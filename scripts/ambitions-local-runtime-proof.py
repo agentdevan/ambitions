@@ -16,6 +16,8 @@ ROOT = Path(__file__).resolve().parents[1]
 ARCHITECTURE_INVENTORY = ROOT / "scripts" / "ambitions-architecture-inventory.py"
 IMPLEMENTATION_TRUTH = ROOT / "docs" / "truth" / "IMPLEMENTATION_TRUTH.md"
 PRODUCT_DESIGN_TRUTH = ROOT / "docs" / "truth" / "PRODUCT_DESIGN_TRUTH.md"
+KNOWN_ISSUES = ROOT / "docs" / "qa" / "KNOWN_ISSUES.md"
+PR_REVIEW_WORKFLOW = ROOT / ".github" / "workflows" / "ambitions-pr-review.yml"
 
 LOCAL_RUNTIME_ROOT = ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS"
 PRODUCTION_SWIFT_ROOTS = [
@@ -282,6 +284,159 @@ TRUTH_GAP_PATTERNS = [
     (
         "truth-declares-unsupported-all-mutations-claim",
         "all meaningful state changes route only through `Command -> Event -> Projection -> Receipt -> Replay`",
+    ),
+]
+
+
+@dataclass(frozen=True)
+class ChecklistSpec:
+    checklist_id: str
+    category: str
+    title: str
+    check_id: str
+    requirement: str
+
+
+LRO_100_CHECKLIST: list[ChecklistSpec] = [
+    ChecklistSpec(
+        "lro100-01-final-tree-source-parity",
+        "architecture",
+        "Final Architecture Tree source parity",
+        "architecture_inventory",
+        "Final architecture inventory must be green before LocalRuntimeProof can claim runtime law coverage.",
+    ),
+    ChecklistSpec(
+        "lro100-02-owner-coverage",
+        "architecture",
+        "LocalRuntimeOS owner coverage",
+        "owner_directories",
+        "All 19 LocalRuntimeOS owners must exist with production Swift source.",
+    ),
+    ChecklistSpec(
+        "lro100-03-core-integration",
+        "integration",
+        "Core runtime integration evidence",
+        "integration_markers",
+        "Command, event, projection, replay, search, and outbox integration points must be source-present.",
+    ),
+    ChecklistSpec(
+        "lro100-04-event-store-authority",
+        "event-store authority",
+        "Live event-store authority",
+        "live_event_store_authority",
+        "Production runtime event authority must be SQLite and must not fall back to JSONL authority.",
+    ),
+    ChecklistSpec(
+        "lro100-05-command-event-reconciliation",
+        "command authority",
+        "Command journal to RuntimeEvent reconciliation",
+        "command_event_reconciliation",
+        "Command journal records, RuntimeEvents, receipts, replay, diagnostics, and RuntimeDoctor drift signals must reconcile.",
+    ),
+    ChecklistSpec(
+        "lro100-06-fail-closed-transaction-commit",
+        "transaction commit",
+        "Fail-closed meaningful mutation commit",
+        "meaningful_mutation_commit_policy",
+        "Meaningful successful mutations must require transaction, event, projection, receipt, rollback, and replay evidence.",
+    ),
+    ChecklistSpec(
+        "lro100-07-transaction-coordinator-ownership",
+        "transaction commit",
+        "RuntimeTransactionCoordinator ownership",
+        "transaction_coordinator_commit_ownership",
+        "Runtime event append and mutation projection materialization must be owned by the transaction coordinator or approved rebuild path.",
+    ),
+    ChecklistSpec(
+        "lro100-08-projection-consumption",
+        "projection consumption",
+        "ProjectionStore/SearchStore consumption",
+        "projection_store_surface_read_gate",
+        "Today, Goals, Time, You, Search, and rebuild paths must consume ProjectionStore/SearchStore evidence rather than raw private graph reads.",
+    ),
+    ChecklistSpec(
+        "lro100-09-external-surface-sanitized-reads",
+        "projection consumption",
+        "Sanitized external-surface reads",
+        "external_surface_sanitized_projection_gate",
+        "Widgets, App Intents, notifications, and share surfaces must use sanitized projections or durable intake records.",
+    ),
+    ChecklistSpec(
+        "lro100-10-privacy-boundary",
+        "privacy",
+        "PrivacySecurity external boundary",
+        "privacy_security_external_boundary_gate",
+        "PrivacySecurity must gate egress, export, diagnostics, external snapshots, App Intent/share bridges, and file protection.",
+    ),
+    ChecklistSpec(
+        "lro100-11-source-atlas-r2-public-only",
+        "privacy",
+        "Source Atlas/R2 public-only boundary",
+        "source_atlas_r2_public_only_gate",
+        "Source Atlas/R2 request and cache paths must remain public-reference-only and deny private graph payloads.",
+    ),
+    ChecklistSpec(
+        "lro100-12-sync-non-authority",
+        "sync",
+        "SyncContinuity non-authority",
+        "sync_continuity_backend_authority_gate",
+        "SyncContinuity must not become backend authority and must preserve local runtime/projection authority.",
+    ),
+    ChecklistSpec(
+        "lro100-13-capture-durable-intake",
+        "command authority",
+        "Capture durable intake before promotion",
+        "capture_intake_durability_gate",
+        "Capture accepted input must be durably journaled before classification, attachment staging, promotion, and restart lookup.",
+    ),
+    ChecklistSpec(
+        "lro100-14-side-effect-receipt-gating",
+        "side-effect",
+        "Side-effect local commit receipt gating",
+        "side_effect_local_commit_receipt_gate",
+        "External side effects must require prior local runtime commit receipt evidence.",
+    ),
+    ChecklistSpec(
+        "lro100-15-trust-system-lineage",
+        "receipt/replay",
+        "TrustSystem runtime lineage",
+        "trust_system_runtime_lineage_gate",
+        "TrustSystem receipt, proof, undo, audit, source, and history records must carry runtime commit receipt lineage.",
+    ),
+    ChecklistSpec(
+        "lro100-16-runtime-mutation-context",
+        "repository boundary",
+        "RuntimeMutationContext boundaries",
+        "runtime_mutation_context_boundaries",
+        "Canonical object-state writes must require coordinator-issued RuntimeMutationContext.",
+    ),
+    ChecklistSpec(
+        "lro100-17-runtime-doctor-drift-repair",
+        "RuntimeDoctor",
+        "RuntimeDoctor local drift repair previews",
+        "runtime_doctor_local_drift_repair_gate",
+        "RuntimeDoctor must detect local drift with redacted readers and produce receipt-backed reviewable repair previews.",
+    ),
+    ChecklistSpec(
+        "lro100-18-mutation-bypass-scan",
+        "repository boundary",
+        "High-risk mutation bypass scan",
+        "mutation_bypass_scan",
+        "Production surface/app/interaction/extension code must not contain high-risk direct mutation or external-write bypasses.",
+    ),
+    ChecklistSpec(
+        "lro100-19-feature-service-boundary",
+        "repository boundary",
+        "Feature/service write authority classification",
+        "feature_service_mutation_authority",
+        "Feature/service repository writes must be command-owned, transaction-owned, migration-owned, test-only, or non-canonical.",
+    ),
+    ChecklistSpec(
+        "lro100-20-proof-ceiling-and-ci",
+        "proof/CI",
+        "Known Issues, truth, and CI evidence",
+        "proof_ceiling_and_ci_evidence",
+        "Known Issues/truth files must reflect the proof ceiling, stale runtime-source blockers must be absent, and CI must run LocalRuntimeProof.",
     ),
 ]
 
@@ -2055,7 +2210,7 @@ def check_runtime_doctor_local_drift_repair_gate() -> CheckResult:
     )
 
 
-def check_truth_file_gaps() -> CheckResult:
+def check_proof_ceiling_and_ci_evidence() -> CheckResult:
     findings: list[Finding] = []
     truth_files = [IMPLEMENTATION_TRUTH, PRODUCT_DESIGN_TRUTH]
     for path in truth_files:
@@ -2085,11 +2240,92 @@ def check_truth_file_gaps() -> CheckResult:
                     f"Truth file still declares this LocalRuntimeOS proof gap: {phrase}",
                 )
             )
+
+    if not KNOWN_ISSUES.exists():
+        findings.append(
+            Finding(
+                "blocker",
+                "known-issues-missing",
+                relative(KNOWN_ISSUES),
+                None,
+                "Known Issues register is required for LocalRuntimeOS proof-ceiling reconciliation.",
+            )
+        )
+    else:
+        known_text = read_text(KNOWN_ISSUES)
+        required_known_markers = [
+            "2026-07-01 LocalRuntimeOS post-refactor proof ceiling",
+            "LocalRuntimeProof Gate Green",
+            "Runtime device Yellow",
+            "Visual Yellow-Red",
+            "Release Red-Yellow",
+            "Device proof ceiling",
+            "Visual proof ceiling",
+            "Release proof ceiling",
+            "Privacy/legal proof ceiling",
+        ]
+        for marker in required_known_markers:
+            if marker not in known_text:
+                findings.append(
+                    Finding(
+                        "blocker",
+                        "known-issues-proof-ceiling-marker-missing",
+                        relative(KNOWN_ISSUES),
+                        None,
+                        f"Known Issues must explicitly preserve proof-ceiling marker `{marker}`.",
+                    )
+                )
+        stale_known_issue_phrases = [
+            "Canonical runtime command spine, validation, idempotency, and unit-of-work proof are missing.",
+            "External side-effect unit-of-work is not proven.",
+            "Local-first privacy boundary with account/R2 is not proven.",
+            "Widgets, App Intents, and deep links may bypass command/runtime safety.",
+            "Source Atlas / R2 provider, cache, freshness, ranking, and public-only boundary are not proven.",
+            "Security, privacy manifest, local auth, and app-group protection proof are missing.",
+        ]
+        for phrase in stale_known_issue_phrases:
+            if phrase in known_text:
+                line_number = next(
+                    (idx for idx, line in enumerate(known_text.splitlines(), start=1) if phrase in line),
+                    None,
+                )
+                findings.append(
+                    Finding(
+                        "blocker",
+                        "known-issues-stale-runtime-source-blocker",
+                        relative(KNOWN_ISSUES),
+                        line_number,
+                        f"Known Issues still carries stale runtime-source blocker wording: {phrase}",
+                    )
+                )
+
+    if not PR_REVIEW_WORKFLOW.exists():
+        findings.append(
+            Finding(
+                "blocker",
+                "ci-localruntimeproof-workflow-missing",
+                relative(PR_REVIEW_WORKFLOW),
+                None,
+                "CI workflow evidence is required for LocalRuntimeProof.",
+            )
+        )
+    else:
+        workflow = read_text(PR_REVIEW_WORKFLOW)
+        if "python3 scripts/ambitions-local-runtime-proof.py" not in workflow:
+            findings.append(
+                Finding(
+                    "blocker",
+                    "ci-localruntimeproof-command-missing",
+                    relative(PR_REVIEW_WORKFLOW),
+                    None,
+                    "Ambitions PR CI must run `python3 scripts/ambitions-local-runtime-proof.py`.",
+                )
+            )
     return make_result(
-        "truth_file_no_claim_gaps",
+        "proof_ceiling_and_ci_evidence",
         findings,
-        "Truth files no longer contain LocalRuntimeOS no-claim blockers.",
-        "{count} truth-file no-claim blocker(s) remain.",
+        "Known Issues, truth files, and CI workflow evidence preserve the LocalRuntimeOS proof ceiling.",
+        "{count} proof-ceiling or CI evidence blocker(s) remain.",
     )
 
 
@@ -2114,8 +2350,77 @@ def run_checks() -> list[CheckResult]:
         check_runtime_doctor_local_drift_repair_gate(),
         scan_mutation_bypasses(),
         scan_feature_service_mutation_authority(),
-        check_truth_file_gaps(),
+        check_proof_ceiling_and_ci_evidence(),
     ]
+
+
+def checklist_status_for_result(result: CheckResult | None) -> str:
+    if result is None or result.status == "fail":
+        return "fail"
+    if result.status == "warn":
+        return "warn"
+    return "pass"
+
+
+def build_checklist(results: list[CheckResult]) -> list[dict[str, object]]:
+    results_by_id = {result.check_id: result for result in results}
+    checklist: list[dict[str, object]] = []
+    for spec in LRO_100_CHECKLIST:
+        result = results_by_id.get(spec.check_id)
+        if result is None:
+            findings = [
+                asdict(
+                    Finding(
+                        "blocker",
+                        "checklist-linked-check-missing",
+                        "scripts/ambitions-local-runtime-proof.py",
+                        None,
+                        f"Checklist item `{spec.checklist_id}` links to missing check `{spec.check_id}`.",
+                    )
+                )
+            ]
+            summary = f"Missing linked check `{spec.check_id}`."
+        else:
+            findings = [asdict(finding) for finding in result.findings]
+            summary = result.summary
+        checklist.append(
+            {
+                "checklistId": spec.checklist_id,
+                "category": spec.category,
+                "title": spec.title,
+                "status": checklist_status_for_result(result),
+                "linkedCheckId": spec.check_id,
+                "requirement": spec.requirement,
+                "summary": summary,
+                "findings": findings,
+            }
+        )
+    return checklist
+
+
+def allowed_claims_for_status(status: str) -> list[str]:
+    if status != "green":
+        return [
+            "LocalRuntimeOS source-present owner inventory can be reported only for passing architecture inventory checks.",
+        ]
+    return [
+        "LocalRuntimeOS source-present owner inventory can be reported when architecture_inventory passes.",
+        "LocalRuntimeProof Gate Green means the current 20-item LRO-100 checklist is semantic, fail-closed, and passing for the checked source tree.",
+        "For the current checked source tree and the represented 20-item checklist, no known meaningful Ambitions state-change bypass remains outside Command -> Event -> Projection -> Receipt -> Replay.",
+    ]
+
+
+def blocked_claims_for_status(status: str) -> list[str]:
+    claims = [
+        "LocalRuntimeOS is complete across future or unscanned code paths",
+        "physical-device behavior, rendered UI quality, accessibility conformance, privacy/legal approval, Visual Green, Release Green, TestFlight readiness, or App Store readiness",
+        "production CloudKit continuity or production R2 deployment",
+    ]
+    if status != "green":
+        claims.insert(0, "all meaningful Ambitions state changes route only through Command -> Event -> Projection -> Receipt -> Replay")
+        claims.insert(1, "app-wide command-only mutation is proven")
+        claims.insert(2, "app-wide event replay and projection consumption are proven")
+    return claims
 
 
 def build_payload(results: list[CheckResult]) -> dict[str, object]:
@@ -2131,7 +2436,9 @@ def build_payload(results: list[CheckResult]) -> dict[str, object]:
         for finding in result.findings
         if finding.severity == "warning"
     ]
-    status = "green" if not blockers else "red"
+    checklist = build_checklist(results)
+    checklist_failures = [item for item in checklist if item["status"] != "pass"]
+    status = "green" if not blockers and not warnings and not checklist_failures else "red"
     return {
         "generatedAt": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "status": status,
@@ -2141,8 +2448,12 @@ def build_payload(results: list[CheckResult]) -> dict[str, object]:
             "passed": sum(1 for result in results if result.status == "pass"),
             "warnings": len(warnings),
             "blockers": len(blockers),
+            "checklistItems": len(checklist),
+            "checklistPassed": sum(1 for item in checklist if item["status"] == "pass"),
+            "checklistFailures": len(checklist_failures),
             "green": status == "green",
         },
+        "checklist": checklist,
         "checks": [
             {
                 "checkId": result.check_id,
@@ -2152,19 +2463,8 @@ def build_payload(results: list[CheckResult]) -> dict[str, object]:
             }
             for result in results
         ],
-        "allowedClaims": [
-            "LocalRuntimeOS source-present owner inventory can be reported when architecture_inventory passes.",
-            "LocalRuntimeProof Green can be claimed only when this gate is green and current focused runtime tests also pass.",
-        ],
-        "blockedClaims": [
-            "all meaningful Ambitions state changes route only through Command -> Event -> Projection -> Receipt -> Replay",
-            "LocalRuntimeOS is complete",
-            "app-wide command-only mutation is proven",
-            "app-wide event replay and projection consumption are proven",
-            "full side-effect outbox enforcement is proven",
-            "production CloudKit continuity is proven",
-            "privacy/legal, Visual Green, Release Green, TestFlight, or App Store readiness",
-        ],
+        "allowedClaims": allowed_claims_for_status(status),
+        "blockedClaims": blocked_claims_for_status(status),
     }
 
 
@@ -2186,10 +2486,35 @@ def render_markdown(payload: dict[str, object]) -> str:
         f"- Passed: `{summary['passed']}`",
         f"- Warnings: `{summary['warnings']}`",
         f"- Blockers: `{summary['blockers']}`",
+        f"- Checklist items: `{summary['checklistItems']}`",
+        f"- Checklist passed: `{summary['checklistPassed']}`",
+        f"- Checklist failures: `{summary['checklistFailures']}`",
+        "",
+        "## LRO-100 Checklist",
+        "",
+        "| ID | Category | Status | Linked check | Requirement |",
+        "| -- | -- | -- | -- | -- |",
+    ]
+
+    checklist = payload["checklist"]
+    assert isinstance(checklist, list)
+    for item in checklist:
+        assert isinstance(item, dict)
+        lines.append(
+            "| `{checklist_id}` | {category} | `{status}` | `{linked_check}` | {requirement} |".format(
+                checklist_id=item["checklistId"],
+                category=str(item["category"]).replace("|", "\\|"),
+                status=item["status"],
+                linked_check=item["linkedCheckId"],
+                requirement=str(item["requirement"]).replace("|", "\\|"),
+            )
+        )
+
+    lines.extend([
         "",
         "## Checks",
         "",
-    ]
+    ])
 
     checks = payload["checks"]
     assert isinstance(checks, list)
@@ -2254,6 +2579,9 @@ def run_self_test() -> int:
     assert any(result.check_id == "side_effect_local_commit_receipt_gate" for result in [check_side_effect_local_commit_receipt_gate()])
     assert any(result.check_id == "trust_system_runtime_lineage_gate" for result in [check_trust_system_runtime_lineage_gate()])
     assert any(result.check_id == "runtime_doctor_local_drift_repair_gate" for result in [check_runtime_doctor_local_drift_repair_gate()])
+    assert any(result.check_id == "proof_ceiling_and_ci_evidence" for result in [check_proof_ceiling_and_ci_evidence()])
+    assert len(LRO_100_CHECKLIST) == 20
+    assert {spec.check_id for spec in LRO_100_CHECKLIST} == {result.check_id for result in run_checks()}
     assert RUNTIME_MUTATION_CONTEXT_PATH.endswith("TransactionKernel/RuntimeMutationContext.swift")
     service_write = "try await repositories.goals.saveGoals([goal])"
     service_match = SERVICE_MUTATION_CALL_PATTERN.search(service_write)
@@ -2269,6 +2597,41 @@ def run_self_test() -> int:
     payload = build_payload([result])
     assert payload["status"] == "red"
     assert "fixture-blocker" in render_markdown(payload)
+
+    green_results = [
+        CheckResult(spec.check_id, "pass", f"{spec.checklist_id} fixture passed.", [])
+        for spec in LRO_100_CHECKLIST
+    ]
+    green_payload = build_payload(green_results)
+    assert green_payload["status"] == "green"
+    green_summary = green_payload["summary"]
+    assert isinstance(green_summary, dict)
+    assert green_summary["checklistItems"] == 20
+    assert green_summary["checklistPassed"] == 20
+    assert green_summary["checklistFailures"] == 0
+    assert len(green_payload["checklist"]) == 20
+    assert any("Command -> Event -> Projection -> Receipt -> Replay" in claim for claim in green_payload["allowedClaims"])
+    assert not any(str(claim).startswith("all meaningful Ambitions state changes") for claim in green_payload["blockedClaims"])
+    assert "| `lro100-20-proof-ceiling-and-ci` |" in render_markdown(green_payload)
+
+    missing_check_payload = build_payload(green_results[:-1])
+    assert missing_check_payload["status"] == "red"
+    missing_summary = missing_check_payload["summary"]
+    assert isinstance(missing_summary, dict)
+    assert missing_summary["checklistFailures"] == 1
+    warning_results = list(green_results)
+    warning_results[0] = CheckResult(
+        LRO_100_CHECKLIST[0].check_id,
+        "warn",
+        "Fixture warning.",
+        [Finding("warning", "fixture-warning", "Fixture.swift", 1, "Fixture warning.")],
+    )
+    warning_payload = build_payload(warning_results)
+    assert warning_payload["status"] == "red"
+    warning_summary = warning_payload["summary"]
+    assert isinstance(warning_summary, dict)
+    assert warning_summary["warnings"] == 1
+    assert warning_summary["checklistFailures"] == 1
     print("ambitions-local-runtime-proof self-test passed")
     return 0
 
@@ -2308,6 +2671,9 @@ def main() -> int:
         print(f"passed={summary['passed']}")
         print(f"warnings={summary['warnings']}")
         print(f"blockers={summary['blockers']}")
+        print(f"checklist_items={summary['checklistItems']}")
+        print(f"checklist_passed={summary['checklistPassed']}")
+        print(f"checklist_failures={summary['checklistFailures']}")
         print("GREEN LocalRuntimeProof achieved" if payload["status"] == "green" else "RED LocalRuntimeProof blocked")
 
     if payload["status"] == "green" or args.audit_only:

@@ -37,6 +37,7 @@ jobs:
           python3 scripts/ambitions-green-standard-audit.py
           bash scripts/privacy-boundary-scan.sh
           bash scripts/release-claim-safety-scan.sh
+          python3 scripts/ambitions-local-runtime-proof.py
           python3 scripts/ci/ambitions-no-weak-implementation-scan.py
 
   source-atlas-boundary-audit:

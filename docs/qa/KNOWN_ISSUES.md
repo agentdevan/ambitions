@@ -8,7 +8,7 @@
 **Last device/runtime review:** 2026-06-22  
 **Runtime evidence set:** `More issues.zip`, screenshots `IMG_8475.PNG` through `IMG_8499.PNG`, plus tester notes from the same review.  
 **Baseline source context:** `ce75bb77122350fcab9500806e5ff26f8ee02e58` (`AMB-1180 rebuild LifeShape field object`) plus current `main` docs commits.
-**LocalRuntimeOS evidence set:** `docs/qa/local-runtime-proof/current-local-runtime-proof.json`, `docs/qa/local-runtime-proof/current-local-runtime-proof.md`, `docs/qa/local-runtime-proof/amb-1597-local-runtime-proof.json`, `docs/qa/local-runtime-proof/amb-1597-local-runtime-proof.md`.
+**LocalRuntimeOS evidence set:** `docs/qa/local-runtime-proof/current-local-runtime-proof.json`, `docs/qa/local-runtime-proof/current-local-runtime-proof.md`, `docs/qa/local-runtime-proof/amb-1597-local-runtime-proof.json`, `docs/qa/local-runtime-proof/amb-1597-local-runtime-proof.md`, `docs/qa/local-runtime-proof/amb-1599-local-runtime-proof.json`, `docs/qa/local-runtime-proof/amb-1599-local-runtime-proof.md`.
 
 ## Register rules
 
@@ -71,7 +71,7 @@ Command -> Event -> Projection -> Receipt -> Replay
 This evidence supports these exact claims only:
 
 - **Architecture source proof:** `Native/Ambitions/Core/LocalRuntimeOS/` has source-present owner coverage for the tracked runtime owners and final architecture inventory source parity.
-- **Runtime-law gate proof:** the repo-local LocalRuntimeProof gate is Green for the current 20 scanner checks, including live SQLite event-store authority, command/event reconciliation, fail-closed mutation commit policy, transaction-coordinator ownership, projection/search read gates, sanitized external-surface reads, PrivacySecurity egress/export/snapshot gates, Source Atlas/R2 public-only gates, SyncContinuity non-authority, durable Capture intake, side-effect commit-receipt gating, TrustSystem lineage, mutation-context boundaries, RuntimeDoctor local drift repair previews, mutation-bypass scan, feature-service mutation classification, and truth-file no-claim gaps.
+- **Runtime-law gate proof:** the repo-local LocalRuntimeProof gate is Green for the current 20-item LRO-100 semantic/fail-closed checklist, including live SQLite event-store authority, command/event reconciliation, fail-closed mutation commit policy, transaction-coordinator ownership, projection/search read gates, sanitized external-surface reads, PrivacySecurity egress/export/snapshot gates, Source Atlas/R2 public-only gates, SyncContinuity non-authority, durable Capture intake, side-effect commit-receipt gating, TrustSystem lineage, mutation-context boundaries, RuntimeDoctor local drift repair previews, mutation-bypass scan, feature-service mutation classification, and Known Issues/truth/CI proof-ceiling evidence.
 - **Runtime behavior proof:** focused simulator XCTest evidence exists for the AMB-1581 through AMB-1597 runtime leaves, with the AMB-1597 closeout covering RuntimeDoctor redacted local drift readers and receipt-backed preview repair plans. This is source/runtime-gate proof, not broad rendered-device proof.
 - **Device proof ceiling:** no current physical-device pass is recorded for this LocalRuntimeOS reconciliation. Simulator/focused XCTest evidence does not close physical-device rows.
 - **Visual proof ceiling:** this reconciliation does not change the AMB-1199 visual ceiling. Dock/content overlap, clipped Goals text, missing Light/System screenshots, incomplete Capture/Search/full-drilldown screenshots, and owner visual review remain open.
