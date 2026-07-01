@@ -5,11 +5,11 @@ protocol ObjectStateReadableStore: Sendable {
     var family: ObjectStateFamily { get }
 }
 
-protocol ObjectStateWritableStore: ObjectStateReadableStore {
-    func save(_ object: StoredObject, context: RuntimeObjectStateMutationContext) async throws -> ObjectStateWriteReceipt
+protocol RuntimeObjectStateWritableStore: ObjectStateReadableStore {
+    func save(_ object: StoredObject, context: RuntimeMutationContext) async throws -> ObjectStateWriteReceipt
 }
 
-protocol GoalThreadStore: ObjectStateWritableStore where StoredObject == GoalThread {
+protocol GoalThreadStore: RuntimeObjectStateWritableStore where StoredObject == GoalThread {
     func fetchThread(id: String) async throws -> GoalThread?
 }
 
@@ -17,35 +17,35 @@ protocol LifeAreaStore: ObjectStateReadableStore where StoredObject == LifeAreaD
     func listLifeAreas() async throws -> [LifeAreaDefinition]
 }
 
-protocol StepStore: ObjectStateWritableStore where StoredObject == Step {
+protocol StepStore: RuntimeObjectStateWritableStore where StoredObject == Step {
     func fetchStep(id: String) async throws -> Step?
 }
 
-protocol CaptureStore: ObjectStateWritableStore where StoredObject == Capture {
+protocol CaptureStore: RuntimeObjectStateWritableStore where StoredObject == Capture {
     func fetchCapture(id: String) async throws -> Capture?
 }
 
-protocol TimeBlockStore: ObjectStateWritableStore where StoredObject == TimeBlockObjectState {
+protocol TimeBlockStore: RuntimeObjectStateWritableStore where StoredObject == TimeBlockObjectState {
     func fetchTimeBlock(id: String) async throws -> TimeBlockObjectState?
 }
 
-protocol ClosureStore: ObjectStateWritableStore where StoredObject == ClosureObjectState {
+protocol ClosureStore: RuntimeObjectStateWritableStore where StoredObject == ClosureObjectState {
     func fetchClosure(id: String) async throws -> ClosureObjectState?
 }
 
-protocol ProofStore: ObjectStateWritableStore where StoredObject == ProofEvent {
+protocol ProofStore: RuntimeObjectStateWritableStore where StoredObject == ProofEvent {
     func fetchProof(id: String) async throws -> ProofEvent?
 }
 
-protocol ReceiptStore: ObjectStateWritableStore where StoredObject == ActionReceiptHistoryRecord {
+protocol ReceiptStore: RuntimeObjectStateWritableStore where StoredObject == ActionReceiptHistoryRecord {
     func fetchReceipt(id: String) async throws -> ActionReceiptHistoryRecord?
 }
 
-protocol UserSystemStore: ObjectStateWritableStore where StoredObject == UserSystemObjectState {
+protocol UserSystemStore: RuntimeObjectStateWritableStore where StoredObject == UserSystemObjectState {
     func fetchUserSystem(id: String) async throws -> UserSystemObjectState?
 }
 
-protocol AppStateStore: ObjectStateWritableStore where StoredObject == AppStateSnapshot {
+protocol AppStateStore: RuntimeObjectStateWritableStore where StoredObject == AppStateSnapshot {
     func loadState() async throws -> AppStateSnapshot
 }
 

@@ -5,6 +5,7 @@ final class ObjectStateTests: XCTestCase {
     func testObjectStateOwnerFilesExistUnderCanonicalLocalRuntimeOSOwner() throws {
         let root = try repoRoot()
         let requiredPaths = [
+            "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeMutationContext.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/ObjectStateCore.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/ObjectStateContracts.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/AppStateStore.swift",
@@ -17,6 +18,30 @@ final class ObjectStateTests: XCTestCase {
             FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Core/Runtime/ObjectState.swift").path),
             "ObjectState must not be owned by the legacy Core/Runtime owner."
         )
+    }
+
+    func testRuntimeMutationContextIsTransactionKernelOwnedAndRequiredByWriteStores() throws {
+        let root = try repoRoot()
+        let contextSource = try String(
+            contentsOf: root.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeMutationContext.swift"),
+            encoding: .utf8
+        )
+        let objectStateSource = try String(
+            contentsOf: root.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/ObjectState/ObjectStateCore.swift"),
+            encoding: .utf8
+        )
+        let contractsSource = try String(
+            contentsOf: root.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/ObjectState/ObjectStateContracts.swift"),
+            encoding: .utf8
+        )
+
+        XCTAssertTrue(contextSource.contains("runtimeMutationContextSchemaVersion"))
+        XCTAssertTrue(contextSource.contains("struct RuntimeMutationContext"))
+        XCTAssertFalse(objectStateSource.contains("struct RuntimeObjectStateMutationContext"))
+        XCTAssertTrue(contractsSource.contains("protocol ObjectStateReadableStore"))
+        XCTAssertTrue(contractsSource.contains("protocol RuntimeObjectStateWritableStore"))
+        XCTAssertTrue(contractsSource.contains("context: RuntimeMutationContext"))
+        XCTAssertFalse(contractsSource.contains("context: RuntimeObjectStateMutationContext"))
     }
 
     func testObjectStateRegistryTracksAllFamiliesAndDoesNotPromoteSwiftDataAsMutationAuthority() {
@@ -41,7 +66,7 @@ final class ObjectStateTests: XCTestCase {
         var state = AppStateSnapshot.default
         state.userDisplayName = "Blocked"
 
-        let unsanctionedContext = RuntimeObjectStateMutationContext(
+        let unsanctionedContext = RuntimeMutationContext(
             family: .appState,
             commandID: "",
             transactionID: "transaction.app-state",
@@ -62,7 +87,7 @@ final class ObjectStateTests: XCTestCase {
             XCTAssertEqual(error as? ObjectStateContractError, .missingCommand(.appState))
         }
 
-        let missingRollbackContext = RuntimeObjectStateMutationContext(
+        let missingRollbackContext = RuntimeMutationContext(
             family: .appState,
             commandID: "command.app-state",
             transactionID: "transaction.app-state",
@@ -116,7 +141,7 @@ final class ObjectStateTests: XCTestCase {
                 commandRecordID: "command.execution.app-state"
             )
         )
-        let context = RuntimeObjectStateMutationContext(
+        let context = RuntimeMutationContext(
             family: .appState,
             command: command,
             transactionID: "runtime.transaction.app-state",

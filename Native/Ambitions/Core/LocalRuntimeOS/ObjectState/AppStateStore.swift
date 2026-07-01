@@ -23,7 +23,7 @@ struct SwiftDataAppStateStore: AppStateStore {
 
     func save(
         _ object: AppStateSnapshot,
-        context: RuntimeObjectStateMutationContext
+        context: RuntimeMutationContext
     ) async throws -> ObjectStateWriteReceipt {
         try context.validated(for: .appState)
         let identity = try ObjectStateIdentity(family: .appState, rawID: object.id)

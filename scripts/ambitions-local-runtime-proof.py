@@ -197,6 +197,11 @@ PROJECTION_MATERIALIZATION_ALLOWED_PATHS = {
     "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/SearchRebuildPipeline.swift",
 }
 
+RUNTIME_MUTATION_CONTEXT_PATH = "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeMutationContext.swift"
+OBJECT_STATE_CORE_PATH = "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/ObjectStateCore.swift"
+OBJECT_STATE_CONTRACTS_PATH = "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/ObjectStateContracts.swift"
+APP_STATE_STORE_PATH = "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/AppStateStore.swift"
+
 TRUTH_GAP_PATTERNS = [
     (
         "truth-declares-localruntimeos-incomplete",
@@ -658,6 +663,99 @@ def check_transaction_coordinator_commit_ownership() -> CheckResult:
     )
 
 
+def check_runtime_mutation_context_boundaries() -> CheckResult:
+    findings: list[Finding] = []
+    required_markers = {
+        ROOT / RUNTIME_MUTATION_CONTEXT_PATH: [
+            "runtimeMutationContextSchemaVersion",
+            "struct RuntimeMutationContext",
+            "let commandID: String",
+            "let transactionID: String",
+            "let eventID: String",
+            "let projectionID: ProjectionID",
+            "let receiptID: String",
+            "let replayTraceID: String",
+            "let rollbackPlanID: String",
+            "func validated(for expectedFamily: ObjectStateFamily) throws",
+        ],
+        ROOT / OBJECT_STATE_CORE_PATH: [
+            "ObjectStateWriteReceipt",
+            "context: RuntimeMutationContext",
+            "try context.validated(for: identity.family)",
+        ],
+        ROOT / OBJECT_STATE_CONTRACTS_PATH: [
+            "protocol ObjectStateReadableStore",
+            "protocol RuntimeObjectStateWritableStore",
+            "func save(_ object: StoredObject, context: RuntimeMutationContext) async throws -> ObjectStateWriteReceipt",
+            "protocol AppStateStore: RuntimeObjectStateWritableStore",
+        ],
+        ROOT / APP_STATE_STORE_PATH: [
+            "struct SwiftDataAppStateStore: AppStateStore",
+            "context: RuntimeMutationContext",
+            "ObjectStateWriteReceipt",
+        ],
+    }
+    for path, markers in required_markers.items():
+        if not path.exists():
+            findings.append(
+                Finding(
+                    "blocker",
+                    "runtime-mutation-context-missing-source",
+                    relative(path),
+                    None,
+                    "RuntimeMutationContext boundary source is missing.",
+                )
+            )
+            continue
+        text = read_text(path)
+        for marker in markers:
+            if marker not in text:
+                findings.append(
+                    Finding(
+                        "blocker",
+                        "runtime-mutation-context-marker-missing",
+                        relative(path),
+                        None,
+                        f"Missing RuntimeMutationContext boundary marker `{marker}`.",
+                    )
+                )
+
+    object_state_core = ROOT / OBJECT_STATE_CORE_PATH
+    if object_state_core.exists() and "struct RuntimeObjectStateMutationContext" in read_text(object_state_core):
+        findings.append(
+            Finding(
+                "blocker",
+                "legacy-object-state-context-still-owned-by-object-state",
+                OBJECT_STATE_CORE_PATH,
+                None,
+                "RuntimeMutationContext must be owned by TransactionKernel, not ObjectState.",
+            )
+        )
+
+    for path in production_swift_files():
+        rel = relative(path)
+        if rel == RUNTIME_MUTATION_CONTEXT_PATH:
+            continue
+        if "RuntimeObjectStateMutationContext" not in read_text(path):
+            continue
+        findings.append(
+            Finding(
+                "blocker",
+                "legacy-runtime-object-state-context-reference",
+                rel,
+                None,
+                "Production code must use RuntimeMutationContext for canonical object-state writes.",
+            )
+        )
+
+    return make_result(
+        "runtime_mutation_context_boundaries",
+        findings,
+        "Canonical object-state write repositories require TransactionKernel-owned RuntimeMutationContext.",
+        "{count} runtime mutation context boundary blocker(s) remain.",
+    )
+
+
 def check_truth_file_gaps() -> CheckResult:
     findings: list[Finding] = []
     truth_files = [IMPLEMENTATION_TRUTH, PRODUCT_DESIGN_TRUTH]
@@ -705,6 +803,7 @@ def run_checks() -> list[CheckResult]:
         check_command_event_reconciliation(),
         check_meaningful_mutation_commit_policy(),
         check_transaction_coordinator_commit_ownership(),
+        check_runtime_mutation_context_boundaries(),
         scan_mutation_bypasses(),
         check_truth_file_gaps(),
     ]
@@ -835,6 +934,7 @@ def run_self_test() -> int:
     assert not is_included_mutation_scan_path(ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Storage" / "ObjectStoreSwiftData.swift")
     assert "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeTransactionCoordinator.swift" in RUNTIME_EVENT_APPEND_ALLOWED_PATHS
     assert "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/SearchRebuildPipeline.swift" in PROJECTION_MATERIALIZATION_ALLOWED_PATHS
+    assert RUNTIME_MUTATION_CONTEXT_PATH.endswith("TransactionKernel/RuntimeMutationContext.swift")
     result = make_result(
         "fixture",
         [Finding("blocker", "fixture-blocker", "Fixture.swift", 1, "Fixture blocker.")],
