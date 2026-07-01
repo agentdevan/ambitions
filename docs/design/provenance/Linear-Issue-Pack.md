@@ -299,8 +299,8 @@ Rollback plan:
 
 - Parent issue mirror: `AMB-1487`
 - Recommended status: `Needs Repair`
-- Labels: VSP, external-boundary, privacy, yellow-proof, owner-review-needed, part-01
-- Blocked by: owner approval, privacy-boundary proof, offline no-account proof, R2 request-shape proof, owner direction selection
+- Labels: VSP, external-boundary, privacy, yellow-proof, owner-review-needed, part-01, owner-selected-direction, airlock-review-gate
+- Blocked by: owner approval, privacy-boundary proof, offline no-account proof, R2 request-shape proof, final VSP-08 candidate-package approval
 - Do not create now: `True`
 
 Acceptance summary:
@@ -310,6 +310,9 @@ Acceptance summary:
 - Part 01 board is node 264:93 with six external-boundary directions A-F.
 - Codex recommends Option B Airlock Review Gate for owner review.
 - No option may make account, R2, Source Atlas, widgets, notifications, external tools, or hosted AI part of core/root architecture.
+- Owner selected Option B Airlock Review Gate as the Part 01 direction on 2026-07-01.
+- Option B must become the base for the final VSP-08 candidate package unless the owner explicitly changes direction.
+- Direction approval does not claim final package approval, privacy proof, R2 readiness, account readiness, source implementation, Visual Green, Release Green, or Done.
 Validation summary:
 - privacy/request-shape proof after source implementation
 - python3 scripts/ambitions-local-first-boundary-scan.py when applicable

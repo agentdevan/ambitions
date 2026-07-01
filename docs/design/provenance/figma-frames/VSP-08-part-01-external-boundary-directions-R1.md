@@ -1,6 +1,6 @@
 # VSP-08 External Boundary Directions Part 01 R1
 
-Status: Needs Repair / owner direction required / Yellow proof ceiling
+Status: Owner selected direction / Needs Repair / Yellow proof ceiling
 
 This frame note records the first VSP-08 owner-selection workshop board. It is Figma exploration and policy readback only. It is not source implementation, privacy proof, R2 readiness, account readiness, SwiftUI parity, device proof, accessibility conformance, Visual Green, Release Green, or Done.
 
@@ -27,7 +27,11 @@ Figma file: `SWtHm9ouHTPbEFfNrrtZwv`
 - `E Quiet Degraded Mode`: offline, stale, revoked, unavailable, and no-account states are calm local modes.
 - `F Boundary Constellation`: compact whole-system map of allowed, optional, degraded, and blocked external edges.
 
-Codex recommendation for owner review: `B Airlock Review Gate`. It is the strongest implementation direction because it turns boundary law into an inspectable interaction, keeps the private runtime local, makes blocked egress honest, and avoids making Source Atlas, account, widgets, notifications, or external tools into root product surfaces.
+Owner selected direction: `B Airlock Review Gate`.
+
+Direction approval proof: `docs/design/provenance/owner-approvals/VSP-08-B-Airlock-Review-Gate-direction-approval.md`.
+
+`B Airlock Review Gate` is the selected implementation direction because it turns boundary law into an inspectable interaction, keeps the private runtime local, makes blocked egress honest, and avoids making Source Atlas, account, widgets, notifications, or external tools into root product surfaces.
 
 ## Product-Law Checklist
 
@@ -62,7 +66,7 @@ Possible primitives after owner direction approval:
 
 ## Missing Proof
 
-- Owner direction selection.
+- Final VSP-08 candidate-package approval.
 - VSP-08A policy readback owner approval.
 - VSP-08B implementation proof packet.
 - Live SwiftUI boundary parity screenshot.
@@ -94,3 +98,4 @@ Possible primitives after owner direction approval:
 
 See `docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/manifest.md`.
 
+Owner direction selection proof: `docs/qa/evidence/2026-07-01-vsp-08-option-b-airlock-review-gate-selection-r1/manifest.md`.

@@ -133,11 +133,11 @@ Claim boundary: this document is a Git-owned provenance/handoff artifact. It is 
 - VSP-08B implementation proof packet
 - VoiceOver
 - device screenshot
+- final VSP-08 candidate-package approval
 - live SwiftUI boundary parity screenshot
 - live SwiftUI screenshot
 - offline no-account proof
 - owner approval
-- owner direction selection
 - privacy boundary
 - runtime behavior
 ### VSP-09 - Motion / Haptics / Accessibility Matrix

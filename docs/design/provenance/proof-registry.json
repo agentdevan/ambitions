@@ -1723,6 +1723,21 @@
       "blocking_reason": "",
       "proof_ceiling_impact": "Supports Yellow owner-review exploration only. Does not prove owner approval, privacy boundary behavior, R2 request shape, offline no-account behavior, SwiftUI parity, Visual Green, device behavior, runtime behavior, accessibility conformance, Release Green, or Done.",
       "notes": "Part 01 board at node 264:93 with six options A-F. Codex recommendation is Option B Airlock Review Gate; owner selection remains required."
+    },
+    {
+      "proof_id": "vsp-08-option-b-airlock-review-gate-selection-r1",
+      "vsp_id": "VSP-08",
+      "proof_type": "owner_direction_selection",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/owner-approvals/VSP-08-B-Airlock-Review-Gate-direction-approval.md",
+        "docs/qa/evidence/2026-07-01-vsp-08-option-b-airlock-review-gate-selection-r1/manifest.md",
+        "docs/qa/evidence/2026-07-01-vsp-08-option-b-airlock-review-gate-selection-r1/images/vsp-08-option-b-selection-board-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-08-option-b-airlock-review-gate-selection-r1/images/vsp-08-option-b-airlock-review-gate-selected-r1.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Satisfies VSP-08 Part 01 owner direction selection only. Keeps proof ceiling Yellow and does not prove final package approval, privacy boundary behavior, R2 request shape, offline no-account behavior, SwiftUI parity, Visual Green, device behavior, runtime behavior, accessibility conformance, Release Green, or Done.",
+      "notes": "Owner selected Option B Airlock Review Gate as the VSP-08 Part 01 direction on 2026-07-01."
     }
   ]
 }

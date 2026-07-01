@@ -426,7 +426,9 @@
         "privacy",
         "yellow-proof",
         "owner-review-needed",
-        "part-01"
+        "part-01",
+        "owner-selected-direction",
+        "airlock-review-gate"
       ],
       "recommended_sub_issues": [
         {
@@ -445,7 +447,7 @@
         "privacy-boundary proof",
         "offline no-account proof",
         "R2 request-shape proof",
-        "owner direction selection"
+        "final VSP-08 candidate-package approval"
       ],
       "acceptance_summary": [
         "Offline no-account core value remains usable.",
@@ -453,7 +455,10 @@
         "No private graph egress and no external/cloud LLM core runtime.",
         "Part 01 board is node 264:93 with six external-boundary directions A-F.",
         "Codex recommends Option B Airlock Review Gate for owner review.",
-        "No option may make account, R2, Source Atlas, widgets, notifications, external tools, or hosted AI part of core/root architecture."
+        "No option may make account, R2, Source Atlas, widgets, notifications, external tools, or hosted AI part of core/root architecture.",
+        "Owner selected Option B Airlock Review Gate as the Part 01 direction on 2026-07-01.",
+        "Option B must become the base for the final VSP-08 candidate package unless the owner explicitly changes direction.",
+        "Direction approval does not claim final package approval, privacy proof, R2 readiness, account readiness, source implementation, Visual Green, Release Green, or Done."
       ],
       "validation_summary": [
         "privacy/request-shape proof after source implementation",
@@ -465,7 +470,7 @@
         "request-shape artifacts",
         "offline no-account proof",
         "Part 01 frame ID 264:93 and durable proof paths",
-        "owner-selected Part 01 direction"
+        "final VSP-08 candidate-package owner approval"
       ],
       "do_not_create_now": true
     },

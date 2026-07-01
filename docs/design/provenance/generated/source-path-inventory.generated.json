@@ -133,7 +133,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 289,
+      "line_count": 297,
       "path": "Native/Ambitions/App/AppContainerFactory.swift"
     },
     {
@@ -3259,7 +3259,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 278,
+      "line_count": 282,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureAttachmentVault.swift"
     },
     {
@@ -3323,6 +3323,19 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
+      "line_count": 168,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureDurableIntakePipeline.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
       "line_count": 206,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureIntakeJournal.swift"
     },
@@ -3337,7 +3350,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 161,
+      "line_count": 230,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CapturePromotionTransaction.swift"
     },
     {
@@ -3400,7 +3413,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 50,
+      "line_count": 54,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureRouteGraphServices.swift"
     },
     {
@@ -4332,7 +4345,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 340,
+      "line_count": 375,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/SourceAtlasStepCandidateFieldBridge+02-shouldUseFallbackOnlyExpansion.swift"
     },
     {
@@ -4345,8 +4358,20 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 351,
+      "line_count": 380,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/SourceAtlasStepCandidateFieldBridge+03-makeRejectedSeedTraces.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 235,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/SourceAtlasStepCandidateFieldBridge+04-verifiedPublicPlanningContext.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -4356,8 +4381,21 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 104,
+      "line_count": 109,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/SourceAtlasStepCandidateFieldBridge.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 135,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/SourceAtlasVerifiedPublicPlanningBridgeModels.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -4921,7 +4959,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 241,
+      "line_count": 262,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionStoreSurfaceReadAdapter.swift"
     },
     {
@@ -5206,7 +5244,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 42,
+      "line_count": 43,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/EventKitOutbox.swift"
     },
     {
@@ -5321,7 +5359,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 211,
+      "line_count": 245,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/SideEffectPolicyEngine.swift"
     },
     {
@@ -5446,7 +5484,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 168,
+      "line_count": 171,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasBridgeReceiptReplayModels.swift"
     },
     {
@@ -6009,6 +6047,17 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
+      "line_count": 329,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPlanningContextModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
       "line_count": 202,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublishedPackMetadataDecoder.swift"
     },
@@ -6156,6 +6205,19 @@
       "kind": "native_source",
       "line_count": 429,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasUserMiniPackBuilderModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 311,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasVerifiedPublicPackProvider.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -7017,23 +7079,24 @@
     },
     {
       "candidate_vsp_ids": [
-        "VSP-04"
+        "VSP-04",
+        "VSP-07"
       ],
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 310,
+      "line_count": 341,
       "path": "Native/Ambitions/Core/Permissions/CalendarReminders/EventKitIntegrationService+02-EventKitIntegrationService.swift"
     },
     {
       "candidate_vsp_ids": [
         "VSP-04",
-        "VSP-05"
+        "VSP-07"
       ],
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 309,
+      "line_count": 335,
       "path": "Native/Ambitions/Core/Permissions/CalendarReminders/EventKitIntegrationService+03-EventKitIntegrationService.swift"
     },
     {
@@ -7048,12 +7111,13 @@
     },
     {
       "candidate_vsp_ids": [
-        "VSP-04"
+        "VSP-04",
+        "VSP-07"
       ],
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 315,
+      "line_count": 323,
       "path": "Native/Ambitions/Core/Permissions/CalendarReminders/EventKitIntegrationService.swift"
     },
     {
@@ -7074,7 +7138,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 534,
+      "line_count": 535,
       "path": "Native/Ambitions/Core/Permissions/LocalNotificationFoundation.swift"
     },
     {
@@ -7218,7 +7282,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 227,
+      "line_count": 230,
       "path": "Native/Ambitions/Core/Persistence/PersistenceContracts+03-UnavailableReminderRepository.swift"
     },
     {
@@ -7733,6 +7797,7 @@
     },
     {
       "candidate_vsp_ids": [
+        "VSP-03",
         "VSP-04",
         "VSP-05",
         "VSP-07",
@@ -7741,7 +7806,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 393,
+      "line_count": 355,
       "path": "Native/Ambitions/Core/Runtime/CaptureService+04-DefaultCaptureService.swift"
     },
     {
@@ -10612,13 +10677,14 @@
       "candidate_vsp_ids": [
         "VSP-02",
         "VSP-03",
+        "VSP-04",
         "VSP-05",
         "VSP-07"
       ],
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 445,
+      "line_count": 606,
       "path": "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceSnapshotBuilder.swift"
     },
     {
@@ -10636,15 +10702,13 @@
     },
     {
       "candidate_vsp_ids": [
-        "VSP-03",
         "VSP-04",
-        "VSP-05",
-        "VSP-10"
+        "VSP-07"
       ],
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 88,
+      "line_count": 129,
       "path": "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceSnapshotWriter.swift"
     },
     {
@@ -10675,12 +10739,14 @@
     },
     {
       "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
         "VSP-10"
       ],
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 26,
+      "line_count": 76,
       "path": "Native/Ambitions/Projection/ExternalSnapshots/SharedExternalSnapshotStore.swift"
     },
     {
@@ -12633,7 +12699,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 302,
+      "line_count": 311,
       "path": "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceSourceAtlasRowsProjection.swift"
     },
     {
@@ -16068,7 +16134,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 231,
+      "line_count": 296,
       "path": "Native/AmbitionsTests/App/CalendarRealityServiceTests.swift"
     },
     {
@@ -16180,13 +16246,12 @@
       "candidate_vsp_ids": [
         "VSP-01",
         "VSP-04",
-        "VSP-07",
-        "VSP-10"
+        "VSP-07"
       ],
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 413,
+      "line_count": 512,
       "path": "Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift"
     },
     {
@@ -16216,7 +16281,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 139,
+      "line_count": 150,
       "path": "Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift"
     },
     {
@@ -16276,7 +16341,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 1034,
+      "line_count": 1110,
       "path": "Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift"
     },
     {
@@ -16290,7 +16355,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 129,
+      "line_count": 131,
       "path": "Native/AmbitionsTests/App/ExternalSurfaceVerificationChecklistTests.swift"
     },
     {
@@ -18536,7 +18601,6 @@
     {
       "candidate_vsp_ids": [
         "VSP-01",
-        "VSP-03",
         "VSP-04",
         "VSP-05",
         "VSP-07",
@@ -18546,7 +18610,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 242,
+      "line_count": 410,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/CaptureRouteGraph/CaptureRouteGraphTests.swift"
     },
     {
@@ -18899,7 +18963,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 292,
+      "line_count": 305,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/ProjectionEngine/ProjectionEngineTests.swift"
     },
     {
@@ -19004,7 +19068,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 217,
+      "line_count": 312,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/SideEffectSystem/SideEffectSystemTests.swift"
     },
     {
@@ -19194,6 +19258,18 @@
       "kind": "test",
       "line_count": 297,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasOfflineFallbackRuntimeModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 511,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasOfflineNoAccountPlanningScaleTests.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -19439,7 +19515,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 1203,
+      "line_count": 1566,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasRuntimeBridgeCoverageGauntletTests.swift"
     },
     {
@@ -19514,6 +19590,30 @@
       "kind": "test",
       "line_count": 121,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasUserMiniPackBuilderModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 300,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasVerifiedPublicPackProviderTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 439,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasVerifiedPublicPlanningBridgeTests.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -22923,7 +23023,7 @@
       "path": "scripts/ambitions-quality-gate.py"
     }
   ],
-  "entry_count": 1849,
+  "entry_count": 1857,
   "generated_at": "deterministic-from-current-source-inputs",
   "generator": "scripts/ambitions-component-inventory-generate.py",
   "schema_version": 1

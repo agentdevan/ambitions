@@ -3177,7 +3177,7 @@
       ],
       "has_preview_provider": false,
       "kind": "test",
-      "line_count": 231,
+      "line_count": 296,
       "path": "Native/AmbitionsTests/App/CalendarRealityServiceTests.swift",
       "preview_count": 0,
       "proof_status": "source_inventory_only",
@@ -3356,12 +3356,11 @@
       "candidate_vsp_ids": [
         "VSP-01",
         "VSP-04",
-        "VSP-07",
-        "VSP-10"
+        "VSP-07"
       ],
       "has_preview_provider": false,
       "kind": "test",
-      "line_count": 413,
+      "line_count": 512,
       "path": "Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift",
       "preview_count": 0,
       "proof_status": "source_inventory_only",
@@ -3407,7 +3406,7 @@
       ],
       "has_preview_provider": false,
       "kind": "test",
-      "line_count": 139,
+      "line_count": 150,
       "path": "Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift",
       "preview_count": 0,
       "proof_status": "source_inventory_only",
@@ -3499,7 +3498,7 @@
       ],
       "has_preview_provider": false,
       "kind": "test",
-      "line_count": 1034,
+      "line_count": 1110,
       "path": "Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift",
       "preview_count": 0,
       "proof_status": "source_inventory_only",
@@ -3521,7 +3520,7 @@
       ],
       "has_preview_provider": false,
       "kind": "test",
-      "line_count": 129,
+      "line_count": 131,
       "path": "Native/AmbitionsTests/App/ExternalSurfaceVerificationChecklistTests.swift",
       "preview_count": 0,
       "proof_status": "source_inventory_only",
@@ -7188,7 +7187,6 @@
       "candidate_inventory_only": true,
       "candidate_vsp_ids": [
         "VSP-01",
-        "VSP-03",
         "VSP-04",
         "VSP-05",
         "VSP-07",
@@ -7197,7 +7195,7 @@
       ],
       "has_preview_provider": false,
       "kind": "test",
-      "line_count": 242,
+      "line_count": 410,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/CaptureRouteGraph/CaptureRouteGraphTests.swift",
       "preview_count": 0,
       "proof_status": "source_inventory_only",
@@ -7764,7 +7762,7 @@
       ],
       "has_preview_provider": false,
       "kind": "test",
-      "line_count": 292,
+      "line_count": 305,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/ProjectionEngine/ProjectionEngineTests.swift",
       "preview_count": 0,
       "proof_status": "source_inventory_only",
@@ -7933,7 +7931,7 @@
       ],
       "has_preview_provider": false,
       "kind": "test",
-      "line_count": 217,
+      "line_count": 312,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/SideEffectSystem/SideEffectSystemTests.swift",
       "preview_count": 0,
       "proof_status": "source_inventory_only",
@@ -8247,6 +8245,26 @@
       "proof_status": "source_inventory_only",
       "test_cases": [
         "SourceAtlasOfflineFallbackRuntimeModelsTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 511,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasOfflineNoAccountPlanningScaleTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasOfflineNoAccountPlanningScaleTests"
       ],
       "view_modifiers": [],
       "view_structs": []
@@ -8656,7 +8674,7 @@
       ],
       "has_preview_provider": false,
       "kind": "test",
-      "line_count": 1203,
+      "line_count": 1566,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasRuntimeBridgeCoverageGauntletTests.swift",
       "preview_count": 0,
       "proof_status": "source_inventory_only",
@@ -8783,6 +8801,46 @@
       "proof_status": "source_inventory_only",
       "test_cases": [
         "SourceAtlasUserMiniPackBuilderModelsTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 300,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasVerifiedPublicPackProviderTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasVerifiedPublicPackProviderTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 439,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasVerifiedPublicPlanningBridgeTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasVerifiedPublicPlanningBridgeTests"
       ],
       "view_modifiers": [],
       "view_structs": []
@@ -12984,7 +13042,7 @@
       "view_structs": []
     }
   ],
-  "entry_count": 609,
+  "entry_count": 612,
   "generated_at": "deterministic-from-current-source-inputs",
   "generator": "scripts/ambitions-component-inventory-generate.py",
   "scan_roots": [

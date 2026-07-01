@@ -1467,6 +1467,29 @@
         "Part 01 owner-review options board; owner direction still required.",
         "Codex recommends Option B Airlock Review Gate; proof ceiling remains Yellow."
       ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "264:184",
+      "node_id_status": "known",
+      "frame_name": "OPTION B - Airlock Review Gate",
+      "vsp_id": "VSP-08",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-08-option-b-airlock-review-gate-selection-r1/images/vsp-08-option-b-selection-board-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-08-option-b-airlock-review-gate-selection-r1/images/vsp-08-option-b-airlock-review-gate-selected-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/owner-approvals/VSP-08-B-Airlock-Review-Gate-direction-approval.md",
+        "docs/qa/evidence/2026-07-01-vsp-08-option-b-airlock-review-gate-selection-r1/manifest.md",
+        "docs/design/provenance/figma-frames/VSP-08-part-01-external-boundary-directions-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/owner-approvals/VSP-08-B-Airlock-Review-Gate-direction-approval.md",
+      "notes": [
+        "Owner-selected VSP-08 Part 01 direction.",
+        "Direction approval only; final package and implementation proof remain missing."
+      ]
     }
   ]
 }

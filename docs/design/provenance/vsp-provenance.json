@@ -26,7 +26,9 @@
     "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/manifest.md",
     "docs/design/provenance/owner-approvals/VSP-07-Object-Wake-Stack-package-approval.md",
     "docs/design/provenance/figma-frames/VSP-08-part-01-external-boundary-directions-R1.md",
-    "docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/manifest.md"
+    "docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/manifest.md",
+    "docs/design/provenance/owner-approvals/VSP-08-B-Airlock-Review-Gate-direction-approval.md",
+    "docs/qa/evidence/2026-07-01-vsp-08-option-b-airlock-review-gate-selection-r1/manifest.md"
   ],
   "vsp_packets": [
     {
@@ -1170,8 +1172,8 @@
       "proof_ceiling": "Yellow",
       "figma": {
         "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
-        "node_id": "264:93",
-        "frame_name": "EXPLORATION - VSP-08 - PART 01 - external boundary directions - R1",
+        "node_id": "264:184",
+        "frame_name": "OPTION B - Airlock Review Gate",
         "screenshot_paths": [
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-08-boundaries-hero-r1.png",
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-08-boundaries-crop-r1.png",
@@ -1179,14 +1181,18 @@
           "docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/images/vsp-08-part-01-board-r1.png",
           "docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/images/vsp-08-option-a-local-first-membrane-r1.png",
           "docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/images/vsp-08-option-b-airlock-review-gate-r1.png",
-          "docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/images/vsp-08-option-f-boundary-constellation-r1.png"
+          "docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/images/vsp-08-option-f-boundary-constellation-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-08-option-b-airlock-review-gate-selection-r1/images/vsp-08-option-b-selection-board-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-08-option-b-airlock-review-gate-selection-r1/images/vsp-08-option-b-airlock-review-gate-selected-r1.png"
         ],
         "evidence_paths": [
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
           "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json",
           "docs/qa/KNOWN_ISSUES.md",
           "docs/design/provenance/figma-frames/VSP-08-part-01-external-boundary-directions-R1.md",
-          "docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/manifest.md"
+          "docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/manifest.md",
+          "docs/design/provenance/owner-approvals/VSP-08-B-Airlock-Review-Gate-direction-approval.md",
+          "docs/qa/evidence/2026-07-01-vsp-08-option-b-airlock-review-gate-selection-r1/manifest.md"
         ],
         "node_id_status": "known",
         "unknown_rationale": ""
@@ -1238,7 +1244,9 @@
           "privacy",
           "yellow-proof",
           "owner-review-needed",
-          "part-01"
+          "part-01",
+          "owner-selected-direction",
+          "airlock-review-gate"
         ],
         "should_create_or_update_now": true
       },
@@ -1257,7 +1265,9 @@
         "privacy_boundary": true
       },
       "proof_present": {
-        "owner_approval": [],
+        "owner_approval": [
+          "docs/design/provenance/owner-approvals/VSP-08-B-Airlock-Review-Gate-direction-approval.md"
+        ],
         "live_swiftui_screenshot": [],
         "device_screenshot": [],
         "dynamic_type": [],
@@ -1283,14 +1293,14 @@
         "live SwiftUI boundary parity screenshot",
         "R2/Source Atlas request-shape proof",
         "offline no-account proof",
-        "owner direction selection"
+        "final VSP-08 candidate-package approval"
       ],
       "green_blockers": [
         "No owner approval.",
         "No privacy-boundary proof.",
         "No offline no-account proof.",
         "No R2 public/reference-only request proof.",
-        "No owner-selected VSP-08 direction."
+        "No final VSP-08 candidate-package approval."
       ],
       "notes": [
         "Split into VSP-08A policy readback and VSP-08B implementation proof before any source implementation.",
@@ -1298,7 +1308,10 @@
         "External/cloud LLMs are not core runtime architecture.",
         "Part 01 external boundary directions board created on 2026-07-01 at node 264:93 with six owner-review options A-F.",
         "Codex recommends Option B Airlock Review Gate because it converts external boundary law into a visible request review object without making Source Atlas, account, widgets, notifications, or cloud services into root surfaces.",
-        "Part 01 remains Needs Repair / Yellow: owner direction selection, policy readback approval, privacy boundary proof, request-shape proof, offline no-account proof, SwiftUI parity, device proof, accessibility conformance, runtime proof, Visual Green, Release Green, and Done are not claimed."
+        "Part 01 remains Needs Repair / Yellow: owner direction selection, policy readback approval, privacy boundary proof, request-shape proof, offline no-account proof, SwiftUI parity, device proof, accessibility conformance, runtime proof, Visual Green, Release Green, and Done are not claimed.",
+        "Owner selected Part 01 Option B Airlock Review Gate on 2026-07-01 as the VSP-08 direction for final candidate-package buildout.",
+        "Option B must be built forward without merging multiple Part 01 options unless explicitly requested.",
+        "Part 01 owner direction approval remains Yellow: no final package approval, source implementation, privacy approval, account readiness, R2 readiness, request-shape proof, offline no-account proof, SwiftUI parity, device proof, accessibility conformance, runtime proof, Visual Green, Release Green, or Done is claimed."
       ]
     },
     {
