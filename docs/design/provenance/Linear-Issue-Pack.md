@@ -208,12 +208,14 @@ Rollback plan:
 ## VSP-06 - VSP-06 You Native Settings
 
 - Parent issue mirror: `AMB-1485`
-- Recommended status: `Ready For Review`
-- Labels: VSP, you, settings, owner-direction-needed, yellow-proof
+- Recommended status: `Accepted Yellow`
+- Labels: VSP, you, settings, owner-approved-direction, yellow-proof
 - Blocked by: owner direction selection, VSP-01 shell authority, VSP-10 source-owner map, VSP-09 accessibility matrix, final VSP-06 package approval
 - Do not create now: `True`
 
 Acceptance summary:
+- Owner approved Part 03 Option C Preference Weave as VSP-06 direction.
+
 - Part 02 is rejected as too literal to supplied references.
 - Part 03 keeps only reference intent and uses Ambitions-owned object language.
 - You remains native settings/user system.
@@ -224,9 +226,9 @@ Validation summary:
 - python3 scripts/ambitions-green-standard-audit.py
 - python3 scripts/ambitions-vsp-provenance-audit.py
 Recommended sub-issues:
-- Owner-select VSP-06 Ambitions-owned You direction - scope: Figma review only; Part 03 recommends D Local Control Observatory with B Trust Meridian ordering - status: Ready For Review
-- Produce VSP-06 final candidate package after direction selection - scope: Figma package only: hero, state matrix, accessibility matrix, SwiftUI anatomy, non-goals - status: Needs Direction
-- Produce You SwiftUI parity leaf - scope: Surfaces/You only, native settings rows with real targets - status: Spec Ready after owner approval
+- Build VSP-06 final package from owner-approved Preference Weave - scope: Figma package only: hero, state matrix, accessibility matrix, SwiftUI anatomy, non-goals - status: Ready For Review after package build
+- Produce You SwiftUI parity leaf - scope: Surfaces/You only, native settings rows with real targets - status: Spec Ready after final package approval
+
 
 Standard Codex closeout block:
 

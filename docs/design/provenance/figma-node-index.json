@@ -828,7 +828,8 @@
       "provenance_annotation_status": "manual_required",
       "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-06-part-03-ambitions-owned-you-directions-R1.md",
       "notes": [
-        "Current VSP-06 owner-review exploration after rejected Part 02."
+        "Board updated: owner approved Option C Preference Weave as direction."
+
       ]
     },
     {
@@ -846,7 +847,8 @@
       "provenance_annotation_status": "manual_required",
       "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-06-part-03-ambitions-owned-you-directions-R1.md",
       "notes": [
-        "Recommended VSP-06 direction."
+        "Non-selected context only after owner approved Option C."
+
       ]
     },
     {
@@ -866,6 +868,26 @@
       "notes": [
         "Recommended ordering model for final VSP-06 direction."
       ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "232:248",
+      "node_id_status": "known",
+      "frame_name": "EXPLORATION - VSP-06 - Option C - Preference Weave - R1",
+      "vsp_id": "VSP-06",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-c-preference-weave-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-06-part-03-ambitions-owned-you-directions-R1.md",
+        "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/owner-approval.md"
+      ],
+      "provenance_annotation_status": "manual_required",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-06-part-03-ambitions-owned-you-directions-R1.md",
+      "notes": [
+        "Owner-approved VSP-06 direction."
+      ]
+
     }
   ]
 }

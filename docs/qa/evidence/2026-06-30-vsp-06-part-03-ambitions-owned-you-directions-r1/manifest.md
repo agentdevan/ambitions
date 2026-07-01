@@ -1,6 +1,7 @@
 # VSP-06 Part 03 Ambitions-Owned You Directions R1
 
-Status: Yellow owner-direction evidence only.
+Status: Owner-approved direction, Yellow proof ceiling.
+
 
 Figma file: `SWtHm9ouHTPbEFfNrrtZwv`
 
@@ -21,7 +22,8 @@ Board screenshot: `images/vsp-06-part-03-ambitions-owned-you-directions-board-r1
 
 Why this pass exists: Part 02 was rejected because it followed the supplied screenshots too literally. Part 03 keeps only the intent from those references: native clarity, grouped controls, local-first account/privacy boundaries, and detail-sheet behavior.
 
-Recommended read: Option D Local Control Observatory is the strongest replacement direction. Option B Trust Meridian should inform the ordering model for custody, reuse, permissioned edges, and external/account boundaries.
+Owner-approved direction: Option C Preference Weave. Option B Trust Meridian remains optional ordering context for custody, reuse, permissioned edges, and external/account boundaries. Option D Local Control Observatory is non-selected context only.
+
 
 Product-law notes:
 - VSP-01 shell is required and unchanged.
@@ -31,7 +33,8 @@ Product-law notes:
 - R2 and Source Atlas remain reference/freshness boundaries, not private life graph storage.
 
 Non-claims:
-- No owner approval.
+- Owner approval recorded in `owner-approval.md`.
+
 - No source implementation.
 - No Visual Green or Done claim.
 - No live SwiftUI, simulator, device, accessibility, or runtime proof.
