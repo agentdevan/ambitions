@@ -16,53 +16,23 @@ extension DefaultCaptureService {
         scopeItemHint: String?,
         proofIntent: String?
     ) async throws -> CaptureRouteGraphPreparation {
-        let intakeReceipt = try await captureRouteGraph.intakeJournal.append(
-            CaptureIntakeJournalAppendRequest(
+        try await captureRouteGraph.durableIntakePipeline().prepareAcceptedInput(
+            CaptureDurableIntakeRequest(
                 captureID: captureID,
                 rawText: rawText,
                 sourceType: sourceType,
                 sourceSurface: sourceSurface,
-                receivedAt: timestamp,
-                deadlineIntent: deadlineText,
-                goalIntent: linkedGoalID,
-                stepIntent: scopeItemHint,
-                proofIntent: proofIntent,
-                privacy: .privateUserText
-            )
-        )
-        guard let intakeRecord = try await captureRouteGraph.intakeJournal.record(id: intakeReceipt.journalRecordID) else {
-            throw CaptureIntakeJournalError.missingDurableReceipt(intakeReceipt.journalRecordID)
-        }
-        let decision = try captureRouteGraph.routeResolver.resolve(
-            CaptureRouteResolveRequest(
-                intakeReceipt: intakeReceipt,
-                rawText: rawText,
+                acceptedAt: timestamp,
                 requestedKind: requestedKind,
                 requestedRoute: requestedRoute,
                 deadlineText: deadlineText,
                 contextLensHint: contextLensHint,
                 priorityHints: priorityHints,
-                sourceType: sourceType,
-                sourceSurface: sourceSurface
+                linkedGoalID: linkedGoalID,
+                scopeItemHint: scopeItemHint,
+                proofIntent: proofIntent,
+                privacy: .privateUserText
             )
-        )
-        let draft = try await captureRouteGraph.draftStore.upsert(
-            intake: intakeRecord,
-            decision: decision,
-            updatedAt: timestamp
-        )
-        let lookupEntry = try await captureRouteGraph.directLookupIndex.index(
-            intake: intakeRecord,
-            draft: draft,
-            decision: decision,
-            updatedAt: timestamp
-        )
-        return CaptureRouteGraphPreparation(
-            intakeReceipt: intakeReceipt,
-            intakeRecord: intakeRecord,
-            decision: decision,
-            draft: draft,
-            lookupEntry: lookupEntry
         )
     }
 
@@ -355,14 +325,6 @@ extension DefaultCaptureService {
             .neutral
         }
     }
-}
-
-struct CaptureRouteGraphPreparation: Sendable, Equatable {
-    let intakeReceipt: CaptureIntakeJournalReceipt
-    let intakeRecord: CaptureIntakeJournalRecord
-    let decision: CaptureRouteDecision
-    let draft: CaptureDraftRecord
-    let lookupEntry: CaptureDirectLookupEntry
 }
 
 enum CaptureServiceError: LocalizedError {

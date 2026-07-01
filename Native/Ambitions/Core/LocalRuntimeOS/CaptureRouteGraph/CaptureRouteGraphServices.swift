@@ -46,4 +46,8 @@ struct CaptureRouteGraphServices: Sendable {
             directLookupIndex: CaptureDirectLookupIndex.fileBacked(rootDirectory: rootDirectory)
         )
     }
+
+    func durableIntakePipeline() -> CaptureDurableIntakePipeline {
+        CaptureDurableIntakePipeline(services: self)
+    }
 }

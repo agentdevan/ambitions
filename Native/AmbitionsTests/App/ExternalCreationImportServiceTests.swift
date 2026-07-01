@@ -15,9 +15,15 @@ final class ExternalCreationImportServiceTests: XCTestCase {
     }
 
     func testImportServiceCreatesNormalCapturesAndPreservesProvenanceHint() async throws {
-        let store = SharedExternalCreationStore(baseURL: temporaryDirectory())
+        let root = temporaryDirectory()
+        let store = SharedExternalCreationStore(baseURL: root)
+        let captureRouteGraph = CaptureRouteGraphServices.fileBacked(rootDirectory: root)
         let repository = PreviewCaptureRepository()
-        let captureService = DefaultCaptureService(repository: repository, idProvider: { "capture-external" })
+        let captureService = DefaultCaptureService(
+            repository: repository,
+            captureRouteGraph: captureRouteGraph,
+            idProvider: { "capture-external" }
+        )
         let commandRecords = InMemoryAmbitionsCommandExecutionRecordRepository()
         let commandJournal = InMemoryCommandJournal()
         let executor = AmbitionsCommandExecutor(
@@ -38,6 +44,8 @@ final class ExternalCreationImportServiceTests: XCTestCase {
 
         let result = await service.importPendingCreations(now: Date(timeIntervalSince1970: 1_712_692_800))
         let captures = try await repository.listCaptures()
+        let intakeRecords = try await captureRouteGraph.intakeJournal.records()
+        let lookup = try await captureRouteGraph.directLookupIndex.entry(captureID: "capture-external")
 
         XCTAssertEqual(result.importedCaptureIDs, ["capture-external"])
         XCTAssertEqual(result.preferredLanding, .captureComposer)
@@ -46,6 +54,9 @@ final class ExternalCreationImportServiceTests: XCTestCase {
         XCTAssertEqual(captures.first?.sourceType, .shareExtensionURL)
         XCTAssertEqual(captures.first?.triage?.destination, .doSoon)
         XCTAssertEqual(captures.first?.triage?.hint, "From Safari: https://example.com/source")
+        XCTAssertEqual(intakeRecords.map(\.captureID), ["capture-external"])
+        XCTAssertEqual(intakeRecords.first?.sourceType, .shareExtensionURL)
+        XCTAssertEqual(lookup?.intakeRecordID, intakeRecords.first?.id)
         let entries = try await commandJournal.fetchEntries(matching: .all, limit: nil)
         XCTAssertEqual(entries.map(\.envelope.commandID), ["external.creation.command.external-request"])
         let record = try await commandRecords.fetchRecord(commandID: "external.creation.command.external-request")

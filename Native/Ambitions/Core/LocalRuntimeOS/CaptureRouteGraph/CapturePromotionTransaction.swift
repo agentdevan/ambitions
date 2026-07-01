@@ -10,6 +10,9 @@ enum CapturePromotionDestination: String, Codable, Sendable, Equatable, Hashable
 enum CapturePromotionTransactionError: Error, Equatable {
     case missingDurableIntake(String)
     case missingTargetObject(CapturePromotionDestination)
+    case attachmentMissingDurableIntake(String)
+    case attachmentBelongsToDifferentCapture(String)
+    case attachmentQuarantined(String)
 }
 
 struct CapturePromotionTransactionRequest: Sendable, Equatable {
@@ -19,6 +22,7 @@ struct CapturePromotionTransactionRequest: Sendable, Equatable {
     let targetObjectIDs: [String]
     let occurredAt: String
     let summary: String
+    let attachmentRecords: [CaptureAttachmentVaultRecord]
     let privacy: EventLedgerPrivacyClassification
 
     init(
@@ -28,6 +32,7 @@ struct CapturePromotionTransactionRequest: Sendable, Equatable {
         targetObjectIDs: [String],
         occurredAt: String,
         summary: String,
+        attachmentRecords: [CaptureAttachmentVaultRecord] = [],
         privacy: EventLedgerPrivacyClassification = .privateUserText
     ) {
         self.intakeReceipt = intakeReceipt
@@ -36,6 +41,7 @@ struct CapturePromotionTransactionRequest: Sendable, Equatable {
         self.targetObjectIDs = CaptureRouteGraphStableID.unique(targetObjectIDs)
         self.occurredAt = CaptureRouteGraphStableID.required(occurredAt)
         self.summary = CaptureRouteGraphStableID.required(summary)
+        self.attachmentRecords = attachmentRecords
         self.privacy = privacy
     }
 }
@@ -48,11 +54,18 @@ struct CapturePromotionTransactionReceipt: Codable, Sendable, Equatable, Hashabl
     let targetObjectIDs: [String]
     let occurredAt: String
     let summary: String
+    let attachmentRecordIDs: [String]
+    let attachmentChecksums: [String]
     let writeAuthority: String
     let sideEffectPolicy: String
     let requiresUnitOfWork: Bool
     let localOnly: Bool
     let privacy: EventLedgerPrivacyClassification
+    let trustReceiptID: String
+    let tombstoneID: String
+    let supersededByObjectID: String
+    let replayHistoryID: String
+    let runtimeEvent: RuntimeEvent
     let runtimeTrace: CaptureRouteGraphRuntimeTrace
     let checksum: String
 
@@ -63,12 +76,25 @@ struct CapturePromotionTransactionReceipt: Codable, Sendable, Equatable, Hashabl
         guard request.targetObjectIDs.isEmpty == false else {
             throw CapturePromotionTransactionError.missingTargetObject(request.destination)
         }
+        for attachment in request.attachmentRecords {
+            guard attachment.intakeRecordID == request.intakeReceipt.journalRecordID else {
+                throw CapturePromotionTransactionError.attachmentMissingDurableIntake(attachment.id)
+            }
+            guard attachment.captureID == request.captureID else {
+                throw CapturePromotionTransactionError.attachmentBelongsToDifferentCapture(attachment.id)
+            }
+            guard attachment.state == .staged else {
+                throw CapturePromotionTransactionError.attachmentQuarantined(attachment.id)
+            }
+        }
         captureID = request.captureID
         intakeRecordID = request.intakeReceipt.journalRecordID
         destination = request.destination
         targetObjectIDs = request.targetObjectIDs
         occurredAt = request.occurredAt
         summary = request.summary
+        attachmentRecordIDs = request.attachmentRecords.map(\.id).sorted()
+        attachmentChecksums = request.attachmentRecords.map(\.sha256).sorted()
         writeAuthority = "Core/LocalRuntimeOS/CaptureRouteGraph + TransactionKernel"
         sideEffectPolicy = AppUnitOfWorkReceipt.noExternalSideEffects
         requiresUnitOfWork = true
@@ -78,7 +104,38 @@ struct CapturePromotionTransactionReceipt: Codable, Sendable, Equatable, Hashabl
             prefix: "capture-promotion.receipt",
             components: [captureID, intakeRecordID, destination.rawValue, targetObjectIDs.joined(separator: ",")]
         )
+        trustReceiptID = CaptureRouteGraphStableID.make(prefix: "capture-promotion.trust-receipt", components: [id, intakeRecordID])
+        tombstoneID = CaptureRouteGraphStableID.make(prefix: "capture-promotion.tombstone", components: [captureID, id])
+        supersededByObjectID = targetObjectIDs[0]
+        replayHistoryID = CaptureRouteGraphStableID.make(prefix: "capture-promotion.replay-history", components: [id, tombstoneID])
         runtimeTrace = CaptureRouteGraphRuntimeTrace.make(owner: "CapturePromotionTransaction", sourceID: id)
+        runtimeEvent = RuntimeEvent(
+            commandID: request.intakeReceipt.runtimeTrace.commandID,
+            actor: .user,
+            source: .capture,
+            target: AmbitionsCommandTarget(captureID: captureID, destination: .captureInbox),
+            privacy: privacy,
+            localOnly: true,
+            occurredAt: occurredAt,
+            payload: .tombstoneRecorded(
+                RuntimeTombstoneEventPayload(
+                    tombstoneID: tombstoneID,
+                    objectFamily: .capture,
+                    objectID: captureID,
+                    lineageID: intakeRecordID,
+                    reason: "Capture promoted to \(destination.rawValue).",
+                    supersededByObjectID: supersededByObjectID
+                )
+            ),
+            metadata: [
+                "capturePromotionReceiptID": id,
+                "captureIntakeRecordID": intakeRecordID,
+                "trustReceiptID": trustReceiptID,
+                "replayHistoryID": replayHistoryID,
+                "attachmentRecordIDs": attachmentRecordIDs.joined(separator: ","),
+                "attachmentChecksums": attachmentChecksums.joined(separator: ",")
+            ]
+        )
         checksum = CaptureRouteGraphStableID.checksum(
             prefix: "capture-promotion.receipt",
             components: [
@@ -89,11 +146,18 @@ struct CapturePromotionTransactionReceipt: Codable, Sendable, Equatable, Hashabl
                 targetObjectIDs.joined(separator: ","),
                 occurredAt,
                 summary,
+                attachmentRecordIDs.joined(separator: ","),
+                attachmentChecksums.joined(separator: ","),
                 writeAuthority,
                 sideEffectPolicy,
                 "requires-uow",
                 "local",
                 privacy.rawValue,
+                trustReceiptID,
+                tombstoneID,
+                supersededByObjectID,
+                replayHistoryID,
+                runtimeEvent.kind.rawValue,
                 runtimeTrace.checksum
             ]
         )
@@ -104,6 +168,11 @@ struct CapturePromotionTransactionReceipt: Codable, Sendable, Equatable, Hashabl
             requiresUnitOfWork &&
             sideEffectPolicy == AppUnitOfWorkReceipt.noExternalSideEffects &&
             writeAuthority == "Core/LocalRuntimeOS/CaptureRouteGraph + TransactionKernel" &&
+            trustReceiptID.isEmpty == false &&
+            tombstoneID.isEmpty == false &&
+            replayHistoryID.isEmpty == false &&
+            runtimeEvent.kind == .tombstoneRecorded &&
+            runtimeEvent.metadata["capturePromotionReceiptID"] == id &&
             runtimeTrace.satisfiesRuntimeSpine
     }
 }

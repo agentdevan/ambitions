@@ -1138,6 +1138,138 @@ def check_external_surface_sanitized_projection_gate() -> CheckResult:
     )
 
 
+def check_capture_intake_durability_gate() -> CheckResult:
+    findings: list[Finding] = []
+    required_markers = {
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureDurableIntakePipeline.swift": [
+            "struct CaptureDurableIntakePipeline",
+            "try await services.intakeJournal.append",
+            "try await services.intakeJournal.record",
+            "try await services.attachmentVault.stage",
+            "services.routeResolver.resolve",
+            "CaptureRouteGraphPreparation",
+        ],
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureRouteGraphServices.swift": [
+            "func durableIntakePipeline() -> CaptureDurableIntakePipeline",
+        ],
+        ROOT / "Native/Ambitions/Core/Runtime/CaptureService+04-DefaultCaptureService.swift": [
+            "captureRouteGraph.durableIntakePipeline().prepareAcceptedInput",
+        ],
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureAttachmentVault.swift": [
+            "case missingDurableIntake",
+            "guard request.intakeRecordID != nil",
+        ],
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CapturePromotionTransaction.swift": [
+            "attachmentRecordIDs",
+            "attachmentChecksums",
+            "trustReceiptID",
+            "RuntimeTombstoneEventPayload",
+            "replayHistoryID",
+            "runtimeEvent.metadata[\"capturePromotionReceiptID\"] == id",
+        ],
+        ROOT / "Native/AmbitionsTests/LocalRuntimeOS/CaptureRouteGraph/CaptureRouteGraphTests.swift": [
+            "testDurablePipelineRecordsAcceptedExternalSourcesBeforeClassificationAndSurvivesRestart",
+            "testDurablePipelineStagesAttachmentsAfterIntakeBeforePromotion",
+            "testPromotionTransactionAndCorrectionLedgerUseDurableIntake",
+            "testDirectLookupSurvivesRestartAfterCorrectionFlow",
+        ],
+        ROOT / "Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift": [
+            "CaptureRouteGraphServices.fileBacked",
+            "captureRouteGraph.intakeJournal.records",
+            "captureRouteGraph.directLookupIndex.entry",
+        ],
+    }
+    for path, markers in required_markers.items():
+        if not path.exists():
+            findings.append(
+                Finding(
+                    "blocker",
+                    "capture-intake-durability-missing-source",
+                    relative(path),
+                    None,
+                    "Capture intake durability gate source/test file is missing.",
+                )
+            )
+            continue
+        text = read_text(path)
+        for marker in markers:
+            if marker not in text:
+                findings.append(
+                    Finding(
+                        "blocker",
+                        "capture-intake-durability-marker-missing",
+                        relative(path),
+                        None,
+                        f"Missing Capture durable-intake marker `{marker}`.",
+                    )
+                )
+
+    pipeline_path = ROOT / "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureDurableIntakePipeline.swift"
+    if pipeline_path.exists():
+        pipeline = read_text(pipeline_path)
+        append_index = pipeline.find("try await services.intakeJournal.append")
+        record_index = pipeline.find("try await services.intakeJournal.record")
+        attachment_index = pipeline.find("try await services.attachmentVault.stage")
+        resolve_index = pipeline.find("services.routeResolver.resolve")
+        if min(append_index, record_index, resolve_index) == -1 or not (append_index < record_index < resolve_index):
+            findings.append(
+                Finding(
+                    "blocker",
+                    "capture-classification-before-durable-intake",
+                    relative(pipeline_path),
+                    None,
+                    "Capture route resolution must occur only after append and durable record reload.",
+                )
+            )
+        if attachment_index != -1 and not (append_index < record_index < attachment_index < resolve_index):
+            findings.append(
+                Finding(
+                    "blocker",
+                    "capture-attachment-before-durable-intake",
+                    relative(pipeline_path),
+                    None,
+                    "Capture attachment checksum/metadata staging must occur after durable intake record reload and before route resolution/promotion.",
+                )
+            )
+
+    allowed_route_resolution_paths = {
+        "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureDurableIntakePipeline.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureRouteResolver.swift",
+    }
+    for path in production_swift_files():
+        rel = relative(path)
+        if rel in allowed_route_resolution_paths:
+            continue
+        text = read_text(path)
+        if "routeResolver.resolve(" in text or "CaptureClassifier.classify(" in text:
+            findings.append(
+                Finding(
+                    "blocker",
+                    "capture-route-resolution-outside-durable-pipeline",
+                    rel,
+                    None,
+                    "Capture classification/route resolution must go through CaptureDurableIntakePipeline after durable intake.",
+                )
+            )
+        if "attachmentVault.stage(" in text and rel != "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureDurableIntakePipeline.swift":
+            findings.append(
+                Finding(
+                    "blocker",
+                    "capture-attachment-staging-outside-durable-pipeline",
+                    rel,
+                    None,
+                    "Capture attachment staging must go through CaptureDurableIntakePipeline so metadata/checksum work follows durable intake.",
+                )
+            )
+
+    return make_result(
+        "capture_intake_durability_gate",
+        findings,
+        "Capture accepted input is journaled before classification, attachment staging, promotion, and restart lookup evidence.",
+        "{count} Capture durable-intake blocker(s) remain.",
+    )
+
+
 def check_side_effect_local_commit_receipt_gate() -> CheckResult:
     findings: list[Finding] = []
     required_markers = {
@@ -1414,6 +1546,7 @@ def run_checks() -> list[CheckResult]:
         check_transaction_coordinator_commit_ownership(),
         check_projection_store_surface_read_gate(),
         check_external_surface_sanitized_projection_gate(),
+        check_capture_intake_durability_gate(),
         check_side_effect_local_commit_receipt_gate(),
         check_runtime_mutation_context_boundaries(),
         scan_mutation_bypasses(),
@@ -1550,6 +1683,7 @@ def run_self_test() -> int:
     assert "surface_projection_store_consumption" in INTEGRATION_MARKERS
     assert any(prefix.endswith("AmbitionsWidgetExtension/") for prefix in EXTERNAL_SURFACE_SCAN_INCLUDED_PREFIXES)
     assert any(result.check_id == "external_surface_sanitized_projection_gate" for result in [check_external_surface_sanitized_projection_gate()])
+    assert any(result.check_id == "capture_intake_durability_gate" for result in [check_capture_intake_durability_gate()])
     assert any(result.check_id == "side_effect_local_commit_receipt_gate" for result in [check_side_effect_local_commit_receipt_gate()])
     assert RUNTIME_MUTATION_CONTEXT_PATH.endswith("TransactionKernel/RuntimeMutationContext.swift")
     service_write = "try await repositories.goals.saveGoals([goal])"

@@ -3,6 +3,7 @@ import Foundation
 
 enum CaptureAttachmentVaultError: Error, Equatable {
     case emptyPayload
+    case missingDurableIntake(String)
     case missingAttachment(String)
 }
 
@@ -198,6 +199,9 @@ actor CaptureAttachmentVault {
     func stage(_ request: CaptureAttachmentVaultStageRequest) async throws -> CaptureAttachmentVaultRecord {
         guard request.data.isEmpty == false else {
             throw CaptureAttachmentVaultError.emptyPayload
+        }
+        guard request.intakeRecordID != nil else {
+            throw CaptureAttachmentVaultError.missingDurableIntake(request.captureID)
         }
         let sha256 = Self.sha256Hex(request.data)
         let storedFilename = "\(sha256)-\(Self.safeFilename(request.originalFilename))"
