@@ -1509,14 +1509,16 @@
       ],
       "evidence_doc_paths": [
         "docs/design/provenance/figma-frames/VSP-08-airlock-review-gate-final-package-R1.md",
-        "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/manifest.md"
+        "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/manifest.md",
+        "docs/design/provenance/owner-approvals/VSP-08-Airlock-Review-Gate-package-approval.md"
       ],
       "provenance_annotation_status": "figma_recorded",
       "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-08-airlock-review-gate-final-package-R1.md",
       "notes": [
         "Final VSP-08 candidate package built from owner-selected Option B Airlock Review Gate.",
-        "Ready For Review / Yellow proof ceiling only; final owner package approval and runtime proof remain missing.",
-        "No source implementation, Visual Green, device proof, runtime proof, privacy proof, request-shape proof, or accessibility conformance is claimed."
+        "Owner approved package node 272:93 on 2026-07-01 as the Figma design target for a future implementation leaf.",
+        "Spec Ready / Yellow proof ceiling only; runtime, privacy, request-shape, offline, device, and accessibility proof remain missing.",
+        "No source implementation, Visual Green, device proof, runtime proof, privacy approval, request-shape proof, R2 readiness, account readiness, or accessibility conformance is claimed."
       ]
     }
   ]

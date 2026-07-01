@@ -30,7 +30,8 @@
     "docs/design/provenance/owner-approvals/VSP-08-B-Airlock-Review-Gate-direction-approval.md",
     "docs/qa/evidence/2026-07-01-vsp-08-option-b-airlock-review-gate-selection-r1/manifest.md",
     "docs/design/provenance/figma-frames/VSP-08-airlock-review-gate-final-package-R1.md",
-    "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/manifest.md"
+    "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/manifest.md",
+    "docs/design/provenance/owner-approvals/VSP-08-Airlock-Review-Gate-package-approval.md"
   ],
   "vsp_packets": [
     {
@@ -1170,7 +1171,7 @@
       "vsp_id": "VSP-08",
       "title": "External Boundaries",
       "category": "external_boundary",
-      "current_status_recommendation": "Ready For Review",
+      "current_status_recommendation": "Spec Ready",
       "proof_ceiling": "Yellow",
       "figma": {
         "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
@@ -1204,7 +1205,8 @@
           "docs/design/provenance/owner-approvals/VSP-08-B-Airlock-Review-Gate-direction-approval.md",
           "docs/qa/evidence/2026-07-01-vsp-08-option-b-airlock-review-gate-selection-r1/manifest.md",
           "docs/design/provenance/figma-frames/VSP-08-airlock-review-gate-final-package-R1.md",
-          "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/manifest.md"
+          "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/manifest.md",
+          "docs/design/provenance/owner-approvals/VSP-08-Airlock-Review-Gate-package-approval.md"
         ],
         "node_id_status": "known",
         "unknown_rationale": ""
@@ -1249,16 +1251,16 @@
       },
       "linear": {
         "likely_parent_issue": "AMB-1487",
-        "recommended_status": "Ready For Review",
+        "recommended_status": "Spec Ready",
         "recommended_labels": [
           "VSP",
           "external-boundary",
           "privacy",
           "yellow-proof",
-          "owner-review-needed",
+          "owner-approved-target",
           "final-package",
           "airlock-review-gate",
-          "ready-for-review"
+          "spec-ready"
         ],
         "should_create_or_update_now": true
       },
@@ -1278,7 +1280,8 @@
       },
       "proof_present": {
         "owner_approval": [
-          "docs/design/provenance/owner-approvals/VSP-08-B-Airlock-Review-Gate-direction-approval.md"
+          "docs/design/provenance/owner-approvals/VSP-08-B-Airlock-Review-Gate-direction-approval.md",
+          "docs/design/provenance/owner-approvals/VSP-08-Airlock-Review-Gate-package-approval.md"
         ],
         "live_swiftui_screenshot": [],
         "device_screenshot": [],
@@ -1299,7 +1302,6 @@
         "A Figma boundary object cannot prove request-shape or no-private-graph runtime behavior."
       ],
       "missing_evidence": [
-        "final VSP-08 candidate-package owner approval",
         "VSP-08A policy readback owner approval",
         "VSP-08B implementation proof packet",
         "live SwiftUI boundary parity screenshot",
@@ -1314,7 +1316,6 @@
         "Reduce Transparency proof"
       ],
       "green_blockers": [
-        "No final package owner approval.",
         "No privacy-boundary runtime proof.",
         "No offline no-account runtime proof.",
         "No R2 public/reference-only request proof.",
@@ -1333,7 +1334,9 @@
         "Final candidate package R1 built from owner-selected Option B Airlock Review Gate on 2026-07-01 at Figma node 272:93.",
         "Final package is Ready For Review / Yellow only until explicit owner package approval is recorded.",
         "Package includes hero, state matrix, accessibility matrix, SwiftUI anatomy, presentation crop, proof non-claims, and package readback frames.",
-        "No source implementation, privacy approval, account readiness, R2 readiness, request-shape proof, offline no-account proof, SwiftUI parity, device proof, accessibility conformance, runtime proof, Visual Green, Release Green, or Done is claimed."
+        "No source implementation, privacy approval, account readiness, R2 readiness, request-shape proof, offline no-account proof, SwiftUI parity, device proof, accessibility conformance, runtime proof, Visual Green, Release Green, or Done is claimed.",
+        "Owner approved final VSP-08 Airlock Review Gate package node 272:93 on 2026-07-01 as the Figma design target for a future implementation leaf.",
+        "VSP-08 is Spec Ready / Yellow after owner package approval; runtime/privacy/request-shape/offline/device/accessibility proof remains missing."
       ]
     },
     {

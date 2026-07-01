@@ -1,6 +1,6 @@
 # VSP-08 Airlock Review Gate Final Package R1
 
-Status: Ready For Review / Yellow proof ceiling
+Status: Owner approved / Spec Ready / Yellow proof ceiling
 
 This frame note maps the VSP-08 final Figma candidate package to Code-Connect-free provenance. It is an owner-reviewable Figma design target for a future implementation leaf, not implementation authority, Visual Green, source parity, device proof, accessibility conformance, runtime proof, privacy proof, account readiness, R2 readiness, Release Green, or Done.
 
@@ -12,7 +12,7 @@ This frame note maps the VSP-08 final Figma candidate package to Code-Connect-fr
 - Final package board: `272:93`
 - Figma file: `SWtHm9ouHTPbEFfNrrtZwv`
 
-The owner selected `B Airlock Review Gate` as the VSP-08 Part 01 direction on 2026-07-01. This package builds that direction into a single final candidate package for owner review. Final package owner approval is still missing.
+The owner selected `B Airlock Review Gate` as the VSP-08 Part 01 direction on 2026-07-01. This package builds that direction into a single final candidate package for owner review. Final package owner approval is recorded in `docs/design/provenance/owner-approvals/VSP-08-Airlock-Review-Gate-package-approval.md`.
 
 ## Final Package Frames
 
@@ -68,7 +68,6 @@ The owner selected `B Airlock Review Gate` as the VSP-08 Part 01 direction on 20
 
 - No source implementation in this package.
 - No Code Connect claim.
-- No final package owner approval claim.
 - No privacy approval.
 - No account readiness.
 - No R2 readiness.
@@ -89,3 +88,5 @@ See `docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/man
 The PNG proof images are durable local render mirrors of the Figma package structure anchored to the Figma node IDs above. They are not device screenshots, not live SwiftUI screenshots, and not direct runtime proof. This limitation is intentional in the proof ceiling and must not be converted into a Green claim.
 
 Direction approval proof: `docs/design/provenance/owner-approvals/VSP-08-B-Airlock-Review-Gate-direction-approval.md`.
+
+Package approval proof: `docs/design/provenance/owner-approvals/VSP-08-Airlock-Review-Gate-package-approval.md`.

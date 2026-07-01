@@ -121,8 +121,8 @@ SwiftUI source owner: Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/Sou
 Allowed implementation area: Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary, Native/Ambitions/DesignSystem/StagePrimitives/SharedUI, Native/Ambitions/Trust
 Forbidden implementation area: R2 private life graph storage, account-required core value, external/cloud LLM core runtime, private user context in Source Atlas, network dependency for offline core value
 Proof ceiling: Yellow
-Missing proof: final VSP-08 candidate-package owner approval, VSP-08A policy readback owner approval, VSP-08B implementation proof packet, live SwiftUI boundary parity screenshot, R2/Source Atlas request-shape proof, offline no-account runtime proof, privacy-boundary runtime proof, device screenshot proof, Dynamic Type proof, VoiceOver proof, Reduce Motion proof, Increase Contrast proof, Reduce Transparency proof
-Linear mirror: AMB-1487 (Ready For Review)
+Missing proof: VSP-08A policy readback owner approval, VSP-08B implementation proof packet, live SwiftUI boundary parity screenshot, R2/Source Atlas request-shape proof, offline no-account runtime proof, privacy-boundary runtime proof, device screenshot proof, Dynamic Type proof, VoiceOver proof, Reduce Motion proof, Increase Contrast proof, Reduce Transparency proof
+Linear mirror: AMB-1487 (Spec Ready)
 Non-claim: this annotation is not Code Connect, not Visual Green, not source implementation, and not owner approval.
 ```
 

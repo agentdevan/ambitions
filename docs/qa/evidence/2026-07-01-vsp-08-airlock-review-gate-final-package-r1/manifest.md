@@ -1,10 +1,10 @@
 # VSP-08 Airlock Review Gate Final Package R1
 
-Status: Ready For Review / Yellow proof ceiling
+Status: Owner approved / Spec Ready / Yellow proof ceiling
 
 This evidence package records the final VSP-08 Airlock Review Gate candidate package built from owner-selected Part 01 Option B.
 
-The owner selected Option B on 2026-07-01 as the VSP-08 direction. Final package owner approval is still missing.
+The owner selected Option B on 2026-07-01 as the VSP-08 direction. Final package owner approval is recorded in `docs/design/provenance/owner-approvals/VSP-08-Airlock-Review-Gate-package-approval.md`.
 
 It is not implementation authority, SwiftUI parity, Visual Green, device proof, accessibility conformance, runtime proof, privacy proof, account readiness, R2 readiness, Release Green, or Done.
 
@@ -36,9 +36,7 @@ It is not implementation authority, SwiftUI parity, Visual Green, device proof, 
 
 ## Owner Review State
 
-The final candidate package is ready for owner review.
-
-Owner decision required: approve this final package, request repair, or reject before Codex implementation leaf creation.
+The final candidate package is owner-approved as a Figma design target for a future implementation leaf.
 
 Source implementation still requires a bounded Codex implementation leaf with exact source owners, non-goals, validation commands, screenshot/accessibility proof requirements, request-shape proof requirements, privacy-boundary proof requirements, and rollback plan.
 
@@ -61,7 +59,6 @@ The PNG proof images are durable local render mirrors of the Figma package struc
 ## Non-Claims
 
 - No source implementation.
-- No final package owner approval.
 - No SwiftUI parity.
 - No Visual Green.
 - No device proof.

@@ -298,9 +298,9 @@ Rollback plan:
 ## VSP-08 - VSP-08 External Boundaries
 
 - Parent issue mirror: `AMB-1487`
-- Recommended status: `Ready For Review`
-- Labels: VSP, external-boundary, privacy, yellow-proof, owner-review-needed, final-package, airlock-review-gate, ready-for-review
-- Blocked by: final VSP-08 candidate-package owner approval, privacy-boundary proof, offline no-account proof, R2 request-shape proof, live SwiftUI/device/accessibility proof
+- Recommended status: `Spec Ready`
+- Labels: VSP, external-boundary, privacy, yellow-proof, owner-approved-target, final-package, airlock-review-gate, spec-ready
+- Blocked by: privacy-boundary proof, offline no-account proof, R2 request-shape proof, live SwiftUI/device/accessibility proof
 - Do not create now: `True`
 
 Acceptance summary:
@@ -312,7 +312,8 @@ Acceptance summary:
 - No private graph egress and no external/cloud LLM core runtime.
 - Widgets, shortcuts, share, notifications, calendar/EventKit, and deep links are inspectable boundaries, not root surfaces.
 - No option may make account, R2, Source Atlas, widgets, notifications, external tools, or hosted AI part of core/root architecture.
-- Ready For Review does not claim final package approval, privacy proof, R2 readiness, account readiness, source implementation, Visual Green, Release Green, or Done.
+- Owner approved final VSP-08 Airlock Review Gate package node 272:93 on 2026-07-01 as the Figma design target for a future implementation leaf.
+- Spec Ready does not claim privacy proof, R2 readiness, account readiness, source implementation, Visual Green, Release Green, or Done.
 Validation summary:
 - privacy/request-shape proof after source implementation
 - python3 scripts/ambitions-local-first-boundary-scan.py when applicable

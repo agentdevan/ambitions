@@ -1102,11 +1102,14 @@
       "proof_id": "vsp-08-owner-approval",
       "vsp_id": "VSP-08",
       "proof_type": "owner_approval",
-      "status": "missing",
-      "artifact_paths": [],
-      "blocking_reason": "Missing owner approval evidence for current VSP scope.",
-      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
-      "notes": "Required before VSP-08 can claim Green for owner approval."
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/owner-approvals/VSP-08-B-Airlock-Review-Gate-direction-approval.md",
+        "docs/design/provenance/owner-approvals/VSP-08-Airlock-Review-Gate-package-approval.md"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Satisfies owner-approval evidence for the VSP-08 direction and final Figma package only. VSP-08 remains Yellow until live SwiftUI, device, accessibility, runtime, privacy-boundary, request-shape, and offline no-account proof exist.",
+      "notes": "Owner selected Option B Airlock Review Gate and approved final package node 272:93 on 2026-07-01. This is not source implementation proof, device proof, accessibility proof, privacy approval, release readiness, Visual Green, or Done."
     },
     {
       "proof_id": "vsp-08-swiftui-simulator-screenshot",
@@ -1754,11 +1757,26 @@
         "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-swiftui-anatomy-r1.png",
         "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-presentation-crop-r1.png",
         "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-non-claims-r1.png",
-        "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-package-readback-r1.png"
+        "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-package-readback-r1.png",
+        "docs/design/provenance/owner-approvals/VSP-08-Airlock-Review-Gate-package-approval.md"
       ],
       "blocking_reason": "",
-      "proof_ceiling_impact": "Supports Ready For Review / Yellow final package evidence only. Does not prove final package owner approval, privacy boundary behavior, R2 request shape, offline no-account behavior, SwiftUI parity, Visual Green, device behavior, runtime behavior, accessibility conformance, Release Green, or Done.",
-      "notes": "Final candidate package board at node 272:93. Built from owner-selected Part 01 Option B Airlock Review Gate. Final owner package approval is still missing."
+      "proof_ceiling_impact": "Supports owner-approved Figma target / Spec Ready evidence only. Does not prove privacy boundary behavior, R2 request shape, offline no-account behavior, SwiftUI parity, Visual Green, device behavior, runtime behavior, accessibility conformance, Release Green, or Done.",
+      "notes": "Final candidate package board at node 272:93. Built from owner-selected Part 01 Option B Airlock Review Gate. Owner approved package node 272:93 on 2026-07-01 as the Figma design target for a future implementation leaf."
+    },
+    {
+      "proof_id": "vsp-08-airlock-review-gate-package-approval-r1",
+      "vsp_id": "VSP-08",
+      "proof_type": "owner_package_approval",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/owner-approvals/VSP-08-Airlock-Review-Gate-package-approval.md",
+        "docs/design/provenance/figma-frames/VSP-08-airlock-review-gate-final-package-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/manifest.md"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Lifts the final VSP-08 package owner-review blocker and moves VSP-08 to Spec Ready / Yellow. Does not authorize Green, source completion, device proof, accessibility conformance, runtime proof, privacy approval, R2 readiness, account readiness, Release Green, or Done.",
+      "notes": "Owner approved VSP-08 Airlock Review Gate final package node 272:93 on 2026-07-01."
     }
   ]
 }
