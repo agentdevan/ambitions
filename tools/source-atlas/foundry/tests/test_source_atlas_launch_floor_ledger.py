@@ -79,6 +79,8 @@ def test_launch_floor_ledger_current_repo_evidence_fails_closed(tmp_path: Path):
     assert counts["sourceNeededFallbackDenominator"] == 50_000
     assert counts["missingShardEvents"] == 200
     assert counts["missingShardEventsWithDurableExpansion"] == 0
+    assert counts["nativeBridgeLaunchFloorCorpusSamples"] == 7
+    assert counts["nativeBridgeLaunchFloorCorpusPermutations"] == 14
     assert counts["packablePublicReferenceClaimProxy"] == 71
     assert counts["liveR2ObjectProxy"] == 196
     assert counts["sourceLaneCount"] == 34

@@ -23,7 +23,7 @@ from .model import NON_CLAIMS, PRIVACY_BOUNDARY, read_json, stable_hash, stable_
 
 
 SOURCE_ATLAS_LAUNCH_FLOOR_LEDGER_KIND = "ambitions.sourceAtlas.launchFloorLedger.v1"
-SOURCE_ATLAS_LAUNCH_FLOOR_LEDGER_VERSION = "source-atlas-launch-floor-ledger-lff-m03-l03"
+SOURCE_ATLAS_LAUNCH_FLOOR_LEDGER_VERSION = "source-atlas-launch-floor-ledger-lff-m03-l04"
 
 LAUNCH_FLOOR_TARGETS = [
     {
@@ -353,6 +353,7 @@ def source_atlas_launch_floor_ledger_markdown(report: dict[str, Any]) -> str:
         f"- Representative configured gauntlet cases: {counts['configuredGauntletCases']}",
         f"- Unknown-domain candidate-only cases: {counts['unknownCandidateOnlyCases']}",
         f"- Native bridge source-contract intents: {counts['nativeBridgeSourceIntentContract']}",
+        f"- Native bridge launch-floor corpus samples/permutations: {counts['nativeBridgeLaunchFloorCorpusSamples']}/{counts['nativeBridgeLaunchFloorCorpusPermutations']}",
         f"- Launch-floor golden intent records: {counts['launchFloorGoldenIntentRecords']}",
         f"- Launch-floor golden intents counted: {counts['goldenIntentCorpusCounter'] or 0}",
         f"- Launch-floor golden intent domains/subdomains: {counts['launchFloorGoldenIntentDomains']}/{counts['launchFloorGoldenIntentSubdomains']}",
@@ -534,6 +535,8 @@ def _counters(
             "finalOutputsGenerated": final_outputs,
             "nativeBridgeSourceIntentContract": native_bridge_source_contract.get("intentCount"),
             "nativeBridgeSourcePermutationContract": native_bridge_source_contract.get("scenarioCount"),
+            "nativeBridgeLaunchFloorCorpusSamples": native_bridge_source_contract.get("launchFloorSampleCount"),
+            "nativeBridgeLaunchFloorCorpusPermutations": native_bridge_source_contract.get("launchFloorScenarioCount"),
             "focusedNativePassedFromReleasePacket": _record_count(release_packet, "focusedNativePassed"),
             "sourceAtlasPytestPassedFromReleasePacket": _record_count(release_packet, "sourceAtlasPytestPassed"),
             "productionSupervisorWorkQueueItems": _record_count(supervisor, "workQueueItems"),
@@ -634,6 +637,8 @@ def _target_statuses(counters: dict[str, Any]) -> list[dict[str, Any]]:
                 "configuredGauntletCases": record_counts["configuredGauntletCases"],
                 "nativeBridgeSourceIntentContract": record_counts["nativeBridgeSourceIntentContract"],
                 "nativeBridgeSourcePermutationContract": record_counts["nativeBridgeSourcePermutationContract"],
+                "nativeBridgeLaunchFloorCorpusSamples": record_counts["nativeBridgeLaunchFloorCorpusSamples"],
+                "nativeBridgeLaunchFloorCorpusPermutations": record_counts["nativeBridgeLaunchFloorCorpusPermutations"],
             },
             missing_counter_gap="canonical golden intent corpus is missing",
             required_changes=[
@@ -945,8 +950,13 @@ def _validation_matrix() -> list[dict[str, str]]:
         },
         {
             "validationID": "launch_floor_ledger",
-            "command": "python3 tools/source-atlas/source-atlas-foundry.py source-atlas-launch-floor-ledger --shard-corpus-manifest tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/launch-floor-shard-corpus-manifest.json --r2-layout-proof docs/qa/source-atlas/source-atlas-launch-floor-r2-layout-proof-lff-m02.json --golden-intent-corpus docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.json --fallback-metric docs/qa/source-atlas/source-atlas-source-needed-fallback-metric-lff-m03.json --missing-shard-events docs/qa/source-atlas/source-atlas-missing-shard-events-lff-m03.json --output-root tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m03-l03-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.md",
-            "purpose": "regenerate current launch-floor ledger with bounded shard corpus/R2 proof, validated golden-intent corpus report, validated source-needed fallback metric, LFF-M04-pending missing-shard events, and no source/R2/native mutation",
+            "command": "python3 tools/source-atlas/source-atlas-foundry.py source-atlas-launch-floor-ledger --shard-corpus-manifest tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/launch-floor-shard-corpus-manifest.json --r2-layout-proof docs/qa/source-atlas/source-atlas-launch-floor-r2-layout-proof-lff-m02.json --golden-intent-corpus docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.json --fallback-metric docs/qa/source-atlas/source-atlas-source-needed-fallback-metric-lff-m03.json --missing-shard-events docs/qa/source-atlas/source-atlas-missing-shard-events-lff-m03.json --output-root tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m03-l04-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.md",
+            "purpose": "regenerate current launch-floor ledger with bounded shard corpus/R2 proof, validated golden-intent corpus report, validated source-needed fallback metric, LFF-M04-pending missing-shard events, native launch-floor corpus sample contract, and no source/R2/native mutation",
+        },
+        {
+            "validationID": "launch_floor_native_bridge_focused",
+            "command": "xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -configuration Debug -destination 'platform=iOS Simulator,id=8ACCD665-4807-4102-B526-5A1AE20686A8' -derivedDataPath output/DerivedData-AMB1624-rerun -packageCachePath /tmp/ambitions-swiftpm-cache-amb1624-rerun -skipMacroValidation COMPILER_INDEX_STORE_ENABLE=NO ONLY_ACTIVE_ARCH=YES -skip-testing:AmbitionsUITests -only-testing:AmbitionsTests/SourceAtlasRuntimeBridgeCoverageGauntletTests/testLaunchFloorGoldenCorpusSlicesBridgeIntoLocalRuntimeWithoutPrivateEgressOrFinalOutputs test",
+            "purpose": "prove launch-floor golden corpus samples and local runtime permutations bridge through Source Atlas handoff without private egress or Source Atlas final-output claims",
         },
         {
             "validationID": "launch_floor_golden_intent_corpus",
@@ -1252,15 +1262,27 @@ def _claim(artifact: Any, claim: str) -> bool:
 
 def _native_bridge_source_contract(path: Path | None) -> dict[str, int | None]:
     if path is None or not path.exists():
-        return {"intentCount": None, "scenarioCount": None}
+        return {
+            "intentCount": None,
+            "scenarioCount": None,
+            "launchFloorSampleCount": None,
+            "launchFloorScenarioCount": None,
+        }
     text = path.read_text(encoding="utf-8")
     intent_match = re.search(r"XCTAssertEqual\(catalog\.intents\.count,\s*(\d+)\)", text)
     scenario_match = re.search(r"XCTAssertEqual\(catalog\.intents\.count \* catalog\.permutations\.count,\s*(\d+)\)", text)
+    launch_floor_sample_match = re.search(r"XCTAssertEqual\(launchFloorSamples\.count,\s*(\d+)\)", text)
+    launch_floor_scenario_match = re.search(
+        r"XCTAssertEqual\(launchFloorSamples\.count \* launchFloorLocalPermutations\.count,\s*(\d+)\)",
+        text,
+    )
     return {
         "intentCount": int(intent_match.group(1)) if intent_match else None,
         "scenarioCount": int(scenario_match.group(1)) if scenario_match else None,
+        "launchFloorSampleCount": int(launch_floor_sample_match.group(1)) if launch_floor_sample_match else None,
+        "launchFloorScenarioCount": int(launch_floor_scenario_match.group(1)) if launch_floor_scenario_match else None,
         "sourcePath": str(path),
-        "proofScope": "source test contract only; not canonical launch-floor golden corpus",
+        "proofScope": "source test contract only; launch-floor corpus samples do not prove full native handoff",
     }
 
 

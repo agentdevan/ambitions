@@ -46,6 +46,142 @@ final class SourceAtlasRuntimeBridgeCoverageGauntletTests: XCTestCase {
         XCTAssertEqual(families, requiredFamilies)
     }
 
+    func testLaunchFloorGoldenCorpusSlicesBridgeIntoLocalRuntimeWithoutPrivateEgressOrFinalOutputs() throws {
+        let catalog = CoverageCatalog.make(using: self)
+        let launchFloorCorpus = try LaunchFloorGoldenIntentCorpus.loadFromRepo()
+        let countedRecords = launchFloorCorpus.intents.filter { $0.countsTowardGoldenIntent }
+        let launchFloorSamples = try launchFloorCorpus.bridgeSamples()
+        let launchFloorLocalPermutations = [catalog.permutations[0], catalog.permutations[4]]
+        let expectedCoverageLabels: Set<String> = [
+            "covered",
+            "source_needed",
+            "stale_source",
+            "candidate_only",
+            "insufficient_source",
+            "private_blocked",
+            "illegal_out_of_scope"
+        ]
+
+        XCTAssertEqual(launchFloorCorpus.intents.count, 51_000)
+        XCTAssertEqual(countedRecords.count, 50_000)
+        XCTAssertEqual(Set(countedRecords.map(\.domainID)).count, 500)
+        XCTAssertEqual(Set(countedRecords.map(\.subdomainID)).count, 5_000)
+        XCTAssertEqual(Set(launchFloorSamples.map(\.coverageLabel)), expectedCoverageLabels)
+        XCTAssertEqual(launchFloorSamples.count, 7)
+        XCTAssertEqual(launchFloorLocalPermutations.count, 2)
+        XCTAssertEqual(launchFloorSamples.count * launchFloorLocalPermutations.count, 14)
+
+        for (sampleIndex, sample) in launchFloorSamples.enumerated() {
+            var sourceSelectionFingerprints: Set<String> = []
+            var localPersonalizationFingerprints: Set<String> = []
+            var replayIDs: Set<String> = []
+
+            for permutation in launchFloorLocalPermutations {
+                let bridgePack = sample.canDriveRuntime
+                    ? makeLaunchFloorPack(for: sample, generatedAt: catalog.generatedAt)
+                    : catalog.emptyPack
+                let match = launchFloorIntentMatch(for: sample, pack: bridgePack)
+                let selection = launchFloorPackSelection(for: sample, pack: bridgePack)
+                let goalID = "goal.launch-floor.\(sample.safeID).\(permutation.index)"
+                let bundle = catalog.lifeContextBundle(
+                    profileIndex: sampleIndex + permutation.index,
+                    permutation: permutation
+                )
+                let projection = bundle.projection(asOf: catalog.generatedAtDate)
+                let factorLedger = PersonalizationFactorLedgerBuilder().build(
+                    PersonalizationFactorLedgerInput(
+                        goalID: goalID,
+                        goalText: sample.localRuntimeIntentText,
+                        projection: projection,
+                        generatedAt: catalog.generatedAtDate,
+                        userContextVersion: "\(catalog.userContextVersion).launch-floor"
+                    )
+                )
+                let composition = SourceAtlasCapabilityPathComposer(
+                    goalID: goalID,
+                    userContextVersion: "\(catalog.userContextVersion).launch-floor",
+                    sourceAtlasProjectionID: "source-atlas.launch-floor.\(sample.safeID)",
+                    packs: [bridgePack],
+                    match: match,
+                    selection: selection,
+                    lifeContextProjection: projection,
+                    factorLedger: factorLedger
+                )
+                .compose()
+                let field = SourceAtlasStepCandidateFieldBridge().expand(
+                    goalID: goalID,
+                    composition: composition,
+                    pack: bridgePack,
+                    generatedAt: catalog.generatedAt,
+                    deadlineTargetDate: permutation.deadlineTargetDate,
+                    factorLedger: factorLedger,
+                    lifeContextProjection: projection,
+                    candidateLimit: 8,
+                    localOnly: true
+                )
+                let replay = SourceAtlasRuntimeBridgeReplay(
+                    intentMatch: match,
+                    packSelection: selection,
+                    pathComposition: composition,
+                    stepCandidateField: field,
+                    factorLedger: factorLedger,
+                    generatedAt: catalog.generatedAt,
+                    localOnly: true
+                )
+                let encoded = try encodedJSONString(replay)
+
+                sourceSelectionFingerprints.insert(sourceSelectionFingerprint(selection))
+                localPersonalizationFingerprints.insert(replay.factorLedgerFingerprint)
+                replayIDs.insert(replay.id)
+
+                XCTAssertTrue(sample.publicReferenceOnly)
+                XCTAssertFalse(sample.finalOutputAllowed)
+                XCTAssertEqual(field.localOnly, true)
+                XCTAssertEqual(replay.localOnly, true)
+                XCTAssertEqual(replay.schemaVersion, sourceAtlasBridgeReplaySchemaVersion)
+                XCTAssertEqual(replay.packSelection.canDriveRuntime, sample.canDriveRuntime)
+                XCTAssertEqual(replay.receiptKinds.last, .sourceAtlasReplayGenerated)
+                XCTAssertTrue(bridgePack.starterItems.allSatisfy { $0.storesFinalSchedule == false })
+
+                if sample.canDriveRuntime {
+                    XCTAssertFalse(selection.selectedPackIDs.isEmpty)
+                    XCTAssertTrue(selection.canDriveRuntime)
+                    XCTAssertFalse(composition.pathInstances.isEmpty)
+                    XCTAssertNotEqual(field.selectedCandidate?.kind, StepCandidateKind.fallback)
+                    XCTAssertTrue(replay.receiptKinds.contains(.sourceAtlasPackSelected))
+                    XCTAssertFalse(replay.receiptKinds.contains(.sourceAtlasUnsupportedGoalFallback))
+                } else {
+                    XCTAssertTrue(selection.selectedPackIDs.isEmpty)
+                    XCTAssertFalse(selection.canDriveRuntime)
+                    XCTAssertEqual(composition.selectedPath.capabilityGraphID, "source-atlas.graph.fallback")
+                    XCTAssertEqual(field.selectedCandidate?.kind, StepCandidateKind.fallback)
+                    XCTAssertTrue(replay.receiptKinds.contains(.sourceAtlasUnsupportedGoalFallback))
+                }
+
+                if sample.requiresRawIntentRedaction {
+                    XCTAssertTrue(replay.intent.rawGoalTextWasRedacted)
+                    XCTAssertFalse(encoded.contains(sample.sanitizedIntentClass))
+                    XCTAssertTrue(encoded.contains("[redacted]"))
+                } else {
+                    XCTAssertFalse(replay.intent.rawGoalTextWasRedacted)
+                }
+
+                XCTAssertFalse(encoded.contains("PRIVATE-RAW-TEXT-LEAK-MARKER"))
+                XCTAssertFalse(encoded.contains("PRIVATE-CUSTOM-REASON-LEAK-MARKER"))
+                XCTAssertFalse(encoded.localizedCaseInsensitiveContains("account_id"))
+                XCTAssertFalse(encoded.localizedCaseInsensitiveContains("device_id"))
+                XCTAssertFalse(encoded.localizedCaseInsensitiveContains("goal_text"))
+                XCTAssertFalse(encoded.localizedCaseInsensitiveContains("final personalized plan"))
+                XCTAssertFalse(encoded.localizedCaseInsensitiveContains("final schedule"))
+                XCTAssertFalse(encoded.localizedCaseInsensitiveContains("final step"))
+            }
+
+            XCTAssertEqual(sourceSelectionFingerprints.count, 1)
+            XCTAssertEqual(localPersonalizationFingerprints.count, launchFloorLocalPermutations.count)
+            XCTAssertEqual(replayIDs.count, launchFloorLocalPermutations.count)
+        }
+    }
+
     func testCoverageGauntletAcrossHundredIntentsAndTenContextPermutations() throws {
         let catalog = CoverageCatalog.make(using: self)
         let packLookup = Dictionary(uniqueKeysWithValues: catalog.packs.map { ($0.manifest.id, $0) })
@@ -172,6 +308,128 @@ final class SourceAtlasRuntimeBridgeCoverageGauntletTests: XCTestCase {
 }
 
 private extension SourceAtlasRuntimeBridgeCoverageGauntletTests {
+    struct LaunchFloorGoldenIntentCorpus: Decodable {
+        let intents: [LaunchFloorGoldenIntentRecord]
+
+        static func loadFromRepo() throws -> LaunchFloorGoldenIntentCorpus {
+            let data = try Data(contentsOf: SourceAtlasRuntimeBridgeCoverageGauntletTests.repoRoot().appendingPathComponent(
+                "tools/source-atlas/generated/source-atlas-launch-floor-golden-intent-corpus/lff-m03-l02-current/launch-floor-golden-intent-corpus.json"
+            ))
+            return try JSONDecoder().decode(LaunchFloorGoldenIntentCorpus.self, from: data)
+        }
+
+        func bridgeSamples() throws -> [LaunchFloorGoldenIntentRecord] {
+            let requiredLabels = [
+                "covered",
+                "source_needed",
+                "stale_source",
+                "candidate_only",
+                "insufficient_source",
+                "private_blocked",
+                "illegal_out_of_scope"
+            ]
+            var samplesByLabel: [String: LaunchFloorGoldenIntentRecord] = [:]
+            for record in intents where requiredLabels.contains(record.coverageLabel) && samplesByLabel[record.coverageLabel] == nil {
+                samplesByLabel[record.coverageLabel] = record
+            }
+            return try requiredLabels.map { label in
+                guard let sample = samplesByLabel[label] else {
+                    throw LaunchFloorGoldenIntentCorpusIssue.missingCoverageLabel(label)
+                }
+                return sample
+            }
+        }
+    }
+
+    enum LaunchFloorGoldenIntentCorpusIssue: Error, Equatable {
+        case missingCoverageLabel(String)
+    }
+
+    struct LaunchFloorGoldenIntentRecord: Decodable, Hashable {
+        let intentID: String
+        let domainID: String
+        let subdomainID: String
+        let sanitizedIntentClass: String
+        let coverageLabel: String
+        let expectedRoutingState: String
+        let sourceNeededCause: String
+        let sourceRefs: [String]
+        let lawfulIntent: Bool
+        let countsTowardGoldenIntent: Bool
+        let publicReferenceOnly: Bool
+        let privateContextAllowed: Bool
+        let finalOutputAllowed: Bool
+
+        var safeID: String {
+            intentID
+                .replacingOccurrences(of: ".", with: "-")
+                .replacingOccurrences(of: "_", with: "-")
+        }
+
+        var canDriveRuntime: Bool {
+            lawfulIntent &&
+                countsTowardGoldenIntent &&
+                publicReferenceOnly &&
+                privateContextAllowed == false &&
+                finalOutputAllowed == false &&
+                coverageLabel == "covered" &&
+                expectedRoutingState == "launch_floor_public_reference_supported" &&
+                sourceNeededCause == "not_required"
+        }
+
+        var requiresRawIntentRedaction: Bool {
+            sanitizedIntentClass.localizedCaseInsensitiveContains("private") ||
+                sanitizedIntentClass.localizedCaseInsensitiveContains("secret")
+        }
+
+        var sourceAtlasNormalizedIntent: String {
+            requiresRawIntentRedaction ? "launch-floor-redacted-control" : normalizedIntent(sanitizedIntentClass)
+        }
+
+        var localRuntimeIntentText: String {
+            requiresRawIntentRedaction ? "launch floor redacted control" : sanitizedIntentClass
+        }
+
+        var routeLabel: String {
+            switch coverageLabel {
+            case "private_blocked":
+                return "blocked-control"
+            case "illegal_out_of_scope":
+                return "out-of-scope-control"
+            default:
+                return coverageLabel
+            }
+        }
+
+        var skillSliceID: String {
+            "skill.launch-floor.\(safeID)"
+        }
+
+        var roleID: String {
+            "role.launch-floor.public-reference"
+        }
+
+        private static func normalizedIntent(_ text: String) -> String {
+            let lowercased = text
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+                .lowercased()
+            let scalarParts = lowercased.unicodeScalars.map { scalar -> String in
+                if CharacterSet.alphanumerics.contains(scalar) {
+                    return String(scalar)
+                }
+                return " "
+            }
+            return scalarParts
+                .joined()
+                .split(whereSeparator: \.isWhitespace)
+                .joined(separator: "-")
+        }
+
+        private func normalizedIntent(_ text: String) -> String {
+            Self.normalizedIntent(text)
+        }
+    }
+
     struct GoalIntentScenario {
         let index: Int
         let family: String
@@ -523,6 +781,111 @@ private extension SourceAtlasRuntimeBridgeCoverageGauntletTests {
         encoder.outputFormatting = [.sortedKeys]
         let data = try encoder.encode(value)
         return String(decoding: data, as: UTF8.self)
+    }
+
+    static func repoRoot() -> URL {
+        let current = URL(fileURLWithPath: #filePath).deletingLastPathComponent()
+        let candidates = sequence(first: current) { url in
+            let parent = url.deletingLastPathComponent()
+            return parent.path == url.path ? nil : parent
+        }
+        for candidate in candidates {
+            if FileManager.default.fileExists(atPath: candidate.appendingPathComponent("project.yml").path) {
+                return candidate
+            }
+        }
+        return current
+    }
+
+    func makeLaunchFloorPack(for sample: LaunchFloorGoldenIntentRecord, generatedAt: String) -> SourceAtlasPack {
+        makePack(
+            id: "pack.launch-floor.\(sample.safeID)",
+            generatedAt: generatedAt,
+            title: "Launch floor \(sample.domainID) pack",
+            domainID: sample.domainID,
+            specificDomainID: sample.subdomainID,
+            graphID: "graph.launch-floor.\(sample.safeID)",
+            roleID: sample.roleID,
+            skillSliceID: sample.skillSliceID,
+            pathPrefix: "path.launch-floor.\(sample.safeID)",
+            claimRiskClass: .careerContext,
+            goalIntents: [sample.sanitizedIntentClass]
+        )
+    }
+
+    func sourceSelectionFingerprint(_ selection: SourceAtlasPackSelection) -> String {
+        [
+            selection.selectedPackIDs.joined(separator: ","),
+            selection.rejectedPackIDs.joined(separator: ","),
+            selection.sourceState.rawValue,
+            selection.freshnessState.rawValue,
+            selection.riskState.rawValue,
+            selection.reviewState.rawValue,
+            "\(selection.canDriveRuntime)",
+            "\(selection.requiredUserReview)"
+        ].joined(separator: "|")
+    }
+
+    func launchFloorIntentMatch(
+        for sample: LaunchFloorGoldenIntentRecord,
+        pack: SourceAtlasPack
+    ) -> SourceAtlasIntentMatch {
+        SourceAtlasIntentMatch(
+            rawGoalText: sample.sanitizedIntentClass,
+            normalizedGoalIntent: sample.sourceAtlasNormalizedIntent,
+            matchedDomainIDs: sample.canDriveRuntime ? [sample.domainID] : [],
+            matchedSpecificDomainIDs: sample.canDriveRuntime ? [sample.subdomainID] : [],
+            matchedSkillSliceIDs: sample.canDriveRuntime ? [sample.skillSliceID] : [],
+            matchedRoleIDs: sample.canDriveRuntime ? [sample.roleID] : [],
+            confidenceBand: sample.canDriveRuntime ? .high : .unknown,
+            missingClarifications: sample.canDriveRuntime ? [] : ["Public reference expansion required."],
+            sourceAtlasPackIDs: sample.canDriveRuntime ? [pack.id] : [],
+            rejectedPackIDs: sample.canDriveRuntime ? [] : ["rejected.launch-floor.\(sample.routeLabel)"],
+            matchTrace: [
+                "source=launch-floor-golden-corpus",
+                "intent-id=\(sample.intentID)",
+                "route=\(sample.routeLabel)",
+                "raw=\(sample.requiresRawIntentRedaction ? "[redacted]" : sample.sanitizedIntentClass)"
+            ]
+        )
+    }
+
+    func launchFloorPackSelection(
+        for sample: LaunchFloorGoldenIntentRecord,
+        pack: SourceAtlasPack
+    ) -> SourceAtlasPackSelection {
+        guard sample.canDriveRuntime else {
+            let rejectedPackID = "rejected.launch-floor.\(sample.routeLabel)"
+            return SourceAtlasPackSelection(
+                selectedPackIDs: [],
+                rejectedPackIDs: [rejectedPackID],
+                rejectionReasons: [
+                    rejectedPackID: [
+                        sample.routeLabel,
+                        sample.sourceNeededCause,
+                        sample.expectedRoutingState
+                    ]
+                ],
+                sourceState: sample.coverageLabel == "stale_source" ? .stale : .sourceNeeded,
+                freshnessState: sample.coverageLabel == "stale_source" ? .stale : .unknown,
+                riskState: sample.coverageLabel == "illegal_out_of_scope" ? .high : .unknown,
+                reviewState: ["private_blocked", "illegal_out_of_scope"].contains(sample.coverageLabel) ? .blocked : .required,
+                canDriveRuntime: false,
+                requiredUserReview: true
+            )
+        }
+
+        return SourceAtlasPackSelection(
+            selectedPackIDs: [pack.id],
+            rejectedPackIDs: [],
+            rejectionReasons: [:],
+            sourceState: .officialCurrent,
+            freshnessState: .current,
+            riskState: .low,
+            reviewState: .approved,
+            canDriveRuntime: true,
+            requiredUserReview: false
+        )
     }
 
     func makeGoalIntents() -> [GoalIntentScenario] {
