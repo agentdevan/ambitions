@@ -840,11 +840,12 @@
       "proof_type": "owner_approval",
       "status": "present",
       "artifact_paths": [
-        "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/owner-approval.md"
+        "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/owner-approval.md",
+        "docs/design/provenance/owner-approvals/VSP-06-Preference-Weave-package-approval.md"
       ],
       "blocking_reason": "",
       "proof_ceiling_impact": "Lifts owner-direction proof only. VSP-06 remains Yellow because final package owner approval, SwiftUI parity, device, accessibility, runtime, and privacy-boundary proof are still missing.",
-      "notes": "Owner approved Part 03 Option C Preference Weave as the VSP-06 direction; final package node 240:93 still needs owner approval."
+      "notes": "Owner approved Part 03 Option C direction and final Preference Weave package node 240:93; proof ceiling remains Yellow."
     },
     {
       "proof_id": "vsp-06-swiftui-simulator-screenshot",
@@ -968,9 +969,9 @@
       "proof_type": "owner_approval",
       "status": "missing",
       "artifact_paths": [],
-      "blocking_reason": "Missing owner approval evidence for current VSP scope.",
+      "blocking_reason": "Missing owner selection/approval evidence for current VSP-07 direction.",
       "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
-      "notes": "Required before VSP-07 can claim Green for owner approval."
+      "notes": "Owner must select, synthesize, or reject Part 01 node 244:93 before VSP-07 can proceed."
     },
     {
       "proof_id": "vsp-07-swiftui-simulator-screenshot",
@@ -1567,6 +1568,38 @@
       "blocking_reason": "",
       "proof_ceiling_impact": "Supports Yellow / Ready For Review package evidence only. Does not prove final package owner approval, SwiftUI parity, Visual Green, device behavior, runtime behavior, account/R2 readiness, or accessibility conformance.",
       "notes": "Final candidate package R1 built from owner-approved Option C Preference Weave direction at Figma node 240:93."
+    },
+    {
+      "proof_id": "vsp-06-preference-weave-package-approval",
+      "vsp_id": "VSP-06",
+      "proof_type": "owner_approval",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/owner-approvals/VSP-06-Preference-Weave-package-approval.md"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Approves final Figma package as future implementation target only. Does not prove SwiftUI parity, Visual Green, device behavior, runtime behavior, account/R2 readiness, or accessibility conformance.",
+      "notes": "Owner approved final VSP-06 Preference Weave package node 240:93 on 2026-07-01."
+    },
+    {
+      "proof_id": "vsp-07-part-01-contextual-trust-seams-r1",
+      "vsp_id": "VSP-07",
+      "proof_type": "figma_exploration",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/figma-frames/VSP-07-part-01-contextual-trust-inspection-seams-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/manifest.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-part-01-options-board-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-a-proof-wake-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-b-thread-lens-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-c-boundary-receipt-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-d-route-trace-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-e-privacy-boundary-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-f-attached-receipt-stack-r1.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports Yellow exploration evidence only. Does not prove owner approval, SwiftUI parity, Visual Green, device behavior, runtime behavior, privacy readiness, or accessibility conformance.",
+      "notes": "Part 01 exploration board at node 244:93. Owner selection required before refinement."
     }
   ]
 }

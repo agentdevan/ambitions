@@ -275,7 +275,7 @@
       "vsp_id": "VSP-06",
       "likely_parent_issue": "AMB-1485",
       "recommended_parent_title": "VSP-06 You Native Settings",
-      "recommended_status": "Ready For Review",
+      "recommended_status": "Spec Ready",
       "recommended_labels": [
         "VSP",
         "you",
@@ -283,7 +283,9 @@
         "owner-approved-direction",
         "yellow-proof",
         "figma-handoff",
-        "ready-for-review"
+        "ready-for-review",
+        "owner-approved-package",
+        "spec-ready"
       ],
       "recommended_sub_issues": [
         {
@@ -298,7 +300,6 @@
         }
       ],
       "blocked_by": [
-        "final VSP-06 package owner approval",
         "VSP-01 shell authority",
         "VSP-10 source-owner map",
         "VSP-09 accessibility matrix",
@@ -313,7 +314,8 @@
         "Every visible row opens real detail or an honest unavailable state.",
         "Final candidate package R1 is Figma node 240:93 with child frames 240:103, 240:220, 240:583, 240:946, and 240:1110.",
         "Package is Yellow / Ready For Review only; it does not claim source implementation, Visual Green, device proof, accessibility conformance, runtime proof, account readiness, or R2 readiness.",
-        "PreferenceWeaveField is a proposed primitive; implementation must keep meaning semantic and accessible, not dependent on decorative motion/glow."
+        "PreferenceWeaveField is a proposed primitive; implementation must keep meaning semantic and accessible, not dependent on decorative motion/glow.",
+        "Owner approved final package node 240:93 on 2026-07-01 for future implementation handoff; proof ceiling remains Yellow."
       ],
       "validation_summary": [
         "focused You tests after source implementation",
@@ -339,21 +341,28 @@
         "VSP",
         "trust",
         "inspection",
-        "yellow-proof"
+        "yellow-proof",
+        "figma-exploration"
       ],
       "recommended_sub_issues": [
         {
-          "title": "Define contextual inspection mounts for Trust details",
-          "scope": "Proof/Source/Privacy/History/Receipts as details only",
+          "title": "Owner-select VSP-07 contextual trust inspection direction",
+          "scope": "Review Part 01 node 244:93 and choose one option, synthesis, or rejection before refinement",
           "recommended_status": "Needs Repair"
         },
         {
+          "title": "Refine VSP-07 selected trust seam into candidate package",
+          "scope": "Figma only: hero, state matrix, accessibility matrix, SwiftUI anatomy, proof/non-claim board",
+          "recommended_status": "Spec Ready after owner direction selection"
+        },
+        {
           "title": "Produce Trust inspection SwiftUI parity leaf",
-          "scope": "Trust and overlay inspection owners only",
-          "recommended_status": "Spec Ready after owner approval"
+          "scope": "Trust and overlay inspection owners only; no root Trust/Proof/Source/Privacy/History/Receipts surfaces",
+          "recommended_status": "Spec Ready after final package approval"
         }
       ],
       "blocked_by": [
+        "owner selection for VSP-07 direction",
         "surface object existence from VSP-02 through VSP-06",
         "VSP-09 accessibility matrix",
         "owner approval"
@@ -361,7 +370,11 @@
       "acceptance_summary": [
         "Trust remains contextual inspection detail.",
         "No Proof, Source, Privacy, History, or Receipts root surfaces.",
-        "Copy cannot overclaim proof or privacy readiness."
+        "Copy cannot overclaim proof or privacy readiness.",
+        "Part 01 exploration board is node 244:93 with options A-F.",
+        "Recommended base is Option C Boundary Receipt because inspection stays attached to the changed object.",
+        "Option E Privacy Boundary is retained as VSP-08 context because it carries account/R2/Source Atlas boundary risk.",
+        "VSP-07 cannot proceed to implementation until owner selects a direction and a final package is approved."
       ],
       "validation_summary": [
         "focused Trust tests after source implementation",
@@ -369,6 +382,8 @@
         "python3 scripts/ambitions-vsp-provenance-audit.py"
       ],
       "closeout_required": [
+        "Part 01 frame ID 244:93 and durable proof paths",
+        "owner-selected VSP-07 direction before Part 02",
         "approved frame ID",
         "contextual inspection screenshot proof",
         "privacy/trust disclosure proof"

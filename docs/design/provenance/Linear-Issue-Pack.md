@@ -208,9 +208,9 @@ Rollback plan:
 ## VSP-06 - VSP-06 You Native Settings
 
 - Parent issue mirror: `AMB-1485`
-- Recommended status: `Ready For Review`
-- Labels: VSP, you, settings, owner-approved-direction, yellow-proof, figma-handoff, ready-for-review
-- Blocked by: final VSP-06 package owner approval, VSP-01 shell authority, VSP-10 source-owner map, VSP-09 accessibility matrix, live SwiftUI/accessibility/device proof after source implementation
+- Recommended status: `Spec Ready`
+- Labels: VSP, you, settings, owner-approved-direction, yellow-proof, figma-handoff, ready-for-review, owner-approved-package, spec-ready
+- Blocked by: VSP-01 shell authority, VSP-10 source-owner map, VSP-09 accessibility matrix, live SwiftUI/accessibility/device proof after source implementation
 - Do not create now: `True`
 
 Acceptance summary:
@@ -223,6 +223,7 @@ Acceptance summary:
 - Final candidate package R1 is Figma node 240:93 with child frames 240:103, 240:220, 240:583, 240:946, and 240:1110.
 - Package is Yellow / Ready For Review only; it does not claim source implementation, Visual Green, device proof, accessibility conformance, runtime proof, account readiness, or R2 readiness.
 - PreferenceWeaveField is a proposed primitive; implementation must keep meaning semantic and accessible, not dependent on decorative motion/glow.
+- Owner approved final package node 240:93 on 2026-07-01 for future implementation handoff; proof ceiling remains Yellow.
 Validation summary:
 - focused You tests after source implementation
 - python3 scripts/ambitions-green-standard-audit.py
@@ -250,21 +251,26 @@ Rollback plan:
 
 - Parent issue mirror: `AMB-1486`
 - Recommended status: `Needs Repair`
-- Labels: VSP, trust, inspection, yellow-proof
-- Blocked by: surface object existence from VSP-02 through VSP-06, VSP-09 accessibility matrix, owner approval
+- Labels: VSP, trust, inspection, yellow-proof, figma-exploration
+- Blocked by: owner selection for VSP-07 direction, surface object existence from VSP-02 through VSP-06, VSP-09 accessibility matrix, owner approval
 - Do not create now: `True`
 
 Acceptance summary:
 - Trust remains contextual inspection detail.
 - No Proof, Source, Privacy, History, or Receipts root surfaces.
 - Copy cannot overclaim proof or privacy readiness.
+- Part 01 exploration board is node 244:93 with options A-F.
+- Recommended base is Option C Boundary Receipt because inspection stays attached to the changed object.
+- Option E Privacy Boundary is retained as VSP-08 context because it carries account/R2/Source Atlas boundary risk.
+- VSP-07 cannot proceed to implementation until owner selects a direction and a final package is approved.
 Validation summary:
 - focused Trust tests after source implementation
 - python3 scripts/ambitions-green-standard-audit.py
 - python3 scripts/ambitions-vsp-provenance-audit.py
 Recommended sub-issues:
-- Define contextual inspection mounts for Trust details - scope: Proof/Source/Privacy/History/Receipts as details only - status: Needs Repair
-- Produce Trust inspection SwiftUI parity leaf - scope: Trust and overlay inspection owners only - status: Spec Ready after owner approval
+- Owner-select VSP-07 contextual trust inspection direction - scope: Review Part 01 node 244:93 and choose one option, synthesis, or rejection before refinement - status: Needs Repair
+- Refine VSP-07 selected trust seam into candidate package - scope: Figma only: hero, state matrix, accessibility matrix, SwiftUI anatomy, proof/non-claim board - status: Spec Ready after owner direction selection
+- Produce Trust inspection SwiftUI parity leaf - scope: Trust and overlay inspection owners only; no root Trust/Proof/Source/Privacy/History/Receipts surfaces - status: Spec Ready after final package approval
 
 Standard Codex closeout block:
 

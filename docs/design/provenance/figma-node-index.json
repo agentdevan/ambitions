@@ -1004,6 +1004,145 @@
       "notes": [
         "Presentation crop; marketing-only atmospheric effects must not be treated as source proof."
       ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "244:93",
+      "node_id_status": "known",
+      "frame_name": "EXPLORATION - VSP-07 - PART 01 - contextual trust inspection seam options - R1",
+      "vsp_id": "VSP-07",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-part-01-options-board-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-a-proof-wake-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-b-thread-lens-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-c-boundary-receipt-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-d-route-trace-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-e-privacy-boundary-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-f-attached-receipt-stack-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-07-part-01-contextual-trust-inspection-seams-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-07-part-01-contextual-trust-inspection-seams-R1.md",
+      "notes": [
+        "Part 01 exploration board with six contextual trust inspection seam options. No owner approval, Visual Green, source implementation, device proof, or accessibility conformance claimed."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "244:105",
+      "node_id_status": "known",
+      "frame_name": "EXPLORATION - VSP-07 - Option A - Proof Wake - R1",
+      "vsp_id": "VSP-07",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-a-proof-wake-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-07-part-01-contextual-trust-inspection-seams-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-07-part-01-contextual-trust-inspection-seams-R1.md",
+      "notes": [
+        "Exploration option: proof wake under changed Today object."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "244:184",
+      "node_id_status": "known",
+      "frame_name": "EXPLORATION - VSP-07 - Option B - Thread Lens - R1",
+      "vsp_id": "VSP-07",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-b-thread-lens-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-07-part-01-contextual-trust-inspection-seams-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-07-part-01-contextual-trust-inspection-seams-R1.md",
+      "notes": [
+        "Exploration option: trust lens inside selected goal path."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "244:263",
+      "node_id_status": "known",
+      "frame_name": "EXPLORATION - VSP-07 - Option C - Boundary Receipt - R1",
+      "vsp_id": "VSP-07",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-c-boundary-receipt-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-07-part-01-contextual-trust-inspection-seams-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-07-part-01-contextual-trust-inspection-seams-R1.md",
+      "notes": [
+        "Recommended VSP-07 base: boundary receipt attached to the changed object."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "244:344",
+      "node_id_status": "known",
+      "frame_name": "EXPLORATION - VSP-07 - Option D - Route Trace - R1",
+      "vsp_id": "VSP-07",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-d-route-trace-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-07-part-01-contextual-trust-inspection-seams-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-07-part-01-contextual-trust-inspection-seams-R1.md",
+      "notes": [
+        "Exploration option: Capture route proof without chatbot or root surface framing."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "244:423",
+      "node_id_status": "known",
+      "frame_name": "EXPLORATION - VSP-07 - Option E - Privacy Boundary - R1",
+      "vsp_id": "VSP-07",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-e-privacy-boundary-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-07-part-01-contextual-trust-inspection-seams-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-07-part-01-contextual-trust-inspection-seams-R1.md",
+      "notes": [
+        "VSP-08-adjacent context: privacy/account/R2 boundary language; not recommended as VSP-07 base without owner direction."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "244:502",
+      "node_id_status": "known",
+      "frame_name": "EXPLORATION - VSP-07 - Option F - Attached Receipt Stack - R1",
+      "vsp_id": "VSP-07",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-f-attached-receipt-stack-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-07-part-01-contextual-trust-inspection-seams-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-07-part-01-contextual-trust-inspection-seams-R1.md",
+      "notes": [
+        "Exploration option: temporary cross-object receipt stack, not activity feed or root destination."
+      ]
     }
   ]
 }

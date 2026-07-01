@@ -219,6 +219,13 @@ Required later for Green: live render, screenshot matrix, accessibility matrix, 
 ## VSP-07 - Trust Inspection Details
 
 Figma candidate screenshots:
+- docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-part-01-options-board-r1.png
+- docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-a-proof-wake-r1.png
+- docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-b-thread-lens-r1.png
+- docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-c-boundary-receipt-r1.png
+- docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-d-route-trace-r1.png
+- docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-e-privacy-boundary-r1.png
+- docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-f-attached-receipt-stack-r1.png
 - docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-07-trust-hero-r1.png
 - docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-07-trust-crop-r1.png
 - docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-07-trust-launch-board-r1.png

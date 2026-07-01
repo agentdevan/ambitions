@@ -18,7 +18,10 @@
     "docs/design/provenance/owner-approvals/VSP-04-F-Apple-Native-Life-Calendar-package-approval.md",
     "docs/design/provenance/owner-approvals/VSP-05-F-Quiet-Placement-Review-direction-approval.md",
     "docs/design/provenance/figma-frames/VSP-06-preference-weave-final-package-R1.md",
-    "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/manifest.md"
+    "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/manifest.md",
+    "docs/design/provenance/owner-approvals/VSP-06-Preference-Weave-package-approval.md",
+    "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/manifest.md",
+    "docs/design/provenance/figma-frames/VSP-07-part-01-contextual-trust-inspection-seams-R1.md"
   ],
   "vsp_packets": [
     {
@@ -804,7 +807,7 @@
       "vsp_id": "VSP-06",
       "title": "You Native Settings",
       "category": "surface_content",
-      "current_status_recommendation": "Ready For Review",
+      "current_status_recommendation": "Spec Ready",
       "proof_ceiling": "Yellow",
       "figma": {
         "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
@@ -824,6 +827,7 @@
           "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-a-personal-os-field-r1.png"
         ],
         "evidence_paths": [
+          "docs/design/provenance/owner-approvals/VSP-06-Preference-Weave-package-approval.md",
           "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/manifest.md",
           "docs/design/provenance/figma-frames/VSP-06-preference-weave-final-package-R1.md",
           "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/owner-approval.md",
@@ -876,7 +880,7 @@
       },
       "linear": {
         "likely_parent_issue": "AMB-1485",
-        "recommended_status": "Ready For Review",
+        "recommended_status": "Spec Ready",
         "recommended_labels": [
           "VSP",
           "you",
@@ -884,7 +888,9 @@
           "owner-approved-direction",
           "yellow-proof",
           "figma-handoff",
-          "ready-for-review"
+          "ready-for-review",
+          "owner-approved-package",
+          "spec-ready"
         ],
         "should_create_or_update_now": false
       },
@@ -904,7 +910,8 @@
       },
       "proof_present": {
         "owner_approval": [
-          "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/owner-approval.md"
+          "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/owner-approval.md",
+          "docs/design/provenance/owner-approvals/VSP-06-Preference-Weave-package-approval.md"
         ],
         "live_swiftui_screenshot": [],
         "device_screenshot": [],
@@ -929,19 +936,18 @@
         "Atmospheric star grain/glow is marketing-only or static decoration unless implemented with native accessibility-safe fallback."
       ],
       "missing_evidence": [
-        "owner approval of final VSP-06 package",
         "live SwiftUI You parity screenshot",
         "device screenshot",
         "manual accessibility matrix",
         "offline/account boundary proof"
       ],
       "green_blockers": [
-        "No final VSP-06 package owner approval.",
         "No live SwiftUI parity screenshot.",
         "No account/offline boundary proof.",
         "No accessibility proof."
       ],
       "notes": [
+        "Owner approved the final VSP-06 Preference Weave package R1 on 2026-07-01; proof ceiling remains Yellow until source/device/accessibility/runtime evidence exists.",
         "Final candidate package R1 was built from owner-approved Option C Preference Weave on 2026-07-01 at Figma node 240:93.",
         "Final package includes hero, state matrix, accessibility matrix, SwiftUI anatomy, and presentation crop frames with durable repo screenshot proof.",
         "Final package still needs explicit owner approval before source implementation begins.",
@@ -959,14 +965,23 @@
       "proof_ceiling": "Yellow",
       "figma": {
         "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
-        "node_id": "14:882",
-        "frame_name": "CANDIDATE - VSP-07 - Trust Inspection hero - R1",
+        "node_id": "244:93",
+        "frame_name": "EXPLORATION - VSP-07 - PART 01 - contextual trust inspection seam options - R1",
         "screenshot_paths": [
+          "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-part-01-options-board-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-a-proof-wake-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-b-thread-lens-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-c-boundary-receipt-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-d-route-trace-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-e-privacy-boundary-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-f-attached-receipt-stack-r1.png",
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-07-trust-hero-r1.png",
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-07-trust-crop-r1.png",
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-07-trust-launch-board-r1.png"
         ],
         "evidence_paths": [
+          "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/manifest.md",
+          "docs/design/provenance/figma-frames/VSP-07-part-01-contextual-trust-inspection-seams-R1.md",
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
           "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json"
         ],
@@ -1021,7 +1036,8 @@
           "VSP",
           "trust",
           "inspection",
-          "yellow-proof"
+          "yellow-proof",
+          "figma-exploration"
         ],
         "should_create_or_update_now": false
       },
@@ -1057,9 +1073,12 @@
       },
       "known_risks": [
         "Inspection details can accidentally become architecture-as-UI or root navigation.",
-        "Source/trust copy can overclaim proof or privacy readiness."
+        "Source/trust copy can overclaim proof or privacy readiness.",
+        "Option E Privacy Boundary carries VSP-08 external-boundary risk and should not become the VSP-07 base without owner direction.",
+        "Cross-object receipts can become activity-feed UI if not tied to an owning object."
       ],
       "missing_evidence": [
+        "owner selection for VSP-07 direction",
         "owner approval",
         "live SwiftUI inspection parity screenshot",
         "device screenshot",
@@ -1072,6 +1091,9 @@
         "No contextual inspection proof."
       ],
       "notes": [
+        "Part 01 exploration board created on 2026-07-01 at node 244:93 with six contextual inspection seam options.",
+        "Recommended base is Option C Boundary Receipt; Option E is reserved as VSP-08 boundary context unless owner directs otherwise.",
+        "VSP-07 remains Needs Repair until owner selects or rejects a direction.",
         "Proof, Source, Privacy, History, and Receipts are contextual details only."
       ]
     },

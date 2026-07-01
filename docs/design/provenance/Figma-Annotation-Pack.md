@@ -91,8 +91,8 @@ SwiftUI source owner: Native/Ambitions/Surfaces/You/YouSurface.swift, Native/Amb
 Allowed implementation area: Native/Ambitions/Surfaces/You, Native/Ambitions/Trust, Sources/Components
 Forbidden implementation area: old profile IA as root, account-required core value, private runtime graph backend, generic settings dashboard without real controls
 Proof ceiling: Yellow
-Missing proof: owner approval of final VSP-06 package, live SwiftUI You parity screenshot, device screenshot, manual accessibility matrix, offline/account boundary proof
-Linear mirror: AMB-1485 (Ready For Review)
+Missing proof: live SwiftUI You parity screenshot, device screenshot, manual accessibility matrix, offline/account boundary proof
+Linear mirror: AMB-1485 (Spec Ready)
 Non-claim: this annotation is not Code Connect, not Visual Green, not source implementation, and not owner approval.
 ```
 
@@ -100,13 +100,13 @@ Non-claim: this annotation is not Code Connect, not Visual Green, not source imp
 
 ```text
 Annotation title: VSP-07 provenance - Trust Inspection Details
-Frame naming recommendation: CANDIDATE - VSP-07 - Trust Inspection hero - R1
+Frame naming recommendation: EXPLORATION - VSP-07 - PART 01 - contextual trust inspection seam options - R1
 Shell relationship: requires VSP-01 shell = True; may mutate shell = False
 SwiftUI source owner: Native/Ambitions/Trust/InspectionSurface.swift, Native/Ambitions/Trust/ProofInspectionView.swift, Native/Ambitions/Trust/SourceInspectionView.swift, Native/Ambitions/Trust/PrivacyInspectionView.swift, Native/Ambitions/Trust/ReceiptInspectionView.swift
 Allowed implementation area: Native/Ambitions/Trust, Native/Ambitions/Projection/OverlayScenes, Sources/Components
 Forbidden implementation area: Trust root surface, Proof root surface, Source root surface, Privacy root surface, History root surface, Receipts root surface
 Proof ceiling: Yellow
-Missing proof: owner approval, live SwiftUI inspection parity screenshot, device screenshot, manual accessibility matrix, privacy/trust disclosure proof
+Missing proof: owner selection for VSP-07 direction, owner approval, live SwiftUI inspection parity screenshot, device screenshot, manual accessibility matrix, privacy/trust disclosure proof
 Linear mirror: AMB-1486 (Needs Repair)
 Non-claim: this annotation is not Code Connect, not Visual Green, not source implementation, and not owner approval.
 ```

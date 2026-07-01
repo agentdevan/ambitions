@@ -106,7 +106,6 @@ Claim boundary: this document is a Git-owned provenance/handoff artifact. It is 
 - live SwiftUI screenshot
 - manual accessibility matrix
 - offline/account boundary proof
-- owner approval of final VSP-06 package
 - privacy boundary
 - runtime behavior
 ### VSP-07 - Trust Inspection Details
@@ -121,6 +120,7 @@ Claim boundary: this document is a Git-owned provenance/handoff artifact. It is 
 - live SwiftUI screenshot
 - manual accessibility matrix
 - owner approval
+- owner selection for VSP-07 direction
 - privacy boundary
 - privacy/trust disclosure proof
 - runtime behavior
