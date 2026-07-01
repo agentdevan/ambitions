@@ -18,6 +18,7 @@ final class PrivacySecurityTests: XCTestCase {
             "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/PrivacyManifestRuntimeMap.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/SensitiveSurfacePolicy.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/StoragePrivacySecurityBoundary.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/PrivacyExternalBoundaryGate.swift",
         ] {
             XCTAssertTrue(
                 FileManager.default.fileExists(atPath: root.appendingPathComponent(requiredPath).path),
@@ -216,6 +217,199 @@ final class PrivacySecurityTests: XCTestCase {
         XCTAssertEqual(decision.collectedDataTypeCount, 0)
     }
 
+    func testPrivacyExternalBoundaryGateEvaluatesEgressExportDiagnosticsAndFiles() {
+        let gate = PrivacyExternalBoundaryGate()
+        let publicObject = PrivacyClassifiedObject(
+            id: "public-source-rule",
+            family: "source_atlas",
+            title: "Public source rule",
+            privacyClass: .publicMetadata,
+            containsUserText: false
+        )
+        let publicEgress = EgressFirewall().evaluate(
+            PrivacyEgressAttempt(
+                id: "public-egress",
+                destination: .r2PublicReference,
+                purpose: .publicReferenceFreshness,
+                redactionRequest: PrivacyRedactionRequest(
+                    object: publicObject,
+                    surface: .sourceAtlasPublicReference,
+                    title: "Public source rule",
+                    summary: "Public reference metadata",
+                    userReviewed: true
+                )
+            )
+        )
+        let publicEgressDecision = gate.evaluateEgress(publicEgress)
+        XCTAssertTrue(publicEgressDecision.isPermitted)
+        XCTAssertEqual(publicEgressDecision.receipt.action, .networkEgress)
+
+        let privateEgress = EgressFirewall().evaluate(
+            PrivacyEgressAttempt(
+                id: "private-egress",
+                destination: .r2PublicReference,
+                purpose: .publicReferenceFreshness,
+                redactionRequest: PrivacyRedactionRequest(
+                    object: privateObject(),
+                    surface: .sourceAtlasPublicReference,
+                    title: "Private goal",
+                    summary: "Private schedule",
+                    userReviewed: true
+                )
+            )
+        )
+        let privateEgressDecision = gate.evaluateEgress(privateEgress)
+        XCTAssertFalse(privateEgressDecision.isPermitted)
+        XCTAssertTrue(privateEgressDecision.issueCodes.contains(PrivacyExternalBoundaryIssue.privateGraphTouched.rawValue))
+
+        let manifest = PortableExportManifest.make(
+            selection: .all,
+            goals: [],
+            drafts: [],
+            evidence: [],
+            feedback: [],
+            captures: [],
+            teachingSignals: [],
+            appState: .default
+        )
+        let records = StoragePrivacyBoundaryCatalog.records(from: manifest, userReviewed: true)
+        let exportDecision = ExportPolicy().evaluate(
+            PrivacyExportRequest(
+                id: "portable-reviewed",
+                destination: .portablePackage,
+                records: records,
+                userReviewed: true
+            )
+        )
+        let externalExportDecision = gate.evaluateExport(exportDecision)
+        XCTAssertTrue(externalExportDecision.isPermitted)
+        XCTAssertEqual(externalExportDecision.receipt.action, .export)
+
+        let diagnosticRedaction = RedactionEngine().redact(
+            PrivacyRedactionRequest(
+                object: privateObject(),
+                surface: .diagnosticsExport,
+                title: "Private detail",
+                summary: "Diagnostic payload",
+                userReviewed: true
+            )
+        )
+        let diagnosticsDecision = gate.evaluateDiagnostics(diagnosticRedaction)
+        XCTAssertTrue(diagnosticsDecision.isPermitted)
+        XCTAssertEqual(diagnosticsDecision.receipt.action, .diagnosticsRedaction)
+
+        let protectedFile = FileProtectionPolicy().decision(for: privateObject())
+        XCTAssertTrue(gate.evaluateFileProtection(protectedFile).isPermitted)
+
+        let sensitiveFile = FileProtectionPolicy().decision(for: PrivacyClassifiedObject(
+            id: "calendar-derived-note",
+            family: "time",
+            title: "Calendar detail",
+            privacyClass: .calendarDerived
+        ))
+        XCTAssertTrue(gate.evaluateFileProtection(sensitiveFile).isPermitted)
+
+        let weakFile = FileProtectionDecision(
+            objectID: "weak-private-file",
+            privacyClass: .privateUserText,
+            protectionLevel: .standard,
+            requiresEncryptedBlobVault: false,
+            reason: "fixture"
+        )
+        let weakFileDecision = gate.evaluateFileProtection(weakFile)
+        XCTAssertFalse(weakFileDecision.isPermitted)
+        XCTAssertTrue(weakFileDecision.issueCodes.contains(PrivacyExternalBoundaryIssue.fileProtectionInsufficient.rawValue))
+    }
+
+    func testPrivacyExternalBoundaryGateEvaluatesExternalSnapshotsAndBridgeHandoffs() async throws {
+        let runtimeStore = InMemoryRuntimeEventStore()
+        _ = try await runtimeStore.append(commandEvent(
+            id: "command-safe-widget",
+            source: .capture,
+            summary: "Safe capture update",
+            privacy: .standard
+        ))
+        _ = try await runtimeStore.append(commandEvent(
+            id: "command-private-widget",
+            source: .widget,
+            summary: "Private Therapy Session",
+            privacy: .privateUserText
+        ))
+        let batch = try await ProjectionMaterializer(store: runtimeStore).materializeAll(materializedAt: "2026-06-30T09:00:00Z")
+        let record = AppGroupSnapshotRecord(
+            id: SharedExternalSnapshotStore.snapshotRecordID,
+            snapshotKind: SharedExternalSnapshotStore.snapshotKind,
+            createdAt: "2026-06-30T09:01:00Z",
+            privacyClasses: [.standard],
+            containsPrivateRuntimeData: false,
+            payloadData: Data(#"{"safe":true}"#.utf8)
+        )
+        let gate = PrivacyExternalBoundaryGate()
+        let snapshotDecision = gate.evaluateExternalSnapshot(record: record, widget: batch.widget, privacy: batch.privacy)
+        XCTAssertTrue(snapshotDecision.isPermitted)
+        XCTAssertEqual(snapshotDecision.receipt.action, .externalSnapshot)
+
+        let unsafeRecord = AppGroupSnapshotRecord(
+            id: SharedExternalSnapshotStore.snapshotRecordID,
+            snapshotKind: SharedExternalSnapshotStore.snapshotKind,
+            createdAt: "2026-06-30T09:01:00Z",
+            privacyClasses: [.privateUserText],
+            containsPrivateRuntimeData: true,
+            payloadData: Data(#"{"unsafe":true}"#.utf8)
+        )
+        let unsafeSnapshotDecision = gate.evaluateExternalSnapshot(record: unsafeRecord, widget: batch.widget, privacy: batch.privacy)
+        XCTAssertFalse(unsafeSnapshotDecision.isPermitted)
+        XCTAssertTrue(unsafeSnapshotDecision.issueCodes.contains(PrivacyExternalBoundaryIssue.rawPrivateRuntimeData.rawValue))
+
+        let appIntentDecision = gate.evaluateExternalSurfaceBridge(
+            PrivacyExternalSurfaceBridgeEvidence(
+                id: "intent-safe",
+                kind: .appIntentResponse,
+                commitRequirement: .committedProjection,
+                requestedBoundary: .localOnly,
+                requestedStatus: .recordedLocalOnly,
+                externalEffect: false,
+                containsPrivateRuntimeData: false,
+                receiptID: "app-intent-intake-receipt.intent-safe",
+                summary: "App Intent response uses safe local review copy."
+            )
+        )
+        XCTAssertTrue(appIntentDecision.isPermitted)
+        XCTAssertEqual(appIntentDecision.receipt.action, .appIntentResponse)
+
+        let shareDecision = gate.evaluateExternalSurfaceBridge(
+            PrivacyExternalSurfaceBridgeEvidence(
+                id: "share-safe",
+                kind: .shareHandoff,
+                commitRequirement: .committedProjection,
+                requestedBoundary: .localOnly,
+                requestedStatus: .recordedLocalOnly,
+                externalEffect: false,
+                containsPrivateRuntimeData: false,
+                receiptID: "share-intake-receipt.share-safe",
+                summary: "Share handoff uses safe local review copy."
+            )
+        )
+        XCTAssertTrue(shareDecision.isPermitted)
+        XCTAssertEqual(shareDecision.receipt.action, .shareHandoff)
+
+        let unsafeBridgeDecision = gate.evaluateExternalSurfaceBridge(
+            PrivacyExternalSurfaceBridgeEvidence(
+                id: "intent-unsafe",
+                kind: .appIntentResponse,
+                commitRequirement: .noUserStateMutation,
+                requestedBoundary: .externalEffect,
+                requestedStatus: .queued,
+                externalEffect: true,
+                containsPrivateRuntimeData: true,
+                receiptID: nil,
+                summary: "fixture"
+            )
+        )
+        XCTAssertFalse(unsafeBridgeDecision.isPermitted)
+        XCTAssertTrue(unsafeBridgeDecision.issueCodes.contains(PrivacyExternalBoundaryIssue.externalSurfaceBridgeContainsPrivateRuntimeData.rawValue))
+    }
+
     private func privateObject() -> PrivacyClassifiedObject {
         classifier.classifyEvent(
             id: "private-goal-note",
@@ -223,6 +417,37 @@ final class PrivacySecurityTests: XCTestCase {
             title: "Private goal note",
             privacy: .privateUserText,
             sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity"
+        )
+    }
+
+    private func commandEvent(
+        id: String,
+        source: AmbitionsCommandSource,
+        summary: String,
+        privacy: EventLedgerPrivacyClassification
+    ) -> RuntimeEvent {
+        let command = AmbitionsCommand(
+            id: id,
+            kind: .quickCapture,
+            source: source,
+            target: AmbitionsCommandTarget(captureID: "capture-\(id)", destination: .captureInbox),
+            payload: AmbitionsCommandPayload(rawText: summary),
+            createdAt: "2026-06-30T09:00:00Z",
+            privacy: privacy
+        )
+        let result = AmbitionsCommandExecutionResult(
+            status: .succeeded,
+            summary: summary,
+            route: .captureInbox,
+            target: command.target,
+            eventLedgerEntryIDs: ["ledger.\(id)"],
+            metadata: ["objectID": "capture-\(id)"]
+        )
+        return RuntimeEvent.commandExecution(
+            command: command,
+            result: result,
+            recordedAt: "2026-06-30T09:00:00Z",
+            commandRecordID: "command.execution.\(id)"
         )
     }
 

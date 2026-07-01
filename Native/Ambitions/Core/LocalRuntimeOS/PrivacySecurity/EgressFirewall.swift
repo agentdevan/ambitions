@@ -3,6 +3,11 @@ import Foundation
 enum PrivacySecurityReceiptAction: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
     case networkEgress = "network_egress"
     case export
+    case diagnosticsRedaction = "diagnostics_redaction"
+    case externalSnapshot = "external_snapshot"
+    case appIntentResponse = "app_intent_response"
+    case shareHandoff = "share_handoff"
+    case fileProtection = "file_protection"
     case localAuth = "local_auth"
     case encryptedVault = "encrypted_vault"
 }

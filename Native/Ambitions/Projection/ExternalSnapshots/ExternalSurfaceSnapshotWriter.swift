@@ -7,15 +7,18 @@ protocol ExternalSurfaceSnapshotWriting: Sendable {
 actor ExternalSurfaceSnapshotWriter: ExternalSurfaceSnapshotWriting {
     private let repositories: AppRepositories
     private let builder: ExternalSurfaceSnapshotBuilder
+    private let privacyGate: PrivacyExternalBoundaryGate
     private let appGroupSnapshotStore: AppGroupSnapshotStore?
 
     init(
         repositories: AppRepositories,
         builder: ExternalSurfaceSnapshotBuilder = ExternalSurfaceSnapshotBuilder(),
+        privacyGate: PrivacyExternalBoundaryGate = PrivacyExternalBoundaryGate(),
         appGroupSnapshotStore: AppGroupSnapshotStore? = nil
     ) {
         self.repositories = repositories
         self.builder = builder
+        self.privacyGate = privacyGate
         self.appGroupSnapshotStore = appGroupSnapshotStore ?? repositories.appGroupSnapshotStore
     }
 
@@ -48,6 +51,8 @@ actor ExternalSurfaceSnapshotWriter: ExternalSurfaceSnapshotWriting {
                 containsPrivateRuntimeData: false,
                 payloadData: data
             )
+            let privacyDecision = privacyGate.evaluateExternalSnapshot(record: record, widget: widget, privacy: privacy)
+            try privacyGate.requirePermitted(privacyDecision)
             try await appGroupSnapshotStore.write(record)
 
             await recordExternalSnapshotSideEffect(status: .recordedLocalOnly, at: now)

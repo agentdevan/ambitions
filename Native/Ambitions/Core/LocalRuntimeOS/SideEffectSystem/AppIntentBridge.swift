@@ -3,13 +3,16 @@ import Foundation
 struct AppIntentBridge {
     private let recorder: (any SideEffectOutboxing)?
     private let store: SharedExternalCreationStore
+    private let privacyGate: PrivacyExternalBoundaryGate
 
     init(
         recorder: (any SideEffectOutboxing)?,
-        store: SharedExternalCreationStore = SharedExternalCreationStore()
+        store: SharedExternalCreationStore = SharedExternalCreationStore(),
+        privacyGate: PrivacyExternalBoundaryGate = PrivacyExternalBoundaryGate()
     ) {
         self.recorder = recorder
         self.store = store
+        self.privacyGate = privacyGate
     }
 
     static func defaultExternalSurfaceBridge() -> AppIntentBridge {
@@ -23,8 +26,6 @@ struct AppIntentBridge {
         _ request: ExternalCreationRequest,
         acceptedAt: Date
     ) async throws -> SideEffectAttempt? {
-        try store.enqueueDurableRequest(request)
-        guard let recorder else { return nil }
         let outboxRequest = SideEffectOutboxRequest(
             id: "app-intent-intake.\(request.id)",
             effectKind: .externalSnapshot,
@@ -42,6 +43,22 @@ struct AppIntentBridge {
             ],
             receiptID: "app-intent-intake-receipt.\(request.id)"
         )
+        let privacyDecision = privacyGate.evaluateExternalSurfaceBridge(
+            PrivacyExternalSurfaceBridgeEvidence(
+                id: request.id,
+                kind: .appIntentResponse,
+                commitRequirement: outboxRequest.commitRequirement,
+                requestedBoundary: outboxRequest.requestedBoundary,
+                requestedStatus: outboxRequest.requestedStatus,
+                externalEffect: outboxRequest.externalEffect,
+                containsPrivateRuntimeData: false,
+                receiptID: outboxRequest.receiptID,
+                summary: "App Intent response stores input for local command-backed import and exposes only safe local review copy."
+            )
+        )
+        try privacyGate.requirePermitted(privacyDecision)
+        try store.enqueueDurableRequest(request)
+        guard let recorder else { return nil }
         return try await recorder.enqueue(outboxRequest)
     }
 

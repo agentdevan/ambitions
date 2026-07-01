@@ -1138,6 +1138,99 @@ def check_external_surface_sanitized_projection_gate() -> CheckResult:
     )
 
 
+def check_privacy_security_external_boundary_gate() -> CheckResult:
+    findings: list[Finding] = []
+    required_markers = {
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/PrivacyExternalBoundaryGate.swift": [
+            "enum PrivacyExternalBoundaryKind",
+            "case networkEgress",
+            "case export",
+            "case diagnosticsRedaction",
+            "case externalSnapshot",
+            "case appIntentResponse",
+            "case shareHandoff",
+            "case fileProtection",
+            "struct PrivacyExternalBoundaryGate",
+            "func evaluateEgress(_ decision: PrivacyEgressDecision)",
+            "func evaluateExport(_ decision: PrivacyExportDecision)",
+            "func evaluateDiagnostics(_ redaction: PrivacyRedactionResult)",
+            "func evaluateExternalSnapshot(",
+            "func evaluateExternalSurfaceBridge(",
+            "func evaluateFileProtection(_ decision: FileProtectionDecision)",
+            "func requirePermitted(_ decision: PrivacyExternalBoundaryDecision)",
+            ".rawPrivateRuntimeData",
+            ".externalSurfaceBridgeContainsPrivateRuntimeData",
+            "SourceAtlasNoPrivateGraphEgressAudit.validate",
+        ],
+        ROOT / "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceSnapshotWriter.swift": [
+            "private let privacyGate: PrivacyExternalBoundaryGate",
+            "privacyGate.evaluateExternalSnapshot(record: record, widget: widget, privacy: privacy)",
+            "try privacyGate.requirePermitted(privacyDecision)",
+            "appGroupSnapshotStore.write(record)",
+        ],
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/AppIntentBridge.swift": [
+            "private let privacyGate: PrivacyExternalBoundaryGate",
+            "PrivacyExternalSurfaceBridgeEvidence(",
+            "kind: .appIntentResponse",
+            "commitRequirement: outboxRequest.commitRequirement",
+            "requestedBoundary: outboxRequest.requestedBoundary",
+            "containsPrivateRuntimeData: false",
+            "try privacyGate.requirePermitted(privacyDecision)",
+            "try store.enqueueDurableRequest(request)",
+        ],
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ShareExtensionIntake.swift": [
+            "private let privacyGate: PrivacyExternalBoundaryGate",
+            "PrivacyExternalSurfaceBridgeEvidence(",
+            "kind: .shareHandoff",
+            "commitRequirement: request.commitRequirement",
+            "requestedBoundary: request.requestedBoundary",
+            "containsPrivateRuntimeData: false",
+            "guard privacyDecision.isPermitted else { return }",
+        ],
+        ROOT / "Native/AmbitionsTests/LocalRuntimeOS/PrivacySecurity/PrivacySecurityTests.swift": [
+            "testPrivacyExternalBoundaryGateEvaluatesEgressExportDiagnosticsAndFiles",
+            "testPrivacyExternalBoundaryGateEvaluatesExternalSnapshotsAndBridgeHandoffs",
+            "gate.evaluateEgress",
+            "gate.evaluateExport",
+            "gate.evaluateDiagnostics",
+            "gate.evaluateExternalSnapshot",
+            "gate.evaluateExternalSurfaceBridge",
+            "gate.evaluateFileProtection",
+        ],
+    }
+    for path, markers in required_markers.items():
+        if not path.exists():
+            findings.append(
+                Finding(
+                    "blocker",
+                    "privacy-security-external-boundary-source-missing",
+                    relative(path),
+                    None,
+                    "PrivacySecurity external boundary gate source is missing.",
+                )
+            )
+            continue
+        text = read_text(path)
+        for marker in markers:
+            if marker not in text:
+                findings.append(
+                    Finding(
+                        "blocker",
+                        "privacy-security-external-boundary-marker-missing",
+                        relative(path),
+                        None,
+                        f"Missing PrivacySecurity external-boundary marker `{marker}`.",
+                    )
+                )
+
+    return make_result(
+        "privacy_security_external_boundary_gate",
+        findings,
+        "PrivacySecurity gates egress, export, diagnostics, external snapshots, App Intent/share bridges, and file protection.",
+        "{count} PrivacySecurity external-boundary blocker(s) remain.",
+    )
+
+
 def check_capture_intake_durability_gate() -> CheckResult:
     findings: list[Finding] = []
     required_markers = {
@@ -1671,6 +1764,7 @@ def run_checks() -> list[CheckResult]:
         check_transaction_coordinator_commit_ownership(),
         check_projection_store_surface_read_gate(),
         check_external_surface_sanitized_projection_gate(),
+        check_privacy_security_external_boundary_gate(),
         check_capture_intake_durability_gate(),
         check_side_effect_local_commit_receipt_gate(),
         check_trust_system_runtime_lineage_gate(),
@@ -1809,6 +1903,7 @@ def run_self_test() -> int:
     assert "surface_projection_store_consumption" in INTEGRATION_MARKERS
     assert any(prefix.endswith("AmbitionsWidgetExtension/") for prefix in EXTERNAL_SURFACE_SCAN_INCLUDED_PREFIXES)
     assert any(result.check_id == "external_surface_sanitized_projection_gate" for result in [check_external_surface_sanitized_projection_gate()])
+    assert any(result.check_id == "privacy_security_external_boundary_gate" for result in [check_privacy_security_external_boundary_gate()])
     assert any(result.check_id == "capture_intake_durability_gate" for result in [check_capture_intake_durability_gate()])
     assert any(result.check_id == "side_effect_local_commit_receipt_gate" for result in [check_side_effect_local_commit_receipt_gate()])
     assert any(result.check_id == "trust_system_runtime_lineage_gate" for result in [check_trust_system_runtime_lineage_gate()])
