@@ -1490,6 +1490,34 @@
         "Owner-selected VSP-08 Part 01 direction.",
         "Direction approval only; final package and implementation proof remain missing."
       ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "272:93",
+      "node_id_status": "known",
+      "frame_name": "CANDIDATE - VSP-08 - Airlock Review Gate final package - R1",
+      "vsp_id": "VSP-08",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-final-package-board-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-hero-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-state-matrix-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-accessibility-matrix-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-swiftui-anatomy-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-presentation-crop-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-non-claims-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-package-readback-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-08-airlock-review-gate-final-package-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-08-airlock-review-gate-final-package-R1.md",
+      "notes": [
+        "Final VSP-08 candidate package built from owner-selected Option B Airlock Review Gate.",
+        "Ready For Review / Yellow proof ceiling only; final owner package approval and runtime proof remain missing.",
+        "No source implementation, Visual Green, device proof, runtime proof, privacy proof, request-shape proof, or accessibility conformance is claimed."
+      ]
     }
   ]
 }

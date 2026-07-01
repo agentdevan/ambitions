@@ -1738,6 +1738,27 @@
       "blocking_reason": "",
       "proof_ceiling_impact": "Satisfies VSP-08 Part 01 owner direction selection only. Keeps proof ceiling Yellow and does not prove final package approval, privacy boundary behavior, R2 request shape, offline no-account behavior, SwiftUI parity, Visual Green, device behavior, runtime behavior, accessibility conformance, Release Green, or Done.",
       "notes": "Owner selected Option B Airlock Review Gate as the VSP-08 Part 01 direction on 2026-07-01."
+    },
+    {
+      "proof_id": "vsp-08-airlock-review-gate-final-package-r1",
+      "vsp_id": "VSP-08",
+      "proof_type": "figma_candidate_package",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/figma-frames/VSP-08-airlock-review-gate-final-package-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/manifest.md",
+        "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-final-package-board-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-hero-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-state-matrix-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-accessibility-matrix-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-swiftui-anatomy-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-presentation-crop-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-non-claims-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-package-readback-r1.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports Ready For Review / Yellow final package evidence only. Does not prove final package owner approval, privacy boundary behavior, R2 request shape, offline no-account behavior, SwiftUI parity, Visual Green, device behavior, runtime behavior, accessibility conformance, Release Green, or Done.",
+      "notes": "Final candidate package board at node 272:93. Built from owner-selected Part 01 Option B Airlock Review Gate. Final owner package approval is still missing."
     }
   ]
 }

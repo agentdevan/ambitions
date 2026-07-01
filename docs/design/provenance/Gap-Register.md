@@ -125,20 +125,27 @@ Claim boundary: this document is a Git-owned provenance/handoff artifact. It is 
 ### VSP-08 - External Boundaries
 
 - Dynamic Type
+- Dynamic Type proof
 - Increase Contrast
+- Increase Contrast proof
 - R2/Source Atlas request-shape proof
 - Reduce Motion
+- Reduce Motion proof
 - Reduce Transparency
+- Reduce Transparency proof
 - VSP-08A policy readback owner approval
 - VSP-08B implementation proof packet
 - VoiceOver
+- VoiceOver proof
 - device screenshot
-- final VSP-08 candidate-package approval
+- device screenshot proof
+- final VSP-08 candidate-package owner approval
 - live SwiftUI boundary parity screenshot
 - live SwiftUI screenshot
-- offline no-account proof
+- offline no-account runtime proof
 - owner approval
 - privacy boundary
+- privacy-boundary runtime proof
 - runtime behavior
 ### VSP-09 - Motion / Haptics / Accessibility Matrix
 

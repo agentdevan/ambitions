@@ -278,6 +278,14 @@ Figma candidate screenshots:
 - docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/images/vsp-08-option-f-boundary-constellation-r1.png
 - docs/qa/evidence/2026-07-01-vsp-08-option-b-airlock-review-gate-selection-r1/images/vsp-08-option-b-selection-board-r1.png
 - docs/qa/evidence/2026-07-01-vsp-08-option-b-airlock-review-gate-selection-r1/images/vsp-08-option-b-airlock-review-gate-selected-r1.png
+- docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-final-package-board-r1.png
+- docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-hero-r1.png
+- docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-state-matrix-r1.png
+- docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-accessibility-matrix-r1.png
+- docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-swiftui-anatomy-r1.png
+- docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-presentation-crop-r1.png
+- docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-non-claims-r1.png
+- docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-package-readback-r1.png
 SwiftUI source owners:
 - Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift
 - Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAudit.swift

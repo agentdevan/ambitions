@@ -115,14 +115,14 @@ Non-claim: this annotation is not Code Connect, not Visual Green, not source imp
 
 ```text
 Annotation title: VSP-08 provenance - External Boundaries
-Frame naming recommendation: OPTION B - Airlock Review Gate
+Frame naming recommendation: CANDIDATE - VSP-08 - Airlock Review Gate final package - R1
 Shell relationship: requires VSP-01 shell = True; may mutate shell = False
 SwiftUI source owner: Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift, Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAudit.swift, Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasPublicArtifactBoundary.swift
 Allowed implementation area: Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary, Native/Ambitions/DesignSystem/StagePrimitives/SharedUI, Native/Ambitions/Trust
 Forbidden implementation area: R2 private life graph storage, account-required core value, external/cloud LLM core runtime, private user context in Source Atlas, network dependency for offline core value
 Proof ceiling: Yellow
-Missing proof: owner approval, VSP-08A policy readback owner approval, VSP-08B implementation proof packet, live SwiftUI boundary parity screenshot, R2/Source Atlas request-shape proof, offline no-account proof, final VSP-08 candidate-package approval
-Linear mirror: AMB-1487 (Needs Repair)
+Missing proof: final VSP-08 candidate-package owner approval, VSP-08A policy readback owner approval, VSP-08B implementation proof packet, live SwiftUI boundary parity screenshot, R2/Source Atlas request-shape proof, offline no-account runtime proof, privacy-boundary runtime proof, device screenshot proof, Dynamic Type proof, VoiceOver proof, Reduce Motion proof, Increase Contrast proof, Reduce Transparency proof
+Linear mirror: AMB-1487 (Ready For Review)
 Non-claim: this annotation is not Code Connect, not Visual Green, not source implementation, and not owner approval.
 ```
 

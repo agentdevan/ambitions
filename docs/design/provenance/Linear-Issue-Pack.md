@@ -298,21 +298,21 @@ Rollback plan:
 ## VSP-08 - VSP-08 External Boundaries
 
 - Parent issue mirror: `AMB-1487`
-- Recommended status: `Needs Repair`
-- Labels: VSP, external-boundary, privacy, yellow-proof, owner-review-needed, part-01, owner-selected-direction, airlock-review-gate
-- Blocked by: owner approval, privacy-boundary proof, offline no-account proof, R2 request-shape proof, final VSP-08 candidate-package approval
+- Recommended status: `Ready For Review`
+- Labels: VSP, external-boundary, privacy, yellow-proof, owner-review-needed, final-package, airlock-review-gate, ready-for-review
+- Blocked by: final VSP-08 candidate-package owner approval, privacy-boundary proof, offline no-account proof, R2 request-shape proof, live SwiftUI/device/accessibility proof
 - Do not create now: `True`
 
 Acceptance summary:
+- Final VSP-08 Airlock Review Gate candidate package R1 is node 272:93.
+- Package is built from owner-selected Part 01 Option B Airlock Review Gate only.
 - Offline no-account core value remains usable.
+- Ambitions Account is optional identity, entitlement, recovery, and support only.
 - R2/Source Atlas is public/reference/freshness only.
 - No private graph egress and no external/cloud LLM core runtime.
-- Part 01 board is node 264:93 with six external-boundary directions A-F.
-- Codex recommends Option B Airlock Review Gate for owner review.
+- Widgets, shortcuts, share, notifications, calendar/EventKit, and deep links are inspectable boundaries, not root surfaces.
 - No option may make account, R2, Source Atlas, widgets, notifications, external tools, or hosted AI part of core/root architecture.
-- Owner selected Option B Airlock Review Gate as the Part 01 direction on 2026-07-01.
-- Option B must become the base for the final VSP-08 candidate package unless the owner explicitly changes direction.
-- Direction approval does not claim final package approval, privacy proof, R2 readiness, account readiness, source implementation, Visual Green, Release Green, or Done.
+- Ready For Review does not claim final package approval, privacy proof, R2 readiness, account readiness, source implementation, Visual Green, Release Green, or Done.
 Validation summary:
 - privacy/request-shape proof after source implementation
 - python3 scripts/ambitions-local-first-boundary-scan.py when applicable

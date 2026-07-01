@@ -28,7 +28,9 @@
     "docs/design/provenance/figma-frames/VSP-08-part-01-external-boundary-directions-R1.md",
     "docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/manifest.md",
     "docs/design/provenance/owner-approvals/VSP-08-B-Airlock-Review-Gate-direction-approval.md",
-    "docs/qa/evidence/2026-07-01-vsp-08-option-b-airlock-review-gate-selection-r1/manifest.md"
+    "docs/qa/evidence/2026-07-01-vsp-08-option-b-airlock-review-gate-selection-r1/manifest.md",
+    "docs/design/provenance/figma-frames/VSP-08-airlock-review-gate-final-package-R1.md",
+    "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/manifest.md"
   ],
   "vsp_packets": [
     {
@@ -1168,12 +1170,12 @@
       "vsp_id": "VSP-08",
       "title": "External Boundaries",
       "category": "external_boundary",
-      "current_status_recommendation": "Needs Repair",
+      "current_status_recommendation": "Ready For Review",
       "proof_ceiling": "Yellow",
       "figma": {
         "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
-        "node_id": "264:184",
-        "frame_name": "OPTION B - Airlock Review Gate",
+        "node_id": "272:93",
+        "frame_name": "CANDIDATE - VSP-08 - Airlock Review Gate final package - R1",
         "screenshot_paths": [
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-08-boundaries-hero-r1.png",
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-08-boundaries-crop-r1.png",
@@ -1183,7 +1185,15 @@
           "docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/images/vsp-08-option-b-airlock-review-gate-r1.png",
           "docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/images/vsp-08-option-f-boundary-constellation-r1.png",
           "docs/qa/evidence/2026-07-01-vsp-08-option-b-airlock-review-gate-selection-r1/images/vsp-08-option-b-selection-board-r1.png",
-          "docs/qa/evidence/2026-07-01-vsp-08-option-b-airlock-review-gate-selection-r1/images/vsp-08-option-b-airlock-review-gate-selected-r1.png"
+          "docs/qa/evidence/2026-07-01-vsp-08-option-b-airlock-review-gate-selection-r1/images/vsp-08-option-b-airlock-review-gate-selected-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-final-package-board-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-hero-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-state-matrix-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-accessibility-matrix-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-swiftui-anatomy-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-presentation-crop-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-non-claims-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-package-readback-r1.png"
         ],
         "evidence_paths": [
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
@@ -1192,7 +1202,9 @@
           "docs/design/provenance/figma-frames/VSP-08-part-01-external-boundary-directions-R1.md",
           "docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/manifest.md",
           "docs/design/provenance/owner-approvals/VSP-08-B-Airlock-Review-Gate-direction-approval.md",
-          "docs/qa/evidence/2026-07-01-vsp-08-option-b-airlock-review-gate-selection-r1/manifest.md"
+          "docs/qa/evidence/2026-07-01-vsp-08-option-b-airlock-review-gate-selection-r1/manifest.md",
+          "docs/design/provenance/figma-frames/VSP-08-airlock-review-gate-final-package-R1.md",
+          "docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/manifest.md"
         ],
         "node_id_status": "known",
         "unknown_rationale": ""
@@ -1237,16 +1249,16 @@
       },
       "linear": {
         "likely_parent_issue": "AMB-1487",
-        "recommended_status": "Needs Repair",
+        "recommended_status": "Ready For Review",
         "recommended_labels": [
           "VSP",
           "external-boundary",
           "privacy",
           "yellow-proof",
           "owner-review-needed",
-          "part-01",
-          "owner-selected-direction",
-          "airlock-review-gate"
+          "final-package",
+          "airlock-review-gate",
+          "ready-for-review"
         ],
         "should_create_or_update_now": true
       },
@@ -1287,20 +1299,26 @@
         "A Figma boundary object cannot prove request-shape or no-private-graph runtime behavior."
       ],
       "missing_evidence": [
-        "owner approval",
+        "final VSP-08 candidate-package owner approval",
         "VSP-08A policy readback owner approval",
         "VSP-08B implementation proof packet",
         "live SwiftUI boundary parity screenshot",
         "R2/Source Atlas request-shape proof",
-        "offline no-account proof",
-        "final VSP-08 candidate-package approval"
+        "offline no-account runtime proof",
+        "privacy-boundary runtime proof",
+        "device screenshot proof",
+        "Dynamic Type proof",
+        "VoiceOver proof",
+        "Reduce Motion proof",
+        "Increase Contrast proof",
+        "Reduce Transparency proof"
       ],
       "green_blockers": [
-        "No owner approval.",
-        "No privacy-boundary proof.",
-        "No offline no-account proof.",
+        "No final package owner approval.",
+        "No privacy-boundary runtime proof.",
+        "No offline no-account runtime proof.",
         "No R2 public/reference-only request proof.",
-        "No final VSP-08 candidate-package approval."
+        "No live SwiftUI/device/accessibility proof."
       ],
       "notes": [
         "Split into VSP-08A policy readback and VSP-08B implementation proof before any source implementation.",
@@ -1311,7 +1329,11 @@
         "Part 01 remains Needs Repair / Yellow: owner direction selection, policy readback approval, privacy boundary proof, request-shape proof, offline no-account proof, SwiftUI parity, device proof, accessibility conformance, runtime proof, Visual Green, Release Green, and Done are not claimed.",
         "Owner selected Part 01 Option B Airlock Review Gate on 2026-07-01 as the VSP-08 direction for final candidate-package buildout.",
         "Option B must be built forward without merging multiple Part 01 options unless explicitly requested.",
-        "Part 01 owner direction approval remains Yellow: no final package approval, source implementation, privacy approval, account readiness, R2 readiness, request-shape proof, offline no-account proof, SwiftUI parity, device proof, accessibility conformance, runtime proof, Visual Green, Release Green, or Done is claimed."
+        "Part 01 owner direction approval remains Yellow: no final package approval, source implementation, privacy approval, account readiness, R2 readiness, request-shape proof, offline no-account proof, SwiftUI parity, device proof, accessibility conformance, runtime proof, Visual Green, Release Green, or Done is claimed.",
+        "Final candidate package R1 built from owner-selected Option B Airlock Review Gate on 2026-07-01 at Figma node 272:93.",
+        "Final package is Ready For Review / Yellow only until explicit owner package approval is recorded.",
+        "Package includes hero, state matrix, accessibility matrix, SwiftUI anatomy, presentation crop, proof non-claims, and package readback frames.",
+        "No source implementation, privacy approval, account readiness, R2 readiness, request-shape proof, offline no-account proof, SwiftUI parity, device proof, accessibility conformance, runtime proof, Visual Green, Release Green, or Done is claimed."
       ]
     },
     {

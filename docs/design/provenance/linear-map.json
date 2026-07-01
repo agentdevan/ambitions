@@ -419,16 +419,16 @@
       "vsp_id": "VSP-08",
       "likely_parent_issue": "AMB-1487",
       "recommended_parent_title": "VSP-08 External Boundaries",
-      "recommended_status": "Needs Repair",
+      "recommended_status": "Ready For Review",
       "recommended_labels": [
         "VSP",
         "external-boundary",
         "privacy",
         "yellow-proof",
         "owner-review-needed",
-        "part-01",
-        "owner-selected-direction",
-        "airlock-review-gate"
+        "final-package",
+        "airlock-review-gate",
+        "ready-for-review"
       ],
       "recommended_sub_issues": [
         {
@@ -443,22 +443,22 @@
         }
       ],
       "blocked_by": [
-        "owner approval",
+        "final VSP-08 candidate-package owner approval",
         "privacy-boundary proof",
         "offline no-account proof",
         "R2 request-shape proof",
-        "final VSP-08 candidate-package approval"
+        "live SwiftUI/device/accessibility proof"
       ],
       "acceptance_summary": [
+        "Final VSP-08 Airlock Review Gate candidate package R1 is node 272:93.",
+        "Package is built from owner-selected Part 01 Option B Airlock Review Gate only.",
         "Offline no-account core value remains usable.",
+        "Ambitions Account is optional identity, entitlement, recovery, and support only.",
         "R2/Source Atlas is public/reference/freshness only.",
         "No private graph egress and no external/cloud LLM core runtime.",
-        "Part 01 board is node 264:93 with six external-boundary directions A-F.",
-        "Codex recommends Option B Airlock Review Gate for owner review.",
+        "Widgets, shortcuts, share, notifications, calendar/EventKit, and deep links are inspectable boundaries, not root surfaces.",
         "No option may make account, R2, Source Atlas, widgets, notifications, external tools, or hosted AI part of core/root architecture.",
-        "Owner selected Option B Airlock Review Gate as the Part 01 direction on 2026-07-01.",
-        "Option B must become the base for the final VSP-08 candidate package unless the owner explicitly changes direction.",
-        "Direction approval does not claim final package approval, privacy proof, R2 readiness, account readiness, source implementation, Visual Green, Release Green, or Done."
+        "Ready For Review does not claim final package approval, privacy proof, R2 readiness, account readiness, source implementation, Visual Green, Release Green, or Done."
       ],
       "validation_summary": [
         "privacy/request-shape proof after source implementation",
@@ -466,11 +466,12 @@
         "python3 scripts/ambitions-vsp-provenance-audit.py"
       ],
       "closeout_required": [
+        "final VSP-08 package owner approval",
         "approved policy readback",
         "request-shape artifacts",
         "offline no-account proof",
-        "Part 01 frame ID 264:93 and durable proof paths",
-        "final VSP-08 candidate-package owner approval"
+        "privacy-boundary proof",
+        "final package frame ID 272:93 and durable proof paths"
       ],
       "do_not_create_now": true
     },
