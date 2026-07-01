@@ -1,0 +1,271 @@
+{
+  "allowedClaims": [
+    "source_atlas_launch_floor_golden_intent_corpus_schema_green",
+    "golden_intent_corpus_counter_measurable",
+    "golden_intent_adjudication_contract_reviewable"
+  ],
+  "balance": {
+    "domainDistribution": {
+      "business_entrepreneurship": 2,
+      "community_volunteering_opportunities": 1,
+      "creative_project_reference": 2,
+      "education_credentialing": 2,
+      "eldercare_local_services": 1,
+      "finance_public_reference": 4,
+      "health_wellness_reference": 2,
+      "health_wellness_reference_ca_statistics": 1,
+      "hobbies_recreation": 2,
+      "home_life_admin": 4,
+      "occupation_foundation": 2,
+      "personal_growth": 2,
+      "public_civic_requirements": 2,
+      "public_safety_training_reference": 1,
+      "relationships_family": 2,
+      "travel_relocation": 2,
+      "volunteering_public_reference": 2
+    },
+    "launchFloorBalanceReady": false,
+    "maxIntentsPerDomain": 4,
+    "maxIntentsPerSubdomain": 1,
+    "minIntentsPerDomain": 1,
+    "minIntentsPerSubdomain": 1,
+    "subdomainDistribution": {
+      "business_entrepreneurship_business_formation_reference": 1,
+      "business_entrepreneurship_entrepreneurship_public_program_reference": 1,
+      "community_volunteering_opportunities_candidate_only": 1,
+      "creative_project_reference_creative_learning_reference": 1,
+      "creative_project_reference_tool_or_standard_reference": 1,
+      "education_credentialing_credential_context_reference": 1,
+      "education_credentialing_education_program_reference": 1,
+      "eldercare_local_services_candidate_only": 1,
+      "finance_public_reference_benefit_program_reference": 1,
+      "finance_public_reference_financial_education_reference": 1,
+      "finance_public_reference_public_benefit_reference": 1,
+      "finance_public_reference_public_benefits_reference": 1,
+      "health_wellness_reference_ca_statistics_health_statistics_reference": 1,
+      "health_wellness_reference_fitness_safety_reference": 1,
+      "health_wellness_reference_wellness_reference": 1,
+      "hobbies_recreation_hobby_learning_reference": 1,
+      "hobbies_recreation_recreation_safety_reference": 1,
+      "home_life_admin_home_admin_reference": 1,
+      "home_life_admin_home_energy_reference": 1,
+      "home_life_admin_home_preparedness_reference": 1,
+      "home_life_admin_local_service_reference": 1,
+      "occupation_foundation_career_occupation_reference": 1,
+      "occupation_foundation_skill_context_reference": 1,
+      "personal_growth_general_habit_science_reference": 1,
+      "personal_growth_personal_growth_learning_reference": 1,
+      "public_civic_requirements_government_requirement_reference": 1,
+      "public_civic_requirements_public_civic_reference": 1,
+      "public_safety_training_reference_candidate_only": 1,
+      "relationships_family_family_admin_reference": 1,
+      "relationships_family_relationship_education_reference": 1,
+      "travel_relocation_relocation_admin_reference": 1,
+      "travel_relocation_travel_requirement_reference": 1,
+      "volunteering_public_reference_public_civic_life_reference": 1,
+      "volunteering_public_reference_volunteering_public_reference": 1
+    }
+  },
+  "blockedClaims": [
+    "app_store_readiness",
+    "continuous_missing_shard_expansion",
+    "final_user_plans_schedules_steps_from_source_atlas_or_r2",
+    "full_source_atlas_green",
+    "launch_floor_complete",
+    "launch_floor_golden_intents_50000_met",
+    "outside_legal_approval",
+    "owner_approval",
+    "private_life_graph_in_source_atlas_or_r2",
+    "release_green",
+    "source_atlas_launch_floor_ready",
+    "source_atlas_private_goal_text_processing",
+    "source_needed_fallback_under_5_percent",
+    "testflight_readiness"
+  ],
+  "checks": [
+    {
+      "issues": [],
+      "name": "inputs_loaded",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "artifact_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "adjudication_complete",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "golden_intent_counter_measurable",
+      "passed": true
+    },
+    {
+      "issues": [
+        "goldenIntentCount=34"
+      ],
+      "name": "launch_floor_golden_intents_50000",
+      "passed": false
+    },
+    {
+      "issues": [
+        "domainCount=17"
+      ],
+      "name": "launch_floor_domain_balance_500",
+      "passed": false
+    },
+    {
+      "issues": [
+        "subdomainCount=34"
+      ],
+      "name": "launch_floor_subdomain_balance_5000",
+      "passed": false
+    },
+    {
+      "issues": [],
+      "name": "no_final_outputs",
+      "passed": true
+    }
+  ],
+  "corpusReportID": "source_atlas.launch_floor_golden_intent_corpus.280eb17a35a73f1d",
+  "counterContract": {
+    "fallbackMetric": {
+      "notProvidedByThisCorpusAlone": true,
+      "source": "separate LFF-M03-L03 source-needed fallback metric"
+    },
+    "goldenIntentCount": {
+      "countWhen": [
+        "countsTowardGoldenIntent == true",
+        "lawfulIntent == true",
+        "publicReferenceOnly == true",
+        "privateContextAllowed == false",
+        "finalOutputAllowed == false",
+        "adjudication.status == adjudicated"
+      ],
+      "failClosedWhenMissing": true,
+      "source": "normalized_intent_records",
+      "threshold": 50000
+    }
+  },
+  "coverageLabelCounts": {
+    "candidate_only": 3,
+    "covered": 31
+  },
+  "createdAt": "2026-07-01T00:00:00Z",
+  "evidencePaths": {
+    "adjudicationLedger": "tools/source-atlas/generated/source-atlas-launch-floor-golden-intent-corpus/lff-m03-l01-current/launch-floor-golden-intent-adjudication-ledger.json",
+    "inputs": [
+      "docs/qa/source-atlas/source-atlas-goal-domain-gauntlet-train-131.json"
+    ],
+    "normalizedCorpus": "tools/source-atlas/generated/source-atlas-launch-floor-golden-intent-corpus/lff-m03-l01-current/launch-floor-golden-intent-corpus.json"
+  },
+  "expectedRoutingStateCounts": {
+    "candidate_only": 3,
+    "current_configured_public_reference_runtime": 31
+  },
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.launchFloorGoldenIntentCorpusReport.v1",
+  "launchFloorGoldenIntentTargetMet": false,
+  "nonClaims": [
+    "not a private goal corpus",
+    "not private life graph storage",
+    "not private capture, schedule, proof, receipt, personalization, behavior history, account ID, or device ID storage",
+    "not a planner, scheduler, Step generator, or final personalized output engine",
+    "not proof of <5% source-needed fallback by itself",
+    "not proof of continuous missing-shard expansion by itself",
+    "not R2 production promotion proof",
+    "not Release Green, App Store readiness, TestFlight readiness, outside legal approval, or owner approval",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "adjudicationLedger": "cf4f00d41559f949ad66a5b212ff5ea292f26600f1da0d6f727f1c41edb17792",
+    "markdownPayload": "bcc22344b17823f287991813ee032128be8574218ad5ee96dc31db59d299c042",
+    "normalizedCorpus": "d1056ca97266b045b5c60ac0ea47592c27a7898e09ec3a4a16a5452d0aadaabe",
+    "report": "889eb3160cb1749681a799e2ee53053a0ed9498e7039a7e14ac551c15ee4a8f8",
+    "reportPayload": "c5ec05a7c70bbaf379613b0facff38d8276bb2f596dcd86111fab70e84df4573"
+  },
+  "outputPaths": {
+    "adjudicationLedger": "tools/source-atlas/generated/source-atlas-launch-floor-golden-intent-corpus/lff-m03-l01-current/launch-floor-golden-intent-adjudication-ledger.json",
+    "closeout": "tools/source-atlas/generated/source-atlas-launch-floor-golden-intent-corpus/lff-m03-l01-current/closeout.md",
+    "emitEvidence": "docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.json",
+    "emitMarkdown": "docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.md",
+    "markdown": "tools/source-atlas/generated/source-atlas-launch-floor-golden-intent-corpus/lff-m03-l01-current/launch-floor-golden-intent-corpus-report.md",
+    "normalizedCorpus": "tools/source-atlas/generated/source-atlas-launch-floor-golden-intent-corpus/lff-m03-l01-current/launch-floor-golden-intent-corpus.json",
+    "report": "tools/source-atlas/generated/source-atlas-launch-floor-golden-intent-corpus/lff-m03-l01-current/launch-floor-golden-intent-corpus-report.json"
+  },
+  "overallReadinessStatus": "golden_intent_target_not_met",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyIssues": [],
+  "productLaw": {
+    "accountOrDeviceIdentifiersAllowed": false,
+    "finalOutputAllowed": false,
+    "localOnlySensitiveRuntimeStateAllowed": false,
+    "localRuntimeOwnsPathing": true,
+    "privateContextAllowed": false,
+    "publicReferenceOnly": true,
+    "sourceAtlasGeneratesFinalPlansSchedulesSteps": false
+  },
+  "recordCounts": {
+    "adjudicatedIntentCount": 34,
+    "candidateOnlyCount": 3,
+    "coveredCount": 31,
+    "domainCount": 17,
+    "excludedControlRecords": 0,
+    "finalOutputsGenerated": 0,
+    "goldenIntentCount": 34,
+    "illegalOutOfScopeCount": 0,
+    "insufficientSourceCount": 0,
+    "intentRecords": 34,
+    "lawfulIntentCount": 34,
+    "privacyIssues": 0,
+    "privateBlockedCount": 0,
+    "publicIntentTextCount": 0,
+    "reviewArtifactCount": 1,
+    "sanitizedClassOnlyCount": 34,
+    "sourceNeededCount": 0,
+    "subdomainCount": 34
+  },
+  "runLabel": "current",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; golden-intent corpus is measured but launch-floor target is not met",
+  "sourceNeededCauseCounts": {
+    "missing_domain": 3,
+    "not_required": 31
+  },
+  "sourceSummaries": [
+    {
+      "importedIntentRecords": 34,
+      "kind": "ambitions.sourceAtlas.goalDomainGauntlet.v1",
+      "path": "docs/qa/source-atlas/source-atlas-goal-domain-gauntlet-train-131.json"
+    }
+  ],
+  "status": "Source Green for golden-intent corpus contract",
+  "targetStatus": {
+    "adjudicationComplete": true,
+    "domainCoverage500": false,
+    "goldenIntents50000": false,
+    "noFinalOutputs": true,
+    "privacyBoundaryPass": true,
+    "subdomainCoverage5000": false
+  },
+  "valid": true,
+  "versionID": "source-atlas-launch-floor-golden-intent-corpus-lff-m03-l01"
+}

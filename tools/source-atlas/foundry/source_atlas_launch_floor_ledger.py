@@ -16,12 +16,13 @@ from typing import Any
 
 from .boundary import boundary_issues_for_value, is_boundary_line
 from .launch_floor_domain_taxonomy import launch_floor_domain_taxonomy_summary
+from .launch_floor_golden_intent_corpus import launch_floor_golden_intent_corpus_summary
 from .launch_floor_shard_corpus import launch_floor_shard_corpus_summary
 from .model import NON_CLAIMS, PRIVACY_BOUNDARY, read_json, stable_hash, stable_id, write_json
 
 
 SOURCE_ATLAS_LAUNCH_FLOOR_LEDGER_KIND = "ambitions.sourceAtlas.launchFloorLedger.v1"
-SOURCE_ATLAS_LAUNCH_FLOOR_LEDGER_VERSION = "source-atlas-launch-floor-ledger-lff-m02"
+SOURCE_ATLAS_LAUNCH_FLOOR_LEDGER_VERSION = "source-atlas-launch-floor-ledger-lff-m03-l01"
 
 LAUNCH_FLOOR_TARGETS = [
     {
@@ -164,6 +165,7 @@ def build_source_atlas_launch_floor_ledger(options: SourceAtlasLaunchFloorLedger
     native_bridge_source_contract = _native_bridge_source_contract(options.native_runtime_bridge_gauntlet_source_path)
     launch_floor_taxonomy_summary = _launch_floor_taxonomy_summary(artifacts)
     launch_floor_shard_corpus_summary = _launch_floor_shard_corpus_summary(artifacts)
+    launch_floor_golden_intent_summary = _launch_floor_golden_intent_summary(artifacts)
 
     input_paths = _input_paths(options)
     input_privacy_issues = _privacy_issues(
@@ -181,6 +183,7 @@ def build_source_atlas_launch_floor_ledger(options: SourceAtlasLaunchFloorLedger
         native_bridge_source_contract,
         launch_floor_taxonomy_summary,
         launch_floor_shard_corpus_summary,
+        launch_floor_golden_intent_summary,
     )
     target_statuses = _target_statuses(counters)
     current_capabilities = _current_capabilities(counters, target_statuses)
@@ -195,6 +198,7 @@ def build_source_atlas_launch_floor_ledger(options: SourceAtlasLaunchFloorLedger
         overclaim_issues=overclaim_issues,
         taxonomy_issues=launch_floor_taxonomy_summary["issues"],
         shard_corpus_issues=launch_floor_shard_corpus_summary["issues"],
+        golden_intent_issues=launch_floor_golden_intent_summary["issues"],
         target_statuses=target_statuses,
     )
     all_targets_met = all(target["status"] == "met" for target in target_statuses)
@@ -205,6 +209,7 @@ def build_source_atlas_launch_floor_ledger(options: SourceAtlasLaunchFloorLedger
         and not overclaim_issues
         and not launch_floor_taxonomy_summary["issues"]
         and not launch_floor_shard_corpus_summary["issues"]
+        and not launch_floor_golden_intent_summary["issues"]
     )
     launch_floor_met = valid and all_targets_met
     launch_floor_claim_allowed = launch_floor_met
@@ -252,6 +257,7 @@ def build_source_atlas_launch_floor_ledger(options: SourceAtlasLaunchFloorLedger
         "privacyIssues": sorted(set([*input_privacy_issues, *artifact_privacy_issues])),
         "overclaimIssues": sorted(set(overclaim_issues)),
         "taxonomyIssues": launch_floor_taxonomy_summary["issues"],
+        "goldenIntentCorpusIssues": launch_floor_golden_intent_summary["issues"],
         "launchFloorTaxonomy": {
             "present": artifacts["launchFloorTaxonomy"] is not None,
             "valid": not launch_floor_taxonomy_summary["issues"],
@@ -264,6 +270,13 @@ def build_source_atlas_launch_floor_ledger(options: SourceAtlasLaunchFloorLedger
             "recordCounts": launch_floor_shard_corpus_summary["recordCounts"],
             "targetStatus": launch_floor_shard_corpus_summary["launchFloorTargets"],
             "issues": launch_floor_shard_corpus_summary["issues"],
+        },
+        "launchFloorGoldenIntentCorpus": {
+            "present": artifacts["goldenIntentCorpus"] is not None,
+            "valid": artifacts["goldenIntentCorpus"] is not None and not launch_floor_golden_intent_summary["issues"],
+            "recordCounts": launch_floor_golden_intent_summary["recordCounts"],
+            "targetStatus": launch_floor_golden_intent_summary["launchFloorTargets"],
+            "issues": launch_floor_golden_intent_summary["issues"],
         },
         "allowedClaims": _allowed_claims(valid, launch_floor_met),
         "blockedClaims": _blocked_claims(),
@@ -339,6 +352,9 @@ def source_atlas_launch_floor_ledger_markdown(report: dict[str, Any]) -> str:
         f"- Representative configured gauntlet cases: {counts['configuredGauntletCases']}",
         f"- Unknown-domain candidate-only cases: {counts['unknownCandidateOnlyCases']}",
         f"- Native bridge source-contract intents: {counts['nativeBridgeSourceIntentContract']}",
+        f"- Launch-floor golden intent records: {counts['launchFloorGoldenIntentRecords']}",
+        f"- Launch-floor golden intents counted: {counts['goldenIntentCorpusCounter'] or 0}",
+        f"- Launch-floor golden intent domains/subdomains: {counts['launchFloorGoldenIntentDomains']}/{counts['launchFloorGoldenIntentSubdomains']}",
         "",
         "## Launch-Floor Target Status",
         "",
@@ -404,6 +420,7 @@ def _counters(
     native_bridge_source_contract: dict[str, int | None],
     launch_floor_taxonomy: dict[str, Any],
     launch_floor_shard_corpus: dict[str, Any],
+    launch_floor_golden_intent: dict[str, Any],
 ) -> dict[str, Any]:
     frontier_config = artifacts["frontierConfig"]
     source_lane_registry = artifacts["sourceLaneRegistry"]
@@ -416,7 +433,6 @@ def _counters(
     supervisor = artifacts["productionSupervisor"]
     control_loop = artifacts["autonomousControlLoop"]
     expansion_chain = artifacts["autonomousDomainExpansionChain"]
-    golden_corpus = artifacts["goldenIntentCorpus"]
     fallback_metric = artifacts["fallbackMetric"]
     missing_shard_events = artifacts["missingShardEvents"]
     r2_layout_proof = artifacts["r2LayoutProof"]
@@ -424,6 +440,8 @@ def _counters(
     taxonomy_valid = not launch_floor_taxonomy["issues"]
     shard_corpus_counts = launch_floor_shard_corpus["recordCounts"]
     shard_corpus_valid = not launch_floor_shard_corpus["issues"] and artifacts["shardCorpusManifest"] is not None
+    golden_intent_counts = launch_floor_golden_intent["recordCounts"]
+    golden_intent_valid = not launch_floor_golden_intent["issues"] and artifacts["goldenIntentCorpus"] is not None
 
     frontiers = frontier_config.get("frontiers", []) if isinstance(frontier_config, dict) else []
     configured_domain_ids = sorted(
@@ -461,10 +479,11 @@ def _counters(
     return {
         "launchFloorTaxonomyValid": taxonomy_valid,
         "launchFloorShardCorpusValid": shard_corpus_valid,
+        "launchFloorGoldenIntentCorpusValid": golden_intent_valid,
         "goalDomainCounter": goal_domain_counter,
         "subdomainCounter": subdomain_counter,
         "shardCorpusCount": shard_corpus_counts["publicReferenceShards"] if shard_corpus_valid else None,
-        "goldenIntentCorpusCount": _record_count(golden_corpus, "goldenIntentCount", "golden_intent_count", "intentCount", "intents"),
+        "goldenIntentCorpusCount": golden_intent_counts["goldenIntentCount"] if golden_intent_valid else None,
         "fallbackNumerator": source_needed_numerator,
         "fallbackDenominator": source_needed_denominator,
         "missingShardEventSummary": missing_event_summary,
@@ -521,7 +540,13 @@ def _counters(
             "domainExpansionCandidateRoutes": _record_count(expansion_chain, "candidateRoutes"),
             "domainExpansionR2PublishOperations": _record_count(expansion_chain, "r2PublishOperations"),
             "shardCorpusCounter": shard_corpus_counts["publicReferenceShards"] if shard_corpus_valid else None,
-            "goldenIntentCorpusCounter": _record_count(golden_corpus, "goldenIntentCount", "golden_intent_count", "intentCount", "intents"),
+            "launchFloorGoldenIntentRecords": golden_intent_counts["intentRecords"],
+            "launchFloorGoldenIntentAdjudicatedRecords": golden_intent_counts["adjudicatedIntentCount"],
+            "launchFloorGoldenIntentDomains": golden_intent_counts["domainCount"],
+            "launchFloorGoldenIntentSubdomains": golden_intent_counts["subdomainCount"],
+            "launchFloorGoldenIntentSourceNeeded": golden_intent_counts["sourceNeededCount"],
+            "launchFloorGoldenIntentCandidateOnly": golden_intent_counts["candidateOnlyCount"],
+            "goldenIntentCorpusCounter": golden_intent_counts["goldenIntentCount"] if golden_intent_valid else None,
             "sourceNeededFallbackNumerator": source_needed_numerator,
             "sourceNeededFallbackDenominator": source_needed_denominator,
             "missingShardEvents": missing_event_summary["eventCount"],
@@ -785,6 +810,17 @@ def _current_capabilities(counters: dict[str, Any], target_statuses: list[dict[s
             ),
         }
     )
+    capabilities.append(
+        {
+            "capabilityID": "launch_floor_golden_intent_corpus_contract",
+            "status": "proven_current" if counters["launchFloorGoldenIntentCorpusValid"] else "not_proven",
+            "evidence": (
+                f"{counts['launchFloorGoldenIntentRecords']} records, "
+                f"{counts['goldenIntentCorpusCounter'] or 0} counted golden intents, "
+                f"{counts['launchFloorGoldenIntentAdjudicatedRecords']} adjudicated records"
+            ),
+        }
+    )
     return capabilities
 
 
@@ -906,8 +942,13 @@ def _validation_matrix() -> list[dict[str, str]]:
         },
         {
             "validationID": "launch_floor_ledger",
-            "command": "python3 tools/source-atlas/source-atlas-foundry.py source-atlas-launch-floor-ledger --shard-corpus-manifest tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/launch-floor-shard-corpus-manifest.json --r2-layout-proof docs/qa/source-atlas/source-atlas-launch-floor-r2-layout-proof-lff-m02.json --output-root tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m02-l03-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.md",
-            "purpose": "regenerate current launch-floor ledger with the compiled bounded shard corpus manifest, R2 layout proof, and no source/R2/native mutation",
+            "command": "python3 tools/source-atlas/source-atlas-foundry.py source-atlas-launch-floor-ledger --shard-corpus-manifest tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/launch-floor-shard-corpus-manifest.json --r2-layout-proof docs/qa/source-atlas/source-atlas-launch-floor-r2-layout-proof-lff-m02.json --golden-intent-corpus docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.json --output-root tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m03-l01-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.md",
+            "purpose": "regenerate current launch-floor ledger with bounded shard corpus/R2 proof, validated golden-intent corpus report, and no source/R2/native mutation",
+        },
+        {
+            "validationID": "launch_floor_golden_intent_corpus",
+            "command": "python3 tools/source-atlas/source-atlas-foundry.py launch-floor-golden-intent-corpus --input docs/qa/source-atlas/source-atlas-goal-domain-gauntlet-train-131.json --input-format goal-domain-gauntlet --output-root tools/source-atlas/generated/source-atlas-launch-floor-golden-intent-corpus/lff-m03-l01-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.md",
+            "purpose": "import current public/reference gauntlet cases into the canonical golden-intent corpus contract while keeping the 50k target fail-closed",
         },
         {
             "validationID": "launch_floor_shard_corpus",
@@ -935,6 +976,7 @@ def _checks(
     overclaim_issues: list[str],
     taxonomy_issues: list[str],
     shard_corpus_issues: list[str],
+    golden_intent_issues: list[str],
     target_statuses: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
     all_targets_met = all(target["status"] == "met" for target in target_statuses)
@@ -945,6 +987,7 @@ def _checks(
         _check("overclaim_scan_passed", not overclaim_issues, overclaim_issues, "red"),
         _check("launch_floor_taxonomy_valid_when_supplied", not taxonomy_issues, taxonomy_issues, "red"),
         _check("launch_floor_shard_corpus_valid_when_supplied", not shard_corpus_issues, shard_corpus_issues, "red"),
+        _check("launch_floor_golden_intent_corpus_valid_when_supplied", not golden_intent_issues, golden_intent_issues, "red"),
         _check("launch_floor_counter_contract_defined", len(target_statuses) == len(LAUNCH_FLOOR_TARGETS), ["counter contract incomplete"], "red"),
         _check(
             "launch_floor_targets_met",
@@ -1118,6 +1161,47 @@ def _launch_floor_shard_corpus_summary(artifacts: dict[str, Any]) -> dict[str, A
         manifest,
         taxonomy=artifacts.get("launchFloorTaxonomy"),
     )
+
+
+def _launch_floor_golden_intent_summary(artifacts: dict[str, Any]) -> dict[str, Any]:
+    corpus = artifacts.get("goldenIntentCorpus")
+    if not isinstance(corpus, dict):
+        return {
+            "recordCounts": {
+                "intentRecords": 0,
+                "goldenIntentCount": 0,
+                "lawfulIntentCount": 0,
+                "excludedControlRecords": 0,
+                "publicIntentTextCount": 0,
+                "sanitizedClassOnlyCount": 0,
+                "adjudicatedIntentCount": 0,
+                "domainCount": 0,
+                "subdomainCount": 0,
+                "coveredCount": 0,
+                "sourceNeededCount": 0,
+                "candidateOnlyCount": 0,
+                "privateBlockedCount": 0,
+                "illegalOutOfScopeCount": 0,
+                "insufficientSourceCount": 0,
+                "reviewArtifactCount": 0,
+                "privacyIssues": 0,
+                "finalOutputsGenerated": 0,
+            },
+            "coverageLabelCounts": {},
+            "expectedRoutingStateCounts": {},
+            "sourceNeededCauseCounts": {},
+            "balance": {},
+            "launchFloorTargets": {
+                "goldenIntents50000": False,
+                "domainCoverage500": False,
+                "subdomainCoverage5000": False,
+                "adjudicationComplete": False,
+                "privacyBoundaryPass": True,
+                "noFinalOutputs": True,
+            },
+            "issues": [],
+        }
+    return launch_floor_golden_intent_corpus_summary(corpus)
 
 
 def _explicit_subdomains(frontiers: list[Any]) -> set[str]:

@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "kind": "ambitions.sourceAtlas.contract.launchFloorGoldenIntentCorpus.v1",
+  "versionID": "source-atlas-launch-floor-golden-intent-corpus-contract-lff-m03-l01",
+  "artifactKind": "ambitions.sourceAtlas.launchFloorGoldenIntentCorpus.v1",
+  "reportKind": "ambitions.sourceAtlas.launchFloorGoldenIntentCorpusReport.v1",
+  "publicReferenceOnly": true,
+  "privateContextAllowed": false,
+  "finalOutputAllowed": false,
+  "description": "Canonical contract for importing and adjudicating lawful representative public/reference Source Atlas evaluation intents. Records may contain public lawful intent text or sanitized intent class only. The corpus is evaluation infrastructure; it cannot store private context or generate final plans, schedules, or Steps.",
+  "requiredTopLevelFields": [
+    "schemaVersion",
+    "kind",
+    "versionID",
+    "createdAt",
+    "publicReferenceOnly",
+    "privateContextAllowed",
+    "finalOutputAllowed",
+    "intents",
+    "nonClaims"
+  ],
+  "requiredIntentRecordFields": [
+    "intentID",
+    "domainID",
+    "subdomainID",
+    "lawfulIntent",
+    "publicReferenceOnly",
+    "privateContextAllowed",
+    "finalOutputAllowed",
+    "expectedRoutingState",
+    "coverageLabel",
+    "sourceNeededCause",
+    "countsTowardGoldenIntent",
+    "adjudication"
+  ],
+  "intentRepresentationRule": {
+    "oneOf": [
+      "publicIntentText",
+      "sanitizedIntentClass"
+    ],
+    "publicIntentText": "public lawful representative phrasing only; no private user context",
+    "sanitizedIntentClass": "public/reference-safe class label when text would risk private context"
+  },
+  "expectedRoutingStates": [
+    "current_configured_public_reference_runtime",
+    "launch_floor_public_reference_supported",
+    "candidate_only",
+    "source_needed",
+    "private_blocked",
+    "unlawful_out_of_scope",
+    "insufficient_source"
+  ],
+  "coverageLabels": [
+    "covered",
+    "source_needed",
+    "candidate_only",
+    "private_blocked",
+    "illegal_out_of_scope",
+    "insufficient_source"
+  ],
+  "sourceNeededCauses": [
+    "not_required",
+    "missing_shard",
+    "missing_source_lane",
+    "missing_legal_review",
+    "missing_api_policy",
+    "missing_freshness",
+    "missing_domain",
+    "insufficient_public_source",
+    "no_lawful_public_reference",
+    "unknown"
+  ],
+  "requiredAdjudicationFields": [
+    "adjudicationID",
+    "status",
+    "reviewerType",
+    "ruleID",
+    "adjudicatedAt",
+    "sourceArtifact",
+    "evidenceHash"
+  ],
+  "allowedReviewerTypes": [
+    "human",
+    "foundry_importer",
+    "deterministic_rule",
+    "external_review_packet"
+  ],
+  "counterContract": {
+    "goldenIntentCount": {
+      "source": "normalized_intent_records",
+      "countWhen": [
+        "countsTowardGoldenIntent == true",
+        "lawfulIntent == true",
+        "publicReferenceOnly == true",
+        "privateContextAllowed == false",
+        "finalOutputAllowed == false",
+        "adjudication.status == adjudicated"
+      ],
+      "threshold": 50000,
+      "failClosedWhenMissing": true
+    }
+  },
+  "forbiddenArtifactClasses": [
+    "private life graph",
+    "captures",
+    "schedules",
+    "proof payloads",
+    "receipts",
+    "personalization",
+    "behavior history",
+    "inferred priorities",
+    "account IDs",
+    "device IDs",
+    "final personalized plans",
+    "final schedules",
+    "final Steps"
+  ],
+  "nonClaims": [
+    "not a private goal corpus",
+    "not private life graph storage",
+    "not proof of less than five percent source-needed fallback by itself",
+    "not continuous missing-shard expansion proof by itself",
+    "not final user plans, schedules, Steps, priority order, or personalized paths from Source Atlas/R2",
+    "not Release Green, App Store readiness, TestFlight readiness, outside legal approval, or owner approval"
+  ]
+}

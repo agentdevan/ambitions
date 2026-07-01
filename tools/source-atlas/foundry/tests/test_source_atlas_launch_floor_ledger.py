@@ -6,6 +6,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from foundry.model import write_json  # noqa: E402
+from foundry.launch_floor_golden_intent_corpus import (  # noqa: E402
+    SOURCE_ATLAS_LAUNCH_FLOOR_GOLDEN_INTENT_CORPUS_REPORT_KIND,
+)
 from foundry.source_atlas_launch_floor_ledger import (  # noqa: E402
     SourceAtlasLaunchFloorLedgerOptions,
     build_source_atlas_launch_floor_ledger,
@@ -205,7 +208,7 @@ def _passing_fixture_paths(tmp_path: Path) -> dict[str, Path]:
     write_json(paths["control_loop"], {"kind": "ambitions.sourceAtlas.autonomousControlLoop.v1", "valid": True, "allowedClaims": ["unknown_domains_candidate_only_controlled"], "recordCounts": {"unknownDomainsCandidateOnly": 2}})
     write_json(paths["expansion_chain"], {"kind": "ambitions.sourceAtlas.autonomousDomainExpansionChain.v1", "valid": True, "allowedClaims": ["deterministic_autonomous_candidate_domain_expansion_chain"], "recordCounts": {"candidateRoutes": 2, "r2PublishOperations": 0}})
     write_json(paths["shard_manifest"], _launch_floor_shard_manifest())
-    write_json(paths["golden_corpus"], {"kind": "ambitions.sourceAtlas.goldenIntentCorpus.v1", "recordCounts": {"goldenIntentCount": 50_000}})
+    write_json(paths["golden_corpus"], _golden_corpus_report())
     write_json(paths["fallback_metric"], {"kind": "ambitions.sourceAtlas.sourceNeededFallbackMetric.v1", "recordCounts": {"sourceNeededFallbacks": 49, "lawfulGoals": 1000}})
     write_json(paths["missing_events"], _missing_events())
     return paths
@@ -252,6 +255,50 @@ def test_launch_floor_ledger_rejects_raw_shard_counter_without_partition_manifes
     assert any(
         "shard corpus manifest kind must be ambitions.sourceAtlas.launchFloorShardCorpusManifest.v1" in issue
         for issue in result["launchFloorShardCorpus"]["issues"]
+    )
+
+
+def test_launch_floor_ledger_rejects_raw_golden_intent_counter_without_corpus_contract(tmp_path: Path):
+    paths = _passing_fixture_paths(tmp_path)
+    write_json(
+        paths["golden_corpus"],
+        {
+            "kind": "ambitions.sourceAtlas.goldenIntentCorpus.v1",
+            "recordCounts": {"goldenIntentCount": 50_000},
+        },
+    )
+
+    result = build_source_atlas_launch_floor_ledger(
+        SourceAtlasLaunchFloorLedgerOptions(
+            frontier_config_path=paths["frontier"],
+            source_lane_registry_path=paths["source_registry"],
+            legal_terms_registry_path=paths["legal_registry"],
+            api_governance_registry_path=paths["api_registry"],
+            production_target_ledger_path=paths["production_ledger"],
+            r2_live_inventory_path=paths["r2_inventory"],
+            goal_domain_gauntlet_path=paths["gauntlet"],
+            completion_audit_path=paths["completion"],
+            release_proof_packet_path=paths["release"],
+            production_supervisor_path=paths["supervisor"],
+            autonomous_control_loop_path=paths["control_loop"],
+            autonomous_domain_expansion_chain_path=paths["expansion_chain"],
+            shard_corpus_manifest_path=paths["shard_manifest"],
+            golden_intent_corpus_path=paths["golden_corpus"],
+            fallback_metric_path=paths["fallback_metric"],
+            missing_shard_events_path=paths["missing_events"],
+            output_root=tmp_path / "raw-golden-counter-rejected",
+            created_at="2026-07-01T00:00:00Z",
+            run_label="synthetic-raw-golden-counter",
+        )
+    )
+
+    assert result["valid"] is False
+    assert result["launchFloorMet"] is False
+    assert result["recordCounts"]["goldenIntentCorpusCounter"] is None
+    assert result["launchFloorTargetStatus"]["golden_intents_50000"]["status"] == "not_measurable_fail_closed"
+    assert any(
+        "golden intent corpus kind must be ambitions.sourceAtlas.launchFloorGoldenIntentCorpus.v1" in issue
+        for issue in result["launchFloorGoldenIntentCorpus"]["issues"]
     )
 
 
@@ -393,6 +440,53 @@ def _release_packet() -> dict:
         "allowedClaims": ["source_atlas_release_proof_packet_green", "release_overclaim_blocked"],
         "blockedClaims": ["release_green", "app_store_readiness", "testflight_readiness"],
         "recordCounts": {"focusedNativePassed": 72, "sourceAtlasPytestPassed": 502},
+    }
+
+
+def _golden_corpus_report() -> dict:
+    return {
+        "schemaVersion": 1,
+        "kind": SOURCE_ATLAS_LAUNCH_FLOOR_GOLDEN_INTENT_CORPUS_REPORT_KIND,
+        "versionID": "source-atlas-launch-floor-golden-intent-corpus-lff-m03-l01",
+        "valid": True,
+        "launchFloorGoldenIntentTargetMet": True,
+        "recordCounts": {
+            "intentRecords": 50_000,
+            "goldenIntentCount": 50_000,
+            "lawfulIntentCount": 50_000,
+            "excludedControlRecords": 0,
+            "publicIntentTextCount": 50_000,
+            "sanitizedClassOnlyCount": 0,
+            "adjudicatedIntentCount": 50_000,
+            "domainCount": 500,
+            "subdomainCount": 5_000,
+            "coveredCount": 49_951,
+            "sourceNeededCount": 49,
+            "candidateOnlyCount": 0,
+            "privateBlockedCount": 0,
+            "illegalOutOfScopeCount": 0,
+            "insufficientSourceCount": 0,
+            "reviewArtifactCount": 1,
+            "privacyIssues": 0,
+            "finalOutputsGenerated": 0,
+        },
+        "coverageLabelCounts": {"covered": 49_951, "source_needed": 49},
+        "expectedRoutingStateCounts": {"launch_floor_public_reference_supported": 49_951, "source_needed": 49},
+        "sourceNeededCauseCounts": {"not_required": 49_951, "missing_shard": 49},
+        "balance": {"launchFloorBalanceReady": True},
+        "counterContract": {
+            "goldenIntentCount": {
+                "source": "normalized_intent_records",
+                "threshold": 50_000,
+                "failClosedWhenMissing": True,
+            }
+        },
+        "issues": [],
+        "outputHashes": {
+            "normalizedCorpus": "a" * 64,
+            "adjudicationLedger": "b" * 64,
+            "report": "c" * 64,
+        },
     }
 
 

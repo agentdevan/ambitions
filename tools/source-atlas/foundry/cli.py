@@ -124,6 +124,11 @@ from .launch_floor_native_shard_index_proof import (
     launch_floor_native_shard_index_proof_markdown,
     run_launch_floor_native_shard_index_proof,
 )
+from .launch_floor_golden_intent_corpus import (
+    LaunchFloorGoldenIntentCorpusOptions,
+    compile_launch_floor_golden_intent_corpus,
+    launch_floor_golden_intent_corpus_markdown,
+)
 from .release_proof_packet import (
     SourceAtlasReleaseProofPacketOptions,
     run_source_atlas_release_proof_packet,
@@ -991,6 +996,19 @@ def main(argv: list[str] | None = None) -> int:
     launch_floor_native_shard_index_parser.add_argument("--test-suite", action="append", dest="test_suites")
     launch_floor_native_shard_index_parser.add_argument("--emit-evidence")
     launch_floor_native_shard_index_parser.add_argument("--markdown")
+
+    launch_floor_golden_intent_parser = sub.add_parser("launch-floor-golden-intent-corpus")
+    launch_floor_golden_intent_parser.add_argument("--input", action="append", dest="inputs", required=True)
+    launch_floor_golden_intent_parser.add_argument(
+        "--input-format",
+        choices=["auto", "canonical", "goal-domain-gauntlet"],
+        default="auto",
+    )
+    launch_floor_golden_intent_parser.add_argument("--output-root", required=True)
+    launch_floor_golden_intent_parser.add_argument("--created-at", default="2026-07-01T00:00:00Z")
+    launch_floor_golden_intent_parser.add_argument("--run-label", default="current")
+    launch_floor_golden_intent_parser.add_argument("--emit-evidence")
+    launch_floor_golden_intent_parser.add_argument("--markdown")
 
     launch_floor_parser = sub.add_parser("source-atlas-launch-floor-ledger")
     launch_floor_parser.add_argument("--frontier-config", default="tools/source-atlas/frontier/coverage-frontiers.json")
@@ -2458,6 +2476,25 @@ def main(argv: list[str] | None = None) -> int:
         if args.markdown:
             Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
             Path(args.markdown).write_text(launch_floor_native_shard_index_proof_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "launch-floor-golden-intent-corpus":
+        result = compile_launch_floor_golden_intent_corpus(
+            LaunchFloorGoldenIntentCorpusOptions(
+                input_paths=tuple(Path(path) for path in args.inputs),
+                input_format=args.input_format,
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                run_label=args.run_label,
+                emit_evidence_path=Path(args.emit_evidence) if args.emit_evidence else None,
+                markdown_path=Path(args.markdown) if args.markdown else None,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(launch_floor_golden_intent_corpus_markdown(result), encoding="utf-8")
         print_json(result)
         return 0 if result["valid"] else 1
     if args.command == "source-atlas-launch-floor-ledger":
