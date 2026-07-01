@@ -19,6 +19,7 @@ final class ProjectionEngineTests: XCTestCase {
             "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/AppIntentProjection.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ReceiptProjection.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/PrivacyProjection.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionStoreSurfaceReadAdapter.swift",
         ]
 
         for path in requiredPaths {
@@ -122,6 +123,78 @@ final class ProjectionEngineTests: XCTestCase {
         XCTAssertEqual(todayInvalidation.nextCursor, secondBatch.today.cursor)
         XCTAssertEqual(todayInvalidation.reason, .eventAppended)
     }
+
+    func testProjectionStoreSurfaceReadAdapterFeedsTodayGoalsTimeYouAndSearchWithFreshnessReceipts() async throws {
+        let directory = try scratchDirectory()
+        let store = InMemoryRuntimeEventStore()
+        let today = try await store.append(commandEvent(
+            id: "command-adapter-today",
+            kind: .quickCapture,
+            source: .today,
+            target: AmbitionsCommandTarget(captureID: "capture-adapter", destination: .captureInbox),
+            summary: "Captured adapter appointment",
+            privacy: .standard
+        ))
+        let goal = try await store.append(commandEvent(
+            id: "command-adapter-goal",
+            kind: .createGoal,
+            source: .goals,
+            target: AmbitionsCommandTarget(goalID: "goal-adapter", destination: .goals),
+            summary: "Created adapter goal",
+            privacy: .standard
+        ))
+        let time = try await store.append(timePlacementEvent())
+        let proof = try await store.append(proofEvent())
+        let batch = try await ProjectionMaterializer(store: store).materializeAll(materializedAt: "2026-06-30T06:10:00Z")
+        let projectionStore = ProjectionStoreSQLite(databaseURL: directory.appendingPathComponent("projections.sqlite"))
+        let searchIndex = FTSIndex(store: SearchStoreFTS(databaseURL: directory.appendingPathComponent("search.sqlite")))
+        try await projectionStore.save(batch: batch, updatedAt: "2026-06-30T06:11:00Z")
+        _ = try await searchIndex.rebuild(from: batch.search, updatedAt: "2026-06-30T06:11:00Z")
+        let adapter = ProjectionStoreSurfaceReadAdapter(projectionStore: projectionStore, searchIndex: searchIndex)
+
+        let todayRead = try await adapter.readToday(minimumEventCursor: batch.today.cursor.eventCursor, inspectedAt: "2026-06-30T06:12:00Z")
+        let goalsRead = try await adapter.readGoals(minimumEventCursor: batch.goals.cursor.eventCursor, inspectedAt: "2026-06-30T06:12:00Z")
+        let timeRead = try await adapter.readTime(minimumEventCursor: batch.time.cursor.eventCursor, inspectedAt: "2026-06-30T06:12:00Z")
+        let youRead = try await adapter.readYou(minimumEventCursor: batch.you.cursor.eventCursor, inspectedAt: "2026-06-30T06:12:00Z")
+        let searchRead = try await adapter.search(
+            SearchRecallQuery(rawText: "adapter", limit: 10),
+            minimumEventCursor: batch.search.cursor.eventCursor,
+            searchedAt: "2026-06-30T06:12:00Z"
+        )
+
+        XCTAssertEqual(todayRead.status, .available)
+        XCTAssertTrue(todayRead.isSurfaceReadable)
+        XCTAssertEqual(todayRead.source, .projectionStoreSQLite)
+        XCTAssertEqual(todayRead.fallbackRole, .rebuildInputOnly)
+        XCTAssertTrue(todayRead.projection?.startHereCommandEventIDs.contains(today.id) == true)
+        XCTAssertEqual(goalsRead.projection?.recordsByGoalID["goal-adapter"], [goal.id])
+        XCTAssertTrue(goalsRead.projection?.proofEventIDs.contains(proof.id) == true)
+        XCTAssertTrue(timeRead.projection?.placementEventIDs.contains(time.id) == true)
+        XCTAssertTrue(youRead.projection?.proofEventIDs.contains(proof.id) == true)
+        XCTAssertEqual(searchRead.projectionState.status, .available)
+        XCTAssertEqual(searchRead.source, .searchStoreFTS)
+        XCTAssertTrue(searchRead.results.contains { $0.provenance.eventID == today.id })
+        XCTAssertEqual(searchRead.indexHealth?.storageHealth.storageTier, .searchStoreFTS)
+
+        let futureCursor = RuntimeEventCursor(
+            sequence: proof.cursor.sequence + 10,
+            eventID: "runtime.event.future",
+            checksum: "future-checksum",
+            occurredAt: "2026-06-30T06:13:00Z"
+        )
+        let staleToday = try await adapter.readToday(minimumEventCursor: futureCursor, inspectedAt: "2026-06-30T06:13:30Z")
+        XCTAssertEqual(staleToday.status, .staleProjection)
+        XCTAssertFalse(staleToday.isSurfaceReadable)
+        XCTAssertEqual(staleToday.repairReceipt?.safeRebuildRequired, true)
+        XCTAssertEqual(staleToday.repairReceipt?.fallbackRole, .rebuildInputOnly)
+
+        let emptyProjectionStore = ProjectionStoreSQLite(databaseURL: directory.appendingPathComponent("empty-projections.sqlite"))
+        let emptyAdapter = ProjectionStoreSurfaceReadAdapter(projectionStore: emptyProjectionStore, searchIndex: searchIndex)
+        let missingYou = try await emptyAdapter.readYou(inspectedAt: "2026-06-30T06:14:00Z")
+        XCTAssertEqual(missingYou.status, .missingProjection)
+        XCTAssertNil(missingYou.projection)
+        XCTAssertEqual(missingYou.repairReceipt?.safeRebuildRequired, true)
+    }
 }
 
 private extension ProjectionEngineTests {
@@ -204,5 +277,15 @@ private extension ProjectionEngineTests {
             candidate.deleteLastPathComponent()
         }
         throw NSError(domain: "ProjectionEngineTests", code: 1)
+    }
+
+    func scratchDirectory() throws -> URL {
+        let directory = URL(fileURLWithPath: "/tmp", isDirectory: true)
+            .appendingPathComponent("ambitions-projection-engine-tests-\(UUID().uuidString)", isDirectory: true)
+        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        addTeardownBlock {
+            try? FileManager.default.removeItem(at: directory)
+        }
+        return directory
     }
 }

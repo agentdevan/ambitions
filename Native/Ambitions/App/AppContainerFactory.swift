@@ -86,6 +86,8 @@ enum AppContainerFactory {
             eventLedger: repositories.eventLedger,
             commandExecutionRecords: repositories.commandExecutionRecords,
             runtimeEvents: repositories.runtimeEvents,
+            projectionStore: repositories.projectionStore,
+            searchIndex: repositories.searchIndex,
             commandJournal: repositories.commandJournal
         )
         let externalCreationImportService = DefaultExternalCreationImportService(
@@ -228,6 +230,8 @@ enum AppContainerFactory {
             runtimeSnapshotLedger: SwiftDataRuntimeSnapshotLedgerRepository(store: store),
             commandExecutionRecords: SwiftDataAmbitionsCommandExecutionRecordRepository(store: store),
             runtimeEvents: runtimeEventStore(for: configuration),
+            projectionStore: projectionStore(for: configuration),
+            searchIndex: searchIndex(for: configuration),
             commandJournal: commandJournal(for: configuration),
             executionLedgerReplayInspection: SwiftDataExecutionLedgerReplayInspectionRepository(store: store),
             graphOperationalRecords: SwiftDataAmbitionGraphOperationalRecordRepository(store: store),
@@ -245,6 +249,20 @@ enum AppContainerFactory {
             return InMemoryRuntimeEventStore()
         }
         return EventStoreSQLite.defaultLiveStore()
+    }
+
+    private static func projectionStore(for configuration: AppBootstrapConfiguration) -> ProjectionStoreSQLite? {
+        if configuration.usesInMemoryStore {
+            return nil
+        }
+        return ProjectionStoreSQLite.defaultLiveStore()
+    }
+
+    private static func searchIndex(for configuration: AppBootstrapConfiguration) -> FTSIndex? {
+        if configuration.usesInMemoryStore {
+            return nil
+        }
+        return FTSIndex(store: SearchStoreFTS.defaultLiveStore())
     }
 
     private static func commandJournal(for configuration: AppBootstrapConfiguration) -> any CommandJournal {

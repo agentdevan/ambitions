@@ -10,12 +10,19 @@ struct RuntimeTransactionCommitOutcome: Sendable, Equatable {
     let transaction: RuntimeTransaction?
     let receipt: RuntimeCommitReceipt
     let replayOutcome: LedgerReplayOutcome
+    let projectionStoreReceipt: ProjectionStoreCommitReceipt?
+    let searchRebuildReceipt: SearchRebuildIndexReceipt?
 
     var appendedNewEvent: Bool {
         disposition == .committed
     }
 
-    static func committed(transaction: RuntimeTransaction, receipt: RuntimeCommitReceipt) -> RuntimeTransactionCommitOutcome {
+    static func committed(
+        transaction: RuntimeTransaction,
+        receipt: RuntimeCommitReceipt,
+        projectionStoreReceipt: ProjectionStoreCommitReceipt?,
+        searchRebuildReceipt: SearchRebuildIndexReceipt?
+    ) -> RuntimeTransactionCommitOutcome {
         RuntimeTransactionCommitOutcome(
             disposition: .committed,
             transaction: transaction.marked(.committed),
@@ -25,7 +32,9 @@ struct RuntimeTransactionCommitOutcome: Sendable, Equatable {
                 decision: .applyFresh,
                 doubleApplyDisposition: .applyOnce,
                 receiptSummary: receipt.receiptID
-            )
+            ),
+            projectionStoreReceipt: projectionStoreReceipt,
+            searchRebuildReceipt: searchRebuildReceipt
         )
     }
 
@@ -39,7 +48,9 @@ struct RuntimeTransactionCommitOutcome: Sendable, Equatable {
                 decision: .replayExistingReceipt,
                 doubleApplyDisposition: .skipDuplicateMutation,
                 receiptSummary: receipt.receiptID
-            )
+            ),
+            projectionStoreReceipt: nil,
+            searchRebuildReceipt: nil
         )
     }
 }
@@ -50,19 +61,25 @@ struct RuntimeTransactionCoordinator: Sendable {
     let validator: RuntimeValidator
     let conflictDetector: RuntimeConflictDetector
     let boundary: PrivateLifeRuntimeBoundary
+    let projectionStore: ProjectionStoreSQLite?
+    let searchIndex: FTSIndex?
 
     init(
         eventStore: any RuntimeEventStore = InMemoryRuntimeEventStore(),
         idempotencyStore: RuntimeIdempotencyStore = RuntimeIdempotencyStore(),
         validator: RuntimeValidator = RuntimeValidator(),
         conflictDetector: RuntimeConflictDetector = RuntimeConflictDetector(),
-        boundary: PrivateLifeRuntimeBoundary = .localOnly
+        boundary: PrivateLifeRuntimeBoundary = .localOnly,
+        projectionStore: ProjectionStoreSQLite? = nil,
+        searchIndex: FTSIndex? = nil
     ) {
         self.eventStore = eventStore
         self.idempotencyStore = idempotencyStore
         self.validator = validator
         self.conflictDetector = conflictDetector
         self.boundary = boundary
+        self.projectionStore = projectionStore
+        self.searchIndex = searchIndex
     }
 
     func prepare(
@@ -136,18 +153,26 @@ struct RuntimeTransactionCoordinator: Sendable {
             throw RuntimeTransactionError.mutationProofIncomplete(commandID: command.id)
         }
 
+        let committedAt = DomainTimestamp.string(from: occurredAt)
         let envelope = try await eventStore.append(transaction.writeSet.event)
         let materialized = try await ProjectionMaterializer(store: eventStore).materializeAll(
             previousCursors: projectionCursors,
-            materializedAt: DomainTimestamp.string(from: occurredAt)
+            materializedAt: committedAt
         )
+        let projectionStoreReceipt = try await projectionStore?.saveWithReceipt(batch: materialized, updatedAt: committedAt)
+        let searchRebuildReceipt = try await searchIndex?.rebuild(from: materialized.search, updatedAt: committedAt)
         let receipt = RuntimeCommitReceipt(
             transaction: transaction,
             eventEnvelope: envelope,
             projectionCursors: materialized.cursors,
-            committedAt: DomainTimestamp.string(from: occurredAt)
+            committedAt: committedAt
         )
         _ = try await idempotencyStore.record(receipt, recordedAt: DomainTimestamp.string(from: occurredAt))
-        return .committed(transaction: transaction, receipt: receipt)
+        return .committed(
+            transaction: transaction,
+            receipt: receipt,
+            projectionStoreReceipt: projectionStoreReceipt,
+            searchRebuildReceipt: searchRebuildReceipt
+        )
     }
 }

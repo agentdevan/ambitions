@@ -20,6 +20,30 @@ struct ProjectionStoreSQLiteHealth: Codable, Sendable, Equatable, Hashable {
     let storageTier: LocalRuntimeStorageTier
 }
 
+struct ProjectionStoreCommitReceipt: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let storedProjectionIDs: [ProjectionID]
+    let cursorSequencesByProjectionID: [ProjectionID: Int64]
+    let updatedAt: String
+    let storageTier: LocalRuntimeStorageTier
+    let localOnly: Bool
+    let schemaVersion: String
+
+    init(
+        records: [StoredProjectionRecord],
+        updatedAt: String,
+        schemaVersion: String = projectionStoreSQLiteSchemaVersion
+    ) {
+        storedProjectionIDs = records.map(\.id).sorted()
+        cursorSequencesByProjectionID = Dictionary(uniqueKeysWithValues: records.map { ($0.id, $0.cursor.sequence) })
+        self.updatedAt = updatedAt
+        storageTier = .projectionStoreSQLite
+        localOnly = true
+        self.schemaVersion = schemaVersion
+        id = "projection-store.commit.\(storedProjectionIDs.map(\.rawValue).joined(separator: ".")).\(updatedAt)"
+    }
+}
+
 actor ProjectionStoreSQLite {
     private let databaseURL: URL
 
@@ -39,6 +63,12 @@ actor ProjectionStoreSQLite {
 
     func save(batch: ProjectionMaterializationBatch, updatedAt: String) async throws {
         try await save(batch.allStoredRecords(updatedAt: updatedAt))
+    }
+
+    func saveWithReceipt(batch: ProjectionMaterializationBatch, updatedAt: String) async throws -> ProjectionStoreCommitReceipt {
+        let records = try batch.allStoredRecords(updatedAt: updatedAt)
+        try await save(records)
+        return ProjectionStoreCommitReceipt(records: records, updatedAt: updatedAt)
     }
 
     func save(_ records: [StoredProjectionRecord]) async throws {

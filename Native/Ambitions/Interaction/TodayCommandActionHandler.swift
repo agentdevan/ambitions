@@ -170,6 +170,8 @@ struct TodayCommandActionHandler {
             commandRecordID: commandRecordID,
             timestamp: timestamp,
             runtimeEvents: repositories.runtimeEvents,
+            projectionStore: repositories.projectionStore,
+            searchIndex: repositories.searchIndex,
             runtimeTransactionIdempotencyStore: runtimeTransactionIdempotencyStore,
             runtimeValidator: runtimeValidator,
             commandJournal: repositories.commandJournal,

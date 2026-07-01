@@ -55,6 +55,12 @@
       "summary": "Runtime event append and projection materialization ownership is restricted to the coordinator and approved rebuild path."
     },
     {
+      "checkId": "projection_store_surface_read_gate",
+      "findings": [],
+      "status": "pass",
+      "summary": "ProjectionStore/SearchStore surface read adapter and command-commit projection persistence markers are present."
+    },
+    {
       "checkId": "runtime_mutation_context_boundaries",
       "findings": [],
       "status": "pass",
@@ -79,14 +85,14 @@
       "summary": "Truth files no longer contain LocalRuntimeOS no-claim blockers."
     }
   ],
-  "generatedAt": "2026-07-01T03:23:36+00:00",
+  "generatedAt": "2026-07-01T04:31:01+00:00",
   "runtimeLaw": "Command -> Event -> Projection -> Receipt -> Replay",
   "status": "green",
   "summary": {
     "blockers": 0,
-    "checks": 11,
+    "checks": 12,
     "green": true,
-    "passed": 11,
+    "passed": 12,
     "warnings": 0
   }
 }

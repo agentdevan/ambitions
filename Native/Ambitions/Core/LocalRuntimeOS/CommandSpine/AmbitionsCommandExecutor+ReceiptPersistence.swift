@@ -81,6 +81,8 @@ extension AmbitionsCommandExecutor {
             commandRecordID: commandRecordID,
             timestamp: timestamp,
             runtimeEvents: runtimeEvents,
+            projectionStore: projectionStore,
+            searchIndex: searchIndex,
             runtimeTransactionIdempotencyStore: runtimeTransactionIdempotencyStore,
             runtimeValidator: runtimeValidator,
             commandJournal: commandJournal,

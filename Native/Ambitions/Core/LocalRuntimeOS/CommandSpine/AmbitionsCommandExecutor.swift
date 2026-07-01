@@ -29,6 +29,8 @@ struct AmbitionsCommandExecutor: CommandExecuting {
     let eventLedger: (any EventLedgerRepository)?
     let commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)?
     let runtimeEvents: (any RuntimeEventStore)?
+    let projectionStore: ProjectionStoreSQLite?
+    let searchIndex: FTSIndex?
     let commandJournal: any CommandJournal
     let runtimeTransactionIdempotencyStore: RuntimeIdempotencyStore
     let smartAttachmentService: (any SmartAttachmentRouting)?
@@ -43,6 +45,8 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         eventLedger: (any EventLedgerRepository)? = nil,
         commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)? = nil,
         runtimeEvents: (any RuntimeEventStore)? = InMemoryRuntimeEventStore(),
+        projectionStore: ProjectionStoreSQLite? = nil,
+        searchIndex: FTSIndex? = nil,
         commandJournal: any CommandJournal = InMemoryCommandJournal(),
         runtimeTransactionIdempotencyStore: RuntimeIdempotencyStore = RuntimeIdempotencyStore(),
         smartAttachmentService: (any SmartAttachmentRouting)? = DefaultSmartAttachmentService(),
@@ -56,6 +60,8 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         self.eventLedger = eventLedger
         self.commandExecutionRecords = commandExecutionRecords
         self.runtimeEvents = runtimeEvents
+        self.projectionStore = projectionStore
+        self.searchIndex = searchIndex
         self.commandJournal = commandJournal
         self.runtimeTransactionIdempotencyStore = runtimeTransactionIdempotencyStore
         self.smartAttachmentService = smartAttachmentService

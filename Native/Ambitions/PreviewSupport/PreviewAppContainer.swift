@@ -82,6 +82,8 @@ enum PreviewAppContainerFactory {
                     eventLedger: runtime.repositories.eventLedger,
                     commandExecutionRecords: runtime.repositories.commandExecutionRecords,
                     runtimeEvents: runtime.repositories.runtimeEvents,
+                    projectionStore: runtime.repositories.projectionStore,
+                    searchIndex: runtime.repositories.searchIndex,
                     commandJournal: runtime.repositories.commandJournal
                 )
             ),

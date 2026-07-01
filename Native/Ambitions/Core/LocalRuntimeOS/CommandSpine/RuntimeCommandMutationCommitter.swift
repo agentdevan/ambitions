@@ -8,6 +8,8 @@ struct RuntimeCommandMutationCommitter: Sendable {
     let commandJournal: any CommandJournal
     let commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)?
     let runtimeEvents: (any RuntimeEventStore)?
+    let projectionStore: ProjectionStoreSQLite?
+    let searchIndex: FTSIndex?
     let runtimeTransactionIdempotencyStore: RuntimeIdempotencyStore
     let compiler: CommandCompiler
     let runtimeValidator: RuntimeValidator
@@ -17,6 +19,8 @@ struct RuntimeCommandMutationCommitter: Sendable {
         commandJournal: any CommandJournal,
         commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)?,
         runtimeEvents: (any RuntimeEventStore)?,
+        projectionStore: ProjectionStoreSQLite? = nil,
+        searchIndex: FTSIndex? = nil,
         runtimeTransactionIdempotencyStore: RuntimeIdempotencyStore = RuntimeIdempotencyStore(),
         compiler: CommandCompiler = CommandCompiler(),
         runtimeValidator: RuntimeValidator = RuntimeValidator(),
@@ -25,6 +29,8 @@ struct RuntimeCommandMutationCommitter: Sendable {
         self.commandJournal = commandJournal
         self.commandExecutionRecords = commandExecutionRecords
         self.runtimeEvents = runtimeEvents
+        self.projectionStore = projectionStore
+        self.searchIndex = searchIndex
         self.runtimeTransactionIdempotencyStore = runtimeTransactionIdempotencyStore
         self.compiler = compiler
         self.runtimeValidator = runtimeValidator
@@ -187,6 +193,8 @@ struct RuntimeCommandMutationCommitter: Sendable {
             commandRecordID: commandRecordID,
             timestamp: timestamp,
             runtimeEvents: runtimeEvents,
+            projectionStore: projectionStore,
+            searchIndex: searchIndex,
             runtimeTransactionIdempotencyStore: runtimeTransactionIdempotencyStore,
             runtimeValidator: runtimeValidator,
             commandJournal: commandJournal,

@@ -116,6 +116,8 @@ enum RuntimeTransactionCommitPolicy {
         commandRecordID: String,
         timestamp: Date,
         runtimeEvents: (any RuntimeEventStore)?,
+        projectionStore: ProjectionStoreSQLite? = nil,
+        searchIndex: FTSIndex? = nil,
         runtimeTransactionIdempotencyStore: RuntimeIdempotencyStore,
         runtimeValidator: RuntimeValidator,
         commandJournal: any CommandJournal,
@@ -148,7 +150,9 @@ enum RuntimeTransactionCommitPolicy {
         let coordinator = RuntimeTransactionCoordinator(
             eventStore: runtimeEvents,
             idempotencyStore: runtimeTransactionIdempotencyStore,
-            validator: runtimeValidator
+            validator: runtimeValidator,
+            projectionStore: projectionStore,
+            searchIndex: searchIndex
         )
 
         do {
@@ -172,6 +176,10 @@ enum RuntimeTransactionCommitPolicy {
                 "runtimeDoubleApplyDisposition": outcome.replayOutcome.doubleApplyDisposition.rawValue,
                 "runtimeProjectionCursorCount": String(outcome.receipt.projectionCursors.count),
                 "runtimeProjectionIDs": outcome.receipt.projectionCursors.map(\.projectionID.rawValue).sorted().joined(separator: ","),
+                "runtimeProjectionStoreStatus": outcome.projectionStoreReceipt == nil ? "not_configured" : "saved",
+                "runtimeProjectionStoreIDs": outcome.projectionStoreReceipt?.storedProjectionIDs.map(\.rawValue).joined(separator: ",") ?? "",
+                "runtimeSearchStoreStatus": outcome.searchRebuildReceipt == nil ? "not_configured" : "rebuilt",
+                "runtimeSearchStoreIndexedRecordCount": outcome.searchRebuildReceipt.map { String($0.indexedRecordCount) } ?? "",
             ]
             if journalReceipt != nil {
                 do {

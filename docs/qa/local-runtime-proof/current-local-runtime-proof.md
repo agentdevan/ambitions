@@ -1,6 +1,6 @@
 # LocalRuntimeProof Gate
 
-Generated: `2026-07-01T03:23:36+00:00`
+Generated: `2026-07-01T04:31:01+00:00`
 Status: `green`
 Runtime law: `Command -> Event -> Projection -> Receipt -> Replay`
 
@@ -8,8 +8,8 @@ This artifact is a runtime-proof gate. It is not Visual Green, Release Green, pr
 
 ## Summary
 
-- Checks: `11`
-- Passed: `11`
+- Checks: `12`
+- Passed: `12`
 - Warnings: `0`
 - Blockers: `0`
 
@@ -49,6 +49,11 @@ This artifact is a runtime-proof gate. It is not Visual Green, Release Green, pr
 
 - Status: `pass`
 - Summary: Runtime event append and projection materialization ownership is restricted to the coordinator and approved rebuild path.
+
+### projection_store_surface_read_gate
+
+- Status: `pass`
+- Summary: ProjectionStore/SearchStore surface read adapter and command-commit projection persistence markers are present.
 
 ### runtime_mutation_context_boundaries
 

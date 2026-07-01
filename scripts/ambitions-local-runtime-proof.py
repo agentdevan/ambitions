@@ -107,9 +107,26 @@ INTEGRATION_MARKERS = {
         "markers": [
             "RuntimeEventStore",
             "ProjectionMaterializer",
+            "projectionStore?.saveWithReceipt",
+            "searchIndex?.rebuild",
             "RuntimeCommitReceipt",
             "RuntimeRollbackPlan",
             "RuntimeIdempotencyStore",
+        ],
+    },
+    "surface_projection_store_consumption": {
+        "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionStoreSurfaceReadAdapter.swift",
+        "markers": [
+            "ProjectionStoreSurfaceReadAdapter",
+            "readToday",
+            "readGoals",
+            "readTime",
+            "readYou",
+            "readSearchProjection",
+            "ProjectionStoreSurfaceReadStatus",
+            ".rebuildInputOnly",
+            "projectionStore.fetchRecord(id: projectionID)",
+            "searchIndex.search",
         ],
     },
     "search_rebuild_from_runtime_events": {
@@ -872,6 +889,85 @@ def check_transaction_coordinator_commit_ownership() -> CheckResult:
     )
 
 
+def check_projection_store_surface_read_gate() -> CheckResult:
+    findings: list[Finding] = []
+    adapter_path = ROOT / "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionStoreSurfaceReadAdapter.swift"
+    if not adapter_path.exists():
+        findings.append(
+            Finding(
+                "blocker",
+                "projection-store-surface-adapter-missing",
+                relative(adapter_path),
+                None,
+                "Today, Goals, Time, You, and Search must have a ProjectionStore-backed read adapter.",
+            )
+        )
+    else:
+        adapter = read_text(adapter_path)
+        required_surface_markers = {
+            "today": ["readToday", ".today", "TodayProjection"],
+            "goals": ["readGoals", ".goals", "GoalsProjection"],
+            "time": ["readTime", ".time", "TimeProjection"],
+            "you": ["readYou", ".you", "YouProjection"],
+            "search": ["readSearchProjection", ".search", "SearchProjection", "searchIndex.search"],
+        }
+        for surface, markers in required_surface_markers.items():
+            for marker in markers:
+                if marker not in adapter:
+                    findings.append(
+                        Finding(
+                            "blocker",
+                            "projection-store-surface-read-bypass",
+                            relative(adapter_path),
+                            None,
+                            f"`{surface}` is missing ProjectionStore/SearchStore consumption marker `{marker}`.",
+                        )
+                    )
+        for marker in [
+            ".staleProjection",
+            ".missingProjection",
+            "ProjectionStoreReadRepairReceipt",
+            "safeRebuildRequired",
+            ".rebuildInputOnly",
+        ]:
+            if marker not in adapter:
+                findings.append(
+                    Finding(
+                        "blocker",
+                        "projection-store-freshness-repair-marker-missing",
+                        relative(adapter_path),
+                        None,
+                        f"ProjectionStore surface reads must expose freshness/rebuild marker `{marker}`.",
+                    )
+                )
+
+    commit_path = ROOT / "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/RuntimeTransactionCommitPolicy.swift"
+    commit_text = read_text(commit_path) if commit_path.exists() else ""
+    for marker in [
+        "projectionStore: ProjectionStoreSQLite?",
+        "searchIndex: FTSIndex?",
+        "runtimeProjectionStoreStatus",
+        "runtimeSearchStoreStatus",
+    ]:
+        if marker not in commit_text:
+            findings.append(
+                Finding(
+                    "blocker",
+                    "projection-store-commit-policy-marker-missing",
+                    relative(commit_path),
+                    None,
+                    f"Command commit policy must expose projection/search commit marker `{marker}`.",
+                )
+            )
+
+    return make_result(
+        "projection_store_surface_read_gate",
+        findings,
+        "ProjectionStore/SearchStore surface read adapter and command-commit projection persistence markers are present.",
+        "{count} ProjectionStore surface-read blocker(s) remain.",
+    )
+
+
 def check_runtime_mutation_context_boundaries() -> CheckResult:
     findings: list[Finding] = []
     required_markers = {
@@ -1033,6 +1129,7 @@ def run_checks() -> list[CheckResult]:
         check_command_event_reconciliation(),
         check_meaningful_mutation_commit_policy(),
         check_transaction_coordinator_commit_ownership(),
+        check_projection_store_surface_read_gate(),
         check_runtime_mutation_context_boundaries(),
         scan_mutation_bypasses(),
         scan_feature_service_mutation_authority(),
@@ -1165,6 +1262,7 @@ def run_self_test() -> int:
     assert not is_included_mutation_scan_path(ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Storage" / "ObjectStoreSwiftData.swift")
     assert "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeTransactionCoordinator.swift" in RUNTIME_EVENT_APPEND_ALLOWED_PATHS
     assert "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/SearchRebuildPipeline.swift" in PROJECTION_MATERIALIZATION_ALLOWED_PATHS
+    assert "surface_projection_store_consumption" in INTEGRATION_MARKERS
     assert RUNTIME_MUTATION_CONTEXT_PATH.endswith("TransactionKernel/RuntimeMutationContext.swift")
     service_write = "try await repositories.goals.saveGoals([goal])"
     service_match = SERVICE_MUTATION_CALL_PATTERN.search(service_write)

@@ -154,6 +154,44 @@ final class LocalRuntimeOSTransactionKernelOwnershipTests: XCTestCase {
         XCTAssertEqual(outcome.replayOutcome.doubleApplyDisposition, .applyOnce)
     }
 
+    func testCommitPersistsProjectionStoreAndRebuildsSearchIndexWhenConfigured() async throws {
+        let directory = try scratchDirectory()
+        let eventStore = InMemoryRuntimeEventStore()
+        let projectionStore = ProjectionStoreSQLite(databaseURL: directory.appendingPathComponent("projections.sqlite"))
+        let searchIndex = FTSIndex(store: SearchStoreFTS(databaseURL: directory.appendingPathComponent("search.sqlite")))
+        let coordinator = RuntimeTransactionCoordinator(
+            eventStore: eventStore,
+            projectionStore: projectionStore,
+            searchIndex: searchIndex
+        )
+        let command = stepCommand(id: "command-commit-projections")
+        let occurredAt = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-25T12:05:00Z"))
+
+        let outcome = try await coordinator.commit(
+            command: command,
+            beforeSnapshot: "today.before",
+            afterSnapshot: "Open step projected into surface read stores.",
+            targetSurface: .today,
+            occurredAt: occurredAt
+        )
+
+        let storedRecords = try await projectionStore.fetchAllRecords()
+        let searchResults = try await searchIndex.search(
+            SearchRecallQuery(rawText: "", limit: 10),
+            searchedAt: "2026-04-25T12:06:00Z"
+        )
+
+        XCTAssertEqual(outcome.projectionStoreReceipt?.storedProjectionIDs, ProjectionID.allCases.sorted())
+        XCTAssertEqual(outcome.searchRebuildReceipt?.projectionID, .search)
+        XCTAssertEqual(outcome.searchRebuildReceipt?.cursor, outcome.receipt.projectionCursors.first { $0.projectionID == .search })
+        XCTAssertEqual(storedRecords.map(\.id).sorted(), ProjectionID.allCases.sorted())
+        guard let todayRecord = try await projectionStore.fetchRecord(id: .today) else {
+            return XCTFail("Expected persisted Today projection.")
+        }
+        XCTAssertEqual(todayRecord.cursor.eventCursor, outcome.receipt.eventCursor)
+        XCTAssertTrue(searchResults.contains { $0.provenance.eventID == outcome.receipt.eventID })
+    }
+
     func testDuplicateCommitReturnsPriorReceiptWithoutAppendingSecondEvent() async throws {
         let eventStore = InMemoryRuntimeEventStore()
         let idempotencyStore = RuntimeIdempotencyStore()
@@ -274,5 +312,15 @@ final class LocalRuntimeOSTransactionKernelOwnershipTests: XCTestCase {
             payload: AmbitionsCommandPayload(title: "Open step"),
             createdAt: "2026-04-25T12:00:00Z"
         )
+    }
+
+    private func scratchDirectory() throws -> URL {
+        let directory = URL(fileURLWithPath: "/tmp", isDirectory: true)
+            .appendingPathComponent("ambitions-transaction-kernel-tests-\(UUID().uuidString)", isDirectory: true)
+        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        addTeardownBlock {
+            try? FileManager.default.removeItem(at: directory)
+        }
+        return directory
     }
 }

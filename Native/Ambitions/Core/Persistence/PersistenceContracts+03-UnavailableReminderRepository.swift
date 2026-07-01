@@ -158,6 +158,8 @@ struct AppRepositories: Sendable {
     let runtimeSnapshotLedger: (any RuntimeSnapshotLedgerRepository)?
     let commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)?
     let runtimeEvents: (any RuntimeEventStore)?
+    let projectionStore: ProjectionStoreSQLite?
+    let searchIndex: FTSIndex?
     let commandJournal: any CommandJournal
     let executionLedgerReplayInspection: (any ExecutionLedgerReplayInspectionRepository)?
     let graphOperationalRecords: (any AmbitionGraphOperationalRecordRepository)?
@@ -183,6 +185,8 @@ struct AppRepositories: Sendable {
         runtimeSnapshotLedger: (any RuntimeSnapshotLedgerRepository)? = nil,
         commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)? = nil,
         runtimeEvents: (any RuntimeEventStore)? = nil,
+        projectionStore: ProjectionStoreSQLite? = nil,
+        searchIndex: FTSIndex? = nil,
         commandJournal: any CommandJournal = InMemoryCommandJournal(),
         executionLedgerReplayInspection: (any ExecutionLedgerReplayInspectionRepository)? = nil,
         graphOperationalRecords: (any AmbitionGraphOperationalRecordRepository)? = nil,
@@ -207,6 +211,8 @@ struct AppRepositories: Sendable {
         self.runtimeSnapshotLedger = runtimeSnapshotLedger
         self.commandExecutionRecords = commandExecutionRecords
         self.runtimeEvents = runtimeEvents
+        self.projectionStore = projectionStore
+        self.searchIndex = searchIndex
         self.commandJournal = commandJournal
         self.executionLedgerReplayInspection = executionLedgerReplayInspection
         self.graphOperationalRecords = graphOperationalRecords

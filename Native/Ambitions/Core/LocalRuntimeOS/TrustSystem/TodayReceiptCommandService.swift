@@ -18,7 +18,9 @@ struct TodayReceiptCommandService: TodayReceiptCommanding {
         committer = RuntimeCommandMutationCommitter(
             commandJournal: repositories.commandJournal,
             commandExecutionRecords: repositories.commandExecutionRecords,
-            runtimeEvents: repositories.runtimeEvents
+            runtimeEvents: repositories.runtimeEvents,
+            projectionStore: repositories.projectionStore,
+            searchIndex: repositories.searchIndex
         )
     }
 

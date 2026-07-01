@@ -51,7 +51,11 @@ final class AppContainerFactoryTests: XCTestCase {
 
         XCTAssertEqual(runtimeEvents.storeKind, .sqlite)
         XCTAssertTrue(runtimeEvents is EventStoreSQLite)
+        XCTAssertNotNil(repositories.projectionStore)
+        XCTAssertNotNil(repositories.searchIndex)
         XCTAssertTrue(factorySource.contains("EventStoreSQLite.defaultLiveStore()"))
+        XCTAssertTrue(factorySource.contains("ProjectionStoreSQLite.defaultLiveStore()"))
+        XCTAssertTrue(factorySource.contains("SearchStoreFTS.defaultLiveStore()"))
         XCTAssertFalse(
             factorySource.contains("return FileRuntimeEventStore.defaultLiveStore()"),
             "Persistent AppContainerFactory runtime events must not use JSONL as live authority."
