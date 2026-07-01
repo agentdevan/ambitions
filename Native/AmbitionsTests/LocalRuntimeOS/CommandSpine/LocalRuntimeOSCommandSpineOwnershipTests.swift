@@ -18,6 +18,7 @@ final class LocalRuntimeOSCommandSpineOwnershipTests: XCTestCase {
             "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandReceiptFactory.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandReplayAdapter.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandValidation.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/RuntimeEventCommandReplayAdapter.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/AmbitionsCommandExecutor.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/PolicyGuardedCommandExecutor.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/RuntimeValidator.swift",

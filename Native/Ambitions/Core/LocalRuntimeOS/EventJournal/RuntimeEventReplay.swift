@@ -4,11 +4,15 @@ struct RuntimeCommandReplayProjection: Equatable, Identifiable {
     let id: String
     let commandID: String
     let eventCursor: RuntimeEventCursor
+    let recordedAt: String
+    let commandRecordID: String?
     let replayOutcome: LedgerReplayOutcome
     let resultStatus: AmbitionsCommandExecutionStatus
     let resultSummary: String
+    let resultRoute: AmbitionsCommandDestination?
     let target: AmbitionsCommandTarget
     let eventLedgerEntryIDs: [String]
+    let recommendationExplanationIDs: [String]
     let metadata: [String: String]
 
     init(envelope: RuntimeEventEnvelope, payload: RuntimeCommandEventPayload) {
@@ -16,6 +20,8 @@ struct RuntimeCommandReplayProjection: Equatable, Identifiable {
         id = "runtime.event.replay.\(commandID)"
         self.commandID = commandID
         eventCursor = envelope.cursor
+        recordedAt = envelope.event.occurredAt
+        commandRecordID = payload.commandRecordID
         replayOutcome = LedgerReplayOutcome(
             idempotencyKey: LedgerIdempotencyKey(commandID),
             decision: .replayExistingReceipt,
@@ -24,8 +30,10 @@ struct RuntimeCommandReplayProjection: Equatable, Identifiable {
         )
         resultStatus = payload.resultStatus
         resultSummary = payload.resultSummary
+        resultRoute = payload.resultRoute
         target = envelope.event.target
         eventLedgerEntryIDs = payload.eventLedgerEntryIDs
+        recommendationExplanationIDs = payload.recommendationExplanationIDs
         metadata = payload.resultMetadata.merging([
             "runtimeEventID": envelope.id,
             "runtimeEventSequence": String(envelope.sequence),

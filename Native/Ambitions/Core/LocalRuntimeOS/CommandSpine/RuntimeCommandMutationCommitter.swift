@@ -36,10 +36,19 @@ struct RuntimeCommandMutationCommitter: Sendable {
         context: CommandExecutionContext,
         mutation: () async throws -> AmbitionsCommandExecutionResult
     ) async -> AmbitionsCommandExecutionResult {
-        let replayAdapter = CommandReplayAdapter(commandExecutionRecords: commandExecutionRecords)
+        let replayAdapter = RuntimeEventCommandReplayAdapter(
+            runtimeEvents: runtimeEvents,
+            commandExecutionRecords: commandExecutionRecords
+        )
         switch await replayAdapter.lookup(command) {
-        case .record(let record):
-            return replayAdapter.replayResult(for: command, record: record)
+        case .runtimeEvent(let projection, let commandRecordMaterialization):
+            return replayAdapter.replayResult(
+                for: command,
+                projection: projection,
+                commandRecordMaterialization: commandRecordMaterialization
+            )
+        case .commandRecordWithoutRuntimeEvent(let record):
+            return replayAdapter.commandRecordWithoutRuntimeEventResult(for: command, record: record)
         case .lookupUnavailable:
             return await persist(
                 command: command,

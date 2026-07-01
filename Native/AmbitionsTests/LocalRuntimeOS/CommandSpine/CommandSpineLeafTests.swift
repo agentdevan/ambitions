@@ -252,6 +252,103 @@ final class CommandSpineLeafTests: XCTestCase {
         XCTAssertEqual(events.map(\.event.commandID), [closureCommand.id, preferencesCommand.id])
     }
 
+    func testRuntimeCommitterReplaysRuntimeEventBeforeMaterializedCommandRecord() async throws {
+        let now = Date(timeIntervalSince1970: 1_777_113_600)
+        let runtimeEvents = InMemoryRuntimeEventStore()
+        let commandRecords = InMemoryAmbitionsCommandExecutionRecordRepository()
+        let committer = RuntimeCommandMutationCommitter(
+            commandJournal: InMemoryCommandJournal(),
+            commandExecutionRecords: commandRecords,
+            runtimeEvents: runtimeEvents
+        )
+        let command = quickCaptureCommand(id: "command.runtime-event-authority", now: now)
+        var mutationExecutionCount = 0
+
+        let first = await committer.commit(
+            command: command,
+            context: CommandExecutionContext(now: now)
+        ) {
+            mutationExecutionCount += 1
+            return AmbitionsCommandExecutionResult(
+                status: .succeeded,
+                summary: "Saved once.",
+                route: .captureInbox,
+                target: AmbitionsCommandTarget(captureID: "capture-runtime-event-authority")
+            )
+        }
+        let second = await committer.commit(
+            command: command,
+            context: CommandExecutionContext(now: now.addingTimeInterval(60))
+        ) {
+            mutationExecutionCount += 1
+            return AmbitionsCommandExecutionResult(
+                status: .succeeded,
+                summary: "Should not run twice.",
+                route: .captureInbox,
+                target: AmbitionsCommandTarget(captureID: "capture-runtime-event-authority-duplicate")
+            )
+        }
+        let events = try await runtimeEvents.fetchEvents(matching: .all, limit: nil)
+        let record = try await commandRecords.fetchRecord(commandID: command.id)
+
+        XCTAssertEqual(first.status, .succeeded)
+        XCTAssertEqual(second.status, .succeeded)
+        XCTAssertEqual(second.summary, "Replayed runtime event receipt: Saved once.")
+        XCTAssertEqual(mutationExecutionCount, 1)
+        XCTAssertEqual(events.count, 1)
+        XCTAssertEqual(record?.result.metadata["runtimeReplayDecision"], LedgerReplayDecision.applyFresh.rawValue)
+        XCTAssertEqual(second.metadata["ledgerRecordKind"], LedgerRecordTaxonomyKind.event.rawValue)
+        XCTAssertEqual(second.metadata["runtimeReplayAuthority"], "runtime_event_journal")
+        XCTAssertEqual(second.metadata["runtimeReplaySource"], "runtime_event")
+        XCTAssertEqual(second.metadata["runtimeReplayCommandRecordMaterialization"], "already_materialized")
+        XCTAssertEqual(second.metadata["doubleApplyDisposition"], LedgerDoubleApplyDisposition.skipDuplicateMutation.rawValue)
+    }
+
+    func testRuntimeCommitterBlocksCommandRecordReplayWhenRuntimeEventIsMissing() async throws {
+        let now = Date(timeIntervalSince1970: 1_777_113_600)
+        let runtimeEvents = InMemoryRuntimeEventStore()
+        let commandRecords = InMemoryAmbitionsCommandExecutionRecordRepository()
+        let command = quickCaptureCommand(id: "command.command-record-without-event", now: now)
+        try await commandRecords.append(
+            AmbitionsCommandExecutionRecord(
+                command: command,
+                result: AmbitionsCommandExecutionResult(
+                    status: .succeeded,
+                    summary: "Receipt exists without event.",
+                    target: AmbitionsCommandTarget(captureID: "capture-stale-record")
+                ),
+                recordedAt: DomainTimestamp.string(from: now)
+            )
+        )
+        let committer = RuntimeCommandMutationCommitter(
+            commandJournal: InMemoryCommandJournal(),
+            commandExecutionRecords: commandRecords,
+            runtimeEvents: runtimeEvents
+        )
+        var mutationExecuted = false
+
+        let result = await committer.commit(
+            command: command,
+            context: CommandExecutionContext(now: now.addingTimeInterval(60))
+        ) {
+            mutationExecuted = true
+            return AmbitionsCommandExecutionResult(
+                status: .succeeded,
+                summary: "Should not execute.",
+                target: AmbitionsCommandTarget(captureID: "capture-should-not-write")
+            )
+        }
+        let events = try await runtimeEvents.fetchEvents(matching: .all, limit: nil)
+
+        XCTAssertFalse(mutationExecuted)
+        XCTAssertTrue(events.isEmpty)
+        XCTAssertEqual(result.status, .blocked)
+        XCTAssertEqual(result.metadata["blockedBy"], "runtime_event_missing_for_command_record")
+        XCTAssertEqual(result.metadata["runtimeReplayAuthority"], "runtime_event_journal")
+        XCTAssertEqual(result.metadata["runtimeReplaySource"], "command_record_repair_state")
+        XCTAssertEqual(result.metadata["doubleApplyDisposition"], LedgerDoubleApplyDisposition.skipUnverifiedMutation.rawValue)
+    }
+
     func testCommandReplayAdapterReturnsPriorReceiptWithCommandIdempotencyKey() async throws {
         let now = Date(timeIntervalSince1970: 1_777_113_600)
         let repository = InMemoryAmbitionsCommandExecutionRecordRepository()

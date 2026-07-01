@@ -74,10 +74,19 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         _ command: AmbitionsCommand,
         context: CommandExecutionContext
     ) async -> AmbitionsCommandExecutionResult {
-        let replayAdapter = CommandReplayAdapter(commandExecutionRecords: commandExecutionRecords)
+        let replayAdapter = RuntimeEventCommandReplayAdapter(
+            runtimeEvents: runtimeEvents,
+            commandExecutionRecords: commandExecutionRecords
+        )
         switch await replayAdapter.lookup(command) {
-        case .record(let replayRecord):
-            return replayAdapter.replayResult(for: command, record: replayRecord)
+        case .runtimeEvent(let projection, let commandRecordMaterialization):
+            return replayAdapter.replayResult(
+                for: command,
+                projection: projection,
+                commandRecordMaterialization: commandRecordMaterialization
+            )
+        case .commandRecordWithoutRuntimeEvent(let record):
+            return replayAdapter.commandRecordWithoutRuntimeEventResult(for: command, record: record)
         case .lookupUnavailable:
             return replayAdapter.lookupUnavailableResult(for: command)
         case .noRecord:

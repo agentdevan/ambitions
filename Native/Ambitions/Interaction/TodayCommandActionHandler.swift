@@ -31,10 +31,17 @@ struct TodayCommandActionHandler {
         command: AmbitionsCommand,
         now: Date
     ) async throws -> TodayActionResponse {
-        let replayAdapter = CommandReplayAdapter(commandExecutionRecords: repositories.commandExecutionRecords)
+        let replayAdapter = RuntimeEventCommandReplayAdapter(
+            runtimeEvents: repositories.runtimeEvents,
+            commandExecutionRecords: repositories.commandExecutionRecords
+        )
         switch await replayAdapter.lookup(command) {
-        case .record:
+        case .runtimeEvent:
             return TodayActionResponse(message: nil)
+        case .commandRecordWithoutRuntimeEvent(let record):
+            let result = replayAdapter.commandRecordWithoutRuntimeEventResult(for: command, record: record)
+            await persistCommandExecution(command: command, result: result, at: now)
+            return blockedActionResponse(for: .blockedByMissingFoundation)
         case .lookupUnavailable:
             let result = replayAdapter.lookupUnavailableResult(for: command)
             await persistCommandExecution(command: command, result: result, at: now)

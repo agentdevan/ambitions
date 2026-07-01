@@ -85,7 +85,7 @@ INTEGRATION_MARKERS = {
     "today_command_append_before_mutation": {
         "path": "Native/Ambitions/Interaction/TodayCommandActionHandler.swift",
         "markers": [
-            "CommandReplayAdapter",
+            "RuntimeEventCommandReplayAdapter",
             "commandJournal.append",
             "persistCommandExecution",
             "RuntimeTransactionCommitPolicy.resultByCommittingRuntimeTransaction",
@@ -505,6 +505,21 @@ def check_command_event_reconciliation() -> CheckResult:
             "command.event_without_journal",
             "command.event_missing_journal_reference",
             "command.journal_link_missing_event",
+        ],
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "EventJournal" / "RuntimeEventCommandReplayAdapter.swift": [
+            "RuntimeEventReplay(store: runtimeEvents).replay(commandID: command.id)",
+            "commandRecordWithoutRuntimeEvent",
+            "runtime_event_missing_for_command_record",
+            "runtimeReplayAuthority",
+            "repaired_from_runtime_event",
+        ],
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "CommandSpine" / "AmbitionsCommandExecutor.swift": [
+            "RuntimeEventCommandReplayAdapter",
+            "runtimeEvents: runtimeEvents",
+        ],
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "CommandSpine" / "RuntimeCommandMutationCommitter.swift": [
+            "RuntimeEventCommandReplayAdapter",
+            "runtimeEvents: runtimeEvents",
         ],
     }
     for path, markers in required_markers.items():
