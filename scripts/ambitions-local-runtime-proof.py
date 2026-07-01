@@ -1952,6 +1952,109 @@ def check_runtime_mutation_context_boundaries() -> CheckResult:
     )
 
 
+def check_runtime_doctor_local_drift_repair_gate() -> CheckResult:
+    findings: list[Finding] = []
+    required_markers = {
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "MigrationRepair" / "RuntimeDoctorRepairOperator.swift": [
+            "runtimeDoctorRepairOperatorSchemaVersion",
+            "RuntimeDoctorHealthDomain",
+            "case commandJournal = \"command_journal\"",
+            "case eventStore = \"event_store\"",
+            "case projectionStore = \"projection_store\"",
+            "case searchIndex = \"search_index\"",
+            "case blobVault = \"blob_vault\"",
+            "case sideEffectOutbox = \"side_effect_outbox\"",
+            "case syncContinuity = \"sync_continuity\"",
+            "case privacyBoundary = \"privacy_boundary\"",
+            "case migrationState = \"migration_state\"",
+            "case storageTier = \"storage_tier\"",
+            "RuntimeDoctorHealthReaders",
+            "func commandJournal(",
+            "func eventStore(",
+            "func projectionStore(",
+            "func searchIndex(",
+            "func blobVault(",
+            "func sideEffectOutbox(",
+            "func syncContinuity(",
+            "func privacyBoundary(",
+            "func migrationState(",
+            "func storageTier(",
+            "RuntimeDoctorRepairPlan",
+            "RuntimeDoctorRepairReceipt",
+            "RuntimeDoctorRepairProof",
+            "case projectionRebuild = \"projection_rebuild\"",
+            "case searchRebuild = \"search_rebuild\"",
+            "case commandEventReconciliation = \"command_event_reconciliation\"",
+            "case corruptBlobQuarantine = \"corrupt_blob_quarantine\"",
+            "case dryMigration = \"dry_migration\"",
+            "case preMigrationBackup = \"pre_migration_backup\"",
+            "case restoreBackup = \"restore_backup\"",
+            "case restoreRollback = \"restore_rollback\"",
+            "beforeProof",
+            "expectedAfterProof",
+            "privatePayloadIncluded: false",
+            "executionAllowed: false",
+            "destructiveResetAllowed: false",
+            "No private details leave this device.",
+        ],
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "MigrationRepair" / "RuntimeDoctor.swift": [
+            "func diagnoseLocalDrift(",
+            "RuntimeDoctorRepairOperator(",
+            "diagnose(snapshot: snapshot)",
+        ],
+        ROOT / "Native" / "AmbitionsTests" / "LocalRuntimeOS" / "MigrationRepair" / "RuntimeDoctorTests.swift": [
+            "testLocalDriftReadersReturnReceiptBackedPreviewPlansForEveryRequiredDomain",
+            "testYouDiagnosticsAreRedactedLocalOnlyAndDoNotExposePrivatePayloads",
+            "testHealthyRuntimeDoctorReadersDoNotAuthorizeRepairExecution",
+            "RuntimeDoctorHealthDomain.allCases",
+            "RuntimeDoctorHealthReaders",
+            ".projectionRebuild",
+            ".searchRebuild",
+            ".commandEventReconciliation",
+            ".corruptBlobQuarantine",
+            ".dryMigration",
+            ".preMigrationBackup",
+            ".restoreBackup",
+            ".restoreRollback",
+            "privatePayloadIncluded == false",
+        ],
+        ROOT / "Native" / "AmbitionsTests" / "LocalRuntimeOS" / "MigrationRepair" / "MigrationRepairOwnershipTests.swift": [
+            "RuntimeDoctorRepairOperator.swift",
+        ],
+    }
+    for path, markers in required_markers.items():
+        if not path.exists():
+            findings.append(
+                Finding(
+                    "blocker",
+                    "runtime-doctor-local-drift-repair-missing-source",
+                    relative(path),
+                    None,
+                    "RuntimeDoctor local drift repair source or tests are missing.",
+                )
+            )
+            continue
+        text = read_text(path)
+        for marker in markers:
+            if marker not in text:
+                findings.append(
+                    Finding(
+                        "blocker",
+                        "runtime-doctor-local-drift-repair-marker-missing",
+                        relative(path),
+                        None,
+                        f"Missing RuntimeDoctor local drift repair marker `{marker}`.",
+                    )
+                )
+
+    return make_result(
+        "runtime_doctor_local_drift_repair_gate",
+        findings,
+        "RuntimeDoctor has redacted local drift readers, receipt-backed preview repair plans, and focused tests.",
+        "{count} RuntimeDoctor local drift repair blocker(s) remain.",
+    )
+
+
 def check_truth_file_gaps() -> CheckResult:
     findings: list[Finding] = []
     truth_files = [IMPLEMENTATION_TRUTH, PRODUCT_DESIGN_TRUTH]
@@ -2008,6 +2111,7 @@ def run_checks() -> list[CheckResult]:
         check_side_effect_local_commit_receipt_gate(),
         check_trust_system_runtime_lineage_gate(),
         check_runtime_mutation_context_boundaries(),
+        check_runtime_doctor_local_drift_repair_gate(),
         scan_mutation_bypasses(),
         scan_feature_service_mutation_authority(),
         check_truth_file_gaps(),
@@ -2149,6 +2253,7 @@ def run_self_test() -> int:
     assert any(result.check_id == "capture_intake_durability_gate" for result in [check_capture_intake_durability_gate()])
     assert any(result.check_id == "side_effect_local_commit_receipt_gate" for result in [check_side_effect_local_commit_receipt_gate()])
     assert any(result.check_id == "trust_system_runtime_lineage_gate" for result in [check_trust_system_runtime_lineage_gate()])
+    assert any(result.check_id == "runtime_doctor_local_drift_repair_gate" for result in [check_runtime_doctor_local_drift_repair_gate()])
     assert RUNTIME_MUTATION_CONTEXT_PATH.endswith("TransactionKernel/RuntimeMutationContext.swift")
     service_write = "try await repositories.goals.saveGoals([goal])"
     service_match = SERVICE_MUTATION_CALL_PATTERN.search(service_write)

@@ -175,6 +175,15 @@ struct RuntimeDoctor: Sendable {
         )
     }
 
+    func diagnoseLocalDrift(
+        snapshot: RuntimeDoctorHealthSnapshot
+    ) -> RuntimeDoctorRepairAssessment {
+        RuntimeDoctorRepairOperator(
+            timestampProvider: timestampProvider,
+            idProvider: idProvider
+        ).diagnose(snapshot: snapshot)
+    }
+
     private func commandEventReplayIssues(
         commandRecords: [AmbitionsCommandExecutionRecord],
         runtimeEvents: [RuntimeEventEnvelope]

@@ -13,6 +13,7 @@ final class MigrationRepairOwnershipTests: XCTestCase {
             "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/StoreInvariantChecker.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/CorruptionQuarantine.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/RuntimeDoctor.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/RuntimeDoctorRepairOperator.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/RepairPlanEngine.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/RestoreRollback.swift",
         ]
