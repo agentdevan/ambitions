@@ -5,12 +5,15 @@ let runtimeDoctorSchemaVersion = "storage_migration_recovery.native.v1"
 enum RuntimeDoctorMode: String, Sendable, Equatable, Hashable {
     case normal = "normal"
     case migrationReviewRequired = "migration_review_required"
+    case replayRepairRequired = "replay_repair_required"
     case corruptionReviewRequired = "corruption_review_required"
 }
 
 enum RuntimeDoctorIssueKind: String, Sendable, Equatable, Hashable {
     case migrationReadinessBlocked = "migration_readiness_blocked"
     case missingPreMigrationBackupReceipt = "missing_pre_migration_backup_receipt"
+    case commandRecordMissingRuntimeEvent = "command_record_missing_runtime_event"
+    case runtimeEventMissingCommandRecord = "runtime_event_missing_command_record"
     case corruptStoreSignal = "corrupt_store_signal"
     case destructiveResetNotAuthorized = "destructive_reset_not_authorized"
 }
@@ -79,7 +82,9 @@ struct RuntimeDoctor: Sendable {
         plan: MigrationPlan,
         readiness: RepairPlan,
         preMigrationBackup: PreMigrationBackupReceipt?,
-        recoverySignals: [CorruptionQuarantineSignal] = []
+        recoverySignals: [CorruptionQuarantineSignal] = [],
+        commandRecords: [AmbitionsCommandExecutionRecord] = [],
+        runtimeEvents: [RuntimeEventEnvelope] = []
     ) -> RuntimeDoctorAssessment {
         var issues: [RuntimeDoctorIssue] = []
         let quarantineDecision = corruptionQuarantine.evaluate(signals: recoverySignals)
@@ -124,9 +129,19 @@ struct RuntimeDoctor: Sendable {
             )
         }
 
+        issues += commandEventReplayIssues(
+            commandRecords: commandRecords,
+            runtimeEvents: runtimeEvents
+        )
+
         let mode: RuntimeDoctorMode
         if quarantineDecision.quarantineRequired {
             mode = .corruptionReviewRequired
+        } else if issues.contains(where: { issue in
+            issue.kind == .commandRecordMissingRuntimeEvent ||
+                issue.kind == .runtimeEventMissingCommandRecord
+        }) {
+            mode = .replayRepairRequired
         } else if issues.isEmpty {
             mode = .normal
         } else {
@@ -158,5 +173,46 @@ struct RuntimeDoctor: Sendable {
             receipt: receipt,
             issues: issues.sorted { $0.id < $1.id }
         )
+    }
+
+    private func commandEventReplayIssues(
+        commandRecords: [AmbitionsCommandExecutionRecord],
+        runtimeEvents: [RuntimeEventEnvelope]
+    ) -> [RuntimeDoctorIssue] {
+        let runtimeCommandEvents = runtimeEvents.compactMap { envelope -> (commandID: String, eventID: String)? in
+            guard case .commandExecution = envelope.event.payload,
+                  let commandID = envelope.event.commandID
+            else { return nil }
+            return (commandID, envelope.id)
+        }
+        let runtimeCommandIDs = Set(runtimeCommandEvents.map(\.commandID))
+        let commandRecordIDs = Set(commandRecords.map(\.commandID))
+        var issues: [RuntimeDoctorIssue] = []
+
+        for record in commandRecords.sorted(by: { $0.commandID < $1.commandID })
+            where runtimeCommandIDs.contains(record.commandID) == false {
+            let fingerprint = LocalRuntimeDiagnosticsRedactor.fingerprint(record.commandID)
+            issues.append(
+                RuntimeDoctorIssue(
+                    id: "command_record_missing_runtime_event.\(fingerprint)",
+                    kind: .commandRecordMissingRuntimeEvent,
+                    message: "Command execution record has no runtime event replay authority; replay must pause for repair before mutation."
+                )
+            )
+        }
+
+        for event in runtimeCommandEvents.sorted(by: { $0.eventID < $1.eventID })
+            where commandRecordIDs.contains(event.commandID) == false {
+            let fingerprint = LocalRuntimeDiagnosticsRedactor.fingerprint(event.eventID)
+            issues.append(
+                RuntimeDoctorIssue(
+                    id: "runtime_event_missing_command_record.\(fingerprint)",
+                    kind: .runtimeEventMissingCommandRecord,
+                    message: "Runtime command event is replayable canonical truth but lacks a materialized command execution receipt."
+                )
+            )
+        }
+
+        return issues
     }
 }

@@ -82,6 +82,15 @@ INTEGRATION_MARKERS = {
             "command.journal_link_missing_event",
         ],
     },
+    "runtime_doctor_replay_repair": {
+        "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/RuntimeDoctor.swift",
+        "markers": [
+            "replay_repair_required",
+            "command_record_missing_runtime_event",
+            "runtime_event_missing_command_record",
+            "commandEventReplayIssues",
+        ],
+    },
     "today_command_append_before_mutation": {
         "path": "Native/Ambitions/Interaction/TodayCommandActionHandler.swift",
         "markers": [
@@ -505,6 +514,12 @@ def check_command_event_reconciliation() -> CheckResult:
             "command.event_without_journal",
             "command.event_missing_journal_reference",
             "command.journal_link_missing_event",
+        ],
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "MigrationRepair" / "RuntimeDoctor.swift": [
+            "replay_repair_required",
+            "command_record_missing_runtime_event",
+            "runtime_event_missing_command_record",
+            "commandEventReplayIssues",
         ],
         ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "EventJournal" / "RuntimeEventCommandReplayAdapter.swift": [
             "RuntimeEventReplay(store: runtimeEvents).replay(commandID: command.id)",
