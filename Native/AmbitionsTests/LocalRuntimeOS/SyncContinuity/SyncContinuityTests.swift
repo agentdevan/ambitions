@@ -7,6 +7,7 @@ final class SyncContinuityTests: XCTestCase {
         let requiredPaths = [
             "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/LocalAuthoritativeSyncModel.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/CloudKitContinuityAdapter.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SyncContinuityAuthorityGate.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SyncEligibilityPolicy.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SyncEnvelope.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/CausalMergeEngine.swift",
@@ -106,6 +107,143 @@ final class SyncContinuityTests: XCTestCase {
         XCTAssertEqual(deniedDecision.operation, .review)
     }
 
+    func testAuthorityGateAllowsOnlyRuntimeEventsAndApprovedProjections() throws {
+        let runtimeEventEnvelope = try makeEnvelope(
+            recordName: "receipt.event-authority",
+            family: .receipt,
+            payloadClass: .receiptMetadata
+        )
+        let projectionEnvelope = try makeEnvelope(
+            recordName: "projection.privacy",
+            family: .syncLedger,
+            payloadClass: .syncLedger,
+            includeRuntimeLineage: false
+        )
+        let directObjectEnvelope = try makeEnvelope(
+            recordName: "object.direct",
+            family: .step,
+            payloadClass: .eventEnvelopeMetadata,
+            includeRuntimeLineage: false
+        )
+
+        let gate = SyncContinuityAuthorityGate()
+        let runtimeEventDecision = gate.evaluate(
+            SyncContinuityAuthorityEvidence(
+                envelope: runtimeEventEnvelope,
+                sourceAuthority: .runtimeEvent,
+                privacyClass: .syncMetadata,
+                runtimeEventID: "runtime_event.receipt.event-authority",
+                localStoreAuthoritative: true,
+                attemptsBackendAuthority: false,
+                accountRequiredForCoreUse: false
+            )
+        )
+        let projectionDecision = gate.evaluate(
+            SyncContinuityAuthorityEvidence(
+                envelope: projectionEnvelope,
+                sourceAuthority: .approvedProjection,
+                privacyClass: .systemOwned,
+                approvedProjectionID: "ProjectionEngine.PrivacyProjection.syncContinuity",
+                localStoreAuthoritative: true,
+                attemptsBackendAuthority: false,
+                accountRequiredForCoreUse: false
+            )
+        )
+        let directObjectDecision = gate.evaluate(
+            SyncContinuityAuthorityEvidence(
+                envelope: directObjectEnvelope,
+                sourceAuthority: .directObjectStore,
+                privacyClass: .standard,
+                localStoreAuthoritative: true,
+                attemptsBackendAuthority: false,
+                accountRequiredForCoreUse: false
+            )
+        )
+
+        XCTAssertTrue(runtimeEventDecision.allowedForCloudKitTransport)
+        XCTAssertTrue(projectionDecision.allowedForCloudKitTransport)
+        XCTAssertFalse(directObjectDecision.allowedForCloudKitTransport)
+        XCTAssertTrue(directObjectDecision.requiresLocalReview)
+        XCTAssertTrue(directObjectDecision.issues.contains(.nonRuntimeSource))
+        XCTAssertTrue(directObjectDecision.issues.contains(.missingRuntimeLineage))
+    }
+
+    func testAuthorityGateDeniesPrivatePrivacyClassesAndBackendAuthority() throws {
+        let envelope = try makeEnvelope(
+            recordName: "receipt.private-authority",
+            family: .receipt,
+            payloadClass: .receiptMetadata
+        )
+        let privatePrivacyDecision = SyncEligibilityPolicy().evaluate(
+            SyncEligibilityCandidate(
+                id: "private-privacy",
+                envelope: envelope,
+                privacyPolicy: .privateCloud,
+                syncState: .healthyAfterProof,
+                accountStatus: .available,
+                userConfirmed: true,
+                proofVerified: true,
+                requestedAt: "2026-07-01T12:00:00Z",
+                sourceAuthority: .runtimeEvent,
+                privacyClass: .privateUserText,
+                runtimeEventID: "runtime_event.receipt.private-authority"
+            )
+        )
+        let backendAuthorityDecision = SyncEligibilityPolicy().evaluate(
+            SyncEligibilityCandidate(
+                id: "backend-authority",
+                envelope: envelope,
+                privacyPolicy: .privateCloud,
+                syncState: .healthyAfterProof,
+                accountStatus: .available,
+                userConfirmed: true,
+                proofVerified: true,
+                requestedAt: "2026-07-01T12:01:00Z",
+                sourceAuthority: .remoteBackend,
+                privacyClass: .syncMetadata,
+                localStoreAuthoritative: false,
+                attemptsBackendAuthority: true,
+                accountRequiredForCoreUse: true
+            )
+        )
+
+        XCTAssertEqual(privatePrivacyDecision.outcome, .deniedPrivacyClass)
+        XCTAssertFalse(privatePrivacyDecision.cloudKitWriteAllowed)
+        XCTAssertTrue(privatePrivacyDecision.localStoreRemainsAuthoritative)
+        XCTAssertTrue(privatePrivacyDecision.reasons.contains("privacy_class_private_user_text_cannot_enter_sync_continuity"))
+
+        XCTAssertEqual(backendAuthorityDecision.outcome, .deniedBackendAuthority)
+        XCTAssertFalse(backendAuthorityDecision.localWriteAllowed)
+        XCTAssertFalse(backendAuthorityDecision.cloudKitWriteAllowed)
+        XCTAssertFalse(backendAuthorityDecision.localStoreRemainsAuthoritative)
+        XCTAssertTrue(backendAuthorityDecision.reasons.contains("sync_continuity_cannot_become_backend_authority"))
+        XCTAssertTrue(backendAuthorityDecision.reasons.contains("offline_core_must_not_require_account"))
+    }
+
+    func testNoAccountOfflineCoreStaysLocalAuthoritative() async {
+        let authority = LocalAuthoritativeSyncModel()
+        let capability = LocalOnlySyncCapability(
+            diagnosticsProvider: LocalOnlyCloudKitContinuityDiagnosticsProvider(
+                featureFlagEnabled: true,
+                accountStatusProbe: StaticCloudKitAccountStatusProbe(accountStatusValue: .noAccount)
+            ),
+            authority: authority
+        )
+
+        let status = await capability.status()
+
+        XCTAssertTrue(authority.localStoreAuthoritative)
+        XCTAssertTrue(authority.continuityOptional)
+        XCTAssertTrue(authority.offlineCoreAvailable)
+        XCTAssertFalse(authority.accountRequiredForCoreUse)
+        XCTAssertFalse(authority.allowsPrivateGraphBackendAuthority)
+        XCTAssertEqual(status.syncState, .accountUnavailable)
+        XCTAssertFalse(status.localOperationBlocked)
+        XCTAssertTrue(status.localOnlyFallbackActive)
+        XCTAssertFalse(status.writesUserData)
+        XCTAssertFalse(status.userDataCaptured)
+    }
+
     func testCausalMergeAndConflictPolicyQuarantineUnreviewedRemoteAcceptance() throws {
         let local = try makeEnvelope(
             recordName: "receipt.merge",
@@ -123,7 +261,12 @@ final class SyncContinuityTests: XCTestCase {
         )
 
         let merge = CausalMergeEngine().merge(
-            CausalMergeCandidate(localEnvelope: local, remoteEnvelope: remote),
+            CausalMergeCandidate(
+                localEnvelope: local,
+                remoteEnvelope: remote,
+                localDeviceID: "same-device",
+                remoteDeviceID: "same-device"
+            ),
             createdAt: "2026-06-30T12:06:00Z"
         )
 
@@ -153,6 +296,59 @@ final class SyncContinuityTests: XCTestCase {
         XCTAssertTrue(conflict.quarantine)
         XCTAssertFalse(conflict.externalWriteAllowed)
         XCTAssertTrue(conflict.localStoreRemainsAuthoritative)
+    }
+
+    func testSameClockPayloadDriftQueuesLocalReviewInsteadOfSilentOverwrite() throws {
+        let local = try makeEnvelope(
+            recordName: "receipt.same-clock",
+            family: .receipt,
+            localRevision: 3,
+            updatedAt: "2026-06-30T12:04:00Z",
+            payloadClass: .receiptMetadata
+        )
+        let remote = try makeEnvelope(
+            recordName: "receipt.same-clock",
+            family: .receipt,
+            localRevision: 3,
+            updatedAt: "2026-06-30T12:04:00Z",
+            payloadClass: .receiptMetadata,
+            payloadValue: "remote-drift"
+        )
+
+        let merge = CausalMergeEngine().merge(
+            CausalMergeCandidate(
+                localEnvelope: local,
+                remoteEnvelope: remote,
+                localDeviceID: "same-device",
+                remoteDeviceID: "same-device"
+            ),
+            createdAt: "2026-06-30T12:06:00Z"
+        )
+        let eligibility = SyncEligibilityDecision(
+            id: "eligibility.same-clock",
+            outcome: .eligibleForCloudKit,
+            operation: .upsert,
+            localWriteAllowed: true,
+            cloudKitWriteAllowed: true,
+            requiresUserConfirmation: false,
+            localStoreRemainsAuthoritative: true,
+            reasons: ["test"],
+            evaluatedAt: "2026-06-30T12:07:00Z"
+        )
+        let conflict = ConflictPolicyEngine().decide(
+            SyncConflictCandidate(
+                mergeDecision: merge,
+                eligibilityDecision: eligibility,
+                userReviewed: false
+            )
+        )
+
+        XCTAssertEqual(merge.outcome, .conflictReview)
+        XCTAssertEqual(merge.review?.reviewState, .conflict)
+        XCTAssertEqual(conflict.resolution, .quarantineForReview)
+        XCTAssertTrue(conflict.quarantine)
+        XCTAssertFalse(conflict.externalWriteAllowed)
+        XCTAssertTrue(conflict.reasons.contains("same_clock_payload_drift"))
     }
 
     func testTombstoneSyncPropagatesOnlyNonLocalTombstoneMetadata() throws {
@@ -194,7 +390,9 @@ final class SyncContinuityTests: XCTestCase {
         )
 
         XCTAssertTrue(plan.localDataRetained)
+        XCTAssertTrue(plan.offlineCoreAvailableAfterCleanup)
         XCTAssertTrue(plan.remoteAuthorityRevoked)
+        XCTAssertFalse(plan.privateGraphBackendAuthorityAllowed)
         XCTAssertTrue(plan.requiresUserConfirmation)
         XCTAssertTrue(plan.localStoreRemainsAuthoritative)
         XCTAssertTrue(plan.actions.contains(.tombstoneEligibleRemoteRecords))
@@ -242,18 +440,20 @@ private extension SyncContinuityTests {
         family: CloudKitContinuityRecordFamily,
         localRevision: Int = 1,
         updatedAt: String = "2026-06-30T12:00:00Z",
-        payloadClass: SyncEnvelopePayloadClass
+        payloadClass: SyncEnvelopePayloadClass,
+        includeRuntimeLineage: Bool = true,
+        payloadValue: String? = nil
     ) throws -> CloudKitContinuityPortableRecordEnvelope {
         try CloudKitContinuityPortableRecordCodec.encode(
-            TestPayload(value: "\(recordName).\(localRevision)"),
+            TestPayload(value: payloadValue ?? "\(recordName).\(localRevision)"),
             family: family,
             recordName: recordName,
             schemaVersion: "sync_continuity_test.v1",
             localRevision: localRevision,
             createdAt: "2026-06-30T12:00:00Z",
             updatedAt: updatedAt,
-            receiptID: "receipt.\(recordName)",
-            replayTraceID: "replay.\(recordName)",
+            receiptID: includeRuntimeLineage ? "receipt.\(recordName)" : nil,
+            replayTraceID: includeRuntimeLineage ? "replay.\(recordName)" : nil,
             payloadClass: payloadClass
         )
     }

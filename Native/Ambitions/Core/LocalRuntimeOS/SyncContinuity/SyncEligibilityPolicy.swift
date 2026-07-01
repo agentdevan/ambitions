@@ -11,6 +11,9 @@ enum SyncEligibilityOutcome: String, Codable, Sendable, Equatable, Hashable {
     case queueForReview = "queue_for_review"
     case eligibleForCloudKit = "eligible_for_cloudkit"
     case deniedPrivateGraph = "denied_private_graph"
+    case deniedNonRuntimeAuthority = "denied_non_runtime_authority"
+    case deniedPrivacyClass = "denied_privacy_class"
+    case deniedBackendAuthority = "denied_backend_authority"
     case deniedAccountState = "denied_account_state"
     case deniedUserPaused = "denied_user_paused"
 }
@@ -24,6 +27,13 @@ struct SyncEligibilityCandidate: Sendable, Equatable {
     let userConfirmed: Bool
     let proofVerified: Bool
     let requestedAt: String
+    let sourceAuthority: SyncContinuitySourceAuthority
+    let privacyClass: RuntimePrivacyClass
+    let runtimeEventID: String?
+    let approvedProjectionID: String?
+    let localStoreAuthoritative: Bool
+    let attemptsBackendAuthority: Bool
+    let accountRequiredForCoreUse: Bool
 
     init(
         id: String,
@@ -33,7 +43,14 @@ struct SyncEligibilityCandidate: Sendable, Equatable {
         accountStatus: CloudKitContinuityAccountStatus,
         userConfirmed: Bool = false,
         proofVerified: Bool = false,
-        requestedAt: String
+        requestedAt: String,
+        sourceAuthority: SyncContinuitySourceAuthority = .runtimeEvent,
+        privacyClass: RuntimePrivacyClass = .syncMetadata,
+        runtimeEventID: String? = nil,
+        approvedProjectionID: String? = nil,
+        localStoreAuthoritative: Bool = true,
+        attemptsBackendAuthority: Bool = false,
+        accountRequiredForCoreUse: Bool = false
     ) {
         self.id = id.trimmingCharacters(in: .whitespacesAndNewlines).syncEligibilityNilIfEmpty ?? envelope.id
         self.envelope = envelope
@@ -43,6 +60,13 @@ struct SyncEligibilityCandidate: Sendable, Equatable {
         self.userConfirmed = userConfirmed
         self.proofVerified = proofVerified
         self.requestedAt = requestedAt.trimmingCharacters(in: .whitespacesAndNewlines).syncEligibilityNilIfEmpty ?? "sync-eligibility-evaluation"
+        self.sourceAuthority = sourceAuthority
+        self.privacyClass = privacyClass
+        self.runtimeEventID = runtimeEventID?.trimmingCharacters(in: .whitespacesAndNewlines).syncEligibilityNilIfEmpty
+        self.approvedProjectionID = approvedProjectionID?.trimmingCharacters(in: .whitespacesAndNewlines).syncEligibilityNilIfEmpty
+        self.localStoreAuthoritative = localStoreAuthoritative
+        self.attemptsBackendAuthority = attemptsBackendAuthority
+        self.accountRequiredForCoreUse = accountRequiredForCoreUse
     }
 }
 
@@ -63,8 +87,37 @@ struct SyncEligibilityDecision: Codable, Sendable, Equatable, Hashable {
 }
 
 struct SyncEligibilityPolicy: Sendable, Equatable {
+    let authorityGate: SyncContinuityAuthorityGate = SyncContinuityAuthorityGate()
+
     func evaluate(_ candidate: SyncEligibilityCandidate) -> SyncEligibilityDecision {
         var reasons: [String] = []
+        let authorityDecision = authorityGate.evaluate(
+            SyncContinuityAuthorityEvidence(
+                envelope: candidate.envelope,
+                sourceAuthority: candidate.sourceAuthority,
+                privacyClass: candidate.privacyClass,
+                runtimeEventID: candidate.runtimeEventID,
+                approvedProjectionID: candidate.approvedProjectionID,
+                localStoreAuthoritative: candidate.localStoreAuthoritative,
+                attemptsBackendAuthority: candidate.attemptsBackendAuthority,
+                accountRequiredForCoreUse: candidate.accountRequiredForCoreUse
+            )
+        )
+        reasons += authorityDecision.reasons
+
+        if authorityDecision.allowedForCloudKitTransport == false {
+            return decision(
+                candidate,
+                outcome: outcome(for: authorityDecision),
+                operation: .review,
+                localWriteAllowed: authorityDecision.allowedForLocalOutbox,
+                cloudKitWriteAllowed: false,
+                requiresUserConfirmation: true,
+                localStoreRemainsAuthoritative: authorityDecision.localStoreRemainsAuthoritative,
+                reasons: reasons
+            )
+        }
+
         let requiresConfirmation = candidate.privacyPolicy == .localOnly ||
             candidate.privacyPolicy == .mostRestrictiveWins ||
             candidate.envelope.reviewState == .needsReview ||
@@ -76,8 +129,10 @@ struct SyncEligibilityPolicy: Sendable, Equatable {
                 candidate,
                 outcome: .localOnly,
                 operation: .noop,
+                localWriteAllowed: true,
                 cloudKitWriteAllowed: false,
                 requiresUserConfirmation: true,
+                localStoreRemainsAuthoritative: true,
                 reasons: reasons
             )
         }
@@ -88,8 +143,10 @@ struct SyncEligibilityPolicy: Sendable, Equatable {
                 candidate,
                 outcome: .deniedPrivateGraph,
                 operation: .review,
+                localWriteAllowed: true,
                 cloudKitWriteAllowed: false,
                 requiresUserConfirmation: true,
+                localStoreRemainsAuthoritative: true,
                 reasons: reasons
             )
         }
@@ -100,8 +157,10 @@ struct SyncEligibilityPolicy: Sendable, Equatable {
                 candidate,
                 outcome: .localOnly,
                 operation: .noop,
+                localWriteAllowed: true,
                 cloudKitWriteAllowed: false,
                 requiresUserConfirmation: true,
+                localStoreRemainsAuthoritative: true,
                 reasons: reasons
             )
         }
@@ -113,8 +172,10 @@ struct SyncEligibilityPolicy: Sendable, Equatable {
                 candidate,
                 outcome: .eligibleForCloudKit,
                 operation: candidate.envelope.reviewState == .tombstoned ? .delete : .upsert,
+                localWriteAllowed: true,
                 cloudKitWriteAllowed: candidate.userConfirmed || requiresConfirmation == false,
                 requiresUserConfirmation: requiresConfirmation,
+                localStoreRemainsAuthoritative: true,
                 reasons: reasons
             )
         case .paused:
@@ -123,8 +184,10 @@ struct SyncEligibilityPolicy: Sendable, Equatable {
                 candidate,
                 outcome: .deniedUserPaused,
                 operation: .review,
+                localWriteAllowed: true,
                 cloudKitWriteAllowed: false,
                 requiresUserConfirmation: true,
+                localStoreRemainsAuthoritative: true,
                 reasons: reasons
             )
         case .accountUnavailable, .restricted, .temporarilyUnavailable, .localOnlyUnavailable, .disabled:
@@ -133,8 +196,10 @@ struct SyncEligibilityPolicy: Sendable, Equatable {
                 candidate,
                 outcome: .deniedAccountState,
                 operation: .review,
+                localWriteAllowed: true,
                 cloudKitWriteAllowed: false,
                 requiresUserConfirmation: requiresConfirmation,
+                localStoreRemainsAuthoritative: true,
                 reasons: reasons
             )
         case .needsReview, .healthyAfterProof:
@@ -143,8 +208,10 @@ struct SyncEligibilityPolicy: Sendable, Equatable {
                 candidate,
                 outcome: .queueForReview,
                 operation: .review,
+                localWriteAllowed: true,
                 cloudKitWriteAllowed: false,
                 requiresUserConfirmation: true,
+                localStoreRemainsAuthoritative: true,
                 reasons: reasons
             )
         }
@@ -154,21 +221,42 @@ struct SyncEligibilityPolicy: Sendable, Equatable {
         _ candidate: SyncEligibilityCandidate,
         outcome: SyncEligibilityOutcome,
         operation: CloudKitContinuityOperationKind,
+        localWriteAllowed: Bool,
         cloudKitWriteAllowed: Bool,
         requiresUserConfirmation: Bool,
+        localStoreRemainsAuthoritative: Bool,
         reasons: [String]
     ) -> SyncEligibilityDecision {
         SyncEligibilityDecision(
             id: "sync_eligibility.\(candidate.id)",
             outcome: outcome,
             operation: operation,
-            localWriteAllowed: true,
+            localWriteAllowed: localWriteAllowed,
             cloudKitWriteAllowed: cloudKitWriteAllowed,
             requiresUserConfirmation: requiresUserConfirmation,
-            localStoreRemainsAuthoritative: true,
+            localStoreRemainsAuthoritative: localStoreRemainsAuthoritative,
             reasons: Array(Set(reasons)).sorted(),
             evaluatedAt: candidate.requestedAt
         )
+    }
+
+    private func outcome(for authorityDecision: SyncContinuityAuthorityDecision) -> SyncEligibilityOutcome {
+        if authorityDecision.issues.contains(.backendAuthorityAttempt) ||
+            authorityDecision.issues.contains(.localStoreNotAuthoritative) ||
+            authorityDecision.issues.contains(.accountRequiredForCoreUse) {
+            return .deniedBackendAuthority
+        }
+        if authorityDecision.issues.contains(.privatePayloadClassDenied) {
+            return .deniedPrivateGraph
+        }
+        if authorityDecision.issues.contains(.privacyClassDenied) {
+            return .deniedPrivacyClass
+        }
+        if authorityDecision.issues.contains(.nonRuntimeSource) ||
+            authorityDecision.issues.contains(.missingRuntimeLineage) {
+            return .deniedNonRuntimeAuthority
+        }
+        return .queueForReview
     }
 }
 

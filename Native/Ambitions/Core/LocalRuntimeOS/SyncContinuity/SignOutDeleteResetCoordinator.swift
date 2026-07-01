@@ -42,7 +42,9 @@ struct ContinuityCleanupPlan: Codable, Sendable, Equatable, Hashable {
     let event: ContinuityAccountLifecycleEvent
     let actions: [ContinuityCleanupAction]
     let localDataRetained: Bool
+    let offlineCoreAvailableAfterCleanup: Bool
     let remoteAuthorityRevoked: Bool
+    let privateGraphBackendAuthorityAllowed: Bool
     let requiresUserConfirmation: Bool
     let localStoreRemainsAuthoritative: Bool
     let reasons: [String]
@@ -92,7 +94,9 @@ struct SignOutDeleteResetCoordinator: Sendable, Equatable {
             event: request.event,
             actions: orderedUnique(actions),
             localDataRetained: true,
+            offlineCoreAvailableAfterCleanup: true,
             remoteAuthorityRevoked: remoteAuthorityRevoked,
+            privateGraphBackendAuthorityAllowed: false,
             requiresUserConfirmation: requiresConfirmation,
             localStoreRemainsAuthoritative: true,
             reasons: Array(Set(reasons)).sorted(),

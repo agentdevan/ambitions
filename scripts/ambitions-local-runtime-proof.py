@@ -1380,6 +1380,94 @@ def check_source_atlas_r2_public_only_gate() -> CheckResult:
     )
 
 
+def check_sync_continuity_backend_authority_gate() -> CheckResult:
+    findings: list[Finding] = []
+    required_markers = {
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SyncContinuityAuthorityGate.swift": [
+            "enum SyncContinuitySourceAuthority",
+            "case runtimeEvent",
+            "case approvedProjection",
+            "case directObjectStore",
+            "case remoteBackend",
+            "struct SyncContinuityAuthorityGate",
+            "func evaluate(_ evidence: SyncContinuityAuthorityEvidence)",
+            ".nonRuntimeSource",
+            ".privacyClassDenied",
+            ".backendAuthorityAttempt",
+            "allowedForCloudKitTransport",
+            "localStoreRemainsAuthoritative",
+            "productionCloudKitContinuityNonClaim",
+            "privateLifeGraphBackendAuthorityDenied",
+        ],
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SyncEligibilityPolicy.swift": [
+            "let authorityGate: SyncContinuityAuthorityGate",
+            "authorityGate.evaluate",
+            "sourceAuthority: SyncContinuitySourceAuthority",
+            "privacyClass: RuntimePrivacyClass",
+            "localStoreAuthoritative: Bool",
+            "attemptsBackendAuthority: Bool",
+            "accountRequiredForCoreUse: Bool",
+            "outcome: outcome(for: authorityDecision)",
+            "localStoreRemainsAuthoritative: authorityDecision.localStoreRemainsAuthoritative",
+            "case deniedBackendAuthority",
+            "case deniedPrivacyClass",
+            "case deniedNonRuntimeAuthority",
+        ],
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SignOutDeleteResetCoordinator.swift": [
+            "offlineCoreAvailableAfterCleanup",
+            "privateGraphBackendAuthorityAllowed",
+            "localDataRetained: true",
+            "offlineCoreAvailableAfterCleanup: true",
+            "privateGraphBackendAuthorityAllowed: false",
+            "localStoreRemainsAuthoritative: true",
+        ],
+        ROOT / "Native/AmbitionsTests/LocalRuntimeOS/SyncContinuity/SyncContinuityTests.swift": [
+            "testAuthorityGateAllowsOnlyRuntimeEventsAndApprovedProjections",
+            "testAuthorityGateDeniesPrivatePrivacyClassesAndBackendAuthority",
+            "testNoAccountOfflineCoreStaysLocalAuthoritative",
+            "testSameClockPayloadDriftQueuesLocalReviewInsteadOfSilentOverwrite",
+            "testSignOutDeleteResetCoordinatorRetainsLocalDataAndRevokesRemoteAuthority",
+            "SyncContinuityAuthorityGate",
+            ".directObjectStore",
+            ".remoteBackend",
+            ".privateUserText",
+            "privateGraphBackendAuthorityAllowed",
+        ],
+    }
+
+    for path, markers in required_markers.items():
+        if not path.exists():
+            findings.append(
+                Finding(
+                    "blocker",
+                    "sync-continuity-backend-authority-gate-missing-source",
+                    relative(path),
+                    None,
+                    "SyncContinuity backend-authority gate source/test file is missing.",
+                )
+            )
+            continue
+        text = read_text(path)
+        for marker in markers:
+            if marker not in text:
+                findings.append(
+                    Finding(
+                        "blocker",
+                        "sync-continuity-backend-authority-gate-marker-missing",
+                        relative(path),
+                        None,
+                        f"Missing SyncContinuity backend-authority marker `{marker}`.",
+                    )
+                )
+
+    return make_result(
+        "sync_continuity_backend_authority_gate",
+        findings,
+        "SyncContinuity gates transport eligibility by runtime/projection source, privacy class, local authority, conflict review, and account cleanup non-authority.",
+        "{count} SyncContinuity backend-authority blocker(s) remain.",
+    )
+
+
 def check_capture_intake_durability_gate() -> CheckResult:
     findings: list[Finding] = []
     required_markers = {
@@ -1915,6 +2003,7 @@ def run_checks() -> list[CheckResult]:
         check_external_surface_sanitized_projection_gate(),
         check_privacy_security_external_boundary_gate(),
         check_source_atlas_r2_public_only_gate(),
+        check_sync_continuity_backend_authority_gate(),
         check_capture_intake_durability_gate(),
         check_side_effect_local_commit_receipt_gate(),
         check_trust_system_runtime_lineage_gate(),
@@ -1969,6 +2058,7 @@ def build_payload(results: list[CheckResult]) -> dict[str, object]:
             "app-wide command-only mutation is proven",
             "app-wide event replay and projection consumption are proven",
             "full side-effect outbox enforcement is proven",
+            "production CloudKit continuity is proven",
             "privacy/legal, Visual Green, Release Green, TestFlight, or App Store readiness",
         ],
     }
@@ -2055,6 +2145,7 @@ def run_self_test() -> int:
     assert any(result.check_id == "external_surface_sanitized_projection_gate" for result in [check_external_surface_sanitized_projection_gate()])
     assert any(result.check_id == "privacy_security_external_boundary_gate" for result in [check_privacy_security_external_boundary_gate()])
     assert any(result.check_id == "source_atlas_r2_public_only_gate" for result in [check_source_atlas_r2_public_only_gate()])
+    assert any(result.check_id == "sync_continuity_backend_authority_gate" for result in [check_sync_continuity_backend_authority_gate()])
     assert any(result.check_id == "capture_intake_durability_gate" for result in [check_capture_intake_durability_gate()])
     assert any(result.check_id == "side_effect_local_commit_receipt_gate" for result in [check_side_effect_local_commit_receipt_gate()])
     assert any(result.check_id == "trust_system_runtime_lineage_gate" for result in [check_trust_system_runtime_lineage_gate()])
