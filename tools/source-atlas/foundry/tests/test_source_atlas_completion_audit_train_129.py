@@ -25,10 +25,10 @@ def test_completion_audit_maps_full_goal_without_claiming_completion(tmp_path: P
     assert result["goalCompletionClaimed"] is False
     assert result["completionClaimAllowed"] is False
     assert result["overallReadinessStatus"] == "yellow_goal_incomplete_gap_mapped"
-    assert result["recordCounts"]["requirements"] == 14
+    assert result["recordCounts"]["requirements"] == 15
     assert result["recordCounts"]["provenCurrentRequirements"] >= 4
     assert result["recordCounts"]["sourceGreenScopedRequirements"] >= 7
-    assert result["recordCounts"]["yellowRequirements"] >= 1
+    assert result["recordCounts"]["yellowRequirements"] >= 2
     assert "source_atlas_completion_audit_green" in result["allowedClaims"]
     assert "full_source_atlas_green" in result["blockedClaims"]
     release = _requirement(result, "release_readiness")
@@ -39,6 +39,10 @@ def test_completion_audit_maps_full_goal_without_claiming_completion(tmp_path: P
     legal = _requirement(result, "legal_terms_approval")
     assert legal["status"] == "source_green_scoped"
     assert any("outside legal" in gap for gap in legal["gaps"])
+    launch_floor = _requirement(result, "near_universal_launch_floor")
+    assert launch_floor["status"] == "yellow_needs_stronger_proof"
+    assert "launchFloorLedger" in launch_floor["evidence"]
+    assert any("golden_intents_50000" in gap for gap in launch_floor["gaps"])
     assert any(item["workItemID"].endswith("outside_legal_approval_artifact") for item in result["nextWorkQueue"])
     assert any(item["sourceRequirementID"] == "autonomous_domain_expansion" for item in result["nextWorkQueue"])
     assert result["recordCounts"]["privacyIssues"] == 0
@@ -57,6 +61,20 @@ def test_completion_audit_blocks_native_requirement_when_native_report_missing_b
     assert "native_runtime_report" not in result["issues"]
     assert result["goalComplete"] is False
     assert any(item["sourceRequirementID"] == "native_fetch_cache_verify" for item in result["nextWorkQueue"])
+
+
+def test_completion_audit_blocks_launch_floor_when_ledger_missing_but_stays_valid(tmp_path: Path):
+    paths = _fixture_paths(tmp_path)
+    paths["launch_floor"] = None
+
+    result = _run(tmp_path, paths)
+
+    assert result["valid"], result["issues"]
+    launch_floor = _requirement(result, "near_universal_launch_floor")
+    assert launch_floor["status"] == "blocked_missing_artifact"
+    assert result["recordCounts"]["launchFloorTargets"] == 0
+    assert result["goalComplete"] is False
+    assert any(item["sourceRequirementID"] == "near_universal_launch_floor" for item in result["nextWorkQueue"])
 
 
 def test_completion_audit_rejects_private_domain_context(tmp_path: Path):
@@ -107,6 +125,7 @@ def _run(tmp_path: Path, paths: dict[str, Path | None]) -> dict:
             release_proof_packet_path=paths["release_packet"],
             legal_approval_packet_path=paths["legal_packet"],
             owner_approval_path=paths["owner"],
+            launch_floor_ledger_path=paths["launch_floor"],
             output_root=tmp_path / f"completion-audit-{len(list(tmp_path.glob('completion-audit-*')))}",
             created_at=CREATED_AT,
             run_label="test-completion-audit",
@@ -135,6 +154,7 @@ def _fixture_paths(tmp_path: Path) -> dict[str, Path | None]:
         "release_packet": root / "release-proof-packet.json",
         "legal_packet": root / "legal-packet.json",
         "owner": root / "owner.json",
+        "launch_floor": root / "launch-floor-ledger.json",
     }
     write_json(paths["supervisor"], _supervisor())
     write_json(paths["sweep"], _sweep())
@@ -150,6 +170,7 @@ def _fixture_paths(tmp_path: Path) -> dict[str, Path | None]:
     write_json(paths["release_packet"], _release_packet())
     write_json(paths["legal_packet"], _legal_packet())
     write_json(paths["owner"], _owner())
+    write_json(paths["launch_floor"], _launch_floor_ledger())
     return paths
 
 
@@ -394,4 +415,27 @@ def _owner() -> dict:
         "approved": True,
         "outsideLegalApprovalClaimed": False,
         "literalUniversalCoverageClaimed": False,
+    }
+
+
+def _launch_floor_ledger() -> dict:
+    target_statuses = [
+        {"targetID": "public_reference_shards_1m", "status": "not_measurable_fail_closed"},
+        {"targetID": "goal_domains_500", "status": "not_met"},
+        {"targetID": "subdomains_5000", "status": "not_measurable_fail_closed"},
+        {"targetID": "golden_intents_50000", "status": "not_measurable_fail_closed"},
+        {"targetID": "source_needed_fallback_under_5_percent", "status": "not_measurable_fail_closed"},
+        {"targetID": "continuous_missing_shard_expansion", "status": "not_measurable_fail_closed"},
+    ]
+    return {
+        "schemaVersion": 1,
+        "kind": "ambitions.sourceAtlas.launchFloorLedger.v1",
+        "valid": True,
+        "status": "Source Green for launch-floor ledger tooling / Launch-floor targets not met",
+        "launchFloorMet": False,
+        "launchFloorClaimAllowed": False,
+        "targetStatuses": target_statuses,
+        "blockedClaims": ["source_atlas_launch_floor_ready", "release_green", "literal_universal_coverage"],
+        "privacyIssues": [],
+        "overclaimIssues": [],
     }

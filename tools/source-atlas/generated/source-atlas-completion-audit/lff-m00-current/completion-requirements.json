@@ -1,0 +1,562 @@
+{
+  "requirements": [
+    {
+      "evidence": [
+        "sourceLaneRegistry",
+        "legalTermsRegistry",
+        "apiGovernanceRegistry"
+      ],
+      "gaps": [],
+      "label": "Source, legal/terms, and API governance registries",
+      "nextActions": [
+        "Keep review expiry and source-specific approval artifacts current."
+      ],
+      "nonClaims": [
+        "goal-level completion audit and gap router only",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not outside legal approval",
+        "not literal universal coverage",
+        "not independent accessibility proof",
+        "not native physical-device proof",
+        "not an automatic production R2 writer",
+        "not uncontrolled live harvest",
+        "not a hosted planner, profile engine, or cloud personalization system",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "objectiveArea": "production_target",
+      "proofScope": "34 source lanes, 27 licenses, 11 API policies loaded",
+      "requirementID": "governance_registries",
+      "status": "proven_current"
+    },
+    {
+      "evidence": [
+        "productionSupervisor"
+      ],
+      "gaps": [],
+      "label": "Autonomous supervised production operations",
+      "nextActions": [
+        "Promote only through the explicit execute/approval gates already emitted by supervisor and promotion runner."
+      ],
+      "nonClaims": [
+        "goal-level completion audit and gap router only",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not outside legal approval",
+        "not literal universal coverage",
+        "not independent accessibility proof",
+        "not native physical-device proof",
+        "not an automatic production R2 writer",
+        "not uncontrolled live harvest",
+        "not a hosted planner, profile engine, or cloud personalization system",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "objectiveArea": "production_target",
+      "proofScope": "supervised autonomous Source Atlas work loop with safe local/candidate actions and held write gates",
+      "requirementID": "autonomous_supervised_operations",
+      "status": "proven_current"
+    },
+    {
+      "evidence": [
+        "arbitraryDomainGate",
+        "goalDomainGauntlet"
+      ],
+      "gaps": [
+        "candidate intake is not authority, claim, pack, R2 publish, or native activation"
+      ],
+      "label": "Autonomous discovery/domain expansion through governed frontiers",
+      "nextActions": [
+        "Review candidate domains, approve source lanes/legal/API posture, then rebuild claim/pack/R2/native proof per domain."
+      ],
+      "nonClaims": [
+        "goal-level completion audit and gap router only",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not outside legal approval",
+        "not literal universal coverage",
+        "not independent accessibility proof",
+        "not native physical-device proof",
+        "not an automatic production R2 writer",
+        "not uncontrolled live harvest",
+        "not a hosted planner, profile engine, or cloud personalization system",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "objectiveArea": "universal_coverage_boundary",
+      "proofScope": "unknown public/reference domains route to candidate-only frontier intake; configured domains route to bounded current public reference runtime",
+      "requirementID": "autonomous_domain_expansion",
+      "status": "source_green_scoped"
+    },
+    {
+      "evidence": [
+        "productionFinishLineGate",
+        "productionRecertification"
+      ],
+      "gaps": [
+        "uncontrolled/high-volume live harvest remains blocked by API governance and execute gates"
+      ],
+      "label": "Live transport and governed harvest proof",
+      "nextActions": [
+        "For each new source, require live flag, execute flag, key/rate/budget policy, and fixture fallback proof."
+      ],
+      "nonClaims": [
+        "goal-level completion audit and gap router only",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not outside legal approval",
+        "not literal universal coverage",
+        "not independent accessibility proof",
+        "not native physical-device proof",
+        "not an automatic production R2 writer",
+        "not uncontrolled live harvest",
+        "not a hosted planner, profile engine, or cloud personalization system",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "objectiveArea": "live_transport",
+      "proofScope": "bounded live transport is proven for configured production frontiers",
+      "requirementID": "live_transport_and_harvest",
+      "status": "source_green_scoped"
+    },
+    {
+      "evidence": [
+        "productionSweep",
+        "productionFinishLineGate"
+      ],
+      "gaps": [
+        "claim/provenance completeness is bounded to configured production target frontiers"
+      ],
+      "label": "Claim graph, provenance, and packability proof",
+      "nextActions": [
+        "Keep missing provenance, stale-critical, restricted, and unresolved-conflict claims blocked from packs."
+      ],
+      "nonClaims": [
+        "goal-level completion audit and gap router only",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not outside legal approval",
+        "not literal universal coverage",
+        "not independent accessibility proof",
+        "not native physical-device proof",
+        "not an automatic production R2 writer",
+        "not uncontrolled live harvest",
+        "not a hosted planner, profile engine, or cloud personalization system",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "objectiveArea": "production_target",
+      "proofScope": "14 configured pack reports valid across 14 ready domains",
+      "requirementID": "claim_graph_packability",
+      "status": "source_green_scoped"
+    },
+    {
+      "evidence": [
+        "productionSweep",
+        "productionFinishLineGate",
+        "ownerApproval"
+      ],
+      "gaps": [
+        "new production R2 writes remain execute-gated and are not performed by this audit"
+      ],
+      "label": "Pack production and R2 upload/readback/checksum proof",
+      "nextActions": [
+        "When a new write is needed, use owner approval, legal packet, remote write preflight, upload/readback/SHA-256, revocation, and rollback proof."
+      ],
+      "nonClaims": [
+        "goal-level completion audit and gap router only",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not outside legal approval",
+        "not literal universal coverage",
+        "not independent accessibility proof",
+        "not native physical-device proof",
+        "not an automatic production R2 writer",
+        "not uncontrolled live harvest",
+        "not a hosted planner, profile engine, or cloud personalization system",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "objectiveArea": "r2_write",
+      "proofScope": "14 remote R2 upload/readback reports reconciled; 14 R2 reports valid",
+      "requirementID": "pack_r2_production",
+      "status": "source_green_scoped"
+    },
+    {
+      "evidence": [
+        "productionSupervisor"
+      ],
+      "gaps": [],
+      "label": "Promotion control, execute gates, and safe command queue",
+      "nextActions": [
+        "Execute only the emitted command queue after explicit owner/legal/API/R2 gates pass."
+      ],
+      "nonClaims": [
+        "goal-level completion audit and gap router only",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not outside legal approval",
+        "not literal universal coverage",
+        "not independent accessibility proof",
+        "not native physical-device proof",
+        "not an automatic production R2 writer",
+        "not uncontrolled live harvest",
+        "not a hosted planner, profile engine, or cloud personalization system",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "objectiveArea": "r2_write",
+      "proofScope": "16 promotion decisions emitted with remote/native/final outputs held at zero",
+      "requirementID": "promotion_execute_control",
+      "status": "proven_current"
+    },
+    {
+      "evidence": [
+        "nativeRuntimeReport"
+      ],
+      "gaps": [
+        "not native physical-device proof, not independent accessibility proof, and not Release Green"
+      ],
+      "label": "Native fetch/cache/verify/quarantine/LKG/offline behavior",
+      "nextActions": [
+        "Run current device/offline/account/accessibility release proof before any release claim."
+      ],
+      "nonClaims": [
+        "goal-level completion audit and gap router only",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not outside legal approval",
+        "not literal universal coverage",
+        "not independent accessibility proof",
+        "not native physical-device proof",
+        "not an automatic production R2 writer",
+        "not uncontrolled live harvest",
+        "not a hosted planner, profile engine, or cloud personalization system",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "objectiveArea": "runtime_release_green",
+      "proofScope": "configured Source Atlas public-pack live gateway consumption, hash/cache/quarantine/LKG, and offline/no-account behavior are proven by current native evidence packet",
+      "requirementID": "native_fetch_cache_verify",
+      "status": "source_green_scoped"
+    },
+    {
+      "evidence": [
+        "nativeRuntimeReport",
+        "goalDomainGauntlet"
+      ],
+      "gaps": [
+        "rendered visual/device/accessibility proof remains release-gated"
+      ],
+      "label": "Local-only runtime composition and source inspection boundary",
+      "nextActions": [
+        "Keep Source Atlas as inspection/enrichment only; final user plans and Steps stay local runtime behavior."
+      ],
+      "nonClaims": [
+        "goal-level completion audit and gap router only",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not outside legal approval",
+        "not literal universal coverage",
+        "not independent accessibility proof",
+        "not native physical-device proof",
+        "not an automatic production R2 writer",
+        "not uncontrolled live harvest",
+        "not a hosted planner, profile engine, or cloud personalization system",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "objectiveArea": "runtime_release_green",
+      "proofScope": "local-only source inspection/runtime composition boundary is proven for configured public-pack behavior",
+      "requirementID": "runtime_composition_inspection",
+      "status": "source_green_scoped"
+    },
+    {
+      "evidence": [
+        "legalApprovalPacket",
+        "legalTermsRegistry"
+      ],
+      "gaps": [
+        "outside legal approval remains unproven without a current source-specific outside legal artifact"
+      ],
+      "label": "Legal/terms approval posture",
+      "nextActions": [
+        "Attach source-specific outside legal approval artifacts before claiming outside legal approval."
+      ],
+      "nonClaims": [
+        "goal-level completion audit and gap router only",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not outside legal approval",
+        "not literal universal coverage",
+        "not independent accessibility proof",
+        "not native physical-device proof",
+        "not an automatic production R2 writer",
+        "not uncontrolled live harvest",
+        "not a hosted planner, profile engine, or cloud personalization system",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "objectiveArea": "legal_approval",
+      "proofScope": "internal legal/terms packet is Green and explicitly does not claim outside legal approval",
+      "requirementID": "legal_terms_approval",
+      "status": "source_green_scoped"
+    },
+    {
+      "evidence": [
+        "productionSupervisor",
+        "productionSweep",
+        "nativeRuntimeReport"
+      ],
+      "gaps": [],
+      "label": "No-private-graph egress and unsafe-output boundary",
+      "nextActions": [
+        "Continue running boundary and no-private-graph egress audits on every train."
+      ],
+      "nonClaims": [
+        "goal-level completion audit and gap router only",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not outside legal approval",
+        "not literal universal coverage",
+        "not independent accessibility proof",
+        "not native physical-device proof",
+        "not an automatic production R2 writer",
+        "not uncontrolled live harvest",
+        "not a hosted planner, profile engine, or cloud personalization system",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "objectiveArea": "production_target",
+      "proofScope": "audit inputs and current production/native reports preserve no-private-graph egress and unsafe-output zero counts",
+      "requirementID": "security_privacy_boundary",
+      "status": "proven_current"
+    },
+    {
+      "evidence": [
+        "nativeRuntimeReport",
+        "releaseProofPacket"
+      ],
+      "gaps": [
+        "umbrella Release Green is not proven",
+        "App Store/TestFlight readiness is not proven",
+        "physical-device proof is not proven",
+        "independent accessibility/visual proof is not proven",
+        "release proof packet missing external gates: app_store_connect_validation, independent_accessibility_proof, independent_visual_review, owner_release_approval, physical_device_proof, privacy_legal_release_signoff, testflight_validation"
+      ],
+      "label": "Runtime/release Green, device, accessibility, and App Store proof",
+      "nextActions": [
+        "Attach current physical-device, independent accessibility/visual, App Store/TestFlight, privacy/legal release signoff, and owner release approval artifacts.",
+        "Keep Release Green blocked until external review approves the umbrella release packet."
+      ],
+      "nonClaims": [
+        "goal-level completion audit and gap router only",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not outside legal approval",
+        "not literal universal coverage",
+        "not independent accessibility proof",
+        "not native physical-device proof",
+        "not an automatic production R2 writer",
+        "not uncontrolled live harvest",
+        "not a hosted planner, profile engine, or cloud personalization system",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "objectiveArea": "runtime_release_green",
+      "proofScope": "Source Atlas release-input proof packet is current; external release gates remain separate",
+      "requirementID": "release_readiness",
+      "status": "yellow_needs_stronger_proof"
+    },
+    {
+      "evidence": [
+        "productionTargetLedger",
+        "arbitraryDomainGate",
+        "goalDomainGauntlet"
+      ],
+      "gaps": [
+        "coverage expansion is frontier-governed, not universal or complete"
+      ],
+      "label": "Universal-coverage claim control",
+      "nextActions": [
+        "Continue domain expansion through candidate intake, legal/source/API review, pack production, R2 proof, and native proof."
+      ],
+      "nonClaims": [
+        "goal-level completion audit and gap router only",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not outside legal approval",
+        "not literal universal coverage",
+        "not independent accessibility proof",
+        "not native physical-device proof",
+        "not an automatic production R2 writer",
+        "not uncontrolled live harvest",
+        "not a hosted planner, profile engine, or cloud personalization system",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "objectiveArea": "universal_coverage_boundary",
+      "proofScope": "literal universal coverage is blocked; arbitrary public/reference domains route through governed coverage frontiers",
+      "requirementID": "universal_coverage_claim_control",
+      "status": "proven_current"
+    },
+    {
+      "evidence": [
+        "launchFloorLedger"
+      ],
+      "gaps": [
+        "public_reference_shards_1m: not_measurable_fail_closed",
+        "goal_domains_500: not_met",
+        "subdomains_5000: not_measurable_fail_closed",
+        "golden_intents_50000: not_measurable_fail_closed",
+        "source_needed_fallback_under_5_percent: not_measurable_fail_closed",
+        "continuous_missing_shard_expansion: not_measurable_fail_closed"
+      ],
+      "label": "Near-universal launch-floor counters and proof ledger",
+      "nextActions": [
+        "Complete 1M public/reference shards, 500 domains, 5,000 subdomains, 50,000 golden intents, <5% fallback metric, and every-event missing-shard expansion proof.",
+        "Rerun source-atlas-launch-floor-ledger and completion audit after each launch-floor train."
+      ],
+      "nonClaims": [
+        "goal-level completion audit and gap router only",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not outside legal approval",
+        "not literal universal coverage",
+        "not independent accessibility proof",
+        "not native physical-device proof",
+        "not an automatic production R2 writer",
+        "not uncontrolled live harvest",
+        "not a hosted planner, profile engine, or cloud personalization system",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "objectiveArea": "universal_coverage_boundary",
+      "proofScope": "launch-floor ledger is present and fail-closed; near-universal launch-floor targets are not all met",
+      "requirementID": "near_universal_launch_floor",
+      "status": "yellow_needs_stronger_proof"
+    },
+    {
+      "evidence": [
+        "completionAudit"
+      ],
+      "gaps": [
+        "full goal remains incomplete until Yellow/blocked/release/legal/universal gaps are resolved by current proof"
+      ],
+      "label": "Full-goal completion claim control",
+      "nextActions": [
+        "Use nextWorkQueue rather than unqualified Source Atlas Green language."
+      ],
+      "nonClaims": [
+        "goal-level completion audit and gap router only",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not outside legal approval",
+        "not literal universal coverage",
+        "not independent accessibility proof",
+        "not native physical-device proof",
+        "not an automatic production R2 writer",
+        "not uncontrolled live harvest",
+        "not a hosted planner, profile engine, or cloud personalization system",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "objectiveArea": "production_target",
+      "proofScope": "audit emits a full-objective gap map while keeping goalComplete=false and completionClaimAllowed=false",
+      "requirementID": "completion_claim_control",
+      "status": "proven_current"
+    }
+  ],
+  "schemaVersion": 1
+}

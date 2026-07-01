@@ -85,6 +85,11 @@ from .source_atlas_completion_audit import (
     run_source_atlas_completion_audit,
     source_atlas_completion_audit_markdown,
 )
+from .source_atlas_launch_floor_ledger import (
+    SourceAtlasLaunchFloorLedgerOptions,
+    build_source_atlas_launch_floor_ledger,
+    source_atlas_launch_floor_ledger_markdown,
+)
 from .release_proof_packet import (
     SourceAtlasReleaseProofPacketOptions,
     run_source_atlas_release_proof_packet,
@@ -879,11 +884,36 @@ def main(argv: list[str] | None = None) -> int:
     completion_audit_parser.add_argument("--release-proof-packet")
     completion_audit_parser.add_argument("--legal-approval-packet")
     completion_audit_parser.add_argument("--owner-approval")
+    completion_audit_parser.add_argument("--launch-floor-ledger")
     completion_audit_parser.add_argument("--output-root", required=True)
     completion_audit_parser.add_argument("--created-at", default="2026-06-29T04:45:00Z")
     completion_audit_parser.add_argument("--run-label", default="current")
     completion_audit_parser.add_argument("--emit-evidence")
     completion_audit_parser.add_argument("--markdown")
+
+    launch_floor_parser = sub.add_parser("source-atlas-launch-floor-ledger")
+    launch_floor_parser.add_argument("--frontier-config", default="tools/source-atlas/frontier/coverage-frontiers.json")
+    launch_floor_parser.add_argument("--source-lane-registry", default="tools/source-atlas/governance/source-lane-registry.json")
+    launch_floor_parser.add_argument("--legal-terms-registry", default="tools/source-atlas/governance/legal-terms-registry.json")
+    launch_floor_parser.add_argument("--api-governance-registry", default="tools/source-atlas/governance/api-governance-registry.json")
+    launch_floor_parser.add_argument("--production-target-ledger", default="tools/source-atlas/generated/production-target-ledger/train-131-tetradeca-current/production-target-ledger.json")
+    launch_floor_parser.add_argument("--r2-live-inventory", default="tools/source-atlas/generated/r2-live-inventory/train-137-post-hygiene-resolution-inventory/r2-live-inventory-report.json")
+    launch_floor_parser.add_argument("--goal-domain-gauntlet", default="docs/qa/source-atlas/source-atlas-goal-domain-gauntlet-train-131.json")
+    launch_floor_parser.add_argument("--completion-audit", default="docs/qa/source-atlas/source-atlas-completion-audit-train-132.json")
+    launch_floor_parser.add_argument("--release-proof-packet", default="docs/qa/source-atlas/source-atlas-release-proof-packet-train-132.json")
+    launch_floor_parser.add_argument("--production-supervisor", default="tools/source-atlas/generated/autonomous-production-supervisor/train-133-current-proof-refresh/autonomous-production-supervisor-report.json")
+    launch_floor_parser.add_argument("--autonomous-control-loop", default="tools/source-atlas/generated/autonomous-control-loop/train-131-tetradeca-final/autonomous-control-loop-report.json")
+    launch_floor_parser.add_argument("--autonomous-domain-expansion-chain", default="tools/source-atlas/generated/autonomous-domain-expansion-chain/train-107-current/autonomous-domain-expansion-chain-report.json")
+    launch_floor_parser.add_argument("--shard-corpus-manifest")
+    launch_floor_parser.add_argument("--golden-intent-corpus")
+    launch_floor_parser.add_argument("--fallback-metric")
+    launch_floor_parser.add_argument("--missing-shard-events")
+    launch_floor_parser.add_argument("--native-runtime-bridge-gauntlet-source", default="Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasRuntimeBridgeCoverageGauntletTests.swift")
+    launch_floor_parser.add_argument("--output-root", required=True)
+    launch_floor_parser.add_argument("--created-at", default="2026-07-01T00:00:00Z")
+    launch_floor_parser.add_argument("--run-label", default="current")
+    launch_floor_parser.add_argument("--emit-evidence")
+    launch_floor_parser.add_argument("--markdown")
 
     arbitrary_domain_gate_parser = sub.add_parser("arbitrary-domain-handling-gate")
     arbitrary_domain_gate_parser.add_argument("--frontier-config", default="tools/source-atlas/frontier/coverage-frontiers.json")
@@ -2194,6 +2224,7 @@ def main(argv: list[str] | None = None) -> int:
                 release_proof_packet_path=Path(args.release_proof_packet) if args.release_proof_packet else None,
                 legal_approval_packet_path=Path(args.legal_approval_packet) if args.legal_approval_packet else None,
                 owner_approval_path=Path(args.owner_approval) if args.owner_approval else None,
+                launch_floor_ledger_path=Path(args.launch_floor_ledger) if args.launch_floor_ledger else None,
                 output_root=Path(args.output_root),
                 created_at=args.created_at,
                 run_label=args.run_label,
@@ -2204,6 +2235,44 @@ def main(argv: list[str] | None = None) -> int:
         if args.markdown:
             Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
             Path(args.markdown).write_text(source_atlas_completion_audit_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "source-atlas-launch-floor-ledger":
+        result = build_source_atlas_launch_floor_ledger(
+            SourceAtlasLaunchFloorLedgerOptions(
+                frontier_config_path=Path(args.frontier_config),
+                source_lane_registry_path=Path(args.source_lane_registry),
+                legal_terms_registry_path=Path(args.legal_terms_registry),
+                api_governance_registry_path=Path(args.api_governance_registry),
+                production_target_ledger_path=Path(args.production_target_ledger),
+                r2_live_inventory_path=Path(args.r2_live_inventory),
+                goal_domain_gauntlet_path=Path(args.goal_domain_gauntlet),
+                completion_audit_path=Path(args.completion_audit),
+                release_proof_packet_path=Path(args.release_proof_packet),
+                production_supervisor_path=Path(args.production_supervisor) if args.production_supervisor else None,
+                autonomous_control_loop_path=Path(args.autonomous_control_loop) if args.autonomous_control_loop else None,
+                autonomous_domain_expansion_chain_path=Path(args.autonomous_domain_expansion_chain)
+                if args.autonomous_domain_expansion_chain
+                else None,
+                shard_corpus_manifest_path=Path(args.shard_corpus_manifest) if args.shard_corpus_manifest else None,
+                golden_intent_corpus_path=Path(args.golden_intent_corpus) if args.golden_intent_corpus else None,
+                fallback_metric_path=Path(args.fallback_metric) if args.fallback_metric else None,
+                missing_shard_events_path=Path(args.missing_shard_events) if args.missing_shard_events else None,
+                native_runtime_bridge_gauntlet_source_path=Path(args.native_runtime_bridge_gauntlet_source)
+                if args.native_runtime_bridge_gauntlet_source
+                else None,
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                run_label=args.run_label,
+                emit_evidence_path=Path(args.emit_evidence) if args.emit_evidence else None,
+                markdown_path=Path(args.markdown) if args.markdown else None,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(source_atlas_launch_floor_ledger_markdown(result), encoding="utf-8")
         print_json(result)
         return 0 if result["valid"] else 1
     if args.command == "arbitrary-domain-handling-gate":

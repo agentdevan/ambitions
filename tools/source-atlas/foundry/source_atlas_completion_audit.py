@@ -124,6 +124,11 @@ COMPLETION_REQUIREMENTS = [
         "objectiveArea": "universal_coverage_boundary",
     },
     {
+        "requirementID": "near_universal_launch_floor",
+        "label": "Near-universal launch-floor counters and proof ledger",
+        "objectiveArea": "universal_coverage_boundary",
+    },
+    {
         "requirementID": "completion_claim_control",
         "label": "Full-goal completion claim control",
         "objectiveArea": "production_target",
@@ -148,6 +153,7 @@ class SourceAtlasCompletionAuditOptions:
     release_proof_packet_path: Path | None = None
     legal_approval_packet_path: Path | None = None
     owner_approval_path: Path | None = None
+    launch_floor_ledger_path: Path | None = None
     created_at: str = "2026-06-29T04:45:00Z"
     run_label: str = "current"
 
@@ -172,6 +178,7 @@ def run_source_atlas_completion_audit(options: SourceAtlasCompletionAuditOptions
         "releaseProofPacket": _read_optional_json(options.release_proof_packet_path, "release proof packet", issues),
         "legalApprovalPacket": _read_optional_json(options.legal_approval_packet_path, "legal approval packet", issues),
         "ownerApproval": _read_optional_json(options.owner_approval_path, "owner approval artifact", issues),
+        "launchFloorLedger": _read_optional_json(options.launch_floor_ledger_path, "launch-floor ledger", issues),
     }
     input_paths = _input_paths(options)
     input_privacy_issues = boundary_issue_strings(
@@ -298,6 +305,7 @@ def source_atlas_completion_audit_markdown(report: dict[str, Any]) -> str:
         f"- Blocked requirements: {counts['blockedRequirements']}",
         f"- Red requirements: {counts['redRequirements']}",
         f"- Next work items: {counts['nextWorkItems']}",
+        f"- Launch-floor targets met: {counts.get('launchFloorTargetsMet', 0)}/{counts.get('launchFloorTargets', 0)}",
         f"- Privacy issues: {counts['privacyIssues']}",
         f"- Overclaim issues: {counts['overclaimIssues']}",
         "",
@@ -384,6 +392,7 @@ def _requirements(artifacts: dict[str, Any], overclaim_issues: list[str], privac
         _requirement_security_privacy(artifacts, privacy_issues),
         _requirement_release_readiness(artifacts),
         _requirement_universal_coverage(artifacts),
+        _requirement_launch_floor(artifacts),
         _requirement_completion_claim(overclaim_issues, privacy_issues),
     ]
     return sorted(evaluations, key=lambda item: [req["requirementID"] for req in COMPLETION_REQUIREMENTS].index(item["requirementID"]))
@@ -749,6 +758,48 @@ def _requirement_universal_coverage(artifacts: dict[str, Any]) -> dict[str, Any]
     )
 
 
+def _requirement_launch_floor(artifacts: dict[str, Any]) -> dict[str, Any]:
+    ledger = artifacts["launchFloorLedger"]
+    if not isinstance(ledger, dict):
+        return _evaluation(
+            "near_universal_launch_floor",
+            "blocked_missing_artifact",
+            "launch-floor ledger missing; 1M shard, 500-domain, 5,000-subdomain, 50k-intent, fallback-rate, and continuous-expansion counters cannot be claimed",
+            evidence=["launchFloorLedger"],
+            gaps=[
+                "launch-floor ledger artifact missing",
+                "full Source Atlas Green and near-universal coverage remain blocked until launch-floor counters are generated and pass",
+            ],
+            next_actions=["Run source-atlas-launch-floor-ledger with current evidence and attach the generated JSON/Markdown outputs."],
+        )
+    target_statuses = ledger.get("targetStatuses", [])
+    incomplete = [
+        f"{item.get('targetID')}: {item.get('status')}"
+        for item in target_statuses
+        if isinstance(item, dict) and item.get("status") != "met"
+    ]
+    if ledger.get("valid") is True and ledger.get("launchFloorMet") is True and ledger.get("launchFloorClaimAllowed") is True and not incomplete:
+        return _evaluation(
+            "near_universal_launch_floor",
+            "proven_current",
+            "launch-floor ledger proves every near-universal target and allows launch-floor claim",
+            evidence=["launchFloorLedger"],
+            next_actions=["Keep launch-floor ledger regenerated from current corpus, taxonomy, routing, R2, native, fallback, and missing-shard proof."],
+        )
+    gaps = incomplete or ["launch-floor ledger is present but does not allow launch-floor claim"]
+    return _evaluation(
+        "near_universal_launch_floor",
+        "yellow_needs_stronger_proof",
+        "launch-floor ledger is present and fail-closed; near-universal launch-floor targets are not all met",
+        evidence=["launchFloorLedger"],
+        gaps=gaps,
+        next_actions=[
+            "Complete 1M public/reference shards, 500 domains, 5,000 subdomains, 50,000 golden intents, <5% fallback metric, and every-event missing-shard expansion proof.",
+            "Rerun source-atlas-launch-floor-ledger and completion audit after each launch-floor train.",
+        ],
+    )
+
+
 def _requirement_completion_claim(overclaim_issues: list[str], privacy_issues: list[str]) -> dict[str, Any]:
     if overclaim_issues or privacy_issues:
         return _evaluation(
@@ -957,6 +1008,14 @@ def _record_counts(
         "domainsReady": _count(artifacts["productionSweep"], "domainsReady"),
         "promotionDecisions": _count(artifacts["productionSupervisor"], "promotionDecisions"),
         "remoteR2UploadsReconciled": _count(artifacts["productionSweep"], "remoteR2UploadsReconciled"),
+        "launchFloorTargets": len(artifacts["launchFloorLedger"].get("targetStatuses", [])) if isinstance(artifacts["launchFloorLedger"], dict) else 0,
+        "launchFloorTargetsMet": sum(
+            1
+            for item in artifacts["launchFloorLedger"].get("targetStatuses", [])
+            if isinstance(item, dict) and item.get("status") == "met"
+        )
+        if isinstance(artifacts["launchFloorLedger"], dict)
+        else 0,
         "privacyIssues": len(privacy_issues),
         "overclaimIssues": len(overclaim_issues),
     }
@@ -1045,6 +1104,7 @@ def _input_paths(options: SourceAtlasCompletionAuditOptions) -> dict[str, str | 
         "releaseProofPacket": str(options.release_proof_packet_path) if options.release_proof_packet_path else None,
         "legalApprovalPacket": str(options.legal_approval_packet_path) if options.legal_approval_packet_path else None,
         "ownerApproval": str(options.owner_approval_path) if options.owner_approval_path else None,
+        "launchFloorLedger": str(options.launch_floor_ledger_path) if options.launch_floor_ledger_path else None,
     }
 
 
