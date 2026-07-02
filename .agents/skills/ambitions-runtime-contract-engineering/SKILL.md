@@ -35,6 +35,8 @@ As of Linear `AMB-1544`, `Core/LocalRuntimeOS/` is the target backend/runtime ow
 
 Do not add new runtime nouns, suffix-split files, broad model files, Source Atlas scope, or projection authority to make a contract sound complete. Delete, collapse, or replace duplicate authority first, keep Source Atlas public-reference-only with ADR allowlist plus no-private-life-graph boundary proof, and prefer feature-local projection when canon allows.
 
+Accepted Yellow is forbidden for incomplete required runtime scope. If the issue requires command routing, event/replay behavior, receipt/rejection behavior, side-effect outbox enforcement, direct-write removal, migration proof, projection safety, deletion/quarantine, or executable tests, documentation or classification is not closure. Keep the issue `In Progress`, move it to `Needs Repair`, or wait for `Ready For Review` proof.
+
 ## Contract workflow
 
 1. Name the contract: goal creation, full goal path, scheduling, future step, plan adjustment, conflict resolution, life capital, proof, progress transfer, onboarding, review, Source Atlas, or a truth-file-named scenario.
@@ -52,6 +54,7 @@ Do not add new runtime nouns, suffix-split files, broad model files, Source Atla
 - Do not place new runtime authority under `Features/`, `Core/Runtime/`, `Core/Persistence/`, or `Projection/Commands/`. If touching legacy/scaffolded owners, move toward `Core/LocalRuntimeOS/` or record explicit Yellow debt with a named repair train.
 - Do not create new `+02`, `+03`, or `+04` split files, broad `Models.swift` files, production Swift files above the hard line cap, or architecture nouns without deleting/collapsing duplicate authority in the same scoped train.
 - Every mutation that changes user-visible life state needs command validation, event or ledger append semantics, projection/materialization consequences, a receipt/undo/proof story, replay/idempotency behavior, and a deliberate documented exception if any part is out of scope.
+- Do not close required runtime remediation as Accepted Yellow while any required source change, deletion/quarantine, receipt behavior, migration proof, projection safety, or executable test remains incomplete.
 
 ## Closeout shape
 

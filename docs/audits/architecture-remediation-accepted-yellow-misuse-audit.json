@@ -1,0 +1,677 @@
+{
+  "schema": "ambitions.architectureRemediation.acceptedYellowMisuseAudit.v1",
+  "generated_at": "2026-07-02",
+  "project": "Architecture Simplification + Flagship Readiness Remediation",
+  "repo_head": "74ea1319910ef00276663da4f44ae1321ef4bfcb",
+  "core_rule": "Accepted Yellow is forbidden for incomplete required source/runtime/test remediation scope.",
+  "current_evidence": {
+    "legacy_runtime_current_files": 111,
+    "legacy_runtime_ceiling_files": 111,
+    "persistence_direct_write_unsafe_rows": 19,
+    "persistence_direct_write_unknown_rows": 1,
+    "source_atlas_boundary_audit": "passing local boundary/no-private-graph audits; production R2, release, privacy/legal, entitlement, TestFlight, App Store, and device proof are not proven",
+    "notes": "This audit blocks Green-equivalent completion claims. Linear has been repaired so AMB-1666, AMB-1667, AMB-1668, and AMB-1719 are Needs Repair, with AMB-1730, AMB-1731, and AMB-1732 carrying required M02 repair work. This audit does not fix runtime, persistence, adapter, or Source Atlas stale-file debt."
+  },
+  "context_compaction_guard": {
+    "purpose": "Prevent resumed Codex runs from continuing an older task variant or stale Accepted Yellow closeout after context compaction.",
+    "resume_rule": "On resume or compaction, newest user instruction wins over summaries, memory, older Linear comments, and earlier task variants.",
+    "required_resume_checks": [
+      "Read the latest user-visible task request before editing or closing out.",
+      "Run git status --short --branch and inspect the current diff before editing or committing.",
+      "Run python3 scripts/ambitions-accepted-yellow-misuse-audit.py --json before any remediation closeout.",
+      "Refresh Linear statuses for AMB-1666, AMB-1667, AMB-1668, AMB-1719, AMB-1730, AMB-1731, and AMB-1732 before making tracker claims.",
+      "Do not continue M03, M08 broad work, M09, M10, M11, M12, or M13 from a compacted summary unless the newest user request explicitly asks for it."
+    ],
+    "blocked_resume_patterns": [
+      "Continuing the superseded progress-integrity task when the active task is Accepted Yellow misuse repair.",
+      "Reporting M02 as complete because a prior summary says administrative completion.",
+      "Closing AMB-1666, AMB-1667, AMB-1668, or AMB-1719 from docs/audits alone.",
+      "Treating AMB-1730, AMB-1731, or AMB-1732 as optional follow-ups instead of blockers."
+    ]
+  },
+  "entries": [
+    {
+      "linear_id": "AMB-1665",
+      "title": "Parent Feature - Runtime Authority Map",
+      "current_status": "Accepted Yellow",
+      "classification": "valid_accepted_yellow",
+      "why": "M01 was an authority-map/control-plane parent. Its Accepted Yellow status may describe map scope only and cannot prove runtime remediation Green.",
+      "acceptance_required_actual_change": false,
+      "actual_change_completed": true,
+      "proof_completed": [
+        "docs/audits/runtime-authority-map.md",
+        "M01 inventory leaves AMB-1708, AMB-1709, and AMB-1710"
+      ],
+      "proof_missing": [
+        "runtime authority elimination",
+        "persistence direct-write removal",
+        "external adapter command/rejection receipt implementation",
+        "device and release proof"
+      ],
+      "required_status_after_repair": "Accepted Yellow for map scope only",
+      "required_source_repairs": [],
+      "required_tests": [],
+      "required_follow_up_issues": [
+        "AMB-1666",
+        "AMB-1667",
+        "AMB-1668"
+      ],
+      "blocks_green_claim": true,
+      "blocks_milestone_completion": false
+    },
+    {
+      "linear_id": "AMB-1708",
+      "title": "Runtime Authority Leaf - System surface mutation inventory",
+      "current_status": "Accepted Yellow",
+      "classification": "docs_only_leaf_valid_but_parent_must_remain_open",
+      "why": "The leaf is inventory/classification evidence. It does not implement external adapter command/rejection receipt behavior.",
+      "acceptance_required_actual_change": false,
+      "actual_change_completed": true,
+      "proof_completed": [
+        "docs/audits/runtime-authority-map.md"
+      ],
+      "proof_missing": [
+        "widget/App Intent/share/notification/EventKit/Reminders executable routing proof",
+        "device lifecycle proof"
+      ],
+      "required_status_after_repair": "Accepted Yellow for inventory scope only",
+      "required_source_repairs": [],
+      "required_tests": [],
+      "required_follow_up_issues": [
+        "AMB-1668"
+      ],
+      "blocks_green_claim": true,
+      "blocks_milestone_completion": false
+    },
+    {
+      "linear_id": "AMB-1709",
+      "title": "Runtime Authority Leaf - Persistence import repair and migration mutation inventory",
+      "current_status": "Accepted Yellow",
+      "classification": "docs_only_leaf_valid_but_parent_must_remain_open",
+      "why": "The leaf is inventory evidence. It does not remove unsafe direct writes or prove migrations with executable fixtures.",
+      "acceptance_required_actual_change": false,
+      "actual_change_completed": true,
+      "proof_completed": [
+        "docs/audits/runtime-authority-map.md"
+      ],
+      "proof_missing": [
+        "direct-write removal or executable rejection",
+        "migration replay/idempotency fixtures"
+      ],
+      "required_status_after_repair": "Accepted Yellow for inventory scope only",
+      "required_source_repairs": [],
+      "required_tests": [],
+      "required_follow_up_issues": [
+        "AMB-1667"
+      ],
+      "blocks_green_claim": true,
+      "blocks_milestone_completion": false
+    },
+    {
+      "linear_id": "AMB-1710",
+      "title": "Runtime Authority Leaf - Preview debug and fixture mutation inventory",
+      "current_status": "Accepted Yellow",
+      "classification": "docs_only_leaf_valid_but_parent_must_remain_open",
+      "why": "The leaf is inventory evidence for preview/debug/fixture paths. It does not prove runtime remediation Green.",
+      "acceptance_required_actual_change": false,
+      "actual_change_completed": true,
+      "proof_completed": [
+        "docs/audits/runtime-authority-map.md"
+      ],
+      "proof_missing": [
+        "runtime authority elimination",
+        "fixture/test-only quarantine where required"
+      ],
+      "required_status_after_repair": "Accepted Yellow for inventory scope only",
+      "required_source_repairs": [],
+      "required_tests": [],
+      "required_follow_up_issues": [
+        "AMB-1666"
+      ],
+      "blocks_green_claim": true,
+      "blocks_milestone_completion": false
+    },
+    {
+      "linear_id": "AMB-1666",
+      "title": "Parent Feature - Legacy Runtime Strangler",
+      "current_status": "Needs Repair",
+      "classification": "invalid_required_scope_incomplete",
+      "why": "The parent mission says to end live production authority in Native/Ambitions/Core/Runtime. Current guard evidence still reports 111 legacy runtime files under the ceiling; classification plus a ceiling is not completion.",
+      "acceptance_required_actual_change": true,
+      "actual_change_completed": false,
+      "proof_completed": [
+        "docs/audits/legacy-runtime-strangler-classification.md",
+        "docs/audits/legacy-runtime-strangler-import-replacement.md",
+        "docs/audits/legacy-runtime-strangler-delete-quarantine.md",
+        "python3 scripts/ambitions-legacy-runtime-production-use-guard.py --json"
+      ],
+      "proof_missing": [
+        "Native/Ambitions/Core/Runtime has no live production authority",
+        "remaining legacy runtime owners moved, deleted, quarantined, or adapter/test-only",
+        "production imports do not depend on legacy runtime authority except approved shims",
+        "focused build/typecheck/test proof after elimination"
+      ],
+      "required_status_after_repair": "Needs Repair",
+      "required_source_repairs": [
+        "Eliminate or convert the remaining 111 Core/Runtime files from live production authority",
+        "Lower the legacy runtime guard ceiling as files are removed or converted",
+        "Record approved adapter/test-only shims with removal targets"
+      ],
+      "required_tests": [
+        "python3 scripts/ambitions-legacy-runtime-production-use-guard.py --json",
+        "focused build/typecheck for touched runtime owners",
+        "focused runtime tests for moved owners"
+      ],
+      "required_follow_up_issues": [
+        "AMB-1730"
+      ],
+      "blocks_green_claim": true,
+      "blocks_milestone_completion": true
+    },
+    {
+      "linear_id": "AMB-1713",
+      "title": "Runtime Strangler Leaf - Classify Core Runtime files",
+      "current_status": "Accepted Yellow",
+      "classification": "docs_only_leaf_valid_but_parent_must_remain_open",
+      "why": "Classification evidence is useful, but classified-live legacy authority remains live until moved, deleted, quarantined, or converted.",
+      "acceptance_required_actual_change": false,
+      "actual_change_completed": true,
+      "proof_completed": [
+        "docs/audits/legacy-runtime-strangler-classification.md"
+      ],
+      "proof_missing": [
+        "source deletion/move/quarantine for classified live owners"
+      ],
+      "required_status_after_repair": "Accepted Yellow for classification scope only",
+      "required_source_repairs": [],
+      "required_tests": [],
+      "required_follow_up_issues": [
+        "AMB-1730"
+      ],
+      "blocks_green_claim": true,
+      "blocks_milestone_completion": true
+    },
+    {
+      "linear_id": "AMB-1714",
+      "title": "Runtime Strangler Leaf - Replace production imports from Core Runtime",
+      "current_status": "Accepted Yellow",
+      "classification": "valid_accepted_yellow",
+      "why": "The bounded leaf reduced some production imports, but the parent still has 111 legacy runtime files and cannot count as Green-equivalent.",
+      "acceptance_required_actual_change": true,
+      "actual_change_completed": true,
+      "proof_completed": [
+        "docs/audits/legacy-runtime-strangler-import-replacement.md"
+      ],
+      "proof_missing": [
+        "complete replacement/removal of all live legacy runtime production authority"
+      ],
+      "required_status_after_repair": "Accepted Yellow for bounded replacement slice only",
+      "required_source_repairs": [
+        "Continue import replacement for remaining move-candidate owners"
+      ],
+      "required_tests": [
+        "focused build/typecheck for touched replacements"
+      ],
+      "required_follow_up_issues": [
+        "AMB-1730"
+      ],
+      "blocks_green_claim": true,
+      "blocks_milestone_completion": true
+    },
+    {
+      "linear_id": "AMB-1715",
+      "title": "Runtime Strangler Leaf - Add legacy runtime production-use guard",
+      "current_status": "Accepted Yellow",
+      "classification": "valid_accepted_yellow",
+      "why": "The guard reports new growth and current ceiling state, but a guard ceiling is not legacy authority removal.",
+      "acceptance_required_actual_change": true,
+      "actual_change_completed": true,
+      "proof_completed": [
+        "scripts/ambitions-legacy-runtime-production-use-guard.py",
+        "docs/audits/legacy-runtime-production-use-guard.md"
+      ],
+      "proof_missing": [
+        "zero or adapter/test-only legacy runtime production authority"
+      ],
+      "required_status_after_repair": "Accepted Yellow for guard slice only",
+      "required_source_repairs": [
+        "Lower ceiling as authority is removed or converted"
+      ],
+      "required_tests": [
+        "python3 scripts/ambitions-legacy-runtime-production-use-guard.py --json"
+      ],
+      "required_follow_up_issues": [
+        "AMB-1730"
+      ],
+      "blocks_green_claim": true,
+      "blocks_milestone_completion": true
+    },
+    {
+      "linear_id": "AMB-1716",
+      "title": "Runtime Strangler Leaf - Delete or quarantine first legacy owner batch",
+      "current_status": "Accepted Yellow",
+      "classification": "valid_accepted_yellow",
+      "why": "The leaf quarantined a first batch, but one batch does not complete the parent requirement to end live Core/Runtime production authority.",
+      "acceptance_required_actual_change": true,
+      "actual_change_completed": true,
+      "proof_completed": [
+        "docs/audits/legacy-runtime-strangler-delete-quarantine.md"
+      ],
+      "proof_missing": [
+        "remaining 111 legacy runtime files removed, moved, quarantined, or converted"
+      ],
+      "required_status_after_repair": "Accepted Yellow for first quarantine slice only",
+      "required_source_repairs": [
+        "Continue deletion/quarantine/move batches until no live legacy runtime authority remains"
+      ],
+      "required_tests": [
+        "python3 scripts/ambitions-legacy-runtime-production-use-guard.py --json",
+        "focused build/typecheck after each batch"
+      ],
+      "required_follow_up_issues": [
+        "AMB-1730"
+      ],
+      "blocks_green_claim": true,
+      "blocks_milestone_completion": true
+    },
+    {
+      "linear_id": "AMB-1667",
+      "title": "Parent Feature - Persistence Authority Closeout",
+      "current_status": "Needs Repair",
+      "classification": "invalid_required_scope_incomplete",
+      "why": "The parent mission requires persistence to become storage substrate only. Current direct-write audit reports 19 unsafe rows and 1 unknown row; migration proof is still a plan, not executable proof.",
+      "acceptance_required_actual_change": true,
+      "actual_change_completed": false,
+      "proof_completed": [
+        "docs/audits/persistence-authority-classification.md",
+        "docs/audits/persistence-storage-owner-map.md",
+        "docs/audits/persistence-direct-save-rejection-proof.md",
+        "docs/audits/persistence-existing-data-migration-proof-plan.md",
+        "python3 scripts/ambitions-runtime-direct-write-audit.py --json"
+      ],
+      "proof_missing": [
+        "direct-write audit has zero unsafe/unknown production rows or explicit test-only allowlist",
+        "meaningful app state cannot be created by direct SwiftData/model saves outside command/event/receipt flow",
+        "executable import/restore/migration fixture proof",
+        "rollback, replay, and idempotency proof"
+      ],
+      "required_status_after_repair": "Needs Repair",
+      "required_source_repairs": [
+        "Remove, route, or block unsafe persistence direct writes",
+        "Add executable migration fixtures",
+        "Add rejection receipts for blocked direct writes"
+      ],
+      "required_tests": [
+        "python3 scripts/ambitions-runtime-direct-write-audit.py --json",
+        "focused persistence command/rejection receipt tests",
+        "migration replay/idempotency fixture tests"
+      ],
+      "required_follow_up_issues": [
+        "AMB-1731"
+      ],
+      "blocks_green_claim": true,
+      "blocks_milestone_completion": true
+    },
+    {
+      "linear_id": "AMB-1717",
+      "title": "Persistence Closeout Leaf - Classify persistence files by role",
+      "current_status": "Accepted Yellow",
+      "classification": "docs_only_leaf_valid_but_parent_must_remain_open",
+      "why": "Classification evidence does not convert persistence into substrate-only behavior.",
+      "acceptance_required_actual_change": false,
+      "actual_change_completed": true,
+      "proof_completed": [
+        "docs/audits/persistence-authority-classification.md"
+      ],
+      "proof_missing": [
+        "unsafe direct-write removal or executable rejection",
+        "migration fixture proof"
+      ],
+      "required_status_after_repair": "Accepted Yellow for classification scope only",
+      "required_source_repairs": [],
+      "required_tests": [],
+      "required_follow_up_issues": [
+        "AMB-1731"
+      ],
+      "blocks_green_claim": true,
+      "blocks_milestone_completion": true
+    },
+    {
+      "linear_id": "AMB-1718",
+      "title": "Persistence Closeout Leaf - Map canonical storage under LocalRuntimeOS",
+      "current_status": "Accepted Yellow",
+      "classification": "docs_only_leaf_valid_but_parent_must_remain_open",
+      "why": "Storage-owner mapping is useful, but mapping does not remove unsafe direct writes.",
+      "acceptance_required_actual_change": false,
+      "actual_change_completed": true,
+      "proof_completed": [
+        "docs/audits/persistence-storage-owner-map.md"
+      ],
+      "proof_missing": [
+        "source changes routing persistence writes through LocalRuntimeOS command/event/receipt flow"
+      ],
+      "required_status_after_repair": "Accepted Yellow for owner-map scope only",
+      "required_source_repairs": [],
+      "required_tests": [],
+      "required_follow_up_issues": [
+        "AMB-1731"
+      ],
+      "blocks_green_claim": true,
+      "blocks_milestone_completion": true
+    },
+    {
+      "linear_id": "AMB-1719",
+      "title": "Persistence Closeout Leaf - Add direct model-save rejection proof",
+      "current_status": "Needs Repair",
+      "classification": "invalid_required_scope_incomplete",
+      "why": "The leaf title requires rejection proof. The produced evidence classifies 19 unsafe rows and 1 unknown row; classification is not rejection or removal.",
+      "acceptance_required_actual_change": true,
+      "actual_change_completed": false,
+      "proof_completed": [
+        "docs/audits/persistence-direct-save-rejection-proof.md",
+        "python3 scripts/ambitions-runtime-direct-write-audit.py --json"
+      ],
+      "proof_missing": [
+        "direct-write audit zero unsafe/unknown rows or explicit test-only allowlist",
+        "executable rejection receipts for blocked direct writes"
+      ],
+      "required_status_after_repair": "Needs Repair",
+      "required_source_repairs": [
+        "Remove, route, or block unsafe direct-write rows"
+      ],
+      "required_tests": [
+        "direct model-save rejection tests",
+        "python3 scripts/ambitions-runtime-direct-write-audit.py --json"
+      ],
+      "required_follow_up_issues": [
+        "AMB-1731"
+      ],
+      "blocks_green_claim": true,
+      "blocks_milestone_completion": true
+    },
+    {
+      "linear_id": "AMB-1720",
+      "title": "Persistence Closeout Leaf - Add existing-data migration proof plan",
+      "current_status": "Accepted Yellow",
+      "classification": "docs_only_leaf_valid_but_parent_must_remain_open",
+      "why": "The proof plan is valid planning evidence only. Migration safety Green requires executable fixtures.",
+      "acceptance_required_actual_change": false,
+      "actual_change_completed": true,
+      "proof_completed": [
+        "docs/audits/persistence-existing-data-migration-proof-plan.md"
+      ],
+      "proof_missing": [
+        "executable migration fixtures",
+        "rollback, replay, and idempotency proof"
+      ],
+      "required_status_after_repair": "Accepted Yellow for proof-plan scope only",
+      "required_source_repairs": [],
+      "required_tests": [
+        "migration fixture tests before any migration safety Green"
+      ],
+      "required_follow_up_issues": [
+        "AMB-1731"
+      ],
+      "blocks_green_claim": true,
+      "blocks_milestone_completion": true
+    },
+    {
+      "linear_id": "AMB-1668",
+      "title": "Parent Feature - External Adapter Mutation Enforcement",
+      "current_status": "Needs Repair",
+      "classification": "invalid_required_scope_incomplete",
+      "why": "The parent mission requires external surfaces to be adapters into commands or projection-only readers. Current proof is contract/audit/test evidence with device, lifecycle, system-surface, and command/rejection receipt gaps still open.",
+      "acceptance_required_actual_change": true,
+      "actual_change_completed": false,
+      "proof_completed": [
+        "docs/audits/runtime-authority-map.md",
+        "AMB-1721 through AMB-1724 local contract/audit/test slices"
+      ],
+      "proof_missing": [
+        "all mutating external entry points route into command/outbox/rejection receipt behavior",
+        "external read surfaces use sanitized projection snapshots only",
+        "EventKit/Reminders result receipt behavior",
+        "share/notification/App Intent/widget executable tests where feasible",
+        "device lifecycle and terminated-app proof or release/device blocker"
+      ],
+      "required_status_after_repair": "Needs Repair",
+      "required_source_repairs": [
+        "Implement command/rejection receipt behavior for unsafe or unknown external entry points",
+        "Add explicit release/device blockers for proof that cannot run locally"
+      ],
+      "required_tests": [
+        "focused external adapter command/rejection receipt tests",
+        "projection redaction/staleness tests",
+        "simulator or device lifecycle tests where feasible"
+      ],
+      "required_follow_up_issues": [
+        "AMB-1732"
+      ],
+      "blocks_green_claim": true,
+      "blocks_milestone_completion": true
+    },
+    {
+      "linear_id": "AMB-1721",
+      "title": "External Adapter Leaf - Define ExternalCommandAdapter contract",
+      "current_status": "Accepted Yellow",
+      "classification": "docs_only_leaf_valid_but_parent_must_remain_open",
+      "why": "A contract can define the rule, but it does not prove every external mutating path routes through it.",
+      "acceptance_required_actual_change": false,
+      "actual_change_completed": true,
+      "proof_completed": [
+        "ExternalCommandAdapter contract slice"
+      ],
+      "proof_missing": [
+        "complete external path implementation and tests"
+      ],
+      "required_status_after_repair": "Accepted Yellow for contract scope only",
+      "required_source_repairs": [],
+      "required_tests": [],
+      "required_follow_up_issues": [
+        "AMB-1732"
+      ],
+      "blocks_green_claim": true,
+      "blocks_milestone_completion": true
+    },
+    {
+      "linear_id": "AMB-1722",
+      "title": "External Adapter Leaf - Audit App Intent widget share and notification routing",
+      "current_status": "Accepted Yellow",
+      "classification": "docs_only_leaf_valid_but_parent_must_remain_open",
+      "why": "Audit classification does not implement command/rejection receipt behavior for every route.",
+      "acceptance_required_actual_change": false,
+      "actual_change_completed": true,
+      "proof_completed": [
+        "external routing audit evidence in docs/audits/runtime-authority-map.md"
+      ],
+      "proof_missing": [
+        "executable command/rejection receipt tests for unsafe or unknown routes"
+      ],
+      "required_status_after_repair": "Accepted Yellow for audit scope only",
+      "required_source_repairs": [],
+      "required_tests": [],
+      "required_follow_up_issues": [
+        "AMB-1732"
+      ],
+      "blocks_green_claim": true,
+      "blocks_milestone_completion": true
+    },
+    {
+      "linear_id": "AMB-1723",
+      "title": "External Adapter Leaf - Audit EventKit and Reminders outbox routing",
+      "current_status": "Accepted Yellow",
+      "classification": "docs_only_leaf_valid_but_parent_must_remain_open",
+      "why": "Audit evidence does not by itself prove EventKit/Reminders result receipt behavior, permission-denied receipts, or device lifecycle behavior.",
+      "acceptance_required_actual_change": false,
+      "actual_change_completed": true,
+      "proof_completed": [
+        "EventKit/Reminders audit evidence in docs/audits/runtime-authority-map.md"
+      ],
+      "proof_missing": [
+        "result receipt linkage",
+        "permission-denied rejection receipts",
+        "device lifecycle proof"
+      ],
+      "required_status_after_repair": "Accepted Yellow for audit scope only",
+      "required_source_repairs": [],
+      "required_tests": [],
+      "required_follow_up_issues": [
+        "AMB-1732"
+      ],
+      "blocks_green_claim": true,
+      "blocks_milestone_completion": true
+    },
+    {
+      "linear_id": "AMB-1724",
+      "title": "External Adapter Leaf - Define projection-only snapshot and redaction tests",
+      "current_status": "Accepted Yellow",
+      "classification": "external_proof_deferred_to_release_or_device",
+      "why": "The bounded redaction/projection test slice exists, but device/lifecycle/system-surface proof remains outside the local leaf and must block parent Green.",
+      "acceptance_required_actual_change": true,
+      "actual_change_completed": true,
+      "proof_completed": [
+        "projection-only snapshot and redaction test slice"
+      ],
+      "proof_missing": [
+        "device lifecycle proof",
+        "complete external command/rejection receipt coverage"
+      ],
+      "required_status_after_repair": "Accepted Yellow for local redaction slice only",
+      "required_source_repairs": [
+        "Continue external adapter command/rejection implementation where unsafe/unknown routes remain"
+      ],
+      "required_tests": [
+        "device or simulator lifecycle proof where feasible"
+      ],
+      "required_follow_up_issues": [
+        "AMB-1732",
+        "M12 release/device proof blocker"
+      ],
+      "blocks_green_claim": true,
+      "blocks_milestone_completion": true
+    },
+    {
+      "linear_id": "AMB-1725",
+      "title": "Source Atlas Scope Freeze - ADR allowlist and boundary taxonomy",
+      "current_status": "Accepted Yellow",
+      "classification": "valid_accepted_yellow",
+      "why": "The ADR/taxonomy leaf is valid for Source Atlas freeze governance only. It cannot prove production R2, release, device, privacy/legal, entitlement, TestFlight, or App Store readiness.",
+      "acceptance_required_actual_change": false,
+      "actual_change_completed": true,
+      "proof_completed": [
+        "docs/adr/ADR-2026-07-02-source-atlas-scope-freeze.md"
+      ],
+      "proof_missing": [
+        "AMB-1729 stale inventory/deletion completion",
+        "production R2/release/device/privacy/legal proof"
+      ],
+      "required_status_after_repair": "Accepted Yellow for ADR scope only",
+      "required_source_repairs": [],
+      "required_tests": [],
+      "required_follow_up_issues": [
+        "AMB-1729"
+      ],
+      "blocks_green_claim": true,
+      "blocks_milestone_completion": true
+    },
+    {
+      "linear_id": "AMB-1726",
+      "title": "Source Atlas Scope Freeze - CI guard for allowlisted growth",
+      "current_status": "Accepted Yellow",
+      "classification": "valid_accepted_yellow",
+      "why": "The growth guard leaf is valid for scope-freeze enforcement, but guard proof does not finish stale-file deletion or production readiness.",
+      "acceptance_required_actual_change": true,
+      "actual_change_completed": true,
+      "proof_completed": [
+        "Source Atlas growth guard wired into local/PR checks"
+      ],
+      "proof_missing": [
+        "AMB-1729 stale inventory/deletion completion",
+        "production R2/release/device/privacy/legal proof"
+      ],
+      "required_status_after_repair": "Accepted Yellow for guard scope only",
+      "required_source_repairs": [],
+      "required_tests": [
+        "source atlas growth guard self-test/current run"
+      ],
+      "required_follow_up_issues": [
+        "AMB-1729"
+      ],
+      "blocks_green_claim": true,
+      "blocks_milestone_completion": true
+    },
+    {
+      "linear_id": "AMB-1727",
+      "title": "Source Atlas Scope Freeze - private graph import and mutation denylist",
+      "current_status": "Accepted Yellow",
+      "classification": "valid_accepted_yellow",
+      "why": "The denylist leaf is valid local boundary proof. It cannot broaden Source Atlas beyond public/reference/freshness infrastructure or finish AMB-1729.",
+      "acceptance_required_actual_change": true,
+      "actual_change_completed": true,
+      "proof_completed": [
+        "python3 scripts/source-atlas-no-private-graph-egress-audit.py --json"
+      ],
+      "proof_missing": [
+        "AMB-1729 stale inventory/deletion completion",
+        "production R2/release/device/privacy/legal proof"
+      ],
+      "required_status_after_repair": "Accepted Yellow for denylist scope only",
+      "required_source_repairs": [],
+      "required_tests": [
+        "python3 scripts/source-atlas-no-private-graph-egress-audit.py --json"
+      ],
+      "required_follow_up_issues": [
+        "AMB-1729"
+      ],
+      "blocks_green_claim": true,
+      "blocks_milestone_completion": true
+    },
+    {
+      "linear_id": "AMB-1728",
+      "title": "Source Atlas Scope Freeze - public-pack, R2 payload, redaction, and log tests",
+      "current_status": "Accepted Yellow",
+      "classification": "valid_accepted_yellow",
+      "why": "The local public-pack/R2 payload/redaction/log test slice is valid, but production R2 and release/device/privacy/legal proof remain unproven.",
+      "acceptance_required_actual_change": true,
+      "actual_change_completed": true,
+      "proof_completed": [
+        "public-pack/R2 payload/redaction/log tests",
+        "python3 scripts/source-atlas-boundary-audit.py --json",
+        "python3 scripts/source-atlas-no-private-graph-egress-audit.py --json"
+      ],
+      "proof_missing": [
+        "AMB-1729 stale inventory/deletion completion",
+        "production R2 credentials and promotion proof",
+        "release/device/privacy/legal/TestFlight/App Store proof"
+      ],
+      "required_status_after_repair": "Accepted Yellow for local test slice only",
+      "required_source_repairs": [],
+      "required_tests": [
+        "python3 scripts/source-atlas-boundary-audit.py --json",
+        "python3 scripts/source-atlas-no-private-graph-egress-audit.py --json"
+      ],
+      "required_follow_up_issues": [
+        "AMB-1729",
+        "M12 release/device/privacy blockers"
+      ],
+      "blocks_green_claim": true,
+      "blocks_milestone_completion": true
+    }
+  ],
+  "tracked_non_accepted": [
+    {
+      "linear_id": "AMB-1680",
+      "title": "Parent Feature - Source Atlas Scope Freeze",
+      "current_status": "In Progress",
+      "required_status_after_repair": "Ready For Review only after AMB-1729 stale inventory/deletion is complete and Source Atlas remains public-reference/freshness-only",
+      "notes": "AMB-1680 may run as the narrow M08 exception. It must not become production R2, release, device, privacy/legal, entitlement, TestFlight, or App Store readiness."
+    },
+    {
+      "linear_id": "AMB-1729",
+      "title": "Source Atlas Scope Freeze - stale-file deletion inventory",
+      "current_status": "In Progress",
+      "required_status_after_repair": "Ready For Review only after inventory exists and safe deletions/quarantines are complete",
+      "notes": "AMB-1729 remains required before AMB-1680 can close."
+    }
+  ]
+}

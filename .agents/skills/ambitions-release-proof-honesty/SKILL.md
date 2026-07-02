@@ -26,6 +26,11 @@ Never claim build success, test success, release readiness, TestFlight readiness
 
 Proof automation outranks prose: current scripts, logs, artifacts, owner approvals, and accepted review evidence set the claim ceiling. A Linear comment, truth-doc change, closeout summary, screenshot path, or old report may summarize evidence; it cannot upgrade absent, stale, failed, or not-run proof.
 
+Accepted Yellow is forbidden for incomplete required remediation scope. Release,
+device, privacy/legal, or production-environment risk may be deferred only when
+it is outside the issue's required source/runtime/test acceptance, explicitly
+owner-accepted, linked to a blocker, and not used by any Green claim.
+
 ## Workflow
 
 1. Read `docs/truth/CODEX_START_HERE.md`.
@@ -37,6 +42,7 @@ Proof automation outranks prose: current scripts, logs, artifacts, owner approva
 7. Replace overclaims with proof-bound status: Implemented Yellow, Partial, Aspirational, Blocked, or Unknown when linked evidence is missing.
 8. Preserve explicit owner approval gates for signing, archive export, upload, legal/privacy, public claims, and distribution.
 9. For Source Atlas/R2 wording, require public-reference/no-private-life-graph boundary evidence before any growth, readiness, entitlement, privacy, or production claim.
+10. Reject Accepted Yellow wording when it closes required source/runtime/test remediation instead of leaving the issue `In Progress`, moving it to `Needs Repair`, or waiting for `Ready For Review` proof.
 
 ## Output
 

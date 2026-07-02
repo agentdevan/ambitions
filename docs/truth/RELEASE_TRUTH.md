@@ -352,6 +352,12 @@ Release claim may be Green only when the exact claim has current proof.
 
 Yellow is allowed when source or process exists but validation is incomplete, unavailable, environment-limited, or not current.
 
+Yellow or Accepted Yellow may defer release/device/privacy/legal risk only when
+the risk is outside the issue's required implementation scope, the owner
+explicitly accepts it, a linked blocker protects the future milestone or
+release, and no Green claim depends on the unresolved work. Yellow is forbidden
+as closure for incomplete required source/runtime/test remediation.
+
 ### Red
 
 Red is required for:

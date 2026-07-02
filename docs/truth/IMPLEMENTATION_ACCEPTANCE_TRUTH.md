@@ -308,7 +308,26 @@ Earlier trains may claim scoped Source Green, Runtime Green, Interaction Green, 
 
 ---
 
-## 15. Required Closeout Template
+## 15. Accepted Yellow Restriction
+
+Accepted Yellow is not implementation acceptance for incomplete required scope.
+
+If an issue requires source changes, deletion/quarantine, runtime enforcement,
+direct-write removal, command/rejection receipt behavior, migration proof,
+projection safety, or executable tests, Codex must implement and prove the
+required change or keep the issue `In Progress`/`Needs Repair`. A docs-only
+leaf may close within docs-only scope, but it cannot close a source/runtime
+parent whose acceptance requires actual code, tests, deletion, migration, or
+device/release proof.
+
+M02 Runtime Strangler remains non-Green until legacy runtime authority is
+removed or adapter/test-only, persistence direct writes are removed or blocked,
+external adapters route through command/rejection receipts, and executable
+proof exists.
+
+---
+
+## 16. Required Closeout Template
 
 Use this template for implementation closeout:
 

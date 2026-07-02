@@ -33,6 +33,7 @@ REQUIRED_ARCHITECTURE_PATHS = [
     "scripts/ambitions-architecture-inventory.py",
     "scripts/ambitions-master-sequencing-check.py",
     "scripts/ambitions-remediation-governance-check.py",
+    "scripts/ambitions-accepted-yellow-misuse-audit.py",
     "scripts/ambitions-runtime-direct-write-audit.py",
     "scripts/lifeshape-linear-control-plane-check.py",
     "scripts/ambitions-visual-proof-gate.py",
@@ -868,6 +869,38 @@ def check_runtime_direct_write_contract() -> list[Finding]:
     ]
 
 
+def check_accepted_yellow_misuse_contract() -> list[Finding]:
+    script = ROOT / "scripts" / "ambitions-accepted-yellow-misuse-audit.py"
+    if not script.exists():
+        return [
+            Finding(
+                "accepted-yellow-misuse",
+                rel(script),
+                "accepted-yellow misuse audit is missing",
+            )
+        ]
+
+    result = subprocess.run(
+        [sys.executable, str(script)],
+        cwd=ROOT,
+        check=False,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if result.returncode == 0:
+        return []
+
+    output = "\n".join(part for part in [result.stdout, result.stderr] if part).strip()
+    return [
+        Finding(
+            "accepted-yellow-misuse",
+            rel(script),
+            output[:500] if output else "Accepted Yellow misuse audit failed",
+        )
+    ]
+
+
 def check_action_mutation_contract(files: list[Path]) -> list[Finding]:
     findings: list[Finding] = []
     for path in files:
@@ -936,6 +969,7 @@ def run_self_test() -> int:
     assert any(re.search(pattern, "TabView(selection: $surface) { Text(\"Today\") }", flags=re.IGNORECASE) for pattern in [r"\bTabView\s*\("])
     assert any(re.search(pattern, "let now = Date()", flags=re.IGNORECASE) for pattern in DIRECT_TIME_RENDERING_PATTERNS)
     assert any(re.search(pattern, "\"GPT\"", flags=re.IGNORECASE) for pattern in HOSTED_AI_BACKEND_PATTERNS)
+    assert "scripts/ambitions-accepted-yellow-misuse-audit.py" in REQUIRED_ARCHITECTURE_PATHS
 
     print("ambitions-quality-gate self-test passed")
     return 0
@@ -970,6 +1004,7 @@ def main() -> int:
     findings.extend(check_rendered_product_acceptance_contracts())
     findings.extend(check_green_standard_contract())
     findings.extend(check_runtime_direct_write_contract())
+    findings.extend(check_accepted_yellow_misuse_contract())
     findings.extend(check_action_mutation_contract(files))
 
     grouped = summarize(findings, max_per_gate=args.max_per_gate)

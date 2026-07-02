@@ -408,6 +408,38 @@ def check_legacy_runtime_guard(args: argparse.Namespace) -> list[Finding]:
     ]
 
 
+def check_accepted_yellow_misuse_guard() -> list[Finding]:
+    script = ROOT / "scripts" / "ambitions-accepted-yellow-misuse-audit.py"
+    if not script.exists():
+        return [
+            Finding(
+                "accepted-yellow-misuse",
+                rel(script),
+                "accepted-yellow misuse guard is missing",
+            )
+        ]
+
+    result = subprocess.run(
+        [sys.executable, str(script)],
+        cwd=ROOT,
+        check=False,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if result.returncode == 0:
+        return []
+
+    output = "\n".join(part for part in [result.stdout, result.stderr] if part).strip()
+    return [
+        Finding(
+            "accepted-yellow-misuse",
+            rel(script),
+            output[:500] if output else "accepted-yellow misuse guard failed",
+        )
+    ]
+
+
 def governance_findings(args: argparse.Namespace) -> list[Finding]:
     changed = diff_changed_paths(args.base, not args.no_untracked)
     findings: list[Finding] = []
@@ -537,6 +569,7 @@ def governance_findings(args: argparse.Namespace) -> list[Finding]:
         findings.extend(check_source_atlas_audits())
 
     findings.extend(check_legacy_runtime_guard(args))
+    findings.extend(check_accepted_yellow_misuse_guard())
 
     return findings
 
@@ -580,6 +613,7 @@ def self_test() -> int:
     assert not changed_scope
     assert finding is None
     assert check_legacy_runtime_guard(argparse.Namespace(base=None, no_untracked=True)) == []
+    assert check_accepted_yellow_misuse_guard() == []
     print("ambitions-remediation-governance-check self-test passed")
     return 0
 

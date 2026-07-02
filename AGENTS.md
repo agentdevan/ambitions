@@ -174,6 +174,18 @@ User-facing UI must stay plain, native, and object-led even when the local runti
 
 Use the truth-claim taxonomy in `docs/truth/CODEX_START_HERE.md` before source work or closeout: Implemented Green, Implemented Yellow, Partial, Aspirational, Deprecated, Blocked, or Unknown. Do not report Green unless the exact claim has linked current evidence artifacts. If proof is missing, report Yellow, Partial, Aspirational, Blocked, or Unknown with the next follow-up instead of fake Green.
 
+Accepted Yellow is forbidden for incomplete required remediation scope. If an issue acceptance requires source changes, deletion/quarantine, runtime enforcement, direct-write removal, command/rejection receipt behavior, migration proof, projection safety, or executable tests, documentation cannot close it. Keep the issue `In Progress`, move it to `Needs Repair`, or use `Ready For Review` only after implementation and proof exist. A docs-only leaf may close within docs-only scope, but it cannot close a source/runtime parent. If an issue says guarantee, end, remove, delete, route, prove, block, cannot, must, or no path, documenting the gap is not enough.
+
+M02 Runtime Strangler is not Green until legacy runtime authority is removed or adapter/test-only, persistence direct writes are removed or blocked, external adapters route through command/rejection receipts, and executable proof exists. Until then, M02 can only be described as partially remediated and must block downstream Green claims.
+
+Context compaction guard: after resume, interruption, or context compaction,
+the newest user-visible instruction wins over summaries, memory, stale Linear
+state, and earlier task variants. Before editing, tracker mutation, commit, or
+closeout, re-run the local repo orientation (`git status --short --branch`),
+inspect the current diff, run the relevant local guard for the active task, and
+refresh tracker state for any issue you will claim or mutate. Do not continue a
+superseded task from a compacted summary.
+
 Before any source work, agents must enforce this AMB-1658 remediation freeze gate:
 
 * Do not add new architecture nouns without deleting, collapsing, or replacing duplicate authority in the same scoped train.

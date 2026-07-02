@@ -31,6 +31,8 @@ proof automation outranks prose
 
 Prefer stable laws and canonical owners over new terminology. Do not add new broad architecture nouns, folders, suffix splits, engines, kernels, managers, coordinators, services, systems, runtimes, ledgers, scenes, lenses, or OS labels unless the scoped train deletes, collapses, or replaces duplicate authority or active truth explicitly approves the new owner with a proof gate. Deep runtime is allowed under the canonical LocalRuntimeOS law; user-facing UI must remain plain and object-led. Proof artifacts, scripts, logs, and accepted evidence set the claim ceiling.
 
+Accepted Yellow is forbidden for incomplete required remediation scope. If the issue requires source movement, deletion/quarantine, runtime authority removal, adapter conversion, direct-write removal, command/rejection receipts, migration proof, projection safety, or executable tests, docs/control-plane artifacts do not close the issue. Keep it `In Progress`, move it to `Needs Repair`, or wait for `Ready For Review` proof.
+
 ## Hard Rule
 
 The final architecture tree is binding path ownership, not a suggestion.
@@ -169,6 +171,7 @@ When source already exists outside the final tree:
 4. Leave only a minimal shim if required for compatibility.
 5. Record the shim and removal target in closeout.
 6. Do not call the train Green if new product logic remains in a non-canonical owner.
+7. Do not call the train accepted Yellow if required source/runtime/test remediation remains incomplete.
 
 ## Closeout Required
 

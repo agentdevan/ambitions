@@ -187,8 +187,23 @@ For branch or PR validation:
 python3 scripts/ambitions-remediation-governance-check.py --base origin/main
 ```
 
-Yellow is allowed only when the closeout links the residual gap, names the
-follow-up Linear issue, and does not report fake Green.
+Accepted Yellow is forbidden for incomplete required remediation scope. If an
+issue requires source changes, deletion/quarantine, runtime enforcement,
+direct-write removal, command/rejection receipt behavior, migration proof,
+projection safety, or executable tests, the issue must remain `In Progress`,
+move to `Needs Repair`, or wait in `Ready For Review` until implementation and
+proof exist. A docs-only leaf may close within docs-only scope, but it cannot
+close a source/runtime parent whose acceptance requires actual code, tests,
+deletion, migration, or device/release proof.
+
+Required scope rule: if the issue says guarantee, end, remove, delete, route,
+prove, block, cannot, must, or no path, documenting the gap is not enough.
+
+M02 Runtime Strangler is not Green until legacy runtime authority is removed or
+adapter/test-only, persistence direct writes are removed or blocked, external
+adapters route through command/rejection receipts, and executable proof exists.
+Until then, M02 can only be described as partially remediated and must block
+downstream Green claims.
 
 Every remediation parent Feature closeout must include:
 
@@ -211,6 +226,14 @@ current artifacts and required approvals.
 ## 5. Planning and Patch Discipline
 
 Before editing, Codex must read truth files, inspect live source, identify task type, define narrow scope, list likely touched files, list validation commands, identify rollback, identify hard-red risks, and classify the claim being made with the truth-claim taxonomy in `CODEX_START_HERE.md`: Implemented Green, Implemented Yellow, Partial, Aspirational, Deprecated, Blocked, or Unknown. Every nontrivial issue, plan, and closeout must state how it preserves or improves `Intent -> Context -> Path -> Time Fit -> Reflow -> Action -> Proof -> Learning`, or explicitly state that the work is narrow repo health, security, build, or cleanup work that does not affect product mission. Closeouts should include the canonical Private Life Orchestration closeout phrase from `PRIVATE_LIFE_ORCHESTRATION_TRUTH.md` or an equivalent scoped statement. For work touching Life Capital, goal pathing, Future Steps, continuous adjustment, onboarding, reviews, Source Atlas composition, proof/progress transfer, automation, notifications, or scenario gates, Codex must also map the intended behavior to `PRODUCT_EXPERIENCE_CANON.md` and report which scenario gates are Existing, Partial, Missing, or Unknown.
+
+After resume, interruption, or context compaction, Codex must rehydrate the
+active task before acting: newest user-visible instruction wins over summaries,
+memory, stale Linear state, and earlier task variants. Re-run repo orientation,
+inspect the current diff, run the relevant local guard for the active task, and
+refresh tracker state for any issue being claimed or mutated. If the compacted
+summary points to an older task than the newest user request, stop that older
+task and follow the newest request.
 
 For LocalRuntimeOS, backend/runtime architecture, mutation, persistence substrate, projection, replay, trust/receipt/proof/history, side-effect, capture intake, privacy boundary, Source Atlas runtime boundary, search/recall, sync continuity, migration, repair, or diagnostics work, Codex must start from Linear `AMB-1544` and the active leaf. As of 2026-06-30, `AMB-1545` is canon/process tracking only, `AMB-1546` covers the first command source move, `AMB-1567` covers the TransactionKernel foundation with validated transaction preparation, event/projection-backed commit receipts, idempotency replay, rollback plans, and conflict detection, `AMB-1547` covers the EventJournal foundation, `AMB-1548` covers the ProjectionEngine foundation, `AMB-1549` covers the Storage foundation and SwiftData object-store ownership move, `AMB-1553` covers the RuntimeBoundary foundation and moved local-only/privacy/source-atlas boundary ownership, `AMB-1554` covers the ObjectState foundation and AppState store adapter proof, `AMB-1555` covers the PrivateLifeRuntimeKernel ownership move and typed-signal foundation, `AMB-1556` covers the PlanningEngine ownership move with moved planning, StepCandidateField, and StepCandidateField generator/Source Atlas bridge files plus focused planning and simulation-gauntlet tests, `AMB-1557` covers the TimeEngine ownership move with moved protected/priority placement policies, local temporal graph/store/recurrence/conflict/placement/recovery engines, Time placement coordinator consumption, and focused protected placement, conflict, recurrence, and persistence tests, `AMB-1558` covers the CaptureRouteGraph foundation with moved route graph ownership, durable intake before classification, draft/direct lookup indexes, attachment checksum/quarantine, correction ledger, promotion transactions, and focused capture route/integration tests, `AMB-1559` covers the TrustSystem foundation with moved event ledger, action receipt, proof ledger, source record, tombstone, replay, history, audit, undo, and trust repository ownership, `AMB-1560` covers the SearchRecall foundation with moved local search index ownership and focused Find / Act / Inspect, provenance, privacy, action validation, local semantic ranking, and projection-fed rebuild tests, `AMB-1561` covers the first SideEffectSystem foundation with moved side-effect ledger ownership and focused outbox tests, `AMB-1562` covers the first SyncContinuity foundation with moved SyncCapability/CloudKit continuity/LivingPlan continuity ownership and focused continuity-boundary tests, `AMB-1563` covers the SourceAtlas foundation with moved Source Atlas model/cache/runtime ownership and focused public-pack compiler/firewall/manifest/freshness/cache/projection tests, `AMB-1564` covers the first PrivacySecurity foundation with moved storage privacy boundary ownership and focused redaction/egress/export/local-auth/vault tests, `AMB-1565` covers the first MigrationRepair foundation with focused schema-ledger/planner/dry-run/rollback/quarantine tests, and `AMB-1566` covers the first Diagnostics foundation with redacted local-backend inspectors and performance-budget diagnostics. Later bounded leaves must continue through the full `Core/LocalRuntimeOS/` subtree coverage ledger rather than treating the initial leaves as implementation completion.
 

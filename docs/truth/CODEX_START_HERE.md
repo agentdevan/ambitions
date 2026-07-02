@@ -79,6 +79,7 @@ Architecture remediation and cleanup trains must also run:
 
 ```bash
 python3 scripts/ambitions-remediation-governance-check.py
+python3 scripts/ambitions-accepted-yellow-misuse-audit.py
 ```
 
 For branch or PR validation, pass the base ref:
@@ -115,6 +116,14 @@ Use these labels for truth-doc, Linear, closeout, and governance claims before t
 
 No fake Green rule: Green requires linked current evidence artifacts for the exact claim. Truth files, plans, source names, screenshot paths, string scans, and generated reports can support context, but they do not by themselves prove implementation, runtime behavior, visual quality, accessibility, privacy/legal approval, device readiness, TestFlight readiness, App Store readiness, R2 production readiness, CloudKit readiness, or release readiness.
 
+Context compaction guard: after resume, interruption, or context compaction,
+the newest user-visible instruction wins over summaries, memory, stale tracker
+state, and earlier task variants. Before editing, tracker mutation, commit, or
+closeout, re-run `git status --short --branch`, inspect the current diff, run
+the relevant local guard for the active task, and refresh tracker state for any
+issue you will claim or mutate. Do not continue a superseded task from a
+compacted summary.
+
 ## Allowed closeout statuses
 
 Docs/governance closeout may use:
@@ -126,9 +135,14 @@ Docs/governance closeout may use:
 Remediation parent Feature closeouts may use Green, Yellow, or Red only for
 the exact parent scope being closed. Parent Green requires linked current
 evidence for every required validation and proof artifact in that parent scope.
-Yellow must name the residual gap and the exact Linear follow-up before the
-parent is treated as accepted Yellow. Red means the parent cannot be closed
-without repair.
+Accepted Yellow is forbidden for incomplete required source/runtime/test
+remediation scope. If the parent or leaf requires code, deletion/quarantine,
+runtime enforcement, direct-write removal, command/rejection receipt behavior,
+migration proof, projection safety, device/release proof, or executable tests,
+documentation is not closure. Keep the issue `In Progress`, move it to
+`Needs Repair`, or use `Ready For Review` only after implementation and proof
+exist. A docs-only leaf may close within docs-only scope, but it cannot close a
+source/runtime parent. Red means the parent cannot be closed without repair.
 
 Implementation and release-adjacent closeout must use the split status model:
 
