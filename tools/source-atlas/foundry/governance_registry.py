@@ -63,6 +63,12 @@ REVIEW_STATUSES = {
     "blocked",
     "candidate_only",
 }
+API_REVIEW_STATUSES = {
+    "reviewed",
+    "review_required",
+    "blocked",
+    "candidate_only",
+}
 
 CATALOG_ALLOWED_CLAIMS = {"candidate_source_record", "discovery_metadata"}
 WIKIDATA_ALLOWED_CLAIMS = {"entity_crosswalk", "identifier_crosswalk", "alias_crosswalk"}
@@ -530,12 +536,22 @@ def _validate_api_policy(policy: dict[str, Any]) -> list[str]:
         "secret_redaction_required",
         "high_volume_review_required",
         "budget_owner",
+        "review_owner",
+        "review_status",
+        "last_reviewed_at",
+        "next_review_due_at",
+        "approval_status",
+        "approval_artifact_path",
         "evidence_output_policy",
         "schema_version",
     ]
     for field in required:
         if field not in policy or policy.get(field) is None:
             issues.append(f"{policy_id}: missing API governance field {field}")
+    if policy.get("review_status") not in API_REVIEW_STATUSES:
+        issues.append(f"{policy_id}: unsupported review_status {policy.get('review_status')}")
+    if "outside_approved" in str(policy.get("approval_status", "")) and not policy.get("approval_artifact_path"):
+        issues.append(f"{policy_id}: outside approval claimed without approval artifact")
     if policy.get("key_required") is True and not policy.get("env_var_name"):
         issues.append(f"{policy_id}: key_required requires env_var_name")
     if policy.get("secret_redaction_required") is not True:

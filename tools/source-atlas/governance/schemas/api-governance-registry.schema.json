@@ -27,6 +27,12 @@
           "secret_redaction_required",
           "high_volume_review_required",
           "budget_owner",
+          "review_owner",
+          "review_status",
+          "last_reviewed_at",
+          "next_review_due_at",
+          "approval_status",
+          "approval_artifact_path",
           "evidence_output_policy",
           "schema_version"
         ],

@@ -129,6 +129,11 @@ from .launch_floor_golden_intent_corpus import (
     compile_launch_floor_golden_intent_corpus,
     launch_floor_golden_intent_corpus_markdown,
 )
+from .launch_floor_governance_renewal import (
+    LaunchFloorGovernanceRenewalOptions,
+    compile_launch_floor_governance_renewal,
+    launch_floor_governance_renewal_markdown,
+)
 from .source_needed_fallback_metric import (
     SourceNeededFallbackMetricOptions,
     compile_source_needed_fallback_metric,
@@ -1039,6 +1044,21 @@ def main(argv: list[str] | None = None) -> int:
     launch_floor_golden_intent_parser.add_argument("--run-label", default="current")
     launch_floor_golden_intent_parser.add_argument("--emit-evidence")
     launch_floor_golden_intent_parser.add_argument("--markdown")
+
+    launch_floor_governance_parser = sub.add_parser("launch-floor-governance-renewal")
+    launch_floor_governance_parser.add_argument("--source-lane-registry", default=str(DEFAULT_SOURCE_LANE_REGISTRY_PATH))
+    launch_floor_governance_parser.add_argument("--legal-terms-registry", default=str(DEFAULT_LEGAL_TERMS_REGISTRY_PATH))
+    launch_floor_governance_parser.add_argument("--api-governance-registry", default=str(DEFAULT_API_GOVERNANCE_REGISTRY_PATH))
+    launch_floor_governance_parser.add_argument("--launch-floor-taxonomy", default=str(DEFAULT_LAUNCH_FLOOR_TAXONOMY_PATH))
+    launch_floor_governance_parser.add_argument("--production-target-ledger", default=str(DEFAULT_PRODUCTION_TARGET_LEDGER_PATH))
+    launch_floor_governance_parser.add_argument(
+        "--output-root",
+        default="tools/source-atlas/generated/source-atlas-launch-floor-governance-renewal/current",
+    )
+    launch_floor_governance_parser.add_argument("--created-at", default="2026-07-01T00:00:00Z")
+    launch_floor_governance_parser.add_argument("--run-label", default="current")
+    launch_floor_governance_parser.add_argument("--emit-evidence")
+    launch_floor_governance_parser.add_argument("--markdown")
 
     source_needed_fallback_parser = sub.add_parser("source-needed-fallback-metric")
     source_needed_fallback_parser.add_argument(
@@ -2629,6 +2649,32 @@ def main(argv: list[str] | None = None) -> int:
         if args.markdown:
             Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
             Path(args.markdown).write_text(launch_floor_golden_intent_corpus_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "launch-floor-governance-renewal":
+        result = compile_launch_floor_governance_renewal(
+            LaunchFloorGovernanceRenewalOptions(
+                source_lane_registry_path=Path(args.source_lane_registry),
+                legal_terms_registry_path=Path(args.legal_terms_registry),
+                api_governance_registry_path=Path(args.api_governance_registry),
+                launch_floor_taxonomy_path=Path(args.launch_floor_taxonomy),
+                production_target_ledger_path=Path(args.production_target_ledger),
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                run_label=args.run_label,
+                emit_evidence_path=Path(args.emit_evidence) if args.emit_evidence else None,
+                markdown_path=Path(args.markdown) if args.markdown else None,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            coverage_records = read_json(Path(result["outputPaths"]["coverageMap"])).get("coverageRecords", [])
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(
+                launch_floor_governance_renewal_markdown(result, coverage_records),
+                encoding="utf-8",
+            )
         print_json(result)
         return 0 if result["valid"] else 1
     if args.command == "source-needed-fallback-metric":

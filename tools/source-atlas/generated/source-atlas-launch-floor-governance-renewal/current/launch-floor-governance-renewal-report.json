@@ -1,0 +1,213 @@
+{
+  "allowedClaims": [
+    "source_atlas_launch_floor_governance_renewal_tooling_green",
+    "launch_source_lanes_have_legal_api_owner_renewal_posture",
+    "launch_source_lanes_have_domain_subdomain_coverage_map",
+    "external_release_gates_remain_blocked_without_real_artifacts"
+  ],
+  "blockedClaims": [
+    "accessibility_approval",
+    "app_store_readiness",
+    "final_user_plans_schedules_steps_from_source_atlas_or_r2",
+    "independent_visual_approval",
+    "launch_floor_complete",
+    "outside_legal_approval",
+    "owner_release_approval",
+    "physical_device_readiness",
+    "privacy_legal_release_signoff",
+    "r2_production_ready",
+    "release_green",
+    "source_atlas_launch_floor_ready",
+    "testflight_readiness"
+  ],
+  "checks": [
+    {
+      "issues": [],
+      "name": "governance_registries_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "launch_taxonomy_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "registry_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "launch_source_lanes_have_coverage",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "launch_domains_have_source_lane_coverage",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "launch_subdomains_have_source_lane_coverage",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "source_lane_legal_api_renewal_complete",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "api_renewal_metadata_complete",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "legal_renewal_metadata_complete",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "source_lane_renewal_metadata_complete",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "expired_or_unknown_posture_blocks_coverage",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "outside_approval_not_claimed_without_artifacts",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_claims_r2_native_or_final_outputs_emitted",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-07-01T00:00:00Z",
+  "evidencePaths": {
+    "apiGovernanceRegistry": "tools/source-atlas/governance/api-governance-registry.json",
+    "launchFloorTaxonomy": "/Users/devan/Documents/GitHub/ambitions/tools/source-atlas/frontier/launch-floor-domain-taxonomy.json",
+    "legalTermsRegistry": "tools/source-atlas/governance/legal-terms-registry.json",
+    "productionTargetLedger": "tools/source-atlas/generated/production-target-ledger/train-131-tetradeca-current/production-target-ledger.json",
+    "sourceLaneRegistry": "tools/source-atlas/governance/source-lane-registry.json"
+  },
+  "externalReleaseGateStatus": [
+    {
+      "gateID": "outside_legal_privacy_signoff",
+      "requiredArtifact": "qualified outside legal/privacy approval covering launch corpus, R2 posture, source terms, API policy, and no-private-graph boundary",
+      "status": "blocked_missing_external_artifact"
+    },
+    {
+      "gateID": "physical_device_accessibility_visual_proof",
+      "requiredArtifact": "current physical-device run, independent accessibility review, and independent visual review for affected Source/Trust/Runtime flows",
+      "status": "blocked_missing_external_artifact"
+    },
+    {
+      "gateID": "app_store_testflight_owner_approval",
+      "requiredArtifact": "App Store Connect validation, TestFlight validation, and explicit owner release approval",
+      "status": "blocked_missing_external_artifact"
+    }
+  ],
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.launchFloorGovernanceRenewal.v1",
+  "launchFloorGovernanceRenewalMet": true,
+  "launchSourceLaneIDs": [
+    "bls.public.data.api",
+    "cfpb.adult_financial_education",
+    "college-scorecard.api",
+    "creative-commons.licenses",
+    "data.gov.catalog",
+    "irs.when_to_file",
+    "loc.primary_sources",
+    "nara.constitution.presidency",
+    "nih.medlineplus.wellness",
+    "openalex.dataset",
+    "openalex.works",
+    "sba.business_guide.start_business",
+    "usa.gov.benefits",
+    "w3c.web-standards",
+    "westpoint.redbook.computer_science_major"
+  ],
+  "nonClaims": [
+    "not outside legal approval",
+    "not privacy/legal release signoff",
+    "not physical-device proof",
+    "not accessibility approval",
+    "not independent visual approval",
+    "not App Store Connect validation",
+    "not TestFlight validation",
+    "not owner release approval",
+    "not production R2 write or readback proof",
+    "not launch-floor complete by itself",
+    "not final user plans, schedules, Steps, priority order, or personalized paths from Source Atlas/R2",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "coverageMap": "57affb4b7c9334f51a7428953d7584defeea51ebbfe39a0a0487a5a7fe0b70e7",
+    "markdownPayload": "698a19578729e447e5fc50ffeadf15bfd87704e293dd90ac17a3210093565bc1",
+    "report": "a22f58fb5b5291116f66238cc8d985c73c1605c6ccb2ff2eae59c8091f1edc2d",
+    "reportPayload": "e08045891d940641f98b0797d7e2117e7a52a10f52c31f106261e5172d750063"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/source-atlas-launch-floor-governance-renewal/current/closeout.md",
+    "coverageMap": "tools/source-atlas/generated/source-atlas-launch-floor-governance-renewal/current/source-lane-domain-subdomain-coverage.json",
+    "emitEvidence": "docs/qa/source-atlas/source-atlas-launch-floor-governance-renewal-lff-m06.json",
+    "emitMarkdown": "docs/qa/source-atlas/source-atlas-launch-floor-governance-renewal-lff-m06.md",
+    "markdown": "tools/source-atlas/generated/source-atlas-launch-floor-governance-renewal/current/launch-floor-governance-renewal-report.md",
+    "report": "tools/source-atlas/generated/source-atlas-launch-floor-governance-renewal/current/launch-floor-governance-renewal-report.json"
+  },
+  "overallReadinessStatus": "governance_renewal_ready",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyIssues": [],
+  "productLaw": {
+    "finalPersonalizedOutputsAllowed": false,
+    "outsideLegalApprovalClaimed": false,
+    "privateContextAllowed": false,
+    "publicReferenceOnly": true,
+    "r2Role": "public/reference/freshness infrastructure only",
+    "sourceAtlasGeneratesFinalPlansSchedulesSteps": false
+  },
+  "recordCounts": {
+    "acceptedLaunchDomains": 500,
+    "acceptedLaunchSubdomains": 5000,
+    "apiPolicies": 11,
+    "apiPoliciesWithRenewalMetadata": 11,
+    "claims": 0,
+    "coveredLaunchDomains": 500,
+    "coveredLaunchSubdomains": 5000,
+    "expiredPostures": 0,
+    "externalReleaseGatesOpen": 3,
+    "finalOutputArtifacts": 0,
+    "launchSourceLanes": 15,
+    "legalEntries": 27,
+    "legalEntriesWithRenewalMetadata": 27,
+    "nativeActivationOperations": 0,
+    "outsideApprovalClaimsWithoutArtifacts": 0,
+    "privacyIssues": 0,
+    "r2PublishOperations": 0,
+    "sourceLanes": 34,
+    "sourceLanesWithRenewalMetadata": 34,
+    "unknownOrBlockingLaunchPostures": 0
+  },
+  "renewalReportID": "source_atlas.launch_floor_governance_renewal.c1b0fe9faac9f668",
+  "runLabel": "current",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; governance renewal only, external release gates remain blocked until real proof exists",
+  "status": "Source Green for launch-floor governance renewal tooling",
+  "valid": true,
+  "versionID": "source-atlas-launch-floor-governance-renewal-lff-m06"
+}

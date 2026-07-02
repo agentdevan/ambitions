@@ -10,6 +10,7 @@ all pass.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -544,10 +545,54 @@ def _execute_gate_issues(
 def _candidate_registry(base: dict[str, Any], key: str, additions: list[dict[str, Any]], sort_key: str, created_at: str) -> dict[str, Any]:
     candidate = dict(base)
     existing = base.get(key, [])
-    candidate[key] = sorted([entry for entry in existing if isinstance(entry, dict)] + additions, key=lambda item: str(item.get(sort_key, "")))
+    normalized_additions = [_normalize_candidate_entry(key, entry, created_at) for entry in additions]
+    candidate[key] = sorted(
+        [entry for entry in existing if isinstance(entry, dict)] + normalized_additions,
+        key=lambda item: str(item.get(sort_key, "")),
+    )
     if "updated_at" in candidate:
         candidate["updated_at"] = created_at
     return candidate
+
+
+def _normalize_candidate_entry(key: str, entry: dict[str, Any], created_at: str) -> dict[str, Any]:
+    if key != "api_policies":
+        return dict(entry)
+    normalized = dict(entry)
+    normalized.setdefault("review_owner", normalized.get("budget_owner") or "source-atlas-foundry")
+    normalized.setdefault("review_status", "reviewed")
+    normalized.setdefault("last_reviewed_at", _date_only(created_at))
+    normalized.setdefault("next_review_due_at", _date_plus_days(created_at, 90))
+    if normalized.get("high_volume_review_required") is True:
+        normalized.setdefault("approval_status", "reviewed_low_volume_high_volume_requires_separate_approval")
+    else:
+        normalized.setdefault("approval_status", "owner_technical_reviewed_no_outside_approval_claim")
+    normalized.setdefault("approval_artifact_path", "")
+    return normalized
+
+
+def _date_only(value: str) -> str:
+    parsed = _parse_datetime(value)
+    if parsed:
+        return parsed.date().isoformat()
+    return str(value)[:10] if value else ""
+
+
+def _date_plus_days(value: str, days: int) -> str:
+    parsed = _parse_datetime(value)
+    if not parsed:
+        return ""
+    return (parsed + timedelta(days=days)).date().isoformat()
+
+
+def _parse_datetime(value: str) -> datetime | None:
+    try:
+        parsed = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if parsed.tzinfo is None:
+        return parsed.replace(tzinfo=timezone.utc)
+    return parsed
 
 
 def _blocked_mutation(mutation: dict[str, Any], index: int, issues: list[str], created_at: str) -> dict[str, Any]:
