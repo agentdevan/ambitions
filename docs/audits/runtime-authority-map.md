@@ -1,7 +1,8 @@
 # Runtime Authority Map
 
 Status: AMB-1665 static authority map with AMB-1721 external adapter contract,
-AMB-1722 route audit, and AMB-1723 EventKit/Reminders addenda
+AMB-1722 route audit, AMB-1723 EventKit/Reminders addenda, and AMB-1724
+projection snapshot/redaction addendum
 
 Snapshot date: 2026-07-02
 
@@ -15,11 +16,13 @@ Source snapshots inspected:
 - AMB-1721 baseline: `35975f72cb5d4918057b879ecfc31f350fdd8121` on `main`
 - AMB-1722 baseline: `3ae3b884701babb3694e40a9e5fbaf2f5e62949f` on `main`
 - AMB-1723 baseline: `39ebf1cf1550ad6a169ba7c71fa684ae2fdf56b8` on `main`
+- AMB-1724 baseline: `38f142973fbecca15efd71a39fcac4ec5fe0c6ed` on `main`
 
 Scope: M01 AMB-1665 runtime authority map plus AMB-1721 contract, AMB-1722 route
-audit, and AMB-1723 EventKit/Reminders audit addenda only. No Swift behavior,
-source migration, runtime authority migration, or product-surface behavior was
-changed by this artifact.
+audit, AMB-1723 EventKit/Reminders audit, and AMB-1724 projection
+snapshot/redaction addenda only. No production Swift behavior, source
+migration, runtime authority migration, or product-surface behavior was changed
+by this artifact.
 
 Evidence class: Implemented Yellow. This map classifies current source
 entry points and direct-write markers so later remediation can proceed without
@@ -536,12 +539,32 @@ AMB-1723 does not prove device EventKit/Reminders behavior, permission prompt
 behavior, release readiness, or parent Green. AMB-1724 remains next for external
 projection-only snapshot and redaction proof.
 
+## AMB-1724 Projection Snapshot And Redaction Audit
+
+AMB-1724 installs the route audit in
+`docs/audits/external-adapter-projection-snapshot-redaction.md` and adds focused
+XCTest source in
+`Native/AmbitionsTests/App/ExternalSurfaceSnapshotBoundaryTests.swift`.
+
+The audit keeps the proof ceiling at Implemented Yellow. It classifies the
+external snapshot writer, app-group snapshot store, widget/Live Activity
+snapshot readers, privacy external boundary gate, and Spotlight/Handoff
+payloads as `projectionOnlyReader` source/test paths. The new test source locks
+external snapshot JSON to approved field names and rejects private-class or
+checksum-corrupt shared snapshot records before payload decode.
+
+AMB-1724 does not prove device widget rendering, device Live Activity behavior,
+Lock Screen privacy, physical app-group read/write behavior, extension
+lifecycle, terminated-app behavior, privacy/legal approval, release readiness,
+or parent Green. The widget payload mutation bridge remains `blockedUnknown`
+until a later scoped train proves command receipt/replay or explicit rejection.
+
 ## Residual Gaps
 
 | Gap | Status | Follow-up |
 | --- | --- | --- |
 | App UI and Capture action handlers are statically inventoried, but several paths still write through legacy repository/projection services outside LocalRuntimeOS. | unsafe write / Implemented Yellow by path | AMB-1666, AMB-1667 |
-| System-surface entry points are statically inventoried by AMB-1708, AMB-1721 defines the adapter contract, AMB-1722 classifies App Intent/widget/share/notification/app routes, and AMB-1723 classifies EventKit/Reminders writes. Terminated-app, extension lifecycle, notification device action, widget payload receipt/replay, Live Activity, EventKit/Reminders device behavior, EventKit result receipt linkage, Reminders permission-denied outbox receipt, CloudKit, and external-reader proof is still missing. | Implemented Yellow / `blockedUnknown` widget payload path / EventKit-Reminders Yellow | AMB-1668, AMB-1680 |
+| System-surface entry points are statically inventoried by AMB-1708, AMB-1721 defines the adapter contract, AMB-1722 classifies App Intent/widget/share/notification/app routes, AMB-1723 classifies EventKit/Reminders writes, and AMB-1724 adds external projection snapshot/redaction source-test boundaries. Terminated-app, extension lifecycle, notification device action, widget payload receipt/replay, Live Activity device behavior, EventKit/Reminders device behavior, EventKit result receipt linkage, Reminders permission-denied outbox receipt, CloudKit, and physical app-group proof are still missing. | Implemented Yellow / `blockedUnknown` widget payload path / EventKit-Reminders Yellow / projection snapshot Yellow | AMB-1668, AMB-1680 |
 | Legacy SwiftData/Core/Persistence, portable snapshot import/restore, restore rollback delegation, and Core/Domain local schedule writes remain outside canonical runtime authority; AMB-1720 defines the migration proof plan but does not make these paths Green. | unsafe write / Implemented Yellow plan | AMB-1667, AMB-1717, AMB-1718, AMB-1719, AMB-1720 |
 | Preview/debug/test helpers are statically separated by AMB-1710, but the preview temporary external-creation store remains an `unknown` direct-write audit sentinel and debug/demo seed writers remain legacy repository writes; AMB-1720 treats demo seed as fixture input only, not production mutation proof. | Implemented Yellow / unknown sentinel / unsafe write | AMB-1667, AMB-1668, AMB-1717, AMB-1720 |
 | Runtime authority map and proof matrix are static-source only. | Implemented Yellow | AMB-1711 |
@@ -555,7 +578,7 @@ projection-only snapshot and redaction proof.
 - Files moved or created in Swift source: none.
 - Old/noncanonical source paths removed: none.
 - Compatibility shims left behind: none added by this slice.
-- Architecture debt remains: yes, in legacy persistence/domain direct-write paths, portable snapshot import/restore delegation, restore rollback delegation, system adapter behavior proof, App UI/Capture command-path conversion, unknown widget payload behavior, EventKit/Reminders result receipt and legacy reminder repository proof, CloudKit continuity proof limits, the preview temporary external-creation audit sentinel, and debug/demo seed writers.
-- Next repair train: AMB-1724 under AMB-1668 before source migration parents.
+- Architecture debt remains: yes, in legacy persistence/domain direct-write paths, portable snapshot import/restore delegation, restore rollback delegation, system adapter behavior proof, App UI/Capture command-path conversion, unknown widget payload behavior, EventKit/Reminders result receipt and legacy reminder repository proof, external surface device/lifecycle proof, CloudKit continuity proof limits, the preview temporary external-creation audit sentinel, and debug/demo seed writers.
+- Next repair train after AMB-1668 parent Yellow closeout: AMB-1680 Source Atlas Scope Freeze before M10 proof-system work.
 - No equivalent folder/path interpretation was used.
 - No Green runtime authority claim is made.
