@@ -1,0 +1,1350 @@
+{
+  "title": "Phase 2 Project Dossier Retrofit Packet — 2026-07-01",
+  "date": "2026-07-01",
+  "status": "Yellow / docs-control-plane packet",
+  "dossiers": [
+    {
+      "project_name": "VSP-01 Stage OS Shell Authority",
+      "target_initiative": "Ambitions Native iPhone App Control Plane",
+      "current_state_if_known": "Linear mirror AMB-1480 observed as VSP registry object; repo docs show Ready For Review / Yellow and a nested Spec Ready mismatch requiring owner review.",
+      "recommended_action": "UPDATE",
+      "why": "Repo evidence maps Stage / Shell / Root routing, Context Crown, Continuity Dock, Design System / Visual Language to this project, but Linear needs explicit dossier, parent feature, Codex leaf, proof, and non-claim structure.",
+      "repo_evidence": [
+        "README.md",
+        "AGENTS.md",
+        "docs/truth/README.md",
+        "docs/truth/CODEX_START_HERE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_ORIGIN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/PRODUCT_EXPERIENCE_CANON.md",
+        "docs/design/provenance/vsp-provenance.json",
+        "docs/design/provenance/VSP-SwiftUI-Provenance-Map.md",
+        "docs/design/provenance/Figma-Annotation-Pack.md",
+        "docs/design/provenance/linear-map.json",
+        "docs/design/provenance/proof-registry.json",
+        "docs/qa/vsp-review/VSP01-VSP10-review-analysis.md",
+        "docs/qa/KNOWN_ISSUES.md",
+        "docs/qa/KNOWN_ISSUES_REMEDIATION_DOSSIERS.md",
+        "docs/quality/"
+      ],
+      "vsp_authority": [
+        "VSP-01: Shell Authority Reconfirmation (Ready For Review / Yellow; mirror AMB-1480)"
+      ],
+      "known_issue_mapping": [
+        "AMB-ISSUE-0006",
+        "AMB-ISSUE-0007",
+        "AMB-ISSUE-0806",
+        "AMB-ISSUE-0901",
+        "AMB-ISSUE-0902",
+        "AMB-ISSUE-1011",
+        "AMB-ISSUE-1701-1709",
+        "AMB-ISSUE-0802",
+        "AMB-ISSUE-1503",
+        "AMB-ISSUE-1901-1906",
+        "AMB-ISSUE-0013-0015",
+        "AMB-ISSUE-0801-0807",
+        "AMB-ISSUE-0903-0912",
+        "AMB-ISSUE-1801",
+        "AMB-ISSUE-1802"
+      ],
+      "source_owner_paths": [
+        "Native/Ambitions/Stage/AmbitionsStage.swift",
+        "Native/Ambitions/Stage/AmbitionsSurface.swift",
+        "Native/Ambitions/Stage/AmbitionsRootStageSurfaceHost.swift",
+        "Native/Ambitions/Stage/StageDockRail.swift"
+      ],
+      "recommended_linear_document_title": "VSP-01 Stage OS Shell Authority — Repo-Grounded Design/Spec Dossier",
+      "recommended_document_outline": [
+        "Mission",
+        "Product meaning",
+        "User use cases",
+        "App surface / object ownership",
+        "Non-goals / hard reds",
+        "Repo truth evidence",
+        "VSP authority",
+        "Source-owner paths",
+        "Runtime dependencies",
+        "Source Atlas / R2 / privacy boundary, if relevant",
+        "Accessibility requirements",
+        "Copy/state language",
+        "Known issue mappings",
+        "Parent Feature requirements",
+        "Codex leaf requirements",
+        "Validation commands",
+        "Proof required for Green",
+        "Explicit non-claims"
+      ],
+      "acceptance_standard": [
+        "Dossier cites truth files, VSP authority if applicable, source-owner paths, known issue mappings, validation commands, proof artifacts required, and non-claims.",
+        "Dossier preserves four-surface product law, Capture composer law, Motion behavior law, local-first/account/R2 law, and runtime mutation law.",
+        "Dossier does not claim implementation, Green, release readiness, issue closure, or Ready For Codex without current scoped proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ],
+      "phase_3_dependencies": [
+        "Create or update Parent Feature with acceptance criteria, proof artifacts, validation commands, and non-claims.",
+        "Create bounded Codex leaves only after owner paths, VSP authority, known issues, rollback, and proof ceilings are present.",
+        "Attach known issue and VSP authority mappings to the Linear hierarchy."
+      ],
+      "phase_4_readiness_blockers": [
+        "Phase 3 hierarchy repair not yet applied in Linear.",
+        "No current device screenshot/manual accessibility/runtime receipt proof for app-wide Green.",
+        "Stale/duplicate ownership risks must be reconciled before implementation leaves are promoted."
+      ]
+    },
+    {
+      "project_name": "VSP-02 Today Reality Window",
+      "target_initiative": "Ambitions Native iPhone App Control Plane",
+      "current_state_if_known": "Linear mirror AMB-1481 observed; repo evidence supports Spec Ready / Yellow target only.",
+      "recommended_action": "UPDATE",
+      "why": "Repo evidence maps Today, Daily / weekly / monthly review, Recovery / re-entry to this project, but Linear needs explicit dossier, parent feature, Codex leaf, proof, and non-claim structure.",
+      "repo_evidence": [
+        "README.md",
+        "AGENTS.md",
+        "docs/truth/README.md",
+        "docs/truth/CODEX_START_HERE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_ORIGIN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/PRODUCT_EXPERIENCE_CANON.md",
+        "docs/design/provenance/vsp-provenance.json",
+        "docs/design/provenance/VSP-SwiftUI-Provenance-Map.md",
+        "docs/design/provenance/Figma-Annotation-Pack.md",
+        "docs/design/provenance/linear-map.json",
+        "docs/design/provenance/proof-registry.json",
+        "docs/qa/vsp-review/VSP01-VSP10-review-analysis.md",
+        "docs/qa/KNOWN_ISSUES.md",
+        "docs/qa/KNOWN_ISSUES_REMEDIATION_DOSSIERS.md",
+        "docs/quality/"
+      ],
+      "vsp_authority": [
+        "VSP-02: Today Reality Window (Spec Ready / Yellow; mirror AMB-1481)"
+      ],
+      "known_issue_mapping": [
+        "AMB-ISSUE-0001",
+        "AMB-ISSUE-0004",
+        "AMB-ISSUE-0005",
+        "AMB-ISSUE-0016",
+        "AMB-ISSUE-0101-0108",
+        "AMB-ISSUE-1001-1011",
+        "AMB-ISSUE-1201"
+      ],
+      "source_owner_paths": [
+        "Native/Ambitions/Surfaces/Today/TodaySurface.swift",
+        "Native/Ambitions/Surfaces/Today/TodayObjectView.swift",
+        "Native/Ambitions/Surfaces/Today/TodayAccessibility.swift"
+      ],
+      "recommended_linear_document_title": "VSP-02 Today Reality Window — Repo-Grounded Design/Spec Dossier",
+      "recommended_document_outline": [
+        "Mission",
+        "Product meaning",
+        "User use cases",
+        "App surface / object ownership",
+        "Non-goals / hard reds",
+        "Repo truth evidence",
+        "VSP authority",
+        "Source-owner paths",
+        "Runtime dependencies",
+        "Source Atlas / R2 / privacy boundary, if relevant",
+        "Accessibility requirements",
+        "Copy/state language",
+        "Known issue mappings",
+        "Parent Feature requirements",
+        "Codex leaf requirements",
+        "Validation commands",
+        "Proof required for Green",
+        "Explicit non-claims"
+      ],
+      "acceptance_standard": [
+        "Dossier cites truth files, VSP authority if applicable, source-owner paths, known issue mappings, validation commands, proof artifacts required, and non-claims.",
+        "Dossier preserves four-surface product law, Capture composer law, Motion behavior law, local-first/account/R2 law, and runtime mutation law.",
+        "Dossier does not claim implementation, Green, release readiness, issue closure, or Ready For Codex without current scoped proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ],
+      "phase_3_dependencies": [
+        "Create or update Parent Feature with acceptance criteria, proof artifacts, validation commands, and non-claims.",
+        "Create bounded Codex leaves only after owner paths, VSP authority, known issues, rollback, and proof ceilings are present.",
+        "Attach known issue and VSP authority mappings to the Linear hierarchy."
+      ],
+      "phase_4_readiness_blockers": [
+        "Phase 3 hierarchy repair not yet applied in Linear.",
+        "No current device screenshot/manual accessibility/runtime receipt proof for app-wide Green.",
+        "Stale/duplicate ownership risks must be reconciled before implementation leaves are promoted."
+      ]
+    },
+    {
+      "project_name": "VSP-03 Goals Life Area Atlas",
+      "target_initiative": "Ambitions Native iPhone App Control Plane",
+      "current_state_if_known": "Linear mirror AMB-1482 observed; repo evidence supports Spec Ready / Yellow target only.",
+      "recommended_action": "UPDATE",
+      "why": "Repo evidence maps Goals, Product Object Grammar, Recovery / re-entry to this project, but Linear needs explicit dossier, parent feature, Codex leaf, proof, and non-claim structure.",
+      "repo_evidence": [
+        "README.md",
+        "AGENTS.md",
+        "docs/truth/README.md",
+        "docs/truth/CODEX_START_HERE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_ORIGIN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/PRODUCT_EXPERIENCE_CANON.md",
+        "docs/design/provenance/vsp-provenance.json",
+        "docs/design/provenance/VSP-SwiftUI-Provenance-Map.md",
+        "docs/design/provenance/Figma-Annotation-Pack.md",
+        "docs/design/provenance/linear-map.json",
+        "docs/design/provenance/proof-registry.json",
+        "docs/qa/vsp-review/VSP01-VSP10-review-analysis.md",
+        "docs/qa/KNOWN_ISSUES.md",
+        "docs/qa/KNOWN_ISSUES_REMEDIATION_DOSSIERS.md",
+        "docs/quality/"
+      ],
+      "vsp_authority": [
+        "VSP-03: Goals Life Area Atlas (Spec Ready / Yellow; mirror AMB-1482)"
+      ],
+      "known_issue_mapping": [
+        "AMB-ISSUE-0401-0406",
+        "AMB-ISSUE-1301-1309"
+      ],
+      "source_owner_paths": [
+        "Native/Ambitions/Surfaces/Goals/GoalsSurface.swift",
+        "Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift",
+        "Native/Ambitions/Projection/StageScenes/GoalsStageScene.swift"
+      ],
+      "recommended_linear_document_title": "VSP-03 Goals Life Area Atlas — Repo-Grounded Design/Spec Dossier",
+      "recommended_document_outline": [
+        "Mission",
+        "Product meaning",
+        "User use cases",
+        "App surface / object ownership",
+        "Non-goals / hard reds",
+        "Repo truth evidence",
+        "VSP authority",
+        "Source-owner paths",
+        "Runtime dependencies",
+        "Source Atlas / R2 / privacy boundary, if relevant",
+        "Accessibility requirements",
+        "Copy/state language",
+        "Known issue mappings",
+        "Parent Feature requirements",
+        "Codex leaf requirements",
+        "Validation commands",
+        "Proof required for Green",
+        "Explicit non-claims"
+      ],
+      "acceptance_standard": [
+        "Dossier cites truth files, VSP authority if applicable, source-owner paths, known issue mappings, validation commands, proof artifacts required, and non-claims.",
+        "Dossier preserves four-surface product law, Capture composer law, Motion behavior law, local-first/account/R2 law, and runtime mutation law.",
+        "Dossier does not claim implementation, Green, release readiness, issue closure, or Ready For Codex without current scoped proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ],
+      "phase_3_dependencies": [
+        "Create or update Parent Feature with acceptance criteria, proof artifacts, validation commands, and non-claims.",
+        "Create bounded Codex leaves only after owner paths, VSP authority, known issues, rollback, and proof ceilings are present.",
+        "Attach known issue and VSP authority mappings to the Linear hierarchy."
+      ],
+      "phase_4_readiness_blockers": [
+        "Phase 3 hierarchy repair not yet applied in Linear.",
+        "No current device screenshot/manual accessibility/runtime receipt proof for app-wide Green.",
+        "Stale/duplicate ownership risks must be reconciled before implementation leaves are promoted."
+      ]
+    },
+    {
+      "project_name": "VSP-04 Time Native Life Calendar",
+      "target_initiative": "Ambitions Native iPhone App Control Plane",
+      "current_state_if_known": "Linear mirror AMB-1483 observed; repo evidence supports Spec Ready / Yellow target only.",
+      "recommended_action": "UPDATE",
+      "why": "Repo evidence maps Time, TimeEngine, EventKit / Reminders to this project, but Linear needs explicit dossier, parent feature, Codex leaf, proof, and non-claim structure.",
+      "repo_evidence": [
+        "README.md",
+        "AGENTS.md",
+        "docs/truth/README.md",
+        "docs/truth/CODEX_START_HERE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_ORIGIN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/PRODUCT_EXPERIENCE_CANON.md",
+        "docs/design/provenance/vsp-provenance.json",
+        "docs/design/provenance/VSP-SwiftUI-Provenance-Map.md",
+        "docs/design/provenance/Figma-Annotation-Pack.md",
+        "docs/design/provenance/linear-map.json",
+        "docs/design/provenance/proof-registry.json",
+        "docs/qa/vsp-review/VSP01-VSP10-review-analysis.md",
+        "docs/qa/KNOWN_ISSUES.md",
+        "docs/qa/KNOWN_ISSUES_REMEDIATION_DOSSIERS.md",
+        "docs/quality/"
+      ],
+      "vsp_authority": [
+        "VSP-04: Time Native Life Calendar (Spec Ready / Yellow; mirror AMB-1483)"
+      ],
+      "known_issue_mapping": [
+        "AMB-ISSUE-0009",
+        "AMB-ISSUE-0501-0507",
+        "AMB-ISSUE-0913",
+        "AMB-ISSUE-1401-1405"
+      ],
+      "source_owner_paths": [
+        "Native/Ambitions/Surfaces/Time/TimeSurface.swift",
+        "Native/Ambitions/Surfaces/Time/TimeObjectView.swift",
+        "Native/Ambitions/Surfaces/Time/TimeAccessibility.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/"
+      ],
+      "recommended_linear_document_title": "VSP-04 Time Native Life Calendar — Repo-Grounded Design/Spec Dossier",
+      "recommended_document_outline": [
+        "Mission",
+        "Product meaning",
+        "User use cases",
+        "App surface / object ownership",
+        "Non-goals / hard reds",
+        "Repo truth evidence",
+        "VSP authority",
+        "Source-owner paths",
+        "Runtime dependencies",
+        "Source Atlas / R2 / privacy boundary, if relevant",
+        "Accessibility requirements",
+        "Copy/state language",
+        "Known issue mappings",
+        "Parent Feature requirements",
+        "Codex leaf requirements",
+        "Validation commands",
+        "Proof required for Green",
+        "Explicit non-claims"
+      ],
+      "acceptance_standard": [
+        "Dossier cites truth files, VSP authority if applicable, source-owner paths, known issue mappings, validation commands, proof artifacts required, and non-claims.",
+        "Dossier preserves four-surface product law, Capture composer law, Motion behavior law, local-first/account/R2 law, and runtime mutation law.",
+        "Dossier does not claim implementation, Green, release readiness, issue closure, or Ready For Codex without current scoped proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ],
+      "phase_3_dependencies": [
+        "Create or update Parent Feature with acceptance criteria, proof artifacts, validation commands, and non-claims.",
+        "Create bounded Codex leaves only after owner paths, VSP authority, known issues, rollback, and proof ceilings are present.",
+        "Attach known issue and VSP authority mappings to the Linear hierarchy."
+      ],
+      "phase_4_readiness_blockers": [
+        "Phase 3 hierarchy repair not yet applied in Linear.",
+        "No current device screenshot/manual accessibility/runtime receipt proof for app-wide Green.",
+        "Stale/duplicate ownership risks must be reconciled before implementation leaves are promoted."
+      ]
+    },
+    {
+      "project_name": "VSP-05 Global Capture Composer",
+      "target_initiative": "Ambitions Native iPhone App Control Plane",
+      "current_state_if_known": "Linear mirror AMB-1484 observed; current target is F Quiet Placement Review R3, with earlier R1/R2 retained as failure evidence.",
+      "recommended_action": "UPDATE",
+      "why": "Repo evidence maps Capture, CaptureRouteGraph, Share Extension, Search / Find / Act / Inspect to this project, but Linear needs explicit dossier, parent feature, Codex leaf, proof, and non-claim structure.",
+      "repo_evidence": [
+        "README.md",
+        "AGENTS.md",
+        "docs/truth/README.md",
+        "docs/truth/CODEX_START_HERE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_ORIGIN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/PRODUCT_EXPERIENCE_CANON.md",
+        "docs/design/provenance/vsp-provenance.json",
+        "docs/design/provenance/VSP-SwiftUI-Provenance-Map.md",
+        "docs/design/provenance/Figma-Annotation-Pack.md",
+        "docs/design/provenance/linear-map.json",
+        "docs/design/provenance/proof-registry.json",
+        "docs/qa/vsp-review/VSP01-VSP10-review-analysis.md",
+        "docs/qa/KNOWN_ISSUES.md",
+        "docs/qa/KNOWN_ISSUES_REMEDIATION_DOSSIERS.md",
+        "docs/quality/"
+      ],
+      "vsp_authority": [
+        "VSP-05: Capture Open Field Composer (Spec Ready / Yellow; mirror AMB-1484)"
+      ],
+      "known_issue_mapping": [
+        "AMB-ISSUE-0002",
+        "AMB-ISSUE-0003",
+        "AMB-ISSUE-0008",
+        "AMB-ISSUE-0012",
+        "AMB-ISSUE-0201-0205",
+        "AMB-ISSUE-1101-1111",
+        "AMB-ISSUE-2002",
+        "AMB-ISSUE-2003",
+        "AMB-ISSUE-0701",
+        "AMB-ISSUE-1601-1605"
+      ],
+      "source_owner_paths": [
+        "Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift",
+        "Native/Ambitions/Composer/Capture/CaptureSurface.swift",
+        "Native/Ambitions/Composer/Capture/CaptureObjectView.swift",
+        "Native/AmbitionsShareExtension/"
+      ],
+      "recommended_linear_document_title": "VSP-05 Global Capture Composer — Repo-Grounded Design/Spec Dossier",
+      "recommended_document_outline": [
+        "Mission",
+        "Product meaning",
+        "User use cases",
+        "App surface / object ownership",
+        "Non-goals / hard reds",
+        "Repo truth evidence",
+        "VSP authority",
+        "Source-owner paths",
+        "Runtime dependencies",
+        "Source Atlas / R2 / privacy boundary, if relevant",
+        "Accessibility requirements",
+        "Copy/state language",
+        "Known issue mappings",
+        "Parent Feature requirements",
+        "Codex leaf requirements",
+        "Validation commands",
+        "Proof required for Green",
+        "Explicit non-claims"
+      ],
+      "acceptance_standard": [
+        "Dossier cites truth files, VSP authority if applicable, source-owner paths, known issue mappings, validation commands, proof artifacts required, and non-claims.",
+        "Dossier preserves four-surface product law, Capture composer law, Motion behavior law, local-first/account/R2 law, and runtime mutation law.",
+        "Dossier does not claim implementation, Green, release readiness, issue closure, or Ready For Codex without current scoped proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ],
+      "phase_3_dependencies": [
+        "Create or update Parent Feature with acceptance criteria, proof artifacts, validation commands, and non-claims.",
+        "Create bounded Codex leaves only after owner paths, VSP authority, known issues, rollback, and proof ceilings are present.",
+        "Attach known issue and VSP authority mappings to the Linear hierarchy."
+      ],
+      "phase_4_readiness_blockers": [
+        "Phase 3 hierarchy repair not yet applied in Linear.",
+        "No current device screenshot/manual accessibility/runtime receipt proof for app-wide Green.",
+        "Stale/duplicate ownership risks must be reconciled before implementation leaves are promoted."
+      ]
+    },
+    {
+      "project_name": "VSP-06 You Native Settings",
+      "target_initiative": "Ambitions Native iPhone App Control Plane",
+      "current_state_if_known": "Linear mirror AMB-1485 observed; repo evidence supports Spec Ready / Yellow target only.",
+      "recommended_action": "UPDATE",
+      "why": "Repo evidence maps You, Optional account, Entitlements / subscription, Product education to this project, but Linear needs explicit dossier, parent feature, Codex leaf, proof, and non-claim structure.",
+      "repo_evidence": [
+        "README.md",
+        "AGENTS.md",
+        "docs/truth/README.md",
+        "docs/truth/CODEX_START_HERE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_ORIGIN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/PRODUCT_EXPERIENCE_CANON.md",
+        "docs/design/provenance/vsp-provenance.json",
+        "docs/design/provenance/VSP-SwiftUI-Provenance-Map.md",
+        "docs/design/provenance/Figma-Annotation-Pack.md",
+        "docs/design/provenance/linear-map.json",
+        "docs/design/provenance/proof-registry.json",
+        "docs/qa/vsp-review/VSP01-VSP10-review-analysis.md",
+        "docs/qa/KNOWN_ISSUES.md",
+        "docs/qa/KNOWN_ISSUES_REMEDIATION_DOSSIERS.md",
+        "docs/quality/"
+      ],
+      "vsp_authority": [
+        "VSP-06: You Native Settings (Spec Ready / Yellow; mirror AMB-1485)"
+      ],
+      "known_issue_mapping": [
+        "AMB-ISSUE-0601-0607",
+        "AMB-ISSUE-1501-1505",
+        "AMB-ISSUE-2004",
+        "AMB-ISSUE-2005",
+        "AMB-ISSUE-2007"
+      ],
+      "source_owner_paths": [
+        "Native/Ambitions/Surfaces/You/YouSurface.swift",
+        "Native/Ambitions/Surfaces/You/YouRootSurface.swift",
+        "Native/Ambitions/Surfaces/You/YouObjectView.swift",
+        "Native/Ambitions/Trust/"
+      ],
+      "recommended_linear_document_title": "VSP-06 You Native Settings — Repo-Grounded Design/Spec Dossier",
+      "recommended_document_outline": [
+        "Mission",
+        "Product meaning",
+        "User use cases",
+        "App surface / object ownership",
+        "Non-goals / hard reds",
+        "Repo truth evidence",
+        "VSP authority",
+        "Source-owner paths",
+        "Runtime dependencies",
+        "Source Atlas / R2 / privacy boundary, if relevant",
+        "Accessibility requirements",
+        "Copy/state language",
+        "Known issue mappings",
+        "Parent Feature requirements",
+        "Codex leaf requirements",
+        "Validation commands",
+        "Proof required for Green",
+        "Explicit non-claims"
+      ],
+      "acceptance_standard": [
+        "Dossier cites truth files, VSP authority if applicable, source-owner paths, known issue mappings, validation commands, proof artifacts required, and non-claims.",
+        "Dossier preserves four-surface product law, Capture composer law, Motion behavior law, local-first/account/R2 law, and runtime mutation law.",
+        "Dossier does not claim implementation, Green, release readiness, issue closure, or Ready For Codex without current scoped proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ],
+      "phase_3_dependencies": [
+        "Create or update Parent Feature with acceptance criteria, proof artifacts, validation commands, and non-claims.",
+        "Create bounded Codex leaves only after owner paths, VSP authority, known issues, rollback, and proof ceilings are present.",
+        "Attach known issue and VSP authority mappings to the Linear hierarchy."
+      ],
+      "phase_4_readiness_blockers": [
+        "Phase 3 hierarchy repair not yet applied in Linear.",
+        "No current device screenshot/manual accessibility/runtime receipt proof for app-wide Green.",
+        "Stale/duplicate ownership risks must be reconciled before implementation leaves are promoted."
+      ]
+    },
+    {
+      "project_name": "VSP-07 Trust Inspection Details",
+      "target_initiative": "Ambitions Native iPhone App Control Plane",
+      "current_state_if_known": "Linear mirror AMB-1486 observed; contextual inspection only, not a root surface.",
+      "recommended_action": "UPDATE",
+      "why": "Repo evidence maps Trust / Proof / Source / Privacy / History / Receipts, TrustSystem, PrivacySecurity to this project, but Linear needs explicit dossier, parent feature, Codex leaf, proof, and non-claim structure.",
+      "repo_evidence": [
+        "README.md",
+        "AGENTS.md",
+        "docs/truth/README.md",
+        "docs/truth/CODEX_START_HERE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_ORIGIN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/PRODUCT_EXPERIENCE_CANON.md",
+        "docs/design/provenance/vsp-provenance.json",
+        "docs/design/provenance/VSP-SwiftUI-Provenance-Map.md",
+        "docs/design/provenance/Figma-Annotation-Pack.md",
+        "docs/design/provenance/linear-map.json",
+        "docs/design/provenance/proof-registry.json",
+        "docs/qa/vsp-review/VSP01-VSP10-review-analysis.md",
+        "docs/qa/KNOWN_ISSUES.md",
+        "docs/qa/KNOWN_ISSUES_REMEDIATION_DOSSIERS.md",
+        "docs/quality/"
+      ],
+      "vsp_authority": [
+        "VSP-07: Trust Inspection Details (Spec Ready / Yellow; mirror AMB-1486)"
+      ],
+      "known_issue_mapping": [
+        "AMB-ISSUE-0013-0015",
+        "AMB-ISSUE-0801-0807",
+        "AMB-ISSUE-0903-0912",
+        "AMB-ISSUE-1801",
+        "AMB-ISSUE-1802",
+        "AMB-ISSUE-2004-2009",
+        "AMB-ISSUE-2012"
+      ],
+      "source_owner_paths": [
+        "Native/Ambitions/Trust/InspectionSurface.swift",
+        "Native/Ambitions/Trust/ProofInspectionView.swift",
+        "Native/Ambitions/Trust/SourceInspectionView.swift",
+        "Native/Ambitions/Trust/PrivacyInspectionView.swift",
+        "Native/Ambitions/Trust/ReceiptInspectionView.swift"
+      ],
+      "recommended_linear_document_title": "VSP-07 Trust Inspection Details — Repo-Grounded Design/Spec Dossier",
+      "recommended_document_outline": [
+        "Mission",
+        "Product meaning",
+        "User use cases",
+        "App surface / object ownership",
+        "Non-goals / hard reds",
+        "Repo truth evidence",
+        "VSP authority",
+        "Source-owner paths",
+        "Runtime dependencies",
+        "Source Atlas / R2 / privacy boundary, if relevant",
+        "Accessibility requirements",
+        "Copy/state language",
+        "Known issue mappings",
+        "Parent Feature requirements",
+        "Codex leaf requirements",
+        "Validation commands",
+        "Proof required for Green",
+        "Explicit non-claims"
+      ],
+      "acceptance_standard": [
+        "Dossier cites truth files, VSP authority if applicable, source-owner paths, known issue mappings, validation commands, proof artifacts required, and non-claims.",
+        "Dossier preserves four-surface product law, Capture composer law, Motion behavior law, local-first/account/R2 law, and runtime mutation law.",
+        "Dossier does not claim implementation, Green, release readiness, issue closure, or Ready For Codex without current scoped proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ],
+      "phase_3_dependencies": [
+        "Create or update Parent Feature with acceptance criteria, proof artifacts, validation commands, and non-claims.",
+        "Create bounded Codex leaves only after owner paths, VSP authority, known issues, rollback, and proof ceilings are present.",
+        "Attach known issue and VSP authority mappings to the Linear hierarchy."
+      ],
+      "phase_4_readiness_blockers": [
+        "Phase 3 hierarchy repair not yet applied in Linear.",
+        "No current device screenshot/manual accessibility/runtime receipt proof for app-wide Green.",
+        "Stale/duplicate ownership risks must be reconciled before implementation leaves are promoted."
+      ]
+    },
+    {
+      "project_name": "VSP-08 External Boundary / Account / R2 / Source Atlas",
+      "target_initiative": "Persistence Privacy Account Boundary",
+      "current_state_if_known": "Linear mirror AMB-1487 observed; repo evidence supports Spec Ready / Yellow target only and explicitly blocks account/R2/privacy readiness claims.",
+      "recommended_action": "UPDATE",
+      "why": "Repo evidence maps SourceAtlas, RuntimeBoundary, Optional account, Account deletion / erasure, CloudKit / continuity, Legal / terms / privacy policy to this project, but Linear needs explicit dossier, parent feature, Codex leaf, proof, and non-claim structure.",
+      "repo_evidence": [
+        "README.md",
+        "AGENTS.md",
+        "docs/truth/README.md",
+        "docs/truth/CODEX_START_HERE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_ORIGIN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/PRODUCT_EXPERIENCE_CANON.md",
+        "docs/design/provenance/vsp-provenance.json",
+        "docs/design/provenance/VSP-SwiftUI-Provenance-Map.md",
+        "docs/design/provenance/Figma-Annotation-Pack.md",
+        "docs/design/provenance/linear-map.json",
+        "docs/design/provenance/proof-registry.json",
+        "docs/qa/vsp-review/VSP01-VSP10-review-analysis.md",
+        "docs/qa/KNOWN_ISSUES.md",
+        "docs/qa/KNOWN_ISSUES_REMEDIATION_DOSSIERS.md",
+        "docs/quality/",
+        "docs/qa/source-atlas/",
+        "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/"
+      ],
+      "vsp_authority": [
+        "VSP-08: External Boundary / Account / R2 / Source Atlas (Spec Ready / Yellow; mirror AMB-1487)"
+      ],
+      "known_issue_mapping": [
+        "AMB-ISSUE-2004-2009",
+        "AMB-ISSUE-2012",
+        "AMB-ISSUE-2001",
+        "AMB-ISSUE-2010",
+        "AMB-ISSUE-2011"
+      ],
+      "source_owner_paths": [
+        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAudit.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasPublicArtifactBoundary.swift",
+        "docs/qa/source-atlas/"
+      ],
+      "recommended_linear_document_title": "VSP-08 External Boundary / Account / R2 / Source Atlas — Repo-Grounded Design/Spec Dossier",
+      "recommended_document_outline": [
+        "Mission",
+        "Product meaning",
+        "User use cases",
+        "App surface / object ownership",
+        "Non-goals / hard reds",
+        "Repo truth evidence",
+        "VSP authority",
+        "Source-owner paths",
+        "Runtime dependencies",
+        "Source Atlas / R2 / privacy boundary, if relevant",
+        "Accessibility requirements",
+        "Copy/state language",
+        "Known issue mappings",
+        "Parent Feature requirements",
+        "Codex leaf requirements",
+        "Validation commands",
+        "Proof required for Green",
+        "Explicit non-claims"
+      ],
+      "acceptance_standard": [
+        "Dossier cites truth files, VSP authority if applicable, source-owner paths, known issue mappings, validation commands, proof artifacts required, and non-claims.",
+        "Dossier preserves four-surface product law, Capture composer law, Motion behavior law, local-first/account/R2 law, and runtime mutation law.",
+        "Dossier does not claim implementation, Green, release readiness, issue closure, or Ready For Codex without current scoped proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ],
+      "phase_3_dependencies": [
+        "Create or update Parent Feature with acceptance criteria, proof artifacts, validation commands, and non-claims.",
+        "Create bounded Codex leaves only after owner paths, VSP authority, known issues, rollback, and proof ceilings are present.",
+        "Attach known issue and VSP authority mappings to the Linear hierarchy."
+      ],
+      "phase_4_readiness_blockers": [
+        "Phase 3 hierarchy repair not yet applied in Linear.",
+        "No current device screenshot/manual accessibility/runtime receipt proof for app-wide Green.",
+        "Stale/duplicate ownership risks must be reconciled before implementation leaves are promoted."
+      ]
+    },
+    {
+      "project_name": "VSP-09 Motion Haptics Accessibility",
+      "target_initiative": "Ambitions Native iPhone App Control Plane",
+      "current_state_if_known": "Linear mirror AMB-1488 observed; repo evidence supports Spec Ready / Yellow matrix only.",
+      "recommended_action": "UPDATE",
+      "why": "Repo evidence maps Motion, Accessibility proof, Performance / memory / launch time to this project, but Linear needs explicit dossier, parent feature, Codex leaf, proof, and non-claim structure.",
+      "repo_evidence": [
+        "README.md",
+        "AGENTS.md",
+        "docs/truth/README.md",
+        "docs/truth/CODEX_START_HERE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_ORIGIN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/PRODUCT_EXPERIENCE_CANON.md",
+        "docs/design/provenance/vsp-provenance.json",
+        "docs/design/provenance/VSP-SwiftUI-Provenance-Map.md",
+        "docs/design/provenance/Figma-Annotation-Pack.md",
+        "docs/design/provenance/linear-map.json",
+        "docs/design/provenance/proof-registry.json",
+        "docs/qa/vsp-review/VSP01-VSP10-review-analysis.md",
+        "docs/qa/KNOWN_ISSUES.md",
+        "docs/qa/KNOWN_ISSUES_REMEDIATION_DOSSIERS.md",
+        "docs/quality/"
+      ],
+      "vsp_authority": [
+        "VSP-09: Motion / Haptics / Accessibility Matrix (Spec Ready / Yellow; mirror AMB-1488)"
+      ],
+      "known_issue_mapping": [
+        "AMB-ISSUE-0013-0015",
+        "AMB-ISSUE-0801-0807",
+        "AMB-ISSUE-0903-0912",
+        "AMB-ISSUE-1801",
+        "AMB-ISSUE-1802",
+        "AMB-ISSUE-0006",
+        "AMB-ISSUE-0007",
+        "AMB-ISSUE-0806",
+        "AMB-ISSUE-0901",
+        "AMB-ISSUE-0902",
+        "AMB-ISSUE-1011",
+        "AMB-ISSUE-1701-1709"
+      ],
+      "source_owner_paths": [
+        "Native/Ambitions/Stage/Motion/StageMotionReductionPolicy.swift",
+        "Native/Ambitions/Stage/Motion/StageMotionAccessibility.swift",
+        "Native/Ambitions/Interaction/HapticPolicy.swift",
+        "Native/Ambitions/DesignSystem/Accessibility/ReduceMotionPolicy.swift"
+      ],
+      "recommended_linear_document_title": "VSP-09 Motion Haptics Accessibility — Repo-Grounded Design/Spec Dossier",
+      "recommended_document_outline": [
+        "Mission",
+        "Product meaning",
+        "User use cases",
+        "App surface / object ownership",
+        "Non-goals / hard reds",
+        "Repo truth evidence",
+        "VSP authority",
+        "Source-owner paths",
+        "Runtime dependencies",
+        "Source Atlas / R2 / privacy boundary, if relevant",
+        "Accessibility requirements",
+        "Copy/state language",
+        "Known issue mappings",
+        "Parent Feature requirements",
+        "Codex leaf requirements",
+        "Validation commands",
+        "Proof required for Green",
+        "Explicit non-claims"
+      ],
+      "acceptance_standard": [
+        "Dossier cites truth files, VSP authority if applicable, source-owner paths, known issue mappings, validation commands, proof artifacts required, and non-claims.",
+        "Dossier preserves four-surface product law, Capture composer law, Motion behavior law, local-first/account/R2 law, and runtime mutation law.",
+        "Dossier does not claim implementation, Green, release readiness, issue closure, or Ready For Codex without current scoped proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ],
+      "phase_3_dependencies": [
+        "Create or update Parent Feature with acceptance criteria, proof artifacts, validation commands, and non-claims.",
+        "Create bounded Codex leaves only after owner paths, VSP authority, known issues, rollback, and proof ceilings are present.",
+        "Attach known issue and VSP authority mappings to the Linear hierarchy."
+      ],
+      "phase_4_readiness_blockers": [
+        "Phase 3 hierarchy repair not yet applied in Linear.",
+        "No current device screenshot/manual accessibility/runtime receipt proof for app-wide Green.",
+        "Stale/duplicate ownership risks must be reconciled before implementation leaves are promoted."
+      ]
+    },
+    {
+      "project_name": "VSP-10 Implementation Anatomy / Source Owner Map",
+      "target_initiative": "Ambitions Native iPhone App Control Plane",
+      "current_state_if_known": "Linear mirror AMB-1489 observed; repo evidence supports source-owner map target only, not product UI proof.",
+      "recommended_action": "UPDATE",
+      "why": "Repo evidence maps Product Object Grammar, Design System / Visual Language, Build / test / CI to this project, but Linear needs explicit dossier, parent feature, Codex leaf, proof, and non-claim structure.",
+      "repo_evidence": [
+        "README.md",
+        "AGENTS.md",
+        "docs/truth/README.md",
+        "docs/truth/CODEX_START_HERE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_ORIGIN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/PRODUCT_EXPERIENCE_CANON.md",
+        "docs/design/provenance/vsp-provenance.json",
+        "docs/design/provenance/VSP-SwiftUI-Provenance-Map.md",
+        "docs/design/provenance/Figma-Annotation-Pack.md",
+        "docs/design/provenance/linear-map.json",
+        "docs/design/provenance/proof-registry.json",
+        "docs/qa/vsp-review/VSP01-VSP10-review-analysis.md",
+        "docs/qa/KNOWN_ISSUES.md",
+        "docs/qa/KNOWN_ISSUES_REMEDIATION_DOSSIERS.md",
+        "docs/quality/"
+      ],
+      "vsp_authority": [
+        "VSP-10: Implementation Anatomy / Source Owner Map (Spec Ready / Yellow; mirror AMB-1489)"
+      ],
+      "known_issue_mapping": [
+        "AMB-ISSUE-0802",
+        "AMB-ISSUE-1503",
+        "AMB-ISSUE-1901-1906",
+        "AMB-ISSUE-2001",
+        "AMB-ISSUE-2010",
+        "AMB-ISSUE-2011"
+      ],
+      "source_owner_paths": [
+        "docs/design/provenance/component-registry.json",
+        "docs/design/provenance/vsp-provenance.json",
+        "docs/design/provenance/swift-component-inventory.generated.json",
+        "Native/Ambitions/Quality/"
+      ],
+      "recommended_linear_document_title": "VSP-10 Implementation Anatomy / Source Owner Map — Repo-Grounded Design/Spec Dossier",
+      "recommended_document_outline": [
+        "Mission",
+        "Product meaning",
+        "User use cases",
+        "App surface / object ownership",
+        "Non-goals / hard reds",
+        "Repo truth evidence",
+        "VSP authority",
+        "Source-owner paths",
+        "Runtime dependencies",
+        "Source Atlas / R2 / privacy boundary, if relevant",
+        "Accessibility requirements",
+        "Copy/state language",
+        "Known issue mappings",
+        "Parent Feature requirements",
+        "Codex leaf requirements",
+        "Validation commands",
+        "Proof required for Green",
+        "Explicit non-claims"
+      ],
+      "acceptance_standard": [
+        "Dossier cites truth files, VSP authority if applicable, source-owner paths, known issue mappings, validation commands, proof artifacts required, and non-claims.",
+        "Dossier preserves four-surface product law, Capture composer law, Motion behavior law, local-first/account/R2 law, and runtime mutation law.",
+        "Dossier does not claim implementation, Green, release readiness, issue closure, or Ready For Codex without current scoped proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ],
+      "phase_3_dependencies": [
+        "Create or update Parent Feature with acceptance criteria, proof artifacts, validation commands, and non-claims.",
+        "Create bounded Codex leaves only after owner paths, VSP authority, known issues, rollback, and proof ceilings are present.",
+        "Attach known issue and VSP authority mappings to the Linear hierarchy."
+      ],
+      "phase_4_readiness_blockers": [
+        "Linear hierarchy still needs owner-reviewed Parent Feature and proof gate before candidate promotion."
+      ]
+    },
+    {
+      "project_name": "LocalRuntimeOS Runtime Spine",
+      "target_initiative": "Private Life Runtime / LocalRuntimeOS",
+      "current_state_if_known": "Repo contains LocalRuntimeOS source and a scoped LocalRuntimeProof Gate Green artifact, but app-wide runtime/device/release proof remains Yellow.",
+      "recommended_action": "CREATE",
+      "why": "Repo evidence maps Private Life Runtime, LocalRuntimeOS, CommandSpine, TransactionKernel, EventJournal, ProjectionEngine, ObjectState, PlanningEngine, TimeEngine, CaptureRouteGraph, TrustSystem, SearchRecall, SideEffectSystem, SyncContinuity, Diagnostics to this project, but Linear needs explicit dossier, parent feature, Codex leaf, proof, and non-claim structure.",
+      "repo_evidence": [
+        "README.md",
+        "AGENTS.md",
+        "docs/truth/README.md",
+        "docs/truth/CODEX_START_HERE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_ORIGIN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/PRODUCT_EXPERIENCE_CANON.md",
+        "docs/design/provenance/vsp-provenance.json",
+        "docs/design/provenance/VSP-SwiftUI-Provenance-Map.md",
+        "docs/design/provenance/Figma-Annotation-Pack.md",
+        "docs/design/provenance/linear-map.json",
+        "docs/design/provenance/proof-registry.json",
+        "docs/qa/vsp-review/VSP01-VSP10-review-analysis.md",
+        "docs/qa/KNOWN_ISSUES.md",
+        "docs/qa/KNOWN_ISSUES_REMEDIATION_DOSSIERS.md",
+        "docs/quality/",
+        "Native/Ambitions/Core/LocalRuntimeOS/",
+        "docs/qa/runtime/",
+        "scripts/ambitions-local-runtime-proof.py"
+      ],
+      "vsp_authority": [
+        "VSP-04: Time Native Life Calendar (Spec Ready / Yellow; mirror AMB-1483)",
+        "VSP-05: Capture Open Field Composer (Spec Ready / Yellow; mirror AMB-1484)",
+        "VSP-07: Trust Inspection Details (Spec Ready / Yellow; mirror AMB-1486)",
+        "VSP-08: External Boundary / Account / R2 / Source Atlas (Spec Ready / Yellow; mirror AMB-1487)",
+        "VSP-10: Implementation Anatomy / Source Owner Map (Spec Ready / Yellow; mirror AMB-1489)"
+      ],
+      "known_issue_mapping": [
+        "AMB-ISSUE-2001",
+        "AMB-ISSUE-2010",
+        "AMB-ISSUE-2011",
+        "AMB-ISSUE-0001",
+        "AMB-ISSUE-0004",
+        "AMB-ISSUE-0005",
+        "AMB-ISSUE-0016",
+        "AMB-ISSUE-0101-0108",
+        "AMB-ISSUE-1001-1011",
+        "AMB-ISSUE-1201",
+        "AMB-ISSUE-0401-0406",
+        "AMB-ISSUE-1301-1309",
+        "AMB-ISSUE-0009",
+        "AMB-ISSUE-0501-0507",
+        "AMB-ISSUE-0913",
+        "AMB-ISSUE-1401-1405",
+        "AMB-ISSUE-0002",
+        "AMB-ISSUE-0003",
+        "AMB-ISSUE-0008",
+        "AMB-ISSUE-0012",
+        "AMB-ISSUE-0201-0205",
+        "AMB-ISSUE-1101-1111",
+        "AMB-ISSUE-2002",
+        "AMB-ISSUE-2003"
+      ],
+      "source_owner_paths": [
+        "Native/Ambitions/Core/LocalRuntimeOS/",
+        "docs/qa/runtime/",
+        "scripts/ambitions-local-runtime-proof.py"
+      ],
+      "recommended_linear_document_title": "LocalRuntimeOS Runtime Spine — Repo-Grounded Design/Spec Dossier",
+      "recommended_document_outline": [
+        "Mission",
+        "Product meaning",
+        "User use cases",
+        "App surface / object ownership",
+        "Non-goals / hard reds",
+        "Repo truth evidence",
+        "VSP authority",
+        "Source-owner paths",
+        "Runtime dependencies",
+        "Source Atlas / R2 / privacy boundary, if relevant",
+        "Accessibility requirements",
+        "Copy/state language",
+        "Known issue mappings",
+        "Parent Feature requirements",
+        "Codex leaf requirements",
+        "Validation commands",
+        "Proof required for Green",
+        "Explicit non-claims"
+      ],
+      "acceptance_standard": [
+        "Dossier cites truth files, VSP authority if applicable, source-owner paths, known issue mappings, validation commands, proof artifacts required, and non-claims.",
+        "Dossier preserves four-surface product law, Capture composer law, Motion behavior law, local-first/account/R2 law, and runtime mutation law.",
+        "Dossier does not claim implementation, Green, release readiness, issue closure, or Ready For Codex without current scoped proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ],
+      "phase_3_dependencies": [
+        "Create or update Parent Feature with acceptance criteria, proof artifacts, validation commands, and non-claims.",
+        "Create bounded Codex leaves only after owner paths, VSP authority, known issues, rollback, and proof ceilings are present.",
+        "Attach known issue and VSP authority mappings to the Linear hierarchy."
+      ],
+      "phase_4_readiness_blockers": [
+        "Phase 3 hierarchy repair not yet applied in Linear.",
+        "No current device screenshot/manual accessibility/runtime receipt proof for app-wide Green.",
+        "Stale/duplicate ownership risks must be reconciled before implementation leaves are promoted."
+      ]
+    },
+    {
+      "project_name": "Persistence Privacy Account Boundary",
+      "target_initiative": "Persistence Privacy Account Boundary",
+      "current_state_if_known": "Repo has source areas and release-proof packets, but external release gates, account behavior, erasure, and legal/privacy proof are incomplete or unknown.",
+      "recommended_action": "CREATE",
+      "why": "Repo evidence maps SwiftData / local persistence, Import / export / reset, Store health / repair, Optional account, Entitlements / subscription, Account deletion / erasure, Local auth / file protection, Privacy manifest, App Group data, CloudKit / continuity, Logging / telemetry / crash privacy, Legal / terms / privacy policy to this project, but Linear needs explicit dossier, parent feature, Codex leaf, proof, and non-claim structure.",
+      "repo_evidence": [
+        "README.md",
+        "AGENTS.md",
+        "docs/truth/README.md",
+        "docs/truth/CODEX_START_HERE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_ORIGIN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/PRODUCT_EXPERIENCE_CANON.md",
+        "docs/design/provenance/vsp-provenance.json",
+        "docs/design/provenance/VSP-SwiftUI-Provenance-Map.md",
+        "docs/design/provenance/Figma-Annotation-Pack.md",
+        "docs/design/provenance/linear-map.json",
+        "docs/design/provenance/proof-registry.json",
+        "docs/qa/vsp-review/VSP01-VSP10-review-analysis.md",
+        "docs/qa/KNOWN_ISSUES.md",
+        "docs/qa/KNOWN_ISSUES_REMEDIATION_DOSSIERS.md",
+        "docs/quality/"
+      ],
+      "vsp_authority": [
+        "VSP-06: You Native Settings (Spec Ready / Yellow; mirror AMB-1485)",
+        "VSP-07: Trust Inspection Details (Spec Ready / Yellow; mirror AMB-1486)",
+        "VSP-08: External Boundary / Account / R2 / Source Atlas (Spec Ready / Yellow; mirror AMB-1487)"
+      ],
+      "known_issue_mapping": [
+        "AMB-ISSUE-2004-2009",
+        "AMB-ISSUE-2012",
+        "AMB-ISSUE-0013-0015",
+        "AMB-ISSUE-0801-0807",
+        "AMB-ISSUE-0903-0912",
+        "AMB-ISSUE-1801",
+        "AMB-ISSUE-1802",
+        "AMB-ISSUE-2001-2012"
+      ],
+      "source_owner_paths": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Storage/",
+        "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/",
+        "Native/Ambitions/Resources/PrivacyInfo.xcprivacy",
+        "Native/AmbitionsWidgetExtension/*.entitlements",
+        "Native/AmbitionsShareExtension/*.entitlements"
+      ],
+      "recommended_linear_document_title": "Persistence Privacy Account Boundary — Repo-Grounded Design/Spec Dossier",
+      "recommended_document_outline": [
+        "Mission",
+        "Product meaning",
+        "User use cases",
+        "App surface / object ownership",
+        "Non-goals / hard reds",
+        "Repo truth evidence",
+        "VSP authority",
+        "Source-owner paths",
+        "Runtime dependencies",
+        "Source Atlas / R2 / privacy boundary, if relevant",
+        "Accessibility requirements",
+        "Copy/state language",
+        "Known issue mappings",
+        "Parent Feature requirements",
+        "Codex leaf requirements",
+        "Validation commands",
+        "Proof required for Green",
+        "Explicit non-claims"
+      ],
+      "acceptance_standard": [
+        "Dossier cites truth files, VSP authority if applicable, source-owner paths, known issue mappings, validation commands, proof artifacts required, and non-claims.",
+        "Dossier preserves four-surface product law, Capture composer law, Motion behavior law, local-first/account/R2 law, and runtime mutation law.",
+        "Dossier does not claim implementation, Green, release readiness, issue closure, or Ready For Codex without current scoped proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ],
+      "phase_3_dependencies": [
+        "Create or update Parent Feature with acceptance criteria, proof artifacts, validation commands, and non-claims.",
+        "Create bounded Codex leaves only after owner paths, VSP authority, known issues, rollback, and proof ceilings are present.",
+        "Attach known issue and VSP authority mappings to the Linear hierarchy."
+      ],
+      "phase_4_readiness_blockers": [
+        "Phase 3 hierarchy repair not yet applied in Linear.",
+        "No current device screenshot/manual accessibility/runtime receipt proof for app-wide Green.",
+        "Stale/duplicate ownership risks must be reconciled before implementation leaves are promoted."
+      ]
+    },
+    {
+      "project_name": "iOS External Surfaces",
+      "target_initiative": "Ambitions Native iPhone App Control Plane",
+      "current_state_if_known": "Repo has Widget and Share extension targets in project.yml; integration proof and app aspect mapping remain partial.",
+      "recommended_action": "CREATE",
+      "why": "Repo evidence maps WidgetKit, Share Extension, App Intents / Shortcuts / Siri, Notifications, EventKit / Reminders, Deep links / URL routing, Live Activities to this project, but Linear needs explicit dossier, parent feature, Codex leaf, proof, and non-claim structure.",
+      "repo_evidence": [
+        "README.md",
+        "AGENTS.md",
+        "docs/truth/README.md",
+        "docs/truth/CODEX_START_HERE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_ORIGIN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/PRODUCT_EXPERIENCE_CANON.md",
+        "docs/design/provenance/vsp-provenance.json",
+        "docs/design/provenance/VSP-SwiftUI-Provenance-Map.md",
+        "docs/design/provenance/Figma-Annotation-Pack.md",
+        "docs/design/provenance/linear-map.json",
+        "docs/design/provenance/proof-registry.json",
+        "docs/qa/vsp-review/VSP01-VSP10-review-analysis.md",
+        "docs/qa/KNOWN_ISSUES.md",
+        "docs/qa/KNOWN_ISSUES_REMEDIATION_DOSSIERS.md",
+        "docs/quality/"
+      ],
+      "vsp_authority": [
+        "VSP-04: Time Native Life Calendar (Spec Ready / Yellow; mirror AMB-1483)",
+        "VSP-05: Capture Open Field Composer (Spec Ready / Yellow; mirror AMB-1484)",
+        "VSP-08: External Boundary / Account / R2 / Source Atlas (Spec Ready / Yellow; mirror AMB-1487)",
+        "VSP-09: Motion / Haptics / Accessibility Matrix (Spec Ready / Yellow; mirror AMB-1488)"
+      ],
+      "known_issue_mapping": [
+        "AMB-ISSUE-2008",
+        "AMB-ISSUE-2009",
+        "AMB-ISSUE-2004-2009",
+        "AMB-ISSUE-2012"
+      ],
+      "source_owner_paths": [
+        "Native/AmbitionsWidgetExtension/",
+        "Native/AmbitionsShareExtension/",
+        "Native/Ambitions/AppIntents/",
+        "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/"
+      ],
+      "recommended_linear_document_title": "iOS External Surfaces — Repo-Grounded Design/Spec Dossier",
+      "recommended_document_outline": [
+        "Mission",
+        "Product meaning",
+        "User use cases",
+        "App surface / object ownership",
+        "Non-goals / hard reds",
+        "Repo truth evidence",
+        "VSP authority",
+        "Source-owner paths",
+        "Runtime dependencies",
+        "Source Atlas / R2 / privacy boundary, if relevant",
+        "Accessibility requirements",
+        "Copy/state language",
+        "Known issue mappings",
+        "Parent Feature requirements",
+        "Codex leaf requirements",
+        "Validation commands",
+        "Proof required for Green",
+        "Explicit non-claims"
+      ],
+      "acceptance_standard": [
+        "Dossier cites truth files, VSP authority if applicable, source-owner paths, known issue mappings, validation commands, proof artifacts required, and non-claims.",
+        "Dossier preserves four-surface product law, Capture composer law, Motion behavior law, local-first/account/R2 law, and runtime mutation law.",
+        "Dossier does not claim implementation, Green, release readiness, issue closure, or Ready For Codex without current scoped proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ],
+      "phase_3_dependencies": [
+        "Create or update Parent Feature with acceptance criteria, proof artifacts, validation commands, and non-claims.",
+        "Create bounded Codex leaves only after owner paths, VSP authority, known issues, rollback, and proof ceilings are present.",
+        "Attach known issue and VSP authority mappings to the Linear hierarchy."
+      ],
+      "phase_4_readiness_blockers": [
+        "Phase 3 hierarchy repair not yet applied in Linear.",
+        "No current device screenshot/manual accessibility/runtime receipt proof for app-wide Green.",
+        "Stale/duplicate ownership risks must be reconciled before implementation leaves are promoted."
+      ]
+    },
+    {
+      "project_name": "QA Release Governance",
+      "target_initiative": "Launch Readiness / Governance",
+      "current_state_if_known": "Repo has QA/quality docs and scripts; release truth remains pre-release and known issues block Green.",
+      "recommended_action": "CREATE",
+      "why": "Repo evidence maps Build / test / CI, Visual QA / screenshot diffing, Accessibility proof, Performance / memory / launch time, Known issues closure, Release train / TestFlight / App Store, Support / feedback / diagnostics, Pricing / paywall to this project, but Linear needs explicit dossier, parent feature, Codex leaf, proof, and non-claim structure.",
+      "repo_evidence": [
+        "README.md",
+        "AGENTS.md",
+        "docs/truth/README.md",
+        "docs/truth/CODEX_START_HERE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_ORIGIN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/PRODUCT_EXPERIENCE_CANON.md",
+        "docs/design/provenance/vsp-provenance.json",
+        "docs/design/provenance/VSP-SwiftUI-Provenance-Map.md",
+        "docs/design/provenance/Figma-Annotation-Pack.md",
+        "docs/design/provenance/linear-map.json",
+        "docs/design/provenance/proof-registry.json",
+        "docs/qa/vsp-review/VSP01-VSP10-review-analysis.md",
+        "docs/qa/KNOWN_ISSUES.md",
+        "docs/qa/KNOWN_ISSUES_REMEDIATION_DOSSIERS.md",
+        "docs/quality/"
+      ],
+      "vsp_authority": [
+        "VSP-09: Motion / Haptics / Accessibility Matrix (Spec Ready / Yellow; mirror AMB-1488)",
+        "VSP-10: Implementation Anatomy / Source Owner Map (Spec Ready / Yellow; mirror AMB-1489)"
+      ],
+      "known_issue_mapping": [
+        "AMB-ISSUE-0013-0015",
+        "AMB-ISSUE-0801-0807",
+        "AMB-ISSUE-0903-0912",
+        "AMB-ISSUE-1801",
+        "AMB-ISSUE-1802",
+        "AMB-ISSUE-2001-2012"
+      ],
+      "source_owner_paths": [
+        "docs/qa/",
+        "docs/quality/",
+        "scripts/ambitions-green-standard-audit.py",
+        "scripts/ambitions-architecture-inventory.py",
+        "scripts/ambitions-vsp-provenance-audit.py"
+      ],
+      "recommended_linear_document_title": "QA Release Governance — Repo-Grounded Design/Spec Dossier",
+      "recommended_document_outline": [
+        "Mission",
+        "Product meaning",
+        "User use cases",
+        "App surface / object ownership",
+        "Non-goals / hard reds",
+        "Repo truth evidence",
+        "VSP authority",
+        "Source-owner paths",
+        "Runtime dependencies",
+        "Source Atlas / R2 / privacy boundary, if relevant",
+        "Accessibility requirements",
+        "Copy/state language",
+        "Known issue mappings",
+        "Parent Feature requirements",
+        "Codex leaf requirements",
+        "Validation commands",
+        "Proof required for Green",
+        "Explicit non-claims"
+      ],
+      "acceptance_standard": [
+        "Dossier cites truth files, VSP authority if applicable, source-owner paths, known issue mappings, validation commands, proof artifacts required, and non-claims.",
+        "Dossier preserves four-surface product law, Capture composer law, Motion behavior law, local-first/account/R2 law, and runtime mutation law.",
+        "Dossier does not claim implementation, Green, release readiness, issue closure, or Ready For Codex without current scoped proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ],
+      "phase_3_dependencies": [
+        "Create or update Parent Feature with acceptance criteria, proof artifacts, validation commands, and non-claims.",
+        "Create bounded Codex leaves only after owner paths, VSP authority, known issues, rollback, and proof ceilings are present.",
+        "Attach known issue and VSP authority mappings to the Linear hierarchy."
+      ],
+      "phase_4_readiness_blockers": [
+        "Phase 3 hierarchy repair not yet applied in Linear.",
+        "No current device screenshot/manual accessibility/runtime receipt proof for app-wide Green.",
+        "Stale/duplicate ownership risks must be reconciled before implementation leaves are promoted."
+      ]
+    },
+    {
+      "project_name": "Onboarding Reviews Guidance",
+      "target_initiative": "Ambitions Native iPhone App Control Plane",
+      "current_state_if_known": "Repo truth defines product language and non-shaming posture; complete implementation/proof coverage for onboarding and reviews is partial or missing.",
+      "recommended_action": "CREATE",
+      "why": "Repo evidence maps Onboarding, Daily / weekly / monthly review, Empty states, Recovery / re-entry, Product education to this project, but Linear needs explicit dossier, parent feature, Codex leaf, proof, and non-claim structure.",
+      "repo_evidence": [
+        "README.md",
+        "AGENTS.md",
+        "docs/truth/README.md",
+        "docs/truth/CODEX_START_HERE.md",
+        "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+        "docs/truth/PRODUCT_ORIGIN_TRUTH.md",
+        "docs/truth/PRODUCT_MOAT_TRUTH.md",
+        "docs/truth/PRODUCT_EXPERIENCE_CANON.md",
+        "docs/design/provenance/vsp-provenance.json",
+        "docs/design/provenance/VSP-SwiftUI-Provenance-Map.md",
+        "docs/design/provenance/Figma-Annotation-Pack.md",
+        "docs/design/provenance/linear-map.json",
+        "docs/design/provenance/proof-registry.json",
+        "docs/qa/vsp-review/VSP01-VSP10-review-analysis.md",
+        "docs/qa/KNOWN_ISSUES.md",
+        "docs/qa/KNOWN_ISSUES_REMEDIATION_DOSSIERS.md",
+        "docs/quality/"
+      ],
+      "vsp_authority": [
+        "VSP-02: Today Reality Window (Spec Ready / Yellow; mirror AMB-1481)",
+        "VSP-03: Goals Life Area Atlas (Spec Ready / Yellow; mirror AMB-1482)",
+        "VSP-04: Time Native Life Calendar (Spec Ready / Yellow; mirror AMB-1483)",
+        "VSP-06: You Native Settings (Spec Ready / Yellow; mirror AMB-1485)",
+        "VSP-09: Motion / Haptics / Accessibility Matrix (Spec Ready / Yellow; mirror AMB-1488)"
+      ],
+      "known_issue_mapping": [
+        "AMB-ISSUE-0001",
+        "AMB-ISSUE-0004",
+        "AMB-ISSUE-0005",
+        "AMB-ISSUE-0016",
+        "AMB-ISSUE-0101-0108",
+        "AMB-ISSUE-1001-1011",
+        "AMB-ISSUE-1201",
+        "AMB-ISSUE-0401-0406",
+        "AMB-ISSUE-1301-1309",
+        "AMB-ISSUE-0601-0607",
+        "AMB-ISSUE-1501-1505",
+        "AMB-ISSUE-2004",
+        "AMB-ISSUE-2005",
+        "AMB-ISSUE-2007",
+        "AMB-ISSUE-0013-0015",
+        "AMB-ISSUE-0801-0807",
+        "AMB-ISSUE-0903-0912",
+        "AMB-ISSUE-1801",
+        "AMB-ISSUE-1802"
+      ],
+      "source_owner_paths": [
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/You/",
+        "Native/Ambitions/Language/"
+      ],
+      "recommended_linear_document_title": "Onboarding Reviews Guidance — Repo-Grounded Design/Spec Dossier",
+      "recommended_document_outline": [
+        "Mission",
+        "Product meaning",
+        "User use cases",
+        "App surface / object ownership",
+        "Non-goals / hard reds",
+        "Repo truth evidence",
+        "VSP authority",
+        "Source-owner paths",
+        "Runtime dependencies",
+        "Source Atlas / R2 / privacy boundary, if relevant",
+        "Accessibility requirements",
+        "Copy/state language",
+        "Known issue mappings",
+        "Parent Feature requirements",
+        "Codex leaf requirements",
+        "Validation commands",
+        "Proof required for Green",
+        "Explicit non-claims"
+      ],
+      "acceptance_standard": [
+        "Dossier cites truth files, VSP authority if applicable, source-owner paths, known issue mappings, validation commands, proof artifacts required, and non-claims.",
+        "Dossier preserves four-surface product law, Capture composer law, Motion behavior law, local-first/account/R2 law, and runtime mutation law.",
+        "Dossier does not claim implementation, Green, release readiness, issue closure, or Ready For Codex without current scoped proof."
+      ],
+      "non_claims": [
+        "No source implementation is authorized by this packet.",
+        "No Linear status movement is authorized by this packet.",
+        "No Linear object creation is performed by this packet.",
+        "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+      ],
+      "phase_3_dependencies": [
+        "Create or update Parent Feature with acceptance criteria, proof artifacts, validation commands, and non-claims.",
+        "Create bounded Codex leaves only after owner paths, VSP authority, known issues, rollback, and proof ceilings are present.",
+        "Attach known issue and VSP authority mappings to the Linear hierarchy."
+      ],
+      "phase_4_readiness_blockers": [
+        "Phase 3 hierarchy repair not yet applied in Linear.",
+        "No current device screenshot/manual accessibility/runtime receipt proof for app-wide Green.",
+        "Stale/duplicate ownership risks must be reconciled before implementation leaves are promoted."
+      ]
+    }
+  ],
+  "non_claims": [
+    "No source implementation is authorized by this packet.",
+    "No Linear status movement is authorized by this packet.",
+    "No Linear object creation is performed by this packet.",
+    "No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed."
+  ]
+}
