@@ -60,7 +60,7 @@ Truth-doc implementation claim labels:
 | Blocked | Implementation or proof cannot advance until a named blocker is removed. |
 | Unknown | Live source/proof has not been inspected or no evidence was found. Unknown is not permission to infer. |
 
-Any truth-doc claim using these labels must preserve the remediation direction from `PRODUCT_DESIGN_TRUTH.md`: law over lore, deep runtime with plain user-facing UI, delete before naming, and no Green without linked evidence.
+Any truth-doc claim using these labels must preserve the remediation direction from `PRODUCT_DESIGN_TRUTH.md`: keep the runtime law while reducing lore, use deep runtime with plain user-facing UI, delete before naming, prefer feature-local projection where canon allows, let proof automation outrank prose, and report no Green without linked evidence.
 
 ---
 

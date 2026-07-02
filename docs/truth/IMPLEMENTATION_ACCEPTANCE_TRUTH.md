@@ -19,6 +19,8 @@ This file closes the gap between source correctness and product quality. It does
 
 Ambitions implementation truth is not established by source names, file paths, component names, accessibility identifiers, string-presence tests, screenshot paths, or closeout claims.
 
+Proof automation outranks prose: rendered UI tests, frame/hierarchy checks, screenshots tied to the current build, accessibility evidence, and independent review set the acceptance ceiling for the scoped claim. Closeout language may summarize those artifacts; it cannot upgrade missing, failed, stale, or not-run evidence.
+
 A surface is not Green until the rendered first viewport proves the product object.
 
 First-class means:

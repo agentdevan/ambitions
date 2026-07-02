@@ -63,6 +63,8 @@ Release evidence may include current terminal logs, `.xcresult` summaries, curre
 
 Release evidence may not be inferred from source presence, target configuration, old audit reports, old batch docs, old PR summaries, README language, design truth, Codex statements, expected script behavior, old generated project state, or screenshots not tied to current build/commit.
 
+Proof automation outranks prose: current scripts, logs, artifacts, and required owner approvals set release claim status. Issue comments, truth-doc prose, and closeout summaries can only summarize those artifacts; they cannot upgrade absent, stale, failed, or not-run release proof.
+
 ### Proof-Claim Labels
 
 Use these labels whenever a truth doc, issue, closeout, or status update discusses proof-sensitive claims. The label does not make the claim true; the linked evidence does.

@@ -96,15 +96,22 @@ law over lore
 deep runtime, boring UI
 delete before naming
 Green requires linked evidence
+proof automation outranks prose
 ```
+
+Keep the runtime law, reduce the lore means the `Command -> Event -> Projection -> Receipt -> Replay` law stays binding while duplicate internal names, mythology, and overlapping owners must be deleted, collapsed, or demoted before they are preserved as architecture.
 
 Law over lore means stable product, runtime, privacy, and proof laws outrank internal mythology, aspirational architecture names, historical dossiers, and clever terminology. A source owner, architecture noun, or product metaphor earns permanence only when it is current, useful, mapped to the Final Architecture Tree, and backed by source/proof evidence appropriate to its claim.
 
-Deep runtime, boring UI means Ambitions may have a sophisticated local Private Life Runtime, but the user-facing product must stay direct, native, inspectable, and life-object-led. Root UI should show Today, Goals, Time, You, Capture, Search, Steps, proof, receipts, recovery, and settings in plain user terms. It must not expose runtime, projection, ledger, kernel, engine, scene, lens, OS, policy, or other architecture vocabulary as product depth.
+Deep runtime, boring UI means Ambitions may have a sophisticated local Private Life Runtime, but the user-facing product must stay direct, boringly native, inspectable, and life-object-led. Root UI should show Today, Goals, Time, You, Capture, Search, Steps, proof, receipts, recovery, and settings in plain user terms. It must not expose runtime, projection, ledger, kernel, engine, scene, lens, OS, policy, or other architecture vocabulary as product depth.
 
 Delete before naming means new broad architecture names, folders, suffix splits, engines, kernels, managers, coordinators, services, systems, runtimes, ledgers, scenes, lenses, or OS nouns are disallowed unless the scoped work first deletes, collapses, or replaces the older authority they would otherwise duplicate, or active truth explicitly approves the new owner with a proof gate.
 
+Feature-local projection is preferred where safe. New central `Projection/SurfaceLenses` authority must earn its need against the scoped product object, the Final Architecture Tree, current runtime law, and proof that a feature-local projection cannot satisfy canon without duplicating authority.
+
 Green requires linked evidence means a canon statement, architecture target, or remediation doctrine is not an implementation claim unless it links to current source, tests, logs, proof artifacts, or owner acceptance that prove the exact scoped claim. If the evidence is missing, narrower status language is required.
+
+Proof automation outranks prose means current scripts, audits, logs, proof packets, and owner-accepted artifacts set the claim ceiling. A truth update, Linear comment, closeout, or narrative summary may explain evidence, but it cannot turn absent, stale, failed, or not-run proof into Green.
 
 ---
 
