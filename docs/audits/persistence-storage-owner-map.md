@@ -17,8 +17,9 @@ claim persistence Green.
 Evidence class: Implemented Yellow. The current source contains canonical
 storage tier files and storage tests, but `Core/Persistence` still contains
 legacy repository, model, import, preview, diagnostic, and direct-write
-scaffolding. AMB-1719 must prove direct-save rejection before stronger mutation
-authority claims are allowed.
+scaffolding. AMB-1719 now classifies direct-save/direct-write proof as
+Implemented Yellow explicit unsafe debt, so stronger mutation authority claims
+remain blocked.
 
 ## Canonical Constraints
 
@@ -78,7 +79,7 @@ life graph storage.
 | --- | --- |
 | P-MAP | This AMB-1718 owner map. |
 | P-STORAGE | Existing focused storage/source tests for canonical storage tier shape and substrate behavior. |
-| P-REJECT | AMB-1719 direct-save rejection proof: direct persistence writes fail, are unreachable from production roots, or remain explicit unsafe debt. |
+| P-REJECT | AMB-1719 direct-save proof in `docs/audits/persistence-direct-save-rejection-proof.md`: direct persistence writes fail, are unreachable from production roots, or remain explicit unsafe debt. Current result is Implemented Yellow explicit unsafe debt. |
 | P-MIGRATE | AMB-1720 existing-data migration proof plan and later executable migration proof. |
 | P-CLOUDKIT | SyncContinuity privacy/local-authority evidence before any CloudKit continuity claim. |
 | P-DIAGNOSTIC | Proof that diagnostics/health/readers cannot authorize durable mutation or repair. |
@@ -88,8 +89,8 @@ life graph storage.
 | Interface | Storage role | Canonical owner | Runtime decision owner | Allowed stored data | Forbidden authority / proof ceiling |
 | --- | --- | --- | --- | --- | --- |
 | `LocalRuntimeStorageCore.swift` | Tier manifest, SQLite helper, checksum, coding, storage errors | `Core/LocalRuntimeOS/Storage` | None; support code only | Tier descriptors, privacy scopes, schema version, checksums | No mutation authority, no product policy, no storage Green by itself. P-STORAGE only. |
-| `EventStoreSQLite.swift` | Event journal storage | `Core/LocalRuntimeOS/Storage` with `EventJournal` consumption | `CommandSpine`, `TransactionKernel`, `EventJournal` | Runtime event envelopes, append order, event checksum chain, causal cursors | Does not prove every app mutation enters the journal. AMB-1719 must reject bypass saves. |
-| `ObjectStoreSwiftData.swift` | SwiftData object store substrate | `Core/LocalRuntimeOS/Storage` | Family-specific owners listed below, always through command/transaction/receipt context | App-facing object records, repository-mapped snapshots, bounded object queries | SwiftData is not business-decision authority and is not the canonical mutation backend. Direct writes remain Yellow until AMB-1719. |
+| `EventStoreSQLite.swift` | Event journal storage | `Core/LocalRuntimeOS/Storage` with `EventJournal` consumption | `CommandSpine`, `TransactionKernel`, `EventJournal` | Runtime event envelopes, append order, event checksum chain, causal cursors | Does not prove every app mutation enters the journal. AMB-1719 records bypass/direct-write rows as Yellow debt. |
+| `ObjectStoreSwiftData.swift` | SwiftData object store substrate | `Core/LocalRuntimeOS/Storage` | Family-specific owners listed below, always through command/transaction/receipt context | App-facing object records, repository-mapped snapshots, bounded object queries | SwiftData is not business-decision authority and is not the canonical mutation backend. Direct writes remain Yellow after AMB-1719. |
 | `ProjectionStoreSQLite.swift` | Projection storage | `Core/LocalRuntimeOS/Storage` with `ProjectionEngine` consumption | `ProjectionEngine` after event-fed materialization | Materialized projection payloads, cursors, projection checksums | Does not prove all UI/widget/App Intent reads consume this store. No product or UI Green. |
 | `SearchStoreFTS.swift` | Search index storage/cache | `Core/LocalRuntimeOS/Storage` with `SearchRecall` consumption | `SearchRecall` and `ProjectionEngine` rebuild pipeline | Local FTS rows, provenance, privacy-filtered index rows, rebuild cursor | No semantic cloud search, no private graph egress, no domain mutation. |
 | `BlobStoreFileSystem.swift` | Blob/cache storage | `Core/LocalRuntimeOS/Storage` | `CaptureRouteGraph`, `TrustSystem`, `PrivacySecurity` when scoped | Attachment/proof blobs, checksums, content type, file-protection class records | No queryable domain authority, no event ordering, no migration approval. |
@@ -173,8 +174,8 @@ Persistence-owned code must not:
 Any `ModelContext.insert`, `ModelContext.delete`, `ModelContext.save`,
 `AmbitionsPersistenceStore.write`, repository `save`, repository `append`, or
 import/apply path outside a validated runtime mutation context remains Yellow
-direct-write debt until AMB-1719 proves rejection, quarantine, or explicit
-unreachability from production roots.
+direct-write debt after AMB-1719 unless a future source/test artifact proves
+rejection, quarantine, or explicit unreachability from production roots.
 
 ## Acceptance Boundary
 
@@ -187,8 +188,8 @@ AMB-1718 acceptance is satisfied at Implemented Yellow:
 - legacy `Core/Persistence` contracts, models, repositories, snapshots,
   diagnostics, preview/demo paths, and reminder persistence are mapped to
   target LocalRuntimeOS owners;
-- direct-save rejection and existing-data migration proof remain explicitly
-  assigned to AMB-1719 and AMB-1720.
+- direct-save proof is recorded as AMB-1719 Implemented Yellow explicit unsafe
+  debt, and existing-data migration proof remains assigned to AMB-1720.
 
 This work protects the Private Life Orchestration loop by making durable local
 state a substrate for intent, context, path, time fit, reflow, action, proof,
@@ -247,8 +248,8 @@ system.
 - Yellow architecture debt remains: yes. `Core/Persistence` still contains
   legacy direct-write and model-location debt, and only AppState has
   ObjectState SwiftData adapter proof.
-- Next repair train: AMB-1719 direct model-save rejection proof, then AMB-1720
-  existing local-data migration proof planning.
+- Next repair train: AMB-1720 existing local-data migration proof planning
+  after AMB-1719 direct-save classification remains Yellow.
 - No equivalent folder/path interpretation was used.
 - No Green runtime authority, storage safety, migration safety, CloudKit,
   device, release, privacy/legal, or product-completion claim is made.

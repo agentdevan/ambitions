@@ -62,6 +62,7 @@ ADAPTER_CLASSIFICATION = "adapter into command"
 PROJECTION_CLASSIFICATION = "projection-only read"
 UNSAFE_CLASSIFICATION = "unsafe write"
 UNKNOWN_CLASSIFICATION = "unknown"
+DIRECT_WRITE_PROOF_FOLLOW_UP = "AMB-1719"
 
 KNOWN_FORBIDDEN_CLASSIFICATIONS: dict[str, tuple[str, str, str]] = {
     "Native/Ambitions/PreviewSupport/PreviewAppContainer.swift": (
@@ -91,97 +92,97 @@ KNOWN_FORBIDDEN_CLASSIFICATIONS: dict[str, tuple[str, str, str]] = {
     ),
     "Native/Ambitions/Core/Domain/RealityModels.swift": (
         UNSAFE_CLASSIFICATION,
-        "AMB-1709",
+        DIRECT_WRITE_PROOF_FOLLOW_UP,
         "Local schedule block file writes live in Core/Domain and must move under LocalRuntimeOS authority.",
     ),
     "Native/Ambitions/Core/Persistence/LifeContextPersistence.swift": (
         UNSAFE_CLASSIFICATION,
-        "AMB-1709",
+        DIRECT_WRITE_PROOF_FOLLOW_UP,
         "Legacy SwiftData persistence scaffolding remains outside Core/LocalRuntimeOS.",
     ),
     "Native/Ambitions/Core/Persistence/PortableSnapshotService+02-PortableSnapshotService.swift": (
         UNSAFE_CLASSIFICATION,
-        "AMB-1709",
+        DIRECT_WRITE_PROOF_FOLLOW_UP,
         "Portable snapshot save path remains in legacy Core/Persistence scaffolding.",
     ),
     "Native/Ambitions/Core/Persistence/SwiftDataModels+02-CaptureRecord.swift": (
         UNSAFE_CLASSIFICATION,
-        "AMB-1709",
+        DIRECT_WRITE_PROOF_FOLLOW_UP,
         "Legacy SwiftData model authority remains outside Core/LocalRuntimeOS.",
     ),
     "Native/Ambitions/Core/Persistence/SwiftDataModels+03-EntityRevisionTombstoneRecord.swift": (
         UNSAFE_CLASSIFICATION,
-        "AMB-1709",
+        DIRECT_WRITE_PROOF_FOLLOW_UP,
         "Legacy SwiftData tombstone model authority remains outside Core/LocalRuntimeOS.",
     ),
     "Native/Ambitions/Core/Persistence/SwiftDataModels+04-AmbitionGraphProjectionRecordModel.swift": (
         UNSAFE_CLASSIFICATION,
-        "AMB-1709",
+        DIRECT_WRITE_PROOF_FOLLOW_UP,
         "Legacy SwiftData projection-record model authority remains outside Core/LocalRuntimeOS.",
     ),
     "Native/Ambitions/Core/Persistence/SwiftDataModels.swift": (
         UNSAFE_CLASSIFICATION,
-        "AMB-1709",
+        DIRECT_WRITE_PROOF_FOLLOW_UP,
         "Legacy SwiftData model authority remains outside Core/LocalRuntimeOS.",
     ),
     "Native/Ambitions/Core/Persistence/SwiftDataRepositories+02-RepositoryMapping+02-persisted.swift": (
         UNSAFE_CLASSIFICATION,
-        "AMB-1709",
+        DIRECT_WRITE_PROOF_FOLLOW_UP,
         "Legacy SwiftData mapping scaffolding remains outside Core/LocalRuntimeOS.",
     ),
     "Native/Ambitions/Core/Persistence/SwiftDataRepositories+02-RepositoryMapping+03-feedbackRecord.swift": (
         UNSAFE_CLASSIFICATION,
-        "AMB-1709",
+        DIRECT_WRITE_PROOF_FOLLOW_UP,
         "Legacy SwiftData feedback mapping scaffolding remains outside Core/LocalRuntimeOS.",
     ),
     "Native/Ambitions/Core/Persistence/SwiftDataRepositories+02-RepositoryMapping+04-apply.swift": (
         UNSAFE_CLASSIFICATION,
-        "AMB-1709",
+        DIRECT_WRITE_PROOF_FOLLOW_UP,
         "Legacy SwiftData apply mapping scaffolding remains outside Core/LocalRuntimeOS.",
     ),
     "Native/Ambitions/Core/Persistence/SwiftDataRepositories+02-RepositoryMapping+05-entityRevisionTombstone.swift": (
         UNSAFE_CLASSIFICATION,
-        "AMB-1709",
+        DIRECT_WRITE_PROOF_FOLLOW_UP,
         "Legacy SwiftData tombstone mapping scaffolding remains outside Core/LocalRuntimeOS.",
     ),
     "Native/Ambitions/Core/Persistence/SwiftDataRepositories+02-RepositoryMapping.swift": (
         UNSAFE_CLASSIFICATION,
-        "AMB-1709",
+        DIRECT_WRITE_PROOF_FOLLOW_UP,
         "Legacy SwiftData mapping scaffolding remains outside Core/LocalRuntimeOS.",
     ),
     "Native/Ambitions/Core/Persistence/SwiftDataRepositories+03-Array.swift": (
         UNSAFE_CLASSIFICATION,
-        "AMB-1709",
+        DIRECT_WRITE_PROOF_FOLLOW_UP,
         "Legacy SwiftData repository helper remains outside Core/LocalRuntimeOS.",
     ),
     "Native/Ambitions/Core/Persistence/SwiftDataRepositories+04-SwiftDataGoalPersistence.swift": (
         UNSAFE_CLASSIFICATION,
-        "AMB-1709",
+        DIRECT_WRITE_PROOF_FOLLOW_UP,
         "Legacy goal persistence writes remain outside Core/LocalRuntimeOS.",
     ),
     "Native/Ambitions/Core/Persistence/SwiftDataRepositories+05-SwiftDataAmbitionGraphProjectionRecordRepository.swift": (
         UNSAFE_CLASSIFICATION,
-        "AMB-1709",
+        DIRECT_WRITE_PROOF_FOLLOW_UP,
         "Legacy graph projection record repository writes remain outside Core/LocalRuntimeOS.",
     ),
     "Native/Ambitions/Core/Persistence/SwiftDataRepositories+06-SwiftDataAppStateRepository.swift": (
         UNSAFE_CLASSIFICATION,
-        "AMB-1709",
+        DIRECT_WRITE_PROOF_FOLLOW_UP,
         "Legacy app-state repository writes remain outside Core/LocalRuntimeOS.",
     ),
     "Native/Ambitions/Core/Persistence/SwiftDataRepositories+07-SwiftDataRuntimeSnapshotLedgerRepository.swift": (
         UNSAFE_CLASSIFICATION,
-        "AMB-1709",
+        DIRECT_WRITE_PROOF_FOLLOW_UP,
         "Legacy runtime snapshot ledger repository writes remain outside Core/LocalRuntimeOS.",
     ),
     "Native/Ambitions/Core/Persistence/SwiftDataRepositories+08-SwiftDataReminderRepository.swift": (
         UNSAFE_CLASSIFICATION,
-        "AMB-1709",
+        DIRECT_WRITE_PROOF_FOLLOW_UP,
         "Legacy reminder repository writes remain outside Core/LocalRuntimeOS.",
     ),
     "Native/Ambitions/Core/Persistence/SwiftDataRepositories.swift": (
         UNSAFE_CLASSIFICATION,
-        "AMB-1709",
+        DIRECT_WRITE_PROOF_FOLLOW_UP,
         "Legacy SwiftData repository authority remains outside Core/LocalRuntimeOS.",
     ),
 }

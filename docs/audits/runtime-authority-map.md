@@ -10,6 +10,7 @@ Source snapshots inspected:
 - AMB-1708: `e25b35125096da6f8da1739689f0040870a95ae4` on `main`
 - AMB-1709: `b7251077e9280d5d914f7fa2521c9c4a68863898` on `main`
 - AMB-1710: `e6139849cdb956782dae4f0f4974705f463759c9` on `main`
+- AMB-1719 baseline: `6c60c6c95fadc9990b0d8198ab895e20ec05f8de` on `main`
 
 Scope: M01 AMB-1665 runtime authority map only. No Swift behavior, source migration,
 runtime authority migration, or product-surface behavior was changed by this
@@ -328,6 +329,13 @@ storage/continuity files. It keeps the same Yellow proof ceiling while adding
 per-file role, target-owner, proof-requirement, and direct-mutation status for
 AMB-1667.
 
+AMB-1719 supersession: `docs/audits/persistence-direct-save-rejection-proof.md`
+is the current direct-save rejection proof overlay. It does not make unsafe
+writes safe; it records that direct persistence writes either remain explicitly
+unsafe linked debt, are canonical LocalRuntimeOS storage markers with scoped
+proof requirements, or are non-production/projection/adapter rows with their
+own follow-ups.
+
 | Candidate | Evidence paths | Classification | Static finding | Follow-up |
 | --- | --- | --- | --- | --- |
 | Direct SwiftData model authority | `Native/Ambitions/Core/Persistence/SwiftDataModels*.swift` | unsafe write | The model declarations live under legacy `Core/Persistence`, not `Core/LocalRuntimeOS/Storage`. They define private graph records, proof/receipt records, app state, projection records, and tombstones outside the canonical runtime owner. | AMB-1667, AMB-1717, AMB-1718 |
@@ -335,7 +343,7 @@ AMB-1667.
 | Portable snapshot import/restore apply | `Native/Ambitions/Core/Persistence/PortableSnapshotService.swift`, `Native/Ambitions/Core/Persistence/PortableSnapshotService+02-PortableSnapshotService.swift`, `Native/Ambitions/Core/Persistence/PortableSnapshotService+02-PortableSnapshotService+03-referenceWarnings.swift` | unsafe write | `replaceLocalStore` resets and saves through legacy repositories; merge import saves accepted goals, drafts, evidence, feedback, receipts, tombstones, captures, teaching signals, and app state. Dry-run reports are read/compare paths, but `importSnapshot` remains a durable apply path outside runtime authority. | AMB-1667, AMB-1717, AMB-1720 |
 | Legacy import and demo seed apply | `Native/Ambitions/Core/Persistence/LegacyImportService.swift`, `Native/Ambitions/Core/Persistence/DemoSeedPipeline.swift`, `Native/Ambitions/App/AppContainerFactory.swift` | unsafe write | Legacy import transforms prototype snapshots into domain objects, and demo seed wiring applies seed data through repository services. This is useful migration scaffolding but not canonical Command -> Event -> Projection -> Receipt -> Replay authority proof. | AMB-1667, AMB-1717, AMB-1720 |
 | Store health and diagnostics | `Native/Ambitions/Core/Persistence/StoreHealthCheck.swift`, `Native/Ambitions/Core/Persistence/SupportDiagnosticsBundle.swift`, `Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/StoreInvariantChecker.swift` | adapter into command | Health and diagnostics inspect stores and invariants. `StoreInvariantChecker` is under LocalRuntimeOS and reads SwiftData through `ModelContext`; it does not itself authorize durable repair. | AMB-1667, AMB-1718, AMB-1720 |
-| Local schedule block file storage | `Native/Ambitions/Core/Domain/RealityModels.swift`, `Native/Ambitions/Core/Runtime/LocalScheduleBlockRepository.swift`, `Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/AmbitionsCommandExecutor+CalendarWriteIntent.swift`, `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LifeCalendarStore.swift` | unsafe write | A command path for confirmed calendar-write intent exists, but the durable local schedule block writer remains `FileManager` JSON storage in `Core/Domain` via `Core/Runtime` repository helpers. Canonical TimeEngine storage exists separately. | AMB-1667, AMB-1717, AMB-1718 |
+| Local schedule block file storage | `Native/Ambitions/Core/Domain/RealityModels.swift`, `Native/Ambitions/Core/Runtime/LocalScheduleBlockRepository.swift`, `Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/AmbitionsCommandExecutor+CalendarWriteIntent.swift`, `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LifeCalendarStore.swift` | unsafe write | A command path for confirmed calendar-write intent exists, but the durable local schedule block writer remains `FileManager` JSON storage in `Core/Domain` via `Core/Runtime` repository helpers. Canonical TimeEngine storage exists separately. | AMB-1667, AMB-1717, AMB-1718, AMB-1719 |
 | Event journal writes | `Native/Ambitions/Core/LocalRuntimeOS/EventJournal/RuntimeEventStore.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Storage/EventStoreSQLite.swift` | canonical command | Event stores append RuntimeEvent envelopes under LocalRuntimeOS, with checksum and append-order validation in source. AMB-1709 does not prove every mutation enters this event path. | AMB-1666, AMB-1667 |
 | Projection store writes | `Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionMaterializer.swift`, `Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionStoreSurfaceReadAdapter.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Storage/ProjectionStoreSQLite.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Storage/SearchStoreFTS.swift` | canonical command | Projection materialization and SQLite/FTS stores live under LocalRuntimeOS and write derived projection/search records. This is storage authority evidence, not proof that all UI surfaces consume only safe projections. | AMB-1668, AMB-1718 |
 | LocalRuntimeOS object, backup, blob, and migration stores | `Native/Ambitions/Core/LocalRuntimeOS/Storage/ObjectStoreSwiftData.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Storage/BackupStore.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Storage/BlobStoreFileSystem.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Storage/MigrationStore.swift` | canonical command | Canonical storage owners exist under LocalRuntimeOS. `ObjectStoreSwiftData` owns local SwiftData transaction/reset scaffolding and backup/migration/blob stores write runtime-owned records; this does not migrate legacy repository authority or prove data-loss safety. | AMB-1667, AMB-1718, AMB-1720 |
@@ -390,10 +398,10 @@ The direct-write audit treats any new production/support direct-write marker
 outside `Native/Ambitions/Core/LocalRuntimeOS/` as a finding unless it is
 classified here with a follow-up.
 
-AMB-1709 statically classifies the persistence/import/repair rows below. The
-`AMB-1709` follow-up labels remain in this table because the audit guard uses
-them as the classification source for this leaf; the remaining repair work is
-carried by AMB-1667 and children AMB-1717 through AMB-1720.
+AMB-1709 is the origin classification for the persistence/import/repair rows
+below. AMB-1719 is the current direct-save proof follow-up for the unsafe
+direct-write rows in the audit guard. The remaining repair work is carried by
+AMB-1667 and children AMB-1717 through AMB-1720.
 
 AMB-1710 statically classifies the preview/debug/test helper families above,
 but keeps the `PreviewAppContainer.swift` direct-write row `unknown` in this
@@ -402,26 +410,26 @@ not be treated as production authority proof or Green adapter proof.
 
 | Path | Markers | Classification | Follow-up | Evidence note |
 | --- | --- | --- | --- | --- |
-| `Native/Ambitions/Core/Domain/RealityModels.swift` | FileManager, write_call | unsafe write | AMB-1709 | Local schedule block file writes live in Core/Domain and must move under LocalRuntimeOS authority. |
+| `Native/Ambitions/Core/Domain/RealityModels.swift` | FileManager, write_call | unsafe write | AMB-1719 | Local schedule block file writes live in Core/Domain and must move under LocalRuntimeOS authority. |
 | `Native/Ambitions/Core/Permissions/LocalNotificationFoundation.swift` | FileManager | adapter into command | AMB-1708 | Notification scheduling reads safe external snapshots and records side effects; action payloads route back through app command handling. |
-| `Native/Ambitions/Core/Persistence/LifeContextPersistence.swift` | SwiftData, context_insert | unsafe write | AMB-1709 | Legacy SwiftData persistence scaffolding remains outside Core/LocalRuntimeOS. |
-| `Native/Ambitions/Core/Persistence/PortableSnapshotService+02-PortableSnapshotService.swift` | try_save | unsafe write | AMB-1709 | Portable snapshot save path remains in legacy Core/Persistence scaffolding. |
-| `Native/Ambitions/Core/Persistence/SwiftDataModels+02-CaptureRecord.swift` | SwiftData | unsafe write | AMB-1709 | Legacy SwiftData model authority remains outside Core/LocalRuntimeOS. |
-| `Native/Ambitions/Core/Persistence/SwiftDataModels+03-EntityRevisionTombstoneRecord.swift` | SwiftData | unsafe write | AMB-1709 | Legacy SwiftData tombstone model authority remains outside Core/LocalRuntimeOS. |
-| `Native/Ambitions/Core/Persistence/SwiftDataModels+04-AmbitionGraphProjectionRecordModel.swift` | SwiftData | unsafe write | AMB-1709 | Legacy SwiftData projection-record model authority remains outside Core/LocalRuntimeOS. |
-| `Native/Ambitions/Core/Persistence/SwiftDataModels.swift` | SwiftData | unsafe write | AMB-1709 | Legacy SwiftData model authority remains outside Core/LocalRuntimeOS. |
-| `Native/Ambitions/Core/Persistence/SwiftDataRepositories+02-RepositoryMapping+02-persisted.swift` | SwiftData | unsafe write | AMB-1709 | Legacy SwiftData mapping scaffolding remains outside Core/LocalRuntimeOS. |
-| `Native/Ambitions/Core/Persistence/SwiftDataRepositories+02-RepositoryMapping+03-feedbackRecord.swift` | SwiftData | unsafe write | AMB-1709 | Legacy SwiftData feedback mapping scaffolding remains outside Core/LocalRuntimeOS. |
-| `Native/Ambitions/Core/Persistence/SwiftDataRepositories+02-RepositoryMapping+04-apply.swift` | SwiftData | unsafe write | AMB-1709 | Legacy SwiftData apply mapping scaffolding remains outside Core/LocalRuntimeOS. |
-| `Native/Ambitions/Core/Persistence/SwiftDataRepositories+02-RepositoryMapping+05-entityRevisionTombstone.swift` | SwiftData | unsafe write | AMB-1709 | Legacy SwiftData tombstone mapping scaffolding remains outside Core/LocalRuntimeOS. |
-| `Native/Ambitions/Core/Persistence/SwiftDataRepositories+02-RepositoryMapping.swift` | SwiftData | unsafe write | AMB-1709 | Legacy SwiftData mapping scaffolding remains outside Core/LocalRuntimeOS. |
-| `Native/Ambitions/Core/Persistence/SwiftDataRepositories+03-Array.swift` | SwiftData, context_delete | unsafe write | AMB-1709 | Legacy SwiftData repository helper remains outside Core/LocalRuntimeOS. |
-| `Native/Ambitions/Core/Persistence/SwiftDataRepositories+04-SwiftDataGoalPersistence.swift` | SwiftData, ModelContext, context_insert, context_delete | unsafe write | AMB-1709 | Legacy goal persistence writes remain outside Core/LocalRuntimeOS. |
-| `Native/Ambitions/Core/Persistence/SwiftDataRepositories+05-SwiftDataAmbitionGraphProjectionRecordRepository.swift` | SwiftData, context_insert | unsafe write | AMB-1709 | Legacy graph projection record repository writes remain outside Core/LocalRuntimeOS. |
-| `Native/Ambitions/Core/Persistence/SwiftDataRepositories+06-SwiftDataAppStateRepository.swift` | SwiftData, context_insert | unsafe write | AMB-1709 | Legacy app-state repository writes remain outside Core/LocalRuntimeOS. |
-| `Native/Ambitions/Core/Persistence/SwiftDataRepositories+07-SwiftDataRuntimeSnapshotLedgerRepository.swift` | SwiftData, context_insert | unsafe write | AMB-1709 | Legacy runtime snapshot ledger repository writes remain outside Core/LocalRuntimeOS. |
-| `Native/Ambitions/Core/Persistence/SwiftDataRepositories+08-SwiftDataReminderRepository.swift` | SwiftData, context_insert | unsafe write | AMB-1709 | Legacy reminder repository writes remain outside Core/LocalRuntimeOS. |
-| `Native/Ambitions/Core/Persistence/SwiftDataRepositories.swift` | SwiftData | unsafe write | AMB-1709 | Legacy SwiftData repository authority remains outside Core/LocalRuntimeOS. |
+| `Native/Ambitions/Core/Persistence/LifeContextPersistence.swift` | SwiftData, context_insert | unsafe write | AMB-1719 | Legacy SwiftData persistence scaffolding remains outside Core/LocalRuntimeOS. |
+| `Native/Ambitions/Core/Persistence/PortableSnapshotService+02-PortableSnapshotService.swift` | try_save | unsafe write | AMB-1719 | Portable snapshot save path remains in legacy Core/Persistence scaffolding. |
+| `Native/Ambitions/Core/Persistence/SwiftDataModels+02-CaptureRecord.swift` | SwiftData | unsafe write | AMB-1719 | Legacy SwiftData model authority remains outside Core/LocalRuntimeOS. |
+| `Native/Ambitions/Core/Persistence/SwiftDataModels+03-EntityRevisionTombstoneRecord.swift` | SwiftData | unsafe write | AMB-1719 | Legacy SwiftData tombstone model authority remains outside Core/LocalRuntimeOS. |
+| `Native/Ambitions/Core/Persistence/SwiftDataModels+04-AmbitionGraphProjectionRecordModel.swift` | SwiftData | unsafe write | AMB-1719 | Legacy SwiftData projection-record model authority remains outside Core/LocalRuntimeOS. |
+| `Native/Ambitions/Core/Persistence/SwiftDataModels.swift` | SwiftData | unsafe write | AMB-1719 | Legacy SwiftData model authority remains outside Core/LocalRuntimeOS. |
+| `Native/Ambitions/Core/Persistence/SwiftDataRepositories+02-RepositoryMapping+02-persisted.swift` | SwiftData | unsafe write | AMB-1719 | Legacy SwiftData mapping scaffolding remains outside Core/LocalRuntimeOS. |
+| `Native/Ambitions/Core/Persistence/SwiftDataRepositories+02-RepositoryMapping+03-feedbackRecord.swift` | SwiftData | unsafe write | AMB-1719 | Legacy SwiftData feedback mapping scaffolding remains outside Core/LocalRuntimeOS. |
+| `Native/Ambitions/Core/Persistence/SwiftDataRepositories+02-RepositoryMapping+04-apply.swift` | SwiftData | unsafe write | AMB-1719 | Legacy SwiftData apply mapping scaffolding remains outside Core/LocalRuntimeOS. |
+| `Native/Ambitions/Core/Persistence/SwiftDataRepositories+02-RepositoryMapping+05-entityRevisionTombstone.swift` | SwiftData | unsafe write | AMB-1719 | Legacy SwiftData tombstone mapping scaffolding remains outside Core/LocalRuntimeOS. |
+| `Native/Ambitions/Core/Persistence/SwiftDataRepositories+02-RepositoryMapping.swift` | SwiftData | unsafe write | AMB-1719 | Legacy SwiftData mapping scaffolding remains outside Core/LocalRuntimeOS. |
+| `Native/Ambitions/Core/Persistence/SwiftDataRepositories+03-Array.swift` | SwiftData, context_delete | unsafe write | AMB-1719 | Legacy SwiftData repository helper remains outside Core/LocalRuntimeOS. |
+| `Native/Ambitions/Core/Persistence/SwiftDataRepositories+04-SwiftDataGoalPersistence.swift` | SwiftData, ModelContext, context_insert, context_delete | unsafe write | AMB-1719 | Legacy goal persistence writes remain outside Core/LocalRuntimeOS. |
+| `Native/Ambitions/Core/Persistence/SwiftDataRepositories+05-SwiftDataAmbitionGraphProjectionRecordRepository.swift` | SwiftData, context_insert | unsafe write | AMB-1719 | Legacy graph projection record repository writes remain outside Core/LocalRuntimeOS. |
+| `Native/Ambitions/Core/Persistence/SwiftDataRepositories+06-SwiftDataAppStateRepository.swift` | SwiftData, context_insert | unsafe write | AMB-1719 | Legacy app-state repository writes remain outside Core/LocalRuntimeOS. |
+| `Native/Ambitions/Core/Persistence/SwiftDataRepositories+07-SwiftDataRuntimeSnapshotLedgerRepository.swift` | SwiftData, context_insert | unsafe write | AMB-1719 | Legacy runtime snapshot ledger repository writes remain outside Core/LocalRuntimeOS. |
+| `Native/Ambitions/Core/Persistence/SwiftDataRepositories+08-SwiftDataReminderRepository.swift` | SwiftData, context_insert | unsafe write | AMB-1719 | Legacy reminder repository writes remain outside Core/LocalRuntimeOS. |
+| `Native/Ambitions/Core/Persistence/SwiftDataRepositories.swift` | SwiftData | unsafe write | AMB-1719 | Legacy SwiftData repository authority remains outside Core/LocalRuntimeOS. |
 | `Native/Ambitions/PreviewSupport/PreviewAppContainer.swift` | FileManager | unknown | AMB-1710 | Preview/debug fixture path uses temporary FileManager storage and needs fixture authority review. |
 | `Native/Ambitions/Projection/ExternalSnapshots/ExternalCreationContracts.swift` | FileManager, write_call | adapter into command | AMB-1708 | External creation handoff queue is imported by DefaultExternalCreationImportService into AmbitionsCommand. |
 | `Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceSnapshotWriter.swift` | write_call | projection-only read | AMB-1708 | External snapshot export writes app-group projection data after privacy validation; it is not canonical private graph state. |
