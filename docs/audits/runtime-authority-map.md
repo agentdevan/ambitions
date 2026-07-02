@@ -322,6 +322,12 @@ durability, replay correctness, device behavior, privacy/legal approval,
 build health, TestFlight readiness, App Store readiness, or total
 LocalRuntimeOS completion.
 
+AMB-1717 supersession: `docs/audits/persistence-authority-classification.md`
+is the current classification overlay for `Core/Persistence` and related
+storage/continuity files. It keeps the same Yellow proof ceiling while adding
+per-file role, target-owner, proof-requirement, and direct-mutation status for
+AMB-1667.
+
 | Candidate | Evidence paths | Classification | Static finding | Follow-up |
 | --- | --- | --- | --- | --- |
 | Direct SwiftData model authority | `Native/Ambitions/Core/Persistence/SwiftDataModels*.swift` | unsafe write | The model declarations live under legacy `Core/Persistence`, not `Core/LocalRuntimeOS/Storage`. They define private graph records, proof/receipt records, app state, projection records, and tombstones outside the canonical runtime owner. | AMB-1667, AMB-1717, AMB-1718 |
