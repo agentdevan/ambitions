@@ -111,3 +111,7 @@ Generated Codex state, old artifacts, prompts, trains, stale batch docs, backup 
 Truth files define authority and standards. They do not by themselves prove implementation completeness, local build success, test success, visual quality, accessibility conformance, performance validation, physical-device validation, TestFlight/App Store readiness, or release approval.
 
 Those claims require current evidence through `RELEASE_TRUTH.md`.
+
+## Truth Claim Status Labels
+
+Use the taxonomy in `CODEX_START_HERE.md` before source work or closeout: Implemented Green, Implemented Yellow, Partial, Aspirational, Deprecated, Blocked, or Unknown. Green requires linked current evidence for the exact claim. If evidence is missing, report the narrower label and the next follow-up instead of turning canon, plans, source names, screenshots, or generated reports into fake Green.

@@ -12,7 +12,7 @@ description: Use for Ambitions release/readiness wording, proof packets, App Sto
 - Owns: proof classification, unsupported-claim removal, status ceiling, and allowed wording.
 - Does not own: product canon, source truth, Visual Green, Release Green, human approval, or device proof.
 - Hard red: build/test/release/device/accessibility/performance/privacy/account/R2 claim without current evidence.
-- Required output: verified, failed, not verified, blocked, human/device follow-up, forbidden claims removed, allowed wording.
+- Required output: proof-claim labels used, verified, failed, not verified, blocked, human/device follow-up, forbidden claims removed, allowed wording.
 
 This skill is operating support only. `docs/truth/RELEASE_TRUTH.md` is the release claim authority.
 
@@ -30,12 +30,14 @@ Never claim build success, test success, release readiness, TestFlight readiness
 2. Read `docs/truth/RELEASE_TRUTH.md`.
 3. Read `docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md` when visual, accessibility, device, split-status, or product-surface status is in scope.
 4. Separate verified, failed, not verified, blocked, and human/device follow-up.
-5. Treat old reports, screenshots, batch closeouts, and deleted artifacts as stale unless tied to the current commit and current logs.
-6. Replace overclaims with proof-bound status.
-7. Preserve explicit owner approval gates for signing, archive export, upload, legal/privacy, public claims, and distribution.
+5. Label proof-sensitive claims as Release-proof, Device-proof, Privacy-proof, Accessibility-proof, or Performance-proof when those claim types are in scope.
+6. Treat old reports, screenshots, batch closeouts, and deleted artifacts as stale unless tied to the current commit and current logs.
+7. Replace overclaims with proof-bound status: Implemented Yellow, Partial, Aspirational, Blocked, or Unknown when linked evidence is missing.
+8. Preserve explicit owner approval gates for signing, archive export, upload, legal/privacy, public claims, and distribution.
 
 ## Output
 
+- Proof-claim labels used
 - Verified
 - Failed
 - Not verified

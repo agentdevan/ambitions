@@ -37,6 +37,9 @@ Codex must prevent:
 - treating batch docs as release proof
 - hiding failures
 - overclaiming completion
+- presenting aspirational architecture or doctrine as current implementation
+- adding new architecture nouns before deleting or collapsing duplicate authority
+- exposing runtime lore as product UI depth
 
 Codex must follow this file for repo inspection, implementation, docs work, validation, repair loops, cleanup, release reporting, and final status reports.
 
@@ -143,11 +146,22 @@ Codex must optimize for:
 
 Codex must not optimize for appearing done, broad diff volume, speculative implementation, old-canon compliance, visual gimmicks, cloud shortcuts, deleting complexity without extraction, or release claims without proof.
 
+Architecture simplification posture:
+
+```text
+law over lore
+deep runtime, boring UI
+delete before naming
+Green requires linked evidence
+```
+
+Codex must preserve stable product/runtime/privacy/proof law, reduce private architecture mythology, keep root UI in plain native life-object terms, and avoid new broad nouns unless the scoped work deletes, collapses, or replaces duplicate authority. A status claim may be Green only when the exact claim has current linked evidence.
+
 ---
 
 ## 5. Planning and Patch Discipline
 
-Before editing, Codex must read truth files, inspect live source, identify task type, define narrow scope, list likely touched files, list validation commands, identify rollback, and identify hard-red risks. Every nontrivial issue, plan, and closeout must state how it preserves or improves `Intent -> Context -> Path -> Time Fit -> Reflow -> Action -> Proof -> Learning`, or explicitly state that the work is narrow repo health, security, build, or cleanup work that does not affect product mission. Closeouts should include the canonical Private Life Orchestration closeout phrase from `PRIVATE_LIFE_ORCHESTRATION_TRUTH.md` or an equivalent scoped statement. For work touching Life Capital, goal pathing, Future Steps, continuous adjustment, onboarding, reviews, Source Atlas composition, proof/progress transfer, automation, notifications, or scenario gates, Codex must also map the intended behavior to `PRODUCT_EXPERIENCE_CANON.md` and report which scenario gates are Existing, Partial, Missing, or Unknown.
+Before editing, Codex must read truth files, inspect live source, identify task type, define narrow scope, list likely touched files, list validation commands, identify rollback, identify hard-red risks, and classify the claim being made with the truth-claim taxonomy in `CODEX_START_HERE.md`: Implemented Green, Implemented Yellow, Partial, Aspirational, Deprecated, Blocked, or Unknown. Every nontrivial issue, plan, and closeout must state how it preserves or improves `Intent -> Context -> Path -> Time Fit -> Reflow -> Action -> Proof -> Learning`, or explicitly state that the work is narrow repo health, security, build, or cleanup work that does not affect product mission. Closeouts should include the canonical Private Life Orchestration closeout phrase from `PRIVATE_LIFE_ORCHESTRATION_TRUTH.md` or an equivalent scoped statement. For work touching Life Capital, goal pathing, Future Steps, continuous adjustment, onboarding, reviews, Source Atlas composition, proof/progress transfer, automation, notifications, or scenario gates, Codex must also map the intended behavior to `PRODUCT_EXPERIENCE_CANON.md` and report which scenario gates are Existing, Partial, Missing, or Unknown.
 
 For LocalRuntimeOS, backend/runtime architecture, mutation, persistence substrate, projection, replay, trust/receipt/proof/history, side-effect, capture intake, privacy boundary, Source Atlas runtime boundary, search/recall, sync continuity, migration, repair, or diagnostics work, Codex must start from Linear `AMB-1544` and the active leaf. As of 2026-06-30, `AMB-1545` is canon/process tracking only, `AMB-1546` covers the first command source move, `AMB-1567` covers the TransactionKernel foundation with validated transaction preparation, event/projection-backed commit receipts, idempotency replay, rollback plans, and conflict detection, `AMB-1547` covers the EventJournal foundation, `AMB-1548` covers the ProjectionEngine foundation, `AMB-1549` covers the Storage foundation and SwiftData object-store ownership move, `AMB-1553` covers the RuntimeBoundary foundation and moved local-only/privacy/source-atlas boundary ownership, `AMB-1554` covers the ObjectState foundation and AppState store adapter proof, `AMB-1555` covers the PrivateLifeRuntimeKernel ownership move and typed-signal foundation, `AMB-1556` covers the PlanningEngine ownership move with moved planning, StepCandidateField, and StepCandidateField generator/Source Atlas bridge files plus focused planning and simulation-gauntlet tests, `AMB-1557` covers the TimeEngine ownership move with moved protected/priority placement policies, local temporal graph/store/recurrence/conflict/placement/recovery engines, Time placement coordinator consumption, and focused protected placement, conflict, recurrence, and persistence tests, `AMB-1558` covers the CaptureRouteGraph foundation with moved route graph ownership, durable intake before classification, draft/direct lookup indexes, attachment checksum/quarantine, correction ledger, promotion transactions, and focused capture route/integration tests, `AMB-1559` covers the TrustSystem foundation with moved event ledger, action receipt, proof ledger, source record, tombstone, replay, history, audit, undo, and trust repository ownership, `AMB-1560` covers the SearchRecall foundation with moved local search index ownership and focused Find / Act / Inspect, provenance, privacy, action validation, local semantic ranking, and projection-fed rebuild tests, `AMB-1561` covers the first SideEffectSystem foundation with moved side-effect ledger ownership and focused outbox tests, `AMB-1562` covers the first SyncContinuity foundation with moved SyncCapability/CloudKit continuity/LivingPlan continuity ownership and focused continuity-boundary tests, `AMB-1563` covers the SourceAtlas foundation with moved Source Atlas model/cache/runtime ownership and focused public-pack compiler/firewall/manifest/freshness/cache/projection tests, `AMB-1564` covers the first PrivacySecurity foundation with moved storage privacy boundary ownership and focused redaction/egress/export/local-auth/vault tests, `AMB-1565` covers the first MigrationRepair foundation with focused schema-ledger/planner/dry-run/rollback/quarantine tests, and `AMB-1566` covers the first Diagnostics foundation with redacted local-backend inspectors and performance-budget diagnostics. Later bounded leaves must continue through the full `Core/LocalRuntimeOS/` subtree coverage ledger rather than treating the initial leaves as implementation completion.
 
@@ -167,7 +181,7 @@ Do not write one unqualified `Green`. Use Source Green, Runtime Green, Interacti
 
 Codex may not self-certify Visual Green or Release Green. For visual/product-surface work, Codex may prepare source, tests, screenshots, target comparison, and proof packets, then move the work to Ready for Visual Review at most.
 
-A Green claim requires proof appropriate to scope:
+A Green claim requires linked current evidence artifacts appropriate to scope:
 
 - Docs/process: truth-file diff, authority scan, forbidden-claim scan when applicable.
 - Swift source: build, focused tests where practical, and affected ownership proof.

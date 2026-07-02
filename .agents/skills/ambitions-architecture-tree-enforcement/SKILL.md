@@ -20,6 +20,16 @@ This skill is operating support only. The binding architecture tree lives in `do
 
 This skill exists to stop architecture drift, convenience folders, old feature ownership, and "equivalent" interpretations.
 
+Architecture simplification posture:
+
+```text
+law over lore
+deep runtime, boring UI
+delete before naming
+```
+
+Prefer stable laws and canonical owners over new terminology. Do not add new broad architecture nouns, folders, suffix splits, engines, kernels, managers, coordinators, services, systems, runtimes, ledgers, scenes, lenses, or OS labels unless the scoped train deletes, collapses, or replaces duplicate authority or active truth explicitly approves the new owner with a proof gate. Deep runtime is allowed under the canonical LocalRuntimeOS law; user-facing UI must remain plain and object-led.
+
 ## Hard Rule
 
 The final architecture tree is binding path ownership, not a suggestion.

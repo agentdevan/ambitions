@@ -48,6 +48,20 @@ Implementation state labels:
 | Conflicting | Contradicts active truth, source, or release proof. |
 | Compatibility debt | Source remains for routing/migration/history but is not current product truth. |
 
+Truth-doc implementation claim labels:
+
+| Label | Meaning |
+|---|---|
+| Implemented Green | Current source plus current validation/proof artifacts establish the exact implementation claim. Green must link to source paths and proof artifacts, and it must not imply release, visual, device, accessibility, privacy/legal, account, R2, CloudKit, or full-product readiness. |
+| Implemented Yellow | Source or scaffolding exists, but validation is incomplete, stale, partial, environment-limited, owner acceptance is missing, or named debt remains. |
+| Partial | A scoped subclaim has current evidence, while the broader claim remains unproven. State the proven subset and unsupported remainder. |
+| Aspirational | Product or architecture direction without current source/proof. It may guide future work, but it is not implementation truth. |
+| Deprecated | Retired, historical, stale, or compatibility-only material. It must not be expanded as active architecture. |
+| Blocked | Implementation or proof cannot advance until a named blocker is removed. |
+| Unknown | Live source/proof has not been inspected or no evidence was found. Unknown is not permission to infer. |
+
+Any truth-doc claim using these labels must preserve the remediation direction from `PRODUCT_DESIGN_TRUTH.md`: law over lore, deep runtime with plain user-facing UI, delete before naming, and no Green without linked evidence.
+
 ---
 
 ## 2. Repository Snapshot

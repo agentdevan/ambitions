@@ -12,7 +12,7 @@ description: Use before Ambitions repo edits or reviews to resolve current canon
 - Owns: evidence classification, stale-material handling, truth/source/proof conflict routing, Private Life Orchestration preservation checks, and smallest safe next action.
 - Does not own: Ambitions canon, current implementation status, release readiness, visual acceptance, or privacy approval.
 - Hard red: treating stale docs, old skills, plans, screenshots, or memory as current truth/proof.
-- Required output: truth files inspected, task type, source/proof evidence used, conflicts found, claims allowed/forbidden, smallest safe next action.
+- Required output: truth files inspected, task type, truth-claim status label, source/proof evidence used, conflicts found, claims allowed/forbidden, smallest safe next action.
 
 This skill is operating support only. It is not product truth, implementation proof, validation proof, release proof, accessibility proof, privacy approval, App Store proof, or permission to widen scope.
 
@@ -34,8 +34,10 @@ Motion is not a tab or destination. Capture is not a tab.
 3. Treat live source/project/test/script evidence as implementation truth.
 4. Treat current logs and proof packets as release truth.
 5. Classify non-source material as active, supporting, stale, or delete-worthy before using it.
-6. Do not revive deleted prompts, trains, artifacts, old skills, old control-plane files, or five-surface IA.
-7. Use `PRODUCT_EXPERIENCE_CANON.md` when the task touches Life Capital, full pathing, Future Steps, proof/progress transfer, Source Atlas, onboarding, reviews, automation, scenario gates, or actionability.
+6. Classify truth-doc and closeout claims as Implemented Green, Implemented Yellow, Partial, Aspirational, Deprecated, Blocked, or Unknown before using them to justify source work.
+7. Do not revive deleted prompts, trains, artifacts, old skills, old control-plane files, or five-surface IA.
+8. Use `PRODUCT_EXPERIENCE_CANON.md` when the task touches Life Capital, full pathing, Future Steps, proof/progress transfer, Source Atlas, onboarding, reviews, automation, scenario gates, or actionability.
+9. Apply the architecture simplification posture from `PRODUCT_DESIGN_TRUTH.md`: law over lore, deep runtime with plain UI, delete before naming, and no Green without linked evidence.
 
 This skill classifies evidence and stale material. It does not define canon.
 
@@ -43,6 +45,7 @@ This skill classifies evidence and stale material. It does not define canon.
 
 - Truth files inspected
 - Task type
+- Truth-claim status label
 - Source/proof evidence used
 - Conflicts found
 - Private Life Orchestration relationship

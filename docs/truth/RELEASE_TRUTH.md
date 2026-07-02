@@ -63,6 +63,20 @@ Release evidence may include current terminal logs, `.xcresult` summaries, curre
 
 Release evidence may not be inferred from source presence, target configuration, old audit reports, old batch docs, old PR summaries, README language, design truth, Codex statements, expected script behavior, old generated project state, or screenshots not tied to current build/commit.
 
+### Proof-Claim Labels
+
+Use these labels whenever a truth doc, issue, closeout, or status update discusses proof-sensitive claims. The label does not make the claim true; the linked evidence does.
+
+| Label | Required current evidence |
+|---|---|
+| Release-proof claim | Current build/test/archive/release evidence with branch, commit SHA, environment, exact commands or procedure, exit codes, artifacts, skipped checks, supported claims, unsupported claims, rollback, and required owner approvals. |
+| Device-proof claim | Current physical-device or explicitly scoped simulator/device evidence tied to build SHA, device/OS, procedure, artifact, result, and known limitations. Physical-device proof is required for device readiness and Visual Green. |
+| Privacy-proof claim | Current source/request/data-flow evidence, privacy manifest review where relevant, no-private-life-graph boundary proof, account/R2/Source Atlas request-shape proof where relevant, and privacy/legal owner approval when release-facing. |
+| Accessibility-proof claim | Current accessibility evidence for the scoped UI, including VoiceOver, Dynamic Type, Reduce Motion, Reduce Transparency, Increase Contrast or High Contrast where relevant, accessible actions, and device/simulator context. |
+| Performance-proof claim | Current measured evidence for the scoped performance claim, including tool/procedure, device or simulator, OS, build SHA, thresholds, results, and regressions or skipped measurements. |
+
+If the required evidence is absent, use `Implemented Yellow`, `Partial`, `Aspirational`, `Blocked`, or `Unknown` from `CODEX_START_HERE.md` instead of Green. Do not convert a proof-sensitive claim into Green by quoting doctrine.
+
 ---
 
 ## 3. Current Release Posture

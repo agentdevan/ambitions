@@ -157,6 +157,23 @@ Historical material is not retained in-repo unless it is current, canon-aligned,
 - Preserve XcodeGen.
 - Edit `project.yml` and regenerate locally; do not treat checked-in `.xcodeproj` as source truth.
 
+## 6A. Architecture simplification and proof-status law
+
+Current remediation direction:
+
+```text
+law over lore
+deep runtime, boring UI
+delete before naming
+Green requires linked evidence
+```
+
+Agents must preserve the product and runtime laws before preserving internal names. Architecture names, folders, suffix splits, engines, kernels, managers, coordinators, services, systems, runtimes, ledgers, scenes, lenses, and OS nouns must earn permanence through current need, exact ownership, deletion/collapse of duplicate authority, and linked proof. Do not add new broad architecture vocabulary because it sounds clarifying.
+
+User-facing UI must stay plain, native, and object-led even when the local runtime is deep. Do not expose runtime, projection, receipt, ledger, kernel, engine, scene, lens, policy, or architecture taxonomy as first-viewport product depth.
+
+Use the truth-claim taxonomy in `docs/truth/CODEX_START_HERE.md` before source work or closeout: Implemented Green, Implemented Yellow, Partial, Aspirational, Deprecated, Blocked, or Unknown. Do not report Green unless the exact claim has linked current evidence artifacts. If proof is missing, report Yellow, Partial, Aspirational, Blocked, or Unknown with the next follow-up instead of fake Green.
+
 ## 7. Strict Architecture Tree Enforcement
 
 Before creating, moving, refactoring, or reviewing Ambitions source, agents must load and follow:

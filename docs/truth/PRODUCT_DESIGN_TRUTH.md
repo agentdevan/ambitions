@@ -87,6 +87,25 @@ If this amendment conflicts with older wording that says Ambitions must not be a
 
 `PRODUCT_DESIGN_TRUTH.md` remains the root product/design/IA/privacy law for Ambitions. `PRODUCT_EXPERIENCE_CANON.md` defines user-facing feature behavior and runtime product behavior: Life Capital, full scheduled goal paths, Future Steps, continuous adjustment, proof/progress preservation, Source Atlas composition, onboarding, reviews, notifications, automation, scenario gates, and actionability. The Product Experience Canon introduces no top-level IA change: Today / Goals / Time / You remain the only persistent surfaces, Capture remains the global composer, Motion remains behavior, and Trust remains inspection.
 
+## 0C. Architecture Simplification Law
+
+The 2026 architecture remediation posture is:
+
+```text
+law over lore
+deep runtime, boring UI
+delete before naming
+Green requires linked evidence
+```
+
+Law over lore means stable product, runtime, privacy, and proof laws outrank internal mythology, aspirational architecture names, historical dossiers, and clever terminology. A source owner, architecture noun, or product metaphor earns permanence only when it is current, useful, mapped to the Final Architecture Tree, and backed by source/proof evidence appropriate to its claim.
+
+Deep runtime, boring UI means Ambitions may have a sophisticated local Private Life Runtime, but the user-facing product must stay direct, native, inspectable, and life-object-led. Root UI should show Today, Goals, Time, You, Capture, Search, Steps, proof, receipts, recovery, and settings in plain user terms. It must not expose runtime, projection, ledger, kernel, engine, scene, lens, OS, policy, or other architecture vocabulary as product depth.
+
+Delete before naming means new broad architecture names, folders, suffix splits, engines, kernels, managers, coordinators, services, systems, runtimes, ledgers, scenes, lenses, or OS nouns are disallowed unless the scoped work first deletes, collapses, or replaces the older authority they would otherwise duplicate, or active truth explicitly approves the new owner with a proof gate.
+
+Green requires linked evidence means a canon statement, architecture target, or remediation doctrine is not an implementation claim unless it links to current source, tests, logs, proof artifacts, or owner acceptance that prove the exact scoped claim. If the evidence is missing, narrower status language is required.
+
 ---
 
 ## 1. Locked Product Law

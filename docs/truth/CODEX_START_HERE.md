@@ -83,6 +83,22 @@ Intent -> Context -> Path -> Time Fit -> Reflow -> Action -> Proof -> Learning
 
 Infrastructure-only work must name which part of the loop it protects or enables, except for narrow repo health, security, build, or cleanup work where the relationship is explicitly "does not affect product mission; preserves repo health."
 
+## Truth Claim Status Taxonomy
+
+Use these labels for truth-doc, Linear, closeout, and governance claims before touching source. These labels classify the claim being made; they do not replace the split implementation/release statuses below.
+
+| Label | Meaning |
+|---|---|
+| Implemented Green | The exact claim has current linked evidence artifacts: source paths, focused tests or logs, proof packets, owner acceptance where required, and no broader unsupported claim. |
+| Implemented Yellow | Some source, process, or proof exists, but evidence is incomplete, validation is stale/not run, owner acceptance is missing, or known debt remains. Name the missing proof and next follow-up. |
+| Partial | A defined subset is implemented or proven, but the whole claim is not. List what is present, what is absent, and the evidence boundary. |
+| Aspirational | Desired future direction, product law, or architecture target with no current implementation proof. Do not treat as source truth. |
+| Deprecated | Historical, compatibility-only, or retired material. It must not drive new work unless a current issue explicitly scopes migration or deletion. |
+| Blocked | The claim cannot be proven or advanced because a named dependency, artifact, environment, approval, or blocker is missing. |
+| Unknown | Current evidence has not been inspected or no proof was found. Do not infer implementation from plans, names, memory, or old docs. |
+
+No fake Green rule: Green requires linked current evidence artifacts for the exact claim. Truth files, plans, source names, screenshot paths, string scans, and generated reports can support context, but they do not by themselves prove implementation, runtime behavior, visual quality, accessibility, privacy/legal approval, device readiness, TestFlight readiness, App Store readiness, R2 production readiness, CloudKit readiness, or release readiness.
+
 ## Allowed closeout statuses
 
 Docs/governance closeout may use:
