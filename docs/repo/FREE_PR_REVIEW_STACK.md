@@ -7,7 +7,7 @@ Status: repo-governance documentation. This stack uses GitHub Actions plus local
 - `repo-hygiene`: runs whitespace/status checks and `scripts/ci/ambitions-pr-hygiene.sh` for conflict markers, accidental generated artifacts, simulator logs outside approved proof paths, and committed dependency folders.
 - `ambitions-law-audit`: runs existing Ambitions product-law and claim-boundary scripts plus `scripts/ci/ambitions-no-weak-implementation-scan.py`.
 - `remediation-governance-check`: runs the AMB-1658/AMB-1680 guard, including Source Atlas new-file allowlist enforcement and the guard self-test.
-- `source-atlas-boundary-audit`: runs Source Atlas privacy-boundary and no-private-egress audits.
+- `source-atlas-boundary-audit`: runs Source Atlas privacy-boundary, native Source Atlas private-authority denylist, no-private-egress audits, and focused self-tests.
 - `swiftlint`: runs SwiftLint in a local container on Ubuntu with the repo-local `.swiftlint.yml`.
 - `semgrep-local`: runs repo-local Semgrep rules from `.semgrep/ambitions-source-atlas.yml`.
 - `shellcheck`: runs ShellCheck over `scripts/**/*.sh`.

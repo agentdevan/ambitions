@@ -18,7 +18,7 @@ extension SourceAtlasCapabilityPathComposer {
         score += match.matchedRoleIDs.isEmpty == false ? 0.04 : 0.0
         score += match.matchedSkillSliceIDs.isEmpty == false ? 0.04 : 0.0
         score += contextAlignmentScore(pathText: pathText, overlay: overlay, roleOverlays: roleOverlays)
-        score += factorLedgerScore(pathText: pathText)
+        score += localInfluenceScore(pathText: pathText)
         score += requirementScore(requirementProjection: requirementProjection)
         score -= min(0.30, Double(traversal.blockedNodes.count) * 0.07)
         score -= min(0.12, Double(traversal.staleNodes.count) * 0.03)
@@ -128,48 +128,48 @@ extension SourceAtlasCapabilityPathComposer {
     }
 
 
-    func factorLedgerScore(pathText: String) -> Double {
-        guard let factorLedger else {
+    func localInfluenceScore(pathText: String) -> Double {
+        guard let localInfluenceSet else {
             return 0.0
         }
 
         let candidateTokens = Self.tokens(pathText)
         var score = 0.0
-        for factor in factorLedger.factors where factor.active && factor.allowedForRuntimeUse {
-            let factorTokens = Self.tokens([
-                factor.humanReadableReason,
-                factor.affectedRecommendationArea,
-                factor.freshness.lastAffectedLabel,
-                factor.fallbackBehaviorIfRemoved,
-                factor.source.sourceLabel
+        for signal in localInfluenceSet.signals where signal.active && signal.allowedForRuntimeUse {
+            let influenceTokens = Self.tokens([
+                signal.summary,
+                signal.affectedArea,
+                signal.lastAffectedLabel,
+                signal.fallbackBehavior,
+                signal.sourceLabel
             ].joined(separator: " "))
 
-            let overlap = Double(candidateTokens.intersection(factorTokens).count)
+            let overlap = Double(candidateTokens.intersection(influenceTokens).count)
             if overlap > 0 {
-                score += min(0.08, overlap * (0.015 + factor.runtimeWeight * 0.03))
+                score += min(0.08, overlap * (0.015 + signal.weight * 0.03))
             }
-            switch factor.factorType {
+            switch signal.kind {
             case .facilityAccess, .equipmentAccess:
                 if candidateTokens.contains("facility") || candidateTokens.contains("equipment") || candidateTokens.contains("access") {
-                    score += min(0.08, factor.runtimeWeight * 0.04)
+                    score += min(0.08, signal.weight * 0.04)
                 }
             case .eligibilityPathway:
                 if candidateTokens.contains("eligibility") {
-                    score += min(0.08, factor.runtimeWeight * 0.05)
+                    score += min(0.08, signal.weight * 0.05)
                 }
             case .recoveryConstraint:
                 if candidateTokens.contains("recovery") {
-                    score += min(0.06, factor.runtimeWeight * 0.04)
+                    score += min(0.06, signal.weight * 0.04)
                 }
             case .travelFit, .transportationConstraint:
                 if candidateTokens.contains("travel") || candidateTokens.contains("field") {
-                    score += min(0.06, factor.runtimeWeight * 0.035)
+                    score += min(0.06, signal.weight * 0.035)
                 }
             case .recentProof:
                 if candidateTokens.contains("proof") || candidateTokens.contains("review") {
-                    score += min(0.05, factor.runtimeWeight * 0.03)
+                    score += min(0.05, signal.weight * 0.03)
                 }
-            default:
+            case .other:
                 break
             }
         }

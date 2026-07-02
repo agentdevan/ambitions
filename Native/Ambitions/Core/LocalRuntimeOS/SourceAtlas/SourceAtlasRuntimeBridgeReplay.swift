@@ -12,7 +12,7 @@ struct SourceAtlasRuntimeBridgeReplay: Codable, Sendable, Equatable, Hashable, I
     let pathTradeoffCount: Int
     let stepCandidateField: StepCandidateField
     let selectedRecommendation: SourceAtlasBridgeRecommendationSummary
-    let factorLedgerFingerprint: String
+    let localInfluenceFingerprint: String
     let simulationSummary: StepImpactSimulation
     let receipts: [SourceAtlasBridgeReceipt]
     let localOnly: Bool
@@ -22,7 +22,7 @@ struct SourceAtlasRuntimeBridgeReplay: Codable, Sendable, Equatable, Hashable, I
         packSelection: SourceAtlasPackSelection,
         pathComposition: PersonalPathComposition,
         stepCandidateField: StepCandidateField,
-        factorLedger: PersonalizationFactorLedger,
+        localInfluenceFingerprint: String,
         correctionInput: SourceAtlasBridgeCorrectionInput? = nil,
         generatedAt: String,
         localOnly: Bool
@@ -36,7 +36,7 @@ struct SourceAtlasRuntimeBridgeReplay: Codable, Sendable, Equatable, Hashable, I
         pathTradeoffCount = pathComposition.pathTradeoffs.count
         self.stepCandidateField = stepCandidateField
         selectedRecommendation = SourceAtlasBridgeRecommendationSummary(stepCandidateField.selectedCandidate ?? stepCandidateField.candidates.first ?? Self.fallbackCandidate())
-        factorLedgerFingerprint = factorLedger.replayProjection.stableFingerprint
+        self.localInfluenceFingerprint = localInfluenceFingerprint.trimmingCharacters(in: .whitespacesAndNewlines)
         simulationSummary = selectedRecommendation.impactSimulation
         receipts = Self.receipts(
             intent: intent,
@@ -46,7 +46,7 @@ struct SourceAtlasRuntimeBridgeReplay: Codable, Sendable, Equatable, Hashable, I
             stepCandidateField: stepCandidateField,
             inspectionSurfaceTitle: inspectionSurfaceTitle,
             inspectionSummary: inspectionSummary,
-            factorLedgerFingerprint: factorLedgerFingerprint,
+            localInfluenceFingerprint: self.localInfluenceFingerprint,
             correctionInput: correctionInput,
             generatedAt: self.generatedAt,
             localOnly: localOnly
@@ -57,7 +57,7 @@ struct SourceAtlasRuntimeBridgeReplay: Codable, Sendable, Equatable, Hashable, I
             prefix: "source-atlas.bridge-replay",
             components: [
                 self.generatedAt,
-                factorLedgerFingerprint,
+                self.localInfluenceFingerprint,
                 stepCandidateField.selectedCandidateID,
                 pathComposition.selectedPath.id,
                 packSelection.selectedPackIDs.joined(separator: ",")
@@ -79,7 +79,7 @@ private extension SourceAtlasRuntimeBridgeReplay {
         stepCandidateField: StepCandidateField,
         inspectionSurfaceTitle: String,
         inspectionSummary: String,
-        factorLedgerFingerprint: String,
+        localInfluenceFingerprint: String,
         correctionInput: SourceAtlasBridgeCorrectionInput?,
         generatedAt: String,
         localOnly: Bool
@@ -204,7 +204,7 @@ private extension SourceAtlasRuntimeBridgeReplay {
                     "selected-candidate=\(stepCandidateField.selectedCandidateID)",
                     "rejected-candidates=\(stepCandidateField.rankingTrace.rejectedCandidateIDs.joined(separator: ","))",
                     "source-provenance=\(stepCandidateField.sourceProvenance.map(\.rawValue).joined(separator: ","))",
-                    "factor-ledger-fingerprint=\(factorLedgerFingerprint)"
+                    "local-influence-fingerprint=\(localInfluenceFingerprint)"
                 ],
                 relatedIDs: [stepCandidateField.selectedCandidateID] + stepCandidateField.candidateIDs
             )
@@ -255,9 +255,9 @@ private extension SourceAtlasRuntimeBridgeReplay {
                 recordedAt: generatedAt,
                 summary: "Source Atlas replay snapshot generated.",
                 details: [
-                    "replay-id=\(CandidateSource.stableIdentifier(prefix: "source-atlas.bridge-replay.snapshot", components: [generatedAt, factorLedgerFingerprint, stepCandidateField.selectedCandidateID]))",
+                    "replay-id=\(CandidateSource.stableIdentifier(prefix: "source-atlas.bridge-replay.snapshot", components: [generatedAt, localInfluenceFingerprint, stepCandidateField.selectedCandidateID]))",
                     "selected-recommendation=\(stepCandidateField.selectedCandidateID)",
-                    "factor-ledger-fingerprint=\(factorLedgerFingerprint)",
+                    "local-influence-fingerprint=\(localInfluenceFingerprint)",
                     "inspection-surface=\(inspectionSurfaceTitle)",
                     "inspection-summary=\(inspectionSummary)",
                     "receipt-count=\(receipts.count + 1)",

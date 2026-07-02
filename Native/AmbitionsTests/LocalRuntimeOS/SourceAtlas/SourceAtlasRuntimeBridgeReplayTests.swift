@@ -13,7 +13,7 @@ final class SourceAtlasRuntimeBridgeReplayTests: XCTestCase {
             packSelection: fixture.packSelection,
             pathComposition: fixture.composition,
             stepCandidateField: fixture.field,
-            factorLedger: fixture.factorLedger,
+            localInfluenceFingerprint: fixture.factorLedger.replayProjection.stableFingerprint,
             correctionInput: fixture.correctionInput,
             generatedAt: fixture.generatedAt,
             localOnly: true
@@ -23,15 +23,15 @@ final class SourceAtlasRuntimeBridgeReplayTests: XCTestCase {
         XCTAssertEqual(
             replay.receiptKinds,
             [
-                .sourceAtlasIntentMatched,
-                .sourceAtlasPackSelected,
-                .sourceAtlasPackRejected,
-                .sourceAtlasPathComposed,
-                .sourceAtlasPathRejected,
-                .sourceAtlasFreshnessBlocked,
-                .sourceAtlasStepCandidatesExpanded,
-                .sourceAtlasUserCorrectionApplied,
-                .sourceAtlasReplayGenerated
+                SourceAtlasBridgeReceiptKind.sourceAtlasIntentMatched,
+                SourceAtlasBridgeReceiptKind.sourceAtlasPackSelected,
+                SourceAtlasBridgeReceiptKind.sourceAtlasPackRejected,
+                SourceAtlasBridgeReceiptKind.sourceAtlasPathComposed,
+                SourceAtlasBridgeReceiptKind.sourceAtlasPathRejected,
+                SourceAtlasBridgeReceiptKind.sourceAtlasFreshnessBlocked,
+                SourceAtlasBridgeReceiptKind.sourceAtlasStepCandidatesExpanded,
+                SourceAtlasBridgeReceiptKind.sourceAtlasUserCorrectionApplied,
+                SourceAtlasBridgeReceiptKind.sourceAtlasReplayGenerated
             ]
         )
         XCTAssertEqual(replay.inspectionSurfaceTitle, "Search Ambitions")
@@ -42,7 +42,7 @@ final class SourceAtlasRuntimeBridgeReplayTests: XCTestCase {
         XCTAssertEqual(replay.stepCandidateField.selectedCandidateID, fixture.field.selectedCandidateID)
         XCTAssertEqual(replay.selectedRecommendation.candidateID, fixture.field.selectedCandidateID)
         XCTAssertEqual(replay.simulationSummary.candidateID, fixture.field.selectedCandidate?.impactSimulation.candidateID)
-        XCTAssertEqual(replay.factorLedgerFingerprint, fixture.factorLedger.replayProjection.stableFingerprint)
+        XCTAssertEqual(replay.localInfluenceFingerprint, fixture.factorLedger.replayProjection.stableFingerprint)
         XCTAssertEqual(replay.pathComposition.selectedPath.id, fixture.composition.selectedPath.id)
         XCTAssertEqual(replay.pathComposition.rejectedPaths.first?.id, fixture.composition.rejectedPaths.first?.id)
         XCTAssertEqual(replay.pathTradeoffCount, fixture.composition.pathTradeoffs.count)

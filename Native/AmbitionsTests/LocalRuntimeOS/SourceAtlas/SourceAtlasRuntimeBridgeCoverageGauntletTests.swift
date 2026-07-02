@@ -105,7 +105,7 @@ final class SourceAtlasRuntimeBridgeCoverageGauntletTests: XCTestCase {
                     match: match,
                     selection: selection,
                     lifeContextProjection: projection,
-                    factorLedger: factorLedger
+                    localInfluenceSet: sourceAtlasLocalInfluenceSet(from: factorLedger)
                 )
                 .compose()
                 let field = SourceAtlasStepCandidateFieldBridge().expand(
@@ -124,14 +124,14 @@ final class SourceAtlasRuntimeBridgeCoverageGauntletTests: XCTestCase {
                     packSelection: selection,
                     pathComposition: composition,
                     stepCandidateField: field,
-                    factorLedger: factorLedger,
+                    localInfluenceFingerprint: factorLedger.replayProjection.stableFingerprint,
                     generatedAt: catalog.generatedAt,
                     localOnly: true
                 )
                 let encoded = try encodedJSONString(replay)
 
                 sourceSelectionFingerprints.insert(sourceSelectionFingerprint(selection))
-                localPersonalizationFingerprints.insert(replay.factorLedgerFingerprint)
+                localPersonalizationFingerprints.insert(replay.localInfluenceFingerprint)
                 replayIDs.insert(replay.id)
 
                 XCTAssertTrue(sample.publicReferenceOnly)
@@ -140,7 +140,7 @@ final class SourceAtlasRuntimeBridgeCoverageGauntletTests: XCTestCase {
                 XCTAssertEqual(replay.localOnly, true)
                 XCTAssertEqual(replay.schemaVersion, sourceAtlasBridgeReplaySchemaVersion)
                 XCTAssertEqual(replay.packSelection.canDriveRuntime, sample.canDriveRuntime)
-                XCTAssertEqual(replay.receiptKinds.last, .sourceAtlasReplayGenerated)
+                XCTAssertEqual(replay.receiptKinds.last, SourceAtlasBridgeReceiptKind.sourceAtlasReplayGenerated)
                 XCTAssertTrue(bridgePack.starterItems.allSatisfy { $0.storesFinalSchedule == false })
 
                 if sample.canDriveRuntime {
@@ -148,14 +148,14 @@ final class SourceAtlasRuntimeBridgeCoverageGauntletTests: XCTestCase {
                     XCTAssertTrue(selection.canDriveRuntime)
                     XCTAssertFalse(composition.pathInstances.isEmpty)
                     XCTAssertNotEqual(field.selectedCandidate?.kind, StepCandidateKind.fallback)
-                    XCTAssertTrue(replay.receiptKinds.contains(.sourceAtlasPackSelected))
-                    XCTAssertFalse(replay.receiptKinds.contains(.sourceAtlasUnsupportedGoalFallback))
+                    XCTAssertTrue(replay.receiptKinds.contains(SourceAtlasBridgeReceiptKind.sourceAtlasPackSelected))
+                    XCTAssertFalse(replay.receiptKinds.contains(SourceAtlasBridgeReceiptKind.sourceAtlasUnsupportedGoalFallback))
                 } else {
                     XCTAssertTrue(selection.selectedPackIDs.isEmpty)
                     XCTAssertFalse(selection.canDriveRuntime)
                     XCTAssertEqual(composition.selectedPath.capabilityGraphID, "source-atlas.graph.fallback")
                     XCTAssertEqual(field.selectedCandidate?.kind, StepCandidateKind.fallback)
-                    XCTAssertTrue(replay.receiptKinds.contains(.sourceAtlasUnsupportedGoalFallback))
+                    XCTAssertTrue(replay.receiptKinds.contains(SourceAtlasBridgeReceiptKind.sourceAtlasUnsupportedGoalFallback))
                 }
 
                 if sample.requiresRawIntentRedaction {
@@ -221,7 +221,7 @@ final class SourceAtlasRuntimeBridgeCoverageGauntletTests: XCTestCase {
                     match: evaluation.match,
                     selection: evaluation.selection,
                     lifeContextProjection: projection,
-                    factorLedger: factorLedger
+                    localInfluenceSet: sourceAtlasLocalInfluenceSet(from: factorLedger)
                 )
                 .compose()
                 let bridgePack = evaluation.selection.selectedPackIDs.isEmpty ? catalog.emptyPack : selectedPack
@@ -246,7 +246,7 @@ final class SourceAtlasRuntimeBridgeCoverageGauntletTests: XCTestCase {
                     packSelection: evaluation.selection,
                     pathComposition: composition,
                     stepCandidateField: field,
-                    factorLedger: factorLedger,
+                    localInfluenceFingerprint: factorLedger.replayProjection.stableFingerprint,
                     correctionInput: correctionInput,
                     generatedAt: catalog.generatedAt,
                     localOnly: true
@@ -256,7 +256,7 @@ final class SourceAtlasRuntimeBridgeCoverageGauntletTests: XCTestCase {
                     packSelection: evaluation.selection,
                     pathComposition: composition,
                     stepCandidateField: field,
-                    factorLedger: factorLedger,
+                    localInfluenceFingerprint: factorLedger.replayProjection.stableFingerprint,
                     correctionInput: correctionInput,
                     generatedAt: catalog.generatedAt,
                     localOnly: true
@@ -264,7 +264,7 @@ final class SourceAtlasRuntimeBridgeCoverageGauntletTests: XCTestCase {
 
                 pathIDs.insert(composition.selectedPath.id)
                 replayIDs.insert(replay.id)
-                replayFingerprints.insert(replay.factorLedgerFingerprint)
+                replayFingerprints.insert(replay.localInfluenceFingerprint)
 
                 if intent.expectedSupported {
                     supportedScenarioCount += 1
@@ -691,7 +691,7 @@ private extension SourceAtlasRuntimeBridgeCoverageGauntletTests {
 
         XCTAssertEqual(replay, replayAgain)
         XCTAssertEqual(replay.id, replayAgain.id)
-        XCTAssertEqual(replay.factorLedgerFingerprint, factorLedger.replayProjection.stableFingerprint)
+        XCTAssertEqual(replay.localInfluenceFingerprint, factorLedger.replayProjection.stableFingerprint)
         XCTAssertEqual(field.rankingTrace.replayFingerprint, factorLedger.replayProjection.stableFingerprint)
         XCTAssertNil(field.rankingTrace.replayReferenceID)
         XCTAssertFalse(replay.selectedRecommendation.title.isEmpty)
@@ -717,7 +717,7 @@ private extension SourceAtlasRuntimeBridgeCoverageGauntletTests {
         } else {
             XCTAssertFalse(field.selectedCandidate?.impactSimulation.goalTimeline.planRisk.isImpossible ?? true)
         }
-        XCTAssertEqual(replay.receiptKinds.last, .sourceAtlasReplayGenerated)
+        XCTAssertEqual(replay.receiptKinds.last, SourceAtlasBridgeReceiptKind.sourceAtlasReplayGenerated)
 
         if evaluation.selection.selectedPackIDs.isEmpty {
             XCTAssertEqual(evaluation.selection.sourceState, .sourceNeeded)
@@ -727,9 +727,9 @@ private extension SourceAtlasRuntimeBridgeCoverageGauntletTests {
             XCTAssertTrue(evaluation.selection.requiredUserReview)
             XCTAssertFalse(evaluation.selection.canDriveRuntime)
             XCTAssertEqual(selectedPack.manifest.id, "pack.coverage.empty")
-            XCTAssertTrue(replay.receiptKinds.contains(.sourceAtlasIntentMatched))
+            XCTAssertTrue(replay.receiptKinds.contains(SourceAtlasBridgeReceiptKind.sourceAtlasIntentMatched))
             if field.selectedCandidate?.kind == .fallback {
-                XCTAssertEqual(replay.receiptKinds.contains(.sourceAtlasUnsupportedGoalFallback), true)
+                XCTAssertEqual(replay.receiptKinds.contains(SourceAtlasBridgeReceiptKind.sourceAtlasUnsupportedGoalFallback), true)
             }
         } else {
             XCTAssertEqual(evaluation.selection.sourceState, .officialCurrent)
@@ -739,7 +739,7 @@ private extension SourceAtlasRuntimeBridgeCoverageGauntletTests {
             XCTAssertTrue(evaluation.selection.canDriveRuntime)
             XCTAssertFalse(evaluation.selection.requiredUserReview)
             XCTAssertNotEqual(field.selectedCandidate?.kind, .fallback)
-            XCTAssertFalse(replay.receiptKinds.contains(.sourceAtlasUnsupportedGoalFallback))
+            XCTAssertFalse(replay.receiptKinds.contains(SourceAtlasBridgeReceiptKind.sourceAtlasUnsupportedGoalFallback))
             XCTAssertFalse(composition.pathInstances.isEmpty)
             XCTAssertFalse(composition.selectedPath.requirementProjection.allRequirements.isEmpty)
             XCTAssertGreaterThan(field.candidates.count, 1)
@@ -762,7 +762,7 @@ private extension SourceAtlasRuntimeBridgeCoverageGauntletTests {
         }
 
         if intent.index % 11 == 0 || intent.index % 17 == 0 {
-            XCTAssertTrue(replay.receipts.contains(where: { $0.kind == .sourceAtlasUserCorrectionApplied }))
+            XCTAssertTrue(replay.receipts.contains(where: { $0.kind == SourceAtlasBridgeReceiptKind.sourceAtlasUserCorrectionApplied }))
             XCTAssertTrue(replay.receipts.contains(where: \.isRedacted))
         }
 
@@ -771,7 +771,7 @@ private extension SourceAtlasRuntimeBridgeCoverageGauntletTests {
         }
 
         XCTAssertFalse(replay.id.isEmpty)
-        XCTAssertFalse(replay.factorLedgerFingerprint.isEmpty)
+        XCTAssertFalse(replay.localInfluenceFingerprint.isEmpty)
         XCTAssertFalse(replay.intent.matchTrace.isEmpty)
         XCTAssertFalse(replay.receipts.contains(where: { $0.summary.localizedCaseInsensitiveContains("private") || $0.summary.localizedCaseInsensitiveContains("secret") }))
     }
@@ -781,6 +781,47 @@ private extension SourceAtlasRuntimeBridgeCoverageGauntletTests {
         encoder.outputFormatting = [.sortedKeys]
         let data = try encoder.encode(value)
         return String(decoding: data, as: UTF8.self)
+    }
+
+    func sourceAtlasLocalInfluenceSet(from factorLedger: PersonalizationFactorLedger) -> SourceAtlasLocalInfluenceSet {
+        SourceAtlasLocalInfluenceSet(
+            stableFingerprint: factorLedger.replayProjection.stableFingerprint,
+            signals: factorLedger.factors.map { factor in
+                SourceAtlasLocalInfluenceSignal(
+                    id: factor.id,
+                    kind: sourceAtlasLocalInfluenceKind(from: factor.factorType),
+                    summary: factor.humanReadableReason,
+                    affectedArea: factor.affectedRecommendationArea,
+                    lastAffectedLabel: factor.lastAffectedLabel,
+                    fallbackBehavior: factor.fallbackBehaviorIfRemoved,
+                    sourceLabel: factor.source.sourceLabel,
+                    weight: factor.runtimeWeight,
+                    active: factor.active,
+                    allowedForRuntimeUse: factor.allowedForRuntimeUse
+                )
+            }
+        )
+    }
+
+    func sourceAtlasLocalInfluenceKind(from factorType: PersonalizationFactorLedgerFactorType) -> SourceAtlasLocalInfluenceKind {
+        switch factorType {
+        case .facilityAccess:
+            return .facilityAccess
+        case .equipmentAccess:
+            return .equipmentAccess
+        case .eligibilityPathway:
+            return .eligibilityPathway
+        case .recoveryConstraint:
+            return .recoveryConstraint
+        case .travelFit:
+            return .travelFit
+        case .transportationConstraint:
+            return .transportationConstraint
+        case .recentProof:
+            return .recentProof
+        default:
+            return .other
+        }
     }
 
     static func repoRoot() -> URL {

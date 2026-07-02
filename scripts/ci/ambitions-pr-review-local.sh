@@ -66,6 +66,7 @@ run_step "remediation governance check" "python3 scripts/ambitions-remediation-g
 run_step "remediation governance self-test" "python3 scripts/ambitions-remediation-governance-check.py --self-test"
 run_step "source atlas boundary audit" "python3 scripts/source-atlas-boundary-audit.py"
 run_step "source atlas no private graph egress audit" "python3 scripts/source-atlas-no-private-graph-egress-audit.py"
+run_step "source atlas no private graph egress self-test" "python3 scripts/source-atlas-no-private-graph-egress-audit.py --self-test"
 run_step "swiftlint" "swiftlint lint --strict"
 run_step "semgrep local" "semgrep scan --config .semgrep/ambitions-source-atlas.yml --error"
 run_step "shellcheck" "find scripts -name '*.sh' -print0 | xargs -0 shellcheck"

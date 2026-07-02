@@ -68,6 +68,7 @@ jobs:
           set -euo pipefail
           python3 scripts/source-atlas-boundary-audit.py
           python3 scripts/source-atlas-no-private-graph-egress-audit.py
+          python3 scripts/source-atlas-no-private-graph-egress-audit.py --self-test
 
   swiftlint:
     name: swiftlint

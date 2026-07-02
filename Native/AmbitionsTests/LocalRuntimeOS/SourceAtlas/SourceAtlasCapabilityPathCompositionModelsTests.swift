@@ -164,19 +164,18 @@ final class SourceAtlasCapabilityPathCompositionModelsTests: XCTestCase {
     func testEligibilityPathwayChangesPathAndSupportsLedgerScore() throws {
         let fixture = makeFixture()
         let baseline = compose(fixture: fixture, projection: fixture.eligibilityProjection)
-        let ledger = makeLedger(
+        let influenceSet = makeLocalInfluenceSet(
             id: "eligibility",
-            factorType: .eligibilityPathway,
-            factorCategory: .eligibility,
-            humanReadableReason: "Eligibility pathway favors the composed path.",
-            affectedRecommendationArea: "eligibility"
+            kind: .eligibilityPathway,
+            summary: "Eligibility pathway favors the composed path.",
+            affectedArea: "eligibility"
         )
-        let withLedger = compose(fixture: fixture, projection: fixture.eligibilityProjection, factorLedger: ledger)
+        let withInfluence = compose(fixture: fixture, projection: fixture.eligibilityProjection, localInfluenceSet: influenceSet)
 
         XCTAssertEqual(baseline.selectedPath.selectedPathOverlayIDs, ["path.eligibility.route"])
-        XCTAssertEqual(withLedger.selectedPath.selectedPathOverlayIDs, ["path.eligibility.route"])
-        XCTAssertGreaterThanOrEqual(withLedger.selectedPath.score, baseline.selectedPath.score)
-        XCTAssertTrue(withLedger.explanationProjection.summary.localizedCaseInsensitiveContains("eligibility"))
+        XCTAssertEqual(withInfluence.selectedPath.selectedPathOverlayIDs, ["path.eligibility.route"])
+        XCTAssertGreaterThanOrEqual(withInfluence.selectedPath.score, baseline.selectedPath.score)
+        XCTAssertTrue(withInfluence.explanationProjection.summary.localizedCaseInsensitiveContains("eligibility"))
     }
 }
 
@@ -193,7 +192,7 @@ private extension SourceAtlasCapabilityPathCompositionModelsTests {
     func compose(
         fixture: Fixture,
         projection: LifeContextRuntimeProjection,
-        factorLedger: PersonalizationFactorLedger? = nil
+        localInfluenceSet: SourceAtlasLocalInfluenceSet? = nil
     ) -> PersonalPathComposition {
         SourceAtlasCapabilityPathComposer(
             goalID: "make-varsity-football",
@@ -203,7 +202,7 @@ private extension SourceAtlasCapabilityPathCompositionModelsTests {
             match: fixture.match,
             selection: fixture.selection,
             lifeContextProjection: projection,
-            factorLedger: factorLedger
+            localInfluenceSet: localInfluenceSet
         )
         .compose()
     }
@@ -770,114 +769,26 @@ private extension SourceAtlasCapabilityPathCompositionModelsTests {
         )
     }
 
-    func makeLedger(
+    func makeLocalInfluenceSet(
         id: String,
-        factorType: PersonalizationFactorLedgerFactorType,
-        factorCategory: PersonalizationFactorLedgerFactorCategory,
-        humanReadableReason: String,
-        affectedRecommendationArea: String
-    ) -> PersonalizationFactorLedger {
-        let source = PersonalizationFactorSourceProjection(
-            kind: .lifeContext,
-            sourceID: "source.\(id)",
-            sourceLabel: humanReadableReason,
-            freshness: .current,
-            isSensitive: false,
-            isUserOwned: true,
-            isPresent: true
-        )
-        let freshness = PersonalizationFactorFreshnessProjection(
-            state: .current,
-            lastAffectedLabel: humanReadableReason,
-            needsReview: false,
-            reviewReason: nil
-        )
-        let control = PersonalizationFactorControlProjection(
-            userControlled: true,
-            canDisable: true,
-            allowedForRuntimeUse: true,
-            active: true,
-            fallbackBehaviorIfRemoved: "Falls back to the base context."
-        )
-        let sensitiveUse = PersonalizationFactorSensitiveUseProjection(
-            isSensitive: false,
-            permissionState: .allowed,
-            sensitiveUseLabel: "Not sensitive"
-        )
-        let replay = PersonalizationFactorReplayProjection(
-            isReplayable: true,
-            stableFactorFingerprint: "\(id).fingerprint",
-            stableEvidenceIDs: ["source.\(id)"],
-            selectedCandidateID: "candidate.\(id)",
-            rejectedCandidateIDs: []
-        )
-        let factor = PersonalizationFactorLedgerFactor(
-            id: "factor.\(id)",
-            factorType: factorType,
-            factorCategory: factorCategory,
-            humanReadableReason: humanReadableReason,
-            source: source,
-            freshness: freshness,
-            userControlled: true,
-            runtimeWeight: 0.8,
-            affectedRecommendationArea: affectedRecommendationArea,
-            allowedForRuntimeUse: true,
-            canDisable: true,
-            fallbackBehaviorIfRemoved: "Falls back to the base context.",
-            active: true,
-            lastAffectedLabel: humanReadableReason,
-            control: control,
-            sensitiveUse: sensitiveUse,
-            replay: replay
-        )
-
-        return PersonalizationFactorLedger(
-            recommendationID: "recommendation.\(id)",
-            generatedAt: "2026-05-23T14:50:55Z",
-            runtimeVersion: "private_life_runtime.factor_ledger.v1",
-            userContextVersion: "life-context.\(id)",
-            goalID: "goal.\(id)",
-            selectedCandidateID: "candidate.\(id)",
-            rejectedCandidateIDs: [],
-            factors: [factor],
-            confidenceBand: .high,
-            missingContextQuestions: [],
-            sensitiveFactorUsage: PersonalizationFactorLedgerSensitiveUseProjection(
-                usedFactorIDs: [factor.id],
-                blockedFactorIDs: [],
-                permissionRequiredFactorIDs: [],
-                redactedFactorIDs: []
-            ),
-            explanationProjection: PersonalizationFactorLedgerExplanationProjection(
-                summary: humanReadableReason,
-                sourceLabels: [source.sourceLabel],
-                whyThisChangesPlans: [affectedRecommendationArea],
-                confidenceLabel: "high"
-            ),
-            replayProjection: PersonalizationFactorLedgerReplayProjection(
-                canReplay: true,
-                stableFingerprint: "\(id).fingerprint",
-                stableFactorIDs: [factor.id],
-                selectedCandidateID: "candidate.\(id)",
-                rejectedCandidateIDs: []
-            ),
-            sourceProjection: PersonalizationFactorLedgerSourceProjection(
-                sourceIDs: [source.sourceID],
-                sourceKinds: [source.kind.rawValue],
-                currentFactorCount: 1,
-                reviewFactorCount: 0,
-                blockedFactorCount: 0
-            ),
-            freshnessProjection: PersonalizationFactorLedgerFreshnessProjection(
-                currentFactorCount: 1,
-                needsReviewFactorCount: 0,
-                staleFactorCount: 0
-            ),
-            controlProjection: PersonalizationFactorLedgerControlProjection(
-                userControlledFactorIDs: [factor.id],
-                disabledFactorIDs: [],
-                blockedFactorIDs: []
-            )
+        kind: SourceAtlasLocalInfluenceKind,
+        summary: String,
+        affectedArea: String
+    ) -> SourceAtlasLocalInfluenceSet {
+        SourceAtlasLocalInfluenceSet(
+            stableFingerprint: "\(id).fingerprint",
+            signals: [
+                SourceAtlasLocalInfluenceSignal(
+                    id: "signal.\(id)",
+                    kind: kind,
+                    summary: summary,
+                    affectedArea: affectedArea,
+                    lastAffectedLabel: summary,
+                    fallbackBehavior: "Falls back to the base context.",
+                    sourceLabel: summary,
+                    weight: 0.8
+                )
+            ]
         )
     }
 }
