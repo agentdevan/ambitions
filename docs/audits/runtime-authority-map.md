@@ -1,7 +1,7 @@
 # Runtime Authority Map
 
-Status: AMB-1665 static authority map with AMB-1721 external adapter contract
-and AMB-1722 route audit addenda
+Status: AMB-1665 static authority map with AMB-1721 external adapter contract,
+AMB-1722 route audit, and AMB-1723 EventKit/Reminders addenda
 
 Snapshot date: 2026-07-02
 
@@ -14,10 +14,12 @@ Source snapshots inspected:
 - AMB-1719 baseline: `6c60c6c95fadc9990b0d8198ab895e20ec05f8de` on `main`
 - AMB-1721 baseline: `35975f72cb5d4918057b879ecfc31f350fdd8121` on `main`
 - AMB-1722 baseline: `3ae3b884701babb3694e40a9e5fbaf2f5e62949f` on `main`
+- AMB-1723 baseline: `39ebf1cf1550ad6a169ba7c71fa684ae2fdf56b8` on `main`
 
-Scope: M01 AMB-1665 runtime authority map plus AMB-1721 contract and AMB-1722
-route audit addenda only. No Swift behavior, source migration, runtime
-authority migration, or product-surface behavior was changed by this artifact.
+Scope: M01 AMB-1665 runtime authority map plus AMB-1721 contract, AMB-1722 route
+audit, and AMB-1723 EventKit/Reminders audit addenda only. No Swift behavior,
+source migration, runtime authority migration, or product-surface behavior was
+changed by this artifact.
 
 Evidence class: Implemented Yellow. This map classifies current source
 entry points and direct-write markers so later remediation can proceed without
@@ -514,12 +516,32 @@ snapshot proof, or release readiness. AMB-1723 remains next for EventKit and
 Reminders; AMB-1724 remains next for external projection writers/readers and
 device-facing external-reader proof.
 
+## AMB-1723 EventKit And Reminders Outbox Audit
+
+AMB-1723 installs the route audit in
+`docs/audits/external-adapter-eventkit-reminders-outbox-routing.md`.
+
+The audit keeps the proof ceiling at Implemented Yellow. It classifies EventKit
+calendar-event writes, confirmed Time calendar block writes, and Reminders
+writes as `sideEffectOutbox` only for local-commit overloads. Current Today and
+Goals callers use no-localCommit protocol methods and are treated as
+blocked/Yellow, not working external-write proof. Reminder permission denial
+does not yet produce an outbox rejection record. EventKit success/failure paths
+record ledger status rows but do not use `SideEffectOutbox.recordResult` to
+create linked result receipts. `ReminderOutbox` is source-present but unconsumed
+by inspected production paths, and `SwiftDataReminderRepository` remains legacy
+`unsafeDebt` when reminder objects are persisted after external save.
+
+AMB-1723 does not prove device EventKit/Reminders behavior, permission prompt
+behavior, release readiness, or parent Green. AMB-1724 remains next for external
+projection-only snapshot and redaction proof.
+
 ## Residual Gaps
 
 | Gap | Status | Follow-up |
 | --- | --- | --- |
 | App UI and Capture action handlers are statically inventoried, but several paths still write through legacy repository/projection services outside LocalRuntimeOS. | unsafe write / Implemented Yellow by path | AMB-1666, AMB-1667 |
-| System-surface entry points are statically inventoried by AMB-1708, AMB-1721 defines the adapter contract, and AMB-1722 classifies App Intent, widget payload, share extension, notification, and external app routes. Terminated-app, extension lifecycle, notification device action, widget payload receipt/replay, Live Activity, EventKit, Reminders, CloudKit, and external-reader proof is still missing. | Implemented Yellow / `blockedUnknown` widget payload path | AMB-1668, AMB-1680 |
+| System-surface entry points are statically inventoried by AMB-1708, AMB-1721 defines the adapter contract, AMB-1722 classifies App Intent/widget/share/notification/app routes, and AMB-1723 classifies EventKit/Reminders writes. Terminated-app, extension lifecycle, notification device action, widget payload receipt/replay, Live Activity, EventKit/Reminders device behavior, EventKit result receipt linkage, Reminders permission-denied outbox receipt, CloudKit, and external-reader proof is still missing. | Implemented Yellow / `blockedUnknown` widget payload path / EventKit-Reminders Yellow | AMB-1668, AMB-1680 |
 | Legacy SwiftData/Core/Persistence, portable snapshot import/restore, restore rollback delegation, and Core/Domain local schedule writes remain outside canonical runtime authority; AMB-1720 defines the migration proof plan but does not make these paths Green. | unsafe write / Implemented Yellow plan | AMB-1667, AMB-1717, AMB-1718, AMB-1719, AMB-1720 |
 | Preview/debug/test helpers are statically separated by AMB-1710, but the preview temporary external-creation store remains an `unknown` direct-write audit sentinel and debug/demo seed writers remain legacy repository writes; AMB-1720 treats demo seed as fixture input only, not production mutation proof. | Implemented Yellow / unknown sentinel / unsafe write | AMB-1667, AMB-1668, AMB-1717, AMB-1720 |
 | Runtime authority map and proof matrix are static-source only. | Implemented Yellow | AMB-1711 |
@@ -533,7 +555,7 @@ device-facing external-reader proof.
 - Files moved or created in Swift source: none.
 - Old/noncanonical source paths removed: none.
 - Compatibility shims left behind: none added by this slice.
-- Architecture debt remains: yes, in legacy persistence/domain direct-write paths, portable snapshot import/restore delegation, restore rollback delegation, system adapter behavior proof, App UI/Capture command-path conversion, unknown widget payload behavior, CloudKit continuity proof limits, the preview temporary external-creation audit sentinel, and debug/demo seed writers.
-- Next repair train: AMB-1723 under AMB-1668, then AMB-1724 before source migration parents.
+- Architecture debt remains: yes, in legacy persistence/domain direct-write paths, portable snapshot import/restore delegation, restore rollback delegation, system adapter behavior proof, App UI/Capture command-path conversion, unknown widget payload behavior, EventKit/Reminders result receipt and legacy reminder repository proof, CloudKit continuity proof limits, the preview temporary external-creation audit sentinel, and debug/demo seed writers.
+- Next repair train: AMB-1724 under AMB-1668 before source migration parents.
 - No equivalent folder/path interpretation was used.
 - No Green runtime authority claim is made.
