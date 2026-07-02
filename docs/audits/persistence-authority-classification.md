@@ -28,6 +28,11 @@ classifies direct model-save and direct persistence-write markers. It satisfies
 P-REJECT at Implemented Yellow only by linking unsafe rows to repair work; it
 does not prove broad runtime rejection, migration safety, or persistence Green.
 
+AMB-1720 follow-up plan: `docs/audits/persistence-existing-data-migration-proof-plan.md`
+defines the existing-data migration fixture matrix, replay expectations,
+failure modes, proof gates, and residual Yellow gaps. It satisfies P-MIGRATE at
+Implemented Yellow only; it does not prove executable migration safety.
+
 ## Canonical Constraints
 
 Runtime mutation law remains:
@@ -100,7 +105,7 @@ Proof code legend:
 | --- | --- |
 | P-MAP | AMB-1718 canonical owner mapping, including target LocalRuntimeOS owner and SwiftData/model dumb-storage boundary. Implemented Yellow in `docs/audits/persistence-storage-owner-map.md`. |
 | P-REJECT | AMB-1719 direct-save proof in `docs/audits/persistence-direct-save-rejection-proof.md`: direct persistence writes fail, are impossible from production roots, or remain explicit unsafe debt. Current result is Implemented Yellow explicit unsafe debt. |
-| P-MIGRATE | AMB-1720 migration proof plan with fixtures, replay expectations, failure modes, and no migration Green without executable evidence. |
+| P-MIGRATE | AMB-1720 migration proof plan in `docs/audits/persistence-existing-data-migration-proof-plan.md`, with fixtures, replay expectations, failure modes, and no migration Green without executable evidence. Implemented Yellow plan only. |
 | P-STORAGE | Focused storage tests plus proof that the storage tier is substrate only and not business-decision authority. |
 | P-CLOUDKIT | SyncContinuity tests plus privacy/no-private-graph evidence before any CloudKit continuity claim; no production CloudKit claim without release proof. |
 | P-DIAGNOSTIC | Proof that diagnostics/health/readers are read-only or review-only and cannot authorize durable repair or mutation. |
@@ -194,6 +199,9 @@ Direct-mutation status legend:
   `PortableSnapshotService+02-PortableSnapshotService.swift`,
   `LegacyImportService`, and `DemoSeedPipeline` remain direct or effective
   legacy write surfaces.
+- `docs/audits/persistence-existing-data-migration-proof-plan.md` now defines
+  the AMB-1720 fixture matrix and proof gates for those import/restore paths,
+  but the plan is not executable migration safety proof.
 - `Core/LocalRuntimeOS/Storage` is the canonical storage owner, but its source
   presence does not prove every production app path consumes only the
   canonical storage tier.
@@ -249,8 +257,8 @@ Direct-mutation status legend:
 - Yellow architecture debt remains: yes. Legacy persistence files remain under
   `Core/Persistence`, and several write-capable repository/import/seed paths
   remain outside proven command/event/projection/receipt/replay authority.
-- Next repair train: AMB-1720 adds existing local-data migration proof
-  planning after AMB-1719 direct-save classification remains Yellow.
+- Next repair train: AMB-1667 parent closeout at Accepted Yellow, then
+  AMB-1668 external adapter leaves before broader source migration parents.
 - No equivalent folder/path interpretation was used.
 - No Green runtime authority, persistence safety, migration safety, CloudKit,
   device, release, or product-completion claim is made.

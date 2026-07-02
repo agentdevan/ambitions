@@ -336,6 +336,13 @@ unsafe linked debt, are canonical LocalRuntimeOS storage markers with scoped
 proof requirements, or are non-production/projection/adapter rows with their
 own follow-ups.
 
+AMB-1720 supersession: `docs/audits/persistence-existing-data-migration-proof-plan.md`
+is the current existing-data migration proof plan. It defines fixture coverage,
+replay expectations, failure modes, proof gates, and residual Yellow gaps for
+portable snapshot import/restore, legacy import, demo seed, MigrationRepair,
+BackupStore, and MigrationStore surfaces. It is not executable migration safety
+proof.
+
 | Candidate | Evidence paths | Classification | Static finding | Follow-up |
 | --- | --- | --- | --- | --- |
 | Direct SwiftData model authority | `Native/Ambitions/Core/Persistence/SwiftDataModels*.swift` | unsafe write | The model declarations live under legacy `Core/Persistence`, not `Core/LocalRuntimeOS/Storage`. They define private graph records, proof/receipt records, app state, projection records, and tombstones outside the canonical runtime owner. | AMB-1667, AMB-1717, AMB-1718 |
@@ -473,8 +480,8 @@ This audit is a governance guard, not proof that unsafe writes are fixed.
 | --- | --- | --- |
 | App UI and Capture action handlers are statically inventoried, but several paths still write through legacy repository/projection services outside LocalRuntimeOS. | unsafe write / Implemented Yellow by path | AMB-1666, AMB-1667 |
 | System-surface entry points are statically inventoried by AMB-1708, and AMB-1709 found no remote private-graph CloudKit apply writer, but terminated-app, extension, notification, widget payload, Live Activity, EventKit, CloudKit, and receipt behavior proof is still missing. | Implemented Yellow / unknown widget payload path | AMB-1668, AMB-1680 |
-| Legacy SwiftData/Core/Persistence, portable snapshot import/restore, restore rollback delegation, and Core/Domain local schedule writes remain outside canonical runtime authority. | unsafe write | AMB-1667, AMB-1717, AMB-1718, AMB-1719, AMB-1720 |
-| Preview/debug/test helpers are statically separated by AMB-1710, but the preview temporary external-creation store remains an `unknown` direct-write audit sentinel and debug/demo seed writers remain legacy repository writes. | Implemented Yellow / unknown sentinel / unsafe write | AMB-1667, AMB-1668, AMB-1717, AMB-1720 |
+| Legacy SwiftData/Core/Persistence, portable snapshot import/restore, restore rollback delegation, and Core/Domain local schedule writes remain outside canonical runtime authority; AMB-1720 defines the migration proof plan but does not make these paths Green. | unsafe write / Implemented Yellow plan | AMB-1667, AMB-1717, AMB-1718, AMB-1719, AMB-1720 |
+| Preview/debug/test helpers are statically separated by AMB-1710, but the preview temporary external-creation store remains an `unknown` direct-write audit sentinel and debug/demo seed writers remain legacy repository writes; AMB-1720 treats demo seed as fixture input only, not production mutation proof. | Implemented Yellow / unknown sentinel / unsafe write | AMB-1667, AMB-1668, AMB-1717, AMB-1720 |
 | Runtime authority map and proof matrix are static-source only. | Implemented Yellow | AMB-1711 |
 | Direct-write audit is local/static and not yet independently proven in hosted CI. | Implemented Yellow | AMB-1712 |
 

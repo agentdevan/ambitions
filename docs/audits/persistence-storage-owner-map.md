@@ -19,7 +19,10 @@ storage tier files and storage tests, but `Core/Persistence` still contains
 legacy repository, model, import, preview, diagnostic, and direct-write
 scaffolding. AMB-1719 now classifies direct-save/direct-write proof as
 Implemented Yellow explicit unsafe debt, so stronger mutation authority claims
-remain blocked.
+remain blocked. AMB-1720 now defines the existing-data migration fixture and
+replay proof plan in
+`docs/audits/persistence-existing-data-migration-proof-plan.md`; that plan is
+Implemented Yellow and does not prove migration safety Green.
 
 ## Canonical Constraints
 
@@ -80,7 +83,7 @@ life graph storage.
 | P-MAP | This AMB-1718 owner map. |
 | P-STORAGE | Existing focused storage/source tests for canonical storage tier shape and substrate behavior. |
 | P-REJECT | AMB-1719 direct-save proof in `docs/audits/persistence-direct-save-rejection-proof.md`: direct persistence writes fail, are unreachable from production roots, or remain explicit unsafe debt. Current result is Implemented Yellow explicit unsafe debt. |
-| P-MIGRATE | AMB-1720 existing-data migration proof plan and later executable migration proof. |
+| P-MIGRATE | AMB-1720 existing-data migration proof plan in `docs/audits/persistence-existing-data-migration-proof-plan.md`, followed by later executable migration proof before any migration Green claim. |
 | P-CLOUDKIT | SyncContinuity privacy/local-authority evidence before any CloudKit continuity claim. |
 | P-DIAGNOSTIC | Proof that diagnostics/health/readers cannot authorize durable mutation or repair. |
 
@@ -189,7 +192,9 @@ AMB-1718 acceptance is satisfied at Implemented Yellow:
   diagnostics, preview/demo paths, and reminder persistence are mapped to
   target LocalRuntimeOS owners;
 - direct-save proof is recorded as AMB-1719 Implemented Yellow explicit unsafe
-  debt, and existing-data migration proof remains assigned to AMB-1720.
+  debt, and existing-data migration proof planning is recorded as AMB-1720
+  Implemented Yellow in
+  `docs/audits/persistence-existing-data-migration-proof-plan.md`.
 
 This work protects the Private Life Orchestration loop by making durable local
 state a substrate for intent, context, path, time fit, reflow, action, proof,
@@ -248,8 +253,8 @@ system.
 - Yellow architecture debt remains: yes. `Core/Persistence` still contains
   legacy direct-write and model-location debt, and only AppState has
   ObjectState SwiftData adapter proof.
-- Next repair train: AMB-1720 existing local-data migration proof planning
-  after AMB-1719 direct-save classification remains Yellow.
+- Next repair train: AMB-1667 parent closeout at Accepted Yellow, then
+  AMB-1668 external adapter leaves before broader source migration parents.
 - No equivalent folder/path interpretation was used.
 - No Green runtime authority, storage safety, migration safety, CloudKit,
   device, release, privacy/legal, or product-completion claim is made.

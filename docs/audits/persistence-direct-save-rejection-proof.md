@@ -19,6 +19,12 @@ Evidence class: Implemented Yellow. Current direct writes are classified by
 to AMB-1719 and the remaining AMB-1667 follow-ups. The proof mode for unsafe
 rows is explicit unsafe classification, not successful runtime rejection.
 
+AMB-1720 follow-up plan: `docs/audits/persistence-existing-data-migration-proof-plan.md`
+now defines the existing-data migration fixture matrix, replay expectations,
+failure modes, proof gates, and residual Yellow gaps for migration/import/
+restore paths. It does not make unsafe direct writes safe and does not prove
+migration safety Green.
+
 ## Canonical Constraints
 
 Runtime mutation law remains:
@@ -129,7 +135,8 @@ context.
 
 - Legacy SwiftData model and repository files remain under `Core/Persistence`.
 - Portable snapshot import/restore can still apply through legacy repositories;
-  AMB-1720 owns existing-data migration proof planning.
+  AMB-1720 documents the existing-data migration proof plan, but executable
+  migration safety remains unproven.
 - Debug/demo seed paths and legacy import scaffolding remain unsafe if treated
   as production mutation authority.
 - The direct-write audit is static source proof. It does not prove runtime
@@ -198,7 +205,8 @@ unsafe storage paths are identified and linked, not because they are fixed.
 - Yellow architecture debt remains: yes. Unsafe direct-write rows remain
   classified linked debt until later source migration or executable rejection
   proof.
-- Next repair train: AMB-1720 existing local-data migration proof planning.
+- Next repair train: AMB-1667 parent closeout at Accepted Yellow, then
+  AMB-1668 external adapter leaves before broader source migration parents.
 - No equivalent folder/path interpretation was used.
 - No Green runtime authority, direct-save rejection, storage safety, migration
   safety, CloudKit, device, release, privacy/legal, or product-completion claim
