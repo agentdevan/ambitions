@@ -62,6 +62,8 @@ run_step "ambitions green standard audit" "python3 scripts/ambitions-green-stand
 run_step "privacy boundary scan" "bash scripts/privacy-boundary-scan.sh"
 run_step "release claim safety scan" "bash scripts/release-claim-safety-scan.sh"
 run_step "weak implementation scan" "python3 scripts/ci/ambitions-no-weak-implementation-scan.py"
+run_step "remediation governance check" "python3 scripts/ambitions-remediation-governance-check.py"
+run_step "remediation governance self-test" "python3 scripts/ambitions-remediation-governance-check.py --self-test"
 run_step "source atlas boundary audit" "python3 scripts/source-atlas-boundary-audit.py"
 run_step "source atlas no private graph egress audit" "python3 scripts/source-atlas-no-private-graph-egress-audit.py"
 run_step "swiftlint" "swiftlint lint --strict"

@@ -69,30 +69,34 @@ done < <(
 bad_path_regex='(^|/)(DerivedData|node_modules|Pods|Carthage/Checkouts|\.build|\.swiftpm|vendor/bundle)(/|$)|\.xcresult(/|$)|(^|/)\.DS_Store$|(^|/)(build|dist|DerivedData)/|(\.ipa|\.app|\.dSYM|\.xcarchive|\.profdata|\.profraw)$'
 sim_log_regex='(^|/)(CoreSimulator|Simulator|simulator).*\.(log|trace|txt|json)$|(\.crash|\.ips|\.spin)$'
 
-for file in "${new_files[@]}"; do
-  [[ -z "$file" ]] && continue
-  if [[ "$file" =~ $bad_path_regex ]]; then
-    add_failure "forbidden generated/build/dependency artifact added: $file"
-  fi
-  if [[ "$file" =~ $sim_log_regex ]] && [[ ! "$file" =~ $approved_log_path_regex ]]; then
-    add_failure "simulator/device log added outside approved proof paths: $file"
-  fi
-done
+if ((${#new_files[@]} > 0)); then
+  for file in "${new_files[@]}"; do
+    [[ -z "$file" ]] && continue
+    if [[ "$file" =~ $bad_path_regex ]]; then
+      add_failure "forbidden generated/build/dependency artifact added: $file"
+    fi
+    if [[ "$file" =~ $sim_log_regex ]] && [[ ! "$file" =~ $approved_log_path_regex ]]; then
+      add_failure "simulator/device log added outside approved proof paths: $file"
+    fi
+  done
+fi
 
-for file in "${changed_files[@]}"; do
-  [[ -z "$file" || ! -f "$file" ]] && continue
-  case "$file" in
-    *.png|*.jpg|*.jpeg|*.gif|*.pdf|*.ico|*.ipa|*.app|*.xcresult|*.zip|*.gz|*.xz)
-      continue
-      ;;
-  esac
-  if LC_ALL=C rg -n '[[:blank:]]$' "$file" >/tmp/ambitions-pr-hygiene-trailing.$$ 2>/dev/null; then
-    while IFS= read -r hit; do
-      add_failure "trailing whitespace: $hit"
-    done < /tmp/ambitions-pr-hygiene-trailing.$$
-  fi
-  rm -f /tmp/ambitions-pr-hygiene-trailing.$$
-done
+if ((${#changed_files[@]} > 0)); then
+  for file in "${changed_files[@]}"; do
+    [[ -z "$file" || ! -f "$file" ]] && continue
+    case "$file" in
+      *.png|*.jpg|*.jpeg|*.gif|*.pdf|*.ico|*.ipa|*.app|*.xcresult|*.zip|*.gz|*.xz)
+        continue
+        ;;
+    esac
+    if LC_ALL=C rg -n '[[:blank:]]$' "$file" >/tmp/ambitions-pr-hygiene-trailing.$$ 2>/dev/null; then
+      while IFS= read -r hit; do
+        add_failure "trailing whitespace: $hit"
+      done < /tmp/ambitions-pr-hygiene-trailing.$$
+    fi
+    rm -f /tmp/ambitions-pr-hygiene-trailing.$$
+  done
+fi
 
 if ((${#failures[@]} > 0)); then
   printf 'RED: repo hygiene failures\n' >&2

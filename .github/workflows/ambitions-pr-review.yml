@@ -40,6 +40,21 @@ jobs:
           python3 scripts/ambitions-local-runtime-proof.py
           python3 scripts/ci/ambitions-no-weak-implementation-scan.py
 
+  remediation-governance-check:
+    name: remediation-governance-check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run remediation governance guard
+        shell: bash
+        run: |
+          set -euo pipefail
+          base_ref="${GITHUB_BASE_REF:-main}"
+          python3 scripts/ambitions-remediation-governance-check.py --base "origin/${base_ref}"
+          python3 scripts/ambitions-remediation-governance-check.py --self-test
+
   source-atlas-boundary-audit:
     name: source-atlas-boundary-audit
     runs-on: ubuntu-latest

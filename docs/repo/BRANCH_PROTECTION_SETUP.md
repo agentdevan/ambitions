@@ -16,6 +16,7 @@ Use this path if the current GitHub plan exposes branch protection or repository
 8. Require these status check names:
    - `repo-hygiene`
    - `ambitions-law-audit`
+   - `remediation-governance-check`
    - `source-atlas-boundary-audit`
    - `swiftlint`
    - `semgrep-local`
@@ -44,6 +45,7 @@ The free PR review stack expects these checks to be visible on PRs:
 
 - `repo-hygiene`
 - `ambitions-law-audit`
+- `remediation-governance-check`
 - `source-atlas-boundary-audit`
 - `swiftlint`
 - `semgrep-local`

@@ -6,6 +6,7 @@ Status: repo-governance documentation. This stack uses GitHub Actions plus local
 
 - `repo-hygiene`: runs whitespace/status checks and `scripts/ci/ambitions-pr-hygiene.sh` for conflict markers, accidental generated artifacts, simulator logs outside approved proof paths, and committed dependency folders.
 - `ambitions-law-audit`: runs existing Ambitions product-law and claim-boundary scripts plus `scripts/ci/ambitions-no-weak-implementation-scan.py`.
+- `remediation-governance-check`: runs the AMB-1658/AMB-1680 guard, including Source Atlas new-file allowlist enforcement and the guard self-test.
 - `source-atlas-boundary-audit`: runs Source Atlas privacy-boundary and no-private-egress audits.
 - `swiftlint`: runs SwiftLint in a local container on Ubuntu with the repo-local `.swiftlint.yml`.
 - `semgrep-local`: runs repo-local Semgrep rules from `.semgrep/ambitions-source-atlas.yml`.
@@ -73,6 +74,7 @@ The local script never uploads results externally.
 
 - Hygiene failures usually mean the PR contains whitespace, conflict markers, generated files, large build output, simulator logs in the wrong place, or accidental dependency folders.
 - Ambitions law failures mean the change may violate product law, proof honesty, or weak-implementation rules.
+- Remediation governance failures mean the change may violate architecture simplification rules, including new Source Atlas files without exact ADR allowlist coverage.
 - Source Atlas failures mean public/reference/freshness infrastructure appears to contain private runtime context or private egress fields.
 - Linter failures should be fixed narrowly in the touched files unless a legacy repo-wide issue is explicitly accepted as Yellow.
 - Secrets findings must be treated as Red until proven synthetic and allowlisted narrowly. Gitleaks timeouts also fail the check.

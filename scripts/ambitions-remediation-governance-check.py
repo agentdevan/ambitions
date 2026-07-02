@@ -252,7 +252,7 @@ def is_source_atlas_scope(path: str, text: str) -> bool:
         return False
     lowered_path = path.lower()
     if (
-        "sourceatlas" in path
+        "sourceatlas" in lowered_path
         or "source-atlas" in lowered_path
         or "source_atlas" in lowered_path
         or "SOURCE_ATLAS" in path
@@ -362,6 +362,22 @@ def check_source_atlas_audits() -> list[Finding]:
                 )
             )
     return findings
+
+
+def source_atlas_growth_guard(
+    item: ChangedPath,
+    text: str,
+    source_atlas_allowlist: set[str],
+) -> tuple[bool, Finding | None]:
+    if not is_source_atlas_scope(item.path, text):
+        return False, None
+    if item.status in {"A", "R"} and item.path not in source_atlas_allowlist:
+        return True, Finding(
+            "source-atlas-growth-adr",
+            item.path,
+            "new Source Atlas scope requires ADR allowlist line: Source Atlas growth allowlist: `path/to/file`",
+        )
+    return True, None
 
 
 def check_legacy_runtime_guard(args: argparse.Namespace) -> list[Finding]:
@@ -482,16 +498,15 @@ def governance_findings(args: argparse.Namespace) -> list[Finding]:
                     )
                 )
 
-        if is_source_atlas_scope(path, text):
-            if item.status in {"A", "R"} and path not in source_atlas_allowlist:
-                findings.append(
-                    Finding(
-                        "source-atlas-growth-adr",
-                        path,
-                        "new Source Atlas scope requires ADR allowlist line: Source Atlas growth allowlist: `path/to/file`",
-                    )
-                )
+        changed_source_atlas_scope, source_atlas_growth_finding = source_atlas_growth_guard(
+            item,
+            text,
+            source_atlas_allowlist,
+        )
+        if changed_source_atlas_scope:
             source_atlas_scope_changed = True
+        if source_atlas_growth_finding:
+            findings.append(source_atlas_growth_finding)
 
         package_boundary_text = text if path == "project.yml" else path
         project_package_boundary = path == "project.yml" and has_any(
@@ -537,6 +552,33 @@ def self_test() -> int:
     assert not is_suffix_split_name("SourceAtlasPackModels+06-SourceAtlasPack.swift")
     allowlist = parse_source_atlas_allowlist("- Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/NewPack.swift`")
     assert "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/NewPack.swift" in allowlist
+    source_atlas_new_file = ChangedPath(
+        "A",
+        "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/NewPack.swift",
+        untracked=True,
+    )
+    changed_scope, finding = source_atlas_growth_guard(
+        source_atlas_new_file,
+        "struct SourceAtlasNewPack {}",
+        set(),
+    )
+    assert changed_scope
+    assert finding is not None
+    assert finding.rule == "source-atlas-growth-adr"
+    changed_scope, finding = source_atlas_growth_guard(
+        source_atlas_new_file,
+        "struct SourceAtlasNewPack {}",
+        {"Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/NewPack.swift"},
+    )
+    assert changed_scope
+    assert finding is None
+    changed_scope, finding = source_atlas_growth_guard(
+        ChangedPath("A", "docs/adr/ADR-2099-source-atlas-test.md", untracked=True),
+        "Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/NewPack.swift`",
+        set(),
+    )
+    assert not changed_scope
+    assert finding is None
     assert check_legacy_runtime_guard(argparse.Namespace(base=None, no_untracked=True)) == []
     print("ambitions-remediation-governance-check self-test passed")
     return 0
