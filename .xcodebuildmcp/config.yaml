@@ -21,15 +21,4 @@ sessionDefaultsProfiles:
     derivedDataPath: /Users/devan/Documents/GitHub/ambitions/output/DerivedData-XcodeBuildMCP
     preferXcodebuild: true
     bundleId: com.ambitions.ios
-  amb1599:
-    projectPath: /private/tmp/ambitions-amb1599/Ambitions.xcodeproj
-    scheme: Ambitions
-    configuration: Debug
-    simulatorName: iPhone 17
-    simulatorId: 8ACCD665-4807-4102-B526-5A1AE20686A8
-    useLatestOS: true
-    derivedDataPath: /private/tmp/ambitions-amb1599/output/DerivedData-XcodeBuildMCP
-    preferXcodebuild: true
-    bundleId: com.ambitions.ios
-    simulatorPlatform: iOS Simulator
-activeSessionDefaultsProfile: amb1599
+activeSessionDefaultsProfile: ambitions-ios
