@@ -364,6 +364,34 @@ def check_source_atlas_audits() -> list[Finding]:
     return findings
 
 
+def check_legacy_runtime_guard(args: argparse.Namespace) -> list[Finding]:
+    command = [sys.executable, "scripts/ambitions-legacy-runtime-production-use-guard.py"]
+    if args.base:
+        command.extend(["--base", args.base])
+    if args.no_untracked:
+        command.append("--no-untracked")
+
+    result = subprocess.run(
+        command,
+        cwd=ROOT,
+        check=False,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if result.returncode == 0:
+        return []
+
+    output = "\n".join(part for part in [result.stdout, result.stderr] if part).strip()
+    return [
+        Finding(
+            "legacy-runtime-production-use-guard",
+            "scripts/ambitions-legacy-runtime-production-use-guard.py",
+            output[:300] if output else "legacy runtime production-use guard failed",
+        )
+    ]
+
+
 def governance_findings(args: argparse.Namespace) -> list[Finding]:
     changed = diff_changed_paths(args.base, not args.no_untracked)
     findings: list[Finding] = []
@@ -493,6 +521,8 @@ def governance_findings(args: argparse.Namespace) -> list[Finding]:
     if source_atlas_scope_changed:
         findings.extend(check_source_atlas_audits())
 
+    findings.extend(check_legacy_runtime_guard(args))
+
     return findings
 
 
@@ -507,6 +537,7 @@ def self_test() -> int:
     assert not is_suffix_split_name("SourceAtlasPackModels+06-SourceAtlasPack.swift")
     allowlist = parse_source_atlas_allowlist("- Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/NewPack.swift`")
     assert "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/NewPack.swift" in allowlist
+    assert check_legacy_runtime_guard(argparse.Namespace(base=None, no_untracked=True)) == []
     print("ambitions-remediation-governance-check self-test passed")
     return 0
 
