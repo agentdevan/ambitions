@@ -43,8 +43,8 @@ Product Experience scenario gates are required when UI/source work touches Steps
 - Keep root surfaces to Today / Goals / Time / You.
 - Treat Capture as global composer and Motion as behavior.
 - Keep Stage thin; do not make custom Stage, UIKit interop, or rendering machinery the product unless SwiftUI-native implementation cannot satisfy product law and the Apple source map supports the exception.
-- Do not create new `+02` or `+03` split files, broad `Models.swift` files, file-size churn, or architecture nouns to avoid deleting/collapsing duplicate authority.
-- Freeze Source Atlas growth for UI/platform work unless public-reference, no-private-life-graph, request-shape, and boundary-audit proof exists for the changed scope.
+- Do not create new `+02`, `+03`, or `+04` split files, broad `Models.swift` files, production Swift files above the hard line cap, file-size churn, or architecture nouns to avoid deleting/collapsing duplicate authority.
+- Freeze Source Atlas growth for UI/platform work unless an ADR allowlists the changed file and public-reference, no-private-life-graph, request-shape, and boundary-audit proof exists for the changed scope.
 - Prefer feature-local projection and surface-owned view state before adding central `Projection/SurfaceLenses` authority where canon allows.
 - Use focused build/test validation first, then broader validation when risk warrants it.
 - Verify iOS 26 availability before adopting an Apple API.

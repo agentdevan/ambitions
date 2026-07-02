@@ -161,9 +161,10 @@ AMB-1658 remediation governance rules:
 
 - No new architecture nouns without deletion, collapse, or replacement of duplicate authority in the same scoped train.
 - No new mutation, storage, receipt, replay, side-effect, migration, repair, privacy, sync, projection-materialization, or diagnostics authority outside `Core/LocalRuntimeOS/`.
-- No new Source Atlas scope before Source Atlas boundary audits pass for the changed scope.
-- No new `+02` or `+03` split files.
+- No new Source Atlas scope before an ADR allowlists the changed file and Source Atlas boundary audits pass for the changed scope.
+- No new `+02`, `+03`, or `+04` split files.
 - No new broad `Models.swift` files.
+- No touched production Swift file may exceed the hard line cap without scoped deletion, collapse, or extraction proof.
 - No package extraction, package splitting, or package-boundary movement as cleanup theater.
 - Adapters cannot mutate canonical state.
 - Prefer feature-local projection over central `Projection/SurfaceLenses` additions when canon allows.
@@ -174,6 +175,11 @@ Architecture remediation and cleanup trains must run:
 ```bash
 python3 scripts/ambitions-remediation-governance-check.py
 ```
+
+The remediation governance check must report root LOC, largest production Swift
+files, naming counts, suffix-split counts, Source Atlas file counts, and
+hard-cap file counts. These reports are baseline evidence only; they do not
+turn existing Yellow debt Green.
 
 For branch or PR validation:
 

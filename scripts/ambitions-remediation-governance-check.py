@@ -82,6 +82,9 @@ SOURCE_ATLAS_PATTERNS = (
     r"\bR2\b",
 )
 
+SWIFT_HARD_LINE_CAP = 600
+LARGEST_FILE_REPORT_LIMIT = 10
+
 
 @dataclass(frozen=True)
 class ChangedPath:
@@ -172,6 +175,8 @@ def is_swift(path: str) -> bool:
 def is_production_swift(path: str) -> bool:
     if not is_swift(path):
         return False
+    if "Previews" in Path(path).parts:
+        return False
     if "/Tests/" in path or path.startswith("Native/AmbitionsTests/") or path.startswith("Native/AmbitionsUITests/"):
         return False
     if path.startswith("Native/Ambitions/PreviewSupport/"):
@@ -181,6 +186,10 @@ def is_production_swift(path: str) -> bool:
 
 def is_local_runtime(path: str) -> bool:
     return path.startswith("Native/Ambitions/Core/LocalRuntimeOS/")
+
+
+def is_suffix_split_name(name: str) -> bool:
+    return any(suffix in name for suffix in ("+02", "+03", "+04"))
 
 
 def has_any(patterns: tuple[str, ...], text: str) -> bool:
@@ -198,6 +207,135 @@ def source_deletion_present(changed: list[ChangedPath]) -> bool:
         if item.status == "R" and item.old_path and is_production_swift(item.old_path):
             return True
     return False
+
+
+def production_swift_files() -> list[Path]:
+    files: list[Path] = []
+    for prefix in PRODUCTION_SWIFT_ROOTS:
+        root = ROOT / prefix
+        if not root.exists():
+            continue
+        if root.is_file() and root.suffix == ".swift":
+            files.append(root)
+            continue
+        for path in root.rglob("*.swift"):
+            relative = rel(path)
+            if is_production_swift(relative):
+                files.append(path)
+    return sorted(set(files))
+
+
+def swift_line_count(path: Path) -> int:
+    text = path.read_text(encoding="utf-8", errors="replace")
+    return text.count("\n") + (0 if text.endswith("\n") else 1)
+
+
+def source_root(relative: str) -> str:
+    parts = Path(relative).parts
+    if relative.startswith("Native/Ambitions/") and len(parts) >= 3:
+        return "/".join(parts[:3])
+    if relative.startswith("Native/AmbitionsWidgetExtension/"):
+        return "Native/AmbitionsWidgetExtension"
+    if relative.startswith("Native/AmbitionsShareExtension/"):
+        return "Native/AmbitionsShareExtension"
+    if relative.startswith("AppUI/Sources/"):
+        return "AppUI/Sources"
+    if relative.startswith("Packages/AmbitionsExperienceKernel/Sources/"):
+        return "Packages/AmbitionsExperienceKernel/Sources"
+    if relative.startswith("Sources/") and len(parts) >= 2:
+        return "Sources" if len(parts) == 2 else "/".join(parts[:2])
+    return parts[0] if parts else relative
+
+
+def is_source_atlas_scope(path: str, text: str) -> bool:
+    if path.startswith("docs/adr/"):
+        return False
+    lowered_path = path.lower()
+    if (
+        "sourceatlas" in path
+        or "source-atlas" in lowered_path
+        or "source_atlas" in lowered_path
+        or "SOURCE_ATLAS" in path
+    ):
+        return True
+    return is_production_swift(path) and has_any(SOURCE_ATLAS_PATTERNS, text)
+
+
+def parse_source_atlas_allowlist(text: str) -> set[str]:
+    allowlist: set[str] = set()
+    for line in text.splitlines():
+        if "Source Atlas growth allowlist:" not in line:
+            continue
+        _, raw_value = line.split("Source Atlas growth allowlist:", 1)
+        raw_value = raw_value.strip()
+        if not raw_value:
+            continue
+        path_match = re.search(r"`([^`]+)`", raw_value)
+        value = path_match.group(1) if path_match else raw_value.split()[0]
+        allowlist.add(value.rstrip(".,;"))
+    return allowlist
+
+
+def source_atlas_adr_allowlist() -> set[str]:
+    allowlist: set[str] = set()
+    adr_root = ROOT / "docs" / "adr"
+    if not adr_root.exists():
+        return allowlist
+    for path in sorted(adr_root.glob("*.md")):
+        allowlist.update(parse_source_atlas_allowlist(path.read_text(encoding="utf-8", errors="replace")))
+    return allowlist
+
+
+def governance_report(changed: list[ChangedPath]) -> dict[str, object]:
+    root_loc: dict[str, dict[str, int]] = {}
+    largest: list[dict[str, object]] = []
+    naming_counts = {
+        "suffixSplitFiles": 0,
+        "blockedSuffixSplitFiles": 0,
+        "broadModelsFiles": 0,
+        "architectureNounFiles": 0,
+        "sourceAtlasFiles": 0,
+        "overHardLineCapFiles": 0,
+    }
+
+    swift_files = production_swift_files()
+    for path in swift_files:
+        relative = rel(path)
+        line_count = swift_line_count(path)
+        root = source_root(relative)
+        root_entry = root_loc.setdefault(root, {"files": 0, "loc": 0})
+        root_entry["files"] += 1
+        root_entry["loc"] += line_count
+
+        largest.append({"path": relative, "lines": line_count})
+
+        name = path.name
+        if re.search(r"\+\d{2}", name):
+            naming_counts["suffixSplitFiles"] += 1
+        if is_suffix_split_name(name):
+            naming_counts["blockedSuffixSplitFiles"] += 1
+        if name == "Models.swift":
+            naming_counts["broadModelsFiles"] += 1
+        if any(noun in path.stem for noun in ARCHITECTURE_NOUNS):
+            naming_counts["architectureNounFiles"] += 1
+        if is_source_atlas_scope(relative, path.read_text(encoding="utf-8", errors="replace")):
+            naming_counts["sourceAtlasFiles"] += 1
+        if line_count > SWIFT_HARD_LINE_CAP:
+            naming_counts["overHardLineCapFiles"] += 1
+
+    largest = sorted(largest, key=lambda row: (-int(row["lines"]), str(row["path"])))[:LARGEST_FILE_REPORT_LIMIT]
+    sorted_root_loc = {
+        root: root_loc[root]
+        for root in sorted(root_loc, key=lambda key: (-root_loc[key]["loc"], key))
+    }
+    return {
+        "changedPathCount": len(changed),
+        "productionSwiftFileCount": len(swift_files),
+        "rootLOC": sorted_root_loc,
+        "largestFiles": largest,
+        "namingCounts": naming_counts,
+        "swiftHardLineCap": SWIFT_HARD_LINE_CAP,
+    }
 
 
 def check_source_atlas_audits() -> list[Finding]:
@@ -231,6 +369,7 @@ def governance_findings(args: argparse.Namespace) -> list[Finding]:
     findings: list[Finding] = []
     deletion_present = source_deletion_present(changed)
     source_atlas_scope_changed = False
+    source_atlas_allowlist = source_atlas_adr_allowlist()
 
     for item in changed:
         path = item.path
@@ -238,12 +377,12 @@ def governance_findings(args: argparse.Namespace) -> list[Finding]:
         text = added_text(item, args.base)
 
         if item.status in {"A", "R"} and is_production_swift(path):
-            if "+02" in path_obj.name or "+03" in path_obj.name:
+            if is_suffix_split_name(path_obj.name):
                 findings.append(
                     Finding(
                         "no-new-suffix-splits",
                         path,
-                        "new +02/+03 split files are blocked by AMB-1658",
+                        "new +02/+03/+04 split files are blocked by AMB-1658/AMB-1662",
                     )
                 )
 
@@ -275,6 +414,18 @@ def governance_findings(args: argparse.Namespace) -> list[Finding]:
                 )
 
         if is_production_swift(path):
+            full_path = ROOT / path
+            if item.status != "D" and full_path.exists():
+                line_count = swift_line_count(full_path)
+                if line_count > SWIFT_HARD_LINE_CAP:
+                    findings.append(
+                        Finding(
+                            "swift-file-size-cap",
+                            path,
+                            f"{line_count} lines exceeds diff-scoped hard cap {SWIFT_HARD_LINE_CAP}",
+                        )
+                    )
+
             if (path.startswith("Native/Ambitions/Stage/") or path.startswith("Native/Ambitions/Surfaces/") or path.startswith("Native/Ambitions/Composer/") or path.startswith("Native/Ambitions/DesignSystem/")) and has_any(CUSTOM_STAGE_PATTERNS, text):
                 findings.append(
                     Finding(
@@ -303,8 +454,16 @@ def governance_findings(args: argparse.Namespace) -> list[Finding]:
                     )
                 )
 
-            if "SourceAtlas" in path or has_any(SOURCE_ATLAS_PATTERNS, text):
-                source_atlas_scope_changed = True
+        if is_source_atlas_scope(path, text):
+            if item.status in {"A", "R"} and path not in source_atlas_allowlist:
+                findings.append(
+                    Finding(
+                        "source-atlas-growth-adr",
+                        path,
+                        "new Source Atlas scope requires ADR allowlist line: Source Atlas growth allowlist: `path/to/file`",
+                    )
+                )
+            source_atlas_scope_changed = True
 
         package_boundary_text = text if path == "project.yml" else path
         project_package_boundary = path == "project.yml" and has_any(
@@ -341,8 +500,13 @@ def self_test() -> int:
     assert is_production_swift("Native/Ambitions/App/AmbitionsApp.swift")
     assert not is_production_swift("Native/AmbitionsTests/AppTests.swift")
     assert not is_production_swift("Native/Ambitions/PreviewSupport/PreviewFixtures.swift")
+    assert not is_production_swift("Sources/Previews/ThemePreview.swift")
     assert is_local_runtime("Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/AmbitionsCommandExecutor.swift")
     assert not is_local_runtime("Native/Ambitions/Core/Runtime/CaptureService.swift")
+    assert is_suffix_split_name("SwiftDataModels+04-AmbitionGraphProjectionRecordModel.swift")
+    assert not is_suffix_split_name("SourceAtlasPackModels+06-SourceAtlasPack.swift")
+    allowlist = parse_source_atlas_allowlist("- Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/NewPack.swift`")
+    assert "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/NewPack.swift" in allowlist
     print("ambitions-remediation-governance-check self-test passed")
     return 0
 
@@ -360,11 +524,14 @@ def main() -> int:
     if args.self_test:
         return self_test()
 
+    changed = diff_changed_paths(args.base, not args.no_untracked)
     findings = governance_findings(args)
+    report = governance_report(changed)
     payload = {
         "valid": not findings,
         "findingCount": len(findings),
         "findings": [asdict(finding) for finding in findings],
+        "report": report,
     }
 
     if args.json:
@@ -372,6 +539,18 @@ def main() -> int:
         return 0 if payload["valid"] else 1
 
     print("ambitions-remediation-governance-check")
+    print(f"changed_paths={report['changedPathCount']}")
+    print(f"production_swift_files={report['productionSwiftFileCount']}")
+    print(f"swift_hard_line_cap={report['swiftHardLineCap']}")
+    print("root_loc:")
+    for root, data in report["rootLOC"].items():
+        print(f"  {root}: files={data['files']} loc={data['loc']}")
+    print("largest_files:")
+    for row in report["largestFiles"]:
+        print(f"  {row['lines']} {row['path']}")
+    print("naming_counts:")
+    for key, value in report["namingCounts"].items():
+        print(f"  {key}={value}")
     if findings:
         print(f"RED {len(findings)} remediation governance finding(s)")
         for finding in findings:

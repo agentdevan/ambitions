@@ -40,8 +40,8 @@ Every retained skill must preserve the AMB-1656/AMB-1661 remediation direction f
 
 - keep the runtime law while reducing architecture lore
 - avoid new architecture nouns, folders, suffix splits, engines, kernels, managers, coordinators, services, systems, runtimes, ledgers, scenes, lenses, or OS labels unless the scoped train deletes, collapses, or replaces duplicate authority
-- reject new `+02` or `+03` split files, new broad `Models.swift` files, and package-boundary cleanup theater unless active truth and a scoped issue explicitly approve the exception
-- freeze Source Atlas growth unless the changed scope has public-reference, no-private-life-graph, and boundary-audit proof
+- reject new `+02`, `+03`, or `+04` split files, new broad `Models.swift` files, production Swift files above the hard line cap, and package-boundary cleanup theater unless active truth and a scoped issue explicitly approve the exception
+- freeze Source Atlas growth unless an ADR allowlists the changed file and the changed scope has public-reference, no-private-life-graph, and boundary-audit proof
 - keep Stage thin and SwiftUI-native by default; custom Stage, UIKit, or rendering machinery requires product-law and Apple-source justification
 - prefer feature-local projection over central `Projection/SurfaceLenses` additions where canon allows
 - make proof artifacts, scripts, logs, and accepted evidence set the closeout ceiling; prose cannot upgrade missing, failed, stale, or not-run proof

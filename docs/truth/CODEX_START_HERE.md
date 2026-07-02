@@ -158,9 +158,10 @@ Stop and report Red if the train:
 - sends private user context, goals, captures, schedule, proof, receipts, behavior, inferred priorities, or the private life graph to R2/Source Atlas
 - adds new meaningful runtime mutation authority outside the LocalRuntimeOS command/event/projection/receipt/replay spine
 - adds new architecture nouns without deleting, collapsing, or replacing duplicate authority
-- adds new Source Atlas scope before Source Atlas boundary audits pass for the changed scope
-- adds new `+02` or `+03` split files
+- adds new Source Atlas scope before an ADR allowlists the changed file and Source Atlas boundary audits pass for the changed scope
+- adds new `+02`, `+03`, or `+04` split files
 - adds new broad `Models.swift` files
+- touches production Swift files above the hard line cap without scoped deletion, collapse, or extraction proof
 - changes package boundaries as cleanup theater without a linked package decision record
 - lets adapters mutate canonical state
 - adds central `Projection/SurfaceLenses` files when feature-local projection can satisfy canon

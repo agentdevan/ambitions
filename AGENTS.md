@@ -178,14 +178,15 @@ Before any source work, agents must enforce this AMB-1658 remediation freeze gat
 
 * Do not add new architecture nouns without deleting, collapsing, or replacing duplicate authority in the same scoped train.
 * Do not add new mutation, storage, receipt, replay, side-effect, migration, repair, privacy, sync, projection-materialization, or diagnostics authority outside `Core/LocalRuntimeOS/`.
-* Do not add new Source Atlas scope before the Source Atlas boundary audit is Green for the changed scope.
-* Do not add new `+02` or `+03` split files.
+* Do not add new Source Atlas scope before an ADR allowlists the changed file and the Source Atlas boundary audit is Green for the changed scope.
+* Do not add new `+02`, `+03`, or `+04` split files.
 * Do not add new broad `Models.swift` files.
+* Do not touch production Swift files above the hard line cap without deleting, collapsing, or splitting authority under a scoped repair train.
 * Do not extract packages, split packages, or move package boundaries as cleanup theater; package boundary changes need a linked decision record and validation plan.
 * Adapters cannot mutate canonical state.
 * Prefer feature-local projection over central `Projection/SurfaceLenses` additions when canon allows.
 * Default to SwiftUI-native implementation and keep Stage thin; custom Stage/UIKit/rendering machinery is allowed only where product law and Apple source guidance require it.
-* Run `python3 scripts/ambitions-remediation-governance-check.py` for remediation/source trains, or close Yellow with the exact not-run reason and linked follow-up.
+* Run `python3 scripts/ambitions-remediation-governance-check.py` for remediation/source trains, including its root LOC, largest-file, naming-count, suffix, file-size, Source Atlas, and architecture-noun report, or close Yellow with the exact not-run reason and linked follow-up.
 
 ## 7. Strict Architecture Tree Enforcement
 

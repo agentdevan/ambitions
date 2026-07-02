@@ -33,7 +33,7 @@ Command -> Event -> Projection -> Receipt -> Replay
 
 As of Linear `AMB-1544`, `Core/LocalRuntimeOS/` is the target backend/runtime owner. Existing `Core/Runtime/`, `Core/Persistence/`, and `Projection/Commands/` source may be scaffolding to migrate or reuse, but it is not the final authority for new command, transaction, event, projection, side-effect, privacy, sync, migration, repair, or diagnostics work.
 
-Do not add new runtime nouns, suffix-split files, broad model files, Source Atlas scope, or projection authority to make a contract sound complete. Delete, collapse, or replace duplicate authority first, keep Source Atlas public-reference-only with no-private-life-graph boundary proof, and prefer feature-local projection when canon allows.
+Do not add new runtime nouns, suffix-split files, broad model files, Source Atlas scope, or projection authority to make a contract sound complete. Delete, collapse, or replace duplicate authority first, keep Source Atlas public-reference-only with ADR allowlist plus no-private-life-graph boundary proof, and prefer feature-local projection when canon allows.
 
 ## Contract workflow
 
@@ -50,7 +50,7 @@ Do not add new runtime nouns, suffix-split files, broad model files, Source Atla
 - Runtime behavior must be local-first, inspectable, deterministic where feasible, and explainable through proof/receipt/history surfaces.
 - Do not implement a generic chatbot, activity feed, productivity score, streak system, cloud AI dependency, or backend profile path as a runtime contract.
 - Do not place new runtime authority under `Features/`, `Core/Runtime/`, `Core/Persistence/`, or `Projection/Commands/`. If touching legacy/scaffolded owners, move toward `Core/LocalRuntimeOS/` or record explicit Yellow debt with a named repair train.
-- Do not create new `+02` or `+03` split files, broad `Models.swift` files, or architecture nouns without deleting/collapsing duplicate authority in the same scoped train.
+- Do not create new `+02`, `+03`, or `+04` split files, broad `Models.swift` files, production Swift files above the hard line cap, or architecture nouns without deleting/collapsing duplicate authority in the same scoped train.
 - Every mutation that changes user-visible life state needs command validation, event or ledger append semantics, projection/materialization consequences, a receipt/undo/proof story, replay/idempotency behavior, and a deliberate documented exception if any part is out of scope.
 
 ## Closeout shape

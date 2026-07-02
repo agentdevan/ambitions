@@ -38,7 +38,7 @@ Motion is not a tab or destination. Capture is not a tab.
 7. Do not revive deleted prompts, trains, artifacts, old skills, old control-plane files, or five-surface IA.
 8. Use `PRODUCT_EXPERIENCE_CANON.md` when the task touches Life Capital, full pathing, Future Steps, proof/progress transfer, Source Atlas, onboarding, reviews, automation, scenario gates, or actionability.
 9. Apply the architecture simplification posture from `PRODUCT_DESIGN_TRUTH.md`: keep the runtime law while reducing lore, deep runtime with plain UI, delete before naming, feature-local projection where safe, proof automation outranks prose, and no Green without linked evidence.
-10. For remediation trains, check for file-size/suffix discipline, no new `+02` or `+03` files, no broad `Models.swift`, no architecture nouns without deletion/collapse, no Source Atlas growth without boundary proof, Stage thinness and SwiftUI-native default, and proof artifacts before closeout.
+10. For remediation trains, check for file-size/suffix discipline, no new `+02`, `+03`, or `+04` files, no broad `Models.swift`, no architecture nouns without deletion/collapse, no Source Atlas growth without ADR allowlist and boundary proof, Stage thinness and SwiftUI-native default, and proof artifacts before closeout.
 
 This skill classifies evidence and stale material. It does not define canon.
 

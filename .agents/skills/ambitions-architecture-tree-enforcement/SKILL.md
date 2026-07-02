@@ -134,9 +134,9 @@ A short-lived compatibility shim is allowed only when required to preserve compi
 
 Stop and repair before closeout if the train creates or expands:
 
-- new `+02` or `+03` split files
+- new `+02`, `+03`, or `+04` split files
 - new broad `Models.swift` files
-- file-size or suffix-split churn that preserves duplicate authority instead of deleting or collapsing it
+- file-size or suffix-split churn, including touched production Swift files above the hard line cap, that preserves duplicate authority instead of deleting or collapsing it
 - `RootTab` as root architecture
 - `TabView` as the product model
 - `Surfaces/Motion/`
@@ -155,7 +155,7 @@ Stop and repair before closeout if the train creates or expands:
 - feature-owned projection policy
 - feature-owned trust policy
 - feature-owned motion policy
-- new Source Atlas scope before public-reference/no-private-life-graph boundary proof exists
+- new Source Atlas scope before ADR allowlist plus public-reference/no-private-life-graph boundary proof exists
 - custom Stage, UIKit, or rendering machinery where SwiftUI-native implementation can satisfy product law
 - source paths that are "equivalent" to the final tree but not the final tree
 
