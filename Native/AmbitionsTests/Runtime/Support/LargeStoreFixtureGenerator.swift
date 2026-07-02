@@ -1,3 +1,4 @@
+@testable import Ambitions
 import Foundation
 
 struct LargeStoreFixtureConfiguration: Sendable, Equatable, Hashable {

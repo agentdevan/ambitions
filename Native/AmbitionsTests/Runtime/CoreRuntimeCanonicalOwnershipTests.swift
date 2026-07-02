@@ -38,6 +38,27 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
         }
     }
 
+    func testAMB1716QuarantinesTestSupportOutsideProductionRuntimeOwner() {
+        let root = repoRoot()
+        for requiredPath in [
+            "Native/AmbitionsTests/Runtime/Support/LargeStoreFixtureGenerator.swift",
+        ] {
+            XCTAssertTrue(
+                FileManager.default.fileExists(atPath: root.appendingPathComponent(requiredPath).path),
+                "Missing AMB-1716 quarantined test support file: \(requiredPath)"
+            )
+        }
+
+        for retiredPath in [
+            "Native/Ambitions/Core/Runtime/LargeStoreFixtureGenerator.swift",
+        ] {
+            XCTAssertFalse(
+                FileManager.default.fileExists(atPath: root.appendingPathComponent(retiredPath).path),
+                "AMB-1716 test support still lives under production runtime owner: \(retiredPath)"
+            )
+        }
+    }
+
     func testRemainingLegacyRuntimeLeavesStayExplicitYellowUntilFollowUpMove() {
         let root = repoRoot()
         for yellowPath in [
@@ -45,6 +66,10 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
             "Native/Ambitions/Core/Runtime/CapacityEngine.swift",
             "Native/Ambitions/Core/Runtime/PressureEngine.swift",
             "Native/Ambitions/Core/Runtime/RecoveryEngine.swift",
+            "Native/Ambitions/Core/Runtime/RuntimeCoreUmbrellaGate.swift",
+            "Native/Ambitions/Core/Runtime/GoldenVerticalSliceRuntime.swift",
+            "Native/Ambitions/Core/Runtime/GoldenVerticalSliceRuntime+02-GoldenVerticalSliceInput.swift",
+            "Native/Ambitions/Core/Runtime/GoldenVerticalSliceRuntime+03-GoldenVerticalSliceRuntime.swift",
         ] {
             XCTAssertTrue(
                 FileManager.default.fileExists(atPath: root.appendingPathComponent(yellowPath).path),

@@ -4,17 +4,18 @@ Status: AMB-1715 Implemented Yellow
 
 Snapshot date: 2026-07-02
 
-Scope: AMB-1666 -> AMB-1715 only. This retained audit installs a guard for new
-production use of the legacy `Native/Ambitions/Core/Runtime` owner. It does not
-move source, delete remaining legacy files, migrate runtime authority, change
+Scope: AMB-1666 -> AMB-1715, with AMB-1716 supersession applied. This retained
+audit installs a guard for new production use of the legacy
+`Native/Ambitions/Core/Runtime` owner. AMB-1716 extends the retired-path set for
+the first test-support quarantine. It does not migrate runtime authority, change
 Swift behavior, or prove full LocalRuntimeOS completion.
 
 Evidence class: Implemented Yellow. The guard reports new production legacy
 runtime owner growth and explicit new production source references to
-`Core/Runtime`. It preserves the AMB-1714 Yellow baseline of `112` remaining
-legacy runtime files. It does not prove runtime correctness, build success,
-device behavior, accessibility behavior, privacy/legal approval, TestFlight
-readiness, App Store readiness, or Green project status.
+`Core/Runtime`. It preserves the AMB-1716 Yellow baseline of `111` remaining
+legacy runtime production files. It does not prove runtime correctness, device
+behavior, accessibility behavior, privacy/legal approval, TestFlight readiness,
+App Store readiness, or Green project status.
 
 ## Canonical Constraints
 
@@ -49,10 +50,11 @@ The guard:
 
 - parses the AMB-1713 classification baseline from
   `docs/audits/legacy-runtime-strangler-classification.md`;
-- subtracts the three AMB-1714 retired legacy owner paths;
-- keeps the current legacy runtime production-file ceiling at `112`;
+- subtracts the AMB-1714 and AMB-1716 retired legacy owner paths;
+- keeps the current legacy runtime production-file ceiling at `111`;
 - reports any new production Swift file under `Native/Ambitions/Core/Runtime`;
-- reports any AMB-1714 retired legacy owner path that is reintroduced;
+- reports any AMB-1714 or AMB-1716 retired legacy owner path that is
+  reintroduced;
 - reports new production Swift diff lines outside `Core/Runtime` that
   explicitly reference `Core/Runtime`; and
 - allows test or preview support paths to mention `Core/Runtime` for validation
@@ -76,12 +78,12 @@ Canonical owners touched:
 
 Production Swift behavior touched: none.
 
-Files created:
+Files created by AMB-1715:
 
 - `scripts/ambitions-legacy-runtime-production-use-guard.py`
 - `docs/audits/legacy-runtime-production-use-guard.md`
 
-Files updated:
+Files updated by AMB-1715:
 
 - `scripts/ambitions-remediation-governance-check.py`
 
@@ -89,9 +91,18 @@ Old/non-canonical paths removed: none.
 
 Compatibility shims left behind by this slice: none added.
 
-Yellow architecture debt remains because `112` legacy runtime production files
-still exist under `Core/Runtime`, including adapter shims, test-only support,
-and the unresolved `RuntimePackageBoundaryModels.swift` owner decision. Next
-repair train: AMB-1716 under AMB-1666.
+AMB-1716 supersession:
+
+- Retired path added:
+  `Native/Ambitions/Core/Runtime/LargeStoreFixtureGenerator.swift`
+- Quarantined support owner:
+  `Native/AmbitionsTests/Runtime/Support/LargeStoreFixtureGenerator.swift`
+- Active guard ceiling: `111` legacy runtime production files.
+
+Yellow architecture debt remains because `111` legacy runtime production files
+still exist under `Core/Runtime`, including adapter shims, production-coupled
+files that AMB-1713 classified as test-only support, and the unresolved
+`RuntimePackageBoundaryModels.swift` owner decision. Next repair train: a
+follow-up AMB-1666 runtime owner-move or quarantine leaf before parent Green.
 
 No equivalent-folder or close-enough path interpretation was used.

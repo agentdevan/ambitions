@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""AMB-1715 guard for legacy Core/Runtime production use.
+"""AMB-1715/AMB-1716 guard for legacy Core/Runtime production use.
 
-This is a retained audit guard, not runtime proof. It preserves the AMB-1714
+This is a retained audit guard, not runtime proof. It preserves the active
 Yellow baseline while reporting new production owner growth under
-Native/Ambitions/Core/Runtime.
+Native/Ambitions/Core/Runtime and blocked reintroduction of retired owners.
 """
 from __future__ import annotations
 
@@ -19,13 +19,19 @@ ROOT = Path(__file__).resolve().parents[1]
 LEGACY_RUNTIME_ROOT = ROOT / "Native" / "Ambitions" / "Core" / "Runtime"
 LEGACY_RUNTIME_PREFIX = "Native/Ambitions/Core/Runtime/"
 CLASSIFICATION_DOC = ROOT / "docs" / "audits" / "legacy-runtime-strangler-classification.md"
-MAX_LEGACY_RUNTIME_PRODUCTION_FILES = 112
+MAX_LEGACY_RUNTIME_PRODUCTION_FILES = 111
 
 AMB_1714_RETIRED_LEGACY_PATHS = {
     "Native/Ambitions/Core/Runtime/PrivateLifeRuntime.swift",
     "Native/Ambitions/Core/Runtime/RuntimeProjectionPipeline.swift",
     "Native/Ambitions/Core/Runtime/RuntimeSnapshot.swift",
 }
+
+AMB_1716_RETIRED_LEGACY_PATHS = {
+    "Native/Ambitions/Core/Runtime/LargeStoreFixtureGenerator.swift",
+}
+
+RETIRED_LEGACY_RUNTIME_PATHS = AMB_1714_RETIRED_LEGACY_PATHS | AMB_1716_RETIRED_LEGACY_PATHS
 
 PRODUCTION_SWIFT_ROOTS = (
     "Native/Ambitions/",
@@ -154,7 +160,7 @@ def baseline_legacy_runtime_paths() -> set[str]:
             text,
         )
     )
-    return paths - AMB_1714_RETIRED_LEGACY_PATHS
+    return paths - RETIRED_LEGACY_RUNTIME_PATHS
 
 
 def current_legacy_runtime_paths() -> set[str]:
@@ -213,7 +219,7 @@ def legacy_owner_findings(baseline: set[str], current: set[str]) -> list[Finding
             Finding(
                 "legacy-runtime-baseline-growth",
                 str(CLASSIFICATION_DOC.relative_to(ROOT)),
-                f"parsed baseline has {len(baseline)} files; AMB-1714 ceiling is {MAX_LEGACY_RUNTIME_PRODUCTION_FILES}",
+                f"parsed baseline has {len(baseline)} files; active legacy runtime ceiling is {MAX_LEGACY_RUNTIME_PRODUCTION_FILES}",
             )
         )
 
@@ -222,7 +228,7 @@ def legacy_owner_findings(baseline: set[str], current: set[str]) -> list[Finding
             Finding(
                 "legacy-runtime-count-increase",
                 LEGACY_RUNTIME_PREFIX,
-                f"current legacy runtime file count is {len(current)}; AMB-1714 ceiling is {MAX_LEGACY_RUNTIME_PRODUCTION_FILES}",
+                f"current legacy runtime file count is {len(current)}; active legacy runtime ceiling is {MAX_LEGACY_RUNTIME_PRODUCTION_FILES}",
             )
         )
 
@@ -235,12 +241,12 @@ def legacy_owner_findings(baseline: set[str], current: set[str]) -> list[Finding
             )
         )
 
-    for path in sorted(current & AMB_1714_RETIRED_LEGACY_PATHS):
+    for path in sorted(current & RETIRED_LEGACY_RUNTIME_PATHS):
         findings.append(
             Finding(
                 "retired-legacy-runtime-owner-reintroduced",
                 path,
-                "AMB-1714 retired this legacy owner path; reintroduction is blocked",
+                "AMB-1714 or AMB-1716 retired this legacy owner path; reintroduction is blocked",
             )
         )
 
@@ -291,6 +297,7 @@ def self_test() -> int:
     assert not contains_legacy_runtime_reference("Core/LocalRuntimeOS")
     baseline = baseline_legacy_runtime_paths()
     assert "Native/Ambitions/Core/Runtime/PrivateLifeRuntime.swift" not in baseline
+    assert "Native/Ambitions/Core/Runtime/LargeStoreFixtureGenerator.swift" not in baseline
     assert len(baseline) <= MAX_LEGACY_RUNTIME_PRODUCTION_FILES
     synthetic_findings = legacy_owner_findings(
         {"Native/Ambitions/Core/Runtime/ExistingRuntime.swift"},

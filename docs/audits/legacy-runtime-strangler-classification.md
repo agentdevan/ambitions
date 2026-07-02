@@ -22,6 +22,13 @@ is the current overlay for the three rows moved after this baseline:
 `PrivateLifeRuntime.swift`, `RuntimeProjectionPipeline.swift`, and
 `RuntimeSnapshot.swift`.
 
+AMB-1716 supersession: `docs/audits/legacy-runtime-strangler-delete-quarantine.md`
+is the current overlay for `LargeStoreFixtureGenerator.swift`. That file moved
+from production `Core/Runtime` into test support under
+`Native/AmbitionsTests/Runtime/Support`. The other AMB-1713 `Test-only support`
+rows remain Yellow until a follow-up proves their owner movement or release-inert
+scope.
+
 ## Canonical Constraints
 
 Runtime mutation law remains:
