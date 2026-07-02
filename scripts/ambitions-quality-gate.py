@@ -33,6 +33,7 @@ REQUIRED_ARCHITECTURE_PATHS = [
     "scripts/ambitions-architecture-inventory.py",
     "scripts/ambitions-master-sequencing-check.py",
     "scripts/ambitions-remediation-governance-check.py",
+    "scripts/ambitions-runtime-direct-write-audit.py",
     "scripts/lifeshape-linear-control-plane-check.py",
     "scripts/ambitions-visual-proof-gate.py",
     "scripts/ambitions-test-strength-audit.py",
@@ -835,6 +836,38 @@ def check_green_standard_contract() -> list[Finding]:
     ]
 
 
+def check_runtime_direct_write_contract() -> list[Finding]:
+    script = ROOT / "scripts" / "ambitions-runtime-direct-write-audit.py"
+    if not script.exists():
+        return [
+            Finding(
+                "runtime-direct-write",
+                rel(script),
+                "runtime direct-write audit is missing",
+            )
+        ]
+
+    result = subprocess.run(
+        [sys.executable, str(script)],
+        cwd=ROOT,
+        check=False,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if result.returncode == 0:
+        return []
+
+    output = "\n".join(part for part in [result.stdout, result.stderr] if part).strip()
+    return [
+        Finding(
+            "runtime-direct-write",
+            rel(script),
+            output[:500] if output else "Runtime direct-write audit failed",
+        )
+    ]
+
+
 def check_action_mutation_contract(files: list[Path]) -> list[Finding]:
     findings: list[Finding] = []
     for path in files:
@@ -936,6 +969,7 @@ def main() -> int:
     findings.extend(check_lifeshape_linear_control_plane_contract())
     findings.extend(check_rendered_product_acceptance_contracts())
     findings.extend(check_green_standard_contract())
+    findings.extend(check_runtime_direct_write_contract())
     findings.extend(check_action_mutation_contract(files))
 
     grouped = summarize(findings, max_per_gate=args.max_per_gate)
