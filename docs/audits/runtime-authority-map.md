@@ -4,7 +4,7 @@ Status: AMB-1665 static authority map
 
 Snapshot date: 2026-07-02
 
-Source snapshot inspected: `805c1f90c419011369c6e4461e5ac3fd0cc041ad` on `main`
+Source snapshot inspected for AMB-1707: `78bf205478578720cc91cc6b8fc0604c6d2b5172` on `main`
 
 Scope: M00 runtime authority map only. No Swift behavior, source migration,
 runtime authority migration, or product-surface behavior was changed by this
@@ -77,18 +77,60 @@ private life graph backend.
   - `Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceSnapshotWriter.swift`
   - `Native/Ambitions/Projection/ExternalSnapshots/ExternalWidgetProjection.swift`
   - `Native/AmbitionsWidgetExtension/NextStepWidget.swift`
+- AMB-1707 source inspection of:
+  - `Native/Ambitions/App/AppShellActivatedCaptureSeam.swift`
+  - `Native/Ambitions/App/ShellCommandRouter.swift`
+  - `Native/Ambitions/Stage/AmbitionsStage.swift`
+  - `Native/Ambitions/Stage/StageReducer.swift`
+  - `Native/Ambitions/Stage/Overlays/AppShellOverlayView.swift`
+  - `Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift`
+  - `Native/Ambitions/Composer/Capture/CaptureContinuityLine.swift`
+  - `Native/Ambitions/Composer/Capture/CaptureViewModel.swift`
+  - `Native/Ambitions/Core/Runtime/CaptureService+03-DefaultCaptureService.swift`
+  - `Native/Ambitions/Core/Runtime/CaptureService+04-DefaultCaptureService.swift`
+  - `Native/Ambitions/Surfaces/Today/TodaySurface.swift`
+  - `Native/Ambitions/Surfaces/Today/TodaySurface+02-autoLoad.swift`
+  - `Native/Ambitions/Surfaces/Today/TodayViewModel.swift`
+  - `Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService.swift`
+  - `Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService+02-RepositoryBackedTodayService+Repository05-performFeedbackAction.swift`
+  - `Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/TodayReceiptCommandService.swift`
+  - `Native/Ambitions/Surfaces/Goals/CreateGoalScreen.swift`
+  - `Native/Ambitions/Surfaces/Goals/CreateGoalViewModel.swift`
+  - `Native/Ambitions/Surfaces/Goals/GoalsViewModels.swift`
+  - `Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+02-Snapshot.swift`
+  - `Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+10-performMutation.swift`
+  - `Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+11-applyAdaptiveRecommendation.swift`
+  - `Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+16-repositories.swift`
+  - `Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+17-submitClarificationAnswer.swift`
+  - `Native/Ambitions/Core/Persistence/SwiftDataRepositories+03-Array.swift`
+  - `Native/Ambitions/Surfaces/Time/TimeSurface.swift`
+  - `Native/Ambitions/Surfaces/Time/TimeViewModel.swift`
+  - `Native/Ambitions/Surfaces/Time/TimeRitualsSurface.swift`
+  - `Native/Ambitions/Surfaces/Time/TimeRitualsViewModel.swift`
+  - `Native/Ambitions/Projection/SurfaceLenses/RepositoryBackedTimeService.swift`
+  - `Native/Ambitions/Projection/SurfaceLenses/TimeRitualsProjectionService.swift`
+  - `Native/Ambitions/Core/Domain/RealityModels.swift`
+  - `Native/Ambitions/Core/Runtime/LocalScheduleBlockRepository.swift`
+  - `Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/AmbitionsCommandExecutor+CalendarWriteIntent.swift`
+  - `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LifeCalendarStore.swift`
+  - `Native/Ambitions/Surfaces/You/YouSurface.swift`
+  - `Native/Ambitions/Surfaces/You/YouRootDetailRouteSurface.swift`
+  - `Native/Ambitions/Surfaces/You/YouScreen+08-YouPlanningHandoffRow.swift`
+  - `Native/Ambitions/Surfaces/You/YouViewModel.swift`
+  - `Native/Ambitions/Projection/SurfaceLenses/YouFeatureService.swift`
+  - `Native/Ambitions/Core/LocalRuntimeOS/ObjectState/YouPreferencesCommandService.swift`
 
 ## Entry-Point Inventory
 
 | Entry point | Evidence paths | Classification | Proof ceiling | Follow-up |
 | --- | --- | --- | --- | --- |
-| App bootstrap and dependency wiring | `Native/Ambitions/App/AppContainerFactory.swift`, `Native/Ambitions/App/AppBootstrapper.swift` | adapter into command | Source shows runtime services, command executor, external creation import, notification maintenance, and external action service are wired, but this is not behavioral proof. | AMB-1707, AMB-1708 |
-| App UI actions | `Native/Ambitions/Surfaces/Today`, `Native/Ambitions/Surfaces/Goals`, `Native/Ambitions/Surfaces/Time`, `Native/Ambitions/Surfaces/You`, `Native/Ambitions/Stage/Overlays` | unknown | Static map sees interactive surfaces, but AMB-1665 does not trace every button/gesture handler to a command receipt. | AMB-1707 |
-| Global Capture | `Native/Ambitions/Composer/Capture`, `Native/Ambitions/App/ShellCommandRouter.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ExternalCreationImportService.swift` | adapter into command | External creation import creates `AmbitionsCommand(kind: .quickCapture)`. Full UI Capture handler coverage remains a leaf task. | AMB-1707 |
-| Today actions | `Native/Ambitions/Surfaces/Today`, `Native/Ambitions/Projection/SurfaceLenses/TodayFeatureSnapshot.swift`, `Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/TodayReceiptCommandService.swift` | canonical command | Source shows receipt command service participation. Exact Today action proof remains leaf-scoped. | AMB-1707 |
-| Goals actions | `Native/Ambitions/Surfaces/Goals`, `Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+10-performMutation.swift`, `Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/AmbitionsCommandExecutor.swift` | unknown | Static map identifies mutation-like Goals projection service paths, but does not prove every Goals action enters LocalRuntimeOS first. | AMB-1707 |
+| App bootstrap and dependency wiring | `Native/Ambitions/App/AppContainerFactory.swift`, `Native/Ambitions/App/AppBootstrapper.swift` | adapter into command | Source shows runtime services, command executor, external creation import, notification maintenance, and external action service are wired, but this is not behavioral proof. | AMB-1708, AMB-1666 |
+| App UI actions | `Native/Ambitions/Surfaces/Today`, `Native/Ambitions/Surfaces/Goals`, `Native/Ambitions/Surfaces/Time`, `Native/Ambitions/Surfaces/You`, `Native/Ambitions/Stage/Overlays` | unsafe write | AMB-1707 traces the main app UI handlers. Some rows are command-routed or projection-only, but Today, Goals, Time rituals, and Capture still have repository writes outside `Core/LocalRuntimeOS/`. | AMB-1666, AMB-1667, AMB-1709 |
+| Global Capture | `Native/Ambitions/Composer/Capture`, `Native/Ambitions/App/AppShellActivatedCaptureSeam.swift`, `Native/Ambitions/App/ShellCommandRouter.swift`, `Native/Ambitions/Core/Runtime/CaptureService+03-DefaultCaptureService.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ExternalCreationImportService.swift` | unsafe write | External creation import creates `AmbitionsCommand(kind: .quickCapture)`, but the in-app global Capture and shell Capture UI save through `DefaultCaptureService` repository writes outside LocalRuntimeOS. | AMB-1666, AMB-1667 |
+| Today actions | `Native/Ambitions/Surfaces/Today`, `Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService.swift`, `Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService+02-RepositoryBackedTodayService+Repository05-performFeedbackAction.swift`, `Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/TodayReceiptCommandService.swift` | unsafe write | Closure and rejection receipts use `TodayReceiptCommandService`, but inline feedback and quick-log actions still save feedback, evidence, goals, or captures through projection/repository paths. | AMB-1666, AMB-1667 |
+| Goals actions | `Native/Ambitions/Surfaces/Goals`, `Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+02-Snapshot.swift`, `Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+10-performMutation.swift`, `Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+16-repositories.swift`, `Native/Ambitions/Core/Persistence/SwiftDataRepositories+03-Array.swift` | unsafe write | Create, clarification, detail, priority, and adaptive recommendation paths are now traced, but writes still land through Projection/SurfaceLenses and Core/Persistence unit-of-work paths. | AMB-1666, AMB-1667, AMB-1709 |
 | Time edits and local schedule blocks | `Native/Ambitions/Surfaces/Time`, `Native/Ambitions/Core/Domain/RealityModels.swift`, `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LifeCalendarStore.swift` | unsafe write | `RealityModels.swift` contains local schedule file writes outside LocalRuntimeOS. Canonical TimeEngine storage exists, but authority migration is not complete. | AMB-1709, AMB-1667 |
-| You/profile edits | `Native/Ambitions/Surfaces/You`, `Native/Ambitions/Projection/SurfaceLenses/YouFeatureService.swift`, `Native/Ambitions/Core/LocalRuntimeOS/ObjectState/YouPreferencesCommandService.swift` | canonical command | Source shows `YouPreferencesCommandService` is used, but exact screen-level action coverage remains leaf-scoped. | AMB-1707 |
+| You/profile edits | `Native/Ambitions/Surfaces/You`, `Native/Ambitions/Projection/SurfaceLenses/YouFeatureService.swift`, `Native/Ambitions/Core/LocalRuntimeOS/ObjectState/YouPreferencesCommandService.swift` | canonical command | AMB-1707 traces preference save through `YouPreferencesCommandService` and `RuntimeCommandMutationCommitter`; static evidence does not prove every You row is a runtime mutation or device behavior. | AMB-1666, AMB-1667 |
 | Widgets and Live Activity | `Native/AmbitionsWidgetExtension/NextStepWidget.swift`, `Native/AmbitionsWidgetExtension/NextStepLiveActivityWidget.swift`, `Native/Ambitions/Projection/ExternalSnapshots/ExternalWidgetProjection.swift` | projection-only read | Widgets read safe external snapshots and deep link back to app. No widget canonical state write is claimed. | AMB-1708, AMB-1668 |
 | App Intents, creation | `Native/Ambitions/App/Intents/AmbitionsCreationIntents.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/AppIntentBridge.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ExternalCreationImportService.swift` | adapter into command | App Intent input is durable handoff first, then imported as `AmbitionsCommand`; adapter receipt and terminated-app proof remain future work. | AMB-1708, AMB-1668 |
 | App Intents, step inspection/control | `Native/Ambitions/App/Intents/AmbitionsStepInspectionIntents.swift`, `Native/Ambitions/App/AppIntentLaunchRouter.swift` | adapter into command | Current source queues app routes for inspection/start/guarded close. Exact mutation receipt proof for each shortcut remains future work. | AMB-1708, AMB-1668 |
@@ -99,6 +141,35 @@ private life graph backend.
 | Import/restore and portable snapshots | `Native/Ambitions/Core/Persistence/PortableSnapshotService+02-PortableSnapshotService.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Storage/BackupStore.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Storage/MigrationStore.swift` | unsafe write | Legacy snapshot save path remains in Core/Persistence. LocalRuntimeOS backup/migration stores exist, but migration proof is not claimed. | AMB-1709, AMB-1667 |
 | Migration and repair | `Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair`, `Native/Ambitions/Core/LocalRuntimeOS/Storage/MigrationStore.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Storage/BackupStore.swift` | canonical command | Canonical owner is present, but repair execution authority and migration tests are not proven by this map. | AMB-1709, AMB-1667 |
 | Previews, debug, fixtures | `Native/Ambitions/PreviewSupport/PreviewAppContainer.swift`, `Native/Ambitions/PreviewSupport/PreviewFixtures.swift`, debug branches in `Native/Ambitions/App/AppContainerFactory.swift` | unknown | Preview/debug paths can seed stores or use temporary file storage. They are not production authority proof and need quarantine review. | AMB-1710 |
+
+## AMB-1707 App UI And Capture Mutation Inventory
+
+Evidence baseline: `78bf205478578720cc91cc6b8fc0604c6d2b5172` on `main`.
+
+This inventory is static source evidence only. It does not prove runtime
+correctness, UI behavior, receipt durability, replay correctness, device
+behavior, privacy/legal approval, or release readiness.
+
+| Candidate | Evidence paths | Classification | Static finding | Follow-up |
+| --- | --- | --- | --- | --- |
+| Capture draft typing, route preview, proposal, and cancel | `Native/Ambitions/Composer/Capture/CaptureViewModel.swift`, `Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift`, `Native/Ambitions/App/AppShellActivatedCaptureSeam.swift` | projection-only read | Draft text, route choice, preview, proposal, and cancel mutate only local view state until the user accepts save or route actions. | None for AMB-1707; keep runtime proof Yellow until behavior tests cover the save boundary. |
+| Global Capture accepted save from composer and activated shell seam | `Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift`, `Native/Ambitions/Composer/Capture/CaptureViewModel.swift`, `Native/Ambitions/App/AppShellActivatedCaptureSeam.swift`, `Native/Ambitions/Core/Runtime/CaptureService+03-DefaultCaptureService.swift`, `Native/Ambitions/Core/Runtime/CaptureService+04-DefaultCaptureService.swift` | unsafe write | UI save calls `CaptureServicing.createCapture`; `DefaultCaptureService` prepares CaptureRouteGraph intake, then persists through `repository.saveCaptures` outside `Core/LocalRuntimeOS/`. | AMB-1666, AMB-1667 |
+| Capture continuity line actions: Ready to Place, Keep for review, Idea, Waiting, Review later, Archive, Attach proof | `Native/Ambitions/Composer/Capture/CaptureContinuityLine.swift`, `Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift`, `Native/Ambitions/Composer/Capture/CaptureViewModel.swift`, `Native/Ambitions/Core/Runtime/CaptureService+03-DefaultCaptureService.swift` | unsafe write | Buttons route to `CaptureViewModel`, then `CaptureServicing.updateCaptureState`, `routeToTimeSeed`, `markAsWaiting`, `markAsOptionalSomeday`, `markAsDeliverableSeed`, or `attachCaptureToGoal`; the default service still saves captures through repositories outside LocalRuntimeOS. | AMB-1666, AMB-1667 |
+| Capture-to-Goal route transition and post-create attachment | `Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift`, `Native/Ambitions/Surfaces/Goals/CreateGoalScreen.swift`, `Native/Ambitions/Stage/Overlays/AppShellOverlayView.swift`, `Native/Ambitions/Stage/AmbitionsStage.swift`, `Native/Ambitions/Core/Runtime/CaptureService+03-DefaultCaptureService.swift`, `Native/Ambitions/Core/Persistence/SwiftDataRepositories+03-Array.swift` | unsafe write | Opening Create Goal from a capture is Stage route state, but successful creation and post-create attachment call Goals and Capture services. The capture promotion unit-of-work receipt is Core/Persistence-backed, not LocalRuntimeOS authority proof. | AMB-1666, AMB-1667, AMB-1709 |
+| Shell command route transitions and overlay presentation | `Native/Ambitions/App/ShellCommandRouter.swift`, `Native/Ambitions/Stage/StageReducer.swift`, `Native/Ambitions/Stage/Overlays/ShellOverlayState.swift` | projection-only read | `presentCommandSheet`, `presentCreateGoal`, `route(to:)`, search result routing, and overlay changes mutate Stage route/overlay state and command history only; they are not private graph mutation proof. | AMB-1708 for external route adapter proof; AMB-1666 if a route becomes a runtime mutation. |
+| Shell command quick capture execution | `Native/Ambitions/App/ShellCommandRouter.swift`, `Native/Ambitions/Core/Runtime/CaptureService+03-DefaultCaptureService.swift` | unsafe write | `execute(.quickCapture)` validates non-empty text, calls `CaptureServicing.createCapture`, and records shell continuity. The typed proof receipt at this boundary is explicitly unavailable in source comments, and persistence uses the legacy Capture service path. | AMB-1666, AMB-1667 |
+| Today navigation, detail, focus, replacement, protection, and Time-shape sheets | `Native/Ambitions/Surfaces/Today/TodaySurface.swift`, `Native/Ambitions/Surfaces/Today/TodaySurface+02-autoLoad.swift`, `Native/Ambitions/Surfaces/Today/TodayViewModel.swift` | projection-only read | Start/pause/stop, open detail, open Capture, protection review, Time-shape review, and replacement approval are Stage route, transient message, or sheet/projection state in the inspected paths. | AMB-1666 if any of these become persisted runtime mutations. |
+| Today closure and recommendation rejection receipts | `Native/Ambitions/Surfaces/Today/TodaySurface.swift`, `Native/Ambitions/Surfaces/Today/TodaySurface+02-autoLoad.swift`, `Native/Ambitions/Surfaces/Today/TodayViewModel.swift`, `Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/TodayReceiptCommandService.swift` | canonical command | Closure and rejection call `TodayReceiptCommandService`, which builds `AmbitionsCommand` values and commits through `RuntimeCommandMutationCommitter`; this is source-static command evidence only. | AMB-1666 for behavior proof; AMB-1667 if repository-backed receipt history remains outside canonical storage. |
+| Today inline feedback, completion, reschedule, recovery, and quick-log actions | `Native/Ambitions/Surfaces/Today/TodayViewModel.swift`, `Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService.swift`, `Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService+02-RepositoryBackedTodayService+Repository05-performFeedbackAction.swift` | unsafe write | `TodayServicing.performAction` reaches `performFeedbackAction`, which writes feedback, evidence, goals, captures, or external reminders through projection/repository services. | AMB-1666, AMB-1667, AMB-1709 |
+| Goals Create Goal submit and clarification materialization | `Native/Ambitions/Surfaces/Goals/CreateGoalScreen.swift`, `Native/Ambitions/Surfaces/Goals/CreateGoalViewModel.swift`, `Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+16-repositories.swift`, `Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+02-Snapshot.swift`, `Native/Ambitions/Core/Persistence/SwiftDataRepositories+03-Array.swift` | unsafe write | Create Goal and clarification save call `GoalsServicing.createGoal` or `submitClarificationAnswer`, then save goals/drafts through repository or Core/Persistence unit-of-work paths. | AMB-1666, AMB-1667, AMB-1709 |
+| Goals detail actions, priority changes, and adaptive recommendations | `Native/Ambitions/Surfaces/Goals/GoalsViewModels.swift`, `Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+10-performMutation.swift`, `Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+11-applyAdaptiveRecommendation.swift`, `Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+16-repositories.swift` | unsafe write | Detail actions call `GoalsServicing.performAction`; mutation handlers write feedback, evidence, goals, app-state priority order, or external calendar/reminder side effects through projection/repository services. | AMB-1666, AMB-1667, AMB-1709 |
+| Time LifeShape field edit, protected-placement review, and undo | `Native/Ambitions/Surfaces/Time/TimeSurface.swift`, `Native/Ambitions/Surfaces/Time/TimeViewModel.swift`, `Native/Ambitions/Surfaces/Time/ProtectedPlacementReviewState.swift` | projection-only read | The inspected LifeShape controls call `TimeFieldMutationCoordinator` and mutate `TimeSurfaceState`, review state, visible mutation, or undo state in memory. No repository persistence is claimed for this UI field path. | AMB-1666 if this UI path becomes a persisted Time mutation. |
+| Time calendar-aware action and calendar context observation | `Native/Ambitions/Surfaces/Time/TimeViewModel.swift`, `Native/Ambitions/Projection/SurfaceLenses/RepositoryBackedTimeService.swift` | unsafe write | `makeTimeCalendarAware` reads calendar availability and appends an event-ledger entry from a projection service; it is user-initiated and local, but not a LocalRuntimeOS command-path proof. | AMB-1708, AMB-1709, AMB-1667 |
+| Time rituals actions | `Native/Ambitions/Surfaces/Time/TimeRitualsSurface.swift`, `Native/Ambitions/Surfaces/Time/TimeRitualsViewModel.swift`, `Native/Ambitions/Projection/SurfaceLenses/TimeRitualsProjectionService.swift` | unsafe write | Ritual complete, minimum version, quick log, delay, skip, easier version, and not-relevant actions save feedback, evidence, and goals through `RepositoryBackedTimeRitualsService`. | AMB-1666, AMB-1667, AMB-1709 |
+| Confirmed local schedule write command path | `Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/AmbitionsCommandExecutor+CalendarWriteIntent.swift`, `Native/Ambitions/Core/Runtime/LocalScheduleBlockRepository.swift`, `Native/Ambitions/Core/Domain/RealityModels.swift`, `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LifeCalendarStore.swift` | canonical command | A `scheduleItem` command path exists under LocalRuntimeOS for confirmed calendar-write intent, and canonical `LifeCalendarStore` exists. The executor still writes through legacy `FileLocalScheduleBlockRepository` and `RealityModels` helpers, so migration remains Yellow. | AMB-1709, AMB-1667 |
+| You appearance/default preference save | `Native/Ambitions/Surfaces/You/YouSurface.swift`, `Native/Ambitions/Surfaces/You/YouRootDetailRouteSurface.swift`, `Native/Ambitions/Surfaces/You/YouScreen+08-YouPlanningHandoffRow.swift`, `Native/Ambitions/Surfaces/You/YouViewModel.swift`, `Native/Ambitions/Projection/SurfaceLenses/YouFeatureService.swift`, `Native/Ambitions/Core/LocalRuntimeOS/ObjectState/YouPreferencesCommandService.swift` | canonical command | Save preferences calls `YouPreferencesCommandService.saveYouPreferences`, builds `AmbitionsCommand(kind: .updateUserPreferences)`, commits through `RuntimeCommandMutationCommitter`, then saves app-state preferences inside the command closure. | AMB-1666 for behavior proof; AMB-1667 if app-state storage authority remains outside canonical storage. |
+| You detail, life context, learning-control, and route-opening controls | `Native/Ambitions/Surfaces/You/YouSurface.swift`, `Native/Ambitions/Surfaces/You/YouScreen+04-YouLifeContextSurface.swift`, `Native/Ambitions/Projection/SurfaceLenses/YouFeatureService*.swift` | projection-only read | The inspected controls expand/focus local detail, route to You destinations, or display source-tied learning/privacy controls. AMB-1707 found no additional persisted private graph mutation in these UI controls. | AMB-1666 if future You controls gain persistence. |
+| You notification permission action | `Native/Ambitions/Surfaces/You/YouSurface.swift`, `Native/Ambitions/Core/Permissions/LocalNotificationFoundation.swift` | adapter into command | Notification opt-in is an OS adapter/system permission action, not a private graph mutation. Scheduling proof remains system-surface scope, not AMB-1707 Green proof. | AMB-1708, AMB-1668 |
 
 ## Direct-Write Marker Summary
 
@@ -156,7 +227,7 @@ classified here with a follow-up.
 
 | Runtime law step | Current evidence | Coverage status | Residual gap |
 | --- | --- | --- | --- |
-| Command | `AmbitionsCommandExecutor`, `RuntimeCommandMutationCommitter`, `DefaultExternalCreationImportService`, `AppIntentBridge`, `ExternalActionCommandService`, `TodayReceiptCommandService`, `YouPreferencesCommandService` | Implemented Yellow | App UI/Capture handler-by-handler proof remains AMB-1707. System adapter proof remains AMB-1708/AMB-1668. |
+| Command | `AmbitionsCommandExecutor`, `RuntimeCommandMutationCommitter`, `DefaultExternalCreationImportService`, `AppIntentBridge`, `ExternalActionCommandService`, `TodayReceiptCommandService`, `YouPreferencesCommandService` | Implemented Yellow | AMB-1707 statically inventories App UI/Capture handlers. Unsafe UI/Capture paths still need command-path conversion and behavior proof in AMB-1666/AMB-1667. System adapter proof remains AMB-1708/AMB-1668. |
 | Event | `RuntimeTransactionCommitPolicy`, `RuntimeTransactionCoordinator`, `RuntimeEventStore`, `EventStoreSQLite` | Implemented Yellow | Legacy Core/Persistence and Core/Domain writes can still bypass the canonical event path until AMB-1709/AMB-1667. |
 | Projection | `ProjectionStoreSQLite`, `ExternalSurfaceSnapshotWriter`, `ExternalWidgetProjection`, `Projection/SurfaceLenses` | Implemented Yellow | Projection-only external surfaces need adapter-level privacy/staleness proof in AMB-1708/AMB-1668. |
 | Receipt | `CommandReceiptFactory`, `CommandJournalAppendReceipt`, `TrustSystem`, `TodayReceiptCommandService`, side-effect outbox records | Implemented Yellow | Not every UI/system mutation candidate has current receipt proof. Unsafe writes are not receipt-proven. |
@@ -188,7 +259,7 @@ This audit is a governance guard, not proof that unsafe writes are fixed.
 
 | Gap | Status | Follow-up |
 | --- | --- | --- |
-| App UI and Capture action handlers are not exhaustively traced to command receipts in this parent slice. | unknown | AMB-1707 |
+| App UI and Capture action handlers are statically inventoried, but several paths still write through legacy repository/projection services outside LocalRuntimeOS. | unsafe write / Implemented Yellow by path | AMB-1666, AMB-1667, AMB-1709 |
 | System-surface adapter behavior needs terminated-app, extension, notification, widget, and receipt proof. | Implemented Yellow / unknown by path | AMB-1708, AMB-1668 |
 | Legacy SwiftData/Core/Persistence and Core/Domain local schedule writes remain outside canonical runtime authority. | unsafe write | AMB-1709, AMB-1667 |
 | Preview/debug fixture mutation-like behavior is not quarantined or proven production-isolated by this slice. | unknown | AMB-1710 |
@@ -198,12 +269,12 @@ This audit is a governance guard, not proof that unsafe writes are fixed.
 ## Closeout Boundary
 
 - Final Architecture Tree inspected: yes, through `docs/truth/PRODUCT_DESIGN_TRUTH.md`.
-- Canonical owners touched: docs and scripts only.
+- Canonical owners touched by AMB-1707: `docs/audits` only. Earlier AMB-1665 slices also touched scripts.
 - Swift owners touched: none.
 - Files moved or created in Swift source: none.
 - Old/noncanonical source paths removed: none.
 - Compatibility shims left behind: none added by this slice.
-- Architecture debt remains: yes, in legacy persistence/domain direct-write paths, system adapter proof, UI handler tracing, and preview/debug fixtures.
-- Next repair train: AMB-1707, AMB-1708, AMB-1709, AMB-1710, AMB-1711, AMB-1712, then AMB-1666/AMB-1667/AMB-1668 before source migration parents.
+- Architecture debt remains: yes, in legacy persistence/domain direct-write paths, system adapter proof, App UI/Capture command-path conversion, and preview/debug fixtures.
+- Next repair train: AMB-1708, AMB-1709, AMB-1710, then AMB-1666/AMB-1667/AMB-1668 before source migration parents.
 - No equivalent folder/path interpretation was used.
 - No Green runtime authority claim is made.
