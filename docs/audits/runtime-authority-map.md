@@ -9,6 +9,7 @@ Source snapshots inspected:
 - AMB-1707: `78bf205478578720cc91cc6b8fc0604c6d2b5172` on `main`
 - AMB-1708: `e25b35125096da6f8da1739689f0040870a95ae4` on `main`
 - AMB-1709: `b7251077e9280d5d914f7fa2521c9c4a68863898` on `main`
+- AMB-1710: `e6139849cdb956782dae4f0f4974705f463759c9` on `main`
 
 Scope: M01 AMB-1665 runtime authority map only. No Swift behavior, source migration,
 runtime authority migration, or product-surface behavior was changed by this
@@ -206,6 +207,30 @@ private life graph backend.
   - `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SyncEligibilityPolicy.swift`
   - `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/LocalAuthoritativeSyncModel.swift`
   - `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SyncEnvelope.swift`
+- AMB-1710 source inspection of:
+  - `project.yml`
+  - `Native/Ambitions/PreviewSupport/PreviewAppContainer.swift`
+  - `Native/Ambitions/PreviewSupport/PreviewFixtures.swift`
+  - `Native/Ambitions/PreviewSupport/PreviewTimeRitualScenarios.swift`
+  - `Native/Ambitions/PreviewSupport/ToolbarPreviewCatalog.swift`
+  - `Native/Ambitions/PreviewSupport/CaptureComposerPreviews.swift`
+  - `Native/Ambitions/PreviewSupport/CaptureAtmosphereComposerPreviews.swift`
+  - `Native/Ambitions/PreviewSupport/AppDeepLinkPreviewRouter.swift`
+  - `Native/Ambitions/PreviewSupport/StubGoalsService.swift`
+  - `Native/Ambitions/PreviewSupport/StubTodayService.swift`
+  - `Native/Ambitions/App/AppContainerFactory.swift`
+  - `Native/Ambitions/Core/Runtime/AppServices.swift`
+  - `Native/Ambitions/Core/Time/AmbitionsClock.swift`
+  - `Native/Ambitions/Core/Time/PreviewClock.swift`
+  - `Native/Ambitions/Core/Persistence/DemoSeedPipeline.swift`
+  - `Native/Ambitions/Core/Persistence/PreviewCaptureRepository.swift`
+  - `Native/Ambitions/Core/Runtime/LargeStoreFixtureGenerator.swift`
+  - `Native/Ambitions/Core/Domain/GoalEngine/GoalEngineFixtures.swift`
+  - `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasCoverageRuntimeFixtureModels.swift`
+  - `Native/AmbitionsTests/App/AppContainerFactoryTests.swift`
+  - `Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift`
+  - `Native/AmbitionsTests/Time/TimeClockTests.swift`
+  - `Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasCoverageRuntimeFixtureModelsTests.swift`
 
 ## Entry-Point Inventory
 
@@ -229,7 +254,7 @@ private life graph backend.
 | CloudKit continuity apply paths | `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/CloudKitContinuityAdapter.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SyncContinuityAuthorityGate.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SyncEligibilityPolicy.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/LocalAuthoritativeSyncModel.swift` | adapter into command | AMB-1709 found no remote private-graph apply writer in the inspected SyncContinuity files. Source shows feature flag default off, local-store authority, private payload denial, local outbox/review decisions, and zone setup only. It does not prove approved private graph sync or remote apply behavior. | AMB-1668, AMB-1680 |
 | Import/restore and portable snapshots | `Native/Ambitions/Core/Persistence/PortableSnapshotService+02-PortableSnapshotService.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Storage/BackupStore.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Storage/MigrationStore.swift` | unsafe write | AMB-1709 confirms snapshot import/replace/merge applies through legacy Core/Persistence repositories. LocalRuntimeOS backup/migration stores exist, but existing-data migration proof is not claimed. | AMB-1667, AMB-1717, AMB-1720 |
 | Migration and repair | `Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair`, `Native/Ambitions/Core/LocalRuntimeOS/Storage/MigrationStore.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Storage/BackupStore.swift` | canonical command | Canonical owner is present. AMB-1709 confirms dry-run, backup, doctor, schema-ledger, and rollback scaffolding remain source-static and do not prove repair execution authority or migration safety. | AMB-1667, AMB-1718, AMB-1720 |
-| Previews, debug, fixtures | `Native/Ambitions/PreviewSupport/PreviewAppContainer.swift`, `Native/Ambitions/PreviewSupport/PreviewFixtures.swift`, debug branches in `Native/Ambitions/App/AppContainerFactory.swift` | unknown | Preview/debug paths can seed stores or use temporary file storage. They are not production authority proof and need quarantine review. | AMB-1710 |
+| Previews, debug, fixtures | `Native/Ambitions/PreviewSupport`, debug branches in `Native/Ambitions/App/AppContainerFactory.swift`, `Native/Ambitions/Core/Persistence/DemoSeedPipeline.swift`, fixture and clock tests | unknown | AMB-1710 separates preview-only and test-only fixtures from production authority and flags the temporary preview external-creation store plus demo seed writers as Yellow debt. They are not production authority proof. | AMB-1667, AMB-1668 |
 
 ## AMB-1707 App UI And Capture Mutation Inventory
 
@@ -312,6 +337,28 @@ LocalRuntimeOS completion.
 | Restore rollback wrapper | `Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/RestoreRollback.swift`, `Native/Ambitions/Core/Persistence/PortableSnapshotService*.swift` | unsafe write | The wrapper lives under LocalRuntimeOS, but successful import and rollback import both delegate to `PortableSnapshotServicing.importSnapshot`, which currently applies through legacy Core/Persistence repositories. Until that delegate changes or is proven safe, the effective mutation remains unsafe debt. | AMB-1667, AMB-1717, AMB-1720 |
 | CloudKit continuity apply path | `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/*.swift` | adapter into command | AMB-1709 found no remote private-graph apply writer. Sync envelopes default local-store authoritative, private payload classes are ineligible, backend authority attempts are denied, and live CloudKit code only checks account status or ensures a zone. This does not approve or prove private graph sync. | AMB-1668, AMB-1680 |
 
+## AMB-1710 Preview Debug And Fixture Mutation Inventory
+
+Evidence baseline: `e6139849cdb956782dae4f0f4974705f463759c9` on `main`.
+
+This inventory is static source evidence only. It does not prove runtime
+correctness, preview rendering behavior, simulator behavior, release-build
+exclusion, receipt durability, replay correctness, device behavior,
+privacy/legal approval, build health, TestFlight readiness, App Store
+readiness, or total LocalRuntimeOS completion.
+
+| Candidate | Evidence paths | Classification | Static finding | Follow-up |
+| --- | --- | --- | --- | --- |
+| Preview app container bootstrap | `Native/Ambitions/PreviewSupport/PreviewAppContainer.swift`, `project.yml` | unknown | Source is fenced with `#if DEBUG`, uses `PreviewClock`, stubs, and `AmbitionsPersistenceStore(inMemory: true)`, but also creates a preview `SharedExternalCreationStore` with `FileManager.default.temporaryDirectory`. The direct-write audit keeps this row `unknown` as a quarantine sentinel until release-build and adapter behavior proof exists. | AMB-1668 |
+| Preview external-creation import handoff | `Native/Ambitions/PreviewSupport/PreviewAppContainer.swift`, `Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift` | adapter into command | Preview wiring hands pending external creations to `DefaultExternalCreationImportService` and `AmbitionsCommandExecutor`; tests exercise temp-store import through in-memory command journals and preview capture repositories. This is support evidence only, not production proof. | AMB-1668 |
+| Preview fixture catalogs and preview-only views | `Native/Ambitions/PreviewSupport/PreviewFixtures.swift`, `Native/Ambitions/PreviewSupport/PreviewTimeRitualScenarios.swift`, `Native/Ambitions/PreviewSupport/ToolbarPreviewCatalog.swift`, `Native/Ambitions/PreviewSupport/*Previews.swift` | projection-only read | Preview fixtures and preview views provide static presentation data and call the preview container. They do not authorize canonical private graph mutation in the inspected source. | None for AMB-1710; keep proof Yellow. |
+| Preview stub services with mutating-looking methods | `Native/Ambitions/PreviewSupport/StubGoalsService.swift`, `Native/Ambitions/PreviewSupport/StubTodayService.swift`, `Native/Ambitions/Core/Runtime/AppServices.swift` | projection-only read | `createGoal`, `performAction`, `recordActionClosure`, `saveYouPreferences`, and Capture methods return fixture or synthesized objects without durable persistence in the inspected stubs. They are not live mutation proof. | None for AMB-1710; keep proof Yellow. |
+| Debug/demo repository seeding | `Native/Ambitions/App/AppContainerFactory.swift`, `Native/Ambitions/Core/Persistence/DemoSeedPipeline.swift`, `Native/AmbitionsTests/App/AppContainerFactoryTests.swift` | unsafe write | Live bootstrap uses persistent mode and `.never` seed policy; tests assert live fresh repositories are not seeded. Debug/demo paths can still write goals, drafts, evidence, feedback, captures, app state, and optional Time seed data through repositories outside LocalRuntimeOS. | AMB-1667, AMB-1717, AMB-1720 |
+| Preview and test clocks | `Native/Ambitions/Core/Time/AmbitionsClock.swift`, `Native/Ambitions/Core/Time/PreviewClock.swift`, `Native/AmbitionsTests/Time/TimeClockTests.swift` | projection-only read | `PreviewClock` and `TestClock` are `#if DEBUG`; clock factory returns `SystemClock` for live when no debug override is supplied, and tests statically check preview-clock leakage in release-scoped Time/Today sources. This is not release-build proof. | None for AMB-1710; keep proof Yellow. |
+| In-memory test repositories and fixture generators | `Native/Ambitions/Core/Persistence/PreviewCaptureRepository.swift`, `Native/Ambitions/Core/Runtime/LargeStoreFixtureGenerator.swift`, `Native/Ambitions/Core/Domain/GoalEngine/GoalEngineFixtures.swift`, selected `Native/AmbitionsTests` files | projection-only read | Fixture generators produce deterministic local-only values; `PreviewCaptureRepository` stores data in actor memory for tests and support paths. These helpers can support tests but cannot satisfy production mutation proof. | AMB-1667 if any helper becomes production importable authority. |
+| Source Atlas runtime coverage fixtures | `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasCoverageRuntimeFixtureModels.swift`, `Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasCoverageRuntimeFixtureModelsTests.swift`, `source-atlas/fixtures` | projection-only read | Fixture models explicitly carry `cannotSatisfyProofAlone`, `canDriveRuntimeProofAlone == false`, privacy boundary, local-only requirement, and unsafe-boundary validation. They are coverage inputs, not runtime proof. | None for AMB-1710; keep proof Yellow. |
+| Test-only temporary file writers | `Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift`, `Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasCoverageRuntimeFixtureModelsTests.swift`, other test-only temp-directory fixtures | projection-only read | Test targets use temporary directories and fixture files to exercise stores, import paths, and validators. They are outside production Swift roots for the direct-write audit and cannot be cited as Green release proof. | None for AMB-1710; keep proof Yellow. |
+
 ## Direct-Write Marker Summary
 
 `python3 scripts/ambitions-runtime-direct-write-audit.py --json` currently
@@ -341,6 +388,11 @@ AMB-1709 statically classifies the persistence/import/repair rows below. The
 `AMB-1709` follow-up labels remain in this table because the audit guard uses
 them as the classification source for this leaf; the remaining repair work is
 carried by AMB-1667 and children AMB-1717 through AMB-1720.
+
+AMB-1710 statically classifies the preview/debug/test helper families above,
+but keeps the `PreviewAppContainer.swift` direct-write row `unknown` in this
+table as an audit sentinel. The temporary preview external-creation store must
+not be treated as production authority proof or Green adapter proof.
 
 | Path | Markers | Classification | Follow-up | Evidence note |
 | --- | --- | --- | --- | --- |
@@ -373,10 +425,10 @@ carried by AMB-1667 and children AMB-1717 through AMB-1720.
 
 | Runtime law step | Current evidence | Coverage status | Residual gap |
 | --- | --- | --- | --- |
-| Command | `AmbitionsCommandExecutor`, `RuntimeCommandMutationCommitter`, `DefaultExternalCreationImportService`, `AppIntentBridge`, `ExternalActionCommandService`, `TodayReceiptCommandService`, `YouPreferencesCommandService` | Implemented Yellow | AMB-1707 statically inventories App UI/Capture handlers, AMB-1708 statically inventories system-surface handlers, and AMB-1709 statically inventories persistence/import/repair apply paths. Unsafe UI/Capture paths and unknown widget payload behavior still need command-path conversion and behavior proof in AMB-1666/AMB-1667/AMB-1668. |
+| Command | `AmbitionsCommandExecutor`, `RuntimeCommandMutationCommitter`, `DefaultExternalCreationImportService`, `AppIntentBridge`, `ExternalActionCommandService`, `TodayReceiptCommandService`, `YouPreferencesCommandService` | Implemented Yellow | AMB-1707 statically inventories App UI/Capture handlers, AMB-1708 statically inventories system-surface handlers, AMB-1709 statically inventories persistence/import/repair apply paths, and AMB-1710 statically separates preview/debug/test helpers. Unsafe UI/Capture paths, debug/demo seed writers, and unknown widget payload behavior still need command-path conversion and behavior proof in AMB-1666/AMB-1667/AMB-1668. |
 | Event | `RuntimeTransactionCommitPolicy`, `RuntimeTransactionCoordinator`, `RuntimeEventStore`, `EventStoreSQLite` | Implemented Yellow | AMB-1709 confirms LocalRuntimeOS event stores exist, but legacy Core/Persistence and Core/Domain writes can still bypass the canonical event path until AMB-1667 and children AMB-1717 through AMB-1720. |
 | Projection | `ProjectionStoreSQLite`, `ExternalSurfaceSnapshotWriter`, `ExternalWidgetProjection`, `Projection/SurfaceLenses` | Implemented Yellow | AMB-1708 statically inventories projection-only external surfaces, and AMB-1709 classifies LocalRuntimeOS projection stores. Adapter-level privacy, staleness, widget, Live Activity, notification, and projection-consumption proof remain AMB-1668/AMB-1718. |
-| Receipt | `CommandReceiptFactory`, `CommandJournalAppendReceipt`, `TrustSystem`, `TodayReceiptCommandService`, side-effect outbox records | Implemented Yellow | Not every UI/system mutation candidate has current receipt proof. Unsafe writes, unknown widget payload behavior, and external side effects are not receipt-proven. |
+| Receipt | `CommandReceiptFactory`, `CommandJournalAppendReceipt`, `TrustSystem`, `TodayReceiptCommandService`, side-effect outbox records | Implemented Yellow | Not every UI/system/debug mutation candidate has current receipt proof. Unsafe writes, demo seed writes, unknown widget payload behavior, and external side effects are not receipt-proven. |
 | Replay | `RuntimeEventCommandReplayAdapter`, `CommandReplayAdapter`, `CommandJournal.linkRuntimeCommit`, `RuntimeTransactionCommitPolicy` idempotency metadata | Implemented Yellow | Replay proof is command-path scoped, not a total app-state replay guarantee. Legacy direct writes remain outside replay proof. |
 
 ## Direct-Write CI Audit Design
@@ -408,19 +460,19 @@ This audit is a governance guard, not proof that unsafe writes are fixed.
 | App UI and Capture action handlers are statically inventoried, but several paths still write through legacy repository/projection services outside LocalRuntimeOS. | unsafe write / Implemented Yellow by path | AMB-1666, AMB-1667 |
 | System-surface entry points are statically inventoried by AMB-1708, and AMB-1709 found no remote private-graph CloudKit apply writer, but terminated-app, extension, notification, widget payload, Live Activity, EventKit, CloudKit, and receipt behavior proof is still missing. | Implemented Yellow / unknown widget payload path | AMB-1668, AMB-1680 |
 | Legacy SwiftData/Core/Persistence, portable snapshot import/restore, restore rollback delegation, and Core/Domain local schedule writes remain outside canonical runtime authority. | unsafe write | AMB-1667, AMB-1717, AMB-1718, AMB-1719, AMB-1720 |
-| Preview/debug fixture mutation-like behavior is not quarantined or proven production-isolated by this slice. | unknown | AMB-1710 |
+| Preview/debug/test helpers are statically separated by AMB-1710, but the preview temporary external-creation store remains an `unknown` direct-write audit sentinel and debug/demo seed writers remain legacy repository writes. | Implemented Yellow / unknown sentinel / unsafe write | AMB-1667, AMB-1668, AMB-1717, AMB-1720 |
 | Runtime authority map and proof matrix are static-source only. | Implemented Yellow | AMB-1711 |
 | Direct-write audit is local/static and not yet independently proven in hosted CI. | Implemented Yellow | AMB-1712 |
 
 ## Closeout Boundary
 
 - Final Architecture Tree inspected: yes, through `docs/truth/PRODUCT_DESIGN_TRUTH.md`.
-- Canonical owners touched by AMB-1709: `docs/audits` only. Earlier AMB-1665 slices also touched scripts.
+- Canonical owners touched by AMB-1710: `docs/audits` only. Earlier AMB-1665 slices also touched scripts.
 - Swift owners touched: none.
 - Files moved or created in Swift source: none.
 - Old/noncanonical source paths removed: none.
 - Compatibility shims left behind: none added by this slice.
-- Architecture debt remains: yes, in legacy persistence/domain direct-write paths, portable snapshot import/restore delegation, restore rollback delegation, system adapter behavior proof, App UI/Capture command-path conversion, unknown widget payload behavior, CloudKit continuity proof limits, and preview/debug fixtures.
-- Next repair train: AMB-1710, then AMB-1666/AMB-1667/AMB-1668 before source migration parents.
+- Architecture debt remains: yes, in legacy persistence/domain direct-write paths, portable snapshot import/restore delegation, restore rollback delegation, system adapter behavior proof, App UI/Capture command-path conversion, unknown widget payload behavior, CloudKit continuity proof limits, the preview temporary external-creation audit sentinel, and debug/demo seed writers.
+- Next repair train: AMB-1666/AMB-1667/AMB-1668 before source migration parents.
 - No equivalent folder/path interpretation was used.
 - No Green runtime authority claim is made.
