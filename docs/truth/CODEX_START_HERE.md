@@ -28,21 +28,22 @@ For non-trivial Ambitions work, read in this order:
 
 1. `docs/truth/README.md`
 2. `docs/truth/CODEX_START_HERE.md`
-3. `docs/truth/PRODUCT_DESIGN_TRUTH.md`
-4. `docs/truth/PRODUCT_ORIGIN_TRUTH.md` if present
-5. `docs/truth/PRODUCT_MOAT_TRUTH.md`
-6. `docs/truth/PRODUCT_EXPERIENCE_CANON.md`
-7. `docs/truth/IMPLEMENTATION_TRUTH.md`
-8. `docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md`
-9. `docs/truth/RELEASE_TRUTH.md`
-10. `docs/truth/CODEX_PROCESS_TRUTH.md`
-11. `docs/truth/HISTORICAL_POLICY.md`
-12. `AGENTS.md`
-13. `README.md`
-14. `docs/README.md`
-15. `project.yml`
-16. `Package.swift`
-17. Relevant source, tests, retained scripts, build docs, current logs, and current issue/proof artifacts
+3. `docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md`
+4. `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+5. `docs/truth/PRODUCT_ORIGIN_TRUTH.md` if present
+6. `docs/truth/PRODUCT_MOAT_TRUTH.md`
+7. `docs/truth/PRODUCT_EXPERIENCE_CANON.md`
+8. `docs/truth/IMPLEMENTATION_TRUTH.md`
+9. `docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md`
+10. `docs/truth/RELEASE_TRUTH.md`
+11. `docs/truth/CODEX_PROCESS_TRUTH.md`
+12. `docs/truth/HISTORICAL_POLICY.md`
+13. `AGENTS.md`
+14. `README.md`
+15. `docs/README.md`
+16. `project.yml`
+17. `Package.swift`
+18. Relevant source, tests, retained scripts, build docs, current logs, and current issue/proof artifacts
 
 Use the task matrix below to choose a smaller safe read path only when the task is clearly bounded and no instruction requires the full path.
 
@@ -50,17 +51,17 @@ Use the task matrix below to choose a smaller safe read path only when the task 
 
 | Task type | Required files |
 |---|---|
-| Product identity / IA / design law | `docs/truth/README.md`, `docs/truth/PRODUCT_ORIGIN_TRUTH.md` if present, `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `docs/truth/PRODUCT_MOAT_TRUTH.md`, `docs/truth/PRODUCT_EXPERIENCE_CANON.md` |
-| Product-experience behavior | `docs/truth/README.md`, `docs/truth/PRODUCT_EXPERIENCE_CANON.md`, `docs/truth/PRODUCT_EXPERIENCE_ACTION_MAP.md`, `docs/qa/product-experience-scenario-gates.md` |
-| Swift source/runtime | `docs/truth/README.md`, `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `docs/truth/PRODUCT_EXPERIENCE_CANON.md`, `docs/truth/IMPLEMENTATION_TRUTH.md`, `docs/truth/CODEX_PROCESS_TRUTH.md`, relevant source/tests |
-| LocalRuntimeOS / backend runtime | `docs/truth/README.md`, `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `docs/truth/IMPLEMENTATION_TRUTH.md`, `docs/truth/CODEX_PROCESS_TRUTH.md`, `.agents/skills/ambitions-runtime-contract-engineering/SKILL.md`, Linear `AMB-1544` and the active leaf, relevant source/tests |
-| SwiftUI/frontend/visual | `docs/truth/README.md`, `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `docs/truth/PRODUCT_EXPERIENCE_CANON.md`, `docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md`, `docs/truth/RELEASE_TRUTH.md`, `docs/truth/FIGMA_PRODUCTION_GATE_ADDENDUM.md` when screenshots/Figma/VSP/visual proof are in scope, `docs/skills/ui-north-star-production-gate/SKILL.md`, relevant source/tests/screenshots |
-| Figma/VSP/marketing render | `docs/truth/README.md`, `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md`, `docs/truth/RELEASE_TRUTH.md`, `docs/truth/FIGMA_PRODUCTION_GATE_ADDENDUM.md`, `docs/skills/figma-production-gate/SKILL.md`; add `docs/skills/ui-north-star-production-gate/SKILL.md` when SwiftUI plausibility, screenshots, accessibility, shell, or design-system implementation is in scope |
-| Build/test/release | `docs/truth/README.md`, `docs/truth/IMPLEMENTATION_TRUTH.md`, `docs/truth/RELEASE_TRUTH.md`, `docs/truth/CODEX_PROCESS_TRUTH.md`, build docs/scripts |
-| QA/risk/gates | `docs/truth/README.md`, `docs/truth/PRODUCT_EXPERIENCE_CANON.md`, `docs/truth/PRODUCT_EXPERIENCE_ACTION_MAP.md`, `docs/qa/product-experience-scenario-gates.md`, `docs/qa/product-experience-scenario-gates.yaml`, `docs/truth/RELEASE_TRUTH.md` |
-| Docs cleanup/retention | `docs/truth/README.md`, `docs/truth/HISTORICAL_POLICY.md`, `docs/truth/CODEX_PROCESS_TRUTH.md` |
-| Account/R2/Source Atlas | `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `docs/truth/PRODUCT_MOAT_TRUTH.md`, `docs/truth/PRODUCT_EXPERIENCE_CANON.md`, `docs/truth/IMPLEMENTATION_TRUTH.md`, `docs/truth/RELEASE_TRUTH.md` |
-| Origin/problem framing | `docs/truth/PRODUCT_ORIGIN_TRUTH.md` if present, `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `docs/truth/PRODUCT_EXPERIENCE_CANON.md` |
+| Product identity / IA / design law | `docs/truth/README.md`, `docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md`, `docs/truth/PRODUCT_ORIGIN_TRUTH.md` if present, `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `docs/truth/PRODUCT_MOAT_TRUTH.md`, `docs/truth/PRODUCT_EXPERIENCE_CANON.md` |
+| Product-experience behavior | `docs/truth/README.md`, `docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md`, `docs/truth/PRODUCT_EXPERIENCE_CANON.md`, `docs/truth/PRODUCT_EXPERIENCE_ACTION_MAP.md`, `docs/qa/product-experience-scenario-gates.md` |
+| Swift source/runtime | `docs/truth/README.md`, `docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md`, `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `docs/truth/PRODUCT_EXPERIENCE_CANON.md`, `docs/truth/IMPLEMENTATION_TRUTH.md`, `docs/truth/CODEX_PROCESS_TRUTH.md`, relevant source/tests |
+| LocalRuntimeOS / backend runtime | `docs/truth/README.md`, `docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md`, `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `docs/truth/IMPLEMENTATION_TRUTH.md`, `docs/truth/CODEX_PROCESS_TRUTH.md`, `.agents/skills/ambitions-runtime-contract-engineering/SKILL.md`, Linear `AMB-1544` and the active leaf, relevant source/tests |
+| SwiftUI/frontend/visual | `docs/truth/README.md`, `docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md`, `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `docs/truth/PRODUCT_EXPERIENCE_CANON.md`, `docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md`, `docs/truth/RELEASE_TRUTH.md`, `docs/truth/FIGMA_PRODUCTION_GATE_ADDENDUM.md` when screenshots/Figma/VSP/visual proof are in scope, `docs/skills/ui-north-star-production-gate/SKILL.md`, relevant source/tests/screenshots |
+| Figma/VSP/marketing render | `docs/truth/README.md`, `docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md`, `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md`, `docs/truth/RELEASE_TRUTH.md`, `docs/truth/FIGMA_PRODUCTION_GATE_ADDENDUM.md`, `docs/skills/figma-production-gate/SKILL.md`; add `docs/skills/ui-north-star-production-gate/SKILL.md` when SwiftUI plausibility, screenshots, accessibility, shell, or design-system implementation is in scope |
+| Build/test/release | `docs/truth/README.md`, `docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md` when product or release claims are in scope, `docs/truth/IMPLEMENTATION_TRUTH.md`, `docs/truth/RELEASE_TRUTH.md`, `docs/truth/CODEX_PROCESS_TRUTH.md`, build docs/scripts |
+| QA/risk/gates | `docs/truth/README.md`, `docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md`, `docs/truth/PRODUCT_EXPERIENCE_CANON.md`, `docs/truth/PRODUCT_EXPERIENCE_ACTION_MAP.md`, `docs/qa/product-experience-scenario-gates.md`, `docs/qa/product-experience-scenario-gates.yaml`, `docs/truth/RELEASE_TRUTH.md` |
+| Docs cleanup/retention | `docs/truth/README.md`, `docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md` when product mission/canon is touched, `docs/truth/HISTORICAL_POLICY.md`, `docs/truth/CODEX_PROCESS_TRUTH.md` |
+| Account/R2/Source Atlas | `docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md`, `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `docs/truth/PRODUCT_MOAT_TRUTH.md`, `docs/truth/PRODUCT_EXPERIENCE_CANON.md`, `docs/truth/IMPLEMENTATION_TRUTH.md`, `docs/truth/RELEASE_TRUTH.md` |
+| Origin/problem framing | `docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md`, `docs/truth/PRODUCT_ORIGIN_TRUTH.md` if present, `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `docs/truth/PRODUCT_EXPERIENCE_CANON.md` |
 
 ## Required proof by task type
 
@@ -73,6 +74,14 @@ Use the task matrix below to choose a smaller safe read path only when the task 
 | SwiftUI/frontend/visual | Source/tests, screenshots or explicit not-run reason, accessibility proof notes, Dynamic Type/Reduce Motion/contrast/safe-area notes, no Visual Green self-certification. |
 | Build/test/release | Exact commands, exit codes, branch, commit SHA, environment, logs/artifacts, unsupported claims listed as not supported. |
 | Account/R2/Source Atlas | Offline no-account boundary, no private life graph backend, no R2 private user context, request/privacy proof before any implementation or release claim. |
+
+Every nontrivial product, feature, Linear, Codex, architecture, QA, or release-facing work item must state how it preserves or improves:
+
+```text
+Intent -> Context -> Path -> Time Fit -> Reflow -> Action -> Proof -> Learning
+```
+
+Infrastructure-only work must name which part of the loop it protects or enables, except for narrow repo health, security, build, or cleanup work where the relationship is explicitly "does not affect product mission; preserves repo health."
 
 ## Allowed closeout statuses
 
@@ -111,6 +120,7 @@ Stop and report Red if the train:
 - adds new meaningful runtime mutation authority outside the LocalRuntimeOS command/event/projection/receipt/replay spine
 - creates Source Atlas marketplace browsing as product center
 - adds productivity score, life score, XP, streak pressure, social feed, public profile, or AI-chatbot center
+- cannot explain its relationship to Private Life Orchestration unless it is narrow repo health, security, build, or cleanup work
 - upgrades scenario gate status without evidence
 - treats docs, plans, source names, screenshot paths, or string scans as implementation/product/release proof
 - self-certifies Visual Green or Release Green
@@ -122,6 +132,7 @@ Stop and report Red if the train:
 - Task type and required truth files inspected
 - Truth hierarchy preserved
 - Product law preserved: Today / Goals / Time / You, Capture global composer, Motion behavior, Trust inspection
+- Private Life Orchestration preserved: Intent -> Context -> Path -> Time Fit -> Reflow -> Action -> Proof -> Learning
 - Local-first/account/R2/AI boundaries preserved
 - Proof produced and validation run
 - Validation not run with reason

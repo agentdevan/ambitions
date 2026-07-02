@@ -1,3 +1,0 @@
-# Test
-
-Temporary write test.

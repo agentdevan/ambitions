@@ -15,6 +15,8 @@ If this file conflicts with `docs/truth/*`, the truth files win.
 
 Ambitions is a premium native iPhone-first, local-first Personal Life OS. It organizes life, shapes time, grounds goals in daily reality, adapts when reality changes, and helps the user make meaningful progress through calm, personalized, inspectable, non-shaming support.
 
+The supreme product mission truth is `docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md`: Ambitions is a private Personal Life OS for contextual life orchestration. Its primary function is to convert messy life intent into contextual goal paths, scheduled next actions, adaptive schedule reflow, recovery moves, proof-backed progress, and user learning, locally and inspectably.
+
 Short product thesis:
 
 ```text
@@ -124,24 +126,25 @@ Mandatory read order:
 
 1. `docs/truth/README.md`
 2. `docs/truth/CODEX_START_HERE.md` (routing/digest only; substantive truth files still win)
-3. `docs/truth/PRODUCT_DESIGN_TRUTH.md`
-4. `docs/truth/PRODUCT_ORIGIN_TRUTH.md`
-5. `docs/truth/PRODUCT_MOAT_TRUTH.md`
-6. `docs/truth/PRODUCT_EXPERIENCE_CANON.md`
-7. `docs/truth/IMPLEMENTATION_TRUTH.md`
-8. `docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md`
-9. `docs/truth/RELEASE_TRUTH.md`
-10. `docs/truth/CODEX_PROCESS_TRUTH.md`
-11. `docs/truth/HISTORICAL_POLICY.md` (repo retention and stale-file deletion)
-12. `AGENTS.md`
-13. `README.md`
-14. `docs/README.md`
-15. `project.yml`
-16. `Package.swift`
-17. relevant source, tests, retained scripts, build docs, and current local logs
-18. `.agents/skills/README.md` skill registry
-19. relevant retained `.agents/skills/*/SKILL.md` files only after truth files and registry routing
-20. `docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md`
+3. `docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md`
+4. `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+5. `docs/truth/PRODUCT_ORIGIN_TRUTH.md`
+6. `docs/truth/PRODUCT_MOAT_TRUTH.md`
+7. `docs/truth/PRODUCT_EXPERIENCE_CANON.md`
+8. `docs/truth/IMPLEMENTATION_TRUTH.md`
+9. `docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md`
+10. `docs/truth/RELEASE_TRUTH.md`
+11. `docs/truth/CODEX_PROCESS_TRUTH.md`
+12. `docs/truth/HISTORICAL_POLICY.md` (repo retention and stale-file deletion)
+13. `AGENTS.md`
+14. `README.md`
+15. `docs/README.md`
+16. `project.yml`
+17. `Package.swift`
+18. relevant source, tests, retained scripts, build docs, and current local logs
+19. `.agents/skills/README.md` skill registry
+20. relevant retained `.agents/skills/*/SKILL.md` files only after truth files and registry routing
+21. `docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md`
 
 
 Historical material is not retained in-repo unless it is current, canon-aligned, and materially useful for App Store readiness. It must not override active truth.

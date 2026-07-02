@@ -53,6 +53,13 @@ Behavior layer: Motion
 Trust layer: Proof / Source / Privacy / History / Receipts
 ```
 
+Codex must also preserve Ambitions' supreme product mission lens:
+
+```text
+Ambitions is a private Personal Life OS for contextual life orchestration.
+Intent -> Context -> Path -> Time Fit -> Reflow -> Action -> Proof -> Learning
+```
+
 Codex must treat:
 
 - Capture as global composer/overlay, not root destination.
@@ -74,23 +81,25 @@ Codex must treat:
 Active truth hierarchy:
 
 1. `docs/truth/CODEX_START_HERE.md` — routing/digest aid only, subordinate to substantive truth files.
-2. `docs/truth/PRODUCT_DESIGN_TRUTH.md` — product/design authority.
-3. `docs/truth/PRODUCT_ORIGIN_TRUTH.md` — origin/problem framing authority when present.
-4. `docs/truth/PRODUCT_MOAT_TRUTH.md` — moat and anti-commodity authority.
-5. `docs/truth/PRODUCT_EXPERIENCE_CANON.md` — product-experience behavior, feature behavior, scenario gates, and actionability authority.
-6. `docs/truth/IMPLEMENTATION_TRUTH.md` — source implementation authority.
-7. `docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md` — rendered-product acceptance and split-status authority.
-8. `docs/truth/RELEASE_TRUTH.md` — validation/release/proof authority.
-9. `docs/truth/CODEX_PROCESS_TRUTH.md` — Codex operating authority.
-10. `docs/truth/HISTORICAL_POLICY.md` — repo retention and stale-file deletion authority.
-11. `AGENTS.md` — front-door agent contract.
-12. Current source, tests, scripts, logs, proof artifacts, `project.yml`, and `Package.swift`.
+2. `docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md` — supreme product mission, app purpose, primary function, core loop, and anti-drift lens.
+3. `docs/truth/PRODUCT_DESIGN_TRUTH.md` — product/design authority.
+4. `docs/truth/PRODUCT_ORIGIN_TRUTH.md` — origin/problem framing authority when present.
+5. `docs/truth/PRODUCT_MOAT_TRUTH.md` — moat and anti-commodity authority.
+6. `docs/truth/PRODUCT_EXPERIENCE_CANON.md` — product-experience behavior, feature behavior, scenario gates, and actionability authority.
+7. `docs/truth/IMPLEMENTATION_TRUTH.md` — source implementation authority.
+8. `docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md` — rendered-product acceptance and split-status authority.
+9. `docs/truth/RELEASE_TRUTH.md` — validation/release/proof authority.
+10. `docs/truth/CODEX_PROCESS_TRUTH.md` — Codex operating authority.
+11. `docs/truth/HISTORICAL_POLICY.md` — repo retention and stale-file deletion authority.
+12. `AGENTS.md` — front-door agent contract.
+13. Current source, tests, scripts, logs, proof artifacts, `project.yml`, and `Package.swift`.
 
 Conflict rules:
 
-- Product/design conflict: `PRODUCT_DESIGN_TRUTH.md` wins.
-- Origin/problem framing conflict: `PRODUCT_ORIGIN_TRUTH.md` wins only for origin doctrine and remains subordinate to product/design, moat, and product-experience law.
-- Product-experience behavior conflict: `PRODUCT_EXPERIENCE_CANON.md` wins unless root IA/privacy/product identity or moat guardrails are at issue.
+- Product mission, app purpose, primary function, and end-goal conflict: `PRIVATE_LIFE_ORCHESTRATION_TRUTH.md` wins.
+- Product/design, root IA, surfaces, privacy/product law, visual/product canon, and Final Architecture Tree conflict: `PRODUCT_DESIGN_TRUTH.md` wins, read through `PRIVATE_LIFE_ORCHESTRATION_TRUTH.md` for mission and primary function.
+- Origin/problem framing conflict: `PRODUCT_ORIGIN_TRUTH.md` wins only for origin doctrine and remains subordinate to supreme product mission, product/design, moat, and product-experience law.
+- Product-experience behavior conflict: `PRODUCT_EXPERIENCE_CANON.md` wins unless supreme product mission, root IA/privacy/product identity, or moat guardrails are at issue.
 - Implementation/source conflict: `IMPLEMENTATION_TRUTH.md` plus live source wins.
 - Rendered acceptance conflict: `IMPLEMENTATION_ACCEPTANCE_TRUTH.md` wins for split status, visual proof limits, and product-object acceptance unless release proof is stricter.
 - Release/readiness conflict: `RELEASE_TRUTH.md` plus current proof wins.
@@ -138,13 +147,13 @@ Codex must not optimize for appearing done, broad diff volume, speculative imple
 
 ## 5. Planning and Patch Discipline
 
-Before editing, Codex must read truth files, inspect live source, identify task type, define narrow scope, list likely touched files, list validation commands, identify rollback, and identify hard-red risks. For work touching Life Capital, goal pathing, Future Steps, continuous adjustment, onboarding, reviews, Source Atlas composition, proof/progress transfer, automation, notifications, or scenario gates, Codex must also map the intended behavior to `PRODUCT_EXPERIENCE_CANON.md` and report which scenario gates are Existing, Partial, Missing, or Unknown.
+Before editing, Codex must read truth files, inspect live source, identify task type, define narrow scope, list likely touched files, list validation commands, identify rollback, and identify hard-red risks. Every nontrivial issue, plan, and closeout must state how it preserves or improves `Intent -> Context -> Path -> Time Fit -> Reflow -> Action -> Proof -> Learning`, or explicitly state that the work is narrow repo health, security, build, or cleanup work that does not affect product mission. Closeouts should include the canonical Private Life Orchestration closeout phrase from `PRIVATE_LIFE_ORCHESTRATION_TRUTH.md` or an equivalent scoped statement. For work touching Life Capital, goal pathing, Future Steps, continuous adjustment, onboarding, reviews, Source Atlas composition, proof/progress transfer, automation, notifications, or scenario gates, Codex must also map the intended behavior to `PRODUCT_EXPERIENCE_CANON.md` and report which scenario gates are Existing, Partial, Missing, or Unknown.
 
 For LocalRuntimeOS, backend/runtime architecture, mutation, persistence substrate, projection, replay, trust/receipt/proof/history, side-effect, capture intake, privacy boundary, Source Atlas runtime boundary, search/recall, sync continuity, migration, repair, or diagnostics work, Codex must start from Linear `AMB-1544` and the active leaf. As of 2026-06-30, `AMB-1545` is canon/process tracking only, `AMB-1546` covers the first command source move, `AMB-1567` covers the TransactionKernel foundation with validated transaction preparation, event/projection-backed commit receipts, idempotency replay, rollback plans, and conflict detection, `AMB-1547` covers the EventJournal foundation, `AMB-1548` covers the ProjectionEngine foundation, `AMB-1549` covers the Storage foundation and SwiftData object-store ownership move, `AMB-1553` covers the RuntimeBoundary foundation and moved local-only/privacy/source-atlas boundary ownership, `AMB-1554` covers the ObjectState foundation and AppState store adapter proof, `AMB-1555` covers the PrivateLifeRuntimeKernel ownership move and typed-signal foundation, `AMB-1556` covers the PlanningEngine ownership move with moved planning, StepCandidateField, and StepCandidateField generator/Source Atlas bridge files plus focused planning and simulation-gauntlet tests, `AMB-1557` covers the TimeEngine ownership move with moved protected/priority placement policies, local temporal graph/store/recurrence/conflict/placement/recovery engines, Time placement coordinator consumption, and focused protected placement, conflict, recurrence, and persistence tests, `AMB-1558` covers the CaptureRouteGraph foundation with moved route graph ownership, durable intake before classification, draft/direct lookup indexes, attachment checksum/quarantine, correction ledger, promotion transactions, and focused capture route/integration tests, `AMB-1559` covers the TrustSystem foundation with moved event ledger, action receipt, proof ledger, source record, tombstone, replay, history, audit, undo, and trust repository ownership, `AMB-1560` covers the SearchRecall foundation with moved local search index ownership and focused Find / Act / Inspect, provenance, privacy, action validation, local semantic ranking, and projection-fed rebuild tests, `AMB-1561` covers the first SideEffectSystem foundation with moved side-effect ledger ownership and focused outbox tests, `AMB-1562` covers the first SyncContinuity foundation with moved SyncCapability/CloudKit continuity/LivingPlan continuity ownership and focused continuity-boundary tests, `AMB-1563` covers the SourceAtlas foundation with moved Source Atlas model/cache/runtime ownership and focused public-pack compiler/firewall/manifest/freshness/cache/projection tests, `AMB-1564` covers the first PrivacySecurity foundation with moved storage privacy boundary ownership and focused redaction/egress/export/local-auth/vault tests, `AMB-1565` covers the first MigrationRepair foundation with focused schema-ledger/planner/dry-run/rollback/quarantine tests, and `AMB-1566` covers the first Diagnostics foundation with redacted local-backend inspectors and performance-budget diagnostics. Later bounded leaves must continue through the full `Core/LocalRuntimeOS/` subtree coverage ledger rather than treating the initial leaves as implementation completion.
 
 `AMB-1568` covers the CommandSpine journal/receipt/replay extraction with source-present command envelope, compiler, authorizer, idempotency key, durable journal, reducer, receipt factory, replay adapter, app-container journal wiring, and focused tests for append-before-mutation, replay, denial, reducer output, typed receipts, Today command routing, and journal-failure blocking. It remains bounded proof and must not be treated as full LocalRuntimeOS completion.
 
-As of `AMB-1599`, the checked-in `docs/qa/local-runtime-proof/current-local-runtime-proof.{json,md}` artifacts record LocalRuntimeProof Gate Green for `20` semantic/fail-closed LRO-100 checklist items and `0` blockers, including live SQLite event authority, command/event reconciliation, fail-closed commit policy, transaction-coordinator ownership, projection/search read gates, sanitized external-surface reads, PrivacySecurity and Source Atlas/R2 boundaries, SyncContinuity non-authority, durable Capture intake, side-effect receipt gating, TrustSystem lineage, mutation-context boundaries, RuntimeDoctor local drift repair previews, mutation-bypass scan, feature-service classification, and Known Issues/truth/CI proof-ceiling evidence. It remains source/runtime-gate proof only: do not report device, visual, release, privacy/legal, TestFlight, App Store, production R2, production CloudKit, or product-completion claims from it.
+As of `AMB-1599`, the checked-in `docs/qa/local-runtime-proof/current-local-runtime-proof.json` and `docs/qa/local-runtime-proof/current-local-runtime-proof.md` artifacts record LocalRuntimeProof Gate Green for `20` semantic/fail-closed LRO-100 checklist items and `0` blockers, including live SQLite event authority, command/event reconciliation, fail-closed commit policy, transaction-coordinator ownership, projection/search read gates, sanitized external-surface reads, PrivacySecurity and Source Atlas/R2 boundaries, SyncContinuity non-authority, durable Capture intake, side-effect receipt gating, TrustSystem lineage, mutation-context boundaries, RuntimeDoctor local drift repair previews, mutation-bypass scan, feature-service classification, and Known Issues/truth/CI proof-ceiling evidence. It remains source/runtime-gate proof only: do not report device, visual, release, privacy/legal, TestFlight, App Store, production R2, production CloudKit, or product-completion claims from it.
 
 Codex must not broad-edit without scope, rewrite major canon unless explicitly authorized, mutate app behavior during docs/governance tasks unless scoped, create new runtime dependencies without approval, silently accept stale tests/scripts as active truth, or bulk update snapshots/proof artifacts to hide failures.
 
@@ -184,6 +193,7 @@ Stop and report Red when:
 - private life graph backend behavior appears
 - R2 receives or stores private user context
 - hosted AI/cloud LLMs become core runtime dependencies
+- work cannot explain its relationship to Private Life Orchestration unless it is narrow repo health, security, build, or cleanup work
 - source changes cannot be validated honestly
 - tests are updated to hide failures instead of validating truth
 - generated reports are treated as release proof

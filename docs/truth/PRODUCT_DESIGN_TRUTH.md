@@ -5,6 +5,7 @@
 **Applies to:** native SwiftUI, iPhone-first, local-first Ambitions architecture  
 **Owner posture:** Product/design truth, not implementation proof  
 **Last updated:** 2026-06-22
+**Mission lens:** Read this file through `docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md`, the supreme product mission canon for Ambitions as a private Personal Life OS for contextual life orchestration.
 
 This file is the compact canonical root. Detailed runtime-remediation canon for the 2026-06-22 device review is installed in the linked decision register, ADR, remediation law, and Codex dossiers.
 
@@ -18,6 +19,12 @@ This file is the compact canonical root. Detailed runtime-remediation canon for 
 ---
 
 ## 0. Canon Authority
+
+`PRODUCT_DESIGN_TRUTH.md` remains the product/design, root IA, surface, privacy/product law, visual/product canon, and Final Architecture Tree authority. It must not be interpreted in a way that weakens `PRIVATE_LIFE_ORCHESTRATION_TRUTH.md`, which owns Ambitions' highest-order mission, app purpose, primary function, and core loop:
+
+```text
+Intent -> Context -> Path -> Time Fit -> Reflow -> Action -> Proof -> Learning
+```
 
 Ambitions is a premium native iPhone-first, local-first Personal Life OS. It is not a tab app, task app, calendar clone, habit tracker, chatbot, dashboard, generic AI productivity wrapper, or web-app shell.
 
@@ -362,7 +369,7 @@ As of `AMB-1567`, source-present TransactionKernel foundation files exist under 
 
 As of `AMB-1568`, source-present CommandSpine files exist under `Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/`, including `CommandEnvelope`, `CommandCompiler`, `CommandValidator`, `CommandAuthorizer`, `CommandIdempotencyKey`, `CommandJournal`, `CommandReducer`, `CommandResult`, `CommandReceiptFactory`, and `CommandReplayAdapter`. Focused simulator tests cover canonical owner files, durable command-journal append before scoped capture mutation, idempotency replay lookup, authorization denial, reducer policy output, typed receipt metadata, Today command routing, app-container journal wiring, and no mutation after command-journal append failure. This proof is bounded runtime evidence, not a claim that every app path is command-only or that LocalRuntimeOS is complete.
 
-As of `AMB-1599`, `docs/qa/local-runtime-proof/current-local-runtime-proof.{json,md}` records LocalRuntimeProof Gate Green for `20` semantic/fail-closed LRO-100 checklist items with `0` blockers, including RuntimeDoctor local drift detection, repair-preview proof, and Known Issues/truth/CI proof-ceiling evidence. This is source/runtime-gate evidence for the checked source tree only; it does not prove Visual Green, Release Green, physical-device behavior, privacy/legal approval, TestFlight readiness, App Store readiness, production R2 deployment, production CloudKit continuity, future/unscanned code paths, or total product completion.
+As of `AMB-1599`, `docs/qa/local-runtime-proof/current-local-runtime-proof.json` and `docs/qa/local-runtime-proof/current-local-runtime-proof.md` record LocalRuntimeProof Gate Green for `20` semantic/fail-closed LRO-100 checklist items with `0` blockers, including RuntimeDoctor local drift detection, repair-preview proof, and Known Issues/truth/CI proof-ceiling evidence. This is source/runtime-gate evidence for the checked source tree only; it does not prove Visual Green, Release Green, physical-device behavior, privacy/legal approval, TestFlight readiness, App Store readiness, production R2 deployment, production CloudKit continuity, future/unscanned code paths, or total product completion.
 
 ```
 Ambitions/

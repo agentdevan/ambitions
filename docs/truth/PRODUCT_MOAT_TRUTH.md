@@ -3,7 +3,7 @@
 Status: Active moat strategy authority  
 Scope: Product moat strategy, anti-commodity alignment, and non-negotiable moat guardrails  
 Applies to: Product/design source truth, Codex patch review questions, and anti-drift checks  
-Owner posture: Subordinate to `PRODUCT_DESIGN_TRUTH.md` when conflicts exist.
+Owner posture: Subordinate to `PRIVATE_LIFE_ORCHESTRATION_TRUTH.md` for mission/app purpose/primary function and to `PRODUCT_DESIGN_TRUTH.md` for root IA/product law when conflicts exist.
 
 This file is not implementation proof, release proof, account proof, R2 proof, sync proof, accessibility proof, or readiness proof.
 
@@ -16,9 +16,11 @@ This file is not implementation proof, release proof, account proof, R2 proof, s
 
 ---
 
-## 0. Product Experience Canon Relationship
+## 0. Supreme mission and product experience relationship
 
-`PRODUCT_EXPERIENCE_CANON.md` operationalizes this moat through Life Capital, full scheduled goal paths, Future Steps, proof/progress preservation, local learning, Source Atlas + local runtime composition, continuous future adjustment, onboarding, reviews, and scenario gates. It remains subordinate to `PRODUCT_DESIGN_TRUTH.md` for root IA/privacy/product identity and to this file for moat and anti-commodity guardrails.
+`PRIVATE_LIFE_ORCHESTRATION_TRUTH.md` is the supreme mission lens: Ambitions is a private Personal Life OS for contextual life orchestration. This moat file explains the technical and strategic moat that serves that mission; it does not replace the mission, prove implementation, or override root IA.
+
+`PRODUCT_EXPERIENCE_CANON.md` operationalizes this moat through Life Capital, full scheduled goal paths, Future Steps, proof/progress preservation, local learning, Source Atlas + local runtime composition, continuous future adjustment, onboarding, reviews, and scenario gates. It remains subordinate to `PRIVATE_LIFE_ORCHESTRATION_TRUTH.md` for mission/app purpose, `PRODUCT_DESIGN_TRUTH.md` for root IA/privacy/product identity, and this file for moat and anti-commodity guardrails.
 
 `PRODUCT_ORIGIN_TRUTH.md` explains the user problem behind the moat: high-agency people with more ambition than operating structure need local, inspectable continuity between foundation planning and a compounding Private Life Runtime.
 

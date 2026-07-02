@@ -78,7 +78,7 @@ Current inventory contains only the five retained skills. No non-retained, merge
 
 Before changing skill inventory:
 
-1. Read `docs/truth/CODEX_START_HERE.md`, `docs/truth/README.md`, `docs/truth/CODEX_PROCESS_TRUTH.md`, and `docs/truth/HISTORICAL_POLICY.md`.
+1. Read `docs/truth/CODEX_START_HERE.md`, `docs/truth/README.md`, `docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md`, `docs/truth/CODEX_PROCESS_TRUTH.md`, and `docs/truth/HISTORICAL_POLICY.md`.
 2. Confirm the change preserves Today / Goals / Time / You, Capture as global composer, Motion as behavior, Trust inspection, local-first/offline core, account/R2 boundaries, and proof honesty.
 3. Prefer updating an existing retained skill over adding a new one.
 4. Keep each skill task-triggered and short.

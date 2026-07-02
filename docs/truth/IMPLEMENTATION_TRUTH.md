@@ -6,7 +6,7 @@ Applies to: Ambitions native iPhone repo
 Owner posture: Source truth, not product vision and not release proof  
 Effective rule: Live source, project files, scripts, tests, and current proof evidence win over plans, historical docs, old canon, handoffs, batch-train docs, prompts, and aspirational reports.
 
-This file does not define what Ambitions should become. That authority belongs to `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `docs/truth/PRODUCT_MOAT_TRUTH.md`, and `docs/truth/PRODUCT_EXPERIENCE_CANON.md`.
+This file does not define what Ambitions should become. That authority belongs to `docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md`, `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `docs/truth/PRODUCT_MOAT_TRUTH.md`, and `docs/truth/PRODUCT_EXPERIENCE_CANON.md`.
 
 This file does not define release readiness. That authority belongs to `docs/truth/RELEASE_TRUTH.md`.
 
@@ -18,6 +18,14 @@ This file does not define release readiness. That authority belongs to `docs/tru
 - Proof/closeout impact: implementation claims require live source/project/test/script evidence; source snapshot sections are evidence-bounded and must be refreshed when source architecture changes.
 
 ---
+
+## 0. Private Life Orchestration implementation interpretation
+
+Implementation status must be read through `PRIVATE_LIFE_ORCHESTRATION_TRUTH.md`: Ambitions' source work should preserve the core loop of `Intent -> Context -> Path -> Time Fit -> Reflow -> Action -> Proof -> Learning`.
+
+The mission truth is not implementation proof. It does not prove goal pathing, schedule reflow, semantic intelligence, user learning, task execution, calendar/time behavior, habit/ritual behavior, assistant behavior, or runtime integration exists in the current app.
+
+Future implementation claims for goal pathing, schedule reflow, semantic intelligence, user learning, or first-class task/calendar/habit/assistant behavior require current source, focused tests, scenario-gate evidence, runtime proof where relevant, and release proof when release/readiness is claimed.
 
 ## 1. Source Evidence Standard
 
@@ -78,6 +86,7 @@ README.md
 AGENTS.md
 project.yml
 Package.swift
+docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md
 docs/truth/PRODUCT_DESIGN_TRUTH.md
 docs/truth/PRODUCT_EXPERIENCE_CANON.md
 Native/Ambitions/App/AmbitionsApp.swift
@@ -185,7 +194,7 @@ Current implementation evidence is narrower:
 - Current SwiftData persistence source is now owned by `ObjectStoreSwiftData`, but the app has not yet proven every app path consumes only the new storage tier split.
 - Existing command, moved trust/receipt/event/proof scaffolding, side-effect ledger, snapshot ledger, Source Atlas, remaining runtime, and repository code may be reused or moved as scaffolding, but they do not prove the LocalRuntimeOS spine is complete.
 - `scripts/ambitions-local-runtime-proof.py` is the repo-local LocalRuntimeProof gate. It currently separates source-present owner coverage from app-wide runtime proof and must be Green, with focused runtime test evidence, before claiming the full LocalRuntimeOS mutation spine is proven.
-- As of `AMB-1599`, `docs/qa/local-runtime-proof/current-local-runtime-proof.{json,md}` records LocalRuntimeProof Gate Green for `20` semantic/fail-closed LRO-100 checklist items with `0` blockers and machine-readable checklist status. That proves the current source/runtime gate for the checked source tree only. It does not prove Visual Green, Release Green, physical-device behavior, privacy/legal approval, TestFlight readiness, App Store readiness, production R2 deployment, production CloudKit continuity, future/unscanned code paths, or total LocalRuntimeOS/product completion.
+- As of `AMB-1599`, `docs/qa/local-runtime-proof/current-local-runtime-proof.json` and `docs/qa/local-runtime-proof/current-local-runtime-proof.md` record LocalRuntimeProof Gate Green for `20` semantic/fail-closed LRO-100 checklist items with `0` blockers and machine-readable checklist status. That proves the current source/runtime gate for the checked source tree only. It does not prove Visual Green, Release Green, physical-device behavior, privacy/legal approval, TestFlight readiness, App Store readiness, production R2 deployment, production CloudKit continuity, future/unscanned code paths, or total LocalRuntimeOS/product completion.
 
 Unsupported implementation claims until future source proof exists:
 

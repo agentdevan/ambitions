@@ -4,7 +4,7 @@ Recommended path: docs/truth/PRODUCT_EXPERIENCE_CANON.md
 Status: Official v1 product-experience canon  
 Applies to: Ambitions native iPhone app, Private Life Runtime, product surfaces, feature behavior, Codex implementation, QA, release proof, and future product planning  
 Owner posture: Product experience truth, not implementation proof  
-Authority relationship: Complements PRODUCT_DESIGN_TRUTH.md and PRODUCT_MOAT_TRUTH.md. This file defines what Ambitions is meant to do for the user, how the experience compounds, and how features must behave. It may direct future implementation away from current code or UI when current implementation is insufficient.
+Authority relationship: Read through PRIVATE_LIFE_ORCHESTRATION_TRUTH.md, and complements PRODUCT_DESIGN_TRUTH.md and PRODUCT_MOAT_TRUTH.md. This file defines what Ambitions is meant to do for the user, how the experience compounds, and how features must behave. It may direct future implementation away from current code or UI when current implementation is insufficient.
 
 ⸻
 
@@ -35,6 +35,8 @@ Ambitions must become a native, local-first Personal Life OS that can:
 8. Never force.
 
 This file defines that product experience.
+
+`PRIVATE_LIFE_ORCHESTRATION_TRUTH.md` defines the supreme product mission and core loop: Intent -> Context -> Path -> Time Fit -> Reflow -> Action -> Proof -> Learning. Product-experience behavior in this file must serve that loop and must not turn Ambitions into separate task, calendar, habit, chatbot, dashboard, or cloud-backed private-life-graph products.
 
 `PRODUCT_ORIGIN_TRUTH.md` defines why Ambitions must serve high-agency users with more ambition than operating structure. This canon turns that origin problem into behavior contracts, actionability, scenario gates, and proof requirements.
 

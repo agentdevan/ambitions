@@ -1,7 +1,7 @@
 # Ambitions Truth Files
 
 Status: Active repo authority index  
-Scope: Product/design, moat, implementation, release/proof, Codex process, shell integration, and repo retention  
+Scope: Supreme product mission, product/design, moat, implementation, release/proof, Codex process, shell integration, and repo retention
 Applies to: Humans, Codex, and implementation agents working in the Ambitions repo
 
 `docs/truth/` is the active authority layer for Ambitions. Start here before reading supporting docs, source-adjacent notes, retained skills, scripts, or historical references.
@@ -9,24 +9,37 @@ Applies to: Humans, Codex, and implementation agents working in the Ambitions re
 ## Mandatory Read Order
 
 1. `CODEX_START_HERE.md` - Codex routing/digest aid only; subordinate to substantive truth files.
-2. `PRODUCT_DESIGN_TRUTH.md` - product/design authority.
-3. `PRODUCT_ORIGIN_TRUTH.md` - sanitized origin/problem doctrine and user-problem authority.
-4. `PRODUCT_MOAT_TRUTH.md` - moat strategy and anti-commodity guardrails.
-5. `PRODUCT_EXPERIENCE_CANON.md` - product-experience behavior, feature behavior, scenario gates, and actionability authority.
-6. `IMPLEMENTATION_TRUTH.md` - implementation/source authority.
-7. `IMPLEMENTATION_ACCEPTANCE_TRUTH.md` - rendered-product acceptance, split status, visual proof, and global shell acceptance authority.
-8. `RELEASE_TRUTH.md` - validation, proof, release, and claim authority.
-9. `CODEX_PROCESS_TRUTH.md` - Codex operating authority.
-10. `HISTORICAL_POLICY.md` - repo retention and stale-file deletion authority.
-11. `AGENTS.md`.
-12. `README.md`.
-13. `docs/README.md`.
-14. `project.yml`.
-15. `Package.swift`.
-16. Relevant source, tests, retained scripts, build docs, and current local logs.
-17. `.agents/skills/README.md` skill registry, then relevant retained `.agents/skills/*/SKILL.md` files only after truth files.
+2. `PRIVATE_LIFE_ORCHESTRATION_TRUTH.md` - supreme product mission, app purpose, primary function, core loop, and anti-drift lens.
+3. `PRODUCT_DESIGN_TRUTH.md` - product/design, root IA, surfaces, privacy/product law, visual/product canon, and Final Architecture Tree authority.
+4. `PRODUCT_ORIGIN_TRUTH.md` - sanitized origin/problem doctrine and user-problem authority.
+5. `PRODUCT_MOAT_TRUTH.md` - moat strategy and anti-commodity guardrails.
+6. `PRODUCT_EXPERIENCE_CANON.md` - product-experience behavior, feature behavior, scenario gates, and actionability authority.
+7. `IMPLEMENTATION_TRUTH.md` - implementation/source authority.
+8. `IMPLEMENTATION_ACCEPTANCE_TRUTH.md` - rendered-product acceptance, split status, visual proof, and global shell acceptance authority.
+9. `RELEASE_TRUTH.md` - validation, proof, release, and claim authority.
+10. `CODEX_PROCESS_TRUTH.md` - Codex operating authority.
+11. `HISTORICAL_POLICY.md` - repo retention and stale-file deletion authority.
+12. `AGENTS.md`.
+13. `README.md`.
+14. `docs/README.md`.
+15. `project.yml`.
+16. `Package.swift`.
+17. Relevant source, tests, retained scripts, build docs, and current local logs.
+18. `.agents/skills/README.md` skill registry, then relevant retained `.agents/skills/*/SKILL.md` files only after truth files.
 
-`CODEX_START_HERE.md` reduces repeated reading burden by routing agents to the right authority files for the task type. It is not higher authority than product, origin, moat, experience, implementation, acceptance, release, process, or retention truth.
+`CODEX_START_HERE.md` reduces repeated reading burden by routing agents to the right authority files for the task type. It is not higher authority than mission, product, origin, moat, experience, implementation, acceptance, release, process, or retention truth.
+
+## Supreme Product Mission Lens
+
+`PRIVATE_LIFE_ORCHESTRATION_TRUTH.md` is the highest-order product mission lens for Ambitions. It defines Ambitions as a private Personal Life OS for contextual life orchestration whose primary function is to convert messy life intent into contextual goal paths, scheduled next actions, adaptive schedule reflow, recovery moves, proof-backed progress, and user learning, locally and inspectably.
+
+Every future project, Linear issue, Codex prompt, source change, design pass, QA gate, release claim, and architecture review must preserve or improve:
+
+```text
+Intent -> Context -> Path -> Time Fit -> Reflow -> Action -> Proof -> Learning
+```
+
+This file is mission canon, not implementation proof or release proof.
 
 ## Active Product Law
 
@@ -63,10 +76,11 @@ The origin doctrine prevents Ambitions from drifting into generic task, calendar
 
 | Conflict Type | Winner |
 |---|---|
-| Product/design direction | `PRODUCT_DESIGN_TRUTH.md` |
-| Origin/problem framing and user-problem doctrine | `PRODUCT_ORIGIN_TRUTH.md`, subordinate to `PRODUCT_DESIGN_TRUTH.md` for product law, `PRODUCT_MOAT_TRUTH.md` for moat law, and `PRODUCT_EXPERIENCE_CANON.md` for behavior contracts |
-| Moat strategy and anti-commodity claims | `PRODUCT_MOAT_TRUTH.md` |
-| Product-experience behavior, feature behavior, Life Capital, full goal pathing, Future Steps, continuous adjustment, reviews, onboarding, proof/progress transfer, and actionability | `PRODUCT_EXPERIENCE_CANON.md`, subordinate to `PRODUCT_DESIGN_TRUTH.md` for root IA/privacy/product identity and `PRODUCT_MOAT_TRUTH.md` for moat/anti-commodity guardrails |
+| Product mission, app purpose, primary function, and end-goal lens | `PRIVATE_LIFE_ORCHESTRATION_TRUTH.md` |
+| Product/design direction, root IA, surfaces, product/design law, privacy boundaries, visual/product canon, and Final Architecture Tree | `PRODUCT_DESIGN_TRUTH.md`, read through `PRIVATE_LIFE_ORCHESTRATION_TRUTH.md` for mission and primary function |
+| Origin/problem framing and user-problem doctrine | `PRODUCT_ORIGIN_TRUTH.md`, subordinate to `PRIVATE_LIFE_ORCHESTRATION_TRUTH.md` for mission/app purpose, `PRODUCT_DESIGN_TRUTH.md` for product law, `PRODUCT_MOAT_TRUTH.md` for moat law, and `PRODUCT_EXPERIENCE_CANON.md` for behavior contracts |
+| Moat strategy and anti-commodity claims | `PRODUCT_MOAT_TRUTH.md`, read through `PRIVATE_LIFE_ORCHESTRATION_TRUTH.md` for mission/app purpose |
+| Product-experience behavior, feature behavior, Life Capital, full goal pathing, Future Steps, continuous adjustment, reviews, onboarding, proof/progress transfer, and actionability | `PRODUCT_EXPERIENCE_CANON.md`, subordinate to `PRIVATE_LIFE_ORCHESTRATION_TRUTH.md` for mission/app purpose, `PRODUCT_DESIGN_TRUTH.md` for root IA/privacy/product identity, and `PRODUCT_MOAT_TRUTH.md` for moat/anti-commodity guardrails |
 | Implementation/source status | Live source/project/test/script evidence, read through `IMPLEMENTATION_TRUTH.md` |
 | Global shell integration and rendered product acceptance | `IMPLEMENTATION_ACCEPTANCE_TRUTH.md` plus current reviewable screenshots, manifest evidence, and target rubric |
 | Release/readiness/proof claim | Current proof/log evidence, read through `RELEASE_TRUTH.md` |

@@ -6,6 +6,7 @@ The repo authority starts at [docs/truth/README.md](docs/truth/README.md). Truth
 
 ## Canon
 
+- Supreme mission lens: Private Life Orchestration, defined in [docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md](docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md)
 - Persistent surfaces: Today / Goals / Time / You
 - Global composer: Capture
 - Behavior layer: Motion
