@@ -9,7 +9,7 @@ description: Use for Ambitions release/readiness wording, proof packets, App Sto
 - Use when: validation, readiness wording, proof packets, Green/Yellow/Red status, privacy/account/R2 proof, TestFlight/App Store, or public claim language is in scope.
 - Do not use as: product canon, implementation proof, release approval, or permission to upgrade status without evidence.
 - Required first read: `docs/truth/CODEX_START_HERE.md`.
-- Owns: proof classification, unsupported-claim removal, status ceiling, and allowed wording.
+- Owns: proof classification, unsupported-claim removal, proof artifact closeout requirements, status ceiling, and allowed wording.
 - Does not own: product canon, source truth, Visual Green, Release Green, human approval, or device proof.
 - Hard red: build/test/release/device/accessibility/performance/privacy/account/R2 claim without current evidence.
 - Required output: proof-claim labels used, verified, failed, not verified, blocked, human/device follow-up, forbidden claims removed, allowed wording.
@@ -22,7 +22,9 @@ This skill is operating support only. `docs/truth/RELEASE_TRUTH.md` is the relea
 
 If proof is absent, readiness is absent.
 
-Never claim build success, test success, release readiness, TestFlight readiness, App Store readiness, device readiness, accessibility conformance, performance readiness, privacy/legal approval, CI proof, account readiness, or R2 readiness without current evidence.
+Never claim build success, test success, release readiness, TestFlight readiness, App Store readiness, device readiness, accessibility conformance, performance readiness, privacy/legal approval, CI proof, account readiness, R2 readiness, Source Atlas production readiness, or broad remediation Green without current evidence.
+
+Proof automation outranks prose: current scripts, logs, artifacts, owner approvals, and accepted review evidence set the claim ceiling. A Linear comment, truth-doc change, closeout summary, screenshot path, or old report may summarize evidence; it cannot upgrade absent, stale, failed, or not-run proof.
 
 ## Workflow
 
@@ -34,6 +36,7 @@ Never claim build success, test success, release readiness, TestFlight readiness
 6. Treat old reports, screenshots, batch closeouts, and deleted artifacts as stale unless tied to the current commit and current logs.
 7. Replace overclaims with proof-bound status: Implemented Yellow, Partial, Aspirational, Blocked, or Unknown when linked evidence is missing.
 8. Preserve explicit owner approval gates for signing, archive export, upload, legal/privacy, public claims, and distribution.
+9. For Source Atlas/R2 wording, require public-reference/no-private-life-graph boundary evidence before any growth, readiness, entitlement, privacy, or production claim.
 
 ## Output
 
@@ -45,3 +48,4 @@ Never claim build success, test success, release readiness, TestFlight readiness
 - Human/device follow-up
 - Forbidden claims removed
 - Allowed wording
+- Proof artifacts required for any future status upgrade

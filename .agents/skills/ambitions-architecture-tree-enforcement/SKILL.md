@@ -26,9 +26,10 @@ Architecture simplification posture:
 law over lore
 deep runtime, boring UI
 delete before naming
+proof automation outranks prose
 ```
 
-Prefer stable laws and canonical owners over new terminology. Do not add new broad architecture nouns, folders, suffix splits, engines, kernels, managers, coordinators, services, systems, runtimes, ledgers, scenes, lenses, or OS labels unless the scoped train deletes, collapses, or replaces duplicate authority or active truth explicitly approves the new owner with a proof gate. Deep runtime is allowed under the canonical LocalRuntimeOS law; user-facing UI must remain plain and object-led.
+Prefer stable laws and canonical owners over new terminology. Do not add new broad architecture nouns, folders, suffix splits, engines, kernels, managers, coordinators, services, systems, runtimes, ledgers, scenes, lenses, or OS labels unless the scoped train deletes, collapses, or replaces duplicate authority or active truth explicitly approves the new owner with a proof gate. Deep runtime is allowed under the canonical LocalRuntimeOS law; user-facing UI must remain plain and object-led. Proof artifacts, scripts, logs, and accepted evidence set the claim ceiling.
 
 ## Hard Rule
 
@@ -97,7 +98,7 @@ Required ownership rules:
 - Domain models, time primitives, and permissions belong under `Core/`.
 - New backend/runtime authority belongs under `Core/LocalRuntimeOS/` and must preserve the `Command -> Event -> Projection -> Receipt -> Replay` target law.
 - Existing `Core/Runtime/`, `Core/Persistence/`, and `Projection/Commands/` source is implementation scaffolding and migration debt when touched. Do not add new runtime policy, persistence substrate authority, command authority, event authority, projection materialization authority, side-effect authority, privacy egress authority, sync authority, migration authority, or diagnostics authority there.
-- Runtime-to-UI translation belongs under `Projection/`.
+- Runtime-to-UI translation belongs under `Projection/`; prefer feature-local projection over new central `Projection/SurfaceLenses` authority when canon allows.
 - User-facing vocabulary, copy policy, forbidden terms, and copy budget belong under `Language/`.
 - Proof, Source, Privacy, History, Receipts, and trust disclosure behavior belong under `Trust/`.
 - Gestures, keyboard policy, direct manipulation, and haptics belong under `Interaction/`.
@@ -133,6 +134,9 @@ A short-lived compatibility shim is allowed only when required to preserve compi
 
 Stop and repair before closeout if the train creates or expands:
 
+- new `+02` or `+03` split files
+- new broad `Models.swift` files
+- file-size or suffix-split churn that preserves duplicate authority instead of deleting or collapsing it
 - `RootTab` as root architecture
 - `TabView` as the product model
 - `Surfaces/Motion/`
@@ -151,6 +155,8 @@ Stop and repair before closeout if the train creates or expands:
 - feature-owned projection policy
 - feature-owned trust policy
 - feature-owned motion policy
+- new Source Atlas scope before public-reference/no-private-life-graph boundary proof exists
+- custom Stage, UIKit, or rendering machinery where SwiftUI-native implementation can satisfy product law
 - source paths that are "equivalent" to the final tree but not the final tree
 
 ## Migration Rule
@@ -177,3 +183,4 @@ Every train using this skill must report:
 - architecture debt
 - next repair train if debt remains
 - confirmation that no "equivalent" folder/path interpretation was used
+- proof artifacts, validation commands, and not-run checks that set the closeout ceiling

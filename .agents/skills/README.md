@@ -34,6 +34,18 @@ Read `docs/truth/CODEX_START_HERE.md` before loading a skill. It is the routing 
 | Docs/governance only | `ambitions-source-truth-authority`; add `ambitions-release-proof-honesty` only if proof/release wording is touched |
 | Account/R2/Source Atlas work | `ambitions-source-truth-authority`, `ambitions-ios-quality-gate` if platform code changes, `ambitions-release-proof-honesty` if readiness/proof is claimed |
 
+## M00 Remediation Enforcement
+
+Every retained skill must preserve the AMB-1656/AMB-1661 remediation direction from active truth:
+
+- keep the runtime law while reducing architecture lore
+- avoid new architecture nouns, folders, suffix splits, engines, kernels, managers, coordinators, services, systems, runtimes, ledgers, scenes, lenses, or OS labels unless the scoped train deletes, collapses, or replaces duplicate authority
+- reject new `+02` or `+03` split files, new broad `Models.swift` files, and package-boundary cleanup theater unless active truth and a scoped issue explicitly approve the exception
+- freeze Source Atlas growth unless the changed scope has public-reference, no-private-life-graph, and boundary-audit proof
+- keep Stage thin and SwiftUI-native by default; custom Stage, UIKit, or rendering machinery requires product-law and Apple-source justification
+- prefer feature-local projection over central `Projection/SurfaceLenses` additions where canon allows
+- make proof artifacts, scripts, logs, and accepted evidence set the closeout ceiling; prose cannot upgrade missing, failed, stale, or not-run proof
+
 ## Retained Skills
 
 | Skill | Path | Role |

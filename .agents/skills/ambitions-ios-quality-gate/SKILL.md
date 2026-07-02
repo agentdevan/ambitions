@@ -9,9 +9,9 @@ description: Use for Ambitions native iPhone source/UI changes that need Apple P
 - Use when: SwiftUI, Apple-platform, iOS design system, accessibility, shell, keyboard, permissions, persistence, widgets, or visual/product surface work is in scope.
 - Do not use as: product canon, release proof, visual acceptance, or permission to skip Apple/source proof.
 - Required first read: `docs/truth/CODEX_START_HERE.md`.
-- Owns: Apple Platform Source Atlas routing, iOS 26 availability checks, native quality gates, accessibility/proof checklist.
+- Owns: Apple Platform Source Atlas routing, iOS 26 availability checks, native quality gates, Stage thinness, SwiftUI-native default, accessibility/proof checklist.
 - Does not own: product canon, implementation status, Visual Green, Release Green, or App Store readiness.
-- Hard red: Apple API guesswork, unsafe shell geometry, missing accessibility semantics, screenshot paths as proof, or readiness overclaims.
+- Hard red: Apple API guesswork, unsafe shell geometry, custom Stage/UIKit/rendering machinery without product-law and Apple-source justification, missing accessibility semantics, screenshot paths as proof, or readiness overclaims.
 - Required output: Apple Platform sections consulted, Product Experience gates touched, iOS 26 availability, accessibility checks, screenshot/proof or not-run reason, validation commands/results.
 
 This skill is operating support only. Product truth lives in `docs/truth/*`. It does not override product canon, release truth, live source, current tests, current logs, or current Xcode evidence.
@@ -42,6 +42,10 @@ Product Experience scenario gates are required when UI/source work touches Steps
 - Verify active source ownership before source edits.
 - Keep root surfaces to Today / Goals / Time / You.
 - Treat Capture as global composer and Motion as behavior.
+- Keep Stage thin; do not make custom Stage, UIKit interop, or rendering machinery the product unless SwiftUI-native implementation cannot satisfy product law and the Apple source map supports the exception.
+- Do not create new `+02` or `+03` split files, broad `Models.swift` files, file-size churn, or architecture nouns to avoid deleting/collapsing duplicate authority.
+- Freeze Source Atlas growth for UI/platform work unless public-reference, no-private-life-graph, request-shape, and boundary-audit proof exists for the changed scope.
+- Prefer feature-local projection and surface-owned view state before adding central `Projection/SurfaceLenses` authority where canon allows.
 - Use focused build/test validation first, then broader validation when risk warrants it.
 - Verify iOS 26 availability before adopting an Apple API.
 - Do not introduce APIs above the Ambitions minimum deployment target unless availability-gated and the iOS 26 path preserves the same user-facing behavior.
@@ -92,4 +96,5 @@ Any source/UI train that changes visible behavior must check:
 - screenshot/proof or explicit not-run reason for UI changes
 - accessibility/non-claim notes where relevant
 - privacy/permission notes where relevant
+- proof artifacts that actually set the closeout ceiling; prose cannot upgrade missing, failed, stale, or not-run checks
 - rollback path
