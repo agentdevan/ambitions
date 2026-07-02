@@ -3,24 +3,23 @@ import Foundation
 import XCTest
 
 final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
-    func testCanonicalCoreRuntimeOwnerFilesExist() {
+    func testAMB1714MovedRuntimeLeavesUseCanonicalLocalRuntimeOSOwners() {
         let root = repoRoot()
         for requiredPath in [
-            "Native/Ambitions/Core/Runtime/PrivateLifeRuntime.swift",
-            "Native/Ambitions/Core/Runtime/RuntimeSnapshot.swift",
-            "Native/Ambitions/Core/Runtime/RuntimeProjectionPipeline.swift",
-            "Native/Ambitions/Core/Runtime/RecommendationEngine.swift",
-            "Native/Ambitions/Core/Runtime/CapacityEngine.swift",
-            "Native/Ambitions/Core/Runtime/PressureEngine.swift",
-            "Native/Ambitions/Core/Runtime/RecoveryEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/PrivateLifeRuntime.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/RuntimeSnapshot.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/RuntimeProjectionPipeline.swift",
         ] {
             XCTAssertTrue(
                 FileManager.default.fileExists(atPath: root.appendingPathComponent(requiredPath).path),
-                "Missing canonical Core/Runtime owner: \(requiredPath)"
+                "Missing AMB-1714 canonical owner: \(requiredPath)"
             )
         }
 
         for retiredPath in [
+            "Native/Ambitions/Core/Runtime/PrivateLifeRuntime.swift",
+            "Native/Ambitions/Core/Runtime/RuntimeSnapshot.swift",
+            "Native/Ambitions/Core/Runtime/RuntimeProjectionPipeline.swift",
             "Native/Ambitions/Core/Runtime/RuntimeMutation.swift",
             "Native/Ambitions/Core/Runtime/RuntimeValidator.swift",
             "Native/Ambitions/Core/Runtime/AmbitionsCommandExecutor.swift",
@@ -35,6 +34,21 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
             XCTAssertFalse(
                 FileManager.default.fileExists(atPath: root.appendingPathComponent(retiredPath).path),
                 "Retired runtime-boundary owner still exists: \(retiredPath)"
+            )
+        }
+    }
+
+    func testRemainingLegacyRuntimeLeavesStayExplicitYellowUntilFollowUpMove() {
+        let root = repoRoot()
+        for yellowPath in [
+            "Native/Ambitions/Core/Runtime/RecommendationEngine.swift",
+            "Native/Ambitions/Core/Runtime/CapacityEngine.swift",
+            "Native/Ambitions/Core/Runtime/PressureEngine.swift",
+            "Native/Ambitions/Core/Runtime/RecoveryEngine.swift",
+        ] {
+            XCTAssertTrue(
+                FileManager.default.fileExists(atPath: root.appendingPathComponent(yellowPath).path),
+                "Remaining legacy runtime leaf moved without updating AMB-1714 Yellow proof: \(yellowPath)"
             )
         }
     }
@@ -98,7 +112,7 @@ private extension CoreRuntimeCanonicalOwnershipTests {
     func repoRoot() -> URL {
         var url = URL(fileURLWithPath: #filePath)
         while url.pathComponents.count > 1 {
-            let candidate = url.appendingPathComponent("Native/Ambitions/Core/Runtime")
+            let candidate = url.appendingPathComponent("project.yml")
             if FileManager.default.fileExists(atPath: candidate.path) {
                 return url
             }

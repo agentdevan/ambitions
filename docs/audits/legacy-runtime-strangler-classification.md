@@ -1,21 +1,26 @@
 # Legacy Runtime Strangler Classification
 
-Status: AMB-1713 source-static classification
+Status: AMB-1713 source-static classification baseline
 
 Snapshot date: 2026-07-02
 
 Repo state inspected: `058bac863a087f435be866636f2a7e414923f093` on `main`
 
 Scope: AMB-1666 -> AMB-1713 only. This audit classifies every Swift file
-currently under `Native/Ambitions/Core/Runtime`. It does not move source, delete
-source, replace imports, add runtime guards, change Swift behavior, or prove
-runtime correctness.
+under `Native/Ambitions/Core/Runtime` at the AMB-1713 snapshot. It does not move
+source, delete source, replace imports, add runtime guards, change Swift
+behavior, or prove runtime correctness.
 
 Evidence class: Implemented Yellow. The table is current source inventory and
 classification evidence only. It does not prove build health, runtime behavior,
 device behavior, accessibility behavior, privacy/legal approval, release
 readiness, TestFlight readiness, App Store readiness, or total LocalRuntimeOS
 completion.
+
+AMB-1714 supersession: `docs/audits/legacy-runtime-strangler-import-replacement.md`
+is the current overlay for the three rows moved after this baseline:
+`PrivateLifeRuntime.swift`, `RuntimeProjectionPipeline.swift`, and
+`RuntimeSnapshot.swift`.
 
 ## Canonical Constraints
 

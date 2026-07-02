@@ -9,6 +9,8 @@ final class ProjectionEngineTests: XCTestCase {
             "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionCursor.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionInvalidation.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionMaterializer.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/RuntimeProjectionPipeline.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/RuntimeSnapshot.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionChecksum.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/TodayProjection.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/GoalsProjection.swift",

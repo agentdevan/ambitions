@@ -8,6 +8,7 @@ final class PrivateLifeRuntimeKernelOwnershipTests: XCTestCase {
         let legacyRuntimeOwner = repositoryRoot.appendingPathComponent("Native/Ambitions/Core/Runtime", isDirectory: true)
 
         let requiredLeaves = [
+            "PrivateLifeRuntime.swift",
             "DecisionKernel.swift",
             "RecommendationKernel.swift",
             "CapacityFitKernel.swift",
