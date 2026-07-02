@@ -37,10 +37,12 @@ final class PrivacySecurityTests: XCTestCase {
             PrivacyRedactionRequest(
                 object: object,
                 surface: .notificationContent,
-                title: "Call therapist",
-                summary: "Discuss recovery details",
+                title: "goal_text=Call therapist",
+                summary: "schedule_assumption=Discuss recovery details",
                 metadata: ["goalID": "goal-1", "tone": "sensitive"],
-                payload: ["rawNote": "Discuss recovery details"],
+                payload: [
+                    "rawNote": "private_life_graph=node proof_payload=photo receipt_payload=receipt behavior_history=night personalization_signal=protect"
+                ],
                 userReviewed: true
             )
         )
@@ -50,8 +52,13 @@ final class PrivacySecurityTests: XCTestCase {
         XCTAssertEqual(result.visibleSummary, "Details hidden. Open Ambitions to inspect locally.")
         XCTAssertEqual(result.metadataKeys, ["goalID", "tone"])
         XCTAssertEqual(result.payloadKeys, ["rawNote"])
-        XCTAssertFalse(result.egressRecord.inspectedValue.contains("Call therapist"))
-        XCTAssertFalse(result.egressRecord.inspectedValue.contains("Discuss recovery details"))
+        XCTAssertFalse(result.egressRecord.inspectedValue.contains("goal_text"))
+        XCTAssertFalse(result.egressRecord.inspectedValue.contains("schedule_assumption"))
+        XCTAssertFalse(result.egressRecord.inspectedValue.contains("private_life_graph"))
+        XCTAssertFalse(result.egressRecord.inspectedValue.contains("proof_payload"))
+        XCTAssertFalse(result.egressRecord.inspectedValue.contains("receipt_payload"))
+        XCTAssertFalse(result.egressRecord.inspectedValue.contains("behavior_history"))
+        XCTAssertFalse(result.egressRecord.inspectedValue.contains("personalization_signal"))
         XCTAssertEqual(SourceAtlasNoPrivateGraphEgressAudit.validate([result.egressRecord]), [])
     }
 
@@ -65,9 +72,9 @@ final class PrivacySecurityTests: XCTestCase {
                 redactionRequest: PrivacyRedactionRequest(
                     object: privateObject(),
                     surface: .sourceAtlasPublicReference,
-                    title: "Private goal",
-                    summary: "Private plan",
-                    payload: ["private": "value"],
+                    title: "goal_text=Private goal",
+                    summary: "schedule_assumption=Private plan",
+                    payload: ["rawNote": "capture_text=private receipt_payload=receipt proof_payload=proof personalization_factor=energy"],
                     userReviewed: true
                 )
             )
@@ -77,6 +84,13 @@ final class PrivacySecurityTests: XCTestCase {
         XCTAssertFalse(privateDecision.receipt.permitted)
         XCTAssertTrue(privateDecision.receipt.issueCodes.contains(SensitiveSurfaceIssue.publicReferenceForbidden.rawValue))
         XCTAssertTrue(privateDecision.receipt.issueCodes.contains(NetworkEgressIssue.privateGraphPayloadForbidden.rawValue))
+        XCTAssertFalse(privateDecision.redaction.egressRecord.inspectedValue.contains("goal_text"))
+        XCTAssertFalse(privateDecision.redaction.egressRecord.inspectedValue.contains("schedule_assumption"))
+        XCTAssertFalse(privateDecision.redaction.egressRecord.inspectedValue.contains("capture_text"))
+        XCTAssertFalse(privateDecision.redaction.egressRecord.inspectedValue.contains("receipt_payload"))
+        XCTAssertFalse(privateDecision.redaction.egressRecord.inspectedValue.contains("proof_payload"))
+        XCTAssertFalse(privateDecision.redaction.egressRecord.inspectedValue.contains("personalization_factor"))
+        XCTAssertEqual(SourceAtlasNoPrivateGraphEgressAudit.validate([privateDecision.redaction.egressRecord]), [])
 
         let publicObject = PrivacyClassifiedObject(
             id: "source-pack-rule",

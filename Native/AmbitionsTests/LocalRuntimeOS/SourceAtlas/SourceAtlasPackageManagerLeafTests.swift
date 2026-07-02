@@ -49,6 +49,40 @@ final class SourceAtlasPackageManagerLeafTests: XCTestCase {
         XCTAssertEqual(request.value(forHTTPHeaderField: "X-Ambitions-Data-Class"), "public-reference")
         XCTAssertTrue(compiled.url.absoluteString.contains("source-atlas/v1/domain/sports/pack.json"))
         XCTAssertTrue(compiled.queryItems.keys.contains("pack_id"))
+        XCTAssertNil(request.httpBody)
+
+        let logRecord = SourceAtlasPublicArtifactLogRecord(
+            event: "source_atlas_r2_public_get_compiled",
+            packID: pack.id,
+            manifestVersionID: try XCTUnwrap(compilation.packRequest?.manifestVersionID),
+            sourceState: .officialCurrent,
+            freshnessState: .current,
+            selectedSource: .cached
+        )
+        let requestRecords = [
+            SourceAtlasNoPrivateGraphEgressRecord(
+                surface: .requestShape,
+                identifier: "r2-compiled-url",
+                inspectedValue: compiled.url.absoluteString
+            ),
+            SourceAtlasNoPrivateGraphEgressRecord(
+                surface: .requestShape,
+                identifier: "r2-compiled-query",
+                inspectedValue: Self.serialized(compiled.queryItems)
+            ),
+            SourceAtlasNoPrivateGraphEgressRecord(
+                surface: .requestShape,
+                identifier: "r2-url-request-headers",
+                inspectedValue: Self.serialized(request.allHTTPHeaderFields ?? [:])
+            ),
+            SourceAtlasNoPrivateGraphEgressRecord(
+                surface: .logLine,
+                identifier: "r2-public-get-log",
+                inspectedValue: logRecord.line
+            ),
+        ]
+
+        XCTAssertEqual(SourceAtlasNoPrivateGraphEgressAudit.validate(requestRecords), [])
     }
 
     func testFirewallAndR2GatewayRejectPrivateGraphRequestShapes() throws {
@@ -69,8 +103,17 @@ final class SourceAtlasPackageManagerLeafTests: XCTestCase {
             manifestVersionID: "manifest.v1",
             declaredSHA256: String(repeating: "a", count: 64),
             queryItems: [
+                "behavior_history": "opened every night",
+                "capture_id": "capture-1",
+                "capture_text": "private",
+                "goal_id": "goal-1",
                 "goal_text": "private",
-                "account_secret": "secret"
+                "personalization_signal": "protect mornings",
+                "private_life_graph": "node-1",
+                "proof_payload": "photo",
+                "receipt_payload": "receipt",
+                "schedule_assumption": "Friday night",
+                "account_secret": "secret",
             ]
         )
 
@@ -82,7 +125,16 @@ final class SourceAtlasPackageManagerLeafTests: XCTestCase {
 
         XCTAssertFalse(verdict.isAllowed)
         XCTAssertTrue(verdict.issues.contains(.unsafePackRequest))
+        XCTAssertTrue(verdict.egressFindings.contains { $0.forbiddenToken == "behavior_history" })
+        XCTAssertTrue(verdict.egressFindings.contains { $0.forbiddenToken == "capture_id" })
+        XCTAssertTrue(verdict.egressFindings.contains { $0.forbiddenToken == "capture_text" })
+        XCTAssertTrue(verdict.egressFindings.contains { $0.forbiddenToken == "goal_id" })
         XCTAssertTrue(verdict.egressFindings.contains { $0.forbiddenToken == "goal_text" })
+        XCTAssertTrue(verdict.egressFindings.contains { $0.forbiddenToken == "personalization" })
+        XCTAssertTrue(verdict.egressFindings.contains { $0.forbiddenToken == "private_life_graph" })
+        XCTAssertTrue(verdict.egressFindings.contains { $0.forbiddenToken == "proof_payload" })
+        XCTAssertTrue(verdict.egressFindings.contains { $0.forbiddenToken == "receipt_payload" })
+        XCTAssertTrue(verdict.egressFindings.contains { $0.forbiddenToken == "schedule_assumption" })
         XCTAssertThrowsError(
             try R2GatewayClient(baseURL: URL(string: "https://r2.example.test")!).compile(
                 kind: .pack,
@@ -172,6 +224,13 @@ final class SourceAtlasPackageManagerLeafTests: XCTestCase {
 
 private extension SourceAtlasPackageManagerLeafTests {
     static let checkedAt = Date(timeIntervalSince1970: 1_780_000_000)
+
+    static func serialized(_ values: [String: String]) -> String {
+        values
+            .sorted { $0.key < $1.key }
+            .map { "\($0.key)=\($0.value)" }
+            .joined(separator: " ")
+    }
 
     static func manifest(
         entry: SourceAtlasFreshnessPackEntry,
