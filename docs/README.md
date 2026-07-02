@@ -26,4 +26,8 @@ This directory is intentionally small. Keep docs only when they are current, can
 
 Historical docs, generated reports, old prompts, old train material, stale proof, and abandoned control-plane files do not belong here. If a non-source file stops matching current canon or stops helping App Store readiness, update it immediately or delete it.
 
+Linear tracker and control-plane evidence lives under `linear/current-state/`
+and `linear/reconciliation/`. There is no `truth/linear/` authority layer;
+truth files remain durable canon, while Linear files remain tracker evidence.
+
 This file is navigation only. It is not implementation proof, validation proof, or release proof.

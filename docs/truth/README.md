@@ -106,6 +106,20 @@ The five retained repo skills are intentionally distinct: source/truth authority
 
 Generated Codex state, old artifacts, prompts, trains, stale batch docs, backup truth files, and historical proof matrices are not retained in-repo.
 
+## Linear Control-Plane Routing
+
+`docs/truth/*` remains the durable authority layer. Do not create or use
+`docs/truth/linear/*` as a separate truth authority.
+
+Current Linear tracker and control-plane evidence belongs under:
+
+- `docs/linear/current-state/`
+- `docs/linear/reconciliation/`
+
+Those files may summarize tracker state, coverage, reconciliation evidence, or
+execution planning. They do not override truth files, live source, tests, logs,
+or current proof artifacts.
+
 ## What Truth Files Do Not Prove
 
 Truth files define authority and standards. They do not by themselves prove implementation completeness, local build success, test success, visual quality, accessibility conformance, performance validation, physical-device validation, TestFlight/App Store readiness, or release approval.
