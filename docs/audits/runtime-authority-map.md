@@ -1,6 +1,6 @@
 # Runtime Authority Map
 
-Status: AMB-1665 static authority map
+Status: AMB-1665 static authority map with AMB-1721 external adapter contract addendum
 
 Snapshot date: 2026-07-02
 
@@ -11,10 +11,11 @@ Source snapshots inspected:
 - AMB-1709: `b7251077e9280d5d914f7fa2521c9c4a68863898` on `main`
 - AMB-1710: `e6139849cdb956782dae4f0f4974705f463759c9` on `main`
 - AMB-1719 baseline: `6c60c6c95fadc9990b0d8198ab895e20ec05f8de` on `main`
+- AMB-1721 baseline: `35975f72cb5d4918057b879ecfc31f350fdd8121` on `main`
 
-Scope: M01 AMB-1665 runtime authority map only. No Swift behavior, source migration,
-runtime authority migration, or product-surface behavior was changed by this
-artifact.
+Scope: M01 AMB-1665 runtime authority map plus AMB-1721 contract addendum only.
+No Swift behavior, source migration, runtime authority migration, or
+product-surface behavior was changed by this artifact.
 
 Evidence class: Implemented Yellow. This map classifies current source
 entry points and direct-write markers so later remediation can proceed without
@@ -473,6 +474,23 @@ Audit behavior:
   forbidden-root path and follow-up.
 
 This audit is a governance guard, not proof that unsafe writes are fixed.
+
+## AMB-1721 External Command Adapter Contract
+
+AMB-1721 installs the system-surface adapter contract in
+`docs/audits/external-command-adapter-contract.md`.
+
+The contract defines required evidence fields and classifications for external
+readers, external mutators, OS side effects, rejection receipts, unknown paths,
+and unsafe debt. It covers command routing, rejection receipts, privacy
+redaction, extension-safe inputs, and no direct canonical writes. It does not
+add a Swift `ExternalCommandAdapter` protocol, change runtime behavior, migrate
+authority, or make adapter paths Green.
+
+Later AMB-1668 leaves must validate each system surface against that contract:
+AMB-1722 for App Intent, widget payload, share extension, notification, and app
+external-route mutation paths; AMB-1723 for EventKit and Reminders writes; and
+AMB-1724 for projection-only snapshots and external readers.
 
 ## Residual Gaps
 
