@@ -18,6 +18,11 @@ correctness, data-loss safety, device behavior, accessibility behavior,
 privacy/legal approval, TestFlight readiness, App Store readiness, CloudKit
 readiness, or total LocalRuntimeOS completion.
 
+AMB-1718 follow-up map: `docs/audits/persistence-storage-owner-map.md`
+defines the canonical LocalRuntimeOS storage owner map and the dumb SwiftData
+model boundary. That map satisfies P-MAP at Implemented Yellow only; it does
+not prove direct-save rejection or migration safety.
+
 ## Canonical Constraints
 
 Runtime mutation law remains:
@@ -88,7 +93,7 @@ Proof code legend:
 
 | Code | Proof needed before stronger claim |
 | --- | --- |
-| P-MAP | AMB-1718 canonical owner mapping, including target LocalRuntimeOS owner and SwiftData/model dumb-storage boundary. |
+| P-MAP | AMB-1718 canonical owner mapping, including target LocalRuntimeOS owner and SwiftData/model dumb-storage boundary. Implemented Yellow in `docs/audits/persistence-storage-owner-map.md`. |
 | P-REJECT | AMB-1719 direct-save rejection proof: direct persistence writes fail, are impossible from production roots, or remain explicit unsafe debt. |
 | P-MIGRATE | AMB-1720 migration proof plan with fixtures, replay expectations, failure modes, and no migration Green without executable evidence. |
 | P-STORAGE | Focused storage tests plus proof that the storage tier is substrate only and not business-decision authority. |
@@ -238,9 +243,8 @@ Direct-mutation status legend:
 - Yellow architecture debt remains: yes. Legacy persistence files remain under
   `Core/Persistence`, and several write-capable repository/import/seed paths
   remain outside proven command/event/projection/receipt/replay authority.
-- Next repair train: AMB-1718 maps canonical storage under LocalRuntimeOS,
-  AMB-1719 adds direct model-save rejection proof, and AMB-1720 adds existing
-  local-data migration proof planning.
+- Next repair train: AMB-1719 adds direct model-save rejection proof, and
+  AMB-1720 adds existing local-data migration proof planning.
 - No equivalent folder/path interpretation was used.
 - No Green runtime authority, persistence safety, migration safety, CloudKit,
   device, release, or product-completion claim is made.
