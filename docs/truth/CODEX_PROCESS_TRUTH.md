@@ -184,6 +184,22 @@ python3 scripts/ambitions-remediation-governance-check.py --base origin/main
 Yellow is allowed only when the closeout links the residual gap, names the
 follow-up Linear issue, and does not report fake Green.
 
+Every remediation parent Feature closeout must include:
+
+- status: Green, Yellow, or Red for the exact parent scope
+- validation run
+- validation not run with the reason
+- proof artifacts, or an explicit empty list when none were produced
+- known risks and residual Yellow/Red gaps
+- exact next Linear follow-up for every residual gap
+- rollback plan
+
+If required validation, proof artifacts, owner review, or approvals are absent,
+the parent closeout must be Yellow or Red for that claim, not Green. Release,
+device, accessibility, privacy/legal, TestFlight, App Store, account, R2,
+production CloudKit, and production readiness claims are forbidden without
+current artifacts and required approvals.
+
 ---
 
 ## 5. Planning and Patch Discipline

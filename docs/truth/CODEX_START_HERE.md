@@ -123,6 +123,13 @@ Docs/governance closeout may use:
 - Yellow
 - Red
 
+Remediation parent Feature closeouts may use Green, Yellow, or Red only for
+the exact parent scope being closed. Parent Green requires linked current
+evidence for every required validation and proof artifact in that parent scope.
+Yellow must name the residual gap and the exact Linear follow-up before the
+parent is treated as accepted Yellow. Red means the parent cannot be closed
+without repair.
+
 Implementation and release-adjacent closeout must use the split status model:
 
 - Source Green
@@ -177,7 +184,14 @@ Stop and report Red if the train:
 - Proof produced and validation run
 - Validation not run with reason
 - Known risks and remaining sprawl risks
+- Exact next Linear follow-up for any Yellow/Red gap
 - Rollback plan
+
+Every remediation parent Feature closeout must also list validation run,
+validation not run, proof artifacts, known risks, follow-up, and rollback.
+Do not report Yellow as Green. Do not report release, device, accessibility,
+privacy/legal, TestFlight, App Store, account, R2, or production readiness
+claims unless current artifacts and required approvals are linked.
 
 For source trains, also include canonical owners touched, files moved/created, old/non-canonical paths removed, compatibility shims left, and whether Final Architecture Tree was inspected.
 
