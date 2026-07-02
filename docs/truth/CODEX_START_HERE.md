@@ -75,6 +75,22 @@ Use the task matrix below to choose a smaller safe read path only when the task 
 | Build/test/release | Exact commands, exit codes, branch, commit SHA, environment, logs/artifacts, unsupported claims listed as not supported. |
 | Account/R2/Source Atlas | Offline no-account boundary, no private life graph backend, no R2 private user context, request/privacy proof before any implementation or release claim. |
 
+Architecture remediation and cleanup trains must also run:
+
+```bash
+python3 scripts/ambitions-remediation-governance-check.py
+```
+
+For branch or PR validation, pass the base ref:
+
+```bash
+python3 scripts/ambitions-remediation-governance-check.py --base origin/main
+```
+
+If the guard is not run, close Yellow and name the exact follow-up. Passing this
+guard is not implementation, runtime, visual, accessibility, privacy, device,
+TestFlight, App Store, or release proof.
+
 Every nontrivial product, feature, Linear, Codex, architecture, QA, or release-facing work item must state how it preserves or improves:
 
 ```text
@@ -134,6 +150,14 @@ Stop and report Red if the train:
 - forgets R2 is not a user-data backend
 - sends private user context, goals, captures, schedule, proof, receipts, behavior, inferred priorities, or the private life graph to R2/Source Atlas
 - adds new meaningful runtime mutation authority outside the LocalRuntimeOS command/event/projection/receipt/replay spine
+- adds new architecture nouns without deleting, collapsing, or replacing duplicate authority
+- adds new Source Atlas scope before Source Atlas boundary audits pass for the changed scope
+- adds new `+02` or `+03` split files
+- adds new broad `Models.swift` files
+- changes package boundaries as cleanup theater without a linked package decision record
+- lets adapters mutate canonical state
+- adds central `Projection/SurfaceLenses` files when feature-local projection can satisfy canon
+- adds custom Stage/UIKit/rendering machinery where SwiftUI-native implementation can satisfy product law
 - creates Source Atlas marketplace browsing as product center
 - adds productivity score, life score, XP, streak pressure, social feed, public profile, or AI-chatbot center
 - cannot explain its relationship to Private Life Orchestration unless it is narrow repo health, security, build, or cleanup work

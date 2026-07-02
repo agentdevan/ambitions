@@ -32,6 +32,7 @@ EXCLUDED_PATH_PARTS = {
 REQUIRED_ARCHITECTURE_PATHS = [
     "scripts/ambitions-architecture-inventory.py",
     "scripts/ambitions-master-sequencing-check.py",
+    "scripts/ambitions-remediation-governance-check.py",
     "scripts/lifeshape-linear-control-plane-check.py",
     "scripts/ambitions-visual-proof-gate.py",
     "scripts/ambitions-test-strength-audit.py",

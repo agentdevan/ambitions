@@ -157,6 +157,33 @@ Green requires linked evidence
 
 Codex must preserve stable product/runtime/privacy/proof law, reduce private architecture mythology, keep root UI in plain native life-object terms, and avoid new broad nouns unless the scoped work deletes, collapses, or replaces duplicate authority. A status claim may be Green only when the exact claim has current linked evidence.
 
+AMB-1658 remediation governance rules:
+
+- No new architecture nouns without deletion, collapse, or replacement of duplicate authority in the same scoped train.
+- No new mutation, storage, receipt, replay, side-effect, migration, repair, privacy, sync, projection-materialization, or diagnostics authority outside `Core/LocalRuntimeOS/`.
+- No new Source Atlas scope before Source Atlas boundary audits pass for the changed scope.
+- No new `+02` or `+03` split files.
+- No new broad `Models.swift` files.
+- No package extraction, package splitting, or package-boundary movement as cleanup theater.
+- Adapters cannot mutate canonical state.
+- Prefer feature-local projection over central `Projection/SurfaceLenses` additions when canon allows.
+- SwiftUI-native implementation is the default; custom Stage, UIKit, or rendering machinery requires product-law and Apple-source justification.
+
+Architecture remediation and cleanup trains must run:
+
+```bash
+python3 scripts/ambitions-remediation-governance-check.py
+```
+
+For branch or PR validation:
+
+```bash
+python3 scripts/ambitions-remediation-governance-check.py --base origin/main
+```
+
+Yellow is allowed only when the closeout links the residual gap, names the
+follow-up Linear issue, and does not report fake Green.
+
 ---
 
 ## 5. Planning and Patch Discipline

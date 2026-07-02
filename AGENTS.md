@@ -174,6 +174,19 @@ User-facing UI must stay plain, native, and object-led even when the local runti
 
 Use the truth-claim taxonomy in `docs/truth/CODEX_START_HERE.md` before source work or closeout: Implemented Green, Implemented Yellow, Partial, Aspirational, Deprecated, Blocked, or Unknown. Do not report Green unless the exact claim has linked current evidence artifacts. If proof is missing, report Yellow, Partial, Aspirational, Blocked, or Unknown with the next follow-up instead of fake Green.
 
+AMB-1658 remediation governance rules:
+
+* Do not add new architecture nouns without deleting, collapsing, or replacing duplicate authority in the same scoped train.
+* Do not add new mutation, storage, receipt, replay, side-effect, migration, repair, privacy, sync, projection-materialization, or diagnostics authority outside `Core/LocalRuntimeOS/`.
+* Do not add new Source Atlas scope before the Source Atlas boundary audit is Green for the changed scope.
+* Do not add new `+02` or `+03` split files.
+* Do not add new broad `Models.swift` files.
+* Do not extract packages, split packages, or move package boundaries as cleanup theater; package boundary changes need a linked decision record and validation plan.
+* Adapters cannot mutate canonical state.
+* Prefer feature-local projection over central `Projection/SurfaceLenses` additions when canon allows.
+* Default to SwiftUI-native implementation; custom Stage/UIKit/rendering machinery is allowed only where product law and Apple source guidance require it.
+* Run `python3 scripts/ambitions-remediation-governance-check.py` for remediation/source trains, or close Yellow with the exact not-run reason and linked follow-up.
+
 ## 7. Strict Architecture Tree Enforcement
 
 Before creating, moving, refactoring, or reviewing Ambitions source, agents must load and follow:
