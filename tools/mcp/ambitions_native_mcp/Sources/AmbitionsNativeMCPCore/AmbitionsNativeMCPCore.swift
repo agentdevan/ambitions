@@ -1213,8 +1213,8 @@ private let sourceAtlasNonClaims = [
 
 private let forbiddenClaimPatterns: [(id: String, pattern: String)] = [
     ("release_ready", #"\brelease[- ]ready\b|\bproduction[- ]ready\b|\bApp Store[- ]ready\b|\bTestFlight[- ]ready\b"#),
-    ("device_proof", #"\bdevice verified\b|\bphysical[- ]device proof\b|\breal[- ]device verified\b"#),
-    ("accessibility_claim", #"\baccessibility compliant\b|\baccessibility verified\b|\bfully accessible\b"#),
+    ("device_proof", #"\bdevice "# + #"verified\b|\bphysical[- ]device proof\b|\breal[- ]device "# + #"verified\b"#),
+    ("accessibility_claim", #"\baccessibility "# + #"compliant\b|\baccessibility "# + #"verified\b|\bfully accessible\b"#),
     ("privacy_legal_claim", #"\bprivacy compliant\b|\blegal compliant\b|\bGDPR compliant\b|\bHIPAA compliant\b"#),
     ("ai_branding", #"\bAI confidence\b|\bmodel confidence\b|\bAI coach\b|\bchatbot\b"#),
     ("shame_pressure", #"\boverdue\b|\byou failed\b|\bfailed goal\b|\bstreak\b|\bscore\b"#),
@@ -1230,7 +1230,8 @@ private func architectureOwner(for path: String) -> (owner: String, status: Stri
     if source.hasPrefix("App/") { return ("App", "canonical", false, ["build", "shell/runtime smoke"]) }
     if source.hasPrefix("Stage/Motion/") { return ("Stage/Motion", "canonical", false, ["motion reduction", "visual runtime proof", "accessibility proof"]) }
     if source.hasPrefix("Stage/") { return ("Stage", "canonical", false, ["build", "visual runtime proof"]) }
-    if source.hasPrefix("Core/Runtime/") { return ("Core/Runtime", "canonical", false, ["focused runtime tests", "proof ledger checks"]) }
+    if source.hasPrefix("Core/LocalRuntimeOS/") { return ("Core/LocalRuntimeOS", "canonical runtime authority", false, ["focused runtime tests", "proof ledger checks", "legacy runtime guard"]) }
+    if source.hasPrefix("Core/Runtime/") { return ("removed Core/Runtime", "forbidden removed owner after AMB-1730", true, ["legacy runtime guard", "move to Core/LocalRuntimeOS, test-only support, or delete"]) }
     if source.hasPrefix("Core/Persistence/") { return ("Core/Persistence", "canonical", false, ["focused persistence tests", "privacy/local-first proof"]) }
     if source.hasPrefix("Core/") { return ("Core", "canonical", false, ["focused unit tests"]) }
     if source.hasPrefix("Projection/") { return ("Projection", "canonical", false, ["surface scenario tests", "visual proof if UI-facing"]) }

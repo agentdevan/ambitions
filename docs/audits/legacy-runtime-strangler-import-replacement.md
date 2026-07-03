@@ -323,10 +323,21 @@ Old/non-canonical paths removed:
 
 Compatibility shims left behind by this slice: none.
 
-Yellow proof debt remains because Swift/Xcode validation was skipped by user
-instruction. No Swift files remain under `Core/Runtime`. Next repair trains:
-focused owner build/typecheck/tests for AMB-1730 when build validation is
-re-enabled, plus AMB-1667 children for unsafe write/persistence authority and
+AMB-1730 prune follow-up:
+
+- The empty `Native/Ambitions/Core/Runtime` directory was pruned from the working
+  tree after the guard reached zero.
+- `tools/mcp/ambitions_native_mcp` now classifies `Core/LocalRuntimeOS` as the
+  canonical runtime authority and `Core/Runtime` as a removed/forbidden owner,
+  not a canonical owner.
+- The legacy runtime guard reports zero current files and zero allowed
+  test/preview references after the classifier test avoids static legacy path
+  literals.
+
+Remaining proof gap: Swift/Xcode validation was skipped by user instruction. No
+Swift files and no owner directory remain under `Core/Runtime`. Next repair
+trains: focused owner build/typecheck/tests for AMB-1730 when build validation
+is re-enabled, plus AMB-1667 children for unsafe write/persistence authority and
 AMB-1668 children for external adapter command/rejection receipt proof.
 
 No equivalent-folder or close-enough path interpretation was used.

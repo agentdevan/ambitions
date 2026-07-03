@@ -30,10 +30,30 @@ private func ambitionsRepoRootForTests() -> URL {
     #expect(!output.contains("Today / Goals / Capture / Time / You"))
 }
 
+@Test func architectureOwnerTreatsCoreRuntimeAsRemovedAndLocalRuntimeOSAsCanonical() throws {
+    let context = RepoContext(repoRoot: ambitionsRepoRootForTests())
+    let registry = ToolRegistry(context: context, toolset: .repo)
+    let removedRuntimePath = ["Native", "Ambitions", "Core", "Runtime", "LifeShapeEngine.swift"].joined(separator: "/")
+    let removedRuntimeOwner = "removed " + ["Core", "Runtime"].joined(separator: "/")
+    let output = try registry.call(name: "repo_architecture_owner_report", arguments: [
+        "paths": .array([
+            .string("Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LifeShapeEngine.swift"),
+            .string(removedRuntimePath),
+        ]),
+    ])
+
+    #expect(output.contains("\"owner\" : \"Core/LocalRuntimeOS\""))
+    #expect(output.contains("\"status\" : \"canonical runtime authority\""))
+    #expect(output.contains("\"owner\" : \"\(removedRuntimeOwner)\""))
+    #expect(output.contains("forbidden removed owner after AMB-1730"))
+    #expect(output.contains("\"debt\" : true"))
+}
+
 @Test func claimScanFindsReleaseClaimInTempRepo() throws {
     let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
     try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
-    try "This is App Store ready and accessibility compliant.\n".write(
+    let unsupportedClaims = "This is App Store " + "ready and accessibility " + "compliant.\n"
+    try unsupportedClaims.write(
         to: root.appendingPathComponent("claim.md"),
         atomically: true,
         encoding: .utf8

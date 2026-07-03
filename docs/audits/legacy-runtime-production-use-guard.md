@@ -162,14 +162,16 @@ AMB-1730 supersession:
   `currentLegacyRuntimeFiles=0`, `legacyRuntimeFileCeiling=0`,
   and `findingCount=0`.
 
-Yellow proof debt remains because Swift/Xcode validation was skipped by user
-instruction. No Swift files remain under `Core/Runtime`. The final AMB-1730
-owner pass moved the remaining adapter-shim classified files to
+Remaining proof gap: Swift/Xcode validation was skipped by user instruction. No
+Swift files remain under `Core/Runtime`; the empty `Core/Runtime` owner
+directory was pruned after the guard reached zero. The final AMB-1730 owner pass
+moved the remaining adapter-shim classified files to
 `Core/LocalRuntimeOS/RuntimeBoundary`, the production-coupled Golden Vertical
 Slice / RuntimeCore proof harness to `Core/LocalRuntimeOS/PrivateLifeRuntimeKernel`,
 and the unresolved `RuntimePackageBoundaryModels.swift` owner decision to
 `Core/LocalRuntimeOS/RuntimeBoundary` with an updated LocalRuntimeOS source
-root. Next repair train: focused owner build/typecheck/tests when build
-validation is re-enabled.
+root. `tools/mcp/ambitions_native_mcp` now reports `Core/Runtime` as a
+removed/forbidden owner rather than a canonical owner. Next repair train:
+focused owner build/typecheck/tests when build validation is re-enabled.
 
 No equivalent-folder or close-enough path interpretation was used.
