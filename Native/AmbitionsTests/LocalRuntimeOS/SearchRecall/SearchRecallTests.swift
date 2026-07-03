@@ -12,15 +12,27 @@ final class SearchRecallTests: XCTestCase {
             "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/FindActInspectContract.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/SearchActionValidator.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/SearchRebuildPipeline.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/MemoryLensResult+SearchPresentation.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/MemoryLensService+SearchResults.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/MemoryLensService.swift",
         ]
 
         for path in requiredPaths {
             XCTAssertTrue(FileManager.default.fileExists(atPath: root.appendingPathComponent(path).path), path)
         }
-        XCTAssertFalse(
-            FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Core/Runtime/SearchIndex.swift").path),
-            "Local search index source must be owned by Core/LocalRuntimeOS/SearchRecall."
-        )
+        let retiredLegacyPaths = [
+            "Native/Ambitions/Core/Runtime/SearchIndex.swift",
+            "Native/Ambitions/Core/Runtime/MemoryLensResult+SearchPresentation.swift",
+            "Native/Ambitions/Core/Runtime/MemoryLensService+SearchAdapters.swift",
+            "Native/Ambitions/Core/Runtime/MemoryLensService.swift",
+        ]
+
+        for path in retiredLegacyPaths {
+            XCTAssertFalse(
+                FileManager.default.fileExists(atPath: root.appendingPathComponent(path).path),
+                "Local search and MemoryLens source must be owned by Core/LocalRuntimeOS/SearchRecall."
+            )
+        }
     }
 
     func testLocalSearchIndexStillRanksMemoryLensRecordsAfterMove() {

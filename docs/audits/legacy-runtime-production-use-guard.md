@@ -8,13 +8,13 @@ Scope: AMB-1666 -> AMB-1715, with AMB-1716 and AMB-1730 supersessions applied.
 This retained audit installs a guard for new production use of the legacy
 `Native/Ambitions/Core/Runtime` owner. AMB-1716 extends the retired-path set for
 the first test-support quarantine. AMB-1730 extends it for the standalone
-PlanningEngine, goal clarification/contradiction, TimeEngine, and step
-planning/scheduling owner-move batches. It does not prove full LocalRuntimeOS
-completion.
+PlanningEngine, goal clarification/contradiction, TimeEngine, step
+planning/scheduling, and MemoryLens/SearchRecall owner-move batches. It does
+not prove full LocalRuntimeOS completion.
 
 Evidence class: Implemented Yellow. The guard reports new production legacy
 runtime owner growth and explicit new production source references to
-`Core/Runtime`. It preserves the AMB-1730 Yellow baseline of `67` remaining
+`Core/Runtime`. It preserves the AMB-1730 Yellow baseline of `64` remaining
 legacy runtime production files. It does not prove runtime correctness, device
 behavior, accessibility behavior, privacy/legal approval, TestFlight readiness,
 App Store readiness, or Green project status.
@@ -53,7 +53,7 @@ The guard:
 - parses the AMB-1713 classification baseline from
   `docs/audits/legacy-runtime-strangler-classification.md`;
 - subtracts the AMB-1714, AMB-1716, and AMB-1730 retired legacy owner paths;
-- keeps the current legacy runtime production-file ceiling at `67`;
+- keeps the current legacy runtime production-file ceiling at `64`;
 - reports any new production Swift file under `Native/Ambitions/Core/Runtime`;
 - reports any AMB-1714, AMB-1716, or AMB-1730 retired legacy owner path that is
   reintroduced;
@@ -123,6 +123,9 @@ AMB-1730 supersession:
   - `Native/Ambitions/Core/Runtime/GoalResourceGraphService.swift`
   - `Native/Ambitions/Core/Runtime/GoalTeachingSignalService.swift`
   - `Native/Ambitions/Core/Runtime/GoalUnderstandingService.swift`
+  - `Native/Ambitions/Core/Runtime/MemoryLensResult+SearchPresentation.swift`
+  - `Native/Ambitions/Core/Runtime/MemoryLensService+SearchAdapters.swift`
+  - `Native/Ambitions/Core/Runtime/MemoryLensService.swift`
   - `Native/Ambitions/Core/Runtime/OneStepGoalProjector.swift`
   - `Native/Ambitions/Core/Runtime/OpenCapacityEngine.swift`
   - `Native/Ambitions/Core/Runtime/PressureEngine.swift`
@@ -150,15 +153,16 @@ AMB-1730 supersession:
   - `Native/Ambitions/Core/Runtime/TimeRitualGoalSemantics.swift`
 - Canonical owner:
   `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/` and
-  `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/`
-- Active guard ceiling: `67` legacy runtime production files.
+  `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/`, plus
+  `Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/`
+- Active guard ceiling: `64` legacy runtime production files.
 - Guard proof:
   `python3 scripts/ambitions-legacy-runtime-production-use-guard.py --json`
-  reports `baselineLegacyRuntimeFiles=67`,
-  `currentLegacyRuntimeFiles=67`, `legacyRuntimeFileCeiling=67`,
+  reports `baselineLegacyRuntimeFiles=64`,
+  `currentLegacyRuntimeFiles=64`, `legacyRuntimeFileCeiling=64`,
   and `findingCount=0`.
 
-Yellow architecture debt remains because `67` legacy runtime production files
+Yellow architecture debt remains because `64` legacy runtime production files
 still exist under `Core/Runtime`, including adapter shims, production-coupled
 files that AMB-1713 classified as test-only support, and the unresolved
 `RuntimePackageBoundaryModels.swift` owner decision. Next repair train: a

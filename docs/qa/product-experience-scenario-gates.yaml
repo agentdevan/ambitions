@@ -133,7 +133,7 @@ gates:
     user_visible_behavior: "Search finds goals, Steps, proof, Life Capital, and settings."
     current_status: "Partial"
     evidence_paths:
-      - "Native/Ambitions/Core/Runtime/MemoryLensService.swift"
+      - "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/MemoryLensService.swift"
       - "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceEverythingSearchProjection.swift"
       - "Native/AmbitionsTests/Runtime/P1FLocalSearchFoundationTests.swift"
     required_future_proof: "First-class Life Capital and Future Steps search proof, rendered route/accessibility proof"

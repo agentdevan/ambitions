@@ -31,7 +31,8 @@ scope.
 
 AMB-1730 supersession: `docs/audits/legacy-runtime-strangler-import-replacement.md`
 is the current overlay for the standalone PlanningEngine, TimeEngine, goal
-clarification/contradiction, and step planning/scheduling owner-move batches:
+clarification/contradiction, step planning/scheduling, and
+MemoryLens/SearchRecall owner-move batches:
 `BufferEngine.swift`, `CapacityEngine.swift`,
 `GoalClarificationService+02-DefaultGoalClarificationService+03-defaultAssumption.swift`,
 `GoalClarificationService+02-DefaultGoalClarificationService.swift`,
@@ -63,12 +64,16 @@ clarification/contradiction, and step planning/scheduling owner-move batches:
 `StepGraphCompiler+02-StepGraphCompiler+02-compile.swift`,
 `StepGraphCompiler+02-StepGraphCompiler+03-edgeKind.swift`,
 `StepGraphCompiler+02-StepGraphCompiler.swift`, `StepGraphCompiler.swift`,
-`StepQualityFirewall.swift`, `StepReallocationRuntimeBridge.swift`, and
-`TimeRitualGoalSemantics.swift`. Those files moved from production
+`StepQualityFirewall.swift`, `StepReallocationRuntimeBridge.swift`,
+`TimeRitualGoalSemantics.swift`,
+`MemoryLensResult+SearchPresentation.swift`,
+`MemoryLensService+SearchAdapters.swift`, and `MemoryLensService.swift`. Those
+files moved from production
 `Core/Runtime` into
 `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine` and
-`Native/Ambitions/Core/LocalRuntimeOS/TimeEngine`. Remaining legacy runtime
-production-file count is now `67`.
+`Native/Ambitions/Core/LocalRuntimeOS/TimeEngine`, plus
+`Native/Ambitions/Core/LocalRuntimeOS/SearchRecall`. Remaining legacy runtime
+production-file count is now `64`.
 
 ## Canonical Constraints
 
@@ -119,7 +124,7 @@ AMB-1730 remaining overlay:
 
 | Classification | Remaining count | Meaning for AMB-1730 |
 | --- | ---: | --- |
-| Move into LocalRuntimeOS | 54 | Move-candidate rows still in legacy runtime owner scope after the AMB-1714 and AMB-1730 moved rows. |
+| Move into LocalRuntimeOS | 51 | Move-candidate rows still in legacy runtime owner scope after the AMB-1714 and AMB-1730 moved rows. |
 | Adapter shim | 8 | Live or boundary wiring that may temporarily remain only as explicit shims. |
 | Test-only support | 4 | Support rows still production-coupled until a later owner move or quarantine proves replacement. |
 | Unresolved | 1 | `RuntimePackageBoundaryModels.swift` still needs owner decision. |

@@ -13,12 +13,13 @@ readiness proof.
 AMB-1730 supersession: this same audit now records the 2026-07-02 standalone
 PlanningEngine owner-move batch, the follow-on standalone TimeEngine
 owner-move batch, the goal clarification/contradiction PlanningEngine
-owner-move batch, and the step planning/scheduling owner-move batch. AMB-1730
-lowered active legacy runtime production files from `111` to `67` by moving
-source files out of `Core/Runtime` and into
-`Core/LocalRuntimeOS/PlanningEngine` and `Core/LocalRuntimeOS/TimeEngine`.
-This remains Implemented Yellow because `67` legacy runtime production files
-still exist.
+owner-move batch, the step planning/scheduling owner-move batch, and the
+MemoryLens/SearchRecall owner-move batch. AMB-1730 lowered active legacy
+runtime production files from `111` to `64` by moving source files out of
+`Core/Runtime` and into `Core/LocalRuntimeOS/PlanningEngine`,
+`Core/LocalRuntimeOS/TimeEngine`, and `Core/LocalRuntimeOS/SearchRecall`. This
+remains Implemented Yellow because `64` legacy runtime production files still
+exist.
 
 Evidence class: Implemented Yellow. The slice proves a bounded source-owner
 reduction and ownership-test update only. It does not prove total
@@ -104,6 +105,9 @@ private life graph backend.
 | `Native/Ambitions/Core/Runtime/StepQualityFirewall.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepQualityFirewall.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
 | `Native/Ambitions/Core/Runtime/StepReallocationRuntimeBridge.swift` | `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/StepReallocationRuntimeBridge.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/TimeEngine` | Moved; legacy path retired. |
 | `Native/Ambitions/Core/Runtime/TimeRitualGoalSemantics.swift` | `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/TimeRitualGoalSemantics.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/TimeEngine` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/MemoryLensResult+SearchPresentation.swift` | `Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/MemoryLensResult+SearchPresentation.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/SearchRecall` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/MemoryLensService+SearchAdapters.swift` | `Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/MemoryLensService+SearchResults.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/SearchRecall` | Moved and renamed to remove adapter vocabulary; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/MemoryLensService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/MemoryLensService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/SearchRecall` | Moved; legacy path retired. |
 
 No compatibility shim was added by this slice. The moved files retain existing
 type names and behavior; the change is path ownership and proof coverage.
@@ -114,10 +118,11 @@ type names and behavior; the change is path ownership and proof coverage.
 `112` after AMB-1714, to `111` after AMB-1716, to `100` after the first
 AMB-1730 PlanningEngine batch, to `95` after the AMB-1730 TimeEngine batch, and
 to `87` after the AMB-1730 goal clarification/contradiction batch, and to `67`
-after the AMB-1730 step planning/scheduling batch.
+after the AMB-1730 step planning/scheduling batch, and to `64` after the
+AMB-1730 MemoryLens/SearchRecall batch.
 The remaining files stay Yellow, not Green:
 
-- `54` move-candidate files remain in legacy runtime owner scope.
+- `51` move-candidate files remain in legacy runtime owner scope.
 - `8` adapter-shim files remain in legacy runtime owner scope.
 - `4` test-only support files remain in legacy runtime owner scope.
 - `1` unresolved owner-decision file remains:
@@ -157,15 +162,17 @@ Expected proof behavior:
   paths exist and the old `Core/Runtime` paths are absent.
 - AMB-1730 step planning/scheduling PlanningEngine and TimeEngine canonical
   owner paths exist and the old `Core/Runtime` paths are absent.
+- AMB-1730 MemoryLens/SearchRecall canonical owner paths exist and the old
+  `Core/Runtime` paths are absent.
 
 ## AMB-1730 Evidence Update
 
 Before count:
 
 - `python3 scripts/ambitions-legacy-runtime-production-use-guard.py --json`
-  reported `baselineLegacyRuntimeFiles=87`,
-  `currentLegacyRuntimeFiles=87`, `legacyRuntimeFileCeiling=87`, and
-  `findingCount=0` before this step planning/scheduling move batch.
+  reported `baselineLegacyRuntimeFiles=67`,
+  `currentLegacyRuntimeFiles=67`, `legacyRuntimeFileCeiling=67`, and
+  `findingCount=0` before this MemoryLens/SearchRecall move batch.
 - Cumulative AMB-1730 source-owner remediation began at `111` active legacy
   runtime production files before the earlier PlanningEngine and TimeEngine
   move batches.
@@ -173,22 +180,25 @@ Before count:
 After count:
 
 - `python3 scripts/ambitions-legacy-runtime-production-use-guard.py --json`
-  reports `baselineLegacyRuntimeFiles=67`,
-  `currentLegacyRuntimeFiles=67`, `legacyRuntimeFileCeiling=67`, and
+  reports `baselineLegacyRuntimeFiles=64`,
+  `currentLegacyRuntimeFiles=64`, `legacyRuntimeFileCeiling=64`, and
   `findingCount=0`.
 
 Files moved/deleted/quarantined/converted:
 
-- Moved `44` standalone PlanningEngine and TimeEngine source files listed in
-  `AMB-1730 Moved Rows`, including this run's `20` step
-  planning/scheduling source files.
+- Moved `47` standalone PlanningEngine, TimeEngine, and SearchRecall source
+  files listed in `AMB-1730 Moved Rows`, including this run's `3`
+  MemoryLens/SearchRecall source files.
+- Renamed `MemoryLensService+SearchAdapters.swift` to
+  `MemoryLensService+SearchResults.swift` in the canonical SearchRecall owner
+  so result mapping is not treated as adapter authority.
 - Deleted no Swift behavior.
 - Quarantined no test-support files.
 - Converted no adapter shims.
 
 Remaining files:
 
-- `67` production Swift files remain under `Native/Ambitions/Core/Runtime`.
+- `64` production Swift files remain under `Native/Ambitions/Core/Runtime`.
 
 Remaining blockers:
 
@@ -200,14 +210,14 @@ Remaining blockers:
 
 Rollback plan:
 
-- Move the latest AMB-1730 step planning/scheduling files back from
-  `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/` to
-  `Native/Ambitions/Core/Runtime/` and from
-  `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/` to
-  `Native/Ambitions/Core/Runtime/`, restore the guard ceiling to `87`, remove
-  the current ownership assertions, regenerate the project, and rerun the
-  focused StepGraph/StepElasticity/ScheduleInstall/StepQuality/StepReallocation/
-  SimpleStep lifecycle tests plus the required remediation guards. A full
+- Move the latest AMB-1730 MemoryLens/SearchRecall files back from
+  `Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/` to
+  `Native/Ambitions/Core/Runtime/`, restoring
+  `MemoryLensService+SearchResults.swift` to the retired legacy filename
+  `MemoryLensService+SearchAdapters.swift`; restore the guard ceiling to `67`,
+  remove the current SearchRecall ownership assertions, regenerate the project,
+  and rerun the focused MemoryLens/SearchRecall tests plus the required
+  remediation guards when build validation is re-enabled. A full
   AMB-1730 owner-move rollback would also move the earlier PlanningEngine and
   TimeEngine files back from
   `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/` and
@@ -223,8 +233,8 @@ Validation run:
 
 - `git diff --check` -> exit `0`.
 - `python3 scripts/ambitions-legacy-runtime-production-use-guard.py --json`
-  -> exit `0`; `baselineLegacyRuntimeFiles=67`,
-  `currentLegacyRuntimeFiles=67`, `legacyRuntimeFileCeiling=67`,
+  -> exit `0`; `baselineLegacyRuntimeFiles=64`,
+  `currentLegacyRuntimeFiles=64`, `legacyRuntimeFileCeiling=64`,
   `findingCount=0`.
 - `python3 scripts/ambitions-accepted-yellow-misuse-audit.py --json`
   -> exit `0`; `valid=true`, `findingCount=0`.
@@ -250,18 +260,12 @@ Validation run:
 - `xcodegen generate` -> exit `0`; regenerated
   `Ambitions.xcodeproj` from `project.yml`.
 - `find Native/Ambitions/Core/Runtime -maxdepth 1 -name '*.swift' | wc -l`
-  -> `67`.
+  -> `64`.
 
 Validation not run:
 
-- Focused Swift/Xcode validation for the step planning/scheduling move batch was
+- Focused Swift/Xcode validation for the MemoryLens/SearchRecall move batch was
   skipped after user instruction to skip build testing until advised otherwise.
-- `mcp__xcodebuildmcp.test_sim` for the selected moved-owner tests timed out at
-  `300` seconds and produced no result bundle; it is not used as validation
-  proof.
-- Direct focused `xcodebuild` for the selected moved-owner tests was interrupted
-  and stopped after the skip-build-testing instruction; it exited `143` with
-  `BUILD INTERRUPTED` and is not used as validation proof.
 - Full test suite.
 - Physical device runtime proof.
 - Accessibility, performance, privacy/legal, TestFlight, App Store, or release
@@ -277,7 +281,8 @@ Canonical owners touched:
 - `Core/LocalRuntimeOS/ProjectionEngine`
 - `Core/LocalRuntimeOS/PlanningEngine`
 - `Core/LocalRuntimeOS/TimeEngine`
-- Legacy owner retired for `44` AMB-1730 files: `Core/Runtime`
+- `Core/LocalRuntimeOS/SearchRecall`
+- Legacy owner retired for `47` AMB-1730 files: `Core/Runtime`
 
 Files moved or created:
 
@@ -287,8 +292,9 @@ Files moved or created:
   `Core/LocalRuntimeOS/ProjectionEngine`.
 - Moved `RuntimeSnapshot.swift` from `Core/Runtime` to
   `Core/LocalRuntimeOS/ProjectionEngine`.
-- Moved the `44` AMB-1730 PlanningEngine and TimeEngine files listed in
-  `AMB-1730 Moved Rows` from `Core/Runtime` to `Core/LocalRuntimeOS`.
+- Moved the `47` AMB-1730 PlanningEngine, TimeEngine, and SearchRecall files
+  listed in `AMB-1730 Moved Rows` from `Core/Runtime` to
+  `Core/LocalRuntimeOS`.
 - Created this audit overlay.
 
 Old/non-canonical paths removed:
@@ -296,11 +302,11 @@ Old/non-canonical paths removed:
 - `Native/Ambitions/Core/Runtime/PrivateLifeRuntime.swift`
 - `Native/Ambitions/Core/Runtime/RuntimeProjectionPipeline.swift`
 - `Native/Ambitions/Core/Runtime/RuntimeSnapshot.swift`
-- The `44` AMB-1730 retired legacy paths listed in `AMB-1730 Moved Rows`.
+- The `47` AMB-1730 retired legacy paths listed in `AMB-1730 Moved Rows`.
 
 Compatibility shims left behind by this slice: none.
 
-Yellow architecture debt remains because `67` legacy runtime files still exist,
+Yellow architecture debt remains because `64` legacy runtime files still exist,
 including adapter shims, test-only support, and the unresolved
 `RuntimePackageBoundaryModels.swift` owner decision. Next repair trains:
 AMB-1730 follow-up owner-move/quarantine batches, plus AMB-1667 children for

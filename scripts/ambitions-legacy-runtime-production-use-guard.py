@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 LEGACY_RUNTIME_ROOT = ROOT / "Native" / "Ambitions" / "Core" / "Runtime"
 LEGACY_RUNTIME_PREFIX = "Native/Ambitions/Core/Runtime/"
 CLASSIFICATION_DOC = ROOT / "docs" / "audits" / "legacy-runtime-strangler-classification.md"
-MAX_LEGACY_RUNTIME_PRODUCTION_FILES = 67
+MAX_LEGACY_RUNTIME_PRODUCTION_FILES = 64
 
 AMB_1714_RETIRED_LEGACY_PATHS = {
     "Native/Ambitions/Core/Runtime/PrivateLifeRuntime.swift",
@@ -51,6 +51,9 @@ AMB_1730_RETIRED_LEGACY_PATHS = {
     "Native/Ambitions/Core/Runtime/GoalResourceGraphService.swift",
     "Native/Ambitions/Core/Runtime/GoalTeachingSignalService.swift",
     "Native/Ambitions/Core/Runtime/GoalUnderstandingService.swift",
+    "Native/Ambitions/Core/Runtime/MemoryLensResult+SearchPresentation.swift",
+    "Native/Ambitions/Core/Runtime/MemoryLensService+SearchAdapters.swift",
+    "Native/Ambitions/Core/Runtime/MemoryLensService.swift",
     "Native/Ambitions/Core/Runtime/OneStepGoalProjector.swift",
     "Native/Ambitions/Core/Runtime/OpenCapacityEngine.swift",
     "Native/Ambitions/Core/Runtime/PressureEngine.swift",
@@ -363,6 +366,9 @@ def self_test() -> int:
     assert "Native/Ambitions/Core/Runtime/StepQualityFirewall.swift" not in baseline
     assert "Native/Ambitions/Core/Runtime/SimpleStepLifecycleService.swift" not in baseline
     assert "Native/Ambitions/Core/Runtime/TimeRitualGoalSemantics.swift" not in baseline
+    assert "Native/Ambitions/Core/Runtime/MemoryLensService.swift" not in baseline
+    assert "Native/Ambitions/Core/Runtime/MemoryLensService+SearchAdapters.swift" not in baseline
+    assert "Native/Ambitions/Core/Runtime/MemoryLensResult+SearchPresentation.swift" not in baseline
     assert len(baseline) <= MAX_LEGACY_RUNTIME_PRODUCTION_FILES
     synthetic_findings = legacy_owner_findings(
         {"Native/Ambitions/Core/Runtime/ExistingRuntime.swift"},
