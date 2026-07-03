@@ -18,6 +18,11 @@ was lowered. It does not prove runtime correctness, device behavior,
 accessibility behavior, privacy/legal approval, TestFlight readiness, App Store
 readiness, or Green AMB-1666 status.
 
+AMB-1730 supersession: the current legacy runtime production-file ceiling is
+`100` after the standalone PlanningEngine owner-move batch recorded in
+`docs/audits/legacy-runtime-strangler-import-replacement.md`. The AMB-1716
+`111` count below remains the historical count for this quarantine slice only.
+
 ## Canonical Constraints
 
 Runtime mutation law remains:

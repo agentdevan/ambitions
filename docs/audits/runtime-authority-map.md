@@ -2,7 +2,8 @@
 
 Status: AMB-1665 static authority map with AMB-1721 external adapter contract,
 AMB-1722 route audit, AMB-1723 EventKit/Reminders addenda, and AMB-1724
-projection snapshot/redaction addendum
+projection snapshot/redaction addendum, plus AMB-1730 legacy runtime owner-move
+addendum
 
 Snapshot date: 2026-07-02
 
@@ -30,6 +31,33 @@ fake Green. It is static source evidence only. It does not prove runtime
 correctness, device behavior, accessibility behavior, privacy/legal approval,
 build health, TestFlight readiness, App Store readiness, or total
 LocalRuntimeOS completion.
+
+## AMB-1730 Legacy Runtime Owner-Move Addendum
+
+AMB-1730 moved `11` standalone goal/planning runtime files out of
+`Native/Ambitions/Core/Runtime` and into
+`Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine`:
+
+- `GoalDomainPackService.swift`
+- `GoalDomainPacks.swift`
+- `GoalEnergyFitService.swift`
+- `GoalEnergyLearningService.swift`
+- `GoalFreshnessUpdateService.swift`
+- `GoalPathCompilerService.swift`
+- `GoalResourceGraphService.swift`
+- `GoalTeachingSignalService.swift`
+- `GoalUnderstandingService.swift`
+- `OneStepGoalProjector.swift`
+- `RecommendationExplanationAdapter.swift`
+
+Before AMB-1730, the legacy runtime production-use guard reported
+`currentLegacyRuntimeFiles=111` and `legacyRuntimeFileCeiling=111`. After the
+move and guard update, it reports `currentLegacyRuntimeFiles=100` and
+`legacyRuntimeFileCeiling=100`.
+
+This addendum changes source ownership for the listed files only. It does not
+convert remaining `Core/Runtime` files, remove persistence direct writes,
+complete external adapter command/rejection receipt proof, or make M02 Green.
 
 ## Canonical Runtime Law
 

@@ -29,6 +29,17 @@ from production `Core/Runtime` into test support under
 rows remain Yellow until a follow-up proves their owner movement or release-inert
 scope.
 
+AMB-1730 supersession: `docs/audits/legacy-runtime-strangler-import-replacement.md`
+is the current overlay for the standalone PlanningEngine owner-move batch:
+`GoalDomainPackService.swift`, `GoalDomainPacks.swift`,
+`GoalEnergyFitService.swift`, `GoalEnergyLearningService.swift`,
+`GoalFreshnessUpdateService.swift`, `GoalPathCompilerService.swift`,
+`GoalResourceGraphService.swift`, `GoalTeachingSignalService.swift`,
+`GoalUnderstandingService.swift`, `OneStepGoalProjector.swift`, and
+`RecommendationExplanationAdapter.swift`. Those files moved from production
+`Core/Runtime` into `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine`.
+Remaining legacy runtime production-file count is now `100`.
+
 ## Canonical Constraints
 
 Runtime mutation law remains:
@@ -73,6 +84,15 @@ private life graph backend.
 | Adapter shim | 8 | Live or boundary wiring that may temporarily remain as a thin shim only if it contains no product policy, storage authority, or durable mutation authority. |
 | Test-only support | 5 | Fixture/proof harness support that must be quarantined out of production runtime authority or proven release-inert before AMB-1716 closes. |
 | Unresolved | 1 | Owner decision is required before move, delete, or quarantine. |
+
+AMB-1730 remaining overlay:
+
+| Classification | Remaining count | Meaning for AMB-1730 |
+| --- | ---: | --- |
+| Move into LocalRuntimeOS | 87 | Move-candidate rows still in legacy runtime owner scope after the AMB-1714 and AMB-1730 moved rows. |
+| Adapter shim | 8 | Live or boundary wiring that may temporarily remain only as explicit shims. |
+| Test-only support | 4 | Support rows still production-coupled until a later owner move or quarantine proves replacement. |
+| Unresolved | 1 | `RuntimePackageBoundaryModels.swift` still needs owner decision. |
 
 Proof code legend:
 

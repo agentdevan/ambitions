@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 LEGACY_RUNTIME_ROOT = ROOT / "Native" / "Ambitions" / "Core" / "Runtime"
 LEGACY_RUNTIME_PREFIX = "Native/Ambitions/Core/Runtime/"
 CLASSIFICATION_DOC = ROOT / "docs" / "audits" / "legacy-runtime-strangler-classification.md"
-MAX_LEGACY_RUNTIME_PRODUCTION_FILES = 111
+MAX_LEGACY_RUNTIME_PRODUCTION_FILES = 100
 
 AMB_1714_RETIRED_LEGACY_PATHS = {
     "Native/Ambitions/Core/Runtime/PrivateLifeRuntime.swift",
@@ -31,7 +31,25 @@ AMB_1716_RETIRED_LEGACY_PATHS = {
     "Native/Ambitions/Core/Runtime/LargeStoreFixtureGenerator.swift",
 }
 
-RETIRED_LEGACY_RUNTIME_PATHS = AMB_1714_RETIRED_LEGACY_PATHS | AMB_1716_RETIRED_LEGACY_PATHS
+AMB_1730_RETIRED_LEGACY_PATHS = {
+    "Native/Ambitions/Core/Runtime/GoalDomainPackService.swift",
+    "Native/Ambitions/Core/Runtime/GoalDomainPacks.swift",
+    "Native/Ambitions/Core/Runtime/GoalEnergyFitService.swift",
+    "Native/Ambitions/Core/Runtime/GoalEnergyLearningService.swift",
+    "Native/Ambitions/Core/Runtime/GoalFreshnessUpdateService.swift",
+    "Native/Ambitions/Core/Runtime/GoalPathCompilerService.swift",
+    "Native/Ambitions/Core/Runtime/GoalResourceGraphService.swift",
+    "Native/Ambitions/Core/Runtime/GoalTeachingSignalService.swift",
+    "Native/Ambitions/Core/Runtime/GoalUnderstandingService.swift",
+    "Native/Ambitions/Core/Runtime/OneStepGoalProjector.swift",
+    "Native/Ambitions/Core/Runtime/RecommendationExplanationAdapter.swift",
+}
+
+RETIRED_LEGACY_RUNTIME_PATHS = (
+    AMB_1714_RETIRED_LEGACY_PATHS
+    | AMB_1716_RETIRED_LEGACY_PATHS
+    | AMB_1730_RETIRED_LEGACY_PATHS
+)
 
 PRODUCTION_SWIFT_ROOTS = (
     "Native/Ambitions/",
@@ -298,6 +316,8 @@ def self_test() -> int:
     baseline = baseline_legacy_runtime_paths()
     assert "Native/Ambitions/Core/Runtime/PrivateLifeRuntime.swift" not in baseline
     assert "Native/Ambitions/Core/Runtime/LargeStoreFixtureGenerator.swift" not in baseline
+    assert "Native/Ambitions/Core/Runtime/GoalUnderstandingService.swift" not in baseline
+    assert "Native/Ambitions/Core/Runtime/OneStepGoalProjector.swift" not in baseline
     assert len(baseline) <= MAX_LEGACY_RUNTIME_PRODUCTION_FILES
     synthetic_findings = legacy_owner_findings(
         {"Native/Ambitions/Core/Runtime/ExistingRuntime.swift"},

@@ -59,6 +59,47 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
         }
     }
 
+    func testAMB1730MovesStandalonePlanningServicesToCanonicalOwner() {
+        let root = repoRoot()
+        for requiredPath in [
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalDomainPackService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalDomainPacks.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalEnergyFitService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalEnergyLearningService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalFreshnessUpdateService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalPathCompilerService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalResourceGraphService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalTeachingSignalService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalUnderstandingService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/OneStepGoalProjector.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/RecommendationExplanationAdapter.swift",
+        ] {
+            XCTAssertTrue(
+                FileManager.default.fileExists(atPath: root.appendingPathComponent(requiredPath).path),
+                "Missing AMB-1730 canonical PlanningEngine owner: \(requiredPath)"
+            )
+        }
+
+        for retiredPath in [
+            "Native/Ambitions/Core/Runtime/GoalDomainPackService.swift",
+            "Native/Ambitions/Core/Runtime/GoalDomainPacks.swift",
+            "Native/Ambitions/Core/Runtime/GoalEnergyFitService.swift",
+            "Native/Ambitions/Core/Runtime/GoalEnergyLearningService.swift",
+            "Native/Ambitions/Core/Runtime/GoalFreshnessUpdateService.swift",
+            "Native/Ambitions/Core/Runtime/GoalPathCompilerService.swift",
+            "Native/Ambitions/Core/Runtime/GoalResourceGraphService.swift",
+            "Native/Ambitions/Core/Runtime/GoalTeachingSignalService.swift",
+            "Native/Ambitions/Core/Runtime/GoalUnderstandingService.swift",
+            "Native/Ambitions/Core/Runtime/OneStepGoalProjector.swift",
+            "Native/Ambitions/Core/Runtime/RecommendationExplanationAdapter.swift",
+        ] {
+            XCTAssertFalse(
+                FileManager.default.fileExists(atPath: root.appendingPathComponent(retiredPath).path),
+                "AMB-1730 planning service still lives under production runtime owner: \(retiredPath)"
+            )
+        }
+    }
+
     func testRemainingLegacyRuntimeLeavesStayExplicitYellowUntilFollowUpMove() {
         let root = repoRoot()
         for yellowPath in [
