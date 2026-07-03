@@ -1781,12 +1781,8 @@ def check_side_effect_local_commit_receipt_gate() -> CheckResult:
             "commitRequirement: externalEffect ? .localCommitRequired : .noUserStateMutation",
             "localCommit: localCommit",
             "return try? await recorder.enqueue(request)",
-        ],
-        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "SideEffectSystem" / "ReminderOutbox.swift": [
-            "localCommit: SideEffectLocalCommitEvidence",
-            "externalEffect: true",
-            "commitRequirement: .localCommitRequired",
-            "localCommit: localCommit",
+            "func recordCalendarResult(",
+            "return try? await recorder.recordResult(result, for: attempt, occurredAt: now)",
         ],
         ROOT / "Native" / "Ambitions" / "Core" / "Permissions" / "CalendarReminders" / "EventKitIntegrationService.swift": [
             "case missingLocalCommitReceipt(scope: CalendarRemindersScope)",
@@ -1799,6 +1795,9 @@ def check_side_effect_local_commit_receipt_gate() -> CheckResult:
             "throw CalendarRemindersError.missingLocalCommitReceipt(scope: .reminders)",
             "throw CalendarRemindersError.missingLocalCommitReceipt(scope: .calendarEvents)",
             "localCommit: localCommit",
+            "storeClient.saveReminder(payload)",
+            "Reminder write completed through EventKit side-effect owner.",
+            "recordCalendarResult(",
         ],
         ROOT / "Native" / "Ambitions" / "Core" / "Permissions" / "CalendarReminders" / "EventKitIntegrationService+03-EventKitIntegrationService.swift": [
             "localCommit: SideEffectLocalCommitEvidence?",
@@ -1812,6 +1811,7 @@ def check_side_effect_local_commit_receipt_gate() -> CheckResult:
             "testLegacyUnitOfWorkReceiptDoesNotPermitExternalWriteWithoutRuntimeReceiptProof",
             "External side effect must declare a local runtime commit receipt requirement.",
             "External side effect cannot be attempted before a committed local mutation receipt.",
+            "SideEffectSystem/ReminderOutbox.swift",
         ],
     }
 
