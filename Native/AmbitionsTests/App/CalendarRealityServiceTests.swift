@@ -114,18 +114,15 @@ final class CalendarRealityServiceTests: XCTestCase {
         XCTAssertEqual(payload?.notes, "Created by Ambitions after explicit Time confirmation.")
 
         let records = await sideEffectLedger.records
-        let queuedSideEffect = records.first { $0.status == .queued }
-        let completedSideEffect = records.first { $0.status == .recordedLocalOnly }
-        XCTAssertEqual(records.count, 2)
-        XCTAssertEqual(queuedSideEffect?.effectKind, .calendar)
-        XCTAssertEqual(queuedSideEffect?.actionKind, .writeCalendarBlock)
-        XCTAssertEqual(queuedSideEffect?.requiresConfirmation, true)
-        XCTAssertEqual(queuedSideEffect?.externalEffect, true)
+        let completedSideEffect = records.first
+        XCTAssertEqual(records.count, 1)
         XCTAssertEqual(completedSideEffect?.effectKind, .calendar)
-        XCTAssertEqual(completedSideEffect?.status, .recordedLocalOnly)
+        XCTAssertEqual(completedSideEffect?.status, .succeeded)
         XCTAssertEqual(completedSideEffect?.actionKind, .writeCalendarBlock)
         XCTAssertEqual(completedSideEffect?.requiresConfirmation, true)
         XCTAssertEqual(completedSideEffect?.externalEffect, true)
+        XCTAssertEqual(completedSideEffect?.receiptID, "event-1")
+        XCTAssertTrue(completedSideEffect?.degradedFacts.contains("Calendar block write completed through EventKit side-effect owner.") == true)
     }
 
     func testConfirmedBlockWriteRequiresLocalCommitReceiptBeforeSavingEvent() async throws {
@@ -169,6 +166,54 @@ final class CalendarRealityServiceTests: XCTestCase {
         XCTAssertEqual(record?.requiresConfirmation, true)
         XCTAssertEqual(record?.externalEffect, true)
         XCTAssertTrue(record?.blockedFacts.contains("External side effect cannot be attempted before a committed local mutation receipt.") == true)
+    }
+
+    func testConfirmedBlockWriteDeniedPermissionRecordsResultReceipt() async throws {
+        let store = RecordingRealityEventKitStoreClient()
+        let now = Date(timeIntervalSince1970: 1_714_000_000)
+        await store.setAuthorization(state: .notDetermined, for: .calendarEvents)
+        await store.setWriteOnlyAuthorizationResponse(state: .denied)
+        let sideEffectLedger = RecordingSideEffectLedgerRepository()
+        let service = EventKitIntegrationService(
+            storeClient: store,
+            eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
+        )
+        let block = ScheduledAmbitionsBlock(
+            id: "block-1",
+            title: "Draft proposal",
+            start: now.addingTimeInterval(3_600),
+            end: now.addingTimeInterval(5_400),
+            contextLens: .work,
+            relatedPlanID: "plan-1",
+            isUserConfirmed: true
+        )
+
+        do {
+            _ = try await service.createCalendarBlock(
+                intent: ScheduledBlockWriteIntent(id: "intent-1", block: block, requestedAt: now),
+                now: now,
+                localCommit: runtimeLocalCommitEvidence("calendar-block-denied")
+            )
+            XCTFail("Expected calendar block write authorization denial to throw.")
+        } catch let error as CalendarRemindersError {
+            XCTAssertEqual(error, .authorizationDenied(scope: .calendarEvents))
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+
+        let payload = await store.lastEventPayload
+        let record = await sideEffectLedger.lastRecord
+        XCTAssertNil(payload)
+        XCTAssertEqual(record?.effectKind, .calendar)
+        XCTAssertEqual(record?.status, .failedSafely)
+        XCTAssertEqual(record?.actionKind, .writeCalendarBlock)
+        XCTAssertEqual(record?.boundary, .externalEffect)
+        XCTAssertEqual(record?.requiresConfirmation, true)
+        XCTAssertEqual(record?.externalEffect, false)
+        XCTAssertEqual(record?.localOnly, true)
+        XCTAssertNotNil(record?.receiptID)
+        XCTAssertTrue(record?.blockedFacts.contains("Calendar write permission was not available for the confirmed block.") == true)
+        XCTAssertTrue(record?.degradedFacts.contains("Calendar block write permission was denied before EventKit save.") == true)
     }
 }
 

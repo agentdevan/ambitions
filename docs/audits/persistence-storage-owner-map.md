@@ -156,7 +156,7 @@ migration, repair, or trust policy.
 | `StoreHealthCheck.swift` | `Diagnostics`, `MigrationRepair`, `Storage/ObjectStoreSwiftData` | Health checks and write probes are diagnostics. They must not authorize durable repair or product mutation. | P-DIAGNOSTIC |
 | `SupportDiagnosticsBundle.swift`, `StoragePackageBoundaryModels.swift` | `Diagnostics`, `PrivacySecurity`, `Quality` | Diagnostic/export boundary data must stay redacted/review-only and cannot become package-boundary authority. | P-DIAGNOSTIC |
 | `PreviewCaptureRepository.swift`, `DemoSeedPipeline.swift` | `Quality`/preview fixtures or command-seeded LocalRuntimeOS fixture paths | Preview/demo data is not production mutation proof. Demo apply paths are unsafe if reachable from production. | P-REJECT |
-| Reminder repositories and contracts | `SideEffectSystem/ReminderOutbox` plus `Storage/ObjectStoreSwiftData` for local object records | Reminder persistence cannot be external side-effect authority; delivery needs outbox/receipt proof. | AMB-1668 and P-REJECT |
+| Reminder repositories and contracts | `SideEffectSystem/EventKitOutbox` plus `Storage/ObjectStoreSwiftData` for local object records | Reminder persistence cannot be external side-effect authority; delivery needs outbox/receipt proof. AMB-1732 removed the unused `ReminderOutbox` duplicate anchor. | AMB-1668 and P-REJECT |
 
 ## Business-Decision Ban
 

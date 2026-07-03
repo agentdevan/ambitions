@@ -242,9 +242,16 @@ final class ExternalActionCommandServiceTests: XCTestCase {
         XCTAssertTrue(router.dispatchedRoutes.isEmpty)
     }
 
-    func testWidgetPayloadFallsBackToCanonicalActionValueWhenActionIdentifierIsGeneric() async {
+    func testAMB1732WidgetMutationPayloadRecordsRejectionReceiptInsteadOfMutating() async throws {
         let today = RecordingExternalActionTodayService()
-        let service = makeService(todayService: today)
+        let router = RecordingExternalActionRouter()
+        let ledger = InMemorySideEffectLedgerRepository()
+        let outbox = SideEffectOutbox(ledger: ledger)
+        let service = makeService(
+            todayService: today,
+            router: router,
+            rejectionRecorder: outbox
+        )
         let payload = AppWidgetRoutingPayload(
             action: "noop",
             values: ExternalSurfaceActionPayload.commandPayload(
@@ -258,19 +265,52 @@ final class ExternalActionCommandServiceTests: XCTestCase {
 
         let result = await service.execute(
             ExternalActionCommand(widgetPayload: payload),
-            now: .now
+            now: Date(timeIntervalSince1970: 1_712_779_200)
         )
 
-        XCTAssertEqual(result.outcome, .performed)
-        XCTAssertEqual(today.performedActions.map(\.kind), [.complete])
-        XCTAssertEqual(today.performedActions.first?.target.goalID, "goal-1")
-        XCTAssertEqual(today.performedActions.first?.target.stepID, "step-1")
+        XCTAssertEqual(result.outcome, .routed)
+        XCTAssertTrue(today.performedActions.isEmpty)
+        XCTAssertEqual(router.dispatchedRoutes.map(\.route), [.openTab(.today)])
+
+        let receipt = try XCTUnwrap(result.sideEffectReceipt)
+        XCTAssertEqual(receipt.status, .failedSafely)
+        XCTAssertTrue(receipt.localOnly)
+
+        let fetched = try await ledger.fetchRecord(id: receipt.sideEffectID)
+        let stored = try XCTUnwrap(fetched)
+        XCTAssertEqual(stored.effectKind, .commandBridge)
+        XCTAssertEqual(stored.status, .failedSafely)
+        XCTAssertEqual(stored.boundary, .unsupported)
+        XCTAssertEqual(stored.actionKind, .markDone)
+        XCTAssertEqual(stored.sourceDomain, .externalSurface)
+        XCTAssertFalse(stored.externalEffect)
+        XCTAssertTrue(stored.localOnly)
+        XCTAssertTrue(stored.reasons.contains(.unsupportedSource))
+        XCTAssertTrue(stored.targetObjects.contains(LifeGraphObjectReference(kind: .goal, id: "goal-1", sourceDomain: .goals)))
+        XCTAssertTrue(
+            stored.targetObjects.contains(
+                LifeGraphObjectReference(
+                    kind: .step,
+                    id: "step-1",
+                    parentContextID: "goal-1",
+                    sourceDomain: .goalEngine
+                )
+            )
+        )
+        XCTAssertTrue(stored.blockedFacts.contains { $0.contains("widget") && $0.contains("complete") })
+        XCTAssertTrue(stored.degradedFacts.contains { $0.contains("No private life graph state changed.") })
     }
 
-    func testPFC20NotificationMutationPayloadRoutesInsteadOfMutating() async {
+    func testAMB1732NotificationMutationPayloadRoutesAndRecordsRejectionReceipts() async throws {
         let today = RecordingExternalActionTodayService()
         let router = RecordingExternalActionRouter()
-        let service = makeService(todayService: today, router: router)
+        let ledger = InMemorySideEffectLedgerRepository()
+        let outbox = SideEffectOutbox(ledger: ledger)
+        let service = makeService(
+            todayService: today,
+            router: router,
+            rejectionRecorder: outbox
+        )
         let completePayload = AppNotificationRoutingPayload(
             action: "complete",
             values: [
@@ -287,14 +327,15 @@ final class ExternalActionCommandServiceTests: XCTestCase {
                 "origin": "notification"
             ]
         )
+        let now = Date(timeIntervalSince1970: 1_712_779_200)
 
         let completeResult = await service.execute(
             ExternalActionCommand(notificationPayload: completePayload),
-            now: .now
+            now: now
         )
         let snoozeResult = await service.execute(
             ExternalActionCommand(notificationPayload: snoozePayload),
-            now: .now
+            now: now.addingTimeInterval(1)
         )
 
         XCTAssertEqual(completeResult.outcome, .routed)
@@ -308,6 +349,32 @@ final class ExternalActionCommandServiceTests: XCTestCase {
             .notificationAction,
             .notificationAction,
         ])
+
+        let completeReceipt = try XCTUnwrap(completeResult.sideEffectReceipt)
+        let snoozeReceipt = try XCTUnwrap(snoozeResult.sideEffectReceipt)
+        XCTAssertEqual(completeReceipt.status, .failedSafely)
+        XCTAssertEqual(snoozeReceipt.status, .failedSafely)
+        XCTAssertTrue(completeReceipt.localOnly)
+        XCTAssertTrue(snoozeReceipt.localOnly)
+
+        let fetchedComplete = try await ledger.fetchRecord(id: completeReceipt.sideEffectID)
+        let completeRecord = try XCTUnwrap(fetchedComplete)
+        let fetchedSnooze = try await ledger.fetchRecord(id: snoozeReceipt.sideEffectID)
+        let snoozeRecord = try XCTUnwrap(fetchedSnooze)
+        XCTAssertEqual(completeRecord.effectKind, .commandBridge)
+        XCTAssertEqual(snoozeRecord.effectKind, .commandBridge)
+        XCTAssertEqual(completeRecord.status, .failedSafely)
+        XCTAssertEqual(snoozeRecord.status, .failedSafely)
+        XCTAssertEqual(completeRecord.boundary, .unsupported)
+        XCTAssertEqual(snoozeRecord.boundary, .unsupported)
+        XCTAssertEqual(completeRecord.actionKind, .markDone)
+        XCTAssertEqual(snoozeRecord.actionKind, .deferAction)
+        XCTAssertFalse(completeRecord.externalEffect)
+        XCTAssertFalse(snoozeRecord.externalEffect)
+        XCTAssertTrue(completeRecord.reasons.contains(.unsupportedSource))
+        XCTAssertTrue(snoozeRecord.reasons.contains(.unsupportedSource))
+        XCTAssertTrue(completeRecord.blockedFacts.contains { $0.contains("notification") && $0.contains("complete") })
+        XCTAssertTrue(snoozeRecord.blockedFacts.contains { $0.contains("notification") && $0.contains("snooze") })
     }
 }
 
@@ -317,7 +384,8 @@ private extension ExternalActionCommandServiceTests {
         todayService: RecordingExternalActionTodayService? = nil,
         goalsService: RecordingExternalActionGoalsService = RecordingExternalActionGoalsService(),
         captureService: RecordingExternalActionCaptureService = RecordingExternalActionCaptureService(),
-        router: RecordingExternalActionRouter? = nil
+        router: RecordingExternalActionRouter? = nil,
+        rejectionRecorder: (any SideEffectOutboxing)? = nil
     ) -> DefaultExternalActionCommandService {
         let todayService = todayService ?? RecordingExternalActionTodayService()
         let router = router ?? RecordingExternalActionRouter()
@@ -325,7 +393,8 @@ private extension ExternalActionCommandServiceTests {
             todayService: todayService,
             goalsService: goalsService,
             captureService: captureService,
-            externalRouter: router
+            externalRouter: router,
+            rejectionRecorder: rejectionRecorder
         )
     }
 }

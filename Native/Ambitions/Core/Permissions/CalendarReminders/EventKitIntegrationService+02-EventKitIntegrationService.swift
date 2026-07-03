@@ -40,6 +40,22 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
     ) async throws -> CreatedReminderRecord {
         let state = await requestAuthorizationIfNeeded(for: .reminders)
         guard state.canWrite else {
+            let attempt = await recordCalendarSideEffect(
+                actionKind: .writeCalendarBlock,
+                status: .blocked,
+                boundary: .externalEffect,
+                requiresConfirmation: true,
+                externalEffect: false,
+                blockedFacts: ["Reminder write permission was not available for this requested reminder."]
+            )
+            await recordCalendarResult(
+                SideEffectAttemptResult(
+                    state: .permissionDenied,
+                    degradedFacts: ["Reminder write permission was denied before EventKit save."]
+                ),
+                for: attempt,
+                now: now
+            )
             throw CalendarRemindersError.authorizationDenied(scope: .reminders)
         }
 
@@ -48,30 +64,29 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
             notes: explicitRequestNotes(from: selection, itemKind: "reminder"),
             dueDate: selection.suggestedDate
         )
+        let attempt = await recordCalendarSideEffect(
+            actionKind: .writeCalendarBlock,
+            status: .queued,
+            boundary: .externalEffect,
+            requiresConfirmation: false,
+            externalEffect: true,
+            reasons: [.externalSideEffect],
+            degradedFacts: ["Reminder write queued after explicit user request."],
+            localCommit: localCommit
+        )
+        guard attempt?.mayAttemptExternalWrite == true else {
+            throw CalendarRemindersError.missingLocalCommitReceipt(scope: .reminders)
+        }
         do {
-            let attempt = await recordCalendarSideEffect(
-                actionKind: .writeCalendarBlock,
-                status: .queued,
-                boundary: .externalEffect,
-                requiresConfirmation: false,
-                externalEffect: true,
-                reasons: [.externalSideEffect],
-                degradedFacts: ["Reminder write queued after explicit user request."],
-                localCommit: localCommit
-            )
-            guard attempt?.mayAttemptExternalWrite == true else {
-                throw CalendarRemindersError.missingLocalCommitReceipt(scope: .reminders)
-            }
             let identifier = try await storeClient.saveReminder(payload)
-            await recordCalendarSideEffect(
-                actionKind: .writeCalendarBlock,
-                status: .succeeded,
-                boundary: .externalEffect,
-                requiresConfirmation: false,
-                externalEffect: true,
-                reasons: [.externalSideEffect],
-                degradedFacts: ["Reminder write completed through EventKit side-effect owner."],
-                localCommit: localCommit
+            await recordCalendarResult(
+                SideEffectAttemptResult(
+                    state: .succeeded,
+                    externalReceiptID: identifier,
+                    degradedFacts: ["Reminder write completed through EventKit side-effect owner."]
+                ),
+                for: attempt,
+                now: now
             )
             if let reminderRepository {
                 try await reminderRepository.saveReminders([
@@ -83,26 +98,24 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
                 ])
             }
             return CreatedReminderRecord(identifier: identifier, title: selection.stepTitle)
-        } catch CalendarRemindersError.missingLocalCommitReceipt(let scope) {
-            throw CalendarRemindersError.missingLocalCommitReceipt(scope: scope)
         } catch let error as CalendarRemindersError {
-            await recordCalendarSideEffect(
-                actionKind: .writeCalendarBlock,
-                status: .failedSafely,
-                boundary: .externalEffect,
-                requiresConfirmation: false,
-                externalEffect: true,
-                degradedFacts: ["Reminder write could not be completed safely."]
+            await recordCalendarResult(
+                SideEffectAttemptResult(
+                    state: .failedSafely,
+                    degradedFacts: ["Reminder write could not be completed safely."]
+                ),
+                for: attempt,
+                now: now
             )
             throw error
         } catch {
-            await recordCalendarSideEffect(
-                actionKind: .writeCalendarBlock,
-                status: .failedSafely,
-                boundary: .externalEffect,
-                requiresConfirmation: false,
-                externalEffect: true,
-                degradedFacts: ["Reminder write could not be completed safely."]
+            await recordCalendarResult(
+                SideEffectAttemptResult(
+                    state: .failedSafely,
+                    degradedFacts: ["Reminder write could not be completed safely."]
+                ),
+                for: attempt,
+                now: now
             )
             throw CalendarRemindersError.saveFailed(error.localizedDescription)
         }
@@ -120,13 +133,21 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
     ) async throws -> CreatedCalendarEventRecord {
         let state = await requestAuthorizationIfNeeded(for: .calendarEvents)
         guard state.canWrite else {
-            await recordCalendarSideEffect(
+            let attempt = await recordCalendarSideEffect(
                 actionKind: .writeCalendarBlock,
                 status: .blocked,
                 boundary: .externalEffect,
                 requiresConfirmation: true,
-                externalEffect: true,
+                externalEffect: false,
                 blockedFacts: ["Calendar write permission was not available for this requested calendar event."]
+            )
+            await recordCalendarResult(
+                SideEffectAttemptResult(
+                    state: .permissionDenied,
+                    degradedFacts: ["Calendar write permission was denied before EventKit save."]
+                ),
+                for: attempt,
+                now: now
             )
             throw CalendarRemindersError.authorizationDenied(scope: .calendarEvents)
         }
@@ -149,30 +170,29 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
             startDate: interval.start,
             endDate: interval.end
         )
+        let attempt = await recordCalendarSideEffect(
+            actionKind: .writeCalendarBlock,
+            status: .queued,
+            boundary: .externalEffect,
+            requiresConfirmation: false,
+            externalEffect: true,
+            reasons: [.externalSideEffect],
+            degradedFacts: ["Calendar event write queued after explicit user request."],
+            localCommit: localCommit
+        )
+        guard attempt?.mayAttemptExternalWrite == true else {
+            throw CalendarRemindersError.missingLocalCommitReceipt(scope: .calendarEvents)
+        }
         do {
-            let attempt = await recordCalendarSideEffect(
-                actionKind: .writeCalendarBlock,
-                status: .queued,
-                boundary: .externalEffect,
-                requiresConfirmation: false,
-                externalEffect: true,
-                reasons: [.externalSideEffect],
-                degradedFacts: ["Calendar event write queued after explicit user request."],
-                localCommit: localCommit
-            )
-            guard attempt?.mayAttemptExternalWrite == true else {
-                throw CalendarRemindersError.missingLocalCommitReceipt(scope: .calendarEvents)
-            }
             let identifier = try await storeClient.saveEvent(payload)
-            await recordCalendarSideEffect(
-                actionKind: .writeCalendarBlock,
-                status: .succeeded,
-                boundary: .externalEffect,
-                requiresConfirmation: false,
-                externalEffect: true,
-                reasons: [.externalSideEffect],
-                degradedFacts: ["Calendar event write completed through EventKit side-effect owner."],
-                localCommit: localCommit
+            await recordCalendarResult(
+                SideEffectAttemptResult(
+                    state: .succeeded,
+                    externalReceiptID: identifier,
+                    degradedFacts: ["Calendar event write completed through EventKit side-effect owner."]
+                ),
+                for: attempt,
+                now: now
             )
             return CreatedCalendarEventRecord(
                 identifier: identifier,
@@ -180,26 +200,24 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
                 startDate: interval.start,
                 endDate: interval.end
             )
-        } catch CalendarRemindersError.missingLocalCommitReceipt(let scope) {
-            throw CalendarRemindersError.missingLocalCommitReceipt(scope: scope)
         } catch let error as CalendarRemindersError {
-            await recordCalendarSideEffect(
-                actionKind: .writeCalendarBlock,
-                status: .failedSafely,
-                boundary: .externalEffect,
-                requiresConfirmation: false,
-                externalEffect: true,
-                degradedFacts: ["Calendar event write could not be completed safely."]
+            await recordCalendarResult(
+                SideEffectAttemptResult(
+                    state: .failedSafely,
+                    degradedFacts: ["Calendar event write could not be completed safely."]
+                ),
+                for: attempt,
+                now: now
             )
             throw error
         } catch {
-            await recordCalendarSideEffect(
-                actionKind: .writeCalendarBlock,
-                status: .failedSafely,
-                boundary: .externalEffect,
-                requiresConfirmation: false,
-                externalEffect: true,
-                degradedFacts: ["Calendar event write could not be completed safely."]
+            await recordCalendarResult(
+                SideEffectAttemptResult(
+                    state: .failedSafely,
+                    degradedFacts: ["Calendar event write could not be completed safely."]
+                ),
+                for: attempt,
+                now: now
             )
             throw CalendarRemindersError.saveFailed(error.localizedDescription)
         }

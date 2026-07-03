@@ -3,7 +3,9 @@
 Status: AMB-1665 static authority map with AMB-1721 external adapter contract,
 AMB-1722 route audit, AMB-1723 EventKit/Reminders addenda, and AMB-1724
 projection snapshot/redaction addendum, plus AMB-1730 legacy runtime owner-move
-addendum and AMB-1731 direct-write repair addendum
+addendum, AMB-1731 direct-write repair addendum, and AMB-1732 external payload
+rejection plus EventKit/Reminders result receipt and unused ReminderOutbox
+deletion source addendum
 
 Snapshot date: 2026-07-03
 
@@ -19,12 +21,15 @@ Source snapshots inspected:
 - AMB-1723 baseline: `39ebf1cf1550ad6a169ba7c71fa684ae2fdf56b8` on `main`
 - AMB-1724 baseline: `38f142973fbecca15efd71a39fcac4ec5fe0c6ed` on `main`
 - AMB-1731 repair run: working tree based on `b616fa056570341094d0c42003f0fc1aa1c16058` on `main`
+- AMB-1732 repair run: working tree based on `4e6359a668dc711e62c469d95f0c43a85a62347c` on `main`
 
 Scope: M01 AMB-1665 runtime authority map plus AMB-1721 contract, AMB-1722 route
-audit, AMB-1723 EventKit/Reminders audit, and AMB-1724 projection
-snapshot/redaction addenda only. No production Swift behavior, source
-migration, runtime authority migration, or product-surface behavior was changed
-by this artifact.
+audit, AMB-1723 EventKit/Reminders audit, AMB-1724 projection
+snapshot/redaction addenda, AMB-1730/AMB-1731 source repair addenda, and
+AMB-1732 external payload rejection receipt, EventKit/Reminders result receipt,
+and unused ReminderOutbox deletion source addendum. This artifact records
+actual source changes only where named by the addenda and does not promote
+parent runtime authority to Green.
 
 Evidence class: Implemented Yellow. This map classifies current source
 entry points and direct-write markers so later remediation can proceed without
@@ -292,8 +297,8 @@ private life graph backend.
   - `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/EventKitOutbox+EventKitStoreClientLive.swift`
   - `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/NotificationOutbox.swift`
   - `Native/Ambitions/Core/Permissions/CalendarReminders/EventKitIntegrationService.swift`
-  - `Native/Ambitions/Core/Permissions/CalendarReminders/EventKitIntegrationService+02-ExternalWrites.swift`
-  - `Native/Ambitions/Core/Permissions/CalendarReminders/EventKitIntegrationService+03-CalendarContext.swift`
+  - `Native/Ambitions/Core/Permissions/CalendarReminders/EventKitIntegrationService+02-EventKitIntegrationService.swift`
+  - `Native/Ambitions/Core/Permissions/CalendarReminders/EventKitIntegrationService+03-EventKitIntegrationService.swift`
   - `Native/Ambitions/Core/Permissions/LocalNotificationFoundation.swift`
   - `Native/Ambitions/Core/Permissions/NextStepLiveActivityService.swift`
   - `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/CloudKitContinuityAdapter.swift`
@@ -378,13 +383,13 @@ private life graph backend.
 | Time edits and local schedule blocks | `Native/Ambitions/Surfaces/Time`, `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LocalScheduleBlockFileStore.swift`, `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LifeCalendarStore.swift` | canonical command | AMB-1731 moved local schedule file IO out of `Core/Domain/RealityModels.swift` and into TimeEngine. Rendered Time behavior and full command/receipt proof remain separate. | AMB-1667, AMB-1717, AMB-1718 |
 | You/profile edits | `Native/Ambitions/Surfaces/You`, `Native/Ambitions/Projection/SurfaceLenses/YouFeatureService.swift`, `Native/Ambitions/Core/LocalRuntimeOS/ObjectState/YouPreferencesCommandService.swift` | canonical command | AMB-1707 traces preference save through `YouPreferencesCommandService` and `RuntimeCommandMutationCommitter`; static evidence does not prove every You row is a runtime mutation or device behavior. | AMB-1666, AMB-1667 |
 | Widgets and Live Activity UI | `Native/AmbitionsWidgetExtension/NextStepWidget.swift`, `Native/AmbitionsWidgetExtension/NextStepLiveActivityWidget.swift`, `Native/Ambitions/Projection/ExternalSnapshots/ExternalWidgetProjection.swift`, `Native/Ambitions/Projection/ExternalSnapshots/SharedExternalSnapshotStore.swift` | projection-only read | Widgets and Live Activity UI read verified safe snapshots and deep link back to app. Current widget source does not render a mutating control. | AMB-1668 |
-| Widget payload action bridge | `Native/Ambitions/App/AppBootstrapper.swift`, `Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/ExternalActionCommandService.swift`, `Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/AmbitionsRuntimeServices.swift` | unknown | Current widget UI does not emit command payloads, but the app-level widget payload bridge can execute `complete`, `delay`, `snooze`, or smaller-step commands if invoked. Static source does not prove a typed receipt or canonical behavior for that path. | AMB-1666, AMB-1668 |
+| Widget payload action bridge | `Native/Ambitions/App/AppBootstrapper.swift`, `Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/ExternalActionCommandService.swift`, `Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/AmbitionsRuntimeServices.swift` | rejectionReceipt source-present / focused XCTest passed | AMB-1732 changes widget payload handling so mutating payload actions downgrade to Today review routing and record a local-only `commandBridge` rejection receipt when a recorder is configured. Current widget UI still does not emit command payloads. Focused simulator XCTest passed; device/lifecycle and replay proof remain missing. | AMB-1668, AMB-1732 |
 | Live Activity lifecycle refresh | `Native/Ambitions/Core/Permissions/LocalNotificationFoundation.swift`, `Native/Ambitions/Core/Permissions/NextStepLiveActivityService.swift`, `Native/AmbitionsWidgetExtension/NextStepLiveActivityWidget.swift` | adapter into command | Live Activity request/update/end decisions derive from safe external snapshots during notification refresh. This is system-surface side-effect handling, not private graph authority proof. | AMB-1668 |
 | App Intents, creation | `Native/Ambitions/App/Intents/AmbitionsCreationIntents.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/AppIntentBridge.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ExternalCreationImportService.swift` | adapter into command | App Intent input is durable handoff first, then imported as `AmbitionsCommand(kind: .quickCapture)`; adapter receipt and terminated-app proof remain future work. | AMB-1668 |
 | App Intents, step inspection/control | `Native/Ambitions/App/Intents/AmbitionsStepInspectionIntents.swift`, `Native/Ambitions/App/Intents/AmbitionsSystemControlIntent.swift`, `Native/Ambitions/App/Intents/OpenAmbitionsDestinationIntent.swift`, `Native/Ambitions/App/AppIntentLaunchRouter.swift` | adapter into command | Current source queues app routes for inspection/start/system controls. Guarded close opens the app for confirmation; the intent itself does not prove a canonical graph mutation. | AMB-1666, AMB-1668 |
 | Share Extension | `Native/AmbitionsShareExtension/ShareViewController.swift`, `Native/AmbitionsShareExtension/ShareIntakeView.swift`, `Native/Ambitions/Projection/ExternalSnapshots/ExternalCreationContracts.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ExternalCreationImportService.swift` | adapter into command | Share saves a local handoff request and opens app for import into `AmbitionsCommand(kind: .quickCapture)`. Extension payload redaction and terminated-app tests remain future work. | AMB-1668 |
-| Notifications | `Native/Ambitions/Core/Permissions/LocalNotificationFoundation.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/NotificationOutbox.swift`, `Native/Ambitions/App/AppBootstrapper.swift`, `Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/ExternalActionCommandService.swift` | adapter into command | Notification scheduling reads safe snapshot data and records side effects. Notification action payloads downgrade mutating actions to open-Today routing before app handling. | AMB-1668 |
-| EventKit and Reminders | `Native/Ambitions/Core/Permissions/CalendarReminders`, `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/EventKitOutbox.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/EventKitOutbox+EventKitStoreClientLive.swift` | adapter into command | EventKit writes require local commit evidence before external save. AMB-1709 classifies reminder repository writes after external save as legacy persistence debt, not Green adapter proof. | AMB-1667, AMB-1668, AMB-1717 |
+| Notifications | `Native/Ambitions/Core/Permissions/LocalNotificationFoundation.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/NotificationOutbox.swift`, `Native/Ambitions/App/AppBootstrapper.swift`, `Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/ExternalActionCommandService.swift` | adapter into command / rejectionReceipt source-present / focused XCTest passed | Notification scheduling reads safe snapshot data and records side effects. AMB-1732 changes mutating notification action payloads to downgrade to open-Today routing and record local-only `commandBridge` rejection receipts when a recorder is configured. Focused simulator XCTest passed; device action proof remains missing. | AMB-1668, AMB-1732 |
+| EventKit and Reminders | `Native/Ambitions/Core/Permissions/CalendarReminders`, `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/EventKitOutbox.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/EventKitOutbox+EventKitStoreClientLive.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Storage/SwiftDataReminderRepository.swift` | adapter into command / sideEffectOutbox source-present / focused XCTest passed | EventKit and Reminders writes require local commit evidence before external save, and AMB-1732 records success, failed-save, and permission-denied results through `SideEffectOutbox.recordResult`. No-localCommit Today/Goals callers remain blocked/Yellow. AMB-1732 deleted unused `ReminderOutbox` duplicate authority, leaving `EventKitOutbox` as the inspected reminder side-effect path. | AMB-1668, AMB-1732 |
 | CloudKit continuity apply paths | `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/CloudKitContinuityAdapter.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SyncContinuityAuthorityGate.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SyncEligibilityPolicy.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/LocalAuthoritativeSyncModel.swift` | adapter into command | AMB-1709 found no remote private-graph apply writer in the inspected SyncContinuity files. Source shows feature flag default off, local-store authority, private payload denial, local outbox/review decisions, and zone setup only. It does not prove approved private graph sync or remote apply behavior. | AMB-1668, AMB-1680 |
 | Import/restore and portable snapshots | `Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/PortableSnapshotServiceOperations.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Storage/BackupStore.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Storage/MigrationStore.swift` | canonical command | AMB-1731 moved portable snapshot import/export apply source under MigrationRepair. Existing-data migration proof is limited to focused fixtures until broader migration validation runs. | AMB-1667, AMB-1717, AMB-1720 |
 | Migration and repair | `Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair`, `Native/Ambitions/Core/LocalRuntimeOS/Storage/MigrationStore.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Storage/BackupStore.swift` | canonical command | Canonical owner is present. AMB-1709 confirms dry-run, backup, doctor, schema-ledger, and rollback scaffolding remain source-static and do not prove repair execution authority or migration safety. | AMB-1667, AMB-1718, AMB-1720 |
@@ -432,18 +437,18 @@ privacy/legal approval, or release readiness.
 | Candidate | Evidence paths | Classification | Static finding | Follow-up |
 | --- | --- | --- | --- | --- |
 | Widget extension snapshot rendering | `Native/AmbitionsWidgetExtension/NextStepWidget.swift`, `Native/Ambitions/Projection/ExternalSnapshots/ExternalWidgetProjection.swift`, `Native/Ambitions/Projection/ExternalSnapshots/SharedExternalSnapshotStore.swift` | projection-only read | Timeline entries decode verified `ExternalSurfaceSnapshot` records and render/deep-link projection data. The inspected widget UI has no direct canonical state mutation control. | AMB-1668 for device/widget privacy and stale-snapshot proof. |
-| Widget payload action bridge | `Native/Ambitions/App/AppBootstrapper.swift`, `Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/ExternalActionCommandService.swift`, `Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/AmbitionsRuntimeServices.swift` | unknown | `handleWidgetPayload` can build an `ExternalActionCommand(widgetPayload:)`; if a command payload reaches the app, the runtime executor can call Today action service paths. Current widget UI does not emit those payloads, but static source does not prove typed receipts for this bridge. | AMB-1666 and AMB-1668. |
+| Widget payload action bridge | `Native/Ambitions/App/AppBootstrapper.swift`, `Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/ExternalActionCommandService.swift`, `Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/AmbitionsRuntimeServices.swift` | rejectionReceipt source-present / focused XCTest passed | `handleWidgetPayload` builds `ExternalActionCommand(widgetPayload:)`; AMB-1732 downgrades mutating payload actions to Today review routing and records local-only `commandBridge` rejection receipts when a recorder is configured. Current widget UI does not emit those payloads; device/lifecycle and replay proof remain missing. | AMB-1668 and AMB-1732. |
 | Live Activity UI deep links | `Native/AmbitionsWidgetExtension/NextStepLiveActivityWidget.swift`, `Native/Ambitions/Projection/ExternalSnapshots/NextStepActivityAttributes.swift` | projection-only read | Live Activity regions render content state derived from external snapshots and link back into the app. They do not mutate the private graph in the inspected extension source. | AMB-1668 for device/live-activity proof. |
 | Live Activity lifecycle refresh | `Native/Ambitions/Core/Permissions/LocalNotificationFoundation.swift`, `Native/Ambitions/Core/Permissions/NextStepLiveActivityService.swift`, `Native/Ambitions/Projection/ExternalSnapshots/NextStepActivityAttributes.swift` | adapter into command | Notification refresh reads the verified external snapshot, then requests, updates, or ends ActivityKit surfaces. This is an OS side effect derived from projection data, not canonical private graph mutation proof. | AMB-1668. |
 | App Intents capture and goal draft creation | `Native/Ambitions/App/Intents/AmbitionsCreationIntents.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/AppIntentBridge.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ExternalCreationImportService.swift` | adapter into command | Creation intents enqueue `ExternalCreationRequest` handoff records, then app import drains them into `AmbitionsCommand(kind: .quickCapture, actor: .externalSurface)`. | AMB-1668 for terminated-app import and receipt proof. |
 | App Intents navigation, step inspection, guarded close, and system controls | `Native/Ambitions/App/Intents/AmbitionsStepInspectionIntents.swift`, `Native/Ambitions/App/Intents/AmbitionsSystemControlIntent.swift`, `Native/Ambitions/App/Intents/OpenAmbitionsDestinationIntent.swift`, `Native/Ambitions/App/AppIntentLaunchRouter.swift` | adapter into command | Open/start/show/inspect intents queue URLs for in-app routing. Guarded close and system controls open the app for confirmation; static source does not show those intents directly writing canonical state. | AMB-1666 and AMB-1668. |
 | Share Extension save | `Native/AmbitionsShareExtension/ShareViewController.swift`, `Native/AmbitionsShareExtension/ShareIntakeView.swift`, `Native/Ambitions/Projection/ExternalSnapshots/ExternalCreationContracts.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ExternalCreationImportService.swift` | adapter into command | The extension writes a local durable handoff request, then opens Ambitions. App import drains the request into `AmbitionsCommand(kind: .quickCapture)`. | AMB-1668 for extension lifecycle and redaction proof. |
 | Notification scheduling | `Native/Ambitions/Core/Permissions/LocalNotificationFoundation.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/NotificationOutbox.swift` | adapter into command | Scheduling reads a verified external snapshot, builds private-default notification content, replaces pending requests, refreshes Live Activity state, and records side-effect outcome. | AMB-1668 for device notification proof. |
-| Notification action payload handling | `Native/Ambitions/App/AppBootstrapper.swift`, `Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/ExternalActionCommandService.swift`, `Native/Ambitions/App/AppExternalRouteTranslator.swift` | adapter into command | Notification payload actions route through `ExternalActionCommand(notificationPayload:)`; mutating action names are downgraded to open-Today routing before execution. | AMB-1668. |
+| Notification action payload handling | `Native/Ambitions/App/AppBootstrapper.swift`, `Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/ExternalActionCommandService.swift`, `Native/Ambitions/App/AppExternalRouteTranslator.swift` | rejectionReceipt source-present / focused XCTest passed | Notification payload actions route through `ExternalActionCommand(notificationPayload:)`; AMB-1732 downgrades mutating action names to open-Today routing and records local-only `commandBridge` rejection receipts when a recorder is configured. Device action proof remains missing. | AMB-1668 and AMB-1732. |
 | Deep links and URL routing | `Native/Ambitions/App/AmbitionsRootScene.swift`, `Native/Ambitions/App/AppBootstrapper.swift`, `Native/Ambitions/App/AppExternalRouting.swift`, `Native/Ambitions/App/AppExternalRouteTranslator.swift`, `Native/Ambitions/App/AppExternalRouteOverlayTranslation.swift`, `Native/Ambitions/App/AppDeepLinkRegistry.swift` | projection-only read | URL handling selects tabs, routes, detail destinations, or overlays. If a route later opens Capture or Create Goal, the downstream in-app mutation remains covered by AMB-1707 and follow-up AMB-1666/AMB-1667. | AMB-1666 if future routes mutate state directly. |
 | External snapshot writer and app-group projection export | `Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceSnapshotWriter.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Storage/AppGroupSnapshotStore.swift`, `Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/PrivacyExternalBoundaryGate.swift` | projection-only read | The writer reads projection stores, evaluates external privacy gates, and writes redacted app-group snapshot records. This materializes projection data for external readers; it is not private graph authority. | AMB-1668 for external-surface privacy and staleness proof. |
 | External object reopening, Spotlight/Handoff payloads, and control contracts | `Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceActionPayloads.swift`, `Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceActionPayloads+02-ExternalObjectReopeningProjector.swift`, `Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceControlContracts.swift` | projection-only read | Payload projectors expose safe titles, routes, and optional interaction contracts. Default indexing/export policy stays disabled until proof-backed eligibility exists. | AMB-1668. |
-| EventKit and Reminders external writes | `Native/Ambitions/Core/Permissions/CalendarReminders/EventKitIntegrationService+02-ExternalWrites.swift`, `Native/Ambitions/Core/Permissions/CalendarReminders/EventKitIntegrationService+03-CalendarContext.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/EventKitOutbox.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/EventKitOutbox+EventKitStoreClientLive.swift` | adapter into command | EventKit saves are guarded by local commit evidence and side-effect outbox state. AMB-1709 classifies reminder repository persistence after external save as legacy persistence debt. | AMB-1667, AMB-1668, AMB-1717. |
+| EventKit and Reminders external writes | `Native/Ambitions/Core/Permissions/CalendarReminders/EventKitIntegrationService+02-EventKitIntegrationService.swift`, `Native/Ambitions/Core/Permissions/CalendarReminders/EventKitIntegrationService+03-EventKitIntegrationService.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/EventKitOutbox.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/EventKitOutbox+EventKitStoreClientLive.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Storage/SwiftDataReminderRepository.swift` | adapter into command / sideEffectOutbox source-present / focused XCTest passed | EventKit and Reminders saves are guarded by local commit evidence and side-effect outbox state, then record success, failed-save, and permission-denied results through `SideEffectOutbox.recordResult`. No-localCommit Today/Goals callers remain blocked/Yellow; unused `ReminderOutbox` duplicate authority was deleted. | AMB-1668 and AMB-1732. |
 | CloudKit continuity eligibility, zone setup, and merge vocabulary | `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/CloudKitContinuityAdapter.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SyncContinuityAuthorityGate.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SyncEligibilityPolicy.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/LocalAuthoritativeSyncModel.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/CausalMergeEngine.swift`, `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/ConflictPolicyEngine.swift` | adapter into command | AMB-1709 found no remote private-graph apply writer in the inspected SyncContinuity files. Source shows continuity defaults local-only, CloudKit continuity disabled by default, local store remains authoritative, private payload classes are denied, remote/backend authority is denied, and live CloudKit code only probes status or ensures the core zone. This is not approval or proof of private graph sync. | AMB-1668, AMB-1680. |
 
 ## AMB-1709 Persistence Import Repair And Migration Mutation Inventory
@@ -564,10 +569,10 @@ authority proof or Green adapter proof.
 
 | Runtime law step | Current evidence | Coverage status | Residual gap |
 | --- | --- | --- | --- |
-| Command | `AmbitionsCommandExecutor`, `RuntimeCommandMutationCommitter`, `DefaultExternalCreationImportService`, `AppIntentBridge`, `ExternalActionCommandService`, `TodayReceiptCommandService`, `YouPreferencesCommandService` | Implemented Yellow | AMB-1707 statically inventories App UI/Capture handlers, AMB-1708 statically inventories system-surface handlers, AMB-1709 statically inventories persistence/import/repair apply paths, and AMB-1710 statically separates preview/debug/test helpers. Unsafe UI/Capture paths, debug/demo seed writers, and unknown widget payload behavior still need command-path conversion and behavior proof in AMB-1666/AMB-1667/AMB-1668. |
+| Command | `AmbitionsCommandExecutor`, `RuntimeCommandMutationCommitter`, `DefaultExternalCreationImportService`, `AppIntentBridge`, `ExternalActionCommandService`, `TodayReceiptCommandService`, `YouPreferencesCommandService` | Implemented Yellow | AMB-1707 statically inventories App UI/Capture handlers, AMB-1708 statically inventories system-surface handlers, AMB-1709 statically inventories persistence/import/repair apply paths, and AMB-1710 statically separates preview/debug/test helpers. Unsafe UI/Capture paths, debug/demo seed writers, and external-surface device/lifecycle/replay proof still need command-path conversion or behavior proof in AMB-1666/AMB-1667/AMB-1668. |
 | Event | `RuntimeTransactionCommitPolicy`, `RuntimeTransactionCoordinator`, `RuntimeEventStore`, `EventStoreSQLite` | Implemented Yellow | AMB-1709 confirms LocalRuntimeOS event stores exist, but legacy Core/Persistence and Core/Domain writes can still bypass the canonical event path until AMB-1667 and children AMB-1717 through AMB-1720. |
 | Projection | `ProjectionStoreSQLite`, `ExternalSurfaceSnapshotWriter`, `ExternalWidgetProjection`, `Projection/SurfaceLenses` | Implemented Yellow | AMB-1708 statically inventories projection-only external surfaces, and AMB-1709 classifies LocalRuntimeOS projection stores. Adapter-level privacy, staleness, widget, Live Activity, notification, and projection-consumption proof remain AMB-1668/AMB-1718. |
-| Receipt | `CommandReceiptFactory`, `CommandJournalAppendReceipt`, `TrustSystem`, `TodayReceiptCommandService`, side-effect outbox records | Implemented Yellow | Not every UI/system/debug mutation candidate has current receipt proof. Unsafe writes, demo seed writes, unknown widget payload behavior, and external side effects are not receipt-proven. |
+| Receipt | `CommandReceiptFactory`, `CommandJournalAppendReceipt`, `TrustSystem`, `TodayReceiptCommandService`, side-effect outbox records | Implemented Yellow | Not every UI/system/debug mutation candidate has current receipt proof. Unsafe writes and demo seed writes remain unproven. AMB-1732 adds focused receipt proof for widget/notification rejection receipts and EventKit/Reminders result receipts, but device/lifecycle/replay proof remains missing. |
 | Replay | `RuntimeEventCommandReplayAdapter`, `CommandReplayAdapter`, `CommandJournal.linkRuntimeCommit`, `RuntimeTransactionCommitPolicy` idempotency metadata | Implemented Yellow | Replay proof is command-path scoped, not a total app-state replay guarantee. Legacy direct writes remain outside replay proof. |
 
 ## Direct-Write CI Audit Design
@@ -618,16 +623,17 @@ The audit keeps the proof ceiling at Implemented Yellow. It classifies App
 Intent creation and Share Extension intake as `commandHandoff`, deep links and
 current widget/Live Activity UI as non-mutating route/projection paths,
 notification scheduling as `sideEffectOutbox`, notification action payloads as
-safe app-open handoff with missing explicit `rejectionReceipt` proof, and the
-widget payload mutation bridge as `blockedUnknown`.
+safe app-open handoff with AMB-1732 source-present `rejectionReceipt` handling,
+and the widget payload mutation bridge as AMB-1732 source-present
+`rejectionReceipt` handling. Focused simulator XCTest passed on 2026-07-03.
+Both remain Yellow until device/lifecycle and replay proof complete.
 
 The AMB-1722 audit does not run or prove device widget rendering, device
 notification delivery/actions, Live Activity behavior, Shortcuts/Siri
 invocation, Share Extension lifecycle, terminated-app import, app-group
 read/write behavior on device, EventKit/Reminders writes, external projection
-snapshot proof, or release readiness. AMB-1723 remains next for EventKit and
-Reminders; AMB-1724 remains next for external projection writers/readers and
-device-facing external-reader proof.
+snapshot proof, or release readiness. AMB-1732 still needs device/lifecycle and
+replay proof before any parent Green claim.
 
 ## AMB-1723 EventKit And Reminders Outbox Audit
 
@@ -638,16 +644,16 @@ The audit keeps the proof ceiling at Implemented Yellow. It classifies EventKit
 calendar-event writes, confirmed Time calendar block writes, and Reminders
 writes as `sideEffectOutbox` only for local-commit overloads. Current Today and
 Goals callers use no-localCommit protocol methods and are treated as
-blocked/Yellow, not working external-write proof. Reminder permission denial
-does not yet produce an outbox rejection record. EventKit success/failure paths
-record ledger status rows but do not use `SideEffectOutbox.recordResult` to
-create linked result receipts. `ReminderOutbox` is source-present but unconsumed
-by inspected production paths, and `SwiftDataReminderRepository` remains legacy
-`unsafeDebt` when reminder objects are persisted after external save.
+blocked/Yellow, not working external-write proof. AMB-1732 now records
+permission-denied, success, and failed-save result receipts through
+`SideEffectOutbox.recordResult` for reminders, calendar events, and confirmed
+Time calendar blocks. AMB-1732 deletes unused `ReminderOutbox` duplicate
+authority, and `SwiftDataReminderRepository` is now canonical LocalRuntimeOS
+storage when reminder objects are persisted after external save.
 
-AMB-1723 does not prove device EventKit/Reminders behavior, permission prompt
-behavior, release readiness, or parent Green. AMB-1724 remains next for external
-projection-only snapshot and redaction proof.
+AMB-1723/AMB-1732 do not prove device EventKit/Reminders behavior, permission
+prompt behavior, replay/lifecycle behavior beyond focused unit tests, release
+readiness, or parent Green.
 
 ## AMB-1724 Projection Snapshot And Redaction Audit
 
@@ -666,15 +672,46 @@ checksum-corrupt shared snapshot records before payload decode.
 AMB-1724 does not prove device widget rendering, device Live Activity behavior,
 Lock Screen privacy, physical app-group read/write behavior, extension
 lifecycle, terminated-app behavior, privacy/legal approval, release readiness,
-or parent Green. The widget payload mutation bridge remains `blockedUnknown`
-until a later scoped train proves command receipt/replay or explicit rejection.
+or parent Green. AMB-1732 has source-present widget payload rejection receipt
+handling with focused simulator XCTest proof, but device proof, lifecycle proof,
+and replay proof remain missing.
+
+## AMB-1732 Validation Evidence
+
+Commands run on 2026-07-03:
+
+- `xcrun simctl boot 0F5F5AC4-4303-47C8-9BDC-EB5F57A0F79E`: exit 0.
+- `xcrun simctl bootstatus 0F5F5AC4-4303-47C8-9BDC-EB5F57A0F79E -b`:
+  exit 0.
+- `xcodegen generate`: exit 0 after deleting the unused `ReminderOutbox`
+  source owner.
+- `/usr/local/bin/gtimeout 900 xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination "platform=iOS Simulator,id=0F5F5AC4-4303-47C8-9BDC-EB5F57A0F79E" -derivedDataPath output/DerivedData-XcodeBuildMCP -skipMacroValidation -skipPackagePluginValidation -collect-test-diagnostics never -only-testing:AmbitionsTests/ExternalActionCommandServiceTests -resultBundlePath output/amb1732-external-action-command-service-current.xcresult COMPILER_INDEX_STORE_ENABLE=NO ONLY_ACTIVE_ARCH=YES`:
+  exit 0, 11 tests passed.
+- `/usr/local/bin/gtimeout 1200 xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination "platform=iOS Simulator,id=0F5F5AC4-4303-47C8-9BDC-EB5F57A0F79E" -derivedDataPath output/DerivedData-XcodeBuildMCP -skipMacroValidation -skipPackagePluginValidation -collect-test-diagnostics never -only-testing:AmbitionsTests/EventKitIntegrationServiceTests -only-testing:AmbitionsTests/CalendarRealityServiceTests -only-testing:AmbitionsTests/SideEffectSystemTests -only-testing:AmbitionsTests/ExternalActionCommandServiceTests -resultBundlePath output/amb1732-eventkit-reminders-result-receipts-after-prune.xcresult COMPILER_INDEX_STORE_ENABLE=NO ONLY_ACTIVE_ARCH=YES`:
+  exit 0, 40 tests passed.
+- `git diff --check`: exit 0.
+- `python3 scripts/ambitions-legacy-runtime-production-use-guard.py --json`:
+  exit 0, `currentLegacyRuntimeFiles=0`, `legacyRuntimeFileCeiling=0`,
+  `findingCount=0`.
+- `python3 scripts/ambitions-accepted-yellow-misuse-audit.py --json`: exit 0,
+  `findingCount=0`.
+- `python3 scripts/ambitions-remediation-governance-check.py --json`: exit 0,
+  `findingCount=0`.
+- `python3 scripts/ambitions-quality-gate.py --self-test`: exit 0.
+- `python3 scripts/ambitions-runtime-direct-write-audit.py --json`: exit 0,
+  `findingCount=0`, `unsafeOrUnknownProductionRowCount=0`.
+- `python3 scripts/ambitions-unsupported-claim-scan.py AGENTS.md docs/truth/CODEX_START_HERE.md docs/truth/CODEX_PROCESS_TRUTH.md docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md docs/audits/architecture-remediation-accepted-yellow-misuse-audit.md docs/audits/runtime-authority-map.md docs/audits/external-command-adapter-contract.md docs/audits/external-adapter-app-intent-widget-share-notification-routing.md docs/audits/external-adapter-eventkit-reminders-outbox-routing.md`:
+  exit 0.
+- `bash scripts/release-claim-safety-scan.sh`: exit 0.
+- `python3 scripts/ambitions-truth-path-vocabulary-audit.py`: exit 0.
+- `python3 scripts/ambitions-skill-registry-check.py`: exit 0.
 
 ## Residual Gaps
 
 | Gap | Status | Follow-up |
 | --- | --- | --- |
 | App UI and Capture action handlers are statically inventoried, but several paths still write through legacy repository/projection services outside LocalRuntimeOS. | unsafe write / Implemented Yellow by path | AMB-1666, AMB-1667 |
-| System-surface entry points are statically inventoried by AMB-1708, AMB-1721 defines the adapter contract, AMB-1722 classifies App Intent/widget/share/notification/app routes, AMB-1723 classifies EventKit/Reminders writes, and AMB-1724 adds external projection snapshot/redaction source-test boundaries. Terminated-app, extension lifecycle, notification device action, widget payload receipt/replay, Live Activity device behavior, EventKit/Reminders device behavior, EventKit result receipt linkage, Reminders permission-denied outbox receipt, CloudKit, and physical app-group proof are still missing. | Implemented Yellow / `blockedUnknown` widget payload path / EventKit-Reminders Yellow / projection snapshot Yellow | AMB-1668, AMB-1680 |
+| System-surface entry points are statically inventoried by AMB-1708, AMB-1721 defines the adapter contract, AMB-1722 classifies App Intent/widget/share/notification/app routes, AMB-1723 classifies EventKit/Reminders writes, AMB-1724 adds external projection snapshot/redaction source-test boundaries, and AMB-1732 adds source-present notification/widget payload rejection receipts plus EventKit/Reminders result receipts. Terminated-app, extension lifecycle, notification device action, widget payload replay/device proof, Live Activity device behavior, EventKit/Reminders device behavior, CloudKit, and physical app-group proof are still missing. | Implemented Yellow / focused simulator XCTest passed / EventKit-Reminders result receipt source-present / projection snapshot Yellow | AMB-1668, AMB-1680, AMB-1732 |
 | Legacy SwiftData/Core/Persistence, portable snapshot import/restore, restore rollback delegation, and Core/Domain local schedule writes remain outside canonical runtime authority; AMB-1720 defines the migration proof plan but does not make these paths Green. | unsafe write / Implemented Yellow plan | AMB-1667, AMB-1717, AMB-1718, AMB-1719, AMB-1720 |
 | Preview/debug/test helpers are statically separated by AMB-1710, but the preview temporary external-creation store remains an `unknown` direct-write audit sentinel and debug/demo seed writers remain legacy repository writes; AMB-1720 treats demo seed as fixture input only, not production mutation proof. | Implemented Yellow / unknown sentinel / unsafe write | AMB-1667, AMB-1668, AMB-1717, AMB-1720 |
 | Runtime authority map and proof matrix are static-source only. | Implemented Yellow | AMB-1711 |
@@ -683,12 +720,31 @@ until a later scoped train proves command receipt/replay or explicit rejection.
 ## Closeout Boundary
 
 - Final Architecture Tree inspected: yes, through `docs/truth/PRODUCT_DESIGN_TRUTH.md`.
-- Canonical owners touched by this map/addenda: `docs/audits` only. Earlier AMB-1665 slices also touched scripts.
-- Swift owners touched: none.
-- Files moved or created in Swift source: none.
-- Old/noncanonical source paths removed: none.
+- Canonical owners touched by this map/addenda:
+  `docs/audits`, `Core/LocalRuntimeOS/CommandSpine`,
+  `Core/LocalRuntimeOS/SideEffectSystem`,
+  `Core/Permissions/CalendarReminders`, and `Native/AmbitionsTests`. Earlier
+  AMB-1665 slices also touched scripts.
+- Swift owners touched by AMB-1732:
+  `Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/ExternalActionCommandService.swift`,
+  `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/EventKitOutbox.swift`,
+  `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ReminderOutbox.swift`
+  deleted as unused duplicate authority,
+  `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/SideEffectPolicyEngine.swift`,
+  `Native/Ambitions/Core/Permissions/CalendarReminders/EventKitIntegrationService+02-EventKitIntegrationService.swift`,
+  `Native/Ambitions/Core/Permissions/CalendarReminders/EventKitIntegrationService+03-EventKitIntegrationService.swift`,
+  `Native/AmbitionsTests/LocalRuntimeOS/CommandSpine/ExternalActionCommandServiceTests.swift`,
+  `Native/AmbitionsTests/LocalRuntimeOS/SideEffectSystem/SideEffectSystemTests.swift`,
+  `Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift`, and
+  `Native/AmbitionsTests/App/CalendarRealityServiceTests.swift`.
+- Files moved or created in Swift source:
+  `Native/AmbitionsTests/App/EventKitIntegrationTestDoubles.swift` was created
+  as test-only support.
+- Old/noncanonical source paths removed:
+  `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ReminderOutbox.swift`
+  was removed after source search found no production callers.
 - Compatibility shims left behind: none added by this slice.
-- Architecture debt remains: yes, in legacy persistence/domain direct-write paths, portable snapshot import/restore delegation, restore rollback delegation, system adapter behavior proof, App UI/Capture command-path conversion, unknown widget payload behavior, EventKit/Reminders result receipt and legacy reminder repository proof, external surface device/lifecycle proof, CloudKit continuity proof limits, the preview temporary external-creation audit sentinel, and debug/demo seed writers.
+- Architecture debt remains: yes, in system adapter device/lifecycle proof, App UI/Capture command-path conversion, widget payload replay/device proof, EventKit/Reminders device permission/write proof, external surface device/lifecycle proof, CloudKit continuity proof limits, the preview temporary external-creation audit sentinel, and debug/demo seed writers.
 - Next repair train after AMB-1668 parent Yellow closeout: AMB-1680 Source Atlas Scope Freeze before M10 proof-system work.
 - No equivalent folder/path interpretation was used.
 - No Green runtime authority claim is made.

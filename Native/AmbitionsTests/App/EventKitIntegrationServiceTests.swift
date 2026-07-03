@@ -5,7 +5,11 @@ final class EventKitIntegrationServiceTests: XCTestCase {
     func testCreateReminderFailsWhenAuthorizationDenied() async {
         let store = RecordingEventKitStoreClient()
         await store.setAuthorization(state: .denied, for: .reminders)
-        let service = EventKitIntegrationService(storeClient: store)
+        let sideEffectLedger = RecordingEventKitSideEffectLedgerRepository()
+        let service = EventKitIntegrationService(
+            storeClient: store,
+            eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
+        )
 
         do {
             _ = try await service.createReminder(for: fixtureSelection(), now: fixtureNow())
@@ -15,13 +19,26 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         } catch {
             XCTFail("Unexpected error: \(error)")
         }
+
+        let record = await sideEffectLedger.lastRecord
+        XCTAssertEqual(record?.effectKind, .calendar)
+        XCTAssertEqual(record?.actionKind, .writeCalendarBlock)
+        XCTAssertEqual(record?.requiresConfirmation, true)
+        assertResultRecord(
+            record,
+            status: .failedSafely,
+            externalEffect: false,
+            receiptID: nil,
+            degradedFact: "Reminder write permission was denied before EventKit save."
+        )
+        XCTAssertTrue(record?.blockedFacts.contains("Reminder write permission was not available for this requested reminder.") == true)
     }
 
     func testCreateReminderRequestsAuthorizationAndSavesPayload() async throws {
         let store = RecordingEventKitStoreClient()
         await store.setAuthorization(state: .notDetermined, for: .reminders)
         await store.setAuthorizationResponse(state: .fullAccess, for: .reminders)
-        let sideEffectLedger = RecordingSideEffectLedgerRepository()
+        let sideEffectLedger = RecordingEventKitSideEffectLedgerRepository()
         let service = EventKitIntegrationService(
             storeClient: store,
             eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
@@ -42,13 +59,23 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         XCTAssertTrue(payload?.notes.contains("Ambitions step ID: step-1") == true)
         XCTAssertFalse(payload?.notes.contains("Ship CFP proposal") == true)
         XCTAssertFalse(payload?.notes.contains("First concrete draft") == true)
+
+        let records = await sideEffectLedger.records
+        XCTAssertEqual(records.count, 1)
+        assertResultRecord(
+            records.first,
+            status: .succeeded,
+            externalEffect: true,
+            receiptID: "reminder-1",
+            degradedFact: "Reminder write completed through EventKit side-effect owner."
+        )
     }
 
     func testCreateReminderPersistsLocalReminderObjectWhenRepositoryIsAvailable() async throws {
         let store = RecordingEventKitStoreClient()
         await store.setAuthorization(state: .fullAccess, for: .reminders)
         let reminderRepository = try await makeReminderRepository()
-        let sideEffectLedger = RecordingSideEffectLedgerRepository()
+        let sideEffectLedger = RecordingEventKitSideEffectLedgerRepository()
         let service = EventKitIntegrationService(
             storeClient: store,
             eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger)),
@@ -79,7 +106,7 @@ final class EventKitIntegrationServiceTests: XCTestCase {
     func testCreateReminderRequiresLocalCommitReceiptBeforeSaving() async throws {
         let store = RecordingEventKitStoreClient()
         await store.setAuthorization(state: .fullAccess, for: .reminders)
-        let sideEffectLedger = RecordingSideEffectLedgerRepository()
+        let sideEffectLedger = RecordingEventKitSideEffectLedgerRepository()
         let service = EventKitIntegrationService(
             storeClient: store,
             eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
@@ -102,6 +129,39 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         XCTAssertEqual(record?.boundary, .externalEffect)
         XCTAssertEqual(record?.externalEffect, true)
         XCTAssertTrue(record?.blockedFacts.contains("External side effect cannot be attempted before a committed local mutation receipt.") == true)
+    }
+
+    func testCreateReminderSaveFailureRecordsFailedResultReceipt() async throws {
+        let store = RecordingEventKitStoreClient()
+        await store.setAuthorization(state: .fullAccess, for: .reminders)
+        await store.setReminderSaveFailure(.saveFailed("simulated reminder failure"))
+        let sideEffectLedger = RecordingEventKitSideEffectLedgerRepository()
+        let service = EventKitIntegrationService(
+            storeClient: store,
+            eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
+        )
+
+        do {
+            _ = try await service.createReminder(
+                for: fixtureSelection(),
+                now: fixtureNow(),
+                localCommit: runtimeLocalCommitEvidence("reminder-save-failure")
+            )
+            XCTFail("Expected reminder save failure to throw.")
+        } catch let error as CalendarRemindersError {
+            XCTAssertEqual(error, .saveFailed("simulated reminder failure"))
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+
+        let record = await sideEffectLedger.lastRecord
+        assertResultRecord(
+            record,
+            status: .failedSafely,
+            externalEffect: true,
+            receiptID: nil,
+            degradedFact: "Reminder write could not be completed safely."
+        )
     }
 
     func testDetectConflictsReturnsOverlappingEventsAndNearbyRoom() async {
@@ -211,7 +271,7 @@ final class EventKitIntegrationServiceTests: XCTestCase {
     func testCreateCalendarEventFailsWhenStepHasNoSuggestedDate() async {
         let store = RecordingEventKitStoreClient()
         await store.setAuthorization(state: .fullAccess, for: .calendarEvents)
-        let sideEffectLedger = RecordingSideEffectLedgerRepository()
+        let sideEffectLedger = RecordingEventKitSideEffectLedgerRepository()
         let service = EventKitIntegrationService(
             storeClient: store,
             eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
@@ -246,7 +306,7 @@ final class EventKitIntegrationServiceTests: XCTestCase {
     func testCreateCalendarEventFailsWhenAuthorizationDeniedAndDoesNotSave() async {
         let store = RecordingEventKitStoreClient()
         await store.setAuthorization(state: .denied, for: .calendarEvents)
-        let sideEffectLedger = RecordingSideEffectLedgerRepository()
+        let sideEffectLedger = RecordingEventKitSideEffectLedgerRepository()
         let service = EventKitIntegrationService(
             storeClient: store,
             eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
@@ -266,18 +326,22 @@ final class EventKitIntegrationServiceTests: XCTestCase {
 
         let record = await sideEffectLedger.lastRecord
         XCTAssertEqual(record?.effectKind, .calendar)
-        XCTAssertEqual(record?.status, .blocked)
-        XCTAssertEqual(record?.boundary, .externalEffect)
         XCTAssertEqual(record?.actionKind, .writeCalendarBlock)
         XCTAssertEqual(record?.requiresConfirmation, true)
-        XCTAssertEqual(record?.externalEffect, true)
+        assertResultRecord(
+            record,
+            status: .failedSafely,
+            externalEffect: false,
+            receiptID: nil,
+            degradedFact: "Calendar write permission was denied before EventKit save."
+        )
         XCTAssertTrue(record?.blockedFacts.contains("Calendar write permission was not available for this requested calendar event.") == true)
     }
 
     func testCreateCalendarEventRequiresLocalCommitReceiptBeforeSaving() async throws {
         let store = RecordingEventKitStoreClient()
         await store.setAuthorization(state: .fullAccess, for: .calendarEvents)
-        let sideEffectLedger = RecordingSideEffectLedgerRepository()
+        let sideEffectLedger = RecordingEventKitSideEffectLedgerRepository()
         let service = EventKitIntegrationService(
             storeClient: store,
             eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
@@ -302,10 +366,44 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         XCTAssertTrue(record?.blockedFacts.contains("External side effect cannot be attempted before a committed local mutation receipt.") == true)
     }
 
+    func testCreateCalendarEventSaveFailureRecordsFailedResultReceipt() async throws {
+        let store = RecordingEventKitStoreClient()
+        await store.setAuthorization(state: .fullAccess, for: .calendarEvents)
+        await store.setEventSaveFailure(.saveFailed("simulated calendar failure"))
+        let sideEffectLedger = RecordingEventKitSideEffectLedgerRepository()
+        let service = EventKitIntegrationService(
+            storeClient: store,
+            eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
+        )
+
+        do {
+            _ = try await service.createCalendarEvent(
+                for: fixtureSelection(),
+                durationMinutes: 45,
+                now: fixtureNow(),
+                localCommit: runtimeLocalCommitEvidence("calendar-save-failure")
+            )
+            XCTFail("Expected calendar event save failure to throw.")
+        } catch let error as CalendarRemindersError {
+            XCTAssertEqual(error, .saveFailed("simulated calendar failure"))
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+
+        let record = await sideEffectLedger.lastRecord
+        assertResultRecord(
+            record,
+            status: .failedSafely,
+            externalEffect: true,
+            receiptID: nil,
+            degradedFact: "Calendar event write could not be completed safely."
+        )
+    }
+
     func testCreateCalendarEventSuccessRecordsCalendarSideEffect() async throws {
         let store = RecordingEventKitStoreClient()
         await store.setAuthorization(state: .fullAccess, for: .calendarEvents)
-        let sideEffectLedger = RecordingSideEffectLedgerRepository()
+        let sideEffectLedger = RecordingEventKitSideEffectLedgerRepository()
         let service = EventKitIntegrationService(
             storeClient: store,
             eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
@@ -319,24 +417,21 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         )
 
         let records = await sideEffectLedger.records
-        let queuedSideEffect = records.first { $0.status == .queued }
-        let succeededSideEffect = records.first { $0.status == .succeeded }
+        let succeededSideEffect = records.first
 
         XCTAssertEqual(record.identifier, "event-1")
-        XCTAssertEqual(records.count, 2)
-        XCTAssertEqual(queuedSideEffect?.effectKind, .calendar)
-        XCTAssertEqual(queuedSideEffect?.boundary, .externalEffect)
-        XCTAssertEqual(queuedSideEffect?.actionKind, .writeCalendarBlock)
-        XCTAssertEqual(queuedSideEffect?.sourceDomain, .time)
-        XCTAssertEqual(queuedSideEffect?.requiresConfirmation, false)
-        XCTAssertEqual(queuedSideEffect?.externalEffect, true)
-        XCTAssertTrue(queuedSideEffect?.reasons.contains(.externalSideEffect) == true)
+        XCTAssertEqual(records.count, 1)
         XCTAssertEqual(succeededSideEffect?.effectKind, .calendar)
-        XCTAssertEqual(succeededSideEffect?.boundary, .externalEffect)
         XCTAssertEqual(succeededSideEffect?.actionKind, .writeCalendarBlock)
         XCTAssertEqual(succeededSideEffect?.sourceDomain, .time)
         XCTAssertEqual(succeededSideEffect?.requiresConfirmation, false)
-        XCTAssertEqual(succeededSideEffect?.externalEffect, true)
+        assertResultRecord(
+            succeededSideEffect,
+            status: .succeeded,
+            externalEffect: true,
+            receiptID: "event-1",
+            degradedFact: "Calendar event write completed through EventKit side-effect owner."
+        )
         XCTAssertTrue(succeededSideEffect?.reasons.contains(.externalSideEffect) == true)
         XCTAssertFalse(records.contains { $0.blockedFacts.contains("Draft conference abstract") })
     }
@@ -344,7 +439,7 @@ final class EventKitIntegrationServiceTests: XCTestCase {
     func testRepeatedCalendarEventSuccessesRecordDistinctLedgerEntries() async throws {
         let store = RecordingEventKitStoreClient()
         await store.setAuthorization(state: .fullAccess, for: .calendarEvents)
-        let sideEffectLedger = RecordingSideEffectLedgerRepository()
+        let sideEffectLedger = RecordingEventKitSideEffectLedgerRepository()
         let service = EventKitIntegrationService(
             storeClient: store,
             eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
@@ -364,12 +459,12 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         )
 
         let records = await sideEffectLedger.records
-        XCTAssertEqual(records.count, 4)
-        XCTAssertEqual(Set(records.map(\.id)).count, 4)
+        XCTAssertEqual(records.count, 2)
+        XCTAssertEqual(Set(records.map(\.id)).count, 2)
         XCTAssertTrue(records.allSatisfy { $0.effectKind == .calendar })
-        XCTAssertEqual(records.filter { $0.status == .queued }.count, 2)
         XCTAssertEqual(records.filter { $0.status == .succeeded }.count, 2)
         XCTAssertTrue(records.allSatisfy { $0.externalEffect })
+        XCTAssertEqual(Set(records.compactMap(\.receiptID)), ["event-1"])
     }
 }
 
@@ -377,6 +472,23 @@ private extension EventKitIntegrationServiceTests {
     func makeReminderRepository() async throws -> SwiftDataReminderRepository {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         return SwiftDataReminderRepository(store: store)
+    }
+
+    func assertResultRecord(
+        _ record: SideEffectLedgerRecord?,
+        status: SideEffectLedgerStatus,
+        externalEffect: Bool,
+        receiptID: String?,
+        degradedFact: String,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        XCTAssertEqual(record?.status, status, file: file, line: line)
+        XCTAssertEqual(record?.boundary, .externalEffect, file: file, line: line)
+        XCTAssertEqual(record?.externalEffect, externalEffect, file: file, line: line)
+        XCTAssertEqual(record?.localOnly, externalEffect == false, file: file, line: line)
+        receiptID.map { XCTAssertEqual(record?.receiptID, $0, file: file, line: line) } ?? XCTAssertNotNil(record?.receiptID, file: file, line: line)
+        XCTAssertTrue(record?.degradedFacts.contains(degradedFact) == true, file: file, line: line)
     }
 
     func fixtureNow() -> Date {
@@ -410,102 +522,5 @@ private extension EventKitIntegrationServiceTests {
             runtimeReceiptID: "runtime.receipt.\(suffix)",
             rollbackPlanID: "runtime.rollback.\(suffix)"
         )
-    }
-}
-
-private actor RecordingEventKitStoreClient: EventKitStoreClient {
-    private var authorizationByScope: [String: CalendarRemindersAuthorizationState] = [:]
-    private var authorizationResponseByScope: [String: CalendarRemindersAuthorizationState] = [:]
-    private(set) var lastReminderPayload: EventKitReminderPayload?
-    private(set) var lastEventPayload: EventKitEventPayload?
-    private(set) var saveEventCount = 0
-    private var events: [EventKitCalendarEventSnapshot] = []
-
-    func authorizationState(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState {
-        authorizationByScope[key(for: scope)] ?? .notDetermined
-    }
-
-    func requestAuthorization(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState {
-        let response = authorizationResponseByScope[key(for: scope)] ?? .denied
-        authorizationByScope[key(for: scope)] = response
-        return response
-    }
-
-    func requestWriteOnlyAuthorizationForEvents() async -> CalendarRemindersAuthorizationState {
-        let response = authorizationResponseByScope[key(for: .calendarEvents)] ?? .denied
-        authorizationByScope[key(for: .calendarEvents)] = response
-        return response
-    }
-
-    func saveReminder(_ payload: EventKitReminderPayload) async throws -> String {
-        lastReminderPayload = payload
-        return "reminder-1"
-    }
-
-    func saveEvent(_ payload: EventKitEventPayload) async throws -> String {
-        saveEventCount += 1
-        lastEventPayload = payload
-        return "event-1"
-    }
-
-    func fetchEvents(in interval: DateInterval) async -> [EventKitCalendarEventSnapshot] {
-        events.filter { $0.startDate < interval.end && $0.endDate > interval.start }
-    }
-
-    func setAuthorization(state: CalendarRemindersAuthorizationState, for scope: CalendarRemindersScope) {
-        authorizationByScope[key(for: scope)] = state
-    }
-
-    func setAuthorizationResponse(state: CalendarRemindersAuthorizationState, for scope: CalendarRemindersScope) {
-        authorizationResponseByScope[key(for: scope)] = state
-    }
-
-    func setEvents(_ events: [EventKitCalendarEventSnapshot]) {
-        self.events = events
-    }
-
-    func currentSaveEventCount() -> Int {
-        saveEventCount
-    }
-
-    private func key(for scope: CalendarRemindersScope) -> String {
-        switch scope {
-        case .reminders:
-            return "reminders"
-        case .calendarEvents:
-            return "calendar-events"
-        }
-    }
-}
-
-private actor RecordingSideEffectLedgerRepository: SideEffectLedgerRepository {
-    private(set) var records: [SideEffectLedgerRecord] = []
-
-    var lastRecord: SideEffectLedgerRecord? {
-        records.first
-    }
-
-    func append(_ record: SideEffectLedgerRecord) async throws {
-        records.removeAll { $0.id == record.id }
-        records.append(record)
-    }
-
-    func fetchRecent(limit: Int) async throws -> [SideEffectLedgerRecord] {
-        Array(records.sorted(by: Self.sort).prefix(max(0, limit)))
-    }
-
-    func fetchRecords(status: SideEffectLedgerStatus) async throws -> [SideEffectLedgerRecord] {
-        records.filter { $0.status == status }.sorted(by: Self.sort)
-    }
-
-    func fetchRecord(id: String) async throws -> SideEffectLedgerRecord? {
-        records.first { $0.id == id }
-    }
-
-    private static func sort(_ lhs: SideEffectLedgerRecord, _ rhs: SideEffectLedgerRecord) -> Bool {
-        if lhs.occurredAt != rhs.occurredAt {
-            return lhs.occurredAt > rhs.occurredAt
-        }
-        return lhs.id < rhs.id
     }
 }

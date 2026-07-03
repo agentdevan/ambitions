@@ -178,7 +178,7 @@ struct SideEffectPolicyEngine: Sendable {
         if blockedFacts.isEmpty == false {
             return SideEffectPolicyDecision(
                 status: .blocked,
-                boundary: request.externalEffect ? .externalEffect : .localOnly,
+                boundary: request.requestedBoundary ?? (request.externalEffect ? .externalEffect : .localOnly),
                 localOnly: request.externalEffect == false,
                 mayAttemptExternalWrite: false,
                 requiresConfirmation: request.requiresConfirmation || request.externalEffect,

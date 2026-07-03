@@ -11,7 +11,6 @@ final class SideEffectSystemTests: XCTestCase {
             "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/SideEffectOutbox.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/NotificationOutbox.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/EventKitOutbox.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ReminderOutbox.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/WidgetRefreshOutbox.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/AppIntentBridge.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ShareExtensionIntake.swift",
@@ -28,6 +27,9 @@ final class SideEffectSystemTests: XCTestCase {
         )
         XCTAssertFalse(
             FileManager.default.fileExists(atPath: root.appendingPathComponent(removedRuntimeOwnerPath("ExternalCreationImportService.swift")).path)
+        )
+        XCTAssertFalse(
+            FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ReminderOutbox.swift").path)
         )
 
         let oldPersistenceFile = try String(
@@ -96,6 +98,34 @@ final class SideEffectSystemTests: XCTestCase {
         XCTAssertNil(attempt.lease)
         XCTAssertEqual(stored?.status, .blocked)
         XCTAssertTrue(stored?.blockedFacts.contains("External side effect must declare a local runtime commit receipt requirement.") == true)
+    }
+
+    func testBlockedRequestPreservesExplicitUnsupportedBoundary() async throws {
+        let ledger = InMemorySideEffectLedgerRepository()
+        let outbox = SideEffectOutbox(ledger: ledger, leaseDuration: 60)
+        let request = SideEffectOutboxRequest(
+            id: "side-effect.command-bridge.unsupported-payload",
+            effectKind: .commandBridge,
+            actionKind: .markDone,
+            sourceDomain: .externalSurface,
+            requestedAt: Date(timeIntervalSince1970: 1_714_000_000),
+            externalEffect: false,
+            requiresConfirmation: false,
+            commitRequirement: .noUserStateMutation,
+            requestedStatus: .unsupported,
+            requestedBoundary: .unsupported,
+            reasons: [.unsupportedSource],
+            blockedFacts: ["External payload attempted a runtime mutation from an unsupported surface."]
+        )
+
+        let attempt = try await outbox.enqueue(request)
+        let stored = try await ledger.fetchRecord(id: request.id)
+
+        XCTAssertFalse(attempt.mayAttemptExternalWrite)
+        XCTAssertEqual(stored?.status, .blocked)
+        XCTAssertEqual(stored?.boundary, .unsupported)
+        XCTAssertTrue(stored?.localOnly == true)
+        XCTAssertTrue(stored?.blockedFacts.contains("External payload attempted a runtime mutation from an unsupported surface.") == true)
     }
 
     func testLocalCommitReceiptSurvivesExternalAttemptFailure() async throws {

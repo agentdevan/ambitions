@@ -39,4 +39,14 @@ struct EventKitOutbox: Sendable {
         )
         return try? await recorder.enqueue(request)
     }
+
+    @discardableResult
+    func recordCalendarResult(
+        _ result: SideEffectAttemptResult,
+        for attempt: SideEffectAttempt?,
+        now: Date = Date()
+    ) async -> SideEffectReceipt? {
+        guard let recorder, let attempt else { return nil }
+        return try? await recorder.recordResult(result, for: attempt, occurredAt: now)
+    }
 }
