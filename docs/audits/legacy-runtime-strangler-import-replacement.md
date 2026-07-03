@@ -22,15 +22,21 @@ pass. AMB-1730 lowered active legacy runtime production files from `111` to
 `Core/LocalRuntimeOS/PrivateLifeRuntimeKernel`,
 `Core/LocalRuntimeOS/RuntimeBoundary`, `Core/LocalRuntimeOS/CaptureRouteGraph`,
 `Core/LocalRuntimeOS/SourceAtlas`, and
-`Core/LocalRuntimeOS/PrivacySecurity`. This remains Implemented Yellow until
-Swift/Xcode validation is re-enabled and passes; the source-owner authority is
-removed, but build proof was intentionally skipped by user instruction.
+`Core/LocalRuntimeOS/PrivacySecurity`. The AMB-1730 source-owner authority
+remediation is Green for legacy `Core/Runtime` production-authority
+elimination: the legacy production count is `0`, the guard ceiling is `0`, and
+focused Swift/Xcode ownership validation passed on 2026-07-03. This does not
+claim total LocalRuntimeOS completion, persistence-direct-write completion,
+external-adapter completion, device proof, or release readiness.
 
-Evidence class: Implemented Yellow. The slice proves a bounded source-owner
-reduction and ownership-test update only. It does not prove total
-LocalRuntimeOS completion, runtime correctness across all flows, device behavior,
-accessibility behavior, privacy/legal approval, TestFlight readiness, App Store
-readiness, or Green project status.
+Evidence class: Implemented Green for the AMB-1730 legacy runtime
+production-authority elimination claim only. The slice proves source-owner
+removal from `Core/Runtime`, zero legacy runtime production files, guard
+enforcement, and focused owner tests. It does not prove total LocalRuntimeOS
+completion, persistence direct-write repair, external-adapter receipt repair,
+runtime correctness across all flows, device behavior, accessibility behavior,
+privacy/legal approval, TestFlight readiness, App Store readiness, or Green
+project status.
 
 ## Canonical Constraints
 
@@ -218,13 +224,13 @@ Remaining files:
 
 - `0` production Swift files remain under `Native/Ambitions/Core/Runtime`.
 
-Remaining blockers:
+Remaining blockers outside AMB-1730:
 
-- Swift/Xcode build/typecheck/test proof was skipped by user instruction, so
-  AMB-1730 should remain open until focused owner validation is re-enabled and
-  passes.
-- This slice does not remove persistence direct writes, external adapter gaps,
-  or unsafe repository mutation paths.
+- Persistence direct writes, migration safety, and unsafe repository mutation
+  paths remain outside this slice under AMB-1667/AMB-1731.
+- External adapter command/rejection receipt gaps remain outside this slice
+  under AMB-1668/AMB-1732.
+- AMB-1669 and AMB-1670 remain blocked until AMB-1731 and AMB-1732 resolve.
 
 Rollback plan:
 
@@ -233,7 +239,7 @@ Rollback plan:
   guard ceiling to `64`, restore `RuntimePackageBoundaryManifest.sourceRoot` to
   its prior value if reverting the boundary-model move, remove the zero-runtime
   ownership assertions, regenerate the project, and rerun the focused owner
-  tests plus required remediation guards when build validation is re-enabled.
+  tests plus required remediation guards.
   A full AMB-1730 owner-move rollback would also move the earlier
   PlanningEngine, TimeEngine, and SearchRecall files back to `Core/Runtime`,
   restore the guard ceiling to `111`, remove AMB-1730 ownership assertions, and
@@ -273,11 +279,20 @@ Validation run:
   `Ambitions.xcodeproj` from `project.yml`.
 - `find Native/Ambitions/Core/Runtime -maxdepth 1 -name '*.swift' | wc -l`
   -> `0`.
+- `xcrun simctl bootstatus 0F5F5AC4-4303-47C8-9BDC-EB5F57A0F79E -b`
+  -> exit `0`; refreshed simulator `iPhone 17 Pro Max
+  (0F5F5AC4-4303-47C8-9BDC-EB5F57A0F79E)` booted on iOS 26.5.
+- `xcodebuild -project /Users/devan/Documents/GitHub/ambitions/Ambitions.xcodeproj -scheme Ambitions -configuration Debug -destination 'platform=iOS Simulator,id=0F5F5AC4-4303-47C8-9BDC-EB5F57A0F79E' -derivedDataPath /Users/devan/Documents/GitHub/ambitions/output/DerivedData-XcodeBuildMCP -resultBundlePath /Users/devan/Documents/GitHub/ambitions/output/amb-1730-core-runtime-ownership-20260703.xcresult -skipPackagePluginValidation -skipMacroValidation -collect-test-diagnostics never COMPILER_INDEX_STORE_ENABLE=NO ONLY_ACTIVE_ARCH=YES -only-testing:AmbitionsTests/CoreRuntimeCanonicalOwnershipTests test`
+  -> exit `0`; `CoreRuntimeCanonicalOwnershipTests` passed, 9 tests, 0
+  failures. Result bundle:
+  `output/amb-1730-core-runtime-ownership-20260703.xcresult`.
+- `xcodebuild -project /Users/devan/Documents/GitHub/ambitions/Ambitions.xcodeproj -scheme Ambitions -configuration Debug -destination 'platform=iOS Simulator,id=0F5F5AC4-4303-47C8-9BDC-EB5F57A0F79E' -derivedDataPath /Users/devan/Documents/GitHub/ambitions/output/DerivedData-XcodeBuildMCP -resultBundlePath /Users/devan/Documents/GitHub/ambitions/output/amb-1730-localruntimeos-owner-tests-20260703.xcresult -skipPackagePluginValidation -skipMacroValidation -collect-test-diagnostics never COMPILER_INDEX_STORE_ENABLE=NO ONLY_ACTIVE_ARCH=YES -only-testing:AmbitionsTests/LocalRuntimeOSCommandSpineOwnershipTests/testRequiredCommandSpineFilesExistAtCanonicalPathsAndOldOwnersAreGone -only-testing:AmbitionsTests/TimeEngineTests/testTimeEngineOwnerFilesExistUnderCanonicalTreeAndOldPolicyOwnersAreRemoved -only-testing:AmbitionsTests/TrustSystemTests/testTrustSystemOwnerFilesExistAndOldOwnersAreRemoved -only-testing:AmbitionsTests/SideEffectSystemTests/testSideEffectSystemCanonicalOwnerFilesExistAndOldOwnersAreRemoved -only-testing:AmbitionsTests/RuntimeBoundaryTests/testRuntimeBoundaryCanonicalOwnerFilesExistAndOldBoundaryOwnersAreRemoved -only-testing:AmbitionsTests/LocalRuntimeOSTransactionKernelOwnershipTests/testTransactionKernelLeavesBelongToCanonicalOwnerAndOldOwnerIsGone -only-testing:AmbitionsTests/PlanningEngineTests/testPlanningEngineOwnerFilesExistUnderCanonicalTreeAndOldPlannerOwnersAreRemoved -only-testing:AmbitionsTests/SearchRecallTests/testSearchRecallOwnerFilesExistUnderCanonicalTreeAndOldRuntimeIndexIsRemoved -only-testing:AmbitionsTests/PrivateLifeRuntimeKernelOwnershipTests/testKernelSourceLeavesLiveUnderCanonicalLocalRuntimeOSOwner -only-testing:AmbitionsTests/ObjectStateTests/testObjectStateOwnerFilesExistUnderCanonicalLocalRuntimeOSOwner -only-testing:AmbitionsTests/SourceAtlasLocalRuntimeOSOwnershipTests/testSourceAtlasCanonicalOwnerFilesExistAndOldOwnersAreRemoved test`
+  -> exit `0`; 11 selected LocalRuntimeOS owner-specific tests passed, 0
+  failures. Result bundle:
+  `output/amb-1730-localruntimeos-owner-tests-20260703.xcresult`.
 
 Validation not run:
 
-- Focused Swift/Xcode validation for the all-remaining owner pass was skipped
-  after user instruction to skip build testing until advised otherwise.
 - Full test suite.
 - Physical device runtime proof.
 - Accessibility, performance, privacy/legal, TestFlight, App Store, or release
@@ -338,10 +353,11 @@ AMB-1730 prune follow-up:
   roots for `Core/Runtime` references instead of reporting only diff-added
   test/preview references.
 
-Remaining proof gap: Swift/Xcode validation was skipped by user instruction. No
-Swift files and no owner directory remain under `Core/Runtime`. Next repair
-trains: focused owner build/typecheck/tests for AMB-1730 when build validation
-is re-enabled, plus AMB-1667 children for unsafe write/persistence authority and
-AMB-1668 children for external adapter command/rejection receipt proof.
+Remaining proof gap: none for AMB-1730 legacy `Core/Runtime`
+production-authority elimination. No Swift files and no owner directory remain
+under `Core/Runtime`, the guard ceiling is `0`, and focused Swift/Xcode owner
+tests passed. Remaining runtime-program debt is outside AMB-1730: AMB-1667 /
+AMB-1731 for unsafe write and persistence authority, and AMB-1668 / AMB-1732
+for external adapter command/rejection receipt proof.
 
 No equivalent-folder or close-enough path interpretation was used.

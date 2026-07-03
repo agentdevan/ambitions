@@ -93,8 +93,10 @@ proof-harness files to `Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeK
 instead of quarantining them into tests. That preserves the production
 dependencies from `FirstRunActivationRuntime`, `LifeConsequenceEngine`, and
 related runtime chain segment producers while removing legacy `Core/Runtime`
-authority. Focused Swift/Xcode validation remains not run because the user
-explicitly paused build testing.
+authority. Focused Swift/Xcode validation for AMB-1730 passed on 2026-07-03:
+`CoreRuntimeCanonicalOwnershipTests` passed 9 tests with 0 failures, and the
+focused LocalRuntimeOS owner-specific batch passed 11 selected tests with 0
+failures.
 
 ## Validation Run
 
@@ -156,9 +158,10 @@ explicitly paused build testing.
 - Old/non-canonical paths removed:
   - `Native/Ambitions/Core/Runtime/LargeStoreFixtureGenerator.swift`
 - Compatibility shims left behind: none added.
-- Yellow proof debt remains: yes. `0` Swift files remain under `Core/Runtime`,
-  but focused Swift/Xcode validation was skipped by user instruction.
-- Next repair train: focused owner build/typecheck/tests for the AMB-1730 moved
-  owners when build validation is re-enabled.
+- Yellow proof debt remains for AMB-1716 historical scope only. AMB-1730 now
+  has focused Swift/Xcode proof for the moved LocalRuntimeOS owners.
+- Next repair train: AMB-1667/AMB-1731 for unsafe write and persistence
+  authority, and AMB-1668/AMB-1732 for external adapter command/rejection
+  receipt proof.
 - No equivalent folder/path interpretation was used.
 - No Green runtime authority, release, or product-completion claim is made.

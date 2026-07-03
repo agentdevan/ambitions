@@ -12,13 +12,16 @@ PlanningEngine, goal clarification/contradiction, TimeEngine, step
 planning/scheduling, MemoryLens/SearchRecall, and final all-remaining
 owner-move batches. It does not prove full LocalRuntimeOS completion.
 
-Evidence class: Implemented Yellow. The guard reports current production legacy
-runtime owner growth, current production Swift source references to
-`Core/Runtime`, and current test/preview Swift reference paths. It preserves the
-AMB-1730 zero-ceiling baseline of `0` remaining legacy runtime production
-files. It does not prove runtime correctness, device
-behavior, accessibility behavior, privacy/legal approval, TestFlight readiness,
-App Store readiness, or Green project status.
+Evidence class: Implemented Green for the AMB-1730 legacy runtime
+production-authority elimination guard claim only. The guard reports current
+production legacy runtime owner growth, current production Swift source
+references to `Core/Runtime`, and current test/preview Swift reference paths.
+It preserves the AMB-1730 zero-ceiling baseline of `0` remaining legacy runtime
+production files, and the focused AMB-1730 owner tests passed on 2026-07-03. It
+does not prove runtime correctness across all flows, persistence direct-write
+repair, external-adapter receipt repair, device behavior, accessibility
+behavior, privacy/legal approval, TestFlight readiness, App Store readiness, or
+Green project status.
 
 ## Canonical Constraints
 
@@ -175,16 +178,24 @@ AMB-1730 guard hardening follow-up:
   `Core/Runtime` references, fails production references, and reports any
   remaining test/preview references in JSON. Current proof is zero.
 
-Remaining proof gap: Swift/Xcode validation was skipped by user instruction. No
-Swift files remain under `Core/Runtime`; the empty `Core/Runtime` owner
+Focused Swift/Xcode proof now exists for AMB-1730. On 2026-07-03, after
+refreshing the simulator destination to `iPhone 17 Pro Max
+(0F5F5AC4-4303-47C8-9BDC-EB5F57A0F79E)`, the focused
+`CoreRuntimeCanonicalOwnershipTests` command passed 9 tests with 0 failures,
+and the focused LocalRuntimeOS owner-specific command passed 11 selected tests
+with 0 failures. Result bundles:
+`output/amb-1730-core-runtime-ownership-20260703.xcresult` and
+`output/amb-1730-localruntimeos-owner-tests-20260703.xcresult`.
+
+No Swift files remain under `Core/Runtime`; the empty `Core/Runtime` owner
 directory was pruned after the guard reached zero. The final AMB-1730 owner pass
 moved the remaining adapter-shim classified files to
 `Core/LocalRuntimeOS/RuntimeBoundary`, the production-coupled Golden Vertical
-Slice / RuntimeCore proof harness to `Core/LocalRuntimeOS/PrivateLifeRuntimeKernel`,
-and the unresolved `RuntimePackageBoundaryModels.swift` owner decision to
+Slice / RuntimeCore proof harness to
+`Core/LocalRuntimeOS/PrivateLifeRuntimeKernel`, and the unresolved
+`RuntimePackageBoundaryModels.swift` owner decision to
 `Core/LocalRuntimeOS/RuntimeBoundary` with an updated LocalRuntimeOS source
 root. `tools/mcp/ambitions_native_mcp` now reports `Core/Runtime` as a
-removed/forbidden owner rather than a canonical owner. Next repair train:
-focused owner build/typecheck/tests when build validation is re-enabled.
+removed/forbidden owner rather than a canonical owner.
 
 No equivalent-folder or close-enough path interpretation was used.

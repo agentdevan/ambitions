@@ -16,9 +16,11 @@ sessionDefaultsProfiles:
     projectPath: /Users/devan/Documents/GitHub/ambitions/Ambitions.xcodeproj
     scheme: Ambitions
     configuration: Debug
-    simulatorName: iPhone 17
-    useLatestOS: true
+    simulatorName: iPhone 17 Pro Max
+    simulatorId: 0F5F5AC4-4303-47C8-9BDC-EB5F57A0F79E
+    useLatestOS: false
     derivedDataPath: /Users/devan/Documents/GitHub/ambitions/output/DerivedData-XcodeBuildMCP
     preferXcodebuild: true
     bundleId: com.ambitions.ios
+    simulatorPlatform: iOS Simulator
 activeSessionDefaultsProfile: ambitions-ios
