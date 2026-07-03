@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 LEGACY_RUNTIME_ROOT = ROOT / "Native" / "Ambitions" / "Core" / "Runtime"
 LEGACY_RUNTIME_PREFIX = "Native/Ambitions/Core/Runtime/"
 CLASSIFICATION_DOC = ROOT / "docs" / "audits" / "legacy-runtime-strangler-classification.md"
-MAX_LEGACY_RUNTIME_PRODUCTION_FILES = 87
+MAX_LEGACY_RUNTIME_PRODUCTION_FILES = 67
 
 AMB_1714_RETIRED_LEGACY_PATHS = {
     "Native/Ambitions/Core/Runtime/PrivateLifeRuntime.swift",
@@ -56,6 +56,26 @@ AMB_1730_RETIRED_LEGACY_PATHS = {
     "Native/Ambitions/Core/Runtime/PressureEngine.swift",
     "Native/Ambitions/Core/Runtime/RecommendationExplanationAdapter.swift",
     "Native/Ambitions/Core/Runtime/RecoveryEngine.swift",
+    "Native/Ambitions/Core/Runtime/ScheduleInstallKernel+02-ScheduleInstallRecord.swift",
+    "Native/Ambitions/Core/Runtime/ScheduleInstallKernel+03-ScheduleInstallKernel+02-evaluate.swift",
+    "Native/Ambitions/Core/Runtime/ScheduleInstallKernel+03-ScheduleInstallKernel+03-makeReceipt.swift",
+    "Native/Ambitions/Core/Runtime/ScheduleInstallKernel+03-ScheduleInstallKernel.swift",
+    "Native/Ambitions/Core/Runtime/ScheduleInstallKernel+04-ScheduleInstallRecord.swift",
+    "Native/Ambitions/Core/Runtime/ScheduleInstallKernel.swift",
+    "Native/Ambitions/Core/Runtime/SimpleStepLifecycleService+Recurring.swift",
+    "Native/Ambitions/Core/Runtime/SimpleStepLifecycleService.swift",
+    "Native/Ambitions/Core/Runtime/StepElasticityEngine+02-StepElasticityEngine+02-evaluate.swift",
+    "Native/Ambitions/Core/Runtime/StepElasticityEngine+02-StepElasticityEngine+03-makeReceipt.swift",
+    "Native/Ambitions/Core/Runtime/StepElasticityEngine+02-StepElasticityEngine.swift",
+    "Native/Ambitions/Core/Runtime/StepElasticityEngine+03-StepElasticityEngineInput.swift",
+    "Native/Ambitions/Core/Runtime/StepElasticityEngine.swift",
+    "Native/Ambitions/Core/Runtime/StepGraphCompiler+02-StepGraphCompiler+02-compile.swift",
+    "Native/Ambitions/Core/Runtime/StepGraphCompiler+02-StepGraphCompiler+03-edgeKind.swift",
+    "Native/Ambitions/Core/Runtime/StepGraphCompiler+02-StepGraphCompiler.swift",
+    "Native/Ambitions/Core/Runtime/StepGraphCompiler.swift",
+    "Native/Ambitions/Core/Runtime/StepQualityFirewall.swift",
+    "Native/Ambitions/Core/Runtime/StepReallocationRuntimeBridge.swift",
+    "Native/Ambitions/Core/Runtime/TimeRitualGoalSemantics.swift",
 }
 
 RETIRED_LEGACY_RUNTIME_PATHS = (
@@ -337,6 +357,12 @@ def self_test() -> int:
     assert "Native/Ambitions/Core/Runtime/GoalContradictionService+03-GoalResourceEntity.swift" not in baseline
     assert "Native/Ambitions/Core/Runtime/BufferEngine.swift" not in baseline
     assert "Native/Ambitions/Core/Runtime/PressureEngine.swift" not in baseline
+    assert "Native/Ambitions/Core/Runtime/StepGraphCompiler.swift" not in baseline
+    assert "Native/Ambitions/Core/Runtime/StepElasticityEngine.swift" not in baseline
+    assert "Native/Ambitions/Core/Runtime/ScheduleInstallKernel.swift" not in baseline
+    assert "Native/Ambitions/Core/Runtime/StepQualityFirewall.swift" not in baseline
+    assert "Native/Ambitions/Core/Runtime/SimpleStepLifecycleService.swift" not in baseline
+    assert "Native/Ambitions/Core/Runtime/TimeRitualGoalSemantics.swift" not in baseline
     assert len(baseline) <= MAX_LEGACY_RUNTIME_PRODUCTION_FILES
     synthetic_findings = legacy_owner_findings(
         {"Native/Ambitions/Core/Runtime/ExistingRuntime.swift"},

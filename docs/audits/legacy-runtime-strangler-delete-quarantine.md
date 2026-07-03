@@ -19,8 +19,8 @@ accessibility behavior, privacy/legal approval, TestFlight readiness, App Store
 readiness, or Green AMB-1666 status.
 
 AMB-1730 supersession: the current legacy runtime production-file ceiling is
-`87` after the standalone PlanningEngine, goal clarification/contradiction, and
-TimeEngine owner-move batches
+`67` after the standalone PlanningEngine, goal clarification/contradiction,
+TimeEngine, and step planning/scheduling owner-move batches
 recorded in `docs/audits/legacy-runtime-strangler-import-replacement.md`. The
 AMB-1716 `111` count below remains the historical count for this quarantine
 slice only.

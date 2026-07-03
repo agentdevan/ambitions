@@ -34,7 +34,7 @@ LocalRuntimeOS completion.
 
 ## AMB-1730 Legacy Runtime Owner-Move Addendum
 
-AMB-1730 moved `24` standalone goal/planning/time runtime files out of
+AMB-1730 moved `44` standalone goal/planning/time runtime files out of
 `Native/Ambitions/Core/Runtime` and into
 `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine` and
 `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine`:
@@ -63,12 +63,32 @@ AMB-1730 moved `24` standalone goal/planning/time runtime files out of
 - `PressureEngine.swift`
 - `RecommendationExplanationAdapter.swift`
 - `RecoveryEngine.swift`
+- `ScheduleInstallKernel+02-ScheduleInstallRecord.swift`
+- `ScheduleInstallKernel+03-ScheduleInstallKernel+02-evaluate.swift`
+- `ScheduleInstallKernel+03-ScheduleInstallKernel+03-makeReceipt.swift`
+- `ScheduleInstallKernel+03-ScheduleInstallKernel.swift`
+- `ScheduleInstallKernel+04-ScheduleInstallRecord.swift`
+- `ScheduleInstallKernel.swift`
+- `SimpleStepLifecycleService+Recurring.swift`
+- `SimpleStepLifecycleService.swift`
+- `StepElasticityEngine+02-StepElasticityEngine+02-evaluate.swift`
+- `StepElasticityEngine+02-StepElasticityEngine+03-makeReceipt.swift`
+- `StepElasticityEngine+02-StepElasticityEngine.swift`
+- `StepElasticityEngine+03-StepElasticityEngineInput.swift`
+- `StepElasticityEngine.swift`
+- `StepGraphCompiler+02-StepGraphCompiler+02-compile.swift`
+- `StepGraphCompiler+02-StepGraphCompiler+03-edgeKind.swift`
+- `StepGraphCompiler+02-StepGraphCompiler.swift`
+- `StepGraphCompiler.swift`
+- `StepQualityFirewall.swift`
+- `StepReallocationRuntimeBridge.swift`
+- `TimeRitualGoalSemantics.swift`
 
 Before AMB-1730, the legacy runtime production-use guard reported
 `currentLegacyRuntimeFiles=111` and `legacyRuntimeFileCeiling=111`. After the
-PlanningEngine, goal clarification/contradiction, and TimeEngine moves and guard
-updates, it reports `currentLegacyRuntimeFiles=87` and
-`legacyRuntimeFileCeiling=87`.
+PlanningEngine, goal clarification/contradiction, TimeEngine, and step
+planning/scheduling moves and guard updates, it reports
+`currentLegacyRuntimeFiles=67` and `legacyRuntimeFileCeiling=67`.
 
 This addendum changes source ownership for the listed files only. It does not
 convert remaining `Core/Runtime` files, remove persistence direct writes,

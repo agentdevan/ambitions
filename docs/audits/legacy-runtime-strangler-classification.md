@@ -30,8 +30,8 @@ rows remain Yellow until a follow-up proves their owner movement or release-iner
 scope.
 
 AMB-1730 supersession: `docs/audits/legacy-runtime-strangler-import-replacement.md`
-is the current overlay for the standalone PlanningEngine and TimeEngine
-owner-move batches:
+is the current overlay for the standalone PlanningEngine, TimeEngine, goal
+clarification/contradiction, and step planning/scheduling owner-move batches:
 `BufferEngine.swift`, `CapacityEngine.swift`,
 `GoalClarificationService+02-DefaultGoalClarificationService+03-defaultAssumption.swift`,
 `GoalClarificationService+02-DefaultGoalClarificationService.swift`,
@@ -47,11 +47,28 @@ owner-move batches:
 `GoalResourceGraphService.swift`, `GoalTeachingSignalService.swift`,
 `GoalUnderstandingService.swift`, `OneStepGoalProjector.swift`, and
 `OpenCapacityEngine.swift`, `PressureEngine.swift`,
-`RecommendationExplanationAdapter.swift`, and `RecoveryEngine.swift`. Those
-files moved from production `Core/Runtime` into
+`RecommendationExplanationAdapter.swift`, `RecoveryEngine.swift`,
+`ScheduleInstallKernel+02-ScheduleInstallRecord.swift`,
+`ScheduleInstallKernel+03-ScheduleInstallKernel+02-evaluate.swift`,
+`ScheduleInstallKernel+03-ScheduleInstallKernel+03-makeReceipt.swift`,
+`ScheduleInstallKernel+03-ScheduleInstallKernel.swift`,
+`ScheduleInstallKernel+04-ScheduleInstallRecord.swift`,
+`ScheduleInstallKernel.swift`, `SimpleStepLifecycleService+Recurring.swift`,
+`SimpleStepLifecycleService.swift`,
+`StepElasticityEngine+02-StepElasticityEngine+02-evaluate.swift`,
+`StepElasticityEngine+02-StepElasticityEngine+03-makeReceipt.swift`,
+`StepElasticityEngine+02-StepElasticityEngine.swift`,
+`StepElasticityEngine+03-StepElasticityEngineInput.swift`,
+`StepElasticityEngine.swift`,
+`StepGraphCompiler+02-StepGraphCompiler+02-compile.swift`,
+`StepGraphCompiler+02-StepGraphCompiler+03-edgeKind.swift`,
+`StepGraphCompiler+02-StepGraphCompiler.swift`, `StepGraphCompiler.swift`,
+`StepQualityFirewall.swift`, `StepReallocationRuntimeBridge.swift`, and
+`TimeRitualGoalSemantics.swift`. Those files moved from production
+`Core/Runtime` into
 `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine` and
 `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine`. Remaining legacy runtime
-production-file count is now `87`.
+production-file count is now `67`.
 
 ## Canonical Constraints
 
@@ -102,7 +119,7 @@ AMB-1730 remaining overlay:
 
 | Classification | Remaining count | Meaning for AMB-1730 |
 | --- | ---: | --- |
-| Move into LocalRuntimeOS | 74 | Move-candidate rows still in legacy runtime owner scope after the AMB-1714 and AMB-1730 moved rows. |
+| Move into LocalRuntimeOS | 54 | Move-candidate rows still in legacy runtime owner scope after the AMB-1714 and AMB-1730 moved rows. |
 | Adapter shim | 8 | Live or boundary wiring that may temporarily remain only as explicit shims. |
 | Test-only support | 4 | Support rows still production-coupled until a later owner move or quarantine proves replacement. |
 | Unresolved | 1 | `RuntimePackageBoundaryModels.swift` still needs owner decision. |

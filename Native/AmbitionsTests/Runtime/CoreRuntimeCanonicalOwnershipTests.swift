@@ -164,6 +164,65 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
         }
     }
 
+    func testAMB1730MovesStepPlanningAndSchedulingRuntimeOwnersToCanonicalOwners() {
+        let root = repoRoot()
+        for requiredPath in [
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepElasticityEngine+02-StepElasticityEngine+02-evaluate.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepElasticityEngine+02-StepElasticityEngine+03-makeReceipt.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepElasticityEngine+02-StepElasticityEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepElasticityEngine+03-StepElasticityEngineInput.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepElasticityEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepGraphCompiler+02-StepGraphCompiler+02-compile.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepGraphCompiler+02-StepGraphCompiler+03-edgeKind.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepGraphCompiler+02-StepGraphCompiler.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepGraphCompiler.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepQualityFirewall.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ScheduleInstallKernel+02-ScheduleInstallRecord.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ScheduleInstallKernel+03-ScheduleInstallKernel+02-evaluate.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ScheduleInstallKernel+03-ScheduleInstallKernel+03-makeReceipt.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ScheduleInstallKernel+03-ScheduleInstallKernel.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ScheduleInstallKernel+04-ScheduleInstallRecord.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ScheduleInstallKernel.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/SimpleStepLifecycleService+Recurring.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/SimpleStepLifecycleService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/StepReallocationRuntimeBridge.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/TimeRitualGoalSemantics.swift",
+        ] {
+            XCTAssertTrue(
+                FileManager.default.fileExists(atPath: root.appendingPathComponent(requiredPath).path),
+                "Missing AMB-1730 canonical step planning/scheduling owner: \(requiredPath)"
+            )
+        }
+
+        for retiredPath in [
+            "Native/Ambitions/Core/Runtime/StepElasticityEngine+02-StepElasticityEngine+02-evaluate.swift",
+            "Native/Ambitions/Core/Runtime/StepElasticityEngine+02-StepElasticityEngine+03-makeReceipt.swift",
+            "Native/Ambitions/Core/Runtime/StepElasticityEngine+02-StepElasticityEngine.swift",
+            "Native/Ambitions/Core/Runtime/StepElasticityEngine+03-StepElasticityEngineInput.swift",
+            "Native/Ambitions/Core/Runtime/StepElasticityEngine.swift",
+            "Native/Ambitions/Core/Runtime/StepGraphCompiler+02-StepGraphCompiler+02-compile.swift",
+            "Native/Ambitions/Core/Runtime/StepGraphCompiler+02-StepGraphCompiler+03-edgeKind.swift",
+            "Native/Ambitions/Core/Runtime/StepGraphCompiler+02-StepGraphCompiler.swift",
+            "Native/Ambitions/Core/Runtime/StepGraphCompiler.swift",
+            "Native/Ambitions/Core/Runtime/StepQualityFirewall.swift",
+            "Native/Ambitions/Core/Runtime/ScheduleInstallKernel+02-ScheduleInstallRecord.swift",
+            "Native/Ambitions/Core/Runtime/ScheduleInstallKernel+03-ScheduleInstallKernel+02-evaluate.swift",
+            "Native/Ambitions/Core/Runtime/ScheduleInstallKernel+03-ScheduleInstallKernel+03-makeReceipt.swift",
+            "Native/Ambitions/Core/Runtime/ScheduleInstallKernel+03-ScheduleInstallKernel.swift",
+            "Native/Ambitions/Core/Runtime/ScheduleInstallKernel+04-ScheduleInstallRecord.swift",
+            "Native/Ambitions/Core/Runtime/ScheduleInstallKernel.swift",
+            "Native/Ambitions/Core/Runtime/SimpleStepLifecycleService+Recurring.swift",
+            "Native/Ambitions/Core/Runtime/SimpleStepLifecycleService.swift",
+            "Native/Ambitions/Core/Runtime/StepReallocationRuntimeBridge.swift",
+            "Native/Ambitions/Core/Runtime/TimeRitualGoalSemantics.swift",
+        ] {
+            XCTAssertFalse(
+                FileManager.default.fileExists(atPath: root.appendingPathComponent(retiredPath).path),
+                "AMB-1730 step planning/scheduling owner still lives under production runtime owner: \(retiredPath)"
+            )
+        }
+    }
+
     func testRemainingLegacyRuntimeLeavesStayExplicitYellowUntilFollowUpMove() {
         let root = repoRoot()
         for yellowPath in [
