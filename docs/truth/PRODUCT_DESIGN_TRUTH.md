@@ -609,7 +609,6 @@ Ambitions/
         SideEffectPolicyEngine/
         NotificationOutbox/
         EventKitOutbox/
-        ReminderOutbox/
         WidgetRefreshOutbox/
         AppIntentBridge/
         ShareExtensionIntake/
