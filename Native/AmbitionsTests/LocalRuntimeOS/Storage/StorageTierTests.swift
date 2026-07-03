@@ -9,12 +9,18 @@ final class StorageTierTests: XCTestCase {
             "Native/Ambitions/Core/LocalRuntimeOS/Storage/LocalRuntimeStorageCore.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/Storage/EventStoreSQLite.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/Storage/ObjectStoreSwiftData.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Storage/ObjectStoreSwiftDataLegacyMigration.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/Storage/ProjectionStoreSQLite.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/Storage/SearchStoreFTS.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/Storage/BlobStoreFileSystem.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/Storage/AppGroupSnapshotStore.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/Storage/BackupStore.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/Storage/MigrationStore.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Storage/ObjectStoreSwiftDataModels.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Storage/ObjectStoreSwiftDataRepositories.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Storage/ObjectStoreLifeContextPersistence.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Storage/SwiftDataGoalPersistenceRepositories.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Storage/SwiftDataReminderRepository.swift",
         ]
 
         for path in requiredPaths {
@@ -24,6 +30,15 @@ final class StorageTierTests: XCTestCase {
             FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Core/Persistence/LocalStore.swift").path),
             "SwiftData object-store source must not remain owned by Core/Persistence/LocalStore.swift"
         )
+        for removedPath in [
+            "Native/Ambitions/Core/Persistence/LifeContextPersistence.swift",
+            "Native/Ambitions/Core/Persistence/SwiftDataModels.swift",
+            "Native/Ambitions/Core/Persistence/SwiftDataRepositories.swift",
+            "Native/Ambitions/Core/Persistence/SwiftDataRepositories+04-SwiftDataGoalPersistence.swift",
+            "Native/Ambitions/Core/Persistence/SwiftDataRepositories+08-SwiftDataReminderRepository.swift",
+        ] {
+            XCTAssertFalse(FileManager.default.fileExists(atPath: root.appendingPathComponent(removedPath).path), removedPath)
+        }
     }
 
     func testStorageManifestAndSwiftDataObjectStoreDeclareAuthorityBoundaries() {

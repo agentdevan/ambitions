@@ -314,7 +314,7 @@ Native/Ambitions/Domain/
 Native/Ambitions/Domain/GoalEngine/
 Native/Ambitions/Domain/Planning/
 Native/Ambitions/Domain/Reschedule/
-Native/Ambitions/Core/Persistence/SwiftDataModels.swift
+Native/Ambitions/Core/LocalRuntimeOS/Storage/ObjectStoreSwiftDataModels.swift
 Native/Ambitions/Core/LocalRuntimeOS/Storage/ObjectStoreSwiftData.swift
 ```
 

@@ -60,15 +60,16 @@ DIRECT_WRITE_PATTERNS = (
 CANONICAL_CLASSIFICATION = "canonical command"
 ADAPTER_CLASSIFICATION = "adapter into command"
 PROJECTION_CLASSIFICATION = "projection-only read"
+TEST_ONLY_CLASSIFICATION = "test-only support"
 UNSAFE_CLASSIFICATION = "unsafe write"
 UNKNOWN_CLASSIFICATION = "unknown"
 DIRECT_WRITE_PROOF_FOLLOW_UP = "AMB-1719"
 
 KNOWN_FORBIDDEN_CLASSIFICATIONS: dict[str, tuple[str, str, str]] = {
     "Native/Ambitions/PreviewSupport/PreviewAppContainer.swift": (
-        UNKNOWN_CLASSIFICATION,
-        "AMB-1710",
-        "Preview/debug fixture path uses temporary FileManager storage and needs fixture authority review.",
+        TEST_ONLY_CLASSIFICATION,
+        "",
+        "DEBUG-only preview fixture composition uses temporary FileManager storage and is not production runtime authority.",
     ),
     "Native/Ambitions/Projection/ExternalSnapshots/ExternalCreationContracts.swift": (
         ADAPTER_CLASSIFICATION,
@@ -89,101 +90,6 @@ KNOWN_FORBIDDEN_CLASSIFICATIONS: dict[str, tuple[str, str, str]] = {
         ADAPTER_CLASSIFICATION,
         "AMB-1708",
         "Notification scheduling reads safe external snapshots and records side effects; action payloads route back through app command handling.",
-    ),
-    "Native/Ambitions/Core/Domain/RealityModels.swift": (
-        UNSAFE_CLASSIFICATION,
-        DIRECT_WRITE_PROOF_FOLLOW_UP,
-        "Local schedule block file writes live in Core/Domain and must move under LocalRuntimeOS authority.",
-    ),
-    "Native/Ambitions/Core/Persistence/LifeContextPersistence.swift": (
-        UNSAFE_CLASSIFICATION,
-        DIRECT_WRITE_PROOF_FOLLOW_UP,
-        "Legacy SwiftData persistence scaffolding remains outside Core/LocalRuntimeOS.",
-    ),
-    "Native/Ambitions/Core/Persistence/PortableSnapshotService+02-PortableSnapshotService.swift": (
-        UNSAFE_CLASSIFICATION,
-        DIRECT_WRITE_PROOF_FOLLOW_UP,
-        "Portable snapshot save path remains in legacy Core/Persistence scaffolding.",
-    ),
-    "Native/Ambitions/Core/Persistence/SwiftDataModels+02-CaptureRecord.swift": (
-        UNSAFE_CLASSIFICATION,
-        DIRECT_WRITE_PROOF_FOLLOW_UP,
-        "Legacy SwiftData model authority remains outside Core/LocalRuntimeOS.",
-    ),
-    "Native/Ambitions/Core/Persistence/SwiftDataModels+03-EntityRevisionTombstoneRecord.swift": (
-        UNSAFE_CLASSIFICATION,
-        DIRECT_WRITE_PROOF_FOLLOW_UP,
-        "Legacy SwiftData tombstone model authority remains outside Core/LocalRuntimeOS.",
-    ),
-    "Native/Ambitions/Core/Persistence/SwiftDataModels+04-AmbitionGraphProjectionRecordModel.swift": (
-        UNSAFE_CLASSIFICATION,
-        DIRECT_WRITE_PROOF_FOLLOW_UP,
-        "Legacy SwiftData projection-record model authority remains outside Core/LocalRuntimeOS.",
-    ),
-    "Native/Ambitions/Core/Persistence/SwiftDataModels.swift": (
-        UNSAFE_CLASSIFICATION,
-        DIRECT_WRITE_PROOF_FOLLOW_UP,
-        "Legacy SwiftData model authority remains outside Core/LocalRuntimeOS.",
-    ),
-    "Native/Ambitions/Core/Persistence/SwiftDataRepositories+02-RepositoryMapping+02-persisted.swift": (
-        UNSAFE_CLASSIFICATION,
-        DIRECT_WRITE_PROOF_FOLLOW_UP,
-        "Legacy SwiftData mapping scaffolding remains outside Core/LocalRuntimeOS.",
-    ),
-    "Native/Ambitions/Core/Persistence/SwiftDataRepositories+02-RepositoryMapping+03-feedbackRecord.swift": (
-        UNSAFE_CLASSIFICATION,
-        DIRECT_WRITE_PROOF_FOLLOW_UP,
-        "Legacy SwiftData feedback mapping scaffolding remains outside Core/LocalRuntimeOS.",
-    ),
-    "Native/Ambitions/Core/Persistence/SwiftDataRepositories+02-RepositoryMapping+04-apply.swift": (
-        UNSAFE_CLASSIFICATION,
-        DIRECT_WRITE_PROOF_FOLLOW_UP,
-        "Legacy SwiftData apply mapping scaffolding remains outside Core/LocalRuntimeOS.",
-    ),
-    "Native/Ambitions/Core/Persistence/SwiftDataRepositories+02-RepositoryMapping+05-entityRevisionTombstone.swift": (
-        UNSAFE_CLASSIFICATION,
-        DIRECT_WRITE_PROOF_FOLLOW_UP,
-        "Legacy SwiftData tombstone mapping scaffolding remains outside Core/LocalRuntimeOS.",
-    ),
-    "Native/Ambitions/Core/Persistence/SwiftDataRepositories+02-RepositoryMapping.swift": (
-        UNSAFE_CLASSIFICATION,
-        DIRECT_WRITE_PROOF_FOLLOW_UP,
-        "Legacy SwiftData mapping scaffolding remains outside Core/LocalRuntimeOS.",
-    ),
-    "Native/Ambitions/Core/Persistence/SwiftDataRepositories+03-Array.swift": (
-        UNSAFE_CLASSIFICATION,
-        DIRECT_WRITE_PROOF_FOLLOW_UP,
-        "Legacy SwiftData repository helper remains outside Core/LocalRuntimeOS.",
-    ),
-    "Native/Ambitions/Core/Persistence/SwiftDataRepositories+04-SwiftDataGoalPersistence.swift": (
-        UNSAFE_CLASSIFICATION,
-        DIRECT_WRITE_PROOF_FOLLOW_UP,
-        "Legacy goal persistence writes remain outside Core/LocalRuntimeOS.",
-    ),
-    "Native/Ambitions/Core/Persistence/SwiftDataRepositories+05-SwiftDataAmbitionGraphProjectionRecordRepository.swift": (
-        UNSAFE_CLASSIFICATION,
-        DIRECT_WRITE_PROOF_FOLLOW_UP,
-        "Legacy graph projection record repository writes remain outside Core/LocalRuntimeOS.",
-    ),
-    "Native/Ambitions/Core/Persistence/SwiftDataRepositories+06-SwiftDataAppStateRepository.swift": (
-        UNSAFE_CLASSIFICATION,
-        DIRECT_WRITE_PROOF_FOLLOW_UP,
-        "Legacy app-state repository writes remain outside Core/LocalRuntimeOS.",
-    ),
-    "Native/Ambitions/Core/Persistence/SwiftDataRepositories+07-SwiftDataRuntimeSnapshotLedgerRepository.swift": (
-        UNSAFE_CLASSIFICATION,
-        DIRECT_WRITE_PROOF_FOLLOW_UP,
-        "Legacy runtime snapshot ledger repository writes remain outside Core/LocalRuntimeOS.",
-    ),
-    "Native/Ambitions/Core/Persistence/SwiftDataRepositories+08-SwiftDataReminderRepository.swift": (
-        UNSAFE_CLASSIFICATION,
-        DIRECT_WRITE_PROOF_FOLLOW_UP,
-        "Legacy reminder repository writes remain outside Core/LocalRuntimeOS.",
-    ),
-    "Native/Ambitions/Core/Persistence/SwiftDataRepositories.swift": (
-        UNSAFE_CLASSIFICATION,
-        DIRECT_WRITE_PROOF_FOLLOW_UP,
-        "Legacy SwiftData repository authority remains outside Core/LocalRuntimeOS.",
     ),
 }
 
@@ -279,11 +185,12 @@ def findings_for(rows: list[AuditRow], authority_map: str) -> list[Finding]:
     findings: list[Finding] = []
     for row in rows:
         known_forbidden = row.path in KNOWN_FORBIDDEN_CLASSIFICATIONS
-        if row.classification == UNKNOWN_CLASSIFICATION and not row.follow_up:
+        if row.classification == UNSAFE_CLASSIFICATION:
+            findings.append(Finding(row.path, "unsafe production direct-write marker must move under Core/LocalRuntimeOS, become an adapter, or become test-only"))
+            continue
+        if row.classification == UNKNOWN_CLASSIFICATION:
             findings.append(Finding(row.path, "unclassified direct-write marker outside Core/LocalRuntimeOS"))
             continue
-        if row.classification in {UNSAFE_CLASSIFICATION, UNKNOWN_CLASSIFICATION} and not row.follow_up:
-            findings.append(Finding(row.path, f"{row.classification} classification requires a follow-up issue"))
         if known_forbidden and row.path not in authority_map:
             findings.append(Finding(row.path, f"{AUTHORITY_MAP.relative_to(ROOT)} does not mention classified path"))
         if known_forbidden and row.follow_up and row.follow_up not in authority_map:
@@ -308,25 +215,44 @@ def summary(rows: list[AuditRow], findings: list[Finding]) -> dict[str, object]:
         for marker in row.markers:
             marker_counts[marker] = marker_counts.get(marker, 0) + 1
 
+    unsafe_or_unknown_count = (
+        classification_counts.get(UNSAFE_CLASSIFICATION, 0)
+        + classification_counts.get(UNKNOWN_CLASSIFICATION, 0)
+    )
+
     return {
-        "status": "red" if findings else "yellow",
-        "proofStatus": "Implemented Yellow",
+        "status": "red" if findings or unsafe_or_unknown_count else "green",
+        "proofStatus": "Implemented Yellow" if findings or unsafe_or_unknown_count else "Implemented Green",
         "directWriteMarkerCount": len(rows),
         "classificationCounts": dict(sorted(classification_counts.items())),
         "markerCounts": dict(sorted(marker_counts.items())),
         "findingCount": len(findings),
+        "unsafeOrUnknownProductionRowCount": unsafe_or_unknown_count,
     }
 
 
 def run_self_test() -> int:
     assert classify("Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandJournal.swift")[0] == CANONICAL_CLASSIFICATION
-    assert classify("Native/Ambitions/Core/Persistence/SwiftDataRepositories.swift")[0] == UNSAFE_CLASSIFICATION
+    assert classify("Native/Ambitions/Core/Persistence/SwiftDataRepositories.swift")[0] == UNKNOWN_CLASSIFICATION
     assert classify("Native/Ambitions/Projection/ExternalSnapshots/ExternalCreationContracts.swift")[0] == ADAPTER_CLASSIFICATION
     assert classify("Native/Ambitions/Projection/ExternalSnapshots/SharedExternalSnapshotStore.swift")[0] == PROJECTION_CLASSIFICATION
-    assert classify("Native/Ambitions/PreviewSupport/PreviewAppContainer.swift")[0] == UNKNOWN_CLASSIFICATION
+    assert classify("Native/Ambitions/PreviewSupport/PreviewAppContainer.swift")[0] == TEST_ONLY_CLASSIFICATION
     assert classify("Native/Ambitions/Core/Domain/NewDirectStore.swift")[1] == ""
     assert "SwiftData" in direct_write_markers("import SwiftData\n")
     assert "write_call" in direct_write_markers("try data.write(to: url)")
+    green_summary = summary(
+        [
+            AuditRow(
+                path="Native/Ambitions/Core/LocalRuntimeOS/Storage/ObjectStoreSwiftData.swift",
+                markers=["SwiftData"],
+                classification=CANONICAL_CLASSIFICATION,
+                follow_up="",
+                detail="",
+            )
+        ],
+        [],
+    )
+    assert green_summary["status"] == "green"
     print("ambitions-runtime-direct-write-audit self-test passed")
     return 0
 
@@ -361,7 +287,7 @@ def main() -> int:
             for finding in findings:
                 print(f"{finding.path}: {finding.detail}")
         else:
-            print("YELLOW all current direct-write markers are classified; unsafe/unknown rows remain follow-up debt")
+            print("GREEN no unsafe/unknown production direct-write rows remain")
 
     return 1 if findings else 0
 

@@ -300,8 +300,24 @@ actor AmbitionsPersistenceStore {
     private let container: ModelContainer
 
     init(inMemory: Bool, persistentStoreURL: URL? = nil) throws {
+        try self.init(
+            inMemory: inMemory,
+            persistentStoreURL: persistentStoreURL,
+            legacyPersistentStoreURL: Self.legacyAppGroupPersistentStoreURL()
+        )
+    }
+
+    init(
+        inMemory: Bool,
+        persistentStoreURL: URL?,
+        legacyPersistentStoreURL: URL? = nil
+    ) throws {
         do {
-            container = try Self.makeContainer(inMemory: inMemory, persistentStoreURL: persistentStoreURL)
+            container = try Self.makeContainer(
+                inMemory: inMemory,
+                persistentStoreURL: persistentStoreURL,
+                legacyPersistentStoreURL: legacyPersistentStoreURL
+            )
         } catch {
             #if DEBUG
             guard inMemory == false else {
@@ -309,7 +325,11 @@ actor AmbitionsPersistenceStore {
             }
 
             try Self.quarantineIncompatiblePersistentStores(after: error, persistentStoreURL: persistentStoreURL)
-            container = try Self.makeContainer(inMemory: false, persistentStoreURL: persistentStoreURL)
+            container = try Self.makeContainer(
+                inMemory: false,
+                persistentStoreURL: persistentStoreURL,
+                legacyPersistentStoreURL: legacyPersistentStoreURL
+            )
             #else
             throw error
             #endif
@@ -323,7 +343,11 @@ actor AmbitionsPersistenceStore {
         return supportDirectory.appendingPathComponent("default.store", isDirectory: false)
     }
 
-    private static func makeContainer(inMemory: Bool, persistentStoreURL: URL?) throws -> ModelContainer {
+    private static func makeContainer(
+        inMemory: Bool,
+        persistentStoreURL: URL?,
+        legacyPersistentStoreURL: URL?
+    ) throws -> ModelContainer {
         let configuration: ModelConfiguration
         if inMemory {
             configuration = ModelConfiguration(
@@ -333,6 +357,10 @@ actor AmbitionsPersistenceStore {
             )
         } else {
             let storeURL = try persistentStoreURL ?? defaultPersistentStoreURL()
+            try migrateLegacyAppGroupPersistentStoreIfNeeded(
+                to: storeURL,
+                legacyStoreURL: legacyPersistentStoreURL
+            )
             try preparePersistentStoreParentDirectory(for: storeURL)
             configuration = ModelConfiguration(
                 schema: Self.schema,
@@ -407,17 +435,6 @@ actor AmbitionsPersistenceStore {
             fileNames.map { directory.appendingPathComponent($0, isDirectory: false) }
         }
         return uniqueURLs(defaultCandidates + persistentStoreSidecarURLs(for: persistentStoreURL))
-    }
-
-    private static func persistentStoreSidecarURLs(for persistentStoreURL: URL?) -> [URL] {
-        guard let persistentStoreURL else {
-            return []
-        }
-        let directory = persistentStoreURL.deletingLastPathComponent()
-        let fileName = persistentStoreURL.lastPathComponent
-        return ["", "-shm", "-wal"].map { suffix in
-            directory.appendingPathComponent(fileName + suffix, isDirectory: false)
-        }
     }
 
     private static func uniqueURLs(_ urls: [URL]) -> [URL] {

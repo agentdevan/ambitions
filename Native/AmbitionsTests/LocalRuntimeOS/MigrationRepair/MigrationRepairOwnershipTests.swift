@@ -16,6 +16,12 @@ final class MigrationRepairOwnershipTests: XCTestCase {
             "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/RuntimeDoctorRepairOperator.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/RepairPlanEngine.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/RestoreRollback.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/PortableSnapshotContracts.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/PortableAppSnapshot.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/PortableStoredGoalFeedbackEvent.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/PortableSnapshotService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/PortableSnapshotServiceOperations.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/PortableSnapshotServiceReferenceWarnings.swift",
         ]
 
         for path in requiredPaths {
@@ -34,6 +40,12 @@ final class MigrationRepairOwnershipTests: XCTestCase {
             "Native/Ambitions/Core/Persistence/StorageMigrationRecovery.swift",
             "Native/Ambitions/Core/Persistence/PortableRestoreRollback.swift",
             "Native/Ambitions/Core/Persistence/StorageMigrationFoundation.swift",
+            "Native/Ambitions/Core/Persistence/PortableSnapshotContracts.swift",
+            "Native/Ambitions/Core/Persistence/PortableSnapshotContracts+02-PortableAppSnapshot.swift",
+            "Native/Ambitions/Core/Persistence/PortableSnapshotContracts+03-PortableStoredGoalFeedbackEvent.swift",
+            "Native/Ambitions/Core/Persistence/PortableSnapshotService.swift",
+            "Native/Ambitions/Core/Persistence/PortableSnapshotService+02-PortableSnapshotService.swift",
+            "Native/Ambitions/Core/Persistence/PortableSnapshotService+02-PortableSnapshotService+03-referenceWarnings.swift",
         ]
 
         for path in removedPaths {

@@ -8,6 +8,7 @@ final class CorePersistenceCanonicalOwnershipTests: XCTestCase {
         let root = repoRoot()
         for requiredPath in [
             "Native/Ambitions/Core/LocalRuntimeOS/Storage/ObjectStoreSwiftData.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Storage/ObjectStoreSwiftDataLegacyMigration.swift",
             "Native/Ambitions/Core/Persistence/StoreHealthCheck.swift",
         ] {
             XCTAssertTrue(
@@ -46,13 +47,67 @@ final class CorePersistenceCanonicalOwnershipTests: XCTestCase {
 
         XCTAssertFalse(FileManager.default.fileExists(atPath: storeURL.deletingLastPathComponent().path))
 
-        let store = try AmbitionsPersistenceStore(inMemory: false, persistentStoreURL: storeURL)
+        let store = try AmbitionsPersistenceStore(
+            inMemory: false,
+            persistentStoreURL: storeURL,
+            legacyPersistentStoreURL: nil
+        )
         let report = await store.healthReport(checker: StoreHealthCheck(timestampProvider: { "2026-07-03T12:00:00Z" }))
 
         XCTAssertTrue(FileManager.default.fileExists(atPath: storeURL.deletingLastPathComponent().path))
         XCTAssertEqual(report.status, .green)
         XCTAssertTrue(report.readVerified)
         XCTAssertTrue(report.writeVerified)
+    }
+
+    func testPersistentObjectStoreMigratesLegacyAppGroupStoreWithoutOverwritingCanonicalStore() throws {
+        let root = FileManager.default.temporaryDirectory
+            .appendingPathComponent("AmbitionsLegacyAppGroupStore-\(UUID().uuidString)", isDirectory: true)
+        let canonicalURL = root
+            .appendingPathComponent("MainApp", isDirectory: true)
+            .appendingPathComponent("Library", isDirectory: true)
+            .appendingPathComponent("Application Support", isDirectory: true)
+            .appendingPathComponent("default.store", isDirectory: false)
+        let legacyURL = root
+            .appendingPathComponent("Shared", isDirectory: true)
+            .appendingPathComponent("AppGroup", isDirectory: true)
+            .appendingPathComponent("Library", isDirectory: true)
+            .appendingPathComponent("Application Support", isDirectory: true)
+            .appendingPathComponent("default.store", isDirectory: false)
+        defer {
+            try? FileManager.default.removeItem(at: root)
+        }
+
+        try FileManager.default.createDirectory(at: legacyURL.deletingLastPathComponent(), withIntermediateDirectories: true)
+        try Data("legacy-store".utf8).write(to: legacyURL)
+        try Data("legacy-wal".utf8).write(to: legacyURL.deletingLastPathComponent().appendingPathComponent("default.store-wal"))
+
+        XCTAssertTrue(try AmbitionsPersistenceStore.migrateLegacyAppGroupPersistentStoreIfNeeded(
+            to: canonicalURL,
+            legacyStoreURL: legacyURL
+        ))
+        XCTAssertEqual(try Data(contentsOf: canonicalURL), Data("legacy-store".utf8))
+        XCTAssertEqual(
+            try Data(contentsOf: canonicalURL.deletingLastPathComponent().appendingPathComponent("default.store-wal")),
+            Data("legacy-wal".utf8)
+        )
+        XCTAssertFalse(FileManager.default.fileExists(atPath: legacyURL.path))
+        XCTAssertFalse(FileManager.default.fileExists(
+            atPath: legacyURL.deletingLastPathComponent().appendingPathComponent("default.store-wal").path
+        ))
+
+        try FileManager.default.createDirectory(at: legacyURL.deletingLastPathComponent(), withIntermediateDirectories: true)
+        try Data("new-legacy-store".utf8).write(to: legacyURL)
+        let emptySidecarURL = legacyURL.deletingLastPathComponent().appendingPathComponent("default.store-shm")
+        try Data().write(to: emptySidecarURL)
+
+        XCTAssertTrue(try AmbitionsPersistenceStore.migrateLegacyAppGroupPersistentStoreIfNeeded(
+            to: canonicalURL,
+            legacyStoreURL: legacyURL
+        ))
+        XCTAssertEqual(try Data(contentsOf: canonicalURL), Data("legacy-store".utf8))
+        XCTAssertEqual(try Data(contentsOf: legacyURL), Data("new-legacy-store".utf8))
+        XCTAssertFalse(FileManager.default.fileExists(atPath: emptySidecarURL.path))
     }
 
     func testStoreHealthCheckDetectsInvariantFailuresAsCorruptStoreRisk() async throws {

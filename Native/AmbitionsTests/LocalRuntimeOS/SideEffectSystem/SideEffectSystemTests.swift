@@ -31,7 +31,7 @@ final class SideEffectSystemTests: XCTestCase {
         )
 
         let oldPersistenceFile = try String(
-            contentsOf: root.appendingPathComponent("Native/Ambitions/Core/Persistence/SwiftDataRepositories+05-SwiftDataAmbitionGraphProjectionRecordRepository.swift"),
+            contentsOf: root.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/Storage/SwiftDataAmbitionGraphProjectionRecordRepository.swift"),
             encoding: .utf8
         )
         XCTAssertFalse(oldPersistenceFile.contains("struct SwiftDataSideEffectLedgerRepository"))

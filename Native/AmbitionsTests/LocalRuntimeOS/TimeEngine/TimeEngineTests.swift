@@ -19,6 +19,7 @@ final class TimeEngineTests: XCTestCase {
             "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/TemporalMath.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ProtectedStepPlacementPolicy.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/PriorityPlacementPolicy.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LocalScheduleBlockFileStore.swift",
         ]
 
         for path in requiredPaths {
@@ -32,6 +33,12 @@ final class TimeEngineTests: XCTestCase {
             FileManager.default.fileExists(atPath: root.appendingPathComponent(removedRuntimeOwnerPath("PriorityPlacementPolicy.swift")).path),
             "Priority placement policy must be owned by Core/LocalRuntimeOS/TimeEngine."
         )
+        let realityModels = try String(
+            contentsOf: root.appendingPathComponent("Native/Ambitions/Core/Domain/RealityModels.swift"),
+            encoding: .utf8
+        )
+        XCTAssertFalse(realityModels.contains("saveLocalScheduleBlocks"), "Local schedule file writes must not live in Core/Domain/RealityModels.swift.")
+        XCTAssertFalse(realityModels.contains("FileManager.default"), "Reality domain models must not own local schedule file IO.")
     }
 
     func testPlacementEngineBlocksAutomaticProtectedPlacementBeforeMutation() throws {

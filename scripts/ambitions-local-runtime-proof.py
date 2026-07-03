@@ -1938,7 +1938,7 @@ def check_trust_system_runtime_lineage_gate() -> CheckResult:
             "var isPublicReferenceOnly",
             "var hasPrivateRuntimeLineage",
         ],
-        ROOT / "Native" / "Ambitions" / "Core" / "Persistence" / "SwiftDataModels+03-EntityRevisionTombstoneRecord.swift": [
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Storage" / "ObjectStoreEntityRevisionTombstoneRecord.swift": [
             "var runtimeLineageData: Data?",
         ],
         ROOT / "Native" / "AmbitionsTests" / "LocalRuntimeOS" / "TrustSystem" / "TrustSystemTests.swift": [
