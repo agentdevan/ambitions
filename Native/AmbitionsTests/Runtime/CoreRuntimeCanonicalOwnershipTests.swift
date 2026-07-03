@@ -100,13 +100,39 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
         }
     }
 
+    func testAMB1730MovesStandaloneTimeEnginesToCanonicalOwner() {
+        let root = repoRoot()
+        for requiredPath in [
+            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/BufferEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/CapacityEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/OpenCapacityEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/PressureEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/RecoveryEngine.swift",
+        ] {
+            XCTAssertTrue(
+                FileManager.default.fileExists(atPath: root.appendingPathComponent(requiredPath).path),
+                "Missing AMB-1730 canonical TimeEngine owner: \(requiredPath)"
+            )
+        }
+
+        for retiredPath in [
+            "Native/Ambitions/Core/Runtime/BufferEngine.swift",
+            "Native/Ambitions/Core/Runtime/CapacityEngine.swift",
+            "Native/Ambitions/Core/Runtime/OpenCapacityEngine.swift",
+            "Native/Ambitions/Core/Runtime/PressureEngine.swift",
+            "Native/Ambitions/Core/Runtime/RecoveryEngine.swift",
+        ] {
+            XCTAssertFalse(
+                FileManager.default.fileExists(atPath: root.appendingPathComponent(retiredPath).path),
+                "AMB-1730 time engine still lives under production runtime owner: \(retiredPath)"
+            )
+        }
+    }
+
     func testRemainingLegacyRuntimeLeavesStayExplicitYellowUntilFollowUpMove() {
         let root = repoRoot()
         for yellowPath in [
             "Native/Ambitions/Core/Runtime/RecommendationEngine.swift",
-            "Native/Ambitions/Core/Runtime/CapacityEngine.swift",
-            "Native/Ambitions/Core/Runtime/PressureEngine.swift",
-            "Native/Ambitions/Core/Runtime/RecoveryEngine.swift",
             "Native/Ambitions/Core/Runtime/RuntimeCoreUmbrellaGate.swift",
             "Native/Ambitions/Core/Runtime/GoldenVerticalSliceRuntime.swift",
             "Native/Ambitions/Core/Runtime/GoldenVerticalSliceRuntime+02-GoldenVerticalSliceInput.swift",

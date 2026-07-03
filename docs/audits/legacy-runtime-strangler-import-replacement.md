@@ -11,10 +11,12 @@ authority migration, persistence migration, package movement, UI work, or releas
 readiness proof.
 
 AMB-1730 supersession: this same audit now records the 2026-07-02 standalone
-PlanningEngine owner-move batch. AMB-1730 lowered active legacy runtime
-production files from `111` to `100` by moving source files out of
-`Core/Runtime` and into `Core/LocalRuntimeOS/PlanningEngine`. This remains
-Implemented Yellow because `100` legacy runtime production files still exist.
+PlanningEngine owner-move batch and the follow-on standalone TimeEngine
+owner-move batch. AMB-1730 lowered active legacy runtime production files from
+`111` to `95` by moving source files out of `Core/Runtime` and into
+`Core/LocalRuntimeOS/PlanningEngine` and `Core/LocalRuntimeOS/TimeEngine`.
+This remains Implemented Yellow because `95` legacy runtime production files
+still exist.
 
 Evidence class: Implemented Yellow. The slice proves a bounded source-owner
 reduction and ownership-test update only. It does not prove total
@@ -56,6 +58,8 @@ private life graph backend.
 
 | Former legacy path | Canonical owner path | AMB-1713 class | AMB-1730 result |
 |---|---|---|---|
+| `Native/Ambitions/Core/Runtime/BufferEngine.swift` | `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/BufferEngine.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/TimeEngine` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/CapacityEngine.swift` | `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/CapacityEngine.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/TimeEngine` | Moved; legacy path retired. |
 | `Native/Ambitions/Core/Runtime/GoalDomainPackService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalDomainPackService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
 | `Native/Ambitions/Core/Runtime/GoalDomainPacks.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalDomainPacks.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
 | `Native/Ambitions/Core/Runtime/GoalEnergyFitService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalEnergyFitService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
@@ -66,7 +70,10 @@ private life graph backend.
 | `Native/Ambitions/Core/Runtime/GoalTeachingSignalService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalTeachingSignalService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
 | `Native/Ambitions/Core/Runtime/GoalUnderstandingService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalUnderstandingService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
 | `Native/Ambitions/Core/Runtime/OneStepGoalProjector.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/OneStepGoalProjector.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/OpenCapacityEngine.swift` | `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/OpenCapacityEngine.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/TimeEngine` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/PressureEngine.swift` | `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/PressureEngine.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/TimeEngine` | Moved; legacy path retired. |
 | `Native/Ambitions/Core/Runtime/RecommendationExplanationAdapter.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/RecommendationExplanationAdapter.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/RecoveryEngine.swift` | `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/RecoveryEngine.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/TimeEngine` | Moved; legacy path retired. |
 
 No compatibility shim was added by this slice. The moved files retain existing
 type names and behavior; the change is path ownership and proof coverage.
@@ -74,10 +81,11 @@ type names and behavior; the change is path ownership and proof coverage.
 ## Remaining Yellow Runtime Surface
 
 `Native/Ambitions/Core/Runtime/*.swift` count reduced from `115` in AMB-1713 to
-`112` after AMB-1714, to `111` after AMB-1716, and to `100` after AMB-1730.
+`112` after AMB-1714, to `111` after AMB-1716, to `100` after the first
+AMB-1730 PlanningEngine batch, and to `95` after the AMB-1730 TimeEngine batch.
 The remaining files stay Yellow, not Green:
 
-- `87` move-candidate files remain in legacy runtime owner scope.
+- `82` move-candidate files remain in legacy runtime owner scope.
 - `8` adapter-shim files remain in legacy runtime owner scope.
 - `4` test-only support files remain in legacy runtime owner scope.
 - `1` unresolved owner-decision file remains:
@@ -111,6 +119,8 @@ Expected proof behavior:
   updates proof.
 - AMB-1730 standalone PlanningEngine canonical owner paths exist and the old
   `Core/Runtime` paths are absent.
+- AMB-1730 standalone TimeEngine canonical owner paths exist and the old
+  `Core/Runtime` paths are absent.
 
 ## AMB-1730 Evidence Update
 
@@ -123,13 +133,13 @@ Before count:
 After count:
 
 - `python3 scripts/ambitions-legacy-runtime-production-use-guard.py --json`
-  reports `baselineLegacyRuntimeFiles=100`,
-  `currentLegacyRuntimeFiles=100`, `legacyRuntimeFileCeiling=100`, and
+  reports `baselineLegacyRuntimeFiles=95`,
+  `currentLegacyRuntimeFiles=95`, `legacyRuntimeFileCeiling=95`, and
   `findingCount=0`.
 
 Files moved/deleted/quarantined/converted:
 
-- Moved `11` standalone PlanningEngine source files listed in
+- Moved `16` standalone PlanningEngine and TimeEngine source files listed in
   `AMB-1730 Moved Rows`.
 - Deleted no Swift behavior.
 - Quarantined no test-support files.
@@ -137,7 +147,7 @@ Files moved/deleted/quarantined/converted:
 
 Remaining files:
 
-- `100` production Swift files remain under `Native/Ambitions/Core/Runtime`.
+- `95` production Swift files remain under `Native/Ambitions/Core/Runtime`.
 
 Remaining blockers:
 
@@ -150,10 +160,12 @@ Remaining blockers:
 Rollback plan:
 
 - Move the AMB-1730 files back from
-  `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/` to
+  `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/` and
+  `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/` to
   `Native/Ambitions/Core/Runtime/`, restore the guard ceiling to `111`, remove
   the AMB-1730 ownership assertions, regenerate the project, and rerun the
-  focused PlanningEngine/service tests plus the required remediation guards.
+  focused PlanningEngine/TimeEngine/service tests plus the required remediation
+  guards.
 
 ## Validation
 

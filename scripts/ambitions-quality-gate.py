@@ -83,7 +83,7 @@ REQUIRED_ARCHITECTURE_PATHS = [
     "Native/Ambitions/Core/Domain/LifeShapeRuleID.swift",
     "Native/Ambitions/Core/Domain/LifeShapeFallback.swift",
     "Native/Ambitions/Core/Runtime/LifeShapeBucketBuilder.swift",
-    "Native/Ambitions/Core/Runtime/OpenCapacityEngine.swift",
+    "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/OpenCapacityEngine.swift",
     "Native/Ambitions/Core/Runtime/ProtectionEngine.swift",
     "Native/Ambitions/Core/Runtime/LifeShapeEngine.swift",
     "Native/Ambitions/Core/Time/LifeShapeBucketizer.swift",

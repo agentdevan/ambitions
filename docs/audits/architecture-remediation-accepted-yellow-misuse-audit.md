@@ -31,7 +31,7 @@ All required read-first files named by the task existed locally at the start of 
 
 ## Evidence Snapshot
 
-- Legacy runtime: `python3 scripts/ambitions-legacy-runtime-production-use-guard.py --json` now reports `currentLegacyRuntimeFiles=100` and `legacyRuntimeFileCeiling=100` after the AMB-1730 standalone PlanningEngine owner-move batch. M02 administrative completion does not mean legacy runtime authority is gone.
+- Legacy runtime: `python3 scripts/ambitions-legacy-runtime-production-use-guard.py --json` now reports `currentLegacyRuntimeFiles=95` and `legacyRuntimeFileCeiling=95` after the AMB-1730 standalone PlanningEngine and TimeEngine owner-move batches. M02 administrative completion does not mean legacy runtime authority is gone.
 - Persistence direct writes: `python3 scripts/ambitions-runtime-direct-write-audit.py --json` reported `19` unsafe rows and `1` unknown row. A classified unsafe direct write is not rejection proof.
 - Migration safety: `docs/audits/persistence-existing-data-migration-proof-plan.md` is a proof plan, not executable migration proof.
 - External adapters: current evidence contains contract/audit/local redaction proof, but not full device/lifecycle/terminated-app/system-surface proof and not complete command/rejection receipt coverage for every mutating entry point.
@@ -56,7 +56,7 @@ M02 may not unlock downstream architecture Green until:
 | AMB-1708 | Accepted Yellow | `docs_only_leaf_valid_but_parent_must_remain_open` | Inventory only; AMB-1668 still needs implementation/proof. |
 | AMB-1709 | Accepted Yellow | `docs_only_leaf_valid_but_parent_must_remain_open` | Inventory only; AMB-1667 still needs implementation/proof. |
 | AMB-1710 | Accepted Yellow | `docs_only_leaf_valid_but_parent_must_remain_open` | Inventory only; AMB-1666 still needs implementation/proof. |
-| AMB-1666 | Needs Repair | `invalid_required_scope_incomplete` | Repair through AMB-1730; eliminate remaining legacy runtime production authority. AMB-1730 reduced the count from `111` to `100`, but remaining live authority still blocks Green. |
+| AMB-1666 | Needs Repair | `invalid_required_scope_incomplete` | Repair through AMB-1730; eliminate remaining legacy runtime production authority. AMB-1730 reduced the count from `111` to `95`, but remaining live authority still blocks Green. |
 | AMB-1713 | Accepted Yellow | `docs_only_leaf_valid_but_parent_must_remain_open` | Classification only; parent remains repair-required. |
 | AMB-1714 | Accepted Yellow | `valid_accepted_yellow` | Bounded replacement slice only; parent remains repair-required. |
 | AMB-1715 | Accepted Yellow | `valid_accepted_yellow` | Guard slice only; parent remains repair-required. |
@@ -80,7 +80,7 @@ The machine-readable source is `docs/audits/architecture-remediation-accepted-ye
 
 ## Required Repair Leaves
 
-- AMB-1730 Legacy runtime remaining authority elimination: owner AMB-1666; blocks AMB-1669 and AMB-1670 until remaining live `Core/Runtime` authority is moved, deleted, quarantined, or converted to approved adapter/test-only support. Current count after the AMB-1730 PlanningEngine batch is `100`.
+- AMB-1730 Legacy runtime remaining authority elimination: owner AMB-1666; blocks AMB-1669 and AMB-1670 until remaining live `Core/Runtime` authority is moved, deleted, quarantined, or converted to approved adapter/test-only support. Current count after the AMB-1730 PlanningEngine and TimeEngine batches is `95`.
 - AMB-1731 Persistence direct-write elimination and migration fixture proof: owner AMB-1667; blocks AMB-1669 and AMB-1670 until unsafe/unknown direct writes are zero or explicitly allowlisted as non-production/test-only and migration fixtures prove replay/idempotency.
 - AMB-1732 External adapter command/rejection receipt implementation and tests: owner AMB-1668; blocks AMB-1669 and AMB-1670 until mutating external entry points route through command/outbox/rejection receipts or explicit release/device blockers.
 - Source Atlas stale-file deletion inventory: owner AMB-1680/AMB-1729; remains the narrow M08 exception only and must not broaden into production R2 or release readiness.

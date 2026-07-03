@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 LEGACY_RUNTIME_ROOT = ROOT / "Native" / "Ambitions" / "Core" / "Runtime"
 LEGACY_RUNTIME_PREFIX = "Native/Ambitions/Core/Runtime/"
 CLASSIFICATION_DOC = ROOT / "docs" / "audits" / "legacy-runtime-strangler-classification.md"
-MAX_LEGACY_RUNTIME_PRODUCTION_FILES = 100
+MAX_LEGACY_RUNTIME_PRODUCTION_FILES = 95
 
 AMB_1714_RETIRED_LEGACY_PATHS = {
     "Native/Ambitions/Core/Runtime/PrivateLifeRuntime.swift",
@@ -32,6 +32,8 @@ AMB_1716_RETIRED_LEGACY_PATHS = {
 }
 
 AMB_1730_RETIRED_LEGACY_PATHS = {
+    "Native/Ambitions/Core/Runtime/BufferEngine.swift",
+    "Native/Ambitions/Core/Runtime/CapacityEngine.swift",
     "Native/Ambitions/Core/Runtime/GoalDomainPackService.swift",
     "Native/Ambitions/Core/Runtime/GoalDomainPacks.swift",
     "Native/Ambitions/Core/Runtime/GoalEnergyFitService.swift",
@@ -42,7 +44,10 @@ AMB_1730_RETIRED_LEGACY_PATHS = {
     "Native/Ambitions/Core/Runtime/GoalTeachingSignalService.swift",
     "Native/Ambitions/Core/Runtime/GoalUnderstandingService.swift",
     "Native/Ambitions/Core/Runtime/OneStepGoalProjector.swift",
+    "Native/Ambitions/Core/Runtime/OpenCapacityEngine.swift",
+    "Native/Ambitions/Core/Runtime/PressureEngine.swift",
     "Native/Ambitions/Core/Runtime/RecommendationExplanationAdapter.swift",
+    "Native/Ambitions/Core/Runtime/RecoveryEngine.swift",
 }
 
 RETIRED_LEGACY_RUNTIME_PATHS = (
@@ -318,6 +323,8 @@ def self_test() -> int:
     assert "Native/Ambitions/Core/Runtime/LargeStoreFixtureGenerator.swift" not in baseline
     assert "Native/Ambitions/Core/Runtime/GoalUnderstandingService.swift" not in baseline
     assert "Native/Ambitions/Core/Runtime/OneStepGoalProjector.swift" not in baseline
+    assert "Native/Ambitions/Core/Runtime/BufferEngine.swift" not in baseline
+    assert "Native/Ambitions/Core/Runtime/PressureEngine.swift" not in baseline
     assert len(baseline) <= MAX_LEGACY_RUNTIME_PRODUCTION_FILES
     synthetic_findings = legacy_owner_findings(
         {"Native/Ambitions/Core/Runtime/ExistingRuntime.swift"},
