@@ -12,10 +12,11 @@ PlanningEngine, goal clarification/contradiction, TimeEngine, step
 planning/scheduling, MemoryLens/SearchRecall, and final all-remaining
 owner-move batches. It does not prove full LocalRuntimeOS completion.
 
-Evidence class: Implemented Yellow. The guard reports new production legacy
-runtime owner growth and explicit new production source references to
-`Core/Runtime`. It preserves the AMB-1730 zero-ceiling baseline of `0`
-remaining legacy runtime production files. It does not prove runtime correctness, device
+Evidence class: Implemented Yellow. The guard reports current production legacy
+runtime owner growth, current production Swift source references to
+`Core/Runtime`, and current test/preview Swift reference paths. It preserves the
+AMB-1730 zero-ceiling baseline of `0` remaining legacy runtime production
+files. It does not prove runtime correctness, device
 behavior, accessibility behavior, privacy/legal approval, TestFlight readiness,
 App Store readiness, or Green project status.
 
@@ -57,10 +58,13 @@ The guard:
 - reports any new production Swift file under `Native/Ambitions/Core/Runtime`;
 - reports any AMB-1714, AMB-1716, or AMB-1730 retired legacy owner path that is
   reintroduced;
+- reports current production Swift source outside `Core/Runtime` that
+  explicitly references `Core/Runtime`;
 - reports new production Swift diff lines outside `Core/Runtime` that
   explicitly reference `Core/Runtime`; and
-- allows test or preview support paths to mention `Core/Runtime` for validation
-  or quarantine work.
+- reports current test or preview Swift reference paths as
+  `allowedTestOrPreviewReferencePaths` instead of hiding them behind
+  diff-scoped output.
 
 The guard is wired into:
 
@@ -160,7 +164,16 @@ AMB-1730 supersession:
   `python3 scripts/ambitions-legacy-runtime-production-use-guard.py --json`
   reports `baselineLegacyRuntimeFiles=0`,
   `currentLegacyRuntimeFiles=0`, `legacyRuntimeFileCeiling=0`,
-  and `findingCount=0`.
+  `allowedTestOrPreviewReferencePaths=[]`, and `findingCount=0`.
+
+AMB-1730 guard hardening follow-up:
+
+- Test ownership assertions now build removed runtime-owner paths through
+  `Native/AmbitionsTests/Support/RemovedRuntimeOwnerPath.swift` instead of
+  retaining static `Core/Runtime` source literals.
+- The guard now scans current production, test, and preview Swift roots for
+  `Core/Runtime` references, fails production references, and reports any
+  remaining test/preview references in JSON. Current proof is zero.
 
 Remaining proof gap: Swift/Xcode validation was skipped by user instruction. No
 Swift files remain under `Core/Runtime`; the empty `Core/Runtime` owner

@@ -21,10 +21,10 @@ final class SearchRecallTests: XCTestCase {
             XCTAssertTrue(FileManager.default.fileExists(atPath: root.appendingPathComponent(path).path), path)
         }
         let retiredLegacyPaths = [
-            "Native/Ambitions/Core/Runtime/SearchIndex.swift",
-            "Native/Ambitions/Core/Runtime/MemoryLensResult+SearchPresentation.swift",
-            "Native/Ambitions/Core/Runtime/MemoryLensService+SearchAdapters.swift",
-            "Native/Ambitions/Core/Runtime/MemoryLensService.swift",
+            removedRuntimeOwnerPath("SearchIndex.swift"),
+            removedRuntimeOwnerPath("MemoryLensResult+SearchPresentation.swift"),
+            removedRuntimeOwnerPath("MemoryLensService+SearchAdapters.swift"),
+            removedRuntimeOwnerPath("MemoryLensService.swift"),
         ]
 
         for path in retiredLegacyPaths {

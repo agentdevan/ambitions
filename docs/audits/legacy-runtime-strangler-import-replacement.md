@@ -331,8 +331,12 @@ AMB-1730 prune follow-up:
   canonical runtime authority and `Core/Runtime` as a removed/forbidden owner,
   not a canonical owner.
 - The legacy runtime guard reports zero current files and zero allowed
-  test/preview references after the classifier test avoids static legacy path
-  literals.
+  test/preview references after the MCP classifier test and Swift owner tests
+  avoid static legacy path literals; test absence checks now build the removed
+  owner path through `Native/AmbitionsTests/Support/RemovedRuntimeOwnerPath.swift`.
+- The legacy runtime guard now scans current production, test, and preview Swift
+  roots for `Core/Runtime` references instead of reporting only diff-added
+  test/preview references.
 
 Remaining proof gap: Swift/Xcode validation was skipped by user instruction. No
 Swift files and no owner directory remain under `Core/Runtime`. Next repair

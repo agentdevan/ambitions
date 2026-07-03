@@ -27,7 +27,7 @@ final class SideEffectSystemTests: XCTestCase {
             FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Core/Domain/SideEffectLedgerModels.swift").path)
         )
         XCTAssertFalse(
-            FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Core/Runtime/ExternalCreationImportService.swift").path)
+            FileManager.default.fileExists(atPath: root.appendingPathComponent(removedRuntimeOwnerPath("ExternalCreationImportService.swift")).path)
         )
 
         let oldPersistenceFile = try String(

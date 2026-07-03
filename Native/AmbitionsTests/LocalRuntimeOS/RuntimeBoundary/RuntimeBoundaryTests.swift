@@ -22,9 +22,9 @@ final class RuntimeBoundaryTests: XCTestCase {
         }
 
         for retiredPath in [
-            "Native/Ambitions/Core/Runtime/PrivacyBoundary.swift",
-            "Native/Ambitions/Core/Runtime/SourceAtlasAccessBoundary.swift",
-            "Native/Ambitions/Core/Runtime/SourceAtlasNoPrivateGraphEgressAudit.swift",
+            removedRuntimeOwnerPath("PrivacyBoundary.swift"),
+            removedRuntimeOwnerPath("SourceAtlasAccessBoundary.swift"),
+            removedRuntimeOwnerPath("SourceAtlasNoPrivateGraphEgressAudit.swift"),
             "Native/Ambitions/Core/Persistence/SourceAtlasPublicArtifactPrivacyBoundary.swift",
         ] {
             XCTAssertFalse(

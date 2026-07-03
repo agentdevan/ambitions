@@ -33,7 +33,7 @@ final class TrustSystemTests: XCTestCase {
             "Native/Ambitions/Core/Domain/ActionReceiptProofLedgerModels.swift",
             "Native/Ambitions/Core/Domain/LedgerReplayModels.swift",
             "Native/Ambitions/Core/Domain/EntityRevisionTombstoneModels.swift",
-            "Native/Ambitions/Core/Runtime/ProofLedger.swift",
+            removedRuntimeOwnerPath("ProofLedger.swift"),
             "Native/Ambitions/Core/Persistence/GoalIntentCompilerReceiptPersistenceAdapter.swift",
             "Native/Ambitions/Core/Persistence/SwiftDataRepositories+06-SwiftDataTrustHistoryQueryRepository.swift",
         ]

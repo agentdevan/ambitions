@@ -17,7 +17,7 @@ final class LocalRuntimeOSTransactionKernelOwnershipTests: XCTestCase {
             "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeMutationContext.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeMutation.swift",
         ]
-        let retiredPath = "Native/Ambitions/Core/Runtime/RuntimeMutation.swift"
+        let retiredPath = removedRuntimeOwnerPath("RuntimeMutation.swift")
 
         for canonicalPath in canonicalPaths {
             XCTAssertTrue(

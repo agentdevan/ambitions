@@ -5,7 +5,7 @@ final class PrivateLifeRuntimeKernelOwnershipTests: XCTestCase {
     func testKernelSourceLeavesLiveUnderCanonicalLocalRuntimeOSOwner() throws {
         let repositoryRoot = try Self.repositoryRoot()
         let owner = repositoryRoot.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel", isDirectory: true)
-        let legacyRuntimeOwner = repositoryRoot.appendingPathComponent("Native/Ambitions/Core/Runtime", isDirectory: true)
+        let legacyRuntimeOwner = repositoryRoot.appendingPathComponent(removedRuntimeOwnerPath(), isDirectory: true)
 
         let requiredLeaves = [
             "PrivateLifeRuntime.swift",
@@ -28,7 +28,7 @@ final class PrivateLifeRuntimeKernelOwnershipTests: XCTestCase {
             )
             XCTAssertFalse(
                 FileManager.default.fileExists(atPath: legacyRuntimeOwner.appendingPathComponent(leaf).path),
-                "\(leaf) must not remain under Core/Runtime."
+                "\(leaf) must not remain under the removed runtime owner."
             )
         }
 

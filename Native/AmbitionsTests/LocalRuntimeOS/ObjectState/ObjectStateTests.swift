@@ -15,8 +15,8 @@ final class ObjectStateTests: XCTestCase {
             XCTAssertTrue(FileManager.default.fileExists(atPath: root.appendingPathComponent(path).path), path)
         }
         XCTAssertFalse(
-            FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Core/Runtime/ObjectState.swift").path),
-            "ObjectState must not be owned by the legacy Core/Runtime owner."
+            FileManager.default.fileExists(atPath: root.appendingPathComponent(removedRuntimeOwnerPath("ObjectState.swift")).path),
+            "ObjectState must not be owned by the removed runtime owner."
         )
     }
 

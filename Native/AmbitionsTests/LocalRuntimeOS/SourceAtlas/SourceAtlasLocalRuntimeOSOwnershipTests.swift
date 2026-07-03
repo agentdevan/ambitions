@@ -29,7 +29,7 @@ final class SourceAtlasLocalRuntimeOSOwnershipTests: XCTestCase {
         for retiredOwner in [
             "Native/Ambitions/Core/Domain",
             "Native/Ambitions/Core/Persistence",
-            "Native/Ambitions/Core/Runtime",
+            removedRuntimeOwnerPath(),
             "Native/AmbitionsTests/Domain",
             "Native/AmbitionsTests/Persistence",
             "Native/AmbitionsTests/Runtime",

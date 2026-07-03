@@ -25,11 +25,11 @@ final class TimeEngineTests: XCTestCase {
             XCTAssertTrue(FileManager.default.fileExists(atPath: root.appendingPathComponent(path).path), path)
         }
         XCTAssertFalse(
-            FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Core/Runtime/ProtectedStepPlacementPolicy.swift").path),
+            FileManager.default.fileExists(atPath: root.appendingPathComponent(removedRuntimeOwnerPath("ProtectedStepPlacementPolicy.swift")).path),
             "Protected placement policy must be owned by Core/LocalRuntimeOS/TimeEngine."
         )
         XCTAssertFalse(
-            FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Core/Runtime/PriorityPlacementPolicy.swift").path),
+            FileManager.default.fileExists(atPath: root.appendingPathComponent(removedRuntimeOwnerPath("PriorityPlacementPolicy.swift")).path),
             "Priority placement policy must be owned by Core/LocalRuntimeOS/TimeEngine."
         )
     }

@@ -35,10 +35,10 @@ final class LocalRuntimeOSCommandSpineOwnershipTests: XCTestCase {
             "Native/Ambitions/Projection/Commands/CommandRouter.swift",
             "Native/Ambitions/Projection/Commands/CommandResult.swift",
             "Native/Ambitions/Projection/Commands/CommandValidation.swift",
-            "Native/Ambitions/Core/Runtime/AmbitionsCommandExecutor.swift",
-            "Native/Ambitions/Core/Runtime/PolicyGuardedCommandExecutor.swift",
-            "Native/Ambitions/Core/Runtime/RuntimeValidator.swift",
-            "Native/Ambitions/Core/Runtime/ExternalActionCommandService.swift",
+            removedRuntimeOwnerPath("AmbitionsCommandExecutor.swift"),
+            removedRuntimeOwnerPath("PolicyGuardedCommandExecutor.swift"),
+            removedRuntimeOwnerPath("RuntimeValidator.swift"),
+            removedRuntimeOwnerPath("ExternalActionCommandService.swift"),
             "Native/Ambitions/Core/Domain/AmbitionsCommandModels.swift"
         ]
 

@@ -166,6 +166,8 @@ TEST_OR_PREVIEW_PREFIXES = (
     "Native/Ambitions/PreviewSupport/",
 )
 
+SWIFT_REFERENCE_SCAN_ROOTS = PRODUCTION_SWIFT_ROOTS + TEST_OR_PREVIEW_PREFIXES
+
 LEGACY_RUNTIME_REFERENCE_PATTERNS = (
     r"Native/Ambitions/Core/Runtime",
     r"\bCore/Runtime\b",
@@ -291,6 +293,35 @@ def current_legacy_runtime_paths() -> set[str]:
     }
 
 
+def swift_reference_scan_paths() -> list[str]:
+    paths: set[str] = set()
+    for prefix in SWIFT_REFERENCE_SCAN_ROOTS:
+        root = ROOT / prefix
+        if not root.exists():
+            continue
+        if root.is_file() and root.suffix == ".swift":
+            paths.add(rel(root))
+            continue
+        for path in root.rglob("*.swift"):
+            if path.is_file():
+                paths.add(rel(path))
+    return sorted(paths)
+
+
+def current_legacy_runtime_reference_paths() -> tuple[list[str], list[str]]:
+    production_paths: list[str] = []
+    test_or_preview_paths: list[str] = []
+    for path in swift_reference_scan_paths():
+        text = (ROOT / path).read_text(encoding="utf-8", errors="replace")
+        if not contains_legacy_runtime_reference(text):
+            continue
+        if is_test_or_preview_path(path):
+            test_or_preview_paths.append(path)
+        elif is_production_swift(path):
+            production_paths.append(path)
+    return production_paths, test_or_preview_paths
+
+
 def contains_legacy_runtime_reference(text: str) -> bool:
     return any(re.search(pattern, text) for pattern in LEGACY_RUNTIME_REFERENCE_PATTERNS)
 
@@ -401,9 +432,19 @@ def guard_findings(changed: list[ChangedPath], base: str | None) -> tuple[list[F
 
     findings.extend(legacy_owner_findings(baseline, current))
 
-    reference_findings, allowed_test_or_preview_paths = explicit_reference_findings(changed, base)
+    current_production_reference_paths, current_test_or_preview_reference_paths = current_legacy_runtime_reference_paths()
+    for path in current_production_reference_paths:
+        findings.append(
+            Finding(
+                "current-production-core-runtime-reference",
+                path,
+                "current production Swift source explicitly references Core/Runtime; route through LocalRuntimeOS or delete the reference",
+            )
+        )
+
+    reference_findings, _diff_allowed_test_or_preview_paths = explicit_reference_findings(changed, base)
     findings.extend(reference_findings)
-    return findings, allowed_test_or_preview_paths, baseline, current
+    return findings, current_test_or_preview_reference_paths, baseline, current
 
 
 def self_test() -> int:
@@ -458,6 +499,9 @@ def self_test() -> int:
         "Native/AmbitionsTests/Runtime/NewRuntimeTest.swift",
         "let legacyPath = \"Native/Ambitions/Core/Runtime/CaptureService.swift\"",
     )
+    current_production_reference_paths, current_test_or_preview_reference_paths = current_legacy_runtime_reference_paths()
+    assert current_production_reference_paths == []
+    assert current_test_or_preview_reference_paths == []
     print("ambitions-legacy-runtime-production-use-guard self-test passed")
     return 0
 

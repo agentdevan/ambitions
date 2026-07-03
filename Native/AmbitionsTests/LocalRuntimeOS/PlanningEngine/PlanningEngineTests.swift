@@ -27,7 +27,7 @@ final class PlanningEngineTests: XCTestCase {
             "Planning source must be owned by Core/LocalRuntimeOS/PlanningEngine."
         )
         XCTAssertFalse(
-            FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Core/Runtime/StepCandidateFieldGenerator.swift").path),
+            FileManager.default.fileExists(atPath: root.appendingPathComponent(removedRuntimeOwnerPath("StepCandidateFieldGenerator.swift")).path),
             "StepCandidateFieldGenerator must be owned by Core/LocalRuntimeOS/PlanningEngine."
         )
         XCTAssertFalse(

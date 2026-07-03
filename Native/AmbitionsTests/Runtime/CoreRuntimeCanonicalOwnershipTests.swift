@@ -17,18 +17,18 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
         }
 
         for retiredPath in [
-            "Native/Ambitions/Core/Runtime/PrivateLifeRuntime.swift",
-            "Native/Ambitions/Core/Runtime/RuntimeSnapshot.swift",
-            "Native/Ambitions/Core/Runtime/RuntimeProjectionPipeline.swift",
-            "Native/Ambitions/Core/Runtime/RuntimeMutation.swift",
-            "Native/Ambitions/Core/Runtime/RuntimeValidator.swift",
-            "Native/Ambitions/Core/Runtime/AmbitionsCommandExecutor.swift",
-            "Native/Ambitions/Core/Runtime/PolicyGuardedCommandExecutor.swift",
-            "Native/Ambitions/Core/Runtime/ExternalActionCommandService.swift",
-            "Native/Ambitions/Core/Runtime/PrivacyBoundary.swift",
-            "Native/Ambitions/Core/Runtime/SourceAtlasAccessBoundary.swift",
-            "Native/Ambitions/Core/Runtime/SourceAtlasNoPrivateGraphEgressAudit.swift",
-            "Native/Ambitions/Core/Runtime/ProofLedger.swift",
+            removedRuntimeOwnerPath("PrivateLifeRuntime.swift"),
+            removedRuntimeOwnerPath("RuntimeSnapshot.swift"),
+            removedRuntimeOwnerPath("RuntimeProjectionPipeline.swift"),
+            removedRuntimeOwnerPath("RuntimeMutation.swift"),
+            removedRuntimeOwnerPath("RuntimeValidator.swift"),
+            removedRuntimeOwnerPath("AmbitionsCommandExecutor.swift"),
+            removedRuntimeOwnerPath("PolicyGuardedCommandExecutor.swift"),
+            removedRuntimeOwnerPath("ExternalActionCommandService.swift"),
+            removedRuntimeOwnerPath("PrivacyBoundary.swift"),
+            removedRuntimeOwnerPath("SourceAtlasAccessBoundary.swift"),
+            removedRuntimeOwnerPath("SourceAtlasNoPrivateGraphEgressAudit.swift"),
+            removedRuntimeOwnerPath("ProofLedger.swift"),
             "Native/Ambitions/Core/Persistence/SourceAtlasPublicArtifactPrivacyBoundary.swift",
         ] {
             XCTAssertFalse(
@@ -50,7 +50,7 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
         }
 
         for retiredPath in [
-            "Native/Ambitions/Core/Runtime/LargeStoreFixtureGenerator.swift",
+            removedRuntimeOwnerPath("LargeStoreFixtureGenerator.swift"),
         ] {
             XCTAssertFalse(
                 FileManager.default.fileExists(atPath: root.appendingPathComponent(retiredPath).path),
@@ -81,17 +81,17 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
         }
 
         for retiredPath in [
-            "Native/Ambitions/Core/Runtime/GoalDomainPackService.swift",
-            "Native/Ambitions/Core/Runtime/GoalDomainPacks.swift",
-            "Native/Ambitions/Core/Runtime/GoalEnergyFitService.swift",
-            "Native/Ambitions/Core/Runtime/GoalEnergyLearningService.swift",
-            "Native/Ambitions/Core/Runtime/GoalFreshnessUpdateService.swift",
-            "Native/Ambitions/Core/Runtime/GoalPathCompilerService.swift",
-            "Native/Ambitions/Core/Runtime/GoalResourceGraphService.swift",
-            "Native/Ambitions/Core/Runtime/GoalTeachingSignalService.swift",
-            "Native/Ambitions/Core/Runtime/GoalUnderstandingService.swift",
-            "Native/Ambitions/Core/Runtime/OneStepGoalProjector.swift",
-            "Native/Ambitions/Core/Runtime/RecommendationExplanationAdapter.swift",
+            removedRuntimeOwnerPath("GoalDomainPackService.swift"),
+            removedRuntimeOwnerPath("GoalDomainPacks.swift"),
+            removedRuntimeOwnerPath("GoalEnergyFitService.swift"),
+            removedRuntimeOwnerPath("GoalEnergyLearningService.swift"),
+            removedRuntimeOwnerPath("GoalFreshnessUpdateService.swift"),
+            removedRuntimeOwnerPath("GoalPathCompilerService.swift"),
+            removedRuntimeOwnerPath("GoalResourceGraphService.swift"),
+            removedRuntimeOwnerPath("GoalTeachingSignalService.swift"),
+            removedRuntimeOwnerPath("GoalUnderstandingService.swift"),
+            removedRuntimeOwnerPath("OneStepGoalProjector.swift"),
+            removedRuntimeOwnerPath("RecommendationExplanationAdapter.swift"),
         ] {
             XCTAssertFalse(
                 FileManager.default.fileExists(atPath: root.appendingPathComponent(retiredPath).path),
@@ -119,14 +119,14 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
         }
 
         for retiredPath in [
-            "Native/Ambitions/Core/Runtime/GoalClarificationService+02-DefaultGoalClarificationService+03-defaultAssumption.swift",
-            "Native/Ambitions/Core/Runtime/GoalClarificationService+02-DefaultGoalClarificationService.swift",
-            "Native/Ambitions/Core/Runtime/GoalClarificationService+03-ClassificationConfidence.swift",
-            "Native/Ambitions/Core/Runtime/GoalClarificationService.swift",
-            "Native/Ambitions/Core/Runtime/GoalContradictionService+02-DefaultGoalContradictionService+03-energyContradictions.swift",
-            "Native/Ambitions/Core/Runtime/GoalContradictionService+02-DefaultGoalContradictionService.swift",
-            "Native/Ambitions/Core/Runtime/GoalContradictionService+03-GoalResourceEntity.swift",
-            "Native/Ambitions/Core/Runtime/GoalContradictionService.swift",
+            removedRuntimeOwnerPath("GoalClarificationService+02-DefaultGoalClarificationService+03-defaultAssumption.swift"),
+            removedRuntimeOwnerPath("GoalClarificationService+02-DefaultGoalClarificationService.swift"),
+            removedRuntimeOwnerPath("GoalClarificationService+03-ClassificationConfidence.swift"),
+            removedRuntimeOwnerPath("GoalClarificationService.swift"),
+            removedRuntimeOwnerPath("GoalContradictionService+02-DefaultGoalContradictionService+03-energyContradictions.swift"),
+            removedRuntimeOwnerPath("GoalContradictionService+02-DefaultGoalContradictionService.swift"),
+            removedRuntimeOwnerPath("GoalContradictionService+03-GoalResourceEntity.swift"),
+            removedRuntimeOwnerPath("GoalContradictionService.swift"),
         ] {
             XCTAssertFalse(
                 FileManager.default.fileExists(atPath: root.appendingPathComponent(retiredPath).path),
@@ -151,11 +151,11 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
         }
 
         for retiredPath in [
-            "Native/Ambitions/Core/Runtime/BufferEngine.swift",
-            "Native/Ambitions/Core/Runtime/CapacityEngine.swift",
-            "Native/Ambitions/Core/Runtime/OpenCapacityEngine.swift",
-            "Native/Ambitions/Core/Runtime/PressureEngine.swift",
-            "Native/Ambitions/Core/Runtime/RecoveryEngine.swift",
+            removedRuntimeOwnerPath("BufferEngine.swift"),
+            removedRuntimeOwnerPath("CapacityEngine.swift"),
+            removedRuntimeOwnerPath("OpenCapacityEngine.swift"),
+            removedRuntimeOwnerPath("PressureEngine.swift"),
+            removedRuntimeOwnerPath("RecoveryEngine.swift"),
         ] {
             XCTAssertFalse(
                 FileManager.default.fileExists(atPath: root.appendingPathComponent(retiredPath).path),
@@ -195,26 +195,26 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
         }
 
         for retiredPath in [
-            "Native/Ambitions/Core/Runtime/StepElasticityEngine+02-StepElasticityEngine+02-evaluate.swift",
-            "Native/Ambitions/Core/Runtime/StepElasticityEngine+02-StepElasticityEngine+03-makeReceipt.swift",
-            "Native/Ambitions/Core/Runtime/StepElasticityEngine+02-StepElasticityEngine.swift",
-            "Native/Ambitions/Core/Runtime/StepElasticityEngine+03-StepElasticityEngineInput.swift",
-            "Native/Ambitions/Core/Runtime/StepElasticityEngine.swift",
-            "Native/Ambitions/Core/Runtime/StepGraphCompiler+02-StepGraphCompiler+02-compile.swift",
-            "Native/Ambitions/Core/Runtime/StepGraphCompiler+02-StepGraphCompiler+03-edgeKind.swift",
-            "Native/Ambitions/Core/Runtime/StepGraphCompiler+02-StepGraphCompiler.swift",
-            "Native/Ambitions/Core/Runtime/StepGraphCompiler.swift",
-            "Native/Ambitions/Core/Runtime/StepQualityFirewall.swift",
-            "Native/Ambitions/Core/Runtime/ScheduleInstallKernel+02-ScheduleInstallRecord.swift",
-            "Native/Ambitions/Core/Runtime/ScheduleInstallKernel+03-ScheduleInstallKernel+02-evaluate.swift",
-            "Native/Ambitions/Core/Runtime/ScheduleInstallKernel+03-ScheduleInstallKernel+03-makeReceipt.swift",
-            "Native/Ambitions/Core/Runtime/ScheduleInstallKernel+03-ScheduleInstallKernel.swift",
-            "Native/Ambitions/Core/Runtime/ScheduleInstallKernel+04-ScheduleInstallRecord.swift",
-            "Native/Ambitions/Core/Runtime/ScheduleInstallKernel.swift",
-            "Native/Ambitions/Core/Runtime/SimpleStepLifecycleService+Recurring.swift",
-            "Native/Ambitions/Core/Runtime/SimpleStepLifecycleService.swift",
-            "Native/Ambitions/Core/Runtime/StepReallocationRuntimeBridge.swift",
-            "Native/Ambitions/Core/Runtime/TimeRitualGoalSemantics.swift",
+            removedRuntimeOwnerPath("StepElasticityEngine+02-StepElasticityEngine+02-evaluate.swift"),
+            removedRuntimeOwnerPath("StepElasticityEngine+02-StepElasticityEngine+03-makeReceipt.swift"),
+            removedRuntimeOwnerPath("StepElasticityEngine+02-StepElasticityEngine.swift"),
+            removedRuntimeOwnerPath("StepElasticityEngine+03-StepElasticityEngineInput.swift"),
+            removedRuntimeOwnerPath("StepElasticityEngine.swift"),
+            removedRuntimeOwnerPath("StepGraphCompiler+02-StepGraphCompiler+02-compile.swift"),
+            removedRuntimeOwnerPath("StepGraphCompiler+02-StepGraphCompiler+03-edgeKind.swift"),
+            removedRuntimeOwnerPath("StepGraphCompiler+02-StepGraphCompiler.swift"),
+            removedRuntimeOwnerPath("StepGraphCompiler.swift"),
+            removedRuntimeOwnerPath("StepQualityFirewall.swift"),
+            removedRuntimeOwnerPath("ScheduleInstallKernel+02-ScheduleInstallRecord.swift"),
+            removedRuntimeOwnerPath("ScheduleInstallKernel+03-ScheduleInstallKernel+02-evaluate.swift"),
+            removedRuntimeOwnerPath("ScheduleInstallKernel+03-ScheduleInstallKernel+03-makeReceipt.swift"),
+            removedRuntimeOwnerPath("ScheduleInstallKernel+03-ScheduleInstallKernel.swift"),
+            removedRuntimeOwnerPath("ScheduleInstallKernel+04-ScheduleInstallRecord.swift"),
+            removedRuntimeOwnerPath("ScheduleInstallKernel.swift"),
+            removedRuntimeOwnerPath("SimpleStepLifecycleService+Recurring.swift"),
+            removedRuntimeOwnerPath("SimpleStepLifecycleService.swift"),
+            removedRuntimeOwnerPath("StepReallocationRuntimeBridge.swift"),
+            removedRuntimeOwnerPath("TimeRitualGoalSemantics.swift"),
         ] {
             XCTAssertFalse(
                 FileManager.default.fileExists(atPath: root.appendingPathComponent(retiredPath).path),
@@ -225,13 +225,13 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
 
     func testAMB1730EliminatesRemainingLegacyRuntimeProductionAuthority() throws {
         let root = repoRoot()
-        let legacyRuntimeOwner = root.appendingPathComponent("Native/Ambitions/Core/Runtime", isDirectory: true)
+        let legacyRuntimeOwner = root.appendingPathComponent(removedRuntimeOwnerPath(), isDirectory: true)
         let legacySwiftFiles = try? FileManager.default.contentsOfDirectory(
             at: legacyRuntimeOwner,
             includingPropertiesForKeys: nil
         ).filter { $0.pathExtension == "swift" }
 
-        XCTAssertEqual(legacySwiftFiles ?? [], [], "Core/Runtime must not contain production Swift authority after AMB-1730.")
+        XCTAssertEqual(legacySwiftFiles ?? [], [], "the removed runtime owner must not contain production Swift authority after AMB-1730.")
 
         for requiredPath in [
             "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureService.swift",
