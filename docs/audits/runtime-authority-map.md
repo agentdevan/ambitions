@@ -34,13 +34,21 @@ LocalRuntimeOS completion.
 
 ## AMB-1730 Legacy Runtime Owner-Move Addendum
 
-AMB-1730 moved `16` standalone goal/planning/time runtime files out of
+AMB-1730 moved `24` standalone goal/planning/time runtime files out of
 `Native/Ambitions/Core/Runtime` and into
 `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine` and
 `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine`:
 
 - `BufferEngine.swift`
 - `CapacityEngine.swift`
+- `GoalClarificationService+02-DefaultGoalClarificationService+03-defaultAssumption.swift`
+- `GoalClarificationService+02-DefaultGoalClarificationService.swift`
+- `GoalClarificationService+03-ClassificationConfidence.swift`
+- `GoalClarificationService.swift`
+- `GoalContradictionService+02-DefaultGoalContradictionService+03-energyContradictions.swift`
+- `GoalContradictionService+02-DefaultGoalContradictionService.swift`
+- `GoalContradictionService+03-GoalResourceEntity.swift`
+- `GoalContradictionService.swift`
 - `GoalDomainPackService.swift`
 - `GoalDomainPacks.swift`
 - `GoalEnergyFitService.swift`
@@ -58,8 +66,9 @@ AMB-1730 moved `16` standalone goal/planning/time runtime files out of
 
 Before AMB-1730, the legacy runtime production-use guard reported
 `currentLegacyRuntimeFiles=111` and `legacyRuntimeFileCeiling=111`. After the
-PlanningEngine and TimeEngine moves and guard updates, it reports
-`currentLegacyRuntimeFiles=95` and `legacyRuntimeFileCeiling=95`.
+PlanningEngine, goal clarification/contradiction, and TimeEngine moves and guard
+updates, it reports `currentLegacyRuntimeFiles=87` and
+`legacyRuntimeFileCeiling=87`.
 
 This addendum changes source ownership for the listed files only. It does not
 convert remaining `Core/Runtime` files, remove persistence direct writes,

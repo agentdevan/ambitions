@@ -192,6 +192,17 @@ def is_suffix_split_name(name: str) -> bool:
     return any(suffix in name for suffix in ("+02", "+03", "+04"))
 
 
+def is_legacy_runtime_to_localruntimeos_suffix_move(item: ChangedPath) -> bool:
+    return (
+        item.status == "R"
+        and item.old_path is not None
+        and item.old_path.startswith("Native/Ambitions/Core/Runtime/")
+        and item.path.startswith("Native/Ambitions/Core/LocalRuntimeOS/")
+        and is_suffix_split_name(Path(item.old_path).name)
+        and is_suffix_split_name(Path(item.path).name)
+    )
+
+
 def has_any(patterns: tuple[str, ...], text: str) -> bool:
     return any(re.search(pattern, text) for pattern in patterns)
 
@@ -453,7 +464,7 @@ def governance_findings(args: argparse.Namespace) -> list[Finding]:
         text = added_text(item, args.base)
 
         if item.status in {"A", "R"} and is_production_swift(path):
-            if is_suffix_split_name(path_obj.name):
+            if is_suffix_split_name(path_obj.name) and not is_legacy_runtime_to_localruntimeos_suffix_move(item):
                 findings.append(
                     Finding(
                         "no-new-suffix-splits",
@@ -583,6 +594,27 @@ def self_test() -> int:
     assert not is_local_runtime("Native/Ambitions/Core/Runtime/CaptureService.swift")
     assert is_suffix_split_name("SwiftDataModels+04-AmbitionGraphProjectionRecordModel.swift")
     assert not is_suffix_split_name("SourceAtlasPackModels+06-SourceAtlasPack.swift")
+    assert is_legacy_runtime_to_localruntimeos_suffix_move(
+        ChangedPath(
+            "R",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalClarificationService+02-DefaultGoalClarificationService.swift",
+            old_path="Native/Ambitions/Core/Runtime/GoalClarificationService+02-DefaultGoalClarificationService.swift",
+        )
+    )
+    assert not is_legacy_runtime_to_localruntimeos_suffix_move(
+        ChangedPath(
+            "A",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/NewPlanningOwner+02-NewSplit.swift",
+            untracked=True,
+        )
+    )
+    assert not is_legacy_runtime_to_localruntimeos_suffix_move(
+        ChangedPath(
+            "R",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalClarificationService+02-DefaultGoalClarificationService.swift",
+            old_path="Native/Ambitions/Core/Domain/GoalEngine/GoalClarificationService+02-DefaultGoalClarificationService.swift",
+        )
+    )
     allowlist = parse_source_atlas_allowlist("- Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/NewPack.swift`")
     assert "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/NewPack.swift" in allowlist
     source_atlas_new_file = ChangedPath(

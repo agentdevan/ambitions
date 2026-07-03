@@ -5,12 +5,12 @@
   "repo_head": "74ea1319910ef00276663da4f44ae1321ef4bfcb",
   "core_rule": "Accepted Yellow is forbidden for incomplete required source/runtime/test remediation scope.",
   "current_evidence": {
-    "legacy_runtime_current_files": 95,
-    "legacy_runtime_ceiling_files": 95,
+    "legacy_runtime_current_files": 87,
+    "legacy_runtime_ceiling_files": 87,
     "persistence_direct_write_unsafe_rows": 19,
     "persistence_direct_write_unknown_rows": 1,
     "source_atlas_boundary_audit": "passing local boundary/no-private-graph audits; production R2, release, privacy/legal, entitlement, TestFlight, App Store, and device proof are not proven",
-    "notes": "This audit blocks Green-equivalent completion claims. AMB-1730 reduced legacy runtime production files from 111 to 95, but AMB-1666, AMB-1667, AMB-1668, and AMB-1719 remain Needs Repair, with AMB-1730, AMB-1731, and AMB-1732 carrying required M02 repair work. This audit does not fix all runtime, persistence, adapter, or Source Atlas stale-file debt."
+    "notes": "This audit blocks Green-equivalent completion claims. AMB-1730 reduced legacy runtime production files from 111 to 87, but AMB-1666, AMB-1667, AMB-1668, and AMB-1719 remain Needs Repair, with AMB-1730, AMB-1731, and AMB-1732 carrying required M02 repair work. This audit does not fix all runtime, persistence, adapter, or Source Atlas stale-file debt."
   },
   "context_compaction_guard": {
     "purpose": "Prevent resumed Codex runs from continuing an older task variant or stale Accepted Yellow closeout after context compaction.",
@@ -136,7 +136,7 @@
       "title": "Parent Feature - Legacy Runtime Strangler",
       "current_status": "Needs Repair",
       "classification": "invalid_required_scope_incomplete",
-      "why": "The parent mission says to end live production authority in Native/Ambitions/Core/Runtime. Current guard evidence reports 95 legacy runtime files under the lowered AMB-1730 ceiling; a reduced ceiling is not completion.",
+      "why": "The parent mission says to end live production authority in Native/Ambitions/Core/Runtime. Current guard evidence reports 87 legacy runtime files under the lowered AMB-1730 ceiling; a reduced ceiling is not completion.",
       "acceptance_required_actual_change": true,
       "actual_change_completed": false,
       "proof_completed": [
@@ -153,7 +153,7 @@
       ],
       "required_status_after_repair": "Needs Repair",
       "required_source_repairs": [
-        "Eliminate or convert the remaining 95 Core/Runtime files from live production authority",
+        "Eliminate or convert the remaining 87 Core/Runtime files from live production authority",
         "Lower the legacy runtime guard ceiling as files are removed or converted",
         "Record approved adapter/test-only shims with removal targets"
       ],
@@ -196,7 +196,7 @@
       "title": "Runtime Strangler Leaf - Replace production imports from Core Runtime",
       "current_status": "Accepted Yellow",
       "classification": "valid_accepted_yellow",
-      "why": "The bounded leaves reduced some production imports, including AMB-1730 lowering the count to 95, but the parent still has legacy runtime files and cannot count as Green-equivalent.",
+      "why": "The bounded leaves reduced some production imports, including AMB-1730 lowering the count to 87, but the parent still has legacy runtime files and cannot count as Green-equivalent.",
       "acceptance_required_actual_change": true,
       "actual_change_completed": true,
       "proof_completed": [
@@ -258,7 +258,7 @@
         "docs/audits/legacy-runtime-strangler-delete-quarantine.md"
       ],
       "proof_missing": [
-        "remaining 95 legacy runtime files removed, moved, quarantined, or converted"
+        "remaining 87 legacy runtime files removed, moved, quarantined, or converted"
       ],
       "required_status_after_repair": "Accepted Yellow for first quarantine slice only",
       "required_source_repairs": [

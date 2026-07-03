@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 LEGACY_RUNTIME_ROOT = ROOT / "Native" / "Ambitions" / "Core" / "Runtime"
 LEGACY_RUNTIME_PREFIX = "Native/Ambitions/Core/Runtime/"
 CLASSIFICATION_DOC = ROOT / "docs" / "audits" / "legacy-runtime-strangler-classification.md"
-MAX_LEGACY_RUNTIME_PRODUCTION_FILES = 95
+MAX_LEGACY_RUNTIME_PRODUCTION_FILES = 87
 
 AMB_1714_RETIRED_LEGACY_PATHS = {
     "Native/Ambitions/Core/Runtime/PrivateLifeRuntime.swift",
@@ -34,6 +34,14 @@ AMB_1716_RETIRED_LEGACY_PATHS = {
 AMB_1730_RETIRED_LEGACY_PATHS = {
     "Native/Ambitions/Core/Runtime/BufferEngine.swift",
     "Native/Ambitions/Core/Runtime/CapacityEngine.swift",
+    "Native/Ambitions/Core/Runtime/GoalClarificationService+02-DefaultGoalClarificationService+03-defaultAssumption.swift",
+    "Native/Ambitions/Core/Runtime/GoalClarificationService+02-DefaultGoalClarificationService.swift",
+    "Native/Ambitions/Core/Runtime/GoalClarificationService+03-ClassificationConfidence.swift",
+    "Native/Ambitions/Core/Runtime/GoalClarificationService.swift",
+    "Native/Ambitions/Core/Runtime/GoalContradictionService+02-DefaultGoalContradictionService+03-energyContradictions.swift",
+    "Native/Ambitions/Core/Runtime/GoalContradictionService+02-DefaultGoalContradictionService.swift",
+    "Native/Ambitions/Core/Runtime/GoalContradictionService+03-GoalResourceEntity.swift",
+    "Native/Ambitions/Core/Runtime/GoalContradictionService.swift",
     "Native/Ambitions/Core/Runtime/GoalDomainPackService.swift",
     "Native/Ambitions/Core/Runtime/GoalDomainPacks.swift",
     "Native/Ambitions/Core/Runtime/GoalEnergyFitService.swift",
@@ -269,7 +277,7 @@ def legacy_owner_findings(baseline: set[str], current: set[str]) -> list[Finding
             Finding(
                 "retired-legacy-runtime-owner-reintroduced",
                 path,
-                "AMB-1714 or AMB-1716 retired this legacy owner path; reintroduction is blocked",
+                "AMB-1714, AMB-1716, or AMB-1730 retired this legacy owner path; reintroduction is blocked",
             )
         )
 
@@ -323,6 +331,10 @@ def self_test() -> int:
     assert "Native/Ambitions/Core/Runtime/LargeStoreFixtureGenerator.swift" not in baseline
     assert "Native/Ambitions/Core/Runtime/GoalUnderstandingService.swift" not in baseline
     assert "Native/Ambitions/Core/Runtime/OneStepGoalProjector.swift" not in baseline
+    assert "Native/Ambitions/Core/Runtime/GoalClarificationService.swift" not in baseline
+    assert "Native/Ambitions/Core/Runtime/GoalClarificationService+02-DefaultGoalClarificationService.swift" not in baseline
+    assert "Native/Ambitions/Core/Runtime/GoalContradictionService.swift" not in baseline
+    assert "Native/Ambitions/Core/Runtime/GoalContradictionService+03-GoalResourceEntity.swift" not in baseline
     assert "Native/Ambitions/Core/Runtime/BufferEngine.swift" not in baseline
     assert "Native/Ambitions/Core/Runtime/PressureEngine.swift" not in baseline
     assert len(baseline) <= MAX_LEGACY_RUNTIME_PRODUCTION_FILES

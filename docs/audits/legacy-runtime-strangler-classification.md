@@ -33,6 +33,14 @@ AMB-1730 supersession: `docs/audits/legacy-runtime-strangler-import-replacement.
 is the current overlay for the standalone PlanningEngine and TimeEngine
 owner-move batches:
 `BufferEngine.swift`, `CapacityEngine.swift`,
+`GoalClarificationService+02-DefaultGoalClarificationService+03-defaultAssumption.swift`,
+`GoalClarificationService+02-DefaultGoalClarificationService.swift`,
+`GoalClarificationService+03-ClassificationConfidence.swift`,
+`GoalClarificationService.swift`,
+`GoalContradictionService+02-DefaultGoalContradictionService+03-energyContradictions.swift`,
+`GoalContradictionService+02-DefaultGoalContradictionService.swift`,
+`GoalContradictionService+03-GoalResourceEntity.swift`,
+`GoalContradictionService.swift`,
 `GoalDomainPackService.swift`, `GoalDomainPacks.swift`,
 `GoalEnergyFitService.swift`, `GoalEnergyLearningService.swift`,
 `GoalFreshnessUpdateService.swift`, `GoalPathCompilerService.swift`,
@@ -43,7 +51,7 @@ owner-move batches:
 files moved from production `Core/Runtime` into
 `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine` and
 `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine`. Remaining legacy runtime
-production-file count is now `95`.
+production-file count is now `87`.
 
 ## Canonical Constraints
 
@@ -94,7 +102,7 @@ AMB-1730 remaining overlay:
 
 | Classification | Remaining count | Meaning for AMB-1730 |
 | --- | ---: | --- |
-| Move into LocalRuntimeOS | 82 | Move-candidate rows still in legacy runtime owner scope after the AMB-1714 and AMB-1730 moved rows. |
+| Move into LocalRuntimeOS | 74 | Move-candidate rows still in legacy runtime owner scope after the AMB-1714 and AMB-1730 moved rows. |
 | Adapter shim | 8 | Live or boundary wiring that may temporarily remain only as explicit shims. |
 | Test-only support | 4 | Support rows still production-coupled until a later owner move or quarantine proves replacement. |
 | Unresolved | 1 | `RuntimePackageBoundaryModels.swift` still needs owner decision. |

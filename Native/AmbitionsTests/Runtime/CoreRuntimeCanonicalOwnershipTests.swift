@@ -100,6 +100,41 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
         }
     }
 
+    func testAMB1730MovesGoalClarificationAndContradictionServicesToCanonicalOwner() {
+        let root = repoRoot()
+        for requiredPath in [
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalClarificationService+02-DefaultGoalClarificationService+03-defaultAssumption.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalClarificationService+02-DefaultGoalClarificationService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalClarificationService+03-ClassificationConfidence.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalClarificationService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalContradictionService+02-DefaultGoalContradictionService+03-energyContradictions.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalContradictionService+02-DefaultGoalContradictionService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalContradictionService+03-GoalResourceEntity.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalContradictionService.swift",
+        ] {
+            XCTAssertTrue(
+                FileManager.default.fileExists(atPath: root.appendingPathComponent(requiredPath).path),
+                "Missing AMB-1730 canonical clarification/contradiction owner: \(requiredPath)"
+            )
+        }
+
+        for retiredPath in [
+            "Native/Ambitions/Core/Runtime/GoalClarificationService+02-DefaultGoalClarificationService+03-defaultAssumption.swift",
+            "Native/Ambitions/Core/Runtime/GoalClarificationService+02-DefaultGoalClarificationService.swift",
+            "Native/Ambitions/Core/Runtime/GoalClarificationService+03-ClassificationConfidence.swift",
+            "Native/Ambitions/Core/Runtime/GoalClarificationService.swift",
+            "Native/Ambitions/Core/Runtime/GoalContradictionService+02-DefaultGoalContradictionService+03-energyContradictions.swift",
+            "Native/Ambitions/Core/Runtime/GoalContradictionService+02-DefaultGoalContradictionService.swift",
+            "Native/Ambitions/Core/Runtime/GoalContradictionService+03-GoalResourceEntity.swift",
+            "Native/Ambitions/Core/Runtime/GoalContradictionService.swift",
+        ] {
+            XCTAssertFalse(
+                FileManager.default.fileExists(atPath: root.appendingPathComponent(retiredPath).path),
+                "AMB-1730 clarification/contradiction service still lives under production runtime owner: \(retiredPath)"
+            )
+        }
+    }
+
     func testAMB1730MovesStandaloneTimeEnginesToCanonicalOwner() {
         let root = repoRoot()
         for requiredPath in [

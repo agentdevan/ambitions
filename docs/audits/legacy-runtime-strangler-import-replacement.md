@@ -11,11 +11,12 @@ authority migration, persistence migration, package movement, UI work, or releas
 readiness proof.
 
 AMB-1730 supersession: this same audit now records the 2026-07-02 standalone
-PlanningEngine owner-move batch and the follow-on standalone TimeEngine
+PlanningEngine owner-move batch, the follow-on standalone TimeEngine
+owner-move batch, and the goal clarification/contradiction PlanningEngine
 owner-move batch. AMB-1730 lowered active legacy runtime production files from
-`111` to `95` by moving source files out of `Core/Runtime` and into
+`111` to `87` by moving source files out of `Core/Runtime` and into
 `Core/LocalRuntimeOS/PlanningEngine` and `Core/LocalRuntimeOS/TimeEngine`.
-This remains Implemented Yellow because `95` legacy runtime production files
+This remains Implemented Yellow because `87` legacy runtime production files
 still exist.
 
 Evidence class: Implemented Yellow. The slice proves a bounded source-owner
@@ -60,6 +61,14 @@ private life graph backend.
 |---|---|---|---|
 | `Native/Ambitions/Core/Runtime/BufferEngine.swift` | `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/BufferEngine.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/TimeEngine` | Moved; legacy path retired. |
 | `Native/Ambitions/Core/Runtime/CapacityEngine.swift` | `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/CapacityEngine.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/TimeEngine` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/GoalClarificationService+02-DefaultGoalClarificationService+03-defaultAssumption.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalClarificationService+02-DefaultGoalClarificationService+03-defaultAssumption.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/GoalClarificationService+02-DefaultGoalClarificationService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalClarificationService+02-DefaultGoalClarificationService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/GoalClarificationService+03-ClassificationConfidence.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalClarificationService+03-ClassificationConfidence.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/GoalClarificationService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalClarificationService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/GoalContradictionService+02-DefaultGoalContradictionService+03-energyContradictions.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalContradictionService+02-DefaultGoalContradictionService+03-energyContradictions.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/GoalContradictionService+02-DefaultGoalContradictionService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalContradictionService+02-DefaultGoalContradictionService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/GoalContradictionService+03-GoalResourceEntity.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalContradictionService+03-GoalResourceEntity.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/GoalContradictionService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalContradictionService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
 | `Native/Ambitions/Core/Runtime/GoalDomainPackService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalDomainPackService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
 | `Native/Ambitions/Core/Runtime/GoalDomainPacks.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalDomainPacks.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
 | `Native/Ambitions/Core/Runtime/GoalEnergyFitService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalEnergyFitService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
@@ -82,10 +91,11 @@ type names and behavior; the change is path ownership and proof coverage.
 
 `Native/Ambitions/Core/Runtime/*.swift` count reduced from `115` in AMB-1713 to
 `112` after AMB-1714, to `111` after AMB-1716, to `100` after the first
-AMB-1730 PlanningEngine batch, and to `95` after the AMB-1730 TimeEngine batch.
+AMB-1730 PlanningEngine batch, to `95` after the AMB-1730 TimeEngine batch, and
+to `87` after the AMB-1730 goal clarification/contradiction batch.
 The remaining files stay Yellow, not Green:
 
-- `82` move-candidate files remain in legacy runtime owner scope.
+- `74` move-candidate files remain in legacy runtime owner scope.
 - `8` adapter-shim files remain in legacy runtime owner scope.
 - `4` test-only support files remain in legacy runtime owner scope.
 - `1` unresolved owner-decision file remains:
@@ -121,25 +131,31 @@ Expected proof behavior:
   `Core/Runtime` paths are absent.
 - AMB-1730 standalone TimeEngine canonical owner paths exist and the old
   `Core/Runtime` paths are absent.
+- AMB-1730 goal clarification/contradiction PlanningEngine canonical owner
+  paths exist and the old `Core/Runtime` paths are absent.
 
 ## AMB-1730 Evidence Update
 
 Before count:
 
 - `python3 scripts/ambitions-legacy-runtime-production-use-guard.py --json`
-  reported `currentLegacyRuntimeFiles=111`,
-  `legacyRuntimeFileCeiling=111`, and `findingCount=0`.
+  reported `baselineLegacyRuntimeFiles=95`,
+  `currentLegacyRuntimeFiles=95`, `legacyRuntimeFileCeiling=95`, and
+  `findingCount=0` before this goal clarification/contradiction move batch.
+- Cumulative AMB-1730 source-owner remediation began at `111` active legacy
+  runtime production files before the earlier PlanningEngine and TimeEngine
+  move batches.
 
 After count:
 
 - `python3 scripts/ambitions-legacy-runtime-production-use-guard.py --json`
-  reports `baselineLegacyRuntimeFiles=95`,
-  `currentLegacyRuntimeFiles=95`, `legacyRuntimeFileCeiling=95`, and
+  reports `baselineLegacyRuntimeFiles=87`,
+  `currentLegacyRuntimeFiles=87`, `legacyRuntimeFileCeiling=87`, and
   `findingCount=0`.
 
 Files moved/deleted/quarantined/converted:
 
-- Moved `16` standalone PlanningEngine and TimeEngine source files listed in
+- Moved `24` standalone PlanningEngine and TimeEngine source files listed in
   `AMB-1730 Moved Rows`.
 - Deleted no Swift behavior.
 - Quarantined no test-support files.
@@ -147,7 +163,7 @@ Files moved/deleted/quarantined/converted:
 
 Remaining files:
 
-- `95` production Swift files remain under `Native/Ambitions/Core/Runtime`.
+- `87` production Swift files remain under `Native/Ambitions/Core/Runtime`.
 
 Remaining blockers:
 
@@ -159,7 +175,13 @@ Remaining blockers:
 
 Rollback plan:
 
-- Move the AMB-1730 files back from
+- Move the latest AMB-1730 clarification/contradiction files back from
+  `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/` to
+  `Native/Ambitions/Core/Runtime/`, restore the guard ceiling to `95`, remove
+  the current ownership assertions, regenerate the project, and rerun the
+  focused GoalClarification/GoalContradiction/service tests plus the required
+  remediation guards. A full AMB-1730 owner-move rollback would also move the
+  earlier PlanningEngine and TimeEngine files back from
   `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/` and
   `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/` to
   `Native/Ambitions/Core/Runtime/`, restore the guard ceiling to `111`, remove
@@ -171,26 +193,42 @@ Rollback plan:
 
 Validation run:
 
-- `python3 scripts/ambitions-remediation-governance-check.py` -> passed.
-- `python3 scripts/ambitions-runtime-direct-write-audit.py --json` -> completed
-  with no command failure; existing runtime authority findings remain Yellow and
-  outside AMB-1714.
-- `xcodegen --version` -> `Version: 2.45.4`.
-- `xcodegen generate` -> passed.
-- MCP `test_sim` focused on
-  `CoreRuntimeCanonicalOwnershipTests`,
-  `PrivateLifeRuntimeKernelOwnershipTests`, and `ProjectionEngineTests` timed
-  out after 300 seconds before result proof.
-- First shell `xcodebuild` focused test attempt wrote
-  `artifacts/amb-1714/results/focused-runtime-ownership.xcresult` and failed
-  before selected test assertions ran with:
-  `Failed to establish communication with the test runner. (Underlying Error: Channel disconnected)`.
-- Warm shell retry with `-parallel-testing-enabled NO` wrote
-  `artifacts/amb-1714/results/focused-runtime-ownership-retry.xcresult` and
-  passed: `11` selected tests, `0` failures.
-- `git diff --check` -> clean.
+- `git diff --check` -> exit `0`.
+- `python3 scripts/ambitions-legacy-runtime-production-use-guard.py --json`
+  -> exit `0`; `baselineLegacyRuntimeFiles=87`,
+  `currentLegacyRuntimeFiles=87`, `legacyRuntimeFileCeiling=87`,
+  `findingCount=0`.
+- `python3 scripts/ambitions-accepted-yellow-misuse-audit.py --json`
+  -> exit `0`; `valid=true`, `findingCount=0`.
+- `python3 scripts/ambitions-remediation-governance-check.py --json`
+  -> exit `0`; `valid=true`, `findingCount=0`.
+- `python3 scripts/ambitions-quality-gate.py --self-test` -> exit `0`;
+  self-test passed.
+- `python3 scripts/ambitions-unsupported-claim-scan.py AGENTS.md docs/truth/CODEX_START_HERE.md docs/truth/CODEX_PROCESS_TRUTH.md docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md docs/audits/architecture-remediation-accepted-yellow-misuse-audit.md`
+  -> exit `0`; unsupported completion/readiness claim scan passed.
+- `bash scripts/release-claim-safety-scan.sh` -> exit `0`; no
+  proof-sensitive release claims found.
+- `python3 scripts/ambitions-truth-path-vocabulary-audit.py` -> exit `0`;
+  truth paths resolve or are explicitly planned/internal.
+- `python3 scripts/ambitions-skill-registry-check.py` -> exit `0`;
+  retained skill registry check passed.
+- `python3 -m json.tool docs/audits/architecture-remediation-accepted-yellow-misuse-audit.json`
+  -> exit `0`.
+- `python3 scripts/ambitions-legacy-runtime-production-use-guard.py --self-test`
+  -> exit `0`.
+- `python3 scripts/ambitions-remediation-governance-check.py --self-test`
+  -> exit `0`.
+- `xcodegen generate` -> exit `0`; regenerated
+  `Ambitions.xcodeproj` from `project.yml` with no checked-in project diff.
+- `xcodebuild -version` -> exit `0`; `Xcode 26.6`, build `17F113`.
+- `xcrun simctl list devices | rg '169566BC|Booted|iPhone'` -> exit `0`;
+  selected booted simulator `iPhone 17`
+  `169566BC-88D9-416F-9F93-0013CBA519EB`.
+- Focused shell test:
+  `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,id=169566BC-88D9-416F-9F93-0013CBA519EB' -only-testing:AmbitionsTests/GoalClarificationServiceTests -only-testing:AmbitionsTests/GoalContradictionServiceTests -only-testing:AmbitionsTests/CoreRuntimeCanonicalOwnershipTests/testAMB1730MovesGoalClarificationAndContradictionServicesToCanonicalOwner -parallel-testing-enabled NO -resultBundlePath artifacts/amb-1730/results/focused-goal-clarification-contradiction.xcresult test`
+  -> exit `0`; `15` selected tests, `0` failures.
 - `find Native/Ambitions/Core/Runtime -maxdepth 1 -name '*.swift' | wc -l`
-  -> `112`.
+  -> `87`.
 
 Validation not run:
 
@@ -198,6 +236,9 @@ Validation not run:
 - Physical device runtime proof.
 - Accessibility, performance, privacy/legal, TestFlight, App Store, or release
   readiness proof.
+- `xcodebuild -project Ambitions.xcodeproj -list` was interrupted with exit
+  `130` after hanging before useful project-list output; it is not used as
+  validation proof.
 
 ## Claim Ceiling
 
@@ -207,7 +248,9 @@ Canonical owners touched:
 
 - `Core/LocalRuntimeOS/PrivateLifeRuntimeKernel`
 - `Core/LocalRuntimeOS/ProjectionEngine`
-- Legacy owner retired for three files: `Core/Runtime`
+- `Core/LocalRuntimeOS/PlanningEngine`
+- `Core/LocalRuntimeOS/TimeEngine`
+- Legacy owner retired for `24` AMB-1730 files: `Core/Runtime`
 
 Files moved or created:
 
@@ -217,6 +260,8 @@ Files moved or created:
   `Core/LocalRuntimeOS/ProjectionEngine`.
 - Moved `RuntimeSnapshot.swift` from `Core/Runtime` to
   `Core/LocalRuntimeOS/ProjectionEngine`.
+- Moved the `24` AMB-1730 PlanningEngine and TimeEngine files listed in
+  `AMB-1730 Moved Rows` from `Core/Runtime` to `Core/LocalRuntimeOS`.
 - Created this audit overlay.
 
 Old/non-canonical paths removed:
@@ -224,12 +269,14 @@ Old/non-canonical paths removed:
 - `Native/Ambitions/Core/Runtime/PrivateLifeRuntime.swift`
 - `Native/Ambitions/Core/Runtime/RuntimeProjectionPipeline.swift`
 - `Native/Ambitions/Core/Runtime/RuntimeSnapshot.swift`
+- The `24` AMB-1730 retired legacy paths listed in `AMB-1730 Moved Rows`.
 
 Compatibility shims left behind by this slice: none.
 
-Yellow architecture debt remains because `112` legacy runtime files still exist,
+Yellow architecture debt remains because `87` legacy runtime files still exist,
 including adapter shims, test-only support, and the unresolved
 `RuntimePackageBoundaryModels.swift` owner decision. Next repair trains:
-AMB-1715, AMB-1716, and AMB-1667 children for unsafe write/persistence authority.
+AMB-1730 follow-up owner-move/quarantine batches, plus AMB-1667 children for
+unsafe write/persistence authority.
 
 No equivalent-folder or close-enough path interpretation was used.
