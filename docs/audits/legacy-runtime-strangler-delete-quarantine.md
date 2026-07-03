@@ -68,7 +68,7 @@ Supporting proof:
   AMB-1716 retired legacy owner path.
 - Active legacy runtime production-file ceiling is now `111`.
 
-## Yellow Non-Moves
+## AMB-1730 Supersession: Former Yellow Non-Moves
 
 The AMB-1713 `Test-only support` classification was broader than the safe
 delete/quarantine proof available in this slice. AMB-1716 attempted wider moves
@@ -88,9 +88,13 @@ Evidence:
   failures for `GoldenVerticalSliceProgramRecord` and `GoldenVerticalSliceRecord`
   in `FirstRunActivationRuntime.swift`.
 
-Those files remain under `Core/Runtime` as explicit Yellow debt until a
-follow-up owner-move or quarantine leaf proves a replacement owner and removes
-the production coupling.
+AMB-1730 resolved this source-owner debt by moving these production-coupled
+proof-harness files to `Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/`
+instead of quarantining them into tests. That preserves the production
+dependencies from `FirstRunActivationRuntime`, `LifeConsequenceEngine`, and
+related runtime chain segment producers while removing legacy `Core/Runtime`
+authority. Focused Swift/Xcode validation remains not run because the user
+explicitly paused build testing.
 
 ## Validation Run
 
@@ -152,11 +156,9 @@ the production coupling.
 - Old/non-canonical paths removed:
   - `Native/Ambitions/Core/Runtime/LargeStoreFixtureGenerator.swift`
 - Compatibility shims left behind: none added.
-- Yellow architecture debt remains: yes. `111` legacy runtime production files
-  remain under `Core/Runtime`, including production-coupled files that need
-  follow-up owner movement before AMB-1666 can be Green.
-- Next repair train: a follow-up AMB-1666 runtime owner-move or quarantine leaf
-  before parent Green; do not move to M01 source migration parents until M00/M02
-  governance/baseline sequence is reconciled.
+- Yellow proof debt remains: yes. `0` Swift files remain under `Core/Runtime`,
+  but focused Swift/Xcode validation was skipped by user instruction.
+- Next repair train: focused owner build/typecheck/tests for the AMB-1730 moved
+  owners when build validation is re-enabled.
 - No equivalent folder/path interpretation was used.
 - No Green runtime authority, release, or product-completion claim is made.

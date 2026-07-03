@@ -27,7 +27,7 @@ struct RuntimePackageBoundaryManifest: Codable, Sendable, Equatable, Hashable {
 
     init(
         moduleName: String = "AmbitionsRuntime",
-        sourceRoot: String = "Native/Ambitions/Runtime",
+        sourceRoot: String = "Native/Ambitions/Core/LocalRuntimeOS",
         plannedPackageProductName: String = "AmbitionsRuntime",
         allowedImports: [String] = ["AmbitionsDesignSystem", "Foundation"],
         forbiddenImports: [String] = ["SwiftUI", "UIKit", "AppKit", "WidgetKit", "EventKit", "UserNotifications", "CloudKit"],

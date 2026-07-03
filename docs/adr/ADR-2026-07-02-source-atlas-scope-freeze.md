@@ -184,6 +184,19 @@ Directory-wide, wildcard, package-wide, or inferred allowlists are forbidden.
 An allowlist entry permits review of the named path; it is not implementation
 Green and not release proof.
 
+AMB-1730 relocates existing legacy runtime Source Atlas files into the canonical
+LocalRuntimeOS SourceAtlas owner. These allowlist entries cover the source-owner
+move only; they do not add public-pack, R2, product-surface, or private runtime
+scope:
+
+- Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/AnyGoalRuntimeCoverage+02-PrivacySafeCoverageRequestBuilder.swift`
+- Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/AnyGoalRuntimeCoverage+03-AnyGoalRuntimeCoverageEngine.swift`
+- Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/AnyGoalRuntimeCoverage+04-AnyGoalCoverageInput.swift`
+- Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/AnyGoalRuntimeCoverage.swift`
+- Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/KnowledgeClaimBoundaryHardener.swift`
+- Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/KnowledgeIngestionService.swift`
+- Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/KnowledgeProviderBoundary.swift`
+
 ## Inspection Requirements
 
 Source Atlas work must keep inspection boring and bounded:

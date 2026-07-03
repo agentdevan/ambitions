@@ -223,18 +223,60 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
         }
     }
 
-    func testRemainingLegacyRuntimeLeavesStayExplicitYellowUntilFollowUpMove() {
+    func testAMB1730EliminatesRemainingLegacyRuntimeProductionAuthority() throws {
         let root = repoRoot()
-        for yellowPath in [
-            "Native/Ambitions/Core/Runtime/RecommendationEngine.swift",
-            "Native/Ambitions/Core/Runtime/RuntimeCoreUmbrellaGate.swift",
-            "Native/Ambitions/Core/Runtime/GoldenVerticalSliceRuntime.swift",
-            "Native/Ambitions/Core/Runtime/GoldenVerticalSliceRuntime+02-GoldenVerticalSliceInput.swift",
-            "Native/Ambitions/Core/Runtime/GoldenVerticalSliceRuntime+03-GoldenVerticalSliceRuntime.swift",
+        let legacyRuntimeOwner = root.appendingPathComponent("Native/Ambitions/Core/Runtime", isDirectory: true)
+        let legacySwiftFiles = try? FileManager.default.contentsOfDirectory(
+            at: legacyRuntimeOwner,
+            includingPropertiesForKeys: nil
+        ).filter { $0.pathExtension == "swift" }
+
+        XCTAssertEqual(legacySwiftFiles ?? [], [], "Core/Runtime must not contain production Swift authority after AMB-1730.")
+
+        for requiredPath in [
+            "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/SmartAttachmentService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/MultiPathLattice.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/RecommendationEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/HighRiskSafetyJurisdictionGate.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/AmbitionsRuntimeGoalIntelligence.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/ExecutionResilienceProjector.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/FirstRunActivationRuntime.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/GoldenVerticalSliceRuntime.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/LearningAnticipationService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/LifeConsequenceEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/RuntimeCoreUmbrellaGate.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/SharedLifeCoordinationService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/CanonicalNowStateProjector.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/GoalBelievabilityProjector.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/GoalExplainabilityProjector.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/LifeAreaAtlasProjector.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/NorthStarProjector.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/PathIntelligenceProjector.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/RealityModelProjector.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ReviewsV1Projector.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/AmbitionsRuntimeContracts.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/AmbitionsRuntimeFactory.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/AmbitionsRuntimeServices.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/AppServices.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/DedicatedDevicePrototypeRuntime.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/RealityIntegrationAdapters.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/RuntimePackageBoundaryModels.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SnapshotRefreshingServices.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/AnyGoalRuntimeCoverage.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/KnowledgeClaimBoundaryHardener.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/KnowledgeIngestionService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/KnowledgeProviderBoundary.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ClosureEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LifeShapeBucketBuilder.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LifeShapeEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LocalScheduleBlockRepository.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ProtectionEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/RitualOrchestrationService.swift",
         ] {
             XCTAssertTrue(
-                FileManager.default.fileExists(atPath: root.appendingPathComponent(yellowPath).path),
-                "Remaining legacy runtime leaf moved without updating AMB-1714 Yellow proof: \(yellowPath)"
+                FileManager.default.fileExists(atPath: root.appendingPathComponent(requiredPath).path),
+                "Missing AMB-1730 canonical owner after full legacy runtime pass: \(requiredPath)"
             )
         }
     }

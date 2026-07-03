@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 LEGACY_RUNTIME_ROOT = ROOT / "Native" / "Ambitions" / "Core" / "Runtime"
 LEGACY_RUNTIME_PREFIX = "Native/Ambitions/Core/Runtime/"
 CLASSIFICATION_DOC = ROOT / "docs" / "audits" / "legacy-runtime-strangler-classification.md"
-MAX_LEGACY_RUNTIME_PRODUCTION_FILES = 64
+MAX_LEGACY_RUNTIME_PRODUCTION_FILES = 0
 
 AMB_1714_RETIRED_LEGACY_PATHS = {
     "Native/Ambitions/Core/Runtime/PrivateLifeRuntime.swift",
@@ -32,8 +32,37 @@ AMB_1716_RETIRED_LEGACY_PATHS = {
 }
 
 AMB_1730_RETIRED_LEGACY_PATHS = {
+    "Native/Ambitions/Core/Runtime/AmbitionsRuntimeContracts.swift",
+    "Native/Ambitions/Core/Runtime/AmbitionsRuntimeExperienceSnapshotAdapter.swift",
+    "Native/Ambitions/Core/Runtime/AmbitionsRuntimeFactory.swift",
+    "Native/Ambitions/Core/Runtime/AmbitionsRuntimeGoalIntelligence.swift",
+    "Native/Ambitions/Core/Runtime/AmbitionsRuntimeServices.swift",
+    "Native/Ambitions/Core/Runtime/AnyGoalRuntimeCoverage+02-PrivacySafeCoverageRequestBuilder.swift",
+    "Native/Ambitions/Core/Runtime/AnyGoalRuntimeCoverage+03-AnyGoalRuntimeCoverageEngine.swift",
+    "Native/Ambitions/Core/Runtime/AnyGoalRuntimeCoverage+04-AnyGoalCoverageInput.swift",
+    "Native/Ambitions/Core/Runtime/AnyGoalRuntimeCoverage.swift",
+    "Native/Ambitions/Core/Runtime/AppServices.swift",
     "Native/Ambitions/Core/Runtime/BufferEngine.swift",
     "Native/Ambitions/Core/Runtime/CapacityEngine.swift",
+    "Native/Ambitions/Core/Runtime/CanonicalNowStateProjector+02-CanonicalNowStateProjector+03-explanation.swift",
+    "Native/Ambitions/Core/Runtime/CanonicalNowStateProjector+02-CanonicalNowStateProjector.swift",
+    "Native/Ambitions/Core/Runtime/CanonicalNowStateProjector.swift",
+    "Native/Ambitions/Core/Runtime/CaptureService+02-CaptureDraftRouteService.swift",
+    "Native/Ambitions/Core/Runtime/CaptureService+03-DefaultCaptureService.swift",
+    "Native/Ambitions/Core/Runtime/CaptureService+04-DefaultCaptureService.swift",
+    "Native/Ambitions/Core/Runtime/CaptureService.swift",
+    "Native/Ambitions/Core/Runtime/ClosureEngine.swift",
+    "Native/Ambitions/Core/Runtime/DedicatedDevicePrototypeRuntime.swift",
+    "Native/Ambitions/Core/Runtime/ExecutionResilienceProjector+02-normalizedAssessments.swift",
+    "Native/Ambitions/Core/Runtime/ExecutionResilienceProjector+03-waitingOrBlockedWork.swift",
+    "Native/Ambitions/Core/Runtime/ExecutionResilienceProjector+04-explanationTitle.swift",
+    "Native/Ambitions/Core/Runtime/ExecutionResilienceProjector+Projector01-nowRecoverySummary.swift",
+    "Native/Ambitions/Core/Runtime/ExecutionResilienceProjector.swift",
+    "Native/Ambitions/Core/Runtime/FirstRunActivationRuntime.swift",
+    "Native/Ambitions/Core/Runtime/GoalBelievabilityProjector+02-GoalBelievabilityProjector+03-healthSignals.swift",
+    "Native/Ambitions/Core/Runtime/GoalBelievabilityProjector+02-GoalBelievabilityProjector+04-rank.swift",
+    "Native/Ambitions/Core/Runtime/GoalBelievabilityProjector+02-GoalBelievabilityProjector.swift",
+    "Native/Ambitions/Core/Runtime/GoalBelievabilityProjector.swift",
     "Native/Ambitions/Core/Runtime/GoalClarificationService+02-DefaultGoalClarificationService+03-defaultAssumption.swift",
     "Native/Ambitions/Core/Runtime/GoalClarificationService+02-DefaultGoalClarificationService.swift",
     "Native/Ambitions/Core/Runtime/GoalClarificationService+03-ClassificationConfidence.swift",
@@ -46,27 +75,62 @@ AMB_1730_RETIRED_LEGACY_PATHS = {
     "Native/Ambitions/Core/Runtime/GoalDomainPacks.swift",
     "Native/Ambitions/Core/Runtime/GoalEnergyFitService.swift",
     "Native/Ambitions/Core/Runtime/GoalEnergyLearningService.swift",
+    "Native/Ambitions/Core/Runtime/GoalExplainabilityProjector.swift",
     "Native/Ambitions/Core/Runtime/GoalFreshnessUpdateService.swift",
     "Native/Ambitions/Core/Runtime/GoalPathCompilerService.swift",
     "Native/Ambitions/Core/Runtime/GoalResourceGraphService.swift",
     "Native/Ambitions/Core/Runtime/GoalTeachingSignalService.swift",
     "Native/Ambitions/Core/Runtime/GoalUnderstandingService.swift",
+    "Native/Ambitions/Core/Runtime/GoldenVerticalSliceRuntime+02-GoldenVerticalSliceInput.swift",
+    "Native/Ambitions/Core/Runtime/GoldenVerticalSliceRuntime+03-GoldenVerticalSliceRuntime.swift",
+    "Native/Ambitions/Core/Runtime/GoldenVerticalSliceRuntime.swift",
+    "Native/Ambitions/Core/Runtime/HighRiskSafetyJurisdictionGate.swift",
+    "Native/Ambitions/Core/Runtime/KnowledgeClaimBoundaryHardener.swift",
+    "Native/Ambitions/Core/Runtime/KnowledgeIngestionService.swift",
+    "Native/Ambitions/Core/Runtime/KnowledgeProviderBoundary.swift",
+    "Native/Ambitions/Core/Runtime/LearningAnticipationService+EvidenceHelpers.swift",
+    "Native/Ambitions/Core/Runtime/LearningAnticipationService.swift",
+    "Native/Ambitions/Core/Runtime/LifeAreaAtlasProjector.swift",
+    "Native/Ambitions/Core/Runtime/LifeConsequenceEngine+02-LifeConsequenceRecord.swift",
+    "Native/Ambitions/Core/Runtime/LifeConsequenceEngine+03-LifeConsequenceEngine.swift",
+    "Native/Ambitions/Core/Runtime/LifeConsequenceEngine+04-LifeConsequenceRecord.swift",
+    "Native/Ambitions/Core/Runtime/LifeConsequenceEngine.swift",
+    "Native/Ambitions/Core/Runtime/LifeShapeBucketBuilder.swift",
+    "Native/Ambitions/Core/Runtime/LifeShapeEngine.swift",
+    "Native/Ambitions/Core/Runtime/LocalScheduleBlockRepository.swift",
     "Native/Ambitions/Core/Runtime/MemoryLensResult+SearchPresentation.swift",
     "Native/Ambitions/Core/Runtime/MemoryLensService+SearchAdapters.swift",
     "Native/Ambitions/Core/Runtime/MemoryLensService.swift",
+    "Native/Ambitions/Core/Runtime/MultiPathLattice.swift",
+    "Native/Ambitions/Core/Runtime/NorthStarProjector.swift",
     "Native/Ambitions/Core/Runtime/OneStepGoalProjector.swift",
     "Native/Ambitions/Core/Runtime/OpenCapacityEngine.swift",
+    "Native/Ambitions/Core/Runtime/PathIntelligenceProjector.swift",
     "Native/Ambitions/Core/Runtime/PressureEngine.swift",
+    "Native/Ambitions/Core/Runtime/ProtectionEngine.swift",
+    "Native/Ambitions/Core/Runtime/RealityIntegrationAdapters.swift",
+    "Native/Ambitions/Core/Runtime/RealityModelProjector.swift",
+    "Native/Ambitions/Core/Runtime/RecommendationEngine.swift",
     "Native/Ambitions/Core/Runtime/RecommendationExplanationAdapter.swift",
     "Native/Ambitions/Core/Runtime/RecoveryEngine.swift",
+    "Native/Ambitions/Core/Runtime/ReviewsV1Projector+02-cadenceSummaries.swift",
+    "Native/Ambitions/Core/Runtime/ReviewsV1Projector+03-progressReceiptLines.swift",
+    "Native/Ambitions/Core/Runtime/ReviewsV1Projector.swift",
+    "Native/Ambitions/Core/Runtime/RitualOrchestrationService.swift",
+    "Native/Ambitions/Core/Runtime/RuntimeCoreUmbrellaGate.swift",
+    "Native/Ambitions/Core/Runtime/RuntimePackageBoundaryModels.swift",
     "Native/Ambitions/Core/Runtime/ScheduleInstallKernel+02-ScheduleInstallRecord.swift",
     "Native/Ambitions/Core/Runtime/ScheduleInstallKernel+03-ScheduleInstallKernel+02-evaluate.swift",
     "Native/Ambitions/Core/Runtime/ScheduleInstallKernel+03-ScheduleInstallKernel+03-makeReceipt.swift",
     "Native/Ambitions/Core/Runtime/ScheduleInstallKernel+03-ScheduleInstallKernel.swift",
     "Native/Ambitions/Core/Runtime/ScheduleInstallKernel+04-ScheduleInstallRecord.swift",
     "Native/Ambitions/Core/Runtime/ScheduleInstallKernel.swift",
+    "Native/Ambitions/Core/Runtime/SharedLifeCoordinationService.swift",
     "Native/Ambitions/Core/Runtime/SimpleStepLifecycleService+Recurring.swift",
     "Native/Ambitions/Core/Runtime/SimpleStepLifecycleService.swift",
+    "Native/Ambitions/Core/Runtime/SmartAttachmentCaptureAdapter.swift",
+    "Native/Ambitions/Core/Runtime/SmartAttachmentService.swift",
+    "Native/Ambitions/Core/Runtime/SnapshotRefreshingServices.swift",
     "Native/Ambitions/Core/Runtime/StepElasticityEngine+02-StepElasticityEngine+02-evaluate.swift",
     "Native/Ambitions/Core/Runtime/StepElasticityEngine+02-StepElasticityEngine+03-makeReceipt.swift",
     "Native/Ambitions/Core/Runtime/StepElasticityEngine+02-StepElasticityEngine.swift",
@@ -326,7 +390,7 @@ def guard_findings(changed: list[ChangedPath], base: str | None) -> tuple[list[F
         )
 
     current = current_legacy_runtime_paths()
-    if not baseline:
+    if not baseline and MAX_LEGACY_RUNTIME_PRODUCTION_FILES > 0:
         findings.append(
             Finding(
                 "legacy-runtime-baseline-empty",
@@ -369,6 +433,12 @@ def self_test() -> int:
     assert "Native/Ambitions/Core/Runtime/MemoryLensService.swift" not in baseline
     assert "Native/Ambitions/Core/Runtime/MemoryLensService+SearchAdapters.swift" not in baseline
     assert "Native/Ambitions/Core/Runtime/MemoryLensResult+SearchPresentation.swift" not in baseline
+    assert "Native/Ambitions/Core/Runtime/CanonicalNowStateProjector.swift" not in baseline
+    assert "Native/Ambitions/Core/Runtime/AmbitionsRuntimeServices.swift" not in baseline
+    assert "Native/Ambitions/Core/Runtime/CaptureService.swift" not in baseline
+    assert "Native/Ambitions/Core/Runtime/GoldenVerticalSliceRuntime.swift" not in baseline
+    assert "Native/Ambitions/Core/Runtime/RuntimePackageBoundaryModels.swift" not in baseline
+    assert len(baseline) == 0
     assert len(baseline) <= MAX_LEGACY_RUNTIME_PRODUCTION_FILES
     synthetic_findings = legacy_owner_findings(
         {"Native/Ambitions/Core/Runtime/ExistingRuntime.swift"},

@@ -4,7 +4,7 @@ enum StoreDiagnostics {
     static let localStoreOwners = [
         "Core/Persistence",
         "Core/Domain/EventLedger",
-        "Core/Runtime"
+        "Core/LocalRuntimeOS"
     ]
 
     static var defaultChecks: [DiagnosticCheckResult] {

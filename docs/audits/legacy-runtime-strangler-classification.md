@@ -31,8 +31,8 @@ scope.
 
 AMB-1730 supersession: `docs/audits/legacy-runtime-strangler-import-replacement.md`
 is the current overlay for the standalone PlanningEngine, TimeEngine, goal
-clarification/contradiction, step planning/scheduling, and
-MemoryLens/SearchRecall owner-move batches:
+clarification/contradiction, step planning/scheduling,
+MemoryLens/SearchRecall, and final all-remaining owner-move batches:
 `BufferEngine.swift`, `CapacityEngine.swift`,
 `GoalClarificationService+02-DefaultGoalClarificationService+03-defaultAssumption.swift`,
 `GoalClarificationService+02-DefaultGoalClarificationService.swift`,
@@ -67,13 +67,18 @@ MemoryLens/SearchRecall owner-move batches:
 `StepQualityFirewall.swift`, `StepReallocationRuntimeBridge.swift`,
 `TimeRitualGoalSemantics.swift`,
 `MemoryLensResult+SearchPresentation.swift`,
-`MemoryLensService+SearchAdapters.swift`, and `MemoryLensService.swift`. Those
-files moved from production
-`Core/Runtime` into
-`Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine` and
-`Native/Ambitions/Core/LocalRuntimeOS/TimeEngine`, plus
-`Native/Ambitions/Core/LocalRuntimeOS/SearchRecall`. Remaining legacy runtime
-production-file count is now `64`.
+`MemoryLensService+SearchAdapters.swift`, `MemoryLensService.swift`, and every
+remaining AMB-1713 legacy runtime row. Those files moved from production
+`Core/Runtime` into `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine`,
+`Native/Ambitions/Core/LocalRuntimeOS/TimeEngine`,
+`Native/Ambitions/Core/LocalRuntimeOS/SearchRecall`,
+`Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine`,
+`Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel`,
+`Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary`,
+`Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph`,
+`Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas`, and
+`Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity`. Remaining legacy
+runtime production-file count is now `0`.
 
 ## Canonical Constraints
 
@@ -124,10 +129,10 @@ AMB-1730 remaining overlay:
 
 | Classification | Remaining count | Meaning for AMB-1730 |
 | --- | ---: | --- |
-| Move into LocalRuntimeOS | 51 | Move-candidate rows still in legacy runtime owner scope after the AMB-1714 and AMB-1730 moved rows. |
-| Adapter shim | 8 | Live or boundary wiring that may temporarily remain only as explicit shims. |
-| Test-only support | 4 | Support rows still production-coupled until a later owner move or quarantine proves replacement. |
-| Unresolved | 1 | `RuntimePackageBoundaryModels.swift` still needs owner decision. |
+| Move into LocalRuntimeOS | 0 | Move-candidate rows remaining in legacy runtime owner scope after the AMB-1730 all-remaining owner pass. |
+| Adapter shim | 0 | Adapter-shim rows remaining in legacy runtime owner scope after the AMB-1730 all-remaining owner pass. |
+| Test-only support | 0 | Test-support rows remaining in legacy runtime owner scope after the AMB-1730 all-remaining owner pass. |
+| Unresolved | 0 | Owner-decision rows remaining in legacy runtime owner scope after the AMB-1730 all-remaining owner pass. |
 
 Proof code legend:
 
@@ -239,7 +244,7 @@ Follow-up code legend:
 | `Native/Ambitions/Core/Runtime/ReviewsV1Projector.swift` | `Core/Runtime` | `AmbitionsDesignSystem, Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/ProjectionEngine` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/RitualOrchestrationService.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/TimeEngine` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/RuntimeCoreUmbrellaGate.swift` | `Core/Runtime` | `Foundation` | `Test-only support` | `Tests/Runtime or Quality quarantine` | `P-TEST` | `F-TEST` |
-| `Native/Ambitions/Core/Runtime/RuntimePackageBoundaryModels.swift` | `Core/Runtime` | `Foundation` | `Unresolved` | `Owner decision required` | `P-DECIDE` | `F-DECIDE` |
+| `Native/Ambitions/Core/Runtime/RuntimePackageBoundaryModels.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/RuntimeBoundary` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/RuntimeProjectionPipeline.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/ProjectionEngine` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/RuntimeSnapshot.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/ProjectionEngine` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/ScheduleInstallKernel+02-ScheduleInstallRecord.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/TimeEngine` | `P-MOVE` | `F-MOVE` |
@@ -267,14 +272,14 @@ Follow-up code legend:
 | `Native/Ambitions/Core/Runtime/StepReallocationRuntimeBridge.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/TimeEngine` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/TimeRitualGoalSemantics.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/TimeEngine` | `P-MOVE` | `F-MOVE` |
 
-## Explicit Unresolved File
+## Former Unresolved File
 
-`Native/Ambitions/Core/Runtime/RuntimePackageBoundaryModels.swift` remains
-Unresolved because it encodes planned package-boundary vocabulary and a stale
-`Native/Ambitions/Runtime` source root while current truth forbids package
-boundary cleanup theater without a linked decision record and validation plan.
-AMB-1714 must record whether this becomes a `Quality`/test support guard, moves
-under a LocalRuntimeOS diagnostics owner, or is quarantined by AMB-1716.
+`Native/Ambitions/Core/Runtime/RuntimePackageBoundaryModels.swift` was resolved
+in the AMB-1730 all-remaining owner pass by moving it to
+`Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/RuntimePackageBoundaryModels.swift`
+and updating the manifest source root from `Native/Ambitions/Runtime` to
+`Native/Ambitions/Core/LocalRuntimeOS`. The file remains a boundary manifest
+model, not a package split or new runtime authority.
 
 ## Closeout Boundary
 

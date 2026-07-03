@@ -135,7 +135,7 @@ final class LifeShapeDataContractTests: XCTestCase {
             """
         )
         let runtime = LifeShapeSourceFile(
-            path: "Native/Ambitions/Core/Runtime/LifeShapeBucketBuilder.swift",
+            path: "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LifeShapeBucketBuilder.swift",
             contents: "let bucket = try LifeShapeBucket.runtimeValidated()"
         )
 
@@ -156,7 +156,7 @@ final class LifeShapeDataContractTests: XCTestCase {
             "Native/Ambitions/Core/Domain/LifeShapeHorizon.swift",
             "Native/Ambitions/Core/Domain/LifeShapeDerivation.swift",
             "Native/Ambitions/Core/Domain/LifeShapeConfidence.swift",
-            "Native/Ambitions/Core/Runtime/LifeShapeBucketBuilder.swift"
+            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LifeShapeBucketBuilder.swift"
         ].map(sourceFile)
 
         XCTAssertTrue(LifeShapeDerivationAudit.auditModelContract(files).passed)

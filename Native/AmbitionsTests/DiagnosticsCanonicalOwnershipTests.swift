@@ -40,7 +40,7 @@ final class DiagnosticsCanonicalOwnershipTests: XCTestCase {
     func testRenderStoreAndCrashDiagnosticsBindExistingOwners() {
         XCTAssertEqual(Set(RenderDiagnostics.requiredRoles), Set(CanvasPrimitiveObjectRole.allCases))
         XCTAssertTrue(StoreDiagnostics.localStoreOwners.contains("Core/Persistence"))
-        XCTAssertEqual(CrashTriageNotes.note(id: "mutation-crash")?.owner, "Core/Runtime")
+        XCTAssertEqual(CrashTriageNotes.note(id: "mutation-crash")?.owner, "Core/LocalRuntimeOS")
     }
 }
 

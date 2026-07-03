@@ -1637,7 +1637,7 @@ def check_capture_intake_durability_gate() -> CheckResult:
         ROOT / "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureRouteGraphServices.swift": [
             "func durableIntakePipeline() -> CaptureDurableIntakePipeline",
         ],
-        ROOT / "Native/Ambitions/Core/Runtime/CaptureService+04-DefaultCaptureService.swift": [
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureService+04-DefaultCaptureService.swift": [
             "captureRouteGraph.durableIntakePipeline().prepareAcceptedInput",
         ],
         ROOT / "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureAttachmentVault.swift": [

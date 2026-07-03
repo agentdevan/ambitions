@@ -27,7 +27,7 @@ final class CaptureRouteGraphTests: XCTestCase {
         XCTAssertFalse(FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Core/Domain/CaptureRouteCommandMapping.swift").path))
 
         let runtimeHelper = try String(
-            contentsOf: root.appendingPathComponent("Native/Ambitions/Core/Runtime/CaptureService+04-DefaultCaptureService.swift"),
+            contentsOf: root.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureService+04-DefaultCaptureService.swift"),
             encoding: .utf8
         )
         XCTAssertFalse(runtimeHelper.contains("enum CaptureClassifier"))

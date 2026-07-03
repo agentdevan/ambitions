@@ -241,7 +241,7 @@ final class PressureEngineTests: XCTestCase {
     private func repoRoot() -> URL {
         var url = URL(fileURLWithPath: #filePath)
         while url.pathComponents.count > 1 {
-            let candidate = url.appendingPathComponent("Native/Ambitions/Core/Runtime")
+            let candidate = url.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/TimeEngine")
             if FileManager.default.fileExists(atPath: candidate.path) {
                 return url
             }

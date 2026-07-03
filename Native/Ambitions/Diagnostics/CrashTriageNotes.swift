@@ -19,7 +19,7 @@ enum CrashTriageNotes {
         ),
         CrashTriageNote(
             id: "mutation-crash",
-            owner: "Core/Runtime",
+            owner: "Core/LocalRuntimeOS",
             trigger: "App exits during command, mutation, or proof recording.",
             firstAction: "Replay the runtime command path through mutation and proof owners.",
             proofRequirement: "Focused runtime mutation tests must pass after the repair."

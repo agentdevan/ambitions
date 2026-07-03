@@ -115,7 +115,7 @@ extension ProjectionDefinition {
                 readModelInventory: [
                     .init(sourcePath: "Native/Ambitions/Projection/SurfaceLenses/GoalsOverviewProjector.swift", responsibility: "Goals overview board projection", migrationTarget: .goals),
                     .init(sourcePath: "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService.swift", responsibility: "Repository-backed Goals surface read path", migrationTarget: .goals),
-                    .init(sourcePath: "Native/Ambitions/Core/Runtime/LifeAreaAtlasProjector.swift", responsibility: "Life area atlas projector scaffold", migrationTarget: .goals),
+                    .init(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/LifeAreaAtlasProjector.swift", responsibility: "Life area atlas projector scaffold", migrationTarget: .goals),
                 ]
             )
         case .time:
