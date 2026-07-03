@@ -7,7 +7,10 @@
     "Native/Ambitions/Projection/SurfaceLenses/",
     "Native/Ambitions/Surfaces/",
     "Native/Ambitions/Composer/",
-    "Native/Ambitions/Core/Runtime/",
+    "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/",
+    "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/",
+    "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/",
+    "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/",
     "Native/Ambitions/Core/Permissions/",
     "Native/AmbitionsWidgetExtension/",
     "Native/AmbitionsShareExtension/"
@@ -106,51 +109,51 @@
       "rationale": "Legacy reminder mirror behind the permissions service; not canonical object-state authority."
     },
     {
-      "path": "Native/Ambitions/Core/Runtime/AppServices.swift",
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/AppServices.swift",
       "classification": "explicitly_non_canonical",
       "allowedCalls": ["appStateRepository.saveState"],
-      "rationale": "Legacy startup app-state compatibility write; not canonical object-state authority."
+      "rationale": "Moved AMB-1730 startup app-state compatibility write; not canonical object-state authority."
     },
     {
-      "path": "Native/Ambitions/Core/Runtime/CaptureService+03-DefaultCaptureService.swift",
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureService+03-DefaultCaptureService.swift",
       "classification": "explicitly_non_canonical",
       "allowedCalls": [
         "repository.saveCaptures",
         "capturePromotionUnitOfWork.saveCapturePromotion"
       ],
-      "rationale": "Legacy capture repository compatibility writes; promotion unit of work is tracked separately from canonical object-state authority."
+      "rationale": "Moved AMB-1730 capture repository compatibility writes; promotion unit of work is tracked separately from canonical object-state authority."
     },
     {
-      "path": "Native/Ambitions/Core/Runtime/CaptureService+04-DefaultCaptureService.swift",
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureService+04-DefaultCaptureService.swift",
       "classification": "explicitly_non_canonical",
       "allowedCalls": ["eventLedger.append"],
-      "rationale": "Legacy capture event-ledger mirror; not canonical object-state authority."
+      "rationale": "Moved AMB-1730 capture event-ledger mirror; not canonical object-state authority."
     },
     {
-      "path": "Native/Ambitions/Core/Runtime/GoalTeachingSignalService.swift",
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalTeachingSignalService.swift",
       "classification": "explicitly_non_canonical",
       "allowedCalls": ["repository.saveSignals"],
-      "rationale": "Legacy teaching-signal repository compatibility write; not canonical object-state authority."
+      "rationale": "Moved AMB-1730 teaching-signal repository compatibility write; not canonical object-state authority."
     },
     {
-      "path": "Native/Ambitions/Core/Runtime/SimpleStepLifecycleService.swift",
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/SimpleStepLifecycleService.swift",
       "classification": "explicitly_non_canonical",
       "allowedCalls": [
         "repositories.goals.saveGoals",
         "repositories.eventLedger.append",
         "repositories.feedback.saveEvents"
       ],
-      "rationale": "Legacy simple-step lifecycle compatibility writes pending command-spine migration."
+      "rationale": "Moved AMB-1730 simple-step lifecycle compatibility writes pending command-spine migration."
     },
     {
-      "path": "Native/Ambitions/Core/Runtime/SimpleStepLifecycleService+Recurring.swift",
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/SimpleStepLifecycleService+Recurring.swift",
       "classification": "explicitly_non_canonical",
       "allowedCalls": [
         "repositories.goals.saveGoals",
         "repositories.feedback.saveEvents",
         "repositories.evidence.saveEvidence"
       ],
-      "rationale": "Legacy recurring-step lifecycle compatibility writes pending command-spine migration."
+      "rationale": "Moved AMB-1730 recurring-step lifecycle compatibility writes pending command-spine migration."
     }
   ]
 }

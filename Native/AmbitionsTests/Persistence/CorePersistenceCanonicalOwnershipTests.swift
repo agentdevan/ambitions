@@ -33,6 +33,28 @@ final class CorePersistenceCanonicalOwnershipTests: XCTestCase {
         XCTAssertEqual(report.issues, [])
     }
 
+    func testPersistentObjectStoreCreatesApplicationSupportBeforeOpeningSwiftData() async throws {
+        let root = FileManager.default.temporaryDirectory
+            .appendingPathComponent("AmbitionsPersistentStore-\(UUID().uuidString)", isDirectory: true)
+        let storeURL = root
+            .appendingPathComponent("Library", isDirectory: true)
+            .appendingPathComponent("Application Support", isDirectory: true)
+            .appendingPathComponent("default.store", isDirectory: false)
+        defer {
+            try? FileManager.default.removeItem(at: root)
+        }
+
+        XCTAssertFalse(FileManager.default.fileExists(atPath: storeURL.deletingLastPathComponent().path))
+
+        let store = try AmbitionsPersistenceStore(inMemory: false, persistentStoreURL: storeURL)
+        let report = await store.healthReport(checker: StoreHealthCheck(timestampProvider: { "2026-07-03T12:00:00Z" }))
+
+        XCTAssertTrue(FileManager.default.fileExists(atPath: storeURL.deletingLastPathComponent().path))
+        XCTAssertEqual(report.status, .green)
+        XCTAssertTrue(report.readVerified)
+        XCTAssertTrue(report.writeVerified)
+    }
+
     func testStoreHealthCheckDetectsInvariantFailuresAsCorruptStoreRisk() async throws {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         try await store.write { context in

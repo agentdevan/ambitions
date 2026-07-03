@@ -299,43 +299,71 @@ actor AmbitionsPersistenceStore {
 
     private let container: ModelContainer
 
-    init(inMemory: Bool) throws {
+    init(inMemory: Bool, persistentStoreURL: URL? = nil) throws {
         do {
-            container = try Self.makeContainer(inMemory: inMemory)
+            container = try Self.makeContainer(inMemory: inMemory, persistentStoreURL: persistentStoreURL)
         } catch {
             #if DEBUG
             guard inMemory == false else {
                 throw error
             }
 
-            try Self.quarantineIncompatiblePersistentStores(after: error)
-            container = try Self.makeContainer(inMemory: false)
+            try Self.quarantineIncompatiblePersistentStores(after: error, persistentStoreURL: persistentStoreURL)
+            container = try Self.makeContainer(inMemory: false, persistentStoreURL: persistentStoreURL)
             #else
             throw error
             #endif
         }
     }
 
-    private static func makeContainer(inMemory: Bool) throws -> ModelContainer {
-        let configuration = ModelConfiguration(
-            schema: Self.schema,
-            isStoredInMemoryOnly: inMemory,
-            cloudKitDatabase: .none
-        )
+    static func defaultPersistentStoreURL(fileManager: FileManager = .default) throws -> URL {
+        guard let supportDirectory = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
+            throw CocoaError(.fileNoSuchFile)
+        }
+        return supportDirectory.appendingPathComponent("default.store", isDirectory: false)
+    }
+
+    private static func makeContainer(inMemory: Bool, persistentStoreURL: URL?) throws -> ModelContainer {
+        let configuration: ModelConfiguration
+        if inMemory {
+            configuration = ModelConfiguration(
+                schema: Self.schema,
+                isStoredInMemoryOnly: true,
+                cloudKitDatabase: .none
+            )
+        } else {
+            let storeURL = try persistentStoreURL ?? defaultPersistentStoreURL()
+            try preparePersistentStoreParentDirectory(for: storeURL)
+            configuration = ModelConfiguration(
+                schema: Self.schema,
+                url: storeURL,
+                cloudKitDatabase: .none
+            )
+        }
         return try ModelContainer(for: Self.schema, configurations: configuration)
+    }
+
+    static func preparePersistentStoreParentDirectory(
+        for storeURL: URL,
+        fileManager: FileManager = .default
+    ) throws {
+        try fileManager.createDirectory(
+            at: storeURL.deletingLastPathComponent(),
+            withIntermediateDirectories: true
+        )
     }
 
     #if DEBUG
     /// SwiftData can fail to open the development simulator store after rapid schema iteration.
     /// In DEBUG only, move the incompatible local store files into Application Support so the app can
     /// recreate a clean local store instead of trapping at launch. Release builds never auto-reset data.
-    private static func quarantineIncompatiblePersistentStores(after error: any Error) throws {
+    private static func quarantineIncompatiblePersistentStores(after error: any Error, persistentStoreURL: URL?) throws {
         let fileManager = FileManager.default
         let timestamp = ISO8601DateFormatter()
             .string(from: .now)
             .replacingOccurrences(of: ":", with: "-")
         let quarantineDirectory = try quarantineDirectory(named: "swiftdata-launch-recovery-\(timestamp)", fileManager: fileManager)
-        let candidates = persistentStoreCandidateURLs(fileManager: fileManager)
+        let candidates = persistentStoreCandidateURLs(fileManager: fileManager, persistentStoreURL: persistentStoreURL)
         var movedAnyStoreFile = false
 
         for candidate in candidates where fileManager.fileExists(atPath: candidate.path) {
@@ -353,7 +381,7 @@ actor AmbitionsPersistenceStore {
         }
     }
 
-    private static func persistentStoreCandidateURLs(fileManager: FileManager) -> [URL] {
+    private static func persistentStoreCandidateURLs(fileManager: FileManager, persistentStoreURL: URL?) -> [URL] {
         let baseDirectories = [
             fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first,
             fileManager.urls(for: .documentDirectory, in: .userDomainMask).first,
@@ -375,9 +403,33 @@ actor AmbitionsPersistenceStore {
             "Ambitions.sqlite-wal"
         ]
 
-        return baseDirectories.flatMap { directory in
+        let defaultCandidates = baseDirectories.flatMap { directory in
             fileNames.map { directory.appendingPathComponent($0, isDirectory: false) }
         }
+        return uniqueURLs(defaultCandidates + persistentStoreSidecarURLs(for: persistentStoreURL))
+    }
+
+    private static func persistentStoreSidecarURLs(for persistentStoreURL: URL?) -> [URL] {
+        guard let persistentStoreURL else {
+            return []
+        }
+        let directory = persistentStoreURL.deletingLastPathComponent()
+        let fileName = persistentStoreURL.lastPathComponent
+        return ["", "-shm", "-wal"].map { suffix in
+            directory.appendingPathComponent(fileName + suffix, isDirectory: false)
+        }
+    }
+
+    private static func uniqueURLs(_ urls: [URL]) -> [URL] {
+        var seen = Set<String>()
+        var unique: [URL] = []
+        for url in urls {
+            let path = url.standardizedFileURL.path
+            if seen.insert(path).inserted {
+                unique.append(url)
+            }
+        }
+        return unique
     }
 
     private static func quarantineDirectory(named name: String, fileManager: FileManager) throws -> URL {
