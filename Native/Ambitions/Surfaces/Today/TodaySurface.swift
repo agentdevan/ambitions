@@ -41,11 +41,11 @@ struct TodaySurface: View {
                 .padding(.horizontal, theme.spacing.lg)
                 .padding(.bottom, bottomChromeClearance)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            .accessibilityIdentifier("today.screen")
-            .refreshable {
-                await refresh()
-            }
+                .refreshable {
+                    await refresh()
+                }
         }
+        .accessibilityIdentifier("today.screen")
         .navigationTitle(showsNavigationChrome ? "Today" : "")
         .navigationBarTitleDisplayMode(dynamicTypeSize.isAccessibilitySize ? .inline : .large)
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)

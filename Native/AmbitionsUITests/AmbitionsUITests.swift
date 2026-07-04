@@ -2926,32 +2926,38 @@ final class AmbitionsUITests: XCTestCase {
 
     private func todayRealityMeridianAnchorExists(in app: XCUIApplication) -> Bool {
         let anchors = [
-            app.descendants(matching: .any)["TodayRealityRail"],
+            app.staticTexts["Start here"],
             app.descendants(matching: .any)["TodayRealityRailStartHereTitle"],
-            app.staticTexts["Start here"]
+            app.descendants(matching: .any)["TodayRealityRail"]
         ]
 
-        return anchors.contains { $0.waitForExistence(timeout: 5) }
+        let deadline = Date().addingTimeInterval(5)
+        while Date() < deadline {
+            if anchors.contains(where: { $0.exists }) {
+                return true
+            }
+            RunLoop.current.run(until: Date().addingTimeInterval(0.2))
+        }
+
+        return anchors.contains(where: { $0.exists })
     }
 
     private func waitForTodayScreenReady(in app: XCUIApplication, timeout: TimeInterval = 30) -> Bool {
         let deadline = Date().addingTimeInterval(timeout)
-        let todayScreen = app.descendants(matching: .any)["today.screen"]
         let readinessCandidates = [
-            app.descendants(matching: .any)["TodayRealityRail"],
             app.staticTexts["Start here"],
-            app.staticTexts["On-device"]
+            app.staticTexts["On-device"],
+            app.descendants(matching: .any)["TodayRealityRail"]
         ]
 
         while Date() < deadline {
-            let hasTodayContainer = todayScreen.waitForExistence(timeout: 1) || app.staticTexts["Start here"].exists
-            if hasTodayContainer,
-               readinessCandidates.contains(where: { $0.waitForExistence(timeout: 1) }) {
+            if readinessCandidates.contains(where: { $0.exists }) {
                 return true
             }
+            RunLoop.current.run(until: Date().addingTimeInterval(0.2))
         }
 
-        return (todayScreen.exists || app.staticTexts["Start here"].exists) && readinessCandidates.contains(where: { $0.exists })
+        return readinessCandidates.contains(where: { $0.exists })
     }
 
     private func waitForShellReady(in app: XCUIApplication, timeout: TimeInterval = 30) -> Bool {

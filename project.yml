@@ -131,6 +131,7 @@ targets:
           - "**/*.md"
     settings:
       base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ambitions.ios.uitests
         GENERATE_INFOPLIST_FILE: YES
     dependencies:
       - target: Ambitions
