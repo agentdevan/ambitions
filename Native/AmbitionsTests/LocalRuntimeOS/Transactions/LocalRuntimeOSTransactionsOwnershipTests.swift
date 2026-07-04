@@ -309,6 +309,49 @@ final class LocalRuntimeOSTransactionsOwnershipTests: XCTestCase {
         }
     }
 
+    func testInterruptedCommitReturnsFailureReceiptAndDoesNotRecordIdempotency() async throws {
+        let command = stepCommand(id: "command-interrupted-commit")
+        let attemptedResult = AmbitionsCommandExecutionResult(
+            status: .succeeded,
+            summary: "Step would have started.",
+            route: .today,
+            target: command.target,
+            eventLedgerEntryIDs: ["event.ledger.interrupted-commit"],
+            metadata: ["attemptedMutation": "start_step"]
+        )
+        let idempotencyStore = RuntimeIdempotencyStore()
+        let recordedAt = "2026-04-25T12:10:00Z"
+        let occurredAt = try XCTUnwrap(DomainTimestamp.date(from: recordedAt))
+
+        let result = await RuntimeTransactionCommitPolicy.resultByCommittingRuntimeTransaction(
+            command: command,
+            result: attemptedResult,
+            recordedAt: recordedAt,
+            commandRecordID: "command.execution.interrupted-commit",
+            timestamp: occurredAt,
+            runtimeEvents: FailingAppendRuntimeEventStore(),
+            runtimeTransactionIdempotencyStore: idempotencyStore,
+            runtimeValidator: RuntimeValidator(),
+            commandJournal: InMemoryCommandJournal(),
+            journalReceipt: nil
+        )
+
+        XCTAssertEqual(result.status, .blocked)
+        XCTAssertEqual(result.eventLedgerEntryIDs, [])
+        XCTAssertEqual(result.metadata["blockedBy"], "runtime_transaction_commit_failed")
+        XCTAssertEqual(result.metadata["runtimeTransactionDisposition"], "not_committed")
+        XCTAssertEqual(result.metadata["runtimeCommitPolicy"], RuntimeTransactionCommitPolicy.policyID)
+        XCTAssertEqual(result.metadata["runtimeCommitFailureReceiptID"], "runtime.failure-receipt.command-interrupted-commit")
+        XCTAssertEqual(result.metadata["runtimeCommitFailureReason"], "runtime_transaction_commit_failed")
+        XCTAssertEqual(result.metadata["runtimeBlockedEventLedgerEntryIDs"], "event.ledger.interrupted-commit")
+        XCTAssertEqual(result.metadata["runtimeCommitFailureBlockedAt"], recordedAt)
+        XCTAssertEqual(result.metadata["runtimeCommitEvidence"], "missing")
+        XCTAssertTrue(result.metadata["runtimeMissingCommitEvidence"]?.contains("runtimeEventID") == true)
+        XCTAssertTrue(result.metadata["runtimeTransactionBlockedBy"]?.contains("runtimeEventAppendUnavailable") == true)
+        let committedReceipt = await idempotencyStore.receipt(for: LedgerIdempotencyKey(command.id))
+        XCTAssertNil(committedReceipt)
+    }
+
     private func repoRoot() -> URL {
         var url = URL(fileURLWithPath: #filePath)
         while url.pathComponents.count > 1 {
@@ -340,5 +383,28 @@ final class LocalRuntimeOSTransactionsOwnershipTests: XCTestCase {
             try? FileManager.default.removeItem(at: directory)
         }
         return directory
+    }
+}
+
+private enum RuntimeTransactionOwnershipTestError: Error {
+    case runtimeEventAppendUnavailable
+}
+
+private actor FailingAppendRuntimeEventStore: RuntimeEventStore {
+    nonisolated var storeKind: RuntimeEventStoreKind { .inMemory }
+
+    func append(_ event: RuntimeEvent) async throws -> RuntimeEventEnvelope {
+        _ = event
+        throw RuntimeTransactionOwnershipTestError.runtimeEventAppendUnavailable
+    }
+
+    func fetchEvents(matching query: RuntimeEventQuery, limit: Int?) async throws -> [RuntimeEventEnvelope] {
+        _ = query
+        _ = limit
+        return []
+    }
+
+    func latestCursor() async throws -> RuntimeEventCursor? {
+        nil
     }
 }
