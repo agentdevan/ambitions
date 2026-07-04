@@ -1,6 +1,6 @@
 import Foundation
 
-enum MigrationRepairProofKind: String, CaseIterable, Sendable, Equatable, Hashable {
+enum RepairProofKind: String, CaseIterable, Sendable, Equatable, Hashable {
     case storageInvariantCheck = "storage_invariant_check"
     case preMigrationBackupReceipt = "pre_migration_backup_receipt"
     case stagedDryRunResult = "staged_dry_run_result"
@@ -25,9 +25,9 @@ enum RepairPlanIssueKind: String, Sendable, Equatable, Hashable, Codable {
     case mutationPlanHasNoMutation = "mutation_plan_has_no_mutation"
 }
 
-struct MigrationRepairProof: Identifiable, Sendable, Equatable, Hashable {
+struct RepairProof: Identifiable, Sendable, Equatable, Hashable {
     let id: String
-    let kind: MigrationRepairProofKind
+    let kind: RepairProofKind
     let subjectEntryID: String?
     let producedBy: String
     let producedAt: String
@@ -35,7 +35,7 @@ struct MigrationRepairProof: Identifiable, Sendable, Equatable, Hashable {
 
     init(
         id: String,
-        kind: MigrationRepairProofKind,
+        kind: RepairProofKind,
         subjectEntryID: String? = nil,
         producedBy: String,
         producedAt: String,
@@ -52,7 +52,7 @@ struct MigrationRepairProof: Identifiable, Sendable, Equatable, Hashable {
 
 enum RepairPlanIssue: Sendable, Equatable, Hashable {
     case validatorIssue(MigrationPlanIssue)
-    case missingProof(entryID: String, gate: MigrationGate, expectedProofKind: MigrationRepairProofKind)
+    case missingProof(entryID: String, gate: MigrationGate, expectedProofKind: RepairProofKind)
     case duplicateProofID(String)
     case mutationPlanHasNoMutation
 
@@ -99,7 +99,7 @@ struct RepairPlanEngine: Sendable {
 
     func evaluate(
         plan: MigrationPlan,
-        proofs: [MigrationRepairProof]
+        proofs: [RepairProof]
     ) -> RepairPlan {
         var issues = validator.validate(plan).map(RepairPlanIssue.validatorIssue)
         let duplicateProofIDs = Dictionary(grouping: proofs, by: \.id)
@@ -146,7 +146,7 @@ struct RepairPlanEngine: Sendable {
         )
     }
 
-    static func proofKind(for gate: MigrationGate) -> MigrationRepairProofKind {
+    static func proofKind(for gate: MigrationGate) -> RepairProofKind {
         switch gate {
         case .storageInvariantCheck:
             return .storageInvariantCheck

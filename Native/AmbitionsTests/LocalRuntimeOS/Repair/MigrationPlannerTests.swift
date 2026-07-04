@@ -55,7 +55,7 @@ final class MigrationPlannerTests: XCTestCase {
                 SchemaLedgerEntry(
                     id: "swiftdata.test_future_record",
                     family: .swiftDataRecord,
-                    owner: "MigrationRepair test fixture",
+                    owner: "Repair test fixture",
                     storedTypeName: "TestFutureRecord",
                     currentVersion: "test_future_record.swiftdata.v1",
                     versionEvidence: "Test future stored type.",
@@ -90,7 +90,7 @@ final class MigrationPlannerTests: XCTestCase {
             notes: "Unsafe test fixture."
         )
         let plan = MigrationPlan(
-            schemaVersion: "migration_repair_dsl.native.v0",
+            schemaVersion: "repair_dsl.native.v0",
             sourceLedgerSchemaVersion: "storage_schema_version_ledger.native.v0",
             targetLedgerSchemaVersion: "storage_schema_version_ledger.native.v0",
             entries: [unsafeEntry, unsafeEntry],
@@ -99,7 +99,7 @@ final class MigrationPlannerTests: XCTestCase {
 
         let issues = validator.validate(plan)
 
-        XCTAssertTrue(issues.contains(.unsupportedPlanSchema("migration_repair_dsl.native.v0")))
+        XCTAssertTrue(issues.contains(.unsupportedPlanSchema("repair_dsl.native.v0")))
         XCTAssertTrue(issues.contains(.unsupportedSourceLedger("storage_schema_version_ledger.native.v0")))
         XCTAssertTrue(issues.contains(.unsupportedTargetLedger("storage_schema_version_ledger.native.v0")))
         XCTAssertTrue(issues.contains(.duplicatePlanEntryID("migration.version_change.swiftdata.goal_record")))

@@ -162,7 +162,7 @@ struct StoreInspector: Sendable, Equatable, Hashable {
                 severity: severity(for: report.status),
                 summary: "SwiftData object-store health is \(report.status.rawValue).",
                 detail: "Read verified: \(report.readVerified); write verified: \(report.writeVerified); invariant blockers: \(report.invariantBlockerCount).",
-                repairHint: report.isGreen ? "Keep SwiftData limited to object-store responsibilities." : "Run StoreInvariantChecker and MigrationRepair before migration or release claims.",
+                repairHint: report.isGreen ? "Keep SwiftData limited to object-store responsibilities." : "Run StoreInvariantChecker in the Repair owner before migration or release claims.",
                 evidenceIDs: [report.schemaVersion, report.checkedAt],
                 privacy: .systemOwned,
                 generatedAt: generatedAt
@@ -177,7 +177,7 @@ struct StoreInspector: Sendable, Equatable, Hashable {
                 severity: issue.kind == .extensionSnapshotWriteFailure ? .warning : .critical,
                 summary: "Store health issue: \(issue.kind.rawValue).",
                 detail: issue.summary,
-                repairHint: "Repair local storage through MigrationRepair before widening backend health claims.",
+                repairHint: "Repair local storage through the Repair owner before widening backend health claims.",
                 evidenceIDs: [issue.id],
                 privacy: .privateSensitive,
                 generatedAt: generatedAt

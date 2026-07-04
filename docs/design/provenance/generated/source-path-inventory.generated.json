@@ -4757,211 +4757,6 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 99,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/CorruptionQuarantine.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 572,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/DryRunMigration.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 156,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/MigrationDSL.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 83,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/MigrationPlanner.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 330,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/PortableAppSnapshot.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 277,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/PortableSnapshotContracts.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 133,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/PortableSnapshotService.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 233,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/PortableSnapshotServiceOperations.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 295,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/PortableSnapshotServiceReferenceWarnings.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 139,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/PortableStoredGoalFeedbackEvent.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 247,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/PreMigrationBackup.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 185,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/RepairPlanEngine.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 219,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/RestoreRollback.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 228,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/RuntimeDoctor.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 734,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/RuntimeDoctorRepairOperator.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 359,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/SchemaLedger.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 373,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/StoreInvariantChecker.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
       "line_count": 35,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/AppStateStore.swift"
     },
@@ -6734,6 +6529,249 @@
       "kind": "native_source",
       "line_count": 35,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/YouProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 99,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Repair/CorruptionQuarantine.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 572,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Repair/DryRunMigration.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 156,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Repair/MigrationDSL.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 83,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Repair/MigrationPlanner.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 330,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Repair/PortableAppSnapshot.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 277,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Repair/PortableSnapshotContracts.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 133,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Repair/PortableSnapshotService.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 233,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Repair/PortableSnapshotServiceOperations.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 295,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Repair/PortableSnapshotServiceReferenceWarnings.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 139,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Repair/PortableStoredGoalFeedbackEvent.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 247,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Repair/PreMigrationBackup.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 185,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Repair/RepairPlanEngine.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 219,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Repair/RestoreRollback.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 228,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Repair/RuntimeDoctor.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 191,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Repair/RuntimeDoctorHealthReaders.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 276,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Repair/RuntimeDoctorRepairOperator.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 82,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Repair/RuntimeDoctorRepairPlans.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 191,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Repair/RuntimeDoctorRepairTypes.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 359,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Repair/SchemaLedger.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 373,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Repair/StoreInvariantChecker.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -19095,114 +19133,6 @@
     },
     {
       "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 222,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/DryRunMigrationTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 113,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/MigrationPlannerTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 92,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/MigrationRepairOwnershipTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 228,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/PreMigrationBackupTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 153,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/RepairPlanEngineTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 268,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/RestoreRollbackTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 444,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/RuntimeDoctorTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 99,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/SchemaLedgerTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 277,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/StoreInvariantCheckerTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
         "VSP-04",
         "VSP-05",
         "VSP-07",
@@ -19335,6 +19265,114 @@
       "kind": "test",
       "line_count": 307,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/Projections/LocalRuntimeOSProjectionsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 222,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/Repair/DryRunMigrationTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 113,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/Repair/MigrationPlannerTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 228,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/Repair/PreMigrationBackupTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 107,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/Repair/RepairOwnershipTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 153,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/Repair/RepairPlanEngineTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 268,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/Repair/RestoreRollbackTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 444,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/Repair/RuntimeDoctorTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 99,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/Repair/SchemaLedgerTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 277,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/Repair/StoreInvariantCheckerTests.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -23185,7 +23223,7 @@
       "path": "scripts/ambitions-quality-gate.py"
     }
   ],
-  "entry_count": 1869,
+  "entry_count": 1872,
   "generated_at": "deterministic-from-current-source-inputs",
   "generator": "scripts/ambitions-component-inventory-generate.py",
   "schema_version": 1

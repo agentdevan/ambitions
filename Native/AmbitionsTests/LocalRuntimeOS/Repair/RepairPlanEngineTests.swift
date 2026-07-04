@@ -46,7 +46,7 @@ struct RepairPlanTestingTests {
     @Test func readinessRejectsDuplicateProofIdentifiers() throws {
         let plan = Self.versionChangePlan()
         let mutation = try #require(plan.mutationEntries.first)
-        let duplicateProof = MigrationRepairProof(
+        let duplicateProof = RepairProof(
             id: "duplicate-proof",
             kind: .preMigrationBackupReceipt,
             subjectEntryID: mutation.id,
@@ -84,7 +84,7 @@ struct RepairPlanTestingTests {
 
     @Test func validatorIssuesExposeDeterministicFailureKinds() {
         let plan = MigrationPlan(
-            schemaVersion: "migration_repair_dsl.native.v0",
+            schemaVersion: "repair_dsl.native.v0",
             sourceLedgerSchemaVersion: SchemaLedger.current.schemaVersion,
             targetLedgerSchemaVersion: SchemaLedger.current.schemaVersion,
             entries: SchemaLedger.current.entries.map { entry in
@@ -136,10 +136,10 @@ struct RepairPlanTestingTests {
         )
     }
 
-    private static func completeProofs(for entry: MigrationPlanEntry) -> [MigrationRepairProof] {
+    private static func completeProofs(for entry: MigrationPlanEntry) -> [RepairProof] {
         MigrationPlanEntry.requiredMutationGates.map { gate in
             let kind = RepairPlanEngine.proofKind(for: gate)
-            return MigrationRepairProof(
+            return RepairProof(
                 id: "proof.\(entry.id).\(kind.rawValue)",
                 kind: kind,
                 subjectEntryID: entry.id,

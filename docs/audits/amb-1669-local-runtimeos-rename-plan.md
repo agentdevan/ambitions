@@ -17,7 +17,7 @@ This artifact records the current folder/type dependency graph, target runtime m
 
 ## Current Owner Graph
 
-Current source owner count after the `Search` slice: 19.
+Current source owner count after the `Repair` slice: 19.
 
 | Current owner | Swift files | Target owner | Status |
 | --- | ---: | --- | --- |
@@ -38,7 +38,7 @@ Current source owner count after the `Search` slice: 19.
 | SourceAtlas | 80 | SourceAtlas or ReferencePacks | Pending decision |
 | PrivacySecurity | 12 | Boundary or Privacy | Pending decision |
 | Storage | 27 | Storage | Retain name |
-| MigrationRepair | 17 | Repair | Pending |
+| Repair | 20 | Repair | Eighth slice renamed from `MigrationRepair` and split over-cap RuntimeDoctor repair operator types |
 | Diagnostics | 8 | Diagnostics | Retain name |
 
 ## First Rename Slice
@@ -235,14 +235,48 @@ Reason:
 - The ownership test now proves required `Search` files exist and the old
   `SearchRecall` production/test owner paths are gone.
 
+## Eighth Rename Slice
+
+Applied eighth:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/
+Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/
+```
+
+to:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/Repair/
+Native/AmbitionsTests/LocalRuntimeOS/Repair/
+```
+
+Reason:
+
+- `Repair` is explicitly named by AMB-1669 target direction and AMB-1670's
+  retained-owner test scope.
+- The old owner paired migration and repair as a folder-level name; retained
+  Swift types such as `MigrationDSL`, `MigrationPlanner`, `RuntimeDoctor`,
+  `RepairPlanEngine`, and `RestoreRollback` already carry the concrete
+  behavior plainly.
+- The move changes canonical ownership without changing runtime behavior.
+- Owner-facing repair proof API types now use `RepairProof*` names instead of
+  `MigrationRepairProof*` names, and the DSL schema string uses `repair_dsl`
+  instead of `migration_repair_dsl`.
+- The ownership test now proves required `Repair` files exist and the old
+  `MigrationRepair` production/test owner paths are gone.
+- The slice also splits the touched `RuntimeDoctorRepairOperator.swift` type
+  cluster into descriptive owner-local files, so the moved owner does not leave
+  a diff-scoped Swift file above the 600-line remediation cap.
+
 ## API Exposure
 
-The moved `Boundary`, `Commands`, `Transactions`, `Projections`, `ExternalWrites`, `Inspection`, and `Search` source contains no `public` or `open` Swift API declarations.
+The moved `Boundary`, `Commands`, `Transactions`, `Projections`, `ExternalWrites`, `Inspection`, `Search`, and `Repair` source contains no `public` or `open` Swift API declarations.
 
 Current exposure is same-module production/test use through Swift files under the existing `Ambitions` target and `AmbitionsTests` target. XcodeGen source discovery is directory-based through `project.yml`, so the move requires project regeneration but no package or target boundary change.
 
 Known direct consumers of the moved `Boundary`, `Commands`, `Transactions`,
-`Projections`, `ExternalWrites`, `Inspection`, and `Search` types remain same-module:
+`Projections`, `ExternalWrites`, `Inspection`, `Search`, and `Repair` types remain same-module:
 
 - `Commands`
 - `Transactions`
@@ -250,6 +284,7 @@ Known direct consumers of the moved `Boundary`, `Commands`, `Transactions`,
 - `ExternalWrites`
 - `Inspection`
 - `Search`
+- `Repair`
 - `PrivateLifeRuntimeKernel`
 - `PlanningEngine`
 - `TimeEngine`
@@ -275,8 +310,4 @@ This slice can support Source Green for the folder-owner rename if validation pa
 
 ## Next Rename Candidates
 
-Proceed one compartment at a time after guards pass:
-
-1. `MigrationRepair` -> `Repair`
-
-Each next slice must update tests, current truth/proof references, and the LocalRuntimeProof owner list before closeout.
+No further rename candidate is selected by this artifact after the eighth slice. Remaining pending rows require a final map decision pass before another source move; each future slice must update tests, current truth/proof references, and the LocalRuntimeProof owner list before closeout.

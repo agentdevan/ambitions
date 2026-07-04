@@ -1,6 +1,6 @@
 import Foundation
 
-let migrationDSLSchemaVersion = "migration_repair_dsl.native.v1"
+let migrationDSLSchemaVersion = "repair_dsl.native.v1"
 
 enum MigrationDSL {
     static let schemaVersion = migrationDSLSchemaVersion

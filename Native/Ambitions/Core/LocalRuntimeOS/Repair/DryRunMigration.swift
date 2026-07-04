@@ -93,7 +93,7 @@ struct DryRunMigrationReport: Sendable, Equatable {
     let invariantReport: StoreInvariantReport?
     let backupReport: PreMigrationBackupReport?
     let dryRunReport: PortableImportDryRunReport?
-    let systemProofs: [MigrationRepairProof]
+    let systemProofs: [RepairProof]
     let readiness: RepairPlan
     let recoveryAssessment: RuntimeDoctorAssessment
     let resetReview: MigrationResetReview
@@ -135,7 +135,7 @@ struct DryRunMigrationReport: Sendable, Equatable {
         invariantReport: StoreInvariantReport?,
         backupReport: PreMigrationBackupReport?,
         dryRunReport: PortableImportDryRunReport?,
-        systemProofs: [MigrationRepairProof],
+        systemProofs: [RepairProof],
         readiness: RepairPlan,
         recoveryAssessment: RuntimeDoctorAssessment,
         resetReview: MigrationResetReview,
@@ -225,7 +225,7 @@ struct DryRunMigration: Sendable {
         let invariantReport = await loadInvariantReport(blockers: &blockers)
         var backupReport: PreMigrationBackupReport?
         var dryRunReport: PortableImportDryRunReport?
-        var systemProofs: [MigrationRepairProof] = []
+        var systemProofs: [RepairProof] = []
 
         let hasMutation = plan.mutationEntries.isEmpty == false
         if hasMutation {
@@ -478,13 +478,13 @@ private extension DryRunMigration {
     }
 
     func proofs(
-        kind: MigrationRepairProofKind,
+        kind: RepairProofKind,
         plan: MigrationPlan,
         reviewID: String,
         summary: String
-    ) -> [MigrationRepairProof] {
+    ) -> [RepairProof] {
         plan.mutationEntries.map { entry in
-            MigrationRepairProof(
+            RepairProof(
                 id: "proof.\(reviewID).\(entry.id).\(kind.rawValue)",
                 kind: kind,
                 subjectEntryID: entry.id,

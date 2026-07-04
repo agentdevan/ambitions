@@ -44,7 +44,7 @@ REQUIRED_LOCAL_RUNTIME_OWNERS = [
     "SourceAtlas",
     "PrivacySecurity",
     "Storage",
-    "MigrationRepair",
+    "Repair",
     "Diagnostics",
 ]
 
@@ -85,7 +85,7 @@ INTEGRATION_MARKERS = {
         ],
     },
     "runtime_doctor_replay_repair": {
-        "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/RuntimeDoctor.swift",
+        "path": "Native/Ambitions/Core/LocalRuntimeOS/Repair/RuntimeDoctor.swift",
         "markers": [
             "replay_repair_required",
             "command_record_missing_runtime_event",
@@ -725,7 +725,7 @@ def check_command_event_reconciliation() -> CheckResult:
             "command.event_missing_journal_reference",
             "command.journal_link_missing_event",
         ],
-        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "MigrationRepair" / "RuntimeDoctor.swift": [
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Repair" / "RuntimeDoctor.swift": [
             "replay_repair_required",
             "command_record_missing_runtime_event",
             "runtime_event_missing_command_record",
@@ -2110,8 +2110,7 @@ def check_runtime_mutation_context_boundaries() -> CheckResult:
 def check_runtime_doctor_local_drift_repair_gate() -> CheckResult:
     findings: list[Finding] = []
     required_markers = {
-        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "MigrationRepair" / "RuntimeDoctorRepairOperator.swift": [
-            "runtimeDoctorRepairOperatorSchemaVersion",
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Repair" / "RuntimeDoctorRepairTypes.swift": [
             "RuntimeDoctorHealthDomain",
             "case commandJournal = \"command_journal\"",
             "case eventStore = \"event_store\"",
@@ -2123,6 +2122,17 @@ def check_runtime_doctor_local_drift_repair_gate() -> CheckResult:
             "case privacyBoundary = \"privacy_boundary\"",
             "case migrationState = \"migration_state\"",
             "case storageTier = \"storage_tier\"",
+            "RuntimeDoctorRepairActionKind",
+            "case projectionRebuild = \"projection_rebuild\"",
+            "case searchRebuild = \"search_rebuild\"",
+            "case commandEventReconciliation = \"command_event_reconciliation\"",
+            "case corruptBlobQuarantine = \"corrupt_blob_quarantine\"",
+            "case dryMigration = \"dry_migration\"",
+            "case preMigrationBackup = \"pre_migration_backup\"",
+            "case restoreBackup = \"restore_backup\"",
+            "case restoreRollback = \"restore_rollback\"",
+        ],
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Repair" / "RuntimeDoctorHealthReaders.swift": [
             "RuntimeDoctorHealthReaders",
             "func commandJournal(",
             "func eventStore(",
@@ -2134,30 +2144,32 @@ def check_runtime_doctor_local_drift_repair_gate() -> CheckResult:
             "func privacyBoundary(",
             "func migrationState(",
             "func storageTier(",
+        ],
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Repair" / "RuntimeDoctorRepairPlans.swift": [
             "RuntimeDoctorRepairPlan",
             "RuntimeDoctorRepairReceipt",
             "RuntimeDoctorRepairProof",
-            "case projectionRebuild = \"projection_rebuild\"",
-            "case searchRebuild = \"search_rebuild\"",
-            "case commandEventReconciliation = \"command_event_reconciliation\"",
-            "case corruptBlobQuarantine = \"corrupt_blob_quarantine\"",
-            "case dryMigration = \"dry_migration\"",
-            "case preMigrationBackup = \"pre_migration_backup\"",
-            "case restoreBackup = \"restore_backup\"",
-            "case restoreRollback = \"restore_rollback\"",
             "beforeProof",
             "expectedAfterProof",
+            "No private details leave this device.",
+        ],
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Repair" / "RuntimeDoctorRepairOperator.swift": [
+            "runtimeDoctorRepairOperatorSchemaVersion",
+            "RuntimeDoctorRepairOperator",
+            "diagnose(snapshot: RuntimeDoctorHealthSnapshot)",
+            "repairActions(",
+            "repairPlan(",
+            "for signal: RuntimeDoctorDriftSignal",
             "privatePayloadIncluded: false",
             "executionAllowed: false",
             "destructiveResetAllowed: false",
-            "No private details leave this device.",
         ],
-        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "MigrationRepair" / "RuntimeDoctor.swift": [
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Repair" / "RuntimeDoctor.swift": [
             "func diagnoseLocalDrift(",
             "RuntimeDoctorRepairOperator(",
             "diagnose(snapshot: snapshot)",
         ],
-        ROOT / "Native" / "AmbitionsTests" / "LocalRuntimeOS" / "MigrationRepair" / "RuntimeDoctorTests.swift": [
+        ROOT / "Native" / "AmbitionsTests" / "LocalRuntimeOS" / "Repair" / "RuntimeDoctorTests.swift": [
             "testLocalDriftReadersReturnReceiptBackedPreviewPlansForEveryRequiredDomain",
             "testYouDiagnosticsAreRedactedLocalOnlyAndDoNotExposePrivatePayloads",
             "testHealthyRuntimeDoctorReadersDoNotAuthorizeRepairExecution",
@@ -2173,8 +2185,11 @@ def check_runtime_doctor_local_drift_repair_gate() -> CheckResult:
             ".restoreRollback",
             "privatePayloadIncluded == false",
         ],
-        ROOT / "Native" / "AmbitionsTests" / "LocalRuntimeOS" / "MigrationRepair" / "MigrationRepairOwnershipTests.swift": [
+        ROOT / "Native" / "AmbitionsTests" / "LocalRuntimeOS" / "Repair" / "RepairOwnershipTests.swift": [
             "RuntimeDoctorRepairOperator.swift",
+            "RuntimeDoctorRepairTypes.swift",
+            "RuntimeDoctorHealthReaders.swift",
+            "RuntimeDoctorRepairPlans.swift",
         ],
     }
     for path, markers in required_markers.items():
