@@ -1,6 +1,6 @@
 import Foundation
 
-enum SyncContinuitySourceAuthority: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+enum ContinuitySourceAuthority: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
     case runtimeEvent = "runtime_event"
     case approvedProjection = "approved_projection"
     case directObjectStore = "direct_object_store"
@@ -17,7 +17,7 @@ enum SyncContinuitySourceAuthority: String, Codable, Sendable, Equatable, Hashab
     }
 }
 
-enum SyncContinuityAuthorityIssue: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+enum ContinuityAuthorityIssue: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
     case nonRuntimeSource = "non_runtime_source"
     case missingRuntimeLineage = "missing_runtime_lineage"
     case privacyClassDenied = "privacy_class_denied"
@@ -27,9 +27,9 @@ enum SyncContinuityAuthorityIssue: String, Codable, Sendable, Equatable, Hashabl
     case accountRequiredForCoreUse = "account_required_for_core_use"
 }
 
-struct SyncContinuityAuthorityEvidence: Sendable, Equatable {
+struct ContinuityAuthorityEvidence: Sendable, Equatable {
     let envelope: CloudKitContinuityPortableRecordEnvelope
-    let sourceAuthority: SyncContinuitySourceAuthority
+    let sourceAuthority: ContinuitySourceAuthority
     let privacyClass: RuntimePrivacyClass
     let runtimeEventID: String?
     let approvedProjectionID: String?
@@ -39,7 +39,7 @@ struct SyncContinuityAuthorityEvidence: Sendable, Equatable {
 
     init(
         envelope: CloudKitContinuityPortableRecordEnvelope,
-        sourceAuthority: SyncContinuitySourceAuthority,
+        sourceAuthority: ContinuitySourceAuthority,
         privacyClass: RuntimePrivacyClass,
         runtimeEventID: String? = nil,
         approvedProjectionID: String? = nil,
@@ -50,28 +50,28 @@ struct SyncContinuityAuthorityEvidence: Sendable, Equatable {
         self.envelope = envelope
         self.sourceAuthority = sourceAuthority
         self.privacyClass = privacyClass
-        self.runtimeEventID = runtimeEventID?.trimmingCharacters(in: .whitespacesAndNewlines).syncContinuityNilIfEmpty
-        self.approvedProjectionID = approvedProjectionID?.trimmingCharacters(in: .whitespacesAndNewlines).syncContinuityNilIfEmpty
+        self.runtimeEventID = runtimeEventID?.trimmingCharacters(in: .whitespacesAndNewlines).continuityNilIfEmpty
+        self.approvedProjectionID = approvedProjectionID?.trimmingCharacters(in: .whitespacesAndNewlines).continuityNilIfEmpty
         self.localStoreAuthoritative = localStoreAuthoritative
         self.attemptsBackendAuthority = attemptsBackendAuthority
         self.accountRequiredForCoreUse = accountRequiredForCoreUse
     }
 }
 
-struct SyncContinuityAuthorityDecision: Codable, Sendable, Equatable, Hashable {
+struct ContinuityAuthorityDecision: Codable, Sendable, Equatable, Hashable {
     let id: String
     let allowedForLocalOutbox: Bool
     let allowedForCloudKitTransport: Bool
     let requiresLocalReview: Bool
     let localStoreRemainsAuthoritative: Bool
-    let issues: [SyncContinuityAuthorityIssue]
+    let issues: [ContinuityAuthorityIssue]
     let reasons: [String]
     let nonClaims: [String]
 }
 
-struct SyncContinuityAuthorityGate: Sendable, Equatable {
-    func evaluate(_ evidence: SyncContinuityAuthorityEvidence) -> SyncContinuityAuthorityDecision {
-        var issues: [SyncContinuityAuthorityIssue] = []
+struct ContinuityAuthorityGate: Sendable, Equatable {
+    func evaluate(_ evidence: ContinuityAuthorityEvidence) -> ContinuityAuthorityDecision {
+        var issues: [ContinuityAuthorityIssue] = []
         var reasons: [String] = []
 
         if evidence.localStoreAuthoritative == false {
@@ -81,7 +81,7 @@ struct SyncContinuityAuthorityGate: Sendable, Equatable {
 
         if evidence.attemptsBackendAuthority {
             issues.append(.backendAuthorityAttempt)
-            reasons.append("sync_continuity_cannot_become_backend_authority")
+            reasons.append("continuity_cannot_become_backend_authority")
         }
 
         if evidence.accountRequiredForCoreUse {
@@ -101,19 +101,19 @@ struct SyncContinuityAuthorityGate: Sendable, Equatable {
 
         if privacyClassAllowsContinuityTransport(evidence.privacyClass) == false {
             issues.append(.privacyClassDenied)
-            reasons.append("privacy_class_\(evidence.privacyClass.rawValue)_cannot_enter_sync_continuity")
+            reasons.append("privacy_class_\(evidence.privacyClass.rawValue)_cannot_enter_continuity")
         }
 
         if evidence.envelope.payloadClass.eligibleForContinuityEnvelope == false {
             issues.append(.privatePayloadClassDenied)
-            reasons.append("payload_class_\(evidence.envelope.payloadClass.rawValue)_cannot_enter_sync_continuity")
+            reasons.append("payload_class_\(evidence.envelope.payloadClass.rawValue)_cannot_enter_continuity")
         }
 
         let orderedIssues = orderedUnique(issues)
         let transportAllowed = orderedIssues.isEmpty && evidence.envelope.canEnterCloudKitContinuity
 
-        return SyncContinuityAuthorityDecision(
-            id: "sync_continuity_authority.\(evidence.envelope.id)",
+        return ContinuityAuthorityDecision(
+            id: "continuity_authority.\(evidence.envelope.id)",
             allowedForLocalOutbox: evidence.localStoreAuthoritative,
             allowedForCloudKitTransport: transportAllowed,
             requiresLocalReview: transportAllowed == false,
@@ -122,13 +122,13 @@ struct SyncContinuityAuthorityGate: Sendable, Equatable {
             reasons: orderedUnique(reasons),
             nonClaims: [
                 "productionCloudKitContinuityNonClaim",
-                "syncContinuityTransportIsNotBackendAuthority",
+                "continuityTransportIsNotBackendAuthority",
                 "privateLifeGraphBackendAuthorityDenied",
             ]
         )
     }
 
-    private func hasRequiredLineage(_ evidence: SyncContinuityAuthorityEvidence) -> Bool {
+    private func hasRequiredLineage(_ evidence: ContinuityAuthorityEvidence) -> Bool {
         switch evidence.sourceAuthority {
         case .runtimeEvent:
             return evidence.runtimeEventID != nil ||
@@ -158,7 +158,7 @@ struct SyncContinuityAuthorityGate: Sendable, Equatable {
 }
 
 private extension String {
-    var syncContinuityNilIfEmpty: String? {
+    var continuityNilIfEmpty: String? {
         isEmpty ? nil : self
     }
 }

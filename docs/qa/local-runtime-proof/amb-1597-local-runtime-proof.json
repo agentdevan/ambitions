@@ -80,10 +80,10 @@
       "summary": "SourceAtlas/R2 request, gateway, endpoint, manifest/cache/LKG, and projection paths are gated as public-reference-only."
     },
     {
-      "checkId": "sync_continuity_backend_authority_gate",
+      "checkId": "continuity_backend_authority_gate",
       "findings": [],
       "status": "pass",
-      "summary": "SyncContinuity gates transport eligibility by runtime/projection source, privacy class, local authority, conflict review, and account cleanup non-authority."
+      "summary": "Continuity gates transport eligibility by runtime/projection source, privacy class, local authority, conflict review, and account cleanup non-authority."
     },
     {
       "checkId": "capture_intake_durability_gate",

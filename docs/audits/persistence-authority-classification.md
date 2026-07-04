@@ -68,7 +68,7 @@ private life graph backend.
 - `git ls-remote origin refs/heads/main`
 - `find Native/Ambitions/Core/Persistence -maxdepth 3 -type f -name '*.swift' | sort`
 - `find Native/Ambitions/Core/LocalRuntimeOS/Storage -maxdepth 3 -type f -name '*.swift' | sort`
-- `find Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity -maxdepth 2 -type f -name '*.swift' | sort`
+- `find Native/Ambitions/Core/LocalRuntimeOS/Continuity -maxdepth 2 -type f -name '*.swift' | sort`
 - `wc -l Native/Ambitions/Core/Persistence/*.swift Native/Ambitions/Core/LocalRuntimeOS/Storage/*.swift`
 - Static source scan for `SwiftData`, `ModelContext`, `store.write`,
   `context.insert`, `context.delete`, `save`, `fetch`, `CloudKit`, `CK`,
@@ -78,7 +78,7 @@ private life graph backend.
 - Test-source inspection of:
   - `Native/AmbitionsTests/Persistence/CorePersistenceCanonicalOwnershipTests.swift`
   - `Native/AmbitionsTests/LocalRuntimeOS/Storage/StorageTierTests.swift`
-  - `Native/AmbitionsTests/LocalRuntimeOS/SyncContinuity/*.swift`
+  - `Native/AmbitionsTests/LocalRuntimeOS/Continuity/*.swift`
 
 ## Classification Summary
 
@@ -86,7 +86,7 @@ private life graph backend.
 | --- | ---: | --- |
 | `Core/Persistence` | 34 | Legacy persistence remains a mixed storage, repository, import, diagnostics, and preview support owner. Several files can still support durable writes outside the LocalRuntimeOS mutation law. |
 | `Core/LocalRuntimeOS/Storage` | 9 | Canonical storage tier source exists for event, projection, search, object, blob, app-group snapshot, backup, and migration stores. It is storage authority only, not proof every app path consumes it safely. |
-| `Core/LocalRuntimeOS/SyncContinuity` | 10 | CloudKit continuity source exists under LocalRuntimeOS with local-authoritative and privacy-gated vocabulary. It is not production CloudKit readiness or private graph sync approval. |
+| `Core/LocalRuntimeOS/Continuity` | 10 | CloudKit continuity source exists under LocalRuntimeOS with local-authoritative and privacy-gated vocabulary. It is not production CloudKit readiness or private graph sync approval. |
 
 Role legend:
 
@@ -107,7 +107,7 @@ Proof code legend:
 | P-REJECT | AMB-1719 direct-save proof in `docs/audits/persistence-direct-save-rejection-proof.md`: direct persistence writes fail, are impossible from production roots, or remain explicit unsafe debt. Current result is Implemented Yellow explicit unsafe debt. |
 | P-MIGRATE | AMB-1720 migration proof plan in `docs/audits/persistence-existing-data-migration-proof-plan.md`, with fixtures, replay expectations, failure modes, and no migration Green without executable evidence. Implemented Yellow plan only. |
 | P-STORAGE | Focused storage tests plus proof that the storage tier is substrate only and not business-decision authority. |
-| P-CLOUDKIT | SyncContinuity tests plus privacy/no-private-graph evidence before any CloudKit continuity claim; no production CloudKit claim without release proof. |
+| P-CLOUDKIT | Continuity tests plus privacy/no-private-graph evidence before any CloudKit continuity claim; no production CloudKit claim without release proof. |
 | P-DIAGNOSTIC | Proof that diagnostics/health/readers are read-only or review-only and cannot authorize durable repair or mutation. |
 
 Direct-mutation status legend:
@@ -140,12 +140,12 @@ Direct-mutation status legend:
 | `Native/Ambitions/Core/Persistence/PortableSnapshotService+02-PortableSnapshotService.swift` | Legacy direct mutation | `Core/LocalRuntimeOS/MigrationRepair`, `BackupStore`, `ObjectState`, and `TrustSystem` | P-MAP, P-REJECT, P-MIGRATE | Unsafe import/replace/merge apply path saves through legacy repositories. |
 | `Native/Ambitions/Core/Persistence/PortableSnapshotService+02-PortableSnapshotService+03-referenceWarnings.swift` | Migration | `Core/LocalRuntimeOS/MigrationRepair` | P-MAP, P-MIGRATE | Reference warning/read helper; no direct write found. |
 | `Native/Ambitions/Core/Persistence/PreviewCaptureRepository.swift` | Cache | Test/preview support or `Core/LocalRuntimeOS/CaptureRouting` fixture boundary | P-MAP, P-REJECT | Preview/test cache only; not production mutation proof. |
-| `Native/Ambitions/Core/Persistence/StoragePackageBoundaryModels.swift` | CloudKit continuity | `Diagnostics`/`Quality` boundary reporting, with SyncContinuity references under `Core/LocalRuntimeOS/SyncContinuity` | P-MAP, P-CLOUDKIT | Read/diagnostic boundary model; no direct write found, but stale package-boundary vocabulary cannot become source authority. |
+| `Native/Ambitions/Core/Persistence/StoragePackageBoundaryModels.swift` | CloudKit continuity | `Diagnostics`/`Quality` boundary reporting, with Continuity references under `Core/LocalRuntimeOS/Continuity` | P-MAP, P-CLOUDKIT | Read/diagnostic boundary model; no direct write found, but stale package-boundary vocabulary cannot become source authority. |
 | `Native/Ambitions/Core/Persistence/StoreHealthCheck.swift` | Migration | `Core/LocalRuntimeOS/MigrationRepair` and `Diagnostics` | P-MAP, P-DIAGNOSTIC, P-MIGRATE | Diagnostic write probe uses `store.write`; not product mutation authority and must remain review/health scoped. |
 | `Native/Ambitions/Core/Persistence/SupportDiagnosticsBundle.swift` | Cache | `Diagnostics` plus `PrivacySecurity` for redaction/export limits | P-MAP, P-DIAGNOSTIC | Read/diagnostic export payload support; no direct product write found. |
 | `Native/Ambitions/Core/Persistence/SwiftDataModels.swift` | Legacy direct mutation | `Core/LocalRuntimeOS/Storage/ObjectStoreSwiftData` plus family owners in AMB-1718 | P-MAP, P-REJECT | Model authority outside canonical owner for private graph records. |
 | `Native/Ambitions/Core/Persistence/SwiftDataModels+02-CaptureRecord.swift` | Legacy direct mutation | `ObjectStoreSwiftData`, `CaptureRouting`, `TrustSystem`, and `Commands` by record family | P-MAP, P-REJECT | Model authority outside canonical owner for captures, commands, side effects, and receipt-related records. |
-| `Native/Ambitions/Core/Persistence/SwiftDataModels+03-EntityRevisionTombstoneRecord.swift` | Legacy direct mutation | `ObjectStoreSwiftData`, `TrustSystem`, `SyncContinuity`, and `MigrationRepair` by record family | P-MAP, P-REJECT, P-MIGRATE | Model authority outside canonical owner for tombstones, proof/source/history, and sync-adjacent records. |
+| `Native/Ambitions/Core/Persistence/SwiftDataModels+03-EntityRevisionTombstoneRecord.swift` | Legacy direct mutation | `ObjectStoreSwiftData`, `TrustSystem`, `Continuity`, and `MigrationRepair` by record family | P-MAP, P-REJECT, P-MIGRATE | Model authority outside canonical owner for tombstones, proof/source/history, and sync-adjacent records. |
 | `Native/Ambitions/Core/Persistence/SwiftDataModels+04-AmbitionGraphProjectionRecordModel.swift` | Projection storage | `Core/LocalRuntimeOS/Projections` and `Core/LocalRuntimeOS/Storage/ProjectionStoreSQLite` | P-MAP, P-REJECT, P-STORAGE | Legacy SwiftData projection-record model outside canonical projection storage. |
 | `Native/Ambitions/Core/Persistence/SwiftDataRepositories.swift` | Legacy direct mutation | `ObjectStoreSwiftData` and family-specific LocalRuntimeOS owners | P-MAP, P-REJECT | Legacy repository helper surface outside canonical storage owner. |
 | `Native/Ambitions/Core/Persistence/SwiftDataRepositories+02-RepositoryMapping.swift` | Legacy direct mutation | `ObjectStoreSwiftData` mapping boundary only | P-MAP, P-REJECT | Mapping namespace enables legacy repository writes. |
@@ -173,16 +173,16 @@ Direct-mutation status legend:
 | `Native/Ambitions/Core/LocalRuntimeOS/Storage/ObjectStoreSwiftData.swift` | Legacy direct mutation | Already under `Core/LocalRuntimeOS/Storage`; consumes legacy SwiftData record types until AMB-1718/AMB-1719 resolves mapping | P-STORAGE, P-MAP, P-REJECT | Canonical storage substrate, not business-decision authority; must stay behind command/transaction/receipt context. |
 | `Native/Ambitions/Core/LocalRuntimeOS/Storage/ProjectionStoreSQLite.swift` | Projection storage | Already under `Core/LocalRuntimeOS/Storage` | P-STORAGE | Canonical projection-store substrate; does not prove all UI reads consume it. |
 | `Native/Ambitions/Core/LocalRuntimeOS/Storage/SearchStoreFTS.swift` | Cache | Already under `Core/LocalRuntimeOS/Storage` | P-STORAGE | Canonical search-index substrate fed by projections; not private graph mutation authority. |
-| `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/AccountStateMachine.swift` | CloudKit continuity | Already under `Core/LocalRuntimeOS/SyncContinuity` | P-CLOUDKIT | Continuity state helper; no production CloudKit readiness claim. |
-| `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/CausalMergeEngine.swift` | CloudKit continuity | Already under `Core/LocalRuntimeOS/SyncContinuity` | P-CLOUDKIT | Merge/conflict vocabulary only; no remote apply Green claim. |
-| `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/CloudKitContinuityAdapter.swift` | CloudKit continuity | Already under `Core/LocalRuntimeOS/SyncContinuity` | P-CLOUDKIT | Zone setup/outbox source exists; not private graph sync approval or production CloudKit readiness. |
-| `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/ConflictPolicyEngine.swift` | CloudKit continuity | Already under `Core/LocalRuntimeOS/SyncContinuity` | P-CLOUDKIT | Conflict policy source only; no remote apply Green claim. |
-| `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/LocalAuthoritativeSyncModel.swift` | CloudKit continuity | Already under `Core/LocalRuntimeOS/SyncContinuity` | P-CLOUDKIT | Local-authoritative model; no private graph backend approval. |
-| `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SignOutDeleteResetCoordinator.swift` | CloudKit continuity | Already under `Core/LocalRuntimeOS/SyncContinuity` | P-CLOUDKIT | Account/reset continuity helper; not data deletion/export release proof. |
-| `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SyncContinuityAuthorityGate.swift` | CloudKit continuity | Already under `Core/LocalRuntimeOS/SyncContinuity` | P-CLOUDKIT | Authority gate source; privacy/legal proof still required for release-facing claims. |
-| `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SyncEligibilityPolicy.swift` | CloudKit continuity | Already under `Core/LocalRuntimeOS/SyncContinuity` | P-CLOUDKIT | Eligibility policy source; no production CloudKit readiness claim. |
-| `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SyncEnvelope.swift` | CloudKit continuity | Already under `Core/LocalRuntimeOS/SyncContinuity` | P-CLOUDKIT | Continuity envelope/source data model; private-sensitive payload denial remains proof-gated. |
-| `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/TombstoneSync.swift` | CloudKit continuity | Already under `Core/LocalRuntimeOS/SyncContinuity` | P-CLOUDKIT | Tombstone sync metadata source; no remote private graph apply Green claim. |
+| `Native/Ambitions/Core/LocalRuntimeOS/Continuity/AccountStateMachine.swift` | CloudKit continuity | Already under `Core/LocalRuntimeOS/Continuity` | P-CLOUDKIT | Continuity state helper; no production CloudKit readiness claim. |
+| `Native/Ambitions/Core/LocalRuntimeOS/Continuity/CausalMergeEngine.swift` | CloudKit continuity | Already under `Core/LocalRuntimeOS/Continuity` | P-CLOUDKIT | Merge/conflict vocabulary only; no remote apply Green claim. |
+| `Native/Ambitions/Core/LocalRuntimeOS/Continuity/CloudKitContinuityClient.swift` | CloudKit continuity | Already under `Core/LocalRuntimeOS/Continuity` | P-CLOUDKIT | Zone setup/outbox source exists; not private graph sync approval or production CloudKit readiness. |
+| `Native/Ambitions/Core/LocalRuntimeOS/Continuity/ConflictPolicyEngine.swift` | CloudKit continuity | Already under `Core/LocalRuntimeOS/Continuity` | P-CLOUDKIT | Conflict policy source only; no remote apply Green claim. |
+| `Native/Ambitions/Core/LocalRuntimeOS/Continuity/LocalAuthoritativeSyncModel.swift` | CloudKit continuity | Already under `Core/LocalRuntimeOS/Continuity` | P-CLOUDKIT | Local-authoritative model; no private graph backend approval. |
+| `Native/Ambitions/Core/LocalRuntimeOS/Continuity/SignOutDeleteResetCoordinator.swift` | CloudKit continuity | Already under `Core/LocalRuntimeOS/Continuity` | P-CLOUDKIT | Account/reset continuity helper; not data deletion/export release proof. |
+| `Native/Ambitions/Core/LocalRuntimeOS/Continuity/ContinuityAuthorityGate.swift` | CloudKit continuity | Already under `Core/LocalRuntimeOS/Continuity` | P-CLOUDKIT | Authority gate source; privacy/legal proof still required for release-facing claims. |
+| `Native/Ambitions/Core/LocalRuntimeOS/Continuity/SyncEligibilityPolicy.swift` | CloudKit continuity | Already under `Core/LocalRuntimeOS/Continuity` | P-CLOUDKIT | Eligibility policy source; no production CloudKit readiness claim. |
+| `Native/Ambitions/Core/LocalRuntimeOS/Continuity/SyncEnvelope.swift` | CloudKit continuity | Already under `Core/LocalRuntimeOS/Continuity` | P-CLOUDKIT | Continuity envelope/source data model; private-sensitive payload denial remains proof-gated. |
+| `Native/Ambitions/Core/LocalRuntimeOS/Continuity/TombstoneSync.swift` | CloudKit continuity | Already under `Core/LocalRuntimeOS/Continuity` | P-CLOUDKIT | Tombstone sync metadata source; no remote private graph apply Green claim. |
 
 ## AMB-1717 Findings
 
@@ -205,7 +205,7 @@ Direct-mutation status legend:
 - `Core/LocalRuntimeOS/Storage` is the canonical storage owner, but its source
   presence does not prove every production app path consumes only the
   canonical storage tier.
-- `SyncContinuity` is the CloudKit continuity owner. Current source does not
+- `Continuity` is the CloudKit continuity owner. Current source does not
   prove approved private graph sync, production CloudKit behavior, privacy/legal
   approval, or release readiness.
 
@@ -230,7 +230,7 @@ Direct-mutation status legend:
   - Result: passed.
 - Read-only coverage scanner against this audit:
   - Result: `missing_count=0` for `Core/Persistence`,
-    `Core/LocalRuntimeOS/Storage`, and `Core/LocalRuntimeOS/SyncContinuity`.
+    `Core/LocalRuntimeOS/Storage`, and `Core/LocalRuntimeOS/Continuity`.
 
 ## Validation Not Run
 

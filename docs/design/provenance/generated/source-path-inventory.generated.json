@@ -4051,6 +4051,122 @@
     {
       "candidate_vsp_ids": [
         "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 174,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Continuity/AccountStateMachine.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 180,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Continuity/CausalMergeEngine.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 358,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Continuity/CloudKitContinuityClient.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 76,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Continuity/ConflictPolicyEngine.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 165,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Continuity/ContinuityAuthorityGate.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 260,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Continuity/LocalAuthoritativeSyncModel.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 118,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Continuity/SignOutDeleteResetCoordinator.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 320,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Continuity/SyncEligibilityPolicy.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 243,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Continuity/SyncEnvelope.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 80,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Continuity/TombstoneSync.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
         "VSP-07",
         "VSP-10"
       ],
@@ -8568,122 +8684,6 @@
       "kind": "native_source",
       "line_count": 170,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/Storage/SwiftDataRuntimeSnapshotLedgerRepository.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 174,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/AccountStateMachine.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 180,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/CausalMergeEngine.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 358,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/CloudKitContinuityAdapter.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 76,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/ConflictPolicyEngine.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 260,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/LocalAuthoritativeSyncModel.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 118,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SignOutDeleteResetCoordinator.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 165,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SyncContinuityAuthorityGate.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 320,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SyncEligibilityPolicy.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 243,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SyncEnvelope.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 80,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/TombstoneSync.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -18906,6 +18906,55 @@
     {
       "candidate_vsp_ids": [
         "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 224,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/Continuity/CloudKitContinuityFoundationTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 474,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/Continuity/ContinuityTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 30,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/Continuity/LivingPlanContinuitySyncTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 110,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/Continuity/SyncCapabilityTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
         "VSP-05",
         "VSP-07",
         "VSP-09",
@@ -20008,55 +20057,6 @@
       "kind": "test",
       "line_count": 358,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/Storage/StorageTierTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 224,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/SyncContinuity/CloudKitContinuityFoundationTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 30,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/SyncContinuity/LivingPlanContinuitySyncTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 110,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/SyncContinuity/SyncCapabilityTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 472,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/SyncContinuity/SyncContinuityTests.swift"
     },
     {
       "candidate_vsp_ids": [

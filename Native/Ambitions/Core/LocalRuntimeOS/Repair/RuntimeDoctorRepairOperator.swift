@@ -79,8 +79,8 @@ struct RuntimeDoctorRepairOperator: Sendable {
             return [.corruptBlobQuarantine]
         case .sideEffectOutbox:
             return [.sideEffectOutboxReconcile]
-        case .syncContinuity:
-            return [.syncContinuityHold]
+        case .continuity:
+            return [.continuityHold]
         case .privacyBoundary:
             return [.privacyRedactionReview]
         case .migrationState:
@@ -184,7 +184,7 @@ struct RuntimeDoctorRepairOperator: Sendable {
                 "Hold external attempts without commit proof.",
                 "Preview retry, drop, or rollback choices locally.",
             ]
-        case .syncContinuityHold:
+        case .continuityHold:
             return [
                 "Keep local storage authoritative.",
                 "Hold continuity metadata locally until proof is valid.",
@@ -244,7 +244,7 @@ struct RuntimeDoctorRepairOperator: Sendable {
             return "Corrupt blob references are quarantined before cleanup."
         case .sideEffectOutboxReconcile:
             return "External handoff queue only contains attempts backed by local receipts."
-        case .syncContinuityHold:
+        case .continuityHold:
             return "Continuity remains metadata-only and local storage stays authoritative."
         case .privacyRedactionReview:
             return "Diagnostics are redacted and local-only before inspection."

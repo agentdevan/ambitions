@@ -215,7 +215,7 @@ run_xcode_tests() {
     -only-testing:AmbitionsTests/ExternalWritesTests
     -only-testing:AmbitionsTests/PrivacySecurityTests
     -only-testing:AmbitionsTests/SourceAtlasPublicOnlyBoundaryGateTests
-    -only-testing:AmbitionsTests/SyncContinuityTests
+    -only-testing:AmbitionsTests/ContinuityTests
     -only-testing:AmbitionsTests/RuntimeDoctorTests
     -only-testing:AmbitionsTests/StoreInvariantCheckerTests
     -only-testing:AmbitionsTests/LocalRuntimeDiagnosticsTests

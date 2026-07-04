@@ -870,7 +870,7 @@
       "target_initiative": "Private Life Runtime / LocalRuntimeOS",
       "current_state_if_known": "Repo contains LocalRuntimeOS source and a scoped LocalRuntimeProof Gate Green artifact, but app-wide runtime/device/release proof remains Yellow.",
       "recommended_action": "CREATE",
-      "why": "Repo evidence maps Private Life Runtime, LocalRuntimeOS, CommandSpine, TransactionKernel, EventJournal, ProjectionEngine, ObjectState, Planning, TimeEngine, CaptureRouting, TrustSystem, SearchRecall, SideEffectSystem, SyncContinuity, Diagnostics to this project, but Linear needs explicit dossier, parent feature, Codex leaf, proof, and non-claim structure.",
+      "why": "Repo evidence maps Private Life Runtime, LocalRuntimeOS, CommandSpine, TransactionKernel, EventJournal, ProjectionEngine, ObjectState, Planning, TimeEngine, CaptureRouting, TrustSystem, SearchRecall, SideEffectSystem, Continuity, Diagnostics to this project, but Linear needs explicit dossier, parent feature, Codex leaf, proof, and non-claim structure.",
       "repo_evidence": [
         "README.md",
         "AGENTS.md",

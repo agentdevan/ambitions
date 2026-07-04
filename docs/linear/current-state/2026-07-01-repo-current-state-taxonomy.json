@@ -446,12 +446,12 @@
       "gap_classification": "DO_NOT_PROMOTE"
     },
     {
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/; entitlements in project.yml",
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Continuity/; entitlements in project.yml",
       "app_aspect": "Sync / continuity",
       "private_life_orchestration_role": "Optional continuity scaffolding; never core authority and never required for offline core value.",
       "orchestration_layer": "External adapter, never core authority",
-      "source_owner_system": "Final Architecture Tree owner: Core/LocalRuntimeOS/SyncContinuity plus project entitlements.",
-      "current_repo_evidence": "SyncContinuity source and CloudKit entitlement references exist; truth docs forbid treating account/sync as required core value.",
+      "source_owner_system": "Final Architecture Tree owner: Core/LocalRuntimeOS/Continuity plus project entitlements.",
+      "current_repo_evidence": "Continuity source and CloudKit entitlement references exist; truth docs forbid treating account/sync as required core value.",
       "existing_linear_object": "initiative: Ambitions Native iPhone App Control Plane; VSP-08 external boundary references.",
       "missing_linear_object": "Missing optional sync/account boundary project with privacy/legal authority; no approved private graph sync architecture found.",
       "runtime_mutation_path": "Sync cannot become source of truth; any future sync must replay local events under explicit future canon.",
@@ -735,7 +735,7 @@
       "gap_classification": "DO_NOT_PROMOTE"
     },
     {
-      "path": "project.yml entitlements; Native/Ambitions/Surfaces/You/ account copy; Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/",
+      "path": "project.yml entitlements; Native/Ambitions/Surfaces/You/ account copy; Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
       "app_aspect": "Account / optional sign-in / entitlement / paywall / pricing",
       "private_life_orchestration_role": "Optional identity and entitlement layer that must not be required for offline core orchestration.",
       "orchestration_layer": "Life-data boundary",

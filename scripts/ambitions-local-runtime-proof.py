@@ -40,7 +40,7 @@ REQUIRED_LOCAL_RUNTIME_OWNERS = [
     "Inspection",
     "Search",
     "ExternalWrites",
-    "SyncContinuity",
+    "Continuity",
     "SourceAtlas",
     "PrivacySecurity",
     "Storage",
@@ -378,9 +378,9 @@ LRO_100_CHECKLIST: list[ChecklistSpec] = [
     ChecklistSpec(
         "lro100-12-sync-non-authority",
         "sync",
-        "SyncContinuity non-authority",
-        "sync_continuity_backend_authority_gate",
-        "SyncContinuity must not become backend authority and must preserve local runtime/projection authority.",
+        "Continuity non-authority",
+        "continuity_backend_authority_gate",
+        "Continuity must not become backend authority and must preserve local runtime/projection authority.",
     ),
     ChecklistSpec(
         "lro100-13-capture-durable-intake",
@@ -1535,17 +1535,17 @@ def check_source_atlas_r2_public_only_gate() -> CheckResult:
     )
 
 
-def check_sync_continuity_backend_authority_gate() -> CheckResult:
+def check_continuity_backend_authority_gate() -> CheckResult:
     findings: list[Finding] = []
     required_markers = {
-        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SyncContinuityAuthorityGate.swift": [
-            "enum SyncContinuitySourceAuthority",
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/Continuity/ContinuityAuthorityGate.swift": [
+            "enum ContinuitySourceAuthority",
             "case runtimeEvent",
             "case approvedProjection",
             "case directObjectStore",
             "case remoteBackend",
-            "struct SyncContinuityAuthorityGate",
-            "func evaluate(_ evidence: SyncContinuityAuthorityEvidence)",
+            "struct ContinuityAuthorityGate",
+            "func evaluate(_ evidence: ContinuityAuthorityEvidence)",
             ".nonRuntimeSource",
             ".privacyClassDenied",
             ".backendAuthorityAttempt",
@@ -1554,10 +1554,10 @@ def check_sync_continuity_backend_authority_gate() -> CheckResult:
             "productionCloudKitContinuityNonClaim",
             "privateLifeGraphBackendAuthorityDenied",
         ],
-        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SyncEligibilityPolicy.swift": [
-            "let authorityGate: SyncContinuityAuthorityGate",
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/Continuity/SyncEligibilityPolicy.swift": [
+            "let authorityGate: ContinuityAuthorityGate",
             "authorityGate.evaluate",
-            "sourceAuthority: SyncContinuitySourceAuthority",
+            "sourceAuthority: ContinuitySourceAuthority",
             "privacyClass: RuntimePrivacyClass",
             "localStoreAuthoritative: Bool",
             "attemptsBackendAuthority: Bool",
@@ -1568,7 +1568,7 @@ def check_sync_continuity_backend_authority_gate() -> CheckResult:
             "case deniedPrivacyClass",
             "case deniedNonRuntimeAuthority",
         ],
-        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SignOutDeleteResetCoordinator.swift": [
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/Continuity/SignOutDeleteResetCoordinator.swift": [
             "offlineCoreAvailableAfterCleanup",
             "privateGraphBackendAuthorityAllowed",
             "localDataRetained: true",
@@ -1576,13 +1576,13 @@ def check_sync_continuity_backend_authority_gate() -> CheckResult:
             "privateGraphBackendAuthorityAllowed: false",
             "localStoreRemainsAuthoritative: true",
         ],
-        ROOT / "Native/AmbitionsTests/LocalRuntimeOS/SyncContinuity/SyncContinuityTests.swift": [
+        ROOT / "Native/AmbitionsTests/LocalRuntimeOS/Continuity/ContinuityTests.swift": [
             "testAuthorityGateAllowsOnlyRuntimeEventsAndApprovedProjections",
             "testAuthorityGateDeniesPrivatePrivacyClassesAndBackendAuthority",
             "testNoAccountOfflineCoreStaysLocalAuthoritative",
             "testSameClockPayloadDriftQueuesLocalReviewInsteadOfSilentOverwrite",
             "testSignOutDeleteResetCoordinatorRetainsLocalDataAndRevokesRemoteAuthority",
-            "SyncContinuityAuthorityGate",
+            "ContinuityAuthorityGate",
             ".directObjectStore",
             ".remoteBackend",
             ".privateUserText",
@@ -1595,10 +1595,10 @@ def check_sync_continuity_backend_authority_gate() -> CheckResult:
             findings.append(
                 Finding(
                     "blocker",
-                    "sync-continuity-backend-authority-gate-missing-source",
+                    "continuity-backend-authority-gate-missing-source",
                     relative(path),
                     None,
-                    "SyncContinuity backend-authority gate source/test file is missing.",
+                    "Continuity backend-authority gate source/test file is missing.",
                 )
             )
             continue
@@ -1608,18 +1608,18 @@ def check_sync_continuity_backend_authority_gate() -> CheckResult:
                 findings.append(
                     Finding(
                         "blocker",
-                        "sync-continuity-backend-authority-gate-marker-missing",
+                        "continuity-backend-authority-gate-marker-missing",
                         relative(path),
                         None,
-                        f"Missing SyncContinuity backend-authority marker `{marker}`.",
+                        f"Missing Continuity backend-authority marker `{marker}`.",
                     )
                 )
 
     return make_result(
-        "sync_continuity_backend_authority_gate",
+        "continuity_backend_authority_gate",
         findings,
-        "SyncContinuity gates transport eligibility by runtime/projection source, privacy class, local authority, conflict review, and account cleanup non-authority.",
-        "{count} SyncContinuity backend-authority blocker(s) remain.",
+        "Continuity gates transport eligibility by runtime/projection source, privacy class, local authority, conflict review, and account cleanup non-authority.",
+        "{count} Continuity backend-authority blocker(s) remain.",
     )
 
 
@@ -2118,7 +2118,7 @@ def check_runtime_doctor_local_drift_repair_gate() -> CheckResult:
             "case searchIndex = \"search_index\"",
             "case blobVault = \"blob_vault\"",
             "case sideEffectOutbox = \"side_effect_outbox\"",
-            "case syncContinuity = \"sync_continuity\"",
+            "case continuity = \"continuity\"",
             "case privacyBoundary = \"privacy_boundary\"",
             "case migrationState = \"migration_state\"",
             "case storageTier = \"storage_tier\"",
@@ -2140,7 +2140,7 @@ def check_runtime_doctor_local_drift_repair_gate() -> CheckResult:
             "func searchIndex(",
             "func blobVault(",
             "func sideEffectOutbox(",
-            "func syncContinuity(",
+            "func continuity(",
             "func privacyBoundary(",
             "func migrationState(",
             "func storageTier(",
@@ -2357,7 +2357,7 @@ def run_checks() -> list[CheckResult]:
         check_external_surface_sanitized_projection_gate(),
         check_privacy_security_external_boundary_gate(),
         check_source_atlas_r2_public_only_gate(),
-        check_sync_continuity_backend_authority_gate(),
+        check_continuity_backend_authority_gate(),
         check_capture_intake_durability_gate(),
         check_side_effect_local_commit_receipt_gate(),
         check_inspection_runtime_lineage_gate(),
@@ -2589,7 +2589,7 @@ def run_self_test() -> int:
     assert any(result.check_id == "external_surface_sanitized_projection_gate" for result in [check_external_surface_sanitized_projection_gate()])
     assert any(result.check_id == "privacy_security_external_boundary_gate" for result in [check_privacy_security_external_boundary_gate()])
     assert any(result.check_id == "source_atlas_r2_public_only_gate" for result in [check_source_atlas_r2_public_only_gate()])
-    assert any(result.check_id == "sync_continuity_backend_authority_gate" for result in [check_sync_continuity_backend_authority_gate()])
+    assert any(result.check_id == "continuity_backend_authority_gate" for result in [check_continuity_backend_authority_gate()])
     assert any(result.check_id == "capture_intake_durability_gate" for result in [check_capture_intake_durability_gate()])
     assert any(result.check_id == "side_effect_local_commit_receipt_gate" for result in [check_side_effect_local_commit_receipt_gate()])
     assert any(result.check_id == "inspection_runtime_lineage_gate" for result in [check_inspection_runtime_lineage_gate()])

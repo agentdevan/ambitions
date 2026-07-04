@@ -70,7 +70,7 @@ life graph storage.
 - `docs/audits/runtime-authority-map.md`
 - `Native/Ambitions/Core/LocalRuntimeOS/Storage/*.swift`
 - `Native/Ambitions/Core/LocalRuntimeOS/ObjectState/*.swift`
-- `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/*.swift`
+- `Native/Ambitions/Core/LocalRuntimeOS/Continuity/*.swift`
 - `Native/Ambitions/Core/Persistence/*.swift`
 - `Native/AmbitionsTests/LocalRuntimeOS/Storage/StorageTierTests.swift`
 - `Native/AmbitionsTests/Persistence/CorePersistenceCanonicalOwnershipTests.swift`
@@ -84,7 +84,7 @@ life graph storage.
 | P-STORAGE | Existing focused storage/source tests for canonical storage tier shape and substrate behavior. |
 | P-REJECT | AMB-1719 direct-save proof in `docs/audits/persistence-direct-save-rejection-proof.md`: direct persistence writes fail, are unreachable from production roots, or remain explicit unsafe debt. Current result is Implemented Yellow explicit unsafe debt. |
 | P-MIGRATE | AMB-1720 existing-data migration proof plan in `docs/audits/persistence-existing-data-migration-proof-plan.md`, followed by later executable migration proof before any migration Green claim. |
-| P-CLOUDKIT | SyncContinuity privacy/local-authority evidence before any CloudKit continuity claim. |
+| P-CLOUDKIT | Continuity privacy/local-authority evidence before any CloudKit continuity claim. |
 | P-DIAGNOSTIC | Proof that diagnostics/health/readers cannot authorize durable mutation or repair. |
 
 ## Canonical Storage Tier Map
@@ -101,7 +101,7 @@ life graph storage.
 | `BackupStore.swift` | Backup package storage | `Core/LocalRuntimeOS/Storage` with `MigrationRepair` consumption | `MigrationRepair` plus `PrivacySecurity` review gates | Encrypted backup packages, backup manifests, backup checksums | No migration execution, no CloudKit authority, no public-reference pack authority, no data-safety Green. |
 | `MigrationStore.swift` | Migration record storage | `Core/LocalRuntimeOS/Storage` with `MigrationRepair` consumption | `MigrationRepair` dry-run/review flows | Dry-run receipts, invariant summaries, rollback references | No destructive migration execution without proof gates. AMB-1720 owns migration proof planning. |
 
-`Core/LocalRuntimeOS/SyncContinuity` is not a storage tier. It is the
+`Core/LocalRuntimeOS/Continuity` is not a storage tier. It is the
 continuity owner for optional CloudKit/account continuity metadata, envelopes,
 eligibility, conflict policy, tombstone limits, and local-authoritative sync
 gates. It remains P-CLOUDKIT Yellow and must not be described as approved
@@ -137,7 +137,7 @@ as full ObjectState migration proof.
 Stored-model coverage note: `ObjectStoreSwiftData.storedModelNames` also
 contains `EntityRevisionTombstoneRecord`. Until a future source train adds an
 explicit tombstone object-store family or moves the type fully under
-`TrustSystem`, `MigrationRepair`, or `SyncContinuity`, this map treats it as
+`TrustSystem`, `MigrationRepair`, or `Continuity`, this map treats it as
 dumb tombstone lineage storage only. It may store entity kind, object identity,
 revision, deletion, sync, and repair metadata; it must not decide undo, sync,
 migration, repair, or trust policy.

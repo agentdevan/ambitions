@@ -1,22 +1,24 @@
 import XCTest
 @testable import Ambitions
 
-final class SyncContinuityTests: XCTestCase {
-    func testSyncContinuityOwnerFilesExistUnderCanonicalLocalRuntimeOSOwner() throws {
+final class ContinuityTests: XCTestCase {
+    func testContinuityOwnerFilesExistUnderCanonicalLocalRuntimeOSOwner() throws {
         let root = try repoRoot()
         let requiredPaths = [
-            "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/LocalAuthoritativeSyncModel.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/CloudKitContinuityAdapter.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SyncContinuityAuthorityGate.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SyncEligibilityPolicy.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SyncEnvelope.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/CausalMergeEngine.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/ConflictPolicyEngine.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/TombstoneSync.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/AccountStateMachine.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SignOutDeleteResetCoordinator.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Continuity/LocalAuthoritativeSyncModel.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Continuity/CloudKitContinuityClient.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Continuity/ContinuityAuthorityGate.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Continuity/SyncEligibilityPolicy.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Continuity/SyncEnvelope.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Continuity/CausalMergeEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Continuity/ConflictPolicyEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Continuity/TombstoneSync.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Continuity/AccountStateMachine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Continuity/SignOutDeleteResetCoordinator.swift",
         ]
         let removedOldOwners = [
+            "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity",
+            "Native/AmbitionsTests/LocalRuntimeOS/SyncContinuity",
             "Native/Ambitions/Core/Persistence/SyncCapabilityContracts.swift",
             "Native/Ambitions/Core/Persistence/CloudKitContinuityModels.swift",
             "Native/Ambitions/Core/Persistence/CloudKitContinuityClient.swift",
@@ -126,9 +128,9 @@ final class SyncContinuityTests: XCTestCase {
             includeRuntimeLineage: false
         )
 
-        let gate = SyncContinuityAuthorityGate()
+        let gate = ContinuityAuthorityGate()
         let runtimeEventDecision = gate.evaluate(
-            SyncContinuityAuthorityEvidence(
+            ContinuityAuthorityEvidence(
                 envelope: runtimeEventEnvelope,
                 sourceAuthority: .runtimeEvent,
                 privacyClass: .syncMetadata,
@@ -139,18 +141,18 @@ final class SyncContinuityTests: XCTestCase {
             )
         )
         let projectionDecision = gate.evaluate(
-            SyncContinuityAuthorityEvidence(
+            ContinuityAuthorityEvidence(
                 envelope: projectionEnvelope,
                 sourceAuthority: .approvedProjection,
                 privacyClass: .systemOwned,
-                approvedProjectionID: "Projections.PrivacyProjection.syncContinuity",
+                approvedProjectionID: "Projections.PrivacyProjection.continuity",
                 localStoreAuthoritative: true,
                 attemptsBackendAuthority: false,
                 accountRequiredForCoreUse: false
             )
         )
         let directObjectDecision = gate.evaluate(
-            SyncContinuityAuthorityEvidence(
+            ContinuityAuthorityEvidence(
                 envelope: directObjectEnvelope,
                 sourceAuthority: .directObjectStore,
                 privacyClass: .standard,
@@ -210,13 +212,13 @@ final class SyncContinuityTests: XCTestCase {
         XCTAssertEqual(privatePrivacyDecision.outcome, .deniedPrivacyClass)
         XCTAssertFalse(privatePrivacyDecision.cloudKitWriteAllowed)
         XCTAssertTrue(privatePrivacyDecision.localStoreRemainsAuthoritative)
-        XCTAssertTrue(privatePrivacyDecision.reasons.contains("privacy_class_private_user_text_cannot_enter_sync_continuity"))
+        XCTAssertTrue(privatePrivacyDecision.reasons.contains("privacy_class_private_user_text_cannot_enter_continuity"))
 
         XCTAssertEqual(backendAuthorityDecision.outcome, .deniedBackendAuthority)
         XCTAssertFalse(backendAuthorityDecision.localWriteAllowed)
         XCTAssertFalse(backendAuthorityDecision.cloudKitWriteAllowed)
         XCTAssertFalse(backendAuthorityDecision.localStoreRemainsAuthoritative)
-        XCTAssertTrue(backendAuthorityDecision.reasons.contains("sync_continuity_cannot_become_backend_authority"))
+        XCTAssertTrue(backendAuthorityDecision.reasons.contains("continuity_cannot_become_backend_authority"))
         XCTAssertTrue(backendAuthorityDecision.reasons.contains("offline_core_must_not_require_account"))
     }
 
@@ -430,7 +432,7 @@ final class SyncContinuityTests: XCTestCase {
     }
 }
 
-private extension SyncContinuityTests {
+private extension ContinuityTests {
     struct TestPayload: Codable, Sendable, Equatable {
         let value: String
     }
@@ -448,7 +450,7 @@ private extension SyncContinuityTests {
             TestPayload(value: payloadValue ?? "\(recordName).\(localRevision)"),
             family: family,
             recordName: recordName,
-            schemaVersion: "sync_continuity_test.v1",
+            schemaVersion: "continuity_test.v1",
             localRevision: localRevision,
             createdAt: "2026-06-30T12:00:00Z",
             updatedAt: updatedAt,
@@ -466,6 +468,6 @@ private extension SyncContinuityTests {
             }
             candidate.deleteLastPathComponent()
         }
-        throw NSError(domain: "SyncContinuityTests", code: 1)
+        throw NSError(domain: "ContinuityTests", code: 1)
     }
 }

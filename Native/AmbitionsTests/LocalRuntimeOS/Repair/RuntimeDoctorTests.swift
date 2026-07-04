@@ -161,7 +161,7 @@ final class RuntimeDoctorTests: XCTestCase {
             .searchRebuild,
             .corruptBlobQuarantine,
             .sideEffectOutboxReconcile,
-            .syncContinuityHold,
+            .continuityHold,
             .privacyRedactionReview,
             .dryMigration,
             .preMigrationBackup,
@@ -359,7 +359,7 @@ private extension RuntimeDoctorTests {
                 evidenceIDs: ["side-effect-reader"],
                 generatedAt: generatedAt
             ),
-            readers.syncContinuity(
+            readers.continuity(
                 diagnostics: [
                     RuntimeDoctorTests.runtimeDoctorDiagnostic(
                         id: "sync.private_graph_capture.fixture",

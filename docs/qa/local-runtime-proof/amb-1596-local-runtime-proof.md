@@ -70,10 +70,10 @@ This artifact is a runtime-proof gate. It is not Visual Green, Release Green, pr
 - Status: `pass`
 - Summary: SourceAtlas/R2 request, gateway, endpoint, manifest/cache/LKG, and projection paths are gated as public-reference-only.
 
-### sync_continuity_backend_authority_gate
+### continuity_backend_authority_gate
 
 - Status: `pass`
-- Summary: SyncContinuity gates transport eligibility by runtime/projection source, privacy class, local authority, conflict review, and account cleanup non-authority.
+- Summary: Continuity gates transport eligibility by runtime/projection source, privacy class, local authority, conflict review, and account cleanup non-authority.
 
 ### capture_intake_durability_gate
 

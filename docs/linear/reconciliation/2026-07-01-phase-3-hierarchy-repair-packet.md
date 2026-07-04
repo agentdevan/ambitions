@@ -167,11 +167,11 @@ This packet recommends Linear hierarchy changes without applying them. It does n
 | ADD_VSP_AUTHORITY | ADD_VSP_AUTHORITY: SideEffectSystem | LocalRuntimeOS Runtime Spine | SideEffectSystem needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
 | ADD_VALIDATION_GATE | ADD_VALIDATION_GATE: SideEffectSystem | LocalRuntimeOS Runtime Spine | SideEffectSystem needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
 | ADD_PROOF_REQUIREMENT | ADD_PROOF_REQUIREMENT: SideEffectSystem | LocalRuntimeOS Runtime Spine | SideEffectSystem needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
-| CREATE_PARENT_FEATURE | CREATE_PARENT_FEATURE: SyncContinuity | LocalRuntimeOS Runtime Spine | SyncContinuity needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
-| ADD_KNOWN_ISSUE_MAPPING | ADD_KNOWN_ISSUE_MAPPING: SyncContinuity | LocalRuntimeOS Runtime Spine | SyncContinuity needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
-| ADD_VSP_AUTHORITY | ADD_VSP_AUTHORITY: SyncContinuity | LocalRuntimeOS Runtime Spine | SyncContinuity needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
-| ADD_VALIDATION_GATE | ADD_VALIDATION_GATE: SyncContinuity | LocalRuntimeOS Runtime Spine | SyncContinuity needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
-| ADD_PROOF_REQUIREMENT | ADD_PROOF_REQUIREMENT: SyncContinuity | LocalRuntimeOS Runtime Spine | SyncContinuity needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
+| CREATE_PARENT_FEATURE | CREATE_PARENT_FEATURE: Continuity | LocalRuntimeOS Runtime Spine | Continuity needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
+| ADD_KNOWN_ISSUE_MAPPING | ADD_KNOWN_ISSUE_MAPPING: Continuity | LocalRuntimeOS Runtime Spine | Continuity needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
+| ADD_VSP_AUTHORITY | ADD_VSP_AUTHORITY: Continuity | LocalRuntimeOS Runtime Spine | Continuity needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
+| ADD_VALIDATION_GATE | ADD_VALIDATION_GATE: Continuity | LocalRuntimeOS Runtime Spine | Continuity needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
+| ADD_PROOF_REQUIREMENT | ADD_PROOF_REQUIREMENT: Continuity | LocalRuntimeOS Runtime Spine | Continuity needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
 | CREATE_PARENT_FEATURE | CREATE_PARENT_FEATURE: SourceAtlas | VSP-08 External Boundary / Account / R2 / Source Atlas | SourceAtlas needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
 | ADD_KNOWN_ISSUE_MAPPING | ADD_KNOWN_ISSUE_MAPPING: SourceAtlas | VSP-08 External Boundary / Account / R2 / Source Atlas | SourceAtlas needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
 | ADD_VSP_AUTHORITY | ADD_VSP_AUTHORITY: SourceAtlas | VSP-08 External Boundary / Account / R2 / Source Atlas | SourceAtlas needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
@@ -536,7 +536,7 @@ This packet recommends Linear hierarchy changes without applying them. It does n
 - **Target initiative:** Private Life Runtime / LocalRuntimeOS
 - **Target project:** LocalRuntimeOS Runtime Spine
 - **Target milestone:** Post-VSP repo-to-Linear hierarchy repair
-- **Product object:** Private Life Runtime, LocalRuntimeOS, CommandSpine, TransactionKernel, EventJournal, ProjectionEngine, ObjectState, Planning, TimeEngine, CaptureRouting, TrustSystem, SearchRecall, SideEffectSystem, SyncContinuity, Diagnostics
+- **Product object:** Private Life Runtime, LocalRuntimeOS, CommandSpine, TransactionKernel, EventJournal, ProjectionEngine, ObjectState, Planning, TimeEngine, CaptureRouting, TrustSystem, SearchRecall, SideEffectSystem, Continuity, Diagnostics
 - **Acceptance criteria:** Parent Feature preserves product law and hard non-goals., Parent Feature cites repo truth, VSP authority if present, source-owner paths, known issue mappings, validation commands, proof artifacts, and proof ceiling., Parent Feature links only bounded Codex leaves that do not invent visual grammar, runtime authority, or release claims.
 - **Repo evidence:** `README.md`, `AGENTS.md`, `docs/truth/README.md`, `docs/truth/CODEX_START_HERE.md`, `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `docs/truth/PRODUCT_ORIGIN_TRUTH.md`, `docs/truth/PRODUCT_MOAT_TRUTH.md`, `docs/truth/PRODUCT_EXPERIENCE_CANON.md`
 - **VSP authority:** VSP-04: Time Native Life Calendar, VSP-05: Capture Open Field Composer, VSP-07: Trust Inspection Details, VSP-08: External Boundary / Account / R2 / Source Atlas, VSP-10: Implementation Anatomy / Source Owner Map
@@ -1081,12 +1081,12 @@ This packet recommends Linear hierarchy changes without applying them. It does n
 - **Proof ceiling:** Yellow
 - **Done criteria:** Linear leaf has bounded scope, owner paths, VSP authority where available, known issue mapping, validation commands, proof requirements, rollback plan, and explicit non-claims., No Green or actual Ready For Codex claim is made by this packet.
 
-### SyncContinuity — bounded reconciliation/proof-gate leaf
+### Continuity — bounded reconciliation/proof-gate leaf
 
-- **Parent Feature:** SyncContinuity parent feature with product-law non-goals and proof gate.
-- **Source-owner paths:** `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/`
-- **Exact bounded scope:** Reconcile SyncContinuity source-owner paths, VSP/known issue authority, validation commands, proof artifacts, rollback plan, and non-claims; implementation may proceed only after Phase 2/3 acceptance and separate authorization.
-- **Files likely touched:** `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/`
+- **Parent Feature:** Continuity parent feature with product-law non-goals and proof gate.
+- **Source-owner paths:** `Native/Ambitions/Core/LocalRuntimeOS/Continuity/`
+- **Exact bounded scope:** Reconcile Continuity source-owner paths, VSP/known issue authority, validation commands, proof artifacts, rollback plan, and non-claims; implementation may proceed only after Phase 2/3 acceptance and separate authorization.
+- **Files likely touched:** `Native/Ambitions/Core/LocalRuntimeOS/Continuity/`
 - **Tests likely required:** `python3 scripts/ambitions-local-runtime-proof.py`, `git diff --check`, `python3 scripts/ambitions-green-standard-audit.py || true`, `python3 scripts/ambitions-architecture-inventory.py || true`
 - **VSP authority:** No direct VSP authority found in current provenance; owner review required.
 - **Accessibility requirements:** VoiceOver, Dynamic Type, Reduce Motion/Transparency, contrast, hit target, motor path, and screenshots required for UI-affecting scope; otherwise mark not applicable with reason.
@@ -1308,7 +1308,7 @@ This packet recommends Linear hierarchy changes without applying them. It does n
 ### CloudKit / continuity — bounded reconciliation/proof-gate leaf
 
 - **Parent Feature:** CloudKit / continuity parent feature with product-law non-goals and proof gate.
-- **Source-owner paths:** `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/`, `Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift`, `Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAudit.swift`
+- **Source-owner paths:** `Native/Ambitions/Core/LocalRuntimeOS/Continuity/`, `Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift`, `Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAudit.swift`
 - **Exact bounded scope:** Owner review and proof-gate definition only; no implementation scope until product/legal/account authority is approved.
 - **Files likely touched:** `docs/linear/reconciliation/`, `Linear project dossier only`
 - **Tests likely required:** `git diff --check`, `owner review artifact`

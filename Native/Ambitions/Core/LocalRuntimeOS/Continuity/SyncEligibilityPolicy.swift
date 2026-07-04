@@ -27,7 +27,7 @@ struct SyncEligibilityCandidate: Sendable, Equatable {
     let userConfirmed: Bool
     let proofVerified: Bool
     let requestedAt: String
-    let sourceAuthority: SyncContinuitySourceAuthority
+    let sourceAuthority: ContinuitySourceAuthority
     let privacyClass: RuntimePrivacyClass
     let runtimeEventID: String?
     let approvedProjectionID: String?
@@ -44,7 +44,7 @@ struct SyncEligibilityCandidate: Sendable, Equatable {
         userConfirmed: Bool = false,
         proofVerified: Bool = false,
         requestedAt: String,
-        sourceAuthority: SyncContinuitySourceAuthority = .runtimeEvent,
+        sourceAuthority: ContinuitySourceAuthority = .runtimeEvent,
         privacyClass: RuntimePrivacyClass = .syncMetadata,
         runtimeEventID: String? = nil,
         approvedProjectionID: String? = nil,
@@ -87,12 +87,12 @@ struct SyncEligibilityDecision: Codable, Sendable, Equatable, Hashable {
 }
 
 struct SyncEligibilityPolicy: Sendable, Equatable {
-    let authorityGate: SyncContinuityAuthorityGate = SyncContinuityAuthorityGate()
+    let authorityGate: ContinuityAuthorityGate = ContinuityAuthorityGate()
 
     func evaluate(_ candidate: SyncEligibilityCandidate) -> SyncEligibilityDecision {
         var reasons: [String] = []
         let authorityDecision = authorityGate.evaluate(
-            SyncContinuityAuthorityEvidence(
+            ContinuityAuthorityEvidence(
                 envelope: candidate.envelope,
                 sourceAuthority: candidate.sourceAuthority,
                 privacyClass: candidate.privacyClass,
@@ -240,7 +240,7 @@ struct SyncEligibilityPolicy: Sendable, Equatable {
         )
     }
 
-    private func outcome(for authorityDecision: SyncContinuityAuthorityDecision) -> SyncEligibilityOutcome {
+    private func outcome(for authorityDecision: ContinuityAuthorityDecision) -> SyncEligibilityOutcome {
         if authorityDecision.issues.contains(.backendAuthorityAttempt) ||
             authorityDecision.issues.contains(.localStoreNotAuthoritative) ||
             authorityDecision.issues.contains(.accountRequiredForCoreUse) {

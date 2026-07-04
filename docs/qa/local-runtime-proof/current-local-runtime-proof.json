@@ -124,11 +124,11 @@
       "category": "sync",
       "checklistId": "lro100-12-sync-non-authority",
       "findings": [],
-      "linkedCheckId": "sync_continuity_backend_authority_gate",
-      "requirement": "SyncContinuity must not become backend authority and must preserve local runtime/projection authority.",
+      "linkedCheckId": "continuity_backend_authority_gate",
+      "requirement": "Continuity must not become backend authority and must preserve local runtime/projection authority.",
       "status": "pass",
-      "summary": "SyncContinuity gates transport eligibility by runtime/projection source, privacy class, local authority, conflict review, and account cleanup non-authority.",
-      "title": "SyncContinuity non-authority"
+      "summary": "Continuity gates transport eligibility by runtime/projection source, privacy class, local authority, conflict review, and account cleanup non-authority.",
+      "title": "Continuity non-authority"
     },
     {
       "category": "command authority",
@@ -279,10 +279,10 @@
       "summary": "SourceAtlas/R2 request, gateway, endpoint, manifest/cache/LKG, and projection paths are gated as public-reference-only."
     },
     {
-      "checkId": "sync_continuity_backend_authority_gate",
+      "checkId": "continuity_backend_authority_gate",
       "findings": [],
       "status": "pass",
-      "summary": "SyncContinuity gates transport eligibility by runtime/projection source, privacy class, local authority, conflict review, and account cleanup non-authority."
+      "summary": "Continuity gates transport eligibility by runtime/projection source, privacy class, local authority, conflict review, and account cleanup non-authority."
     },
     {
       "checkId": "capture_intake_durability_gate",
@@ -333,7 +333,7 @@
       "summary": "Known Issues, truth files, and CI workflow evidence preserve the LocalRuntimeOS proof ceiling."
     }
   ],
-  "generatedAt": "2026-07-04T09:00:39+00:00",
+  "generatedAt": "2026-07-04T09:45:00+00:00",
   "runtimeLaw": "Command -> Event -> Projection -> Receipt -> Replay",
   "status": "green",
   "summary": {

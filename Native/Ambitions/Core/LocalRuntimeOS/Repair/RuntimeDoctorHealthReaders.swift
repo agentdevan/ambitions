@@ -85,14 +85,14 @@ struct RuntimeDoctorHealthReaders: Sendable, Equatable, Hashable {
         )
     }
 
-    func syncContinuity(
+    func continuity(
         diagnostics: [LocalRuntimeDiagnosticRecord],
         evidenceIDs: [String] = [],
         generatedAt: String
     ) -> RuntimeDoctorHealthReader {
         reader(
-            domain: .syncContinuity,
-            componentID: "SyncContinuityHealthReader",
+            domain: .continuity,
+            componentID: "ContinuityHealthReader",
             diagnostics: diagnostics,
             evidenceIDs: evidenceIDs,
             generatedAt: generatedAt

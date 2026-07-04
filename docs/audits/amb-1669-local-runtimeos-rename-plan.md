@@ -17,7 +17,7 @@ This artifact records the current folder/type dependency graph, target runtime m
 
 ## Current Owner Graph
 
-Current source owner count after the `CaptureRouting` slice: 19.
+Current source owner count after the `Continuity` slice: 19.
 
 | Current owner | Swift files | Target owner | Status |
 | --- | ---: | --- | --- |
@@ -34,7 +34,7 @@ Current source owner count after the `CaptureRouting` slice: 19.
 | Inspection | 29 | Inspection | Sixth slice renamed from `TrustSystem` |
 | Search | 10 | Search | Seventh slice renamed from `SearchRecall` |
 | ExternalWrites | 13 | ExternalWrites | Fifth slice renamed from `SideEffectSystem` |
-| SyncContinuity | 10 | Continuity | Pending |
+| Continuity | 10 | Continuity | Thirteenth slice renamed from `SyncContinuity` |
 | SourceAtlas | 80 | SourceAtlas or ReferencePacks | Pending decision |
 | PrivacySecurity | 12 | Boundary or Privacy | Pending decision |
 | Storage | 27 | Storage | Retain name |
@@ -389,15 +389,44 @@ Reason:
 - The ownership test now proves required `CaptureRouting` files exist and the
   old `CaptureRouteGraph` production/test owner paths are gone.
 
+## Thirteenth Rename Slice
+
+Applied thirteenth:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/
+Native/AmbitionsTests/LocalRuntimeOS/SyncContinuity/
+```
+
+to:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/Continuity/
+Native/AmbitionsTests/LocalRuntimeOS/Continuity/
+```
+
+Reason:
+
+- `Continuity` is explicitly named by AMB-1669 target direction.
+- The old owner used `SyncContinuity` as a folder-level architecture name;
+  retained Swift types such as `SyncEnvelope`, `SyncEligibilityPolicy`,
+  `CloudKitContinuityAdapter`, and `LivingPlanContinuitySync` still carry
+  concrete sync/CloudKit behavior plainly.
+- The move changes canonical ownership without changing runtime behavior.
+- Owner-facing authority gate, proof/check naming, RuntimeDoctor domain, and
+  tests now use `Continuity*` / `continuity` names.
+- The ownership test now proves required `Continuity` files exist and the old
+  `SyncContinuity` production/test owner paths are gone.
+
 ## API Exposure
 
-The moved `Boundary`, `Commands`, `Transactions`, `Projections`, `ExternalWrites`, `Inspection`, `Search`, `Repair`, `State`, `Planning`, `Scheduling`, and `CaptureRouting` source contains no `public` or `open` Swift API declarations.
+The moved `Boundary`, `Commands`, `Transactions`, `Projections`, `ExternalWrites`, `Inspection`, `Search`, `Repair`, `State`, `Planning`, `Scheduling`, `CaptureRouting`, and `Continuity` source contains no `public` or `open` Swift API declarations.
 
 Current exposure is same-module production/test use through Swift files under the existing `Ambitions` target and `AmbitionsTests` target. XcodeGen source discovery is directory-based through `project.yml`, so the move requires project regeneration but no package or target boundary change.
 
 Known direct consumers of the moved `Boundary`, `Commands`, `Transactions`,
 `Projections`, `ExternalWrites`, `Inspection`, `Search`, `Repair`, `State`,
-`Planning`, `Scheduling`, and `CaptureRouting` types remain same-module:
+`Planning`, `Scheduling`, `CaptureRouting`, and `Continuity` types remain same-module:
 
 - `Commands`
 - `Transactions`
@@ -410,6 +439,7 @@ Known direct consumers of the moved `Boundary`, `Commands`, `Transactions`,
 - `Planning`
 - `Scheduling`
 - `CaptureRouting`
+- `Continuity`
 - `PrivateLifeRuntimeKernel`
 - `PrivacySecurity`
 - `SourceAtlas`
@@ -433,9 +463,8 @@ This slice can support Source Green for the folder-owner rename if validation pa
 
 ## Next Rename Candidates
 
-Next concrete candidates, one at a time after guards:
-
-- `SyncContinuity` -> `Continuity`
+No additional direct rename candidate is approved by this plan without a
+decision record.
 
 `EventJournal`, `PrivateLifeRuntimeKernel`, `SourceAtlas`, and `PrivacySecurity`
 require retain/collapse decision records before source moves. Each future slice

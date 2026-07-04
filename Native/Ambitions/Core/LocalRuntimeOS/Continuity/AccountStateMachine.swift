@@ -75,7 +75,7 @@ struct AccountStateMachine: Sendable, Equatable {
             syncState: syncState,
             accountStatus: accountStatus,
             transition: transition,
-            evaluatedAt: evaluatedAt.trimmingCharacters(in: .whitespacesAndNewlines).syncContinuityNilIfEmpty ?? "local-sync-evaluation",
+            evaluatedAt: evaluatedAt.trimmingCharacters(in: .whitespacesAndNewlines).continuityNilIfEmpty ?? "local-sync-evaluation",
             localOperationBlocked: false,
             localOnlyFallbackActive: true,
             detail: Self.detail(syncState: syncState)
@@ -167,7 +167,7 @@ struct AccountStateMachine: Sendable, Equatable {
 }
 
 private extension String {
-    var syncContinuityNilIfEmpty: String? {
+    var continuityNilIfEmpty: String? {
         isEmpty ? nil : self
     }
 }

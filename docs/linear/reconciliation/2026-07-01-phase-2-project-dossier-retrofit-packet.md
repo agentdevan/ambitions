@@ -972,7 +972,7 @@ Current repo proof is not enough for Green. Green requires current scoped implem
 Represent `LocalRuntimeOS Runtime Spine` as a Linear project dossier grounded in repo truth and bounded by current proof ceilings.
 
 #### Product meaning
-Covers: Private Life Runtime, LocalRuntimeOS, CommandSpine, TransactionKernel, EventJournal, ProjectionEngine, ObjectState, Planning, TimeEngine, CaptureRouting, TrustSystem, SearchRecall, SideEffectSystem, SyncContinuity, Diagnostics. The project must preserve the Ambitions product law and must not expand root IA, account/R2 authority, or runtime mutation paths beyond canon.
+Covers: Private Life Runtime, LocalRuntimeOS, CommandSpine, TransactionKernel, EventJournal, ProjectionEngine, ObjectState, Planning, TimeEngine, CaptureRouting, TrustSystem, SearchRecall, SideEffectSystem, Continuity, Diagnostics. The project must preserve the Ambitions product law and must not expand root IA, account/R2 authority, or runtime mutation paths beyond canon.
 
 #### User use cases
 - User can understand and operate the relevant Ambitions object or boundary without shame, fake urgency, score pressure, or network dependency for core value.

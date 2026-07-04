@@ -716,7 +716,7 @@
         "VSP-08"
       ],
       "source_owner_paths": [
-        "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
         "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift",
         "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAudit.swift"
       ],

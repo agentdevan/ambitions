@@ -7,7 +7,7 @@ enum RuntimeDoctorHealthDomain: String, CaseIterable, Codable, Sendable, Equatab
     case searchIndex = "search_index"
     case blobVault = "blob_vault"
     case sideEffectOutbox = "side_effect_outbox"
-    case syncContinuity = "sync_continuity"
+    case continuity = "continuity"
     case privacyBoundary = "privacy_boundary"
     case migrationState = "migration_state"
     case storageTier = "storage_tier"
@@ -26,7 +26,7 @@ enum RuntimeDoctorHealthDomain: String, CaseIterable, Codable, Sendable, Equatab
             return "private attachments"
         case .sideEffectOutbox:
             return "external handoff queue"
-        case .syncContinuity:
+        case .continuity:
             return "continuity metadata"
         case .privacyBoundary:
             return "privacy boundary"
@@ -46,7 +46,7 @@ enum RuntimeDoctorDriftKind: String, Codable, Sendable, Equatable, Hashable {
     case searchIndexDrift = "search_index_drift"
     case blobVaultCorruption = "blob_vault_corruption"
     case sideEffectOutboxDrift = "side_effect_outbox_drift"
-    case syncContinuityDrift = "sync_continuity_drift"
+    case continuityDrift = "continuity_drift"
     case privacyRedactionDrift = "privacy_redaction_drift"
     case migrationStateDrift = "migration_state_drift"
     case storageTierDrift = "storage_tier_drift"
@@ -58,7 +58,7 @@ enum RuntimeDoctorRepairActionKind: String, CaseIterable, Codable, Sendable, Equ
     case searchRebuild = "search_rebuild"
     case corruptBlobQuarantine = "corrupt_blob_quarantine"
     case sideEffectOutboxReconcile = "side_effect_outbox_reconcile"
-    case syncContinuityHold = "sync_continuity_hold"
+    case continuityHold = "continuity_hold"
     case privacyRedactionReview = "privacy_redaction_review"
     case dryMigration = "dry_migration"
     case preMigrationBackup = "pre_migration_backup"
@@ -170,8 +170,8 @@ struct RuntimeDoctorHealthReader: Identifiable, Codable, Sendable, Equatable, Ha
             return .blobVaultCorruption
         case .sideEffectOutbox:
             return .sideEffectOutboxDrift
-        case .syncContinuity:
-            return .syncContinuityDrift
+        case .continuity:
+            return .continuityDrift
         case .privacyBoundary:
             return .privacyRedactionDrift
         case .migrationState:

@@ -1,6 +1,6 @@
 # LocalRuntimeProof Gate
 
-Generated: `2026-07-04T09:00:39+00:00`
+Generated: `2026-07-04T09:45:00+00:00`
 Status: `green`
 Runtime law: `Command -> Event -> Projection -> Receipt -> Replay`
 
@@ -31,7 +31,7 @@ This artifact is a runtime-proof gate. It is not Visual Green, Release Green, pr
 | `lro100-09-external-surface-sanitized-reads` | projection consumption | `pass` | `external_surface_sanitized_projection_gate` | Widgets, App Intents, notifications, and share surfaces must use sanitized projections or durable intake records. |
 | `lro100-10-privacy-boundary` | privacy | `pass` | `privacy_security_external_boundary_gate` | PrivacySecurity must gate egress, export, diagnostics, external snapshots, App Intent/share bridges, and file protection. |
 | `lro100-11-source-atlas-r2-public-only` | privacy | `pass` | `source_atlas_r2_public_only_gate` | Source Atlas/R2 request and cache paths must remain public-reference-only and deny private graph payloads. |
-| `lro100-12-sync-non-authority` | sync | `pass` | `sync_continuity_backend_authority_gate` | SyncContinuity must not become backend authority and must preserve local runtime/projection authority. |
+| `lro100-12-sync-non-authority` | sync | `pass` | `continuity_backend_authority_gate` | Continuity must not become backend authority and must preserve local runtime/projection authority. |
 | `lro100-13-capture-durable-intake` | command authority | `pass` | `capture_intake_durability_gate` | Capture accepted input must be durably journaled before classification, attachment staging, promotion, and restart lookup. |
 | `lro100-14-side-effect-receipt-gating` | side-effect | `pass` | `side_effect_local_commit_receipt_gate` | External side effects must require prior local runtime commit receipt evidence. |
 | `lro100-15-inspection-lineage` | receipt/replay | `pass` | `inspection_runtime_lineage_gate` | Inspection receipt, proof, undo, audit, source, and history records must carry runtime commit receipt lineage. |
@@ -98,10 +98,10 @@ This artifact is a runtime-proof gate. It is not Visual Green, Release Green, pr
 - Status: `pass`
 - Summary: SourceAtlas/R2 request, gateway, endpoint, manifest/cache/LKG, and projection paths are gated as public-reference-only.
 
-### sync_continuity_backend_authority_gate
+### continuity_backend_authority_gate
 
 - Status: `pass`
-- Summary: SyncContinuity gates transport eligibility by runtime/projection source, privacy class, local authority, conflict review, and account cleanup non-authority.
+- Summary: Continuity gates transport eligibility by runtime/projection source, privacy class, local authority, conflict review, and account cleanup non-authority.
 
 ### capture_intake_durability_gate
 
