@@ -321,6 +321,7 @@ final class InteractionMotionHapticsDesignSystemTests: XCTestCase {
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("score"))
     }
 
+    @MainActor
     func testSI12TactilePrimitivesExposeAccessibilityAndReduceMotionContracts() {
         let afi = AfiFlowIndicator()
         XCTAssertTrue(afi.accessibilityValue.localizedCaseInsensitiveContains("Reduce Motion"))

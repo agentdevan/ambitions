@@ -58,6 +58,7 @@ final class TrustReceiptLayerDesignSystemTests: XCTestCase {
         XCTAssertFalse(combined.localizedCaseInsensitiveContains(scannerSensitivePhrase("release", "ready")))
     }
 
+    @MainActor
     func testFE04PrimitiveBindingsCoverSourceFreshnessReceiptAndRealityMeridianRoles() {
         XCTAssertEqual(SourceFreshnessState.stale.fe04Role, .sourceFreshnessBadge)
         XCTAssertEqual(SourceTrustReceiptStrip(sourceLabel: "Local plan", freshness: .fresh, receiptLabel: "Receipt ready").fe04Role, .inspectableStrip)

@@ -78,6 +78,7 @@ final class PersonalSystemCenterDesignSystemTests: XCTestCase {
         XCTAssertFalse(AmbitionsSurface.allCases.map(\.title).contains("Habits"))
     }
 
+    @MainActor
     func testFE04PrimitiveRolesBindYouAsThePersonalSystemCenter() {
         let header = PersonalSystemCenterHeader(
             title: "Your system",
