@@ -1,7 +1,7 @@
 import XCTest
 @testable import Ambitions
 
-final class CommandSpineLeafTests: XCTestCase {
+final class CommandsLeafTests: XCTestCase {
     func testCommandCompilerBuildsEnvelopeWithMutationPlanAndPolicy() {
         let now = Date(timeIntervalSince1970: 1_777_113_600)
         let command = quickCaptureCommand(id: "command.compiler.proof", now: now)
@@ -408,7 +408,7 @@ final class CommandSpineLeafTests: XCTestCase {
     }
 }
 
-private enum CommandSpineLeafTestError: Error {
+private enum CommandsLeafTestError: Error {
     case commandJournalMissingBeforeMutation
     case commandJournalUnavailable
     case runtimeEventAppendUnavailable
@@ -435,7 +435,7 @@ private actor JournalGatedCaptureRepository: CaptureRepository {
     func saveCaptures(_ captures: [Capture]) async throws {
         let envelopes = try await commandJournal.fetchEnvelopes(matching: .commandID(commandID), limit: nil)
         guard envelopes.isEmpty == false else {
-            throw CommandSpineLeafTestError.commandJournalMissingBeforeMutation
+            throw CommandsLeafTestError.commandJournalMissingBeforeMutation
         }
         self.captures = captures
     }
@@ -444,7 +444,7 @@ private actor JournalGatedCaptureRepository: CaptureRepository {
 private actor FailingCommandJournal: CommandJournal {
     func append(_ envelope: CommandEnvelope) async throws -> CommandJournalAppendReceipt {
         _ = envelope
-        throw CommandSpineLeafTestError.commandJournalUnavailable
+        throw CommandsLeafTestError.commandJournalUnavailable
     }
 
     func fetchEntries(matching query: CommandJournalQuery, limit: Int?) async throws -> [CommandJournalEntry] {
@@ -465,7 +465,7 @@ private actor FailingRuntimeEventStore: RuntimeEventStore {
 
     func append(_ event: RuntimeEvent) async throws -> RuntimeEventEnvelope {
         _ = event
-        throw CommandSpineLeafTestError.runtimeEventAppendUnavailable
+        throw CommandsLeafTestError.runtimeEventAppendUnavailable
     }
 
     func fetchEvents(matching query: RuntimeEventQuery, limit: Int?) async throws -> [RuntimeEventEnvelope] {

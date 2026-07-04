@@ -43,12 +43,12 @@ final class PlanningEngineTests: XCTestCase {
             steps: [
                 PlanStep(
                     id: "scope",
-                    title: "Define command spine",
+                    title: "Define Commands path",
                     summary: "Describe command event projection receipt replay.",
                     type: .actionUnit,
                     pace: .untimed,
                     repeatEveryDays: 18,
-                    evidenceHint: "Command spine is written."
+                    evidenceHint: "Commands path is written."
                 ),
                 PlanStep(
                     id: "journal",

@@ -195,12 +195,12 @@ struct AmbitionsCommandExecutor: CommandExecuting {
             )
         }
 
-        let commandSpineResult = result
+        let commandsResult = result
             .mergingMetadata(compilation.resultMetadata)
             .mergingMetadata(journalReceipt.resultMetadata)
         return await persistExecution(
             command: command,
-            result: commandSpineResult,
+            result: commandsResult,
             at: context.now,
             compilation: compilation,
             journalReceipt: journalReceipt

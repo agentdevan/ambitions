@@ -65,7 +65,7 @@
         "repositories.feedback.saveEvents",
         "repositories.evidence.saveEvidence"
       ],
-      "rationale": "Legacy Goals detail mutation compatibility writes pending command-spine migration."
+      "rationale": "Legacy Goals detail mutation compatibility writes pending Commands migration."
     },
     {
       "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+11-applyAdaptiveRecommendation.swift",
@@ -74,7 +74,7 @@
         "repositories.goals.saveGoals",
         "repositories.appState.saveState"
       ],
-      "rationale": "Legacy adaptive recommendation compatibility writes pending command-spine migration."
+      "rationale": "Legacy adaptive recommendation compatibility writes pending Commands migration."
     },
     {
       "path": "Native/Ambitions/Projection/SurfaceLenses/RepositoryBackedTimeService.swift",
@@ -90,7 +90,7 @@
         "repositories.evidence.saveEvidence",
         "repositories.goals.saveGoals"
       ],
-      "rationale": "Legacy Time ritual compatibility writes pending TimeEngine/command-spine migration."
+      "rationale": "Legacy Time ritual compatibility writes pending TimeEngine/Commands migration."
     },
     {
       "path": "Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService+02-RepositoryBackedTodayService+Repository05-performFeedbackAction.swift",
@@ -100,7 +100,7 @@
         "repositories.evidence.saveEvidence",
         "repositories.goals.saveGoals"
       ],
-      "rationale": "Legacy Today inline feedback compatibility writes pending command-spine migration."
+      "rationale": "Legacy Today inline feedback compatibility writes pending Commands migration."
     },
     {
       "path": "Native/Ambitions/Core/Permissions/CalendarReminders/EventKitIntegrationService+02-EventKitIntegrationService.swift",
@@ -143,7 +143,7 @@
         "repositories.eventLedger.append",
         "repositories.feedback.saveEvents"
       ],
-      "rationale": "Moved AMB-1730 simple-step lifecycle compatibility writes pending command-spine migration."
+      "rationale": "Moved AMB-1730 simple-step lifecycle compatibility writes pending Commands migration."
     },
     {
       "path": "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/SimpleStepLifecycleService+Recurring.swift",
@@ -153,7 +153,7 @@
         "repositories.feedback.saveEvents",
         "repositories.evidence.saveEvidence"
       ],
-      "rationale": "Moved AMB-1730 recurring-step lifecycle compatibility writes pending command-spine migration."
+      "rationale": "Moved AMB-1730 recurring-step lifecycle compatibility writes pending Commands migration."
     }
   ]
 }

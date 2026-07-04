@@ -590,7 +590,7 @@ def self_test() -> int:
     assert not is_production_swift("Native/AmbitionsTests/AppTests.swift")
     assert not is_production_swift("Native/Ambitions/PreviewSupport/PreviewFixtures.swift")
     assert not is_production_swift("Sources/Previews/ThemePreview.swift")
-    assert is_local_runtime("Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/AmbitionsCommandExecutor.swift")
+    assert is_local_runtime("Native/Ambitions/Core/LocalRuntimeOS/Commands/AmbitionsCommandExecutor.swift")
     assert not is_local_runtime("Native/Ambitions/Core/Runtime/CaptureService.swift")
     assert is_suffix_split_name("SwiftDataModels+04-AmbitionGraphProjectionRecordModel.swift")
     assert not is_suffix_split_name("SourceAtlasPackModels+06-SourceAtlasPack.swift")

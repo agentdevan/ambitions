@@ -68,7 +68,7 @@ the private life graph.
 | Share extension save | `commandHandoff` | `Native/AmbitionsShareExtension/ShareViewController.swift` trims shared text/URL, builds an `ExternalCreationRequest`, calls `SharedExternalCreationStore.enqueueDurableRequest`, opens Ambitions, and completes the extension context. `Native/AmbitionsShareExtension/ShareIntakeView.swift` keeps the user in an edit/confirm flow. App import is handled by `ExternalCreationImportService.swift`. | `Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift` covers durable handoff drain, app import, duplicate replay, command journal metadata, and command receipt ID metadata. App, widget, and share entitlements point at `group.com.ambitions.shared` through `project.yml` and entitlements files. | The inspected `ShareViewController` path writes the durable handoff directly; extension-side `ShareExtensionIntake` outbox receipt proof is not shown on that path. No extension lifecycle, redaction-on-device, app-group device, or terminated-app import proof. |
 | Deep links and app external routes | `projectionOnlyReader` for route-only Stage handoff | `Native/Ambitions/App/AmbitionsRootScene.swift`, `Native/Ambitions/App/AppBootstrapper.swift`, `Native/Ambitions/App/AppExternalRouting.swift`, `Native/Ambitions/App/AppExternalRouteTranslator.swift`, and related payload translators select tabs, goal detail, Time routes, You routes, Capture composer overlays, or generic external-entry fallback. They do not directly write canonical private graph state in the inspected paths. | `Native/AmbitionsTests/App/ExternalRoutingTests.swift` covers deep link route decoding, notification/widget payload route decoding, legacy tab fallback for stale `motion`/`pulse` names, generic fallback, and route dispatch. | If a route opens Capture, Create Goal, or another in-app mutating UI, downstream mutation remains AMB-1666/AMB-1667 scope. No device URL-open proof. |
 | Widget and Live Activity UI reads | `projectionOnlyReader` | `Native/AmbitionsWidgetExtension/NextStepWidget.swift` reads `SharedExternalSnapshotRecord.verifiedPayloadData()` from `Native/Ambitions/Projection/ExternalSnapshots/SharedExternalSnapshotStore.swift`, decodes `ExternalSurfaceSnapshot`, renders `ExternalWidgetProjection`, and uses `.widgetURL(projection.primaryURL)`. `Native/AmbitionsWidgetExtension/NextStepLiveActivityWidget.swift` renders ActivityKit content state and uses `Link`/`.widgetURL` deep links. No mutating widget `Button`/App Intent control was found in the inspected widget source. | `Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift`, `Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift`, and `Native/AmbitionsTests/App/ExternalSurfaceVerificationChecklistTests.swift` cover privacy-safe widget projection, stale/unavailable fallback, payload route shape, and checklist readiness ceilings. | AMB-1724 still owns external projection snapshot writer/reader privacy, staleness, widget rendering, Live Activity, and device proof. No widget or Live Activity Green. |
-| Widget payload action bridge | `rejectionReceipt` source-present; focused XCTest passed | `Native/Ambitions/App/AppBootstrapper.swift` calls `ExternalActionCommand(widgetPayload:)`; AMB-1732 changed `Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/ExternalActionCommandService.swift` so widget payloads for `complete`, `delay`, `snooze`, and `askForSmallerStep` downgrade to `openToday`, preserve the rejected action kind, and record a local-only `commandBridge` side-effect receipt when a recorder is configured. Current widget UI source still does not emit a mutating payload. | AMB-1732 added and ran `testAMB1732WidgetMutationPayloadRecordsRejectionReceiptInsteadOfMutating` in `Native/AmbitionsTests/LocalRuntimeOS/CommandSpine/ExternalActionCommandServiceTests.swift`, asserting no Today mutation, Today review routing, `SideEffectReceipt.status == .failedSafely`, `commandBridge`, `.unsupported` boundary, `.markDone`, target object preservation, and no private life graph state change. | Source now rejects the widget mutation bridge instead of executing it, and focused simulator XCTest passed. Device/lifecycle and replay proof remain missing before parent Green. |
+| Widget payload action bridge | `rejectionReceipt` source-present; focused XCTest passed | `Native/Ambitions/App/AppBootstrapper.swift` calls `ExternalActionCommand(widgetPayload:)`; AMB-1732 changed `Native/Ambitions/Core/LocalRuntimeOS/Commands/ExternalActionCommandService.swift` so widget payloads for `complete`, `delay`, `snooze`, and `askForSmallerStep` downgrade to `openToday`, preserve the rejected action kind, and record a local-only `commandBridge` side-effect receipt when a recorder is configured. Current widget UI source still does not emit a mutating payload. | AMB-1732 added and ran `testAMB1732WidgetMutationPayloadRecordsRejectionReceiptInsteadOfMutating` in `Native/AmbitionsTests/LocalRuntimeOS/Commands/ExternalActionCommandServiceTests.swift`, asserting no Today mutation, Today review routing, `SideEffectReceipt.status == .failedSafely`, `commandBridge`, `.unsupported` boundary, `.markDone`, target object preservation, and no private life graph state change. | Source now rejects the widget mutation bridge instead of executing it, and focused simulator XCTest passed. Device/lifecycle and replay proof remain missing before parent Green. |
 | Notification scheduling and local notification side effects | `sideEffectOutbox` | `Native/Ambitions/Core/Permissions/LocalNotificationFoundation.swift` reads verified external snapshots, builds private-default notification request content and route payloads, schedules/replaces pending requests, refreshes Live Activity state, and records notification side effects through `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/NotificationOutbox.swift`. | `Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift` covers private request copy, route payload keys, authorization-missing ledger records, snapshot failure `failedSafely`, no-next-action clearing, lifecycle cleanup, and no private terms in payload/copy. | No real device authorization, delivery, action, pending/delivered notification, or Lock Screen proof. No release readiness. |
 | Notification response parser and action payload handling | `rejectionReceipt` source-present; focused XCTest passed | `Native/Ambitions/Core/Permissions/NotificationRuntime.swift` parses notification responses and forwards payloads to `AppBootstrapper.handleNotificationPayload`. AMB-1732 changed `ExternalActionCommand(notificationPayload:)` so mutating `complete`, `snooze`, `delay`, and `askForSmallerStep` payloads downgrade to open Today, preserve the rejected action kind, and record a local-only `commandBridge` side-effect receipt when a recorder is configured. `AppExternalRouteTranslator.route(fromNotification:)` still maps notification recovery routes to Today. | `Native/AmbitionsTests/App/NotificationResponsePayloadParserTests.swift` covers system open, snooze, complete, and payload preservation. AMB-1732 added and ran `testAMB1732NotificationMutationPayloadRoutesAndRecordsRejectionReceipts`, asserting no Today mutation, Today review routing, failed-safely local-only receipts, `commandBridge`, `.unsupported` boundary, `.markDone` for complete, `.deferAction` for snooze, and unsupported-source reason facts. `Native/AmbitionsTests/App/ExternalRoutingTests.swift` covers notification `complete` routing to Today recovery. | Source now records explicit rejection receipts for notification mutation payloads, and focused simulator XCTest passed. Device notification action and replay proof remain missing before parent Green. |
 
@@ -113,7 +113,7 @@ Verified by this audit:
 - AMB-1732 source diff adds explicit local-only `commandBridge` rejection
   receipt handling for mutating notification and widget payloads in
   `ExternalActionCommandService`.
-- AMB-1732 test diff adds focused command-spine assertions for widget and
+- AMB-1732 test diff adds focused Commands assertions for widget and
   notification payload rejection receipts.
 - AMB-1732 simulator validation now covers
   `AmbitionsTests/ExternalActionCommandServiceTests` directly and in the
@@ -135,13 +135,13 @@ Not verified by this audit:
 
 Changed source:
 
-- `Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/ExternalActionCommandService.swift`
+- `Native/Ambitions/Core/LocalRuntimeOS/Commands/ExternalActionCommandService.swift`
   preserves rejected mutating external payload action kinds, downgrades
   notification and widget mutation payloads to `openToday`, and records
   local-only `SideEffectOutbox` `commandBridge` receipts with `.unsupported`
   initial boundary and failed-safely result receipts when a recorder is
   configured.
-- `Native/AmbitionsTests/LocalRuntimeOS/CommandSpine/ExternalActionCommandServiceTests.swift`
+- `Native/AmbitionsTests/LocalRuntimeOS/Commands/ExternalActionCommandServiceTests.swift`
   replaces the prior widget-payload execution expectation with rejection
   receipt proof expectations and adds notification mutation-payload rejection
   receipt expectations.
@@ -192,18 +192,18 @@ Remaining AMB-1732 blockers:
 - Final Architecture Tree inspected: yes, through
   `docs/truth/PRODUCT_DESIGN_TRUTH.md`.
 - Canonical owners touched by the AMB-1732 addendum:
-  `Core/LocalRuntimeOS/CommandSpine`,
+  `Core/LocalRuntimeOS/Commands`,
   `Core/LocalRuntimeOS/SideEffectSystem`,
   `Core/Permissions/CalendarReminders`, and `Native/AmbitionsTests`.
 - Swift owners touched:
-  `Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/ExternalActionCommandService.swift`,
+  `Native/Ambitions/Core/LocalRuntimeOS/Commands/ExternalActionCommandService.swift`,
   `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/EventKitOutbox.swift`,
   `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ReminderOutbox.swift`
   deleted as unused duplicate authority,
   `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/SideEffectPolicyEngine.swift`,
   `Native/Ambitions/Core/Permissions/CalendarReminders/EventKitIntegrationService+02-EventKitIntegrationService.swift`,
   `Native/Ambitions/Core/Permissions/CalendarReminders/EventKitIntegrationService+03-EventKitIntegrationService.swift`,
-  `Native/AmbitionsTests/LocalRuntimeOS/CommandSpine/ExternalActionCommandServiceTests.swift`,
+  `Native/AmbitionsTests/LocalRuntimeOS/Commands/ExternalActionCommandServiceTests.swift`,
   `Native/AmbitionsTests/LocalRuntimeOS/SideEffectSystem/SideEffectSystemTests.swift`,
   `Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift`, and
   `Native/AmbitionsTests/App/CalendarRealityServiceTests.swift`.

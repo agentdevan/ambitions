@@ -13,7 +13,7 @@ struct CommandInspector: Sendable, Equatable, Hashable {
                 severity: records.isEmpty ? .notice : .healthy,
                 summary: records.isEmpty ? "No command execution records supplied." : "Inspected \(records.count) command execution records.",
                 detail: "Command diagnostics inspect validation state, execution status, local-only posture, and privacy class without exposing command payload text.",
-                repairHint: records.isEmpty ? "Wire command journal records into diagnostics before claiming command-spine health." : "Keep command failures tied to command IDs, receipts, and replay evidence.",
+                repairHint: records.isEmpty ? "Wire command journal records into diagnostics before claiming Commands health." : "Keep command failures tied to command IDs, receipts, and replay evidence.",
                 generatedAt: generatedAt
             )
         ]

@@ -232,7 +232,7 @@ def summary(rows: list[AuditRow], findings: list[Finding]) -> dict[str, object]:
 
 
 def run_self_test() -> int:
-    assert classify("Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandJournal.swift")[0] == CANONICAL_CLASSIFICATION
+    assert classify("Native/Ambitions/Core/LocalRuntimeOS/Commands/CommandJournal.swift")[0] == CANONICAL_CLASSIFICATION
     assert classify("Native/Ambitions/Core/Persistence/SwiftDataRepositories.swift")[0] == UNKNOWN_CLASSIFICATION
     assert classify("Native/Ambitions/Projection/ExternalSnapshots/ExternalCreationContracts.swift")[0] == ADAPTER_CLASSIFICATION
     assert classify("Native/Ambitions/Projection/ExternalSnapshots/SharedExternalSnapshotStore.swift")[0] == PROJECTION_CLASSIFICATION

@@ -28,7 +28,7 @@ PRODUCTION_SWIFT_ROOTS = [
 
 REQUIRED_LOCAL_RUNTIME_OWNERS = [
     "Boundary",
-    "CommandSpine",
+    "Commands",
     "TransactionKernel",
     "EventJournal",
     "ObjectState",
@@ -67,7 +67,7 @@ INTEGRATION_MARKERS = {
         ],
     },
     "command_journal_runtime_linkage": {
-        "path": "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandJournal.swift",
+        "path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/CommandJournal.swift",
         "markers": [
             "CommandJournalRuntimeLink",
             "linkRuntimeCommit",
@@ -153,12 +153,12 @@ MUTATION_PATTERNS = [
     (
         "today-direct-action-closure-service",
         re.compile(r"\bservice\.recordActionClosure\s*\("),
-        "Today action closure writes through a service call; LocalRuntimeProof requires command-spine coverage for the mutation.",
+        "Today action closure writes through a service call; LocalRuntimeProof requires Commands coverage for the mutation.",
     ),
     (
         "today-direct-recommendation-rejection-service",
         re.compile(r"\bservice\.recordRecommendationRejection\s*\("),
-        "Today recommendation rejection writes through a service call; LocalRuntimeProof requires command-spine coverage for the mutation.",
+        "Today recommendation rejection writes through a service call; LocalRuntimeProof requires Commands coverage for the mutation.",
     ),
     (
         "surface-viewmodel-save",
@@ -278,7 +278,7 @@ TRUTH_GAP_PATTERNS = [
         "does not prove the full local runtime OS until later implementation trains",
     ),
     (
-        "truth-declares-command-spine-not-app-wide",
+        "truth-declares-commands-not-app-wide",
         "does not prove app-wide command-only mutation",
     ),
     (
@@ -706,14 +706,14 @@ def check_live_event_store_authority() -> CheckResult:
 def check_command_event_reconciliation() -> CheckResult:
     findings: list[Finding] = []
     required_markers = {
-        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "CommandSpine" / "CommandJournal.swift": [
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Commands" / "CommandJournal.swift": [
             "CommandJournalRuntimeLink",
             "CommandJournalRuntimeLinkChecksum",
             "linkRuntimeCommit",
             "runtimeEventID",
             "runtimeReceiptID",
         ],
-        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "CommandSpine" / "RuntimeTransactionCommitPolicy.swift": [
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Commands" / "RuntimeTransactionCommitPolicy.swift": [
             "commandJournal.linkRuntimeCommit",
             "commandJournalRuntimeLinkStatus",
             "linkReceipt.resultMetadata",
@@ -738,11 +738,11 @@ def check_command_event_reconciliation() -> CheckResult:
             "runtimeReplayAuthority",
             "repaired_from_runtime_event",
         ],
-        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "CommandSpine" / "AmbitionsCommandExecutor.swift": [
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Commands" / "AmbitionsCommandExecutor.swift": [
             "RuntimeEventCommandReplayAdapter",
             "runtimeEvents: runtimeEvents",
         ],
-        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "CommandSpine" / "RuntimeCommandMutationCommitter.swift": [
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Commands" / "RuntimeCommandMutationCommitter.swift": [
             "RuntimeEventCommandReplayAdapter",
             "runtimeEvents: runtimeEvents",
         ],
@@ -783,7 +783,7 @@ def check_command_event_reconciliation() -> CheckResult:
 def check_meaningful_mutation_commit_policy() -> CheckResult:
     findings: list[Finding] = []
     required_markers = {
-        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "CommandSpine" / "RuntimeTransactionCommitPolicy.swift": [
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Commands" / "RuntimeTransactionCommitPolicy.swift": [
             "RuntimeTransactionCommitPolicy",
             "meaningful_mutation_requires_commit",
             "requiredEvidenceKeys",
@@ -799,10 +799,10 @@ def check_meaningful_mutation_commit_policy() -> CheckResult:
             "runtime_transaction_failure_receipt.native.v1",
             "runtimeCommitFailureReceiptID",
         ],
-        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "CommandSpine" / "AmbitionsCommandExecutor+ReceiptPersistence.swift": [
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Commands" / "AmbitionsCommandExecutor+ReceiptPersistence.swift": [
             "RuntimeTransactionCommitPolicy.resultByCommittingRuntimeTransaction",
         ],
-        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "CommandSpine" / "RuntimeCommandMutationCommitter.swift": [
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Commands" / "RuntimeCommandMutationCommitter.swift": [
             "RuntimeTransactionCommitPolicy.resultByCommittingRuntimeTransaction",
         ],
         ROOT / "Native" / "Ambitions" / "Interaction" / "TodayCommandActionHandler.swift": [
@@ -1134,7 +1134,7 @@ def check_projection_store_surface_read_gate() -> CheckResult:
                     )
                 )
 
-    commit_path = ROOT / "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/RuntimeTransactionCommitPolicy.swift"
+    commit_path = ROOT / "Native/Ambitions/Core/LocalRuntimeOS/Commands/RuntimeTransactionCommitPolicy.swift"
     commit_text = read_text(commit_path) if commit_path.exists() else ""
     for marker in [
         "projectionStore: ProjectionStoreSQLite?",
@@ -2276,7 +2276,7 @@ def check_proof_ceiling_and_ci_evidence() -> CheckResult:
                     )
                 )
         stale_known_issue_phrases = [
-            "Canonical runtime command spine, validation, idempotency, and unit-of-work proof are missing.",
+            "Canonical runtime Commands validation, idempotency, and unit-of-work proof are missing.",
             "External side-effect unit-of-work is not proven.",
             "Local-first privacy boundary with account/R2 is not proven.",
             "Widgets, App Intents, and deep links may bypass command/runtime safety.",

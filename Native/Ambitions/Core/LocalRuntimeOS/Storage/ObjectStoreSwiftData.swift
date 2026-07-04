@@ -169,7 +169,7 @@ actor AmbitionsPersistenceStore {
             ObjectStoreSwiftDataFamilyDescriptor(
                 id: .goalThread,
                 storedTypeNames: ["GoalRecord"],
-                mutationAuthority: "Core/LocalRuntimeOS/CommandSpine + TransactionKernel + EventJournal",
+                mutationAuthority: "Core/LocalRuntimeOS/Commands + TransactionKernel + EventJournal",
                 fieldRules: [
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "GoalRecord", fieldName: "id", authority: .queryColumn, notes: "Stable local object identity and direct lookup column."),
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "GoalRecord", fieldName: "stateRaw", authority: .queryColumn, notes: "Queryable lifecycle state used for bounded surface reads."),
@@ -251,7 +251,7 @@ actor AmbitionsPersistenceStore {
             ObjectStoreSwiftDataFamilyDescriptor(
                 id: .eventLedger,
                 storedTypeNames: ["EventLedgerRecord", "CommandExecutionRecord"],
-                mutationAuthority: "Core/LocalRuntimeOS/CommandSpine + EventJournal + TrustSystem",
+                mutationAuthority: "Core/LocalRuntimeOS/Commands + EventJournal + TrustSystem",
                 fieldRules: [
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "EventLedgerRecord", fieldName: "kindRaw", authority: .queryColumn, notes: "Trust/history event kind lookup."),
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "CommandExecutionRecord", fieldName: "commandData", authority: .encodedValue, encodedTypeName: "AmbitionsCommand", notes: "Durable command payload."),
@@ -288,7 +288,7 @@ actor AmbitionsPersistenceStore {
             ObjectStoreSwiftDataFamilyDescriptor(
                 id: .appState,
                 storedTypeNames: ["AppStateRecord", "ReminderRecord"],
-                mutationAuthority: "Core/LocalRuntimeOS/CommandSpine + ObjectState",
+                mutationAuthority: "Core/LocalRuntimeOS/Commands + ObjectState",
                 fieldRules: [
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "AppStateRecord", fieldName: "preferredTabRaw", authority: .queryColumn, notes: "Current canonical surface preference."),
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "ReminderRecord", fieldName: "deliveryPolicyData", authority: .encodedValue, encodedTypeName: "ReminderDeliveryPolicy", notes: "Typed local reminder delivery policy.")

@@ -18,8 +18,8 @@ Ambitions must not silently move scheduled Step placement inside the next seven 
 ### Contract Implemented
 
 - Canonical owner: `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ProtectedStepPlacementPolicy.swift`.
-- Command preflight hook: `Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/PolicyGuardedCommandExecutor.swift`.
-- Test owner: `Native/AmbitionsTests/LocalRuntimeOS/TimeEngine/ProtectedStepPlacementPolicyTests.swift` and `Native/AmbitionsTests/LocalRuntimeOS/CommandSpine/PolicyGuardedCommandExecutorTests.swift`.
+- Command preflight hook: `Native/Ambitions/Core/LocalRuntimeOS/Commands/PolicyGuardedCommandExecutor.swift`.
+- Test owner: `Native/AmbitionsTests/LocalRuntimeOS/TimeEngine/ProtectedStepPlacementPolicyTests.swift` and `Native/AmbitionsTests/LocalRuntimeOS/Commands/PolicyGuardedCommandExecutorTests.swift`.
 - Deterministic decision states: `allowed`, `requires_explicit_approval`, `blocked_from_silent_movement`, and `pending_review`.
 - Inputs evaluated: current time, original placement, proposed placement, protected seven-day window, trigger, explicit approval, automation policy maturity, context quality, and local-only boundary.
 - Automatic movement inside the next seven days is blocked from silent application unless explicit approval is present.

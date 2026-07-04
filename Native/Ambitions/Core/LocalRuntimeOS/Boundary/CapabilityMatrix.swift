@@ -94,7 +94,7 @@ struct CapabilityMatrix: Sendable, Equatable {
                 localOnlyCompatible: true,
                 requiresAccount: false,
                 issueCodes: [],
-                explanation: "External action commands may request local commands but must not mutate outside the command spine."
+                explanation: "External action commands may request local commands but must not mutate outside the local command pipeline."
             ),
             RuntimeCapabilityDecision(
                 capability: .calendarReminderIntegration,

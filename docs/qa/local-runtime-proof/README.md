@@ -12,7 +12,7 @@ Command -> Event -> Projection -> Receipt -> Replay
 
 This gate is stricter than LocalRuntimeOS source-present inventory. Source parity
 can pass while LocalRuntimeProof remains Red if meaningful mutations still bypass
-the command spine, side effects can execute without durable outbox proof, event
+the Commands pipeline, side effects can execute without durable outbox proof, event
 replay/projection consumption is not app-wide, or truth files still contain
 explicit no-claim gaps.
 

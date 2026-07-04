@@ -206,7 +206,7 @@ run_xcode_tests() {
     -collect-test-diagnostics never
     -skip-testing:AmbitionsUITests
     -only-testing:AmbitionsTests/AmbitionsCommandExecutorTests
-    -only-testing:AmbitionsTests/CommandSpineLeafTests
+    -only-testing:AmbitionsTests/CommandsLeafTests
     -only-testing:AmbitionsTests/LocalRuntimeOSTransactionKernelOwnershipTests
     -only-testing:AmbitionsTests/RuntimeEventJournalTests
     -only-testing:AmbitionsTests/ProjectionEngineTests

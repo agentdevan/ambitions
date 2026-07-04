@@ -1,29 +1,29 @@
 import XCTest
 @testable import Ambitions
 
-final class LocalRuntimeOSCommandSpineOwnershipTests: XCTestCase {
-    func testRequiredCommandSpineFilesExistAtCanonicalPathsAndOldOwnersAreGone() {
+final class LocalRuntimeOSCommandsOwnershipTests: XCTestCase {
+    func testRequiredCommandsFilesExistAtCanonicalPathsAndOldOwnersAreGone() {
         let root = repoRoot()
         let required = [
-            "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/AmbitionsCommand.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/AmbitionsCommandTaxonomy.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandEnvelope.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandCompiler.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandAuthorizer.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandIdempotencyKey.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandJournal.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandReducer.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandRouter.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandResult.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandReceiptFactory.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandReplayAdapter.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandValidation.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Commands/AmbitionsCommand.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Commands/AmbitionsCommandTaxonomy.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Commands/CommandEnvelope.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Commands/CommandCompiler.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Commands/CommandAuthorizer.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Commands/CommandIdempotencyKey.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Commands/CommandJournal.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Commands/CommandReducer.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Commands/CommandRouter.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Commands/CommandResult.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Commands/CommandReceiptFactory.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Commands/CommandReplayAdapter.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Commands/CommandValidation.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/RuntimeEventCommandReplayAdapter.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/AmbitionsCommandExecutor.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/PolicyGuardedCommandExecutor.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/RuntimeValidator.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/ExternalActionCommandService.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/StageActionPipelineContract.swift"
+            "Native/Ambitions/Core/LocalRuntimeOS/Commands/AmbitionsCommandExecutor.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Commands/PolicyGuardedCommandExecutor.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Commands/RuntimeValidator.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Commands/ExternalActionCommandService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Commands/StageActionPipelineContract.swift"
         ]
 
         for path in required {
@@ -31,6 +31,10 @@ final class LocalRuntimeOSCommandSpineOwnershipTests: XCTestCase {
         }
 
         let retiredOwners = [
+            "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/AmbitionsCommand.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandJournal.swift",
+            "Native/AmbitionsTests/LocalRuntimeOS/CommandSpine/CommandSpineLeafTests.swift",
+            "Native/AmbitionsTests/LocalRuntimeOS/CommandSpine/LocalRuntimeOSCommandSpineOwnershipTests.swift",
             "Native/Ambitions/Projection/Commands/AmbitionsCommand.swift",
             "Native/Ambitions/Projection/Commands/CommandRouter.swift",
             "Native/Ambitions/Projection/Commands/CommandResult.swift",
@@ -116,7 +120,7 @@ final class LocalRuntimeOSCommandSpineOwnershipTests: XCTestCase {
     private func repoRoot() -> URL {
         var url = URL(fileURLWithPath: #filePath)
         while url.pathComponents.count > 1 {
-            let candidate = url.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/CommandSpine")
+            let candidate = url.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/Commands")
             if FileManager.default.fileExists(atPath: candidate.path) {
                 return url
             }

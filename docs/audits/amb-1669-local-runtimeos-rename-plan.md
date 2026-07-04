@@ -13,16 +13,16 @@ AMB-1669 keeps the LocalRuntimeOS mutation law while reducing architecture lore:
 Command -> Event -> Projection -> Receipt -> Replay
 ```
 
-This artifact records the current folder/type dependency graph, target runtime map, API exposure posture, and first rename slice.
+This artifact records the current folder/type dependency graph, target runtime map, API exposure posture, and applied rename slices.
 
 ## Current Owner Graph
 
-Current source owner count after the first slice: 19.
+Current source owner count after the `Commands` slice: 19.
 
 | Current owner | Swift files | Target owner | Status |
 | --- | ---: | --- | --- |
 | Boundary | 18 | Boundary | First slice renamed from `RuntimeBoundary` |
-| CommandSpine | 25 | Commands or CommandPipeline | Pending |
+| Commands | 25 | Commands | Second slice renamed from `CommandSpine` |
 | TransactionKernel | 12 | Transactions | Pending |
 | EventJournal | 10 | Events or EventJournal | Pending |
 | ObjectState | 4 | State | Pending |
@@ -64,15 +64,41 @@ Reason:
 - The move changes canonical ownership without changing runtime behavior.
 - Behavior types such as `PrivateLifeRuntimeBoundary`, `SourceAtlasBoundary`, and `NetworkEgressPolicy` remain intact because they are concrete contract types, not folder owners.
 
+## Second Rename Slice
+
+Applied second:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/
+Native/AmbitionsTests/LocalRuntimeOS/CommandSpine/
+```
+
+to:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/Commands/
+Native/AmbitionsTests/LocalRuntimeOS/Commands/
+```
+
+Reason:
+
+- `Commands` is explicitly named by AMB-1669 target direction.
+- The old owner was a folder-level lore noun; retained Swift types such as
+  `AmbitionsCommand`, `CommandJournal`, and `CommandCompiler` already carry the
+  behavior contract plainly.
+- The move changes canonical ownership without changing runtime behavior.
+- The ownership test now proves required `Commands` files exist and the old
+  `CommandSpine` production/test owner paths are gone.
+
 ## API Exposure
 
-The moved `Boundary` source contains no `public` or `open` Swift API declarations.
+The moved `Boundary` and `Commands` source contains no `public` or `open` Swift API declarations.
 
 Current exposure is same-module production/test use through Swift files under the existing `Ambitions` target and `AmbitionsTests` target. XcodeGen source discovery is directory-based through `project.yml`, so the move requires project regeneration but no package or target boundary change.
 
-Known direct consumers of the moved types remain same-module:
+Known direct consumers of the moved `Boundary` types remain same-module:
 
-- `CommandSpine`
+- `Commands`
 - `TransactionKernel`
 - `ProjectionEngine`
 - `PrivateLifeRuntimeKernel`
@@ -102,12 +128,11 @@ This slice can support Source Green for the folder-owner rename if validation pa
 
 Proceed one compartment at a time after guards pass:
 
-1. `CommandSpine` -> `Commands` or `CommandPipeline`
-2. `TransactionKernel` -> `Transactions`
-3. `ProjectionEngine` -> `Projections`
-4. `SideEffectSystem` -> `ExternalWrites` or `Outbox`
-5. `TrustSystem` -> `Inspection` or `Receipts`
-6. `SearchRecall` -> `Search`
-7. `MigrationRepair` -> `Repair`
+1. `TransactionKernel` -> `Transactions`
+2. `ProjectionEngine` -> `Projections`
+3. `SideEffectSystem` -> `ExternalWrites` or `Outbox`
+4. `TrustSystem` -> `Inspection` or `Receipts`
+5. `SearchRecall` -> `Search`
+6. `MigrationRepair` -> `Repair`
 
 Each next slice must update tests, current truth/proof references, and the LocalRuntimeProof owner list before closeout.
