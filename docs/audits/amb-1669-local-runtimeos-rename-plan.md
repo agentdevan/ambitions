@@ -17,13 +17,13 @@ This artifact records the current folder/type dependency graph, target runtime m
 
 ## Current Owner Graph
 
-Current source owner count after the `Commands` slice: 19.
+Current source owner count after the `Transactions` slice: 19.
 
 | Current owner | Swift files | Target owner | Status |
 | --- | ---: | --- | --- |
 | Boundary | 18 | Boundary | First slice renamed from `RuntimeBoundary` |
 | Commands | 25 | Commands | Second slice renamed from `CommandSpine` |
-| TransactionKernel | 12 | Transactions | Pending |
+| Transactions | 12 | Transactions | Third slice renamed from `TransactionKernel` |
 | EventJournal | 10 | Events or EventJournal | Pending |
 | ObjectState | 4 | State | Pending |
 | ProjectionEngine | 32 | Projections | Pending |
@@ -90,16 +90,42 @@ Reason:
 - The ownership test now proves required `Commands` files exist and the old
   `CommandSpine` production/test owner paths are gone.
 
+## Third Rename Slice
+
+Applied third:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/
+Native/AmbitionsTests/LocalRuntimeOS/TransactionKernel/
+```
+
+to:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/Transactions/
+Native/AmbitionsTests/LocalRuntimeOS/Transactions/
+```
+
+Reason:
+
+- `Transactions` is explicitly named by AMB-1669 target direction.
+- The old owner was a folder-level architecture noun; retained Swift types such
+  as `RuntimeTransaction`, `RuntimeTransactionCoordinator`, and
+  `RuntimeMutationPlan` already carry the behavior contract plainly.
+- The move changes canonical ownership without changing runtime behavior.
+- The ownership test now proves required `Transactions` files exist and the old
+  `TransactionKernel` production/test owner paths are gone.
+
 ## API Exposure
 
-The moved `Boundary` and `Commands` source contains no `public` or `open` Swift API declarations.
+The moved `Boundary`, `Commands`, and `Transactions` source contains no `public` or `open` Swift API declarations.
 
 Current exposure is same-module production/test use through Swift files under the existing `Ambitions` target and `AmbitionsTests` target. XcodeGen source discovery is directory-based through `project.yml`, so the move requires project regeneration but no package or target boundary change.
 
 Known direct consumers of the moved `Boundary` types remain same-module:
 
 - `Commands`
-- `TransactionKernel`
+- `Transactions`
 - `ProjectionEngine`
 - `PrivateLifeRuntimeKernel`
 - `PlanningEngine`
@@ -128,11 +154,10 @@ This slice can support Source Green for the folder-owner rename if validation pa
 
 Proceed one compartment at a time after guards pass:
 
-1. `TransactionKernel` -> `Transactions`
-2. `ProjectionEngine` -> `Projections`
-3. `SideEffectSystem` -> `ExternalWrites` or `Outbox`
-4. `TrustSystem` -> `Inspection` or `Receipts`
-5. `SearchRecall` -> `Search`
-6. `MigrationRepair` -> `Repair`
+1. `ProjectionEngine` -> `Projections`
+2. `SideEffectSystem` -> `ExternalWrites` or `Outbox`
+3. `TrustSystem` -> `Inspection` or `Receipts`
+4. `SearchRecall` -> `Search`
+5. `MigrationRepair` -> `Repair`
 
 Each next slice must update tests, current truth/proof references, and the LocalRuntimeProof owner list before closeout.

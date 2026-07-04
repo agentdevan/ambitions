@@ -279,7 +279,7 @@ final class CaptureRouteGraphTests: XCTestCase {
 
         XCTAssertEqual(lookup.captureID, "capture-promotion-1")
         XCTAssertTrue(promotion.satisfiesRuntimeSpine)
-        XCTAssertEqual(promotion.writeAuthority, "Core/LocalRuntimeOS/CaptureRouteGraph + TransactionKernel")
+        XCTAssertEqual(promotion.writeAuthority, "Core/LocalRuntimeOS/CaptureRouteGraph + Transactions")
         XCTAssertEqual(promotion.sideEffectPolicy, AppUnitOfWorkReceipt.noExternalSideEffects)
         XCTAssertEqual(promotion.runtimeEvent.kind, .tombstoneRecorded)
         XCTAssertEqual(promotion.runtimeEvent.metadata["capturePromotionReceiptID"], promotion.id)

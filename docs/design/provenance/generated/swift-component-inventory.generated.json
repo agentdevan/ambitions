@@ -9124,12 +9124,12 @@
       ],
       "has_preview_provider": false,
       "kind": "test",
-      "line_count": 327,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/TransactionKernel/LocalRuntimeOSTransactionKernelOwnershipTests.swift",
+      "line_count": 345,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/Transactions/LocalRuntimeOSTransactionsOwnershipTests.swift",
       "preview_count": 0,
       "proof_status": "source_inventory_only",
       "test_cases": [
-        "LocalRuntimeOSTransactionKernelOwnershipTests"
+        "LocalRuntimeOSTransactionsOwnershipTests"
       ],
       "view_modifiers": [],
       "view_structs": []

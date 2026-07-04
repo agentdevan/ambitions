@@ -29,7 +29,7 @@ PRODUCTION_SWIFT_ROOTS = [
 REQUIRED_LOCAL_RUNTIME_OWNERS = [
     "Boundary",
     "Commands",
-    "TransactionKernel",
+    "Transactions",
     "EventJournal",
     "ObjectState",
     "ProjectionEngine",
@@ -105,7 +105,7 @@ INTEGRATION_MARKERS = {
         ],
     },
     "transaction_event_projection_commit": {
-        "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeTransactionCoordinator.swift",
+        "path": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeTransactionCoordinator.swift",
         "markers": [
             "RuntimeEventStore",
             "ProjectionMaterializer",
@@ -251,16 +251,16 @@ EXTERNAL_SURFACE_PRIVATE_GRAPH_READ_PATTERNS = [
 ]
 
 RUNTIME_EVENT_APPEND_ALLOWED_PATHS = {
-    "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeTransactionCoordinator.swift",
+    "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeTransactionCoordinator.swift",
 }
 
 PROJECTION_MATERIALIZATION_ALLOWED_PATHS = {
-    "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeTransactionCoordinator.swift",
+    "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeTransactionCoordinator.swift",
     "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/SearchRebuildPipeline.swift",
 }
 
-RUNTIME_MUTATION_CONTEXT_PATH = "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeMutationContext.swift"
-RUNTIME_TRANSACTION_PATH = "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeTransaction.swift"
+RUNTIME_MUTATION_CONTEXT_PATH = "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeMutationContext.swift"
+RUNTIME_TRANSACTION_PATH = "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeTransaction.swift"
 OBJECT_STATE_CORE_PATH = "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/ObjectStateCore.swift"
 OBJECT_STATE_CONTRACTS_PATH = "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/ObjectStateContracts.swift"
 APP_STATE_STORE_PATH = "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/AppStateStore.swift"
@@ -794,7 +794,7 @@ def check_meaningful_mutation_commit_policy() -> CheckResult:
             "failureResult",
             "RuntimeTransactionCoordinator",
         ],
-        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "TransactionKernel" / "RuntimeTransactionFailureReceipt.swift": [
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Transactions" / "RuntimeTransactionFailureReceipt.swift": [
             "RuntimeTransactionFailureReceipt",
             "runtime_transaction_failure_receipt.native.v1",
             "runtimeCommitFailureReceiptID",
@@ -808,11 +808,11 @@ def check_meaningful_mutation_commit_policy() -> CheckResult:
         ROOT / "Native" / "Ambitions" / "Interaction" / "TodayCommandActionHandler.swift": [
             "RuntimeTransactionCommitPolicy.resultByCommittingRuntimeTransaction",
         ],
-        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "TransactionKernel" / "RuntimeTransaction.swift": [
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Transactions" / "RuntimeTransaction.swift": [
             "youPreferencesObjectID",
             "updateUserPreferences",
         ],
-        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "TransactionKernel" / "RuntimeMutation.swift": [
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Transactions" / "RuntimeMutation.swift": [
             "youPreferencesObjectID",
             "updateUserPreferences",
         ],
@@ -2069,7 +2069,7 @@ def check_runtime_mutation_context_boundaries() -> CheckResult:
                 "legacy-object-state-context-still-owned-by-object-state",
                 OBJECT_STATE_CORE_PATH,
                 None,
-                "RuntimeMutationContext must be owned by TransactionKernel, not ObjectState.",
+                "RuntimeMutationContext must be owned by Transactions, not ObjectState.",
             )
         )
 
@@ -2102,7 +2102,7 @@ def check_runtime_mutation_context_boundaries() -> CheckResult:
     return make_result(
         "runtime_mutation_context_boundaries",
         findings,
-        "Canonical object-state write repositories require coordinator-issued TransactionKernel RuntimeMutationContext.",
+        "Canonical object-state write repositories require coordinator-issued Transactions RuntimeMutationContext.",
         "{count} runtime mutation context boundary blocker(s) remain.",
     )
 
@@ -2567,7 +2567,7 @@ def run_self_test() -> int:
     assert MUTATION_PATTERNS[3][1].search(sample)
     assert is_included_mutation_scan_path(ROOT / "Native" / "Ambitions" / "Surfaces" / "You" / "YouSurface.swift")
     assert not is_included_mutation_scan_path(ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Storage" / "ObjectStoreSwiftData.swift")
-    assert "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeTransactionCoordinator.swift" in RUNTIME_EVENT_APPEND_ALLOWED_PATHS
+    assert "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeTransactionCoordinator.swift" in RUNTIME_EVENT_APPEND_ALLOWED_PATHS
     assert "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/SearchRebuildPipeline.swift" in PROJECTION_MATERIALIZATION_ALLOWED_PATHS
     assert "surface_projection_store_consumption" in INTEGRATION_MARKERS
     assert any(prefix.endswith("AmbitionsWidgetExtension/") for prefix in EXTERNAL_SURFACE_SCAN_INCLUDED_PREFIXES)
@@ -2582,7 +2582,7 @@ def run_self_test() -> int:
     assert any(result.check_id == "proof_ceiling_and_ci_evidence" for result in [check_proof_ceiling_and_ci_evidence()])
     assert len(LRO_100_CHECKLIST) == 20
     assert {spec.check_id for spec in LRO_100_CHECKLIST} == {result.check_id for result in run_checks()}
-    assert RUNTIME_MUTATION_CONTEXT_PATH.endswith("TransactionKernel/RuntimeMutationContext.swift")
+    assert RUNTIME_MUTATION_CONTEXT_PATH.endswith("Transactions/RuntimeMutationContext.swift")
     service_write = "try await repositories.goals.saveGoals([goal])"
     service_match = SERVICE_MUTATION_CALL_PATTERN.search(service_write)
     assert service_match is not None

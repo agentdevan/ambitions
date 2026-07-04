@@ -89,7 +89,7 @@ struct ObjectStateFamilyDescriptor: Codable, Sendable, Equatable, Hashable, Iden
         tombstoneEntityKind: EntityRevisionTombstoneEntityKind,
         runtimeTombstoneFamily: RuntimeTombstoneObjectFamily,
         supersessionPolicy: ObjectStateSupersessionPolicy,
-        canonicalMutationAuthority: String = "Core/LocalRuntimeOS/Commands + TransactionKernel + EventJournal",
+        canonicalMutationAuthority: String = "Core/LocalRuntimeOS/Commands + Transactions + EventJournal",
         adapterOwner: String? = nil,
         remainingDirectWriteDebt: String? = nil
     ) {

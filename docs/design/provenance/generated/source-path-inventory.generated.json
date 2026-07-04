@@ -8311,7 +8311,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 84,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeCommitReceipt.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeCommitReceipt.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -8322,7 +8322,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 118,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeConflictDetector.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeConflictDetector.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -8333,7 +8333,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 62,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeIdempotencyStore.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeIdempotencyStore.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -8347,7 +8347,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 166,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeMutation.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeMutation.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -8358,7 +8358,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 227,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeMutationContext.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeMutationContext.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -8369,7 +8369,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 99,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeMutationPlan.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeMutationPlan.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -8380,7 +8380,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 70,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeReadSet.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeReadSet.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -8391,7 +8391,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 65,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeRollbackPlan.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeRollbackPlan.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -8406,7 +8406,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 225,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeTransaction.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeTransaction.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -8417,7 +8417,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 179,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeTransactionCoordinator.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeTransactionCoordinator.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -8428,7 +8428,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 57,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeTransactionFailureReceipt.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeTransactionFailureReceipt.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -8440,7 +8440,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 101,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeWriteSet.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeWriteSet.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -19885,8 +19885,8 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 327,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/TransactionKernel/LocalRuntimeOSTransactionKernelOwnershipTests.swift"
+      "line_count": 345,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/Transactions/LocalRuntimeOSTransactionsOwnershipTests.swift"
     },
     {
       "candidate_vsp_ids": [

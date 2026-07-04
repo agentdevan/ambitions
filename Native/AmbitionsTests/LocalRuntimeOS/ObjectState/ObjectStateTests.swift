@@ -5,7 +5,7 @@ final class ObjectStateTests: XCTestCase {
     func testObjectStateOwnerFilesExistUnderCanonicalLocalRuntimeOSOwner() throws {
         let root = try repoRoot()
         let requiredPaths = [
-            "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeMutationContext.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeMutationContext.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/ObjectStateCore.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/ObjectStateContracts.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/AppStateStore.swift",
@@ -20,10 +20,10 @@ final class ObjectStateTests: XCTestCase {
         )
     }
 
-    func testRuntimeMutationContextIsTransactionKernelOwnedAndRequiredByWriteStores() throws {
+    func testRuntimeMutationContextIsTransactionsOwnedAndRequiredByWriteStores() throws {
         let root = try repoRoot()
         let contextSource = try String(
-            contentsOf: root.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeMutationContext.swift"),
+            contentsOf: root.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeMutationContext.swift"),
             encoding: .utf8
         )
         let objectStateSource = try String(

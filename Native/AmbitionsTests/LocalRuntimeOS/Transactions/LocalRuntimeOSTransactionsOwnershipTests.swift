@@ -1,10 +1,24 @@
 @testable import Ambitions
 import XCTest
 
-final class LocalRuntimeOSTransactionKernelOwnershipTests: XCTestCase {
-    func testTransactionKernelLeavesBelongToCanonicalOwnerAndOldOwnerIsGone() {
+final class LocalRuntimeOSTransactionsOwnershipTests: XCTestCase {
+    func testTransactionsLeavesBelongToCanonicalOwnerAndOldOwnerIsGone() {
         let root = repoRoot()
         let canonicalPaths = [
+            "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeTransaction.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeTransactionCoordinator.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeMutationPlan.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeWriteSet.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeReadSet.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeCommitReceipt.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeRollbackPlan.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeConflictDetector.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeIdempotencyStore.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeMutationContext.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeMutation.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeTransactionFailureReceipt.swift",
+        ]
+        let retiredPaths = [
             "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeTransaction.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeTransactionCoordinator.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeMutationPlan.swift",
@@ -16,24 +30,28 @@ final class LocalRuntimeOSTransactionKernelOwnershipTests: XCTestCase {
             "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeIdempotencyStore.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeMutationContext.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeMutation.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeTransactionFailureReceipt.swift",
+            "Native/AmbitionsTests/LocalRuntimeOS/TransactionKernel/LocalRuntimeOSTransactionKernelOwnershipTests.swift",
+            removedRuntimeOwnerPath("RuntimeMutation.swift"),
         ]
-        let retiredPath = removedRuntimeOwnerPath("RuntimeMutation.swift")
 
         for canonicalPath in canonicalPaths {
             XCTAssertTrue(
                 FileManager.default.fileExists(atPath: root.appendingPathComponent(canonicalPath).path),
-                "Missing canonical TransactionKernel owner: \(canonicalPath)"
+                "Missing canonical Transactions owner: \(canonicalPath)"
             )
         }
-        XCTAssertFalse(
-            FileManager.default.fileExists(atPath: root.appendingPathComponent(retiredPath).path),
-            "Retired transaction owner still exists: \(retiredPath)"
-        )
+        for retiredPath in retiredPaths {
+            XCTAssertFalse(
+                FileManager.default.fileExists(atPath: root.appendingPathComponent(retiredPath).path),
+                "Retired transaction owner still exists: \(retiredPath)"
+            )
+        }
     }
 
     func testRuntimeMutationContextCreationIsCoordinatorOwnedInProductionSource() throws {
         let root = repoRoot().resolvingSymlinksInPath()
-        let contextPath = "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeMutationContext.swift"
+        let contextPath = "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeMutationContext.swift"
         let contextURL = root.appendingPathComponent(contextPath)
         let contextSource = try String(contentsOf: contextURL, encoding: .utf8)
 
@@ -294,7 +312,7 @@ final class LocalRuntimeOSTransactionKernelOwnershipTests: XCTestCase {
     private func repoRoot() -> URL {
         var url = URL(fileURLWithPath: #filePath)
         while url.pathComponents.count > 1 {
-            let candidate = url.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel")
+            let candidate = url.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/Transactions")
             if FileManager.default.fileExists(atPath: candidate.path) {
                 return url
             }
@@ -316,7 +334,7 @@ final class LocalRuntimeOSTransactionKernelOwnershipTests: XCTestCase {
 
     private func scratchDirectory() throws -> URL {
         let directory = URL(fileURLWithPath: "/tmp", isDirectory: true)
-            .appendingPathComponent("ambitions-transaction-kernel-tests-\(UUID().uuidString)", isDirectory: true)
+            .appendingPathComponent("ambitions-transaction-tests-\(UUID().uuidString)", isDirectory: true)
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         addTeardownBlock {
             try? FileManager.default.removeItem(at: directory)

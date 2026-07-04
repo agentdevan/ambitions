@@ -95,7 +95,7 @@ struct CapturePromotionTransactionReceipt: Codable, Sendable, Equatable, Hashabl
         summary = request.summary
         attachmentRecordIDs = request.attachmentRecords.map(\.id).sorted()
         attachmentChecksums = request.attachmentRecords.map(\.sha256).sorted()
-        writeAuthority = "Core/LocalRuntimeOS/CaptureRouteGraph + TransactionKernel"
+        writeAuthority = "Core/LocalRuntimeOS/CaptureRouteGraph + Transactions"
         sideEffectPolicy = AppUnitOfWorkReceipt.noExternalSideEffects
         requiresUnitOfWork = true
         localOnly = true
@@ -167,7 +167,7 @@ struct CapturePromotionTransactionReceipt: Codable, Sendable, Equatable, Hashabl
         localOnly &&
             requiresUnitOfWork &&
             sideEffectPolicy == AppUnitOfWorkReceipt.noExternalSideEffects &&
-            writeAuthority == "Core/LocalRuntimeOS/CaptureRouteGraph + TransactionKernel" &&
+            writeAuthority == "Core/LocalRuntimeOS/CaptureRouteGraph + Transactions" &&
             trustReceiptID.isEmpty == false &&
             tombstoneID.isEmpty == false &&
             replayHistoryID.isEmpty == false &&

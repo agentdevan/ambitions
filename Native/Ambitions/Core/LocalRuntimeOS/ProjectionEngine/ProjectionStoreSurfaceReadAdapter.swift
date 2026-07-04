@@ -40,7 +40,7 @@ struct ProjectionStoreReadRepairReceipt: Codable, Sendable, Equatable, Hashable,
         self.safeRebuildRequired = true
         self.fallbackRole = .rebuildInputOnly
         self.rebuildOwners = [
-            "Core/LocalRuntimeOS/TransactionKernel/RuntimeTransactionCoordinator",
+            "Core/LocalRuntimeOS/Transactions/RuntimeTransactionCoordinator",
             "Core/LocalRuntimeOS/SearchRecall/SearchRebuildPipeline",
         ]
         self.inspectedAt = inspectedAt
