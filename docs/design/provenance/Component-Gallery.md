@@ -89,9 +89,9 @@ Figma candidate screenshots:
 SwiftUI source owners:
 - Native/Ambitions/Surfaces/Goals/GoalsSurface.swift
 - Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift
-- Native/Ambitions/Projection/StageScenes/GoalsStageScene.swift
+- Native/Ambitions/Surfaces/Goals/Projection/GoalsStageScene.swift
 Candidate components:
-- `GoalsStageScene / Goals object owner` (`surface`) - `Native/Ambitions/Projection/StageScenes/GoalsStageScene.swift` - proof: `swiftui_render_missing`
+- `GoalsStageScene / Goals object owner` (`surface`) - `Native/Ambitions/Surfaces/Goals/Projection/GoalsStageScene.swift` - proof: `swiftui_render_missing`
 - `GroupedNavigationRow / Life area row candidate` (`surface`) - `Sources/Components/GroupedNavigationList.swift` - proof: `source_only`
 Known previews/tests/quality files:
 - Native/AmbitionsTests/Goals/GoalsConstellationAtlasReconstructionTests.swift

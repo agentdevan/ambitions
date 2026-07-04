@@ -732,6 +732,35 @@
     },
     {
       "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 29,
+      "path": "Native/Ambitions/Composer/Capture/Projection/CaptureLens.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-01",
+        "VSP-05",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 28,
+      "path": "Native/Ambitions/Composer/Capture/Projection/CaptureStageScene.swift"
+    },
+    {
+      "candidate_vsp_ids": [
         "VSP-07"
       ],
       "exists": true,
@@ -6411,10 +6440,12 @@
     },
     {
       "candidate_vsp_ids": [
+        "VSP-01",
         "VSP-02",
         "VSP-03",
         "VSP-04",
         "VSP-05",
+        "VSP-06",
         "VSP-07"
       ],
       "exists": true,
@@ -10739,6 +10770,34 @@
     },
     {
       "candidate_vsp_ids": [
+        "VSP-01",
+        "VSP-05",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 112,
+      "path": "Native/Ambitions/Projection/Contracts/OverlayProjectionContracts.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 98,
+      "path": "Native/Ambitions/Projection/Contracts/SurfaceLens.swift"
+    },
+    {
+      "candidate_vsp_ids": [
         "VSP-05",
         "VSP-10"
       ],
@@ -11056,106 +11115,6 @@
     },
     {
       "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-09",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 77,
-      "path": "Native/Ambitions/Projection/OverlayLenses/CaptureLens.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-07",
-        "VSP-09",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 28,
-      "path": "Native/Ambitions/Projection/OverlayLenses/ClosureLens.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 33,
-      "path": "Native/Ambitions/Projection/OverlayLenses/InspectionLens.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 27,
-      "path": "Native/Ambitions/Projection/OverlayLenses/SearchLens.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-01",
-        "VSP-05",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 78,
-      "path": "Native/Ambitions/Projection/OverlayScenes/CaptureStageScene.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-01",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 28,
-      "path": "Native/Ambitions/Projection/OverlayScenes/ClosureStageScene.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-01",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 28,
-      "path": "Native/Ambitions/Projection/OverlayScenes/InspectionStageScene.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-01",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 28,
-      "path": "Native/Ambitions/Projection/OverlayScenes/SearchStageScene.swift"
-    },
-    {
-      "candidate_vsp_ids": [
         "VSP-09"
       ],
       "exists": true,
@@ -11163,1818 +11122,6 @@
       "kind": "native_source",
       "line_count": 27,
       "path": "Native/Ambitions/Projection/StageMotionProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 51,
-      "path": "Native/Ambitions/Projection/StageScenes/GoalsStageScene.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 70,
-      "path": "Native/Ambitions/Projection/StageScenes/TimeStageScene.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 71,
-      "path": "Native/Ambitions/Projection/StageScenes/TodayStageScene.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-06",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 40,
-      "path": "Native/Ambitions/Projection/StageScenes/YouStageScene.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 514,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/DayRailProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 158,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/DayRailStepDetailState.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-09",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 394,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/DayRailViewState.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-01",
-        "VSP-03",
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 124,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalShellSummaryProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-01",
-        "VSP-02",
-        "VSP-03",
-        "VSP-07",
-        "VSP-09",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 359,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureModels+02-GoalsLifeAreaItemState.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-05",
-        "VSP-07",
-        "VSP-09",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 349,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureModels+03-GoalsOverview.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-09",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 308,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureModels+04-GoalSeedReviewState.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 362,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureModels+05-GoalPathStage.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 344,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureModels+06-GoalFeedbackItem.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 220,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureModels+07-GoalDetailMissionControlState.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 357,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 321,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+02-Snapshot.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-01",
-        "VSP-03",
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 299,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+03-resolveDetailContext.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-05",
-        "VSP-07",
-        "VSP-09",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 325,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+04-heroPrimaryAction.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-07",
-        "VSP-09",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 307,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+05-archiveLearningLines.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 314,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+06-makeAtlasPreview.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 209,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+07-pathBuilderState.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 301,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+08-missionControlState.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 125,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+09-goalDetailTimeline.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 455,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+10-performMutation.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 340,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+11-applyAdaptiveRecommendation.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-01",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 345,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+12-composerContext.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-09",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 325,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+13-detailSubtitle.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 323,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+14-strategicStatus.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 326,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+15-adaptiveResult.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 250,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+16-repositories.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 94,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+17-submitClarificationAnswer.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 117,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-01",
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 89,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsLens.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 277,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsOverviewBoardProjection+03-portfolioLifecycleState.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 53,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsOverviewBoardProjection+04-proofTitle.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-01",
-        "VSP-03",
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 240,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsOverviewBoardProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-01",
-        "VSP-03",
-        "VSP-05",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 169,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsOverviewProjector.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 93,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/RepositoryBackedTimeService.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-04",
-        "VSP-07",
-        "VSP-09",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 62,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/StartHereProductKernelProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 98,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/SurfaceLens.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 113,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeCalendarAwarenessSupport.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 89,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeCalendarRecoveryProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-04",
-        "VSP-07",
-        "VSP-09",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 91,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeCapacityReviewState.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 205,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeDecisionDebtProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-01",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 123,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeExecutionResilienceProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 132,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeHeroProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-08",
-        "VSP-09",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 185,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeLens.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 227,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeLifeShapeDrillDownProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 426,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeLifeShapeFieldProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-01",
-        "VSP-04",
-        "VSP-07",
-        "VSP-09",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 323,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeLifeShapeModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-09",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 131,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeLifeShapeSemanticProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 51,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeLifeSuiteProjector.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 128,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeLifeSuiteShapeProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-01",
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 200,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeLifeSuiteState.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 110,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimePlacementCalendarContracts.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 27,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimePlacementCandidateProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 126,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimePressureProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 38,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeProjectionService.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 53,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeProjectionSnapshot.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 274,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeProjectionUtilityDatePressure.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 196,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeProjectionUtilityGoalLifecycle.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 254,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeRealityReflowProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 150,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeRecoveryReceiptMaturityProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 128,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeReflowDecisionLabels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 152,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeReflowDecisionOptionProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 39,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeReflowDecisionProjector.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-09",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 208,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeReflowDecisionState.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 170,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeReflowRecoveryState.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 127,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeRitualsDashboardBuilder.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 197,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeRitualsMetrics.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 149,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeRitualsMutationHelpers.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 23,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeRitualsProjectionModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 149,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeRitualsProjectionService.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 74,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeShapingActionProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 254,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeSurfaceProjectionAssembly.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 325,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeSurfaceState.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 224,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeTimelineDecisionState.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 131,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeTimelineProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 118,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeTreatyCapacityProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 186,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeWeekShapeProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 44,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeWeeklyReviewCarryForwardProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 75,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeWeeklyReviewProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 135,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeWeeklySurfaceState.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-04",
-        "VSP-07",
-        "VSP-09",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 205,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TodayActionClosureSheetState.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-09",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 375,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TodayExecutionCompatibility.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-04",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 331,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TodayExecutionProjector+02-TodayExecutionProjector+Projector01-dayRailState.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 355,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TodayExecutionProjector+02-TodayExecutionProjector+Projector02-contractEntries.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 151,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TodayExecutionProjector+02-TodayExecutionProjector+Projector03-deeperSections.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 3,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TodayExecutionProjector+02-TodayExecutionProjector.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 181,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TodayExecutionProjector+03-TodayExecutionProjector.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 101,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TodayExecutionProjector.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-09",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 183,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TodayExecutionViewState.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-01",
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 269,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TodayFeatureModels+02-TodayTargetItem.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-04",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 354,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TodayFeatureModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-01",
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 352,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService+02-RepositoryBackedTodayService+Repository01-makeExperience.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-01",
-        "VSP-02",
-        "VSP-03",
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 358,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService+02-RepositoryBackedTodayService+Repository02-heroSeed.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-04",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 359,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService+02-RepositoryBackedTodayService+Repository03-openWindows.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-01",
-        "VSP-02",
-        "VSP-03",
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 63,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService+02-RepositoryBackedTodayService+Repository04-todayShellSummaries.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 462,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService+02-RepositoryBackedTodayService+Repository05-performFeedbackAction.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-01",
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 320,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService+02-RepositoryBackedTodayService+Repository06-adjustmentPayload.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-01",
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 360,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService+02-RepositoryBackedTodayService+Repository07-makeMilestone.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 148,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService+02-RepositoryBackedTodayService+Repository08-nextStepSchedulingSelection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 3,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService+02-RepositoryBackedTodayService.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-01",
-        "VSP-02",
-        "VSP-03"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 31,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService+03-TodayFocusState.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-04",
-        "VSP-05"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 79,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 144,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TodayFeatureSnapshot.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-04",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 119,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TodayLens.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 355,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TodayReadModelProjector.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-06",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 168,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouFeatureService.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-09",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 175,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceConstitutionProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 436,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceDashboardProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-05",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 347,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceEverythingSearchProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-05",
-        "VSP-07",
-        "VSP-08",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 240,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceLearningControlsProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 284,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceLifeContextHistoryProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 343,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceLifeContextOverviewProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 401,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceLifeContextProfileProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 390,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceLifeContextReceiptProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 168,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceLifeContextRuntimeProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 275,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceLifeContextSummaryUtilityProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 381,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceLifeContextUtilityProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 400,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceMemoryVaultProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-05",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 181,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceNarrativeMemoryProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-09",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 384,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServicePolicyCenterProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-08",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 292,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceReviewProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-05"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 63,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceSnapshot.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 392,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceSourceAtlasPrimaryProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-07",
-        "VSP-08",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 171,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceSourceAtlasReceiptRowsProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 311,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceSourceAtlasRowsProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 264,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceSystemCenterProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-08",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 245,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceTrustProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 132,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouHistoryDashboardBuilder.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 303,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouHistoryPatternProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 198,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouHistoryProjectionCore.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 251,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouHistoryProjectionLabels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 33,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouHistoryProjectionModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 28,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouHistoryProjectionService.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 60,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouHistoryTimelineProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 107,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouHistoryTrendProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-06",
-        "VSP-07",
-        "VSP-08",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 46,
-      "path": "Native/Ambitions/Projection/SurfaceLenses/YouLens.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -13289,6 +11436,24 @@
       "kind": "quality",
       "line_count": 84,
       "path": "Native/Ambitions/Quality/RealDeviceRenderChecklist.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-01",
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "quality",
+      "line_count": 192,
+      "path": "Native/Ambitions/Quality/ReleaseFrontendProofGate.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -14389,6 +12554,56 @@
     {
       "candidate_vsp_ids": [
         "VSP-01",
+        "VSP-02",
+        "VSP-07",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 28,
+      "path": "Native/Ambitions/Stage/Overlays/Projection/ClosureLens.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-01",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 28,
+      "path": "Native/Ambitions/Stage/Overlays/Projection/ClosureStageScene.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-01",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 27,
+      "path": "Native/Ambitions/Stage/Overlays/Projection/SearchLens.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-01",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 28,
+      "path": "Native/Ambitions/Stage/Overlays/Projection/SearchStageScene.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-01",
         "VSP-05",
         "VSP-09"
       ],
@@ -14891,12 +13106,13 @@
         "VSP-05",
         "VSP-07",
         "VSP-08",
-        "VSP-09"
+        "VSP-09",
+        "VSP-10"
       ],
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 126,
+      "line_count": 133,
       "path": "Native/Ambitions/Support/ReleaseCandidateLockDecisionReport.swift"
     },
     {
@@ -14923,7 +13139,8 @@
         "VSP-05",
         "VSP-07",
         "VSP-08",
-        "VSP-09"
+        "VSP-09",
+        "VSP-10"
       ],
       "exists": true,
       "inventory_only": true,
@@ -15190,6 +13407,421 @@
     },
     {
       "candidate_vsp_ids": [
+        "VSP-01",
+        "VSP-03",
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 124,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalShellSummaryProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-01",
+        "VSP-02",
+        "VSP-03",
+        "VSP-07",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 359,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureModels+02-GoalsLifeAreaItemState.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-05",
+        "VSP-07",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 349,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureModels+03-GoalsOverview.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 308,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureModels+04-GoalSeedReviewState.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 362,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureModels+05-GoalPathStage.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 344,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureModels+06-GoalFeedbackItem.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 220,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureModels+07-GoalDetailMissionControlState.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 357,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 321,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService+02-Snapshot.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-01",
+        "VSP-03",
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 299,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService+03-resolveDetailContext.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-05",
+        "VSP-07",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 325,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService+04-heroPrimaryAction.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-07",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 307,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService+05-archiveLearningLines.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 314,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService+06-makeAtlasPreview.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 209,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService+07-pathBuilderState.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 301,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService+08-missionControlState.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 125,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService+09-goalDetailTimeline.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 455,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService+10-performMutation.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 340,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService+11-applyAdaptiveRecommendation.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-01",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 345,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService+12-composerContext.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 325,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService+13-detailSubtitle.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 323,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService+14-strategicStatus.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 326,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService+15-adaptiveResult.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 250,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService+16-repositories.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 94,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService+17-submitClarificationAnswer.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 117,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-01",
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 89,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsLens.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 277,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsOverviewBoardProjection+03-portfolioLifecycleState.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 53,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsOverviewBoardProjection+04-proofTitle.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-01",
+        "VSP-03",
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 240,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsOverviewBoardProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-01",
+        "VSP-03",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 169,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsOverviewProjector.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 51,
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsStageScene.swift"
+    },
+    {
+      "candidate_vsp_ids": [
         "VSP-02",
         "VSP-03",
         "VSP-04",
@@ -15308,6 +13940,573 @@
       "kind": "native_source",
       "line_count": 22,
       "path": "Native/Ambitions/Surfaces/SurfacePrimaryObject.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 93,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/RepositoryBackedTimeService.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 113,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeCalendarAwarenessSupport.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 89,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeCalendarRecoveryProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-07",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 91,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeCapacityReviewState.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 205,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeDecisionDebtProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-01",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 123,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeExecutionResilienceProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 132,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeHeroProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 185,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeLens.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 227,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeLifeShapeDrillDownProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 426,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeLifeShapeFieldProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-01",
+        "VSP-04",
+        "VSP-07",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 323,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeLifeShapeModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 131,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeLifeShapeSemanticProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 51,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeLifeSuiteProjector.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 128,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeLifeSuiteShapeProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-01",
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 200,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeLifeSuiteState.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 110,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimePlacementCalendarContracts.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 27,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimePlacementCandidateProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 126,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimePressureProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 38,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeProjectionService.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 53,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeProjectionSnapshot.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 274,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeProjectionUtilityDatePressure.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 196,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeProjectionUtilityGoalLifecycle.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 254,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeRealityReflowProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 150,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeRecoveryReceiptMaturityProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 128,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeReflowDecisionLabels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 152,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeReflowDecisionOptionProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 39,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeReflowDecisionProjector.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 208,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeReflowDecisionState.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 170,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeReflowRecoveryState.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 127,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeRitualsDashboardBuilder.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 197,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeRitualsMetrics.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 149,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeRitualsMutationHelpers.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 23,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeRitualsProjectionModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 149,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeRitualsProjectionService.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 74,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeShapingActionProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 70,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeStageScene.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 254,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeSurfaceProjectionAssembly.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 325,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeSurfaceState.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 224,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeTimelineDecisionState.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 131,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeTimelineProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 118,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeTreatyCapacityProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 186,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeWeekShapeProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 44,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeWeeklyReviewCarryForwardProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 75,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeWeeklyReviewProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 135,
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeWeeklySurfaceState.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -15460,6 +14659,407 @@
     {
       "candidate_vsp_ids": [
         "VSP-02",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 514,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/DayRailProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 158,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/DayRailStepDetailState.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 394,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/DayRailViewState.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-07",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 62,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/StartHereProductKernelProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-07",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 205,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/TodayActionClosureSheetState.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 375,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/TodayExecutionCompatibility.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 331,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/TodayExecutionProjector+02-TodayExecutionProjector+Projector01-dayRailState.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 355,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/TodayExecutionProjector+02-TodayExecutionProjector+Projector02-contractEntries.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 151,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/TodayExecutionProjector+02-TodayExecutionProjector+Projector03-deeperSections.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 3,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/TodayExecutionProjector+02-TodayExecutionProjector.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 181,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/TodayExecutionProjector+03-TodayExecutionProjector.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 101,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/TodayExecutionProjector.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 183,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/TodayExecutionViewState.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-01",
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 269,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/TodayFeatureModels+02-TodayTargetItem.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 354,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/TodayFeatureModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-01",
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 352,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/TodayFeatureService+02-RepositoryBackedTodayService+Repository01-makeExperience.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-01",
+        "VSP-02",
+        "VSP-03",
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 358,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/TodayFeatureService+02-RepositoryBackedTodayService+Repository02-heroSeed.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 359,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/TodayFeatureService+02-RepositoryBackedTodayService+Repository03-openWindows.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-01",
+        "VSP-02",
+        "VSP-03",
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 63,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/TodayFeatureService+02-RepositoryBackedTodayService+Repository04-todayShellSummaries.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 462,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/TodayFeatureService+02-RepositoryBackedTodayService+Repository05-performFeedbackAction.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-01",
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 320,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/TodayFeatureService+02-RepositoryBackedTodayService+Repository06-adjustmentPayload.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-01",
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 360,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/TodayFeatureService+02-RepositoryBackedTodayService+Repository07-makeMilestone.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 148,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/TodayFeatureService+02-RepositoryBackedTodayService+Repository08-nextStepSchedulingSelection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 3,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/TodayFeatureService+02-RepositoryBackedTodayService.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-01",
+        "VSP-02",
+        "VSP-03"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 31,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/TodayFeatureService+03-TodayFocusState.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-05"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 79,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/TodayFeatureService.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 144,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/TodayFeatureSnapshot.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 119,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/TodayLens.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 355,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/TodayReadModelProjector.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 71,
+      "path": "Native/Ambitions/Surfaces/Today/Projection/TodayStageScene.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
         "VSP-07",
         "VSP-09"
       ],
@@ -15576,6 +15176,449 @@
       "kind": "native_source",
       "line_count": 150,
       "path": "Native/Ambitions/Surfaces/Today/TodayViewModel.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-06",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 168,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouFeatureService.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-06",
+        "VSP-07",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 175,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceConstitutionProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-06",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 436,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceDashboardProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-05",
+        "VSP-06",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 347,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceEverythingSearchProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-05",
+        "VSP-06",
+        "VSP-07",
+        "VSP-08",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 240,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceLearningControlsProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-06",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 284,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceLifeContextHistoryProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-06",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 343,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceLifeContextOverviewProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-06"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 401,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceLifeContextProfileProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-06",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 390,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceLifeContextReceiptProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-06"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 168,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceLifeContextRuntimeProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-06"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 275,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceLifeContextSummaryUtilityProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-06",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 381,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceLifeContextUtilityProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-06",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 400,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceMemoryVaultProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-05",
+        "VSP-06",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 181,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceNarrativeMemoryProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-06",
+        "VSP-07",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 384,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouFeatureServicePolicyCenterProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-06",
+        "VSP-07",
+        "VSP-08",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 292,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceReviewProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-05",
+        "VSP-06"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 63,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceSnapshot.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-06",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 392,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceSourceAtlasPrimaryProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-06",
+        "VSP-07",
+        "VSP-08",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 171,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceSourceAtlasReceiptRowsProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-06",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 311,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceSourceAtlasRowsProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-06",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 264,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceSystemCenterProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-06",
+        "VSP-07",
+        "VSP-08",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 245,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceTrustProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-06",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 132,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouHistoryDashboardBuilder.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-06",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 303,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouHistoryPatternProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-06",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 198,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouHistoryProjectionCore.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-06",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 251,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouHistoryProjectionLabels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-06",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 33,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouHistoryProjectionModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-06",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 28,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouHistoryProjectionService.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-06",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 60,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouHistoryTimelineProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-06",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 107,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouHistoryTrendProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-06",
+        "VSP-07",
+        "VSP-08",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 46,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouLens.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-06",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 40,
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouStageScene.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -15950,6 +15993,29 @@
       "kind": "native_source",
       "line_count": 8,
       "path": "Native/Ambitions/Trust/PrivacyInspectionView.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 33,
+      "path": "Native/Ambitions/Trust/Projection/InspectionLens.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-01",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 28,
+      "path": "Native/Ambitions/Trust/Projection/InspectionStageScene.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -16621,7 +16687,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 357,
+      "line_count": 358,
       "path": "Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift"
     },
     {
@@ -16732,7 +16798,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 187,
+      "line_count": 188,
       "path": "Native/AmbitionsTests/App/PersonalSystemCenterDesignSystemTests.swift"
     },
     {
@@ -16785,12 +16851,13 @@
         "VSP-01",
         "VSP-07",
         "VSP-08",
-        "VSP-09"
+        "VSP-09",
+        "VSP-10"
       ],
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 74,
+      "line_count": 77,
       "path": "Native/AmbitionsTests/App/ReleaseCandidateLockDecisionReportTests.swift"
     },
     {
@@ -16813,12 +16880,13 @@
         "VSP-05",
         "VSP-07",
         "VSP-08",
-        "VSP-09"
+        "VSP-09",
+        "VSP-10"
       ],
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 117,
+      "line_count": 131,
       "path": "Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift"
     },
     {
@@ -17014,7 +17082,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 288,
+      "line_count": 289,
       "path": "Native/AmbitionsTests/App/TrustReceiptLayerDesignSystemTests.swift"
     },
     {
@@ -20070,7 +20138,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 345,
+      "line_count": 411,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/Transactions/LocalRuntimeOSTransactionsOwnershipTests.swift"
     },
     {
@@ -20279,7 +20347,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 80,
+      "line_count": 101,
       "path": "Native/AmbitionsTests/Projection/OverlayLensesCanonicalOwnershipTests.swift"
     },
     {
@@ -20294,7 +20362,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 87,
+      "line_count": 107,
       "path": "Native/AmbitionsTests/Projection/OverlayScenesCanonicalOwnershipTests.swift"
     },
     {
@@ -20311,7 +20379,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 63,
+      "line_count": 79,
       "path": "Native/AmbitionsTests/Projection/StageScenesCanonicalOwnershipTests.swift"
     },
     {
@@ -20328,7 +20396,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 86,
+      "line_count": 103,
       "path": "Native/AmbitionsTests/Projection/SurfaceLensesCanonicalOwnershipTests.swift"
     },
     {
@@ -20378,6 +20446,24 @@
       "kind": "test",
       "line_count": 54,
       "path": "Native/AmbitionsTests/Quality/RealDeviceRenderChecklistTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-01",
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 96,
+      "path": "Native/AmbitionsTests/Quality/ReleaseFrontendProofGateTests.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -21157,7 +21243,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 294,
+      "line_count": 295,
       "path": "Native/AmbitionsTests/Time/TimeClockTests.swift"
     },
     {
@@ -23157,7 +23243,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "doc",
-      "line_count": 920,
+      "line_count": 933,
       "path": "docs/truth/PRODUCT_DESIGN_TRUTH.md"
     },
     {
@@ -23219,11 +23305,11 @@
       "exists": true,
       "inventory_only": true,
       "kind": "script",
-      "line_count": 1032,
+      "line_count": 1072,
       "path": "scripts/ambitions-quality-gate.py"
     }
   ],
-  "entry_count": 1872,
+  "entry_count": 1875,
   "generated_at": "deterministic-from-current-source-inputs",
   "generator": "scripts/ambitions-component-inventory-generate.py",
   "schema_version": 1

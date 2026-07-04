@@ -28,7 +28,7 @@ Annotation title: VSP-02 provenance - Today Reality Window
 Frame naming recommendation: CANDIDATE - VSP-02 - Rail-Attached Time Bands + Current Aperture - selected direction - R6
 Shell relationship: requires VSP-01 shell = True; may mutate shell = False
 SwiftUI source owner: Native/Ambitions/Surfaces/Today/TodaySurface.swift, Native/Ambitions/Surfaces/Today/TodayObjectView.swift, Native/Ambitions/Surfaces/Today/TodayAccessibility.swift
-Allowed implementation area: Native/Ambitions/Surfaces/Today, Native/Ambitions/Projection/StageScenes, Sources/Components
+Allowed implementation area: Native/Ambitions/Surfaces/Today, Native/Ambitions/Surfaces/Today/Projection, Sources/Components
 Forbidden implementation area: Native/Ambitions/Stage shell mutations, dashboard/card-feed root pattern, task-list-only root pattern, Capture root/tab ownership
 Proof ceiling: Yellow
 Missing proof: live SwiftUI Today parity screenshot, device screenshot, manual accessibility matrix for Dynamic Type, VoiceOver, Reduce Motion, Reduce Transparency, Increase Contrast, and haptics, runtime mutation/proof receipt evidence
@@ -42,8 +42,8 @@ Non-claim: this annotation is not Code Connect, not Visual Green, not source imp
 Annotation title: VSP-03 provenance - Goals Life Area Atlas
 Frame naming recommendation: CANDIDATE - VSP-03 - D5 Focus Lens Territory owner review package - R1
 Shell relationship: requires VSP-01 shell = True; may mutate shell = False
-SwiftUI source owner: Native/Ambitions/Surfaces/Goals/GoalsSurface.swift, Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift, Native/Ambitions/Projection/StageScenes/GoalsStageScene.swift
-Allowed implementation area: Native/Ambitions/Surfaces/Goals, Native/Ambitions/Projection/StageScenes, Sources/Components
+SwiftUI source owner: Native/Ambitions/Surfaces/Goals/GoalsSurface.swift, Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift, Native/Ambitions/Surfaces/Goals/Projection/GoalsStageScene.swift
+Allowed implementation area: Native/Ambitions/Surfaces/Goals, Native/Ambitions/Surfaces/Goals/Projection, Sources/Components
 Forbidden implementation area: Native/Ambitions/Stage shell mutations, generic project-board root pattern, productivity-score or ranking root, stale top-level IA
 Proof ceiling: Yellow
 Missing proof: live SwiftUI Goals parity screenshot, device screenshot, manual accessibility matrix, goal action runtime proof
@@ -103,7 +103,7 @@ Annotation title: VSP-07 provenance - Trust Inspection Details
 Frame naming recommendation: CANDIDATE - VSP-07 - Object Wake Stack final package - R1
 Shell relationship: requires VSP-01 shell = True; may mutate shell = False
 SwiftUI source owner: Native/Ambitions/Trust/InspectionSurface.swift, Native/Ambitions/Trust/ProofInspectionView.swift, Native/Ambitions/Trust/SourceInspectionView.swift, Native/Ambitions/Trust/PrivacyInspectionView.swift, Native/Ambitions/Trust/ReceiptInspectionView.swift
-Allowed implementation area: Native/Ambitions/Trust, Native/Ambitions/Projection/OverlayScenes, Sources/Components
+Allowed implementation area: Native/Ambitions/Trust, Native/Ambitions/Trust/Projection, Sources/Components
 Forbidden implementation area: Trust root surface, Proof root surface, Source root surface, Privacy root surface, History root surface, Receipts root surface
 Proof ceiling: Yellow
 Missing proof: live SwiftUI inspection parity screenshot, device screenshot, manual accessibility matrix, privacy/trust disclosure proof

@@ -207,7 +207,7 @@
         ],
         "allowed_implementation_areas": [
           "Native/Ambitions/Surfaces/Today",
-          "Native/Ambitions/Projection/StageScenes",
+          "Native/Ambitions/Surfaces/Today/Projection",
           "Sources/Components"
         ],
         "forbidden_implementation_areas": [
@@ -368,11 +368,11 @@
         "canonical_source_owners": [
           "Native/Ambitions/Surfaces/Goals/GoalsSurface.swift",
           "Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift",
-          "Native/Ambitions/Projection/StageScenes/GoalsStageScene.swift"
+          "Native/Ambitions/Surfaces/Goals/Projection/GoalsStageScene.swift"
         ],
         "allowed_implementation_areas": [
           "Native/Ambitions/Surfaces/Goals",
-          "Native/Ambitions/Projection/StageScenes",
+          "Native/Ambitions/Surfaces/Goals/Projection",
           "Sources/Components"
         ],
         "forbidden_implementation_areas": [
@@ -1041,7 +1041,7 @@
         ],
         "allowed_implementation_areas": [
           "Native/Ambitions/Trust",
-          "Native/Ambitions/Projection/OverlayScenes",
+          "Native/Ambitions/Trust/Projection",
           "Sources/Components"
         ],
         "forbidden_implementation_areas": [

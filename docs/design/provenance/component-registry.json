@@ -183,7 +183,7 @@
     {
       "component_id": "goals-stage-scene",
       "component_name": "GoalsStageScene / Goals object owner",
-      "source_path": "Native/Ambitions/Projection/StageScenes/GoalsStageScene.swift",
+      "source_path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsStageScene.swift",
       "component_kind": "surface",
       "owning_vsp_ids": [
         "VSP-03"
