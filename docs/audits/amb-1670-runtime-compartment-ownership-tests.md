@@ -1,8 +1,9 @@
 # AMB-1670 Runtime Compartment Ownership Tests
 
-Status: Ready for review
+Status: Done / Source Green for ownership-test scope
 Date: 2026-07-04
 Scope: AMB-1670 M03 Runtime Simplification
+Final-review baseline: `main` / `origin/main` `ac460e7b99d974c1e16257eebf51af7711dbc1df`
 
 ## Purpose
 
@@ -77,10 +78,40 @@ Primary summary artifacts:
 Full build-for-testing, full test suite, device, screenshot, accessibility, and
 release gates were not run for this AMB-1670 slice.
 
+## Final Review
+
+AMB-1670 acceptance review on 2026-07-04:
+
+| Acceptance requirement | Current evidence |
+| --- | --- |
+| Commands: validation, idempotency, rejection, receipt emission. | Commands focused tests passed and the Required Leaf Coverage table maps validation/rejection, idempotency replay, command/runtime receipt metadata, unsupported/future command blocking, external adapter rejection receipts, and policy-guarded mutation blocking. |
+| Transactions: atomic commit, rollback, conflict detection, interrupted commit recovery. | Transactions focused tests passed, including the AMB-1670 interrupted-commit failure-receipt case added in this slice. |
+| Events: append ordering, replay determinism, corruption handling. | RuntimeEventJournal focused tests passed and cover append ordering, checksum/tamper detection, deterministic replay, tombstones, compaction snapshots, and duplicate replay prevention. |
+| Projections: rebuild, stale invalidation, extension snapshot read. | LocalRuntimeOSProjections focused tests passed and cover event-fed materialization, diffs/invalidations, surface/search reads, widget/App Intent reads, repair receipts, and rebuild requirements. |
+| Scheduling: time fit, reflow, recovery moves, closure impact. | Scheduling and ProtectedStepPlacement focused tests passed and the audit maps related placement, conflict, recurrence, recovery, priority, and local/account-free policy proof. |
+| ExternalWrites: EventKit/Reminders outbox, notifications, no private graph egress. | ExternalWrites and SideEffectLedger focused tests passed and cover local-commit receipt gating, safe failed attempts, notification side effects, App Intent/share handoff, legacy receipt rejection, and deterministic ledger persistence. |
+| Continuity: optional CloudKit, offline-first behavior, conflict receipts. | Continuity, CloudKitContinuityFoundation, and SyncCapability focused tests passed and cover local authority, private-graph payload denial, default-off CloudKit diagnostics, offline/no-account operation, queued changes, merge conflict quarantine/review receipts, tombstone limits, and sign-out local-data retention. |
+| Repair: migration repair, projection rebuild, journal validation. | RuntimeDoctor and MigrationPlanner focused tests passed and the audit maps schema/migration/dry-run/backup/replay/search-projection/journal/local-drift/preview-repair/invariant/rollback proof. |
+
+Final-review validation:
+
+- AMB-1670 focused ownership summaries: present and passed for 13 focused
+  summary artifacts, totaling 89 tests across the eight required leaves.
+- `python3 scripts/ambitions-remediation-governance-check.py`: passed,
+  `GREEN remediation governance guard passed`, `changed_paths=0` in the
+  current pre-review tree.
+- `python3 scripts/ambitions-accepted-yellow-misuse-audit.py`: passed,
+  `valid=true`, `invalidAcceptedYellowIssues=0`.
+- `python3 scripts/ambitions-local-runtime-proof.py --json`: passed,
+  `status=green`, `checklistPassed=20/20`, `blockers=0`.
+- Current import-clean proof after later docs/release changes:
+  `scripts/ambitions-xcode-build-for-testing.sh --batch AMB_1669_FINAL_REVIEW --timeout 45m --kill-after 60s`
+  passed at summary `.codex/xcode-summaries/AMB_1669_FINAL_REVIEW/20260704T121010Z-bft-54189-28319/build-for-testing-summary.json`.
+
 ## Proof Ceiling
 
-This packet supports AMB-1670 Ready For Review for executable compartment
-ownership tests. It does not claim full LocalRuntimeOS completion, app-wide
+This packet supports AMB-1670 Done / Source Green for executable compartment
+ownership-test scope. It does not claim full LocalRuntimeOS completion, app-wide
 command-only mutation, device behavior, rendered UI quality, accessibility
 conformance, privacy/legal approval, Visual Green, Release Green, production R2,
 production CloudKit, TestFlight readiness, or App Store readiness.
