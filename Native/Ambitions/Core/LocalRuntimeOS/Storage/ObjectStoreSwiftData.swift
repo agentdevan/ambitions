@@ -191,7 +191,7 @@ actor AmbitionsPersistenceStore {
             ObjectStoreSwiftDataFamilyDescriptor(
                 id: .goalPlan,
                 storedTypeNames: ["GoalPlanRecord", "PlanSectionRecord"],
-                mutationAuthority: "Core/LocalRuntimeOS/PlanningEngine + Transactions",
+                mutationAuthority: "Core/LocalRuntimeOS/Planning + Transactions",
                 fieldRules: [
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "GoalPlanRecord", fieldName: "goalID", authority: .queryColumn, notes: "Goal-to-plan lookup column."),
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "GoalPlanRecord", fieldName: "strategyData", authority: .encodedValue, encodedTypeName: "PlanningStrategy", notes: "Typed planning strategy payload."),
@@ -202,7 +202,7 @@ actor AmbitionsPersistenceStore {
             ObjectStoreSwiftDataFamilyDescriptor(
                 id: .step,
                 storedTypeNames: ["StepRecord"],
-                mutationAuthority: "Core/LocalRuntimeOS/PlanningEngine + TimeEngine + Transactions",
+                mutationAuthority: "Core/LocalRuntimeOS/Planning + TimeEngine + Transactions",
                 fieldRules: [
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "StepRecord", fieldName: "goalID", authority: .queryColumn, notes: "Goal-scoped step lookup column."),
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "StepRecord", fieldName: "stateRaw", authority: .queryColumn, notes: "Queryable step lifecycle column."),

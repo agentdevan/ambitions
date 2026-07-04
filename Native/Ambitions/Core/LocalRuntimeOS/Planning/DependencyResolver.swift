@@ -8,7 +8,7 @@ struct DependencyResolution: Codable, Sendable, Equatable, Hashable {
     let missingDependencyIDs: [String]
     let cyclicNodeIDs: [String]
     let topologicalOrder: [String]
-    let runtimeTrace: PlanningEngineRuntimeTrace
+    let runtimeTrace: PlanningRuntimeTrace
 
     var hasBlockingFailures: Bool {
         blockedNodeIDs.isEmpty == false || missingDependencyIDs.isEmpty == false || cyclicNodeIDs.isEmpty == false
@@ -49,7 +49,7 @@ struct DependencyResolver: Sendable {
         }
 
         let order = topologicalOrder(graph: graph, nodesByID: nodesByID)
-        let trace = PlanningEngineRuntimeTrace.make(
+        let trace = PlanningRuntimeTrace.make(
             owner: "DependencyResolver",
             generatedAt: graph.generatedAt,
             components: [

@@ -17,7 +17,7 @@ This artifact records the current folder/type dependency graph, target runtime m
 
 ## Current Owner Graph
 
-Current source owner count after the `State` slice: 19.
+Current source owner count after the `Planning` slice: 19.
 
 | Current owner | Swift files | Target owner | Status |
 | --- | ---: | --- | --- |
@@ -28,7 +28,7 @@ Current source owner count after the `State` slice: 19.
 | State | 4 | State | Ninth slice renamed from `ObjectState` |
 | Projections | 32 | Projections | Fourth slice renamed from `ProjectionEngine` |
 | PrivateLifeRuntimeKernel | 37 | RuntimeKernel or collapsed into retained owners | Pending decision |
-| PlanningEngine | 68 | Planning | Pending |
+| Planning | 68 | Planning | Tenth slice renamed from `PlanningEngine` |
 | TimeEngine | 35 | Scheduling | Pending |
 | CaptureRouteGraph | 20 | CaptureRouting | Pending |
 | Inspection | 29 | Inspection | Sixth slice renamed from `TrustSystem` |
@@ -295,14 +295,47 @@ Reason:
 - The ownership test now proves required `State` files exist and the old
   `ObjectState` production/test owner paths are gone.
 
+## Tenth Rename Slice
+
+Applied tenth:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/
+Native/AmbitionsTests/LocalRuntimeOS/PlanningEngine/
+```
+
+to:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/Planning/
+Native/AmbitionsTests/LocalRuntimeOS/Planning/
+```
+
+Reason:
+
+- `Planning` is explicitly named by AMB-1669 target direction.
+- The old owner used `PlanningEngine` as a folder-level architecture name;
+  retained Swift types such as `GoalPathPlanner`, `PlanRepairEngine`,
+  `SmallerStepEngine`, `StepElasticityEngine`, and `StepGraphCompiler` still
+  carry concrete behavior contracts plainly.
+- The move changes canonical ownership without changing runtime behavior.
+- Owner-facing runtime trace API now uses `PlanningRuntimeTrace` instead of
+  `PlanningEngineRuntimeTrace`.
+- The touched `+02` / `+03` / `+04` split filenames in this owner were renamed
+  to descriptive owner-local filenames in the same slice to comply with the
+  AMB-1658 remediation freeze.
+- The ownership test now proves required `Planning` files exist and the old
+  `PlanningEngine` production/test owner paths are gone.
+
 ## API Exposure
 
-The moved `Boundary`, `Commands`, `Transactions`, `Projections`, `ExternalWrites`, `Inspection`, `Search`, `Repair`, and `State` source contains no `public` or `open` Swift API declarations.
+The moved `Boundary`, `Commands`, `Transactions`, `Projections`, `ExternalWrites`, `Inspection`, `Search`, `Repair`, `State`, and `Planning` source contains no `public` or `open` Swift API declarations.
 
 Current exposure is same-module production/test use through Swift files under the existing `Ambitions` target and `AmbitionsTests` target. XcodeGen source discovery is directory-based through `project.yml`, so the move requires project regeneration but no package or target boundary change.
 
 Known direct consumers of the moved `Boundary`, `Commands`, `Transactions`,
-`Projections`, `ExternalWrites`, `Inspection`, `Search`, `Repair`, and `State` types remain same-module:
+`Projections`, `ExternalWrites`, `Inspection`, `Search`, `Repair`, `State`, and
+`Planning` types remain same-module:
 
 - `Commands`
 - `Transactions`
@@ -312,8 +345,8 @@ Known direct consumers of the moved `Boundary`, `Commands`, `Transactions`,
 - `Search`
 - `Repair`
 - `State`
+- `Planning`
 - `PrivateLifeRuntimeKernel`
-- `PlanningEngine`
 - `TimeEngine`
 - `PrivacySecurity`
 - `SourceAtlas`
@@ -339,7 +372,6 @@ This slice can support Source Green for the folder-owner rename if validation pa
 
 Next concrete candidates, one at a time after guards:
 
-- `PlanningEngine` -> `Planning`
 - `TimeEngine` -> `Scheduling`
 - `CaptureRouteGraph` -> `CaptureRouting`
 - `SyncContinuity` -> `Continuity`

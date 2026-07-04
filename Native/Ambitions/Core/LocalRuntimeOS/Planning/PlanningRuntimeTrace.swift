@@ -16,7 +16,7 @@ enum PlanningRuntimeSpineStep: String, Codable, Sendable, Equatable, Hashable, C
     ]
 }
 
-struct PlanningEngineRuntimeTrace: Codable, Sendable, Equatable, Hashable, Identifiable {
+struct PlanningRuntimeTrace: Codable, Sendable, Equatable, Hashable, Identifiable {
     let id: String
     let commandID: String
     let eventID: String
@@ -78,12 +78,12 @@ struct PlanningEngineRuntimeTrace: Codable, Sendable, Equatable, Hashable, Ident
             [commandID, eventID, projectionID, receiptID, replayTraceID, sourceFingerprint, checksum].allSatisfy { $0.isEmpty == false }
     }
 
-    static func make(owner: String, generatedAt: String, components: [String], localOnly: Bool = true) -> PlanningEngineRuntimeTrace {
+    static func make(owner: String, generatedAt: String, components: [String], localOnly: Bool = true) -> PlanningRuntimeTrace {
         let fingerprint = CandidateSource.stableIdentifier(
             prefix: "planning-source",
             components: [owner, generatedAt] + components
         )
-        return PlanningEngineRuntimeTrace(
+        return PlanningRuntimeTrace(
             commandID: CandidateSource.stableIdentifier(prefix: "planning-command", components: [fingerprint]),
             eventID: CandidateSource.stableIdentifier(prefix: "planning-event", components: [fingerprint]),
             projectionID: CandidateSource.stableIdentifier(prefix: "planning-projection", components: [fingerprint]),

@@ -7,7 +7,7 @@ struct ProgressPreservationReport: Codable, Sendable, Equatable, Hashable {
     let activeNodeIDs: [String]
     let preservedDependencyIDs: [String]
     let summary: String
-    let runtimeTrace: PlanningEngineRuntimeTrace
+    let runtimeTrace: PlanningRuntimeTrace
 
     var hasPreservedProgress: Bool {
         preservedNodeIDs.isEmpty == false || proofBearingNodeIDs.isEmpty == false || activeNodeIDs.isEmpty == false
@@ -52,7 +52,7 @@ struct ProgressPreservationEngine: Sendable {
             activeCount: activeIDs.count,
             dependencyCount: dependencyIDs.count
         )
-        let trace = PlanningEngineRuntimeTrace.make(
+        let trace = PlanningRuntimeTrace.make(
             owner: "ProgressPreservationEngine",
             generatedAt: graph.generatedAt,
             components: [

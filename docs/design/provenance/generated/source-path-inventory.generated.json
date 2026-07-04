@@ -4751,6 +4751,59 @@
     },
     {
       "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 15,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/ClassificationConfidencePlanningSupport.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 260,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/DefaultGoalClarificationService.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 289,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/DefaultGoalClarificationServiceAssumptions.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 289,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/DefaultGoalContradictionService.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 249,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/DefaultGoalContradictionServiceEnergyRules.swift"
+    },
+    {
+      "candidate_vsp_ids": [
         "VSP-04",
         "VSP-10"
       ],
@@ -4758,7 +4811,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 153,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/DependencyResolver.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/DependencyResolver.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -4769,7 +4822,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 187,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/DeterministicGoalPlanner.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/DeterministicGoalPlanner.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -4781,39 +4834,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 110,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/FreeFloatingStepPlanner.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 289,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalClarificationService+02-DefaultGoalClarificationService+03-defaultAssumption.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 260,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalClarificationService+02-DefaultGoalClarificationService.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 15,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalClarificationService+03-ClassificationConfidence.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/FreeFloatingStepPlanner.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -4823,38 +4844,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 75,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalClarificationService.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 249,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalContradictionService+02-DefaultGoalContradictionService+03-energyContradictions.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 289,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalContradictionService+02-DefaultGoalContradictionService.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 39,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalContradictionService+03-GoalResourceEntity.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalClarificationService.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -4864,7 +4854,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 70,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalContradictionService.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalContradictionService.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -4874,7 +4864,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 150,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalDomainPackService.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalDomainPackService.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -4885,7 +4875,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 350,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalDomainPacks.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalDomainPacks.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -4895,7 +4885,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 438,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalEnergyFitService.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalEnergyFitService.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -4908,7 +4898,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 271,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalEnergyLearningService.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalEnergyLearningService.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -4918,7 +4908,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 394,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalFreshnessUpdateService.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalFreshnessUpdateService.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -4928,7 +4918,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 24,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalPathCompilerService.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalPathCompilerService.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -4941,7 +4931,17 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 169,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalPathPlanner.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalPathPlanner.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 39,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalResourceEntityPlanningSupport.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -4951,7 +4951,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 52,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalResourceGraphService.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalResourceGraphService.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -4964,7 +4964,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 451,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalTeachingSignalService.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalTeachingSignalService.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -4975,7 +4975,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 509,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalUnderstandingService.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalUnderstandingService.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -4987,7 +4987,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 80,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/LivingPlanFreshnessBroker.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/LivingPlanFreshnessBroker.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5000,7 +5000,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 86,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/LivingPlanGovernanceConsole.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/LivingPlanGovernanceConsole.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5012,7 +5012,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 71,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/LivingPlanMergeLedger.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/LivingPlanMergeLedger.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5023,7 +5023,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 46,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/LivingPlanMutationPermission.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/LivingPlanMutationPermission.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5036,7 +5036,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 95,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/LivingPlanRecompiler.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/LivingPlanRecompiler.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5048,7 +5048,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 78,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/LivingPlanRedTeamEvaluator.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/LivingPlanRedTeamEvaluator.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5060,7 +5060,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 57,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/LivingPlanSchemaMigration.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/LivingPlanSchemaMigration.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5071,7 +5071,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 467,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/MultiPathLattice.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/MultiPathLattice.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5085,7 +5085,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 347,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/OneStepGoalProjector.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/OneStepGoalProjector.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5096,7 +5096,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 103,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/PlanRepairEngine.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/PlanRepairEngine.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5106,41 +5106,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 344,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/PlanningDomainModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 103,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/PlanningEngineRuntimeTrace.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 152,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/PlanningEvaluation+02-PlanningRuleCounterfactualDiff.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 367,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/PlanningEvaluation+03-PlanningNextStepSelector.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/PlanningDomainModels.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5152,7 +5118,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 343,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/PlanningEvaluation.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/PlanningEvaluation.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5164,7 +5130,41 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 252,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/PlanningGraph.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/PlanningGraph.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 367,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/PlanningNextStepSelector.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 152,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/PlanningRuleCounterfactualDiff.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 103,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/PlanningRuntimeTrace.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5176,7 +5176,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 99,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/ProgressPreservationEngine.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/ProgressPreservationEngine.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5189,7 +5189,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 66,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/RecommendationEngine.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/RecommendationEngine.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5201,7 +5201,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 129,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/RecommendationExplanationAdapter.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/RecommendationExplanationAdapter.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5213,7 +5213,18 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 107,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/SmallerStepEngine.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/SmallerStepEngine.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 109,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/SourceAtlasStepCandidateFieldBridge.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5226,7 +5237,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 375,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/SourceAtlasStepCandidateFieldBridge+02-shouldUseFallbackOnlyExpansion.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/SourceAtlasStepCandidateFieldFallback.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5239,7 +5250,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 380,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/SourceAtlasStepCandidateFieldBridge+03-makeRejectedSeedTraces.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/SourceAtlasStepCandidateFieldRejectedSeedTraces.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5251,18 +5262,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 235,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/SourceAtlasStepCandidateFieldBridge+04-verifiedPublicPlanningContext.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 109,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/SourceAtlasStepCandidateFieldBridge.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/SourceAtlasStepCandidateFieldVerifiedPublicContext.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5275,81 +5275,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 135,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/SourceAtlasVerifiedPublicPlanningBridgeModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-09",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 220,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepCandidateFieldGenerator+02-clamp.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 335,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepCandidateFieldGenerator+03-rejectionAlignmentScore.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 337,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepCandidateFieldGenerator+04-accessComponents.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 197,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepCandidateFieldGenerator+05-validity.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 105,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepCandidateFieldGenerator.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 277,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepCandidateFieldModels+02-CandidateRejectionRisk.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/SourceAtlasVerifiedPublicPlanningBridgeModels.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5362,29 +5288,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 153,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepCandidateFieldModels+03-StepCandidate.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 158,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepCandidateFieldModels+04-StepImpactSimulation+03-feasibilityBand.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 265,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepCandidateFieldModels+04-StepImpactSimulation.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepCandidate.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5397,20 +5301,68 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 286,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepCandidateFieldModels+05-StepCandidateField.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepCandidateField.swift"
     },
     {
       "candidate_vsp_ids": [
-        "VSP-02",
         "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 105,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepCandidateFieldGenerator.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
         "VSP-07",
         "VSP-10"
       ],
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 356,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepCandidateFieldModels+06-StepCandidate.swift"
+      "line_count": 337,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepCandidateFieldGeneratorAccessComponents.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 220,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepCandidateFieldGeneratorClamp.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 335,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepCandidateFieldGeneratorRejectionAlignment.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 197,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepCandidateFieldGeneratorValidity.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5424,7 +5376,54 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 364,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepCandidateFieldModels.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepCandidateFieldModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 277,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepCandidateFieldRiskModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 356,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepCandidateSupport.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 250,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepElasticityEngine.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 4,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepElasticityEngineCore.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5436,7 +5435,17 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 264,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepElasticityEngine+02-StepElasticityEngine+02-evaluate.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepElasticityEngineEvaluation.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 14,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepElasticityEngineInputs.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5448,27 +5457,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 178,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepElasticityEngine+02-StepElasticityEngine+03-makeReceipt.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 4,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepElasticityEngine+02-StepElasticityEngine.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 14,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepElasticityEngine+03-StepElasticityEngineInput.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepElasticityEngineReceipt.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5478,8 +5467,8 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 250,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepElasticityEngine.swift"
+      "line_count": 174,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepGraphCompiler.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5491,7 +5480,17 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 286,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepGraphCompiler+02-StepGraphCompiler+02-compile.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepGraphCompilerCompile.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 5,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepGraphCompilerCore.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5503,17 +5502,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 292,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepGraphCompiler+02-StepGraphCompiler+03-edgeKind.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 5,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepGraphCompiler+02-StepGraphCompiler.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepGraphCompilerEdgeKindResolution.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5523,8 +5512,19 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 174,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepGraphCompiler.swift"
+      "line_count": 158,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepImpactSimulationFeasibility.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 265,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepImpactSimulationSupport.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5539,7 +5539,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 506,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepQualityFirewall.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepQualityFirewall.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -19142,7 +19142,7 @@
       "inventory_only": true,
       "kind": "test",
       "line_count": 179,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/PlanningEngine/PlanningEngineTests.swift"
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/Planning/PlanningTests.swift"
     },
     {
       "candidate_vsp_ids": [

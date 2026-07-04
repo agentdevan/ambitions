@@ -137,7 +137,7 @@ struct PlanningGraph: Codable, Sendable, Equatable, Hashable, Identifiable {
     let nodes: [PlanningGraphNode]
     let dependencies: [PlanningGraphDependency]
     let localOnly: Bool
-    let runtimeTrace: PlanningEngineRuntimeTrace
+    let runtimeTrace: PlanningRuntimeTrace
 
     init(
         goalID: String? = nil,
@@ -179,7 +179,7 @@ struct PlanningGraph: Codable, Sendable, Equatable, Hashable, Identifiable {
                 self.dependencies.map { "\($0.blockedNodeID)->\($0.requiredNodeID):\($0.blocking)" }.joined(separator: "|")
             ]
         )
-        self.runtimeTrace = PlanningEngineRuntimeTrace.make(
+        self.runtimeTrace = PlanningRuntimeTrace.make(
             owner: "PlanningGraph",
             generatedAt: self.generatedAt,
             components: [graphFingerprint],

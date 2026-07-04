@@ -34,7 +34,7 @@ REQUIRED_LOCAL_RUNTIME_OWNERS = [
     "State",
     "Projections",
     "PrivateLifeRuntimeKernel",
-    "PlanningEngine",
+    "Planning",
     "TimeEngine",
     "CaptureRouteGraph",
     "Inspection",

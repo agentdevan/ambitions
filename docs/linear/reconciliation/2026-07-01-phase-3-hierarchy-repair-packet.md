@@ -536,7 +536,7 @@ This packet recommends Linear hierarchy changes without applying them. It does n
 - **Target initiative:** Private Life Runtime / LocalRuntimeOS
 - **Target project:** LocalRuntimeOS Runtime Spine
 - **Target milestone:** Post-VSP repo-to-Linear hierarchy repair
-- **Product object:** Private Life Runtime, LocalRuntimeOS, CommandSpine, TransactionKernel, EventJournal, ProjectionEngine, ObjectState, PlanningEngine, TimeEngine, CaptureRouteGraph, TrustSystem, SearchRecall, SideEffectSystem, SyncContinuity, Diagnostics
+- **Product object:** Private Life Runtime, LocalRuntimeOS, CommandSpine, TransactionKernel, EventJournal, ProjectionEngine, ObjectState, Planning, TimeEngine, CaptureRouteGraph, TrustSystem, SearchRecall, SideEffectSystem, SyncContinuity, Diagnostics
 - **Acceptance criteria:** Parent Feature preserves product law and hard non-goals., Parent Feature cites repo truth, VSP authority if present, source-owner paths, known issue mappings, validation commands, proof artifacts, and proof ceiling., Parent Feature links only bounded Codex leaves that do not invent visual grammar, runtime authority, or release claims.
 - **Repo evidence:** `README.md`, `AGENTS.md`, `docs/truth/README.md`, `docs/truth/CODEX_START_HERE.md`, `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `docs/truth/PRODUCT_ORIGIN_TRUTH.md`, `docs/truth/PRODUCT_MOAT_TRUTH.md`, `docs/truth/PRODUCT_EXPERIENCE_CANON.md`
 - **VSP authority:** VSP-04: Time Native Life Calendar, VSP-05: Capture Open Field Composer, VSP-07: Trust Inspection Details, VSP-08: External Boundary / Account / R2 / Source Atlas, VSP-10: Implementation Anatomy / Source Owner Map
@@ -988,9 +988,9 @@ This packet recommends Linear hierarchy changes without applying them. It does n
 ### PlanningEngine — bounded reconciliation/proof-gate leaf
 
 - **Parent Feature:** PlanningEngine parent feature with product-law non-goals and proof gate.
-- **Source-owner paths:** `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/`
-- **Exact bounded scope:** Reconcile PlanningEngine source-owner paths, VSP/known issue authority, validation commands, proof artifacts, rollback plan, and non-claims; implementation may proceed only after Phase 2/3 acceptance and separate authorization.
-- **Files likely touched:** `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/`
+- **Source-owner paths:** `Native/Ambitions/Core/LocalRuntimeOS/Planning/`
+- **Exact bounded scope:** Reconcile Planning source-owner paths, VSP/known issue authority, validation commands, proof artifacts, rollback plan, and non-claims; implementation may proceed only after Phase 2/3 acceptance and separate authorization.
+- **Files likely touched:** `Native/Ambitions/Core/LocalRuntimeOS/Planning/`
 - **Tests likely required:** `python3 scripts/ambitions-local-runtime-proof.py`, `git diff --check`, `python3 scripts/ambitions-green-standard-audit.py || true`, `python3 scripts/ambitions-architecture-inventory.py || true`
 - **VSP authority:** No direct VSP authority found in current provenance; owner review required.
 - **Accessibility requirements:** VoiceOver, Dynamic Type, Reduce Motion/Transparency, contrast, hit target, motor path, and screenshots required for UI-affecting scope; otherwise mark not applicable with reason.

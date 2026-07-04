@@ -11,13 +11,13 @@ authority migration, persistence migration, package movement, UI work, or releas
 readiness proof.
 
 AMB-1730 supersession: this same audit now records the 2026-07-02 standalone
-PlanningEngine owner-move batch, the follow-on standalone TimeEngine
+Planning owner-move batch, the follow-on standalone TimeEngine
 owner-move batch, the goal clarification/contradiction PlanningEngine
 owner-move batch, the step planning/scheduling owner-move batch, the
 MemoryLens/SearchRecall owner-move batch, and the final all-remaining owner
 pass. AMB-1730 lowered active legacy runtime production files from `111` to
 `0` by moving source files out of `Core/Runtime` and into
-`Core/LocalRuntimeOS/PlanningEngine`, `Core/LocalRuntimeOS/TimeEngine`,
+`Core/LocalRuntimeOS/Planning`, `Core/LocalRuntimeOS/TimeEngine`,
 `Core/LocalRuntimeOS/SearchRecall`, `Core/LocalRuntimeOS/Projections`,
 `Core/LocalRuntimeOS/PrivateLifeRuntimeKernel`,
 `Core/LocalRuntimeOS/RuntimeBoundary`, `Core/LocalRuntimeOS/CaptureRouteGraph`,
@@ -74,27 +74,27 @@ private life graph backend.
 |---|---|---|---|
 | `Native/Ambitions/Core/Runtime/BufferEngine.swift` | `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/BufferEngine.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/TimeEngine` | Moved; legacy path retired. |
 | `Native/Ambitions/Core/Runtime/CapacityEngine.swift` | `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/CapacityEngine.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/TimeEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/GoalClarificationService+02-DefaultGoalClarificationService+03-defaultAssumption.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalClarificationService+02-DefaultGoalClarificationService+03-defaultAssumption.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/GoalClarificationService+02-DefaultGoalClarificationService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalClarificationService+02-DefaultGoalClarificationService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/GoalClarificationService+03-ClassificationConfidence.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalClarificationService+03-ClassificationConfidence.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/GoalClarificationService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalClarificationService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/GoalContradictionService+02-DefaultGoalContradictionService+03-energyContradictions.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalContradictionService+02-DefaultGoalContradictionService+03-energyContradictions.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/GoalContradictionService+02-DefaultGoalContradictionService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalContradictionService+02-DefaultGoalContradictionService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/GoalContradictionService+03-GoalResourceEntity.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalContradictionService+03-GoalResourceEntity.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/GoalContradictionService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalContradictionService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/GoalDomainPackService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalDomainPackService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/GoalDomainPacks.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalDomainPacks.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/GoalEnergyFitService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalEnergyFitService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/GoalEnergyLearningService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalEnergyLearningService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/GoalFreshnessUpdateService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalFreshnessUpdateService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/GoalPathCompilerService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalPathCompilerService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/GoalResourceGraphService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalResourceGraphService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/GoalTeachingSignalService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalTeachingSignalService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/GoalUnderstandingService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalUnderstandingService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/OneStepGoalProjector.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/OneStepGoalProjector.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/DefaultGoalClarificationServiceAssumptions.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/DefaultGoalClarificationServiceAssumptions.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/DefaultGoalClarificationService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/DefaultGoalClarificationService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/ClassificationConfidencePlanningSupport.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/ClassificationConfidencePlanningSupport.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/GoalClarificationService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalClarificationService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/DefaultGoalContradictionServiceEnergyRules.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/DefaultGoalContradictionServiceEnergyRules.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/DefaultGoalContradictionService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/DefaultGoalContradictionService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/GoalResourceEntityPlanningSupport.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalResourceEntityPlanningSupport.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/GoalContradictionService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalContradictionService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/GoalDomainPackService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalDomainPackService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/GoalDomainPacks.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalDomainPacks.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/GoalEnergyFitService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalEnergyFitService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/GoalEnergyLearningService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalEnergyLearningService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/GoalFreshnessUpdateService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalFreshnessUpdateService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/GoalPathCompilerService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalPathCompilerService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/GoalResourceGraphService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalResourceGraphService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/GoalTeachingSignalService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalTeachingSignalService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/GoalUnderstandingService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalUnderstandingService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/OneStepGoalProjector.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/OneStepGoalProjector.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
 | `Native/Ambitions/Core/Runtime/OpenCapacityEngine.swift` | `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/OpenCapacityEngine.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/TimeEngine` | Moved; legacy path retired. |
 | `Native/Ambitions/Core/Runtime/PressureEngine.swift` | `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/PressureEngine.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/TimeEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/RecommendationExplanationAdapter.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/RecommendationExplanationAdapter.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/RecommendationExplanationAdapter.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/RecommendationExplanationAdapter.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
 | `Native/Ambitions/Core/Runtime/RecoveryEngine.swift` | `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/RecoveryEngine.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/TimeEngine` | Moved; legacy path retired. |
 | `Native/Ambitions/Core/Runtime/ScheduleInstallKernel+02-ScheduleInstallRecord.swift` | `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ScheduleInstallKernel+02-ScheduleInstallRecord.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/TimeEngine` | Moved; legacy path retired. |
 | `Native/Ambitions/Core/Runtime/ScheduleInstallKernel+03-ScheduleInstallKernel+02-evaluate.swift` | `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ScheduleInstallKernel+03-ScheduleInstallKernel+02-evaluate.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/TimeEngine` | Moved; legacy path retired. |
@@ -104,16 +104,16 @@ private life graph backend.
 | `Native/Ambitions/Core/Runtime/ScheduleInstallKernel.swift` | `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ScheduleInstallKernel.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/TimeEngine` | Moved; legacy path retired. |
 | `Native/Ambitions/Core/Runtime/SimpleStepLifecycleService+Recurring.swift` | `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/SimpleStepLifecycleService+Recurring.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/TimeEngine` | Moved; legacy path retired. |
 | `Native/Ambitions/Core/Runtime/SimpleStepLifecycleService.swift` | `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/SimpleStepLifecycleService.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/TimeEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/StepElasticityEngine+02-StepElasticityEngine+02-evaluate.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepElasticityEngine+02-StepElasticityEngine+02-evaluate.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/StepElasticityEngine+02-StepElasticityEngine+03-makeReceipt.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepElasticityEngine+02-StepElasticityEngine+03-makeReceipt.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/StepElasticityEngine+02-StepElasticityEngine.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepElasticityEngine+02-StepElasticityEngine.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/StepElasticityEngine+03-StepElasticityEngineInput.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepElasticityEngine+03-StepElasticityEngineInput.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/StepElasticityEngine.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepElasticityEngine.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/StepGraphCompiler+02-StepGraphCompiler+02-compile.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepGraphCompiler+02-StepGraphCompiler+02-compile.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/StepGraphCompiler+02-StepGraphCompiler+03-edgeKind.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepGraphCompiler+02-StepGraphCompiler+03-edgeKind.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/StepGraphCompiler+02-StepGraphCompiler.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepGraphCompiler+02-StepGraphCompiler.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/StepGraphCompiler.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepGraphCompiler.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/StepQualityFirewall.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepQualityFirewall.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PlanningEngine` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/StepElasticityEngineEvaluation.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/StepElasticityEngineEvaluation.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/StepElasticityEngineReceipt.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/StepElasticityEngineReceipt.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/StepElasticityEngineCore.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/StepElasticityEngineCore.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/StepElasticityEngineInputs.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/StepElasticityEngineInputs.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/StepElasticityEngine.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/StepElasticityEngine.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/StepGraphCompilerCompile.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/StepGraphCompilerCompile.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/StepGraphCompilerEdgeKindResolution.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/StepGraphCompilerEdgeKindResolution.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/StepGraphCompilerCore.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/StepGraphCompilerCore.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/StepGraphCompiler.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/StepGraphCompiler.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/StepQualityFirewall.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Planning/StepQualityFirewall.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Planning` | Moved; legacy path retired. |
 | `Native/Ambitions/Core/Runtime/StepReallocationRuntimeBridge.swift` | `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/StepReallocationRuntimeBridge.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/TimeEngine` | Moved; legacy path retired. |
 | `Native/Ambitions/Core/Runtime/TimeRitualGoalSemantics.swift` | `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/TimeRitualGoalSemantics.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/TimeEngine` | Moved; legacy path retired. |
 | `Native/Ambitions/Core/Runtime/MemoryLensResult+SearchPresentation.swift` | `Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/MemoryLensResult+SearchPresentation.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/SearchRecall` | Moved; legacy path retired. |
@@ -127,7 +127,7 @@ type names and behavior; the change is path ownership and proof coverage.
 
 `Native/Ambitions/Core/Runtime/*.swift` count reduced from `115` in AMB-1713 to
 `112` after AMB-1714, to `111` after AMB-1716, to `100` after the first
-AMB-1730 PlanningEngine batch, to `95` after the AMB-1730 TimeEngine batch, and
+AMB-1730 Planning batch, to `95` after the AMB-1730 TimeEngine batch, and
 to `87` after the AMB-1730 goal clarification/contradiction batch, and to `67`
 after the AMB-1730 step planning/scheduling batch, and to `64` after the
 AMB-1730 MemoryLens/SearchRecall batch, and to `0` after the AMB-1730
@@ -167,13 +167,13 @@ Expected proof behavior:
   `CoreRuntimeCanonicalOwnershipTests` remains unchanged.
 - Remaining legacy runtime leaves are explicitly Yellow until a follow-up move
   updates proof.
-- AMB-1730 standalone PlanningEngine canonical owner paths exist and the old
+- AMB-1730 standalone Planning canonical owner paths exist and the old
   `Core/Runtime` paths are absent.
 - AMB-1730 standalone TimeEngine canonical owner paths exist and the old
   `Core/Runtime` paths are absent.
-- AMB-1730 goal clarification/contradiction PlanningEngine canonical owner
+- AMB-1730 goal clarification/contradiction Planning canonical owner
   paths exist and the old `Core/Runtime` paths are absent.
-- AMB-1730 step planning/scheduling PlanningEngine and TimeEngine canonical
+- AMB-1730 step planning/scheduling Planning and TimeEngine canonical
   owner paths exist and the old `Core/Runtime` paths are absent.
 - AMB-1730 MemoryLens/SearchRecall canonical owner paths exist and the old
   `Core/Runtime` paths are absent.
@@ -191,7 +191,7 @@ Before count:
   `currentLegacyRuntimeFiles=64`, `legacyRuntimeFileCeiling=64`, and
   `findingCount=0` before this all-remaining owner pass.
 - Cumulative AMB-1730 source-owner remediation began at `111` active legacy
-  runtime production files before the earlier PlanningEngine and TimeEngine
+  runtime production files before the earlier Planning and TimeEngine
   move batches.
 
 After count:
@@ -241,7 +241,7 @@ Rollback plan:
   ownership assertions, regenerate the project, and rerun the focused owner
   tests plus required remediation guards.
   A full AMB-1730 owner-move rollback would also move the earlier
-  PlanningEngine, TimeEngine, and SearchRecall files back to `Core/Runtime`,
+  Planning, TimeEngine, and SearchRecall files back to `Core/Runtime`,
   restore the guard ceiling to `111`, remove AMB-1730 ownership assertions, and
   rerun focused owner tests plus required remediation guards.
 
@@ -286,7 +286,7 @@ Validation run:
   -> exit `0`; `CoreRuntimeCanonicalOwnershipTests` passed, 9 tests, 0
   failures. Result bundle:
   `output/amb-1730-core-runtime-ownership-20260703.xcresult`.
-- `xcodebuild -project /Users/devan/Documents/GitHub/ambitions/Ambitions.xcodeproj -scheme Ambitions -configuration Debug -destination 'platform=iOS Simulator,id=0F5F5AC4-4303-47C8-9BDC-EB5F57A0F79E' -derivedDataPath /Users/devan/Documents/GitHub/ambitions/output/DerivedData-XcodeBuildMCP -resultBundlePath /Users/devan/Documents/GitHub/ambitions/output/amb-1730-localruntimeos-owner-tests-20260703.xcresult -skipPackagePluginValidation -skipMacroValidation -collect-test-diagnostics never COMPILER_INDEX_STORE_ENABLE=NO ONLY_ACTIVE_ARCH=YES -only-testing:AmbitionsTests/LocalRuntimeOSCommandSpineOwnershipTests/testRequiredCommandSpineFilesExistAtCanonicalPathsAndOldOwnersAreGone -only-testing:AmbitionsTests/TimeEngineTests/testTimeEngineOwnerFilesExistUnderCanonicalTreeAndOldPolicyOwnersAreRemoved -only-testing:AmbitionsTests/TrustSystemTests/testTrustSystemOwnerFilesExistAndOldOwnersAreRemoved -only-testing:AmbitionsTests/ExternalWritesTests/testExternalWritesCanonicalOwnerFilesExistAndOldOwnersAreRemoved -only-testing:AmbitionsTests/RuntimeBoundaryTests/testRuntimeBoundaryCanonicalOwnerFilesExistAndOldBoundaryOwnersAreRemoved -only-testing:AmbitionsTests/LocalRuntimeOSTransactionKernelOwnershipTests/testTransactionKernelLeavesBelongToCanonicalOwnerAndOldOwnerIsGone -only-testing:AmbitionsTests/PlanningEngineTests/testPlanningEngineOwnerFilesExistUnderCanonicalTreeAndOldPlannerOwnersAreRemoved -only-testing:AmbitionsTests/SearchRecallTests/testSearchRecallOwnerFilesExistUnderCanonicalTreeAndOldRuntimeIndexIsRemoved -only-testing:AmbitionsTests/PrivateLifeRuntimeKernelOwnershipTests/testKernelSourceLeavesLiveUnderCanonicalLocalRuntimeOSOwner -only-testing:AmbitionsTests/ObjectStateTests/testObjectStateOwnerFilesExistUnderCanonicalLocalRuntimeOSOwner -only-testing:AmbitionsTests/SourceAtlasLocalRuntimeOSOwnershipTests/testSourceAtlasCanonicalOwnerFilesExistAndOldOwnersAreRemoved test`
+- `xcodebuild -project /Users/devan/Documents/GitHub/ambitions/Ambitions.xcodeproj -scheme Ambitions -configuration Debug -destination 'platform=iOS Simulator,id=0F5F5AC4-4303-47C8-9BDC-EB5F57A0F79E' -derivedDataPath /Users/devan/Documents/GitHub/ambitions/output/DerivedData-XcodeBuildMCP -resultBundlePath /Users/devan/Documents/GitHub/ambitions/output/amb-1730-localruntimeos-owner-tests-20260703.xcresult -skipPackagePluginValidation -skipMacroValidation -collect-test-diagnostics never COMPILER_INDEX_STORE_ENABLE=NO ONLY_ACTIVE_ARCH=YES -only-testing:AmbitionsTests/LocalRuntimeOSCommandSpineOwnershipTests/testRequiredCommandSpineFilesExistAtCanonicalPathsAndOldOwnersAreGone -only-testing:AmbitionsTests/TimeEngineTests/testTimeEngineOwnerFilesExistUnderCanonicalTreeAndOldPolicyOwnersAreRemoved -only-testing:AmbitionsTests/TrustSystemTests/testTrustSystemOwnerFilesExistAndOldOwnersAreRemoved -only-testing:AmbitionsTests/ExternalWritesTests/testExternalWritesCanonicalOwnerFilesExistAndOldOwnersAreRemoved -only-testing:AmbitionsTests/RuntimeBoundaryTests/testRuntimeBoundaryCanonicalOwnerFilesExistAndOldBoundaryOwnersAreRemoved -only-testing:AmbitionsTests/LocalRuntimeOSTransactionKernelOwnershipTests/testTransactionKernelLeavesBelongToCanonicalOwnerAndOldOwnerIsGone -only-testing:AmbitionsTests/PlanningTests/testPlanningOwnerFilesExistUnderCanonicalTreeAndOldPlannerOwnersAreRemoved -only-testing:AmbitionsTests/SearchRecallTests/testSearchRecallOwnerFilesExistUnderCanonicalTreeAndOldRuntimeIndexIsRemoved -only-testing:AmbitionsTests/PrivateLifeRuntimeKernelOwnershipTests/testKernelSourceLeavesLiveUnderCanonicalLocalRuntimeOSOwner -only-testing:AmbitionsTests/ObjectStateTests/testObjectStateOwnerFilesExistUnderCanonicalLocalRuntimeOSOwner -only-testing:AmbitionsTests/SourceAtlasLocalRuntimeOSOwnershipTests/testSourceAtlasCanonicalOwnerFilesExistAndOldOwnersAreRemoved test`
   -> exit `0`; 11 selected LocalRuntimeOS owner-specific tests passed, 0
   failures. Result bundle:
   `output/amb-1730-localruntimeos-owner-tests-20260703.xcresult`.
@@ -306,7 +306,7 @@ Canonical owners touched:
 
 - `Core/LocalRuntimeOS/PrivateLifeRuntimeKernel`
 - `Core/LocalRuntimeOS/Projections`
-- `Core/LocalRuntimeOS/PlanningEngine`
+- `Core/LocalRuntimeOS/Planning`
 - `Core/LocalRuntimeOS/TimeEngine`
 - `Core/LocalRuntimeOS/SearchRecall`
 - `Core/LocalRuntimeOS/CaptureRouteGraph`
@@ -323,7 +323,7 @@ Files moved or created:
   `Core/LocalRuntimeOS/Projections`.
 - Moved `RuntimeSnapshot.swift` from `Core/Runtime` to
   `Core/LocalRuntimeOS/Projections`.
-- Moved the `111` AMB-1730 PlanningEngine, TimeEngine, SearchRecall,
+- Moved the `111` AMB-1730 Planning, TimeEngine, SearchRecall,
   CaptureRouteGraph, PrivacySecurity, PrivateLifeRuntimeKernel,
   Projections, RuntimeBoundary, and SourceAtlas files from `Core/Runtime`
   to `Core/LocalRuntimeOS`.

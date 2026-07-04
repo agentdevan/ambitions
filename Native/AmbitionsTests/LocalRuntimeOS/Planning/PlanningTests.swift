@@ -1,22 +1,22 @@
 @testable import Ambitions
 import XCTest
 
-final class PlanningEngineTests: XCTestCase {
-    func testPlanningEngineOwnerFilesExistUnderCanonicalTreeAndOldPlannerOwnersAreRemoved() throws {
+final class PlanningTests: XCTestCase {
+    func testPlanningOwnerFilesExistUnderCanonicalTreeAndOldPlannerOwnersAreRemoved() throws {
         let root = try repoRoot()
         let requiredPaths = [
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/PlanningGraph.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepCandidateFieldModels+05-StepCandidateField.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalPathPlanner.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/FreeFloatingStepPlanner.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/PlanRepairEngine.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/SmallerStepEngine.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/DependencyResolver.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/ProgressPreservationEngine.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/DeterministicGoalPlanner.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/PlanningEvaluation.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/SourceAtlasStepCandidateFieldBridge.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepCandidateFieldGenerator.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/PlanningGraph.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepCandidateField.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalPathPlanner.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/FreeFloatingStepPlanner.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/PlanRepairEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/SmallerStepEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/DependencyResolver.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/ProgressPreservationEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/DeterministicGoalPlanner.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/PlanningEvaluation.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/SourceAtlasStepCandidateFieldBridge.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepCandidateFieldGenerator.swift",
         ]
 
         for path in requiredPaths {
@@ -24,15 +24,15 @@ final class PlanningEngineTests: XCTestCase {
         }
         XCTAssertFalse(
             FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Core/Domain/Planning").path),
-            "Planning source must be owned by Core/LocalRuntimeOS/PlanningEngine."
+            "Planning source must be owned by Core/LocalRuntimeOS/Planning."
         )
         XCTAssertFalse(
             FileManager.default.fileExists(atPath: root.appendingPathComponent(removedRuntimeOwnerPath("StepCandidateFieldGenerator.swift")).path),
-            "StepCandidateFieldGenerator must be owned by Core/LocalRuntimeOS/PlanningEngine."
+            "StepCandidateFieldGenerator must be owned by Core/LocalRuntimeOS/Planning."
         )
         XCTAssertFalse(
             FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Core/Domain/GoalEngine/StepCandidateFieldModels.swift").path),
-            "StepCandidateField models must be owned by Core/LocalRuntimeOS/PlanningEngine."
+            "StepCandidateField models must be owned by Core/LocalRuntimeOS/Planning."
         )
     }
 
@@ -164,7 +164,7 @@ final class PlanningEngineTests: XCTestCase {
     }
 }
 
-private extension PlanningEngineTests {
+private extension PlanningTests {
     func repoRoot() throws -> URL {
         var candidate = URL(fileURLWithPath: #filePath)
         while candidate.path != "/" {
@@ -173,6 +173,6 @@ private extension PlanningEngineTests {
             }
             candidate.deleteLastPathComponent()
         }
-        throw NSError(domain: "PlanningEngineTests", code: 1)
+        throw NSError(domain: "PlanningTests", code: 1)
     }
 }

@@ -16,7 +16,7 @@ struct SmallerStepProposal: Codable, Sendable, Equatable, Hashable, Identifiable
     let energyDelta: Double
     let reasons: [SmallerStepProposalReason]
     let summary: String
-    let runtimeTrace: PlanningEngineRuntimeTrace
+    let runtimeTrace: PlanningRuntimeTrace
 }
 
 struct SmallerStepEngine: Sendable {
@@ -54,7 +54,7 @@ struct SmallerStepEngine: Sendable {
         let minuteDelta = proposed.estimatedMinutes - selected.estimatedMinutes
         let energyDelta = ((proposed.estimatedEnergyCost - selected.estimatedEnergyCost) * 100).rounded() / 100
         let reasons = proposalReasons(selected: selected, proposed: proposed)
-        let trace = PlanningEngineRuntimeTrace.make(
+        let trace = PlanningRuntimeTrace.make(
             owner: "SmallerStepEngine",
             generatedAt: field.generatedAt,
             components: [

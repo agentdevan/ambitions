@@ -10128,7 +10128,7 @@
       "target_initiative": "Private Life Runtime / LocalRuntimeOS",
       "target_project": "LocalRuntimeOS Runtime Spine",
       "target_milestone": "Post-VSP repo-to-Linear hierarchy repair",
-      "product_object": "Private Life Runtime, LocalRuntimeOS, CommandSpine, TransactionKernel, EventJournal, ProjectionEngine, ObjectState, PlanningEngine, TimeEngine, CaptureRouteGraph, TrustSystem, SearchRecall, SideEffectSystem, SyncContinuity, Diagnostics",
+      "product_object": "Private Life Runtime, LocalRuntimeOS, CommandSpine, TransactionKernel, EventJournal, ProjectionEngine, ObjectState, Planning, TimeEngine, CaptureRouteGraph, TrustSystem, SearchRecall, SideEffectSystem, SyncContinuity, Diagnostics",
       "acceptance_criteria": [
         "Parent Feature preserves product law and hard non-goals.",
         "Parent Feature cites repo truth, VSP authority if present, source-owner paths, known issue mappings, validation commands, proof artifacts, and proof ceiling.",
@@ -11642,11 +11642,11 @@
       "title": "PlanningEngine — bounded reconciliation/proof-gate leaf",
       "parent_feature": "PlanningEngine parent feature with product-law non-goals and proof gate.",
       "source_owner_paths": [
-        "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/"
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/"
       ],
-      "exact_bounded_scope": "Reconcile PlanningEngine source-owner paths, VSP/known issue authority, validation commands, proof artifacts, rollback plan, and non-claims; implementation may proceed only after Phase 2/3 acceptance and separate authorization.",
+      "exact_bounded_scope": "Reconcile Planning source-owner paths, VSP/known issue authority, validation commands, proof artifacts, rollback plan, and non-claims; implementation may proceed only after Phase 2/3 acceptance and separate authorization.",
       "files_likely_touched": [
-        "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/"
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/"
       ],
       "tests_likely_required": [
         "python3 scripts/ambitions-local-runtime-proof.py",

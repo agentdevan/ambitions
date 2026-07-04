@@ -10,7 +10,7 @@ struct GoalPathPlan: Codable, Sendable, Equatable, Hashable, Identifiable {
     let dependencyResolution: DependencyResolution
     let progressPreservation: ProgressPreservationReport
     let repairTrace: PlanRepairTrace
-    let runtimeTrace: PlanningEngineRuntimeTrace
+    let runtimeTrace: PlanningRuntimeTrace
     let localOnly: Bool
 
     var isReplayReady: Bool {
@@ -91,7 +91,7 @@ struct GoalPathPlanner: Sendable {
             preservationReport: preservation
         )
         let goalID = context.goalID ?? graph.goalID ?? "unscoped-goal"
-        let trace = PlanningEngineRuntimeTrace.make(
+        let trace = PlanningRuntimeTrace.make(
             owner: "GoalPathPlanner",
             generatedAt: context.generatedAt,
             components: [

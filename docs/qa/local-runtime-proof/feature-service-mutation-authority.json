@@ -8,7 +8,7 @@
     "Native/Ambitions/Surfaces/",
     "Native/Ambitions/Composer/",
     "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/",
-    "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/",
+    "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
     "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
     "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/",
     "Native/Ambitions/Core/Permissions/",
@@ -130,7 +130,7 @@
       "rationale": "Moved AMB-1730 capture event-ledger mirror; not canonical object-state authority."
     },
     {
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalTeachingSignalService.swift",
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalTeachingSignalService.swift",
       "classification": "explicitly_non_canonical",
       "allowedCalls": ["repository.saveSignals"],
       "rationale": "Moved AMB-1730 teaching-signal repository compatibility write; not canonical object-state authority."

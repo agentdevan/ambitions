@@ -62,21 +62,21 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
     func testAMB1730MovesStandalonePlanningServicesToCanonicalOwner() {
         let root = repoRoot()
         for requiredPath in [
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalDomainPackService.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalDomainPacks.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalEnergyFitService.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalEnergyLearningService.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalFreshnessUpdateService.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalPathCompilerService.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalResourceGraphService.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalTeachingSignalService.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalUnderstandingService.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/OneStepGoalProjector.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/RecommendationExplanationAdapter.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalDomainPackService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalDomainPacks.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalEnergyFitService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalEnergyLearningService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalFreshnessUpdateService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalPathCompilerService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalResourceGraphService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalTeachingSignalService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalUnderstandingService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/OneStepGoalProjector.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/RecommendationExplanationAdapter.swift",
         ] {
             XCTAssertTrue(
                 FileManager.default.fileExists(atPath: root.appendingPathComponent(requiredPath).path),
-                "Missing AMB-1730 canonical PlanningEngine owner: \(requiredPath)"
+                "Missing AMB-1730 canonical Planning owner: \(requiredPath)"
             )
         }
 
@@ -103,14 +103,14 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
     func testAMB1730MovesGoalClarificationAndContradictionServicesToCanonicalOwner() {
         let root = repoRoot()
         for requiredPath in [
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalClarificationService+02-DefaultGoalClarificationService+03-defaultAssumption.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalClarificationService+02-DefaultGoalClarificationService.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalClarificationService+03-ClassificationConfidence.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalClarificationService.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalContradictionService+02-DefaultGoalContradictionService+03-energyContradictions.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalContradictionService+02-DefaultGoalContradictionService.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalContradictionService+03-GoalResourceEntity.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalContradictionService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/DefaultGoalClarificationServiceAssumptions.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/DefaultGoalClarificationService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/ClassificationConfidencePlanningSupport.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalClarificationService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/DefaultGoalContradictionServiceEnergyRules.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/DefaultGoalContradictionService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalResourceEntityPlanningSupport.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/GoalContradictionService.swift",
         ] {
             XCTAssertTrue(
                 FileManager.default.fileExists(atPath: root.appendingPathComponent(requiredPath).path),
@@ -119,13 +119,13 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
         }
 
         for retiredPath in [
-            removedRuntimeOwnerPath("GoalClarificationService+02-DefaultGoalClarificationService+03-defaultAssumption.swift"),
-            removedRuntimeOwnerPath("GoalClarificationService+02-DefaultGoalClarificationService.swift"),
-            removedRuntimeOwnerPath("GoalClarificationService+03-ClassificationConfidence.swift"),
+            removedRuntimeOwnerPath("DefaultGoalClarificationServiceAssumptions.swift"),
+            removedRuntimeOwnerPath("DefaultGoalClarificationService.swift"),
+            removedRuntimeOwnerPath("ClassificationConfidencePlanningSupport.swift"),
             removedRuntimeOwnerPath("GoalClarificationService.swift"),
-            removedRuntimeOwnerPath("GoalContradictionService+02-DefaultGoalContradictionService+03-energyContradictions.swift"),
-            removedRuntimeOwnerPath("GoalContradictionService+02-DefaultGoalContradictionService.swift"),
-            removedRuntimeOwnerPath("GoalContradictionService+03-GoalResourceEntity.swift"),
+            removedRuntimeOwnerPath("DefaultGoalContradictionServiceEnergyRules.swift"),
+            removedRuntimeOwnerPath("DefaultGoalContradictionService.swift"),
+            removedRuntimeOwnerPath("GoalResourceEntityPlanningSupport.swift"),
             removedRuntimeOwnerPath("GoalContradictionService.swift"),
         ] {
             XCTAssertFalse(
@@ -167,16 +167,16 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
     func testAMB1730MovesStepPlanningAndSchedulingRuntimeOwnersToCanonicalOwners() {
         let root = repoRoot()
         for requiredPath in [
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepElasticityEngine+02-StepElasticityEngine+02-evaluate.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepElasticityEngine+02-StepElasticityEngine+03-makeReceipt.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepElasticityEngine+02-StepElasticityEngine.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepElasticityEngine+03-StepElasticityEngineInput.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepElasticityEngine.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepGraphCompiler+02-StepGraphCompiler+02-compile.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepGraphCompiler+02-StepGraphCompiler+03-edgeKind.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepGraphCompiler+02-StepGraphCompiler.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepGraphCompiler.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/StepQualityFirewall.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepElasticityEngineEvaluation.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepElasticityEngineReceipt.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepElasticityEngineCore.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepElasticityEngineInputs.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepElasticityEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepGraphCompilerCompile.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepGraphCompilerEdgeKindResolution.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepGraphCompilerCore.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepGraphCompiler.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepQualityFirewall.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ScheduleInstallKernel+02-ScheduleInstallRecord.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ScheduleInstallKernel+03-ScheduleInstallKernel+02-evaluate.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ScheduleInstallKernel+03-ScheduleInstallKernel+03-makeReceipt.swift",
@@ -195,14 +195,14 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
         }
 
         for retiredPath in [
-            removedRuntimeOwnerPath("StepElasticityEngine+02-StepElasticityEngine+02-evaluate.swift"),
-            removedRuntimeOwnerPath("StepElasticityEngine+02-StepElasticityEngine+03-makeReceipt.swift"),
-            removedRuntimeOwnerPath("StepElasticityEngine+02-StepElasticityEngine.swift"),
-            removedRuntimeOwnerPath("StepElasticityEngine+03-StepElasticityEngineInput.swift"),
+            removedRuntimeOwnerPath("StepElasticityEngineEvaluation.swift"),
+            removedRuntimeOwnerPath("StepElasticityEngineReceipt.swift"),
+            removedRuntimeOwnerPath("StepElasticityEngineCore.swift"),
+            removedRuntimeOwnerPath("StepElasticityEngineInputs.swift"),
             removedRuntimeOwnerPath("StepElasticityEngine.swift"),
-            removedRuntimeOwnerPath("StepGraphCompiler+02-StepGraphCompiler+02-compile.swift"),
-            removedRuntimeOwnerPath("StepGraphCompiler+02-StepGraphCompiler+03-edgeKind.swift"),
-            removedRuntimeOwnerPath("StepGraphCompiler+02-StepGraphCompiler.swift"),
+            removedRuntimeOwnerPath("StepGraphCompilerCompile.swift"),
+            removedRuntimeOwnerPath("StepGraphCompilerEdgeKindResolution.swift"),
+            removedRuntimeOwnerPath("StepGraphCompilerCore.swift"),
             removedRuntimeOwnerPath("StepGraphCompiler.swift"),
             removedRuntimeOwnerPath("StepQualityFirewall.swift"),
             removedRuntimeOwnerPath("ScheduleInstallKernel+02-ScheduleInstallRecord.swift"),
@@ -236,8 +236,8 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
         for requiredPath in [
             "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureService.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/SmartAttachmentService.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/MultiPathLattice.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/RecommendationEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/MultiPathLattice.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/RecommendationEngine.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/HighRiskSafetyJurisdictionGate.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/AmbitionsRuntimeGoalIntelligence.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/ExecutionResilienceProjector.swift",

@@ -18965,7 +18965,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Domain",
       "line_count": 276,
-      "path": "Native/Ambitions/Core/Domain/GoalEngine/StepCandidateFieldModels+02-CandidateRejectionRisk.swift",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/StepCandidateFieldRiskModels.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -19120,7 +19120,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Domain",
       "line_count": 152,
-      "path": "Native/Ambitions/Core/Domain/GoalEngine/StepCandidateFieldModels+03-StepCandidate.swift",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/StepCandidate.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -19165,7 +19165,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Domain",
       "line_count": 157,
-      "path": "Native/Ambitions/Core/Domain/GoalEngine/StepCandidateFieldModels+04-StepImpactSimulation+03-feasibilityBand.swift",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/StepImpactSimulationFeasibility.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -19210,7 +19210,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Domain",
       "line_count": 264,
-      "path": "Native/Ambitions/Core/Domain/GoalEngine/StepCandidateFieldModels+04-StepImpactSimulation.swift",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/StepImpactSimulationSupport.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -19255,7 +19255,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Domain",
       "line_count": 285,
-      "path": "Native/Ambitions/Core/Domain/GoalEngine/StepCandidateFieldModels+05-StepCandidateField.swift",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/StepCandidateField.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -19360,7 +19360,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Domain",
       "line_count": 355,
-      "path": "Native/Ambitions/Core/Domain/GoalEngine/StepCandidateFieldModels+06-StepCandidate.swift",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/StepCandidateSupport.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -25117,7 +25117,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Domain",
       "line_count": 151,
-      "path": "Native/Ambitions/Core/Domain/Planning/PlanningEvaluation+02-PlanningRuleCounterfactualDiff.swift",
+      "path": "Native/Ambitions/Core/Domain/Planning/PlanningRuleCounterfactualDiff.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -25170,7 +25170,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Domain",
       "line_count": 366,
-      "path": "Native/Ambitions/Core/Domain/Planning/PlanningEvaluation+03-PlanningNextStepSelector.swift",
+      "path": "Native/Ambitions/Core/Domain/Planning/PlanningNextStepSelector.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -42973,7 +42973,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Runtime",
       "line_count": 288,
-      "path": "Native/Ambitions/Core/Runtime/GoalClarificationService+02-DefaultGoalClarificationService+03-defaultAssumption.swift",
+      "path": "Native/Ambitions/Core/Runtime/DefaultGoalClarificationServiceAssumptions.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -43018,7 +43018,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Runtime",
       "line_count": 259,
-      "path": "Native/Ambitions/Core/Runtime/GoalClarificationService+02-DefaultGoalClarificationService.swift",
+      "path": "Native/Ambitions/Core/Runtime/DefaultGoalClarificationService.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -43063,7 +43063,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Runtime",
       "line_count": 14,
-      "path": "Native/Ambitions/Core/Runtime/GoalClarificationService+03-ClassificationConfidence.swift",
+      "path": "Native/Ambitions/Core/Runtime/ClassificationConfidencePlanningSupport.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -43163,7 +43163,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Runtime",
       "line_count": 248,
-      "path": "Native/Ambitions/Core/Runtime/GoalContradictionService+02-DefaultGoalContradictionService+03-energyContradictions.swift",
+      "path": "Native/Ambitions/Core/Runtime/DefaultGoalContradictionServiceEnergyRules.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -43208,7 +43208,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Runtime",
       "line_count": 288,
-      "path": "Native/Ambitions/Core/Runtime/GoalContradictionService+02-DefaultGoalContradictionService.swift",
+      "path": "Native/Ambitions/Core/Runtime/DefaultGoalContradictionService.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -43253,7 +43253,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Runtime",
       "line_count": 38,
-      "path": "Native/Ambitions/Core/Runtime/GoalContradictionService+03-GoalResourceEntity.swift",
+      "path": "Native/Ambitions/Core/Runtime/GoalResourceEntityPlanningSupport.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -48684,7 +48684,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Runtime",
       "line_count": 339,
-      "path": "Native/Ambitions/Core/Runtime/SourceAtlasStepCandidateFieldBridge+02-shouldUseFallbackOnlyExpansion.swift",
+      "path": "Native/Ambitions/Core/Runtime/SourceAtlasStepCandidateFieldFallback.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -48727,7 +48727,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Runtime",
       "line_count": 350,
-      "path": "Native/Ambitions/Core/Runtime/SourceAtlasStepCandidateFieldBridge+03-makeRejectedSeedTraces.swift",
+      "path": "Native/Ambitions/Core/Runtime/SourceAtlasStepCandidateFieldRejectedSeedTraces.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -48813,7 +48813,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Runtime",
       "line_count": 219,
-      "path": "Native/Ambitions/Core/Runtime/StepCandidateFieldGenerator+02-clamp.swift",
+      "path": "Native/Ambitions/Core/Runtime/StepCandidateFieldGeneratorClamp.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -48858,7 +48858,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Runtime",
       "line_count": 334,
-      "path": "Native/Ambitions/Core/Runtime/StepCandidateFieldGenerator+03-rejectionAlignmentScore.swift",
+      "path": "Native/Ambitions/Core/Runtime/StepCandidateFieldGeneratorRejectionAlignment.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -48903,7 +48903,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Runtime",
       "line_count": 336,
-      "path": "Native/Ambitions/Core/Runtime/StepCandidateFieldGenerator+04-accessComponents.swift",
+      "path": "Native/Ambitions/Core/Runtime/StepCandidateFieldGeneratorAccessComponents.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -48948,7 +48948,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Runtime",
       "line_count": 196,
-      "path": "Native/Ambitions/Core/Runtime/StepCandidateFieldGenerator+05-validity.swift",
+      "path": "Native/Ambitions/Core/Runtime/StepCandidateFieldGeneratorValidity.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -49038,7 +49038,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Runtime",
       "line_count": 263,
-      "path": "Native/Ambitions/Core/Runtime/StepElasticityEngine+02-StepElasticityEngine+02-evaluate.swift",
+      "path": "Native/Ambitions/Core/Runtime/StepElasticityEngineEvaluation.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -49083,7 +49083,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Runtime",
       "line_count": 177,
-      "path": "Native/Ambitions/Core/Runtime/StepElasticityEngine+02-StepElasticityEngine+03-makeReceipt.swift",
+      "path": "Native/Ambitions/Core/Runtime/StepElasticityEngineReceipt.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -49128,7 +49128,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Runtime",
       "line_count": 3,
-      "path": "Native/Ambitions/Core/Runtime/StepElasticityEngine+02-StepElasticityEngine.swift",
+      "path": "Native/Ambitions/Core/Runtime/StepElasticityEngineCore.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -49173,7 +49173,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Runtime",
       "line_count": 13,
-      "path": "Native/Ambitions/Core/Runtime/StepElasticityEngine+03-StepElasticityEngineInput.swift",
+      "path": "Native/Ambitions/Core/Runtime/StepElasticityEngineInputs.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -49363,7 +49363,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Runtime",
       "line_count": 285,
-      "path": "Native/Ambitions/Core/Runtime/StepGraphCompiler+02-StepGraphCompiler+02-compile.swift",
+      "path": "Native/Ambitions/Core/Runtime/StepGraphCompilerCompile.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -49408,7 +49408,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Runtime",
       "line_count": 291,
-      "path": "Native/Ambitions/Core/Runtime/StepGraphCompiler+02-StepGraphCompiler+03-edgeKind.swift",
+      "path": "Native/Ambitions/Core/Runtime/StepGraphCompilerEdgeKindResolution.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -49453,7 +49453,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Runtime",
       "line_count": 4,
-      "path": "Native/Ambitions/Core/Runtime/StepGraphCompiler+02-StepGraphCompiler.swift",
+      "path": "Native/Ambitions/Core/Runtime/StepGraphCompilerCore.swift",
       "public_internal_types": [
         {
           "access": "internal",

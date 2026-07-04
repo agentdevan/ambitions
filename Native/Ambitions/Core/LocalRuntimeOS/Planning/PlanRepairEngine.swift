@@ -16,7 +16,7 @@ struct PlanRepairTrace: Codable, Sendable, Equatable, Hashable, Identifiable {
     let blockedNodeIDs: [String]
     let preservedNodeIDs: [String]
     let reason: String
-    let runtimeTrace: PlanningEngineRuntimeTrace
+    let runtimeTrace: PlanningRuntimeTrace
 }
 
 struct PlanRepairEngine: Sendable {
@@ -53,7 +53,7 @@ struct PlanRepairEngine: Sendable {
             reason = field.rankingTrace.semanticSummary
         }
 
-        let trace = PlanningEngineRuntimeTrace.make(
+        let trace = PlanningRuntimeTrace.make(
             owner: "PlanRepairEngine",
             generatedAt: field.generatedAt,
             components: [

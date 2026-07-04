@@ -210,6 +210,17 @@ runtime scope:
 - Source Atlas growth allowlist: `Native/AmbitionsTests/LocalRuntimeOS/Boundary/SourceAtlasNoPrivateGraphEgressAuditTests.swift`
 - Source Atlas growth allowlist: `Native/AmbitionsTests/LocalRuntimeOS/Boundary/SourceAtlasPublicArtifactBoundaryTests.swift`
 
+AMB-1669 renames existing planning source under the clearer LocalRuntimeOS
+`Planning` owner. These allowlist entries cover the source-owner rename and
+split-filename cleanup only; they do not add public-pack, R2, product-surface,
+or private runtime scope:
+
+- Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/Planning/SourceAtlasStepCandidateFieldBridge.swift`
+- Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/Planning/SourceAtlasStepCandidateFieldFallback.swift`
+- Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/Planning/SourceAtlasStepCandidateFieldRejectedSeedTraces.swift`
+- Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/Planning/SourceAtlasStepCandidateFieldVerifiedPublicContext.swift`
+- Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/Planning/SourceAtlasVerifiedPublicPlanningBridgeModels.swift`
+
 ## Inspection Requirements
 
 Source Atlas work must keep inspection boring and bounded:

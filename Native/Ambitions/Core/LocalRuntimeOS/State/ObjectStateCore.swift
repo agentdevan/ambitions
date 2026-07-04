@@ -175,7 +175,7 @@ enum ObjectStateRegistry {
                 tombstoneEntityKind: .goal,
                 runtimeTombstoneFamily: .step,
                 supersessionPolicy: .appendOnlyRevision,
-                remainingDirectWriteDebt: "Step writes remain embedded in goal plan persistence until PlanningEngine and TimeEngine move their object-state adapters."
+                remainingDirectWriteDebt: "Step writes remain embedded in goal plan persistence until Planning and TimeEngine move their object-state adapters."
             ),
             ObjectStateFamilyDescriptor(
                 id: .capture,

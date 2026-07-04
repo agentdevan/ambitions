@@ -1229,7 +1229,7 @@
         "docs/truth/CODEX_START_HERE.md"
       ],
       "source_owner_paths": [
-        "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/"
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/"
       ],
       "existing_tests_scripts": [
         "python3 scripts/ambitions-local-runtime-proof.py",

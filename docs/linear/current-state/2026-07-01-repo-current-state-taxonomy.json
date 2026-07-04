@@ -344,12 +344,12 @@
       "gap_classification": "PARTIAL_NEEDS_LEAF_REPAIR"
     },
     {
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/",
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
       "app_aspect": "Planning and recommendation",
       "private_life_orchestration_role": "Turns intent, identity, context, and time reality into recommended steps and reflow candidates.",
       "orchestration_layer": "Recommended step / planning / reflow",
-      "source_owner_system": "Final Architecture Tree owner: Core/LocalRuntimeOS/PlanningEngine.",
-      "current_repo_evidence": "PlanningEngine source owner exists under LocalRuntimeOS and is referenced by Goals/Time planning paths.",
+      "source_owner_system": "Final Architecture Tree owner: Core/LocalRuntimeOS/Planning.",
+      "current_repo_evidence": "Planning source owner exists under LocalRuntimeOS and is referenced by Goals/Time planning paths.",
       "existing_linear_object": "initiative: Private Life Runtime; AMB-1544 partial owner.",
       "missing_linear_object": "Missing dedicated Planning/Recommendation parent Feature and Codex leaves for step selection, reflow, and proof.",
       "runtime_mutation_path": "Recommendations are derived and must commit changes only through command-backed actions.",

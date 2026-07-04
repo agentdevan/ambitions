@@ -597,22 +597,22 @@ def self_test() -> int:
     assert is_legacy_runtime_to_localruntimeos_suffix_move(
         ChangedPath(
             "R",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalClarificationService+02-DefaultGoalClarificationService.swift",
-            old_path="Native/Ambitions/Core/Runtime/GoalClarificationService+02-DefaultGoalClarificationService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/LegacyRuntimeOwner+02-Split.swift",
+            old_path="Native/Ambitions/Core/Runtime/LegacyRuntimeOwner+02-Split.swift",
         )
     )
     assert not is_legacy_runtime_to_localruntimeos_suffix_move(
         ChangedPath(
             "A",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/NewPlanningOwner+02-NewSplit.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/NewPlanningOwner+02-NewSplit.swift",
             untracked=True,
         )
     )
     assert not is_legacy_runtime_to_localruntimeos_suffix_move(
         ChangedPath(
             "R",
-            "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/GoalClarificationService+02-DefaultGoalClarificationService.swift",
-            old_path="Native/Ambitions/Core/Domain/GoalEngine/GoalClarificationService+02-DefaultGoalClarificationService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/LegacyRuntimeOwner+02-Split.swift",
+            old_path="Native/Ambitions/Core/Domain/GoalEngine/LegacyRuntimeOwner+02-Split.swift",
         )
     )
     allowlist = parse_source_atlas_allowlist("- Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/NewPack.swift`")

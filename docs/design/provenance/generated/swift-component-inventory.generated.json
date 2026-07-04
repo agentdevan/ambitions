@@ -7841,11 +7841,11 @@
       "has_preview_provider": false,
       "kind": "test",
       "line_count": 179,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/PlanningEngine/PlanningEngineTests.swift",
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/Planning/PlanningTests.swift",
       "preview_count": 0,
       "proof_status": "source_inventory_only",
       "test_cases": [
-        "PlanningEngineTests"
+        "PlanningTests"
       ],
       "view_modifiers": [],
       "view_structs": []

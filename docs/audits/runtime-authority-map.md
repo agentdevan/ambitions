@@ -42,20 +42,20 @@ LocalRuntimeOS completion.
 
 AMB-1730 moved `111` legacy runtime production files out of
 `Native/Ambitions/Core/Runtime` and into `Native/Ambitions/Core/LocalRuntimeOS`
-owners. Earlier batches moved PlanningEngine, TimeEngine, and SearchRecall
+owners. Earlier batches moved Planning, TimeEngine, and SearchRecall
 files. The final all-remaining pass moved the remaining CaptureRouteGraph,
 PrivacySecurity, PrivateLifeRuntimeKernel, Projections, Boundary,
 SourceAtlas, and TimeEngine files. Representative retired files include:
 
 - `BufferEngine.swift`
 - `CapacityEngine.swift`
-- `GoalClarificationService+02-DefaultGoalClarificationService+03-defaultAssumption.swift`
-- `GoalClarificationService+02-DefaultGoalClarificationService.swift`
-- `GoalClarificationService+03-ClassificationConfidence.swift`
+- `DefaultGoalClarificationServiceAssumptions.swift`
+- `DefaultGoalClarificationService.swift`
+- `ClassificationConfidencePlanningSupport.swift`
 - `GoalClarificationService.swift`
-- `GoalContradictionService+02-DefaultGoalContradictionService+03-energyContradictions.swift`
-- `GoalContradictionService+02-DefaultGoalContradictionService.swift`
-- `GoalContradictionService+03-GoalResourceEntity.swift`
+- `DefaultGoalContradictionServiceEnergyRules.swift`
+- `DefaultGoalContradictionService.swift`
+- `GoalResourceEntityPlanningSupport.swift`
 - `GoalContradictionService.swift`
 - `GoalDomainPackService.swift`
 - `GoalDomainPacks.swift`
@@ -79,14 +79,14 @@ SourceAtlas, and TimeEngine files. Representative retired files include:
 - `ScheduleInstallKernel.swift`
 - `SimpleStepLifecycleService+Recurring.swift`
 - `SimpleStepLifecycleService.swift`
-- `StepElasticityEngine+02-StepElasticityEngine+02-evaluate.swift`
-- `StepElasticityEngine+02-StepElasticityEngine+03-makeReceipt.swift`
-- `StepElasticityEngine+02-StepElasticityEngine.swift`
-- `StepElasticityEngine+03-StepElasticityEngineInput.swift`
+- `StepElasticityEngineEvaluation.swift`
+- `StepElasticityEngineReceipt.swift`
+- `StepElasticityEngineCore.swift`
+- `StepElasticityEngineInputs.swift`
 - `StepElasticityEngine.swift`
-- `StepGraphCompiler+02-StepGraphCompiler+02-compile.swift`
-- `StepGraphCompiler+02-StepGraphCompiler+03-edgeKind.swift`
-- `StepGraphCompiler+02-StepGraphCompiler.swift`
+- `StepGraphCompilerCompile.swift`
+- `StepGraphCompilerEdgeKindResolution.swift`
+- `StepGraphCompilerCore.swift`
 - `StepGraphCompiler.swift`
 - `StepQualityFirewall.swift`
 - `StepReallocationRuntimeBridge.swift`

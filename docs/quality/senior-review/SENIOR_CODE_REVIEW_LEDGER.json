@@ -13813,7 +13813,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Domain/GoalEngine/StepCandidateFieldModels+02-CandidateRejectionRisk.swift",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/StepCandidateFieldRiskModels.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -13869,7 +13869,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Domain/GoalEngine/StepCandidateFieldModels+03-StepCandidate.swift",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/StepCandidate.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -13925,7 +13925,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Domain/GoalEngine/StepCandidateFieldModels+04-StepImpactSimulation+03-feasibilityBand.swift",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/StepImpactSimulationFeasibility.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -13981,7 +13981,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Domain/GoalEngine/StepCandidateFieldModels+04-StepImpactSimulation.swift",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/StepImpactSimulationSupport.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -14037,7 +14037,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Domain/GoalEngine/StepCandidateFieldModels+05-StepCandidateField.swift",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/StepCandidateField.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -14093,7 +14093,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Domain/GoalEngine/StepCandidateFieldModels+06-StepCandidate.swift",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/StepCandidateSupport.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -17926,7 +17926,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Domain/Planning/PlanningEvaluation+02-PlanningRuleCounterfactualDiff.swift",
+      "path": "Native/Ambitions/Core/Domain/Planning/PlanningRuleCounterfactualDiff.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -17982,7 +17982,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Domain/Planning/PlanningEvaluation+03-PlanningNextStepSelector.swift",
+      "path": "Native/Ambitions/Core/Domain/Planning/PlanningNextStepSelector.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -29001,7 +29001,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Runtime/GoalClarificationService+02-DefaultGoalClarificationService+03-defaultAssumption.swift",
+      "path": "Native/Ambitions/Core/Runtime/DefaultGoalClarificationServiceAssumptions.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -29057,7 +29057,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Runtime/GoalClarificationService+02-DefaultGoalClarificationService.swift",
+      "path": "Native/Ambitions/Core/Runtime/DefaultGoalClarificationService.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -29113,7 +29113,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Runtime/GoalClarificationService+03-ClassificationConfidence.swift",
+      "path": "Native/Ambitions/Core/Runtime/ClassificationConfidencePlanningSupport.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -29225,7 +29225,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Runtime/GoalContradictionService+02-DefaultGoalContradictionService+03-energyContradictions.swift",
+      "path": "Native/Ambitions/Core/Runtime/DefaultGoalContradictionServiceEnergyRules.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -29281,7 +29281,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Runtime/GoalContradictionService+02-DefaultGoalContradictionService.swift",
+      "path": "Native/Ambitions/Core/Runtime/DefaultGoalContradictionService.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -29337,7 +29337,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Runtime/GoalContradictionService+03-GoalResourceEntity.swift",
+      "path": "Native/Ambitions/Core/Runtime/GoalResourceEntityPlanningSupport.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -34022,7 +34022,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Runtime/SourceAtlasStepCandidateFieldBridge+02-shouldUseFallbackOnlyExpansion.swift",
+      "path": "Native/Ambitions/Core/Runtime/SourceAtlasStepCandidateFieldFallback.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -34078,7 +34078,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Runtime/SourceAtlasStepCandidateFieldBridge+03-makeRejectedSeedTraces.swift",
+      "path": "Native/Ambitions/Core/Runtime/SourceAtlasStepCandidateFieldRejectedSeedTraces.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -34190,7 +34190,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Runtime/StepCandidateFieldGenerator+02-clamp.swift",
+      "path": "Native/Ambitions/Core/Runtime/StepCandidateFieldGeneratorClamp.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -34246,7 +34246,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Runtime/StepCandidateFieldGenerator+03-rejectionAlignmentScore.swift",
+      "path": "Native/Ambitions/Core/Runtime/StepCandidateFieldGeneratorRejectionAlignment.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -34302,7 +34302,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Runtime/StepCandidateFieldGenerator+04-accessComponents.swift",
+      "path": "Native/Ambitions/Core/Runtime/StepCandidateFieldGeneratorAccessComponents.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -34358,7 +34358,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Runtime/StepCandidateFieldGenerator+05-validity.swift",
+      "path": "Native/Ambitions/Core/Runtime/StepCandidateFieldGeneratorValidity.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -34470,7 +34470,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Runtime/StepElasticityEngine+02-StepElasticityEngine+02-evaluate.swift",
+      "path": "Native/Ambitions/Core/Runtime/StepElasticityEngineEvaluation.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -34526,7 +34526,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Runtime/StepElasticityEngine+02-StepElasticityEngine+03-makeReceipt.swift",
+      "path": "Native/Ambitions/Core/Runtime/StepElasticityEngineReceipt.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -34582,7 +34582,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Runtime/StepElasticityEngine+02-StepElasticityEngine.swift",
+      "path": "Native/Ambitions/Core/Runtime/StepElasticityEngineCore.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -34638,7 +34638,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Runtime/StepElasticityEngine+03-StepElasticityEngineInput.swift",
+      "path": "Native/Ambitions/Core/Runtime/StepElasticityEngineInputs.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -34750,7 +34750,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Runtime/StepGraphCompiler+02-StepGraphCompiler+02-compile.swift",
+      "path": "Native/Ambitions/Core/Runtime/StepGraphCompilerCompile.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -34806,7 +34806,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Runtime/StepGraphCompiler+02-StepGraphCompiler+03-edgeKind.swift",
+      "path": "Native/Ambitions/Core/Runtime/StepGraphCompilerEdgeKindResolution.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -34862,7 +34862,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Runtime/StepGraphCompiler+02-StepGraphCompiler.swift",
+      "path": "Native/Ambitions/Core/Runtime/StepGraphCompilerCore.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",

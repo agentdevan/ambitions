@@ -7,7 +7,7 @@ struct FreeFloatingStepPlan: Codable, Sendable, Equatable, Hashable, Identifiabl
     let candidateField: StepCandidateField
     let selectedCandidate: StepCandidate?
     let repairTrace: PlanRepairTrace
-    let runtimeTrace: PlanningEngineRuntimeTrace
+    let runtimeTrace: PlanningRuntimeTrace
     let localOnly: Bool
 }
 
@@ -89,7 +89,7 @@ struct FreeFloatingStepPlanner: Sendable {
             context: context,
             graph: graph
         )
-        let trace = PlanningEngineRuntimeTrace.make(
+        let trace = PlanningRuntimeTrace.make(
             owner: "FreeFloatingStepPlanner",
             generatedAt: generatedAt,
             components: [stepID, plan.candidateField.id, plan.repairTrace.id],

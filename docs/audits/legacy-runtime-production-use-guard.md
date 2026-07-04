@@ -113,13 +113,13 @@ AMB-1730 supersession:
 - Retired paths added:
   - `Native/Ambitions/Core/Runtime/BufferEngine.swift`
   - `Native/Ambitions/Core/Runtime/CapacityEngine.swift`
-  - `Native/Ambitions/Core/Runtime/GoalClarificationService+02-DefaultGoalClarificationService+03-defaultAssumption.swift`
-  - `Native/Ambitions/Core/Runtime/GoalClarificationService+02-DefaultGoalClarificationService.swift`
-  - `Native/Ambitions/Core/Runtime/GoalClarificationService+03-ClassificationConfidence.swift`
+  - `Native/Ambitions/Core/Runtime/DefaultGoalClarificationServiceAssumptions.swift`
+  - `Native/Ambitions/Core/Runtime/DefaultGoalClarificationService.swift`
+  - `Native/Ambitions/Core/Runtime/ClassificationConfidencePlanningSupport.swift`
   - `Native/Ambitions/Core/Runtime/GoalClarificationService.swift`
-  - `Native/Ambitions/Core/Runtime/GoalContradictionService+02-DefaultGoalContradictionService+03-energyContradictions.swift`
-  - `Native/Ambitions/Core/Runtime/GoalContradictionService+02-DefaultGoalContradictionService.swift`
-  - `Native/Ambitions/Core/Runtime/GoalContradictionService+03-GoalResourceEntity.swift`
+  - `Native/Ambitions/Core/Runtime/DefaultGoalContradictionServiceEnergyRules.swift`
+  - `Native/Ambitions/Core/Runtime/DefaultGoalContradictionService.swift`
+  - `Native/Ambitions/Core/Runtime/GoalResourceEntityPlanningSupport.swift`
   - `Native/Ambitions/Core/Runtime/GoalContradictionService.swift`
   - `Native/Ambitions/Core/Runtime/GoalDomainPackService.swift`
   - `Native/Ambitions/Core/Runtime/GoalDomainPacks.swift`
@@ -146,20 +146,20 @@ AMB-1730 supersession:
   - `Native/Ambitions/Core/Runtime/ScheduleInstallKernel.swift`
   - `Native/Ambitions/Core/Runtime/SimpleStepLifecycleService+Recurring.swift`
   - `Native/Ambitions/Core/Runtime/SimpleStepLifecycleService.swift`
-  - `Native/Ambitions/Core/Runtime/StepElasticityEngine+02-StepElasticityEngine+02-evaluate.swift`
-  - `Native/Ambitions/Core/Runtime/StepElasticityEngine+02-StepElasticityEngine+03-makeReceipt.swift`
-  - `Native/Ambitions/Core/Runtime/StepElasticityEngine+02-StepElasticityEngine.swift`
-  - `Native/Ambitions/Core/Runtime/StepElasticityEngine+03-StepElasticityEngineInput.swift`
+  - `Native/Ambitions/Core/Runtime/StepElasticityEngineEvaluation.swift`
+  - `Native/Ambitions/Core/Runtime/StepElasticityEngineReceipt.swift`
+  - `Native/Ambitions/Core/Runtime/StepElasticityEngineCore.swift`
+  - `Native/Ambitions/Core/Runtime/StepElasticityEngineInputs.swift`
   - `Native/Ambitions/Core/Runtime/StepElasticityEngine.swift`
-  - `Native/Ambitions/Core/Runtime/StepGraphCompiler+02-StepGraphCompiler+02-compile.swift`
-  - `Native/Ambitions/Core/Runtime/StepGraphCompiler+02-StepGraphCompiler+03-edgeKind.swift`
-  - `Native/Ambitions/Core/Runtime/StepGraphCompiler+02-StepGraphCompiler.swift`
+  - `Native/Ambitions/Core/Runtime/StepGraphCompilerCompile.swift`
+  - `Native/Ambitions/Core/Runtime/StepGraphCompilerEdgeKindResolution.swift`
+  - `Native/Ambitions/Core/Runtime/StepGraphCompilerCore.swift`
   - `Native/Ambitions/Core/Runtime/StepGraphCompiler.swift`
   - `Native/Ambitions/Core/Runtime/StepQualityFirewall.swift`
   - `Native/Ambitions/Core/Runtime/StepReallocationRuntimeBridge.swift`
   - `Native/Ambitions/Core/Runtime/TimeRitualGoalSemantics.swift`
 - Canonical owner:
-  `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/` and
+  `Native/Ambitions/Core/LocalRuntimeOS/Planning/` and
   `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/`, plus
   `Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/`
 - Active guard ceiling: `0` legacy runtime production files.
