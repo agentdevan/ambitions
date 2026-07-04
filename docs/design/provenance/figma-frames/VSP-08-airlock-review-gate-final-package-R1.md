@@ -32,7 +32,7 @@ The owner selected `B Airlock Review Gate` as the VSP-08 Part 01 direction on 20
 - VSP: `VSP-08`
 - Category: external boundary and inspection content
 - Shell authority: VSP-01 owns shell, Stage, dock, chrome, Capture/Search placement, root IA, and route depth. VSP-08 may not mutate shell.
-- Canonical runtime source owner for future implementation: `Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/`
+- Canonical runtime source owner for future implementation: `Native/Ambitions/Core/LocalRuntimeOS/Boundary/`
 - Canonical trust source owner for future inspection UI: `Native/Ambitions/Trust/`
 - Allowed design-system support: `Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/`
 - New primitives likely required after package approval: `RequestAirlockGate`, `BoundaryMembraneObject`, `SourceFreshnessWeather`, `QuietDegradedBoundaryState`, `RuntimeBoundaryRequestShape`
@@ -55,7 +55,7 @@ The owner selected `B Airlock Review Gate` as the VSP-08 Part 01 direction on 20
 
 - Implement VSP-08 as content mounted inside the approved VSP-01 shell.
 - Preserve exact VSP-01 shell authority; no new dock, crown, Capture, Search, route, status, or navigation chrome.
-- Build runtime request-shape proof under `Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/`.
+- Build runtime request-shape proof under `Native/Ambitions/Core/LocalRuntimeOS/Boundary/`.
 - Build inspection UI under `Native/Ambitions/Trust/` and shared stage primitives under `Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/`.
 - Show offline/no-account value continuing without network dependency.
 - Show optional account state without account-gating the core app.

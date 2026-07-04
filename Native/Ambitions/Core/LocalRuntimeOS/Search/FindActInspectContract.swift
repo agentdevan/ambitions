@@ -1,8 +1,8 @@
 import Foundation
 
-let findActInspectContractSchemaVersion = "search_recall_find_act_inspect.native.v1"
+let findActInspectContractSchemaVersion = "search_find_act_inspect.native.v1"
 
-struct SearchRecallQuery: Codable, Sendable, Equatable, Hashable {
+struct SearchQuery: Codable, Sendable, Equatable, Hashable {
     let rawText: String
     let origin: AmbitionsSurface?
     let allowedPrivacy: Set<EventLedgerPrivacyClassification>
@@ -35,7 +35,7 @@ struct SearchRecallQuery: Codable, Sendable, Equatable, Hashable {
     }
 }
 
-struct SearchRecallProvenance: Codable, Sendable, Equatable, Hashable {
+struct SearchProvenance: Codable, Sendable, Equatable, Hashable {
     let eventID: String
     let objectIDs: [String]
     let sourceSummary: String
@@ -46,7 +46,7 @@ struct SearchRecallProvenance: Codable, Sendable, Equatable, Hashable {
         eventID: String,
         objectIDs: [String],
         sourceSummary: String,
-        sourceOwner: String = "Core/LocalRuntimeOS/SearchRecall",
+        sourceOwner: String = "Core/LocalRuntimeOS/Search",
         schemaVersion: String = findActInspectContractSchemaVersion
     ) {
         self.eventID = eventID
@@ -61,7 +61,7 @@ struct SearchRecallProvenance: Codable, Sendable, Equatable, Hashable {
     }
 }
 
-struct SearchRecallExplanation: Codable, Sendable, Equatable, Hashable {
+struct SearchExplanation: Codable, Sendable, Equatable, Hashable {
     let matchedTerms: [String]
     let rankingSignals: [String]
     let privacySummary: String
@@ -82,8 +82,8 @@ struct SearchRecallExplanation: Codable, Sendable, Equatable, Hashable {
         self.localOnly = localOnly
     }
 
-    func addingRankingSignals(_ signals: [String]) -> SearchRecallExplanation {
-        SearchRecallExplanation(
+    func addingRankingSignals(_ signals: [String]) -> SearchExplanation {
+        SearchExplanation(
             matchedTerms: matchedTerms,
             rankingSignals: rankingSignals + signals,
             privacySummary: privacySummary,
@@ -97,14 +97,14 @@ struct SearchRecallExplanation: Codable, Sendable, Equatable, Hashable {
     }
 }
 
-enum SearchRecallActionKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+enum SearchActionKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
     case open
     case inspect
 }
 
-struct SearchRecallAction: Codable, Sendable, Equatable, Hashable, Identifiable {
+struct SearchAction: Codable, Sendable, Equatable, Hashable, Identifiable {
     let id: String
-    let kind: SearchRecallActionKind
+    let kind: SearchActionKind
     let title: String
     let commandKind: AmbitionsCommandKind
     let target: AmbitionsCommandTarget
@@ -114,7 +114,7 @@ struct SearchRecallAction: Codable, Sendable, Equatable, Hashable, Identifiable 
 
     init(
         id: String,
-        kind: SearchRecallActionKind,
+        kind: SearchActionKind,
         title: String,
         commandKind: AmbitionsCommandKind,
         target: AmbitionsCommandTarget,
@@ -139,10 +139,10 @@ struct FindActInspectResult: Codable, Sendable, Equatable, Hashable, Identifiabl
     let title: String
     let body: String
     let privacy: EventLedgerPrivacyClassification
-    let provenance: SearchRecallProvenance
-    let primaryAction: SearchRecallAction
-    let inspectAction: SearchRecallAction
-    let explanation: SearchRecallExplanation
+    let provenance: SearchProvenance
+    let primaryAction: SearchAction
+    let inspectAction: SearchAction
+    let explanation: SearchExplanation
     let updatedAt: String
     let baseScore: Int
     let rankScore: Int
@@ -155,10 +155,10 @@ struct FindActInspectResult: Codable, Sendable, Equatable, Hashable, Identifiabl
         title: String,
         body: String,
         privacy: EventLedgerPrivacyClassification,
-        provenance: SearchRecallProvenance,
-        primaryAction: SearchRecallAction,
-        inspectAction: SearchRecallAction,
-        explanation: SearchRecallExplanation,
+        provenance: SearchProvenance,
+        primaryAction: SearchAction,
+        inspectAction: SearchAction,
+        explanation: SearchExplanation,
         updatedAt: String,
         baseScore: Int,
         rankScore: Int? = nil,
@@ -188,12 +188,12 @@ struct FindActInspectResult: Codable, Sendable, Equatable, Hashable, Identifiabl
         )
         let target = AmbitionsCommandTarget.destination(for: family, objectIDs: record.objectIDs)
         let actionState = record.actionValidation
-        let provenance = SearchRecallProvenance(
+        let provenance = SearchProvenance(
             eventID: record.eventID,
             objectIDs: record.objectIDs,
             sourceSummary: record.provenance
         )
-        let primaryAction = SearchRecallAction(
+        let primaryAction = SearchAction(
             id: "\(record.id).open",
             kind: .open,
             title: "Open \(family.title.lowercased())",
@@ -203,7 +203,7 @@ struct FindActInspectResult: Codable, Sendable, Equatable, Hashable, Identifiabl
             requiresConfirmation: false,
             localOnly: true
         )
-        let inspectAction = SearchRecallAction(
+        let inspectAction = SearchAction(
             id: "\(record.id).inspect",
             kind: .inspect,
             title: "Inspect source",
@@ -222,10 +222,10 @@ struct FindActInspectResult: Codable, Sendable, Equatable, Hashable, Identifiabl
             provenance: provenance,
             primaryAction: primaryAction,
             inspectAction: inspectAction,
-            explanation: SearchRecallExplanation(
+            explanation: SearchExplanation(
                 matchedTerms: [],
                 rankingSignals: ["fts-store-score-\(record.score)"],
-                privacySummary: "Privacy class \(record.privacy.rawValue) stayed inside local search recall.",
+                privacySummary: "Privacy class \(record.privacy.rawValue) stayed inside local search.",
                 actionSummary: "Open and inspect actions require valid local targets.",
                 localOnly: true
             ),
@@ -245,7 +245,7 @@ struct FindActInspectResult: Codable, Sendable, Equatable, Hashable, Identifiabl
             provenance: provenance,
             primaryAction: primaryAction,
             inspectAction: inspectAction,
-            explanation: SearchRecallExplanation(
+            explanation: SearchExplanation(
                 matchedTerms: explanation.matchedTerms + matchedTerms,
                 rankingSignals: explanation.rankingSignals + signals,
                 privacySummary: explanation.privacySummary,

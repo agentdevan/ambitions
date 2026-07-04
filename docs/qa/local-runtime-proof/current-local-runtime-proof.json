@@ -333,7 +333,7 @@
       "summary": "Known Issues, truth files, and CI workflow evidence preserve the LocalRuntimeOS proof ceiling."
     }
   ],
-  "generatedAt": "2026-07-04T03:52:03+00:00",
+  "generatedAt": "2026-07-04T04:55:52+00:00",
   "runtimeLaw": "Command -> Event -> Projection -> Receipt -> Replay",
   "status": "green",
   "summary": {

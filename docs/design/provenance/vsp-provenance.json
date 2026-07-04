@@ -1219,11 +1219,11 @@
       "swiftui": {
         "canonical_source_owners": [
           "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift",
-          "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAudit.swift",
-          "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasPublicArtifactBoundary.swift"
+          "Native/Ambitions/Core/LocalRuntimeOS/Boundary/SourceAtlasNoPrivateGraphEgressAudit.swift",
+          "Native/Ambitions/Core/LocalRuntimeOS/Boundary/SourceAtlasPublicArtifactBoundary.swift"
         ],
         "allowed_implementation_areas": [
-          "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary",
+          "Native/Ambitions/Core/LocalRuntimeOS/Boundary",
           "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI",
           "Native/Ambitions/Trust"
         ],
@@ -1236,13 +1236,13 @@
         ],
         "known_component_candidates": [
           "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift",
-          "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasBoundary.swift",
+          "Native/Ambitions/Core/LocalRuntimeOS/Boundary/SourceAtlasBoundary.swift",
           "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasLocalCompositionFallback.swift"
         ],
         "known_tests": [
-          "Native/AmbitionsTests/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAuditTests.swift",
+          "Native/AmbitionsTests/LocalRuntimeOS/Boundary/SourceAtlasNoPrivateGraphEgressAuditTests.swift",
           "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasOfflineNoAccountScenarioTests.swift",
-          "Native/AmbitionsTests/LocalRuntimeOS/RuntimeBoundary/SourceAtlasPublicArtifactBoundaryTests.swift"
+          "Native/AmbitionsTests/LocalRuntimeOS/Boundary/SourceAtlasPublicArtifactBoundaryTests.swift"
         ],
         "known_preview_or_quality_files": [
           "Native/Ambitions/Quality/ForbiddenLanguageAudit.swift",

@@ -53,7 +53,7 @@ This approval does not claim:
 The next source implementation leaf for VSP-08, if authorized later, must:
 
 - preserve VSP-01 shell authority;
-- scope runtime proof under `Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/`;
+- scope runtime proof under `Native/Ambitions/Core/LocalRuntimeOS/Boundary/`;
 - scope inspection UI under `Native/Ambitions/Trust/`;
 - scope shared stage primitives under `Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/`;
 - prove offline no-account value remains usable;

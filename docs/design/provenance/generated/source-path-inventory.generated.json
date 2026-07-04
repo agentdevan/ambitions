@@ -6744,7 +6744,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 138,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/FTSIndex.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Search/FTSIndex.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6755,7 +6755,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 283,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/FindActInspectContract.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Search/FindActInspectContract.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6768,7 +6768,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 130,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/LocalSearchIndex.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Search/LocalSearchIndex.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6780,7 +6780,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 36,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/MemoryLensResult+SearchPresentation.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Search/MemoryLensResult+SearchPresentation.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6796,7 +6796,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 387,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/MemoryLensService+SearchResults.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Search/MemoryLensService+SearchResults.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6809,7 +6809,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 380,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/MemoryLensService.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Search/MemoryLensService.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6823,7 +6823,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 106,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/ResultRanker.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Search/ResultRanker.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6835,7 +6835,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 141,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/SearchActionValidator.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Search/SearchActionValidator.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6846,7 +6846,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 93,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/SearchRebuildPipeline.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Search/SearchRebuildPipeline.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6857,7 +6857,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 98,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/SemanticLocalIndex.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Search/SemanticLocalIndex.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -19349,7 +19349,7 @@
       "inventory_only": true,
       "kind": "test",
       "line_count": 314,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/SearchRecall/SearchRecallTests.swift"
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/Search/SearchTests.swift"
     },
     {
       "candidate_vsp_ids": [

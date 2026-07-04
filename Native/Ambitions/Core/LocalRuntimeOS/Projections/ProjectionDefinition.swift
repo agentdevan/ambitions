@@ -20,7 +20,7 @@ enum ProjectionID: String, Codable, Equatable, Hashable, CaseIterable, Comparabl
 
 enum ProjectionFamily: String, Codable, Equatable, Hashable, CaseIterable {
     case surface
-    case searchRecall = "search_recall"
+    case search = "search"
     case externalSurface = "external_surface"
     case trust
     case privacy
@@ -143,7 +143,7 @@ extension ProjectionDefinition {
         case .search:
             return ProjectionDefinition(
                 id: .search,
-                family: .searchRecall,
+                family: .search,
                 consumesEventKinds: RuntimeEventKind.allCases.filter { $0 != .compactionSnapshot },
                 readModelInventory: [
                     .init(sourcePath: "Native/Ambitions/Projection/OverlayLenses/SearchLens.swift", responsibility: "Search overlay read model", migrationTarget: .search),

@@ -388,20 +388,20 @@
     {
       "component_id": "source-atlas-boundary",
       "component_name": "SourceAtlas boundary primitives",
-      "source_path": "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAudit.swift",
+      "source_path": "Native/Ambitions/Core/LocalRuntimeOS/Boundary/SourceAtlasNoPrivateGraphEgressAudit.swift",
       "component_kind": "external_boundary",
       "owning_vsp_ids": [
         "VSP-08"
       ],
       "owning_surface_or_layer": "Source Atlas / R2 / privacy boundary",
       "used_by_paths": [
-        "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasPublicArtifactBoundary.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/SourceAtlasPublicArtifactBoundary.swift",
         "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift"
       ],
       "known_tests": [
-        "Native/AmbitionsTests/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAuditTests.swift",
+        "Native/AmbitionsTests/LocalRuntimeOS/Boundary/SourceAtlasNoPrivateGraphEgressAuditTests.swift",
         "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasOfflineNoAccountScenarioTests.swift",
-        "Native/AmbitionsTests/LocalRuntimeOS/RuntimeBoundary/SourceAtlasPublicArtifactBoundaryTests.swift"
+        "Native/AmbitionsTests/LocalRuntimeOS/Boundary/SourceAtlasPublicArtifactBoundaryTests.swift"
       ],
       "known_previews": [],
       "proof_status": "source_only",

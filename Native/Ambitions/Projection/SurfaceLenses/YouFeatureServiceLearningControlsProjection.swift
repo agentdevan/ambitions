@@ -133,7 +133,7 @@ extension RepositoryBackedYouService {
                 id: "memory-lens-open-captures",
                 title: "Open capture context",
                 summary: openCaptures == 0
-                    ? "No open captures need Search recall right now."
+                    ? "No open captures need Search right now."
                     : "\(openCaptures) open captures may need placement before they influence planning.",
                 sourceLabel: "Captured thought",
                 sourceAgeLabel: openCaptures == 0 ? "Current" : "May need review",

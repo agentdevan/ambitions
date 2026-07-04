@@ -1,6 +1,6 @@
 import Foundation
 
-let semanticLocalIndexSchemaVersion = "search_recall_semantic_local_index.native.v1"
+let semanticLocalIndexSchemaVersion = "search_semantic_local_index.native.v1"
 
 struct SemanticLocalMatch: Codable, Sendable, Equatable, Hashable, Identifiable {
     let id: String
@@ -36,7 +36,7 @@ struct SemanticLocalIndex: Sendable, Equatable {
         self.results = results
     }
 
-    func search(_ query: SearchRecallQuery) -> [SemanticLocalMatch] {
+    func search(_ query: SearchQuery) -> [SemanticLocalMatch] {
         let queryTerms = Set(ResultRanker.tokens(query.normalizedText).map(Self.stem))
         guard queryTerms.isEmpty == false else {
             return []

@@ -38,7 +38,7 @@ REQUIRED_LOCAL_RUNTIME_OWNERS = [
     "TimeEngine",
     "CaptureRouteGraph",
     "Inspection",
-    "SearchRecall",
+    "Search",
     "ExternalWrites",
     "SyncContinuity",
     "SourceAtlas",
@@ -132,7 +132,7 @@ INTEGRATION_MARKERS = {
         ],
     },
     "search_rebuild_from_runtime_events": {
-        "path": "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/SearchRebuildPipeline.swift",
+        "path": "Native/Ambitions/Core/LocalRuntimeOS/Search/SearchRebuildPipeline.swift",
         "markers": [
             "RuntimeEventStore",
             "ProjectionMaterializer",
@@ -256,7 +256,7 @@ RUNTIME_EVENT_APPEND_ALLOWED_PATHS = {
 
 PROJECTION_MATERIALIZATION_ALLOWED_PATHS = {
     "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeTransactionCoordinator.swift",
-    "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/SearchRebuildPipeline.swift",
+    "Native/Ambitions/Core/LocalRuntimeOS/Search/SearchRebuildPipeline.swift",
 }
 
 RUNTIME_MUTATION_CONTEXT_PATH = "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeMutationContext.swift"
@@ -1071,7 +1071,7 @@ def check_transaction_coordinator_commit_ownership() -> CheckResult:
                         "projection-materialization-outside-approved-owner",
                         rel,
                         index,
-                        "Projection materialization for mutation commits must be owned by RuntimeTransactionCoordinator; SearchRecall may rebuild from runtime events.",
+                        "Projection materialization for mutation commits must be owned by RuntimeTransactionCoordinator; Search may rebuild from runtime events.",
                     )
                 )
     return make_result(
@@ -2568,7 +2568,7 @@ def run_self_test() -> int:
     assert is_included_mutation_scan_path(ROOT / "Native" / "Ambitions" / "Surfaces" / "You" / "YouSurface.swift")
     assert not is_included_mutation_scan_path(ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Storage" / "ObjectStoreSwiftData.swift")
     assert "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeTransactionCoordinator.swift" in RUNTIME_EVENT_APPEND_ALLOWED_PATHS
-    assert "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/SearchRebuildPipeline.swift" in PROJECTION_MATERIALIZATION_ALLOWED_PATHS
+    assert "Native/Ambitions/Core/LocalRuntimeOS/Search/SearchRebuildPipeline.swift" in PROJECTION_MATERIALIZATION_ALLOWED_PATHS
     assert "surface_projection_store_consumption" in INTEGRATION_MARKERS
     assert any(prefix.endswith("AmbitionsWidgetExtension/") for prefix in EXTERNAL_SURFACE_SCAN_INCLUDED_PREFIXES)
     assert any(result.check_id == "external_surface_sanitized_projection_gate" for result in [check_external_surface_sanitized_projection_gate()])

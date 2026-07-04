@@ -1,6 +1,6 @@
 import Foundation
 
-let searchRebuildPipelineSchemaVersion = "search_recall_rebuild_pipeline.native.v1"
+let searchRebuildPipelineSchemaVersion = "search_rebuild_pipeline.native.v1"
 
 struct SearchRebuildReceipt: Codable, Sendable, Equatable, Hashable, Identifiable {
     let id: String
@@ -23,7 +23,7 @@ struct SearchRebuildReceipt: Codable, Sendable, Equatable, Hashable, Identifiabl
         localOnly: Bool = true,
         schemaVersion: String = searchRebuildPipelineSchemaVersion
     ) {
-        id = "search-recall.rebuild.\(indexReceipt.cursor.sequence).\(updatedAt)"
+        id = "search.rebuild.\(indexReceipt.cursor.sequence).\(updatedAt)"
         self.indexReceipt = indexReceipt
         self.projectionStored = projectionStored
         self.invalidation = invalidation

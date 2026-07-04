@@ -166,7 +166,7 @@ final class LocalRuntimeOSProjectionsTests: XCTestCase {
         let appIntentRead = try await adapter.readAppIntent(minimumEventCursor: batch.appIntent.cursor.eventCursor, inspectedAt: "2026-06-30T06:12:00Z")
         let privacyRead = try await adapter.readPrivacy(minimumEventCursor: batch.privacy.cursor.eventCursor, inspectedAt: "2026-06-30T06:12:00Z")
         let searchRead = try await adapter.search(
-            SearchRecallQuery(rawText: "adapter", limit: 10),
+            SearchQuery(rawText: "adapter", limit: 10),
             minimumEventCursor: batch.search.cursor.eventCursor,
             searchedAt: "2026-06-30T06:12:00Z"
         )

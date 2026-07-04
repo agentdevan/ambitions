@@ -8236,11 +8236,11 @@
       "has_preview_provider": false,
       "kind": "test",
       "line_count": 314,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/SearchRecall/SearchRecallTests.swift",
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/Search/SearchTests.swift",
       "preview_count": 0,
       "proof_status": "source_inventory_only",
       "test_cases": [
-        "SearchRecallTests"
+        "SearchTests"
       ],
       "view_modifiers": [],
       "view_structs": []

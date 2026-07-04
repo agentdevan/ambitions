@@ -1,6 +1,6 @@
 import Foundation
 
-let searchActionValidatorSchemaVersion = "search_recall_action_validator.native.v1"
+let searchActionValidatorSchemaVersion = "search_action_validator.native.v1"
 
 enum SearchActionValidationState: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
     case allowed
@@ -45,8 +45,8 @@ struct SearchActionValidationReport: Codable, Sendable, Equatable, Hashable, Ide
 struct SearchActionValidator: Sendable {
     func validate(
         result: FindActInspectResult,
-        query: SearchRecallQuery,
-        actionKind: SearchRecallActionKind = .open,
+        query: SearchQuery,
+        actionKind: SearchActionKind = .open,
         validatedAt: String
     ) -> SearchActionValidationReport {
         let action = actionKind == .open ? result.primaryAction : result.inspectAction

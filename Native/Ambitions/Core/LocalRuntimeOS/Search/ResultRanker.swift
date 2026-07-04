@@ -1,11 +1,11 @@
 import Foundation
 
-let resultRankerSchemaVersion = "search_recall_result_ranker.native.v1"
+let resultRankerSchemaVersion = "search_result_ranker.native.v1"
 
 struct ResultRanker: Sendable {
     func rank(
         _ results: [FindActInspectResult],
-        query: SearchRecallQuery,
+        query: SearchQuery,
         familyPriority: [LocalSearchObjectFamily: Int] = [:]
     ) -> [FindActInspectResult] {
         let queryTerms = Self.tokens(query.normalizedText)

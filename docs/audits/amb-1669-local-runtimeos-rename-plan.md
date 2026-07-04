@@ -17,7 +17,7 @@ This artifact records the current folder/type dependency graph, target runtime m
 
 ## Current Owner Graph
 
-Current source owner count after the `Inspection` slice: 19.
+Current source owner count after the `Search` slice: 19.
 
 | Current owner | Swift files | Target owner | Status |
 | --- | ---: | --- | --- |
@@ -32,7 +32,7 @@ Current source owner count after the `Inspection` slice: 19.
 | TimeEngine | 35 | Scheduling | Pending |
 | CaptureRouteGraph | 20 | CaptureRouting | Pending |
 | Inspection | 29 | Inspection | Sixth slice renamed from `TrustSystem` |
-| SearchRecall | 10 | Search | Pending |
+| Search | 10 | Search | Seventh slice renamed from `SearchRecall` |
 | ExternalWrites | 13 | ExternalWrites | Fifth slice renamed from `SideEffectSystem` |
 | SyncContinuity | 10 | Continuity | Pending |
 | SourceAtlas | 80 | SourceAtlas or ReferencePacks | Pending decision |
@@ -207,20 +207,49 @@ Reason:
   filenames, so the move does not introduce new blocked suffix-split files
   under the new owner.
 
+## Seventh Rename Slice
+
+Applied seventh:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/
+Native/AmbitionsTests/LocalRuntimeOS/SearchRecall/
+```
+
+to:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/Search/
+Native/AmbitionsTests/LocalRuntimeOS/Search/
+```
+
+Reason:
+
+- `Search` is explicitly named by AMB-1669 target direction.
+- The old owner paired search with recall as folder-level lore; retained Swift
+  types such as `LocalSearchIndex`, `FTSIndex`, `MemoryLensService`, and
+  `FindActInspectResult` already carry the concrete behavior plainly.
+- The move changes canonical ownership without changing runtime behavior.
+- Owner-facing API types now use `Search*` names instead of `SearchRecall*`
+  names, and receipt/schema strings use `search` instead of `search_recall`.
+- The ownership test now proves required `Search` files exist and the old
+  `SearchRecall` production/test owner paths are gone.
+
 ## API Exposure
 
-The moved `Boundary`, `Commands`, `Transactions`, `Projections`, `ExternalWrites`, and `Inspection` source contains no `public` or `open` Swift API declarations.
+The moved `Boundary`, `Commands`, `Transactions`, `Projections`, `ExternalWrites`, `Inspection`, and `Search` source contains no `public` or `open` Swift API declarations.
 
 Current exposure is same-module production/test use through Swift files under the existing `Ambitions` target and `AmbitionsTests` target. XcodeGen source discovery is directory-based through `project.yml`, so the move requires project regeneration but no package or target boundary change.
 
 Known direct consumers of the moved `Boundary`, `Commands`, `Transactions`,
-`Projections`, `ExternalWrites`, and `Inspection` types remain same-module:
+`Projections`, `ExternalWrites`, `Inspection`, and `Search` types remain same-module:
 
 - `Commands`
 - `Transactions`
 - `Projections`
 - `ExternalWrites`
 - `Inspection`
+- `Search`
 - `PrivateLifeRuntimeKernel`
 - `PlanningEngine`
 - `TimeEngine`
@@ -248,7 +277,6 @@ This slice can support Source Green for the folder-owner rename if validation pa
 
 Proceed one compartment at a time after guards pass:
 
-1. `SearchRecall` -> `Search`
-2. `MigrationRepair` -> `Repair`
+1. `MigrationRepair` -> `Repair`
 
 Each next slice must update tests, current truth/proof references, and the LocalRuntimeProof owner list before closeout.

@@ -51,7 +51,7 @@ Direction approval proof: `docs/design/provenance/owner-approvals/VSP-08-B-Airlo
 
 Likely future implementation owners after owner direction approval:
 
-- `Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/`
+- `Native/Ambitions/Core/LocalRuntimeOS/Boundary/`
 - `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/`
 - `Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/`
 - `Native/Ambitions/Trust/`

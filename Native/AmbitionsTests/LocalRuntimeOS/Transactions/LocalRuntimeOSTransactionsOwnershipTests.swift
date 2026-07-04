@@ -195,7 +195,7 @@ final class LocalRuntimeOSTransactionsOwnershipTests: XCTestCase {
 
         let storedRecords = try await projectionStore.fetchAllRecords()
         let searchResults = try await searchIndex.search(
-            SearchRecallQuery(rawText: "", limit: 10),
+            SearchQuery(rawText: "", limit: 10),
             searchedAt: "2026-04-25T12:06:00Z"
         )
 

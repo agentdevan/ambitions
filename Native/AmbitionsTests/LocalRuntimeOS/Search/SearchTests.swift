@@ -1,20 +1,20 @@
 @testable import Ambitions
 import XCTest
 
-final class SearchRecallTests: XCTestCase {
-    func testSearchRecallOwnerFilesExistUnderCanonicalTreeAndOldRuntimeIndexIsRemoved() throws {
+final class SearchTests: XCTestCase {
+    func testSearchOwnerFilesExistUnderCanonicalTreeAndOldRuntimeIndexIsRemoved() throws {
         let root = try repoRoot()
         let requiredPaths = [
-            "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/LocalSearchIndex.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/FTSIndex.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/SemanticLocalIndex.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/ResultRanker.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/FindActInspectContract.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/SearchActionValidator.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/SearchRebuildPipeline.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/MemoryLensResult+SearchPresentation.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/MemoryLensService+SearchResults.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/MemoryLensService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Search/LocalSearchIndex.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Search/FTSIndex.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Search/SemanticLocalIndex.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Search/ResultRanker.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Search/FindActInspectContract.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Search/SearchActionValidator.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Search/SearchRebuildPipeline.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Search/MemoryLensResult+SearchPresentation.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Search/MemoryLensService+SearchResults.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Search/MemoryLensService.swift",
         ]
 
         for path in requiredPaths {
@@ -30,7 +30,7 @@ final class SearchRecallTests: XCTestCase {
         for path in retiredLegacyPaths {
             XCTAssertFalse(
                 FileManager.default.fileExists(atPath: root.appendingPathComponent(path).path),
-                "Local search and MemoryLens source must be owned by Core/LocalRuntimeOS/SearchRecall."
+                "Local search and MemoryLens source must be owned by Core/LocalRuntimeOS/Search."
             )
         }
     }
@@ -75,7 +75,7 @@ final class SearchRecallTests: XCTestCase {
     }
 
     func testFTSIndexReturnsFindActInspectResultsWithPrivacyProvenanceAndValidatedActions() async throws {
-        let eventStore = InMemoryRuntimeEventStore(deviceID: "search-recall-fts-test")
+        let eventStore = InMemoryRuntimeEventStore(deviceID: "search-fts-test")
         _ = try await eventStore.append(commandEvent(
             id: "command-search-public",
             captureID: "capture-search-public",
@@ -95,13 +95,13 @@ final class SearchRecallTests: XCTestCase {
         let receipt = try await ftsIndex.rebuild(from: batch.search, updatedAt: "2026-06-30T08:11:00Z")
 
         let results = try await ftsIndex.search(
-            SearchRecallQuery(rawText: "planning", allowedPrivacy: [.standard], limit: 10),
+            SearchQuery(rawText: "planning", allowedPrivacy: [.standard], limit: 10),
             searchedAt: "2026-06-30T08:12:00Z"
         )
         let result = try XCTUnwrap(results.first)
         let report = await ftsIndex.validationReport(
             for: result,
-            query: SearchRecallQuery(rawText: "planning", allowedPrivacy: [.standard], limit: 10),
+            query: SearchQuery(rawText: "planning", allowedPrivacy: [.standard], limit: 10),
             validatedAt: "2026-06-30T08:12:30Z"
         )
 
@@ -127,14 +127,14 @@ final class SearchRecallTests: XCTestCase {
         )
         let privateReport = validator.validate(
             result: privateResult,
-            query: SearchRecallQuery(rawText: "private", allowedPrivacy: [.standard]),
+            query: SearchQuery(rawText: "private", allowedPrivacy: [.standard]),
             validatedAt: "2026-06-30T08:20:00Z"
         )
         XCTAssertEqual(privateReport.state, .deniedPrivacy)
 
         let familyReport = validator.validate(
             result: privateResult,
-            query: SearchRecallQuery(rawText: "private", allowedPrivacy: [.privateUserText], allowedFamilies: [.goal]),
+            query: SearchQuery(rawText: "private", allowedPrivacy: [.privateUserText], allowedFamilies: [.goal]),
             validatedAt: "2026-06-30T08:20:30Z"
         )
         XCTAssertEqual(familyReport.state, .deniedFamily)
@@ -148,7 +148,7 @@ final class SearchRecallTests: XCTestCase {
         )
         let missingReport = validator.validate(
             result: missingTarget,
-            query: SearchRecallQuery(rawText: "goal", allowedPrivacy: [.standard]),
+            query: SearchQuery(rawText: "goal", allowedPrivacy: [.standard]),
             validatedAt: "2026-06-30T08:21:00Z"
         )
         XCTAssertEqual(missingReport.state, .deniedMissingTarget)
@@ -166,7 +166,7 @@ final class SearchRecallTests: XCTestCase {
         )
 
         let matches = SemanticLocalIndex(results: [result]).search(
-            SearchRecallQuery(rawText: "planned note", allowedPrivacy: [.standard])
+            SearchQuery(rawText: "planned note", allowedPrivacy: [.standard])
         )
 
         let match = matches.first
@@ -174,7 +174,7 @@ final class SearchRecallTests: XCTestCase {
         XCTAssertEqual(match?.externalModelUsed, false)
         XCTAssertEqual(match?.localOnly, true)
         XCTAssertEqual(matches, SemanticLocalIndex(results: [result]).search(
-            SearchRecallQuery(rawText: "planned note", allowedPrivacy: [.standard])
+            SearchQuery(rawText: "planned note", allowedPrivacy: [.standard])
         ))
     }
 
@@ -201,7 +201,7 @@ final class SearchRecallTests: XCTestCase {
         )
         let storedCursor = try await projectionStore.fetchCursor(id: .search)
         let results = try await ftsIndex.search(
-            SearchRecallQuery(rawText: "rebuild", allowedPrivacy: [.standard], limit: 10),
+            SearchQuery(rawText: "rebuild", allowedPrivacy: [.standard], limit: 10),
             searchedAt: "2026-06-30T08:32:00Z"
         )
 
@@ -213,7 +213,7 @@ final class SearchRecallTests: XCTestCase {
     }
 }
 
-private extension SearchRecallTests {
+private extension SearchTests {
     func commandEvent(
         id: String,
         captureID: String,
@@ -260,12 +260,12 @@ private extension SearchRecallTests {
             title: title,
             body: body,
             privacy: privacy,
-            provenance: SearchRecallProvenance(
+            provenance: SearchProvenance(
                 eventID: "event-\(id)",
                 objectIDs: ["object-\(id)"],
                 sourceSummary: "Runtime event"
             ),
-            primaryAction: SearchRecallAction(
+            primaryAction: SearchAction(
                 id: "\(id).open",
                 kind: .open,
                 title: "Open",
@@ -273,7 +273,7 @@ private extension SearchRecallTests {
                 target: target,
                 validationState: validationState
             ),
-            inspectAction: SearchRecallAction(
+            inspectAction: SearchAction(
                 id: "\(id).inspect",
                 kind: .inspect,
                 title: "Inspect",
@@ -281,7 +281,7 @@ private extension SearchRecallTests {
                 target: target,
                 validationState: validationState
             ),
-            explanation: SearchRecallExplanation(
+            explanation: SearchExplanation(
                 matchedTerms: [],
                 rankingSignals: [],
                 privacySummary: "local",
@@ -301,12 +301,12 @@ private extension SearchRecallTests {
             }
             candidate.deleteLastPathComponent()
         }
-        throw NSError(domain: "SearchRecallTests", code: 1)
+        throw NSError(domain: "SearchTests", code: 1)
     }
 
     func scratchDirectory() throws -> URL {
         let directory = URL(fileURLWithPath: "/tmp", isDirectory: true)
-            .appendingPathComponent("ambitions-search-recall-tests-\(UUID().uuidString)", isDirectory: true)
+            .appendingPathComponent("ambitions-search-tests-\(UUID().uuidString)", isDirectory: true)
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         return directory
     }

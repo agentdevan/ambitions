@@ -288,14 +288,14 @@ Figma candidate screenshots:
 - docs/qa/evidence/2026-07-01-vsp-08-airlock-review-gate-final-package-r1/images/vsp-08-airlock-review-gate-package-readback-r1.png
 SwiftUI source owners:
 - Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift
-- Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAudit.swift
-- Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasPublicArtifactBoundary.swift
+- Native/Ambitions/Core/LocalRuntimeOS/Boundary/SourceAtlasNoPrivateGraphEgressAudit.swift
+- Native/Ambitions/Core/LocalRuntimeOS/Boundary/SourceAtlasPublicArtifactBoundary.swift
 Candidate components:
-- `SourceAtlas boundary primitives` (`external_boundary`) - `Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAudit.swift` - proof: `source_only`
+- `SourceAtlas boundary primitives` (`external_boundary`) - `Native/Ambitions/Core/LocalRuntimeOS/Boundary/SourceAtlasNoPrivateGraphEgressAudit.swift` - proof: `source_only`
 Known previews/tests/quality files:
-- Native/AmbitionsTests/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAuditTests.swift
+- Native/AmbitionsTests/LocalRuntimeOS/Boundary/SourceAtlasNoPrivateGraphEgressAuditTests.swift
 - Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasOfflineNoAccountScenarioTests.swift
-- Native/AmbitionsTests/LocalRuntimeOS/RuntimeBoundary/SourceAtlasPublicArtifactBoundaryTests.swift
+- Native/AmbitionsTests/LocalRuntimeOS/Boundary/SourceAtlasPublicArtifactBoundaryTests.swift
 - Native/Ambitions/Quality/ForbiddenLanguageAudit.swift
 - scripts/ambitions-local-first-boundary-scan.py
 Current visual proof status: SwiftUI render missing unless listed as a current live screenshot in the proof registry.

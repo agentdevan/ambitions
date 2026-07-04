@@ -1,6 +1,6 @@
 import Foundation
 
-let ftsIndexSchemaVersion = "search_recall_fts_index.native.v1"
+let ftsIndexSchemaVersion = "search_fts_index.native.v1"
 
 struct FTSIndexHealth: Codable, Sendable, Equatable, Hashable {
     let schemaVersion: String
@@ -41,7 +41,7 @@ actor FTSIndex {
     }
 
     func search(
-        _ query: SearchRecallQuery,
+        _ query: SearchQuery,
         familyPriority: [LocalSearchObjectFamily: Int] = [:],
         searchedAt: String
     ) async throws -> [FindActInspectResult] {
@@ -75,8 +75,8 @@ actor FTSIndex {
 
     func validationReport(
         for result: FindActInspectResult,
-        query: SearchRecallQuery,
-        actionKind: SearchRecallActionKind = .open,
+        query: SearchQuery,
+        actionKind: SearchActionKind = .open,
         validatedAt: String
     ) -> SearchActionValidationReport {
         validator.validate(
@@ -126,7 +126,7 @@ struct SearchRebuildIndexReceipt: Codable, Sendable, Equatable, Hashable, Identi
         updatedAt: String,
         schemaVersion: String = ftsIndexSchemaVersion
     ) {
-        id = "search-recall.fts-index.\(cursor.sequence).\(updatedAt)"
+        id = "search.fts-index.\(cursor.sequence).\(updatedAt)"
         self.projectionID = projectionID
         self.cursor = cursor
         self.indexedRecordCount = max(0, indexedRecordCount)

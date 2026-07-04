@@ -41,7 +41,7 @@ struct ProjectionStoreReadRepairReceipt: Codable, Sendable, Equatable, Hashable,
         self.fallbackRole = .rebuildInputOnly
         self.rebuildOwners = [
             "Core/LocalRuntimeOS/Transactions/RuntimeTransactionCoordinator",
-            "Core/LocalRuntimeOS/SearchRecall/SearchRebuildPipeline",
+            "Core/LocalRuntimeOS/Search/SearchRebuildPipeline",
         ]
         self.inspectedAt = inspectedAt
         self.schemaVersion = schemaVersion
@@ -146,7 +146,7 @@ struct ProjectionStoreSurfaceReadAdapter {
     }
 
     func search(
-        _ query: SearchRecallQuery,
+        _ query: SearchQuery,
         minimumEventCursor: RuntimeEventCursor? = nil,
         searchedAt: String
     ) async throws -> ProjectionBackedSearchReadEnvelope {
