@@ -14,6 +14,9 @@ SUMMARY_DIR=".codex/xcode-summaries"
 TIMEOUT_DURATION="15m"
 KILL_AFTER="60s"
 XCODEBUILD_ACTION="test"
+UI_PREBUILD_MODE="${AMBITIONS_XCODE_UI_PREBUILD:-auto}"
+UI_PREBUILD_TIMEOUT_DURATION="${AMBITIONS_XCODE_UI_PREBUILD_TIMEOUT:-35m}"
+UI_PREBUILD_KILL_AFTER="${AMBITIONS_XCODE_UI_PREBUILD_KILL_AFTER:-$KILL_AFTER}"
 
 while [[ "$#" -gt 0 ]]; do
   case "$1" in
@@ -27,8 +30,12 @@ while [[ "$#" -gt 0 ]]; do
     --timeout) TIMEOUT_DURATION="${2:-$TIMEOUT_DURATION}"; shift 2 ;;
     --kill-after) KILL_AFTER="${2:-$KILL_AFTER}"; shift 2 ;;
     --without-building|--test-without-building) XCODEBUILD_ACTION="test-without-building"; shift ;;
+    --prebuild) UI_PREBUILD_MODE="always"; shift ;;
+    --skip-prebuild) UI_PREBUILD_MODE="never"; shift ;;
+    --prebuild-timeout) UI_PREBUILD_TIMEOUT_DURATION="${2:-$UI_PREBUILD_TIMEOUT_DURATION}"; shift 2 ;;
+    --prebuild-kill-after) UI_PREBUILD_KILL_AFTER="${2:-$UI_PREBUILD_KILL_AFTER}"; shift 2 ;;
     -h|--help)
-      echo "Usage: scripts/ambitions-xcode-test-focused.sh --batch <BATCH> --test <TEST_ID> [--scheme auto|Ambitions|AmbitionsUnitTests|AmbitionsUITests] [--timeout 15m] [--kill-after 60s] [--without-building]" >&2
+      echo "Usage: scripts/ambitions-xcode-test-focused.sh --batch <BATCH> --test <TEST_ID> [--scheme auto|Ambitions|AmbitionsUnitTests|AmbitionsUITests] [--timeout 15m] [--kill-after 60s] [--without-building] [--prebuild|--skip-prebuild] [--prebuild-timeout 35m]" >&2
       exit 0
       ;;
     *)
@@ -96,6 +103,23 @@ case "$RESOLVED_SCHEME" in
   AmbitionsUITests) PROOF_SCOPE="ui-focused-fast" ;;
   Ambitions) PROOF_SCOPE="full-scheme-focused" ;;
 esac
+REQUESTED_XCODEBUILD_ACTION="$XCODEBUILD_ACTION"
+UI_PREBUILD_REQUIRED=false
+UI_PREBUILD_STATUS=0
+UI_PREBUILD_FAILURE_CLASS="not_run"
+UI_PREBUILD_OUTPUT_FILE=""
+UI_PREBUILD_SUMMARY_FILE=""
+
+if [[ "$RESOLVED_SCHEME" == "AmbitionsUITests" && "$REQUESTED_XCODEBUILD_ACTION" == "test" ]]; then
+  case "$UI_PREBUILD_MODE" in
+    0|false|FALSE|no|NO|never|NEVER)
+      UI_PREBUILD_REQUIRED=false
+      ;;
+    *)
+      UI_PREBUILD_REQUIRED=true
+      ;;
+  esac
+fi
 
 need_output="$(scripts/ambitions-xcodegen-needed.sh || true)"
 need_flag="$(awk -F= '/^XCODEGEN_NEEDED=/{print $2}' <<<"$need_output")"
@@ -136,24 +160,6 @@ if [[ -n "${AMBITIONS_SIM_UDID:-}" || -n "$sim_udid" ]]; then
   sim="${AMBITIONS_SIM_UDID:-$sim_udid}"
   [[ -n "$sim" ]] && SIM_DEST="platform=iOS Simulator,id=${sim}"
 fi
-
-TEST_CMD=(
-  xcodebuild
-  -project Ambitions.xcodeproj
-  -scheme "$RESOLVED_SCHEME"
-  -sdk iphonesimulator
-  -destination "$SIM_DEST"
-  -derivedDataPath "$DERIVED_DATA"
-  -parallel-testing-enabled NO
-  "$XCODEBUILD_ACTION"
-  -only-testing "$test_filter"
-  CODE_SIGNING_ALLOWED=NO
-  CODE_SIGNING_REQUIRED=NO
-  COMPILER_INDEX_STORE_ENABLE=NO
-  ONLY_ACTIVE_ARCH=YES
-  -resultBundlePath "$RESULT_BUNDLE"
-)
-BOUNDED_TEST_CMD=(scripts/ambitions-bounded-xcodebuild.sh --timeout "$TIMEOUT_DURATION" --kill-after "$KILL_AFTER" --log "$LOG_FILE" -- "${TEST_CMD[@]}")
 
 extract_executed_tests() {
   local log_file="$1"
@@ -216,6 +222,134 @@ import time
 print(time.time())
 PY
 )"
+
+if [[ "$UI_PREBUILD_REQUIRED" == "true" ]]; then
+  UI_PREBUILD_OUTPUT_FILE="$SUMMARY_DIR/$BATCH/$RUN_ID/ui-prebuild-output.log"
+  ui_prebuild_marker="$SUMMARY_DIR/$BATCH/$RUN_ID/ui-prebuild-start.marker"
+  : > "$ui_prebuild_marker"
+
+  echo "UI_PREBUILD_REQUIRED=1"
+  echo "UI_PREBUILD_TIMEOUT=$UI_PREBUILD_TIMEOUT_DURATION"
+  set +e
+  scripts/ambitions-xcode-build-for-testing.sh \
+    --batch "$BATCH" \
+    --scheme "$RESOLVED_SCHEME" \
+    --results-dir "$RESULT_DIR" \
+    --logs-dir "$LOG_DIR" \
+    --summaries-dir "$SUMMARY_DIR" \
+    --timeout "$UI_PREBUILD_TIMEOUT_DURATION" \
+    --kill-after "$UI_PREBUILD_KILL_AFTER" \
+    2>&1 | tee "$UI_PREBUILD_OUTPUT_FILE"
+  UI_PREBUILD_STATUS=${PIPESTATUS[0]}
+  set -e
+
+  UI_PREBUILD_FAILURE_CLASS="$(awk -F= '/^FAILURE_CLASS=/{value=$2} END{print value}' "$UI_PREBUILD_OUTPUT_FILE")"
+  [[ -n "$UI_PREBUILD_FAILURE_CLASS" ]] || UI_PREBUILD_FAILURE_CLASS="unknown"
+  UI_PREBUILD_SUMMARY_FILE="$(find "$SUMMARY_DIR/$BATCH" -type f -name build-for-testing-summary.json -newer "$ui_prebuild_marker" -print 2>/dev/null | sort | tail -1)"
+
+  if [[ "$UI_PREBUILD_STATUS" -ne 0 ]]; then
+    duration_seconds="$(python3 - "$run_start" <<'PY'
+import sys
+import time
+print(round(time.time() - float(sys.argv[1]), 3))
+PY
+)"
+    cat > "$SUMMARY_FILE" <<JSON
+{
+  "batch": "$BATCH",
+  "lane": "focused-test",
+  "test": "$test_filter",
+  "scheme": "$RESOLVED_SCHEME",
+  "proof_scope": "$PROOF_SCOPE",
+  "requested_xcodebuild_action": "$REQUESTED_XCODEBUILD_ACTION",
+  "xcodebuild_action": "not_run",
+  "status": "failed",
+  "failure_category": "ui_prebuild_$UI_PREBUILD_FAILURE_CLASS",
+  "executed_tests": 0,
+  "duration_seconds": $duration_seconds,
+  "xcode_observer_seconds": null,
+  "xctest_wall_seconds": null,
+  "result_bundle": "$RESULT_BUNDLE",
+  "log_file": "$LOG_FILE",
+  "timestamp_utc": "$TS",
+  "run_id": "$RUN_ID",
+  "sim_destination": "$SIM_DEST",
+  "ui_prebuild_required": true,
+  "ui_prebuild_status": "failed",
+  "ui_prebuild_failure_category": "$UI_PREBUILD_FAILURE_CLASS",
+  "ui_prebuild_timeout": "$UI_PREBUILD_TIMEOUT_DURATION",
+  "ui_prebuild_log_file": "$UI_PREBUILD_OUTPUT_FILE",
+  "ui_prebuild_summary_file": "$UI_PREBUILD_SUMMARY_FILE",
+  "claim_boundary": "focused test execution proof only; UI build-for-testing prebuild is prerequisite proof, not UI, visual, accessibility, device, TestFlight, App Store, or release proof"
+}
+JSON
+    echo "FAILURE_CLASS=ui_prebuild_$UI_PREBUILD_FAILURE_CLASS"
+    echo "EXECUTED_TESTS=0"
+    echo "DURATION_SECONDS=$duration_seconds"
+    echo "SCHEME=$RESOLVED_SCHEME"
+    exit "$UI_PREBUILD_STATUS"
+  fi
+
+  XCODEBUILD_ACTION="test-without-building"
+fi
+
+TEST_CMD=(
+  xcodebuild
+  -project Ambitions.xcodeproj
+  -scheme "$RESOLVED_SCHEME"
+  -sdk iphonesimulator
+  -destination "$SIM_DEST"
+  -derivedDataPath "$DERIVED_DATA"
+  -parallel-testing-enabled NO
+  "$XCODEBUILD_ACTION"
+  -only-testing "$test_filter"
+  CODE_SIGNING_ALLOWED=NO
+  CODE_SIGNING_REQUIRED=NO
+  COMPILER_INDEX_STORE_ENABLE=NO
+  ONLY_ACTIVE_ARCH=YES
+  -resultBundlePath "$RESULT_BUNDLE"
+)
+BOUNDED_TEST_CMD=(scripts/ambitions-bounded-xcodebuild.sh --timeout "$TIMEOUT_DURATION" --kill-after "$KILL_AFTER" --log "$LOG_FILE" -- "${TEST_CMD[@]}")
+
+classify_log_failure() {
+  python3 scripts/ambitions-xcode-failure-classifier.py --log "$LOG_FILE" --json \
+    | python3 -c 'import sys, json; print(json.load(sys.stdin).get("classification", ""))'
+}
+
+is_simulator_retry_class() {
+  case "$1" in
+    simulator_boot_failure|simulator_launcher_failure) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
+mark_status_from_log_failure() {
+  [[ "$status" -eq 0 ]] || return 0
+
+  local detected
+  detected="$(classify_log_failure)"
+  case "$detected" in
+    ""|unknown) ;;
+    *)
+      status=65
+      classification="$detected"
+      ;;
+  esac
+}
+
+repair_simulator_for_retry() {
+  if [[ "$classification" == "simulator_launcher_failure" && -n "${sim:-}" ]]; then
+    xcrun simctl shutdown "$sim" >/dev/null 2>&1 || true
+    xcrun simctl erase "$sim" >/dev/null 2>&1 || true
+  fi
+
+  scripts/ambitions-xcode-sim-health.sh --repair --json >/dev/null 2>&1 || true
+  if [[ -n "${sim:-}" ]]; then
+    xcrun simctl bootstatus "$sim" -b >/dev/null 2>&1 || true
+  fi
+}
+
+classification=""
 run_once
 status=$?
 
@@ -225,19 +359,22 @@ fi
 if [[ "$status" -eq 0 ]] && grep -Eq "Test Case '.+' failed|Test Suite '.+' failed|XCTAssert.+ failed|: error: -\\[.+\\] : XCTAssert" "$LOG_FILE"; then
   status=65
 fi
+mark_status_from_log_failure
 
 if [[ "$status" -ne 0 ]]; then
-  classification="$(python3 scripts/ambitions-xcode-failure-classifier.py --log "$LOG_FILE" --json | python3 -c 'import sys, json; print(json.load(sys.stdin).get("classification",""))' )"
-  if [[ "$classification" == "simulator_boot_failure" ]]; then
-    scripts/ambitions-xcode-sim-health.sh --repair --json >/dev/null 2>&1 || true
+  [[ -n "$classification" ]] || classification="$(classify_log_failure)"
+  if is_simulator_retry_class "$classification"; then
+    repair_simulator_for_retry
     run_once
     status=$?
+    classification=""
     if [[ "$status" -eq 0 ]] && grep -Eq "Testing failed:|\\*\\* TEST EXECUTE FAILED \\*\\*" "$LOG_FILE"; then
       status=65
     fi
     if [[ "$status" -eq 0 ]] && grep -Eq "Test Case '.+' failed|Test Suite '.+' failed|XCTAssert.+ failed|: error: -\\[.+\\] : XCTAssert" "$LOG_FILE"; then
       status=65
     fi
+    mark_status_from_log_failure
   fi
 fi
 
@@ -248,7 +385,7 @@ fi
 if [[ "$status" -eq 124 ]]; then
   classification="timeout"
 else
-  classification="$(python3 scripts/ambitions-xcode-failure-classifier.py --log "$LOG_FILE" --json | python3 -c 'import sys, json; print(json.load(sys.stdin).get("classification", ""))')"
+  classification="$(classify_log_failure)"
 fi
 executed_tests="$(extract_executed_tests "$LOG_FILE")"
 if [[ "$status" -eq 0 ]]; then
@@ -276,6 +413,7 @@ cat > "$SUMMARY_FILE" <<JSON
   "test": "$test_filter",
   "scheme": "$RESOLVED_SCHEME",
   "proof_scope": "$PROOF_SCOPE",
+  "requested_xcodebuild_action": "$REQUESTED_XCODEBUILD_ACTION",
   "xcodebuild_action": "$XCODEBUILD_ACTION",
   "status": "$([ "$status" -eq 0 ] && echo passed || echo failed)",
   "failure_category": "$classification",
@@ -288,7 +426,13 @@ cat > "$SUMMARY_FILE" <<JSON
   "timestamp_utc": "$TS",
   "run_id": "$RUN_ID",
   "sim_destination": "$SIM_DEST",
-  "claim_boundary": "focused test execution proof only; not full build, UI, visual, accessibility, device, TestFlight, App Store, or release proof"
+  "ui_prebuild_required": $UI_PREBUILD_REQUIRED,
+  "ui_prebuild_status": "$([[ "$UI_PREBUILD_REQUIRED" == "true" ]] && { [ "$UI_PREBUILD_STATUS" -eq 0 ] && echo passed || echo failed; } || echo not_run)",
+  "ui_prebuild_failure_category": "$UI_PREBUILD_FAILURE_CLASS",
+  "ui_prebuild_timeout": "$UI_PREBUILD_TIMEOUT_DURATION",
+  "ui_prebuild_log_file": "$UI_PREBUILD_OUTPUT_FILE",
+  "ui_prebuild_summary_file": "$UI_PREBUILD_SUMMARY_FILE",
+  "claim_boundary": "focused test execution proof only; UI build-for-testing prebuild is prerequisite proof, not UI, visual, accessibility, device, TestFlight, App Store, or release proof"
 }
 JSON
 

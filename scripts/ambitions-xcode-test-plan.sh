@@ -118,7 +118,7 @@ status=${status:-0}
 
 if [[ "$status" -ne 0 ]]; then
   classification="$(python3 scripts/ambitions-xcode-failure-classifier.py --log "$LOG_FILE" --json | python3 -c 'import sys, json; print(json.load(sys.stdin).get("classification",""))' )"
-  if [[ "$classification" == "simulator_boot_failure" ]]; then
+  if [[ "$classification" == "simulator_boot_failure" || "$classification" == "simulator_launcher_failure" ]]; then
     scripts/ambitions-xcode-sim-health.sh --repair --json >/dev/null 2>&1 || true
     run_xcode_plan
     status=${status:-0}

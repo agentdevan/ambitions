@@ -82,7 +82,7 @@ select_name=""
 
 if [[ -n "${AMBITIONS_SIM_UDID:-}" ]]; then
   select_udid="${AMBITIONS_SIM_UDID}"
-  select_name="$(echo "$DEVICES" | awk -v udid="$select_udid" 'match($0, udid) {sub(/^ *(.*) \\(.*/, "\\1"); print $0; exit}')"
+  select_name="$(echo "$DEVICES" | awk -v udid="$select_udid" 'index($0, udid) {line=$0; sub(/^[[:space:]]*/, "", line); marker=index(line, " ("); if (marker > 0) line=substr(line, 1, marker - 1); print line; exit}')"
 elif [[ -n "${AMBITIONS_SIM_NAME:-}" ]]; then
   select_udid="$(find_sim_udid "${AMBITIONS_SIM_NAME}")"
   select_name="${AMBITIONS_SIM_NAME}"
@@ -104,7 +104,7 @@ if [[ -z "$select_udid" ]]; then
         if (value ~ /^[0-9A-Fa-f-]{36}$/) {print value; exit}
       }
     }')"
-  select_name="$(echo "$DEVICES" | awk -v udid="$select_udid" 'index($0, udid) {sub(/^ *(.*) \\(.*/, "\\1"); print $0; exit}')"
+  select_name="$(echo "$DEVICES" | awk -v udid="$select_udid" 'index($0, udid) {line=$0; sub(/^[[:space:]]*/, "", line); marker=index(line, " ("); if (marker > 0) line=substr(line, 1, marker - 1); print line; exit}')"
 fi
 
 if [[ -z "$select_udid" ]]; then

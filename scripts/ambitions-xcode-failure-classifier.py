@@ -34,6 +34,13 @@ PATTERNS = {
         r"Booting the simulator failed",
         r"An error was encountered while attempting to boot",
     ],
+    "simulator_launcher_failure": [
+        r"IDELaunchiPhoneSimulatorLauncher",
+        r"NSMachErrorDomain\s+Code:\s*-308",
+        r"Mach error -308",
+        r"\(ipc/mig\) server died",
+        r"\*\*\s+BUILD\s+INTERRUPTED\s+\*\*",
+    ],
     "test_discovery_failure": [
         r"No such test class",
         r"no tests found",

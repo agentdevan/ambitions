@@ -59,7 +59,7 @@ map_exit_code() {
     no_validation_required) echo 10 ;;
     test_failure|test_discovery_failure) echo 20 ;;
     compile_error|signing_error) echo 21 ;;
-    simulator_boot_failure|missing_destination) echo 22 ;;
+    simulator_boot_failure|simulator_launcher_failure|missing_destination) echo 22 ;;
     xcodegen_project_drift|stale_derived_data) echo 23 ;;
     tool_missing) echo 24 ;;
     test_timeout) echo 25 ;;
@@ -245,7 +245,7 @@ run_validation_command() {
       return 0
     fi
 
-    if [[ "$allow_sim_retry" == "1" && "$attempt_class" == "simulator_boot_failure" && "$attempts" -eq 0 ]]; then
+    if [[ "$allow_sim_retry" == "1" && ( "$attempt_class" == "simulator_boot_failure" || "$attempt_class" == "simulator_launcher_failure" ) && "$attempts" -eq 0 ]]; then
       attempts=$((attempts + 1))
       scripts/ambitions-xcode-sim-health.sh --repair --json >/dev/null 2>&1 || true
       continue
