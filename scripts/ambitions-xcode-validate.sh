@@ -142,6 +142,29 @@ swift_changes_since_base() {
   git ls-files --others --exclude-standard -- '*.swift' | grep -q .
 }
 
+focused_tests_are_all_unit() {
+  [[ -n "$TEST" ]] || return 1
+  local suite
+  IFS=',' read -r -a suites_for_scheme <<< "$TEST"
+  for suite in "${suites_for_scheme[@]}"; do
+    suite="$(printf '%s' "$suite" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+    [[ -n "$suite" ]] || continue
+    case "$suite" in
+      AmbitionsTests|AmbitionsTests/*) ;;
+      *) return 1 ;;
+    esac
+  done
+  return 0
+}
+
+focused_prebuild_scheme_for_tests() {
+  if focused_tests_are_all_unit; then
+    printf '%s\n' "${AMBITIONS_XCODE_UNIT_TEST_SCHEME:-AmbitionsUnitTests}"
+  else
+    printf '%s\n' "${AMBITIONS_XCODE_FULL_TEST_SCHEME:-Ambitions}"
+  fi
+}
+
 third_status_field() {
   local value="$1"
   local rest="${value#*:}"
@@ -247,6 +270,7 @@ run_status_and_class=""
 prebuild_for_focused_test=false
 prebuild_status="not_run"
 prebuild_failure_class="not_run"
+focused_prebuild_scheme="not_run"
 focused_executed_tests=0
 focused_suite_count=0
 focused_rerun_after_prebuild=false
@@ -305,9 +329,11 @@ case "$LANE" in
       mkdir -p "$RESULT_BASE/$BATCH/$RUN_ID" "$LOG_BASE/$BATCH/$RUN_ID" "$SUMMARY_BASE/$BATCH/$RUN_ID"
       if [[ "${AMBITIONS_XCODE_SKIP_PREBUILD:-0}" != "1" ]] && swift_changes_since_base; then
         prebuild_for_focused_test=true
-        echo "Swift source/test changes detected; running build-for-testing before focused tests" >&2
+        focused_prebuild_scheme="$(focused_prebuild_scheme_for_tests)"
+        echo "Swift source/test changes detected; running $focused_prebuild_scheme build-for-testing before focused tests" >&2
         run_status_and_class="$(run_validation_command 0 scripts/ambitions-xcode-build-for-testing.sh \
           --batch "$BATCH" \
+          --scheme "$focused_prebuild_scheme" \
           --results-dir "$RESULT_BASE" \
           --logs-dir "$LOG_BASE" \
           --summaries-dir "$SUMMARY_BASE")"
@@ -343,8 +369,10 @@ case "$LANE" in
           if [[ "$status" != "0" && ( "$failure_class" == "stale_derived_data" || "$failure_class" == "test_discovery_failure" ) ]]; then
             focused_rerun_after_prebuild=true
             echo "Focused test reported $failure_class; rebuilding test bundle and retrying once" >&2
+            [[ "$focused_prebuild_scheme" == "not_run" ]] && focused_prebuild_scheme="$(focused_prebuild_scheme_for_tests)"
             run_status_and_class="$(run_validation_command 0 scripts/ambitions-xcode-build-for-testing.sh \
               --batch "$BATCH" \
+              --scheme "$focused_prebuild_scheme" \
               --results-dir "$RESULT_BASE" \
               --logs-dir "$LOG_BASE" \
               --summaries-dir "$SUMMARY_BASE")"
@@ -452,6 +480,7 @@ cat > "$SUMMARY_FILE" <<JSON
   "test": "$TEST",
   "test_plan": "$TEST_PLAN",
   "prebuild_for_focused_test": $prebuild_for_focused_test,
+  "focused_prebuild_scheme": "$focused_prebuild_scheme",
   "prebuild_status": "$prebuild_status",
   "prebuild_failure_category": "$prebuild_failure_class",
   "focused_suite_count": $focused_suite_count,

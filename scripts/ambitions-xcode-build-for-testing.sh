@@ -22,7 +22,7 @@ while [[ "$#" -gt 0 ]]; do
     --timeout) TIMEOUT_DURATION="${2:-$TIMEOUT_DURATION}"; shift 2 ;;
     --kill-after) KILL_AFTER="${2:-$KILL_AFTER}"; shift 2 ;;
     -h|--help)
-      echo "Usage: scripts/ambitions-xcode-build-for-testing.sh --batch <BATCH> [--timeout 30m] [--kill-after 60s]" >&2
+      echo "Usage: scripts/ambitions-xcode-build-for-testing.sh --batch <BATCH> [--scheme Ambitions|AmbitionsUnitTests] [--timeout 30m] [--kill-after 60s]" >&2
       exit 0
       ;;
     *)
@@ -95,9 +95,27 @@ PY
   xcodegen generate >/dev/null
 fi
 
-BUILD_CMD=(xcodebuild -project Ambitions.xcodeproj -scheme "$SCHEME" -sdk iphonesimulator -destination "$SIM_DEST" -derivedDataPath "$DERIVED_DATA" build-for-testing CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO -resultBundlePath "$RESULT_BUNDLE")
+BUILD_CMD=(
+  xcodebuild
+  -project Ambitions.xcodeproj
+  -scheme "$SCHEME"
+  -sdk iphonesimulator
+  -destination "$SIM_DEST"
+  -derivedDataPath "$DERIVED_DATA"
+  build-for-testing
+  CODE_SIGNING_ALLOWED=NO
+  CODE_SIGNING_REQUIRED=NO
+  COMPILER_INDEX_STORE_ENABLE=NO
+  ONLY_ACTIVE_ARCH=YES
+  -resultBundlePath "$RESULT_BUNDLE"
+)
 BOUNDED_BUILD_CMD=(scripts/ambitions-bounded-xcodebuild.sh --timeout "$TIMEOUT_DURATION" --kill-after "$KILL_AFTER" --log "$LOG_FILE" -- "${BUILD_CMD[@]}")
 
+run_start="$(python3 - <<'PY'
+import time
+print(time.time())
+PY
+)"
 set +e
 if command -v xcbeautify >/dev/null 2>&1; then
   "${BOUNDED_BUILD_CMD[@]}" 2>&1 | xcbeautify
@@ -107,6 +125,12 @@ else
   status=$?
 fi
 set -e
+duration_seconds="$(python3 - "$run_start" <<'PY'
+import sys
+import time
+print(round(time.time() - float(sys.argv[1]), 3))
+PY
+)"
 
 if command -v scripts/ambitions-xcode-result-extract.sh >/dev/null 2>&1; then
   scripts/ambitions-xcode-result-extract.sh --result "$RESULT_BUNDLE" --output-dir "$SUMMARY_DIR/$BATCH/$TS/extract" || true
@@ -125,15 +149,20 @@ cat > "$SUMMARY_FILE" <<JSON
 {
   "batch": "$BATCH",
   "lane": "build-for-testing",
+  "scheme": "$SCHEME",
   "status": "$([ "$status" -eq 0 ] && echo passed || echo failed)",
   "failure_category": "$classification",
+  "duration_seconds": $duration_seconds,
   "result_bundle": "$RESULT_BUNDLE",
   "log_file": "$LOG_FILE",
   "timestamp_utc": "$TS",
   "run_id": "$RUN_ID",
-  "reason": "$need_reason"
+  "reason": "$need_reason",
+  "sim_destination": "$SIM_DEST",
+  "claim_boundary": "build-for-testing proof only; not UI, visual, accessibility, device, TestFlight, App Store, or release proof"
 }
 JSON
 
 echo "FAILURE_CLASS=$classification"
+echo "DURATION_SECONDS=$duration_seconds"
 exit "$status"

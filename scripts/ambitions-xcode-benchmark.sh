@@ -7,7 +7,7 @@ cd "$REPO_ROOT"
 usage() {
   cat <<'USAGE'
 Usage:
-  bash scripts/ambitions-xcode-benchmark.sh [--batch <BATCH>] [--scheme <SCHEME>] [--test <ONLY_TESTING>] [--test-plan <PLAN>] [--workers <1,2,4>]
+  bash scripts/ambitions-xcode-benchmark.sh [--batch <BATCH>] [--scheme auto|Ambitions|AmbitionsUnitTests] [--test <ONLY_TESTING>] [--test-plan <PLAN>] [--workers <1,2,4>]
   bash scripts/ambitions-xcode-benchmark.sh --status
   bash scripts/ambitions-xcode-benchmark.sh --batch <BATCH> --lane <LANE> -- <command> [args...]
 
@@ -21,7 +21,7 @@ Purpose:
 
 Defaults:
   --batch XCODE-BENCHMARK
-  --scheme Ambitions
+  --scheme auto
   --workers 1
 
 Examples:
@@ -34,7 +34,7 @@ USAGE
 }
 
 BATCH="XCODE-BENCHMARK"
-SCHEME="Ambitions"
+SCHEME="auto"
 ONLY_TESTING=""
 TEST_PLAN=""
 WORKERS="${AMBITIONS_XCODE_TEST_WORKERS:-1}"
@@ -131,6 +131,33 @@ normalize_workers() {
   printf '%s\n' "$WORKERS" | tr ',' ' '
 }
 
+parallel_args_for_worker() {
+  local worker="$1"
+  if [[ "$worker" == "1" ]]; then
+    printf '%s\n' "-parallel-testing-enabled" "NO"
+  else
+    printf '%s\n' "-parallel-testing-enabled" "YES" "-parallel-testing-worker-count" "$worker"
+  fi
+}
+
+resolve_scheme() {
+  if [[ "$SCHEME" != "auto" ]]; then
+    printf '%s\n' "$SCHEME"
+    return
+  fi
+
+  if [[ -n "$ONLY_TESTING" && -z "$TEST_PLAN" ]]; then
+    case "$ONLY_TESTING" in
+      AmbitionsTests|AmbitionsTests/*)
+        printf '%s\n' "${AMBITIONS_XCODE_UNIT_TEST_SCHEME:-AmbitionsUnitTests}"
+        return
+        ;;
+    esac
+  fi
+
+  printf '%s\n' "${AMBITIONS_XCODE_FULL_TEST_SCHEME:-Ambitions}"
+}
+
 json_append_step() {
   local name="$1"
   local status="$2"
@@ -210,6 +237,7 @@ if [[ -n "${AMBITIONS_SIM_UDID:-}" || -n "$sim_udid" ]]; then
   sim="${AMBITIONS_SIM_UDID:-$sim_udid}"
   [[ -n "$sim" ]] && SIM_DEST="platform=iOS Simulator,id=${sim}"
 fi
+RESOLVED_SCHEME="$(resolve_scheme)"
 
 need_output="$(scripts/ambitions-xcodegen-needed.sh || true)"
 need_flag="$(awk -F= '/^XCODEGEN_NEEDED=/{print $2}' <<<"$need_output")"
@@ -226,7 +254,7 @@ BUILD_RESULT="$OUT_DIR/build-for-testing.xcresult"
 BUILD_CMD=(
   xcodebuild
   -project Ambitions.xcodeproj
-  -scheme "$SCHEME"
+  -scheme "$RESOLVED_SCHEME"
   -sdk iphonesimulator
   -destination "$SIM_DEST"
   -derivedDataPath "$DERIVED_DATA"
@@ -235,6 +263,7 @@ BUILD_CMD=(
   CODE_SIGNING_ALLOWED=NO
   CODE_SIGNING_REQUIRED=NO
   COMPILER_INDEX_STORE_ENABLE=NO
+  ONLY_ACTIVE_ARCH=YES
   -resultBundlePath "$BUILD_RESULT"
 )
 
@@ -244,19 +273,20 @@ run_step "build-for-testing" "${BUILD_CMD[@]}" || build_status=$?
 if [[ "$build_status" -eq 0 && -n "$ONLY_TESTING" ]]; then
   for worker in $(normalize_workers); do
     TEST_RESULT="$OUT_DIR/focused-test-workers-$worker.xcresult"
+    mapfile -t PARALLEL_ARGS < <(parallel_args_for_worker "$worker")
     TEST_CMD=(
       xcodebuild
       -project Ambitions.xcodeproj
-      -scheme "$SCHEME"
+      -scheme "$RESOLVED_SCHEME"
       -destination "$SIM_DEST"
       -derivedDataPath "$DERIVED_DATA"
-      -parallel-testing-enabled YES
-      -parallel-testing-worker-count "$worker"
+      "${PARALLEL_ARGS[@]}"
       test-without-building
       -only-testing "$ONLY_TESTING"
       CODE_SIGNING_ALLOWED=NO
       CODE_SIGNING_REQUIRED=NO
       COMPILER_INDEX_STORE_ENABLE=NO
+      ONLY_ACTIVE_ARCH=YES
       -resultBundlePath "$TEST_RESULT"
     )
     run_step "focused-test workers=$worker" "${TEST_CMD[@]}" || true
@@ -266,26 +296,27 @@ fi
 if [[ "$build_status" -eq 0 && -n "$TEST_PLAN" ]]; then
   for worker in $(normalize_workers); do
     PLAN_RESULT="$OUT_DIR/test-plan-$TEST_PLAN-workers-$worker.xcresult"
+    mapfile -t PARALLEL_ARGS < <(parallel_args_for_worker "$worker")
     PLAN_CMD=(
       xcodebuild
       -project Ambitions.xcodeproj
-      -scheme "$SCHEME"
+      -scheme "$RESOLVED_SCHEME"
       -testPlan "$TEST_PLAN"
       -destination "$SIM_DEST"
       -derivedDataPath "$DERIVED_DATA"
-      -parallel-testing-enabled YES
-      -parallel-testing-worker-count "$worker"
+      "${PARALLEL_ARGS[@]}"
       test-without-building
       CODE_SIGNING_ALLOWED=NO
       CODE_SIGNING_REQUIRED=NO
       COMPILER_INDEX_STORE_ENABLE=NO
+      ONLY_ACTIVE_ARCH=YES
       -resultBundlePath "$PLAN_RESULT"
     )
     run_step "test-plan $TEST_PLAN workers=$worker" "${PLAN_CMD[@]}" || true
   done
 fi
 
-python3 - "$SUMMARY_JSON" "$STEPS_JSONL" "$BATCH" "$SCHEME" "$SIM_DEST" "$DERIVED_DATA" <<'PY'
+python3 - "$SUMMARY_JSON" "$STEPS_JSONL" "$BATCH" "$RESOLVED_SCHEME" "$SIM_DEST" "$DERIVED_DATA" <<'PY'
 import json
 import sys
 from pathlib import Path

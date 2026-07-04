@@ -154,3 +154,14 @@ schemes:
       targets:
         - name: AmbitionsTests
         - name: AmbitionsUITests
+  AmbitionsUnitTests:
+    build:
+      targets:
+        AmbitionsTests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      gatherCoverageData: false
+      targets:
+        - name: AmbitionsTests

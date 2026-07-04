@@ -7,7 +7,7 @@ cd "$REPO_ROOT"
 BATCH=""
 TEST_ID=""
 ONLY_TESTING=""
-SCHEME="Ambitions"
+SCHEME="auto"
 RESULT_DIR=".codex/xcode-results"
 LOG_DIR=".codex/xcode-logs"
 SUMMARY_DIR=".codex/xcode-summaries"
@@ -28,7 +28,7 @@ while [[ "$#" -gt 0 ]]; do
     --kill-after) KILL_AFTER="${2:-$KILL_AFTER}"; shift 2 ;;
     --without-building|--test-without-building) XCODEBUILD_ACTION="test-without-building"; shift ;;
     -h|--help)
-      echo "Usage: scripts/ambitions-xcode-test-focused.sh --batch <BATCH> --test <TEST_ID> [--timeout 15m] [--kill-after 60s] [--without-building]" >&2
+      echo "Usage: scripts/ambitions-xcode-test-focused.sh --batch <BATCH> --test <TEST_ID> [--scheme auto|Ambitions|AmbitionsUnitTests] [--timeout 15m] [--kill-after 60s] [--without-building]" >&2
       exit 0
       ;;
     *)
@@ -57,6 +57,56 @@ mkdir -p "$RESULT_DIR/$BATCH/$RUN_ID" "$LOG_DIR/$BATCH/$RUN_ID" "$SUMMARY_DIR/$B
 DERIVED_DATA="$REPO_ROOT/.codex/DerivedData/Ambitions"
 mkdir -p "$DERIVED_DATA"
 
+resolve_scheme() {
+  if [[ "$SCHEME" != "auto" ]]; then
+    printf '%s\n' "$SCHEME"
+    return
+  fi
+
+  case "$test_filter" in
+    AmbitionsTests|AmbitionsTests/*)
+      printf '%s\n' "${AMBITIONS_XCODE_UNIT_TEST_SCHEME:-AmbitionsUnitTests}"
+      ;;
+    *)
+      printf '%s\n' "${AMBITIONS_XCODE_FULL_TEST_SCHEME:-Ambitions}"
+      ;;
+  esac
+}
+
+RESOLVED_SCHEME="$(resolve_scheme)"
+PROOF_SCOPE="focused"
+case "$RESOLVED_SCHEME" in
+  AmbitionsUnitTests) PROOF_SCOPE="unit-focused-fast" ;;
+  Ambitions) PROOF_SCOPE="full-scheme-focused" ;;
+esac
+
+need_output="$(scripts/ambitions-xcodegen-needed.sh || true)"
+need_flag="$(awk -F= '/^XCODEGEN_NEEDED=/{print $2}' <<<"$need_output")"
+if [[ "$need_flag" == "1" ]]; then
+  if ! command -v xcodegen >/dev/null 2>&1; then
+    cat > "$SUMMARY_FILE" <<JSON
+{
+  "batch": "$BATCH",
+  "lane": "focused-test",
+  "test": "$test_filter",
+  "scheme": "$RESOLVED_SCHEME",
+  "xcodebuild_action": "$XCODEBUILD_ACTION",
+  "status": "failed",
+  "failure_category": "tool_missing",
+  "executed_tests": 0,
+  "result_bundle": "$RESULT_BUNDLE",
+  "log_file": "$LOG_FILE",
+  "timestamp_utc": "$TS",
+  "run_id": "$RUN_ID"
+}
+JSON
+    echo "FAILURE_CLASS=tool_missing"
+    echo "EXECUTED_TESTS=0"
+    exit 24
+  fi
+  xcodegen generate >/dev/null
+fi
+
 sim_json="$(scripts/ambitions-xcode-sim-health.sh --json || true)"
 if [[ -n "${AMBITIONS_SIM_UDID:-}" ]]; then
   sim_udid="${AMBITIONS_SIM_UDID}"
@@ -79,7 +129,22 @@ if [[ -n "${AMBITIONS_SIM_UDID:-}" || -n "$sim_udid" ]]; then
   [[ -n "$sim" ]] && SIM_DEST="platform=iOS Simulator,id=${sim}"
 fi
 
-TEST_CMD=(xcodebuild -project Ambitions.xcodeproj -scheme "$SCHEME" -destination "$SIM_DEST" -derivedDataPath "$DERIVED_DATA" "$XCODEBUILD_ACTION" -only-testing "$test_filter" CODE_SIGNING_ALLOWED=NO -resultBundlePath "$RESULT_BUNDLE")
+TEST_CMD=(
+  xcodebuild
+  -project Ambitions.xcodeproj
+  -scheme "$RESOLVED_SCHEME"
+  -sdk iphonesimulator
+  -destination "$SIM_DEST"
+  -derivedDataPath "$DERIVED_DATA"
+  -parallel-testing-enabled NO
+  "$XCODEBUILD_ACTION"
+  -only-testing "$test_filter"
+  CODE_SIGNING_ALLOWED=NO
+  CODE_SIGNING_REQUIRED=NO
+  COMPILER_INDEX_STORE_ENABLE=NO
+  ONLY_ACTIVE_ARCH=YES
+  -resultBundlePath "$RESULT_BUNDLE"
+)
 BOUNDED_TEST_CMD=(scripts/ambitions-bounded-xcodebuild.sh --timeout "$TIMEOUT_DURATION" --kill-after "$KILL_AFTER" --log "$LOG_FILE" -- "${TEST_CMD[@]}")
 
 extract_executed_tests() {
@@ -98,6 +163,34 @@ else:
 PY
 }
 
+extract_xcode_observer_seconds() {
+  local log_file="$1"
+  python3 - "$log_file" <<'PY'
+import re
+import sys
+from pathlib import Path
+
+path = Path(sys.argv[1])
+text = path.read_text(encoding="utf-8", errors="replace") if path.exists() else ""
+matches = re.findall(r"IDETestOperationsObserverDebug:\s+([0-9.]+) elapsed", text)
+print(matches[-1] if matches else "null")
+PY
+}
+
+extract_xctest_wall_seconds() {
+  local log_file="$1"
+  python3 - "$log_file" <<'PY'
+import re
+import sys
+from pathlib import Path
+
+path = Path(sys.argv[1])
+text = path.read_text(encoding="utf-8", errors="replace") if path.exists() else ""
+matches = re.findall(r"\bExecuted\s+\d+\s+tests?.* in [0-9.]+ \(([0-9.]+)\) seconds", text)
+print(matches[-1] if matches else "null")
+PY
+}
+
 run_once() {
   set +e
   if command -v xcbeautify >/dev/null 2>&1; then
@@ -110,6 +203,11 @@ run_once() {
   set -e
 }
 
+run_start="$(python3 - <<'PY'
+import time
+print(time.time())
+PY
+)"
 run_once
 status=$?
 
@@ -154,24 +252,41 @@ if [[ "$status" -eq 0 ]]; then
   fi
 fi
 [[ -z "$classification" ]] && classification="unknown"
+duration_seconds="$(python3 - "$run_start" <<'PY'
+import sys
+import time
+print(round(time.time() - float(sys.argv[1]), 3))
+PY
+)"
+xcode_observer_seconds="$(extract_xcode_observer_seconds "$LOG_FILE")"
+xctest_wall_seconds="$(extract_xctest_wall_seconds "$LOG_FILE")"
 
 cat > "$SUMMARY_FILE" <<JSON
 {
   "batch": "$BATCH",
   "lane": "focused-test",
   "test": "$test_filter",
+  "scheme": "$RESOLVED_SCHEME",
+  "proof_scope": "$PROOF_SCOPE",
   "xcodebuild_action": "$XCODEBUILD_ACTION",
   "status": "$([ "$status" -eq 0 ] && echo passed || echo failed)",
   "failure_category": "$classification",
   "executed_tests": $executed_tests,
+  "duration_seconds": $duration_seconds,
+  "xcode_observer_seconds": $xcode_observer_seconds,
+  "xctest_wall_seconds": $xctest_wall_seconds,
   "result_bundle": "$RESULT_BUNDLE",
   "log_file": "$LOG_FILE",
   "timestamp_utc": "$TS",
-  "run_id": "$RUN_ID"
+  "run_id": "$RUN_ID",
+  "sim_destination": "$SIM_DEST",
+  "claim_boundary": "focused test execution proof only; not full build, UI, visual, accessibility, device, TestFlight, App Store, or release proof"
 }
 JSON
 
 echo "FAILURE_CLASS=$classification"
 echo "EXECUTED_TESTS=$executed_tests"
+echo "DURATION_SECONDS=$duration_seconds"
+echo "SCHEME=$RESOLVED_SCHEME"
 ((status == 0)) || exit "$status"
 exit 0
