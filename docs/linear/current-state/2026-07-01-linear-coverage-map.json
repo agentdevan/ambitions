@@ -149,7 +149,7 @@
       "missing_linear_object": "Time implementation parent and leaves for TimeEngine, capacity/reflow, EventKit boundary, and proof.",
       "recommended_action": "Create Time/TimeEngine parent linked to AMB-1483 and AMB-1544.",
       "status_correction": "Keep as Yellow repo evidence until runtime and device proof exists.",
-      "source_owner_paths": "Native/Ambitions/Surfaces/Time/; Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/; Projection Time owners",
+      "source_owner_paths": "Native/Ambitions/Surfaces/Time/; Native/Ambitions/Core/LocalRuntimeOS/Scheduling/; Projection Time owners",
       "runtime_mutation_path": "Placement/reflow must use command/event/receipt path.",
       "local_first_boundary": "Protected time and capacity remain local unless explicit adapter writes are user-approved.",
       "proof_or_recovery_gap": "Conflict/reflow/EventKit/device proof missing.",

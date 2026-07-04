@@ -174,11 +174,11 @@
       "gap_classification": "PARTIAL_NEEDS_PARENT_REPAIR"
     },
     {
-      "path": "Native/Ambitions/Surfaces/Time/; Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/; Native/Ambitions/Projection/SurfaceLenses/Time*",
+      "path": "Native/Ambitions/Surfaces/Time/; Native/Ambitions/Core/LocalRuntimeOS/Scheduling/; Native/Ambitions/Projection/SurfaceLenses/Time*",
       "app_aspect": "Time",
       "private_life_orchestration_role": "Models time reality, capacity, protected time, placement, and reflow for recommended steps that fit actual life.",
       "orchestration_layer": "Context / capacity / protected time / time reality / recovery",
-      "source_owner_system": "Final Architecture Tree owners: Surfaces/Time, Core/LocalRuntimeOS/TimeEngine, Projection.",
+      "source_owner_system": "Final Architecture Tree owners: Surfaces/Time, Core/LocalRuntimeOS/Scheduling, Projection.",
       "current_repo_evidence": "Time surface, TimeFieldMutationCoordinator, PlacementEngine, TimeEngine, and projection owners are present.",
       "existing_linear_object": "AMB-1483 VSP-04 leaf; project: Ambitions Flagship Visual Specification Layer - Pre-Codex.",
       "missing_linear_object": "Missing repo-current parent Feature and Codex leaves for time/capacity/reflow runtime proof.",
@@ -361,11 +361,11 @@
       "gap_classification": "MISSING_PARENT_FEATURE"
     },
     {
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/",
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
       "app_aspect": "Time/capacity/reflow",
       "private_life_orchestration_role": "Computes capacity, protected time, conflicts, recovery moves, placement, and reflow against life reality.",
       "orchestration_layer": "Context / capacity / protected time / time reality / recovery",
-      "source_owner_system": "Final Architecture Tree owner: Core/LocalRuntimeOS/TimeEngine.",
+      "source_owner_system": "Final Architecture Tree owner: Core/LocalRuntimeOS/Scheduling.",
       "current_repo_evidence": "TimeEngine directory exists under LocalRuntimeOS and Time surface references time placement/reflow services.",
       "existing_linear_object": "AMB-1483 VSP-04; AMB-1544 partial runtime owner.",
       "missing_linear_object": "Missing current TimeEngine parent Feature and Codex leaves for capacity/reflow proof.",

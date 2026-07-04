@@ -300,7 +300,7 @@
         "Native/Ambitions/Surfaces/Time/TimeSurface.swift",
         "Native/Ambitions/Surfaces/Time/TimeObjectView.swift",
         "Native/Ambitions/Surfaces/Time/TimeAccessibility.swift",
-        "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/"
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/"
       ],
       "recommended_linear_document_title": "VSP-04 Time Native Life Calendar — Repo-Grounded Design/Spec Dossier",
       "recommended_document_outline": [

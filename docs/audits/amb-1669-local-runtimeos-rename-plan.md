@@ -17,7 +17,7 @@ This artifact records the current folder/type dependency graph, target runtime m
 
 ## Current Owner Graph
 
-Current source owner count after the `Planning` slice: 19.
+Current source owner count after the `Scheduling` slice: 19.
 
 | Current owner | Swift files | Target owner | Status |
 | --- | ---: | --- | --- |
@@ -29,7 +29,7 @@ Current source owner count after the `Planning` slice: 19.
 | Projections | 32 | Projections | Fourth slice renamed from `ProjectionEngine` |
 | PrivateLifeRuntimeKernel | 37 | RuntimeKernel or collapsed into retained owners | Pending decision |
 | Planning | 68 | Planning | Tenth slice renamed from `PlanningEngine` |
-| TimeEngine | 35 | Scheduling | Pending |
+| Scheduling | 35 | Scheduling | Eleventh slice renamed from `TimeEngine` and collapsed numbered ScheduleInstall split filenames |
 | CaptureRouteGraph | 20 | CaptureRouting | Pending |
 | Inspection | 29 | Inspection | Sixth slice renamed from `TrustSystem` |
 | Search | 10 | Search | Seventh slice renamed from `SearchRecall` |
@@ -347,7 +347,7 @@ Known direct consumers of the moved `Boundary`, `Commands`, `Transactions`,
 - `State`
 - `Planning`
 - `PrivateLifeRuntimeKernel`
-- `TimeEngine`
+- `Scheduling`
 - `PrivacySecurity`
 - `SourceAtlas`
 - runtime/domain tests
@@ -372,7 +372,6 @@ This slice can support Source Green for the folder-owner rename if validation pa
 
 Next concrete candidates, one at a time after guards:
 
-- `TimeEngine` -> `Scheduling`
 - `CaptureRouteGraph` -> `CaptureRouting`
 - `SyncContinuity` -> `Continuity`
 

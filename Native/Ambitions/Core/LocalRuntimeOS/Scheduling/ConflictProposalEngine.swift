@@ -16,7 +16,7 @@ struct TimeConflictProposal: Codable, Sendable, Equatable, Hashable, Identifiabl
     let violationIDs: [String]
     let summary: String
     let canCommit: Bool
-    let runtimeTrace: TimeEngineRuntimeTrace
+    let runtimeTrace: SchedulingRuntimeTrace
 
     init(
         kind: TimeConflictProposalKind,
@@ -29,11 +29,11 @@ struct TimeConflictProposal: Codable, Sendable, Equatable, Hashable, Identifiabl
         localOnly: Bool
     ) {
         self.kind = kind
-        self.candidateBlockID = TimeEngineStableID.required(candidateBlockID)
+        self.candidateBlockID = SchedulingStableID.required(candidateBlockID)
         self.proposedWindow = proposedWindow
-        self.conflictIDs = TimeEngineStableID.unique(conflictIDs)
-        self.violationIDs = TimeEngineStableID.unique(violationIDs)
-        self.summary = TimeEngineStableID.required(summary)
+        self.conflictIDs = SchedulingStableID.unique(conflictIDs)
+        self.violationIDs = SchedulingStableID.unique(violationIDs)
+        self.summary = SchedulingStableID.required(summary)
         self.canCommit = canCommit
         let source = [
             kind.rawValue,
@@ -43,8 +43,8 @@ struct TimeConflictProposal: Codable, Sendable, Equatable, Hashable, Identifiabl
             proposedWindow.map { "\(TemporalMath.string(from: $0.start))-\(TemporalMath.string(from: $0.end))" } ?? "no-window",
             canCommit ? "commit" : "review"
         ].joined(separator: "|")
-        runtimeTrace = TimeEngineRuntimeTrace.make(owner: "ConflictProposalEngine", sourceID: source, localOnly: localOnly)
-        id = TimeEngineStableID.make(prefix: "time-conflict-proposal", components: [source])
+        runtimeTrace = SchedulingRuntimeTrace.make(owner: "ConflictProposalEngine", sourceID: source, localOnly: localOnly)
+        id = SchedulingStableID.make(prefix: "time-conflict-proposal", components: [source])
     }
 }
 
@@ -76,7 +76,7 @@ struct ConflictProposalEngine: Sendable {
                     proposedWindow: ProtectedStepPlacementWindow(start: candidate.start, end: candidate.end),
                     conflictIDs: conflicts.map(\.id),
                     violationIDs: evaluation.violations.map(\.id),
-                    summary: "Placement can commit without violating protected TimeEngine constraints.",
+                    summary: "Placement can commit without violating protected Scheduling constraints.",
                     canCommit: true,
                     localOnly: candidateGraph.localOnly
                 )

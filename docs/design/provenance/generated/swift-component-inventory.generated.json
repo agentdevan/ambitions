@@ -8205,6 +8205,66 @@
       "button_styles": [],
       "candidate_inventory_only": true,
       "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 166,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/Scheduling/PriorityPlacementPolicyTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "PriorityPlacementPolicyTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 188,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/Scheduling/ProtectedStepPlacementPolicyTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "ProtectedStepPlacementPolicyTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 199,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/Scheduling/SchedulingTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SchedulingTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
         "VSP-02",
         "VSP-03",
         "VSP-04",
@@ -9290,66 +9350,6 @@
       "proof_status": "source_inventory_only",
       "test_cases": [
         "SyncContinuityTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 166,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/TimeEngine/PriorityPlacementPolicyTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "PriorityPlacementPolicyTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 188,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/TimeEngine/ProtectedStepPlacementPolicyTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "ProtectedStepPlacementPolicyTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 176,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/TimeEngine/TimeEngineTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "TimeEngineTests"
       ],
       "view_modifiers": [],
       "view_structs": []

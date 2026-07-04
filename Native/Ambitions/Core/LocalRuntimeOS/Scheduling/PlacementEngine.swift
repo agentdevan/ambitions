@@ -29,10 +29,10 @@ struct TimePlacementRequest: Sendable, Equatable, Hashable {
         localOnly: Bool,
         priorityInput: PriorityPlacementInput
     ) {
-        self.commandID = TimeEngineStableID.required(commandID)
+        self.commandID = SchedulingStableID.required(commandID)
         self.now = now
-        self.stepID = TimeEngineStableID.required(stepID)
-        self.title = TimeEngineStableID.required(title)
+        self.stepID = SchedulingStableID.required(stepID)
+        self.title = SchedulingStableID.required(title)
         self.originalWindow = originalWindow
         self.proposedWindow = proposedWindow
         self.trigger = trigger
@@ -67,7 +67,7 @@ struct TimePlacementRequest: Sendable, Equatable, Hashable {
               ) else {
             return nil
         }
-        let commandTitle = TimeEngineStableID.optional(command.payload.title) ?? stepID
+        let commandTitle = SchedulingStableID.optional(command.payload.title) ?? stepID
         self.init(
             commandID: command.id,
             now: context.now,
@@ -94,7 +94,7 @@ struct TimePlacementDecision: Sendable, Equatable, Hashable {
     let protectedEvaluation: ProtectedTimeEvaluation
     let priorityDecision: PriorityPlacementDecision
     let conflictProposals: [TimeConflictProposal]
-    let runtimeTrace: TimeEngineRuntimeTrace
+    let runtimeTrace: SchedulingRuntimeTrace
 
     var protectedPlacementDecision: ProtectedStepPlacementDecision {
         protectedEvaluation.protectedPlacementDecision
@@ -151,7 +151,7 @@ struct PlacementEngine: Sendable {
             protectedEvaluation: protectedEvaluation,
             priorityDecision: priorityDecision,
             conflictProposals: proposals,
-            runtimeTrace: TimeEngineRuntimeTrace.make(owner: "PlacementEngine", sourceID: source, localOnly: request.localOnly && graph.localOnly)
+            runtimeTrace: SchedulingRuntimeTrace.make(owner: "PlacementEngine", sourceID: source, localOnly: request.localOnly && graph.localOnly)
         )
     }
 }

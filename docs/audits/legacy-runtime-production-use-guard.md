@@ -8,7 +8,7 @@ Scope: AMB-1666 -> AMB-1715, with AMB-1716 and AMB-1730 supersessions applied.
 This retained audit installs a guard for new production use of the legacy
 `Native/Ambitions/Core/Runtime` owner. AMB-1716 extends the retired-path set for
 the first test-support quarantine. AMB-1730 extends it for the standalone
-PlanningEngine, goal clarification/contradiction, TimeEngine, step
+PlanningEngine, goal clarification/contradiction, Scheduling, step
 planning/scheduling, MemoryLens/SearchRecall, and final all-remaining
 owner-move batches. It does not prove full LocalRuntimeOS completion.
 
@@ -160,7 +160,7 @@ AMB-1730 supersession:
   - `Native/Ambitions/Core/Runtime/TimeRitualGoalSemantics.swift`
 - Canonical owner:
   `Native/Ambitions/Core/LocalRuntimeOS/Planning/` and
-  `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/`, plus
+  `Native/Ambitions/Core/LocalRuntimeOS/Scheduling/`, plus
   `Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/`
 - Active guard ceiling: `0` legacy runtime production files.
 - Guard proof:

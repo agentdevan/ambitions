@@ -321,7 +321,7 @@ Covers: Time, TimeEngine, EventKit / Reminders. The project must preserve the Am
 - `Native/Ambitions/Surfaces/Time/TimeSurface.swift`
 - `Native/Ambitions/Surfaces/Time/TimeObjectView.swift`
 - `Native/Ambitions/Surfaces/Time/TimeAccessibility.swift`
-- `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/`
+- `Native/Ambitions/Core/LocalRuntimeOS/Scheduling/`
 
 #### Non-goals / hard reds
 - Do not make Capture, Motion, Trust, Proof, Source, Privacy, History, or Receipts persistent root destinations.

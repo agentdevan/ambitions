@@ -1082,7 +1082,7 @@
         "VSP-08"
       ],
       "source_owner_paths": [
-        "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
         "Native/Ambitions/Surfaces/Time/TimeSurface.swift",
         "Native/Ambitions/Surfaces/Time/TimeObjectView.swift",
         "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift",

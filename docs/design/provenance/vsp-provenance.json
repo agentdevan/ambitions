@@ -538,7 +538,7 @@
         "allowed_implementation_areas": [
           "Native/Ambitions/Surfaces/Time",
           "Native/Ambitions/Core/Time",
-          "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine",
+          "Native/Ambitions/Core/LocalRuntimeOS/Scheduling",
           "Native/Ambitions/DesignSystem/ProductObjects",
           "Native/Ambitions/Rendering/CanvasPrimitives",
           "Sources/Components"
@@ -554,17 +554,17 @@
           "Sources/Components/LifeDirectionalIntegrationPrimitives+02-LifeShapeField.swift",
           "Sources/Components/RealityMeridianTimeBand.swift",
           "Sources/Components/HorizonCapacityPrimitiveFamily.swift",
-          "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/TimeBlockGraph.swift",
-          "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/PlacementEngine.swift",
-          "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ProtectedTimeEngine.swift",
-          "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/RecoveryWindowEngine.swift"
+          "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/TimeBlockGraph.swift",
+          "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/PlacementEngine.swift",
+          "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/ProtectedTimeEngine.swift",
+          "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/RecoveryWindowEngine.swift"
         ],
         "known_tests": [
           "Native/AmbitionsTests/Time/LifeShapeFieldViewReconstructionTests.swift",
           "Native/AmbitionsTests/Time/TimeFieldMutationCoordinatorTests.swift",
           "Native/AmbitionsTests/Time/TimeProjectionServiceTests.swift",
-          "Native/AmbitionsTests/LocalRuntimeOS/TimeEngine/TimeEngineTests.swift",
-          "Native/AmbitionsTests/LocalRuntimeOS/TimeEngine/ProtectedStepPlacementPolicyTests.swift",
+          "Native/AmbitionsTests/LocalRuntimeOS/Scheduling/SchedulingTests.swift",
+          "Native/AmbitionsTests/LocalRuntimeOS/Scheduling/ProtectedStepPlacementPolicyTests.swift",
           "Native/AmbitionsTests/Time/HorizonCapacityPrimitiveFamilyTests.swift"
         ],
         "known_preview_or_quality_files": [

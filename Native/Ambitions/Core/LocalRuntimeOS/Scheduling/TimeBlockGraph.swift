@@ -67,18 +67,18 @@ struct TimeBlock: Codable, Sendable, Equatable, Hashable, Identifiable {
         localOnly: Bool = true
     ) {
         precondition(end > start, "TimeBlock end must be after start")
-        self.title = TimeEngineStableID.required(title)
+        self.title = SchedulingStableID.required(title)
         self.start = start
         self.end = end
         self.kind = kind
         self.source = source
-        self.stepID = TimeEngineStableID.optional(stepID)
-        self.goalID = TimeEngineStableID.optional(goalID)
-        self.commandID = TimeEngineStableID.optional(commandID)
-        self.eventID = TimeEngineStableID.optional(eventID)
+        self.stepID = SchedulingStableID.optional(stepID)
+        self.goalID = SchedulingStableID.optional(goalID)
+        self.commandID = SchedulingStableID.optional(commandID)
+        self.eventID = SchedulingStableID.optional(eventID)
         self.privacyClass = privacyClass
         self.localOnly = localOnly
-        self.id = TimeEngineStableID.optional(id) ?? TimeEngineStableID.make(
+        self.id = SchedulingStableID.optional(id) ?? SchedulingStableID.make(
             prefix: "time-block",
             components: [
                 self.title,
@@ -147,7 +147,7 @@ struct TimeBlockConflict: Codable, Sendable, Equatable, Hashable, Identifiable {
         reason = severity == .blocking
             ? "A protected, fixed, or capacity-consuming block overlaps another scheduled block."
             : "Flexible blocks overlap and should be reviewed before placement."
-        id = TimeEngineStableID.make(prefix: "time-conflict", components: [firstBlockID, secondBlockID, "\(overlapMinutes)", severity.rawValue])
+        id = SchedulingStableID.make(prefix: "time-conflict", components: [firstBlockID, secondBlockID, "\(overlapMinutes)", severity.rawValue])
     }
 }
 
@@ -157,7 +157,7 @@ struct TimeBlockGraph: Codable, Sendable, Equatable, Hashable, Identifiable {
     let id: String
     let blocks: [TimeBlock]
     let localOnly: Bool
-    let runtimeTrace: TimeEngineRuntimeTrace
+    let runtimeTrace: SchedulingRuntimeTrace
 
     init(blocks: [TimeBlock], localOnly: Bool = true) {
         self.blocks = blocks.sorted {
@@ -166,12 +166,12 @@ struct TimeBlockGraph: Codable, Sendable, Equatable, Hashable, Identifiable {
             return $0.id < $1.id
         }
         self.localOnly = localOnly && self.blocks.allSatisfy(\.localOnly)
-        let fingerprint = TimeEngineStableID.make(
+        let fingerprint = SchedulingStableID.make(
             prefix: "time-block-graph.source",
             components: self.blocks.map { "\($0.id):\(TemporalMath.string(from: $0.start)):\(TemporalMath.string(from: $0.end)):\($0.kind.rawValue)" }
         )
-        id = TimeEngineStableID.make(prefix: "time-block-graph", components: [fingerprint])
-        runtimeTrace = TimeEngineRuntimeTrace.make(owner: "TimeBlockGraph", sourceID: fingerprint, localOnly: self.localOnly)
+        id = SchedulingStableID.make(prefix: "time-block-graph", components: [fingerprint])
+        runtimeTrace = SchedulingRuntimeTrace.make(owner: "TimeBlockGraph", sourceID: fingerprint, localOnly: self.localOnly)
     }
 
     var conflicts: [TimeBlockConflict] {

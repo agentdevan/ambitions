@@ -1,25 +1,32 @@
 @testable import Ambitions
 import XCTest
 
-final class TimeEngineTests: XCTestCase {
+final class SchedulingTests: XCTestCase {
     private let now = ISO8601DateFormatter().date(from: "2027-02-19T12:20:00Z")!
 
-    func testTimeEngineOwnerFilesExistUnderCanonicalTreeAndOldPolicyOwnersAreRemoved() throws {
+    func testSchedulingOwnerFilesExistUnderCanonicalTreeAndOldPolicyOwnersAreRemoved() throws {
         let root = try repoRoot()
         let requiredPaths = [
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LifeCalendarStore.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/TimeBlockGraph.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ProtectedTimeEngine.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ConstraintEngine.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/CapacityEnvelopeEngine.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/RecurrenceEngine.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ConflictProposalEngine.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/PlacementEngine.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/RecoveryWindowEngine.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/TemporalMath.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ProtectedStepPlacementPolicy.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/PriorityPlacementPolicy.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LocalScheduleBlockFileStore.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/LifeCalendarStore.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/TimeBlockGraph.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/ProtectedTimeEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/ConstraintEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/CapacityEnvelopeEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/RecurrenceEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/ConflictProposalEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/PlacementEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/RecoveryWindowEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/TemporalMath.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/ProtectedStepPlacementPolicy.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/PriorityPlacementPolicy.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/LocalScheduleBlockFileStore.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/SchedulingRuntimeTrace.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/ScheduleInstallKernel.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/ScheduleInstallKernelCore.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/ScheduleInstallKernelEvaluation.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/ScheduleInstallKernelReceipt.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/ScheduleInstallRecord.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/ScheduleInstallRecordSupport.swift",
         ]
 
         for path in requiredPaths {
@@ -27,12 +34,28 @@ final class TimeEngineTests: XCTestCase {
         }
         XCTAssertFalse(
             FileManager.default.fileExists(atPath: root.appendingPathComponent(removedRuntimeOwnerPath("ProtectedStepPlacementPolicy.swift")).path),
-            "Protected placement policy must be owned by Core/LocalRuntimeOS/TimeEngine."
+            "Protected placement policy must be owned by Core/LocalRuntimeOS/Scheduling."
         )
         XCTAssertFalse(
             FileManager.default.fileExists(atPath: root.appendingPathComponent(removedRuntimeOwnerPath("PriorityPlacementPolicy.swift")).path),
-            "Priority placement policy must be owned by Core/LocalRuntimeOS/TimeEngine."
+            "Priority placement policy must be owned by Core/LocalRuntimeOS/Scheduling."
         )
+        XCTAssertFalse(
+            FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/TimeEngine").path),
+            "The old TimeEngine owner folder must be removed after the Scheduling rename."
+        )
+        for retiredSplitFile in [
+            "ScheduleInstallKernel+02-ScheduleInstallRecord.swift",
+            "ScheduleInstallKernel+03-ScheduleInstallKernel+02-evaluate.swift",
+            "ScheduleInstallKernel+03-ScheduleInstallKernel+03-makeReceipt.swift",
+            "ScheduleInstallKernel+03-ScheduleInstallKernel.swift",
+            "ScheduleInstallKernel+04-ScheduleInstallRecord.swift",
+        ] {
+            XCTAssertFalse(
+                FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/Scheduling/\(retiredSplitFile)").path),
+                "Numbered ScheduleInstall split file must be collapsed: \(retiredSplitFile)"
+            )
+        }
         let realityModels = try String(
             contentsOf: root.appendingPathComponent("Native/Ambitions/Core/Domain/RealityModels.swift"),
             encoding: .utf8
@@ -112,7 +135,7 @@ final class TimeEngineTests: XCTestCase {
 
     func testLifeCalendarStorePersistsAndReloadsLocalBlocks() async throws {
         let fileURL = FileManager.default.temporaryDirectory
-            .appendingPathComponent("ambitions-time-engine-\(UUID().uuidString)")
+            .appendingPathComponent("ambitions-scheduling-\(UUID().uuidString)")
             .appendingPathComponent("life-calendar.json")
         let block = TimeBlock(
             title: "Draft section",
@@ -161,7 +184,7 @@ final class TimeEngineTests: XCTestCase {
     }
 }
 
-private extension TimeEngineTests {
+private extension SchedulingTests {
     func repoRoot() throws -> URL {
         var candidate = URL(fileURLWithPath: #filePath)
         while candidate.path != "/" {
@@ -170,6 +193,6 @@ private extension TimeEngineTests {
             }
             candidate.deleteLastPathComponent()
         }
-        throw NSError(domain: "TimeEngineTests", code: 1)
+        throw NSError(domain: "SchedulingTests", code: 1)
     }
 }

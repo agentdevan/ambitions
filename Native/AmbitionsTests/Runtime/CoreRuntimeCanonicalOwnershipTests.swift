@@ -135,18 +135,18 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
         }
     }
 
-    func testAMB1730MovesStandaloneTimeEnginesToCanonicalOwner() {
+    func testAMB1730MovesStandaloneSchedulingEnginesToCanonicalOwner() {
         let root = repoRoot()
         for requiredPath in [
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/BufferEngine.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/CapacityEngine.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/OpenCapacityEngine.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/PressureEngine.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/RecoveryEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/BufferEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/CapacityEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/OpenCapacityEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/PressureEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/RecoveryEngine.swift",
         ] {
             XCTAssertTrue(
                 FileManager.default.fileExists(atPath: root.appendingPathComponent(requiredPath).path),
-                "Missing AMB-1730 canonical TimeEngine owner: \(requiredPath)"
+                "Missing AMB-1730 canonical Scheduling owner: \(requiredPath)"
             )
         }
 
@@ -159,7 +159,7 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
         ] {
             XCTAssertFalse(
                 FileManager.default.fileExists(atPath: root.appendingPathComponent(retiredPath).path),
-                "AMB-1730 time engine still lives under production runtime owner: \(retiredPath)"
+                "AMB-1730 scheduling engine still lives under production runtime owner: \(retiredPath)"
             )
         }
     }
@@ -177,16 +177,16 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
             "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepGraphCompilerCore.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepGraphCompiler.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/Planning/StepQualityFirewall.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ScheduleInstallKernel+02-ScheduleInstallRecord.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ScheduleInstallKernel+03-ScheduleInstallKernel+02-evaluate.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ScheduleInstallKernel+03-ScheduleInstallKernel+03-makeReceipt.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ScheduleInstallKernel+03-ScheduleInstallKernel.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ScheduleInstallKernel+04-ScheduleInstallRecord.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ScheduleInstallKernel.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/SimpleStepLifecycleService+Recurring.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/SimpleStepLifecycleService.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/StepReallocationRuntimeBridge.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/TimeRitualGoalSemantics.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/ScheduleInstallKernel.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/ScheduleInstallKernelCore.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/ScheduleInstallKernelEvaluation.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/ScheduleInstallKernelReceipt.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/ScheduleInstallRecord.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/ScheduleInstallRecordSupport.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/SimpleStepLifecycleService+Recurring.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/SimpleStepLifecycleService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/StepReallocationRuntimeBridge.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/TimeRitualGoalSemantics.swift",
         ] {
             XCTAssertTrue(
                 FileManager.default.fileExists(atPath: root.appendingPathComponent(requiredPath).path),
@@ -267,12 +267,12 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
             "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/KnowledgeClaimBoundaryHardener.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/KnowledgeIngestionService.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/KnowledgeProviderBoundary.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ClosureEngine.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LifeShapeBucketBuilder.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LifeShapeEngine.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LocalScheduleBlockRepository.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ProtectionEngine.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/RitualOrchestrationService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/ClosureEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/LifeShapeBucketBuilder.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/LifeShapeEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/LocalScheduleBlockRepository.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/ProtectionEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/RitualOrchestrationService.swift",
         ] {
             XCTAssertTrue(
                 FileManager.default.fileExists(atPath: root.appendingPathComponent(requiredPath).path),

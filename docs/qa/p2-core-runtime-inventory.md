@@ -17,9 +17,9 @@ Ambitions must not silently move scheduled Step placement inside the next seven 
 
 ### Contract Implemented
 
-- Canonical owner: `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ProtectedStepPlacementPolicy.swift`.
+- Canonical owner: `Native/Ambitions/Core/LocalRuntimeOS/Scheduling/ProtectedStepPlacementPolicy.swift`.
 - Command preflight hook: `Native/Ambitions/Core/LocalRuntimeOS/Commands/PolicyGuardedCommandExecutor.swift`.
-- Test owner: `Native/AmbitionsTests/LocalRuntimeOS/TimeEngine/ProtectedStepPlacementPolicyTests.swift` and `Native/AmbitionsTests/LocalRuntimeOS/Commands/PolicyGuardedCommandExecutorTests.swift`.
+- Test owner: `Native/AmbitionsTests/LocalRuntimeOS/Scheduling/ProtectedStepPlacementPolicyTests.swift` and `Native/AmbitionsTests/LocalRuntimeOS/Commands/PolicyGuardedCommandExecutorTests.swift`.
 - Deterministic decision states: `allowed`, `requires_explicit_approval`, `blocked_from_silent_movement`, and `pending_review`.
 - Inputs evaluated: current time, original placement, proposed placement, protected seven-day window, trigger, explicit approval, automation policy maturity, context quality, and local-only boundary.
 - Automatic movement inside the next seven days is blocked from silent application unless explicit approval is present.
@@ -69,11 +69,11 @@ Ambitions must not silently move scheduled Step placement inside the next seven 
 ### Architecture Notes
 
 - Final Architecture Tree inspected: yes.
-- Current canonical owner touched after `AMB-1557`: `Core/LocalRuntimeOS/TimeEngine`.
-- Test owner touched after `AMB-1557`: `Native/AmbitionsTests/LocalRuntimeOS/TimeEngine` and existing executor tests.
+- Current canonical owner touched after `AMB-1557`: `Core/LocalRuntimeOS/Scheduling`.
+- Test owner touched after `AMB-1557`: `Native/AmbitionsTests/LocalRuntimeOS/Scheduling` and existing executor tests.
 - `Features/` was not expanded.
 - `SimpleStepLifecycleService.swift` was not edited during P2A and remained at 807 lines; `AMB-1557` later routed recurring occurrence generation through `RecurrenceEngine` while leaving repository mutation authority unchanged.
-- Compatibility debt: command preflight covers schedule/placement commands with step placement metadata; broader scheduling/projection centralization remains a future TimeEngine repair train.
+- Compatibility debt: command preflight covers schedule/placement commands with step placement metadata; broader scheduling/projection centralization remains a future Scheduling repair train.
 
 ## P2B-A Central Apply-Path Consolidation Addendum
 
@@ -89,7 +89,7 @@ P2B-A routes the rendered Time placement apply path through the existing protect
 ### Source Changed
 
 - `Native/Ambitions/Projection/Mutations/TimeFieldMutationCoordinator.swift`
-- `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ProtectedStepPlacementPolicy.swift`
+- `Native/Ambitions/Core/LocalRuntimeOS/Scheduling/ProtectedStepPlacementPolicy.swift`
 - `Native/AmbitionsTests/Time/TimeFieldMutationCoordinatorTests.swift`
 
 ### Apply-Path Proof Added
@@ -261,8 +261,8 @@ P2C-A adds a small canonical runtime policy for placement priority. It supports 
 
 ### Source Changed
 
-- `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/PriorityPlacementPolicy.swift`
-- `Native/AmbitionsTests/LocalRuntimeOS/TimeEngine/PriorityPlacementPolicyTests.swift`
+- `Native/Ambitions/Core/LocalRuntimeOS/Scheduling/PriorityPlacementPolicy.swift`
+- `Native/AmbitionsTests/LocalRuntimeOS/Scheduling/PriorityPlacementPolicyTests.swift`
 
 ### Runtime Proof
 
@@ -313,8 +313,8 @@ P2C-A adds a small canonical runtime policy for placement priority. It supports 
 ### Architecture Notes
 
 - Final Architecture Tree inspected: yes.
-- Current canonical owner after `AMB-1557`: `Core/LocalRuntimeOS/TimeEngine`.
-- Current test owner after `AMB-1557`: `Native/AmbitionsTests/LocalRuntimeOS/TimeEngine`.
+- Current canonical owner after `AMB-1557`: `Core/LocalRuntimeOS/Scheduling`.
+- Current test owner after `AMB-1557`: `Native/AmbitionsTests/LocalRuntimeOS/Scheduling`.
 - Non-canonical owners touched: none.
 - `Features/` was not expanded.
 - No parallel Step, Time, Priority, Capacity, Conflict, or persistence model was introduced.
@@ -322,21 +322,21 @@ P2C-A adds a small canonical runtime policy for placement priority. It supports 
 - `SimpleStepLifecycleService.swift` was not touched by P2C-A.
 - `SimpleStepLifecycleService.swift` line count remained 469.
 
-## AMB-1557 LocalRuntimeOS TimeEngine Addendum
+## AMB-1557 LocalRuntimeOS Scheduling Addendum
 
 Date: 2026-06-30
-Phase status: Source Green and Runtime Green scoped to the local temporal backend foundation. Interaction Green, Visual Green, Release Green, physical-device readiness, and full app-wide TimeEngine adoption are not claimed.
+Phase status: Source Green and Runtime Green scoped to the local temporal backend foundation. Interaction Green, Visual Green, Release Green, physical-device readiness, and full app-wide Scheduling adoption are not claimed.
 
 ### Scope
 
-`AMB-1557` installs `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/` as the canonical owner for local temporal graph, protected placement, priority placement, recurrence, conflict, placement, recovery-window, and local calendar-store behavior. EventKit remains outside this owner as an adapter/side-effect boundary.
+`AMB-1557` installs `Native/Ambitions/Core/LocalRuntimeOS/Scheduling/` as the canonical owner for local temporal graph, protected placement, priority placement, recurrence, conflict, placement, recovery-window, and local calendar-store behavior. EventKit remains outside this owner as an adapter/side-effect boundary.
 
 ### Source Changed
 
-- `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/`
+- `Native/Ambitions/Core/LocalRuntimeOS/Scheduling/`
 - `Native/Ambitions/Projection/Mutations/TimeFieldMutationCoordinator.swift`
 - `Native/Ambitions/Core/Runtime/SimpleStepLifecycleService+Recurring.swift`
-- `Native/AmbitionsTests/LocalRuntimeOS/TimeEngine/`
+- `Native/AmbitionsTests/LocalRuntimeOS/Scheduling/`
 
 ### Runtime Proof
 
@@ -348,7 +348,7 @@ Phase status: Source Green and Runtime Green scoped to the local temporal backen
 
 ### Remaining Gaps
 
-- Not every Time/scheduling/recovery/recurrence path consumes `TimeEngine` yet.
+- Not every Time/scheduling/recovery/recurrence path consumes `Scheduling` yet.
 - EventKit outbox and external reconciliation are not fully enforced across every external calendar path.
 - TimeProjection is not yet fully rebuilt from the event journal for every Time mutation.
 - Rendered review UI, accessibility proof, no-network device proof, Visual Green, and Release Green are not claimed.

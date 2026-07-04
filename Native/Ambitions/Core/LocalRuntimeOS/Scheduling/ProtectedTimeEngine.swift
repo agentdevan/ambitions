@@ -3,7 +3,7 @@ import Foundation
 struct ProtectedTimeEvaluation: Codable, Sendable, Equatable, Hashable {
     let protectedPlacementDecision: ProtectedStepPlacementDecision
     let constraintEvaluation: TimeConstraintEvaluation
-    let runtimeTrace: TimeEngineRuntimeTrace
+    let runtimeTrace: SchedulingRuntimeTrace
 
     var requiresReview: Bool {
         protectedPlacementDecision.kind != .allowed || constraintEvaluation.hasBlockingViolation
@@ -44,7 +44,7 @@ struct ProtectedTimeEngine: Sendable {
         return ProtectedTimeEvaluation(
             protectedPlacementDecision: decision,
             constraintEvaluation: constraintEvaluation,
-            runtimeTrace: TimeEngineRuntimeTrace.make(owner: "ProtectedTimeEngine", sourceID: source, localOnly: decision.localOnly && graph.localOnly)
+            runtimeTrace: SchedulingRuntimeTrace.make(owner: "ProtectedTimeEngine", sourceID: source, localOnly: decision.localOnly && graph.localOnly)
         )
     }
 }

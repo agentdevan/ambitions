@@ -12,20 +12,20 @@ struct LifeCalendarStoreReceipt: Codable, Sendable, Equatable, Hashable, Identif
     let graphID: String
     let persisted: Bool
     let occurredAt: String
-    let runtimeTrace: TimeEngineRuntimeTrace
+    let runtimeTrace: SchedulingRuntimeTrace
 
     init(action: String, blockIDs: [String], graph: TimeBlockGraph, persisted: Bool, occurredAt: Date) {
-        self.action = TimeEngineStableID.required(action)
-        self.blockIDs = TimeEngineStableID.unique(blockIDs)
+        self.action = SchedulingStableID.required(action)
+        self.blockIDs = SchedulingStableID.unique(blockIDs)
         graphID = graph.id
         self.persisted = persisted
         self.occurredAt = TemporalMath.string(from: occurredAt)
-        runtimeTrace = TimeEngineRuntimeTrace.make(
+        runtimeTrace = SchedulingRuntimeTrace.make(
             owner: "LifeCalendarStore",
             sourceID: [self.action, self.blockIDs.joined(separator: ","), graph.id, self.occurredAt].joined(separator: "|"),
             localOnly: graph.localOnly
         )
-        id = TimeEngineStableID.make(prefix: "life-calendar.receipt", components: [self.action, graph.id, self.occurredAt])
+        id = SchedulingStableID.make(prefix: "life-calendar.receipt", components: [self.action, graph.id, self.occurredAt])
     }
 }
 

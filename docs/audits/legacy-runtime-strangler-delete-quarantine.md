@@ -20,7 +20,7 @@ readiness, or Green AMB-1666 status.
 
 AMB-1730 supersession: the current legacy runtime production-file ceiling is
 `64` after the standalone PlanningEngine, goal clarification/contradiction,
-TimeEngine, step planning/scheduling, and MemoryLens/SearchRecall owner-move
+Scheduling, step planning/scheduling, and MemoryLens/SearchRecall owner-move
 batches
 recorded in `docs/audits/legacy-runtime-strangler-import-replacement.md`. The
 AMB-1716 `111` count below remains the historical count for this quarantine

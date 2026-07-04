@@ -30,8 +30,8 @@ struct TimeRecurrenceSeed: Codable, Sendable, Equatable, Hashable {
         isPaused: Bool = false,
         localOnly: Bool = true
     ) {
-        self.id = TimeEngineStableID.required(id)
-        self.title = TimeEngineStableID.required(title)
+        self.id = SchedulingStableID.required(id)
+        self.title = SchedulingStableID.required(title)
         self.startsAt = startsAt
         self.rule = rule
         self.isPaused = isPaused
@@ -45,7 +45,7 @@ struct RecurringTimeOccurrence: Codable, Sendable, Equatable, Hashable, Identifi
     let scheduledAt: Date
     let title: String
     let isPaused: Bool
-    let runtimeTrace: TimeEngineRuntimeTrace
+    let runtimeTrace: SchedulingRuntimeTrace
 
     init(seed: TimeRecurrenceSeed, scheduledAt: Date) {
         seedID = seed.id
@@ -53,8 +53,8 @@ struct RecurringTimeOccurrence: Codable, Sendable, Equatable, Hashable, Identifi
         title = seed.title
         isPaused = seed.isPaused
         let source = [seed.id, TemporalMath.string(from: scheduledAt), seed.rule.timeZoneIdentifier].joined(separator: "|")
-        runtimeTrace = TimeEngineRuntimeTrace.make(owner: "RecurrenceEngine", sourceID: source, localOnly: seed.localOnly)
-        id = TimeEngineStableID.make(prefix: "recurring-time-occurrence", components: [source])
+        runtimeTrace = SchedulingRuntimeTrace.make(owner: "RecurrenceEngine", sourceID: source, localOnly: seed.localOnly)
+        id = SchedulingStableID.make(prefix: "recurring-time-occurrence", components: [source])
     }
 }
 

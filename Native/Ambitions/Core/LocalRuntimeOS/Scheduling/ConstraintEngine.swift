@@ -35,9 +35,9 @@ struct TimeConstraint: Codable, Sendable, Equatable, Hashable, Identifiable {
         self.kind = kind
         self.window = window
         self.maxMinutes = maxMinutes.map { max(1, $0) }
-        self.affectedObjectIDs = TimeEngineStableID.unique(affectedObjectIDs)
-        self.summary = TimeEngineStableID.required(summary)
-        self.id = TimeEngineStableID.optional(id) ?? TimeEngineStableID.make(
+        self.affectedObjectIDs = SchedulingStableID.unique(affectedObjectIDs)
+        self.summary = SchedulingStableID.required(summary)
+        self.id = SchedulingStableID.optional(id) ?? SchedulingStableID.make(
             prefix: "time-constraint",
             components: [
                 kind.rawValue,
@@ -66,17 +66,17 @@ struct TimeConstraintViolation: Codable, Sendable, Equatable, Hashable, Identifi
         reason: String
     ) {
         self.kind = kind
-        self.constraintID = TimeEngineStableID.required(constraintID)
-        self.blockIDs = TimeEngineStableID.unique(blockIDs)
+        self.constraintID = SchedulingStableID.required(constraintID)
+        self.blockIDs = SchedulingStableID.unique(blockIDs)
         self.severity = severity
-        self.reason = TimeEngineStableID.required(reason)
-        id = TimeEngineStableID.make(prefix: "time-constraint-violation", components: [kind.rawValue, self.constraintID, self.blockIDs.joined(separator: ","), severity.rawValue])
+        self.reason = SchedulingStableID.required(reason)
+        id = SchedulingStableID.make(prefix: "time-constraint-violation", components: [kind.rawValue, self.constraintID, self.blockIDs.joined(separator: ","), severity.rawValue])
     }
 }
 
 struct TimeConstraintEvaluation: Codable, Sendable, Equatable, Hashable {
     let violations: [TimeConstraintViolation]
-    let runtimeTrace: TimeEngineRuntimeTrace
+    let runtimeTrace: SchedulingRuntimeTrace
 
     var blockingViolations: [TimeConstraintViolation] {
         violations.filter { $0.severity == .blocking }
@@ -112,7 +112,7 @@ struct ConstraintEngine: Sendable {
         let uniqueViolations = Dictionary(grouping: violations, by: \.id).compactMap { $0.value.first }.sorted { $0.id < $1.id }
         return TimeConstraintEvaluation(
             violations: uniqueViolations,
-            runtimeTrace: TimeEngineRuntimeTrace.make(
+            runtimeTrace: SchedulingRuntimeTrace.make(
                 owner: "ConstraintEngine",
                 sourceID: [candidateGraph.id, uniqueViolations.map(\.id).joined(separator: ",")].joined(separator: "|"),
                 localOnly: candidateGraph.localOnly
@@ -135,7 +135,7 @@ struct ConstraintEngine: Sendable {
                     constraintID: constraint.id,
                     blockIDs: [block.id],
                     severity: .blocking,
-                    reason: "TimeEngine blocks must stay local and account-free."
+                    reason: "Scheduling blocks must stay local and account-free."
                 )
             }
         case .protectedWindow, .keepClear:
@@ -171,7 +171,7 @@ struct ConstraintEngine: Sendable {
 }
 
 extension TimeConstraint {
-    static let localOnly = TimeConstraint(kind: .localOnly, summary: "TimeEngine state must remain local-only.")
+    static let localOnly = TimeConstraint(kind: .localOnly, summary: "Scheduling state must remain local-only.")
     static let noOverlap = TimeConstraint(kind: .noOverlap, summary: "Time blocks should not overlap without review.")
 
     static func protected(window: ProtectedStepPlacementWindow, summary: String = "Protected time requires review before placement.") -> TimeConstraint {
@@ -183,6 +183,6 @@ extension TimeConstraint {
     }
 
     static func capacityLimit(window: ProtectedStepPlacementWindow, maxMinutes: Int) -> TimeConstraint {
-        TimeConstraint(kind: .capacityLimit, window: window, maxMinutes: maxMinutes, summary: "Capacity limit for local TimeEngine evaluation.")
+        TimeConstraint(kind: .capacityLimit, window: window, maxMinutes: maxMinutes, summary: "Capacity limit for local Scheduling evaluation.")
     }
 }

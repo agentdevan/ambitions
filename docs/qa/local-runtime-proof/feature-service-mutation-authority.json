@@ -10,7 +10,7 @@
     "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/",
     "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
     "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
-    "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/",
+    "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
     "Native/Ambitions/Core/Permissions/",
     "Native/AmbitionsWidgetExtension/",
     "Native/AmbitionsShareExtension/"
@@ -90,7 +90,7 @@
         "repositories.evidence.saveEvidence",
         "repositories.goals.saveGoals"
       ],
-      "rationale": "Legacy Time ritual compatibility writes pending TimeEngine/Commands migration."
+      "rationale": "Legacy Time ritual compatibility writes pending Scheduling/Commands migration."
     },
     {
       "path": "Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService+02-RepositoryBackedTodayService+Repository05-performFeedbackAction.swift",
@@ -136,7 +136,7 @@
       "rationale": "Moved AMB-1730 teaching-signal repository compatibility write; not canonical object-state authority."
     },
     {
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/SimpleStepLifecycleService.swift",
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/SimpleStepLifecycleService.swift",
       "classification": "explicitly_non_canonical",
       "allowedCalls": [
         "repositories.goals.saveGoals",
@@ -146,7 +146,7 @@
       "rationale": "Moved AMB-1730 simple-step lifecycle compatibility writes pending Commands migration."
     },
     {
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/SimpleStepLifecycleService+Recurring.swift",
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/SimpleStepLifecycleService+Recurring.swift",
       "classification": "explicitly_non_canonical",
       "allowedCalls": [
         "repositories.goals.saveGoals",

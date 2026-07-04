@@ -5,15 +5,15 @@ struct RecoveryWindow: Codable, Sendable, Equatable, Hashable, Identifiable {
     let window: ProtectedStepPlacementWindow
     let durationMinutes: Int
     let reason: String
-    let runtimeTrace: TimeEngineRuntimeTrace
+    let runtimeTrace: SchedulingRuntimeTrace
 
     init(window: ProtectedStepPlacementWindow, reason: String, localOnly: Bool) {
         self.window = window
         durationMinutes = TemporalMath.durationMinutes(start: window.start, end: window.end)
-        self.reason = TimeEngineStableID.required(reason)
+        self.reason = SchedulingStableID.required(reason)
         let source = [TemporalMath.string(from: window.start), TemporalMath.string(from: window.end), self.reason].joined(separator: "|")
-        runtimeTrace = TimeEngineRuntimeTrace.make(owner: "RecoveryWindowEngine", sourceID: source, localOnly: localOnly)
-        id = TimeEngineStableID.make(prefix: "recovery-window", components: [source])
+        runtimeTrace = SchedulingRuntimeTrace.make(owner: "RecoveryWindowEngine", sourceID: source, localOnly: localOnly)
+        id = SchedulingStableID.make(prefix: "recovery-window", components: [source])
     }
 }
 

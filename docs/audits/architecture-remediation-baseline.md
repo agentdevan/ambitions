@@ -335,7 +335,7 @@ files.
 | 524 | `Native/Ambitions/Core/LocalRuntimeOS/Storage/ObjectStoreSwiftData.swift` | `context.delete`, `context.save`, `try save(`, `FileManager`, `import SwiftData`, `ModelContext` |
 | 252 | `Native/Ambitions/Core/LocalRuntimeOS/Storage/ProjectionStoreSQLite.swift` | `try save(`, `FileManager` |
 | 257 | `Native/Ambitions/Core/LocalRuntimeOS/Storage/SearchStoreFTS.swift` | `FileManager` |
-| 133 | `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LifeCalendarStore.swift` | `.write(`, `FileManager` |
+| 133 | `Native/Ambitions/Core/LocalRuntimeOS/Scheduling/LifeCalendarStore.swift` | `.write(`, `FileManager` |
 | 187 | `Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/GoalIntentCompilerReceiptPersistenceAdapter.swift` | `try save(` |
 | 223 | `Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/TodayReceiptCommandService.swift` | `try save(` |
 | 489 | `Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/TrustSystem.swift` | `try save(` |

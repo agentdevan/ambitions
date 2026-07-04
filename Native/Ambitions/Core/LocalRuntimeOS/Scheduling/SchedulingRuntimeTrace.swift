@@ -1,13 +1,13 @@
 import Foundation
 
-enum TimeEngineRuntimeSpineStep: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+enum SchedulingRuntimeSpineStep: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
     case command
     case event
     case projection
     case receipt
     case replay
 
-    static let required: [TimeEngineRuntimeSpineStep] = [
+    static let required: [SchedulingRuntimeSpineStep] = [
         .command,
         .event,
         .projection,
@@ -16,7 +16,7 @@ enum TimeEngineRuntimeSpineStep: String, Codable, Sendable, Equatable, Hashable,
     ]
 }
 
-struct TimeEngineRuntimeTrace: Codable, Sendable, Equatable, Hashable, Identifiable {
+struct SchedulingRuntimeTrace: Codable, Sendable, Equatable, Hashable, Identifiable {
     let id: String
     let owner: String
     let commandID: String
@@ -26,7 +26,7 @@ struct TimeEngineRuntimeTrace: Codable, Sendable, Equatable, Hashable, Identifia
     let replayTraceID: String
     let checksum: String
     let localOnly: Bool
-    let mutationSpine: [TimeEngineRuntimeSpineStep]
+    let mutationSpine: [SchedulingRuntimeSpineStep]
 
     init(
         owner: String,
@@ -36,18 +36,18 @@ struct TimeEngineRuntimeTrace: Codable, Sendable, Equatable, Hashable, Identifia
         receiptID: String,
         replayTraceID: String,
         localOnly: Bool = true,
-        mutationSpine: [TimeEngineRuntimeSpineStep] = TimeEngineRuntimeSpineStep.required
+        mutationSpine: [SchedulingRuntimeSpineStep] = SchedulingRuntimeSpineStep.required
     ) {
-        self.owner = TimeEngineStableID.required(owner)
-        self.commandID = TimeEngineStableID.required(commandID)
-        self.eventID = TimeEngineStableID.required(eventID)
-        self.projectionID = TimeEngineStableID.required(projectionID)
-        self.receiptID = TimeEngineStableID.required(receiptID)
-        self.replayTraceID = TimeEngineStableID.required(replayTraceID)
+        self.owner = SchedulingStableID.required(owner)
+        self.commandID = SchedulingStableID.required(commandID)
+        self.eventID = SchedulingStableID.required(eventID)
+        self.projectionID = SchedulingStableID.required(projectionID)
+        self.receiptID = SchedulingStableID.required(receiptID)
+        self.replayTraceID = SchedulingStableID.required(replayTraceID)
         self.localOnly = localOnly
-        self.mutationSpine = mutationSpine.isEmpty ? TimeEngineRuntimeSpineStep.required : mutationSpine
-        checksum = TimeEngineStableID.make(
-            prefix: "time-engine.checksum",
+        self.mutationSpine = mutationSpine.isEmpty ? SchedulingRuntimeSpineStep.required : mutationSpine
+        checksum = SchedulingStableID.make(
+            prefix: "scheduling.checksum",
             components: [
                 self.owner,
                 self.commandID,
@@ -59,31 +59,31 @@ struct TimeEngineRuntimeTrace: Codable, Sendable, Equatable, Hashable, Identifia
                 self.mutationSpine.map(\.rawValue).joined(separator: ",")
             ]
         )
-        id = TimeEngineStableID.make(prefix: "time-engine.trace", components: [self.owner, checksum])
+        id = SchedulingStableID.make(prefix: "scheduling.trace", components: [self.owner, checksum])
     }
 
     var satisfiesRuntimeSpine: Bool {
         localOnly &&
-            mutationSpine == TimeEngineRuntimeSpineStep.required &&
+            mutationSpine == SchedulingRuntimeSpineStep.required &&
             [owner, commandID, eventID, projectionID, receiptID, replayTraceID, checksum].allSatisfy { $0.isEmpty == false }
     }
 
-    static func make(owner: String, sourceID: String, localOnly: Bool = true) -> TimeEngineRuntimeTrace {
-        let normalizedOwner = TimeEngineStableID.required(owner)
-        let normalizedSource = TimeEngineStableID.required(sourceID)
-        return TimeEngineRuntimeTrace(
+    static func make(owner: String, sourceID: String, localOnly: Bool = true) -> SchedulingRuntimeTrace {
+        let normalizedOwner = SchedulingStableID.required(owner)
+        let normalizedSource = SchedulingStableID.required(sourceID)
+        return SchedulingRuntimeTrace(
             owner: normalizedOwner,
-            commandID: TimeEngineStableID.make(prefix: "time-engine.command", components: [normalizedOwner, normalizedSource]),
-            eventID: TimeEngineStableID.make(prefix: "time-engine.event", components: [normalizedOwner, normalizedSource]),
-            projectionID: TimeEngineStableID.make(prefix: "time-engine.projection", components: [normalizedOwner, normalizedSource]),
-            receiptID: TimeEngineStableID.make(prefix: "time-engine.receipt", components: [normalizedOwner, normalizedSource]),
-            replayTraceID: TimeEngineStableID.make(prefix: "time-engine.replay", components: [normalizedOwner, normalizedSource]),
+            commandID: SchedulingStableID.make(prefix: "scheduling.command", components: [normalizedOwner, normalizedSource]),
+            eventID: SchedulingStableID.make(prefix: "scheduling.event", components: [normalizedOwner, normalizedSource]),
+            projectionID: SchedulingStableID.make(prefix: "scheduling.projection", components: [normalizedOwner, normalizedSource]),
+            receiptID: SchedulingStableID.make(prefix: "scheduling.receipt", components: [normalizedOwner, normalizedSource]),
+            replayTraceID: SchedulingStableID.make(prefix: "scheduling.replay", components: [normalizedOwner, normalizedSource]),
             localOnly: localOnly
         )
     }
 }
 
-enum TimeEngineStableID {
+enum SchedulingStableID {
     static func make(prefix: String, components: [String]) -> String {
         let normalizedPrefix = slug(prefix)
         let normalizedComponents = components.map(slug).filter { $0.isEmpty == false }
@@ -94,7 +94,7 @@ enum TimeEngineStableID {
 
     static func required(_ value: String) -> String {
         let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
-        precondition(trimmed.isEmpty == false, "Expected non-empty TimeEngine identifier")
+        precondition(trimmed.isEmpty == false, "Expected non-empty Scheduling identifier")
         return trimmed
     }
 

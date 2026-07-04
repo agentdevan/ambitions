@@ -175,7 +175,7 @@ enum ObjectStateRegistry {
                 tombstoneEntityKind: .goal,
                 runtimeTombstoneFamily: .step,
                 supersessionPolicy: .appendOnlyRevision,
-                remainingDirectWriteDebt: "Step writes remain embedded in goal plan persistence until Planning and TimeEngine move their object-state adapters."
+                remainingDirectWriteDebt: "Step writes remain embedded in goal plan persistence until Planning and Scheduling move their object-state adapters."
             ),
             ObjectStateFamilyDescriptor(
                 id: .capture,
@@ -195,7 +195,7 @@ enum ObjectStateRegistry {
                 tombstoneEntityKind: .unknown,
                 runtimeTombstoneFamily: .timeBlock,
                 supersessionPolicy: .appendOnlyRevision,
-                remainingDirectWriteDebt: "Time blocks are not yet a canonical object-state store; TimeEngine owns the next migration."
+                remainingDirectWriteDebt: "Time blocks are not yet a canonical object-state store; Scheduling owns the next migration."
             ),
             ObjectStateFamilyDescriptor(
                 id: .closure,

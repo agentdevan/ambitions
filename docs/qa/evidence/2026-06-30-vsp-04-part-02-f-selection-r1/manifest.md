@@ -27,7 +27,7 @@ Claim boundary: this records selection of the F refinement direction only. It do
 - Shell authority preserved: yes. Content-only selection; no VSP-01 shell mutation.
 - Product law preserved: yes. Today / Goals / Time / You remain the only persistent surfaces; Capture is not a tab; Motion is not a destination; trust details are not root surfaces.
 - Time boundary preserved: yes. F is month-level Time root direction; Today retains day/current-step ownership.
-- Current source anchors: `TimeSurface`, `TimeObjectView`, `LifeShapeField`, `TimeEngine`, `ProtectedTimeEngine`, `RecoveryWindowEngine`.
+- Current source anchors: `TimeSurface`, `TimeObjectView`, `LifeShapeField`, `Scheduling`, `ProtectedTimeEngine`, `RecoveryWindowEngine`.
 - Accessibility proof: not run; required in candidate package.
 - SwiftUI proof: not run; no source implementation.
 - Final owner approval: not present; this is selection of direction only.

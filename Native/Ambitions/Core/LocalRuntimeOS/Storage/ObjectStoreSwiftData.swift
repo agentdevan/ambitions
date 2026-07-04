@@ -202,7 +202,7 @@ actor AmbitionsPersistenceStore {
             ObjectStoreSwiftDataFamilyDescriptor(
                 id: .step,
                 storedTypeNames: ["StepRecord"],
-                mutationAuthority: "Core/LocalRuntimeOS/Planning + TimeEngine + Transactions",
+                mutationAuthority: "Core/LocalRuntimeOS/Planning + Scheduling + Transactions",
                 fieldRules: [
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "StepRecord", fieldName: "goalID", authority: .queryColumn, notes: "Goal-scoped step lookup column."),
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "StepRecord", fieldName: "stateRaw", authority: .queryColumn, notes: "Queryable step lifecycle column."),

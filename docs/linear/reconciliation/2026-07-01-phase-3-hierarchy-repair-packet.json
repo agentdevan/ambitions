@@ -9629,7 +9629,7 @@
         "Native/Ambitions/Surfaces/Time/TimeSurface.swift",
         "Native/Ambitions/Surfaces/Time/TimeObjectView.swift",
         "Native/Ambitions/Surfaces/Time/TimeAccessibility.swift",
-        "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/"
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/"
       ],
       "known_issue_mapping": [
         "AMB-ISSUE-0009",
@@ -11683,13 +11683,13 @@
       "title": "TimeEngine — bounded reconciliation/proof-gate leaf",
       "parent_feature": "TimeEngine parent feature with product-law non-goals and proof gate.",
       "source_owner_paths": [
-        "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
         "Native/Ambitions/Surfaces/Time/TimeSurface.swift",
         "Native/Ambitions/Surfaces/Time/TimeObjectView.swift"
       ],
       "exact_bounded_scope": "Reconcile TimeEngine source-owner paths, VSP/known issue authority, validation commands, proof artifacts, rollback plan, and non-claims; implementation may proceed only after Phase 2/3 acceptance and separate authorization.",
       "files_likely_touched": [
-        "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
         "Native/Ambitions/Surfaces/Time/TimeSurface.swift",
         "Native/Ambitions/Surfaces/Time/TimeObjectView.swift"
       ],
@@ -12802,7 +12802,7 @@
       "title": "EventKit / Reminders — bounded reconciliation/proof-gate leaf",
       "parent_feature": "EventKit / Reminders parent feature with product-law non-goals and proof gate.",
       "source_owner_paths": [
-        "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
         "Native/Ambitions/Surfaces/Time/TimeSurface.swift",
         "Native/Ambitions/Surfaces/Time/TimeObjectView.swift",
         "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift",
@@ -12810,7 +12810,7 @@
       ],
       "exact_bounded_scope": "Reconcile EventKit / Reminders source-owner paths, VSP/known issue authority, validation commands, proof artifacts, rollback plan, and non-claims; implementation may proceed only after Phase 2/3 acceptance and separate authorization.",
       "files_likely_touched": [
-        "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
         "Native/Ambitions/Surfaces/Time/TimeSurface.swift",
         "Native/Ambitions/Surfaces/Time/TimeObjectView.swift",
         "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift",

@@ -70,7 +70,7 @@ The candidate intentionally avoids side KPI rails, dashboard cards, calendar-clo
 - `New SwiftUI primitive required`: `MonthLifeCalendarGrid`.
 - `New SwiftUI primitive required`: `MonthLifeCalendarSemanticOverlay`.
 - `New SwiftUI primitive required`: `MonthReflowProtectionMarker`.
-- Canonical owners: `Native/Ambitions/Surfaces/Time`, `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine`, `Native/Ambitions/DesignSystem/ProductObjects`, `Native/Ambitions/Rendering/CanvasPrimitives`, `Sources/Components`.
+- Canonical owners: `Native/Ambitions/Surfaces/Time`, `Native/Ambitions/Core/LocalRuntimeOS/Scheduling`, `Native/Ambitions/DesignSystem/ProductObjects`, `Native/Ambitions/Rendering/CanvasPrimitives`, `Sources/Components`.
 - Rejected for root: VSP-01 shell mutation, generic calendar clone, KPI dashboard, side analytics rail, Today-owned current-step timeline, Plan/Profile/Habits/Insights IA, Capture tab, Motion destination.
 
 ## Export Note

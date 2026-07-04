@@ -42,10 +42,10 @@ LocalRuntimeOS completion.
 
 AMB-1730 moved `111` legacy runtime production files out of
 `Native/Ambitions/Core/Runtime` and into `Native/Ambitions/Core/LocalRuntimeOS`
-owners. Earlier batches moved Planning, TimeEngine, and SearchRecall
+owners. Earlier batches moved Planning, Scheduling, and SearchRecall
 files. The final all-remaining pass moved the remaining CaptureRouteGraph,
 PrivacySecurity, PrivateLifeRuntimeKernel, Projections, Boundary,
-SourceAtlas, and TimeEngine files. Representative retired files include:
+SourceAtlas, and Scheduling files. Representative retired files include:
 
 - `BufferEngine.swift`
 - `CapacityEngine.swift`
@@ -97,7 +97,7 @@ SourceAtlas, and TimeEngine files. Representative retired files include:
 
 Before AMB-1730, the legacy runtime production-use guard reported
 `currentLegacyRuntimeFiles=111` and `legacyRuntimeFileCeiling=111`. After the
-PlanningEngine, goal clarification/contradiction, TimeEngine, step
+PlanningEngine, goal clarification/contradiction, Scheduling, step
 planning/scheduling, MemoryLens/SearchRecall, and all-remaining owner moves, it
 reports `currentLegacyRuntimeFiles=0` and `legacyRuntimeFileCeiling=0`.
 
@@ -132,7 +132,7 @@ Files moved or converted:
   `Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/Portable*`
 - Local schedule JSON file helpers moved from
   `Native/Ambitions/Core/Domain/RealityModels.swift` to
-  `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LocalScheduleBlockFileStore.swift`
+  `Native/Ambitions/Core/LocalRuntimeOS/Scheduling/LocalScheduleBlockFileStore.swift`
 - Legacy app-group SwiftData store migration helpers live in
   `Native/Ambitions/Core/LocalRuntimeOS/Storage/ObjectStoreSwiftDataLegacyMigration.swift`
   and are covered by the canonical persistence ownership tests.
@@ -254,9 +254,9 @@ private life graph backend.
   - `Native/Ambitions/Projection/SurfaceLenses/RepositoryBackedTimeService.swift`
   - `Native/Ambitions/Projection/SurfaceLenses/TimeRitualsProjectionService.swift`
   - `Native/Ambitions/Core/Domain/RealityModels.swift`
-  - `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LocalScheduleBlockRepository.swift`
+  - `Native/Ambitions/Core/LocalRuntimeOS/Scheduling/LocalScheduleBlockRepository.swift`
   - `Native/Ambitions/Core/LocalRuntimeOS/Commands/AmbitionsCommandExecutor+CalendarWriteIntent.swift`
-  - `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LifeCalendarStore.swift`
+  - `Native/Ambitions/Core/LocalRuntimeOS/Scheduling/LifeCalendarStore.swift`
   - `Native/Ambitions/Surfaces/You/YouSurface.swift`
   - `Native/Ambitions/Surfaces/You/YouRootDetailRouteSurface.swift`
   - `Native/Ambitions/Surfaces/You/YouScreen+08-YouPlanningHandoffRow.swift`
@@ -323,7 +323,7 @@ private life graph backend.
   - `Native/Ambitions/Core/Persistence/StoreHealthCheck.swift`
   - `Native/Ambitions/Core/Persistence/SupportDiagnosticsBundle.swift`
   - `Native/Ambitions/Core/Domain/RealityModels.swift`
-  - `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LocalScheduleBlockRepository.swift`
+  - `Native/Ambitions/Core/LocalRuntimeOS/Scheduling/LocalScheduleBlockRepository.swift`
   - `Native/Ambitions/Core/LocalRuntimeOS/EventJournal/RuntimeEventStore.swift`
   - `Native/Ambitions/Core/LocalRuntimeOS/Storage/ObjectStoreSwiftData.swift`
   - `Native/Ambitions/Core/LocalRuntimeOS/Storage/EventStoreSQLite.swift`
@@ -380,7 +380,7 @@ private life graph backend.
 | Global Capture | `Native/Ambitions/Composer/Capture`, `Native/Ambitions/App/AppShellActivatedCaptureSeam.swift`, `Native/Ambitions/App/ShellCommandRouter.swift`, `Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureService+03-DefaultCaptureService.swift`, `Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/ExternalCreationImportService.swift` | unsafe write | External creation import creates `AmbitionsCommand(kind: .quickCapture)`, but the in-app global Capture and shell Capture UI save through `DefaultCaptureService` repository writes without complete command receipt proof. | AMB-1666, AMB-1667 |
 | Today actions | `Native/Ambitions/Surfaces/Today`, `Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService.swift`, `Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService+02-RepositoryBackedTodayService+Repository05-performFeedbackAction.swift`, `Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/TodayReceiptCommandService.swift` | unsafe write | Closure and rejection receipts use `TodayReceiptCommandService`, but inline feedback and quick-log actions still save feedback, evidence, goals, or captures through projection/repository paths. | AMB-1666, AMB-1667 |
 | Goals actions | `Native/Ambitions/Surfaces/Goals`, `Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+02-Snapshot.swift`, `Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+10-performMutation.swift`, `Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+16-repositories.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Storage/SwiftDataRepositoryArrayHelpers.swift` | canonical command | AMB-1731 moved the SwiftData repository substrate under LocalRuntimeOS storage. App-wide Goals command/receipt behavior still needs AMB-1666/AMB-1667 proof; this row is not broad UI Green. | AMB-1666, AMB-1667 |
-| Time edits and local schedule blocks | `Native/Ambitions/Surfaces/Time`, `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LocalScheduleBlockFileStore.swift`, `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LifeCalendarStore.swift` | canonical command | AMB-1731 moved local schedule file IO out of `Core/Domain/RealityModels.swift` and into TimeEngine. Rendered Time behavior and full command/receipt proof remain separate. | AMB-1667, AMB-1717, AMB-1718 |
+| Time edits and local schedule blocks | `Native/Ambitions/Surfaces/Time`, `Native/Ambitions/Core/LocalRuntimeOS/Scheduling/LocalScheduleBlockFileStore.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Scheduling/LifeCalendarStore.swift` | canonical command | AMB-1731 moved local schedule file IO out of `Core/Domain/RealityModels.swift` and into Scheduling. Rendered Time behavior and full command/receipt proof remain separate. | AMB-1667, AMB-1717, AMB-1718 |
 | You/profile edits | `Native/Ambitions/Surfaces/You`, `Native/Ambitions/Projection/SurfaceLenses/YouFeatureService.swift`, `Native/Ambitions/Core/LocalRuntimeOS/ObjectState/YouPreferencesCommandService.swift` | canonical command | AMB-1707 traces preference save through `YouPreferencesCommandService` and `RuntimeCommandMutationCommitter`; static evidence does not prove every You row is a runtime mutation or device behavior. | AMB-1666, AMB-1667 |
 | Widgets and Live Activity UI | `Native/AmbitionsWidgetExtension/NextStepWidget.swift`, `Native/AmbitionsWidgetExtension/NextStepLiveActivityWidget.swift`, `Native/Ambitions/Projection/ExternalSnapshots/ExternalWidgetProjection.swift`, `Native/Ambitions/Projection/ExternalSnapshots/SharedExternalSnapshotStore.swift` | projection-only read | Widgets and Live Activity UI read verified safe snapshots and deep link back to app. Current widget source does not render a mutating control. | AMB-1668 |
 | Widget payload action bridge | `Native/Ambitions/App/AppBootstrapper.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Commands/ExternalActionCommandService.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Boundary/AmbitionsRuntimeServices.swift` | rejectionReceipt source-present / focused XCTest passed | AMB-1732 changes widget payload handling so mutating payload actions downgrade to Today review routing and record a local-only `commandBridge` rejection receipt when a recorder is configured. Current widget UI still does not emit command payloads. Focused simulator XCTest passed; device/lifecycle and replay proof remain missing. | AMB-1668, AMB-1732 |
@@ -419,7 +419,7 @@ behavior, privacy/legal approval, or release readiness.
 | Time LifeShape field edit, protected-placement review, and undo | `Native/Ambitions/Surfaces/Time/TimeSurface.swift`, `Native/Ambitions/Surfaces/Time/TimeViewModel.swift`, `Native/Ambitions/Surfaces/Time/ProtectedPlacementReviewState.swift` | projection-only read | The inspected LifeShape controls call `TimeFieldMutationCoordinator` and mutate `TimeSurfaceState`, review state, visible mutation, or undo state in memory. No repository persistence is claimed for this UI field path. | AMB-1666 if this UI path becomes a persisted Time mutation. |
 | Time calendar-aware action and calendar context observation | `Native/Ambitions/Surfaces/Time/TimeViewModel.swift`, `Native/Ambitions/Projection/SurfaceLenses/RepositoryBackedTimeService.swift` | unsafe write | `makeTimeCalendarAware` reads calendar availability and appends an event-ledger entry from a projection service; it is user-initiated and local, but not a LocalRuntimeOS command-path proof. | AMB-1667, AMB-1668 |
 | Time rituals actions | `Native/Ambitions/Surfaces/Time/TimeRitualsSurface.swift`, `Native/Ambitions/Surfaces/Time/TimeRitualsViewModel.swift`, `Native/Ambitions/Projection/SurfaceLenses/TimeRitualsProjectionService.swift` | unsafe write | Ritual complete, minimum version, quick log, delay, skip, easier version, and not-relevant actions save feedback, evidence, and goals through `RepositoryBackedTimeRitualsService`. | AMB-1666, AMB-1667 |
-| Confirmed local schedule write command path | `Native/Ambitions/Core/LocalRuntimeOS/Commands/AmbitionsCommandExecutor+CalendarWriteIntent.swift`, `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LocalScheduleBlockRepository.swift`, `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LocalScheduleBlockFileStore.swift`, `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LifeCalendarStore.swift` | canonical command | A `scheduleItem` command path exists under LocalRuntimeOS for confirmed calendar-write intent, and AMB-1731 moved file-backed schedule block helpers under TimeEngine. | AMB-1667, AMB-1717, AMB-1718 |
+| Confirmed local schedule write command path | `Native/Ambitions/Core/LocalRuntimeOS/Commands/AmbitionsCommandExecutor+CalendarWriteIntent.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Scheduling/LocalScheduleBlockRepository.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Scheduling/LocalScheduleBlockFileStore.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Scheduling/LifeCalendarStore.swift` | canonical command | A `scheduleItem` command path exists under LocalRuntimeOS for confirmed calendar-write intent, and AMB-1731 moved file-backed schedule block helpers under Scheduling. | AMB-1667, AMB-1717, AMB-1718 |
 | You appearance/default preference save | `Native/Ambitions/Surfaces/You/YouSurface.swift`, `Native/Ambitions/Surfaces/You/YouRootDetailRouteSurface.swift`, `Native/Ambitions/Surfaces/You/YouScreen+08-YouPlanningHandoffRow.swift`, `Native/Ambitions/Surfaces/You/YouViewModel.swift`, `Native/Ambitions/Projection/SurfaceLenses/YouFeatureService.swift`, `Native/Ambitions/Core/LocalRuntimeOS/ObjectState/YouPreferencesCommandService.swift` | canonical command | Save preferences calls `YouPreferencesCommandService.saveYouPreferences`, builds `AmbitionsCommand(kind: .updateUserPreferences)`, commits through `RuntimeCommandMutationCommitter`, then saves app-state preferences inside the command closure. | AMB-1666 for behavior proof; AMB-1667 if app-state storage authority remains outside canonical storage. |
 | You detail, life context, learning-control, and route-opening controls | `Native/Ambitions/Surfaces/You/YouSurface.swift`, `Native/Ambitions/Surfaces/You/YouScreen+04-YouLifeContextSurface.swift`, `Native/Ambitions/Projection/SurfaceLenses/YouFeatureService*.swift` | projection-only read | The inspected controls expand/focus local detail, route to You destinations, or display source-tied learning/privacy controls. AMB-1707 found no additional persisted private graph mutation in these UI controls. | AMB-1666 if future You controls gain persistence. |
 | You notification permission action | `Native/Ambitions/Surfaces/You/YouSurface.swift`, `Native/Ambitions/Core/Permissions/LocalNotificationFoundation.swift` | adapter into command | Notification opt-in is an OS adapter/system permission action, not a private graph mutation. Scheduling proof remains system-surface scope, not AMB-1707 Green proof. | AMB-1668 |
@@ -488,7 +488,7 @@ proof.
 | Portable snapshot import/restore apply | `Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/PortableSnapshotService.swift`, `Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/PortableSnapshotServiceOperations.swift`, `Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/PortableSnapshotServiceReferenceWarnings.swift` | canonical command | AMB-1731 moved portable snapshot import/export apply source under MigrationRepair. Dry-run, import, restore, rollback, and idempotency remain bounded to focused fixture proof unless broader validation is run. | AMB-1667, AMB-1717, AMB-1720 |
 | Legacy import and demo seed apply | `Native/Ambitions/Core/Persistence/LegacyImportService.swift`, `Native/Ambitions/Core/Persistence/DemoSeedPipeline.swift`, `Native/Ambitions/App/AppContainerFactory.swift` | unsafe write | Legacy import transforms prototype snapshots into domain objects, and demo seed wiring applies seed data through repository services. This is useful migration scaffolding but not canonical Command -> Event -> Projection -> Receipt -> Replay authority proof. | AMB-1667, AMB-1717, AMB-1720 |
 | Store health and diagnostics | `Native/Ambitions/Core/Persistence/StoreHealthCheck.swift`, `Native/Ambitions/Core/Persistence/SupportDiagnosticsBundle.swift`, `Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/StoreInvariantChecker.swift` | adapter into command | Health and diagnostics inspect stores and invariants. `StoreInvariantChecker` is under LocalRuntimeOS and reads SwiftData through `ModelContext`; it does not itself authorize durable repair. | AMB-1667, AMB-1718, AMB-1720 |
-| Local schedule block file storage | `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LocalScheduleBlockFileStore.swift`, `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LocalScheduleBlockRepository.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Commands/AmbitionsCommandExecutor+CalendarWriteIntent.swift`, `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LifeCalendarStore.swift` | canonical command | AMB-1731 moved durable local schedule block file IO out of `Core/Domain` and into TimeEngine. | AMB-1667, AMB-1717, AMB-1718 |
+| Local schedule block file storage | `Native/Ambitions/Core/LocalRuntimeOS/Scheduling/LocalScheduleBlockFileStore.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Scheduling/LocalScheduleBlockRepository.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Commands/AmbitionsCommandExecutor+CalendarWriteIntent.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Scheduling/LifeCalendarStore.swift` | canonical command | AMB-1731 moved durable local schedule block file IO out of `Core/Domain` and into Scheduling. | AMB-1667, AMB-1717, AMB-1718 |
 | Event journal writes | `Native/Ambitions/Core/LocalRuntimeOS/EventJournal/RuntimeEventStore.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Storage/EventStoreSQLite.swift` | canonical command | Event stores append RuntimeEvent envelopes under LocalRuntimeOS, with checksum and append-order validation in source. AMB-1709 does not prove every mutation enters this event path. | AMB-1666, AMB-1667 |
 | Projection store writes | `Native/Ambitions/Core/LocalRuntimeOS/Projections/ProjectionMaterializer.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Projections/ProjectionStoreSurfaceReadAdapter.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Storage/ProjectionStoreSQLite.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Storage/SearchStoreFTS.swift` | canonical command | Projection materialization and SQLite/FTS stores live under LocalRuntimeOS and write derived projection/search records. This is storage authority evidence, not proof that all UI surfaces consume only safe projections. | AMB-1668, AMB-1718 |
 | LocalRuntimeOS object, backup, blob, and migration stores | `Native/Ambitions/Core/LocalRuntimeOS/Storage/ObjectStoreSwiftData.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Storage/BackupStore.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Storage/BlobStoreFileSystem.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Storage/MigrationStore.swift` | canonical command | Canonical storage owners exist under LocalRuntimeOS. `ObjectStoreSwiftData` owns local SwiftData transaction/reset scaffolding and backup/migration/blob stores write runtime-owned records; this does not migrate legacy repository authority or prove data-loss safety. | AMB-1667, AMB-1718, AMB-1720 |
@@ -549,7 +549,7 @@ test-only support.
 
 AMB-1731 removed the AMB-1709/AMB-1719 unsafe direct-write rows from the guard
 by moving the effective source into `Core/LocalRuntimeOS/Storage`,
-`Core/LocalRuntimeOS/MigrationRepair`, and `Core/LocalRuntimeOS/TimeEngine`.
+`Core/LocalRuntimeOS/MigrationRepair`, and `Core/LocalRuntimeOS/Scheduling`.
 Those old paths are now guarded by ownership tests and the direct-write audit.
 
 AMB-1710 statically classifies the preview/debug/test helper families above,

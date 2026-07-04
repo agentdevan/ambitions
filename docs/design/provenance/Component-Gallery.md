@@ -144,8 +144,8 @@ Known previews/tests/quality files:
 - Native/AmbitionsTests/Time/LifeShapeFieldViewReconstructionTests.swift
 - Native/AmbitionsTests/Time/TimeFieldMutationCoordinatorTests.swift
 - Native/AmbitionsTests/Time/TimeProjectionServiceTests.swift
-- Native/AmbitionsTests/LocalRuntimeOS/TimeEngine/TimeEngineTests.swift
-- Native/AmbitionsTests/LocalRuntimeOS/TimeEngine/ProtectedStepPlacementPolicyTests.swift
+- Native/AmbitionsTests/LocalRuntimeOS/Scheduling/SchedulingTests.swift
+- Native/AmbitionsTests/LocalRuntimeOS/Scheduling/ProtectedStepPlacementPolicyTests.swift
 - Native/AmbitionsTests/Time/HorizonCapacityPrimitiveFamilyTests.swift
 - Sources/Previews/RealityMeridianTemporalPreviews.swift
 - Native/Ambitions/Quality/LifeShapeConstructionAudit.swift

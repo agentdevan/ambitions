@@ -37,7 +37,7 @@ private func ambitionsRepoRootForTests() -> URL {
     let removedRuntimeOwner = "removed " + ["Core", "Runtime"].joined(separator: "/")
     let output = try registry.call(name: "repo_architecture_owner_report", arguments: [
         "paths": .array([
-            .string("Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LifeShapeEngine.swift"),
+            .string("Native/Ambitions/Core/LocalRuntimeOS/Scheduling/LifeShapeEngine.swift"),
             .string(removedRuntimePath),
         ]),
     ])

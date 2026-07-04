@@ -421,7 +421,7 @@ This packet recommends Linear hierarchy changes without applying them. It does n
 - **Acceptance criteria:** Parent Feature preserves product law and hard non-goals., Parent Feature cites repo truth, VSP authority if present, source-owner paths, known issue mappings, validation commands, proof artifacts, and proof ceiling., Parent Feature links only bounded Codex leaves that do not invent visual grammar, runtime authority, or release claims.
 - **Repo evidence:** `README.md`, `AGENTS.md`, `docs/truth/README.md`, `docs/truth/CODEX_START_HERE.md`, `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `docs/truth/PRODUCT_ORIGIN_TRUTH.md`, `docs/truth/PRODUCT_MOAT_TRUTH.md`, `docs/truth/PRODUCT_EXPERIENCE_CANON.md`
 - **VSP authority:** VSP-04: Time Native Life Calendar
-- **Source-owner paths:** `Native/Ambitions/Surfaces/Time/TimeSurface.swift`, `Native/Ambitions/Surfaces/Time/TimeObjectView.swift`, `Native/Ambitions/Surfaces/Time/TimeAccessibility.swift`, `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/`
+- **Source-owner paths:** `Native/Ambitions/Surfaces/Time/TimeSurface.swift`, `Native/Ambitions/Surfaces/Time/TimeObjectView.swift`, `Native/Ambitions/Surfaces/Time/TimeAccessibility.swift`, `Native/Ambitions/Core/LocalRuntimeOS/Scheduling/`
 - **Known issue mapping:** AMB-ISSUE-0009, AMB-ISSUE-0501-0507, AMB-ISSUE-0913, AMB-ISSUE-1401-1405
 - **Validation commands:** `git diff --check`, `python3 scripts/ambitions-green-standard-audit.py || true`, `python3 scripts/ambitions-architecture-inventory.py || true`, `python3 scripts/ambitions-vsp-provenance-audit.py || true`
 - **Proof artifacts required:** design/spec dossier, source-owner map, known issue mapping, validation logs, screenshot/accessibility proof for UI, runtime receipt/replay proof for state changes, privacy boundary proof for external data paths
@@ -1004,9 +1004,9 @@ This packet recommends Linear hierarchy changes without applying them. It does n
 ### TimeEngine — bounded reconciliation/proof-gate leaf
 
 - **Parent Feature:** TimeEngine parent feature with product-law non-goals and proof gate.
-- **Source-owner paths:** `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/`, `Native/Ambitions/Surfaces/Time/TimeSurface.swift`, `Native/Ambitions/Surfaces/Time/TimeObjectView.swift`
+- **Source-owner paths:** `Native/Ambitions/Core/LocalRuntimeOS/Scheduling/`, `Native/Ambitions/Surfaces/Time/TimeSurface.swift`, `Native/Ambitions/Surfaces/Time/TimeObjectView.swift`
 - **Exact bounded scope:** Reconcile TimeEngine source-owner paths, VSP/known issue authority, validation commands, proof artifacts, rollback plan, and non-claims; implementation may proceed only after Phase 2/3 acceptance and separate authorization.
-- **Files likely touched:** `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/`, `Native/Ambitions/Surfaces/Time/TimeSurface.swift`, `Native/Ambitions/Surfaces/Time/TimeObjectView.swift`
+- **Files likely touched:** `Native/Ambitions/Core/LocalRuntimeOS/Scheduling/`, `Native/Ambitions/Surfaces/Time/TimeSurface.swift`, `Native/Ambitions/Surfaces/Time/TimeObjectView.swift`
 - **Tests likely required:** `python3 scripts/ambitions-local-runtime-proof.py`, `git diff --check`, `python3 scripts/ambitions-green-standard-audit.py || true`, `python3 scripts/ambitions-architecture-inventory.py || true`
 - **VSP authority:** VSP-04: Time Native Life Calendar (Spec Ready / Yellow; mirror AMB-1483)
 - **Accessibility requirements:** VoiceOver, Dynamic Type, Reduce Motion/Transparency, contrast, hit target, motor path, and screenshots required for UI-affecting scope; otherwise mark not applicable with reason.
@@ -1420,9 +1420,9 @@ This packet recommends Linear hierarchy changes without applying them. It does n
 ### EventKit / Reminders — bounded reconciliation/proof-gate leaf
 
 - **Parent Feature:** EventKit / Reminders parent feature with product-law non-goals and proof gate.
-- **Source-owner paths:** `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/`, `Native/Ambitions/Surfaces/Time/TimeSurface.swift`, `Native/Ambitions/Surfaces/Time/TimeObjectView.swift`, `Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift`, `Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAudit.swift`
+- **Source-owner paths:** `Native/Ambitions/Core/LocalRuntimeOS/Scheduling/`, `Native/Ambitions/Surfaces/Time/TimeSurface.swift`, `Native/Ambitions/Surfaces/Time/TimeObjectView.swift`, `Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift`, `Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAudit.swift`
 - **Exact bounded scope:** Reconcile EventKit / Reminders source-owner paths, VSP/known issue authority, validation commands, proof artifacts, rollback plan, and non-claims; implementation may proceed only after Phase 2/3 acceptance and separate authorization.
-- **Files likely touched:** `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/`, `Native/Ambitions/Surfaces/Time/TimeSurface.swift`, `Native/Ambitions/Surfaces/Time/TimeObjectView.swift`, `Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift`, `Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAudit.swift`
+- **Files likely touched:** `Native/Ambitions/Core/LocalRuntimeOS/Scheduling/`, `Native/Ambitions/Surfaces/Time/TimeSurface.swift`, `Native/Ambitions/Surfaces/Time/TimeObjectView.swift`, `Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift`, `Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAudit.swift`
 - **Tests likely required:** `python3 scripts/ambitions-vsp-provenance-audit.py`, `git diff --check`, `python3 scripts/ambitions-green-standard-audit.py || true`, `python3 scripts/ambitions-architecture-inventory.py || true`
 - **VSP authority:** VSP-04: Time Native Life Calendar (Spec Ready / Yellow; mirror AMB-1483), VSP-08: External Boundary / Account / R2 / Source Atlas (Spec Ready / Yellow; mirror AMB-1487)
 - **Accessibility requirements:** VoiceOver, Dynamic Type, Reduce Motion/Transparency, contrast, hit target, motor path, and screenshots required for UI-affecting scope; otherwise mark not applicable with reason.

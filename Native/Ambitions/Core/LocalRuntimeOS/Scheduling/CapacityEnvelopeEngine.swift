@@ -16,7 +16,7 @@ struct CapacityEnvelope: Codable, Sendable, Equatable, Hashable, Identifiable {
     let recoveryMinutes: Int
     let pressure: TimeCapacityPressure
     let localOnly: Bool
-    let runtimeTrace: TimeEngineRuntimeTrace
+    let runtimeTrace: SchedulingRuntimeTrace
 
     var hasRecoveryMargin: Bool {
         recoveryMinutes >= 30 || availableMinutes >= 60
@@ -46,9 +46,9 @@ struct CapacityEnvelopeEngine: Sendable {
         let available = max(0, capacity - committed)
         let pressure = pressure(committed: committed, capacity: capacity)
         let sourceID = [graph.id, TemporalMath.string(from: horizon.start), TemporalMath.string(from: horizon.end), "\(capacity)", "\(committed)"].joined(separator: "|")
-        let trace = TimeEngineRuntimeTrace.make(owner: "CapacityEnvelopeEngine", sourceID: sourceID, localOnly: graph.localOnly)
+        let trace = SchedulingRuntimeTrace.make(owner: "CapacityEnvelopeEngine", sourceID: sourceID, localOnly: graph.localOnly)
         return CapacityEnvelope(
-            id: TimeEngineStableID.make(prefix: "capacity-envelope", components: [sourceID]),
+            id: SchedulingStableID.make(prefix: "capacity-envelope", components: [sourceID]),
             horizon: horizon,
             committedMinutes: committed,
             availableMinutes: available,

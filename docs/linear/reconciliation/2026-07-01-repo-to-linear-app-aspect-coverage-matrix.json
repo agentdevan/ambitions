@@ -1276,7 +1276,7 @@
         "docs/truth/CODEX_START_HERE.md"
       ],
       "source_owner_paths": [
-        "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
         "Native/Ambitions/Surfaces/Time/TimeSurface.swift",
         "Native/Ambitions/Surfaces/Time/TimeObjectView.swift"
       ],
@@ -2541,7 +2541,7 @@
         "docs/truth/CODEX_START_HERE.md"
       ],
       "source_owner_paths": [
-        "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
         "Native/Ambitions/Surfaces/Time/TimeSurface.swift",
         "Native/Ambitions/Surfaces/Time/TimeObjectView.swift",
         "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift",
@@ -3501,7 +3501,7 @@
         "Native/Ambitions/Surfaces/Time/TimeSurface.swift",
         "Native/Ambitions/Surfaces/Time/TimeObjectView.swift",
         "Native/Ambitions/Surfaces/Time/TimeAccessibility.swift",
-        "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/"
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/"
       ],
       "missing": [
         "SwiftUI Time parity",
