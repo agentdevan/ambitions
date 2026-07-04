@@ -32,7 +32,7 @@ Execution bundles:
 | -- | -- | -- |
 | AMB-1191 | `AMB-1191-theme-design-system.md` | Theme / design system |
 | AMB-1194 | `AMB-1194-shell-stage-os.md` | Shell / Stage OS |
-| AMB-1192 | `AMB-1192-capture-route-graph-composer.md` | Capture |
+| AMB-1192 | `AMB-1192-capture-routing-composer.md` | Capture |
 | AMB-1193 | `AMB-1193-goals-root-detail.md` | Goals |
 | AMB-1195 | `AMB-1195-today-reality-window.md` | Today |
 | AMB-1196 | `AMB-1196-search-find-act-inspect.md` | Search |

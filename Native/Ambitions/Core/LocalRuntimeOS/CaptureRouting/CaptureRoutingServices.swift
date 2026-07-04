@@ -1,6 +1,6 @@
 import Foundation
 
-struct CaptureRouteGraphServices: Sendable {
+struct CaptureRoutingServices: Sendable {
     let intakeJournal: CaptureIntakeJournal
     let draftStore: CaptureDraftStore
     let routeResolver: CaptureRouteResolver
@@ -27,16 +27,16 @@ struct CaptureRouteGraphServices: Sendable {
         self.directLookupIndex = directLookupIndex
     }
 
-    static func inMemory() -> CaptureRouteGraphServices {
-        CaptureRouteGraphServices()
+    static func inMemory() -> CaptureRoutingServices {
+        CaptureRoutingServices()
     }
 
-    static func live(rootDirectory: URL = CaptureRouteGraphJSONFileStore<[CaptureIntakeJournalRecord]>.defaultRootDirectory()) -> CaptureRouteGraphServices {
+    static func live(rootDirectory: URL = CaptureRoutingJSONFileStore<[CaptureIntakeJournalRecord]>.defaultRootDirectory()) -> CaptureRoutingServices {
         fileBacked(rootDirectory: rootDirectory)
     }
 
-    static func fileBacked(rootDirectory: URL) -> CaptureRouteGraphServices {
-        CaptureRouteGraphServices(
+    static func fileBacked(rootDirectory: URL) -> CaptureRoutingServices {
+        CaptureRoutingServices(
             intakeJournal: CaptureIntakeJournal.fileBacked(rootDirectory: rootDirectory),
             draftStore: CaptureDraftStore.fileBacked(rootDirectory: rootDirectory),
             routeResolver: CaptureRouteResolver(),

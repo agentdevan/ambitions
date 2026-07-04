@@ -34,17 +34,17 @@ struct CaptureIntakeJournalAppendRequest: Sendable, Equatable {
         proofIntent: String? = nil,
         privacy: EventLedgerPrivacyClassification = .privateUserText
     ) {
-        self.captureID = CaptureRouteGraphStableID.required(captureID)
+        self.captureID = CaptureRoutingStableID.required(captureID)
         self.rawText = rawText.trimmingCharacters(in: .whitespacesAndNewlines)
         self.sourceType = sourceType
-        self.sourceSurface = CaptureRouteGraphStableID.required(sourceSurface)
-        self.receivedAt = CaptureRouteGraphStableID.required(receivedAt)
-        self.commandID = CaptureRouteGraphStableID.optional(commandID)
-        self.attachmentIDs = CaptureRouteGraphStableID.unique(attachmentIDs)
-        self.deadlineIntent = CaptureRouteGraphStableID.optional(deadlineIntent)
-        self.goalIntent = CaptureRouteGraphStableID.optional(goalIntent)
-        self.stepIntent = CaptureRouteGraphStableID.optional(stepIntent)
-        self.proofIntent = CaptureRouteGraphStableID.optional(proofIntent)
+        self.sourceSurface = CaptureRoutingStableID.required(sourceSurface)
+        self.receivedAt = CaptureRoutingStableID.required(receivedAt)
+        self.commandID = CaptureRoutingStableID.optional(commandID)
+        self.attachmentIDs = CaptureRoutingStableID.unique(attachmentIDs)
+        self.deadlineIntent = CaptureRoutingStableID.optional(deadlineIntent)
+        self.goalIntent = CaptureRoutingStableID.optional(goalIntent)
+        self.stepIntent = CaptureRoutingStableID.optional(stepIntent)
+        self.proofIntent = CaptureRoutingStableID.optional(proofIntent)
         self.privacy = privacy
     }
 }
@@ -85,11 +85,11 @@ struct CaptureIntakeJournalRecord: Codable, Sendable, Equatable, Hashable, Ident
         proofIntent = request.proofIntent
         privacy = request.privacy
         localOnly = true
-        id = CaptureRouteGraphStableID.make(
+        id = CaptureRoutingStableID.make(
             prefix: "capture-intake.record",
             components: [captureID, receivedAt, String(sequence), rawText]
         )
-        checksum = CaptureRouteGraphStableID.checksum(
+        checksum = CaptureRoutingStableID.checksum(
             prefix: "capture-intake.record",
             components: [
                 id,
@@ -122,7 +122,7 @@ struct CaptureIntakeJournalReceipt: Codable, Sendable, Equatable, Hashable, Iden
     let localOnly: Bool
     let acknowledgedAfterDurableWrite: Bool
     let privacy: EventLedgerPrivacyClassification
-    let runtimeTrace: CaptureRouteGraphRuntimeTrace
+    let runtimeTrace: CaptureRoutingRuntimeTrace
 
     init(record: CaptureIntakeJournalRecord, acknowledgedAfterDurableWrite: Bool) {
         journalRecordID = record.id
@@ -133,8 +133,8 @@ struct CaptureIntakeJournalReceipt: Codable, Sendable, Equatable, Hashable, Iden
         localOnly = record.localOnly
         self.acknowledgedAfterDurableWrite = acknowledgedAfterDurableWrite
         privacy = record.privacy
-        runtimeTrace = CaptureRouteGraphRuntimeTrace.make(owner: "CaptureIntakeJournal", sourceID: record.id, localOnly: record.localOnly)
-        id = CaptureRouteGraphStableID.make(prefix: "capture-intake.receipt", components: [record.id, record.checksum])
+        runtimeTrace = CaptureRoutingRuntimeTrace.make(owner: "CaptureIntakeJournal", sourceID: record.id, localOnly: record.localOnly)
+        id = CaptureRoutingStableID.make(prefix: "capture-intake.receipt", components: [record.id, record.checksum])
     }
 
     var canClassify: Bool {
@@ -144,15 +144,15 @@ struct CaptureIntakeJournalReceipt: Codable, Sendable, Equatable, Hashable, Iden
 
 actor CaptureIntakeJournal {
     private var recordsCache: [CaptureIntakeJournalRecord]?
-    private let fileStore: CaptureRouteGraphJSONFileStore<[CaptureIntakeJournalRecord]>?
+    private let fileStore: CaptureRoutingJSONFileStore<[CaptureIntakeJournalRecord]>?
 
     init(fileURL: URL? = nil) {
-        fileStore = fileURL.map { CaptureRouteGraphJSONFileStore(fileURL: $0, emptyValue: []) }
+        fileStore = fileURL.map { CaptureRoutingJSONFileStore(fileURL: $0, emptyValue: []) }
     }
 
     static func fileBacked(rootDirectory: URL) -> CaptureIntakeJournal {
         CaptureIntakeJournal(
-            fileURL: CaptureRouteGraphJSONFileStore<[CaptureIntakeJournalRecord]>.fileURL(
+            fileURL: CaptureRoutingJSONFileStore<[CaptureIntakeJournalRecord]>.fileURL(
                 rootDirectory: rootDirectory,
                 fileName: "CaptureIntakeJournal.json"
             )

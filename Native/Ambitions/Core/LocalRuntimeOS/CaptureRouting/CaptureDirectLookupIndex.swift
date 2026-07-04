@@ -28,12 +28,12 @@ struct CaptureDirectLookupEntry: Codable, Sendable, Equatable, Hashable, Identif
         route = decision.route
         kind = decision.kind
         sourceSurface = intake.sourceSurface
-        rawTextFingerprint = CaptureRouteGraphStableID.checksum(prefix: "capture-text", components: [intake.rawText])
+        rawTextFingerprint = CaptureRoutingStableID.checksum(prefix: "capture-text", components: [intake.rawText])
         attachmentIDs = intake.attachmentIDs
-        self.updatedAt = CaptureRouteGraphStableID.required(updatedAt)
+        self.updatedAt = CaptureRoutingStableID.required(updatedAt)
         privacy = intake.privacy
-        id = CaptureRouteGraphStableID.make(prefix: "capture-lookup", components: [captureID, intakeRecordID, decisionID])
-        checksum = CaptureRouteGraphStableID.checksum(
+        id = CaptureRoutingStableID.make(prefix: "capture-lookup", components: [captureID, intakeRecordID, decisionID])
+        checksum = CaptureRoutingStableID.checksum(
             prefix: "capture-lookup",
             components: [
                 id,
@@ -78,7 +78,7 @@ struct CaptureDirectLookupEntry: Codable, Sendable, Equatable, Hashable, Identif
         self.attachmentIDs = attachmentIDs
         self.updatedAt = updatedAt
         self.privacy = privacy
-        checksum = CaptureRouteGraphStableID.checksum(
+        checksum = CaptureRoutingStableID.checksum(
             prefix: "capture-lookup",
             components: [
                 id,
@@ -108,13 +108,13 @@ struct CaptureDirectLookupEntry: Codable, Sendable, Equatable, Hashable, Identif
             captureID: captureID,
             intakeRecordID: intakeRecordID,
             draftID: draftID,
-            decisionID: CaptureRouteGraphStableID.optional(decisionID) ?? self.decisionID,
+            decisionID: CaptureRoutingStableID.optional(decisionID) ?? self.decisionID,
             route: route,
             kind: kind,
             sourceSurface: sourceSurface,
             rawTextFingerprint: rawTextFingerprint,
             attachmentIDs: attachmentIDs,
-            updatedAt: CaptureRouteGraphStableID.required(updatedAt),
+            updatedAt: CaptureRoutingStableID.required(updatedAt),
             privacy: privacy
         )
     }
@@ -122,15 +122,15 @@ struct CaptureDirectLookupEntry: Codable, Sendable, Equatable, Hashable, Identif
 
 actor CaptureDirectLookupIndex {
     private var entriesCache: [CaptureDirectLookupEntry]?
-    private let fileStore: CaptureRouteGraphJSONFileStore<[CaptureDirectLookupEntry]>?
+    private let fileStore: CaptureRoutingJSONFileStore<[CaptureDirectLookupEntry]>?
 
     init(fileURL: URL? = nil) {
-        fileStore = fileURL.map { CaptureRouteGraphJSONFileStore(fileURL: $0, emptyValue: []) }
+        fileStore = fileURL.map { CaptureRoutingJSONFileStore(fileURL: $0, emptyValue: []) }
     }
 
     static func fileBacked(rootDirectory: URL) -> CaptureDirectLookupIndex {
         CaptureDirectLookupIndex(
-            fileURL: CaptureRouteGraphJSONFileStore<[CaptureDirectLookupEntry]>.fileURL(
+            fileURL: CaptureRoutingJSONFileStore<[CaptureDirectLookupEntry]>.fileURL(
                 rootDirectory: rootDirectory,
                 fileName: "CaptureDirectLookupIndex.json"
             )
@@ -165,7 +165,7 @@ actor CaptureDirectLookupIndex {
     }
 
     func searchTextFingerprint(_ fingerprint: String) async throws -> [CaptureDirectLookupEntry] {
-        let normalized = CaptureRouteGraphStableID.required(fingerprint)
+        let normalized = CaptureRoutingStableID.required(fingerprint)
         return try await loadEntries().filter { $0.rawTextFingerprint == normalized }
     }
 

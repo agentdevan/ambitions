@@ -185,7 +185,7 @@ enum ObjectStateRegistry {
                 tombstoneEntityKind: .capture,
                 runtimeTombstoneFamily: .capture,
                 supersessionPolicy: .appendOnlyRevision,
-                remainingDirectWriteDebt: "Capture writes remain in CaptureRepository until CaptureRouteGraph installs durable intake and promotion transactions."
+                remainingDirectWriteDebt: "Capture writes remain in CaptureRepository until CaptureRouting installs durable intake and promotion transactions."
             ),
             ObjectStateFamilyDescriptor(
                 id: .timeBlock,

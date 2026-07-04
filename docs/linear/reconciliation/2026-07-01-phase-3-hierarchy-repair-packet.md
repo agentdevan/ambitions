@@ -147,11 +147,11 @@ This packet recommends Linear hierarchy changes without applying them. It does n
 | ADD_VSP_AUTHORITY | ADD_VSP_AUTHORITY: TimeEngine | VSP-04 Time Native Life Calendar | TimeEngine needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
 | ADD_VALIDATION_GATE | ADD_VALIDATION_GATE: TimeEngine | VSP-04 Time Native Life Calendar | TimeEngine needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
 | ADD_PROOF_REQUIREMENT | ADD_PROOF_REQUIREMENT: TimeEngine | VSP-04 Time Native Life Calendar | TimeEngine needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
-| CREATE_PARENT_FEATURE | CREATE_PARENT_FEATURE: CaptureRouteGraph | VSP-05 Global Capture Composer | CaptureRouteGraph needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
-| ADD_KNOWN_ISSUE_MAPPING | ADD_KNOWN_ISSUE_MAPPING: CaptureRouteGraph | VSP-05 Global Capture Composer | CaptureRouteGraph needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
-| ADD_VSP_AUTHORITY | ADD_VSP_AUTHORITY: CaptureRouteGraph | VSP-05 Global Capture Composer | CaptureRouteGraph needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
-| ADD_VALIDATION_GATE | ADD_VALIDATION_GATE: CaptureRouteGraph | VSP-05 Global Capture Composer | CaptureRouteGraph needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
-| ADD_PROOF_REQUIREMENT | ADD_PROOF_REQUIREMENT: CaptureRouteGraph | VSP-05 Global Capture Composer | CaptureRouteGraph needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
+| CREATE_PARENT_FEATURE | CREATE_PARENT_FEATURE: CaptureRouting | VSP-05 Global Capture Composer | CaptureRouting needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
+| ADD_KNOWN_ISSUE_MAPPING | ADD_KNOWN_ISSUE_MAPPING: CaptureRouting | VSP-05 Global Capture Composer | CaptureRouting needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
+| ADD_VSP_AUTHORITY | ADD_VSP_AUTHORITY: CaptureRouting | VSP-05 Global Capture Composer | CaptureRouting needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
+| ADD_VALIDATION_GATE | ADD_VALIDATION_GATE: CaptureRouting | VSP-05 Global Capture Composer | CaptureRouting needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
+| ADD_PROOF_REQUIREMENT | ADD_PROOF_REQUIREMENT: CaptureRouting | VSP-05 Global Capture Composer | CaptureRouting needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
 | CREATE_PARENT_FEATURE | CREATE_PARENT_FEATURE: TrustSystem | VSP-07 Trust Inspection Details | TrustSystem needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
 | ADD_KNOWN_ISSUE_MAPPING | ADD_KNOWN_ISSUE_MAPPING: TrustSystem | VSP-07 Trust Inspection Details | TrustSystem needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
 | ADD_VSP_AUTHORITY | ADD_VSP_AUTHORITY: TrustSystem | VSP-07 Trust Inspection Details | TrustSystem needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion. |
@@ -434,7 +434,7 @@ This packet recommends Linear hierarchy changes without applying them. It does n
 - **Target initiative:** Ambitions Native iPhone App Control Plane
 - **Target project:** VSP-05 Global Capture Composer
 - **Target milestone:** Post-VSP repo-to-Linear hierarchy repair
-- **Product object:** Capture, CaptureRouteGraph, Share Extension, Search / Find / Act / Inspect
+- **Product object:** Capture, CaptureRouting, Share Extension, Search / Find / Act / Inspect
 - **Acceptance criteria:** Parent Feature preserves product law and hard non-goals., Parent Feature cites repo truth, VSP authority if present, source-owner paths, known issue mappings, validation commands, proof artifacts, and proof ceiling., Parent Feature links only bounded Codex leaves that do not invent visual grammar, runtime authority, or release claims.
 - **Repo evidence:** `README.md`, `AGENTS.md`, `docs/truth/README.md`, `docs/truth/CODEX_START_HERE.md`, `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `docs/truth/PRODUCT_ORIGIN_TRUTH.md`, `docs/truth/PRODUCT_MOAT_TRUTH.md`, `docs/truth/PRODUCT_EXPERIENCE_CANON.md`
 - **VSP authority:** VSP-05: Capture Open Field Composer
@@ -443,7 +443,7 @@ This packet recommends Linear hierarchy changes without applying them. It does n
 - **Validation commands:** `git diff --check`, `python3 scripts/ambitions-green-standard-audit.py || true`, `python3 scripts/ambitions-architecture-inventory.py || true`, `python3 scripts/ambitions-vsp-provenance-audit.py || true`
 - **Proof artifacts required:** design/spec dossier, source-owner map, known issue mapping, validation logs, screenshot/accessibility proof for UI, runtime receipt/replay proof for state changes, privacy boundary proof for external data paths
 - **Non-claims:** No source implementation is authorized by this packet., No Linear status movement is authorized by this packet., No Linear object creation is performed by this packet., No Visual Green, app-wide Runtime Green, Release Green, TestFlight readiness, App Store readiness, issue closure, or Ready For Codex promotion is claimed.
-- **Child Codex leaf recommendations:** Capture: bounded proof-gate/source-owner reconciliation leaf, CaptureRouteGraph: bounded proof-gate/source-owner reconciliation leaf, Share Extension: bounded proof-gate/source-owner reconciliation leaf, Search / Find / Act / Inspect: bounded proof-gate/source-owner reconciliation leaf
+- **Child Codex leaf recommendations:** Capture: bounded proof-gate/source-owner reconciliation leaf, CaptureRouting: bounded proof-gate/source-owner reconciliation leaf, Share Extension: bounded proof-gate/source-owner reconciliation leaf, Search / Find / Act / Inspect: bounded proof-gate/source-owner reconciliation leaf
 
 ### VSP-06 You Native Settings Parent Feature
 
@@ -536,7 +536,7 @@ This packet recommends Linear hierarchy changes without applying them. It does n
 - **Target initiative:** Private Life Runtime / LocalRuntimeOS
 - **Target project:** LocalRuntimeOS Runtime Spine
 - **Target milestone:** Post-VSP repo-to-Linear hierarchy repair
-- **Product object:** Private Life Runtime, LocalRuntimeOS, CommandSpine, TransactionKernel, EventJournal, ProjectionEngine, ObjectState, Planning, TimeEngine, CaptureRouteGraph, TrustSystem, SearchRecall, SideEffectSystem, SyncContinuity, Diagnostics
+- **Product object:** Private Life Runtime, LocalRuntimeOS, CommandSpine, TransactionKernel, EventJournal, ProjectionEngine, ObjectState, Planning, TimeEngine, CaptureRouting, TrustSystem, SearchRecall, SideEffectSystem, SyncContinuity, Diagnostics
 - **Acceptance criteria:** Parent Feature preserves product law and hard non-goals., Parent Feature cites repo truth, VSP authority if present, source-owner paths, known issue mappings, validation commands, proof artifacts, and proof ceiling., Parent Feature links only bounded Codex leaves that do not invent visual grammar, runtime authority, or release claims.
 - **Repo evidence:** `README.md`, `AGENTS.md`, `docs/truth/README.md`, `docs/truth/CODEX_START_HERE.md`, `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `docs/truth/PRODUCT_ORIGIN_TRUTH.md`, `docs/truth/PRODUCT_MOAT_TRUTH.md`, `docs/truth/PRODUCT_EXPERIENCE_CANON.md`
 - **VSP authority:** VSP-04: Time Native Life Calendar, VSP-05: Capture Open Field Composer, VSP-07: Trust Inspection Details, VSP-08: External Boundary / Account / R2 / Source Atlas, VSP-10: Implementation Anatomy / Source Owner Map
@@ -1017,12 +1017,12 @@ This packet recommends Linear hierarchy changes without applying them. It does n
 - **Proof ceiling:** Yellow
 - **Done criteria:** Linear leaf has bounded scope, owner paths, VSP authority where available, known issue mapping, validation commands, proof requirements, rollback plan, and explicit non-claims., No Green or actual Ready For Codex claim is made by this packet.
 
-### CaptureRouteGraph — bounded reconciliation/proof-gate leaf
+### CaptureRouting — bounded reconciliation/proof-gate leaf
 
-- **Parent Feature:** CaptureRouteGraph parent feature with product-law non-goals and proof gate.
-- **Source-owner paths:** `Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/`, `Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift`, `Native/Ambitions/Composer/Capture/CaptureSurface.swift`
-- **Exact bounded scope:** Reconcile CaptureRouteGraph source-owner paths, VSP/known issue authority, validation commands, proof artifacts, rollback plan, and non-claims; implementation may proceed only after Phase 2/3 acceptance and separate authorization.
-- **Files likely touched:** `Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/`, `Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift`, `Native/Ambitions/Composer/Capture/CaptureSurface.swift`
+- **Parent Feature:** CaptureRouting parent feature with product-law non-goals and proof gate.
+- **Source-owner paths:** `Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/`, `Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift`, `Native/Ambitions/Composer/Capture/CaptureSurface.swift`
+- **Exact bounded scope:** Reconcile CaptureRouting source-owner paths, VSP/known issue authority, validation commands, proof artifacts, rollback plan, and non-claims; implementation may proceed only after Phase 2/3 acceptance and separate authorization.
+- **Files likely touched:** `Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/`, `Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift`, `Native/Ambitions/Composer/Capture/CaptureSurface.swift`
 - **Tests likely required:** `python3 scripts/ambitions-local-runtime-proof.py`, `git diff --check`, `python3 scripts/ambitions-green-standard-audit.py || true`, `python3 scripts/ambitions-architecture-inventory.py || true`
 - **VSP authority:** VSP-05: Capture Open Field Composer (Spec Ready / Yellow; mirror AMB-1484)
 - **Accessibility requirements:** VoiceOver, Dynamic Type, Reduce Motion/Transparency, contrast, hit target, motor path, and screenshots required for UI-affecting scope; otherwise mark not applicable with reason.

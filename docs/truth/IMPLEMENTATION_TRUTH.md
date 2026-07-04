@@ -197,9 +197,9 @@ Current implementation evidence is narrower:
 - The former `Core/Domain`, `Core/Persistence`, and legacy runtime SourceAtlas owner files and their old `Native/AmbitionsTests/Domain`, `Native/AmbitionsTests/Persistence`, and `Native/AmbitionsTests/Runtime` SourceAtlas test owners were removed from those owners.
 - Focused simulator tests cover SourceAtlas owner files, old owner removal, public-only request compilation, private-graph request rejection, safe R2 GET request metadata compilation for public reference objects, manifest hash/signature verification, freshness evaluation, last-known-good cache selection, and SourceAtlas projection materialization.
 - SourceAtlas proof remains bounded to local source/test behavior. It does not prove R2 production deployment, public transparency logs, production signing operations, app-wide SourceAtlas consumption, or full LocalRuntimeOS completion.
-- Source-present CaptureRouteGraph foundation source exists under `Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/`, including `CaptureIntakeJournal`, `CaptureDraftStore`, `CaptureClassifier`, `CaptureRouteResolver`, `CaptureAttachmentVault`, `CapturePromotionTransaction`, `CaptureCorrectionLedger`, and `CaptureDirectLookupIndex`.
-- The former `Core/Domain` CaptureRouteGraph and CaptureRouteCommandMapping owner files were removed from that owner.
-- Focused simulator tests cover CaptureRouteGraph owner files, old owner removal, durable intake before classification, route-decision event traces, draft and direct-lookup indexing, attachment checksum/quarantine behavior, correction ledger writes, promotion transaction receipts, and DefaultCaptureService create/promotion routing through CaptureRouteGraph.
+- Source-present CaptureRouting foundation source exists under `Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/`, including `CaptureIntakeJournal`, `CaptureDraftStore`, `CaptureClassifier`, `CaptureRouteResolver`, `CaptureAttachmentVault`, `CapturePromotionTransaction`, `CaptureCorrectionLedger`, and `CaptureDirectLookupIndex`.
+- The former `Core/Domain` CaptureRouting and CaptureRouteCommandMapping owner files were removed from that owner.
+- Focused simulator tests cover CaptureRouting owner files, old owner removal, durable intake before classification, route-decision event traces, draft and direct-lookup indexing, attachment checksum/quarantine behavior, correction ledger writes, promotion transaction receipts, and DefaultCaptureService create/promotion routing through CaptureRouting.
 - Source-present Inspection source exists under `Native/Ambitions/Core/LocalRuntimeOS/Inspection/`, including event ledger models, action receipt history models, action receipt proof ledger models, `ProofLedger`, `SourceRecordLedger`, entity revision tombstones, ledger replay models, `AuditTrail`, `UndoLedger`, `HistoryQueryEngine`, trust repository contracts, SwiftData trust repositories, unavailable trust repositories, and the goal-intent receipt persistence recorder.
 - The former `Core/Domain` receipt/event/proof/tombstone/replay model owner files, the former legacy runtime `ProofLedger.swift` owner file, and the former `Core/Persistence` trust-history and goal-intent receipt recorder owner files were removed from those owners.
 - Focused Inspection test source covers canonical owner files, old owner removal, and command/event/receipt/proof/source/audit/undo/history/replay planning behavior. This is source/build scope only unless current closeout proof shows simulator execution.
@@ -219,7 +219,7 @@ Unsupported implementation claims until future source proof exists:
 - every app path treats SwiftData only as the object store tier
 - SQLite/FTS-backed journal, projection, and search stores are active across all production mutation/read paths
 - every external side-effect path is fully outboxed with leases, retry, confirmation, and receipts
-- every capture entrypoint, extension, widget/App Intent bridge, attachment flow, and direct repository fallback path is forced through the durable CaptureRouteGraph before classification/promotion
+- every capture entrypoint, extension, widget/App Intent bridge, attachment flow, and direct repository fallback path is forced through the durable CaptureRouting before classification/promotion
 - every trust/proof/source/history/receipt/undo path is produced and consumed only through Inspection
 - Source Atlas is a signed public-reference package manager
 - CloudKit continuity is approved or implemented as user-owned event-envelope sync
@@ -427,9 +427,9 @@ Implementation truth: You source exists. Profile compatibility symbols may remai
 
 ### Capture
 
-Source-present evidence: `Native/Ambitions/Composer/Capture/CaptureSurface.swift`, `Native/Ambitions/Composer/Capture/CaptureAtmosphereComposer.swift`, `Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/`, `Native/Ambitions/Projection/OverlayScenes/CaptureStageScene.swift`, and `Native/Ambitions/Projection/OverlayLenses/CaptureLens.swift`.
+Source-present evidence: `Native/Ambitions/Composer/Capture/CaptureSurface.swift`, `Native/Ambitions/Composer/Capture/CaptureAtmosphereComposer.swift`, `Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/`, `Native/Ambitions/Projection/OverlayScenes/CaptureStageScene.swift`, and `Native/Ambitions/Projection/OverlayLenses/CaptureLens.swift`.
 
-Implementation truth: Capture source exists. CaptureRouteGraph now has a source-present LocalRuntimeOS owner for durable intake, classification, route resolution, attachment staging, correction, direct lookup, and promotion receipts. Capture may still contain old route/screen assumptions outside that bounded source slice. Product truth says Capture is the global typed route graph and full-screen Stage composer, not a root tab. Final global composer behavior remains unproven unless current proof exists.
+Implementation truth: Capture source exists. CaptureRouting now has a source-present LocalRuntimeOS owner for durable intake, classification, route resolution, attachment staging, correction, direct lookup, and promotion receipts. Capture may still contain old route/screen assumptions outside that bounded source slice. Product truth says Capture is the global typed route graph and full-screen Stage composer, not a root tab. Final global composer behavior remains unproven unless current proof exists.
 
 ### Motion
 

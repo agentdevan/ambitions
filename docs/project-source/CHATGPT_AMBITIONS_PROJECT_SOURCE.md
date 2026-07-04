@@ -13,7 +13,7 @@
 
 1. AMB-1191 Theme / Design System Tokens
 2. AMB-1194 Shell / Stage OS
-3. AMB-1192 Capture Route Graph + Composer
+3. AMB-1192 Capture Routing + Composer
 4. AMB-1193 Goals Root / Detail Rebuild
 5. AMB-1195 Today Reality Window / Action Gating
 6. AMB-1196 Search Find / Act / Inspect

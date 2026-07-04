@@ -36,7 +36,7 @@ REQUIRED_LOCAL_RUNTIME_OWNERS = [
     "PrivateLifeRuntimeKernel",
     "Planning",
     "Scheduling",
-    "CaptureRouteGraph",
+    "CaptureRouting",
     "Inspection",
     "Search",
     "ExternalWrites",
@@ -1626,25 +1626,25 @@ def check_sync_continuity_backend_authority_gate() -> CheckResult:
 def check_capture_intake_durability_gate() -> CheckResult:
     findings: list[Finding] = []
     required_markers = {
-        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureDurableIntakePipeline.swift": [
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/CaptureDurableIntakePipeline.swift": [
             "struct CaptureDurableIntakePipeline",
             "try await services.intakeJournal.append",
             "try await services.intakeJournal.record",
             "try await services.attachmentVault.stage",
             "services.routeResolver.resolve",
-            "CaptureRouteGraphPreparation",
+            "CaptureRoutingPreparation",
         ],
-        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureRouteGraphServices.swift": [
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/CaptureRoutingServices.swift": [
             "func durableIntakePipeline() -> CaptureDurableIntakePipeline",
         ],
-        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureService+04-DefaultCaptureService.swift": [
-            "captureRouteGraph.durableIntakePipeline().prepareAcceptedInput",
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/DefaultCaptureServiceRouting.swift": [
+            "captureRouting.durableIntakePipeline().prepareAcceptedInput",
         ],
-        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureAttachmentVault.swift": [
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/CaptureAttachmentVault.swift": [
             "case missingDurableIntake",
             "guard request.intakeRecordID != nil",
         ],
-        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CapturePromotionTransaction.swift": [
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/CapturePromotionTransaction.swift": [
             "attachmentRecordIDs",
             "attachmentChecksums",
             "trustReceiptID",
@@ -1652,16 +1652,16 @@ def check_capture_intake_durability_gate() -> CheckResult:
             "replayHistoryID",
             "runtimeEvent.metadata[\"capturePromotionReceiptID\"] == id",
         ],
-        ROOT / "Native/AmbitionsTests/LocalRuntimeOS/CaptureRouteGraph/CaptureRouteGraphTests.swift": [
+        ROOT / "Native/AmbitionsTests/LocalRuntimeOS/CaptureRouting/CaptureRoutingTests.swift": [
             "testDurablePipelineRecordsAcceptedExternalSourcesBeforeClassificationAndSurvivesRestart",
             "testDurablePipelineStagesAttachmentsAfterIntakeBeforePromotion",
             "testPromotionTransactionAndCorrectionLedgerUseDurableIntake",
             "testDirectLookupSurvivesRestartAfterCorrectionFlow",
         ],
         ROOT / "Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift": [
-            "CaptureRouteGraphServices.fileBacked",
-            "captureRouteGraph.intakeJournal.records",
-            "captureRouteGraph.directLookupIndex.entry",
+            "CaptureRoutingServices.fileBacked",
+            "captureRouting.intakeJournal.records",
+            "captureRouting.directLookupIndex.entry",
         ],
     }
     for path, markers in required_markers.items():
@@ -1689,7 +1689,7 @@ def check_capture_intake_durability_gate() -> CheckResult:
                     )
                 )
 
-    pipeline_path = ROOT / "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureDurableIntakePipeline.swift"
+    pipeline_path = ROOT / "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/CaptureDurableIntakePipeline.swift"
     if pipeline_path.exists():
         pipeline = read_text(pipeline_path)
         append_index = pipeline.find("try await services.intakeJournal.append")
@@ -1718,8 +1718,8 @@ def check_capture_intake_durability_gate() -> CheckResult:
             )
 
     allowed_route_resolution_paths = {
-        "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureDurableIntakePipeline.swift",
-        "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureRouteResolver.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/CaptureDurableIntakePipeline.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/CaptureRouteResolver.swift",
     }
     for path in production_swift_files():
         rel = relative(path)
@@ -1736,7 +1736,7 @@ def check_capture_intake_durability_gate() -> CheckResult:
                     "Capture classification/route resolution must go through CaptureDurableIntakePipeline after durable intake.",
                 )
             )
-        if "attachmentVault.stage(" in text and rel != "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureDurableIntakePipeline.swift":
+        if "attachmentVault.stage(" in text and rel != "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/CaptureDurableIntakePipeline.swift":
             findings.append(
                 Finding(
                     "blocker",

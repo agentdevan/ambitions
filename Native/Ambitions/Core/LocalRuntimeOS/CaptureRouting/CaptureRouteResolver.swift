@@ -26,11 +26,11 @@ struct CaptureRouteResolveRequest: Sendable, Equatable {
         self.rawText = rawText.trimmingCharacters(in: .whitespacesAndNewlines)
         self.requestedKind = requestedKind
         self.requestedRoute = requestedRoute
-        self.deadlineText = CaptureRouteGraphStableID.optional(deadlineText)
+        self.deadlineText = CaptureRoutingStableID.optional(deadlineText)
         self.contextLensHint = contextLensHint
         self.priorityHints = priorityHints
         self.sourceType = sourceType
-        self.sourceSurface = CaptureRouteGraphStableID.required(sourceSurface)
+        self.sourceSurface = CaptureRoutingStableID.required(sourceSurface)
     }
 }
 
@@ -52,7 +52,7 @@ struct CaptureRouteDecision: Codable, Sendable, Equatable, Hashable, Identifiabl
     let sourceSurface: String
     let privacy: EventLedgerPrivacyClassification
     let runtimeEvent: RuntimeEvent
-    let runtimeTrace: CaptureRouteGraphRuntimeTrace
+    let runtimeTrace: CaptureRoutingRuntimeTrace
     let checksum: String
 
     init(
@@ -74,11 +74,11 @@ struct CaptureRouteDecision: Codable, Sendable, Equatable, Hashable, Identifiabl
         sourceType = request.sourceType
         sourceSurface = request.sourceSurface
         privacy = request.intakeReceipt.privacy
-        id = CaptureRouteGraphStableID.make(
-            prefix: "capture-route.decision",
+        id = CaptureRoutingStableID.make(
+            prefix: "capture-routing.decision",
             components: [intakeRecordID, captureID, route.rawValue, kind.rawValue]
         )
-        runtimeTrace = CaptureRouteGraphRuntimeTrace.make(owner: "CaptureRouteResolver", sourceID: id)
+        runtimeTrace = CaptureRoutingRuntimeTrace.make(owner: "CaptureRouteResolver", sourceID: id)
         runtimeEvent = RuntimeEvent(
             commandID: request.intakeReceipt.runtimeTrace.commandID,
             actor: .user,
@@ -102,8 +102,8 @@ struct CaptureRouteDecision: Codable, Sendable, Equatable, Hashable, Identifiabl
                 "sourceSurface": sourceSurface
             ]
         )
-        checksum = CaptureRouteGraphStableID.checksum(
-            prefix: "capture-route.decision",
+        checksum = CaptureRoutingStableID.checksum(
+            prefix: "capture-routing.decision",
             components: [
                 id,
                 intakeRecordID,

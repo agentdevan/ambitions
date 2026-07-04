@@ -1,7 +1,7 @@
 import Foundation
 
 extension DefaultCaptureService {
-    func prepareCaptureRouteGraphDecision(
+    func prepareCaptureRoutingDecision(
         captureID: String,
         rawText: String,
         sourceType: CaptureSourceType?,
@@ -15,8 +15,8 @@ extension DefaultCaptureService {
         linkedGoalID: String?,
         scopeItemHint: String?,
         proofIntent: String?
-    ) async throws -> CaptureRouteGraphPreparation {
-        try await captureRouteGraph.durableIntakePipeline().prepareAcceptedInput(
+    ) async throws -> CaptureRoutingPreparation {
+        try await captureRouting.durableIntakePipeline().prepareAcceptedInput(
             CaptureDurableIntakeRequest(
                 captureID: captureID,
                 rawText: rawText,
@@ -37,10 +37,10 @@ extension DefaultCaptureService {
     }
 
     func durableIntakeReceipt(for capture: Capture, now: Date) async throws -> CaptureIntakeJournalReceipt {
-        if let record = try await captureRouteGraph.intakeJournal.latestRecord(captureID: capture.id) {
+        if let record = try await captureRouting.intakeJournal.latestRecord(captureID: capture.id) {
             return CaptureIntakeJournalReceipt(record: record, acknowledgedAfterDurableWrite: true)
         }
-        return try await captureRouteGraph.intakeJournal.append(
+        return try await captureRouting.intakeJournal.append(
             CaptureIntakeJournalAppendRequest(
                 captureID: capture.id,
                 rawText: capture.rawText,
@@ -62,13 +62,13 @@ extension DefaultCaptureService {
         request: CaptureRouteUpdateRequest,
         occurredAt: String
     ) async throws {
-        let lookupEntry = try await captureRouteGraph.directLookupIndex.updateRoute(
+        let lookupEntry = try await captureRouting.directLookupIndex.updateRoute(
             captureID: updated.id,
             route: updated.route,
             kind: updated.kind,
             updatedAt: occurredAt
         )
-        _ = try await captureRouteGraph.correctionLedger.append(
+        _ = try await captureRouting.correctionLedger.append(
             CaptureCorrectionLedgerRequest(
                 captureID: updated.id,
                 previousRoute: existing.route,
@@ -93,7 +93,7 @@ extension DefaultCaptureService {
         summary: String,
         privacy: EventLedgerPrivacyClassification
     ) async throws {
-        _ = try await captureRouteGraph.promotionTransaction.prepare(
+        _ = try await captureRouting.promotionTransaction.prepare(
             CapturePromotionTransactionRequest(
                 intakeReceipt: intakeReceipt,
                 captureID: captureID,

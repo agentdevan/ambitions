@@ -205,7 +205,7 @@
 | `Native/Ambitions/Core/Domain/CaptureModels+04-Capture.swift` | Core/Domain | Core/Domain | Core/Domain | Keep | 89.7 | Green | 0 | 0 | 0 | 0 | 0 | No SCG-005 repair required; keep under normal owner review. |
 | `Native/Ambitions/Core/Domain/CaptureModels.swift` | Core/Domain | Core/Domain | Core/Domain | Keep | 89.7 | Green | 0 | 0 | 0 | 0 | 0 | No SCG-005 repair required; keep under normal owner review. |
 | `Native/Ambitions/Core/Domain/CaptureRouteCommandMapping.swift` | Core/Domain | Core/Domain | Core/Domain | Keep | 89.7 | Green | 0 | 0 | 0 | 0 | 0 | No SCG-005 repair required; keep under normal owner review. |
-| `Native/Ambitions/Core/Domain/CaptureRouteGraph.swift` | Core/Domain | Core/Domain | Core/Domain | Keep | 89.7 | Green | 0 | 0 | 0 | 0 | 0 | No SCG-005 repair required; keep under normal owner review. |
+| `Native/Ambitions/Core/Domain/CaptureRouting.swift` | Core/Domain | Core/Domain | Core/Domain | Keep | 89.7 | Green | 0 | 0 | 0 | 0 | 0 | No SCG-005 repair required; keep under normal owner review. |
 | `Native/Ambitions/Core/Domain/CaptureRuntimeReceipt+02-SmartAttachmentResult.swift` | Core/Domain | Core/Domain | Core/Domain | Keep | 89.7 | Green | 0 | 0 | 0 | 0 | 0 | No SCG-005 repair required; keep under normal owner review. |
 | `Native/Ambitions/Core/Domain/CaptureRuntimeReceipt+03-SmartAttachmentResult+03-captureRuntimeDetectedSummary.swift` | Core/Domain | Core/Domain | Core/Domain | Keep | 89.7 | Green | 0 | 0 | 0 | 0 | 0 | No SCG-005 repair required; keep under normal owner review. |
 | `Native/Ambitions/Core/Domain/CaptureRuntimeReceipt+03-SmartAttachmentResult.swift` | Core/Domain | Core/Domain | Core/Domain | Keep | 89.7 | Green | 0 | 0 | 0 | 0 | 0 | No SCG-005 repair required; keep under normal owner review. |
@@ -518,9 +518,9 @@
 | `Native/Ambitions/Core/Runtime/CanonicalNowStateProjector+02-CanonicalNowStateProjector.swift` | Core/Runtime | Core/Runtime | Core/Runtime | Keep | 89.7 | Green | 0 | 0 | 0 | 0 | 0 | No SCG-005 repair required; keep under normal owner review. |
 | `Native/Ambitions/Core/Runtime/CanonicalNowStateProjector.swift` | Core/Runtime | Core/Runtime | Core/Runtime | Keep | 89.7 | Green | 0 | 0 | 0 | 0 | 0 | No SCG-005 repair required; keep under normal owner review. |
 | `Native/Ambitions/Core/Runtime/CapacityEngine.swift` | Core/Runtime | Core/Runtime | Core/Runtime | Keep | 89.7 | Green | 0 | 0 | 0 | 0 | 0 | No SCG-005 repair required; keep under normal owner review. |
-| `Native/Ambitions/Core/Runtime/CaptureService+02-CaptureDraftRouteService.swift` | Core/Runtime | Core/Runtime | Core/Runtime | Keep | 89.7 | Green | 0 | 0 | 0 | 0 | 0 | No SCG-005 repair required; keep under normal owner review. |
-| `Native/Ambitions/Core/Runtime/CaptureService+03-DefaultCaptureService.swift` | Core/Runtime | Core/Runtime | Core/Runtime | Keep | 89.7 | Green | 0 | 0 | 0 | 0 | 0 | No SCG-005 repair required; keep under normal owner review. |
-| `Native/Ambitions/Core/Runtime/CaptureService+04-DefaultCaptureService.swift` | Core/Runtime | Core/Runtime | Core/Runtime | Keep | 89.7 | Green | 0 | 0 | 0 | 0 | 0 | No SCG-005 repair required; keep under normal owner review. |
+| `Native/Ambitions/Core/Runtime/CaptureDraftRouteService.swift` | Core/Runtime | Core/Runtime | Core/Runtime | Keep | 89.7 | Green | 0 | 0 | 0 | 0 | 0 | No SCG-005 repair required; keep under normal owner review. |
+| `Native/Ambitions/Core/Runtime/DefaultCaptureService.swift` | Core/Runtime | Core/Runtime | Core/Runtime | Keep | 89.7 | Green | 0 | 0 | 0 | 0 | 0 | No SCG-005 repair required; keep under normal owner review. |
+| `Native/Ambitions/Core/Runtime/DefaultCaptureServiceRouting.swift` | Core/Runtime | Core/Runtime | Core/Runtime | Keep | 89.7 | Green | 0 | 0 | 0 | 0 | 0 | No SCG-005 repair required; keep under normal owner review. |
 | `Native/Ambitions/Core/Runtime/CaptureService.swift` | Core/Runtime | Core/Runtime | Core/Runtime | Keep | 89.7 | Green | 0 | 0 | 0 | 0 | 0 | No SCG-005 repair required; keep under normal owner review. |
 | `Native/Ambitions/Core/Runtime/ClosureEngine.swift` | Core/Runtime | Core/Runtime | Core/Runtime | Keep | 89.7 | Green | 0 | 0 | 0 | 0 | 0 | No SCG-005 repair required; keep under normal owner review. |
 | `Native/Ambitions/Core/Runtime/DedicatedDevicePrototypeRuntime.swift` | Core/Runtime | Core/Runtime | Core/Runtime | Keep | 89.7 | Green | 0 | 0 | 0 | 0 | 0 | No SCG-005 repair required; keep under normal owner review. |
@@ -1921,7 +1921,7 @@
 | `docs/qa/remediation/2026-06-22-codex-remediation-law.md` | Docs | Docs | Docs | Keep | 90.5 | Green | 0 | 0 | 0 | 0 | 0 | No SCG-005 repair required; keep under normal owner review. |
 | `docs/qa/remediation/README.md` | Docs | Docs | Docs | Keep | 90.5 | Green | 0 | 0 | 0 | 0 | 0 | No SCG-005 repair required; keep under normal owner review. |
 | `docs/qa/remediation/dossiers/AMB-1191-theme-design-system.md` | Docs | Docs | Docs | Keep | 90.5 | Green | 0 | 0 | 0 | 0 | 0 | No SCG-005 repair required; keep under normal owner review. |
-| `docs/qa/remediation/dossiers/AMB-1192-capture-route-graph-composer.md` | Docs | Docs | Docs | Keep | 90.5 | Green | 0 | 0 | 0 | 0 | 0 | No SCG-005 repair required; keep under normal owner review. |
+| `docs/qa/remediation/dossiers/AMB-1192-capture-routing-composer.md` | Docs | Docs | Docs | Keep | 90.5 | Green | 0 | 0 | 0 | 0 | 0 | No SCG-005 repair required; keep under normal owner review. |
 | `docs/qa/remediation/dossiers/AMB-1193-goals-root-detail.md` | Docs | Docs | Docs | Keep | 90.5 | Green | 0 | 0 | 0 | 0 | 0 | No SCG-005 repair required; keep under normal owner review. |
 | `docs/qa/remediation/dossiers/AMB-1194-shell-stage-os.md` | Docs | Docs | Docs | Keep | 90.5 | Green | 0 | 0 | 0 | 0 | 0 | No SCG-005 repair required; keep under normal owner review. |
 | `docs/qa/remediation/dossiers/AMB-1195-today-reality-window.md` | Docs | Docs | Docs | Keep | 90.5 | Green | 0 | 0 | 0 | 0 | 0 | No SCG-005 repair required; keep under normal owner review. |

@@ -16,7 +16,7 @@ Known issues: `docs/qa/KNOWN_ISSUES.md`
 | -- | -- | -- | -- |
 | 1 | AMB-1191 | AMB-1191-theme-design-system.md | Theme / design system |
 | 2 | AMB-1194 | AMB-1194-shell-stage-os.md | Shell / Stage OS |
-| 3 | AMB-1192 | AMB-1192-capture-route-graph-composer.md | Capture |
+| 3 | AMB-1192 | AMB-1192-capture-routing-composer.md | Capture |
 | 4 | AMB-1193 | AMB-1193-goals-root-detail.md | Goals |
 | 5 | AMB-1195 | AMB-1195-today-reality-window.md | Today |
 | 6 | AMB-1196 | AMB-1196-search-find-act-inspect.md | Search |

@@ -8,7 +8,7 @@ struct DefaultCaptureService: CaptureServicing {
     let capturePromotionUnitOfWork: (any CapturePromotionUnitOfWorking)?
     let eventLedger: (any EventLedgerRepository)?
     let simpleStepLifecycleService: SimpleStepLifecycleService?
-    let captureRouteGraph: CaptureRouteGraphServices
+    let captureRouting: CaptureRoutingServices
     let idProvider: @Sendable () -> String
 
     init(
@@ -19,7 +19,7 @@ struct DefaultCaptureService: CaptureServicing {
         capturePromotionUnitOfWork: (any CapturePromotionUnitOfWorking)? = nil,
         eventLedger: (any EventLedgerRepository)? = nil,
         simpleStepLifecycleService: SimpleStepLifecycleService? = nil,
-        captureRouteGraph: CaptureRouteGraphServices = .inMemory(),
+        captureRouting: CaptureRoutingServices = .inMemory(),
         idProvider: @escaping @Sendable () -> String = { DomainIdentifier.prefixed("capture") }
     ) {
         self.repository = repository
@@ -29,7 +29,7 @@ struct DefaultCaptureService: CaptureServicing {
         self.capturePromotionUnitOfWork = capturePromotionUnitOfWork
         self.eventLedger = eventLedger
         self.simpleStepLifecycleService = simpleStepLifecycleService
-        self.captureRouteGraph = captureRouteGraph
+        self.captureRouting = captureRouting
         self.idProvider = idProvider
     }
 
@@ -41,7 +41,7 @@ struct DefaultCaptureService: CaptureServicing {
 
         let timestamp = DomainTimestamp.string(from: now)
         let captureID = idProvider()
-        let routeGraphPreparation = try await prepareCaptureRouteGraphDecision(
+        let routingPreparation = try await prepareCaptureRoutingDecision(
             captureID: captureID,
             rawText: trimmed,
             sourceType: request.sourceType,
@@ -56,7 +56,7 @@ struct DefaultCaptureService: CaptureServicing {
             scopeItemHint: request.scopeItemHint,
             proofIntent: request.route == .proofItem || request.route == .goalAttachment ? trimmed : nil
         )
-        let classification = routeGraphPreparation.decision.classification
+        let classification = routingPreparation.decision.classification
         let stepRouting: CaptureStepRoutingResult?
         if request.linkedGoalID == nil, request.goalRelationship?.goalID == nil {
             stepRouting = try await createStepIfNeeded(
@@ -71,13 +71,13 @@ struct DefaultCaptureService: CaptureServicing {
         }
         if let stepRouting {
             try await preparePromotionTransaction(
-                intakeReceipt: routeGraphPreparation.intakeReceipt,
+                intakeReceipt: routingPreparation.intakeReceipt,
                 captureID: captureID,
                 destination: .step,
                 targetObjectIDs: [stepRouting.goalID, stepRouting.stepID],
                 occurredAt: timestamp,
                 summary: "Capture promoted into a local Step before capture persistence commit.",
-                privacy: routeGraphPreparation.intakeReceipt.privacy
+                privacy: routingPreparation.intakeReceipt.privacy
             )
         }
         let capture = Capture(

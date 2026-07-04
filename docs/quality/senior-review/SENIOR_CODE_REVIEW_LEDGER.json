@@ -10192,7 +10192,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Domain/CaptureRouteGraph.swift",
+      "path": "Native/Ambitions/Core/Domain/CaptureRouting.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -27982,7 +27982,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Runtime/CaptureService+02-CaptureDraftRouteService.swift",
+      "path": "Native/Ambitions/Core/Runtime/CaptureDraftRouteService.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -28038,7 +28038,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Runtime/CaptureService+03-DefaultCaptureService.swift",
+      "path": "Native/Ambitions/Core/Runtime/DefaultCaptureService.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -28094,7 +28094,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/Runtime/CaptureService+04-DefaultCaptureService.swift",
+      "path": "Native/Ambitions/Core/Runtime/DefaultCaptureServiceRouting.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",
@@ -109645,7 +109645,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "docs/qa/remediation/dossiers/AMB-1192-capture-route-graph-composer.md",
+      "path": "docs/qa/remediation/dossiers/AMB-1192-capture-routing-composer.md",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",

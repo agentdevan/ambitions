@@ -14,7 +14,7 @@ The 2026-06-24 risk-register import is evidence only. It does not create a third
 |---|---|---|
 | `AMB-1191` | `docs/qa/remediation/dossiers/AMB-1191-theme-design-system.md` | Light Mode / theme / hard-coded dark color rows: `AMB-ISSUE-1901`–`1906`, `1503`, `0802` |
 | `AMB-1194` | `docs/qa/remediation/dossiers/AMB-1194-shell-stage-os.md` | Shell / dock / header / full-bleed rows: `AMB-ISSUE-0006`, `0007`, `0806`, `0901`, `0902`, `1011`, `1701`–`1709` |
-| `AMB-1192` | `docs/qa/remediation/dossiers/AMB-1192-capture-route-graph-composer.md` | Capture rows: `AMB-ISSUE-0002`, `0003`, `0008`, `0012`, `0201`–`0205`, `1101`–`1111` |
+| `AMB-1192` | `docs/qa/remediation/dossiers/AMB-1192-capture-routing-composer.md` | Capture rows: `AMB-ISSUE-0002`, `0003`, `0008`, `0012`, `0201`–`0205`, `1101`–`1111` |
 | `AMB-1193` | `docs/qa/remediation/dossiers/AMB-1193-goals-root-detail.md` | Goals rows: `AMB-ISSUE-0401`–`0406`, `1301`–`1309` |
 | `AMB-1195` | `docs/qa/remediation/dossiers/AMB-1195-today-reality-window.md` | Today / Closure-gating rows: `AMB-ISSUE-0001`, `0004`, `0005`, `0016`, `0101`–`0108`, `1001`–`1011`, `1201` |
 | `AMB-1196` | `docs/qa/remediation/dossiers/AMB-1196-search-find-act-inspect.md` | Search rows: `AMB-ISSUE-0701`, `1601`–`1605` |

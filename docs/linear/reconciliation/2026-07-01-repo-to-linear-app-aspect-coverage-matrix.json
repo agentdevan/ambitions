@@ -1316,7 +1316,7 @@
       "phase_4_eligibility": "OWNER_REVIEW_REQUIRED"
     },
     {
-      "app_aspect": "CaptureRouteGraph",
+      "app_aspect": "CaptureRouting",
       "category": "Private Life Runtime / Local Backend",
       "coverage_verdict": "partial",
       "product_role": "Routes capture intake into local proposals, objects, and receipts.",
@@ -1328,7 +1328,7 @@
         "docs/truth/CODEX_START_HERE.md"
       ],
       "source_owner_paths": [
-        "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/",
+        "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/",
         "Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift",
         "Native/Ambitions/Composer/Capture/CaptureSurface.swift"
       ],
@@ -1356,10 +1356,10 @@
         "VSP-05 Global Capture Composer"
       ],
       "required_design_spec_dossier": "VSP-05 Global Capture Composer dossier with mission, product meaning, owner paths, validation gates, VSP authority, and proof ceilings.",
-      "required_parent_feature": "CaptureRouteGraph parent feature with product-law non-goals and proof gate.",
+      "required_parent_feature": "CaptureRouting parent feature with product-law non-goals and proof gate.",
       "required_codex_leaves": [
-        "CaptureRouteGraph: source-owner/proof-gate reconciliation leaf",
-        "CaptureRouteGraph: bounded parity or runtime proof leaf only after Phase 2/3 hierarchy is accepted"
+        "CaptureRouting: source-owner/proof-gate reconciliation leaf",
+        "CaptureRouting: bounded parity or runtime proof leaf only after Phase 2/3 hierarchy is accepted"
       ],
       "validation_proof_required": [
         "Repo evidence cross-reference to truth, VSP provenance, source-owner paths, and known issues.",
@@ -3516,7 +3516,7 @@
       "ceiling": "Spec Ready / Yellow",
       "aspects": [
         "Capture",
-        "CaptureRouteGraph",
+        "CaptureRouting",
         "Share Extension"
       ],
       "owners": [
@@ -3701,7 +3701,7 @@
       "Storage",
       "PlanningEngine",
       "TimeEngine",
-      "CaptureRouteGraph",
+      "CaptureRouting",
       "TrustSystem",
       "SearchRecall",
       "SideEffectSystem",

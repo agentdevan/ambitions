@@ -7318,7 +7318,7 @@
       "has_preview_provider": false,
       "kind": "test",
       "line_count": 21,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/CaptureRouteGraph/CaptureRouteCommandMappingTests.swift",
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/CaptureRouting/CaptureRouteCommandMappingTests.swift",
       "preview_count": 0,
       "proof_status": "source_inventory_only",
       "test_cases": [
@@ -7340,12 +7340,12 @@
       ],
       "has_preview_provider": false,
       "kind": "test",
-      "line_count": 410,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/CaptureRouteGraph/CaptureRouteGraphTests.swift",
+      "line_count": 411,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/CaptureRouting/CaptureRoutingTests.swift",
       "preview_count": 0,
       "proof_status": "source_inventory_only",
       "test_cases": [
-        "CaptureRouteGraphTests"
+        "CaptureRoutingTests"
       ],
       "view_modifiers": [],
       "view_structs": []

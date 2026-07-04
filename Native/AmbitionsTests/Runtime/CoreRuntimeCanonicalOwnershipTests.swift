@@ -234,8 +234,8 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
         XCTAssertEqual(legacySwiftFiles ?? [], [], "the removed runtime owner must not contain production Swift authority after AMB-1730.")
 
         for requiredPath in [
-            "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureService.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/SmartAttachmentService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/CaptureService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/SmartAttachmentService.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/Planning/MultiPathLattice.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/Planning/RecommendationEngine.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/HighRiskSafetyJurisdictionGate.swift",

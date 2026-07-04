@@ -30,13 +30,13 @@ struct CaptureAttachmentVaultStageRequest: Sendable, Equatable {
         privacy: EventLedgerPrivacyClassification = .privateUserText,
         stagedAt: String
     ) {
-        self.captureID = CaptureRouteGraphStableID.required(captureID)
-        self.intakeRecordID = CaptureRouteGraphStableID.optional(intakeRecordID)
-        self.originalFilename = CaptureRouteGraphStableID.required(originalFilename)
-        self.contentType = CaptureRouteGraphStableID.required(contentType)
+        self.captureID = CaptureRoutingStableID.required(captureID)
+        self.intakeRecordID = CaptureRoutingStableID.optional(intakeRecordID)
+        self.originalFilename = CaptureRoutingStableID.required(originalFilename)
+        self.contentType = CaptureRoutingStableID.required(contentType)
         self.data = data
         self.privacy = privacy
-        self.stagedAt = CaptureRouteGraphStableID.required(stagedAt)
+        self.stagedAt = CaptureRoutingStableID.required(stagedAt)
     }
 }
 
@@ -71,18 +71,18 @@ struct CaptureAttachmentVaultRecord: Codable, Sendable, Equatable, Hashable, Ide
         captureID = request.captureID
         intakeRecordID = request.intakeRecordID
         originalFilename = request.originalFilename
-        self.storedFilename = CaptureRouteGraphStableID.required(storedFilename)
+        self.storedFilename = CaptureRoutingStableID.required(storedFilename)
         contentType = request.contentType
         byteCount = request.data.count
-        self.sha256 = CaptureRouteGraphStableID.required(sha256)
+        self.sha256 = CaptureRoutingStableID.required(sha256)
         self.state = state
-        self.quarantineReason = CaptureRouteGraphStableID.optional(quarantineReason)
+        self.quarantineReason = CaptureRoutingStableID.optional(quarantineReason)
         privacy = request.privacy
         stagedAt = request.stagedAt
-        self.updatedAt = CaptureRouteGraphStableID.required(updatedAt ?? request.stagedAt)
+        self.updatedAt = CaptureRoutingStableID.required(updatedAt ?? request.stagedAt)
         localOnly = true
-        id = CaptureRouteGraphStableID.make(prefix: "capture-attachment", components: [captureID, self.sha256, originalFilename])
-        checksum = CaptureRouteGraphStableID.checksum(
+        id = CaptureRoutingStableID.make(prefix: "capture-attachment", components: [captureID, self.sha256, originalFilename])
+        checksum = CaptureRoutingStableID.checksum(
             prefix: "capture-attachment",
             components: [
                 id,
@@ -133,7 +133,7 @@ struct CaptureAttachmentVaultRecord: Codable, Sendable, Equatable, Hashable, Ide
         self.stagedAt = stagedAt
         self.updatedAt = updatedAt
         self.localOnly = localOnly
-        checksum = CaptureRouteGraphStableID.checksum(
+        checksum = CaptureRoutingStableID.checksum(
             prefix: "capture-attachment",
             components: [
                 id,
@@ -165,10 +165,10 @@ struct CaptureAttachmentVaultRecord: Codable, Sendable, Equatable, Hashable, Ide
             byteCount: byteCount,
             sha256: sha256,
             state: .quarantined,
-            quarantineReason: CaptureRouteGraphStableID.required(reason),
+            quarantineReason: CaptureRoutingStableID.required(reason),
             privacy: privacy,
             stagedAt: stagedAt,
-            updatedAt: CaptureRouteGraphStableID.required(updatedAt),
+            updatedAt: CaptureRoutingStableID.required(updatedAt),
             localOnly: localOnly
         )
     }
@@ -177,18 +177,18 @@ struct CaptureAttachmentVaultRecord: Codable, Sendable, Equatable, Hashable, Ide
 actor CaptureAttachmentVault {
     private let rootDirectory: URL?
     private var recordsCache: [CaptureAttachmentVaultRecord]?
-    private let fileStore: CaptureRouteGraphJSONFileStore<[CaptureAttachmentVaultRecord]>?
+    private let fileStore: CaptureRoutingJSONFileStore<[CaptureAttachmentVaultRecord]>?
 
     init(rootDirectory: URL? = nil, indexFileURL: URL? = nil) {
         self.rootDirectory = rootDirectory
-        fileStore = indexFileURL.map { CaptureRouteGraphJSONFileStore(fileURL: $0, emptyValue: []) }
+        fileStore = indexFileURL.map { CaptureRoutingJSONFileStore(fileURL: $0, emptyValue: []) }
     }
 
     static func fileBacked(rootDirectory: URL) -> CaptureAttachmentVault {
         let vaultDirectory = rootDirectory.appendingPathComponent("AttachmentVault", isDirectory: true)
         return CaptureAttachmentVault(
             rootDirectory: vaultDirectory,
-            indexFileURL: CaptureRouteGraphJSONFileStore<[CaptureAttachmentVaultRecord]>.fileURL(
+            indexFileURL: CaptureRoutingJSONFileStore<[CaptureAttachmentVaultRecord]>.fileURL(
                 rootDirectory: rootDirectory,
                 fileName: "CaptureAttachmentVault.json"
             )
@@ -212,7 +212,7 @@ actor CaptureAttachmentVault {
             }
             let fileURL = rootDirectory.appendingPathComponent(storedFilename, isDirectory: false)
             try request.data.write(to: fileURL, options: [.atomic])
-            CaptureRouteGraphLocalFileProtection.apply(to: fileURL)
+            CaptureRoutingLocalFileProtection.apply(to: fileURL)
         }
         var records = try await loadRecords()
         let record = try CaptureAttachmentVaultRecord(request: request, storedFilename: storedFilename, sha256: sha256)
@@ -241,7 +241,7 @@ actor CaptureAttachmentVault {
 
     func records(captureID: String? = nil) async throws -> [CaptureAttachmentVaultRecord] {
         let records = try await loadRecords()
-        guard let captureID = CaptureRouteGraphStableID.optional(captureID) else {
+        guard let captureID = CaptureRoutingStableID.optional(captureID) else {
             return records
         }
         return records.filter { $0.captureID == captureID }

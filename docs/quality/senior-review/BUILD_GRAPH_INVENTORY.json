@@ -2135,7 +2135,7 @@
       "evidence_source": [
         "project.yml/Package.swift membership rules"
       ],
-      "path": "Native/Ambitions/Core/Domain/CaptureRouteGraph.swift",
+      "path": "Native/Ambitions/Core/Domain/CaptureRouting.swift",
       "reason": "Included by configured app, extension, package, resource, or target config membership.",
       "risk": "Green",
       "target_membership": [
@@ -5897,7 +5897,7 @@
       "evidence_source": [
         "project.yml/Package.swift membership rules"
       ],
-      "path": "Native/Ambitions/Core/Runtime/CaptureService+02-CaptureDraftRouteService.swift",
+      "path": "Native/Ambitions/Core/Runtime/CaptureDraftRouteService.swift",
       "reason": "Included by configured app, extension, package, resource, or target config membership.",
       "risk": "Green",
       "target_membership": [
@@ -5909,7 +5909,7 @@
       "evidence_source": [
         "project.yml/Package.swift membership rules"
       ],
-      "path": "Native/Ambitions/Core/Runtime/CaptureService+03-DefaultCaptureService.swift",
+      "path": "Native/Ambitions/Core/Runtime/DefaultCaptureService.swift",
       "reason": "Included by configured app, extension, package, resource, or target config membership.",
       "risk": "Green",
       "target_membership": [
@@ -5921,7 +5921,7 @@
       "evidence_source": [
         "project.yml/Package.swift membership rules"
       ],
-      "path": "Native/Ambitions/Core/Runtime/CaptureService+04-DefaultCaptureService.swift",
+      "path": "Native/Ambitions/Core/Runtime/DefaultCaptureServiceRouting.swift",
       "reason": "Included by configured app, extension, package, resource, or target config membership.",
       "risk": "Green",
       "target_membership": [
@@ -59357,7 +59357,7 @@
       "evidence_source": [
         "documentation path/extension"
       ],
-      "path": "docs/qa/remediation/dossiers/AMB-1192-capture-route-graph-composer.md",
+      "path": "docs/qa/remediation/dossiers/AMB-1192-capture-routing-composer.md",
       "reason": "Documentation or agent governance file; excluded from app source by project/package rules unless target membership is listed.",
       "risk": "Green",
       "target_membership": []

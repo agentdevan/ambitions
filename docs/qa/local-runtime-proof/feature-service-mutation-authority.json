@@ -7,7 +7,7 @@
     "Native/Ambitions/Projection/SurfaceLenses/",
     "Native/Ambitions/Surfaces/",
     "Native/Ambitions/Composer/",
-    "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/",
+    "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/",
     "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
     "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
     "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
@@ -115,7 +115,7 @@
       "rationale": "Moved AMB-1730 startup app-state compatibility write; not canonical object-state authority."
     },
     {
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureService+03-DefaultCaptureService.swift",
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/DefaultCaptureService.swift",
       "classification": "explicitly_non_canonical",
       "allowedCalls": [
         "repository.saveCaptures",
@@ -124,7 +124,7 @@
       "rationale": "Moved AMB-1730 capture repository compatibility writes; promotion unit of work is tracked separately from canonical object-state authority."
     },
     {
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureService+04-DefaultCaptureService.swift",
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/DefaultCaptureServiceRouting.swift",
       "classification": "explicitly_non_canonical",
       "allowedCalls": ["eventLedger.append"],
       "rationale": "Moved AMB-1730 capture event-ledger mirror; not canonical object-state authority."

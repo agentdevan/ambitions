@@ -208,11 +208,11 @@
       "gap_classification": "PARTIAL_NEEDS_PARENT_REPAIR"
     },
     {
-      "path": "Native/Ambitions/Composer/Capture/; Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/",
+      "path": "Native/Ambitions/Composer/Capture/; Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/",
       "app_aspect": "Capture",
       "private_life_orchestration_role": "Global composer and durable intake path that turns messy intent into command-backed candidate objects without becoming a tab or inbox.",
       "orchestration_layer": "Intent / capture intake",
-      "source_owner_system": "Final Architecture Tree owners: Composer/Capture and Core/LocalRuntimeOS/CaptureRouteGraph.",
+      "source_owner_system": "Final Architecture Tree owners: Composer/Capture and Core/LocalRuntimeOS/CaptureRouting.",
       "current_repo_evidence": "Composer/Capture exists; CaptureDurableIntakePipeline, DefaultCaptureService, route graph, and promotion receipt paths are present; Surfaces/Capture is absent.",
       "existing_linear_object": "AMB-1484 VSP-05 leaf; project: Ambitions Flagship Visual Specification Layer - Pre-Codex.",
       "missing_linear_object": "Missing repo-current parent Feature and leaves for durable intake, promotion routing, failure recovery, and accessibility proof.",
@@ -220,7 +220,7 @@
       "local_first_boundary": "Raw captures and intent text are private local data and must not leave device for classification.",
       "life_data_boundary_risk": "High: raw capture text can contain the most sensitive private life data.",
       "proof_or_recovery_gap": "No current global composer device proof, durable queue failure proof, or replay proof recorded.",
-      "validation_gate": "capture route graph tests; app-wide capture invocation UI tests; privacy proof.",
+      "validation_gate": "capture routing tests; app-wide capture invocation UI tests; privacy proof.",
       "proof_ceiling": "YELLOW_REPO_EVIDENCE",
       "gap_classification": "PARTIAL_NEEDS_LEAF_REPAIR"
     },
@@ -264,7 +264,7 @@
       "private_life_orchestration_role": "Local, inspectable, user-controlled life graph moat that converts intent to reality-fit action and preserves proof-backed change over time.",
       "orchestration_layer": "Local-first storage / migration / repair",
       "source_owner_system": "Final Architecture Tree owner: Core/LocalRuntimeOS.",
-      "current_repo_evidence": "LocalRuntimeOS contains CommandSpine, TransactionKernel, EventJournal, ProjectionEngine, TrustSystem, Storage, MigrationRepair, PrivacySecurity, SideEffectSystem, TimeEngine, PlanningEngine, CaptureRouteGraph, SearchRecall, and SourceAtlas owners.",
+      "current_repo_evidence": "LocalRuntimeOS contains CommandSpine, TransactionKernel, EventJournal, ProjectionEngine, TrustSystem, Storage, MigrationRepair, PrivacySecurity, SideEffectSystem, TimeEngine, PlanningEngine, CaptureRouting, SearchRecall, and SourceAtlas owners.",
       "existing_linear_object": "initiative: Private Life Runtime; AMB-1544 LocalRuntimeOS Architecture Canon + Migration Spine Acceptance.",
       "missing_linear_object": "Missing app-wide runtime mirror leaves linking every surface mutation and adapter path to LocalRuntimeOS ownership.",
       "runtime_mutation_path": "Command -> Event -> Projection -> Receipt -> Replay is the only meaningful state mutation path.",
@@ -378,12 +378,12 @@
       "gap_classification": "PARTIAL_NEEDS_PARENT_REPAIR"
     },
     {
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/",
-      "app_aspect": "Capture route graph / durable intake",
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/",
+      "app_aspect": "Capture routing / durable intake",
       "private_life_orchestration_role": "Routes raw capture intent to durable intake, classification, promotion candidates, and command-backed object creation.",
       "orchestration_layer": "Intent / capture intake",
-      "source_owner_system": "Final Architecture Tree owner: Core/LocalRuntimeOS/CaptureRouteGraph.",
-      "current_repo_evidence": "CaptureRouteGraph exists under LocalRuntimeOS; capture pipeline and route graph are present in source.",
+      "source_owner_system": "Final Architecture Tree owner: Core/LocalRuntimeOS/CaptureRouting.",
+      "current_repo_evidence": "CaptureRouting exists under LocalRuntimeOS; capture pipeline and route graph are present in source.",
       "existing_linear_object": "AMB-1484 VSP-05; AMB-1544 partial runtime owner.",
       "missing_linear_object": "Missing durable intake parent/leaf set for queue repair, failure recovery, and promotion proof.",
       "runtime_mutation_path": "Raw intake can be staged locally; promotions must enter command/event/projection/receipt/replay.",
@@ -497,11 +497,11 @@
       "gap_classification": "PARTIAL_NEEDS_LEAF_REPAIR"
     },
     {
-      "path": "Native/AmbitionsShareExtension/; Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/; app group queue paths in project.yml",
+      "path": "Native/AmbitionsShareExtension/; Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/; app group queue paths in project.yml",
       "app_aspect": "Share extension",
       "private_life_orchestration_role": "External intake adapter for URL/text that stages incoming intent into local durable capture intake.",
       "orchestration_layer": "External adapter, never core authority",
-      "source_owner_system": "Share extension target plus CaptureRouteGraph/local intake owner.",
+      "source_owner_system": "Share extension target plus CaptureRouting/local intake owner.",
       "current_repo_evidence": "Share extension root exists; project.yml embeds share extension and app group settings; Share Extension appears in repo search.",
       "existing_linear_object": "AMB-1416 Share Extension Boundary Acceptance; iOS System Integrations initiative.",
       "missing_linear_object": "Missing failure-safe share queue drain/idempotency/recovery proof leaf.",

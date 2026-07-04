@@ -20,7 +20,7 @@ pass. AMB-1730 lowered active legacy runtime production files from `111` to
 `Core/LocalRuntimeOS/Planning`, `Core/LocalRuntimeOS/Scheduling`,
 `Core/LocalRuntimeOS/SearchRecall`, `Core/LocalRuntimeOS/Projections`,
 `Core/LocalRuntimeOS/PrivateLifeRuntimeKernel`,
-`Core/LocalRuntimeOS/RuntimeBoundary`, `Core/LocalRuntimeOS/CaptureRouteGraph`,
+`Core/LocalRuntimeOS/RuntimeBoundary`, `Core/LocalRuntimeOS/CaptureRouting`,
 `Core/LocalRuntimeOS/SourceAtlas`, and
 `Core/LocalRuntimeOS/PrivacySecurity`. The AMB-1730 source-owner authority
 remediation is Green for legacy `Core/Runtime` production-authority
@@ -178,7 +178,7 @@ Expected proof behavior:
 - AMB-1730 MemoryLens/SearchRecall canonical owner paths exist and the old
   `Core/Runtime` paths are absent.
 - AMB-1730 all-remaining owner pass leaves `Core/Runtime` with `0` Swift files;
-  representative moved owners exist under CaptureRouteGraph, PlanningEngine,
+  representative moved owners exist under CaptureRouting, PlanningEngine,
   PrivacySecurity, PrivateLifeRuntimeKernel, Projections, RuntimeBoundary,
   SourceAtlas, and Scheduling.
 
@@ -206,7 +206,7 @@ Files moved/deleted/quarantined/converted:
 - Moved `111` cumulative AMB-1730 source files out of `Core/Runtime`,
   including this run's `64` all-remaining files.
 - Moved this run's remaining files into:
-  `CaptureRouteGraph`, `PlanningEngine`, `PrivacySecurity`,
+  `CaptureRouting`, `PlanningEngine`, `PrivacySecurity`,
   `PrivateLifeRuntimeKernel`, `Projections`, `RuntimeBoundary`,
   `SourceAtlas`, and `Scheduling`.
 - Renamed `MemoryLensService+SearchAdapters.swift` to
@@ -309,7 +309,7 @@ Canonical owners touched:
 - `Core/LocalRuntimeOS/Planning`
 - `Core/LocalRuntimeOS/Scheduling`
 - `Core/LocalRuntimeOS/SearchRecall`
-- `Core/LocalRuntimeOS/CaptureRouteGraph`
+- `Core/LocalRuntimeOS/CaptureRouting`
 - `Core/LocalRuntimeOS/PrivacySecurity`
 - `Core/LocalRuntimeOS/RuntimeBoundary`
 - `Core/LocalRuntimeOS/SourceAtlas`
@@ -324,7 +324,7 @@ Files moved or created:
 - Moved `RuntimeSnapshot.swift` from `Core/Runtime` to
   `Core/LocalRuntimeOS/Projections`.
 - Moved the `111` AMB-1730 Planning, Scheduling, SearchRecall,
-  CaptureRouteGraph, PrivacySecurity, PrivateLifeRuntimeKernel,
+  CaptureRouting, PrivacySecurity, PrivateLifeRuntimeKernel,
   Projections, RuntimeBoundary, and SourceAtlas files from `Core/Runtime`
   to `Core/LocalRuntimeOS`.
 - Created this audit overlay.

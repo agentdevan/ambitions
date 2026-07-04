@@ -313,8 +313,8 @@ files.
 | LOC | Path | Markers |
 | ---: | --- | --- |
 | 337 | `Native/Ambitions/Core/Domain/RealityModels.swift` | `.write(`, `FileManager` |
-| 281 | `Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureAttachmentVault.swift` | `.write(`, `FileManager` |
-| 66 | `Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureRouteGraphFileStore.swift` | `.write(`, `FileManager` |
+| 281 | `Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/CaptureAttachmentVault.swift` | `.write(`, `FileManager` |
+| 66 | `Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/CaptureRoutingFileStore.swift` | `.write(`, `FileManager` |
 | 187 | `Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/AmbitionsCommandExecutor+02-AmbitionsCommandExecutor+03-scheduleMutationIntent.swift` | `FileManager` |
 | 533 | `Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandJournal.swift` | `.write(`, `FileManager` |
 | 174 | `Native/Ambitions/Core/LocalRuntimeOS/EventJournal/RuntimeEventStore.swift` | `.write(`, `FileManager` |

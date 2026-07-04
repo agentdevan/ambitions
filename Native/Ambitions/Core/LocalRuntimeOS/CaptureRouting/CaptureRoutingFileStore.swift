@@ -1,6 +1,6 @@
 import Foundation
 
-actor CaptureRouteGraphJSONFileStore<Value: Codable & Sendable> {
+actor CaptureRoutingJSONFileStore<Value: Codable & Sendable> {
     private let fileURL: URL
     private let emptyValue: Value
     private let encoder: JSONEncoder
@@ -34,7 +34,7 @@ actor CaptureRouteGraphJSONFileStore<Value: Codable & Sendable> {
         }
         let data = try encoder.encode(value)
         try data.write(to: fileURL, options: [.atomic])
-        CaptureRouteGraphLocalFileProtection.apply(to: fileURL)
+        CaptureRoutingLocalFileProtection.apply(to: fileURL)
     }
 
     static func defaultRootDirectory() -> URL {
@@ -44,7 +44,7 @@ actor CaptureRouteGraphJSONFileStore<Value: Codable & Sendable> {
             .appendingPathComponent("Library", isDirectory: true)
             .appendingPathComponent("Application Support", isDirectory: true)
         return supportDirectory.appendingPathComponent("AmbitionsLocalRuntimeOS", isDirectory: true)
-            .appendingPathComponent("CaptureRouteGraph", isDirectory: true)
+            .appendingPathComponent("CaptureRouting", isDirectory: true)
     }
 
     static func fileURL(rootDirectory: URL, fileName: String) -> URL {
@@ -52,7 +52,7 @@ actor CaptureRouteGraphJSONFileStore<Value: Codable & Sendable> {
     }
 }
 
-enum CaptureRouteGraphLocalFileProtection {
+enum CaptureRoutingLocalFileProtection {
     static func apply(to fileURL: URL) {
         #if os(iOS)
         try? FileManager.default.setAttributes(

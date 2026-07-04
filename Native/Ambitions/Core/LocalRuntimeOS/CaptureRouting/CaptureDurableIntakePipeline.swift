@@ -14,10 +14,10 @@ struct CaptureDurableAttachmentInput: Sendable, Equatable {
         data: Data,
         privacy: EventLedgerPrivacyClassification = .privateUserText
     ) {
-        self.originalFilename = CaptureRouteGraphStableID.required(originalFilename)
-        self.clientAttachmentID = CaptureRouteGraphStableID.optional(clientAttachmentID)
-            ?? CaptureRouteGraphStableID.make(prefix: "capture-attachment.pending", components: [self.originalFilename])
-        self.contentType = CaptureRouteGraphStableID.required(contentType)
+        self.originalFilename = CaptureRoutingStableID.required(originalFilename)
+        self.clientAttachmentID = CaptureRoutingStableID.optional(clientAttachmentID)
+            ?? CaptureRoutingStableID.make(prefix: "capture-attachment.pending", components: [self.originalFilename])
+        self.contentType = CaptureRoutingStableID.required(contentType)
         self.data = data
         self.privacy = privacy
     }
@@ -59,26 +59,26 @@ struct CaptureDurableIntakeRequest: Sendable, Equatable {
         attachments: [CaptureDurableAttachmentInput] = [],
         privacy: EventLedgerPrivacyClassification = .privateUserText
     ) {
-        self.captureID = CaptureRouteGraphStableID.required(captureID)
+        self.captureID = CaptureRoutingStableID.required(captureID)
         self.rawText = rawText.trimmingCharacters(in: .whitespacesAndNewlines)
         self.sourceType = sourceType
-        self.sourceSurface = CaptureRouteGraphStableID.required(sourceSurface)
-        self.acceptedAt = CaptureRouteGraphStableID.required(acceptedAt)
-        self.commandID = CaptureRouteGraphStableID.optional(commandID)
+        self.sourceSurface = CaptureRoutingStableID.required(sourceSurface)
+        self.acceptedAt = CaptureRoutingStableID.required(acceptedAt)
+        self.commandID = CaptureRoutingStableID.optional(commandID)
         self.requestedKind = requestedKind
         self.requestedRoute = requestedRoute
-        self.deadlineText = CaptureRouteGraphStableID.optional(deadlineText)
+        self.deadlineText = CaptureRoutingStableID.optional(deadlineText)
         self.contextLensHint = contextLensHint
         self.priorityHints = priorityHints
-        self.linkedGoalID = CaptureRouteGraphStableID.optional(linkedGoalID)
-        self.scopeItemHint = CaptureRouteGraphStableID.optional(scopeItemHint)
-        self.proofIntent = CaptureRouteGraphStableID.optional(proofIntent)
+        self.linkedGoalID = CaptureRoutingStableID.optional(linkedGoalID)
+        self.scopeItemHint = CaptureRoutingStableID.optional(scopeItemHint)
+        self.proofIntent = CaptureRoutingStableID.optional(proofIntent)
         self.attachments = attachments
         self.privacy = privacy
     }
 }
 
-struct CaptureRouteGraphPreparation: Sendable, Equatable {
+struct CaptureRoutingPreparation: Sendable, Equatable {
     let intakeReceipt: CaptureIntakeJournalReceipt
     let intakeRecord: CaptureIntakeJournalRecord
     let attachmentRecords: [CaptureAttachmentVaultRecord]
@@ -88,13 +88,13 @@ struct CaptureRouteGraphPreparation: Sendable, Equatable {
 }
 
 struct CaptureDurableIntakePipeline: Sendable {
-    let services: CaptureRouteGraphServices
+    let services: CaptureRoutingServices
 
-    init(services: CaptureRouteGraphServices) {
+    init(services: CaptureRoutingServices) {
         self.services = services
     }
 
-    func prepareAcceptedInput(_ request: CaptureDurableIntakeRequest) async throws -> CaptureRouteGraphPreparation {
+    func prepareAcceptedInput(_ request: CaptureDurableIntakeRequest) async throws -> CaptureRoutingPreparation {
         let intakeReceipt = try await services.intakeJournal.append(
             CaptureIntakeJournalAppendRequest(
                 captureID: request.captureID,
@@ -155,7 +155,7 @@ struct CaptureDurableIntakePipeline: Sendable {
             decision: decision,
             updatedAt: request.acceptedAt
         )
-        return CaptureRouteGraphPreparation(
+        return CaptureRoutingPreparation(
             intakeReceipt: intakeReceipt,
             intakeRecord: intakeRecord,
             attachmentRecords: attachmentRecords,

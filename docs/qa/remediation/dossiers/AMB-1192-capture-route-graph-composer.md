@@ -1,4 +1,4 @@
-# AMB-1192 — Capture Route Graph + Composer
+# AMB-1192 — Capture Routing + Composer
 
 ## Objective
 
@@ -75,7 +75,7 @@ No `Task` language. No internal header/chips/copy such as `Open Field`, `Activat
 
 ## Required implementation
 
-- typed Capture route graph
+- typed Capture routing
 - full-screen Stage takeover
 - no sheet
 - no placeholder text
@@ -91,7 +91,7 @@ No `Task` language. No internal header/chips/copy such as `Open Field`, `Activat
 
 ## Files likely in scope
 
-Codex must inspect current source before editing. Likely areas include Capture route graph, composer/container views, proposal/receipt flows, attachment handling, dictation affordances, contextual launchers, persistence paths, and `docs/qa/KNOWN_ISSUES.md`. Unexpected files must be justified in closeout.
+Codex must inspect current source before editing. Likely areas include Capture routing, composer/container views, proposal/receipt flows, attachment handling, dictation affordances, contextual launchers, persistence paths, and `docs/qa/KNOWN_ISSUES.md`. Unexpected files must be justified in closeout.
 
 ## Files forbidden unless explicitly justified
 

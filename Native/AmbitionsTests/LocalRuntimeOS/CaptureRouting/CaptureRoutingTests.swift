@@ -2,10 +2,10 @@ import CryptoKit
 import XCTest
 @testable import Ambitions
 
-final class CaptureRouteGraphTests: XCTestCase {
-    func testCaptureRouteGraphOwnsCanonicalFilesWithoutOldAuthorityPaths() throws {
+final class CaptureRoutingTests: XCTestCase {
+    func testCaptureRoutingOwnsCanonicalFilesWithoutOldAuthorityPaths() throws {
         let root = try repoRoot()
-        let owner = root.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph", isDirectory: true)
+        let owner = root.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting", isDirectory: true)
         let requiredFiles = [
             "CaptureIntakeJournal.swift",
             "CaptureDraftStore.swift",
@@ -15,7 +15,7 @@ final class CaptureRouteGraphTests: XCTestCase {
             "CapturePromotionTransaction.swift",
             "CaptureCorrectionLedger.swift",
             "CaptureDirectLookupIndex.swift",
-            "CaptureRouteGraph.swift",
+            "CaptureRouting.swift",
             "CaptureDurableIntakePipeline.swift",
             "CaptureRouteCommandMapping.swift"
         ]
@@ -23,11 +23,12 @@ final class CaptureRouteGraphTests: XCTestCase {
         for file in requiredFiles {
             XCTAssertTrue(FileManager.default.fileExists(atPath: owner.appendingPathComponent(file).path), file)
         }
+        XCTAssertFalse(FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph").path))
         XCTAssertFalse(FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Core/Domain/CaptureRouteGraph.swift").path))
         XCTAssertFalse(FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Core/Domain/CaptureRouteCommandMapping.swift").path))
 
         let runtimeHelper = try String(
-            contentsOf: root.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureService+04-DefaultCaptureService.swift"),
+            contentsOf: root.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/DefaultCaptureServiceRouting.swift"),
             encoding: .utf8
         )
         XCTAssertFalse(runtimeHelper.contains("enum CaptureClassifier"))
@@ -35,7 +36,7 @@ final class CaptureRouteGraphTests: XCTestCase {
 
     func testIntakeJournalPersistsBeforeRouteResolution() async throws {
         let root = try temporaryRoot()
-        let graph = CaptureRouteGraphServices.fileBacked(rootDirectory: root)
+        let graph = CaptureRoutingServices.fileBacked(rootDirectory: root)
         let receipt = try await graph.intakeJournal.append(
             CaptureIntakeJournalAppendRequest(
                 captureID: "capture-intake-1",
@@ -47,7 +48,7 @@ final class CaptureRouteGraphTests: XCTestCase {
             )
         )
 
-        let reloadedGraph = CaptureRouteGraphServices.fileBacked(rootDirectory: root)
+        let reloadedGraph = CaptureRoutingServices.fileBacked(rootDirectory: root)
         let persistedRecord = try await reloadedGraph.intakeJournal.record(id: receipt.journalRecordID)
         let persisted = try XCTUnwrap(persistedRecord)
         let decision = try reloadedGraph.routeResolver.resolve(
@@ -78,7 +79,7 @@ final class CaptureRouteGraphTests: XCTestCase {
 
     func testAttachmentVaultStagesChecksumAndQuarantinesPrivatePayload() async throws {
         let root = try temporaryRoot()
-        let graph = CaptureRouteGraphServices.fileBacked(rootDirectory: root)
+        let graph = CaptureRoutingServices.fileBacked(rootDirectory: root)
         let intakeReceipt = try await graph.intakeJournal.append(
             CaptureIntakeJournalAppendRequest(
                 captureID: "capture-attachment-1",
@@ -114,7 +115,7 @@ final class CaptureRouteGraphTests: XCTestCase {
     }
 
     func testAttachmentVaultRejectsChecksumWorkBeforeDurableIntake() async throws {
-        let graph = CaptureRouteGraphServices.inMemory()
+        let graph = CaptureRoutingServices.inMemory()
 
         do {
             _ = try await graph.attachmentVault.stage(
@@ -143,7 +144,7 @@ final class CaptureRouteGraphTests: XCTestCase {
         ]
 
         for (index, source) in externalSources.enumerated() {
-            let graph = CaptureRouteGraphServices.fileBacked(rootDirectory: root)
+            let graph = CaptureRoutingServices.fileBacked(rootDirectory: root)
             let captureID = "capture-external-\(index)"
             let preparation = try await graph.durableIntakePipeline().prepareAcceptedInput(
                 CaptureDurableIntakeRequest(
@@ -158,7 +159,7 @@ final class CaptureRouteGraphTests: XCTestCase {
                     priorityHints: CapturePriorityHints()
                 )
             )
-            let reloaded = CaptureRouteGraphServices.fileBacked(rootDirectory: root)
+            let reloaded = CaptureRoutingServices.fileBacked(rootDirectory: root)
             let maybeRecord = try await reloaded.intakeJournal.record(id: preparation.intakeReceipt.journalRecordID)
             let record = try XCTUnwrap(maybeRecord)
             let lookup = try await reloaded.directLookupIndex.entry(captureID: captureID)
@@ -175,7 +176,7 @@ final class CaptureRouteGraphTests: XCTestCase {
 
     func testDurablePipelineStagesAttachmentsAfterIntakeBeforePromotion() async throws {
         let root = try temporaryRoot()
-        let graph = CaptureRouteGraphServices.fileBacked(rootDirectory: root)
+        let graph = CaptureRoutingServices.fileBacked(rootDirectory: root)
         let payload = Data("private attachment payload".utf8)
         let preparation = try await graph.durableIntakePipeline().prepareAcceptedInput(
             CaptureDurableIntakeRequest(
@@ -219,7 +220,7 @@ final class CaptureRouteGraphTests: XCTestCase {
 
     func testPromotionTransactionAndCorrectionLedgerUseDurableIntake() async throws {
         let root = try temporaryRoot()
-        let graph = CaptureRouteGraphServices.fileBacked(rootDirectory: root)
+        let graph = CaptureRoutingServices.fileBacked(rootDirectory: root)
         let receipt = try await graph.intakeJournal.append(
             CaptureIntakeJournalAppendRequest(
                 captureID: "capture-promotion-1",
@@ -279,7 +280,7 @@ final class CaptureRouteGraphTests: XCTestCase {
 
         XCTAssertEqual(lookup.captureID, "capture-promotion-1")
         XCTAssertTrue(promotion.satisfiesRuntimeSpine)
-        XCTAssertEqual(promotion.writeAuthority, "Core/LocalRuntimeOS/CaptureRouteGraph + Transactions")
+        XCTAssertEqual(promotion.writeAuthority, "Core/LocalRuntimeOS/CaptureRouting + Transactions")
         XCTAssertEqual(promotion.sideEffectPolicy, AppUnitOfWorkReceipt.noExternalSideEffects)
         XCTAssertEqual(promotion.runtimeEvent.kind, .tombstoneRecorded)
         XCTAssertEqual(promotion.runtimeEvent.metadata["capturePromotionReceiptID"], promotion.id)
@@ -293,7 +294,7 @@ final class CaptureRouteGraphTests: XCTestCase {
 
     func testDirectLookupSurvivesRestartAfterCorrectionFlow() async throws {
         let root = try temporaryRoot()
-        let graph = CaptureRouteGraphServices.fileBacked(rootDirectory: root)
+        let graph = CaptureRoutingServices.fileBacked(rootDirectory: root)
         let preparation = try await graph.durableIntakePipeline().prepareAcceptedInput(
             CaptureDurableIntakeRequest(
                 captureID: "capture-lookup-restart",
@@ -326,7 +327,7 @@ final class CaptureRouteGraphTests: XCTestCase {
             )
         )
 
-        let reloaded = CaptureRouteGraphServices.fileBacked(rootDirectory: root)
+        let reloaded = CaptureRoutingServices.fileBacked(rootDirectory: root)
         let lookup = try await reloaded.directLookupIndex.entry(captureID: "capture-lookup-restart")
         let corrections = try await reloaded.correctionLedger.records(captureID: "capture-lookup-restart")
 
@@ -336,17 +337,17 @@ final class CaptureRouteGraphTests: XCTestCase {
         XCTAssertEqual(corrections.map(\.correctedRoute), [.timeSeed])
     }
 
-    func testDefaultCaptureServiceRoutesThroughCaptureRouteGraphOnCreateAndPromotion() async throws {
+    func testDefaultCaptureServiceRoutesThroughCaptureRoutingOnCreateAndPromotion() async throws {
         let root = try temporaryRoot()
-        let graph = CaptureRouteGraphServices.fileBacked(rootDirectory: root)
+        let graph = CaptureRoutingServices.fileBacked(rootDirectory: root)
         let store = try AmbitionsPersistenceStore(inMemory: true)
         let repositories = makeRepositories(store: store)
         let service = DefaultCaptureService(
             repository: repositories.captures,
             eventLedger: repositories.eventLedger,
             simpleStepLifecycleService: SimpleStepLifecycleService(repositories: repositories, idProvider: { "route-graph-step" }),
-            captureRouteGraph: graph,
-            idProvider: { "capture-route-graph-service" }
+            captureRouting: graph,
+            idProvider: { "capture-routing-service" }
         )
 
         let capture = try await service.createCapture(
@@ -370,10 +371,10 @@ final class CaptureRouteGraphTests: XCTestCase {
     }
 }
 
-private extension CaptureRouteGraphTests {
+private extension CaptureRoutingTests {
     func temporaryRoot() throws -> URL {
         let root = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-            .appendingPathComponent("CaptureRouteGraphTests-\(UUID().uuidString)", isDirectory: true)
+            .appendingPathComponent("CaptureRoutingTests-\(UUID().uuidString)", isDirectory: true)
         try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
         addTeardownBlock {
             try? FileManager.default.removeItem(at: root)

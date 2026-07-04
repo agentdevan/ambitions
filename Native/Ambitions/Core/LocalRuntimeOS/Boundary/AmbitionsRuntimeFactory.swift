@@ -87,7 +87,7 @@ enum AmbitionsRuntimeFactory {
             capturePromotionUnitOfWork: repositories.capturePromotionUnitOfWork,
             eventLedger: repositories.eventLedger,
             simpleStepLifecycleService: SimpleStepLifecycleService(repositories: repositories),
-            captureRouteGraph: .live()
+            captureRouting: .live()
         )
         let youService = RepositoryBackedYouService(
             repositories: repositories,

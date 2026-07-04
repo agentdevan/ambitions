@@ -3590,10 +3590,10 @@
     },
     {
       "classification": "CREATE_PARENT_FEATURE",
-      "title": "CREATE_PARENT_FEATURE: CaptureRouteGraph",
+      "title": "CREATE_PARENT_FEATURE: CaptureRouting",
       "target_initiative": "Ambitions Native iPhone App Control Plane",
       "target_project": "VSP-05 Global Capture Composer",
-      "why": "CaptureRouteGraph needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion.",
+      "why": "CaptureRouting needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion.",
       "repo_evidence": [
         "VSP-05 and runtime command law. Scoped LocalRuntimeProof Gate Green exists but is not app-wide Runtime Green.",
         "README.md",
@@ -3623,10 +3623,10 @@
     },
     {
       "classification": "ADD_KNOWN_ISSUE_MAPPING",
-      "title": "ADD_KNOWN_ISSUE_MAPPING: CaptureRouteGraph",
+      "title": "ADD_KNOWN_ISSUE_MAPPING: CaptureRouting",
       "target_initiative": "Ambitions Native iPhone App Control Plane",
       "target_project": "VSP-05 Global Capture Composer",
-      "why": "CaptureRouteGraph needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion.",
+      "why": "CaptureRouting needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion.",
       "repo_evidence": [
         "VSP-05 and runtime command law. Scoped LocalRuntimeProof Gate Green exists but is not app-wide Runtime Green.",
         "README.md",
@@ -3656,10 +3656,10 @@
     },
     {
       "classification": "ADD_VSP_AUTHORITY",
-      "title": "ADD_VSP_AUTHORITY: CaptureRouteGraph",
+      "title": "ADD_VSP_AUTHORITY: CaptureRouting",
       "target_initiative": "Ambitions Native iPhone App Control Plane",
       "target_project": "VSP-05 Global Capture Composer",
-      "why": "CaptureRouteGraph needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion.",
+      "why": "CaptureRouting needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion.",
       "repo_evidence": [
         "VSP-05 and runtime command law. Scoped LocalRuntimeProof Gate Green exists but is not app-wide Runtime Green.",
         "README.md",
@@ -3689,10 +3689,10 @@
     },
     {
       "classification": "ADD_VALIDATION_GATE",
-      "title": "ADD_VALIDATION_GATE: CaptureRouteGraph",
+      "title": "ADD_VALIDATION_GATE: CaptureRouting",
       "target_initiative": "Ambitions Native iPhone App Control Plane",
       "target_project": "VSP-05 Global Capture Composer",
-      "why": "CaptureRouteGraph needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion.",
+      "why": "CaptureRouting needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion.",
       "repo_evidence": [
         "VSP-05 and runtime command law. Scoped LocalRuntimeProof Gate Green exists but is not app-wide Runtime Green.",
         "README.md",
@@ -3722,10 +3722,10 @@
     },
     {
       "classification": "ADD_PROOF_REQUIREMENT",
-      "title": "ADD_PROOF_REQUIREMENT: CaptureRouteGraph",
+      "title": "ADD_PROOF_REQUIREMENT: CaptureRouting",
       "target_initiative": "Ambitions Native iPhone App Control Plane",
       "target_project": "VSP-05 Global Capture Composer",
-      "why": "CaptureRouteGraph needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion.",
+      "why": "CaptureRouting needs Linear hierarchy, source-owner mapping, proof gates, VSP/known issue mapping, and non-claims before any promotion.",
       "repo_evidence": [
         "VSP-05 and runtime command law. Scoped LocalRuntimeProof Gate Green exists but is not app-wide Runtime Green.",
         "README.md",
@@ -9669,7 +9669,7 @@
       "target_initiative": "Ambitions Native iPhone App Control Plane",
       "target_project": "VSP-05 Global Capture Composer",
       "target_milestone": "Post-VSP repo-to-Linear hierarchy repair",
-      "product_object": "Capture, CaptureRouteGraph, Share Extension, Search / Find / Act / Inspect",
+      "product_object": "Capture, CaptureRouting, Share Extension, Search / Find / Act / Inspect",
       "acceptance_criteria": [
         "Parent Feature preserves product law and hard non-goals.",
         "Parent Feature cites repo truth, VSP authority if present, source-owner paths, known issue mappings, validation commands, proof artifacts, and proof ceiling.",
@@ -9738,7 +9738,7 @@
       ],
       "child_codex_leaf_recommendations": [
         "Capture: bounded proof-gate/source-owner reconciliation leaf",
-        "CaptureRouteGraph: bounded proof-gate/source-owner reconciliation leaf",
+        "CaptureRouting: bounded proof-gate/source-owner reconciliation leaf",
         "Share Extension: bounded proof-gate/source-owner reconciliation leaf",
         "Search / Find / Act / Inspect: bounded proof-gate/source-owner reconciliation leaf"
       ]
@@ -10128,7 +10128,7 @@
       "target_initiative": "Private Life Runtime / LocalRuntimeOS",
       "target_project": "LocalRuntimeOS Runtime Spine",
       "target_milestone": "Post-VSP repo-to-Linear hierarchy repair",
-      "product_object": "Private Life Runtime, LocalRuntimeOS, CommandSpine, TransactionKernel, EventJournal, ProjectionEngine, ObjectState, Planning, TimeEngine, CaptureRouteGraph, TrustSystem, SearchRecall, SideEffectSystem, SyncContinuity, Diagnostics",
+      "product_object": "Private Life Runtime, LocalRuntimeOS, CommandSpine, TransactionKernel, EventJournal, ProjectionEngine, ObjectState, Planning, TimeEngine, CaptureRouting, TrustSystem, SearchRecall, SideEffectSystem, SyncContinuity, Diagnostics",
       "acceptance_criteria": [
         "Parent Feature preserves product law and hard non-goals.",
         "Parent Feature cites repo truth, VSP authority if present, source-owner paths, known issue mappings, validation commands, proof artifacts, and proof ceiling.",
@@ -11728,16 +11728,16 @@
       ]
     },
     {
-      "title": "CaptureRouteGraph — bounded reconciliation/proof-gate leaf",
-      "parent_feature": "CaptureRouteGraph parent feature with product-law non-goals and proof gate.",
+      "title": "CaptureRouting — bounded reconciliation/proof-gate leaf",
+      "parent_feature": "CaptureRouting parent feature with product-law non-goals and proof gate.",
       "source_owner_paths": [
-        "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/",
+        "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/",
         "Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift",
         "Native/Ambitions/Composer/Capture/CaptureSurface.swift"
       ],
-      "exact_bounded_scope": "Reconcile CaptureRouteGraph source-owner paths, VSP/known issue authority, validation commands, proof artifacts, rollback plan, and non-claims; implementation may proceed only after Phase 2/3 acceptance and separate authorization.",
+      "exact_bounded_scope": "Reconcile CaptureRouting source-owner paths, VSP/known issue authority, validation commands, proof artifacts, rollback plan, and non-claims; implementation may proceed only after Phase 2/3 acceptance and separate authorization.",
       "files_likely_touched": [
-        "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/",
+        "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/",
         "Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift",
         "Native/Ambitions/Composer/Capture/CaptureSurface.swift"
       ],

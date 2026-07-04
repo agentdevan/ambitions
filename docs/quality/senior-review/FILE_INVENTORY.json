@@ -12311,7 +12311,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Domain",
       "line_count": 131,
-      "path": "Native/Ambitions/Core/Domain/CaptureRouteGraph.swift",
+      "path": "Native/Ambitions/Core/Domain/CaptureRouting.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -41782,7 +41782,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Runtime",
       "line_count": 199,
-      "path": "Native/Ambitions/Core/Runtime/CaptureService+02-CaptureDraftRouteService.swift",
+      "path": "Native/Ambitions/Core/Runtime/CaptureDraftRouteService.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -41827,7 +41827,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Runtime",
       "line_count": 356,
-      "path": "Native/Ambitions/Core/Runtime/CaptureService+03-DefaultCaptureService.swift",
+      "path": "Native/Ambitions/Core/Runtime/DefaultCaptureService.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -41872,7 +41872,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Core/Runtime",
       "line_count": 354,
-      "path": "Native/Ambitions/Core/Runtime/CaptureService+04-DefaultCaptureService.swift",
+      "path": "Native/Ambitions/Core/Runtime/DefaultCaptureServiceRouting.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -115804,7 +115804,7 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "Docs",
       "line_count": 141,
-      "path": "docs/qa/remediation/dossiers/AMB-1192-capture-route-graph-composer.md",
+      "path": "docs/qa/remediation/dossiers/AMB-1192-capture-routing-composer.md",
       "public_internal_types": [],
       "risk_level": "Green",
       "risk_reasons": [],

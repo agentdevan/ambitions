@@ -181,7 +181,7 @@ actor AmbitionsPersistenceStore {
             ObjectStoreSwiftDataFamilyDescriptor(
                 id: .goalDraft,
                 storedTypeNames: ["GoalDraftRecord"],
-                mutationAuthority: "Core/LocalRuntimeOS/CaptureRouteGraph + Transactions",
+                mutationAuthority: "Core/LocalRuntimeOS/CaptureRouting + Transactions",
                 fieldRules: [
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "GoalDraftRecord", fieldName: "id", authority: .queryColumn, notes: "Stable draft identity."),
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "GoalDraftRecord", fieldName: "plannedGoalID", authority: .queryColumn, notes: "Promotion lookup column."),
@@ -213,7 +213,7 @@ actor AmbitionsPersistenceStore {
             ObjectStoreSwiftDataFamilyDescriptor(
                 id: .capture,
                 storedTypeNames: ["CaptureRecord"],
-                mutationAuthority: "Core/LocalRuntimeOS/CaptureRouteGraph + Transactions",
+                mutationAuthority: "Core/LocalRuntimeOS/CaptureRouting + Transactions",
                 fieldRules: [
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "CaptureRecord", fieldName: "id", authority: .queryColumn, notes: "Capture direct lookup column."),
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "CaptureRecord", fieldName: "linkedGoalID", authority: .queryColumn, notes: "Promotion reference column."),

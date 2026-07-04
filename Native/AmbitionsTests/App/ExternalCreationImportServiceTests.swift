@@ -17,11 +17,11 @@ final class ExternalCreationImportServiceTests: XCTestCase {
     func testImportServiceCreatesNormalCapturesAndPreservesProvenanceHint() async throws {
         let root = temporaryDirectory()
         let store = SharedExternalCreationStore(baseURL: root)
-        let captureRouteGraph = CaptureRouteGraphServices.fileBacked(rootDirectory: root)
+        let captureRouting = CaptureRoutingServices.fileBacked(rootDirectory: root)
         let repository = PreviewCaptureRepository()
         let captureService = DefaultCaptureService(
             repository: repository,
-            captureRouteGraph: captureRouteGraph,
+            captureRouting: captureRouting,
             idProvider: { "capture-external" }
         )
         let commandRecords = InMemoryAmbitionsCommandExecutionRecordRepository()
@@ -44,8 +44,8 @@ final class ExternalCreationImportServiceTests: XCTestCase {
 
         let result = await service.importPendingCreations(now: Date(timeIntervalSince1970: 1_712_692_800))
         let captures = try await repository.listCaptures()
-        let intakeRecords = try await captureRouteGraph.intakeJournal.records()
-        let lookup = try await captureRouteGraph.directLookupIndex.entry(captureID: "capture-external")
+        let intakeRecords = try await captureRouting.intakeJournal.records()
+        let lookup = try await captureRouting.directLookupIndex.entry(captureID: "capture-external")
 
         XCTAssertEqual(result.importedCaptureIDs, ["capture-external"])
         XCTAssertEqual(result.preferredLanding, .captureComposer)

@@ -45,7 +45,7 @@ Execution-bundle order:
 
 1. Theme / Design System Tokens
 2. Shell / Stage OS
-3. Capture Route Graph + Composer
+3. Capture Routing + Composer
 4. Goals Root / Detail Rebuild
 5. Today Reality Window / Action Gating
 6. Search Find / Act / Inspect
@@ -224,11 +224,11 @@ Semantic glyph registry:
 
 ---
 
-## 5. Capture Route Graph + Composer decisions
+## 5. Capture Routing + Composer decisions
 
 Capture architecture:
 
-- typed Capture route graph
+- typed Capture routing
 - Capture is a flow engine
 - entry points pass typed context and skip known steps
 - broad first-class intents, controlled by typed routes

@@ -220,7 +220,7 @@ run_xcode_tests() {
     -only-testing:AmbitionsTests/StoreInvariantCheckerTests
     -only-testing:AmbitionsTests/LocalRuntimeDiagnosticsTests
     -only-testing:AmbitionsTests/InspectionTests
-    -only-testing:AmbitionsTests/CaptureRouteGraphTests
+    -only-testing:AmbitionsTests/CaptureRoutingTests
     -only-testing:AmbitionsTests/ExternalSurfaceSnapshotTests
     -only-testing:AmbitionsTests/AppIntentRoutingTests
     -only-testing:AmbitionsTests/FeatureServiceMutationAuthorityTests

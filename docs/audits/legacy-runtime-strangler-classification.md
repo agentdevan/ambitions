@@ -75,7 +75,7 @@ remaining AMB-1713 legacy runtime row. Those files moved from production
 `Native/Ambitions/Core/LocalRuntimeOS/Projections`,
 `Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel`,
 `Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary`,
-`Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph`,
+`Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting`,
 `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas`, and
 `Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity`. Remaining legacy
 runtime production-file count is now `0`.
@@ -171,10 +171,10 @@ Follow-up code legend:
 | `Native/Ambitions/Core/Runtime/CanonicalNowStateProjector+02-CanonicalNowStateProjector.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/Projections` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/CanonicalNowStateProjector.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/Projections` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/CapacityEngine.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/Scheduling` | `P-MOVE` | `F-MOVE` |
-| `Native/Ambitions/Core/Runtime/CaptureService+02-CaptureDraftRouteService.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/CaptureRouteGraph` | `P-MOVE` | `F-MOVE` |
-| `Native/Ambitions/Core/Runtime/CaptureService+03-DefaultCaptureService.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/CaptureRouteGraph` | `P-MOVE` | `F-MOVE` |
-| `Native/Ambitions/Core/Runtime/CaptureService+04-DefaultCaptureService.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/CaptureRouteGraph` | `P-MOVE` | `F-MOVE` |
-| `Native/Ambitions/Core/Runtime/CaptureService.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/CaptureRouteGraph` | `P-MOVE` | `F-MOVE` |
+| `Native/Ambitions/Core/Runtime/CaptureDraftRouteService.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/CaptureRouting` | `P-MOVE` | `F-MOVE` |
+| `Native/Ambitions/Core/Runtime/DefaultCaptureService.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/CaptureRouting` | `P-MOVE` | `F-MOVE` |
+| `Native/Ambitions/Core/Runtime/DefaultCaptureServiceRouting.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/CaptureRouting` | `P-MOVE` | `F-MOVE` |
+| `Native/Ambitions/Core/Runtime/CaptureService.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/CaptureRouting` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/ClosureEngine.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/Scheduling` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/DedicatedDevicePrototypeRuntime.swift` | `Core/Runtime` | `Foundation` | `Adapter shim` | `Core/LocalRuntimeOS/RuntimeBoundary shim` | `P-SHIM` | `F-SHIM` |
 | `Native/Ambitions/Core/Runtime/ExecutionResilienceProjector+02-normalizedAssessments.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/PrivateLifeRuntimeKernel` | `P-MOVE` | `F-MOVE` |
@@ -256,8 +256,8 @@ Follow-up code legend:
 | `Native/Ambitions/Core/Runtime/SharedLifeCoordinationService.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/PrivateLifeRuntimeKernel` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/SimpleStepLifecycleService+Recurring.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/Scheduling` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/SimpleStepLifecycleService.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/Scheduling` | `P-MOVE` | `F-MOVE` |
-| `Native/Ambitions/Core/Runtime/SmartAttachmentCaptureAdapter.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/CaptureRouteGraph` | `P-MOVE` | `F-MOVE` |
-| `Native/Ambitions/Core/Runtime/SmartAttachmentService.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/CaptureRouteGraph` | `P-MOVE` | `F-MOVE` |
+| `Native/Ambitions/Core/Runtime/SmartAttachmentCaptureAdapter.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/CaptureRouting` | `P-MOVE` | `F-MOVE` |
+| `Native/Ambitions/Core/Runtime/SmartAttachmentService.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/CaptureRouting` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/SnapshotRefreshingServices.swift` | `Core/Runtime` | `Foundation` | `Adapter shim` | `Core/LocalRuntimeOS/RuntimeBoundary shim` | `P-SHIM` | `F-SHIM` |
 | `Native/Ambitions/Core/Runtime/StepElasticityEngineEvaluation.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/Planning` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/StepElasticityEngineReceipt.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/Planning` | `P-MOVE` | `F-MOVE` |

@@ -24,15 +24,15 @@ struct CaptureCorrectionLedgerRequest: Sendable, Equatable {
         decisionID: String? = nil,
         privacy: EventLedgerPrivacyClassification = .privateUserText
     ) {
-        self.captureID = CaptureRouteGraphStableID.required(captureID)
+        self.captureID = CaptureRoutingStableID.required(captureID)
         self.previousRoute = previousRoute
         self.correctedRoute = correctedRoute
         self.previousKind = previousKind
         self.correctedKind = correctedKind
-        self.reason = CaptureRouteGraphStableID.required(reason)
-        self.occurredAt = CaptureRouteGraphStableID.required(occurredAt)
-        self.intakeRecordID = CaptureRouteGraphStableID.optional(intakeRecordID)
-        self.decisionID = CaptureRouteGraphStableID.optional(decisionID)
+        self.reason = CaptureRoutingStableID.required(reason)
+        self.occurredAt = CaptureRoutingStableID.required(occurredAt)
+        self.intakeRecordID = CaptureRoutingStableID.optional(intakeRecordID)
+        self.decisionID = CaptureRoutingStableID.optional(decisionID)
         self.privacy = privacy
     }
 }
@@ -50,7 +50,7 @@ struct CaptureCorrectionLedgerRecord: Codable, Sendable, Equatable, Hashable, Id
     let intakeRecordID: String?
     let decisionID: String?
     let privacy: EventLedgerPrivacyClassification
-    let runtimeTrace: CaptureRouteGraphRuntimeTrace
+    let runtimeTrace: CaptureRoutingRuntimeTrace
     let checksum: String
 
     init(sequence: Int, request: CaptureCorrectionLedgerRequest) {
@@ -65,12 +65,12 @@ struct CaptureCorrectionLedgerRecord: Codable, Sendable, Equatable, Hashable, Id
         intakeRecordID = request.intakeRecordID
         decisionID = request.decisionID
         privacy = request.privacy
-        id = CaptureRouteGraphStableID.make(
+        id = CaptureRoutingStableID.make(
             prefix: "capture-correction",
             components: [captureID, String(sequence), previousRoute.rawValue, correctedRoute.rawValue, occurredAt]
         )
-        runtimeTrace = CaptureRouteGraphRuntimeTrace.make(owner: "CaptureCorrectionLedger", sourceID: id)
-        checksum = CaptureRouteGraphStableID.checksum(
+        runtimeTrace = CaptureRoutingRuntimeTrace.make(owner: "CaptureCorrectionLedger", sourceID: id)
+        checksum = CaptureRoutingStableID.checksum(
             prefix: "capture-correction",
             components: [
                 id,
@@ -93,15 +93,15 @@ struct CaptureCorrectionLedgerRecord: Codable, Sendable, Equatable, Hashable, Id
 
 actor CaptureCorrectionLedger {
     private var recordsCache: [CaptureCorrectionLedgerRecord]?
-    private let fileStore: CaptureRouteGraphJSONFileStore<[CaptureCorrectionLedgerRecord]>?
+    private let fileStore: CaptureRoutingJSONFileStore<[CaptureCorrectionLedgerRecord]>?
 
     init(fileURL: URL? = nil) {
-        fileStore = fileURL.map { CaptureRouteGraphJSONFileStore(fileURL: $0, emptyValue: []) }
+        fileStore = fileURL.map { CaptureRoutingJSONFileStore(fileURL: $0, emptyValue: []) }
     }
 
     static func fileBacked(rootDirectory: URL) -> CaptureCorrectionLedger {
         CaptureCorrectionLedger(
-            fileURL: CaptureRouteGraphJSONFileStore<[CaptureCorrectionLedgerRecord]>.fileURL(
+            fileURL: CaptureRoutingJSONFileStore<[CaptureCorrectionLedgerRecord]>.fileURL(
                 rootDirectory: rootDirectory,
                 fileName: "CaptureCorrectionLedger.json"
             )
@@ -119,7 +119,7 @@ actor CaptureCorrectionLedger {
 
     func records(captureID: String? = nil) async throws -> [CaptureCorrectionLedgerRecord] {
         let records = try await loadRecords()
-        guard let captureID = CaptureRouteGraphStableID.optional(captureID) else {
+        guard let captureID = CaptureRoutingStableID.optional(captureID) else {
             return records
         }
         return records.filter { $0.captureID == captureID }

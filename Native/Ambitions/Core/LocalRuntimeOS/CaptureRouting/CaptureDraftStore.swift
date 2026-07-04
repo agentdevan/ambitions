@@ -30,9 +30,9 @@ struct CaptureDraftRecord: Codable, Sendable, Equatable, Hashable, Identifiable 
         attachmentIDs = intake.attachmentIDs
         privacy = intake.privacy
         createdAt = intake.receivedAt
-        self.updatedAt = CaptureRouteGraphStableID.required(updatedAt)
-        id = CaptureRouteGraphStableID.make(prefix: "capture-draft", components: [intake.id, decision.id])
-        checksum = CaptureRouteGraphStableID.checksum(
+        self.updatedAt = CaptureRoutingStableID.required(updatedAt)
+        id = CaptureRoutingStableID.make(prefix: "capture-draft", components: [intake.id, decision.id])
+        checksum = CaptureRoutingStableID.checksum(
             prefix: "capture-draft",
             components: [
                 id,
@@ -54,15 +54,15 @@ struct CaptureDraftRecord: Codable, Sendable, Equatable, Hashable, Identifiable 
 
 actor CaptureDraftStore {
     private var recordsCache: [CaptureDraftRecord]?
-    private let fileStore: CaptureRouteGraphJSONFileStore<[CaptureDraftRecord]>?
+    private let fileStore: CaptureRoutingJSONFileStore<[CaptureDraftRecord]>?
 
     init(fileURL: URL? = nil) {
-        fileStore = fileURL.map { CaptureRouteGraphJSONFileStore(fileURL: $0, emptyValue: []) }
+        fileStore = fileURL.map { CaptureRoutingJSONFileStore(fileURL: $0, emptyValue: []) }
     }
 
     static func fileBacked(rootDirectory: URL) -> CaptureDraftStore {
         CaptureDraftStore(
-            fileURL: CaptureRouteGraphJSONFileStore<[CaptureDraftRecord]>.fileURL(
+            fileURL: CaptureRoutingJSONFileStore<[CaptureDraftRecord]>.fileURL(
                 rootDirectory: rootDirectory,
                 fileName: "CaptureDraftStore.json"
             )

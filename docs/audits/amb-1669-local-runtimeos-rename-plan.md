@@ -17,7 +17,7 @@ This artifact records the current folder/type dependency graph, target runtime m
 
 ## Current Owner Graph
 
-Current source owner count after the `Scheduling` slice: 19.
+Current source owner count after the `CaptureRouting` slice: 19.
 
 | Current owner | Swift files | Target owner | Status |
 | --- | ---: | --- | --- |
@@ -30,7 +30,7 @@ Current source owner count after the `Scheduling` slice: 19.
 | PrivateLifeRuntimeKernel | 37 | RuntimeKernel or collapsed into retained owners | Pending decision |
 | Planning | 68 | Planning | Tenth slice renamed from `PlanningEngine` |
 | Scheduling | 35 | Scheduling | Eleventh slice renamed from `TimeEngine` and collapsed numbered ScheduleInstall split filenames |
-| CaptureRouteGraph | 20 | CaptureRouting | Pending |
+| CaptureRouting | 20 | CaptureRouting | Twelfth slice renamed from `CaptureRouteGraph` |
 | Inspection | 29 | Inspection | Sixth slice renamed from `TrustSystem` |
 | Search | 10 | Search | Seventh slice renamed from `SearchRecall` |
 | ExternalWrites | 13 | ExternalWrites | Fifth slice renamed from `SideEffectSystem` |
@@ -327,15 +327,77 @@ Reason:
 - The ownership test now proves required `Planning` files exist and the old
   `PlanningEngine` production/test owner paths are gone.
 
+## Eleventh Rename Slice
+
+Applied eleventh:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/
+Native/AmbitionsTests/LocalRuntimeOS/TimeEngine/
+```
+
+to:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/Scheduling/
+Native/AmbitionsTests/LocalRuntimeOS/Scheduling/
+```
+
+Reason:
+
+- `Scheduling` is explicitly named by AMB-1669 target direction.
+- The old owner used `TimeEngine` as a folder-level architecture name; retained
+  Swift types such as `PlacementEngine`, `RecurrenceEngine`,
+  `ProtectedTimeEngine`, and `TimeBlockGraph` still carry concrete behavior
+  contracts plainly.
+- The move changes canonical ownership without changing runtime behavior.
+- Owner-facing runtime trace API now uses `SchedulingRuntimeTrace` and
+  `SchedulingStableID` instead of `TimeEngineRuntimeTrace` and
+  `TimeEngineStableID`.
+- The touched ScheduleInstall `+02` / `+03` / `+04` split filenames were
+  renamed to descriptive owner-local filenames in the same slice to comply
+  with the AMB-1658 remediation freeze.
+- The ownership test now proves required `Scheduling` files exist and the old
+  `TimeEngine` production/test owner paths are gone.
+
+## Twelfth Rename Slice
+
+Applied twelfth:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/
+Native/AmbitionsTests/LocalRuntimeOS/CaptureRouteGraph/
+```
+
+to:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/
+Native/AmbitionsTests/LocalRuntimeOS/CaptureRouting/
+```
+
+Reason:
+
+- `CaptureRouting` is explicitly named by AMB-1669 target direction.
+- The old owner used `CaptureRouteGraph` as a folder-level architecture name;
+  retained Swift types such as `CaptureRouteResolver` and
+  `CaptureRouteCommandMapping` still carry concrete routing behavior plainly.
+- The move changes canonical ownership without changing runtime behavior.
+- Owner-facing runtime trace, service container, stable ID, file store, default
+  persistence folder, and test APIs now use `CaptureRouting*` names instead of
+  `CaptureRouteGraph*` names.
+- The ownership test now proves required `CaptureRouting` files exist and the
+  old `CaptureRouteGraph` production/test owner paths are gone.
+
 ## API Exposure
 
-The moved `Boundary`, `Commands`, `Transactions`, `Projections`, `ExternalWrites`, `Inspection`, `Search`, `Repair`, `State`, and `Planning` source contains no `public` or `open` Swift API declarations.
+The moved `Boundary`, `Commands`, `Transactions`, `Projections`, `ExternalWrites`, `Inspection`, `Search`, `Repair`, `State`, `Planning`, `Scheduling`, and `CaptureRouting` source contains no `public` or `open` Swift API declarations.
 
 Current exposure is same-module production/test use through Swift files under the existing `Ambitions` target and `AmbitionsTests` target. XcodeGen source discovery is directory-based through `project.yml`, so the move requires project regeneration but no package or target boundary change.
 
 Known direct consumers of the moved `Boundary`, `Commands`, `Transactions`,
-`Projections`, `ExternalWrites`, `Inspection`, `Search`, `Repair`, `State`, and
-`Planning` types remain same-module:
+`Projections`, `ExternalWrites`, `Inspection`, `Search`, `Repair`, `State`,
+`Planning`, `Scheduling`, and `CaptureRouting` types remain same-module:
 
 - `Commands`
 - `Transactions`
@@ -346,8 +408,9 @@ Known direct consumers of the moved `Boundary`, `Commands`, `Transactions`,
 - `Repair`
 - `State`
 - `Planning`
-- `PrivateLifeRuntimeKernel`
 - `Scheduling`
+- `CaptureRouting`
+- `PrivateLifeRuntimeKernel`
 - `PrivacySecurity`
 - `SourceAtlas`
 - runtime/domain tests
@@ -372,7 +435,6 @@ This slice can support Source Green for the folder-owner rename if validation pa
 
 Next concrete candidates, one at a time after guards:
 
-- `CaptureRouteGraph` -> `CaptureRouting`
 - `SyncContinuity` -> `Continuity`
 
 `EventJournal`, `PrivateLifeRuntimeKernel`, `SourceAtlas`, and `PrivacySecurity`

@@ -1,13 +1,13 @@
 import Foundation
 
-enum CaptureRouteGraphRuntimeSpineStep: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+enum CaptureRoutingRuntimeSpineStep: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
     case command
     case event
     case projection
     case receipt
     case replay
 
-    static let required: [CaptureRouteGraphRuntimeSpineStep] = [
+    static let required: [CaptureRoutingRuntimeSpineStep] = [
         .command,
         .event,
         .projection,
@@ -16,7 +16,7 @@ enum CaptureRouteGraphRuntimeSpineStep: String, Codable, Sendable, Equatable, Ha
     ]
 }
 
-struct CaptureRouteGraphRuntimeTrace: Codable, Sendable, Equatable, Hashable, Identifiable {
+struct CaptureRoutingRuntimeTrace: Codable, Sendable, Equatable, Hashable, Identifiable {
     let id: String
     let owner: String
     let commandID: String
@@ -26,7 +26,7 @@ struct CaptureRouteGraphRuntimeTrace: Codable, Sendable, Equatable, Hashable, Id
     let replayTraceID: String
     let checksum: String
     let localOnly: Bool
-    let mutationSpine: [CaptureRouteGraphRuntimeSpineStep]
+    let mutationSpine: [CaptureRoutingRuntimeSpineStep]
 
     init(
         owner: String,
@@ -36,18 +36,18 @@ struct CaptureRouteGraphRuntimeTrace: Codable, Sendable, Equatable, Hashable, Id
         receiptID: String,
         replayTraceID: String,
         localOnly: Bool = true,
-        mutationSpine: [CaptureRouteGraphRuntimeSpineStep] = CaptureRouteGraphRuntimeSpineStep.required
+        mutationSpine: [CaptureRoutingRuntimeSpineStep] = CaptureRoutingRuntimeSpineStep.required
     ) {
-        self.owner = CaptureRouteGraphStableID.required(owner)
-        self.commandID = CaptureRouteGraphStableID.required(commandID)
-        self.eventID = CaptureRouteGraphStableID.required(eventID)
-        self.projectionID = CaptureRouteGraphStableID.required(projectionID)
-        self.receiptID = CaptureRouteGraphStableID.required(receiptID)
-        self.replayTraceID = CaptureRouteGraphStableID.required(replayTraceID)
+        self.owner = CaptureRoutingStableID.required(owner)
+        self.commandID = CaptureRoutingStableID.required(commandID)
+        self.eventID = CaptureRoutingStableID.required(eventID)
+        self.projectionID = CaptureRoutingStableID.required(projectionID)
+        self.receiptID = CaptureRoutingStableID.required(receiptID)
+        self.replayTraceID = CaptureRoutingStableID.required(replayTraceID)
         self.localOnly = localOnly
-        self.mutationSpine = mutationSpine.isEmpty ? CaptureRouteGraphRuntimeSpineStep.required : mutationSpine
-        checksum = CaptureRouteGraphStableID.make(
-            prefix: "capture-route.checksum",
+        self.mutationSpine = mutationSpine.isEmpty ? CaptureRoutingRuntimeSpineStep.required : mutationSpine
+        checksum = CaptureRoutingStableID.make(
+            prefix: "capture-routing.checksum",
             components: [
                 self.owner,
                 self.commandID,
@@ -59,31 +59,31 @@ struct CaptureRouteGraphRuntimeTrace: Codable, Sendable, Equatable, Hashable, Id
                 self.mutationSpine.map(\.rawValue).joined(separator: ",")
             ]
         )
-        id = CaptureRouteGraphStableID.make(prefix: "capture-route.trace", components: [self.owner, checksum])
+        id = CaptureRoutingStableID.make(prefix: "capture-routing.trace", components: [self.owner, checksum])
     }
 
     var satisfiesRuntimeSpine: Bool {
         localOnly &&
-            mutationSpine == CaptureRouteGraphRuntimeSpineStep.required &&
+            mutationSpine == CaptureRoutingRuntimeSpineStep.required &&
             [owner, commandID, eventID, projectionID, receiptID, replayTraceID, checksum].allSatisfy { $0.isEmpty == false }
     }
 
-    static func make(owner: String, sourceID: String, localOnly: Bool = true) -> CaptureRouteGraphRuntimeTrace {
-        let normalizedOwner = CaptureRouteGraphStableID.required(owner)
-        let normalizedSource = CaptureRouteGraphStableID.required(sourceID)
-        return CaptureRouteGraphRuntimeTrace(
+    static func make(owner: String, sourceID: String, localOnly: Bool = true) -> CaptureRoutingRuntimeTrace {
+        let normalizedOwner = CaptureRoutingStableID.required(owner)
+        let normalizedSource = CaptureRoutingStableID.required(sourceID)
+        return CaptureRoutingRuntimeTrace(
             owner: normalizedOwner,
-            commandID: CaptureRouteGraphStableID.make(prefix: "capture-route.command", components: [normalizedOwner, normalizedSource]),
-            eventID: CaptureRouteGraphStableID.make(prefix: "capture-route.event", components: [normalizedOwner, normalizedSource]),
-            projectionID: CaptureRouteGraphStableID.make(prefix: "capture-route.projection", components: [normalizedOwner, normalizedSource]),
-            receiptID: CaptureRouteGraphStableID.make(prefix: "capture-route.receipt", components: [normalizedOwner, normalizedSource]),
-            replayTraceID: CaptureRouteGraphStableID.make(prefix: "capture-route.replay", components: [normalizedOwner, normalizedSource]),
+            commandID: CaptureRoutingStableID.make(prefix: "capture-routing.command", components: [normalizedOwner, normalizedSource]),
+            eventID: CaptureRoutingStableID.make(prefix: "capture-routing.event", components: [normalizedOwner, normalizedSource]),
+            projectionID: CaptureRoutingStableID.make(prefix: "capture-routing.projection", components: [normalizedOwner, normalizedSource]),
+            receiptID: CaptureRoutingStableID.make(prefix: "capture-routing.receipt", components: [normalizedOwner, normalizedSource]),
+            replayTraceID: CaptureRoutingStableID.make(prefix: "capture-routing.replay", components: [normalizedOwner, normalizedSource]),
             localOnly: localOnly
         )
     }
 }
 
-enum CaptureRouteGraphStableID {
+enum CaptureRoutingStableID {
     static func make(prefix: String, components: [String]) -> String {
         let normalizedPrefix = slug(prefix)
         let normalizedComponents = components.map(slug).filter { $0.isEmpty == false }
@@ -94,7 +94,7 @@ enum CaptureRouteGraphStableID {
 
     static func required(_ value: String) -> String {
         let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
-        precondition(trimmed.isEmpty == false, "Expected non-empty CaptureRouteGraph identifier")
+        precondition(trimmed.isEmpty == false, "Expected non-empty CaptureRouting identifier")
         return trimmed
     }
 
