@@ -1150,55 +1150,62 @@ final class AmbitionsUITests: XCTestCase {
     func testAMB962TodayReconstructionScreenshotMatrix() throws {
         executionTimeAllowance = 300
 
-        let matrix: [(name: String, scenario: String, contentSize: String, sheet: String?, required: [String])] = [
+        let matrix: [(name: String, scenario: String, contentSize: String, sheet: String?, required: [String], forbidden: [String])] = [
             (
                 name: "default",
                 scenario: "stable",
                 contentSize: "UICTContentSizeCategoryM",
                 sheet: nil,
-                required: ["Start here", "Recommended step", "Why this?", "Up next"]
+                required: ["Start here", "Recommended step", "Why this?", "Up next"],
+                forbidden: []
             ),
             (
                 name: "source-unavailable",
                 scenario: "source-unavailable",
                 contentSize: "UICTContentSizeCategoryM",
                 sheet: nil,
-                required: ["Needs context. Manual shaping still works.", "Why this?"]
+                required: ["Needs context. Manual shaping still works.", "Why this?"],
+                forbidden: []
             ),
             (
                 name: "active-recommended-step",
                 scenario: "start-here-ready",
                 contentSize: "UICTContentSizeCategoryM",
                 sheet: nil,
-                required: ["Start here", "Start now", "Recommended step"]
+                required: ["Start here", "Start now", "Recommended step"],
+                forbidden: []
             ),
             (
                 name: "large-dynamic-type",
                 scenario: "reflow",
                 contentSize: "UICTContentSizeCategoryAccessibilityL",
                 sheet: nil,
-                required: ["Start here", "Recommended step"]
+                required: ["Start here", "Recommended step"],
+                forbidden: []
             ),
             (
                 name: "receipt-visible",
                 scenario: "stable",
                 contentSize: "UICTContentSizeCategoryM",
                 sheet: "receipt",
-                required: ["Start Here review history", "Still counts", "Waiting", "Blocked", "Not needed"]
+                required: ["Start Here review history", "Still counts", "Waiting", "Blocked", "Not needed"],
+                forbidden: []
             ),
             (
                 name: "reduce-motion-static-equivalent",
                 scenario: "protected",
                 contentSize: "UICTContentSizeCategoryM",
                 sheet: nil,
-                required: ["Start here", "Recommended step", "Protected"]
+                required: ["Start here", "Recommended step", "Protected"],
+                forbidden: []
             ),
             (
                 name: "no-step-paths",
                 scenario: "empty",
                 contentSize: "UICTContentSizeCategoryM",
                 sheet: nil,
-                required: ["No step is required right now", "Capture what changed", "Shape Time", "Review context", "Record outcome", "Protect this window"]
+                required: ["No step is required right now", "Open Field stays available"],
+                forbidden: ["Capture what changed", "Shape Time", "Review context", "Record outcome", "Protect this window"]
             )
         ]
 
@@ -1220,7 +1227,7 @@ final class AmbitionsUITests: XCTestCase {
             )
             app.launch()
 
-            XCTAssertTrue(waitForTodayScreenReady(in: app, timeout: 90), "Today should be ready for \(item.name).")
+            XCTAssertTrue(waitForTodayScreenReady(in: app, timeout: 20), "Today should be ready for \(item.name).")
             XCTAssertTrue(
                 todayRealityMeridianAnchorExists(in: app),
                 "Today should expose the Reality Meridian or Start Here anchor for \(item.name)."
@@ -1228,8 +1235,14 @@ final class AmbitionsUITests: XCTestCase {
 
             for copy in item.required {
                 XCTAssertTrue(
-                    scrollUntilStaticTextExists(copy, in: app, maxAttempts: 8),
+                    waitForScreenshotCopy(copy, in: app),
                     "Missing required AMB-962 copy '\(copy)' in \(item.name)."
+                )
+            }
+            for copy in item.forbidden {
+                XCTAssertFalse(
+                    screenshotCopyExists(copy, in: app),
+                    "AMB-962 \(item.name) should not render stale or generic copy '\(copy)'."
                 )
             }
 
@@ -2071,7 +2084,7 @@ final class AmbitionsUITests: XCTestCase {
         }
         for (key, value) in extraEnvironment {
             app.launchEnvironment[key] = value
-        app.launchArguments += ["-\(key)", value]
+            app.launchArguments += ["-\(key)", value]
         }
         return app
     }
@@ -2925,39 +2938,39 @@ final class AmbitionsUITests: XCTestCase {
     }
 
     private func todayRealityMeridianAnchorExists(in app: XCUIApplication) -> Bool {
-        let anchors = [
-            app.staticTexts["Start here"],
-            app.descendants(matching: .any)["TodayRealityRailStartHereTitle"],
-            app.descendants(matching: .any)["TodayRealityRail"]
-        ]
-
         let deadline = Date().addingTimeInterval(5)
         while Date() < deadline {
-            if anchors.contains(where: { $0.exists }) {
+            if todayReadinessAnchors(in: app).contains(where: { $0.exists }) {
                 return true
             }
             RunLoop.current.run(until: Date().addingTimeInterval(0.2))
         }
 
-        return anchors.contains(where: { $0.exists })
+        return todayReadinessAnchors(in: app).contains(where: { $0.exists })
     }
 
     private func waitForTodayScreenReady(in app: XCUIApplication, timeout: TimeInterval = 30) -> Bool {
         let deadline = Date().addingTimeInterval(timeout)
-        let readinessCandidates = [
-            app.staticTexts["Start here"],
-            app.staticTexts["On-device"],
-            app.descendants(matching: .any)["TodayRealityRail"]
-        ]
 
         while Date() < deadline {
-            if readinessCandidates.contains(where: { $0.exists }) {
+            if todayReadinessAnchors(in: app).contains(where: { $0.exists }) {
                 return true
             }
             RunLoop.current.run(until: Date().addingTimeInterval(0.2))
         }
 
-        return readinessCandidates.contains(where: { $0.exists })
+        return todayReadinessAnchors(in: app).contains(where: { $0.exists })
+    }
+
+    private func todayReadinessAnchors(in app: XCUIApplication) -> [XCUIElement] {
+        [
+            app.staticTexts["Start here"],
+            app.staticTexts["On-device"],
+            app.staticTexts["TodayRealityRailStartHereTitle"],
+            app.staticTexts["TodayRealityRailStepTitle"],
+            app.otherElements["TodayRealityRail"],
+            app.buttons["TodayRealityRailPrimaryAction"]
+        ]
     }
 
     private func waitForShellReady(in app: XCUIApplication, timeout: TimeInterval = 30) -> Bool {
@@ -3117,6 +3130,25 @@ final class AmbitionsUITests: XCTestCase {
             scrollPageDown(in: app)
         }
 
+        return exactStaticText.exists || exactButton.exists || matchingStaticText.exists || matchingButton.exists
+    }
+
+    private func waitForScreenshotCopy(_ label: String, in app: XCUIApplication, timeout: TimeInterval = 3) -> Bool {
+        let deadline = Date().addingTimeInterval(timeout)
+        while Date() < deadline {
+            if screenshotCopyExists(label, in: app) {
+                return true
+            }
+            RunLoop.current.run(until: Date().addingTimeInterval(0.2))
+        }
+        return screenshotCopyExists(label, in: app)
+    }
+
+    private func screenshotCopyExists(_ label: String, in app: XCUIApplication) -> Bool {
+        let exactStaticText = app.staticTexts[label]
+        let exactButton = app.buttons[label]
+        let matchingStaticText = app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", label)).firstMatch
+        let matchingButton = app.buttons.matching(NSPredicate(format: "label CONTAINS[c] %@", label)).firstMatch
         return exactStaticText.exists || exactButton.exists || matchingStaticText.exists || matchingButton.exists
     }
 
