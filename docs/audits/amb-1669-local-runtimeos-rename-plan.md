@@ -1,9 +1,10 @@
 # AMB-1669 LocalRuntimeOS Rename Plan
 
-Status: In progress
-Date: 2026-07-03
+Status: Ready for review
+Date: 2026-07-04
 Scope: AMB-1669 M03 Runtime Simplification
 Baseline: `main` / `origin/main` `6bfac0ec7f054dcbfa0597fe3b9452d00e1b4a5c`
+Decision-record baseline: `main` / `origin/main` `348d7e4786c50cbec2e9f0ea7ca6786e528e487a`
 
 ## Purpose
 
@@ -24,10 +25,10 @@ Current source owner count after the `Continuity` slice: 19.
 | Boundary | 18 | Boundary | First slice renamed from `RuntimeBoundary` |
 | Commands | 25 | Commands | Second slice renamed from `CommandSpine` |
 | Transactions | 12 | Transactions | Third slice renamed from `TransactionKernel` |
-| EventJournal | 10 | Events or EventJournal | Pending |
+| EventJournal | 10 | EventJournal | Retain name - decision recorded |
 | State | 4 | State | Ninth slice renamed from `ObjectState` |
 | Projections | 32 | Projections | Fourth slice renamed from `ProjectionEngine` |
-| PrivateLifeRuntimeKernel | 37 | RuntimeKernel or collapsed into retained owners | Pending decision |
+| PrivateLifeRuntimeKernel | 37 | PrivateLifeRuntimeKernel | Retain name - decision recorded |
 | Planning | 68 | Planning | Tenth slice renamed from `PlanningEngine` |
 | Scheduling | 35 | Scheduling | Eleventh slice renamed from `TimeEngine` and collapsed numbered ScheduleInstall split filenames |
 | CaptureRouting | 20 | CaptureRouting | Twelfth slice renamed from `CaptureRouteGraph` |
@@ -35,8 +36,8 @@ Current source owner count after the `Continuity` slice: 19.
 | Search | 10 | Search | Seventh slice renamed from `SearchRecall` |
 | ExternalWrites | 13 | ExternalWrites | Fifth slice renamed from `SideEffectSystem` |
 | Continuity | 10 | Continuity | Thirteenth slice renamed from `SyncContinuity` |
-| SourceAtlas | 80 | SourceAtlas or ReferencePacks | Pending decision |
-| PrivacySecurity | 12 | Boundary or Privacy | Pending decision |
+| SourceAtlas | 80 | SourceAtlas | Retain name - decision recorded |
+| PrivacySecurity | 12 | PrivacySecurity | Retain name - decision recorded |
 | Storage | 27 | Storage | Retain name |
 | Repair | 20 | Repair | Eighth slice renamed from `MigrationRepair` and split over-cap RuntimeDoctor repair operator types |
 | Diagnostics | 8 | Diagnostics | Retain name |
@@ -418,18 +419,124 @@ Reason:
 - The ownership test now proves required `Continuity` files exist and the old
   `SyncContinuity` production/test owner paths are gone.
 
+## Retain/Collapse Decision Records
+
+These records close the AMB-1669 decision gap for remaining owner names after
+inspection of the Final Architecture Tree, implementation truth, current source,
+and owner tests. They do not move source, add runtime authority, widen API
+exposure, or claim AMB-1670 ownership-test completion.
+
+### EventJournal - retain
+
+Decision: retain `EventJournal`.
+
+Reason:
+
+- The Final Architecture Tree names `EventJournal/` under
+  `Core/LocalRuntimeOS/` with event, envelope, store, cursor, compactor, replay,
+  checksum, causal-clock, and tombstone-ledger responsibilities.
+- Current source has 10 owner-local Swift files for runtime event records,
+  append/replay, checksums, cursors, compaction, causal clocks, and tombstones.
+- Collapsing to `Events` would make the owner less concrete and would not
+  remove duplicate authority, because there is no separate retained `Events`
+  owner in the current tree.
+- This owner is the event leg of `Command -> Event -> Projection -> Receipt ->
+  Replay`, so the journal/replay wording is useful runtime law, not lore.
+
+Follow-up: executable ownership proof belongs in the next ownership-test train;
+this record only decides that AMB-1669 should not rename the folder.
+
+### PrivateLifeRuntimeKernel - retain
+
+Decision: retain `PrivateLifeRuntimeKernel`.
+
+Reason:
+
+- The Final Architecture Tree names `PrivateLifeRuntimeKernel/` with decision,
+  recommendation, capacity-fit, recovery, closure, proof, adaptation,
+  explanation, replayable-decision-trace, and personalization-ledger
+  responsibilities.
+- Current source has 37 owner-local Swift files for the private life decision
+  runtime and its typed local-runtime signals.
+- Renaming to `RuntimeKernel` would reduce product-law specificity without
+  deleting or collapsing duplicate authority.
+- Collapsing the owner into Planning, Scheduling, Inspection, or State would mix
+  decision/recommendation/capacity/recovery behavior into owners that already
+  have narrower canonical responsibilities.
+
+Follow-up: this owner still has source hygiene debt, including descriptive split
+cleanup in some files, but that requires a scoped source repair train rather
+than a folder-level AMB-1669 rename.
+
+### SourceAtlas - retain
+
+Decision: retain `SourceAtlas`.
+
+Reason:
+
+- Product and implementation truth define Source Atlas as the public/reference
+  pack and freshness boundary; the Final Architecture Tree names
+  `SourceAtlas/` with public-pack request, manifest, signature, cache,
+  freshness, last-known-good, R2 gateway, public-only firewall, and projection
+  responsibilities.
+- Current source has 80 owner-local Swift files and corresponding focused test
+  owners for public-only request compilation, private-graph rejection, manifest
+  verification, freshness evaluation, last-known-good cache selection,
+  SourceAtlas projection materialization, and bounded R2 request metadata.
+- Renaming to `ReferencePacks` would hide the broader Source Atlas boundary,
+  projection, ingestion, freshness, and public-only firewall responsibilities.
+- No new Source Atlas scope is approved here; this record retains the existing
+  canonical owner only.
+
+Follow-up: Source Atlas remains bounded to local source/test behavior. This
+record does not prove production R2 deployment, transparency logs, signing
+operations, app-wide Source Atlas consumption, or release readiness.
+
+### PrivacySecurity - retain
+
+Decision: retain `PrivacySecurity`.
+
+Reason:
+
+- The Final Architecture Tree names `PrivacySecurity/` with privacy
+  classification, redaction, egress firewall, export policy, local auth, file
+  protection, encrypted blob vault, privacy manifest, and sensitive-surface
+  responsibilities.
+- Current source has 12 owner-local Swift files for privacy classification,
+  redaction, egress, export review, local auth, file protection, encrypted
+  storage, privacy manifests, sensitive surfaces, safety jurisdiction gating,
+  and the moved storage privacy/security boundary.
+- Collapsing this owner into `Boundary` would blur runtime privacy/security
+  policy with account, network, source-atlas, and local-only boundary decisions.
+- Renaming to `Privacy` would drop security responsibilities that are already
+  source-present and explicitly named by current implementation truth.
+
+Follow-up: broader app-wide privacy firewall, network-egress enforcement, and
+privacy/legal approval remain outside AMB-1669.
+
 ## API Exposure
 
-The moved `Boundary`, `Commands`, `Transactions`, `Projections`, `ExternalWrites`, `Inspection`, `Search`, `Repair`, `State`, `Planning`, `Scheduling`, `CaptureRouting`, and `Continuity` source contains no `public` or `open` Swift API declarations.
+The moved `Boundary`, `Commands`, `Transactions`, `Projections`,
+`ExternalWrites`, `Inspection`, `Search`, `Repair`, `State`, `Planning`,
+`Scheduling`, `CaptureRouting`, and `Continuity` source contains no `public` or
+`open` Swift API declarations.
+
+The retained `EventJournal`, `PrivateLifeRuntimeKernel`, and `PrivacySecurity`
+source contains no `public` or `open` Swift API declarations. The retained
+`SourceAtlas` owner has existing public freshness-manifest model declarations in
+`SourceAtlasFreshnessBrokerModels.swift`; this decision-record slice does not
+add, remove, or widen that exposure.
 
 Current exposure is same-module production/test use through Swift files under the existing `Ambitions` target and `AmbitionsTests` target. XcodeGen source discovery is directory-based through `project.yml`, so the move requires project regeneration but no package or target boundary change.
 
-Known direct consumers of the moved `Boundary`, `Commands`, `Transactions`,
-`Projections`, `ExternalWrites`, `Inspection`, `Search`, `Repair`, `State`,
-`Planning`, `Scheduling`, `CaptureRouting`, and `Continuity` types remain same-module:
+Known direct consumers of the moved and retained LocalRuntimeOS owners remain
+same-module, except for the existing `SourceAtlas` public freshness-manifest
+models noted above:
 
+- `Boundary`
 - `Commands`
 - `Transactions`
+- `EventJournal`
 - `Projections`
 - `ExternalWrites`
 - `Inspection`
@@ -447,7 +554,10 @@ Known direct consumers of the moved `Boundary`, `Commands`, `Transactions`,
 
 ## Proof Ceiling
 
-This slice can support Source Green for the folder-owner rename if validation passes. It does not claim:
+The applied rename slices can support Source Green for the folder-owner renames
+when their validation evidence is present. This decision-record slice can
+support AMB-1669 Ready For Review for the documented runtime map and remaining
+retain/collapse decisions. It does not claim:
 
 - full AMB-1669 completion
 - all LocalRuntimeOS names simplified
@@ -463,10 +573,11 @@ This slice can support Source Green for the folder-owner rename if validation pa
 
 ## Next Rename Candidates
 
-No additional direct rename candidate is approved by this plan without a
-decision record.
+No additional direct rename candidate remains approved by this plan.
 
-`EventJournal`, `PrivateLifeRuntimeKernel`, `SourceAtlas`, and `PrivacySecurity`
-require retain/collapse decision records before source moves. Each future slice
-must update tests, current truth/proof references, and the LocalRuntimeProof
-owner list before closeout.
+The `EventJournal`, `PrivateLifeRuntimeKernel`, `SourceAtlas`, and
+`PrivacySecurity` retain/collapse decisions are recorded above. Any future move
+inside those owners must be a scoped source remediation or ownership-proof train,
+not another AMB-1669 folder-name cleanup. Such a train must update tests,
+current truth/proof references, and the LocalRuntimeProof owner list before
+closeout when source behavior or owner contracts change.
