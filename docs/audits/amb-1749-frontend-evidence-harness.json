@@ -1,0 +1,280 @@
+{
+  "issue": "AMB-1749",
+  "title": "Frontend Evidence Harness",
+  "status": "implemented_yellow_ready_for_review",
+  "claim_boundary": "Harness/index proof only; not visual quality, accessibility conformance, device proof, TestFlight readiness, App Store readiness, Release Green, or frontend completion.",
+  "sibling_frontend_recovery_project": {
+    "name": "Ambitions Flagship Frontend Recovery",
+    "project_id": "94c36d50-9a1a-4b25-ba13-a6bd47a9866f",
+    "linked_issue_range": [
+      "AMB-1733",
+      "AMB-1734",
+      "AMB-1735",
+      "AMB-1736",
+      "AMB-1737",
+      "AMB-1738",
+      "AMB-1739",
+      "AMB-1740",
+      "AMB-1741",
+      "AMB-1742",
+      "AMB-1743",
+      "AMB-1744",
+      "AMB-1751"
+    ]
+  },
+  "acceptance_locks": {
+    "covers_sibling_frontend_recovery_project": true,
+    "screenshot_artifacts_have_stable_paths": true,
+    "slow_release_checks_are_separated_from_fast_local_checks": true,
+    "unit_tests_cannot_infer_frontend_green": true,
+    "visual_green_requires_independent_visual_review": true,
+    "device_claims_require_device_evidence": true
+  },
+  "artifact_roots": {
+    "retained_manifest": "docs/audits/amb-1749-frontend-evidence-harness.json",
+    "retained_audit": "docs/audits/amb-1749-frontend-evidence-harness.md",
+    "local_fast_results": ".codex/xcode-results/AMB_1749_FRONTEND_FAST_LOCAL/",
+    "local_fast_logs": ".codex/xcode-logs/AMB_1749_FRONTEND_FAST_LOCAL/",
+    "local_fast_summaries": ".codex/xcode-summaries/AMB_1749_FRONTEND_FAST_LOCAL/",
+    "local_screenshot_results": ".codex/xcode-results/AMB_1749_FRONTEND_SCREENSHOT_ARTIFACTS/",
+    "local_screenshot_logs": ".codex/xcode-logs/AMB_1749_FRONTEND_SCREENSHOT_ARTIFACTS/",
+    "local_screenshot_summaries": ".codex/xcode-summaries/AMB_1749_FRONTEND_SCREENSHOT_ARTIFACTS/",
+    "local_release_index_results": ".codex/xcode-results/AMB_1749_FRONTEND_RELEASE_INDEX/",
+    "local_release_index_logs": ".codex/xcode-logs/AMB_1749_FRONTEND_RELEASE_INDEX/",
+    "local_release_index_summaries": ".codex/xcode-summaries/AMB_1749_FRONTEND_RELEASE_INDEX/"
+  },
+  "lanes": [
+    {
+      "id": "fast_frontend_local",
+      "speed_class": "fast_local",
+      "purpose": "Run source-route, shell, visual-fixture, and accessibility contract checks without screenshot or release claims.",
+      "claim_boundary": "May support frontend harness coverage only; cannot prove rendered visual quality, accessibility conformance, device behavior, or frontend Green.",
+      "commands": [
+        [
+          "scripts/ambitions-xcode-validate.sh",
+          "--batch",
+          "AMB_1749_FRONTEND_FAST_LOCAL",
+          "--lane",
+          "focused-test",
+          "--test",
+          "AmbitionsTests/AppShellNavigationTests,AmbitionsTests/DesignSystemAccessibilityCanonicalOwnershipTests,AmbitionsTests/SignatureInterfaceVisualQAFixtureTests",
+          "--json"
+        ]
+      ],
+      "artifact_roots": [
+        ".codex/xcode-results/AMB_1749_FRONTEND_FAST_LOCAL/",
+        ".codex/xcode-logs/AMB_1749_FRONTEND_FAST_LOCAL/",
+        ".codex/xcode-summaries/AMB_1749_FRONTEND_FAST_LOCAL/"
+      ]
+    },
+    {
+      "id": "frontend_screenshot_artifacts",
+      "speed_class": "slow_local",
+      "purpose": "Capture rendered screenshot attachments and extract them from xcresult bundles under stable local paths.",
+      "claim_boundary": "May prove that screenshot artifacts were captured for the named run; does not prove visual acceptance, device proof, or accessibility conformance.",
+      "commands": [
+        [
+          "scripts/ambitions-run-ui-screenshot-matrix.sh",
+          "--batch",
+          "AMB_1749_FRONTEND_SCREENSHOT_ARTIFACTS",
+          "--timeout",
+          "20m",
+          "--kill-after",
+          "60s"
+        ],
+        [
+          "scripts/ambitions-xcode-test-focused.sh",
+          "--batch",
+          "AMB_1749_FRONTEND_SCREENSHOT_ARTIFACTS",
+          "--test",
+          "AmbitionsUITests/VisualTargetAttachmentUITests",
+          "--timeout",
+          "20m",
+          "--kill-after",
+          "60s"
+        ]
+      ],
+      "artifact_roots": [
+        ".codex/xcode-results/AMB_1749_FRONTEND_SCREENSHOT_ARTIFACTS/",
+        ".codex/xcode-logs/AMB_1749_FRONTEND_SCREENSHOT_ARTIFACTS/",
+        ".codex/xcode-summaries/AMB_1749_FRONTEND_SCREENSHOT_ARTIFACTS/"
+      ]
+    },
+    {
+      "id": "frontend_release_index",
+      "speed_class": "slow_release",
+      "purpose": "Index the frontend evidence required before release proof can mention frontend quality.",
+      "claim_boundary": "Index proof only. AMB-1750 owns the release proof gate, visual acceptance, device-sensitive claims, and frontend Green/Yellow/Red release classification.",
+      "commands": [
+        [
+          "python3",
+          "scripts/ambitions-frontend-evidence-harness.py",
+          "--check",
+          "--json"
+        ]
+      ],
+      "artifact_roots": [
+        ".codex/xcode-results/AMB_1749_FRONTEND_RELEASE_INDEX/",
+        ".codex/xcode-logs/AMB_1749_FRONTEND_RELEASE_INDEX/",
+        ".codex/xcode-summaries/AMB_1749_FRONTEND_RELEASE_INDEX/"
+      ]
+    }
+  ],
+  "ui_journeys": [
+    {
+      "id": "root_shell",
+      "surface_or_flow": "root shell",
+      "source_file": "Native/AmbitionsUITests/AmbitionsUITests.swift",
+      "test_symbols": [
+        "testPreviewBootstrapExposesCanonicalFourTabShellAndSecondarySurfaces",
+        "testUIQL002ShellGeometryKeepsChromeInsideSafeAreasAndDockHittable",
+        "testAFRI005ShellScreenshotBaselineCapturesCanonicalTabs"
+      ],
+      "required_artifacts": [
+        "screenshot_or_explicit_not_run_reason",
+        "safe_area_note",
+        "root_dock_note"
+      ]
+    },
+    {
+      "id": "capture",
+      "surface_or_flow": "global Capture",
+      "source_file": "Native/AmbitionsUITests/AmbitionsUITests.swift",
+      "test_symbols": [
+        "testUIQL002ActivatedCaptureSeamUsesOverlayKeyboardClearanceWithoutRootDock",
+        "testAMB967CaptureCreateGoalScreenshotMatrix",
+        "testCaptureComposerLaunchKeepsGlobalCaptureComposerReachable"
+      ],
+      "required_artifacts": [
+        "screenshot_or_explicit_not_run_reason",
+        "keyboard_clearance_note",
+        "capture_not_root_note"
+      ]
+    },
+    {
+      "id": "today",
+      "surface_or_flow": "Today / Start here",
+      "source_file": "Native/AmbitionsUITests/AmbitionsUITests.swift",
+      "test_symbols": [
+        "testTodaySurfaceShowsDominantHeroAndPrimaryAction",
+        "testAMB962TodayReconstructionScreenshotMatrix",
+        "testTodayCanHandOffToGoalDetail",
+        "testTodayCanHandOffToTime"
+      ],
+      "required_artifacts": [
+        "screenshot_or_explicit_not_run_reason",
+        "start_here_note",
+        "handoff_note"
+      ]
+    },
+    {
+      "id": "goals",
+      "surface_or_flow": "Goals / Constellation Atlas",
+      "source_file": "Native/AmbitionsUITests/AmbitionsUITests.swift",
+      "test_symbols": [
+        "testDemoGoalsAtlasLoadsCoreModules",
+        "testAMB963GoalsReconstructionScreenshotMatrix",
+        "testDemoGoalsAtlasPrimaryActionAndCardRouteToGoalDetail"
+      ],
+      "required_artifacts": [
+        "screenshot_or_explicit_not_run_reason",
+        "goal_detail_note"
+      ]
+    },
+    {
+      "id": "time",
+      "surface_or_flow": "Time / LifeShape Field",
+      "source_file": "Native/AmbitionsUITests/AmbitionsUITests.swift",
+      "test_symbols": [
+        "testLaunchURLCanLandOnCanonicalTimeSurface",
+        "testAMB964TimeReconstructionScreenshotMatrix",
+        "testAMB1174TimeVisualFlagshipLayerScreenshotProof",
+        "testAMB1176TimeEmptyAndAccessibilityProofPacket"
+      ],
+      "required_artifacts": [
+        "screenshot_or_explicit_not_run_reason",
+        "dynamic_type_note",
+        "reduce_motion_note"
+      ]
+    },
+    {
+      "id": "you",
+      "surface_or_flow": "You / User System Profile",
+      "source_file": "Native/AmbitionsUITests/AmbitionsUITests.swift",
+      "test_symbols": [
+        "testYouScreenshotProofLaunchStatesOpenRequiredDetailSheets",
+        "testAMB966YouReconstructionScreenshotMatrix",
+        "testYouTrustSurfaceShowsConservativeExternalStatusLabels"
+      ],
+      "required_artifacts": [
+        "screenshot_or_explicit_not_run_reason",
+        "trust_status_note"
+      ]
+    },
+    {
+      "id": "inspection",
+      "surface_or_flow": "Proof / Source / Privacy / History / Receipts inspection",
+      "source_file": "Native/AmbitionsUITests/VisualTargetAttachmentUITests.swift",
+      "test_symbols": [
+        "testSourceInspectionYouSourcesAttachesRenderedProofScreenshots"
+      ],
+      "required_artifacts": [
+        "screenshot_or_explicit_not_run_reason",
+        "source_inspection_note",
+        "accessibility_size_note"
+      ]
+    }
+  ],
+  "accessibility_smoke": [
+    {
+      "id": "dynamic_type_contracts",
+      "source_file": "Native/AmbitionsTests/App/AccessibilityAdaptiveInterfaceDesignSystemTests.swift",
+      "test_symbols": [
+        "testSI15PrimarySurfaceAccessibilitySummariesCoverAllActiveObjectTargets",
+        "testSI15RequirementsKeepAccessibilityEvidenceExplicitAndNonColor"
+      ],
+      "claim_boundary": "Contract coverage only; manual Dynamic Type proof remains required before accessibility conformance or Green claims."
+    },
+    {
+      "id": "reduce_motion_contracts",
+      "source_file": "Native/AmbitionsTests/App/AccessibilityAdaptiveInterfaceDesignSystemTests.swift",
+      "test_symbols": [
+        "testSI15RequirementsKeepAccessibilityEvidenceExplicitAndNonColor"
+      ],
+      "claim_boundary": "Contract coverage only; rendered Reduce Motion proof remains required before motion, accessibility conformance, or Green claims."
+    },
+    {
+      "id": "visual_fixture_claim_locks",
+      "source_file": "Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift",
+      "test_symbols": [
+        "testSI16FixturesStayEvidenceOnlyWithoutRuntimeOrProofClaims",
+        "testAFI13VisualQAScorecardsLockActiveSurfaceTargetsWithoutClaims"
+      ],
+      "claim_boundary": "Locks missing visual/device/accessibility proof to Yellow; cannot upgrade frontend Green."
+    }
+  ],
+  "source_paths": [
+    "scripts/ambitions-frontend-evidence-harness.py",
+    "scripts/ambitions-xcode-validate.sh",
+    "scripts/ambitions-xcode-test-focused.sh",
+    "scripts/ambitions-run-ui-screenshot-matrix.sh",
+    "scripts/ambitions-xcode-result-extract.sh",
+    "Native/AmbitionsUITests/AmbitionsUITests.swift",
+    "Native/AmbitionsUITests/VisualTargetAttachmentUITests.swift",
+    "Native/AmbitionsTests/App/AppShellNavigationTests.swift",
+    "Native/AmbitionsTests/App/AccessibilityAdaptiveInterfaceDesignSystemTests.swift",
+    "Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift",
+    "docs/audits/amb-1746-frontend-research-extension-gate.md",
+    "docs/audits/amb-1747-stage-shell-frontend-reality-audit.md",
+    "docs/audits/amb-1748-design-system-adoption-proof.md",
+    "docs/audits/amb-1749-frontend-evidence-harness.md"
+  ],
+  "required_claim_denials": [
+    "frontend_green_from_unit_tests",
+    "visual_green_without_independent_review",
+    "accessibility_conformance_without_manual_or_tool_evidence",
+    "device_claim_without_device_evidence",
+    "testflight_or_app_store_readiness_from_harness_only",
+    "release_green_from_frontend_index_only"
+  ]
+}
