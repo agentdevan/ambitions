@@ -28,7 +28,7 @@ while [[ "$#" -gt 0 ]]; do
     --kill-after) KILL_AFTER="${2:-$KILL_AFTER}"; shift 2 ;;
     --without-building|--test-without-building) XCODEBUILD_ACTION="test-without-building"; shift ;;
     -h|--help)
-      echo "Usage: scripts/ambitions-xcode-test-focused.sh --batch <BATCH> --test <TEST_ID> [--scheme auto|Ambitions|AmbitionsUnitTests] [--timeout 15m] [--kill-after 60s] [--without-building]" >&2
+      echo "Usage: scripts/ambitions-xcode-test-focused.sh --batch <BATCH> --test <TEST_ID> [--scheme auto|Ambitions|AmbitionsUnitTests|AmbitionsUITests] [--timeout 15m] [--kill-after 60s] [--without-building]" >&2
       exit 0
       ;;
     *)
@@ -57,6 +57,19 @@ mkdir -p "$RESULT_DIR/$BATCH/$RUN_ID" "$LOG_DIR/$BATCH/$RUN_ID" "$SUMMARY_DIR/$B
 DERIVED_DATA="$REPO_ROOT/.codex/DerivedData/Ambitions"
 mkdir -p "$DERIVED_DATA"
 
+run_with_optional_timeout() {
+  local duration="$1"
+  shift
+
+  if command -v gtimeout >/dev/null 2>&1; then
+    gtimeout "$duration" "$@"
+  elif command -v timeout >/dev/null 2>&1; then
+    timeout "$duration" "$@"
+  else
+    "$@"
+  fi
+}
+
 resolve_scheme() {
   if [[ "$SCHEME" != "auto" ]]; then
     printf '%s\n' "$SCHEME"
@@ -66,6 +79,9 @@ resolve_scheme() {
   case "$test_filter" in
     AmbitionsTests|AmbitionsTests/*)
       printf '%s\n' "${AMBITIONS_XCODE_UNIT_TEST_SCHEME:-AmbitionsUnitTests}"
+      ;;
+    AmbitionsUITests|AmbitionsUITests/*)
+      printf '%s\n' "${AMBITIONS_XCODE_UI_TEST_SCHEME:-AmbitionsUITests}"
       ;;
     *)
       printf '%s\n' "${AMBITIONS_XCODE_FULL_TEST_SCHEME:-Ambitions}"
@@ -77,6 +93,7 @@ RESOLVED_SCHEME="$(resolve_scheme)"
 PROOF_SCOPE="focused"
 case "$RESOLVED_SCHEME" in
   AmbitionsUnitTests) PROOF_SCOPE="unit-focused-fast" ;;
+  AmbitionsUITests) PROOF_SCOPE="ui-focused-fast" ;;
   Ambitions) PROOF_SCOPE="full-scheme-focused" ;;
 esac
 
@@ -107,20 +124,11 @@ JSON
   xcodegen generate >/dev/null
 fi
 
-sim_json="$(scripts/ambitions-xcode-sim-health.sh --json || true)"
+sim_json="$(run_with_optional_timeout "${AMBITIONS_SIM_HEALTH_TIMEOUT:-45s}" scripts/ambitions-xcode-sim-health.sh --json || true)"
 if [[ -n "${AMBITIONS_SIM_UDID:-}" ]]; then
   sim_udid="${AMBITIONS_SIM_UDID}"
 else
-  sim_udid="$(python3 - "$sim_json" <<'PY'
-import json, sys
-text = sys.argv[1] if len(sys.argv) > 1 else "{}"
-try:
-    data = json.loads(text)
-except Exception:
-    data = {}
-print(data.get("udid", ""))
-PY
-)"
+  sim_udid="$(printf '%s\n' "$sim_json" | sed -n 's/.*"udid"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' | head -1)"
 fi
 
 SIM_DEST="platform=iOS Simulator,name=iPhone 17"

@@ -22,7 +22,7 @@ while [[ "$#" -gt 0 ]]; do
     --timeout) TIMEOUT_DURATION="${2:-$TIMEOUT_DURATION}"; shift 2 ;;
     --kill-after) KILL_AFTER="${2:-$KILL_AFTER}"; shift 2 ;;
     -h|--help)
-      echo "Usage: scripts/ambitions-xcode-build-for-testing.sh --batch <BATCH> [--scheme Ambitions|AmbitionsUnitTests] [--timeout 30m] [--kill-after 60s]" >&2
+      echo "Usage: scripts/ambitions-xcode-build-for-testing.sh --batch <BATCH> [--scheme Ambitions|AmbitionsUnitTests|AmbitionsUITests] [--timeout 30m] [--kill-after 60s]" >&2
       exit 0
       ;;
     *)
@@ -44,20 +44,24 @@ mkdir -p "$RESULT_DIR/$BATCH/$RUN_ID" "$LOG_DIR/$BATCH/$RUN_ID" "$SUMMARY_DIR/$B
 DERIVED_DATA="$REPO_ROOT/.codex/DerivedData/Ambitions"
 mkdir -p "$DERIVED_DATA"
 
-sim_json="$(scripts/ambitions-xcode-sim-health.sh --json || true)"
+run_with_optional_timeout() {
+  local duration="$1"
+  shift
+
+  if command -v gtimeout >/dev/null 2>&1; then
+    gtimeout "$duration" "$@"
+  elif command -v timeout >/dev/null 2>&1; then
+    timeout "$duration" "$@"
+  else
+    "$@"
+  fi
+}
+
+sim_json="$(run_with_optional_timeout "${AMBITIONS_SIM_HEALTH_TIMEOUT:-45s}" scripts/ambitions-xcode-sim-health.sh --json || true)"
 if [[ -n "${AMBITIONS_SIM_UDID:-}" ]]; then
   sim_udid="${AMBITIONS_SIM_UDID}"
 else
-  sim_udid="$(python3 - "$sim_json" <<'PY'
-import json, sys
-text = sys.argv[1] if len(sys.argv) > 1 else "{}"
-try:
-    data = json.loads(text)
-except Exception:
-    data = {}
-print(data.get("udid", ""))
-PY
-)"
+  sim_udid="$(printf '%s\n' "$sim_json" | sed -n 's/.*"udid"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' | head -1)"
 fi
 
 SIM_DEST="platform=iOS Simulator,name=iPhone 17"

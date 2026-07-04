@@ -165,3 +165,14 @@ schemes:
       gatherCoverageData: false
       targets:
         - name: AmbitionsTests
+  AmbitionsUITests:
+    build:
+      targets:
+        AmbitionsUITests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      gatherCoverageData: false
+      targets:
+        - name: AmbitionsUITests

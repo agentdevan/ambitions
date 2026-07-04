@@ -5,7 +5,7 @@ REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd -P)"
 cd "$REPO_ROOT"
 
 BATCH="DESIGN_TRUTH_TRAIN_05_6"
-SCHEME="Ambitions"
+SCHEME="AmbitionsUITests"
 DESTINATION="platform=iOS Simulator,name=iPhone 17 Pro,OS=26.5"
 TIMEOUT_DURATION="20m"
 KILL_AFTER="60s"
@@ -22,7 +22,7 @@ Runs the AMB-962 Today screenshot matrix through scripts/ambitions-bounded-xcode
 
 Options:
   --batch <name>          Batch directory under .codex outputs. Default: DESIGN_TRUTH_TRAIN_05_6.
-  --scheme <name>         Xcode scheme. Default: Ambitions.
+  --scheme <name>         Xcode scheme. Default: AmbitionsUITests.
   --destination <spec>    Xcode destination. Default: platform=iOS Simulator,name=iPhone 17 Pro,OS=26.5.
   --timeout <duration>    Wall-clock timeout. Default: 20m.
   --kill-after <duration> Timeout kill-after grace. Default: 60s.
