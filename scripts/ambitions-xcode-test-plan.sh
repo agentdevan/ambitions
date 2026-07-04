@@ -57,6 +57,26 @@ mkdir -p "$RESULT_DIR/$BATCH/$TS" "$LOG_DIR/$BATCH/$TS" "$SUMMARY_DIR/$BATCH/$TS
 DERIVED_DATA="$REPO_ROOT/.codex/DerivedData/Ambitions"
 mkdir -p "$DERIVED_DATA"
 
+json_field() {
+  local key="$1"
+  local payload="$2"
+  python3 - "$key" "$payload" <<'PY'
+import json
+import sys
+
+key, payload = sys.argv[1], sys.argv[2]
+try:
+    data = json.loads(payload)
+except Exception:
+    data = {}
+value = data.get(key, "")
+if isinstance(value, bool):
+    print("true" if value else "false")
+else:
+    print(value)
+PY
+}
+
 if command -v scripts/ambitions-xcodegen-needed.sh >/dev/null 2>&1; then
   need_output="$(scripts/ambitions-xcodegen-needed.sh || true)"
   need_required="$(awk -F= '/^XCODEGEN_NEEDED=/{print $2}' <<<"$need_output")"
@@ -69,21 +89,35 @@ if command -v scripts/ambitions-xcodegen-needed.sh >/dev/null 2>&1; then
   fi
 fi
 
-sim_line="$(scripts/ambitions-xcode-sim-health.sh --json || true)"
-sim_udid="$(python3 - "$sim_line" <<'PY'
-import json, sys
-try:
-    data = json.loads(sys.argv[1])
-except Exception:
-    data = {}
-print(data.get("udid", ""))
-PY
-)"
-
-SIM_DEST="platform=iOS Simulator,name=iPhone 17"
-if [[ -n "${AMBITIONS_SIM_UDID:-${sim_udid:-}}" ]]; then
-  SIM_DEST="platform=iOS Simulator,id=${AMBITIONS_SIM_UDID:-$sim_udid}"
+set +e
+sim_line="$(scripts/ambitions-xcode-sim-health.sh --json)"
+sim_status=$?
+set -e
+sim_failure="$(json_field failure_category "$sim_line")"
+[[ -n "$sim_failure" ]] || sim_failure="simulator_health_unavailable"
+sim_udid="$(json_field udid "$sim_line")"
+sim_state="$(json_field state "$sim_line")"
+if [[ "$sim_status" -ne 0 || -z "$sim_udid" || "$sim_state" != "Booted" ]]; then
+  cat > "$SUMMARY_FILE" <<JSON
+{
+  "batch": "$BATCH",
+  "lane": "test-plan",
+  "test_plan": "$TEST_PLAN",
+  "plan_path": "$PLAN_PATH",
+  "status": "failed",
+  "failure_category": "$sim_failure",
+  "result_bundle": "$RESULT_BUNDLE",
+  "log_file": "$LOG_FILE",
+  "timestamp_utc": "$TS",
+  "sim_destination": "unavailable",
+  "claim_boundary": "simulator preflight failure only; no test-plan proof produced"
+}
+JSON
+  echo "FAILURE_CLASS=$sim_failure"
+  exit "$([[ "$sim_failure" == "simctl_unresponsive" ]] && echo 25 || echo 22)"
 fi
+
+SIM_DEST="platform=iOS Simulator,id=${sim_udid}"
 
 run_xcode_plan() {
   set +e

@@ -13,13 +13,32 @@ PATTERNS = {
         r"\bFailed to produce objective-c header\b",
         r"\bfatal error:\s+[A-Za-z]",
     ],
+    "launch_wait_timeout": [
+        r"Timed out waiting for .* to launch",
+        r"Failed to launch .* within",
+        r"Launch .* timed out",
+    ],
+    "idle_wait_timeout": [
+        r"Timed out waiting for .* to idle",
+        r"Wait for .* to idle.*Timed out",
+    ],
+    "assertion_failure": [
+        r"\bAssertion Failure\b",
+        r"\bXCTAssert\w*\b.*failed",
+    ],
     "test_failure": [
         r"\b\d+\s+tests?\s+failed\b",
         r"\*\*\s+TEST\s+FAILED\b",
         r"\*\*\s+TEST\s+EXECUTE\s+FAILED\b",
         r"\bTest Case .* failed\b",
-        r"\bAssertion Failure\b",
         r"\btest failed\b",
+    ],
+    "automation_event_timeout": [
+        r"(?s)Setting up automation session.*\*\*\s+BUILD\s+INTERRUPTED\s+\*\*",
+        r"(?s)Wait for .* to idle.*\*\*\s+BUILD\s+INTERRUPTED\s+\*\*",
+        r"(?s)Checking existence of .* retry \d+.*\*\*\s+BUILD\s+INTERRUPTED\s+\*\*",
+        r"Timed out.*(?:synthesiz|automation|accessibility hierarchy|idle)",
+        r"Failed to synthesize event",
     ],
     "test_timeout": [
         r"Test run did not complete",
@@ -39,7 +58,6 @@ PATTERNS = {
         r"NSMachErrorDomain\s+Code:\s*-308",
         r"Mach error -308",
         r"\(ipc/mig\) server died",
-        r"\*\*\s+BUILD\s+INTERRUPTED\s+\*\*",
     ],
     "test_discovery_failure": [
         r"No such test class",
@@ -85,6 +103,26 @@ PATTERNS = {
         r"result bundle \"?[^\" ]+\"? does not exist",
         r"Failed to generate result bundle",
         r"could not write result bundle",
+    ],
+    "result_extraction_failure": [
+        r"result extraction failed",
+        r"xcresulttool.*failed",
+        r"xcparse.*failed",
+    ],
+    "corrupt_xcresult": [
+        r"corrupt_xcresult",
+        r"Result bundle .* is corrupt",
+        r"result bundle .* is not valid",
+        r"Info\.plist.*missing",
+        r"missing Info\.plist.*xcresult",
+    ],
+    "mcp_timeout_no_test_log": [
+        r"mcp_timeout_no_test_log",
+        r"XCODEBUILD_TIMEOUT_NO_TEST_LOG=1",
+    ],
+    "simctl_unresponsive": [
+        r"simctl_unresponsive",
+        r"simctl list devices .* exceeded",
     ],
     "tool_missing": [
         r"\bcommand not found\b",

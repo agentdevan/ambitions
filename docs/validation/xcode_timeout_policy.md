@@ -51,7 +51,7 @@ scripts/ambitions-run-ui-screenshot-matrix.sh --batch <BATCH>
 
 The helper uses:
 
-- destination: `platform=iOS Simulator,name=iPhone 17 Pro,OS=26.5`;
+- destination: the `scripts/ambitions-xcode-sim-health.sh` selected simulator UDID by default, or an explicit `--destination` override;
 - test: `AmbitionsUITests/AmbitionsUITests/testAMB962TodayReconstructionScreenshotMatrix`;
 - result bundle: `.codex/xcode-results/<batch>/<timestamp>-AMB962.xcresult`;
 - extraction: `scripts/ambitions-xcode-result-extract.sh --result <bundle> --output-dir <extract-dir>`;

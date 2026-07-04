@@ -77,6 +77,26 @@ run_with_optional_timeout() {
   fi
 }
 
+json_field() {
+  local key="$1"
+  local payload="$2"
+  python3 - "$key" "$payload" <<'PY'
+import json
+import sys
+
+key, payload = sys.argv[1], sys.argv[2]
+try:
+    data = json.loads(payload)
+except Exception:
+    data = {}
+value = data.get(key, "")
+if isinstance(value, bool):
+    print("true" if value else "false")
+else:
+    print(value)
+PY
+}
+
 resolve_scheme() {
   if [[ "$SCHEME" != "auto" ]]; then
     printf '%s\n' "$SCHEME"
@@ -148,18 +168,81 @@ JSON
   xcodegen generate >/dev/null
 fi
 
-sim_json="$(run_with_optional_timeout "${AMBITIONS_SIM_HEALTH_TIMEOUT:-45s}" scripts/ambitions-xcode-sim-health.sh --json || true)"
-if [[ -n "${AMBITIONS_SIM_UDID:-}" ]]; then
-  sim_udid="${AMBITIONS_SIM_UDID}"
-else
-  sim_udid="$(printf '%s\n' "$sim_json" | sed -n 's/.*"udid"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' | head -1)"
+write_sim_health_failure_summary() {
+  local failure_class="$1"
+  local health_payload="$2"
+  local exit_code="${3:-22}"
+  local selected_udid selected_name selected_state booted_count app_pid_count xcode_process_count
+
+  selected_udid="$(json_field udid "$health_payload")"
+  selected_name="$(json_field sim_name "$health_payload")"
+  selected_state="$(json_field state "$health_payload")"
+  booted_count="$(json_field booted_simulator_count "$health_payload")"
+  app_pid_count="$(json_field ambitions_app_pid_count "$health_payload")"
+  xcode_process_count="$(json_field xcode_process_count "$health_payload")"
+  [[ -n "$booted_count" ]] || booted_count=0
+  [[ -n "$app_pid_count" ]] || app_pid_count=0
+  [[ -n "$xcode_process_count" ]] || xcode_process_count=0
+
+  cat > "$SUMMARY_FILE" <<JSON
+{
+  "batch": "$BATCH",
+  "lane": "focused-test",
+  "test": "$test_filter",
+  "scheme": "$RESOLVED_SCHEME",
+  "proof_scope": "$PROOF_SCOPE",
+  "requested_xcodebuild_action": "$REQUESTED_XCODEBUILD_ACTION",
+  "xcodebuild_action": "not_run",
+  "status": "failed",
+  "failure_category": "$failure_class",
+  "executed_tests": 0,
+  "duration_seconds": 0,
+  "xcode_observer_seconds": null,
+  "xctest_wall_seconds": null,
+  "result_bundle": "$RESULT_BUNDLE",
+  "log_file": "$LOG_FILE",
+  "timestamp_utc": "$TS",
+  "run_id": "$RUN_ID",
+  "selected_sim_name": "$selected_name",
+  "selected_sim_udid": "$selected_udid",
+  "selected_sim_state": "$selected_state",
+  "booted_simulator_count": $booted_count,
+  "ambitions_app_pid_count": $app_pid_count,
+  "xcode_process_count": $xcode_process_count,
+  "ui_prebuild_required": $UI_PREBUILD_REQUIRED,
+  "ui_prebuild_status": "not_run",
+  "ui_prebuild_failure_category": "$UI_PREBUILD_FAILURE_CLASS",
+  "claim_boundary": "simulator preflight failure only; no focused test proof produced"
+}
+JSON
+  echo "FAILURE_CLASS=$failure_class"
+  echo "EXECUTED_TESTS=0"
+  echo "DURATION_SECONDS=0"
+  echo "SCHEME=$RESOLVED_SCHEME"
+  echo "SIM_HEALTH_STATUS=failed"
+  echo "SIM_HEALTH_SUMMARY=$SUMMARY_FILE"
+  exit "$exit_code"
+}
+
+sim_json=""
+set +e
+sim_json="$(scripts/ambitions-xcode-sim-health.sh --json)"
+sim_status=$?
+set -e
+sim_failure="$(json_field failure_category "$sim_json")"
+[[ -n "$sim_failure" ]] || sim_failure="simulator_health_unavailable"
+if [[ "$sim_status" -ne 0 ]]; then
+  write_sim_health_failure_summary "$sim_failure" "$sim_json" "$sim_status"
 fi
 
-SIM_DEST="platform=iOS Simulator,name=iPhone 17"
-if [[ -n "${AMBITIONS_SIM_UDID:-}" || -n "$sim_udid" ]]; then
-  sim="${AMBITIONS_SIM_UDID:-$sim_udid}"
-  [[ -n "$sim" ]] && SIM_DEST="platform=iOS Simulator,id=${sim}"
+sim_udid="$(json_field udid "$sim_json")"
+sim_state="$(json_field state "$sim_json")"
+if [[ -z "$sim_udid" || "$sim_state" != "Booted" ]]; then
+  write_sim_health_failure_summary "simulator_not_booted" "$sim_json" 22
 fi
+
+SIM_DEST="platform=iOS Simulator,id=${sim_udid}"
+sim="$sim_udid"
 
 extract_executed_tests() {
   local log_file="$1"
@@ -383,7 +466,14 @@ if command -v scripts/ambitions-xcode-result-extract.sh >/dev/null 2>&1; then
 fi
 
 if [[ "$status" -eq 124 ]]; then
-  classification="timeout"
+  detected="$(classify_log_failure)"
+  if [[ "$detected" != "unknown" && -n "$detected" ]]; then
+    classification="$detected"
+  elif [[ ! -s "$LOG_FILE" || ( -e "$RESULT_BUNDLE" && ! -f "$RESULT_BUNDLE/Info.plist" && -z "$(grep -E "Test Suite|Test Case|Testing started" "$LOG_FILE" 2>/dev/null || true)" ) ]]; then
+    classification="mcp_timeout_no_test_log"
+  else
+    classification="timeout"
+  fi
 else
   classification="$(classify_log_failure)"
 fi
@@ -395,6 +485,9 @@ if [[ "$status" -eq 0 ]]; then
     status=65
     classification="test_discovery_failure"
   fi
+fi
+if [[ "$status" -ne 0 && -e "$RESULT_BUNDLE" && ! -f "$RESULT_BUNDLE/Info.plist" && "$classification" == "unknown" ]]; then
+  classification="corrupt_xcresult"
 fi
 [[ -z "$classification" ]] && classification="unknown"
 duration_seconds="$(python3 - "$run_start" <<'PY'

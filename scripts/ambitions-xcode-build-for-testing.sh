@@ -57,18 +57,89 @@ run_with_optional_timeout() {
   fi
 }
 
-sim_json="$(run_with_optional_timeout "${AMBITIONS_SIM_HEALTH_TIMEOUT:-45s}" scripts/ambitions-xcode-sim-health.sh --json || true)"
-if [[ -n "${AMBITIONS_SIM_UDID:-}" ]]; then
-  sim_udid="${AMBITIONS_SIM_UDID}"
-else
-  sim_udid="$(printf '%s\n' "$sim_json" | sed -n 's/.*"udid"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' | head -1)"
+json_field() {
+  local key="$1"
+  local payload="$2"
+  python3 - "$key" "$payload" <<'PY'
+import json
+import sys
+
+key, payload = sys.argv[1], sys.argv[2]
+try:
+    data = json.loads(payload)
+except Exception:
+    data = {}
+value = data.get(key, "")
+if isinstance(value, bool):
+    print("true" if value else "false")
+else:
+    print(value)
+PY
+}
+
+write_sim_health_failure_summary() {
+  local failure_class="$1"
+  local health_payload="$2"
+  local exit_code="${3:-22}"
+  local selected_udid selected_name selected_state booted_count app_pid_count xcode_process_count
+
+  selected_udid="$(json_field udid "$health_payload")"
+  selected_name="$(json_field sim_name "$health_payload")"
+  selected_state="$(json_field state "$health_payload")"
+  booted_count="$(json_field booted_simulator_count "$health_payload")"
+  app_pid_count="$(json_field ambitions_app_pid_count "$health_payload")"
+  xcode_process_count="$(json_field xcode_process_count "$health_payload")"
+  [[ -n "$booted_count" ]] || booted_count=0
+  [[ -n "$app_pid_count" ]] || app_pid_count=0
+  [[ -n "$xcode_process_count" ]] || xcode_process_count=0
+
+  cat > "$SUMMARY_FILE" <<JSON
+{
+  "batch": "$BATCH",
+  "lane": "build-for-testing",
+  "scheme": "$SCHEME",
+  "status": "failed",
+  "failure_category": "$failure_class",
+  "duration_seconds": 0,
+  "result_bundle": "$RESULT_BUNDLE",
+  "log_file": "$LOG_FILE",
+  "timestamp_utc": "$TS",
+  "run_id": "$RUN_ID",
+  "reason": "simulator health unavailable",
+  "selected_sim_name": "$selected_name",
+  "selected_sim_udid": "$selected_udid",
+  "selected_sim_state": "$selected_state",
+  "booted_simulator_count": $booted_count,
+  "ambitions_app_pid_count": $app_pid_count,
+  "xcode_process_count": $xcode_process_count,
+  "claim_boundary": "simulator preflight failure only; no build-for-testing proof produced"
+}
+JSON
+  echo "FAILURE_CLASS=$failure_class"
+  echo "DURATION_SECONDS=0"
+  echo "SIM_HEALTH_STATUS=failed"
+  echo "SIM_HEALTH_SUMMARY=$SUMMARY_FILE"
+  exit "$exit_code"
+}
+
+sim_json=""
+set +e
+sim_json="$(scripts/ambitions-xcode-sim-health.sh --json)"
+sim_status=$?
+set -e
+sim_failure="$(json_field failure_category "$sim_json")"
+[[ -n "$sim_failure" ]] || sim_failure="simulator_health_unavailable"
+if [[ "$sim_status" -ne 0 ]]; then
+  write_sim_health_failure_summary "$sim_failure" "$sim_json" "$sim_status"
 fi
 
-SIM_DEST="platform=iOS Simulator,name=iPhone 17"
-if [[ -n "${AMBITIONS_SIM_UDID:-}" || -n "$sim_udid" ]]; then
-  sim="${AMBITIONS_SIM_UDID:-$sim_udid}"
-  [[ -n "$sim" ]] && SIM_DEST="platform=iOS Simulator,id=${sim}"
+sim_udid="$(json_field udid "$sim_json")"
+sim_state="$(json_field state "$sim_json")"
+if [[ -z "$sim_udid" || "$sim_state" != "Booted" ]]; then
+  write_sim_health_failure_summary "simulator_not_booted" "$sim_json" 22
 fi
+
+SIM_DEST="platform=iOS Simulator,id=${sim_udid}"
 
 need_output="$(scripts/ambitions-xcodegen-needed.sh || true)"
 need_flag="$(awk -F= '/^XCODEGEN_NEEDED=/{print $2}' <<<"$need_output")"
@@ -144,9 +215,18 @@ classification="passed"
 if [[ "$status" -eq 0 ]]; then
   classification="passed"
 elif [[ "$status" -eq 124 ]]; then
-  classification="timeout"
+  detected="$(python3 scripts/ambitions-xcode-failure-classifier.py --log "$LOG_FILE" --json | python3 -c 'import sys, json; print(json.load(sys.stdin).get("classification","unknown"))' )"
+  if [[ "$detected" != "unknown" ]]; then
+    classification="$detected"
+  else
+    classification="timeout"
+  fi
 elif [[ -f "$LOG_FILE" ]]; then
   classification="$(python3 scripts/ambitions-xcode-failure-classifier.py --log "$LOG_FILE" --json | python3 -c 'import sys, json; print(json.load(sys.stdin).get("classification","unknown"))' )"
+fi
+
+if [[ "$status" -ne 0 && -e "$RESULT_BUNDLE" && ! -f "$RESULT_BUNDLE/Info.plist" && "$classification" == "unknown" ]]; then
+  classification="corrupt_xcresult"
 fi
 
 cat > "$SUMMARY_FILE" <<JSON

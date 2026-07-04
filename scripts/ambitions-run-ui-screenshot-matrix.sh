@@ -6,7 +6,7 @@ cd "$REPO_ROOT"
 
 BATCH="DESIGN_TRUTH_TRAIN_05_6"
 SCHEME="AmbitionsUITests"
-DESTINATION="platform=iOS Simulator,name=iPhone 17 Pro,OS=26.5"
+DESTINATION="${AMBITIONS_XCODE_UI_DESTINATION:-}"
 TIMEOUT_DURATION="20m"
 KILL_AFTER="60s"
 PREBUILD_TIMEOUT_DURATION="${AMBITIONS_XCODE_UI_PREBUILD_TIMEOUT:-35m}"
@@ -26,7 +26,7 @@ Runs the AMB-962 Today screenshot matrix through scripts/ambitions-bounded-xcode
 Options:
   --batch <name>          Batch directory under .codex outputs. Default: DESIGN_TRUTH_TRAIN_05_6.
   --scheme <name>         Xcode scheme. Default: AmbitionsUITests.
-  --destination <spec>    Xcode destination. Default: platform=iOS Simulator,name=iPhone 17 Pro,OS=26.5.
+  --destination <spec>    Xcode destination. Default: health-selected simulator UDID.
   --timeout <duration>    Wall-clock timeout. Default: 20m.
   --kill-after <duration> Timeout kill-after grace. Default: 60s.
   --prebuild-timeout <d>  Build-for-testing timeout. Default: 35m.
@@ -63,7 +63,6 @@ done
 
 [[ -n "$BATCH" ]] || { echo "--batch must not be empty" >&2; exit 2; }
 [[ -n "$SCHEME" ]] || { echo "--scheme must not be empty" >&2; exit 2; }
-[[ -n "$DESTINATION" ]] || { echo "--destination must not be empty" >&2; exit 2; }
 [[ -n "$TIMEOUT_DURATION" ]] || { echo "--timeout must not be empty" >&2; exit 2; }
 [[ -n "$KILL_AFTER" ]] || { echo "--kill-after must not be empty" >&2; exit 2; }
 [[ -n "$PREBUILD_TIMEOUT_DURATION" ]] || { echo "--prebuild-timeout must not be empty" >&2; exit 2; }
@@ -72,6 +71,88 @@ TEST_ID="AmbitionsUITests/AmbitionsUITests/testAMB962TodayReconstructionScreensh
 TS="$(date -u +%Y%m%dT%H%M%SZ)"
 mkdir -p "$RESULT_DIR/$BATCH" "$LOG_DIR/$BATCH" "$SUMMARY_DIR/$BATCH"
 mkdir -p "$DERIVED_DATA"
+
+json_field() {
+  local key="$1"
+  local payload="$2"
+  python3 - "$key" "$payload" <<'PY'
+import json
+import sys
+
+key, payload = sys.argv[1], sys.argv[2]
+try:
+    data = json.loads(payload)
+except Exception:
+    data = {}
+value = data.get(key, "")
+if isinstance(value, bool):
+    print("true" if value else "false")
+else:
+    print(value)
+PY
+}
+
+classify_failure() {
+  local status="$1"
+  local log_file="$2"
+  local result_bundle="$3"
+  local detected="unknown"
+
+  if [[ "$status" -eq 0 ]]; then
+    echo "passed"
+    return
+  fi
+
+  if [[ -f "$log_file" ]]; then
+    detected="$(python3 scripts/ambitions-xcode-failure-classifier.py --log "$log_file" --json | python3 -c 'import sys, json; print(json.load(sys.stdin).get("classification","unknown"))' )"
+    if [[ -n "$detected" && "$detected" != "unknown" ]]; then
+      echo "$detected"
+      return
+    fi
+  fi
+
+  if [[ -e "$result_bundle" && ! -f "$result_bundle/Info.plist" ]]; then
+    echo "corrupt_xcresult"
+    return
+  fi
+
+  if [[ "$status" -eq 124 ]]; then
+    echo "test_timeout"
+  else
+    echo "unknown"
+  fi
+}
+
+set +e
+sim_health_json="$(scripts/ambitions-xcode-sim-health.sh --json)"
+sim_health_status=$?
+set -e
+sim_failure="$(json_field failure_category "$sim_health_json")"
+[[ -n "$sim_failure" ]] || sim_failure="simulator_health_unavailable"
+sim_udid="$(json_field udid "$sim_health_json")"
+sim_state="$(json_field state "$sim_health_json")"
+if [[ "$sim_health_status" -ne 0 || -z "$sim_udid" || "$sim_state" != "Booted" ]]; then
+  health_summary="$SUMMARY_DIR/$BATCH/${TS}-AMB962-health/summary.json"
+  mkdir -p "$(dirname "$health_summary")"
+  cat > "$health_summary" <<JSON
+{
+  "batch": "$BATCH",
+  "status": "failed",
+  "failure_category": "$sim_failure",
+  "test_id": "$TEST_ID",
+  "xcodebuild_action": "not_run",
+  "claim_boundary": "simulator preflight failure only; no AMB-962 screenshot proof produced"
+}
+JSON
+  echo "FAILURE_CLASS=$sim_failure"
+  echo "AMB962_STATUS=failed_or_timed_out"
+  echo "AMB962_HEALTH_SUMMARY=$health_summary"
+  exit "$([[ "$sim_failure" == "simctl_unresponsive" ]] && echo 25 || echo 22)"
+fi
+
+if [[ -z "$DESTINATION" ]]; then
+  DESTINATION="platform=iOS Simulator,id=${sim_udid}"
+fi
 
 XCODE_TEST_TIMEOUT_ARGS=()
 if xcodebuild -help 2>&1 | grep -q -- "-test-timeouts-enabled"; then
@@ -120,6 +201,15 @@ run_prebuild() {
     scripts/ambitions-xcode-result-extract.sh --result "$result_bundle" --output-dir "$extract_dir" || true
   fi
 
+  local failure_category
+  local status_label
+  failure_category="$(classify_failure "$status" "$log_file" "$result_bundle")"
+  if [[ "$status" -eq 0 ]]; then
+    status_label="passed"
+  else
+    status_label="failed"
+  fi
+
   cat > "$summary_file" <<JSON
 {
   "batch": "$BATCH",
@@ -128,7 +218,9 @@ run_prebuild() {
   "log_file": "$log_file",
   "result_bundle": "$result_bundle",
   "scheme": "$SCHEME",
+  "status": "$status_label",
   "status_code": $status,
+  "failure_category": "$failure_category",
   "timeout": "$PREBUILD_TIMEOUT_DURATION",
   "test_id": "$TEST_ID",
   "xcodebuild_action": "build-for-testing"
@@ -189,6 +281,14 @@ run_attempt() {
   fi
 
   local summary_file="$SUMMARY_DIR/$BATCH/${run_id}/summary.json"
+  local failure_category
+  local status_label
+  failure_category="$(classify_failure "$status" "$log_file" "$result_bundle")"
+  if [[ "$status" -eq 0 ]]; then
+    status_label="passed"
+  else
+    status_label="failed"
+  fi
   mkdir -p "$(dirname "$summary_file")"
   cat > "$summary_file" <<JSON
 {
@@ -198,7 +298,9 @@ run_attempt() {
   "extract_dir": "$extract_dir",
   "log_file": "$log_file",
   "result_bundle": "$result_bundle",
+  "status": "$status_label",
   "status_code": $status,
+  "failure_category": "$failure_category",
   "test_id": "$TEST_ID",
   "timeout": "$TIMEOUT_DURATION",
   "kill_after": "$KILL_AFTER",

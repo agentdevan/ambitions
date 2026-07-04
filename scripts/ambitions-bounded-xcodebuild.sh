@@ -153,6 +153,9 @@ cleanup_targeted_result_bundle_processes() {
 }
 
 if [[ -n "$TIMEOUT_TOOL" && ( "$status" -eq 124 || "$status" -eq 137 ) ]]; then
+  if [[ -n "$LOG_FILE" ]] && ! grep -Eq "Test Suite|Test Case|Testing started|\\*\\* TEST" "$LOG_FILE" 2>/dev/null; then
+    echo "XCODEBUILD_TIMEOUT_NO_TEST_LOG=1" | tee -a "$LOG_FILE" >&2
+  fi
   echo "XCODEBUILD_TIMEOUT=1" >&2
   echo "TIMEOUT_STATUS=124" >&2
   echo "Process inspection guidance:" >&2

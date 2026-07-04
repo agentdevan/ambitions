@@ -31,6 +31,22 @@ if [[ ! -e "$RESULT" ]]; then
   exit 1
 fi
 
+if [[ ! -f "$RESULT/Info.plist" ]]; then
+  mkdir -p "$OUT_DIR"
+  summary_file="$OUT_DIR/summary.json"
+  cat > "$summary_file" <<JSON
+{
+  "result_bundle": "$RESULT",
+  "status": "failed",
+  "failure_category": "corrupt_xcresult",
+  "reason": "result bundle is missing Info.plist"
+}
+JSON
+  echo "corrupt_xcresult: result bundle missing Info.plist: $RESULT" >&2
+  echo "$summary_file"
+  exit 65
+fi
+
 mkdir -p "$OUT_DIR"
 mkdir -p "$OUT_DIR/attachments" "$OUT_DIR/screenshots" "$OUT_DIR/logs" "$OUT_DIR/coverage"
 

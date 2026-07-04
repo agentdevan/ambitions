@@ -62,7 +62,8 @@ map_exit_code() {
     simulator_boot_failure|simulator_launcher_failure|missing_destination) echo 22 ;;
     xcodegen_project_drift|stale_derived_data) echo 23 ;;
     tool_missing) echo 24 ;;
-    test_timeout) echo 25 ;;
+    test_timeout|automation_event_timeout|launch_wait_timeout|idle_wait_timeout|mcp_timeout_no_test_log|simctl_unresponsive) echo 25 ;;
+    corrupt_xcresult|result_extraction_failure) echo 26 ;;
     *) echo 26 ;;
   esac
 }
@@ -114,9 +115,27 @@ run_wrapper() {
   printf '%s:%s:%s\n' "$status" "$class" "$executed"
 }
 
+PREBOOT_FAILURE_CLASS=""
 preboot_simulator() {
+  PREBOOT_FAILURE_CLASS=""
   if command -v scripts/ambitions-xcode-sim-health.sh >/dev/null 2>&1; then
-    if ! scripts/ambitions-xcode-sim-health.sh --json --repair >/dev/null 2>&1; then
+    local output status
+    set +e
+    output="$(scripts/ambitions-xcode-sim-health.sh --json --repair 2>&1)"
+    status=$?
+    set -e
+    PREBOOT_FAILURE_CLASS="$(python3 - "$output" <<'PY'
+import json
+import sys
+
+try:
+    data = json.loads(sys.argv[1])
+except Exception:
+    data = {}
+print(data.get("failure_category") or "simulator_boot_failure")
+PY
+)"
+    if [[ "$status" -ne 0 ]]; then
       return 1
     fi
   fi
@@ -305,7 +324,7 @@ case "$LANE" in
   build-for-testing)
     if ! preboot_simulator; then
       status=22
-      failure_class="simulator_boot_failure"
+      failure_class="${PREBOOT_FAILURE_CLASS:-simulator_boot_failure}"
     fi
     if [[ "$status" -eq 0 ]]; then
       mkdir -p "$RESULT_BASE/$BATCH/$RUN_ID" "$LOG_BASE/$BATCH/$RUN_ID" "$SUMMARY_BASE/$BATCH/$RUN_ID"
@@ -324,7 +343,7 @@ case "$LANE" in
     [[ -n "$TEST" ]] || TEST="AmbitionsTests/Focused"
     if ! preboot_simulator; then
       status=22
-      failure_class="simulator_boot_failure"
+      failure_class="${PREBOOT_FAILURE_CLASS:-simulator_boot_failure}"
     else
       mkdir -p "$RESULT_BASE/$BATCH/$RUN_ID" "$LOG_BASE/$BATCH/$RUN_ID" "$SUMMARY_BASE/$BATCH/$RUN_ID"
       if [[ "${AMBITIONS_XCODE_SKIP_PREBUILD:-0}" != "1" ]] && swift_changes_since_base; then
@@ -407,7 +426,7 @@ case "$LANE" in
   test-plan|ui-proof|terminal-device-proof)
     if ! preboot_simulator; then
       status=22
-      failure_class="simulator_boot_failure"
+      failure_class="${PREBOOT_FAILURE_CLASS:-simulator_boot_failure}"
     else
       case "$LANE" in
         test-plan) [[ -n "$TEST_PLAN" ]] || TEST_PLAN="Ambitions-Focused" ;;
