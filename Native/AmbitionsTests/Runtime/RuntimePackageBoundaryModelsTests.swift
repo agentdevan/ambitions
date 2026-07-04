@@ -21,15 +21,15 @@ final class RuntimePackageBoundaryModelsTests: XCTestCase {
         let manifest = RuntimePackageBoundaryManifest(packageWiringDeclared: true)
         let files = [
             RuntimeSourceFileBoundary(
-                path: "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/AmbitionsRuntimeContracts.swift",
+                path: "Native/Ambitions/Core/LocalRuntimeOS/Boundary/AmbitionsRuntimeContracts.swift",
                 imports: ["Foundation"]
             ),
             RuntimeSourceFileBoundary(
-                path: "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/AmbitionsRuntimeServices.swift",
+                path: "Native/Ambitions/Core/LocalRuntimeOS/Boundary/AmbitionsRuntimeServices.swift",
                 imports: ["AmbitionsDesignSystem", "Foundation"]
             ),
             RuntimeSourceFileBoundary(
-                path: "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/DedicatedDevicePrototypeRuntime.swift",
+                path: "Native/Ambitions/Core/LocalRuntimeOS/Boundary/DedicatedDevicePrototypeRuntime.swift",
                 imports: ["Foundation"]
             )
         ]
@@ -45,7 +45,7 @@ final class RuntimePackageBoundaryModelsTests: XCTestCase {
     func testValidatorBlocksForbiddenImportsOutOfRootFilesAndRemoteRuntimeClaims() {
         let files = [
             RuntimeSourceFileBoundary(
-                path: "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/BadRuntimeView.swift",
+                path: "Native/Ambitions/Core/LocalRuntimeOS/Boundary/BadRuntimeView.swift",
                 imports: ["Foundation", "SwiftUI"]
             ),
             RuntimeSourceFileBoundary(
@@ -53,7 +53,7 @@ final class RuntimePackageBoundaryModelsTests: XCTestCase {
                 imports: ["Foundation"]
             ),
             RuntimeSourceFileBoundary(
-                path: "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/MissingFoundation.swift",
+                path: "Native/Ambitions/Core/LocalRuntimeOS/Boundary/MissingFoundation.swift",
                 imports: ["AmbitionsDesignSystem"]
             )
         ]
@@ -75,8 +75,8 @@ final class RuntimePackageBoundaryModelsTests: XCTestCase {
         XCTAssertEqual(
             report.offendingPaths,
             [
-                "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/BadRuntimeView.swift",
-                "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/MissingFoundation.swift",
+                "Native/Ambitions/Core/LocalRuntimeOS/Boundary/BadRuntimeView.swift",
+                "Native/Ambitions/Core/LocalRuntimeOS/Boundary/MissingFoundation.swift",
                 "Native/Ambitions/Services/RuntimeBridge.swift"
             ]
         )

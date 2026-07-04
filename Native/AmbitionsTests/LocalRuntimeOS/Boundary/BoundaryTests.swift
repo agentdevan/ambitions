@@ -1,23 +1,23 @@
 @testable import Ambitions
 import XCTest
 
-final class RuntimeBoundaryTests: XCTestCase {
-    func testRuntimeBoundaryCanonicalOwnerFilesExistAndOldBoundaryOwnersAreRemoved() {
+final class BoundaryTests: XCTestCase {
+    func testBoundaryCanonicalOwnerFilesExistAndOldBoundaryOwnersAreRemoved() {
         let root = repoRoot()
         for requiredPath in [
-            "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/PrivateLifeRuntimeBoundary.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/CapabilityMatrix.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/NetworkEgressPolicy.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/LocalOnlyMode.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/AccountBoundary.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasBoundary.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/PrivacyBoundary.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAudit.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasPublicArtifactBoundary.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Boundary/PrivateLifeRuntimeBoundary.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Boundary/CapabilityMatrix.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Boundary/NetworkEgressPolicy.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Boundary/LocalOnlyMode.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Boundary/AccountBoundary.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Boundary/SourceAtlasBoundary.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Boundary/PrivacyBoundary.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Boundary/SourceAtlasNoPrivateGraphEgressAudit.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Boundary/SourceAtlasPublicArtifactBoundary.swift",
         ] {
             XCTAssertTrue(
                 FileManager.default.fileExists(atPath: root.appendingPathComponent(requiredPath).path),
-                "Missing RuntimeBoundary owner file: \(requiredPath)"
+                "Missing Boundary owner file: \(requiredPath)"
             )
         }
 
@@ -29,7 +29,7 @@ final class RuntimeBoundaryTests: XCTestCase {
         ] {
             XCTAssertFalse(
                 FileManager.default.fileExists(atPath: root.appendingPathComponent(retiredPath).path),
-                "Retired RuntimeBoundary path still exists: \(retiredPath)"
+                "Retired Boundary path still exists: \(retiredPath)"
             )
         }
     }
@@ -131,7 +131,7 @@ final class RuntimeBoundaryTests: XCTestCase {
     private func repoRoot() -> URL {
         var url = URL(fileURLWithPath: #filePath)
         while url.pathComponents.count > 1 {
-            let candidate = url.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary")
+            let candidate = url.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/Boundary")
             if FileManager.default.fileExists(atPath: candidate.path) {
                 return url
             }

@@ -197,6 +197,19 @@ scope:
 - Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/KnowledgeIngestionService.swift`
 - Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/KnowledgeProviderBoundary.swift`
 
+AMB-1669 renames existing runtime-boundary source under the clearer
+LocalRuntimeOS `Boundary` owner. These allowlist entries cover the source-owner
+rename only; they do not add public-pack, R2, product-surface, or private
+runtime scope:
+
+- Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/Boundary/CapabilityMatrix.swift`
+- Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/Boundary/SourceAtlasBoundary.swift`
+- Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/Boundary/SourceAtlasNoPrivateGraphEgressAudit.swift`
+- Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/Boundary/SourceAtlasPublicArtifactBoundary.swift`
+- Source Atlas growth allowlist: `Native/AmbitionsTests/LocalRuntimeOS/Boundary/SourceAtlasBoundaryTests.swift`
+- Source Atlas growth allowlist: `Native/AmbitionsTests/LocalRuntimeOS/Boundary/SourceAtlasNoPrivateGraphEgressAuditTests.swift`
+- Source Atlas growth allowlist: `Native/AmbitionsTests/LocalRuntimeOS/Boundary/SourceAtlasPublicArtifactBoundaryTests.swift`
+
 ## Inspection Requirements
 
 Source Atlas work must keep inspection boring and bounded:
@@ -236,7 +249,7 @@ Current supporting evidence:
 - `scripts/source-atlas-no-private-graph-egress-audit.py`
 - `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/`
 - `Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/`
-- `Native/AmbitionsTests/LocalRuntimeOS/RuntimeBoundary/`
+- `Native/AmbitionsTests/LocalRuntimeOS/Boundary/`
 
 AMB-1725 claim status is Implemented Yellow: the governance ADR is installed
 and can be validated, but AMB-1680 remains open until the guard, import/mutation

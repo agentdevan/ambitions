@@ -9,7 +9,7 @@
     "Native/Ambitions/Composer/",
     "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/",
     "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/",
-    "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/",
+    "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
     "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/",
     "Native/Ambitions/Core/Permissions/",
     "Native/AmbitionsWidgetExtension/",
@@ -109,7 +109,7 @@
       "rationale": "Legacy reminder mirror behind the permissions service; not canonical object-state authority."
     },
     {
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/AppServices.swift",
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Boundary/AppServices.swift",
       "classification": "explicitly_non_canonical",
       "allowedCalls": ["appStateRepository.saveState"],
       "rationale": "Moved AMB-1730 startup app-state compatibility write; not canonical object-state authority."

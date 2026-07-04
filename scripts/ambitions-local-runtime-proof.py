@@ -27,7 +27,7 @@ PRODUCTION_SWIFT_ROOTS = [
 ]
 
 REQUIRED_LOCAL_RUNTIME_OWNERS = [
-    "RuntimeBoundary",
+    "Boundary",
     "CommandSpine",
     "TransactionKernel",
     "EventJournal",
