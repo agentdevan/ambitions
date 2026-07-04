@@ -31,7 +31,7 @@ enum ReleaseCandidateLockDecisionReport {
 
     static let releasePosture: ReleaseCandidatePosture = .investorDemoPreparedWithLimitations
 
-    static let postureSummary = "R05 prepares the release-candidate truth for human review. The current build has strong simulator/unit evidence and an investor/demo story, but it is not TestFlight-ready, App Store submission-ready, or locked without human approval."
+    static let postureSummary = "R05 prepares the release-candidate truth for human review. The current build has strong simulator/unit evidence and an investor/demo story, but it is not ready for TestFlight or App Store submission, and it is not locked without human approval. AMB-1750 states frontend quality remains Yellow because current visual, accessibility, journey, and device proof are still required."
 
     static let satisfiedEvidence: [ReleaseCandidateDecisionItem] = [
         ReleaseCandidateDecisionItem(
@@ -78,6 +78,13 @@ enum ReleaseCandidateLockDecisionReport {
             evidence: "R01 keeps AccessibilityClaimsLock.publishableClaims empty until manual VoiceOver, Dynamic Type, Reduce Motion, contrast, motor/tap-target, and external-surface proof exists.",
             state: .blockedByMissingHumanOrDeviceProof,
             nextAction: "Complete manual accessibility verification before publishing Accessibility Nutrition or App Store accessibility claims."
+        ),
+        ReleaseCandidateDecisionItem(
+            id: "frontend-visual-app-store-proof",
+            title: "Frontend Visual/App Store proof is Yellow.",
+            evidence: ReleaseFrontendProofGate.releaseSummary,
+            state: .blockedByMissingHumanOrDeviceProof,
+            nextAction: "Complete AMB-1749 screenshot lanes, AMB-1744/AMB-1743 frontend review, sibling frontend recovery, manual accessibility, Dynamic Type, Reduce Motion, and physical-device evidence before promoting frontend release quality."
         ),
         ReleaseCandidateDecisionItem(
             id: "signed-archive-store-validation",

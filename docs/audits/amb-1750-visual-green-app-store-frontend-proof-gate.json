@@ -1,0 +1,67 @@
+{
+  "issue": "AMB-1750",
+  "title": "Parent Feature - Visual Green / App Store Frontend Proof Gate",
+  "status": "implemented_yellow_ready_for_review",
+  "claim_boundary": "Release proof gate only; not rendered screenshot coverage, visual quality, accessibility conformance, device proof, TestFlight submission, App Store submission, Release Green, or sibling frontend recovery completion.",
+  "release_gate": {
+    "frontend_quality_status": "Yellow",
+    "accepted_yellow_counts_as_green": false,
+    "visual_green_claim_allowed": false,
+    "app_store_frontend_claim_allowed": false,
+    "device_sensitive_claims_require_device_evidence": true
+  },
+  "release_packet_wiring": {
+    "quality_gate_source": "Native/Ambitions/Quality/ReleaseFrontendProofGate.swift",
+    "quality_gate_tests": "Native/AmbitionsTests/Quality/ReleaseFrontendProofGateTests.swift",
+    "rc_decision_report": "Native/Ambitions/Support/ReleaseCandidateLockDecisionReport.swift",
+    "external_truth_packet": "Native/Ambitions/Support/ReleaseExternalTruthReadinessPacket.swift",
+    "rc_blocker_id": "frontend-visual-app-store-proof"
+  },
+  "required_screenshot_scopes": [
+    "root_shell",
+    "capture",
+    "today",
+    "goals",
+    "time",
+    "you",
+    "inspection_details",
+    "empty_error_offline_states"
+  ],
+  "required_proof_kinds": [
+    "screenshot",
+    "journey",
+    "accessibility",
+    "dynamic_type",
+    "reduce_motion",
+    "device",
+    "sibling_dependency",
+    "accepted_yellow_separation"
+  ],
+  "release_dependencies": [
+    "AMB-1749",
+    "AMB-1744",
+    "AMB-1743",
+    "AMB-1733",
+    "AMB-1734",
+    "AMB-1735",
+    "AMB-1736",
+    "AMB-1737",
+    "AMB-1738",
+    "AMB-1739",
+    "AMB-1740",
+    "AMB-1741",
+    "AMB-1742",
+    "AMB-1751"
+  ],
+  "proof_not_produced_by_this_packet": [
+    "current rendered screenshot matrix",
+    "independent visual review",
+    "manual VoiceOver review",
+    "Dynamic Type rendered screenshot review",
+    "Reduce Motion rendered walkthrough",
+    "physical iPhone evidence",
+    "signed archive validation",
+    "live support or privacy URLs",
+    "App Store Connect validation"
+  ]
+}

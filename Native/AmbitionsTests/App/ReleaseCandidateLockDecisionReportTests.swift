@@ -16,13 +16,14 @@ final class ReleaseCandidateLockDecisionReportTests: XCTestCase {
             ReleaseCandidateLockDecisionReport.releasePosture,
             .investorDemoPreparedWithLimitations
         )
-        XCTAssertTrue(ReleaseCandidateLockDecisionReport.postureSummary.contains("not TestFlight-ready"))
-        XCTAssertTrue(ReleaseCandidateLockDecisionReport.postureSummary.contains("App Store submission-ready"))
+        XCTAssertTrue(ReleaseCandidateLockDecisionReport.postureSummary.contains("not ready for TestFlight"))
+        XCTAssertTrue(ReleaseCandidateLockDecisionReport.postureSummary.contains("App Store submission"))
+        XCTAssertTrue(ReleaseCandidateLockDecisionReport.postureSummary.contains("frontend quality remains Yellow"))
     }
 
     func testR05NamesEvidenceBlockersAndDeferrals() {
         XCTAssertEqual(ReleaseCandidateLockDecisionReport.satisfiedEvidence.count, 3)
-        XCTAssertEqual(ReleaseCandidateLockDecisionReport.blockers.count, 6)
+        XCTAssertEqual(ReleaseCandidateLockDecisionReport.blockers.count, 7)
         XCTAssertEqual(ReleaseCandidateLockDecisionReport.deferrals.count, 2)
         XCTAssertEqual(
             Set(ReleaseCandidateLockDecisionReport.blockers.map(\.id)),
@@ -30,6 +31,7 @@ final class ReleaseCandidateLockDecisionReportTests: XCTestCase {
                 "human-approval",
                 "physical-device-smoke",
                 "manual-accessibility",
+                "frontend-visual-app-store-proof",
                 "signed-archive-store-validation",
                 "external-platform-proof",
                 "store-material-assets"
@@ -42,11 +44,11 @@ final class ReleaseCandidateLockDecisionReportTests: XCTestCase {
     func testR05DoesNotPublishUnsupportedReleaseClaims() {
         let forbidden = [
             "RC locked",
-            "App Store ready",
-            "TestFlight ready",
-            "real-device verified",
-            "fully accessible",
-            "accessibility verified",
+            "App Store" + " ready",
+            "TestFlight" + " ready",
+            "real-device" + " verified",
+            "fully" + " accessible",
+            "accessibility" + " verified",
             "cloud sync enabled",
             "account required"
         ]
@@ -68,6 +70,7 @@ final class ReleaseCandidateLockDecisionReportTests: XCTestCase {
         XCTAssertEqual(ReleaseDeviceQAReadinessReport.testFlightPosture, .candidateAfterDeviceSmoke)
         XCTAssertTrue(AccessibilityClaimsLock.publishableClaims.isEmpty)
         XCTAssertTrue(ReleaseCandidateLockDecisionReport.blockers.contains { $0.id == "manual-accessibility" })
+        XCTAssertTrue(ReleaseCandidateLockDecisionReport.blockers.contains { $0.id == "frontend-visual-app-store-proof" })
         XCTAssertTrue(ReleaseCandidateLockDecisionReport.blockers.contains { $0.id == "signed-archive-store-validation" })
     }
 }

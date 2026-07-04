@@ -45,7 +45,7 @@ enum ReleaseExternalTruthReadinessPacket {
             id: "app-store-copy",
             area: .appStoreCopy,
             preparedStatement: "Ambitions helps you capture what is on your mind, shape goals into believable next steps, plan a week that can survive real life, recover when plans change, and review proof of what moved.",
-            evidence: "The active native shell is Today, Goals, Time, Motion, and You, with Capture as the global action; D11-D26, M01-M12, and R01-R03 evidence cover the Golden Launch Loop, local-first trust posture, recovery, reviews, memory visibility, and release gates.",
+            evidence: "The active native shell is Today, Goals, Time, and You, with Capture as the global action and Motion as behavior/proof; D11-D26, M01-M12, R01-R03, and AMB-1750 evidence cover the Golden Launch Loop, local-first trust posture, recovery, reviews, memory visibility, frontend proof limits, and release gates.",
             state: .draftedFromCurrentEvidence,
             limitation: "Final App Store metadata still needs human review, current screenshots, support and privacy URLs, signed archive validation, and approval."
         ),
@@ -53,7 +53,7 @@ enum ReleaseExternalTruthReadinessPacket {
             id: "screenshots",
             area: .screenshots,
             preparedStatement: "Screenshot plan: capture Today, Goals or Goal Detail, Time, You, the global Capture composer, What Ambitions Knows, and one recovery/review moment after the final release build is installed.",
-            evidence: "R03 completed simulator/source scenario coverage; no curated App Store screenshot set has been generated or human-approved in this environment.",
+            evidence: "R03 completed simulator/source scenario coverage; AMB-1749 defines stable frontend screenshot artifact lanes; AMB-1750 classifies frontend quality as \(ReleaseFrontendProofGate.currentStatus.rawValue). No curated App Store screenshot set has been generated or human-approved in this environment.",
             state: .needsHumanAsset,
             limitation: "Do not submit screenshots until the signed build, device class, privacy-safe demo data, and human visual review are complete."
         ),
@@ -84,8 +84,8 @@ enum ReleaseExternalTruthReadinessPacket {
         ReleaseExternalTruthItem(
             id: "release-notes",
             area: .releaseNotes,
-            preparedStatement: "Release notes draft: Ambitions organizes life around Today, Goals, Time, Motion, and You, with global Capture, believable planning, recovery, proof, local trust controls, and clearer release-readiness limits.",
-            evidence: "D01-D26, M01-M12, and R01-R04 are complete for planning purposes, while R05 still gates RC lock.",
+            preparedStatement: "Release notes draft: Ambitions organizes life around Today, Goals, Time, and You, with global Capture, Motion behavior/proof, believable planning, recovery, local trust controls, and clearer release-readiness limits.",
+            evidence: "D01-D26, M01-M12, R01-R04, and AMB-1750 are complete for planning purposes, while R05 still gates RC lock.",
             state: .draftedFromCurrentEvidence,
             limitation: "Final release notes must be reviewed against the exact submitted build and must not claim accessibility, sync, TestFlight, App Store, or RC readiness beyond evidence."
         ),
@@ -101,7 +101,7 @@ enum ReleaseExternalTruthReadinessPacket {
             id: "marketing-one-pager",
             area: .marketingOnePager,
             preparedStatement: "One-page promise: Ambitions makes life feel organized and gives concrete steps to accomplish what the user sets their mind to, without adding another dashboard or requiring an account.",
-            evidence: "The top-level IA stays Today, Goals, Time, Motion, and You, with Capture as the global action; docs and tests guard against Tasks, Insights, Habits, Calendar, account, sync, cloud, and AI-wrapper drift.",
+            evidence: "The top-level IA stays Today, Goals, Time, and You, with Capture as the global action and Motion as behavior/proof; docs and tests guard against Tasks, Insights, Habits, Calendar, account, sync, cloud, and AI-wrapper drift.",
             state: .draftedFromCurrentEvidence,
             limitation: "Marketing must stay tied to shipped native behavior and avoid unverified platform, accessibility, sync, account, or advice claims."
         ),
@@ -109,7 +109,7 @@ enum ReleaseExternalTruthReadinessPacket {
             id: "accessibility-claims",
             area: .accessibilityClaims,
             preparedStatement: "Accessibility public claims remain locked; current copy may say the team is still verifying accessibility evidence, not that support is fully verified.",
-            evidence: "R01 keeps AccessibilityClaimsLock.publishableClaims empty until manual VoiceOver, Dynamic Type, Reduce Motion, contrast, motor, external-surface, and App Store-summary proof exists.",
+            evidence: "R01 keeps AccessibilityClaimsLock.publishableClaims empty until manual VoiceOver, Dynamic Type, Reduce Motion, contrast, motor, external-surface, App Store-summary proof, and AMB-1750 frontend proof gates are satisfied.",
             state: .blockedUntilManualProof,
             limitation: "Do not publish Accessibility Nutrition facts or App Store accessibility claims from the current evidence alone."
         ),
@@ -117,7 +117,7 @@ enum ReleaseExternalTruthReadinessPacket {
             id: "platform-claims",
             area: .platformClaims,
             preparedStatement: "Platform claims remain gated; widgets, Live Activities, Shortcuts, notifications, real-device behavior, TestFlight, App Store submission, and RC lock are not public-ready claims yet.",
-            evidence: "D22-D25/M04/R02/R03 cover shared contracts, source budgets, metadata, and simulator/source paths while keeping rendered/device/platform proof unclaimed.",
+            evidence: "D22-D25/M04/R02/R03 and AMB-1750 cover shared contracts, source budgets, metadata, frontend proof gates, and simulator/source paths while keeping rendered/device/platform proof unclaimed.",
             state: .blockedUntilDeviceProof,
             limitation: "Do not claim physical-device, TestFlight, App Store, external-surface, or RC readiness until R05 and human/device evidence close the gates."
         )
@@ -140,6 +140,6 @@ enum ReleaseExternalTruthReadinessPacket {
     }
 
     static var readinessSummary: String {
-        "R04 prepares \(items.count) external-truth areas for App Store, privacy, marketing, and demo review while keeping App Store submission and RC lock blocked until R05/human gates."
+        "R04 prepares \(items.count) external-truth areas for App Store, privacy, marketing, and demo review while keeping App Store submission, RC lock, and frontend quality blocked at \(ReleaseFrontendProofGate.currentStatus.rawValue) until R05/human/device gates."
     }
 }

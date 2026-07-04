@@ -11,6 +11,8 @@ final class ReleaseExternalTruthReadinessPacketTests: XCTestCase {
         XCTAssertEqual(ReleaseExternalTruthReadinessPacket.items.count, 10)
         XCTAssertTrue(ReleaseExternalTruthReadinessPacket.readinessSummary.contains("R04 prepares"))
         XCTAssertTrue(ReleaseExternalTruthReadinessPacket.readinessSummary.contains("R05"))
+        XCTAssertTrue(ReleaseExternalTruthReadinessPacket.readinessSummary.contains("frontend quality"))
+        XCTAssertTrue(ReleaseExternalTruthReadinessPacket.readinessSummary.contains("Yellow"))
     }
 
     func testR04KeepsSubmissionClaimsBlockedUntilHumanAndDeviceGates() {
@@ -23,7 +25,7 @@ final class ReleaseExternalTruthReadinessPacketTests: XCTestCase {
         XCTAssertTrue(ReleaseExternalTruthReadinessPacket.items.contains { $0.area == .platformClaims && $0.state == .blockedUntilDeviceProof })
     }
 
-    func testR04PacketUsesTimeAsCanonicalTopLevelSurfaceAndDoesNotReintroducePlan() {
+    func testR04PacketUsesCurrentCanonicalTopLevelSurfacesAndDoesNotReintroducePlanOrMotionAsRoot() {
         for item in ReleaseExternalTruthReadinessPacket.items {
             let searchable = [
                 item.preparedStatement,
@@ -39,13 +41,24 @@ final class ReleaseExternalTruthReadinessPacketTests: XCTestCase {
                 searchable.localizedCaseInsensitiveContains("Plan " + "tab"),
                 "\(item.id) should not name Plan as a tab"
             )
+            XCTAssertFalse(
+                searchable.localizedCaseInsensitiveContains("Today, Goals, Time, " + "Motion, and You"),
+                "\(item.id) should not name Motion as a top-level surface"
+            )
         }
 
         XCTAssertTrue(
             ReleaseExternalTruthReadinessPacket.items.contains { item in
                 [item.preparedStatement, item.evidence, item.limitation]
                     .joined(separator: " ")
-                    .localizedCaseInsensitiveContains("Today, Goals, Time, Motion, and You")
+                    .localizedCaseInsensitiveContains("Today, Goals, Time, and You")
+            }
+        )
+        XCTAssertTrue(
+            ReleaseExternalTruthReadinessPacket.items.contains { item in
+                [item.preparedStatement, item.evidence, item.limitation]
+                    .joined(separator: " ")
+                    .localizedCaseInsensitiveContains("Motion as behavior/proof")
             }
         )
     }
@@ -61,7 +74,7 @@ final class ReleaseExternalTruthReadinessPacketTests: XCTestCase {
             "TestFlight" + " ready",
             "real-device" + " verified",
             "fully" + " accessible",
-            "accessibility verified",
+            "accessibility" + " verified",
             "RC locked"
         ]
 
@@ -93,6 +106,7 @@ final class ReleaseExternalTruthReadinessPacketTests: XCTestCase {
             ReleaseExternalTruthReadinessPacket.items.first { $0.area == .accessibilityClaims }
         )
         XCTAssertTrue(accessibility.evidence.contains("AccessibilityClaimsLock.publishableClaims empty"))
+        XCTAssertTrue(accessibility.evidence.contains("AMB-1750 frontend proof gates"))
         XCTAssertEqual(accessibility.state, .blockedUntilManualProof)
         XCTAssertTrue(AccessibilityClaimsLock.publishableClaims.isEmpty)
     }
