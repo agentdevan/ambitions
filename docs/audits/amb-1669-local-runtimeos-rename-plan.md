@@ -1,10 +1,11 @@
 # AMB-1669 LocalRuntimeOS Rename Plan
 
-Status: Ready for review
+Status: Done / Source Green for rename-plan scope
 Date: 2026-07-04
 Scope: AMB-1669 M03 Runtime Simplification
 Baseline: `main` / `origin/main` `6bfac0ec7f054dcbfa0597fe3b9452d00e1b4a5c`
 Decision-record baseline: `main` / `origin/main` `348d7e4786c50cbec2e9f0ea7ca6786e528e487a`
+Final-review baseline: `main` / `origin/main` `f8f76ac0db2b406230ff3475a8ffc4f0729c44ea`
 
 ## Purpose
 
@@ -552,14 +553,45 @@ models noted above:
 - `SourceAtlas`
 - runtime/domain tests
 
+## Final Review
+
+AMB-1669 acceptance review on 2026-07-04:
+
+| Acceptance requirement | Current evidence |
+| --- | --- |
+| Generate current folder/type dependency graph. | Current Owner Graph above lists all 19 LocalRuntimeOS owners, Swift file counts, target owners, and status. |
+| Draft target runtime map. | Current Owner Graph and Retain/Collapse Decision Records define the target map. No direct rename candidate remains approved by this plan. |
+| Identify API exposure. | API Exposure section records moved/retained owner exposure and the one existing `SourceAtlas` public freshness-manifest model exposure. |
+| Rename one compartment at a time with no behavior changes. | Thirteen bounded rename slices are recorded above and in Linear comments, each preserving behavior names unless the name was owner-level lore. |
+| Use temporary typealiases only with expiry. | Current scan of `Native/Ambitions/Core/LocalRuntimeOS` and `Native/AmbitionsTests/LocalRuntimeOS` found no old-owner compatibility typealias shim from AMB-1669. Existing typealiases are same-owner or concrete store/type aliases, not temporary rename bridges. |
+| Update tests and docs. | LocalRuntimeOS tests, truth docs, source inventories, LocalRuntimeProof, and this audit were updated across the rename slices. |
+| Delete old names. | Current directory scan found no production/test LocalRuntimeOS owner directories named `RuntimeBoundary`, `CommandSpine`, `TransactionKernel`, `ProjectionEngine`, `SideEffectSystem`, `TrustSystem`, `SearchRecall`, `MigrationRepair`, `ObjectState`, `PlanningEngine`, `TimeEngine`, `CaptureRouteGraph`, or `SyncContinuity`. |
+| Final runtime map is smaller, concrete, documented, and import-clean. | Current owner graph is reduced to concrete owners; retained owner decisions are documented; `scripts/ambitions-xcode-build-for-testing.sh --batch AMB_1669_FINAL_REVIEW --timeout 45m --kill-after 60s` passed on current `main`. |
+
+Final-review validation:
+
+- Retired LocalRuntimeOS owner directory scan: passed, no retired
+  production/test owner directories found.
+- Temporary rename shim scan: passed, no AMB-1669 old-owner typealias shims
+  found.
+- `python3 scripts/ambitions-remediation-governance-check.py`: passed,
+  `GREEN remediation governance guard passed`, `changed_paths=0`.
+- `python3 scripts/ambitions-accepted-yellow-misuse-audit.py`: passed,
+  `valid=true`, `invalidAcceptedYellowIssues=0`.
+- `python3 scripts/ambitions-local-runtime-proof.py --json`: passed,
+  `status=green`, `checklistPassed=20/20`, `blockers=0`.
+- `scripts/ambitions-xcode-build-for-testing.sh --batch AMB_1669_FINAL_REVIEW --timeout 45m --kill-after 60s`: passed,
+  summary `.codex/xcode-summaries/AMB_1669_FINAL_REVIEW/20260704T121010Z/extract/summary.json`.
+
 ## Proof Ceiling
 
 The applied rename slices can support Source Green for the folder-owner renames
-when their validation evidence is present. This decision-record slice can
-support AMB-1669 Ready For Review for the documented runtime map and remaining
-retain/collapse decisions. It does not claim:
+when their validation evidence is present. The final review above supports
+AMB-1669 Done / Source Green for the LocalRuntimeOS rename-plan scope:
+documented owner graph, target map, API exposure posture, one-compartment
+renames, no temporary rename shims, deleted retired owner directories, updated
+tests/docs, and import-clean current build proof. It does not claim:
 
-- full AMB-1669 completion
 - all LocalRuntimeOS names simplified
 - AMB-1670 ownership-test completion
 - app-wide runtime completion
