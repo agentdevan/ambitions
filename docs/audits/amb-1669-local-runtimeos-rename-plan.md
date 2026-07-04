@@ -17,7 +17,7 @@ This artifact records the current folder/type dependency graph, target runtime m
 
 ## Current Owner Graph
 
-Current source owner count after the `Transactions` slice: 19.
+Current source owner count after the `Projections` slice: 19.
 
 | Current owner | Swift files | Target owner | Status |
 | --- | ---: | --- | --- |
@@ -26,7 +26,7 @@ Current source owner count after the `Transactions` slice: 19.
 | Transactions | 12 | Transactions | Third slice renamed from `TransactionKernel` |
 | EventJournal | 10 | Events or EventJournal | Pending |
 | ObjectState | 4 | State | Pending |
-| ProjectionEngine | 32 | Projections | Pending |
+| Projections | 32 | Projections | Fourth slice renamed from `ProjectionEngine` |
 | PrivateLifeRuntimeKernel | 37 | RuntimeKernel or collapsed into retained owners | Pending decision |
 | PlanningEngine | 68 | Planning | Pending |
 | TimeEngine | 35 | Scheduling | Pending |
@@ -116,17 +116,48 @@ Reason:
 - The ownership test now proves required `Transactions` files exist and the old
   `TransactionKernel` production/test owner paths are gone.
 
+## Fourth Rename Slice
+
+Applied fourth:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/
+Native/AmbitionsTests/LocalRuntimeOS/ProjectionEngine/
+```
+
+to:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/Projections/
+Native/AmbitionsTests/LocalRuntimeOS/Projections/
+```
+
+Reason:
+
+- `Projections` is explicitly named by AMB-1669 target direction.
+- The old owner was a folder-level architecture noun; retained Swift types such
+  as `ProjectionDefinition`, `ProjectionMaterializer`, and
+  `ProjectionStoreSurfaceReadAdapter` already carry the behavior contract
+  plainly.
+- The move changes canonical ownership without changing runtime behavior.
+- The ownership test now proves required `Projections` files exist and the old
+  `ProjectionEngine` production/test owner paths are gone.
+- The slice also renames the moved projector extension shards away from
+  `+02/+03/+04` filenames into descriptive owner-local filenames, so the move
+  does not introduce new blocked suffix-split files under the new owner.
+
 ## API Exposure
 
-The moved `Boundary`, `Commands`, and `Transactions` source contains no `public` or `open` Swift API declarations.
+The moved `Boundary`, `Commands`, `Transactions`, and `Projections` source contains no `public` or `open` Swift API declarations.
 
 Current exposure is same-module production/test use through Swift files under the existing `Ambitions` target and `AmbitionsTests` target. XcodeGen source discovery is directory-based through `project.yml`, so the move requires project regeneration but no package or target boundary change.
 
-Known direct consumers of the moved `Boundary` types remain same-module:
+Known direct consumers of the moved `Boundary`, `Commands`, `Transactions`, and
+`Projections` types remain same-module:
 
 - `Commands`
 - `Transactions`
-- `ProjectionEngine`
+- `Projections`
 - `PrivateLifeRuntimeKernel`
 - `PlanningEngine`
 - `TimeEngine`
@@ -154,10 +185,9 @@ This slice can support Source Green for the folder-owner rename if validation pa
 
 Proceed one compartment at a time after guards pass:
 
-1. `ProjectionEngine` -> `Projections`
-2. `SideEffectSystem` -> `ExternalWrites` or `Outbox`
-3. `TrustSystem` -> `Inspection` or `Receipts`
-4. `SearchRecall` -> `Search`
-5. `MigrationRepair` -> `Repair`
+1. `SideEffectSystem` -> `ExternalWrites` or `Outbox`
+2. `TrustSystem` -> `Inspection` or `Receipts`
+3. `SearchRecall` -> `Search`
+4. `MigrationRepair` -> `Repair`
 
 Each next slice must update tests, current truth/proof references, and the LocalRuntimeProof owner list before closeout.

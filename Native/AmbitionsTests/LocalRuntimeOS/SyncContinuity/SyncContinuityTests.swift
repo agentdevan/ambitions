@@ -143,7 +143,7 @@ final class SyncContinuityTests: XCTestCase {
                 envelope: projectionEnvelope,
                 sourceAuthority: .approvedProjection,
                 privacyClass: .systemOwned,
-                approvedProjectionID: "ProjectionEngine.PrivacyProjection.syncContinuity",
+                approvedProjectionID: "Projections.PrivacyProjection.syncContinuity",
                 localStoreAuthoritative: true,
                 attemptsBackendAuthority: false,
                 accountRequiredForCoreUse: false

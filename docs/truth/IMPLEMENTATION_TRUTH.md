@@ -157,7 +157,7 @@ Current implementation evidence is narrower:
 - Focused simulator tests cover Transactions canonical owner files, old owner removal, validated transaction preparation, read/write set construction, rollback-plan construction, event append, projection materialization, replayable commit receipts, duplicate idempotency replay, stale read-set conflict detection, and invalid-command rejection.
 - Source-present EventJournal foundation source exists under `Native/Ambitions/Core/LocalRuntimeOS/EventJournal/`, including runtime event envelopes, cursors, append-only stores, checksums, command replay projection, compaction snapshots, and tombstone event append support.
 - `AmbitionsCommandExecutor` and `TodayCommandActionHandler` append runtime command execution events when a runtime event store is injected; focused tests cover the standalone executor duplicate-replay path and EventJournal checksum/replay behavior.
-- Source-present ProjectionEngine foundation source exists under `Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/`, including projection definitions, cursors, invalidations, diffs, checksums, event-fed materialization, Today/Goals/Time/You/Search/Widget/App Intent/Receipt/Privacy projection outputs, and an inventory of existing surface read-model scaffolding.
+- Source-present Projections foundation source exists under `Native/Ambitions/Core/LocalRuntimeOS/Projections/`, including projection definitions, cursors, invalidations, diffs, checksums, event-fed materialization, Today/Goals/Time/You/Search/Widget/App Intent/Receipt/Privacy projection outputs, and an inventory of existing surface read-model scaffolding.
 - `ProjectionMaterializer` materializes projection outputs from `RuntimeEventStore` envelopes and focused tests cover canonical owner files, definition coverage, inventory path existence, event-fed projection outputs, privacy-safe external filtering, cursor/checksum creation, invalidation, and diffs.
 - Source-present Storage foundation source exists under `Native/Ambitions/Core/LocalRuntimeOS/Storage/`, including `EventStoreSQLite`, `ObjectStoreSwiftData`, `ProjectionStoreSQLite`, `SearchStoreFTS`, `BlobStoreFileSystem`, `AppGroupSnapshotStore`, `BackupStore`, and `MigrationStore`.
 - `ObjectStoreSwiftData.swift` owns the SwiftData object-store source; the former `Core/Persistence` local-store owner file was removed.
@@ -215,7 +215,7 @@ Unsupported implementation claims until future source proof exists:
 - every meaningful state change in every present or future app path is forced through the command/event/projection/receipt/replay law
 - the EventJournal is the sole canonical mutation record for every meaningful runtime mutation
 - duplicate and failed command replay are deterministic across every runtime path
-- all app-facing projections are consumed by Stage/surfaces/widgets/App Intents only from `ProjectionEngine`
+- all app-facing projections are consumed by Stage/surfaces/widgets/App Intents only from `Projections`
 - every app path treats SwiftData only as the object store tier
 - SQLite/FTS-backed journal, projection, and search stores are active across all production mutation/read paths
 - every external side-effect path is fully outboxed with leases, retry, confirmation, and receipts

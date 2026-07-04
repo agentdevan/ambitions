@@ -32,7 +32,7 @@ REQUIRED_LOCAL_RUNTIME_OWNERS = [
     "Transactions",
     "EventJournal",
     "ObjectState",
-    "ProjectionEngine",
+    "Projections",
     "PrivateLifeRuntimeKernel",
     "PlanningEngine",
     "TimeEngine",
@@ -117,7 +117,7 @@ INTEGRATION_MARKERS = {
         ],
     },
     "surface_projection_store_consumption": {
-        "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionStoreSurfaceReadAdapter.swift",
+        "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/ProjectionStoreSurfaceReadAdapter.swift",
         "markers": [
             "ProjectionStoreSurfaceReadAdapter",
             "readToday",
@@ -1084,7 +1084,7 @@ def check_transaction_coordinator_commit_ownership() -> CheckResult:
 
 def check_projection_store_surface_read_gate() -> CheckResult:
     findings: list[Finding] = []
-    adapter_path = ROOT / "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionStoreSurfaceReadAdapter.swift"
+    adapter_path = ROOT / "Native/Ambitions/Core/LocalRuntimeOS/Projections/ProjectionStoreSurfaceReadAdapter.swift"
     if not adapter_path.exists():
         findings.append(
             Finding(
@@ -1201,7 +1201,7 @@ def check_external_surface_sanitized_projection_gate() -> CheckResult:
             "SharedExternalSnapshotRecord.self",
             "record.verifiedPayloadData()",
         ],
-        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionStoreSurfaceReadAdapter.swift": [
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/Projections/ProjectionStoreSurfaceReadAdapter.swift": [
             "readWidget",
             "WidgetProjection.self",
             "readAppIntent",
@@ -1209,7 +1209,7 @@ def check_external_surface_sanitized_projection_gate() -> CheckResult:
             "readPrivacy",
             "PrivacyProjection.self",
         ],
-        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/AppIntentProjection.swift": [
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/Projections/AppIntentProjection.swift": [
             "canRunFromIntent = record.isPrivacySafeForExternalSurface && record.resultStatus != .failed",
             'title = canRunFromIntent ? record.summary : "Open Ambitions"',
             "blockedReason = canRunFromIntent ? nil",

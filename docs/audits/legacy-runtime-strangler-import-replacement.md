@@ -18,7 +18,7 @@ MemoryLens/SearchRecall owner-move batch, and the final all-remaining owner
 pass. AMB-1730 lowered active legacy runtime production files from `111` to
 `0` by moving source files out of `Core/Runtime` and into
 `Core/LocalRuntimeOS/PlanningEngine`, `Core/LocalRuntimeOS/TimeEngine`,
-`Core/LocalRuntimeOS/SearchRecall`, `Core/LocalRuntimeOS/ProjectionEngine`,
+`Core/LocalRuntimeOS/SearchRecall`, `Core/LocalRuntimeOS/Projections`,
 `Core/LocalRuntimeOS/PrivateLifeRuntimeKernel`,
 `Core/LocalRuntimeOS/RuntimeBoundary`, `Core/LocalRuntimeOS/CaptureRouteGraph`,
 `Core/LocalRuntimeOS/SourceAtlas`, and
@@ -65,8 +65,8 @@ private life graph backend.
 | Former legacy path | Canonical owner path | AMB-1713 class | AMB-1714 result |
 |---|---|---|---|
 | `Native/Ambitions/Core/Runtime/PrivateLifeRuntime.swift` | `Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/PrivateLifeRuntime.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/PrivateLifeRuntimeKernel` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/RuntimeProjectionPipeline.swift` | `Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/RuntimeProjectionPipeline.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/ProjectionEngine` | Moved; legacy path retired. |
-| `Native/Ambitions/Core/Runtime/RuntimeSnapshot.swift` | `Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/RuntimeSnapshot.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/ProjectionEngine` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/RuntimeProjectionPipeline.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Projections/RuntimeProjectionPipeline.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Projections` | Moved; legacy path retired. |
+| `Native/Ambitions/Core/Runtime/RuntimeSnapshot.swift` | `Native/Ambitions/Core/LocalRuntimeOS/Projections/RuntimeSnapshot.swift` | Move into LocalRuntimeOS -> `Core/LocalRuntimeOS/Projections` | Moved; legacy path retired. |
 
 ## AMB-1730 Moved Rows
 
@@ -157,7 +157,7 @@ Updated tests:
 
 - `Native/AmbitionsTests/Runtime/CoreRuntimeCanonicalOwnershipTests.swift`
 - `Native/AmbitionsTests/LocalRuntimeOS/PrivateLifeRuntimeKernel/PrivateLifeRuntimeKernelOwnershipTests.swift`
-- `Native/AmbitionsTests/LocalRuntimeOS/ProjectionEngine/ProjectionEngineTests.swift`
+- `Native/AmbitionsTests/LocalRuntimeOS/Projections/LocalRuntimeOSProjectionsTests.swift`
 
 Expected proof behavior:
 
@@ -179,7 +179,7 @@ Expected proof behavior:
   `Core/Runtime` paths are absent.
 - AMB-1730 all-remaining owner pass leaves `Core/Runtime` with `0` Swift files;
   representative moved owners exist under CaptureRouteGraph, PlanningEngine,
-  PrivacySecurity, PrivateLifeRuntimeKernel, ProjectionEngine, RuntimeBoundary,
+  PrivacySecurity, PrivateLifeRuntimeKernel, Projections, RuntimeBoundary,
   SourceAtlas, and TimeEngine.
 
 ## AMB-1730 Evidence Update
@@ -207,7 +207,7 @@ Files moved/deleted/quarantined/converted:
   including this run's `64` all-remaining files.
 - Moved this run's remaining files into:
   `CaptureRouteGraph`, `PlanningEngine`, `PrivacySecurity`,
-  `PrivateLifeRuntimeKernel`, `ProjectionEngine`, `RuntimeBoundary`,
+  `PrivateLifeRuntimeKernel`, `Projections`, `RuntimeBoundary`,
   `SourceAtlas`, and `TimeEngine`.
 - Renamed `MemoryLensService+SearchAdapters.swift` to
   `MemoryLensService+SearchResults.swift` in the canonical SearchRecall owner
@@ -305,7 +305,7 @@ Final Architecture Tree inspected: yes.
 Canonical owners touched:
 
 - `Core/LocalRuntimeOS/PrivateLifeRuntimeKernel`
-- `Core/LocalRuntimeOS/ProjectionEngine`
+- `Core/LocalRuntimeOS/Projections`
 - `Core/LocalRuntimeOS/PlanningEngine`
 - `Core/LocalRuntimeOS/TimeEngine`
 - `Core/LocalRuntimeOS/SearchRecall`
@@ -320,12 +320,12 @@ Files moved or created:
 - Moved `PrivateLifeRuntime.swift` from `Core/Runtime` to
   `Core/LocalRuntimeOS/PrivateLifeRuntimeKernel`.
 - Moved `RuntimeProjectionPipeline.swift` from `Core/Runtime` to
-  `Core/LocalRuntimeOS/ProjectionEngine`.
+  `Core/LocalRuntimeOS/Projections`.
 - Moved `RuntimeSnapshot.swift` from `Core/Runtime` to
-  `Core/LocalRuntimeOS/ProjectionEngine`.
+  `Core/LocalRuntimeOS/Projections`.
 - Moved the `111` AMB-1730 PlanningEngine, TimeEngine, SearchRecall,
   CaptureRouteGraph, PrivacySecurity, PrivateLifeRuntimeKernel,
-  ProjectionEngine, RuntimeBoundary, and SourceAtlas files from `Core/Runtime`
+  Projections, RuntimeBoundary, and SourceAtlas files from `Core/Runtime`
   to `Core/LocalRuntimeOS`.
 - Created this audit overlay.
 

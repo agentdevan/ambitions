@@ -5875,31 +5875,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 41,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/AppIntentProjection.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 147,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/CanonicalNowStateProjector+02-CanonicalNowStateProjector+03-explanation.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 291,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/CanonicalNowStateProjector+02-CanonicalNowStateProjector.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/AppIntentProjection.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5913,7 +5889,43 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 224,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/CanonicalNowStateProjector.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/CanonicalNowStateProjector.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 291,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/CanonicalNowStateProjectorActions.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 147,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/CanonicalNowStateProjectorEvidence.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 212,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/GoalBelievabilityProjector.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5925,17 +5937,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 289,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/GoalBelievabilityProjector+02-GoalBelievabilityProjector+03-healthSignals.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 21,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/GoalBelievabilityProjector+02-GoalBelievabilityProjector+04-rank.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/GoalBelievabilityProjectorHealthSignals.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5948,19 +5950,17 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 282,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/GoalBelievabilityProjector+02-GoalBelievabilityProjector.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/GoalBelievabilityProjectorPosture.swift"
     },
     {
       "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
+        "VSP-04"
       ],
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 212,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/GoalBelievabilityProjector.swift"
+      "line_count": 21,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/GoalBelievabilityProjectorRanking.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5972,7 +5972,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 490,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/GoalExplainabilityProjector.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/GoalExplainabilityProjector.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5984,7 +5984,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 41,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/GoalsProjection.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/GoalsProjection.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5996,7 +5996,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 320,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/LifeAreaAtlasProjector.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/LifeAreaAtlasProjector.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6009,7 +6009,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 176,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/NorthStarProjector.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/NorthStarProjector.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6020,7 +6020,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 467,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/PathIntelligenceProjector.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/PathIntelligenceProjector.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6031,7 +6031,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 42,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/PrivacyProjection.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/PrivacyProjection.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6041,7 +6041,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 49,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionChecksum.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/ProjectionChecksum.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6051,7 +6051,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 40,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionCursor.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/ProjectionCursor.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6065,7 +6065,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 204,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionDefinition.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/ProjectionDefinition.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6076,7 +6076,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 78,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionInvalidation.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/ProjectionInvalidation.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6088,7 +6088,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 328,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionMaterializer.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/ProjectionMaterializer.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6101,7 +6101,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 262,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionStoreSurfaceReadAdapter.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/ProjectionStoreSurfaceReadAdapter.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6112,7 +6112,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 358,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/RealityModelProjector.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/RealityModelProjector.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6123,7 +6123,20 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 40,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ReceiptProjection.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/ReceiptProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 227,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/ReviewsV1Projector.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6138,7 +6151,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 288,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ReviewsV1Projector+02-cadenceSummaries.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/ReviewsV1ProjectorCadenceSummaries.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6149,20 +6162,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 340,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ReviewsV1Projector+03-progressReceiptLines.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 227,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ReviewsV1Projector.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/ReviewsV1ProjectorProgressReceiptLines.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6174,7 +6174,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 72,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/RuntimeProjectionPipeline.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/RuntimeProjectionPipeline.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6185,7 +6185,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 110,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/RuntimeSnapshot.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/RuntimeSnapshot.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6196,7 +6196,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 54,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/SearchProjection.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/SearchProjection.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6206,7 +6206,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 48,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/TimeProjection.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/TimeProjection.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6218,7 +6218,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 42,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/TodayProjection.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/TodayProjection.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6229,7 +6229,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 41,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/WidgetProjection.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/WidgetProjection.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6240,7 +6240,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 35,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/YouProjection.swift"
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/YouProjection.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -19149,7 +19149,7 @@
       "inventory_only": true,
       "kind": "test",
       "line_count": 307,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/ProjectionEngine/ProjectionEngineTests.swift"
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/Projections/LocalRuntimeOSProjectionsTests.swift"
     },
     {
       "candidate_vsp_ids": [

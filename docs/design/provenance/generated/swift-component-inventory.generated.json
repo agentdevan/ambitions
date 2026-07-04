@@ -7908,11 +7908,11 @@
       "has_preview_provider": false,
       "kind": "test",
       "line_count": 307,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/ProjectionEngine/ProjectionEngineTests.swift",
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/Projections/LocalRuntimeOSProjectionsTests.swift",
       "preview_count": 0,
       "proof_status": "source_inventory_only",
       "test_cases": [
-        "ProjectionEngineTests"
+        "LocalRuntimeOSProjectionsTests"
       ],
       "view_modifiers": [],
       "view_structs": []

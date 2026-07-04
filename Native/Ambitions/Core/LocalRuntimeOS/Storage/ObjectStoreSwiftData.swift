@@ -232,7 +232,7 @@ actor AmbitionsPersistenceStore {
             ObjectStoreSwiftDataFamilyDescriptor(
                 id: .receipt,
                 storedTypeNames: ["ActionReceiptHistoryRecordModel", "RuntimeSnapshotLedgerRecord"],
-                mutationAuthority: "Core/LocalRuntimeOS/TrustSystem + ProjectionEngine",
+                mutationAuthority: "Core/LocalRuntimeOS/TrustSystem + Projections",
                 fieldRules: [
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "ActionReceiptHistoryRecordModel", fieldName: "receiptData", authority: .encodedValue, encodedTypeName: "ActionReceipt", notes: "Typed receipt payload."),
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "ActionReceiptHistoryRecordModel", fieldName: "runtimeLineageData", authority: .encodedValue, encodedTypeName: "RuntimeTrustLineage", notes: "Runtime commit receipt lineage tying receipt history to transaction, event, rollback, and replay proof."),
@@ -270,7 +270,7 @@ actor AmbitionsPersistenceStore {
             ObjectStoreSwiftDataFamilyDescriptor(
                 id: .runtimeSnapshot,
                 storedTypeNames: ["RuntimeSnapshotLedgerRecord", "AmbitionGraphProjectionRecordModel", "AmbitionGraphOperationalRecordModel"],
-                mutationAuthority: "Core/LocalRuntimeOS/ProjectionEngine + TrustSystem",
+                mutationAuthority: "Core/LocalRuntimeOS/Projections + TrustSystem",
                 fieldRules: [
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "AmbitionGraphProjectionRecordModel", fieldName: "snapshotData", authority: .snapshotFallback, notes: "Projection payload fallback."),
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "AmbitionGraphOperationalRecordModel", fieldName: "snapshotData", authority: .snapshotFallback, notes: "Operational read-model fallback.")

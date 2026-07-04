@@ -392,7 +392,7 @@ Production candidate files excluding test files: 33.
 | 156 | `Native/Ambitions/App/Intents/AmbitionsStepInspectionIntents.swift` | AppIntent, mutation/write language |
 | 69 | `Native/Ambitions/App/Intents/AmbitionsSystemControlIntent.swift` | AppIntent |
 | 28 | `Native/Ambitions/App/Intents/OpenAmbitionsDestinationIntent.swift` | AppIntent |
-| 40 | `Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/AppIntentProjection.swift` | AppIntent |
+| 40 | `Native/Ambitions/Core/LocalRuntimeOS/Projections/AppIntentProjection.swift` | AppIntent |
 | 88 | `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/AppIntentBridge.swift` | AppIntent, mutation/write language |
 | 147 | `Native/Ambitions/Projection/ExternalSnapshots/ExternalCreationContracts.swift` | external snapshot/shared projection, mutation/write language |
 | 324 | `Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceActionPayloads+02-ExternalObjectReopeningProjector.swift` | external snapshot/shared projection, mutation/write language |

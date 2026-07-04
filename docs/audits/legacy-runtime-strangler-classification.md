@@ -72,7 +72,7 @@ remaining AMB-1713 legacy runtime row. Those files moved from production
 `Core/Runtime` into `Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine`,
 `Native/Ambitions/Core/LocalRuntimeOS/TimeEngine`,
 `Native/Ambitions/Core/LocalRuntimeOS/SearchRecall`,
-`Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine`,
+`Native/Ambitions/Core/LocalRuntimeOS/Projections`,
 `Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel`,
 `Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary`,
 `Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph`,
@@ -167,9 +167,9 @@ Follow-up code legend:
 | `Native/Ambitions/Core/Runtime/AnyGoalRuntimeCoverage.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/SourceAtlas` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/AppServices.swift` | `Core/Runtime` | `AmbitionsWidgetUI, Foundation` | `Adapter shim` | `Core/LocalRuntimeOS/RuntimeBoundary shim` | `P-SHIM` | `F-SHIM` |
 | `Native/Ambitions/Core/Runtime/BufferEngine.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/TimeEngine` | `P-MOVE` | `F-MOVE` |
-| `Native/Ambitions/Core/Runtime/CanonicalNowStateProjector+02-CanonicalNowStateProjector+03-explanation.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/ProjectionEngine` | `P-MOVE` | `F-MOVE` |
-| `Native/Ambitions/Core/Runtime/CanonicalNowStateProjector+02-CanonicalNowStateProjector.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/ProjectionEngine` | `P-MOVE` | `F-MOVE` |
-| `Native/Ambitions/Core/Runtime/CanonicalNowStateProjector.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/ProjectionEngine` | `P-MOVE` | `F-MOVE` |
+| `Native/Ambitions/Core/Runtime/CanonicalNowStateProjector+02-CanonicalNowStateProjector+03-explanation.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/Projections` | `P-MOVE` | `F-MOVE` |
+| `Native/Ambitions/Core/Runtime/CanonicalNowStateProjector+02-CanonicalNowStateProjector.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/Projections` | `P-MOVE` | `F-MOVE` |
+| `Native/Ambitions/Core/Runtime/CanonicalNowStateProjector.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/Projections` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/CapacityEngine.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/TimeEngine` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/CaptureService+02-CaptureDraftRouteService.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/CaptureRouteGraph` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/CaptureService+03-DefaultCaptureService.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/CaptureRouteGraph` | `P-MOVE` | `F-MOVE` |
@@ -183,10 +183,10 @@ Follow-up code legend:
 | `Native/Ambitions/Core/Runtime/ExecutionResilienceProjector+Projector01-nowRecoverySummary.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/PrivateLifeRuntimeKernel` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/ExecutionResilienceProjector.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/PrivateLifeRuntimeKernel` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/FirstRunActivationRuntime.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/PrivateLifeRuntimeKernel` | `P-MOVE` | `F-MOVE` |
-| `Native/Ambitions/Core/Runtime/GoalBelievabilityProjector+02-GoalBelievabilityProjector+03-healthSignals.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/ProjectionEngine` | `P-MOVE` | `F-MOVE` |
-| `Native/Ambitions/Core/Runtime/GoalBelievabilityProjector+02-GoalBelievabilityProjector+04-rank.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/ProjectionEngine` | `P-MOVE` | `F-MOVE` |
-| `Native/Ambitions/Core/Runtime/GoalBelievabilityProjector+02-GoalBelievabilityProjector.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/ProjectionEngine` | `P-MOVE` | `F-MOVE` |
-| `Native/Ambitions/Core/Runtime/GoalBelievabilityProjector.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/ProjectionEngine` | `P-MOVE` | `F-MOVE` |
+| `Native/Ambitions/Core/Runtime/GoalBelievabilityProjector+02-GoalBelievabilityProjector+03-healthSignals.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/Projections` | `P-MOVE` | `F-MOVE` |
+| `Native/Ambitions/Core/Runtime/GoalBelievabilityProjector+02-GoalBelievabilityProjector+04-rank.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/Projections` | `P-MOVE` | `F-MOVE` |
+| `Native/Ambitions/Core/Runtime/GoalBelievabilityProjector+02-GoalBelievabilityProjector.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/Projections` | `P-MOVE` | `F-MOVE` |
+| `Native/Ambitions/Core/Runtime/GoalBelievabilityProjector.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/Projections` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/GoalClarificationService+02-DefaultGoalClarificationService+03-defaultAssumption.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/PlanningEngine` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/GoalClarificationService+02-DefaultGoalClarificationService.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/PlanningEngine` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/GoalClarificationService+03-ClassificationConfidence.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/PlanningEngine` | `P-MOVE` | `F-MOVE` |
@@ -199,7 +199,7 @@ Follow-up code legend:
 | `Native/Ambitions/Core/Runtime/GoalDomainPacks.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/PlanningEngine` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/GoalEnergyFitService.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/PlanningEngine` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/GoalEnergyLearningService.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/PlanningEngine` | `P-MOVE` | `F-MOVE` |
-| `Native/Ambitions/Core/Runtime/GoalExplainabilityProjector.swift` | `Core/Runtime` | `AmbitionsDesignSystem, Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/ProjectionEngine` | `P-MOVE` | `F-MOVE` |
+| `Native/Ambitions/Core/Runtime/GoalExplainabilityProjector.swift` | `Core/Runtime` | `AmbitionsDesignSystem, Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/Projections` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/GoalFreshnessUpdateService.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/PlanningEngine` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/GoalPathCompilerService.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/PlanningEngine` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/GoalResourceGraphService.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/PlanningEngine` | `P-MOVE` | `F-MOVE` |
@@ -215,7 +215,7 @@ Follow-up code legend:
 | `Native/Ambitions/Core/Runtime/LargeStoreFixtureGenerator.swift` | `Core/Runtime` | `Foundation` | `Test-only support` | `Tests/Runtime or Quality quarantine` | `P-TEST` | `F-TEST` |
 | `Native/Ambitions/Core/Runtime/LearningAnticipationService+EvidenceHelpers.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/PrivateLifeRuntimeKernel` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/LearningAnticipationService.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/PrivateLifeRuntimeKernel` | `P-MOVE` | `F-MOVE` |
-| `Native/Ambitions/Core/Runtime/LifeAreaAtlasProjector.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/ProjectionEngine` | `P-MOVE` | `F-MOVE` |
+| `Native/Ambitions/Core/Runtime/LifeAreaAtlasProjector.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/Projections` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/LifeConsequenceEngine+02-LifeConsequenceRecord.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/PrivateLifeRuntimeKernel` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/LifeConsequenceEngine+03-LifeConsequenceEngine.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/PrivateLifeRuntimeKernel` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/LifeConsequenceEngine+04-LifeConsequenceRecord.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/PrivateLifeRuntimeKernel` | `P-MOVE` | `F-MOVE` |
@@ -227,26 +227,26 @@ Follow-up code legend:
 | `Native/Ambitions/Core/Runtime/MemoryLensService+SearchAdapters.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/SearchRecall` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/MemoryLensService.swift` | `Core/Runtime` | `AmbitionsDesignSystem, Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/SearchRecall` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/MultiPathLattice.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/PlanningEngine` | `P-MOVE` | `F-MOVE` |
-| `Native/Ambitions/Core/Runtime/NorthStarProjector.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/ProjectionEngine` | `P-MOVE` | `F-MOVE` |
+| `Native/Ambitions/Core/Runtime/NorthStarProjector.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/Projections` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/OneStepGoalProjector.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/PlanningEngine` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/OpenCapacityEngine.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/TimeEngine` | `P-MOVE` | `F-MOVE` |
-| `Native/Ambitions/Core/Runtime/PathIntelligenceProjector.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/ProjectionEngine` | `P-MOVE` | `F-MOVE` |
+| `Native/Ambitions/Core/Runtime/PathIntelligenceProjector.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/Projections` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/PressureEngine.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/TimeEngine` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/PrivateLifeRuntime.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/PrivateLifeRuntimeKernel` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/ProtectionEngine.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/TimeEngine` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/RealityIntegrationAdapters.swift` | `Core/Runtime` | `Foundation` | `Adapter shim` | `Core/LocalRuntimeOS/RuntimeBoundary shim` | `P-SHIM` | `F-SHIM` |
-| `Native/Ambitions/Core/Runtime/RealityModelProjector.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/ProjectionEngine` | `P-MOVE` | `F-MOVE` |
+| `Native/Ambitions/Core/Runtime/RealityModelProjector.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/Projections` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/RecommendationEngine.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/PlanningEngine` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/RecommendationExplanationAdapter.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/PlanningEngine` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/RecoveryEngine.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/TimeEngine` | `P-MOVE` | `F-MOVE` |
-| `Native/Ambitions/Core/Runtime/ReviewsV1Projector+02-cadenceSummaries.swift` | `Core/Runtime` | `AmbitionsDesignSystem, Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/ProjectionEngine` | `P-MOVE` | `F-MOVE` |
-| `Native/Ambitions/Core/Runtime/ReviewsV1Projector+03-progressReceiptLines.swift` | `Core/Runtime` | `AmbitionsDesignSystem, Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/ProjectionEngine` | `P-MOVE` | `F-MOVE` |
-| `Native/Ambitions/Core/Runtime/ReviewsV1Projector.swift` | `Core/Runtime` | `AmbitionsDesignSystem, Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/ProjectionEngine` | `P-MOVE` | `F-MOVE` |
+| `Native/Ambitions/Core/Runtime/ReviewsV1Projector+02-cadenceSummaries.swift` | `Core/Runtime` | `AmbitionsDesignSystem, Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/Projections` | `P-MOVE` | `F-MOVE` |
+| `Native/Ambitions/Core/Runtime/ReviewsV1Projector+03-progressReceiptLines.swift` | `Core/Runtime` | `AmbitionsDesignSystem, Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/Projections` | `P-MOVE` | `F-MOVE` |
+| `Native/Ambitions/Core/Runtime/ReviewsV1Projector.swift` | `Core/Runtime` | `AmbitionsDesignSystem, Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/Projections` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/RitualOrchestrationService.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/TimeEngine` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/RuntimeCoreUmbrellaGate.swift` | `Core/Runtime` | `Foundation` | `Test-only support` | `Tests/Runtime or Quality quarantine` | `P-TEST` | `F-TEST` |
 | `Native/Ambitions/Core/Runtime/RuntimePackageBoundaryModels.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/RuntimeBoundary` | `P-MOVE` | `F-MOVE` |
-| `Native/Ambitions/Core/Runtime/RuntimeProjectionPipeline.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/ProjectionEngine` | `P-MOVE` | `F-MOVE` |
-| `Native/Ambitions/Core/Runtime/RuntimeSnapshot.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/ProjectionEngine` | `P-MOVE` | `F-MOVE` |
+| `Native/Ambitions/Core/Runtime/RuntimeProjectionPipeline.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/Projections` | `P-MOVE` | `F-MOVE` |
+| `Native/Ambitions/Core/Runtime/RuntimeSnapshot.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/Projections` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/ScheduleInstallKernel+02-ScheduleInstallRecord.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/TimeEngine` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/ScheduleInstallKernel+03-ScheduleInstallKernel+02-evaluate.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/TimeEngine` | `P-MOVE` | `F-MOVE` |
 | `Native/Ambitions/Core/Runtime/ScheduleInstallKernel+03-ScheduleInstallKernel+03-makeReceipt.swift` | `Core/Runtime` | `Foundation` | `Move into LocalRuntimeOS` | `Core/LocalRuntimeOS/TimeEngine` | `P-MOVE` | `F-MOVE` |

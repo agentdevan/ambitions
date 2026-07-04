@@ -1,27 +1,27 @@
 @testable import Ambitions
 import XCTest
 
-final class ProjectionEngineTests: XCTestCase {
-    func testProjectionEngineOwnerFilesExistUnderCanonicalTree() throws {
+final class LocalRuntimeOSProjectionsTests: XCTestCase {
+    func testProjectionsOwnerFilesExistUnderCanonicalTree() throws {
         let root = try repoRoot()
         let requiredPaths = [
-            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionDefinition.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionCursor.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionInvalidation.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionMaterializer.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/RuntimeProjectionPipeline.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/RuntimeSnapshot.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionChecksum.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/TodayProjection.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/GoalsProjection.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/TimeProjection.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/YouProjection.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/SearchProjection.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/WidgetProjection.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/AppIntentProjection.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ReceiptProjection.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/PrivacyProjection.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionStoreSurfaceReadAdapter.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Projections/ProjectionDefinition.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Projections/ProjectionCursor.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Projections/ProjectionInvalidation.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Projections/ProjectionMaterializer.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Projections/RuntimeProjectionPipeline.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Projections/RuntimeSnapshot.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Projections/ProjectionChecksum.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Projections/TodayProjection.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Projections/GoalsProjection.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Projections/TimeProjection.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Projections/YouProjection.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Projections/SearchProjection.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Projections/WidgetProjection.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Projections/AppIntentProjection.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Projections/ReceiptProjection.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Projections/PrivacyProjection.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Projections/ProjectionStoreSurfaceReadAdapter.swift",
         ]
 
         for path in requiredPaths {
@@ -212,7 +212,7 @@ final class ProjectionEngineTests: XCTestCase {
     }
 }
 
-private extension ProjectionEngineTests {
+private extension LocalRuntimeOSProjectionsTests {
     func commandEvent(
         id: String,
         kind: AmbitionsCommandKind,
@@ -291,12 +291,12 @@ private extension ProjectionEngineTests {
             }
             candidate.deleteLastPathComponent()
         }
-        throw NSError(domain: "ProjectionEngineTests", code: 1)
+        throw NSError(domain: "LocalRuntimeOSProjectionsTests", code: 1)
     }
 
     func scratchDirectory() throws -> URL {
         let directory = URL(fileURLWithPath: "/tmp", isDirectory: true)
-            .appendingPathComponent("ambitions-projection-engine-tests-\(UUID().uuidString)", isDirectory: true)
+            .appendingPathComponent("ambitions-projections-tests-\(UUID().uuidString)", isDirectory: true)
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         addTeardownBlock {
             try? FileManager.default.removeItem(at: directory)

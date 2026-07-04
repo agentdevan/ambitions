@@ -7,8 +7,8 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
         let root = repoRoot()
         for requiredPath in [
             "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/PrivateLifeRuntime.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/RuntimeSnapshot.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/RuntimeProjectionPipeline.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Projections/RuntimeSnapshot.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Projections/RuntimeProjectionPipeline.swift",
         ] {
             XCTAssertTrue(
                 FileManager.default.fileExists(atPath: root.appendingPathComponent(requiredPath).path),
@@ -247,14 +247,14 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
             "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/LifeConsequenceEngine.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/RuntimeCoreUmbrellaGate.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/SharedLifeCoordinationService.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/CanonicalNowStateProjector.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/GoalBelievabilityProjector.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/GoalExplainabilityProjector.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/LifeAreaAtlasProjector.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/NorthStarProjector.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/PathIntelligenceProjector.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/RealityModelProjector.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ReviewsV1Projector.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Projections/CanonicalNowStateProjector.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Projections/GoalBelievabilityProjector.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Projections/GoalExplainabilityProjector.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Projections/LifeAreaAtlasProjector.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Projections/NorthStarProjector.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Projections/PathIntelligenceProjector.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Projections/RealityModelProjector.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Projections/ReviewsV1Projector.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/Boundary/AmbitionsRuntimeContracts.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/Boundary/AmbitionsRuntimeFactory.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/Boundary/AmbitionsRuntimeServices.swift",
