@@ -27,28 +27,29 @@ final class SurfaceLensesCanonicalOwnershipTests: XCTestCase {
         }
     }
 
-    func testRequiredSurfaceLensFilesExistAtCanonicalPathsAndTodayMovedOutOfStageSceneOwner() throws {
+    func testRequiredSurfaceLensFilesExistAtFeatureLocalPathsAndOldCentralOwnerIsEmpty() throws {
         let root = repoRoot()
         let required = [
-            "Native/Ambitions/Projection/SurfaceLenses/SurfaceLens.swift",
-            "Native/Ambitions/Projection/SurfaceLenses/TodayLens.swift",
-            "Native/Ambitions/Projection/SurfaceLenses/GoalsLens.swift",
-            "Native/Ambitions/Projection/SurfaceLenses/TimeLens.swift",
-            "Native/Ambitions/Projection/SurfaceLenses/YouLens.swift"
+            "Native/Ambitions/Projection/Contracts/SurfaceLens.swift",
+            "Native/Ambitions/Surfaces/Today/Projection/TodayLens.swift",
+            "Native/Ambitions/Surfaces/Goals/Projection/GoalsLens.swift",
+            "Native/Ambitions/Surfaces/Time/Projection/TimeLens.swift",
+            "Native/Ambitions/Surfaces/You/Projection/YouLens.swift"
         ]
 
         for path in required {
             XCTAssertTrue(FileManager.default.fileExists(atPath: root.appendingPathComponent(path).path), path)
         }
 
-        let todayLensSource = try source("Native/Ambitions/Projection/SurfaceLenses/TodayLens.swift", root: root)
-        let stageSceneSource = try source("Native/Ambitions/Projection/StageScenes/TodayStageScene.swift", root: root)
+        let todayLensSource = try source("Native/Ambitions/Surfaces/Today/Projection/TodayLens.swift", root: root)
+        let stageSceneSource = try source("Native/Ambitions/Surfaces/Today/Projection/TodayStageScene.swift", root: root)
 
         XCTAssertTrue(todayLensSource.contains("struct TodayLens"))
         XCTAssertTrue(todayLensSource.contains("SurfaceLens"))
         XCTAssertFalse(stageSceneSource.contains("struct TodayLens"))
         XCTAssertTrue(stageSceneSource.contains("struct TodayStageScene"))
-        XCTAssertFalse(FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Projection/StageScenes/TodayStageProjection.swift").path))
+        XCTAssertFalse(FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Surfaces/Today/Projection/TodayStageProjection.swift").path))
+        XCTAssertEqual(try swiftFiles(under: root.appendingPathComponent("Native/Ambitions/Projection/SurfaceLenses")), [])
     }
 
     func testRegistryRejectsFifthSurfaceAndIncompleteContract() {
@@ -73,6 +74,22 @@ final class SurfaceLensesCanonicalOwnershipTests: XCTestCase {
 
     private func source(_ relativePath: String, root: URL) throws -> String {
         try String(contentsOf: root.appendingPathComponent(relativePath), encoding: .utf8)
+    }
+
+    private func swiftFiles(under root: URL) throws -> [String] {
+        guard let enumerator = FileManager.default.enumerator(
+            at: root,
+            includingPropertiesForKeys: [.isRegularFileKey],
+            options: [.skipsHiddenFiles]
+        ) else {
+            return []
+        }
+
+        return try enumerator.compactMap { item in
+            guard let url = item as? URL else { return nil }
+            let values = try url.resourceValues(forKeys: [.isRegularFileKey])
+            return values.isRegularFile == true && url.pathExtension == "swift" ? url.lastPathComponent : nil
+        }.sorted()
     }
 
     private func repoRoot() -> URL {

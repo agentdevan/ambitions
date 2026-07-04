@@ -13,7 +13,7 @@ enum LifeShapeConstructionAudit {
     ]
 
     private static let approvedPathFragments = [
-        "Native/Ambitions/Projection/SurfaceLenses/",
+        "Native/Ambitions/Surfaces/Time/Projection/",
         "Native/Ambitions/Core/"
     ]
 

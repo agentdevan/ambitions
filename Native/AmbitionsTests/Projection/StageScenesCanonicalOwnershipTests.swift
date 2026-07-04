@@ -2,29 +2,29 @@ import XCTest
 @testable import Ambitions
 
 final class StageScenesCanonicalOwnershipTests: XCTestCase {
-    func testRequiredStageSceneFilesExistAtCanonicalPaths() throws {
+    func testRequiredStageSceneFilesExistAtFeatureLocalPaths() throws {
         let root = repoRoot()
         let required = [
-            "Native/Ambitions/Projection/StageScenes/TodayStageScene.swift",
-            "Native/Ambitions/Projection/StageScenes/GoalsStageScene.swift",
-            "Native/Ambitions/Projection/StageScenes/TimeStageScene.swift",
-            "Native/Ambitions/Projection/StageScenes/YouStageScene.swift"
+            "Native/Ambitions/Surfaces/Today/Projection/TodayStageScene.swift",
+            "Native/Ambitions/Surfaces/Goals/Projection/GoalsStageScene.swift",
+            "Native/Ambitions/Surfaces/Time/Projection/TimeStageScene.swift",
+            "Native/Ambitions/Surfaces/You/Projection/YouStageScene.swift"
         ]
 
         for path in required {
             XCTAssertTrue(FileManager.default.fileExists(atPath: root.appendingPathComponent(path).path), path)
         }
 
-        XCTAssertFalse(FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Projection/StageScenes/TodayStageProjection.swift").path))
-        XCTAssertFalse(FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Projection/StageScenes/MotionStageScene.swift").path))
+        XCTAssertFalse(FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Surfaces/Today/Projection/TodayStageProjection.swift").path))
+        XCTAssertEqual(try swiftFiles(under: root.appendingPathComponent("Native/Ambitions/Projection/StageScenes")), [])
     }
 
     func testStageSceneSourcesStayLimitedToCanonSurfaceOwners() throws {
         let root = repoRoot()
-        let today = try source("Native/Ambitions/Projection/StageScenes/TodayStageScene.swift", root: root)
-        let goals = try source("Native/Ambitions/Projection/StageScenes/GoalsStageScene.swift", root: root)
-        let time = try source("Native/Ambitions/Projection/StageScenes/TimeStageScene.swift", root: root)
-        let you = try source("Native/Ambitions/Projection/StageScenes/YouStageScene.swift", root: root)
+        let today = try source("Native/Ambitions/Surfaces/Today/Projection/TodayStageScene.swift", root: root)
+        let goals = try source("Native/Ambitions/Surfaces/Goals/Projection/GoalsStageScene.swift", root: root)
+        let time = try source("Native/Ambitions/Surfaces/Time/Projection/TimeStageScene.swift", root: root)
+        let you = try source("Native/Ambitions/Surfaces/You/Projection/YouStageScene.swift", root: root)
         let combined = [today, goals, time, you].joined(separator: "\n")
 
         XCTAssertTrue(today.contains("struct TodayStageScene"))
@@ -50,6 +50,22 @@ final class StageScenesCanonicalOwnershipTests: XCTestCase {
 
     private func source(_ relativePath: String, root: URL) throws -> String {
         try String(contentsOf: root.appendingPathComponent(relativePath), encoding: .utf8)
+    }
+
+    private func swiftFiles(under root: URL) throws -> [String] {
+        guard let enumerator = FileManager.default.enumerator(
+            at: root,
+            includingPropertiesForKeys: [.isRegularFileKey],
+            options: [.skipsHiddenFiles]
+        ) else {
+            return []
+        }
+
+        return try enumerator.compactMap { item in
+            guard let url = item as? URL else { return nil }
+            let values = try url.resourceValues(forKeys: [.isRegularFileKey])
+            return values.isRegularFile == true && url.pathExtension == "swift" ? url.lastPathComponent : nil
+        }.sorted()
     }
 
     private func repoRoot() -> URL {

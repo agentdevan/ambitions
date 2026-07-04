@@ -4,7 +4,7 @@
   "scanIncludedPrefixes": [
     "Native/Ambitions/App/",
     "Native/Ambitions/Interaction/",
-    "Native/Ambitions/Projection/SurfaceLenses/",
+    "Native/Ambitions/Projection/Contracts/",
     "Native/Ambitions/Surfaces/",
     "Native/Ambitions/Composer/",
     "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/",
@@ -48,7 +48,7 @@
       "rationale": "Command evidence emission follows the Today command action handler."
     },
     {
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+02-Snapshot.swift",
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService+02-Snapshot.swift",
       "classification": "explicitly_non_canonical",
       "allowedCalls": [
         "repositories.goals.saveGoals",
@@ -58,7 +58,7 @@
       "rationale": "Legacy Goals feature-service creation compatibility writes; canonical object-state authority remains LocalRuntimeOS."
     },
     {
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+10-performMutation.swift",
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService+10-performMutation.swift",
       "classification": "explicitly_non_canonical",
       "allowedCalls": [
         "repositories.goals.saveGoals",
@@ -68,7 +68,7 @@
       "rationale": "Legacy Goals detail mutation compatibility writes pending Commands migration."
     },
     {
-      "path": "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService+11-applyAdaptiveRecommendation.swift",
+      "path": "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService+11-applyAdaptiveRecommendation.swift",
       "classification": "explicitly_non_canonical",
       "allowedCalls": [
         "repositories.goals.saveGoals",
@@ -77,13 +77,13 @@
       "rationale": "Legacy adaptive recommendation compatibility writes pending Commands migration."
     },
     {
-      "path": "Native/Ambitions/Projection/SurfaceLenses/RepositoryBackedTimeService.swift",
+      "path": "Native/Ambitions/Surfaces/Time/Projection/RepositoryBackedTimeService.swift",
       "classification": "explicitly_non_canonical",
       "allowedCalls": ["repositories.eventLedger.append"],
       "rationale": "Legacy Time projection ledger mirror; not canonical object-state authority."
     },
     {
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TimeRitualsProjectionService.swift",
+      "path": "Native/Ambitions/Surfaces/Time/Projection/TimeRitualsProjectionService.swift",
       "classification": "explicitly_non_canonical",
       "allowedCalls": [
         "repositories.feedback.saveEvents",
@@ -93,7 +93,7 @@
       "rationale": "Legacy Time ritual compatibility writes pending Scheduling/Commands migration."
     },
     {
-      "path": "Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService+02-RepositoryBackedTodayService+Repository05-performFeedbackAction.swift",
+      "path": "Native/Ambitions/Surfaces/Today/Projection/TodayFeatureService+02-RepositoryBackedTodayService+Repository05-performFeedbackAction.swift",
       "classification": "explicitly_non_canonical",
       "allowedCalls": [
         "repositories.feedback.saveEvents",

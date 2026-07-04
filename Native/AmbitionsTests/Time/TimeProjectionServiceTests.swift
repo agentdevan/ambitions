@@ -13,7 +13,7 @@ final class TimeProjectionServiceTests: XCTestCase {
             encoding: .utf8
         )
         let lensSource = try String(
-            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Projection/SurfaceLenses/TimeLens.swift"),
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Surfaces/Time/Projection/TimeLens.swift"),
             encoding: .utf8
         )
         let timeScreenSource = try String(

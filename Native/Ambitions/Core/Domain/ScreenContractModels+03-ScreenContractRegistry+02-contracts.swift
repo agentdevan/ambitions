@@ -80,7 +80,7 @@ extension ScreenContractRegistry {
             screenMatrixAnchor,
             accessibilityMatrixAnchor,
             .init(kind: .sourceSurface, path: "Native/Ambitions/Surfaces/Today/TodaySurface.swift", note: "Current Today surface"),
-            .init(kind: .sourceService, path: "Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService.swift", note: "Today projection source"),
+            .init(kind: .sourceService, path: "Native/Ambitions/Surfaces/Today/Projection/TodayFeatureService.swift", note: "Today projection source"),
             .init(kind: .testCoverage, path: "Native/AmbitionsTests/Today", note: "Focused Today tests where present")
         ]
     )
@@ -106,7 +106,7 @@ extension ScreenContractRegistry {
             screenMatrixAnchor,
             accessibilityMatrixAnchor,
             .init(kind: .sourceSurface, path: "Native/Ambitions/Surfaces/Goals/GoalsSurface.swift", note: "Current Goals surface"),
-            .init(kind: .sourceService, path: "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService.swift", note: "Goals projection source"),
+            .init(kind: .sourceService, path: "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService.swift", note: "Goals projection source"),
             .init(kind: .testCoverage, path: "Native/AmbitionsTests/Goals", note: "Focused Goals tests")
         ]
     )
@@ -132,7 +132,7 @@ extension ScreenContractRegistry {
             screenMatrixAnchor,
             accessibilityMatrixAnchor,
             .init(kind: .sourceSurface, path: "Native/Ambitions/Surfaces/Goals/GoalDetailScreen.swift", note: "Current Goal Detail surface"),
-            .init(kind: .sourceService, path: "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService.swift", note: "Goal Detail projection source"),
+            .init(kind: .sourceService, path: "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService.swift", note: "Goal Detail projection source"),
             .init(kind: .testCoverage, path: "Native/AmbitionsTests/Goals/GoalDetailStrategicPresentationTests.swift", note: "Goal Detail presentation tests")
         ]
     )
@@ -184,7 +184,7 @@ extension ScreenContractRegistry {
             screenMatrixAnchor,
             accessibilityMatrixAnchor,
             .init(kind: .sourceSurface, path: "Native/Ambitions/Surfaces/Time/TimeSurface.swift", note: "Current Time surface"),
-            .init(kind: .sourceService, path: "Native/Ambitions/Projection/SurfaceLenses/TimeProjectionService.swift", note: "Time projection source"),
+            .init(kind: .sourceService, path: "Native/Ambitions/Surfaces/Time/Projection/TimeProjectionService.swift", note: "Time projection source"),
             .init(kind: .testCoverage, path: "Native/AmbitionsTests/Time/TimeProjectionServiceTests.swift", note: "Focused Time tests")
         ]
     )
@@ -210,7 +210,7 @@ extension ScreenContractRegistry {
             screenMatrixAnchor,
             accessibilityMatrixAnchor,
             .init(kind: .sourceSurface, path: "Native/Ambitions/Surfaces/You/YouSurface.swift", note: "Current You surface"),
-            .init(kind: .sourceService, path: "Native/Ambitions/Projection/SurfaceLenses/YouFeatureService.swift", note: "You projection source"),
+            .init(kind: .sourceService, path: "Native/Ambitions/Surfaces/You/Projection/YouFeatureService.swift", note: "You projection source"),
             .init(kind: .testCoverage, path: "Native/AmbitionsTests/You/YouFeatureServiceTests.swift", note: "Focused You tests")
         ]
     )

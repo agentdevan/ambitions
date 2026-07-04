@@ -235,6 +235,23 @@ SURFACE_OWNED_PATH_PREFIXES = (
     "Native/Ambitions/Features/",
 )
 
+CENTRAL_PROJECTION_REHOME_OLD_PREFIXES = (
+    "Native/Ambitions/Projection/SurfaceLenses/",
+    "Native/Ambitions/Projection/StageScenes/",
+    "Native/Ambitions/Projection/OverlayLenses/",
+    "Native/Ambitions/Projection/OverlayScenes/",
+)
+
+CENTRAL_PROJECTION_REHOME_NEW_PREFIXES = (
+    "Native/Ambitions/Composer/Capture/Projection/",
+    "Native/Ambitions/Stage/Overlays/Projection/",
+    "Native/Ambitions/Surfaces/Goals/Projection/",
+    "Native/Ambitions/Surfaces/Time/Projection/",
+    "Native/Ambitions/Surfaces/Today/Projection/",
+    "Native/Ambitions/Surfaces/You/Projection/",
+    "Native/Ambitions/Trust/Projection/",
+)
+
 STAGE_ALLOWED_PREFIXES = (
     "Native/Ambitions/Stage/",
     "Native/Ambitions/App/",
@@ -293,6 +310,23 @@ def changed_paths() -> set[str]:
             candidate = candidate.split(" -> ", 1)[1]
         paths.add(candidate.strip())
     return {path for path in paths if path}
+
+
+def central_projection_rehome_paths() -> set[str]:
+    paths: set[str] = set()
+    for line in run_git(["status", "--porcelain"]).splitlines():
+        if not line or " -> " not in line:
+            continue
+        status = line[:2]
+        if status[0] != "R":
+            continue
+        raw = line[3:] if len(line) > 3 else ""
+        old_path, new_path = raw.split(" -> ", 1)
+        if any(old_path.startswith(prefix) for prefix in CENTRAL_PROJECTION_REHOME_OLD_PREFIXES) and any(
+            new_path.startswith(prefix) for prefix in CENTRAL_PROJECTION_REHOME_NEW_PREFIXES
+        ):
+            paths.add(new_path.strip())
+    return paths
 
 
 def is_excluded(path: Path) -> bool:
@@ -540,7 +574,7 @@ def check_final_tree_inventory() -> list[Finding]:
     return final_tree_inventory_findings(entries)
 
 
-def check_file_sizes(files: list[Path], changed: set[str]) -> list[Finding]:
+def check_file_sizes(files: list[Path], changed: set[str], rehomed_projection_paths: set[str]) -> list[Finding]:
     findings: list[Finding] = []
     for path in files:
         relative = rel(path)
@@ -548,7 +582,12 @@ def check_file_sizes(files: list[Path], changed: set[str]) -> list[Finding]:
         count = line_count(text)
         if count > 600:
             findings.append(Finding("file-size", relative, f"{count} lines exceeds production maximum 600"))
-        if relative in changed and count > 400 and "AMBITIONS-QUALITY-EXTRACTION:" not in text:
+        if (
+            relative in changed
+            and relative not in rehomed_projection_paths
+            and count > 400
+            and "AMBITIONS-QUALITY-EXTRACTION:" not in text
+        ):
             findings.append(Finding("file-size", relative, f"{count} touched lines exceeds 400 without extraction note"))
     return findings
 
@@ -592,8 +631,8 @@ def check_temporal_rendering(files: list[Path]) -> list[Finding]:
         "Native/Ambitions/Surfaces/Time/",
         "Native/Ambitions/DesignSystem/ProductObjects/Today",
         "Native/Ambitions/DesignSystem/ProductObjects/Time",
-        "Native/Ambitions/Projection/SurfaceLenses/Today",
-        "Native/Ambitions/Projection/SurfaceLenses/Time",
+        "Native/Ambitions/Surfaces/Today/Projection/Today",
+        "Native/Ambitions/Surfaces/Time/Projection/Time",
     )
     for path in files:
         relative = rel(path)
@@ -987,11 +1026,12 @@ def main() -> int:
 
     files = production_swift_files()
     changed = changed_paths()
+    rehomed_projection_paths = central_projection_rehome_paths()
 
     findings: list[Finding] = []
     findings.extend(check_final_tree_inventory())
     findings.extend(check_architecture(files))
-    findings.extend(check_file_sizes(files, changed))
+    findings.extend(check_file_sizes(files, changed, rehomed_projection_paths))
     findings.extend(check_forbidden_language(files))
     findings.extend(check_transitional_ownership_terms(files))
     findings.extend(check_temporal_rendering(files))

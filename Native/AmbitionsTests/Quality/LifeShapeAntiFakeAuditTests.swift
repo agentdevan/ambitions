@@ -44,7 +44,7 @@ final class LifeShapeAntiFakeAuditTests: XCTestCase {
             contents: "let bucket = LifeShapeBucket(input: rawUIState)\nlet projection = LifeShapeProjection(bucket)"
         )
         let allowed = LifeShapeSourceFile(
-            path: "Native/Ambitions/Projection/SurfaceLenses/TimeLens.swift",
+            path: "Native/Ambitions/Surfaces/Time/Projection/TimeLens.swift",
             contents: "let projection = LifeShapeProjection(bucket)"
         )
 
@@ -57,11 +57,11 @@ final class LifeShapeAntiFakeAuditTests: XCTestCase {
 
     func testDerivationAuditRequiresInputRuleClockFallbackAndAccessibilityContract() {
         let bad = LifeShapeSourceFile(
-            path: "Native/Ambitions/Projection/SurfaceLenses/TimeLifeShapeModels.swift",
+            path: "Native/Ambitions/Surfaces/Time/Projection/TimeLifeShapeModels.swift",
             contents: "struct LifeShapeFieldState { let segments: [LifeShapeSegment] }"
         )
         let good = LifeShapeSourceFile(
-            path: "Native/Ambitions/Projection/SurfaceLenses/TimeLifeShapeModels.swift",
+            path: "Native/Ambitions/Surfaces/Time/Projection/TimeLifeShapeModels.swift",
             contents: """
             struct LifeShapeProjection {}
             struct LifeShapeBucket {}
@@ -156,7 +156,7 @@ final class LifeShapeAntiFakeAuditTests: XCTestCase {
 
     func testSemanticAuditRequiresDerivationAndAccessibilityMeaning() {
         let bad = LifeShapeSourceFile(
-            path: "Native/Ambitions/Projection/SurfaceLenses/TimeLifeShapeModels.swift",
+            path: "Native/Ambitions/Surfaces/Time/Projection/TimeLifeShapeModels.swift",
             contents: "struct LifeShapeSemanticMark { let semanticMeaning: String }"
         )
 
@@ -170,8 +170,8 @@ final class LifeShapeAntiFakeAuditTests: XCTestCase {
     func testCurrentTimeBaselineDocumentsKnownRedFindings() throws {
         let root = repoRoot()
         let timeSurface = try source("Native/Ambitions/Surfaces/Time/TimeSurface.swift", root: root)
-        let lifeShapeModels = try source("Native/Ambitions/Projection/SurfaceLenses/TimeLifeShapeModels.swift", root: root)
-        let lifeShapeProjection = try source("Native/Ambitions/Projection/SurfaceLenses/TimeLifeShapeFieldProjection.swift", root: root)
+        let lifeShapeModels = try source("Native/Ambitions/Surfaces/Time/Projection/TimeLifeShapeModels.swift", root: root)
+        let lifeShapeProjection = try source("Native/Ambitions/Surfaces/Time/Projection/TimeLifeShapeFieldProjection.swift", root: root)
         let reflowView = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldReflow.swift", root: root)
         let snapshotMatrix = try source("Native/Ambitions/Quality/SnapshotMatrix.swift", root: root)
         let baselineFiles = [

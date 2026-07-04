@@ -3,7 +3,7 @@ import Foundation
 enum InspectionLens {
     static let contract = OverlayLensContract(
         kind: .inspection,
-        ownerLayer: "Projection/OverlayLenses",
+        ownerLayer: "Trust/Projection",
         primaryObject: "Trust inspection detail",
         projectionInputs: ["receipt search query", "receipt results", "privacy level", "proof relevance"],
         actionBoundary: "Inspection opens detail only when requested or required and does not become root navigation.",

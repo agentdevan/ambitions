@@ -888,7 +888,7 @@ struct PreviewFixtures: Sendable {
                 id: "eb35-trust-memory-controls",
                 title: "Trust and memory controls",
                 surface: "You",
-                fixtureOwner: "Native/Ambitions/Projection/SurfaceLenses/YouFeatureService.swift",
+                fixtureOwner: "Native/Ambitions/Surfaces/You/Projection/YouFeatureService.swift",
                 sourceTruth: "Trust Center / What Ambitions Knows",
                 commandIntent: nil,
                 memoryQuery: nil,

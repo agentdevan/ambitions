@@ -112,12 +112,12 @@ Native/Ambitions/App/AppContainerFactory.swift
 Native/Ambitions/Core/LocalRuntimeOS/
 Native/Ambitions/Core/Persistence/
 Native/Ambitions/Core/Domain/
-Native/Ambitions/Projection/StageScenes/TodayStageScene.swift
-Native/Ambitions/Projection/StageScenes/GoalsStageScene.swift
-Native/Ambitions/Projection/StageScenes/TimeStageScene.swift
-Native/Ambitions/Projection/StageScenes/YouStageScene.swift
-Native/Ambitions/Projection/OverlayScenes/CaptureStageScene.swift
-Native/Ambitions/Projection/OverlayScenes/SearchStageScene.swift
+Native/Ambitions/Surfaces/Today/Projection/TodayStageScene.swift
+Native/Ambitions/Surfaces/Goals/Projection/GoalsStageScene.swift
+Native/Ambitions/Surfaces/Time/Projection/TimeStageScene.swift
+Native/Ambitions/Surfaces/You/Projection/YouStageScene.swift
+Native/Ambitions/Composer/Capture/Projection/CaptureStageScene.swift
+Native/Ambitions/Stage/Overlays/Projection/SearchStageScene.swift
 Native/Ambitions/Surfaces/Today/TodaySurface.swift
 Native/Ambitions/Surfaces/Goals/GoalsSurface.swift
 Native/Ambitions/Surfaces/Time/TimeSurface.swift
@@ -403,31 +403,31 @@ Codex must not add external LLM dependency, cloud model calls, chatbot-first UI,
 
 ### Today
 
-Source-present evidence: `Native/Ambitions/Surfaces/Today/TodaySurface.swift`, `Native/Ambitions/Surfaces/Today/TodayObjectView.swift`, `Native/Ambitions/Projection/StageScenes/TodayStageScene.swift`, and `Native/Ambitions/Projection/SurfaceLenses/TodayLens.swift`.
+Source-present evidence: `Native/Ambitions/Surfaces/Today/TodaySurface.swift`, `Native/Ambitions/Surfaces/Today/TodayObjectView.swift`, `Native/Ambitions/Surfaces/Today/Projection/TodayStageScene.swift`, and `Native/Ambitions/Surfaces/Today/Projection/TodayLens.swift`.
 
 Implementation truth: Today source exists and is wired in current app source. Product truth says Today is the Reality Window, not task list, calendar timeline, dashboard, or detached card stack. Final live-time, mutation, accessibility, safe-area, and flagship visual behavior remain unproven unless current proof exists.
 
 ### Goals
 
-Source-present evidence: `Native/Ambitions/Surfaces/Goals/GoalsSurface.swift`, `Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift`, `Native/Ambitions/Projection/StageScenes/GoalsStageScene.swift`, and `Native/Ambitions/Projection/SurfaceLenses/GoalsLens.swift`.
+Source-present evidence: `Native/Ambitions/Surfaces/Goals/GoalsSurface.swift`, `Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift`, `Native/Ambitions/Surfaces/Goals/Projection/GoalsStageScene.swift`, and `Native/Ambitions/Surfaces/Goals/Projection/GoalsLens.swift`.
 
 Implementation truth: Goals source exists. Product truth says Goals is the Life Area Atlas with Life Areas, Goal Threads, Step chains, proof history, and no KPI/ranked-score/dashboard drift. Final Life Area Atlas behavior remains unproven unless current proof exists.
 
 ### Time
 
-Source-present evidence: `Native/Ambitions/Surfaces/Time/TimeSurface.swift`, `Native/Ambitions/Surfaces/Time/TimeObjectView.swift`, `Native/Ambitions/Projection/StageScenes/TimeStageScene.swift`, and `Native/Ambitions/Projection/SurfaceLenses/TimeLens.swift`.
+Source-present evidence: `Native/Ambitions/Surfaces/Time/TimeSurface.swift`, `Native/Ambitions/Surfaces/Time/TimeObjectView.swift`, `Native/Ambitions/Surfaces/Time/Projection/TimeStageScene.swift`, and `Native/Ambitions/Surfaces/Time/Projection/TimeLens.swift`.
 
 Implementation truth: Time source exists. Plan compatibility code may still exist. Product truth says Time is Ambitions' native Life Calendar, not calendar clone, agenda clone, free/busy grid, productivity score, or AI scheduling surface. Final native Life Calendar implementation remains unproven unless current proof exists.
 
 ### You
 
-Source-present evidence: `Native/Ambitions/Surfaces/You/YouSurface.swift`, `Native/Ambitions/Surfaces/You/YouObjectView.swift`, `Native/Ambitions/Projection/StageScenes/YouStageScene.swift`, and `Native/Ambitions/Projection/SurfaceLenses/YouLens.swift`.
+Source-present evidence: `Native/Ambitions/Surfaces/You/YouSurface.swift`, `Native/Ambitions/Surfaces/You/YouObjectView.swift`, `Native/Ambitions/Surfaces/You/Projection/YouStageScene.swift`, and `Native/Ambitions/Surfaces/You/Projection/YouLens.swift`.
 
 Implementation truth: You source exists. Profile compatibility symbols may remain. Product truth says You is the local settings, personalization, privacy, learning, Source, receipts, and account-control surface, not social profile/admin/AI settings wall/generic settings dump. Final native settings/profile quality remains unproven unless current proof exists.
 
 ### Capture
 
-Source-present evidence: `Native/Ambitions/Composer/Capture/CaptureSurface.swift`, `Native/Ambitions/Composer/Capture/CaptureAtmosphereComposer.swift`, `Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/`, `Native/Ambitions/Projection/OverlayScenes/CaptureStageScene.swift`, and `Native/Ambitions/Projection/OverlayLenses/CaptureLens.swift`.
+Source-present evidence: `Native/Ambitions/Composer/Capture/CaptureSurface.swift`, `Native/Ambitions/Composer/Capture/CaptureAtmosphereComposer.swift`, `Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/`, `Native/Ambitions/Composer/Capture/Projection/CaptureStageScene.swift`, and `Native/Ambitions/Composer/Capture/Projection/CaptureLens.swift`.
 
 Implementation truth: Capture source exists. CaptureRouting now has a source-present LocalRuntimeOS owner for durable intake, classification, route resolution, attachment staging, correction, direct lookup, and promotion receipts. Capture may still contain old route/screen assumptions outside that bounded source slice. Product truth says Capture is the global typed route graph and full-screen Stage composer, not a root tab. Final global composer behavior remains unproven unless current proof exists.
 

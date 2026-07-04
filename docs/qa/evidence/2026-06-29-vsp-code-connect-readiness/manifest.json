@@ -111,7 +111,7 @@
       "figma_component": "CANDIDATE — DirectionField",
       "code_connect_target": "GoalsStageScene / FE09ComponentSystemRole.constellationAtlas",
       "source_owners": [
-        "Native/Ambitions/Projection/StageScenes/GoalsStageScene.swift",
+        "Native/Ambitions/Surfaces/Goals/Projection/GoalsStageScene.swift",
         "Sources/Components/FE09ComponentSystemPrimitives.swift"
       ],
       "provenance": "Partial SwiftUI/semantic support; dedicated Constellation Atlas field primitive still required",
@@ -125,7 +125,7 @@
       "code_connect_target": "GroupedNavigationRow / GroupedStatusNavigationRow / GoalsStageScene",
       "source_owners": [
         "Sources/Components/GroupedNavigationList.swift",
-        "Native/Ambitions/Projection/StageScenes/GoalsStageScene.swift"
+        "Native/Ambitions/Surfaces/Goals/Projection/GoalsStageScene.swift"
       ],
       "provenance": "Partial existing row primitives; Goals-specific durable row wrapper needs parity review",
       "status": "Needs source primitive before full Code Connect",

@@ -133,7 +133,7 @@ final class RenderedProductAcceptanceAuditTests: XCTestCase {
 
     func testProjectionTruthAuditRejectsFabricatedMinimumCounts() {
         let projection = LifeShapeSourceFile(
-            path: "Native/Ambitions/Projection/SurfaceLenses/TimeLifeShapeFieldProjection.swift",
+            path: "Native/Ambitions/Surfaces/Time/Projection/TimeLifeShapeFieldProjection.swift",
             contents: """
             let focusedBlockCount = max(activeGoalCount, 1)
             let lightStepCount = max(openDays, 1)
@@ -248,11 +248,11 @@ final class RenderedProductAcceptanceAuditTests: XCTestCase {
             "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldModels.swift",
             "Native/Ambitions/DesignSystem/ProductObjects/MotionCurrentFieldView.swift",
             "Native/Ambitions/DesignSystem/ProductObjects/MotionCurrentLaneViews.swift",
-            "Native/Ambitions/Projection/SurfaceLenses/TimeLifeShapeFieldProjection.swift",
-            "Native/Ambitions/Projection/SurfaceLenses/TimeLifeShapeSemanticProjection.swift",
-            "Native/Ambitions/Projection/SurfaceLenses/TimeLifeShapeModels.swift",
-            "Native/Ambitions/Projection/SurfaceLenses/TimeLifeSuiteState.swift",
-            "Native/Ambitions/Projection/SurfaceLenses/TimeLifeShapeDrillDownProjection.swift",
+            "Native/Ambitions/Surfaces/Time/Projection/TimeLifeShapeFieldProjection.swift",
+            "Native/Ambitions/Surfaces/Time/Projection/TimeLifeShapeSemanticProjection.swift",
+            "Native/Ambitions/Surfaces/Time/Projection/TimeLifeShapeModels.swift",
+            "Native/Ambitions/Surfaces/Time/Projection/TimeLifeSuiteState.swift",
+            "Native/Ambitions/Surfaces/Time/Projection/TimeLifeShapeDrillDownProjection.swift",
             "Native/Ambitions/Stage/Chrome/StageDockRail.swift",
             "Native/Ambitions/Stage/Motion/StageMotionCurrentView.swift",
             "Native/Ambitions/Stage/Motion/StageMotionState.swift",

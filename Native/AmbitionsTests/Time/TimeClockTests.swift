@@ -106,7 +106,6 @@ final class TimeClockTests: XCTestCase {
         let root = repoRoot()
         let sourceRoots = [
             "Native/Ambitions/Core/Time",
-            "Native/Ambitions/Projection/SurfaceLenses",
             "Native/Ambitions/Surfaces/Time"
         ].map { root.appendingPathComponent($0) }
         let fileURLs = try sourceRoots.flatMap { try swiftFiles(under: $0) }
@@ -183,8 +182,7 @@ final class TimeClockTests: XCTestCase {
         let sourceRoots = [
             "Native/Ambitions/Core/Time",
             "Native/Ambitions/Surfaces/Time",
-            "Native/Ambitions/Surfaces/Today",
-            "Native/Ambitions/Projection/SurfaceLenses"
+            "Native/Ambitions/Surfaces/Today"
         ].map { root.appendingPathComponent($0) }
         let fileURLs = try sourceRoots.flatMap { try swiftFiles(under: $0) }
         var findings: [String] = []
@@ -201,8 +199,11 @@ final class TimeClockTests: XCTestCase {
 
     func testTodayAndTimeProjectionSourcesUseCoreTimePolicyForRendering() throws {
         let root = repoRoot()
-        let surfaceLensRoot = root.appendingPathComponent("Native/Ambitions/Projection/SurfaceLenses")
-        let sourceURLs = try swiftFiles(under: surfaceLensRoot).filter {
+        let sourceRoots = [
+            "Native/Ambitions/Surfaces/Today/Projection",
+            "Native/Ambitions/Surfaces/Time/Projection"
+        ].map { root.appendingPathComponent($0) }
+        let sourceURLs = try sourceRoots.flatMap { try swiftFiles(under: $0) }.filter {
             $0.lastPathComponent.hasPrefix("Today") || $0.lastPathComponent.hasPrefix("Time")
         }
         let disallowedPatterns = [

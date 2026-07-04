@@ -106,7 +106,7 @@ final class HorizonCapacityPrimitiveFamilyTests: XCTestCase {
         let surfaceSource = try source("Native/Ambitions/Surfaces/Time/TimeSurface.swift", root: root)
         let objectSource = try source("Native/Ambitions/Surfaces/Time/TimeObjectView.swift", root: root)
         let productObjectSource = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift", root: root)
-        let lensSource = try source("Native/Ambitions/Projection/SurfaceLenses/TimeLens.swift", root: root)
+        let lensSource = try source("Native/Ambitions/Surfaces/Time/Projection/TimeLens.swift", root: root)
 
         XCTAssertTrue(surfaceSource.contains("TimeObjectView("))
         XCTAssertTrue(objectSource.contains("TimeLens.makeStageScene"))

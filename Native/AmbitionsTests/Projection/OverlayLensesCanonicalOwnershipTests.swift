@@ -2,18 +2,20 @@ import XCTest
 @testable import Ambitions
 
 final class OverlayLensesCanonicalOwnershipTests: XCTestCase {
-    func testRequiredOverlayLensFilesExistAtCanonicalPaths() {
+    func testRequiredOverlayLensFilesExistAtFeatureLocalPaths() throws {
         let root = repoRoot()
         let required = [
-            "Native/Ambitions/Projection/OverlayLenses/CaptureLens.swift",
-            "Native/Ambitions/Projection/OverlayLenses/SearchLens.swift",
-            "Native/Ambitions/Projection/OverlayLenses/ClosureLens.swift",
-            "Native/Ambitions/Projection/OverlayLenses/InspectionLens.swift"
+            "Native/Ambitions/Projection/Contracts/OverlayProjectionContracts.swift",
+            "Native/Ambitions/Composer/Capture/Projection/CaptureLens.swift",
+            "Native/Ambitions/Stage/Overlays/Projection/SearchLens.swift",
+            "Native/Ambitions/Stage/Overlays/Projection/ClosureLens.swift",
+            "Native/Ambitions/Trust/Projection/InspectionLens.swift"
         ]
 
         for path in required {
             XCTAssertTrue(FileManager.default.fileExists(atPath: root.appendingPathComponent(path).path), path)
         }
+        XCTAssertEqual(try swiftFiles(under: root.appendingPathComponent("Native/Ambitions/Projection/OverlayLenses")), [])
     }
 
     func testOverlayLensContractsAreRealProjectionOwners() {
@@ -25,9 +27,12 @@ final class OverlayLensesCanonicalOwnershipTests: XCTestCase {
         ]
 
         XCTAssertEqual(contracts.map(\.kind), [.capture, .search, .closure, .inspection])
+        XCTAssertEqual(
+            contracts.map(\.ownerLayer),
+            ["Composer/Capture/Projection", "Stage/Overlays/Projection", "Stage/Overlays/Projection", "Trust/Projection"]
+        )
         for contract in contracts {
             XCTAssertTrue(contract.satisfiesFinalCanon, contract.kind.rawValue)
-            XCTAssertEqual(contract.ownerLayer, "Projection/OverlayLenses")
             XCTAssertFalse(contract.projectionInputs.isEmpty)
             XCTAssertFalse(contract.failureStates.isEmpty)
         }
@@ -75,5 +80,21 @@ final class OverlayLensesCanonicalOwnershipTests: XCTestCase {
             .deletingLastPathComponent()
             .deletingLastPathComponent()
             .deletingLastPathComponent()
+    }
+
+    private func swiftFiles(under root: URL) throws -> [String] {
+        guard let enumerator = FileManager.default.enumerator(
+            at: root,
+            includingPropertiesForKeys: [.isRegularFileKey],
+            options: [.skipsHiddenFiles]
+        ) else {
+            return []
+        }
+
+        return try enumerator.compactMap { item in
+            guard let url = item as? URL else { return nil }
+            let values = try url.resourceValues(forKeys: [.isRegularFileKey])
+            return values.isRegularFile == true && url.pathExtension == "swift" ? url.lastPathComponent : nil
+        }.sorted()
     }
 }

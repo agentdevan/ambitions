@@ -82,6 +82,23 @@ SOURCE_ATLAS_PATTERNS = (
     r"\bR2\b",
 )
 
+CENTRAL_PROJECTION_REHOME_OLD_PREFIXES = (
+    "Native/Ambitions/Projection/SurfaceLenses/",
+    "Native/Ambitions/Projection/StageScenes/",
+    "Native/Ambitions/Projection/OverlayLenses/",
+    "Native/Ambitions/Projection/OverlayScenes/",
+)
+
+CENTRAL_PROJECTION_REHOME_NEW_PREFIXES = (
+    "Native/Ambitions/Composer/Capture/Projection/",
+    "Native/Ambitions/Stage/Overlays/Projection/",
+    "Native/Ambitions/Surfaces/Goals/Projection/",
+    "Native/Ambitions/Surfaces/Time/Projection/",
+    "Native/Ambitions/Surfaces/Today/Projection/",
+    "Native/Ambitions/Surfaces/You/Projection/",
+    "Native/Ambitions/Trust/Projection/",
+)
+
 SWIFT_HARD_LINE_CAP = 600
 LARGEST_FILE_REPORT_LIMIT = 10
 
@@ -143,7 +160,7 @@ def diff_changed_paths(base: str | None, include_untracked: bool) -> list[Change
     return sorted(deduped.values(), key=lambda item: item.path)
 
 
-def added_lines(path: str, base: str | None, untracked: bool) -> list[str]:
+def added_lines(path: str, base: str | None, untracked: bool, old_path: str | None = None) -> list[str]:
     full_path = ROOT / path
     if untracked:
         if full_path.exists() and full_path.is_file():
@@ -152,9 +169,12 @@ def added_lines(path: str, base: str | None, untracked: bool) -> list[str]:
 
     args = ["diff", "--unified=0"]
     if base:
-        args.extend([base, "HEAD", "--", path])
+        args.extend([base, "HEAD", "--"])
     else:
-        args.extend(["HEAD", "--", path])
+        args.extend(["HEAD", "--"])
+    if old_path:
+        args.append(old_path)
+    args.append(path)
     try:
         diff = run_git(args)
     except subprocess.CalledProcessError:
@@ -203,12 +223,23 @@ def is_legacy_runtime_to_localruntimeos_suffix_move(item: ChangedPath) -> bool:
     )
 
 
+def is_central_projection_rehome(item: ChangedPath) -> bool:
+    return (
+        item.status == "R"
+        and item.old_path is not None
+        and is_production_swift(item.old_path)
+        and is_production_swift(item.path)
+        and any(item.old_path.startswith(prefix) for prefix in CENTRAL_PROJECTION_REHOME_OLD_PREFIXES)
+        and any(item.path.startswith(prefix) for prefix in CENTRAL_PROJECTION_REHOME_NEW_PREFIXES)
+    )
+
+
 def has_any(patterns: tuple[str, ...], text: str) -> bool:
     return any(re.search(pattern, text) for pattern in patterns)
 
 
 def added_text(item: ChangedPath, base: str | None) -> str:
-    return "\n".join(added_lines(item.path, base, item.untracked))
+    return "\n".join(added_lines(item.path, base, item.untracked, item.old_path))
 
 
 def source_deletion_present(changed: list[ChangedPath]) -> bool:
@@ -382,6 +413,8 @@ def source_atlas_growth_guard(
 ) -> tuple[bool, Finding | None]:
     if not is_source_atlas_scope(item.path, text):
         return False, None
+    if is_central_projection_rehome(item):
+        return False, None
     if item.status in {"A", "R"} and item.path not in source_atlas_allowlist:
         return True, Finding(
             "source-atlas-growth-adr",
@@ -464,7 +497,11 @@ def governance_findings(args: argparse.Namespace) -> list[Finding]:
         text = added_text(item, args.base)
 
         if item.status in {"A", "R"} and is_production_swift(path):
-            if is_suffix_split_name(path_obj.name) and not is_legacy_runtime_to_localruntimeos_suffix_move(item):
+            if (
+                is_suffix_split_name(path_obj.name)
+                and not is_legacy_runtime_to_localruntimeos_suffix_move(item)
+                and not is_central_projection_rehome(item)
+            ):
                 findings.append(
                     Finding(
                         "no-new-suffix-splits",

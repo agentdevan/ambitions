@@ -140,7 +140,7 @@
       "gap_classification": "MISSING_PARENT_FEATURE"
     },
     {
-      "path": "Native/Ambitions/Surfaces/Today/; Native/Ambitions/Projection/SurfaceLenses/Today*; Native/Ambitions/Projection/StageScenes/Today*",
+      "path": "Native/Ambitions/Surfaces/Today/; Native/Ambitions/Surfaces/Today/Projection/",
       "app_aspect": "Today",
       "private_life_orchestration_role": "Turns current reality, capacity, protected time, and recommended step into the flagship Start here decision object.",
       "orchestration_layer": "Context / capacity / protected time / time reality / recovery",
@@ -157,7 +157,7 @@
       "gap_classification": "PARTIAL_NEEDS_LEAF_REPAIR"
     },
     {
-      "path": "Native/Ambitions/Surfaces/Goals/; Native/Ambitions/Projection/SurfaceLenses/Goals*; Native/Ambitions/Projection/StageScenes/Goals*",
+      "path": "Native/Ambitions/Surfaces/Goals/; Native/Ambitions/Surfaces/Goals/Projection/",
       "app_aspect": "Goals",
       "private_life_orchestration_role": "Owns identity direction, life areas, ambition paths, goal threads, and goal-to-step interpretation.",
       "orchestration_layer": "Identity direction / life area / ambition / goal thread",
@@ -174,7 +174,7 @@
       "gap_classification": "PARTIAL_NEEDS_PARENT_REPAIR"
     },
     {
-      "path": "Native/Ambitions/Surfaces/Time/; Native/Ambitions/Core/LocalRuntimeOS/Scheduling/; Native/Ambitions/Projection/SurfaceLenses/Time*",
+      "path": "Native/Ambitions/Surfaces/Time/; Native/Ambitions/Core/LocalRuntimeOS/Scheduling/; Native/Ambitions/Surfaces/Time/Projection/Time*",
       "app_aspect": "Time",
       "private_life_orchestration_role": "Models time reality, capacity, protected time, placement, and reflow for recommended steps that fit actual life.",
       "orchestration_layer": "Context / capacity / protected time / time reality / recovery",
@@ -191,7 +191,7 @@
       "gap_classification": "PARTIAL_NEEDS_PARENT_REPAIR"
     },
     {
-      "path": "Native/Ambitions/Surfaces/You/; Native/Ambitions/Projection/SurfaceLenses/You*; Native/Ambitions/Projection/StageScenes/You*",
+      "path": "Native/Ambitions/Surfaces/You/; Native/Ambitions/Surfaces/You/Projection/",
       "app_aspect": "You",
       "private_life_orchestration_role": "Owns user system profile, preferences, identity context, and adaptation settings that personalize orchestration without cloud profiling.",
       "orchestration_layer": "Identity direction / life area / ambition / goal thread",
@@ -242,7 +242,7 @@
       "gap_classification": "PARTIAL_NEEDS_LEAF_REPAIR"
     },
     {
-      "path": "Native/Ambitions/Trust/; Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/; Native/Ambitions/Projection/StageScenes/*Receipt*",
+      "path": "Native/Ambitions/Trust/; Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/; Native/Ambitions/Trust/Projection/",
       "app_aspect": "Trust / Proof / Source / Privacy / History / Receipts",
       "private_life_orchestration_role": "Provides inspectable proof, source, privacy, history, receipt, replay, and undo/recovery views over local runtime changes.",
       "orchestration_layer": "Proof / source / privacy / history / trust inspection",

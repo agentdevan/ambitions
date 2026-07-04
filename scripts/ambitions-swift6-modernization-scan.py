@@ -52,7 +52,7 @@ EXCLUDED_DIR_NAMES = {
 EXPLICIT_ALLOWLISTS: tuple[tuple[str, str, str], ...] = (
     (
         "unchecked-sendable",
-        "Native/Ambitions/Projection/SurfaceLenses/TodayReadModelProjector.swift",
+        "Native/Ambitions/Surfaces/Today/Projection/TodayReadModelProjector.swift",
         "final class TodayDerivedReadModelCache: @unchecked Sendable",
     ),
 )

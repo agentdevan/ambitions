@@ -2,18 +2,19 @@ import XCTest
 @testable import Ambitions
 
 final class OverlayScenesCanonicalOwnershipTests: XCTestCase {
-    func testRequiredOverlaySceneFilesExistAtCanonicalPaths() {
+    func testRequiredOverlaySceneFilesExistAtFeatureLocalPaths() throws {
         let root = repoRoot()
         let required = [
-            "Native/Ambitions/Projection/OverlayScenes/CaptureStageScene.swift",
-            "Native/Ambitions/Projection/OverlayScenes/SearchStageScene.swift",
-            "Native/Ambitions/Projection/OverlayScenes/ClosureStageScene.swift",
-            "Native/Ambitions/Projection/OverlayScenes/InspectionStageScene.swift"
+            "Native/Ambitions/Composer/Capture/Projection/CaptureStageScene.swift",
+            "Native/Ambitions/Stage/Overlays/Projection/SearchStageScene.swift",
+            "Native/Ambitions/Stage/Overlays/Projection/ClosureStageScene.swift",
+            "Native/Ambitions/Trust/Projection/InspectionStageScene.swift"
         ]
 
         for path in required {
             XCTAssertTrue(FileManager.default.fileExists(atPath: root.appendingPathComponent(path).path), path)
         }
+        XCTAssertEqual(try swiftFiles(under: root.appendingPathComponent("Native/Ambitions/Projection/OverlayScenes")), [])
     }
 
     func testOverlaySceneContractsOwnShellBehavior() {
@@ -25,9 +26,12 @@ final class OverlayScenesCanonicalOwnershipTests: XCTestCase {
         ]
 
         XCTAssertEqual(contracts.map(\.kind), [.capture, .search, .closure, .inspection])
+        XCTAssertEqual(
+            contracts.map(\.ownerLayer),
+            ["Composer/Capture/Projection", "Stage/Overlays/Projection", "Stage/Overlays/Projection", "Trust/Projection"]
+        )
         for contract in contracts {
             XCTAssertTrue(contract.satisfiesFinalCanon, contract.kind.rawValue)
-            XCTAssertEqual(contract.ownerLayer, "Projection/OverlayScenes")
             XCTAssertTrue(contract.routeBoundary.localizedCaseInsensitiveContains("overlay"))
             XCTAssertTrue(contract.motionBehavior.localizedCaseInsensitiveContains("Stage/Motion"))
         }
@@ -82,5 +86,21 @@ final class OverlayScenesCanonicalOwnershipTests: XCTestCase {
             .deletingLastPathComponent()
             .deletingLastPathComponent()
             .deletingLastPathComponent()
+    }
+
+    private func swiftFiles(under root: URL) throws -> [String] {
+        guard let enumerator = FileManager.default.enumerator(
+            at: root,
+            includingPropertiesForKeys: [.isRegularFileKey],
+            options: [.skipsHiddenFiles]
+        ) else {
+            return []
+        }
+
+        return try enumerator.compactMap { item in
+            guard let url = item as? URL else { return nil }
+            let values = try url.resourceValues(forKeys: [.isRegularFileKey])
+            return values.isRegularFile == true && url.pathExtension == "swift" ? url.lastPathComponent : nil
+        }.sorted()
     }
 }

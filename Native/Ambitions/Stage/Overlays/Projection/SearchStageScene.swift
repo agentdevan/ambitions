@@ -3,7 +3,7 @@ import Foundation
 enum SearchStageScene {
     static let contract = OverlayStageSceneContract(
         kind: .search,
-        ownerLayer: "Projection/OverlayScenes",
+        ownerLayer: "Stage/Overlays/Projection",
         routeBoundary: "Search appears as an overlay, not a persistent surface.",
         dockBehavior: "Root dock stays visible only for the owning root surface.",
         focusRestoration: "Dismissal restores focus to the search entry trigger.",

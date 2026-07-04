@@ -3,7 +3,7 @@ import Foundation
 enum ClosureLens {
     static let contract = OverlayLensContract(
         kind: .closure,
-        ownerLayer: "Projection/OverlayLenses",
+        ownerLayer: "Stage/Overlays/Projection",
         primaryObject: "Action closure outcome review",
         projectionInputs: ["closure prompt", "outcome options", "proof preview", "undo preview"],
         actionBoundary: "Closure saves only after the selected outcome explains visible mutation, receipt, and undo state.",

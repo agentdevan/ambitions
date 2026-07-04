@@ -102,9 +102,9 @@ extension ProjectionDefinition {
                 family: .surface,
                 consumesEventKinds: [.commandExecution, .captureRouteDecided, .closureRecorded, .correctionRecorded, .timePlacementProposed, .tombstoneRecorded],
                 readModelInventory: [
-                    .init(sourcePath: "Native/Ambitions/Projection/SurfaceLenses/TodayReadModelProjector.swift", responsibility: "Today execution read model assembly", migrationTarget: .today),
-                    .init(sourcePath: "Native/Ambitions/Projection/SurfaceLenses/TodayExecutionProjector.swift", responsibility: "Today Stage execution projection", migrationTarget: .today),
-                    .init(sourcePath: "Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService+02-RepositoryBackedTodayService.swift", responsibility: "Repository-backed Today read path", migrationTarget: .today),
+                    .init(sourcePath: "Native/Ambitions/Surfaces/Today/Projection/TodayReadModelProjector.swift", responsibility: "Today execution read model assembly", migrationTarget: .today),
+                    .init(sourcePath: "Native/Ambitions/Surfaces/Today/Projection/TodayExecutionProjector.swift", responsibility: "Today Stage execution projection", migrationTarget: .today),
+                    .init(sourcePath: "Native/Ambitions/Surfaces/Today/Projection/TodayFeatureService+02-RepositoryBackedTodayService.swift", responsibility: "Repository-backed Today read path", migrationTarget: .today),
                 ]
             )
         case .goals:
@@ -113,8 +113,8 @@ extension ProjectionDefinition {
                 family: .surface,
                 consumesEventKinds: [.commandExecution, .closureRecorded, .correctionRecorded, .proofAttached, .tombstoneRecorded],
                 readModelInventory: [
-                    .init(sourcePath: "Native/Ambitions/Projection/SurfaceLenses/GoalsOverviewProjector.swift", responsibility: "Goals overview board projection", migrationTarget: .goals),
-                    .init(sourcePath: "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService.swift", responsibility: "Repository-backed Goals surface read path", migrationTarget: .goals),
+                    .init(sourcePath: "Native/Ambitions/Surfaces/Goals/Projection/GoalsOverviewProjector.swift", responsibility: "Goals overview board projection", migrationTarget: .goals),
+                    .init(sourcePath: "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureService.swift", responsibility: "Repository-backed Goals surface read path", migrationTarget: .goals),
                     .init(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/Projections/LifeAreaAtlasProjector.swift", responsibility: "Life area atlas projector scaffold", migrationTarget: .goals),
                 ]
             )
@@ -124,9 +124,9 @@ extension ProjectionDefinition {
                 family: .surface,
                 consumesEventKinds: [.commandExecution, .correctionRecorded, .timePlacementProposed, .tombstoneRecorded],
                 readModelInventory: [
-                    .init(sourcePath: "Native/Ambitions/Projection/SurfaceLenses/TimeProjectionService.swift", responsibility: "Time projection service source reads", migrationTarget: .time),
-                    .init(sourcePath: "Native/Ambitions/Projection/SurfaceLenses/TimeSurfaceProjectionAssembly.swift", responsibility: "Time surface assembly", migrationTarget: .time),
-                    .init(sourcePath: "Native/Ambitions/Projection/SurfaceLenses/TimeLifeSuiteProjector.swift", responsibility: "Life calendar suite projection", migrationTarget: .time),
+                    .init(sourcePath: "Native/Ambitions/Surfaces/Time/Projection/TimeProjectionService.swift", responsibility: "Time projection service source reads", migrationTarget: .time),
+                    .init(sourcePath: "Native/Ambitions/Surfaces/Time/Projection/TimeSurfaceProjectionAssembly.swift", responsibility: "Time surface assembly", migrationTarget: .time),
+                    .init(sourcePath: "Native/Ambitions/Surfaces/Time/Projection/TimeLifeSuiteProjector.swift", responsibility: "Life calendar suite projection", migrationTarget: .time),
                 ]
             )
         case .you:
@@ -135,9 +135,9 @@ extension ProjectionDefinition {
                 family: .surface,
                 consumesEventKinds: [.commandExecution, .correctionRecorded, .proofAttached, .tombstoneRecorded, .compactionSnapshot],
                 readModelInventory: [
-                    .init(sourcePath: "Native/Ambitions/Projection/SurfaceLenses/YouFeatureService.swift", responsibility: "You surface repository read path", migrationTarget: .you),
-                    .init(sourcePath: "Native/Ambitions/Projection/SurfaceLenses/YouHistoryProjectionService.swift", responsibility: "You history projection service", migrationTarget: .you),
-                    .init(sourcePath: "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceTrustProjection.swift", responsibility: "You trust read model projection", migrationTarget: .you),
+                    .init(sourcePath: "Native/Ambitions/Surfaces/You/Projection/YouFeatureService.swift", responsibility: "You surface repository read path", migrationTarget: .you),
+                    .init(sourcePath: "Native/Ambitions/Surfaces/You/Projection/YouHistoryProjectionService.swift", responsibility: "You history projection service", migrationTarget: .you),
+                    .init(sourcePath: "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceTrustProjection.swift", responsibility: "You trust read model projection", migrationTarget: .you),
                 ]
             )
         case .search:
@@ -146,8 +146,8 @@ extension ProjectionDefinition {
                 family: .search,
                 consumesEventKinds: RuntimeEventKind.allCases.filter { $0 != .compactionSnapshot },
                 readModelInventory: [
-                    .init(sourcePath: "Native/Ambitions/Projection/OverlayLenses/SearchLens.swift", responsibility: "Search overlay read model", migrationTarget: .search),
-                    .init(sourcePath: "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceEverythingSearchProjection.swift", responsibility: "Everything search projection scaffold", migrationTarget: .search),
+                    .init(sourcePath: "Native/Ambitions/Stage/Overlays/Projection/SearchLens.swift", responsibility: "Search overlay read model", migrationTarget: .search),
+                    .init(sourcePath: "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceEverythingSearchProjection.swift", responsibility: "Everything search projection scaffold", migrationTarget: .search),
                 ]
             )
         case .widget:

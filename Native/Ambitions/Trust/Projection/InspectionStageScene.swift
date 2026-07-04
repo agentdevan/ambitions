@@ -3,7 +3,7 @@ import Foundation
 enum InspectionStageScene {
     static let contract = OverlayStageSceneContract(
         kind: .inspection,
-        ownerLayer: "Projection/OverlayScenes",
+        ownerLayer: "Trust/Projection",
         routeBoundary: "Inspection appears as a trust-detail overlay, never a root surface.",
         dockBehavior: "Root dock remains owned by the invoking root surface.",
         focusRestoration: "Dismissal restores focus to the inspected receipt control.",

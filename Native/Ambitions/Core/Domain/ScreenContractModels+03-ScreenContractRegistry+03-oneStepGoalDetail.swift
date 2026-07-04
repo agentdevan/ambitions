@@ -74,7 +74,7 @@ extension ScreenContractRegistry {
             screenMatrixAnchor,
             accessibilityMatrixAnchor,
             .init(kind: .sourceSurface, path: "Native/Ambitions/Surfaces/You/YouSurface.swift", note: "Current You-hosted trust entry"),
-            .init(kind: .sourceService, path: "Native/Ambitions/Projection/SurfaceLenses/YouFeatureService.swift", note: "Trust projection source"),
+            .init(kind: .sourceService, path: "Native/Ambitions/Surfaces/You/Projection/YouFeatureService.swift", note: "Trust projection source"),
             .init(kind: .testCoverage, path: "Native/AmbitionsTests/You/YouFeatureServiceTests.swift", note: "Trust and profile tests")
         ]
     )

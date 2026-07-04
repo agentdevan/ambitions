@@ -448,6 +448,13 @@ Ambitions/
       StageMotionAccessibility.swift
       StageMotionReductionPolicy.swift
 
+    Overlays/
+      Projection/
+        SearchLens.swift
+        SearchStageScene.swift
+        ClosureLens.swift
+        ClosureStageScene.swift
+
   Core/
     Domain/
       Step.swift
@@ -692,30 +699,9 @@ Ambitions/
       LocalAuthenticationPolicy.swift
 
   Projection/
-    SurfaceLenses/
+    Contracts/
       SurfaceLens.swift
-      TodayLens.swift
-      GoalsLens.swift
-      TimeLens.swift
-      YouLens.swift
-
-    StageScenes/
-      TodayStageScene.swift
-      GoalsStageScene.swift
-      TimeStageScene.swift
-      YouStageScene.swift
-
-    OverlayLenses/
-      CaptureLens.swift
-      SearchLens.swift
-      ClosureLens.swift
-      InspectionLens.swift
-
-    OverlayScenes/
-      CaptureStageScene.swift
-      SearchStageScene.swift
-      ClosureStageScene.swift
-      InspectionStageScene.swift
+      OverlayProjectionContracts.swift
 
     Mutations/
       StageMutation.swift
@@ -741,6 +727,10 @@ Ambitions/
     ReceiptInspectionView.swift
     RuntimeExplanationPolicy.swift
     TrustDisclosureLevel.swift
+
+    Projection/
+      InspectionLens.swift
+      InspectionStageScene.swift
 
   Interaction/
     GestureGrammar.swift
@@ -819,24 +809,44 @@ Ambitions/
       TodayObjectView.swift
       TodayInteractions.swift
       TodayAccessibility.swift
+      Projection/
+        TodayLens.swift
+        TodayStageScene.swift
+        TodayExecutionProjector.swift
+        TodayReadModelProjector.swift
 
     Goals/
       GoalsSurface.swift
       GoalsObjectView.swift
       GoalsInteractions.swift
       GoalsAccessibility.swift
+      Projection/
+        GoalsLens.swift
+        GoalsStageScene.swift
+        GoalsFeatureService.swift
+        GoalsOverviewProjector.swift
 
     Time/
       TimeSurface.swift
       TimeObjectView.swift
       TimeInteractions.swift
       TimeAccessibility.swift
+      Projection/
+        TimeLens.swift
+        TimeStageScene.swift
+        TimeProjectionService.swift
+        TimeSurfaceProjectionAssembly.swift
 
     You/
       YouSurface.swift
       YouObjectView.swift
       YouInteractions.swift
       YouAccessibility.swift
+      Projection/
+        YouLens.swift
+        YouStageScene.swift
+        YouFeatureService.swift
+        YouHistoryProjectionService.swift
 
   Composer/
     Capture/
@@ -846,6 +856,9 @@ Ambitions/
       CaptureAccessibility.swift
       CaptureInputModel.swift
       CaptureRoutingPreview.swift
+      Projection/
+        CaptureLens.swift
+        CaptureStageScene.swift
 
   Scenarios/
     RuntimeScenario.swift

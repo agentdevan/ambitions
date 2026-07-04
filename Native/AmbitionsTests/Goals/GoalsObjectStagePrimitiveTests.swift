@@ -76,7 +76,7 @@ final class GoalsObjectStagePrimitiveTests: XCTestCase {
     func testAMB575ArchitectureTreeIncludesGoalsObjectStageEntry() throws {
         let goalsLensSource = try goalsLensSource()
         let stageSceneSource = try String(
-            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Projection/StageScenes/GoalsStageScene.swift"),
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Surfaces/Goals/Projection/GoalsStageScene.swift"),
             encoding: .utf8
         )
 
@@ -110,7 +110,7 @@ final class GoalsObjectStagePrimitiveTests: XCTestCase {
 
     func goalsLensSource() throws -> String {
         try String(
-            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Projection/SurfaceLenses/GoalsLens.swift"),
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Surfaces/Goals/Projection/GoalsLens.swift"),
             encoding: .utf8
         )
     }
@@ -118,8 +118,8 @@ final class GoalsObjectStagePrimitiveTests: XCTestCase {
     func goalsFeatureModelsSource() throws -> String {
         let root = repoRoot()
         let sourcePaths = [
-            "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureModels.swift",
-            "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureModels+03-GoalsOverview.swift",
+            "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureModels.swift",
+            "Native/Ambitions/Surfaces/Goals/Projection/GoalsFeatureModels+03-GoalsOverview.swift",
         ]
         return try sourcePaths.map {
             try String(contentsOf: root.appendingPathComponent($0), encoding: .utf8)

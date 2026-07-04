@@ -7,7 +7,7 @@ gates:
     current_status: "Partial"
     evidence_paths:
       - "docs/truth/PRODUCT_ORIGIN_TRUTH.md"
-      - "Native/Ambitions/Projection/SurfaceLenses/TodayExecutionProjector.swift"
+      - "Native/Ambitions/Surfaces/Today/Projection/TodayExecutionProjector.swift"
       - "Native/Ambitions/DesignSystem/ProductObjects/TodayStartHereSurface.swift"
     required_future_proof: "End-to-end first-session scenario, rendered Today proof, accessibility proof"
     last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
@@ -20,7 +20,7 @@ gates:
     current_status: "Partial"
     evidence_paths:
       - "docs/truth/PRODUCT_DESIGN_TRUTH.md"
-      - "Native/Ambitions/Projection/SurfaceLenses/TodayExecutionProjector.swift"
+      - "Native/Ambitions/Surfaces/Today/Projection/TodayExecutionProjector.swift"
     required_future_proof: "Overloaded-day scenario test, rendered first-viewport proof, visual review"
     last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
     canon_source: "docs/truth/PRODUCT_ORIGIN_TRUTH.md"
@@ -107,7 +107,7 @@ gates:
     user_visible_behavior: "Quick Capture saves locally without network."
     current_status: "Partial"
     evidence_paths:
-      - "Native/Ambitions/Projection/OverlayScenes/CaptureStageScene.swift"
+      - "Native/Ambitions/Composer/Capture/Projection/CaptureStageScene.swift"
       - "Native/Ambitions/Core/Persistence/"
       - "Native/AmbitionsTests/Runtime/P1FLocalSearchFoundationTests.swift"
     required_future_proof: "Rendered Capture save proof, network-disabled device workflow, release evidence"
@@ -121,7 +121,7 @@ gates:
     user_visible_behavior: "Time shows fixed points and open windows."
     current_status: "Partial"
     evidence_paths:
-      - "Native/Ambitions/Projection/SurfaceLenses/TimePlacementCalendarContracts.swift"
+      - "Native/Ambitions/Surfaces/Time/Projection/TimePlacementCalendarContracts.swift"
       - "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldVisualField.swift"
     required_future_proof: "Rendered Time proof with fixed/open windows and accessibility labels"
     last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
@@ -134,7 +134,7 @@ gates:
     current_status: "Partial"
     evidence_paths:
       - "Native/Ambitions/Core/LocalRuntimeOS/Search/MemoryLensService.swift"
-      - "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceEverythingSearchProjection.swift"
+      - "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceEverythingSearchProjection.swift"
       - "Native/AmbitionsTests/Runtime/P1FLocalSearchFoundationTests.swift"
     required_future_proof: "First-class Life Capital and Future Steps search proof, rendered route/accessibility proof"
     last_verified_commit: "f51576616f06c3127c2add5f3a94f284e178b6ba"
@@ -285,7 +285,7 @@ gates:
     user_visible_behavior: "Today shows the current slice, not the entire long-term path."
     current_status: "Partial"
     evidence_paths:
-      - "Native/Ambitions/Projection/SurfaceLenses/TodayExecutionProjector.swift"
+      - "Native/Ambitions/Surfaces/Today/Projection/TodayExecutionProjector.swift"
     required_future_proof: "Today scenario test and screenshot proof"
     last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
@@ -296,7 +296,7 @@ gates:
     user_visible_behavior: "Time shows whether a goal fits."
     current_status: "Partial"
     evidence_paths:
-      - "Native/Ambitions/Projection/SurfaceLenses/TimePressureProjection.swift"
+      - "Native/Ambitions/Surfaces/Time/Projection/TimePressureProjection.swift"
       - "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldCapacity.swift"
     required_future_proof: "Fit/over-capacity scenario test"
     last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
@@ -398,7 +398,7 @@ gates:
     user_visible_behavior: "User-caused adjustment shows impact summary."
     current_status: "Partial"
     evidence_paths:
-      - "Native/Ambitions/Projection/SurfaceLenses/TimeReflowDecisionProjector.swift"
+      - "Native/Ambitions/Surfaces/Time/Projection/TimeReflowDecisionProjector.swift"
       - "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/ProtectedStepPlacementPolicy.swift"
       - "Native/AmbitionsTests/LocalRuntimeOS/Scheduling/ProtectedStepPlacementPolicyTests.swift"
     required_future_proof: "User-caused change UI, receipt proof, accessibility proof"
@@ -445,7 +445,7 @@ gates:
     user_visible_behavior: "Ignored plan suggests contextual recovery."
     current_status: "Partial"
     evidence_paths:
-      - "Native/Ambitions/Projection/SurfaceLenses/TimeCalendarRecoveryProjection.swift"
+      - "Native/Ambitions/Surfaces/Time/Projection/TimeCalendarRecoveryProjection.swift"
     required_future_proof: "Multi-day ignored-plan scenario proof"
     last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
@@ -608,7 +608,7 @@ gates:
     current_status: "Partial"
     evidence_paths:
       - "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPackModels+06-SourceAtlasPack.swift"
-      - "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceLifeContextRuntimeProjection.swift"
+      - "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceLifeContextRuntimeProjection.swift"
     required_future_proof: "Dedicated Life Capital model/tests"
     last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
@@ -649,7 +649,7 @@ gates:
     user_visible_behavior: "Patterns show broad stats."
     current_status: "Partial"
     evidence_paths:
-      - "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceLearningControlsProjection.swift"
+      - "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceLearningControlsProjection.swift"
     required_future_proof: "Pattern rows and planning effect proof"
     last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
@@ -755,7 +755,7 @@ gates:
     user_visible_behavior: "Review surfaces accomplishments and proof."
     current_status: "Partial"
     evidence_paths:
-      - "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceReviewProjection.swift"
+      - "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceReviewProjection.swift"
     required_future_proof: "Review UI/export proof"
     last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
@@ -767,7 +767,7 @@ gates:
     current_status: "Partial"
     evidence_paths:
       - "docs/truth/PRODUCT_DESIGN_TRUTH.md"
-      - "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceSourceAtlasPrimaryProjection.swift"
+      - "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceSourceAtlasPrimaryProjection.swift"
     required_future_proof: "Surface audit proving no marketplace/center"
     last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
@@ -812,7 +812,7 @@ gates:
     user_visible_behavior: "Source inspection appears when asked why."
     current_status: "Partial"
     evidence_paths:
-      - "Native/Ambitions/Projection/OverlayScenes/InspectionStageScene.swift"
+      - "Native/Ambitions/Trust/Projection/InspectionStageScene.swift"
       - "Native/Ambitions/Trust/"
     required_future_proof: "Inspection UI proof"
     last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
@@ -935,7 +935,7 @@ gates:
     user_visible_behavior: "Review includes accomplishments."
     current_status: "Partial"
     evidence_paths:
-      - "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceReviewProjection.swift"
+      - "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceReviewProjection.swift"
     required_future_proof: "Rendered review content proof"
     last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
@@ -946,7 +946,7 @@ gates:
     user_visible_behavior: "Review includes broad patterns."
     current_status: "Partial"
     evidence_paths:
-      - "Native/Ambitions/Projection/SurfaceLenses/YouHistoryPatternProjection.swift"
+      - "Native/Ambitions/Surfaces/You/Projection/YouHistoryPatternProjection.swift"
     required_future_proof: "Pattern review proof"
     last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
@@ -1081,7 +1081,7 @@ gates:
     user_visible_behavior: "Automation never forces."
     current_status: "Partial"
     evidence_paths:
-      - "Native/Ambitions/Projection/SurfaceLenses/TimeReflowDecisionProjector.swift"
+      - "Native/Ambitions/Surfaces/Time/Projection/TimeReflowDecisionProjector.swift"
       - "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
     required_future_proof: "Policy tests and destructive-action proof"
     last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
@@ -1109,7 +1109,7 @@ gates:
     user_visible_behavior: "User-caused automation impact is visible."
     current_status: "Partial"
     evidence_paths:
-      - "Native/Ambitions/Projection/SurfaceLenses/TimeReflowDecisionProjector.swift"
+      - "Native/Ambitions/Surfaces/Time/Projection/TimeReflowDecisionProjector.swift"
     required_future_proof: "User-caused impact UI proof"
     last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
