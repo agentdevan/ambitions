@@ -1,21 +1,21 @@
 import XCTest
 @testable import Ambitions
 
-final class SideEffectSystemTests: XCTestCase {
-    func testSideEffectSystemCanonicalOwnerFilesExistAndOldOwnersAreRemoved() throws {
+final class ExternalWritesTests: XCTestCase {
+    func testExternalWritesCanonicalOwnerFilesExistAndOldOwnersAreRemoved() throws {
         let root = repositoryRoot()
         let requiredFiles = [
-            "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/SideEffectLedgerModels.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/SideEffectLedgerSwiftDataRepository.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/SideEffectPolicyEngine.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/SideEffectOutbox.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/NotificationOutbox.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/EventKitOutbox.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/WidgetRefreshOutbox.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/AppIntentBridge.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ShareExtensionIntake.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ExternalCreationImportService.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ExternalReconciliation.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/SideEffectLedgerModels.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/SideEffectLedgerSwiftDataRepository.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/SideEffectPolicyEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/SideEffectOutbox.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/NotificationOutbox.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/EventKitOutbox.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/WidgetRefreshOutbox.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/AppIntentBridge.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/ShareExtensionIntake.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/ExternalCreationImportService.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/ExternalReconciliation.swift",
         ]
 
         for path in requiredFiles {
@@ -29,7 +29,13 @@ final class SideEffectSystemTests: XCTestCase {
             FileManager.default.fileExists(atPath: root.appendingPathComponent(removedRuntimeOwnerPath("ExternalCreationImportService.swift")).path)
         )
         XCTAssertFalse(
-            FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ReminderOutbox.swift").path)
+            FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem").path)
+        )
+        XCTAssertFalse(
+            FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/AmbitionsTests/LocalRuntimeOS/SideEffectSystem").path)
+        )
+        XCTAssertFalse(
+            FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/ReminderOutbox.swift").path)
         )
 
         let oldPersistenceFile = try String(
@@ -336,6 +342,6 @@ final class SideEffectSystemTests: XCTestCase {
 
     private func temporaryDirectory() -> URL {
         FileManager.default.temporaryDirectory
-            .appendingPathComponent("AmbitionsSideEffectSystemTests-\(UUID().uuidString)", isDirectory: true)
+            .appendingPathComponent("AmbitionsExternalWritesTests-\(UUID().uuidString)", isDirectory: true)
     }
 }

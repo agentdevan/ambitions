@@ -6089,7 +6089,7 @@
       "current_owner": "Core/Domain",
       "decision": "Keep",
       "evidence_source": [
-        "Canonical LocalRuntimeOS SideEffectSystem owner.",
+        "Canonical LocalRuntimeOS ExternalWrites owner.",
         "docs/quality/senior-review/BUILD_GRAPH_INVENTORY.json",
         "git ls-files",
         "project.yml/Package.swift membership rules",
@@ -28647,7 +28647,7 @@
         "docs/quality/senior-review/FILE_INVENTORY.json",
         "docs/quality/senior-review/AUTOMATED_FINDINGS.json"
       ],
-      "expected_owner": "Core/LocalRuntimeOS/SideEffectSystem",
+      "expected_owner": "Core/LocalRuntimeOS/ExternalWrites",
       "file_hash": "05ed81f2d996e46a914a92415064fed3b9b14e44eef464e44ce8dc5799df3527",
       "file_type": "swift",
       "findings": {
@@ -28661,11 +28661,11 @@
       "inventory_risk_reasons": [],
       "inventory_status": "classified",
       "last_reviewed_sha": "85b176e70988512988580697f0687802673b8ae0",
-      "layer": "Core/LocalRuntimeOS/SideEffectSystem",
+      "layer": "Core/LocalRuntimeOS/ExternalWrites",
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ExternalCreationImportService.swift",
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/ExternalCreationImportService.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",

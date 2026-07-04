@@ -101,7 +101,7 @@ not create these fixtures; it defines the minimum matrix.
 | `migration_fixture_corrupt_orphan_step` | Orphan `StepRecord`, orphan evidence, orphan capture link, malformed payloads, and missing goal/plan/section references. | `StoreInvariantChecker` blocks backup/import before mutation and produces reviewable blocker evidence. |
 | `migration_fixture_unsupported_schema_future` | Future portable snapshot schema and SwiftData version ledger mismatch. | Import is blocked before mutation with unsupported-schema evidence and no partial write. |
 | `migration_fixture_backup_checksum_failure` | Backup package with checksum mismatch, missing package record, or wrong encryption key. | Restore is blocked or rollback failure is reported without claiming data-loss safety. |
-| `migration_fixture_side_effect_reminder_state` | Reminder/outbox records and app state adjacent to imported goal/step state. | Side-effect delivery is not executed by migration; any reminder carry-forward requires SideEffectSystem receipt proof. |
+| `migration_fixture_side_effect_reminder_state` | Reminder/outbox records and app state adjacent to imported goal/step state. | Side-effect delivery is not executed by migration; any reminder carry-forward requires ExternalWrites receipt proof. |
 | `migration_fixture_private_data_egress_guard` | Private user text, sensitive captures, local-only receipts, Source Atlas references, and public/reference pack metadata. | Migration stays local; no R2, Source Atlas public pack, CloudKit, or hosted AI egress occurs. |
 
 ## Replay Expectations

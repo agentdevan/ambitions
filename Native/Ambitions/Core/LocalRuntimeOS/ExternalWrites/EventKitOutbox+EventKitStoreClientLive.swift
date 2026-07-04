@@ -2,7 +2,7 @@ import EventKit
 import Foundation
 
 extension EventKitStoreClientLive {
-    func saveReminderThroughSideEffectSystem(_ payload: EventKitReminderPayload) async throws -> String {
+    func saveReminderThroughExternalWrites(_ payload: EventKitReminderPayload) async throws -> String {
         let reminder = EKReminder(eventStore: store)
         reminder.title = payload.title
         reminder.notes = payload.notes
@@ -27,7 +27,7 @@ extension EventKitStoreClientLive {
         }
     }
 
-    func saveEventThroughSideEffectSystem(_ payload: EventKitEventPayload) async throws -> String {
+    func saveEventThroughExternalWrites(_ payload: EventKitEventPayload) async throws -> String {
         let event = EKEvent(eventStore: store)
         event.title = payload.title
         event.notes = payload.notes

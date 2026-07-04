@@ -17,7 +17,7 @@ This artifact records the current folder/type dependency graph, target runtime m
 
 ## Current Owner Graph
 
-Current source owner count after the `Projections` slice: 19.
+Current source owner count after the `ExternalWrites` slice: 19.
 
 | Current owner | Swift files | Target owner | Status |
 | --- | ---: | --- | --- |
@@ -33,7 +33,7 @@ Current source owner count after the `Projections` slice: 19.
 | CaptureRouteGraph | 20 | CaptureRouting | Pending |
 | TrustSystem | 29 | Inspection/Receipts | Pending |
 | SearchRecall | 10 | Search | Pending |
-| SideEffectSystem | 13 | ExternalWrites/Outbox | Pending |
+| ExternalWrites | 13 | ExternalWrites | Fifth slice renamed from `SideEffectSystem` |
 | SyncContinuity | 10 | Continuity | Pending |
 | SourceAtlas | 80 | SourceAtlas or ReferencePacks | Pending decision |
 | PrivacySecurity | 12 | Boundary or Privacy | Pending decision |
@@ -146,18 +146,49 @@ Reason:
   `+02/+03/+04` filenames into descriptive owner-local filenames, so the move
   does not introduce new blocked suffix-split files under the new owner.
 
+## Fifth Rename Slice
+
+Applied fifth:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/
+Native/AmbitionsTests/LocalRuntimeOS/SideEffectSystem/
+```
+
+to:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/
+Native/AmbitionsTests/LocalRuntimeOS/ExternalWrites/
+```
+
+Reason:
+
+- `ExternalWrites` is explicitly named by AMB-1670's retained-owner test scope
+  and is the clearer half of AMB-1669's `ExternalWrites/Outbox` target.
+- `Outbox` would be too narrow for the owner because the folder also owns App
+  Intent handoff, Share Extension intake, external reconciliation, and
+  external-creation import source.
+- Concrete behavior types such as `SideEffectOutbox`, `NotificationOutbox`,
+  `EventKitOutbox`, `WidgetRefreshOutbox`, and side-effect ledger records remain
+  intact because they name behavior, not the folder owner.
+- The move changes canonical ownership without changing runtime behavior.
+- The ownership test now proves required `ExternalWrites` files exist and the
+  old `SideEffectSystem` production/test owner paths are gone.
+
 ## API Exposure
 
-The moved `Boundary`, `Commands`, `Transactions`, and `Projections` source contains no `public` or `open` Swift API declarations.
+The moved `Boundary`, `Commands`, `Transactions`, `Projections`, and `ExternalWrites` source contains no `public` or `open` Swift API declarations.
 
 Current exposure is same-module production/test use through Swift files under the existing `Ambitions` target and `AmbitionsTests` target. XcodeGen source discovery is directory-based through `project.yml`, so the move requires project regeneration but no package or target boundary change.
 
-Known direct consumers of the moved `Boundary`, `Commands`, `Transactions`, and
-`Projections` types remain same-module:
+Known direct consumers of the moved `Boundary`, `Commands`, `Transactions`,
+`Projections`, and `ExternalWrites` types remain same-module:
 
 - `Commands`
 - `Transactions`
 - `Projections`
+- `ExternalWrites`
 - `PrivateLifeRuntimeKernel`
 - `PlanningEngine`
 - `TimeEngine`
@@ -185,9 +216,8 @@ This slice can support Source Green for the folder-owner rename if validation pa
 
 Proceed one compartment at a time after guards pass:
 
-1. `SideEffectSystem` -> `ExternalWrites` or `Outbox`
-2. `TrustSystem` -> `Inspection` or `Receipts`
-3. `SearchRecall` -> `Search`
-4. `MigrationRepair` -> `Repair`
+1. `TrustSystem` -> `Inspection` or `Receipts`
+2. `SearchRecall` -> `Search`
+3. `MigrationRepair` -> `Repair`
 
 Each next slice must update tests, current truth/proof references, and the LocalRuntimeProof owner list before closeout.

@@ -39,11 +39,11 @@ actor EventKitStoreClientLive: EventKitStoreClient {
     }
 
     func saveReminder(_ payload: EventKitReminderPayload) async throws -> String {
-        try await saveReminderThroughSideEffectSystem(payload)
+        try await saveReminderThroughExternalWrites(payload)
     }
 
     func saveEvent(_ payload: EventKitEventPayload) async throws -> String {
-        try await saveEventThroughSideEffectSystem(payload)
+        try await saveEventThroughExternalWrites(payload)
     }
 
     func fetchEvents(in interval: DateInterval) async -> [EventKitCalendarEventSnapshot] {

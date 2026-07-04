@@ -320,9 +320,9 @@ files.
 | 174 | `Native/Ambitions/Core/LocalRuntimeOS/EventJournal/RuntimeEventStore.swift` | `.write(`, `FileManager` |
 | 109 | `Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/EncryptedBlobVault.swift` | `.write(` |
 | 92 | `Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/SearchRebuildPipeline.swift` | `try save(` |
-| 49 | `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/EventKitOutbox+EventKitStoreClientLive.swift` | `try save(` |
-| 80 | `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/FileSideEffectLedgerRepository.swift` | `.write(`, `FileManager` |
-| 50 | `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/SideEffectLedgerSwiftDataRepository.swift` | `context.insert`, `import SwiftData` |
+| 49 | `Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/EventKitOutbox+EventKitStoreClientLive.swift` | `try save(` |
+| 80 | `Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/FileSideEffectLedgerRepository.swift` | `.write(`, `FileManager` |
+| 50 | `Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/SideEffectLedgerSwiftDataRepository.swift` | `context.insert`, `import SwiftData` |
 | 294 | `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackCacheFileRepository+Storage.swift` | `.write(` |
 | 470 | `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackCacheFileRepository.swift` | `FileManager` |
 | 320 | `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackLifecycleRefreshService.swift` | `FileManager` |
@@ -393,7 +393,7 @@ Production candidate files excluding test files: 33.
 | 69 | `Native/Ambitions/App/Intents/AmbitionsSystemControlIntent.swift` | AppIntent |
 | 28 | `Native/Ambitions/App/Intents/OpenAmbitionsDestinationIntent.swift` | AppIntent |
 | 40 | `Native/Ambitions/Core/LocalRuntimeOS/Projections/AppIntentProjection.swift` | AppIntent |
-| 88 | `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/AppIntentBridge.swift` | AppIntent, mutation/write language |
+| 88 | `Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/AppIntentBridge.swift` | AppIntent, mutation/write language |
 | 147 | `Native/Ambitions/Projection/ExternalSnapshots/ExternalCreationContracts.swift` | external snapshot/shared projection, mutation/write language |
 | 324 | `Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceActionPayloads+02-ExternalObjectReopeningProjector.swift` | external snapshot/shared projection, mutation/write language |
 | 312 | `Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceActionPayloads.swift` | external snapshot/shared projection, mutation/write language |

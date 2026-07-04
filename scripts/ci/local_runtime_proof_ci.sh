@@ -212,7 +212,7 @@ run_xcode_tests() {
     -only-testing:AmbitionsTests/LocalRuntimeOSProjectionsTests
     -only-testing:AmbitionsTests/StorageTierTests
     -only-testing:AmbitionsTests/ObjectStateTests
-    -only-testing:AmbitionsTests/SideEffectSystemTests
+    -only-testing:AmbitionsTests/ExternalWritesTests
     -only-testing:AmbitionsTests/PrivacySecurityTests
     -only-testing:AmbitionsTests/SourceAtlasPublicOnlyBoundaryGateTests
     -only-testing:AmbitionsTests/SyncContinuityTests

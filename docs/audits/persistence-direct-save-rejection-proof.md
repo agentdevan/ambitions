@@ -116,7 +116,7 @@ context.
 | `Native/Ambitions/Core/Persistence/SwiftDataRepositories+05-SwiftDataAmbitionGraphProjectionRecordRepository.swift` | SwiftData, context_insert | Unsafe graph projection record writes outside canonical projection storage. | AMB-1667 / Projections storage migration |
 | `Native/Ambitions/Core/Persistence/SwiftDataRepositories+06-SwiftDataAppStateRepository.swift` | SwiftData, context_insert | Unsafe app-state direct save path unless called through sanctioned command context. | AMB-1667 / ObjectState storage migration |
 | `Native/Ambitions/Core/Persistence/SwiftDataRepositories+07-SwiftDataRuntimeSnapshotLedgerRepository.swift` | SwiftData, context_insert | Unsafe runtime snapshot ledger writes outside canonical event/trust storage. | AMB-1667 / TrustSystem or EventJournal migration |
-| `Native/Ambitions/Core/Persistence/SwiftDataRepositories+08-SwiftDataReminderRepository.swift` | SwiftData, context_insert | Unsafe reminder repository writes outside SideEffectSystem outbox authority. | AMB-1668 and AMB-1667 |
+| `Native/Ambitions/Core/Persistence/SwiftDataRepositories+08-SwiftDataReminderRepository.swift` | SwiftData, context_insert | Unsafe reminder repository writes outside ExternalWrites outbox authority. | AMB-1668 and AMB-1667 |
 | `Native/Ambitions/Core/Persistence/SwiftDataRepositories.swift` | SwiftData | Unsafe legacy SwiftData repository authority outside LocalRuntimeOS. | AMB-1667 / ObjectStoreSwiftData adapter migration |
 
 ## Other Direct-Write Classifications

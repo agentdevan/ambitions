@@ -7528,6 +7528,68 @@
       "button_styles": [],
       "candidate_inventory_only": true,
       "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 348,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/ExternalWrites/ExternalWritesTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "ExternalWritesTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 200,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/ExternalWrites/SideEffectLedgerModelsTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SideEffectLedgerModelsTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 137,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/ExternalWrites/SideEffectLedgerRepositoryTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SideEffectLedgerRepositoryTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
         "VSP-03",
         "VSP-04",
         "VSP-05",
@@ -7936,68 +7998,6 @@
       "proof_status": "source_inventory_only",
       "test_cases": [
         "SearchRecallTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 200,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/SideEffectSystem/SideEffectLedgerModelsTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SideEffectLedgerModelsTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 137,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/SideEffectSystem/SideEffectLedgerRepositoryTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SideEffectLedgerRepositoryTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-04",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 342,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/SideEffectSystem/SideEffectSystemTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SideEffectSystemTests"
       ],
       "view_modifiers": [],
       "view_structs": []

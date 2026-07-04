@@ -261,7 +261,7 @@ actor AmbitionsPersistenceStore {
             ObjectStoreSwiftDataFamilyDescriptor(
                 id: .sideEffectLedger,
                 storedTypeNames: ["SideEffectLedgerStorageRecord"],
-                mutationAuthority: "Core/LocalRuntimeOS/SideEffectSystem",
+                mutationAuthority: "Core/LocalRuntimeOS/ExternalWrites",
                 fieldRules: [
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "SideEffectLedgerStorageRecord", fieldName: "effectKindRaw", authority: .queryColumn, notes: "Effect outbox kind lookup."),
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "SideEffectLedgerStorageRecord", fieldName: "snapshotData", authority: .snapshotFallback, encodedTypeName: "SideEffectLedgerRecord", notes: "Full side-effect receipt payload.")

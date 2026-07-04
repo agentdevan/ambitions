@@ -39,7 +39,7 @@ REQUIRED_LOCAL_RUNTIME_OWNERS = [
     "CaptureRouteGraph",
     "TrustSystem",
     "SearchRecall",
-    "SideEffectSystem",
+    "ExternalWrites",
     "SyncContinuity",
     "SourceAtlas",
     "PrivacySecurity",
@@ -140,7 +140,7 @@ INTEGRATION_MARKERS = {
         ],
     },
     "app_intent_bridge_outbox_owner": {
-        "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/AppIntentBridge.swift",
+        "path": "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/AppIntentBridge.swift",
         "markers": [
             "SideEffectOutboxRequest",
             "SideEffectOutboxing",
@@ -178,7 +178,7 @@ MUTATION_PATTERNS = [
     (
         "share-extension-direct-append",
         re.compile(r"\bstore\.append\s*\(\s*request\s*\)"),
-        "Share extension intake append must be proven through SideEffectSystem/ShareExtensionIntake.",
+        "Share extension intake append must be proven through ExternalWrites/ShareExtensionIntake.",
     ),
     (
         "app-intent-nil-outbox-recorder",
@@ -1214,13 +1214,13 @@ def check_external_surface_sanitized_projection_gate() -> CheckResult:
             'title = canRunFromIntent ? record.summary : "Open Ambitions"',
             "blockedReason = canRunFromIntent ? nil",
         ],
-        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/AppIntentBridge.swift": [
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/AppIntentBridge.swift": [
             "SharedExternalCreationStore",
             "enqueueExternalCreation",
             "commitRequirement: .committedProjection",
             "requestedBoundary: .localOnly",
         ],
-        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ShareExtensionIntake.swift": [
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/ShareExtensionIntake.swift": [
             "recordDurableIntake",
             "commitRequirement: .committedProjection",
             "without direct private graph mutation",
@@ -1327,7 +1327,7 @@ def check_privacy_security_external_boundary_gate() -> CheckResult:
             "try privacyGate.requirePermitted(privacyDecision)",
             "appGroupSnapshotStore.write(record)",
         ],
-        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/AppIntentBridge.swift": [
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/AppIntentBridge.swift": [
             "private let privacyGate: PrivacyExternalBoundaryGate",
             "PrivacyExternalSurfaceBridgeEvidence(",
             "kind: .appIntentResponse",
@@ -1337,7 +1337,7 @@ def check_privacy_security_external_boundary_gate() -> CheckResult:
             "try privacyGate.requirePermitted(privacyDecision)",
             "try store.enqueueDurableRequest(request)",
         ],
-        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ShareExtensionIntake.swift": [
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/ShareExtensionIntake.swift": [
             "private let privacyGate: PrivacyExternalBoundaryGate",
             "PrivacyExternalSurfaceBridgeEvidence(",
             "kind: .shareHandoff",
@@ -1758,7 +1758,7 @@ def check_capture_intake_durability_gate() -> CheckResult:
 def check_side_effect_local_commit_receipt_gate() -> CheckResult:
     findings: list[Finding] = []
     required_markers = {
-        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "SideEffectSystem" / "SideEffectPolicyEngine.swift": [
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "ExternalWrites" / "SideEffectPolicyEngine.swift": [
             "let runtimeTransactionID: String?",
             "let runtimeEventID: String?",
             "let runtimeReceiptID: String?",
@@ -1776,7 +1776,7 @@ def check_side_effect_local_commit_receipt_gate() -> CheckResult:
             "External side effect must declare a local runtime commit receipt requirement.",
             "External side effect cannot be attempted before a committed local mutation receipt.",
         ],
-        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "SideEffectSystem" / "EventKitOutbox.swift": [
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "ExternalWrites" / "EventKitOutbox.swift": [
             "async -> SideEffectAttempt?",
             "commitRequirement: externalEffect ? .localCommitRequired : .noUserStateMutation",
             "localCommit: localCommit",
@@ -1805,13 +1805,13 @@ def check_side_effect_local_commit_receipt_gate() -> CheckResult:
             "throw CalendarRemindersError.missingLocalCommitReceipt(scope: .calendarEvents)",
             "localCommit: localCommit",
         ],
-        ROOT / "Native" / "AmbitionsTests" / "LocalRuntimeOS" / "SideEffectSystem" / "SideEffectSystemTests.swift": [
+        ROOT / "Native" / "AmbitionsTests" / "LocalRuntimeOS" / "ExternalWrites" / "ExternalWritesTests.swift": [
             "SideEffectLocalCommitEvidence(runtimeReceipt: localCommitOutcome.receipt)",
             "RuntimeTransactionCoordinator(eventStore: eventStore)",
             "testLegacyUnitOfWorkReceiptDoesNotPermitExternalWriteWithoutRuntimeReceiptProof",
             "External side effect must declare a local runtime commit receipt requirement.",
             "External side effect cannot be attempted before a committed local mutation receipt.",
-            "SideEffectSystem/ReminderOutbox.swift",
+            "ExternalWrites/ReminderOutbox.swift",
         ],
     }
 
@@ -1840,7 +1840,7 @@ def check_side_effect_local_commit_receipt_gate() -> CheckResult:
                     )
                 )
 
-    side_effect_root = LOCAL_RUNTIME_ROOT / "SideEffectSystem"
+    side_effect_root = LOCAL_RUNTIME_ROOT / "ExternalWrites"
     if side_effect_root.exists():
         for path in sorted(side_effect_root.glob("*.swift")):
             rel = relative(path)
@@ -1856,7 +1856,7 @@ def check_side_effect_local_commit_receipt_gate() -> CheckResult:
                             "external-side-effect-without-local-commit-requirement",
                             rel,
                             index,
-                            "SideEffectSystem external-effect requests must require a local runtime commit receipt.",
+                            "ExternalWrites external-effect requests must require a local runtime commit receipt.",
                         )
                     )
 

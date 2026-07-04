@@ -6041,7 +6041,7 @@
       "evidence_source": [
         "project.yml/Package.swift membership rules"
       ],
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ExternalCreationImportService.swift",
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/ExternalCreationImportService.swift",
       "reason": "Included by configured app, extension, package, resource, or target config membership.",
       "risk": "Green",
       "target_membership": [

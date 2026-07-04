@@ -97,7 +97,7 @@ life graph storage.
 | `ProjectionStoreSQLite.swift` | Projection storage | `Core/LocalRuntimeOS/Storage` with `Projections` consumption | `Projections` after event-fed materialization | Materialized projection payloads, cursors, projection checksums | Does not prove all UI/widget/App Intent reads consume this store. No product or UI Green. |
 | `SearchStoreFTS.swift` | Search index storage/cache | `Core/LocalRuntimeOS/Storage` with `SearchRecall` consumption | `SearchRecall` and `Projections` rebuild pipeline | Local FTS rows, provenance, privacy-filtered index rows, rebuild cursor | No semantic cloud search, no private graph egress, no domain mutation. |
 | `BlobStoreFileSystem.swift` | Blob/cache storage | `Core/LocalRuntimeOS/Storage` | `CaptureRouteGraph`, `TrustSystem`, `PrivacySecurity` when scoped | Attachment/proof blobs, checksums, content type, file-protection class records | No queryable domain authority, no event ordering, no migration approval. |
-| `AppGroupSnapshotStore.swift` | Redacted external projection snapshot storage | `Core/LocalRuntimeOS/Storage` with `Projections` and `PrivacySecurity` boundaries | `Projections`, `PrivacySecurity`, `SideEffectSystem` adapters | Sanitized widget/share/App Intent snapshots | No full private graph access, no extension-side mutation, no private text exposure, no external-surface Green. |
+| `AppGroupSnapshotStore.swift` | Redacted external projection snapshot storage | `Core/LocalRuntimeOS/Storage` with `Projections` and `PrivacySecurity` boundaries | `Projections`, `PrivacySecurity`, `ExternalWrites` adapters | Sanitized widget/share/App Intent snapshots | No full private graph access, no extension-side mutation, no private text exposure, no external-surface Green. |
 | `BackupStore.swift` | Backup package storage | `Core/LocalRuntimeOS/Storage` with `MigrationRepair` consumption | `MigrationRepair` plus `PrivacySecurity` review gates | Encrypted backup packages, backup manifests, backup checksums | No migration execution, no CloudKit authority, no public-reference pack authority, no data-safety Green. |
 | `MigrationStore.swift` | Migration record storage | `Core/LocalRuntimeOS/Storage` with `MigrationRepair` consumption | `MigrationRepair` dry-run/review flows | Dry-run receipts, invariant summaries, rollback references | No destructive migration execution without proof gates. AMB-1720 owns migration proof planning. |
 
@@ -124,10 +124,10 @@ the scoped mutation.
 | `receipt` | `ActionReceiptHistoryRecordModel`, `RuntimeSnapshotLedgerRecord` | `TrustSystem`, `Projections` | Store typed receipt payloads, runtime lineage, replay-validation fallback payloads | Receipt storage is not receipt-policy authority. |
 | `teachingSignal` | `TeachingSignalRecord` | `PrivateLifeRuntimeKernel` | Store local teaching signal lookup and payload | No learning/recommendation Green from stored signals alone. |
 | `eventLedger` | `EventLedgerRecord`, `CommandExecutionRecord` | `Commands`, `EventJournal`, `TrustSystem` | Store trust/history event kind, command payload, command result payload | Legacy SwiftData ledger is not canonical EventJournal proof. |
-| `sideEffectLedger` | `SideEffectLedgerStorageRecord` | `SideEffectSystem` | Store effect outbox kind and side-effect receipt payload | No app-wide external side-effect outbox Green from records alone. |
+| `sideEffectLedger` | `SideEffectLedgerStorageRecord` | `ExternalWrites` | Store effect outbox kind and side-effect receipt payload | No app-wide external side-effect outbox Green from records alone. |
 | `runtimeSnapshot` | `RuntimeSnapshotLedgerRecord`, `AmbitionGraphProjectionRecordModel`, `AmbitionGraphOperationalRecordModel` | `Projections`, `TrustSystem` | Store projection/read-model fallback payloads | Projection storage does not prove Stage or widget consumption. |
 | `lifeContext` | `LifeContextBundleRecord` | `PrivateLifeRuntimeKernel` | Store local life-context bundle lookup and fallback payload | No personalization/recommendation Green from stored context alone. |
-| `appState` | `AppStateRecord`, `ReminderRecord` | `Commands`, `ObjectState`; reminders also require `SideEffectSystem` when external delivery is scoped | Store canonical surface preference and encoded reminder delivery policy | `AppStateStore` has adapter proof; reminder writes remain Yellow. |
+| `appState` | `AppStateRecord`, `ReminderRecord` | `Commands`, `ObjectState`; reminders also require `ExternalWrites` when external delivery is scoped | Store canonical surface preference and encoded reminder delivery policy | `AppStateStore` has adapter proof; reminder writes remain Yellow. |
 
 ObjectState source currently marks only `appState` as
 `swiftdata_adapter_migrated`. The other object-state families are
@@ -146,7 +146,7 @@ migration, repair, or trust policy.
 
 | Legacy persistence surface | Target owner | Required interpretation | Follow-up |
 | --- | --- | --- | --- |
-| Repository contracts in `PersistenceContracts+02-AFEPQueryBudgetCatalog.swift` | Split by family into `ObjectState`, `Commands`, `CaptureRouteGraph`, `PlanningEngine`, `TimeEngine`, `TrustSystem`, `Projections`, `SideEffectSystem`, `MigrationRepair`, and `Storage` | `save`, `append`, `delete`, import, and unit-of-work APIs are legacy adapter contracts, not business-decision authority. | P-REJECT |
+| Repository contracts in `PersistenceContracts+02-AFEPQueryBudgetCatalog.swift` | Split by family into `ObjectState`, `Commands`, `CaptureRouteGraph`, `PlanningEngine`, `TimeEngine`, `TrustSystem`, `Projections`, `ExternalWrites`, `MigrationRepair`, and `Storage` | `save`, `append`, `delete`, import, and unit-of-work APIs are legacy adapter contracts, not business-decision authority. | P-REJECT |
 | DTO and legacy snapshot records in `PersistenceContracts.swift` | `Core/Domain` for inert value shape, `ObjectState` for current object families, `MigrationRepair` for legacy import records | Value types may remain dumb DTOs. They must not drive current product behavior or prove migration safety. | P-MIGRATE |
 | `SwiftDataModels*.swift` | `Storage/ObjectStoreSwiftData` plus the family owners above | `@Model` classes are dumb storage records. Their current `Core/Persistence` location is legacy model-location debt, not authority. | P-REJECT |
 | `SwiftDataRepositories*.swift` | `Storage/ObjectStoreSwiftData` adapters behind family owners | Repository implementations may read/write storage, but may not decide planning, trust, reflow, Source Atlas, privacy, side effects, or product policy. | P-REJECT |
@@ -156,7 +156,7 @@ migration, repair, or trust policy.
 | `StoreHealthCheck.swift` | `Diagnostics`, `MigrationRepair`, `Storage/ObjectStoreSwiftData` | Health checks and write probes are diagnostics. They must not authorize durable repair or product mutation. | P-DIAGNOSTIC |
 | `SupportDiagnosticsBundle.swift`, `StoragePackageBoundaryModels.swift` | `Diagnostics`, `PrivacySecurity`, `Quality` | Diagnostic/export boundary data must stay redacted/review-only and cannot become package-boundary authority. | P-DIAGNOSTIC |
 | `PreviewCaptureRepository.swift`, `DemoSeedPipeline.swift` | `Quality`/preview fixtures or command-seeded LocalRuntimeOS fixture paths | Preview/demo data is not production mutation proof. Demo apply paths are unsafe if reachable from production. | P-REJECT |
-| Reminder repositories and contracts | `SideEffectSystem/EventKitOutbox` plus `Storage/ObjectStoreSwiftData` for local object records | Reminder persistence cannot be external side-effect authority; delivery needs outbox/receipt proof. AMB-1732 removed the unused `ReminderOutbox` duplicate anchor. | AMB-1668 and P-REJECT |
+| Reminder repositories and contracts | `ExternalWrites/EventKitOutbox` plus `Storage/ObjectStoreSwiftData` for local object records | Reminder persistence cannot be external side-effect authority; delivery needs outbox/receipt proof. AMB-1732 removed the unused `ReminderOutbox` duplicate anchor. | AMB-1668 and P-REJECT |
 
 ## Business-Decision Ban
 
@@ -168,7 +168,7 @@ Persistence-owned code must not:
 - approve a Source Atlas request or R2 request;
 - classify private graph data for egress;
 - authorize CloudKit continuity;
-- enqueue or execute external side effects without `SideEffectSystem`;
+- enqueue or execute external side effects without `ExternalWrites`;
 - approve migration or repair execution;
 - generate user-facing closure/trust wording;
 - create receipt meaning without `TrustSystem`;

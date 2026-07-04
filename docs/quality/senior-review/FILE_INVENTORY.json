@@ -42570,17 +42570,17 @@
       ]
     },
     {
-      "current_owner": "Core/LocalRuntimeOS/SideEffectSystem",
-      "expected_owner": "Core/LocalRuntimeOS/SideEffectSystem",
+      "current_owner": "Core/LocalRuntimeOS/ExternalWrites",
+      "expected_owner": "Core/LocalRuntimeOS/ExternalWrites",
       "file_hash": "05ed81f2d996e46a914a92415064fed3b9b14e44eef464e44ce8dc5799df3527",
       "file_type": "swift",
       "imports": [
         "Foundation"
       ],
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
-      "layer": "Core/LocalRuntimeOS/SideEffectSystem",
+      "layer": "Core/LocalRuntimeOS/ExternalWrites",
       "line_count": 132,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ExternalCreationImportService.swift",
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/ExternalCreationImportService.swift",
       "public_internal_types": [
         {
           "access": "internal",
@@ -42606,7 +42606,7 @@
       "risk_level": "Green",
       "risk_reasons": [],
       "source_evidence": [
-        "Canonical LocalRuntimeOS SideEffectSystem owner.",
+        "Canonical LocalRuntimeOS ExternalWrites owner.",
         "docs/quality/senior-review/BUILD_GRAPH_INVENTORY.json",
         "git ls-files",
         "project.yml/Package.swift membership rules"

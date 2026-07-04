@@ -4259,6 +4259,154 @@
     {
       "candidate_vsp_ids": [
         "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 89,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/AppIntentBridge.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 50,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/EventKitOutbox+EventKitStoreClientLive.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 53,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/EventKitOutbox.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 167,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/ExternalCreationImportService.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 38,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/ExternalReconciliation.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 81,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/FileSideEffectLedgerRepository.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 83,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/NotificationOutbox.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 48,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/ShareExtensionIntake.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 276,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/SideEffectLedgerModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 51,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/SideEffectLedgerSwiftDataRepository.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 222,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/SideEffectOutbox.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 245,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/SideEffectPolicyEngine.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 30,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/WidgetRefreshOutbox.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
         "VSP-07"
       ],
       "exists": true,
@@ -6365,154 +6513,6 @@
       "kind": "native_source",
       "line_count": 98,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/SemanticLocalIndex.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 89,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/AppIntentBridge.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 50,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/EventKitOutbox+EventKitStoreClientLive.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 53,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/EventKitOutbox.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 167,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ExternalCreationImportService.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 38,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ExternalReconciliation.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 81,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/FileSideEffectLedgerRepository.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 83,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/NotificationOutbox.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 48,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ShareExtensionIntake.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 276,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/SideEffectLedgerModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 51,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/SideEffectLedgerSwiftDataRepository.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 222,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/SideEffectOutbox.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 245,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/SideEffectPolicyEngine.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 30,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/WidgetRefreshOutbox.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -18910,6 +18910,44 @@
     },
     {
       "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 348,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/ExternalWrites/ExternalWritesTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 200,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/ExternalWrites/SideEffectLedgerModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 137,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/ExternalWrites/SideEffectLedgerRepositoryTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
         "VSP-03",
         "VSP-04",
         "VSP-05",
@@ -19165,44 +19203,6 @@
       "kind": "test",
       "line_count": 314,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/SearchRecall/SearchRecallTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 200,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/SideEffectSystem/SideEffectLedgerModelsTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 137,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/SideEffectSystem/SideEffectLedgerRepositoryTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-04",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 342,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/SideEffectSystem/SideEffectSystemTests.swift"
     },
     {
       "candidate_vsp_ids": [
