@@ -17,7 +17,7 @@ This artifact records the current folder/type dependency graph, target runtime m
 
 ## Current Owner Graph
 
-Current source owner count after the `ExternalWrites` slice: 19.
+Current source owner count after the `Inspection` slice: 19.
 
 | Current owner | Swift files | Target owner | Status |
 | --- | ---: | --- | --- |
@@ -31,7 +31,7 @@ Current source owner count after the `ExternalWrites` slice: 19.
 | PlanningEngine | 68 | Planning | Pending |
 | TimeEngine | 35 | Scheduling | Pending |
 | CaptureRouteGraph | 20 | CaptureRouting | Pending |
-| TrustSystem | 29 | Inspection/Receipts | Pending |
+| Inspection | 29 | Inspection | Sixth slice renamed from `TrustSystem` |
 | SearchRecall | 10 | Search | Pending |
 | ExternalWrites | 13 | ExternalWrites | Fifth slice renamed from `SideEffectSystem` |
 | SyncContinuity | 10 | Continuity | Pending |
@@ -176,19 +176,51 @@ Reason:
 - The ownership test now proves required `ExternalWrites` files exist and the
   old `SideEffectSystem` production/test owner paths are gone.
 
+## Sixth Rename Slice
+
+Applied sixth:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/
+Native/AmbitionsTests/LocalRuntimeOS/TrustSystem/
+```
+
+to:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/Inspection/
+Native/AmbitionsTests/LocalRuntimeOS/Inspection/
+```
+
+Reason:
+
+- `Inspection` is the clearer half of AMB-1669's `Inspection/Receipts` target.
+- `Receipts` would be too narrow for the owner because the folder also owns
+  proof, source records, audit, undo, history, replay, tombstones, and
+  repository contracts.
+- The move changes canonical ownership without changing runtime behavior.
+- The moved owner-local commit-planner types now use `Inspection` names.
+- The ownership test now proves required `Inspection` files exist and the old
+  `TrustSystem` production/test owner paths are gone.
+- The slice also renames the moved receipt and event-ledger shard files away
+  from `+02/+03/+04/+05/+06/+07/+08` filenames into descriptive owner-local
+  filenames, so the move does not introduce new blocked suffix-split files
+  under the new owner.
+
 ## API Exposure
 
-The moved `Boundary`, `Commands`, `Transactions`, `Projections`, and `ExternalWrites` source contains no `public` or `open` Swift API declarations.
+The moved `Boundary`, `Commands`, `Transactions`, `Projections`, `ExternalWrites`, and `Inspection` source contains no `public` or `open` Swift API declarations.
 
 Current exposure is same-module production/test use through Swift files under the existing `Ambitions` target and `AmbitionsTests` target. XcodeGen source discovery is directory-based through `project.yml`, so the move requires project regeneration but no package or target boundary change.
 
 Known direct consumers of the moved `Boundary`, `Commands`, `Transactions`,
-`Projections`, and `ExternalWrites` types remain same-module:
+`Projections`, `ExternalWrites`, and `Inspection` types remain same-module:
 
 - `Commands`
 - `Transactions`
 - `Projections`
 - `ExternalWrites`
+- `Inspection`
 - `PrivateLifeRuntimeKernel`
 - `PlanningEngine`
 - `TimeEngine`
@@ -216,8 +248,7 @@ This slice can support Source Green for the folder-owner rename if validation pa
 
 Proceed one compartment at a time after guards pass:
 
-1. `TrustSystem` -> `Inspection` or `Receipts`
-2. `SearchRecall` -> `Search`
-3. `MigrationRepair` -> `Repair`
+1. `SearchRecall` -> `Search`
+2. `MigrationRepair` -> `Repair`
 
 Each next slice must update tests, current truth/proof references, and the LocalRuntimeProof owner list before closeout.

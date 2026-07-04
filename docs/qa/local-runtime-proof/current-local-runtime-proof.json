@@ -152,13 +152,13 @@
     },
     {
       "category": "receipt/replay",
-      "checklistId": "lro100-15-trust-system-lineage",
+      "checklistId": "lro100-15-inspection-lineage",
       "findings": [],
-      "linkedCheckId": "trust_system_runtime_lineage_gate",
-      "requirement": "TrustSystem receipt, proof, undo, audit, source, and history records must carry runtime commit receipt lineage.",
+      "linkedCheckId": "inspection_runtime_lineage_gate",
+      "requirement": "Inspection receipt, proof, undo, audit, source, and history records must carry runtime commit receipt lineage.",
       "status": "pass",
-      "summary": "TrustSystem receipt, proof, undo, audit, source, and history records require runtime commit receipt lineage.",
-      "title": "TrustSystem runtime lineage"
+      "summary": "Inspection receipt, proof, undo, audit, source, and history records require runtime commit receipt lineage.",
+      "title": "Inspection runtime lineage"
     },
     {
       "category": "repository boundary",
@@ -167,7 +167,7 @@
       "linkedCheckId": "runtime_mutation_context_boundaries",
       "requirement": "Canonical object-state writes must require coordinator-issued RuntimeMutationContext.",
       "status": "pass",
-      "summary": "Canonical object-state write repositories require coordinator-issued TransactionKernel RuntimeMutationContext.",
+      "summary": "Canonical object-state write repositories require coordinator-issued Transactions RuntimeMutationContext.",
       "title": "RuntimeMutationContext boundaries"
     },
     {
@@ -297,16 +297,16 @@
       "summary": "External side effects require local runtime commit receipt evidence before attempt."
     },
     {
-      "checkId": "trust_system_runtime_lineage_gate",
+      "checkId": "inspection_runtime_lineage_gate",
       "findings": [],
       "status": "pass",
-      "summary": "TrustSystem receipt, proof, undo, audit, source, and history records require runtime commit receipt lineage."
+      "summary": "Inspection receipt, proof, undo, audit, source, and history records require runtime commit receipt lineage."
     },
     {
       "checkId": "runtime_mutation_context_boundaries",
       "findings": [],
       "status": "pass",
-      "summary": "Canonical object-state write repositories require coordinator-issued TransactionKernel RuntimeMutationContext."
+      "summary": "Canonical object-state write repositories require coordinator-issued Transactions RuntimeMutationContext."
     },
     {
       "checkId": "runtime_doctor_local_drift_repair_gate",
@@ -333,7 +333,7 @@
       "summary": "Known Issues, truth files, and CI workflow evidence preserve the LocalRuntimeOS proof ceiling."
     }
   ],
-  "generatedAt": "2026-07-03T20:01:58+00:00",
+  "generatedAt": "2026-07-04T03:52:03+00:00",
   "runtimeLaw": "Command -> Event -> Projection -> Receipt -> Replay",
   "status": "green",
   "summary": {

@@ -205,7 +205,7 @@ enum ObjectStateRegistry {
                 tombstoneEntityKind: .actionReceipt,
                 runtimeTombstoneFamily: .closure,
                 supersessionPolicy: .appendOnlyRevision,
-                remainingDirectWriteDebt: "Closure ownership remains split between receipts, event ledger entries, and runtime services until TrustSystem moves the ledger stores."
+                remainingDirectWriteDebt: "Closure ownership remains split between receipts, event ledger entries, and runtime services until Inspection moves the ledger stores."
             ),
             ObjectStateFamilyDescriptor(
                 id: .proof,
@@ -215,7 +215,7 @@ enum ObjectStateRegistry {
                 tombstoneEntityKind: .progressEvidence,
                 runtimeTombstoneFamily: .proof,
                 supersessionPolicy: .appendOnlyRevision,
-                remainingDirectWriteDebt: "Proof object-state writes remain in evidence/proof graph repositories until TrustSystem migration."
+                remainingDirectWriteDebt: "Proof object-state writes remain in evidence/proof graph repositories until Inspection migration."
             ),
             ObjectStateFamilyDescriptor(
                 id: .receipt,
@@ -225,7 +225,7 @@ enum ObjectStateRegistry {
                 tombstoneEntityKind: .actionReceipt,
                 runtimeTombstoneFamily: .receipt,
                 supersessionPolicy: .appendOnlyRevision,
-                remainingDirectWriteDebt: "Receipt writes remain in ActionReceiptHistoryRepository until TrustSystem migration."
+                remainingDirectWriteDebt: "Receipt writes remain in ActionReceiptHistoryRepository until Inspection migration."
             ),
             ObjectStateFamilyDescriptor(
                 id: .userSystem,

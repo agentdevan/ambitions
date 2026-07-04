@@ -1,26 +1,26 @@
 @testable import Ambitions
 import XCTest
 
-final class TrustSystemTests: XCTestCase {
-    func testTrustSystemOwnerFilesExistAndOldOwnersAreRemoved() throws {
+final class InspectionTests: XCTestCase {
+    func testInspectionOwnerFilesExistAndOldOwnersAreRemoved() throws {
         let root = try repoRoot()
         let requiredPaths = [
-            "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/EventLedgerModels.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/EventLedgerModels+02-EventLedgerEntry.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/ActionClosureReceiptModels.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/ActionClosureReceiptModels+03-ActionReceiptHistoryRecord.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/ActionReceiptProofLedgerModels.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/ProofLedger.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/SourceRecordLedger.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/EntityRevisionTombstoneModels.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/AuditTrail.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/UndoLedger.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/HistoryQueryEngine.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/TrustSystem.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/TrustSystemRepositoryContracts.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/TrustSystemSwiftDataRepositories.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/ExecutionLedgerReplayInspectionSwiftDataRepository.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/GoalIntentCompilerReceiptPersistenceAdapter.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Inspection/EventLedgerModels.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Inspection/EventLedgerEntryAdapters.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Inspection/ActionClosureReceiptModels.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Inspection/ActionReceiptHistoryRecord.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Inspection/ActionReceiptProofLedgerModels.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Inspection/ProofLedger.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Inspection/SourceRecordLedger.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Inspection/EntityRevisionTombstoneModels.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Inspection/AuditTrail.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Inspection/UndoLedger.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Inspection/HistoryQueryEngine.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Inspection/InspectionCommitPlanner.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Inspection/InspectionRepositoryContracts.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Inspection/InspectionSwiftDataRepositories.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Inspection/ExecutionLedgerReplayInspectionSwiftDataRepository.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Inspection/GoalIntentCompilerReceiptRecorder.swift",
         ]
 
         for path in requiredPaths {
@@ -46,21 +46,21 @@ final class TrustSystemTests: XCTestCase {
     func testSanctionedRuntimeMutationProducesTrustLedgersReceiptsUndoAndHistory() async throws {
         let eventLedger = InMemoryEventLedgerRepository()
         let receiptHistory = InMemoryActionReceiptHistoryRepository()
-        let recorder = TrustSystemRecorder(
+        let recorder = InspectionRecorder(
             eventLedger: eventLedger,
             actionReceiptHistory: receiptHistory
         )
         let fixture = try await Self.sanctionedMutationFixture()
 
         let plan = try await recorder.record(
-            TrustSystemCommitInput(
+            InspectionCommitInput(
                 commandRecord: fixture.commandRecord,
                 runtimeEventEnvelope: fixture.runtimeEventEnvelope,
                 runtimeCommitReceipt: fixture.runtimeCommitReceipt,
                 receipt: fixture.receipt,
                 proofRelevance: .countsAsProof,
                 publicSourceAtlasReferences: [
-                    TrustSystemPublicSourceAtlasReference(
+                    InspectionPublicSourceAtlasReference(
                         packID: "source-atlas.public.life-calendar",
                         manifestID: "manifest.2026-06-30",
                         summary: "Public date calculation reference pack."
@@ -102,7 +102,7 @@ final class TrustSystemTests: XCTestCase {
         XCTAssertTrue(plan.sourceRecordLedger.publicSourceAtlasRecords.allSatisfy(\.isPublicReferenceOnly))
     }
 
-    func testTrustSystemRejectsRuntimeEventThatDoesNotMatchCommandRecord() async throws {
+    func testInspectionRejectsRuntimeEventThatDoesNotMatchCommandRecord() async throws {
         let fixture = try await Self.sanctionedMutationFixture()
         let mismatchedEvent = RuntimeEvent(
             commandID: "command-other",
@@ -132,8 +132,8 @@ final class TrustSystemTests: XCTestCase {
             event: mismatchedEvent
         )
 
-        XCTAssertThrowsError(try TrustSystemCommitPlanner().plan(
-            TrustSystemCommitInput(
+        XCTAssertThrowsError(try InspectionCommitPlanner().plan(
+            InspectionCommitInput(
                 commandRecord: fixture.commandRecord,
                 runtimeEventEnvelope: mismatchedEnvelope,
                 runtimeCommitReceipt: fixture.runtimeCommitReceipt,
@@ -142,7 +142,7 @@ final class TrustSystemTests: XCTestCase {
             plannedAt: "2026-06-30T12:01:00Z"
         )) { error in
             XCTAssertEqual(
-                error as? TrustSystemCommitError,
+                error as? InspectionCommitError,
                 .commandMismatch(expected: "command-trust-1", actual: "command-other")
             )
         }
@@ -178,7 +178,7 @@ final class TrustSystemTests: XCTestCase {
             metadata: ["receiptID": runtimeReceiptID]
         )
         guard let occurredAt = DomainTimestamp.date(from: "2026-06-30T12:00:30Z") else {
-            throw NSError(domain: "TrustSystemTests", code: 2)
+            throw NSError(domain: "InspectionTests", code: 2)
         }
         let outcome = try await coordinator.commit(
             command: command,
@@ -191,7 +191,7 @@ final class TrustSystemTests: XCTestCase {
         )
         let envelopes = try await eventStore.fetchEvents(matching: .all, limit: nil)
         guard let runtimeEventEnvelope = envelopes.first else {
-            throw NSError(domain: "TrustSystemTests", code: 3)
+            throw NSError(domain: "InspectionTests", code: 3)
         }
         let lineage = RuntimeTrustLineage(runtimeCommitReceipt: outcome.receipt)
         let commandResult = result.mergingMetadata(lineage.metadata)
@@ -242,6 +242,6 @@ final class TrustSystemTests: XCTestCase {
             }
             candidate.deleteLastPathComponent()
         }
-        throw NSError(domain: "TrustSystemTests", code: 1)
+        throw NSError(domain: "InspectionTests", code: 1)
     }
 }

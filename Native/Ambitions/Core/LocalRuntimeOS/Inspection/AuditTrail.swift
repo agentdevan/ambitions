@@ -139,7 +139,7 @@ struct AuditTrail: Codable, Sendable, Equatable, Hashable {
                 eventLedgerEntryID: nil,
                 receiptID: nil,
                 occurredAt: occurredAt,
-                summary: "Command accepted into TrustSystem.",
+                summary: "Command accepted into Inspection.",
                 privacy: commandRecord.privacy,
                 localOnly: commandRecord.localOnly,
                 runtimeLineage: runtimeLineage

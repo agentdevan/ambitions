@@ -1,6 +1,6 @@
 import Foundation
 
-struct GoalIntentCompilerReceiptPersistenceAdapter: Sendable {
+struct GoalIntentCompilerReceiptRecorder: Sendable {
     let actionReceiptHistoryRepository: any ActionReceiptHistoryRepository
 
     init(actionReceiptHistoryRepository: any ActionReceiptHistoryRepository) {

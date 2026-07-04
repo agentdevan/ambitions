@@ -1,6 +1,6 @@
 import Foundation
 
-enum TrustSystemCommitError: Error, Sendable, Equatable {
+enum InspectionCommitError: Error, Sendable, Equatable {
     case commandMismatch(expected: String, actual: String?)
     case nonLocalInput(String)
     case runtimeCommitReceiptNotReplayable(String)
@@ -12,7 +12,7 @@ enum TrustSystemCommitError: Error, Sendable, Equatable {
     case receiptCommandMismatch(receiptID: String, commandID: String)
 }
 
-struct TrustSystemPublicSourceAtlasReference: Sendable, Equatable, Hashable {
+struct InspectionPublicSourceAtlasReference: Sendable, Equatable, Hashable {
     let packID: String
     let manifestID: String?
     let summary: String
@@ -24,13 +24,13 @@ struct TrustSystemPublicSourceAtlasReference: Sendable, Equatable, Hashable {
     }
 }
 
-struct TrustSystemCommitInput: Sendable, Equatable {
+struct InspectionCommitInput: Sendable, Equatable {
     let commandRecord: AmbitionsCommandExecutionRecord
     let runtimeEventEnvelope: RuntimeEventEnvelope
     let runtimeCommitReceipt: RuntimeCommitReceipt
     let receipt: ActionReceipt
     let proofRelevance: ActionReceiptProofRelevance
-    let publicSourceAtlasReferences: [TrustSystemPublicSourceAtlasReference]
+    let publicSourceAtlasReferences: [InspectionPublicSourceAtlasReference]
 
     init(
         commandRecord: AmbitionsCommandExecutionRecord,
@@ -38,7 +38,7 @@ struct TrustSystemCommitInput: Sendable, Equatable {
         runtimeCommitReceipt: RuntimeCommitReceipt,
         receipt: ActionReceipt,
         proofRelevance: ActionReceiptProofRelevance = .notProof,
-        publicSourceAtlasReferences: [TrustSystemPublicSourceAtlasReference] = []
+        publicSourceAtlasReferences: [InspectionPublicSourceAtlasReference] = []
     ) {
         self.commandRecord = commandRecord
         self.runtimeEventEnvelope = runtimeEventEnvelope
@@ -53,7 +53,7 @@ struct TrustSystemCommitInput: Sendable, Equatable {
     }
 }
 
-struct TrustSystemCommitPlan: Sendable, Equatable {
+struct InspectionCommitPlan: Sendable, Equatable {
     let commandRecord: AmbitionsCommandExecutionRecord
     let runtimeEventEnvelope: RuntimeEventEnvelope
     let runtimeCommitReceipt: RuntimeCommitReceipt
@@ -89,7 +89,7 @@ struct TrustSystemCommitPlan: Sendable, Equatable {
     }
 }
 
-struct TrustSystemCommitPlanner: Sendable {
+struct InspectionCommitPlanner: Sendable {
     let historyQueryEngine: HistoryQueryEngine
 
     init(historyQueryEngine: HistoryQueryEngine = HistoryQueryEngine()) {
@@ -97,9 +97,9 @@ struct TrustSystemCommitPlanner: Sendable {
     }
 
     func plan(
-        _ input: TrustSystemCommitInput,
+        _ input: InspectionCommitInput,
         plannedAt: String
-    ) throws -> TrustSystemCommitPlan {
+    ) throws -> InspectionCommitPlan {
         try validate(input)
 
         let runtimeLineage = RuntimeTrustLineage(runtimeCommitReceipt: input.runtimeCommitReceipt)
@@ -160,7 +160,7 @@ struct TrustSystemCommitPlanner: Sendable {
             runtimeLineage: runtimeLineage
         )
 
-        return TrustSystemCommitPlan(
+        return InspectionCommitPlan(
             commandRecord: input.commandRecord,
             runtimeEventEnvelope: input.runtimeEventEnvelope,
             runtimeCommitReceipt: input.runtimeCommitReceipt,
@@ -177,55 +177,55 @@ struct TrustSystemCommitPlanner: Sendable {
         )
     }
 
-    private func validate(_ input: TrustSystemCommitInput) throws {
+    private func validate(_ input: InspectionCommitInput) throws {
         guard input.runtimeEvent.commandID == input.commandRecord.commandID else {
-            throw TrustSystemCommitError.commandMismatch(
+            throw InspectionCommitError.commandMismatch(
                 expected: input.commandRecord.commandID,
                 actual: input.runtimeEvent.commandID
             )
         }
         guard input.runtimeCommitReceipt.hasReplayableProof else {
-            throw TrustSystemCommitError.runtimeCommitReceiptNotReplayable(input.runtimeCommitReceipt.id)
+            throw InspectionCommitError.runtimeCommitReceiptNotReplayable(input.runtimeCommitReceipt.id)
         }
         guard input.runtimeCommitReceipt.localOnly else {
-            throw TrustSystemCommitError.nonLocalInput("runtime commit receipt")
+            throw InspectionCommitError.nonLocalInput("runtime commit receipt")
         }
         guard input.runtimeCommitReceipt.commandID == input.commandRecord.commandID else {
-            throw TrustSystemCommitError.runtimeCommitReceiptCommandMismatch(
+            throw InspectionCommitError.runtimeCommitReceiptCommandMismatch(
                 expected: input.commandRecord.commandID,
                 actual: input.runtimeCommitReceipt.commandID
             )
         }
         guard input.runtimeCommitReceipt.eventID == input.runtimeEventEnvelope.id else {
-            throw TrustSystemCommitError.runtimeCommitReceiptEventMismatch(
+            throw InspectionCommitError.runtimeCommitReceiptEventMismatch(
                 expected: input.runtimeCommitReceipt.eventID,
                 actual: input.runtimeEventEnvelope.id
             )
         }
         guard input.runtimeCommitReceipt.eventCursor == input.runtimeEventEnvelope.cursor else {
-            throw TrustSystemCommitError.runtimeCommitReceiptCursorMismatch(
+            throw InspectionCommitError.runtimeCommitReceiptCursorMismatch(
                 expected: input.runtimeCommitReceipt.eventCursor,
                 actual: input.runtimeEventEnvelope.cursor
             )
         }
         guard input.runtimeCommitReceipt.receiptID == input.receipt.id else {
-            throw TrustSystemCommitError.runtimeCommitReceiptReceiptMismatch(
+            throw InspectionCommitError.runtimeCommitReceiptReceiptMismatch(
                 expected: input.runtimeCommitReceipt.receiptID,
                 actual: input.receipt.id
             )
         }
         guard input.commandRecord.localOnly else {
-            throw TrustSystemCommitError.nonLocalInput("command record")
+            throw InspectionCommitError.nonLocalInput("command record")
         }
         guard input.runtimeEvent.localOnly else {
-            throw TrustSystemCommitError.nonLocalInput("runtime event")
+            throw InspectionCommitError.nonLocalInput("runtime event")
         }
         guard input.receipt.affectedObjects.isEmpty == false else {
-            throw TrustSystemCommitError.receiptMissingAffectedObject(input.receipt.id)
+            throw InspectionCommitError.receiptMissingAffectedObject(input.receipt.id)
         }
         if let metadataReceiptID = input.commandRecord.result.metadata["receiptID"],
            metadataReceiptID != input.receipt.id {
-            throw TrustSystemCommitError.receiptCommandMismatch(
+            throw InspectionCommitError.receiptCommandMismatch(
                 receiptID: input.receipt.id,
                 commandID: input.commandRecord.commandID
             )
@@ -233,7 +233,7 @@ struct TrustSystemCommitPlanner: Sendable {
     }
 
     private func makeEventLedgerEntry(
-        input: TrustSystemCommitInput,
+        input: InspectionCommitInput,
         plannedAt: String
     ) -> EventLedgerEntry {
         let runtimeLineage = RuntimeTrustLineage(runtimeCommitReceipt: input.runtimeCommitReceipt)
@@ -291,7 +291,7 @@ struct TrustSystemCommitPlanner: Sendable {
     }
 
     private func makeSourceRecords(
-        input: TrustSystemCommitInput,
+        input: InspectionCommitInput,
         eventLedgerEntry: EventLedgerEntry,
         receiptRecord: ActionReceiptHistoryRecord,
         proofLedgerEntry: ActionReceiptProofLedgerEntry,
@@ -443,15 +443,15 @@ struct TrustSystemCommitPlanner: Sendable {
     }
 }
 
-actor TrustSystemRecorder {
+actor InspectionRecorder {
     let eventLedger: any EventLedgerRepository
     let actionReceiptHistory: any ActionReceiptHistoryRepository
-    let planner: TrustSystemCommitPlanner
+    let planner: InspectionCommitPlanner
 
     init(
         eventLedger: any EventLedgerRepository,
         actionReceiptHistory: any ActionReceiptHistoryRepository,
-        planner: TrustSystemCommitPlanner = TrustSystemCommitPlanner()
+        planner: InspectionCommitPlanner = InspectionCommitPlanner()
     ) {
         self.eventLedger = eventLedger
         self.actionReceiptHistory = actionReceiptHistory
@@ -459,9 +459,9 @@ actor TrustSystemRecorder {
     }
 
     func record(
-        _ input: TrustSystemCommitInput,
+        _ input: InspectionCommitInput,
         recordedAt: String
-    ) async throws -> TrustSystemCommitPlan {
+    ) async throws -> InspectionCommitPlan {
         let plan = try planner.plan(input, plannedAt: recordedAt)
         try await eventLedger.append(plan.eventLedgerEntry)
         try await actionReceiptHistory.save([plan.receiptRecord])

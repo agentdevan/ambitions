@@ -223,7 +223,7 @@ actor AmbitionsPersistenceStore {
             ObjectStoreSwiftDataFamilyDescriptor(
                 id: .proof,
                 storedTypeNames: ["ProgressEvidenceRecord", "AmbitionGraphProofRecordModel"],
-                mutationAuthority: "Core/LocalRuntimeOS/TrustSystem + EventJournal",
+                mutationAuthority: "Core/LocalRuntimeOS/Inspection + EventJournal",
                 fieldRules: [
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "ProgressEvidenceRecord", fieldName: "goalID", authority: .queryColumn, notes: "Proof lookup column."),
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "AmbitionGraphProofRecordModel", fieldName: "snapshotData", authority: .snapshotFallback, notes: "Proof projection fallback payload.")
@@ -232,7 +232,7 @@ actor AmbitionsPersistenceStore {
             ObjectStoreSwiftDataFamilyDescriptor(
                 id: .receipt,
                 storedTypeNames: ["ActionReceiptHistoryRecordModel", "RuntimeSnapshotLedgerRecord"],
-                mutationAuthority: "Core/LocalRuntimeOS/TrustSystem + Projections",
+                mutationAuthority: "Core/LocalRuntimeOS/Inspection + Projections",
                 fieldRules: [
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "ActionReceiptHistoryRecordModel", fieldName: "receiptData", authority: .encodedValue, encodedTypeName: "ActionReceipt", notes: "Typed receipt payload."),
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "ActionReceiptHistoryRecordModel", fieldName: "runtimeLineageData", authority: .encodedValue, encodedTypeName: "RuntimeTrustLineage", notes: "Runtime commit receipt lineage tying receipt history to transaction, event, rollback, and replay proof."),
@@ -251,7 +251,7 @@ actor AmbitionsPersistenceStore {
             ObjectStoreSwiftDataFamilyDescriptor(
                 id: .eventLedger,
                 storedTypeNames: ["EventLedgerRecord", "CommandExecutionRecord"],
-                mutationAuthority: "Core/LocalRuntimeOS/Commands + EventJournal + TrustSystem",
+                mutationAuthority: "Core/LocalRuntimeOS/Commands + EventJournal + Inspection",
                 fieldRules: [
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "EventLedgerRecord", fieldName: "kindRaw", authority: .queryColumn, notes: "Trust/history event kind lookup."),
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "CommandExecutionRecord", fieldName: "commandData", authority: .encodedValue, encodedTypeName: "AmbitionsCommand", notes: "Durable command payload."),
@@ -270,7 +270,7 @@ actor AmbitionsPersistenceStore {
             ObjectStoreSwiftDataFamilyDescriptor(
                 id: .runtimeSnapshot,
                 storedTypeNames: ["RuntimeSnapshotLedgerRecord", "AmbitionGraphProjectionRecordModel", "AmbitionGraphOperationalRecordModel"],
-                mutationAuthority: "Core/LocalRuntimeOS/Projections + TrustSystem",
+                mutationAuthority: "Core/LocalRuntimeOS/Projections + Inspection",
                 fieldRules: [
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "AmbitionGraphProjectionRecordModel", fieldName: "snapshotData", authority: .snapshotFallback, notes: "Projection payload fallback."),
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "AmbitionGraphOperationalRecordModel", fieldName: "snapshotData", authority: .snapshotFallback, notes: "Operational read-model fallback.")

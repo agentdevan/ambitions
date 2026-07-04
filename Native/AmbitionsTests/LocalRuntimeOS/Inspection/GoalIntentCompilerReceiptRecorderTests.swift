@@ -1,10 +1,10 @@
 import XCTest
 @testable import Ambitions
 
-final class GoalIntentCompilerReceiptPersistenceAdapterTests: XCTestCase {
-    func testAdapterSavesClearCompilerReceiptWithGoalAndStepFacts() async throws {
+final class GoalIntentCompilerReceiptRecorderTests: XCTestCase {
+    func testRecorderSavesClearCompilerReceiptWithGoalAndStepFacts() async throws {
         let repository = try await makeRepository()
-        let adapter = GoalIntentCompilerReceiptPersistenceAdapter(actionReceiptHistoryRepository: repository)
+        let recorder = GoalIntentCompilerReceiptRecorder(actionReceiptHistoryRepository: repository)
         let output = makeClearOutput(
             receiptID: "compiler-receipt-clear",
             compiledStepID: "compiled-step-clear",
@@ -13,7 +13,7 @@ final class GoalIntentCompilerReceiptPersistenceAdapterTests: XCTestCase {
             reason: "Deterministic local-first compilation."
         )
 
-        try await adapter.save(output)
+        try await recorder.save(output)
 
         let projection = try await repository.fetch(
             ActionReceiptSearchQuery(
@@ -40,9 +40,9 @@ final class GoalIntentCompilerReceiptPersistenceAdapterTests: XCTestCase {
         ])
     }
 
-    func testAdapterReplacesCompilerReceiptWhenTheSameIDIsSavedAgain() async throws {
+    func testRecorderReplacesCompilerReceiptWhenTheSameIDIsSavedAgain() async throws {
         let repository = try await makeRepository()
-        let adapter = GoalIntentCompilerReceiptPersistenceAdapter(actionReceiptHistoryRepository: repository)
+        let recorder = GoalIntentCompilerReceiptRecorder(actionReceiptHistoryRepository: repository)
         let originalOutput = makeClearOutput(
             receiptID: "compiler-receipt-replace",
             compiledStepID: "compiled-step-replace",
@@ -58,8 +58,8 @@ final class GoalIntentCompilerReceiptPersistenceAdapterTests: XCTestCase {
             reason: "Deterministic local-first compilation after refinement."
         )
 
-        try await adapter.save(originalOutput)
-        try await adapter.save(updatedOutput)
+        try await recorder.save(originalOutput)
+        try await recorder.save(updatedOutput)
 
         let projection = try await repository.fetch(
             ActionReceiptSearchQuery(
@@ -77,9 +77,9 @@ final class GoalIntentCompilerReceiptPersistenceAdapterTests: XCTestCase {
         XCTAssertEqual(result.changedFactSummaries.last, "Compiled daily step candidate Draft launch announcement v2.")
     }
 
-    func testAdapterForcesCompilerReceiptHistoryToStayLocalOnly() async throws {
+    func testRecorderForcesCompilerReceiptHistoryToStayLocalOnly() async throws {
         let repository = try await makeRepository()
-        let adapter = GoalIntentCompilerReceiptPersistenceAdapter(actionReceiptHistoryRepository: repository)
+        let recorder = GoalIntentCompilerReceiptRecorder(actionReceiptHistoryRepository: repository)
         let output = makeClearOutput(
             receiptID: "compiler-receipt-local-only",
             compiledStepID: "compiled-step-local-only",
@@ -89,7 +89,7 @@ final class GoalIntentCompilerReceiptPersistenceAdapterTests: XCTestCase {
             localOnly: false
         )
 
-        try await adapter.save(output)
+        try await recorder.save(output)
 
         let projection = try await repository.fetch(
             ActionReceiptSearchQuery(
@@ -105,9 +105,9 @@ final class GoalIntentCompilerReceiptPersistenceAdapterTests: XCTestCase {
         XCTAssertEqual(result.proofFreshnessLineage.privacyReceiptLabel, "Privacy receipt stored on this device")
     }
 
-    func testAdapterPersistsBlockedCompilerReceiptWithFreshnessReviewMetadata() async throws {
+    func testRecorderPersistsBlockedCompilerReceiptWithFreshnessReviewMetadata() async throws {
         let repository = try await makeRepository()
-        let adapter = GoalIntentCompilerReceiptPersistenceAdapter(actionReceiptHistoryRepository: repository)
+        let recorder = GoalIntentCompilerReceiptRecorder(actionReceiptHistoryRepository: repository)
         let output = makeBlockedOutput(
             receiptID: "compiler-receipt-blocked",
             blockedReasonID: "block-success-definition",
@@ -116,7 +116,7 @@ final class GoalIntentCompilerReceiptPersistenceAdapterTests: XCTestCase {
             reason: "Clarify what success looks like. Capacity context: Open window available."
         )
 
-        try await adapter.save(output)
+        try await recorder.save(output)
 
         let projection = try await repository.fetch(
             ActionReceiptSearchQuery(

@@ -37,7 +37,7 @@ REQUIRED_LOCAL_RUNTIME_OWNERS = [
     "PlanningEngine",
     "TimeEngine",
     "CaptureRouteGraph",
-    "TrustSystem",
+    "Inspection",
     "SearchRecall",
     "ExternalWrites",
     "SyncContinuity",
@@ -397,11 +397,11 @@ LRO_100_CHECKLIST: list[ChecklistSpec] = [
         "External side effects must require prior local runtime commit receipt evidence.",
     ),
     ChecklistSpec(
-        "lro100-15-trust-system-lineage",
+        "lro100-15-inspection-lineage",
         "receipt/replay",
-        "TrustSystem runtime lineage",
-        "trust_system_runtime_lineage_gate",
-        "TrustSystem receipt, proof, undo, audit, source, and history records must carry runtime commit receipt lineage.",
+        "Inspection runtime lineage",
+        "inspection_runtime_lineage_gate",
+        "Inspection receipt, proof, undo, audit, source, and history records must carry runtime commit receipt lineage.",
     ),
     ChecklistSpec(
         "lro100-16-runtime-mutation-context",
@@ -1868,10 +1868,10 @@ def check_side_effect_local_commit_receipt_gate() -> CheckResult:
     )
 
 
-def check_trust_system_runtime_lineage_gate() -> CheckResult:
+def check_inspection_runtime_lineage_gate() -> CheckResult:
     findings: list[Finding] = []
     required_markers = {
-        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "TrustSystem" / "RuntimeTrustLineage.swift": [
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Inspection" / "RuntimeTrustLineage.swift": [
             "struct RuntimeTrustLineage",
             "init(runtimeCommitReceipt: RuntimeCommitReceipt)",
             "runtimeTransactionID: runtimeCommitReceipt.transactionID",
@@ -1881,7 +1881,7 @@ def check_trust_system_runtime_lineage_gate() -> CheckResult:
             "runtimeReplayTraceID: runtimeCommitReceipt.replayTraceID",
             "hasCompleteTrustTrace",
         ],
-        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "TrustSystem" / "TrustSystem.swift": [
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Inspection" / "InspectionCommitPlanner.swift": [
             "let runtimeCommitReceipt: RuntimeCommitReceipt",
             "let runtimeEventEnvelope: RuntimeEventEnvelope",
             "RuntimeTrustLineage(runtimeCommitReceipt: input.runtimeCommitReceipt)",
@@ -1891,46 +1891,46 @@ def check_trust_system_runtime_lineage_gate() -> CheckResult:
             "hasCompleteCommandEventProjectionReceiptReplayFlow",
             "proofLedger.hasRuntimeLineage",
         ],
-        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "TrustSystem" / "ActionClosureReceiptModels+03-ActionReceiptHistoryRecord.swift": [
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Inspection" / "ActionReceiptHistoryRecord.swift": [
             "let runtimeLineage: RuntimeTrustLineage?",
             "var hasRuntimeLineage",
             "var runtimeTransactionID",
             "var runtimeEventID",
             "var runtimeReplayTraceID",
         ],
-        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "TrustSystem" / "ActionReceiptProofLedgerModels.swift": [
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Inspection" / "ActionReceiptProofLedgerModels.swift": [
             "let runtimeLineage: RuntimeTrustLineage?",
             "var hasRuntimeLineage",
             "var runtimeTransactionID",
             "var runtimeEventID",
             "var runtimeReplayTraceID",
         ],
-        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "TrustSystem" / "ProofLedger.swift": [
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Inspection" / "ProofLedger.swift": [
             "let runtimeLineages: [RuntimeTrustLineage]",
             "var runtimeTransactionIDs",
             "var runtimeEventIDs",
             "var runtimeReplayTraceIDs",
             "var hasRuntimeLineage",
         ],
-        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "TrustSystem" / "UndoLedger.swift": [
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Inspection" / "UndoLedger.swift": [
             "let runtimeLineage: RuntimeTrustLineage?",
             "var runtimeRollbackPlanID",
             "var runtimeReplayTraceID",
             "var hasRuntimeRollbackLineage",
         ],
-        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "TrustSystem" / "AuditTrail.swift": [
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Inspection" / "AuditTrail.swift": [
             "let runtimeLineage: RuntimeTrustLineage?",
             "hasCompleteRuntimeLineage",
             "runtimeLineage: runtimeLineage",
         ],
-        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "TrustSystem" / "HistoryQueryEngine.swift": [
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Inspection" / "HistoryQueryEngine.swift": [
             "requiresRuntimeLineage",
             "runtimeTransactionIDs",
             "runtimeEventIDs",
             "runtimeReplayTraceIDs",
             "RuntimeTrustLineage.eventMetadataLineage",
         ],
-        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "TrustSystem" / "SourceRecordLedger.swift": [
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Inspection" / "SourceRecordLedger.swift": [
             "let runtimeTransactionID: String?",
             "let runtimeEventID: String?",
             "let runtimeReceiptID: String?",
@@ -1941,19 +1941,19 @@ def check_trust_system_runtime_lineage_gate() -> CheckResult:
         ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Storage" / "ObjectStoreEntityRevisionTombstoneRecord.swift": [
             "var runtimeLineageData: Data?",
         ],
-        ROOT / "Native" / "AmbitionsTests" / "LocalRuntimeOS" / "TrustSystem" / "TrustSystemTests.swift": [
+        ROOT / "Native" / "AmbitionsTests" / "LocalRuntimeOS" / "Inspection" / "InspectionTests.swift": [
             "RuntimeTransactionCoordinator(eventStore: eventStore)",
             "runtimeCommitReceipt: fixture.runtimeCommitReceipt",
             "runtimeEventEnvelope: fixture.runtimeEventEnvelope",
             "hasCompleteRuntimeLineage",
             "hasPrivateRuntimeLineage",
         ],
-        ROOT / "Native" / "AmbitionsTests" / "LocalRuntimeOS" / "TrustSystem" / "ActionReceiptHistoryRepositoryTests.swift": [
+        ROOT / "Native" / "AmbitionsTests" / "LocalRuntimeOS" / "Inspection" / "ActionReceiptHistoryRepositoryTests.swift": [
             "runtimeLineage:",
             "runtimeTransactionID",
             "runtimeReplayTraceID",
         ],
-        ROOT / "Native" / "AmbitionsTests" / "LocalRuntimeOS" / "TrustSystem" / "TrustHistoryQueryRepositoryTests.swift": [
+        ROOT / "Native" / "AmbitionsTests" / "LocalRuntimeOS" / "Inspection" / "TrustHistoryQueryRepositoryTests.swift": [
             "testSwiftDataTrustHistoryQueryFiltersByRuntimeLineage",
             "requiresRuntimeLineage: true",
             "runtimeTransactionIDs:",
@@ -1965,10 +1965,10 @@ def check_trust_system_runtime_lineage_gate() -> CheckResult:
             findings.append(
                 Finding(
                     "blocker",
-                    "trust-system-runtime-lineage-missing-source",
+                    "inspection-runtime-lineage-missing-source",
                     relative(path),
                     None,
-                    "TrustSystem runtime lineage source is missing.",
+                    "Inspection runtime lineage source is missing.",
                 )
             )
             continue
@@ -1978,18 +1978,18 @@ def check_trust_system_runtime_lineage_gate() -> CheckResult:
                 findings.append(
                     Finding(
                         "blocker",
-                        "trust-system-runtime-lineage-marker-missing",
+                        "inspection-runtime-lineage-marker-missing",
                         relative(path),
                         None,
-                        f"Missing TrustSystem runtime lineage marker `{marker}`.",
+                        f"Missing Inspection runtime lineage marker `{marker}`.",
                     )
                 )
 
     return make_result(
-        "trust_system_runtime_lineage_gate",
+        "inspection_runtime_lineage_gate",
         findings,
-        "TrustSystem receipt, proof, undo, audit, source, and history records require runtime commit receipt lineage.",
-        "{count} TrustSystem runtime lineage blocker(s) remain.",
+        "Inspection receipt, proof, undo, audit, source, and history records require runtime commit receipt lineage.",
+        "{count} Inspection runtime lineage blocker(s) remain.",
     )
 
 
@@ -2345,7 +2345,7 @@ def run_checks() -> list[CheckResult]:
         check_sync_continuity_backend_authority_gate(),
         check_capture_intake_durability_gate(),
         check_side_effect_local_commit_receipt_gate(),
-        check_trust_system_runtime_lineage_gate(),
+        check_inspection_runtime_lineage_gate(),
         check_runtime_mutation_context_boundaries(),
         check_runtime_doctor_local_drift_repair_gate(),
         scan_mutation_bypasses(),
@@ -2577,7 +2577,7 @@ def run_self_test() -> int:
     assert any(result.check_id == "sync_continuity_backend_authority_gate" for result in [check_sync_continuity_backend_authority_gate()])
     assert any(result.check_id == "capture_intake_durability_gate" for result in [check_capture_intake_durability_gate()])
     assert any(result.check_id == "side_effect_local_commit_receipt_gate" for result in [check_side_effect_local_commit_receipt_gate()])
-    assert any(result.check_id == "trust_system_runtime_lineage_gate" for result in [check_trust_system_runtime_lineage_gate()])
+    assert any(result.check_id == "inspection_runtime_lineage_gate" for result in [check_inspection_runtime_lineage_gate()])
     assert any(result.check_id == "runtime_doctor_local_drift_repair_gate" for result in [check_runtime_doctor_local_drift_repair_gate()])
     assert any(result.check_id == "proof_ceiling_and_ci_evidence" for result in [check_proof_ceiling_and_ci_evidence()])
     assert len(LRO_100_CHECKLIST) == 20

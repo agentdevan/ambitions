@@ -1,6 +1,6 @@
 # LocalRuntimeProof Gate
 
-Generated: `2026-07-03T20:01:58+00:00`
+Generated: `2026-07-04T03:52:03+00:00`
 Status: `green`
 Runtime law: `Command -> Event -> Projection -> Receipt -> Replay`
 
@@ -34,7 +34,7 @@ This artifact is a runtime-proof gate. It is not Visual Green, Release Green, pr
 | `lro100-12-sync-non-authority` | sync | `pass` | `sync_continuity_backend_authority_gate` | SyncContinuity must not become backend authority and must preserve local runtime/projection authority. |
 | `lro100-13-capture-durable-intake` | command authority | `pass` | `capture_intake_durability_gate` | Capture accepted input must be durably journaled before classification, attachment staging, promotion, and restart lookup. |
 | `lro100-14-side-effect-receipt-gating` | side-effect | `pass` | `side_effect_local_commit_receipt_gate` | External side effects must require prior local runtime commit receipt evidence. |
-| `lro100-15-trust-system-lineage` | receipt/replay | `pass` | `trust_system_runtime_lineage_gate` | TrustSystem receipt, proof, undo, audit, source, and history records must carry runtime commit receipt lineage. |
+| `lro100-15-inspection-lineage` | receipt/replay | `pass` | `inspection_runtime_lineage_gate` | Inspection receipt, proof, undo, audit, source, and history records must carry runtime commit receipt lineage. |
 | `lro100-16-runtime-mutation-context` | repository boundary | `pass` | `runtime_mutation_context_boundaries` | Canonical object-state writes must require coordinator-issued RuntimeMutationContext. |
 | `lro100-17-runtime-doctor-drift-repair` | RuntimeDoctor | `pass` | `runtime_doctor_local_drift_repair_gate` | RuntimeDoctor must detect local drift with redacted readers and produce receipt-backed reviewable repair previews. |
 | `lro100-18-mutation-bypass-scan` | repository boundary | `pass` | `mutation_bypass_scan` | Production surface/app/interaction/extension code must not contain high-risk direct mutation or external-write bypasses. |
@@ -113,15 +113,15 @@ This artifact is a runtime-proof gate. It is not Visual Green, Release Green, pr
 - Status: `pass`
 - Summary: External side effects require local runtime commit receipt evidence before attempt.
 
-### trust_system_runtime_lineage_gate
+### inspection_runtime_lineage_gate
 
 - Status: `pass`
-- Summary: TrustSystem receipt, proof, undo, audit, source, and history records require runtime commit receipt lineage.
+- Summary: Inspection receipt, proof, undo, audit, source, and history records require runtime commit receipt lineage.
 
 ### runtime_mutation_context_boundaries
 
 - Status: `pass`
-- Summary: Canonical object-state write repositories require coordinator-issued TransactionKernel RuntimeMutationContext.
+- Summary: Canonical object-state write repositories require coordinator-issued Transactions RuntimeMutationContext.
 
 ### runtime_doctor_local_drift_repair_gate
 
