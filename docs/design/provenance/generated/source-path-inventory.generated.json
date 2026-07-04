@@ -4752,54 +4752,6 @@
     {
       "candidate_vsp_ids": [
         "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 35,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/AppStateStore.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 74,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/ObjectStateContracts.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 290,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/ObjectStateCore.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 97,
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/YouPreferencesCommandService.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
         "VSP-10"
       ],
       "exists": true,
@@ -7854,6 +7806,54 @@
       "kind": "native_source",
       "line_count": 544,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasVisionOCRFallbackModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 35,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/State/AppStateStore.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 74,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/State/ObjectStateContracts.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 290,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/State/ObjectStateCore.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 97,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/State/YouPreferencesCommandService.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -19134,19 +19134,6 @@
     {
       "candidate_vsp_ids": [
         "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 212,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/ObjectState/ObjectStateTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
         "VSP-07",
         "VSP-08",
         "VSP-10"
@@ -19959,6 +19946,19 @@
       "kind": "test",
       "line_count": 328,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasVisionOCRFallbackModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 221,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/State/ObjectStateTests.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -23157,7 +23157,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "doc",
-      "line_count": 916,
+      "line_count": 920,
       "path": "docs/truth/PRODUCT_DESIGN_TRUTH.md"
     },
     {

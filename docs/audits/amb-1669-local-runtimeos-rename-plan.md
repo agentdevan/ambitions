@@ -17,7 +17,7 @@ This artifact records the current folder/type dependency graph, target runtime m
 
 ## Current Owner Graph
 
-Current source owner count after the `Repair` slice: 19.
+Current source owner count after the `State` slice: 19.
 
 | Current owner | Swift files | Target owner | Status |
 | --- | ---: | --- | --- |
@@ -25,7 +25,7 @@ Current source owner count after the `Repair` slice: 19.
 | Commands | 25 | Commands | Second slice renamed from `CommandSpine` |
 | Transactions | 12 | Transactions | Third slice renamed from `TransactionKernel` |
 | EventJournal | 10 | Events or EventJournal | Pending |
-| ObjectState | 4 | State | Pending |
+| State | 4 | State | Ninth slice renamed from `ObjectState` |
 | Projections | 32 | Projections | Fourth slice renamed from `ProjectionEngine` |
 | PrivateLifeRuntimeKernel | 37 | RuntimeKernel or collapsed into retained owners | Pending decision |
 | PlanningEngine | 68 | Planning | Pending |
@@ -269,14 +269,40 @@ Reason:
   cluster into descriptive owner-local files, so the moved owner does not leave
   a diff-scoped Swift file above the 600-line remediation cap.
 
+## Ninth Rename Slice
+
+Applied ninth:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/ObjectState/
+Native/AmbitionsTests/LocalRuntimeOS/ObjectState/
+```
+
+to:
+
+```text
+Native/Ambitions/Core/LocalRuntimeOS/State/
+Native/AmbitionsTests/LocalRuntimeOS/State/
+```
+
+Reason:
+
+- `State` is explicitly named by AMB-1669 target direction.
+- The old owner used `ObjectState` as a folder-level architecture name; retained
+  Swift types such as `ObjectStateFamily`, `ObjectStateRegistry`, and
+  `ObjectStateWriteReceipt` still carry the concrete behavior contract plainly.
+- The move changes canonical ownership without changing runtime behavior.
+- The ownership test now proves required `State` files exist and the old
+  `ObjectState` production/test owner paths are gone.
+
 ## API Exposure
 
-The moved `Boundary`, `Commands`, `Transactions`, `Projections`, `ExternalWrites`, `Inspection`, `Search`, and `Repair` source contains no `public` or `open` Swift API declarations.
+The moved `Boundary`, `Commands`, `Transactions`, `Projections`, `ExternalWrites`, `Inspection`, `Search`, `Repair`, and `State` source contains no `public` or `open` Swift API declarations.
 
 Current exposure is same-module production/test use through Swift files under the existing `Ambitions` target and `AmbitionsTests` target. XcodeGen source discovery is directory-based through `project.yml`, so the move requires project regeneration but no package or target boundary change.
 
 Known direct consumers of the moved `Boundary`, `Commands`, `Transactions`,
-`Projections`, `ExternalWrites`, `Inspection`, `Search`, and `Repair` types remain same-module:
+`Projections`, `ExternalWrites`, `Inspection`, `Search`, `Repair`, and `State` types remain same-module:
 
 - `Commands`
 - `Transactions`
@@ -285,6 +311,7 @@ Known direct consumers of the moved `Boundary`, `Commands`, `Transactions`,
 - `Inspection`
 - `Search`
 - `Repair`
+- `State`
 - `PrivateLifeRuntimeKernel`
 - `PlanningEngine`
 - `TimeEngine`
@@ -310,4 +337,14 @@ This slice can support Source Green for the folder-owner rename if validation pa
 
 ## Next Rename Candidates
 
-No further rename candidate is selected by this artifact after the eighth slice. Remaining pending rows require a final map decision pass before another source move; each future slice must update tests, current truth/proof references, and the LocalRuntimeProof owner list before closeout.
+Next concrete candidates, one at a time after guards:
+
+- `PlanningEngine` -> `Planning`
+- `TimeEngine` -> `Scheduling`
+- `CaptureRouteGraph` -> `CaptureRouting`
+- `SyncContinuity` -> `Continuity`
+
+`EventJournal`, `PrivateLifeRuntimeKernel`, `SourceAtlas`, and `PrivacySecurity`
+require retain/collapse decision records before source moves. Each future slice
+must update tests, current truth/proof references, and the LocalRuntimeProof
+owner list before closeout.

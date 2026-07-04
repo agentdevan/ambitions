@@ -31,7 +31,7 @@ REQUIRED_LOCAL_RUNTIME_OWNERS = [
     "Commands",
     "Transactions",
     "EventJournal",
-    "ObjectState",
+    "State",
     "Projections",
     "PrivateLifeRuntimeKernel",
     "PlanningEngine",
@@ -261,9 +261,9 @@ PROJECTION_MATERIALIZATION_ALLOWED_PATHS = {
 
 RUNTIME_MUTATION_CONTEXT_PATH = "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeMutationContext.swift"
 RUNTIME_TRANSACTION_PATH = "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeTransaction.swift"
-OBJECT_STATE_CORE_PATH = "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/ObjectStateCore.swift"
-OBJECT_STATE_CONTRACTS_PATH = "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/ObjectStateContracts.swift"
-APP_STATE_STORE_PATH = "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/AppStateStore.swift"
+OBJECT_STATE_CORE_PATH = "Native/Ambitions/Core/LocalRuntimeOS/State/ObjectStateCore.swift"
+OBJECT_STATE_CONTRACTS_PATH = "Native/Ambitions/Core/LocalRuntimeOS/State/ObjectStateContracts.swift"
+APP_STATE_STORE_PATH = "Native/Ambitions/Core/LocalRuntimeOS/State/AppStateStore.swift"
 FEATURE_SERVICE_MUTATION_AUTHORITY_PATH = "docs/qa/local-runtime-proof/feature-service-mutation-authority.json"
 
 SERVICE_MUTATION_CALL_PATTERN = re.compile(
@@ -2069,7 +2069,7 @@ def check_runtime_mutation_context_boundaries() -> CheckResult:
                 "legacy-object-state-context-still-owned-by-object-state",
                 OBJECT_STATE_CORE_PATH,
                 None,
-                "RuntimeMutationContext must be owned by Transactions, not ObjectState.",
+                "RuntimeMutationContext must be owned by Transactions, not the State owner.",
             )
         )
 

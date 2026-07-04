@@ -7834,27 +7834,6 @@
       "candidate_inventory_only": true,
       "candidate_vsp_ids": [
         "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 212,
-      "path": "Native/AmbitionsTests/LocalRuntimeOS/ObjectState/ObjectStateTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "ObjectStateTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-04",
         "VSP-07",
         "VSP-08",
         "VSP-10"
@@ -9188,6 +9167,27 @@
       "proof_status": "source_inventory_only",
       "test_cases": [
         "SourceAtlasVisionOCRFallbackModelsTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 221,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/State/ObjectStateTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "ObjectStateTests"
       ],
       "view_modifiers": [],
       "view_structs": []

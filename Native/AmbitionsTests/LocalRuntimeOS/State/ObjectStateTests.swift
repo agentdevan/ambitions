@@ -6,9 +6,10 @@ final class ObjectStateTests: XCTestCase {
         let root = try repoRoot()
         let requiredPaths = [
             "Native/Ambitions/Core/LocalRuntimeOS/Transactions/RuntimeMutationContext.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/ObjectStateCore.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/ObjectStateContracts.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/AppStateStore.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/State/ObjectStateCore.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/State/ObjectStateContracts.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/State/AppStateStore.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/State/YouPreferencesCommandService.swift",
         ]
 
         for path in requiredPaths {
@@ -17,6 +18,14 @@ final class ObjectStateTests: XCTestCase {
         XCTAssertFalse(
             FileManager.default.fileExists(atPath: root.appendingPathComponent(removedRuntimeOwnerPath("ObjectState.swift")).path),
             "ObjectState must not be owned by the removed runtime owner."
+        )
+        XCTAssertFalse(
+            FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/ObjectState").path),
+            "The old LocalRuntimeOS/ObjectState production owner must be removed after the State rename."
+        )
+        XCTAssertFalse(
+            FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/AmbitionsTests/LocalRuntimeOS/ObjectState").path),
+            "The old LocalRuntimeOS/ObjectState test owner must be removed after the State rename."
         )
     }
 
@@ -27,11 +36,11 @@ final class ObjectStateTests: XCTestCase {
             encoding: .utf8
         )
         let objectStateSource = try String(
-            contentsOf: root.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/ObjectState/ObjectStateCore.swift"),
+            contentsOf: root.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/State/ObjectStateCore.swift"),
             encoding: .utf8
         )
         let contractsSource = try String(
-            contentsOf: root.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/ObjectState/ObjectStateContracts.swift"),
+            contentsOf: root.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/State/ObjectStateContracts.swift"),
             encoding: .utf8
         )
 
