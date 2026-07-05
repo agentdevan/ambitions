@@ -17,6 +17,7 @@ XCODEBUILD_ACTION="test"
 UI_PREBUILD_MODE="${AMBITIONS_XCODE_UI_PREBUILD:-auto}"
 UI_PREBUILD_TIMEOUT_DURATION="${AMBITIONS_XCODE_UI_PREBUILD_TIMEOUT:-35m}"
 UI_PREBUILD_KILL_AFTER="${AMBITIONS_XCODE_UI_PREBUILD_KILL_AFTER:-$KILL_AFTER}"
+SIM_HEALTH_TIMEOUT="${AMBITIONS_XCODE_SIM_HEALTH_TIMEOUT:-${AMBITIONS_SIM_HEALTH_TIMEOUT:-30s}}"
 
 while [[ "$#" -gt 0 ]]; do
   case "$1" in
@@ -224,13 +225,28 @@ JSON
   exit "$exit_code"
 }
 
+sim_health_retryable() {
+  case "$1" in
+    simctl_unresponsive|simctl_unavailable|simulator_not_booted|xcode_process_active) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
 sim_json=""
 set +e
-sim_json="$(scripts/ambitions-xcode-sim-health.sh --json)"
+sim_json="$(scripts/ambitions-xcode-sim-health.sh --json --timeout "$SIM_HEALTH_TIMEOUT")"
 sim_status=$?
 set -e
 sim_failure="$(json_field failure_category "$sim_json")"
 [[ -n "$sim_failure" ]] || sim_failure="simulator_health_unavailable"
+if [[ "$sim_status" -ne 0 ]] && sim_health_retryable "$sim_failure"; then
+  set +e
+  sim_json="$(scripts/ambitions-xcode-sim-health.sh --json --repair --kill-active-xcode --timeout "$SIM_HEALTH_TIMEOUT")"
+  sim_status=$?
+  set -e
+  sim_failure="$(json_field failure_category "$sim_json")"
+  [[ -n "$sim_failure" ]] || sim_failure="simulator_health_unavailable"
+fi
 if [[ "$sim_status" -ne 0 ]]; then
   write_sim_health_failure_summary "$sim_failure" "$sim_json" "$sim_status"
 fi
@@ -426,7 +442,7 @@ repair_simulator_for_retry() {
     xcrun simctl erase "$sim" >/dev/null 2>&1 || true
   fi
 
-  scripts/ambitions-xcode-sim-health.sh --repair --json >/dev/null 2>&1 || true
+  scripts/ambitions-xcode-sim-health.sh --repair --json --timeout "$SIM_HEALTH_TIMEOUT" >/dev/null 2>&1 || true
   if [[ -n "${sim:-}" ]]; then
     xcrun simctl bootstatus "$sim" -b >/dev/null 2>&1 || true
   fi

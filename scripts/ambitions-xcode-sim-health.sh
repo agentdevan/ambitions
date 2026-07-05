@@ -92,6 +92,16 @@ capture_bounded() {
   return "$status"
 }
 
+reset_simctl_transport_for_retry() {
+  pkill -TERM -f 'xcrun simctl' >/dev/null 2>&1 || true
+  pkill -TERM -f '/usr/bin/simctl' >/dev/null 2>&1 || true
+  killall -9 com.apple.CoreSimulator.CoreSimulatorService >/dev/null 2>&1 || true
+  killall -9 SimulatorTrampoline >/dev/null 2>&1 || true
+  killall -9 SimLaunchHost.x86 >/dev/null 2>&1 || true
+  killall -9 CoreSimulatorBridge >/dev/null 2>&1 || true
+  sleep 3
+}
+
 json_escape() {
   python3 - "$1" <<'PY'
 import json
@@ -117,7 +127,16 @@ fail_health() {
 
 DEVICES=""
 if ! capture_bounded DEVICES "$SIMCTL_TIMEOUT" xcrun simctl list devices available; then
-  fail_health "simctl_unresponsive" "simctl list devices available exceeded ${SIMCTL_TIMEOUT}" 25
+  if (( REPAIR == 1 )); then
+    reset_simctl_transport_for_retry
+    if capture_bounded DEVICES "$SIMCTL_TIMEOUT" xcrun simctl list devices available; then
+      :
+    else
+      fail_health "simctl_unresponsive" "simctl list devices available exceeded ${SIMCTL_TIMEOUT} after transport reset" 25
+    fi
+  else
+    fail_health "simctl_unresponsive" "simctl list devices available exceeded ${SIMCTL_TIMEOUT}" 25
+  fi
 fi
 if [[ -z "$DEVICES" ]]; then
   fail_health "simctl_unavailable" "simctl list devices available returned no output" 1
@@ -125,7 +144,16 @@ fi
 
 ALL_DEVICES=""
 if ! capture_bounded ALL_DEVICES "$SIMCTL_TIMEOUT" xcrun simctl list devices; then
-  fail_health "simctl_unresponsive" "simctl list devices exceeded ${SIMCTL_TIMEOUT}" 25
+  if (( REPAIR == 1 )); then
+    reset_simctl_transport_for_retry
+    if capture_bounded ALL_DEVICES "$SIMCTL_TIMEOUT" xcrun simctl list devices; then
+      :
+    else
+      fail_health "simctl_unresponsive" "simctl list devices exceeded ${SIMCTL_TIMEOUT} after transport reset" 25
+    fi
+  else
+    fail_health "simctl_unresponsive" "simctl list devices exceeded ${SIMCTL_TIMEOUT}" 25
+  fi
 fi
 if [[ -z "$ALL_DEVICES" ]]; then
   fail_health "simctl_unavailable" "simctl list devices returned no output" 1
