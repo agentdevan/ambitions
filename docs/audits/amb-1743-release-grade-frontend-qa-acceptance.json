@@ -1,0 +1,234 @@
+{
+  "issue": "AMB-1743",
+  "title": "Release-Grade Frontend QA Acceptance",
+  "status": "implemented_yellow_completion_authorized_without_runtime_testing",
+  "date": "2026-07-05",
+  "baseline_sha": "c1782c54a139dd2a47fa74cbe73838c4b60a2b08",
+  "linear_status_before_closeout": "In Progress",
+  "user_authorization": {
+    "completion_without_testing": true,
+    "xctest_run": false,
+    "ui_test_run": false,
+    "simulator_run": false,
+    "screenshots_captured": false,
+    "manual_accessibility_review": false,
+    "performance_walkthrough": false,
+    "device_proof": false
+  },
+  "retained_inputs": [
+    "docs/audits/amb-1749-frontend-evidence-harness.md",
+    "docs/audits/amb-1749-frontend-evidence-harness.json",
+    "scripts/ambitions-frontend-evidence-harness.py",
+    "Native/Ambitions/Quality/ReleaseFrontendProofGate.swift",
+    "docs/audits/amb-1750-visual-green-app-store-frontend-proof-gate.md",
+    "docs/audits/frontend-screen-route-registry.md",
+    "docs/audits/frontend-journey-registry.md",
+    "docs/audits/amb-1748-design-system-adoption-proof.md",
+    "scripts/ambitions-xcode-benchmark.sh"
+  ],
+  "qa_ladder": [
+    {
+      "id": "fast_frontend_local",
+      "owner": "scripts/ambitions-frontend-evidence-harness.py",
+      "scope": "source-route shell visual-fixture and accessibility contract checks",
+      "claim_ceiling": "harness_source_coverage_only"
+    },
+    {
+      "id": "focused_journey_lanes",
+      "owner": "docs/audits/amb-1749-frontend-evidence-harness.json",
+      "scope": "root shell capture today goals time you inspection test symbol index",
+      "claim_ceiling": "indexed_coverage_only_until_executed_and_reviewed"
+    },
+    {
+      "id": "screenshot_artifacts",
+      "owner": "docs/audits/amb-1749-frontend-evidence-harness.json",
+      "scope": "stable result log and summary roots under .codex",
+      "claim_ceiling": "artifact_existence_only_for_named_run"
+    },
+    {
+      "id": "frontend_release_index",
+      "owner": "scripts/ambitions-frontend-evidence-harness.py",
+      "scope": "harness structure and proof-denial locks",
+      "claim_ceiling": "index_proof_only"
+    },
+    {
+      "id": "accessibility_smoke",
+      "owner": "docs/audits/amb-1748-design-system-adoption-proof.md",
+      "scope": "dynamic type reduce motion non-color meaning hit target and manual proof requirements",
+      "claim_ceiling": "requirement_coverage_only"
+    },
+    {
+      "id": "visual_review_gate",
+      "owner": "Native/Ambitions/Quality/ReleaseFrontendProofGate.swift",
+      "scope": "keep frontend release quality Yellow until current screenshots human review accessibility and device proof exist",
+      "claim_ceiling": "blocks_visual_green_and_app_store_frontend_claims"
+    },
+    {
+      "id": "performance_budget_hook",
+      "owner": "scripts/ambitions-xcode-benchmark.sh",
+      "scope": "local Xcode loop and command benchmark summaries",
+      "claim_ceiling": "timing_evidence_only"
+    },
+    {
+      "id": "rollback_flake_policy",
+      "owner": "docs/audits/amb-1743-release-grade-frontend-qa-acceptance.md",
+      "scope": "flaky gates may be disabled only with artifact capture retained and Needs Repair follow-up",
+      "claim_ceiling": "disabling_gate_cannot_upgrade_readiness"
+    }
+  ],
+  "journey_coverage": [
+    {
+      "id": "root_shell",
+      "indexed_by": "AMB-1749 root_shell",
+      "required_before_green": [
+        "current_launch_screenshot",
+        "safe_area_proof",
+        "dock_hit_target_proof",
+        "root_route_review"
+      ]
+    },
+    {
+      "id": "capture_to_today",
+      "indexed_by": "AMB-1749 capture plus AMB-1736",
+      "required_before_green": [
+        "keyboard_clearance",
+        "save_mutation",
+        "placement_review",
+        "receipt",
+        "dismissal",
+        "screenshot_proof"
+      ]
+    },
+    {
+      "id": "today",
+      "indexed_by": "AMB-1749 today plus AMB-1737",
+      "required_before_green": [
+        "start_here_screenshot",
+        "route_handoff",
+        "state_mutation",
+        "receipt",
+        "accessibility_summary_proof"
+      ]
+    },
+    {
+      "id": "goals",
+      "indexed_by": "AMB-1749 goals plus AMB-1738",
+      "required_before_green": [
+        "goals_root",
+        "life_area",
+        "goal_detail",
+        "create_edit",
+        "back_path",
+        "screenshot_proof"
+      ]
+    },
+    {
+      "id": "time",
+      "indexed_by": "AMB-1749 time plus AMB-1739",
+      "required_before_green": [
+        "lifeshape_field",
+        "weekly_review",
+        "dynamic_type",
+        "reduce_motion",
+        "time_boundary_proof",
+        "screenshots"
+      ]
+    },
+    {
+      "id": "you",
+      "indexed_by": "AMB-1749 you plus AMB-1740",
+      "required_before_green": [
+        "you_root",
+        "detail_routes",
+        "privacy_trust_rows",
+        "settings_controls",
+        "screenshot_proof"
+      ]
+    },
+    {
+      "id": "inspection_paths",
+      "indexed_by": "AMB-1749 inspection plus Trust owners",
+      "required_before_green": [
+        "proof_source_privacy_history_receipts_invocation",
+        "return_paths",
+        "accessibility_size_review"
+      ]
+    }
+  ],
+  "accessibility_contract": {
+    "automated_smoke_requirements": [
+      "dynamic_type_root_shell_capture_today_goals_time_you_inspection",
+      "reduce_motion_shell_capture_time_recovery_reflow_inspection",
+      "voiceover_labels_values_hints_focus_order_semantic_grouping",
+      "non_color_meaning_contrast_tap_targets_clipping_overlap"
+    ],
+    "manual_owner_review_requirements": [
+      "manual_voiceover_walkthrough",
+      "dynamic_type_accessibility_size_screenshot_review",
+      "reduce_motion_static_equivalent_walkthrough",
+      "owner_visual_review",
+      "device_sensitive_review"
+    ],
+    "conformance_claim_allowed": false
+  },
+  "acceptance": {
+    "tests_cover_required_paths": "indexed_not_executed",
+    "predictable_screenshot_artifact_location": "present_via_amb_1749_stable_roots",
+    "accessibility_smoke_voiceover_dynamic_type": "requirements_indexed_manual_proof_missing",
+    "slow_release_lane_separated_from_fast_local": true,
+    "subjective_visual_green_requires_human_review": true,
+    "baseline_screenshot_matrix_defined_and_runnable": "defined_not_run",
+    "manual_owner_review_requirements_documented": true,
+    "unit_tests_alone_cannot_close_frontend_qa_green": true,
+    "rollback_plan_preserves_artifacts_and_needs_repair": true
+  },
+  "proof_ceiling": {
+    "allowed_claims": [
+      "frontend_qa_ladder_index_present",
+      "fast_slow_lanes_indexed",
+      "journey_coverage_indexed",
+      "accessibility_requirements_indexed",
+      "performance_timing_hook_indexed",
+      "no_fake_green_gate_present"
+    ],
+    "forbidden_claims": [
+      "rendered_screenshot_coverage",
+      "rendered_visual_quality",
+      "accessibility_conformance",
+      "manual_voiceover_completion",
+      "dynamic_type_rendered_fit",
+      "reduce_motion_rendered_fit",
+      "performance_budget_pass",
+      "physical_device_behavior",
+      "testflight_readiness",
+      "app_store_readiness",
+      "frontend_qa_green",
+      "release_green"
+    ]
+  },
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_touched": [],
+    "production_source_changes": false,
+    "files_created": [
+      "docs/audits/amb-1743-release-grade-frontend-qa-acceptance.md",
+      "docs/audits/amb-1743-release-grade-frontend-qa-acceptance.json"
+    ],
+    "files_moved": [],
+    "old_noncanonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "yellow_debt": [
+      "fast_local_lane_execution",
+      "focused_ui_journeys",
+      "screenshot_matrix",
+      "manual_accessibility_review",
+      "dynamic_type_review",
+      "reduce_motion_review",
+      "performance_budget_walkthrough",
+      "visual_owner_review",
+      "device_proof"
+    ],
+    "next_proof_train": "AMB-1744 and AMB-1765 through AMB-1775 when testing/device proof is re-enabled",
+    "equivalent_path_interpretation_used": false
+  }
+}

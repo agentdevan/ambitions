@@ -186,7 +186,7 @@
       "surface_or_flow": "Time / LifeShape Field",
       "source_file": "Native/AmbitionsUITests/AmbitionsUITests.swift",
       "test_symbols": [
-        "testLaunchURLCanLandOnCanonicalTimeSurface",
+        "testDemoTimeWorkspaceShowsBatch49CoreModules",
         "testAMB964TimeReconstructionScreenshotMatrix",
         "testAMB1174TimeVisualFlagshipLayerScreenshotProof",
         "testAMB1176TimeEmptyAndAccessibilityProofPacket"
