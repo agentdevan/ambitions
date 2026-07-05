@@ -135,7 +135,7 @@ extension RepositoryBackedYouService {
             makeSourceAtlasKnowledgeRow(
                 id: "goal-source-captures",
                 icon: "tray.full",
-                title: "Captures",
+                title: "Captured items",
                 usedWhat: snapshot.captures.isEmpty ? "No open captures." : "\(snapshot.captures.filter { $0.status != .archived }.count) open captures, \(snapshot.captures.count) total captures",
                 whyUsed: "Used to surface unresolved intent and keep the capture queue visible to planning.",
                 sourceName: "Capture",
@@ -243,7 +243,7 @@ extension RepositoryBackedYouService {
                 title: "Step source pack",
                 usedWhat: totalPlannedSteps == 0 ? "No step pack yet." : "\(totalPlannedSteps) planned step(s)",
                 whyUsed: "Used to keep step-level planning local and inspectable.",
-                sourceName: "Plan steps",
+                sourceName: "Goal path steps",
                 sourceState: totalPlannedSteps == 0 ? .sourceNeeded : .locallyProven,
                 freshnessState: totalPlannedSteps == 0 ? .unknown : .current,
                 riskState: totalPlannedSteps == 0 ? .medium : .low,
@@ -336,7 +336,7 @@ extension RepositoryBackedYouService {
                     riskState: .high,
                     runtimeUseState: .notUsed,
                     needsReview: true,
-                    correctionPath: "Open Goal Detail > Add Plan",
+                    correctionPath: "Open Goal Detail > Add Path",
                     reviewPath: "Open Goal Detail > Review Goal",
                     iconState: .warning
                 )

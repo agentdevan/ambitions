@@ -63,7 +63,7 @@ extension PreviewTimeScenarios {
                 TimeGoalLifecycleRailSegment(lifecycleState: .parked, count: 1, subtitle: "Intentionally outside pressure"),
                 TimeGoalLifecycleRailSegment(lifecycleState: .protected, count: 1, subtitle: "Should be defended"),
                 TimeGoalLifecycleRailSegment(lifecycleState: .completed, count: 1, subtitle: "Done and preserved"),
-                TimeGoalLifecycleRailSegment(lifecycleState: .cancelledDropped, count: 1, subtitle: "Dropped without shame")
+                TimeGoalLifecycleRailSegment(lifecycleState: .cancelledDropped, count: 1, subtitle: "Dropped without blame")
             ]
         ),
         timelineStrip: TimeTimelineStripState(

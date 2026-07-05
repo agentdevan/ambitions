@@ -15,7 +15,7 @@ extension RepositoryBackedYouService {
         let blockedCount = snapshot.drafts.filter { $0.latestResultKind == .blocked }.count
         let openCaptures = snapshot.captures.filter { $0.status != .archived }.count
         let trimmedName = snapshot.appState.userDisplayName.trimmingCharacters(in: .whitespacesAndNewlines)
-        let profileTitle = trimmedName.isEmpty ? "Local profile" : "\(trimmedName)'s settings"
+        let profileTitle = trimmedName.isEmpty ? "Local personal system" : "\(trimmedName)'s settings"
         let notificationStatus = notificationAuthorizationStatus(notificationAuthorization)
         let syncState = syncVisualState(syncStatus)
         let appearanceSummary = "\(snapshot.appState.appearancePreference.title) mode with \(snapshot.appState.accentFamily.title)"
@@ -79,7 +79,7 @@ extension RepositoryBackedYouService {
                 appearanceSummary: appearanceSummary
             ),
             controlRoom: YouControlRoomState(
-                title: "Profile map",
+                title: "Personal system map",
                 subtitle: "A short map of the local settings and trust areas you can inspect.",
                 entries: [
                     YouControlRoomEntry(
@@ -371,7 +371,7 @@ extension RepositoryBackedYouService {
                 items: [
                     SettingsItem(
                         id: "you-default-tab",
-                        title: "Default landing tab",
+                        title: "Default starting surface",
                         subtitle: "Used on the next cold launch so re-entry starts where you prefer.",
                         icon: "square.grid.2x2",
                         valueLabel: snapshot.appState.preferredTab.canonicalTopLevelTab.title

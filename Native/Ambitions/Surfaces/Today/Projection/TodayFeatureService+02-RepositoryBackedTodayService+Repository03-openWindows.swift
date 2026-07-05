@@ -164,7 +164,7 @@ extension RepositoryBackedTodayService {
                 state: .default,
                 target: actions.first?.target ?? TodayActionTarget()
             ),
-            detail: "Let the rest of the day stay lighter and carry the shaping into Plan."
+            detail: "Let the rest of the day stay lighter and carry the shaping into Goals."
         )
 
         return Array(options.prefix(4))

@@ -178,7 +178,7 @@ extension ExecutionResilienceProjector {
                     title: "Let passive work move slowly",
                     summary: "Passive or flexible work can stay active without crowding urgent commitments.",
                     strategy: .deferPassiveWork,
-                    expectedEffect: "Protects urgent work while preserving passive goals without guilt.",
+                    expectedEffect: "Protects urgent work while preserving passive goals without pressure.",
                     tradeoff: RecoveryTradeoff(summary: "Meaningful flexible work waits calmly.", protectsHighPriorityWork: protected.isEmpty == false, defersPassiveOrFlexibleWork: true, displacesLowerPriorityWork: false, requiresUserDecision: false),
                     urgencyBasis: "Passive goals have lower immediate consequence.",
                     capacityBasis: input.realitySnapshot?.capacityEstimate.summary ?? "Uses baseline capacity because calendar/reality data may be absent.",

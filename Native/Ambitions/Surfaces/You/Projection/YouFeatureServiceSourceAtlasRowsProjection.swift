@@ -173,7 +173,7 @@ extension RepositoryBackedYouService {
                     title: "No step sources yet",
                     usedWhat: "No step has source detail yet.",
                     whyUsed: "This row stays visible so step source gaps remain obvious.",
-                    sourceName: "Plan steps",
+                    sourceName: "Goal path steps",
                     sourceState: .sourceNeeded,
                     freshnessState: .unknown,
                     riskState: .medium,

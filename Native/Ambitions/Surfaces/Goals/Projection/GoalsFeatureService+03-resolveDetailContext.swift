@@ -86,7 +86,7 @@ extension RepositoryBackedGoalsService {
             mode: goal.mode,
             renderState: renderState,
             progressValue: progressValue,
-            progressLabel: steps.isEmpty ? "Plan forming" : "\(completed)/\(steps.count) steps complete",
+            progressLabel: steps.isEmpty ? "Path forming" : "\(completed)/\(steps.count) steps complete",
             statusLabel: renderState.title,
             timingLabel: timingLabel(for: goal.timing, goalMode: goal.mode),
             nextStepHint: firstActive?.title ?? "Open detail to confirm the next step",

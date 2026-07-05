@@ -129,7 +129,7 @@ enum ActivationContract {
             return ActivationPromise(
                 kind: kind,
                 title: "First recovery example",
-                explanation: "Recovery is part of Time and Today. When the day breaks, Ambitions should offer a smaller, safer step without guilt or silent rescheduling.",
+                explanation: "Recovery is part of Time and Today. When the day breaks, Ambitions should offer a smaller, safer step without pressure or silent rescheduling.",
                 primaryActionTitle: nil,
                 primaryRoutingHint: nil
             )

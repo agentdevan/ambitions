@@ -55,7 +55,7 @@ struct TimeLifeSuiteState: Sendable {
                 LifeShapeSegment(kind: .goalTime, detail: life?.summary ?? "Goal load not loaded.", valueLabel: life?.sourceLabel ?? "Goals", weight: 0.50, visualState: life?.visualState ?? .default),
                 LifeShapeSegment(kind: .protectedTime, detail: day?.protectedTimeLabel ?? "Protected time is inspectable.", valueLabel: "Protected", weight: 0.38, visualState: .selected),
                 LifeShapeSegment(kind: .pressure, detail: week?.schedulePressureLabel ?? "Capacity has room before another Step is added.", valueLabel: pressureKind.title, weight: fit == .tight ? 0.78 : 0.44, visualState: fit.visualState),
-                LifeShapeSegment(kind: .recovery, detail: "Recovery stays available without shame.", valueLabel: "Recovery", weight: 0.34, visualState: .default),
+                LifeShapeSegment(kind: .recovery, detail: "Recovery stays available without blame.", valueLabel: "Recovery", weight: 0.34, visualState: .default),
                 LifeShapeSegment(kind: .source, detail: trustLabel, valueLabel: "Local", weight: 0.30, visualState: .selected)
             ],
             semanticMarks: Self.fallbackSemanticMarks(fit: fit, pressureKind: pressureKind),

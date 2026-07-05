@@ -83,7 +83,7 @@ extension RepositoryBackedYouService {
             return YouRuntimeInspectionItem(
                 id: "runtime-inspection-personal-\(signal.signalType.rawValue)-\(signal.id)",
                 kind: .learned,
-                title: "What Personal system learned from momentum reflow",
+                title: "What Ambitions learned from momentum reflow",
                 summary: signal.personalRuntimeInspectableSummary,
                 sourceLabel: signal.sourceRecordLabel,
                 controlLabel: signal.isExcludedFromFutureRanking

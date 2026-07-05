@@ -9,7 +9,7 @@ struct YouObjectView: View {
             profileProjection: profileProjection,
             onOpenDetail: onOpenDetail
         )
-        .accessibilityLabel("User profile")
-        .accessibilityValue("Local profile and settings.")
+        .accessibilityLabel("User System Profile")
+        .accessibilityValue("Local personal system and settings.")
     }
 }

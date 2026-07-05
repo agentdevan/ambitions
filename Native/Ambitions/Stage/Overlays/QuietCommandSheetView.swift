@@ -186,7 +186,7 @@ struct QuietCommandSheetView: View {
         case .createGoal: "Open a draft before anything becomes active."
         case .recall: "Search local context."
         case .neutral: "Choose an action."
-        case .recovery: "Return to Today without shame or silent changes."
+        case .recovery: "Return to Today without blame or silent changes."
         case .focus: "Center the recommended step."
         case .time: "Open Time."
         }

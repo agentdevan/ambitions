@@ -275,7 +275,7 @@ extension RepositoryBackedYouService {
             ),
             SettingsItem(
                 id: "search-filter-captures",
-                title: "Captures",
+                title: "Captured items",
                 subtitle: "Open captures and route previews",
                 icon: "tray.full",
                 valueLabel: "\(countsByKind[.capture, default: 0])"

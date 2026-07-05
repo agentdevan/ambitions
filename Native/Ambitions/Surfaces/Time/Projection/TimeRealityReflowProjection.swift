@@ -173,7 +173,7 @@ extension RepositoryBackedTimeService {
             append(.moveLocalActionLater, detail: "Reschedule one local action later without touching Calendar.", impact: "Needs confirmation before mutation", state: .default)
             append(.deferGoalOrItem, detail: "Defer the lower-priority item that no longer fits.", impact: "Broad change needs confirmation", state: .warning)
             append(.dropOptionalWork, detail: "Drop only optional work, and only after confirmation.", impact: "Destructive choice gated", state: .warning)
-            append(.recoverRest, detail: "Protect recovery or rest as part of Time.", impact: "No shame recovery", state: .success, target: nil)
+            append(.recoverRest, detail: "Protect recovery or rest as part of Time.", impact: "Calm recovery", state: .success, target: nil)
         }
 
         if reasonKind != .stillBelievable && suggestions.contains(where: { $0.kind == .askForConfirmation }) == false {

@@ -43,7 +43,7 @@ extension RepositoryBackedInsightsService {
             trustWhisper = "This changed after recent feedback and still has visible proof."
         } else if current.visibleFollowThrough == 0 {
             dominantTruth = "The system has an active portfolio, but not enough current proof to say more than that."
-            editorialSummary = "Reflection stays useful here by being conservative. The next visible completion will sharpen the read more than another dashboard number."
+            editorialSummary = "Reflection stays useful here by being conservative. The next visible completion will sharpen the read more than another abstract number."
             trustWhisper = "This looks based on older context and limited recent evidence."
         } else {
             dominantTruth = "Momentum is building from repeatable scope, not volume theater."
@@ -62,7 +62,7 @@ extension RepositoryBackedInsightsService {
         return InsightsHeroState(
             eyebrow: "What you are learning",
             title: posture.title,
-            subtitle: "Reflection stays calm, specific, and close to the work instead of drifting into dashboard theater.",
+            subtitle: "Reflection stays calm, specific, and close to the work instead of drifting into detached reporting.",
             dominantTruth: dominantTruth,
             editorialSummary: editorialSummary,
             trustWhisper: trustWhisper,
@@ -126,7 +126,7 @@ extension RepositoryBackedInsightsService {
         if current.frictionCount > current.visibleFollowThrough {
             return InsightsContinuityRibbon(
                 title: "This week is tightening around friction",
-                detail: "Take that signal back into Plan before adding more load.",
+                detail: "Take that signal back into Goals before adding more load.",
                 icon: "calendar.badge.exclamationmark",
                 visualState: .warning,
                 goalTarget: nil,

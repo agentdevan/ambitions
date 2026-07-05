@@ -43,7 +43,7 @@ extension RepositoryBackedGoalsService {
             proofRequirements: proofRequirements,
             todayConnectionTitle: todayTitle,
             todayConnectionSummary: todaySummary.isEmpty ? "Keep one believable next step visible before widening the path shape." : todaySummary,
-            planConnectionSummary: "Plan should only protect the next believable window; wider changes still need review.",
+            planConnectionSummary: "Goal path should only protect the next believable window; wider changes still need review.",
             decisionReceiptSummary: missionControl.decisions.items.first?.summary
                 ?? "Path changes should leave a decision or proof trail before they reshape the plan.",
             roadmapListTitle: "Path list",
@@ -198,7 +198,7 @@ extension RepositoryBackedGoalsService {
         case .today:
             return "Today"
         case .plan:
-            return "Plan"
+            return "Path"
         case .goalDetail:
             return "Goal Detail"
         case .proof:

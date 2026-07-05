@@ -21,7 +21,7 @@ extension TodayExecutionViewState {
             ],
             panels: [.heroDecision, .nowLayer, .todayPlan, .compactTimeline, .oneStepGoals, .schedule, .recovery],
             actions: [.start, .move, .parkNotToday, .markDone, .saveTheDay],
-            drillDowns: ["Goal Detail", "Plan", "Receipt", "Review"],
+            drillDowns: ["Goal Detail", "Goal Path", "Receipt", "Review"],
             copySamples: [
                 hero.title,
                 hero.subtitle,

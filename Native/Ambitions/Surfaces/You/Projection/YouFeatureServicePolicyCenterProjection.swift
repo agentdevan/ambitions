@@ -90,7 +90,7 @@ extension RepositoryBackedYouService {
                         YouPlanningDefaultsPreference(
                             id: "schedule-anchors",
                             title: "Work, school, and anchors",
-                            whyItMatters: "Plan can keep committed blocks, transitions, sleep, care, and recovery from being mistaken for open capacity.",
+                            whyItMatters: "Ambitions can keep committed blocks, transitions, sleep, care, and recovery from being mistaken for open capacity.",
                             statusLabel: calendarAuthorizationLabel(calendarAuthorization),
                             privacyLabel: "Calendar awareness is Time-owned and requested only after a clear Time action.",
                             defaultLabel: "Optional",
@@ -128,7 +128,7 @@ extension RepositoryBackedYouService {
                         YouPlanningDefaultsPreference(
                             id: "planning-reflow",
                             title: "Reflow permission",
-                            whyItMatters: "Meaningful day changes stay reviewable so Plan can recover without taking over.",
+                            whyItMatters: "Meaningful day changes stay reviewable so Ambitions can recover without taking over.",
                             statusLabel: "Ask first",
                             privacyLabel: "Receipts explain consequential changes.",
                             defaultLabel: nil,
@@ -146,7 +146,7 @@ extension RepositoryBackedYouService {
                         YouPlanningDefaultsPreference(
                             id: "vacation-default",
                             title: "Away time default",
-                            whyItMatters: "Vacation is not free time by default, so Plan does not turn recovery into a work queue.",
+                            whyItMatters: "Vacation is not free time by default, so Ambitions does not turn recovery into a work queue.",
                             statusLabel: VacationAvailabilityBehavior.defaultBehavior.displayLabel,
                             privacyLabel: "The selected behavior applies only to planning fit.",
                             defaultLabel: "Default",

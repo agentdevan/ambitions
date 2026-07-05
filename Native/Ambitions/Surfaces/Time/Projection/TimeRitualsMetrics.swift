@@ -113,7 +113,7 @@ extension RepositoryBackedTimeRitualsService {
         case .recovery:
             return recoveryCount == 1
                 ? "One loop needs a gentler restart. Ambitions keeps that visible without turning it punitive."
-                : "\(recoveryCount) loops need recovery framing. The screen is prioritizing ease over guilt."
+                : "\(recoveryCount) loops need recovery framing. The screen is prioritizing ease over pressure."
         }
     }
 

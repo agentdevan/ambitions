@@ -180,7 +180,7 @@ extension RepositoryBackedTimeService {
         case .parked: return "Intentionally outside pressure"
         case .protected: return "Should be defended"
         case .completed: return "Done and preserved"
-        case .cancelledDropped: return "Dropped without shame"
+        case .cancelledDropped: return "Dropped without blame"
         case .passive: return "Quiet support"
         }
     }

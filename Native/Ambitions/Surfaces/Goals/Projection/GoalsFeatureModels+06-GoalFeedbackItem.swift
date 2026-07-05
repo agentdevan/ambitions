@@ -218,7 +218,7 @@ struct GoalAlternatePathDecisionSpineState: Sendable {
                 reviewLabel: fork.decisionPrompt.localizedCaseInsensitiveContains("review")
                     ? fork.decisionPrompt
                     : "Review first: \(fork.decisionPrompt)",
-                consequenceLabel: "Review tradeoffs before this branch changes Today or Plan.",
+                consequenceLabel: "Review tradeoffs before this branch changes Today or the goal path.",
                 mutationBoundaryLabel: "No automated reroute; no plan changed.",
                 freshnessLabel: fork.freshnessLabel,
                 state: fork.state

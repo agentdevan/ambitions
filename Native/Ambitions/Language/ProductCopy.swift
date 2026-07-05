@@ -74,7 +74,7 @@ enum ProductCopy {
     enum You {
         static let surfaceTitle = UserFacingLanguage.Surface.you
         static let objectTitle = UserFacingLanguage.Object.userSystemProfile
-        static let profile = "Profile"
+        static let profile = UserFacingLanguage.Object.userSystemProfile
         static let personalization = "Personalization"
         static let planning = "Planning"
         static let capture = "Capture"

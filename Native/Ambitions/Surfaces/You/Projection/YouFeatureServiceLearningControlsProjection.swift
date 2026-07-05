@@ -31,7 +31,7 @@ extension RepositoryBackedYouService {
                 sourceLabel: "Source-tied learning",
                 availabilityLabel: "Review first",
                 receiptLabel: "Receipt records disabled reuse",
-                boundaryLabel: "Local-only; no silent sync or hidden profile update",
+                boundaryLabel: "Local-only; no silent sync or hidden personal-context update",
                 state: .warning,
                 accessibilityLabel: "Disable learning from this signal",
                 accessibilityValue: "Review first. Local-only.",
@@ -101,7 +101,7 @@ extension RepositoryBackedYouService {
                     : "\(proofFeedbackCount) proof or feedback records can ground plan recall.",
                 sourceLabel: "Current plan",
                 sourceAgeLabel: proofFeedbackCount == 0 ? "May need review" : "Current",
-                whyRemembered: "Why remembered: current goals, proof, and feedback help recall return to Plan or Goal Detail instead of inventing a second history.",
+                whyRemembered: "Why remembered: current goals, proof, and feedback help recall return to Goals or Goal Detail instead of inventing a second history.",
                 privacyShutterLabel: "Summary only",
                 reviewLabel: "Safe for context recall",
                 correctionLabel: "Correct in owning surface",
@@ -176,16 +176,16 @@ extension RepositoryBackedYouService {
             YouRuntimeInspectionItem(
                 id: "runtime-inspection-learned",
                 kind: .learned,
-                title: "What Personal system learned",
+                title: "What Ambitions learned",
                 summary: correctionCount == 0
-                    ? "No Personal system learning signal is saved yet."
-                    : "\(correctionCount) correction signal\(correctionCount == 1 ? "" : "s") can teach Personal system how to reject or reuse similar recommendations.",
-                sourceLabel: "Personal system",
+                    ? "No local learning signal is saved yet."
+                    : "\(correctionCount) correction signal\(correctionCount == 1 ? "" : "s") can teach Ambitions how to reject or reuse similar recommendations.",
+                sourceLabel: "Local learning",
                 controlLabel: correctionCount == 0 ? "Available when present" : "Reset or delete in Search Ambitions",
                 privacyLabel: "Local and source-tied",
                 state: correctionCount == 0 ? .default : .success,
-                accessibilityLabel: "What Personal system learned",
-                accessibilityValue: correctionCount == 0 ? "No Personal system learning signal saved yet. Local and source-tied." : "\(correctionCount) correction signals. Personal system, local and source-tied.",
+                accessibilityLabel: "What Ambitions learned",
+                accessibilityValue: correctionCount == 0 ? "No local learning signal saved yet. Local and source-tied." : "\(correctionCount) correction signals. Local learning, local and source-tied.",
                 accessibilityHint: "Shows learned local correction state and where reuse can be reset, deleted, corrected, or rejected."
             ),
             YouRuntimeInspectionItem(

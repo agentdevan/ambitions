@@ -151,12 +151,12 @@ extension RepositoryBackedYouService {
                     items: [
                         YouSystemCenterItem(
                             id: "you",
-                            title: "Local profile",
-                            subtitle: "Name and default landing tab.",
+                            title: "Local personal system",
+                            subtitle: "Name and default starting surface.",
                             icon: "person.crop.circle",
                             statusLabel: snapshot.appState.userDisplayName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Optional" : "Local",
                             semanticState: .neutral,
-                            accessibilityHint: "Opens local profile settings."
+                            accessibilityHint: "Opens personal system settings."
                         ),
                         YouSystemCenterItem(
                             id: "personalization",

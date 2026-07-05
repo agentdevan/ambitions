@@ -144,7 +144,7 @@ extension RepositoryBackedInsightsService {
         case .tooBig, .askedForSmallerVersion:
             return "Step was shrunk"
         case .notRelevant:
-            return "Plan correction flagged"
+            return "Path correction flagged"
         case .askedWhyThisMatters:
             return "Rationale requested"
         case .edited:

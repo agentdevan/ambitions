@@ -33,7 +33,7 @@ extension RepositoryBackedYouService {
     }
 
     func lifeContextDisplayTitle(for profile: LifeContextProfile?) -> String {
-        guard let profile else { return "Life Context Profile" }
+        guard let profile else { return "Life context" }
         if let schoolOrWorkContext = profile.schoolOrWorkContext, schoolOrWorkContext.isEmpty == false {
             return schoolOrWorkContext
         }

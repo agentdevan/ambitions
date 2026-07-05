@@ -126,7 +126,7 @@ extension RepositoryBackedYouService {
                 ),
                 YouConstitutionRule(
                     id: "constitution-recovery-tone",
-                    title: "Recover without shame",
+                    title: "Recover without blame",
                     detail: "Delays, skips, and smaller-version requests are treated as recovery context, not blame.",
                     statusLabel: "Calm recovery",
                     state: .success

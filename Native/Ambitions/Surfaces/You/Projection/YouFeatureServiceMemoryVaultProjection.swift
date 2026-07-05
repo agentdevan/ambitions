@@ -244,17 +244,17 @@ extension RepositoryBackedYouService {
             id: "personal-vault-defaults",
             kind: .signal,
             title: "Personal defaults",
-            summary: "Name, landing tab, appearance, and review cadence stay separate from the surfaces they influence.",
+            summary: "Name, starting surface, appearance, and review cadence stay separate from the surfaces they influence.",
             sourceLabel: "User System Profile",
             storageLabel: snapshot.appState.localOnlyModeEnabled ? "Stored on this device" : "Needs review",
             exportLabel: "Summary export only",
             resetLabel: "Reset in You",
             deleteLabel: "Delete requires confirmation",
-            provenanceLabel: "Profile source",
+            provenanceLabel: "Personal context source",
             privacyPolicyLabel: "Private by default",
             permissionLabel: "User-owned",
             state: snapshot.appState.userDisplayName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? .default : .selected,
-            accessibilityHint: "Shows the profile defaults row and the visible storage, export, reset, delete, provenance, privacy, and permission labels."
+            accessibilityHint: "Shows the personal defaults row and the visible storage, export, reset, delete, provenance, privacy, and permission labels."
         )
         let learningRow = makePersonalVaultRow(
             id: "personal-vault-learning",

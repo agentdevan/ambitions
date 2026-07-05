@@ -319,7 +319,7 @@ extension GoalPathBuilderState {
                     ? "Time: current context still needs review."
                     : "Time: review the source before using it.",
                 energyLabel: "Energy: choose the sustainable path, not the biggest one.",
-                reviewRequirementLabel: "User review required before this changes Today or Plan.",
+                reviewRequirementLabel: "User review required before this changes Today or the goal path.",
                 recoveryLabel: recoveryLabel,
                 state: fork.state
             )

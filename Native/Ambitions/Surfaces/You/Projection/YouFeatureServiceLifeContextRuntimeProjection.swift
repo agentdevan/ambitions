@@ -93,7 +93,7 @@ extension RepositoryBackedYouService {
                 activityLabel: ledger.confidenceBand == .reviewNeeded ? "Needs review" : "Active",
                 lastAffectedLabel: ledger.generatedAt,
                 runtimePermissionLabel: "Allowed",
-                whereUsed: "Plan-shaping explanation",
+                whereUsed: "Path-shaping explanation",
                 updateTargets: [.historicalFact],
                 captureRouteContext: .needsReview,
                 basePath: basePath

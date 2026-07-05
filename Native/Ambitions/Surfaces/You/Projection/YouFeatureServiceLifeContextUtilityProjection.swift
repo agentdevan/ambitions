@@ -68,7 +68,7 @@ extension RepositoryBackedYouService {
     }
 
     func ageSourceLabel(bundle: LifeContextBundle?) -> String {
-        bundle?.profile.ageSource?.label ?? "Profile"
+        bundle?.profile.ageSource?.label ?? "Personal context"
     }
 
     func ageFreshness(bundle: LifeContextBundle?, projection: LifeContextRuntimeProjection?) -> YouMemoryFreshness {

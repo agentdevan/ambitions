@@ -119,7 +119,7 @@ struct YouLocalDataControlsControlGroup: View {
                     SettingsItem(
                         id: "you-local-data-state",
                         title: "Local app state",
-                        subtitle: "Display preferences, default landing tab, review cadence, local evidence, captures, and recent event ledger counts come from the current on-device You projection path.",
+                        subtitle: "Display preferences, default starting surface, review cadence, local evidence, captures, and recent event ledger counts come from the current on-device You projection path.",
                         icon: "internaldrive",
                         valueLabel: "On device"
                     ),

@@ -38,7 +38,7 @@ enum YouRootDetail: String, Identifiable {
     var title: String {
         switch self {
         case .personalization: "Personalization"
-        case .personalRuntime: "Local profile"
+        case .personalRuntime: "Local personal system"
         case .sessionDefaults: "Session defaults"
         case .appearance: "Appearance"
         case .whatAmbitionsKnows: "Local context"
@@ -185,7 +185,7 @@ struct UserSystemProfileRootView: View {
                     .minimumScaleFactor(0.78)
                     .accessibilityIdentifier("you.root-title")
 
-                Text("Profile and settings")
+                Text("Personal system and settings")
                     .font(AmbitionsIOS26SemanticTokens.Typography.subheadline)
                     .foregroundStyle(theme.colors.textSecondary)
                     .lineLimit(2)
@@ -211,7 +211,7 @@ struct UserSystemProfileRootView: View {
         [
             RootSettingsGroup(
                 id: "profile",
-                title: "Profile",
+                title: "Personal system",
                 rows: [
                     row(id: "personalization", title: "Personalization", detail: .personalization, value: "Local", symbolName: "person.crop.circle", semanticState: .neutral),
                     row(id: "session-defaults", title: "Session defaults", detail: .sessionDefaults, value: "Ready", symbolName: "slider.horizontal.3", semanticState: .success),
