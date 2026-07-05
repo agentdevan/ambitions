@@ -227,6 +227,13 @@ or private runtime scope:
 - Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/Planning/SourceAtlasStepCandidateFieldVerifiedPublicContext.swift`
 - Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/Planning/SourceAtlasVerifiedPublicPlanningBridgeModels.swift`
 
+AMB-1803 adds focused receipt-contract coverage for verified public Source
+Atlas influence on local planning decisions. This allowlist entry covers that
+contract test only; it does not add public-pack, R2, product-surface, private
+runtime storage, final-step, or schedule ownership scope:
+
+- Source Atlas growth allowlist: `Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceInfluenceReceiptTests.swift`
+
 AMB-1669 renames existing scheduling source under the clearer LocalRuntimeOS
 `Scheduling` owner. This allowlist entry covers the source-owner rename for an
 existing no-R2/no-hosted-services policy string only; it does not add

@@ -39,6 +39,7 @@ extension SourceAtlasStepCandidateFieldBridge {
                 field: fallbackField,
                 receipts: receipts,
                 shardInfluence: nil,
+                sourceInfluenceReceipt: nil,
                 issues: issues,
                 localOnly: localOnly
             )
@@ -57,10 +58,18 @@ extension SourceAtlasStepCandidateFieldBridge {
             localOnly: localOnly
         )
         let shardInfluence = SourceAtlasVerifiedPublicShardInfluence(context: publicPlanningContext)
+        let sourceInfluenceReceipt = SourceInfluenceReceipt(
+            recordedAt: generatedAt,
+            field: field,
+            shardInfluence: shardInfluence,
+            reviewRequired: publicPlanningContext.sourceInfluenceReceiptReviewRequired,
+            localOnly: localOnly
+        )
         let receipts = makePublicPlanningAppliedReceipts(
             context: publicPlanningContext,
             field: field,
             shardInfluence: shardInfluence,
+            sourceInfluenceReceipt: sourceInfluenceReceipt,
             generatedAt: generatedAt,
             localOnly: localOnly
         )
@@ -69,6 +78,7 @@ extension SourceAtlasStepCandidateFieldBridge {
             field: field,
             receipts: receipts,
             shardInfluence: shardInfluence,
+            sourceInfluenceReceipt: sourceInfluenceReceipt,
             issues: [],
             localOnly: localOnly
         )
@@ -145,6 +155,7 @@ extension SourceAtlasStepCandidateFieldBridge {
         context: SourceAtlasPublicPlanningContext,
         field: StepCandidateField,
         shardInfluence: SourceAtlasVerifiedPublicShardInfluence,
+        sourceInfluenceReceipt: SourceInfluenceReceipt,
         generatedAt: String,
         localOnly: Bool
     ) -> [SourceAtlasBridgeReceipt] {
@@ -198,7 +209,8 @@ extension SourceAtlasStepCandidateFieldBridge {
                     "local-only=\(localOnly)"
                 ],
                 relatedIDs: [field.id, field.selectedCandidateID, shardInfluence.id] + field.candidateIDs
-            )
+            ),
+            sourceInfluenceReceipt.bridgeReceipt
         ]
     }
 
@@ -230,5 +242,13 @@ extension SourceAtlasStepCandidateFieldBridge {
                 isRedacted: providerOutput.egressFindings.isEmpty == false
             )
         ]
+    }
+}
+
+private extension SourceAtlasPublicPlanningContext {
+    var sourceInfluenceReceiptReviewRequired: Bool {
+        useMode == .reviewOnlyReference ||
+            requirements.contains { $0.reviewState != .approved } ||
+            riskMetadata.contains { $0.strictReviewRequired }
     }
 }

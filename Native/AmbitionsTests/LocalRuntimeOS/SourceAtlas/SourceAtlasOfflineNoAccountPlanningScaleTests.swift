@@ -107,7 +107,15 @@ final class SourceAtlasOfflineNoAccountPlanningScaleTests: XCTestCase {
             XCTAssertTrue(bridged.canUseSourceAtlasCandidates)
             XCTAssertEqual(bridged.shardInfluence?.selectedPackID, pack.id)
             XCTAssertTrue(bridged.field.sourceProvenance.contains(.sourceAtlasPack))
-            XCTAssertEqual(bridged.receipts.map(\.kind), [.sourceAtlasPublicContextVerified, .sourceAtlasPublicContextApplied])
+            XCTAssertEqual(
+                bridged.receipts.map(\.kind),
+                [
+                    .sourceAtlasPublicContextVerified,
+                    .sourceAtlasPublicContextApplied,
+                    .sourceAtlasInfluenceReceiptRecorded
+                ]
+            )
+            XCTAssertTrue(bridged.sourceInfluenceReceipt?.canInfluenceLocalPlanning == true)
             XCTAssertTrue(bridged.receipts.flatMap(\.details).contains("source-atlas-final-step-owner=false"))
             XCTAssertTrue(bridged.receipts.flatMap(\.details).contains("source-atlas-final-schedule-owner=false"))
             replayFingerprints.insert(bridged.deterministicReplayFingerprint)

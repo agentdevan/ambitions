@@ -27,7 +27,16 @@ final class SourceAtlasVerifiedPublicPlanningBridgeTests: XCTestCase {
         XCTAssertTrue(output.canUseSourceAtlasCandidates)
         XCTAssertEqual(output.field, repeated.field)
         XCTAssertEqual(output.deterministicReplayFingerprint, repeated.deterministicReplayFingerprint)
-        XCTAssertEqual(output.receipts.map(\.kind), [.sourceAtlasPublicContextVerified, .sourceAtlasPublicContextApplied])
+        XCTAssertEqual(
+            output.receipts.map(\.kind),
+            [
+                .sourceAtlasPublicContextVerified,
+                .sourceAtlasPublicContextApplied,
+                .sourceAtlasInfluenceReceiptRecorded
+            ]
+        )
+        XCTAssertEqual(output.sourceInfluenceReceipt?.publicPlanningContextID, "context.public.varsity")
+        XCTAssertTrue(output.sourceInfluenceReceipt?.canInfluenceLocalPlanning == true)
         XCTAssertEqual(output.shardInfluence?.sourceIDs, ["source-public-varsity"])
         XCTAssertEqual(output.shardInfluence?.claimIDs, ["claim-public-varsity"])
         XCTAssertEqual(output.shardInfluence?.requirementIDs, ["requirement-public-proof"])
@@ -43,6 +52,8 @@ final class SourceAtlasVerifiedPublicPlanningBridgeTests: XCTestCase {
         let receiptDetails = output.receipts.flatMap(\.details)
         XCTAssertTrue(receiptDetails.contains("source-atlas-final-step-owner=false"))
         XCTAssertTrue(receiptDetails.contains("source-atlas-final-schedule-owner=false"))
+        XCTAssertTrue(receiptDetails.contains("private-input-included=false"))
+        XCTAssertTrue(receiptDetails.contains("private-life-graph-included=false"))
         XCTAssertTrue(receiptDetails.contains("r2-artifact=false"))
         XCTAssertFalse(encoded.contains("PRIVATE-GOAL-TEXT"))
         XCTAssertFalse(encoded.contains("account_id"))
