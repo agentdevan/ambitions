@@ -28,6 +28,8 @@ final class AppBootstrapper {
     private var pendingDeepLinks: [URL] = []
     private var didQueueConfiguredLaunchURL = false
     private let sourceAtlasRefreshScheduler = AppSourceAtlasLifecycleRefreshScheduler()
+    private(set) var latestSourceAtlasBackgroundRefreshInput: SourceAtlasPublicPackLifecycleRefreshInput?
+    private(set) var latestSourceAtlasBackgroundRefreshResolution: SourceAtlasPublicPackLifecycleRefreshResolution?
 
     init(mode: BootstrapMode = .automatic) {
         self.mode = mode
@@ -85,6 +87,22 @@ final class AppBootstrapper {
         Task {
             await reconcileMaintenance(using: container, mode: .activeLifecycle, now: now)
         }
+    }
+
+    @discardableResult
+    func performSourceAtlasPublicPackBackgroundRefresh(
+        now: Date = .now
+    ) async -> SourceAtlasPublicPackLifecycleRefreshResolution? {
+        guard case let .ready(container) = phase else { return nil }
+        let input = SourceAtlasPublicPackLifecycleRefreshInput(
+            mode: .background,
+            networkReachability: .online,
+            checkedAt: now
+        )
+        latestSourceAtlasBackgroundRefreshInput = input
+        let resolution = await container.sourceAtlasLifecycleRefreshService.refreshPublicSourceAtlasPacks(input)
+        latestSourceAtlasBackgroundRefreshResolution = resolution
+        return resolution
     }
 
     func handleNotificationPayload(_ payload: AppNotificationRoutingPayload) {

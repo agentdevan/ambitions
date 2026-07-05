@@ -19,6 +19,9 @@ struct AmbitionsRootScene: Scene {
                     reconcileActiveLaunchState()
                 }
         }
+        .backgroundTask(.appRefresh(SourceAtlasPublicPackBackgroundRefreshTaskIdentifier.publicPackRefresh)) {
+            await bootstrapper.performSourceAtlasPublicPackBackgroundRefresh(now: .now)
+        }
     }
 
     private func reconcileActiveLaunchState() {

@@ -87,6 +87,36 @@ final class AppSourceAtlasLifecycleRefreshSchedulerTests: XCTestCase {
             "Startup maintenance must schedule Source Atlas refresh instead of awaiting network-backed public refresh work."
         )
     }
+
+    func testSwiftUISceneRegistersAllowedSourceAtlasBackgroundRefreshIdentifier() throws {
+        let rootSceneSource = try String(
+            contentsOf: Self.repoRoot().appendingPathComponent("Native/Ambitions/App/AmbitionsRootScene.swift"),
+            encoding: .utf8
+        )
+        let bootstrapperSource = try String(
+            contentsOf: Self.repoRoot().appendingPathComponent("Native/Ambitions/App/AppBootstrapper.swift"),
+            encoding: .utf8
+        )
+
+        XCTAssertTrue(
+            rootSceneSource.contains(".backgroundTask(.appRefresh(SourceAtlasPublicPackBackgroundRefreshTaskIdentifier.publicPackRefresh))")
+        )
+        XCTAssertTrue(rootSceneSource.contains("await bootstrapper.performSourceAtlasPublicPackBackgroundRefresh"))
+        XCTAssertTrue(bootstrapperSource.contains("mode: .background"))
+        XCTAssertTrue(bootstrapperSource.contains("container.sourceAtlasLifecycleRefreshService.refreshPublicSourceAtlasPacks(input)"))
+        XCTAssertFalse(bootstrapperSource.contains("generatedFinalPlan = true"))
+        XCTAssertFalse(bootstrapperSource.contains("generatedFinalSchedule = true"))
+    }
+
+    func testSourceAtlasBackgroundRefreshIdentifierIsConfiguredInInfoPlist() throws {
+        let infoURL = Self.repoRoot().appendingPathComponent("Native/Ambitions/Support/Info.plist")
+        let info = try XCTUnwrap(NSDictionary(contentsOf: infoURL) as? [String: Any])
+        let permittedIdentifiers = try XCTUnwrap(info["BGTaskSchedulerPermittedIdentifiers"] as? [String])
+        let backgroundModes = try XCTUnwrap(info["UIBackgroundModes"] as? [String])
+
+        XCTAssertEqual(permittedIdentifiers, [SourceAtlasPublicPackBackgroundRefreshTaskIdentifier.publicPackRefresh])
+        XCTAssertEqual(backgroundModes, ["fetch"])
+    }
 }
 
 private actor DeferredSourceAtlasLifecycleRefreshService: SourceAtlasPublicPackLifecycleRefreshing {

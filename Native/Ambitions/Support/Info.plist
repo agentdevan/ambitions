@@ -37,6 +37,14 @@
     <false/>
     <key>LSRequiresIPhoneOS</key>
     <true/>
+    <key>BGTaskSchedulerPermittedIdentifiers</key>
+    <array>
+        <string>com.ambitions.source-atlas.public-pack-refresh</string>
+    </array>
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>fetch</string>
+    </array>
     <key>NSSupportsLiveActivities</key>
     <true/>
     <key>NSCalendarsFullAccessUsageDescription</key>
