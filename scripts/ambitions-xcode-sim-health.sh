@@ -258,6 +258,44 @@ find_sim_udid() {
   return 1
 }
 
+xcodebuildmcp_default_simulator_field() {
+  local field="$1"
+  python3 - "$field" <<'PY'
+import pathlib
+import re
+import sys
+
+field = sys.argv[1]
+config_path = pathlib.Path(".xcodebuildmcp/config.yaml")
+if not config_path.exists():
+    raise SystemExit(0)
+
+lines = config_path.read_text(encoding="utf-8").splitlines()
+profile = None
+for line in lines:
+    match = re.match(r"^activeSessionDefaultsProfile:\s*(.+?)\s*$", line)
+    if match:
+        profile = match.group(1).strip().strip("'\"")
+        break
+if not profile:
+    raise SystemExit(0)
+
+in_profile = False
+for raw in lines:
+    if re.match(rf"^  {re.escape(profile)}:\s*$", raw):
+        in_profile = True
+        continue
+    if in_profile and re.match(r"^  [^ ].*:\s*$", raw):
+        break
+    if not in_profile:
+        continue
+    match = re.match(r"^\s{4}([^:]+):\s*(.*?)\s*$", raw)
+    if match and match.group(1) == field:
+        print(match.group(2).strip().strip("'\""))
+        raise SystemExit(0)
+PY
+}
+
 select_udid=""
 select_name=""
 
@@ -265,16 +303,38 @@ if [[ -n "${AMBITIONS_SIM_UDID:-}" ]]; then
   select_udid="${AMBITIONS_SIM_UDID}"
   select_name="$(echo "$DEVICES" | awk -v udid="$select_udid" 'index($0, udid) {line=$0; sub(/^[[:space:]]*/, "", line); marker=index(line, " ("); if (marker > 0) line=substr(line, 1, marker - 1); print line; exit}')"
 elif [[ -n "${AMBITIONS_SIM_NAME:-}" ]]; then
-  select_udid="$(find_sim_udid "${AMBITIONS_SIM_NAME}")"
   select_name="${AMBITIONS_SIM_NAME}"
+  mcp_default_udid="$(xcodebuildmcp_default_simulator_field simulatorId || true)"
+  mcp_default_name="$(xcodebuildmcp_default_simulator_field simulatorName || true)"
+  if [[ "$mcp_default_name" == "$select_name" && -n "$mcp_default_udid" ]] && grep -q "$mcp_default_udid" <<<"$DEVICES"; then
+    select_udid="$mcp_default_udid"
+  else
+    select_udid="$(find_sim_udid "${AMBITIONS_SIM_NAME}")"
+  fi
 else
-  for candidate in "iPhone 17 Pro Max" "iPhone 17 Pro" "iPhone 17" "iPhone 16" "iPhone 15"; do
-    select_udid="$(find_sim_udid "$candidate")"
-    if [[ -n "$select_udid" ]]; then
-      select_name="$candidate"
-      break
+  mcp_default_udid="$(xcodebuildmcp_default_simulator_field simulatorId || true)"
+  if [[ -n "$mcp_default_udid" ]] && grep -q "$mcp_default_udid" <<<"$DEVICES"; then
+    select_udid="$mcp_default_udid"
+    select_name="$(echo "$DEVICES" | awk -v udid="$select_udid" 'index($0, udid) {line=$0; sub(/^[[:space:]]*/, "", line); marker=index(line, " ("); if (marker > 0) line=substr(line, 1, marker - 1); print line; exit}')"
+  fi
+
+  if [[ -z "$select_udid" ]]; then
+    mcp_default_name="$(xcodebuildmcp_default_simulator_field simulatorName || true)"
+    if [[ -n "$mcp_default_name" ]]; then
+      select_udid="$(find_sim_udid "$mcp_default_name")"
+      select_name="$mcp_default_name"
     fi
-  done
+  fi
+
+  if [[ -z "$select_udid" ]]; then
+    for candidate in "iPhone 17 Pro Max" "iPhone 17 Pro" "iPhone 17" "iPhone 16" "iPhone 15"; do
+      select_udid="$(find_sim_udid "$candidate")"
+      if [[ -n "$select_udid" ]]; then
+        select_name="$candidate"
+        break
+      fi
+    done
+  fi
 fi
 
 if [[ -z "$select_udid" ]]; then

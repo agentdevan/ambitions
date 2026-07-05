@@ -4,7 +4,7 @@ set -uo pipefail
 SCHEME="${SCHEME:-Ambitions}"
 DESTINATION="${DESTINATION:-}"
 SIMULATOR_NAME="${SIMULATOR_NAME:-${AMBITIONS_SIM_NAME:-iPhone 17 Pro Max}}"
-SIMULATOR_UDID="${SIMULATOR_UDID:-}"
+SIMULATOR_UDID="${SIMULATOR_UDID:-${AMBITIONS_SIM_UDID:-}}"
 export SIMULATOR_NAME SIMULATOR_UDID
 RUN_STAMP="${RUN_STAMP:-$(date -u +%Y%m%dT%H%M%SZ)}"
 OUTPUT_ROOT="${OUTPUT_ROOT:-artifacts/strict-build-launch/${RUN_STAMP}}"
@@ -27,6 +27,8 @@ select_simulator_udid() {
   python3 - <<'PY'
 import json
 import os
+import pathlib
+import re
 import subprocess
 import sys
 
@@ -35,6 +37,36 @@ explicit = os.environ.get("SIMULATOR_UDID", "").strip()
 if explicit:
     print(explicit)
     raise SystemExit(0)
+
+def xcodebuildmcp_default():
+    config_path = pathlib.Path(".xcodebuildmcp/config.yaml")
+    if not config_path.exists():
+        return {}
+
+    lines = config_path.read_text(encoding="utf-8").splitlines()
+    profile = None
+    for line in lines:
+        match = re.match(r"^activeSessionDefaultsProfile:\s*(.+?)\s*$", line)
+        if match:
+            profile = match.group(1).strip().strip("'\"")
+            break
+    if not profile:
+        return {}
+
+    fields = {}
+    in_profile = False
+    for raw in lines:
+        if re.match(rf"^  {re.escape(profile)}:\s*$", raw):
+            in_profile = True
+            continue
+        if in_profile and re.match(r"^  [^ ].*:\s*$", raw):
+            break
+        if not in_profile:
+            continue
+        match = re.match(r"^\s{4}([^:]+):\s*(.*?)\s*$", raw)
+        if match:
+            fields[match.group(1)] = match.group(2).strip().strip("'\"")
+    return fields
 
 payload = subprocess.check_output(
     ["xcrun", "simctl", "list", "devices", "available", "-j"],
@@ -66,6 +98,17 @@ for runtime, runtime_devices in devices.items():
 if not candidates:
     print("No available iOS simulator found.", file=sys.stderr)
     raise SystemExit(2)
+
+devices_by_udid = {candidate[4]: candidate for candidate in candidates}
+mcp_default = xcodebuildmcp_default()
+mcp_udid = mcp_default.get("simulatorId", "").strip()
+mcp_name = mcp_default.get("simulatorName", "").strip()
+if mcp_udid in devices_by_udid:
+    candidate = devices_by_udid[mcp_udid]
+    candidate_name = candidate[3]
+    if not mcp_name or candidate_name == mcp_name or candidate_name == preferred:
+        print(mcp_udid)
+        raise SystemExit(0)
 
 candidates.sort()
 print(candidates[0][4])
