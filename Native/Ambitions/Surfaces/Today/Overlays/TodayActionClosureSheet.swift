@@ -1,6 +1,8 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
+// Today closure contract: actions preview the runtime mutation, preserve accessibility labels, and show proof/receipt consequences before confirmation.
+
 struct TodayActionClosureSheet: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.dismiss) private var dismiss

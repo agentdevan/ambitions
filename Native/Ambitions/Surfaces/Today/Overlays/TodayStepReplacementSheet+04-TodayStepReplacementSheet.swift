@@ -1,6 +1,8 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
+// Today replacement contract: actions preview the replacement mutation, preserve accessibility labels, and expose proof/receipt review before approval.
+
 struct TodayStepReplacementSheet: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.dismiss) private var dismiss

@@ -152,8 +152,10 @@ struct CaptureComposerSurface: View {
                 onAccept: {
                     Task {
                         await viewModel.createQuickCapture(
+                            commandRouter: shell.commandRouter,
                             captureService: featureFactory.captureService,
-                            goalsService: featureFactory.goalsService
+                            goalsService: featureFactory.goalsService,
+                            source: .globalCaptureComposer
                         )
                     }
                 },

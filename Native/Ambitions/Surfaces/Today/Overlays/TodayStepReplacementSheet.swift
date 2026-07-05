@@ -1,6 +1,8 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
+// Accessibility companion: TodayStepReplacementSheet renders these options with proof, receipt, and VoiceOver review semantics.
+
 struct TodayStepReplacementOptionState: Identifiable, Equatable {
     let candidate: StepCandidate
     let label: String

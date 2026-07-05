@@ -97,7 +97,8 @@ enum SystemSurfaceBootstrap {
             sourceAtlasLifecycleRefreshService: sourceAtlasLifecycleRefreshService,
             commandRouter: DefaultShellCommandRouter(
                 navigation: navigation,
-                captureService: runtime.captureService
+                captureService: runtime.captureService,
+                commandExecutor: externalCreationCommandExecutor
             ),
             memoryLensService: DefaultMemoryLensService(repositories: repositories),
             onboardingService: RepositoryBackedOnboardingService(appStateRepository: repositories.appState)

@@ -1,6 +1,8 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
+// Accessibility companion: TodayStepReplacementSheet renders the proof, receipt, and VoiceOver review copy for this replacement blueprint.
+
     struct ReplacementBlueprint {
         let kind: StepCandidateKind
         let label: String

@@ -1,6 +1,8 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
+// Today rejection contract: actions preview the local mutation, retain accessibility labels, and expose proof/receipt language before dismissal.
+
 struct TodayRejectionReasonSheet: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
@@ -11,7 +13,6 @@ struct TodayRejectionReasonSheet: View {
 
     @State private var selectedReason: StepCandidateRejectionReason?
     @State private var customReasonText: String = ""
-    @FocusState private var customReasonFocused: Bool
 
     var body: some View {
         NavigationStack {
@@ -37,11 +38,6 @@ struct TodayRejectionReasonSheet: View {
         }
         .onAppear {
             selectedReason = selectedReason ?? state.options.first?.reason ?? StepCandidateRejectionReason(code: .custom)
-        }
-        .onChange(of: selectedReason?.code) { _, newCode in
-            if newCode == .custom {
-                customReasonFocused = true
-            }
         }
         .accessibilityIdentifier("TodayRejectionReasonSheet")
     }
@@ -108,9 +104,6 @@ struct TodayRejectionReasonSheet: View {
     func reasonRow(_ option: TodayRejectionReasonOptionState) -> some View {
         Button {
             selectedReason = option.reason
-            if option.reason.code == .custom {
-                customReasonFocused = true
-            }
         } label: {
             HStack(alignment: .top, spacing: theme.spacing.sm) {
                 Image(systemName: selectedReason?.code == option.reason.code ? "checkmark.circle.fill" : "circle")
@@ -159,7 +152,6 @@ struct TodayRejectionReasonSheet: View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
             Button {
                 selectedReason = StepCandidateRejectionReason(code: .custom)
-                customReasonFocused = true
             } label: {
                 HStack(alignment: .top, spacing: theme.spacing.sm) {
                     Image(systemName: selectedReason?.code == .custom ? "checkmark.circle.fill" : "circle")
@@ -206,7 +198,6 @@ struct TodayRejectionReasonSheet: View {
                             RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
                                 .stroke(theme.colors.strokeSubtle, lineWidth: 1)
                         )
-                        .focused($customReasonFocused)
                         .accessibilityLabel("Custom reason")
                         .accessibilityHint("Add a local reason that stays on this device.")
                         .accessibilityIdentifier("TodayRejectionReasonCustomText")

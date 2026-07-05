@@ -1,6 +1,8 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
+// Accessibility companion: TodayStepReplacementSheet owns proof, receipt, and VoiceOver review semantics for this state factory.
+
 extension TodayStepReplacementSheetState {
     static func make(
         from hero: DayRailHeroStepState,

@@ -54,7 +54,11 @@ extension AmbitionsCommandExecutor {
             var metadata: [String: String] = [
                 "captureID": capture.id,
                 "commandKind": command.kind.rawValue,
-                "commandSource": command.source.rawValue
+                "commandSource": command.source.rawValue,
+                "captureSourceType": sourceType.rawValue,
+                "captureRoute": capture.route.rawValue,
+                "captureMaturityState": capture.maturityState.rawValue,
+                "captureLocalOnly": String(capture.localOnly)
             ]
             if let smartAttachment {
                 metadata["smartAttachmentResult"] = smartAttachment.resultState.rawValue

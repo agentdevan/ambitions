@@ -592,6 +592,8 @@ Ambitions/
         CapturePromotionTransaction/
         CaptureCorrectionLedger/
         CaptureDirectLookupIndex/
+        CaptureComposerEntryContract.swift
+        CaptureMaturityState.swift
 
       Inspection/
         EventLedger/
@@ -865,6 +867,7 @@ Ambitions/
       CaptureInteractions.swift
       CaptureAccessibility.swift
       CaptureInputModel.swift
+      CaptureCopyPolicy.swift
       CaptureRoutingPreview.swift
       Projection/
         CaptureLens.swift

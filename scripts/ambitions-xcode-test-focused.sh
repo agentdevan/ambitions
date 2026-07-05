@@ -481,6 +481,11 @@ if command -v scripts/ambitions-xcode-result-extract.sh >/dev/null 2>&1; then
   scripts/ambitions-xcode-result-extract.sh --result "$RESULT_BUNDLE" --output-dir "$SUMMARY_DIR/$BATCH/$RUN_ID/extract" || true
 fi
 
+result_bundle_corrupt=false
+if [[ -e "$RESULT_BUNDLE" && ! -f "$RESULT_BUNDLE/Info.plist" ]]; then
+  result_bundle_corrupt=true
+fi
+
 if [[ "$status" -eq 124 ]]; then
   detected="$(classify_log_failure)"
   if [[ "$detected" != "unknown" && -n "$detected" ]]; then
@@ -514,6 +519,14 @@ PY
 )"
 xcode_observer_seconds="$(extract_xcode_observer_seconds "$LOG_FILE")"
 xctest_wall_seconds="$(extract_xctest_wall_seconds "$LOG_FILE")"
+if [[ "$result_bundle_corrupt" == "true" && "$executed_tests" =~ ^[0-9]+$ && "$executed_tests" -eq 0 ]]; then
+  status=65
+  if [[ -z "$(grep -E "Test Suite|Test Case|Testing started" "$LOG_FILE" 2>/dev/null || true)" ]]; then
+    classification="mcp_timeout_no_test_log"
+  else
+    classification="corrupt_xcresult"
+  fi
+fi
 
 cat > "$SUMMARY_FILE" <<JSON
 {

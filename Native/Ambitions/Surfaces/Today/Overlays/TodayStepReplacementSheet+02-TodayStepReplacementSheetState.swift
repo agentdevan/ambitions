@@ -1,6 +1,8 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
+// Accessibility companion: TodayStepReplacementSheet renders this state with proof, receipt, and VoiceOver review semantics.
+
 struct TodayStepReplacementSheetState: Identifiable, Equatable {
     let id: String
     let title: String

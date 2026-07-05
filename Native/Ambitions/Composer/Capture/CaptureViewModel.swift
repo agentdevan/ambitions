@@ -1,6 +1,8 @@
 import Foundation
 import Observation
 
+// AMBITIONS-QUALITY-EXTRACTION: CaptureViewModel still carries direct-service editing actions plus the AMB-1674 command-routed save path. A future Capture view-model slice should separate command save orchestration from post-save edit actions.
+
 struct CaptureViewState: Sendable {
     let captures: [Capture]
     let activeGoalOptions: [CaptureGoalOption]
@@ -177,6 +179,53 @@ final class CaptureViewModel {
         } catch {
             draftError = error.localizedDescription
         }
+    }
+
+    func createQuickCapture(
+        commandRouter: any ShellCommandRouting,
+        captureService: any CaptureServicing,
+        goalsService: any GoalsServicing,
+        source: ShellCommandEntrySource = .globalCaptureComposer,
+        now: Date = .now
+    ) async {
+        let text = draftText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard text.isEmpty == false else {
+            draftError = "Write one real thing first."
+            return
+        }
+
+        let decision = draftRouteService.draftRouteDecision(
+            for: text,
+            sourceType: appShellCaptureSourceType(for: source),
+            sourceSurface: source.displayTitle,
+            selectedDraftRouteType: selectedDraftRouteType,
+            candidates: smartAttachmentCandidates()
+        )
+        let result = await commandRouter.execute(
+            intent: .quickCapture,
+            text: text,
+            goalID: nil,
+            captureID: nil,
+            source: source,
+            selectedCaptureRouteType: selectedDraftRouteType ?? decision.routeType,
+            now: now
+        )
+
+        guard let title = result.title, result.createdCaptureID != nil else {
+            draftError = result.title ?? "Capture could not be saved."
+            return
+        }
+
+        draftText = ""
+        draftError = nil
+        selectedDraftRouteType = nil
+        draftRoutePreview = nil
+        isProposalPresented = false
+        actionMessage = CaptureActionMessage(
+            title: title,
+            body: "Saved locally through Capture. Placement stays editable."
+        )
+        await load(captureService: captureService, goalsService: goalsService)
     }
 
     func saveToNeedsPlace(id: String, captureService: any CaptureServicing, goalsService: any GoalsServicing, now: Date = .now) async {

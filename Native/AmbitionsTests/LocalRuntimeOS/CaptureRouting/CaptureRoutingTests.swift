@@ -17,7 +17,9 @@ final class CaptureRoutingTests: XCTestCase {
             "CaptureDirectLookupIndex.swift",
             "CaptureRouting.swift",
             "CaptureDurableIntakePipeline.swift",
-            "CaptureRouteCommandMapping.swift"
+            "CaptureRouteCommandMapping.swift",
+            "CaptureComposerEntryContract.swift",
+            "CaptureMaturityState.swift"
         ]
 
         for file in requiredFiles {

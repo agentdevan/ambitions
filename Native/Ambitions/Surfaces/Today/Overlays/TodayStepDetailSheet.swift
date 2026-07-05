@@ -1,6 +1,8 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
+// Today step detail contract: actions route through the inline mutation handler, preserve accessibility labels, and expose proof/receipt context before dismissal.
+
 struct TodayStepDetailSheet: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.dismiss) private var dismiss

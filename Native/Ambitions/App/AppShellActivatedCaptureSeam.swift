@@ -230,16 +230,22 @@ struct AppShellActivatedCaptureSeam: View {
             selectedDraftRouteType: selectedDraftRouteType
         )
         saveState = .saving
-        do {
-            _ = try await appContainer.captureService.createCapture(
-                decision.createCaptureRequest(rawText: rawText, sourceType: sourceType),
-                now: appContainer.clock.now
-            )
-            saveState = .saved("Saved locally.")
+        let result = await appContainer.commandRouter.execute(
+            intent: .quickCapture,
+            text: rawText,
+            goalID: overlay.goalID,
+            captureID: overlay.captureID,
+            source: overlay.entrySource,
+            selectedCaptureRouteType: selectedDraftRouteType ?? decision.routeType,
+            now: appContainer.clock.now
+        )
+
+        if let title = result.title, result.createdCaptureID != nil {
+            saveState = .saved(title)
             selectedDraftRouteType = nil
             isProposalPresented = false
-        } catch {
-            saveState = .error(error.localizedDescription)
+        } else {
+            saveState = .error(result.title ?? "Capture could not be saved.")
         }
     }
 

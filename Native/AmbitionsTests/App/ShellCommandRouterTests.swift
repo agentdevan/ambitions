@@ -42,7 +42,7 @@ final class ShellCommandRouterTests: XCTestCase {
         XCTAssertEqual(result.pipelineTrace?.commandValidation.state, .satisfied)
         XCTAssertEqual(result.pipelineTrace?.runtimeMutation.state, .satisfied)
         XCTAssertEqual(result.pipelineTrace?.visibleMutation.state, .satisfied)
-        XCTAssertEqual(result.pipelineTrace?.proofReceipt.state, .unavailable)
+        XCTAssertEqual(result.pipelineTrace?.proofReceipt.state, .satisfied)
         XCTAssertEqual(result.pipelineTrace?.accessibilityAnnouncement.state, .satisfied)
         XCTAssertEqual(result.pipelineTrace?.fallbackUndo.state, .satisfied)
         XCTAssertEqual(result.pipelineTrace?.shellRouteChange.state, .notApplicable)

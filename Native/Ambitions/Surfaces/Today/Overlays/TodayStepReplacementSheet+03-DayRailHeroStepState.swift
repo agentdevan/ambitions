@@ -1,6 +1,8 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
+// Accessibility companion: TodayStepReplacementSheet uses this copy for proof, receipt, and VoiceOver review summaries.
+
 extension DayRailHeroStepState {
     var visibleCopy: String {
         (

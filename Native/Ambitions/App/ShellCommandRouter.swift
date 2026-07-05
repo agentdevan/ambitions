@@ -1,5 +1,7 @@
 import Foundation
 
+// AMBITIONS-QUALITY-EXTRACTION: This router predates the 400-line guard. AMB-1674 only converts quick Capture to the shared command path; a later shell-slice should extract non-Capture intent handlers without changing route behavior.
+
 struct ShellCommandExecutionResult: Sendable, Equatable {
     let title: String?
     let destination: ShellCommandDestination?
@@ -44,6 +46,7 @@ protocol ShellCommandRouting: AnyObject {
         goalID: String?,
         captureID: String?,
         source: ShellCommandEntrySource,
+        selectedCaptureRouteType: SmartAttachmentRouteType?,
         now: Date
     ) async -> ShellCommandExecutionResult
 }
@@ -57,16 +60,17 @@ extension ShellCommandRouting {
 @MainActor
 final class DefaultShellCommandRouter: ShellCommandRouting {
     private let navigation: StageStore
-    private let captureService: any CaptureServicing
+    private let commandExecutor: any CommandExecuting
     private let smartAttachmentAdapter: SmartAttachmentCaptureAdapter
 
     init(
         navigation: StageStore,
         captureService: any CaptureServicing,
-        smartAttachmentAdapter: SmartAttachmentCaptureAdapter = SmartAttachmentCaptureAdapter()
+        smartAttachmentAdapter: SmartAttachmentCaptureAdapter = SmartAttachmentCaptureAdapter(),
+        commandExecutor: (any CommandExecuting)? = nil
     ) {
         self.navigation = navigation
-        self.captureService = captureService
+        self.commandExecutor = commandExecutor ?? AmbitionsCommandExecutor(captureService: captureService)
         self.smartAttachmentAdapter = smartAttachmentAdapter
     }
 
@@ -170,6 +174,7 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
         goalID: String? = nil,
         captureID: String? = nil,
         source: ShellCommandEntrySource,
+        selectedCaptureRouteType: SmartAttachmentRouteType? = nil,
         now: Date = .now
     ) async -> ShellCommandExecutionResult {
         switch intent {
@@ -189,55 +194,79 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                 )
             }
 
-            do {
-                let sourceType = appShellCaptureSourceType(for: source)
-                let decision = smartAttachmentAdapter.decision(
+            let sourceType = appShellCaptureSourceType(for: source)
+            let decision = smartAttachmentAdapter.decision(
+                rawText: trimmed,
+                sourceType: sourceType,
+                sourceSurface: source.displayTitle,
+                selectedRouteType: selectedCaptureRouteType
+            ) ?? fallbackDecision(for: trimmed, source: source)
+            let command = AmbitionsCommand(
+                id: DomainIdentifier.prefixed("shell.capture.command"),
+                kind: .quickCapture,
+                source: ambitionsCommandSource(for: source),
+                payload: AmbitionsCommandPayload(
                     rawText: trimmed,
-                    sourceType: sourceType,
+                    destinationRoute: decision.result.captureRoute.rawValue,
+                    metadata: captureCommandMetadata(
+                        sourceType: sourceType,
+                        routeType: decision.routeType,
+                        source: source
+                    )
+                ),
+                createdAt: DomainTimestamp.string(from: now),
+                actor: .user,
+                sourceSurface: source.displayTitle,
+                privacy: .privateUserText
+            )
+            let commandResult = await commandExecutor.execute(
+                command,
+                context: CommandExecutionContext(
+                    now: now,
+                    actor: .user,
                     sourceSurface: source.displayTitle
                 )
-                let capture = try await captureService.createCapture(
-                    (decision ?? fallbackDecision(for: trimmed, source: source)).createCaptureRequest(
-                        rawText: trimmed,
-                        sourceType: sourceType
-                    ),
-                    now: now
-                )
-                let destination = captureComposerDestination(source: source)
-                navigation.openCaptureComposer(source: source)
-                navigation.recordRoute(
-                    title: decision?.receiptLine ?? "Saved to Needs a Place",
-                    source: source,
-                    presentationContext: .quickCapture,
-                    destination: destination,
-                    receiptBody: "Saved locally in Capture. Placement stays editable."
-                )
+            )
+            guard commandResult.status == .succeeded, let captureID = commandResult.target?.captureID else {
                 return ShellCommandExecutionResult(
-                    title: decision?.receiptLine ?? "Saved to Needs a Place",
-                    destination: destination,
-                    createdCaptureID: capture.id,
+                    title: commandResult.summary,
                     pipelineTrace: intent.productRuntimePipelineTrace(
                         commandValidation: .satisfied("Capture save command has non-empty user text."),
-                        runtimeMutation: .satisfied("Capture service created local capture \(capture.id)."),
-                        visibleMutation: .satisfied("Stage opened the global Capture composer after save."),
-                        proofReceipt: .unavailable("Shell router records continuity, but typed MutationProof/MutationReceipt is not attached at this boundary."),
-                        accessibility: .satisfied("Capture composer opens with an accessible route label."),
-                        fallbackUndo: .satisfied("Placement remains editable if the route proposal is wrong.")
-                    )
-                )
-            } catch {
-                return ShellCommandExecutionResult(
-                    title: error.localizedDescription,
-                    pipelineTrace: intent.productRuntimePipelineTrace(
-                        commandValidation: .satisfied("Capture save command has non-empty user text."),
-                        runtimeMutation: .blocked("Capture service rejected the local save."),
-                        visibleMutation: .blocked("No saved Capture mutation is claimed after service failure."),
-                        proofReceipt: .unavailable("No proof or receipt is created when capture persistence fails."),
+                        runtimeMutation: .blocked("Shared command executor did not commit a Capture mutation."),
+                        visibleMutation: .blocked("No saved Capture mutation is claimed after command failure."),
+                        proofReceipt: .unavailable("No proof or receipt is created when command execution fails."),
                         accessibility: .satisfied("Failure returns a user-facing fallback message."),
                         fallbackUndo: .satisfied("The previous Capture state remains unchanged.")
                     )
                 )
             }
+
+            let destination = captureComposerDestination(source: source)
+            if navigation.isActivatedCaptureComposerVisible == false {
+                navigation.openCaptureComposer(source: source)
+            }
+            navigation.recordRoute(
+                title: commandResult.summary,
+                source: source,
+                presentationContext: .quickCapture,
+                destination: destination,
+                receiptBody: "Saved locally in Capture through the shared command path. Placement stays editable."
+            )
+            return ShellCommandExecutionResult(
+                title: commandResult.summary,
+                destination: destination,
+                createdCaptureID: captureID,
+                pipelineTrace: intent.productRuntimePipelineTrace(
+                    commandValidation: .satisfied("Capture save command has non-empty user text."),
+                    runtimeMutation: .satisfied("Shared command executor created local capture \(captureID)."),
+                    visibleMutation: .satisfied("Stage opened the global Capture composer after save."),
+                    proofReceipt: commandResult.metadata["commandReceiptID"] == nil
+                        ? .unavailable("Command executor returned no command receipt metadata.")
+                        : .satisfied("Command executor persisted receipt \(commandResult.metadata["commandReceiptID"] ?? "")."),
+                    accessibility: .satisfied("Capture composer opens with an accessible route label."),
+                    fallbackUndo: .satisfied("Placement remains editable if the route proposal is wrong.")
+                )
+            )
         case .newGoal:
             presentCreateGoal(source: source)
             return ShellCommandExecutionResult(
@@ -352,5 +381,41 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
             sourceSurface: source.displayTitle,
             selectedRouteType: .idea
         )!
+    }
+
+    private func captureCommandMetadata(
+        sourceType: CaptureSourceType,
+        routeType: SmartAttachmentRouteType,
+        source: ShellCommandEntrySource
+    ) -> [String: String] {
+        [
+            ExternalCreationCommandMetadataKey.sourceType: sourceType.rawValue,
+            "captureEntryPoint": source.rawValue,
+            "captureRouteType": routeType.rawValue,
+            "captureCommandPath": "shell_command_router"
+        ]
+    }
+
+    private func ambitionsCommandSource(for source: ShellCommandEntrySource) -> AmbitionsCommandSource {
+        switch source {
+        case .todayQuickCapture:
+            return .today
+        case .goalsCreate, .goalsQuickCapture:
+            return .goals
+        case .timeQuickCapture:
+            return .time
+        case .youQuickCapture:
+            return .you
+        case .appIntent:
+            return .appIntent
+        case .notification:
+            return .notification
+        case .widget:
+            return .widget
+        case .deepLink, .shareExtension:
+            return .deepLink
+        case .shellCompose, .shellUtility, .globalCaptureComposer, .external:
+            return .capture
+        }
     }
 }
