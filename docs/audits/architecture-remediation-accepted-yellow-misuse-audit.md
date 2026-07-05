@@ -7,6 +7,15 @@ Project: Architecture Simplification + Flagship Readiness Remediation
 
 Linear repair applied: AMB-1666, AMB-1667, AMB-1668, and AMB-1719 were moved to `Needs Repair`; AMB-1730, AMB-1731, and AMB-1732 were created as blocking repair leaves for AMB-1669 and AMB-1670.
 
+July 5 live-status reconciliation: this July 2 audit remains a retained
+policy/control guard, not the current live Linear Accepted Yellow ledger. Use
+`docs/linear/reconciliation/2026-07-05-amb-1760-accepted-yellow-follow-up-ledger.md`
+and its paired JSON for the current live Accepted Yellow set. That AMB-1760
+ledger records live Linear returning 20 Accepted Yellow issues, including
+`AMB-1668` as Accepted Yellow for source/runtime parent scope only after
+`AMB-1732`, with device/system-surface/release proof ceilings still blocking
+Green or release-readiness claims.
+
 ## Core Rule
 
 Accepted Yellow is forbidden for incomplete required source/runtime/test remediation scope.
