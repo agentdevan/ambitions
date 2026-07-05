@@ -11,7 +11,6 @@ final class DesignSystemFoundationsCanonicalOwnershipTests: XCTestCase {
             "Native/Ambitions/DesignSystem/Foundations/AmbitionsTypography.swift",
             "Native/Ambitions/DesignSystem/Foundations/AmbitionsSpacing.swift",
             "Native/Ambitions/DesignSystem/Foundations/AmbitionsMaterial.swift",
-            "Native/Ambitions/DesignSystem/Foundations/AmbitionsLighting.swift",
             "Native/Ambitions/DesignSystem/Foundations/AmbitionsDepth.swift",
             "Native/Ambitions/DesignSystem/Foundations/AmbitionsMotion.swift",
             "Native/Ambitions/DesignSystem/Foundations/AmbitionsHaptics.swift",
@@ -52,12 +51,12 @@ final class DesignSystemFoundationsCanonicalOwnershipTests: XCTestCase {
             "AmbitionsTypography",
             "AmbitionsSpacing",
             "AmbitionsMaterial",
-            "AmbitionsLighting",
             "AmbitionsDepth",
             "AmbitionsMotion",
         ] {
             XCTAssertTrue(source.contains(owner), "StartHereSurface must consume \(owner)")
         }
+        XCTAssertFalse(source.contains("AmbitionsLighting"))
     }
 
     func testPrimaryActionButtonUsesCanonicalHapticOwner() throws {

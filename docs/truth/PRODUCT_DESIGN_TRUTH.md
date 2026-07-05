@@ -792,7 +792,6 @@ Ambitions/
       AmbitionsTypography.swift
       AmbitionsSpacing.swift
       AmbitionsMaterial.swift
-      AmbitionsLighting.swift
       AmbitionsDepth.swift
       AmbitionsMotion.swift
       AmbitionsHaptics.swift

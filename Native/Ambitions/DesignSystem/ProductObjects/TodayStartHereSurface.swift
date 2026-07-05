@@ -20,7 +20,6 @@ struct StartHereSurface: View {
         let typography = AmbitionsTypography(theme: theme)
         let spacing = AmbitionsSpacing(theme: theme)
         let material = AmbitionsMaterial(theme: theme)
-        let lighting = AmbitionsLighting(theme: theme)
         let depth = AmbitionsDepth(theme: theme)
         let motion = AmbitionsMotion(theme: theme)
 
@@ -75,13 +74,13 @@ struct StartHereSurface: View {
                 .fill(colors.primaryObjectFill)
 
                 material.startHereWash
-                    .blendMode(lighting.startHereWashBlendMode)
+                    .blendMode(.screen)
             }
         )
         .overlay(
             HStack(spacing: 0) {
                 Rectangle()
-                    .fill(colors.startHereAccent.opacity(lighting.startHereAccentOpacity))
+                    .fill(colors.startHereAccent.opacity(theme.mode == .dark ? 0.86 : 0.72))
                     .frame(width: 3)
                     .accessibilityHidden(true)
                 Spacer(minLength: 0)
