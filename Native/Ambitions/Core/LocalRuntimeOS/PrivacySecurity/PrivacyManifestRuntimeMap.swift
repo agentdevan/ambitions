@@ -22,10 +22,47 @@ struct PrivacyManifestRuntimeFacts: Codable, Sendable, Equatable {
     }
 }
 
+struct PrivacyManifestAccessedAPIEntry: Identifiable, Codable, Sendable, Equatable, Hashable {
+    let id: String
+    let apiType: String
+    let reasonCodes: [String]
+    let sourceReferences: [String]
+    let localOnlyJustification: String
+}
+
+struct PrivacyManifestDataAndAccessedAPIInventory: Codable, Sendable, Equatable, Hashable {
+    let manifestPath: String
+    let collectedDataTypes: [String]
+    let accessedAPITypes: [PrivacyManifestAccessedAPIEntry]
+    let trackingEnabled: Bool
+    let legalApprovalClaimed: Bool
+    let appStoreReadinessClaimed: Bool
+
+    static let current = PrivacyManifestDataAndAccessedAPIInventory(
+        manifestPath: PrivacyManifestRuntimeMap.expectedManifestPath,
+        collectedDataTypes: [],
+        accessedAPITypes: [
+            PrivacyManifestAccessedAPIEntry(
+                id: "privacy-manifest.accessed-api.file-timestamp.prior-store-sidecar-size",
+                apiType: "NSPrivacyAccessedAPICategoryFileTimestamp",
+                reasonCodes: ["C617.1"],
+                sourceReferences: [
+                    "Native/Ambitions/Core/LocalRuntimeOS/Storage/ObjectStoreSwiftDataLegacyMigration.swift:66"
+                ],
+                localOnlyJustification: "Reads app-owned prior SwiftData sidecar file metadata inside local/app-group storage to remove empty migrated files; no derived information is sent off-device."
+            )
+        ],
+        trackingEnabled: false,
+        legalApprovalClaimed: false,
+        appStoreReadinessClaimed: false
+    )
+}
+
 enum PrivacyManifestRuntimeIssue: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
     case manifestPathMismatch = "manifest_path_mismatch"
     case trackingEnabled = "tracking_enabled"
     case collectedDataTypesDeclared = "collected_data_types_declared"
+    case accessedAPITypeCountMismatch = "accessed_api_type_count_mismatch"
     case nonLocalRuntimeBoundary = "non_local_runtime_boundary"
 }
 
@@ -55,6 +92,9 @@ struct PrivacyManifestRuntimeMap: Sendable, Equatable, Hashable {
         }
         if facts.collectedDataTypeCount > 0 {
             issues.append(.collectedDataTypesDeclared)
+        }
+        if facts.accessedAPITypeCount != PrivacyManifestDataAndAccessedAPIInventory.current.accessedAPITypes.count {
+            issues.append(.accessedAPITypeCountMismatch)
         }
         if facts.runtimeBoundary.isLocalOnly == false {
             issues.append(.nonLocalRuntimeBoundary)

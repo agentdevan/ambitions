@@ -1,5 +1,7 @@
 import Foundation
 
+// AMBITIONS-QUALITY-EXTRACTION: AMB-1804 updates only privacy-manifest alignment constants in this existing release report; extract the report before future broad release/privacy edits.
+
 enum AFEP023FieldCategory: String, CaseIterable, Sendable, Equatable {
     case today = "Today"
     case goals = "Goals"
@@ -109,7 +111,7 @@ struct AFEP023ProtectedStorageArchitecturePacket: Sendable, Equatable {
             storageClassPolicies.allSatisfy { $0.simulatorSafe && $0.runtimeWiringEnabled == false } &&
             privacyManifestAlignment.trackingDeclared == false &&
             privacyManifestAlignment.collectedDataTypesDeclared == 0 &&
-            privacyManifestAlignment.accessedAPITypesDeclared == 0 &&
+            privacyManifestAlignment.accessedAPITypesDeclared == PrivacyManifestDataAndAccessedAPIInventory.current.accessedAPITypes.count &&
             privacyManifestAlignment.alignedWithCurrentManifest &&
             rollbackGate.available &&
             rollbackGate.restoresConservativeAFRIPolicy &&
@@ -337,9 +339,9 @@ enum ReleasePrivacyProtectedStorageReport {
         manifestPath: "Native/Ambitions/Resources/PrivacyInfo.xcprivacy",
         trackingDeclared: false,
         collectedDataTypesDeclared: 0,
-        accessedAPITypesDeclared: 0,
+        accessedAPITypesDeclared: PrivacyManifestDataAndAccessedAPIInventory.current.accessedAPITypes.count,
         alignedWithCurrentManifest: true,
-        evidenceSummary: "The checked-in manifest currently declares no tracking, no collected data, and no accessed API reasons."
+        evidenceSummary: "The checked-in manifest currently declares no tracking, no collected data, and one accessed API reason for app-owned local file metadata."
     )
 
     static let rollbackGate = AFEP023RollbackGate(

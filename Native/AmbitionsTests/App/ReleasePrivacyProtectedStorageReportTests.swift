@@ -33,14 +33,18 @@ final class ReleasePrivacyProtectedStorageReportTests: XCTestCase {
         let manifest = try loadPrivacyManifest()
         let packet = ReleasePrivacyProtectedStorageReport.packet
         let alignment = packet.privacyManifestAlignment
+        let accessedAPITypes = manifest["NSPrivacyAccessedAPITypes"] as? [[String: Any]] ?? []
+        let fileTimestampAPI = try XCTUnwrap(accessedAPITypes.first)
 
         XCTAssertEqual(manifest["NSPrivacyTracking"] as? Bool, false)
         XCTAssertEqual((manifest["NSPrivacyCollectedDataTypes"] as? [Any])?.count, 0)
-        XCTAssertEqual((manifest["NSPrivacyAccessedAPITypes"] as? [Any])?.count, 0)
+        XCTAssertEqual(accessedAPITypes.count, 1)
+        XCTAssertEqual(fileTimestampAPI["NSPrivacyAccessedAPIType"] as? String, "NSPrivacyAccessedAPICategoryFileTimestamp")
+        XCTAssertEqual(fileTimestampAPI["NSPrivacyAccessedAPITypeReasons"] as? [String], ["C617.1"])
         XCTAssertTrue(alignment.alignedWithCurrentManifest)
         XCTAssertEqual(alignment.trackingDeclared, false)
         XCTAssertEqual(alignment.collectedDataTypesDeclared, 0)
-        XCTAssertEqual(alignment.accessedAPITypesDeclared, 0)
+        XCTAssertEqual(alignment.accessedAPITypesDeclared, PrivacyManifestDataAndAccessedAPIInventory.current.accessedAPITypes.count)
         XCTAssertTrue(alignment.evidenceSummary.contains("no tracking"))
         XCTAssertTrue(packet.noCloudBackendDependency)
         XCTAssertTrue(packet.noExternalRawProjection)

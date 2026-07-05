@@ -221,7 +221,7 @@ final class PrivacySecurityTests: XCTestCase {
             PrivacyManifestRuntimeFacts(
                 trackingEnabled: false,
                 collectedDataTypeCount: 0,
-                accessedAPITypeCount: 0
+                accessedAPITypeCount: PrivacyManifestDataAndAccessedAPIInventory.current.accessedAPITypes.count
             )
         )
 
@@ -229,6 +229,22 @@ final class PrivacySecurityTests: XCTestCase {
         XCTAssertTrue(decision.localOnlyRuntime)
         XCTAssertFalse(decision.trackingEnabled)
         XCTAssertEqual(decision.collectedDataTypeCount, 0)
+        XCTAssertEqual(decision.accessedAPITypeCount, 1)
+    }
+
+    func testPrivacyManifestInventoryCapturesFileTimestampReasonWithoutReleaseClaims() throws {
+        let inventory = PrivacyManifestDataAndAccessedAPIInventory.current
+        let entry = try XCTUnwrap(inventory.accessedAPITypes.first)
+
+        XCTAssertEqual(inventory.manifestPath, PrivacyManifestRuntimeMap.expectedManifestPath)
+        XCTAssertFalse(inventory.trackingEnabled)
+        XCTAssertTrue(inventory.collectedDataTypes.isEmpty)
+        XCTAssertFalse(inventory.legalApprovalClaimed)
+        XCTAssertFalse(inventory.appStoreReadinessClaimed)
+        XCTAssertEqual(entry.apiType, "NSPrivacyAccessedAPICategoryFileTimestamp")
+        XCTAssertEqual(entry.reasonCodes, ["C617.1"])
+        XCTAssertTrue(entry.sourceReferences.contains("Native/Ambitions/Core/LocalRuntimeOS/Storage/ObjectStoreSwiftDataLegacyMigration.swift:66"))
+        XCTAssertTrue(entry.localOnlyJustification.contains("no derived information is sent off-device"))
     }
 
     func testPrivacyExternalBoundaryGateEvaluatesEgressExportDiagnosticsAndFiles() {

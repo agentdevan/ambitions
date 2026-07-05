@@ -200,12 +200,16 @@ final class LocalOnlyProofHarnessTests: XCTestCase {
         XCTAssertEqual(result.receipt.sideEffectPolicy, AppUnitOfWorkReceipt.noExternalSideEffects)
     }
 
-    func testPrivacyManifestRemainsEmptyForCollectedDataAndAccessedAPIs() throws {
+    func testPrivacyManifestDeclaresNoCollectedDataAndOnlyInventoriedAccessedAPIs() throws {
         let privacyManifest = try loadPrivacyManifest()
+        let accessedAPITypes = privacyManifest["NSPrivacyAccessedAPITypes"] as? [[String: Any]] ?? []
+        let fileTimestampAPI = try XCTUnwrap(accessedAPITypes.first)
 
         XCTAssertEqual(privacyManifest["NSPrivacyTracking"] as? Bool, false)
         XCTAssertTrue((privacyManifest["NSPrivacyCollectedDataTypes"] as? [Any] ?? []).isEmpty)
-        XCTAssertTrue((privacyManifest["NSPrivacyAccessedAPITypes"] as? [Any] ?? []).isEmpty)
+        XCTAssertEqual(accessedAPITypes.count, 1)
+        XCTAssertEqual(fileTimestampAPI["NSPrivacyAccessedAPIType"] as? String, "NSPrivacyAccessedAPICategoryFileTimestamp")
+        XCTAssertEqual(fileTimestampAPI["NSPrivacyAccessedAPITypeReasons"] as? [String], ["C617.1"])
     }
 }
 
