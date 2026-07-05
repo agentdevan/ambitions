@@ -5,7 +5,8 @@ REPO_ROOT="/Users/devan/Documents/GitHub/ambitions"
 cd "${REPO_ROOT}"
 
 export DEVELOPER_DIR="${DEVELOPER_DIR:-/Applications/Xcode.app/Contents/Developer}"
-export XCODEBUILDMCP_ENABLED_WORKFLOWS="${XCODEBUILDMCP_ENABLED_WORKFLOWS:-session-management,project-discovery,simulator-management,simulator,ui-automation,debugging,utilities,swift-package}"
+export XCODEBUILDMCP_ENABLED_WORKFLOWS="${XCODEBUILDMCP_ENABLED_WORKFLOWS:-session-management,project-discovery,simulator-management,simulator,ui-automation,utilities,swift-package}"
+export XCODEBUILDMCP_DISABLE_XCODE_AUTO_SYNC="${XCODEBUILDMCP_DISABLE_XCODE_AUTO_SYNC:-true}"
 export XCODEBUILDMCP_SENTRY_DISABLED="${XCODEBUILDMCP_SENTRY_DISABLED:-true}"
 
 terminate_matching_peers() {
@@ -25,7 +26,7 @@ terminate_matching_peers() {
   done <<< "${pids}"
 }
 
-if [[ "${AMBITIONS_XCODEBUILDMCP_CLEAN_PEERS:-1}" == "1" ]]; then
+if [[ "${AMBITIONS_XCODEBUILDMCP_CLEAN_PEERS:-0}" == "1" ]]; then
   terminate_matching_peers TERM "xcodebuildmcp@2\\.6\\.2 mcp"
   terminate_matching_peers TERM "node .*/xcodebuildmcp mcp"
   sleep 1

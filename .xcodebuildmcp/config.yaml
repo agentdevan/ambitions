@@ -1,15 +1,14 @@
 schemaVersion: 1
 enabledWorkflows:
-  - coverage
-  - debugging
-  - device
+  - session-management
   - project-discovery
   - simulator
   - simulator-management
   - swift-package
   - ui-automation
   - utilities
-  - xcode-ide
+disableXcodeAutoSync: true
+sentryDisabled: true
 sessionDefaults: {}
 sessionDefaultsProfiles:
   ambitions-ios:
