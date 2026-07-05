@@ -8,6 +8,10 @@ export DEVELOPER_DIR="${DEVELOPER_DIR:-/Applications/Xcode.app/Contents/Develope
 export XCODEBUILDMCP_ENABLED_WORKFLOWS="${XCODEBUILDMCP_ENABLED_WORKFLOWS:-session-management,project-discovery,simulator-management,simulator,ui-automation,utilities,swift-package}"
 export XCODEBUILDMCP_DISABLE_XCODE_AUTO_SYNC="${XCODEBUILDMCP_DISABLE_XCODE_AUTO_SYNC:-true}"
 export XCODEBUILDMCP_SENTRY_DISABLED="${XCODEBUILDMCP_SENTRY_DISABLED:-true}"
+export AMBITIONS_XCODEBUILDMCP_CLEAN_PEERS="${AMBITIONS_XCODEBUILDMCP_CLEAN_PEERS:-1}"
+
+XCODEBUILDMCP_PACKAGE_VERSION="${XCODEBUILDMCP_PACKAGE_VERSION:-2.6.2}"
+PEER_CLEANUP_GRACE_SECONDS="${AMBITIONS_XCODEBUILDMCP_PEER_CLEANUP_GRACE_SECONDS:-1}"
 
 terminate_matching_peers() {
   local signal="$1"
@@ -26,12 +30,14 @@ terminate_matching_peers() {
   done <<< "${pids}"
 }
 
-if [[ "${AMBITIONS_XCODEBUILDMCP_CLEAN_PEERS:-0}" == "1" ]]; then
-  terminate_matching_peers TERM "xcodebuildmcp@2\\.6\\.2 mcp"
+if [[ "${AMBITIONS_XCODEBUILDMCP_CLEAN_PEERS}" == "1" ]]; then
+  terminate_matching_peers TERM "npm exec xcodebuildmcp(@[^[:space:]]*)? mcp"
+  terminate_matching_peers TERM "xcodebuildmcp(@[^[:space:]]*)? mcp"
   terminate_matching_peers TERM "node .*/xcodebuildmcp mcp"
-  sleep 1
-  terminate_matching_peers KILL "xcodebuildmcp@2\\.6\\.2 mcp"
+  sleep "${PEER_CLEANUP_GRACE_SECONDS}"
+  terminate_matching_peers KILL "npm exec xcodebuildmcp(@[^[:space:]]*)? mcp"
+  terminate_matching_peers KILL "xcodebuildmcp(@[^[:space:]]*)? mcp"
   terminate_matching_peers KILL "node .*/xcodebuildmcp mcp"
 fi
 
-exec /usr/local/bin/npx -y xcodebuildmcp@2.6.2 mcp
+exec /usr/local/bin/npx -y "xcodebuildmcp@${XCODEBUILDMCP_PACKAGE_VERSION}" mcp
