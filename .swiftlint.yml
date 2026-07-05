@@ -9,7 +9,6 @@ excluded:
   - build
   - DerivedData
   - .codex
-  - Packages/AmbitionsExperienceKernel/.build
   - tools/mcp/ambitions_native_mcp/.build
   - "**/*.xcresult"
 

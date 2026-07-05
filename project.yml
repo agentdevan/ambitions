@@ -10,8 +10,6 @@ settings:
 packages:
   AmbitionsPackages:
     path: .
-  AmbitionsExperienceKernel:
-    path: Packages/AmbitionsExperienceKernel
 targets:
   Ambitions:
     type: application
@@ -48,8 +46,6 @@ targets:
         product: AmbitionsDesignSystem
       - package: AmbitionsPackages
         product: AmbitionsWidgetUI
-      - package: AmbitionsExperienceKernel
-        product: AmbitionsExperienceKernel
       - target: AmbitionsWidgetExtension
         embed: true
       - target: AmbitionsShareExtension
