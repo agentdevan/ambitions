@@ -1,0 +1,255 @@
+{
+  "issue": "AMB-1807",
+  "status": "Implemented Yellow",
+  "date": "2026-07-05T20:20:43Z",
+  "branch": "main",
+  "baseline_main_sha": "9de167657f1198627836630f4dd29a15bc962d05",
+  "commit_sha": "artifact commit SHA is recorded in Linear after commit/push",
+  "environment": "local Codex macOS workspace at /Users/devan/Documents/GitHub/ambitions",
+  "xcode_version": "Xcode 26.6, build version 17F113",
+  "artifact_paths": [
+    "docs/qa/evidence/2026-07-05-amb-1807-export-import-reset-scope-matrix/manifest.md",
+    "docs/qa/evidence/2026-07-05-amb-1807-export-import-reset-scope-matrix/export-import-reset-scope-matrix.json"
+  ],
+  "proof_metadata_text": {
+    "Validation run": "See validation_run for commands and procedures completed for this packet.",
+    "Validation not run": "See validation_not_run for tests, builds, import execution, reset execution, restore execution, device proof, and release procedures not run.",
+    "Non-Claims": "See non_claims for unsupported destructive restore, privacy, device, and release claims.",
+    "Branch": "main",
+    "Commit SHA": "artifact commit SHA is recorded in Linear after commit/push",
+    "Environment": "local Codex macOS workspace at /Users/devan/Documents/GitHub/ambitions",
+    "Xcode version": "Xcode 26.6, build version 17F113",
+    "Simulator or device": "simulator health only; no app launch, import execution, reset execution, restore execution, or physical-device procedure was run",
+    "Exit code": "See each validation_run entry.",
+    "Artifact paths": "This JSON file and the paired manifest in the same evidence directory."
+  },
+  "scope_matrix": {
+    "schema_version": "export_import_reset_scope_matrix.v1",
+    "portable_categories": [
+      {
+        "id": "goals_and_plans",
+        "title": "Goals and plans",
+        "stored_data_kinds": ["Goal", "PersistedGoalDraft"],
+        "privacy_class": "private_sensitive",
+        "indexing_policy": "not_indexed",
+        "export_policy": "export_review_only",
+        "included_in_portable_package": true,
+        "replace_mode_may_reset_local_store": true,
+        "merge_mode_may_reset_local_store": false
+      },
+      {
+        "id": "captures",
+        "title": "Captures",
+        "stored_data_kinds": ["Capture"],
+        "privacy_class": "private_sensitive",
+        "indexing_policy": "not_indexed",
+        "export_policy": "export_review_only",
+        "included_in_portable_package": true,
+        "replace_mode_may_reset_local_store": true,
+        "merge_mode_may_reset_local_store": false
+      },
+      {
+        "id": "proof",
+        "title": "Proof",
+        "stored_data_kinds": ["ProgressEvidence"],
+        "privacy_class": "proof_restricted",
+        "indexing_policy": "not_indexed",
+        "export_policy": "export_review_only",
+        "included_in_portable_package": true,
+        "replace_mode_may_reset_local_store": true,
+        "merge_mode_may_reset_local_store": false
+      },
+      {
+        "id": "receipts",
+        "title": "Receipts and history",
+        "stored_data_kinds": ["GoalFeedbackEvent", "ActionReceiptHistoryRecord", "EntityRevisionTombstone", "EntityRevisionTombstoneLineageView"],
+        "privacy_class": "proof_restricted",
+        "indexing_policy": "not_indexed",
+        "export_policy": "export_review_only",
+        "included_in_portable_package": true,
+        "replace_mode_may_reset_local_store": true,
+        "merge_mode_may_reset_local_store": false
+      },
+      {
+        "id": "memory",
+        "title": "Memory",
+        "stored_data_kinds": ["GoalTeachingSignal"],
+        "privacy_class": "local_only",
+        "indexing_policy": "not_indexed",
+        "export_policy": "export_review_only",
+        "included_in_portable_package": true,
+        "replace_mode_may_reset_local_store": true,
+        "merge_mode_may_reset_local_store": false
+      },
+      {
+        "id": "settings",
+        "title": "Settings",
+        "stored_data_kinds": ["AppStateSnapshot"],
+        "privacy_class": "system_owned",
+        "indexing_policy": "indexed",
+        "export_policy": "safe",
+        "included_in_portable_package": true,
+        "replace_mode_may_reset_local_store": true,
+        "merge_mode_may_reset_local_store": false
+      }
+    ],
+    "excluded_scopes": [
+      {
+        "id": "excluded.raw-calendar-events",
+        "title": "Raw calendar events",
+        "reason": "Ambitions exports local derived planning context, not raw calendar event titles."
+      },
+      {
+        "id": "excluded.cloud-sync-account",
+        "title": "Cloud sync or account data",
+        "reason": "No cloud account, sync payload, or hosted private storage is part of the local portable package."
+      },
+      {
+        "id": "excluded.external-rendered-state",
+        "title": "Rendered widget or Live Activity state",
+        "reason": "External surfaces rebuild from safe local snapshots; rendered platform state is not portable user data."
+      }
+    ],
+    "import_modes": [
+      {
+        "mode": "replace_local_store",
+        "would_reset_local_store": true,
+        "requires_explicit_confirmation": true,
+        "conflict_report_required": false,
+        "durable_dry_run_mutation_allowed": false,
+        "destructive_reset_allowed": false
+      },
+      {
+        "mode": "merge_with_conflict_report",
+        "would_reset_local_store": false,
+        "requires_explicit_confirmation": false,
+        "conflict_report_required": true,
+        "durable_dry_run_mutation_allowed": false,
+        "destructive_reset_allowed": false
+      }
+    ]
+  },
+  "first_repair": "Added source-backed export/import/reset data-scope matrix and focused invariant coverage.",
+  "proof_files": [
+    "Native/Ambitions/Core/LocalRuntimeOS/Repair/ExportImportResetDataScopeMatrix.swift",
+    "Native/AmbitionsTests/LocalRuntimeOS/Repair/ExportImportResetDataScopeMatrixTests.swift",
+    "Native/Ambitions/Core/LocalRuntimeOS/Repair/PortableSnapshotContracts.swift",
+    "Native/Ambitions/Core/LocalRuntimeOS/Repair/PortableSnapshotServiceOperations.swift",
+    "Native/Ambitions/Core/LocalRuntimeOS/Repair/DryRunMigration.swift"
+  ],
+  "validation_run": [
+    {
+      "command": "xcodegen generate",
+      "exit_code": 0,
+      "result": "project regenerated"
+    },
+    {
+      "command": "scripts/ambitions-xcodegen-needed.sh",
+      "exit_code": 0,
+      "result": "XCODEGEN_NEEDED=0; project build inputs unchanged"
+    },
+    {
+      "command": "python3 -m json.tool docs/qa/evidence/2026-07-05-amb-1807-export-import-reset-scope-matrix/export-import-reset-scope-matrix.json",
+      "exit_code": 0,
+      "result": "JSON evidence parsed"
+    },
+    {
+      "command": "swiftc -parse Native/Ambitions/Core/LocalRuntimeOS/Repair/ExportImportResetDataScopeMatrix.swift Native/AmbitionsTests/LocalRuntimeOS/Repair/ExportImportResetDataScopeMatrixTests.swift",
+      "exit_code": 0,
+      "result": "Swift parser accepted the matrix and focused assertions; no XCTest execution"
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-remediation-governance-check.py",
+      "exit_code": 0,
+      "result": "passed; changed_paths=4, production_swift_files=1426, overHardLineCapFiles=0"
+    },
+    {
+      "command": "python3 scripts/ambitions-quality-gate.py",
+      "exit_code": 1,
+      "result": "initial strict quality gate found one hosted-backend boundary phrase in the new matrix text"
+    },
+    {
+      "command": "python3 scripts/ambitions-quality-gate.py",
+      "exit_code": 0,
+      "result": "passed after removing the hosted-backend boundary phrase from source/evidence"
+    },
+    {
+      "command": "python3 scripts/ambitions-architecture-inventory.py",
+      "exit_code": 0,
+      "result": "final-tree parity achieved"
+    },
+    {
+      "command": "python3 scripts/ambitions-green-standard-audit.py",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-vocabulary-drift-scan.py",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "command": "scripts/no-unsupported-ai-claim-scan.sh docs/qa/evidence/2026-07-05-amb-1807-export-import-reset-scope-matrix/manifest.md docs/qa/evidence/2026-07-05-amb-1807-export-import-reset-scope-matrix/export-import-reset-scope-matrix.json Native/Ambitions/Core/LocalRuntimeOS/Repair/ExportImportResetDataScopeMatrix.swift Native/AmbitionsTests/LocalRuntimeOS/Repair/ExportImportResetDataScopeMatrixTests.swift",
+      "exit_code": 0,
+      "result": "advisory Yellow only; reviewed existing truth-file wording outside this AMB-1807 diff as non-claim context"
+    },
+    {
+      "command": "scripts/ambitions-xcode-sim-health.sh --json --timeout 20s",
+      "exit_code": 25,
+      "result": "failed because active Xcode processes blocked the check"
+    },
+    {
+      "command": "scripts/ambitions-xcode-sim-health.sh --repair --kill-active-xcode --json --timeout 20s",
+      "exit_code": 0,
+      "result": "repaired by killing active Xcode processes; selected iPhone 17 Pro Max simulator DD9B9C84-7188-48FA-AA2A-AB5C1D0EE2B6 passed"
+    },
+    {
+      "command": "scripts/ambitions-xcode-sim-health.sh --json --timeout 20s",
+      "exit_code": 0,
+      "result": "final non-repair simulator preflight passed"
+    }
+  ],
+  "validation_not_run": [
+    "Focused export/import/reset XCTest execution was not run under current user instruction.",
+    "LocalRuntimeProof was not run because no command execution behavior, receipt writer, or runtime mutation path changed.",
+    "xcodebuild package resolution, build, build-for-testing, and test were not run.",
+    "Import execution, reset execution, restore execution, destructive migration procedure, simulator app launch, and physical-device verification were not run.",
+    "Privacy/legal review, release gate, TestFlight validation, App Store validation, and product readiness review were not run."
+  ],
+  "non_claims": [
+    "No destructive migration or restore readiness proof",
+    "No data-loss-proof import claim",
+    "No privacy/legal approval claim",
+    "No device proof",
+    "No App Store/release proof"
+  ],
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_touched": [
+      "Core/LocalRuntimeOS/Repair",
+      "Native/AmbitionsTests/LocalRuntimeOS/Repair",
+      "QA evidence"
+    ],
+    "files_moved_or_created": [
+      "Native/Ambitions/Core/LocalRuntimeOS/Repair/ExportImportResetDataScopeMatrix.swift",
+      "Native/AmbitionsTests/LocalRuntimeOS/Repair/ExportImportResetDataScopeMatrixTests.swift",
+      "docs/qa/evidence/2026-07-05-amb-1807-export-import-reset-scope-matrix/manifest.md",
+      "docs/qa/evidence/2026-07-05-amb-1807-export-import-reset-scope-matrix/export-import-reset-scope-matrix.json"
+    ],
+    "old_noncanonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "yellow_debt": "Source-invariant proof only; destructive restore/reset, import execution, device, privacy/legal, and release proof remain outside this no-testing slice.",
+    "next_repair_train": "Continue AMB-1686 leaves for executable import/reset/restore scenarios when testing or device proof is re-enabled.",
+    "equivalent_folder_interpretation_used": false
+  }
+}
