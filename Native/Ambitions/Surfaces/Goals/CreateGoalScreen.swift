@@ -105,7 +105,7 @@ struct CreateGoalScreen: View {
         }
         .scrollIndicators(.hidden)
         .background(theme.colors.canvas.stageOwnedIgnoresSafeArea())
-        .navigationTitle("Create Goal")
+        .navigationTitle("Create goal")
         .navigationBarTitleDisplayMode(.inline)
         .toolbarBackground(theme.colors.canvas, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)

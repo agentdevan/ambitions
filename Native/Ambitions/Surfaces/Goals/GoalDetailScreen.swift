@@ -106,7 +106,7 @@ struct GoalDetailScreen: View {
                     }
 
                     if detail.suggestions.isEmpty == false {
-                        GoalDetailSectionSurface(title: "Suggested Steps", subtitle: "The calmest contained steps that still create signal.") {
+                        GoalDetailSectionSurface(title: "Suggested steps", subtitle: "The calmest contained steps that still create signal.") {
                             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                                 ForEach(detail.suggestions) { step in
                                     GoalSuggestionSurface(step: step)

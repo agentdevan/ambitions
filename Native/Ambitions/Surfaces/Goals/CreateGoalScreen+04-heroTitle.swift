@@ -76,18 +76,18 @@ extension CreateGoalScreen {
 
     var submitButtonTitle: String {
         guard case let .loaded(preview) = viewModel.previewState else {
-            return viewModel.isSubmitting ? "Saving..." : "Create Goal"
+            return viewModel.isSubmitting ? "Saving..." : "Create goal"
         }
 
         if viewModel.isSubmitting {
-            return preview.resultKind == .planned || preview.resultKind == .starterPlanned ? "Creating Goal..." : "Saving Draft..."
+            return preview.resultKind == .planned || preview.resultKind == .starterPlanned ? "Creating goal..." : "Saving draft..."
         }
 
         switch preview.resultKind {
         case .planned, .starterPlanned:
-            return "Create Goal"
+            return "Create goal"
         case .clarificationRequired, .blocked:
-            return "Save Draft"
+            return "Save draft"
         }
     }
 

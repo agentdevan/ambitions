@@ -58,8 +58,8 @@ enum GoalsAtlasPosture: String, Hashable, Sendable {
         case .active: "Active"
         case .stalled: "Stalled"
         case .crowded: "Crowded"
-        case .atRisk: "At Risk"
-        case .lowerPriority: "Lower Priority"
+        case .atRisk: "At risk"
+        case .lowerPriority: "Lower priority"
         case .achieved: "Achieved"
         }
     }
