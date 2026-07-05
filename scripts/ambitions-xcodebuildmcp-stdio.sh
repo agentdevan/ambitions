@@ -11,6 +11,8 @@ export XCODEBUILDMCP_SENTRY_DISABLED="${XCODEBUILDMCP_SENTRY_DISABLED:-true}"
 export AMBITIONS_XCODEBUILDMCP_CLEAN_PEERS="${AMBITIONS_XCODEBUILDMCP_CLEAN_PEERS:-1}"
 
 XCODEBUILDMCP_PACKAGE_VERSION="${XCODEBUILDMCP_PACKAGE_VERSION:-2.6.2}"
+XCODEBUILDMCP_PACKAGE_ROOT="${XCODEBUILDMCP_PACKAGE_ROOT:-/Users/devan/.codex/mcp-node-packages/xcodebuildmcp-${XCODEBUILDMCP_PACKAGE_VERSION}}"
+XCODEBUILDMCP_BIN="${XCODEBUILDMCP_PACKAGE_ROOT}/node_modules/.bin/xcodebuildmcp"
 PEER_CLEANUP_GRACE_SECONDS="${AMBITIONS_XCODEBUILDMCP_PEER_CLEANUP_GRACE_SECONDS:-1}"
 
 terminate_matching_peers() {
@@ -34,10 +36,19 @@ if [[ "${AMBITIONS_XCODEBUILDMCP_CLEAN_PEERS}" == "1" ]]; then
   terminate_matching_peers TERM "npm exec xcodebuildmcp(@[^[:space:]]*)? mcp"
   terminate_matching_peers TERM "xcodebuildmcp(@[^[:space:]]*)? mcp"
   terminate_matching_peers TERM "node .*/xcodebuildmcp mcp"
+  terminate_matching_peers TERM "node .*/xcodebuildmcp/.* mcp"
   sleep "${PEER_CLEANUP_GRACE_SECONDS}"
   terminate_matching_peers KILL "npm exec xcodebuildmcp(@[^[:space:]]*)? mcp"
   terminate_matching_peers KILL "xcodebuildmcp(@[^[:space:]]*)? mcp"
   terminate_matching_peers KILL "node .*/xcodebuildmcp mcp"
+  terminate_matching_peers KILL "node .*/xcodebuildmcp/.* mcp"
 fi
 
-exec /usr/local/bin/npx -y "xcodebuildmcp@${XCODEBUILDMCP_PACKAGE_VERSION}" mcp
+if [[ ! -x "${XCODEBUILDMCP_BIN}" ]]; then
+  mkdir -p "${XCODEBUILDMCP_PACKAGE_ROOT}"
+  npm_config_update_notifier=false npm_config_fund=false npm_config_audit=false \
+    /usr/local/bin/npm install --silent --prefix "${XCODEBUILDMCP_PACKAGE_ROOT}" \
+    "xcodebuildmcp@${XCODEBUILDMCP_PACKAGE_VERSION}" </dev/null
+fi
+
+exec "${XCODEBUILDMCP_BIN}" mcp
