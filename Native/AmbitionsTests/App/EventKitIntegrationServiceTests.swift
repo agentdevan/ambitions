@@ -20,7 +20,11 @@ final class EventKitIntegrationServiceTests: XCTestCase {
             XCTFail("Unexpected error: \(error)")
         }
 
+        let reminderSaveCount = await store.currentSaveReminderCount()
+        let reminderPayload = await store.lastReminderPayload
         let record = await sideEffectLedger.lastRecord
+        XCTAssertEqual(reminderSaveCount, 0)
+        XCTAssertNil(reminderPayload)
         XCTAssertEqual(record?.effectKind, .calendar)
         XCTAssertEqual(record?.actionKind, .writeCalendarBlock)
         XCTAssertEqual(record?.requiresConfirmation, true)

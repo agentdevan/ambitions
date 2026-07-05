@@ -1,0 +1,139 @@
+{
+  "issue": "AMB-1811",
+  "title": "EventKit Reminders permission-denied receipt path",
+  "status": "Implemented Yellow / Ready For Review for this permission-denied receipt leaf",
+  "date": "2026-07-05T19:37:34Z",
+  "branch": "main",
+  "baseline_main_sha": "8bff3c6f53adb4c581520c515459ec29fa4bb58b",
+  "parent": "AMB-1690",
+  "source_path": [
+    {
+      "step": "permission_denied_gate",
+      "file": "Native/Ambitions/Core/Permissions/CalendarReminders/EventKitIntegrationService+02-EventKitIntegrationService.swift",
+      "evidence": "Reminder authorization is checked before EventKit payload creation or save.",
+      "claim": "Denied reminder permission blocks the external write path."
+    },
+    {
+      "step": "local_side_effect_attempt",
+      "file": "Native/Ambitions/Core/Permissions/CalendarReminders/EventKitIntegrationService+02-EventKitIntegrationService.swift",
+      "evidence": "The denied branch records a calendar side effect with status blocked, boundary externalEffect, requiresConfirmation true, and externalEffect false.",
+      "claim": "The attempted write is represented as local inspection evidence."
+    },
+    {
+      "step": "permission_denied_result",
+      "file": "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/SideEffectOutbox.swift",
+      "evidence": "SideEffectAttemptResultState.permissionDenied maps to SideEffectLedgerStatus.failedSafely in recordResult.",
+      "claim": "The permission denial produces a failed-safe local receipt row."
+    },
+    {
+      "step": "direct_external_mutation_guard",
+      "file": "Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift",
+      "evidence": "The denied reminder test asserts saveReminder count is zero and no reminder payload was captured.",
+      "claim": "The focused denied path does not call EventKitStoreClient.saveReminder."
+    }
+  ],
+  "validation_run": [
+    {
+      "command": "xcodebuild -version",
+      "exit_code": 0,
+      "result": "confirmed Xcode 26.6 build version 17F113"
+    },
+    {
+      "command": "python3 -m json.tool docs/qa/evidence/2026-07-05-amb-1811-eventkit-reminders-permission-denied-receipt/permission-denied-receipt-path.json",
+      "exit_code": 0,
+      "result": "JSON evidence parsed"
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-unsupported-claim-scan.py Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift Native/AmbitionsTests/App/EventKitIntegrationTestDoubles.swift docs/qa/evidence/2026-07-05-amb-1811-eventkit-reminders-permission-denied-receipt/manifest.md docs/qa/evidence/2026-07-05-amb-1811-eventkit-reminders-permission-denied-receipt/permission-denied-receipt-path.json",
+      "exit_code": 0,
+      "result": "unsupported completion/readiness claim scan passed"
+    },
+    {
+      "command": "swiftc -parse Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift Native/AmbitionsTests/App/EventKitIntegrationTestDoubles.swift",
+      "exit_code": 0,
+      "result": "Swift parser accepted the focused test/test-double edits; no XCTest execution"
+    },
+    {
+      "command": "python3 scripts/ambitions-remediation-governance-check.py",
+      "exit_code": 0,
+      "result": "passed; changed_paths=4, production_swift_files=1423, overHardLineCapFiles=0"
+    },
+    {
+      "command": "python3 scripts/ambitions-quality-gate.py",
+      "exit_code": 0,
+      "result": "strict quality gates passed"
+    },
+    {
+      "command": "xcodegen generate",
+      "exit_code": 0,
+      "result": "project regenerated"
+    },
+    {
+      "command": "python3 scripts/ambitions-green-standard-audit.py",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-vocabulary-drift-scan.py",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-architecture-inventory.py",
+      "exit_code": 0,
+      "result": "final-tree parity achieved"
+    },
+    {
+      "command": "scripts/ambitions-xcode-sim-health.sh --json --timeout 20s",
+      "exit_code": 25,
+      "result": "failed because active Xcode processes blocked the check"
+    },
+    {
+      "command": "scripts/ambitions-xcode-sim-health.sh --json --timeout 20s --repair --kill-active-xcode",
+      "exit_code": 0,
+      "result": "repaired by killing active Xcode processes; selected iPhone 17 Pro Max simulator DD9B9C84-7188-48FA-AA2A-AB5C1D0EE2B6 passed"
+    }
+  ],
+  "validation_not_run": [
+    "Focused ExternalWrites/EventKit tests were not run under current user instruction.",
+    "LocalRuntimeProof was not run under current user instruction.",
+    "xcodebuild package resolution, build, build-for-testing, and test were not run.",
+    "No simulator app launch, EventKit permission prompt, Reminders app write, or physical-device procedure was run."
+  ],
+  "non_claims": [
+    "No device EventKit or Reminders proof.",
+    "No real permission prompt proof.",
+    "No real Reminders app write proof.",
+    "No retry/cancellation proof.",
+    "No calendar/reminders production readiness.",
+    "No privacy/legal, TestFlight, App Store, Release Green, or product-completion claim."
+  ],
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_touched": [
+      "Core/LocalRuntimeOS/ExternalWrites",
+      "Core/Permissions/CalendarReminders",
+      "Native/AmbitionsTests",
+      "QA evidence"
+    ],
+    "files_moved_or_created": [
+      "docs/qa/evidence/2026-07-05-amb-1811-eventkit-reminders-permission-denied-receipt/manifest.md",
+      "docs/qa/evidence/2026-07-05-amb-1811-eventkit-reminders-permission-denied-receipt/permission-denied-receipt-path.json"
+    ],
+    "old_noncanonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "yellow_debt": "Device EventKit/Reminders behavior and parent retry/cancellation/inspection UI proof remain open.",
+    "next_repair_train": "Continue AMB-1690 leaves for retry/cancellation, local inspection UI, and device/system-surface proof.",
+    "equivalent_folder_interpretation_used": false
+  }
+}

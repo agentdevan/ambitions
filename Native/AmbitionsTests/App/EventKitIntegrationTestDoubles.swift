@@ -6,6 +6,7 @@ actor RecordingEventKitStoreClient: EventKitStoreClient {
     private var authorizationResponseByScope: [String: CalendarRemindersAuthorizationState] = [:]
     private(set) var lastReminderPayload: EventKitReminderPayload?
     private(set) var lastEventPayload: EventKitEventPayload?
+    private(set) var saveReminderCount = 0
     private(set) var saveEventCount = 0
     private var reminderSaveFailure: CalendarRemindersError?
     private var eventSaveFailure: CalendarRemindersError?
@@ -29,6 +30,7 @@ actor RecordingEventKitStoreClient: EventKitStoreClient {
 
     func saveReminder(_ payload: EventKitReminderPayload) async throws -> String {
         if let reminderSaveFailure { throw reminderSaveFailure }
+        saveReminderCount += 1
         lastReminderPayload = payload
         return "reminder-1"
     }
@@ -66,6 +68,10 @@ actor RecordingEventKitStoreClient: EventKitStoreClient {
 
     func currentSaveEventCount() -> Int {
         saveEventCount
+    }
+
+    func currentSaveReminderCount() -> Int {
+        saveReminderCount
     }
 
     private func key(for scope: CalendarRemindersScope) -> String {
