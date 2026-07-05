@@ -187,6 +187,66 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
         })
     }
 
+    func testAMB1814AutomatedNutritionGateCoversVoiceOverDynamicTypeAndReduceMotionOnly() {
+        let gate = AMB1814AutomatedNutritionGate.gate
+        let requirements = AMB1814AutomatedNutritionGate.requirements
+
+        XCTAssertEqual(gate.id, "amb-1814-automated-accessibility-nutrition-gate")
+        XCTAssertEqual(gate.issueID, "AMB-1814")
+        XCTAssertEqual(gate.owner, "Accessibility")
+        XCTAssertEqual(Set(gate.coveredAxes), Set(AccessibilityAdjustmentAxis.allCases))
+        XCTAssertEqual(Set(gate.coveredCategories), [.voiceOver, .dynamicType, .reduceMotion])
+        XCTAssertEqual(requirements.count, 3)
+        XCTAssertTrue(gate.sourceTruth.contains("Sources/Accessibility/AccessibilityAutomatedNutritionGate.swift"))
+        XCTAssertTrue(gate.sourceTruth.contains("docs/qa/accessibility/amb-1814-automated-nutrition-gate.md"))
+        XCTAssertFalse(AMB1814AutomatedNutritionGate.userFacingClaimsAllowed)
+        XCTAssertFalse(AMB1814AutomatedNutritionGate.releaseClaimsAllowed)
+
+        for requirement in requirements {
+            XCTAssertFalse(requirement.ownerFile.isEmpty)
+            XCTAssertEqual(
+                requirement.automatedProofTarget,
+                "Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift"
+            )
+            XCTAssertFalse(requirement.automatedEvidenceScope.isEmpty)
+            XCTAssertFalse(requirement.requiredFallback.isEmpty)
+            XCTAssertEqual(requirement.verificationStatus, .partiallySupported)
+            XCTAssertFalse(requirement.publicAccessibilityClaimAllowed)
+        }
+    }
+
+    func testAMB1814AutomatedNutritionGateKeepsManualAndDeviceProofBoundariesExplicit() {
+        let requirements = AMB1814AutomatedNutritionGate.requirements
+        let gate = AMB1814AutomatedNutritionGate.gate
+
+        XCTAssertTrue(gate.limitations.contains { $0.localizedCaseInsensitiveContains("No XCTest execution") })
+        XCTAssertTrue(gate.limitations.contains { $0.localizedCaseInsensitiveContains("No public accessibility conformance") })
+
+        XCTAssertTrue(requirements.contains {
+            $0.axis == .voiceOverOrder &&
+                $0.category == .voiceOver &&
+                $0.automatedEvidenceScope.localizedCaseInsensitiveContains("manual traversal") &&
+                $0.manualProofStillRequired.localizedCaseInsensitiveContains("Manual VoiceOver") &&
+                $0.deviceProofStillRequired.localizedCaseInsensitiveContains("Physical-device VoiceOver")
+        })
+        XCTAssertTrue(requirements.contains {
+            $0.axis == .dynamicTypeLayout &&
+                $0.category == .dynamicType &&
+                $0.ownerFile == "Sources/Theme/PanelDensitySize.swift" &&
+                $0.requiredFallback.localizedCaseInsensitiveContains("Large text") &&
+                $0.manualProofStillRequired.localizedCaseInsensitiveContains("screenshot") &&
+                $0.deviceProofStillRequired.localizedCaseInsensitiveContains("Physical-device Dynamic Type")
+        })
+        XCTAssertTrue(requirements.contains {
+            $0.axis == .reduceMotionEquivalent &&
+                $0.category == .reduceMotion &&
+                $0.ownerFile == "Sources/Components/DynamicAdaptiveVisualPrimitives.swift" &&
+                $0.requiredFallback.localizedCaseInsensitiveContains("without motion") &&
+                $0.manualProofStillRequired.localizedCaseInsensitiveContains("Reduce Motion walkthrough") &&
+                $0.deviceProofStillRequired.localizedCaseInsensitiveContains("Physical-device Reduce Motion")
+        })
+    }
+
     func testAFI12AccessibilityStateProofLocksActiveFlagshipSurfaces() {
         XCTAssertEqual(AFI12AccessibilityStateProof.ownerBatch, "AFI12")
         XCTAssertFalse(AFI12AccessibilityStateProof.userFacingClaimsAllowed)
