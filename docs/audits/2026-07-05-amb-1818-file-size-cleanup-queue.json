@@ -1,0 +1,155 @@
+{
+  "issue": "AMB-1818",
+  "title": "File Size Leaf - Current top cleanup queue",
+  "status": "Implemented Yellow / Ready For Review for this file-size leaf",
+  "generated_at": "2026-07-05T17:02:38Z",
+  "branch": "main",
+  "baseline_main_sha": "7646062f02bd06ff6b9247935b4a94ea63102790",
+  "artifact_commit_sha": "recorded in Linear after commit/push",
+  "parent": "AMB-1697",
+  "source_snapshot": {
+    "production_swift_files": 1421,
+    "swift_hard_line_cap": 600,
+    "over_hard_line_cap_files": 0,
+    "changed_paths_after_split": 4,
+    "xcode_project_tracking": "Ambitions.xcodeproj is ignored; xcodegen generate was run locally to refresh build tooling."
+  },
+  "support_split": {
+    "before": {
+      "path": "Native/Ambitions/PreviewSupport/PreviewFixtures.swift",
+      "lines": 1258
+    },
+    "after": [
+      {
+        "path": "Native/Ambitions/PreviewSupport/PreviewFixtures.swift",
+        "lines": 451,
+        "responsibility": "registry plus compact default fixture seed and existing Source Atlas preview helpers"
+      },
+      {
+        "path": "Native/Ambitions/PreviewSupport/PreviewYouDashboardFixtures.swift",
+        "lines": 589,
+        "responsibility": "You dashboard preview literal"
+      },
+      {
+        "path": "Native/Ambitions/PreviewSupport/PreviewInsightsFixtures.swift",
+        "lines": 151,
+        "responsibility": "Insights dashboard preview literal"
+      },
+      {
+        "path": "Native/Ambitions/PreviewSupport/PreviewExternalBrainScenarios.swift",
+        "lines": 85,
+        "responsibility": "External brain scenario preview literals"
+      }
+    ],
+    "source_atlas_scope_note": "Existing Source Atlas preview helper content stayed in PreviewFixtures.swift to avoid creating new Source Atlas scope without an ADR allowlist."
+  },
+  "top_overall_swift_files": [
+    {"rank": 1, "lines": 3224, "path": "Native/AmbitionsUITests/AmbitionsUITests.swift"},
+    {"rank": 2, "lines": 2485, "path": "Native/AmbitionsTests/You/YouFeatureServiceTests.swift"},
+    {"rank": 3, "lines": 2048, "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackLifecycleRefreshServiceTests.swift"},
+    {"rank": 4, "lines": 1753, "path": "Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift"},
+    {"rank": 5, "lines": 1644, "path": "Native/AmbitionsTests/Time/TimeProjectionServiceTests.swift"},
+    {"rank": 6, "lines": 1628, "path": "Native/AmbitionsTests/Today/TodayViewModelTests.swift"},
+    {"rank": 7, "lines": 1606, "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasRuntimeBridgeCoverageGauntletTests.swift"},
+    {"rank": 8, "lines": 1399, "path": "Native/AmbitionsTests/Domain/ProjectStepOperationModelsTests.swift"},
+    {"rank": 9, "lines": 1373, "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPackModelsTests.swift"},
+    {"rank": 10, "lines": 1350, "path": "Native/AmbitionsTests/Domain/AmbitionsMoatScenarioProof98Tests.swift"},
+    {"rank": 11, "lines": 1348, "path": "Native/AmbitionsTests/Domain/RecommendationExplanationModelsTests.swift"},
+    {"rank": 12, "lines": 1223, "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackRemoteTransportTests.swift"},
+    {"rank": 13, "lines": 1218, "path": "Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift"},
+    {"rank": 14, "lines": 1216, "path": "Native/AmbitionsTests/LocalRuntimeOS/Inspection/ActionClosureReceiptModelsTests.swift"},
+    {"rank": 15, "lines": 1173, "path": "Native/AmbitionsTests/Domain/LifeKnowledgeOperationModelsTests.swift"},
+    {"rank": 16, "lines": 1158, "path": "Native/AmbitionsTests/Persistence/PortableSnapshotServiceTests.swift"},
+    {"rank": 17, "lines": 1035, "path": "Native/AmbitionsTests/Domain/IOS26NotionP0ContractHarnessTests.swift"},
+    {"rank": 18, "lines": 971, "path": "Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift"},
+    {"rank": 19, "lines": 891, "path": "Native/AmbitionsTests/Goals/GoalsOverviewBoardTests.swift"},
+    {"rank": 20, "lines": 868, "path": "Native/AmbitionsTests/Runtime/CaptureRuntimeGauntletTests.swift"},
+    {"rank": 21, "lines": 868, "path": "Native/AmbitionsTests/Domain/InspectableIntelligenceGoldenScenarioTests.swift"},
+    {"rank": 22, "lines": 849, "path": "Native/AmbitionsTests/Runtime/GoldenVerticalSliceRuntimeTests.swift"},
+    {"rank": 23, "lines": 846, "path": "Native/AmbitionsTests/Domain/IOS26CrossAppJourneyContractHarnessTests.swift"},
+    {"rank": 24, "lines": 841, "path": "Native/AmbitionsTests/Capture/CaptureViewModelTests.swift"},
+    {"rank": 25, "lines": 837, "path": "Native/AmbitionsTests/LocalRuntimeOS/Commands/AmbitionsCommandExecutorTests.swift"},
+    {"rank": 26, "lines": 823, "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasCapabilityPathCompositionModelsTests.swift"},
+    {"rank": 27, "lines": 817, "path": "Native/AmbitionsTests/App/ExternalRoutingTests.swift"},
+    {"rank": 28, "lines": 763, "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPackFactoryModelsTests.swift"},
+    {"rank": 29, "lines": 709, "path": "Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift"},
+    {"rank": 30, "lines": 708, "path": "Native/AmbitionsTests/Services/GoalContradictionServiceTests.swift"},
+    {"rank": 31, "lines": 706, "path": "Native/AmbitionsTests/LocalRuntimeOS/PrivateLifeRuntimeKernel/PersonalizationFactorLedgerTests.swift"},
+    {"rank": 32, "lines": 678, "path": "Native/AmbitionsTests/App/AppShellNavigationTests.swift"},
+    {"rank": 33, "lines": 672, "path": "Native/AmbitionsTests/Persistence/CaptureServiceTests.swift"},
+    {"rank": 34, "lines": 665, "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackCacheFileRepositoryTests.swift"},
+    {"rank": 35, "lines": 661, "path": "Native/AmbitionsTests/Goals/GoalDetailStrategicPresentationTests.swift"},
+    {"rank": 36, "lines": 635, "path": "Native/AmbitionsTests/Services/CanonicalNowStateProjectorTests.swift"},
+    {"rank": 37, "lines": 630, "path": "Native/AmbitionsTests/LocalRuntimeOS/PrivateLifeRuntimeKernel/ReplayableDecisionTraceTests.swift"},
+    {"rank": 38, "lines": 620, "path": "Native/AmbitionsTests/Persistence/PersistenceRepositoryTests.swift"},
+    {"rank": 39, "lines": 618, "path": "Native/AmbitionsTests/Domain/AmbitionGraphModelsTests.swift"},
+    {"rank": 40, "lines": 602, "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackFetchPipelineTests.swift"},
+    {"rank": 41, "lines": 601, "path": "Native/AmbitionsTests/Domain/RecommendationMutationLabModelsTests.swift"},
+    {"rank": 42, "lines": 599, "path": "Native/Ambitions/Core/Domain/CorrectionFoldModels.swift"},
+    {"rank": 43, "lines": 595, "path": "Native/Ambitions/Core/Domain/CommitmentWaitingModels.swift"},
+    {"rank": 44, "lines": 593, "path": "Native/Ambitions/Core/LocalRuntimeOS/Storage/ObjectStoreSwiftData.swift"},
+    {"rank": 45, "lines": 589, "path": "Native/AmbitionsTests/Today/TodayCommandHandlerTests.swift"},
+    {"rank": 46, "lines": 589, "path": "Native/Ambitions/PreviewSupport/PreviewYouDashboardFixtures.swift"},
+    {"rank": 47, "lines": 583, "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackRemoteTransport.swift"},
+    {"rank": 48, "lines": 577, "path": "Native/AmbitionsTests/LocalRuntimeOS/Commands/ExternalActionCommandServiceTests.swift"},
+    {"rank": 49, "lines": 572, "path": "Native/Ambitions/Core/Domain/ProofResourceGraphModels.swift"},
+    {"rank": 50, "lines": 571, "path": "Native/Ambitions/Core/LocalRuntimeOS/Repair/DryRunMigration.swift"}
+  ],
+  "validation_run": [
+    {
+      "command": "xcodegen generate",
+      "exit_code": 0,
+      "result": "Regenerated ignored local Xcode project for local build tooling."
+    },
+    {
+      "command": "python3 scripts/ambitions-quality-gate.py",
+      "exit_code": 0,
+      "result": "Passed; production_swift_files=1421, changed_paths=6."
+    },
+    {
+      "command": "python3 scripts/ambitions-remediation-governance-check.py",
+      "exit_code": 0,
+      "result": "Passed; changed_paths=6, production_swift_files=1421, overHardLineCapFiles=0."
+    },
+    {
+      "command": "python3 scripts/ambitions-remediation-governance-check.py --json",
+      "exit_code": 0,
+      "result": "Passed; findingCount=0."
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "result": "Passed before audit packet creation."
+    },
+    {
+      "command": "mcp__xcodebuildmcp.session_show_defaults",
+      "exit_code": 0,
+      "result": "Confirmed Ambitions Debug on iPhone 17 Pro Max with repo-local DerivedData."
+    },
+    {
+      "command": "mcp__xcodebuildmcp.build_sim",
+      "exit_code": "timeout",
+      "result": "MCP call timed out after 300s; underlying xcodebuild remained CPU-active and was stopped after a prolonged compile window. No build success claim."
+    }
+  ],
+  "validation_not_run": [
+    "XCTest",
+    "UI tests",
+    "focused test lanes",
+    "screenshot capture",
+    "app launch proof",
+    "accessibility walkthrough",
+    "physical-device proof",
+    "archive",
+    "App Store validation",
+    "TestFlight upload",
+    "release approval"
+  ],
+  "non_claims": [
+    "No repo-wide file-size cleanup Green.",
+    "No broad refactor proof.",
+    "No build success, test success, app launch proof, screenshot proof, release readiness, or product completion.",
+    "AMB-1697 remains In Progress for CI thresholds, test monolith splits, production-file reductions, monthly reporting, and trend tracking."
+  ],
+  "rollback": "Revert this audit packet and the three new PreviewSupport split files, then restore the extracted literals into PreviewFixtures.swift."
+}
