@@ -1,3 +1,4 @@
+// AMB Needs Repair proof trigger: source-neutral comment to force Native validation.
 import XCTest
 @testable import Ambitions
 
