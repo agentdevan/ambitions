@@ -117,19 +117,80 @@ case "$QUARANTINE_ACTIONS_RUNNER" in
 esac
 
 external_actions_runner_xcode_pids() {
-  ps -axo pid=,args= | awk -v self="$$" -v parent="$PPID" '
-    {
-      pid=$1
-      line=$0
-      sub(/^[[:space:]]*[0-9]+[[:space:]]+/, "", line)
-    }
-    pid == self || pid == parent { next }
-    line ~ /awk/ { next }
-    line ~ /actions-runner\/_work\/(_temp\/ambitions-local-runtime-proof|ambitions\/ambitions)/ &&
-    line ~ /xcodebuild|swift-frontend|swift-driver|SWBBuildService|actool|ibtool/ {
-      print pid
-    }
-  ' | sort -n -u
+  python3 - "$$" "$PPID" <<'PY'
+import os
+import re
+import subprocess
+import sys
+
+self_pid = int(sys.argv[1])
+parent_pid = int(sys.argv[2])
+current = {self_pid, parent_pid, os.getpid(), os.getppid()}
+
+processes: dict[int, tuple[int, str]] = {}
+children: dict[int, list[int]] = {}
+output = subprocess.check_output(["ps", "-axo", "pid=,ppid=,args="], text=True)
+for raw in output.splitlines():
+    parts = raw.strip().split(None, 2)
+    if len(parts) != 3:
+        continue
+    try:
+        pid = int(parts[0])
+        ppid = int(parts[1])
+    except ValueError:
+        continue
+    args = parts[2]
+    processes[pid] = (ppid, args)
+    children.setdefault(ppid, []).append(pid)
+
+own_tree = set(current)
+stack = [self_pid]
+while stack:
+    pid = stack.pop()
+    if pid in own_tree and pid != self_pid:
+        continue
+    own_tree.add(pid)
+    stack.extend(children.get(pid, []))
+
+def has_matching_ancestor(pid: int, pattern: re.Pattern[str]) -> bool:
+    seen: set[int] = set()
+    while pid in processes and pid not in seen:
+        seen.add(pid)
+        ppid, args = processes[pid]
+        if pattern.search(args):
+            return True
+        pid = ppid
+    return False
+
+xcode_pattern = re.compile(r"xcodebuild|swift-frontend|swift-driver|SWBBuildService|actool|ibtool")
+ambitions_pattern = re.compile(
+    r"Ambitions\.xcodeproj|/Documents/GitHub/ambitions|actions-runner/_work/ambitions/ambitions"
+)
+external_runner_pattern = re.compile(
+    r"actions-runner/_work/(_temp/ambitions-local-runtime-proof|ambitions/ambitions)"
+    r"|artifacts/strict-build-launch"
+    r"|strict_build_launch"
+)
+runner_ancestor_pattern = re.compile(
+    r"/actions-runner/bin/Runner\.(Worker|Listener)"
+    r"|/actions-runner/runsvc\.sh"
+    r"|scripts/ci/strict_build_launch\.sh"
+)
+
+targets = []
+for pid, (_ppid, args) in processes.items():
+    if pid in own_tree:
+        continue
+    if not xcode_pattern.search(args):
+        continue
+    if not ambitions_pattern.search(args):
+        continue
+    if external_runner_pattern.search(args) or has_matching_ancestor(pid, runner_ancestor_pattern):
+        targets.append(pid)
+
+for pid in sorted(set(targets)):
+    print(pid)
+PY
 }
 
 terminate_pid_trees() {

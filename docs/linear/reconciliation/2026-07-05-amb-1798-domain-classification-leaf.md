@@ -64,9 +64,11 @@ Tooling hardening required for current local validation:
   preflight failures with `--repair --kill-active-xcode`.
 - `scripts/ambitions-bounded-xcodebuild.sh` now quarantines the exact local
   self-hosted Actions-runner Ambitions `xcodebuild` process family while a local
-  bounded Xcode validation is running. This targets paths under
-  `actions-runner/_work/_temp/ambitions-local-runtime-proof` and
-  `actions-runner/_work/ambitions/ambitions` only.
+  bounded Xcode validation is running. This targets Runner.Worker ancestry,
+  `artifacts/strict-build-launch`, and paths under
+  `actions-runner/_work/_temp/ambitions-local-runtime-proof` or
+  `actions-runner/_work/ambitions/ambitions`, while excluding the current
+  wrapper's own process tree.
 
 ## Classifier Delta
 
@@ -159,8 +161,11 @@ were not introduced by this leaf.
 The first AMB-1798 build-for-testing attempt timed out after 30 minutes while
 compiling. During investigation, a self-hosted local Actions-runner job under
 `/Users/devan/actions-runner/_work/_temp/ambitions-local-runtime-proof...`
-reappeared and contended for CoreSimulator/Xcode resources. The final validation
-used the hardened wrapper path above and completed successfully.
+reappeared and contended for CoreSimulator/Xcode resources. After the final push,
+an additional runner-side `artifacts/strict-build-launch` Xcode process appeared;
+the quarantine matcher was extended to catch that family by Runner.Worker ancestry
+without killing the current wrapper's own child process. The final validation used
+the hardened wrapper path above and completed successfully.
 
 This packet does not claim the already-running Codex MCP host namespace was
 hot-reloaded. The XcodeBuildMCP wrapper repair is recorded in the AMB-1757
