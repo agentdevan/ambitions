@@ -34,7 +34,17 @@ jobs:
       - name: Select latest installed Xcode
         run: |
           set -euo pipefail
-          latest_xcode="$(ls -d /Applications/Xcode*.app 2>/dev/null | sort -V | tail -n 1)"
+          latest_xcode="$(python3 - <<'PY'
+import glob
+import re
+paths = glob.glob('/Applications/Xcode*.app')
+def key(path: str):
+    name = path.rsplit('/', 1)[-1]
+    nums = tuple(int(part) for part in re.findall(r'\d+', name))
+    return nums or (0,)
+print(sorted(paths, key=key)[-1] if paths else '')
+PY
+)"
           if [[ -z "$latest_xcode" ]]; then
             echo "No Xcode installation found under /Applications" >&2
             exit 24
@@ -116,7 +126,7 @@ PY
             echo "::endgroup::"
           }
 
-          run_lane AMB-1818 build-for-testing \
+          run_lane AMB-1818_AMB-1819_AMB-1820 build-for-testing \
             "scripts/ambitions-xcode-build-for-testing.sh --batch AMB_NEEDS_REPAIR_PROOF --scheme Ambitions --timeout 60m --kill-after 180s" \
             scripts/ambitions-xcode-build-for-testing.sh --batch AMB_NEEDS_REPAIR_PROOF --scheme Ambitions --timeout 60m --kill-after 180s
 
@@ -141,8 +151,8 @@ PY
             scripts/ambitions-xcode-test-focused.sh --batch AMB_NEEDS_REPAIR_PROOF --scheme AmbitionsUnitTests --test AmbitionsTests/RuntimeEventReplayPerformanceSmokeTests --timeout 25m --kill-after 180s
 
           run_lane AMB-1758 focused-unit \
-            "scripts/ambitions-xcode-test-focused.sh --batch AMB_NEEDS_REPAIR_PROOF --scheme AmbitionsUnitTests --only-testing AmbitionsTests/ExternalSurfaceSnapshotPrivacyTests --timeout 25m --kill-after 180s" \
-            scripts/ambitions-xcode-test-focused.sh --batch AMB_NEEDS_REPAIR_PROOF --scheme AmbitionsUnitTests --only-testing AmbitionsTests/ExternalSurfaceSnapshotPrivacyTests --timeout 25m --kill-after 180s
+            "scripts/ambitions-xcode-test-focused.sh --batch AMB_NEEDS_REPAIR_PROOF --scheme AmbitionsUnitTests --only-testing AmbitionsTests/ExternalSurfaceSnapshotTests --timeout 25m --kill-after 180s" \
+            scripts/ambitions-xcode-test-focused.sh --batch AMB_NEEDS_REPAIR_PROOF --scheme AmbitionsUnitTests --only-testing AmbitionsTests/ExternalSurfaceSnapshotTests --timeout 25m --kill-after 180s
 
           run_lane AMB-1815 deterministic-screenshot \
             "scripts/ambitions-run-deterministic-screenshot-lane.sh --batch AMB_NEEDS_REPAIR_PROOF --timeout 35m --kill-after 180s" \
