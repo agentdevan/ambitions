@@ -31,11 +31,11 @@ final class TimeViewModel {
     var accessibilitySummary: String {
         switch state {
         case .loading:
-            return "Time. Life Calendar is loading."
+            return "Time. LifeShape Field is loading."
         case let .loaded(timeState):
             return TimeAccessibility.rootSummary(for: timeState)
         case let .failed(message):
-            return "Time. Life Calendar failed. \(message)"
+            return "Time. LifeShape Field failed. \(message)"
         }
     }
 

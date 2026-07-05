@@ -32,7 +32,7 @@ struct LifeShapeFieldVisualField: View {
             horizonStrip
         }
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("Life Calendar")
+        .accessibilityLabel("LifeShape Field")
         .accessibilityValue(accessibilityValue)
         .accessibilityIdentifier("time.life-shape-field.primary-object")
     }
@@ -54,7 +54,7 @@ struct LifeShapeFieldVisualField: View {
                 )
         }
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("Calendar field")
+        .accessibilityLabel("Time field")
         .accessibilityValue(accessibilityValue)
         .accessibilityIdentifier("time.life-shape-field.visual-stage")
     }

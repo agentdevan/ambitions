@@ -199,7 +199,7 @@ extension LifeShapeFieldState {
                 id: "time.calendar.list",
                 kind: .list,
                 title: "List",
-                value: "Equivalent",
+                value: "Accessible",
                 detail: "Rows expose the current Time state for VoiceOver and large text.",
                 visualState: .selected,
                 isOperational: true

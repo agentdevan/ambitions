@@ -76,7 +76,7 @@ struct TimeLifeSuiteState: Sendable {
                 TimeCalendarRow(id: "time.calendar.week", kind: .week, title: "Week", value: week?.capacityLabel ?? "Current", detail: week?.summary ?? "Week view is available.", visualState: .selected, isOperational: true),
                 TimeCalendarRow(id: "time.calendar.month", kind: .month, title: "Month", value: life?.capacityLabel ?? "Staged", detail: life?.summary ?? "Month remains directional from local state.", visualState: .default, isOperational: life != nil),
                 TimeCalendarRow(id: "time.calendar.year", kind: .year, title: "Year", value: life?.capacityLabel ?? "Staged", detail: life?.summary ?? "Year remains directional from local state.", visualState: .default, isOperational: life != nil),
-                TimeCalendarRow(id: "time.calendar.list", kind: .list, title: "List", value: "Equivalent", detail: "Rows expose calendar signals for VoiceOver and large text.", visualState: .selected, isOperational: true)
+                TimeCalendarRow(id: "time.calendar.list", kind: .list, title: "List", value: "Accessible", detail: "Rows expose Time signals for VoiceOver and large text.", visualState: .selected, isOperational: true)
             ],
             sourceState: LifeShapeSourceState(title: calendarBoundaryLabel, detail: manualFallbackLabel, whyThisLabel: trustLabel, privacyLabel: "Local Time state; no silent calendar write.", visualState: .selected),
             reflowProposal: LifeShapeReflowProposal(title: "Review stays optional", detail: "Time can suggest relief only after capacity is clear.", actionTitle: "Review shape", visualState: fit.visualState),

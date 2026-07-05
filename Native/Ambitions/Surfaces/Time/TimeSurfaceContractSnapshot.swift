@@ -19,7 +19,7 @@ extension TimeSurfaceState {
             ],
             panels: [.heroDecision, .schedule, .timeline, .weekShapeStrip, .recovery, .trust],
             actions: [.makeCalendarAware, .findWindows, .move, .protect, .saveTheWeek],
-            drillDowns: ["Calendar mode", "Rituals", "Review archive", "Receipts"],
+            drillDowns: ["Calendar awareness", "Rituals", "Review archive", "Receipts"],
             copySamples: [
                 hero.title,
                 hero.subtitle,

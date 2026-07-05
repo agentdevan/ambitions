@@ -1,0 +1,166 @@
+{
+  "id": "AMB-1739",
+  "title": "Time Flagship Acceptance",
+  "status": "Implemented Yellow",
+  "date": "2026-07-05",
+  "baseline_sha": "73375fc0ada94b28e24f21a5483ea52295aeb399",
+  "scope": [
+    "Time source acceptance",
+    "LifeShape Field source evidence",
+    "constraint and pressure source evidence",
+    "reflow source evidence",
+    "protected placement source evidence",
+    "calendar awareness and outbox boundary source evidence",
+    "visible Time label cleanup"
+  ],
+  "source_changes": {
+    "changed_source_file_count": 7,
+    "change_type": "string-only Time visible/accessibility label cleanup",
+    "runtime_authority_changed": false,
+    "command_routing_changed": false,
+    "persistence_changed": false,
+    "projection_ownership_changed": false,
+    "model_enum_cases_changed": false,
+    "external_adapter_behavior_changed": false,
+    "outbox_behavior_changed": false,
+    "source_paths_moved": false
+  },
+  "acceptance_map": [
+    {
+      "criterion": "Time root / LifeShape Field",
+      "evidence": [
+        "Native/Ambitions/Surfaces/Time/TimeSurface.swift",
+        "Native/Ambitions/Surfaces/Time/TimeObjectView.swift",
+        "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift",
+        "Native/Ambitions/Surfaces/Time/Projection/TimeStageScene.swift"
+      ],
+      "status": "source_present"
+    },
+    {
+      "criterion": "Constraint and pressure language",
+      "evidence": [
+        "Native/Ambitions/Surfaces/Time/Projection/TimeLifeShapeFieldProjection.swift",
+        "Native/Ambitions/Surfaces/Time/Projection/TimePressureProjection.swift",
+        "Native/Ambitions/Surfaces/Time/Projection/TimeTreatyCapacityProjection.swift",
+        "Native/Ambitions/Surfaces/Time/Projection/TimeCapacityReviewState.swift"
+      ],
+      "status": "source_present"
+    },
+    {
+      "criterion": "Time edit mutation path",
+      "evidence": [
+        "Native/Ambitions/Surfaces/Time/TimeViewModel.swift",
+        "Native/Ambitions/Projection/Mutations/TimeFieldMutationCoordinator.swift",
+        "Native/Ambitions/Projection/Mutations/TimeFieldMutationStateProjection.swift",
+        "Native/Ambitions/Projection/Mutations/TimeFieldMutationAction.swift"
+      ],
+      "status": "source_present"
+    },
+    {
+      "criterion": "Protected placement review",
+      "evidence": [
+        "Native/Ambitions/Surfaces/Time/ProtectedPlacementReviewCard.swift",
+        "Native/Ambitions/Surfaces/Time/ProtectedPlacementReviewState.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/ProtectedStepPlacementPolicy.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/PriorityPlacementPolicy.swift"
+      ],
+      "status": "source_present"
+    },
+    {
+      "criterion": "Reflow detail connects back to Today",
+      "evidence": [
+        "Native/Ambitions/Surfaces/Time/Projection/TimeRealityReflowProjection.swift",
+        "Native/Ambitions/Surfaces/Time/Projection/TimeReflowDecisionProjector.swift",
+        "Native/Ambitions/Surfaces/Time/Projection/TimeReflowDecisionState.swift",
+        "Native/Ambitions/Projection/Mutations/TimeFieldMutationStateProjection.swift"
+      ],
+      "status": "source_present"
+    },
+    {
+      "criterion": "Calendar/reminder/outbox boundary where present",
+      "evidence": [
+        "Native/Ambitions/Surfaces/Time/Projection/RepositoryBackedTimeService.swift",
+        "Native/Ambitions/Surfaces/Time/Projection/TimeCalendarAwarenessSupport.swift",
+        "Native/Ambitions/Surfaces/Time/Projection/TimeCalendarRecoveryProjection.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/AmbitionsCommandExecutor+CalendarWriteIntent.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/EventKitOutbox.swift"
+      ],
+      "status": "source_present"
+    },
+    {
+      "criterion": "Empty, loading, error, offline, and no-permission states",
+      "evidence": [
+        "Native/Ambitions/Surfaces/Time/TimeViewModel.swift",
+        "Native/Ambitions/Surfaces/Time/TimeSurface.swift",
+        "Native/Ambitions/Surfaces/Time/Projection/TimeSurfaceState.swift",
+        "Native/Ambitions/Surfaces/Time/Projection/TimeCalendarAwarenessSupport.swift"
+      ],
+      "status": "source_present_runtime_proof_absent"
+    },
+    {
+      "criterion": "Accessibility source support",
+      "evidence": [
+        "Native/Ambitions/Surfaces/Time/TimeAccessibility.swift",
+        "Native/Ambitions/Surfaces/Time/Projection/TimeStageScene.swift",
+        "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldVisualField.swift",
+        "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift"
+      ],
+      "status": "source_present_accessibility_proof_absent"
+    }
+  ],
+  "truth_claims": {
+    "allowed": [
+      "Time has source and projection evidence for a local LifeShape Field surface.",
+      "Time has source-level local mutation, visible proof, receipt, Today recompute, and undo paths.",
+      "Time calendar awareness is optional and external effects are bounded by confirmed local write and outbox/receipt source paths.",
+      "Time visible and accessibility labels were normalized toward LifeShape Field language in this slice."
+    ],
+    "forbidden": [
+      "Visual Green",
+      "Runtime Green",
+      "Interaction Green",
+      "Release Green",
+      "screenshot proof",
+      "focused UI journey test proof",
+      "VoiceOver proof",
+      "Dynamic Type proof",
+      "Reduce Motion proof",
+      "Reduce Transparency proof",
+      "High Contrast proof",
+      "calendar permission journey proof",
+      "airplane-mode proof",
+      "simulator proof",
+      "device proof"
+    ]
+  },
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_touched": [
+      "Surfaces/Time",
+      "DesignSystem/ProductObjects",
+      "Projection/Mutations"
+    ],
+    "non_canonical_owners_touched": [],
+    "files_moved_or_created": [
+      "docs/audits/time-flagship-acceptance.md",
+      "docs/audits/time-flagship-acceptance.json"
+    ],
+    "old_non_canonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "architecture_debt": [
+      "Screenshot, accessibility, device, calendar permission, airplane-mode, and full UI journey proof remain outside this no-testing source acceptance."
+    ],
+    "next_repair_train": "AMB-1744/AMB-1765 screenshot and device proof; AMB-1743/AMB-1766 accessibility proof.",
+    "used_equivalent_path_interpretation": false
+  },
+  "proof_ceiling": {
+    "runtime_tests_run": false,
+    "ui_tests_run": false,
+    "simulator_run": false,
+    "screenshots_captured": false,
+    "accessibility_proof_run": false,
+    "calendar_permission_proof_run": false,
+    "airplane_mode_proof_run": false,
+    "reason": "User authorized full completion without testing until advised otherwise."
+  }
+}

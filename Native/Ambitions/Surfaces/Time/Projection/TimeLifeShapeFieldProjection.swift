@@ -346,8 +346,8 @@ extension TimeLifeSuiteProjector {
                 id: "time.calendar.list",
                 kind: .list,
                 title: "List",
-                value: "Equivalent",
-                detail: "Rows expose the same calendar signals for VoiceOver and large text.",
+                value: "Accessible",
+                detail: "Rows expose the same Time signals for VoiceOver and large text.",
                 visualState: .selected,
                 isOperational: true
             )

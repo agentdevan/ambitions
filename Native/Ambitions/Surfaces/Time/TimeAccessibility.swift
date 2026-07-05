@@ -15,7 +15,7 @@ enum TimeAccessibility {
     static func rootSummary(for state: TimeSurfaceState) -> String {
         [
             "Time",
-            "Life Calendar",
+            "LifeShape Field",
             state.timeframeLabel,
             state.hero.dominantTruth,
             state.hero.roomSummary,
