@@ -30,10 +30,10 @@
       "rationale": "Legacy onboarding app-state compatibility write; not canonical object-state authority."
     },
     {
-      "path": "Native/Ambitions/App/AppContainerFactory.swift",
+      "path": "Native/Ambitions/App/Bootstrap/PersistenceBootstrap.swift",
       "classification": "test_only",
       "allowedCalls": ["repositories.captures.saveCaptures"],
-      "rationale": "DEBUG-only preview capture seed guarded by AMBITIONS_UI_SEED_CAPTURES."
+      "rationale": "DEBUG-only preview capture seed guarded by AMBITIONS_UI_SEED_CAPTURES; persistence bootstrap owns repository setup after AMB-1675."
     },
     {
       "path": "Native/Ambitions/Interaction/TodayCommandActionHandler.swift",

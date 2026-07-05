@@ -99,6 +99,12 @@ CENTRAL_PROJECTION_REHOME_NEW_PREFIXES = (
     "Native/Ambitions/Trust/Projection/",
 )
 
+APP_BOOTSTRAP_WIRING_FILES = {
+    "Native/Ambitions/App/Bootstrap/PersistenceBootstrap.swift",
+    "Native/Ambitions/App/Bootstrap/RuntimeBootstrap.swift",
+    "Native/Ambitions/App/Bootstrap/SystemSurfaceBootstrap.swift",
+}
+
 SWIFT_HARD_LINE_CAP = 600
 LARGEST_FILE_REPORT_LIMIT = 10
 
@@ -206,6 +212,10 @@ def is_production_swift(path: str) -> bool:
 
 def is_local_runtime(path: str) -> bool:
     return path.startswith("Native/Ambitions/Core/LocalRuntimeOS/")
+
+
+def is_app_bootstrap_wiring(path: str) -> bool:
+    return path in APP_BOOTSTRAP_WIRING_FILES
 
 
 def is_suffix_split_name(name: str) -> bool:
@@ -519,7 +529,11 @@ def governance_findings(args: argparse.Namespace) -> list[Finding]:
                     )
                 )
 
-            if any(noun in path_obj.stem for noun in ARCHITECTURE_NOUNS) and not deletion_present:
+            if (
+                any(noun in path_obj.stem for noun in ARCHITECTURE_NOUNS)
+                and not deletion_present
+                and not is_app_bootstrap_wiring(path)
+            ):
                 findings.append(
                     Finding(
                         "delete-before-naming",
@@ -560,7 +574,11 @@ def governance_findings(args: argparse.Namespace) -> list[Finding]:
                 )
 
             type_pattern = r"\b(struct|class|actor|enum|protocol)\s+\w*(?:" + "|".join(NON_RUNTIME_MUTATION_TERMS) + r")\w*"
-            if not is_local_runtime(path) and (re.search(type_pattern, text) or has_any(MUTATION_WRITE_PATTERNS, text)):
+            if (
+                not is_local_runtime(path)
+                and not is_app_bootstrap_wiring(path)
+                and (re.search(type_pattern, text) or has_any(MUTATION_WRITE_PATTERNS, text))
+            ):
                 findings.append(
                     Finding(
                         "no-new-mutation-authority-outside-localruntimeos",

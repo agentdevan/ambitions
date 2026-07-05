@@ -50,71 +50,34 @@ enum AppContainerFactory {
     @MainActor
     static func make(configuration: AppBootstrapConfiguration) async throws -> AppContainer {
         let repositories = try await prepareRepositories(for: configuration)
-        let clock = AmbitionsClockFactory.clock(for: configuration.sessionSource)
-        let sideEffectOutbox = repositories.sideEffectLedger.map { SideEffectOutbox(ledger: $0) }
-        let notificationService = LocalNotificationFoundation(
-            notificationOutbox: NotificationOutbox(recorder: sideEffectOutbox)
-        )
-        let calendarRemindersService = EventKitIntegrationService(
-            eventKitOutbox: EventKitOutbox(recorder: sideEffectOutbox),
-            reminderRepository: repositories.reminders
-        )
-        let runtime = AmbitionsRuntimeFactory.make(
+        let clock = RuntimeBootstrap.clock(for: configuration)
+        let platformServices = SystemSurfaceBootstrap.makePlatformServices(repositories: repositories)
+        let runtime = RuntimeBootstrap.makeRuntime(
             repositories: repositories,
             clock: clock,
-            notificationService: notificationService,
-            calendarRemindersService: calendarRemindersService
+            notificationService: platformServices.notificationService,
+            calendarRemindersService: platformServices.calendarRemindersService
         )
-
-        let preferencesStore = RepositoryBackedAppPreferencesStore(appStateRepository: repositories.appState)
-        let startupService = DefaultStartupService(preferencesStore: preferencesStore, appStateRepository: repositories.appState, clock: clock)
-        let session = try await startupService.prepareSession(source: configuration.sessionSource)
+        let session = try await SystemSurfaceBootstrap.prepareSession(
+            configuration: configuration,
+            repositories: repositories,
+            clock: clock
+        )
         let navigation = StageStore(selectedSurface: session.initialTab)
         let externalRouter = DefaultAppExternalRouter(navigation: navigation)
-        let todayService = previewTodayServiceOverride(for: configuration.sessionSource) ?? runtime.todayService
-        let todayReceiptCommands = TodayReceiptCommandService(repositories: repositories)
-        let youPreferencesCommands = YouPreferencesCommandService(
+        let surfaceServices = SystemSurfaceBootstrap.makeServices(
             repositories: repositories,
-            loadDashboard: { try await runtime.youService.loadYouDashboard() }
-        )
-        let externalActionService = DefaultExternalActionCommandService(
-            runtimeExecutor: runtime.actionExecutor,
+            runtime: runtime,
+            navigation: navigation,
             externalRouter: externalRouter
         )
-        let externalCreationCommandExecutor = AmbitionsCommandExecutor(
-            captureService: runtime.captureService,
-            eventLedger: repositories.eventLedger,
-            commandExecutionRecords: repositories.commandExecutionRecords,
-            runtimeEvents: repositories.runtimeEvents,
-            projectionStore: repositories.projectionStore,
-            searchIndex: repositories.searchIndex,
-            commandJournal: repositories.commandJournal
+        let todayService = RuntimeBootstrap.todayService(for: configuration, runtime: runtime)
+        let timeService = RuntimeBootstrap.timeService(runtime: runtime)
+        await SystemSurfaceBootstrap.prepareLaunchEffects(
+            runtime: runtime,
+            notificationService: platformServices.notificationService,
+            clock: clock
         )
-        let externalCreationImportService = DefaultExternalCreationImportService(
-            commandExecutor: externalCreationCommandExecutor,
-            externalSurfaceSideEffectLedger: FileSideEffectLedgerRepository.defaultExternalSurfaceLedger(),
-            appSideEffectLedger: repositories.sideEffectLedger
-        )
-        let sourceAtlasLifecycleRefreshService = SourceAtlasPublicPackLifecycleRefreshService(
-            registry: SourceAtlasPublicPackRefreshTargetRegistryArtifactLoader.defaultAppRegistry(),
-            transport: SourceAtlasURLSessionPublicPackRemoteTransport(
-                endpoint: .sourceAtlasPublicGateway
-            )
-        )
-        let commandRouter = DefaultShellCommandRouter(
-            navigation: navigation,
-            captureService: runtime.captureService
-        )
-        let memoryLensService = DefaultMemoryLensService(repositories: repositories)
-        let onboardingService = RepositoryBackedOnboardingService(appStateRepository: repositories.appState)
-        await notificationService.registerCategories()
-        await runtime.snapshotWriter.refresh(now: clock.now)
-        await notificationService.refreshSchedule(now: clock.now)
-        #if DEBUG
-        let timeService = debugProtectedPlacementReviewTimeServiceOverride() ?? runtime.timeService
-        #else
-        let timeService = runtime.timeService
-        #endif
 
         return AppContainer(
             bootstrapConfiguration: configuration,
@@ -125,24 +88,24 @@ enum AppContainerFactory {
             accentFamily: session.accentFamily,
             navigation: navigation,
             todayService: todayService,
-            todayReceiptCommands: todayReceiptCommands,
+            todayReceiptCommands: surfaceServices.todayReceiptCommands,
             captureService: runtime.captureService,
             goalsService: runtime.goalsService,
             timeRitualsService: runtime.timeRitualsService,
             timeService: timeService,
             insightsService: runtime.insightsService,
             youService: runtime.youService,
-            youPreferencesCommands: youPreferencesCommands,
-            notificationService: notificationService,
-            calendarRemindersService: calendarRemindersService,
-            actionRouter: DefaultAppActionRouter(navigation: navigation),
+            youPreferencesCommands: surfaceServices.youPreferencesCommands,
+            notificationService: platformServices.notificationService,
+            calendarRemindersService: platformServices.calendarRemindersService,
+            actionRouter: surfaceServices.actionRouter,
             externalRouter: externalRouter,
-            externalActionService: externalActionService,
-            externalCreationImportService: externalCreationImportService,
-            sourceAtlasLifecycleRefreshService: sourceAtlasLifecycleRefreshService,
-            commandRouter: commandRouter,
-            memoryLensService: memoryLensService,
-            onboardingService: onboardingService
+            externalActionService: surfaceServices.externalActionService,
+            externalCreationImportService: surfaceServices.externalCreationImportService,
+            sourceAtlasLifecycleRefreshService: surfaceServices.sourceAtlasLifecycleRefreshService,
+            commandRouter: surfaceServices.commandRouter,
+            memoryLensService: surfaceServices.memoryLensService,
+            onboardingService: surfaceServices.onboardingService
         )
     }
 
@@ -150,16 +113,7 @@ enum AppContainerFactory {
         for configuration: AppBootstrapConfiguration,
         store overrideStore: AmbitionsPersistenceStore? = nil
     ) async throws -> AppRepositories {
-        let store: AmbitionsPersistenceStore
-        if let overrideStore {
-            store = overrideStore
-        } else {
-            store = try AmbitionsPersistenceStore(inMemory: configuration.usesInMemoryStore)
-        }
-
-        let repositories = makeRepositories(store: store, configuration: configuration)
-        try await applySeedPolicy(configuration.seedPolicy, to: repositories)
-        return repositories
+        try await PersistenceBootstrap.prepareRepositories(for: configuration, store: overrideStore)
     }
 
     private static func configuration(for source: AppSession.BootstrapSource) -> AppBootstrapConfiguration {
@@ -175,122 +129,5 @@ enum AppContainerFactory {
             return .live
             #endif
         }
-    }
-
-    private static func applySeedPolicy(_ seedPolicy: AppBootstrapConfiguration.SeedPolicy, to repositories: AppRepositories) async throws {
-        switch seedPolicy {
-        case .never:
-            #if DEBUG
-            try await applyPreviewCaptureSeedIfNeeded(to: repositories)
-            try await DemoSeedPipeline(repositories: repositories).applyRenderedTimeFoundationSeedIfNeeded()
-            #endif
-            return
-        case .whenExplicit:
-            try await DemoSeedPipeline(repositories: repositories).seedIfNeeded(force: true)
-        }
-    }
-
-    #if DEBUG
-    private static func applyPreviewCaptureSeedIfNeeded(to repositories: AppRepositories) async throws {
-        guard ProcessInfo.processInfo.environment["AMBITIONS_UI_SEED_CAPTURES"] == "1" else {
-            return
-        }
-
-        try await repositories.captures.saveCaptures(PreviewFixtures.default.captures)
-    }
-
-    private static func debugProtectedPlacementReviewTimeServiceOverride() -> (any TimeServicing)? {
-        guard ProcessInfo.processInfo.environment["AMBITIONS_UI_PROTECTED_PLACEMENT_REVIEW"] == "1" else {
-            return nil
-        }
-
-        return StubTimeService(
-            timeState: PreviewTimeScenarios.protectedPlacementReviewSeeded,
-            weeklyReviewState: PreviewTimeScenarios.weeklyReview
-        )
-    }
-    #endif
-
-    private static func makeRepositories(
-        store: AmbitionsPersistenceStore,
-        configuration: AppBootstrapConfiguration
-    ) -> AppRepositories {
-        AppRepositories(
-            goals: SwiftDataGoalRepository(store: store),
-            drafts: SwiftDataGoalDraftRepository(store: store),
-            evidence: SwiftDataProgressEvidenceRepository(store: store),
-            feedback: SwiftDataFeedbackEventRepository(store: store),
-            captures: SwiftDataCaptureRepository(store: store),
-            reminders: SwiftDataReminderRepository(store: store),
-            teaching: SwiftDataGoalTeachingSignalRepository(store: store),
-            eventLedger: SwiftDataEventLedgerRepository(store: store),
-            sideEffectLedger: SwiftDataSideEffectLedgerRepository(store: store),
-            actionReceiptHistory: SwiftDataActionReceiptHistoryRepository(store: store),
-            entityRevisionTombstones: SwiftDataEntityRevisionTombstoneRepository(store: store),
-            runtimeSnapshotLedger: SwiftDataRuntimeSnapshotLedgerRepository(store: store),
-            commandExecutionRecords: SwiftDataAmbitionsCommandExecutionRecordRepository(store: store),
-            runtimeEvents: runtimeEventStore(for: configuration),
-            projectionStore: projectionStore(for: configuration),
-            appGroupSnapshotStore: appGroupSnapshotStore(for: configuration),
-            searchIndex: searchIndex(for: configuration),
-            commandJournal: commandJournal(for: configuration),
-            executionLedgerReplayInspection: SwiftDataExecutionLedgerReplayInspectionRepository(store: store),
-            graphOperationalRecords: SwiftDataAmbitionGraphOperationalRecordRepository(store: store),
-            graphProofRecords: SwiftDataAmbitionGraphProofRecordRepository(store: store),
-            graphProjectionRecords: SwiftDataAmbitionGraphProjectionRecordRepository(store: store),
-            lifeContext: SwiftDataLifeContextRepository(store: store),
-            goalCreationUnitOfWork: SwiftDataGoalCreationUnitOfWork(store: store),
-            capturePromotionUnitOfWork: SwiftDataCapturePromotionUnitOfWork(store: store),
-            appState: SwiftDataAppStateRepository(store: store)
-        )
-    }
-
-    private static func runtimeEventStore(for configuration: AppBootstrapConfiguration) -> any RuntimeEventStore {
-        if configuration.usesInMemoryStore {
-            return InMemoryRuntimeEventStore()
-        }
-        return EventStoreSQLite.defaultLiveStore()
-    }
-
-    private static func projectionStore(for configuration: AppBootstrapConfiguration) -> ProjectionStoreSQLite? {
-        if configuration.usesInMemoryStore {
-            return nil
-        }
-        return ProjectionStoreSQLite.defaultLiveStore()
-    }
-
-    private static func appGroupSnapshotStore(for configuration: AppBootstrapConfiguration) -> AppGroupSnapshotStore? {
-        if configuration.usesInMemoryStore {
-            return nil
-        }
-        return AppGroupSnapshotStore.defaultLiveStore()
-    }
-
-    private static func searchIndex(for configuration: AppBootstrapConfiguration) -> FTSIndex? {
-        if configuration.usesInMemoryStore {
-            return nil
-        }
-        return FTSIndex(store: SearchStoreFTS.defaultLiveStore())
-    }
-
-    private static func commandJournal(for configuration: AppBootstrapConfiguration) -> any CommandJournal {
-        if configuration.usesInMemoryStore {
-            return InMemoryCommandJournal()
-        }
-        return FileCommandJournal.defaultLiveStore()
-    }
-
-    private static func previewTodayServiceOverride(for source: AppSession.BootstrapSource) -> (any TodayServicing)? {
-        #if DEBUG
-        guard source == .preview,
-              let scenarioName = ProcessInfo.processInfo.environment["AMBITIONS_PREVIEW_TODAY_SCENARIO"],
-              let experience = PreviewTodayScenarios.named(scenarioName) else {
-            return nil
-        }
-        return StubTodayService(experience: experience)
-        #else
-        _ = source
-        return nil
-        #endif
     }
 }

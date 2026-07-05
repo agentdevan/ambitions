@@ -44,22 +44,60 @@ final class AppContainerFactoryTests: XCTestCase {
 
         let repositories = try await AppContainerFactory.prepareRepositories(for: .live, store: store)
         let runtimeEvents = try XCTUnwrap(repositories.runtimeEvents)
-        let factorySource = try String(
-            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/App/AppContainerFactory.swift"),
-            encoding: .utf8
-        )
+        let factorySource = try source("Native/Ambitions/App/AppContainerFactory.swift")
+        let persistenceBootstrapSource = try source("Native/Ambitions/App/Bootstrap/PersistenceBootstrap.swift")
 
         XCTAssertEqual(runtimeEvents.storeKind, .sqlite)
         XCTAssertTrue(runtimeEvents is EventStoreSQLite)
         XCTAssertNotNil(repositories.projectionStore)
         XCTAssertNotNil(repositories.searchIndex)
-        XCTAssertTrue(factorySource.contains("EventStoreSQLite.defaultLiveStore()"))
-        XCTAssertTrue(factorySource.contains("ProjectionStoreSQLite.defaultLiveStore()"))
-        XCTAssertTrue(factorySource.contains("SearchStoreFTS.defaultLiveStore()"))
+        XCTAssertTrue(factorySource.contains("PersistenceBootstrap.prepareRepositories"))
+        XCTAssertTrue(persistenceBootstrapSource.contains("EventStoreSQLite.defaultLiveStore()"))
+        XCTAssertTrue(persistenceBootstrapSource.contains("ProjectionStoreSQLite.defaultLiveStore()"))
+        XCTAssertTrue(persistenceBootstrapSource.contains("SearchStoreFTS.defaultLiveStore()"))
         XCTAssertFalse(
-            factorySource.contains("return FileRuntimeEventStore.defaultLiveStore()"),
-            "Persistent AppContainerFactory runtime events must not use JSONL as live authority."
+            persistenceBootstrapSource.contains("return FileRuntimeEventStore.defaultLiveStore()"),
+            "Persistent bootstrap runtime events must not use JSONL as live authority."
         )
+    }
+
+    func testAppBootstrapResponsibilitySlicesOwnNamedWiring() throws {
+        let factorySource = try source("Native/Ambitions/App/AppContainerFactory.swift")
+        let persistenceSource = try source("Native/Ambitions/App/Bootstrap/PersistenceBootstrap.swift")
+        let runtimeSource = try source("Native/Ambitions/App/Bootstrap/RuntimeBootstrap.swift")
+        let systemSurfaceSource = try source("Native/Ambitions/App/Bootstrap/SystemSurfaceBootstrap.swift")
+
+        XCTAssertTrue(factorySource.contains("PersistenceBootstrap.prepareRepositories"))
+        XCTAssertTrue(factorySource.contains("RuntimeBootstrap.makeRuntime"))
+        XCTAssertTrue(factorySource.contains("SystemSurfaceBootstrap.makePlatformServices"))
+        XCTAssertTrue(factorySource.contains("SystemSurfaceBootstrap.makeServices"))
+        XCTAssertTrue(factorySource.contains("SystemSurfaceBootstrap.prepareLaunchEffects"))
+
+        XCTAssertTrue(persistenceSource.contains("SwiftDataGoalRepository(store:"))
+        XCTAssertTrue(persistenceSource.contains("EventStoreSQLite.defaultLiveStore()"))
+        XCTAssertTrue(persistenceSource.contains("FileCommandJournal.defaultLiveStore()"))
+        XCTAssertTrue(runtimeSource.contains("AmbitionsRuntimeFactory.make("))
+        XCTAssertTrue(systemSurfaceSource.contains("LocalNotificationFoundation("))
+        XCTAssertTrue(systemSurfaceSource.contains("EventKitIntegrationService("))
+        XCTAssertTrue(systemSurfaceSource.contains("AmbitionsCommandExecutor("))
+        XCTAssertTrue(systemSurfaceSource.contains("SourceAtlasPublicPackLifecycleRefreshService("))
+
+        XCTAssertFalse(factorySource.contains("SwiftDataGoalRepository(store:"))
+        XCTAssertFalse(factorySource.contains("AmbitionsRuntimeFactory.make("))
+        XCTAssertFalse(factorySource.contains("LocalNotificationFoundation("))
+        XCTAssertFalse(factorySource.contains("EventKitIntegrationService("))
+        XCTAssertFalse(factorySource.contains("AmbitionsCommandExecutor("))
+    }
+
+    func testAppBootstrapDependencyGraphArtifactNamesCurrentOwners() throws {
+        let artifact = try source("docs/audits/app-bootstrap-dependency-graph.md")
+
+        XCTAssertTrue(artifact.contains("Native/Ambitions/App/Bootstrap/PersistenceBootstrap.swift"))
+        XCTAssertTrue(artifact.contains("Native/Ambitions/App/Bootstrap/RuntimeBootstrap.swift"))
+        XCTAssertTrue(artifact.contains("Native/Ambitions/App/Bootstrap/SystemSurfaceBootstrap.swift"))
+        XCTAssertTrue(artifact.contains("Native/Ambitions/App/AppContainerFactory.swift"))
+        XCTAssertTrue(artifact.contains("Proof ceiling: Source/architecture evidence"))
+        XCTAssertTrue(artifact.contains("This artifact does not prove:"))
     }
 
     func testDemoBootstrapSeedsRepositoriesOnlyWhenExplicitlyRequested() async throws {
@@ -321,5 +359,12 @@ private extension AppContainerFactoryTests {
             candidate.deleteLastPathComponent()
         }
         throw NSError(domain: "AppContainerFactoryTests", code: 1)
+    }
+
+    func source(_ relativePath: String) throws -> String {
+        try String(
+            contentsOf: repoRoot().appendingPathComponent(relativePath),
+            encoding: .utf8
+        )
     }
 }

@@ -50,17 +50,17 @@ REQUIRED_LOCAL_RUNTIME_OWNERS = [
 
 INTEGRATION_MARKERS = {
     "command_journal_live_wiring": {
-        "path": "Native/Ambitions/App/AppContainerFactory.swift",
+        "path": "Native/Ambitions/App/Bootstrap/SystemSurfaceBootstrap.swift",
         "markers": [
             "AmbitionsCommandExecutor",
             "commandJournal",
-            "runtimeEventStore",
-            "FileCommandJournal.defaultLiveStore",
-            "EventStoreSQLite.defaultLiveStore",
+            "runtimeEvents",
+            "projectionStore",
+            "searchIndex",
         ],
     },
     "runtime_event_sqlite_live_authority": {
-        "path": "Native/Ambitions/App/AppContainerFactory.swift",
+        "path": "Native/Ambitions/App/Bootstrap/PersistenceBootstrap.swift",
         "markers": [
             "return EventStoreSQLite.defaultLiveStore()",
             "return InMemoryRuntimeEventStore()",
@@ -641,16 +641,16 @@ def check_integration_markers() -> CheckResult:
 
 
 def check_live_event_store_authority() -> CheckResult:
-    path = ROOT / "Native" / "Ambitions" / "App" / "AppContainerFactory.swift"
+    path = ROOT / "Native" / "Ambitions" / "App" / "Bootstrap" / "PersistenceBootstrap.swift"
     findings: list[Finding] = []
     if not path.exists():
         findings.append(
             Finding(
                 "blocker",
-                "missing-app-container-factory",
+                "missing-persistence-bootstrap",
                 relative(path),
                 None,
-                "Live runtime event authority cannot be proven without AppContainerFactory source.",
+                "Live runtime event authority cannot be proven without PersistenceBootstrap source.",
             )
         )
         return make_result(
@@ -681,7 +681,7 @@ def check_live_event_store_authority() -> CheckResult:
                 "live-runtime-event-authority-not-sqlite",
                 relative(path),
                 None,
-                "Persistent AppContainerFactory runtimeEventStore(for:) must select EventStoreSQLite.defaultLiveStore().",
+                "Persistent PersistenceBootstrap runtimeEventStore(for:) must select EventStoreSQLite.defaultLiveStore().",
             )
         )
     if "return InMemoryRuntimeEventStore()" not in text:
@@ -698,7 +698,7 @@ def check_live_event_store_authority() -> CheckResult:
     return make_result(
         "live_event_store_authority",
         findings,
-        "Production runtime event authority is SQLite; JSONL authority is not selected by AppContainerFactory.",
+        "Production runtime event authority is SQLite; JSONL authority is not selected by PersistenceBootstrap.",
         "{count} live event-store authority blocker(s) remain.",
     )
 
