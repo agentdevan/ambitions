@@ -8,19 +8,35 @@ export DEVELOPER_DIR="${DEVELOPER_DIR:-/Applications/Xcode.app/Contents/Develope
 export XCODEBUILDMCP_ENABLED_WORKFLOWS="${XCODEBUILDMCP_ENABLED_WORKFLOWS:-session-management,project-discovery,simulator-management,simulator,ui-automation,utilities,swift-package}"
 export XCODEBUILDMCP_DISABLE_XCODE_AUTO_SYNC="${XCODEBUILDMCP_DISABLE_XCODE_AUTO_SYNC:-true}"
 export XCODEBUILDMCP_SENTRY_DISABLED="${XCODEBUILDMCP_SENTRY_DISABLED:-true}"
-export AMBITIONS_XCODEBUILDMCP_CLEAN_PEERS="${AMBITIONS_XCODEBUILDMCP_CLEAN_PEERS:-1}"
 
 XCODEBUILDMCP_PACKAGE_VERSION="${XCODEBUILDMCP_PACKAGE_VERSION:-2.6.2}"
 XCODEBUILDMCP_PACKAGE_ROOT="${XCODEBUILDMCP_PACKAGE_ROOT:-/Users/devan/.codex/mcp-node-packages/xcodebuildmcp-${XCODEBUILDMCP_PACKAGE_VERSION}}"
 XCODEBUILDMCP_BIN="${XCODEBUILDMCP_PACKAGE_ROOT}/node_modules/.bin/xcodebuildmcp"
 PEER_CLEANUP_GRACE_SECONDS="${AMBITIONS_XCODEBUILDMCP_PEER_CLEANUP_GRACE_SECONDS:-1}"
 
+matching_xcodebuildmcp_peer_pids() {
+  ps -axo pid=,command= | while IFS= read -r line; do
+    local pid=""
+    local command=""
+    read -r pid command <<< "${line}"
+
+    if [[ -z "${pid}" || "${pid}" == "$$" ]]; then
+      continue
+    fi
+
+    case "${command}" in
+      *"/node_modules/xcodebuildmcp/build/cli.js mcp"* | *"/node_modules/.bin/xcodebuildmcp mcp"*)
+        printf '%s\n' "${pid}"
+        ;;
+    esac
+  done
+}
+
 terminate_matching_peers() {
   local signal="$1"
-  local pattern="$2"
   local pids
 
-  pids="$(pgrep -f "${pattern}" 2>/dev/null || true)"
+  pids="$(matching_xcodebuildmcp_peer_pids || true)"
   if [[ -z "${pids}" ]]; then
     return 0
   fi
@@ -32,16 +48,16 @@ terminate_matching_peers() {
   done <<< "${pids}"
 }
 
-if [[ "${AMBITIONS_XCODEBUILDMCP_CLEAN_PEERS}" == "1" ]]; then
-  terminate_matching_peers TERM "npm exec xcodebuildmcp(@[^[:space:]]*)? mcp"
-  terminate_matching_peers TERM "xcodebuildmcp(@[^[:space:]]*)? mcp"
-  terminate_matching_peers TERM "node .*/xcodebuildmcp mcp"
-  terminate_matching_peers TERM "node .*/xcodebuildmcp/.* mcp"
+if [[ "${1:-}" == "--cleanup-peers-and-exit" ]]; then
+  echo "[ambitions-xcodebuildmcp] explicit peer cleanup enabled" >&2
+  terminate_matching_peers TERM
   sleep "${PEER_CLEANUP_GRACE_SECONDS}"
-  terminate_matching_peers KILL "npm exec xcodebuildmcp(@[^[:space:]]*)? mcp"
-  terminate_matching_peers KILL "xcodebuildmcp(@[^[:space:]]*)? mcp"
-  terminate_matching_peers KILL "node .*/xcodebuildmcp mcp"
-  terminate_matching_peers KILL "node .*/xcodebuildmcp/.* mcp"
+  terminate_matching_peers KILL
+  exit 0
+fi
+
+if [[ "${AMBITIONS_XCODEBUILDMCP_CLEAN_PEERS:-0}" == "1" ]]; then
+  echo "[ambitions-xcodebuildmcp] ignoring AMBITIONS_XCODEBUILDMCP_CLEAN_PEERS during stdio startup; use --cleanup-peers-and-exit for maintenance" >&2
 fi
 
 if [[ ! -x "${XCODEBUILDMCP_BIN}" ]]; then

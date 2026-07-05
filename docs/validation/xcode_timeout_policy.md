@@ -74,10 +74,29 @@ scripts/ambitions-xcodebuildmcp-stdio.sh
 The wrapper pins `xcodebuildmcp@2.6.2`, starts from the Ambitions repo root so
 `.xcodebuildmcp/config.yaml` is loaded, uses `/Applications/Xcode.app`, and
 excludes the invalid `logging` workflow from the Build iOS Apps plugin manifest.
+Startup must never perform peer cleanup. Transport startup is a stdio contract:
+the wrapper may install the pinned package if missing, then it must exec the MCP
+server without killing sibling processes. Explicit maintenance cleanup is:
+
+```bash
+scripts/ambitions-xcodebuildmcp-stdio.sh --cleanup-peers-and-exit
+```
+
+That maintenance mode may only target exact `xcodebuildmcp` executable process
+shapes, not arbitrary shell command lines that happen to mention
+`xcodebuildmcp`. Do not run it while an active Codex host is expected to keep
+using an already-open `xcodebuildmcp` client; restart/reload the host after
+intentional cleanup.
 
 The expected transport proof is a direct JSON-RPC `tools/call` for
 `session_show_defaults` returning the `ambitions-ios` profile with
 `iPhone 17 Pro Max` and `0F5F5AC4-4303-47C8-9BDC-EB5F57A0F79E`.
+
+Use this probe for current repo proof:
+
+```bash
+scripts/ambitions-xcodebuildmcp-probe.py --json
+```
 
 If the in-process Codex tool namespace still reports `Transport closed` after
 the wrapper and manifests are patched, treat that as a running-host stale
@@ -100,6 +119,9 @@ The helper uses:
 - extraction: `scripts/ambitions-xcode-result-extract.sh --result <bundle> --output-dir <extract-dir>`;
 - bounded execution: `scripts/ambitions-bounded-xcodebuild.sh`;
 - retry behavior: retry once only after `xcrun simctl shutdown all`, and only when the first attempt times out.
+
+Local `.codex` result and screenshot paths are local working evidence for
+validation triage. They are not visual acceptance by themselves.
 
 If the first UI screenshot matrix run times out, extract the partial result bundle if it exists and record the attempt as an infrastructure timeout. Then retry once after simulator shutdown.
 
