@@ -255,4 +255,47 @@ final class ScreenContractRegistryTests: XCTestCase {
         XCTAssertEqual(ownersByScreen[.trustCenter], "D18")
         XCTAssertEqual(ownersByScreen[.whatAmbitionsKnows], "D19")
     }
+
+    func testAMB1676ScreenContractsLiveUnderQualityNotCoreDomain() {
+        let root = repoRoot()
+        let qualityOwnerFiles = [
+            "Native/Ambitions/Quality/ScreenContracts/ScreenContractModels.swift",
+            "Native/Ambitions/Quality/ScreenContracts/ScreenContractValidator.swift",
+            "Native/Ambitions/Quality/ScreenContracts/ScreenContractRegistry.swift",
+            "Native/Ambitions/Quality/ScreenContracts/ScreenContractRegistry+Contracts.swift",
+            "Native/Ambitions/Quality/ScreenContracts/ScreenContractRegistry+DetailContracts.swift",
+        ]
+        let oldDomainOwnerFiles = [
+            "Native/Ambitions/Core/Domain/ScreenContractModels.swift",
+            "Native/Ambitions/Core/Domain/ScreenContractModels+02-ScreenContractValidator.swift",
+            "Native/Ambitions/Core/Domain/ScreenContractModels+03-ScreenContractRegistry.swift",
+            "Native/Ambitions/Core/Domain/ScreenContractModels+03-ScreenContractRegistry+02-contracts.swift",
+            "Native/Ambitions/Core/Domain/ScreenContractModels+03-ScreenContractRegistry+03-oneStepGoalDetail.swift",
+        ]
+
+        for path in qualityOwnerFiles {
+            XCTAssertTrue(
+                FileManager.default.fileExists(atPath: root.appendingPathComponent(path).path),
+                "Screen contract Quality owner missing: \(path)"
+            )
+        }
+        for path in oldDomainOwnerFiles {
+            XCTAssertFalse(
+                FileManager.default.fileExists(atPath: root.appendingPathComponent(path).path),
+                "Screen contract UI/quality model still lives under Core/Domain: \(path)"
+            )
+        }
+    }
+
+    private func repoRoot() -> URL {
+        var url = URL(fileURLWithPath: #filePath)
+        while url.pathComponents.count > 1 {
+            let candidate = url.appendingPathComponent("project.yml")
+            if FileManager.default.fileExists(atPath: candidate.path) {
+                return url
+            }
+            url.deleteLastPathComponent()
+        }
+        return URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
+    }
 }

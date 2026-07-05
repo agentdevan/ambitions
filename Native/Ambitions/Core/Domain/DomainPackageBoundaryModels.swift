@@ -22,7 +22,7 @@ struct DomainPackageBoundaryManifest: Codable, Sendable, Equatable, Hashable {
 
     init(
         moduleName: String = "AmbitionsDomain",
-        sourceRoot: String = "Native/Ambitions/Domain",
+        sourceRoot: String = "Native/Ambitions/Core/Domain",
         plannedPackageProductName: String = "AmbitionsDomain",
         allowedImports: [String] = ["Foundation"],
         forbiddenImports: [String] = ["SwiftUI", "UIKit", "AppKit", "WidgetKit", "EventKit", "UserNotifications", "CloudKit"],

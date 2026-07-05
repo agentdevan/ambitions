@@ -235,7 +235,7 @@ extension ScreenContractRegistry {
         evidenceAnchors: [
             screenMatrixAnchor,
             accessibilityMatrixAnchor,
-            .init(kind: .sourceFoundation, path: "Native/Ambitions/Domain/LifeAreaModels.swift", note: "Life Areas model foundation"),
+            .init(kind: .sourceFoundation, path: "Native/Ambitions/Core/Domain/LifeAreaModels.swift", note: "Life Areas model foundation"),
             .init(kind: .sourceService, path: "Native/Ambitions/Services/LifeAreaAtlasProjector.swift", note: "Life Areas Atlas projector"),
             .init(kind: .testCoverage, path: "Native/AmbitionsTests/Services/LifeAreaAtlasProjectorTests.swift", note: "Life Areas Atlas tests")
         ]
@@ -261,7 +261,7 @@ extension ScreenContractRegistry {
         evidenceAnchors: [
             screenMatrixAnchor,
             accessibilityMatrixAnchor,
-            .init(kind: .sourceFoundation, path: "Native/Ambitions/Domain/NorthStarModels.swift", note: "North Star foundation"),
+            .init(kind: .sourceFoundation, path: "Native/Ambitions/Core/Domain/NorthStarModels.swift", note: "North Star foundation"),
             .init(kind: .sourceService, path: "Native/Ambitions/Services/NorthStarProjector.swift", note: "North Star projector"),
             .init(kind: .testCoverage, path: "Native/AmbitionsTests/Services/NorthStarProjectorTests.swift", note: "North Star projector tests")
         ]

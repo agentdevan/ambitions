@@ -21,7 +21,7 @@ extension ScreenContractRegistry {
         evidenceAnchors: [
             screenMatrixAnchor,
             accessibilityMatrixAnchor,
-            .init(kind: .sourceFoundation, path: "Native/Ambitions/Domain/OneStepGoalModels.swift", note: "One-Step Goal foundation"),
+            .init(kind: .sourceFoundation, path: "Native/Ambitions/Core/Domain/OneStepGoalModels.swift", note: "One-Step Goal foundation"),
             .init(kind: .sourceService, path: "Native/Ambitions/Services/OneStepGoalProjector.swift", note: "One-Step Goal projector"),
             .init(kind: .testCoverage, path: "Native/AmbitionsTests/Services/OneStepGoalProjectorTests.swift", note: "One-Step Goal projector tests")
         ]
@@ -47,7 +47,7 @@ extension ScreenContractRegistry {
         evidenceAnchors: [
             screenMatrixAnchor,
             accessibilityMatrixAnchor,
-            .init(kind: .sourceFoundation, path: "Native/Ambitions/Domain/ReviewsModels.swift", note: "Review foundation"),
+            .init(kind: .sourceFoundation, path: "Native/Ambitions/Core/Domain/ReviewsModels.swift", note: "Review foundation"),
             .init(kind: .sourceService, path: "Native/Ambitions/Services/ReviewsV1Projector.swift", note: "Review projector"),
             .init(kind: .testCoverage, path: "Native/AmbitionsTests/Services/ReviewsV1ProjectorTests.swift", note: "Review projector tests")
         ]
@@ -125,8 +125,8 @@ extension ScreenContractRegistry {
         evidenceAnchors: [
             screenMatrixAnchor,
             accessibilityMatrixAnchor,
-            .init(kind: .sourceFoundation, path: "Native/Ambitions/Domain/ActionClosureReceiptModels.swift", note: "Receipt and archive metadata foundation"),
-            .init(kind: .testCoverage, path: "Native/AmbitionsTests/Domain/ActionClosureReceiptModelsTests.swift", note: "Receipt tests")
+            .init(kind: .sourceFoundation, path: "Native/Ambitions/Core/LocalRuntimeOS/Inspection/ActionClosureReceiptModels.swift", note: "Receipt and archive metadata foundation"),
+            .init(kind: .testCoverage, path: "Native/AmbitionsTests/LocalRuntimeOS/Inspection/ActionClosureReceiptModelsTests.swift", note: "Receipt tests")
         ]
     )
 

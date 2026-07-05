@@ -6,7 +6,7 @@ final class DomainPackageBoundaryModelsTests: XCTestCase {
         let manifest = DomainPackageBoundaryManifest.current
 
         XCTAssertEqual(manifest.moduleName, "AmbitionsDomain")
-        XCTAssertEqual(manifest.sourceRoot, "Native/Ambitions/Domain")
+        XCTAssertEqual(manifest.sourceRoot, "Native/Ambitions/Core/Domain")
         XCTAssertEqual(manifest.plannedPackageProductName, "AmbitionsDomain")
         XCTAssertTrue(manifest.allowedImports.contains("Foundation"))
         XCTAssertTrue(manifest.forbiddenImports.contains("SwiftUI"))
@@ -17,11 +17,11 @@ final class DomainPackageBoundaryModelsTests: XCTestCase {
         let manifest = DomainPackageBoundaryManifest(packageWiringDeclared: true)
         let files = [
             DomainSourceFileBoundary(
-                path: "Native/Ambitions/Domain/DomainFoundation.swift",
+                path: "Native/Ambitions/Core/Domain/DomainFoundation.swift",
                 imports: ["Foundation"]
             ),
             DomainSourceFileBoundary(
-                path: "Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift",
+                path: "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineContracts.swift",
                 imports: ["Foundation"]
             )
         ]
@@ -37,7 +37,7 @@ final class DomainPackageBoundaryModelsTests: XCTestCase {
     func testValidatorBlocksForbiddenImportsAndOutOfRootFiles() {
         let files = [
             DomainSourceFileBoundary(
-                path: "Native/Ambitions/Domain/BadView.swift",
+                path: "Native/Ambitions/Core/Domain/BadView.swift",
                 imports: ["Foundation", "SwiftUI"]
             ),
             DomainSourceFileBoundary(
@@ -45,7 +45,7 @@ final class DomainPackageBoundaryModelsTests: XCTestCase {
                 imports: ["Foundation"]
             ),
             DomainSourceFileBoundary(
-                path: "Native/Ambitions/Domain/MissingFoundation.swift",
+                path: "Native/Ambitions/Core/Domain/MissingFoundation.swift",
                 imports: []
             )
         ]
@@ -62,8 +62,8 @@ final class DomainPackageBoundaryModelsTests: XCTestCase {
         XCTAssertEqual(
             report.offendingPaths,
             [
-                "Native/Ambitions/Domain/BadView.swift",
-                "Native/Ambitions/Domain/MissingFoundation.swift",
+                "Native/Ambitions/Core/Domain/BadView.swift",
+                "Native/Ambitions/Core/Domain/MissingFoundation.swift",
                 "Native/Ambitions/Surfaces/Today/Projection/TodayFeatureService.swift"
             ]
         )

@@ -1,0 +1,2042 @@
+{
+  "allowedCategories": [
+    "canonical_entity",
+    "value_object",
+    "command_payload",
+    "event_payload",
+    "projection_dto",
+    "ui_model",
+    "adapter_dto",
+    "obsolete"
+  ],
+  "debt": {
+    "lowConfidenceDefaultFiles": [
+      "Native/Ambitions/Core/Domain/AmbitionGraphLineageModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionGraphModels+02-Constraint.swift",
+      "Native/Ambitions/Core/Domain/AmbitionGraphModels+03-RecoveryThread.swift",
+      "Native/Ambitions/Core/Domain/AmbitionGraphModels+04-AmbitionGraphRecommendationTrace.swift",
+      "Native/Ambitions/Core/Domain/AmbitionGraphModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionGraphStoreSplitModels.swift",
+      "Native/Ambitions/Core/Domain/AppSession.swift",
+      "Native/Ambitions/Core/Domain/CommitmentWaitingModels.swift",
+      "Native/Ambitions/Core/Domain/ConflictPolicyModels.swift",
+      "Native/Ambitions/Core/Domain/CorrectionFoldModels.swift",
+      "Native/Ambitions/Core/Domain/DomainFoundation.swift",
+      "Native/Ambitions/Core/Domain/ExecutionResilienceModels.swift",
+      "Native/Ambitions/Core/Domain/FixedPoint.swift",
+      "Native/Ambitions/Core/Domain/GoalBelievabilityModels.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalClarificationModels.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalContradictionModels.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEnergyFitModels.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEnergyLearningModels.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineAdaptationService.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineContracts+02-PlanSection.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineContracts+05-GoalOrchestrationResult.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineContracts+ProgressStorageCoding.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineContracts.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineFeedback.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineFeedbackAnalyzer.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineFixtures.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineIntake+02-GoalEngineIntakeService+02-buildGoalDraft.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineIntake+02-GoalEngineIntakeService+03-inferMissingFields.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineIntake+02-GoalEngineIntakeService+04-createPlanningStrategy.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineIntake+02-GoalEngineIntakeService.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineIntake+03-GoalClarificationQuestionGenerator.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineIntake.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineOrchestrator.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEnginePlanner.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEnginePlannerLinter.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineStepRewriter.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalFreshnessUpdateModels.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalIntentCompilerModels+02-GoalIntentCapacityEnvelope.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalIntentCompilerModels+03-GoalDraft.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalIntentCompilerModels+04-GoalIntentDayCompilerInput.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalIntentCompilerModels.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalPathCompilerModels+02-GoalCompiledPathCompilerCore+02-compile.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalPathCompilerModels+02-GoalCompiledPathCompilerCore+03-stageUncertaintyReasons.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalPathCompilerModels+02-GoalCompiledPathCompilerCore.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalPathCompilerModels.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalResourceGraphModels+02-GoalResourceGraphBuilderCore+03-ScoredResource.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalResourceGraphModels+02-GoalResourceGraphBuilderCore.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalResourceGraphModels.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalTeachingModels.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalUnderstandingModels.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/PathIntelligenceModels.swift",
+      "Native/Ambitions/Core/Domain/GoalRelevanceScan.swift",
+      "Native/Ambitions/Core/Domain/InsightsModels.swift",
+      "Native/Ambitions/Core/Domain/LearningAnticipationModels.swift",
+      "Native/Ambitions/Core/Domain/LifeAreaModels.swift",
+      "Native/Ambitions/Core/Domain/LifeContextModels+02-HistoricalContextFact.swift",
+      "Native/Ambitions/Core/Domain/LifeContextModels+03-LifeContextBundle+02-id.swift",
+      "Native/Ambitions/Core/Domain/LifeContextModels+03-LifeContextBundle+03-deriveConstraints.swift",
+      "Native/Ambitions/Core/Domain/LifeContextModels+03-LifeContextBundle.swift",
+      "Native/Ambitions/Core/Domain/LifeContextModels+04-LifeContextBundle.swift",
+      "Native/Ambitions/Core/Domain/LifeContextModels+05-LifeContextFixtureProfiles+02-teenPortfolioLaunchWithGuardianTransport.swift",
+      "Native/Ambitions/Core/Domain/LifeContextModels+05-LifeContextFixtureProfiles+03-makerResidencyApplicationPathway.swift",
+      "Native/Ambitions/Core/Domain/LifeContextModels+05-LifeContextFixtureProfiles+04-cityWorkshopLaunchWithoutEquipment.swift",
+      "Native/Ambitions/Core/Domain/LifeContextModels+05-LifeContextFixtureProfiles.swift",
+      "Native/Ambitions/Core/Domain/LifeContextModels+06-LifeContextEnergyPattern.swift",
+      "Native/Ambitions/Core/Domain/LifeContextModels.swift",
+      "Native/Ambitions/Core/Domain/LifeGraphDeltaReviewModels.swift",
+      "Native/Ambitions/Core/Domain/LifeGraphModels+04-LifeGraphResolver.swift",
+      "Native/Ambitions/Core/Domain/LifeGraphModels.swift",
+      "Native/Ambitions/Core/Domain/LifeShapeConfidence.swift",
+      "Native/Ambitions/Core/Domain/LifeShapeCorrection.swift",
+      "Native/Ambitions/Core/Domain/LifeShapeDerivation.swift",
+      "Native/Ambitions/Core/Domain/LifeShapeHorizon.swift",
+      "Native/Ambitions/Core/Domain/LifeShapeInputRef.swift",
+      "Native/Ambitions/Core/Domain/LifeShapeLayer.swift",
+      "Native/Ambitions/Core/Domain/LifeShapeRuleID.swift",
+      "Native/Ambitions/Core/Domain/NorthStarModels.swift",
+      "Native/Ambitions/Core/Domain/OneStepGoalModels+02-OneStepGoalReferenceHooks.swift",
+      "Native/Ambitions/Core/Domain/OneStepGoalModels.swift",
+      "Native/Ambitions/Core/Domain/PlanInsertionCandidate.swift",
+      "Native/Ambitions/Core/Domain/RecommendationExplanationModels+03-RecommendationTraceCounterfactualDiff.swift",
+      "Native/Ambitions/Core/Domain/RecommendationExplanationModels+04-RecommendationTrace+02-CodingKeys.swift",
+      "Native/Ambitions/Core/Domain/RecommendationExplanationModels+04-RecommendationTrace+03-id.swift",
+      "Native/Ambitions/Core/Domain/RecommendationExplanationModels+04-RecommendationTrace+04-reasonGraph.swift",
+      "Native/Ambitions/Core/Domain/RecommendationExplanationModels+04-RecommendationTrace.swift",
+      "Native/Ambitions/Core/Domain/RecommendationExplanationModels+05-RecommendationTrustSeamSectionState.swift",
+      "Native/Ambitions/Core/Domain/RecommendationExplanationModels+06-RecommendationExplanation.swift",
+      "Native/Ambitions/Core/Domain/RecommendationExplanationModels.swift",
+      "Native/Ambitions/Core/Domain/ReminderModels.swift",
+      "Native/Ambitions/Core/Domain/ReviewsModels.swift",
+      "Native/Ambitions/Core/Domain/RitualModels.swift",
+      "Native/Ambitions/Core/Domain/SafeAutomationPolicyModels.swift",
+      "Native/Ambitions/Core/Domain/SmartAttachmentModels+03-SmartAttachmentResult.swift",
+      "Native/Ambitions/Core/Domain/SmartAttachmentModels.swift",
+      "Native/Ambitions/Core/Domain/SmartAttachmentPlacementPreview.swift",
+      "Native/Ambitions/Core/Domain/TimeRitualModels.swift",
+      "Native/Ambitions/Core/Domain/YouPlanningDefaultsModels.swift"
+    ],
+    "mechanicalSuffixFiles": [
+      "Native/Ambitions/Core/Domain/AmbitionGraphModels+02-Constraint.swift",
+      "Native/Ambitions/Core/Domain/AmbitionGraphModels+03-RecoveryThread.swift",
+      "Native/Ambitions/Core/Domain/AmbitionGraphModels+04-AmbitionGraphRecommendationTrace.swift",
+      "Native/Ambitions/Core/Domain/AmbitionGraphProjectionStore+02-AmbitionGraphProjectionStore.swift",
+      "Native/Ambitions/Core/Domain/AmbitionGraphProjectionStore+03-AmbitionGraphSnapshot.swift",
+      "Native/Ambitions/Core/Domain/AmbitionGraphStoreSplitModels+02-AmbitionGraphProjectionRecord.swift",
+      "Native/Ambitions/Core/Domain/AmbitionGraphStoreSplitModels+03-AmbitionGraphOperationalRecord.swift",
+      "Native/Ambitions/Core/Domain/CaptureModels+02-CaptureStagedInputProjection.swift",
+      "Native/Ambitions/Core/Domain/CaptureModels+03-CaptureRoute.swift",
+      "Native/Ambitions/Core/Domain/CaptureModels+04-Capture.swift",
+      "Native/Ambitions/Core/Domain/CaptureRuntimeReceipt+02-SmartAttachmentResult.swift",
+      "Native/Ambitions/Core/Domain/CaptureRuntimeReceipt+03-SmartAttachmentResult+03-captureRuntimeDetectedSummary.swift",
+      "Native/Ambitions/Core/Domain/CaptureRuntimeReceipt+03-SmartAttachmentResult.swift",
+      "Native/Ambitions/Core/Domain/CaptureRuntimeReceipt+04-CaptureRuntimeReceiptKind.swift",
+      "Native/Ambitions/Core/Domain/FutureProofContextCandidate+02-FutureProofContextClassifier+02-captureRuntimeFactoringCandidate.swift",
+      "Native/Ambitions/Core/Domain/FutureProofContextCandidate+02-FutureProofContextClassifier+03-futureProofContextCandidate.swift",
+      "Native/Ambitions/Core/Domain/FutureProofContextCandidate+02-FutureProofContextClassifier+04-accessConstraintTerms.swift",
+      "Native/Ambitions/Core/Domain/FutureProofContextCandidate+02-FutureProofContextClassifier.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineContracts+02-PlanSection.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineContracts+03-GoalFeedbackEventBase.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineContracts+04-GoalEngineOrchestrationContextSnapshot.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineContracts+05-GoalOrchestrationResult.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineIntake+02-GoalEngineIntakeService+02-buildGoalDraft.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineIntake+02-GoalEngineIntakeService+03-inferMissingFields.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineIntake+02-GoalEngineIntakeService+04-createPlanningStrategy.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineIntake+02-GoalEngineIntakeService.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineIntake+03-GoalClarificationQuestionGenerator.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalIntentCompilerModels+02-GoalIntentCapacityEnvelope.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalIntentCompilerModels+03-GoalDraft.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalIntentCompilerModels+04-GoalIntentDayCompilerInput.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalPathCompilerModels+02-GoalCompiledPathCompilerCore+02-compile.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalPathCompilerModels+02-GoalCompiledPathCompilerCore+03-stageUncertaintyReasons.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalPathCompilerModels+02-GoalCompiledPathCompilerCore.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalResourceGraphModels+02-GoalResourceGraphBuilderCore+03-ScoredResource.swift",
+      "Native/Ambitions/Core/Domain/GoalEngine/GoalResourceGraphModels+02-GoalResourceGraphBuilderCore.swift",
+      "Native/Ambitions/Core/Domain/LifeContextModels+02-HistoricalContextFact.swift",
+      "Native/Ambitions/Core/Domain/LifeContextModels+03-LifeContextBundle+02-id.swift",
+      "Native/Ambitions/Core/Domain/LifeContextModels+03-LifeContextBundle+03-deriveConstraints.swift",
+      "Native/Ambitions/Core/Domain/LifeContextModels+03-LifeContextBundle.swift",
+      "Native/Ambitions/Core/Domain/LifeContextModels+04-LifeContextBundle.swift",
+      "Native/Ambitions/Core/Domain/LifeContextModels+05-LifeContextFixtureProfiles+02-teenPortfolioLaunchWithGuardianTransport.swift",
+      "Native/Ambitions/Core/Domain/LifeContextModels+05-LifeContextFixtureProfiles+03-makerResidencyApplicationPathway.swift",
+      "Native/Ambitions/Core/Domain/LifeContextModels+05-LifeContextFixtureProfiles+04-cityWorkshopLaunchWithoutEquipment.swift",
+      "Native/Ambitions/Core/Domain/LifeContextModels+05-LifeContextFixtureProfiles.swift",
+      "Native/Ambitions/Core/Domain/LifeContextModels+06-LifeContextEnergyPattern.swift",
+      "Native/Ambitions/Core/Domain/LifeGraphModels+02-LifeGraphSourceDomain.swift",
+      "Native/Ambitions/Core/Domain/LifeGraphModels+03-LifePathProgressionSummary.swift",
+      "Native/Ambitions/Core/Domain/LifeGraphModels+04-LifeGraphResolver.swift",
+      "Native/Ambitions/Core/Domain/LifeKnowledgeOperationModels+02-LifeKnowledgeOperationModels.swift",
+      "Native/Ambitions/Core/Domain/LifeKnowledgeOperationModels+02-schemaVersion.swift",
+      "Native/Ambitions/Core/Domain/LifeKnowledgeOperationModels+03-Collection.swift",
+      "Native/Ambitions/Core/Domain/LifeKnowledgeOperationModels+03-LifeKnowledgeOperationModels.swift",
+      "Native/Ambitions/Core/Domain/LifeKnowledgeOperationModels+04-Store.swift",
+      "Native/Ambitions/Core/Domain/LifeKnowledgeOperationModels+05-SearchFilters.swift",
+      "Native/Ambitions/Core/Domain/OneStepGoalModels+02-OneStepGoalReferenceHooks.swift",
+      "Native/Ambitions/Core/Domain/OneStepGoalModels+03-OneStepGoalSummary.swift",
+      "Native/Ambitions/Core/Domain/ProjectStepOperationModels+02-ProjectStepGoalThreadUpdate.swift",
+      "Native/Ambitions/Core/Domain/ProjectStepOperationModels+03-PersonalRuntimeLearningSignal.swift",
+      "Native/Ambitions/Core/Domain/ProjectStepOperationModels+04-StepReallocationApprovedDecision.swift",
+      "Native/Ambitions/Core/Domain/RecommendationExplanationModels+02-RecommendationEvidenceBoundarySummary.swift",
+      "Native/Ambitions/Core/Domain/RecommendationExplanationModels+03-RecommendationTraceCounterfactualDiff.swift",
+      "Native/Ambitions/Core/Domain/RecommendationExplanationModels+04-RecommendationTrace+02-CodingKeys.swift",
+      "Native/Ambitions/Core/Domain/RecommendationExplanationModels+04-RecommendationTrace+03-id.swift",
+      "Native/Ambitions/Core/Domain/RecommendationExplanationModels+04-RecommendationTrace+04-reasonGraph.swift",
+      "Native/Ambitions/Core/Domain/RecommendationExplanationModels+04-RecommendationTrace.swift",
+      "Native/Ambitions/Core/Domain/RecommendationExplanationModels+05-RecommendationTrustSeamSectionState.swift",
+      "Native/Ambitions/Core/Domain/RecommendationExplanationModels+06-RecommendationExplanation.swift",
+      "Native/Ambitions/Core/Domain/RuntimeSnapshotLedgerModels+02-RuntimeSnapshotLedgerEnvelope.swift",
+      "Native/Ambitions/Core/Domain/RuntimeSnapshotLedgerModels+03-RuntimeSnapshotLedgerEnvelope.swift",
+      "Native/Ambitions/Core/Domain/SafeAutomationPolicyModels+02-SafeAutomationProposedAction.swift",
+      "Native/Ambitions/Core/Domain/SafeAutomationPolicyModels+03-ActionReceiptSourceDomain.swift",
+      "Native/Ambitions/Core/Domain/SmartAttachmentModels+02-SmartAttachmentActionLabel.swift",
+      "Native/Ambitions/Core/Domain/SmartAttachmentModels+03-SmartAttachmentResult.swift",
+      "Native/Ambitions/Core/Domain/SmartAttachmentModels+04-CaptureSemanticExtraction+03-goalDomainHints.swift",
+      "Native/Ambitions/Core/Domain/SmartAttachmentModels+04-CaptureSemanticExtraction.swift",
+      "Native/Ambitions/Core/Domain/YouModels+02-YouMemoryControlState.swift",
+      "Native/Ambitions/Core/Domain/YouModels+03-YouPersonalVaultRow.swift"
+    ],
+    "obsoleteBucketFiles": [
+      "Native/Ambitions/Core/Domain/AmbitionsOSAdaptationModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSAlternatePathModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSCloseoutTailGate.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSCommitmentTimeModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSControlPlaneModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSEvaluationModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSEvaluationTailGate.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSExperienceModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSExperienceTailGate.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSGoalPathCompilerModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSHandoffTailGate.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSIntegrationTailGate.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSInteroperabilityModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSLivingDreamCapacityBridgeModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSLivingDreamEligibilityDeadlineModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSLivingDreamHandlingModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSLivingDreamNorthStarModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSLivingDreamPackRegistryModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSLivingDreamPackSupplyChainSecurityModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSLivingDreamPathPortfolioModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSLivingDreamRequirementGraphModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSLivingDreamSafetyTriageModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSLivingDreamSourceClaimGraphModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSLivingDreamStartingPositionPrivacyIntakeModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSLivingDreamTodayBridgeModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSLivingDreamTrustReceiptModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSLocalGoalPackModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSLocalLanguageModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSLongevityModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSOptionValueModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSPerformanceEnergyModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSPrivacySafetyModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSPrivacySafetyTailGate.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSProofTrustModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSRealityDriftModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSRecommendationStartHereModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSRuntimeTailGate.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSSourceTruthModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSStartingPositionModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsOSVerticalSliceProofModels.swift",
+      "Native/Ambitions/Core/Domain/AmbitionsProductCanonV2Models.swift"
+    ],
+    "uiModelFilesStillInDomain": [
+      "Native/Ambitions/Core/Domain/CanonicalNowStateModels.swift",
+      "Native/Ambitions/Core/Domain/GoalsModels.swift",
+      "Native/Ambitions/Core/Domain/LifeAreaSummary.swift",
+      "Native/Ambitions/Core/Domain/RealityModels.swift",
+      "Native/Ambitions/Core/Domain/TodayModels.swift",
+      "Native/Ambitions/Core/Domain/YouModels+02-YouMemoryControlState.swift",
+      "Native/Ambitions/Core/Domain/YouModels+03-YouPersonalVaultRow.swift",
+      "Native/Ambitions/Core/Domain/YouModels.swift"
+    ]
+  },
+  "entries": [
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/AmbitionGraphLineageModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/AmbitionGraphModels+02-Constraint.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/AmbitionGraphModels+03-RecoveryThread.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/AmbitionGraphModels+04-AmbitionGraphRecommendationTrace.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/AmbitionGraphModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/AmbitionGraphProjectionStore+02-AmbitionGraphProjectionStore.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/AmbitionGraphProjectionStore+03-AmbitionGraphSnapshot.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/AmbitionGraphProjectionStore.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/AmbitionGraphStoreSplitModels+02-AmbitionGraphProjectionRecord.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/AmbitionGraphStoreSplitModels+03-AmbitionGraphOperationalRecord.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/AmbitionGraphStoreSplitModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSAdaptationModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSAlternatePathModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSCloseoutTailGate.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSCommitmentTimeModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSControlPlaneModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSEvaluationModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSEvaluationTailGate.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSExperienceModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSExperienceTailGate.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSGoalPathCompilerModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSHandoffTailGate.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSIntegrationTailGate.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSInteroperabilityModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSLivingDreamCapacityBridgeModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSLivingDreamEligibilityDeadlineModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSLivingDreamHandlingModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSLivingDreamNorthStarModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSLivingDreamPackRegistryModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSLivingDreamPackSupplyChainSecurityModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSLivingDreamPathPortfolioModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSLivingDreamRequirementGraphModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSLivingDreamSafetyTriageModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSLivingDreamSourceClaimGraphModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSLivingDreamStartingPositionPrivacyIntakeModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSLivingDreamTodayBridgeModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSLivingDreamTrustReceiptModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSLocalGoalPackModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSLocalLanguageModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSLongevityModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSOptionValueModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSPerformanceEnergyModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSPrivacySafetyModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSPrivacySafetyTailGate.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSProofTrustModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSRealityDriftModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSRecommendationStartHereModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSRuntimeTailGate.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSSourceTruthModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSStartingPositionModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsOSVerticalSliceProofModels.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "obsolete",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
+      "path": "Native/Ambitions/Core/Domain/AmbitionsProductCanonV2Models.swift",
+      "reason": "product-doctrine-or-tail-gate-bucket"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/AppSession.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "ui_model",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-out-of-core-domain-to-surface-quality-or-projection-owner",
+      "path": "Native/Ambitions/Core/Domain/CanonicalNowStateModels.swift",
+      "reason": "surface-or-screen-state-marker"
+    },
+    {
+      "category": "canonical_entity",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "keep-in-core-domain",
+      "path": "Native/Ambitions/Core/Domain/CapacityShape.swift",
+      "reason": "final-architecture-tree-core-domain-owner"
+    },
+    {
+      "category": "canonical_entity",
+      "confidence": "high",
+      "loopRole": "Intent",
+      "migrationAction": "keep-in-core-domain",
+      "path": "Native/Ambitions/Core/Domain/CaptureIntake.swift",
+      "reason": "final-architecture-tree-core-domain-owner"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/CaptureModels+02-CaptureStagedInputProjection.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/CaptureModels+03-CaptureRoute.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/CaptureModels+04-Capture.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/CaptureModels.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/CaptureRuntimeReceipt+02-SmartAttachmentResult.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/CaptureRuntimeReceipt+03-SmartAttachmentResult+03-captureRuntimeDetectedSummary.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/CaptureRuntimeReceipt+03-SmartAttachmentResult.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/CaptureRuntimeReceipt+04-CaptureRuntimeReceiptKind.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/CaptureRuntimeReceipt.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "canonical_entity",
+      "confidence": "high",
+      "loopRole": "Action",
+      "migrationAction": "keep-in-core-domain",
+      "path": "Native/Ambitions/Core/Domain/ClosureOutcome.swift",
+      "reason": "final-architecture-tree-core-domain-owner"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Time Fit",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/CommitmentWaitingModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Reflow",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/ConflictPolicyModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Reflow",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/CorrectionFoldModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/DomainFoundation.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "adapter_dto",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-to-boundary-sourceatlas-externalwrites-or-relevant-adapter-owner-when-touched",
+      "path": "Native/Ambitions/Core/Domain/DomainPackageBoundaryModels.swift",
+      "reason": "boundary-source-pack-or-interoperability-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Action",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/ExecutionResilienceModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Time Fit",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/FixedPoint.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/FutureProofContextCandidate+02-FutureProofContextClassifier+02-captureRuntimeFactoringCandidate.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/FutureProofContextCandidate+02-FutureProofContextClassifier+03-futureProofContextCandidate.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/FutureProofContextCandidate+02-FutureProofContextClassifier+04-accessConstraintTerms.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/FutureProofContextCandidate+02-FutureProofContextClassifier.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/FutureProofContextCandidate.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalBelievabilityModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalClarificationModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalContradictionModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "adapter_dto",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "move-to-boundary-sourceatlas-externalwrites-or-relevant-adapter-owner-when-touched",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalDomainPackModels.swift",
+      "reason": "boundary-source-pack-or-interoperability-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEnergyFitModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEnergyLearningModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineAdaptationService.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineContracts+02-PlanSection.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineContracts+03-GoalFeedbackEventBase.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineContracts+04-GoalEngineOrchestrationContextSnapshot.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineContracts+05-GoalOrchestrationResult.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineContracts+ProgressStorageCoding.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineContracts.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineFeedback.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineFeedbackAnalyzer.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineFixtures.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Intent",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineIntake+02-GoalEngineIntakeService+02-buildGoalDraft.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Intent",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineIntake+02-GoalEngineIntakeService+03-inferMissingFields.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Intent",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineIntake+02-GoalEngineIntakeService+04-createPlanningStrategy.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Intent",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineIntake+02-GoalEngineIntakeService.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Intent",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineIntake+03-GoalClarificationQuestionGenerator.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Intent",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineIntake.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineOrchestrator.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEnginePlanner.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEnginePlannerLinter.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalEngineStepRewriter.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalFreshnessUpdateModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Intent",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalIntentCompilerModels+02-GoalIntentCapacityEnvelope.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Intent",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalIntentCompilerModels+03-GoalDraft.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Intent",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalIntentCompilerModels+04-GoalIntentDayCompilerInput.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Intent",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalIntentCompilerModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalPathCompilerModels+02-GoalCompiledPathCompilerCore+02-compile.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalPathCompilerModels+02-GoalCompiledPathCompilerCore+03-stageUncertaintyReasons.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalPathCompilerModels+02-GoalCompiledPathCompilerCore.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalPathCompilerModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalResourceGraphModels+02-GoalResourceGraphBuilderCore+03-ScoredResource.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalResourceGraphModels+02-GoalResourceGraphBuilderCore.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalResourceGraphModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalTeachingModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/GoalUnderstandingModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalEngine/PathIntelligenceModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/GoalRelevanceScan.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "canonical_entity",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "keep-in-core-domain",
+      "path": "Native/Ambitions/Core/Domain/GoalThread.swift",
+      "reason": "final-architecture-tree-core-domain-owner"
+    },
+    {
+      "category": "ui_model",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "move-out-of-core-domain-to-surface-quality-or-projection-owner",
+      "path": "Native/Ambitions/Core/Domain/GoalsModels.swift",
+      "reason": "surface-or-screen-state-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/InsightsModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "adapter_dto",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-to-boundary-sourceatlas-externalwrites-or-relevant-adapter-owner-when-touched",
+      "path": "Native/Ambitions/Core/Domain/KnowledgeBoundaryModels.swift",
+      "reason": "boundary-source-pack-or-interoperability-marker"
+    },
+    {
+      "category": "adapter_dto",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-to-boundary-sourceatlas-externalwrites-or-relevant-adapter-owner-when-touched",
+      "path": "Native/Ambitions/Core/Domain/KnowledgeIngestionModels.swift",
+      "reason": "boundary-source-pack-or-interoperability-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Learning",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LearningAnticipationModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "canonical_entity",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "keep-in-core-domain",
+      "path": "Native/Ambitions/Core/Domain/LifeArea.swift",
+      "reason": "final-architecture-tree-core-domain-owner"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeAreaModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "ui_model",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-out-of-core-domain-to-surface-quality-or-projection-owner",
+      "path": "Native/Ambitions/Core/Domain/LifeAreaSummary.swift",
+      "reason": "surface-or-screen-state-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/LifeContextModels+02-HistoricalContextFact.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/LifeContextModels+03-LifeContextBundle+02-id.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/LifeContextModels+03-LifeContextBundle+03-deriveConstraints.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/LifeContextModels+03-LifeContextBundle.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/LifeContextModels+04-LifeContextBundle.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/LifeContextModels+05-LifeContextFixtureProfiles+02-teenPortfolioLaunchWithGuardianTransport.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/LifeContextModels+05-LifeContextFixtureProfiles+03-makerResidencyApplicationPathway.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/LifeContextModels+05-LifeContextFixtureProfiles+04-cityWorkshopLaunchWithoutEquipment.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/LifeContextModels+05-LifeContextFixtureProfiles.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/LifeContextModels+06-LifeContextEnergyPattern.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeContextModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeGraphDeltaReviewModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeGraphEventLogModels.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "adapter_dto",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/LifeGraphModels+02-LifeGraphSourceDomain.swift",
+      "reason": "boundary-source-pack-or-interoperability-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/LifeGraphModels+03-LifePathProgressionSummary.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/LifeGraphModels+04-LifeGraphResolver.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeGraphModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeKnowledgeOperationCompatibilityAliases.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/LifeKnowledgeOperationModels+02-LifeKnowledgeOperationModels.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/LifeKnowledgeOperationModels+02-schemaVersion.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/LifeKnowledgeOperationModels+03-Collection.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/LifeKnowledgeOperationModels+03-LifeKnowledgeOperationModels.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/LifeKnowledgeOperationModels+04-Store.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/LifeKnowledgeOperationModels+05-SearchFilters.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeKnowledgeOperationModels.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "adapter_dto",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-to-boundary-sourceatlas-externalwrites-or-relevant-adapter-owner-when-touched",
+      "path": "Native/Ambitions/Core/Domain/LifeKnowledgeOptionalStringCompatibility.swift",
+      "reason": "boundary-source-pack-or-interoperability-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/LifeShapeBucket.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeShapeConfidence.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Reflow",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeShapeCorrection.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeShapeDerivation.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/LifeShapeFallback.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeShapeHorizon.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeShapeInputRef.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeShapeLayer.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/LifeShapeProjection.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/LifeShapeReading.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/LifeShapeRuleID.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/NorthStarModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/OneStepGoalModels+02-OneStepGoalReferenceHooks.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/OneStepGoalModels+03-OneStepGoalSummary.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/OneStepGoalModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/PlanInsertionCandidate.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/ProjectStepOperationModels+02-ProjectStepGoalThreadUpdate.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/ProjectStepOperationModels+03-PersonalRuntimeLearningSignal.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/ProjectStepOperationModels+04-StepReallocationApprovedDecision.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/ProjectStepOperationModels.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "canonical_entity",
+      "confidence": "high",
+      "loopRole": "Proof",
+      "migrationAction": "keep-in-core-domain",
+      "path": "Native/Ambitions/Core/Domain/ProofEvent.swift",
+      "reason": "final-architecture-tree-core-domain-owner"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Proof",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/ProofMode/AppDrivingProofModeRouter.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/ProofResourceGraphModels.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "adapter_dto",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-to-boundary-sourceatlas-externalwrites-or-relevant-adapter-owner-when-touched",
+      "path": "Native/Ambitions/Core/Domain/ProtectedBoundary.swift",
+      "reason": "boundary-source-pack-or-interoperability-marker"
+    },
+    {
+      "category": "ui_model",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-out-of-core-domain-to-surface-quality-or-projection-owner",
+      "path": "Native/Ambitions/Core/Domain/RealityModels.swift",
+      "reason": "surface-or-screen-state-marker"
+    },
+    {
+      "category": "canonical_entity",
+      "confidence": "high",
+      "loopRole": "Context",
+      "migrationAction": "keep-in-core-domain",
+      "path": "Native/Ambitions/Core/Domain/RealityWindow.swift",
+      "reason": "final-architecture-tree-core-domain-owner"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/RecommendationExplanationModels+02-RecommendationEvidenceBoundarySummary.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/RecommendationExplanationModels+03-RecommendationTraceCounterfactualDiff.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/RecommendationExplanationModels+04-RecommendationTrace+02-CodingKeys.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/RecommendationExplanationModels+04-RecommendationTrace+03-id.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/RecommendationExplanationModels+04-RecommendationTrace+04-reasonGraph.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/RecommendationExplanationModels+04-RecommendationTrace.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Proof",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/RecommendationExplanationModels+05-RecommendationTrustSeamSectionState.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/RecommendationExplanationModels+06-RecommendationExplanation.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/RecommendationExplanationModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/RecommendationMutationLabModels.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "canonical_entity",
+      "confidence": "high",
+      "loopRole": "Reflow",
+      "migrationAction": "keep-in-core-domain",
+      "path": "Native/Ambitions/Core/Domain/RecoveryState.swift",
+      "reason": "final-architecture-tree-core-domain-owner"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Time Fit",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/ReminderModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/ReminderNaturalLanguageCaptureParser.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Time Fit",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/Reschedule/RescheduleEngine.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/ReviewsModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Time Fit",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/RitualModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Proof",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/RuntimeSnapshotLedgerModels+02-RuntimeSnapshotLedgerEnvelope.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Proof",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/RuntimeSnapshotLedgerModels+03-RuntimeSnapshotLedgerEnvelope.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "projection_dto",
+      "confidence": "medium",
+      "loopRole": "Proof",
+      "migrationAction": "move-to-projection-or-feature-local-projection-when-touched",
+      "path": "Native/Ambitions/Core/Domain/RuntimeSnapshotLedgerModels.swift",
+      "reason": "projection-or-read-model-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Action",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/SafeAutomationPolicyModels+02-SafeAutomationProposedAction.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/SafeAutomationPolicyModels+03-ActionReceiptSourceDomain.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Action",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/SafeAutomationPolicyModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Action",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/SmartAttachmentModels+02-SmartAttachmentActionLabel.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/SmartAttachmentModels+03-SmartAttachmentResult.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/SmartAttachmentModels+04-CaptureSemanticExtraction+03-goalDomainHints.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "command_payload",
+      "confidence": "medium",
+      "loopRole": "Intent",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/SmartAttachmentModels+04-CaptureSemanticExtraction.swift",
+      "reason": "command-operation-action-route-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/SmartAttachmentModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Context",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/SmartAttachmentPlacementPreview.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "canonical_entity",
+      "confidence": "high",
+      "loopRole": "Path",
+      "migrationAction": "keep-in-core-domain",
+      "path": "Native/Ambitions/Core/Domain/Step.swift",
+      "reason": "final-architecture-tree-core-domain-owner"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Time Fit",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/TimeRitualModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    },
+    {
+      "category": "ui_model",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-out-of-core-domain-to-surface-quality-or-projection-owner",
+      "path": "Native/Ambitions/Core/Domain/TodayModels.swift",
+      "reason": "surface-or-screen-state-marker"
+    },
+    {
+      "category": "canonical_entity",
+      "confidence": "high",
+      "loopRole": "Learning",
+      "migrationAction": "keep-in-core-domain",
+      "path": "Native/Ambitions/Core/Domain/UserSystemProfile.swift",
+      "reason": "final-architecture-tree-core-domain-owner"
+    },
+    {
+      "category": "event_payload",
+      "confidence": "medium",
+      "loopRole": "Proof",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/YouCrossSurfaceProofReviewModels.swift",
+      "reason": "event-proof-receipt-history-marker"
+    },
+    {
+      "category": "ui_model",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/YouModels+02-YouMemoryControlState.swift",
+      "reason": "surface-or-screen-state-marker"
+    },
+    {
+      "category": "ui_model",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "rename-mechanical-suffix-to-semantic-owner",
+      "path": "Native/Ambitions/Core/Domain/YouModels+03-YouPersonalVaultRow.swift",
+      "reason": "surface-or-screen-state-marker"
+    },
+    {
+      "category": "ui_model",
+      "confidence": "medium",
+      "loopRole": "Context",
+      "migrationAction": "move-out-of-core-domain-to-surface-quality-or-projection-owner",
+      "path": "Native/Ambitions/Core/Domain/YouModels.swift",
+      "reason": "surface-or-screen-state-marker"
+    },
+    {
+      "category": "value_object",
+      "confidence": "low",
+      "loopRole": "Path",
+      "migrationAction": "review-for-semantic-file-name-or-keep-as-domain-value",
+      "path": "Native/Ambitions/Core/Domain/YouPlanningDefaultsModels.swift",
+      "reason": "domain-value-default-no-special-marker"
+    }
+  ],
+  "issue": "AMB-1676",
+  "schema": "ambitions.domain-object-classification.v1",
+  "screenContractOwnerStatus": {
+    "oldDomainFiles": [],
+    "passed": true,
+    "qualityFiles": [
+      "Native/Ambitions/Quality/ScreenContracts/ScreenContractModels.swift",
+      "Native/Ambitions/Quality/ScreenContracts/ScreenContractRegistry+Contracts.swift",
+      "Native/Ambitions/Quality/ScreenContracts/ScreenContractRegistry+DetailContracts.swift",
+      "Native/Ambitions/Quality/ScreenContracts/ScreenContractRegistry.swift",
+      "Native/Ambitions/Quality/ScreenContracts/ScreenContractValidator.swift"
+    ]
+  },
+  "sourceRoot": "Native/Ambitions/Core/Domain",
+  "status": "passed",
+  "summary": {
+    "categoryCounts": {
+      "adapter_dto": 7,
+      "canonical_entity": 10,
+      "command_payload": 23,
+      "event_payload": 15,
+      "obsolete": 41,
+      "projection_dto": 17,
+      "ui_model": 8,
+      "value_object": 97
+    },
+    "loopRoleCounts": {
+      "Action": 5,
+      "Context": 74,
+      "Intent": 25,
+      "Learning": 2,
+      "Path": 95,
+      "Proof": 7,
+      "Reflow": 4,
+      "Time Fit": 6
+    },
+    "lowConfidenceDefaultCount": 97,
+    "mechanicalSuffixDebtCount": 77,
+    "migrationActionCounts": {
+      "keep-in-core-domain": 10,
+      "move-out-of-core-domain-to-surface-quality-or-projection-owner": 6,
+      "move-to-boundary-sourceatlas-externalwrites-or-relevant-adapter-owner-when-touched": 6,
+      "move-to-projection-or-feature-local-projection-when-touched": 6,
+      "rename-mechanical-suffix-to-semantic-owner": 77,
+      "review-for-semantic-file-name-or-keep-as-domain-value": 72,
+      "split-rename-or-delete-before-amb-1676-green": 41
+    },
+    "obsoleteBucketDebtCount": 41,
+    "totalDomainSwiftFiles": 218,
+    "uiModelDebtCount": 8
+  }
+}

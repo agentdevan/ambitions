@@ -344,7 +344,7 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
         })
         XCTAssertTrue(requirements.contains {
             $0.axis == .screenExplanation &&
-                $0.ownerFile == "Native/Ambitions/Domain/ScreenContractModels.swift" &&
+                $0.ownerFile == "Native/Ambitions/Quality/ScreenContracts/ScreenContractModels.swift" &&
                 $0.forbiddenPattern.localizedCaseInsensitiveContains("unsupported implementation claim")
         })
     }

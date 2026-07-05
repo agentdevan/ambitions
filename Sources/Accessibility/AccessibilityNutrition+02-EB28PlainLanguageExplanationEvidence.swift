@@ -27,7 +27,7 @@ public enum EB28PlainLanguageExplanationEvidence {
         ),
         AccessibilityPlainLanguageRequirement(
             axis: .screenExplanation,
-            ownerFile: "Native/Ambitions/Domain/ScreenContractModels.swift",
+            ownerFile: "Native/Ambitions/Quality/ScreenContracts/ScreenContractModels.swift",
             automatedProofTarget: "Native/AmbitionsTests/App/ScreenContractRegistryTests.swift",
             requiredPattern: "Explain purpose, source, state, consequence, and user control without a defensive essay.",
             forbiddenPattern: "No hidden automation, no AI-performance display, and no unsupported implementation claim."
