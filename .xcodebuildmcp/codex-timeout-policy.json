@@ -1,7 +1,7 @@
 {
   "server": "xcodebuildmcp",
-  "command": "npx -y xcodebuildmcp@latest mcp",
-  "startup_timeout_seconds": 60,
+  "command": "/Users/devan/Documents/GitHub/ambitions/scripts/ambitions-xcodebuildmcp-stdio.sh",
+  "startup_timeout_seconds": 180,
   "tool_timeout_seconds": 1800,
   "policy": "Focused simulator tests must not use a 120-second client/tool timeout. If Codex still times out, use Ambitions Proof MCP wrapper-native xcode_validate_focused_test or configure the Codex MCP host with this timeout budget.",
   "preferred_repo_validation": "scripts/ambitions-xcode-validate.sh --lane focused-test --json",

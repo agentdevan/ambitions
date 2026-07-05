@@ -3,14 +3,21 @@ set -uo pipefail
 
 SCHEME="${SCHEME:-Ambitions}"
 DESTINATION="${DESTINATION:-}"
-SIMULATOR_NAME="${SIMULATOR_NAME:-iPhone 17}"
+SIMULATOR_NAME="${SIMULATOR_NAME:-${AMBITIONS_SIM_NAME:-iPhone 17 Pro Max}}"
 SIMULATOR_UDID="${SIMULATOR_UDID:-}"
+export SIMULATOR_NAME SIMULATOR_UDID
 RUN_STAMP="${RUN_STAMP:-$(date -u +%Y%m%dT%H%M%SZ)}"
 OUTPUT_ROOT="${OUTPUT_ROOT:-artifacts/strict-build-launch/${RUN_STAMP}}"
 DERIVED_DATA="${OUTPUT_ROOT}/DerivedData"
 LOG_DIR="${OUTPUT_ROOT}/logs"
 SCREENSHOT_DIR="${OUTPUT_ROOT}/screenshots"
 STATUS_JSON="${OUTPUT_ROOT}/phase-status.json"
+SIM_HEALTH_TIMEOUT="${SIM_HEALTH_TIMEOUT:-30s}"
+STRICT_XCODE_LIST_TIMEOUT="${STRICT_XCODE_LIST_TIMEOUT:-10m}"
+STRICT_XCODE_RESOLVE_TIMEOUT="${STRICT_XCODE_RESOLVE_TIMEOUT:-20m}"
+STRICT_XCODE_BUILD_TIMEOUT="${STRICT_XCODE_BUILD_TIMEOUT:-45m}"
+STRICT_XCODE_KILL_AFTER="${STRICT_XCODE_KILL_AFTER:-60s}"
+STRICT_KILL_ACTIVE_XCODE="${STRICT_KILL_ACTIVE_XCODE:-1}"
 mkdir -p "${LOG_DIR}" "${SCREENSHOT_DIR}"
 
 PHASE_STATUS=()
@@ -23,7 +30,7 @@ import os
 import subprocess
 import sys
 
-preferred = os.environ.get("SIMULATOR_NAME", "iPhone 17")
+preferred = os.environ.get("SIMULATOR_NAME", "iPhone 17 Pro Max")
 explicit = os.environ.get("SIMULATOR_UDID", "").strip()
 if explicit:
     print(explicit)
@@ -113,6 +120,26 @@ run_phase() {
   return "${exit_code}"
 }
 
+run_bounded_xcode_phase() {
+  local phase="$1"
+  local timeout="$2"
+  shift 2
+  local log_path="${LOG_DIR}/${phase}.log"
+  echo "=== ${phase} ==="
+  set +e
+  scripts/ambitions-bounded-xcodebuild.sh \
+    --timeout "${timeout}" \
+    --kill-after "${STRICT_XCODE_KILL_AFTER}" \
+    --log "${log_path}" \
+    -- "$@"
+  local exit_code="$?"
+  set -e
+  echo "${phase}: exit ${exit_code}"
+  record_phase "${phase}" "${exit_code}" "${log_path}"
+  write_status_json
+  return "${exit_code}"
+}
+
 {
   echo "run_stamp=${RUN_STAMP}"
   echo "scheme=${SCHEME}"
@@ -142,13 +169,19 @@ if [[ "${FIRST_FAILURE}" != "0" ]]; then
   exit "${FIRST_FAILURE}"
 fi
 
-run_phase xcode_list xcodebuild -project Ambitions.xcodeproj -list -json || true
+run_bounded_xcode_phase xcode_list "${STRICT_XCODE_LIST_TIMEOUT}" \
+  -project Ambitions.xcodeproj \
+  -list \
+  -json || true
 if [[ "${FIRST_FAILURE}" != "0" ]]; then
   python3 scripts/ci/parse_strict_build_failures.py --root "${OUTPUT_ROOT}" || true
   exit "${FIRST_FAILURE}"
 fi
 
-run_phase resolve_packages xcodebuild -project Ambitions.xcodeproj -scheme "${SCHEME}" -resolvePackageDependencies || true
+run_bounded_xcode_phase resolve_packages "${STRICT_XCODE_RESOLVE_TIMEOUT}" \
+  -project Ambitions.xcodeproj \
+  -scheme "${SCHEME}" \
+  -resolvePackageDependencies || true
 if [[ "${FIRST_FAILURE}" != "0" ]]; then
   python3 scripts/ci/parse_strict_build_failures.py --root "${OUTPUT_ROOT}" || true
   exit "${FIRST_FAILURE}"
@@ -162,7 +195,20 @@ fi
 echo "${SIMULATOR_UDID}" > "${OUTPUT_ROOT}/simulator-udid.txt"
 echo "${DESTINATION}" > "${OUTPUT_ROOT}/destination.txt"
 
-run_phase simulator_build xcodebuild \
+SIM_HEALTH_ARGS=(--json --repair --timeout "${SIM_HEALTH_TIMEOUT}")
+if [[ "${STRICT_KILL_ACTIVE_XCODE}" == "1" || "${STRICT_KILL_ACTIVE_XCODE}" == "true" || "${STRICT_KILL_ACTIVE_XCODE}" == "TRUE" ]]; then
+  SIM_HEALTH_ARGS+=(--kill-active-xcode)
+fi
+run_phase simulator_preflight env \
+  AMBITIONS_SIM_UDID="${SIMULATOR_UDID}" \
+  AMBITIONS_SIM_NAME="${SIMULATOR_NAME}" \
+  scripts/ambitions-xcode-sim-health.sh "${SIM_HEALTH_ARGS[@]}" || true
+if [[ "${FIRST_FAILURE}" != "0" ]]; then
+  python3 scripts/ci/parse_strict_build_failures.py --root "${OUTPUT_ROOT}" || true
+  exit "${FIRST_FAILURE}"
+fi
+
+run_bounded_xcode_phase simulator_build "${STRICT_XCODE_BUILD_TIMEOUT}" \
   -project Ambitions.xcodeproj \
   -scheme "${SCHEME}" \
   -destination "${DESTINATION}" \

@@ -71,6 +71,7 @@ fi
 
 DESTINATION=""
 RESULT_BUNDLE=""
+DERIVED_DATA_PATH=""
 for ((i = 0; i < ${#XCODEBUILD_ARGS[@]}; i++)); do
   case "${XCODEBUILD_ARGS[$i]}" in
     -destination)
@@ -81,6 +82,11 @@ for ((i = 0; i < ${#XCODEBUILD_ARGS[@]}; i++)); do
     -resultBundlePath)
       if (( i + 1 < ${#XCODEBUILD_ARGS[@]} )); then
         RESULT_BUNDLE="${XCODEBUILD_ARGS[$((i + 1))]}"
+      fi
+      ;;
+    -derivedDataPath)
+      if (( i + 1 < ${#XCODEBUILD_ARGS[@]} )); then
+        DERIVED_DATA_PATH="${XCODEBUILD_ARGS[$((i + 1))]}"
       fi
       ;;
   esac
@@ -96,6 +102,7 @@ echo "timeout=$TIMEOUT_DURATION"
 echo "kill_after=$KILL_AFTER"
 echo "destination=${DESTINATION:-not provided}"
 echo "result_bundle=${RESULT_BUNDLE:-not provided}"
+echo "derived_data=${DERIVED_DATA_PATH:-not provided}"
 echo "log_file=${LOG_FILE:-not provided}"
 printf 'command:'
 printf ' %q' xcodebuild "${XCODEBUILD_ARGS[@]}"
@@ -120,36 +127,84 @@ fi
 set -e
 
 cleanup_targeted_result_bundle_processes() {
-  [[ -n "$RESULT_BUNDLE" ]] || return 0
-  echo "timeout_cleanup=targeted_result_bundle"
-  echo "timeout_cleanup_match=$RESULT_BUNDLE"
+  local match_value="$RESULT_BUNDLE"
+  local match_label="result_bundle"
+  if [[ -z "$match_value" && -n "$DERIVED_DATA_PATH" ]]; then
+    match_value="$DERIVED_DATA_PATH"
+    match_label="derived_data"
+  fi
+  [[ -n "$match_value" ]] || return 0
+  echo "timeout_cleanup=targeted_${match_label}"
+  echo "timeout_cleanup_match=$match_value"
 
-  local matched=0
+  local pids=()
   while IFS= read -r pid; do
     [[ -n "$pid" ]] || continue
     [[ "$pid" != "$$" && "$pid" != "$PPID" ]] || continue
 
     local command_line
     command_line="$(ps -p "$pid" -o command= 2>/dev/null || true)"
-    [[ "$command_line" == *xcodebuild* ]] || continue
-    matched=1
+    [[ "$command_line" == *xcodebuild* || "$command_line" == *swift-frontend* || "$command_line" == *swift-driver* ]] || continue
     echo "timeout_cleanup_pid=$pid"
-    kill -TERM "$pid" 2>/dev/null || true
-  done < <(pgrep -f "$RESULT_BUNDLE" 2>/dev/null || true)
+    pids+=("$pid")
+  done < <(pgrep -f "$match_value" 2>/dev/null || true)
 
-  if [[ "$matched" -eq 1 ]]; then
-    sleep 2
-    while IFS= read -r pid; do
-      [[ -n "$pid" ]] || continue
-      [[ "$pid" != "$$" && "$pid" != "$PPID" ]] || continue
+  ((${#pids[@]} > 0)) || return 0
 
-      local command_line
-      command_line="$(ps -p "$pid" -o command= 2>/dev/null || true)"
-      [[ "$command_line" == *xcodebuild* ]] || continue
-      echo "timeout_cleanup_force_pid=$pid"
-      kill -KILL "$pid" 2>/dev/null || true
-    done < <(pgrep -f "$RESULT_BUNDLE" 2>/dev/null || true)
-  fi
+  python3 - "${pids[@]}" <<'PY'
+import os
+import signal
+import subprocess
+import sys
+import time
+
+roots = {int(pid) for pid in sys.argv[1:] if pid.isdigit()}
+if not roots:
+    raise SystemExit(0)
+
+def collect_tree(root_pids):
+    output = subprocess.check_output(["ps", "-axo", "pid=,ppid="], text=True)
+    children = {}
+    live = set()
+    for raw in output.splitlines():
+        parts = raw.split()
+        if len(parts) != 2:
+            continue
+        pid, ppid = map(int, parts)
+        live.add(pid)
+        children.setdefault(ppid, []).append(pid)
+    seen = set()
+    stack = list(root_pids)
+    while stack:
+        pid = stack.pop()
+        if pid in seen or pid not in live:
+            continue
+        seen.add(pid)
+        stack.extend(children.get(pid, []))
+    return seen
+
+targets = collect_tree(roots)
+targets.difference_update({os.getpid(), os.getppid()})
+for pid in sorted(targets, reverse=True):
+    try:
+        os.kill(pid, signal.SIGTERM)
+    except (ProcessLookupError, PermissionError):
+        pass
+
+time.sleep(2)
+remaining = set()
+for pid in targets:
+    result = subprocess.run(["ps", "-p", str(pid)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    if result.returncode == 0:
+        remaining.add(pid)
+
+for pid in sorted(remaining, reverse=True):
+    try:
+        os.kill(pid, signal.SIGKILL)
+        print(f"timeout_cleanup_force_pid={pid}")
+    except (ProcessLookupError, PermissionError):
+        pass
+PY
 }
 
 if [[ -n "$TIMEOUT_TOOL" && ( "$status" -eq 124 || "$status" -eq 137 ) ]]; then

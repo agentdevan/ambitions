@@ -52,6 +52,8 @@ BENCHMARK_FILE="$BENCHMARK_BASE/$BATCH/$RUN_ID/validate-benchmark.json"
 mkdir -p "$SUMMARY_BASE/$BATCH/$RUN_ID" "$BENCHMARK_BASE/$BATCH/$RUN_ID"
 START_EPOCH="$(date +%s)"
 SLOW_THRESHOLD_SECONDS="${AMBITIONS_XCODE_SLOW_THRESHOLD_SECONDS:-300}"
+VALIDATE_BUILD_TIMEOUT_DURATION="${AMBITIONS_XCODE_VALIDATE_BUILD_TIMEOUT:-30m}"
+VALIDATE_BUILD_KILL_AFTER="${AMBITIONS_XCODE_VALIDATE_BUILD_KILL_AFTER:-60s}"
 
 map_exit_code() {
   local class="$1"
@@ -62,7 +64,7 @@ map_exit_code() {
     simulator_boot_failure|simulator_launcher_failure|missing_destination) echo 22 ;;
     xcodegen_project_drift|stale_derived_data) echo 23 ;;
     tool_missing) echo 24 ;;
-    test_timeout|automation_event_timeout|launch_wait_timeout|idle_wait_timeout|mcp_timeout_no_test_log|simctl_unresponsive) echo 25 ;;
+    test_timeout|automation_event_timeout|launch_wait_timeout|idle_wait_timeout|mcp_timeout_no_test_log|simctl_unresponsive|xcode_process_active) echo 25 ;;
     corrupt_xcresult|result_extraction_failure) echo 26 ;;
     *) echo 26 ;;
   esac
@@ -87,13 +89,18 @@ run_xcodebuild_build() {
   mkdir -p "$(dirname "$log_file")" "$(dirname "$result_file")" "$DERIVED_DATA_DIR"
 
   set +e
-  xcodebuild -project Ambitions.xcodeproj \
+  scripts/ambitions-bounded-xcodebuild.sh \
+    --timeout "$VALIDATE_BUILD_TIMEOUT_DURATION" \
+    --kill-after "$VALIDATE_BUILD_KILL_AFTER" \
+    --log "$log_file" \
+    -- \
+    -project Ambitions.xcodeproj \
     -scheme Ambitions \
     -derivedDataPath "$DERIVED_DATA_DIR" \
     build \
     CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO \
     -resultBundlePath "$result_file" \
-    2>&1 | tee "$log_file" >&2
+    >&2
   run_status=$?
   set -e
 

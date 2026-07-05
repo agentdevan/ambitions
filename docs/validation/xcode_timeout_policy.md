@@ -24,7 +24,7 @@ The wrapper:
 - returns `124` for timeout;
 - prints process-inspection guidance on timeout;
 - does not kill unrelated `xcodebuild` processes globally;
-- performs only targeted timeout cleanup for processes whose command line matches the result bundle path, when a result bundle path is provided.
+- performs only targeted timeout cleanup for processes whose command line matches the result bundle or derived data path, when either path is provided.
 
 If neither `gtimeout` nor `timeout` is installed, the wrapper prints a warning and runs the command without a wall-clock bound. Long-running validation from that fallback must not be treated as Green release or screenshot proof.
 
@@ -40,6 +40,49 @@ The retained wrappers route through `scripts/ambitions-bounded-xcodebuild.sh`:
 
 - `scripts/ambitions-xcode-build-for-testing.sh --batch <BATCH>` uses `30m` by default.
 - `scripts/ambitions-xcode-test-focused.sh --batch <BATCH> --test <TEST_ID>` uses `15m` by default.
+- `scripts/ambitions-xcode-validate.sh --lane build` uses the bounded wrapper instead of direct `xcodebuild`.
+- `scripts/ci/strict_build_launch.sh` uses bounded `xcodebuild` phases for list, package resolution, and simulator build.
+- `scripts/ci/strict_build_launch.sh` defaults to `SIMULATOR_NAME=iPhone 17 Pro Max` through the same simulator family used by the standalone health gate and the repo XcodeBuildMCP profile.
+
+## Simulator Preflight Contention Policy
+
+`scripts/ambitions-xcode-sim-health.sh --json` is a strict preflight. It must
+fail with `failure_category: "xcode_process_active"` when an Ambitions-owned
+Xcode lane is already active. A preflight that reports active Ambitions
+`xcodebuild`, XcodeBuildMCP, strict-build, Swift compiler, or XCTest processes
+must not be treated as Green simulator/tooling health.
+
+Use this only for explicit cleanup of repo-owned validation lanes:
+
+```bash
+scripts/ambitions-xcode-sim-health.sh --repair --kill-active-xcode --json --timeout 30s
+```
+
+That repair path terminates matching Ambitions Xcode process trees, shuts down
+extra booted simulators, terminates the Ambitions app in booted simulators, and
+boots the selected simulator. It is intentionally scoped to Ambitions/Xcode
+commands and should not be generalized to unrelated user builds.
+
+## XcodeBuildMCP Transport Policy
+
+Codex XcodeBuildMCP transport for this repo must launch through:
+
+```bash
+scripts/ambitions-xcodebuildmcp-stdio.sh
+```
+
+The wrapper pins `xcodebuildmcp@2.6.2`, starts from the Ambitions repo root so
+`.xcodebuildmcp/config.yaml` is loaded, uses `/Applications/Xcode.app`, and
+excludes the invalid `logging` workflow from the Build iOS Apps plugin manifest.
+
+The expected transport proof is a direct JSON-RPC `tools/call` for
+`session_show_defaults` returning the `ambitions-ios` profile with
+`iPhone 17 Pro Max` and `0F5F5AC4-4303-47C8-9BDC-EB5F57A0F79E`.
+
+If the in-process Codex tool namespace still reports `Transport closed` after
+the wrapper and manifests are patched, treat that as a running-host stale
+transport until the Codex app-server reloads. Do not treat the stale live
+namespace as evidence that the repo wrapper command is invalid.
 
 ## UI Screenshot Timeout Policy
 
