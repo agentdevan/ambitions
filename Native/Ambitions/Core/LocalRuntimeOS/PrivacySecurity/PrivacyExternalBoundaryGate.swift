@@ -236,7 +236,7 @@ struct PrivacyExternalBoundaryGate: Sendable, Equatable, Hashable {
         }
         let redactionRequired = Set(privacy.redactionRequiredEventIDs)
         let widgetRedacted = Set(widget.redactedEventIDs)
-        if widgetRedacted.isSubset(of: redactionRequired) == false {
+        if redactionRequired.isSubset(of: widgetRedacted) == false {
             issues.append(.externalSnapshotPrivacyProjectionMismatch)
         }
 

@@ -58,6 +58,8 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertEqual(snapshot.ambientState?.protectedTime?.kind, .protectedTime)
         XCTAssertEqual(snapshot.ambientState?.protectedTime?.action.tab, "time")
         XCTAssertEqual(snapshot.ambientState?.captureEntry?.kind, .captureEntry)
+        XCTAssertEqual(snapshot.ambientState?.captureEntry?.action.surface, .captureComposer)
+        XCTAssertNil(snapshot.ambientState?.captureEntry?.action.tab)
         XCTAssertEqual(snapshot.ambientState?.captureEntry?.privacySummary, "Capture text never appears here")
         XCTAssertEqual(snapshot.ambientState?.recovery?.kind, .recovery)
         XCTAssertEqual(snapshot.ambientState?.recovery?.action.tab, "today")
@@ -697,6 +699,65 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertEqual(sideEffectRecord?.occurredAt, DomainTimestamp.string(from: now))
     }
 
+    func testSnapshotWriterFailsClosedWhenWidgetProjectionOmitsRequiredRedactionIDs() async throws {
+        let directory = try scratchDirectory()
+        let runtimeStore = InMemoryRuntimeEventStore()
+        _ = try await runtimeStore.append(commandEvent(
+            id: "command-safe-widget",
+            kind: .quickCapture,
+            source: .capture,
+            target: AmbitionsCommandTarget(captureID: "capture-safe", destination: .captureInbox),
+            summary: "Safe capture update",
+            privacy: .standard
+        ))
+        _ = try await runtimeStore.append(commandEvent(
+            id: "command-private-widget",
+            kind: .openDestination,
+            source: .widget,
+            target: AmbitionsCommandTarget(destination: .today),
+            summary: "Private Therapy Session",
+            privacy: .privateUserText
+        ))
+        let batch = try await ProjectionMaterializer(store: runtimeStore).materializeAll(materializedAt: "2026-06-30T09:00:00Z")
+        let projectionStore = ProjectionStoreSQLite(databaseURL: directory.appendingPathComponent("projections.sqlite"))
+        let records = try batch.allStoredRecords(updatedAt: "2026-06-30T09:01:00Z").map { record -> StoredProjectionRecord in
+            guard record.id == .widget else { return record }
+            let payloadData = try widgetPayloadDroppingRedactions(from: record.payloadData)
+            return record.replacingPayloadData(payloadData)
+        }
+        try await projectionStore.save(records)
+        let appGroupStore = AppGroupSnapshotStore(rootDirectory: directory.appendingPathComponent("snapshots", isDirectory: true))
+        let sideEffectLedger = InMemorySideEffectLedgerRepository()
+        let repositories = StaticSnapshotWriterRepositories(failOnRawGraphRead: true)
+        let now = Date(timeIntervalSince1970: 1_712_779_200)
+        let writer = ExternalSurfaceSnapshotWriter(
+            repositories: AppRepositories(
+                goals: repositories,
+                drafts: repositories,
+                evidence: repositories,
+                feedback: repositories,
+                captures: repositories,
+                teaching: repositories,
+                eventLedger: InMemoryEventLedgerRepository(),
+                sideEffectLedger: sideEffectLedger,
+                projectionStore: projectionStore,
+                appGroupSnapshotStore: appGroupStore,
+                appState: repositories
+            )
+        )
+
+        await writer.refresh(now: now)
+
+        let storedRecord = try? await appGroupStore.read(id: SharedExternalSnapshotStore.snapshotRecordID)
+        let sideEffectRecord = try? await sideEffectLedger.fetchRecord(id: "externalSnapshot.failed_safely.1712779200")
+
+        XCTAssertNil(storedRecord)
+        XCTAssertEqual(sideEffectRecord?.effectKind, .externalSnapshot)
+        XCTAssertEqual(sideEffectRecord?.status, .failedSafely)
+        XCTAssertEqual(sideEffectRecord?.boundary, .localOnly)
+        XCTAssertTrue(sideEffectRecord?.degradedFacts.contains("External snapshot refresh/write did not complete.") ?? false)
+    }
+
     func testSnapshotWriterFailsClosedWithoutProjectionStore() async {
         let sideEffectLedger = InMemorySideEffectLedgerRepository()
         let repositories = StaticSnapshotWriterRepositories()
@@ -935,6 +996,14 @@ private extension ExternalSurfaceSnapshotTests {
         )
     }
 
+    func widgetPayloadDroppingRedactions(from data: Data) throws -> Data {
+        guard var root = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            throw ExternalSurfaceSnapshotTestError.invalidWidgetProjectionPayload
+        }
+        root["redactedEventIDs"] = []
+        return try JSONSerialization.data(withJSONObject: root, options: [.sortedKeys])
+    }
+
     func scratchDirectory() throws -> URL {
         let directory = URL(fileURLWithPath: "/tmp", isDirectory: true)
             .appendingPathComponent("ambitions-external-surface-snapshot-tests-\(UUID().uuidString)", isDirectory: true)
@@ -1058,6 +1127,24 @@ private extension ExternalSurfaceSnapshotTests {
             plan: plan
         )
     }
+}
+
+private extension StoredProjectionRecord {
+    func replacingPayloadData(_ data: Data) -> StoredProjectionRecord {
+        StoredProjectionRecord(
+            id: id,
+            cursor: cursor,
+            payloadChecksum: LocalRuntimeStorageChecksum.sha256Hex(for: data),
+            payloadSchemaVersion: payloadSchemaVersion,
+            payloadData: data,
+            materializedAt: materializedAt,
+            updatedAt: updatedAt
+        )
+    }
+}
+
+private enum ExternalSurfaceSnapshotTestError: Error {
+    case invalidWidgetProjectionPayload
 }
 
 private actor RecordingSnapshotWriter: ExternalSurfaceSnapshotWriting {

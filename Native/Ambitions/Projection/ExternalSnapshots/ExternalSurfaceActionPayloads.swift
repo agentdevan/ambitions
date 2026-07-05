@@ -162,13 +162,13 @@ enum ExternalObjectReopeningRoot: String, Codable, Sendable, Equatable, CaseIter
     var canonicalTitle: String {
         switch self {
         case .today:
-            return "Reality Meridian"
+            return "Today"
         case .goals:
-            return "Direction Atlas"
+            return "Goals"
         case .time:
-            return "LifeShape Field"
+            return "Time"
         case .you:
-            return "Personal system"
+            return "You"
         }
     }
 

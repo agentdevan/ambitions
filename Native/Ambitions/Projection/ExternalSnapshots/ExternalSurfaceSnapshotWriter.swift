@@ -77,7 +77,7 @@ actor ExternalSurfaceSnapshotWriter: ExternalSurfaceSnapshotWriting {
 
         let redactionRequired = Set(privacy.redactionRequiredEventIDs)
         let widgetRedacted = Set(widget.redactedEventIDs)
-        guard widgetRedacted.isSubset(of: redactionRequired) else {
+        guard redactionRequired.isSubset(of: widgetRedacted) else {
             throw ExternalSurfaceSnapshotWriterError.privacyProjectionMismatch
         }
     }

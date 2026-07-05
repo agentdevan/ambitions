@@ -25,30 +25,123 @@ def parse_args():
     return parser.parse_args()
 
 
+def encode_message(payload):
+    return (json.dumps(payload, separators=(",", ":")) + "\n").encode("utf-8")
+
+
 def send(stdin, payload):
-    stdin.write(json.dumps(payload, separators=(",", ":")) + "\n")
+    stdin.write(encode_message(payload))
     stdin.flush()
 
 
-def wait_for_id(proc, selector, expected_id, deadline, events):
-    while time.time() < deadline:
-        if proc.poll() is not None:
-            return None
-        for key, _ in selector.select(timeout=0.2):
-            line = key.fileobj.readline()
+def header_separator(buffer):
+    crlf = buffer.find(b"\r\n\r\n")
+    lf = buffer.find(b"\n\n")
+    candidates = [(index, length) for index, length in ((crlf, 4), (lf, 2)) if index >= 0]
+    if not candidates:
+        return None
+    return min(candidates, key=lambda candidate: candidate[0])
+
+
+def content_length(header_bytes):
+    header = header_bytes.decode("ascii", errors="replace")
+    for line in header.replace("\r\n", "\n").split("\n"):
+        name, separator, value = line.partition(":")
+        if separator and name.strip().lower() == "content-length":
+            try:
+                return int(value.strip())
+            except ValueError:
+                return None
+    return None
+
+
+def append_stderr(events, stderr_buffer, data):
+    stderr_buffer.extend(data)
+    while True:
+        newline = stderr_buffer.find(b"\n")
+        if newline < 0:
+            break
+        line = bytes(stderr_buffer[:newline]).decode("utf-8", errors="replace")
+        del stderr_buffer[: newline + 1]
+        events.append({"stream": "stderr", "line": line.rstrip("\r")})
+
+
+def drain_stderr(events, stderr_buffer):
+    if stderr_buffer:
+        line = bytes(stderr_buffer).decode("utf-8", errors="replace")
+        events.append({"stream": "stderr", "line": line.rstrip("\r\n")})
+        stderr_buffer.clear()
+
+
+def parse_stdout_messages(events, stdout_buffer):
+    messages = []
+    while True:
+        stripped = stdout_buffer.lstrip()
+        if stripped.startswith(b"{") or stripped.startswith(b"["):
+            newline = stdout_buffer.find(b"\n")
+            if newline < 0:
+                return messages
+            line = bytes(stdout_buffer[:newline]).decode("utf-8", errors="replace").rstrip("\r")
+            del stdout_buffer[: newline + 1]
             if not line:
                 continue
-            stream = key.data
-            line = line.rstrip("\n")
-            events.append({"stream": stream, "line": line})
-            if stream != "stdout":
-                continue
+            events.append({"stream": "stdout", "line": line})
             try:
-                payload = json.loads(line)
+                messages.append(json.loads(line))
             except json.JSONDecodeError:
+                events.append({"stream": "stdout", "line": "malformed MCP JSON line"})
+            continue
+
+        separator = header_separator(stdout_buffer)
+        if separator is None:
+            return messages
+
+        header_end, separator_length = separator
+        length = content_length(bytes(stdout_buffer[:header_end]))
+        if length is None:
+            bad_header = bytes(stdout_buffer[:header_end]).decode("utf-8", errors="replace")
+            events.append({"stream": "stdout", "line": f"malformed MCP header: {bad_header}"})
+            del stdout_buffer[: header_end + separator_length]
+            continue
+
+        body_start = header_end + separator_length
+        body_end = body_start + length
+        if len(stdout_buffer) < body_end:
+            return messages
+
+        body = bytes(stdout_buffer[body_start:body_end])
+        del stdout_buffer[:body_end]
+        line = body.decode("utf-8", errors="replace")
+        events.append({"stream": "stdout", "line": line})
+        try:
+            messages.append(json.loads(line))
+        except json.JSONDecodeError:
+            events.append({"stream": "stdout", "line": "malformed MCP JSON body"})
+    return messages
+
+
+def wait_for_id(proc, selector, state, expected_id, deadline, events):
+    while time.time() < deadline:
+        if proc.poll() is not None:
+            drain_stderr(events, state["stderr_buffer"])
+            return None
+        for key, _ in selector.select(timeout=0.2):
+            try:
+                chunk = os.read(key.fileobj.fileno(), 4096)
+            except BlockingIOError:
                 continue
-            if payload.get("id") == expected_id:
-                return payload
+            stream = key.data
+            if not chunk:
+                continue
+            if stream == "stderr":
+                append_stderr(events, state["stderr_buffer"], chunk)
+                continue
+            state["stdout_buffer"].extend(chunk)
+            for payload in parse_stdout_messages(events, state["stdout_buffer"]):
+                if payload.get("id") == expected_id:
+                    drain_stderr(events, state["stderr_buffer"])
+                    return payload
+    drain_stderr(events, state["stderr_buffer"])
     return None
 
 
@@ -83,13 +176,13 @@ def main():
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
-        text=True,
-        bufsize=1,
+        bufsize=0,
     )
     selector = selectors.DefaultSelector()
     selector.register(proc.stdout, selectors.EVENT_READ, "stdout")
     selector.register(proc.stderr, selectors.EVENT_READ, "stderr")
     events = []
+    state = {"stdout_buffer": bytearray(), "stderr_buffer": bytearray()}
     deadline = time.time() + args.timeout
     result = None
     error = None
@@ -111,7 +204,7 @@ def main():
                 },
             },
         )
-        initialized = wait_for_id(proc, selector, 1, deadline, events)
+        initialized = wait_for_id(proc, selector, state, 1, deadline, events)
         if initialized is None:
             error = "initialize timed out or transport closed"
         elif "error" in initialized:
@@ -137,7 +230,7 @@ def main():
                     },
                 },
             )
-            result = wait_for_id(proc, selector, 2, deadline, events)
+            result = wait_for_id(proc, selector, state, 2, deadline, events)
             if result is None:
                 error = "session_show_defaults timed out or transport closed"
             elif "error" in result:

@@ -107,7 +107,7 @@ struct NextStepProvider: TimelineProvider {
                         title: "Capture is clear",
                         detail: "Add a thought without exposing it here.",
                         privacySummary: "Capture text never appears here",
-                        action: ExternalSurfaceVariantAction(title: "Open Capture", surface: .tab, tab: "capture"),
+                        action: ExternalSurfaceVariantAction(title: "Open Capture", surface: .captureComposer, tab: nil),
                         reference: ExternalSurfaceActionReference(goalID: "goal-placeholder", stepID: "step-placeholder"),
                         prominence: .standard
                     ),
@@ -306,9 +306,9 @@ private struct NextStepWidgetView: View {
     }
 
     private func widgetGradient(projection: ExternalWidgetProjection) -> LinearGradient {
-        let warm = Color(red: 0.96, green: 0.72, blue: 0.42).opacity(projection.pressureLevel == .overloaded ? 0.30 : 0.18)
+        let warm = Color.orange.opacity(projection.pressureLevel == .overloaded ? 0.30 : 0.18)
         return LinearGradient(
-            colors: [Color(red: 0.08, green: 0.10, blue: 0.12), Color(red: 0.13, green: 0.16, blue: 0.18), warm],
+            colors: [.black.opacity(0.92), .secondary.opacity(0.18), warm],
             startPoint: .topLeading,
             endPoint: .bottomTrailing
         )

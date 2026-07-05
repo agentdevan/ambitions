@@ -363,6 +363,15 @@ final class PrivacySecurityTests: XCTestCase {
         XCTAssertTrue(snapshotDecision.isPermitted)
         XCTAssertEqual(snapshotDecision.receipt.action, .externalSnapshot)
 
+        let mismatchedWidget = try widgetProjectionDroppingRedactions(batch.widget)
+        let mismatchedSnapshotDecision = gate.evaluateExternalSnapshot(
+            record: record,
+            widget: mismatchedWidget,
+            privacy: batch.privacy
+        )
+        XCTAssertFalse(mismatchedSnapshotDecision.isPermitted)
+        XCTAssertTrue(mismatchedSnapshotDecision.issueCodes.contains(PrivacyExternalBoundaryIssue.externalSnapshotPrivacyProjectionMismatch.rawValue))
+
         let unsafeRecord = AppGroupSnapshotRecord(
             id: SharedExternalSnapshotStore.snapshotRecordID,
             snapshotKind: SharedExternalSnapshotStore.snapshotKind,
@@ -424,6 +433,20 @@ final class PrivacySecurityTests: XCTestCase {
         XCTAssertTrue(unsafeBridgeDecision.issueCodes.contains(PrivacyExternalBoundaryIssue.externalSurfaceBridgeContainsPrivateRuntimeData.rawValue))
     }
 
+    private func widgetProjectionDroppingRedactions(_ widget: WidgetProjection) throws -> WidgetProjection {
+        let data = try LocalRuntimeStorageCoding.encode(widget)
+        let corruptedData = try widgetPayloadDroppingRedactions(from: data)
+        return try LocalRuntimeStorageCoding.decode(WidgetProjection.self, from: corruptedData)
+    }
+
+    private func widgetPayloadDroppingRedactions(from data: Data) throws -> Data {
+        guard var root = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            throw PrivacySecurityTestError.invalidWidgetProjectionPayload
+        }
+        root["redactedEventIDs"] = []
+        return try JSONSerialization.data(withJSONObject: root, options: [.sortedKeys])
+    }
+
     private func privateObject() -> PrivacyClassifiedObject {
         classifier.classifyEvent(
             id: "private-goal-note",
@@ -476,4 +499,8 @@ final class PrivacySecurityTests: XCTestCase {
         }
         return URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
     }
+}
+
+private enum PrivacySecurityTestError: Error {
+    case invalidWidgetProjectionPayload
 }
