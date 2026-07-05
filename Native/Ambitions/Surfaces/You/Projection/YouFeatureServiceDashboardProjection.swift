@@ -15,7 +15,7 @@ extension RepositoryBackedYouService {
         let blockedCount = snapshot.drafts.filter { $0.latestResultKind == .blocked }.count
         let openCaptures = snapshot.captures.filter { $0.status != .archived }.count
         let trimmedName = snapshot.appState.userDisplayName.trimmingCharacters(in: .whitespacesAndNewlines)
-        let profileTitle = trimmedName.isEmpty ? "Local personal system" : "\(trimmedName)'s settings"
+        let profileTitle = trimmedName.isEmpty ? "User System Profile" : "\(trimmedName)'s User System Profile"
         let notificationStatus = notificationAuthorizationStatus(notificationAuthorization)
         let syncState = syncVisualState(syncStatus)
         let appearanceSummary = "\(snapshot.appState.appearancePreference.title) mode with \(snapshot.appState.accentFamily.title)"
@@ -43,7 +43,7 @@ extension RepositoryBackedYouService {
         return YouDashboard(
             hero: YouHeroState(
                 title: profileTitle,
-                subtitle: "Local settings keep privacy, receipts, appearance, and defaults inspectable.",
+                subtitle: "Privacy, receipts, appearance, account state, and defaults stay inspectable from one local profile.",
                 dominantTruth: dominantTruth(
                     syncStatus: syncStatus,
                     notificationStatus: notificationStatus,
@@ -79,7 +79,7 @@ extension RepositoryBackedYouService {
                 appearanceSummary: appearanceSummary
             ),
             controlRoom: YouControlRoomState(
-                title: "Personal system map",
+                title: "User System Profile map",
                 subtitle: "A short map of the local settings and trust areas you can inspect.",
                 entries: [
                     YouControlRoomEntry(

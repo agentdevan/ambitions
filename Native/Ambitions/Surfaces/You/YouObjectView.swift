@@ -10,6 +10,6 @@ struct YouObjectView: View {
             onOpenDetail: onOpenDetail
         )
         .accessibilityLabel("User System Profile")
-        .accessibilityValue("Local personal system and settings.")
+        .accessibilityValue("Local profile with privacy, receipts, account, and settings status.")
     }
 }

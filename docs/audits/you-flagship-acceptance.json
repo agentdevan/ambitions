@@ -1,0 +1,170 @@
+{
+  "id": "AMB-1740",
+  "title": "You Flagship Acceptance",
+  "status": "Implemented Yellow",
+  "date": "2026-07-05",
+  "baseline_sha": "40763e51274eb771f42831c3c8f388e4da682aa6",
+  "scope": [
+    "You source acceptance",
+    "User System Profile source evidence",
+    "privacy and local-first source evidence",
+    "account/no-account source evidence",
+    "proof/history/receipt source evidence",
+    "settings detail source evidence",
+    "visible You label cleanup"
+  ],
+  "source_changes": {
+    "changed_source_file_count": 5,
+    "change_type": "string-only You visible/accessibility label cleanup",
+    "runtime_authority_changed": false,
+    "command_routing_changed": false,
+    "persistence_changed": false,
+    "projection_ownership_changed": false,
+    "model_enum_cases_changed": false,
+    "account_boundary_changed": false,
+    "privacy_boundary_changed": false,
+    "source_paths_moved": false
+  },
+  "acceptance_map": [
+    {
+      "criterion": "You root / User System Profile",
+      "evidence": [
+        "Native/Ambitions/Surfaces/You/YouSurface.swift",
+        "Native/Ambitions/Surfaces/You/YouObjectView.swift",
+        "Native/Ambitions/Surfaces/You/YouRootSurface.swift",
+        "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceDashboardProjection.swift"
+      ],
+      "status": "source_present_and_repaired"
+    },
+    {
+      "criterion": "Not a generic settings dump",
+      "evidence": [
+        "Native/Ambitions/Surfaces/You/YouRootSurface.swift",
+        "Native/Ambitions/Surfaces/You/YouRootDetailContent.swift",
+        "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceSystemCenterProjection.swift",
+        "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceDashboardProjection.swift"
+      ],
+      "status": "source_present"
+    },
+    {
+      "criterion": "Privacy/local-first status",
+      "evidence": [
+        "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceTrustProjection.swift",
+        "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceMemoryVaultProjection.swift",
+        "Native/Ambitions/Surfaces/You/YouRootDetailContent.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/PrivacyBoundary.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/LocalOnlyMode.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/PrivacyInspector.swift"
+      ],
+      "status": "source_present"
+    },
+    {
+      "criterion": "Account/sync status where present",
+      "evidence": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/LocalAuthoritativeSyncModel.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/AccountStateMachine.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/ContinuityAuthorityGate.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/AccountBoundary.swift",
+        "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceDashboardProjection.swift"
+      ],
+      "status": "source_present"
+    },
+    {
+      "criterion": "Proof/history/receipts detail",
+      "evidence": [
+        "Native/Ambitions/Surfaces/You/YouRootDetailContent.swift",
+        "Native/Ambitions/Trust/ReceiptInspectionView.swift",
+        "Native/Ambitions/Trust/HistoryInspectionView.swift",
+        "Native/Ambitions/Trust/InspectionSurface.swift",
+        "Native/Ambitions/Trust/YouCrossSurfaceProofReviewProjector.swift",
+        "Native/Ambitions/Trust/YouTrustHistoryProjector.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/ActionReceiptProofLedgerModels.swift"
+      ],
+      "status": "source_present"
+    },
+    {
+      "criterion": "Settings and preference details",
+      "evidence": [
+        "Native/Ambitions/Surfaces/You/YouRootDetailContent.swift",
+        "Native/Ambitions/Surfaces/You/YouRootDetailRouteSurface.swift",
+        "Native/Ambitions/Surfaces/You/YouViewModel.swift",
+        "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceSystemCenterProjection.swift",
+        "Native/Ambitions/Surfaces/You/Projection/YouFeatureService.swift"
+      ],
+      "status": "source_present"
+    },
+    {
+      "criterion": "Empty, loading, error, offline, and no-account states",
+      "evidence": [
+        "Native/Ambitions/Surfaces/You/YouViewModel.swift",
+        "Native/Ambitions/Surfaces/You/YouSurface.swift",
+        "Native/Ambitions/Surfaces/You/YouRootDetailRouteSurface.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/LocalAuthoritativeSyncModel.swift",
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/AccountBoundary.swift"
+      ],
+      "status": "source_present_runtime_proof_absent"
+    },
+    {
+      "criterion": "Accessibility source support",
+      "evidence": [
+        "Native/Ambitions/Surfaces/You/YouAccessibility.swift",
+        "Native/Ambitions/Surfaces/You/YouRootSurface.swift",
+        "Native/Ambitions/Surfaces/You/YouObjectView.swift",
+        "Native/Ambitions/Surfaces/You/YouRootDetailRouteSurface.swift",
+        "Native/Ambitions/Trust/InspectionSurface.swift"
+      ],
+      "status": "source_present_accessibility_proof_absent"
+    }
+  ],
+  "truth_claims": {
+    "allowed": [
+      "You has source and projection evidence for a local User System Profile surface.",
+      "You has source-level local-first, privacy, account/no-account, receipt, history, and settings detail evidence.",
+      "You visible and accessibility labels were normalized toward User System Profile language in this slice."
+    ],
+    "forbidden": [
+      "Visual Green",
+      "Runtime Green",
+      "Interaction Green",
+      "Release Green",
+      "screenshot proof",
+      "focused UI journey test proof",
+      "VoiceOver proof",
+      "Dynamic Type proof",
+      "Reduce Motion proof",
+      "Reduce Transparency proof",
+      "High Contrast proof",
+      "offline journey proof",
+      "no-account journey proof",
+      "simulator proof",
+      "device proof"
+    ]
+  },
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_touched": [
+      "Surfaces/You"
+    ],
+    "non_canonical_owners_touched": [],
+    "files_moved_or_created": [
+      "docs/audits/you-flagship-acceptance.md",
+      "docs/audits/you-flagship-acceptance.json"
+    ],
+    "old_non_canonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "architecture_debt": [
+      "Screenshot, accessibility, device, offline/no-account, and full UI journey proof remain outside this no-testing source acceptance."
+    ],
+    "next_repair_train": "AMB-1744/AMB-1765 screenshot and device proof; AMB-1743/AMB-1766 accessibility proof.",
+    "used_equivalent_path_interpretation": false
+  },
+  "proof_ceiling": {
+    "runtime_tests_run": false,
+    "ui_tests_run": false,
+    "simulator_run": false,
+    "screenshots_captured": false,
+    "accessibility_proof_run": false,
+    "offline_no_account_proof_run": false,
+    "reason": "User authorized full completion without testing until advised otherwise."
+  }
+}

@@ -58,8 +58,8 @@ struct YouRootDetailRouteSurface: View {
             await refresh()
         }
         .accessibilityIdentifier("you.screen")
-        .accessibilityLabel("\(detail.title). You settings.")
-        .accessibilityHint("Review this settings detail.")
+        .accessibilityLabel("\(detail.title). You detail.")
+        .accessibilityHint("Review this User System Profile detail.")
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
         .task {
             await viewModel.load(using: featureFactory.youService)

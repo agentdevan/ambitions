@@ -12,8 +12,8 @@ extension RepositoryBackedYouService {
         appearanceSummary: String
         ) -> YouSystemCenterState {
         YouSystemCenterState(
-            title: "Settings",
-            subtitle: "Local profile keeps appearance, capture, privacy, data, receipts, and defaults inspectable.",
+            title: "User System Profile",
+            subtitle: "Local profile keeps privacy, account state, receipts, appearance, data, and defaults inspectable.",
             sections: [
                 YouSystemCenterSection(
                     id: "planning-behavior",
@@ -151,7 +151,7 @@ extension RepositoryBackedYouService {
                     items: [
                         YouSystemCenterItem(
                             id: "you",
-                            title: "Local personal system",
+                            title: "User System Profile",
                             subtitle: "Name and default starting surface.",
                             icon: "person.crop.circle",
                             statusLabel: snapshot.appState.userDisplayName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Optional" : "Local",
