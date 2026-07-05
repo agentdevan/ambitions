@@ -1,0 +1,239 @@
+{
+  "issue": "AMB-1742",
+  "title": "Frontend Quarantine / Stale Route Deletion",
+  "status": "implemented_yellow_completion_authorized_without_runtime_testing",
+  "date": "2026-07-05",
+  "baseline_sha": "415b2d8f99076560fffff6ad114146a4bea7e6ad",
+  "linear_status_before_closeout": "In Progress",
+  "user_authorization": {
+    "completion_without_testing": true,
+    "runtime_tests_run": false,
+    "simulator_run": false,
+    "screenshots_captured": false,
+    "accessibility_runtime_proof": false,
+    "device_proof": false
+  },
+  "classification_terms": [
+    "keep_and_harden",
+    "replace_in_place",
+    "strangle_with_new_implementation",
+    "quarantine",
+    "delete",
+    "unknown_until_route_test_proves_use"
+  ],
+  "classifications": [
+    {
+      "candidate": "canonical_root_shell",
+      "classification": "keep_and_harden",
+      "source_owner_evidence": [
+        "Native/Ambitions/Stage/AmbitionsSurface.swift",
+        "Native/Ambitions/App/AmbitionsRootStageSurfaceHost.swift",
+        "Native/Ambitions/Stage/StageChrome.swift",
+        "Native/Ambitions/Stage/SurfaceOwnershipRegistry.swift"
+      ],
+      "decision": "keep_launch_critical_product_spine"
+    },
+    {
+      "candidate": "today_goals_time_you_surface_routes",
+      "classification": "keep_and_harden",
+      "source_owner_evidence": [
+        "docs/audits/frontend-screen-route-registry.md",
+        "docs/audits/frontend-journey-registry.md"
+      ],
+      "decision": "keep_no_launch_critical_deletion"
+    },
+    {
+      "candidate": "global_capture_composer",
+      "classification": "keep_and_harden",
+      "source_owner_evidence": [
+        "Native/Ambitions/Stage/SurfaceOwnershipRegistry.swift",
+        "Native/Ambitions/Stage/Overlays/ShellOverlayState.swift",
+        "Native/Ambitions/App/ShellCommandRouter.swift"
+      ],
+      "decision": "keep_as_global_composer_not_root_destination"
+    },
+    {
+      "candidate": "stage_motion_behavior",
+      "classification": "keep_and_harden",
+      "source_owner_evidence": [
+        "Native/Ambitions/Stage/SurfaceOwnershipRegistry.swift",
+        "Native/Ambitions/Stage/AmbitionsStage.swift",
+        "docs/audits/amb-1747-stage-shell-frontend-reality-audit.md"
+      ],
+      "decision": "keep_under_stage_motion_behavior_no_motion_root_found"
+    },
+    {
+      "candidate": "trust_inspection_wrappers",
+      "classification": "keep_and_harden_proof_limited",
+      "source_owner_evidence": [
+        "Native/Ambitions/Trust/ProofInspectionView.swift",
+        "Native/Ambitions/Trust/SourceInspectionView.swift",
+        "Native/Ambitions/Trust/PrivacyInspectionView.swift",
+        "Native/Ambitions/Trust/HistoryInspectionView.swift",
+        "Native/Ambitions/Trust/ReceiptInspectionView.swift",
+        "Native/Ambitions/App/AmbitionsRootStageSurfaceHost.swift"
+      ],
+      "decision": "keep_contextual_under_owner_routes_until_invocation_proof_exists"
+    },
+    {
+      "candidate": "preview_support_development_assets",
+      "classification": "quarantine",
+      "source_owner_evidence": [
+        "project.yml",
+        "docs/audits/frontend-deletion-quarantine-candidates.md"
+      ],
+      "decision": "preview_only_not_primary_runtime_evidence"
+    },
+    {
+      "candidate": "historical_screenshot_and_design_reference_evidence",
+      "classification": "quarantine",
+      "source_owner_evidence": [
+        "docs/audits/frontend-deletion-quarantine-candidates.md",
+        "docs/audits/amb-1749-frontend-evidence-harness.md"
+      ],
+      "decision": "historical_or_design_reference_only_not_current_rendered_proof"
+    },
+    {
+      "candidate": "stale_root_labels_in_tests_and_fixtures",
+      "classification": "quarantine",
+      "source_owner_evidence": [
+        "Native/AmbitionsTests",
+        "Native/AmbitionsUITests",
+        "docs/audits/copy-state-language-audit.json"
+      ],
+      "decision": "retain_negative_assertions_quarantine_fixture_copy_from_product_claims"
+    },
+    {
+      "candidate": "shell_stale_destination_blockers",
+      "classification": "keep_and_harden",
+      "source_owner_evidence": [
+        "Native/Ambitions/App/ShellCommandDestination.swift"
+      ],
+      "decision": "keep_active_guard_against_plan_pulse_profile_calendar_inbox"
+    },
+    {
+      "candidate": "you_profile_terminology",
+      "classification": "replace_in_place",
+      "source_owner_evidence": [
+        "Native/Ambitions/Surfaces/You/Projection",
+        "docs/audits/you-flagship-acceptance.md"
+      ],
+      "decision": "continue_source_owner_copy_review_with_screenshot_proof_when_testing_returns"
+    },
+    {
+      "candidate": "external_route_and_snapshot_contracts",
+      "classification": "unknown_until_route_test_proves_use",
+      "source_owner_evidence": [
+        "Native/Ambitions/App/AppDeepLinkRegistry.swift",
+        "Native/Ambitions/App/AppExternalRouting.swift",
+        "Native/Ambitions/Projection/ExternalSnapshots",
+        "project.yml"
+      ],
+      "decision": "retain_until_external_route_proof_train"
+    },
+    {
+      "candidate": "production_source_deletion_batch",
+      "classification": "delete",
+      "source_owner_evidence": [],
+      "decision": "none_selected_no_runtime_or_screenshot_proof_run"
+    }
+  ],
+  "acceptance": {
+    "candidate_route_or_source_owner_evidence": "present_for_classified_candidates",
+    "launch_critical_deletion_without_replacement": "none",
+    "preview_or_fake_fixture_primary_runtime_paths": "quarantined_by_policy",
+    "motion_as_destination": "no_active_root_found_keep_stage_behavior",
+    "inspection_as_surface": "kept_contextual_proof_limited_under_owner_routes",
+    "build_tests_screenshots": "not_run_by_user_instruction_green_blocked"
+  },
+  "follow_up_gates": [
+    {
+      "id": "AMB-1742-FU-01",
+      "scope": "PreviewSupport quarantine hardening",
+      "required_before_green_or_deletion": [
+        "production_import_scan",
+        "xcodegen_drift_check",
+        "focused_build_validation",
+        "no_runtime_dependency_on_preview_fixtures"
+      ]
+    },
+    {
+      "id": "AMB-1742-FU-02",
+      "scope": "Stale label cleanup",
+      "required_before_green_or_deletion": [
+        "negative_assertion_split",
+        "copy_scan",
+        "focused_screenshot_proof_for_user_facing_changes"
+      ]
+    },
+    {
+      "id": "AMB-1742-FU-03",
+      "scope": "Trust inspection invocation proof",
+      "required_before_green_or_deletion": [
+        "proof_source_privacy_history_receipts_rendered_routes",
+        "return_path_proof",
+        "accessibility_runtime_smoke"
+      ]
+    },
+    {
+      "id": "AMB-1742-FU-04",
+      "scope": "External route retention or deletion proof",
+      "required_before_green_or_deletion": [
+        "deep_link_route_proof",
+        "widget_route_proof",
+        "share_extension_route_proof",
+        "app_intent_route_proof",
+        "handoff_or_notification_route_proof"
+      ]
+    },
+    {
+      "id": "AMB-1742-FU-05",
+      "scope": "Deletion batch proof",
+      "required_before_green_or_deletion": [
+        "revertable_deletion_commit",
+        "removed_path_inventory",
+        "build_test_screenshot_accessibility_evidence",
+        "rollback_note"
+      ]
+    }
+  ],
+  "proof_ceiling": {
+    "allowed_claims": [
+      "source_owner_deletion_quarantine_contract_present",
+      "launch_critical_paths_not_deleted",
+      "preview_fixtures_and_historical_evidence_quarantined_from_product_claims"
+    ],
+    "forbidden_claims": [
+      "visual_green",
+      "rendered_route_proof",
+      "accessibility_conformance",
+      "physical_device_behavior",
+      "testflight_readiness",
+      "app_store_readiness",
+      "release_green",
+      "future_source_deletion_safety"
+    ]
+  },
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_touched": [],
+    "production_source_changes": false,
+    "files_created": [
+      "docs/audits/amb-1742-frontend-quarantine-stale-route-deletion.md",
+      "docs/audits/amb-1742-frontend-quarantine-stale-route-deletion.json"
+    ],
+    "files_moved": [],
+    "old_noncanonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "yellow_debt": [
+      "rendered_launch_proof",
+      "route_runtime_proof",
+      "screenshots",
+      "accessibility_runtime_proof",
+      "external_route_proof",
+      "deletion_batch_proof"
+    ],
+    "next_repair_train": "AMB-1742-FU-01 through AMB-1742-FU-05 plus AMB-1749 and AMB-1750",
+    "equivalent_path_interpretation_used": false
+  }
+}
