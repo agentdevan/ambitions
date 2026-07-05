@@ -1177,7 +1177,7 @@ def check_external_surface_sanitized_projection_gate() -> CheckResult:
             "appGroupSnapshotStore.write(record)",
             "privacy.redactionRequiredEventIDs",
         ],
-        ROOT / "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceSnapshotBuilder.swift": [
+        ROOT / "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceSnapshotBuilderWidgetProjection.swift": [
             "func makeSnapshot(widget: WidgetProjection, privacy: PrivacyProjection, now: Date)",
             "nextAction: nil",
             "Glance-safe updates only",

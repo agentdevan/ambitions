@@ -639,7 +639,11 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         let batch = try await ProjectionMaterializer(store: runtimeStore).materializeAll(materializedAt: "2026-06-30T09:00:00Z")
         let projectionStore = ProjectionStoreSQLite(databaseURL: directory.appendingPathComponent("projections.sqlite"))
         try await projectionStore.save(batch: batch, updatedAt: "2026-06-30T09:01:00Z")
-        let appGroupStore = AppGroupSnapshotStore(rootDirectory: directory.appendingPathComponent("snapshots", isDirectory: true))
+        let protectionRecorder = SnapshotProtectionRecorder()
+        let appGroupStore = AppGroupSnapshotStore(
+            rootDirectory: directory.appendingPathComponent("snapshots", isDirectory: true),
+            fileProtectionApplier: protectionRecorder.record
+        )
         let sideEffectLedger = InMemorySideEffectLedgerRepository()
         let repositories = StaticSnapshotWriterRepositories(failOnRawGraphRead: true)
         let now = Date(timeIntervalSince1970: 1_712_779_200)
@@ -669,6 +673,7 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
             .appendingPathComponent("\(SharedExternalSnapshotStore.snapshotRecordID).snapshot.json")
         let sharedRecord = try PersistenceCoding.decode(SharedExternalSnapshotRecord.self, from: Data(contentsOf: sharedRecordURL))
         let sideEffectRecord = try? await sideEffectLedger.fetchRecord(id: "externalSnapshot.recorded_local_only.1712779200")
+        XCTAssertEqual(protectionRecorder.protectedPaths, [sharedRecordURL.path])
 
         XCTAssertEqual(storedRecord.id, SharedExternalSnapshotStore.snapshotRecordID)
         XCTAssertEqual(storedRecord.snapshotKind, SharedExternalSnapshotStore.snapshotKind)
@@ -877,6 +882,23 @@ private actor StaticSnapshotWriterRepositories: GoalRepository, GoalDraftReposit
 
 private enum SnapshotWriterRawGraphReadError: Error {
     case unexpectedRawGraphRead
+}
+
+private final class SnapshotProtectionRecorder: @unchecked Sendable {
+    private let lock = NSLock()
+    private var paths: [String] = []
+
+    var protectedPaths: [String] {
+        lock.lock()
+        defer { lock.unlock() }
+        return paths
+    }
+
+    func record(_ url: URL) {
+        lock.lock()
+        defer { lock.unlock() }
+        paths.append(url.path)
+    }
 }
 
 private extension ExternalSurfaceSnapshotTests {

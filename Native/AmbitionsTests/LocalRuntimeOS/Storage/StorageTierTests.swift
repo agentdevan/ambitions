@@ -193,7 +193,11 @@ final class StorageTierTests: XCTestCase {
         XCTAssertEqual(storedBlobData, Data("attachment".utf8))
         XCTAssertEqual(blobHealth.blobCount, 1)
 
-        let appGroupStore = AppGroupSnapshotStore(rootDirectory: directory.appendingPathComponent("snapshots", isDirectory: true))
+        let protectionRecorder = SnapshotProtectionRecorder()
+        let appGroupStore = AppGroupSnapshotStore(
+            rootDirectory: directory.appendingPathComponent("snapshots", isDirectory: true),
+            fileProtectionApplier: protectionRecorder.record
+        )
         let safeSnapshot = AppGroupSnapshotRecord(
             id: "widget-safe",
             snapshotKind: "widget",
@@ -204,6 +208,13 @@ final class StorageTierTests: XCTestCase {
         )
         try await appGroupStore.write(safeSnapshot)
         let storedSnapshot = try await appGroupStore.read(id: "widget-safe")
+        XCTAssertEqual(
+            protectionRecorder.protectedPaths,
+            [directory
+                .appendingPathComponent("snapshots", isDirectory: true)
+                .appendingPathComponent("widget-safe.snapshot.json")
+                .path]
+        )
         XCTAssertEqual(storedSnapshot, safeSnapshot)
         let unsafeSnapshot = AppGroupSnapshotRecord(
             id: "widget-unsafe",
@@ -245,6 +256,23 @@ final class StorageTierTests: XCTestCase {
         let migrationHealth = try await migrationStore.health()
         XCTAssertEqual(storedMigration?.relatedBackupID, backupRecord.id)
         XCTAssertEqual(migrationHealth.executionAllowedRecordCount, 0)
+    }
+}
+
+private final class SnapshotProtectionRecorder: @unchecked Sendable {
+    private let lock = NSLock()
+    private var paths: [String] = []
+
+    var protectedPaths: [String] {
+        lock.lock()
+        defer { lock.unlock() }
+        return paths
+    }
+
+    func record(_ url: URL) {
+        lock.lock()
+        defer { lock.unlock() }
+        paths.append(url.path)
     }
 }
 

@@ -47,12 +47,18 @@ struct AppGroupSnapshotStoreHealth: Codable, Sendable, Equatable, Hashable {
 actor AppGroupSnapshotStore {
     static let appGroupIdentifier = "group.com.ambitions.shared"
     static let relativeDirectory = "ExternalSnapshots"
+    static let snapshotFileProtectionPolicy = "complete_until_first_user_authentication"
 
     private let rootDirectory: URL
     private let fileManager = FileManager.default
+    private let fileProtectionApplier: @Sendable (URL) throws -> Void
 
-    init(rootDirectory: URL) {
+    init(
+        rootDirectory: URL,
+        fileProtectionApplier: @escaping @Sendable (URL) throws -> Void = AppGroupSnapshotStore.applyDefaultSnapshotFileProtection
+    ) {
         self.rootDirectory = rootDirectory
+        self.fileProtectionApplier = fileProtectionApplier
     }
 
     static func defaultLiveStore() -> AppGroupSnapshotStore {
@@ -80,6 +86,7 @@ actor AppGroupSnapshotStore {
         try ensureRoot()
         let fileURL = try url(for: record.id)
         try LocalRuntimeStorageCoding.encode(record).write(to: fileURL, options: [.atomic])
+        try fileProtectionApplier(fileURL)
     }
 
     func read(id: String) async throws -> AppGroupSnapshotRecord {
@@ -136,5 +143,16 @@ private extension AppGroupSnapshotStore {
             throw LocalRuntimeStorageError.pathEscape(id: id)
         }
         return trimmed
+    }
+
+    static func applyDefaultSnapshotFileProtection(to url: URL) throws {
+        #if os(iOS)
+        try FileManager.default.setAttributes(
+            [.protectionKey: FileProtectionType.completeUntilFirstUserAuthentication],
+            ofItemAtPath: url.path
+        )
+        #else
+        _ = url
+        #endif
     }
 }
