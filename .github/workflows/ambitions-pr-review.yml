@@ -225,3 +225,173 @@ jobs:
         if: steps.xcode_paths.outputs.should_run != 'true'
         shell: bash
         run: echo "No Native/Package/project Swift paths changed; Xcode build-for-testing skipped for this PR."
+
+  needs-repair-proof:
+    name: needs-repair-proof
+    runs-on: [self-hosted, Ambitions-XCode26]
+    timeout-minutes: 150
+    env:
+      AMBITIONS_SIM_HEALTH_TIMEOUT: 60s
+      AMBITIONS_XCODE_SIM_HEALTH_TIMEOUT: 60s
+      AMBITIONS_XCODE_UI_PREBUILD_TIMEOUT: 45m
+      AMBITIONS_XCODE_UI_PREBUILD_KILL_AFTER: 180s
+      AMBITIONS_XCODE_UI_PREBUILD: auto
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Decide whether Needs Repair proof applies
+        id: needs_repair_paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          should_run=false
+          if [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
+            should_run=true
+          else
+            base_ref="${GITHUB_BASE_REF:-main}"
+            git fetch origin "${base_ref}" --depth=1
+            base="$(git merge-base HEAD "origin/${base_ref}")"
+            if git diff --name-only "${base}" HEAD -- \
+              docs/qa/evidence/2026-07-05-needs-repair-proof-trigger.md \
+              Native Package.swift project.yml scripts \
+              | grep -E '^(docs/qa/evidence/2026-07-05-needs-repair-proof-trigger\.md|Native/|Package\.swift|project\.yml|scripts/)'; then
+              should_run=true
+            fi
+          fi
+          echo "should_run=${should_run}" >> "$GITHUB_OUTPUT"
+          echo "needs-repair-proof should_run=${should_run}"
+      - name: Install XcodeGen if needed
+        if: steps.needs_repair_paths.outputs.should_run == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! command -v xcodegen >/dev/null 2>&1; then
+            brew install xcodegen
+          fi
+      - name: Run static repair gates
+        if: steps.needs_repair_paths.outputs.should_run == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcodegen generate
+          git diff --check
+          scripts/ambitions-xcodegen-needed.sh
+          python3 scripts/ambitions-remediation-governance-check.py
+          python3 scripts/ambitions-quality-gate.py
+          python3 scripts/ambitions-architecture-inventory.py
+          python3 scripts/ambitions-green-standard-audit.py
+          python3 scripts/ambitions-vocabulary-drift-scan.py
+          python3 scripts/ambitions-local-first-boundary-scan.py
+          python3 scripts/source-atlas-boundary-audit.py
+          python3 scripts/source-atlas-no-private-graph-egress-audit.py
+      - name: Run Needs Repair proof lanes
+        if: steps.needs_repair_paths.outputs.should_run == 'true'
+        shell: bash
+        run: |
+          set -uo pipefail
+          mkdir -p .codex/needs-repair-proof .codex/xcode-logs .codex/xcode-results .codex/xcode-summaries
+          summary=".codex/needs-repair-proof/summary.jsonl"
+          : > "$summary"
+          overall=0
+
+          run_lane() {
+            local issue="$1"
+            local kind="$2"
+            local command_text="$3"
+            shift 3
+            local log=".codex/needs-repair-proof/${issue}-${kind}.log"
+            echo "::group::${issue} ${kind}"
+            echo "${command_text}"
+            local start end duration status
+            start="$(date +%s)"
+            set +e
+            "$@" 2>&1 | tee "$log"
+            status=${PIPESTATUS[0]}
+            set -e
+            end="$(date +%s)"
+            duration=$((end - start))
+            python3 - "$summary" "$issue" "$kind" "$status" "$duration" "$log" "$command_text" <<'PY'
+import json
+import sys
+from pathlib import Path
+summary, issue, kind, status, duration, log, command = sys.argv[1:]
+record = {
+    "issue": issue,
+    "kind": kind,
+    "status": int(status),
+    "result": "passed" if int(status) == 0 else "failed",
+    "duration_seconds": int(duration),
+    "log_file": log,
+    "command": command,
+}
+Path(summary).open("a", encoding="utf-8").write(json.dumps(record, sort_keys=True) + "\n")
+PY
+            if [[ "$status" -ne 0 ]]; then
+              overall=1
+            fi
+            echo "::endgroup::"
+          }
+
+          run_lane AMB-1818_AMB-1819_AMB-1820 build-for-testing \
+            "scripts/ambitions-xcode-build-for-testing.sh --batch AMB_NEEDS_REPAIR_PROOF --scheme Ambitions --timeout 60m --kill-after 180s" \
+            scripts/ambitions-xcode-build-for-testing.sh --batch AMB_NEEDS_REPAIR_PROOF --scheme Ambitions --timeout 60m --kill-after 180s
+
+          run_lane AMB-1808 focused-unit \
+            "scripts/ambitions-xcode-test-focused.sh --batch AMB_NEEDS_REPAIR_PROOF --scheme AmbitionsUnitTests --test AmbitionsTests/AppIntentCommandRoutingInventoryTests --timeout 25m --kill-after 180s" \
+            scripts/ambitions-xcode-test-focused.sh --batch AMB_NEEDS_REPAIR_PROOF --scheme AmbitionsUnitTests --test AmbitionsTests/AppIntentCommandRoutingInventoryTests --timeout 25m --kill-after 180s
+
+          run_lane AMB-1809 focused-unit \
+            "scripts/ambitions-xcode-test-focused.sh --batch AMB_NEEDS_REPAIR_PROOF --scheme AmbitionsUnitTests --test AmbitionsTests/ExternalWidgetLiveActivityScopeAllowlistTests --timeout 25m --kill-after 180s" \
+            scripts/ambitions-xcode-test-focused.sh --batch AMB_NEEDS_REPAIR_PROOF --scheme AmbitionsUnitTests --test AmbitionsTests/ExternalWidgetLiveActivityScopeAllowlistTests --timeout 25m --kill-after 180s
+
+          run_lane AMB-1811 focused-unit \
+            "scripts/ambitions-xcode-test-focused.sh --batch AMB_NEEDS_REPAIR_PROOF --scheme AmbitionsUnitTests --test AmbitionsTests/EventKitIntegrationServiceTests/testCreateReminderFailsWhenAuthorizationDenied --timeout 25m --kill-after 180s" \
+            scripts/ambitions-xcode-test-focused.sh --batch AMB_NEEDS_REPAIR_PROOF --scheme AmbitionsUnitTests --test AmbitionsTests/EventKitIntegrationServiceTests/testCreateReminderFailsWhenAuthorizationDenied --timeout 25m --kill-after 180s
+
+          run_lane AMB-1814 focused-unit \
+            "scripts/ambitions-xcode-test-focused.sh --batch AMB_NEEDS_REPAIR_PROOF --scheme AmbitionsUnitTests --test AmbitionsTests/AccessibilityNutritionChecklistTests --timeout 25m --kill-after 180s" \
+            scripts/ambitions-xcode-test-focused.sh --batch AMB_NEEDS_REPAIR_PROOF --scheme AmbitionsUnitTests --test AmbitionsTests/AccessibilityNutritionChecklistTests --timeout 25m --kill-after 180s
+
+          run_lane AMB-1816 focused-unit \
+            "scripts/ambitions-xcode-test-focused.sh --batch AMB_NEEDS_REPAIR_PROOF --scheme AmbitionsUnitTests --test AmbitionsTests/RuntimeEventReplayPerformanceSmokeTests --timeout 25m --kill-after 180s" \
+            scripts/ambitions-xcode-test-focused.sh --batch AMB_NEEDS_REPAIR_PROOF --scheme AmbitionsUnitTests --test AmbitionsTests/RuntimeEventReplayPerformanceSmokeTests --timeout 25m --kill-after 180s
+
+          run_lane AMB-1758 focused-unit \
+            "scripts/ambitions-xcode-test-focused.sh --batch AMB_NEEDS_REPAIR_PROOF --scheme AmbitionsUnitTests --only-testing AmbitionsTests/ExternalSurfaceSnapshotTests --timeout 25m --kill-after 180s" \
+            scripts/ambitions-xcode-test-focused.sh --batch AMB_NEEDS_REPAIR_PROOF --scheme AmbitionsUnitTests --only-testing AmbitionsTests/ExternalSurfaceSnapshotTests --timeout 25m --kill-after 180s
+
+          run_lane AMB-1815 deterministic-screenshot \
+            "scripts/ambitions-run-deterministic-screenshot-lane.sh --batch AMB_NEEDS_REPAIR_PROOF --timeout 35m --kill-after 180s" \
+            scripts/ambitions-run-deterministic-screenshot-lane.sh --batch AMB_NEEDS_REPAIR_PROOF --timeout 35m --kill-after 180s
+
+          python3 - "$summary" <<'PY'
+import json
+import sys
+from pathlib import Path
+summary = Path(sys.argv[1])
+records = [json.loads(line) for line in summary.read_text(encoding="utf-8").splitlines() if line.strip()]
+failed = [r for r in records if r["status"] != 0]
+print(json.dumps({
+    "lane_count": len(records),
+    "passed_count": len(records) - len(failed),
+    "failed_count": len(failed),
+    "failed_issues": [r["issue"] for r in failed],
+}, indent=2, sort_keys=True))
+PY
+          exit "$overall"
+      - name: Upload Needs Repair proof artifacts
+        if: always() && steps.needs_repair_paths.outputs.should_run == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ambitions-needs-repair-proof
+          path: |
+            .codex/needs-repair-proof/**
+            .codex/xcode-logs/**
+            .codex/xcode-results/**
+            .codex/xcode-summaries/**
+          if-no-files-found: warn
+      - name: Skip Needs Repair proof lanes
+        if: steps.needs_repair_paths.outputs.should_run != 'true'
+        shell: bash
+        run: echo "No Needs Repair proof trigger or Native/project/script paths changed; proof lanes skipped."
