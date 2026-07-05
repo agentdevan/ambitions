@@ -1,0 +1,82 @@
+{
+  "issue": "AMB-1768",
+  "status": "Implemented Yellow",
+  "date": "2026-07-05",
+  "baselineSHA": "95e6bd882284b91135564ceac91693eb5432d9f0",
+  "scope": "Frontend Product-Law Drift Scan",
+  "inputs": {
+    "linearProject": "Ambitions Flagship Frontend Recovery",
+    "projectIssueCount": 26,
+    "projectDocuments": [
+      "Frontend Recovery Program Charter",
+      "Frontend Codex Execution Index",
+      "Frontend Quality Rubric",
+      "Frontend Parent Feature Closeout Standard"
+    ],
+    "repoDocs": [
+      "docs/audits/frontend-screen-route-registry.md",
+      "docs/audits/frontend-journey-registry.md",
+      "docs/audits/frontend-deletion-quarantine-candidates.md",
+      "docs/audits/frontend-missing-screen-audit.md",
+      "docs/audits/amb-1747-stage-shell-frontend-reality-audit.md"
+    ]
+  },
+  "drift": [
+    {
+      "term": "surface:capture / surface: capture",
+      "owner": "Linear labels",
+      "classification": "misleading-taxonomy",
+      "correction": "Prefer capture-global or composer:capture because Capture is a global composer, not a persistent surface.",
+      "blocksCodex": "future label automation only"
+    },
+    {
+      "term": "motion-surface",
+      "owner": "Linear label",
+      "classification": "stale-ia",
+      "correction": "Replace future use with stage-motion or motion-behavior.",
+      "blocksCodex": "yes if used to mature root IA or surface implementation"
+    },
+    {
+      "term": "pulse / surface: pulse",
+      "owner": "Linear labels",
+      "classification": "historical-root-language",
+      "correction": "Replace with trust, history, proof, stage-motion, or issue-specific behavior labels.",
+      "blocksCodex": "yes if used as active product authority"
+    },
+    {
+      "term": "YouTrustPulseState",
+      "owner": "Native/Ambitions/Surfaces/You and Native/Ambitions/Core/Domain",
+      "classification": "copy-naming-review-candidate",
+      "correction": "Route to AMB-1776 copy and state-language audit.",
+      "blocksCodex": "blocks You copy Green, not AMB-1735"
+    },
+    {
+      "term": "Dashboard internal names",
+      "owner": "Native/Ambitions/Surfaces/You, Native/Ambitions/Surfaces/Time, tests",
+      "classification": "copy-review-candidate-or-internal-model-name",
+      "correction": "AMB-1776 should separate user-facing copy from internal model names and negative tests.",
+      "blocksCodex": "copy Green only"
+    }
+  ],
+  "clearsBlockerFor": [
+    "AMB-1735",
+    "AMB-1764"
+  ],
+  "remainingBlockers": [
+    "AMB-1479 visual specification authority repair",
+    "screenshot proof",
+    "accessibility proof",
+    "device proof",
+    "runtime UI proof"
+  ],
+  "nonClaims": [
+    "frontend implementation Green",
+    "Visual Green",
+    "accessibility conformance",
+    "screenshot/device proof",
+    "App Store readiness",
+    "release readiness",
+    "stale label cleanup completed",
+    "source copy cleanup completed"
+  ]
+}
