@@ -1,0 +1,196 @@
+{
+  "issue": "AMB-1771",
+  "title": "Search Functionality Repair Gate",
+  "status": "implemented_yellow_gate_closed_without_runtime_testing",
+  "date": "2026-07-05",
+  "baseline_sha": "6ef06166f72be79e38eb387dce0292ea400b80bb",
+  "linear_status_before_closeout": "In Progress",
+  "user_authorization": {
+    "completion_without_testing": true,
+    "xctest_run": false,
+    "ui_test_run": false,
+    "simulator_run": false,
+    "screenshots_captured": false,
+    "manual_accessibility_review": false,
+    "offline_no_account_runtime_proof": false,
+    "rendered_mutation_proof": false,
+    "physical_device_proof": false
+  },
+  "gate_inputs": [
+    "docs/audits/amb-1764-search-find-act-inspect-acceptance.md",
+    "docs/audits/amb-1764-search-find-act-inspect-acceptance.json",
+    "docs/audits/frontend-product-law-drift-scan.md",
+    "docs/truth/2026-06-22-runtime-remediation-decision-register.md",
+    "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+    "Native/Ambitions/Stage/Overlays/QuietCommandMemoryLensOverlay.swift",
+    "Native/Ambitions/App/ShellCommandRouter.swift",
+    "Native/Ambitions/App/ShellCommandDestination.swift",
+    "Native/Ambitions/Surfaces/You/Projection/SearchLens.swift"
+  ],
+  "gate_decisions": [
+    {
+      "question": "local_only_find_act_inspect",
+      "decision": "yes_as_source_contract_from_AMB_1764"
+    },
+    {
+      "question": "no_chatbot_or_cloud_search_framing",
+      "decision": "yes_active_search_owners_keep_local_no_external_service_copy"
+    },
+    {
+      "question": "actions_constrained_before_routing",
+      "decision": "yes_source_contract_uses_action_validator_trusted_handoffs_and_stale_destination_blockers"
+    },
+    {
+      "question": "safe_fallback_present",
+      "decision": "yes_source_contract_has_capture_fallback_missing_goal_memory_lens_fallback_and_held_stale_destinations"
+    },
+    {
+      "question": "visible_mutation_when_action_supported",
+      "decision": "source_supported_not_runtime_rendered"
+    },
+    {
+      "question": "green_claim_allowed",
+      "decision": "no_runtime_screenshot_accessibility_offline_no_account_and_device_proof_absent"
+    }
+  ],
+  "repair_policy": [
+    "block_stale_ia_noncanonical_or_untrusted_search_routes",
+    "deny_actions_that_fail_privacy_family_local_only_command_validation_or_target_checks",
+    "preserve_local_inspectable_source_tied_search_copy",
+    "use_capture_fallback_for_no_local_match",
+    "keep_visual_green_and_rendered_device_claims_in_later_proof_trains"
+  ],
+  "proof_ceiling": {
+    "allowed_claims": [
+      "search_repair_gate_has_source_acceptance_packet",
+      "search_repair_gate_has_canonical_owner_map",
+      "search_repair_gate_has_product_law_nonclaims",
+      "search_repair_gate_has_validation_record",
+      "search_repair_gate_has_rollback_policy"
+    ],
+    "forbidden_claims": [
+      "current_screenshot_proof",
+      "rendered_search_behavior",
+      "manual_accessibility_conformance",
+      "simulator_or_device_behavior",
+      "offline_no_account_runtime_behavior",
+      "runtime_ui_mutation_proof",
+      "final_visual_approval",
+      "testflight_readiness",
+      "app_store_readiness",
+      "frontend_visual_green",
+      "release_green"
+    ]
+  },
+  "validation": {
+    "status": "static_validation_complete_runtime_testing_skipped",
+    "commands_run": [
+      {
+        "command": "git diff --check",
+        "result": "passed"
+      },
+      {
+        "command": "jq . docs/audits/amb-1771-search-functionality-repair-gate.json",
+        "result": "passed"
+      },
+      {
+        "command": "npx markdownlint-cli2 --no-globs docs/audits/amb-1771-search-functionality-repair-gate.md",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-unsupported-claim-scan.py docs/audits/amb-1771-search-functionality-repair-gate.md docs/audits/amb-1771-search-functionality-repair-gate.json",
+        "result": "passed"
+      },
+      {
+        "command": "scripts/release-claim-safety-scan.sh docs/audits/amb-1771-search-functionality-repair-gate.md docs/audits/amb-1771-search-functionality-repair-gate.json",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-remediation-governance-check.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-architecture-inventory.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-vocabulary-drift-scan.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-truth-path-vocabulary-audit.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-green-standard-audit.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-accepted-yellow-misuse-audit.py",
+        "result": "passed"
+      },
+      {
+        "command": "scripts/no-unsupported-ai-claim-scan.sh docs/audits/amb-1771-search-functionality-repair-gate.md docs/audits/amb-1771-search-functionality-repair-gate.json",
+        "result": "advisory_yellow_truth_file_context_and_explicit_nonclaims"
+      },
+      {
+        "command": "scripts/privacy-boundary-scan.sh docs/audits/amb-1771-search-functionality-repair-gate.md docs/audits/amb-1771-search-functionality-repair-gate.json",
+        "result": "advisory_yellow_truth_file_context_and_explicit_nonclaims"
+      },
+      {
+        "command": "xcodegen generate --spec project.yml",
+        "result": "passed"
+      },
+      {
+        "command": "scripts/ambitions-xcodegen-needed.sh",
+        "result": "passed_XCODEGEN_NEEDED_0"
+      }
+    ],
+    "commands_not_run": [
+      "xctest",
+      "ui_test",
+      "simulator",
+      "screenshot_capture",
+      "manual_accessibility_review",
+      "performance_walkthrough",
+      "physical_device",
+      "signed_archive",
+      "app_store_connect_validation"
+    ]
+  },
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_inspected": [
+      "Core/LocalRuntimeOS/Search",
+      "Stage/Overlays",
+      "App",
+      "Surfaces/You/Projection",
+      "truth",
+      "retained_tests",
+      "audit_docs"
+    ],
+    "canonical_owners_touched": [],
+    "production_source_changes": false,
+    "files_created": [
+      "docs/audits/amb-1771-search-functionality-repair-gate.md",
+      "docs/audits/amb-1771-search-functionality-repair-gate.json"
+    ],
+    "files_moved": [],
+    "old_noncanonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "yellow_debt": [
+      "current_screenshots",
+      "manual_accessibility",
+      "simulator_device",
+      "offline_no_account_runtime",
+      "rendered_receipt",
+      "performance_proof"
+    ],
+    "next_proof_train": "AMB-1765 AMB-1766 AMB-1767 AMB-1770 AMB-1774 AMB-1775 when testing/device proof is re-enabled",
+    "equivalent_path_interpretation_used": false
+  }
+}
