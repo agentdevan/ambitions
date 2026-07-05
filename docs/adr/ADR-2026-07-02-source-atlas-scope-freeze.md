@@ -184,6 +184,12 @@ Directory-wide, wildcard, package-wide, or inferred allowlists are forbidden.
 An allowlist entry permits review of the named path; it is not implementation
 Green and not release proof.
 
+AMB-1671 splits existing launch-floor shard index contracts from an over-limit
+model file. This allowlist entry covers file-size remediation only; it does not
+add public-pack, R2, product-surface, or private runtime scope:
+
+- Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasLaunchFloorShardIndexContracts.swift`
+
 AMB-1730 relocates existing legacy runtime Source Atlas files into the canonical
 LocalRuntimeOS SourceAtlas owner. These allowlist entries cover the source-owner
 move only; they do not add public-pack, R2, product-surface, or private runtime
