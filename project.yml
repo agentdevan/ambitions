@@ -164,6 +164,23 @@ schemes:
       gatherCoverageData: false
       targets:
         - name: AmbitionsTests
+  AmbitionsSmoke:
+    build:
+      targets:
+        Ambitions: all
+        AmbitionsTests: [test]
+        AmbitionsUITests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      gatherCoverageData: false
+      targets:
+        - name: AmbitionsTests
+        - name: AmbitionsUITests
+      testPlans:
+        - path: Native/TestPlans/Smoke.xctestplan
+          defaultPlan: true
   AmbitionsUITests:
     build:
       targets:
