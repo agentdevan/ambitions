@@ -142,12 +142,31 @@ struct NextStepProvider: TimelineProvider {
 
 struct NextStepWidget: Widget {
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: "AmbitionsNextStepWidget", provider: NextStepProvider()) { entry in
+        StaticConfiguration(kind: ExternalSurfaceScopeAllowlist.nextStepWidget.widgetKind, provider: NextStepProvider()) { entry in
             NextStepWidgetView(entry: entry)
         }
         .configurationDisplayName("Next Step")
         .description("Shows a glance-safe Ambitions surface from your latest local state.")
-        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge, .accessoryInline, .accessoryCircular, .accessoryRectangular])
+        .supportedFamilies(ExternalSurfaceScopeAllowlist.nextStepWidget.supportedFamilyIdentifiers.map(\.widgetFamily))
+    }
+}
+
+private extension ExternalWidgetFamilyIdentifier {
+    var widgetFamily: WidgetFamily {
+        switch self {
+        case .systemSmall:
+            return .systemSmall
+        case .systemMedium:
+            return .systemMedium
+        case .systemLarge:
+            return .systemLarge
+        case .accessoryInline:
+            return .accessoryInline
+        case .accessoryCircular:
+            return .accessoryCircular
+        case .accessoryRectangular:
+            return .accessoryRectangular
+        }
     }
 }
 

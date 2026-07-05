@@ -1,0 +1,63 @@
+{
+  "issue": "AMB-1809",
+  "status": "Implemented Yellow",
+  "firstAllowedSnapshotSurface": {
+    "surfaceID": "next-step-widget",
+    "widgetKind": "AmbitionsNextStepWidget",
+    "contractKind": "widgets",
+    "projectionTypeName": "ExternalWidgetProjection",
+    "snapshotKind": "widget_projection_external_surface",
+    "consumesSharedSnapshotRecord": true,
+    "supportedFamilyIdentifiers": [
+      "systemSmall",
+      "systemMedium",
+      "systemLarge",
+      "accessoryInline",
+      "accessoryCircular",
+      "accessoryRectangular"
+    ],
+    "allowedVariantKinds": [
+      "current_step",
+      "today_pressure",
+      "protected_time",
+      "capture_entry",
+      "recovery",
+      "today",
+      "focus",
+      "goal",
+      "time_shape"
+    ]
+  },
+  "liveActivityCandidates": [
+    {
+      "surfaceID": "next-step-live-activity",
+      "widgetTypeName": "NextStepLiveActivityWidget",
+      "attributesTypeName": "NextStepActivityAttributes",
+      "contractKind": "live_activities",
+      "requiresConcreteStep": true,
+      "requiresUserInitiatedActiveOperation": true,
+      "hasBoundedEndTime": true,
+      "isPlatformReady": false
+    }
+  ],
+  "proofFiles": [
+    "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceScopeAllowlist.swift",
+    "Native/AmbitionsWidgetExtension/NextStepWidget.swift",
+    "Native/AmbitionsTests/App/ExternalWidgetLiveActivityScopeAllowlistTests.swift",
+    "Native/AmbitionsTests/App/ExternalSurfaceSnapshotBoundaryTests.swift"
+  ],
+  "notRun": [
+    "Focused widget/snapshot XCTest execution",
+    "xcodebuild build",
+    "UI tests",
+    "Rendered widget gallery",
+    "Lock Screen/accessory widget proof",
+    "ActivityKit start/update/end delivery",
+    "Physical-device verification"
+  ],
+  "nonClaims": [
+    "No locked-screen/device proof",
+    "No Live Activity production readiness",
+    "No release proof"
+  ]
+}

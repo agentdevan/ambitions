@@ -66,6 +66,7 @@ targets:
       - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalObjectReopeningProjector.swift
       - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceGlanceState.swift
       - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceControlContracts.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceScopeAllowlist.swift
       - path: Native/Ambitions/Projection/ExternalSnapshots/NextStepActivityAttributes.swift
     settings:
       base:
