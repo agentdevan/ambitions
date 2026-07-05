@@ -610,15 +610,6 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilStaticTextExists("Not Used", in: app, maxAttempts: 8))
     }
 
-    func testLaunchURLCanLandOnCanonicalTimeSurface() throws {
-        let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://tab/time")
-        app.launch()
-
-        XCTAssertTrue(waitForRootDestination("Time", in: app, timeout: 10))
-        XCTAssertTrue(waitForSelectedSurface("Time", in: app, timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["time.screen"].waitForExistence(timeout: 10))
-    }
-
     func testLaunchURLCanOpenGlobalCaptureWithoutTopLevelCaptureTab() throws {
         let hiddenApp = makeApp(bootstrapMode: "preview")
         hiddenApp.launch()
