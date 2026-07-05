@@ -54,13 +54,13 @@ extension ClosureState {
         case .completed:
             "Completed"
         case .stillCounts:
-            "Still Counts"
+            "Still counts"
         case .moved:
             "Rescheduled"
         case .skippedIntentionally:
             "Skipped intentionally"
         case .notNeeded:
-            "Not Needed"
+            "Not needed"
         case .blocked, .needsRecovery:
             "Needs Recovery"
         case .waiting:
@@ -77,13 +77,13 @@ extension ClosureState {
         case .completed:
             "Completed · recorded today"
         case .stillCounts:
-            "Still Counts · smaller version completed"
+            "Still counts · smaller version completed"
         case .moved:
             "Rescheduled · receipt saved"
         case .skippedIntentionally:
             "Skipped intentionally · receipt saved"
         case .notNeeded:
-            "Not Needed · receipt saved"
+            "Not needed · receipt saved"
         case .blocked, .needsRecovery:
             "Needs Recovery · review before changing the plan"
         case .waiting:

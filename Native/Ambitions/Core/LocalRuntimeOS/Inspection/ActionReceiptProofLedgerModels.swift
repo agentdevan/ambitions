@@ -215,7 +215,7 @@ struct ActionReceiptProofLedgerEntry: Sendable, Equatable, Identifiable {
     }
 
     private static func proofTitle(for receipt: ActionReceipt) -> String {
-        isStillCounts(receipt) ? "Still Counts" : receipt.title
+        isStillCounts(receipt) ? "Still counts" : receipt.title
     }
 
     private static func proofStrength(for receipt: ActionReceipt) -> ProofStrength {
@@ -223,10 +223,10 @@ struct ActionReceiptProofLedgerEntry: Sendable, Equatable, Identifiable {
     }
 
     private static func isStillCounts(_ receipt: ActionReceipt) -> Bool {
-        receipt.title.localizedCaseInsensitiveContains("Still Counts") ||
+        receipt.title.localizedCaseInsensitiveContains("Still counts") ||
             receipt.changedFacts.contains { fact in
-                fact.newValueSummary?.localizedCaseInsensitiveContains("Still Counts") == true ||
-                    fact.summary.localizedCaseInsensitiveContains("Still Counts")
+                fact.newValueSummary?.localizedCaseInsensitiveContains("Still counts") == true ||
+                    fact.summary.localizedCaseInsensitiveContains("Still counts")
             }
     }
 

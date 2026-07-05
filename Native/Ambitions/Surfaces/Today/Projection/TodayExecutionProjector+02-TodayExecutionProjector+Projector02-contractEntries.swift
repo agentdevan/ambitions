@@ -43,7 +43,7 @@ extension TodayExecutionProjector {
             id: "today2.contract.closure",
             kind: .actionClosure,
             title: "Close the loop",
-            subtitle: "Completed, Still Counts, Rescheduled, Waiting, or Needs Recovery can be recorded here.",
+            subtitle: "Completed, Still counts, Rescheduled, Waiting, or Needs Recovery can be recorded here.",
             value: "Needs a quick check",
             semanticState: .review,
             action: TodayInlineAction(kind: .closeActionClosure, title: "Close the loop", systemImage: "checkmark.bubble", state: .default, target: hero.primaryAction.target),

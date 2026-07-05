@@ -86,7 +86,7 @@ extension TodayExecutionViewState {
             id: "today2.contract.closure",
             kind: .actionClosure,
             title: "Close the loop",
-            subtitle: "One step can become Completed, Still Counts, Rescheduled, Waiting, or Needs Recovery.",
+            subtitle: "One step can become Completed, Still counts, Rescheduled, Waiting, or Needs Recovery.",
             value: "Needs a quick check",
             semanticState: .review,
             action: TodayInlineAction(kind: .closeActionClosure, title: "Close the loop", systemImage: "checkmark.bubble", state: .default, target: primary.target),
