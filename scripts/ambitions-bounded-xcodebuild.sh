@@ -7,6 +7,9 @@ cd "$REPO_ROOT"
 TIMEOUT_DURATION="15m"
 KILL_AFTER="60s"
 LOG_FILE=""
+QUARANTINE_ACTIONS_RUNNER="${AMBITIONS_XCODE_QUARANTINE_ACTIONS_RUNNER:-1}"
+QUARANTINE_INTERVAL_SECONDS="${AMBITIONS_XCODE_QUARANTINE_ACTIONS_RUNNER_INTERVAL_SECONDS:-10}"
+QUARANTINE_WATCHDOG_PID=""
 
 usage() {
   cat >&2 <<'EOF'
@@ -108,6 +111,121 @@ printf 'command:'
 printf ' %q' xcodebuild "${XCODEBUILD_ARGS[@]}"
 printf '\n'
 
+case "$QUARANTINE_ACTIONS_RUNNER" in
+  1|true|TRUE|yes|YES) QUARANTINE_ACTIONS_RUNNER=1 ;;
+  *) QUARANTINE_ACTIONS_RUNNER=0 ;;
+esac
+
+external_actions_runner_xcode_pids() {
+  ps -axo pid=,args= | awk -v self="$$" -v parent="$PPID" '
+    {
+      pid=$1
+      line=$0
+      sub(/^[[:space:]]*[0-9]+[[:space:]]+/, "", line)
+    }
+    pid == self || pid == parent { next }
+    line ~ /awk/ { next }
+    line ~ /actions-runner\/_work\/(_temp\/ambitions-local-runtime-proof|ambitions\/ambitions)/ &&
+    line ~ /xcodebuild|swift-frontend|swift-driver|SWBBuildService|actool|ibtool/ {
+      print pid
+    }
+  ' | sort -n -u
+}
+
+terminate_pid_trees() {
+  (("$#" > 0)) || return 0
+  python3 - "$@" <<'PY'
+import os
+import signal
+import subprocess
+import sys
+import time
+
+roots = {int(pid) for pid in sys.argv[1:] if pid.isdigit()}
+if not roots:
+    raise SystemExit(0)
+
+def collect_tree(root_pids):
+    output = subprocess.check_output(["ps", "-axo", "pid=,ppid="], text=True)
+    children = {}
+    live = set()
+    for raw in output.splitlines():
+        parts = raw.split()
+        if len(parts) != 2:
+            continue
+        pid, ppid = map(int, parts)
+        live.add(pid)
+        children.setdefault(ppid, []).append(pid)
+
+    seen = set()
+    stack = list(root_pids)
+    while stack:
+        pid = stack.pop()
+        if pid in seen or pid not in live:
+            continue
+        seen.add(pid)
+        stack.extend(children.get(pid, []))
+    return seen
+
+current = {os.getpid(), os.getppid()}
+targets = collect_tree(roots)
+targets.difference_update(current)
+
+for sig, delay in ((signal.SIGTERM, 2.0), (signal.SIGKILL, 0.0)):
+    for pid in sorted(targets, reverse=True):
+        try:
+            os.kill(pid, sig)
+        except (ProcessLookupError, PermissionError):
+            pass
+    if not delay:
+        break
+    time.sleep(delay)
+    remaining = set()
+    for pid in targets:
+        result = subprocess.run(["ps", "-p", str(pid)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        if result.returncode == 0:
+            remaining.add(pid)
+    targets = remaining.difference(current)
+    if not targets:
+        break
+PY
+}
+
+quarantine_external_actions_runner_xcode() {
+  local reason="$1"
+  local pids=()
+  while IFS= read -r pid; do
+    [[ -n "$pid" ]] || continue
+    pids+=("$pid")
+  done < <(external_actions_runner_xcode_pids)
+
+  ((${#pids[@]} > 0)) || return 0
+  echo "actions_runner_xcode_quarantine=$reason"
+  printf 'actions_runner_xcode_quarantine_pids='
+  printf '%s,' "${pids[@]}"
+  printf '\n'
+  terminate_pid_trees "${pids[@]}"
+}
+
+start_actions_runner_quarantine_watchdog() {
+  [[ "$QUARANTINE_ACTIONS_RUNNER" -eq 1 ]] || return 0
+  quarantine_external_actions_runner_xcode preflight
+  (
+    while true; do
+      sleep "$QUARANTINE_INTERVAL_SECONDS"
+      quarantine_external_actions_runner_xcode watchdog
+    done
+  ) &
+  QUARANTINE_WATCHDOG_PID="$!"
+}
+
+stop_actions_runner_quarantine_watchdog() {
+  [[ -n "$QUARANTINE_WATCHDOG_PID" ]] || return 0
+  kill "$QUARANTINE_WATCHDOG_PID" >/dev/null 2>&1 || true
+  wait "$QUARANTINE_WATCHDOG_PID" >/dev/null 2>&1 || true
+  QUARANTINE_WATCHDOG_PID=""
+}
+
 CMD=(xcodebuild "${XCODEBUILD_ARGS[@]}")
 if [[ -n "$TIMEOUT_TOOL" ]]; then
   RUN_CMD=("$TIMEOUT_TOOL" -k "$KILL_AFTER" "$TIMEOUT_DURATION" "${CMD[@]}")
@@ -115,6 +233,9 @@ else
   echo "WARNING: no gtimeout/timeout binary found; running without a wall-clock bound." >&2
   RUN_CMD=("${CMD[@]}")
 fi
+
+trap stop_actions_runner_quarantine_watchdog EXIT
+start_actions_runner_quarantine_watchdog
 
 set +e
 if [[ -n "$LOG_FILE" ]]; then
@@ -125,6 +246,7 @@ else
   status=$?
 fi
 set -e
+stop_actions_runner_quarantine_watchdog
 
 cleanup_targeted_result_bundle_processes() {
   local match_value="$RESULT_BUNDLE"

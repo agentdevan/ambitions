@@ -6,10 +6,10 @@ This artifact tags every current `Native/Ambitions/Core/Domain` Swift file with 
 
 ## Summary
 
-- Total Core/Domain Swift files: 218
+- Total Core/Domain Swift files: 217
 - Mechanical suffix debt files: 77
 - UI model debt files still in Domain: 8
-- Obsolete/product-doctrine bucket files: 41
+- Obsolete/product-doctrine bucket files: 40
 - Low-confidence default classifications: 97
 
 ## Category Counts
@@ -20,7 +20,7 @@ This artifact tags every current `Native/Ambitions/Core/Domain` Swift file with 
 | `canonical_entity` | 10 |
 | `command_payload` | 23 |
 | `event_payload` | 15 |
-| `obsolete` | 41 |
+| `obsolete` | 40 |
 | `projection_dto` | 17 |
 | `ui_model` | 8 |
 | `value_object` | 97 |
@@ -79,7 +79,6 @@ This artifact tags every current `Native/Ambitions/Core/Domain` Swift file with 
 | `Native/Ambitions/Core/Domain/AmbitionsOSRuntimeTailGate.swift` | `obsolete` | Path | `split-rename-or-delete-before-amb-1676-green` | product-doctrine-or-tail-gate-bucket | medium |
 | `Native/Ambitions/Core/Domain/AmbitionsOSSourceTruthModels.swift` | `obsolete` | Context | `split-rename-or-delete-before-amb-1676-green` | product-doctrine-or-tail-gate-bucket | medium |
 | `Native/Ambitions/Core/Domain/AmbitionsOSStartingPositionModels.swift` | `obsolete` | Intent | `split-rename-or-delete-before-amb-1676-green` | product-doctrine-or-tail-gate-bucket | medium |
-| `Native/Ambitions/Core/Domain/AmbitionsOSVerticalSliceProofModels.swift` | `obsolete` | Path | `split-rename-or-delete-before-amb-1676-green` | product-doctrine-or-tail-gate-bucket | medium |
 | `Native/Ambitions/Core/Domain/AmbitionsProductCanonV2Models.swift` | `obsolete` | Path | `split-rename-or-delete-before-amb-1676-green` | product-doctrine-or-tail-gate-bucket | medium |
 | `Native/Ambitions/Core/Domain/AppSession.swift` | `value_object` | Context | `review-for-semantic-file-name-or-keep-as-domain-value` | domain-value-default-no-special-marker | low |
 | `Native/Ambitions/Core/Domain/CanonicalNowStateModels.swift` | `ui_model` | Context | `move-out-of-core-domain-to-surface-quality-or-projection-owner` | surface-or-screen-state-marker | medium |

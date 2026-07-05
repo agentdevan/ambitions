@@ -228,7 +228,6 @@
       "Native/Ambitions/Core/Domain/AmbitionsOSRuntimeTailGate.swift",
       "Native/Ambitions/Core/Domain/AmbitionsOSSourceTruthModels.swift",
       "Native/Ambitions/Core/Domain/AmbitionsOSStartingPositionModels.swift",
-      "Native/Ambitions/Core/Domain/AmbitionsOSVerticalSliceProofModels.swift",
       "Native/Ambitions/Core/Domain/AmbitionsProductCanonV2Models.swift"
     ],
     "uiModelFilesStillInDomain": [
@@ -641,14 +640,6 @@
       "loopRole": "Intent",
       "migrationAction": "split-rename-or-delete-before-amb-1676-green",
       "path": "Native/Ambitions/Core/Domain/AmbitionsOSStartingPositionModels.swift",
-      "reason": "product-doctrine-or-tail-gate-bucket"
-    },
-    {
-      "category": "obsolete",
-      "confidence": "medium",
-      "loopRole": "Path",
-      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
-      "path": "Native/Ambitions/Core/Domain/AmbitionsOSVerticalSliceProofModels.swift",
       "reason": "product-doctrine-or-tail-gate-bucket"
     },
     {
@@ -2009,7 +2000,7 @@
       "canonical_entity": 10,
       "command_payload": 23,
       "event_payload": 15,
-      "obsolete": 41,
+      "obsolete": 40,
       "projection_dto": 17,
       "ui_model": 8,
       "value_object": 97
@@ -2019,7 +2010,7 @@
       "Context": 74,
       "Intent": 25,
       "Learning": 2,
-      "Path": 95,
+      "Path": 94,
       "Proof": 7,
       "Reflow": 4,
       "Time Fit": 6
@@ -2033,10 +2024,10 @@
       "move-to-projection-or-feature-local-projection-when-touched": 6,
       "rename-mechanical-suffix-to-semantic-owner": 77,
       "review-for-semantic-file-name-or-keep-as-domain-value": 72,
-      "split-rename-or-delete-before-amb-1676-green": 41
+      "split-rename-or-delete-before-amb-1676-green": 40
     },
-    "obsoleteBucketDebtCount": 41,
-    "totalDomainSwiftFiles": 218,
+    "obsoleteBucketDebtCount": 40,
+    "totalDomainSwiftFiles": 217,
     "uiModelDebtCount": 8
   }
 }
