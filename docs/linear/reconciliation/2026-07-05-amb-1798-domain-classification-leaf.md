@@ -64,11 +64,9 @@ Tooling hardening required for current local validation:
   preflight failures with `--repair --kill-active-xcode`.
 - `scripts/ambitions-bounded-xcodebuild.sh` now quarantines the exact local
   self-hosted Actions-runner Ambitions `xcodebuild` process family while a local
-  bounded Xcode validation is running. This targets Runner.Worker ancestry,
-  `artifacts/strict-build-launch`, and paths under
-  `actions-runner/_work/_temp/ambitions-local-runtime-proof` or
-  `actions-runner/_work/ambitions/ambitions`, while excluding the current
-  wrapper's own process tree.
+  bounded Xcode validation is running. The final matcher uses PID, parent PID,
+  executable name, and `Runner.Worker` ancestry only; it does not read every
+  process command line. It excludes the current wrapper's own process tree.
 
 ## Classifier Delta
 
@@ -162,10 +160,13 @@ The first AMB-1798 build-for-testing attempt timed out after 30 minutes while
 compiling. During investigation, a self-hosted local Actions-runner job under
 `/Users/devan/actions-runner/_work/_temp/ambitions-local-runtime-proof...`
 reappeared and contended for CoreSimulator/Xcode resources. After the final push,
-an additional runner-side `artifacts/strict-build-launch` Xcode process appeared;
-the quarantine matcher was extended to catch that family by Runner.Worker ancestry
-without killing the current wrapper's own child process. The final validation used
-the hardened wrapper path above and completed successfully.
+an additional runner-side `artifacts/strict-build-launch` Xcode process appeared.
+The quarantine matcher was first extended for that family, then hardened again
+after full command-line process scans proved capable of stalling on huge Swift
+frontend invocations. The final matcher kills Xcode tool descendants of
+`Runner.Worker` using executable-name process data only, without killing the
+current wrapper's own child process. The final validation used the hardened wrapper
+path above and completed successfully.
 
 This packet does not claim the already-running Codex MCP host namespace was
 hot-reloaded. The XcodeBuildMCP wrapper repair is recorded in the AMB-1757

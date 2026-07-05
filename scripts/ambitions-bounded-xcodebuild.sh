@@ -119,7 +119,6 @@ esac
 external_actions_runner_xcode_pids() {
   python3 - "$$" "$PPID" <<'PY'
 import os
-import re
 import subprocess
 import sys
 
@@ -127,9 +126,21 @@ self_pid = int(sys.argv[1])
 parent_pid = int(sys.argv[2])
 current = {self_pid, parent_pid, os.getpid(), os.getppid()}
 
+def run_output(args: list[str], timeout: float = 3.0) -> str:
+    try:
+        return subprocess.check_output(
+            args,
+            stderr=subprocess.DEVNULL,
+            text=True,
+            timeout=timeout,
+        )
+    except (subprocess.CalledProcessError, subprocess.TimeoutExpired, FileNotFoundError):
+        return ""
+
 processes: dict[int, tuple[int, str]] = {}
 children: dict[int, list[int]] = {}
-output = subprocess.check_output(["ps", "-axo", "pid=,ppid=,args="], text=True)
+
+output = run_output(["ps", "-axo", "pid=,ppid=,comm="])
 for raw in output.splitlines():
     parts = raw.strip().split(None, 2)
     if len(parts) != 3:
@@ -139,8 +150,8 @@ for raw in output.splitlines():
         ppid = int(parts[1])
     except ValueError:
         continue
-    args = parts[2]
-    processes[pid] = (ppid, args)
+    comm = parts[2]
+    processes[pid] = (ppid, comm)
     children.setdefault(ppid, []).append(pid)
 
 own_tree = set(current)
@@ -152,43 +163,44 @@ while stack:
     own_tree.add(pid)
     stack.extend(children.get(pid, []))
 
-def has_matching_ancestor(pid: int, pattern: re.Pattern[str]) -> bool:
+xcode_tool_names = {
+    "xcodebuild",
+    "swift-frontend",
+    "swift-driver",
+    "SWBBuildService",
+    "actool",
+    "ibtool",
+}
+runner_roots = {
+    pid
+    for pid, (_ppid, comm) in processes.items()
+    if os.path.basename(comm) == "Runner.Worker"
+}
+
+def has_runner_ancestor(pid: int) -> bool:
     seen: set[int] = set()
     while pid in processes and pid not in seen:
         seen.add(pid)
-        ppid, args = processes[pid]
-        if pattern.search(args):
+        ppid, _comm = processes[pid]
+        if ppid in runner_roots:
             return True
         pid = ppid
     return False
 
-xcode_pattern = re.compile(r"xcodebuild|swift-frontend|swift-driver|SWBBuildService|actool|ibtool")
-ambitions_pattern = re.compile(
-    r"Ambitions\.xcodeproj|/Documents/GitHub/ambitions|actions-runner/_work/ambitions/ambitions"
-)
-external_runner_pattern = re.compile(
-    r"actions-runner/_work/(_temp/ambitions-local-runtime-proof|ambitions/ambitions)"
-    r"|artifacts/strict-build-launch"
-    r"|strict_build_launch"
-)
-runner_ancestor_pattern = re.compile(
-    r"/actions-runner/bin/Runner\.(Worker|Listener)"
-    r"|/actions-runner/runsvc\.sh"
-    r"|scripts/ci/strict_build_launch\.sh"
-)
+candidates = {
+    pid
+    for pid, (_ppid, comm) in processes.items()
+    if os.path.basename(comm) in xcode_tool_names
+}
 
-targets = []
-for pid, (_ppid, args) in processes.items():
+targets: set[int] = set()
+for pid in candidates:
     if pid in own_tree:
         continue
-    if not xcode_pattern.search(args):
-        continue
-    if not ambitions_pattern.search(args):
-        continue
-    if external_runner_pattern.search(args) or has_matching_ancestor(pid, runner_ancestor_pattern):
-        targets.append(pid)
+    if has_runner_ancestor(pid):
+        targets.add(pid)
 
-for pid in sorted(set(targets)):
+for pid in sorted(targets):
     print(pid)
 PY
 }
