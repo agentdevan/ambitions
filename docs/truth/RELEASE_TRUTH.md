@@ -375,18 +375,23 @@ Red is required for:
 
 ## 12. Final Release Reporting Contract
 
-Every release-facing report must include:
+Every release-facing packet or report must include:
 
 ```text
 Status: Green / Yellow / Red
 Commit SHA:
 Branch:
 Environment:
+Xcode version:
+Simulator or device:
 Commands/procedures:
+Validation run:
+Validation not run:
+Exit code(s):
+Artifact paths:
 Proof artifacts:
 Claims supported:
 Claims not supported:
-Validation not run:
 Known risks:
 Next proof required:
 Rollback plan:

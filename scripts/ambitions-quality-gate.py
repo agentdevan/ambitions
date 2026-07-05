@@ -41,6 +41,7 @@ REQUIRED_ARCHITECTURE_PATHS = [
     "scripts/ambitions-screenshot-artifact-audit.py",
     "scripts/ambitions-linear-green-claim-audit.py",
     "scripts/ambitions-device-proof-required.py",
+    "scripts/ambitions-release-non-claim-gate.py",
     "scripts/ambitions-green-standard-audit.py",
     "Native/Ambitions/Language/ProductCopy.swift",
     "Native/Ambitions/Language/ForbiddenTopLevelTerms.swift",
@@ -964,6 +965,38 @@ def check_accepted_yellow_misuse_contract() -> list[Finding]:
     ]
 
 
+def check_release_non_claim_contract() -> list[Finding]:
+    script = ROOT / "scripts" / "ambitions-release-non-claim-gate.py"
+    if not script.exists():
+        return [
+            Finding(
+                "release-non-claim",
+                rel(script),
+                "release non-claim gate is missing",
+            )
+        ]
+
+    result = subprocess.run(
+        [sys.executable, str(script)],
+        cwd=ROOT,
+        check=False,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if result.returncode == 0:
+        return []
+
+    output = "\n".join(part for part in [result.stdout, result.stderr] if part).strip()
+    return [
+        Finding(
+            "release-non-claim",
+            rel(script),
+            output[:500] if output else "Release non-claim gate failed",
+        )
+    ]
+
+
 def check_action_mutation_contract(files: list[Path], rehomed_stage_overlay_paths: set[str]) -> list[Finding]:
     findings: list[Finding] = []
     for path in files:
@@ -1035,6 +1068,7 @@ def run_self_test() -> int:
     assert any(re.search(pattern, "let now = Date()", flags=re.IGNORECASE) for pattern in DIRECT_TIME_RENDERING_PATTERNS)
     assert any(re.search(pattern, "\"GPT\"", flags=re.IGNORECASE) for pattern in HOSTED_AI_BACKEND_PATTERNS)
     assert "scripts/ambitions-accepted-yellow-misuse-audit.py" in REQUIRED_ARCHITECTURE_PATHS
+    assert "scripts/ambitions-release-non-claim-gate.py" in REQUIRED_ARCHITECTURE_PATHS
 
     print("ambitions-quality-gate self-test passed")
     return 0
@@ -1072,6 +1106,7 @@ def main() -> int:
     findings.extend(check_green_standard_contract())
     findings.extend(check_runtime_direct_write_contract())
     findings.extend(check_accepted_yellow_misuse_contract())
+    findings.extend(check_release_non_claim_contract())
     findings.extend(check_action_mutation_contract(files, rehomed_stage_overlay_paths))
 
     grouped = summarize(findings, max_per_gate=args.max_per_gate)
