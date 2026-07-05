@@ -10,10 +10,10 @@ import time
 
 REPO_ROOT = "/Users/devan/Documents/GitHub/ambitions"
 WRAPPER = f"{REPO_ROOT}/scripts/ambitions-xcodebuildmcp-stdio.sh"
-EXPECTED_PROFILE = "ambitions-ios"
-EXPECTED_SCHEME = "Ambitions"
-EXPECTED_SIMULATOR_NAME = "iPhone 17 Pro Max"
-EXPECTED_SIMULATOR_ID = "0F5F5AC4-4303-47C8-9BDC-EB5F57A0F79E"
+CONFIG_PATH = f"{REPO_ROOT}/.xcodebuildmcp/config.yaml"
+DEFAULT_EXPECTED_PROFILE = "ambitions-ios"
+DEFAULT_EXPECTED_SCHEME = "Ambitions"
+DEFAULT_EXPECTED_SIMULATOR_NAME = "iPhone 17 Pro Max"
 
 
 def parse_args():
@@ -23,6 +23,47 @@ def parse_args():
     parser.add_argument("--timeout", type=float, default=45.0)
     parser.add_argument("--json", action="store_true")
     return parser.parse_args()
+
+
+def load_expected_defaults():
+    expected = {
+        "profile": DEFAULT_EXPECTED_PROFILE,
+        "scheme": DEFAULT_EXPECTED_SCHEME,
+        "simulatorName": DEFAULT_EXPECTED_SIMULATOR_NAME,
+        "simulatorId": "",
+    }
+    try:
+        with open(CONFIG_PATH, encoding="utf-8") as handle:
+            lines = handle.read().splitlines()
+    except OSError:
+        return expected
+
+    active_profile = None
+    for line in lines:
+        if line.startswith("activeSessionDefaultsProfile:"):
+            active_profile = line.split(":", 1)[1].strip().strip("'\"")
+            break
+    if active_profile:
+        expected["profile"] = active_profile
+
+    in_profile = False
+    for line in lines:
+        if line == f"  {expected['profile']}:":
+            in_profile = True
+            continue
+        if in_profile and line.startswith("  ") and not line.startswith("    "):
+            break
+        if not in_profile or not line.startswith("    "):
+            continue
+
+        key, separator, value = line.strip().partition(":")
+        if not separator:
+            continue
+        value = value.strip().strip("'\"")
+        if key in ("scheme", "simulatorName", "simulatorId"):
+            expected[key] = value
+
+    return expected
 
 
 def encode_message(payload):
@@ -145,16 +186,11 @@ def wait_for_id(proc, selector, state, expected_id, deadline, events):
     return None
 
 
-def summarize(result, events, ok, error=None):
+def summarize(result, events, expected, ok, error=None):
     payload = {
         "ok": ok,
         "wrapper": WRAPPER,
-        "expected": {
-            "profile": EXPECTED_PROFILE,
-            "scheme": EXPECTED_SCHEME,
-            "simulatorName": EXPECTED_SIMULATOR_NAME,
-            "simulatorId": EXPECTED_SIMULATOR_ID,
-        },
+        "expected": expected,
         "error": error,
         "stderr_tail": [
             event["line"] for event in events if event["stream"] == "stderr"
@@ -167,6 +203,7 @@ def summarize(result, events, ok, error=None):
 
 def main():
     args = parse_args()
+    expected = load_expected_defaults()
     env = os.environ.copy()
     env.setdefault("AMBITIONS_XCODEBUILDMCP_CLEAN_PEERS", "0")
     proc = subprocess.Popen(
@@ -244,17 +281,20 @@ def main():
             proc.wait()
 
     text = json.dumps(result or {})
+    expected_values = [
+        expected["profile"],
+        expected["scheme"],
+        expected["simulatorName"],
+        expected["simulatorId"],
+    ]
     ok = (
         error is None
-        and EXPECTED_PROFILE in text
-        and EXPECTED_SCHEME in text
-        and EXPECTED_SIMULATOR_NAME in text
-        and EXPECTED_SIMULATOR_ID in text
+        and all(value and value in text for value in expected_values)
     )
     if error is None and not ok:
-        error = "session defaults response did not contain expected Ambitions profile"
+        error = "session defaults response did not contain expected Ambitions profile/defaults"
 
-    payload = summarize(result, events, ok, error)
+    payload = summarize(result, events, expected, ok, error)
     if args.json:
         print(json.dumps(payload, indent=2, sort_keys=True))
     else:
@@ -264,10 +304,10 @@ def main():
         if ok:
             print(
                 "profile:",
-                EXPECTED_PROFILE,
-                EXPECTED_SCHEME,
-                EXPECTED_SIMULATOR_NAME,
-                EXPECTED_SIMULATOR_ID,
+                expected["profile"],
+                expected["scheme"],
+                expected["simulatorName"],
+                expected["simulatorId"],
             )
     return 0 if ok else 1
 

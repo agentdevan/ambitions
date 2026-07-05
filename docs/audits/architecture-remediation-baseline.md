@@ -395,7 +395,7 @@ Production candidate files excluding test files: 33.
 | 40 | `Native/Ambitions/Core/LocalRuntimeOS/Projections/AppIntentProjection.swift` | AppIntent |
 | 88 | `Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/AppIntentBridge.swift` | AppIntent, mutation/write language |
 | 147 | `Native/Ambitions/Projection/ExternalSnapshots/ExternalCreationContracts.swift` | external snapshot/shared projection, mutation/write language |
-| 324 | `Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceActionPayloads+02-ExternalObjectReopeningProjector.swift` | external snapshot/shared projection, mutation/write language |
+| 324 | `Native/Ambitions/Projection/ExternalSnapshots/ExternalObjectReopeningProjector.swift` | external snapshot/shared projection, mutation/write language |
 | 312 | `Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceActionPayloads.swift` | external snapshot/shared projection, mutation/write language |
 | 158 | `Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceContractModels.swift` | external snapshot/shared projection, mutation/write language |
 | 177 | `Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceControlContracts.swift` | external snapshot/shared projection, mutation/write language |

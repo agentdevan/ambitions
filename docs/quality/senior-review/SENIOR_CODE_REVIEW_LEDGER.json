@@ -43388,7 +43388,7 @@
       "non_senior_traits": [
         "SCG-004 automated Yellow finding"
       ],
-      "path": "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceActionPayloads+02-ExternalObjectReopeningProjector.swift",
+      "path": "Native/Ambitions/Projection/ExternalSnapshots/ExternalObjectReopeningProjector.swift",
       "required_proof": "Mutation receipt/proof artifact tied to source and test evidence.",
       "required_repair": "Route meaningful mutations through typed proof/receipt paths or explicitly classify files as non-mutating support.",
       "required_tests": "Add before/action/after mutation tests for accepted repair scope.",

@@ -90,7 +90,7 @@ intentional cleanup.
 
 The expected transport proof is a direct JSON-RPC `tools/call` for
 `session_show_defaults` returning the `ambitions-ios` profile with
-`iPhone 17 Pro Max` and `0F5F5AC4-4303-47C8-9BDC-EB5F57A0F79E`.
+`iPhone 17 Pro Max` and the active `simulatorId` from `.xcodebuildmcp/config.yaml`.
 
 Use this probe for current repo proof:
 

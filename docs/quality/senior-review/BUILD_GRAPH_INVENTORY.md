@@ -167,7 +167,7 @@ Resolved finding `SCG-BG-001`: `Packages/AmbitionsExperienceKernel/Package.swift
 
 - Count: 9
 - `Native/Ambitions/Projection/ExternalSnapshots/ExternalCreationContracts.swift` -> Ambitions source/config (project.yml sources: Native/Ambitions), AmbitionsShareExtension shared source (project.yml explicit file)
-- `Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceActionPayloads+02-ExternalObjectReopeningProjector.swift` -> Ambitions source/config (project.yml sources: Native/Ambitions), AmbitionsShareExtension shared source (project.yml explicit file), AmbitionsWidgetExtension shared source (project.yml explicit file)
+- `Native/Ambitions/Projection/ExternalSnapshots/ExternalObjectReopeningProjector.swift` -> Ambitions source/config (project.yml sources: Native/Ambitions), AmbitionsShareExtension shared source (project.yml explicit file), AmbitionsWidgetExtension shared source (project.yml explicit file)
 - `Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceActionPayloads.swift` -> Ambitions source/config (project.yml sources: Native/Ambitions), AmbitionsShareExtension shared source (project.yml explicit file), AmbitionsWidgetExtension shared source (project.yml explicit file)
 - `Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceContractModels.swift` -> Ambitions source/config (project.yml sources: Native/Ambitions), AmbitionsShareExtension shared source (project.yml explicit file), AmbitionsWidgetExtension shared source (project.yml explicit file)
 - `Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceControlContracts.swift` -> Ambitions source/config (project.yml sources: Native/Ambitions), AmbitionsWidgetExtension shared source (project.yml explicit file)

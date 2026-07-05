@@ -10819,7 +10819,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 325,
-      "path": "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceActionPayloads+02-ExternalObjectReopeningProjector.swift"
+      "path": "Native/Ambitions/Projection/ExternalSnapshots/ExternalObjectReopeningProjector.swift"
     },
     {
       "candidate_vsp_ids": [

@@ -9161,7 +9161,7 @@
       "evidence_source": [
         "project.yml/Package.swift membership rules"
       ],
-      "path": "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceActionPayloads+02-ExternalObjectReopeningProjector.swift",
+      "path": "Native/Ambitions/Projection/ExternalSnapshots/ExternalObjectReopeningProjector.swift",
       "reason": "Included by configured app, extension, package, resource, or target config membership.",
       "risk": "Green",
       "target_membership": [
