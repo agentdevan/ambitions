@@ -1,0 +1,221 @@
+{
+  "issue": "AMB-1744",
+  "title": "Frontend Screenshot / Device Proof Matrix",
+  "status": "implemented_yellow_app_store_frontend_green_blocked",
+  "date": "2026-07-05",
+  "baseline_sha": "6b41d8f3837c5978b48d18ccb83ba34ff1fee126",
+  "linear_status_before_closeout": "In Progress",
+  "user_authorization": {
+    "completion_without_testing": true,
+    "xctest_run": false,
+    "ui_test_run": false,
+    "simulator_run": false,
+    "screenshots_captured": false,
+    "manual_accessibility_review": false,
+    "physical_device_proof": false,
+    "signed_archive_validation": false,
+    "app_store_connect_validation": false
+  },
+  "release_gate_inputs": [
+    "Native/Ambitions/Quality/ReleaseFrontendProofGate.swift",
+    "Native/Ambitions/Support/ReleaseCandidateLockDecisionReport.swift",
+    "Native/Ambitions/Support/ReleaseExternalTruthReadinessPacket.swift",
+    "docs/audits/amb-1750-visual-green-app-store-frontend-proof-gate.md",
+    "docs/audits/amb-1750-visual-green-app-store-frontend-proof-gate.json",
+    "docs/audits/amb-1749-frontend-evidence-harness.md",
+    "docs/audits/amb-1743-release-grade-frontend-qa-acceptance.md"
+  ],
+  "release_blocker_ids": [
+    "frontend-visual-app-store-proof",
+    "physical-device-smoke",
+    "manual-accessibility",
+    "signed-archive-store-validation",
+    "external-platform-proof",
+    "store-material-assets"
+  ],
+  "device_matrix": [
+    {
+      "device_class": "primary_current_iphone",
+      "required_proof": [
+        "fresh_install",
+        "launch",
+        "root_shell",
+        "safe_areas",
+        "keyboard_behavior",
+        "capture",
+        "today",
+        "goals",
+        "time",
+        "you",
+        "inspection_details",
+        "offline_no_account",
+        "performance_smoke"
+      ],
+      "current_status": "not_run",
+      "release_result": "red_for_app_store_frontend_green"
+    },
+    {
+      "device_class": "accessibility_size_iphone_run",
+      "required_proof": [
+        "dynamic_type_accessibility_sizes",
+        "voiceover_order",
+        "clipping_overlap",
+        "tap_targets",
+        "contrast",
+        "reduce_motion",
+        "non_color_meaning"
+      ],
+      "current_status": "not_run",
+      "release_result": "red_for_accessibility_or_release_claims"
+    },
+    {
+      "device_class": "lower_smaller_supported_iphone_class",
+      "required_proof": [
+        "root_shell",
+        "dock",
+        "first_viewport",
+        "keyboard",
+        "modal_sheet_fit",
+        "scroll_depth"
+      ],
+      "current_status": "not_run",
+      "release_result": "yellow_risk_until_proven"
+    },
+    {
+      "device_class": "external_surface_device_integration",
+      "required_proof": [
+        "widget",
+        "share",
+        "notification",
+        "shortcut",
+        "handoff",
+        "device_shared_container"
+      ],
+      "current_status": "not_run",
+      "release_result": "red_for_platform_claims"
+    }
+  ],
+  "screenshot_matrix": [
+    "launch_root_shell",
+    "global_capture",
+    "today",
+    "goals",
+    "time",
+    "you",
+    "inspection_details",
+    "empty_error_offline_states",
+    "dynamic_type"
+  ],
+  "screenshot_status": "not_captured",
+  "known_risk_ledger": [
+    {
+      "risk": "current_physical_device_proof_missing",
+      "severity": "red",
+      "source_blocker": "physical-device-smoke",
+      "required_release_action": "run_target_device_journeys_or_keep_claims_blocked"
+    },
+    {
+      "risk": "final_screenshot_packet_missing",
+      "severity": "red",
+      "source_blocker": "store-material-assets",
+      "required_release_action": "capture_and_review_current_screenshots_from_final_build_data"
+    },
+    {
+      "risk": "manual_accessibility_proof_missing",
+      "severity": "red",
+      "source_blocker": "manual-accessibility",
+      "required_release_action": "complete_manual_voiceover_dynamic_type_reduce_motion_contrast_motor_and_external_surface_proof"
+    },
+    {
+      "risk": "owner_visual_review_missing",
+      "severity": "red",
+      "source_blocker": "frontend-visual-app-store-proof",
+      "required_release_action": "record_owner_visual_review_before_visual_green"
+    },
+    {
+      "risk": "accepted_yellow_counted_as_green",
+      "severity": "blocked_by_gate",
+      "source_blocker": "ReleaseFrontendProofGate.acceptedYellowCountsAsGreen_false",
+      "required_release_action": "preserve_gate"
+    },
+    {
+      "risk": "external_platform_proof_missing",
+      "severity": "red",
+      "source_blocker": "external-platform-proof",
+      "required_release_action": "verify_enabled_external_surfaces_on_device_or_remove_claims"
+    },
+    {
+      "risk": "signed_archive_app_store_validation_missing",
+      "severity": "red",
+      "source_blocker": "signed-archive-store-validation",
+      "required_release_action": "run_signed_archive_and_app_store_connect_validation_on_release_mac"
+    }
+  ],
+  "frontend_release_packet": {
+    "frontend_quality_status": "Yellow",
+    "accepted_yellow_counts_as_green": false,
+    "visual_green_claim_allowed": false,
+    "app_store_frontend_claim_allowed": false,
+    "device_sensitive_claims_require_device_evidence": true,
+    "app_store_submission_ready": false
+  },
+  "acceptance": {
+    "core_journeys_device_matrix": "not_run_explicit_red_yellow_risk",
+    "screenshots_required_scopes": "enumerated_not_produced",
+    "accessibility_and_motion_settings": "not_verified_proof_required",
+    "accepted_yellow_not_green": true,
+    "release_claims_scoped_and_evidence_backed": "non_claim_gate_blocks_ready_claims",
+    "final_screenshot_packet_current_labeled_reviewable": false,
+    "simulator_or_architecture_only_cannot_close_green": true,
+    "rollback_plan_blocks_release_claim": true
+  },
+  "proof_ceiling": {
+    "allowed_claims": [
+      "device_app_store_proof_matrix_present",
+      "known_risk_ledger_present",
+      "release_packet_mapping_present",
+      "rollback_block_policy_present",
+      "app_store_frontend_green_blocked"
+    ],
+    "forbidden_claims": [
+      "final_screenshot_packet_exists",
+      "current_rendered_visual_quality",
+      "owner_visual_approval",
+      "accessibility_conformance",
+      "motion_accessibility_readiness",
+      "physical_device_behavior",
+      "external_platform_device_proof",
+      "signed_archive_validation",
+      "testflight_readiness",
+      "app_store_readiness",
+      "frontend_visual_green",
+      "release_green"
+    ]
+  },
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_touched": [],
+    "production_source_changes": false,
+    "files_created": [
+      "docs/audits/amb-1744-frontend-screenshot-device-proof-matrix.md",
+      "docs/audits/amb-1744-frontend-screenshot-device-proof-matrix.json"
+    ],
+    "files_moved": [],
+    "old_noncanonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "yellow_debt": [
+      "current_screenshots",
+      "owner_visual_review",
+      "manual_accessibility",
+      "dynamic_type",
+      "reduce_motion",
+      "physical_device_proof",
+      "external_platform_proof",
+      "signed_archive_validation",
+      "app_store_connect_validation",
+      "live_support_privacy_url_proof"
+    ],
+    "next_proof_train": "AMB-1765 AMB-1766 AMB-1767 AMB-1770 AMB-1774 AMB-1775 when testing/device proof is re-enabled",
+    "equivalent_path_interpretation_used": false
+  }
+}
