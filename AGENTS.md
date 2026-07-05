@@ -165,10 +165,12 @@ Current remediation direction:
 law over lore
 deep runtime, boring UI
 delete before naming
+public reference is not private intelligence
+no platform reinvention when SwiftUI owns it
 Green requires linked evidence
 ```
 
-Agents must preserve the product and runtime laws before preserving internal names. Architecture names, folders, suffix splits, engines, kernels, managers, coordinators, services, systems, runtimes, ledgers, scenes, lenses, and OS nouns must earn permanence through current need, exact ownership, deletion/collapse of duplicate authority, and linked proof. Do not add new broad architecture vocabulary because it sounds clarifying.
+Agents must preserve the product, runtime, privacy, proof, public-reference, and native-platform laws before preserving internal names. Architecture names, folders, suffix splits, engines, kernels, managers, coordinators, services, systems, runtimes, ledgers, scenes, lenses, and OS nouns must earn permanence through current need, exact ownership, deletion/collapse of duplicate authority, and linked proof. Do not add new broad architecture vocabulary because it sounds clarifying.
 
 User-facing UI must stay plain, native, and object-led even when the local runtime is deep. Do not expose runtime, projection, receipt, ledger, kernel, engine, scene, lens, policy, or architecture taxonomy as first-viewport product depth.
 

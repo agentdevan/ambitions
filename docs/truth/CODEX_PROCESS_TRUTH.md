@@ -152,10 +152,12 @@ Architecture simplification posture:
 law over lore
 deep runtime, boring UI
 delete before naming
+public reference is not private intelligence
+no platform reinvention when SwiftUI owns it
 Green requires linked evidence
 ```
 
-Codex must preserve stable product/runtime/privacy/proof law, reduce private architecture mythology, keep root UI in plain native life-object terms, and avoid new broad nouns unless the scoped work deletes, collapses, or replaces duplicate authority. Proof automation outranks prose: current checks, logs, proof packets, and accepted artifacts set the claim ceiling. A status claim may be Green only when the exact claim has current linked evidence.
+Codex must preserve stable product/runtime/privacy/proof law, reduce private architecture mythology, keep root UI in plain native life-object terms, keep Source Atlas/R2 public-reference-only rather than private intelligence authority, default to SwiftUI-native platform shape, and avoid new broad nouns unless the scoped work deletes, collapses, or replaces duplicate authority. Proof automation outranks prose: current checks, logs, proof packets, and accepted artifacts set the claim ceiling. A status claim may be Green only when the exact claim has current linked evidence.
 
 AMB-1658 remediation governance rules:
 

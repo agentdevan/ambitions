@@ -95,6 +95,8 @@ The 2026 architecture remediation posture is:
 law over lore
 deep runtime, boring UI
 delete before naming
+public reference is not private intelligence
+no platform reinvention when SwiftUI owns it
 Green requires linked evidence
 proof automation outranks prose
 ```
@@ -108,6 +110,10 @@ Deep runtime, boring UI means Ambitions may have a sophisticated local Private L
 Delete before naming means new broad architecture names, folders, suffix splits, engines, kernels, managers, coordinators, services, systems, runtimes, ledgers, scenes, lenses, or OS nouns are disallowed unless the scoped work first deletes, collapses, or replaces the older authority they would otherwise duplicate, or active truth explicitly approves the new owner with a proof gate.
 
 Feature-local projection is preferred where safe. New central `Projection/SurfaceLenses` authority must earn its need against the scoped product object, the Final Architecture Tree, current runtime law, and proof that a feature-local projection cannot satisfy canon without duplicating authority.
+
+Public reference is not private intelligence means Source Atlas and R2 may support public/reference/freshness packs, but they must not receive, store, infer, personalize from, or transmit the private life graph, private user context, goals, captures, schedules, receipts, proof, behavior, or inferred priorities. Public reference infrastructure may inform local orchestration only through approved boundaries and never becomes private intelligence authority.
+
+No platform reinvention when SwiftUI owns it means SwiftUI-native implementation is the default for product surfaces, Stage, shell, controls, accessibility, navigation, and motion unless product law and Apple-source guidance prove a native API cannot satisfy the scoped behavior. Custom Stage, UIKit, rendering, or framework-shaped machinery must earn its use through current product need, exact owner, availability/fallback proof, and validation.
 
 Green requires linked evidence means a canon statement, architecture target, or remediation doctrine is not an implementation claim unless it links to current source, tests, logs, proof artifacts, or owner acceptance that prove the exact scoped claim. If the evidence is missing, narrower status language is required.
 
