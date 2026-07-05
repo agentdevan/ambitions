@@ -1,21 +1,21 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-enum ObjectStageRole: String, CaseIterable, Sendable {
+enum ProductObjectFrameRole: String, CaseIterable, Sendable {
     case rootPrimaryObject
     case detailObject
     case overlayObject
 }
 
-struct ObjectStage<Content: View>: View {
+struct ProductObjectFrame<Content: View>: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let role: ObjectStageRole
+    let role: ProductObjectFrameRole
     let accessibilityIdentifier: String
     let content: Content
 
     init(
-        role: ObjectStageRole = .rootPrimaryObject,
+        role: ProductObjectFrameRole = .rootPrimaryObject,
         accessibilityIdentifier: String,
         @ViewBuilder content: () -> Content
     ) {

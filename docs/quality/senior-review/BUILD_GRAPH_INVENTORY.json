@@ -8611,7 +8611,7 @@
       "evidence_source": [
         "project.yml/Package.swift membership rules"
       ],
-      "path": "Native/Ambitions/DesignSystem/StagePrimitives/ObjectStage.swift",
+      "path": "Native/Ambitions/DesignSystem/StagePrimitives/ProductObjectFrame.swift",
       "reason": "Included by configured app, extension, package, resource, or target config membership.",
       "risk": "Green",
       "target_membership": [

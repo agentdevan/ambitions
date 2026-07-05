@@ -4,7 +4,7 @@ import SwiftUI
 struct SurfaceMorphBackdrop: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let role: ObjectStageRole
+    let role: ProductObjectFrameRole
 
     var body: some View {
         let colors = AmbitionsColor(theme: theme)

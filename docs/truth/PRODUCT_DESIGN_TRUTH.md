@@ -806,7 +806,7 @@ Ambitions/
       ContrastPolicy.swift
 
     StagePrimitives/
-      ObjectStage.swift
+      ProductObjectFrame.swift
       ContextCrown.swift
       ContinuityDock.swift
       CaptureAccessPoint.swift

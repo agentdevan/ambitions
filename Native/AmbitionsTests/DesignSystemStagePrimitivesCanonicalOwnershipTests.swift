@@ -5,7 +5,7 @@ final class DesignSystemStagePrimitivesCanonicalOwnershipTests: XCTestCase {
     func testCanonicalStagePrimitiveFilesExist() {
         let root = repoRoot()
         for requiredPath in [
-            "Native/Ambitions/DesignSystem/StagePrimitives/ObjectStage.swift",
+            "Native/Ambitions/DesignSystem/StagePrimitives/ProductObjectFrame.swift",
             "Native/Ambitions/DesignSystem/StagePrimitives/ContextCrown.swift",
             "Native/Ambitions/DesignSystem/StagePrimitives/ContinuityDock.swift",
             "Native/Ambitions/DesignSystem/StagePrimitives/CaptureAccessPoint.swift",

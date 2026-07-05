@@ -10252,7 +10252,7 @@
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 35,
-      "path": "Native/Ambitions/DesignSystem/StagePrimitives/ObjectStage.swift"
+      "path": "Native/Ambitions/DesignSystem/StagePrimitives/ProductObjectFrame.swift"
     },
     {
       "candidate_vsp_ids": [

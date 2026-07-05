@@ -40712,7 +40712,7 @@
       "non_senior_traits": [
         "none found by SCG-005 artifact review"
       ],
-      "path": "Native/Ambitions/DesignSystem/StagePrimitives/ObjectStage.swift",
+      "path": "Native/Ambitions/DesignSystem/StagePrimitives/ProductObjectFrame.swift",
       "required_proof": "Current file hash and SCG-005 ledger row.",
       "required_repair": "No SCG-005 repair required; keep under normal owner review.",
       "required_tests": "No additional SCG-005 test required beyond validation commands.",

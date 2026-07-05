@@ -55374,17 +55374,17 @@
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
       "layer": "DesignSystem",
       "line_count": 34,
-      "path": "Native/Ambitions/DesignSystem/StagePrimitives/ObjectStage.swift",
+      "path": "Native/Ambitions/DesignSystem/StagePrimitives/ProductObjectFrame.swift",
       "public_internal_types": [
         {
           "access": "internal",
           "kind": "enum",
-          "name": "ObjectStageRole"
+          "name": "ProductObjectFrameRole"
         },
         {
           "access": "internal",
           "kind": "struct",
-          "name": "ObjectStage"
+          "name": "ProductObjectFrame"
         }
       ],
       "risk_level": "Green",
@@ -55409,12 +55409,12 @@
         {
           "access": "internal",
           "kind": "enum",
-          "name": "ObjectStageRole"
+          "name": "ProductObjectFrameRole"
         },
         {
           "access": "internal",
           "kind": "struct",
-          "name": "ObjectStage"
+          "name": "ProductObjectFrame"
         }
       ]
     },
