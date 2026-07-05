@@ -146,7 +146,7 @@ extension ProjectionDefinition {
                 family: .search,
                 consumesEventKinds: RuntimeEventKind.allCases.filter { $0 != .compactionSnapshot },
                 readModelInventory: [
-                    .init(sourcePath: "Native/Ambitions/Stage/Overlays/Projection/SearchLens.swift", responsibility: "Search overlay read model", migrationTarget: .search),
+                    .init(sourcePath: "Native/Ambitions/Surfaces/You/Projection/SearchLens.swift", responsibility: "Search overlay read model", migrationTarget: .search),
                     .init(sourcePath: "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceEverythingSearchProjection.swift", responsibility: "Everything search projection scaffold", migrationTarget: .search),
                 ]
             )

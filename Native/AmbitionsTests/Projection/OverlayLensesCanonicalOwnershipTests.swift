@@ -7,8 +7,8 @@ final class OverlayLensesCanonicalOwnershipTests: XCTestCase {
         let required = [
             "Native/Ambitions/Projection/Contracts/OverlayProjectionContracts.swift",
             "Native/Ambitions/Composer/Capture/Projection/CaptureLens.swift",
-            "Native/Ambitions/Stage/Overlays/Projection/SearchLens.swift",
-            "Native/Ambitions/Stage/Overlays/Projection/ClosureLens.swift",
+            "Native/Ambitions/Surfaces/You/Projection/SearchLens.swift",
+            "Native/Ambitions/Surfaces/Today/Projection/ClosureLens.swift",
             "Native/Ambitions/Trust/Projection/InspectionLens.swift"
         ]
 
@@ -29,7 +29,7 @@ final class OverlayLensesCanonicalOwnershipTests: XCTestCase {
         XCTAssertEqual(contracts.map(\.kind), [.capture, .search, .closure, .inspection])
         XCTAssertEqual(
             contracts.map(\.ownerLayer),
-            ["Composer/Capture/Projection", "Stage/Overlays/Projection", "Stage/Overlays/Projection", "Trust/Projection"]
+            ["Composer/Capture/Projection", "Surfaces/You/Projection", "Surfaces/Today/Projection", "Trust/Projection"]
         )
         for contract in contracts {
             XCTAssertTrue(contract.satisfiesFinalCanon, contract.kind.rawValue)

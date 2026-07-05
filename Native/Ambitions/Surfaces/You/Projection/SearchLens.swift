@@ -3,7 +3,7 @@ import Foundation
 enum SearchLens {
     static let contract = OverlayLensContract(
         kind: .search,
-        ownerLayer: "Stage/Overlays/Projection",
+        ownerLayer: "Surfaces/You/Projection",
         primaryObject: "Local Search results",
         projectionInputs: ["query prompt", "filters", "matched local candidates", "performance budget"],
         actionBoundary: "Search opens local results and expansion only through source-tied rows.",

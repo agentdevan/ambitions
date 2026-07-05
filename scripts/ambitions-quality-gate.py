@@ -244,12 +244,17 @@ CENTRAL_PROJECTION_REHOME_OLD_PREFIXES = (
 
 CENTRAL_PROJECTION_REHOME_NEW_PREFIXES = (
     "Native/Ambitions/Composer/Capture/Projection/",
-    "Native/Ambitions/Stage/Overlays/Projection/",
     "Native/Ambitions/Surfaces/Goals/Projection/",
     "Native/Ambitions/Surfaces/Time/Projection/",
     "Native/Ambitions/Surfaces/Today/Projection/",
     "Native/Ambitions/Surfaces/You/Projection/",
     "Native/Ambitions/Trust/Projection/",
+)
+
+STAGE_OVERLAY_REHOME_NEW_PREFIXES = (
+    "Native/Ambitions/Surfaces/Today/Overlays/",
+    "Native/Ambitions/Surfaces/Today/Projection/",
+    "Native/Ambitions/Surfaces/You/Projection/",
 )
 
 STAGE_ALLOWED_PREFIXES = (
@@ -324,6 +329,23 @@ def central_projection_rehome_paths() -> set[str]:
         old_path, new_path = raw.split(" -> ", 1)
         if any(old_path.startswith(prefix) for prefix in CENTRAL_PROJECTION_REHOME_OLD_PREFIXES) and any(
             new_path.startswith(prefix) for prefix in CENTRAL_PROJECTION_REHOME_NEW_PREFIXES
+        ):
+            paths.add(new_path.strip())
+    return paths
+
+
+def stage_overlay_surface_rehome_paths() -> set[str]:
+    paths: set[str] = set()
+    for line in run_git(["status", "--porcelain"]).splitlines():
+        if not line or " -> " not in line:
+            continue
+        status = line[:2]
+        if status[0] != "R":
+            continue
+        raw = line[3:] if len(line) > 3 else ""
+        old_path, new_path = raw.split(" -> ", 1)
+        if old_path.startswith("Native/Ambitions/Stage/Overlays/") and any(
+            new_path.startswith(prefix) for prefix in STAGE_OVERLAY_REHOME_NEW_PREFIXES
         ):
             paths.add(new_path.strip())
     return paths
@@ -677,10 +699,12 @@ def check_design_tokens(files: list[Path], changed: set[str]) -> list[Finding]:
     return findings
 
 
-def check_shell_and_accessibility(files: list[Path], changed: set[str]) -> list[Finding]:
+def check_shell_and_accessibility(files: list[Path], changed: set[str], rehomed_stage_overlay_paths: set[str]) -> list[Finding]:
     findings: list[Finding] = []
     for path in files:
         relative = rel(path)
+        if relative in rehomed_stage_overlay_paths:
+            continue
         text = read(path)
         is_rendering_source = is_swiftui_rendering_source(text)
         if relative.startswith(SURFACE_OWNED_PATH_PREFIXES) and is_rendering_source:
@@ -940,10 +964,12 @@ def check_accepted_yellow_misuse_contract() -> list[Finding]:
     ]
 
 
-def check_action_mutation_contract(files: list[Path]) -> list[Finding]:
+def check_action_mutation_contract(files: list[Path], rehomed_stage_overlay_paths: set[str]) -> list[Finding]:
     findings: list[Finding] = []
     for path in files:
         relative = rel(path)
+        if relative in rehomed_stage_overlay_paths:
+            continue
         if not relative.startswith(("Native/Ambitions/Surfaces/", "Native/Ambitions/Composer/")):
             continue
         text = read(path)
@@ -1027,6 +1053,7 @@ def main() -> int:
     files = production_swift_files()
     changed = changed_paths()
     rehomed_projection_paths = central_projection_rehome_paths()
+    rehomed_stage_overlay_paths = stage_overlay_surface_rehome_paths()
 
     findings: list[Finding] = []
     findings.extend(check_final_tree_inventory())
@@ -1037,7 +1064,7 @@ def main() -> int:
     findings.extend(check_temporal_rendering(files))
     findings.extend(check_hosted_ai_backend_boundaries(files))
     findings.extend(check_design_tokens(files, changed))
-    findings.extend(check_shell_and_accessibility(files, changed))
+    findings.extend(check_shell_and_accessibility(files, changed, rehomed_stage_overlay_paths))
     findings.extend(check_scenario_and_quality_contracts())
     findings.extend(check_master_lifeshape_foldin_contract())
     findings.extend(check_lifeshape_linear_control_plane_contract())
@@ -1045,7 +1072,7 @@ def main() -> int:
     findings.extend(check_green_standard_contract())
     findings.extend(check_runtime_direct_write_contract())
     findings.extend(check_accepted_yellow_misuse_contract())
-    findings.extend(check_action_mutation_contract(files))
+    findings.extend(check_action_mutation_contract(files, rehomed_stage_overlay_paths))
 
     grouped = summarize(findings, max_per_gate=args.max_per_gate)
     if args.json:

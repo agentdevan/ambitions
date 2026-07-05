@@ -29,7 +29,8 @@ struct OverlayLensContract: Sendable, Equatable {
 
     private static let allowedOwnerLayers: Set<String> = [
         "Composer/Capture/Projection",
-        "Stage/Overlays/Projection",
+        "Surfaces/Today/Projection",
+        "Surfaces/You/Projection",
         "Trust/Projection"
     ]
 }
@@ -83,7 +84,8 @@ struct OverlayStageSceneContract: Sendable, Equatable {
 
     private static let allowedOwnerLayers: Set<String> = [
         "Composer/Capture/Projection",
-        "Stage/Overlays/Projection",
+        "Surfaces/Today/Projection",
+        "Surfaces/You/Projection",
         "Trust/Projection"
     ]
 }

@@ -6,8 +6,8 @@ final class OverlayScenesCanonicalOwnershipTests: XCTestCase {
         let root = repoRoot()
         let required = [
             "Native/Ambitions/Composer/Capture/Projection/CaptureStageScene.swift",
-            "Native/Ambitions/Stage/Overlays/Projection/SearchStageScene.swift",
-            "Native/Ambitions/Stage/Overlays/Projection/ClosureStageScene.swift",
+            "Native/Ambitions/Surfaces/You/Projection/SearchStageScene.swift",
+            "Native/Ambitions/Surfaces/Today/Projection/ClosureStageScene.swift",
             "Native/Ambitions/Trust/Projection/InspectionStageScene.swift"
         ]
 
@@ -28,7 +28,7 @@ final class OverlayScenesCanonicalOwnershipTests: XCTestCase {
         XCTAssertEqual(contracts.map(\.kind), [.capture, .search, .closure, .inspection])
         XCTAssertEqual(
             contracts.map(\.ownerLayer),
-            ["Composer/Capture/Projection", "Stage/Overlays/Projection", "Stage/Overlays/Projection", "Trust/Projection"]
+            ["Composer/Capture/Projection", "Surfaces/You/Projection", "Surfaces/Today/Projection", "Trust/Projection"]
         )
         for contract in contracts {
             XCTAssertTrue(contract.satisfiesFinalCanon, contract.kind.rawValue)

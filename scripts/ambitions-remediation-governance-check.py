@@ -91,12 +91,17 @@ CENTRAL_PROJECTION_REHOME_OLD_PREFIXES = (
 
 CENTRAL_PROJECTION_REHOME_NEW_PREFIXES = (
     "Native/Ambitions/Composer/Capture/Projection/",
-    "Native/Ambitions/Stage/Overlays/Projection/",
     "Native/Ambitions/Surfaces/Goals/Projection/",
     "Native/Ambitions/Surfaces/Time/Projection/",
     "Native/Ambitions/Surfaces/Today/Projection/",
     "Native/Ambitions/Surfaces/You/Projection/",
     "Native/Ambitions/Trust/Projection/",
+)
+
+STAGE_OVERLAY_REHOME_NEW_PREFIXES = (
+    "Native/Ambitions/Surfaces/Today/Overlays/",
+    "Native/Ambitions/Surfaces/Today/Projection/",
+    "Native/Ambitions/Surfaces/You/Projection/",
 )
 
 APP_BOOTSTRAP_WIRING_FILES = {
@@ -241,6 +246,17 @@ def is_central_projection_rehome(item: ChangedPath) -> bool:
         and is_production_swift(item.path)
         and any(item.old_path.startswith(prefix) for prefix in CENTRAL_PROJECTION_REHOME_OLD_PREFIXES)
         and any(item.path.startswith(prefix) for prefix in CENTRAL_PROJECTION_REHOME_NEW_PREFIXES)
+    )
+
+
+def is_stage_overlay_surface_rehome(item: ChangedPath) -> bool:
+    return (
+        item.status == "R"
+        and item.old_path is not None
+        and is_production_swift(item.old_path)
+        and is_production_swift(item.path)
+        and item.old_path.startswith("Native/Ambitions/Stage/Overlays/")
+        and any(item.path.startswith(prefix) for prefix in STAGE_OVERLAY_REHOME_NEW_PREFIXES)
     )
 
 
@@ -511,6 +527,7 @@ def governance_findings(args: argparse.Namespace) -> list[Finding]:
                 is_suffix_split_name(path_obj.name)
                 and not is_legacy_runtime_to_localruntimeos_suffix_move(item)
                 and not is_central_projection_rehome(item)
+                and not is_stage_overlay_surface_rehome(item)
             ):
                 findings.append(
                     Finding(

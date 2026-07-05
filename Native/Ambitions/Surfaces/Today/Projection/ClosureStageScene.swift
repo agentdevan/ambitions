@@ -3,7 +3,7 @@ import Foundation
 enum ClosureStageScene {
     static let contract = OverlayStageSceneContract(
         kind: .closure,
-        ownerLayer: "Stage/Overlays/Projection",
+        ownerLayer: "Surfaces/Today/Projection",
         routeBoundary: "Closure appears as a bounded overlay after a surface action.",
         dockBehavior: "Root dock does not duplicate inside closure drilldown.",
         focusRestoration: "Dismissal restores focus to the completed step.",

@@ -117,7 +117,7 @@ Native/Ambitions/Surfaces/Goals/Projection/GoalsStageScene.swift
 Native/Ambitions/Surfaces/Time/Projection/TimeStageScene.swift
 Native/Ambitions/Surfaces/You/Projection/YouStageScene.swift
 Native/Ambitions/Composer/Capture/Projection/CaptureStageScene.swift
-Native/Ambitions/Stage/Overlays/Projection/SearchStageScene.swift
+Native/Ambitions/Surfaces/You/Projection/SearchStageScene.swift
 Native/Ambitions/Surfaces/Today/TodaySurface.swift
 Native/Ambitions/Surfaces/Goals/GoalsSurface.swift
 Native/Ambitions/Surfaces/Time/TimeSurface.swift

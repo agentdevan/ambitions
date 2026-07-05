@@ -449,11 +449,12 @@ Ambitions/
       StageMotionReductionPolicy.swift
 
     Overlays/
-      Projection/
-        SearchLens.swift
-        SearchStageScene.swift
-        ClosureLens.swift
-        ClosureStageScene.swift
+      AppShellOverlayView.swift
+      CapturePresentationRoute.swift
+      QuietCommandCaptureOverlay.swift
+      QuietCommandMemoryLensOverlay.swift
+      QuietCommandSheetView.swift
+      ShellOverlayState.swift
 
   Core/
     Domain/
@@ -809,9 +810,16 @@ Ambitions/
       TodayObjectView.swift
       TodayInteractions.swift
       TodayAccessibility.swift
+      Overlays/
+        TodayActionClosureSheet.swift
+        TodayRejectionReasonSheet.swift
+        TodayStepDetailSheet.swift
+        TodayStepReplacementSheet.swift
       Projection/
         TodayLens.swift
         TodayStageScene.swift
+        ClosureLens.swift
+        ClosureStageScene.swift
         TodayExecutionProjector.swift
         TodayReadModelProjector.swift
 
@@ -845,6 +853,8 @@ Ambitions/
       Projection/
         YouLens.swift
         YouStageScene.swift
+        SearchLens.swift
+        SearchStageScene.swift
         YouFeatureService.swift
         YouHistoryProjectionService.swift
 
