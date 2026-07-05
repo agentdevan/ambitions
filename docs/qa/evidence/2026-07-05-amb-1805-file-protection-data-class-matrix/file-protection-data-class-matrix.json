@@ -1,0 +1,187 @@
+{
+  "issue": "AMB-1805",
+  "status": "Implemented Yellow",
+  "date": "2026-07-05T20:42:09Z",
+  "branch": "main",
+  "baseline_main_sha": "6df764f0112284cb13d6d1553c9dd2369ac794ad",
+  "commit_sha": "artifact commit SHA is recorded in Linear after commit/push",
+  "environment": "local Codex macOS workspace at /Users/devan/Documents/GitHub/ambitions",
+  "xcode_version": "Xcode 26.6, build version 17F113",
+  "artifact_paths": [
+    "docs/qa/evidence/2026-07-05-amb-1805-file-protection-data-class-matrix/manifest.md",
+    "docs/qa/evidence/2026-07-05-amb-1805-file-protection-data-class-matrix/file-protection-data-class-matrix.json"
+  ],
+  "proof_metadata_text": {
+        "Validation run": "See validation_run for exact non-test commands and exit codes.",
+    "Validation not run": "See validation_not_run for tests, builds, locked-device proof, local-auth prompt proof, device proof, and release procedures not run.",
+    "Non-Claims": "See non_claims for unsupported file-protection, local-auth, privacy, device, and release claims.",
+    "Branch": "main",
+    "Commit SHA": "artifact commit SHA is recorded in Linear after commit/push",
+    "Environment": "local Codex macOS workspace at /Users/devan/Documents/GitHub/ambitions",
+    "Xcode version": "Xcode 26.6, build version 17F113",
+    "Simulator or device": "simulator health only; no app launch, locked-device procedure, local-auth prompt, file-protection runtime probe, or physical-device procedure was run",
+        "Exit code": "All final non-test validators exited 0; initial remediation governance exited 1 before repair and initial simulator preflight exited 25 before repair.",
+    "Artifact paths": "This JSON file and the paired manifest in the same evidence directory."
+  },
+  "matrix": {
+    "schema_version": "data_class_protection_matrix.native.v1",
+    "data_classes": [
+      {
+        "artifact": "private_runtime_artifacts",
+        "file_protection_level": "complete",
+        "local_auth_required_for_inspection": true,
+        "encrypted_blob_vault_required": true,
+        "user_review_required_before_external_use": true,
+        "public_reference_allowed": false
+      },
+      {
+                "artifact": "public_reference_cache",
+        "file_protection_level": "standard",
+        "local_auth_required_for_inspection": false,
+        "encrypted_blob_vault_required": false,
+        "user_review_required_before_external_use": false,
+        "public_reference_allowed": true
+      },
+      {
+        "artifact": "app_group_snapshots",
+        "file_protection_level": "complete_until_first_user_authentication",
+        "local_auth_required_for_inspection": false,
+        "encrypted_blob_vault_required": false,
+        "user_review_required_before_external_use": false,
+        "public_reference_allowed": false
+      },
+      {
+        "artifact": "portable_exports",
+        "file_protection_level": "complete",
+        "local_auth_required_for_inspection": true,
+        "encrypted_blob_vault_required": true,
+        "user_review_required_before_external_use": true,
+        "public_reference_allowed": false
+      },
+      {
+        "artifact": "diagnostics_bundles",
+        "file_protection_level": "complete",
+        "local_auth_required_for_inspection": true,
+        "encrypted_blob_vault_required": true,
+        "user_review_required_before_external_use": true,
+        "public_reference_allowed": false
+      }
+    ]
+  },
+  "first_repair": "Added source-backed file-protection data-class matrix and focused invariant coverage.",
+  "proof_files": [
+    "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/DataClassProtectionMatrix.swift",
+    "Native/AmbitionsTests/LocalRuntimeOS/PrivacySecurity/DataClassProtectionMatrixTests.swift",
+    "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/FileProtectionPolicy.swift",
+    "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/LocalAuthGate.swift",
+    "Native/Ambitions/Core/LocalRuntimeOS/Storage/AppGroupSnapshotStore.swift"
+  ],
+    "validation_run": [
+        {
+            "command": "xcodegen generate",
+            "exit_code": 0
+        },
+        {
+            "command": "scripts/ambitions-xcodegen-needed.sh",
+            "exit_code": 0,
+            "summary": "XCODEGEN_NEEDED=0"
+        },
+        {
+            "command": "python3 -m json.tool docs/qa/evidence/2026-07-05-amb-1805-file-protection-data-class-matrix/file-protection-data-class-matrix.json",
+            "exit_code": 0
+        },
+        {
+            "command": "swiftc -parse Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/DataClassProtectionMatrix.swift Native/AmbitionsTests/LocalRuntimeOS/PrivacySecurity/DataClassProtectionMatrixTests.swift",
+            "exit_code": 0
+        },
+        {
+            "command": "git diff --check",
+            "exit_code": 0
+        },
+        {
+            "command": "python3 scripts/ambitions-remediation-governance-check.py",
+            "exit_code": 1,
+            "summary": "Initial run failed [source-atlas-growth-adr] on the new production file; repaired by removing new Source Atlas-specific production scope from this slice."
+        },
+        {
+            "command": "python3 scripts/ambitions-remediation-governance-check.py",
+            "exit_code": 0,
+            "summary": "GREEN remediation governance guard passed"
+        },
+        {
+            "command": "python3 scripts/ambitions-quality-gate.py",
+            "exit_code": 0,
+            "summary": "GREEN all strict quality gates passed"
+        },
+        {
+            "command": "python3 scripts/ambitions-architecture-inventory.py",
+            "exit_code": 0,
+            "summary": "GREEN final-tree parity achieved"
+        },
+        {
+            "command": "python3 scripts/ambitions-green-standard-audit.py",
+            "exit_code": 0
+        },
+        {
+            "command": "python3 scripts/ambitions-vocabulary-drift-scan.py",
+            "exit_code": 0
+        },
+        {
+            "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+            "exit_code": 0
+        },
+        {
+            "command": "scripts/no-unsupported-ai-claim-scan.sh Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/DataClassProtectionMatrix.swift Native/AmbitionsTests/LocalRuntimeOS/PrivacySecurity/DataClassProtectionMatrixTests.swift docs/qa/evidence/2026-07-05-amb-1805-file-protection-data-class-matrix/manifest.md docs/qa/evidence/2026-07-05-amb-1805-file-protection-data-class-matrix/file-protection-data-class-matrix.json",
+            "exit_code": 0,
+            "summary": "Existing Yellow advisory in docs/truth/PRODUCT_EXPERIENCE_CANON.md:66, outside this AMB-1805 diff."
+        },
+        {
+            "command": "scripts/ambitions-xcode-sim-health.sh --json --timeout 20s",
+            "exit_code": 25,
+            "summary": "Initial simulator preflight failed with failure_category=xcode_process_active."
+        },
+        {
+            "command": "scripts/ambitions-xcode-sim-health.sh --repair --kill-active-xcode --json --timeout 20s",
+            "exit_code": 0,
+            "summary": "Repair cleared blocking Xcode processes."
+        },
+        {
+            "command": "scripts/ambitions-xcode-sim-health.sh --json --timeout 20s",
+            "exit_code": 0,
+            "summary": "Final simulator health passed for iPhone 17 Pro Max DD9B9C84-7188-48FA-AA2A-AB5C1D0EE2B6."
+        }
+    ],
+  "validation_not_run": [
+    "Focused PrivacySecurity/Storage XCTest execution was not run under current user instruction.",
+    "LocalRuntimeProof was not run because no command execution behavior, receipt writer, or runtime mutation path changed.",
+    "xcodebuild package resolution, build, build-for-testing, and test were not run.",
+    "Locked-device behavior, local-auth prompt behavior, runtime file-protection attributes, simulator app launch, and physical-device verification were not run.",
+    "Privacy/legal review, release gate, TestFlight validation, App Store validation, and product readiness review were not run."
+  ],
+  "non_claims": [
+    "No physical-device file-protection proof",
+    "No local-auth prompt proof",
+    "No locked-device behavior proof",
+    "No privacy/legal approval claim",
+    "No App Store/release proof"
+  ],
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_touched": [
+      "Core/LocalRuntimeOS/PrivacySecurity",
+      "Native/AmbitionsTests/LocalRuntimeOS/PrivacySecurity",
+      "QA evidence"
+    ],
+    "files_moved_or_created": [
+      "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/DataClassProtectionMatrix.swift",
+      "Native/AmbitionsTests/LocalRuntimeOS/PrivacySecurity/DataClassProtectionMatrixTests.swift",
+      "docs/qa/evidence/2026-07-05-amb-1805-file-protection-data-class-matrix/manifest.md",
+      "docs/qa/evidence/2026-07-05-amb-1805-file-protection-data-class-matrix/file-protection-data-class-matrix.json"
+    ],
+    "old_noncanonical_paths_removed": [],
+    "compatibility_shims_left": [],
+        "yellow_debt": "Source-invariant proof only; Source Atlas-specific production scope remains gated by the Source Atlas ADR allowlist, and locked-device, local-auth prompt, runtime file-protection, privacy/legal, and release proof remain outside this no-testing slice.",
+    "next_repair_train": "Continue AMB-1684 leaves for runtime file-protection and local-auth device proof when testing/device proof is re-enabled.",
+    "equivalent_folder_interpretation_used": false
+  }
+}
