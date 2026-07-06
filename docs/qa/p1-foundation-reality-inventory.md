@@ -388,8 +388,8 @@ Gates targeted: `foundation_reminder_can_be_created_completed_and_rescheduled`, 
 
 Source changed:
 
-- `Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailPanels+02-AmbitionsDayRailView+03-mappedRowNode.swift`
-- `Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailPanels+02-AmbitionsDayRailView+04-upNextRow.swift`
+- `Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailViewCurrentMoment.swift`
+- `Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailViewUpNextRows.swift`
 - `Native/Ambitions/Surfaces/Today/Overlays/TodayStepDetailSheet.swift`
 - `Native/Ambitions/Surfaces/Today/TodaySurface.swift`
 - `Native/Ambitions/Surfaces/Today/TodaySurface+02-autoLoad.swift`

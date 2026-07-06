@@ -4,9 +4,9 @@ import XCTest
 
 final class TodayRealityWindowActionGatingTests: XCTestCase {
     func testTodayRootHasNoNoOpModeToggleOrEmbeddedCaptureCTA() throws {
-        let railSource = try source("Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailPanels+02-AmbitionsDayRailView.swift")
-        let railStateSource = try source("Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailPanels+02-AmbitionsDayRailView+02-state.swift")
-        let railActionSource = try source("Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailPanels+02-AmbitionsDayRailView+03-mappedRowNode.swift")
+        let railSource = try source("Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailView.swift")
+        let railStateSource = try source("Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailViewStateRendering.swift")
+        let railActionSource = try source("Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailViewCurrentMoment.swift")
         let surfaceSource = try source("Native/Ambitions/Surfaces/Today/TodaySurface.swift")
         let combined = [railSource, railStateSource, railActionSource, surfaceSource].joined(separator: "\n")
 
@@ -104,10 +104,10 @@ final class TodayRealityWindowActionGatingTests: XCTestCase {
         let paths = [
             "Native/Ambitions/Surfaces/Today",
             "Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailPanels.swift",
-            "Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailPanels+02-AmbitionsDayRailView.swift",
-            "Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailPanels+02-AmbitionsDayRailView+02-state.swift",
-            "Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailPanels+02-AmbitionsDayRailView+03-mappedRowNode.swift",
-            "Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailPanels+02-AmbitionsDayRailView+04-upNextRow.swift"
+            "Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailView.swift",
+            "Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailViewStateRendering.swift",
+            "Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailViewCurrentMoment.swift",
+            "Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailViewUpNextRows.swift"
         ]
         let combined = try paths.map(source).joined(separator: "\n")
 

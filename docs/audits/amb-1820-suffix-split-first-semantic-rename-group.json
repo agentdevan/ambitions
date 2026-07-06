@@ -1,0 +1,239 @@
+{
+  "issue": "AMB-1820",
+  "title": "Suffix Split Leaf — First semantic rename group",
+  "status": "implemented_yellow_one_suffix_group_renamed_tests_not_run",
+  "date": "2026-07-06",
+  "baseline_sha": "7ac3b6fe8a07101663a875b8ecaf9c720f9cd3a8",
+  "linear_status_before_closeout": "In Progress",
+  "user_authorization": {
+    "completion_without_testing": true,
+    "focused_tests_run": false,
+    "xctest_run": false,
+    "build_run": false,
+    "simulator_run": false,
+    "screenshots_captured": false,
+    "physical_device_proof": false,
+    "release_proof": false
+  },
+  "authority_inputs": [
+    "docs/truth/CODEX_START_HERE.md",
+    "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+    "docs/truth/PRODUCT_EXPERIENCE_ACTION_MAP.md",
+    "docs/truth/IMPLEMENTATION_TRUTH.md",
+    "docs/truth/CODEX_PROCESS_TRUTH.md",
+    "docs/qa/p1-foundation-reality-inventory.md",
+    ".agents/skills/README.md",
+    ".agents/skills/ambitions-source-truth-authority/SKILL.md",
+    ".agents/skills/ambitions-architecture-tree-enforcement/SKILL.md",
+    ".agents/skills/ambitions-ios-quality-gate/SKILL.md",
+    ".agents/skills/ambitions-release-proof-honesty/SKILL.md"
+  ],
+  "selected_group": {
+    "owner": "DesignSystem/ProductObjects",
+    "base": "Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailPanels",
+    "reason": [
+      "canonical_owner",
+      "compact_group",
+      "filename_responsibility_cleanup_only",
+      "focused_test_references_are_localized",
+      "no_runtime_authority_added"
+    ]
+  },
+  "rename_map": [
+    {
+      "old": "Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailPanels+02-AmbitionsDayRailView.swift",
+      "new": "Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailView.swift"
+    },
+    {
+      "old": "Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailPanels+02-AmbitionsDayRailView+02-state.swift",
+      "new": "Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailViewStateRendering.swift"
+    },
+    {
+      "old": "Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailPanels+02-AmbitionsDayRailView+03-mappedRowNode.swift",
+      "new": "Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailViewCurrentMoment.swift"
+    },
+    {
+      "old": "Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailPanels+02-AmbitionsDayRailView+04-upNextRow.swift",
+      "new": "Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailViewUpNextRows.swift"
+    },
+    {
+      "old": "Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailPanels+03-DayRailRowSlot.swift",
+      "new": "Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailRowSlotLabels.swift"
+    }
+  ],
+  "references_updated": [
+    "Native/AmbitionsTests/Today/TodayRealityWindowActionGatingTests.swift",
+    "docs/truth/PRODUCT_EXPERIENCE_ACTION_MAP.md",
+    "docs/qa/p1-foundation-reality-inventory.md"
+  ],
+  "scope_boundary": {
+    "repo_wide_suffix_elimination": false,
+    "unrelated_suffix_groups_touched": false,
+    "architecture_owner_changed": false,
+    "product_ui_behavior_changed": false,
+    "runtime_authority_changed": false,
+    "new_suffix_files_added": false
+  },
+  "proof_ceiling": {
+    "allowed_claims": [
+      "amb_1820_selected_group_renamed",
+      "active_today_test_path_references_updated",
+      "selected_group_has_no_active_plus02_plus03_reference"
+    ],
+    "forbidden_claims": [
+      "repo_wide_suffix_elimination_complete",
+      "amb_1699_green",
+      "no_suffix_split_files_remain",
+      "focused_today_tests_passed",
+      "build_validation_passed",
+      "simulator_validation_passed",
+      "device_proof_exists",
+      "release_proof_exists",
+      "testflight_readiness",
+      "app_store_readiness",
+      "release_green"
+    ]
+  },
+  "validation": {
+    "status": "static_guards_passed_tests_not_run_post_commit_xcodegen_clean",
+    "commands_run": [
+      {
+        "command": "git diff --check",
+        "result": "passed"
+      },
+      {
+        "command": "jq -e . docs/audits/amb-1820-suffix-split-first-semantic-rename-group.json >/dev/null",
+        "result": "passed"
+      },
+      {
+        "command": "npx markdownlint-cli2 --no-globs docs/audits/amb-1820-suffix-split-first-semantic-rename-group.md",
+        "result": "passed_0_errors"
+      },
+      {
+        "command": "npx markdownlint-cli2 --no-globs docs/audits/amb-1820-suffix-split-first-semantic-rename-group.md docs/truth/PRODUCT_EXPERIENCE_ACTION_MAP.md docs/qa/p1-foundation-reality-inventory.md",
+        "result": "passed_0_errors"
+      },
+      {
+        "command": "python3 scripts/ambitions-unsupported-claim-scan.py docs/audits/amb-1820-suffix-split-first-semantic-rename-group.md docs/audits/amb-1820-suffix-split-first-semantic-rename-group.json",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-unsupported-claim-scan.py docs/audits/amb-1820-suffix-split-first-semantic-rename-group.md docs/audits/amb-1820-suffix-split-first-semantic-rename-group.json docs/truth/PRODUCT_EXPERIENCE_ACTION_MAP.md docs/qa/p1-foundation-reality-inventory.md",
+        "result": "passed"
+      },
+      {
+        "command": "scripts/release-claim-safety-scan.sh docs/audits/amb-1820-suffix-split-first-semantic-rename-group.md docs/audits/amb-1820-suffix-split-first-semantic-rename-group.json",
+        "result": "passed"
+      },
+      {
+        "command": "scripts/release-claim-safety-scan.sh docs/audits/amb-1820-suffix-split-first-semantic-rename-group.md docs/audits/amb-1820-suffix-split-first-semantic-rename-group.json docs/truth/PRODUCT_EXPERIENCE_ACTION_MAP.md docs/qa/p1-foundation-reality-inventory.md",
+        "result": "passed"
+      },
+      {
+        "command": "rg -n \"TodayDayRailPanels\\\\+02|TodayDayRailPanels\\\\+03\" Native/Ambitions Native/AmbitionsTests Sources project.yml -S",
+        "result": "passed_0_active_source_test_project_hits"
+      },
+      {
+        "command": "rg -n \"TodayDayRailPanels\\\\+02|TodayDayRailPanels\\\\+03\" docs/truth docs/qa Native/Ambitions Native/AmbitionsTests Sources project.yml -S",
+        "result": "passed_0_active_truth_qa_source_test_project_hits"
+      },
+      {
+        "command": "xcodegen generate --spec project.yml",
+        "result": "passed_no_xcodeproj_diff_after_generation"
+      },
+      {
+        "command": "python3 scripts/ambitions-remediation-governance-check.py",
+        "result": "passed_suffixSplitFiles_224_blockedSuffixSplitFiles_182"
+      },
+      {
+        "command": "python3 scripts/ambitions-architecture-inventory.py",
+        "result": "passed_final_tree_parity"
+      },
+      {
+        "command": "python3 scripts/ambitions-vocabulary-drift-scan.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-truth-path-vocabulary-audit.py",
+        "result": "passed_after_truth_path_update"
+      },
+      {
+        "command": "python3 scripts/ambitions-green-standard-audit.py",
+        "result": "passed_static_source_scan"
+      },
+      {
+        "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-accepted-yellow-misuse-audit.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-screenshot-artifact-audit.py",
+        "result": "passed_static_guard_no_screenshot_artifact_produced"
+      },
+      {
+        "command": "python3 scripts/ambitions-device-proof-required.py",
+        "result": "passed_static_guard_no_device_proof_produced"
+      },
+      {
+        "command": "scripts/no-unsupported-ai-claim-scan.sh docs/audits/amb-1820-suffix-split-first-semantic-rename-group.md docs/audits/amb-1820-suffix-split-first-semantic-rename-group.json docs/truth/PRODUCT_EXPERIENCE_ACTION_MAP.md docs/qa/p1-foundation-reality-inventory.md",
+        "result": "completed_advisory_hits_reviewed_as_context"
+      },
+      {
+        "command": "scripts/privacy-boundary-scan.sh docs/audits/amb-1820-suffix-split-first-semantic-rename-group.md docs/audits/amb-1820-suffix-split-first-semantic-rename-group.json docs/truth/PRODUCT_EXPERIENCE_ACTION_MAP.md docs/qa/p1-foundation-reality-inventory.md",
+        "result": "completed_advisory_hits_reviewed_as_context"
+      },
+      {
+        "command": "scripts/ambitions-xcodegen-needed.sh",
+        "result": "pre_commit_xcodegen_needed_1_due_dirty_swift_source_paths_then_post_commit_xcodegen_needed_0_project_build_inputs_unchanged"
+      }
+    ],
+    "commands_not_run": [
+      "focused_today_xctest",
+      "full_xctest",
+      "build",
+      "simulator",
+      "screenshot_capture",
+      "physical_device",
+      "performance",
+      "signed_archive",
+      "app_store_connect_validation"
+    ]
+  },
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_touched": [
+      "DesignSystem/ProductObjects",
+      "tests",
+      "truth_docs",
+      "qa_docs"
+    ],
+    "noncanonical_owners_touched": [],
+    "files_created": [
+      "docs/audits/amb-1820-suffix-split-first-semantic-rename-group.md",
+      "docs/audits/amb-1820-suffix-split-first-semantic-rename-group.json"
+    ],
+    "files_moved": [
+      "TodayDayRailPanels+02-AmbitionsDayRailView.swift -> TodayDayRailView.swift",
+      "TodayDayRailPanels+02-AmbitionsDayRailView+02-state.swift -> TodayDayRailViewStateRendering.swift",
+      "TodayDayRailPanels+02-AmbitionsDayRailView+03-mappedRowNode.swift -> TodayDayRailViewCurrentMoment.swift",
+      "TodayDayRailPanels+02-AmbitionsDayRailView+04-upNextRow.swift -> TodayDayRailViewUpNextRows.swift",
+      "TodayDayRailPanels+03-DayRailRowSlot.swift -> TodayDayRailRowSlotLabels.swift"
+    ],
+    "old_noncanonical_paths_removed": [
+      "selected TodayDayRailPanels +02/+03 filenames"
+    ],
+    "compatibility_shims_left": [],
+    "yellow_debt": [
+      "remaining_repo_suffix_groups",
+      "amb_1699_parent_proof",
+      "focused_test_execution",
+      "build_validation",
+      "simulator_proof",
+      "release_proof"
+    ],
+    "equivalent_path_interpretation_used": false
+  }
+}
