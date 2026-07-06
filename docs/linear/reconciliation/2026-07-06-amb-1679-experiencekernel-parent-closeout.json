@@ -1,0 +1,183 @@
+{
+  "issue": "AMB-1679",
+  "status": "Implemented Yellow parent closeout",
+  "date": "2026-07-06T03:25:00Z",
+  "branch": "main",
+  "baseline_main_sha": "8be5c77be3d6f9c67c00160419b639f20407164d",
+  "commit_sha": "pending local packet commit; final commit SHA is recorded in Linear after commit and push",
+  "environment": "local Codex macOS workspace at /Users/devan/Documents/GitHub/ambitions",
+  "xcode_version": "Xcode 26.6, build version 17F113",
+  "simulator_or_device": "No simulator app launch, XCTest, UI test, screenshot, accessibility, performance, archive, upload, or physical-device procedure is claimed.",
+  "project": {
+    "name": "Architecture Simplification + Flagship Readiness Remediation",
+    "id": "59c3917f-f662-4ca3-b412-b532613f3a7a"
+  },
+  "artifact_paths": [
+    "docs/linear/reconciliation/2026-07-06-amb-1679-experiencekernel-parent-closeout.md",
+    "docs/linear/reconciliation/2026-07-06-amb-1679-experiencekernel-parent-closeout.json"
+  ],
+  "proof_metadata_text": {
+    "Validation run": "See validation_run for commands completed for this packet.",
+    "Validation not run": "See validation_not_run for builds, tests, package resolve, device proof, release procedures, and approval procedures not run.",
+    "Non-Claims": "See non_claims for unsupported readiness and Green claims.",
+    "Branch": "main",
+    "Commit SHA": "pending local packet commit; final commit SHA is recorded in Linear after commit and push",
+    "Environment": "local Codex macOS workspace at /Users/devan/Documents/GitHub/ambitions",
+    "Xcode version": "Xcode 26.6, build version 17F113",
+    "Simulator or device": "No simulator app launch, XCTest, UI test, screenshot, accessibility, performance, archive, upload, or physical-device procedure is claimed.",
+    "Exit code": "See each validation_run entry.",
+    "Artifact paths": "This JSON file and the paired Markdown packet."
+  },
+  "parent_decision": "Delete Packages/AmbitionsExperienceKernel",
+  "child_issues": [
+    {
+      "issue": "AMB-1801",
+      "status": "Done",
+      "evidence": "docs/linear/reconciliation/2026-07-05-amb-1801-experiencekernel-boundary-decision.md"
+    }
+  ],
+  "current_source_evidence": [
+    "Packages/AmbitionsExperienceKernel is absent",
+    "No live AmbitionsExperienceKernel source/project references outside historical closeout docs"
+  ],
+  "acceptance_mapping": [
+    {
+      "requirement": "Determine whether the package has live production imports",
+      "status": "AMB-1801 found only a keep-alive seam and removed it; current scan finds no live references",
+      "proof_ceiling": "Static/current source scan; no new build proof"
+    },
+    {
+      "requirement": "If no live purpose, delete it",
+      "status": "Packages/AmbitionsExperienceKernel is absent",
+      "proof_ceiling": "Filesystem/source proof only in this closeout"
+    },
+    {
+      "requirement": "If unique code is live, move it to the appropriate owner",
+      "status": "No unique live production behavior was found by AMB-1801; no absorb action was required",
+      "proof_ceiling": "Relies on AMB-1801 evidence and current no-reference scan"
+    },
+    {
+      "requirement": "If package remains, upgrade tools/platform baseline and document boundary",
+      "status": "Not applicable because the package was deleted",
+      "proof_ceiling": "Not applicable"
+    },
+    {
+      "requirement": "Remove stale package docs and project references",
+      "status": "Package tree, app keep-alive seam, integration test, package dependency, and SwiftLint package-local exclusion were removed by AMB-1801",
+      "proof_ceiling": "Current static scan only"
+    }
+  ],
+  "validation_run": [
+    {
+      "command": "test ! -e Packages/AmbitionsExperienceKernel",
+      "exit_code": 0,
+      "result": "Package tree remains deleted"
+    },
+    {
+      "command": "! rg -n \"AmbitionsExperienceKernel|ExperienceKernel|import AmbitionsExperienceKernel|Packages/AmbitionsExperienceKernel\" Native Sources AppUI Package.swift project.yml .swiftlint.yml Ambitions.xcodeproj",
+      "exit_code": 0,
+      "result": "No live source/project references remain"
+    },
+    {
+      "command": "xcodegen dump --type parsed-json package audit",
+      "exit_code": 0,
+      "result": "AmbitionsExperienceKernel absent from parsed XcodeGen spec"
+    },
+    {
+      "command": "python3 -m json.tool docs/linear/reconciliation/2026-07-06-amb-1679-experiencekernel-parent-closeout.json",
+      "exit_code": 0,
+      "result": "This packet JSON parsed"
+    },
+    {
+      "command": "python3 scripts/ambitions-remediation-governance-check.py --json",
+      "exit_code": 0,
+      "result": "Passed; valid=true, findingCount=0, changedPathCount=2"
+    },
+    {
+      "command": "python3 scripts/ambitions-quality-gate.py",
+      "exit_code": 0,
+      "result": "Passed; all strict quality gates passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-accepted-yellow-misuse-audit.py --json",
+      "exit_code": 0,
+      "result": "Passed; invalidAcceptedYellowIssues=[]"
+    },
+    {
+      "command": "python3 scripts/ambitions-architecture-inventory.py",
+      "exit_code": 0,
+      "result": "Passed; final-tree parity achieved"
+    },
+    {
+      "command": "python3 scripts/ambitions-green-standard-audit.py",
+      "exit_code": 0,
+      "result": "Passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-vocabulary-drift-scan.py",
+      "exit_code": 0,
+      "result": "Passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+      "exit_code": 0,
+      "result": "Passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-unsupported-claim-scan.py docs/linear/reconciliation/2026-07-06-amb-1679-experiencekernel-parent-closeout.md docs/linear/reconciliation/2026-07-06-amb-1679-experiencekernel-parent-closeout.json",
+      "exit_code": 0,
+      "result": "Passed for this packet and paired JSON"
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "result": "Passed"
+    }
+  ],
+  "validation_not_run": [
+    "xcodebuild build",
+    "xcodebuild build-for-testing",
+    "XCTest",
+    "package resolve",
+    "simulator app launch",
+    "archive",
+    "TestFlight upload",
+    "App Store upload",
+    "physical-device procedure"
+  ],
+  "non_claims": [
+    "Implemented Green",
+    "full package-boundary Green",
+    "Design System package Green",
+    "WidgetUI package Green",
+    "AmbitionsTestingSupport decision",
+    "runtime behavior claim",
+    "build/test pass",
+    "release readiness",
+    "TestFlight readiness",
+    "App Store readiness"
+  ],
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_touched_by_source_implementation": [],
+    "files_created": [
+      "docs/linear/reconciliation/2026-07-06-amb-1679-experiencekernel-parent-closeout.md",
+      "docs/linear/reconciliation/2026-07-06-amb-1679-experiencekernel-parent-closeout.json"
+    ],
+    "source_files_edited_in_this_packet": [],
+    "files_moved": [],
+    "old_noncanonical_paths_removed_by_implementation_evidence": [
+      "Packages/AmbitionsExperienceKernel/**",
+      "Native/Ambitions/App/AmbitionsExperienceKernelIntegration.swift",
+      "Native/AmbitionsTests/App/AmbitionsExperienceKernelIntegrationTests.swift"
+    ],
+    "compatibility_shims_left": [],
+    "new_suffix_split_files_added": [],
+    "new_broad_models_files_added": [],
+    "new_runtime_or_source_atlas_authority_added_in_this_packet": false,
+    "yellow_debt_remains": true,
+    "next_repair_train": "Continue AMB-1681 for remaining package boundary decisions; rerun package resolve/build proof when build proof is re-enabled.",
+    "equivalent_folder_interpretation_used": false
+  },
+  "build_proof_instruction": "Build proof is skipped under the current user instruction until advised otherwise."
+}
