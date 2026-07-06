@@ -1,0 +1,35 @@
+{
+  "configurations" : [
+    {
+      "id" : "16910000-0000-4000-8000-000000000003",
+      "name" : "Screenshots",
+      "options" : {
+        "environmentVariableEntries" : [
+          {
+            "enabled" : true,
+            "key" : "AMBITIONS_TEST_PLAN",
+            "value" : "Screenshots"
+          }
+        ],
+        "testTimeoutsEnabled" : true
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : false,
+      "selectedTests" : [
+        "DeterministicScreenshotLaneUITests/testAMB1815TimeRootLightMScreenshotLane()"
+      ],
+      "target" : {
+        "containerPath" : "container:Ambitions.xcodeproj",
+        "identifier" : "A0FFD943C238642233FECEA5",
+        "name" : "AmbitionsUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

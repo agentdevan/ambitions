@@ -182,6 +182,72 @@ schemes:
       testPlans:
         - path: Native/TestPlans/Smoke.xctestplan
           defaultPlan: true
+  AmbitionsRuntime:
+    build:
+      targets:
+        Ambitions: all
+        AmbitionsTests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      gatherCoverageData: false
+      targets:
+        - name: AmbitionsTests
+      testPlans:
+        - path: Native/TestPlans/Runtime.xctestplan
+          defaultPlan: true
+  AmbitionsAccessibility:
+    build:
+      targets:
+        Ambitions: all
+        AmbitionsTests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      gatherCoverageData: false
+      targets:
+        - name: AmbitionsTests
+      testPlans:
+        - path: Native/TestPlans/Accessibility.xctestplan
+          defaultPlan: true
+  AmbitionsScreenshots:
+    build:
+      targets:
+        Ambitions: all
+        AmbitionsUITests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      gatherCoverageData: false
+      targets:
+        - name: AmbitionsUITests
+      testPlans:
+        - path: Native/TestPlans/Screenshots.xctestplan
+          defaultPlan: true
+  AmbitionsReleaseCandidate:
+    build:
+      targets:
+        Ambitions: all
+        AmbitionsWidgetExtension: all
+        AmbitionsShareExtension: all
+        AmbitionsTests: [test]
+        AmbitionsUITests: [test]
+    run:
+      config: Debug
+    archive:
+      config: Release
+    test:
+      config: Debug
+      gatherCoverageData: true
+      targets:
+        - name: AmbitionsTests
+        - name: AmbitionsUITests
+      testPlans:
+        - path: Native/TestPlans/ReleaseCandidate.xctestplan
+          defaultPlan: true
   AmbitionsUITests:
     build:
       targets:

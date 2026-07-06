@@ -1,0 +1,40 @@
+{
+  "configurations" : [
+    {
+      "id" : "16910000-0000-4000-8000-000000000004",
+      "name" : "ReleaseCandidate",
+      "options" : {
+        "environmentVariableEntries" : [
+          {
+            "enabled" : true,
+            "key" : "AMBITIONS_TEST_PLAN",
+            "value" : "ReleaseCandidate"
+          }
+        ],
+        "testTimeoutsEnabled" : true
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : true
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : false,
+      "target" : {
+        "containerPath" : "container:Ambitions.xcodeproj",
+        "identifier" : "6B452B4FF95B016DF4E6415D",
+        "name" : "AmbitionsTests"
+      }
+    },
+    {
+      "parallelizable" : false,
+      "target" : {
+        "containerPath" : "container:Ambitions.xcodeproj",
+        "identifier" : "A0FFD943C238642233FECEA5",
+        "name" : "AmbitionsUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

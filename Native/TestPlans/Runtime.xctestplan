@@ -1,0 +1,47 @@
+{
+  "configurations" : [
+    {
+      "id" : "16910000-0000-4000-8000-000000000001",
+      "name" : "Runtime",
+      "options" : {
+        "environmentVariableEntries" : [
+          {
+            "enabled" : true,
+            "key" : "AMBITIONS_TEST_PLAN",
+            "value" : "Runtime"
+          }
+        ],
+        "testTimeoutsEnabled" : true
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : false,
+      "selectedTests" : [
+        "MessyIntentLoopScenarioTests/testMessyIntentTravelsThroughCapturePlanTimeFitAndProofInspection()",
+        "SourceInfluenceReceiptTests/testReceiptCarriesOnlyPublicInfluenceAndLocalDecisionIdentifiers()",
+        "SourceInfluenceReceiptTests/testReceiptCannotInfluenceLocalPlanningWhenBoundaryIsViolated()",
+        "SourceAtlasVerifiedPublicPlanningBridgeTests/testVerifiedPublicContextExpandsCandidatesWithLocalReceiptsAndDeterministicReplay()",
+        "SourceAtlasVerifiedPublicPlanningBridgeTests/testPackMismatchFailsClosedToLocalFallbackWithoutSourceAtlasCandidateProvenance()",
+        "DataClassProtectionMatrixTests/testMatrixCoversCurrentDataClassesNamedByProtectionScope()",
+        "DataClassProtectionMatrixTests/testMatrixAgreesWithFileProtectionAndLocalAuthPoliciesForRepresentativeObjects()",
+        "AppGroupSnapshotWriterInventoryTests/testInventoryNamesCurrentAppGroupSnapshotWriterChainAndConstants()",
+        "AppGroupSnapshotWriterInventoryTests/testSourceScanKeepsOnlyOneCurrentAppGroupSnapshotWriteCallsite()",
+        "ExportImportResetDataScopeMatrixTests/testDataScopeMatrixCoversEveryPortableCategoryAndCurrentManifestExclusion()",
+        "ExportImportResetDataScopeMatrixTests/testImportResetSemanticsKeepReplaceGatedAndMergeNonResetting()",
+        "RuntimeEventReplayPerformanceSmokeTests/testRuntimeEventReplayAppendAndLookupSmokeStaysUnderBudget()",
+        "RuntimeEventReplayPerformanceSmokeTests/testRuntimeEventReplaySmokeMetadataRecordsEnvironmentAndThreshold()"
+      ],
+      "target" : {
+        "containerPath" : "container:Ambitions.xcodeproj",
+        "identifier" : "6B452B4FF95B016DF4E6415D",
+        "name" : "AmbitionsTests"
+      }
+    }
+  ],
+  "version" : 1
+}
