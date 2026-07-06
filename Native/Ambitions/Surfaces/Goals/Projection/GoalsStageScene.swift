@@ -13,7 +13,7 @@ struct GoalsStageScene: Equatable {
 
     var satisfiesArchitectureTree: Bool {
         surface == .goals &&
-            productObject.localizedCaseInsensitiveContains("Constellation Atlas") &&
+            productObject.localizedCaseInsensitiveContains("Life Area Atlas") &&
             firstViewportStructure.localizedCaseInsensitiveContains("life-area") &&
             firstViewportStructure.localizedCaseInsensitiveContains("Today") &&
             sourceTrustLineOrder == ["life area", "goal thread", "step chain", "Today link"] &&

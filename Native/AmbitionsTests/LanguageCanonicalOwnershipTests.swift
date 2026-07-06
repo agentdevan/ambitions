@@ -22,7 +22,7 @@ final class LanguageCanonicalOwnershipTests: XCTestCase {
         XCTAssertEqual(UserFacingLanguage.persistentSurfaces, ["Today", "Goals", "Time", "You"])
         XCTAssertEqual(ProductCopy.Today.startHere, UserFacingLanguage.Action.startHere)
         XCTAssertEqual(ProductCopy.Today.recommendedStep, UserFacingLanguage.Action.recommendedStep)
-        XCTAssertEqual(ProductCopy.Goals.objectTitle, UserFacingLanguage.Object.constellationAtlas)
+        XCTAssertEqual(ProductCopy.Goals.objectTitle, UserFacingLanguage.Object.lifeAreaAtlas)
         XCTAssertEqual(RuntimeVocabulary.canonicalRootSurfaceSet, Set(["Today", "Goals", "Time", "You"]))
     }
 

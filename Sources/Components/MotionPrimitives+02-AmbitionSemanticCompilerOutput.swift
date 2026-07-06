@@ -266,7 +266,7 @@ public enum AmbitionFlagshipMotionObject: String, CaseIterable, Sendable {
             )
         case .missionControlTimeSpine:
             return AmbitionObjectMotionPolicy(
-                objectTitle: "Constellation Atlas",
+                objectTitle: "Life Area Atlas",
                 owner: "Goals",
                 motionToken: .panelReveal,
                 stateMeaning: "Goal direction became legible across life areas, proof, pressure, and next steps.",

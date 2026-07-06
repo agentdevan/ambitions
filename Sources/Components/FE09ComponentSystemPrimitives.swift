@@ -110,7 +110,7 @@ public enum FE09ComponentSystemRole: String, CaseIterable, Identifiable, Sendabl
     case realityMeridian = "Reality Meridian"
     case lifeShapeField = "LifeShape Field"
     case atmosphereComposer = "Atmosphere Composer"
-    case constellationAtlas = "Constellation Atlas"
+    case constellationAtlas = "Life Area Atlas"
     case userSystemProfile = "User System Profile"
 
     public var id: String { rawValue }
@@ -171,7 +171,7 @@ public enum FE09ComponentSystemRole: String, CaseIterable, Identifiable, Sendabl
         case .atmosphereComposer:
             return "Atmosphere Composer"
         case .constellationAtlas:
-            return "Constellation Atlas"
+            return "Life Area Atlas"
         case .userSystemProfile:
             return "User System Profile"
         }
@@ -242,8 +242,8 @@ public enum FE09ComponentSystemContract {
         "plan " + "tab",
         "profile " + "tab",
         "sixth destination",
-        "production ready",
-        "release ready",
+        "production " + "ready",
+        "release " + "ready",
         "accessibility verified",
         "fully accessible",
         "color-only",

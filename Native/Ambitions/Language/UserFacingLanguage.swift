@@ -10,7 +10,7 @@ enum UserFacingLanguage {
 
     enum Object {
         static let realityMeridian = "Reality Meridian"
-        static let constellationAtlas = "Constellation Atlas"
+        static let lifeAreaAtlas = "Life Area Atlas"
         static let lifeShapeField = "LifeShape Field"
         static let userSystemProfile = "User System Profile"
         static let atmosphereComposer = "Atmosphere Composer"

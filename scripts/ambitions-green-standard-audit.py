@@ -49,7 +49,7 @@ STRUCTURAL_GATES = [
     (
         "Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift",
         "LazyVGrid(",
-        "Goals root must be a connected Constellation Atlas object, not a card/grid surface.",
+        "Goals root must be a connected Life Area Atlas object, not a card/grid surface.",
     ),
     (
         "Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift",

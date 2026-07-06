@@ -56,7 +56,7 @@ private extension LifeAreaAtlasField {
     var atlasHeader: some View {
         HStack(alignment: .center, spacing: theme.spacing.md) {
             VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                Text("Constellation Atlas")
+                Text("Life Area Atlas")
                     .font(theme.typography.title)
                     .foregroundStyle(theme.colors.textPrimary)
                     .accessibilityIdentifier("goals.life-area-atlas.title")

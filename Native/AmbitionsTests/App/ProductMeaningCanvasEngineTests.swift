@@ -9,7 +9,7 @@ final class ProductMeaningCanvasEngineTests: XCTestCase {
         XCTAssertEqual(contract.primitiveID, "canvas-engines-static-fallbacks")
         XCTAssertEqual(contract.ownerSurfaces, ["Goals", "Time", "Motion"])
         XCTAssertEqual(contract.productObjects, [
-            "Constellation Atlas relationship contour",
+            "Life Area Atlas relationship contour",
             "LifeShape pressure contour",
             "Motion proof-thread contour"
         ])

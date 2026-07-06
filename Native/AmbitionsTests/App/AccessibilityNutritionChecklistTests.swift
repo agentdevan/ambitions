@@ -317,8 +317,8 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
         assertAFI12Proof(
             proofsBySurface["Goals"],
             surface: "Goals",
-            primaryObject: "Constellation Atlas",
-            voiceOverSnippets: ["Constellation Atlas", "life areas", "goal threads", "Today connection", "source path"],
+            primaryObject: "Life Area Atlas",
+            voiceOverSnippets: ["Life Area Atlas", "life areas", "goal threads", "Today connection", "source path"],
             dynamicTypeSnippets: ["decorative geometry", "selected area", "thread", "next meaningful action"],
             reduceMotionSnippets: ["static", "selected state", "native drill-down"],
             nonColorSnippets: ["Pinned", "selected", "stale", "blocked", "Today-linked"],

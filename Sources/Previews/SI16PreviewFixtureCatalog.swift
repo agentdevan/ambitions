@@ -30,15 +30,15 @@ public enum SI16PreviewFixtureCatalog {
 
     public static let fixtures: [SI16VisualQAFixture] = [
         fixture(.normal, "Today", "Reality Meridian", lane: nil),
-        fixture(.selected, "Goals", "Constellation Atlas", lane: nil),
-        fixture(.focused, "Goals", "Constellation Atlas focus thread", lane: "clarification_needed"),
+        fixture(.selected, "Goals", "Life Area Atlas", lane: nil),
+        fixture(.focused, "Goals", "Life Area Atlas focus thread", lane: "clarification_needed"),
         fixture(.loading, "Time", "LifeShape Field", lane: "source_check_first"),
         fixture(.empty, "You", "User System Profile", lane: nil),
         fixture(.disabled, "Today", "Start here decision", lane: "user_review_required"),
         fixture(.degraded, "Goals", "Source review lane", lane: "source_conflict_review"),
         fixture(.privacySensitive, "You", "Trust receipt", lane: "privacy_sensitive_plan"),
         fixture(.reducedMotion, "Time", "Capacity transition", lane: nil),
-        fixture(.dynamicType, "Goals", "Constellation Atlas large-text proof", lane: nil),
+        fixture(.dynamicType, "Goals", "Life Area Atlas large-text proof", lane: nil),
         fixture(.staleSource, "Goals", "Requirement source", lane: "source_stale_review"),
         fixture(.partialSource, "Time", "Pressure source", lane: "source_check_first"),
         fixture(.offlineLocalOnly, "You", "Local-only privacy state", lane: "local_only_private_plan"),
@@ -68,7 +68,7 @@ public enum SI16PreviewFixtureCatalog {
         ),
         surfaceRow(
             "Goals",
-            object: "Constellation Atlas",
+            object: "Life Area Atlas",
             fixtureIDs: [
                 "goals.selected",
                 "goals.focused",

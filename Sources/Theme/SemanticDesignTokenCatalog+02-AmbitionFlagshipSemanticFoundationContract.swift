@@ -113,7 +113,7 @@ public enum AmbitionFlagshipSemanticFoundationCatalog {
         .init(
             id: "goals.constellationAtlas.foundation",
             surface: "Goals",
-            primaryObject: "Constellation Atlas",
+            primaryObject: "Life Area Atlas",
             semanticTokenID: "goals.constellationAtlas",
             isTopLevelSurface: true,
             materialRole: .hero,

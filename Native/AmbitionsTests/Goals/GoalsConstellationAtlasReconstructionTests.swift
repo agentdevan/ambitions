@@ -5,7 +5,7 @@ final class GoalsConstellationAtlasReconstructionTests: XCTestCase {
     func testGoalsObjectStageContractOwnsConstellationAtlas() {
         let contract = GoalsObjectStagePrimitiveContract.current
         XCTAssertEqual(contract.ownerSurface, "Goals")
-        XCTAssertEqual(contract.stageName, "Constellation Atlas")
+        XCTAssertEqual(contract.stageName, "Life Area Atlas")
         XCTAssertTrue(contract.avoidsGenericGoalRootOutput)
         XCTAssertTrue(contract.firstViewportStructure.contains("life-area"))
         XCTAssertTrue(contract.firstViewportStructure.contains("Today"))
@@ -20,7 +20,7 @@ final class GoalsConstellationAtlasReconstructionTests: XCTestCase {
     func testGoalsLensCreatesCanonAlignedStageScene() {
         let scene = GoalsLens.makeStageScene(for: PreviewGoalsScenarios.overview)
         XCTAssertTrue(scene.satisfiesArchitectureTree)
-        XCTAssertEqual(scene.productObject, "Constellation Atlas + Orbital Lens")
+        XCTAssertEqual(scene.productObject, "Life Area Atlas + Orbital Lens")
         XCTAssertTrue(scene.todayRelationshipSummary.contains("Today"))
         XCTAssertTrue(scene.inspectionSummary.contains("reason"))
     }

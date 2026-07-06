@@ -85,7 +85,7 @@ private struct DAVScenario: Identifiable, Sendable {
         DAVScenario(
             id: "goal-with-proof",
             title: "Goal with proof",
-            subtitle: "Constellation Atlas makes proof, next step, and momentum feel calm and source-bound.",
+            subtitle: "Life Area Atlas makes proof, next step, and momentum feel calm and source-bound.",
             context: .goals,
             state: .proof,
             evidence: "goal with proof preview",

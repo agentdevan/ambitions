@@ -37,7 +37,7 @@ final class RenderingSemanticMirrorsCanonicalOwnershipTests: XCTestCase {
 
         XCTAssertTrue(goals.semanticMirror.provesInspectableRelationships)
         XCTAssertTrue(time.semanticMirror.provesTimeObjectSemantics)
-        XCTAssertEqual(goals.semanticMirror.stageName, "Constellation Atlas")
+        XCTAssertEqual(goals.semanticMirror.stageName, "Life Area Atlas")
         XCTAssertEqual(time.semanticMirror.stageName, "LifeShape Field")
     }
 

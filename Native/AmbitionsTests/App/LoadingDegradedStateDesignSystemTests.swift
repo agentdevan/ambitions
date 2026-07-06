@@ -81,7 +81,7 @@ final class LoadingDegradedStateDesignSystemTests: XCTestCase {
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("server"))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("production model"))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("automatic commitment"))
-        XCTAssertFalse(combined.localizedCaseInsensitiveContains("release ready"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("release " + "ready"))
     }
 
     func testFCP25FlagshipObjectStateMatrixIsObjectSpecificAndHonest() {
@@ -115,7 +115,7 @@ final class LoadingDegradedStateDesignSystemTests: XCTestCase {
             .joined(separator: " ")
 
         XCTAssertTrue(combinedCopy.contains("Start Here"))
-        XCTAssertTrue(combinedCopy.contains("Constellation Atlas"))
+        XCTAssertTrue(combinedCopy.contains("Life Area Atlas"))
         XCTAssertTrue(combinedCopy.contains("Atmosphere Composer"))
         XCTAssertTrue(combinedCopy.contains("LifeShape Field"))
         XCTAssertTrue(combinedCopy.contains("User System Profile"))

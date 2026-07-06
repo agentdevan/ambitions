@@ -2,7 +2,7 @@ import Foundation
 
 enum SurfacePrimaryObject: String, CaseIterable, Sendable {
     case realityMeridian = "Reality Meridian"
-    case constellationAtlas = "Constellation Atlas"
+    case lifeAreaAtlas = "Life Area Atlas"
     case lifeShapeField = "LifeShape Field"
     case userSystemProfile = "User System Profile"
 
@@ -11,7 +11,7 @@ enum SurfacePrimaryObject: String, CaseIterable, Sendable {
         case .today:
             .realityMeridian
         case .goals:
-            .constellationAtlas
+            .lifeAreaAtlas
         case .time:
             .lifeShapeField
         case .you:

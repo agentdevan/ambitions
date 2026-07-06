@@ -68,8 +68,8 @@ public enum AFI12AccessibilityStateProof {
         AFI12AccessibilitySurfaceProof(
             id: "afi12-goals",
             surface: "Goals",
-            primaryObject: "Constellation Atlas",
-            voiceOverSummary: "Goals. Constellation Atlas names life areas, selected area, goal threads, Today connection, and source path.",
+            primaryObject: "Life Area Atlas",
+            voiceOverSummary: "Goals. Life Area Atlas names life areas, selected area, goal threads, Today connection, and source path.",
             dynamicTypeFallback: "Large text collapses decorative geometry before selected area, thread, and next meaningful action.",
             reduceMotionFallback: "Constellation focus becomes static selected state and native drill-down instead of motion-dependent orientation.",
             nonColorStateSupport: "Pinned, selected, stale, blocked, and Today-linked states require labels or symbols beyond color.",

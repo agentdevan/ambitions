@@ -20,9 +20,9 @@ struct StageObject: Equatable, Identifiable {
         case .goals:
             StageObject(
                 surface: .goals,
-                title: "Constellation Atlas",
+                title: "Life Area Atlas",
                 primaryActionTitle: "Open step",
-                accessibilitySummary: "Goals shows the Constellation Atlas and keeps the next Step reachable."
+                accessibilitySummary: "Goals shows the Life Area Atlas and keeps the next Step reachable."
             )
         case .time:
             StageObject(

@@ -15,7 +15,7 @@ public struct ProductMeaningCanvasEngineContract: Equatable, Sendable {
         primitiveID: "canvas-engines-static-fallbacks",
         ownerSurfaces: ["Goals", "Time", "Motion"],
         productObjects: [
-            "Constellation Atlas relationship contour",
+            "Life Area Atlas relationship contour",
             "LifeShape pressure contour",
             "Motion proof-thread contour"
         ],

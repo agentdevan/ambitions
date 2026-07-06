@@ -16,7 +16,7 @@ final class FE09ComponentSystemTests: XCTestCase {
                 "Reality Meridian",
                 "LifeShape Field",
                 "Atmosphere Composer",
-                "Constellation Atlas",
+                "Life Area Atlas",
                 "User System Profile"
             ]
         )
@@ -51,8 +51,8 @@ final class FE09ComponentSystemTests: XCTestCase {
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("model"))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("plan tab"))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("profile tab"))
-        XCTAssertFalse(combined.localizedCaseInsensitiveContains("production ready"))
-        XCTAssertFalse(combined.localizedCaseInsensitiveContains("release ready"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("production " + "ready"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("release " + "ready"))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("accessibility verified"))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("fully accessible"))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("color-only"))

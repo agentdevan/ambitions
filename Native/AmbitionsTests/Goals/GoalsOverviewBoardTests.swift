@@ -432,7 +432,7 @@ final class GoalsOverviewAtlasTests: XCTestCase {
 
         XCTAssertTrue(firstScreenCopy.localizedCaseInsensitiveContains("Your Direction"))
         XCTAssertTrue(firstScreenCopy.localizedCaseInsensitiveContains("Thread Focus"))
-        XCTAssertTrue(GoalsObjectStagePrimitiveContract.current.productObject.localizedCaseInsensitiveContains("Constellation Atlas"))
+        XCTAssertTrue(GoalsObjectStagePrimitiveContract.current.productObject.localizedCaseInsensitiveContains("Life Area Atlas"))
         XCTAssertTrue(GoalsObjectStagePrimitiveContract.current.productObject.localizedCaseInsensitiveContains("Orbital Lens"))
         XCTAssertFalse(firstScreenCopy.localizedCaseInsensitiveContains("Direction Atlas"))
         XCTAssertFalse(firstScreenCopy.localizedCaseInsensitiveContains("Mission Control"))

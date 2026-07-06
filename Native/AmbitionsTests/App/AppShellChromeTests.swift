@@ -164,7 +164,7 @@ final class AppShellChromeTests: XCTestCase {
             encoding: .utf8
         )
 
-        XCTAssertFalse(source.contains("subtitle: \"Constellation Atlas\""))
+        XCTAssertFalse(source.contains("subtitle: \"Life Area Atlas\""))
         XCTAssertFalse(source.contains("subtitle: \"Profile and settings\""))
         XCTAssertEqual(source.components(separatedBy: "subtitle: \"LifeShape Field\"").count - 1, 2)
         XCTAssertTrue(source.contains("title: \"Time\""))

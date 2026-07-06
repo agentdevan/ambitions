@@ -278,7 +278,7 @@ struct GoalsDirectionDepthDisclosure: View {
     .ambitionTheme(.dark)
 }
 
-#Preview("Goals Constellation Atlas Large Type") {
+#Preview("Goals Life Area Atlas Large Type") {
     NavigationStack {
         GoalsSurface(viewModel: GoalsViewModel(state: .loaded(PreviewGoalsScenarios.overview)))
     }

@@ -53,7 +53,7 @@ enum ToolbarPreviewCatalog {
     private static func primaryObject(for tab: AmbitionsSurface) -> String {
         switch tab {
         case .today: "Reality Meridian / Start here"
-        case .goals: "Constellation Atlas"
+        case .goals: "Life Area Atlas"
         case .time: "LifeShape Field"
         case .you: "User System Profile"
         }

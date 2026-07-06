@@ -16,7 +16,7 @@ enum GoalsAccessibility {
     ) -> String {
         [
             "Goals",
-            "Constellation Atlas: \(atlasState)",
+            "Life Area Atlas: \(atlasState)",
             selectedThread.map { "Selected thread: \($0)" },
             "Today relationship: \(todayRelationship)",
             "Proof: \(proofState)"

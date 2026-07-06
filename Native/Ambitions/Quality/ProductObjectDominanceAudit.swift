@@ -67,7 +67,7 @@ enum ProductObjectDominanceAudit {
                     findings.append(LifeShapeAuditFinding(
                         id: "dominance.goals-card-grid-root",
                         path: file.path,
-                        detail: "Goals root renders life areas as a grid/card surface instead of one Constellation Atlas object."
+                        detail: "Goals root renders life areas as a grid/card surface instead of one Life Area Atlas object."
                     ))
                 }
                 if contents.contains("LifeAreaAtlasField(") == false {

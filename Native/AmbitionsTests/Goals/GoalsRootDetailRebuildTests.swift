@@ -23,7 +23,7 @@ final class GoalsRootDetailRebuildTests: XCTestCase {
         XCTAssertFalse(rootSource.contains("Feeds Today"))
         XCTAssertFalse(rootSource.contains("No active thread yet"))
         XCTAssertFalse(rootSource.contains("Create your first goal"))
-        XCTAssertFalse(rootSource.contains("GOALS · Constellation Atlas"))
+        XCTAssertFalse(rootSource.contains("GOALS · Life Area Atlas"))
         XCTAssertFalse(rootSource.contains("source-proof-trust"))
     }
 

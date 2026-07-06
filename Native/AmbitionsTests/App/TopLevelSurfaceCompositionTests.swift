@@ -24,7 +24,7 @@ final class TopLevelSurfaceCompositionTests: XCTestCase {
             XCTAssertTrue(surface.accessibilitySummary.contains(surface.primaryObject))
         }
 
-        XCTAssertEqual(AmbitionsTopLevelSurfaceComposition.goals.primaryObject, "Constellation Atlas")
+        XCTAssertEqual(AmbitionsTopLevelSurfaceComposition.goals.primaryObject, "Life Area Atlas")
         XCTAssertTrue(AmbitionsTopLevelSurfaceComposition.goals.supportingModules.contains("Orbital Lens"))
     }
 

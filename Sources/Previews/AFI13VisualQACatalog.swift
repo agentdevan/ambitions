@@ -54,7 +54,7 @@ public enum AFI13VisualQACatalog {
         ),
         scorecard(
             "Goals",
-            object: "Constellation Atlas",
+            object: "Life Area Atlas",
             target: 95,
             inventory: [
                 "goals-constellation-atlas-default.png",

@@ -257,7 +257,7 @@ final class InteractionMotionHapticsDesignSystemTests: XCTestCase {
             "Reality Meridian",
             "Receipt Drawer",
             "Source Fold",
-            "Constellation Atlas",
+            "Life Area Atlas",
             "Action Closure Diamond",
             "LifeShape Field",
             "Capture Atmosphere Composer"

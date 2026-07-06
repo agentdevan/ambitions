@@ -44,7 +44,7 @@ enum RootReportPanelAudit {
                 findings.append(LifeShapeAuditFinding(
                     id: "report-panel.goals-dashboard-grid",
                     path: file.path,
-                    detail: "Goals root cannot present Constellation Atlas as a dashboard grid/card wrapper."
+                    detail: "Goals root cannot present Life Area Atlas as a dashboard grid/card wrapper."
                 ))
             }
             if file.path.contains("YouRootSurface"),

@@ -41,7 +41,7 @@ enum ProductCopy {
 
     enum Goals {
         static let surfaceTitle = UserFacingLanguage.Surface.goals
-        static let objectTitle = UserFacingLanguage.Object.constellationAtlas
+        static let objectTitle = UserFacingLanguage.Object.lifeAreaAtlas
         static let whatYouAreBuilding = "What you’re building"
         static let lifeAreas = "Life areas"
         static let activeThread = "Active thread"

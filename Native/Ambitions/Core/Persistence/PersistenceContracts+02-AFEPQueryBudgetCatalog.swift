@@ -11,7 +11,7 @@ enum AFEPQueryBudgetCatalog {
         AFEPQueryBudgetDescriptor(
             scope: .goals,
             maximumReads: 12,
-            notes: "Goals / Constellation Atlas can fan out across goal threads, receipts, and proof records without claiming measured performance."
+            notes: "Goals / Life Area Atlas can fan out across goal threads, receipts, and proof records without claiming measured performance."
         ),
         AFEPQueryBudgetDescriptor(
             scope: .capture,

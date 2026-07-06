@@ -10,7 +10,7 @@ final class SurfaceLensesCanonicalOwnershipTests: XCTestCase {
         )
         XCTAssertEqual(
             SurfaceLensRegistry.canonicalContracts.map(\.primaryObjectTitle),
-            ["Reality Meridian", "Constellation Atlas", "LifeShape Field", "User System Profile"]
+            ["Reality Meridian", "Life Area Atlas", "LifeShape Field", "User System Profile"]
         )
         XCTAssertFalse(SurfaceLensRegistry.canonicalContracts.map(\.surfaceTitle).contains("Capture"))
         XCTAssertFalse(SurfaceLensRegistry.canonicalContracts.map(\.surfaceTitle).contains("Motion"))

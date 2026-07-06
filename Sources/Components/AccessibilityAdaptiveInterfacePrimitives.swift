@@ -68,7 +68,7 @@ public enum AmbitionsPrimaryObjectSurface: String, CaseIterable, Identifiable, S
     public var objectTitle: String {
         switch self {
         case .today: "Today / Reality Meridian"
-        case .goals: "Goals / Constellation Atlas"
+        case .goals: "Goals / Life Area Atlas"
         case .time: "Time / LifeShape Field"
         case .motion: "Motion / Progress proof"
         case .you: "You / User System Profile"
