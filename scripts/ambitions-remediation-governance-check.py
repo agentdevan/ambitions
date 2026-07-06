@@ -27,6 +27,13 @@ PRODUCTION_SWIFT_ROOTS = (
     "Packages/AmbitionsExperienceKernel/Sources/",
 )
 
+SUPPORT_SWIFT_ROOTS = (
+    "Native/AmbitionsTests/",
+    "Native/AmbitionsUITests/",
+    "Native/Ambitions/PreviewSupport/",
+    "Sources/Previews/",
+)
+
 NON_RUNTIME_MUTATION_TERMS = (
     "Command",
     "Event",
@@ -112,6 +119,7 @@ APP_BOOTSTRAP_WIRING_FILES = {
 
 SWIFT_HARD_LINE_CAP = 600
 LARGEST_FILE_REPORT_LIMIT = 10
+SUPPORT_FILE_REPORT_LIMIT = 15
 
 
 @dataclass(frozen=True)
@@ -293,6 +301,20 @@ def production_swift_files() -> list[Path]:
     return sorted(set(files))
 
 
+def support_swift_files() -> list[Path]:
+    files: list[Path] = []
+    for prefix in SUPPORT_SWIFT_ROOTS:
+        root = ROOT / prefix
+        if not root.exists():
+            continue
+        if root.is_file() and root.suffix == ".swift":
+            files.append(root)
+            continue
+        for path in root.rglob("*.swift"):
+            files.append(path)
+    return sorted(set(files))
+
+
 def swift_line_count(path: Path) -> int:
     text = path.read_text(encoding="utf-8", errors="replace")
     return text.count("\n") + (0 if text.endswith("\n") else 1)
@@ -357,6 +379,7 @@ def source_atlas_adr_allowlist() -> set[str]:
 def governance_report(changed: list[ChangedPath]) -> dict[str, object]:
     root_loc: dict[str, dict[str, int]] = {}
     largest: list[dict[str, object]] = []
+    support_largest: list[dict[str, object]] = []
     naming_counts = {
         "suffixSplitFiles": 0,
         "blockedSuffixSplitFiles": 0,
@@ -367,6 +390,7 @@ def governance_report(changed: list[ChangedPath]) -> dict[str, object]:
     }
 
     swift_files = production_swift_files()
+    support_files = support_swift_files()
     for path in swift_files:
         relative = rel(path)
         line_count = swift_line_count(path)
@@ -391,7 +415,16 @@ def governance_report(changed: list[ChangedPath]) -> dict[str, object]:
         if line_count > SWIFT_HARD_LINE_CAP:
             naming_counts["overHardLineCapFiles"] += 1
 
+    support_over_hard_line_cap = 0
+    for path in support_files:
+        relative = rel(path)
+        line_count = swift_line_count(path)
+        support_largest.append({"path": relative, "lines": line_count})
+        if line_count > SWIFT_HARD_LINE_CAP:
+            support_over_hard_line_cap += 1
+
     largest = sorted(largest, key=lambda row: (-int(row["lines"]), str(row["path"])))[:LARGEST_FILE_REPORT_LIMIT]
+    support_largest = sorted(support_largest, key=lambda row: (-int(row["lines"]), str(row["path"])))[:SUPPORT_FILE_REPORT_LIMIT]
     sorted_root_loc = {
         root: root_loc[root]
         for root in sorted(root_loc, key=lambda key: (-root_loc[key]["loc"], key))
@@ -399,8 +432,11 @@ def governance_report(changed: list[ChangedPath]) -> dict[str, object]:
     return {
         "changedPathCount": len(changed),
         "productionSwiftFileCount": len(swift_files),
+        "supportSwiftFileCount": len(support_files),
         "rootLOC": sorted_root_loc,
         "largestFiles": largest,
+        "supportLargestFiles": support_largest,
+        "supportOverHardLineCapFiles": support_over_hard_line_cap,
         "namingCounts": naming_counts,
         "swiftHardLineCap": SWIFT_HARD_LINE_CAP,
     }
@@ -662,6 +698,7 @@ def self_test() -> int:
     assert not is_production_swift("Native/AmbitionsTests/AppTests.swift")
     assert not is_production_swift("Native/Ambitions/PreviewSupport/PreviewFixtures.swift")
     assert not is_production_swift("Sources/Previews/ThemePreview.swift")
+    assert rel(ROOT / "Native/AmbitionsTests/AppTests.swift").startswith("Native/AmbitionsTests/")
     assert is_local_runtime("Native/Ambitions/Core/LocalRuntimeOS/Commands/AmbitionsCommandExecutor.swift")
     assert not is_local_runtime("Native/Ambitions/Core/Runtime/CaptureService.swift")
     assert is_suffix_split_name("SwiftDataModels+04-AmbitionGraphProjectionRecordModel.swift")
@@ -752,6 +789,7 @@ def main() -> int:
     print("ambitions-remediation-governance-check")
     print(f"changed_paths={report['changedPathCount']}")
     print(f"production_swift_files={report['productionSwiftFileCount']}")
+    print(f"support_swift_files={report['supportSwiftFileCount']}")
     print(f"swift_hard_line_cap={report['swiftHardLineCap']}")
     print("root_loc:")
     for root, data in report["rootLOC"].items():
@@ -759,6 +797,10 @@ def main() -> int:
     print("largest_files:")
     for row in report["largestFiles"]:
         print(f"  {row['lines']} {row['path']}")
+    print("support_largest_files:")
+    for row in report["supportLargestFiles"]:
+        print(f"  {row['lines']} {row['path']}")
+    print(f"support_over_hard_line_cap_files={report['supportOverHardLineCapFiles']}")
     print("naming_counts:")
     for key, value in report["namingCounts"].items():
         print(f"  {key}={value}")

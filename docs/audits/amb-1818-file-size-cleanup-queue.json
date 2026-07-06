@@ -1,0 +1,210 @@
+{
+  "issue": "AMB-1818",
+  "title": "File Size Leaf - Current top cleanup queue",
+  "status": "implemented_yellow_live_queue_and_support_quarantine_tests_not_run",
+  "date": "2026-07-06",
+  "baseline_sha": "5793532a60fb7b514c65946088850d3bd3a7bdfe",
+  "linear_status_before_closeout": "In Progress",
+  "user_authorization": {
+    "completion_without_testing": true,
+    "focused_tests_run": false,
+    "ui_test_discovery_run": false,
+    "xctest_run": false,
+    "build_run": false,
+    "simulator_run": false,
+    "screenshots_captured": false,
+    "physical_device_proof": false,
+    "release_proof": false
+  },
+  "script_change": {
+    "path": "scripts/ambitions-remediation-governance-check.py",
+    "behavior": "reports nonblocking support_largest_files and support_over_hard_line_cap_files while preserving production swift hard-cap enforcement"
+  },
+  "live_counts": {
+    "swift_hard_line_cap": 600,
+    "production_swift_files": 1425,
+    "support_swift_files": 475,
+    "production_over_hard_line_cap_files": 0,
+    "support_over_hard_line_cap_files": 41,
+    "suffix_split_files": 224,
+    "blocked_suffix_split_files": 182,
+    "architecture_noun_files": 357,
+    "source_atlas_files": 101
+  },
+  "production_largest_files": [
+    {"lines": 599, "path": "Native/Ambitions/Core/Domain/CorrectionFoldModels.swift"},
+    {"lines": 595, "path": "Native/Ambitions/Core/Domain/CommitmentWaitingModels.swift"},
+    {"lines": 593, "path": "Native/Ambitions/Core/LocalRuntimeOS/Storage/ObjectStoreSwiftData.swift"},
+    {"lines": 583, "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackRemoteTransport.swift"},
+    {"lines": 572, "path": "Native/Ambitions/Core/Domain/ProofResourceGraphModels.swift"},
+    {"lines": 571, "path": "Native/Ambitions/Core/LocalRuntimeOS/Repair/DryRunMigration.swift"},
+    {"lines": 570, "path": "Native/Ambitions/Core/Domain/ReminderModels.swift"},
+    {"lines": 561, "path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/ExternalActionCommandService.swift"},
+    {"lines": 552, "path": "Native/Ambitions/Core/Domain/Reschedule/RescheduleEngine.swift"},
+    {"lines": 547, "path": "Native/Ambitions/Core/Domain/AmbitionsProductCanonV2Models.swift"}
+  ],
+  "support_largest_files": [
+    {"lines": 3215, "path": "Native/AmbitionsUITests/AmbitionsUITests.swift"},
+    {"lines": 2485, "path": "Native/AmbitionsTests/You/YouFeatureServiceTests.swift"},
+    {"lines": 2048, "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackLifecycleRefreshServiceTests.swift"},
+    {"lines": 1753, "path": "Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift"},
+    {"lines": 1644, "path": "Native/AmbitionsTests/Time/TimeProjectionServiceTests.swift"},
+    {"lines": 1628, "path": "Native/AmbitionsTests/Today/TodayViewModelTests.swift"},
+    {"lines": 1606, "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasRuntimeBridgeCoverageGauntletTests.swift"},
+    {"lines": 1399, "path": "Native/AmbitionsTests/Domain/ProjectStepOperationModelsTests.swift"},
+    {"lines": 1373, "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPackModelsTests.swift"},
+    {"lines": 1350, "path": "Native/AmbitionsTests/Domain/AmbitionsMoatScenarioProof98Tests.swift"},
+    {"lines": 1348, "path": "Native/AmbitionsTests/Domain/RecommendationExplanationModelsTests.swift"},
+    {"lines": 1223, "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackRemoteTransportTests.swift"},
+    {"lines": 1218, "path": "Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift"},
+    {"lines": 1216, "path": "Native/AmbitionsTests/LocalRuntimeOS/Inspection/ActionClosureReceiptModelsTests.swift"},
+    {"lines": 1173, "path": "Native/AmbitionsTests/Domain/LifeKnowledgeOperationModelsTests.swift"}
+  ],
+  "selected_support_quarantine": {
+    "path": "Native/AmbitionsUITests/AmbitionsUITests.swift",
+    "lines": 3215,
+    "decision": "quarantined_as_top_support_cleanup_candidate_no_split_in_this_leaf",
+    "reason": [
+      "production_over_cap_count_is_zero",
+      "ui_test_monolith_split_needs_xctest_discovery_or_build_proof",
+      "current_user_instruction_skips_testing",
+      "guard_now_surfaces_support_backlog_in_every_run"
+    ]
+  },
+  "validation": {
+    "status": "static_guards_passed_tests_not_run_xcodegen_clean",
+    "commands_run": [
+      {
+        "command": "python3 scripts/ambitions-remediation-governance-check.py --self-test",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-remediation-governance-check.py",
+        "result": "passed_support_swift_files_475_support_over_hard_line_cap_files_41_production_over_hard_line_cap_files_0"
+      },
+      {
+        "command": "python3 scripts/ambitions-remediation-governance-check.py --json",
+        "result": "passed_json_emitted_support_queue"
+      },
+      {
+        "command": "git diff --check",
+        "result": "passed"
+      },
+      {
+        "command": "jq -e . docs/audits/amb-1818-file-size-cleanup-queue.json",
+        "result": "passed"
+      },
+      {
+        "command": "npx markdownlint-cli2 --no-globs docs/audits/amb-1818-file-size-cleanup-queue.md",
+        "result": "passed_0_errors"
+      },
+      {
+        "command": "python3 scripts/ambitions-unsupported-claim-scan.py docs/audits/amb-1818-file-size-cleanup-queue.md docs/audits/amb-1818-file-size-cleanup-queue.json",
+        "result": "passed"
+      },
+      {
+        "command": "scripts/release-claim-safety-scan.sh docs/audits/amb-1818-file-size-cleanup-queue.md docs/audits/amb-1818-file-size-cleanup-queue.json",
+        "result": "passed"
+      },
+      {
+        "command": "scripts/ambitions-xcodegen-needed.sh",
+        "result": "passed_xcodegen_needed_0_project_build_inputs_unchanged"
+      },
+      {
+        "command": "python3 scripts/ambitions-architecture-inventory.py",
+        "result": "passed_final_tree_parity"
+      },
+      {
+        "command": "python3 scripts/ambitions-vocabulary-drift-scan.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-truth-path-vocabulary-audit.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-green-standard-audit.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-accepted-yellow-misuse-audit.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-screenshot-artifact-audit.py",
+        "result": "passed_static_guard_no_screenshot_artifact_produced"
+      },
+      {
+        "command": "python3 scripts/ambitions-device-proof-required.py",
+        "result": "passed_static_guard_no_device_proof_produced"
+      },
+      {
+        "command": "scripts/no-unsupported-ai-claim-scan.sh docs/audits/amb-1818-file-size-cleanup-queue.md docs/audits/amb-1818-file-size-cleanup-queue.json",
+        "result": "completed_advisory_hits_reviewed_as_context"
+      },
+      {
+        "command": "scripts/privacy-boundary-scan.sh docs/audits/amb-1818-file-size-cleanup-queue.md docs/audits/amb-1818-file-size-cleanup-queue.json",
+        "result": "completed_advisory_hits_reviewed_as_context"
+      }
+    ],
+    "commands_not_run": [
+      "focused_xctest",
+      "ui_test_discovery",
+      "full_xctest",
+      "build",
+      "simulator",
+      "screenshot_capture",
+      "physical_device",
+      "performance",
+      "signed_archive",
+      "app_store_connect_validation"
+    ]
+  },
+  "proof_ceiling": {
+    "allowed_claims": [
+      "amb_1818_live_file_size_queue_produced",
+      "support_oversize_queue_reported_by_governance_guard",
+      "production_over_hard_line_cap_files_zero"
+    ],
+    "forbidden_claims": [
+      "repo_wide_file_size_cleanup_green",
+      "support_test_monolith_cleanup_complete",
+      "ui_test_monolith_split_complete",
+      "focused_tests_passed",
+      "build_validation_passed",
+      "simulator_validation_passed",
+      "device_proof_exists",
+      "release_proof_exists",
+      "testflight_readiness",
+      "app_store_readiness",
+      "release_green"
+    ]
+  },
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_touched": [
+      "governance_script",
+      "audit_docs"
+    ],
+    "files_created": [
+      "docs/audits/amb-1818-file-size-cleanup-queue.md",
+      "docs/audits/amb-1818-file-size-cleanup-queue.json"
+    ],
+    "files_moved": [],
+    "old_noncanonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "yellow_debt": [
+      "production_files_near_600_line_cap",
+      "support_test_files_over_support_queue_threshold",
+      "ui_test_monolith_split_requires_test_discovery_proof",
+      "build_validation",
+      "simulator_proof",
+      "release_proof"
+    ],
+    "equivalent_path_interpretation_used": false
+  }
+}
