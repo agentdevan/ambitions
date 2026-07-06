@@ -15,9 +15,9 @@ struct TimeObjectStagePrimitiveContract: Equatable, Sendable {
     static let current = TimeObjectStagePrimitiveContract(
         primitiveID: "time-object-stage",
         ownerSurface: "Time",
-        productObject: "LifeShape Field",
-        stageName: "LifeShape Field",
-        firstViewportStructure: "Full-bleed LifeShape Field object stage with live now, current date, fixed points, capacity contours, pressure texture, protected windows, day/week/month/year horizons, confirmation-first shaping actions, global Capture support, and source/receipt inspection.",
+        productObject: "Life Calendar",
+        stageName: "Life Calendar",
+        firstViewportStructure: "Full-bleed Life Calendar object stage with live now, current date, fixed points, capacity contours, pressure texture, protected windows, day/week/month/year horizons, confirmation-first shaping actions, global Capture support, and source/receipt inspection.",
         replacesFirstViewportStructures: [
             "calendar-like horizon chip strip",
             "rounded LifeShape canvas panel",
@@ -40,7 +40,7 @@ struct TimeObjectStagePrimitiveContract: Equatable, Sendable {
             "Capture"
         ],
         accessibilityFallbacks: [
-            "VoiceOver names LifeShape Field before current date, now marker, fixed points, open capacity, protected windows, pressure seams, horizon, and Capture support",
+            "VoiceOver names Life Calendar before current date, now marker, fixed points, open capacity, protected windows, pressure seams, horizon, and Capture support",
             "Dynamic Type stacks horizon, source, receipt, and capacity lines without changing object order",
             "Reduce Motion keeps pressure texture static and preserves state with text",
             "Reduce Transparency uses opaque field bands with text labels",
@@ -56,7 +56,7 @@ enum TimeLens: SurfaceLens {
     static let contract = SurfaceLensContract(
         surface: .time,
         surfaceTitle: "Time",
-        primaryObjectTitle: "LifeShape Field",
+        primaryObjectTitle: "Life Calendar",
         primaryActionTitle: "Move it",
         runtimeInputs: [
             "current date",
@@ -67,7 +67,7 @@ enum TimeLens: SurfaceLens {
             "pressure",
             "horizon"
         ],
-        firstViewportContract: "LifeShape Field owns current time shape, capacity, protected windows, pressure, and horizon changes as one native time field.",
+        firstViewportContract: "Life Calendar owns current time shape, capacity, protected windows, pressure, and horizon changes as one native time field.",
         accessibilityContract: objectStageContract.accessibilityFallbacks,
         trustInspectionRequirements: ["source", "proof", "receipt", "privacy"],
         failureStateRequirements: ["offline calendar", "permission denied", "broken source", "recovery reflow"]

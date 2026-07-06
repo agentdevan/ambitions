@@ -79,8 +79,8 @@ public enum AFI12AccessibilityStateProof {
         AFI12AccessibilitySurfaceProof(
             id: "afi12-time",
             surface: "Time",
-            primaryObject: "LifeShape Field",
-            voiceOverSummary: "Time. LifeShape Field names horizon, open time, goal time, protected time, pressure, shaping actions, and manual mode.",
+            primaryObject: "Life Calendar",
+            voiceOverSummary: "Time. Life Calendar names horizon, open time, goal time, protected time, pressure, shaping actions, and manual mode.",
             dynamicTypeFallback: "Large text preserves horizon, pressure source, protected time, and Shape week or Review pressure actions before visual contour detail.",
             reduceMotionFallback: "LifeShape morph and reflow preview become a static before/after summary with explicit confirmation.",
             nonColorStateSupport: "Pressure, protected, open, unavailable, and source-review states require text and shape cues beyond color.",

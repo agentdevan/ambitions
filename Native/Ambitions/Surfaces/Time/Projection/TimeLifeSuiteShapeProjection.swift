@@ -98,7 +98,7 @@ extension TimeLifeSuiteProjector {
             question: "Is Time still pointed at the life you are building?",
             summary: activeGoalCount == 0
                 ? "Life Shape is quiet until active goals give Time something to shape."
-                : "\(activeGoalCount) active goal\((activeGoalCount == 1) ? "" : "s") shape the current LifeShape Field.",
+                : "\(activeGoalCount) active goal\((activeGoalCount == 1) ? "" : "s") shape the current Life Calendar.",
             facts: [
                 activeGoalCount == 0 ? "No active goals shaping life view yet." : "\(activeGoalCount) active goal\((activeGoalCount == 1) ? "" : "s") included.",
                 "Life Shape stays inside Time.",

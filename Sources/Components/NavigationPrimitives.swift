@@ -22,7 +22,7 @@ public enum RootDestinationIdentity: String, CaseIterable, Hashable, Identifiabl
         switch self {
         case .today: "Reality Meridian"
         case .goals: "Direction Atlas"
-        case .time: "LifeShape Field"
+        case .time: "Life Calendar"
         case .you: "Personal system"
         }
     }

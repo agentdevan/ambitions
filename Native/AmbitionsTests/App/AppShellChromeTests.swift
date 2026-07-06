@@ -166,7 +166,7 @@ final class AppShellChromeTests: XCTestCase {
 
         XCTAssertFalse(source.contains("subtitle: \"Life Area Atlas\""))
         XCTAssertFalse(source.contains("subtitle: \"Profile and settings\""))
-        XCTAssertEqual(source.components(separatedBy: "subtitle: \"LifeShape Field\"").count - 1, 2)
+        XCTAssertEqual(source.components(separatedBy: "subtitle: \"Life Calendar\"").count - 1, 2)
         XCTAssertTrue(source.contains("title: \"Time\""))
         XCTAssertTrue(source.contains("title: \"Goals\""))
         XCTAssertTrue(source.contains("title: \"You\""))

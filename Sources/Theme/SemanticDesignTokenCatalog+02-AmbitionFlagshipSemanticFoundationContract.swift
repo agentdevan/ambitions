@@ -133,7 +133,7 @@ public enum AmbitionFlagshipSemanticFoundationCatalog {
         .init(
             id: "time.lifeShapeField.foundation",
             surface: "Time",
-            primaryObject: "LifeShape Field / Time Texture",
+            primaryObject: "Life Calendar / Time Texture",
             semanticTokenID: "time.lifeShapeField",
             isTopLevelSurface: true,
             materialRole: .band,

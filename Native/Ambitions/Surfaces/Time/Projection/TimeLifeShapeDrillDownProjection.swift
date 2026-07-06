@@ -52,7 +52,7 @@ extension TimeLifeSuiteProjector {
             : "Milestones: \(milestoneTitles.joined(separator: ", ")) shape the longer arc."
 
         return TimeLifeShapeDrillDownState(
-            title: "LifeShape Field detail",
+            title: "Life Calendar detail",
             subtitle: "Month/year life-range horizon, rhythm, and instrument readings stay inspectable without becoming an event list.",
             rhythmLabel: rhythmLabel,
             pressureWeeksLabel: pressuredDays == 0
@@ -104,7 +104,7 @@ extension TimeLifeSuiteProjector {
                     title: "Life areas",
                     value: activeGoalCount == 0 ? "Quiet" : "\(activeGoalCount) active",
                     detail: activeGoalCount == 0
-                        ? "LifeShape Field waits for active goals before drawing a wider pattern."
+                        ? "Life Calendar waits for active goals before drawing a wider pattern."
                         : "Active goals are the source for longer-range shape.",
                     visualState: activeGoalCount == 0 ? .default : .selected
                 ),

@@ -284,7 +284,7 @@ public enum AmbitionFlagshipMotionObject: String, CaseIterable, Sendable {
             )
         case .lifeShapeField:
             return AmbitionObjectMotionPolicy(
-                objectTitle: "LifeShape Field",
+                objectTitle: "Life Calendar",
                 owner: "Time",
                 motionToken: .reviewRequired,
                 stateMeaning: "Capacity, pressure, or defaults need review before shape changes.",

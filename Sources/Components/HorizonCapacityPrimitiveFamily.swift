@@ -15,7 +15,7 @@ public struct HorizonCapacityPrimitiveFamilyContract: Equatable, Sendable {
     public static let current = HorizonCapacityPrimitiveFamilyContract(
         primitiveID: "horizon-capacity-family",
         ownerSurface: "Time",
-        productObjects: ["Horizon", "Capacity", "LifeShape Field"],
+        productObjects: ["Horizon", "Capacity", "Life Calendar"],
         stageName: "Horizon / Capacity Primitive Family",
         screenshotIdentifier: "HorizonCapacityPrimitiveFamily",
         replacesStructures: [

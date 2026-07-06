@@ -65,7 +65,7 @@ public enum AFI13VisualQACatalog {
         ),
         scorecard(
             "Time",
-            object: "LifeShape Field",
+            object: "Life Calendar",
             target: 95,
             inventory: [
                 "time-lifeshape-field-week.png",

@@ -351,8 +351,8 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
         assertAFI12Proof(
             proofsBySurface["Time"],
             surface: "Time",
-            primaryObject: "LifeShape Field",
-            voiceOverSnippets: ["LifeShape Field", "horizon", "open time", "goal time", "protected time", "pressure", "manual mode"],
+            primaryObject: "Life Calendar",
+            voiceOverSnippets: ["Life Calendar", "horizon", "open time", "goal time", "protected time", "pressure", "manual mode"],
             dynamicTypeSnippets: ["horizon", "pressure source", "protected time", "Shape week", "Review pressure"],
             reduceMotionSnippets: ["static", "before/after summary", "explicit confirmation"],
             nonColorSnippets: ["Pressure", "protected", "open", "unavailable", "source-review"],

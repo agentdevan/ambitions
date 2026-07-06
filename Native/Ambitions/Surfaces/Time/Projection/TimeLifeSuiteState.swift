@@ -153,7 +153,7 @@ struct TimeLifeShapeDrillDownState: Sendable {
     let items: [TimeLifeShapeDrillDownItemState]
 
     static let baseline = TimeLifeShapeDrillDownState(
-        title: "LifeShape Field detail",
+        title: "Life Calendar detail",
         subtitle: "Longer-range shape stays explanatory, not event-like.",
         rhythmLabel: "Rhythm: no pattern loaded yet.",
         pressureWeeksLabel: "Pressure weeks: none visible.",

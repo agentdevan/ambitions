@@ -108,7 +108,7 @@ public enum FE09ComponentSystemRole: String, CaseIterable, Identifiable, Sendabl
     case proof = "Proof"
     case recovery = "Recovery"
     case realityMeridian = "Reality Meridian"
-    case lifeShapeField = "LifeShape Field"
+    case lifeShapeField = "Life Calendar"
     case atmosphereComposer = "Atmosphere Composer"
     case constellationAtlas = "Life Area Atlas"
     case userSystemProfile = "User System Profile"
@@ -167,7 +167,7 @@ public enum FE09ComponentSystemRole: String, CaseIterable, Identifiable, Sendabl
         case .realityMeridian:
             return "Reality Meridian"
         case .lifeShapeField:
-            return "LifeShape Field"
+            return "Life Calendar"
         case .atmosphereComposer:
             return "Atmosphere Composer"
         case .constellationAtlas:

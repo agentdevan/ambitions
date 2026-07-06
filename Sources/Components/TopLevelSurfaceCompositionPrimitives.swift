@@ -22,7 +22,7 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
         switch self {
         case .today: "Reality Meridian"
         case .goals: "Life Area Atlas"
-        case .time: "LifeShape Field"
+        case .time: "Life Calendar"
         case .you: "User System Profile"
         }
     }
@@ -58,7 +58,7 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
         switch self {
         case .today: "One calm execution path with Start here, Now, Next, Later, closure, and proof."
         case .goals: "Strategic direction, path pressure, proof lanes, and goal drill-downs stay connected."
-        case .time: "Capacity, pressure, protected time, and reflow stay visible without becoming a calendar clone."
+        case .time: "Capacity, pressure, protected time, and reflow stay tied to real windows."
         case .you: "Trust, setup, data, preferences, and receipts stay user-controlled."
         }
     }
@@ -127,7 +127,7 @@ public enum AFI14CrossSurfaceCoherenceCatalog {
     public static let stages: [AFI14ProductGrammarStage] = [
         stage("Capture", promise: "Capture what matters.", surfaces: ["Global Capture"], object: "Atmosphere Composer"),
         stage("Clarify", promise: "Give it a place.", surfaces: ["Global Capture", "Goals"], object: "Needs a Place / Grow into Goal"),
-        stage("Shape", promise: "Shape your time around what matters.", surfaces: ["Time"], object: "LifeShape Field"),
+        stage("Shape", promise: "Shape your time around what matters.", surfaces: ["Time"], object: "Life Calendar"),
         stage("Start", promise: "Start where reality allows.", surfaces: ["Today"], object: "Start here / Reality Meridian"),
         stage("Inspect", promise: "See what moved and what can re-enter.", surfaces: ["You", "Today"], object: "Proof / Source / Privacy / History / Receipts"),
         stage("Close", promise: "Close the loop without shame.", surfaces: ["Today"], object: "Receipt Surface"),

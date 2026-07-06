@@ -91,13 +91,13 @@ final class AppShellNavigationTests: XCTestCase {
             [
                 "Reality Meridian",
                 "Life Area Atlas",
-                "LifeShape Field",
+                "Life Calendar",
                 "User System Profile"
             ]
         )
         XCTAssertEqual(AmbitionsSurface.today.surfaceContract.title, "Today")
         XCTAssertEqual(AmbitionsSurface.goals.surfaceContract.primaryObjectTitle, "Life Area Atlas")
-        XCTAssertEqual(AmbitionsSurface.time.surfaceContract.primaryObjectTitle, "LifeShape Field")
+        XCTAssertEqual(AmbitionsSurface.time.surfaceContract.primaryObjectTitle, "Life Calendar")
         XCTAssertEqual(AmbitionsSurface.you.surfaceContract.primaryObjectTitle, "User System Profile")
         XCTAssertFalse(AmbitionsSurfaceContractRegistry.canonicalContracts.map(\.tab.rawValue).contains("capture"))
     }
@@ -123,7 +123,7 @@ final class AppShellNavigationTests: XCTestCase {
 
         let issues = AmbitionsSurfaceContractRegistry.validate(contracts)
 
-        XCTAssertTrue(issues.contains { $0.contains("Time must own LifeShape Field") })
+        XCTAssertTrue(issues.contains { $0.contains("Time must own Life Calendar") })
         XCTAssertTrue(issues.contains { $0.contains("Primary object Reality Meridian is assigned to multiple top-level surfaces") })
     }
 

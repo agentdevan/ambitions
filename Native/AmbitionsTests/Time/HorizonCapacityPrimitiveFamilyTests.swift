@@ -8,7 +8,7 @@ final class HorizonCapacityPrimitiveFamilyTests: XCTestCase {
 
         XCTAssertEqual(contract.primitiveID, "horizon-capacity-family")
         XCTAssertEqual(contract.ownerSurface, "Time")
-        XCTAssertEqual(contract.productObjects, ["Horizon", "Capacity", "LifeShape Field"])
+        XCTAssertEqual(contract.productObjects, ["Horizon", "Capacity", "Life Calendar"])
         XCTAssertEqual(contract.stageName, "Horizon / Capacity Primitive Family")
         XCTAssertEqual(contract.screenshotIdentifier, "HorizonCapacityPrimitiveFamily")
         XCTAssertTrue(contract.replacesStructures.contains("generic horizon chips"))

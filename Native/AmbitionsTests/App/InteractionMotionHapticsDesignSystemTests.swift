@@ -259,7 +259,7 @@ final class InteractionMotionHapticsDesignSystemTests: XCTestCase {
             "Source Fold",
             "Life Area Atlas",
             "Action Closure Diamond",
-            "LifeShape Field",
+            "Life Calendar",
             "Capture Atmosphere Composer"
         ])
 

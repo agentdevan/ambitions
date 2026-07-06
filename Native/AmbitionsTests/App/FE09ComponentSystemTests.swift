@@ -14,7 +14,7 @@ final class FE09ComponentSystemTests: XCTestCase {
                 "Proof",
                 "Recovery",
                 "Reality Meridian",
-                "LifeShape Field",
+                "Life Calendar",
                 "Atmosphere Composer",
                 "Life Area Atlas",
                 "User System Profile"

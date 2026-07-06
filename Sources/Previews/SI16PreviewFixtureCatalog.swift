@@ -32,7 +32,7 @@ public enum SI16PreviewFixtureCatalog {
         fixture(.normal, "Today", "Reality Meridian", lane: nil),
         fixture(.selected, "Goals", "Life Area Atlas", lane: nil),
         fixture(.focused, "Goals", "Life Area Atlas focus thread", lane: "clarification_needed"),
-        fixture(.loading, "Time", "LifeShape Field", lane: "source_check_first"),
+        fixture(.loading, "Time", "Life Calendar", lane: "source_check_first"),
         fixture(.empty, "You", "User System Profile", lane: nil),
         fixture(.disabled, "Today", "Start here decision", lane: "user_review_required"),
         fixture(.degraded, "Goals", "Source review lane", lane: "source_conflict_review"),
@@ -82,7 +82,7 @@ public enum SI16PreviewFixtureCatalog {
         ),
         surfaceRow(
             "Time",
-            object: "LifeShape Field",
+            object: "Life Calendar",
             fixtureIDs: [
                 "time.loading",
                 "time.partialSource",

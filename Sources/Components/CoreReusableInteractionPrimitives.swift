@@ -187,7 +187,7 @@ public enum AmbitionCoreInteractionRole: String, CaseIterable, Identifiable, Sen
         case .openGoalThread:
             return "Life Area Atlas"
         case .reviewTimeFit:
-            return "LifeShape Field / Time Texture"
+            return "Life Calendar / Time Texture"
         case .reviewHistory:
             return "Movement history"
         case .recoveryOption:

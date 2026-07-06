@@ -8,7 +8,7 @@ extension TimeSurfaceState {
             screenID: .time,
             firstScreenContent: [
                 "Shape Time",
-                "LifeShape Field",
+                "Life Calendar",
                 "Open time",
                 "Goal time",
                 "Protected time",

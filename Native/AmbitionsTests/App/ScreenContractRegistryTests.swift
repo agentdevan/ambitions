@@ -226,7 +226,7 @@ final class ScreenContractRegistryTests: XCTestCase {
         }
 
         XCTAssertEqual(ScreenContractRegistry.contract(for: .goalDetail).requiredFirstScreenContent[1], "Goal detail lanes")
-        XCTAssertTrue(ScreenContractRegistry.contract(for: .time).requiredFirstScreenContent.contains("LifeShape Field"))
+        XCTAssertTrue(ScreenContractRegistry.contract(for: .time).requiredFirstScreenContent.contains("Life Calendar"))
         XCTAssertTrue(ScreenContractRegistry.contract(for: .capture).requiredFirstScreenContent.contains("Changeable route receipt"))
         XCTAssertFalse(ScreenContractRegistry.contract(for: .capture).requiredFirstScreenContent.contains("Capture Anything"))
     }

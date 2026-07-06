@@ -17,7 +17,7 @@ struct TimeStageScene: Equatable, Sendable {
 
     var satisfiesArchitectureTree: Bool {
         surface == .time &&
-            productObject == "LifeShape Field" &&
+            productObject == "Life Calendar" &&
             firstViewportStructure.localizedCaseInsensitiveContains("capacity") &&
             firstViewportStructure.localizedCaseInsensitiveContains("protected") &&
             firstViewportStructure.localizedCaseInsensitiveContains("pressure") &&

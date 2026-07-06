@@ -27,9 +27,9 @@ struct StageObject: Equatable, Identifiable {
         case .time:
             StageObject(
                 surface: .time,
-                title: "LifeShape Field",
+                title: "Life Calendar",
                 primaryActionTitle: "Review",
-                accessibilitySummary: "Time shows the LifeShape Field and lets the user review capacity."
+                accessibilitySummary: "Time shows the Life Calendar and lets the user review capacity."
             )
         case .you:
             StageObject(

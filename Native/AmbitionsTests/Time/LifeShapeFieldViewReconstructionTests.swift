@@ -5,7 +5,7 @@ final class LifeShapeFieldViewReconstructionTests: XCTestCase {
     func testTimeObjectStageContractOwnsLifeShapeField() {
         let contract = TimeObjectStagePrimitiveContract.current
         XCTAssertEqual(contract.ownerSurface, "Time")
-        XCTAssertEqual(contract.productObject, "LifeShape Field")
+        XCTAssertEqual(contract.productObject, "Life Calendar")
         XCTAssertTrue(contract.firstViewportAvoidsCalendarCardStackGeometry)
     }
 

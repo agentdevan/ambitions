@@ -23,7 +23,7 @@ final class TimeProjectionServiceTests: XCTestCase {
 
         XCTAssertEqual(contract.primitiveID, "time-object-stage")
         XCTAssertEqual(contract.ownerSurface, "Time")
-        XCTAssertEqual(contract.productObject, "LifeShape Field")
+        XCTAssertEqual(contract.productObject, "Life Calendar")
         XCTAssertEqual(contract.screenshotIdentifier, "TimeObjectStage")
         XCTAssertTrue(contract.firstViewportAvoidsCalendarCardStackGeometry)
         XCTAssertEqual(contract.sourceTrustLineOrder, ["current date", "now marker", "fixed points", "capacity", "protected windows", "pressure", "horizon", "Capture"])
@@ -48,7 +48,7 @@ final class TimeProjectionServiceTests: XCTestCase {
         }
         let registry = try String(contentsOf: registryURL, encoding: .utf8)
 
-        XCTAssertTrue(registry.contains("| time-object-stage | Promoted | Time | LifeShape Field | AMB-573 |"))
+        XCTAssertTrue(registry.contains("| time-object-stage | Promoted | Time | Life Calendar | AMB-573 |"))
         XCTAssertTrue(registry.contains("### time-object-stage"))
         XCTAssertTrue(registry.contains("artifacts/ambitions-ui-reconstruction/object-stage/AMB-573-time-object-stage.md"))
     }
@@ -183,7 +183,7 @@ final class TimeProjectionServiceTests: XCTestCase {
         XCTAssertTrue(weekShape.privacyLabel.localizedCaseInsensitiveContains("user choice"))
         XCTAssertEqual(
             weekItem.accessibilityHint,
-            "Selects this LifeShape Field shape without changing Time or calendar."
+            "Selects this Life Calendar shape without changing Time or calendar."
         )
         XCTAssertTrue(weekItem.accessibilityLabel.contains(weekItem.capacityShapeLabel))
         XCTAssertTrue(weekItem.accessibilityLabel.contains(weekItem.protectedTimeLabel))
@@ -321,7 +321,7 @@ final class TimeProjectionServiceTests: XCTestCase {
         XCTAssertGreaterThan(weekItem.pressureLevel, 0.45)
         XCTAssertTrue(weekItem.capacityLabel.localizedCaseInsensitiveContains("pressure"))
         XCTAssertTrue(weekItem.recoveryLabel.localizedCaseInsensitiveContains("lighten"))
-        XCTAssertTrue(weekItem.accessibilityHint.localizedCaseInsensitiveContains("LifeShape Field shape"))
+        XCTAssertTrue(weekItem.accessibilityHint.localizedCaseInsensitiveContains("Life Calendar shape"))
         XCTAssertTrue(weekItem.accessibilityHint.localizedCaseInsensitiveContains("without changing"))
         XCTAssertFalse(items.map(\.summary).joined(separator: " ").localizedCaseInsensitiveContains("calendar grid"))
     }
@@ -458,7 +458,7 @@ final class TimeProjectionServiceTests: XCTestCase {
         let afterCaptures = try await repositories.captures.listCaptures()
         let drillDown = timeState.lifeSuite.drillDown
 
-        XCTAssertEqual(drillDown.title, "LifeShape Field detail")
+        XCTAssertEqual(drillDown.title, "Life Calendar detail")
         XCTAssertTrue(drillDown.subtitle.contains("rhythm"))
         XCTAssertTrue(drillDown.rhythmLabel.contains("Rhythm"))
         XCTAssertTrue(drillDown.pressureWeeksLabel.contains("Pressure weeks"))
@@ -494,7 +494,7 @@ final class TimeProjectionServiceTests: XCTestCase {
             "goal-load"
         ])
         XCTAssertTrue(drillDown.items.contains(where: { $0.title == "Life areas" }))
-        XCTAssertTrue(drillDown.accessibilityValue.contains("LifeShape Field detail"))
+        XCTAssertTrue(drillDown.accessibilityValue.contains("Life Calendar detail"))
 
         let copy = [
             drillDown.subtitle,
@@ -1307,7 +1307,7 @@ final class TimeProjectionServiceTests: XCTestCase {
         XCTAssertEqual(snapshot.screenID, .time)
         XCTAssertEqual(snapshot.topLevelTabTitles, ["Today", "Goals", "Time", "You"])
         XCTAssertFalse(snapshot.topLevelTabTitles.contains("Capture"))
-        XCTAssertTrue(snapshot.firstScreenContent.contains("LifeShape Field"))
+        XCTAssertTrue(snapshot.firstScreenContent.contains("Life Calendar"))
         XCTAssertTrue(snapshot.firstScreenContent.contains("Open time"))
         XCTAssertTrue(snapshot.firstScreenContent.contains("Protected time"))
         XCTAssertTrue(snapshot.copySamples.contains("Open time, goal time, protected time, pressure, source state, and user choice stay inspectable."))
