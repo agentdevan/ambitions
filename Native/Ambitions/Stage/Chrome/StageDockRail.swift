@@ -54,12 +54,6 @@ struct StageDockRail: View {
                     width: accessibilityCompact ? 58 : 52,
                     height: accessibilityCompact ? 50 : 44
                 )
-                .background {
-                    if isSelected {
-                        Capsule(style: .continuous)
-                            .fill(theme.shell.controlBackground.opacity(0.92))
-                    }
-                }
                 .contentShape(Capsule(style: .continuous))
         }
         .buttonStyle(.plain)

@@ -71,17 +71,17 @@ final class AppShellChromeTests: XCTestCase {
         }
     }
 
-    func testAMB1194DockRailUsesSemanticThemeMaterialWithoutVisibleContainerChrome() throws {
+    func testAMB1194DockRailUsesIconOnlySelectionWithoutVisibleContainerChrome() throws {
         let source = try String(
             contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Stage/Chrome/StageDockRail.swift"),
             encoding: .utf8
         )
 
-        XCTAssertTrue(source.contains("theme.shell.controlBackground"))
         XCTAssertTrue(source.contains("theme.shell.activeTabForeground"))
         XCTAssertTrue(source.contains("theme.shell.inactiveTabForeground"))
         XCTAssertTrue(source.contains("shell.stage-os.invisible-rail"))
         XCTAssertFalse(source.contains("Text(destination.title)"))
+        XCTAssertFalse(source.contains("theme.shell.controlBackground"))
         XCTAssertFalse(source.contains("theme.shell.bottomBarMaterial"))
         XCTAssertFalse(source.contains("theme.colors.surfaceOverlay"))
         XCTAssertFalse(source.contains("theme.shell.divider"))
