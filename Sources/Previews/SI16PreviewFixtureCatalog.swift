@@ -55,7 +55,7 @@ public enum SI16PreviewFixtureCatalog {
     public static let surfaceCoverageRows: [SI16PreviewSurfaceCoverageRow] = [
         surfaceRow(
             "Today",
-            object: "Reality Meridian / Start Here",
+            object: "Reality Meridian / Start here",
             fixtureIDs: [
                 "today.normal",
                 "today.disabled",
@@ -63,7 +63,7 @@ public enum SI16PreviewFixtureCatalog {
                 "today.waiting",
                 "today.noDataYet"
             ],
-            accessibilityNote: "Today keeps Start Here grounded in clear, recommended-step, recovery, waiting, and no-proof-yet states.",
+            accessibilityNote: "Today keeps Start here grounded in clear, recommended-step, recovery, waiting, and no-proof-yet states.",
             nonColorNote: "State meaning stays visible through labels, symbols, and section order rather than color alone."
         ),
         surfaceRow(

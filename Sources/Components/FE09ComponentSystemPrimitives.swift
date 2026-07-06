@@ -157,7 +157,7 @@ public enum FE09ComponentSystemRole: String, CaseIterable, Identifiable, Sendabl
         case .sourceFreshness:
             return "Source Freshness Badge"
         case .primaryCTA:
-            return "Start Here"
+            return "Start here"
         case .disclosureRow:
             return "Disclosure Row"
         case .proof:

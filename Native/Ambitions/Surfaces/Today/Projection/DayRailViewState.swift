@@ -181,7 +181,7 @@ struct TodayObjectStagePrimitiveContract: Equatable {
     static let current = TodayObjectStagePrimitiveContract(
         primitiveID: "today-object-stage",
         ownerSurface: "Today",
-        productObject: "Reality Meridian / Start Here",
+        productObject: "Reality Meridian / Start here",
         firstViewportStructure: "Full-bleed object stage with the current time spine, Start here decision, inline source/trust line, and primary action.",
         replacesFirstViewportStructures: [
             "time-band panel",

@@ -99,7 +99,7 @@ public enum StartHereProductKernelAudit {
     public static func failures(for kernel: StartHereProductKernel) -> [String] {
         var failures: [String] = []
         if kernel.hasRequiredProof == false {
-            failures.append("missing required Start Here proof structure")
+            failures.append("missing required Start here proof structure")
         }
 
         let searchable = ([kernel.label, kernel.title, kernel.subtitle, kernel.becauseLine, kernel.durationLabel, kernel.fitLabel, kernel.sourceQualityLabel, kernel.receiptSummary, kernel.primaryActionTitle] + kernel.proofFacts.flatMap { [$0.title, $0.summary, $0.detail] })

@@ -185,12 +185,12 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(rail.closureSlot.reservedForActionClosureSheet)
         XCTAssertFalse(rail.proofSlot.reservedForReceiptPeek)
         XCTAssertTrue(rail.proofSlot.noSilentChanges)
-        XCTAssertEqual(rail.continuity.markers.map(\.title), ["Start Here", "Now", "Next", "Later", "Closure knot", "Proof marker", "Pressure"])
+        XCTAssertEqual(rail.continuity.markers.map(\.title), ["Start here", "Now", "Next", "Later", "Closure knot", "Proof marker", "Pressure"])
         XCTAssertEqual(heroStep.contextEdge.title, "Context edge")
         XCTAssertEqual(heroStep.timeFitProof.title, "Time fit")
         XCTAssertEqual(heroStep.goalThread.title, "Goal thread")
-        XCTAssertEqual(heroStep.receiptItem.title, "Start Here review history")
-        XCTAssertEqual(heroStep.receiptLabel, "Start Here review history")
+        XCTAssertEqual(heroStep.receiptItem.title, "Start here review history")
+        XCTAssertEqual(heroStep.receiptLabel, "Start here review history")
         XCTAssertEqual(heroStep.proofLabel, "No change has been made yet.")
         XCTAssertEqual(heroStep.sourceRecordLabel, "Source record stays local")
         XCTAssertEqual(heroStep.replayTraceLabel, "Review path stays inspectable")
@@ -318,7 +318,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(copy.contains("Context edge"))
         XCTAssertTrue(copy.contains("Time fit"))
         XCTAssertTrue(copy.contains("Goal thread"))
-        XCTAssertTrue(copy.contains("Start Here review history"))
+        XCTAssertTrue(copy.contains("Start here review history"))
         XCTAssertTrue(copy.contains("No change has been made yet."))
         XCTAssertTrue(copy.contains("Source record stays local"))
         XCTAssertTrue(copy.contains("Review path stays inspectable"))
@@ -347,7 +347,7 @@ final class TodayViewModelTests: XCTestCase {
         let copy = f02VisibleRailCopy(rail)
 
         XCTAssertEqual(rail.continuity.title, "Reality Meridian continuity")
-        XCTAssertTrue(copy.contains("Start Here emerges from the active Meridian node"))
+        XCTAssertTrue(copy.contains("Start here emerges from the active Meridian node"))
         XCTAssertTrue(copy.contains("Now, Next, Later, closure, proof, and pressure stay connected."))
         XCTAssertTrue(copy.contains("Closure knot"))
         XCTAssertTrue(copy.contains("Close the loop"))
@@ -378,16 +378,16 @@ final class TodayViewModelTests: XCTestCase {
         let copy = f02VisibleRailCopy(rail)
 
         XCTAssertEqual(rail.continuity.title, "Reality Meridian continuity")
-        XCTAssertTrue(copy.contains("Start Here emerges from the active Meridian node"))
+        XCTAssertTrue(copy.contains("Start here emerges from the active Meridian node"))
         XCTAssertTrue(copy.contains("Now"))
         XCTAssertTrue(copy.contains("Next"))
         XCTAssertTrue(copy.contains("Later"))
         XCTAssertEqual(hero.contextEdge.title, "Context edge")
         XCTAssertEqual(hero.timeFitProof.title, "Time fit")
         XCTAssertEqual(hero.goalThread.title, "Goal thread")
-        XCTAssertEqual(hero.receiptItem.title, "Start Here review history")
+        XCTAssertEqual(hero.receiptItem.title, "Start here review history")
         XCTAssertEqual(hero.receiptItem.summary, "No change has been made yet.")
-        XCTAssertEqual(hero.receiptLabel, "Start Here review history")
+        XCTAssertEqual(hero.receiptLabel, "Start here review history")
         XCTAssertEqual(hero.proofLabel, "No change has been made yet.")
         XCTAssertEqual(hero.sourceRecordLabel, "Source record stays local")
         XCTAssertEqual(hero.replayTraceLabel, "Review path stays inspectable")
@@ -605,7 +605,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(summary.contains(hero.contextEdge.title))
         XCTAssertTrue(summary.contains(hero.timeFitProof.title))
         XCTAssertTrue(summary.contains(hero.goalThread.title))
-        XCTAssertTrue(summary.contains("Start Here review history"))
+        XCTAssertTrue(summary.contains("Start here review history"))
         XCTAssertFalse(summary.localizedCaseInsensitiveContains("recommendation card"))
         XCTAssertFalse(summary.localizedCaseInsensitiveContains("dashboard"))
         XCTAssertFalse(summary.localizedCaseInsensitiveContains("task list"))
@@ -722,7 +722,7 @@ final class TodayViewModelTests: XCTestCase {
         let target = TodayActionTarget(goalID: "goal-fcp13a", stepID: "step-fcp13a")
         let sheet = TodayActionClosureSheetState.step(
             title: "Send the launch note",
-            context: "Start Here",
+            context: "Start here",
             target: target
         )
 
@@ -980,7 +980,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(rail.continuity.title, "Reality Meridian continuity")
         XCTAssertTrue(rail.continuity.markers.contains(where: { $0.title == "Closure knot" }))
         XCTAssertEqual(rail.continuity.markers.contains(where: { $0.title == "Proof marker" }), true)
-        XCTAssertEqual(hero.receiptItem.title, "Start Here review history")
+        XCTAssertEqual(hero.receiptItem.title, "Start here review history")
         XCTAssertEqual(rail.proofSlot.noSilentChanges, true)
         XCTAssertEqual(rail.continuity.noSilentChangesLabel, "Changes stay reviewable.")
     }

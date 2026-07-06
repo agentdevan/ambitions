@@ -26,7 +26,7 @@ private struct InteractionMotionHapticsPreviewGallery: View {
                     subtitle: "Flagship objects keep static meaning, bounded haptics, and Reduce Motion equivalents.",
                     context: .today,
                     state: .proof,
-                    evidence: "Start Here, Rail, Drawer, Fold, Spine, Closure, LifeShape, and Capture share one object-policy contract."
+                    evidence: "Start here, Rail, Drawer, Fold, Spine, Closure, LifeShape, and Capture share one object-policy contract."
                 ) {
                     VStack(alignment: .leading, spacing: theme.spacing.sm) {
                         ForEach(AmbitionFlagshipMotionObject.allCases, id: \.rawValue) { object in

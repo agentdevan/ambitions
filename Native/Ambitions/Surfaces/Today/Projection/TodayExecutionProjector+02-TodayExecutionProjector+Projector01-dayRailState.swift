@@ -40,7 +40,7 @@ extension TodayExecutionProjector {
                 sourceSummary: sourceSummary
             ),
             becauseLine: "Because \(heroBecause)",
-            receiptLabel: "Start Here review history",
+            receiptLabel: "Start here review history",
             proofLabel: "No change has been made yet.",
             sourceRecordLabel: sourceRecordLabel,
             replayTraceLabel: replayTraceLabel,
@@ -91,7 +91,7 @@ extension TodayExecutionProjector {
         let proofSlot = DayRailProofSlotState(
             title: "Proof saved",
             subtitle: input.nowState.evidenceSummaries.isEmpty
-                ? "Start Here keeps the review history visible before anything changes."
+                ? "Start here keeps the review history visible before anything changes."
                 : "\(input.nowState.evidenceSummaries.count) local evidence item\(input.nowState.evidenceSummaries.count == 1 ? "" : "s") counted.",
             noSilentChanges: true,
             reservedForReceiptPeek: false

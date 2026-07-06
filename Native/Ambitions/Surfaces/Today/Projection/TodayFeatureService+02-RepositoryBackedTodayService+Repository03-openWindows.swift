@@ -307,12 +307,12 @@ extension RepositoryBackedTodayService {
         switch action.kind {
         case .complete:
             kind = .complete
-            title = "Complete"
+            title = "Still counts"
             systemImage = "checkmark"
             state = .success
         case .delay:
             kind = .defer
-            title = "Defer"
+            title = "Move it"
             systemImage = "clock.arrow.circlepath"
             state = .default
         case .askForSmallerStep:

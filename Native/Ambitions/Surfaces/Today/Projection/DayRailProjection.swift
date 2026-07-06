@@ -28,7 +28,7 @@ extension AmbitionsDayRailViewState {
             whySummary: hero.explanation?.summary ?? hero.subtitle,
             sourceQualityLabel: "Source-backed by the current Time shape",
             becauseLine: "Because \(hero.explanation?.summary ?? hero.subtitle)",
-            receiptLabel: "Start Here review history",
+            receiptLabel: "Start here review history",
             proofLabel: "No change has been made yet.",
             sourceRecordLabel: DayRailHeroStepState.sourceRecordLabel(for: [source]),
             replayTraceLabel: DayRailHeroStepState.replayTraceLabel(localOnly: true),
@@ -77,7 +77,7 @@ extension AmbitionsDayRailViewState {
         )
         let proofSlot = DayRailProofSlotState(
             title: "Proof saved",
-            subtitle: "Start Here keeps the review history visible before anything changes.",
+            subtitle: "Start here keeps the review history visible before anything changes.",
             noSilentChanges: true,
             reservedForReceiptPeek: false
         )
@@ -339,7 +339,7 @@ extension DayRailHeroStepState {
         TrustReceiptLayerItem(
             id: id,
             kind: .needsReview,
-            title: "Start Here review history",
+            title: "Start here review history",
             summary: "No change has been made yet.",
             sourceLabel: sourceLabel,
             freshness: freshness,
@@ -368,7 +368,7 @@ extension DayRailContinuityState {
             DayRailContinuityMarkerState(
                 id: "rail.continuity.start",
                 kind: heroStep == nil ? .empty : .recommended,
-                title: "Start Here",
+                title: "Start here",
                 summary: heroStep?.title ?? "User choice stays available.",
                 detail: heroStep?.becauseLine ?? "Today stays open until something real exists.",
                 semanticState: heroStep == nil ? .trust : .focus
@@ -422,7 +422,7 @@ extension DayRailContinuityState {
 
         return DayRailContinuityState(
             title: "Reality Meridian continuity",
-            summary: "Start Here emerges from the active Meridian node; Now, Next, Later, closure, proof, and pressure stay connected.",
+            summary: "Start here emerges from the active Meridian node; Now, Next, Later, closure, proof, and pressure stay connected.",
             markers: markers,
             pressureLabel: pressureLabel,
             noSilentChangesLabel: proofSlot.noSilentChanges ? "Changes stay reviewable." : "Review before changing."

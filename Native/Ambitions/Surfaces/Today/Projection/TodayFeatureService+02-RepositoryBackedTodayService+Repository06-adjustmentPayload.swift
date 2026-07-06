@@ -133,14 +133,14 @@ extension RepositoryBackedTodayService {
                 state: state,
                 primaryAction: TodayInlineAction(
                     kind: .complete,
-                    title: "Complete",
+                    title: "Still counts",
                     systemImage: "checkmark",
                     state: .success,
                     target: TodayActionTarget(goalID: goal.id, stepID: step.id, draftID: draft?.id)
                 ),
                 secondaryAction: TodayInlineAction(
                     kind: .defer,
-                    title: "Defer",
+                    title: "Move it",
                     systemImage: "clock.arrow.circlepath",
                     state: .default,
                     target: TodayActionTarget(goalID: goal.id, stepID: step.id, draftID: draft?.id)
@@ -150,13 +150,13 @@ extension RepositoryBackedTodayService {
         }
 
         return TodayDailyTargetsState(
-            title: mode == .empty ? "No live targets yet" : "Daily targets",
+            title: mode == .empty ? "No fitted Step yet" : "What fits now",
             subtitle: mode == .empty
-                ? "Once a goal exists, Today will surface only the few steps worth acting on."
-                : "This is the smallest useful set of live work from the native planner and repository layers.",
+                ? "Once a goal exists, Today will surface only the few Steps that fit current reality."
+                : "Only the live Steps that fit current reality stay visible here.",
             completionLabel: completionLabel,
             items: items,
-            emptyMessage: items.isEmpty ? "Import, seed, or create a goal and Today will immediately fill from persisted steps and draft states." : nil
+            emptyMessage: items.isEmpty ? "Create a goal or capture one loose thing; Today will surface a fitted Step when local context is ready." : nil
         )
     }
 
@@ -243,9 +243,9 @@ extension RepositoryBackedTodayService {
                     timingLabel: timingLabel(for: step.timing, goalMode: goal.mode),
                     assumptions: draft?.assumptions.prefix(3).map(\.summary) ?? [],
                     actions: [
-                        TodayInlineAction(kind: .complete, title: "Complete", systemImage: "checkmark", state: .success, target: target),
+                        TodayInlineAction(kind: .complete, title: "Still counts", systemImage: "checkmark", state: .success, target: target),
                         TodayInlineAction(kind: .split, title: "Split", systemImage: "scissors", state: .selected, target: target),
-                        TodayInlineAction(kind: .defer, title: "Defer", systemImage: "clock.arrow.circlepath", state: .default, target: target),
+                        TodayInlineAction(kind: .defer, title: "Move it", systemImage: "clock.arrow.circlepath", state: .default, target: target),
                         TodayInlineAction(kind: .protectLater, title: "Adjust plan", systemImage: "calendar.badge.clock", state: .default, target: target),
                         TodayInlineAction(kind: .askWhyThisMatters, title: "Why this matters", systemImage: "questionmark.circle", state: .default, target: target),
                         TodayInlineAction(kind: .openDetail, title: "Open detail", systemImage: "arrow.right.circle", state: .default, target: target)
@@ -265,8 +265,8 @@ extension RepositoryBackedTodayService {
                 progress: progress,
                 supportingText: supportingText(for: goal, step: step),
                 actions: [
-                    TodayInlineAction(kind: .complete, title: "Complete", systemImage: "checkmark", state: .success, target: target),
-                    TodayInlineAction(kind: .defer, title: "Defer", systemImage: "clock.arrow.circlepath", state: .default, target: target),
+                    TodayInlineAction(kind: .complete, title: "Still counts", systemImage: "checkmark", state: .success, target: target),
+                    TodayInlineAction(kind: .defer, title: "Move it", systemImage: "clock.arrow.circlepath", state: .default, target: target),
                     TodayInlineAction(kind: .reschedule, title: "Reschedule", systemImage: "forward.fill", state: .warning, target: target),
                     TodayInlineAction(kind: .split, title: "Split", systemImage: "scissors", state: .selected, target: target),
                     TodayInlineAction(kind: .protectLater, title: "Adjust plan", systemImage: "calendar.badge.clock", state: .default, target: target),

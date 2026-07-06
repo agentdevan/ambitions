@@ -21,7 +21,7 @@ public enum AmbitionsCanonPreviewFixtureCatalog {
     public static let requiredFixtures: [AmbitionsCanonPreviewFixtureRequirement] = [
         requirement("TodayEmptyManual", "Today", "Reality Meridian", coveredBy: "today.empty"),
         requirement("TodayNowOpenCapacity", "Today", "Reality Meridian", coveredBy: "today.normal"),
-        requirement("TodayRecommendedStepReady", "Today", "Start Here Surface", coveredBy: "today.disabled"),
+        requirement("TodayRecommendedStepReady", "Today", "Start here Surface", coveredBy: "today.disabled"),
         requirement("TodayActiveStepLive", "Today", "Reality Meridian", coveredBy: "today.selected"),
         requirement("TodayNextSoon", "Today", "Reality Meridian", coveredBy: nil),
         requirement("TodayProtectedBlockActive", "Today", "Reality Meridian", coveredBy: nil),

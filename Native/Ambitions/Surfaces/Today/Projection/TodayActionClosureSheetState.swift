@@ -149,13 +149,13 @@ struct TodayActionClosureSheetState: Identifiable, Equatable, Sendable {
         title: String,
         context: String,
         target: TodayActionTarget,
-        startHereReceiptLabel: String = "Start Here review history",
+        startHereReceiptLabel: String = "Start here review history",
         privacyLabel: String = "Stored on this device"
     ) -> TodayActionClosureSheetState {
         TodayActionClosureSheetState(
             id: "today.action-closure.\(target.goalID ?? target.draftID ?? "today").\(target.stepID ?? "step")",
             objectTitle: title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Today step" : title,
-            startHereReceiptLabel: startHereReceiptLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Start Here review history" : startHereReceiptLabel,
+            startHereReceiptLabel: startHereReceiptLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Start here review history" : startHereReceiptLabel,
             originalContext: context.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "From Today" : context,
             prompt: "What changed?",
             privacyLabel: privacyLabel,

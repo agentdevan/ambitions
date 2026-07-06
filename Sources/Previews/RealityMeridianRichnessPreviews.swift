@@ -47,7 +47,7 @@ private struct RealityMeridianRichnessPreviewGallery: View {
                             VStack(alignment: .leading, spacing: theme.spacing.xs) {
                                 RealityMeridianScheduledNode(
                                     timeLabel: "10:00 AM",
-                                    title: "Start Here",
+                                    title: "Start here",
                                     isActive: false
                                 )
 

@@ -7,7 +7,7 @@ final class TodayRealityMeridianExperienceElevationTests: XCTestCase {
 
         XCTAssertEqual(contract.primitiveID, "today-object-stage")
         XCTAssertEqual(contract.ownerSurface, "Today")
-        XCTAssertEqual(contract.productObject, "Reality Meridian / Start Here")
+        XCTAssertEqual(contract.productObject, "Reality Meridian / Start here")
         XCTAssertEqual(contract.screenshotIdentifier, "TodayObjectStage")
         XCTAssertTrue(contract.firstViewportAvoidsVisibleCardStructure)
         XCTAssertEqual(contract.sourceTrustLineOrder, ["source", "freshness", "receipt", "privacy"])
@@ -26,7 +26,7 @@ final class TodayRealityMeridianExperienceElevationTests: XCTestCase {
             encoding: .utf8
         )
 
-        XCTAssertTrue(registry.contains("| today-object-stage | Promoted | Today | Reality Meridian / Start Here | AMB-572 |"))
+        XCTAssertTrue(registry.contains("| today-object-stage | Promoted | Today | Reality Meridian / Start here | AMB-572 |"))
         XCTAssertTrue(registry.contains("### today-object-stage"))
         XCTAssertTrue(registry.contains("artifacts/ambitions-ui-reconstruction/object-stage/AMB-572-today-object-stage.md"))
     }

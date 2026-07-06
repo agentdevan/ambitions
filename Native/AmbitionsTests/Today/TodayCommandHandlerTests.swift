@@ -28,7 +28,7 @@ final class TodayCommandHandlerTests: XCTestCase {
         )
         XCTAssertEqual(renderedToday.hero.primaryAction.action.target.goalID, created.goalID)
         XCTAssertEqual(renderedToday.hero.primaryAction.action.target.stepID, created.stepID)
-        XCTAssertTrue(renderedToday.hero.primaryAction.title == "Start now" || renderedToday.hero.primaryAction.title == "Complete")
+        XCTAssertTrue(renderedToday.hero.primaryAction.title == "Start now" || renderedToday.hero.primaryAction.title == "Still counts")
 
         let rescheduleAction = TodayInlineAction(
             kind: .reschedule,
@@ -71,7 +71,7 @@ final class TodayCommandHandlerTests: XCTestCase {
 
         let completeAction = TodayInlineAction(
             kind: .complete,
-            title: "Complete",
+            title: "Still counts",
             systemImage: "checkmark.circle.fill",
             state: .success,
             target: TodayActionTarget(goalID: created.goalID, stepID: created.stepID)
@@ -154,7 +154,7 @@ final class TodayCommandHandlerTests: XCTestCase {
         assertNoShameOrPressureCopy(in: notes)
         XCTAssertEqual(reloadedToday.hero.primaryAction.action.target.goalID, created.goalID)
         XCTAssertEqual(reloadedToday.hero.primaryAction.action.target.stepID, created.stepID)
-        XCTAssertTrue(reloadedToday.hero.primaryAction.title == "Start now" || reloadedToday.hero.primaryAction.title == "Complete")
+        XCTAssertTrue(reloadedToday.hero.primaryAction.title == "Start now" || reloadedToday.hero.primaryAction.title == "Still counts")
         XCTAssertEqual(AmbitionsRuntimeCapabilities.currentLocalRuntime.privateLifeRuntimeBoundary, .localOnly)
         XCTAssertFalse(AmbitionsRuntimeCapabilities.currentLocalRuntime.hasRemoteIntelligenceBackend)
     }
@@ -179,7 +179,7 @@ final class TodayCommandHandlerTests: XCTestCase {
         let baselineEvidence = try await repositories.evidence.listEvidence(goalID: goalID)
         let command = TodayInlineAction(
             kind: .complete,
-            title: "Complete",
+            title: "Still counts",
             systemImage: "checkmark.circle.fill",
             state: .success,
             target: TodayActionTarget(goalID: goalID, stepID: stepID)
@@ -278,7 +278,7 @@ final class TodayCommandHandlerTests: XCTestCase {
 
         let action = TodayInlineAction(
             kind: .complete,
-            title: "Complete",
+            title: "Still counts",
             systemImage: "checkmark.circle.fill",
             state: .success,
             target: TodayActionTarget(goalID: goalID, stepID: step.id)
@@ -413,7 +413,7 @@ final class TodayCommandHandlerTests: XCTestCase {
 
         let action = TodayInlineAction(
             kind: .complete,
-            title: "Complete",
+            title: "Still counts",
             systemImage: "checkmark.circle",
             state: .warning,
             target: TodayActionTarget()
@@ -458,7 +458,7 @@ final class TodayCommandHandlerTests: XCTestCase {
         )
         let action = TodayInlineAction(
             kind: .complete,
-            title: "Complete",
+            title: "Still counts",
             systemImage: "checkmark.circle",
             state: .warning,
             target: TodayActionTarget()

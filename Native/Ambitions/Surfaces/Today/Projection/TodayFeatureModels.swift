@@ -343,7 +343,7 @@ struct TodayExperience: Sendable {
 }
 
 // Internal projection scaffolding retained to avoid widening this preview composition path
-// into planner or service rewrites beyond Today presentation composition.
+// into domain-service rewrites beyond Today presentation composition.
 
 struct TodayHeaderState: Sendable {
     let greeting: String

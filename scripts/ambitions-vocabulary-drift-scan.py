@@ -116,7 +116,7 @@ REQUIRED_TERMS = [
     "Reflection",
     "Private Life Runtime",
     "Reality Meridian",
-    "Start Here",
+    "Start here",
 ]
 
 

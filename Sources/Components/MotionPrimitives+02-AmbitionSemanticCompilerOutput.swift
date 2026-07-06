@@ -230,12 +230,12 @@ public enum AmbitionFlagshipMotionObject: String, CaseIterable, Sendable {
         switch self {
         case .startHere:
             return AmbitionObjectMotionPolicy(
-                objectTitle: "Start Here",
+                objectTitle: "Start here",
                 owner: "Today",
                 motionToken: .selectionConfirm,
                 stateMeaning: "The recommended starting point became selected by the user.",
                 nonMotionCues: ["selected label", "because line", "time fit proof"],
-                hapticBoundary: "Selection haptic only after a user chooses Start Here."
+                hapticBoundary: "Selection haptic only after a user chooses Start here."
             )
         case .realityMeridian:
             return AmbitionObjectMotionPolicy(

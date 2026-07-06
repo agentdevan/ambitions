@@ -62,7 +62,7 @@ public enum AFI12AccessibilityStateProof {
             dynamicTypeFallback: "At large text sizes Today preserves the active decision, source, recovery path, and primary action before supporting detail.",
             reduceMotionFallback: "Meridian movement becomes static Now, Next, Later labels with source and receipt text.",
             nonColorStateSupport: "Now, protected, waiting, blocked, and recovery states require text and symbols in addition to tint.",
-            trustReceiptPath: "Why This? and closure receipts remain reachable from Start Here and closure surfaces.",
+            trustReceiptPath: "Why This? and closure receipts remain reachable from Start here and closure surfaces.",
             manualProofStillRequired: "Manual VoiceOver, Dynamic Type screenshot, Reduce Motion walkthrough, contrast, and motor review remain required."
         ),
         AFI12AccessibilitySurfaceProof(

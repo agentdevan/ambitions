@@ -94,7 +94,7 @@ public enum AFI13VisualQACatalog {
         example("Graphite Recess", pass: "embedded product surface", fail: "stacked SaaS cards", label: "Red: SaaS/dashboard", surface: nil),
         example("Luminous Trace", pass: "state, proof, and relationship", fail: "neon decorative lines", label: "Red: sci-fi/HUD", surface: nil),
         example("Quiet Glass", pass: "restrained touch controls", fail: "generic glassmorphism", label: "Yellow: adjacent drift", surface: nil),
-        example("Today", pass: "Reality Meridian plus Start Here", fail: "task list or timeline", label: "Red: generic productivity", surface: "Today"),
+        example("Today", pass: "Reality Meridian plus Start here", fail: "task list or timeline", label: "Red: generic productivity", surface: "Today"),
         example("Goals", pass: "equal-weight atlas", fail: "KPI dashboard or astrology", label: "Red: SaaS/dashboard", surface: "Goals"),
         example("Time", pass: "capacity field", fail: "calendar clone or analytics", label: "Red: canon violation", surface: "Time"),
         example("Motion", pass: "stage behavior for proof, recovery, and re-entry", fail: "activity feed, score, or dashboard", label: "Red: canon violation", surface: nil),

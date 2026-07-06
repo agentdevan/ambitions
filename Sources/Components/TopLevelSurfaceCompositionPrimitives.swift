@@ -128,7 +128,7 @@ public enum AFI14CrossSurfaceCoherenceCatalog {
         stage("Capture", promise: "Capture what matters.", surfaces: ["Global Capture"], object: "Atmosphere Composer"),
         stage("Clarify", promise: "Give it a place.", surfaces: ["Global Capture", "Goals"], object: "Needs a Place / Grow into Goal"),
         stage("Shape", promise: "Shape your time around what matters.", surfaces: ["Time"], object: "LifeShape Field"),
-        stage("Start", promise: "Start where reality allows.", surfaces: ["Today"], object: "Start Here / Reality Meridian"),
+        stage("Start", promise: "Start where reality allows.", surfaces: ["Today"], object: "Start here / Reality Meridian"),
         stage("Inspect", promise: "See what moved and what can re-enter.", surfaces: ["You", "Today"], object: "Proof / Source / Privacy / History / Receipts"),
         stage("Close", promise: "Close the loop without shame.", surfaces: ["Today"], object: "Receipt Surface"),
         stage("Remember", promise: "Trust what changed.", surfaces: ["You"], object: "Trust Seam / Receipts & History")
@@ -137,7 +137,7 @@ public enum AFI14CrossSurfaceCoherenceCatalog {
     public static let handoffs: [AFI14CrossSurfaceHandoff] = [
         handoff("Global Capture", "Goals", thread: "Grow into Goal / place into life area", trust: "route explanation before placement"),
         handoff("Global Capture", "Time", thread: "captured commitment influences capacity after user confirms", trust: "manual confirmation and receipt"),
-        handoff("Global Capture", "Today", thread: "quick step can become Start Here candidate after placement", trust: "source visible before start"),
+        handoff("Global Capture", "Today", thread: "quick step can become Start here candidate after placement", trust: "source visible before start"),
         handoff("Goals", "Time", thread: "goal thread asks for capacity", trust: "capacity source visible"),
         handoff("Goals", "Today", thread: "thread feeds Recommended step", trust: "Why this? route"),
         handoff("Time", "Today", thread: "capacity informs what fits now", trust: "pressure source and user choice"),

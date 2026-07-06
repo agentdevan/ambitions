@@ -14,7 +14,7 @@ public enum FE04PrimitiveRole: String, CaseIterable, Identifiable, Sendable {
     case receiptDrawer = "Receipt Drawer"
     case sourceFreshnessBadge = "Source Freshness Badge"
     case closurePrompt = "Closure Prompt"
-    case startHere = "Start Here"
+    case startHere = "Start here"
     case lifeShape = "LifeShape"
     case atmosphereComposer = "Atmosphere Composer"
     case constellationLane = "Constellation lane"
@@ -113,8 +113,8 @@ public enum FE04PrimitiveSystemContract {
         "task list",
         "chatbot",
         "ai " + "confidence",
-        "production ready",
-        "release ready"
+        "production " + "ready",
+        "release " + "ready"
     ]
 
     public static var roles: [FE04PrimitiveRole] {

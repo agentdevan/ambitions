@@ -9,7 +9,7 @@ extension TodayExecutionProjector {
         case .focus:
             return TodayInlineAction(kind: .startStepSession, title: "Start now", systemImage: "scope", state: .selected, target: target)
         case .completeAction:
-            return TodayInlineAction(kind: .complete, title: "Complete", systemImage: "checkmark", state: .success, target: target)
+            return TodayInlineAction(kind: .complete, title: "Still counts", systemImage: "checkmark", state: .success, target: target)
         case .openGoal:
             return TodayInlineAction(kind: .openDetail, title: "Open Goal", systemImage: "arrow.right.circle", state: .default, target: target)
         case .openTime, .schedule:
