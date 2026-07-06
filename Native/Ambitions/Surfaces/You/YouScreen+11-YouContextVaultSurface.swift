@@ -9,7 +9,7 @@ struct YouContextVaultSurface: View {
     let contextVault: YouContextVaultState
 
     var body: some View {
-        ObjectStageSurface {
+        ProductObjectFrame {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     eyebrow: "Optional context",
@@ -76,7 +76,7 @@ struct YouPersonalVaultSurface: View {
     let personalVault: YouPersonalVaultState
 
     var body: some View {
-        ObjectStageSurface {
+        ProductObjectFrame {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     eyebrow: "Privacy",

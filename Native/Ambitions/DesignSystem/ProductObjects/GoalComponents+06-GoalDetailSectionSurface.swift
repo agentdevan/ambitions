@@ -15,7 +15,7 @@ struct GoalDetailSectionSurface: View {
     }
 
     var body: some View {
-        ObjectStageSurface {
+        ProductObjectFrame {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: title, subtitle: subtitle)
                 content

@@ -1,0 +1,227 @@
+{
+  "issue": "AMB-1819",
+  "title": "Naming Simplification Leaf - Next concrete owner rename",
+  "status": "implemented_yellow_objectstage_layout_primitive_collapsed_tests_not_run",
+  "date": "2026-07-06",
+  "baseline_sha": "059a062c5ab105345d6a6d0cd8a54274d96a8d38",
+  "linear_status_before_closeout": "In Progress",
+  "user_authorization": {
+    "completion_without_testing": true,
+    "focused_tests_run": false,
+    "xctest_run": false,
+    "build_run": false,
+    "simulator_run": false,
+    "screenshots_captured": false,
+    "physical_device_proof": false,
+    "release_proof": false
+  },
+  "authority_inputs": [
+    "AMB-1819",
+    "AMB-1698",
+    "docs/truth/CODEX_START_HERE.md",
+    "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+    "docs/truth/IMPLEMENTATION_TRUTH.md",
+    "docs/truth/CODEX_PROCESS_TRUTH.md",
+    ".agents/skills/README.md",
+    ".agents/skills/ambitions-source-truth-authority/SKILL.md",
+    ".agents/skills/ambitions-architecture-tree-enforcement/SKILL.md",
+    ".agents/skills/ambitions-ios-quality-gate/SKILL.md",
+    ".agents/skills/ambitions-release-proof-honesty/SKILL.md"
+  ],
+  "selected_owner": {
+    "old_name": "ObjectStage layout primitive package source",
+    "new_owner": "DesignSystem/StagePrimitives/ProductObjectFrame",
+    "reason": [
+      "source_present",
+      "layout_primitive_not_runtime_authority",
+      "canonical_owner_already_exists",
+      "small_active_reference_set",
+      "other_amb_1698_queue_names_already_absent_or_too_broad_for_this_leaf"
+    ]
+  },
+  "source_changes": {
+    "canonical_owner": "Native/Ambitions/DesignSystem/StagePrimitives/ProductObjectFrame.swift",
+    "deleted_files": [
+      "Sources/Components/ObjectStageSurfaces.swift",
+      "Sources/Components/FlagshipObjectStagePrimitives.swift"
+    ],
+    "old_symbols_removed_from_active_source": [
+      "ObjectStageSurface",
+      "ObjectStageGlance",
+      "ObjectStageHero",
+      "FlagshipObjectStage",
+      "FlagshipStepToken",
+      "FlagshipInspectionDisclosure",
+      "FlagshipSettingsGroup"
+    ],
+    "replacement_roles": {
+      "ObjectStageSurface": "ProductObjectFrame role rootPrimaryObject",
+      "ObjectStageGlance": "ProductObjectFrame role detailObject",
+      "ObjectStageHero": "ProductObjectFrame role overlayObject"
+    },
+    "call_site_roots_updated": [
+      "Native/Ambitions/DesignSystem/ProductObjects",
+      "Native/Ambitions/Surfaces/You"
+    ],
+    "provenance_paths_updated": [
+      "docs/design/provenance/vsp-provenance.json",
+      "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json"
+    ]
+  },
+  "scope_boundary": {
+    "full_naming_campaign_green": false,
+    "private_life_runtime_kernel_collapsed": false,
+    "object_stage_contracts_renamed": false,
+    "runtime_authority_changed": false,
+    "new_architecture_noun_added": false,
+    "new_suffix_files_added": false
+  },
+  "validation": {
+    "status": "static_guards_passed_tests_not_run_post_commit_xcodegen_clean",
+    "commands_run": [
+      {
+        "command": "rg selected old ObjectStage package symbols across active source/provenance scopes",
+        "result": "passed_0_active_hits_before_packet"
+      },
+      {
+        "command": "jq -e . docs/design/provenance/vsp-provenance.json",
+        "result": "passed"
+      },
+      {
+        "command": "jq -e . docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json",
+        "result": "passed"
+      },
+      {
+        "command": "git diff --check",
+        "result": "passed"
+      },
+      {
+        "command": "jq -e . docs/audits/amb-1819-naming-simplification-objectstage-frame.json",
+        "result": "passed"
+      },
+      {
+        "command": "npx markdownlint-cli2 --no-globs docs/audits/amb-1819-naming-simplification-objectstage-frame.md",
+        "result": "passed_0_errors"
+      },
+      {
+        "command": "python3 scripts/ambitions-unsupported-claim-scan.py docs/audits/amb-1819-naming-simplification-objectstage-frame.md docs/audits/amb-1819-naming-simplification-objectstage-frame.json docs/design/provenance/vsp-provenance.json docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json",
+        "result": "passed"
+      },
+      {
+        "command": "scripts/release-claim-safety-scan.sh docs/audits/amb-1819-naming-simplification-objectstage-frame.md docs/audits/amb-1819-naming-simplification-objectstage-frame.json docs/design/provenance/vsp-provenance.json docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json",
+        "result": "passed"
+      },
+      {
+        "command": "xcodegen generate --spec project.yml",
+        "result": "passed_generated_project"
+      },
+      {
+        "command": "python3 scripts/ambitions-remediation-governance-check.py",
+        "result": "passed_changed_paths_21_suffixSplitFiles_224_blockedSuffixSplitFiles_182_architectureNounFiles_357_overHardLineCapFiles_0"
+      },
+      {
+        "command": "python3 scripts/ambitions-architecture-inventory.py",
+        "result": "passed_final_tree_parity"
+      },
+      {
+        "command": "python3 scripts/ambitions-vocabulary-drift-scan.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-truth-path-vocabulary-audit.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-green-standard-audit.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-accepted-yellow-misuse-audit.py",
+        "result": "passed"
+      },
+      {
+        "command": "python3 scripts/ambitions-screenshot-artifact-audit.py",
+        "result": "passed_static_guard_no_screenshot_artifact_produced"
+      },
+      {
+        "command": "python3 scripts/ambitions-device-proof-required.py",
+        "result": "passed_static_guard_no_device_proof_produced"
+      },
+      {
+        "command": "scripts/no-unsupported-ai-claim-scan.sh docs/audits/amb-1819-naming-simplification-objectstage-frame.md docs/audits/amb-1819-naming-simplification-objectstage-frame.json docs/design/provenance/vsp-provenance.json docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json",
+        "result": "completed_advisory_hits_reviewed_as_context"
+      },
+      {
+        "command": "scripts/privacy-boundary-scan.sh docs/audits/amb-1819-naming-simplification-objectstage-frame.md docs/audits/amb-1819-naming-simplification-objectstage-frame.json docs/design/provenance/vsp-provenance.json docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json",
+        "result": "completed_advisory_hits_reviewed_as_context"
+      },
+      {
+        "command": "scripts/ambitions-xcodegen-needed.sh",
+        "result": "pre_commit_xcodegen_needed_1_due_dirty_swift_source_paths_then_post_commit_xcodegen_needed_0_project_build_inputs_unchanged"
+      }
+    ],
+    "commands_not_run": [
+      "focused_owner_xctest",
+      "full_xctest",
+      "build",
+      "simulator",
+      "screenshot_capture",
+      "physical_device",
+      "performance",
+      "signed_archive",
+      "app_store_connect_validation"
+    ]
+  },
+  "proof_ceiling": {
+    "allowed_claims": [
+      "amb_1819_selected_objectstage_layout_primitive_collapsed",
+      "active_old_package_symbols_removed",
+      "no_runtime_authority_added"
+    ],
+    "forbidden_claims": [
+      "amb_1698_green",
+      "private_life_runtime_kernel_collapsed",
+      "full_objectstage_vocabulary_eliminated",
+      "focused_tests_passed",
+      "build_validation_passed",
+      "simulator_validation_passed",
+      "device_proof_exists",
+      "release_proof_exists",
+      "testflight_readiness",
+      "app_store_readiness",
+      "release_green"
+    ]
+  },
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_touched": [
+      "DesignSystem/StagePrimitives",
+      "DesignSystem/ProductObjects",
+      "Surfaces/You",
+      "provenance_docs"
+    ],
+    "noncanonical_owners_removed": [
+      "Sources/Components/ObjectStageSurfaces.swift",
+      "Sources/Components/FlagshipObjectStagePrimitives.swift"
+    ],
+    "files_created": [
+      "docs/audits/amb-1819-naming-simplification-objectstage-frame.md",
+      "docs/audits/amb-1819-naming-simplification-objectstage-frame.json"
+    ],
+    "compatibility_shims_left": [],
+    "yellow_debt": [
+      "full_amb_1698_naming_campaign",
+      "private_life_runtime_kernel_collapse",
+      "remaining_objectstage_primitive_contract_names",
+      "focused_test_execution",
+      "build_validation",
+      "simulator_proof",
+      "release_proof"
+    ],
+    "equivalent_path_interpretation_used": false
+  }
+}

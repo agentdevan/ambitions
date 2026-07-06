@@ -200,7 +200,7 @@ struct GoalsHeroSurface: View {
     let onPrimaryAction: (GoalsAtlasPrimaryAction) -> Void
 
     var body: some View {
-        ObjectStageHero(state: overview.heroPrimaryAction.state) {
+        ProductObjectFrame(role: .overlayObject, state: overview.heroPrimaryAction.state) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 VStack(alignment: .leading, spacing: theme.spacing.xxs) {
                     Text(overview.hero.eyebrow)
@@ -291,7 +291,7 @@ struct GoalsWeekPressureSurface: View {
     let summary: GoalsWeekPressureSummary
 
     var body: some View {
-        ObjectStageSurface {
+        ProductObjectFrame {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 HStack(alignment: .top, spacing: theme.spacing.sm) {
                     VStack(alignment: .leading, spacing: theme.spacing.xxxs) {

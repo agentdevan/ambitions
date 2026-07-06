@@ -83,10 +83,10 @@
       "vsp": "VSP-02 Today Reality Window",
       "figma_node_id": "11:25",
       "figma_component": "CANDIDATE — TodayStepObject",
-      "code_connect_target": "StartHereProductProofStack / FlagshipStepToken",
+      "code_connect_target": "StartHereProductProofStack / ProductObjectFrame",
       "source_owners": [
         "Sources/Components/StartHereProductPrimitives.swift",
-        "Sources/Components/FlagshipObjectStagePrimitives.swift"
+        "Native/Ambitions/DesignSystem/StagePrimitives/ProductObjectFrame.swift"
       ],
       "provenance": "Existing SwiftUI primitive plus VSP object-state wrapper needs parity review",
       "status": "Code Connect-ready; Figma plan seat blocks publish",
@@ -149,11 +149,10 @@
       "vsp": "VSP-07 Trust Inspection Seams",
       "figma_node_id": "11:120",
       "figma_component": "CANDIDATE — TrustSeamObject",
-      "code_connect_target": "SourceTrustReceiptStrip / TrustSeamDisclosure / FlagshipInspectionDisclosure",
+      "code_connect_target": "SourceTrustReceiptStrip / TrustSeam / ProductObjectFrame",
       "source_owners": [
         "Sources/Components/TrustReceiptLayerPrimitives+02-SourceTrustReceiptStrip.swift",
-        "Sources/Components/ObjectStageSurfaces.swift",
-        "Sources/Components/FlagshipObjectStagePrimitives.swift"
+        "Native/Ambitions/DesignSystem/StagePrimitives/ProductObjectFrame.swift"
       ],
       "provenance": "Existing SwiftUI primitives",
       "status": "Code Connect-ready; Figma plan seat blocks publish",

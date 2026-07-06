@@ -128,7 +128,7 @@ struct YouTrustCenterSurface: View {
     let onEnableNotifications: () -> Void
 
     var body: some View {
-        ObjectStageSurface {
+        ProductObjectFrame {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     eyebrow: "Trust",

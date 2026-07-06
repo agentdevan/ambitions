@@ -11,7 +11,7 @@ struct YouLifeContextSurface: View {
     let lifeContext: YouLifeContextState
 
     var body: some View {
-        ObjectStageSurface {
+        ProductObjectFrame {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     eyebrow: "Life Context",
@@ -98,7 +98,7 @@ struct YouLifeContextSectionDisclosure: View {
     @Binding var isExpanded: Bool
 
     var body: some View {
-        ObjectStageSurface {
+        ProductObjectFrame {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 Button {
                     isExpanded.toggle()

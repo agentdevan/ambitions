@@ -51,7 +51,7 @@ struct YouSourceAtlasKnowledgeSurface: View {
     let sourceAtlasKnowledge: YouSourceAtlasKnowledgeState
 
     var body: some View {
-        ObjectStageSurface {
+        ProductObjectFrame {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     eyebrow: "Source Atlas",
@@ -289,7 +289,7 @@ struct YouMemoryPatternRow: View {
     let pattern: YouMemoryPattern
 
     var body: some View {
-        ObjectStageGlance(state: pattern.state) {
+        ProductObjectFrame(role: .detailObject, state: pattern.state) {
             VStack(alignment: .leading, spacing: theme.spacing.xs) {
                 HStack(alignment: .firstTextBaseline) {
                     Text(pattern.title)
@@ -316,7 +316,7 @@ struct YouAutomationBoundarySurface: View {
     let boundary: YouAutomationBoundaryState
 
     var body: some View {
-        ObjectStageSurface {
+        ProductObjectFrame {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     eyebrow: "Boundaries",

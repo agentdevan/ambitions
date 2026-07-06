@@ -165,7 +165,7 @@ struct LifePathThreadSurface: View {
     var sourceFold: some View {
         let source = state.sourceFold
 
-        return ObjectStageSurface(state: source.state) {
+        return ProductObjectFrame(state: source.state) {
             VStack(alignment: .leading, spacing: theme.spacing.xs) {
                 Label(source.title, systemImage: "doc.text.magnifyingglass")
                     .font(theme.typography.micro)

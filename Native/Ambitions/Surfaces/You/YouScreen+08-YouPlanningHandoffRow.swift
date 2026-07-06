@@ -133,7 +133,7 @@ struct YouAppearanceStudioSurface: View {
     let previewColumns = [GridItem(.flexible()), GridItem(.flexible())]
 
     var body: some View {
-        ObjectStageSurface {
+        ProductObjectFrame {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     eyebrow: "Appearance",

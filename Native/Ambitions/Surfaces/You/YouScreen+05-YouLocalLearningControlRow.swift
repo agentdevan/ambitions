@@ -75,7 +75,7 @@ struct YouEverythingSearchSurface: View {
     let search: YouEverythingSearchState
 
     var body: some View {
-        ObjectStageSurface {
+        ProductObjectFrame {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     eyebrow: "Search",

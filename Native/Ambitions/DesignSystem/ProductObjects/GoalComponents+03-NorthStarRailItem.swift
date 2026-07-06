@@ -54,7 +54,7 @@ struct GoalsOneStepGoalsPanel: View {
     let onPromote: (GoalsOneStepGoalPanelItemState) -> Void
 
     var body: some View {
-        ObjectStageSurface {
+        ProductObjectFrame {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: state.title, subtitle: state.subtitle)
 
@@ -144,7 +144,7 @@ struct GoalsAtlasBandSection: View {
     let band: GoalsAtlasBand
 
     var body: some View {
-        ObjectStageSurface {
+        ProductObjectFrame {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: band.title, subtitle: band.subtitle)
 
@@ -283,7 +283,7 @@ struct GoalsLowerPriorityDisclosureSection: View {
     let onToggle: () -> Void
 
     var body: some View {
-        ObjectStageSurface {
+        ProductObjectFrame {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: state.title, subtitle: state.subtitle) {
                     Button(isExpanded ? "Hide" : state.disclosureTitle, action: onToggle)

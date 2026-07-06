@@ -218,7 +218,7 @@
         ],
         "known_component_candidates": [
           "Sources/Components/StartHereProductPrimitives.swift",
-          "Sources/Components/FlagshipObjectStagePrimitives.swift",
+          "Native/Ambitions/DesignSystem/StagePrimitives/ProductObjectFrame.swift",
           "Sources/Components/LifeDirectionalIntegrationPrimitives.swift",
           "Sources/Components/RealityMeridianTemporalPrimitives.swift",
           "Sources/Components/RealityMeridianTimeBand.swift"
@@ -384,7 +384,7 @@
         "known_component_candidates": [
           "Sources/Components/FE09ComponentSystemPrimitives.swift",
           "Sources/Components/GroupedNavigationList.swift",
-          "Sources/Components/FlagshipObjectStagePrimitives.swift"
+          "Native/Ambitions/DesignSystem/StagePrimitives/ProductObjectFrame.swift"
         ],
         "known_tests": [
           "Native/AmbitionsTests/Goals/GoalsConstellationAtlasReconstructionTests.swift",
@@ -1054,8 +1054,7 @@
         ],
         "known_component_candidates": [
           "Sources/Components/TrustReceiptLayerPrimitives+02-SourceTrustReceiptStrip.swift",
-          "Sources/Components/ObjectStageSurfaces.swift",
-          "Sources/Components/FlagshipObjectStagePrimitives.swift"
+          "Native/Ambitions/DesignSystem/StagePrimitives/ProductObjectFrame.swift"
         ],
         "known_tests": [
           "Native/AmbitionsTests/Trust/SourceInspectionPresentationTests.swift",

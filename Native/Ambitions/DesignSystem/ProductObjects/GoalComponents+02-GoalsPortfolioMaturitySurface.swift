@@ -7,7 +7,7 @@ struct GoalsPortfolioMaturitySurface: View {
     let summary: GoalPortfolioMaturitySummary
 
     var body: some View {
-        ObjectStageSurface {
+        ProductObjectFrame {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: summary.title, subtitle: summary.subtitle)
 
@@ -69,7 +69,7 @@ struct GoalsLifecycleRailSurface: View {
     let segments: [GoalLifecycleRailSegment]
 
     var body: some View {
-        ObjectStageSurface {
+        ProductObjectFrame {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: "Ambition portfolio", subtitle: "Previous, active, and future goals stay oriented without becoming a spreadsheet.")
 
@@ -111,7 +111,7 @@ struct GoalStateChipsSurface: View {
     let chips: [GoalStateChipState]
 
     var body: some View {
-        ObjectStageSurface {
+        ProductObjectFrame {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 SectionHeader(title: "State signals", subtitle: "Kept in view, waiting, blocked, parked, completed, and cancelled remain distinct.")
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 132), spacing: theme.spacing.xs)], alignment: .leading, spacing: theme.spacing.xs) {
@@ -139,7 +139,7 @@ struct GoalsLifeAreasPanel: View {
     let onZoomModeChange: (GoalsSemanticZoomMode) -> Void
 
     var body: some View {
-        ObjectStageSurface {
+        ProductObjectFrame {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: state.title, subtitle: state.subtitle)
                 Text(state.equalWeightSummary)
@@ -319,7 +319,7 @@ struct GoalsNorthStarsRailSurface: View {
     let state: GoalsNorthStarsRailState
 
     var body: some View {
-        ObjectStageSurface {
+        ProductObjectFrame {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: state.title, subtitle: state.subtitle)
 

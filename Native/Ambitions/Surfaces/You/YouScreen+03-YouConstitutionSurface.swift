@@ -9,7 +9,7 @@ struct YouConstitutionSurface: View {
     let constitution: YouConstitutionState
 
     var body: some View {
-        ObjectStageSurface {
+        ProductObjectFrame {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     eyebrow: "Constitution",
@@ -54,7 +54,7 @@ struct YouMemoryControlsSurface: View {
     let memoryControls: YouMemoryControlState
 
     var body: some View {
-        ObjectStageSurface {
+        ProductObjectFrame {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     eyebrow: "Memory",

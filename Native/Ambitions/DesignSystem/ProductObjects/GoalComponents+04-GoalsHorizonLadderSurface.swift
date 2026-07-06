@@ -7,7 +7,7 @@ struct GoalsHorizonLadderSurface: View {
     let state: GoalsHorizonLadderState
 
     var body: some View {
-        ObjectStageSurface {
+        ProductObjectFrame {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: state.title, subtitle: state.subtitle)
 
@@ -66,7 +66,7 @@ struct GoalAtlasPreviewSurface: View {
     let state: GoalAtlasPreviewState
 
     var body: some View {
-        ObjectStageSurface {
+        ProductObjectFrame {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: state.title, subtitle: state.subtitle)
 
@@ -122,7 +122,7 @@ struct GoalArchiveSummarySurface: View {
     let summary: GoalPortfolioArchiveSummary
 
     var body: some View {
-        ObjectStageSurface {
+        ProductObjectFrame {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 SectionHeader(title: summary.title, subtitle: summary.subtitle)
                 HStack(spacing: theme.spacing.xs) {
@@ -177,7 +177,7 @@ struct GoalDetailHeroSurface: View {
     let detail: GoalDetailPresentation
 
     var body: some View {
-        ObjectStageHero(state: detail.headline.renderState.visualState, accent: detail.supportModeActive ? theme.colors.accentWarm : nil) {
+        ProductObjectFrame(role: .overlayObject, state: detail.headline.renderState.visualState, accent: detail.supportModeActive ? theme.colors.accentWarm : nil) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 HStack(alignment: .top, spacing: theme.spacing.sm) {
                     VStack(alignment: .leading, spacing: theme.spacing.xxs) {
