@@ -1,0 +1,200 @@
+{
+  "issues": [
+    "AMB-1804",
+    "AMB-1805",
+    "AMB-1806",
+    "AMB-1807"
+  ],
+  "status": "Implemented Yellow static/source closeout",
+  "date": "2026-07-06T02:46:45Z",
+  "branch": "main",
+  "baseline_main_sha": "4e957645d615db5185df04fa220cc3962cf74b28",
+  "commit_sha": "pending local commit; final commit SHA is recorded in Linear after commit and push",
+  "environment": "local Codex macOS workspace at /Users/devan/Documents/GitHub/ambitions",
+  "xcode_version": "Xcode 26.6, build version 17F113",
+  "simulator_or_device": "No simulator app launch, XCTest, UI test, screenshot, accessibility, performance, archive, upload, or physical-device procedure is claimed.",
+  "project": {
+    "name": "Architecture Simplification + Flagship Readiness Remediation",
+    "id": "59c3917f-f662-4ca3-b412-b532613f3a7a"
+  },
+  "artifact_paths": [
+    "docs/linear/reconciliation/2026-07-06-amb-1804-1807-static-review.md",
+    "docs/linear/reconciliation/2026-07-06-amb-1804-1807-static-review.json"
+  ],
+  "proof_metadata_text": {
+    "Validation run": "See validation_run for commands completed for this packet.",
+    "Validation not run": "See validation_not_run for builds, tests, runtime proof, device proof, release procedures, and approval procedures not run.",
+    "Non-Claims": "See non_claims for unsupported readiness and Green claims.",
+    "Branch": "main",
+    "Commit SHA": "pending local commit; final commit SHA is recorded in Linear after commit and push",
+    "Environment": "local Codex macOS workspace at /Users/devan/Documents/GitHub/ambitions",
+    "Xcode version": "Xcode 26.6, build version 17F113",
+    "Simulator or device": "No simulator app launch, XCTest, UI test, screenshot, accessibility, performance, archive, upload, or physical-device procedure is claimed.",
+    "Exit code": "See each validation_run entry.",
+    "Artifact paths": "This JSON file and the paired Markdown packet."
+  },
+  "reviewed_existing_leaf_evidence": [
+    "docs/qa/evidence/2026-07-05-amb-1804-privacy-manifest-inventory/manifest.md",
+    "docs/qa/evidence/2026-07-05-amb-1805-file-protection-data-class-matrix/manifest.md",
+    "docs/qa/evidence/2026-07-05-amb-1806-app-group-snapshot-writer-inventory/manifest.md",
+    "docs/qa/evidence/2026-07-05-amb-1807-export-import-reset-scope-matrix/manifest.md"
+  ],
+  "source_changes": [
+    {
+      "path": "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceSourceAtlasRowsProjection.swift",
+      "change": "Added exhaustive receipt title handling for SourceAtlasBridgeReceiptKind.sourceAtlasInfluenceReceiptRecorded.",
+      "canonical_owner": "Surfaces/You/Projection"
+    }
+  ],
+  "issue_disposition": [
+    {
+      "issue": "AMB-1804",
+      "disposition": "Done within static/source leaf scope",
+      "proof_ceiling": "Implemented Yellow; no legal/privacy/App Store/build proof"
+    },
+    {
+      "issue": "AMB-1805",
+      "disposition": "Done within static/source leaf scope",
+      "proof_ceiling": "Implemented Yellow; no XCTest, locked-device, LocalAuthentication, or physical-device proof"
+    },
+    {
+      "issue": "AMB-1806",
+      "disposition": "Done within static/source leaf scope",
+      "proof_ceiling": "Implemented Yellow; no widget launch, Live Activity lifecycle, XCTest, or device proof"
+    },
+    {
+      "issue": "AMB-1807",
+      "disposition": "Done within static/source leaf scope",
+      "proof_ceiling": "Implemented Yellow; no import/reset execution, XCTest, simulator launch, or device proof"
+    }
+  ],
+  "live_tracker_state_before_close": {
+    "ready_for_review": [
+      "AMB-1804",
+      "AMB-1805",
+      "AMB-1806",
+      "AMB-1807"
+    ],
+    "todo": [],
+    "needs_repair": [],
+    "backlog": [],
+    "in_progress_parents_include": [
+      "AMB-1683",
+      "AMB-1684",
+      "AMB-1685",
+      "AMB-1686"
+    ]
+  },
+  "validation_run": [
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "command": "xcodegen generate --spec project.yml",
+      "exit_code": 0,
+      "result": "project regenerated locally; no tracked project diff appeared"
+    },
+    {
+      "command": "scripts/ambitions-xcodegen-needed.sh",
+      "exit_code": 0,
+      "result": "reported XCODEGEN_NEEDED=1 because Swift source is dirty before commit; project generation was run"
+    },
+    {
+      "command": "python3 scripts/ambitions-remediation-governance-check.py --json",
+      "exit_code": 0,
+      "result": "valid=true, findingCount=0, changedPathCount=1"
+    },
+    {
+      "command": "python3 scripts/ambitions-accepted-yellow-misuse-audit.py --json",
+      "exit_code": 0,
+      "result": "invalidAcceptedYellowIssues=[]"
+    },
+    {
+      "command": "python3 scripts/ambitions-quality-gate.py",
+      "exit_code": 0,
+      "result": "all strict quality gates passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-architecture-inventory.py",
+      "exit_code": 0,
+      "result": "final-tree parity achieved"
+    },
+    {
+      "command": "python3 scripts/ambitions-green-standard-audit.py",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-vocabulary-drift-scan.py",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+      "exit_code": 0,
+      "result": "passed"
+    }
+  ],
+  "validation_not_run": [
+    "xcodebuild build",
+    "xcodebuild build-for-testing",
+    "XCTest",
+    "UI tests",
+    "simulator app launch",
+    "widget runtime proof",
+    "Live Activity lifecycle proof",
+    "locked-device file-protection procedure",
+    "LocalAuthentication prompt proof",
+    "export/import/reset execution",
+    "App Store Connect privacy report",
+    "legal/privacy review",
+    "archive",
+    "TestFlight upload",
+    "App Store upload",
+    "physical-device procedure"
+  ],
+  "non_claims": [
+    "Implemented Green",
+    "final architecture Green",
+    "build/test pass",
+    "release readiness",
+    "TestFlight readiness",
+    "App Store readiness",
+    "privacy/legal approval",
+    "device proof",
+    "accessibility Green",
+    "screenshot Green",
+    "performance Green",
+    "widget lifecycle Green",
+    "Live Activity Green",
+    "LocalAuthentication Green",
+    "locked-device Green",
+    "import/reset Green",
+    "runtime Green"
+  ],
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_touched": [
+      "Surfaces/You/Projection"
+    ],
+    "files_created": [
+      "docs/linear/reconciliation/2026-07-06-amb-1804-1807-static-review.md",
+      "docs/linear/reconciliation/2026-07-06-amb-1804-1807-static-review.json"
+    ],
+    "files_moved": [],
+    "source_files_edited": [
+      "Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceSourceAtlasRowsProjection.swift"
+    ],
+    "old_noncanonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "new_suffix_split_files_added": [],
+    "new_broad_models_files_added": [],
+    "new_runtime_or_source_atlas_authority_added": false,
+    "yellow_debt_remains": true,
+    "next_repair_train": "Continue open parent issues once build/device proof is re-enabled.",
+    "equivalent_folder_interpretation_used": false
+  },
+  "build_proof_instruction": "Build proof is skipped under the current user instruction until advised otherwise."
+}

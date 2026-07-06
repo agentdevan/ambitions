@@ -290,6 +290,8 @@ extension RepositoryBackedYouService {
             return "Public context applied"
         case .sourceAtlasPublicContextRejected:
             return "Public context rejected"
+        case .sourceAtlasInfluenceReceiptRecorded:
+            return "Influence receipt recorded"
         case .sourceAtlasPathComposed:
             return "Path composed"
         case .sourceAtlasPathRejected:
