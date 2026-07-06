@@ -88,7 +88,7 @@ final class AppGroupSnapshotWriterInventoryTests: XCTestCase {
     }
 
     private func swiftFiles(in directories: [String], root: URL) throws -> [String] {
-        try directories.flatMap { directory in
+        try directories.flatMap { directory -> [String] in
             let rootURL = root.appendingPathComponent(directory, isDirectory: true)
             guard let enumerator = FileManager.default.enumerator(
                 at: rootURL,

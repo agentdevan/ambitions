@@ -125,7 +125,7 @@ final class AppIntentCommandRoutingInventoryTests: XCTestCase {
         XCTAssertTrue(projectionRecords.allSatisfy { record in
             record.routeURLString?.contains("origin=app_intent") == true
         })
-        XCTAssertFalse(projectionRecords.map(\.routeURLString).joined(separator: " ").contains("Private Therapy Goal"))
+        XCTAssertFalse(projectionRecords.compactMap(\.routeURLString).joined(separator: " ").contains("Private Therapy Goal"))
     }
 
     private func record(id: String) -> AppIntentCommandRoutingRecord {

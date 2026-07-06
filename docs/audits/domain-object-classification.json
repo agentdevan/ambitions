@@ -217,7 +217,6 @@
       "Native/Ambitions/Core/Domain/AmbitionsOSLivingDreamTrustReceiptModels.swift",
       "Native/Ambitions/Core/Domain/AmbitionsOSLocalGoalPackModels.swift",
       "Native/Ambitions/Core/Domain/AmbitionsOSLocalLanguageModels.swift",
-      "Native/Ambitions/Core/Domain/AmbitionsOSLongevityModels.swift",
       "Native/Ambitions/Core/Domain/AmbitionsOSOptionValueModels.swift",
       "Native/Ambitions/Core/Domain/AmbitionsOSPerformanceEnergyModels.swift",
       "Native/Ambitions/Core/Domain/AmbitionsOSPrivacySafetyModels.swift",
@@ -552,14 +551,6 @@
       "loopRole": "Path",
       "migrationAction": "split-rename-or-delete-before-amb-1676-green",
       "path": "Native/Ambitions/Core/Domain/AmbitionsOSLocalLanguageModels.swift",
-      "reason": "product-doctrine-or-tail-gate-bucket"
-    },
-    {
-      "category": "obsolete",
-      "confidence": "medium",
-      "loopRole": "Path",
-      "migrationAction": "split-rename-or-delete-before-amb-1676-green",
-      "path": "Native/Ambitions/Core/Domain/AmbitionsOSLongevityModels.swift",
       "reason": "product-doctrine-or-tail-gate-bucket"
     },
     {
@@ -2000,7 +1991,7 @@
       "canonical_entity": 10,
       "command_payload": 23,
       "event_payload": 15,
-      "obsolete": 40,
+      "obsolete": 39,
       "projection_dto": 17,
       "ui_model": 8,
       "value_object": 97
@@ -2010,7 +2001,7 @@
       "Context": 74,
       "Intent": 25,
       "Learning": 2,
-      "Path": 94,
+      "Path": 93,
       "Proof": 7,
       "Reflow": 4,
       "Time Fit": 6
@@ -2024,10 +2015,10 @@
       "move-to-projection-or-feature-local-projection-when-touched": 6,
       "rename-mechanical-suffix-to-semantic-owner": 77,
       "review-for-semantic-file-name-or-keep-as-domain-value": 72,
-      "split-rename-or-delete-before-amb-1676-green": 40
+      "split-rename-or-delete-before-amb-1676-green": 39
     },
-    "obsoleteBucketDebtCount": 40,
-    "totalDomainSwiftFiles": 217,
+    "obsoleteBucketDebtCount": 39,
+    "totalDomainSwiftFiles": 216,
     "uiModelDebtCount": 8
   }
 }

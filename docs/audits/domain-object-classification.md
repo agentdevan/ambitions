@@ -6,10 +6,10 @@ This artifact tags every current `Native/Ambitions/Core/Domain` Swift file with 
 
 ## Summary
 
-- Total Core/Domain Swift files: 217
+- Total Core/Domain Swift files: 216
 - Mechanical suffix debt files: 77
 - UI model debt files still in Domain: 8
-- Obsolete/product-doctrine bucket files: 40
+- Obsolete/product-doctrine bucket files: 39
 - Low-confidence default classifications: 97
 
 ## Category Counts
@@ -20,7 +20,7 @@ This artifact tags every current `Native/Ambitions/Core/Domain` Swift file with 
 | `canonical_entity` | 10 |
 | `command_payload` | 23 |
 | `event_payload` | 15 |
-| `obsolete` | 40 |
+| `obsolete` | 39 |
 | `projection_dto` | 17 |
 | `ui_model` | 8 |
 | `value_object` | 97 |
@@ -68,7 +68,6 @@ This artifact tags every current `Native/Ambitions/Core/Domain` Swift file with 
 | `Native/Ambitions/Core/Domain/AmbitionsOSLivingDreamTrustReceiptModels.swift` | `obsolete` | Path | `split-rename-or-delete-before-amb-1676-green` | product-doctrine-or-tail-gate-bucket | medium |
 | `Native/Ambitions/Core/Domain/AmbitionsOSLocalGoalPackModels.swift` | `obsolete` | Path | `split-rename-or-delete-before-amb-1676-green` | product-doctrine-or-tail-gate-bucket | medium |
 | `Native/Ambitions/Core/Domain/AmbitionsOSLocalLanguageModels.swift` | `obsolete` | Path | `split-rename-or-delete-before-amb-1676-green` | product-doctrine-or-tail-gate-bucket | medium |
-| `Native/Ambitions/Core/Domain/AmbitionsOSLongevityModels.swift` | `obsolete` | Path | `split-rename-or-delete-before-amb-1676-green` | product-doctrine-or-tail-gate-bucket | medium |
 | `Native/Ambitions/Core/Domain/AmbitionsOSOptionValueModels.swift` | `obsolete` | Path | `split-rename-or-delete-before-amb-1676-green` | product-doctrine-or-tail-gate-bucket | medium |
 | `Native/Ambitions/Core/Domain/AmbitionsOSPerformanceEnergyModels.swift` | `obsolete` | Path | `split-rename-or-delete-before-amb-1676-green` | product-doctrine-or-tail-gate-bucket | medium |
 | `Native/Ambitions/Core/Domain/AmbitionsOSPrivacySafetyModels.swift` | `obsolete` | Context | `split-rename-or-delete-before-amb-1676-green` | product-doctrine-or-tail-gate-bucket | medium |
