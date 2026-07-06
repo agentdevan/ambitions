@@ -1,0 +1,276 @@
+{
+  "issue": "AMB-1705",
+  "status": "Accepted Yellow closeout",
+  "date": "2026-07-06T01:41:29Z",
+  "branch": "main",
+  "baseline_main_sha": "b52ca5019918a8c19b752aac448f02840c146de7",
+  "commit_sha": "pending local packet commit; final commit SHA is recorded in Linear after commit and push",
+  "environment": "local Codex macOS workspace at /Users/devan/Documents/GitHub/ambitions",
+  "xcode_version": "Xcode 26.6, build version 17F113",
+  "simulator_or_device": "MCP transport/configuration probe only; no app launch, XCTest, UI test, screenshot, accessibility, performance, archive, upload, or physical-device procedure is claimed",
+  "artifact_paths": [
+    "docs/linear/reconciliation/2026-07-06-amb-1705-final-architecture-closeout.md",
+    "docs/linear/reconciliation/2026-07-06-amb-1705-final-architecture-closeout.json"
+  ],
+  "proof_metadata_text": {
+    "Validation run": "See validation_run for commands completed for this packet.",
+    "Validation not run": "See validation_not_run for tests, builds, runtime proof, device proof, release procedures, and approval procedures not run.",
+    "Non-Claims": "See non_claims for unsupported readiness and Green claims.",
+    "Branch": "main",
+    "Commit SHA": "pending local packet commit; final commit SHA is recorded in Linear after commit and push",
+    "Environment": "local Codex macOS workspace at /Users/devan/Documents/GitHub/ambitions",
+    "Xcode version": "Xcode 26.6, build version 17F113",
+    "Simulator or device": "MCP transport/configuration probe only; no app launch, XCTest, UI test, screenshot, accessibility, performance, archive, upload, or physical-device procedure is claimed",
+    "Exit code": "See each validation_run entry.",
+    "Artifact paths": "This JSON file and the paired Markdown packet."
+  },
+  "live_tracker_state": {
+    "needs_repair_before_close": ["AMB-1705"],
+    "ready_for_codex": [],
+    "ready_for_review": ["AMB-1804", "AMB-1805", "AMB-1806", "AMB-1807"],
+    "spec_ready": ["AMB-1682", "AMB-1691"],
+    "in_progress": [
+      "AMB-1676",
+      "AMB-1677",
+      "AMB-1678",
+      "AMB-1679",
+      "AMB-1681",
+      "AMB-1683",
+      "AMB-1684",
+      "AMB-1685",
+      "AMB-1686",
+      "AMB-1687",
+      "AMB-1688",
+      "AMB-1689",
+      "AMB-1690",
+      "AMB-1692",
+      "AMB-1693",
+      "AMB-1694",
+      "AMB-1695",
+      "AMB-1696",
+      "AMB-1697",
+      "AMB-1698",
+      "AMB-1699",
+      "AMB-1700"
+    ],
+    "accepted_yellow": [
+      "AMB-1665",
+      "AMB-1668",
+      "AMB-1708",
+      "AMB-1709",
+      "AMB-1710",
+      "AMB-1713",
+      "AMB-1714",
+      "AMB-1715",
+      "AMB-1716",
+      "AMB-1717",
+      "AMB-1718",
+      "AMB-1720",
+      "AMB-1721",
+      "AMB-1722",
+      "AMB-1723",
+      "AMB-1724",
+      "AMB-1725",
+      "AMB-1726",
+      "AMB-1727",
+      "AMB-1728",
+      "AMB-1810",
+      "AMB-1812",
+      "AMB-1813"
+    ],
+    "direct_child_done": ["AMB-1826"]
+  },
+  "scorecard": [
+    {
+      "dimension": "iOS-native leverage",
+      "target": 9.0,
+      "current": 8.0,
+      "status": "Yellow"
+    },
+    {
+      "dimension": "SwiftUI leverage",
+      "target": 8.5,
+      "current": 8.0,
+      "status": "Yellow"
+    },
+    {
+      "dimension": "runtime authority",
+      "target": 8.5,
+      "current": 7.5,
+      "status": "Yellow"
+    },
+    {
+      "dimension": "privacy/local-first",
+      "target": 9.5,
+      "current": 8.5,
+      "status": "Yellow"
+    },
+    {
+      "dimension": "testing/QA",
+      "target": 9.0,
+      "current": 6.5,
+      "status": "Yellow"
+    },
+    {
+      "dimension": "release readiness",
+      "target": 8.5,
+      "current": 4.0,
+      "status": "Yellow"
+    },
+    {
+      "dimension": "naming",
+      "target": 8.0,
+      "current": 7.0,
+      "status": "Yellow"
+    },
+    {
+      "dimension": "file hygiene",
+      "target": 8.0,
+      "current": 6.5,
+      "status": "Yellow"
+    },
+    {
+      "dimension": "new-engineer comprehensibility",
+      "target": 8.0,
+      "current": 7.0,
+      "status": "Yellow"
+    },
+    {
+      "dimension": "over-engineering risk",
+      "target_max": 4.0,
+      "current": 5.0,
+      "status": "Yellow"
+    }
+  ],
+  "supersedes_for_current_status": [
+    "01199fdf reconciliation evidence",
+    "docs/linear/reconciliation/2026-07-05-amb-1826-pre-scorecard-blocker-inventory.md status counts"
+  ],
+  "remaining_app_aspect_gaps": [
+    "AMB-1682 Source Atlas influence receipts and replay",
+    "AMB-1683 and AMB-1804 privacy manifest and App Store disclosure review",
+    "AMB-1684 and AMB-1805 file protection and local authentication proof",
+    "AMB-1685 and AMB-1806 App Group snapshot safety review",
+    "AMB-1686 and AMB-1807 export/import/reset hardening review",
+    "AMB-1687 App Intents runtime invocation and terminated-app/device proof",
+    "AMB-1688 widget/Live Activity rendered proof and lifecycle proof",
+    "AMB-1689 background task lifecycle/device proof",
+    "AMB-1690 EventKit/Reminders real permission/device proof",
+    "AMB-1691 Xcode test plans and CI wiring",
+    "AMB-1692 UI test decomposition and focused lane execution",
+    "AMB-1693 accessibility conformance proof beyond nutrition gate",
+    "AMB-1694 screenshot/rendered artifact proof beyond deterministic lane scaffolding",
+    "AMB-1695 performance threshold proof beyond smoke harness",
+    "AMB-1696 and AMB-1700 release evidence automation and release candidate gate",
+    "AMB-1697, AMB-1698, and AMB-1699 file-size, naming, and suffix cleanup campaigns"
+  ],
+  "validation_run": [
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "command": "python3 -m json.tool docs/linear/reconciliation/2026-07-06-amb-1705-final-architecture-closeout.json",
+      "exit_code": 0,
+      "result": "JSON parsed"
+    },
+    {
+      "command": "scripts/ambitions-xcodegen-needed.sh",
+      "exit_code": 0,
+      "result": "XCODEGEN_NEEDED=0"
+    },
+    {
+      "command": "python3 scripts/ambitions-remediation-governance-check.py --json",
+      "exit_code": 0,
+      "result": "valid=true, findingCount=0"
+    },
+    {
+      "command": "python3 scripts/ambitions-quality-gate.py",
+      "exit_code": 0,
+      "result": "all strict quality gates passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-accepted-yellow-misuse-audit.py",
+      "exit_code": 0,
+      "result": "invalidAcceptedYellowIssues=0"
+    },
+    {
+      "command": "python3 scripts/ambitions-architecture-inventory.py",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-green-standard-audit.py",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-vocabulary-drift-scan.py",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-unsupported-claim-scan.py docs/linear/reconciliation/2026-07-06-amb-1705-final-architecture-closeout.md docs/linear/reconciliation/2026-07-06-amb-1705-final-architecture-closeout.json",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-xcodebuildmcp-probe.py --json --timeout 30",
+      "exit_code": 0,
+      "result": "MCP transport returned active ambitions-ios profile"
+    }
+  ],
+  "validation_not_run": [
+    "XCTest",
+    "xcodebuild build",
+    "build-for-testing",
+    "xcodebuild test",
+    "UI tests",
+    "screenshot lane execution",
+    "App Intents runtime tests",
+    "LocalRuntimeProof",
+    "rendered widget or Live Activity proof",
+    "app launch",
+    "accessibility walkthrough",
+    "performance profiling",
+    "archive export",
+    "TestFlight upload",
+    "App Store upload",
+    "privacy/legal approval",
+    "production R2 proof",
+    "account proof",
+    "CloudKit proof",
+    "physical-device procedures"
+  ],
+  "non_claims": [
+    "No final architecture Green",
+    "No product completion",
+    "No release readiness",
+    "No TestFlight or App Store readiness",
+    "No build/test pass claim",
+    "No runtime/device/system-surface Green",
+    "No Visual Green",
+    "No accessibility conformance",
+    "No privacy/legal approval",
+    "No production R2, Ambitions Account, or CloudKit readiness"
+  ],
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_touched": ["docs/linear/reconciliation"],
+    "files_moved_or_created": [
+      "docs/linear/reconciliation/2026-07-06-amb-1705-final-architecture-closeout.md",
+      "docs/linear/reconciliation/2026-07-06-amb-1705-final-architecture-closeout.json"
+    ],
+    "old_noncanonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "yellow_debt": "The scorecard, live tracker state, and remaining app-aspect gaps are the explicit debt list.",
+    "next_repair_train": "Continue open In Progress parents, review AMB-1804 through AMB-1807, execute AMB-1682 and AMB-1691, then re-enable runtime/device/build/test proof before any Green closeout.",
+    "equivalent_folder_interpretation_used": false
+  }
+}
