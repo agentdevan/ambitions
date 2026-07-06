@@ -234,6 +234,14 @@ runtime storage, final-step, or schedule ownership scope:
 
 - Source Atlas growth allowlist: `Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceInfluenceReceiptTests.swift`
 
+AMB-1682 closes the Source Atlas influence receipt parent with reconciliation
+evidence only. These allowlist entries cover the documentation packet and
+paired JSON; they do not add source, public-pack, R2, product-surface, private
+runtime storage, final-step, schedule ownership, or release scope:
+
+- Source Atlas growth allowlist: `docs/linear/reconciliation/2026-07-06-amb-1682-source-atlas-influence-receipts-parent.md`
+- Source Atlas growth allowlist: `docs/linear/reconciliation/2026-07-06-amb-1682-source-atlas-influence-receipts-parent.json`
+
 AMB-1669 renames existing scheduling source under the clearer LocalRuntimeOS
 `Scheduling` owner. This allowlist entry covers the source-owner rename for an
 existing no-R2/no-hosted-services policy string only; it does not add
