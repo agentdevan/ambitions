@@ -21,12 +21,27 @@ PRODUCTION_ROOTS = [
     ROOT / "Packages" / "AmbitionsExperienceKernel" / "Sources",
 ]
 
+SUPPORT_ROOTS = [
+    ROOT / "Native" / "AmbitionsTests",
+    ROOT / "Native" / "AmbitionsUITests",
+    ROOT / "Native" / "Ambitions" / "PreviewSupport",
+    ROOT / "Sources" / "Previews",
+]
+
+SUPPORT_SWIFT_HARD_LINE_CAP = 600
+
 EXCLUDED_PATH_PARTS = {
     ".build",
     "DerivedData",
     "Resources",
     "PreviewSupport",
     "Previews",
+}
+
+SUPPORT_EXCLUDED_PATH_PARTS = {
+    ".build",
+    "DerivedData",
+    "Resources",
 }
 
 REQUIRED_ARCHITECTURE_PATHS = [
@@ -360,6 +375,13 @@ def is_excluded(path: Path) -> bool:
     return any(part.endswith(".xcodeproj") for part in relative_parts)
 
 
+def is_support_excluded(path: Path) -> bool:
+    relative_parts = set(path.relative_to(ROOT).parts)
+    if relative_parts & SUPPORT_EXCLUDED_PATH_PARTS:
+        return True
+    return any(part.endswith(".xcodeproj") for part in relative_parts)
+
+
 def production_swift_files() -> list[Path]:
     files: list[Path] = []
     for root in PRODUCTION_ROOTS:
@@ -367,6 +389,17 @@ def production_swift_files() -> list[Path]:
             continue
         for path in root.rglob("*.swift"):
             if not is_excluded(path):
+                files.append(path)
+    return sorted(files)
+
+
+def support_swift_files() -> list[Path]:
+    files: list[Path] = []
+    for root in SUPPORT_ROOTS:
+        if not root.exists():
+            continue
+        for path in root.rglob("*.swift"):
+            if not is_support_excluded(path):
                 files.append(path)
     return sorted(files)
 
@@ -613,6 +646,24 @@ def check_file_sizes(files: list[Path], changed: set[str], rehomed_projection_pa
             and "AMBITIONS-QUALITY-EXTRACTION:" not in text
         ):
             findings.append(Finding("file-size", relative, f"{count} touched lines exceeds 400 without extraction note"))
+    return findings
+
+
+def check_changed_support_file_sizes(files: list[Path], changed: set[str]) -> list[Finding]:
+    findings: list[Finding] = []
+    for path in files:
+        relative = rel(path)
+        if relative not in changed:
+            continue
+        count = line_count(read(path))
+        if count > SUPPORT_SWIFT_HARD_LINE_CAP:
+            findings.append(
+                Finding(
+                    "support-file-size",
+                    relative,
+                    f"{count} changed support lines exceeds maximum {SUPPORT_SWIFT_HARD_LINE_CAP}",
+                )
+            )
     return findings
 
 
@@ -1119,6 +1170,7 @@ def main() -> int:
         return run_self_test()
 
     files = production_swift_files()
+    support_files = support_swift_files()
     changed = changed_paths()
     rehomed_projection_paths = central_projection_rehome_paths()
     rehomed_stage_overlay_paths = stage_overlay_surface_rehome_paths()
@@ -1127,6 +1179,7 @@ def main() -> int:
     findings.extend(check_final_tree_inventory())
     findings.extend(check_architecture(files))
     findings.extend(check_file_sizes(files, changed, rehomed_projection_paths))
+    findings.extend(check_changed_support_file_sizes(support_files, changed))
     findings.extend(check_forbidden_language(files))
     findings.extend(check_transitional_ownership_terms(files))
     findings.extend(check_temporal_rendering(files))
@@ -1150,6 +1203,7 @@ def main() -> int:
     else:
         print("ambitions-quality-gate")
         print(f"production_swift_files={len(files)}")
+        print(f"support_swift_files={len(support_files)}")
         print(f"changed_paths={len(changed)}")
         if not findings:
             print("GREEN all strict quality gates passed")
