@@ -95,6 +95,40 @@ extension AmbitionsUITestCase {
         add(attachment)
     }
 
+    func assertTimeAccessibilityXXXLStackIsReadable(
+        in app: XCUIApplication,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        let identifiers = [
+            "time.life-shape-field.accessibility-stage",
+            "time.life-shape-field.accessibility-selected-layer",
+            "time.life-shape-field.accessibility-segment.openTime",
+            "time.life-shape-field.accessibility-segment.protectedTime",
+            "time.life-shape-field.accessibility-segment.pressure",
+            "time.life-shape-field.accessibility-primary-row"
+        ]
+
+        let elements = identifiers.map { app.descendants(matching: .any)[$0] }
+        for (identifier, element) in zip(identifiers, elements) {
+            XCTAssertTrue(element.waitForExistence(timeout: 10), "\(identifier) should render in the Accessibility XXXL Time stack.", file: file, line: line)
+            XCTAssertGreaterThan(element.frame.height, 12, "\(identifier) should have a readable rendered height.", file: file, line: line)
+            XCTAssertGreaterThan(element.frame.width, 80, "\(identifier) should have readable rendered width.", file: file, line: line)
+        }
+
+        for index in 1..<(elements.count - 1) {
+            let current = elements[index]
+            let next = elements[index + 1]
+            XCTAssertLessThanOrEqual(
+                current.frame.maxY,
+                next.frame.minY + 2,
+                "\(identifiers[index]) overlaps \(identifiers[index + 1]) at Accessibility XXXL.",
+                file: file,
+                line: line
+            )
+        }
+    }
+
     func scrollTimeContentToCapacityProof(in app: XCUIApplication) {
         let scrollView = app.scrollViews["time.content-scroll"]
         let target = app.descendants(matching: .any)["time.life-shape-field.capacity-statement"]

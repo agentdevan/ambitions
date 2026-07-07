@@ -5,26 +5,8 @@ extension LifeShapeFieldVisualField {
     var horizonStrip: some View {
         VStack(spacing: 0) {
             ForEach(horizonRows) { row in
-                HStack(spacing: theme.spacing.sm) {
-                    Image(systemName: row.kind.systemImage)
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundStyle(theme.stateStyle(for: row.visualState).accent)
-                        .frame(width: 24)
-                    Text(row.title)
-                        .font(theme.typography.caption.weight(.semibold))
-                        .foregroundStyle(theme.colors.textPrimary)
-                    Spacer(minLength: theme.spacing.sm)
-                    Text(row.value)
-                        .font(theme.typography.caption)
-                        .foregroundStyle(theme.colors.textSecondary)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.70)
-                    Image(systemName: "chevron.right")
-                        .font(theme.typography.micro.weight(.semibold))
-                        .foregroundStyle(theme.colors.textTertiary)
-                        .accessibilityHidden(true)
-                }
-                .frame(minHeight: 44)
+                horizonRowContent(row)
+                .frame(minHeight: isAccessibilitySize ? 74 : 44, alignment: .leading)
                 .overlay(alignment: .bottom) {
                     Rectangle()
                         .fill(theme.colors.strokeSubtle.opacity(0.28))
@@ -50,6 +32,57 @@ extension LifeShapeFieldVisualField {
         .accessibilityLabel("Time horizons")
         .accessibilityValue(horizonRows.map(\.accessibilitySummary).joined(separator: ". "))
         .accessibilityIdentifier("time.life-shape-field.horizon-strip")
+    }
+
+    @ViewBuilder
+    private func horizonRowContent(_ row: TimeCalendarRow) -> some View {
+        if isAccessibilitySize {
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                HStack(spacing: theme.spacing.sm) {
+                    Image(systemName: row.kind.systemImage)
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundStyle(theme.stateStyle(for: row.visualState).accent)
+                        .frame(width: 24)
+                        .accessibilityHidden(true)
+                    Text(row.title)
+                        .font(theme.typography.caption.weight(.semibold))
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Spacer(minLength: theme.spacing.sm)
+                    Image(systemName: "chevron.right")
+                        .font(theme.typography.micro.weight(.semibold))
+                        .foregroundStyle(theme.colors.textTertiary)
+                        .accessibilityHidden(true)
+                }
+
+                Text(row.value)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.vertical, theme.spacing.xs)
+        } else {
+            HStack(spacing: theme.spacing.sm) {
+                Image(systemName: row.kind.systemImage)
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundStyle(theme.stateStyle(for: row.visualState).accent)
+                    .frame(width: 24)
+                    .accessibilityHidden(true)
+                Text(row.title)
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(theme.colors.textPrimary)
+                Spacer(minLength: theme.spacing.sm)
+                Text(row.value)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.70)
+                Image(systemName: "chevron.right")
+                    .font(theme.typography.micro.weight(.semibold))
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .accessibilityHidden(true)
+            }
+        }
     }
 
     var accessibilityValue: String {

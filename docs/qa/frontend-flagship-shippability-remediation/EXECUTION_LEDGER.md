@@ -6,7 +6,7 @@ Owner: Codex frontend remediation operator
 Repository: agentdevan/ambitions
 Branch: frontend-flagship-shippability-remediation
 Session start SHA: 9362e940eec5e7d118df418d00022c3588df6610
-Current packet: Packet 1.2 - Accessibility XXXL Layout Rescue
+Current packet: Packet 1.3 - Appearance Mode Proof
 
 This ledger is process evidence only. It is not product acceptance, owner visual acceptance, release proof, accessibility proof, Visual Green, Accessibility Green, or Release Green.
 
@@ -29,8 +29,8 @@ No packet may be marked Done by Codex in this program.
 
 - Branch: `frontend-flagship-shippability-remediation`
 - Base SHA: `9362e940eec5e7d118df418d00022c3588df6610`
-- Current packet status: Packet 1.1 is locally ready for review after source/simulator proof; Packet 1.2 is next.
-- Working tree expectation: clean after the Packet 1.1 commit.
+- Current packet status: Packet 1.2 is locally ready for review after source/simulator proof; Packet 1.3 is next.
+- Working tree expectation: clean after the Packet 1.2 commit.
 - Linear: not touched this session; local ledger is the active progress record.
 - Xcode: `Xcode 26.6`, build `17F113`
 - Simulator used: iPhone 17 Pro Max, iOS 26.5, UDID `DD9B9C84-7188-48FA-AA2A-AB5C1D0EE2B6`
@@ -96,7 +96,7 @@ Check this before every packet closeout:
 | Packet | Status | Entry Condition | Required Proof |
 | --- | --- | --- | --- |
 | 1.1 Root Shell Safe-Area + Dock Clearance | Ready For Review | Current first Red gate | Source diff, focused root screenshots, Time mutation proof, build/test output |
-| 1.2 Accessibility XXXL Layout Rescue | Ready For Codex | Packet 1.1 source/simulator proof not Red | Large Dynamic Type screenshots, Reduce Motion/Transparency checks |
+| 1.2 Accessibility XXXL Layout Rescue | Ready For Review | Packet 1.1 source/simulator proof not Red | Large Dynamic Type screenshots, Reduce Motion/Transparency checks |
 | 1.3 Appearance Mode Proof | Backlog | Packet 1.1 not Red | Light/dark/system screenshot matrix |
 | 1.4 Rendered Failure Gates | Backlog | Packet 1.1-1.3 failure patterns understood | UI/render assertions that fail on visual breakage |
 | 1.5 Baseline Validation Recovery | Backlog | Stable screenshot/proof lanes exist | Repeatable validation matrix and explicit Green ceilings |
@@ -241,6 +241,60 @@ Packet 1.1 residual risks:
 Next packet:
 - Packet 1.2 - Accessibility XXXL Layout Rescue.
 
+### Packet 1.2 - Accessibility XXXL Layout Rescue
+
+Status: Ready For Review
+
+Target:
+- Time Accessibility XXXL is readable and non-overlapped.
+- Create Goal no longer bleeds/clips.
+- All roots preserve content access at large sizes.
+- Reduce Motion/Reduce Transparency do not break layout.
+
+Canonical owner under repair:
+- Time LifeShape Field rendering, because the catastrophic overlap was inside the field's positioned visual stage rather than the shared shell.
+
+Starting evidence:
+- Baseline Time Accessibility XXXL simulator screenshot showed overlapping field text and controls inside the LifeShape Field visual stage.
+- Baseline Create Goal large Dynamic Type simulator screenshot was readable with no catastrophic bleed observed; no Create Goal source repair was made in this packet.
+- Baseline Goals large Dynamic Type simulator screenshot was crowded but readable with no hard overlap observed; no Goals source repair was made in this packet.
+
+Implementation notes:
+- Time now uses a stacked, readable LifeShape Field layout at accessibility Dynamic Type sizes instead of the position-based micro-field canvas.
+- Regular/default Dynamic Type visual-stage behavior is preserved.
+- The Time horizon strip stacks row values at accessibility sizes to avoid one-line squeeze.
+- The selected Time bucket stacks detail text and primary action at accessibility sizes.
+- Focused UI assertions now verify the Time Accessibility XXXL stack exists, has readable frames, and does not vertically overlap between selected layer, open time, protected time, pressure, and primary row.
+- No root IA, Capture, Search, Motion, privacy, runtime, persistence, receipt, or mutation authority changed.
+
+Packet 1.2 source file set:
+- `Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldVisualField.swift`
+- `Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldVisualField+HorizonPresentation.swift`
+- `Native/AmbitionsUITests/AmbitionsTimeUITestSupport.swift`
+- `Native/AmbitionsUITests/TimeSurfaceUITests.swift`
+- `docs/qa/frontend-flagship-shippability-remediation/EXECUTION_LEDGER.md`
+
+Packet 1.2 closeout:
+- Status: Yellow / Ready For Review.
+- Source status: local source/build/script proof passed for the scoped Time Accessibility XXXL repair.
+- Runtime status: focused simulator UI proof passed for the Time Accessibility XXXL screenshot lane.
+- Interaction status: Yellow; simulator automation proof only, no manual device interaction proof.
+- Visual status: Yellow maximum; simulator screenshots inspected, no physical-device proof.
+- Accessibility status: Yellow maximum; automated accessibility-oriented UI checks and transcript attachments exist, but manual VoiceOver proof was not performed.
+- Release status: not Green; this is not release validation.
+- Product law preserved: Today / Goals / Time / You only as roots; Capture is not a root tab; Search not changed; Motion not a root destination; local-first/offline trust not weakened; no hosted-AI grammar added.
+
+Packet 1.2 residual risks:
+- Time Accessibility XXXL catastrophic field overlap is repaired in the focused simulator scenario, but all-root large Dynamic Type proof is incomplete.
+- Create Goal and Goals large Dynamic Type screenshots were inspected as baseline diagnosis only; they remain later repair candidates if broader large-type matrices expose failures.
+- Time first viewport remains dense at Accessibility XXXL; this packet proves readability and non-overlap, not flagship visual acceptance.
+- Physical-device proof is still missing.
+- Manual VoiceOver proof is still missing.
+- Light/system/dark appearance ambiguity remains next.
+
+Next packet:
+- Packet 1.3 - Appearance Mode Proof.
+
 ## 6. Validation Log
 
 ### Baseline before Packet 1.1 source edits
@@ -289,6 +343,48 @@ Validation classification:
 - Runtime Green is not claimed for the frontend overall.
 - Interaction Green is not claimed.
 - Visual Review readiness for Packet 1.1 is Yellow only because proof is simulator-only and physical-device proof is missing.
+- Accessibility Green is impossible because manual VoiceOver proof was not performed.
+- Release Green is impossible; release validation, device proof, accessibility proof, and later Red blockers remain.
+
+### Packet 1.2 baseline diagnosis before source edits
+
+| Command | Exit | Result |
+| --- | ---: | --- |
+| `git status --short --branch` | 0 | Branch `frontend-flagship-shippability-remediation`, clean at Packet 1.2 start |
+| `git rev-parse HEAD` | 0 | `4f11fbb14e03f90c0eed1f88938236ceaf9764ee` before Packet 1.2 edits |
+| `xcodegen generate` | 0 | Project generated successfully |
+| `python3 scripts/ambitions-architecture-inventory.py` | 0 | `GREEN final-tree parity achieved`; source/path parity only |
+| `python3 scripts/ambitions-green-standard-audit.py` | 0 | Green-standard source gate passed |
+| `python3 scripts/ambitions-vocabulary-drift-scan.py` | 0 | Vocabulary drift gate passed |
+| `python3 scripts/ambitions-local-first-boundary-scan.py` | 0 | Local-first boundary scan passed |
+| `python3 scripts/ambitions-remediation-governance-check.py` | 0 | Remediation governance gate passed |
+| `python3 scripts/ambitions-accepted-yellow-misuse-audit.py` | 0 | Accepted Yellow misuse audit passed |
+| `python3 scripts/ambitions-flagship-ios-standards-check.py` | 0 | Flagship iOS standards check passed |
+| `AMBITIONS_XCODE_UI_PREBUILD=never scripts/ambitions-xcode-test-focused.sh --batch packet-1.2-diagnosis --only-testing AmbitionsUITests/TimeSurfaceUITests/testAMB1176TimeEmptyAndAccessibilityProofPacket --scheme AmbitionsUITests --timeout 8m --kill-after 30s --test-without-building` | 0 | Test passed, but baseline screenshot showed catastrophic Accessibility XXXL Time field overlap |
+| `AMBITIONS_XCODE_UI_PREBUILD=never scripts/ambitions-xcode-test-focused.sh --batch packet-1.2-diagnosis --only-testing AmbitionsUITests/CaptureComposerUITests/testAMB967CaptureCreateGoalScreenshotMatrix --scheme AmbitionsUITests --timeout 8m --kill-after 30s --test-without-building` | 0 | Baseline Create Goal large Dynamic Type screenshot inspected; no catastrophic bleed observed |
+| `AMBITIONS_XCODE_UI_PREBUILD=never scripts/ambitions-xcode-test-focused.sh --batch packet-1.2-diagnosis --only-testing AmbitionsUITests/GoalsSurfaceUITests/testAMB963GoalsReconstructionScreenshotMatrix --scheme AmbitionsUITests --timeout 8m --kill-after 30s --test-without-building` | 0 | Baseline Goals large Dynamic Type screenshot inspected; crowded but no hard overlap observed |
+
+### Packet 1.2 final validation after repair
+
+| Command | Exit | Result |
+| --- | ---: | --- |
+| `git diff --check` | 0 | Passed |
+| `xcodegen generate` | 0 | Project generated successfully |
+| `python3 scripts/ambitions-architecture-inventory.py` | 0 | `GREEN final-tree parity achieved`; source/path parity only |
+| `python3 scripts/ambitions-green-standard-audit.py` | 0 | Green-standard source gate passed |
+| `python3 scripts/ambitions-vocabulary-drift-scan.py` | 0 | Vocabulary drift gate passed |
+| `python3 scripts/ambitions-local-first-boundary-scan.py` | 0 | Local-first boundary scan passed |
+| `python3 scripts/ambitions-remediation-governance-check.py` | 0 | Guard passed; changed paths limited to 4 source/test files before ledger update |
+| `python3 scripts/ambitions-accepted-yellow-misuse-audit.py` | 0 | Accepted Yellow misuse audit passed |
+| `python3 scripts/ambitions-flagship-ios-standards-check.py` | 0 | Flagship iOS standards check passed |
+| `scripts/ambitions-xcode-test-focused.sh --batch packet-1.2-after-fresh2 --only-testing AmbitionsUITests/TimeSurfaceUITests/testAMB1176TimeEmptyAndAccessibilityProofPacket --scheme AmbitionsUITests --timeout 8m --kill-after 30s --prebuild --prebuild-timeout 20m --prebuild-kill-after 30s` | 0 | Focused Time Accessibility XXXL UI proof passed after fresh prebuild; 1 executed test |
+| `./scripts/ambitions-xcode-build-for-testing.sh --batch frontend-remediation` | 0 | Build-for-testing passed; summary at `.codex/xcode-summaries/frontend-remediation/20260707T224530Z-bft-69210-20010/build-for-testing-summary.json`; duration 562.13s |
+
+Validation classification:
+- Source Green for the scoped Packet 1.2 diff is supported by source/build/script proof.
+- Runtime Green is not claimed for the frontend overall.
+- Interaction Green is not claimed.
+- Visual Review readiness for Packet 1.2 is Yellow only because proof is simulator-only and physical-device proof is missing.
 - Accessibility Green is impossible because manual VoiceOver proof was not performed.
 - Release Green is impossible; release validation, device proof, accessibility proof, and later Red blockers remain.
 
@@ -342,11 +438,30 @@ Additional proof notes:
 - Capture screenshot proof is in `.codex/xcode-results/frontend-remediation/capture-screenshot-tight-receipt.xcresult` with attachments including `amb-967-capture-activated`, `amb-967-capture-keyboard`, `amb-967-capture-proposal`, `amb-967-create-goal-default`, `amb-967-create-goal-first-path-preview`, and `amb-967-create-goal-large-dynamic-type`.
 - Manual `simctl` Capture screenshot attempts are not counted as clean proof because SpringBoard displayed an "Open in Ambitions?" system prompt over the app.
 
+### Packet 1.2 proof
+
+Packet 1.2 proof is simulator Yellow only, not Visual Green or Accessibility Green.
+
+Baseline failure artifact:
+- `.codex/xcode-summaries/packet-1.2-diagnosis/20260707T221131Z-AmbitionsUITests-TimeSurfaceUITests-testAMB1176TimeEmptyAndAccessibilityProofPac-62158-21320/extract/screenshots/amb-1176-time-accessibility-xxxl-reduce-motion_0_6C8BE3BB-E8C8-4059-A9AD-6782E76A85B9.png`: Time Accessibility XXXL baseline; catastrophic overlapping field copy and controls inside the visual stage.
+
+Baseline diagnosis artifacts:
+- `.codex/xcode-summaries/packet-1.2-diagnosis/20260707T221432Z-AmbitionsUITests-CaptureComposerUITests-testAMB967CaptureCreateGoalScreenshotMat-62743-32608/extract/screenshots/amb-967-create-goal-large-dynamic-type_0_445FE7D6-66AB-45AE-B00D-EEF7F8033835.png`: Create Goal large Dynamic Type baseline; readable in inspected screenshot, no source repair made.
+- `.codex/xcode-summaries/packet-1.2-diagnosis/20260707T221901Z-AmbitionsUITests-GoalsSurfaceUITests-testAMB963GoalsReconstructionScreenshotMatr-63561-1009/extract/screenshots/amb-963-goals-large-dynamic-type_0_775225D5-C2A1-4684-857B-B774AFA32DC4.png`: Goals large Dynamic Type baseline; crowded but no hard overlap observed, no source repair made.
+
+Final focused proof artifacts:
+- `.codex/xcode-summaries/packet-1.2-after-fresh2/20260707T223934Z-AmbitionsUITests-TimeSurfaceUITests-testAMB1176TimeEmptyAndAccessibilityProofPac-68054-24187/focused-test-summary.json`: focused Time Accessibility XXXL test passed after fresh prebuild.
+- `.codex/xcode-summaries/packet-1.2-after-fresh2/20260707T223937Z-bft-68214-25520/build-for-testing-summary.json`: UI prebuild prerequisite passed for the focused test lane.
+- `.codex/xcode-summaries/packet-1.2-after-fresh2/20260707T223934Z-AmbitionsUITests-TimeSurfaceUITests-testAMB1176TimeEmptyAndAccessibilityProofPac-68054-24187/extract/screenshots/amb-1176-time-accessibility-xxxl-reduce-motion_0_5C7ABF52-5425-4514-A98D-236A607E20F3.png`: final current-source Time Accessibility XXXL screenshot; old overlapping visual-stage text is gone and the field is stacked/readable, though still dense and simulator-only.
+- `.codex/xcode-summaries/packet-1.2-after-fresh2/20260707T223934Z-AmbitionsUITests-TimeSurfaceUITests-testAMB1176TimeEmptyAndAccessibilityProofPac-68054-24187/extract/screenshots/amb-1176-time-empty-root_0_5995C22C-7DBF-414F-919B-72ACB0DE88D8.png`: default empty Time root captured in the same lane.
+- `.codex/xcode-summaries/packet-1.2-after-fresh2/20260707T223934Z-AmbitionsUITests-TimeSurfaceUITests-testAMB1176TimeEmptyAndAccessibilityProofPac-68054-24187/extract/attachments/amb-1176-accessibility-variant-voiceover-transcript_0_D308FCE3-2469-4164-BB5F-81323963CB57.txt`: automated transcript attachment, not manual VoiceOver proof.
+- `.codex/xcode-summaries/frontend-remediation/20260707T224530Z-bft-69210-20010/build-for-testing-summary.json`: required broad build-for-testing passed.
+
 ## 8. Known Remaining Red Blockers
 
-- Root shell safe-area and dock/content overlap is repaired for the inspected default Dynamic Type dark-mode simulator roots, but not proven for large Dynamic Type, all appearances, or physical device.
-- Time Accessibility XXXL collapse.
-- Large Dynamic Type failures.
+- Root shell safe-area and dock/content overlap is repaired for the inspected default Dynamic Type dark-mode simulator roots, but not proven for all appearances or physical device.
+- Time Accessibility XXXL catastrophic LifeShape Field collapse is repaired in the focused simulator lane, but large Dynamic Type is not fully proven across all roots, overlays, and device contexts.
+- Large Dynamic Type failures outside the focused Time lane remain possible.
 - Light/system/dark appearance ambiguity.
 - Simulator-only visual proof.
 - No manual VoiceOver proof.
@@ -377,6 +492,22 @@ Packet 1.1 current evidence:
 
 Mapping confidence: High for overlap family, source-to-issue exactness still bounded by current known-issue docs.
 
+Current Packet 1.2 maps to:
+- AMB-ISSUE-1709: screenshot coverage gap and visual proof gaps around rendered failures.
+- Known Red blocker family: Time Accessibility XXXL collapse and broader Large Dynamic Type failures.
+- AMB-1194 remediation dossier family: visual/screenshot acceptance proof ceiling and accessibility proof gaps.
+
+Packet 1.2 current evidence:
+- Source repair exists for the Time LifeShape Field Accessibility XXXL layout.
+- Runtime focused proof exists for the Time Accessibility XXXL screenshot lane.
+- Visual simulator proof exists for the Time Accessibility XXXL repaired state.
+- Automated accessibility-oriented frame-order checks and transcript attachments exist.
+- Manual VoiceOver proof is incomplete.
+- Device proof is missing.
+- Safe status: Yellow / Ready For Review, not Done.
+
+Mapping confidence: Medium; the current known-issue docs name the risk family, while this packet repairs one scoped rendered failure inside Time rather than all large Dynamic Type contexts.
+
 ## 10. Proof Ceilings
 
 - Source gates passing can support source status only.
@@ -399,17 +530,21 @@ Packet 1.1 planned commit:
 - `Frontend remediation: root shell safe-area clearance`
 - SHA: read from `git rev-parse HEAD` after commit; the ledger does not embed its own final commit hash because amending that value changes the hash.
 
+Packet 1.2 planned commit:
+- `Frontend remediation: accessibility XXXL layout rescue`
+- SHA: read from `git rev-parse HEAD` after commit; the ledger does not embed its own final commit hash because amending that value changes the hash.
+
 ## 13. Resume Instructions
 
 To resume from this checkpoint:
 1. Stay on branch `frontend-flagship-shippability-remediation`.
 2. Run `git status --short --branch`.
-3. Confirm Packet 1.1 is committed and current packet is Packet 1.2.
+3. Confirm Packet 1.2 is committed and current packet is Packet 1.3.
 4. Inspect the current diff before editing.
 5. Rerun `git diff --check`.
-6. Begin Packet 1.2 - Accessibility XXXL Layout Rescue.
-7. Focus first on Time Accessibility XXXL collapse, then Create Goal large-type bleed and shell large-type behavior.
-8. Run focused large Dynamic Type screenshot/test lanes.
+6. Begin Packet 1.3 - Appearance Mode Proof.
+7. Focus first on determining the current appearance-mode screenshot/test lane and whether light, dark, and system modes render distinct roots and core overlays.
+8. Run focused appearance screenshot/test lanes.
 9. Inspect generated screenshots manually.
 10. Update this ledger with exact commands, exits, artifacts, risks, and next packet.
 11. Commit only if validation passes and the change is coherent.

@@ -53,10 +53,14 @@ struct LifeShapeFieldVisualField: View {
     private var fieldStage: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
             LifeShapeLayerSelector(selection: $selectedLayer)
-            microField
+            if isAccessibilitySize {
+                accessibilityMicroField
+            } else {
+                microField
+            }
         }
         .padding(theme.spacing.sm)
-        .frame(minHeight: isAccessibilitySize ? 600 : 520, alignment: .top)
+        .frame(minHeight: isAccessibilitySize ? 0 : 520, alignment: .top)
         .background(fieldBackground)
         .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
         .overlay {
@@ -70,6 +74,98 @@ struct LifeShapeFieldVisualField: View {
         .accessibilityLabel("Time field")
         .accessibilityValue(accessibilityValue)
         .accessibilityIdentifier("time.life-shape-field.visual-stage")
+    }
+
+    private var accessibilityMicroField: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            selectedLayerReading
+
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                ForEach(Array(instrumentSegments.prefix(5))) { segment in
+                    accessibilitySegmentRow(segment)
+                }
+            }
+
+            if selectedMarks.isEmpty == false {
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    Text("Signals")
+                        .font(theme.typography.caption.weight(.semibold))
+                        .foregroundStyle(theme.colors.textSecondary)
+                    ForEach(selectedMarks.prefix(3)) { mark in
+                        Button {
+                            onSelectMark(mark)
+                        } label: {
+                            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                                Circle()
+                                    .fill(theme.stateStyle(for: mark.visualState).fill)
+                                    .frame(width: 14, height: 14)
+                                    .overlay {
+                                        Circle()
+                                            .stroke(theme.stateStyle(for: mark.visualState).stroke, lineWidth: 1)
+                                    }
+                                    .padding(.top, theme.spacing.xxs)
+                                    .accessibilityHidden(true)
+
+                                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                                    Text(mark.kind.pointTitle)
+                                        .font(theme.typography.caption.weight(.semibold))
+                                        .foregroundStyle(theme.colors.textPrimary)
+                                    Text(mark.detail.humanRootCopy)
+                                        .font(theme.typography.caption)
+                                        .foregroundStyle(theme.colors.textSecondary)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                }
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.vertical, theme.spacing.xxs)
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityLabel(mark.accessibilitySummary)
+                        .accessibilityIdentifier("time.life-shape-field.mark.\(mark.id)")
+                    }
+                }
+            }
+
+            selectedBucket
+        }
+        .padding(theme.spacing.sm)
+        .background {
+            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                .fill(theme.colors.surfaceOverlay.opacity(reduceTransparency ? 0.94 : 0.58))
+        }
+        .overlay(instrumentStroke)
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("Life Calendar readable field")
+        .accessibilityIdentifier("time.life-shape-field.accessibility-stage")
+    }
+
+    private func accessibilitySegmentRow(_ segment: LifeShapeSegment) -> some View {
+        HStack(alignment: .top, spacing: theme.spacing.sm) {
+            Image(systemName: segment.kind.systemImage)
+                .font(.system(size: 18, weight: .semibold))
+                .foregroundStyle(layerTint(segment.kind.instrumentLayer))
+                .frame(width: 28)
+                .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text(segment.kind.instrumentTitle)
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text(segment.valueLabel.humanInstrumentValue)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                Text(segment.detail.humanRootCopy)
+                    .font(theme.typography.micro)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.vertical, theme.spacing.xs)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(segment.title), \(segment.valueLabel), \(segment.detail)")
+        .accessibilityIdentifier("time.life-shape-field.accessibility-segment.\(segment.kind.rawValue)")
     }
 
     private var fieldBackground: some View {
@@ -100,35 +196,56 @@ struct LifeShapeFieldVisualField: View {
         .accessibilityHidden(true)
     }
 
+    @ViewBuilder
     private var selectedLayerReading: some View {
-        HStack(alignment: .top, spacing: theme.spacing.sm) {
-            VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+        if isAccessibilitySize {
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
                 Text(selectedLayer.title)
-                    .font(.system(size: isAccessibilitySize ? 33 : 30, weight: .semibold))
+                    .font(theme.typography.bodyEmphasized)
                     .foregroundStyle(selectedLayerTint)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.70)
 
-                Text(selectedLayer.realitySentence(for: field, mark: selectedMark))
+                Text(accessibilityLayerSentence)
                     .font(theme.typography.caption.weight(.semibold))
                     .foregroundStyle(theme.colors.textPrimary)
-                    .lineLimit(isAccessibilitySize ? 3 : 2)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Text("Next fixed point: \(nextFixedPointLabel)")
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
             }
+            .accessibilityElement(children: .combine)
+            .accessibilityIdentifier("time.life-shape-field.accessibility-selected-layer")
+        } else {
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+                    Text(selectedLayer.title)
+                        .font(.system(size: 30, weight: .semibold))
+                        .foregroundStyle(selectedLayerTint)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.70)
 
-            Spacer(minLength: theme.spacing.sm)
+                    Text(selectedLayer.realitySentence(for: field, mark: selectedMark))
+                        .font(theme.typography.caption.weight(.semibold))
+                        .foregroundStyle(theme.colors.textPrimary)
+                        .lineLimit(2)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
 
-            VStack(alignment: .trailing, spacing: theme.spacing.xxxs) {
-                Text("Next fixed point")
-                    .font(theme.typography.micro.weight(.semibold))
-                    .foregroundStyle(theme.colors.textTertiary)
-                    .textCase(.uppercase)
-                Text(nextFixedPointLabel)
-                    .font(theme.typography.caption.weight(.semibold))
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .lineLimit(2)
-                    .multilineTextAlignment(.trailing)
-                    .minimumScaleFactor(0.74)
+                Spacer(minLength: theme.spacing.sm)
+
+                VStack(alignment: .trailing, spacing: theme.spacing.xxxs) {
+                    Text("Next fixed point")
+                        .font(theme.typography.micro.weight(.semibold))
+                        .foregroundStyle(theme.colors.textTertiary)
+                        .textCase(.uppercase)
+                    Text(nextFixedPointLabel)
+                        .font(theme.typography.caption.weight(.semibold))
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .lineLimit(2)
+                        .multilineTextAlignment(.trailing)
+                        .minimumScaleFactor(0.74)
+                }
             }
         }
     }
@@ -165,6 +282,13 @@ struct LifeShapeFieldVisualField: View {
         .accessibilityElement(children: .contain)
         .accessibilityLabel("Life Calendar instrument")
         .accessibilityIdentifier("time.life-shape-field.micro-field")
+    }
+
+    private var accessibilityLayerSentence: String {
+        if selectedLayer == .pressure, let selectedMark {
+            return selectedMark.detail
+        }
+        return selectedLayer.realitySentence(for: field, mark: selectedMark)
     }
 
     private func fieldAtmosphere(size: CGSize) -> some View {
@@ -302,7 +426,63 @@ struct LifeShapeFieldVisualField: View {
             )
     }
 
+    @ViewBuilder
     private var selectedBucket: some View {
+        if isAccessibilitySize {
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                HStack(alignment: .top, spacing: theme.spacing.sm) {
+                    Circle()
+                        .stroke(selectedLayerTint, lineWidth: 1.3)
+                        .frame(width: 18, height: 18)
+                        .overlay {
+                            Circle()
+                                .fill(selectedLayerTint.opacity(0.74))
+                                .frame(width: 7, height: 7)
+                        }
+                        .padding(.top, theme.spacing.xxs)
+                        .accessibilityHidden(true)
+
+                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                        Text(selectedWindowLabel)
+                            .font(theme.typography.caption.weight(.semibold))
+                            .foregroundStyle(theme.colors.textPrimary)
+                            .fixedSize(horizontal: false, vertical: true)
+                        Text(selectedLayerDetail)
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textSecondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+
+                Button(action: onPrimaryAction) {
+                    Label(visiblePrimaryActionTitle, systemImage: selectedLayer.actionSymbol)
+                        .font(theme.typography.caption.weight(.semibold))
+                        .labelStyle(.titleAndIcon)
+                        .frame(maxWidth: .infinity, minHeight: 48, alignment: .center)
+                }
+                .buttonStyle(.plain)
+                .foregroundStyle(primaryActionEnabled ? selectedLayerTint : theme.colors.textTertiary)
+                .disabled(primaryActionEnabled == false)
+                .accessibilityIdentifier("time.life-shape-field.primary-action")
+                .accessibilityHint(primaryActionEnabled ? "Applies this local Time change." : field.placementUnavailableReason)
+            }
+            .padding(theme.spacing.sm)
+            .background {
+                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                    .fill(theme.colors.canvas.opacity(reduceTransparency ? 0.96 : 0.66))
+            }
+            .overlay {
+                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                    .stroke(selectedLayerTint.opacity(colorSchemeContrast == .increased ? 0.72 : 0.34), lineWidth: 1)
+            }
+            .accessibilityElement(children: .contain)
+            .accessibilityIdentifier("time.life-shape-field.accessibility-primary-row")
+        } else {
+            compactSelectedBucket
+        }
+    }
+
+    private var compactSelectedBucket: some View {
         HStack(alignment: .center, spacing: theme.spacing.sm) {
             Circle()
                 .stroke(selectedLayerTint, lineWidth: 1.3)
