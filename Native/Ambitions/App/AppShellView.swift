@@ -1,9 +1,21 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
+private struct AppShellAdditionalRootBottomClearanceKey: EnvironmentKey {
+    static let defaultValue: CGFloat = 0
+}
+
+extension EnvironmentValues {
+    var appShellAdditionalRootBottomClearance: CGFloat {
+        get { self[AppShellAdditionalRootBottomClearanceKey.self] }
+        set { self[AppShellAdditionalRootBottomClearanceKey.self] = newValue }
+    }
+}
+
 struct AppShellScaffold<Content: View>: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.layoutDirection) private var layoutDirection
+    @Environment(\.appShellAdditionalRootBottomClearance) private var additionalRootBottomClearance
 
     let title: String
     let subtitle: String?
@@ -41,13 +53,22 @@ struct AppShellScaffold<Content: View>: View {
 
     @ViewBuilder
     private var scaffoldedContent: some View {
-        content
-            .padding(.top, topContentClearance)
-            .safeAreaInset(edge: .bottom, spacing: 0) {
-                Color.clear
-                    .frame(height: bottomChromeClearance)
-                    .accessibilityHidden(true)
-            }
+        GeometryReader { proxy in
+            content
+                .padding(.top, topContentClearance)
+                .frame(
+                    width: proxy.size.width,
+                    height: max(0, proxy.size.height - hardBottomViewportClearance),
+                    alignment: .top
+                )
+                .clipped()
+        }
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            Color.clear
+                .frame(height: softBottomChromeClearance)
+                .allowsHitTesting(false)
+                .accessibilityHidden(true)
+        }
             .safeAreaInset(edge: .top, spacing: topInsetSpacing) {
                 headerRail
                     .hidden()
@@ -85,7 +106,15 @@ struct AppShellScaffold<Content: View>: View {
             routeDepth: .root,
             overlayPresentation: .none,
             dynamicTypeIsAccessibilitySize: dynamicTypeSize.isAccessibilitySize
-        )
+        ) + additionalRootBottomClearance
+    }
+
+    private var hardBottomViewportClearance: CGFloat {
+        onBack == nil ? bottomChromeClearance : 0
+    }
+
+    private var softBottomChromeClearance: CGFloat {
+        onBack == nil ? 0 : bottomChromeClearance
     }
 
     private var topInsetSpacing: CGFloat {

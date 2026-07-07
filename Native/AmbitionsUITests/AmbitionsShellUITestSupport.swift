@@ -102,6 +102,42 @@ extension AmbitionsUITestCase {
         XCTAssertFalse(dockFrame.intersects(button.frame), "Global add button overlaps the root Stage dock.", file: file, line: line)
     }
 
+    func assertRootContentDoesNotIntersectDock(
+        identifier: String,
+        named name: String,
+        in app: XCUIApplication,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        let window = app.windows.firstMatch
+        XCTAssertTrue(window.waitForExistence(timeout: 10), file: file, line: line)
+
+        let dockFrame = rootDockFrame(in: app)
+        XCTAssertFalse(dockFrame.isNull, "Root dock frame should exist before checking \(name).", file: file, line: line)
+
+        let element = app.descendants(matching: .any)[identifier]
+        XCTAssertTrue(element.waitForExistence(timeout: 10), "\(name) should exist before dock-overlap validation.", file: file, line: line)
+        XCTAssertFalse(element.frame.isEmpty, "\(name) should expose a measurable frame.", file: file, line: line)
+
+        guard element.frame.intersects(window.frame) else { return }
+
+        let dockExclusionFrame = CGRect(
+            x: window.frame.minX,
+            y: dockFrame.minY - 8,
+            width: window.frame.width,
+            height: window.frame.maxY - dockFrame.minY + 8
+        )
+
+        guard element.frame.intersects(dockExclusionFrame) else { return }
+
+        XCTAssertFalse(
+            element.isHittable,
+            "\(name) remains hittable in the root dock exclusion zone. element=\(element.frame) dock=\(dockFrame)",
+            file: file,
+            line: line
+        )
+    }
+
     func waitForShellReady(in app: XCUIApplication, timeout: TimeInterval = 30) -> Bool {
         let deadline = Date().addingTimeInterval(timeout)
         let stageHost = app.descendants(matching: .any)["shell.stage.host"]

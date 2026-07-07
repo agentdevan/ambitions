@@ -230,6 +230,27 @@ final class BootstrapShellUITests: AmbitionsUITestCase {
         XCTAssertFalse(rootDestinationExists("Plan", in: app))
     }
 
+    func testUIQL002RootDockDoesNotOverlapTimeOrYouContent() throws {
+        let app = makeApp(bootstrapMode: "preview")
+        app.launch()
+
+        XCTAssertTrue(waitForShellReady(in: app))
+
+        XCTAssertTrue(openCanonicalDestination("Time", screenIdentifier: "time.screen", in: app))
+        assertRootContentDoesNotIntersectDock(
+            identifier: "time.calendar.open-window",
+            named: "Time open windows row",
+            in: app
+        )
+
+        XCTAssertTrue(openCanonicalDestination("You", screenIdentifier: "you.screen", in: app))
+        assertRootContentDoesNotIntersectDock(
+            identifier: "you.settings.row.capture-preferences",
+            named: "You Capture settings row",
+            in: app
+        )
+    }
+
     func testUIQL002GoalDetailDrilldownHidesRootDock() throws {
         let app = makeApp(bootstrapMode: "demo", launchURL: "ambitions://goal/goal-native")
         app.launch()

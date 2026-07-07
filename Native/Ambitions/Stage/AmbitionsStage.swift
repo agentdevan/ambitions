@@ -35,6 +35,10 @@ struct AmbitionsStage: View {
         ZStack(alignment: .bottom) {
             stageSurfaceHost
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .environment(
+                    \.appShellAdditionalRootBottomClearance,
+                    rootContinuityReceiptClearance(policy: chromePolicy)
+                )
             if chromePolicy.showsRootDock {
                 shellRootDockLayer(theme: resolvedTheme, policy: chromePolicy)
             }
@@ -202,19 +206,20 @@ struct AmbitionsStage: View {
     private func shellContinuityReceipt(theme: AmbitionTheme, policy: StageChromePolicy) -> some View {
         // Display-only shell receipt chrome; SourceRecord and ReplayTrace wiring stay in runtime/proof owners.
         if let receipt = navigation.continuityReceipt {
-            AmbitionActionClosureTray(
-                title: receipt.title,
-                message: receipt.body,
-                status: .steady
-            ) {
+            ShellContinuityBanner(receipt: receipt) {
                 navigation.continuityReceipt = nil
             }
-            .frame(maxWidth: dynamicTypeSize.isAccessibilitySize ? 360 : 310, alignment: .leading)
+            .frame(maxWidth: dynamicTypeSize.isAccessibilitySize ? 400 : 380, alignment: .leading)
             .padding(.trailing, 20)
-            .padding(.bottom, policy.continuityReceiptBottomClearance + theme.spacing.lg)
+            .padding(.bottom, policy.continuityReceiptBottomClearance)
             .accessibilityIdentifier("shell.continuity-receipt")
             .zIndex(4)
         }
+    }
+
+    private func rootContinuityReceiptClearance(policy: StageChromePolicy) -> CGFloat {
+        guard policy.showsRootDock, navigation.continuityReceipt != nil else { return 0 }
+        return dynamicTypeSize.isAccessibilitySize ? 132 : 88
     }
 
     private func handleCreatedGoal(_ response: CreateGoalResponse, from overlay: ShellOverlayState) async {
@@ -388,4 +393,51 @@ struct AmbitionsStage: View {
         }
     }
 
+}
+
+private struct ShellContinuityBanner: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let receipt: ShellContinuityReceipt
+    let onDismiss: () -> Void
+
+    var body: some View {
+        HStack(alignment: .center, spacing: theme.spacing.sm) {
+            Image(systemName: "checkmark.circle")
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(theme.colors.accentWarm)
+                .frame(width: 20)
+                .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text(receipt.title)
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(theme.colors.textPrimary)
+                    .lineLimit(1)
+                Text(receipt.body)
+                    .font(.caption2)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .lineLimit(1)
+            }
+
+            Spacer(minLength: theme.spacing.xs)
+
+            Button(action: onDismiss) {
+                Image(systemName: "xmark")
+                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                    .frame(width: theme.panel.minimumTapTarget, height: theme.panel.minimumTapTarget)
+            }
+            .buttonStyle(.plain)
+            .foregroundStyle(theme.colors.textSecondary)
+            .accessibilityIdentifier("shell.continuity-receipt.dismiss-button")
+            .accessibilityLabel("Dismiss receipt")
+        }
+        .padding(.leading, theme.spacing.sm)
+        .padding(.trailing, theme.spacing.xs)
+        .padding(.vertical, theme.spacing.xs)
+        .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.shell.ribbonMaterial))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.shell.divider, lineWidth: 1))
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(receipt.title). \(receipt.body)")
+    }
 }
