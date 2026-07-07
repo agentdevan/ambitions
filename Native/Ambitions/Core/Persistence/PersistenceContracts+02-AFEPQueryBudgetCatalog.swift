@@ -21,7 +21,7 @@ enum AFEPQueryBudgetCatalog {
         AFEPQueryBudgetDescriptor(
             scope: .time,
             maximumReads: 10,
-            notes: "Time / LifeShape Field can include availability, schedule, and recovery reads inside one contract ceiling."
+            notes: "Time / Life Calendar can include availability, schedule, and recovery reads inside one contract ceiling."
         ),
         AFEPQueryBudgetDescriptor(
             scope: .you,

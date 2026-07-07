@@ -46,18 +46,21 @@ class AmbitionsUITestCase: XCTestCase {
         guard keyboard.exists else { return }
 
         let dismissButtons = [
+            app.buttons["capture.keyboard.done"],
+            app.toolbars.buttons["Done"],
             keyboard.buttons["Return"],
             keyboard.buttons["Done"],
-            keyboard.buttons["Hide keyboard"],
-            app.toolbars.buttons["Done"]
+            keyboard.buttons["Hide keyboard"]
         ]
 
         if let button = dismissButtons.first(where: { $0.waitForExistence(timeout: 1) && $0.isHittable }) {
             button.tap()
+            _ = keyboard.waitForNonExistence(timeout: 5)
             return
         }
 
         app.swipeUp()
+        _ = keyboard.waitForNonExistence(timeout: 5)
     }
 
     func tapFirstHittableButton(identifier: String? = nil, named label: String, in app: XCUIApplication, timeout: TimeInterval = 10) {

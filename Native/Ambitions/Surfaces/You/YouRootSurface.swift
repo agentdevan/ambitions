@@ -161,7 +161,7 @@ struct UserSystemProfileRootView: View {
             }
         }
         .accessibilityIdentifier("you.root")
-        .accessibilityValue("Local profile. \(localStatusSummary).")
+        .accessibilityValue("User System Profile. \(localStatusSummary).")
         .ambitionHaptic(theme.haptics.routeChange, trigger: selectedRowHapticToken)
     }
 

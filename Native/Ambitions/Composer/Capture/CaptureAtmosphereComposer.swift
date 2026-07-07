@@ -153,6 +153,7 @@ struct CaptureAtmosphereComposer: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     @Binding var text: String
+    @FocusState private var isInputFocused: Bool
 
     let routePreview: CaptureDraftRoutePreview?
     let error: String?
@@ -256,9 +257,21 @@ struct CaptureAtmosphereComposer: View {
                 .font(theme.typography.title)
                 .foregroundStyle(theme.colors.textPrimary)
                 .lineLimit(dynamicTypeSize.isAccessibilitySize ? 4 ... 8 : 2 ... 6)
+                .focused($isInputFocused)
+                .submitLabel(.done)
                 .onSubmit {
+                    isInputFocused = false
                     if isSubmitEnabled {
                         onSubmit()
+                    }
+                }
+                .toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Spacer()
+                        Button("Done") {
+                            isInputFocused = false
+                        }
+                        .accessibilityIdentifier("capture.keyboard.done")
                     }
                 }
                 .accessibilityIdentifier(accessibilityIDs.input)

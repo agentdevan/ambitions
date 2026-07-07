@@ -662,12 +662,12 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
                 projectionStore: projectionStore,
                 appGroupSnapshotStore: appGroupStore,
                 appState: repositories
-            )
+            ), appGroupSnapshotStore: appGroupStore
         )
 
         await writer.refresh(now: now)
 
-        let storedRecord = try await appGroupStore.read(id: SharedExternalSnapshotStore.snapshotRecordID)
+        let storedRecord = try await Self.readSharedSnapshotRecord(from: appGroupStore, sideEffectLedger: sideEffectLedger)
         let snapshot = try PersistenceCoding.decode(ExternalSurfaceSnapshot.self, from: storedRecord.payloadData)
         let payloadJSON = try XCTUnwrap(String(data: storedRecord.payloadData, encoding: .utf8))
         let sharedRecordURL = directory

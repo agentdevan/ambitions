@@ -253,16 +253,19 @@ struct PlanningNextStepSelector: Sendable {
             "review_cadence_days:\(contextVector.reviewCadenceDays)"
         ]
 
+        let sourceRecordID = "SourceRecord.planning.\(goal.id).\(step.id)"
+        let receiptID = "Receipt.planning.\(goal.id).\(step.id)"
+        let replayTraceID = "ReplayTrace.planning.\(goal.id).\(step.id)"
         return PlanningRuleTrace(
             id: "planning-rule-trace.\(goal.id).\(step.id)",
-            sourceRecordID: "SourceRecord.planning.\(goal.id).\(step.id)",
-            receiptID: "Receipt.planning.\(goal.id).\(step.id)",
-            replayTraceID: "ReplayTrace.planning.\(goal.id).\(step.id)",
+            sourceRecordID: sourceRecordID,
+            receiptID: receiptID,
+            replayTraceID: replayTraceID,
             contextVector: contextVector,
             ruleReasons: ruleReasons,
             fallbackReasonIDs: fallbackReasonIDs,
             confidence: evaluation.recommendationConfidence,
-            explanationSummary: "Local deterministic rules ranked this step through inspectable context. Source, receipt, reason, time fit, closure evidence, confidence, and fallback reasons stay visible.",
+            explanationSummary: "Local deterministic rules ranked this step through inspectable context. \(sourceRecordID), \(receiptID), \(replayTraceID), reason, time fit, closure evidence, confidence, and fallback reasons stay visible.",
             controlVisibility: "You / Search Ambitions can inspect sources, reasons, confidence, fallback, and reset or correction controls.",
             inspectionSurfaceTitle: "Search Ambitions",
             localOnly: true

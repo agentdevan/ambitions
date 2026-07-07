@@ -7,7 +7,7 @@ enum YouLens: SurfaceLens {
         primaryObjectTitle: "User System Profile",
         primaryActionTitle: "Review",
         runtimeInputs: [
-            "local profile defaults",
+            "User System Profile defaults",
             "permission status",
             "privacy posture",
             "receipt history",

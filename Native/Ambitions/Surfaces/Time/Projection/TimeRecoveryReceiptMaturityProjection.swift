@@ -27,8 +27,8 @@ extension RepositoryBackedTimeService {
             ? "displaced step pressure profile is recalculated before any write."
             : reflow.reasonDetail
         let lifeshapeImpact = reflow.reasonKind == .stillBelievable
-            ? "LifeShape impact: no recovery shift needed now."
-            : "LifeShape impact: recoverable pressure for destination and displaced steps is recalculated."
+            ? "Life Calendar impact: no recovery shift needed now."
+            : "Life Calendar impact: recoverable pressure for destination and displaced steps is recalculated."
         let momentumReflowContract: [String] = [
             "Original block link: \(saveTheDay.protectedItem) stays reviewable before any change.",
             "Approved duration: user-approved duration selection is required before reassignment.",

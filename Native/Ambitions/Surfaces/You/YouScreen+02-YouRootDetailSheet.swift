@@ -65,15 +65,15 @@ struct YouPersonalRuntimeStatusControlGroup: View {
 
     var body: some View {
         YouControlGroup(
-            eyebrow: "Personal system",
+            eyebrow: "User System Profile",
             section: YouSectionGroup(
-                title: "Personal system",
+                title: "User System Profile",
                 subtitle: "Inspectable local inputs, controls, and receipts for what Ambitions can use today.",
                 items: [
                     SettingsItem(
                         id: "you-personal-on-device",
                         title: "Personal context",
-                        subtitle: "Life context, memory controls, and personal settings are available from this profile.",
+                        subtitle: "Life context, memory controls, and personal settings are available from User System Profile.",
                         icon: "internaldrive",
                         valueLabel: "On device"
                     ),

@@ -49,6 +49,14 @@ struct TodaySurface: View {
         .navigationTitle(showsNavigationChrome ? "Today" : "")
         .navigationBarTitleDisplayMode(dynamicTypeSize.isAccessibilitySize ? .inline : .large)
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
+        .overlay(alignment: .topLeading) {
+            if let message = viewModel.transientMessage {
+                TodayInlineReceiptState(message: message)
+                    .padding(.horizontal, theme.spacing.lg)
+                    .padding(.top, theme.spacing.md)
+                    .transition(.move(edge: .top).combined(with: .opacity))
+            }
+        }
         .sheet(item: $selectedStepDetail) { detail in
             TodayStepDetailSheet(detail: detail) { action in
                 selectedStepDetail = nil
@@ -171,6 +179,43 @@ struct TodayInlineFallbackState: View {
         }
         .padding(.top, theme.spacing.xxxl)
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
+struct TodayInlineReceiptState: View {
+    @Environment(\.ambitionTheme) var theme
+
+    let message: TodayInlineMessage
+
+    var body: some View {
+        HStack(alignment: .top, spacing: theme.spacing.sm) {
+            Image(systemName: "checkmark.circle.fill")
+                .font(theme.typography.bodyEmphasized)
+                .foregroundStyle(theme.colors.accentWarm)
+                .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+                Text(message.title)
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text(message.body)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .padding(.horizontal, theme.spacing.md)
+        .padding(.vertical, theme.spacing.sm)
+        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+        )
+        .shadow(color: Color.black.opacity(0.12), radius: 14, y: 8)
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel(message.title)
+        .accessibilityValue(message.body)
+        .accessibilityIdentifier("today.inline-message")
     }
 }
 

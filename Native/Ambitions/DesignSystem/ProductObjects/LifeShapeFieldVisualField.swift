@@ -28,11 +28,25 @@ struct LifeShapeFieldVisualField: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text("Life Calendar")
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.80)
+                    .accessibilityIdentifier("time.life-calendar.title")
+                Text(visibleHorizonTitle)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.80)
+                    .accessibilityIdentifier("time.life-calendar.horizon-title")
+            }
             fieldStage
             horizonStrip
         }
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("LifeShape Field")
+        .accessibilityLabel("Life Calendar")
         .accessibilityValue(accessibilityValue)
         .accessibilityIdentifier("time.life-shape-field.primary-object")
     }
@@ -150,7 +164,7 @@ struct LifeShapeFieldVisualField: View {
         .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
         .overlay(instrumentStroke)
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("LifeShape time instrument")
+        .accessibilityLabel("Life Calendar instrument")
         .accessibilityIdentifier("time.life-shape-field.micro-field")
     }
 
@@ -278,6 +292,7 @@ struct LifeShapeFieldVisualField: View {
         .buttonStyle(.plain)
         .position(x: x, y: y)
         .accessibilityLabel(mark.accessibilitySummary)
+        .accessibilityIdentifier("time.life-shape-field.mark.\(mark.id)")
     }
 
     private var instrumentStroke: some View {
@@ -445,6 +460,19 @@ struct LifeShapeFieldVisualField: View {
         ]
         let byID = Dictionary(uniqueKeysWithValues: field.calendarRows.map { ($0.id, $0) })
         return preferredIDs.compactMap { byID[$0] }.prefix(isAccessibilitySize ? 11 : 6).map { $0 }
+    }
+
+    private var visibleHorizonTitle: String {
+        switch reading.horizon {
+        case .day:
+            "Today"
+        case .week:
+            "This week"
+        case .month:
+            "This month"
+        case .year:
+            "This year"
+        }
     }
 
     private var nowAnchorLabel: String {

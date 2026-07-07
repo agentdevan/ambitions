@@ -38,17 +38,21 @@ final class ProofRelationshipTracePrimitiveFamilyTests: XCTestCase {
     func testAMB582MotionCurrentUsesProofRelationshipTracePrimitiveFamily() throws {
         let root = repoRoot()
         let motionSource = [
+            try source("Native/Ambitions/Stage/Motion/StageMotionAccessibility.swift", root: root),
             try source("Native/Ambitions/Stage/Motion/StageMotionRenderer.swift", root: root),
             try source("Native/Ambitions/DesignSystem/ProductObjects/MotionCurrentContextViews.swift", root: root),
             try source("Native/Ambitions/DesignSystem/ProductObjects/MotionCurrentFieldView.swift", root: root),
             try source("Native/Ambitions/DesignSystem/ProductObjects/MotionCurrentLaneViews.swift", root: root)
         ].joined(separator: "\n")
 
-        XCTAssertTrue(motionSource.contains("ProofRelationshipTracePrimitiveToken("))
-        XCTAssertTrue(motionSource.contains("ProofRelationshipTracePrimitiveLine("))
-        XCTAssertTrue(motionSource.contains("ProofRelationshipTracePrimitiveStage("))
+        XCTAssertTrue(motionSource.contains("MotionSourceReceiptAffordance"))
         XCTAssertTrue(motionSource.contains("motion.current.history-review"))
-        XCTAssertTrue(motionSource.contains("History stays inspectable when you open detail."))
+        XCTAssertTrue(motionSource.contains("motionTraceRole(for label: String) -> ProofRelationshipTracePrimitiveRole"))
+        XCTAssertTrue(motionSource.contains("return .source"))
+        XCTAssertTrue(motionSource.contains("return .proof"))
+        XCTAssertTrue(motionSource.contains("return .receipt"))
+        XCTAssertTrue(motionSource.contains("return .replayTrace"))
+        XCTAssertTrue(motionSource.contains("return .inspection"))
 
         XCTAssertFalse(motionSource.contains("AmbitionChip(chip.title"))
         XCTAssertFalse(motionSource.contains("AmbitionChip(marker.title"))
@@ -57,18 +61,22 @@ final class ProofRelationshipTracePrimitiveFamilyTests: XCTestCase {
     }
 
     func testAMB582GoalReviewTrailAndReceiptsUseProofRelationshipTracePrimitiveFamily() throws {
-        let goalSource = try source("Native/Ambitions/Surfaces/Goals/GoalDetailScreen.swift", root: repoRoot())
-        let reviewTrailSource = try section(
-            named: "private struct GoalDetailReviewTrailSurface",
-            endingBefore: "private struct GoalDetailProofRailSurface",
-            in: goalSource
+        let root = repoRoot()
+        let reviewTrailSource = try source(
+            "Native/Ambitions/Surfaces/Goals/GoalDetailScreen+02-GoalDetailBreadcrumbSurface.swift",
+            root: root
+        )
+        let proofRailAndReceiptsSource = try source(
+            "Native/Ambitions/Surfaces/Goals/GoalDetailScreen+03-GoalDetailProofRailSurface.swift",
+            root: root
         )
         let receiptsSource = try section(
-            named: "private struct GoalDetailReceiptsSurface",
-            endingBefore: "private struct GoalAlternatePathDecisionSpine",
-            in: goalSource
+            named: "struct GoalDetailReceiptsSurface",
+            endingBefore: "struct GoalAlternatePathDecisionSpine",
+            in: proofRailAndReceiptsSource
         )
 
+        XCTAssertTrue(reviewTrailSource.contains("struct GoalDetailReviewTrailSurface"))
         XCTAssertTrue(reviewTrailSource.contains("ProofRelationshipTracePrimitiveStage("))
         XCTAssertTrue(reviewTrailSource.contains("ProofRelationshipTracePrimitiveLine("))
         XCTAssertTrue(reviewTrailSource.contains("goal-detail.review-trail.\\(item.id)"))
@@ -76,9 +84,13 @@ final class ProofRelationshipTracePrimitiveFamilyTests: XCTestCase {
         XCTAssertFalse(reviewTrailSource.contains("TagPill(item.sourceLabel"))
         XCTAssertFalse(reviewTrailSource.contains("Label(item.kind.title"))
 
+        XCTAssertTrue(proofRailAndReceiptsSource.contains("struct GoalDetailProofRailSurface"))
+        XCTAssertTrue(proofRailAndReceiptsSource.contains("ProofSpine("))
+        XCTAssertTrue(receiptsSource.contains("struct GoalDetailReceiptsSurface"))
         XCTAssertTrue(receiptsSource.contains("ProofRelationshipTracePrimitiveStage("))
         XCTAssertTrue(receiptsSource.contains("ProofRelationshipTracePrimitiveLine("))
         XCTAssertTrue(receiptsSource.contains("goal-detail.receipts.\\(item.id)"))
+        XCTAssertTrue(receiptsSource.contains("goal-detail.receipts.empty"))
         XCTAssertFalse(receiptsSource.contains("AppCard(state: item.state)"))
         XCTAssertFalse(receiptsSource.contains("EmptyStateCard("))
     }
@@ -97,10 +109,11 @@ final class ProofRelationshipTracePrimitiveFamilyTests: XCTestCase {
     }
 
     func section(named startMarker: String, endingBefore endMarker: String, in source: String) throws -> String {
-        guard let start = source.range(of: startMarker),
-              let end = source.range(of: endMarker, range: start.lowerBound..<source.endIndex) else {
-            throw XCTSkip("Source section could not be located for \(startMarker).")
-        }
+        let start = try XCTUnwrap(source.range(of: startMarker), "Source section start could not be located for \(startMarker).")
+        let end = try XCTUnwrap(
+            source.range(of: endMarker, range: start.lowerBound..<source.endIndex),
+            "Source section end could not be located for \(startMarker)."
+        )
         return String(source[start.lowerBound..<end.lowerBound])
     }
 

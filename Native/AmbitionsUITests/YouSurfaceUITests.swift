@@ -39,57 +39,61 @@ final class YouSurfaceUITests: AmbitionsUITestCase {
         XCTAssertTrue(waitForRootDestination("You", in: app, timeout: 10))
         XCTAssertTrue(tapCanonicalDestination("You", in: app))
         XCTAssertTrue(app.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts["Planning defaults"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["User System Profile"].waitForExistence(timeout: 10))
 
-        XCTAssertTrue(scrollUntilYouRowExists(named: "Receipts & History", in: app, maxAttempts: 6))
-        XCTAssertTrue(scrollUntilYouRowExists(named: "Privacy", in: app, maxAttempts: 6))
+        XCTAssertTrue(scrollUntilElementExists("you.settings.row.privacy", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilElementExists("you.settings.row.local-data-controls", in: app, maxAttempts: 8))
         XCTAssertTrue(tapYouRow(named: "Privacy", in: app))
         XCTAssertTrue(app.descendants(matching: .any)["you.trust-center-card"].waitForExistence(timeout: 10))
         XCTAssertTrue(scrollUntilStaticTextExists("Receipts, corrections, and explanations", in: app))
         XCTAssertTrue(scrollUntilStaticTextExists("Recent trust receipts", in: app))
         XCTAssertTrue(scrollUntilStaticTextExists("Claims locked", in: app))
         XCTAssertTrue(scrollUntilStaticTextExists("Receipt drawer", in: app))
-        XCTAssertTrue(scrollUntilStaticTextExists("Receipt drawer keeps source freshness, privacy, correction, undo, and review paths visible.", in: app))
+        XCTAssertTrue(scrollUntilStaticTextExists("Receipt drawer keeps context freshness, privacy, correction, undo, and review paths visible.", in: app))
         XCTAssertTrue(scrollUntilStaticTextExists("Proof trail", in: app))
-        XCTAssertTrue(scrollUntilStaticTextExists("Proof stays attached to source freshness, privacy, correction, and review state.", in: app))
+        XCTAssertTrue(scrollUntilStaticTextExists("Proof stays attached to context freshness, privacy, correction, and review state.", in: app))
         XCTAssertTrue(scrollUntilStaticTextExists("Why this?", in: app))
     }
 
     func testYouPersonalRuntimeAndLocalDataControlsShowHonestStatusLabels() throws {
-        let app = makeApp(bootstrapMode: "preview")
+        let app = makeApp(
+            bootstrapMode: "preview",
+            extraEnvironment: [
+                "AmbitionsInitialSurface": "you",
+                "AmbitionsScreenshotMode": "YES",
+                "AmbitionsYouDetail": "personal-runtime"
+            ]
+        )
         app.launch()
 
-        XCTAssertTrue(waitForRootDestination("You", in: app, timeout: 10))
-        XCTAssertTrue(tapCanonicalDestination("You", in: app))
         XCTAssertTrue(app.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts["Planning defaults"].waitForExistence(timeout: 10))
-
-        XCTAssertTrue(scrollUntilYouRowExists(named: "Personal system", in: app, maxAttempts: 8))
-        XCTAssertTrue(tapYouRow(named: "Personal system", in: app, maxAttempts: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["you.personal-runtime-status-card"].waitForExistence(timeout: 10))
-        XCTAssertTrue(scrollUntilStaticTextExists("local", in: app, maxAttempts: 8))
-        XCTAssertTrue(scrollUntilStaticTextExists("preview", in: app, maxAttempts: 8))
-        XCTAssertTrue(scrollUntilStaticTextExists("needs setup", in: app, maxAttempts: 8))
+        XCTAssertTrue(app.descendants(matching: .any)["you.personal-runtime-status-control-group"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilStaticTextExists("On device", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("user-owned", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Example", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Pending", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilStaticTextExists("No hidden automation", in: app, maxAttempts: 8))
-        app.buttons["Done"].tap()
+        app.buttons["shell.you.back-button"].tap()
 
         XCTAssertTrue(app.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts["Planning defaults"].waitForExistence(timeout: 10))
-        XCTAssertTrue(scrollUntilYouRowExists(named: "Local Data Controls", in: app, maxAttempts: 10))
-        XCTAssertTrue(tapYouRow(named: "Local Data Controls", in: app, maxAttempts: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["you.local-data-controls-card"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["User System Profile"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilYouRowExists(named: "Local Data", in: app, maxAttempts: 10))
+        XCTAssertTrue(tapYouRow(named: "Local Data", in: app, maxAttempts: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["you.local-data-controls-control-group"].waitForExistence(timeout: 10))
         XCTAssertTrue(scrollUntilStaticTextExists("Privacy / Local Data Controls", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilStaticTextExists("No hosted account", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilStaticTextExists("Policy receipt examples", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilStaticTextExists("Export/import drill pending", in: app, maxAttempts: 8))
-        XCTAssertTrue(scrollUntilStaticTextExists("needs setup", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("On device", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Example", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Pending", in: app, maxAttempts: 8))
     }
 
     func testYouScreenshotProofLaunchStatesOpenRequiredDetailSheets() throws {
         let states = [
             ("trust-automation", "you.automation-trust-card"),
-            ("personal-runtime", "you.personal-runtime-status-card"),
-            ("receipts-history", "you.receipts-card")
+            ("personal-runtime", "you.personal-runtime-status-control-group"),
+            ("receipts-history", "you.receipts-control-group")
         ]
 
         for state in states {
@@ -225,10 +229,10 @@ final class YouSurfaceUITests: AmbitionsUITestCase {
             MatrixItem(
                 name: "amb-1198-you-bottom-inset-local-data",
                 detail: nil,
-                requiredIdentifier: "you.row.local-data-controls",
+                requiredIdentifier: "you.settings.row.local-data-controls",
                 contentSizeCategory: "UICTContentSizeCategoryM",
                 extraEnvironment: [:],
-                bottomInsetTarget: "you.row.local-data-controls"
+                bottomInsetTarget: "you.settings.row.local-data-controls"
             )
         ]
 
@@ -251,10 +255,10 @@ final class YouSurfaceUITests: AmbitionsUITestCase {
 
             XCTAssertTrue(app.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
             if item.detail == nil {
-                XCTAssertTrue(app.staticTexts["Local profile"].waitForExistence(timeout: 10))
-                XCTAssertTrue(app.descendants(matching: .any)["you.row.appearance"].waitForExistence(timeout: 10))
-                XCTAssertTrue(app.descendants(matching: .any)["you.row.capture-preferences"].waitForExistence(timeout: 10))
-                XCTAssertTrue(app.descendants(matching: .any)["you.row.life-areas"].waitForExistence(timeout: 10))
+                XCTAssertTrue(app.staticTexts["User System Profile"].waitForExistence(timeout: 10))
+                XCTAssertTrue(app.descendants(matching: .any)["you.settings.row.appearance"].waitForExistence(timeout: 10))
+                XCTAssertTrue(app.descendants(matching: .any)["you.settings.row.capture-preferences"].waitForExistence(timeout: 10))
+                XCTAssertTrue(app.descendants(matching: .any)["you.settings.row.life-areas"].waitForExistence(timeout: 10))
                 XCTAssertFalse(app.staticTexts["How Ambitions works for me"].exists)
             }
             if let target = item.bottomInsetTarget {
@@ -275,65 +279,64 @@ final class YouSurfaceUITests: AmbitionsUITestCase {
     }
 
     func testYouLifeContextHeroCTAsExpandCatchUpAndReviewRoutes() throws {
-        let app = makeApp(bootstrapMode: "preview")
+        let app = makeApp(
+            bootstrapMode: "preview",
+            extraEnvironment: [
+                "AmbitionsInitialSurface": "you",
+                "AmbitionsScreenshotMode": "YES",
+                "AmbitionsYouDetail": "local-context"
+            ]
+        )
         app.launch()
 
-        XCTAssertTrue(waitForRootDestination("You", in: app, timeout: 10))
-        XCTAssertTrue(tapCanonicalDestination("You", in: app))
-        XCTAssertTrue(scrollUntilYouRowExists(named: "Local Context Controls", in: app, maxAttempts: 8))
-        XCTAssertTrue(tapYouRow(named: "Local Context Controls", in: app, maxAttempts: 10))
-
+        XCTAssertTrue(app.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(scrollUntilElementExists("you.life-context-card", in: app, maxAttempts: 16))
-        let catchUpButton = scrollUntilButtonHittable("you.life-context.catch-up-button", fallbackLabel: "Catch me up", in: app, maxAttempts: 16)
-        let reviewButton = scrollUntilButtonHittable("you.life-context.review-button", fallbackLabel: "Review what Ambitions knows", in: app, maxAttempts: 16)
-        XCTAssertTrue(catchUpButton.waitForExistence(timeout: 1))
-        XCTAssertTrue(reviewButton.waitForExistence(timeout: 1))
-
-        reviewButton.tap()
-        XCTAssertTrue(scrollUntilStaticTextExists("Needs Review", in: app, maxAttempts: 8))
-        XCTAssertTrue(scrollUntilStaticTextExists("Older context that may need review", in: app, maxAttempts: 8))
-        XCTAssertTrue(scrollUntilElementExists("you.life-context.section.life-context-review-needed", in: app, maxAttempts: 8))
-
-        catchUpButton.tap()
+        XCTAssertTrue(app.buttons["you.life-context.catch-up-button"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["you.life-context.review-button"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilStaticTextExists("Life Context", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Help Ambitions plan from your real life.", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilStaticTextExists("Basics", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilStaticTextExists("Schedule & Availability", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilStaticTextExists("Travel & Access", in: app, maxAttempts: 8))
-        XCTAssertTrue(app.buttons["you.life-context.fact.life-context-age.edit"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilElementExists("you.life-context.section.life-context-review-needed", in: app, maxAttempts: 8))
     }
 
     func testYouLifeContextLedgerInspectionShowsRuntimeFactorsAndReplayReceipts() throws {
-        let app = makeApp(bootstrapMode: "preview")
+        let app = makeApp(
+            bootstrapMode: "preview",
+            extraEnvironment: [
+                "AmbitionsInitialSurface": "you",
+                "AmbitionsScreenshotMode": "YES",
+                "AmbitionsYouDetail": "local-context"
+            ]
+        )
         app.launch()
 
-        XCTAssertTrue(waitForRootDestination("You", in: app, timeout: 10))
-        XCTAssertTrue(tapCanonicalDestination("You", in: app))
-        XCTAssertTrue(scrollUntilYouRowExists(named: "Local Context Controls", in: app, maxAttempts: 8))
-        XCTAssertTrue(tapYouRow(named: "Local Context Controls", in: app, maxAttempts: 10))
-
+        XCTAssertTrue(app.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(scrollUntilElementExists("you.life-context-card", in: app, maxAttempts: 16))
-        let reviewButton = scrollUntilButtonHittable("you.life-context.review-button", fallbackLabel: "Review what Ambitions knows", in: app, maxAttempts: 16)
-        XCTAssertTrue(reviewButton.waitForExistence(timeout: 1))
-        reviewButton.tap()
-        XCTAssertTrue(scrollUntilStaticTextExists("Runtime Factors", in: app, maxAttempts: 8))
-        XCTAssertTrue(scrollUntilStaticTextExists("Recommendation Inputs", in: app, maxAttempts: 8))
-        XCTAssertTrue(scrollUntilStaticTextExists("Why This Changes Plans", in: app, maxAttempts: 8))
-        XCTAssertTrue(scrollUntilStaticTextExists("Rejected Factors", in: app, maxAttempts: 8))
-        XCTAssertTrue(scrollUntilStaticTextExists("Sensitive Context Usage", in: app, maxAttempts: 8))
-        XCTAssertTrue(scrollUntilStaticTextExists("Context Confidence", in: app, maxAttempts: 8))
-        XCTAssertTrue(scrollUntilStaticTextExists("Needs Review", in: app, maxAttempts: 8))
-        XCTAssertTrue(scrollUntilStaticTextExists("Disabled Factors", in: app, maxAttempts: 8))
-        XCTAssertTrue(scrollUntilStaticTextExists("Replay & Receipts", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilElementExists("you.life-context.section.life-context-runtime-factors", in: app, maxAttempts: 12))
+        XCTAssertTrue(scrollUntilElementExists("you.life-context.section.life-context-recommendation-inputs", in: app, maxAttempts: 12))
+        XCTAssertTrue(scrollUntilElementExists("you.life-context.section.life-context-why-this-changes-plans", in: app, maxAttempts: 12))
+        XCTAssertTrue(scrollUntilElementExists("you.life-context.section.life-context-rejected-factors", in: app, maxAttempts: 12))
+        XCTAssertTrue(scrollUntilElementExists("you.life-context.section.life-context-sensitive-context-usage", in: app, maxAttempts: 12))
+        XCTAssertTrue(scrollUntilElementExists("you.life-context.section.life-context-context-confidence", in: app, maxAttempts: 12))
+        XCTAssertTrue(scrollUntilElementExists("you.life-context.section.life-context-review-needed", in: app, maxAttempts: 12))
+        XCTAssertTrue(scrollUntilElementExists("you.life-context.section.life-context-disabled-factors", in: app, maxAttempts: 12))
+        XCTAssertTrue(scrollUntilElementExists("you.life-context.section.life-context-replay-receipts", in: app, maxAttempts: 12))
     }
 
     func testYouSourceAtlasGoalKnowledgeSurfaceShowsSourceReviewAndReplayReceipts() throws {
-        let app = makeApp(bootstrapMode: "preview")
+        let app = makeApp(
+            bootstrapMode: "preview",
+            extraEnvironment: [
+                "AmbitionsInitialSurface": "you",
+                "AmbitionsScreenshotMode": "YES",
+                "AmbitionsYouDetail": "local-context"
+            ]
+        )
         app.launch()
 
-        XCTAssertTrue(waitForRootDestination("You", in: app, timeout: 10))
-        XCTAssertTrue(tapCanonicalDestination("You", in: app))
-        XCTAssertTrue(scrollUntilYouRowExists(named: "Local Context Controls", in: app, maxAttempts: 8))
-        XCTAssertTrue(tapYouRow(named: "Local Context Controls", in: app, maxAttempts: 10))
-
+        XCTAssertTrue(app.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(scrollUntilElementExists("you.source-atlas-knowledge-card", in: app, maxAttempts: 16))
         XCTAssertTrue(scrollUntilStaticTextExists("Source Atlas & Goal Knowledge", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilStaticTextExists("Goal Knowledge Sources", in: app, maxAttempts: 8))

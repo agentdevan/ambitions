@@ -16,9 +16,9 @@ extension AmbitionsUITestCase {
             }
         }
 
-        let startHere = app.staticTexts["Start here"]
+        let startHere = app.descendants(matching: .any)["TodayRealityRailStartHereTitle"]
         if startHere.waitForExistence(timeout: 5) {
-            startHere.tap()
+            tapIfPossible(startHere)
             if existingDetail.waitForExistence(timeout: 5) {
                 return true
             }
@@ -67,6 +67,26 @@ extension AmbitionsUITestCase {
     func normalTodayStepOpenControl(in app: XCUIApplication) -> XCUIElement {
         let candidates = [
             app.buttons["TodayStartHereOpenStep"],
+            app.descendants(matching: .any)["TodayStartHereOpenStep"],
+            app.buttons["TodayRealityRailPrimaryAction"],
+            app.descendants(matching: .any)["TodayRealityRailPrimaryAction"]
+        ]
+
+        for candidate in candidates where candidate.waitForExistence(timeout: 1) && candidate.isHittable {
+            return candidate
+        }
+
+        for candidate in candidates where candidate.waitForExistence(timeout: 1) {
+            return candidate
+        }
+
+        return app.descendants(matching: .any)["TodayStartHereOpenStep"]
+    }
+
+    func todayStepTitleElement(in app: XCUIApplication) -> XCUIElement {
+        let candidates = [
+            app.descendants(matching: .any)["TodayRealityRailStepTitle"],
+            app.buttons["TodayStartHereOpenStep"],
             app.descendants(matching: .any)["TodayStartHereOpenStep"]
         ]
 
@@ -74,16 +94,28 @@ extension AmbitionsUITestCase {
             return candidate
         }
 
-        return app.descendants(matching: .any)["TodayStartHereOpenStep"]
+        return app.descendants(matching: .any)["TodayRealityRailStepTitle"]
+    }
+
+    func todayStepTitleText(in app: XCUIApplication) -> String {
+        accessibilityText(for: todayStepTitleElement(in: app))
     }
 
     func normalTodayStepRowControl(in app: XCUIApplication) -> XCUIElement {
         let candidates = [
             app.buttons.matching(identifier: "TodayRealityRailRow").firstMatch,
-            app.descendants(matching: .any)["TodayRealityRailRow"]
+            app.descendants(matching: .any)["TodayRealityRailRow"],
+            app.buttons["TodayRealityRailPrimaryAction"],
+            app.descendants(matching: .any)["TodayRealityRailPrimaryAction"],
+            app.buttons["TodayStartHereOpenStep"],
+            app.descendants(matching: .any)["TodayStartHereOpenStep"]
         ]
 
-        for candidate in candidates where candidate.waitForExistence(timeout: 2) {
+        for candidate in candidates where candidate.waitForExistence(timeout: 1) && candidate.isHittable {
+            return candidate
+        }
+
+        for candidate in candidates where candidate.waitForExistence(timeout: 1) {
             return candidate
         }
 
@@ -98,7 +130,7 @@ extension AmbitionsUITestCase {
 
         let stepRow = normalTodayStepRowControl(in: app)
         if stepRow.waitForExistence(timeout: 5) {
-            stepRow.tap()
+            tapIfPossible(stepRow)
             return existingDetail.waitForExistence(timeout: 5)
         }
 
@@ -146,14 +178,63 @@ extension AmbitionsUITestCase {
         return todayReadinessAnchors(in: app).contains(where: { $0.exists })
     }
 
+    func waitForTodayInlineReceipt(
+        in app: XCUIApplication,
+        title: String,
+        bodyFragment: String? = nil,
+        timeout: TimeInterval = 10
+    ) -> Bool {
+        let deadline = Date().addingTimeInterval(timeout)
+        let receipt = app.descendants(matching: .any)["today.inline-message"]
+        let titlePredicate = NSPredicate(format: "label CONTAINS[c] %@", title)
+
+        while Date() < deadline {
+            if receipt.exists {
+                let receiptText = accessibilityText(for: receipt)
+                let hasTitle = receiptText.localizedCaseInsensitiveContains(title)
+                    || app.staticTexts.matching(titlePredicate).firstMatch.exists
+                let hasBody = bodyFragment.map { receiptText.localizedCaseInsensitiveContains($0) } ?? true
+                if hasTitle && hasBody {
+                    return true
+                }
+            }
+
+            if app.staticTexts.matching(titlePredicate).firstMatch.exists {
+                if let bodyFragment {
+                    let bodyPredicate = NSPredicate(format: "label CONTAINS[c] %@", bodyFragment)
+                    if app.staticTexts.matching(bodyPredicate).firstMatch.exists {
+                        return true
+                    }
+                } else {
+                    return true
+                }
+            }
+
+            RunLoop.current.run(until: Date().addingTimeInterval(0.2))
+        }
+
+        return false
+    }
+
+    func todayInlineReceiptDebugDescription(in app: XCUIApplication) -> String {
+        let receipt = app.descendants(matching: .any)["today.inline-message"]
+        let receiptText = receipt.exists ? accessibilityText(for: receipt) : ""
+        let visibleText = app.staticTexts.allElementsBoundByIndex
+            .prefix(24)
+            .map { accessibilityText(for: $0) }
+            .filter { $0.isEmpty == false }
+            .joined(separator: " | ")
+        return "receiptExists=\(receipt.exists); receiptText=\(receiptText); visibleText=\(visibleText)"
+    }
+
     func todayReadinessAnchors(in app: XCUIApplication) -> [XCUIElement] {
         [
-            app.staticTexts["Start here"],
-            app.staticTexts["On-device"],
-            app.staticTexts["TodayRealityRailStartHereTitle"],
-            app.staticTexts["TodayRealityRailStepTitle"],
-            app.otherElements["TodayRealityRail"],
-            app.buttons["TodayRealityRailPrimaryAction"]
+            app.descendants(matching: .any)["TodayRealityRailStartHereTitle"],
+            app.descendants(matching: .any)["TodayRealityRailStepTitle"],
+            app.descendants(matching: .any)["TodayStartHereSurface"],
+            app.descendants(matching: .any)["TodayRealityRail"],
+            app.buttons["TodayRealityRailPrimaryAction"],
+            app.buttons["TodayStartHereOpenStep"]
         ]
     }
 }

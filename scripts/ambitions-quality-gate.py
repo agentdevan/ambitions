@@ -58,6 +58,7 @@ REQUIRED_ARCHITECTURE_PATHS = [
     "scripts/ambitions-device-proof-required.py",
     "scripts/ambitions-release-non-claim-gate.py",
     "scripts/ambitions-architecture-path-normalization-check.py",
+    "scripts/ambitions-flagship-ios-standards-check.py",
     "scripts/ambitions-green-standard-audit.py",
     "Native/Ambitions/Language/ProductCopy.swift",
     "Native/Ambitions/Language/ForbiddenTopLevelTerms.swift",
@@ -656,12 +657,21 @@ def check_changed_support_file_sizes(files: list[Path], changed: set[str]) -> li
         if relative not in changed:
             continue
         count = line_count(read(path))
-        if count > SUPPORT_SWIFT_HARD_LINE_CAP:
+        base_result = subprocess.run(
+            ["git", "show", f"HEAD:{relative}"],
+            cwd=ROOT,
+            check=False,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_count = line_count(base_result.stdout) if base_result.returncode == 0 else None
+        if count > SUPPORT_SWIFT_HARD_LINE_CAP and (base_count is None or count > base_count):
             findings.append(
                 Finding(
                     "support-file-size",
                     relative,
-                    f"{count} changed support lines exceeds maximum {SUPPORT_SWIFT_HARD_LINE_CAP}",
+                    f"{count} support lines exceeds maximum {SUPPORT_SWIFT_HARD_LINE_CAP} and grew from {base_count or 'new'}",
                 )
             )
     return findings
@@ -1049,6 +1059,38 @@ def check_release_non_claim_contract() -> list[Finding]:
     ]
 
 
+def check_flagship_ios_standards_contract() -> list[Finding]:
+    script = ROOT / "scripts" / "ambitions-flagship-ios-standards-check.py"
+    if not script.exists():
+        return [
+            Finding(
+                "flagship-ios-standards",
+                rel(script),
+                "flagship iOS standards check is missing",
+            )
+        ]
+
+    result = subprocess.run(
+        [sys.executable, str(script)],
+        cwd=ROOT,
+        check=False,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if result.returncode == 0:
+        return []
+
+    output = "\n".join(part for part in [result.stdout, result.stderr] if part).strip()
+    return [
+        Finding(
+            "flagship-ios-standards",
+            rel(script),
+            output[:700] if output else "Flagship iOS standards gate failed",
+        )
+    ]
+
+
 def check_architecture_path_normalization_contract() -> list[Finding]:
     script = ROOT / "scripts" / "ambitions-architecture-path-normalization-check.py"
     if not script.exists():
@@ -1154,6 +1196,7 @@ def run_self_test() -> int:
     assert "scripts/ambitions-accepted-yellow-misuse-audit.py" in REQUIRED_ARCHITECTURE_PATHS
     assert "scripts/ambitions-release-non-claim-gate.py" in REQUIRED_ARCHITECTURE_PATHS
     assert "scripts/ambitions-architecture-path-normalization-check.py" in REQUIRED_ARCHITECTURE_PATHS
+    assert "scripts/ambitions-flagship-ios-standards-check.py" in REQUIRED_ARCHITECTURE_PATHS
 
     print("ambitions-quality-gate self-test passed")
     return 0
@@ -1194,6 +1237,7 @@ def main() -> int:
     findings.extend(check_runtime_direct_write_contract())
     findings.extend(check_accepted_yellow_misuse_contract())
     findings.extend(check_release_non_claim_contract())
+    findings.extend(check_flagship_ios_standards_contract())
     findings.extend(check_architecture_path_normalization_contract())
     findings.extend(check_action_mutation_contract(files, rehomed_stage_overlay_paths))
 

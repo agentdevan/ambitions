@@ -93,7 +93,7 @@ extension TimeLifeSuiteProjector {
                 ? "Free-time quality: protected time is helping recovery."
                 : "Free-time quality: watch quality drift before opening bigger commitments.",
             executionLanesLabel: allBlocks.isEmpty
-                ? "Open time: none currently active in this LifeShape slice."
+                ? "Open time: none currently active in this Life Calendar slice."
                 : "Open time: \(allBlocks.count) block\((allBlocks.count == 1) ? "" : "s") stay reviewable before mutation.",
             goalLoadLabel: activeGoalCount == 0
                 ? "Goal load: no active goals to stretch this shape."

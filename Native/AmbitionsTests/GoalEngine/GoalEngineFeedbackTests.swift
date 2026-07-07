@@ -134,7 +134,10 @@ private extension GoalEngineFeedbackTests {
         case let .starterPlanned(result):
             currentResult = .starterPlanned(result)
         case .clarificationRequired, .blocked:
-            throw XCTSkip("Fixture must produce a plannable result.")
+            currentResult = try XCTUnwrap(
+                Optional<GoalAdaptivePlanResult>.none,
+                "GoalEngine feedback fixture must produce a plannable result."
+            )
         }
         let step = try XCTUnwrap(currentResult.plan.sections.first?.steps.first)
         return GoalAdaptivePlanInput(

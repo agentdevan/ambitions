@@ -45,6 +45,7 @@ enum ForbiddenTopLevelTerms {
         Rule(term: "blocked-pending-model", minimumAllowedExposure: .internal),
         Rule(term: "correction-shaped ledger", minimumAllowedExposure: .internal),
         Rule(term: "Motion Current", minimumAllowedExposure: .internal),
+        Rule(term: "LifeShape Field", minimumAllowedExposure: .internal),
         Rule(term: "Capture Anything", minimumAllowedExposure: .internal),
         Rule(term: "Close Today", minimumAllowedExposure: .internal)
     ]

@@ -193,7 +193,7 @@ extension PreviewTimeScenarios {
                 "Approved duration: user-approved duration selection is required before reassignment.",
                 "Displaced step pressure: current pressure context is recalculated before any write.",
                 "Destination step: goal-1 pressure is recalculated in this contract.",
-                "LifeShape impact: recoverable pressure for destination and displaced steps is recalculated."
+                "Life Calendar impact: recoverable pressure for destination and displaced steps is recalculated."
             ],
             confirmationRequired: "Safe local suggestion",
             undoAvailability: "Undo can be local",

@@ -50,6 +50,18 @@ struct GoalDetailScreen: View {
 
                     GoalDetailJournalSurface(detail: detail)
 
+                    if let explainability = detail.explainability {
+                        GoalTrustWhisperSurface(
+                            state: explainability,
+                            isExpanded: $viewModel.isTrustExpanded
+                        )
+                    }
+
+                    GoalMemoryNarrativeSurface(
+                        detail: detail,
+                        isExpanded: $viewModel.isMemoryExpanded
+                    )
+
                     if let clarification = detail.clarification {
                         GoalDetailSectionSurface(title: clarification.title, subtitle: clarification.subtitle) {
                             VStack(alignment: .leading, spacing: theme.spacing.sm) {

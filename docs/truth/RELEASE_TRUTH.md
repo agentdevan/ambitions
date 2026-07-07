@@ -219,8 +219,29 @@ Required proof before claiming tests pass:
 - simulator/device target
 - exit code
 - `.xcresult` or log summary when applicable
+- count of executed, failed, skipped, and expected-failure tests when available
+- confirmation that the underlying `xcodebuild`, runner, and simulator processes exited
 
 Do not infer test pass from source existence.
+
+### 6A. Flagship Test Evidence Standard
+
+For any release-adjacent, flagship-readiness, root-surface, UI-suite, accessibility, runtime, migration, or remediation-completion claim:
+
+- expected failures count as failures for the scoped claim
+- skipped tests count as not run unless they are explicitly external/manual proof outside the claim
+- a wrapper timeout is inconclusive until the underlying process and result bundle are inspected
+- a test lane with broad UI failures, interrupted execution, unreadable `.xcresult`, or lingering runner process cannot support Green
+- known flaky lanes must be repaired or removed from the readiness claim with a named owner, expiry, and follow-up
+- rerunning until pass is not proof unless the root cause of the earlier failure is fixed or the earlier failure is shown to be environmental with current evidence
+
+Allowed wording for incomplete test evidence:
+
+```text
+Focused proof passed for the named scope.
+Full-suite Green is not claimed.
+Skipped or expected-failure lanes do not support readiness.
+```
 
 ---
 

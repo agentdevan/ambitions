@@ -18,7 +18,7 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
         case .missionControlTimeSpine: "Your Direction"
         case .proofSpine: "Proof Spine"
         case .capturePlacementShelf: "Atmosphere Composer"
-        case .lifeShapeContourMap: "LifeShape Field"
+        case .lifeShapeContourMap: "Life Calendar"
         case .personalSystemCenter: "User System Profile"
         case .memoryLens: "Search"
         }
@@ -50,7 +50,7 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
         case .capturePlacementShelf:
             "Capture keeps the Atmosphere Composer available while placement, privacy, and correction signals settle."
         case .lifeShapeContourMap:
-            "Time preserves the LifeShape Field while capacity, pressure, and protected pockets load."
+            "Time preserves the Life Calendar while capacity, pressure, and protected pockets load."
         case .personalSystemCenter:
             "You keeps Your System stable while setup, trust, privacy, receipts, and defaults load."
         case .memoryLens:
@@ -71,7 +71,7 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
         case .capturePlacementShelf:
             "The composer stays quiet until something needs a place."
         case .lifeShapeContourMap:
-            "The LifeShape Field can stay open when no real pressure needs shaping."
+            "The Life Calendar can stay open when no real pressure needs shaping."
         case .personalSystemCenter:
             "Your System starts with profile, defaults, privacy, and history controls."
         case .memoryLens:

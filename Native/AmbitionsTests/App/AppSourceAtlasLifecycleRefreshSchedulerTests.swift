@@ -148,7 +148,7 @@ private actor DeferredSourceAtlasLifecycleRefreshService: SourceAtlasPublicPackL
             }
             try await Task.sleep(nanoseconds: 5_000_000)
         }
-        throw XCTSkip("Deferred Source Atlas refresh did not reach pending count \(count).")
+        XCTFail("Deferred Source Atlas refresh did not reach pending count \(count).")
     }
 
     func completeNext(with resolution: SourceAtlasPublicPackLifecycleRefreshResolution) {

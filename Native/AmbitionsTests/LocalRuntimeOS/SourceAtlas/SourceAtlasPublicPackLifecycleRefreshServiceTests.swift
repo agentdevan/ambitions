@@ -1676,7 +1676,7 @@ private actor SourceAtlasLifecycleSuspendingTransport: SourceAtlasPublicPackRemo
             }
             try await Task.sleep(nanoseconds: 5_000_000)
         }
-        throw XCTSkip("Suspending Source Atlas transport did not receive \(count) request(s).")
+        XCTFail("Suspending Source Atlas transport did not receive \(count) request(s).")
     }
 
     func failAllSuspendedFetches() {

@@ -3,17 +3,27 @@ import XCTest
 @MainActor
 extension AmbitionsUITestCase {
     func shellCommandButton(in app: XCUIApplication) -> XCUIElement {
-        let identified = app.buttons["shell.global-entry-button"]
-        if identified.waitForExistence(timeout: 2) {
-            return identified
+        let candidates = [
+            app.buttons["shell.global-entry-button"],
+            app.buttons["shell.header.action-cluster-menu"],
+            app.buttons["shell.today.capture-button"],
+            app.buttons["shell.goals.capture-button"],
+            app.buttons["shell.time.capture-button"],
+            app.buttons["shell.you.capture-button"],
+            app.buttons["Capture"],
+            app.buttons["Quick action Sheet"]
+        ]
+
+        for candidate in candidates where candidate.waitForExistence(timeout: 1) && candidate.isHittable {
+            return candidate
         }
-        let currentLabel = app.buttons["Capture"]
-        if currentLabel.waitForExistence(timeout: 2) {
-            return currentLabel
+
+        let visibleFrame = app.windows.firstMatch.frame
+        for candidate in candidates where candidate.waitForExistence(timeout: 1) && candidate.frame.intersects(visibleFrame) {
+            return candidate
         }
-        let labeled = app.buttons["Quick action Sheet"]
-        _ = labeled.waitForExistence(timeout: 2)
-        return labeled
+
+        return app.buttons["shell.global-entry-button"]
     }
 
     func openCanonicalDestination(_ title: String, screenIdentifier: String, in app: XCUIApplication, timeout: TimeInterval = 20) -> Bool {

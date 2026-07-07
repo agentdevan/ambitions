@@ -130,10 +130,14 @@ final class HorizonCapacityPrimitiveFamilyTests: XCTestCase {
     }
 
     private func activeTimeScreenBodySource(from timeScreenSource: String) throws -> String {
-        guard let start = timeScreenSource.range(of: "var body: some View"),
-              let end = timeScreenSource.range(of: "private var shell:", range: start.lowerBound..<timeScreenSource.endIndex) else {
-            throw XCTSkip("Active TimeSurface body source could not be located.")
-        }
+        let start = try XCTUnwrap(
+            timeScreenSource.range(of: "var body: some View"),
+            "Active TimeSurface body start could not be located."
+        )
+        let end = try XCTUnwrap(
+            timeScreenSource.range(of: "private var shell:", range: start.lowerBound..<timeScreenSource.endIndex),
+            "Active TimeSurface body end could not be located."
+        )
         return String(timeScreenSource[start.lowerBound..<end.lowerBound])
     }
 

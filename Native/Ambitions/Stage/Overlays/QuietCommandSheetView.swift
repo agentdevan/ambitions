@@ -104,6 +104,7 @@ struct QuietCommandSheetView: View {
                 appContainer?.commandRouter.presentCreateGoal(source: overlay.entrySource, seedText: overlay.query, captureID: overlay.captureID)
             }
             .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
+            .accessibilityIdentifier("shell.command.action.new_goal")
         }
     }
 
@@ -118,6 +119,7 @@ struct QuietCommandSheetView: View {
                 appContainer?.navigation.selectToday(entryContext: .standard)
             }
             .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
+            .accessibilityIdentifier("shell.command.action.quick_recovery")
         }
     }
 
@@ -132,6 +134,7 @@ struct QuietCommandSheetView: View {
                 appContainer?.navigation.selectToday(entryContext: .stepSession)
             }
             .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
+            .accessibilityIdentifier("shell.command.action.quick_focus")
         }
     }
 
@@ -146,6 +149,7 @@ struct QuietCommandSheetView: View {
                 appContainer?.commandRouter.route(to: .tab(.time), source: overlay.entrySource)
             }
             .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
+            .accessibilityIdentifier("shell.command.action.open_week")
         }
     }
 
@@ -156,11 +160,13 @@ struct QuietCommandSheetView: View {
                 appContainer?.navigation.presentGlobalCaptureComposer(source: overlay.entrySource)
             }
             .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+            .accessibilityIdentifier("shell.command.action.quick_capture")
             Button("Create Goal") {
                 onDismiss()
                 appContainer?.commandRouter.presentCreateGoal(source: overlay.entrySource)
             }
             .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+            .accessibilityIdentifier("shell.command.action.new_goal")
         }
     }
 

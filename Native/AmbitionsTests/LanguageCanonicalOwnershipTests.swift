@@ -49,7 +49,7 @@ final class LanguageCanonicalOwnershipTests: XCTestCase {
 
     func testForbiddenLanguageAuditRoutesThroughSurfaceCopyPolicy() {
         XCTAssertEqual(ForbiddenLanguageAudit.violation(in: "Show the Motion tab"), "Motion tab")
-        XCTAssertNil(ForbiddenLanguageAudit.violation(in: "Open Time and review the LifeShape Field."))
+        XCTAssertNil(ForbiddenLanguageAudit.violation(in: "Open Time and review the Life Calendar."))
     }
 
     func testRootCopyExposureBlocksInternalRuntimeTerms() {

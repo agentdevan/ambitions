@@ -108,6 +108,35 @@ ADAPTER_TOKENS = (
     "ControlPlane",
 )
 
+BEHAVIOR_DECLARATION_TOKENS = (
+    "Analyzer",
+    "Builder",
+    "Classifier",
+    "Compiler",
+    "Engine",
+    "Generator",
+    "Linter",
+    "Orchestrator",
+    "Planner",
+    "Projector",
+    "Resolver",
+    "Rewriter",
+    "Scanner",
+    "Service",
+)
+
+VALUE_PROTOCOL_TOKENS = (
+    "Codable",
+    "Sendable",
+    "Equatable",
+    "Hashable",
+    "Identifiable",
+    "CaseIterable",
+)
+
+DECLARATION_PATTERN = re.compile(r"\b(?:struct|enum|class|actor|protocol)\s+([A-Za-z_][A-Za-z0-9_]*)")
+EXTENSION_PATTERN = re.compile(r"\bextension\s+([A-Za-z_][A-Za-z0-9_\.]*)")
+
 LOOP_ROLE_RULES = (
     ("Intent", ("Intent", "Capture", "GoalEngineIntake", "StartingPosition")),
     ("Context", ("Context", "Capacity", "Knowledge", "Source", "Privacy", "Boundary")),
@@ -142,6 +171,99 @@ def matches_any(name: str, tokens: tuple[str, ...]) -> bool:
     return any(token in name for token in tokens)
 
 
+def read_source(path: Path) -> str:
+    if not path.exists():
+        return ""
+    return path.read_text(encoding="utf-8")
+
+
+def declaration_names(source: str) -> list[str]:
+    return DECLARATION_PATTERN.findall(source)
+
+
+def extension_names(source: str) -> list[str]:
+    return EXTENSION_PATTERN.findall(source)
+
+
+def source_evidence_category(relative_path: str, source: str) -> tuple[str, str, str]:
+    declarations = declaration_names(source)
+    extensions = extension_names(source)
+    evidence_names = declarations + extensions
+    has_functions = re.search(r"\bfunc\s+", source) is not None
+
+    if not source:
+        return (
+            "value_object",
+            "domain-value-default-no-source-evidence",
+            "low",
+        )
+
+    if evidence_names and any(matches_any(name, BEHAVIOR_DECLARATION_TOKENS) for name in evidence_names):
+        return (
+            "command_payload",
+            "domain-behavior-declaration-evidence",
+            "high" if has_functions else "medium",
+        )
+
+    if evidence_names and any(matches_any(name, PROJECTION_TOKENS) for name in evidence_names):
+        return (
+            "projection_dto",
+            "projection-declaration-evidence",
+            "high",
+        )
+
+    if evidence_names and any(matches_any(name, EVENT_TOKENS) for name in evidence_names):
+        return (
+            "event_payload",
+            "event-proof-receipt-declaration-evidence",
+            "high",
+        )
+
+    if evidence_names and any(matches_any(name, COMMAND_TOKENS) for name in evidence_names):
+        return (
+            "command_payload",
+            "command-operation-declaration-evidence",
+            "high",
+        )
+
+    if evidence_names and any(matches_any(name, ADAPTER_TOKENS) for name in evidence_names):
+        return (
+            "adapter_dto",
+            "boundary-source-adapter-declaration-evidence",
+            "high",
+        )
+
+    if any(token in source for token in VALUE_PROTOCOL_TOKENS):
+        return (
+            "value_object",
+            "domain-value-protocol-conformance-evidence",
+            "high",
+        )
+
+    if declarations:
+        return (
+            "value_object",
+            "domain-declaration-evidence",
+            "medium",
+        )
+
+    if extensions:
+        confidence = "medium"
+        if has_functions or "GoalEngine/" in relative_path:
+            confidence = "high"
+        return (
+            "value_object",
+            "domain-extension-target-evidence",
+            confidence,
+        )
+
+    return (
+        "value_object",
+        "domain-source-file-evidence",
+        "medium",
+    )
+
+
 def loop_role_for(name: str) -> str:
     for role, tokens in LOOP_ROLE_RULES:
         if any(token in name for token in tokens):
@@ -153,6 +275,7 @@ def classify_path(path: Path) -> Classification:
     name = path.name
     relative_path = rel(path)
     suffix_debt = has_mechanical_suffix(path)
+    source = read_source(path)
 
     if name in CANONICAL_ENTITY_FILES:
         category = "canonical_entity"
@@ -183,9 +306,7 @@ def classify_path(path: Path) -> Classification:
         reason = "boundary-source-pack-or-interoperability-marker"
         confidence = "medium"
     else:
-        category = "value_object"
-        reason = "domain-value-default-no-special-marker"
-        confidence = "low"
+        category, reason, confidence = source_evidence_category(relative_path, source)
 
     if suffix_debt:
         migration_action = "rename-mechanical-suffix-to-semantic-owner"
@@ -236,7 +357,7 @@ def build_report() -> dict[str, object]:
     loop_roles = Counter(entry.loopRole for entry in entries)
     migration_actions = Counter(entry.migrationAction for entry in entries)
     unallowed = sorted({entry.category for entry in entries if entry.category not in ALLOWED_CATEGORIES})
-    fallback_entries = [entry.path for entry in entries if entry.reason == "domain-value-default-no-special-marker"]
+    low_confidence_entries = [entry.path for entry in entries if entry.confidence == "low"]
     suffix_entries = [entry.path for entry in entries if "mechanical-suffix" in entry.migrationAction]
     ui_model_entries = [entry.path for entry in entries if entry.category == "ui_model"]
     obsolete_entries = [entry.path for entry in entries if entry.category == "obsolete"]
@@ -256,14 +377,14 @@ def build_report() -> dict[str, object]:
             "mechanicalSuffixDebtCount": len(suffix_entries),
             "uiModelDebtCount": len(ui_model_entries),
             "obsoleteBucketDebtCount": len(obsolete_entries),
-            "lowConfidenceDefaultCount": len(fallback_entries),
+            "lowConfidenceDefaultCount": len(low_confidence_entries),
         },
         "screenContractOwnerStatus": screen_contract_status,
         "debt": {
             "mechanicalSuffixFiles": suffix_entries,
             "uiModelFilesStillInDomain": ui_model_entries,
             "obsoleteBucketFiles": obsolete_entries,
-            "lowConfidenceDefaultFiles": fallback_entries,
+            "lowConfidenceDefaultFiles": low_confidence_entries,
         },
         "entries": [asdict(entry) for entry in entries],
     }

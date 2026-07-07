@@ -60,7 +60,10 @@ actor ExternalSurfaceSnapshotWriter: ExternalSurfaceSnapshotWriting {
             await recordExternalSnapshotSideEffect(
                 status: .failedSafely,
                 at: now,
-                degradedFacts: ["External snapshot refresh/write did not complete."]
+                degradedFacts: [
+                    "External snapshot refresh/write did not complete.",
+                    Self.failureDiagnostic(for: error)
+                ]
             )
             // Snapshot export is best-effort and must never block user flows.
         }
@@ -121,6 +124,19 @@ actor ExternalSurfaceSnapshotWriter: ExternalSurfaceSnapshotWriting {
         )
 
         try? await sideEffectLedger.append(record)
+    }
+
+    private static func failureDiagnostic(for error: any Error) -> String {
+        if let writerError = error as? ExternalSurfaceSnapshotWriterError {
+            return "External snapshot writer failed: \(writerError)"
+        }
+        if let gateError = error as? PrivacyExternalBoundaryGateError {
+            return "External snapshot privacy gate failed: \(gateError)"
+        }
+        if let storageError = error as? LocalRuntimeStorageError {
+            return "External snapshot storage failed: \(storageError)"
+        }
+        return "External snapshot failed with \(String(describing: type(of: error)))"
     }
 }
 

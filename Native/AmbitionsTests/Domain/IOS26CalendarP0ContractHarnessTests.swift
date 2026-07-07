@@ -133,7 +133,7 @@ final class IOS26CalendarP0ContractHarnessTests: XCTestCase {
         XCTAssertEqual(scheduleEntry.privacy, .standard)
         XCTAssertTrue(scheduleEntry.localOnly)
         XCTAssertEqual(contextEntry.kind, .calendarContextObserved)
-        XCTAssertEqual(contextEntry.source, .plan)
+        XCTAssertEqual(contextEntry.source, .time)
         XCTAssertEqual(contextEntry.privacy, .calendarDerived)
         XCTAssertTrue(contextEntry.localOnly)
         XCTAssertEqual(explanation.privacy, .calendarDerived)

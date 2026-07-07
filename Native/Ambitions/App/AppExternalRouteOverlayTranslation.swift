@@ -45,7 +45,7 @@ extension AppExternalRouteTranslator {
             return .commandSheet(
                 intent: intent,
                 entrySource: source,
-                presentationContext: intent == .quickCapture ? .quickCapture : .neutral
+                presentationContext: intent?.presentationContext ?? .neutral
             )
         case "memory-lens", "memory", "search":
             return .memoryLens(
@@ -91,7 +91,7 @@ extension AppExternalRouteTranslator {
             return .commandSheet(
                 intent: intent,
                 entrySource: entrySource,
-                presentationContext: intent == .quickCapture ? .quickCapture : .neutral
+                presentationContext: intent?.presentationContext ?? .neutral
             )
         case "memory-lens", "open-memory-lens", "memory":
             return .memoryLens(

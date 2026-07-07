@@ -74,6 +74,23 @@ enum ShellCommandIntent: String, CaseIterable, Hashable, Identifiable, Sendable,
         }
     }
 
+    var presentationContext: ShellCommandPresentationContext {
+        switch self {
+        case .quickCapture, .openCapture:
+            .quickCapture
+        case .newGoal:
+            .createGoal
+        case .quickTimePatch, .openWeek:
+            .time
+        case .quickRecovery:
+            .recovery
+        case .quickFocus:
+            .focus
+        case .openGoal, .memoryLens:
+            .recall
+        }
+    }
+
     var externalBrainCommandContract: ShellExternalBrainCommandContract {
         switch self {
         case .quickCapture:

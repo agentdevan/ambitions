@@ -4,6 +4,11 @@ import XCTest
 extension AmbitionsUITestCase {
     func goalCreateButton(in app: XCUIApplication) -> XCUIElement {
         let candidates = [
+            app.buttons["goals.capture-plus"],
+            app.descendants(matching: .any)["goals.capture-plus"],
+            app.buttons["Add goal"],
+            app.buttons["goals.atlas-dock.create"],
+            app.descendants(matching: .any)["goals.atlas-dock.create"],
             goalsHeroPrimaryAction(in: app),
             app.buttons["goals.empty.create-goal"],
             app.buttons["goals.create-button"],
@@ -23,6 +28,10 @@ extension AmbitionsUITestCase {
 
     func goalTitleInput(in app: XCUIApplication) -> XCUIElement {
         let candidates = [
+            app.textFields["shell.activated-capture.input"],
+            app.textViews["shell.activated-capture.input"],
+            app.textFields["capture.quick-input"],
+            app.textViews["capture.quick-input"],
             app.textFields["create-goal.title-field"],
             app.textViews["create-goal.title-field"],
             app.textFields["What do you want to make real?"],
@@ -54,6 +63,11 @@ extension AmbitionsUITestCase {
 
     func waitForCreateGoalComposer(in app: XCUIApplication, timeout: TimeInterval = 10) -> Bool {
         let candidates = [
+            app.descendants(matching: .any)["shell.activated-capture-seam"],
+            app.descendants(matching: .any)["shell.activated-capture.composer"],
+            app.textFields["shell.activated-capture.input"],
+            app.descendants(matching: .any)["capture.composer"],
+            app.textFields["capture.quick-input"],
             app.descendants(matching: .any)["create-goal.hero-card"],
             app.navigationBars["Create Goal"],
             app.staticTexts["Strategy Composer"],
@@ -91,20 +105,32 @@ extension AmbitionsUITestCase {
     }
 
     func goalsHeroPrimaryAction(in app: XCUIApplication) -> XCUIElement {
-        let button = app.buttons["goals.hero.primary-action"]
-        if button.waitForExistence(timeout: 2) {
-            return button
+        let candidates = [
+            app.buttons["goals.current-step.open"],
+            app.descendants(matching: .any)["goals.current-step.open"],
+            app.buttons["goals.hero.primary-action"],
+            app.descendants(matching: .any)["goals.hero.primary-action"],
+            app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "goals.surface.open.")).firstMatch,
+            app.descendants(matching: .any).matching(NSPredicate(format: "identifier BEGINSWITH %@", "goals.surface.open.")).firstMatch
+        ]
+
+        for candidate in candidates where candidate.waitForExistence(timeout: 1) && candidate.isHittable {
+            return candidate
         }
 
-        let fallback = app.descendants(matching: .any)["goals.hero.primary-action"]
-        _ = fallback.waitForExistence(timeout: 2)
-        return fallback
+        for candidate in candidates where candidate.waitForExistence(timeout: 1) {
+            return candidate
+        }
+
+        return app.descendants(matching: .any)["goals.current-step.open"]
     }
 
     func waitForGoalsPrimaryObject(in app: XCUIApplication, timeout: TimeInterval = 20) -> Bool {
         let candidates = [
-            app.descendants(matching: .any)["goals.constellation-atlas.stage"],
-            app.descendants(matching: .any)["goals.constellation-atlas.object"],
+            app.descendants(matching: .any)["goals.life-area-atlas.object"],
+            app.descendants(matching: .any)["goals.life-area-atlas.title"],
+            app.buttons["goals.capture-plus"],
+            app.descendants(matching: .any)["goals.current-step.open"],
             app.descendants(matching: .any)["goals.mission-control-lanes"],
             app.descendants(matching: .any)["goals.life-path"],
             app.descendants(matching: .any)["goals.hero-card"]
@@ -115,70 +141,50 @@ extension AmbitionsUITestCase {
             if candidates.contains(where: { $0.waitForExistence(timeout: 1) }) {
                 return true
             }
+            scrollPageUp(in: app)
         }
 
         return candidates.contains(where: { $0.exists })
     }
 
-    func openGoalsDirectionDepth(in app: XCUIApplication) -> Bool {
-        if app.descendants(matching: .any)["goals.week-pressure"].waitForExistence(timeout: 1) {
-            return true
+    func tapGoalsHeroPrimaryAction(in app: XCUIApplication) {
+        let directCandidates = [
+            goalsHeroPrimaryAction(in: app),
+            app.buttons["goals.current-step.open"],
+            app.descendants(matching: .any)["goals.current-step.open"],
+            app.buttons["goals.hero-card"],
+            app.descendants(matching: .any)["goals.hero-card"].firstMatch,
+            app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "goals.surface.open.")).firstMatch,
+            app.descendants(matching: .any).matching(NSPredicate(format: "identifier BEGINSWITH %@", "goals.surface.open.")).firstMatch
+        ]
+
+        for candidate in directCandidates where candidate.waitForExistence(timeout: 1) && candidate.isHittable {
+            candidate.tap()
+            return
         }
 
-        let toggle = app.buttons["goals.direction-depth-toggle"]
-        if toggle.waitForExistence(timeout: 2) {
-            toggle.tap()
-            return app.descendants(matching: .any)["goals.week-pressure"].waitForExistence(timeout: 5)
+        let visibleAtlas = app.descendants(matching: .any)["goals.life-area-atlas.object"].firstMatch
+        if visibleAtlas.waitForExistence(timeout: 2) {
+            visibleAtlas.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.54)).tap()
+            return
         }
 
-        let title = app.staticTexts["Direction depth"]
-        for _ in 0..<8 {
-            if title.exists || title.waitForExistence(timeout: 0.25) {
-                title.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
-                return app.descendants(matching: .any)["goals.week-pressure"].waitForExistence(timeout: 5)
+        for _ in 0..<6 {
+            for candidate in directCandidates where candidate.exists && candidate.isHittable {
+                candidate.tap()
+                return
             }
             scrollPageUp(in: app)
         }
 
-        return false
-    }
-
-    func openGoalsOrbitalLens(in app: XCUIApplication) -> Bool {
-        if app.descendants(matching: .any)["goals.orbital-lens.expanded"].waitForExistence(timeout: 1) {
-            return true
-        }
-
-        let toggle = app.buttons["goals.orbital-lens.toggle"]
-        if toggle.waitForExistence(timeout: 2) {
-            toggle.tap()
-            return app.descendants(matching: .any)["goals.orbital-lens.expanded"].waitForExistence(timeout: 5)
-        }
-
-        let lens = app.descendants(matching: .any)["goals.orbital-lens.collapsed"]
-        if lens.waitForExistence(timeout: 2) {
-            lens.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.2)).tap()
-            return app.descendants(matching: .any)["goals.orbital-lens.expanded"].waitForExistence(timeout: 5)
-        }
-
-        return false
-    }
-
-    func tapGoalsHeroPrimaryAction(in app: XCUIApplication) {
-        let direct = goalsHeroPrimaryAction(in: app)
-        if direct.exists && direct.isHittable {
-            direct.tap()
+        for candidate in directCandidates where candidate.exists {
+            tapIfPossible(candidate)
             return
         }
 
-        let heroButton = app.buttons["goals.hero-card"]
-        if heroButton.waitForExistence(timeout: 10) {
-            heroButton.tap()
-            return
-        }
-
-        let heroCard = app.descendants(matching: .any)["goals.hero-card"].firstMatch
-        XCTAssertTrue(heroCard.waitForExistence(timeout: 10))
-        heroCard.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.82)).tap()
+        let atlas = app.descendants(matching: .any)["goals.life-area-atlas.object"]
+        XCTAssertTrue(atlas.waitForExistence(timeout: 10))
+        atlas.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
     }
 
     func tapFirstVisibleGoalCard(in app: XCUIApplication) {

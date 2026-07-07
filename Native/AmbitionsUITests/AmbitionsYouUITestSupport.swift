@@ -42,6 +42,22 @@ extension AmbitionsUITestCase {
 
     func youRow(named title: String, in app: XCUIApplication) -> XCUIElement {
         let identifier = youRowIdentifier(for: title)
+        let settingsButton = app.buttons["you.settings.row.\(identifier)"]
+        if settingsButton.exists {
+            return settingsButton
+        }
+
+        let settingsAny = app.descendants(matching: .any)["you.settings.row.\(identifier)"]
+        if settingsAny.exists {
+            if settingsAny.elementType == .button {
+                return settingsAny
+            }
+
+            if settingsAny.buttons.firstMatch.exists {
+                return settingsAny.buttons.firstMatch
+            }
+        }
+
         let stableButton = app.buttons["you.row.\(identifier)"]
         if stableButton.exists {
             return stableButton

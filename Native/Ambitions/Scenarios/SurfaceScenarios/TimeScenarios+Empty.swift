@@ -162,7 +162,7 @@ extension PreviewTimeScenarios {
                 "Approved duration: user-approved duration selection is required before reassignment.",
                 "Displaced step pressure: no displaced step pressure recalculation needed for still-believable states.",
                 "Destination step: active destination step pressure remains unchanged.",
-                "LifeShape impact: no recovery shift needed now."
+                "Life Calendar impact: no recovery shift needed now."
             ],
             confirmationRequired: "Safe local suggestion",
             undoAvailability: "Undo can be local",

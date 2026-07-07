@@ -159,6 +159,20 @@ Green requires linked evidence
 
 Codex must preserve stable product/runtime/privacy/proof law, reduce private architecture mythology, keep root UI in plain native life-object terms, keep Source Atlas/R2 public-reference-only rather than private intelligence authority, default to SwiftUI-native platform shape, and avoid new broad nouns unless the scoped work deletes, collapses, or replaces duplicate authority. Proof automation outranks prose: current checks, logs, proof packets, and accepted artifacts set the claim ceiling. A status claim may be Green only when the exact claim has current linked evidence.
 
+Flagship iOS engineering standard:
+
+Ambitions process must match a senior flagship iOS product team, not a prototype cleanup project. Required source, runtime, interaction, UI, and release lanes must optimize for durable correctness, deterministic evidence, readable failure diagnosis, and maintainable ownership.
+
+- Required lanes must finish with zero unexpected failures, zero expected failures, zero unreviewed skips, and a readable `.xcresult` or log summary before any Green claim.
+- `XCTExpectFailure`, expected-failure result lanes, and known-failure wrappers are not accepted completion mechanisms for required remediation, flagship UI, runtime, accessibility, or release-adjacent scope.
+- `XCTSkip` is allowed only for explicitly external, lab-only, live-service, or build-configuration-specific proof. A skipped check caps the affected claim below Green and must name the unsupported claim.
+- Flaky, intermittent, quarantine, retry-only, timeout-only, and "passes locally sometimes" test posture is Red for required lanes. Fix the fixture, app determinism, route, accessibility identifier, clock, store, simulator state, or test harness.
+- UI tests must launch deterministic state, avoid blind sleeps and unbounded scroll hunting, assert stable frame/hierarchy behavior, attach screenshots when visual or product-surface proof is in scope, and verify accessible state where interaction is claimed.
+- Test changes must raise signal. Do not weaken assertions, delete coverage, hide failures behind optional lookup, or change expected copy back to stale product language to make a lane pass.
+- Test files, fixtures, and support helpers are production engineering assets. Oversized or unclear test files must be split into focused tests, fixtures, and support helpers instead of becoming a second app architecture.
+- Wrapper timeouts are not test results. Codex must inspect or stop the underlying `xcodebuild`/runner process, recover the `.xcresult` when possible, and report the run as failed, interrupted, or inconclusive with evidence.
+- Local gates that report Red are blockers for the scoped Green claim. A standards update cannot be used to rename Red as Yellow.
+
 AMB-1658 remediation governance rules:
 
 - No new architecture nouns without deletion, collapse, or replacement of duplicate authority in the same scoped train.
@@ -284,6 +298,7 @@ Stop and report Red when:
 - work cannot explain its relationship to Private Life Orchestration unless it is narrow repo health, security, build, or cleanup work
 - source changes cannot be validated honestly
 - tests are updated to hide failures instead of validating truth
+- expected-failure, skipped, flaky, or quarantined lanes are used to claim required source/runtime/UI/release completion
 - generated reports are treated as release proof
 - screenshot paths or source-string tests are treated as visual acceptance
 - Codex self-certifies Visual Green or Release Green

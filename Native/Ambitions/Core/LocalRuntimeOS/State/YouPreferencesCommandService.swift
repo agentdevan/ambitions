@@ -30,7 +30,7 @@ struct YouPreferencesCommandService: YouPreferencesCommanding {
 
         let now = Date()
         let command = AmbitionsCommand(
-            id: "you.preferences.command.\(Int(now.timeIntervalSince1970))",
+            id: "you-preferences-command-\(UUID().uuidString.lowercased())",
             kind: .updateUserPreferences,
             source: .you,
             target: AmbitionsCommandTarget(destination: .you),

@@ -125,7 +125,7 @@ Capture access may appear once in the crown. Search access may appear once in th
 For Time, this pattern is Red:
 
 ```text
-AppShellScaffold(title: "Time", subtitle: "LifeShape Field")
+AppShellScaffold(title: "Time", subtitle: "Life Calendar")
 +
 LifeShapeFieldView.contextCrown
 ```
@@ -235,7 +235,27 @@ Source string tests may support Source Green. They cannot establish Interaction 
 
 ---
 
-## 10. Report Panel Ban
+## 10. Flagship UI Test Standard
+
+Flagship iOS UI proof must behave like product engineering proof, not screenshot theater.
+
+For any required root-surface, SwiftUI, interaction, accessibility, visual-qa, or flagship-quality claim:
+
+- the UI lane must complete with zero unexpected failures
+- no expected-failure lane may be counted as passing proof
+- skipped UI tests cap the affected claim below Green unless they are explicitly external/manual proof outside the claim
+- tests must launch deterministic fixture state or an explicit deep-link route
+- tests must assert rendered hierarchy or frames, not only string presence
+- screenshot attachments are required when visual, first-viewport, or product-object dominance is in scope
+- accessibility label, value, hint, or action evidence is required when interaction is claimed
+- retries, sleeps, broad scroll hunting, and optional element fallbacks must be replaced with stable app state, route aliases, identifiers, or fixture setup
+- failing UI evidence must repair the app or test harness; it must not be closed as Accepted Yellow when the issue requires working UI proof
+
+UI tests may be split into smoke, surface, screenshot, accessibility, and route lanes, but each lane must have a clear readiness claim and a zero-failure result before it can support that claim.
+
+---
+
+## 11. Report Panel Ban
 
 Root product objects cannot be text reports.
 
@@ -246,11 +266,11 @@ In the root first viewport:
 - no semantic-meaning rows may be the root object
 - no root copy sentence may claim capacity unless backed by explicit projection confidence and approved plain language
 
-For Time, a separate `LifeShapeNowInstrument` report above the field is Red. The current Time object must be one dominant LifeShape Field instrument with internal anatomy.
+For Time, a separate `LifeShapeNowInstrument` report above the field is Red. The current Time object must be one dominant Life Calendar instrument with internal anatomy.
 
 ---
 
-## 11. No Fabricated Intelligence Law
+## 12. No Fabricated Intelligence Law
 
 No minimum-count smart copy.
 
@@ -264,7 +284,7 @@ Known values may be shown as object state. Unknown or low-confidence values must
 
 ---
 
-## 12. Jargon Generation Law
+## 13. Jargon Generation Law
 
 Forbidden language cannot be a static list only.
 
@@ -278,7 +298,7 @@ The root UI should communicate fit, protection, pressure, room, and timing throu
 
 ---
 
-## 13. Device Evidence Law
+## 14. Device Evidence Law
 
 For visual-qa or flagship-quality work:
 
@@ -298,7 +318,7 @@ Device proof must include:
 
 ---
 
-## 14. Final Umbrella Gate
+## 15. Final Umbrella Gate
 
 No master fold-in, release branch, `implementation complete`, product Green, or handoff to the next surface may occur until the active umbrella proof gate for that scope is complete and accepted.
 
@@ -308,7 +328,7 @@ Earlier trains may claim scoped Source Green, Runtime Green, Interaction Green, 
 
 ---
 
-## 15. Accepted Yellow Restriction
+## 16. Accepted Yellow Restriction
 
 Accepted Yellow is not implementation acceptance for incomplete required scope.
 
@@ -327,7 +347,7 @@ proof exists.
 
 ---
 
-## 16. Required Closeout Template
+## 17. Required Closeout Template
 
 Use this template for implementation closeout:
 
@@ -365,7 +385,7 @@ Independent visual reviewer:
 
 ---
 
-## 16. Proof Escalation Law
+## 18. Proof Escalation Law
 
 If a proof artifact reveals product-quality failure, the issue becomes Red or Yellow immediately.
 

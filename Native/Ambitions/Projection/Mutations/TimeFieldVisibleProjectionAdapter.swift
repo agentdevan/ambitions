@@ -131,7 +131,7 @@ extension LifeShapeProjection {
                 LifeShapeCorrection(id: "correction.keep-clear.\(mark.id)", kind: .protect, title: "Keep this clear", accessibilitySummary: "Protect this Time window.")
             ],
             derivation: derivation,
-            confidence: LifeShapeConfidence(level: .grounded, explanation: "Mutation target came from a visible LifeShape Field mark."),
+            confidence: LifeShapeConfidence(level: .grounded, explanation: "Mutation target came from a visible Life Calendar mark."),
             accessibilitySummary: layer == .open && placementCandidate == nil
                 ? "\(mark.accessibilitySummary) Placement waits for a real Step."
                 : mark.accessibilitySummary

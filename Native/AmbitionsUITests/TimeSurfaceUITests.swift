@@ -10,7 +10,7 @@ final class TimeSurfaceUITests: AmbitionsUITestCase {
         dismissContinuityReceiptIfPresent(in: app)
         XCTAssertTrue(app.descendants(matching: .any)["time.screen"].waitForExistence(timeout: 15))
         XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts["LifeShape Field"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Life Calendar"].waitForExistence(timeout: 10))
     }
 
     func testAMB964TimeReconstructionScreenshotMatrix() throws {
@@ -33,7 +33,7 @@ final class TimeSurfaceUITests: AmbitionsUITestCase {
                     "time.life-shape-field.visual-stage",
                     "time.life-shape-field.primary-action"
                 ],
-                requiredTexts: ["LifeShape Field", "This week", "Place Step"]
+                requiredTexts: ["Life Calendar", "This week", "Select Step"]
             ),
             TimeMatrixItem(
                 name: "pressure-protected",
@@ -55,7 +55,7 @@ final class TimeSurfaceUITests: AmbitionsUITestCase {
                     "time.life-shape-field",
                     "time.life-shape-field.primary-action"
                 ],
-                requiredTexts: ["LifeShape Field", "This week"]
+                requiredTexts: ["Life Calendar", "This week"]
             ),
             TimeMatrixItem(
                 name: "static-equivalent",
@@ -101,7 +101,7 @@ final class TimeSurfaceUITests: AmbitionsUITestCase {
             XCTAssertTrue(waitForSelectedTab("Time", in: app), "Time should be selected for \(item.name).")
             dismissContinuityReceiptIfPresent(in: app)
             XCTAssertTrue(app.descendants(matching: .any)["time.screen"].waitForExistence(timeout: 20), "Time screen should exist for \(item.name).")
-            XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 10), "LifeShape Field should exist for \(item.name).")
+            XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 10), "Life Calendar should exist for \(item.name).")
 
             for identifier in item.requiredIdentifiers {
                 XCTAssertTrue(
@@ -125,7 +125,7 @@ final class TimeSurfaceUITests: AmbitionsUITestCase {
                 let screenshotApp = launchMatrixApp(for: item)
                 XCTAssertTrue(waitForSelectedTab("Time", in: screenshotApp), "Time should be selected for \(item.name) screenshot proof.")
                 dismissContinuityReceiptIfPresent(in: screenshotApp)
-                XCTAssertTrue(screenshotApp.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 10), "LifeShape Field should exist for \(item.name) screenshot proof.")
+                XCTAssertTrue(screenshotApp.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 10), "Life Calendar should exist for \(item.name) screenshot proof.")
                 captureTimeScreenshot(named: "amb-964-time-\(item.name)", in: screenshotApp)
                 screenshotApp.terminate()
             } else {
@@ -136,21 +136,31 @@ final class TimeSurfaceUITests: AmbitionsUITestCase {
     }
 
     func testDemoTimeLifeShapeLayerAndCorrectionControlsStayInteractive() throws {
-        let app = makeApp(bootstrapMode: "demo", launchURL: "ambitions://tab/time")
+        let app = makeApp(
+            bootstrapMode: "demo",
+            launchURL: "ambitions://tab/time",
+            extraEnvironment: ["AmbitionsTimeRenderState": "pressure-cluster"]
+        )
         app.launch()
 
         XCTAssertTrue(waitForSelectedTab("Time", in: app))
         dismissContinuityReceiptIfPresent(in: app)
         XCTAssertTrue(app.descendants(matching: .any)["time.screen"].waitForExistence(timeout: 15))
-        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.layer.protected", in: app, maxAttempts: 20))
-        let protected = app.descendants(matching: .any)["time.life-shape-field.layer.protected"]
-        XCTAssertTrue(protected.waitForExistence(timeout: 10))
-        protected.tap()
-        let protectedValue = protected.value as? String
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.layer.pressure", in: app, maxAttempts: 20))
+        let pressure = app.descendants(matching: .any)["time.life-shape-field.layer.pressure"]
+        XCTAssertTrue(pressure.waitForExistence(timeout: 10))
+        pressure.tap()
+        let pressureValue = pressure.value as? String
         XCTAssertTrue(
-            protected.isSelected || protectedValue?.localizedCaseInsensitiveContains("Selected") == true,
-            "Protected layer should expose selected state after tap. Value: \(protectedValue ?? "<nil>")"
+            pressure.isSelected || pressureValue?.localizedCaseInsensitiveContains("Selected") == true,
+            "Pressure layer should expose selected state after tap. Value: \(pressureValue ?? "<nil>")"
         )
+
+        let semanticMark = app.descendants(matching: .button)
+            .matching(NSPredicate(format: "identifier BEGINSWITH %@", "time.life-shape-field.mark."))
+            .firstMatch
+        XCTAssertTrue(semanticMark.waitForExistence(timeout: 10), "A pressure semantic mark should be selectable before detail controls appear.")
+        semanticMark.tap()
 
         XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.correction-menu", in: app, maxAttempts: 10))
         XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.bucket-detail", in: app, maxAttempts: 10))
@@ -186,15 +196,15 @@ final class TimeSurfaceUITests: AmbitionsUITestCase {
         XCTAssertTrue(app.descendants(matching: .any)["protected-placement-review.keep-as-is"].waitForExistence(timeout: 10))
         captureTimeScreenshot(named: "amb-1168-time-protected-placement-review", in: app)
 
-        tapIfPossible(app.descendants(matching: .any)["protected-placement-review.keep-as-is"])
-        XCTAssertTrue(app.descendants(matching: .any)["protected-placement-review.outcome"].waitForExistence(timeout: 10))
+        scrollUntilButtonHittable("protected-placement-review.keep-as-is", fallbackLabel: "Keep as is", in: app).tap()
+        XCTAssertTrue(scrollUntilElementExists("protected-placement-review.outcome", in: app, maxAttempts: 10))
         XCTAssertTrue(app.staticTexts["Kept as is"].waitForExistence(timeout: 10))
         XCTAssertFalse(app.staticTexts["Step placed"].exists)
 
         XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.primary-action", in: app, maxAttempts: 10))
         app.descendants(matching: .any)["time.life-shape-field.primary-action"].tap()
         XCTAssertTrue(scrollUntilElementExists("protected-placement-review", in: app, maxAttempts: 10))
-        tapIfPossible(app.descendants(matching: .any)["protected-placement-review.move-it"])
+        scrollUntilButtonHittable("protected-placement-review.move-it", fallbackLabel: "Move it", in: app).tap()
         XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.mutation-proof", in: app, maxAttempts: 10))
         XCTAssertTrue(app.staticTexts["Step placed"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Today recomputed")).firstMatch.exists)
@@ -206,7 +216,7 @@ final class TimeSurfaceUITests: AmbitionsUITestCase {
         captureTimeScreenshot(named: "amb-1168-time-after-undo", in: app)
 
         XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.layer.protected", in: app, maxAttempts: 20))
-        tapIfPossible(app.descendants(matching: .any)["time.life-shape-field.layer.protected"])
+        scrollUntilButtonHittable("time.life-shape-field.layer.protected", fallbackLabel: "Protected", in: app).tap()
         XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.primary-action", in: app, maxAttempts: 10))
         app.descendants(matching: .any)["time.life-shape-field.primary-action"].tap()
         XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.mutation-proof", in: app, maxAttempts: 10))
@@ -230,6 +240,7 @@ final class TimeSurfaceUITests: AmbitionsUITestCase {
         XCTAssertFalse(app.staticTexts["Privacy posture: Local"].exists)
         captureTimeScreenshot(named: "amb-1169-time-root-clean", in: app)
 
+        XCTAssertTrue(selectFirstLifeShapeSemanticMark(in: app))
         XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.bucket-detail", in: app, maxAttempts: 12))
         XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.why-this.button", in: app, maxAttempts: 8))
         app.descendants(matching: .any)["time.life-shape-field.why-this.button"].tap()
@@ -240,10 +251,11 @@ final class TimeSurfaceUITests: AmbitionsUITestCase {
         XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.inspect-proof.button", in: app, maxAttempts: 8))
         app.descendants(matching: .any)["time.life-shape-field.inspect-proof.button"].tap()
         XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field.proof-inspection"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts["Receipt is saved with this Time shape."].waitForExistence(timeout: 10))
+        let proofInspectionText = accessibilityText(for: app.descendants(matching: .any)["time.life-shape-field.proof-inspection"])
+        XCTAssertTrue(proofInspectionText.localizedCaseInsensitiveContains("History is attached to this Time window."), proofInspectionText)
         XCTAssertFalse(app.staticTexts["Runtime-backed projection"].exists)
         XCTAssertTrue(
-            scrollLifeShapeProofLineIntoScreenshotBand("Receipt is saved with this Time shape.", in: app),
+            scrollLifeShapeProofLineIntoScreenshotBand("History is attached to this Time window.", in: app),
             "Proof receipt line should be visibly inside the screenshot proof band."
         )
         captureTimeScreenshot(named: "amb-1169-time-proof-inspection", in: app)
@@ -272,8 +284,9 @@ final class TimeSurfaceUITests: AmbitionsUITestCase {
         app.descendants(matching: .any)["time.life-shape-field.primary-action"].tap()
         XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.mutation-proof", in: app, maxAttempts: 10))
         XCTAssertTrue(app.staticTexts["Today made lighter"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Today recomputed")).firstMatch.exists)
-        XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Later Today updated")).firstMatch.exists)
+        let pressureMutationText = accessibilityText(for: app.descendants(matching: .any)["time.life-shape-field.mutation-proof"])
+        XCTAssertTrue(pressureMutationText.localizedCaseInsensitiveContains("Today recomputed"), pressureMutationText)
+        XCTAssertTrue(pressureMutationText.localizedCaseInsensitiveContains("Later Today"), pressureMutationText)
         captureTimeScreenshot(named: "amb-1171-pressure-after-make-today-lighter", in: app)
 
         XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field.undo"].waitForExistence(timeout: 10))
@@ -310,8 +323,9 @@ final class TimeSurfaceUITests: AmbitionsUITestCase {
         app.descendants(matching: .any)["time.life-shape-field.primary-action"].tap()
         XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.mutation-proof", in: app, maxAttempts: 10))
         XCTAssertTrue(app.staticTexts["Buffer added"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Today recomputed")).firstMatch.exists)
-        XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Current window updated")).firstMatch.exists)
+        let bufferMutationText = accessibilityText(for: app.descendants(matching: .any)["time.life-shape-field.mutation-proof"])
+        XCTAssertTrue(bufferMutationText.localizedCaseInsensitiveContains("Today recomputed"), bufferMutationText)
+        XCTAssertTrue(bufferMutationText.localizedCaseInsensitiveContains("current window"), bufferMutationText)
         captureTimeScreenshot(named: "amb-1173-buffer-after-add-buffer", in: app)
 
         XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field.undo"].waitForExistence(timeout: 10))
@@ -567,5 +581,16 @@ final class TimeSurfaceUITests: AmbitionsUITestCase {
         XCTAssertFalse(reloadedApp.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "optimized")).firstMatch.exists)
 
         captureTimeScreenshot(named: "p1e1-reload-backed-time-foundation", in: reloadedApp)
+    }
+
+    private func selectFirstLifeShapeSemanticMark(in app: XCUIApplication) -> Bool {
+        let semanticMark = app.descendants(matching: .button)
+            .matching(NSPredicate(format: "identifier BEGINSWITH %@", "time.life-shape-field.mark."))
+            .firstMatch
+        guard semanticMark.waitForExistence(timeout: 10) else {
+            return false
+        }
+        semanticMark.tap()
+        return true
     }
 }

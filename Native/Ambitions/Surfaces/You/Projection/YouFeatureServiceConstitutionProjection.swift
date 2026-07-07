@@ -31,14 +31,14 @@ extension RepositoryBackedYouService {
             ),
             YouPreviewSwatch(
                 id: "preview-lifeshape",
-                title: "LifeShape",
+                title: "Life Calendar",
                 subtitle: "Capacity contour keeps pressure visible without becoming a calendar.",
                 eyebrow: "Capacity",
                 objectKind: .lifeShape,
                 accentFamily: selectedAccent,
                 appearancePreference: selectedAppearance,
                 state: .default,
-                accessibilityLabel: "Appearance preview for LifeShape capacity contour"
+                accessibilityLabel: "Appearance preview for Life Calendar capacity contour"
             ),
             YouPreviewSwatch(
                 id: "preview-receipt",

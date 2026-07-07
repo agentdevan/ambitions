@@ -86,7 +86,7 @@ struct AmbitionsRootStageSurfaceHost: View {
                 case .rituals:
                     AppShellScaffold(
                         title: "Rituals",
-                        subtitle: "LifeShape Field",
+                        subtitle: "Life Calendar",
                         posture: .shaping,
                         backButtonAccessibilityIdentifier: "shell.time.back-button",
                         onBack: { navigation.resetTimePath() },
@@ -97,7 +97,7 @@ struct AmbitionsRootStageSurfaceHost: View {
                 case .weeklyReview:
                     AppShellScaffold(
                         title: "Weekly Review",
-                        subtitle: "LifeShape Field",
+                        subtitle: "Life Calendar",
                         posture: .shaping,
                         backButtonAccessibilityIdentifier: "shell.time.back-button",
                         onBack: { navigation.resetTimePath() },

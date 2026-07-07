@@ -195,10 +195,13 @@ final class SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests: XCTes
 private extension SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests {
     static func repoRoot() throws -> URL {
         var url = URL(fileURLWithPath: #filePath)
-        for _ in 0 ..< 4 {
+        while url.pathComponents.count > 1 {
+            if FileManager.default.fileExists(atPath: url.appendingPathComponent("project.yml").path) {
+                return url
+            }
             url.deleteLastPathComponent()
         }
-        return url
+        throw NSError(domain: "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests", code: 1)
     }
 
     func artifactData(

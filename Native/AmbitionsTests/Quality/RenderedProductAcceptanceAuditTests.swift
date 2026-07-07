@@ -5,7 +5,7 @@ final class RenderedProductAcceptanceAuditTests: XCTestCase {
     func testSingleOwnerAuditRejectsDuplicateTimeCrown() {
         let shell = LifeShapeSourceFile(
             path: "Native/Ambitions/Stage/AppShellScaffold.swift",
-            contents: "AppShellScaffold(title: \"Time\", subtitle: \"LifeShape Field\")"
+            contents: "AppShellScaffold(title: \"Time\", subtitle: \"Life Calendar\")"
         )
         let object = LifeShapeSourceFile(
             path: "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift",

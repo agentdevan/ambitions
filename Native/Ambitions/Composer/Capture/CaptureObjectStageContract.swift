@@ -59,12 +59,12 @@ struct CaptureStageGroup<Content: View>: View {
     @Environment(\.ambitionTheme) private var theme
 
     let state: LivingVisualState
-    let accessibilityIdentifier: String
+    let accessibilityIdentifier: String?
     let content: Content
 
     init(
         state: LivingVisualState,
-        accessibilityIdentifier: String,
+        accessibilityIdentifier: String?,
         @ViewBuilder content: () -> Content
     ) {
         self.state = state
@@ -75,7 +75,7 @@ struct CaptureStageGroup<Content: View>: View {
     var body: some View {
         let accent = state == .empty ? LivingTabContext.capture.accent(in: theme) : theme.stateStyle(for: state.ambitionState).accent
 
-        VStack(alignment: .leading, spacing: theme.spacing.md) {
+        let stage = VStack(alignment: .leading, spacing: theme.spacing.md) {
             content
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -96,7 +96,12 @@ struct CaptureStageGroup<Content: View>: View {
                 .fill(theme.colors.strokeSubtle.opacity(0.42))
                 .frame(height: 1)
         }
-        .accessibilityIdentifier(accessibilityIdentifier)
+
+        if let accessibilityIdentifier {
+            stage.accessibilityIdentifier(accessibilityIdentifier)
+        } else {
+            stage
+        }
     }
 }
 

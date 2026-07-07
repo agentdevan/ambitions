@@ -54,7 +54,7 @@ enum ToolbarPreviewCatalog {
         switch tab {
         case .today: "Reality Meridian / Start here"
         case .goals: "Life Area Atlas"
-        case .time: "LifeShape Field"
+        case .time: "Life Calendar"
         case .you: "User System Profile"
         }
     }

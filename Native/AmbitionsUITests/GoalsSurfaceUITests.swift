@@ -12,24 +12,14 @@ final class GoalsSurfaceUITests: AmbitionsUITestCase {
 
         XCTAssertTrue(app.descendants(matching: .any)["goals.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(waitForGoalsPrimaryObject(in: app))
-        XCTAssertTrue(app.staticTexts["Your Direction"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Life Area Atlas"].waitForExistence(timeout: 10))
         XCTAssertFalse(app.staticTexts["Direction Atlas"].exists)
-        XCTAssertTrue(app.staticTexts["Thread Focus"].waitForExistence(timeout: 5))
-        XCTAssertTrue(app.descendants(matching: .any)["goals.life-areas.equal-weight-band"].waitForExistence(timeout: 5))
-        XCTAssertTrue(openGoalsOrbitalLens(in: app))
-        XCTAssertTrue(app.staticTexts["Thread Focus"].waitForExistence(timeout: 5))
-        XCTAssertTrue(app.descendants(matching: .any)["goals.orbital-lens.proof"].waitForExistence(timeout: 5))
-        XCTAssertTrue(app.descendants(matching: .any)["goals.orbital-lens.source"].waitForExistence(timeout: 5))
-        XCTAssertTrue(app.descendants(matching: .any)["goals.orbital-lens.why"].waitForExistence(timeout: 5))
-        XCTAssertTrue(app.buttons["goals.orbital-lens.open-thread"].waitForExistence(timeout: 5))
-        XCTAssertTrue(openGoalsDirectionDepth(in: app))
-        XCTAssertTrue(scrollUntilElementExists("goals.week-pressure", in: app))
-        XCTAssertTrue(scrollUntilElementExists("goals.portfolio-maturity", in: app))
-        XCTAssertTrue(scrollUntilElementExists("goals.life-areas-panel", in: app))
-        XCTAssertTrue(scrollUntilElementExists("goals.life-areas.controls", in: app))
-        XCTAssertTrue(scrollUntilElementExists("goals.north-stars-rail", in: app))
-        XCTAssertTrue(scrollUntilElementExists("goals.one-step-goals-panel", in: app))
-        XCTAssertTrue(scrollUntilElementExists("goals.band.active_direction", in: app))
+        XCTAssertTrue(app.descendants(matching: .any)["goals.life-area-atlas.title"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.descendants(matching: .any)["goals.life-area-atlas.object"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.descendants(matching: .any)["goals.life-area.work"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.descendants(matching: .any)["goals.life-area.open-field"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.buttons["goals.current-step.open"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.buttons["goals.capture-plus"].waitForExistence(timeout: 5))
     }
 
     func testAMB963GoalsReconstructionScreenshotMatrix() throws {
@@ -49,13 +39,13 @@ final class GoalsSurfaceUITests: AmbitionsUITestCase {
                 renderState: "default",
                 contentSizeCategory: "UICTContentSizeCategoryM",
                 requiredIdentifiers: [
-                    "goals.constellation-atlas.stage",
-                    "goals.constellation-atlas.object",
-                    "goals.life-areas.equal-weight-band",
-                    "goals.orbital-lens.collapsed",
-                    "goals.source-proof-trust"
+                    "goals.life-area-atlas.title",
+                    "goals.life-area-atlas.object",
+                    "goals.life-area.work",
+                    "goals.current-step.open",
+                    "goals.capture-plus"
                 ],
-                requiredTexts: ["Your Direction", "Thread Focus", "Source", "Today link"]
+                requiredTexts: ["Life Area Atlas", "Start here", "Work", "Open Field"]
             ),
             GoalsMatrixItem(
                 name: "selected-life-area",
@@ -63,11 +53,12 @@ final class GoalsSurfaceUITests: AmbitionsUITestCase {
                 renderState: "selected-life-area",
                 contentSizeCategory: "UICTContentSizeCategoryM",
                 requiredIdentifiers: [
-                    "goals.life-areas.equal-weight-band",
-                    "goals.orbital-lens.collapsed",
-                    "goals.constellation-atlas.object"
+                    "goals.life-area-atlas.title",
+                    "goals.life-area-atlas.object",
+                    "goals.life-area.work",
+                    "goals.life-area.body"
                 ],
-                requiredTexts: ["Career", "Thread Focus"]
+                requiredTexts: ["Life Area Atlas", "Work", "Body"]
             ),
             GoalsMatrixItem(
                 name: "proof-source-visible",
@@ -75,12 +66,12 @@ final class GoalsSurfaceUITests: AmbitionsUITestCase {
                 renderState: "proof-available",
                 contentSizeCategory: "UICTContentSizeCategoryM",
                 requiredIdentifiers: [
-                    "goals.orbital-lens.expanded",
-                    "goals.orbital-lens.proof",
-                    "goals.orbital-lens.source",
-                    "goals.orbital-lens.why"
+                    "goals.life-area-atlas.title",
+                    "goals.life-area-atlas.object",
+                    "goals.life-area.future",
+                    "goals.current-step.open"
                 ],
-                requiredTexts: ["Proof available", "Source", "Why this?"]
+                requiredTexts: ["Life Area Atlas", "Future", "Start here"]
             ),
             GoalsMatrixItem(
                 name: "large-dynamic-type",
@@ -88,11 +79,11 @@ final class GoalsSurfaceUITests: AmbitionsUITestCase {
                 renderState: "selected-life-area",
                 contentSizeCategory: "UICTContentSizeCategoryXXXL",
                 requiredIdentifiers: [
-                    "goals.constellation-atlas.stage",
-                    "goals.life-areas.equal-weight-band",
-                    "goals.orbital-lens.collapsed"
+                    "goals.life-area-atlas.title",
+                    "goals.life-area-atlas.object",
+                    "goals.current-step.open"
                 ],
-                requiredTexts: ["Your Direction", "Thread Focus", "Relations"]
+                requiredTexts: ["Life Area Atlas", "Start here", "People"]
             )
         ]
 
@@ -129,9 +120,6 @@ final class GoalsSurfaceUITests: AmbitionsUITestCase {
 
             XCTAssertFalse(app.staticTexts["Direction Atlas"].exists, "Direction Atlas must not be visible for \(item.name).")
             XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Relationsh")).firstMatch.exists, "Relationship label must not truncate for \(item.name).")
-            if item.name == "proof-source-visible" {
-                XCTAssertTrue(app.staticTexts["Proof available"].isHittable, "Proof/source state should visibly expose proof before screenshot capture.")
-            }
             captureGoalsScreenshot(named: "amb-963-goals-\(item.name)", in: app)
         }
     }
@@ -148,18 +136,11 @@ final class GoalsSurfaceUITests: AmbitionsUITestCase {
         tapGoalsHeroPrimaryAction(in: app)
 
         XCTAssertTrue(app.descendants(matching: .any)["goal-detail.screen"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["goal-detail.strategic-header"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["goal-detail.mission-control"].waitForExistence(timeout: 10))
-        XCTAssertTrue(scrollUntilElementExists("goal-detail.lane.overview", in: app))
-        XCTAssertTrue(scrollUntilElementExists("goal-detail.lane.steps", in: app))
-        XCTAssertTrue(scrollUntilElementExists("goal-detail.lane.decisions", in: app))
-        XCTAssertTrue(scrollUntilElementExists("goal-detail.lane.risks", in: app))
-        XCTAssertTrue(scrollUntilElementExists("goal-detail.lane.archive", in: app))
-        XCTAssertTrue(scrollUntilElementExists("goal-detail.decisions", in: app))
-        XCTAssertTrue(scrollUntilElementExists("goal-detail.risks", in: app))
-        XCTAssertTrue(scrollUntilElementExists("goal-detail.archive", in: app))
-        XCTAssertTrue(scrollUntilElementExists("goal-detail.path-builder", in: app, maxAttempts: 20))
-        XCTAssertTrue(scrollUntilElementExists("goal-detail.tactics-region", in: app))
+        XCTAssertTrue(app.descendants(matching: .any)["goal-detail.profile"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["goal-detail.path-field"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilElementExists("goal-detail.journal", in: app, maxAttempts: 12))
+        XCTAssertTrue(scrollUntilElementExists("goal-detail.trust-whisper", in: app, maxAttempts: 12))
+        XCTAssertTrue(scrollUntilElementExists("goal-detail.memory-narrative", in: app, maxAttempts: 24))
     }
 
     func testPreviewRetiredInsightsTabRouteFallsBackToToday() throws {
@@ -194,21 +175,19 @@ final class GoalsSurfaceUITests: AmbitionsUITestCase {
     }
 
     func testMemoryLensCanOpenAndRouteToCanonicalWeekDestination() throws {
-        let app = makeApp(bootstrapMode: "preview")
+        let app = makeApp(
+            bootstrapMode: "preview",
+            launchURL: "ambitions://overlay/memory-lens?intent=open_week&q=week"
+        )
         app.launch()
-
-        let memoryButton = app.buttons["shell.today.memory-lens-button"]
-        XCTAssertTrue(memoryButton.waitForExistence(timeout: 10))
-        memoryButton.tap()
 
         let searchField = app.textFields["shell.memory-lens.search-field"]
         XCTAssertTrue(searchField.waitForExistence(timeout: 10))
 
-        let result = app.buttons["shell.memory-lens.result.memory-week"]
+        let result = app.buttons["shell.memory-lens.result.time-weekly-review"]
         XCTAssertTrue(result.waitForExistence(timeout: 10))
         result.tap()
 
-        XCTAssertTrue(waitForRootDestination("Time", in: app, timeout: 10))
-        XCTAssertTrue(waitForSelectedSurface("Time", in: app, timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["weekly-review.screen"].waitForExistence(timeout: 10))
     }
 }

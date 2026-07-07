@@ -65,6 +65,7 @@ extension AmbitionsDayRailView {
             if usesExpandedViewport {
                 primaryActionButton(for: heroStep)
                     .padding(.top, theme.spacing.xs)
+                currentMomentActionRow(for: heroStep)
             } else {
                 Text(heroCopy(for: heroStep))
                     .font(theme.typography.body)
@@ -190,18 +191,60 @@ extension AmbitionsDayRailView {
         let availability = TodayRootActionGate.actions(for: heroStep)
         let actions = [availability.shapeTime, availability.protectWindow, availability.recordOutcome].compactMap { $0 }
 
-        return Group {
-            if actions.isEmpty == false {
-                HStack(spacing: theme.spacing.sm) {
-                    ForEach(actions) { action in
-                        rootActionButton(action)
-                    }
-                }
-                .padding(.top, theme.spacing.sm)
-                .accessibilityElement(children: .contain)
-                .accessibilityLabel("Start here actions")
+        return HStack(spacing: theme.spacing.sm) {
+            startHereControlButton(
+                title: "Show another",
+                systemImage: "arrow.triangle.branch",
+                identifier: "TodayStartHereShowAnother",
+                hint: "Opens a focused replacement sheet with timeline impact before approval."
+            ) {
+                onShowAnother(heroStep)
+            }
+
+            startHereControlButton(
+                title: "Not this",
+                systemImage: "hand.thumbsdown",
+                identifier: "TodayStartHereNotThis",
+                hint: "Opens a compact reason sheet so the rejection stays local and reviewable."
+            ) {
+                onNotThis(heroStep)
+            }
+
+            ForEach(actions) { action in
+                rootActionButton(action)
             }
         }
+        .padding(.top, theme.spacing.sm)
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("Start here actions")
+    }
+
+
+    func startHereControlButton(
+        title: String,
+        systemImage: String,
+        identifier: String,
+        hint: String,
+        action: @escaping () -> Void
+    ) -> some View {
+        Button(action: action) {
+            Image(systemName: systemImage)
+                .font(.system(size: 14, weight: .semibold, design: .rounded))
+                .foregroundStyle(theme.colors.textPrimary)
+                .frame(width: 44, height: 44)
+                .background(
+                    Circle()
+                        .fill(theme.colors.surfaceOverlay.opacity(0.52))
+                )
+                .overlay(
+                    Circle()
+                        .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+                )
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(title)
+        .accessibilityHint(hint)
+        .accessibilityIdentifier(identifier)
     }
 
 

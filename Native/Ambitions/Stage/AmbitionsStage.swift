@@ -117,6 +117,11 @@ struct AmbitionsStage: View {
                 return navigation.activeOverlay
             },
             set: { newValue in
+                if newValue == nil,
+                   navigation.activeOverlay?.isActivatedCaptureComposer == true
+                    || navigation.activeOverlay?.kind == .memoryLens {
+                    return
+                }
                 navigation.activeOverlay = newValue
             }
         )

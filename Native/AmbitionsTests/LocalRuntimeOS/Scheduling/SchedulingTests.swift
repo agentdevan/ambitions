@@ -56,12 +56,17 @@ final class SchedulingTests: XCTestCase {
                 "Numbered ScheduleInstall split file must be collapsed: \(retiredSplitFile)"
             )
         }
-        let realityModels = try String(
-            contentsOf: root.appendingPathComponent("Native/Ambitions/Core/Domain/RealityModels.swift"),
-            encoding: .utf8
+        let retiredRealityModelsPath = root.appendingPathComponent("Native/Ambitions/Core/Domain/RealityModels.swift")
+        XCTAssertFalse(
+            FileManager.default.fileExists(atPath: retiredRealityModelsPath.path),
+            "Reality UI read models must not remain in Core/Domain/RealityModels.swift."
         )
-        XCTAssertFalse(realityModels.contains("saveLocalScheduleBlocks"), "Local schedule file writes must not live in Core/Domain/RealityModels.swift.")
-        XCTAssertFalse(realityModels.contains("FileManager.default"), "Reality domain models must not own local schedule file IO.")
+        let schedulingSources = try requiredPaths
+            .map { path in
+                try String(contentsOf: root.appendingPathComponent(path), encoding: .utf8)
+            }
+            .joined(separator: "\n")
+        XCTAssertTrue(schedulingSources.contains("saveLocalScheduleBlocks"), "Local schedule file writes must be owned by LocalRuntimeOS/Scheduling.")
     }
 
     func testPlacementEngineBlocksAutomaticProtectedPlacementBeforeMutation() throws {

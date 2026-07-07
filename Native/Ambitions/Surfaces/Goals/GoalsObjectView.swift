@@ -25,7 +25,6 @@ struct GoalsObjectView: View {
             onOpenLifeArea: onOpenLifeArea,
             onCreate: onCreate
         )
-        .accessibilityIdentifier("goals.life-area-atlas")
         .accessibilityElement(children: .contain)
         .accessibilityLabel(GoalsAccessibility.rootSummary(regions: regions))
     }
@@ -91,6 +90,9 @@ private extension LifeAreaAtlasField {
             let radiusY = max(112, size.height * (dynamicTypeSize.isAccessibilitySize ? 0.28 : 0.34))
 
             ZStack {
+                atlasObjectAccessibilityMarker
+                    .position(x: 0.5, y: 0.5)
+
                 ProductMeaningCanvasEngine(
                     role: .goalsRelationship,
                     marks: regions.map { ProductMeaningCanvasMark(id: $0.id, intensity: $0.atlasIntensity) },
@@ -129,7 +131,14 @@ private extension LifeAreaAtlasField {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .frame(minHeight: dynamicTypeSize.isAccessibilitySize ? 560 : 430)
-        .accessibilityIdentifier("goals.life-area-atlas.object")
+    }
+
+    var atlasObjectAccessibilityMarker: some View {
+        Color.clear
+            .frame(width: 1, height: 1)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("Life Area Atlas object")
+            .accessibilityIdentifier("goals.life-area-atlas.object")
     }
 
     var nodeWidth: CGFloat {

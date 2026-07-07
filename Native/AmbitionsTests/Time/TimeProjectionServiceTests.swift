@@ -1147,7 +1147,7 @@ final class TimeProjectionServiceTests: XCTestCase {
         XCTAssertTrue(contract[1].contains("Approved duration"))
         XCTAssertTrue(contract[2].contains("Displaced step pressure"))
         XCTAssertTrue(contract[3].contains("Destination step"))
-        XCTAssertTrue(contract[4].contains("LifeShape impact"))
+        XCTAssertTrue(contract[4].contains("Life Calendar impact"))
     }
 
     func testSaveTheDayReturnsProtectedAdjustmentAndExplanation() async throws {

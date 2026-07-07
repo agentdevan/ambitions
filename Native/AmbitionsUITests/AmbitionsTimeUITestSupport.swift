@@ -87,7 +87,7 @@ extension AmbitionsUITestCase {
         let transcript = ([
             "AMB-1176 accessibility transcript",
             "Source: XCUIElement label/value/hint tree from simulator proof run; manual VoiceOver audio was not produced by this automated test.",
-            "Expected VoiceOver reading order focus: root LifeShape Field, internal layer selector, visual field, primary action, horizon strip."
+            "Expected VoiceOver reading order focus: root Life Calendar, internal layer selector, visual field, primary action, horizon strip."
         ] + lines).joined(separator: "\n")
         let attachment = XCTAttachment(string: transcript)
         attachment.name = name

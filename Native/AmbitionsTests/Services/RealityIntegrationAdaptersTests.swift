@@ -22,7 +22,7 @@ final class RealityIntegrationAdaptersTests: XCTestCase {
         )
 
         XCTAssertEqual(entry.kind, .calendarContextObserved)
-        XCTAssertEqual(entry.source, .plan)
+        XCTAssertEqual(entry.source, .time)
         XCTAssertEqual(entry.privacy, .calendarDerived)
         XCTAssertTrue(entry.localOnly)
         XCTAssertNil(entry.payload["rawEventTitle"])

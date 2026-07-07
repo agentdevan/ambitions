@@ -39,8 +39,8 @@ final class BootstrapShellUITests: AmbitionsUITestCase {
         app.launch()
 
         XCTAssertTrue(waitForTodayScreenReady(in: app))
-        XCTAssertTrue(app.staticTexts["TodayRealityRailStepTitle"].waitForExistence(timeout: 10))
-        let originalTitle = app.staticTexts["TodayRealityRailStepTitle"].label
+        XCTAssertTrue(todayStepTitleElement(in: app).waitForExistence(timeout: 10))
+        let originalTitle = todayStepTitleText(in: app)
 
         let showAnotherButton = scrollUntilButtonHittable("TodayStartHereShowAnother", fallbackLabel: "Show another", in: app)
         XCTAssertTrue(showAnotherButton.exists)
@@ -51,14 +51,17 @@ final class BootstrapShellUITests: AmbitionsUITestCase {
         XCTAssertTrue(app.descendants(matching: .any)["TodayStepReplacementAlternatives"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["TodayStepReplacementImpact"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["TodayStepReplacementReceiptPreview"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.buttons["Shorter"].waitForExistence(timeout: 10))
-        app.buttons["Shorter"].tap()
+        let shorterAlternative = app.buttons
+            .matching(NSPredicate(format: "identifier BEGINSWITH %@ AND value CONTAINS[c] %@", "TodayStepReplacementAlternative.", "First 15 minutes"))
+            .firstMatch
+        XCTAssertTrue(shorterAlternative.waitForExistence(timeout: 10))
+        shorterAlternative.tap()
         XCTAssertTrue(app.buttons["TodayStepReplacementApprove"].waitForExistence(timeout: 10))
         app.buttons["TodayStepReplacementApprove"].tap()
 
         XCTAssertTrue(app.descendants(matching: .any)["today.inline-message"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts["TodayRealityRailStepTitle"].waitForExistence(timeout: 10))
-        let updatedTitle = app.staticTexts["TodayRealityRailStepTitle"].label
+        XCTAssertTrue(todayStepTitleElement(in: app).waitForExistence(timeout: 10))
+        let updatedTitle = todayStepTitleText(in: app)
 
         XCTAssertNotEqual(updatedTitle, originalTitle)
         XCTAssertTrue(updatedTitle.contains("First 15 minutes"))
@@ -110,7 +113,7 @@ final class BootstrapShellUITests: AmbitionsUITestCase {
         XCTAssertTrue(shellCaptureInput(in: app).waitForExistence(timeout: 10))
     }
 
-    func testPreviewBootstrapCanCreateGoalFromEmptyState() throws {
+    func testPreviewBootstrapOpensGoalsTypedCaptureFromAtlas() throws {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
@@ -127,14 +130,46 @@ final class BootstrapShellUITests: AmbitionsUITestCase {
         titleField.tap()
         titleField.typeText("UI Smoke Goal")
         dismissKeyboardIfNeeded(in: app)
-        XCTAssertTrue(scrollUntilStaticTextExists("Trust framing", in: app))
 
-        let submitButton = scrollUntilButtonHittable("create-goal.submit-button", in: app)
+        let submitButton = goalsTypedCaptureSubmitButton(in: app)
         XCTAssertTrue(submitButton.waitForExistence(timeout: 10))
         submitButton.tap()
 
-        XCTAssertTrue(waitForCreatedGoalAcknowledgement(title: "UI Smoke Goal", in: app))
-        XCTAssertTrue(titleField.waitForNonExistence(timeout: 10))
+        XCTAssertTrue(waitForGoalsTypedCaptureProposal(in: app))
+    }
+
+    private func goalsTypedCaptureSubmitButton(in app: XCUIApplication) -> XCUIElement {
+        let candidates = [
+            app.buttons["shell.activated-capture.save-button"],
+            app.buttons["capture.quick-submit"],
+            app.buttons["create-goal.submit-button"]
+        ]
+
+        for candidate in candidates where candidate.waitForExistence(timeout: 2) {
+            return candidate
+        }
+
+        return app.buttons["shell.activated-capture.save-button"]
+    }
+
+    private func waitForGoalsTypedCaptureProposal(in app: XCUIApplication, timeout: TimeInterval = 12) -> Bool {
+        let candidates = [
+            app.descendants(matching: .any)["shell.activated-capture.placement-preview"],
+            app.descendants(matching: .any)["shell.activated-capture.placement-choice.goal_seed"],
+            app.descendants(matching: .any)["capture.placement-preview"],
+            app.descendants(matching: .any)["capture.placement-choice.goal_seed"],
+            app.descendants(matching: .any)["capture.proposal.placement-choice.goal_seed"],
+            app.descendants(matching: .any)["capture.proposal"]
+        ]
+        let deadline = Date().addingTimeInterval(timeout)
+
+        while Date() < deadline {
+            if candidates.contains(where: { $0.waitForExistence(timeout: 1) }) {
+                return true
+            }
+        }
+
+        return candidates.contains(where: { $0.exists })
     }
 
     func testPreviewBootstrapExposesCanonicalFourTabShellAndSecondarySurfaces() throws {
@@ -240,10 +275,26 @@ final class BootstrapShellUITests: AmbitionsUITestCase {
         XCTAssertGreaterThanOrEqual(seam.frame.height, window.frame.height * 0.62, "Activated Capture should take over the Stage instead of behaving like a sheet.")
 
         dismissKeyboardIfNeeded(in: app)
+        XCTAssertTrue(keyboard.waitForNonExistence(timeout: 5), "Keyboard should dismiss before validating restored full-screen Capture geometry.")
+        XCTAssertTrue(
+            waitForElement(seam, heightAtLeast: window.frame.height * 0.86, timeout: 5),
+            "Activated Capture should recover full-screen height after keyboard dismissal."
+        )
 
         assertFrame(seam.frame, isInside: window.frame, named: "activated Capture seam")
         XCTAssertGreaterThanOrEqual(seam.frame.height, window.frame.height * 0.86, "Activated Capture should remain full-screen after keyboard dismissal.")
         XCTAssertTrue(app.buttons["shell.activated-capture.save-button"].waitForExistence(timeout: 10))
+    }
+
+    private func waitForElement(_ element: XCUIElement, heightAtLeast minimumHeight: CGFloat, timeout: TimeInterval) -> Bool {
+        let deadline = Date().addingTimeInterval(timeout)
+        while Date() < deadline {
+            if element.exists, element.frame.height >= minimumHeight {
+                return true
+            }
+            RunLoop.current.run(until: Date().addingTimeInterval(0.1))
+        }
+        return element.exists && element.frame.height >= minimumHeight
     }
 
     func testAFRI005ShellScreenshotBaselineCapturesCanonicalTabs() throws {

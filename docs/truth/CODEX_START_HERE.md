@@ -80,6 +80,7 @@ Architecture remediation and cleanup trains must also run:
 ```bash
 python3 scripts/ambitions-remediation-governance-check.py
 python3 scripts/ambitions-accepted-yellow-misuse-audit.py
+python3 scripts/ambitions-flagship-ios-standards-check.py
 ```
 
 For branch or PR validation, pass the base ref:

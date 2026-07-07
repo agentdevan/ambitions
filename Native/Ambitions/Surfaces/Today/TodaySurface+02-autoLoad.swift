@@ -44,19 +44,6 @@ extension TodaySurface {
             )
             .transition(.opacity)
 
-            if let message = viewModel.transientMessage {
-                TodayInlineFallbackState(
-                    title: message.title,
-                    message: message.body,
-                    systemImage: "checkmark.circle.fill"
-                )
-                .padding(.top, theme.spacing.md)
-                .accessibilityElement(children: .combine)
-                .accessibilityLabel(message.title)
-                .accessibilityValue(message.body)
-                .accessibilityIdentifier("today.post-closure-feedback")
-            }
-
         default:
             TodayInlineFallbackState(
                 title: "Today could not load",

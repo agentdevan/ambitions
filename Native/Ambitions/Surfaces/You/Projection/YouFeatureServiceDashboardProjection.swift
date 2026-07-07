@@ -43,7 +43,7 @@ extension RepositoryBackedYouService {
         return YouDashboard(
             hero: YouHeroState(
                 title: profileTitle,
-                subtitle: "Privacy, receipts, appearance, account state, and defaults stay inspectable from one local profile.",
+                subtitle: "Privacy, receipts, appearance, account state, and defaults stay inspectable from User System Profile.",
                 dominantTruth: dominantTruth(
                     syncStatus: syncStatus,
                     notificationStatus: notificationStatus,

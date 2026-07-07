@@ -8,7 +8,7 @@ final class YouFeatureServiceTests: XCTestCase {
 
         let dashboard = try await service.loadYouDashboard()
 
-        XCTAssertTrue(dashboard.hero.subtitle.contains("Local settings"))
+        XCTAssertTrue(dashboard.hero.subtitle.contains("User System Profile"))
         XCTAssertTrue(dashboard.trustCenter.pulse.subtitle.contains("Local-first"))
         XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "you-trust-sync" && $0.valueLabel == "Not currently connected" }))
         XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "you-trust-accessibility" && $0.valueLabel == "Claims locked" }))
@@ -56,7 +56,7 @@ final class YouFeatureServiceTests: XCTestCase {
 
         let dashboard = try await service.loadYouDashboard()
 
-        XCTAssertEqual(dashboard.hero.title, "Local profile")
+        XCTAssertEqual(dashboard.hero.title, "User System Profile")
         XCTAssertEqual(dashboard.preferences.appearancePreference, .system)
         XCTAssertEqual(dashboard.preferences.accentFamily, .sage)
         XCTAssertTrue(dashboard.defaultsSection.items.contains(where: { $0.id == "you-default-storage" && $0.valueLabel == "Local-only" }))
@@ -225,7 +225,7 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertEqual(search.queryPrompt, "Find anything local")
         XCTAssertEqual(search.filters.map(\.title), [
             "Goals",
-            "Captures",
+            "Captured items",
             "Proof",
             "Feedback",
             "Teaching",
@@ -278,7 +278,7 @@ final class YouFeatureServiceTests: XCTestCase {
         ])
         XCTAssertTrue(studio.previewSwatches.contains(where: { $0.title == "Start Here" }))
         XCTAssertTrue(studio.previewSwatches.contains(where: { $0.title == "Reality Meridian" }))
-        XCTAssertTrue(studio.previewSwatches.contains(where: { $0.title == "LifeShape" }))
+        XCTAssertTrue(studio.previewSwatches.contains(where: { $0.title == "Life Calendar" }))
         XCTAssertTrue(studio.previewSwatches.contains(where: { $0.title == "Receipt Drawer" }))
         XCTAssertTrue(studio.previewSummary.contains("real Ambitions objects"))
 
@@ -358,8 +358,8 @@ final class YouFeatureServiceTests: XCTestCase {
         let items = dashboard.systemCenter.sections.flatMap(\.items)
         let titles = items.map(\.title)
 
-        XCTAssertEqual(dashboard.systemCenter.title, "Settings")
-        XCTAssertTrue(dashboard.systemCenter.subtitle.contains("Local profile"))
+        XCTAssertEqual(dashboard.systemCenter.title, "User System Profile")
+        XCTAssertTrue(dashboard.systemCenter.subtitle.contains("User System Profile"))
         XCTAssertEqual(titles, [
             "Schedule & Availability",
             "Time Behavior",
@@ -373,7 +373,7 @@ final class YouFeatureServiceTests: XCTestCase {
             "Reviews",
             "Proof",
             "Archive / Completed",
-            "Local profile",
+            "User System Profile",
             "Personalization",
             "Appearance",
             "Notifications",
@@ -1288,9 +1288,9 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertEqual(inspectionItems.map(\.kind.label), ["Learned", "Used", "Ignored", "Changed"])
         XCTAssertTrue(inspectionItems.contains(where: {
             $0.id == "runtime-inspection-learned" &&
-            $0.title == "What Personal system learned" &&
+            $0.title == "What Ambitions learned" &&
             $0.summary.contains("1 correction signal") &&
-            $0.sourceLabel == "Personal system" &&
+            $0.sourceLabel == "Local learning" &&
             $0.controlLabel == "Reset or delete in Search Ambitions" &&
             $0.privacyLabel == "Local and source-tied"
         }))
@@ -1427,7 +1427,7 @@ final class YouFeatureServiceTests: XCTestCase {
             $0.id == "local-learning-disable" &&
             $0.title == "Disable learning from this signal" &&
             $0.sourceLabel == "Source-tied learning" &&
-            $0.boundaryLabel == "Local-only; no silent sync or hidden profile update"
+            $0.boundaryLabel == "Local-only; no silent sync or hidden personal-context update"
         }))
         XCTAssertTrue(controls.contains(where: {
             $0.id == "local-learning-delete" &&
@@ -1461,7 +1461,7 @@ final class YouFeatureServiceTests: XCTestCase {
         let sourceRecord = SourceRecord(
             id: "source.you.personal-runtime.1",
             providerID: "provider.local",
-            entityTitle: "Momentum reflow personal system signal",
+            entityTitle: "Momentum reflow User System Profile signal",
             publisher: nil,
             locator: "local://you/personal-runtime/1",
             provenanceKind: .userProvided,
@@ -1592,7 +1592,7 @@ final class YouFeatureServiceTests: XCTestCase {
 
         XCTAssertEqual(inspectionItems.count, 1)
         XCTAssertEqual(inspectionItems.first?.kind, .learned)
-        XCTAssertEqual(inspectionItems.first?.title, "What Personal system learned from momentum reflow")
+        XCTAssertEqual(inspectionItems.first?.title, "What Ambitions learned from momentum reflow")
         XCTAssertEqual(inspectionItems.first?.privacyLabel, "Review required")
         XCTAssertTrue(inspectionItems.first?.controlLabel.contains("Search Ambitions") ?? false)
         XCTAssertEqual(controls.map { $0.id }, [
@@ -1657,12 +1657,12 @@ final class YouFeatureServiceTests: XCTestCase {
         ])
         XCTAssertEqual(rows.count, 5)
         XCTAssertTrue(rows.contains(where: {
-            $0.id == "personal-vault-defaults" &&
+            $0.id == "personal-vault-defaults" && $0.sourceLabel == "User System Profile" &&
             $0.storageLabel == "Stored on this device" &&
             $0.exportLabel == "Summary export only" &&
             $0.resetLabel == "Reset in You" &&
             $0.deleteLabel == "Delete requires confirmation" &&
-            $0.provenanceLabel == "Profile source" &&
+            $0.provenanceLabel == "Personal context source" &&
             $0.privacyPolicyLabel == "Private by default" &&
             $0.permissionLabel == "User-owned"
         }))
@@ -2053,7 +2053,7 @@ private extension YouFeatureServiceTests {
                 backendKind: .localOnly,
                 trustPosture: .localOnly,
                 availability: .unavailable,
-                detail: "You personal system learning signal tests run local-only."
+                detail: "You User System Profile learning signal tests run local-only."
             ),
             knowledgeProviderStatuses: [
                 KnowledgeProviderStatus(
@@ -2083,7 +2083,7 @@ private extension YouFeatureServiceTests {
         let input = PrivateLifeRuntimeKernelDecisionInput(
             traceContext: traceContext,
             decisionKey: "you.personal-runtime.learning-signal.\(sourceRecordID)",
-            goalText: "Inspect Personal system learning without leaving local proof."
+            goalText: "Inspect User System Profile learning without leaving local proof."
         )
         let evaluatedOutput = PrivateLifeRuntimeKernel().evaluate(input)
         let output = PrivateLifeRuntimeKernelDecisionOutput(
@@ -2097,7 +2097,6 @@ private extension YouFeatureServiceTests {
             lifeContextEffect: evaluatedOutput.lifeContextEffect,
             lifeContextSignature: evaluatedOutput.lifeContextSignature
         )
-
         return ReplayableDecisionTrace(input: input, output: output, record: nil)
     }
 
@@ -2109,6 +2108,7 @@ private extension YouFeatureServiceTests {
             evidence: SwiftDataProgressEvidenceRepository(store: store),
             feedback: SwiftDataFeedbackEventRepository(store: store),
             captures: SwiftDataCaptureRepository(store: store),
+            commandExecutionRecords: SwiftDataAmbitionsCommandExecutionRecordRepository(store: store), runtimeEvents: InMemoryRuntimeEventStore(),
             lifeContext: SwiftDataLifeContextRepository(store: store),
             appState: SwiftDataAppStateRepository(store: store)
         )

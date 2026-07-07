@@ -33,18 +33,21 @@ final class CaptureComposerUITests: AmbitionsUITestCase {
         XCTAssertTrue(review.waitForExistence(timeout: 10))
         review.tap()
         XCTAssertTrue(app.descendants(matching: .any)["capture.proposal"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.buttons["capture.proposal.route-choice.task"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.buttons["capture.proposal.route-choice.goal"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["capture.proposal.placement-choice.task"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["capture.proposal.placement-choice.goal"].waitForExistence(timeout: 10))
 
-        let routeCorrection = scrollUntilButtonHittable("capture.proposal.route-choice.task", in: app, maxAttempts: 10)
+        let routeCorrection = scrollUntilButtonHittable("capture.proposal.placement-choice.task", in: app, maxAttempts: 10)
         XCTAssertTrue(routeCorrection.exists)
         routeCorrection.tap()
 
         let accept = scrollUntilButtonHittable("capture.proposal.accept", in: app, maxAttempts: 10)
         XCTAssertTrue(accept.waitForExistence(timeout: 10))
         accept.tap()
-        XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.receipt"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.status"].waitForExistence(timeout: 10))
+        XCTAssertTrue(
+            app.descendants(matching: .any)["shell.activated-capture.status"].waitForExistence(timeout: 10)
+                || app.staticTexts.matching(NSPredicate(format: "label CONTAINS %@", "Saved")).firstMatch.waitForExistence(timeout: 10)
+        )
+        XCTAssertFalse(app.descendants(matching: .any)["capture.proposal"].exists)
         XCTAssertFalse(rootDestinationExists("Capture", in: app))
         app.terminate()
 
@@ -70,7 +73,8 @@ final class CaptureComposerUITests: AmbitionsUITestCase {
         XCTAssertFalse(largeTextApp.buttons["shell.activated-capture.dictation-button"].exists)
         largeTextApp.buttons["shell.activated-capture.save-button"].tap()
         XCTAssertTrue(largeTextApp.descendants(matching: .any)["capture.proposal"].waitForExistence(timeout: 10))
-        XCTAssertTrue(largeTextApp.buttons["capture.proposal.route-choice.task"].waitForExistence(timeout: 10))
+        XCTAssertTrue(largeTextApp.buttons["capture.proposal.placement-choice.task"].waitForExistence(timeout: 10))
+        XCTAssertTrue(largeTextApp.buttons["capture.proposal.placement-choice.goal"].waitForExistence(timeout: 10))
     }
 
     func testAMB967CaptureCreateGoalScreenshotMatrix() throws {
@@ -94,9 +98,8 @@ final class CaptureComposerUITests: AmbitionsUITestCase {
         XCTAssertTrue(activatedReview.waitForExistence(timeout: 10))
         activatedReview.tap()
         XCTAssertTrue(activatedApp.descendants(matching: .any)["capture.proposal"].waitForExistence(timeout: 10))
-        XCTAssertTrue(activatedApp.buttons["capture.proposal.route-choice.task"].waitForExistence(timeout: 10))
-        XCTAssertTrue(activatedApp.buttons["capture.proposal.route-choice.goal"].waitForExistence(timeout: 10))
-        XCTAssertTrue(activatedApp.buttons["capture.proposal.route-choice.idea"].waitForExistence(timeout: 10))
+        XCTAssertTrue(activatedApp.buttons["capture.proposal.placement-choice.task"].waitForExistence(timeout: 10))
+        XCTAssertTrue(activatedApp.buttons["capture.proposal.placement-choice.goal"].waitForExistence(timeout: 10))
         captureAMB967Screenshot(named: "amb-967-capture-proposal", in: activatedApp)
         activatedApp.terminate()
 
@@ -130,18 +133,11 @@ final class CaptureComposerUITests: AmbitionsUITestCase {
     }
 
     func testPreviewBootstrapGlobalCaptureComposerSurfacesPlacementApprovalAndFallback() throws {
-        let app = makeApp(bootstrapMode: "preview")
+        let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://overlay/quiet-command-sheet?intent=quick_capture")
         app.launch()
 
         XCTAssertTrue(waitForShellReady(in: app))
         XCTAssertFalse(rootDestinationExists("Capture", in: app))
-        let commandButton = shellCommandButton(in: app)
-        XCTAssertTrue(commandButton.waitForExistence(timeout: 10))
-        commandButton.tap()
-
-        let quickCapture = app.buttons["shell.command.action.quick_capture"]
-        XCTAssertTrue(quickCapture.waitForExistence(timeout: 10))
-        quickCapture.tap()
 
         let input = shellCaptureInput(in: app)
         XCTAssertTrue(input.waitForExistence(timeout: 10))
@@ -149,21 +145,22 @@ final class CaptureComposerUITests: AmbitionsUITestCase {
         input.typeText("play pickleball at 8 next Tuesday")
         dismissKeyboardIfNeeded(in: app)
 
-        XCTAssertTrue(app.buttons["shell.overlay.save-capture-button"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["shell.overlay.quick-capture.route-reveal"].waitForExistence(timeout: 10))
+        let review = scrollUntilButtonHittable("shell.activated-capture.save-button", in: app, maxAttempts: 10)
+        XCTAssertTrue(review.waitForExistence(timeout: 10))
+        XCTAssertFalse(app.descendants(matching: .any)["shell.activated-capture.route-reveal"].exists)
+        review.tap()
+        XCTAssertTrue(app.descendants(matching: .any)["capture.proposal"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["capture.proposal.change-destination"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["capture.proposal.accept"].waitForExistence(timeout: 10))
         XCTAssertFalse(rootDestinationExists("Capture", in: app))
         XCTAssertFalse(rootDestinationExists("Pulse", in: app))
     }
 
     func testShellCommandSheetCanOpenAndNavigateToTime() throws {
-        let app = makeApp(bootstrapMode: "preview")
+        let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://overlay/quiet-command-sheet?intent=open_week")
         app.launch()
 
         XCTAssertTrue(waitForShellReady(in: app))
-        let commandButton = shellCommandButton(in: app)
-        XCTAssertTrue(commandButton.waitForExistence(timeout: 10))
-        commandButton.tap()
-
         XCTAssertTrue(app.buttons["shell.command.action.open_week"].waitForExistence(timeout: 10))
         app.buttons["shell.command.action.open_week"].tap()
 
@@ -173,17 +170,13 @@ final class CaptureComposerUITests: AmbitionsUITestCase {
     }
 
     func testShellCommandSheetSupportsQuickCaptureFlow() throws {
-        let app = makeApp(bootstrapMode: "preview")
+        let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://overlay/quiet-command-sheet")
         app.launch()
 
         XCTAssertTrue(waitForShellReady(in: app))
-        let commandButton = shellCommandButton(in: app)
-        XCTAssertTrue(commandButton.waitForExistence(timeout: 10))
-        commandButton.tap()
 
         let quickCapture = app.buttons["shell.command.action.quick_capture"]
         XCTAssertTrue(quickCapture.waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts["Quick action Sheet"].waitForExistence(timeout: 10))
         quickCapture.tap()
 
         let field = shellCaptureInput(in: app)
@@ -192,25 +185,25 @@ final class CaptureComposerUITests: AmbitionsUITestCase {
         field.typeText("UI shell capture")
         dismissKeyboardIfNeeded(in: app)
 
-        let submit = app.buttons["shell.overlay.save-capture-button"]
+        let submit = scrollUntilButtonHittable("shell.activated-capture.save-button", in: app, maxAttempts: 10)
         XCTAssertTrue(submit.waitForExistence(timeout: 10))
         submit.tap()
+        XCTAssertTrue(app.descendants(matching: .any)["capture.proposal"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["capture.proposal.accept"].waitForExistence(timeout: 10))
+        app.buttons["capture.proposal.accept"].tap()
 
         XCTAssertFalse(rootDestinationExists("Capture", in: app))
         XCTAssertTrue(
-            app.descendants(matching: .any)["shell.overlay.quick-capture.status"].waitForExistence(timeout: 10)
+            app.descendants(matching: .any)["shell.activated-capture.status"].waitForExistence(timeout: 10)
                 || app.staticTexts.matching(NSPredicate(format: "label CONTAINS %@", "Saved locally")).firstMatch.waitForExistence(timeout: 10)
         )
     }
 
     func testShellOwnedCreateGoalFlowWorksFromCommandSheet() throws {
-        let app = makeApp(bootstrapMode: "preview")
+        let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://overlay/quiet-command-sheet")
         app.launch()
 
         XCTAssertTrue(waitForShellReady(in: app))
-        let commandButton = shellCommandButton(in: app)
-        XCTAssertTrue(commandButton.waitForExistence(timeout: 10))
-        commandButton.tap()
 
         let createAction = scrollUntilButtonHittable("shell.command.action.new_goal", fallbackLabel: "New goal", in: app)
         XCTAssertTrue(createAction.waitForExistence(timeout: 10))

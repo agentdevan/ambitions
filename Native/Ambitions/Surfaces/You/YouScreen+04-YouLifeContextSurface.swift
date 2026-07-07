@@ -3,7 +3,7 @@ import Foundation
 import SwiftUI
 import UIKit
 
-// Mutation/accessibility/proof contract: life-context actions mutate local profile state, update the visible profile stage, announce save/recovery, and preserve proof history references.
+// Mutation/accessibility/proof contract: life-context actions mutate User System Profile state, update the visible profile stage, announce save/recovery, and preserve proof history references.
 struct YouLifeContextSurface: View {
     @Environment(\.ambitionTheme) private var theme
     @State private var expandedSectionIDs: Set<String> = ["life-context-basics", "life-context-schedule-availability"]

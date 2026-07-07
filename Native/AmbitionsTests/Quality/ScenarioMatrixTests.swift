@@ -68,7 +68,8 @@ final class ScenarioMatrixTests: XCTestCase {
         XCTAssertEqual(ForbiddenLanguageAudit.violation(in: "runtime-backed local projection"), "runtime-backed")
         XCTAssertEqual(ForbiddenLanguageAudit.violation(in: "source unavailable"), "source unavailable")
         XCTAssertNil(ForbiddenLanguageAudit.violation(in: "source unavailable", exposure: .inspectionOnly))
-        XCTAssertNil(ForbiddenLanguageAudit.violation(in: "Open Time and review the LifeShape Field."))
+        XCTAssertEqual(ForbiddenLanguageAudit.violation(in: "Open Time and review the LifeShape Field."), "LifeShape Field")
+        XCTAssertNil(ForbiddenLanguageAudit.violation(in: "LifeShape Field", exposure: .internal))
     }
 
     func testM01CaptureToGoalPromotionPersistsGoalDraftCaptureAndReceipt() async throws {

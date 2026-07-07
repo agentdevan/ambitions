@@ -92,7 +92,7 @@ struct LifeShapeFieldItem: Identifiable, Sendable, Hashable {
     }
 
     var accessibilityHint: String {
-        "Selects this LifeShape Field shape without changing Time or calendar."
+        "Selects this Life Calendar shape without changing Time or calendar."
     }
 
     static func pressureLevel(for shape: TimeLifeSuiteShapeState) -> Double {

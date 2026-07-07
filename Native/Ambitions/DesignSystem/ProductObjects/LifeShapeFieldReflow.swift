@@ -190,9 +190,9 @@ extension LifeShapeFieldView {
         option: TimeReflowDecisionOptionState,
         decision: TimeReflowDecisionState,
         receiptPreview: TimeReflowReceiptPreviewState
-    ) -> String {
+        ) -> String {
         [
-            "LifeShape: \(reading.title)",
+            "Life Calendar: \(reading.title)",
             "Capacity: \(reading.capacityStatement)",
             decision.subtitle,
             option.beforeAfterPreview.accessibilityValue,

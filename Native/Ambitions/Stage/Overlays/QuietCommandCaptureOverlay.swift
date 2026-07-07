@@ -14,7 +14,7 @@ extension QuietCommandSheetView {
                 appContainer?.navigation.presentGlobalCaptureComposer(source: overlay.entrySource)
             }
             .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
-            .accessibilityIdentifier("shell.overlay.open-capture-composer")
+            .accessibilityIdentifier("shell.command.action.quick_capture")
         }
     }
 }

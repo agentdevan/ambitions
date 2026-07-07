@@ -156,6 +156,8 @@ struct YouSurface: View {
             "capture": .capturePreferences,
             "capture-preferences": .capturePreferences,
             "privacy": .trustCenter,
+            "local-context": .whatAmbitionsKnows,
+            "what-ambitions-knows": .whatAmbitionsKnows,
             "local-data": .localDataControls,
             "sources": .sourceSettings,
             "accessibility": .accessibility,

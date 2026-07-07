@@ -55,6 +55,16 @@ final class TodayCommandHandlerTests: XCTestCase {
             return false
         })
 
+        let replayedRescheduleResponse = try await todayService.performAction(
+            rescheduleAction,
+            now: fixedNow.addingTimeInterval(90)
+        )
+        let replayedRescheduleFeedback = try await repositories.feedback.listEvents(goalID: created.goalID)
+        XCTAssertEqual(replayedRescheduleResponse.message?.title, "What changed?")
+        XCTAssertTrue(replayedRescheduleResponse.message?.body.contains("Move it") == true)
+        XCTAssertTrue(replayedRescheduleResponse.message?.body.contains("replayed the existing receipt") == true)
+        XCTAssertEqual(replayedRescheduleFeedback.count, rescheduleFeedback.count)
+
         let missedRecovery = try await lifecycleService.markMissedStepForRecovery(
             goalID: created.goalID,
             stepID: created.stepID,

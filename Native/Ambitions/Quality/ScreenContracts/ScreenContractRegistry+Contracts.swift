@@ -166,7 +166,7 @@ extension ScreenContractRegistry {
     static let time = ScreenContract(
         id: .time,
         dominantQuestion: "What can my life actually hold?",
-        requiredFirstScreenContent: ["Shape Time", "LifeShape Field", "Open time", "Goal time", "Protected time", "Pressure", "Shape week", "Review pressure", "Manual mode"],
+        requiredFirstScreenContent: ["Shape Time", "Life Calendar", "Open time", "Goal time", "Protected time", "Pressure", "Shape week", "Review pressure", "Manual mode"],
         requiredPanels: [.heroDecision, .schedule, .timeline, .weekShapeStrip, .recovery, .trust],
         optionalPanels: [.groupedNavigationList, .insight],
         forbiddenFirstScreenContent: ["Onboarding permission request", "Raw calendar list", "Calendar clone", "Agenda", "Analytics dashboard", "Red warning surface", "Silent scheduler"],
@@ -174,7 +174,7 @@ extension ScreenContractRegistry {
         drillDowns: ["Calendar mode", "Rituals", "Review archive", "Receipts"],
         densityBehavior: "Detailed allowed for planning evidence below hero.",
         panelSizeBehavior: "Large focuses one week section; Compact uses timeline ribbon.",
-        accessibilityRequirements: ["LifeShape Field summarizes open time, goal time, protected time, and pressure.", "Calendar controls have permission rationale.", "Timeline has non-gesture controls."],
+        accessibilityRequirements: ["Life Calendar summarizes open time, goal time, protected time, and pressure.", "Calendar controls have permission rationale.", "Timeline has non-gesture controls."],
         trustPrivacyRequirements: ["Calendar appears only as a Time source or detail.", "External writes require confirmation."],
         dependencies: [.d03GroupedNavigationList, .d04PanelDensitySize, .d05ReceiptsActionClosure],
         guardrails: commonTopLevelGuardrails + [.noCalendarPromptOutsideTime, .receiptsForMeaningfulChanges],

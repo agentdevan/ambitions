@@ -119,7 +119,7 @@ enum AppDeepLinkRegistry {
             canonicalRoute: .openTab(.time),
             deepLinkTemplate: "ambitions://tab/time",
             allowedSources: externalObjectSources,
-            privacyBoundary: "Root route only; opens LifeShape Field without schedule export."
+            privacyBoundary: "Root route only; opens Life Calendar without schedule export."
         ),
         AppDeepLinkRegistryEntry(
             id: "time.rituals",

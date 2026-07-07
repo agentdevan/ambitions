@@ -12,7 +12,7 @@ struct CaptureProposalStage: View {
     let onCancel: () -> Void
 
     var body: some View {
-        CaptureStageGroup(state: .active, accessibilityIdentifier: "capture.proposal") {
+        CaptureStageGroup(state: .active, accessibilityIdentifier: nil) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 proposalHeader
                 capturedText
@@ -39,6 +39,7 @@ struct CaptureProposalStage: View {
                 Text("Proposal")
                     .font(theme.typography.section)
                     .foregroundStyle(theme.colors.textPrimary)
+                    .accessibilityIdentifier("capture.proposal")
                 Text("Confirm the destination or change it first.")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
@@ -75,6 +76,7 @@ struct CaptureProposalStage: View {
             Text("Change destination")
                 .font(theme.typography.caption.weight(.semibold))
                 .foregroundStyle(theme.colors.textTertiary)
+                .accessibilityIdentifier("capture.proposal.change-destination")
             if dynamicTypeSize.isAccessibilitySize {
                 VStack(alignment: .leading, spacing: theme.spacing.xs) {
                     choiceButtons
@@ -85,7 +87,6 @@ struct CaptureProposalStage: View {
                 }
             }
         }
-        .accessibilityIdentifier("capture.proposal.change-destination")
     }
 
     @ViewBuilder

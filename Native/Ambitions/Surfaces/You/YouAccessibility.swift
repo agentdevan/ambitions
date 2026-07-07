@@ -9,7 +9,7 @@ enum YouAccessibility {
     ) -> String {
         [
             "You",
-            "Personal system: \(profileState)",
+            "User System Profile: \(profileState)",
             "Privacy: \(privacyState)",
             "Account: \(accountState)",
             "Receipts and history: \(receiptState)"

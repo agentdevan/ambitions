@@ -156,7 +156,6 @@ extension ProjectionDefinition {
                 family: .externalSurface,
                 consumesEventKinds: [.commandExecution, .closureRecorded, .timePlacementProposed],
                 materializationMode: .privacyFiltered,
-                privacyClasses: [.standard, .calendarDerived, .syncMetadata],
                 readModelInventory: [
                     .init(sourcePath: "Native/Ambitions/Projection/ExternalSnapshots/ExternalWidgetProjection.swift", responsibility: "Widget-safe projection scaffold", migrationTarget: .widget),
                     .init(sourcePath: "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceSnapshotBuilder.swift", responsibility: "External snapshot builder", migrationTarget: .widget),
@@ -168,7 +167,6 @@ extension ProjectionDefinition {
                 family: .externalSurface,
                 consumesEventKinds: [.commandExecution, .closureRecorded, .timePlacementProposed],
                 materializationMode: .privacyFiltered,
-                privacyClasses: [.standard, .calendarDerived, .syncMetadata],
                 readModelInventory: [
                     .init(sourcePath: "Native/Ambitions/App/AppIntentLaunchRouter.swift", responsibility: "App Intent launch routing", migrationTarget: .appIntent),
                     .init(sourcePath: "Native/Ambitions/App/Intents/AmbitionsCreationIntents.swift", responsibility: "Creation App Intents", migrationTarget: .appIntent),

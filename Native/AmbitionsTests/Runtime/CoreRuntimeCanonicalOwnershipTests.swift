@@ -38,14 +38,14 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
         }
     }
 
-    func testAMB1716QuarantinesTestSupportOutsideProductionRuntimeOwner() {
+    func testAMB1716IsolatesTestSupportOutsideProductionRuntimeOwner() {
         let root = repoRoot()
         for requiredPath in [
             "Native/AmbitionsTests/Runtime/Support/LargeStoreFixtureGenerator.swift",
         ] {
             XCTAssertTrue(
                 FileManager.default.fileExists(atPath: root.appendingPathComponent(requiredPath).path),
-                "Missing AMB-1716 quarantined test support file: \(requiredPath)"
+                "Missing AMB-1716 isolated test support file: \(requiredPath)"
             )
         }
 
