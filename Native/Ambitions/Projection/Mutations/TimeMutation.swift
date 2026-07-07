@@ -1,6 +1,5 @@
 import Foundation
 
-// AMBITIONS-QUALITY-EXTRACTION: Cohesive Time mutation owner remains under the hard 600-line ceiling; AMB-1197 touched only real-Step placement guarding, and broader split should happen with mutation replay tests.
 enum TimeMutationError: Error, Equatable {
     case unsupportedCommand
     case unsupportedCorrectionKind(String)

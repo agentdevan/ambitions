@@ -2,7 +2,18 @@ import Foundation
 
 enum SurfaceLaw {
     static let rootSurfaces: [AmbitionsSurface] = [.today, .goals, .time, .you]
-    static let blockedRootRawValues: Set<String> = ["capture", "motion", "source", "proof", "privacy", "history", "receipts"]
+    static let blockedRootRawValues: Set<String> = [
+        "capture",
+        "captures",
+        "motion",
+        "plan",
+        "profile",
+        "source",
+        "proof",
+        "privacy",
+        "history",
+        "receipts"
+    ]
 
     static func rootSurfaceIssues(for contracts: [AmbitionsSurfaceContract]) -> [String] {
         var issues: [String] = []

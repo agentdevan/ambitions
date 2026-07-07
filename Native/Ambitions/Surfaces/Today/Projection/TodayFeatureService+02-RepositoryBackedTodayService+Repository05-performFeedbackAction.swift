@@ -1,7 +1,6 @@
 import AmbitionsDesignSystem
 import Foundation
 
-// AMBITIONS-QUALITY-EXTRACTION: Cohesive owner boundary remains under the hard 600-line ceiling after adjacent declarations were extracted; split further only with behavior-level tests.
 extension RepositoryBackedTodayService {
     func performFeedbackAction(_ action: TodayInlineAction, now: Date) async throws -> TodayActionResponse {
         guard let goalID = action.target.goalID, let stepID = action.target.stepID else {

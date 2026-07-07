@@ -1,6 +1,5 @@
 import Foundation
 
-// AMBITIONS-QUALITY-EXTRACTION: Storage helpers live in SourceAtlasPublicPackCacheFileRepository+Storage.swift; split commit/load flows further only with repository lifecycle tests.
 enum SourceAtlasPublicPackCacheRepositoryCommitStatus: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
     case persistedCurrent = "persisted_current"
     case recordedOnly = "recorded_only"

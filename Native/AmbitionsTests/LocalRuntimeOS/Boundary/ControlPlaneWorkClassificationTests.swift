@@ -4,6 +4,41 @@ import XCTest
 final class AmbitionsOSControlPlaneModelsTests: XCTestCase {
     private let classifier = AmbitionsOSControlPlaneClassifier()
 
+    func testControlPlanePersistentUserSurfacesMatchStageRootSurfacesExactly() {
+        let stageRoots = AmbitionsSurface.allCases.map(\.rawValue)
+        let controlPlaneRoots = AmbitionsOSControlPlaneSurface.canonicalPersistentUserSurfaces.map(\.rawValue)
+        let allControlPlaneCases = AmbitionsOSControlPlaneSurface.allCases.map(\.rawValue)
+
+        XCTAssertEqual(stageRoots, ["today", "goals", "time", "you"])
+        XCTAssertEqual(controlPlaneRoots, stageRoots)
+        XCTAssertEqual(
+            allControlPlaneCases.filter { ["capture", "captures", "plan", "profile", "motion"].contains($0) },
+            []
+        )
+        XCTAssertTrue(AmbitionsOSControlPlaneSurface.time.isPersistentUserSurface)
+        XCTAssertFalse(AmbitionsOSControlPlaneSurface.captureComposer.isPersistentUserSurface)
+        XCTAssertTrue(AmbitionsOSControlPlaneSurface.captureComposer.isGlobalComposerOrCommand)
+    }
+
+    func testCaptureComposerClassifiesLocalWorkWithoutBecomingRootSurface() {
+        let request = AmbitionsOSControlPlaneWorkRequest(
+            id: "capture-composer",
+            title: "Route captured intent",
+            surface: .captureComposer,
+            signals: [.localOnly],
+            requestedAt: "2026-05-06T15:29:00Z"
+        )
+
+        let classification = classifier.classify(request)
+
+        XCTAssertFalse(request.surface.isPersistentUserSurface)
+        XCTAssertTrue(request.surface.isGlobalComposerOrCommand)
+        XCTAssertEqual(classification.disposition, .allowLocalWork)
+        XCTAssertEqual(classification.requiredGates, [])
+        XCTAssertTrue(classification.allowedOutputs.contains(.recommendation))
+        XCTAssertTrue(classification.canReachEventLog)
+    }
+
     func testSourceSensitiveRegulatedWorkRequiresSourceAndSafetyReview() {
         let request = AmbitionsOSControlPlaneWorkRequest(
             id: "career-requirement",
@@ -94,7 +129,7 @@ final class AmbitionsOSControlPlaneModelsTests: XCTestCase {
             AmbitionsOSControlPlaneWorkRequest(
                 id: "safety",
                 title: "Unsafe request",
-                surface: .capture,
+                surface: .captureComposer,
                 signals: [.crisisOrSafety],
                 requestedAt: "2026-05-06T15:34:00Z"
             )

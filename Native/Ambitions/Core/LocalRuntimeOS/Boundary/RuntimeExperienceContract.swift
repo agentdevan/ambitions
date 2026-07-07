@@ -111,12 +111,19 @@ struct AmbitionsOSExperienceContract: Codable, Sendable, Equatable, Hashable, Id
     }
 
     var isCanonicalUserSurface: Bool {
-        switch surface {
-        case .today, .goals, .capture, .plan, .you:
-            return true
-        case .externalProjection, .runtimeContract:
-            return false
-        }
+        surface.isPersistentUserSurface
+    }
+
+    var isGlobalComposerExperience: Bool {
+        surface.isGlobalComposerOrCommand && primaryObject == .captureComposer
+    }
+
+    var isInspectionDetailExperience: Bool {
+        surface.isInspectionDetail && primaryObject == .proofReview
+    }
+
+    var isValidExperienceScope: Bool {
+        isCanonicalUserSurface || isGlobalComposerExperience || isInspectionDetailExperience
     }
 
     var containsForbiddenExperienceLanguage: Bool {
@@ -164,7 +171,7 @@ struct AmbitionsOSExperienceValidator: Sendable, Equatable, Hashable {
         if contract.isWellFormed == false {
             issues.insert(.malformedContract)
         }
-        if contract.isCanonicalUserSurface == false {
+        if contract.isValidExperienceScope == false {
             issues.insert(.nonCanonicalSurface)
         }
         if contract.primaryObject == .none {

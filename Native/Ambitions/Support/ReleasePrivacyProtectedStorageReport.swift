@@ -1,7 +1,5 @@
 import Foundation
 
-// AMBITIONS-QUALITY-EXTRACTION: AMB-1804 updates only privacy-manifest alignment constants in this existing release report; extract the report before future broad release/privacy edits.
-
 enum AFEP023FieldCategory: String, CaseIterable, Sendable, Equatable {
     case today = "Today"
     case goals = "Goals"

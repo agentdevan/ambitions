@@ -151,9 +151,9 @@ enum CalendarRemindersError: LocalizedError, Equatable {
         case let .missingLocalCommitReceipt(scope):
             switch scope {
             case .reminders:
-                return "A local runtime commit receipt is required before creating reminder items."
+                return "Save the local change before creating reminder items."
             case .calendarEvents:
-                return "A local runtime commit receipt is required before creating calendar events."
+                return "Save the local change before creating calendar events."
             }
         case let .saveFailed(message):
             return "Unable to save to EventKit: \(message)"
@@ -166,7 +166,6 @@ protocol CalendarRemindersServicing: Sendable {
     func requestAuthorizationIfNeeded(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState
     func createReminder(for selection: NextStepSchedulingSelection, now: Date) async throws -> CreatedReminderRecord
     func createCalendarEvent(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async throws -> CreatedCalendarEventRecord
-    // Reserved for the next calendar read-path pass. The current hook avoids broad churn.
     func detectConflicts(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async -> CalendarConflictReport?
 }
 

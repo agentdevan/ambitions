@@ -1,7 +1,5 @@
 import Foundation
 
-// AMBITIONS-QUALITY-EXTRACTION: This router predates the 400-line guard. AMB-1674 only converts quick Capture to the shared command path; a later shell-slice should extract non-Capture intent handlers without changing route behavior.
-
 struct ShellCommandExecutionResult: Sendable, Equatable {
     let title: String?
     let destination: ShellCommandDestination?
@@ -250,7 +248,7 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                 source: source,
                 presentationContext: .quickCapture,
                 destination: destination,
-                receiptBody: "Saved locally in Capture through the shared command path. Placement stays editable."
+                receiptBody: "Saved locally in Capture. Placement stays editable."
             )
             return ShellCommandExecutionResult(
                 title: commandResult.summary,
@@ -324,7 +322,7 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                 source: source,
                 presentationContext: .recall,
                 destination: .goal(goalID),
-                receiptBody: "Opened the canonical Goal Detail from \(source.displayTitle)."
+                receiptBody: "Opened Goal Detail from \(source.displayTitle)."
             )
             return ShellCommandExecutionResult(destination: .goal(goalID), pipelineTrace: intent.shellPipelineTrace())
         case .openCapture:
@@ -364,58 +362,4 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
         }
     }
 
-    private func captureComposerDestination(source: ShellCommandEntrySource) -> ShellCommandDestination {
-        .overlay(
-            .commandSheet(
-                intent: .quickCapture,
-                entrySource: source,
-                presentationContext: .quickCapture
-            )
-        )
-    }
-
-    private func fallbackDecision(for text: String, source: ShellCommandEntrySource) -> SmartAttachmentCaptureDecision {
-        SmartAttachmentCaptureAdapter().decision(
-            rawText: text,
-            sourceType: appShellCaptureSourceType(for: source),
-            sourceSurface: source.displayTitle,
-            selectedRouteType: .idea
-        )!
-    }
-
-    private func captureCommandMetadata(
-        sourceType: CaptureSourceType,
-        routeType: SmartAttachmentRouteType,
-        source: ShellCommandEntrySource
-    ) -> [String: String] {
-        [
-            ExternalCreationCommandMetadataKey.sourceType: sourceType.rawValue,
-            "captureEntryPoint": source.rawValue,
-            "captureRouteType": routeType.rawValue,
-            "captureCommandPath": "shell_command_router"
-        ]
-    }
-
-    private func ambitionsCommandSource(for source: ShellCommandEntrySource) -> AmbitionsCommandSource {
-        switch source {
-        case .todayQuickCapture:
-            return .today
-        case .goalsCreate, .goalsQuickCapture:
-            return .goals
-        case .timeQuickCapture:
-            return .time
-        case .youQuickCapture:
-            return .you
-        case .appIntent:
-            return .appIntent
-        case .notification:
-            return .notification
-        case .widget:
-            return .widget
-        case .deepLink, .shareExtension:
-            return .deepLink
-        case .shellCompose, .shellUtility, .globalCaptureComposer, .external:
-            return .capture
-        }
-    }
 }

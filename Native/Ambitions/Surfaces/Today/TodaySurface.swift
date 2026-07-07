@@ -211,7 +211,7 @@ struct TodayInlineReceiptState: View {
             RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
                 .stroke(theme.colors.strokeSubtle, lineWidth: 1)
         )
-        .shadow(color: Color.black.opacity(0.12), radius: 14, y: 8)
+        .shadow(color: theme.depth.overlay.color, radius: theme.depth.overlay.radius, x: theme.depth.overlay.x, y: theme.depth.overlay.y)
         .accessibilityElement(children: .contain)
         .accessibilityLabel(message.title)
         .accessibilityValue(message.body)

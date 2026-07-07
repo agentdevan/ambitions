@@ -2,7 +2,6 @@ import AmbitionsDesignSystem
 import Foundation
 
 extension RepositoryBackedYouService {
-    // AMBITIONS-QUALITY-EXTRACTION: Dashboard assembly stays in one projection boundary while child projection groups are split into focused owner files.
     func makeDashboard(
         snapshot: Snapshot,
         syncStatus: SyncCapabilityStatus,

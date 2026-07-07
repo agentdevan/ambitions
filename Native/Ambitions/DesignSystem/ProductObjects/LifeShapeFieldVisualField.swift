@@ -1,7 +1,6 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-// AMBITIONS-QUALITY-EXTRACTION: Visual support extensions live in LifeShapeFieldVisualFieldSupport.swift; this file keeps the root instrument anatomy together for review.
 struct LifeShapeFieldVisualField: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion

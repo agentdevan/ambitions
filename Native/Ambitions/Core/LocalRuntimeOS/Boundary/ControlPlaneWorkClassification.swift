@@ -5,11 +5,35 @@ let ambitionsOSControlPlaneSchemaVersion = "ambitionsos_control_plane.native.v1"
 enum AmbitionsOSControlPlaneSurface: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
     case today
     case goals
-    case capture
-    case plan
+    case time
     case you
+    case captureComposer = "capture_composer"
+    case inspectionDetail = "inspection_detail"
     case externalProjection = "external_projection"
     case runtimeContract = "runtime_contract"
+
+    static let canonicalPersistentUserSurfaces: [AmbitionsOSControlPlaneSurface] = [
+        .today,
+        .goals,
+        .time,
+        .you
+    ]
+
+    var isPersistentUserSurface: Bool {
+        Self.canonicalPersistentUserSurfaces.contains(self)
+    }
+
+    var isGlobalComposerOrCommand: Bool {
+        self == .captureComposer
+    }
+
+    var isInspectionDetail: Bool {
+        self == .inspectionDetail
+    }
+
+    var isExternalProjectionOrRuntimeContract: Bool {
+        self == .externalProjection || self == .runtimeContract
+    }
 }
 
 enum AmbitionsOSWorkClass: String, Codable, Sendable, Equatable, Hashable, CaseIterable {

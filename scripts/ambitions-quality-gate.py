@@ -296,6 +296,75 @@ POLICY_AUDIT_FILES = {
     "Native/Ambitions/Quality/UserLanguageCategoryAudit.swift",
 }
 
+CANONICAL_ROOT_SURFACE_CASES = ["today", "goals", "time", "you"]
+BLOCKED_CANONICAL_SURFACE_CASES = {"capture", "captures", "plan", "profile", "motion"}
+CANONICAL_SURFACE_MODEL_FILES = {
+    "Native/Ambitions/Stage/AmbitionsSurface.swift",
+    "Native/Ambitions/Core/LocalRuntimeOS/Boundary/ControlPlaneWorkClassification.swift",
+    "Native/Ambitions/Core/LocalRuntimeOS/Boundary/RuntimeExperienceContract.swift",
+}
+
+STALE_ROOT_SURFACE_CLAIM_PATTERNS = [
+    r"\b(Capture|Captures|Plan|Profile|Motion)\b.{0,80}\b(canonical|persistent|root|top[- ]level)\b.{0,50}\b(surface|tab|destination|route|IA)\b",
+    r"\b(canonical|persistent|root|top[- ]level)\b.{0,80}\b(Capture|Captures|Plan|Profile|Motion)\b.{0,50}\b(surface|tab|destination|route|IA)\b",
+    r"\b(Capture|Captures|Plan|Profile|Motion)\s+tab\b",
+]
+
+STALE_ROOT_SURFACE_NEGATION_MARKERS = [
+    "must not",
+    "not ",
+    "no ",
+    "never",
+    "without",
+    "reject",
+    "forbidden",
+    "blocked",
+    "out of root",
+    "topLevel=false",
+    "should not",
+    "is not",
+    "false",
+    "violation",
+]
+
+STALE_ROOT_SURFACE_POLICY_TEST_MARKERS = [
+    "ForbiddenLanguageAudit",
+    "forbiddenCopyTerm",
+    "XCTAssertFalse",
+    "XCTAssertNil",
+]
+
+STALE_ROOT_SURFACE_POLICY_TEST_PATHS = {
+    "Native/AmbitionsTests/LanguageCanonicalOwnershipTests.swift",
+    "Native/AmbitionsTests/Quality/ScenarioMatrixTests.swift",
+}
+
+SHELL_POLICY_ALLOWED_PATTERNS_BY_PATH = {
+    "Native/Ambitions/Composer/Capture/CaptureAtmosphereComposer.swift": [
+        r"@FocusState",
+        r"\.focused\s*\(",
+        r"\.submitLabel\s*\(",
+        r"\.toolbar\s*\(",
+    ],
+}
+
+FIRST_LAYER_COPY_OWNER_FILES = {
+    "Native/Ambitions/Interaction/TodayActionCopyBuilder.swift",
+}
+
+FIRST_LAYER_INTERNAL_TERM_PATTERNS = [
+    r"\bruntime\b",
+    r"\blocal runtime\b",
+    r"\breceipts?\b",
+    r"\breplay trace\b",
+    r"\brollback\b",
+    r"\bidempotency\b",
+    r"\btransactions?\b",
+    r"\bcommand journal\b",
+    r"\bevent ledger\b",
+    r"\bprojection cursor\b",
+]
+
 
 @dataclass(frozen=True)
 class Finding:
@@ -333,6 +402,37 @@ def changed_paths() -> set[str]:
             candidate = candidate.split(" -> ", 1)[1]
         paths.add(candidate.strip())
     return {path for path in paths if path}
+
+
+def diff_only_deletes_quality_extraction_marker(diff_text: str) -> bool:
+    saw_marker_removal = False
+    for line in diff_text.splitlines():
+        if (
+            line.startswith("diff --git ")
+            or line.startswith("index ")
+            or line.startswith("--- ")
+            or line.startswith("+++ ")
+            or line.startswith("@@")
+        ):
+            continue
+        if line.startswith("+"):
+            return False
+        if line.startswith("-"):
+            if line == "-":
+                continue
+            if "AMBITIONS-QUALITY-EXTRACTION" not in line:
+                return False
+            saw_marker_removal = True
+            continue
+        if line.strip():
+            return False
+    return saw_marker_removal
+
+
+def only_deletes_quality_extraction_marker(relative: str) -> bool:
+    return diff_only_deletes_quality_extraction_marker(
+        run_git(["diff", "--unified=0", "HEAD", "--", relative])
+    )
 
 
 def central_projection_rehome_paths() -> set[str]:
@@ -431,6 +531,17 @@ def swift_enum_case_names(text: str, enum_name: str) -> list[str]:
     return cases
 
 
+def swift_static_member_cases(text: str, member_name: str) -> list[str]:
+    match = re.search(
+        rf"\bstatic\s+let\s+{re.escape(member_name)}\b[^=]*=\s*\[([^\]]*)\]",
+        text,
+        flags=re.DOTALL,
+    )
+    if match is None:
+        return []
+    return re.findall(r"\.([A-Za-z_][A-Za-z0-9_]*)", match.group(1))
+
+
 def line_count(text: str) -> int:
     return text.count("\n") + (0 if text.endswith("\n") else 1)
 
@@ -514,6 +625,41 @@ def add_regex_findings(
                 break
 
 
+def stale_root_surface_claim(line: str) -> bool:
+    if not any(re.search(pattern, line, flags=re.IGNORECASE) for pattern in STALE_ROOT_SURFACE_CLAIM_PATTERNS):
+        return False
+    if any(marker in line for marker in STALE_ROOT_SURFACE_POLICY_TEST_MARKERS):
+        return False
+    lowered = line.lower()
+    return not any(marker.lower() in lowered for marker in STALE_ROOT_SURFACE_NEGATION_MARKERS)
+
+
+def first_layer_copy_leaks_internal_term(text: str) -> str | None:
+    for literal in swift_string_literals(text):
+        for pattern in FIRST_LAYER_INTERNAL_TERM_PATTERNS:
+            if re.search(pattern, literal, flags=re.IGNORECASE):
+                return f"{pattern} :: {literal.strip()[:160]}"
+    return None
+
+
+def add_shell_policy_findings(findings: list[Finding], path: Path, text: str) -> None:
+    relative = rel(path)
+    allowed_patterns = SHELL_POLICY_ALLOWED_PATTERNS_BY_PATH.get(relative, [])
+    for index, line in enumerate(text.splitlines(), start=1):
+        if any(re.search(pattern, line, flags=re.IGNORECASE) for pattern in allowed_patterns):
+            continue
+        for pattern in SHELL_POLICY_PATTERNS:
+            if re.search(pattern, line, flags=re.IGNORECASE):
+                findings.append(
+                    Finding(
+                        "shell-chrome-safe-area",
+                        relative,
+                        f"line {index}: {pattern} :: {line.strip()[:160]}",
+                    )
+                )
+                break
+
+
 def is_centralized_design_token_usage(line: str) -> bool:
     if "theme." not in line and "DAVMotionPreset." not in line:
         return False
@@ -523,6 +669,8 @@ def is_centralized_design_token_usage(line: str) -> bool:
         return re.search(r"cornerRadius\s*:\s*theme\.radius\.", line) is not None
     if re.search(r"\.animation\s*\(", line):
         return "theme.motion.animation" in line or "DAVMotionPreset." in line
+    if re.search(r"\.shadow\s*\(", line):
+        return "theme.depth." in line
     return False
 
 
@@ -568,6 +716,117 @@ def check_architecture(files: list[Path]) -> list[Finding]:
         if relative.startswith("Native/Ambitions/App/") and re.search(r"\bTabView\s*\(", text):
             findings.append(Finding("architecture", relative, "TabView appears in App root shell"))
         add_regex_findings(findings, "architecture", path, FORBIDDEN_ROUTE_PATTERNS, text)
+
+    return findings
+
+
+def check_canonical_surface_guardrails(files: list[Path], support_files: list[Path]) -> list[Finding]:
+    findings: list[Finding] = []
+
+    stage_path = ROOT / "Native/Ambitions/Stage/AmbitionsSurface.swift"
+    control_path = ROOT / "Native/Ambitions/Core/LocalRuntimeOS/Boundary/ControlPlaneWorkClassification.swift"
+    runtime_path = ROOT / "Native/Ambitions/Core/LocalRuntimeOS/Boundary/RuntimeExperienceContract.swift"
+
+    for relative in CANONICAL_SURFACE_MODEL_FILES:
+        if not (ROOT / relative).exists():
+            findings.append(Finding("canonical-surface-guardrail", relative, "required canonical surface model file is missing"))
+
+    if stage_path.exists():
+        stage_cases = swift_enum_case_names(read(stage_path), "AmbitionsSurface")
+        if stage_cases != CANONICAL_ROOT_SURFACE_CASES:
+            findings.append(
+                Finding(
+                    "canonical-surface-guardrail",
+                    rel(stage_path),
+                    f"AmbitionsSurface must be exactly {CANONICAL_ROOT_SURFACE_CASES}; found {stage_cases}",
+                )
+            )
+
+    if control_path.exists():
+        control_text = read(control_path)
+        control_cases = swift_enum_case_names(control_text, "AmbitionsOSControlPlaneSurface")
+        blocked_cases = sorted(BLOCKED_CANONICAL_SURFACE_CASES.intersection(control_cases))
+        persistent_cases = swift_static_member_cases(control_text, "canonicalPersistentUserSurfaces")
+        if blocked_cases:
+            findings.append(
+                Finding(
+                    "canonical-surface-guardrail",
+                    rel(control_path),
+                    f"control-plane surface enum reintroduced stale root case(s): {blocked_cases}",
+                )
+            )
+        if "time" not in control_cases:
+            findings.append(Finding("canonical-surface-guardrail", rel(control_path), "control-plane surface enum is missing time"))
+        if persistent_cases != CANONICAL_ROOT_SURFACE_CASES:
+            findings.append(
+                Finding(
+                    "canonical-surface-guardrail",
+                    rel(control_path),
+                    f"canonicalPersistentUserSurfaces must be {CANONICAL_ROOT_SURFACE_CASES}; found {persistent_cases}",
+                )
+            )
+        if "captureComposer" not in control_cases or "isGlobalComposerOrCommand" not in control_text:
+            findings.append(
+                Finding(
+                    "canonical-surface-guardrail",
+                    rel(control_path),
+                    "Capture must be modeled only as the non-persistent captureComposer/global command path",
+                )
+            )
+
+    if runtime_path.exists():
+        runtime_text = read(runtime_path)
+        canonical_body = re.search(r"\bvar\s+isCanonicalUserSurface\b[\s\S]{0,500}", runtime_text)
+        if canonical_body and re.search(r"\.(capture|captures|plan|profile|motion)\b", canonical_body.group(0)):
+            findings.append(
+                Finding(
+                    "canonical-surface-guardrail",
+                    rel(runtime_path),
+                    "isCanonicalUserSurface references a stale non-root surface",
+                )
+            )
+        for snippet in ["isGlobalComposerExperience", "isInspectionDetailExperience", "isValidExperienceScope"]:
+            if snippet not in runtime_text:
+                findings.append(Finding("canonical-surface-guardrail", rel(runtime_path), f"missing {snippet}"))
+
+    for path in files + support_files:
+        relative = rel(path)
+        if relative in POLICY_AUDIT_FILES or relative in STALE_ROOT_SURFACE_POLICY_TEST_PATHS:
+            continue
+        text = read(path)
+        for index, line in enumerate(text.splitlines(), start=1):
+            if stale_root_surface_claim(line):
+                findings.append(
+                    Finding(
+                        "canonical-surface-guardrail",
+                        relative,
+                        f"line {index}: stale root-surface claim: {line.strip()[:180]}",
+                    )
+                )
+
+    return findings
+
+
+def check_first_layer_copy_boundaries() -> list[Finding]:
+    findings: list[Finding] = []
+    for relative in FIRST_LAYER_COPY_OWNER_FILES:
+        path = ROOT / relative
+        if not path.exists():
+            findings.append(Finding("first-layer-copy", relative, "required first-layer copy owner is missing"))
+            continue
+        leaked = first_layer_copy_leaks_internal_term(read(path))
+        if leaked is not None:
+            findings.append(Finding("first-layer-copy", relative, leaked))
+
+    today_handler = ROOT / "Native/Ambitions/Interaction/TodayCommandActionHandler.swift"
+    if today_handler.exists() and "TodayActionCopyBuilder" not in read(today_handler):
+        findings.append(
+            Finding(
+                "first-layer-copy",
+                rel(today_handler),
+                "Today command handler must route user-facing response copy through TodayActionCopyBuilder",
+            )
+        )
 
     return findings
 
@@ -643,10 +902,10 @@ def check_file_sizes(files: list[Path], changed: set[str], rehomed_projection_pa
         if (
             relative in changed
             and relative not in rehomed_projection_paths
+            and not only_deletes_quality_extraction_marker(relative)
             and count > 400
-            and "AMBITIONS-QUALITY-EXTRACTION:" not in text
         ):
-            findings.append(Finding("file-size", relative, f"{count} touched lines exceeds 400 without extraction note"))
+            findings.append(Finding("file-size", relative, f"{count} touched lines exceeds 400; extract or reduce the touched owner"))
     return findings
 
 
@@ -771,7 +1030,7 @@ def check_shell_and_accessibility(files: list[Path], changed: set[str], rehomed_
         text = read(path)
         is_rendering_source = is_swiftui_rendering_source(text)
         if relative.startswith(SURFACE_OWNED_PATH_PREFIXES) and is_rendering_source:
-            add_regex_findings(findings, "shell-chrome-safe-area", path, SHELL_POLICY_PATTERNS, text)
+            add_shell_policy_findings(findings, path, text)
         if relative in changed and re.search(r"\.animation\s*\(|withAnimation\s*\(", text) and "accessibilityReduceMotion" not in text:
             findings.append(Finding("motion-reduction", relative, "changed animated file lacks local reduce-motion handling"))
         if relative.startswith("Native/Ambitions/Surfaces/") and (
@@ -1193,10 +1452,39 @@ def run_self_test() -> int:
     assert any(re.search(pattern, "TabView(selection: $surface) { Text(\"Today\") }", flags=re.IGNORECASE) for pattern in [r"\bTabView\s*\("])
     assert any(re.search(pattern, "let now = Date()", flags=re.IGNORECASE) for pattern in DIRECT_TIME_RENDERING_PATTERNS)
     assert any(re.search(pattern, "\"GPT\"", flags=re.IGNORECASE) for pattern in HOSTED_AI_BACKEND_PATTERNS)
+    assert is_centralized_design_token_usage(".shadow(color: theme.depth.overlay.color, radius: theme.depth.overlay.radius, x: theme.depth.overlay.x, y: theme.depth.overlay.y)")
     assert "scripts/ambitions-accepted-yellow-misuse-audit.py" in REQUIRED_ARCHITECTURE_PATHS
     assert "scripts/ambitions-release-non-claim-gate.py" in REQUIRED_ARCHITECTURE_PATHS
     assert "scripts/ambitions-architecture-path-normalization-check.py" in REQUIRED_ARCHITECTURE_PATHS
     assert "scripts/ambitions-flagship-ios-standards-check.py" in REQUIRED_ARCHITECTURE_PATHS
+    assert swift_static_member_cases(
+        "static let canonicalPersistentUserSurfaces: [Surface] = [.today, .goals, .time, .you]",
+        "canonicalPersistentUserSurfaces",
+    ) == ["today", "goals", "time", "you"]
+    assert stale_root_surface_claim("Capture is a canonical root surface")
+    assert stale_root_surface_claim("Plan is a persistent top-level tab")
+    assert not stale_root_surface_claim("Capture is global composer, not a tab or root surface")
+    assert not stale_root_surface_claim("Capture appears with no root-destination treatment")
+    assert not stale_root_surface_claim('XCTAssertFalse(copy.contains("Plan tab"))')
+    assert first_layer_copy_leaks_internal_term('let body = "The local runtime replayed the existing receipt."') is not None
+    assert first_layer_copy_leaks_internal_term('let body = "Already recorded. No duplicate change was made."') is None
+    assert diff_only_deletes_quality_extraction_marker(
+        """diff --git a/A.swift b/A.swift
+--- a/A.swift
++++ b/A.swift
+@@ -1 +0,0 @@
+-// AMBITIONS-QUALITY-EXTRACTION: remove obsolete marker
+"""
+    )
+    assert not diff_only_deletes_quality_extraction_marker(
+        """diff --git a/A.swift b/A.swift
+--- a/A.swift
++++ b/A.swift
+@@ -1 +1 @@
+-// AMBITIONS-QUALITY-EXTRACTION: remove obsolete marker
++let copy = "Changed"
+"""
+    )
 
     print("ambitions-quality-gate self-test passed")
     return 0
@@ -1221,6 +1509,8 @@ def main() -> int:
     findings: list[Finding] = []
     findings.extend(check_final_tree_inventory())
     findings.extend(check_architecture(files))
+    findings.extend(check_canonical_surface_guardrails(files, support_files))
+    findings.extend(check_first_layer_copy_boundaries())
     findings.extend(check_file_sizes(files, changed, rehomed_projection_paths))
     findings.extend(check_changed_support_file_sizes(support_files, changed))
     findings.extend(check_forbidden_language(files))

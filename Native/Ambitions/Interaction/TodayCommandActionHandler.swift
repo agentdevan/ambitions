@@ -36,16 +36,16 @@ struct TodayCommandActionHandler {
             commandExecutionRecords: repositories.commandExecutionRecords
         )
         switch await replayAdapter.lookup(command) {
-        case .runtimeEvent(let projection, _):
-            return replayedActionResponse(for: action, projection: projection)
+        case .runtimeEvent:
+            return TodayActionCopyBuilder.replayedActionResponse(for: action)
         case .commandRecordWithoutRuntimeEvent(let record):
             let result = replayAdapter.commandRecordWithoutRuntimeEventResult(for: command, record: record)
             await persistCommandExecution(command: command, result: result, at: now)
-            return blockedActionResponse(for: .blockedByMissingFoundation)
+            return TodayActionCopyBuilder.blockedActionResponse(for: .blockedByMissingFoundation)
         case .lookupUnavailable:
             let result = replayAdapter.lookupUnavailableResult(for: command)
             await persistCommandExecution(command: command, result: result, at: now)
-            return blockedActionResponse(for: .blockedByMissingFoundation)
+            return TodayActionCopyBuilder.blockedActionResponse(for: .blockedByMissingFoundation)
         case .noRecord:
             break
         }
@@ -63,7 +63,7 @@ struct TodayCommandActionHandler {
         } catch {
             let result = commandJournalFailureResult(command: command, compilation: compilation, error: error)
             await persistCommandExecution(command: command, result: result, at: now, compilation: compilation)
-            return blockedActionResponse(for: .blockedByMissingFoundation)
+            return TodayActionCopyBuilder.blockedActionResponse(for: .blockedByMissingFoundation)
         }
 
         let goalID = action.target.goalID
@@ -82,7 +82,7 @@ struct TodayCommandActionHandler {
                 compilation: compilation,
                 journalReceipt: journalReceipt
             )
-            return blockedActionResponse(for: validation)
+            return TodayActionCopyBuilder.blockedActionResponse(for: validation)
         }
 
         guard compilation.authorization.isAuthorized else {
@@ -99,7 +99,7 @@ struct TodayCommandActionHandler {
                 compilation: compilation,
                 journalReceipt: journalReceipt
             )
-            return blockedActionResponse(for: .blockedByMissingFoundation)
+            return TodayActionCopyBuilder.blockedActionResponse(for: .blockedByMissingFoundation)
         }
 
         let response = try await feedbackAction(action, now)
@@ -321,106 +321,6 @@ struct TodayCommandActionHandler {
                 "stageActionPipelineFallbackUndo": StageActionPipelineRequirementState.satisfied.rawValue
             ]
         )
-    }
-
-    private func blockedActionResponse(for validation: AmbitionsCommandValidationState) -> TodayActionResponse {
-        let body: String
-        switch validation {
-        case .valid:
-            body = "Command is valid."
-        case .invalid:
-            body = "This action needs a clearer command before Ambitions can change anything."
-        case .needsConfirmation:
-            body = "Review this action before Ambitions changes anything."
-        case .needsMissingTarget:
-            body = "This action needs a real Step or source object before Ambitions can change anything."
-        case .unsupportedInThisBuild:
-            body = "This action is not available in this build."
-        case .blockedByMissingFoundation:
-            body = "This action is waiting on foundation work before it can run."
-        }
-        return TodayActionResponse(
-            message: TodayInlineMessage(
-                title: "Action not available",
-                body: body,
-                state: .warning
-            )
-        )
-    }
-
-    private func replayedActionResponse(
-        for action: TodayInlineAction,
-        projection: RuntimeCommandReplayProjection
-    ) -> TodayActionResponse {
-        let replayLine = "The local runtime replayed the existing receipt instead of applying the same change twice."
-        let bodySuffix = projection.resultSummary.isEmpty ? replayLine : "\(replayLine) \(projection.resultSummary)"
-
-        switch action.kind {
-        case .complete:
-            return TodayActionResponse(
-                message: TodayInlineMessage(
-                    title: "Completion recorded",
-                    body: "Still counts. \(bodySuffix)",
-                    state: .success
-                )
-            )
-        case .reschedule:
-            return TodayActionResponse(
-                message: TodayInlineMessage(
-                    title: "What changed?",
-                    body: "Move it without blame. \(bodySuffix)",
-                    state: .warning
-                )
-            )
-        case .defer:
-            return TodayActionResponse(
-                message: TodayInlineMessage(
-                    title: "Pressure softened",
-                    body: "Move it without blame. \(bodySuffix)",
-                    state: .selected
-                )
-            )
-        case .split:
-            return TodayActionResponse(
-                message: TodayInlineMessage(
-                    title: "Smaller step kept",
-                    body: "A smaller version is already recorded. \(bodySuffix)",
-                    state: .selected
-                )
-            )
-        case .askForHelp:
-            return TodayActionResponse(
-                message: TodayInlineMessage(
-                    title: "Support context captured",
-                    body: "This support request is already recorded. \(bodySuffix)",
-                    state: .warning
-                )
-            )
-        case .askWhyThisMatters:
-            return TodayActionResponse(
-                message: TodayInlineMessage(
-                    title: "Why this matters",
-                    body: bodySuffix,
-                    state: .selected
-                )
-            )
-        case .quickLog:
-            return TodayActionResponse(
-                message: TodayInlineMessage(
-                    title: "Capture saved",
-                    body: bodySuffix,
-                    state: .success
-                )
-            )
-        default:
-            return TodayActionResponse(
-                message: TodayInlineMessage(
-                    title: "Action already recorded",
-                    body: bodySuffix,
-                    state: .selected
-                )
-            )
-        }
     }
 
     func newCaptures(before: [Capture], after: [Capture]) -> [Capture] {

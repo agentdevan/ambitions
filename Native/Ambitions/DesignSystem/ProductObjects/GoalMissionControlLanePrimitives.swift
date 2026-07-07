@@ -1,7 +1,6 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-// AMBITIONS-QUALITY-EXTRACTION: Cohesive owner boundary remains under the hard 600-line ceiling after adjacent declarations were extracted; split further only with behavior-level tests.
 enum MissionControlLaneDensity: String, Sendable, CaseIterable {
     case compact
     case standard

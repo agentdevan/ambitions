@@ -1,6 +1,5 @@
 import Foundation
 
-// AMBITIONS-QUALITY-EXTRACTION: Recurring Step lifecycle behavior lives in SimpleStepLifecycleService+Recurring.swift; this file keeps one-shot placement and recovery under the hard 600-line ceiling.
 enum SimpleStepLifecycleServiceError: Error, Equatable {
     case emptyTitle
     case stepNotFound

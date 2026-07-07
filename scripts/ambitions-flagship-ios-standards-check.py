@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import subprocess
 import sys
@@ -114,23 +115,82 @@ def swift_test_files() -> list[Path]:
     return files
 
 
-def changed_paths() -> set[str]:
+def run_git(args: list[str]) -> subprocess.CompletedProcess[str]:
     result = subprocess.run(
-        ["git", "status", "--short"],
+        ["git", *args],
         cwd=ROOT,
         check=False,
         text=True,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )
+    return result
+
+
+def parse_git_status_paths(output: str) -> set[str]:
     paths: set[str] = set()
-    for raw in result.stdout.splitlines():
+    for raw in output.splitlines():
         if not raw:
             continue
         value = raw[3:].strip()
         if " -> " in value:
             _, value = value.rsplit(" -> ", 1)
-        paths.add(value)
+        if value:
+            paths.add(value)
+    return paths
+
+
+def parse_name_only_paths(output: str) -> set[str]:
+    return {line.strip() for line in output.splitlines() if line.strip()}
+
+
+def diff_paths(base: str, head: str) -> set[str]:
+    result = run_git(["diff", "--name-only", base, head, "--"])
+    if result.returncode != 0:
+        return set()
+    return parse_name_only_paths(result.stdout)
+
+
+def merge_base(left: str, right: str) -> str | None:
+    result = run_git(["merge-base", left, right])
+    if result.returncode != 0:
+        return None
+    value = result.stdout.strip()
+    return value or None
+
+
+def upstream_ref() -> str | None:
+    result = run_git(["rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{upstream}"])
+    if result.returncode != 0:
+        return None
+    value = result.stdout.strip()
+    return value or None
+
+
+def environment_base_ref() -> str | None:
+    for name in ["AMB_DESIGN_BASE_SHA", "AMB_BASE_SHA", "BASE_SHA", "GITHUB_BASE_SHA", "CI_MERGE_BASE"]:
+        value = os.environ.get(name, "").strip()
+        if value:
+            return value
+    return None
+
+
+def changed_paths(base: str | None = None, head: str = "HEAD") -> set[str]:
+    status_result = run_git(["status", "--short"])
+    status_paths = parse_git_status_paths(status_result.stdout) if status_result.returncode == 0 else set()
+    paths: set[str] = set()
+
+    effective_base = base or environment_base_ref()
+    if effective_base:
+        paths.update(diff_paths(effective_base, head))
+    elif not status_paths:
+        upstream = upstream_ref()
+        if upstream:
+            common_base = merge_base(head, upstream)
+            if common_base and common_base != head:
+                paths.update(diff_paths(common_base, head))
+
+    paths.update(status_paths)
     return paths
 
 
@@ -269,6 +329,14 @@ def run_self_test() -> int:
     assert skip_reason('throw XCTSkip("Demo bootstrap fixtures are only available in DEBUG builds.")') == (
         "Demo bootstrap fixtures are only available in DEBUG builds."
     )
+    assert parse_git_status_paths(" M Native/AmbitionsTests/FooTests.swift\nR  Old.swift -> Native/AmbitionsTests/NewTests.swift\n") == {
+        "Native/AmbitionsTests/FooTests.swift",
+        "Native/AmbitionsTests/NewTests.swift",
+    }
+    assert parse_name_only_paths("Native/AmbitionsTests/FooTests.swift\n\nNative/Ambitions/Bar.swift\n") == {
+        "Native/AmbitionsTests/FooTests.swift",
+        "Native/Ambitions/Bar.swift",
+    }
     print("ambitions-flagship-ios-standards-check self-test passed")
     return 0
 
@@ -278,6 +346,8 @@ def main() -> int:
     parser.add_argument("--json", action="store_true", help="Emit JSON findings.")
     parser.add_argument("--max-per-gate", type=int, default=80)
     parser.add_argument("--self-test", action="store_true", help="Run self-test only.")
+    parser.add_argument("--base", help="Base git ref/SHA for clean CI changed-file detection.")
+    parser.add_argument("--head", default="HEAD", help="Head git ref/SHA for clean CI changed-file detection.")
     args = parser.parse_args()
 
     if args.self_test:
@@ -288,7 +358,7 @@ def main() -> int:
     findings.extend(check_truth_snippets())
     findings.extend(check_ui_proof_helpers())
     findings.extend(check_test_source_policy(files))
-    findings.extend(check_changed_support_size(changed_paths()))
+    findings.extend(check_changed_support_size(changed_paths(base=args.base, head=args.head)))
 
     grouped = summarize(findings, args.max_per_gate)
     if args.json:

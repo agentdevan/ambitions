@@ -1,8 +1,6 @@
 import Foundation
 import Observation
 
-// AMBITIONS-QUALITY-EXTRACTION: CaptureViewModel still carries direct-service editing actions plus the AMB-1674 command-routed save path. A future Capture view-model slice should separate command save orchestration from post-save edit actions.
-
 struct CaptureViewState: Sendable {
     let captures: [Capture]
     let activeGoalOptions: [CaptureGoalOption]

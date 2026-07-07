@@ -46,6 +46,14 @@ final class SurfacesCanonicalOwnershipTests: XCTestCase {
         XCTAssertEqual(AmbitionsSurfaceContractRegistry.validate(), [])
     }
 
+    func testPersistentRootSurfacesRejectRemovedSurfaceNames() {
+        XCTAssertEqual(AmbitionsSurface.allCases.map(\.rawValue), ["today", "goals", "time", "you"])
+        for removed in ["capture", "captures", "plan", "profile", "motion"] {
+            XCTAssertNil(AmbitionsSurface(rawValue: removed), "\(removed) must not become a persistent root surface")
+            XCTAssertTrue(SurfaceLaw.blockedRootRawValues.contains(removed), "\(removed) must stay blocked by SurfaceLaw")
+        }
+    }
+
     func testRootHostUsesCanonicalSurfaceOwners() throws {
         let root = repoRoot()
         let source = try String(

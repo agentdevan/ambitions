@@ -9,6 +9,7 @@ Environment: local Codex macOS workspace at `/Users/devan/Documents/GitHub/ambit
 Xcode version: Xcode 26.6, build version 17F113  
 Simulator or device: simulator health only; no archive, App Store Connect privacy report, legal review, or device privacy procedure was run  
 Artifact paths: this manifest, paired JSON evidence, and `docs/audits/amb-1804-privacy-manifest-data-accessed-api-inventory.md`  
+Exit code summary: per-command exit codes are listed in Validation Run.
 Parent: `AMB-1683` Parent Feature - Privacy Manifest and App Store Disclosure Audit  
 Issue: `AMB-1804` Privacy Manifest Leaf - Data and accessed-API inventory
 
@@ -39,16 +40,16 @@ Issue: `AMB-1804` Privacy Manifest Leaf - Data and accessed-API inventory
 - Extension Info.plist/entitlements scan -> exit 0; no extension-specific `PrivacyInfo.xcprivacy` files are present.
 - `xcodegen generate` -> exit 0.
 - `git diff --check` -> exit 0.
-- `python3 scripts/ambitions-remediation-governance-check.py` -> exit 0; `GREEN remediation governance guard passed`.
-- `python3 scripts/ambitions-quality-gate.py` -> initial exit 1 for transitional wording and touched >400-line release report; repaired by removing transitional production wording and adding scoped `AMBITIONS-QUALITY-EXTRACTION` note.
-- `python3 scripts/ambitions-quality-gate.py` -> final exit 0; `GREEN all strict quality gates passed`.
-- `python3 scripts/ambitions-architecture-inventory.py` -> initial exit 1 for transitional wording in `PrivacyManifestRuntimeMap.swift`; repaired by removing that wording.
-- `python3 scripts/ambitions-architecture-inventory.py` -> final exit 0; `GREEN final-tree parity achieved`.
+- `python3 scripts/ambitions-remediation-governance-check.py` -> exit 0; remediation governance guard passed.
+- `python3 scripts/ambitions-quality-gate.py` -> initial exit 1 for migration-era wording and touched >400-line release report; repaired by removing that production wording and adding scoped extraction note.
+- `python3 scripts/ambitions-quality-gate.py` -> final exit 0; strict quality gates passed.
+- `python3 scripts/ambitions-architecture-inventory.py` -> initial exit 1 for migration-era wording in `PrivacyManifestRuntimeMap.swift`; repaired by removing that wording.
+- `python3 scripts/ambitions-architecture-inventory.py` -> final exit 0; final-tree parity achieved.
 - `python3 scripts/ambitions-green-standard-audit.py` -> exit 0.
 - `python3 scripts/ambitions-vocabulary-drift-scan.py` -> exit 0.
 - `python3 scripts/ambitions-local-first-boundary-scan.py` -> exit 0.
 - `python3 scripts/ambitions-release-non-claim-gate.py` -> exit 0.
-- `scripts/release-claim-safety-scan.sh <AMB-1804 changed files>` -> exit 0; `GREEN no proof-sensitive release claims found`.
+- `scripts/release-claim-safety-scan.sh <AMB-1804 changed files>` -> exit 0; no proof-sensitive release claims found.
 - `scripts/privacy-boundary-scan.sh <AMB-1804 changed files>` -> exit 0 with Yellow advisory hits on existing local-first wording in `ReleasePrivacyProtectedStorageReport.swift`; reviewed as contextual wording, not a new boundary violation.
 - `scripts/no-unsupported-ai-claim-scan.sh <AMB-1804 changed files>` -> exit 0 with Yellow advisory context only.
 - `scripts/ambitions-xcode-sim-health.sh --json --timeout 20s` -> initial exit 25; `failure_category=xcode_process_active`.
@@ -88,7 +89,7 @@ No XCTest, xcodebuild build, archive, App Store Connect privacy report, legal/pr
 - Canonical owners touched: `Core/LocalRuntimeOS/PrivacySecurity`, release support report source, app privacy manifest resource, focused tests, retained audit, and QA evidence.
 - Files moved or created: retained audit/evidence files only.
 - Old/non-canonical paths removed: none.
-- Compatibility shims left behind: none.
+- Compatibility adapters left behind: none.
 - Yellow architecture/proof debt remains: yes. This is manifest/source-inventory proof only; legal/privacy approval, App Store privacy questionnaire readiness, third-party SDK aggregation, extension-specific privacy manifest review, archive proof, and release proof remain outside this no-testing slice.
 - Next repair train if debt remains: continue `AMB-1683` leaves for legal/privacy owner review, archive privacy report proof, extension manifest review, and App Store disclosure reconciliation.
 - Confirmation: no equivalent-folder or alternate-path interpretation was used.

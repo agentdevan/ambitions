@@ -16,6 +16,56 @@ final class AmbitionsOSExperienceModelsTests: XCTestCase {
         XCTAssertEqual(validator.validate(decoded), [])
     }
 
+    func testCanonicalUserSurfaceContractOnlyAcceptsTodayGoalsTimeYou() {
+        let rootSurfaces = AmbitionsOSControlPlaneSurface.canonicalPersistentUserSurfaces
+        let nonRootSurfaces: [AmbitionsOSControlPlaneSurface] = [
+            .captureComposer,
+            .inspectionDetail,
+            .externalProjection,
+            .runtimeContract
+        ]
+
+        XCTAssertEqual(rootSurfaces.map(\.rawValue), ["today", "goals", "time", "you"])
+        XCTAssertEqual(rootSurfaces.map(\.rawValue), AmbitionsSurface.allCases.map(\.rawValue))
+        XCTAssertTrue(rootSurfaces.allSatisfy(\.isPersistentUserSurface))
+        XCTAssertTrue(rootSurfaces.allSatisfy { experienceContract(surface: $0).isCanonicalUserSurface })
+        XCTAssertTrue(nonRootSurfaces.allSatisfy { experienceContract(surface: $0).isCanonicalUserSurface == false })
+        XCTAssertEqual(
+            AmbitionsOSControlPlaneSurface.allCases.map(\.rawValue).filter {
+                ["capture", "captures", "plan", "profile", "motion"].contains($0)
+            },
+            []
+        )
+    }
+
+    func testCaptureComposerExperienceUsesSeparateNonRootValidationPath() {
+        let contract = experienceContract(
+            id: "capture-composer-experience",
+            surface: .captureComposer,
+            primaryObject: .captureComposer,
+            copySamples: [
+                "Capture",
+                "Review before saving",
+                "You are in control"
+            ],
+            recoveryLanguageSamples: [
+                "Keep it private",
+                "Choose where it belongs"
+            ]
+        )
+
+        XCTAssertFalse(contract.isCanonicalUserSurface)
+        XCTAssertTrue(contract.isGlobalComposerExperience)
+        XCTAssertFalse(contract.surface.isPersistentUserSurface)
+        XCTAssertEqual(validator.validate(contract), [])
+    }
+
+    func testOnlyCanonicalUserSurfacesCanCarryExperienceContracts() {
+        let contract = experienceContract(surface: .runtimeContract)
+
+        XCTAssertTrue(validator.validate(contract).contains(.nonCanonicalSurface))
+    }
+
     func testInvalidSchemaAndMalformedContractAreRejected() {
         let contract = experienceContract(
             id: "",
@@ -30,12 +80,6 @@ final class AmbitionsOSExperienceModelsTests: XCTestCase {
 
         XCTAssertTrue(issues.contains(.unsupportedSchema))
         XCTAssertTrue(issues.contains(.malformedContract))
-    }
-
-    func testOnlyCanonicalUserSurfacesCanCarryExperienceContracts() {
-        let contract = experienceContract(surface: .runtimeContract)
-
-        XCTAssertTrue(validator.validate(contract).contains(.nonCanonicalSurface))
     }
 
     func testPrimaryObjectAndDecisionBudgetAreRequired() {

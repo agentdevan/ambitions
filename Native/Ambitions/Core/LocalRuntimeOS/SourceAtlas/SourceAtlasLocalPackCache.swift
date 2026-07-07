@@ -1,6 +1,5 @@
 import Foundation
 
-// AMBITIONS-QUALITY-EXTRACTION: Cohesive owner boundary remains under the hard 600-line ceiling after adjacent declarations were extracted; split further only with behavior-level tests.
 enum SourceAtlasPublicPackRequestIssue: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
     case missingPackID = "missing_pack_id"
     case missingManifestVersion = "missing_manifest_version"

@@ -1,7 +1,5 @@
 import Foundation
 
-// AMBITIONS-QUALITY-EXTRACTION: Goal understanding remains a single Codable domain contract plus projection helpers; split only with migration tests for persisted snapshots and compiler fixtures.
-
 let goalUnderstandingSchemaVersion = "goal_understanding.native.v1"
 
 enum GoalUnderstandingValueOrigin: String, Codable, Sendable, Equatable, Hashable {

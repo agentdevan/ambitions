@@ -60,9 +60,10 @@ final class TodayCommandHandlerTests: XCTestCase {
             now: fixedNow.addingTimeInterval(90)
         )
         let replayedRescheduleFeedback = try await repositories.feedback.listEvents(goalID: created.goalID)
+        let replayedBody = try XCTUnwrap(replayedRescheduleResponse.message?.body)
         XCTAssertEqual(replayedRescheduleResponse.message?.title, "What changed?")
-        XCTAssertTrue(replayedRescheduleResponse.message?.body.contains("Move it") == true)
-        XCTAssertTrue(replayedRescheduleResponse.message?.body.contains("replayed the existing receipt") == true)
+        XCTAssertTrue(replayedBody.contains("Move it") && replayedBody.contains("Already recorded. No duplicate change was made."))
+        XCTAssertFalse(replayedBody.contains("local runtime") || replayedBody.contains("receipt"))
         XCTAssertEqual(replayedRescheduleFeedback.count, rescheduleFeedback.count)
 
         let missedRecovery = try await lifecycleService.markMissedStepForRecovery(
