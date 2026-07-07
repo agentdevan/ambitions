@@ -35,6 +35,10 @@ struct AmbitionsRootStageSurfaceHost: View {
             ) {
                 TodaySurface(showsNavigationChrome: false)
             }
+            .background {
+                TodayBackgroundView()
+                    .ignoresSafeArea()
+            }
         }
     }
 
@@ -59,7 +63,7 @@ struct AmbitionsRootStageSurfaceHost: View {
                         subtitle: nil,
                         posture: .direction,
                         backButtonAccessibilityIdentifier: "shell.goals.back-button",
-                        onBack: { navigation.resetGoalsPath() },
+                        onBack: { navigation.popFocusedRoute() },
                         trailingButtons: []
                     ) {
                         AreaDetailScreen(lifeAreaID: lifeAreaID)
@@ -89,7 +93,7 @@ struct AmbitionsRootStageSurfaceHost: View {
                         subtitle: "Life Calendar",
                         posture: .shaping,
                         backButtonAccessibilityIdentifier: "shell.time.back-button",
-                        onBack: { navigation.resetTimePath() },
+                        onBack: { navigation.popFocusedRoute() },
                         trailingButtons: []
                     ) {
                         TimeRitualsSurface()
@@ -100,7 +104,7 @@ struct AmbitionsRootStageSurfaceHost: View {
                         subtitle: "Life Calendar",
                         posture: .shaping,
                         backButtonAccessibilityIdentifier: "shell.time.back-button",
-                        onBack: { navigation.resetTimePath() },
+                        onBack: { navigation.popFocusedRoute() },
                         trailingButtons: []
                     ) {
                         WeeklyReviewScreen()
@@ -131,7 +135,7 @@ struct AmbitionsRootStageSurfaceHost: View {
                         subtitle: "Reflection",
                         posture: .reflection,
                         backButtonAccessibilityIdentifier: "shell.you.back-button",
-                        onBack: { navigation.resetYouPath() },
+                        onBack: { navigation.popFocusedRoute() },
                         trailingButtons: []
                     ) {
                         YouMonthlyReviewSurface()
@@ -142,7 +146,7 @@ struct AmbitionsRootStageSurfaceHost: View {
                         subtitle: "Reflection",
                         posture: .reflection,
                         backButtonAccessibilityIdentifier: "shell.you.back-button",
-                        onBack: { navigation.resetYouPath() },
+                        onBack: { navigation.popFocusedRoute() },
                         trailingButtons: []
                     ) {
                         HistoryInspectionView()
@@ -171,7 +175,7 @@ struct AmbitionsRootStageSurfaceHost: View {
                         subtitle: nil,
                         posture: .utility,
                         backButtonAccessibilityIdentifier: "shell.you.back-button",
-                        onBack: { navigation.resetYouPath() },
+                        onBack: { navigation.popFocusedRoute() },
                         trailingButtons: []
                     ) {
                         YouRootDetailRouteSurface(detail: rootDetail(for: target))

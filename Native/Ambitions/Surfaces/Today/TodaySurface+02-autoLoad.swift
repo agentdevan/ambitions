@@ -4,10 +4,15 @@ import SwiftUI
 
 extension TodaySurface {
     var bottomChromeClearance: CGFloat {
-        TodayViewportSafety.layout(
-            dynamicTypeSize: dynamicTypeSize,
-            showsNavigationChrome: showsNavigationChrome
-        ).rootBottomChromeClearance
+        max(
+            TodayViewportSafety.layout(
+                dynamicTypeSize: dynamicTypeSize,
+                showsNavigationChrome: showsNavigationChrome
+            ).rootBottomChromeClearance,
+            StageSafeAreaPolicy.rootSurfaceContentBottomInset(
+                dynamicTypeIsAccessibilitySize: dynamicTypeSize.isAccessibilitySize
+            )
+        )
     }
 
 

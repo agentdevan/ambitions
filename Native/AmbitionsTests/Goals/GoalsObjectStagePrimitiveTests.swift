@@ -69,7 +69,7 @@ final class GoalsObjectStagePrimitiveTests: XCTestCase {
         )
 
         XCTAssertTrue(source.contains(".stageOwnedSafeAreaInset(edge: .bottom"))
-        XCTAssertTrue(source.contains("theme.spacing.xxxl"))
+        XCTAssertTrue(source.contains("StageSafeAreaPolicy.rootSurfaceContentBottomInset"))
         XCTAssertTrue(source.contains(".allowsHitTesting(false)"))
     }
 

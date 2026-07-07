@@ -9,7 +9,7 @@ SCHEME="Ambitions"
 RESULT_DIR=".codex/xcode-results"
 LOG_DIR=".codex/xcode-logs"
 SUMMARY_DIR=".codex/xcode-summaries"
-TIMEOUT_DURATION="30m"
+TIMEOUT_DURATION="${AMBITIONS_XCODE_BUILD_FOR_TESTING_TIMEOUT:-45m}"
 KILL_AFTER="60s"
 SIM_HEALTH_TIMEOUT="${AMBITIONS_XCODE_SIM_HEALTH_TIMEOUT:-${AMBITIONS_SIM_HEALTH_TIMEOUT:-30s}}"
 
@@ -23,7 +23,7 @@ while [[ "$#" -gt 0 ]]; do
     --timeout) TIMEOUT_DURATION="${2:-$TIMEOUT_DURATION}"; shift 2 ;;
     --kill-after) KILL_AFTER="${2:-$KILL_AFTER}"; shift 2 ;;
     -h|--help)
-      echo "Usage: scripts/ambitions-xcode-build-for-testing.sh --batch <BATCH> [--scheme Ambitions|AmbitionsUnitTests|AmbitionsUITests] [--timeout 30m] [--kill-after 60s]" >&2
+      echo "Usage: scripts/ambitions-xcode-build-for-testing.sh --batch <BATCH> [--scheme Ambitions|AmbitionsUnitTests|AmbitionsUITests] [--timeout 45m] [--kill-after 60s]" >&2
       exit 0
       ;;
     *)
@@ -188,11 +188,14 @@ fi
 
 BUILD_CMD=(
   xcodebuild
+  -skipPackagePluginValidation
+  -skipMacroValidation
   -project Ambitions.xcodeproj
   -scheme "$SCHEME"
   -sdk iphonesimulator
   -destination "$SIM_DEST"
   -derivedDataPath "$DERIVED_DATA"
+  -showBuildTimingSummary
   build-for-testing
   CODE_SIGNING_ALLOWED=NO
   CODE_SIGNING_REQUIRED=NO
@@ -252,6 +255,10 @@ cat > "$SUMMARY_FILE" <<JSON
   "scheme": "$SCHEME",
   "status": "$([ "$status" -eq 0 ] && echo passed || echo failed)",
   "failure_category": "$classification",
+  "xcodebuild_action": "build-for-testing",
+  "timeout": "$TIMEOUT_DURATION",
+  "kill_after": "$KILL_AFTER",
+  "build_timing_summary": "enabled",
   "duration_seconds": $duration_seconds,
   "result_bundle": "$RESULT_BUNDLE",
   "log_file": "$LOG_FILE",

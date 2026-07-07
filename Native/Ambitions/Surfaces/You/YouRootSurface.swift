@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-// Mutation/accessibility/proof contract: root rows route to local User System Profile detail surfaces, preserve visible profile context, and rely on detail screens to save or show proof-backed preference changes.
+// Mutation/accessibility/proof contract: root rows route to local profile detail surfaces, preserve visible You context, and rely on detail screens to save or show proof-backed preference changes.
 enum YouRootDetail: String, Identifiable {
     case personalization
     case personalRuntime
@@ -38,7 +38,7 @@ enum YouRootDetail: String, Identifiable {
     var title: String {
         switch self {
         case .personalization: "Personalization"
-        case .personalRuntime: "User System Profile"
+        case .personalRuntime: "Personal settings"
         case .sessionDefaults: "Session defaults"
         case .appearance: "Appearance"
         case .whatAmbitionsKnows: "Local context"
@@ -161,7 +161,7 @@ struct UserSystemProfileRootView: View {
             }
         }
         .accessibilityIdentifier("you.root")
-        .accessibilityValue("User System Profile. \(localStatusSummary).")
+        .accessibilityValue("You settings. \(localStatusSummary).")
         .ambitionHaptic(theme.haptics.routeChange, trigger: selectedRowHapticToken)
     }
 
@@ -185,7 +185,7 @@ struct UserSystemProfileRootView: View {
                     .minimumScaleFactor(0.78)
                     .accessibilityIdentifier("you.root-title")
 
-                Text("User System Profile")
+                Text("Your settings")
                     .font(AmbitionsIOS26SemanticTokens.Typography.subheadline)
                     .foregroundStyle(theme.colors.textSecondary)
                     .lineLimit(2)
@@ -211,7 +211,7 @@ struct UserSystemProfileRootView: View {
         [
             RootSettingsGroup(
                 id: "profile",
-                title: "User System Profile",
+                title: "Account & local settings",
                 rows: [
                     row(id: "personalization", title: "Personalization", detail: .personalization, value: "Local", symbolName: "person.crop.circle", semanticState: .neutral),
                     row(id: "session-defaults", title: "Session defaults", detail: .sessionDefaults, value: "Ready", symbolName: "slider.horizontal.3", semanticState: .success),
@@ -232,7 +232,7 @@ struct UserSystemProfileRootView: View {
                 id: "capture",
                 title: "Capture",
                 rows: [
-                    row(id: "capture-preferences", title: "Open Field", detail: .capturePreferences, value: "Composer", symbolName: "square.and.pencil", semanticState: .capture),
+                    row(id: "capture-preferences", title: "Capture", detail: .capturePreferences, value: "Composer", symbolName: "square.and.pencil", semanticState: .capture),
                     row(id: "reviews", title: "Reviews", detail: .reviews, value: "Manual", symbolName: "checklist", semanticState: .review),
                 ]
             ),

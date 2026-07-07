@@ -33,7 +33,7 @@ final class TimeSurfaceUITests: AmbitionsUITestCase {
                     "time.life-shape-field.visual-stage",
                     "time.life-shape-field.primary-action"
                 ],
-                requiredTexts: ["Life Calendar", "This week", "Select Step"]
+                requiredTexts: ["Life Calendar", "This week", "Choose Step"]
             ),
             TimeMatrixItem(
                 name: "pressure-protected",

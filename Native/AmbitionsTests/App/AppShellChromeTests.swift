@@ -171,6 +171,35 @@ final class AppShellChromeTests: XCTestCase {
         XCTAssertTrue(source.contains("title: \"Goals\""))
         XCTAssertTrue(source.contains("title: \"You\""))
     }
+
+    func testRootFirstLayerCopyAvoidsInternalCompatibilityNames() throws {
+        let root = repoRoot()
+        let today = try String(
+            contentsOf: root.appendingPathComponent("Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailViewCurrentMoment.swift"),
+            encoding: .utf8
+        )
+        let goals = try String(
+            contentsOf: root.appendingPathComponent("Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift"),
+            encoding: .utf8
+        )
+        let you = try String(
+            contentsOf: root.appendingPathComponent("Native/Ambitions/Surfaces/You/YouRootSurface.swift"),
+            encoding: .utf8
+        )
+
+        XCTAssertFalse(today.contains("Open Field stays available"))
+        XCTAssertFalse(today.contains("Start here appears when this window can hold it."))
+        XCTAssertTrue(today.contains("Capture stays ready when something new needs a place."))
+        XCTAssertTrue(today.contains("When a step fits here, it will appear with a clear next action."))
+
+        XCTAssertFalse(goals.contains("isOpenField"))
+        XCTAssertFalse(goals.contains("region.isOpenField ? \"Add thought\""))
+
+        XCTAssertFalse(you.contains("Text(\"User System Profile\")"))
+        XCTAssertFalse(you.contains("title: \"Open Field\""))
+        XCTAssertTrue(you.contains("Text(\"Your settings\")"))
+        XCTAssertTrue(you.contains("title: \"Capture\""))
+    }
 }
 
 private extension AppShellChromeTests {

@@ -3,9 +3,9 @@ import Foundation
 enum GoalsAccessibility {
     static func rootSummary(regions: [GoalsLifeAreaAtlasRegion]) -> String {
         let active = regions.filter(\.hasActivity).map(\.title)
-        let defaultAreas = regions.filter { $0.isOpenField == false }.map(\.title).joined(separator: ", ")
+        let defaultAreas = regions.map(\.title).joined(separator: ", ")
         let activeSummary = active.isEmpty ? "No active area yet." : "Active areas: \(active.joined(separator: ", "))."
-        return "Goals. Life Areas: \(defaultAreas). \(activeSummary) Open Field is available."
+        return "Goals. Life Areas: \(defaultAreas). \(activeSummary) Capture stays available from the global composer."
     }
 
     static func rootSummary(

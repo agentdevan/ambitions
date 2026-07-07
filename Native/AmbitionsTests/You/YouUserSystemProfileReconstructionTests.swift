@@ -79,8 +79,10 @@ final class YouUserSystemProfileReconstructionTests: XCTestCase {
         XCTAssertTrue(rootSource.contains("UserSystemProfileRootView"))
         XCTAssertTrue(rootSource.contains("RootSettingsRow("))
         XCTAssertTrue(rootSource.contains("NativeSettingsGroup(title: group.title)"))
+        XCTAssertTrue(rootSource.contains("Text(\"Your settings\")"))
+        XCTAssertTrue(rootSource.contains("title: \"Account & local settings\""))
         XCTAssertTrue(rootSource.contains("title: \"Appearance\""))
-        XCTAssertTrue(rootSource.contains("title: \"Open Field\""))
+        XCTAssertTrue(rootSource.contains("title: \"Capture\""))
         XCTAssertTrue(rootSource.contains("title: \"Life Areas\""))
         XCTAssertTrue(rootSource.contains("title: \"Permissions\""))
         XCTAssertTrue(rootSource.contains("title: \"Local Data\""))
@@ -93,7 +95,10 @@ final class YouUserSystemProfileReconstructionTests: XCTestCase {
     }
 
     func testAMB1198DetailsExposeHonestUnavailableAndConfirmationBoundaries() throws {
-        let detailSource = try source("Native/Ambitions/Surfaces/You/YouRootDetailContent.swift")
+        let detailSource = try [
+            source("Native/Ambitions/Surfaces/You/YouRootDetailContent.swift"),
+            source("Native/Ambitions/Surfaces/You/YouRootDetailContent+Sections.swift"),
+        ].joined(separator: "\n")
 
         XCTAssertTrue(detailSource.contains("Gesture teaching reset"))
         XCTAssertTrue(detailSource.contains("Unavailable"))

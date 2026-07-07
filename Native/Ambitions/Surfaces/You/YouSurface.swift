@@ -12,6 +12,7 @@ struct YouSurface: View {
     @Environment(\.appUserSystemCapability) private var appUserSystemCapability
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var viewModel: YouViewModel
     @State private var pendingScreenshotDetail: YouRootDetail?
     let showsNavigationChrome: Bool
@@ -54,7 +55,9 @@ struct YouSurface: View {
         .accessibilityIdentifier("you.scroll")
         .stageOwnedSafeAreaInset(edge: .bottom) {
             Color.clear
-                .frame(height: theme.spacing.xxxl + theme.spacing.xxl)
+                .frame(height: StageSafeAreaPolicy.rootSurfaceContentBottomInset(
+                    dynamicTypeIsAccessibilitySize: dynamicTypeSize.isAccessibilitySize
+                ))
                 .accessibilityHidden(true)
         }
         .background {

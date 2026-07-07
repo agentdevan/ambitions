@@ -5,10 +5,10 @@ import XCTest
 final class GoalsRootDetailRebuildTests: XCTestCase {
     func testAMB1193DefaultLifeAreaAtlasRegionsExistWithoutFakeContent() {
         let regions = GoalsLifeAreaAtlasRegion.regions(from: PreviewGoalsScenarios.overview)
-        let rootNames = regions.filter { $0.isOpenField == false }.map(\.title)
+        let rootNames = regions.map(\.title)
 
         XCTAssertEqual(rootNames, ["Work", "Body", "Home", "People", "Self", "Future"])
-        XCTAssertTrue(regions.contains { $0.title == "Open Field" && $0.isOpenField })
+        XCTAssertFalse(regions.contains { $0.id == "open-field" || $0.title == "Open Field" })
         XCTAssertTrue(regions.allSatisfy { $0.accessibilityHint.localizedCaseInsensitiveContains("opens") })
     }
 

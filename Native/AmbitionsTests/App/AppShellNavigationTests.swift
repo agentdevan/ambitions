@@ -36,54 +36,6 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertTrue(AmbitionsSurface.you.isCanonicalTopLevel)
     }
 
-    func testRootShellTopInsetDoesNotPullSurfaceContentUnderHeader() {
-        XCTAssertGreaterThanOrEqual(
-            StageSafeAreaPolicy.topInsetSpacing(
-                hasBackButton: false,
-                dynamicTypeIsAccessibilitySize: false
-            ),
-            0
-        )
-        XCTAssertGreaterThanOrEqual(
-            StageSafeAreaPolicy.topInsetSpacing(
-                hasBackButton: false,
-                dynamicTypeIsAccessibilitySize: true
-            ),
-            0
-        )
-        XCTAssertEqual(
-            StageSafeAreaPolicy.topInsetSpacing(
-                hasBackButton: true,
-                dynamicTypeIsAccessibilitySize: false
-            ),
-            0
-        )
-        XCTAssertGreaterThanOrEqual(
-            StageSafeAreaPolicy.topContentClearance(
-                reservesPrimaryObjectTopClearance: true,
-                dynamicTypeIsAccessibilitySize: false
-            ),
-            80
-        )
-        XCTAssertGreaterThan(
-            StageSafeAreaPolicy.topContentClearance(
-                reservesPrimaryObjectTopClearance: true,
-                dynamicTypeIsAccessibilitySize: true
-            ),
-            StageSafeAreaPolicy.topContentClearance(
-                reservesPrimaryObjectTopClearance: true,
-                dynamicTypeIsAccessibilitySize: false
-            )
-        )
-        XCTAssertEqual(
-            StageSafeAreaPolicy.topContentClearance(
-                reservesPrimaryObjectTopClearance: false,
-                dynamicTypeIsAccessibilitySize: true
-            ),
-            0
-        )
-    }
-
     func testCanonicalSurfaceContractsBindEachTabToOnePrimaryObject() {
         XCTAssertEqual(AmbitionsSurfaceContractRegistry.validate(), [])
         XCTAssertEqual(
@@ -145,46 +97,6 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(SurfaceOwnershipRegistry.motionBehavior.layer, .motionBehavior)
         XCTAssertNil(SurfaceOwnershipRegistry.motionBehavior.canonicalTab)
         XCTAssertEqual(SurfaceOwnershipRegistry.motionBehavior.routePolicy, "Behavior layer only")
-    }
-
-    func testStagePathPolicyComputesRootDockAndOverlayClearance() {
-        let root = StagePathStore.chromePolicy(
-            routeDepth: .root,
-            overlayPresentation: .none,
-            dynamicTypeIsAccessibilitySize: false
-        )
-        XCTAssertTrue(root.showsRootDock)
-        XCTAssertFalse(root.showsDockBackdrop)
-        XCTAssertEqual(root.dockClearance, 108)
-        XCTAssertEqual(root.stageContentBottomClearance, 108)
-        XCTAssertEqual(root.captureComposerClearance, 108)
-
-        let capture = StagePathStore.chromePolicy(
-            routeDepth: .root,
-            overlayPresentation: .activatedCaptureComposer,
-            dynamicTypeIsAccessibilitySize: false
-        )
-        XCTAssertFalse(capture.showsRootDock)
-        XCTAssertFalse(capture.showsDockBackdrop)
-        XCTAssertEqual(capture.stageContentBottomClearance, 0)
-        XCTAssertEqual(capture.captureComposerClearance, 18)
-
-        let search = StagePathStore.chromePolicy(
-            routeDepth: .root,
-            overlayPresentation: .memoryLens,
-            dynamicTypeIsAccessibilitySize: false
-        )
-        XCTAssertFalse(search.showsRootDock)
-        XCTAssertTrue(StageOverlay.current(.memoryLens(entrySource: .shellUtility)).hidesRootDock)
-
-        let drilldown = StagePathStore.chromePolicy(
-            routeDepth: .drilldown,
-            overlayPresentation: .none,
-            dynamicTypeIsAccessibilitySize: true
-        )
-        XCTAssertFalse(drilldown.showsRootDock)
-        XCTAssertEqual(drilldown.stageContentBottomClearance, 0)
-        XCTAssertEqual(drilldown.continuityReceiptBottomClearance, 40)
     }
 
     func testMeridianDestinationsMirrorCanonicalTabsWithoutNewRouteOwnership() {

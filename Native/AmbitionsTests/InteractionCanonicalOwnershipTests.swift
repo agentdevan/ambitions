@@ -37,6 +37,38 @@ final class InteractionCanonicalOwnershipTests: XCTestCase {
         XCTAssertEqual(HapticPolicy.intent(for: .complete), .confirmation)
         XCTAssertEqual(HapticPolicy.intent(for: .askForHelp), .warning)
     }
+
+    func testEdgeBackSwipeGrammarIsDrilldownOnlyAndRejectsNonBackDrags() {
+        XCTAssertTrue(SurfaceGestureMap.edgeBackSwipeGrammar.isCanonSafe)
+        XCTAssertTrue(DirectManipulationPolicy.isAllowed(SurfaceGestureMap.edgeBackSwipeGrammar))
+        XCTAssertEqual(SurfaceGestureMap.edgeBackSwipeGrammar.semanticAction, "Back")
+        XCTAssertEqual(SurfaceGestureMap.edgeBackSwipeGrammar.accessibilityAlternative, "Back button")
+
+        XCTAssertTrue(SurfaceGestureMap.isEdgeBackSwipe(
+            startDistanceFromLeadingEdge: 18,
+            horizontalTranslation: 96,
+            verticalTranslation: 12,
+            screenWidth: 393
+        ))
+        XCTAssertFalse(SurfaceGestureMap.isEdgeBackSwipe(
+            startDistanceFromLeadingEdge: 92,
+            horizontalTranslation: 120,
+            verticalTranslation: 8,
+            screenWidth: 393
+        ))
+        XCTAssertFalse(SurfaceGestureMap.isEdgeBackSwipe(
+            startDistanceFromLeadingEdge: 18,
+            horizontalTranslation: 52,
+            verticalTranslation: 6,
+            screenWidth: 393
+        ))
+        XCTAssertFalse(SurfaceGestureMap.isEdgeBackSwipe(
+            startDistanceFromLeadingEdge: 18,
+            horizontalTranslation: 100,
+            verticalTranslation: 88,
+            screenWidth: 393
+        ))
+    }
 }
 
 private extension InteractionCanonicalOwnershipTests {

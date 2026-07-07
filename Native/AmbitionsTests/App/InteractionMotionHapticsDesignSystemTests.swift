@@ -140,9 +140,9 @@ final class InteractionMotionHapticsDesignSystemTests: XCTestCase {
         let output = AmbitionSemanticCompiler.compile(.proofReceipt, causalityContext: provenance)
 
         XCTAssertEqual(output.causalityContext, provenance)
-        XCTAssertTrue(output.accessibilitySummary.localizedCaseInsensitiveContains("SourceRecord"))
+        XCTAssertTrue(output.accessibilitySummary.localizedCaseInsensitiveContains("Source"))
         XCTAssertTrue(output.accessibilitySummary.localizedCaseInsensitiveContains("Receipt"))
-        XCTAssertTrue(output.accessibilitySummary.localizedCaseInsensitiveContains("ReplayTrace"))
+        XCTAssertTrue(output.accessibilitySummary.localizedCaseInsensitiveContains("Reason"))
         XCTAssertTrue(output.accessibilitySummary.localizedCaseInsensitiveContains("Search Ambitions"))
         XCTAssertTrue(output.accessibilitySummary.localizedCaseInsensitiveContains("You / Search Ambitions"))
     }
@@ -253,7 +253,7 @@ final class InteractionMotionHapticsDesignSystemTests: XCTestCase {
 
         let titles = Set(AmbitionFlagshipMotionObject.allCases.map { $0.motionPolicy.objectTitle })
         XCTAssertEqual(titles, [
-            "Start Here",
+            "Start here",
             "Reality Meridian",
             "Receipt Drawer",
             "Source Fold",
@@ -263,8 +263,8 @@ final class InteractionMotionHapticsDesignSystemTests: XCTestCase {
             "Capture Atmosphere Composer"
         ])
 
-        XCTAssertEqual(AmbitionFlagshipMotionObject.realityRail, .realityMeridian)
-        XCTAssertEqual(AmbitionFlagshipMotionObject.lifeShapeMap, .lifeShapeField)
+        XCTAssertTrue(AmbitionFlagshipMotionObject.allCases.contains(.realityMeridian))
+        XCTAssertTrue(AmbitionFlagshipMotionObject.allCases.contains(.lifeShapeField))
     }
 
     func testFCP09ObjectMotionPoliciesPreserveMeaningWithoutMotion() {

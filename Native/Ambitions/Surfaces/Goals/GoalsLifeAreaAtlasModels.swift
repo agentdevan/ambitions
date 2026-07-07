@@ -13,7 +13,6 @@ struct GoalsLifeAreaAtlasRegion: Identifiable, Hashable {
     let receiptCount: Int
     let goalReferences: [GoalAtlasPreviewItem]
     let state: AmbitionVisualState
-    let isOpenField: Bool
     let accessibilityLabel: String
     let accessibilityValue: String
     let accessibilityHint: String
@@ -74,38 +73,17 @@ struct GoalsLifeAreaAtlasRegion: Identifiable, Hashable {
                 receiptCount: receiptCount,
                 goalReferences: goalReferences,
                 state: state,
-                isOpenField: false,
                 accessibilityLabel: "\(blueprint.title) life area",
                 accessibilityValue: value,
                 accessibilityHint: "Opens full-screen area detail."
             )
         }
 
-        return regions + [openFieldRegion(from: overview)]
+        return regions
     }
 
     static func region(id: String, in overview: GoalsOverview) -> GoalsLifeAreaAtlasRegion? {
         regions(from: overview).first { $0.id == id }
-    }
-
-    private static func openFieldRegion(from overview: GoalsOverview) -> GoalsLifeAreaAtlasRegion {
-        GoalsLifeAreaAtlasRegion(
-            id: "open-field",
-            title: "Open Field",
-            symbolName: "sparkles.rectangle.stack",
-            summary: overview.emptyMessage.isEmpty ? "Unplaced captures and thoughts can wait here without becoming clutter." : overview.emptyMessage,
-            activeGoalCount: 0,
-            looseStepCount: overview.oneStepGoals.openCount,
-            thoughtCount: 0,
-            proofCount: 0,
-            receiptCount: 0,
-            goalReferences: [],
-            state: .default,
-            isOpenField: true,
-            accessibilityLabel: "Open Field",
-            accessibilityValue: overview.oneStepGoals.openCount > 0 ? "\(overview.oneStepGoals.openCount) loose steps" : "empty",
-            accessibilityHint: "Opens the holding area for unplaced captures, steps, and thoughts."
-        )
     }
 
     private static let blueprint: [GoalsLifeAreaBlueprint] = [

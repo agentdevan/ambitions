@@ -181,9 +181,9 @@ extension AmbitionsDayRailView {
     var noStepSummary: String {
         let trimmed = state.contextSummary.trimmingCharacters(in: .whitespacesAndNewlines)
         guard trimmed.isEmpty == false else {
-            return "Open Field stays available from global Capture when something new needs a place."
+            return "Capture stays ready when something new needs a place."
         }
-        return "\(trimmed) Open Field stays available from global Capture."
+        return "\(trimmed) Capture stays ready when something new needs a place."
     }
 
 
@@ -310,7 +310,7 @@ extension AmbitionsDayRailView {
             }
 
             if state.rows.isEmpty {
-                Text("Start here appears when this window can hold it.")
+                Text("When a step fits here, it will appear with a clear next action.")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)

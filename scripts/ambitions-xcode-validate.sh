@@ -52,7 +52,8 @@ BENCHMARK_FILE="$BENCHMARK_BASE/$BATCH/$RUN_ID/validate-benchmark.json"
 mkdir -p "$SUMMARY_BASE/$BATCH/$RUN_ID" "$BENCHMARK_BASE/$BATCH/$RUN_ID"
 START_EPOCH="$(date +%s)"
 SLOW_THRESHOLD_SECONDS="${AMBITIONS_XCODE_SLOW_THRESHOLD_SECONDS:-300}"
-VALIDATE_BUILD_TIMEOUT_DURATION="${AMBITIONS_XCODE_VALIDATE_BUILD_TIMEOUT:-30m}"
+VALIDATE_BUILD_TIMEOUT_DURATION="${AMBITIONS_XCODE_VALIDATE_BUILD_TIMEOUT:-${AMBITIONS_XCODE_BUILD_FOR_TESTING_TIMEOUT:-45m}}"
+VALIDATE_TEST_PLAN_TIMEOUT_DURATION="${AMBITIONS_XCODE_VALIDATE_TEST_PLAN_TIMEOUT:-${AMBITIONS_XCODE_TEST_PLAN_TIMEOUT:-45m}}"
 VALIDATE_BUILD_KILL_AFTER="${AMBITIONS_XCODE_VALIDATE_BUILD_KILL_AFTER:-60s}"
 
 map_exit_code() {
@@ -64,7 +65,7 @@ map_exit_code() {
     simulator_boot_failure|simulator_launcher_failure|missing_destination) echo 22 ;;
     xcodegen_project_drift|stale_derived_data) echo 23 ;;
     tool_missing) echo 24 ;;
-    test_timeout|automation_event_timeout|launch_wait_timeout|idle_wait_timeout|mcp_timeout_no_test_log|simctl_unresponsive|xcode_process_active) echo 25 ;;
+    timeout|test_timeout|automation_event_timeout|launch_wait_timeout|idle_wait_timeout|mcp_timeout_no_test_log|simctl_unresponsive|xcode_process_active) echo 25 ;;
     corrupt_xcresult|result_extraction_failure) echo 26 ;;
     *) echo 26 ;;
   esac
@@ -94,11 +95,17 @@ run_xcodebuild_build() {
     --kill-after "$VALIDATE_BUILD_KILL_AFTER" \
     --log "$log_file" \
     -- \
+    -skipPackagePluginValidation \
+    -skipMacroValidation \
     -project Ambitions.xcodeproj \
     -scheme Ambitions \
+    -sdk iphonesimulator \
+    -destination "generic/platform=iOS Simulator" \
     -derivedDataPath "$DERIVED_DATA_DIR" \
+    -showBuildTimingSummary \
     build \
     CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO \
+    COMPILER_INDEX_STORE_ENABLE=NO ONLY_ACTIVE_ARCH=YES \
     -resultBundlePath "$result_file" \
     >&2
   run_status=$?
@@ -191,19 +198,36 @@ focused_prebuild_scheme_for_tests() {
   fi
 }
 
+focused_requested_suite_count() {
+  awk -v suites="$TEST" 'BEGIN{n=split(suites,a,","); for(i=1;i<=n;i++){gsub(/^[[:space:]]+|[[:space:]]+$/,"",a[i]); if(a[i]!="") c++} print c+0}'
+}
+
+should_prebuild_focused_tests() {
+  [[ "${AMBITIONS_XCODE_SKIP_PREBUILD:-0}" == "1" ]] && return 1
+  [[ "${AMBITIONS_XCODE_FOCUSED_PREBUILD:-0}" == "1" ]] && return 0
+  swift_changes_since_base || return 1
+  focused_tests_are_all_unit || return 1
+  [[ "$(focused_requested_suite_count)" -gt 1 ]]
+}
+
+scheme_for_test_plan() {
+  local plan="$1"
+  local name
+  name="$(basename "$plan" .xctestplan)"
+  case "$name" in
+    Smoke) printf '%s\n' "AmbitionsSmoke" ;;
+    Runtime) printf '%s\n' "AmbitionsRuntime" ;;
+    Accessibility) printf '%s\n' "AmbitionsAccessibility" ;;
+    Screenshots) printf '%s\n' "AmbitionsScreenshots" ;;
+    ReleaseCandidate) printf '%s\n' "AmbitionsReleaseCandidate" ;;
+    *) printf '%s\n' "Ambitions" ;;
+  esac
+}
+
 third_status_field() {
-  local value="$1"
-  local rest="${value#*:}"
-  if [[ "$rest" == "$value" ]]; then
-    printf '\n'
-    return
-  fi
-  rest="${rest#*:}"
-  if [[ "$rest" == "$value" ]]; then
-    printf '\n'
-    return
-  fi
-  printf '%s\n' "${rest%%:*}"
+  local first second third rest
+  IFS=: read -r first second third rest <<< "$1"
+  printf '%s\n' "$third"
 }
 
 write_benchmark_summary() {
@@ -218,24 +242,10 @@ write_benchmark_summary() {
     slow=true
   fi
   python3 - "$BENCHMARK_FILE" "$BATCH" "$LANE" "$TS" "$phase" "$exit_code" "$category" "$duration" "$SLOW_THRESHOLD_SECONDS" "$slow" "$DERIVED_DATA_DIR" <<'PY'
-import json
-import sys
+import json, sys
 from pathlib import Path
 
-(
-    path,
-    batch,
-    lane,
-    timestamp,
-    phase,
-    exit_code,
-    category,
-    duration,
-    threshold,
-    slow,
-    derived_data,
-) = sys.argv[1:]
-
+path, batch, lane, timestamp, phase, exit_code, category, duration, threshold, slow, derived_data = sys.argv[1:]
 payload = {
     "batch": batch,
     "lane": lane,
@@ -300,6 +310,10 @@ focused_prebuild_scheme="not_run"
 focused_executed_tests=0
 focused_suite_count=0
 focused_rerun_after_prebuild=false
+focused_test_without_building=false
+test_plan_scheme="not_run"
+test_plan_prebuild_status="not_run"
+test_plan_prebuild_failure_class="not_run"
 case "$LANE" in
   none)
     status=10
@@ -339,7 +353,9 @@ case "$LANE" in
         --batch "$BATCH" \
         --results-dir "$RESULT_BASE" \
         --logs-dir "$LOG_BASE" \
-        --summaries-dir "$SUMMARY_BASE")"
+        --summaries-dir "$SUMMARY_BASE" \
+        --timeout "$VALIDATE_BUILD_TIMEOUT_DURATION" \
+        --kill-after "$VALIDATE_BUILD_KILL_AFTER")"
       status="${run_status_and_class%%:*}"
       failure_class="${run_status_and_class#*:}"
       failure_class="${failure_class%%:*}"
@@ -353,22 +369,26 @@ case "$LANE" in
       failure_class="${PREBOOT_FAILURE_CLASS:-simulator_boot_failure}"
     else
       mkdir -p "$RESULT_BASE/$BATCH/$RUN_ID" "$LOG_BASE/$BATCH/$RUN_ID" "$SUMMARY_BASE/$BATCH/$RUN_ID"
-      if [[ "${AMBITIONS_XCODE_SKIP_PREBUILD:-0}" != "1" ]] && swift_changes_since_base; then
+      if should_prebuild_focused_tests; then
         prebuild_for_focused_test=true
         focused_prebuild_scheme="$(focused_prebuild_scheme_for_tests)"
-        echo "Swift source/test changes detected; running $focused_prebuild_scheme build-for-testing before focused tests" >&2
+        echo "Multiple unit focused tests detected; running $focused_prebuild_scheme build-for-testing once before test-without-building execution" >&2
         run_status_and_class="$(run_validation_command 0 scripts/ambitions-xcode-build-for-testing.sh \
           --batch "$BATCH" \
           --scheme "$focused_prebuild_scheme" \
           --results-dir "$RESULT_BASE" \
           --logs-dir "$LOG_BASE" \
-          --summaries-dir "$SUMMARY_BASE")"
+          --summaries-dir "$SUMMARY_BASE" \
+          --timeout "$VALIDATE_BUILD_TIMEOUT_DURATION" \
+          --kill-after "$VALIDATE_BUILD_KILL_AFTER")"
         prebuild_status="${run_status_and_class%%:*}"
         prebuild_failure_class="${run_status_and_class#*:}"
         prebuild_failure_class="${prebuild_failure_class%%:*}"
         if [[ "$prebuild_status" != "0" ]]; then
           status="$prebuild_status"
           failure_class="$prebuild_failure_class"
+        else
+          focused_test_without_building=true
         fi
       fi
 
@@ -378,12 +398,18 @@ case "$LANE" in
           suite="$(printf '%s' "$suite" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
           [[ -n "$suite" ]] || continue
           focused_suite_count=$((focused_suite_count + 1))
-          run_status_and_class="$(run_validation_command 1 scripts/ambitions-xcode-test-focused.sh \
+          focused_test_args=(
+            scripts/ambitions-xcode-test-focused.sh
             --batch "$BATCH" \
             --test "$suite" \
             --results-dir "$RESULT_BASE" \
             --logs-dir "$LOG_BASE" \
-            --summaries-dir "$SUMMARY_BASE")"
+            --summaries-dir "$SUMMARY_BASE"
+          )
+          if [[ "$focused_test_without_building" == "true" ]]; then
+            focused_test_args+=(--without-building)
+          fi
+          run_status_and_class="$(run_validation_command 1 "${focused_test_args[@]}")"
           status="${run_status_and_class%%:*}"
           failure_class="${run_status_and_class#*:}"
           failure_class="${failure_class%%:*}"
@@ -401,17 +427,24 @@ case "$LANE" in
               --scheme "$focused_prebuild_scheme" \
               --results-dir "$RESULT_BASE" \
               --logs-dir "$LOG_BASE" \
-              --summaries-dir "$SUMMARY_BASE")"
+              --summaries-dir "$SUMMARY_BASE" \
+              --timeout "$VALIDATE_BUILD_TIMEOUT_DURATION" \
+              --kill-after "$VALIDATE_BUILD_KILL_AFTER")"
             prebuild_status="${run_status_and_class%%:*}"
             prebuild_failure_class="${run_status_and_class#*:}"
             prebuild_failure_class="${prebuild_failure_class%%:*}"
             if [[ "$prebuild_status" == "0" ]]; then
-              run_status_and_class="$(run_validation_command 1 scripts/ambitions-xcode-test-focused.sh \
+              focused_test_without_building=true
+              focused_test_args=(
+                scripts/ambitions-xcode-test-focused.sh
                 --batch "$BATCH" \
                 --test "$suite" \
                 --results-dir "$RESULT_BASE" \
                 --logs-dir "$LOG_BASE" \
-                --summaries-dir "$SUMMARY_BASE")"
+                --summaries-dir "$SUMMARY_BASE" \
+                --without-building
+              )
+              run_status_and_class="$(run_validation_command 1 "${focused_test_args[@]}")"
               status="${run_status_and_class%%:*}"
               failure_class="${run_status_and_class#*:}"
               failure_class="${failure_class%%:*}"
@@ -436,20 +469,40 @@ case "$LANE" in
       failure_class="${PREBOOT_FAILURE_CLASS:-simulator_boot_failure}"
     else
       case "$LANE" in
-        test-plan) [[ -n "$TEST_PLAN" ]] || TEST_PLAN="Ambitions-Focused" ;;
-        ui-proof) TEST_PLAN="Ambitions-UI" ;;
-        terminal-device-proof) TEST_PLAN="Ambitions-ReleaseProof" ;;
+        test-plan) [[ -n "$TEST_PLAN" ]] || TEST_PLAN="Smoke" ;;
+        ui-proof) TEST_PLAN="Screenshots" ;;
+        terminal-device-proof) TEST_PLAN="ReleaseCandidate" ;;
       esac
       mkdir -p "$RESULT_BASE/$BATCH/$RUN_ID" "$LOG_BASE/$BATCH/$RUN_ID" "$SUMMARY_BASE/$BATCH/$RUN_ID"
-      run_status_and_class="$(run_validation_command 1 scripts/ambitions-xcode-test-plan.sh \
+      test_plan_scheme="$(scheme_for_test_plan "$TEST_PLAN")"
+      run_status_and_class="$(run_validation_command 0 scripts/ambitions-xcode-build-for-testing.sh \
         --batch "$BATCH" \
-        --test-plan "$TEST_PLAN" \
+        --scheme "$test_plan_scheme" \
         --results-dir "$RESULT_BASE" \
         --logs-dir "$LOG_BASE" \
-        --summaries-dir "$SUMMARY_BASE")"
-      status="${run_status_and_class%%:*}"
-      failure_class="${run_status_and_class#*:}"
-      failure_class="${failure_class%%:*}"
+        --summaries-dir "$SUMMARY_BASE" \
+        --timeout "$VALIDATE_BUILD_TIMEOUT_DURATION" \
+        --kill-after "$VALIDATE_BUILD_KILL_AFTER")"
+      test_plan_prebuild_status="${run_status_and_class%%:*}"
+      test_plan_prebuild_failure_class="${run_status_and_class#*:}"
+      test_plan_prebuild_failure_class="${test_plan_prebuild_failure_class%%:*}"
+      if [[ "$test_plan_prebuild_status" != "0" ]]; then
+        status="$test_plan_prebuild_status"
+        failure_class="$test_plan_prebuild_failure_class"
+      else
+        run_status_and_class="$(run_validation_command 1 scripts/ambitions-xcode-test-plan.sh \
+          --batch "$BATCH" \
+          --test-plan "$TEST_PLAN" \
+          --scheme "$test_plan_scheme" \
+          --results-dir "$RESULT_BASE" \
+          --logs-dir "$LOG_BASE" \
+          --summaries-dir "$SUMMARY_BASE" \
+          --timeout "$VALIDATE_TEST_PLAN_TIMEOUT_DURATION" \
+          --kill-after "$VALIDATE_BUILD_KILL_AFTER")"
+        status="${run_status_and_class%%:*}"
+        failure_class="${run_status_and_class#*:}"
+        failure_class="${failure_class%%:*}"
+      fi
     fi
     ;;
 
@@ -492,13 +545,20 @@ except Exception:
 PY
 )"
 
+status_label="failed"
+if [[ "$status" -eq 0 ]]; then
+  status_label="passed"
+elif [[ "$status" -eq 10 ]]; then
+  status_label="skipped"
+fi
+
 cat > "$SUMMARY_FILE" <<JSON
 {
   "batch": "$BATCH",
   "lane": "$LANE",
   "timestamp_utc": "$TS",
   "exit_code": $status,
-  "status": "$([ "$status" -eq 0 ] && echo passed || echo failed)",
+  "status": "$status_label",
   "failure_category": "$failure_class",
   "duration_seconds": $duration_seconds,
   "slow_threshold_seconds": $SLOW_THRESHOLD_SECONDS,
@@ -512,6 +572,12 @@ cat > "$SUMMARY_FILE" <<JSON
   "focused_suite_count": $focused_suite_count,
   "focused_executed_tests": $focused_executed_tests,
   "focused_rerun_after_prebuild": $focused_rerun_after_prebuild,
+  "focused_test_without_building": $focused_test_without_building,
+  "test_plan_scheme": "$test_plan_scheme",
+  "test_plan_prebuild_status": "$test_plan_prebuild_status",
+  "test_plan_prebuild_failure_category": "$test_plan_prebuild_failure_class",
+  "build_timeout": "$VALIDATE_BUILD_TIMEOUT_DURATION",
+  "test_plan_timeout": "$VALIDATE_TEST_PLAN_TIMEOUT_DURATION",
   "run_id": "$RUN_ID",
   "result_root": "$RESULT_BASE/$BATCH",
   "log_root": "$LOG_BASE/$BATCH",
@@ -522,12 +588,12 @@ JSON
 
 if [[ "$status" -eq 0 ]]; then
   echo "xcode validation passed"
+elif [[ "$status" -eq 10 ]]; then
+  echo "xcode validation skipped: $failure_class"
 else
   echo "xcode validation failed ($status): $failure_class"
 fi
 
-if (( JSON == 1 )); then
-  cat "$SUMMARY_FILE"
-fi
+(( JSON == 1 )) && cat "$SUMMARY_FILE"
 
 exit "$status"

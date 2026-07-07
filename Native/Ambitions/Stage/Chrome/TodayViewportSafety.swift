@@ -14,7 +14,7 @@ struct TodayViewportSafety: Equatable, Sendable {
         if usesExpandedViewport(dynamicTypeSize: dynamicTypeSize) {
             return TodayViewportSafety(
                 topChromeClearance: 176,
-                rootBottomChromeClearance: showsNavigationChrome ? 56 : 560,
+                rootBottomChromeClearance: showsNavigationChrome ? 160 : 560,
                 railBottomContentClearance: 260,
                 railMinHeight: 980,
                 emptyActionBottomClearance: 240,
@@ -25,7 +25,7 @@ struct TodayViewportSafety: Equatable, Sendable {
 
         return TodayViewportSafety(
             topChromeClearance: 112,
-            rootBottomChromeClearance: showsNavigationChrome ? 40 : 420,
+            rootBottomChromeClearance: showsNavigationChrome ? 128 : 420,
             railBottomContentClearance: 148,
             railMinHeight: 760,
             emptyActionBottomClearance: 120,

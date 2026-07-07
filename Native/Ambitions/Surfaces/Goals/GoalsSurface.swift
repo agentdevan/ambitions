@@ -6,6 +6,7 @@ struct GoalsSurface: View {
     @Environment(\.appFeatureFactoryCapability) private var appFeatureFactoryCapability
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var viewModel: GoalsViewModel
     @State private var localCreationMessage: GoalDetailInlineMessage?
     let externalCreationMessage: GoalDetailInlineMessage?
@@ -79,7 +80,9 @@ struct GoalsSurface: View {
         .scrollIndicators(.hidden)
         .stageOwnedSafeAreaInset(edge: .bottom, spacing: 0) {
             Color.clear
-                .frame(height: theme.spacing.xxxl)
+                .frame(height: StageSafeAreaPolicy.rootSurfaceContentBottomInset(
+                    dynamicTypeIsAccessibilitySize: dynamicTypeSize.isAccessibilitySize
+                ))
                 .allowsHitTesting(false)
                 .accessibilityHidden(true)
         }
@@ -135,14 +138,14 @@ struct GoalsSurface: View {
         shell.navigation.presentTypedCaptureComposer(
             kind: kind,
             source: .goalsCreate,
-            lifeAreaID: region?.isOpenField == true ? nil : region?.id
+            lifeAreaID: region?.id
         )
     }
 
     func handlePromoteOneStepGoal(_ item: GoalsOneStepGoalPanelItemState) {
         localCreationMessage = GoalDetailInlineMessage(
-            title: "This can become a goal later",
-            body: "\(item.title) can stay as a One-Step Goal until you confirm a fuller Goal.",
+            title: "Keep this as a One-Step Goal",
+            body: "\(item.title) can stay here until you confirm a fuller Goal.",
             state: .selected
         )
         shell.navigation.presentTypedCaptureComposer(

@@ -183,6 +183,8 @@ run_prebuild() {
     --kill-after "$KILL_AFTER" \
     --log "$log_file" \
     -- \
+    -skipPackagePluginValidation \
+    -skipMacroValidation \
     -project Ambitions.xcodeproj \
     -scheme "$SCHEME" \
     -sdk iphonesimulator \
@@ -259,6 +261,8 @@ run_attempt() {
     --kill-after "$KILL_AFTER" \
     --log "$log_file" \
     -- \
+    -skipPackagePluginValidation \
+    -skipMacroValidation \
     -project Ambitions.xcodeproj \
     -scheme "$SCHEME" \
     -sdk iphonesimulator \

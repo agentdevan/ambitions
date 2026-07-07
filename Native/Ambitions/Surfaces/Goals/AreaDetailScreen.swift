@@ -10,7 +10,6 @@ enum GoalsLifeAreaTitle {
         case "people": "People"
         case "self": "Self"
         case "future": "Future"
-        case "open-field": "Open Field"
         default: id.split(separator: "-").map { $0.capitalized }.joined(separator: " ")
         }
     }
@@ -77,7 +76,7 @@ struct AreaDetailScreen: View {
         shell.navigation.presentTypedCaptureComposer(
             kind: kind,
             source: .goalsCreate,
-            lifeAreaID: lifeAreaID == "open-field" ? nil : lifeAreaID
+            lifeAreaID: lifeAreaID
         )
     }
 
@@ -145,9 +144,7 @@ private struct AreaDetailLoadedView: View {
             areaAction("Goal", symbol: "target", kind: .goalSeed)
             areaAction("Step", symbol: "smallcircle.filled.circle", kind: .stepSeed)
             areaAction("Thought", symbol: "sparkle", kind: .noteThought)
-            if region.isOpenField == false {
-                areaAction("Proof", symbol: "seal", kind: .proof)
-            }
+            areaAction("Proof", symbol: "seal", kind: .proof)
         }
         .accessibilityIdentifier("goals.area-detail.capture-actions")
     }

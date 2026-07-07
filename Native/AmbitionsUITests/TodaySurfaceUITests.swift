@@ -157,7 +157,7 @@ final class TodaySurfaceUITests: AmbitionsUITestCase {
                 scenario: "empty",
                 contentSize: "UICTContentSizeCategoryM",
                 sheet: nil,
-                required: ["No step is required right now", "Open Field stays available"],
+                required: ["No step is required right now", "Capture stays ready"],
                 forbidden: ["Capture what changed", "Shape Time", "Review context", "Record outcome", "Protect this window"]
             )
         ]

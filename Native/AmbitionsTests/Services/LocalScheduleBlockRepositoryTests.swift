@@ -73,7 +73,7 @@ final class LocalScheduleBlockRepositoryTests: XCTestCase {
             isUserConfirmed: true
         )
 
-        try await sourceRepository.saveBlocks([block])
+        _ = try await sourceRepository.saveBlocks([block])
         let export = try await sourceRepository.exportBlocks()
         try await destinationRepository.importBlocks(export)
 

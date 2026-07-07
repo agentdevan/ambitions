@@ -31,18 +31,43 @@ If neither `gtimeout` nor `timeout` is installed, the wrapper prints a warning a
 ## Timeout Values
 
 - Focused unit tests: `15m`.
-- Build-for-testing: `30m`.
+- Build-for-testing and validate build prebuilds: `45m`.
+- Xcode test-plan execution after prebuild: `45m`.
 - AMB-962 / UI screenshot matrix: `20m`.
+- UI screenshot matrix prebuild: `45m`.
 - Kill-after: `60s`.
 - UI screenshot matrix retry count: maximum `1`.
 
 The retained wrappers route through `scripts/ambitions-bounded-xcodebuild.sh`:
 
-- `scripts/ambitions-xcode-build-for-testing.sh --batch <BATCH>` uses `30m` by default.
+- `scripts/ambitions-xcode-build-for-testing.sh --batch <BATCH>` uses `45m` by default and writes Xcode's build timing summary to the retained log.
 - `scripts/ambitions-xcode-test-focused.sh --batch <BATCH> --test <TEST_ID>` uses `15m` by default.
+- `scripts/ambitions-xcode-test-plan.sh --batch <BATCH> --test-plan <PLAN_NAME>` uses `45m` by default and must run against a prior build-for-testing artifact.
 - `scripts/ambitions-xcode-validate.sh --lane build` uses the bounded wrapper instead of direct `xcodebuild`.
+- `scripts/ambitions-xcode-validate.sh --lane test-plan` defaults to `Smoke` on `AmbitionsSmoke`.
+- `scripts/ambitions-xcode-validate.sh --lane ui-proof` defaults to `Screenshots` on `AmbitionsScreenshots`.
+- `scripts/ambitions-xcode-validate.sh --lane terminal-device-proof` defaults to `ReleaseCandidate` on `AmbitionsReleaseCandidate`.
+- `scripts/ambitions-xcode-validate.sh` prebuilds the matching scheme before any test-plan lane, then runs `test-without-building` for the plan execution.
 - `scripts/ci/strict_build_launch.sh` uses bounded `xcodebuild` phases for list, package resolution, and simulator build.
 - `scripts/ci/strict_build_launch.sh` defaults to `SIMULATOR_NAME=iPhone 17 Pro Max` through the same simulator family used by the standalone health gate and the repo XcodeBuildMCP profile.
+
+Local retained Xcode runners pass `-skipPackagePluginValidation` and
+`-skipMacroValidation` because this repo pins trusted local project/package
+inputs and validation proof should not spend repeated wall-clock time on those
+checks. Do not add `-skipPackageSignatureValidation` to proof lanes without a
+separate security review.
+
+The timeout values are environment-tunable without editing scripts:
+
+```bash
+AMBITIONS_XCODE_BUILD_FOR_TESTING_TIMEOUT=60m scripts/ambitions-xcode-build-for-testing.sh --batch LOCAL
+AMBITIONS_XCODE_VALIDATE_TEST_PLAN_TIMEOUT=60m scripts/ambitions-xcode-validate.sh --batch LOCAL --lane ui-proof
+```
+
+Increasing the wall-clock budget is allowed when the build is actively compiling
+and producing current proof artifacts. It must not be used to relabel a hung
+test, simulator failure, corrupt result bundle, or missing test discovery as
+Green proof.
 
 ## Simulator Preflight Contention Policy
 
@@ -102,6 +127,15 @@ If the in-process Codex tool namespace still reports `Transport closed` after
 the wrapper and manifests are patched, treat that as a running-host stale
 transport until the Codex app-server reloads. Do not treat the stale live
 namespace as evidence that the repo wrapper command is invalid.
+
+Do not use XcodeBuildMCP `build` or `test` tool calls as the primary proof lane
+for broad Ambitions validation. The MCP call can return a tool-level timeout
+while its child `xcodebuild` continues compiling. Broad build and test proof must
+come from the retained shell wrappers above, which own wall-clock bounds, logs,
+result bundles, summaries, failure classification, and targeted cleanup. Use
+XcodeBuildMCP for simulator/session defaults, install/launch, screenshots,
+runtime UI inspection, and focused UI automation where the tool call itself is
+the intended interaction proof.
 
 ## UI Screenshot Timeout Policy
 

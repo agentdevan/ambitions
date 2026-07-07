@@ -115,7 +115,7 @@ private extension LifeAreaAtlasField {
                     LifeAreaAtlasNode(
                         region: region,
                         onOpen: { onOpenLifeArea(region) },
-                        onCreate: { onCreate(region.isOpenField ? .noteThought : .goalSeed, region) }
+                        onCreate: { onCreate(.goalSeed, region) }
                     )
                     .frame(width: nodeWidth, height: nodeHeight)
                     .position(point)
@@ -198,7 +198,7 @@ private struct LifeAreaAtlasNode: View {
                 if region.hasActivity {
                     ActivityMarks(region: region)
                 } else {
-                    Label(region.isOpenField ? "Add thought" : "Add goal", systemImage: "plus.circle")
+                    Label("Add goal", systemImage: "plus.circle")
                         .font(theme.typography.micro)
                         .foregroundStyle(theme.colors.textSecondary)
                         .lineLimit(1)
@@ -292,9 +292,6 @@ private extension GoalsLifeAreaAtlasRegion {
     }
 
     func atlasTint(_ theme: AmbitionTheme) -> Color {
-        if isOpenField {
-            return theme.colors.accentWarm
-        }
         if activeGoalCount > 0 {
             return theme.colors.accentPrimary
         }

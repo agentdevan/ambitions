@@ -189,6 +189,10 @@ final class StageStore {
         dispatch(.resetGoalsPath)
     }
 
+    func popFocusedRoute() {
+        dispatch(.popFocusedRoute)
+    }
+
     func openTimeRoute(_ target: TimeRouteTarget) {
         dispatch(.openTimeRoute(target))
     }

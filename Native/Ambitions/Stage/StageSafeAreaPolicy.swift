@@ -3,7 +3,10 @@ import Foundation
 
 enum StageSafeAreaPolicy {
     static func topInsetSpacing(hasBackButton: Bool, dynamicTypeIsAccessibilitySize: Bool) -> CGFloat {
-        0
+        if hasBackButton {
+            return 0
+        }
+        return dynamicTypeIsAccessibilitySize ? 12 : 8
     }
 
     static func topContentClearance(
@@ -48,5 +51,13 @@ enum StageSafeAreaPolicy {
 
     static func drilldownBottomClearance(dynamicTypeIsAccessibilitySize: Bool) -> CGFloat {
         dynamicTypeIsAccessibilitySize ? 64 : 34
+    }
+
+    static func rootSurfaceContentBottomInset(dynamicTypeIsAccessibilitySize: Bool) -> CGFloat {
+        stageContentBottomClearance(
+            routeDepth: .root,
+            overlayPresentation: .none,
+            dynamicTypeIsAccessibilitySize: dynamicTypeIsAccessibilitySize
+        ) + (dynamicTypeIsAccessibilitySize ? 28 : 20)
     }
 }

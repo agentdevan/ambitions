@@ -21,7 +21,7 @@ final class FrontendRecoveryGateTests: XCTestCase {
         ]
 
         for relativePath in checkedFiles {
-            let contents = try String(contentsOfFile: repoRoot.appendingPathComponent(relativePath).path)
+            let contents = try source(relativePath)
             XCTAssertFalse(contents.contains("Label(\"Profile\""), relativePath)
             XCTAssertFalse(contents.contains("Plan " + "tab"), relativePath)
             XCTAssertFalse(contents.contains("Profile " + "tab"), relativePath)
@@ -44,19 +44,19 @@ final class FrontendRecoveryGateTests: XCTestCase {
             ("Native/Ambitions/Surfaces/Today/TodayObjectView.swift", "TodayAccessibility.rootSummary"),
             ("Native/Ambitions/Surfaces/Today/TodaySurface.swift", "TodayExecutionDepthDisclosure"),
             ("Native/Ambitions/Surfaces/Goals/GoalsSurface.swift", "GoalsDirectionDepthDisclosure"),
-            ("Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift", "AtmosphereComposerCanvas"),
+            ("Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift", "CaptureObjectView"),
             ("Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift", "CaptureDepthDisclosure"),
             ("Native/Ambitions/Surfaces/Time/TimeSurface.swift", "TimeObjectView"),
             ("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift", "LifeShapeFieldView"),
-            ("Native/Ambitions/Surfaces/You/YouRootSurface.swift", "User System Profile")
+            ("Native/Ambitions/Surfaces/You/YouRootSurface.swift", "UserSystemProfileRootView")
         ]
 
         for (relativePath, needle) in expectations {
-            let contents = try String(contentsOfFile: repoRoot.appendingPathComponent(relativePath).path)
+            let contents = try source(relativePath)
             XCTAssertTrue(contents.contains(needle), "\(relativePath) should contain \(needle)")
         }
 
-        let todayObject = try String(contentsOfFile: repoRoot.appendingPathComponent("Native/Ambitions/Surfaces/Today/TodayObjectView.swift").path)
+        let todayObject = try source("Native/Ambitions/Surfaces/Today/TodayObjectView.swift")
         XCTAssertFalse(todayObject.contains("FlagshipRuntimeStage"))
         XCTAssertFalse(todayObject.contains("TodayRealityMeridianFlagshipAdapter"))
     }
@@ -70,7 +70,7 @@ final class FrontendRecoveryGateTests: XCTestCase {
         ]
 
         let contents = try filePaths
-            .map { try String(contentsOfFile: repoRoot.appendingPathComponent($0).path) }
+            .map { try source($0) }
             .joined(separator: "\n")
 
         XCTAssertFalse(contents.localizedCaseInsensitiveContains("plan " + "tab"))
@@ -88,5 +88,9 @@ final class FrontendRecoveryGateTests: XCTestCase {
             url.deleteLastPathComponent()
         }
         return url
+    }
+
+    private func source(_ relativePath: String) throws -> String {
+        try String(contentsOf: repoRoot.appendingPathComponent(relativePath), encoding: .utf8)
     }
 }

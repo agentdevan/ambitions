@@ -17,7 +17,7 @@ final class GoalsSurfaceUITests: AmbitionsUITestCase {
         XCTAssertTrue(app.descendants(matching: .any)["goals.life-area-atlas.title"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.descendants(matching: .any)["goals.life-area-atlas.object"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.descendants(matching: .any)["goals.life-area.work"].waitForExistence(timeout: 5))
-        XCTAssertTrue(app.descendants(matching: .any)["goals.life-area.open-field"].waitForExistence(timeout: 5))
+        XCTAssertFalse(app.descendants(matching: .any)["goals.life-area.open-field"].exists)
         XCTAssertTrue(app.buttons["goals.current-step.open"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.buttons["goals.capture-plus"].waitForExistence(timeout: 5))
     }
@@ -45,7 +45,7 @@ final class GoalsSurfaceUITests: AmbitionsUITestCase {
                     "goals.current-step.open",
                     "goals.capture-plus"
                 ],
-                requiredTexts: ["Life Area Atlas", "Start here", "Work", "Open Field"]
+                requiredTexts: ["Life Area Atlas", "Start here", "Work", "Body"]
             ),
             GoalsMatrixItem(
                 name: "selected-life-area",

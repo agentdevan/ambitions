@@ -13,12 +13,13 @@ final class TodayViewportSafetyTests: XCTestCase {
         XCTAssertGreaterThan(accessibility.rootBottomChromeClearance, normal.rootBottomChromeClearance)
     }
 
-    func testNavigationTodayClearanceStaysCompactWhenShellDockIsAbsent() {
+    func testNavigationTodayClearanceReservesRootDockBand() {
         let normal = TodayViewportSafety.layout(dynamicTypeSize: .large, showsNavigationChrome: true)
         let accessibility = TodayViewportSafety.layout(dynamicTypeSize: .accessibility3, showsNavigationChrome: true)
 
-        XCTAssertLessThanOrEqual(normal.rootBottomChromeClearance, 56)
-        XCTAssertLessThanOrEqual(accessibility.rootBottomChromeClearance, 72)
+        XCTAssertGreaterThanOrEqual(normal.rootBottomChromeClearance, 128)
+        XCTAssertGreaterThanOrEqual(accessibility.rootBottomChromeClearance, 160)
+        XCTAssertGreaterThan(accessibility.rootBottomChromeClearance, normal.rootBottomChromeClearance)
     }
 
     func testAccessibilityDynamicTypeUsesStackedRailAndSuppressesStageMetrics() {
@@ -53,15 +54,28 @@ final class TodayViewportSafetyTests: XCTestCase {
     }
 
     func testTodaySurfaceAndRailRouteLayoutThroughViewportPolicy() throws {
-        let screenSource = try source("Native/Ambitions/Surfaces/Today/TodaySurface.swift")
-        let railSource = try source("Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailPanels.swift")
+        let screenSource = try source("Native/Ambitions/Surfaces/Today/TodaySurface+02-autoLoad.swift")
+        let railSource = try source("Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailView.swift")
+        let policySource = try source("Native/Ambitions/Stage/Chrome/TodayViewportSafety.swift")
         let objectSource = try source("Native/Ambitions/Surfaces/Today/TodayObjectView.swift")
+        let rootHostSource = try source("Native/Ambitions/App/AmbitionsRootStageSurfaceHost.swift")
 
         XCTAssertTrue(screenSource.contains("rootBottomChromeClearance"))
+        XCTAssertTrue(screenSource.contains("StageSafeAreaPolicy.rootSurfaceContentBottomInset"))
         XCTAssertTrue(railSource.contains("usesStackedAccessibilityRail"))
-        XCTAssertTrue(railSource.contains("emptyActionBottomClearance"))
+        XCTAssertTrue(policySource.contains("emptyActionBottomClearance"))
         XCTAssertTrue(objectSource.contains("RealityMeridianView"))
+        XCTAssertTrue(rootHostSource.contains("TodayBackgroundView()"))
         XCTAssertFalse(objectSource.contains("FlagshipRuntimeStage"))
+    }
+
+    func testTodayMeridianAtmosphereDoesNotPaintLowerViewportBlack() throws {
+        let source = try source("Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailViewStateRendering.swift")
+
+        XCTAssertTrue(source.contains("Color.clear"))
+        XCTAssertFalse(source.contains("theme.colors.canvas.opacity(0.52)"))
+        XCTAssertFalse(source.contains("theme.colors.canvasElevated.opacity(0.54)"))
+        XCTAssertFalse(source.contains("theme.colors.canvas,"))
     }
 
     func source(_ relativePath: String) throws -> String {

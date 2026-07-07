@@ -6,6 +6,7 @@ enum StageAction {
     case selectRootSurfaceFromDock(AmbitionsSurface, now: Date)
     case handleCurrentSurfaceReselection(now: Date)
     case openGoalDetail(GoalRouteTarget)
+    case popFocusedRoute
     case resetGoalsPath
     case openTimeRoute(TimeRouteTarget)
     case resetTimePath

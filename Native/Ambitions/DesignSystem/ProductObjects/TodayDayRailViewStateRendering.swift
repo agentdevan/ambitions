@@ -6,9 +6,9 @@ extension AmbitionsDayRailView {
         ZStack {
             LinearGradient(
                 colors: [
-                    theme.colors.canvas,
-                    theme.colors.canvasElevated.opacity(0.94),
-                    theme.colors.surfaceOverlay.opacity(0.42)
+                    Color.clear,
+                    theme.colors.surfaceOverlay.opacity(0.18),
+                    theme.colors.accentWarm.opacity(0.10)
                 ],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
@@ -83,7 +83,7 @@ extension AmbitionsDayRailView {
                     colors: [
                         .clear,
                         theme.colors.accentWarm.opacity(0.12),
-                        theme.colors.canvas.opacity(0.52)
+                        theme.colors.surfaceOverlay.opacity(0.10)
                     ],
                     startPoint: .top,
                     endPoint: .bottom
@@ -102,7 +102,7 @@ extension AmbitionsDayRailView {
                 farRidge.addLine(to: CGPoint(x: size.width, y: size.height * 0.72))
                 farRidge.addLine(to: CGPoint(x: size.width, y: size.height))
                 farRidge.closeSubpath()
-                context.fill(farRidge, with: .color(theme.colors.surfaceOverlay.opacity(0.30)))
+                context.fill(farRidge, with: .color(theme.colors.surfaceOverlay.opacity(0.18)))
 
                 var nearRidge = Path()
                 nearRidge.move(to: CGPoint(x: 0, y: size.height))
@@ -113,7 +113,7 @@ extension AmbitionsDayRailView {
                 nearRidge.addLine(to: CGPoint(x: size.width, y: size.height * 0.88))
                 nearRidge.addLine(to: CGPoint(x: size.width, y: size.height))
                 nearRidge.closeSubpath()
-                context.fill(nearRidge, with: .color(theme.colors.canvasElevated.opacity(0.54)))
+                context.fill(nearRidge, with: .color(theme.colors.accentWarm.opacity(0.08)))
             }
             .frame(height: 260)
             .allowsHitTesting(false)

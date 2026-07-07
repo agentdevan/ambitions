@@ -128,11 +128,9 @@ struct AppShellHeaderRail: View {
                         menuButton(entry.element)
                     }
                 } label: {
-                    Label("Actions", systemImage: "ellipsis")
-                        .labelStyle(.iconOnly)
-                        .frame(width: theme.panel.minimumTapTarget, height: theme.panel.minimumTapTarget)
+                    headerIconLabel(title: "Actions", systemImage: "ellipsis")
                 }
-                .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+                .buttonStyle(.plain)
                 .accessibilityIdentifier("shell.header.action-cluster-menu")
                 .accessibilityLabel("Actions")
                 .accessibilityHint("Shows contextual actions for this surface, including Capture.")
@@ -165,11 +163,9 @@ struct AppShellHeaderRail: View {
             AppShellSensoryFeedbackPolicy.emit(.headerAction, reduceMotionEnabled: reduceMotion)
             button.action()
         } label: {
-            Label(button.title, systemImage: button.systemImage)
-                .labelStyle(.iconOnly)
-                .frame(width: theme.panel.minimumTapTarget, height: theme.panel.minimumTapTarget)
+            headerIconLabel(title: button.title, systemImage: button.systemImage)
         }
-        .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+        .buttonStyle(.plain)
         .accessibilityIdentifier(button.accessibilityIdentifier)
         .accessibilityLabel(button.accessibilityLabel)
         .accessibilityHint(button.accessibilityHint ?? "")
@@ -179,6 +175,23 @@ struct AppShellHeaderRail: View {
         } else {
             base
         }
+    }
+
+    private func headerIconLabel(title: String, systemImage: String) -> some View {
+        Label(title, systemImage: systemImage)
+            .labelStyle(.iconOnly)
+            .font(.system(size: theme.icon.smallSize, weight: .semibold))
+            .symbolRenderingMode(.hierarchical)
+            .foregroundStyle(theme.colors.textPrimary)
+            .frame(width: theme.panel.minimumTapTarget, height: theme.panel.minimumTapTarget)
+            .background {
+                Circle()
+                    .fill(theme.colors.surfaceOverlay.opacity(theme.mode == .dark ? 0.34 : 0.42))
+            }
+            .overlay {
+                Circle()
+                    .stroke(theme.colors.strokeSubtle.opacity(0.56), lineWidth: 1)
+            }
     }
 
     private var divider: some View {
@@ -228,14 +241,14 @@ struct AppShellHeaderRail: View {
 
     private var headerTopClearance: CGFloat {
         if onBack == nil {
-            return dynamicTypeSize.isAccessibilitySize ? 10 : 6
+            return dynamicTypeSize.isAccessibilitySize ? theme.spacing.lg : theme.spacing.sm
         }
         return dynamicTypeSize.isAccessibilitySize ? theme.spacing.xl : theme.spacing.lg
     }
 
     private var headerBottomClearance: CGFloat {
         if onBack == nil {
-            return dynamicTypeSize.isAccessibilitySize ? 6 : 4
+            return dynamicTypeSize.isAccessibilitySize ? theme.spacing.sm : theme.spacing.xs
         }
         return theme.spacing.xs
     }

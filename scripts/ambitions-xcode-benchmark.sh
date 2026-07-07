@@ -253,6 +253,8 @@ fi
 BUILD_RESULT="$OUT_DIR/build-for-testing.xcresult"
 BUILD_CMD=(
   xcodebuild
+  -skipPackagePluginValidation
+  -skipMacroValidation
   -project Ambitions.xcodeproj
   -scheme "$RESOLVED_SCHEME"
   -sdk iphonesimulator
@@ -276,6 +278,8 @@ if [[ "$build_status" -eq 0 && -n "$ONLY_TESTING" ]]; then
     mapfile -t PARALLEL_ARGS < <(parallel_args_for_worker "$worker")
     TEST_CMD=(
       xcodebuild
+      -skipPackagePluginValidation
+      -skipMacroValidation
       -project Ambitions.xcodeproj
       -scheme "$RESOLVED_SCHEME"
       -destination "$SIM_DEST"
@@ -299,6 +303,8 @@ if [[ "$build_status" -eq 0 && -n "$TEST_PLAN" ]]; then
     mapfile -t PARALLEL_ARGS < <(parallel_args_for_worker "$worker")
     PLAN_CMD=(
       xcodebuild
+      -skipPackagePluginValidation
+      -skipMacroValidation
       -project Ambitions.xcodeproj
       -scheme "$RESOLVED_SCHEME"
       -testPlan "$TEST_PLAN"

@@ -5,7 +5,7 @@ extension LifeShapeFieldView {
     var primaryActionTitle: String {
         switch selectedLayer {
         case .open:
-            suite.field.canPlaceStep ? "Place Step" : "Select Step"
+            suite.field.canPlaceStep ? "Place Step" : "Choose Step"
         case .protected:
             "Protect window"
         case .pressure:

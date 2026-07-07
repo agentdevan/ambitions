@@ -41,6 +41,8 @@ enum StageReducer {
             state.selectedSurface = .goals
             state.goalsPath = [target]
             return .none(effects: StageEffect.surfaceChanged(to: .goals))
+        case .popFocusedRoute:
+            return popFocusedRoute(state: &state)
         case .resetGoalsPath:
             state.goalsPath = []
             return .none(effects: [
@@ -339,6 +341,22 @@ enum StageReducer {
         case .you:
             state.youPath = []
         }
+    }
+
+    private static func popFocusedRoute(state: inout StageState) -> StageReduction {
+        let surface = state.selectedSurface
+        switch surface {
+        case .today:
+            return .none()
+        case .goals:
+            guard state.goalsPath.popLast() != nil else { return .none() }
+        case .time:
+            guard state.timePath.popLast() != nil else { return .none() }
+        case .you:
+            guard state.youPath.popLast() != nil else { return .none() }
+        }
+
+        return .none(effects: StageEffect.routePopped(to: surface))
     }
 
     private static func recordCommandHistory(

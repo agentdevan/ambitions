@@ -39,7 +39,7 @@ final class YouSurfaceUITests: AmbitionsUITestCase {
         XCTAssertTrue(waitForRootDestination("You", in: app, timeout: 10))
         XCTAssertTrue(tapCanonicalDestination("You", in: app))
         XCTAssertTrue(app.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts["User System Profile"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Your settings"].waitForExistence(timeout: 10))
 
         XCTAssertTrue(scrollUntilElementExists("you.settings.row.privacy", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilElementExists("you.settings.row.local-data-controls", in: app, maxAttempts: 8))
@@ -76,7 +76,7 @@ final class YouSurfaceUITests: AmbitionsUITestCase {
         app.buttons["shell.you.back-button"].tap()
 
         XCTAssertTrue(app.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts["User System Profile"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Your settings"].waitForExistence(timeout: 10))
         XCTAssertTrue(scrollUntilYouRowExists(named: "Local Data", in: app, maxAttempts: 10))
         XCTAssertTrue(tapYouRow(named: "Local Data", in: app, maxAttempts: 10))
         XCTAssertTrue(app.descendants(matching: .any)["you.local-data-controls-control-group"].waitForExistence(timeout: 10))
@@ -255,7 +255,7 @@ final class YouSurfaceUITests: AmbitionsUITestCase {
 
             XCTAssertTrue(app.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
             if item.detail == nil {
-                XCTAssertTrue(app.staticTexts["User System Profile"].waitForExistence(timeout: 10))
+                XCTAssertTrue(app.staticTexts["Your settings"].waitForExistence(timeout: 10))
                 XCTAssertTrue(app.descendants(matching: .any)["you.settings.row.appearance"].waitForExistence(timeout: 10))
                 XCTAssertTrue(app.descendants(matching: .any)["you.settings.row.capture-preferences"].waitForExistence(timeout: 10))
                 XCTAssertTrue(app.descendants(matching: .any)["you.settings.row.life-areas"].waitForExistence(timeout: 10))

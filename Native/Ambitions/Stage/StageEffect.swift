@@ -68,6 +68,15 @@ enum StageEffect: Equatable {
         ]
     }
 
+    static func routePopped(to surface: AmbitionsSurface) -> [StageEffect] {
+        let objectID = "surface.\(surface.rawValue)"
+        return [
+            .visibleObjectMutation(id: "\(objectID).swipe-back", affectedObjectIDs: [objectID], consequence: "\(surface.title) returned to the previous screen"),
+            .announcement(id: "\(objectID).swipe-back.announcement", message: "Back to \(surface.title)", affectedObjectIDs: [objectID]),
+            .proofReference(id: "stage.surface.\(surface.rawValue).swipe-back", affectedObjectIDs: [objectID], inspectionTarget: "\(objectID).route-history")
+        ]
+    }
+
     static func visibleObjectMutation(
         id: String,
         affectedObjectIDs: [String],

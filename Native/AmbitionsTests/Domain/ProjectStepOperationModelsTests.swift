@@ -341,7 +341,7 @@ final class ProjectStepOperationModelsTests: XCTestCase {
 
         XCTAssertTrue(event.isWellFormed)
         XCTAssertTrue(event.isInspectableBoundary)
-        XCTAssertEqual(event.sourceAdapterUseSummary, "Step reallocation stays local and inspectable through source adapters.")
+        XCTAssertEqual(event.sourceAdapterUseSummary, "Step reallocation stays local and inspectable through source records.")
         XCTAssertEqual(runtimeInput.sourceRecord, sourceRecord)
         XCTAssertEqual(runtimeInput.receipt, receipt)
         XCTAssertEqual(runtimeInput.replayTrace, replayTrace)
@@ -662,12 +662,6 @@ final class ProjectStepOperationModelsTests: XCTestCase {
             id: "step.project-step.reallocation.stable.destination",
             label: "Music momentum block",
             sourceDomain: .today
-        )
-        let proofObject = LifeGraphObjectReference(
-            kind: .proof,
-            id: "proof.project-step.reallocation.stable",
-            label: "Reallocation proof opportunity",
-            sourceDomain: .proof
         )
         let receipt = Receipt(
             id: "receipt.project-step.reallocation.2",

@@ -6,10 +6,12 @@ cd "$REPO_ROOT"
 
 BATCH=""
 TEST_PLAN=""
-SCHEME="Ambitions"
+SCHEME="auto"
 RESULT_DIR=".codex/xcode-results"
 LOG_DIR=".codex/xcode-logs"
 SUMMARY_DIR=".codex/xcode-summaries"
+TIMEOUT_DURATION="${AMBITIONS_XCODE_TEST_PLAN_TIMEOUT:-45m}"
+KILL_AFTER="${AMBITIONS_XCODE_TEST_PLAN_KILL_AFTER:-60s}"
 
 while [[ "$#" -gt 0 ]]; do
   case "$1" in
@@ -19,8 +21,10 @@ while [[ "$#" -gt 0 ]]; do
     --results-dir) RESULT_DIR="${2:-$RESULT_DIR}"; shift 2 ;;
     --logs-dir) LOG_DIR="${2:-$LOG_DIR}"; shift 2 ;;
     --summaries-dir) SUMMARY_DIR="${2:-$SUMMARY_DIR}"; shift 2 ;;
+    --timeout) TIMEOUT_DURATION="${2:-$TIMEOUT_DURATION}"; shift 2 ;;
+    --kill-after) KILL_AFTER="${2:-$KILL_AFTER}"; shift 2 ;;
     -h|--help)
-      echo "Usage: scripts/ambitions-xcode-test-plan.sh --batch <BATCH> --test-plan <PLAN_NAME>" >&2
+      echo "Usage: scripts/ambitions-xcode-test-plan.sh --batch <BATCH> --test-plan <PLAN_NAME> [--scheme auto|AmbitionsSmoke|AmbitionsScreenshots|AmbitionsReleaseCandidate] [--timeout 45m] [--kill-after 60s]" >&2
       exit 0
       ;;
     *)
@@ -32,6 +36,8 @@ done
 
 [[ -n "$BATCH" ]] || { echo "--batch is required" >&2; exit 1; }
 [[ -n "$TEST_PLAN" ]] || { echo "--test-plan is required" >&2; exit 1; }
+[[ -n "$TIMEOUT_DURATION" ]] || { echo "--timeout must not be empty" >&2; exit 2; }
+[[ -n "$KILL_AFTER" ]] || { echo "--kill-after must not be empty" >&2; exit 2; }
 
 PLAN_PATH=""
 if [[ -f "Native/TestPlans/$TEST_PLAN.xctestplan" ]]; then
@@ -56,6 +62,30 @@ SUMMARY_FILE="$SUMMARY_DIR/$BATCH/$TS/test-plan-summary.json"
 mkdir -p "$RESULT_DIR/$BATCH/$TS" "$LOG_DIR/$BATCH/$TS" "$SUMMARY_DIR/$BATCH/$TS"
 DERIVED_DATA="$REPO_ROOT/.codex/DerivedData/Ambitions"
 mkdir -p "$DERIVED_DATA"
+
+plan_basename() {
+  basename "$TEST_PLAN" .xctestplan
+}
+
+XCODE_TEST_PLAN_NAME="$(plan_basename)"
+
+resolve_scheme() {
+  if [[ "$SCHEME" != "auto" ]]; then
+    printf '%s\n' "$SCHEME"
+    return
+  fi
+
+  case "$XCODE_TEST_PLAN_NAME" in
+    Smoke) printf '%s\n' "AmbitionsSmoke" ;;
+    Runtime) printf '%s\n' "AmbitionsRuntime" ;;
+    Accessibility) printf '%s\n' "AmbitionsAccessibility" ;;
+    Screenshots) printf '%s\n' "AmbitionsScreenshots" ;;
+    ReleaseCandidate) printf '%s\n' "AmbitionsReleaseCandidate" ;;
+    *) printf '%s\n' "Ambitions" ;;
+  esac
+}
+
+RESOLVED_SCHEME="$(resolve_scheme)"
 
 json_field() {
   local key="$1"
@@ -119,29 +149,68 @@ fi
 
 SIM_DEST="platform=iOS Simulator,id=${sim_udid}"
 
+extract_executed_tests() {
+  local log_file="$1"
+  python3 - "$log_file" <<'PY'
+import re
+import sys
+from pathlib import Path
+
+path = Path(sys.argv[1])
+text = path.read_text(encoding="utf-8", errors="replace") if path.exists() else ""
+executed = [int(match.group(1)) for match in re.finditer(r"\bExecuted\s+(\d+)\s+tests?\b", text)]
+if executed:
+    print(executed[-1])
+else:
+    print(len(re.findall(r"Test Case '.+' (passed|failed) \(", text)))
+PY
+}
+
+XCODE_TEST_TIMEOUT_ARGS=()
+if xcodebuild -help 2>&1 | grep -q -- "-test-timeouts-enabled"; then
+  XCODE_TEST_TIMEOUT_ARGS=(
+    -test-timeouts-enabled YES
+    -default-test-execution-time-allowance "${AMBITIONS_XCODE_DEFAULT_TEST_ALLOWANCE_SECONDS:-240}"
+    -maximum-test-execution-time-allowance "${AMBITIONS_XCODE_MAX_TEST_ALLOWANCE_SECONDS:-360}"
+  )
+fi
+
 run_xcode_plan() {
+  local -a plan_cmd
+  rm -rf "$RESULT_BUNDLE"
+  plan_cmd=(
+    xcodebuild
+    -skipPackagePluginValidation
+    -skipMacroValidation
+    -project Ambitions.xcodeproj
+    -scheme "$RESOLVED_SCHEME"
+    -testPlan "$XCODE_TEST_PLAN_NAME"
+    -destination "$SIM_DEST"
+    -derivedDataPath "$DERIVED_DATA"
+    "${XCODE_TEST_TIMEOUT_ARGS[@]}"
+    test-without-building
+    CODE_SIGNING_ALLOWED=NO
+    CODE_SIGNING_REQUIRED=NO
+    COMPILER_INDEX_STORE_ENABLE=NO
+    ONLY_ACTIVE_ARCH=YES
+    -resultBundlePath "$RESULT_BUNDLE"
+  )
+
   set +e
   if command -v xcbeautify >/dev/null 2>&1; then
-    xcodebuild -project Ambitions.xcodeproj \
-      -scheme "$SCHEME" \
-      -testPlan "$TEST_PLAN" \
-      -destination "$SIM_DEST" \
-      -derivedDataPath "$DERIVED_DATA" \
-      test-without-building \
-      CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO \
-      -resultBundlePath "$RESULT_BUNDLE" \
-      2>&1 | tee "$LOG_FILE" | xcbeautify
+    scripts/ambitions-bounded-xcodebuild.sh \
+      --timeout "$TIMEOUT_DURATION" \
+      --kill-after "$KILL_AFTER" \
+      --log "$LOG_FILE" \
+      -- "${plan_cmd[@]}" \
+      2>&1 | xcbeautify
     status=${PIPESTATUS[0]}
   else
-    xcodebuild -project Ambitions.xcodeproj \
-      -scheme "$SCHEME" \
-      -testPlan "$TEST_PLAN" \
-      -destination "$SIM_DEST" \
-      -derivedDataPath "$DERIVED_DATA" \
-      test-without-building \
-      CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO \
-      -resultBundlePath "$RESULT_BUNDLE" \
-      2>&1 | tee "$LOG_FILE"
+    scripts/ambitions-bounded-xcodebuild.sh \
+      --timeout "$TIMEOUT_DURATION" \
+      --kill-after "$KILL_AFTER" \
+      --log "$LOG_FILE" \
+      -- "${plan_cmd[@]}"
     status=$?
   fi
   set -e
@@ -165,21 +234,44 @@ fi
 
 classification="$(python3 scripts/ambitions-xcode-failure-classifier.py --log "$LOG_FILE" --json | python3 -c 'import sys, json; print(json.load(sys.stdin).get("classification", ""))')"
 [[ -z "$classification" ]] && classification="unknown"
+executed_tests="$(extract_executed_tests "$LOG_FILE")"
+if [[ "$status" -eq 0 ]]; then
+  if [[ "$executed_tests" =~ ^[0-9]+$ && "$executed_tests" -gt 0 ]]; then
+    classification="passed"
+  else
+    status=65
+    classification="test_discovery_failure"
+  fi
+elif [[ "$status" -eq 124 && "$classification" == "unknown" ]]; then
+  classification="test_timeout"
+fi
+if [[ "$status" -ne 0 && -e "$RESULT_BUNDLE" && ! -f "$RESULT_BUNDLE/Info.plist" && "$classification" == "unknown" ]]; then
+  classification="corrupt_xcresult"
+fi
 
 cat > "$SUMMARY_FILE" <<JSON
 {
   "batch": "$BATCH",
   "lane": "test-plan",
   "test_plan": "$TEST_PLAN",
+  "xcode_test_plan_name": "$XCODE_TEST_PLAN_NAME",
   "plan_path": "$PLAN_PATH",
+  "scheme": "$RESOLVED_SCHEME",
+  "xcodebuild_action": "test-without-building",
   "status": "$([ "$status" -eq 0 ] && echo passed || echo failed)",
   "failure_category": "$classification",
+  "executed_tests": $executed_tests,
+  "timeout": "$TIMEOUT_DURATION",
+  "kill_after": "$KILL_AFTER",
   "result_bundle": "$RESULT_BUNDLE",
   "log_file": "$LOG_FILE",
   "timestamp_utc": "$TS",
-  "sim_destination": "$SIM_DEST"
+  "sim_destination": "$SIM_DEST",
+  "claim_boundary": "test-plan execution proof only; prerequisite build-for-testing proof is recorded separately and this is not visual, accessibility, device, TestFlight, App Store, or release proof"
 }
 JSON
 
 echo "FAILURE_CLASS=$classification"
+echo "EXECUTED_TESTS=$executed_tests"
+echo "SCHEME=$RESOLVED_SCHEME"
 exit "$status"
