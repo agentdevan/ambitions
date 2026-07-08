@@ -451,7 +451,7 @@ final class TodaySurfaceUITests: AmbitionsUITestCase {
 
         XCTAssertTrue(waitForShellReady(in: app))
         XCTAssertFalse(rootDestinationExists("Motion", in: app))
-        XCTAssertFalse(app.descendants(matching: .any)["motion.current.screen"].waitForExistence(timeout: 2))
+        XCTAssertFalse(app.descendants(matching: .any)["stage.motion.current.view"].waitForExistence(timeout: 2))
         XCTAssertTrue(waitForSelectedSurface("Today", in: app))
         XCTAssertTrue(
             app.descendants(matching: .any)["today.screen"].waitForExistence(timeout: 10)

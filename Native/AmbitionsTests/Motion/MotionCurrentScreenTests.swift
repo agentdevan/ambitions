@@ -51,6 +51,21 @@ final class MotionCurrentScreenTests: XCTestCase {
         XCTAssertTrue(registry.contains("artifacts/ambitions-ui-reconstruction/object-stage/AMB-574-motion-object-stage.md"))
     }
 
+    func testMotionBehaviorDoesNotExposeScreenScreenshotHelpers() throws {
+        let root = repoRoot()
+        let screenshotSupport = try source("Native/AmbitionsUITests/AmbitionsScreenshotUITestSupport.swift", root: root)
+        let youSupport = try source("Native/AmbitionsUITests/AmbitionsYouUITestSupport.swift", root: root)
+        let retiredRouteTest = try source("Native/AmbitionsUITests/TodaySurfaceUITests.swift", root: root)
+        let stageView = try source("Native/Ambitions/Stage/Motion/StageMotionCurrentView.swift", root: root)
+
+        XCTAssertFalse(screenshotSupport.contains("captureMotionScreenshot"))
+        XCTAssertFalse(screenshotSupport.contains("motion.current.screen"))
+        XCTAssertFalse(youSupport.contains("scrollMotionContentToVisible"))
+        XCTAssertFalse(youSupport.contains("motion.current.scroll"))
+        XCTAssertFalse(retiredRouteTest.contains("motion.current.screen"))
+        XCTAssertTrue(stageView.contains("stage.motion.current.view"))
+    }
+
     func testMotionCurrentProjectionContainsRequiredRootChildren() {
         let projection = MotionCurrentProjection.fixture
 

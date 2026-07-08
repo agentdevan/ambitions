@@ -79,6 +79,19 @@ final class StageMotionRoutingTests: XCTestCase {
         XCTAssertFalse(owner.lastMotionCoordination?.reductionPolicy.allowsAmbientMovement ?? true)
     }
 
+    func testStageMotionDefaultSourceIsBehaviorLayerNotRootSurface() {
+        let owner = StageOwner()
+        _ = owner.route(for: .openTime)
+
+        XCTAssertEqual(owner.lastMotionProjection?.sourceSurface, "stage.motion")
+        XCTAssertFalse(owner.lastMotionProjection?.sourceSurface.localizedCaseInsensitiveContains("motion.current") ?? true)
+
+        let coordination = StageMotionCoordinator().coordinate(action: .reviewHistory(nil))
+        XCTAssertEqual(coordination.projection.sourceSurface, "stage.motion")
+        XCTAssertFalse(coordination.projection.sourceSurface.localizedCaseInsensitiveContains("screen"))
+        XCTAssertFalse(coordination.projection.sourceSurface.localizedCaseInsensitiveContains("tab"))
+    }
+
     func testStageMotionCoordinatorOwnsCanonicalRoutingAndPolicy() {
         let coordinator = StageMotionCoordinator(reduceMotionEnabled: false)
         let coordination = coordinator.coordinate(

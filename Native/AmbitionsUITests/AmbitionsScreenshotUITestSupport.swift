@@ -38,15 +38,6 @@ extension AmbitionsUITestCase {
         XCTAssertTrue(app.descendants(matching: .any)["time.screen"].exists)
     }
 
-    func captureMotionScreenshot(named name: String, in app: XCUIApplication) {
-        let screenshot = XCUIScreen.main.screenshot()
-        let attachment = XCTAttachment(screenshot: screenshot)
-        attachment.name = name
-        attachment.lifetime = .keepAlways
-        add(attachment)
-        XCTAssertTrue(app.descendants(matching: .any)["motion.current.screen"].exists)
-    }
-
     func captureYouScreenshot(named name: String, in app: XCUIApplication) {
         let screenshot = XCUIScreen.main.screenshot()
         let attachment = XCTAttachment(screenshot: screenshot)

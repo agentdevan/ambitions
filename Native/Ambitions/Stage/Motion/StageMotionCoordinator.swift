@@ -24,7 +24,7 @@ struct StageMotionCoordinator {
 
     func coordinate(
         action: MotionCurrentAction,
-        source: String = "motion.current"
+        source: String = "stage.motion"
     ) -> StageMotionCoordination {
         let reductionPolicy = StageMotionReductionPolicy.current(reduceMotionEnabled: reduceMotionEnabled)
         let projection = StageMotionProjection(

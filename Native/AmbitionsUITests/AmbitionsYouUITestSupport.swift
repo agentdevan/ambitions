@@ -22,24 +22,6 @@ extension AmbitionsUITestCase {
         return target.exists && target.frame.intersects(safeBand)
     }
 
-    func scrollMotionContentToVisible(identifier: String, in app: XCUIApplication) -> Bool {
-        let scrollView = app.scrollViews["motion.current.scroll"]
-        let target = app.descendants(matching: .any)[identifier]
-
-        for _ in 0..<14 {
-            if target.exists, target.frame.minY > 118, target.frame.maxY < 690 {
-                return true
-            }
-            if scrollView.exists {
-                scrollView.swipeUp(velocity: .slow)
-            } else {
-                app.swipeUp(velocity: .slow)
-            }
-        }
-
-        return target.exists && target.frame.maxY < 760
-    }
-
     func youRow(named title: String, in app: XCUIApplication) -> XCUIElement {
         let identifier = youRowIdentifier(for: title)
         let settingsButton = app.buttons["you.settings.row.\(identifier)"]

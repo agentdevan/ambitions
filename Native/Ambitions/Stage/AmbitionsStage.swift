@@ -372,7 +372,7 @@ struct AmbitionsStage: View {
             queue: .main
         ) { notification in
             guard let action = notification.ambitionsMotionCurrentAction else { return }
-            let source = notification.userInfo?[MotionCurrentAction.notificationSourceKey] as? String ?? "motion.current"
+            let source = notification.userInfo?[MotionCurrentAction.notificationSourceKey] as? String ?? "stage.motion"
             Task { @MainActor in
                 routeStageMotionAction(action, source: source)
             }

@@ -6,7 +6,7 @@ Owner: Codex frontend remediation operator
 Repository: agentdevan/ambitions
 Branch: frontend-flagship-shippability-remediation
 Session start SHA: 9362e940eec5e7d118df418d00022c3588df6610
-Current packet: Packet 2.2 - Motion-as-Behavior Cleanup (next after Packet 2.1 closeout)
+Current packet: Packet 2.3 - No-Dashboard / No-Task-App Guardrail (next after Packet 2.2 closeout)
 
 This ledger is process evidence only. It is not product acceptance, owner visual acceptance, release proof, accessibility proof, Visual Green, Accessibility Green, or Release Green.
 
@@ -29,8 +29,8 @@ No packet may be marked Done by Codex in this program.
 
 - Branch: `frontend-flagship-shippability-remediation`
 - Base SHA: `9362e940eec5e7d118df418d00022c3588df6610`
-- Current packet status: Packet 2.1 has source/runtime/simulator screenshot proof and is Yellow / Ready For Review.
-- Working tree expectation: after Packet 2.1 commit, the next unresolved packet is Packet 2.2.
+- Current packet status: Packet 2.2 has source/runtime/simulator proof and is Yellow / Ready For Review.
+- Working tree expectation: after Packet 2.2 commit, the next unresolved packet is Packet 2.3.
 - Linear: not touched this session; local ledger is the active progress record.
 - Xcode: `Xcode 26.6`, build `17F113`
 - Simulator used: iPhone 17 Pro Max, iOS 26.5, UDID `DD9B9C84-7188-48FA-AA2A-AB5C1D0EE2B6`
@@ -211,7 +211,7 @@ Surface maturity acceptance:
 | Packet | Status | Entry Condition | Required Proof |
 | --- | --- | --- | --- |
 | 2.1 Root IA Law Lock | Ready For Review | Project 1 no longer Red at shell level | Tests proving roots only Today/Goals/Time/You |
-| 2.2 Motion-as-Behavior Cleanup | Backlog | IA tests stable | No Motion root destination, transition/reflow proof |
+| 2.2 Motion-as-Behavior Cleanup | Ready For Review | IA tests stable | No Motion root destination, transition/reflow proof |
 | 2.3 No-Dashboard / No-Task-App Guardrail | Backlog | IA law stable | Explicit anti-drift checks and mapped repair list |
 | 2.4 Architecture Hygiene When Touched | Backlog | After touched source paths are known | Governance check and canonical owner evidence |
 
@@ -654,6 +654,83 @@ Remaining visual deltas:
 
 Passing tests did not determine this status. The status is based on source proof, runtime proof, screenshot inspection, repair-loop completion, and fidelity to the Ambitions premium frontend target: premium roots, native light/dark drilldowns and entire frontend, deeply inspectable object surfaces, and realistic SwiftUI proportions.
 
+### Packet 2.2 - Motion-as-Behavior Cleanup
+
+Status: Yellow / Ready For Review
+
+Target:
+- Keep Motion as cross-surface Stage behavior, not a root destination or visual surface.
+- Remove or quarantine stale Motion-as-screen screenshot helpers and scroll helpers that imply `motion.current.screen` or a Motion root/surface.
+- Preserve Stage/Motion behavior infrastructure for route continuity, memory-lens handoff, Reduce Motion policy, and post-mutation perception.
+- Add proof that future agents cannot resurrect Motion as root IA or as a screenshot surface while still allowing behavior-level Stage Motion identifiers.
+
+Depth map before coding:
+- Root state: Today / Goals / Time / You remain the only persistent roots; Motion must not appear in root dock or deep-link fallback as a selected root.
+- Valid drilldowns: no new drilldowns in this packet; Motion actions may route contextually to Today, Goals, Time, Trust/History, or local Search/Memory Lens overlays.
+- Invalid extra surfaces: Motion root tab, Motion screenshot surface, Motion scroll surface, Motion module page, Motion analytics/report/dashboard, Motion activity feed, Motion score/streak/XP surface.
+- Object types involved: StageMotionCoordinator, StageOwner, StageMotionProjection, StageMotionCurrentView, MotionCurrentAction, UI screenshot helper support, root IA tests.
+- Inspection details: tests must distinguish behavior identifiers like `stage.motion.current.view` from stale root/screen identifiers like `motion.current.screen`.
+- Edit/control paths: no user-facing route redesign; only source/test cleanup and default behavior source naming unless proof reveals a source drift.
+- Receipt/proof/history paths: Motion behavior may open local Memory Lens/history overlays; no new receipt model or trust root is introduced.
+- Accessibility expectations: Motion behavior remains accessible through contextual controls and Reduce Motion policy; no root accessibility destination named Motion appears.
+- Screenshot proof required: if UI proof is added, it must show root shell without Motion as root; this packet can use existing Packet 2.1 screenshot proof plus focused source/runtime tests if no rendered Motion surface exists.
+
+Visual Delta:
+- Current screenshot/source state: Packet 2.1 proves the rendered root dock has no Motion destination. Source still contains stale UI helper residue: `captureMotionScreenshot` asserts `motion.current.screen`, `scrollMotionContentToVisible` scrolls `motion.current.scroll`, and the retired Motion route test asserts the old screen identifier is absent. Stage defaults still label the behavior source as `motion.current`, which reads like a surface source rather than Stage behavior.
+- Target screenshot/source state: no active UI screenshot helper should capture Motion as a screen; no test helper should scroll a Motion surface; Stage Motion default source should be behavior-named; behavior identifiers such as `stage.motion.current.view` and `stage.motion.renderer.current` remain allowed and tested.
+- Gap from desired premium frontend target: stale Motion screen/scroll helper names can teach future agents that Motion is a destination or screenshot surface, creating IA drift despite the rendered dock being correct.
+- Exact visual deltas to close: remove screen/scroll helper residue; preserve root dock proof; avoid creating any new Motion surface or module menu.
+- Exact inspectability deltas to close: add source/runtime tests that reject `motion.current.screen`, `motion.current.scroll`, `captureMotionScreenshot`, and `scrollMotionContentToVisible`, while proving Stage Motion routing/reduction/overlay behavior still works.
+- Exact realism/proportion deltas to close: no UI proportion changes intended; cleanup must not add visual chrome, panels, or a Motion page.
+- Likely files: `Native/AmbitionsUITests/AmbitionsScreenshotUITestSupport.swift`, `Native/AmbitionsUITests/AmbitionsYouUITestSupport.swift`, `Native/AmbitionsUITests/TodaySurfaceUITests.swift`, `Native/Ambitions/Stage/StageOwner.swift`, `Native/Ambitions/Stage/AmbitionsStage.swift`, `Native/Ambitions/Stage/Motion/StageMotionCoordinator.swift`, `Native/Ambitions/Projection/StageMotionProjection.swift`, `Native/AmbitionsTests/App/StageMotionRoutingTests.swift`, `Native/AmbitionsTests/Motion/MotionCurrentScreenTests.swift`, and this ledger.
+- Product-law risks: do not delete Stage/Motion behavior infrastructure; do not rename product-object identifiers so broadly that existing behavior/detail proof loses continuity; do not replace Motion with a dashboard, route, or root.
+- Accessibility risks: source cleanup must not remove behavior-level action labels or Reduce Motion semantic policy.
+- Proof required: focused StageMotion routing/source tests, retired Motion route UI test or Packet 2.1 rendered root proof, source/governance scans, and broad frontend build-for-testing if source/test code changes.
+- Self-review criteria: no `motion.current.screen` or `motion.current.scroll` in active UI test support; no `captureMotionScreenshot`/`scrollMotionContentToVisible`; default Stage Motion source is behavior-named; Motion behavior still routes and respects Reduce Motion; root IA law remains intact.
+- Repair-loop conditions: if cleanup breaks behavior routing or tests reveal that Motion is still treated as a destination, repair source/tests before closing; if removing stale helpers would require broad redesign, stop with the exact dependency.
+
+Implementation completed:
+- Removed the unused `captureMotionScreenshot` helper that asserted a `motion.current.screen` UI surface.
+- Removed the unused `scrollMotionContentToVisible` helper that treated Motion as a scrollable UI surface.
+- Renamed default Stage Motion behavior source from `motion.current` to `stage.motion` in `StageOwner`, `StageMotionCoordinator`, `StageMotionProjection`, and the `AmbitionsStage` notification fallback.
+- Updated the retired Motion deep-link UI gate to assert that `stage.motion.current.view` does not appear as a root result after launching `ambitions://tab/motion`.
+- Added source/runtime tests that prove Stage Motion default source is behavior-layer named, behavior routing/reduction still works, and stale Motion screen/scroll screenshot helpers cannot reappear in active UI test support.
+
+Visual inspection notes:
+- Packet 2.2 did not add or render a Motion surface; this is intentional because Motion must remain behavior infrastructure.
+- The UI proof is the retired Motion route simulator test: old Motion URL opens the canonical shell/Today fallback and does not expose a Motion root destination or Stage Motion view as a destination.
+- No new visual chrome, panels, cards, Motion tab, Motion page, dashboard, activity feed, score, or analytics surface was introduced.
+
+Visual Scorecard:
+- Native iOS quality: 4 for preserving the existing native root shell while removing non-native Motion screen proof residue.
+- Visual hierarchy: 4 because no additional root/dock/control hierarchy was introduced.
+- Surface identity: 4 because Motion remains behavior and no Motion surface identity is rendered.
+- Object inspectability: 4 because Stage Motion behavior source, routing, reduction, and helper cleanup are inspectable through tests.
+- Light/dark quality: 4 because no appearance surfaces changed and Packet 1.3 remains the active appearance proof; this packet does not claim light/dark Motion surface proof.
+- Material restraint: 4 because no new visual materials or panels were added.
+- Typography and spacing: 4 because no rendered typography/spacing changed.
+- Interaction clarity: 4 because retired Motion URLs fall back to Today and Motion actions still route to canonical surfaces/overlays.
+- SwiftUI realism / proportions: 4 because the packet avoids creating an unrealistic Motion page and preserves real shell behavior.
+- Similarity to Ambitions premium frontend target: 4 for deep-not-wide behavior governance; broader transition/haptic proof remains later work.
+- Final self-score: 4.0 average, Yellow / Ready For Review within simulator/source proof ceilings.
+
+Frontend-wide evaluation:
+- Root quality: no new root destinations; Motion stays out of root IA.
+- Drilldown/sub-surface quality: no new Motion drilldown or sub-surface was added; contextual Memory Lens/history routing remains behavior-level.
+- Light/dark quality: not directly changed; no dark-only/light-only Motion surface was introduced.
+- Object inspectability: Stage Motion source/routing/reduction behavior is testable; user-facing object detail maturity remains later surface packets.
+- SwiftUI realism / proportions: cleanup prevents a stale Motion screenshot/surface path from producing unrealistic or non-canonical UI.
+
+Repair cycles performed:
+- 1: Initial focused Stage Motion unit lane timed out before executing tests during compile (`EXECUTED_TESTS=0`, `mcp_timeout_no_test_log`); ran a dedicated Packet 2.2 prebuild and reran focused tests without rebuilding.
+
+Remaining visual deltas:
+- Packet 2.2 does not produce transition animation screenshots, haptic proof, or physical-device Motion proof.
+- Motion behavior is source/runtime proven, not visually accepted by an owner and not Visual Green.
+- Broader dashboard/task-app anti-drift remains Packet 2.3.
+
+Passing tests did not determine this status. The status is based on source proof, runtime proof, screenshot inspection, repair-loop completion, and fidelity to the Ambitions premium frontend target: premium roots, native light/dark drilldowns and entire frontend, deeply inspectable object surfaces, and realistic SwiftUI proportions.
+
 ### Packet 1.5 - Baseline Validation Recovery
 
 Status: Yellow / Ready For Review
@@ -921,6 +998,34 @@ Validation classification:
 - Runtime Green is not claimed for the frontend overall.
 - Interaction Green is not claimed.
 - Visual Review readiness for Packet 2.1 is Yellow only because proof is simulator-only and physical-device proof is missing.
+- Accessibility Green is impossible because manual VoiceOver proof was not performed.
+- Release Green is impossible; release validation, device proof, accessibility proof, and later Red blockers remain.
+
+### Packet 2.2 final validation after repair
+
+| Command | Exit | Result |
+| --- | ---: | --- |
+| `git status --short --branch` | 0 | Branch `frontend-flagship-shippability-remediation`; Packet 2.2 files modified before commit |
+| `git diff --check` | 0 | Passed |
+| `xcodegen generate` | 0 | Project generated successfully |
+| `python3 scripts/ambitions-architecture-inventory.py` | 0 | `GREEN final-tree parity achieved`; source/path parity only |
+| `python3 scripts/ambitions-green-standard-audit.py` | 0 | Green-standard source gate passed |
+| `python3 scripts/ambitions-vocabulary-drift-scan.py` | 0 | Vocabulary drift gate passed |
+| `python3 scripts/ambitions-local-first-boundary-scan.py` | 0 | Local-first boundary scan passed |
+| `python3 scripts/ambitions-remediation-governance-check.py` | 0 | Guard passed; changed paths limited to Stage Motion source, focused source/UI tests, and ledger |
+| `rg -n "captureMotionScreenshot|scrollMotionContentToVisible|motion\\.current\\.screen|motion\\.current\\.scroll|source: String = \\\"motion\\.current\\\"|sourceSurface: String = \\\"motion\\.current\\\"|\\?\\? \\\"motion\\.current\\\"" Native/Ambitions Native/AmbitionsUITests || true` | 0 | No stale active app/UI-test-support Motion screen/scroll/default-source strings remained |
+| `scripts/ambitions-xcode-test-focused.sh --batch packet-2.2-stage-motion-source --test AmbitionsTests/StageMotionRoutingTests/testStageMotionDefaultSourceIsBehaviorLayerNotRootSurface --scheme AmbitionsUnitTests --timeout 10m --kill-after 30s --prebuild --prebuild-timeout 20m` | 65 | Timed out before executing tests during compile; `EXECUTED_TESTS=0`, `FAILURE_CLASS=mcp_timeout_no_test_log`; not source proof |
+| `./scripts/ambitions-xcode-build-for-testing.sh --batch packet-2.2-validation-prebuild` | 0 | Prebuild passed; summary at `.codex/xcode-summaries/packet-2.2-validation-prebuild/20260708T041813Z/extract/summary.json`; duration 693.413s |
+| `AMBITIONS_XCODE_UI_PREBUILD=never scripts/ambitions-xcode-test-focused.sh --batch packet-2.2-stage-motion-source-after-prebuild --test AmbitionsTests/StageMotionRoutingTests/testStageMotionDefaultSourceIsBehaviorLayerNotRootSurface --scheme AmbitionsUnitTests --timeout 8m --kill-after 30s --test-without-building --skip-prebuild` | 0 | Stage Motion default-source focused unit test passed; 1 executed test; summary at `.codex/xcode-summaries/packet-2.2-stage-motion-source-after-prebuild/20260708T043001Z-AmbitionsTests-StageMotionRoutingTests-testStageMotionDefaultSourceIsBehaviorLay-6035-11731/extract/summary.json` |
+| `AMBITIONS_XCODE_UI_PREBUILD=never scripts/ambitions-xcode-test-focused.sh --batch packet-2.2-motion-helper-source-after-prebuild --test AmbitionsTests/MotionCurrentScreenTests/testMotionBehaviorDoesNotExposeScreenScreenshotHelpers --scheme AmbitionsUnitTests --timeout 8m --kill-after 30s --test-without-building --skip-prebuild` | 0 | Motion helper source guard passed; 1 executed test; summary at `.codex/xcode-summaries/packet-2.2-motion-helper-source-after-prebuild/20260708T043145Z-AmbitionsTests-MotionCurrentScreenTests-testMotionBehaviorDoesNotExposeScreenScr-6754-20095/extract/summary.json` |
+| `AMBITIONS_XCODE_UI_PREBUILD=never scripts/ambitions-xcode-test-focused.sh --batch packet-2.2-retired-motion-route-after-prebuild --test AmbitionsUITests/TodaySurfaceUITests/testRetiredMotionRouteDoesNotCreateRootDestination --scheme AmbitionsUITests --timeout 10m --kill-after 30s --test-without-building --skip-prebuild` | 0 | Retired Motion URL/root IA UI gate passed; 1 executed test; summary at `.codex/xcode-summaries/packet-2.2-retired-motion-route-after-prebuild/20260708T043320Z-AmbitionsUITests-TodaySurfaceUITests-testRetiredMotionRouteDoesNotCreateRootDest-7455-13943/extract/summary.json` |
+| `./scripts/ambitions-xcode-build-for-testing.sh --batch frontend-remediation` | 0 | Build-for-testing passed; summary at `.codex/xcode-summaries/frontend-remediation/20260708T043614Z/extract/summary.json`; duration 81.734s |
+
+Validation classification:
+- Source Green for the scoped Packet 2.2 diff is supported by source/build/script proof.
+- Runtime Green is not claimed for the frontend overall.
+- Interaction Green is not claimed.
+- Visual Review readiness for Packet 2.2 is Yellow only because proof is simulator/source-bound and physical-device proof is missing.
 - Accessibility Green is impossible because manual VoiceOver proof was not performed.
 - Release Green is impossible; release validation, device proof, accessibility proof, and later Red blockers remain.
 
@@ -1211,6 +1316,35 @@ Additional proof notes:
 - The long Packet 2.1 selector path then hit `test_discovery_failure`; the UI test method was shortened and the gate reran successfully with `EXECUTED_TESTS=1`.
 - This packet proves root IA law at source and rendered shell levels. It does not prove Motion behavior quality, premium surface maturity, drilldown realism, full light/dark drilldown appearance, physical-device visual fidelity, manual VoiceOver quality, or release readiness.
 
+### Packet 2.2 proof
+
+Packet 2.2 proof is simulator/source Yellow only, not Visual Green or Accessibility Green.
+
+Focused source result bundles:
+- `.codex/xcode-results/packet-2.2-stage-motion-source-after-prebuild/20260708T043001Z-AmbitionsTests-StageMotionRoutingTests-testStageMotionDefaultSourceIsBehaviorLay-6035-11731/focused-test.xcresult`
+- `.codex/xcode-results/packet-2.2-motion-helper-source-after-prebuild/20260708T043145Z-AmbitionsTests-MotionCurrentScreenTests-testMotionBehaviorDoesNotExposeScreenScr-6754-20095/focused-test.xcresult`
+
+Focused source summaries:
+- `.codex/xcode-summaries/packet-2.2-stage-motion-source-after-prebuild/20260708T043001Z-AmbitionsTests-StageMotionRoutingTests-testStageMotionDefaultSourceIsBehaviorLay-6035-11731/extract/summary.json`: Stage Motion default-source focused unit test executed 1 selected test and passed.
+- `.codex/xcode-summaries/packet-2.2-motion-helper-source-after-prebuild/20260708T043145Z-AmbitionsTests-MotionCurrentScreenTests-testMotionBehaviorDoesNotExposeScreenScr-6754-20095/extract/summary.json`: Motion screen/helper source guard executed 1 selected test and passed.
+
+Focused UI result bundle:
+- `.codex/xcode-results/packet-2.2-retired-motion-route-after-prebuild/20260708T043320Z-AmbitionsUITests-TodaySurfaceUITests-testRetiredMotionRouteDoesNotCreateRootDest-7455-13943/focused-test.xcresult`
+
+Focused UI summary:
+- `.codex/xcode-summaries/packet-2.2-retired-motion-route-after-prebuild/20260708T043320Z-AmbitionsUITests-TodaySurfaceUITests-testRetiredMotionRouteDoesNotCreateRootDest-7455-13943/extract/summary.json`: retired Motion route UI gate executed 1 selected test and passed.
+
+Build proof:
+- `.codex/xcode-summaries/packet-2.2-validation-prebuild/20260708T041813Z/extract/summary.json`
+- `.codex/xcode-results/packet-2.2-validation-prebuild/20260708T041813Z-bft-2054-5665/build-for-testing.xcresult`
+- `.codex/xcode-summaries/frontend-remediation/20260708T043614Z/extract/summary.json`
+- `.codex/xcode-results/frontend-remediation/20260708T043614Z-bft-9226-10790/build-for-testing.xcresult`
+
+Additional proof notes:
+- No active app/UI-test-support stale strings remained for `captureMotionScreenshot`, `scrollMotionContentToVisible`, `motion.current.screen`, `motion.current.scroll`, or default `motion.current` Stage source after the cleanup.
+- The first focused Packet 2.2 unit run timed out before tests executed and is not counted as source proof.
+- This packet proves Motion is not a root destination or screenshot surface in current active helpers and route fallback. It does not prove physical-device Motion behavior, haptics, transition smoothness, owner acceptance, or release readiness.
+
 ## 8. Known Remaining Red Blockers
 
 - Root shell safe-area and dock/content overlap is repaired for the inspected default Dynamic Type dark-mode simulator roots, but not proven for all appearances or physical device.
@@ -1225,7 +1359,7 @@ Additional proof notes:
 - Goals state variants visually indistinct.
 - Receipts/toasts default root collision was reduced by Packet 1.1, but receipt copy truncation, non-root overlays, and large Dynamic Type receipt behavior remain unproven.
 - Source/identifier gates passing while screenshots still show failure remains a program risk; Packet 1.3 adds rendered luminance assertions for appearance proof, Packet 1.4 adds root/receipt/Dynamic Type rendered gates, and Packet 1.5 repairs the standard wrapper path for the root rendered gate, but full drilldown/render failure coverage remains incomplete.
-- Motion naming/screenshot residue creating IA ambiguity.
+- Motion active screenshot/helper residue is repaired for the scoped `motion.current.screen` / `motion.current.scroll` debt, but transition/haptic/device proof remains incomplete.
 - Local-first/privacy source gates passing but runtime/private-egress proof incomplete.
 
 ## 9. Known-Issue Mapping
@@ -1292,6 +1426,21 @@ Packet 2.1 current evidence:
 
 Mapping confidence: High for root IA law lock; Medium for Motion ambiguity because Packet 2.1 prevents Motion as root IA but does not yet clean stale Motion screenshots/helpers or prove Motion behavior.
 
+Current Packet 2.2 maps to:
+- Known Red blocker family: Motion naming/screenshot residue creating IA ambiguity.
+- Deep, Not Wide product-law family: Motion is Stage behavior, not root destination or screenshot surface.
+- AMB-1194 remediation dossier family: shell/stage/root IA proof and visual proof ceiling.
+
+Packet 2.2 current evidence:
+- Source repair exists for stale Motion screenshot/scroll helpers and behavior-source naming.
+- Runtime focused proof exists for Stage Motion default-source behavior and retired Motion deep-link fallback.
+- UI simulator proof exists that retired Motion route does not create a root destination or render the Stage Motion behavior view as a destination.
+- Accessibility proof is incomplete; no manual VoiceOver was performed.
+- Device proof is missing.
+- Safe status: Yellow / Ready For Review, not Done.
+
+Mapping confidence: High for the scoped active helper/default-source residue; Medium for broader Motion behavior quality because transition, haptic, and physical-device proof remain future scope.
+
 ## 10. Proof Ceilings
 
 - Source gates passing can support source status only.
@@ -1303,10 +1452,10 @@ Mapping confidence: High for root IA law lock; Medium for Motion ambiguity becau
 
 ## 11. Product Decisions Needed
 
-None for Packet 2.1 at this checkpoint.
+None for Packet 2.2 at this checkpoint.
 
 Decision trigger:
-- If Packet 2.2 reveals a product-law conflict between old Motion-as-surface artifacts and current Motion-as-behavior law, stop and classify whether it is source drift, compatibility debt, or a true product decision before broadening.
+- If Packet 2.3 reveals that dashboard/task-app guardrails require product-surface redesign rather than bounded anti-drift tests/mapping, stop and classify the needed surface maturity packet rather than broadening.
 
 ## 12. Commit Ledger
 
@@ -1334,19 +1483,23 @@ Packet 2.1 planned commit:
 - `Frontend remediation: root IA law lock`
 - SHA: read from `git rev-parse HEAD` after commit; the ledger does not embed its own final commit hash because amending that value changes the hash.
 
+Packet 2.2 planned commit:
+- `Frontend remediation: motion-as-behavior cleanup`
+- SHA: read from `git rev-parse HEAD` after commit; the ledger does not embed its own final commit hash because amending that value changes the hash.
+
 ## 13. Resume Instructions
 
 To resume from this checkpoint:
 1. Stay on branch `frontend-flagship-shippability-remediation`.
 2. Run `git status --short --branch`.
-3. Confirm Packet 2.1 is committed and current packet is Packet 2.2.
+3. Confirm Packet 2.2 is committed and current packet is Packet 2.3.
 4. Inspect the current diff before editing.
 5. Rerun `git diff --check`.
-6. Begin Packet 2.2 - Motion-as-Behavior Cleanup.
-7. Write the Packet 2.2 Visual Delta before coding because Motion ambiguity affects root IA coherence and screenshot/proof naming.
-8. Inspect current Motion paths, screenshots, helper names, tests, and Stage/Motion behavior proof before editing.
-9. Remove or quarantine stale Motion-as-root/surface helpers only when the replacement behavior proof is clear; do not delete needed Stage/Motion behavior infrastructure.
-10. Run focused Motion/product-law validation, then required source/governance scans and the broad `frontend-remediation` build lane if source/test code changes.
+6. Begin Packet 2.3 - No-Dashboard / No-Task-App Guardrail.
+7. Write the Packet 2.3 Visual Delta before coding because anti-drift guardrails affect product surface visual direction.
+8. Inspect current root/surface copy, source audit tests, known issues, and existing dashboard/task/habit/chatbot guardrails before editing.
+9. Add explicit bounded anti-drift checks and repair only guardrail/source residue in this packet; do not redesign all surfaces here.
+10. Run focused anti-drift/product-law validation, then required source/governance scans and the broad `frontend-remediation` build lane if source/test code changes.
 11. Inspect any generated screenshots manually, update this ledger with exact commands, exits, artifacts, risks, and next packet, and commit only if validation passes and the change is coherent.
 
 ## 14. Packet Closeout Template
