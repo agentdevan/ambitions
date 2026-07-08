@@ -518,6 +518,13 @@ These anti-patterns fail the Ambitions premium frontend target:
 
 Any visual or surface packet that produces one of these anti-targets is Needs Repair unless the condition is outside the packet scope and blocked by a named dependency.
 
+## 6B. Owner device-review override
+
+- Real-device owner review can supersede simulator-scored Yellow.
+- Owner rejection can force Needs Repair or Red even when tests pass.
+- Visual scoring must avoid self-protective inflation and must report real product usability.
+- Real navigability and object discoverability are part of visual/product fidelity.
+
 ## 7. Visual scoring rubric
 
 For every visual repair packet and every surface maturity packet, score inspected screenshots from 1 to 5 across these categories:

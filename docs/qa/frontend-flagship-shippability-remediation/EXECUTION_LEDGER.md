@@ -6,7 +6,7 @@ Owner: Codex frontend remediation operator
 Repository: agentdevan/ambitions
 Branch: main
 Session start SHA: 9362e940eec5e7d118df418d00022c3588df6610
-Current packet: Packet 4.2 - Capture Route System (next unresolved packet after Packet 4.1 closeout)
+Current packet: Owner Rejection Rebaseline installed; next implementation packet: P0.1 Navigation and Object Reality Gate
 
 This ledger is process evidence only. It is not product acceptance, owner visual acceptance, release proof, accessibility proof, Visual Green, Accessibility Green, or Release Green.
 
@@ -29,8 +29,8 @@ No packet may be marked Done by Codex in this program.
 
 - Branch: `main` after the remediation branch merge.
 - Base SHA: `9362e940eec5e7d118df418d00022c3588df6610`
-- Current packet status: Packet 4.1 is Yellow / Ready For Review after source repair, focused simulator screenshot proof, and broad build-for-testing proof.
-- Working tree expectation: clean after Packet 4.1 commit/push; if resuming before commit, only the Packet 4.1 diff should be present.
+- Current packet status: Packet 4.1 was closed Yellow / Ready For Review under simulator evidence only; owner real-device review has now re-baselined future sequence to P0.1 Navigation and Object Reality Gate.
+- Working tree expectation: clean after docs-only install; no implementation changes were made in this docs rebaseline session.
 - Linear: not touched this session; local ledger is the active progress record.
 - Xcode: `Xcode 26.6`, build `17F113`
 - Simulator used: iPhone 17 Pro Max, iOS 26.5, UDID `DD9B9C84-7188-48FA-AA2A-AB5C1D0EE2B6`
@@ -39,6 +39,16 @@ No packet may be marked Done by Codex in this program.
 - Highest possible visual status from this environment: Yellow.
 - Highest possible accessibility status without manual VoiceOver: Yellow.
 - Highest possible release status from this packet: not Release Green.
+
+
+## Owner Rejection Rebaseline — Installed
+
+- Owner real-device review supersedes prior self-scored Yellow when it is contradicted by product usability.
+- Prior Packet 4.2 sequencing is frozen behind this owner-rejection rebaseline.
+- Packet 4.2 implementation must not continue until P0.1 through relevant P0 gates are complete or explicitly re-authorized.
+- Next implementation packet is **P0.1 Navigation and Object Reality Gate**.
+- This is a docs-only governance install. No source files were edited in this session.
+
 
 ## 2. Authority Read This Session
 
@@ -2815,6 +2825,20 @@ Additional proof notes:
 
 ## 8. Known Remaining Red Blockers
 
+Owner rebaseline overrides prior readiness for the following items:
+
+- Back navigation does not work reliably from all current detail routes.
+- Created goal cannot be found in Goals.
+- Today can show no actionable next step.
+- Capture is not a first-class full-screen creation surface.
+- Goals constellation/atlas design is rejected.
+- Time is not Calendar-grade.
+- Appearance detail route can be unreadable in selected light mode.
+- You settings copy/detail values are too noisy and not fully runtime-connected.
+- Existing Yellow scores are over-optimistic because real-device UX remains poor.
+- Shell/dock/chrome is decorative and insufficiently navigable.
+- Created-object destination is unclear after Capture/Create Goal.
+
 - Root shell safe-area and dock/content overlap is repaired for the inspected default Dynamic Type dark-mode simulator roots, but not proven for all appearances or physical device.
 - Time Accessibility XXXL catastrophic LifeShape Field collapse is repaired in the focused simulator lane, but large Dynamic Type is not fully proven across all roots, overlays, and device contexts.
 - Large Dynamic Type failures outside the focused Time lane remain possible.
@@ -2920,10 +2944,15 @@ Mapping confidence: High for the scoped active helper/default-source residue; Me
 
 ## 11. Product Decisions Needed
 
-None for Packet 4.2 at this checkpoint.
+Owner-rejection rebaseline active blockers and direction:
 
-Decision trigger:
-- If Packet 4.2 requires changing Capture from a global composer/action into a root destination, adding broad route architecture, or deciding product semantics for unsupported capture object types, stop and classify the product decision before implementing.
+- Capture is first-class but not a root tab/dock destination.
+- Capture must be a full-screen safe-area-respecting global composer and route to destinations with clear post-save destination receipt.
+- Goals must move to a native Apple-Reminders-style hierarchy; constellation/atlas visual grammar is retired.
+- Time must become Calendar-grade with day/week windows, now line, protected/open/fixed blocks, and placement review.
+- Today must remain actionable and scrollable forward/backward across time windows.
+- Shell/chrome should be rebuilt for clear navigation: obvious top header, rounded bottom dock, clear active root, and global Capture/Search action surfaces.
+- You settings must remove noisy right-side labels and connect settings to runtime where possible; show unavailable honestly.
 
 ## 12. Commit Ledger
 
@@ -2963,6 +2992,10 @@ Packet 3.7 planned commit:
 - `Frontend remediation: you native settings maturity`
 - SHA: read from `git rev-parse HEAD` after commit; the ledger does not embed its own final commit hash because amending that value changes the hash.
 
+Owner rebaseline docs commit:
+- `Docs: install owner rejection rebaseline`
+- SHA: read from `git rev-parse HEAD` after commit; the ledger does not embed its own final commit hash because amending that value changes the hash.
+
 Packet 4.1 planned commit:
 - `Frontend remediation: capture visual grammar repair`
 - SHA: read from `git rev-parse HEAD` after commit; the ledger does not embed its own final commit hash because amending that value changes the hash.
@@ -2972,15 +3005,15 @@ Packet 4.1 planned commit:
 To resume from this checkpoint:
 1. Stay on branch `main` unless explicitly instructed otherwise.
 2. Run `git status --short --branch`.
-3. Confirm Packet 4.1 is committed/pushed and current packet is Packet 4.2.
+3. Confirm rebaseline install state: Packet 4.2 is frozen and current implementation packet is P0.1.
 4. Inspect the current diff before editing.
 5. Rerun `git diff --check`.
-6. Begin Packet 4.2 - Capture Route System.
-7. Write the Packet 4.2 depth map and Visual Delta before coding.
-8. Inspect Capture route presentation, Create Goal presentation consistency, typed route affordances, current screenshots, tests, and known issue mappings before editing.
-9. Repair only bounded route-system depth in this packet: consistent Create Goal presentation, route affordances before typing, free capture, goal seed, step seed, proof, protected time, note/thought, constraint/fixed point, attachment, cancel/undo, and one coherent composer law where existing runtime paths support it.
-10. Run focused Capture route-system validation, then required source/governance scans and the broad `frontend-remediation` build lane if source/test code changes.
-11. Inspect any generated screenshots manually, update this ledger with exact commands, exits, artifacts, risks, and next packet, and commit only if validation passes and the change is coherent.
+6. Begin with P0.1 Navigation and Object Reality Gate only unless the owner explicitly re-authorizes a different sequence.
+7. Write the P0.1 depth map and visual delta before coding.
+8. Validate back navigation, created-object discoverability, Capture destination clarity, and runtime-state honesty before editing source.
+9. Repair only bounded P0 gates in order; do not start Packet 4.2 scope or any later packet until the rebaseline gates are complete.
+10. Run focused scoped validation, then required source/governance scans and the broad `frontend-remediation` build lane only when source work begins.
+11. Update this ledger with exact commands, exits, artifacts, risks, and next implementation packet, then commit only if validation passes and the change is coherent.
 
 ## 14. Packet Closeout Template
 
