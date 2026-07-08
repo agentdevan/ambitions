@@ -6,7 +6,7 @@ Owner: Codex frontend remediation operator
 Repository: agentdevan/ambitions
 Branch: frontend-flagship-shippability-remediation
 Session start SHA: 9362e940eec5e7d118df418d00022c3588df6610
-Current packet: Packet 1.4 - Rendered Failure Gates (next; Packet 1.3 is Yellow / Ready For Review pending commit)
+Current packet: Packet 1.5 - Baseline Validation Recovery (next after Packet 1.4 closeout)
 
 This ledger is process evidence only. It is not product acceptance, owner visual acceptance, release proof, accessibility proof, Visual Green, Accessibility Green, or Release Green.
 
@@ -29,8 +29,8 @@ No packet may be marked Done by Codex in this program.
 
 - Branch: `frontend-flagship-shippability-remediation`
 - Base SHA: `9362e940eec5e7d118df418d00022c3588df6610`
-- Current packet status: Packet 1.3 has current source/runtime/screenshot proof and is Yellow / Ready For Review pending commit.
-- Working tree expectation: Packet 1.3 source/test/script/ledger changes may be present until the appearance proof packet is committed; after commit the next unresolved packet is Packet 1.4.
+- Current packet status: Packet 1.4 has source/runtime/simulator screenshot proof and is Yellow / Ready For Review.
+- Working tree expectation: after Packet 1.4 commit, the next unresolved packet is Packet 1.5.
 - Linear: not touched this session; local ledger is the active progress record.
 - Xcode: `Xcode 26.6`, build `17F113`
 - Simulator used: iPhone 17 Pro Max, iOS 26.5, UDID `DD9B9C84-7188-48FA-AA2A-AB5C1D0EE2B6`
@@ -202,8 +202,8 @@ Surface maturity acceptance:
 | --- | --- | --- | --- |
 | 1.1 Root Shell Safe-Area + Dock Clearance | Ready For Review | Current first Red gate | Source diff, focused root screenshots, Time mutation proof, build/test output |
 | 1.2 Accessibility XXXL Layout Rescue | Ready For Review | Packet 1.1 source/simulator proof not Red | Large Dynamic Type screenshots, Reduce Motion/Transparency checks |
-| 1.3 Appearance Mode Proof | In Progress | Packet 1.1 not Red | Light/dark/system screenshot matrix |
-| 1.4 Rendered Failure Gates | Backlog | Packet 1.1-1.3 failure patterns understood | UI/render assertions that fail on visual breakage |
+| 1.3 Appearance Mode Proof | Ready For Review | Packet 1.1 not Red | Light/dark/system screenshot matrix |
+| 1.4 Rendered Failure Gates | Ready For Review | Packet 1.1-1.3 failure patterns understood | UI/render assertions that fail on visual breakage |
 | 1.5 Baseline Validation Recovery | Backlog | Stable screenshot/proof lanes exist | Repeatable validation matrix and explicit Green ceilings |
 
 ### Project 2 - Product Law, IA, and Stage Governance
@@ -499,6 +499,83 @@ Packet 1.3 closeout:
 Next packet:
 - Packet 1.4 - Rendered Failure Gates.
 
+### Packet 1.4 - Rendered Failure Gates
+
+Status: Yellow / Ready For Review
+
+Target:
+- Rendered tests/proof fail on actual visual breakage, not only missing identifiers.
+- Add or improve screenshot/rendered assertions for dock overlap, clipped text, header/content collision, receipt/control collision, unreadable large Dynamic Type, and wrong appearance mode.
+- Ensure product-law root IA gates fail if Capture or Motion becomes a root destination.
+
+Depth map before coding:
+- Root state: Today / Goals / Time / You roots only; each root must keep its primary content clear of shell header and dock in rendered geometry.
+- Valid drilldowns: existing Goal detail, Time weekly review, Capture/Search overlays remain contextual; Packet 1.4 does not add new drilldowns.
+- Invalid extra surfaces: no new root tabs, no Capture tab, no Motion tab, no Proof/Source/History/Privacy/Receipts tab.
+- Object types involved: root destination buttons, root screen containers, primary object anchors, continuity receipt/toast, Capture/Search overlays, Time accessibility stack.
+- Inspection details: tests should inspect rendered frames, visibility, screenshot luminance, and accessibility text/frame sizes rather than source strings alone.
+- Edit/control paths: no production edit/control path changes intended; this packet should be test/proof harness only unless a rendered gate exposes a repairable source failure.
+- Receipt/proof/history paths: receipts must not cover dock/root controls; this packet should verify collision behavior where existing receipt lanes make it practical.
+- Accessibility expectations: large Dynamic Type failure gates must assert measurable readable frames and non-overlap in simulator; manual VoiceOver remains unavailable.
+- Screenshot proof required: focused UI proof artifacts for the new/strengthened rendered gates, plus broad `frontend-remediation` build-for-testing before closeout.
+
+Visual Delta:
+- Current screenshot state: Packet 1.1/1.2/1.3 produced simulator screenshots and some frame checks, but several known Red families still depend on human inspection or source identifiers rather than explicit rendered failure gates.
+- Target screenshot state: focused tests must fail when root content collides with dock/header chrome, a receipt covers primary controls, Dynamic Type becomes unreadable, or light/dark/system proof renders the wrong mode.
+- Gap from desired premium frontend target: current proof is stronger than source-only, but not yet broad enough to prevent a technically valid regression from reintroducing clipped/overlapped chrome or fake appearance success.
+- Exact visual deltas to close: centralize reusable rendered-geometry assertions; strengthen root matrix checks beyond screenshot capture; add receipt/control collision checks; keep appearance luminance checks attached to the deterministic matrix; preserve screenshot attachment proof.
+- Exact inspectability deltas to close: rendered gates must report which object/surface failed and why, so later agents can repair actual UI rather than chase identifiers.
+- Exact realism/proportion deltas to close: tests should enforce practical iPhone frame bounds, minimum readable sizes, and header/dock clearance without imposing fantasy pixel perfection.
+- Likely files: `Native/AmbitionsUITests/AmbitionsShellUITestSupport.swift`, `Native/AmbitionsUITests/DeterministicScreenshotLaneUITests.swift`, `Native/AmbitionsUITests/BootstrapShellUITests.swift`, `Native/AmbitionsUITests/TimeSurfaceUITests.swift`, and this ledger.
+- Product-law risks: adding a broad visual harness must not create new roots or bless Capture/Search/Motion as root IA.
+- Accessibility risks: automated frame gates cannot prove VoiceOver quality; large Dynamic Type proof remains simulator-only.
+- Proof required: focused UI tests for root rendered failure gates and appearance/luminance gates, plus `git diff --check`, XcodeGen, source/governance scans, and broad build-for-testing.
+- Repair-loop conditions: if the new gate exposes a current rendered failure inside Packet 1.4 scope, repair source and rerun; if the failure belongs to a later surface maturity packet, document the dependency and keep Packet 1.4 focused on the guardrail.
+
+Source changes:
+- Added reusable rendered chrome-clearance, receipt-control-clearance, shell-header-frame, and canonical-root-IA helpers in `Native/AmbitionsUITests/AmbitionsShellUITestSupport.swift`.
+- Added `testPacket14RootChromeRenderedGates` and `testPacket14ContinuityReceiptDoesNotCoverRootControls` in `Native/AmbitionsUITests/BootstrapShellUITests.swift`.
+- Strengthened `assertTimeAccessibilityXXXLStackIsReadable` in `Native/AmbitionsUITests/AmbitionsTimeUITestSupport.swift` so the Time Accessibility XXXL stack must remain inside the visible header/dock band.
+
+Repair cycles performed:
+- Root gate cycle 1: wrapper `scripts/ambitions-xcode-test-focused.sh --batch packet-1.4-rendered-root-gates ... --prebuild` failed with `test_discovery_failure`, 0 executed tests; direct `xcodebuild -only-testing:` proved the XCTest method existed and could execute.
+- Root gate cycle 2: Today composed/fused rail identifier was not automation-visible; replaced with a stable Today title anchor.
+- Root gate cycle 3: Today title width/height thresholds were over-constrained for a small label; calibrated Today thresholds to realistic label proportions.
+- Root gate cycle 4: Goals rich object identifier was not visible in preview root state; replaced with stable `goals.life-area-atlas.title` anchor.
+- Final root gate direct run passed and produced root screenshots for Today, Goals, Time, and You.
+
+Visual Scorecard:
+- Native iOS quality: 4
+- Visual hierarchy: 4
+- Surface identity: 4
+- Object inspectability: 4
+- Light/dark quality: 4
+- Material restraint: 4
+- Typography and spacing: 4
+- Interaction clarity: 4
+- SwiftUI realism / proportions: 4
+- Similarity to Ambitions premium frontend target: 4
+- Average: 4.0 for this rendered-failure-gate packet. This does not mean the surfaced objects have mature product depth; those deficits belong to later surface maturity packets. No Visual Green is claimed.
+
+Visual inspection notes:
+- Today root gate screenshot: header and dock clearance are clean; empty/recovery state is readable but not rich Start Here depth.
+- Goals root gate screenshot: header and dock clearance are clean; repeated `Quiet` / `Add goal` fixture-like state remains Packet 3.3 debt.
+- Time root gate screenshot: header and dock clearance are clean; gauge/card-heavy Life Calendar maturity remains Packet 3.5 debt.
+- You root gate screenshot: header and dock clearance are clean and settings-like; deeper privacy/account controls remain Packet 3.7/3.8 debt.
+- Receipt screenshot: continuity receipt clears header/root dock/root destination controls; receipt visual weight and copy truncation remain later receipt maturity debt.
+- Time Accessibility XXXL screenshot: no catastrophic overlap in the checked stack; visual density remains high and simulator-only.
+- Appearance rendered gate reused the Packet 1.3 root matrix and passed luminance separation; wrong light/dark/system mode cannot pass from source identifiers alone in that lane.
+
+Remaining visual deltas:
+- Packet 1.4 does not make roots premium; it installs failure gates that block repeated overlap/clipping/appearance regressions.
+- Goals, Time, Capture, Search, receipts, drilldowns, and object-depth quality remain later packets.
+- Wrapper focused-test selector failure for the root gate remains a tooling note: direct `xcodebuild -only-testing:` executed and passed; the wrapper path reported `test_discovery_failure` for this method even after renaming.
+
+Final self-score:
+- Yellow / Ready For Review within simulator/source proof ceilings.
+
+Passing tests did not determine this status. The status is based on source proof, runtime proof, screenshot inspection, repair-loop completion, and fidelity to the Ambitions premium frontend target: premium roots, native light/dark drilldowns and entire frontend, deeply inspectable object surfaces, and realistic SwiftUI proportions.
+
 ## 6. Validation Log
 
 ### Baseline before Packet 1.1 source edits
@@ -614,6 +691,33 @@ Validation classification:
 - Runtime Green is not claimed for the frontend overall.
 - Interaction Green is not claimed.
 - Visual Review readiness for Packet 1.3 is Yellow only because proof is simulator-only and physical-device proof is missing.
+- Accessibility Green is impossible because manual VoiceOver proof was not performed.
+- Release Green is impossible; release validation, device proof, accessibility proof, and later Red blockers remain.
+
+### Packet 1.4 final validation after repair
+
+| Command | Exit | Result |
+| --- | ---: | --- |
+| `git diff --check` | 0 | Passed |
+| `xcodegen generate` | 0 | Project generated successfully |
+| `python3 scripts/ambitions-architecture-inventory.py` | 0 | `GREEN final-tree parity achieved`; source/path parity only |
+| `python3 scripts/ambitions-green-standard-audit.py` | 0 | Green-standard source gate passed |
+| `python3 scripts/ambitions-vocabulary-drift-scan.py` | 0 | Vocabulary drift gate passed |
+| `python3 scripts/ambitions-local-first-boundary-scan.py` | 0 | Local-first boundary scan passed |
+| `python3 scripts/ambitions-remediation-governance-check.py` | 0 | Guard passed; changed paths limited to Packet 1.4 UI test support/test files plus ledger |
+| `scripts/ambitions-xcode-test-focused.sh --batch packet-1.4-rendered-root-gates --test AmbitionsUITests/BootstrapShellUITests/testPacket14RenderedRootChromeFailureGatesAcrossCanonicalRoots --scheme AmbitionsUITests --timeout 14m --kill-after 30s --prebuild --prebuild-timeout 20m` | 65 | Wrapper prebuild passed but focused test discovery executed 0 tests; not proof; repaired by shortening the method name and using direct `xcodebuild -only-testing:` syntax |
+| `scripts/ambitions-xcode-test-focused.sh --batch packet-1.4-root-chrome-rendered-gate --test AmbitionsUITests/BootstrapShellUITests/testPacket14RootChromeRenderedGates --scheme AmbitionsUITests --timeout 14m --kill-after 30s --prebuild --prebuild-timeout 20m` | 65 | Wrapper still reported `test_discovery_failure`, 0 executed tests; not proof; direct `xcodebuild -only-testing:` was used and recorded below |
+| `xcodebuild ... test -only-testing:AmbitionsUITests/BootstrapShellUITests/testPacket14RootChromeRenderedGates ... -resultBundlePath .codex/xcode-results/packet-1.4-root-chrome-rendered-gate-direct/focused-test.xcresult` | 0 | Direct root rendered gate passed; 1 executed UI test; screenshots extracted to `.codex/xcode-summaries/packet-1.4-root-chrome-rendered-gate-direct/extract/screenshots` |
+| `scripts/ambitions-xcode-test-focused.sh --batch packet-1.4-receipt-collision-gate --test AmbitionsUITests/BootstrapShellUITests/testPacket14ContinuityReceiptDoesNotCoverRootControls --scheme AmbitionsUITests --timeout 10m --kill-after 30s --skip-prebuild` | 0 | Receipt/root-control collision gate passed; 1 executed UI test; summary at `.codex/xcode-summaries/packet-1.4-receipt-collision-gate/20260708T014309Z-AmbitionsUITests-BootstrapShellUITests-testPacket14ContinuityReceiptDoesNotCover-49156-17856/extract/summary.json` |
+| `scripts/ambitions-xcode-test-focused.sh --batch packet-1.4-time-xxxl-rendered-gate --test AmbitionsUITests/TimeSurfaceUITests/testAMB1176TimeEmptyAndAccessibilityProofPacket --scheme AmbitionsUITests --timeout 16m --kill-after 30s --skip-prebuild` | 0 | Strengthened Time Accessibility XXXL rendered gate passed; 1 executed UI test; summary at `.codex/xcode-summaries/packet-1.4-time-xxxl-rendered-gate/20260708T014537Z-AmbitionsUITests-TimeSurfaceUITests-testAMB1176TimeEmptyAndAccessibilityProofPac-50035-16924/extract/summary.json` |
+| `scripts/ambitions-xcode-test-focused.sh --batch packet-1.4-appearance-rendered-gate --test AmbitionsUITests/DeterministicScreenshotLaneUITests/testAMB1815AppearanceRootScreenshotMatrix --scheme AmbitionsUITests --timeout 18m --kill-after 30s --skip-prebuild` | 0 | Root appearance rendered/luminance gate passed; 1 executed UI test; summary at `.codex/xcode-summaries/packet-1.4-appearance-rendered-gate/20260708T014825Z-AmbitionsUITests-DeterministicScreenshotLaneUITests-testAMB1815AppearanceRootScr-50733-6299/extract/summary.json` |
+| `./scripts/ambitions-xcode-build-for-testing.sh --batch frontend-remediation` | 0 | Build-for-testing passed; summary at `.codex/xcode-summaries/frontend-remediation/20260708T023006Z/extract/summary.json`; duration 581.927s |
+
+Validation classification:
+- Source Green for the scoped Packet 1.4 diff is supported by source/build/script proof.
+- Runtime Green is not claimed for the frontend overall.
+- Interaction Green is not claimed.
+- Visual Review readiness for Packet 1.4 is Yellow only because proof is simulator-only and physical-device proof is missing.
 - Accessibility Green is impossible because manual VoiceOver proof was not performed.
 - Release Green is impossible; release validation, device proof, accessibility proof, and later Red blockers remain.
 
@@ -813,6 +917,41 @@ Additional proof notes:
 - The root and overlay UI tests assert rendered average-content-luminance separation for light versus dark and system-light versus system-dark, so source identifiers alone cannot pass the appearance proof.
 - These screenshots do not prove owner visual acceptance, physical-device fidelity, manual VoiceOver, or full frontend drilldown maturity.
 
+### Packet 1.4 proof
+
+Packet 1.4 proof is simulator Yellow only, not Visual Green or Accessibility Green.
+
+Focused/direct result bundles:
+- `.codex/xcode-results/packet-1.4-root-chrome-rendered-gate-direct/focused-test.xcresult`
+- `.codex/xcode-results/packet-1.4-receipt-collision-gate/20260708T014309Z-AmbitionsUITests-BootstrapShellUITests-testPacket14ContinuityReceiptDoesNotCover-49156-17856/focused-test.xcresult`
+- `.codex/xcode-results/packet-1.4-time-xxxl-rendered-gate/20260708T014537Z-AmbitionsUITests-TimeSurfaceUITests-testAMB1176TimeEmptyAndAccessibilityProofPac-50035-16924/focused-test.xcresult`
+- `.codex/xcode-results/packet-1.4-appearance-rendered-gate/20260708T014825Z-AmbitionsUITests-DeterministicScreenshotLaneUITests-testAMB1815AppearanceRootScr-50733-6299/focused-test.xcresult`
+- `.codex/xcode-results/frontend-remediation/20260708T023006Z-bft-59308-10304/build-for-testing.xcresult`
+
+Broad build summary:
+- `.codex/xcode-summaries/frontend-remediation/20260708T023006Z/extract/summary.json`
+
+Root rendered gate screenshots:
+- `.codex/xcode-summaries/packet-1.4-root-chrome-rendered-gate-direct/extract/screenshots/packet-1.4-rendered-root-today.png`: Today root clears header and dock; screenshot shows an empty/recovery state, so Today core thesis/depth remains later Packet 3.1/3.2 work.
+- `.codex/xcode-summaries/packet-1.4-root-chrome-rendered-gate-direct/extract/screenshots/packet-1.4-rendered-root-goals.png`: Goals root clears header and dock; repeated `Quiet` / `Add goal` state remains Packet 3.3 maturity debt.
+- `.codex/xcode-summaries/packet-1.4-root-chrome-rendered-gate-direct/extract/screenshots/packet-1.4-rendered-root-time.png`: Time root clears header and dock; gauge/card-heavy Life Calendar maturity remains Packet 3.5 work.
+- `.codex/xcode-summaries/packet-1.4-root-chrome-rendered-gate-direct/extract/screenshots/packet-1.4-rendered-root-you.png`: You root clears header and dock and reads settings-like; local-first/privacy/account depth remains Packet 3.7/3.8 work.
+
+Receipt/root-control screenshot:
+- `.codex/xcode-summaries/packet-1.4-receipt-collision-gate/20260708T014309Z-AmbitionsUITests-BootstrapShellUITests-testPacket14ContinuityReceiptDoesNotCover-49156-17856/extract/screenshots/packet-1_0_AF2D0624-6ED0-4A2E-A682-DF9B91A3E788.4-continuity-receipt-clearance`: continuity receipt clears root dock, root destination controls, and header controls; receipt weight/copy truncation remains later receipt maturity debt.
+
+Large Dynamic Type screenshot:
+- `.codex/xcode-summaries/packet-1.4-time-xxxl-rendered-gate/20260708T014537Z-AmbitionsUITests-TimeSurfaceUITests-testAMB1176TimeEmptyAndAccessibilityProofPac-50035-16924/extract/screenshots/amb-1176-time-accessibility-xxxl-reduce-motion_0_A080E540-284A-4E01-926E-E0E3A16A76B8.png`: strengthened Time Accessibility XXXL check passed; screenshot is dense but the checked accessibility stack remains measurable and clear of header/dock.
+
+Appearance rendered gate screenshots:
+- `.codex/xcode-summaries/packet-1.4-appearance-rendered-gate/20260708T014825Z-AmbitionsUITests-DeterministicScreenshotLaneUITests-testAMB1815AppearanceRootScr-50733-6299/extract/screenshots`: root appearance matrix passed rendered luminance assertions for light, dark, system-light, and system-dark across Today / Goals / Time / You.
+
+Additional proof notes:
+- Packet 1.4 adds rendered frame assertions that fail on header/content collision, dock/content collision, receipt/root-control collision, unreadable Dynamic Type frames in the Time Accessibility XXXL lane, and wrong appearance mode in the deterministic luminance matrix.
+- The root gate intentionally uses stable rendered root anchors rather than hidden composition identifiers: Today title, Goals atlas title, Time visual stage, and You appearance row.
+- The root gate wrapper lane still reports `test_discovery_failure` for this method; direct `xcodebuild -only-testing:` is the executable proof path for Packet 1.4.
+- This packet does not prove premium surface maturity, object-depth maturity, physical-device visual fidelity, manual VoiceOver quality, or release readiness.
+
 ## 8. Known Remaining Red Blockers
 
 - Root shell safe-area and dock/content overlap is repaired for the inspected default Dynamic Type dark-mode simulator roots, but not proven for all appearances or physical device.
@@ -826,7 +965,7 @@ Additional proof notes:
 - Create Goal sheet/prototype inconsistency.
 - Goals state variants visually indistinct.
 - Receipts/toasts default root collision was reduced by Packet 1.1, but receipt copy truncation, non-root overlays, and large Dynamic Type receipt behavior remain unproven.
-- Source/identifier gates passing while screenshots still show failure remains a program risk; Packet 1.3 adds rendered luminance assertions for appearance proof but does not solve all rendered-failure gates.
+- Source/identifier gates passing while screenshots still show failure remains a program risk; Packet 1.3 adds rendered luminance assertions for appearance proof and Packet 1.4 adds root/receipt/Dynamic Type rendered gates, but full drilldown/render failure coverage remains incomplete.
 - Motion naming/screenshot residue creating IA ambiguity.
 - Local-first/privacy source gates passing but runtime/private-egress proof incomplete.
 

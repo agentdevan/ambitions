@@ -110,10 +110,32 @@ extension AmbitionsUITestCase {
         ]
 
         let elements = identifiers.map { app.descendants(matching: .any)[$0] }
+        let window = app.windows.firstMatch
+        XCTAssertTrue(window.waitForExistence(timeout: 10), file: file, line: line)
+        let headerFrame = shellHeaderFrame(in: app)
+        XCTAssertFalse(headerFrame.isNull, "Shell header frame should exist before Time Accessibility XXXL rendered validation.", file: file, line: line)
+        let dockFrame = rootDockFrame(in: app)
+        XCTAssertFalse(dockFrame.isNull, "Root dock frame should exist before Time Accessibility XXXL rendered validation.", file: file, line: line)
+
         for (identifier, element) in zip(identifiers, elements) {
             XCTAssertTrue(element.waitForExistence(timeout: 10), "\(identifier) should render in the Accessibility XXXL Time stack.", file: file, line: line)
             XCTAssertGreaterThan(element.frame.height, 12, "\(identifier) should have a readable rendered height.", file: file, line: line)
             XCTAssertGreaterThan(element.frame.width, 80, "\(identifier) should have readable rendered width.", file: file, line: line)
+            assertFrame(element.frame, isInside: window.frame, named: "\(identifier) Accessibility XXXL frame", file: file, line: line)
+            XCTAssertGreaterThanOrEqual(
+                element.frame.minY,
+                headerFrame.maxY + 4,
+                "\(identifier) collides with shell header at Accessibility XXXL. element=\(element.frame) header=\(headerFrame)",
+                file: file,
+                line: line
+            )
+            XCTAssertLessThanOrEqual(
+                element.frame.maxY,
+                dockFrame.minY - 8,
+                "\(identifier) collides with root dock at Accessibility XXXL. element=\(element.frame) dock=\(dockFrame)",
+                file: file,
+                line: line
+            )
         }
 
         for index in 1..<(elements.count - 1) {
