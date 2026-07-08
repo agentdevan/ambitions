@@ -15,6 +15,7 @@ struct YouRootDetailContent: View {
     let onEnableNotifications: () -> Void
     let notificationPermissionState: DegradedStatePresentation?
     let onOpenSystemSettings: () -> Void
+    let onOpenDetail: ((YouRootDetail) -> Void)?
 
     var body: some View {
         switch detail {
@@ -152,8 +153,11 @@ struct YouRootDetailContent: View {
             )
         case .localDataControls, .integrations, .widgets, .exportImport:
             if detail == .localDataControls {
+                YouLocalDataControlsControlGroup(
+                    profileProjection: profileProjection,
+                    onOpenDetail: onOpenDetail
+                )
                 YouControlGroup(eyebrow: "Local Data", section: localDataStatusSection, accessibilityIdentifier: "you.local-data-status-control-group")
-                YouLocalDataControlsControlGroup(profileProjection: profileProjection)
                 YouPersonalVaultSurface(personalVault: profileProjection.personalVault)
                 YouMemoryControlsSurface(memoryControls: profileProjection.memoryControls)
                 YouControlGroup(eyebrow: "Permission edges", section: profileProjection.integrationsSection, accessibilityIdentifier: "you.local-data-permissions-control-group")

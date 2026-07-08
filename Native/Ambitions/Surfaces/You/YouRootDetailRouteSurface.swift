@@ -5,6 +5,7 @@ import SwiftUI
 #endif
 
 struct YouRootDetailRouteSurface: View {
+    @Environment(\.appShellCapability) private var appShellCapability
     @Environment(\.appFeatureFactoryCapability) private var appFeatureFactoryCapability
     @Environment(\.appPlatformCapability) private var appPlatformCapability
     @Environment(\.appUserSystemCapability) private var appUserSystemCapability
@@ -45,7 +46,8 @@ struct YouRootDetailRouteSurface: View {
                         onSavePreferences: savePreferences,
                         onEnableNotifications: requestNotificationAuthorization,
                         notificationPermissionState: notificationPermissionState(for: profileProjection),
-                        onOpenSystemSettings: openSystemSettingsIfAvailable
+                        onOpenSystemSettings: openSystemSettingsIfAvailable,
+                        onOpenDetail: openDetail
                     )
                 }
             }
@@ -122,6 +124,11 @@ struct YouRootDetailRouteSurface: View {
         #endif
     }
 
+    func openDetail(_ detail: YouRootDetail) {
+        announce(YouInteractions.accessibilityAnnouncement(for: .openDetail(detail)))
+        shell.navigation.openYouRoute(detail.routeTarget)
+    }
+
     func syncAppearanceFromLoadedDashboard() {
         guard let profileProjection = viewModel.loadedDashboard else { return }
         userSystem.applyAppearancePreference(
@@ -143,6 +150,13 @@ struct YouRootDetailRouteSurface: View {
             preconditionFailure("App feature factory capability must be injected.")
         }
         return appFeatureFactoryCapability
+    }
+
+    var shell: AppShellCapability {
+        guard let appShellCapability else {
+            preconditionFailure("App shell capability must be injected.")
+        }
+        return appShellCapability
     }
 
     var platform: AppPlatformCapability {

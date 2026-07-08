@@ -173,9 +173,41 @@ final class YouSurfaceUITests: AmbitionsUITestCase {
             MatrixItem(
                 name: "amb-1198-you-local-data",
                 detail: "local-data",
-                requiredIdentifier: "you.local-data-status-control-group",
+                requiredIdentifier: "you.privacy-control.review.export",
                 contentSizeCategory: "UICTContentSizeCategoryM",
-                extraEnvironment: [:],
+                extraEnvironment: ["AmbitionsYouPrivacyControlReview": "export"],
+                bottomInsetTarget: nil
+            ),
+            MatrixItem(
+                name: "packet-3-8-you-local-data-controls-reset-review",
+                detail: "local-data",
+                requiredIdentifier: "you.privacy-control.review.reset",
+                contentSizeCategory: "UICTContentSizeCategoryM",
+                extraEnvironment: ["AmbitionsYouPrivacyControlReview": "reset"],
+                bottomInsetTarget: nil
+            ),
+            MatrixItem(
+                name: "packet-3-8-you-local-data-controls-delete-review",
+                detail: "local-data",
+                requiredIdentifier: "you.privacy-control.review.delete",
+                contentSizeCategory: "UICTContentSizeCategoryM",
+                extraEnvironment: ["AmbitionsYouPrivacyControlReview": "delete"],
+                bottomInsetTarget: nil
+            ),
+            MatrixItem(
+                name: "packet-3-8-you-local-data-controls-account-review",
+                detail: "local-data",
+                requiredIdentifier: "you.privacy-control.review.account",
+                contentSizeCategory: "UICTContentSizeCategoryM",
+                extraEnvironment: ["AmbitionsYouPrivacyControlReview": "account"],
+                bottomInsetTarget: nil
+            ),
+            MatrixItem(
+                name: "packet-3-8-you-local-data-controls-source-review",
+                detail: "local-data",
+                requiredIdentifier: "you.privacy-control.review.sources",
+                contentSizeCategory: "UICTContentSizeCategoryM",
+                extraEnvironment: ["AmbitionsYouPrivacyControlReview": "sources"],
                 bottomInsetTarget: nil
             ),
             MatrixItem(
@@ -278,6 +310,7 @@ final class YouSurfaceUITests: AmbitionsUITestCase {
         }
 
         try capturePacket37YouNativeSettingsMaturityScreenshots()
+        try capturePacket38YouPrivacyControlsScreenshots()
     }
 
     private func capturePacket37YouNativeSettingsMaturityScreenshots() throws {
@@ -329,8 +362,10 @@ final class YouSurfaceUITests: AmbitionsUITestCase {
         localDataApp.launch()
 
         XCTAssertTrue(localDataApp.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
-        XCTAssertTrue(localDataApp.descendants(matching: .any)["you.local-data-status-control-group"].waitForExistence(timeout: 10))
+        XCTAssertTrue(localDataApp.descendants(matching: .any)["you.local-data-control-center"].waitForExistence(timeout: 10))
+        XCTAssertTrue(localDataApp.descendants(matching: .any)["you.privacy-control-review-surface"].waitForExistence(timeout: 10))
         XCTAssertTrue(scrollUntilStaticTextExists("Privacy / Local Data Controls", in: localDataApp, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Local app state", in: localDataApp, maxAttempts: 8))
         XCTAssertTrue(scrollUntilStaticTextExists("No hosted account", in: localDataApp, maxAttempts: 8))
         localDataApp.terminate()
 
@@ -367,6 +402,76 @@ final class YouSurfaceUITests: AmbitionsUITestCase {
         XCTAssertTrue(scrollUntilStaticTextExists("Capture remains a global composer", in: capturePreferencesApp, maxAttempts: 8))
         captureYouScreenshot(named: "packet-3.7-you-capture-preferences-detail", in: capturePreferencesApp)
         capturePreferencesApp.terminate()
+    }
+
+    private func capturePacket38YouPrivacyControlsScreenshots() throws {
+        let app = makeApp(
+            bootstrapMode: "preview",
+            extraEnvironment: [
+                "AmbitionsInitialSurface": "you",
+                "AmbitionsScreenshotMode": "YES",
+                "AmbitionsYouDetail": "local-data"
+            ]
+        )
+        app.launch()
+
+        XCTAssertTrue(app.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["you.local-data-control-center"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilElementExists("you.privacy-control-review-surface", in: app, maxAttempts: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["you.privacy-control.review.export"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilStaticTextExists("Review before anything changes", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Export summary", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("This panel does not create a file", in: app, maxAttempts: 8))
+        captureYouScreenshot(named: "packet-3.8-you-local-data-controls-export-review", in: app)
+
+        let resetButton = scrollUntilButtonHittable("you.privacy-control.reset-button", in: app, maxAttempts: 10)
+        XCTAssertTrue(resetButton.exists)
+        resetButton.tap()
+        XCTAssertTrue(app.descendants(matching: .any)["you.privacy-control.review.reset"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilStaticTextExists("Reset learned corrections", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("does not erase goals", in: app, maxAttempts: 8))
+        captureYouScreenshot(named: "packet-3.8-you-local-data-controls-reset-review", in: app)
+
+        let deleteButton = scrollUntilButtonHittable("you.privacy-control.delete-button", in: app, maxAttempts: 10)
+        XCTAssertTrue(deleteButton.exists)
+        deleteButton.tap()
+        XCTAssertTrue(app.descendants(matching: .any)["you.privacy-control.review.delete"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilStaticTextExists("Delete local data", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("cannot erase goals", in: app, maxAttempts: 8))
+        captureYouScreenshot(named: "packet-3.8-you-local-data-controls-delete-review", in: app)
+
+        let accountButton = scrollUntilButtonHittable("you.privacy-control.account-button", in: app, maxAttempts: 10)
+        XCTAssertTrue(accountButton.exists)
+        accountButton.tap()
+        XCTAssertTrue(app.descendants(matching: .any)["you.privacy-control.review.account"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilStaticTextExists("No account is required", in: app, maxAttempts: 8))
+        XCTAssertTrue(
+            scrollUntilButtonHittable(
+                "you.privacy-control.account.handoff-button",
+                fallbackLabel: "Open About",
+                in: app,
+                maxAttempts: 10
+            ).exists
+        )
+        captureYouScreenshot(named: "packet-3.8-you-local-data-controls-account-review", in: app)
+
+        let sourcesButton = scrollUntilButtonHittable("you.privacy-control.sources-button", in: app, maxAttempts: 10)
+        XCTAssertTrue(sourcesButton.exists)
+        sourcesButton.tap()
+        XCTAssertTrue(app.descendants(matching: .any)["you.privacy-control.review.sources"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilStaticTextExists("Source Atlas remains public-reference", in: app, maxAttempts: 8))
+        let handoffButton = scrollUntilButtonHittable(
+            "you.privacy-control.sources.handoff-button",
+            fallbackLabel: "Open Sources",
+            in: app,
+            maxAttempts: 10
+        )
+        XCTAssertTrue(handoffButton.exists)
+        handoffButton.tap()
+        XCTAssertTrue(app.descendants(matching: .any)["you.source-settings-control-group"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilStaticTextExists("Sources", in: app, maxAttempts: 8))
+        captureYouScreenshot(named: "packet-3.8-you-local-data-controls-source-handoff", in: app)
+        app.terminate()
     }
 
     func testYouLifeContextHeroCTAsExpandCatchUpAndReviewRoutes() throws {
