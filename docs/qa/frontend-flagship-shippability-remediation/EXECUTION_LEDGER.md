@@ -6,7 +6,7 @@ Owner: Codex frontend remediation operator
 Repository: agentdevan/ambitions
 Branch: frontend-flagship-shippability-remediation
 Session start SHA: 9362e940eec5e7d118df418d00022c3588df6610
-Current packet: Packet 2.4 - Architecture Hygiene When Touched (next after Packet 2.3 closeout)
+Current packet: Packet 3.1 - Today Core Thesis Proof (next after Packet 2.4 closeout)
 
 This ledger is process evidence only. It is not product acceptance, owner visual acceptance, release proof, accessibility proof, Visual Green, Accessibility Green, or Release Green.
 
@@ -29,8 +29,8 @@ No packet may be marked Done by Codex in this program.
 
 - Branch: `frontend-flagship-shippability-remediation`
 - Base SHA: `9362e940eec5e7d118df418d00022c3588df6610`
-- Current packet status: Packet 2.3 has source/build proof and is Yellow / Ready For Review.
-- Working tree expectation: after Packet 2.3 commit, the next unresolved packet is Packet 2.4.
+- Current packet status: Packet 2.4 has script/self-test/governance proof and is Yellow / Ready For Review.
+- Working tree expectation: after Packet 2.4 commit, the next unresolved packet is Packet 3.1.
 - Linear: not touched this session; local ledger is the active progress record.
 - Xcode: `Xcode 26.6`, build `17F113`
 - Simulator used: iPhone 17 Pro Max, iOS 26.5, UDID `DD9B9C84-7188-48FA-AA2A-AB5C1D0EE2B6`
@@ -213,7 +213,7 @@ Surface maturity acceptance:
 | 2.1 Root IA Law Lock | Ready For Review | Project 1 no longer Red at shell level | Tests proving roots only Today/Goals/Time/You |
 | 2.2 Motion-as-Behavior Cleanup | Ready For Review | IA tests stable | No Motion root destination, transition/reflow proof |
 | 2.3 No-Dashboard / No-Task-App Guardrail | Ready For Review | IA law stable | Explicit anti-drift checks and mapped repair list |
-| 2.4 Architecture Hygiene When Touched | Backlog | After touched source paths are known | Governance check and canonical owner evidence |
+| 2.4 Architecture Hygiene When Touched | Ready For Review | After touched source paths are known | Governance check and canonical owner evidence |
 
 ### Project 3 - Core Surface Flagship Maturity
 
@@ -863,6 +863,71 @@ Follow-up required:
 - Later Project 3 / 4 / 6 packets must repair actual rendered dashboard/task/habit/chatbot/productivity feel where screenshots or source prove it.
 
 Passing tests did not determine this status. The status is based on source proof, runtime proof, screenshot inspection, repair-loop completion, and fidelity to the Ambitions premium frontend target: premium roots, native light/dark drilldowns and entire frontend, deeply inspectable object surfaces, and realistic SwiftUI proportions.
+
+### Packet 2.4 - Architecture Hygiene When Touched
+
+Status: Yellow / Ready For Review
+
+Target:
+- Strengthen architecture hygiene evidence for touched remediation work without changing product UI.
+- Keep repair work in canonical owners and make changed owner scope inspectable.
+- Avoid expanding `+02` / `+03` / `+04` suffix debt, broad model files, architecture nouns, package-boundary drift, Source Atlas growth, and non-runtime mutation authority.
+- Add narrow validation lane notes and known-issue/proof-mapping discipline for later packets.
+
+Architecture hygiene delta before coding:
+- Current state: `scripts/ambitions-remediation-governance-check.py` already blocks new production suffix split files, broad `Models.swift`, production architecture noun files without deletion, central lens growth, Source Atlas growth without ADR allowlist, package-boundary drift, non-runtime mutation/storage markers, adapter writes, and custom UIKit/rendering additions. It reports root LOC, largest files, support largest files, naming counts, Source Atlas counts, and changed path count.
+- Target state: the remediation governance output should also make changed-owner scope inspectable and fail if changed support Swift files exceed the hard line cap, because support/test churn can hide oversized proof harnesses and make bounded packets harder to review.
+- Gap from desired architecture target: the script currently reports support largest files globally, but a packet can touch or add an oversized support Swift file without a diff-scoped failure. The script also reports changed path count without listing changed owner groups, which weakens closeout evidence for canonical owner scope.
+- Exact implementation deltas to close: add changed owner/path summary to the governance report; add diff-scoped support Swift line-cap findings; cover both in script self-test.
+- Product-law risks: do not add new production architecture nouns, package boundaries, Source Atlas scope, runtime mutation authority, or UI routes.
+- Accessibility risks: none directly; no UI or accessibility behavior changes.
+- Files likely responsible: `scripts/ambitions-remediation-governance-check.py` and this ledger.
+- Proof required: script self-test, default governance check, source truth/governance scans if affected, `git diff --check`, and no Xcode build unless Swift/project source changes are introduced.
+- Repair-loop conditions: if script changes produce false positives against current scoped changes, repair the script narrowly; if architecture hygiene requires moving source ownership or broad refactor, stop and classify a later packet rather than widening.
+
+Packet 2.4 is not a visual packet and does not claim visual maturity, accessibility maturity, release readiness, or owner acceptance.
+
+Implementation completed:
+- Added diff-scoped support Swift line-cap enforcement to `scripts/ambitions-remediation-governance-check.py` so touched/added support Swift files over the hard cap fail the governance gate instead of being hidden in the global support-largest report.
+- Added changed-owner reporting to the remediation governance report and console output, making scoped owner groups inspectable in closeouts.
+- Added self-test coverage for support Swift detection and changed-owner grouping.
+- Did not change production Swift, project boundaries, packages, Source Atlas scope, runtime mutation authority, root IA, or rendered UI.
+
+Architecture hygiene result:
+- Changed owners for Packet 2.4 are `docs/qa` and `scripts`.
+- Changed production Swift count is 0.
+- Changed support Swift count is 0.
+- No new suffix split files, broad `Models.swift`, production architecture nouns, package boundaries, Source Atlas scope, or mutation/storage authority were introduced.
+
+Validation run:
+- `git diff --check`: exit 0.
+- `python3 scripts/ambitions-remediation-governance-check.py --self-test`: exit 1 then 0. First run failed because `Native/AmbitionsTests` support paths grouped as `Native`; repaired `changed_owner` for support roots and reran successfully.
+- `python3 scripts/ambitions-remediation-governance-check.py`: exit 0; `changed_owners` reports `docs/qa` and `scripts`; `GREEN remediation governance guard passed`.
+- `python3 scripts/ambitions-remediation-governance-check.py --json`: exit 0; `valid: true`, `findingCount: 0`, changed owners include `docs/qa` and `scripts`.
+- `xcodegen generate`: exit 0.
+- `python3 scripts/ambitions-architecture-inventory.py`: exit 0; `GREEN final-tree parity achieved`.
+- `python3 scripts/ambitions-green-standard-audit.py`: exit 0; no disallowed architecture-as-UI strings in active primary UI source.
+- `python3 scripts/ambitions-vocabulary-drift-scan.py`: exit 0; canonical and active vocabulary terms present and explicit ban terms absent.
+- `python3 scripts/ambitions-local-first-boundary-scan.py`: exit 0; local-first/account/R2/hosted-AI boundary checks passed in active authority files.
+
+Validation not run:
+- `./scripts/ambitions-xcode-build-for-testing.sh --batch frontend-remediation`: not rerun for Packet 2.4 because this packet changed only the Python governance script and ledger after the Packet 2.3 broad build passed at `.codex/xcode-summaries/frontend-remediation/20260708T050223Z/extract/summary.json`; no Swift, project source, or UI implementation changed in Packet 2.4.
+- Screenshot/UI lanes: not run because no rendered UI changed.
+- Physical-device proof: unavailable in this environment.
+- Manual VoiceOver proof: not performed.
+
+Proof artifacts:
+- Governance console output from `python3 scripts/ambitions-remediation-governance-check.py` after repair: changed owners are `docs/qa` and `scripts`, with no findings.
+- Governance JSON output from `python3 scripts/ambitions-remediation-governance-check.py --json`: `valid: true`, `findingCount: 0`, `changedPathCount: 2`.
+
+Known risks:
+- The governance script now blocks touched support Swift over 600 lines, but existing oversized support files remain baseline debt and are not repaired by this packet.
+- Changed-owner reporting is evidence for scope review, not proof that future source changes are architecturally ideal.
+- Known-issue proof mapping still depends on packet operators updating the ledger honestly; this packet improves the hygiene evidence, not all tracker state.
+
+Follow-up required:
+- Packet 3.1 - Today Core Thesis Proof.
+- Later packets must continue running the governance check and recording changed owners, proof ceilings, and known-issue mappings.
 
 ### Packet 1.5 - Baseline Validation Recovery
 
