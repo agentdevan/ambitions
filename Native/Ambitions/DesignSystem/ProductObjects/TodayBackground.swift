@@ -1,10 +1,12 @@
 import Foundation
+import AmbitionsDesignSystem
 import SwiftUI
 #if canImport(UIKit)
     import UIKit
 #endif
 
 struct TodayBackgroundView: View {
+    @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     let clock: any AmbitionsClock
 
@@ -25,7 +27,7 @@ struct TodayBackgroundView: View {
     }
 
     func sky(date: Date) -> some View {
-        let palette = TodaySkyPalette(date: date, calendar: clock.calendar)
+        let palette = TodaySkyPalette(date: date, calendar: clock.calendar, mode: theme.mode)
 
         return ZStack {
             LinearGradient(
@@ -44,19 +46,32 @@ struct TodayBackgroundView: View {
             .ignoresSafeArea()
             .blendMode(.screen)
 
-            TodayStarField(opacity: palette.starOpacity, date: date)
+            TodayStarField(opacity: theme.mode == .dark ? palette.starOpacity : 0, date: date)
                 .ignoresSafeArea()
 
             LinearGradient(
-                colors: [
-                    Color.black.opacity(0.34),
-                    Color.black.opacity(0.56),
-                    Color.black.opacity(0.76),
-                ],
+                colors: overlayColors,
                 startPoint: .top,
                 endPoint: .bottom
             )
             .ignoresSafeArea()
+        }
+    }
+
+    var overlayColors: [Color] {
+        switch theme.mode {
+        case .dark:
+            [
+                Color.black.opacity(0.34),
+                Color.black.opacity(0.56),
+                Color.black.opacity(0.76),
+            ]
+        case .light:
+            [
+                theme.colors.canvas.opacity(0.08),
+                theme.colors.canvas.opacity(0.28),
+                theme.colors.canvas.opacity(0.56),
+            ]
         }
     }
 }
@@ -98,7 +113,7 @@ struct TodaySkyPalette {
     let glowY: CGFloat
     let starOpacity: Double
 
-    init(date: Date, calendar: Calendar) {
+    init(date: Date, calendar: Calendar, mode: AmbitionThemeMode) {
         let seconds = calendar.dateComponents([.hour, .minute, .second], from: date)
         let hour = Double(seconds.hour ?? 0)
         let minute = Double(seconds.minute ?? 0)
@@ -113,23 +128,44 @@ struct TodaySkyPalette {
         let night = max(0, 1 - solar * 1.35)
         starOpacity = min(0.28, max(0.07, night * 0.26))
 
-        topColor = Self.lerp(
-            from: Color(red: 0.018, green: 0.026, blue: 0.045),
-            to: Color(red: 0.066, green: 0.090, blue: 0.132),
-            amount: visualSolar
-        )
-        midColor = Self.lerp(
-            from: Color(red: 0.028, green: 0.033, blue: 0.052),
-            to: Color(red: 0.078, green: 0.106, blue: 0.150),
-            amount: visualSolar
-        )
-        bottomColor = Self.lerp(
-            from: Color(red: 0.016, green: 0.018, blue: 0.030),
-            to: Color(red: 0.120, green: 0.072, blue: 0.046),
-            amount: warmth * 0.26 + visualSolar * 0.10
-        )
-        glowColor = warmth > 0.08 ? Color(red: 1.00, green: 0.66, blue: 0.38) : Color(red: 0.42, green: 0.50, blue: 0.76)
-        glowOpacity = 0.10 + warmth * 0.14 + visualSolar * 0.04
+        switch mode {
+        case .dark:
+            topColor = Self.lerp(
+                from: Color(red: 0.018, green: 0.026, blue: 0.045),
+                to: Color(red: 0.066, green: 0.090, blue: 0.132),
+                amount: visualSolar
+            )
+            midColor = Self.lerp(
+                from: Color(red: 0.028, green: 0.033, blue: 0.052),
+                to: Color(red: 0.078, green: 0.106, blue: 0.150),
+                amount: visualSolar
+            )
+            bottomColor = Self.lerp(
+                from: Color(red: 0.016, green: 0.018, blue: 0.030),
+                to: Color(red: 0.120, green: 0.072, blue: 0.046),
+                amount: warmth * 0.26 + visualSolar * 0.10
+            )
+            glowColor = warmth > 0.08 ? Color(red: 1.00, green: 0.66, blue: 0.38) : Color(red: 0.42, green: 0.50, blue: 0.76)
+            glowOpacity = 0.10 + warmth * 0.14 + visualSolar * 0.04
+        case .light:
+            topColor = Self.lerp(
+                from: Color(red: 0.900, green: 0.940, blue: 0.970),
+                to: Color(red: 0.820, green: 0.890, blue: 0.940),
+                amount: max(0.22, visualSolar)
+            )
+            midColor = Self.lerp(
+                from: Color(red: 0.965, green: 0.952, blue: 0.930),
+                to: Color(red: 0.910, green: 0.940, blue: 0.950),
+                amount: max(0.18, visualSolar)
+            )
+            bottomColor = Self.lerp(
+                from: Color(red: 0.990, green: 0.982, blue: 0.962),
+                to: Color(red: 0.965, green: 0.920, blue: 0.865),
+                amount: max(warmth * 0.42, visualSolar * 0.28)
+            )
+            glowColor = warmth > 0.08 ? Color(red: 0.96, green: 0.64, blue: 0.34) : Color(red: 0.58, green: 0.68, blue: 0.86)
+            glowOpacity = 0.12 + warmth * 0.12 + visualSolar * 0.03
+        }
         glowX = dawnGlow > duskGlow ? 0.18 : 0.82
         glowY = CGFloat(0.12 + (1 - solar) * 0.18)
     }

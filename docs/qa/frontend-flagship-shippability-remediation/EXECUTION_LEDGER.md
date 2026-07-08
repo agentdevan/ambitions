@@ -6,7 +6,7 @@ Owner: Codex frontend remediation operator
 Repository: agentdevan/ambitions
 Branch: frontend-flagship-shippability-remediation
 Session start SHA: 9362e940eec5e7d118df418d00022c3588df6610
-Current packet: Packet 1.3 - Appearance Mode Proof
+Current packet: Packet 1.4 - Rendered Failure Gates (next; Packet 1.3 is Yellow / Ready For Review pending commit)
 
 This ledger is process evidence only. It is not product acceptance, owner visual acceptance, release proof, accessibility proof, Visual Green, Accessibility Green, or Release Green.
 
@@ -29,8 +29,8 @@ No packet may be marked Done by Codex in this program.
 
 - Branch: `frontend-flagship-shippability-remediation`
 - Base SHA: `9362e940eec5e7d118df418d00022c3588df6610`
-- Current packet status: Packet 1.3 is in progress under the Flagship Visual Fidelity Contract.
-- Working tree expectation: Packet 1.3 source/test/script changes may be present until the appearance proof packet is validated and committed.
+- Current packet status: Packet 1.3 has current source/runtime/screenshot proof and is Yellow / Ready For Review pending commit.
+- Working tree expectation: Packet 1.3 source/test/script/ledger changes may be present until the appearance proof packet is committed; after commit the next unresolved packet is Packet 1.4.
 - Linear: not touched this session; local ledger is the active progress record.
 - Xcode: `Xcode 26.6`, build `17F113`
 - Simulator used: iPhone 17 Pro Max, iOS 26.5, UDID `DD9B9C84-7188-48FA-AA2A-AB5C1D0EE2B6`
@@ -400,6 +400,105 @@ Packet 1.2 residual risks:
 Next packet:
 - Packet 1.3 - Appearance Mode Proof.
 
+### Packet 1.3 - Appearance Mode Proof
+
+Status: Yellow / Ready For Review pending commit
+
+Target:
+- Light mode actually renders light.
+- Dark mode remains premium.
+- System appearance follows OS/system mode in deterministic proof.
+- Today, Goals, Time, You are captured in light and dark.
+- Capture/Search overlay appearance proof exists where practical.
+- Shell materials, dock, header, and core product objects adapt coherently.
+- Appearance failure becomes testable through rendered screenshot proof, not identifiers alone.
+
+Canonical owners under repair:
+- App bootstrap and Stage theme ownership, because deterministic appearance proof was being defeated by persisted/default appearance state and system-mode ambiguity.
+- Today product-object background and fused rail, because Today retained dark-only visual treatment in light-mode proof.
+- Capture overlay entry/composer, because the Packet 1.3 overlay matrix exposed prompt-box and AI-glyph visual grammar that violated the strengthened frontend target.
+- Deterministic screenshot lanes, because appearance proof needed rendered root/overlay light, dark, system-light, and system-dark assertions.
+
+Implementation notes:
+- DEBUG screenshot launch arguments now drive `AmbitionsAppearancePreference` and `AmbitionsSystemAppearance`; in-memory screenshot runs persist the preference into the local app state before Stage resolves theme.
+- Stage resolves an effective system color scheme for deterministic system-light/system-dark proof while production behavior remains tied to the real system color scheme and user appearance preference.
+- Today background and the current-time fused rail now use the active Ambitions theme instead of forcing dark-only materials.
+- Root screenshot matrix now captures Today, Goals, Time, You in light, dark, system-light, and system-dark, attaches metadata, and asserts average content luminance separation.
+- Overlay screenshot matrix now captures Capture and Search in light, dark, system-light, and system-dark, attaches metadata, and asserts average content luminance separation.
+- Capture overlay visual grammar was repaired after screenshot inspection: the field no longer uses the old text-cursor/prompt cue, the teaching line uses local review-before-save language, and the duplicate first-run teaching row was removed.
+- No new root surfaces, Capture tab, Search chatbot, Motion destination, hosted AI grammar, or cloud/private-graph dependency was added.
+
+Packet 1.3 source file set:
+- `Native/Ambitions/App/AppBootstrapper.swift`
+- `Native/Ambitions/App/AppContainer.swift`
+- `Native/Ambitions/App/AppShellActivatedCaptureSeam.swift`
+- `Native/Ambitions/Composer/Capture/CaptureAtmosphereComposer.swift`
+- `Native/Ambitions/DesignSystem/ProductObjects/TodayBackground.swift`
+- `Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailCurrentTimeFusion.swift`
+- `Native/Ambitions/Stage/AmbitionsStage.swift`
+- `Native/AmbitionsTests/App/AppearancePreferenceTests.swift`
+- `Native/AmbitionsUITests/DeterministicScreenshotLaneUITests.swift`
+- `scripts/ambitions-run-deterministic-screenshot-lane.sh`
+- `docs/qa/frontend-flagship-shippability-remediation/EXECUTION_LEDGER.md`
+
+Packet 1.3 visual inspection:
+- Today light/dark: repaired. Light mode is intentionally light with readable shell/product object contrast; dark mode retains the premium dark field. System-light/system-dark mirror the expected modes.
+- Goals light/dark: repaired for appearance distinction. Remaining repeated `Quiet` / `Add goal` state noise and atlas maturity are not repaired here because they belong to Packet 3.3, but the root no longer shows appearance-mode ambiguity.
+- Time light/dark: repaired for appearance distinction. Remaining gauge/card-heavy Life Calendar maturity belongs to Packet 3.5; the light and dark rendered states are readable and materially distinct.
+- You light/dark: repaired for appearance distinction. The settings/profile surface reads as light in light mode and dark in dark mode; deeper privacy/control maturity remains later scope.
+- Capture light/dark/system: repaired for the appearance-owned visual failure found by this packet. The obvious AI/prompt cue and duplicate teaching line are gone; full Capture route/persistence maturity remains Packet 4.
+- Search light/dark/system: captured and appearance-distinct. Search remains card/result heavy and deeper local Find / Act / Inspect maturity remains Packet 4.4/4.5, but Packet 1.3 did not expose a dark-only or hosted-AI appearance failure.
+
+Packet 1.3 Visual Scorecard:
+- Native iOS quality: 4
+- Visual hierarchy: 4
+- Surface identity: 4
+- Object inspectability: 4
+- Light/dark quality: 4
+- Material restraint: 4
+- Typography and spacing: 4
+- Interaction clarity: 4
+- SwiftUI realism / proportions: 4
+- Similarity to Ambitions premium frontend target: 4
+- Final self-score: 4.0 average, Yellow / Ready For Review within simulator/source proof ceilings.
+
+Frontend-wide evaluation:
+- Root quality: appearance-owned root failures are repaired; roots are not owner-accepted flagship surfaces yet.
+- Drilldown/sub-surface quality: Capture/Search overlays were included and appearance-adapt; deep drilldowns and inspectors remain later packet scope.
+- Light/dark quality: current root and core overlay screenshots are materially distinct, with luminance assertions preventing identifier-only success.
+- Object inspectability: current proof preserves local object cues and review-before-save/local-search language, but full object-depth maturity remains later packets.
+- SwiftUI realism / proportions: current appearance scope uses buildable SwiftUI proportions; remaining Goals/Time/Search/Capture surface maturity is tracked as follow-up, not hidden as Green.
+
+Repair cycles performed:
+- Cycle 1: diagnosed pre-repair appearance failures where Today/You light and system-dark proof did not render deterministically.
+- Cycle 2: repaired DEBUG appearance launch state and Stage system-mode override path; reran root matrix.
+- Cycle 3: repaired Today dark-only product-object treatment in background/current-time fused rail; reran root matrix.
+- Cycle 4: overlay screenshots exposed Capture prompt/AI visual grammar; repaired Capture composer field icon/copy/material treatment; reran overlay matrix.
+- Cycle 5: overlay screenshots still showed duplicate first-run teaching/prompt residue; removed the extra shell seam teaching row; reran overlay matrix.
+
+Remaining visual deltas:
+- Simulator proof only; Visual Green remains impossible without physical-device proof.
+- Manual VoiceOver proof was not performed; Accessibility Green remains impossible.
+- Goals state legibility, repeated quiet/add-goal noise, and proof-state maturity remain Packet 3.3/3.4.
+- Time Life Calendar redesign and gauge/card reduction remain Packet 3.5/3.6.
+- Capture full route system, persistence, receipt depth, and non-chatbot composer maturity remain Packet 4.1-4.3.
+- Search automation/accessibility and deeper local Find / Act / Inspect maturity remain Packet 4.4/4.5.
+- Appearance proof is current for roots and core overlays, not for every future drilldown/detail route in the app.
+
+Packet 1.3 closeout:
+- Status: Yellow / Ready For Review.
+- Source status: local source/build/script proof passed for the scoped appearance repair.
+- Runtime status: focused simulator UI proof passed for root and core overlay appearance matrices.
+- Interaction status: Yellow; simulator automation proof only, no manual device interaction proof.
+- Visual status: Yellow maximum; simulator screenshots inspected, no physical-device proof.
+- Accessibility status: Yellow maximum; no manual VoiceOver proof.
+- Release status: not Green; this is not release validation.
+- Product law preserved: Today / Goals / Time / You only as roots; Capture is not a root tab; Search remains local search overlay; Motion not a root destination; depth law preserved; local-first/offline trust not weakened; no hosted-AI grammar added.
+- Required closeout sentence: Passing tests did not determine this status. The status is based on source proof, runtime proof, screenshot inspection, repair-loop completion, and fidelity to the Ambitions premium frontend target: premium roots, native light/dark drilldowns and entire frontend, deeply inspectable object surfaces, and realistic SwiftUI proportions.
+
+Next packet:
+- Packet 1.4 - Rendered Failure Gates.
+
 ## 6. Validation Log
 
 ### Baseline before Packet 1.1 source edits
@@ -490,6 +589,31 @@ Validation classification:
 - Runtime Green is not claimed for the frontend overall.
 - Interaction Green is not claimed.
 - Visual Review readiness for Packet 1.2 is Yellow only because proof is simulator-only and physical-device proof is missing.
+- Accessibility Green is impossible because manual VoiceOver proof was not performed.
+- Release Green is impossible; release validation, device proof, accessibility proof, and later Red blockers remain.
+
+### Packet 1.3 final validation after repair
+
+| Command | Exit | Result |
+| --- | ---: | --- |
+| `git status --short --branch` | 0 | Branch `frontend-flagship-shippability-remediation`; only Packet 1.3 files modified before commit |
+| `git diff --check` | 0 | Passed before final validation and ledger update |
+| `xcodegen generate` | 0 | Project generated successfully |
+| `python3 scripts/ambitions-architecture-inventory.py` | 0 | `GREEN final-tree parity achieved`; source/path parity only |
+| `python3 scripts/ambitions-green-standard-audit.py` | 0 | Green-standard source gate passed |
+| `python3 scripts/ambitions-vocabulary-drift-scan.py` | 0 | Vocabulary drift gate passed |
+| `python3 scripts/ambitions-local-first-boundary-scan.py` | 0 | Local-first boundary scan passed |
+| `python3 scripts/ambitions-remediation-governance-check.py` | 0 | Guard passed; changed paths limited to Packet 1.3 source/test/script files before ledger update |
+| `scripts/ambitions-xcode-test-focused.sh --batch packet-1.3-final-unit --test AmbitionsTests/AppearancePreferenceTests/testDebugLaunchConfigurationAcceptsAppearancePreferenceForScreenshotProof --scheme AmbitionsUnitTests --timeout 8m --kill-after 30s --prebuild --prebuild-timeout 20m` | 0 | Focused unit proof passed; summary at `.codex/xcode-summaries/packet-1.3-final-unit/20260708T005851Z-AmbitionsTests-AppearancePreferenceTests-testDebugLaunchConfigurationAcceptsAppe-32211-15757/extract/summary.json`; 1 executed test |
+| `scripts/ambitions-xcode-test-focused.sh --batch packet-1.3-final-root-matrix --test AmbitionsUITests/DeterministicScreenshotLaneUITests/testAMB1815AppearanceRootScreenshotMatrix --scheme AmbitionsUITests --timeout 18m --kill-after 30s --skip-prebuild` | 0 | Root appearance matrix passed; summary at `.codex/xcode-summaries/packet-1.3-final-root-matrix/20260708T010235Z-AmbitionsUITests-DeterministicScreenshotLaneUITests-testAMB1815AppearanceRootScr-33365-28693/extract/summary.json`; 1 executed UI test |
+| `scripts/ambitions-xcode-test-focused.sh --batch packet-1.3-final-overlay-matrix --test AmbitionsUITests/DeterministicScreenshotLaneUITests/testAMB1815AppearanceCoreOverlayScreenshotMatrix --scheme AmbitionsUITests --timeout 18m --kill-after 30s --skip-prebuild` | 0 | Capture/Search overlay appearance matrix passed; summary at `.codex/xcode-summaries/packet-1.3-final-overlay-matrix/20260708T010704Z-AmbitionsUITests-DeterministicScreenshotLaneUITests-testAMB1815AppearanceCoreOve-34467-26007/extract/summary.json`; 1 executed UI test |
+| `./scripts/ambitions-xcode-build-for-testing.sh --batch frontend-remediation` | 0 | Build-for-testing passed; summary at `.codex/xcode-summaries/frontend-remediation/20260708T011224Z/extract/summary.json`; duration 694.594s |
+
+Validation classification:
+- Source Green for the scoped Packet 1.3 diff is supported by source/build/script proof.
+- Runtime Green is not claimed for the frontend overall.
+- Interaction Green is not claimed.
+- Visual Review readiness for Packet 1.3 is Yellow only because proof is simulator-only and physical-device proof is missing.
 - Accessibility Green is impossible because manual VoiceOver proof was not performed.
 - Release Green is impossible; release validation, device proof, accessibility proof, and later Red blockers remain.
 
@@ -644,20 +768,65 @@ Repair-loop conditions:
 - If a root or overlay looks proportionally unrealistic inside Packet 1.3 scope, repair it and rerun proof.
 - Do not close Packet 1.3 from tests alone.
 
+### Packet 1.3 proof
+
+Packet 1.3 proof is simulator Yellow only, not Visual Green.
+
+Focused result bundles:
+- `.codex/xcode-results/packet-1.3-final-unit/20260708T005851Z-AmbitionsTests-AppearancePreferenceTests-testDebugLaunchConfigurationAcceptsAppe-32211-15757/focused-test.xcresult`
+- `.codex/xcode-results/packet-1.3-final-root-matrix/20260708T010235Z-AmbitionsUITests-DeterministicScreenshotLaneUITests-testAMB1815AppearanceRootScr-33365-28693/focused-test.xcresult`
+- `.codex/xcode-results/packet-1.3-final-overlay-matrix/20260708T010704Z-AmbitionsUITests-DeterministicScreenshotLaneUITests-testAMB1815AppearanceCoreOve-34467-26007/focused-test.xcresult`
+- `.codex/xcode-results/frontend-remediation/20260708T011224Z-bft-35690-29009/build-for-testing.xcresult`
+
+Broad build summary:
+- `.codex/xcode-summaries/frontend-remediation/20260708T011224Z/extract/summary.json`
+
+Root screenshot directory:
+- `.codex/xcode-summaries/packet-1.3-final-root-matrix/20260708T010235Z-AmbitionsUITests-DeterministicScreenshotLaneUITests-testAMB1815AppearanceRootScr-33365-28693/extract/screenshots`
+
+Root screenshots inspected:
+- `amb-1815-root-today-light-screenshot_0_D0EFDA52-79C7-4EEF-BE0D-2A9DDB36FB57.png`: Today light; intentionally light, readable, no dark-only background leak.
+- `amb-1815-root-today-dark-screenshot_0_83C6778C-8E95-47AE-BC18-6F9E1242B1BB.png`: Today dark; dark premium field retained.
+- `amb-1815-root-today-system-light-screenshot_0_34EE5193-A732-4847-A7F5-862A2213F700.png`: Today system-light; follows light mode.
+- `amb-1815-root-today-system-dark-screenshot_0_D38DE0FA-2577-4395-82BC-6624D507197D.png`: Today system-dark; follows dark mode.
+- `amb-1815-root-goals-light-screenshot_0_6190857C-5EDA-463B-81C5-5EF5ABF8453E.png`: Goals light; appearance distinct and readable, with known later state-legibility debt.
+- `amb-1815-root-goals-dark-screenshot_0_3F9FD91F-A542-4911-8816-22CE214B23E1.png`: Goals dark; dark mode distinct, with same later Goals maturity debt.
+- `amb-1815-root-time-light-screenshot_0_8EF43C3F-BAEF-4594-B12A-0EB864B2968F.png`: Time light; readable and light, with later Life Calendar maturity debt.
+- `amb-1815-root-time-dark-screenshot_0_D2A8B944-D628-4506-811A-E071A4BB1C24.png`: Time dark; readable and distinct, with later gauge/card maturity debt.
+- `amb-1815-root-you-light-screenshot_0_C3B96590-E214-42B9-A6C5-2E5DAC44F6EE.png`: You light; native settings-like light mode.
+- `amb-1815-root-you-dark-screenshot_0_5E4A029B-8C33-4631-A607-7D7FC5F9FCEF.png`: You dark; distinct dark settings/profile surface.
+
+Overlay screenshot directory:
+- `.codex/xcode-summaries/packet-1.3-final-overlay-matrix/20260708T010704Z-AmbitionsUITests-DeterministicScreenshotLaneUITests-testAMB1815AppearanceCoreOve-34467-26007/extract/screenshots`
+
+Overlay screenshots inspected:
+- `amb-1815-overlay-capture-light-screenshot_0_01630215-7836-4859-8A3B-5B63F5D38113.png`: Capture light; no old AI glyph, no duplicate teaching row, no dark-only leak.
+- `amb-1815-overlay-capture-dark-screenshot_0_27081F50-DF30-4FAC-B497-9D12E25A7B26.png`: Capture dark; no old AI glyph, local review-before-save copy retained.
+- `amb-1815-overlay-capture-system-light-screenshot_0_1C521187-2893-4053-A261-AE719C20167D.png`: Capture system-light; follows light mode.
+- `amb-1815-overlay-capture-system-dark-screenshot_0_53C2BF99-12E6-43A8-BE34-F741F3FEC57B.png`: Capture system-dark; follows dark mode.
+- `amb-1815-overlay-search-light-screenshot_0_B6D29D82-4EB4-4246-AFAD-33C0BDB756DD.png`: Search light; local iPhone search language visible, still card-heavy for later Search maturity.
+- `amb-1815-overlay-search-dark-screenshot_0_E405440C-BDB0-48B2-B855-8E311EA52721.png`: Search dark; appearance distinct and readable, still card-heavy for later Search maturity.
+- `amb-1815-overlay-search-system-light-screenshot_0_04FD6E5C-ED80-4C34-9F95-FB0A401737A2.png`: Search system-light; follows light mode.
+- `amb-1815-overlay-search-system-dark-screenshot_0_784E30A1-213A-4092-8D82-3610277A30BD.png`: Search system-dark; follows dark mode.
+
+Additional proof notes:
+- The root and overlay UI tests assert rendered average-content-luminance separation for light versus dark and system-light versus system-dark, so source identifiers alone cannot pass the appearance proof.
+- These screenshots do not prove owner visual acceptance, physical-device fidelity, manual VoiceOver, or full frontend drilldown maturity.
+
 ## 8. Known Remaining Red Blockers
 
 - Root shell safe-area and dock/content overlap is repaired for the inspected default Dynamic Type dark-mode simulator roots, but not proven for all appearances or physical device.
 - Time Accessibility XXXL catastrophic LifeShape Field collapse is repaired in the focused simulator lane, but large Dynamic Type is not fully proven across all roots, overlays, and device contexts.
 - Large Dynamic Type failures outside the focused Time lane remain possible.
-- Light/system/dark appearance ambiguity.
+- Light/system/dark appearance ambiguity is repaired for current roots plus Capture/Search overlays in deterministic simulator proof, but physical-device and full-drilldown appearance proof remain missing.
 - Simulator-only visual proof.
 - No manual VoiceOver proof.
 - Search accessibility/automation detection failure.
-- Capture AI-wrapper glyph/prompt feel.
+- Capture AI-wrapper glyph/prompt feel is repaired for the current appearance overlay screenshot, but broader Capture visual grammar remains Packet 4.1 scope.
 - Create Goal sheet/prototype inconsistency.
 - Goals state variants visually indistinct.
 - Receipts/toasts default root collision was reduced by Packet 1.1, but receipt copy truncation, non-root overlays, and large Dynamic Type receipt behavior remain unproven.
-- Source/identifier gates passing while screenshots still show failure.
+- Source/identifier gates passing while screenshots still show failure remains a program risk; Packet 1.3 adds rendered luminance assertions for appearance proof but does not solve all rendered-failure gates.
 - Motion naming/screenshot residue creating IA ambiguity.
 - Local-first/privacy source gates passing but runtime/private-egress proof incomplete.
 

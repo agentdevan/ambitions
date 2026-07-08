@@ -248,7 +248,7 @@ struct CaptureAtmosphereComposer: View {
 
     private var fieldCapsule: some View {
         HStack(spacing: theme.spacing.sm) {
-            Image(systemName: "text.cursor")
+            Image(systemName: "square.and.pencil")
                 .font(.system(size: theme.icon.smallSize, weight: .semibold))
                 .foregroundStyle(text.isEmpty ? theme.colors.textTertiary : theme.colors.accentWarm)
                 .accessibilityHidden(true)
@@ -276,15 +276,22 @@ struct CaptureAtmosphereComposer: View {
                 }
                 .accessibilityIdentifier(accessibilityIDs.input)
                 .accessibilityLabel("Capture field")
-                .accessibilityHint("Type one real thing. Review opens when you choose it.")
+                .accessibilityHint("Write one real thing. Review opens before saving.")
         }
         .padding(.horizontal, theme.spacing.md)
         .padding(.vertical, dynamicTypeSize.isAccessibilitySize ? theme.spacing.lg : theme.spacing.md)
         .background(fieldBackground)
-        .overlay(
-            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                .stroke(text.isEmpty ? theme.colors.strokeSubtle : theme.colors.accentWarm, lineWidth: text.isEmpty ? 1 : 1.5)
-        )
+        .clipShape(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous))
+        .overlay(alignment: .leading) {
+            Rectangle()
+                .fill(text.isEmpty ? theme.colors.strokeSubtle : theme.colors.accentWarm)
+                .frame(width: text.isEmpty ? 1 : 2)
+        }
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .fill(text.isEmpty ? theme.colors.strokeSubtle.opacity(0.72) : theme.colors.accentWarm.opacity(0.72))
+                .frame(height: 1)
+        }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
@@ -293,10 +300,10 @@ struct CaptureAtmosphereComposer: View {
             ContextAtmosphereLayer(
                 context: .capture,
                 state: composerState,
-                intensity: text.isEmpty ? 0.38 : 0.5
+                intensity: text.isEmpty ? 0.22 : 0.36
             )
-            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                .fill(theme.colors.surfaceSecondary.opacity(0.92))
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .fill(theme.colors.surfaceSecondary.opacity(text.isEmpty ? 0.58 : 0.72))
         }
     }
 
@@ -334,11 +341,11 @@ private struct SpatialCaptureTeachingLine: View {
     var body: some View {
         if isVisible {
             HStack(spacing: theme.spacing.sm) {
-                Image(systemName: "sparkle.magnifyingglass")
+                Image(systemName: "scope")
                     .font(.system(size: theme.icon.smallSize, weight: .semibold))
                     .foregroundStyle(theme.colors.textSecondary)
                     .accessibilityHidden(true)
-                Text("Type one real thing. Review opens when you choose it.")
+                Text("Write one real thing. Review opens before saving.")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -346,7 +353,7 @@ private struct SpatialCaptureTeachingLine: View {
             .accessibilityIdentifier("capture.first-run.spatial-teaching")
             .accessibilityElement(children: .combine)
             .accessibilityLabel("Capture teaching")
-            .accessibilityValue("Type one real thing. Review opens when you choose it.")
+            .accessibilityValue("Write one real thing. Review opens before saving.")
         }
     }
 }

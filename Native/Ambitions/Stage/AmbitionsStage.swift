@@ -23,8 +23,10 @@ struct AmbitionsStage: View {
     }
 
     var body: some View {
+        let systemColorSchemeForTheme = effectiveSystemColorScheme
+        let preferredColorSchemeForStage = effectivePreferredColorScheme
         let resolvedTheme = container.appearancePreference.resolveTheme(
-            systemColorScheme: systemColorScheme,
+            systemColorScheme: systemColorSchemeForTheme,
             accentFamily: container.accentFamily
         )
         let stageModel = navigation.stageModel(
@@ -83,17 +85,36 @@ struct AmbitionsStage: View {
             }
             .interactiveDismissDisabled()
             .appContainer(container)
-            .preferredColorScheme(container.appearancePreference.preferredColorScheme)
+            .preferredColorScheme(preferredColorSchemeForStage)
             .ambitionTheme(
                 container.appearancePreference.resolveTheme(
-                    systemColorScheme: systemColorScheme,
+                    systemColorScheme: systemColorSchemeForTheme,
                     accentFamily: container.accentFamily
                 )
             )
         }
         .appContainer(container)
-        .preferredColorScheme(container.appearancePreference.preferredColorScheme)
+        .preferredColorScheme(preferredColorSchemeForStage)
         .ambitionTheme(resolvedTheme)
+    }
+
+    private var effectiveSystemColorScheme: ColorScheme {
+        #if DEBUG
+        if let override = container.debugSystemThemeModeOverride {
+            return override == .dark ? .dark : .light
+        }
+        #endif
+        return systemColorScheme
+    }
+
+    private var effectivePreferredColorScheme: ColorScheme? {
+        #if DEBUG
+        if container.appearancePreference == .system,
+           let override = container.debugSystemThemeModeOverride {
+            return override == .dark ? .dark : .light
+        }
+        #endif
+        return container.appearancePreference.preferredColorScheme
     }
 
     @ViewBuilder
