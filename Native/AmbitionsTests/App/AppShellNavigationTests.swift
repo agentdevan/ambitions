@@ -125,7 +125,11 @@ final class AppShellNavigationTests: XCTestCase {
         let destinationTitles = Set(destinations.map(\.title))
         let destinationIdentifiers = Set(destinations.map(\.accessibilityIdentifier))
         let forbiddenRootTokens = [
+            "activity",
+            "analytics",
             "capture",
+            "chatbot",
+            "dashboard",
             "search",
             "motion",
             "proof",
@@ -137,6 +141,10 @@ final class AppShellNavigationTests: XCTestCase {
             "trust",
             "plan",
             "profile",
+            "productivity",
+            "score",
+            "streak",
+            "task",
             "habits",
             "insights"
         ]

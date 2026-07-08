@@ -6,7 +6,7 @@ Owner: Codex frontend remediation operator
 Repository: agentdevan/ambitions
 Branch: frontend-flagship-shippability-remediation
 Session start SHA: 9362e940eec5e7d118df418d00022c3588df6610
-Current packet: Packet 2.3 - No-Dashboard / No-Task-App Guardrail (next after Packet 2.2 closeout)
+Current packet: Packet 2.4 - Architecture Hygiene When Touched (next after Packet 2.3 closeout)
 
 This ledger is process evidence only. It is not product acceptance, owner visual acceptance, release proof, accessibility proof, Visual Green, Accessibility Green, or Release Green.
 
@@ -29,8 +29,8 @@ No packet may be marked Done by Codex in this program.
 
 - Branch: `frontend-flagship-shippability-remediation`
 - Base SHA: `9362e940eec5e7d118df418d00022c3588df6610`
-- Current packet status: Packet 2.2 has source/runtime/simulator proof and is Yellow / Ready For Review.
-- Working tree expectation: after Packet 2.2 commit, the next unresolved packet is Packet 2.3.
+- Current packet status: Packet 2.3 has source/build proof and is Yellow / Ready For Review.
+- Working tree expectation: after Packet 2.3 commit, the next unresolved packet is Packet 2.4.
 - Linear: not touched this session; local ledger is the active progress record.
 - Xcode: `Xcode 26.6`, build `17F113`
 - Simulator used: iPhone 17 Pro Max, iOS 26.5, UDID `DD9B9C84-7188-48FA-AA2A-AB5C1D0EE2B6`
@@ -212,7 +212,7 @@ Surface maturity acceptance:
 | --- | --- | --- | --- |
 | 2.1 Root IA Law Lock | Ready For Review | Project 1 no longer Red at shell level | Tests proving roots only Today/Goals/Time/You |
 | 2.2 Motion-as-Behavior Cleanup | Ready For Review | IA tests stable | No Motion root destination, transition/reflow proof |
-| 2.3 No-Dashboard / No-Task-App Guardrail | Backlog | IA law stable | Explicit anti-drift checks and mapped repair list |
+| 2.3 No-Dashboard / No-Task-App Guardrail | Ready For Review | IA law stable | Explicit anti-drift checks and mapped repair list |
 | 2.4 Architecture Hygiene When Touched | Backlog | After touched source paths are known | Governance check and canonical owner evidence |
 
 ### Project 3 - Core Surface Flagship Maturity
@@ -728,6 +728,139 @@ Remaining visual deltas:
 - Packet 2.2 does not produce transition animation screenshots, haptic proof, or physical-device Motion proof.
 - Motion behavior is source/runtime proven, not visually accepted by an owner and not Visual Green.
 - Broader dashboard/task-app anti-drift remains Packet 2.3.
+
+Passing tests did not determine this status. The status is based on source proof, runtime proof, screenshot inspection, repair-loop completion, and fidelity to the Ambitions premium frontend target: premium roots, native light/dark drilldowns and entire frontend, deeply inspectable object surfaces, and realistic SwiftUI proportions.
+
+### Packet 2.3 - No-Dashboard / No-Task-App Guardrail
+
+Status: Yellow / Ready For Review
+
+Target:
+- Add explicit bounded guardrails against dashboard, task-app, habit-app, chatbot, AI-wrapper, productivity-score, streak, KPI, analytics, and activity-feed collapse.
+- Identify dashboard-like compatibility components that need later surface repair without redesigning all surfaces in this packet.
+- Preserve deep-not-wide product law: roots remain Today / Goals / Time / You, while Capture, Search, Motion, Proof, Source, Privacy, History, and Receipts stay global/contextual/inspectable layers.
+
+Depth map before coding:
+- Root state: Today / Goals / Time / You remain the only persistent roots; no new root, module menu, dashboard, task board, habit tracker, chatbot, analytics, activity feed, or productivity-score destination may be added.
+- Valid drilldowns: no new drilldowns in this packet; existing contextual object/detail routes remain allowed only when reached from canonical roots, Capture, or Search.
+- Invalid extra surfaces: separate dashboard root, task root, habit root, analytics/Insights root, AI/chatbot surface, productivity report, score/streak surface, Motion dashboard, Capture inbox, Proof/History/Receipts root.
+- Object types involved: SurfaceLaw contracts, forbidden user-facing language policy, root object acceptance audits, dashboard-named projection compatibility types, and source/test guardrails.
+- Inspection details: the guardrail must make known dashboard-named compatibility debt visible and prevent it from growing silently.
+- Edit/control paths: source/test/control-plane guardrails only; no product route redesign, no visual redesign, and no data mutation changes in this packet.
+- Receipt/proof/history paths: no new receipts; proof is source/test/build/governance output plus the explicit debt mapping in this ledger.
+- Accessibility expectations: no new UI, but primary accessibility labels/copy must remain protected from dashboard/chatbot/AI/score/streak language.
+- Screenshot proof required: no new screenshot is required unless a source change affects rendered UI. Packet 2.3 is not allowed to claim visual maturity from source-only guardrails.
+
+Visual Delta:
+- Current screenshot/source state: Packet 2.1 proves the root dock renders only Today, Goals, Time, You, and Packet 2.2 removes stale Motion-as-screen proof residue. Source still contains compatibility names and concepts such as `TodayDashboard`, `GoalsDashboard`, `TimeRitualsDashboard`, `YouDashboard`, `InsightsDashboard`, dashboard builders/projections, and ritual/habit/task compatibility semantics. Some audits already reject dashboard-like root report panels, but there is no single anti-drift inventory that freezes dashboard-named production source debt or blocks new task/habit/chatbot/productivity root archetypes at the SurfaceLaw/primary-copy level.
+- Target screenshot/source state: root IA remains unchanged; source guardrails explicitly reject new dashboard/task/habit/chatbot/AI-wrapper/productivity-score/streak/KPI/activity-feed root drift; known dashboard-named compatibility components are mapped as later surface repair debt and cannot grow silently.
+- Gap from desired premium frontend target: existing dashboard-named model/projection vocabulary can keep teaching future agents that Ambitions is a dashboard/productivity app, even when rendered roots avoid those words. Without an executable inventory, new dashboard-like components can be added while Packet 2.1 root IA tests still pass.
+- Exact visual deltas to close: no direct visual redesign in this packet; prevent future visual regression into dashboard/card-wall/task-app/chatbot patterns by enforcing the active language and archetype law in tests/audits.
+- Exact inspectability deltas to close: add executable checks for forbidden root archetype terms, primary-copy terms, and dashboard-named compatibility debt growth; record the current debt list for later surface maturity packets.
+- Exact realism/proportion deltas to close: no proportion changes; the guardrail must protect realistic SwiftUI surfaces from future fantasy dashboard panels and generic productivity screens.
+- Likely files: `Native/Ambitions/Surfaces/SurfaceLaw.swift`, `Native/Ambitions/Language/ForbiddenTopLevelTerms.swift`, existing quality/app tests under `Native/AmbitionsTests/`, and this ledger.
+- Product-law risks: adding a guardrail must not create new root surfaces, broad architecture nouns, or dashboard replacement architecture; it must not forbid valid Step object language by banning the SwiftUI `.task` modifier or all internal `GoalMode.habit` compatibility semantics.
+- Accessibility risks: source-only guardrails do not prove manual VoiceOver quality; copy/a11y term filters can only block known forbidden language.
+- Proof required: focused anti-drift source tests, `git diff --check`, XcodeGen, architecture/green/vocabulary/local-first/governance scans, and broad `frontend-remediation` build-for-testing after Swift/test changes.
+- Self-review criteria: new tests fail if dashboard/task/habit/chatbot/AI-wrapper/productivity-score/streak/KPI/activity-feed terms become top-level/root grammar; known dashboard-named production files are explicitly enumerated; no new UI route/surface is added; existing root IA law remains intact.
+- Repair-loop conditions: if tests expose a small repairable forbidden root/copy drift, repair it inside Packet 2.3; if the failure requires redesigning Today/Goals/Time/You/Capture/Search surfaces, map it to later surface maturity packets and stop rather than widening this packet.
+
+Known dashboard-like compatibility debt mapped for later packets:
+- `Native/Ambitions/Surfaces/Today/Projection/TodayDashboardState.swift` - projection naming debt; later Today maturity must prove the root reads as Reality Window / Start Here rather than dashboard state.
+- `Native/Ambitions/Surfaces/Goals/Projection/GoalsDashboardState.swift` - projection naming debt; later Goals maturity must prove Life Area Atlas state legibility, not a generic goal dashboard.
+- `Native/Ambitions/Surfaces/Time/Projection/TimeRitualsDashboardState.swift` and `Native/Ambitions/Surfaces/Time/Projection/TimeRitualsDashboardBuilder.swift` - compatibility naming debt; later Time maturity must avoid ritual/habit dashboard collapse.
+- `Native/Ambitions/Surfaces/You/Projection/YouDashboardModels.swift` and `Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceDashboardProjection.swift` - projection naming debt; later You maturity must feel like native settings/profile, not an admin dashboard.
+- `Native/Ambitions/Surfaces/You/Projection/InsightsDashboardState.swift` and `Native/Ambitions/Surfaces/You/Projection/YouHistoryDashboardBuilder.swift` - legacy Insights/dashboard naming debt; later You/history/reviews work must keep Insights contextual, not root IA.
+- `Native/Ambitions/DesignSystem/ProductObjects/TimeRitualViews.swift` - ritual/habit/task semantics need later visual proof that they do not become a habit tracker or task manager.
+
+Packet 2.3 does not claim these debts are fixed; it freezes and maps them while adding bounded anti-drift enforcement.
+
+Implementation completed:
+- Expanded `SurfaceLaw.blockedRootRawValues` to block dashboard/task/habit/chatbot/AI/analytics/score/streak/KPI/activity-feed archetypes as persistent root raw values.
+- Added `SurfaceLaw.rootArchetypeDriftTerms` and root contract validation so Today / Goals / Time / You contracts fail if their root title/object grammar collapses into dashboard, task manager, habit tracker, chatbot, AI wrapper, productivity score, KPI, streak, or activity feed language.
+- Expanded `ForbiddenTopLevelTerms` so primary product copy rejects dashboard/task/habit/chatbot/AI-wrapper/productivity-score/streak/KPI/activity-feed language.
+- Added `NoDashboardTaskAppGuardrailTests` to prove the broader root-archetype blocks, primary-copy blocks, and exact current dashboard-named production debt inventory.
+- Tightened existing AppShellNavigation, ScenarioMatrix, and SurfacesCanonicalOwnership tests to include the broader anti-drift terms.
+- Did not redesign any root surface, drilldown, overlay, or product object in this packet.
+
+Visual inspection notes:
+- No UI screenshots were required or captured because Packet 2.3 changed source/test guardrails only and did not alter rendered UI.
+- The packet cannot claim visual maturity, root surface improvement, drilldown quality, or owner visual acceptance.
+- The known dashboard-named production files remain compatibility debt for later surface maturity work; this packet only prevents untracked expansion and blocks root/copy drift.
+
+Visual Scorecard:
+- Native iOS quality: 4 for preserving root IA and avoiding new non-native UI.
+- Visual hierarchy: 4 because no additional root, panel, dashboard, score, or feed hierarchy was introduced.
+- Surface identity: 4 because the law now explicitly rejects dashboard/task/habit/chatbot/productivity root grammar.
+- Object inspectability: 4 because the known dashboard-named compatibility debt is executable and ledger-mapped.
+- Light/dark quality: 4 because no appearance implementation changed and no dark-only/light-only UI was introduced.
+- Material restraint: 4 because no cards, panels, borders, glass, or material surfaces were added.
+- Typography and spacing: 4 because no rendered typography/spacing changed.
+- Interaction clarity: 4 because Capture/Search/Motion/trust layers remain non-root and no new generic workflow surface was added.
+- SwiftUI realism / proportions: 4 because the packet blocks future dashboard/productivity surface drift without adding fantasy UI geometry.
+- Similarity to Ambitions premium frontend target: 4 for product-law enforcement; visual surface maturity still belongs to later packets.
+- Final self-score: 4.0 average, Yellow / Ready For Review within source/build proof ceilings.
+
+Frontend-wide evaluation:
+- Root quality: root law is stricter; rendered root quality was not changed or accepted.
+- Drilldown/sub-surface quality: not changed; weak or dashboard-like drilldowns remain later surface maturity risk.
+- Light/dark quality: not changed; Packet 1.3 remains the active appearance proof.
+- Object inspectability: current dashboard-named source debt is explicitly inspectable and frozen by tests.
+- SwiftUI realism / proportions: no new unrealistic UI; future realism is protected by anti-drift guardrails, not proven visually here.
+
+Repair cycles performed:
+- 1: Initial focused test wrapper attempts used unsupported `--suite` arguments and exited before executing tests; reran with supported `--batch` / `--test` syntax.
+- 2: Initial parallel Xcode focused lanes caused `build.db` lock failures with `EXECUTED_TESTS=0`; reran the focused lanes sequentially.
+- 3: Warmed sequential focused reruns passed for the new guardrail test, forbidden-language matrix test, app-shell root IA token test, and surface ownership raw-value test.
+
+Remaining visual deltas:
+- Existing dashboard-named compatibility files are still not repaired or renamed.
+- Today, Goals, Time, You, Capture, Search, You history/reviews, and drilldowns still require later visual/product maturity proof that they do not feel like dashboard/task/habit/chatbot/productivity surfaces.
+- No screenshots, physical-device proof, or manual VoiceOver proof were produced in Packet 2.3.
+
+Validation run:
+- `git diff --check`: exit 0.
+- `xcodegen generate`: exit 0.
+- `python3 scripts/ambitions-architecture-inventory.py`: exit 0; `GREEN final-tree parity achieved`.
+- `python3 scripts/ambitions-green-standard-audit.py`: exit 0; no disallowed architecture-as-UI strings in active primary UI source.
+- `python3 scripts/ambitions-vocabulary-drift-scan.py`: exit 0; canonical and active vocabulary terms present and explicit ban terms absent.
+- `python3 scripts/ambitions-local-first-boundary-scan.py`: exit 0; local-first/account/R2/hosted-AI boundary checks passed in active authority files.
+- `python3 scripts/ambitions-remediation-governance-check.py`: exit 0; `GREEN remediation governance guard passed`.
+- `./scripts/ambitions-xcode-test-focused.sh --batch packet-2.3-no-dashboard-guardrail-rerun --test AmbitionsTests/NoDashboardTaskAppGuardrailTests --timeout 15m --kill-after 60s --without-building`: exit 0; 4 tests executed, 0 failures.
+- `./scripts/ambitions-xcode-test-focused.sh --batch packet-2.3-forbidden-language-rerun --test AmbitionsTests/ScenarioMatrixTests/testForbiddenLanguageTermsRejectOldRootCanon --timeout 15m --kill-after 60s --without-building`: exit 0; 1 test executed, 0 failures.
+- `./scripts/ambitions-xcode-test-focused.sh --batch packet-2.3-root-ia-token-rerun --test AmbitionsTests/AppShellNavigationTests/testRootIALawRejectsGlobalBehaviorAndTrustLayersAsDockDestinations --timeout 15m --kill-after 60s --without-building`: exit 0; 1 test executed, 0 failures.
+- `./scripts/ambitions-xcode-test-focused.sh --batch packet-2.3-surface-ownership --test AmbitionsTests/SurfacesCanonicalOwnershipTests/testPersistentRootSurfacesRejectRemovedSurfaceNames --timeout 15m --kill-after 60s`: exit 0; 1 test executed, 0 failures.
+- `./scripts/ambitions-xcode-build-for-testing.sh --batch frontend-remediation`: exit 0; build-for-testing passed.
+
+Proof artifacts:
+- `.codex/xcode-summaries/packet-2.3-no-dashboard-guardrail-rerun/20260708T045736Z-AmbitionsTests-NoDashboardTaskAppGuardrailTests-24158-30964/extract/summary.json`
+- `.codex/xcode-results/packet-2.3-no-dashboard-guardrail-rerun/20260708T045736Z-AmbitionsTests-NoDashboardTaskAppGuardrailTests-24158-30964/focused-test.xcresult`
+- `.codex/xcode-summaries/packet-2.3-forbidden-language-rerun/20260708T045918Z-AmbitionsTests-ScenarioMatrixTests-testForbiddenLanguageTermsRejectOldRootCanon-24929-12756/extract/summary.json`
+- `.codex/xcode-results/packet-2.3-forbidden-language-rerun/20260708T045918Z-AmbitionsTests-ScenarioMatrixTests-testForbiddenLanguageTermsRejectOldRootCanon-24929-12756/focused-test.xcresult`
+- `.codex/xcode-summaries/packet-2.3-root-ia-token-rerun/20260708T050050Z-AmbitionsTests-AppShellNavigationTests-testRootIALawRejectsGlobalBehaviorAndTrus-25645-20627/extract/summary.json`
+- `.codex/xcode-results/packet-2.3-root-ia-token-rerun/20260708T050050Z-AmbitionsTests-AppShellNavigationTests-testRootIALawRejectsGlobalBehaviorAndTrus-25645-20627/focused-test.xcresult`
+- `.codex/xcode-summaries/packet-2.3-surface-ownership/20260708T044520Z-AmbitionsTests-SurfacesCanonicalOwnershipTests-testPersistentRootSurfacesRejectR-18272-19664/extract/summary.json`
+- `.codex/xcode-results/packet-2.3-surface-ownership/20260708T044520Z-AmbitionsTests-SurfacesCanonicalOwnershipTests-testPersistentRootSurfacesRejectR-18272-19664/focused-test.xcresult`
+- `.codex/xcode-summaries/frontend-remediation/20260708T050223Z/extract/summary.json`
+- `.codex/xcode-results/frontend-remediation/20260708T050223Z-bft-26336-14843/build-for-testing.xcresult`
+
+Validation not counted as proof:
+- `./scripts/ambitions-xcode-test-focused.sh --suite ...`: exit 1 unsupported arg, zero tests executed.
+- Initial parallel focused runs for Packet 2.3 guardrail and forbidden-language lanes: exit 65 from Xcode build database lock, zero tests executed.
+
+Validation not run:
+- Screenshot/UI lanes: not run because Packet 2.3 changed only source/test guardrails and no rendered UI.
+- Physical-device proof: unavailable in this environment.
+- Manual VoiceOver proof: not performed.
+
+Known risks:
+- Source guardrails can prevent new forbidden root/copy drift but cannot prove existing surfaces feel premium.
+- Dashboard-named production compatibility debt remains and may keep shaping future source decisions until later surface packets repair or rename it.
+- Existing `GoalMode.habit`, `.task` SwiftUI modifiers, and legacy dashboard model names remain intentional compatibility/debt contexts, not visual acceptance.
+
+Follow-up required:
+- Packet 2.4 - Architecture Hygiene When Touched.
+- Later Project 3 / 4 / 6 packets must repair actual rendered dashboard/task/habit/chatbot/productivity feel where screenshots or source prove it.
 
 Passing tests did not determine this status. The status is based on source proof, runtime proof, screenshot inspection, repair-loop completion, and fidelity to the Ambitions premium frontend target: premium roots, native light/dark drilldowns and entire frontend, deeply inspectable object surfaces, and realistic SwiftUI proportions.
 
