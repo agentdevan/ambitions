@@ -276,6 +276,97 @@ final class YouSurfaceUITests: AmbitionsUITestCase {
             captureYouScreenshot(named: item.name, in: app)
             app.terminate()
         }
+
+        try capturePacket37YouNativeSettingsMaturityScreenshots()
+    }
+
+    private func capturePacket37YouNativeSettingsMaturityScreenshots() throws {
+        let rootApp = makeApp(
+            bootstrapMode: "preview",
+            extraEnvironment: [
+                "AmbitionsInitialSurface": "you",
+                "AmbitionsScreenshotMode": "YES"
+            ]
+        )
+        rootApp.launch()
+
+        XCTAssertTrue(rootApp.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(rootApp.staticTexts["Your settings"].waitForExistence(timeout: 10))
+        XCTAssertTrue(rootApp.staticTexts["On this iPhone"].waitForExistence(timeout: 10))
+        XCTAssertTrue(rootApp.descendants(matching: .any)["you.settings.row.personal-system"].waitForExistence(timeout: 10))
+        XCTAssertTrue(rootApp.descendants(matching: .any)["you.settings.row.local-data-controls"].waitForExistence(timeout: 10))
+        XCTAssertTrue(rootApp.descendants(matching: .any)["you.settings.row.privacy"].waitForExistence(timeout: 10))
+        XCTAssertFalse(rootApp.staticTexts["Open Field"].exists)
+        captureYouScreenshot(named: "packet-3.7-you-native-settings-root", in: rootApp)
+        XCTAssertTrue(scrollUntilElementExists("you.settings.row.capture-preferences", in: rootApp, maxAttempts: 8))
+        rootApp.terminate()
+
+        let largeTypeApp = makeApp(
+            bootstrapMode: "preview",
+            extraEnvironment: [
+                "AmbitionsInitialSurface": "you",
+                "AmbitionsScreenshotMode": "YES"
+            ],
+            contentSizeCategory: "UICTContentSizeCategoryAccessibilityXL"
+        )
+        largeTypeApp.launch()
+
+        XCTAssertTrue(largeTypeApp.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(largeTypeApp.staticTexts["On this iPhone"].waitForExistence(timeout: 10))
+        XCTAssertTrue(largeTypeApp.descendants(matching: .any)["you.settings.row.personal-system"].waitForExistence(timeout: 10))
+        captureYouScreenshot(named: "packet-3.7-you-native-settings-large-dynamic-type", in: largeTypeApp)
+        XCTAssertTrue(scrollYouContentToVisible(identifier: "you.settings.row.capture-preferences", in: largeTypeApp))
+        largeTypeApp.terminate()
+
+        let localDataApp = makeApp(
+            bootstrapMode: "preview",
+            extraEnvironment: [
+                "AmbitionsInitialSurface": "you",
+                "AmbitionsScreenshotMode": "YES",
+                "AmbitionsYouDetail": "local-data"
+            ]
+        )
+        localDataApp.launch()
+
+        XCTAssertTrue(localDataApp.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(localDataApp.descendants(matching: .any)["you.local-data-status-control-group"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilStaticTextExists("Privacy / Local Data Controls", in: localDataApp, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("No hosted account", in: localDataApp, maxAttempts: 8))
+        localDataApp.terminate()
+
+        let privacyApp = makeApp(
+            bootstrapMode: "preview",
+            extraEnvironment: [
+                "AmbitionsInitialSurface": "you",
+                "AmbitionsScreenshotMode": "YES",
+                "AmbitionsYouDetail": "privacy"
+            ]
+        )
+        privacyApp.launch()
+
+        XCTAssertTrue(privacyApp.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(privacyApp.descendants(matching: .any)["you.trust-center-card"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilStaticTextExists("Receipts, corrections, and explanations", in: privacyApp, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Why this?", in: privacyApp, maxAttempts: 8))
+        captureYouScreenshot(named: "packet-3.7-you-privacy-detail", in: privacyApp)
+        privacyApp.terminate()
+
+        let capturePreferencesApp = makeApp(
+            bootstrapMode: "preview",
+            extraEnvironment: [
+                "AmbitionsInitialSurface": "you",
+                "AmbitionsScreenshotMode": "YES",
+                "AmbitionsYouDetail": "capture"
+            ]
+        )
+        capturePreferencesApp.launch()
+
+        XCTAssertTrue(capturePreferencesApp.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(capturePreferencesApp.descendants(matching: .any)["you.capture-preferences-control-group"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilStaticTextExists("Capture preferences", in: capturePreferencesApp, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Capture remains a global composer", in: capturePreferencesApp, maxAttempts: 8))
+        captureYouScreenshot(named: "packet-3.7-you-capture-preferences-detail", in: capturePreferencesApp)
+        capturePreferencesApp.terminate()
     }
 
     func testYouLifeContextHeroCTAsExpandCatchUpAndReviewRoutes() throws {

@@ -48,12 +48,12 @@ extension AmbitionsUITestCase {
     }
 
     func captureYouScreenshot(named name: String, in app: XCUIApplication) {
+        XCTAssertTrue(app.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
         let screenshot = XCUIScreen.main.screenshot()
         let attachment = XCTAttachment(screenshot: screenshot)
         attachment.name = name
         attachment.lifetime = .keepAlways
         add(attachment)
-        XCTAssertTrue(app.descendants(matching: .any)["you.screen"].exists)
     }
 
     func captureAMB967Screenshot(named name: String, in app: XCUIApplication) {

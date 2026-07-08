@@ -9,7 +9,6 @@ struct YouRootDetailRouteSurface: View {
     @Environment(\.appPlatformCapability) private var appPlatformCapability
     @Environment(\.appUserSystemCapability) private var appUserSystemCapability
     @Environment(\.ambitionTheme) private var theme
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: YouViewModel
 
     let detail: YouRootDetail
@@ -60,7 +59,6 @@ struct YouRootDetailRouteSurface: View {
         .accessibilityIdentifier("you.screen")
         .accessibilityLabel("\(detail.title). You detail.")
         .accessibilityHint("Review this User System Profile detail.")
-        .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
         .task {
             await viewModel.load(using: featureFactory.youService)
             syncAppearanceFromLoadedDashboard()

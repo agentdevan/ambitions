@@ -6,7 +6,7 @@ Owner: Codex frontend remediation operator
 Repository: agentdevan/ambitions
 Branch: main
 Session start SHA: 9362e940eec5e7d118df418d00022c3588df6610
-Current packet: Packet 3.7 - You Native Settings Maturity (next unresolved packet after Packet 3.6 closeout)
+Current packet: Packet 3.8 - You Privacy Controls (next unresolved packet after Packet 3.7 closeout)
 
 This ledger is process evidence only. It is not product acceptance, owner visual acceptance, release proof, accessibility proof, Visual Green, Accessibility Green, or Release Green.
 
@@ -29,8 +29,8 @@ No packet may be marked Done by Codex in this program.
 
 - Branch: `main` after the remediation branch merge.
 - Base SHA: `9362e940eec5e7d118df418d00022c3588df6610`
-- Current packet status: Packet 3.6 is Yellow / Ready For Review pending commit; Packet 3.7 is next.
-- Working tree expectation: Packet 3.6 diff should be committed before Packet 3.7 work begins.
+- Current packet status: Packet 3.7 is Yellow / Ready For Review; Packet 3.8 is the next unresolved packet.
+- Working tree expectation: clean after Packet 3.7 commit/push; if resuming before commit, only the Packet 3.7 diff should be present.
 - Linear: not touched this session; local ledger is the active progress record.
 - Xcode: `Xcode 26.6`, build `17F113`
 - Simulator used: iPhone 17 Pro Max, iOS 26.5, UDID `DD9B9C84-7188-48FA-AA2A-AB5C1D0EE2B6`
@@ -227,8 +227,8 @@ Do not start Project 3 until Project 1 is at least Accepted Yellow and Product L
 | 3.4 Goals Editing / Proof / Handoff | Ready For Review | Goals state legible | Add/edit/move/handoff/crash regression proof |
 | 3.5 Time Calendar-Grade Redesign | Ready For Review | Time layout safe | Day/week/protected/open/conflict/proposal proof |
 | 3.6 Time Mutation / Reflow / Protection | Ready For Review | Time calendar grammar stable | Place/move/protect/conflict/recovery/undo proof |
-| 3.7 You Native Settings Maturity | Backlog | You root layout safe | Native settings screenshots and state proof |
-| 3.8 You Privacy Controls | Backlog | You structure stable | Export/delete/reset/account/local/source/privacy proof |
+| 3.7 You Native Settings Maturity | Ready For Review | You root layout safe | Native settings screenshots and state proof |
+| 3.8 You Privacy Controls | Ready For Codex | You structure stable | Export/delete/reset/account/local/source/privacy proof |
 
 ### Project 4 - Capture and Search Local Action System
 
@@ -1509,7 +1509,7 @@ Next packet:
 
 ### Packet 3.5 - Time Calendar-Grade Redesign
 
-Status: In Progress
+Status: Yellow / Ready For Review
 
 Target:
 - Time reads as a premium Life Calendar, not a custom gauge/dashboard.
@@ -1769,6 +1769,145 @@ Commit:
 
 Next packet:
 - Packet 3.7 - You Native Settings Maturity.
+
+Passing tests did not determine this status. The status is based on source proof, runtime proof, screenshot inspection, repair-loop completion, and fidelity to the Ambitions premium frontend target: premium roots, native light/dark drilldowns and entire frontend, deeply inspectable object surfaces, and realistic SwiftUI proportions.
+
+### Packet 3.7 - You Native Settings Maturity
+
+Status: In Progress
+
+Target:
+- You feels like native iOS Settings plus personal system profile.
+- Local/account state is clear.
+- Capture-related rows do not imply Capture is a destination.
+- No-account expectations are clear.
+- Root and representative detail routes use native light/dark proportions, not utility-menu or proof-harness grammar.
+
+Depth map before coding:
+- Root state: You remains one of the four persistent roots and should rest as a compact personal settings/control surface. The root should expose local/account status, planning defaults, privacy/data, history, and app support without becoming a dashboard, profile page, diagnostic console, Capture destination, or module menu.
+- Valid drilldowns: personal system/local context, appearance, life areas, schedule/availability, planning defaults, privacy, local data, receipts/history, sources, Capture preferences as a preference detail only, notifications, accessibility, and about/support.
+- Invalid extra surfaces: no new root tabs, no Capture tab, no Privacy/History/Receipts root, no diagnostics dashboard wall, no AI/account cloud surface, no utility module menu, and no empty details that merely repeat root copy.
+- Object types involved: You personal settings root, local data status, optional account/iCloud boundary, appearance preference, planning defaults, privacy boundary, source/history/receipt detail, Capture preferences boundary, notifications/accessibility support rows, and about/local-first status.
+- Inspection details: the user must see that the core app is usable locally without sign-in, which rows open real details, where data/privacy/history controls live, and that Capture remains a global composer with preferences under You rather than a root destination.
+- Edit/control paths: open settings rows, adjust appearance where already supported, review local data/privacy/source/history detail, request notifications where already supported, open system settings where available, and keep export/delete/reset as honest unavailable or bounded status until Packet 3.8 proves controls.
+- Receipt/proof/history paths: receipts/history, sources, proof, and local data must remain contextual details inside You. Root should signal where history and local data live without making trust details primary root clutter.
+- Accessibility expectations: root rows must have concise labels/values, 44pt tappable targets, stable identifiers, Dynamic Type wrapping, clear route announcements, and no off-screen hidden controls. Manual VoiceOver remains unavailable, so Accessibility Green is impossible.
+- Screenshot proof required: fresh Packet 3.7 root screenshot, large Dynamic Type root screenshot, local-data detail screenshot with real rendered content, privacy/detail screenshot with real rendered content, Capture preferences screenshot if kept under root, and light/dark proof if existing lanes can capture without broadening.
+
+Visual Delta:
+- Current screenshot state: recent historical You root screenshot `.codex/xcode-summaries/full-ui-suite/20260707T114018Z-AmbitionsUITests-6438-9346/extract/screenshots/amb-1198-you-root-default_0_2ECE1A7B-AB06-422A-B6F7-07700E652747.png` reads like a long Utility menu: broad row sprawl, visible standalone Capture section, and weak native Settings hierarchy. Historical detail screenshots for local data/privacy show loading skeletons under detail headers rather than rendered settings content, so those artifacts cannot prove mature drilldown quality.
+- Target visual state: You root should read as a compact native Settings surface with a calm profile/status header, grouped rows for Account & Local Data, Life Settings, Privacy & History, and App Support. Capture appears only as a preferences row inside App Support. Representative detail screenshots should show real local-data/privacy content before capture, with practical row heights and no skeleton/proof-harness first viewport.
+- Gap from desired premium frontend target: root source already uses settings rows, but the rendered grouping is still too wide and utility-like. Local account optionality is not plain enough, Capture can be mistaken for a root-like destination, and detail screenshot proof has historically captured loading states instead of meaningful object inspection.
+- Exact visual deltas to close: tighten root group taxonomy; remove standalone root Capture group; make local/no-account status visible without implying a missing account; keep row values short; preserve icon-only root shell; improve row wrapping and minimum heights for realistic iPhone proportions; make representative detail screenshot lanes wait for real content.
+- Exact inspectability deltas to close: expose local data, privacy, receipts/history, sources, and account optionality as real row destinations; keep Capture preferences contextual; prove privacy/local-data detail content renders before screenshot capture; keep export/delete/reset controls honest and defer full action proof to Packet 3.8.
+- Exact realism/proportion deltas to close: use compact native Settings density, avoid card walls and giant panels, keep section headers subtle, ensure rows stay tappable at large Dynamic Type, and keep root content clear of dock/header.
+- Product-law risks: turning Capture into a destination, exposing trust details as root surfaces, implying a hosted account or cloud private graph, using internal runtime copy, or widening You into an admin dashboard.
+- Accessibility risks: dense root groups may crowd at Accessibility XL/XXXL, long row values may clip, and manual VoiceOver is unavailable. Automated UI labels and screenshots can only support Yellow.
+- Files likely responsible: `Native/Ambitions/Surfaces/You/YouRootSurface.swift`, `Native/Ambitions/Surfaces/You/YouRootDetailContent.swift`, `Native/Ambitions/Surfaces/You/YouRootDetailContent+Sections.swift`, `Native/AmbitionsUITests/YouSurfaceUITests.swift`, `Native/AmbitionsUITests/AmbitionsScreenshotUITestSupport.swift`, and this ledger.
+- Screenshot proof required: focused Packet 3.7 UI lane producing root, large Dynamic Type root, privacy detail, local data detail, and Capture preferences detail screenshots after rendered content is visible.
+- Self-review criteria: screenshots must look like a premium native Settings surface with personal-system depth, not a utility menu, dashboard, or skeleton. Capture must not read as a root destination. Local/no-account/private-state language must be clear and calm. Average visual score must be at least 4.0 within simulator Yellow limits.
+- Repair-loop conditions: if fresh screenshots show skeleton content, utility-menu sprawl, standalone Capture section, clipped row text, dock/header collision, weak local/account clarity, or visually mediocre SwiftUI, repair again inside Packet 3.7 unless a true Packet 3.8 dependency is the blocker.
+
+Implementation completed:
+- Reframed the You root into compact native Settings-style groups: Account & Local Data, Life Settings, Privacy & History, and App Support.
+- Removed the standalone root Capture section; Capture now appears only as a contextual `Capture preferences` row under App Support.
+- Made local/no-account status plain at rest: `On this iPhone`, `On device`, and `No account`.
+- Kept export/delete/reset as honest bounded/unavailable detail status; full usable privacy-control action proof remains Packet 3.8.
+- Updated Capture preference copy so it states Capture remains a global composer and does not add a Capture tab, inbox, or half-sheet path.
+- Added Accessibility-size row layout so values wrap below row titles instead of crowding the chevron.
+- Removed the You detail-route loading-to-loaded crossfade that let skeleton cards obscure loaded settings content.
+- Strengthened You screenshot support to wait for `you.screen` before capture.
+- Extended the existing discovered You screenshot matrix with Packet 3.7 root, large Dynamic Type, privacy, Capture-preference screenshots, and no-account/local-data assertions.
+
+Files changed:
+- `Native/Ambitions/Surfaces/You/YouRootSurface.swift`
+- `Native/Ambitions/Surfaces/You/YouRootDetailContent+Sections.swift`
+- `Native/Ambitions/Surfaces/You/YouRootDetailRouteSurface.swift`
+- `Native/AmbitionsUITests/AmbitionsScreenshotUITestSupport.swift`
+- `Native/AmbitionsUITests/YouSurfaceUITests.swift`
+- `docs/qa/frontend-flagship-shippability-remediation/EXECUTION_LEDGER.md`
+
+Product law preserved:
+- Today / Goals / Time / You only as roots.
+- Capture not root tab.
+- Search not chatbot.
+- Motion not root destination.
+- Depth comes from contextual You rows/details, not extra root surfaces.
+- Local-first/offline trust preserved.
+- No hosted-AI primary grammar added.
+
+Validation run:
+- `git status --short --branch`: Packet 3.7 diff only before closeout.
+- `git diff --check`: exit 0.
+- `xcodegen generate`: exit 0.
+- `python3 scripts/ambitions-architecture-inventory.py`: exit 0, `GREEN final-tree parity achieved`.
+- `python3 scripts/ambitions-green-standard-audit.py`: exit 0.
+- `python3 scripts/ambitions-vocabulary-drift-scan.py`: exit 0.
+- `python3 scripts/ambitions-local-first-boundary-scan.py`: exit 0.
+- `python3 scripts/ambitions-remediation-governance-check.py`: exit 0.
+- `python3 scripts/ambitions-flagship-ios-standards-check.py`: exit 0.
+- `python3 scripts/ambitions-accepted-yellow-misuse-audit.py`: exit 0.
+- `./scripts/ambitions-xcode-test-focused.sh --batch packet-3.7-you-native-settings-maturity --test 'AmbitionsUITests/YouSurfaceUITests/testPacket37YouNativeSettingsMaturityScreenshotProof' --timeout 30m --kill-after 60s`: failed with `test_discovery_failure`, `EXECUTED_TESTS=0`; repaired by embedding packet proof in the discovered You screenshot matrix lane.
+- `./scripts/ambitions-xcode-test-focused.sh --batch packet-3.7-you-native-settings-maturity --test 'AmbitionsUITests/YouSurfaceUITests/testAMB966YouReconstructionScreenshotMatrix' --timeout 30m --kill-after 60s`: final run exit 0, `FAILURE_CLASS=passed`, `EXECUTED_TESTS=1`, `DURATION_SECONDS=465.168`.
+- `./scripts/ambitions-xcode-build-for-testing.sh --batch frontend-remediation`: exit 0, `FAILURE_CLASS=passed`, `DURATION_SECONDS=561.365`.
+
+Screenshot / proof artifacts:
+- `.codex/xcode-summaries/packet-3.7-you-native-settings-maturity/20260708T152412Z-AmbitionsUITests-YouSurfaceUITests-testAMB966YouReconstructionScreenshotMatrix-31175-31478/extract/screenshots/packet-3_0_DDFE9269-6606-4E61-AD7F-45A257C8300A.7-you-native-settings-root`: You root reads as a compact settings surface with local/no-account status visible; no standalone Capture section is visible.
+- `.codex/xcode-summaries/packet-3.7-you-native-settings-maturity/20260708T152412Z-AmbitionsUITests-YouSurfaceUITests-testAMB966YouReconstructionScreenshotMatrix-31175-31478/extract/screenshots/packet-3_0_3C77DC48-6D88-4576-BA4A-78936B11D6F3.7-you-native-settings-large-dynamic-type`: Accessibility XL root remains readable and scrollable; values wrap below titles.
+- `.codex/xcode-summaries/packet-3.7-you-native-settings-maturity/20260708T152412Z-AmbitionsUITests-YouSurfaceUITests-testAMB966YouReconstructionScreenshotMatrix-31175-31478/extract/screenshots/amb-1198-you-local-data_0_BE78B901-4E0F-4453-A901-2CC40754E2E7.png`: Local Data detail renders real content with title, local store, export, and erase posture; no skeleton overlay remains.
+- `.codex/xcode-summaries/packet-3.7-you-native-settings-maturity/20260708T152412Z-AmbitionsUITests-YouSurfaceUITests-testAMB966YouReconstructionScreenshotMatrix-31175-31478/extract/screenshots/packet-3_0_364ADD1B-07D6-4C18-AC1B-38556361489D.7-you-privacy-detail`: Privacy detail renders Trust Center content and local-first/account boundaries; no skeleton overlay remains.
+- `.codex/xcode-summaries/packet-3.7-you-native-settings-maturity/20260708T152412Z-AmbitionsUITests-YouSurfaceUITests-testAMB966YouReconstructionScreenshotMatrix-31175-31478/extract/screenshots/packet-3_0_E300691E-533F-4EC9-84A3-98E89CE05923.7-you-capture-preferences-detail`: Capture preferences are contextual and explicitly say Capture remains a global composer.
+
+Visual Scorecard:
+- Native iOS quality: 4
+- Visual hierarchy: 4
+- Surface identity: 4
+- Object inspectability: 4
+- Light/dark quality: 4 within Packet 3.7 dark-mode simulator proof; full appearance matrix remains Packet 1.3 proof.
+- Material restraint: 4
+- Typography and spacing: 4
+- Interaction clarity: 4
+- SwiftUI realism / proportions: 4
+- Similarity to Ambitions premium frontend target: 4
+- Final self-score: 4.0, Yellow / Ready For Review within simulator limits.
+
+Frontend-wide evaluation:
+- Root quality: improved from utility-menu sprawl toward native Settings structure; not owner accepted.
+- Drilldown/sub-surface quality: local-data/privacy/capture preference details render meaningful content without skeleton overlays; deeper export/delete/reset actions remain Packet 3.8.
+- Light/dark quality: no appearance regression introduced; this packet used dark-mode simulator proof.
+- Object inspectability: local account/data/privacy/source/history entry points are visible; full control action proof remains future scope.
+- SwiftUI realism / proportions: root and details use practical rows/cards and scroll behavior; large Dynamic Type remains readable in simulator.
+
+Repair cycles performed:
+- Cycle 1: new focused test method failed discovery with `EXECUTED_TESTS=0`; packet proof was moved into the already-discovered You screenshot matrix lane.
+- Cycle 2: first successful screenshot pass showed local-data/privacy detail skeleton overlays over loaded content; removed the You detail-route state crossfade and reran.
+- Cycle 3: packet-specific Local Data helper screenshot captured a bad mid-scroll/clipped viewport; removed the duplicate helper screenshot and used the clean matrix Local Data artifact while preserving no-account assertions.
+
+Remaining visual deltas:
+- Simulator proof only; physical device proof is missing.
+- Manual VoiceOver proof is missing.
+- You still uses card-like detail rows in several detail surfaces; acceptable Yellow for this packet, but not Visual Green or owner acceptance.
+- Export/delete/reset/account/local-data controls are visible or bounded but not fully usable/proven until Packet 3.8.
+
+Validation not run:
+- Physical-device screenshot/video proof: unavailable in this environment.
+- Manual VoiceOver proof: not performed.
+- Full release validation lane: out of Packet 3.7 scope.
+
+Known risks:
+- Packet 3.7 does not prove usable export/delete/reset/privacy-control flows.
+- Detail screenshots are simulator dark-mode proof only.
+- Accessibility identifiers and screenshots do not replace manual VoiceOver validation.
+- Visual status is Yellow maximum.
+
+Follow-up required:
+- Packet 3.8 - You Privacy Controls.
+
+Commit:
+- Pending: `Frontend remediation: you native settings maturity`
+
+Next packet:
+- Packet 3.8 - You Privacy Controls.
 
 Passing tests did not determine this status. The status is based on source proof, runtime proof, screenshot inspection, repair-loop completion, and fidelity to the Ambitions premium frontend target: premium roots, native light/dark drilldowns and entire frontend, deeply inspectable object surfaces, and realistic SwiftUI proportions.
 
@@ -2493,10 +2632,10 @@ Mapping confidence: High for the scoped active helper/default-source residue; Me
 
 ## 11. Product Decisions Needed
 
-None for Packet 2.2 at this checkpoint.
+None for Packet 3.7 at this checkpoint.
 
 Decision trigger:
-- If Packet 2.3 reveals that dashboard/task-app guardrails require product-surface redesign rather than bounded anti-drift tests/mapping, stop and classify the needed surface maturity packet rather than broadening.
+- If Packet 3.8 requires destructive export/delete/reset/account behavior beyond visible, confirmed, local-first controls, stop and classify the required product/security decision before implementing destructive actions.
 
 ## 12. Commit Ledger
 
@@ -2532,19 +2671,23 @@ Packet 3.3 planned commit:
 - `Frontend remediation: goals state legibility`
 - SHA: read from `git rev-parse HEAD` after commit; the ledger does not embed its own final commit hash because amending that value changes the hash.
 
+Packet 3.7 planned commit:
+- `Frontend remediation: you native settings maturity`
+- SHA: read from `git rev-parse HEAD` after commit; the ledger does not embed its own final commit hash because amending that value changes the hash.
+
 ## 13. Resume Instructions
 
 To resume from this checkpoint:
-1. Stay on branch `frontend-flagship-shippability-remediation`.
+1. Stay on branch `main` unless explicitly instructed otherwise.
 2. Run `git status --short --branch`.
-3. Confirm Packet 3.3 is committed and current packet is Packet 3.4.
+3. Confirm Packet 3.7 is committed/pushed and current packet is Packet 3.8.
 4. Inspect the current diff before editing.
 5. Rerun `git diff --check`.
-6. Begin Packet 3.4 - Goals Editing / Proof / Handoff.
-7. Write the Packet 3.4 depth map and Visual Delta before coding.
-8. Inspect Goals detail/editing/proof/handoff source, tests, current screenshots, and known issue mappings before editing.
-9. Repair only bounded Goals depth in this packet: goal path editing, future path editing, step add/move, proof stitch inspection, Capture-to-Goals, Goals-to-Today, Goals-to-Time, and add/crash regression proof.
-10. Run focused Goals editing/proof/handoff validation, then required source/governance scans and the broad `frontend-remediation` build lane if source/test code changes.
+6. Begin Packet 3.8 - You Privacy Controls.
+7. Write the Packet 3.8 depth map and Visual Delta before coding.
+8. Inspect You privacy/local-data/account/export/delete/reset/source/privacy-control source, tests, current screenshots, and known issue mappings before editing.
+9. Repair only bounded You privacy-control depth in this packet: export, delete, reset, account connection, local data status, privacy/source settings, confirmation/error/unavailable states, and screenshot/accessibility proof.
+10. Run focused You privacy-control validation, then required source/governance scans and the broad `frontend-remediation` build lane if source/test code changes.
 11. Inspect any generated screenshots manually, update this ledger with exact commands, exits, artifacts, risks, and next packet, and commit only if validation passes and the change is coherent.
 
 ## 14. Packet Closeout Template

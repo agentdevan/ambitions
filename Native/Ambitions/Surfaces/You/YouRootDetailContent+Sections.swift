@@ -5,16 +5,16 @@ import SwiftUI
 extension YouRootDetailContent {
     var captureSettingsSection: YouSectionGroup {
         YouSectionGroup(
-            title: "Capture",
-            subtitle: "Capture settings reflect the current global composer path.",
+            title: "Capture preferences",
+            subtitle: "Capture remains a global composer. These settings only describe its local behavior.",
             items: [
-                SettingsItem(id: "capture-input", title: "Input behavior", subtitle: "Capture opens as a full-screen Stage composer.", icon: "keyboard", valueLabel: "Global"),
+                SettingsItem(id: "capture-input", title: "Input behavior", subtitle: "Capture opens from the shell as a full-screen composer.", icon: "keyboard", valueLabel: "Global"),
                 SettingsItem(id: "capture-keyboard-tools", title: "Keyboard tools", subtitle: "Use standard iOS keyboard tools in the Capture field.", icon: "keyboard.chevron.compact.down", valueLabel: "System"),
                 SettingsItem(id: "capture-attachments", title: "Attachments", subtitle: "Local attachments stay in the Capture flow and are not uploaded from this setting.", icon: "paperclip", valueLabel: "Local"),
                 SettingsItem(id: "capture-teaching-reset", title: "Gesture teaching reset", subtitle: "Reset is not exposed in You yet.", icon: "hand.tap", valueLabel: "Unavailable"),
                 SettingsItem(id: "capture-permissions", title: "Permission state", subtitle: "No Capture-only cloud or analytics permission is connected.", icon: "lock", valueLabel: "Local"),
             ],
-            footer: "This detail does not rebuild Capture or add a half-sheet path."
+            footer: "This detail does not add a Capture tab, inbox, or half-sheet path."
         )
     }
 
