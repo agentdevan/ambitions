@@ -154,8 +154,11 @@ private struct AreaDetailLoadedView: View {
             onCapture(kind)
         } label: {
             Label(title, systemImage: symbol)
-                .font(theme.typography.caption)
-                .frame(maxWidth: .infinity)
+                .font(theme.typography.caption.weight(.semibold))
+                .lineLimit(1)
+                .minimumScaleFactor(0.82)
+                .frame(maxWidth: .infinity, minHeight: theme.panel.minimumTapTarget)
+                .contentShape(Rectangle())
         }
         .buttonStyle(AmbitionPressableButtonStyle(state: .default))
         .accessibilityIdentifier("goals.area-detail.capture.\(kind.rawValue)")

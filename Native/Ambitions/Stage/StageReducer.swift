@@ -28,6 +28,7 @@ enum StageReducer {
             return .none(effects: StageEffect.surfaceChanged(to: state.selectedSurface))
         case let .selectToday(entryContext):
             dismissOverlay(state: &state)
+            resetFocusedRoutes(state: &state)
             state.selectedSurface = .today
             state.todayEntryContext = entryContext
             return .none(effects: StageEffect.surfaceChanged(to: .today))
@@ -341,6 +342,12 @@ enum StageReducer {
         case .you:
             state.youPath = []
         }
+    }
+
+    private static func resetFocusedRoutes(state: inout StageState) {
+        state.goalsPath = []
+        state.timePath = []
+        state.youPath = []
     }
 
     private static func popFocusedRoute(state: inout StageState) -> StageReduction {

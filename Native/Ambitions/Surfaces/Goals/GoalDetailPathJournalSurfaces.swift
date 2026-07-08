@@ -41,34 +41,68 @@ struct GoalDetailPathFieldSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let detail: GoalDetailPresentation
+    let isReviewingPath: Bool
     let onAction: (GoalDetailActionKind) -> Void
 
+    init(
+        detail: GoalDetailPresentation,
+        isReviewingPath: Bool = false,
+        onAction: @escaping (GoalDetailActionKind) -> Void
+    ) {
+        self.detail = detail
+        self.isReviewingPath = isReviewingPath
+        self.onAction = onAction
+    }
+
+    @ViewBuilder
     var body: some View {
-        GoalDetailSectionSurface(title: "Path", subtitle: pathSubtitle) {
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(alignment: .center, spacing: theme.spacing.md) {
-                    ForEach(nodes) { node in
-                        GoalDetailPathNodeView(node: node)
-                    }
-                }
-                .padding(.vertical, theme.spacing.xs)
-            }
-            .accessibilityIdentifier("goal-detail.path-field")
+        if isReviewingPath {
+            HStack(alignment: .center, spacing: theme.spacing.sm) {
+                reviewButton
 
-            HStack(spacing: theme.spacing.sm) {
-                Button {
-                    onAction(.showPath)
-                } label: {
-                    Label("Review path", systemImage: "point.topleft.down.curvedto.point.bottomright.up")
-                }
-                .buttonStyle(AmbitionPressableButtonStyle(state: .default))
-
-                Text("Move, replace, split, and regenerate stay unavailable until they can preserve history.")
+                Text("The full path, proof, decisions, and receipts are open below.")
                     .font(theme.typography.micro)
-                    .foregroundStyle(theme.colors.textTertiary)
+                    .foregroundStyle(theme.colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
             }
+            .padding(.vertical, theme.spacing.xs)
+            .accessibilityElement(children: .combine)
+            .accessibilityIdentifier("goal-detail.path-field")
+        } else {
+            GoalDetailSectionSurface(title: "Path", subtitle: pathSubtitle) {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(alignment: .center, spacing: theme.spacing.md) {
+                        ForEach(nodes) { node in
+                            GoalDetailPathNodeView(node: node)
+                        }
+                    }
+                    .padding(.vertical, theme.spacing.xs)
+                }
+                .accessibilityIdentifier("goal-detail.path-field")
+
+                HStack(spacing: theme.spacing.sm) {
+                    reviewButton
+
+                    Text("Move, replace, and split stay unavailable until they can preserve history.")
+                        .font(theme.typography.micro)
+                        .foregroundStyle(theme.colors.textTertiary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
         }
+    }
+
+    private var reviewButton: some View {
+        Button {
+            onAction(.showPath)
+        } label: {
+            Label(
+                isReviewingPath ? "Close path" : "Review path",
+                systemImage: isReviewingPath ? "chevron.up" : "point.topleft.down.curvedto.point.bottomright.up"
+            )
+        }
+        .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+        .accessibilityIdentifier("goal-detail.path.review-button")
     }
 
     private var pathSubtitle: String {

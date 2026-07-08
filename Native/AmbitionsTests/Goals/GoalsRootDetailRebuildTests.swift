@@ -62,8 +62,11 @@ final class GoalsRootDetailRebuildTests: XCTestCase {
 
         XCTAssertTrue(detailSource.contains("GoalDetailPathFieldSurface(detail: detail)"))
         XCTAssertTrue(detailSource.contains("GoalDetailJournalSurface(detail: detail)"))
+        XCTAssertTrue(detailSource.contains("GoalPathBuilderSurface(state: pathBuilder)"))
+        XCTAssertTrue(detailSource.contains("LifePathThreadSurface(state: LifePathThreadState"))
+        XCTAssertTrue(detailSource.contains("GoalDetailReviewTrailSurface(state: missionControl.reviewTrail)"))
+        XCTAssertTrue(detailSource.contains("GoalDetailHandoffSurface("))
         XCTAssertFalse(detailSource.contains("GoalDetailMissionControlSurface(state: missionControl)"))
-        XCTAssertFalse(detailSource.contains("GoalDetailBreadcrumbSurface(state: missionControl.breadcrumb)"))
     }
 
     private func source(_ relativePath: String) throws -> String {
