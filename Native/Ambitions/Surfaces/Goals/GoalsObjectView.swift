@@ -20,6 +20,7 @@ struct GoalsObjectView: View {
         LifeAreaAtlasField(
             regions: regions,
             primaryAction: overview.heroPrimaryAction,
+            screenshotProofState: screenshotProofState,
             isReduceMotionEnabled: reduceMotion,
             onPrimaryAction: onPrimaryAction,
             onOpenLifeArea: onOpenLifeArea,
@@ -36,6 +37,7 @@ private struct LifeAreaAtlasField: View {
 
     let regions: [GoalsLifeAreaAtlasRegion]
     let primaryAction: GoalsAtlasPrimaryAction
+    let screenshotProofState: GoalsScreenshotProofState
     let isReduceMotionEnabled: Bool
     let onPrimaryAction: (GoalsAtlasPrimaryAction) -> Void
     let onOpenLifeArea: (GoalsLifeAreaAtlasRegion) -> Void
@@ -44,6 +46,7 @@ private struct LifeAreaAtlasField: View {
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.md) {
             atlasHeader
+            atlasStateRibbon
             atlasObject
         }
         .padding(.horizontal, theme.spacing.md)
@@ -52,6 +55,73 @@ private struct LifeAreaAtlasField: View {
 }
 
 private extension LifeAreaAtlasField {
+    var focusRegion: GoalsLifeAreaAtlasRegion? {
+        regions.first { $0.hasActivity } ?? regions.first
+    }
+
+    var proofRegion: GoalsLifeAreaAtlasRegion? {
+        regions.first { ($0.proofCount + $0.receiptCount) > 0 } ?? focusRegion
+    }
+
+    var highlightedRegionID: String? {
+        if screenshotProofState.highlightsProof {
+            return proofRegion?.id
+        }
+        if screenshotProofState.highlightsSelectedLifeArea {
+            return focusRegion?.id
+        }
+        return nil
+    }
+
+    var atlasRibbonState: AmbitionVisualState {
+        if screenshotProofState.highlightsProof {
+            return .success
+        }
+        if screenshotProofState.highlightsSelectedLifeArea {
+            return .selected
+        }
+        return primaryAction.state
+    }
+
+    var atlasRibbonIcon: String {
+        if screenshotProofState.highlightsProof {
+            return "checkmark.seal"
+        }
+        if screenshotProofState.highlightsSelectedLifeArea {
+            return "scope"
+        }
+        return primaryAction.systemImage
+    }
+
+    var atlasRibbonTitle: String {
+        if screenshotProofState.highlightsProof {
+            return "Proof visible"
+        }
+        if screenshotProofState.highlightsSelectedLifeArea {
+            return "Selected area"
+        }
+        switch primaryAction.state {
+        case .warning:
+            return "Recovery focus"
+        default:
+            return "Active thread"
+        }
+    }
+
+    var atlasRibbonDetail: String {
+        if screenshotProofState.highlightsProof {
+            let region = proofRegion
+            return region?.proofHistoryLabel ?? "Evidence and receipts stay attached to this direction."
+        }
+        if screenshotProofState.highlightsSelectedLifeArea {
+            let region = focusRegion
+            return [region?.title, region?.primaryCountLabel]
+                .compactMap { $0 }
+                .joined(separator: " / ")
+        }
+        return primaryAction.subtitle
+    }
+
     var atlasHeader: some View {
         HStack(alignment: .center, spacing: theme.spacing.md) {
             VStack(alignment: .leading, spacing: theme.spacing.xs) {
@@ -82,12 +152,60 @@ private extension LifeAreaAtlasField {
         }
     }
 
+    var atlasStateRibbon: some View {
+        let style = theme.stateStyle(for: atlasRibbonState)
+        return HStack(alignment: .center, spacing: theme.spacing.sm) {
+            Image(systemName: atlasRibbonIcon)
+                .font(.system(size: theme.icon.smallSize, weight: .semibold))
+                .foregroundStyle(style.accent)
+                .frame(width: 28, height: 28)
+                .background(
+                    Circle()
+                        .fill(style.fill)
+                )
+                .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text(atlasRibbonTitle)
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text(atlasRibbonDetail)
+                    .font(theme.typography.micro)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            Spacer(minLength: theme.spacing.xs)
+        }
+        .padding(.vertical, theme.spacing.xs)
+        .overlay(alignment: .leading) {
+            Rectangle()
+                .fill(style.accent.opacity(0.72))
+                .frame(width: screenshotProofState == .defaultAtlas ? 2 : 3)
+        }
+        .padding(.leading, theme.spacing.xs)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(atlasRibbonTitle)
+        .accessibilityValue(atlasRibbonDetail)
+        .accessibilityIdentifier("goals.life-area-atlas.state-ribbon")
+    }
+
+    @ViewBuilder
     var atlasObject: some View {
+        if usesListAtlas {
+            atlasListObject
+        } else {
+            radialAtlasObject
+        }
+    }
+
+    var radialAtlasObject: some View {
         GeometryReader { geometry in
             let size = geometry.size
-            let center = CGPoint(x: size.width * 0.5, y: size.height * 0.50)
+            let center = CGPoint(x: size.width * 0.5, y: size.height * (dynamicTypeSize.isAccessibilitySize ? 0.50 : 0.47))
             let radiusX = max(96, size.width * (dynamicTypeSize.isAccessibilitySize ? 0.31 : 0.38))
-            let radiusY = max(112, size.height * (dynamicTypeSize.isAccessibilitySize ? 0.28 : 0.34))
+            let radiusY = max(104, size.height * (dynamicTypeSize.isAccessibilitySize ? 0.28 : 0.30))
 
             ZStack {
                 atlasObjectAccessibilityMarker
@@ -114,6 +232,8 @@ private extension LifeAreaAtlasField {
 
                     LifeAreaAtlasNode(
                         region: region,
+                        isSelected: highlightedRegionID == region.id && screenshotProofState.highlightsSelectedLifeArea,
+                        isProofHighlighted: highlightedRegionID == region.id && screenshotProofState.highlightsProof,
                         onOpen: { onOpenLifeArea(region) },
                         onCreate: { onCreate(.goalSeed, region) }
                     )
@@ -123,6 +243,7 @@ private extension LifeAreaAtlasField {
 
                 AtlasCurrentStepObject(
                     action: primaryAction,
+                    isProofHighlighted: screenshotProofState.highlightsProof,
                     onOpen: { onPrimaryAction(primaryAction) }
                 )
                 .frame(width: dynamicTypeSize.isAccessibilitySize ? 180 : 160)
@@ -130,11 +251,42 @@ private extension LifeAreaAtlasField {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .frame(minHeight: dynamicTypeSize.isAccessibilitySize ? 560 : 430)
+        .frame(minHeight: dynamicTypeSize.isAccessibilitySize ? 560 : 395)
+    }
+
+    var atlasListObject: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            atlasObjectAccessibilityMarker
+
+            AtlasCurrentStepObject(
+                action: primaryAction,
+                isProofHighlighted: screenshotProofState.highlightsProof,
+                onOpen: { onPrimaryAction(primaryAction) }
+            )
+            .accessibilityIdentifier("goals.current-step.open")
+
+            LazyVStack(alignment: .leading, spacing: theme.spacing.sm) {
+                ForEach(regions) { region in
+                    LifeAreaAtlasListRow(
+                        region: region,
+                        isSelected: highlightedRegionID == region.id && screenshotProofState.highlightsSelectedLifeArea,
+                        isProofHighlighted: highlightedRegionID == region.id && screenshotProofState.highlightsProof,
+                        onOpen: { onOpenLifeArea(region) },
+                        onCreate: { onCreate(.goalSeed, region) }
+                    )
+                }
+            }
+        }
+        .padding(.top, theme.spacing.sm)
+    }
+
+    var usesListAtlas: Bool {
+        dynamicTypeSize >= .xxxLarge
     }
 
     var atlasObjectAccessibilityMarker: some View {
-        Color.clear
+        Rectangle()
+            .fill(theme.colors.textPrimary.opacity(0.01))
             .frame(width: 1, height: 1)
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("Life Area Atlas object")
@@ -164,129 +316,7 @@ private extension LifeAreaAtlasField {
     }
 }
 
-private struct LifeAreaAtlasNode: View {
-    @Environment(\.ambitionTheme) private var theme
-
-    let region: GoalsLifeAreaAtlasRegion
-    let onOpen: () -> Void
-    let onCreate: () -> Void
-
-    var body: some View {
-        Button(action: region.hasActivity ? onOpen : onCreate) {
-            VStack(alignment: .center, spacing: theme.spacing.xs) {
-                ZStack {
-                    Circle()
-                        .fill(region.atlasTint(theme).opacity(region.hasActivity ? 0.26 : 0.12))
-                    Image(systemName: region.symbolName)
-                        .font(.system(size: theme.icon.smallSize, weight: .semibold))
-                        .foregroundStyle(region.hasActivity ? region.atlasTint(theme) : theme.colors.textSecondary)
-                }
-                .frame(width: 36, height: 36)
-                .accessibilityHidden(true)
-
-                Text(region.title)
-                    .font(theme.typography.caption.weight(.semibold))
-                    .foregroundStyle(theme.colors.textPrimary)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.76)
-
-                Text(region.primaryCountLabel)
-                    .font(theme.typography.micro)
-                    .foregroundStyle(region.hasActivity ? region.atlasTint(theme) : theme.colors.textTertiary)
-                    .lineLimit(1)
-
-                if region.hasActivity {
-                    ActivityMarks(region: region)
-                } else {
-                    Label("Add goal", systemImage: "plus.circle")
-                        .font(theme.typography.micro)
-                        .foregroundStyle(theme.colors.textSecondary)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.74)
-                }
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-        }
-        .buttonStyle(.plain)
-        .contentShape(Capsule())
-        .accessibilityIdentifier("goals.life-area.\(region.id)")
-        .accessibilityLabel(region.accessibilityLabel)
-        .accessibilityValue(region.accessibilityValue)
-        .accessibilityHint(region.accessibilityHint)
-    }
-}
-
-private struct ActivityMarks: View {
-    @Environment(\.ambitionTheme) private var theme
-
-    let region: GoalsLifeAreaAtlasRegion
-
-    var body: some View {
-        HStack(spacing: theme.spacing.xs) {
-            mark(count: region.activeGoalCount, symbol: "target", label: "goals")
-            mark(count: region.looseStepCount, symbol: "smallcircle.filled.circle", label: "steps")
-            mark(count: region.thoughtCount, symbol: "sparkle", label: "thoughts")
-            mark(count: region.proofCount + region.receiptCount, symbol: "seal", label: "history")
-        }
-        .accessibilityElement(children: .combine)
-    }
-
-    @ViewBuilder
-    private func mark(count: Int, symbol: String, label: String) -> some View {
-        if count > 0 {
-            Image(systemName: symbol)
-                .font(theme.typography.micro)
-                .foregroundStyle(theme.colors.textSecondary)
-                .accessibilityLabel("\(count) \(label)")
-        }
-    }
-}
-
-private struct AtlasCurrentStepObject: View {
-    @Environment(\.ambitionTheme) private var theme
-
-    let action: GoalsAtlasPrimaryAction
-    let onOpen: () -> Void
-
-    var body: some View {
-        Button(action: onOpen) {
-            VStack(alignment: .center, spacing: theme.spacing.xs) {
-                Image(systemName: action.systemImage)
-                    .font(.system(size: theme.icon.largeSize, weight: .semibold))
-                    .foregroundStyle(theme.colors.accentPrimary)
-                    .accessibilityHidden(true)
-
-                Text("Start here")
-                    .font(theme.typography.caption.weight(.semibold))
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .textCase(.uppercase)
-                    .lineLimit(1)
-
-                Text(action.title)
-                    .font(theme.typography.bodyEmphasized)
-                    .foregroundStyle(theme.colors.textPrimary)
-                    .multilineTextAlignment(.center)
-                    .lineLimit(2)
-                    .minimumScaleFactor(0.78)
-
-                Text(action.subtitle)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .multilineTextAlignment(.center)
-                    .lineLimit(2)
-                    .minimumScaleFactor(0.74)
-            }
-            .padding(theme.spacing.sm)
-        }
-        .buttonStyle(.plain)
-        .contentShape(Capsule())
-        .accessibilityIdentifier("goals.current-step.open")
-        .accessibilityLabel(action.title)
-        .accessibilityHint(action.subtitle)
-    }
-}
-
-private extension GoalsLifeAreaAtlasRegion {
+extension GoalsLifeAreaAtlasRegion {
     var atlasIntensity: Double {
         min(1, max(0.18, Double(activeGoalCount + looseStepCount + proofCount + receiptCount + thoughtCount) / 6.0))
     }

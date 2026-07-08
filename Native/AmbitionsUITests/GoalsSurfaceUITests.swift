@@ -30,6 +30,7 @@ final class GoalsSurfaceUITests: AmbitionsUITestCase {
             let contentSizeCategory: String
             let requiredIdentifiers: [String]
             let requiredTexts: [String]
+            let forbiddenTexts: [String]
         }
 
         let matrix: [GoalsMatrixItem] = [
@@ -41,11 +42,13 @@ final class GoalsSurfaceUITests: AmbitionsUITestCase {
                 requiredIdentifiers: [
                     "goals.life-area-atlas.title",
                     "goals.life-area-atlas.object",
+                    "goals.life-area-atlas.state-ribbon",
                     "goals.life-area.work",
                     "goals.current-step.open",
                     "goals.capture-plus"
                 ],
-                requiredTexts: ["Life Area Atlas", "Start here", "Work", "Body"]
+                requiredTexts: ["Life Area Atlas", "Recovery focus", "Start here", "Work", "Body"],
+                forbiddenTexts: ["Quiet"]
             ),
             GoalsMatrixItem(
                 name: "selected-life-area",
@@ -55,10 +58,13 @@ final class GoalsSurfaceUITests: AmbitionsUITestCase {
                 requiredIdentifiers: [
                     "goals.life-area-atlas.title",
                     "goals.life-area-atlas.object",
+                    "goals.life-area-atlas.state-ribbon",
+                    "goals.life-area.work.selected-marker",
                     "goals.life-area.work",
                     "goals.life-area.body"
                 ],
-                requiredTexts: ["Life Area Atlas", "Work", "Body"]
+                requiredTexts: ["Life Area Atlas", "Selected area", "Work", "Body"],
+                forbiddenTexts: ["Quiet"]
             ),
             GoalsMatrixItem(
                 name: "proof-source-visible",
@@ -68,10 +74,13 @@ final class GoalsSurfaceUITests: AmbitionsUITestCase {
                 requiredIdentifiers: [
                     "goals.life-area-atlas.title",
                     "goals.life-area-atlas.object",
+                    "goals.life-area-atlas.state-ribbon",
+                    "goals.life-area.work.proof-marker",
                     "goals.life-area.future",
                     "goals.current-step.open"
                 ],
-                requiredTexts: ["Life Area Atlas", "Future", "Start here"]
+                requiredTexts: ["Life Area Atlas", "Proof visible", "Future", "Start here"],
+                forbiddenTexts: ["Quiet"]
             ),
             GoalsMatrixItem(
                 name: "large-dynamic-type",
@@ -81,9 +90,12 @@ final class GoalsSurfaceUITests: AmbitionsUITestCase {
                 requiredIdentifiers: [
                     "goals.life-area-atlas.title",
                     "goals.life-area-atlas.object",
+                    "goals.life-area-atlas.state-ribbon",
+                    "goals.life-area.work.selected-marker",
                     "goals.current-step.open"
                 ],
-                requiredTexts: ["Life Area Atlas", "Start here", "People"]
+                requiredTexts: ["Life Area Atlas", "Selected area", "Start here", "People"],
+                forbiddenTexts: ["Quiet"]
             )
         ]
 
@@ -109,13 +121,17 @@ final class GoalsSurfaceUITests: AmbitionsUITestCase {
             XCTAssertTrue(app.descendants(matching: .any)["goals.screen"].waitForExistence(timeout: 10), "Goals screen should exist for \(item.name).")
             for identifier in item.requiredIdentifiers {
                 XCTAssertTrue(
-                    app.descendants(matching: .any)[identifier].waitForExistence(timeout: 10),
+                    scrollUntilElementExists(identifier, in: app, maxAttempts: 8),
                     "\(identifier) should exist for \(item.name)."
                 )
             }
 
             for text in item.requiredTexts {
                 XCTAssertTrue(scrollUntilStaticTextExists(text, in: app, maxAttempts: 12), "\(text) should be visible for \(item.name).")
+            }
+
+            for text in item.forbiddenTexts {
+                XCTAssertFalse(app.staticTexts[text].exists, "\(text) should not be repeated as root state noise for \(item.name).")
             }
 
             XCTAssertFalse(app.staticTexts["Direction Atlas"].exists, "Direction Atlas must not be visible for \(item.name).")

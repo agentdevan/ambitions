@@ -6,7 +6,7 @@ Owner: Codex frontend remediation operator
 Repository: agentdevan/ambitions
 Branch: frontend-flagship-shippability-remediation
 Session start SHA: 9362e940eec5e7d118df418d00022c3588df6610
-Current packet: Packet 3.3 - Goals State Legibility (next unresolved packet)
+Current packet: Packet 3.4 - Goals Editing / Proof / Handoff (next unresolved packet)
 
 This ledger is process evidence only. It is not product acceptance, owner visual acceptance, release proof, accessibility proof, Visual Green, Accessibility Green, or Release Green.
 
@@ -29,8 +29,8 @@ No packet may be marked Done by Codex in this program.
 
 - Branch: `frontend-flagship-shippability-remediation`
 - Base SHA: `9362e940eec5e7d118df418d00022c3588df6610`
-- Current packet status: Packet 3.2 is Yellow / Ready For Review under the stronger visual fidelity contract; Packet 3.3 is the next unresolved packet.
-- Working tree expectation: Packet 3.2 source/test/ledger changes are ready to commit after final diff check.
+- Current packet status: Packet 3.3 is Yellow / Ready For Review under the stronger visual fidelity contract; Packet 3.4 is the next unresolved packet.
+- Working tree expectation: Packet 3.3 source/test/ledger changes are ready to commit after final diff check.
 - Linear: not touched this session; local ledger is the active progress record.
 - Xcode: `Xcode 26.6`, build `17F113`
 - Simulator used: iPhone 17 Pro Max, iOS 26.5, UDID `DD9B9C84-7188-48FA-AA2A-AB5C1D0EE2B6`
@@ -223,7 +223,7 @@ Do not start Project 3 until Project 1 is at least Accepted Yellow and Product L
 | --- | --- | --- | --- |
 | 3.1 Today Core Thesis Proof | Ready For Review | Red-gate rendering cleared | Today first-viewport screenshots and mutation evidence |
 | 3.2 Today Action / Closure / Proof Loop | Ready For Review | Today thesis visible | Start, pause/defer, close, undo, receipt, proof/source proof |
-| 3.3 Goals State Legibility | Backlog | Goals rendering stable | Distinct selected/proof/recovery states |
+| 3.3 Goals State Legibility | Ready For Review | Goals rendering stable | Distinct selected/proof/recovery states |
 | 3.4 Goals Editing / Proof / Handoff | Backlog | Goals state legible | Add/edit/move/handoff/crash regression proof |
 | 3.5 Time Calendar-Grade Redesign | Backlog | Time layout safe | Day/week/protected/open/conflict/proposal proof |
 | 3.6 Time Mutation / Reflow / Protection | Backlog | Time calendar grammar stable | Place/move/protect/conflict/recovery/undo proof |
@@ -1076,7 +1076,7 @@ Next packet:
 
 ### Packet 3.2 - Today Action / Closure / Proof Loop
 
-Status: In Progress
+Status: Yellow / Ready For Review
 
 Target:
 - Today must prove the actionable loop after the Start Here object exists: start/open the step, pause/defer or move without shame, close the step, undo/control where available, show receipt, and expose proof/source inspection.
@@ -1188,6 +1188,162 @@ Packet 3.2 closeout:
 
 Next packet:
 - Packet 3.3 - Goals State Legibility.
+
+### Packet 3.3 - Goals State Legibility
+
+Status: In Progress
+
+Target:
+- Goals must make Life Area selected state, proof availability, recovery/recent movement, and active thread focus visually distinguishable to a human, not just to source/tests.
+- Repeated fixture-like `Quiet` / `Add goal` noise must be reduced on the root without hiding available creation paths.
+- The root must still feel like a living Life Area Atlas, not a KPI wall, generic goal list, dashboard, or module menu.
+- Depth remains contextual: Life area and goal detail routes are valid; no new root surface is allowed.
+
+Depth map before coding:
+- Root state: Goals remains one of the four persistent roots and presents the Life Area Atlas as the root object.
+- Valid drilldowns: Life area detail, goal detail, goal path/future path, proof rail, Today influence, Time load, recovery/accomplishment state, and Capture seeded from a life area.
+- Invalid extra surfaces: no new root tab, no Proof/History/Receipts root, no Motion destination, no Capture tab, no dashboard wall, no generic analytics screen, no module menu.
+- Object types involved: `GoalsOverview`, `GoalsAtlasPrimaryAction`, `GoalsLifeAreaAtlasRegion`, `GoalsScreenshotProofState`, `GoalsObjectView`, `LifeAreaAtlasField`, `LifeAreaAtlasNode`, and `AtlasCurrentStepObject`.
+- Inspection details: the root must communicate which Life Area is active or selected, what proof/receipt/history is attached, where recovery is needed, and which active thread feeds Today.
+- Edit/control paths: Open active thread, open Life Area detail, add a goal through contextual Capture, and open recovery/refinement action where the existing primary action provides it.
+- Receipt/proof/history paths: proof and receipt counts must be visible in the Life Area object and not buried as identical tiny marks; proof state should have non-color cue text and automation-visible labels.
+- Accessibility expectations: visible state distinction should be reflected in concise accessibility values/hints; manual VoiceOver proof remains unavailable.
+- Screenshot proof required: current baseline and post-repair default, selected-life-area, proof-source-visible, and large Dynamic Type Goals screenshots.
+
+Visual Delta:
+- Current screenshot state: fresh Packet 3.3 baseline passed the existing screenshot matrix but rendered default, selected-life-area, and proof-source-visible states as visually identical. Screenshots:
+  - `.codex/xcode-summaries/packet-3.3-goals-baseline/20260708T075749Z-AmbitionsUITests-GoalsSurfaceUITests-testAMB963GoalsReconstructionScreenshotMatr-8591-27629/extract/screenshots/amb-963-goals-default_0_2E3021EA-223D-4900-880E-4AF68A8F7088.png`
+  - `.codex/xcode-summaries/packet-3.3-goals-baseline/20260708T075749Z-AmbitionsUITests-GoalsSurfaceUITests-testAMB963GoalsReconstructionScreenshotMatr-8591-27629/extract/screenshots/amb-963-goals-selected-life-area_0_75B04F42-1AE6-47DA-885B-7137D44F98CD.png`
+  - `.codex/xcode-summaries/packet-3.3-goals-baseline/20260708T075749Z-AmbitionsUITests-GoalsSurfaceUITests-testAMB963GoalsReconstructionScreenshotMatr-8591-27629/extract/screenshots/amb-963-goals-proof-source-visible_0_E82826E2-C8E8-46F7-82BA-21791F8BB87F.png`
+  - `.codex/xcode-summaries/packet-3.3-goals-baseline/20260708T075749Z-AmbitionsUITests-GoalsSurfaceUITests-testAMB963GoalsReconstructionScreenshotMatr-8591-27629/extract/screenshots/amb-963-goals-large-dynamic-type_0_C882EE76-85BB-410B-B339-721241FB96A0.png`
+- Target screenshot state: selected Life Area should read as deliberately selected; proof/source state should visibly surface proof/receipt/history; recovery/recent movement should be visible in the central thread without becoming a dashboard; empty areas should stay calm without repeated `Quiet` / `Add goal` clutter.
+- Gap from desired premium frontend target: the root currently passes identifiers while failing human state legibility. The Atlas is a static diagram with repeated empty labels and weak state differentiation.
+- Exact visual deltas to close: add a clear selected-area treatment, proof/history treatment, recovery/thread treatment, and quieter empty-area treatment inside the existing Life Area Atlas; keep proportions realistic and avoid adding cards around every node.
+- Exact inspectability deltas to close: expose proof/receipt counts and selected-area context as visible non-color cues; preserve exact tap targets for life area detail and contextual Capture.
+- Exact realism/proportion deltas to close: keep the atlas as a native root object with practical iPhone geometry; avoid giant fantasy panels, nested dashboard cards, and small unreadable microcopy.
+- Likely files: `Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift`, `Native/Ambitions/Surfaces/Goals/GoalsLifeAreaAtlasModels.swift`, `Native/AmbitionsUITests/GoalsSurfaceUITests.swift`, and this ledger.
+- Product-law risks: do not add roots or module menus; do not turn proof/history into primary root clutter; do not make Goals a KPI wall or generic goal list.
+- Accessibility risks: screenshots cannot prove manual VoiceOver; large Dynamic Type is readable but crowded and must not worsen.
+- Proof required: focused Goals screenshot matrix after repair, assertions that selected/proof labels are visible in the relevant states, source/governance scans, and `./scripts/ambitions-xcode-build-for-testing.sh --batch frontend-remediation` before commit.
+- Self-review criteria: default/selected/proof screenshots differ visibly; repeated `Quiet` / `Add goal` noise is materially reduced; central recovery action remains clear; large Dynamic Type remains readable; visual score average is at least 4.0 within simulator Yellow limits.
+- Repair-loop conditions: if selected/proof states are still only identifier-different, repair again. If the root becomes a card wall or dashboard, repair immediately. If a needed proof/detail route belongs to Packet 3.4, document the boundary without faking it in Packet 3.3.
+
+Implementation completed:
+- Replaced repeated empty-state root noise with contextual Life Area labels (`Work direction`, `Energy and care`, `Home systems`, `People and care`, `Identity`, `Long range`) while preserving contextual Capture creation paths.
+- Added a state ribbon inside the Life Area Atlas for recovery, selected-area, and proof-visible states so the root communicates state in text, icon, and color instead of relying on source identifiers or tiny marks.
+- Added selected/proof badges to active Life Area nodes and proof/history label support without turning Proof/History/Receipts into root destinations.
+- Added an XXXL fallback layout that switches the atlas from radial diagram to a vertical object/list structure for readable large Dynamic Type.
+- Repaired the primary Start Here title layout so recover/open/refine actions can break into realistic two-line native text where needed.
+- Split atlas subviews into `GoalsLifeAreaAtlasObjectViews.swift` after the governance scan caught `GoalsObjectView.swift` over the 600-line hard cap; both changed Goals files are now below the cap.
+- Strengthened `GoalsSurfaceUITests.testAMB963GoalsReconstructionScreenshotMatrix()` to assert selected/proof state identifiers, visible state text, large Dynamic Type visibility, and absence of repeated `Quiet` root noise.
+
+Files changed:
+- `Native/Ambitions/Surfaces/Goals/GoalsLifeAreaAtlasModels.swift`
+- `Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift`
+- `Native/Ambitions/Surfaces/Goals/GoalsLifeAreaAtlasObjectViews.swift`
+- `Native/AmbitionsUITests/GoalsSurfaceUITests.swift`
+- `docs/qa/frontend-flagship-shippability-remediation/EXECUTION_LEDGER.md`
+
+Validation run:
+- `git status --short --branch`: exit 0; active branch `frontend-flagship-shippability-remediation`; packet-scoped changed files only.
+- `git diff --check`: exit 0.
+- `xcodegen generate`: exit 0.
+- `python3 scripts/ambitions-architecture-inventory.py`: exit 0; final-tree parity Green.
+- `python3 scripts/ambitions-green-standard-audit.py`: exit 0.
+- `python3 scripts/ambitions-vocabulary-drift-scan.py`: exit 0.
+- `python3 scripts/ambitions-local-first-boundary-scan.py`: exit 0.
+- `python3 scripts/ambitions-remediation-governance-check.py`: first rerun exit 1 because `GoalsObjectView.swift` reached 636 lines; repaired by same-owner view split; final rerun exit 0.
+- `./scripts/ambitions-xcode-test-focused.sh --batch packet-3.3-goals-baseline --test 'AmbitionsUITests/GoalsSurfaceUITests/testAMB963GoalsReconstructionScreenshotMatrix()' --skip-prebuild --timeout 20m --kill-after 60s`: exit 0; baseline showed visual failure despite passing test.
+- `./scripts/ambitions-xcode-test-focused.sh --batch packet-3.3-goals-state-legibility-rerun --test 'AmbitionsUITests/GoalsSurfaceUITests/testAMB963GoalsReconstructionScreenshotMatrix()' --skip-prebuild --timeout 20m --kill-after 60s`: exit 0; first repair proof, but screenshots still showed overlapping state labels and crowded large type.
+- `./scripts/ambitions-xcode-test-focused.sh --batch packet-3.3-goals-state-legibility-final4 --test 'AmbitionsUITests/GoalsSurfaceUITests/testAMB963GoalsReconstructionScreenshotMatrix()' --skip-prebuild --timeout 20m --kill-after 60s`: exit 0 after accessibility hierarchy repair.
+- `./scripts/ambitions-xcode-test-focused.sh --batch packet-3.3-goals-state-legibility-final5 --test 'AmbitionsUITests/GoalsSurfaceUITests/testAMB963GoalsReconstructionScreenshotMatrix()' --skip-prebuild --timeout 20m --kill-after 60s`: exit 0 after badge-overlap repair.
+- `./scripts/ambitions-xcode-test-focused.sh --batch packet-3.3-goals-state-legibility-final6 --test 'AmbitionsUITests/GoalsSurfaceUITests/testAMB963GoalsReconstructionScreenshotMatrix()' --skip-prebuild --timeout 20m --kill-after 60s`: exit 0 after geometry/title repair.
+- `./scripts/ambitions-xcode-test-focused.sh --batch packet-3.3-goals-state-legibility-final7 --test 'AmbitionsUITests/GoalsSurfaceUITests/testAMB963GoalsReconstructionScreenshotMatrix()' --skip-prebuild --timeout 20m --kill-after 60s`: exit 65; compile failed because `atlasTint` was inaccessible after the file split; repaired by making the region helper internal to the module.
+- `./scripts/ambitions-xcode-test-focused.sh --batch packet-3.3-goals-state-legibility-final8 --test 'AmbitionsUITests/GoalsSurfaceUITests/testAMB963GoalsReconstructionScreenshotMatrix()' --skip-prebuild --timeout 20m --kill-after 60s`: exit 0; 1 UI test executed and passed.
+- `./scripts/ambitions-xcode-build-for-testing.sh --batch frontend-remediation`: exit 0; build-for-testing passed. Summary: `.codex/xcode-summaries/frontend-remediation/20260708T093500Z/extract/summary.json`.
+
+Screenshot / proof artifacts:
+- Baseline default: `.codex/xcode-summaries/packet-3.3-goals-baseline/20260708T075749Z-AmbitionsUITests-GoalsSurfaceUITests-testAMB963GoalsReconstructionScreenshotMatr-8591-27629/extract/screenshots/amb-963-goals-default_0_2E3021EA-223D-4900-880E-4AF68A8F7088.png`; visual failure because default, selected, and proof states looked essentially identical.
+- Baseline selected: `.codex/xcode-summaries/packet-3.3-goals-baseline/20260708T075749Z-AmbitionsUITests-GoalsSurfaceUITests-testAMB963GoalsReconstructionScreenshotMatr-8591-27629/extract/screenshots/amb-963-goals-selected-life-area_0_75B04F42-1AE6-47DA-885B-7137D44F98CD.png`; state not human-distinct.
+- Baseline proof: `.codex/xcode-summaries/packet-3.3-goals-baseline/20260708T075749Z-AmbitionsUITests-GoalsSurfaceUITests-testAMB963GoalsReconstructionScreenshotMatr-8591-27629/extract/screenshots/amb-963-goals-proof-source-visible_0_E82826E2-C8E8-46F7-82BA-21791F8BB87F.png`; proof state not human-distinct.
+- Baseline large Dynamic Type: `.codex/xcode-summaries/packet-3.3-goals-baseline/20260708T075749Z-AmbitionsUITests-GoalsSurfaceUITests-testAMB963GoalsReconstructionScreenshotMatr-8591-27629/extract/screenshots/amb-963-goals-large-dynamic-type_0_C882EE76-85BB-410B-B339-721241FB96A0.png`; readable but crowded and visually indistinct.
+- Final default: `.codex/xcode-summaries/packet-3.3-goals-state-legibility-final8/20260708T092923Z-AmbitionsUITests-GoalsSurfaceUITests-testAMB963GoalsReconstructionScreenshotMatr-43543-16618/extract/screenshots/amb-963-goals-default_0_804CC444-5F46-4BD7-B065-4E238A905F54.png`; recovery state is visible, empty-area copy is quieter, and dock/content clearance holds.
+- Final selected: `.codex/xcode-summaries/packet-3.3-goals-state-legibility-final8/20260708T092923Z-AmbitionsUITests-GoalsSurfaceUITests-testAMB963GoalsReconstructionScreenshotMatr-43543-16618/extract/screenshots/amb-963-goals-selected-life-area_0_B8BFE0AC-8E51-4483-8579-E6ABF2C035BF.png`; selected state is visible through ribbon, Work ring, and compact badge without label collision.
+- Final proof: `.codex/xcode-summaries/packet-3.3-goals-state-legibility-final8/20260708T092923Z-AmbitionsUITests-GoalsSurfaceUITests-testAMB963GoalsReconstructionScreenshotMatr-43543-16618/extract/screenshots/amb-963-goals-proof-source-visible_0_C513FD66-4E42-40D3-9819-60BB1CC2DF9A.png`; proof state is visible through ribbon, proof count, green state treatment, and compact badge.
+- Final large Dynamic Type: `.codex/xcode-summaries/packet-3.3-goals-state-legibility-final8/20260708T092923Z-AmbitionsUITests-GoalsSurfaceUITests-testAMB963GoalsReconstructionScreenshotMatr-43543-16618/extract/screenshots/amb-963-goals-large-dynamic-type_0_6E6F0D90-1D3A-44D0-A498-5803049E339A.png`; vertical fallback is readable, state remains visible, and the Start Here action no longer compresses into one awkward line.
+
+Visual inspection notes:
+- Default Goals now has a clear recovery state instead of identical quiet nodes; still not final flagship Goals maturity, but no longer source-only state closure.
+- Selected state is human-distinct without adding a dashboard card wall.
+- Proof state is human-distinct and inspectable at root level without making Proof a root surface.
+- Large Dynamic Type is readable and proportionally credible as a vertical fallback; additional accessibility proof remains blocked by lack of manual VoiceOver.
+- The root still needs Packet 3.4 depth for goal path editing, future path editing, proof stitch inspection, and handoffs; this packet intentionally did not fake those drilldowns.
+
+Visual Scorecard:
+- Native iOS quality: 4
+- Visual hierarchy: 4
+- Surface identity: 4
+- Object inspectability: 4
+- Light/dark quality: 4
+- Material restraint: 4
+- Typography and spacing: 4
+- Interaction clarity: 4
+- SwiftUI realism / proportions: 4
+- Similarity to Ambitions premium frontend target: 4
+- Final self-score: 4.0 average; Yellow / Ready For Review within simulator proof ceilings.
+
+Frontend-wide evaluation:
+- Root quality: improved for Goals state legibility; selected/proof/recovery states are now human-distinct and not just test identifiers.
+- Drilldown/sub-surface quality: not completed in Packet 3.3; Packet 3.4 remains responsible for Goals editing, proof, handoff, and deeper detail maturity.
+- Light/dark quality: no new appearance-mode implementation in this packet; Packet 1.3 remains the active light/dark proof. The changed Goals views use existing theme tokens and did not introduce dark-only hardcoding.
+- Object inspectability: improved at the root through visible selected/proof/recovery context; full object depth remains Packet 3.4.
+- SwiftUI realism / proportions: improved through a less stretched radial atlas, compact node badges, and an XXXL vertical fallback.
+
+Repair cycles performed:
+- 6 focused repair cycles after baseline:
+  - Cycle 1 added state ribbon, selected/proof markers, quieter area labels, and stronger screenshot assertions; first run exposed bad copy truncation (`Relationships`).
+  - Cycle 2 changed the People label and produced screenshots, but state labels overlapped the central object and large type remained crowded.
+  - Cycle 3 added the list fallback and removed overlapping text panels; automation exposed accessibility hierarchy/order issues.
+  - Cycle 4 repaired atlas object/current-step accessibility exposure; focused matrix passed.
+  - Cycle 5 replaced radial text pills with compact node badges; focused matrix passed and visual overlap was removed.
+  - Cycle 6 repaired radial geometry and Start Here title layout, then split the oversized file after governance failed; compile access-control regression was repaired and final focused matrix passed.
+
+Remaining visual deltas:
+- Goals root is Yellow / Ready For Review for state legibility only, not final Goals maturity.
+- Goal path editing, future path editing, proof stitch inspection, Capture-to-Goals, Goals-to-Today, Goals-to-Time, and add/crash regression proof remain Packet 3.4.
+- Manual VoiceOver proof is missing.
+- Physical-device proof is missing.
+- Visual Green is impossible from simulator screenshots alone.
+
+Product law preserved:
+- Today / Goals / Time / You remain the only persistent roots.
+- Capture remains contextual/global action, not a root tab.
+- Search was not changed and no chatbot/cloud search grammar was added.
+- Motion was not exposed as a root destination.
+- Proof / Source / Privacy / History / Receipts remain inspectable details, not root surfaces.
+- Depth still comes from contextual object routes; no extra persistent surface was introduced.
+- Local-first/offline trust boundaries were preserved; no account, R2, hosted AI, or private graph egress path was added.
+
+Validation not run:
+- Manual VoiceOver: not available in this environment.
+- Physical-device screenshots/video: not available in this environment.
+- Full UI test suite: not run; broad build-for-testing and focused Goals UI screenshot lane were run for this packet.
+
+Known risks:
+- Simulator screenshots support Visual Yellow maximum only.
+- Accessibility Green is impossible without manual VoiceOver and broader large-type/contrast checks.
+- Packet 3.4 may expose deeper Goals route/editing/proof maturity failures that this root-state packet does not repair.
+
+Follow-up required:
+- Packet 3.4 - Goals Editing / Proof / Handoff.
+
+Commit:
+- Planned commit: `Frontend remediation: goals state legibility`; SHA to be recorded from `git rev-parse HEAD` after commit.
+
+Next packet:
+- Packet 3.4 - Goals Editing / Proof / Handoff.
+
+Passing tests did not determine this status. The status is based on source proof, runtime proof, screenshot inspection, repair-loop completion, and fidelity to the Ambitions premium frontend target: premium roots, native light/dark drilldowns and entire frontend, deeply inspectable object surfaces, and realistic SwiftUI proportions.
 
 ### Packet 1.5 - Baseline Validation Recovery
 
@@ -1945,19 +2101,23 @@ Packet 2.2 planned commit:
 - `Frontend remediation: motion-as-behavior cleanup`
 - SHA: read from `git rev-parse HEAD` after commit; the ledger does not embed its own final commit hash because amending that value changes the hash.
 
+Packet 3.3 planned commit:
+- `Frontend remediation: goals state legibility`
+- SHA: read from `git rev-parse HEAD` after commit; the ledger does not embed its own final commit hash because amending that value changes the hash.
+
 ## 13. Resume Instructions
 
 To resume from this checkpoint:
 1. Stay on branch `frontend-flagship-shippability-remediation`.
 2. Run `git status --short --branch`.
-3. Confirm Packet 2.2 is committed and current packet is Packet 2.3.
+3. Confirm Packet 3.3 is committed and current packet is Packet 3.4.
 4. Inspect the current diff before editing.
 5. Rerun `git diff --check`.
-6. Begin Packet 2.3 - No-Dashboard / No-Task-App Guardrail.
-7. Write the Packet 2.3 Visual Delta before coding because anti-drift guardrails affect product surface visual direction.
-8. Inspect current root/surface copy, source audit tests, known issues, and existing dashboard/task/habit/chatbot guardrails before editing.
-9. Add explicit bounded anti-drift checks and repair only guardrail/source residue in this packet; do not redesign all surfaces here.
-10. Run focused anti-drift/product-law validation, then required source/governance scans and the broad `frontend-remediation` build lane if source/test code changes.
+6. Begin Packet 3.4 - Goals Editing / Proof / Handoff.
+7. Write the Packet 3.4 depth map and Visual Delta before coding.
+8. Inspect Goals detail/editing/proof/handoff source, tests, current screenshots, and known issue mappings before editing.
+9. Repair only bounded Goals depth in this packet: goal path editing, future path editing, step add/move, proof stitch inspection, Capture-to-Goals, Goals-to-Today, Goals-to-Time, and add/crash regression proof.
+10. Run focused Goals editing/proof/handoff validation, then required source/governance scans and the broad `frontend-remediation` build lane if source/test code changes.
 11. Inspect any generated screenshots manually, update this ledger with exact commands, exits, artifacts, risks, and next packet, and commit only if validation passes and the change is coherent.
 
 ## 14. Packet Closeout Template
