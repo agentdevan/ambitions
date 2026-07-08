@@ -403,7 +403,7 @@ TEST_CMD=(
   -derivedDataPath "$DERIVED_DATA"
   -parallel-testing-enabled NO
   "$XCODEBUILD_ACTION"
-  -only-testing "$test_filter"
+  "-only-testing:$test_filter"
   CODE_SIGNING_ALLOWED=NO
   CODE_SIGNING_REQUIRED=NO
   COMPILER_INDEX_STORE_ENABLE=NO
