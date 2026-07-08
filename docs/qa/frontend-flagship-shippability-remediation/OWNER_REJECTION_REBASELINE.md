@@ -62,7 +62,9 @@ Historical packet closeouts remain preserved as evidence. This is an ownership o
    - No modal prompt-box feel.
    - No chatbot/fake AI classifier feel.
    - Dense dead-space is not acceptable.
-   - Must show route affordances, review-before-save, destination before save, exact destination after save, open destination from receipt, cancel/back/close behavior, and remain globally reachable.
+   - Must show route affordances, review-before-save, destination before save, exact destination after save, open destination from receipt.
+   - Must support cancel/back/close correctly and remain globally reachable.
+   - Do not claim persistence if the object cannot be found.
 
 2. **Goals constellation/atlas design is retired**
    - Move toward Apple Reminders-style hierarchy.
@@ -146,59 +148,98 @@ Required proof:
 ### P0.2 Shell / Chrome Clarity Rebuild
 
 Target:
-- clear top command header and modern rounded bottom dock.
-- clear selected root + global Capture + global Search.
-- practical touch targets.
-- no dock/content collision; no collision between header and content.
-- no decorative-only icons.
+- working back behavior
+- obvious top command header
+- modern rounded bottom dock
+- clear selected root
+- global Capture action
+- global Search action
+- practical touch targets
+- content scrolls under stable chrome
+- no dock/content collision
+- no header/content collision
+- no decorative-only icons
+- light/dark proof where practical
+- screenshots for Today, Goals, Time, You, Capture, and one detail route
 
-Required proof:
-- Today/Goals/Time/You/Capture + one detail screenshot lane.
-- redress any route or screenshot ambiguity against Facebook iOS clarity reference.
+The shell should use Facebook iOS screenshots as a clarity reference only.
+If back fails, Red.
+If Capture looks like a modal prompt, Needs Repair.
+If dock looks decorative or ambiguous, Needs Repair.
+If screenshots are less clear/tappable than the reference, Needs Repair.
 
 ### P0.3 Capture First-Class Surface Reconstruction
 
 Target:
-- full-screen safe-area-respecting capture.
-- clear route affordances and destination before/after save.
-- review before save, destination confirmation, and local action states.
-- goal/step seed, proof, protected time, note/thought, constraints, fixed point, attachment if supported.
-- cancellation/return works and is honest when features are unavailable.
+- full-screen Capture surface
+- respects safe area
+- no modal prompt-box feel
+- no sparse dead surface
+- clear route affordances
+- free capture
+- goal seed
+- step seed
+- proof
+- protected time
+- note/thought
+- constraint/fixed point
+- attachment if supported
+- review before save
+- destination before save
+- receipt with exact destination after save
+- open destination from receipt
+- cancel/back works
+Unsupported route types must show honest unavailable/bounded states.
+Do not fake support.
 
 ### P0.4 Goals Native Hierarchy Reconstruction
 
 Target:
-- remove constellation/atlas root.
-- list hierarchy with groups/folders and visible goal rows.
-- native drilldown and active paths.
-- create goal appears as visible list row.
-- no abstract orbit nodes or dashboard wall.
+- retire constellation/atlas root
+- replace with native list hierarchy
+- life areas as groups/folders/sections
+- goals as visible rows
+- active paths as rows/details
+- add goal creates visible row
+- goal detail is native drilldown
+- no radial constellation
+- no abstract orbit node UI
+- no dashboard wall
+- no proof/root clutter
 
 ### P0.5 Today Actionable Rotary Meridian
 
 Target:
-- forward/back time-window navigation.
-- useful non-step state with primary action.
-- Start Here when a real step exists.
-- review/protect/review paths visible.
+- Today scrolls forward and backward through time windows
+- current window is clear
+- previous/next windows are accessible
+- no-step state has primary action
+- Start Here appears when real step exists
+- Capture/build/protect/review paths are visible
+- no passive empty root
 
 ### P0.6 Time Calendar-Native Reconstruction
 
 Target:
-- day/week calendar structure.
-- now line.
-- protected/open/fixed windows.
-- conflict/reflow placement review.
-- remove segmented card/control-panel behavior.
+- day/week calendar grammar
+- now line
+- protected/open/fixed blocks
+- scheduled Step block
+- conflict/reflow review
+- placement proposal
+- no segmented card dashboard
+- no abstract gauge/control panel
 
 ### P0.7 You Runtime Settings Cleanup
 
 Target:
-- remove trailing value words beside chevrons.
-- move secondary details into subtitles or detail pages.
-- connect settings actions to runtime and prove unavailable states honestly.
-- repair appearance unreadability.
-- verify actual setting changes affect app state.
+- remove trailing value words beside chevrons
+- move secondary values to subtitles/details
+- connect settings to runtime
+- verify Appearance back navigation
+- repair Appearance detail unreadability
+- verify actual setting changes affect app state
+- keep unavailable controls honest
 
 ## 10. Required future validation discipline
 
