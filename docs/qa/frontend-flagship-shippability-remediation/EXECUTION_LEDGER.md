@@ -2036,7 +2036,7 @@ Follow-up required:
 - Packet 4.1 - Capture Visual Grammar Repair.
 
 Commit:
-- Pending commit: `Frontend remediation: you privacy controls`.
+- `0bd12f1f0186855f78a3f4033b5889d650e2aeb6` - `Frontend remediation: you privacy controls`.
 
 Next packet:
 - Packet 4.1 - Capture Visual Grammar Repair.
