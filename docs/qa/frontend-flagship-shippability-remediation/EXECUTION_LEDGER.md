@@ -29,8 +29,8 @@ No packet may be marked Done by Codex in this program.
 
 - Branch: `frontend-flagship-shippability-remediation`
 - Base SHA: `9362e940eec5e7d118df418d00022c3588df6610`
-- Current packet status: Packet 1.2 is locally ready for review after source/simulator proof; Packet 1.3 is next.
-- Working tree expectation: clean after the Packet 1.2 commit.
+- Current packet status: Packet 1.3 is in progress under the Flagship Visual Fidelity Contract.
+- Working tree expectation: Packet 1.3 source/test/script changes may be present until the appearance proof packet is validated and committed.
 - Linear: not touched this session; local ledger is the active progress record.
 - Xcode: `Xcode 26.6`, build `17F113`
 - Simulator used: iPhone 17 Pro Max, iOS 26.5, UDID `DD9B9C84-7188-48FA-AA2A-AB5C1D0EE2B6`
@@ -76,6 +76,7 @@ Key active laws for this ledger:
 - Hosted/cloud LLMs are not core frontend architecture or primary product grammar.
 - Source existence, identifiers, comments, and screenshot paths are not product-quality proof.
 - Deep, Not Wide Product Law: Ambitions must feel like a few canonical places with rich object depth underneath them, not a wider app with more tabs.
+- Premium Frontend Target: premium roots, native light/dark drilldowns and entire frontend, deeply inspectable object surfaces, all built with realistic SwiftUI proportions.
 
 ## 3. Product-Law Guardrail Checklist
 
@@ -173,11 +174,21 @@ Surface maturity acceptance:
 ## 3B. Flagship Visual Fidelity Contract
 
 - Contract installed: `docs/qa/frontend-flagship-shippability-remediation/VISUAL_FIDELITY_CONTRACT.md`.
+- Stronger target installed: premium roots, native light/dark drilldowns and entire frontend, deeply inspectable object surfaces, all built with realistic SwiftUI proportions.
+- The target is the entire frontend, not isolated screens or isolated packet wins.
+- Roots and drilldowns must both be premium.
+- Light and dark are both first-class product modes.
+- Deep object inspection is required, not optional polish.
+- Realistic SwiftUI proportions are required.
+- Visually weak drilldowns are failures, not later polish.
+- Visually weak roots are failures, not later polish.
+- The frontend must converge toward one cohesive premium product, not disconnected local improvements.
 - Tests are not sufficient for product quality.
 - Visually mediocre SwiftUI is a packet failure.
 - Every visual repair packet requires a pre-coding Visual Delta.
 - Every surface maturity packet requires a pre-coding Visual Delta.
 - Every relevant packet requires a post-coding Visual Scorecard.
+- Every visual repair packet and surface maturity packet must evaluate root quality, drilldown quality, light/dark quality, object inspectability, and SwiftUI realism.
 - Packets can pass tests and still be Needs Repair.
 - Repairable visual failure must be repaired immediately, not merely documented.
 - Human review is deferred until final owner review package.
@@ -191,7 +202,7 @@ Surface maturity acceptance:
 | --- | --- | --- | --- |
 | 1.1 Root Shell Safe-Area + Dock Clearance | Ready For Review | Current first Red gate | Source diff, focused root screenshots, Time mutation proof, build/test output |
 | 1.2 Accessibility XXXL Layout Rescue | Ready For Review | Packet 1.1 source/simulator proof not Red | Large Dynamic Type screenshots, Reduce Motion/Transparency checks |
-| 1.3 Appearance Mode Proof | Backlog | Packet 1.1 not Red | Light/dark/system screenshot matrix |
+| 1.3 Appearance Mode Proof | In Progress | Packet 1.1 not Red | Light/dark/system screenshot matrix |
 | 1.4 Rendered Failure Gates | Backlog | Packet 1.1-1.3 failure patterns understood | UI/render assertions that fail on visual breakage |
 | 1.5 Baseline Validation Recovery | Backlog | Stable screenshot/proof lanes exist | Repeatable validation matrix and explicit Green ceilings |
 
@@ -551,6 +562,88 @@ Final focused proof artifacts:
 - `.codex/xcode-summaries/packet-1.2-after-fresh2/20260707T223934Z-AmbitionsUITests-TimeSurfaceUITests-testAMB1176TimeEmptyAndAccessibilityProofPac-68054-24187/extract/attachments/amb-1176-accessibility-variant-voiceover-transcript_0_D308FCE3-2469-4164-BB5F-81323963CB57.txt`: automated transcript attachment, not manual VoiceOver proof.
 - `.codex/xcode-summaries/frontend-remediation/20260707T224530Z-bft-69210-20010/build-for-testing-summary.json`: required broad build-for-testing passed.
 
+### Packet 1.3 Visual Delta
+
+Current screenshot state:
+- Pre-repair Packet 1.3 lanes exposed functional appearance failures: Time light rendered light, but Today light, You light, and system-dark proof failed in focused root matrix attempts before current source repairs.
+- Current-source focused root and overlay appearance matrix lanes have passing artifacts from simulator proof, but those artifacts require visual inspection under the newly installed Flagship Visual Fidelity Contract before Packet 1.3 can close.
+- The required broad `frontend-remediation` build-for-testing was started during Packet 1.3 pre-contract work and then intentionally terminated after the contract-first instruction; that terminated run is not Packet 1.3 proof.
+
+Target visual state:
+- Light mode must render as an intentionally designed light Ambitions shell, not a dark surface with adjusted text.
+- Dark mode must retain the premium root shell and not regress from Packet 1.1/1.2 safe-area and Dynamic Type repairs.
+- System mode must follow the requested OS appearance in deterministic screenshot proof.
+- Today, Goals, Time, You, Capture, and Search must show materially distinct light and dark treatment while preserving root law and non-chatbot grammar.
+- The affected frontend scope must move toward premium roots, native light/dark overlays, deep object inspection cues, and realistic SwiftUI proportions.
+
+Gap from desired premium frontend target:
+- Appearance ownership previously leaked persisted dark preferences into screenshot proof and left parts of Today with dark-only product-object treatment.
+- System appearance proof was not deterministic until the screenshot lane could explicitly drive the effective system mode.
+- Capture overlay screenshots exposed AI/prompt visual grammar that failed the stronger frontend target even after appearance tests passed.
+- Roots and overlays still contain surface-maturity issues that are not all repairable inside Packet 1.3; this packet must repair appearance-owned failures and clearly cap the remaining scope.
+- Simulator screenshots can prove only Yellow, and physical-device appearance fidelity remains unavailable.
+
+Exact visual deltas to close:
+- Apply debug appearance overrides through the in-memory app state used by screenshot lanes.
+- Make Today background and current-time fused rail adapt to light mode.
+- Add deterministic screenshot coverage for root and core overlay light, dark, system-light, and system-dark cases.
+- Ensure light/dark screenshot luminance separation is asserted so source identifiers cannot pass while the rendered UI is visually unchanged.
+- Remove AI/prompt visual grammar from Capture overlay when it is revealed by Packet 1.3 appearance proof.
+
+Exact inspectability deltas to close:
+- Preserve Capture as a local review-before-save composer with clear user-controlled inspection, not a chatbot or AI prompt.
+- Preserve Search as local Find / Act / Inspect, not hosted assistant grammar.
+- Ensure appearance screenshot metadata and lanes prove roots and core overlays rather than source identifiers alone.
+
+Exact realism/proportion deltas to close:
+- Keep shell/header/dock geometry believable in both light and dark.
+- Keep Capture field proportions native and usable, not prompt-box or concept-shot geometry.
+- Keep root and overlay material treatment restrained enough for real SwiftUI, not a fantasy panel.
+
+Product-law risks:
+- Appearance proof must not add a new root surface, Capture tab, Search chatbot, or Motion destination.
+- Appearance repair must stay in canonical App, Stage, DesignSystem, test, and script owners without adding new architecture nouns or route surfaces.
+- Debug launch overrides must remain screenshot/test instrumentation and not become production-hosted AI or cloud dependency.
+
+Accessibility risks:
+- Light mode contrast must remain readable.
+- Dynamic Type regressions are not exhaustively re-proven by Packet 1.3; Packet 1.2 large-type proof remains simulator-only and broader Dynamic Type proof remains a known risk.
+- Manual VoiceOver proof is unavailable, so Accessibility Green remains impossible.
+
+Files likely responsible:
+- `Native/Ambitions/App/AppBootstrapper.swift`
+- `Native/Ambitions/App/AppContainer.swift`
+- `Native/Ambitions/App/AppShellActivatedCaptureSeam.swift`
+- `Native/Ambitions/Stage/AmbitionsStage.swift`
+- `Native/Ambitions/Composer/Capture/CaptureAtmosphereComposer.swift`
+- `Native/Ambitions/DesignSystem/ProductObjects/TodayBackground.swift`
+- `Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailCurrentTimeFusion.swift`
+- `Native/AmbitionsUITests/DeterministicScreenshotLaneUITests.swift`
+- `Native/AmbitionsTests/App/AppearancePreferenceTests.swift`
+- `scripts/ambitions-run-deterministic-screenshot-lane.sh`
+
+Screenshot proof required:
+- Today, Goals, Time, You light screenshots.
+- Today, Goals, Time, You dark screenshots.
+- Today, Goals, Time, You system-light and system-dark screenshots, or exact automation limitation if system proof cannot be driven.
+- Capture and Search overlay light, dark, system-light, and system-dark screenshots if the existing lane remains stable.
+
+Self-review criteria:
+- No inspected light screenshot may read as dark-only appearance.
+- Light and dark shells must be visually distinct in human inspection and in luminance assertions.
+- Shell material, dock, headers, and core overlays must adapt coherently.
+- Affected roots and overlays must not look like fixture/proof harness output or normal visually mediocre SwiftUI under the strengthened scoring rubric.
+- Capture/Search overlays must not show prompt-box, chatbot, AI-glyph, or ordinary utility-sheet grammar within Packet 1.3 scope.
+- The affected UI must preserve realistic SwiftUI proportions in light and dark.
+
+Repair-loop conditions:
+- If any required screenshot renders the wrong appearance, repair appearance ownership and rerun proof.
+- If a screenshot is technically distinct but visually mediocre within appearance scope, repair tokens/material hierarchy and rerun proof.
+- If one surface adapts and another does not, repair inconsistent token/product-object usage and rerun proof.
+- If a screenshot reveals AI/prompt visual grammar inside Capture/Search appearance proof, repair it and rerun proof.
+- If a root or overlay looks proportionally unrealistic inside Packet 1.3 scope, repair it and rerun proof.
+- Do not close Packet 1.3 from tests alone.
+
 ## 8. Known Remaining Red Blockers
 
 - Root shell safe-area and dock/content overlap is repaired for the inspected default Dynamic Type dark-mode simulator roots, but not proven for all appearances or physical device.
@@ -676,8 +769,10 @@ Screenshot / proof artifacts:
 Visual Delta:
 - Current screenshot state: `<state>`
 - Target visual state: `<state>`
-- Gap from flagship target: `<gap>`
+- Gap from desired premium frontend target: `<gap>`
 - Exact visual deltas to close: `<deltas>`
+- Exact inspectability deltas to close: `<deltas>`
+- Exact realism/proportion deltas to close: `<deltas>`
 - Product-law risks: `<risks>`
 - Accessibility risks: `<risks>`
 - Files likely responsible: `<paths>`
@@ -689,14 +784,21 @@ Visual Scorecard:
 - Native iOS quality: `<1-5>`
 - Visual hierarchy: `<1-5>`
 - Surface identity: `<1-5>`
-- Object depth: `<1-5>`
+- Object inspectability: `<1-5>`
+- Light/dark quality: `<1-5>`
 - Material restraint: `<1-5>`
 - Typography and spacing: `<1-5>`
 - Interaction clarity: `<1-5>`
-- Local-first trust clarity: `<1-5>`
-- Accessibility / Dynamic Type readiness: `<1-5>`
-- Similarity to Ambitions flagship target: `<1-5>`
+- SwiftUI realism / proportions: `<1-5>`
+- Similarity to Ambitions premium frontend target: `<1-5>`
 - Final self-score: `<average and status>`
+
+Frontend-wide evaluation:
+- Root quality: `<inspection>`
+- Drilldown/sub-surface quality: `<inspection>`
+- Light/dark quality: `<inspection>`
+- Object inspectability: `<inspection>`
+- SwiftUI realism / proportions: `<inspection>`
 
 Repair cycles performed:
 - `<cycle count and notes>`
@@ -705,7 +807,7 @@ Remaining visual deltas:
 - `<remaining deltas or none>`
 
 Required closeout sentence:
-- Passing tests did not determine this status. The status is based on source proof, runtime proof, screenshot inspection, repair-loop completion, and visual fidelity against the Ambitions flagship target.
+- Passing tests did not determine this status. The status is based on source proof, runtime proof, screenshot inspection, repair-loop completion, and fidelity to the Ambitions premium frontend target: premium roots, native light/dark drilldowns and entire frontend, deeply inspectable object surfaces, and realistic SwiftUI proportions.
 
 Validation not run:
 - `<command or lane>`: `<why>`

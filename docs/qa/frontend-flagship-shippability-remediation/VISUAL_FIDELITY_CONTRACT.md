@@ -6,6 +6,10 @@ Installed: 2026-07-08
 
 This contract is process authority for visual remediation packets. It is not owner visual acceptance, Visual Green, Accessibility Green, Release Green, or shippability proof.
 
+The target is now explicit:
+
+premium roots, native light/dark drilldowns and entire frontend, deeply inspectable object surfaces, all built with realistic SwiftUI proportions.
+
 ## 1. Purpose
 
 This contract exists because passing tests is not product quality.
@@ -17,6 +21,8 @@ Passing screenshot capture is not product quality.
 A screenshot artifact proves the screen rendered; it does not prove the screen is good.
 
 Ambitions may not ship or advance through visual/surface maturity as technically valid, test-passing, visually mediocre SwiftUI.
+
+The weaker standard of "not mediocre" is replaced by a positive product target: the affected frontend scope must move toward a first-class native iPhone app with premium roots, premium drilldowns, premium overlays, premium inspectors, premium detail routes, native light/dark behavior, deep object inspection, and realistic SwiftUI proportions.
 
 ## 2. Product-quality target
 
@@ -51,6 +57,160 @@ It must not feel like:
 - internal tool
 - SwiftUI demo
 - normal Codex-generated UI
+
+The product feeling target is:
+
+- premium roots
+- native light/dark drilldowns and entire frontend
+- deeply inspectable object surfaces
+- realistic SwiftUI proportions
+- few canonical places, many meaningful contextual depths
+
+The product should feel like:
+
+"There are only a few places. But every place knows a lot."
+
+Visually, the product should feel like:
+
+"This feels like a flagship native Apple-adjacent app, not a Codex-built productivity prototype."
+
+## 2A. Root surface premium standard
+
+The root surfaces, Today, Goals, Time, and You, must feel premium, flagship, and native.
+
+Roots must have:
+
+- realistic SwiftUI proportions
+- strong visual hierarchy
+- native iOS layout credibility
+- restrained materials
+- clear primary object/action
+- refined spacing and typography
+- seamless shell/chrome integration
+- no dashboard clutter
+- no generic productivity-app feel
+- no awkward proof-harness energy
+- no placeholder composition
+- no normal Codex SwiftUI feel
+
+Weak roots are failures, not later polish. If a root looks technically valid but ordinary, generic, dashboard-like, card-heavy, or proportionally implausible, the packet is Needs Repair unless the failure is outside the packet and blocked by a named dependency.
+
+## 2B. Full-frontend light/dark standard
+
+The appearance standard applies to the entire frontend, not isolated screens.
+
+Root surfaces, drilldowns, overlays, inspectors, detail pages, Search, Capture, receipts, settings, edit flows, and object detail must be:
+
+- credible native SwiftUI
+- proportionally correct
+- visually consistent
+- intentionally designed in light
+- intentionally designed in dark
+- correct in system appearance
+- not dark-only
+- not light-only
+- not generic
+
+Light mode and dark mode are both first-class product modes. Light mode is not a technical variant. Dark mode is not the only designed experience. Drilldowns and sub-surfaces are not utilitarian leftovers under prettier roots.
+
+## 2C. Drilldown and sub-surface realism standard
+
+Drilldowns, inspectors, and secondary routes must feel like practical, buildable iPhone screens.
+
+They must use:
+
+- believable navigation hierarchy
+- practical row heights
+- practical list density
+- practical card restraint
+- native spacing
+- proportionate headers
+- legible control placement
+- meaningful object context
+- useful action/control paths
+
+They must not use:
+
+- fantasy panels
+- impossible geometry
+- giant concept-board blocks
+- fake design-shot distortions
+- empty detail pages
+- drilldowns that only repeat parent content
+- ugly utilitarian subviews hidden below polished roots
+
+Visually weak drilldowns are failures, not later polish.
+
+## 2D. Deep inspectability standard
+
+Ambitions must be deep, not wide. Depth is part of the product, not optional polish.
+
+Every meaningful object should support the appropriate subset of:
+
+- identity
+- context
+- fit / reason
+- action
+- proof
+- receipt
+- history
+- control
+- privacy boundary
+
+Valid depth comes from contextual object inspection:
+
+- Step detail
+- Goal detail
+- Life area detail
+- Goal path
+- Future path
+- Time block detail
+- Placement review
+- Reflow review
+- Conflict review
+- Recovery review
+- Capture proposal
+- Capture receipt
+- Search result preview
+- Proof detail
+- Source detail
+- History detail
+- Receipt detail
+- Privacy detail
+- Export/delete/reset
+- Local data status
+- Account optionality
+- Diagnostics / inspect and repair
+
+Each drilldown must answer a real user question or enable a real user action. Detail routes that only restate root content are failures.
+
+## 2E. Realistic SwiftUI proportions standard
+
+Every implemented screen must feel like a real iPhone app that could ship.
+
+Optimize for:
+
+- realistic iPhone ratios
+- believable nav bars, headers, and safe areas
+- practical row heights
+- practical list density
+- restrained card usage
+- native spacing
+- Apple-grade typography hierarchy
+- buildable SwiftUI geometry
+- default Dynamic Type credibility
+- large Dynamic Type resilience where relevant
+
+Avoid:
+
+- giant fantasy panels
+- over-cinematic concept-board distortions
+- impossible layouts
+- ratio drift
+- pretty screenshots with unrealistic app geometry
+- generated concept art posing as product UI
+
+If a surface looks like generated concept art instead of real SwiftUI, it fails.
 
 ## 3. North Star visual principles
 
@@ -301,6 +461,16 @@ Failure conditions:
 
 Any of these force Needs Repair even when tests pass:
 
+- roots that are not premium, flagship, or native-feeling
+- drilldowns that look utilitarian under polished roots
+- light mode that reads like an unfinished technical variant
+- dark mode that carries all product design while light mode lags
+- system appearance that is not deterministic or visually coherent
+- unrealistic SwiftUI proportions
+- fantasy panels or concept-art geometry
+- pretty screenshots with impossible app layout
+- roots improved in isolation while details, overlays, or inspectors remain weak
+- isolated packet wins that do not converge into one cohesive product
 - technically valid but visually mediocre SwiftUI
 - box-in-box card walls
 - heavy rounded-rectangle stacks
@@ -325,6 +495,29 @@ Any of these force Needs Repair even when tests pass:
 - module-menu sprawl
 - root-surface proliferation
 
+## 6A. Frontend-wide anti-patterns
+
+These anti-patterns fail the Ambitions premium frontend target:
+
+- dashboard walls
+- SaaS cards everywhere
+- generic productivity layouts
+- heavy nested rounded rectangles
+- giant glass panels
+- dark-only design
+- light mode that feels unfinished
+- prompt-box / chatbot composer feel
+- fake AI assistant energy
+- static diagrams with weak state distinction
+- empty detail pages
+- drilldowns that only repeat parent content
+- ugly utilitarian subviews under pretty roots
+- roots that look good while detail screens collapse into ordinary SwiftUI
+- pretty screenshots with unrealistic app geometry
+- technically valid but visually mediocre UI
+
+Any visual or surface packet that produces one of these anti-targets is Needs Repair unless the condition is outside the packet scope and blocked by a named dependency.
+
 ## 7. Visual scoring rubric
 
 For every visual repair packet and every surface maturity packet, score inspected screenshots from 1 to 5 across these categories:
@@ -332,13 +525,13 @@ For every visual repair packet and every surface maturity packet, score inspecte
 1. Native iOS quality
 2. Visual hierarchy
 3. Surface identity
-4. Object depth
-5. Material restraint
-6. Typography and spacing
-7. Interaction clarity
-8. Local-first trust clarity
-9. Accessibility / Dynamic Type readiness
-10. Similarity to Ambitions flagship target
+4. Object inspectability
+5. Light/dark quality
+6. Material restraint
+7. Typography and spacing
+8. Interaction clarity
+9. SwiftUI realism / proportions
+10. Similarity to Ambitions premium frontend target
 
 Scoring:
 
@@ -354,6 +547,10 @@ Rules:
 - Any category at 2 = Needs Repair unless explicitly outside packet scope and documented as a dependency.
 - Average under 4.0 = not Ready For Review for visual/surface maturity packets.
 - "Technically acceptable but visually mediocre" is not a pass.
+- "Looks okay for now" is not a pass.
+- "Only roots look premium" is not a pass.
+- "Only drilldowns look premium" is not a pass.
+- The entire affected frontend scope must move meaningfully toward the target.
 - Simulator proof can only support Yellow maximum, but simulator screenshots must still be visually strong enough to justify continuing.
 - Tests do not override the visual score.
 
@@ -365,14 +562,16 @@ Visual Delta must include:
 
 1. Current screenshot state
 2. Target visual state
-3. Gap from flagship target
+3. Gap from desired premium frontend target
 4. Exact visual deltas to close
-5. Product-law risks
-6. Accessibility risks
-7. Files likely responsible
-8. Screenshot proof required
-9. Self-review criteria
-10. Repair-loop conditions
+5. Exact inspectability deltas to close
+6. Exact realism/proportion deltas to close
+7. Product-law risks
+8. Accessibility risks
+9. Files likely responsible
+10. Screenshot proof required
+11. Self-review criteria
+12. Repair-loop conditions
 
 Do not start the packet implementation until this Visual Delta exists.
 
@@ -389,8 +588,13 @@ After every visual repair packet or surface maturity packet, update the ledger w
 7. Whether additional repair was performed
 8. Whether the packet required multiple repair cycles
 9. Final packet status
+10. Root quality evaluation
+11. Drilldown/sub-surface quality evaluation
+12. Light/dark quality evaluation
+13. Object inspectability evaluation
+14. SwiftUI realism/proportion evaluation
 
-## 10. Repair-loop rule
+## 10. Packet repair-loop enforcement
 
 A packet may pass tests and still fail.
 
@@ -402,6 +606,8 @@ If visual score is below threshold:
 - reinspect
 - rescore
 - repeat
+
+If root quality, drilldown quality, light/dark quality, object inspectability, or SwiftUI realism is weak inside the affected packet scope, the packet must loop through repair. Do not advance from an isolated technical win when the affected frontend still fails the premium target.
 
 Do not merely document visual failure as follow-up if it is within source/simulator scope for the current packet.
 
@@ -430,12 +636,22 @@ Ready For Review requires:
 - visual scorecard
 - repair loops completed for repairable failures
 - honest proof ceilings
+- root quality evaluation
+- drilldown/sub-surface quality evaluation
+- light/dark quality evaluation
+- object inspectability evaluation
+- SwiftUI realism/proportion evaluation
 
 Mark Needs Repair if:
 
 - screenshots look mediocre
 - visual hierarchy is weak
 - surface identity is unclear
+- root quality is weak
+- drilldown/sub-surface quality is weak inside packet scope
+- light/dark quality is weak
+- object inspectability is shallow inside packet scope
+- SwiftUI proportions feel unrealistic
 - root looks like cards/panels/dashboard
 - Dynamic Type is cramped
 - light mode is not truly designed
@@ -444,11 +660,29 @@ Mark Needs Repair if:
 - the surface does not materially move toward the flagship target
 - current packet failure is repairable and not repaired
 
+## 11A. Status rule: test-pass does not override visual/product failure
+
+Passing tests cannot upgrade a packet that fails the premium frontend target.
+
+Tests, source gates, identifiers, and screenshot capture are required proof inputs, but they do not override:
+
+- visually weak roots
+- visually weak drilldowns
+- weak light/dark execution
+- shallow object inspectability
+- unrealistic SwiftUI proportions
+- generic productivity-app grammar
+- dashboard/card-wall drift
+- prompt-box/chatbot visual grammar
+- ordinary Codex SwiftUI feel
+
+If a packet passes tests but fails these product conditions, its status is Needs Repair, Red, or Blocked according to severity and repairability.
+
 ## 12. Required closeout sentence
 
 Every visual/surface packet closeout must include:
 
-"Passing tests did not determine this status. The status is based on source proof, runtime proof, screenshot inspection, repair-loop completion, and visual fidelity against the Ambitions flagship target."
+"Passing tests did not determine this status. The status is based on source proof, runtime proof, screenshot inspection, repair-loop completion, and fidelity to the Ambitions premium frontend target: premium roots, native light/dark drilldowns and entire frontend, deeply inspectable object surfaces, and realistic SwiftUI proportions."
 
 ## 13. No human review checkpoints during execution
 
