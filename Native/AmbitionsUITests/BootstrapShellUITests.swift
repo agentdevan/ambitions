@@ -317,6 +317,31 @@ final class BootstrapShellUITests: AmbitionsUITestCase {
         add(screenshot)
     }
 
+    func testPacket21RootIALaw() throws {
+        let app = makeApp(
+            bootstrapMode: "preview",
+            extraEnvironment: ["AmbitionsScreenshotMode": "YES"]
+        )
+        app.launch()
+
+        XCTAssertTrue(waitForShellReady(in: app))
+        assertCanonicalRootIALawRendered(in: app)
+
+        for tab in ["Today", "Goals", "Time", "You"] {
+            XCTAssertTrue(
+                openCanonicalDestination(tab, screenIdentifier: screenIdentifier(forTab: tab), in: app),
+                "\(tab) should open before rendered root IA law proof."
+            )
+            XCTAssertTrue(waitForSelectedSurface(tab, in: app, timeout: 10))
+            assertCanonicalRootIALawRendered(in: app)
+        }
+
+        let screenshot = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
+        screenshot.name = "packet-2.1-root-ia-law-four-canonical-roots"
+        screenshot.lifetime = .keepAlways
+        add(screenshot)
+    }
+
     func testUIQL002RootDockDoesNotOverlapTimeOrYouContent() throws {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()

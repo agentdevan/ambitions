@@ -102,6 +102,7 @@ final class AppShellNavigationTests: XCTestCase {
     func testMeridianDestinationsMirrorCanonicalTabsWithoutNewRouteOwnership() {
         let destinations = StageDockDestination.all
 
+        XCTAssertEqual(destinations.count, 4)
         XCTAssertEqual(destinations.map(\.surface), AmbitionsSurface.allCases)
         XCTAssertEqual(destinations.map(\.title), ["Today", "Goals", "Time", "You"])
         XCTAssertEqual(destinations.map(\.glyphRole), [.startHere, .goalsAtlas, .timeCapacity, .userProfile])
@@ -114,8 +115,60 @@ final class AppShellNavigationTests: XCTestCase {
                 "shell.meridian.destination.you"
             ]
         )
+        XCTAssertEqual(StageChromeContract.launchDefault.destinations, destinations)
         XCTAssertFalse(destinations.map(\.title).contains { $0.localizedCaseInsensitiveContains("plan") })
         XCTAssertFalse(destinations.map(\.accessibilityIdentifier).contains { $0.localizedCaseInsensitiveContains("plan") })
+    }
+
+    func testRootIALawRejectsGlobalBehaviorAndTrustLayersAsDockDestinations() {
+        let destinations = StageDockDestination.all
+        let destinationTitles = Set(destinations.map(\.title))
+        let destinationIdentifiers = Set(destinations.map(\.accessibilityIdentifier))
+        let forbiddenRootTokens = [
+            "capture",
+            "search",
+            "motion",
+            "proof",
+            "source",
+            "privacy",
+            "history",
+            "receipt",
+            "receipts",
+            "trust",
+            "plan",
+            "profile",
+            "habits",
+            "insights"
+        ]
+
+        XCTAssertEqual(destinationTitles, Set(["Today", "Goals", "Time", "You"]))
+        XCTAssertEqual(
+            destinationIdentifiers,
+            Set([
+                "shell.meridian.destination.today",
+                "shell.meridian.destination.goals",
+                "shell.meridian.destination.time",
+                "shell.meridian.destination.you"
+            ])
+        )
+
+        for token in forbiddenRootTokens {
+            XCTAssertFalse(
+                destinationTitles.contains { $0.localizedCaseInsensitiveContains(token) },
+                "\(token) must not become a rendered root dock title."
+            )
+            XCTAssertFalse(
+                destinationIdentifiers.contains { $0.localizedCaseInsensitiveContains(token) },
+                "\(token) must not become a rendered root dock identifier."
+            )
+        }
+
+        XCTAssertNil(SurfaceOwnershipRegistry.globalComposer.canonicalTab)
+        XCTAssertEqual(SurfaceOwnershipRegistry.globalComposer.layer, .globalComposer)
+        XCTAssertNil(SurfaceOwnershipRegistry.motionBehavior.canonicalTab)
+        XCTAssertEqual(SurfaceOwnershipRegistry.motionBehavior.layer, .motionBehavior)
+        XCTAssertNil(SurfaceOwnershipRegistry.trustInspection.canonicalTab)
+        XCTAssertEqual(SurfaceOwnershipRegistry.trustInspection.layer, .trustInspection)
     }
 
     func testFCP08MeridianShellChromeContractPreservesFourRootSurfacesAndReceiptZone() {

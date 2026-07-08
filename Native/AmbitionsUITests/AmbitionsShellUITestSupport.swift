@@ -285,6 +285,13 @@ extension AmbitionsUITestCase {
             .count > 0
     }
 
+    func renderedRootDestinationButtons(in app: XCUIApplication) -> [XCUIElement] {
+        app.descendants(matching: .any)
+            .matching(NSPredicate(format: "identifier BEGINSWITH %@", "shell.meridian.destination."))
+            .allElementsBoundByIndex
+            .filter(\.exists)
+    }
+
     func rootDockFrame(in app: XCUIApplication) -> CGRect {
         var frame = CGRect.null
         for title in ["Today", "Goals", "Time", "You"] {
@@ -318,6 +325,28 @@ extension AmbitionsUITestCase {
         file: StaticString = #filePath,
         line: UInt = #line
     ) {
+        let expectedRootIdentifiers = [
+            "shell.meridian.destination.today",
+            "shell.meridian.destination.goals",
+            "shell.meridian.destination.time",
+            "shell.meridian.destination.you"
+        ]
+        let renderedRootButtons = renderedRootDestinationButtons(in: app)
+        XCTAssertEqual(
+            renderedRootButtons.count,
+            expectedRootIdentifiers.count,
+            "Root dock must expose exactly four rendered destinations: Today, Goals, Time, You.",
+            file: file,
+            line: line
+        )
+        XCTAssertEqual(
+            Set(renderedRootButtons.map(\.identifier)),
+            Set(expectedRootIdentifiers),
+            "Root dock rendered destination identifiers must stay locked to Today, Goals, Time, You.",
+            file: file,
+            line: line
+        )
+
         for tab in ["Today", "Goals", "Time", "You"] {
             let destination = rootDestinationButton(tab, in: app)
             XCTAssertTrue(destination.waitForExistence(timeout: 10), "Missing canonical root \(tab).", file: file, line: line)
@@ -334,6 +363,7 @@ extension AmbitionsUITestCase {
             "Source",
             "Privacy",
             "History",
+            "Trust",
             "Receipts",
             "Plan",
             "Profile",

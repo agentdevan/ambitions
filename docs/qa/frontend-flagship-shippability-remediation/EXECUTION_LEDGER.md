@@ -6,7 +6,7 @@ Owner: Codex frontend remediation operator
 Repository: agentdevan/ambitions
 Branch: frontend-flagship-shippability-remediation
 Session start SHA: 9362e940eec5e7d118df418d00022c3588df6610
-Current packet: Packet 2.1 - Root IA Law Lock (next after Packet 1.5 closeout)
+Current packet: Packet 2.2 - Motion-as-Behavior Cleanup (next after Packet 2.1 closeout)
 
 This ledger is process evidence only. It is not product acceptance, owner visual acceptance, release proof, accessibility proof, Visual Green, Accessibility Green, or Release Green.
 
@@ -29,8 +29,8 @@ No packet may be marked Done by Codex in this program.
 
 - Branch: `frontend-flagship-shippability-remediation`
 - Base SHA: `9362e940eec5e7d118df418d00022c3588df6610`
-- Current packet status: Packet 1.5 has source/runtime/simulator screenshot proof and is Yellow / Ready For Review.
-- Working tree expectation: after Packet 1.5 commit, the next unresolved packet is Packet 2.1.
+- Current packet status: Packet 2.1 has source/runtime/simulator screenshot proof and is Yellow / Ready For Review.
+- Working tree expectation: after Packet 2.1 commit, the next unresolved packet is Packet 2.2.
 - Linear: not touched this session; local ledger is the active progress record.
 - Xcode: `Xcode 26.6`, build `17F113`
 - Simulator used: iPhone 17 Pro Max, iOS 26.5, UDID `DD9B9C84-7188-48FA-AA2A-AB5C1D0EE2B6`
@@ -210,7 +210,7 @@ Surface maturity acceptance:
 
 | Packet | Status | Entry Condition | Required Proof |
 | --- | --- | --- | --- |
-| 2.1 Root IA Law Lock | Backlog | Project 1 no longer Red at shell level | Tests proving roots only Today/Goals/Time/You |
+| 2.1 Root IA Law Lock | Ready For Review | Project 1 no longer Red at shell level | Tests proving roots only Today/Goals/Time/You |
 | 2.2 Motion-as-Behavior Cleanup | Backlog | IA tests stable | No Motion root destination, transition/reflow proof |
 | 2.3 No-Dashboard / No-Task-App Guardrail | Backlog | IA law stable | Explicit anti-drift checks and mapped repair list |
 | 2.4 Architecture Hygiene When Touched | Backlog | After touched source paths are known | Governance check and canonical owner evidence |
@@ -576,6 +576,84 @@ Final self-score:
 
 Passing tests did not determine this status. The status is based on source proof, runtime proof, screenshot inspection, repair-loop completion, and fidelity to the Ambitions premium frontend target: premium roots, native light/dark drilldowns and entire frontend, deeply inspectable object surfaces, and realistic SwiftUI proportions.
 
+### Packet 2.1 - Root IA Law Lock
+
+Status: Yellow / Ready For Review
+
+Target:
+- Lock persistent root IA to Today / Goals / Time / You only.
+- Ensure tests fail if Capture, Search, Motion, Proof, Source, Privacy, History, Receipts, or stale product roots become persistent root destinations.
+- Keep Capture/Search as global layers and Motion as Stage behavior, not root IA.
+- Preserve deep-not-wide law: no new root surfaces, module menus, or root trust destinations.
+
+Depth map before coding:
+- Root state: exactly four persistent root dock destinations: Today, Goals, Time, You.
+- Valid drilldowns: none added in this packet; existing contextual drilldowns under Goals/Time/You remain valid.
+- Invalid extra surfaces: Capture tab/root, Search tab/root, Motion tab/root, Proof/Source/Privacy/History/Receipts tabs, Plan/Profile/Habits/Insights/Pulse roots.
+- Object types involved: root dock destinations, Stage surface ownership registry, shell chrome contract, Capture/Search overlay state, Motion behavior ownership.
+- Inspection details: tests should expose both source-level root ownership and rendered UI root dock evidence.
+- Edit/control paths: no product mutation or route redesign intended; only proof/test gates unless a source-law drift is found.
+- Receipt/proof/history paths: no product receipts changed; ledger records test proof and simulator screenshot paths.
+- Accessibility expectations: root dock destination count and labels must remain accessible as four root controls; Capture/Search/Motion must not appear as root accessibility destinations.
+- Screenshot proof required: rendered root dock screenshot lane proving exactly four canonical roots and no forbidden root destinations.
+
+Visual Delta:
+- Current screenshot state: Packet 1.5 standard wrapper proof renders Today, Goals, Time, and You roots and asserts no invalid root destination identifiers by name, but the helper does not yet count the rendered dock destination set exactly.
+- Target screenshot state: rendered root proof must show and test exactly four root dock destinations with identifiers for Today, Goals, Time, and You only.
+- Gap from desired premium frontend target: a future extra root destination could potentially sneak into the dock if the test only asserts that the canonical four exist; this would violate the deep-not-wide law even if screenshots still render.
+- Exact visual deltas to close: add a rendered dock destination count/identifier check; keep screenshot proof on the real root shell; avoid adding visual chrome or extra controls.
+- Exact inspectability deltas to close: make the root IA contract inspectable in source tests and UI tests, including Capture/Search/Motion/trust details as forbidden root destinations.
+- Exact realism/proportion deltas to close: no UI proportion changes intended; the rendered root shell must remain a practical four-icon native dock.
+- Likely files: `Native/AmbitionsUITests/AmbitionsShellUITestSupport.swift`, `Native/AmbitionsTests/App/AppShellNavigationTests.swift`, `Native/AmbitionsUITests/BootstrapShellUITests.swift`, and this ledger.
+- Product-law risks: do not convert Capture/Search/Motion into roots while testing them; do not add a diagnostics or module-menu root.
+- Accessibility risks: root destination counting must not rely on hidden labels while missing the rendered accessible controls.
+- Proof required: focused unit/source root-law test, focused rendered root UI gate, source/governance scans, broad frontend build-for-testing if tests change.
+- Self-review criteria: rendered dock exposes exactly Today / Goals / Time / You; forbidden root identifiers/titles are absent; Capture/Search remain overlay/global layers; Motion remains behavior.
+- Repair-loop conditions: if any forbidden root appears in the dock or the rendered count is not exactly four, repair shell/root ownership before closing; do not close from source enum existence alone.
+
+Implementation completed:
+- Strengthened `AppShellNavigationTests` so source tests assert `StageDockDestination.all` has exactly four destinations, mirrors `StageChromeContract.launchDefault.destinations`, and rejects Capture, Search, Motion, Proof, Source, Privacy, History, Receipts, Trust, Plan, Profile, Habits, and Insights as dock title/identifier tokens.
+- Added source assertions that `SurfaceOwnershipRegistry.globalComposer`, `motionBehavior`, and `trustInspection` have no `canonicalTab` and remain in their non-root layers.
+- Strengthened `assertCanonicalRootIALawRendered` so UI tests count rendered root destination accessibility identifiers and require the exact set `today`, `goals`, `time`, and `you`.
+- Added a focused rendered UI gate that opens each canonical root, reasserts the four-root law at each state, and attaches `packet-2.1-root-ia-law-four-canonical-roots`.
+
+Visual inspection notes:
+- Packet 2.1 screenshot shows the actual root shell on You with four icon-only dock destinations and no Capture, Search, Motion, Proof, Source, Privacy, History, Receipt, or Trust root destination.
+- The dock geometry remains practical and iPhone-native; this packet does not change root surface composition.
+- The inspected screenshot is dark-mode simulator proof only. It proves root IA law at the rendered dock, not surface premium maturity, light/dark appearance breadth, drilldown realism, manual VoiceOver quality, physical-device fidelity, or release readiness.
+
+Visual Scorecard:
+- Native iOS quality: 4 for preserving a real native rendered root shell while locking root IA.
+- Visual hierarchy: 4 because the dock remains four icon-only roots and no new root clutter was introduced.
+- Surface identity: 4 because Today / Goals / Time / You remain the only root identities in source and rendered proof.
+- Object inspectability: 4 for making root IA ownership inspectable in source tests and rendered UI tests; product object drilldowns remain later surface maturity scope.
+- Light/dark quality: 4 within this packet because the change does not alter appearance and preserves Packet 1.3 as the active appearance proof; Packet 2.1 itself captured dark-mode IA proof only.
+- Material restraint: 4 because no new materials, borders, cards, or dashboard chrome were added.
+- Typography and spacing: 4 because root dock proportions were preserved and no text layout churn was introduced.
+- Interaction clarity: 4 because each canonical root can be opened and the rendered four-root law is reasserted after navigation.
+- SwiftUI realism / proportions: 4 because the rendered proof uses the real simulator shell, not a mock or identifier-only source gate.
+- Similarity to Ambitions premium frontend target: 4 for deep-not-wide root governance; broader premium root/drilldown quality remains later packets.
+- Final self-score: 4.0 average, Yellow / Ready For Review within simulator/source proof ceilings.
+
+Frontend-wide evaluation:
+- Root quality: root IA is locked to the four canonical surfaces; this is product-law quality proof, not a claim that the roots are visually mature.
+- Drilldown/sub-surface quality: no drilldowns changed; stale Motion screenshot/helper debt remains Packet 2.2 scope.
+- Light/dark quality: not directly changed; Packet 1.3 remains the active appearance matrix proof.
+- Object inspectability: root ownership and non-root global/behavior/trust layers are inspectable in tests; product object inspection remains later maturity scope.
+- SwiftUI realism / proportions: no fantasy UI or additional root surface was introduced; rendered proof remains a real iPhone simulator shell.
+
+Repair cycles performed:
+- 1: Initial source-law focused run timed out before executing tests during compile; a Packet 2.1 validation prebuild then passed, and the source-law focused test passed with `EXECUTED_TESTS=1`.
+- 2: Initial rendered UI gate failed because the helper queried only `app.buttons` and found zero SwiftUI dock destination elements; repaired the helper to inspect rendered descendants by `shell.meridian.destination.` identifier and reran.
+- 3: The long UI selector then reported `test_discovery_failure`; shortened the UI test method to `testPacket21RootIALaw`, rebuilt, reran, and proved `EXECUTED_TESTS=1` with the screenshot attachment.
+
+Remaining visual deltas:
+- Packet 2.1 does not repair premium root surface maturity, drilldown depth, Capture/Search visual grammar, Motion naming residue, or light/dark drilldown breadth.
+- Motion-as-root ambiguity in screenshot helpers/source residue remains the next packet, Packet 2.2.
+- Physical-device and manual VoiceOver proof remain unavailable; Visual Green and Accessibility Green are impossible.
+
+Passing tests did not determine this status. The status is based on source proof, runtime proof, screenshot inspection, repair-loop completion, and fidelity to the Ambitions premium frontend target: premium roots, native light/dark drilldowns and entire frontend, deeply inspectable object surfaces, and realistic SwiftUI proportions.
+
 ### Packet 1.5 - Baseline Validation Recovery
 
 Status: Yellow / Ready For Review
@@ -815,6 +893,34 @@ Validation classification:
 - Runtime Green is not claimed for the frontend overall.
 - Interaction Green is not claimed.
 - Visual Review readiness for Packet 1.5 is Yellow only because proof is simulator-only and physical-device proof is missing.
+- Accessibility Green is impossible because manual VoiceOver proof was not performed.
+- Release Green is impossible; release validation, device proof, accessibility proof, and later Red blockers remain.
+
+### Packet 2.1 final validation after repair
+
+| Command | Exit | Result |
+| --- | ---: | --- |
+| `git status --short --branch` | 0 | Branch `frontend-flagship-shippability-remediation`; Packet 2.1 files modified before commit |
+| `git diff --check` | 0 | Passed |
+| `xcodegen generate` | 0 | Project generated successfully |
+| `python3 scripts/ambitions-architecture-inventory.py` | 0 | `GREEN final-tree parity achieved`; source/path parity only |
+| `python3 scripts/ambitions-green-standard-audit.py` | 0 | Green-standard source gate passed |
+| `python3 scripts/ambitions-vocabulary-drift-scan.py` | 0 | Vocabulary drift gate passed |
+| `python3 scripts/ambitions-local-first-boundary-scan.py` | 0 | Local-first boundary scan passed |
+| `python3 scripts/ambitions-remediation-governance-check.py` | 0 | Guard passed; changed paths limited to source/UI tests plus ledger |
+| `scripts/ambitions-xcode-test-focused.sh --batch packet-2.1-root-ia-source --test AmbitionsTests/AppShellNavigationTests/testRootIALawRejectsGlobalBehaviorAndTrustLayersAsDockDestinations --scheme AmbitionsUnitTests --timeout 8m --kill-after 30s --prebuild --prebuild-timeout 20m` | 65 | Tooling timeout before test execution; `EXECUTED_TESTS=0`, `FAILURE_CLASS=mcp_timeout_no_test_log`; not source proof |
+| `./scripts/ambitions-xcode-build-for-testing.sh --batch packet-2.1-validation-prebuild` | 0 | Prebuild passed; summary at `.codex/xcode-summaries/packet-2.1-validation-prebuild/20260708T032048Z/extract/summary.json`; duration 642.861s |
+| `AMBITIONS_XCODE_UI_PREBUILD=never scripts/ambitions-xcode-test-focused.sh --batch packet-2.1-root-ia-source-after-prebuild --test AmbitionsTests/AppShellNavigationTests/testRootIALawRejectsGlobalBehaviorAndTrustLayersAsDockDestinations --scheme AmbitionsUnitTests --timeout 8m --kill-after 30s --test-without-building --skip-prebuild` | 0 | Source root IA law test passed; 1 executed test; summary at `.codex/xcode-summaries/packet-2.1-root-ia-source-after-prebuild/20260708T033148Z-AmbitionsTests-AppShellNavigationTests-testRootIALawRejectsGlobalBehaviorAndTrus-82076-17961/extract/summary.json` |
+| `AMBITIONS_XCODE_UI_PREBUILD=never scripts/ambitions-xcode-test-focused.sh --batch packet-2.1-root-ia-rendered --test AmbitionsUITests/BootstrapShellUITests/testPacket21RootIALawLocksRenderedDockToFourCanonicalRoots --scheme AmbitionsUITests --timeout 12m --kill-after 30s --test-without-building --skip-prebuild` | 65 | Executed 1 UI test and failed because the new rendered helper queried only `app.buttons` and found 0 root destination elements; repaired helper to query rendered descendants |
+| `scripts/ambitions-xcode-test-focused.sh --batch packet-2.1-root-ia-rendered-repair --test AmbitionsUITests/BootstrapShellUITests/testPacket21RootIALawLocksRenderedDockToFourCanonicalRoots --scheme AmbitionsUITests --timeout 16m --kill-after 30s --prebuild --prebuild-timeout 20m` | 65 | Prebuild passed, but focused run reported `test_discovery_failure` with `EXECUTED_TESTS=0`; shortened selector to `testPacket21RootIALaw` |
+| `scripts/ambitions-xcode-test-focused.sh --batch packet-2.1-root-ia-rendered-short --test AmbitionsUITests/BootstrapShellUITests/testPacket21RootIALaw --scheme AmbitionsUITests --timeout 16m --kill-after 30s --prebuild --prebuild-timeout 20m` | 0 | Rendered root IA law test passed; 1 executed UI test; summary at `.codex/xcode-summaries/packet-2.1-root-ia-rendered-short/20260708T034708Z-AmbitionsUITests-BootstrapShellUITests-testPacket21RootIALaw-86966-2696/extract/summary.json` |
+| `./scripts/ambitions-xcode-build-for-testing.sh --batch frontend-remediation` | 0 | Build-for-testing passed; summary at `.codex/xcode-summaries/frontend-remediation/20260708T035243Z/extract/summary.json`; duration 571.606s |
+
+Validation classification:
+- Source Green for the scoped Packet 2.1 diff is supported by source/build/script proof.
+- Runtime Green is not claimed for the frontend overall.
+- Interaction Green is not claimed.
+- Visual Review readiness for Packet 2.1 is Yellow only because proof is simulator-only and physical-device proof is missing.
 - Accessibility Green is impossible because manual VoiceOver proof was not performed.
 - Release Green is impossible; release validation, device proof, accessibility proof, and later Red blockers remain.
 
@@ -1075,6 +1181,36 @@ Additional proof notes:
 - The repaired wrapper now invokes `xcodebuild ... test -only-testing:AmbitionsUITests/BootstrapShellUITests/testPacket14RootChromeRenderedGates ...`, matching the direct syntax that proved the gate during Packet 1.4.
 - This packet does not prove premium surface maturity, drilldown realism, physical-device visual fidelity, manual VoiceOver quality, or release readiness.
 
+### Packet 2.1 proof
+
+Packet 2.1 proof is simulator Yellow only, not Visual Green or Accessibility Green.
+
+Focused source result bundle:
+- `.codex/xcode-results/packet-2.1-root-ia-source-after-prebuild/20260708T033148Z-AmbitionsTests-AppShellNavigationTests-testRootIALawRejectsGlobalBehaviorAndTrus-82076-17961/focused-test.xcresult`
+
+Focused source summary:
+- `.codex/xcode-summaries/packet-2.1-root-ia-source-after-prebuild/20260708T033148Z-AmbitionsTests-AppShellNavigationTests-testRootIALawRejectsGlobalBehaviorAndTrus-82076-17961/extract/summary.json`: source root IA law test executed 1 selected unit test and passed.
+
+Focused rendered result bundles:
+- `.codex/xcode-results/packet-2.1-root-ia-rendered-short/20260708T034708Z-AmbitionsUITests-BootstrapShellUITests-testPacket21RootIALaw-86966-2696/focused-test.xcresult`
+- `.codex/xcode-results/packet-2.1-root-ia-rendered-short/20260708T034713Z-bft-87175-10496/build-for-testing.xcresult`
+
+Focused rendered summary:
+- `.codex/xcode-summaries/packet-2.1-root-ia-rendered-short/20260708T034708Z-AmbitionsUITests-BootstrapShellUITests-testPacket21RootIALaw-86966-2696/extract/summary.json`: rendered root IA law test executed 1 selected UI test and passed.
+
+Focused rendered screenshot:
+- `.codex/xcode-summaries/packet-2.1-root-ia-rendered-short/20260708T034708Z-AmbitionsUITests-BootstrapShellUITests-testPacket21RootIALaw-86966-2696/extract/screenshots/packet-2_0_A0A46553-8A25-4701-B73F-A709EBCDD889.1-root-ia-law-four-canonical-roots`: rendered You root screenshot after opening all canonical roots; dock exposes four icon-only destinations and no Capture/Search/Motion/trust root destination.
+
+Broad build proof:
+- `.codex/xcode-summaries/frontend-remediation/20260708T035243Z/extract/summary.json`
+- `.codex/xcode-results/frontend-remediation/20260708T035243Z-bft-89147-12909/build-for-testing.xcresult`
+
+Additional proof notes:
+- The first Packet 2.1 focused source attempt timed out before executing tests and is not counted as source proof.
+- The first Packet 2.1 rendered UI attempt failed on a real assertion (`0` rendered destinations from the helper); the helper was repaired and the rendered gate reran successfully.
+- The long Packet 2.1 selector path then hit `test_discovery_failure`; the UI test method was shortened and the gate reran successfully with `EXECUTED_TESTS=1`.
+- This packet proves root IA law at source and rendered shell levels. It does not prove Motion behavior quality, premium surface maturity, drilldown realism, full light/dark drilldown appearance, physical-device visual fidelity, manual VoiceOver quality, or release readiness.
+
 ## 8. Known Remaining Red Blockers
 
 - Root shell safe-area and dock/content overlap is repaired for the inspected default Dynamic Type dark-mode simulator roots, but not proven for all appearances or physical device.
@@ -1141,6 +1277,21 @@ Packet 1.5 current evidence:
 
 Mapping confidence: High for proof-lane repeatability; Medium for broader visual-failure-gate coverage because full drilldown/render coverage remains future scope.
 
+Current Packet 2.1 maps to:
+- Deep, Not Wide product-law family: only Today / Goals / Time / You may be persistent roots.
+- Known Red blocker family: Motion naming/screenshot residue creating IA ambiguity.
+- AMB-1194 remediation dossier family: shell/stage/root IA proof and visual proof ceiling.
+
+Packet 2.1 current evidence:
+- Source test repair exists for root dock destination count, forbidden root tokens, and non-root global/behavior/trust ownership.
+- Runtime focused proof exists for the rendered four-root dock after opening Today, Goals, Time, and You.
+- Visual simulator proof exists for the four-root rendered dock screenshot.
+- Accessibility proof is incomplete; the rendered identifiers are tested, but manual VoiceOver was not performed.
+- Device proof is missing.
+- Safe status: Yellow / Ready For Review, not Done.
+
+Mapping confidence: High for root IA law lock; Medium for Motion ambiguity because Packet 2.1 prevents Motion as root IA but does not yet clean stale Motion screenshots/helpers or prove Motion behavior.
+
 ## 10. Proof Ceilings
 
 - Source gates passing can support source status only.
@@ -1152,10 +1303,10 @@ Mapping confidence: High for proof-lane repeatability; Medium for broader visual
 
 ## 11. Product Decisions Needed
 
-None for Packet 1.5 at this checkpoint.
+None for Packet 2.1 at this checkpoint.
 
 Decision trigger:
-- If Packet 2.1 reveals a product-law conflict between root IA tests and current source behavior, stop and classify whether it is source drift or a true product decision before broadening.
+- If Packet 2.2 reveals a product-law conflict between old Motion-as-surface artifacts and current Motion-as-behavior law, stop and classify whether it is source drift, compatibility debt, or a true product decision before broadening.
 
 ## 12. Commit Ledger
 
@@ -1179,19 +1330,23 @@ Packet 1.5 planned commit:
 - `Frontend remediation: baseline validation recovery`
 - SHA: read from `git rev-parse HEAD` after commit; the ledger does not embed its own final commit hash because amending that value changes the hash.
 
+Packet 2.1 planned commit:
+- `Frontend remediation: root IA law lock`
+- SHA: read from `git rev-parse HEAD` after commit; the ledger does not embed its own final commit hash because amending that value changes the hash.
+
 ## 13. Resume Instructions
 
 To resume from this checkpoint:
 1. Stay on branch `frontend-flagship-shippability-remediation`.
 2. Run `git status --short --branch`.
-3. Confirm Packet 1.5 is committed and current packet is Packet 2.1.
+3. Confirm Packet 2.1 is committed and current packet is Packet 2.2.
 4. Inspect the current diff before editing.
 5. Rerun `git diff --check`.
-6. Begin Packet 2.1 - Root IA Law Lock.
-7. Write the Packet 2.1 Visual Delta before coding because root IA law affects shell visual/product governance.
-8. Inspect current shell/dock/Capture/Search/Motion tests and source ownership.
-9. Add or repair focused gates only as needed to prove Today / Goals / Time / You are the only persistent roots and Capture/Search remain global layers.
-10. Run focused IA/product-law validation, then required source/governance scans and the broad `frontend-remediation` build lane if source/test code changes.
+6. Begin Packet 2.2 - Motion-as-Behavior Cleanup.
+7. Write the Packet 2.2 Visual Delta before coding because Motion ambiguity affects root IA coherence and screenshot/proof naming.
+8. Inspect current Motion paths, screenshots, helper names, tests, and Stage/Motion behavior proof before editing.
+9. Remove or quarantine stale Motion-as-root/surface helpers only when the replacement behavior proof is clear; do not delete needed Stage/Motion behavior infrastructure.
+10. Run focused Motion/product-law validation, then required source/governance scans and the broad `frontend-remediation` build lane if source/test code changes.
 11. Inspect any generated screenshots manually, update this ledger with exact commands, exits, artifacts, risks, and next packet, and commit only if validation passes and the change is coherent.
 
 ## 14. Packet Closeout Template
