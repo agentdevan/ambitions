@@ -185,18 +185,16 @@ final class TimeSurfaceUITests: AmbitionsUITestCase {
         XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.primary-action", in: app, maxAttempts: 10))
         app.descendants(matching: .any)["time.life-shape-field.primary-action"].tap()
         XCTAssertTrue(scrollUntilElementExists("protected-placement-review", in: app, maxAttempts: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["protected-placement-review.step"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["protected-placement-review.current-placement"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["protected-placement-review.proposed-placement"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["protected-placement-review.priority"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["Low"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["Normal"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["High"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["protected-placement-review.move-it"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["protected-placement-review.keep-as-is"].waitForExistence(timeout: 10))
-        captureTimeScreenshot(named: "amb-1168-time-protected-placement-review", in: app)
+        assertPacket36ProtectedPlacementReviewDepthExists(in: app)
+        XCTAssertTrue(
+            scrollPacket36ProtectedPlacementReviewIntoScreenshotBand(in: app),
+            "Packet 3.6 placement review should be visible in the screenshot proof band."
+        )
+        captureTimeScreenshot(named: "packet-3.6-time-protected-placement-review", in: app)
 
-        scrollUntilButtonHittable("protected-placement-review.keep-as-is", fallbackLabel: "Keep as is", in: app).tap()
+        let keepAsIsButton = scrollUntilButtonHittable("protected-placement-review.keep-as-is", fallbackLabel: "Keep as is", in: app)
+        captureTimeScreenshot(named: "packet-3.6-time-protected-placement-review-actions", in: app)
+        keepAsIsButton.tap()
         XCTAssertTrue(scrollUntilElementExists("protected-placement-review.outcome", in: app, maxAttempts: 10))
         XCTAssertTrue(app.staticTexts["Kept as is"].waitForExistence(timeout: 10))
         XCTAssertFalse(app.staticTexts["Step placed"].exists)
@@ -208,12 +206,14 @@ final class TimeSurfaceUITests: AmbitionsUITestCase {
         XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.mutation-proof", in: app, maxAttempts: 10))
         XCTAssertTrue(app.staticTexts["Step placed"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Today recomputed")).firstMatch.exists)
-        captureTimeScreenshot(named: "amb-1168-time-after-place-step", in: app)
+        assertPacket36TimeMutationProofIsInspectableAndClear(in: app)
+        captureTimeScreenshot(named: "packet-3.6-time-after-approved-placement", in: app)
 
         XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field.undo"].waitForExistence(timeout: 10))
         app.descendants(matching: .any)["time.life-shape-field.undo"].tap()
         XCTAssertTrue(app.staticTexts["Undo applied"].waitForExistence(timeout: 10))
-        captureTimeScreenshot(named: "amb-1168-time-after-undo", in: app)
+        assertPacket36TimeMutationProofIsInspectableAndClear(in: app)
+        captureTimeScreenshot(named: "packet-3.6-time-after-undo", in: app)
 
         XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.layer.protected", in: app, maxAttempts: 20))
         scrollUntilButtonHittable("time.life-shape-field.layer.protected", fallbackLabel: "Protected", in: app).tap()
@@ -221,7 +221,8 @@ final class TimeSurfaceUITests: AmbitionsUITestCase {
         app.descendants(matching: .any)["time.life-shape-field.primary-action"].tap()
         XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.mutation-proof", in: app, maxAttempts: 10))
         XCTAssertTrue(app.staticTexts["Window protected"].waitForExistence(timeout: 10))
-        captureTimeScreenshot(named: "amb-1168-time-after-protect-window", in: app)
+        assertPacket36TimeMutationProofIsInspectableAndClear(in: app)
+        captureTimeScreenshot(named: "packet-3.6-time-after-protect-window", in: app)
     }
 
     func testAMB1169TimeWhyThisInspectionStaysBehindDetailIntent() throws {
@@ -595,4 +596,5 @@ final class TimeSurfaceUITests: AmbitionsUITestCase {
         semanticMark.tap()
         return true
     }
+
 }

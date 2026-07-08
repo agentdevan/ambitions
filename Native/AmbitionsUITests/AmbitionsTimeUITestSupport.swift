@@ -204,4 +204,107 @@ extension AmbitionsUITestCase {
 
         return target.exists && target.frame.intersects(screenshotBand)
     }
+
+    func assertPacket36TimeMutationProofIsInspectableAndClear(
+        in app: XCUIApplication,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        let proof = app.descendants(matching: .any)["time.life-shape-field.mutation-proof"]
+        let source = app.descendants(matching: .any)["time.life-shape-field.mutation-proof.source"]
+        let proofLine = app.descendants(matching: .any)["time.life-shape-field.mutation-proof.proof"]
+        let history = app.descendants(matching: .any)["time.life-shape-field.mutation-proof.history"]
+        let privacy = app.descendants(matching: .any)["time.life-shape-field.mutation-proof.privacy"]
+
+        XCTAssertTrue(proof.waitForExistence(timeout: 10), "Time mutation proof should render as an inline receipt.", file: file, line: line)
+        XCTAssertTrue(source.waitForExistence(timeout: 10), "Time mutation proof should expose source.", file: file, line: line)
+        XCTAssertTrue(proofLine.waitForExistence(timeout: 10), "Time mutation proof should expose proof.", file: file, line: line)
+        XCTAssertTrue(history.waitForExistence(timeout: 10), "Time mutation proof should expose history.", file: file, line: line)
+        XCTAssertTrue(privacy.waitForExistence(timeout: 10), "Time mutation proof should expose privacy.", file: file, line: line)
+
+        let receiptText = accessibilityText(for: proof)
+        XCTAssertTrue(receiptText.localizedCaseInsensitiveContains("Local Time action"), receiptText, file: file, line: line)
+        XCTAssertTrue(receiptText.localizedCaseInsensitiveContains("Saved on this iPhone"), receiptText, file: file, line: line)
+        XCTAssertTrue(
+            receiptText.localizedCaseInsensitiveContains("Today recomputed") ||
+                receiptText.localizedCaseInsensitiveContains("Undo applied"),
+            receiptText,
+            file: file,
+            line: line
+        )
+        XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "runtime-backed")).firstMatch.exists, file: file, line: line)
+        XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "proof seam")).firstMatch.exists, file: file, line: line)
+        XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "AI recommends")).firstMatch.exists, file: file, line: line)
+
+        let headerFrame = shellHeaderFrame(in: app)
+        let layerSelector = app.descendants(matching: .any)["time.life-shape-field.layer-selector"]
+        XCTAssertFalse(headerFrame.isNull, "Shell header frame should exist before receipt collision validation.", file: file, line: line)
+        XCTAssertFalse(
+            proof.frame.intersects(headerFrame),
+            "Inline Time receipt intersects shell header. proof=\(proof.frame) header=\(headerFrame)",
+            file: file,
+            line: line
+        )
+        if layerSelector.exists {
+            XCTAssertFalse(
+                proof.frame.intersects(layerSelector.frame),
+                "Inline Time receipt intersects layer controls. proof=\(proof.frame) selector=\(layerSelector.frame)",
+                file: file,
+                line: line
+            )
+        }
+    }
+
+    func assertPacket36ProtectedPlacementReviewDepthExists(
+        in app: XCUIApplication,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        for identifier in [
+            "protected-placement-review.step",
+            "protected-placement-review.current-placement",
+            "protected-placement-review.proposed-placement",
+            "protected-placement-review.protection",
+            "protected-placement-review.receipt",
+            "protected-placement-review.privacy",
+            "protected-placement-review.priority",
+            "protected-placement-review.move-it",
+            "protected-placement-review.keep-as-is"
+        ] {
+            XCTAssertTrue(
+                app.descendants(matching: .any)[identifier].waitForExistence(timeout: 10),
+                "\(identifier) should render in the Packet 3.6 placement review.",
+                file: file,
+                line: line
+            )
+        }
+        XCTAssertTrue(app.descendants(matching: .any)["Low"].waitForExistence(timeout: 10), file: file, line: line)
+        XCTAssertTrue(app.descendants(matching: .any)["Normal"].waitForExistence(timeout: 10), file: file, line: line)
+        XCTAssertTrue(app.descendants(matching: .any)["High"].waitForExistence(timeout: 10), file: file, line: line)
+    }
+
+    func scrollPacket36ProtectedPlacementReviewIntoScreenshotBand(in app: XCUIApplication) -> Bool {
+        let scrollView = app.scrollViews["time.content-scroll"]
+        let card = app.descendants(matching: .any)["protected-placement-review"]
+        let receipt = app.descendants(matching: .any)["protected-placement-review.receipt"]
+        let screenshotBand = CGRect(x: 0, y: 170, width: 1_000, height: 760)
+
+        for _ in 0..<12 {
+            if card.exists,
+               card.frame.intersects(screenshotBand),
+               card.frame.minY >= 130,
+               receipt.exists,
+               receipt.frame.intersects(screenshotBand) {
+                return true
+            }
+
+            if scrollView.exists {
+                scrollView.swipeUp(velocity: .slow)
+            } else {
+                app.swipeUp(velocity: .slow)
+            }
+        }
+
+        return card.exists && card.frame.intersects(screenshotBand)
+    }
 }

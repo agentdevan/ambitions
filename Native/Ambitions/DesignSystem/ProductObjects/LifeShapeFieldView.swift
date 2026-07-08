@@ -215,22 +215,22 @@ struct LifeShapeFieldView: View {
     }
 
     var objectCanvasWithEmbeddedConsequences: some View {
-        objectCanvas
-            .overlay(alignment: .topLeading) {
-                if let visibleMutation {
-                    LifeShapeMutationProofBanner(
-                        mutation: visibleMutation,
-                        onUndo: visibleMutation.stageMutation.undoAvailability.isAvailable ? onUndoMutation : nil
-                    )
-                    .padding(theme.spacing.sm)
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            objectCanvas
+                .overlay(alignment: .bottomLeading) {
+                    if shouldShowEmbeddedReflow {
+                        reflowTrustSeam
+                            .padding(theme.spacing.sm)
+                    }
                 }
+
+            if let visibleMutation {
+                LifeShapeMutationProofBanner(
+                    mutation: visibleMutation,
+                    onUndo: visibleMutation.stageMutation.undoAvailability.isAvailable ? onUndoMutation : nil
+                )
             }
-            .overlay(alignment: .bottomLeading) {
-                if shouldShowEmbeddedReflow {
-                    reflowTrustSeam
-                        .padding(theme.spacing.sm)
-                }
-            }
+        }
     }
 
     var shouldShowEmbeddedReflow: Bool {

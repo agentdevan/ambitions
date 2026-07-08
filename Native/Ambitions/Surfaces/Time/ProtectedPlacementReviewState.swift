@@ -25,6 +25,8 @@ struct ProtectedPlacementReviewState: Identifiable, Sendable, Hashable {
             "Priority: \(priorityDecision.priority.userFacingLabel)",
             reasonLabel,
             priorityDecision.reviewNote,
+            "Approving saves a local receipt. Keep as is makes no placement change.",
+            "No sign-in or cloud handoff is needed.",
             "Available priority choices: Low, Normal, High",
             "Ambitions will not move this without approval"
         ].joined(separator: ". ")

@@ -4,6 +4,7 @@ import SwiftUI
 // Mutation/accessibility/proof contract: protected-placement actions either approve a local Time placement mutation with visible review state or keep the existing Step placement without fabricating proof.
 struct ProtectedPlacementReviewCard: View {
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
 
     let review: ProtectedPlacementReviewState
     let onPriorityChange: (PlacementPriority) -> Void
@@ -11,24 +12,40 @@ struct ProtectedPlacementReviewCard: View {
     let onKeep: () -> Void
 
     var body: some View {
+        let reviewStyle = theme.stateStyle(for: .warning)
+
         VStack(alignment: .leading, spacing: theme.spacing.md) {
-            VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                Text("Review change")
-                    .font(theme.typography.titleCompact.weight(.semibold))
-                    .foregroundStyle(theme.colors.textPrimary)
-                    .accessibilityAddTraits(.isHeader)
-                Text("This moves a Step inside the next seven days. Ambitions will not move it without approval.")
-                    .font(theme.typography.bodySecondary)
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .fixedSize(horizontal: false, vertical: true)
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 8, style: .continuous)
+                        .fill(reviewStyle.fill.opacity(reduceTransparency ? 0.34 : 0.20))
+                    Image(systemName: "calendar.badge.clock")
+                        .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                        .foregroundStyle(reviewStyle.accent)
+                }
+                .frame(width: 40, height: 40)
+                .accessibilityHidden(true)
+
+                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+                    Text("Review Step placement")
+                        .font(theme.typography.section.weight(.semibold))
+                        .foregroundStyle(theme.colors.textPrimary)
+                        .accessibilityAddTraits(.isHeader)
+                    Text("This touches this week. Time will keep the current placement unless you approve the move.")
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
             }
 
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 reviewRow(title: "Step", value: review.stepTitle, identifier: "protected-placement-review.step")
-                reviewRow(title: "Current placement", value: review.currentPlacementLabel, identifier: "protected-placement-review.current-placement")
-                reviewRow(title: "Proposed placement", value: review.proposedPlacementLabel, identifier: "protected-placement-review.proposed-placement")
+                reviewRow(title: "Stays now", value: review.currentPlacementLabel, identifier: "protected-placement-review.current-placement")
+                reviewRow(title: "Move to", value: review.proposedPlacementLabel, identifier: "protected-placement-review.proposed-placement")
+                reviewRow(title: "Protection", value: review.decision.userImpactSummary, identifier: "protected-placement-review.protection")
                 priorityControl
-                reviewRow(title: "This changes this week", value: review.reasonLabel, identifier: "protected-placement-review.reason")
+                reviewRow(title: "Receipt", value: "Approving saves a local receipt. Keep as is makes no placement change.", identifier: "protected-placement-review.receipt")
+                reviewRow(title: "Private", value: "No sign-in or cloud handoff is needed.", identifier: "protected-placement-review.privacy")
             }
 
             Text(review.priorityDecision.reviewNote)
@@ -58,15 +75,15 @@ struct ProtectedPlacementReviewCard: View {
         }
         .padding(theme.spacing.md)
         .background {
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .fill(theme.colors.surfaceOverlay.opacity(0.94))
+            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                .fill(theme.colors.surfaceOverlay.opacity(reduceTransparency ? 0.98 : 0.86))
         }
         .overlay {
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .stroke(theme.colors.strokeSubtle.opacity(0.72), lineWidth: 1)
+            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                .stroke(reviewStyle.stroke.opacity(0.62), lineWidth: 1)
         }
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("Review change")
+        .accessibilityLabel("Review Step placement")
         .accessibilityValue(review.accessibilityValue)
         .accessibilityHint("Choose Move it to approve, or Keep as is to leave the Step where it is.")
         .accessibilityIdentifier("protected-placement-review")
@@ -99,16 +116,19 @@ struct ProtectedPlacementReviewCard: View {
     }
 
     private func reviewRow(title: String, value: String, identifier: String) -> some View {
-        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+        HStack(alignment: .top, spacing: theme.spacing.sm) {
             Text(title)
-                .font(theme.typography.caption.weight(.semibold))
+                .font(theme.typography.micro.weight(.semibold))
                 .foregroundStyle(theme.colors.textSecondary)
+                .frame(width: 72, alignment: .leading)
             Text(value)
-                .font(theme.typography.bodySecondary)
+                .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textPrimary)
                 .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.vertical, theme.spacing.xxs)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(title)
         .accessibilityValue(value)

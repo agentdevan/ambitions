@@ -179,16 +179,37 @@ struct TimeSurface: View {
                 onKeep: keepProtectedPlacementReview
             )
         } else if let outcome = viewModel.protectedPlacementReviewOutcome {
-            Text(outcome.rawValue)
-                .font(theme.typography.bodyEmphasized)
-                .foregroundStyle(theme.colors.textPrimary)
-                .padding(theme.spacing.sm)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background {
-                    RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                        .fill(theme.colors.surfaceOverlay.opacity(0.72))
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                Image(systemName: outcome == .moved ? "checkmark.circle" : "arrow.uturn.backward.circle")
+                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                    .foregroundStyle(theme.stateStyle(for: outcome == .moved ? .success : .selected).accent)
+                    .frame(width: 28)
+                    .accessibilityHidden(true)
+
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(outcome.rawValue)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(outcome == .moved
+                        ? "The local receipt is attached to Time. Undo is available on the changed object."
+                        : "No placement changed. The Step stayed where it was.")
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
-                .accessibilityIdentifier("protected-placement-review.outcome")
+            }
+            .padding(theme.spacing.sm)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background {
+                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                    .fill(theme.colors.surfaceOverlay.opacity(0.72))
+            }
+            .overlay {
+                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                    .stroke(theme.colors.strokeSubtle.opacity(0.42), lineWidth: 1)
+            }
+            .accessibilityElement(children: .combine)
+            .accessibilityIdentifier("protected-placement-review.outcome")
         }
     }
 
