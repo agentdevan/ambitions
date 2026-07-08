@@ -4,9 +4,9 @@ Status: Active execution ledger
 Installed: 2026-07-07
 Owner: Codex frontend remediation operator
 Repository: agentdevan/ambitions
-Branch: frontend-flagship-shippability-remediation
+Branch: main
 Session start SHA: 9362e940eec5e7d118df418d00022c3588df6610
-Current packet: Packet 3.5 - Time Calendar-Grade Redesign (next unresolved packet after Packet 3.4 commit)
+Current packet: Packet 3.6 - Time Mutation / Reflow / Protection (next unresolved packet after Packet 3.5 closeout)
 
 This ledger is process evidence only. It is not product acceptance, owner visual acceptance, release proof, accessibility proof, Visual Green, Accessibility Green, or Release Green.
 
@@ -27,10 +27,10 @@ No packet may be marked Done by Codex in this program.
 
 ## 1. Current Session State
 
-- Branch: `frontend-flagship-shippability-remediation`
+- Branch: `main` after the remediation branch merge.
 - Base SHA: `9362e940eec5e7d118df418d00022c3588df6610`
-- Current packet status: Packet 3.4 is Yellow / Ready For Review under the stronger visual fidelity contract and pending commit; Packet 3.5 is next.
-- Working tree expectation: Packet 3.4 diff should be committed before Packet 3.5 work begins.
+- Current packet status: Packet 3.5 is Yellow / Ready For Review pending commit; Packet 3.6 is next.
+- Working tree expectation: Packet 3.5 diff should be committed before Packet 3.6 work begins.
 - Linear: not touched this session; local ledger is the active progress record.
 - Xcode: `Xcode 26.6`, build `17F113`
 - Simulator used: iPhone 17 Pro Max, iOS 26.5, UDID `DD9B9C84-7188-48FA-AA2A-AB5C1D0EE2B6`
@@ -225,7 +225,7 @@ Do not start Project 3 until Project 1 is at least Accepted Yellow and Product L
 | 3.2 Today Action / Closure / Proof Loop | Ready For Review | Today thesis visible | Start, pause/defer, close, undo, receipt, proof/source proof |
 | 3.3 Goals State Legibility | Ready For Review | Goals rendering stable | Distinct selected/proof/recovery states |
 | 3.4 Goals Editing / Proof / Handoff | Ready For Review | Goals state legible | Add/edit/move/handoff/crash regression proof |
-| 3.5 Time Calendar-Grade Redesign | Backlog | Time layout safe | Day/week/protected/open/conflict/proposal proof |
+| 3.5 Time Calendar-Grade Redesign | Ready For Review | Time layout safe | Day/week/protected/open/conflict/proposal proof |
 | 3.6 Time Mutation / Reflow / Protection | Backlog | Time calendar grammar stable | Place/move/protect/conflict/recovery/undo proof |
 | 3.7 You Native Settings Maturity | Backlog | You root layout safe | Native settings screenshots and state proof |
 | 3.8 You Privacy Controls | Backlog | You structure stable | Export/delete/reset/account/local/source/privacy proof |
@@ -1506,6 +1506,137 @@ Commit:
 
 Next packet:
 - Packet 3.5 - Time Calendar-Grade Redesign.
+
+### Packet 3.5 - Time Calendar-Grade Redesign
+
+Status: In Progress
+
+Target:
+- Time reads as a premium Life Calendar, not a custom gauge/dashboard.
+- Day/week clarity.
+- Protected windows.
+- Open capacity.
+- Conflicts.
+- Proposals.
+- Useful empty state.
+- No productivity scoring.
+
+Depth map before coding:
+- Root state: Time remains one of the four persistent roots and owns the Life Calendar as the resting object. The first viewport must read as time reality, not as a dashboard, score, generic agenda, or more roots.
+- Valid drilldowns: time block detail, protected window detail, placement review, reflow review, conflict review, recovery review, source detail, receipt/history detail, and goal/step-linked landing from Time.
+- Invalid extra surfaces: no new calendar tab, agenda tab, Motion tab, Proof/Source/History/Receipts tab, analytics dashboard, productivity score, habit/project/task calendar clone, AI planner, or module menu.
+- Object types involved: day, week, now marker, fixed/protected window, open window, scheduled step, pressure segment, buffer/recovery signal, goal load, placement candidate, conflict/reflow proposal, source/privacy line, and receipt.
+- Inspection details: the user should understand what today/week can hold, what is protected, what is open, what is fixed, what pressure exists, whether a real Step can be placed, what conflict/reflow proposal exists, and why Time will not silently mutate Calendar.
+- Edit/control paths: select Time layer/window, review/place a real Step when available, protect a window, review pressure/reflow, add buffer/recovery, inspect source/proof/receipt, undo visible mutation where existing paths allow it. Packet 3.5 should emphasize the root Life Calendar grammar; deeper mutation maturity remains Packet 3.6.
+- Receipt/proof/history paths: receipts/proof/source remain inspectable details; they must not become root clutter. If root-level Time exposes a proposal, the receipt/source boundary must be clear and local.
+- Accessibility expectations: calendar rows and controls need stable identifiers, practical touch targets, readable default and large Dynamic Type, reduced motion/transparency compatibility, concise labels, and no manual VoiceOver Green claim.
+- Screenshot proof required: Time root light, Time root dark, default week, pressure/protected, large Dynamic Type if touched, and any new root calendar/proposal state screenshot lane. Simulator proof remains Yellow maximum.
+
+Visual Delta:
+- Current screenshot state: Packet 1.3 light/dark Time screenshots show a readable but gauge-first root. The first viewport is dominated by Open/Protected/Pressure/Buffer tabs and a large abstract field with bands, dots, and a disabled Choose Step row. It is technically functional but reads as a custom control panel more than a premium Life Calendar. Current artifacts:
+  - `.codex/xcode-summaries/packet-1.3-final-root-matrix/20260708T010235Z-AmbitionsUITests-DeterministicScreenshotLaneUITests-testAMB1815AppearanceRootScr-33365-28693/extract/screenshots/amb-1815-root-time-light-screenshot_0_8EF43C3F-BAEF-4594-B12A-E071A4BB1C24.png`
+  - `.codex/xcode-summaries/packet-1.3-final-root-matrix/20260708T010235Z-AmbitionsUITests-DeterministicScreenshotLaneUITests-testAMB1815AppearanceRootScr-33365-28693/extract/screenshots/amb-1815-root-time-dark-screenshot_0_D2A8B944-D628-4506-811A-E071A4BB1C24.png`
+- Target screenshot state: Time first viewport should read as a native, practical Life Calendar: a clear now/day/week structure, protected/fixed windows, open capacity, pressure/conflict, a reviewable placement/proposal cue, and a calm local/privacy boundary. The field should feel like a calendar-grade object, not a gauge dashboard or abstract analytics canvas.
+- Gap from desired premium frontend target: Time has local-first semantics and accessibility rows in source, but the rendered primary object buries calendar-grade clarity under an abstract gauge. The user must infer day/week structure from rows lower on the screen rather than seeing a believable Life Calendar first.
+- Exact visual deltas to close: reduce gauge dominance; introduce a calendar-like day/week spine in the first viewport; make protected, fixed, open, scheduled, pressure/conflict, and proposal cues visible as time objects; keep the shell/dock clear; preserve light/dark intent; avoid dashboard panels and productivity-score grammar.
+- Exact inspectability deltas to close: make Time calendar rows/objects visible in the first viewport enough for screenshot and UI automation proof; keep source/privacy and receipt/reflow cues inspectable without root clutter; preserve real-step-only placement guard.
+- Exact realism/proportion deltas to close: use realistic iPhone row heights, native list/card restraint, compact time bands, practical touch targets, and no giant fantasy panels. Large Dynamic Type must not collapse if the field layout changes.
+- Likely files: `Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldVisualField.swift`, `Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldVisualField+HorizonPresentation.swift`, `Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldCanvas.swift`, `Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldModels.swift`, `Native/Ambitions/Surfaces/Time/TimeObjectView.swift`, `Native/Ambitions/Surfaces/Time/Projection/TimeLifeShapeFieldProjection.swift`, `Native/Ambitions/Surfaces/Time/Projection/TimeLifeSuiteState.swift`, `Native/AmbitionsUITests/TimeSurfaceUITests.swift`, `Native/AmbitionsUITests/AmbitionsTimeUITestSupport.swift`, and this ledger.
+- Product-law risks: making Time a generic Apple Calendar clone, adding another root surface, creating a productivity score, exposing Motion/Proof/Source/Receipts as roots, or creating pretty but non-operational calendar art.
+- Accessibility risks: first-viewport calendar density could crowd at Dynamic Type; abstract controls could become visible but not semantically reachable; manual VoiceOver remains unavailable.
+- Proof required: focused Time UI/screenshot lane for default week, protected/pressure, light/dark root proof if practical, source/governance gates, `git diff --check`, `xcodegen generate`, and `frontend-remediation` build-for-testing before commit.
+- Self-review criteria: screenshots must look like a premium native Life Calendar with useful time objects, not a gauge dashboard; day/week/protected/open/pressure/proposal cues must be human-visible; no root law drift; no productivity/AI/dashboard copy; affected visual score average at least 4.0 within simulator Yellow ceilings.
+- Repair-loop conditions: if the first viewport remains gauge-first, visually generic, dashboard-like, dark/light inconsistent, clipped, or lacking visible day/week/protected/open/proposal cues, repair again inside Packet 3.5 unless a true dependency pushes it into Packet 3.6.
+
+Implementation notes:
+- Replaced the default-size Time LifeShape visual stage with a compact Life Calendar week frame while preserving the accessibility-size stacked field from Packet 1.2.
+- Moved the new default week calendar rendering into `Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldVisualField+CalendarWeek.swift` to keep `LifeShapeFieldVisualField.swift` under the hard line cap.
+- Rendered six first-viewport calendar rows for now, fixed point, open windows, scheduled Step, protected windows, and pressure.
+- Kept the Time layer selector and semantic mark buttons so existing Time selection/correction interaction remains reachable.
+- Added a focused UI test proving the Time root exposes calendar-stage identifiers, the six calendar rows, primary action, and no productivity score / AI recommends / dashboard copy.
+- No new root surfaces, Capture tab, Motion destination, Search chatbot, hosted AI grammar, R2/private-graph path, runtime mutation authority, or Source Atlas scope was added.
+
+Files changed:
+- `Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldVisualField.swift`
+- `Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldVisualField+CalendarWeek.swift`
+- `Native/AmbitionsUITests/TimeCalendarGradeUITests.swift`
+- `docs/qa/frontend-flagship-shippability-remediation/EXECUTION_LEDGER.md`
+
+Validation run:
+- `git status --short --branch` - passed; scoped Packet 3.5 files only.
+- `git diff --check` - passed.
+- `xcodegen generate` - passed.
+- `python3 scripts/ambitions-architecture-inventory.py` - passed, `GREEN final-tree parity achieved`.
+- `python3 scripts/ambitions-green-standard-audit.py` - passed.
+- `python3 scripts/ambitions-vocabulary-drift-scan.py` - passed.
+- `python3 scripts/ambitions-local-first-boundary-scan.py` - passed.
+- `python3 scripts/ambitions-remediation-governance-check.py` - passed; changed paths 4, no changed production Swift over hard line cap.
+- `python3 scripts/ambitions-accepted-yellow-misuse-audit.py` - passed.
+- `python3 scripts/ambitions-flagship-ios-standards-check.py` - passed.
+- `./scripts/ambitions-xcode-test-focused.sh --batch packet-3.5-time-calendar-grade-ui --test 'AmbitionsUITests/TimeCalendarGradeUITests/testPacket35TimeRootReadsAsCalendarGradeLifeCalendar' --timeout 30m --kill-after 60s --skip-prebuild` - passed on final run.
+- `./scripts/ambitions-xcode-build-for-testing.sh --batch frontend-remediation` - passed, `FAILURE_CLASS=passed`, duration 633.099s.
+
+Failed/repaired validation runs:
+- Focused UI prebuild initially failed because `selectedLayerReading`, `instrumentStroke`, and `selectedBucket` were `private` after the new helper split; repaired by making them file-internal for the canonical extension.
+- Focused UI direct run crashed with `EXC_BAD_ACCESS` in `LifeShapeFieldVisualField.fieldStage`; repaired the new calendar body by removing duplicate-key trap risk and then removing fragile `ForEach` paths from the default calendar body.
+- One focused run failed at compile time because `calendarSignalRail` had local declarations without an explicit `return`; repaired and reran.
+
+Screenshot / proof artifacts:
+- Final focused UI result bundle: `.codex/xcode-results/packet-3.5-time-calendar-grade-ui/20260708T131333Z-AmbitionsUITests-TimeCalendarGradeUITests-testPacket35TimeRootReadsAsCalendarGra-66053-20632/focused-test.xcresult`
+- Final focused UI summary: `.codex/xcode-summaries/packet-3.5-time-calendar-grade-ui/20260708T131333Z-AmbitionsUITests-TimeCalendarGradeUITests-testPacket35TimeRootReadsAsCalendarGra-66053-20632/focused-test-summary.json`
+- Final Time root screenshot: `.codex/xcode-summaries/packet-3.5-time-calendar-grade-ui/20260708T131333Z-AmbitionsUITests-TimeCalendarGradeUITests-testPacket35TimeRootReadsAsCalendarGra-66053-20632/extract/screenshots/packet-3_0_CBCB471D-205E-4EFF-9AD1-EEE72890AE46.5-time-calendar-grade-root`
+- Broad build-for-testing summary: `.codex/xcode-summaries/frontend-remediation/20260708T131812Z/extract/summary.json`
+- Broad build-for-testing result bundle: `.codex/xcode-results/frontend-remediation/20260708T131812Z-bft-69236-18920/build-for-testing.xcresult`
+
+Visual inspection:
+- Final screenshot visually moved Time away from an abstract gauge-first field toward a single Life Calendar object.
+- The first viewport now shows one dominant Time object with a week frame, six readable calendar rows, protected/open/scheduled/pressure state, local calendar privacy language, and no productivity-score or AI copy.
+- The result still uses simulator dark-mode proof only for this packet and is not Visual Green.
+- Remaining maturity debt: Time still has a heavy framed instrument and large layer selector; deeper placement/reflow/conflict/undo richness belongs to Packet 3.6, and light/dark full matrix proof remains Packet 1.3 proof rather than newly repeated here.
+
+Visual Scorecard:
+- Native iOS quality: 4
+- Visual hierarchy: 4
+- Surface identity: 4
+- Object inspectability: 4
+- Light/dark quality: 4 within previously proven Packet 1.3 appearance ceilings; Packet 3.5 focused screenshot is dark-mode simulator proof.
+- Material restraint: 4
+- Typography and spacing: 4
+- Interaction clarity: 4
+- SwiftUI realism / proportions: 4
+- Similarity to Ambitions premium frontend target: 4
+- Final self-score: 4.0 average, Yellow / Ready For Review within simulator/source proof ceilings.
+
+Repair cycles performed:
+- Cycle 1: split the new calendar helper and new UI test to repair remediation-governance hard line-cap failures.
+- Cycle 2: repaired helper access levels after focused UI compile failure.
+- Cycle 3: inspected first screenshot and found the first pass still too control-panel-like; reduced nested material, row density, and gauge dominance.
+- Cycle 4: repaired `EXC_BAD_ACCESS` crash path by removing fragile row dictionary/ForEach assumptions from the new calendar body.
+- Cycle 5: repaired compile failure in the explicit semantic mark rail.
+- Cycle 6: reran focused UI proof, inspected the final screenshot, and accepted Yellow / Ready For Review within simulator limits.
+
+Remaining visual deltas:
+- Simulator proof only; physical iPhone proof is still required for any Visual Green claim.
+- Manual VoiceOver proof was not performed; Accessibility Green remains impossible.
+- Time mutation, placement, reflow, protection, conflict, recovery, undo, proof/source/history inspection, and before/after state clarity remain Packet 3.6.
+- The Time root is materially more calendar-grade, but owner visual acceptance has not happened and the UI is not shippable.
+
+Packet 3.5 closeout:
+- Status: Yellow / Ready For Review.
+- Source status: source/build/test/script proof passed for the scoped Time calendar-grade root redesign.
+- Runtime status: focused simulator UI proof passed for default-week Time root calendar rendering.
+- Interaction status: Yellow; simulator automation proof only, deeper mutation/reflow interaction remains Packet 3.6.
+- Visual status: Yellow maximum; simulator screenshot inspected, no physical-device proof.
+- Accessibility status: Yellow maximum; automated identifiers and inherited large-type fallback exist, but no manual VoiceOver proof.
+- Release status: not Green; this is not release validation.
+- Product law preserved: Today / Goals / Time / You only as roots; Capture not root tab; Search not chatbot; Motion not root destination; local-first/offline trust preserved; no hosted-AI primary grammar added.
+- Required closeout sentence: Passing tests did not determine this status. The status is based on source proof, runtime proof, screenshot inspection, repair-loop completion, and fidelity to the Ambitions premium frontend target: premium roots, native light/dark drilldowns and entire frontend, deeply inspectable object surfaces, and realistic SwiftUI proportions.
+
+Commit:
+- Pending: `Frontend remediation: time calendar-grade redesign`
+
+Next packet:
+- Packet 3.6 - Time Mutation / Reflow / Protection.
 
 ### Packet 1.5 - Baseline Validation Recovery
 

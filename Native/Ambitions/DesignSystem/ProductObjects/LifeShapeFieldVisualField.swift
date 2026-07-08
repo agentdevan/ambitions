@@ -56,11 +56,11 @@ struct LifeShapeFieldVisualField: View {
             if isAccessibilitySize {
                 accessibilityMicroField
             } else {
-                microField
+                calendarField
             }
         }
         .padding(theme.spacing.sm)
-        .frame(minHeight: isAccessibilitySize ? 0 : 520, alignment: .top)
+        .frame(minHeight: isAccessibilitySize ? 0 : 420, alignment: .top)
         .background(fieldBackground)
         .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
         .overlay {
@@ -197,7 +197,7 @@ struct LifeShapeFieldVisualField: View {
     }
 
     @ViewBuilder
-    private var selectedLayerReading: some View {
+    var selectedLayerReading: some View {
         if isAccessibilitySize {
             VStack(alignment: .leading, spacing: theme.spacing.xs) {
                 Text(selectedLayer.title)
@@ -418,7 +418,7 @@ struct LifeShapeFieldVisualField: View {
         .accessibilityIdentifier("time.life-shape-field.mark.\(mark.id)")
     }
 
-    private var instrumentStroke: some View {
+    var instrumentStroke: some View {
         RoundedRectangle(cornerRadius: 8, style: .continuous)
             .stroke(
                 selectedLayerTint.opacity(colorSchemeContrast == .increased ? 0.74 : 0.36),
@@ -427,7 +427,7 @@ struct LifeShapeFieldVisualField: View {
     }
 
     @ViewBuilder
-    private var selectedBucket: some View {
+    var selectedBucket: some View {
         if isAccessibilitySize {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 HStack(alignment: .top, spacing: theme.spacing.sm) {
