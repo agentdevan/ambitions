@@ -57,7 +57,6 @@ struct AppShellActivatedCaptureSeam: View {
                             }
                         )
                     }
-                    firstRunTeaching
                     statusMessage
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -143,26 +142,6 @@ struct AppShellActivatedCaptureSeam: View {
             saveStateLabel: saveState.accessibilityLabel,
             isSaving: saveState == .saving
         )
-    }
-
-    @ViewBuilder
-    private var firstRunTeaching: some View {
-        if captureText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            HStack(spacing: theme.spacing.sm) {
-                Image(systemName: "text.cursor")
-                    .font(.system(size: theme.icon.smallSize, weight: .semibold))
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .accessibilityHidden(true)
-                Text("Start with the field. Review opens first.")
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-            .accessibilityIdentifier("shell.activated-capture.first-run-teaching")
-            .accessibilityElement(children: .combine)
-            .accessibilityLabel("Capture teaching")
-            .accessibilityValue("Start with the field. Review opens first.")
-        }
     }
 
     @ViewBuilder

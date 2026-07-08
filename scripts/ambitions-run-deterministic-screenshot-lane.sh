@@ -5,7 +5,7 @@ REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd -P)"
 cd "$REPO_ROOT"
 
 BATCH="AMB_1815_DETERMINISTIC_SCREENSHOT_LANE"
-TEST_ID="AmbitionsUITests/DeterministicScreenshotLaneUITests/testAMB1815TimeRootLightMScreenshotLane"
+TEST_ID="${AMBITIONS_DETERMINISTIC_SCREENSHOT_TEST_ID:-AmbitionsUITests/DeterministicScreenshotLaneUITests}"
 TIMEOUT_DURATION="20m"
 KILL_AFTER="60s"
 PREBUILD_TIMEOUT_DURATION="${AMBITIONS_XCODE_UI_PREBUILD_TIMEOUT:-35m}"
@@ -14,8 +14,10 @@ usage() {
   cat >&2 <<'EOF'
 Usage: scripts/ambitions-run-deterministic-screenshot-lane.sh [options]
 
-Runs the first deterministic Ambitions screenshot lane:
-  AmbitionsUITests/DeterministicScreenshotLaneUITests/testAMB1815TimeRootLightMScreenshotLane
+Runs the deterministic Ambitions screenshot lane:
+  AmbitionsUITests/DeterministicScreenshotLaneUITests
+
+Override with AMBITIONS_DETERMINISTIC_SCREENSHOT_TEST_ID for a narrower class/test.
 
 Options:
   --batch <name>             Batch directory under .codex outputs.

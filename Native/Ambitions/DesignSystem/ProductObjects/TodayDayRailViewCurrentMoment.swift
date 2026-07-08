@@ -154,6 +154,55 @@ extension AmbitionsDayRailView {
     }
 
 
+    func emptyPrimaryActionButton(_ action: TodayInlineAction) -> some View {
+        Button {
+            onAction(action)
+        } label: {
+            HStack(spacing: theme.spacing.sm) {
+                Image(systemName: action.systemImage)
+                    .font(.system(size: 15, weight: .semibold, design: .rounded))
+                    .accessibilityHidden(true)
+
+                Text(emptyPrimaryActionTitle(for: action))
+                    .font(theme.typography.bodyEmphasized)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.82)
+
+                Spacer(minLength: theme.spacing.sm)
+
+                Image(systemName: "arrow.right")
+                    .font(.system(size: 15, weight: .semibold, design: .rounded))
+                    .accessibilityHidden(true)
+            }
+            .foregroundStyle(theme.colors.textPrimary)
+            .padding(.horizontal, theme.spacing.md)
+            .padding(.vertical, theme.spacing.sm)
+            .frame(maxWidth: usesExpandedViewport ? .infinity : 220, alignment: .leading)
+            .background(
+                Capsule(style: .continuous)
+                    .fill(theme.colors.surfaceOverlay.opacity(0.62))
+            )
+            .overlay(
+                Capsule(style: .continuous)
+                    .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+            )
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(action.title)
+        .accessibilityHint("Opens Time so the open window can be shaped without inventing a step.")
+        .accessibilityIdentifier("TodayNoStepPrimaryAction")
+    }
+
+
+    func emptyPrimaryActionTitle(for action: TodayInlineAction) -> String {
+        let title = action.title.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard title.isEmpty == false else {
+            return "Build today"
+        }
+        return title
+    }
+
+
     var emptyMoment: some View {
         VStack(alignment: .leading, spacing: theme.spacing.md) {
             HStack(spacing: theme.spacing.sm) {
@@ -174,6 +223,11 @@ extension AmbitionsDayRailView {
                 .foregroundStyle(theme.colors.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
                 .lineLimit(usesExpandedViewport ? 5 : 3)
+
+            if let action = state.primaryAction {
+                emptyPrimaryActionButton(action)
+                    .padding(.top, theme.spacing.xs)
+            }
         }
     }
 
@@ -183,7 +237,8 @@ extension AmbitionsDayRailView {
         guard trimmed.isEmpty == false else {
             return "Capture stays ready when something new needs a place."
         }
-        return "\(trimmed) Capture stays ready when something new needs a place."
+        let summary = trimmed.last.map { ".!?".contains($0) } == true ? trimmed : "\(trimmed)."
+        return "\(summary) Capture stays ready when something new needs a place."
     }
 
 

@@ -36,6 +36,26 @@ final class AppearancePreferenceTests: XCTestCase {
         XCTAssertEqual(AmbitionThemePreference.dark.resolvedMode(systemMode: .light), .dark)
     }
 
+    @MainActor
+    func testDebugLaunchConfigurationAcceptsAppearancePreferenceForScreenshotProof() {
+        #if DEBUG
+            let configuration = AppBootstrapper().debugLaunchConfiguration(
+                arguments: [
+                    "Ambitions",
+                    "-AmbitionsInitialSurface", "time",
+                    "-AmbitionsScreenshotMode", "YES",
+                    "-AmbitionsAppearancePreference", "light",
+                    "-AmbitionsSystemAppearance", "dark"
+                ]
+            )
+
+            XCTAssertTrue(configuration.screenshotModeEnabled)
+            XCTAssertEqual(configuration.initialSurface, .time)
+            XCTAssertEqual(configuration.appearancePreference, .light)
+            XCTAssertEqual(configuration.systemThemeModeOverride, .dark)
+        #endif
+    }
+
     func testYouAppearanceDetailAppliesEditorChangesLiveBeforePersistenceSave() throws {
         let source = try String(
             contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Surfaces/You/YouRootDetailRouteSurface.swift"),

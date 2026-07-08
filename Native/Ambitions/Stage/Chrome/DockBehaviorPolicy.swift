@@ -17,6 +17,6 @@ enum DockBehaviorPolicy {
     }
 
     static func dockClearance(dynamicTypeIsAccessibilitySize: Bool) -> CGFloat {
-        dynamicTypeIsAccessibilitySize ? 132 : 108
+        dynamicTypeIsAccessibilitySize ? 156 : 148
     }
 }

@@ -31,11 +31,11 @@ extension RepositoryBackedGoalsService {
             ?? pathIntelligence?.dailyConnection.fallbackHint
             ?? nextMovement?.summary
             ?? missionControl.primaryNextMove.detail
-        let breadcrumbLabels = Array((missionControl.breadcrumb.labels + ["Path Builder"]).prefix(4))
+        let breadcrumbLabels = Array((missionControl.breadcrumb.labels + ["Goal path"]).prefix(4))
         let budget = "Bounded path shape: \(phaseStates.count) phases, \(forks.count) route options, \(proofRequirements.count) proof checks."
 
         return GoalPathBuilderState(
-            title: "Path Builder",
+            title: "Goal path",
             subtitle: "A long-range view that still keeps the next step visible.",
             breadcrumbLabels: breadcrumbLabels,
             phases: phaseStates,
@@ -49,7 +49,7 @@ extension RepositoryBackedGoalsService {
             roadmapListTitle: "Path list",
             roadmapListSummary: "The same phases are available as a plain list for review.",
             performanceBudgetSummary: budget,
-            accessibilityLabel: "Path Builder",
+            accessibilityLabel: "Goal path",
             accessibilityValue: "\(phaseStates.count) phases, \(forks.count) forks, \(proofRequirements.count) proof checks. Next step: \(todayTitle).",
             accessibilityHint: "Review the path shape as phases, route options, proof, and the next step before changing the path."
         )

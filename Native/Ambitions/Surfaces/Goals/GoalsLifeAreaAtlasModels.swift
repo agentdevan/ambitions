@@ -31,7 +31,44 @@ struct GoalsLifeAreaAtlasRegion: Identifiable, Hashable {
         if thoughtCount > 0 {
             return "\(thoughtCount) thoughts"
         }
-        return "Quiet"
+        if proofCount > 0 {
+            return "\(proofCount) proof"
+        }
+        if receiptCount > 0 {
+            return "\(receiptCount) receipts"
+        }
+        return emptyContextLabel
+    }
+
+    var emptyContextLabel: String {
+        switch id {
+        case "work":
+            return "Work direction"
+        case "body":
+            return "Energy and care"
+        case "home":
+            return "Home systems"
+        case "people":
+            return "People and care"
+        case "self":
+            return "Identity"
+        case "future":
+            return "Long range"
+        default:
+            return "Open area"
+        }
+    }
+
+    var proofHistoryLabel: String? {
+        let total = proofCount + receiptCount
+        guard total > 0 else { return nil }
+        if proofCount > 0 && receiptCount > 0 {
+            return "\(proofCount) proof / \(receiptCount) receipts"
+        }
+        if proofCount > 0 {
+            return "\(proofCount) proof visible"
+        }
+        return "\(receiptCount) receipts"
     }
 
     var firstGoalTarget: GoalRouteTarget? {

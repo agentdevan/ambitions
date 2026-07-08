@@ -48,7 +48,33 @@ final class SurfacesCanonicalOwnershipTests: XCTestCase {
 
     func testPersistentRootSurfacesRejectRemovedSurfaceNames() {
         XCTAssertEqual(AmbitionsSurface.allCases.map(\.rawValue), ["today", "goals", "time", "you"])
-        for removed in ["capture", "captures", "plan", "profile", "motion"] {
+        for removed in [
+            "activity",
+            "activity-feed",
+            "ai",
+            "analytics",
+            "assistant",
+            "capture",
+            "captures",
+            "chatbot",
+            "dashboard",
+            "dashboards",
+            "feed",
+            "habit",
+            "habits",
+            "insights",
+            "kpi",
+            "motion",
+            "plan",
+            "profile",
+            "productivity",
+            "score",
+            "streak",
+            "task",
+            "task-board",
+            "taskboard",
+            "tasks",
+        ] {
             XCTAssertNil(AmbitionsSurface(rawValue: removed), "\(removed) must not become a persistent root surface")
             XCTAssertTrue(SurfaceLaw.blockedRootRawValues.contains(removed), "\(removed) must stay blocked by SurfaceLaw")
         }

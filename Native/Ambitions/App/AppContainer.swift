@@ -25,6 +25,9 @@ final class AppContainer {
     let runtime: AmbitionsRuntime
     var appearancePreference: AppAppearancePreference
     var accentFamily: AmbitionAccentFamily
+    #if DEBUG
+    var debugSystemThemeModeOverride: AmbitionThemeMode? = nil
+    #endif
     let navigation: StageStore
     let todayService: any TodayServicing
     let todayReceiptCommands: any TodayReceiptCommanding

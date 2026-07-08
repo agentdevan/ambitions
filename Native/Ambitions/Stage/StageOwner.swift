@@ -19,7 +19,7 @@ final class StageOwner {
         motionCoordinator.reduceMotionEnabled = isEnabled
     }
 
-    func route(for action: MotionCurrentAction, source: String = "motion.current") -> StageMotionRoute {
+    func route(for action: MotionCurrentAction, source: String = "stage.motion") -> StageMotionRoute {
         let coordination = motionCoordinator.coordinate(action: action, source: source)
         lastMotionCoordination = coordination
         lastMotionProjection = coordination.projection

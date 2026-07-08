@@ -230,6 +230,139 @@ final class BootstrapShellUITests: AmbitionsUITestCase {
         XCTAssertFalse(rootDestinationExists("Plan", in: app))
     }
 
+    func testPacket14RootChromeRenderedGates() throws {
+        let app = makeApp(
+            bootstrapMode: "preview",
+            extraEnvironment: ["AmbitionsScreenshotMode": "YES"]
+        )
+        app.launch()
+
+        XCTAssertTrue(waitForShellReady(in: app))
+        assertCanonicalRootIALawRendered(in: app)
+
+        let rootGates: [(title: String, screenIdentifier: String, anchorIdentifier: String, anchorName: String, minimumWidth: CGFloat, minimumHeight: CGFloat)] = [
+            (
+                title: "Today",
+                screenIdentifier: "today.screen",
+                anchorIdentifier: "TodayRealityRailStartHereTitle",
+                anchorName: "Today Start Here title",
+                minimumWidth: 44,
+                minimumHeight: 12
+            ),
+            (
+                title: "Goals",
+                screenIdentifier: "goals.screen",
+                anchorIdentifier: "goals.life-area-atlas.title",
+                anchorName: "Goals Life Area Atlas title",
+                minimumWidth: 44,
+                minimumHeight: 12
+            ),
+            (
+                title: "Time",
+                screenIdentifier: "time.screen",
+                anchorIdentifier: "time.life-shape-field.visual-stage",
+                anchorName: "Time Life Calendar field",
+                minimumWidth: 180,
+                minimumHeight: 140
+            ),
+            (
+                title: "You",
+                screenIdentifier: "you.screen",
+                anchorIdentifier: "you.settings.row.appearance",
+                anchorName: "You appearance settings row",
+                minimumWidth: 180,
+                minimumHeight: 44
+            )
+        ]
+
+        for gate in rootGates {
+            XCTAssertTrue(
+                openCanonicalDestination(gate.title, screenIdentifier: gate.screenIdentifier, in: app),
+                "\(gate.title) should open before rendered root gate."
+            )
+            XCTAssertTrue(waitForSelectedSurface(gate.title, in: app, timeout: 10))
+            dismissContinuityReceiptIfPresent(in: app, timeout: 1)
+            assertCanonicalRootIALawRendered(in: app)
+            assertRenderedRootContentClearsChrome(
+                identifier: gate.anchorIdentifier,
+                named: gate.anchorName,
+                in: app,
+                minimumWidth: gate.minimumWidth,
+                minimumHeight: gate.minimumHeight
+            )
+
+            let screenshot = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
+            screenshot.name = "packet-1.4-rendered-root-\(gate.title.lowercased())"
+            screenshot.lifetime = .keepAlways
+            add(screenshot)
+        }
+    }
+
+    func testPacket14ContinuityReceiptDoesNotCoverRootControls() throws {
+        let app = makeApp(
+            bootstrapMode: "preview",
+            launchURL: "ambitions://tab/time",
+            extraEnvironment: ["AmbitionsScreenshotMode": "YES"]
+        )
+        app.launch()
+
+        XCTAssertTrue(waitForShellReady(in: app))
+        XCTAssertTrue(waitForSelectedSurface("Time", in: app, timeout: 10))
+        assertCanonicalRootIALawRendered(in: app)
+        assertContinuityReceiptClearsRootControls(in: app)
+
+        let screenshot = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
+        screenshot.name = "packet-1.4-continuity-receipt-clearance"
+        screenshot.lifetime = .keepAlways
+        add(screenshot)
+    }
+
+    func testPacket21RootIALaw() throws {
+        let app = makeApp(
+            bootstrapMode: "preview",
+            extraEnvironment: ["AmbitionsScreenshotMode": "YES"]
+        )
+        app.launch()
+
+        XCTAssertTrue(waitForShellReady(in: app))
+        assertCanonicalRootIALawRendered(in: app)
+
+        for tab in ["Today", "Goals", "Time", "You"] {
+            XCTAssertTrue(
+                openCanonicalDestination(tab, screenIdentifier: screenIdentifier(forTab: tab), in: app),
+                "\(tab) should open before rendered root IA law proof."
+            )
+            XCTAssertTrue(waitForSelectedSurface(tab, in: app, timeout: 10))
+            assertCanonicalRootIALawRendered(in: app)
+        }
+
+        let screenshot = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
+        screenshot.name = "packet-2.1-root-ia-law-four-canonical-roots"
+        screenshot.lifetime = .keepAlways
+        add(screenshot)
+    }
+
+    func testUIQL002RootDockDoesNotOverlapTimeOrYouContent() throws {
+        let app = makeApp(bootstrapMode: "preview")
+        app.launch()
+
+        XCTAssertTrue(waitForShellReady(in: app))
+
+        XCTAssertTrue(openCanonicalDestination("Time", screenIdentifier: "time.screen", in: app))
+        assertRootContentDoesNotIntersectDock(
+            identifier: "time.calendar.open-window",
+            named: "Time open windows row",
+            in: app
+        )
+
+        XCTAssertTrue(openCanonicalDestination("You", screenIdentifier: "you.screen", in: app))
+        assertRootContentDoesNotIntersectDock(
+            identifier: "you.settings.row.capture-preferences",
+            named: "You Capture settings row",
+            in: app
+        )
+    }
+
     func testUIQL002GoalDetailDrilldownHidesRootDock() throws {
         let app = makeApp(bootstrapMode: "demo", launchURL: "ambitions://goal/goal-native")
         app.launch()

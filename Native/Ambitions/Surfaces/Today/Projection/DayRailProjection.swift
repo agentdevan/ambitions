@@ -87,7 +87,7 @@ extension AmbitionsDayRailViewState {
             contextSummary: todayPlanLayer.openWindowLabel,
             heroStep: mode == .empty ? nil : heroStep,
             rows: rows,
-            primaryAction: mode == .empty ? nil : hero.primaryAction,
+            primaryAction: hero.primaryAction,
             rowTapDetailTargetPlaceholder: mode == .empty ? nil : detailTarget,
             durationSource: duration.source,
             contextLabels: [source],

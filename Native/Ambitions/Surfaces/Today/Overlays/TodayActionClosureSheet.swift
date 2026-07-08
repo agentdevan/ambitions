@@ -223,9 +223,12 @@ struct TodayActionClosureSheet: View {
     }
 
     var receiptDisclosure: some View {
-        DisclosureGroup("Receipt and review", isExpanded: $isReceiptPreviewExpanded) {
+        DisclosureGroup(isExpanded: $isReceiptPreviewExpanded) {
             receiptPreview
                 .padding(.top, theme.spacing.sm)
+        } label: {
+            Text("Receipt and review")
+                .accessibilityIdentifier("TodayActionClosureReceiptDisclosure")
         }
         .font(theme.typography.bodyEmphasized)
         .foregroundStyle(theme.colors.textPrimary)

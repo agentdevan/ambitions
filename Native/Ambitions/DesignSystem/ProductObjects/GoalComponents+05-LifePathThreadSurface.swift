@@ -137,7 +137,7 @@ struct LifePathThreadSurface: View {
 
     var proofBeads: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {
-            SectionHeader(title: "Proof beads", subtitle: "Evidence attaches to the thread without becoming the path itself.")
+            SectionHeader(title: "Proof points", subtitle: "Evidence attaches to the path without becoming the path itself.")
             ForEach(state.proofBeads) { bead in
                 markerPill(title: bead.title, summary: bead.summary, symbolName: "checkmark.seal", state: bead.state)
             }
@@ -146,7 +146,7 @@ struct LifePathThreadSurface: View {
 
     var riskPinches: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {
-            SectionHeader(title: "Risk pinch", subtitle: "Friction is marked by role and copy, not color alone.")
+            SectionHeader(title: "Friction", subtitle: "Friction is marked by role and copy, not color alone.")
             ForEach(state.riskPinches) { pinch in
                 markerPill(title: pinch.title, summary: pinch.summary, symbolName: "exclamationmark.triangle", state: pinch.state)
             }
@@ -155,7 +155,7 @@ struct LifePathThreadSurface: View {
 
     var alternateRouteFold: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {
-            SectionHeader(title: "AlternateRouteFold", subtitle: "Branches stay folded until the user reviews tradeoffs.")
+            SectionHeader(title: "Future routes", subtitle: "Branches stay folded until the user reviews tradeoffs.")
             ForEach(state.alternateRouteFolds) { fold in
                 markerPill(title: fold.title, summary: "\(fold.summary) \(fold.reviewLabel)", symbolName: "arrow.triangle.branch", state: fold.state)
             }

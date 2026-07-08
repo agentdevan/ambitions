@@ -44,7 +44,7 @@ final class AppBootstrapper {
         do {
             let container = try await AppContainerFactory.make(configuration: resolvedConfiguration)
             #if DEBUG
-            applyDebugLaunchOverridesIfNeeded(to: container)
+            await applyDebugLaunchOverridesIfNeeded(to: container)
             #endif
             phase = .ready(container)
             await importPendingExternalCreations(using: container)
@@ -181,6 +181,8 @@ final class AppBootstrapper {
     struct DebugLaunchConfiguration: Equatable {
         let screenshotModeEnabled: Bool
         let initialSurface: AmbitionsSurface?
+        let appearancePreference: AppAppearancePreference?
+        let systemThemeModeOverride: AmbitionThemeMode?
     }
 
     private func launchConfiguration(
@@ -188,11 +190,20 @@ final class AppBootstrapper {
     ) -> DebugLaunchConfiguration {
         let initialSurface = launchArgumentValue(for: "AmbitionsInitialSurface", fromArguments: arguments)
             .flatMap { validCanonicalInitialSurfaces[$0.lowercased()] }
+        let appearancePreference = launchArgumentValue(for: "AmbitionsAppearancePreference", fromArguments: arguments)
+            .flatMap { AppAppearancePreference(rawValue: $0.lowercased()) }
+        let systemThemeModeOverride = launchArgumentValue(for: "AmbitionsSystemAppearance", fromArguments: arguments)
+            .flatMap { AmbitionThemeMode(rawValue: $0.lowercased()) }
 
         let screenshotModeEnabled = launchArgumentValue(for: "AmbitionsScreenshotMode", fromArguments: arguments)?
             .caseInsensitiveCompare("yes") == .orderedSame
 
-        return DebugLaunchConfiguration(screenshotModeEnabled: screenshotModeEnabled, initialSurface: initialSurface)
+        return DebugLaunchConfiguration(
+            screenshotModeEnabled: screenshotModeEnabled,
+            initialSurface: initialSurface,
+            appearancePreference: appearancePreference,
+            systemThemeModeOverride: systemThemeModeOverride
+        )
     }
 
     func debugLaunchConfiguration(
@@ -202,10 +213,40 @@ final class AppBootstrapper {
         return launchConfiguration(fromArguments: launchArguments)
     }
 
-    private func applyDebugLaunchOverridesIfNeeded(to container: AppContainer) {
+    private func applyDebugLaunchOverridesIfNeeded(to container: AppContainer) async {
         let configuration = debugLaunchConfiguration
-        guard let initialSurface = configuration.initialSurface else { return }
-        container.navigation.selectTab(initialSurface)
+        if configuration.screenshotModeEnabled {
+            container.debugSystemThemeModeOverride = configuration.systemThemeModeOverride
+        }
+        if let appearancePreference = configuration.appearancePreference {
+            await saveDebugAppearancePreferenceIfIsolated(
+                appearancePreference,
+                initialSurface: configuration.initialSurface,
+                to: container
+            )
+            container.userSystem.applyAppearancePreference(appearancePreference, container.accentFamily)
+        }
+        if let initialSurface = configuration.initialSurface {
+            container.navigation.selectTab(initialSurface)
+        }
+    }
+
+    private func saveDebugAppearancePreferenceIfIsolated(
+        _ appearancePreference: AppAppearancePreference,
+        initialSurface: AmbitionsSurface?,
+        to container: AppContainer
+    ) async {
+        guard container.persistence.usesInMemoryStore else { return }
+
+        _ = try? await container.youPreferencesCommands.saveYouPreferences(
+            YouPreferencesUpdate(
+                preferredTab: initialSurface ?? container.navigation.selectedTab,
+                appearancePreference: appearancePreference,
+                accentFamily: container.accentFamily,
+                reviewCadenceDays: 7,
+                localOnlyModeEnabled: true
+            )
+        )
     }
 
     private func launchArgumentValue(for key: String, fromArguments arguments: [String]) -> String? {

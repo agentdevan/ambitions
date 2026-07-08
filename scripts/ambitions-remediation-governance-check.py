@@ -223,6 +223,12 @@ def is_production_swift(path: str) -> bool:
     return path.startswith(PRODUCTION_SWIFT_ROOTS)
 
 
+def is_support_swift(path: str) -> bool:
+    if not is_swift(path):
+        return False
+    return path.startswith(SUPPORT_SWIFT_ROOTS)
+
+
 def is_local_runtime(path: str) -> bool:
     return path.startswith("Native/Ambitions/Core/LocalRuntimeOS/")
 
@@ -337,6 +343,61 @@ def source_root(relative: str) -> str:
     return parts[0] if parts else relative
 
 
+def changed_owner(path: str) -> str:
+    parts = Path(path).parts
+    if is_support_swift(path):
+        if path.startswith("Native/AmbitionsTests/"):
+            return "Native/AmbitionsTests"
+        if path.startswith("Native/AmbitionsUITests/"):
+            return "Native/AmbitionsUITests"
+        if path.startswith("Native/Ambitions/PreviewSupport/"):
+            return "Native/Ambitions/PreviewSupport"
+        if path.startswith("Sources/Previews/"):
+            return "Sources/Previews"
+    if is_production_swift(path):
+        return source_root(path)
+    if path.startswith("scripts/"):
+        return "scripts"
+    if path.startswith("docs/") and len(parts) >= 2:
+        return "/".join(parts[:2])
+    return parts[0] if parts else path
+
+
+def changed_owner_summary(changed: list[ChangedPath]) -> list[dict[str, object]]:
+    owners: dict[str, dict[str, object]] = {}
+    for item in changed:
+        owner = changed_owner(item.path)
+        entry = owners.setdefault(
+            owner,
+            {
+                "owner": owner,
+                "paths": [],
+                "productionSwift": 0,
+                "supportSwift": 0,
+            },
+        )
+        entry["paths"].append(item.path)  # type: ignore[index,union-attr]
+        if is_production_swift(item.path):
+            entry["productionSwift"] = int(entry["productionSwift"]) + 1
+        if is_support_swift(item.path):
+            entry["supportSwift"] = int(entry["supportSwift"]) + 1
+
+    rows: list[dict[str, object]] = []
+    for owner in sorted(owners):
+        entry = owners[owner]
+        paths = sorted(str(path) for path in entry["paths"])  # type: ignore[index]
+        rows.append(
+            {
+                "owner": owner,
+                "count": len(paths),
+                "productionSwift": entry["productionSwift"],
+                "supportSwift": entry["supportSwift"],
+                "paths": paths,
+            }
+        )
+    return rows
+
+
 def is_source_atlas_scope(path: str, text: str) -> bool:
     if path.startswith("docs/adr/"):
         return False
@@ -431,6 +492,7 @@ def governance_report(changed: list[ChangedPath]) -> dict[str, object]:
     }
     return {
         "changedPathCount": len(changed),
+        "changedOwners": changed_owner_summary(changed),
         "productionSwiftFileCount": len(swift_files),
         "supportSwiftFileCount": len(support_files),
         "rootLOC": sorted_root_loc,
@@ -649,6 +711,19 @@ def governance_findings(args: argparse.Namespace) -> list[Finding]:
                     )
                 )
 
+        if is_support_swift(path):
+            full_path = ROOT / path
+            if item.status != "D" and full_path.exists():
+                line_count = swift_line_count(full_path)
+                if line_count > SWIFT_HARD_LINE_CAP:
+                    findings.append(
+                        Finding(
+                            "support-swift-file-size-cap",
+                            path,
+                            f"{line_count} lines exceeds diff-scoped support hard cap {SWIFT_HARD_LINE_CAP}",
+                        )
+                    )
+
         changed_source_atlas_scope, source_atlas_growth_finding = source_atlas_growth_guard(
             item,
             text,
@@ -698,6 +773,23 @@ def self_test() -> int:
     assert not is_production_swift("Native/AmbitionsTests/AppTests.swift")
     assert not is_production_swift("Native/Ambitions/PreviewSupport/PreviewFixtures.swift")
     assert not is_production_swift("Sources/Previews/ThemePreview.swift")
+    assert is_support_swift("Native/AmbitionsTests/AppTests.swift")
+    assert is_support_swift("Native/AmbitionsUITests/AppUITests.swift")
+    assert is_support_swift("Native/Ambitions/PreviewSupport/PreviewFixtures.swift")
+    assert not is_support_swift("Native/Ambitions/App/AmbitionsApp.swift")
+    owner_rows = changed_owner_summary(
+        [
+            ChangedPath("M", "Native/Ambitions/App/AmbitionsApp.swift"),
+            ChangedPath("A", "Native/AmbitionsTests/AppTests.swift", untracked=True),
+            ChangedPath("M", "docs/qa/KNOWN_ISSUES.md"),
+            ChangedPath("M", "scripts/ambitions-remediation-governance-check.py"),
+        ]
+    )
+    owner_map = {str(row["owner"]): row for row in owner_rows}
+    assert owner_map["Native/Ambitions/App"]["productionSwift"] == 1
+    assert owner_map["Native/AmbitionsTests"]["supportSwift"] == 1
+    assert owner_map["docs/qa"]["count"] == 1
+    assert owner_map["scripts"]["count"] == 1
     assert rel(ROOT / "Native/AmbitionsTests/AppTests.swift").startswith("Native/AmbitionsTests/")
     assert is_local_runtime("Native/Ambitions/Core/LocalRuntimeOS/Commands/AmbitionsCommandExecutor.swift")
     assert not is_local_runtime("Native/Ambitions/Core/Runtime/CaptureService.swift")
@@ -801,6 +893,12 @@ def main() -> int:
     for row in report["supportLargestFiles"]:
         print(f"  {row['lines']} {row['path']}")
     print(f"support_over_hard_line_cap_files={report['supportOverHardLineCapFiles']}")
+    print("changed_owners:")
+    for row in report["changedOwners"]:
+        print(
+            f"  {row['owner']}: paths={row['count']} "
+            f"productionSwift={row['productionSwift']} supportSwift={row['supportSwift']}"
+        )
     print("naming_counts:")
     for key, value in report["namingCounts"].items():
         print(f"  {key}={value}")

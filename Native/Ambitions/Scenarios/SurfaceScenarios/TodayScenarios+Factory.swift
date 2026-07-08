@@ -33,7 +33,7 @@ extension PreviewTodayScenarios {
                     ],
                     trustWhisper: TodayTrustWhisperState(
                         title: "Why this now",
-                        detail: "The top layer is reading live native planning and runtime summary truth.",
+                        detail: "this step fits the open window and keeps the next move small enough to finish.",
                         state: .selected
                     ),
                     shellSummary: GoalShellSummaryState(
@@ -89,7 +89,7 @@ extension PreviewTodayScenarios {
                         title: posture == .lowData ? "May need confirmation" : "Based on",
                         detail: posture == .lowData
                             ? "Time pressure is inferred from the current draft shape and may change as answers land."
-                            : "The remaining-time read is using the current plan shape and runtime summary truth.",
+                            : "the remaining time leaves a clean window without crowding fixed commitments.",
                         state: pressureState(for: posture)
                     )
                 ),

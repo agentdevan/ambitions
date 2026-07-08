@@ -458,6 +458,8 @@ final class TimeSurfaceUITests: AmbitionsUITestCase {
         dismissContinuityReceiptIfPresent(in: accessibilityApp)
         XCTAssertTrue(accessibilityApp.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 15))
         XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.visual-stage", in: accessibilityApp, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.accessibility-stage", in: accessibilityApp, maxAttempts: 8))
+        assertTimeAccessibilityXXXLStackIsReadable(in: accessibilityApp)
         attachAMB1176AccessibilityTranscript(named: "amb-1176-accessibility-variant-voiceover-transcript", in: accessibilityApp)
         captureTimeScreenshot(named: "amb-1176-time-accessibility-xxxl-reduce-motion", in: accessibilityApp)
     }

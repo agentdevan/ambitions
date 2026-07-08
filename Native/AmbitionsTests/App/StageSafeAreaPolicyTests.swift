@@ -58,12 +58,12 @@ final class StageSafeAreaPolicyTests: XCTestCase {
         )
         XCTAssertTrue(root.showsRootDock)
         XCTAssertFalse(root.showsDockBackdrop)
-        XCTAssertEqual(root.dockClearance, 108)
-        XCTAssertEqual(root.stageContentBottomClearance, 108)
-        XCTAssertEqual(root.captureComposerClearance, 108)
+        XCTAssertEqual(root.dockClearance, 148)
+        XCTAssertEqual(root.stageContentBottomClearance, 148)
+        XCTAssertEqual(root.captureComposerClearance, 148)
         XCTAssertEqual(
             StageSafeAreaPolicy.rootSurfaceContentBottomInset(dynamicTypeIsAccessibilitySize: false),
-            128
+            168
         )
 
         let capture = StagePathStore.chromePolicy(
@@ -94,7 +94,7 @@ final class StageSafeAreaPolicyTests: XCTestCase {
         XCTAssertEqual(drilldown.continuityReceiptBottomClearance, 40)
         XCTAssertEqual(
             StageSafeAreaPolicy.rootSurfaceContentBottomInset(dynamicTypeIsAccessibilitySize: true),
-            160
+            184
         )
     }
 }

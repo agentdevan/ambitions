@@ -12,7 +12,7 @@ struct StageMotionProjection: Equatable, Sendable {
     let displayStyle: StageMotionDisplayStyle
     let generatedAt: Date
 
-    init(action: MotionCurrentAction, sourceSurface: String = "motion.current", reduceMotion: Bool) {
+    init(action: MotionCurrentAction, sourceSurface: String = "stage.motion", reduceMotion: Bool) {
         self.action = action
         self.sourceSurface = sourceSurface
         self.reduceMotion = reduceMotion

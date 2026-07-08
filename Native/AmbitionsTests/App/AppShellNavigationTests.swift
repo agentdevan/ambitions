@@ -102,6 +102,7 @@ final class AppShellNavigationTests: XCTestCase {
     func testMeridianDestinationsMirrorCanonicalTabsWithoutNewRouteOwnership() {
         let destinations = StageDockDestination.all
 
+        XCTAssertEqual(destinations.count, 4)
         XCTAssertEqual(destinations.map(\.surface), AmbitionsSurface.allCases)
         XCTAssertEqual(destinations.map(\.title), ["Today", "Goals", "Time", "You"])
         XCTAssertEqual(destinations.map(\.glyphRole), [.startHere, .goalsAtlas, .timeCapacity, .userProfile])
@@ -114,8 +115,68 @@ final class AppShellNavigationTests: XCTestCase {
                 "shell.meridian.destination.you"
             ]
         )
+        XCTAssertEqual(StageChromeContract.launchDefault.destinations, destinations)
         XCTAssertFalse(destinations.map(\.title).contains { $0.localizedCaseInsensitiveContains("plan") })
         XCTAssertFalse(destinations.map(\.accessibilityIdentifier).contains { $0.localizedCaseInsensitiveContains("plan") })
+    }
+
+    func testRootIALawRejectsGlobalBehaviorAndTrustLayersAsDockDestinations() {
+        let destinations = StageDockDestination.all
+        let destinationTitles = Set(destinations.map(\.title))
+        let destinationIdentifiers = Set(destinations.map(\.accessibilityIdentifier))
+        let forbiddenRootTokens = [
+            "activity",
+            "analytics",
+            "capture",
+            "chatbot",
+            "dashboard",
+            "search",
+            "motion",
+            "proof",
+            "source",
+            "privacy",
+            "history",
+            "receipt",
+            "receipts",
+            "trust",
+            "plan",
+            "profile",
+            "productivity",
+            "score",
+            "streak",
+            "task",
+            "habits",
+            "insights"
+        ]
+
+        XCTAssertEqual(destinationTitles, Set(["Today", "Goals", "Time", "You"]))
+        XCTAssertEqual(
+            destinationIdentifiers,
+            Set([
+                "shell.meridian.destination.today",
+                "shell.meridian.destination.goals",
+                "shell.meridian.destination.time",
+                "shell.meridian.destination.you"
+            ])
+        )
+
+        for token in forbiddenRootTokens {
+            XCTAssertFalse(
+                destinationTitles.contains { $0.localizedCaseInsensitiveContains(token) },
+                "\(token) must not become a rendered root dock title."
+            )
+            XCTAssertFalse(
+                destinationIdentifiers.contains { $0.localizedCaseInsensitiveContains(token) },
+                "\(token) must not become a rendered root dock identifier."
+            )
+        }
+
+        XCTAssertNil(SurfaceOwnershipRegistry.globalComposer.canonicalTab)
+        XCTAssertEqual(SurfaceOwnershipRegistry.globalComposer.layer, .globalComposer)
+        XCTAssertNil(SurfaceOwnershipRegistry.motionBehavior.canonicalTab)
+        XCTAssertEqual(SurfaceOwnershipRegistry.motionBehavior.layer, .motionBehavior)
+        XCTAssertNil(SurfaceOwnershipRegistry.trustInspection.canonicalTab)
+        XCTAssertEqual(SurfaceOwnershipRegistry.trustInspection.layer, .trustInspection)
     }
 
     func testFCP08MeridianShellChromeContractPreservesFourRootSurfacesAndReceiptZone() {
@@ -392,93 +453,6 @@ final class AppShellNavigationTests: XCTestCase {
     }
 
     @MainActor
-    func testDebugLaunchConfigurationDefaultsRespectCanonicalInitialSurfaceOnly() {
-        let bootstrapper = AppBootstrapper()
-
-        XCTAssertNil(bootstrapper.debugLaunchConfiguration().initialSurface)
-        XCTAssertFalse(bootstrapper.debugLaunchConfiguration().screenshotModeEnabled)
-    }
-
-    @MainActor
-    func testDebugLaunchConfigurationParsesAllowedInitialSurfaceArguments() {
-        let bootstrapper = AppBootstrapper()
-
-        let expected: [(String, AmbitionsSurface)] = [
-            ("today", .today),
-            ("goals", .goals),
-            ("time", .time),
-            ("you", .you)
-        ]
-
-        for (surface, tab) in expected {
-            let configuration = bootstrapper.debugLaunchConfiguration(arguments: ["Ambitions", "-AmbitionsInitialSurface", surface])
-
-            XCTAssertEqual(configuration.initialSurface, tab)
-            XCTAssertFalse(configuration.screenshotModeEnabled)
-        }
-    }
-
-    @MainActor
-    func testDebugLaunchConfigurationRejectsInvalidOrLegacyInitialSurfaceArguments() {
-        let bootstrapper = AppBootstrapper()
-        let invalidValues = ["capture", "pulse", "plan", "habits", "insights", "review", "profile", "unknown"]
-
-        for value in invalidValues {
-            let configuration = bootstrapper.debugLaunchConfiguration(arguments: ["Ambitions", "-AmbitionsInitialSurface", value])
-
-            XCTAssertNil(configuration.initialSurface, "Legacy or invalid value '\(value)' must not map to top-level launch targets.")
-            XCTAssertFalse(configuration.screenshotModeEnabled)
-        }
-    }
-
-    @MainActor
-    func testDebugLaunchConfigurationIgnoresEnvironmentValues() {
-        let bootstrapper = AppBootstrapper()
-
-        let configuration = bootstrapper.debugLaunchConfiguration(arguments: ["Ambitions"])
-
-        XCTAssertNil(configuration.initialSurface)
-        XCTAssertFalse(configuration.screenshotModeEnabled)
-    }
-
-    @MainActor
-    func testDebugLaunchConfigurationParsesScreenshotModeStrictly() {
-        let bootstrapper = AppBootstrapper()
-
-        XCTAssertTrue(
-            bootstrapper.debugLaunchConfiguration(arguments: ["Ambitions", "-AmbitionsScreenshotMode", "YES"]).screenshotModeEnabled
-        )
-        XCTAssertTrue(
-            bootstrapper.debugLaunchConfiguration(arguments: ["Ambitions", "-AmbitionsScreenshotMode", "yes"]).screenshotModeEnabled
-        )
-        XCTAssertFalse(
-            bootstrapper.debugLaunchConfiguration(arguments: ["Ambitions", "-AmbitionsScreenshotMode", "No"]).screenshotModeEnabled
-        )
-        XCTAssertFalse(
-            bootstrapper.debugLaunchConfiguration(arguments: ["Ambitions"]).screenshotModeEnabled
-        )
-    }
-
-    @MainActor
-    func testDebugLaunchConfigurationDoesNotSelectCaptureOrLegacySurfaces() {
-        let bootstrapper = AppBootstrapper()
-        let captureLikeInputs = [
-            ["Ambitions", "-AmbitionsInitialSurface", "capture"],
-            ["Ambitions", "-AmbitionsInitialSurface", "captures"],
-            ["Ambitions", "-AmbitionsInitialSurface", "pulse"],
-            ["Ambitions", "-AmbitionsInitialSurface", "plan"],
-            ["Ambitions", "-AmbitionsInitialSurface", "habits"],
-            ["Ambitions", "-AmbitionsInitialSurface", "insights"]
-        ]
-
-        for arguments in captureLikeInputs {
-            let configuration = bootstrapper.debugLaunchConfiguration(arguments: arguments)
-
-            XCTAssertNil(configuration.initialSurface)
-        }
-    }
-
-    @MainActor
     func testCurrentTabReselectionFirstTapRequestsScrollThenSecondTapReturnsToRoot() {
         let navigation = StageStore(selectedSurface: .time)
         navigation.openRituals()
@@ -513,6 +487,21 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(navigation.selectedTab, .today)
         XCTAssertEqual(navigation.takeTodayEntryContext(), .recovery)
         XCTAssertEqual(navigation.takeTodayEntryContext(), .standard)
+    }
+
+    @MainActor
+    func testSelectingTodayClearsFocusedRoutes() {
+        let navigation = StageStore(selectedSurface: .goals)
+
+        navigation.openGoalDetail(goalID: "goal-shell")
+        XCTAssertFalse(navigation.goalsPath.isEmpty)
+
+        navigation.selectToday(entryContext: .standard)
+
+        XCTAssertEqual(navigation.selectedTab, .today)
+        XCTAssertTrue(navigation.goalsPath.isEmpty)
+        XCTAssertTrue(navigation.timePath.isEmpty)
+        XCTAssertTrue(navigation.youPath.isEmpty)
     }
 
     @MainActor

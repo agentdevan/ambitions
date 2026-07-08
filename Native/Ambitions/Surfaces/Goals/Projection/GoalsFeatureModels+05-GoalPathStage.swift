@@ -217,27 +217,27 @@ struct LifePathThreadState: Sendable {
         }
         let sourceFold = GoalPathSourceFold(
             id: "goal-path-source-fold",
-            title: "GoalPathSourceFold",
+            title: "Path source",
             summary: pathBuilder?.performanceBudgetSummary ?? "Thread is based on the visible goal path stages.",
-            breadcrumbLabels: pathBuilder?.breadcrumbLabels ?? ["Goal Detail", "LifePath Thread"],
+            breadcrumbLabels: pathBuilder?.breadcrumbLabels ?? ["Goal Detail", "Goal path"],
             privacyLabel: privacySensitive ? "Private mode hides titles while preserving path roles." : "Source labels stay visible for review.",
             state: .default
         )
 
-        self.title = "LifePath Thread"
+        self.title = "Goal path"
         self.subtitle = "Path roles, proof, risk, and alternate routes stay connected before deeper tactics."
         self.nodes = nodes
         self.proofBeads = Array((stageProof + requirementProof).prefix(6))
         self.riskPinches = Array((stageRiskPinches + phaseRiskPinches + forkRiskPinches).prefix(3))
         self.alternateRouteFolds = Array(alternateRouteFolds)
         self.sourceFold = sourceFold
-        self.accessibilityLabel = "LifePath Thread"
+        self.accessibilityLabel = "Goal path"
         self.accessibilityValue = nodes
             .map { "Order \($0.order), \($0.roleLabel), \($0.statusLabel), \($0.title)" }
             .joined(separator: ". ")
         self.accessibilityHint = privacySensitive
-            ? "Private mode preserves accessible path order, proof beads, risk pinch, alternate route fold, and source fold roles without exposing titles."
-            : "Review the path in order with proof beads, risk pinch, alternate route fold, and source fold."
+            ? "Private mode preserves accessible path order, proof points, friction, future routes, and source roles without exposing titles."
+            : "Review the path in order with proof points, friction, future routes, and source."
     }
 
     static func symbolName(for position: GoalPathStagePosition) -> String {

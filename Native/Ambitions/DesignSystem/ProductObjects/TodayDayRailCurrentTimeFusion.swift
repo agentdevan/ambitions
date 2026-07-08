@@ -12,7 +12,7 @@ struct TodayRealityMeridianCurrentTimeFusionModifier: ViewModifier {
     @Environment(\.ambitionTheme) private var theme
 
     func body(content: Content) -> some View {
-        let surfaceTheme = AmbitionTheme.theme(for: .dark, accentFamily: theme.accentFamily)
+        let surfaceTheme = theme
 
         VStack(alignment: .leading, spacing: 0) {
             RealityMeridianTimeBand()
@@ -31,28 +31,41 @@ struct TodayRealityMeridianCurrentTimeFusionModifier: ViewModifier {
             }
         }
         .ambitionTheme(surfaceTheme)
-        .environment(\.colorScheme, .dark)
-        .background(fusedSurfaceMaterial)
+        .environment(\.colorScheme, surfaceTheme.mode == .dark ? .dark : .light)
+        .background(fusedSurfaceMaterial(for: surfaceTheme))
         .clipShape(RoundedRectangle(cornerRadius: surfaceTheme.radius.xl, style: .continuous))
         .overlay(
             RoundedRectangle(cornerRadius: surfaceTheme.radius.xl, style: .continuous)
-                .stroke(Color.white.opacity(0.12), lineWidth: 1)
+                .stroke(surfaceTheme.colors.strokeSubtle, lineWidth: 1)
         )
-        .shadow(color: Color.black.opacity(0.42), radius: 28, x: 0, y: 18)
+        .shadow(color: Color.black.opacity(surfaceTheme.mode == .dark ? 0.42 : 0.10), radius: 28, x: 0, y: 18)
         .accessibilityElement(children: .contain)
         .accessibilityLabel("Reality Meridian time band and rail")
         .accessibilityIdentifier("TodayRealityMeridianFusedRail")
     }
 
-    var fusedSurfaceMaterial: LinearGradient {
-        LinearGradient(
-            colors: [
-                Color(red: 0.020, green: 0.024, blue: 0.036),
-                Color(red: 0.010, green: 0.014, blue: 0.024),
-                Color(red: 0.006, green: 0.008, blue: 0.014)
-            ],
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
-        )
+    func fusedSurfaceMaterial(for theme: AmbitionTheme) -> LinearGradient {
+        switch theme.mode {
+        case .dark:
+            LinearGradient(
+                colors: [
+                    Color(red: 0.020, green: 0.024, blue: 0.036),
+                    Color(red: 0.010, green: 0.014, blue: 0.024),
+                    Color(red: 0.006, green: 0.008, blue: 0.014),
+                ],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        case .light:
+            LinearGradient(
+                colors: [
+                    theme.colors.surfacePrimary.opacity(0.98),
+                    theme.colors.surfaceSecondary.opacity(0.94),
+                    theme.colors.canvasElevated.opacity(0.96),
+                ],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        }
     }
 }
