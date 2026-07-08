@@ -75,6 +75,7 @@ Key active laws for this ledger:
 - R2 / Source Atlas must not receive the private life graph.
 - Hosted/cloud LLMs are not core frontend architecture or primary product grammar.
 - Source existence, identifiers, comments, and screenshot paths are not product-quality proof.
+- Deep, Not Wide Product Law: Ambitions must feel like a few canonical places with rich object depth underneath them, not a wider app with more tabs.
 
 ## 3. Product-Law Guardrail Checklist
 
@@ -88,6 +89,99 @@ Check this before every packet closeout:
 - No UI or request shape implies private graph storage in R2/backend.
 - No hosted AI dependency is introduced as core grammar.
 - No generic task-app, habit-app, calendar-clone, dashboard, or AI-wrapper drift is introduced.
+- Depth comes from objects, drilldowns, inspectors, edit paths, receipts, local proof, history, control, and privacy boundaries, not more root destinations.
+
+## 3A. Deep, Not Wide Product Law
+
+Ambitions must become deep, not wide.
+
+Persistent roots are only:
+- Today
+- Goals
+- Time
+- You
+
+Global and inspection layers:
+- Capture is a global composer/action.
+- Search is a global local Find / Act / Inspect layer.
+- Motion is cross-surface Stage behavior.
+- Proof / Source / Privacy / History / Receipts are inspection details.
+- None of Capture, Search, Motion, Proof, Source, Privacy, History, or Receipts may become a root destination.
+
+At rest, the app should feel like four canonical places:
+- Today: what fits now.
+- Goals: where life is going.
+- Time: what reality can hold.
+- You: control, privacy, profile, history.
+
+Depth model:
+- Ambitions should feel simple at rest and deep on inspection.
+- Depth comes from objects, not more tabs.
+- Valid depth is contextual and reached from Today, Goals, Time, You, Capture, or Search.
+- Drilldowns must answer a real user question or enable a real user action.
+- Do not create placeholder detail surfaces, dead drilldowns, shallow cards that repeat root information, module menus, dashboard walls, generic analytics screens, separate AI surfaces, separate Motion surfaces, separate Capture tabs, separate Proof tabs, separate History tabs, separate Privacy tabs, separate Receipts tabs, or habit/task/project/calendar clone areas.
+
+Valid secondary route-depth surfaces include:
+- Step detail
+- Goal detail
+- Life area detail
+- Goal path editor
+- Future path editor
+- Time block detail
+- Protected window detail
+- Placement review
+- Reflow review
+- Conflict review
+- Recovery review
+- Capture proposal
+- Capture receipt
+- Search result preview
+- Proof detail
+- Source detail
+- History detail
+- Receipt detail
+- Privacy detail
+- Export flow
+- Delete/reset flow
+- Local data status
+- Account/iCloud optionality detail
+- Diagnostics / inspect and repair
+
+Object depth requirement:
+- Each meaningful object should support the appropriate subset of object identity, context, fit / reason, action, proof, receipt, history, control, and privacy boundary.
+- Step depth should show what it is, why it fits now, what goal it serves, what time window holds it, what proof completes it, what changed after action, and how to undo/defer/move/close it.
+- Goal depth should show life area, active thread, path, future path, proof stitches, related steps, Today influence, Time load, and recovery/accomplishment state.
+- Time block depth should show fixed/protected/open status, capacity, conflict, reflow options, source/constraint, related goal/step, receipt/history, and undo/control.
+- Capture depth should show captured input, resolved object type, destination, storage/local status, receipt, related surface, and undo/edit path.
+- Receipt depth should show what changed, why it changed, where it went, what source informed it, what stayed private, and how to undo or inspect.
+
+Packet behavior for surface maturity packets:
+- Before coding, create a short depth map covering root state, valid drilldowns, invalid extra surfaces, object types involved, inspection details, edit/control paths, receipt/proof/history paths, accessibility expectations, and screenshot proof required.
+- Implement only the depth that belongs to the current packet.
+- Do not add broad route architecture unless required by the packet.
+- A packet is not complete if it only makes the root prettier.
+
+Surface maturity acceptance:
+- Today must prove Start Here, action, closure, proof, and receipt depth.
+- Goals must prove life area, goal path, future path, proof stitch, and handoff depth.
+- Time must prove placement, conflict, reflow, protection, source, and undo depth.
+- Capture must prove typed object routing, local persistence, destination, and receipt depth.
+- Search must prove exact local object lookup, route precision, and inspection depth.
+- You must prove local-first privacy/account/data-control depth.
+- The product target is: there are only a few places, but every place knows a lot.
+
+## 3B. Flagship Visual Fidelity Contract
+
+- Contract installed: `docs/qa/frontend-flagship-shippability-remediation/VISUAL_FIDELITY_CONTRACT.md`.
+- Tests are not sufficient for product quality.
+- Visually mediocre SwiftUI is a packet failure.
+- Every visual repair packet requires a pre-coding Visual Delta.
+- Every surface maturity packet requires a pre-coding Visual Delta.
+- Every relevant packet requires a post-coding Visual Scorecard.
+- Packets can pass tests and still be Needs Repair.
+- Repairable visual failure must be repaired immediately, not merely documented.
+- Human review is deferred until final owner review package.
+- Codex must self-score and run repair cycles until the packet meets the contract or a hard stop rule applies.
 
 ## 4. Program Queue
 
@@ -569,6 +663,7 @@ Product law preserved:
 - Capture not root tab
 - Search not chatbot
 - Motion not root destination
+- depth from objects and contextual drilldowns, not extra root surfaces
 - local-first/offline trust preserved
 - no hosted-AI primary grammar added
 
@@ -577,6 +672,40 @@ Validation run:
 
 Screenshot / proof artifacts:
 - `<path>`: `<inspection notes>`
+
+Visual Delta:
+- Current screenshot state: `<state>`
+- Target visual state: `<state>`
+- Gap from flagship target: `<gap>`
+- Exact visual deltas to close: `<deltas>`
+- Product-law risks: `<risks>`
+- Accessibility risks: `<risks>`
+- Files likely responsible: `<paths>`
+- Screenshot proof required: `<paths or lanes>`
+- Self-review criteria: `<criteria>`
+- Repair-loop conditions: `<conditions>`
+
+Visual Scorecard:
+- Native iOS quality: `<1-5>`
+- Visual hierarchy: `<1-5>`
+- Surface identity: `<1-5>`
+- Object depth: `<1-5>`
+- Material restraint: `<1-5>`
+- Typography and spacing: `<1-5>`
+- Interaction clarity: `<1-5>`
+- Local-first trust clarity: `<1-5>`
+- Accessibility / Dynamic Type readiness: `<1-5>`
+- Similarity to Ambitions flagship target: `<1-5>`
+- Final self-score: `<average and status>`
+
+Repair cycles performed:
+- `<cycle count and notes>`
+
+Remaining visual deltas:
+- `<remaining deltas or none>`
+
+Required closeout sentence:
+- Passing tests did not determine this status. The status is based on source proof, runtime proof, screenshot inspection, repair-loop completion, and visual fidelity against the Ambitions flagship target.
 
 Validation not run:
 - `<command or lane>`: `<why>`
