@@ -57,46 +57,118 @@ Historical packet closeouts remain preserved as evidence. This is an ownership o
 ## 6. New active product decisions
 
 1. **Capture is first-class but not a root tab**
-   - Must be full-screen and route-ready globally.
-   - Not a persistent dock/root destination.
+   - Capture must be a full-screen creation surface.
+   - It is global and first-class.
+   - It is not a persistent dock/root destination.
+   - Must use the full screen while respecting safe area.
+   - Must feel like a real native creation surface.
    - No modal prompt-box feel.
    - No chatbot/fake AI classifier feel.
    - Dense dead-space is not acceptable.
+   - expose route affordances clearly.
    - Must show route affordances, review-before-save, destination before save, exact destination after save, open destination from receipt.
    - Must support cancel/back/close correctly and remain globally reachable.
    - Do not claim persistence if the object cannot be found.
+   - must not be a dock tab.
+   - must not become an inbox.
+   - must not become a notes feed.
 
 2. **Goals constellation/atlas design is retired**
-   - Move toward Apple Reminders-style hierarchy.
+   - The current constellation / Life Area Atlas visual direction is rejected.
+   - Goals must move toward native Apple Reminders-style hierarchy.
+   - Do not clone Apple Reminders one-to-one, but use its native grammar:
+     - clear list hierarchy
+     - life areas as groups/folders/sections
+     - goals as visible rows
+     - active paths as rows/details
+     - clean add/edit flow
+     - created goals immediately visible
+     - detail drilldowns
+     - practical row heights
+     - clear back navigation
    - Keep life areas as groups/folders/sections.
    - Keep goals as visible rows.
    - Keep active paths as rows/details.
    - No radial constellation, no abstract orbit nodes, no decorative radial map.
+   - no “Create your first goal” box trapped in a diagram.
+   - no unclear proof/status tiny marks.
    - Remove “Create your first goal” trapped-in-diagram patterns.
 
 3. **Time must become Calendar-grade**
-   - Day/week scroll, now line, protected/open/fixed blocks.
-   - Scheduled step blocks.
-   - Conflict/reflow review and placement proposal.
-   - Clear temporal navigation.
-   - No segmented-card dashboard or abstract gauge treatment.
+   - Time must feel structurally closer to Apple Calendar.
+   - Do not clone Calendar one-to-one, but use native calendar grammar:
+     - day/week scroll
+     - now line
+     - time blocks/windows
+     - protected time
+     - open time
+     - fixed points
+     - scheduled step blocks
+     - conflict/reflow review
+     - placement proposal
+     - clear temporal navigation
+   - Time must not read as:
+     - segmented control panel
+     - dashboard card
+     - abstract gauge
+     - productivity score
+     - static list of system facts
 
 4. **Today must become actionable and rotary**
-   - Keep useful paths when no step is required.
-   - Scroll forward/back through time windows.
-   - Show window context and Start Here when a real step exists.
+   - Today must not be a passive empty state.
+   - Useful actions when no step is required:
+     - Build today
+     - Capture
+     - Add a step
+     - Review open time
+     - Protect time
+     - Inspect why nothing fits
+   - Scroll forward and backward through time windows.
+   - Today should feel like a living rotary meridian, not a static empty poster.
+   - Show:
+     - current window
+     - previous windows
+     - next windows
+     - Start Here when a real step exists
+     - useful no-step state
+     - action path
+     - proof/receipt after action
 
 5. **Shell/chrome clarity direction**
-   - Rebuild shell/chrome clarity using Facebook iOS as reference principle only.
-   - Apply: “Facebook-clear, Apple-native, Ambitions-private.”
-   - Preserve four roots only: Today / Goals / Time / You.
-   - Keep Capture global, global-search global, top header context visible, and no decorative/inert chrome.
+   - Owners provided current Facebook iOS screenshots as a shell/chrome reference.
+   - Extract only shell/chrome principles.
+   - Ambitions shell should be: “Facebook-clear, Apple-native, Ambitions-private.”
+   - Facebook-clear: controls are obvious, touchable, and navigable.
+   - Apple-native: proportions, safe areas, lists, sheets, scrolling, navigation, and detail routes feel like real iOS.
+   - Ambitions-private: no feed, no social graph, no attention mechanics, no noisy badges, no Meta branding, no engagement UI.
+   - Apply target shell behavior:
+     - clear top command header
+     - working back on drilldowns
+     - visible surface identity
+     - visible mode/context
+     - clear Search action
+     - clear Capture action
+     - one contextual action where needed
+     - large touch targets
+     - readable contrast in light/dark
+     - no decorative-only icons
+     - no broken/inert controls
+     - rounded anchored bottom dock
+     - four persistent roots only: Today / Goals / Time / You
+     - strong selected dock state
+     - content never hidden behind dock
+     - Capture remains global, not dock tab
+     - root surfaces scroll as real product surfaces
+     - detail routes are full native navigable surfaces
 
 6. **You cleanup**
+   - Remove trailing value words next to chevrons.
+   - Avoid noisy right-side labels like “On device,” “No account,” “Light,” “Ready,” “Goals,” “Time.”
+   - Put secondary details as subtitles under row titles or inside detail pages.
    - Connect settings to runtime where possible.
-   - Remove trailing value words beside chevrons and noisy right labels.
-   - Show unavailable states honestly.
-   - Repair appearance unreadability and runtime-inspected row behavior.
+   - Show unavailable honestly where not connected.
+   - Repair Appearance detail unreadability.
+   - Keep local-first/privacy controls real and inspectable.
 
 ## 7. Facebook shell/chrome reference translation
 
