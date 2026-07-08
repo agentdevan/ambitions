@@ -51,10 +51,14 @@ final class TodayRealityMeridianExperienceElevationTests: XCTestCase {
         XCTAssertEqual(unavailable.heroStep?.sourceRecordLabel, "Source record unavailable")
         XCTAssertEqual(reviewRequired.heroStep?.receiptItem.freshness, .partial)
         XCTAssertEqual(reviewRequired.heroStep?.sourceQualityLabel, "Source needs review")
+        XCTAssertTrue(happy.heroStep?.becauseLine.contains("open window") == true)
+        XCTAssertFalse(happy.heroStep?.becauseLine.localizedCaseInsensitiveContains("runtime summary truth") == true)
         XCTAssertTrue(privateRail.privacyProjection.isSensitiveProjection)
         XCTAssertEqual(recovery.hero.kind, .recovery)
         XCTAssertEqual(lowConfidence.hero.confidenceLabel, "Low-data")
         XCTAssertNil(empty.heroStep)
+        XCTAssertEqual(empty.primaryAction?.kind, .openTime)
+        XCTAssertEqual(empty.primaryAction?.title, "Build today")
     }
 
     func testTodayRealityMeridianReceiptAccessibilitySummariesStayInspectable() throws {

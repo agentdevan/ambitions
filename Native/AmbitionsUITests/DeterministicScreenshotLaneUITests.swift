@@ -82,6 +82,70 @@ final class DeterministicScreenshotLaneUITests: AmbitionsUITestCase {
         }
     }
 
+    func testPacket31TodayProof() throws {
+        var samples: [String: Double] = [:]
+
+        for appearance in [DeterministicAppearanceCase.light, DeterministicAppearanceCase.dark] {
+            let app = appearance.launchApplication(
+                initialSurface: "today",
+                extraEnvironment: ["AMBITIONS_PREVIEW_TODAY_SCENARIO": "start-here-ready"]
+            )
+            XCTAssertTrue(waitForShellReady(in: app))
+            XCTAssertTrue(app.descendants(matching: .any)["today.screen"].waitForExistence(timeout: 20))
+            XCTAssertTrue(app.descendants(matching: .any)["TodayRealityRailStartHereTitle"].waitForExistence(timeout: 20))
+            let openStep = app.descendants(matching: .any)["TodayStartHereOpenStep"]
+            XCTAssertTrue(openStep.waitForExistence(timeout: 20))
+            XCTAssertTrue(accessibilityText(for: openStep).localizedCaseInsensitiveContains("Draft the talk outline"))
+            XCTAssertTrue(app.descendants(matching: .any)["TodayRealityRailPrimaryAction"].waitForExistence(timeout: 20))
+            XCTAssertTrue(app.descendants(matching: .any)["TodayStartHereSourceFreshness"].waitForExistence(timeout: 20))
+            XCTAssertTrue(app.descendants(matching: .any)["TodayStartHereShowAnother"].waitForExistence(timeout: 20))
+            XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Recommended step")).firstMatch.waitForExistence(timeout: 10))
+            XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Draft the talk outline")).firstMatch.waitForExistence(timeout: 10))
+            XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "open window")).firstMatch.waitForExistence(timeout: 10))
+            XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "runtime summary truth")).firstMatch.exists)
+            XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "top layer")).firstMatch.exists)
+
+            let dockFrame = rootDockFrame(in: app)
+            XCTAssertFalse(dockFrame.isNull)
+            XCTAssertLessThanOrEqual(
+                app.descendants(matching: .any)["TodayRealityRailPrimaryAction"].frame.maxY,
+                dockFrame.minY - 4,
+                "Start Here primary action should clear the root dock in the first viewport."
+            )
+            XCTAssertLessThanOrEqual(
+                app.descendants(matching: .any)["TodayStartHereShowAnother"].frame.maxY,
+                dockFrame.minY - 4,
+                "Start Here correction controls should clear the root dock in the first viewport."
+            )
+
+            let screen = XCUIScreen.main.screenshot()
+            let screenshot = XCTAttachment(screenshot: screen)
+            screenshot.name = "packet-3.1-today-start-here-\(appearance.id)-screenshot"
+            screenshot.lifetime = .keepAlways
+            add(screenshot)
+
+            samples[appearance.id] = assertScreenshotTone(
+                screen,
+                expected: appearance.expectedMode,
+                context: "Today Start Here \(appearance.id)"
+            )
+            attachMetadata(
+                id: "packet-3.1-today-start-here-\(appearance.id)",
+                surface: "Today",
+                appearance: appearance,
+                luminance: samples[appearance.id] ?? 0,
+                proofScope: "Packet 3.1 seeded Start Here screenshot proof; simulator proof only"
+            )
+            app.terminate()
+        }
+
+        XCTAssertGreaterThan(
+            samples[DeterministicAppearanceCase.light.id] ?? 0,
+            (samples[DeterministicAppearanceCase.dark.id] ?? 0) + 0.18,
+            "Seeded Today Start Here Light should be visually distinct from Dark."
+        )
+    }
+
     func testAMB1815AppearanceCoreOverlayScreenshotMatrix() throws {
         var samples: [String: [String: Double]] = [:]
 
@@ -236,7 +300,11 @@ private struct DeterministicAppearanceCase: Equatable {
     static let allCases = [light, dark, systemLight, systemDark]
 
     @MainActor
-    func launchApplication(launchURL: String? = nil, initialSurface: String) -> XCUIApplication {
+    func launchApplication(
+        launchURL: String? = nil,
+        initialSurface: String,
+        extraEnvironment: [String: String] = [:]
+    ) -> XCUIApplication {
         let app = XCUIApplication()
         var keyValues = [
             "AMBITIONS_BOOTSTRAP_MODE": "preview",
@@ -252,6 +320,9 @@ private struct DeterministicAppearanceCase: Equatable {
         ]
         if let launchURL {
             keyValues["AMBITIONS_LAUNCH_URL"] = launchURL
+        }
+        for (key, value) in extraEnvironment {
+            keyValues[key] = value
         }
 
         for keyValue in keyValues.sorted(by: { $0.key < $1.key }) {

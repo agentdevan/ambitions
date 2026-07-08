@@ -6,7 +6,7 @@ Owner: Codex frontend remediation operator
 Repository: agentdevan/ambitions
 Branch: frontend-flagship-shippability-remediation
 Session start SHA: 9362e940eec5e7d118df418d00022c3588df6610
-Current packet: Packet 3.1 - Today Core Thesis Proof (next after Packet 2.4 closeout)
+Current packet: Packet 3.2 - Today Action / Closure / Proof Loop (next unresolved packet)
 
 This ledger is process evidence only. It is not product acceptance, owner visual acceptance, release proof, accessibility proof, Visual Green, Accessibility Green, or Release Green.
 
@@ -29,8 +29,8 @@ No packet may be marked Done by Codex in this program.
 
 - Branch: `frontend-flagship-shippability-remediation`
 - Base SHA: `9362e940eec5e7d118df418d00022c3588df6610`
-- Current packet status: Packet 2.4 has script/self-test/governance proof and is Yellow / Ready For Review.
-- Working tree expectation: after Packet 2.4 commit, the next unresolved packet is Packet 3.1.
+- Current packet status: Packet 3.1 is Yellow / Ready For Review; Packet 3.2 is the next unresolved packet.
+- Working tree expectation: Packet 3.1 proof is complete within simulator/source ceilings and ready to commit.
 - Linear: not touched this session; local ledger is the active progress record.
 - Xcode: `Xcode 26.6`, build `17F113`
 - Simulator used: iPhone 17 Pro Max, iOS 26.5, UDID `DD9B9C84-7188-48FA-AA2A-AB5C1D0EE2B6`
@@ -221,7 +221,7 @@ Do not start Project 3 until Project 1 is at least Accepted Yellow and Product L
 
 | Packet | Status | Entry Condition | Required Proof |
 | --- | --- | --- | --- |
-| 3.1 Today Core Thesis Proof | Backlog | Red-gate rendering cleared | Today first-viewport screenshots and mutation evidence |
+| 3.1 Today Core Thesis Proof | Ready For Review | Red-gate rendering cleared | Today first-viewport screenshots and mutation evidence |
 | 3.2 Today Action / Closure / Proof Loop | Backlog | Today thesis visible | Start, pause/defer, close, undo, receipt, proof/source proof |
 | 3.3 Goals State Legibility | Backlog | Goals rendering stable | Distinct selected/proof/recovery states |
 | 3.4 Goals Editing / Proof / Handoff | Backlog | Goals state legible | Add/edit/move/handoff/crash regression proof |
@@ -928,6 +928,151 @@ Known risks:
 Follow-up required:
 - Packet 3.1 - Today Core Thesis Proof.
 - Later packets must continue running the governance check and recording changed owners, proof ceilings, and known-issue mappings.
+
+### Packet 3.1 - Today Core Thesis Proof
+
+Status: In Progress
+
+Target:
+- Today must prove the core product thesis: show the step that fits when one exists, and show a useful no-step/recovery state when no real step exists.
+- The first viewport must communicate fit, reason, capacity, protected boundary, and action without becoming a task list, dashboard, or decorative meridian poster.
+- The Timeline / Reality Meridian must be operational: a visible step, empty state, or no-step action must connect to Time/Capture/detail context.
+
+Depth map before coding:
+- Root state: Today remains one of the four persistent roots; no new root surface, Capture tab, Motion surface, dashboard, task list, habit surface, or calendar clone is allowed.
+- Valid drilldowns: Step detail, proof/receipt/source inspection from the Start Here object, replacement/rejection sheets, Time handoff for an open/no-step window, and future Packet 3.2 closure/action sheets.
+- Invalid extra surfaces: Today dashboard wall, separate plan/task module, decorative-only meridian screen, Capture root, Motion root, proof/history/receipt root, or empty detail page.
+- Object types involved: `AmbitionsDayRailViewState`, `DayRailHeroStepState`, Reality Meridian / Start Here, Today preview scenarios, Today screenshot UI lanes, and Step detail proof hooks.
+- Inspection details: Start Here must expose object identity, time fit/capacity, reason, source/trust line, primary action, correction controls, and proof/detail access when a step exists; no-step must expose what remains possible without inventing urgency.
+- Edit/control paths: bounded root actions only: Start now/Open step for hero; Build today/Open Time for no-step if the projection already owns an open-time action.
+- Receipt/proof/history paths: Step proof/detail access remains visible through existing Step Detail and Trust Details hooks; Packet 3.1 does not implement the full closure/receipt loop reserved for Packet 3.2.
+- Accessibility expectations: Start Here, primary action, source/freshness, correction controls, no-step action, and Up Next must remain automation-visible; no manual VoiceOver Green claim.
+- Screenshot proof required: seeded Today Start Here light/dark screenshots, default no-step Today light/dark screenshots where practical, and existing Today UI screenshot matrix artifacts after repair.
+
+Visual Delta:
+- Current screenshot state: latest Packet 1.4 appearance proof for Today renders a visually stable but passive no-step root. Light screenshot path: `.codex/xcode-summaries/packet-1.4-appearance-rendered-gate/20260708T014825Z-AmbitionsUITests-DeterministicScreenshotLaneUITests-testAMB1815AppearanceRootScr-50733-6299/extract/screenshots/amb-1815-root-today-light-screenshot_0_D3412905-F3C2-4308-9FB9-FA93B75F815F.png`. Dark screenshot path: `.codex/xcode-summaries/packet-1.4-appearance-rendered-gate/20260708T014825Z-AmbitionsUITests-DeterministicScreenshotLaneUITests-testAMB1815AppearanceRootScr-50733-6299/extract/screenshots/amb-1815-root-today-dark-screenshot_0_C96BDAD0-1B4B-48DD-8E6F-59E9BDF61F8B.png`. Both show "No step is required right now", "Capture stays ready...", and Up Next copy, but no primary action and too much first-viewport emptiness.
+- Target screenshot state: seeded Today screenshots should show a clear Start Here object, a specific Recommended step, a readable fit/reason line, capacity/boundary context, Why this/proof access, a primary action, correction controls, and Up Next. Default no-step screenshots should remain calm while exposing one believable next control such as Build today/Open Time without adding Capture as root or inventing a fake step.
+- Gap from desired premium frontend target: the current proof over-indexes on empty state and does not provide screenshot evidence that Today actually shows "what fits now" when a step exists. The empty state is calm but passive, so Today can still feel like a static proof harness rather than a living execution window.
+- Exact visual deltas to close: add rendered Start Here screenshot proof; reduce passive no-step feel by showing a contextual action when the projection owns one; keep the Reality Meridian from reading as decorative-only; preserve realistic iPhone proportions and root shell clearance.
+- Exact inspectability deltas to close: ensure Start Here and no-step routes expose stable identifiers for primary action, source/reason/proof access, and action handoff; add source/test proof that empty Today keeps the open-time action instead of dropping it.
+- Exact realism/proportion deltas to close: avoid giant fantasy panels, box-in-box dashboards, dense cards, and oversized controls; use existing native button proportions and the current Reality Meridian layout.
+- Likely files: `Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailViewCurrentMoment.swift`, `Native/Ambitions/Surfaces/Today/Projection/DayRailProjection.swift`, `Native/AmbitionsUITests/TodaySurfaceUITests.swift`, `Native/AmbitionsTests/Today/TodayRealityMeridianExperienceElevationTests.swift`, and this ledger.
+- Product-law risks: no new persistent roots; Capture stays a global action only; Search remains local Find / Act / Inspect; Motion remains behavior; no task-list/dashboard/habit/chatbot grammar.
+- Accessibility risks: automated identifiers and Dynamic Type behavior can be checked, but manual VoiceOver is unavailable; large Dynamic Type cannot be claimed Green.
+- Proof required: focused Today unit/source tests, focused Today UI screenshot lane for seeded/default states, source/governance scans, and `./scripts/ambitions-xcode-build-for-testing.sh --batch frontend-remediation` before commit.
+- Self-review criteria: Start Here screenshot has a specific step and action above the dock; no-step screenshot has a useful contextual control and no fake urgency; Up Next remains visible; light/dark remain intentional; no dashboard/task app feel; no root law regressions.
+- Repair-loop conditions: if seeded Today screenshots still show empty state, repair scenario routing or test lane; if no-step remains passive within current scope, repair the empty action path; if the repair requires full action/closure/receipt implementation, stop and defer that portion to Packet 3.2 with exact proof gap.
+
+Implementation completed:
+- Empty Today preview projections preserve their open-time `Build today` action instead of dropping the action at the Day Rail projection boundary.
+- The no-step Today state renders a contextual `Build today` control and fixes the malformed no-step summary sentence.
+- The seeded Start Here scenario no longer exposes internal runtime/proof-harness reason copy; the visible reason now states why the step fits the open window.
+- Normal Today viewport top clearance was tightened so the Start Here primary action and correction controls clear the dock in the first viewport.
+- Expanded Today Dynamic Type top clearance was tightened so the large-type first viewport keeps the primary object readable instead of pushing it below excessive chrome.
+- Focused UI proof now captures seeded Today Start Here in light and dark, verifies the rendered step, action, reason, source/freshness access, correction control, dock clearance, and light/dark luminance separation.
+- The existing Today screenshot matrix now requires the seeded fit explanation and the no-step `Build today` path.
+
+Files changed:
+- `Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailViewCurrentMoment.swift`
+- `Native/Ambitions/Scenarios/SurfaceScenarios/TodayScenarios+Factory.swift`
+- `Native/Ambitions/Stage/Chrome/TodayViewportSafety.swift`
+- `Native/Ambitions/Surfaces/Today/Projection/DayRailProjection.swift`
+- `Native/AmbitionsTests/Today/TodayRealityMeridianExperienceElevationTests.swift`
+- `Native/AmbitionsTests/Today/TodayViewportSafetyTests.swift`
+- `Native/AmbitionsUITests/DeterministicScreenshotLaneUITests.swift`
+- `Native/AmbitionsUITests/TodaySurfaceUITests.swift`
+- `docs/qa/frontend-flagship-shippability-remediation/EXECUTION_LEDGER.md`
+
+Repair cycles performed:
+- Cycle 1: Baseline Today proof showed a passive no-step first viewport with no primary action; repaired the empty projection/action render path.
+- Cycle 2: Seeded Start Here screenshot initially exposed dock collision for correction controls; repaired normal Today viewport top clearance and reran proof.
+- Cycle 3: Seeded proof initially relied on a child text identifier hidden inside a SwiftUI button; repaired the UI proof to assert the accessible Step button value and stable rendered text.
+- Cycle 4: Screenshot inspection found internal `runtime summary truth` / `top layer` reason copy; replaced scenario reason language and added source/UI assertions against that wording.
+- Cycle 5: Screenshot inspection found no-step still visually misleading as `Start now`; repaired no-step action presentation to show `Build today`.
+- Cycle 6: Today large Dynamic Type screenshot remained too low in the first viewport; repaired expanded Today viewport top clearance and reran the Today matrix.
+
+Visual inspection notes:
+- Final seeded Today light screenshot: clear Start Here object, specific `Draft the talk outline` step, fit/reason copy, source/freshness access, `Start now` action, and dock clearance. Light mode remains intentionally light and readable.
+- Final seeded Today dark screenshot: same object/action/reason hierarchy with premium dark materials and no visible dock collision.
+- Final no-step screenshot: calm no-step state now exposes `Build today` without inventing urgency or turning Capture into a root destination.
+- Final large Dynamic Type screenshot: the oversized test title is readable and no longer driven below the first viewport by excessive top clearance. The primary action can still sit below the first viewport for intentionally long large-type titles, so this remains Yellow, not accessibility acceptance.
+- Today still needs Packet 3.2 to prove start/pause/defer/close/undo/receipt/proof/source depth; Packet 3.1 proves the root thesis, not the complete action loop.
+
+Visual Scorecard:
+- Native iOS quality: 4
+- Visual hierarchy: 4
+- Surface identity: 4
+- Object inspectability: 4
+- Light/dark quality: 4
+- Material restraint: 4
+- Typography and spacing: 4
+- Interaction clarity: 4
+- SwiftUI realism / proportions: 4
+- Similarity to Ambitions premium frontend target: 4
+- Final self-score: 4.0 average, Yellow / Ready For Review within simulator/source proof ceilings.
+
+Frontend-wide evaluation:
+- Root quality: Today now proves a living Start Here root in seeded light/dark screenshots and a useful no-step state in the matrix.
+- Drilldown quality: existing Step detail/proof access remains reachable but was not matured in this packet; full action/closure/proof depth is Packet 3.2.
+- Light/dark quality: final seeded light/dark screenshots are materially distinct and luminance-asserted.
+- Object inspectability: first-viewport step identity, reason, source/freshness access, correction control, no-step handoff, and proof hooks are exposed; history/receipt depth remains later scope.
+- SwiftUI realism: the repair uses existing native Day Rail proportions and viewport policy rather than new fantasy panels, dashboard cards, or extra roots.
+
+Validation run:
+- `git diff --check`: exit 0.
+- `xcodegen generate`: exit 0.
+- `python3 scripts/ambitions-architecture-inventory.py`: exit 0; `GREEN final-tree parity achieved`.
+- `python3 scripts/ambitions-green-standard-audit.py`: exit 0; no disallowed architecture-as-UI strings in active primary UI source.
+- `python3 scripts/ambitions-vocabulary-drift-scan.py`: exit 0; canonical and active vocabulary terms present and explicit ban terms absent.
+- `python3 scripts/ambitions-local-first-boundary-scan.py`: exit 0; local-first/account/R2/hosted-AI boundary checks passed.
+- `python3 scripts/ambitions-remediation-governance-check.py`: exit 0; changed owners are `Native/Ambitions/DesignSystem`, `Native/Ambitions/Scenarios`, `Native/Ambitions/Stage`, `Native/Ambitions/Surfaces`, `Native/AmbitionsTests`, `Native/AmbitionsUITests`, and `docs/qa`; `GREEN remediation governance guard passed`.
+- `./scripts/ambitions-xcode-test-focused.sh --batch packet-3.1-today-units-reason-repair --test AmbitionsTests/TodayRealityMeridianExperienceElevationTests/testTodayRealityMeridianPreviewFixturesCoverFreshnessVariants --timeout 15m --kill-after 60s`: exit 0; 1 test executed, 0 failures.
+- `./scripts/ambitions-xcode-test-focused.sh --batch packet-3.1-today-viewport-repair-unit --test AmbitionsTests/TodayViewportSafetyTests/testStatusCrownAndNoStepClearanceAreExplicitViewportPolicy --timeout 10m --kill-after 60s`: exit 0; 1 test executed, 0 failures.
+- `./scripts/ambitions-xcode-test-focused.sh --batch packet-3.1-today-start-here-final --test AmbitionsUITests/DeterministicScreenshotLaneUITests/testPacket31TodayProof --timeout 20m --kill-after 60s --without-building`: exit 0; 1 test executed, 0 failures.
+- `./scripts/ambitions-xcode-test-focused.sh --batch packet-3.1-today-matrix-viewport-repair --test AmbitionsUITests/TodaySurfaceUITests/testAMB962TodayReconstructionScreenshotMatrix --timeout 25m --kill-after 60s --without-building`: exit 0; 1 test executed, 0 failures.
+- `./scripts/ambitions-xcode-build-for-testing.sh --batch frontend-remediation`: exit 0; build-for-testing passed.
+
+Proof artifacts:
+- `.codex/xcode-summaries/packet-3.1-today-units-reason-repair/20260708T060345Z-AmbitionsTests-TodayRealityMeridianExperienceElevationTests-testTodayRealityMeri-59488-27715/extract/summary.json`
+- `.codex/xcode-summaries/packet-3.1-today-viewport-repair-unit/20260708T061744Z-AmbitionsTests-TodayViewportSafetyTests-testStatusCrownAndNoStepClearanceAreExpl-64244-5688/extract/summary.json`
+- `.codex/xcode-summaries/packet-3.1-today-start-here-final/20260708T062832Z-AmbitionsUITests-DeterministicScreenshotLaneUITests-testPacket31TodayProof-67200-29776/extract/summary.json`
+- `.codex/xcode-summaries/packet-3.1-today-start-here-final/20260708T062832Z-AmbitionsUITests-DeterministicScreenshotLaneUITests-testPacket31TodayProof-67200-29776/extract/screenshots/packet-3_0_BCE53315-9672-46D4-940B-FCFCE370BD26.1-today-start-here-light-screenshot`
+- `.codex/xcode-summaries/packet-3.1-today-start-here-final/20260708T062832Z-AmbitionsUITests-DeterministicScreenshotLaneUITests-testPacket31TodayProof-67200-29776/extract/screenshots/packet-3_0_5941A553-A779-4638-80CD-728D672715C7.1-today-start-here-dark-screenshot`
+- `.codex/xcode-summaries/packet-3.1-today-matrix-viewport-repair/20260708T062133Z-AmbitionsUITests-TodaySurfaceUITests-testAMB962TodayReconstructionScreenshotMatr-65386-31947/extract/summary.json`
+- `.codex/xcode-summaries/packet-3.1-today-matrix-viewport-repair/20260708T062133Z-AmbitionsUITests-TodaySurfaceUITests-testAMB962TodayReconstructionScreenshotMatr-65386-31947/extract/screenshots/amb-962-no-step-paths_0_E6146A77-4A1E-4467-ADE4-7FCB978367DE.png`
+- `.codex/xcode-summaries/packet-3.1-today-matrix-viewport-repair/20260708T062133Z-AmbitionsUITests-TodaySurfaceUITests-testAMB962TodayReconstructionScreenshotMatr-65386-31947/extract/screenshots/amb-962-large-dynamic-type_0_96A8F83F-363F-45C3-B488-4E13732D635D.png`
+- `.codex/xcode-summaries/frontend-remediation/20260708T063300Z/extract/summary.json`
+
+Validation not counted as final proof:
+- Earlier Packet 3.1 seeded screenshot run failed because the first UI assertion expected a hidden child identifier and exposed correction-control dock collision; repaired and reran.
+- Earlier Packet 3.1 seeded rerun reported `test_discovery_failure` for the long selector name; renamed the focused UI method and reran.
+- Earlier screenshot artifacts before the no-step/reason/large-type repairs are superseded by the final artifacts listed above.
+
+Validation not run:
+- Physical-device proof: unavailable in this environment.
+- Manual VoiceOver proof: not performed.
+- Full unit/UI test execution: not run; this packet used focused unit/UI lanes plus broad build-for-testing.
+
+Known risks:
+- Full Today action loop depth remains Packet 3.2: start, pause/defer, close, undo, receipt, proof/source inspection, and persistence/relaunch proof are not claimed here.
+- Manual VoiceOver proof is missing; Accessibility Green is impossible.
+- Physical-device proof is missing; Visual Green is impossible.
+- Today large Dynamic Type with intentionally long titles remains Yellow: readable and materially improved, but not owner-accepted accessibility quality.
+- Remaining copy/design-system cleanup across Today and other surfaces belongs to Packet 6 and later surface maturity packets.
+
+Packet 3.1 closeout:
+- Status: Yellow / Ready For Review.
+- Source status: local source/build/script proof passed for the scoped Today thesis repair.
+- Runtime status: focused simulator UI proof passed for seeded Start Here and Today matrix paths.
+- Interaction status: Yellow; simulator automation proof only, no manual interaction/device proof.
+- Visual status: Yellow maximum; simulator screenshots inspected, no physical-device proof.
+- Accessibility status: Yellow maximum; automated large Dynamic Type screenshot proof exists, but manual VoiceOver proof was not performed.
+- Release status: not Green; this is not release validation.
+- Product law preserved: Today / Goals / Time / You only as roots; Capture is not a root tab; Search remains local Find / Act / Inspect; Motion not a root destination; depth law preserved; local-first/offline trust not weakened; no hosted-AI grammar added.
+- Required closeout sentence: Passing tests did not determine this status. The status is based on source proof, runtime proof, screenshot inspection, repair-loop completion, and fidelity to the Ambitions premium frontend target: premium roots, native light/dark drilldowns and entire frontend, deeply inspectable object surfaces, and realistic SwiftUI proportions.
+
+Next packet:
+- Packet 3.2 - Today Action / Closure / Proof Loop.
 
 ### Packet 1.5 - Baseline Validation Recovery
 

@@ -13,7 +13,7 @@ struct TodayViewportSafety: Equatable, Sendable {
     static func layout(dynamicTypeSize: DynamicTypeSize, showsNavigationChrome: Bool) -> TodayViewportSafety {
         if usesExpandedViewport(dynamicTypeSize: dynamicTypeSize) {
             return TodayViewportSafety(
-                topChromeClearance: 176,
+                topChromeClearance: 72,
                 rootBottomChromeClearance: showsNavigationChrome ? 160 : 560,
                 railBottomContentClearance: 260,
                 railMinHeight: 980,
@@ -24,7 +24,7 @@ struct TodayViewportSafety: Equatable, Sendable {
         }
 
         return TodayViewportSafety(
-            topChromeClearance: 112,
+            topChromeClearance: 40,
             rootBottomChromeClearance: showsNavigationChrome ? 128 : 420,
             railBottomContentClearance: 148,
             railMinHeight: 760,

@@ -125,7 +125,7 @@ final class TodaySurfaceUITests: AmbitionsUITestCase {
                 scenario: "start-here-ready",
                 contentSize: "UICTContentSizeCategoryM",
                 sheet: nil,
-                required: ["Start here", "Start now", "Recommended step"],
+                required: ["Start here", "Start now", "Recommended step", "open window"],
                 forbidden: []
             ),
             (
@@ -157,7 +157,7 @@ final class TodaySurfaceUITests: AmbitionsUITestCase {
                 scenario: "empty",
                 contentSize: "UICTContentSizeCategoryM",
                 sheet: nil,
-                required: ["No step is required right now", "Capture stays ready"],
+                required: ["No step is required right now", "Capture stays ready", "Build today"],
                 forbidden: ["Capture what changed", "Shape Time", "Review context", "Record outcome", "Protect this window"]
             )
         ]
