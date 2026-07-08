@@ -26,9 +26,9 @@ struct CaptureRouteStagePrimitive: View {
             }
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel(preview.accessibilityLabel)
-        .accessibilityValue(preview.accessibilityValue)
-        .accessibilityHint(preview.accessibilityHint ?? "Choose a different placement if this is not right.")
+        .accessibilityLabel(displayLabel(preview.accessibilityLabel))
+        .accessibilityValue(displayLabel(preview.accessibilityValue))
+        .accessibilityHint(displayLabel(preview.accessibilityHint ?? "Choose a different placement if this is not right."))
     }
 
     private var livingState: LivingVisualState {
@@ -43,16 +43,16 @@ struct CaptureRouteStagePrimitive: View {
                 .accessibilityHidden(true)
 
             VStack(alignment: .leading, spacing: theme.spacing.xxs) {
-                Text(preview.postInputStateTitle)
+                Text(displayLabel(preview.postInputStateTitle))
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textTertiary)
-                Text(preview.receiptTitle)
+                Text(displayLabel(preview.receiptTitle))
                     .font(theme.typography.bodyEmphasized)
                     .foregroundStyle(theme.colors.textPrimary)
-                Text(preview.summary)
+                Text(displayLabel(preview.summary))
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
-                Text(preview.destinationLabel)
+                Text(displayLabel(preview.destinationLabel))
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textTertiary)
             }
@@ -127,16 +127,16 @@ struct CaptureRouteStagePrimitive: View {
             )
 
             EvidenceLabel(
-                preview.postInputStateTitle,
-                detail: preview.summary,
-                source: preview.destinationLabel,
+                displayLabel(preview.postInputStateTitle),
+                detail: displayLabel(preview.summary),
+                source: displayLabel(preview.destinationLabel),
                 state: livingState,
                 context: .capture
             )
             EvidenceLabel(
                     "Placement check",
-                    detail: preview.routeProofDetail,
-                    source: preview.destinationLabel,
+                    detail: displayLabel(preview.routeProofDetail),
+                    source: displayLabel(preview.destinationLabel),
                     state: livingState,
                     context: .capture
                 )
@@ -146,7 +146,7 @@ struct CaptureRouteStagePrimitive: View {
 
     static func placementShelfDisplayTitle(for rawTitle: String) -> String {
         if rawTitle == "Atmosphere Composer" {
-            return "Unplaced item"
+            return "Not tied yet"
         }
         return rawTitle
     }
@@ -255,7 +255,7 @@ struct CaptureRouteStagePrimitive: View {
                 .foregroundStyle(theme.colors.textTertiary)
                 .frame(width: 78, alignment: .leading)
 
-            Text(value)
+            Text(displayLabel(value))
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -266,7 +266,7 @@ struct CaptureRouteStagePrimitive: View {
     @ViewBuilder
     private var clarificationQuestion: some View {
         if let question = preview.clarificationQuestion {
-            Text(question)
+            Text(displayLabel(question))
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textPrimary)
         }
@@ -278,7 +278,7 @@ struct CaptureRouteStagePrimitive: View {
                 Button {
                     onSelect(choice.routeType)
                 } label: {
-                    Text(choice.title)
+                    Text(displayLabel(choice.title))
                         .lineLimit(1)
                         .minimumScaleFactor(0.8)
                 }
@@ -290,17 +290,21 @@ struct CaptureRouteStagePrimitive: View {
 
     private var routeCommands: some View {
         HStack(spacing: theme.spacing.xs) {
-            Label(preview.primaryActionTitle, systemImage: "checkmark.circle")
+            Label(displayLabel(preview.primaryActionTitle), systemImage: "checkmark.circle")
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textPrimary)
-            Text(preview.changeActionTitle)
+            Text(displayLabel(preview.changeActionTitle))
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textSecondary)
-            Text(preview.safeActionTitle)
+            Text(displayLabel(preview.safeActionTitle))
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textSecondary)
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(preview.primaryActionTitle), \(preview.changeActionTitle), or \(preview.safeActionTitle)")
+        .accessibilityLabel(displayLabel("\(preview.primaryActionTitle), \(preview.changeActionTitle), or \(preview.safeActionTitle)"))
+    }
+
+    private func displayLabel(_ rawValue: String) -> String {
+        CaptureCopyPolicy.primaryDisplayLabel(rawValue)
     }
 }

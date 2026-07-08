@@ -86,7 +86,7 @@ private extension SmartAttachmentResult {
         if semanticExtraction.activity == .exercise {
             return "Looks like an activity."
         }
-        return "Looks like a capture that needs a place."
+        return "Looks like a capture draft for review."
     }
 
     func mayAffectLabel() -> String {

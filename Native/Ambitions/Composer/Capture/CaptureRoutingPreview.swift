@@ -14,11 +14,11 @@ struct CapturePlacementPreviewStrip: View {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
                     VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                        Text(preview.postInputStateTitle)
+                        Text(displayLabel(preview.postInputStateTitle))
                             .font(theme.typography.bodyEmphasized)
                             .foregroundStyle(theme.colors.textPrimary)
                             .accessibilityIdentifier(accessibilityIDs.placementPreviewStrip)
-                        Text(preview.consequenceLabel)
+                        Text(displayLabel(preview.consequenceLabel))
                             .font(theme.typography.caption)
                             .foregroundStyle(theme.colors.textSecondary)
                             .fixedSize(horizontal: false, vertical: true)
@@ -31,8 +31,8 @@ struct CapturePlacementPreviewStrip: View {
 
                 EvidenceLabel(
                     "Placement check",
-                    detail: preview.routeProofDetail,
-                    source: preview.destinationLabel,
+                    detail: displayLabel(preview.routeProofDetail),
+                    source: displayLabel(preview.destinationLabel),
                     state: livingState,
                     context: .capture
                 )
@@ -66,9 +66,9 @@ struct CapturePlacementPreviewStrip: View {
                 .frame(height: 1)
         }
         .accessibilityElement(children: .contain)
-        .accessibilityLabel(preview.accessibilityLabel)
-        .accessibilityValue([preview.accessibilityValue, preview.atmosphereComposerInspectionSummary].joined(separator: ". "))
-        .accessibilityHint(preview.accessibilityHint ?? "Choose a route or save the suggested placement.")
+        .accessibilityLabel(displayLabel(preview.accessibilityLabel))
+        .accessibilityValue(displayLabel([preview.accessibilityValue, preview.atmosphereComposerInspectionSummary].joined(separator: ". ")))
+        .accessibilityHint(displayLabel(preview.accessibilityHint ?? "Choose a route or save the suggested placement."))
     }
 
     private var routeChoiceRow: some View {
@@ -92,15 +92,19 @@ struct CapturePlacementPreviewStrip: View {
             Button {
                 onRouteChoice(choice.routeType)
             } label: {
-                Label(choice.title, systemImage: choice.isSelected ? "checkmark.circle.fill" : "circle")
+                Label(displayLabel(choice.title), systemImage: choice.isSelected ? "checkmark.circle.fill" : "circle")
                     .font(theme.typography.caption)
             }
             .buttonStyle(.bordered)
             .controlSize(.small)
             .accessibilityIdentifier("\(accessibilityIDs.placementChoicePrefix)\(choice.routeType.rawValue)")
-            .accessibilityLabel(choice.title)
+            .accessibilityLabel(displayLabel(choice.title))
             .accessibilityValue(choice.isSelected ? "Selected placement" : "Available placement")
         }
+    }
+
+    private func displayLabel(_ rawValue: String) -> String {
+        CaptureCopyPolicy.primaryDisplayLabel(rawValue)
     }
 
     private var livingState: LivingVisualState {

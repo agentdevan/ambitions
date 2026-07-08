@@ -217,17 +217,17 @@ struct CaptureComposerSurface: View {
                 HStack(alignment: .top, spacing: theme.spacing.sm) {
                     ProofPulse(isActive: true, label: "Capture receipt saved")
                     VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                        Text(message.title)
+                        Text(CaptureCopyPolicy.primaryDisplayLabel(message.title))
                             .font(theme.typography.bodyEmphasized)
                             .foregroundStyle(theme.colors.textPrimary)
-                        Text(message.body)
+                        Text(CaptureCopyPolicy.primaryDisplayLabel(message.body))
                             .font(theme.typography.caption)
                             .foregroundStyle(theme.colors.textSecondary)
                     }
                 }
                 EvidenceLabel(
                     "Receipt",
-                    detail: message.body,
+                    detail: CaptureCopyPolicy.primaryDisplayLabel(message.body),
                     source: "Capture action",
                     state: .proof,
                     context: .capture

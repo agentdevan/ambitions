@@ -37,15 +37,15 @@ struct CaptureInputModel: Equatable, Sendable {
     }
 
     var suggestedRouteLabel: String {
-        routePreview?.destinationLabel ?? "Private intake"
+        CaptureCopyPolicy.primaryDisplayLabel(routePreview?.destinationLabel ?? "Private intake")
     }
 
     var privacyLabel: String {
-        routePreview?.privacyLabel ?? "Stored locally when saved"
+        CaptureCopyPolicy.primaryDisplayLabel(routePreview?.privacyLabel ?? "Stored locally when saved")
     }
 
     var postInputStateTitle: String {
-        routePreview?.postInputStateTitle ?? (hasInput ? "Ready to Place" : "Needs placement")
+        CaptureCopyPolicy.primaryDisplayLabel(routePreview?.postInputStateTitle ?? (hasInput ? "Ready to Place" : "Needs review"))
     }
 
     var accessibilityValue: String {
@@ -54,7 +54,7 @@ struct CaptureInputModel: Equatable, Sendable {
             postInputStateTitle,
             suggestedRouteLabel,
             privacyLabel,
-            routePreview?.accessibilityValue,
+            routePreview.map { CaptureCopyPolicy.primaryDisplayLabel($0.accessibilityValue) },
             error,
             saveStateLabel,
             isSaving ? "Saving locally" : nil,

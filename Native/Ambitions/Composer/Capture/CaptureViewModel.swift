@@ -27,17 +27,17 @@ struct CaptureViewState: Sendable {
                 .changeRoute,
                 .keepStandalone
             ],
-            drillDowns: ["Needs a Place", "Object details", "Route settings"],
+            drillDowns: ["Review first", "Object details", "Route settings"],
             copySamples: [
-                "What needs a place?",
+                "What should be held for review?",
                 "Start here",
                 "Create goal",
                 "Shape time",
                 "Close with proof",
                 "Inspect what Ambitions knows",
                 "Saved for Today",
-                "Saved to Needs a Place",
-                "Save to Needs a Place",
+                "Saved for review",
+                "Save for review",
                 "Attached as Proof",
                 "Grow into goal"
             ],
@@ -232,7 +232,7 @@ final class CaptureViewModel {
                 CaptureStateUpdateRequest(
                     id: id,
                     status: .needsTriage,
-                    triage: CaptureTriageMetadata(destination: .needsTriage, hint: "Held in Needs a Place until the route is clearer."),
+                    triage: CaptureTriageMetadata(destination: .needsTriage, hint: "Held for review until the route is clearer."),
                     kind: .raw,
                     route: .captureInbox,
                     triageStatus: .userCorrected,
@@ -240,7 +240,7 @@ final class CaptureViewModel {
                 ),
                 now: now
             )
-            actionMessage = CaptureActionMessage(title: "Saved to Needs a Place", body: "Held without pressure until you choose a clearer route.")
+            actionMessage = CaptureActionMessage(title: "Saved for review", body: "Held without pressure until you choose a clearer route.")
             return nil
         }
     }
@@ -353,7 +353,7 @@ final class CaptureViewModel {
         if let fallback { return fallback }
         switch capture.route {
         case .captureInbox:
-            return "Saved to Needs a Place"
+            return "Saved for review"
         case .timeSeed:
             return "Saved as Step · Today"
         case .goalSeed:
@@ -371,7 +371,7 @@ final class CaptureViewModel {
         case .optionalSomeday:
             return "Saved as Idea"
         case .archive:
-            return "Saved to Needs a Place"
+            return "Saved for review"
         }
     }
 

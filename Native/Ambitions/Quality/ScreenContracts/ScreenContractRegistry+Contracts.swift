@@ -139,13 +139,13 @@ extension ScreenContractRegistry {
 
     static let capture = ScreenContract(
         id: .capture,
-        dominantQuestion: "What needs a place?",
-        requiredFirstScreenContent: ["Field-first Capture", "Needs a place", "Ready to place", "Grow into goal", "Changeable route receipt"],
+        dominantQuestion: "What should be held for review?",
+        requiredFirstScreenContent: ["Field-first Capture", "Review first", "Ready to place", "Grow into goal", "Changeable route receipt"],
         requiredPanels: [.capture, .smartAttachmentReceipt, .receipt, .trust],
         optionalPanels: [.groupedNavigationList],
         forbiddenFirstScreenContent: ["Chat-first AI surface", "Long inbox as primary"],
         primaryActions: [.save, .attach, .changeRoute, .keepStandalone],
-        drillDowns: ["Needs a Place", "Object details", "Route settings"],
+        drillDowns: ["Review first", "Object details", "Route settings"],
         densityBehavior: "Minimal favors input and receipt; Detailed shows suggestions.",
         panelSizeBehavior: "Compact preserves input target; Large avoids stretched empty space.",
         accessibilityRequirements: ["Clarification choices are reachable without typing.", "Input target remains reachable."],

@@ -34,7 +34,7 @@ extension DayRailHeroStepState {
             return "Connected to the current goal path"
         }
         if target.draftID != nil {
-            return "Connected to a draft that needs a place"
+            return "Connected to a capture draft under review"
         }
         return "One-step path"
     }

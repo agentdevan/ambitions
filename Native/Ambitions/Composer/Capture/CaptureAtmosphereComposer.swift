@@ -43,16 +43,16 @@ struct CaptureAtmosphereComposerPresentation: Equatable {
         isSubmitEnabled: Bool
     ) {
         isPlacementPreviewVisible = routePreview != nil
-        placementTitle = routePreview?.postInputStateTitle ?? (isSubmitEnabled ? "Ready to save" : "Ready when you type")
-        destinationLabel = routePreview?.destinationLabel ?? "Open Field"
-        privacyLabel = routePreview?.privacyLabel ?? "Stays on this device when saved"
+        placementTitle = CaptureCopyPolicy.primaryDisplayLabel(routePreview?.postInputStateTitle ?? (isSubmitEnabled ? "Ready to save" : "Ready when you type"))
+        destinationLabel = CaptureCopyPolicy.primaryDisplayLabel(routePreview?.destinationLabel ?? "Open Field")
+        privacyLabel = CaptureCopyPolicy.primaryDisplayLabel(routePreview?.privacyLabel ?? "Stays on this device when saved")
 
         if let error {
             evidenceTitle = "Needs attention"
             evidenceDetail = error
         } else if let routePreview {
             evidenceTitle = "Where this fits"
-            evidenceDetail = routePreview.consequenceLabel
+            evidenceDetail = CaptureCopyPolicy.primaryDisplayLabel(routePreview.consequenceLabel)
         } else if isSubmitEnabled {
             evidenceTitle = "Ready to save"
             evidenceDetail = "Choose Review when you want to adjust where it belongs."
@@ -72,13 +72,13 @@ struct CaptureAtmosphereComposerPresentation: Equatable {
             placementTitle,
             destinationLabel,
             privacyLabel,
-            routePreview?.understoodLabel,
-            routePreview?.suggestedPlacementLabel,
-            routePreview?.mayAffectLabel,
-            routePreview?.approvalNeededLabel,
-            routePreview?.changeableLabels.joined(separator: ". "),
-            routePreview?.safeFallbackLabel,
-            routePreview?.consequenceLabel,
+            routePreview.map { CaptureCopyPolicy.primaryDisplayLabel($0.understoodLabel) },
+            routePreview.map { CaptureCopyPolicy.primaryDisplayLabel($0.suggestedPlacementLabel) },
+            routePreview.map { CaptureCopyPolicy.primaryDisplayLabel($0.mayAffectLabel) },
+            routePreview.map { CaptureCopyPolicy.primaryDisplayLabel($0.approvalNeededLabel) },
+            routePreview.map { $0.changeableLabels.map(CaptureCopyPolicy.primaryDisplayLabel).joined(separator: ". ") },
+            routePreview.map { CaptureCopyPolicy.primaryDisplayLabel($0.safeFallbackLabel) },
+            routePreview.map { CaptureCopyPolicy.primaryDisplayLabel($0.consequenceLabel) },
             planInsertionTitle,
             planInsertionDetail,
             error,
@@ -185,6 +185,7 @@ struct CaptureAtmosphereComposer: View {
             }
 
             SpatialCaptureTeachingLine(isVisible: text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+            CaptureRouteHintRow(isVisible: text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
         }
         .padding(.horizontal, theme.spacing.lg)
         .padding(.top, theme.spacing.md)
@@ -247,14 +248,15 @@ struct CaptureAtmosphereComposer: View {
     }
 
     private var fieldCapsule: some View {
-        HStack(spacing: theme.spacing.sm) {
-            Image(systemName: "square.and.pencil")
+        HStack(alignment: .top, spacing: theme.spacing.sm) {
+            Image(systemName: "tray.and.arrow.down")
                 .font(.system(size: theme.icon.smallSize, weight: .semibold))
                 .foregroundStyle(text.isEmpty ? theme.colors.textTertiary : theme.colors.accentWarm)
+                .padding(.top, 2)
                 .accessibilityHidden(true)
 
-            TextField("", text: $text, axis: .vertical)
-                .font(theme.typography.title)
+            TextField("Write one real thing", text: $text, axis: .vertical)
+                .font(theme.typography.titleCompact)
                 .foregroundStyle(theme.colors.textPrimary)
                 .lineLimit(dynamicTypeSize.isAccessibilitySize ? 4 ... 8 : 2 ... 6)
                 .focused($isInputFocused)
@@ -279,18 +281,13 @@ struct CaptureAtmosphereComposer: View {
                 .accessibilityHint("Write one real thing. Review opens before saving.")
         }
         .padding(.horizontal, theme.spacing.md)
-        .padding(.vertical, dynamicTypeSize.isAccessibilitySize ? theme.spacing.lg : theme.spacing.md)
+        .padding(.vertical, dynamicTypeSize.isAccessibilitySize ? theme.spacing.lg : theme.spacing.sm)
         .background(fieldBackground)
-        .clipShape(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous))
+        .clipShape(RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous))
         .overlay(alignment: .leading) {
             Rectangle()
                 .fill(text.isEmpty ? theme.colors.strokeSubtle : theme.colors.accentWarm)
                 .frame(width: text.isEmpty ? 1 : 2)
-        }
-        .overlay(alignment: .bottom) {
-            Rectangle()
-                .fill(text.isEmpty ? theme.colors.strokeSubtle.opacity(0.72) : theme.colors.accentWarm.opacity(0.72))
-                .frame(height: 1)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -300,10 +297,10 @@ struct CaptureAtmosphereComposer: View {
             ContextAtmosphereLayer(
                 context: .capture,
                 state: composerState,
-                intensity: text.isEmpty ? 0.22 : 0.36
+                intensity: text.isEmpty ? 0.12 : 0.24
             )
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .fill(theme.colors.surfaceSecondary.opacity(text.isEmpty ? 0.58 : 0.72))
+            RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
+                .fill(theme.colors.surfaceSecondary.opacity(text.isEmpty ? 0.32 : 0.52))
         }
     }
 
@@ -311,7 +308,7 @@ struct CaptureAtmosphereComposer: View {
         Button(action: onSubmit) {
             Image(systemName: "arrow.right")
                 .font(.system(size: theme.icon.smallSize, weight: .bold))
-                .frame(width: 42, height: 42)
+                .frame(width: 40, height: 40)
         }
         .buttonStyle(AmbitionPressableButtonStyle(state: isSubmitEnabled ? .selected : .disabled))
         .disabled(isSubmitEnabled == false)
@@ -341,11 +338,11 @@ private struct SpatialCaptureTeachingLine: View {
     var body: some View {
         if isVisible {
             HStack(spacing: theme.spacing.sm) {
-                Image(systemName: "scope")
+                Image(systemName: "lock.shield")
                     .font(.system(size: theme.icon.smallSize, weight: .semibold))
                     .foregroundStyle(theme.colors.textSecondary)
                     .accessibilityHidden(true)
-                Text("Write one real thing. Review opens before saving.")
+                Text("Private field. Review opens before anything is saved.")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -353,7 +350,31 @@ private struct SpatialCaptureTeachingLine: View {
             .accessibilityIdentifier("capture.first-run.spatial-teaching")
             .accessibilityElement(children: .combine)
             .accessibilityLabel("Capture teaching")
-            .accessibilityValue("Write one real thing. Review opens before saving.")
+            .accessibilityValue("Private field. Review opens before anything is saved.")
+        }
+    }
+}
+
+private struct CaptureRouteHintRow: View {
+    @Environment(\.ambitionTheme) private var theme
+    let isVisible: Bool
+
+    private let hints = ["Goal", "Step", "Proof", "Protected time"]
+
+    var body: some View {
+        if isVisible {
+            HStack(spacing: theme.spacing.xs) {
+                ForEach(hints, id: \.self) { hint in
+                    Text(hint)
+                        .font(theme.typography.caption.weight(.semibold))
+                        .foregroundStyle(theme.colors.textTertiary)
+                        .padding(.horizontal, theme.spacing.xs)
+                        .frame(minHeight: 28)
+                }
+            }
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel("Capture can become a goal, step, proof, or protected time.")
+            .accessibilityIdentifier("capture.route-hints")
         }
     }
 }

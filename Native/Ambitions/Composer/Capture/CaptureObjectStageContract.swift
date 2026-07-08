@@ -125,7 +125,7 @@ extension CaptureComposerPresentationMode {
         case .timeSupport:
             "Absorb raw inputs into the current week without turning Capture into a holding bin, raw activity stream, or classification board."
         case .globalComposer:
-            "The field stays calm until a thought is ready to place, grow into a goal, or stay in Needs placement."
+            "The field stays calm until a thought is ready to place, grow into a goal, or stay in review."
         }
     }
 }

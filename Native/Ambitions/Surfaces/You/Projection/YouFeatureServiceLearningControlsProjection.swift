@@ -137,7 +137,7 @@ extension RepositoryBackedYouService {
                     : "\(openCaptures) open captures may need placement before they influence planning.",
                 sourceLabel: "Captured thought",
                 sourceAgeLabel: openCaptures == 0 ? "Current" : "May need review",
-                whyRemembered: "Why remembered: unresolved captures may explain what needs a place without becoming hidden work.",
+                whyRemembered: "Why remembered: unresolved captures may explain what is waiting for review without becoming hidden work.",
                 privacyShutterLabel: "Stored on this device",
                 reviewLabel: "Place before stronger use",
                 correctionLabel: "Edit in Capture",

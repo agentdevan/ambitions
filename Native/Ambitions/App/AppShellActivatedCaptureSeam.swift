@@ -39,6 +39,7 @@ struct AppShellActivatedCaptureSeam: View {
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
             closeRow
+            captureHeader
             ScrollView {
                 VStack(alignment: .leading, spacing: theme.spacing.lg) {
                     composer
@@ -60,7 +61,7 @@ struct AppShellActivatedCaptureSeam: View {
                     statusMessage
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.top, dynamicTypeSize.isAccessibilitySize ? theme.spacing.sm : theme.spacing.xl)
+                .padding(.top, dynamicTypeSize.isAccessibilitySize ? theme.spacing.sm : theme.spacing.md)
                 .padding(.bottom, theme.spacing.xxl)
             }
             .scrollDismissesKeyboard(.interactively)
@@ -108,6 +109,22 @@ struct AppShellActivatedCaptureSeam: View {
         }
     }
 
+    private var captureHeader: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+            Text("Capture")
+                .font(theme.typography.titleCompact)
+                .foregroundStyle(theme.colors.textPrimary)
+            Text("Private field. Review before anything is saved.")
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("Capture")
+        .accessibilityValue("Private field. Review before anything is saved.")
+        .accessibilityIdentifier("shell.activated-capture.header")
+    }
+
     private var composer: some View {
         CaptureObjectView(
             text: $captureText,
@@ -139,7 +156,7 @@ struct AppShellActivatedCaptureSeam: View {
             routePreview: isProposalPresented ? routePreview : nil,
             error: errorText,
             presentationMode: .globalComposer,
-            saveStateLabel: saveState.accessibilityLabel,
+            saveStateLabel: saveState.accessibilityLabel.map(CaptureCopyPolicy.primaryDisplayLabel),
             isSaving: saveState == .saving
         )
     }
@@ -148,13 +165,13 @@ struct AppShellActivatedCaptureSeam: View {
     private var statusMessage: some View {
         switch saveState {
         case let .error(message):
-            Text(message)
+            Text(displayCaptureStatus(message))
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.semanticAccent(for: .caution))
                 .fixedSize(horizontal: false, vertical: true)
                 .accessibilityIdentifier("shell.activated-capture.status")
         case let .saved(message):
-            Text(message)
+            Text(displayCaptureStatus(message))
                 .font(theme.typography.bodyEmphasized)
                 .foregroundStyle(theme.semanticAccent(for: .success))
                 .fixedSize(horizontal: false, vertical: true)
@@ -182,9 +199,13 @@ struct AppShellActivatedCaptureSeam: View {
 
     private var errorText: String? {
         if case let .error(message) = saveState {
-            return message
+            return displayCaptureStatus(message)
         }
         return nil
+    }
+
+    private func displayCaptureStatus(_ message: String) -> String {
+        CaptureCopyPolicy.primaryDisplayLabel(message)
     }
 
     private var sourceType: CaptureSourceType {

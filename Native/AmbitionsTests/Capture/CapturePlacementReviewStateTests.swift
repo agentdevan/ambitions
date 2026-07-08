@@ -12,15 +12,15 @@ final class CapturePlacementReviewStateTests: XCTestCase {
 
         let review = capture.placementReviewState
 
-        XCTAssertEqual(review.placementStateTitle, "Needs a Place")
-        XCTAssertEqual(review.destinationLabel, "Needs a Place")
+        XCTAssertEqual(review.placementStateTitle, "Review first")
+        XCTAssertEqual(review.destinationLabel, "Review first")
         XCTAssertEqual(review.privacyLabel, "Private detail hidden")
         XCTAssertTrue(review.consequenceLabel.localizedCaseInsensitiveContains("correctable"))
         XCTAssertTrue(review.confirmationLabel.localizedCaseInsensitiveContains("you choose"))
         XCTAssertFalse(review.accessibilityValue.localizedCaseInsensitiveContains(["in", "box"].joined()))
         XCTAssertFalse(review.accessibilityValue.localizedCaseInsensitiveContains(["AI", "confidence"].joined(separator: " ")))
         XCTAssertFalse(review.accessibilityValue.localizedCaseInsensitiveContains(["sco", "re"].joined()))
-        XCTAssertNotEqual(review.placementStateTitle, "Held for Review")
+        XCTAssertNotEqual(review.placementStateTitle, "Needs a Place")
     }
 
     func testReadyToPlaceReviewNamesDestinationAndConsequenceBeforeChange() {

@@ -88,7 +88,7 @@ extension CreateGoalScreen {
                     }
                 }
 
-                Text("First read: clarity, timing, source, local save, and the receipt path stay visible before activation.")
+                Text("First read: clarity, timing, source, local save, and receipt stay visible before creation.")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -131,8 +131,8 @@ extension CreateGoalScreen {
                     firstPathPreviewLine(
                         title: "Outcome",
                         value: viewModel.trimmedTitle.isEmpty
-                            ? "Name it first. Recommended step and local proof stay visible before creation."
-                            : "\(viewModel.trimmedTitle). Recommended step and local proof stay visible before creation."
+                            ? "Name it first. Recommended step and local receipt stay visible before creation."
+                            : "\(viewModel.trimmedTitle). Recommended step and local receipt stay visible before creation."
                     )
                 }
             } else {
@@ -141,7 +141,7 @@ extension CreateGoalScreen {
                     firstPathPreviewConnector
                     firstPathPreviewNode(title: "Step", value: "Recommended step")
                     firstPathPreviewConnector
-                    firstPathPreviewNode(title: "Receipt", value: "Local proof")
+                    firstPathPreviewNode(title: "Receipt", value: "Local receipt")
                 }
             }
         }
@@ -160,7 +160,7 @@ extension CreateGoalScreen {
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel("First path preview")
-        .accessibilityValue(viewModel.trimmedTitle.isEmpty ? "Waiting for the outcome." : "Showing outcome, recommended step, and local proof.")
+        .accessibilityValue(viewModel.trimmedTitle.isEmpty ? "Waiting for the outcome." : "Showing outcome, recommended step, and local receipt.")
         .accessibilityIdentifier("create-goal.first-path-object-preview")
     }
 

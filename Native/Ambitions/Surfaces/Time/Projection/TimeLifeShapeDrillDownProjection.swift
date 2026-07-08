@@ -22,7 +22,7 @@ extension TimeLifeSuiteProjector {
         [
             openDays == 1 ? "Open time: 1 day remains open." : "Open time: \(openDays) days remain open.",
             "\(pressuredDays) pressured day\((pressuredDays == 1) ? "" : "s") visible.",
-            openCaptureCount == 1 ? "1 capture needs a place." : "\(openCaptureCount) captures need a place.",
+            openCaptureCount == 1 ? "1 capture is waiting for review." : "\(openCaptureCount) captures are waiting for review.",
             "\(weekDays.count) day\((weekDays.count == 1) ? "" : "s") included in this week."
         ]
     }

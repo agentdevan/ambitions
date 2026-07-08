@@ -83,6 +83,8 @@ final class CaptureComposerUITests: AmbitionsUITestCase {
         XCTAssertTrue(waitForShellReady(in: activatedApp))
         XCTAssertFalse(rootDestinationExists("Capture", in: activatedApp))
         XCTAssertTrue(activatedApp.descendants(matching: .any)["shell.activated-capture-seam"].waitForExistence(timeout: 10))
+        XCTAssertTrue(activatedApp.descendants(matching: .any)["shell.activated-capture.header"].waitForExistence(timeout: 10))
+        XCTAssertTrue(activatedApp.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Private field")).firstMatch.waitForExistence(timeout: 10))
         XCTAssertFalse(activatedApp.descendants(matching: .any)["shell.activated-capture.route-reveal"].exists)
         captureAMB967Screenshot(named: "amb-967-capture-activated", in: activatedApp)
 
@@ -100,6 +102,15 @@ final class CaptureComposerUITests: AmbitionsUITestCase {
         XCTAssertTrue(activatedApp.descendants(matching: .any)["capture.proposal"].waitForExistence(timeout: 10))
         XCTAssertTrue(activatedApp.buttons["capture.proposal.placement-choice.task"].waitForExistence(timeout: 10))
         XCTAssertTrue(activatedApp.buttons["capture.proposal.placement-choice.goal"].waitForExistence(timeout: 10))
+        XCTAssertTrue(activatedApp.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Placement review")).firstMatch.waitForExistence(timeout: 10))
+        XCTAssertTrue(activatedApp.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Review first")).firstMatch.waitForExistence(timeout: 10))
+        XCTAssertTrue(activatedApp.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Capture draft")).firstMatch.waitForExistence(timeout: 10))
+        for forbidden in ["Resolver", "Needs a Place", "Unplaced capture", "Unresolved start", "Unplaced item"] {
+            XCTAssertFalse(
+                activatedApp.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", forbidden)).firstMatch.exists,
+                "Capture proposal must not expose classifier or holding-bin language: \(forbidden)"
+            )
+        }
         captureAMB967Screenshot(named: "amb-967-capture-proposal", in: activatedApp)
         activatedApp.terminate()
 

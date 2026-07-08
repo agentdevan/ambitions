@@ -69,7 +69,7 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
         case .proofSpine:
             "No proof is shown until the user saves evidence or a local receipt exists."
         case .capturePlacementShelf:
-            "The composer stays quiet until something needs a place."
+            "The composer stays quiet until something is ready for review."
         case .lifeShapeContourMap:
             "The Life Calendar can stay open when no real pressure needs shaping."
         case .personalSystemCenter:

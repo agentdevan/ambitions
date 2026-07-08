@@ -5,7 +5,7 @@ extension PreviewFixtures {
     static let defaultExternalBrainScenarios: [ExternalBrainPreviewScenario] = [
         ExternalBrainPreviewScenario(
             id: "eb35-capture-needs-place",
-            title: "Capture needs a place",
+            title: "Capture ready for review",
             surface: "Capture",
             fixtureOwner: "Native/Ambitions/PreviewSupport/PreviewFixtures.swift",
             sourceTruth: "Universal Capture / Smart Attachment",

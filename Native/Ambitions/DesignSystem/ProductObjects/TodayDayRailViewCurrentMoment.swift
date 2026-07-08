@@ -235,10 +235,10 @@ extension AmbitionsDayRailView {
     var noStepSummary: String {
         let trimmed = state.contextSummary.trimmingCharacters(in: .whitespacesAndNewlines)
         guard trimmed.isEmpty == false else {
-            return "Capture stays ready when something new needs a place."
+            return "Capture stays ready for new input."
         }
         let summary = trimmed.last.map { ".!?".contains($0) } == true ? trimmed : "\(trimmed)."
-        return "\(summary) Capture stays ready when something new needs a place."
+        return "\(summary) Capture stays ready for new input."
     }
 
 

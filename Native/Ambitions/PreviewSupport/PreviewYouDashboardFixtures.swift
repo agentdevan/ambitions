@@ -266,7 +266,7 @@ extension PreviewFixtures {
                     summary: "1 open capture may need placement before it influences planning.",
                     sourceLabel: "Captured thought",
                     sourceAgeLabel: "May need review",
-                    whyRemembered: "Why remembered: unresolved captures may explain what needs a place without becoming hidden work.",
+                    whyRemembered: "Why remembered: unresolved captures may explain what is waiting for review without becoming hidden work.",
                     privacyShutterLabel: "Stored on this device",
                     reviewLabel: "Place before stronger use",
                     correctionLabel: "Edit in Capture",

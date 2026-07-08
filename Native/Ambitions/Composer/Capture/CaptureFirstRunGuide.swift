@@ -13,19 +13,19 @@ private enum CaptureFirstRunGuideItem: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .captureAnything: "Field first"
+        case .captureAnything: "Private field"
         case .startHere: "Start here"
         case .createGoal: "Create goal"
         case .shapeTime: "Shape time"
-        case .closeWithProof: "Close with proof"
-        case .inspectWhatAmbitionsKnows: "Inspect what Ambitions knows"
+        case .closeWithProof: "Add proof"
+        case .inspectWhatAmbitionsKnows: "Review settings"
         }
     }
 
     var detail: String {
         switch self {
         case .captureAnything:
-            "Type one real thing, then review before committing it."
+            "Type one real thing, then choose where it belongs."
         case .startHere:
             "Open Today when the thing needs one doable step."
         case .createGoal:
@@ -33,15 +33,15 @@ private enum CaptureFirstRunGuideItem: String, CaseIterable, Identifiable {
         case .shapeTime:
             "Open Time when the thing needs room this week."
         case .closeWithProof:
-            "Let Today and its receipts show what changed after the step is done."
+            "Attach proof after a step changes something."
         case .inspectWhatAmbitionsKnows:
-            "Use You to review trust, receipts, and local settings."
+            "Use You for privacy, receipts, and local controls."
         }
     }
 
     var icon: String {
         switch self {
-        case .captureAnything: "tray.and.arrow.down"
+        case .captureAnything: "lock.shield"
         case .startHere: "sun.max"
         case .createGoal: "target"
         case .shapeTime: "calendar.badge.clock"
@@ -59,8 +59,8 @@ struct CaptureFirstRunGuide: View {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     eyebrow: "First run",
-                    title: "How to operate life from Ambitions",
-                    subtitle: "Capture is the first stop. The other objects stay nearby when the thing needs a step, a direction, room, or review."
+                    title: "What can happen next",
+                    subtitle: "Capture stays private until you review where the input belongs."
                 )
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {

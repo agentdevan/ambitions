@@ -12,16 +12,21 @@ struct CaptureProposalStage: View {
     let onCancel: () -> Void
 
     var body: some View {
-        CaptureStageGroup(state: .active, accessibilityIdentifier: nil) {
-            VStack(alignment: .leading, spacing: theme.spacing.md) {
-                proposalHeader
-                capturedText
-                destinationSummary
-                destinationChoices
-                resolverDisclosure
-                proposalActions
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            proposalHeader
+            capturedText
+            destinationSummary
+            destinationChoices
+            resolverDisclosure
+            proposalActions
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.top, theme.spacing.sm)
+        .padding(.leading, theme.spacing.sm)
+        .background(alignment: .leading) {
+            Rectangle()
+                .fill(theme.colors.accentWarm.opacity(0.32))
+                .frame(width: 2)
         }
         .accessibilityElement(children: .contain)
         .accessibilityLabel("Capture proposal")
@@ -31,16 +36,16 @@ struct CaptureProposalStage: View {
 
     private var proposalHeader: some View {
         HStack(alignment: .top, spacing: theme.spacing.sm) {
-            Image(systemName: "arrow.triangle.branch")
+            Image(systemName: "checklist")
                 .font(.system(size: theme.icon.smallSize, weight: .semibold))
                 .foregroundStyle(theme.colors.accentWarm)
                 .accessibilityHidden(true)
             VStack(alignment: .leading, spacing: theme.spacing.xxs) {
-                Text("Proposal")
+                Text("Placement review")
                     .font(theme.typography.section)
                     .foregroundStyle(theme.colors.textPrimary)
                     .accessibilityIdentifier("capture.proposal")
-                Text("Confirm the destination or change it first.")
+                Text("Choose where this goes before saving.")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -50,7 +55,7 @@ struct CaptureProposalStage: View {
 
     private var capturedText: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {
-            Text("Captured text")
+            Text("Captured")
                 .font(theme.typography.caption.weight(.semibold))
                 .foregroundStyle(theme.colors.textTertiary)
             Text(preview.originalText)
@@ -63,11 +68,11 @@ struct CaptureProposalStage: View {
 
     private var destinationSummary: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {
-            proposalLine(icon: "target", title: "Destination", value: preview.destinationLabel)
-            proposalLine(icon: "square.stack.3d.up", title: "Object", value: preview.objectTypeLabel)
-            proposalLine(icon: "calendar", title: "Time", value: timeWindowLabel)
-            proposalLine(icon: "person.2", title: "Area or goal", value: areaOrGoalLabel)
-            proposalLine(icon: "lock.shield", title: "Storage", value: preview.privacyLabel)
+            proposalLine(icon: "target", title: "Destination", value: displayDestinationLabel)
+            proposalLine(icon: "square.stack.3d.up", title: "Object", value: displayObjectTypeLabel)
+            proposalLine(icon: "calendar", title: "Time fit", value: timeWindowLabel)
+            proposalLine(icon: "person.2", title: "Goal or area", value: areaOrGoalLabel)
+            proposalLine(icon: "lock.shield", title: "Local status", value: displayPrivacyLabel)
         }
     }
 
@@ -95,13 +100,23 @@ struct CaptureProposalStage: View {
             Button {
                 onChangeDestination(choice.routeType)
             } label: {
-                Label(choice.title, systemImage: choice.isSelected ? "checkmark.circle.fill" : "circle")
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.84)
+                HStack(spacing: theme.spacing.xs) {
+                    Image(systemName: choice.isSelected ? "checkmark.circle.fill" : "circle")
+                        .font(.system(size: theme.icon.smallSize, weight: .semibold))
+                        .foregroundStyle(choice.isSelected ? theme.colors.accentWarm : theme.colors.textTertiary)
+                        .accessibilityHidden(true)
+                    Text(displayLabel(choice.title))
+                        .font(theme.typography.caption.weight(.semibold))
+                        .foregroundStyle(theme.colors.textPrimary)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.84)
+                }
+                .frame(minHeight: 44)
+                .contentShape(Rectangle())
             }
-            .buttonStyle(AmbitionPressableButtonStyle(state: choice.isSelected ? .selected : .default))
+            .buttonStyle(.plain)
             .accessibilityIdentifier("capture.proposal.placement-choice.\(choice.routeType.rawValue)")
-            .accessibilityLabel(choice.title)
+            .accessibilityLabel(displayLabel(choice.title))
             .accessibilityValue(choice.isSelected ? "Selected" : "Available")
         }
     }
@@ -109,19 +124,19 @@ struct CaptureProposalStage: View {
     private var resolverDisclosure: some View {
         DisclosureGroup {
             VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                Text(preview.resolverWhyLabel)
-                Text(preview.routeProofDetail)
+                Text(displayResolverWhyLabel)
+                Text(displayRouteProofDetail)
             }
             .font(theme.typography.caption)
             .foregroundStyle(theme.colors.textSecondary)
             .fixedSize(horizontal: false, vertical: true)
             .padding(.top, theme.spacing.xs)
         } label: {
-            Label("Resolver", systemImage: "info.circle")
+            Label("Why this placement", systemImage: "info.circle")
                 .font(theme.typography.caption.weight(.semibold))
                 .foregroundStyle(theme.colors.textSecondary)
         }
-        .accessibilityIdentifier("capture.proposal.resolver-disclosure")
+        .accessibilityIdentifier("capture.proposal.placement-reason-disclosure")
     }
 
     private var proposalActions: some View {
@@ -129,10 +144,17 @@ struct CaptureProposalStage: View {
             Button {
                 onAccept()
             } label: {
-                Label(isSaving ? "Saving" : "Accept", systemImage: "checkmark.circle")
+                Label(isSaving ? "Saving" : "Accept", systemImage: "checkmark.circle.fill")
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.colors.textPrimary)
+                    .padding(.horizontal, theme.spacing.md)
                     .frame(minHeight: 44)
+                    .background(
+                        Capsule(style: .continuous)
+                            .fill(theme.colors.accentWarm.opacity(0.28))
+                    )
             }
-            .buttonStyle(AmbitionPressableButtonStyle(state: isSaving ? .disabled : .selected))
+            .buttonStyle(.plain)
             .disabled(isSaving)
             .accessibilityIdentifier("capture.proposal.accept")
 
@@ -140,9 +162,11 @@ struct CaptureProposalStage: View {
                 onCancel()
             } label: {
                 Label("Cancel", systemImage: "arrow.uturn.backward")
+                    .font(theme.typography.body)
+                    .foregroundStyle(theme.colors.textSecondary)
                     .frame(minHeight: 44)
             }
-            .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+            .buttonStyle(.plain)
             .accessibilityIdentifier("capture.proposal.cancel")
         }
     }
@@ -167,27 +191,51 @@ struct CaptureProposalStage: View {
     }
 
     private var timeWindowLabel: String {
-        preview.planInsertionCandidate?.proposedStartLabel ?? "Not set"
+        displayLabel(preview.planInsertionCandidate?.proposedStartLabel ?? "Time not set")
     }
 
     private var areaOrGoalLabel: String {
-        if preview.destinationLabel.localizedCaseInsensitiveContains("Goal") {
-            return preview.destinationLabel
+        if displayDestinationLabel.localizedCaseInsensitiveContains("Goal") {
+            return displayDestinationLabel
         }
         if preview.suggestedPlacementLabel.localizedCaseInsensitiveContains("Fitness") {
-            return preview.suggestedPlacementLabel
+            return displayLabel(preview.suggestedPlacementLabel)
         }
-        return "Unplaced item"
+        return "Not tied yet"
+    }
+
+    private var displayDestinationLabel: String {
+        displayLabel(preview.destinationLabel)
+    }
+
+    private var displayObjectTypeLabel: String {
+        displayLabel(preview.objectTypeLabel)
+    }
+
+    private var displayPrivacyLabel: String {
+        displayLabel(preview.privacyLabel)
+    }
+
+    private var displayResolverWhyLabel: String {
+        displayLabel(preview.resolverWhyLabel)
+    }
+
+    private var displayRouteProofDetail: String {
+        displayLabel(preview.routeProofDetail)
+    }
+
+    private func displayLabel(_ rawValue: String) -> String {
+        CaptureCopyPolicy.primaryDisplayLabel(rawValue)
     }
 
     private var accessibilityValue: String {
         [
             preview.originalText,
-            preview.destinationLabel,
-            preview.objectTypeLabel,
+            displayDestinationLabel,
+            displayObjectTypeLabel,
             timeWindowLabel,
             areaOrGoalLabel,
-            preview.privacyLabel
+            displayPrivacyLabel
         ].joined(separator: ". ")
     }
 }

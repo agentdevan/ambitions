@@ -6,7 +6,7 @@ Owner: Codex frontend remediation operator
 Repository: agentdevan/ambitions
 Branch: main
 Session start SHA: 9362e940eec5e7d118df418d00022c3588df6610
-Current packet: Packet 4.1 - Capture Visual Grammar Repair (next unresolved packet after Packet 3.8 closeout)
+Current packet: Packet 4.2 - Capture Route System (next unresolved packet after Packet 4.1 closeout)
 
 This ledger is process evidence only. It is not product acceptance, owner visual acceptance, release proof, accessibility proof, Visual Green, Accessibility Green, or Release Green.
 
@@ -29,8 +29,8 @@ No packet may be marked Done by Codex in this program.
 
 - Branch: `main` after the remediation branch merge.
 - Base SHA: `9362e940eec5e7d118df418d00022c3588df6610`
-- Current packet status: Packet 3.8 is Yellow / Ready For Review after local source, simulator screenshot, focused UI, and broad build proof; Packet 4.1 is the next unresolved packet.
-- Working tree expectation: clean after Packet 3.8 commit/push; if resuming before commit, only the Packet 3.8 diff should be present.
+- Current packet status: Packet 4.1 is Yellow / Ready For Review after source repair, focused simulator screenshot proof, and broad build-for-testing proof.
+- Working tree expectation: clean after Packet 4.1 commit/push; if resuming before commit, only the Packet 4.1 diff should be present.
 - Linear: not touched this session; local ledger is the active progress record.
 - Xcode: `Xcode 26.6`, build `17F113`
 - Simulator used: iPhone 17 Pro Max, iOS 26.5, UDID `DD9B9C84-7188-48FA-AA2A-AB5C1D0EE2B6`
@@ -1774,7 +1774,7 @@ Passing tests did not determine this status. The status is based on source proof
 
 ### Packet 3.7 - You Native Settings Maturity
 
-Status: In Progress
+Status: Yellow / Ready For Review
 
 Target:
 - You feels like native iOS Settings plus personal system profile.
@@ -2040,6 +2040,164 @@ Commit:
 
 Next packet:
 - Packet 4.1 - Capture Visual Grammar Repair.
+
+### Packet 4.1 - Capture Visual Grammar Repair
+
+Status: In Progress
+
+Target:
+- Remove AI glyphs, prompt-box feel, chatbot copy, and internal resolver/proof-harness language from the primary Capture composer and proposal flow.
+- Preserve Capture as a global composer/action overlay, not a root tab, destination, inbox, notes feed, category wall, or chatbot.
+- Keep the bounded packet focused on visual grammar and primary copy. Capture route-system depth, persistence/search lookup, attachments, typed object routing breadth, and full receipt replay are Packet 4.2 and Packet 4.3 scope.
+
+Depth map before coding:
+- Root state: Capture remains a global full-screen composer overlay opened from the shell, Today/Goals/Time/You contextual actions, URLs, or command sheet. It must not appear in the root dock or become a fifth persistent surface.
+- Valid drilldowns: typed placement proposal inside Capture, destination choices, local storage/privacy summary, receipt preview after save, and contextual handoff to existing Goals/Time/Today routes when accepted.
+- Invalid extra surfaces: no Capture tab, Capture inbox, prompt/chat page, AI assistant surface, module menu, category wall, separate Proof/Receipts root, or empty detail page.
+- Object types involved: raw captured input, route proposal, destination choice, local storage/private boundary, placement review, saved capture receipt, and cancellation path.
+- Inspection details: before save, the user should see what was captured, where it would go, whether time/goal context is known, what remains local, and how to change or cancel the destination.
+- Edit/control paths: type, review, change destination, accept, cancel, close, and save locally where existing runtime paths already support it. This packet does not add new attachment or typed-route breadth.
+- Receipt/proof/history paths: saved state may show a local receipt preview, but primary UI must not expose proof-harness or runtime jargon. Receipt depth remains inspectable detail, not root clutter.
+- Accessibility expectations: composer input and review controls keep stable identifiers, clear labels/hints, no dead microphone/dictation button, no root Capture destination, 44pt targets, and Dynamic Type wrapping.
+- Screenshot proof required: activated Capture empty state, typed keyboard state if stable, proposal review state, and saved/receipt state if reachable without broadening.
+
+Visual Delta:
+- Current screenshot state: historical Packet 1.2 Capture screenshots show full-screen overlay geometry, but the first viewport still reads as a dark prompt box with an AI-looking glyph beside the text field. The proposal screenshot shows `Proposal`, `Needs a Place`, `Unplaced capture`, `Unresolved start`, `Unplaced item`, and `Resolver` in the primary flow, plus a branch-like icon and large pill buttons that feel closer to a classifier/proof harness than a private native composer.
+- Target screenshot state: Capture should open as a calm native field-first composer with a simple local capture glyph, a slim context/status row, and clear `Review` action. The proposal should read as a placement review, not an AI/classifier decision: captured text, destination, object, time fit, related area/goal, local storage, change destination, why this placement, and Accept/Cancel should be visible with plain user language.
+- Gap from desired premium frontend target: the overlay shape is mostly full-screen and canonical, but the primary visual grammar is still too prompt/composer-box heavy and uses internal/runtime-style language where a premium iPhone app would use object and action language.
+- Exact visual deltas to close: replace AI-looking glyphs with local/native symbols; reduce prompt-box feel by making the field feel like a private entry surface rather than chat input; rename primary proposal language away from Resolver/Unplaced/Needs a Place/Unresolved; make route review labels human and local; improve first-run/empty supporting line so it sounds like private capture rather than an AI prompt; keep controls practical and not oversized.
+- Exact inspectability deltas to close: make proposal summary answer what this is, where it can go, what is known about time, what remains private/local, and how the user can change/cancel before saving.
+- Exact realism/proportion deltas to close: keep one dominant composer object in a real iPhone full-screen layout, maintain safe-area/header clearance, keep the proposal compact enough for the first viewport, support Dynamic Type stacking, and avoid giant fantasy panels or card walls.
+- Product-law risks: accidentally reintroducing Capture as a root, hiding route choices behind vague copy, implying hosted AI classification, claiming full persistence/receipt/search proof before Packet 4.3, or adding new broad route architecture.
+- Accessibility risks: label changes can break existing UI automation; compact proposal rows must remain readable; manual VoiceOver is unavailable, so Accessibility Green remains impossible.
+- Files likely responsible: `Native/Ambitions/Composer/Capture/CaptureAtmosphereComposer.swift`, `Native/Ambitions/Composer/Capture/CaptureProposalStage.swift`, `Native/Ambitions/Composer/Capture/CaptureRouteStagePrimitive.swift`, `Native/Ambitions/Composer/Capture/CaptureFirstRunGuide.swift`, `Native/Ambitions/Composer/Capture/CaptureInputModel.swift`, `Native/AmbitionsUITests/CaptureComposerUITests.swift`, and this ledger.
+- Screenshot proof required: focused `CaptureComposerUITests/testAMB967CaptureCreateGoalScreenshotMatrix` lane after repair, plus current screenshots for activated Capture and Capture proposal.
+- Self-review criteria: fresh screenshots must no longer read as AI/prompt/chatbot UI, must remove primary `Resolver`/`Needs a Place`/`Unplaced capture` language, must keep destination review understandable, and must remain a global overlay with no root Capture tab.
+- Repair-loop conditions: if screenshots still show AI-looking glyphs, prompt-box dominance, `Resolver`, `Needs a Place`, `Unplaced capture`, fake microphone/dictation controls, clipped proposal copy, or visually mediocre classifier cards, repair again inside Packet 4.1 unless a true product decision blocks the change.
+
+Packet Closeout - Packet 4.1 Capture Visual Grammar Repair
+
+Status:
+- Yellow / Ready For Review.
+
+Scope completed:
+- Reworked activated Capture header and composer copy away from AI/prompt grammar into a private local field with review-before-save framing.
+- Replaced the AI-looking primary field glyph with a local intake glyph and reduced prompt-box heaviness.
+- Rewrote proposal language from classifier/runtime terms into a placement review: captured text, destination, object, time fit, goal or area, local status, change destination, reason, accept, and cancel.
+- Sanitized composer-facing preview/accessibility copy so `Resolver`, `Needs a Place`, `Unplaced capture`, `Unresolved start`, and `Unplaced item` do not render in the Packet 4.1 Capture proposal lane.
+- Rewrote Create Goal overlay copy captured by the Packet 4.1 lane to avoid primary `local proof`, `receipt path`, and `activation` language.
+- Preserved Capture as a global overlay/action and did not add a root destination.
+
+Files changed:
+- `Native/Ambitions/App/AppShellActivatedCaptureSeam.swift`
+- `Native/Ambitions/Composer/Capture/CaptureAtmosphereComposer.swift`
+- `Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift`
+- `Native/Ambitions/Composer/Capture/CaptureCopyPolicy.swift`
+- `Native/Ambitions/Composer/Capture/CaptureFirstRunGuide.swift`
+- `Native/Ambitions/Composer/Capture/CaptureInputModel.swift`
+- `Native/Ambitions/Composer/Capture/CaptureObjectStageContract.swift`
+- `Native/Ambitions/Composer/Capture/CapturePlacementReviewState.swift`
+- `Native/Ambitions/Composer/Capture/CaptureProposalStage.swift`
+- `Native/Ambitions/Composer/Capture/CaptureRouteStagePrimitive.swift`
+- `Native/Ambitions/Composer/Capture/CaptureRoutingPreview.swift`
+- `Native/Ambitions/Composer/Capture/CaptureViewModel.swift`
+- `Native/Ambitions/Core/Domain/SmartAttachmentPlacementPreview.swift`
+- `Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailViewCurrentMoment.swift`
+- `Native/Ambitions/PreviewSupport/PreviewExternalBrainScenarios.swift`
+- `Native/Ambitions/PreviewSupport/PreviewYouDashboardFixtures.swift`
+- `Native/Ambitions/Quality/ScreenContracts/ScreenContractRegistry+Contracts.swift`
+- `Native/Ambitions/Surfaces/Goals/CreateGoalScreen+02-onCreated.swift`
+- `Native/Ambitions/Surfaces/SurfaceLaw/FlagshipObjectStateMatrix.swift`
+- `Native/Ambitions/Surfaces/Time/Projection/TimeLifeShapeDrillDownProjection.swift`
+- `Native/Ambitions/Surfaces/Today/Projection/DayRailProjectionSupport.swift`
+- `Native/Ambitions/Surfaces/You/Projection/YouFeatureServiceLearningControlsProjection.swift`
+- `Native/AmbitionsTests/Capture/CapturePlacementReviewStateTests.swift`
+- `Native/AmbitionsUITests/CaptureComposerUITests.swift`
+- `docs/qa/frontend-flagship-shippability-remediation/EXECUTION_LEDGER.md`
+
+Product law preserved:
+- Today / Goals / Time / You only as roots.
+- Capture not root tab.
+- Search not chatbot.
+- Motion not root destination.
+- Depth from objects and contextual drilldowns, not extra root surfaces.
+- Local-first/offline trust preserved.
+- No hosted-AI primary grammar added.
+
+Validation run:
+- `git status --short --branch`: exit 0; Packet 4.1 scoped modified paths only before commit.
+- `git diff --check`: exit 0.
+- `xcodegen generate`: exit 0.
+- `python3 scripts/ambitions-architecture-inventory.py`: exit 0; `GREEN final-tree parity achieved`.
+- `python3 scripts/ambitions-green-standard-audit.py`: exit 0.
+- `python3 scripts/ambitions-vocabulary-drift-scan.py`: exit 0.
+- `python3 scripts/ambitions-local-first-boundary-scan.py`: exit 0.
+- `python3 scripts/ambitions-remediation-governance-check.py`: exit 0; `GREEN remediation governance guard passed`.
+- `python3 scripts/ambitions-flagship-ios-standards-check.py`: exit 0.
+- `python3 scripts/ambitions-accepted-yellow-misuse-audit.py`: exit 0.
+- `./scripts/ambitions-xcode-test-focused.sh --batch packet-4.1-capture-visual-grammar-r5 --test 'AmbitionsUITests/CaptureComposerUITests/testAMB967CaptureCreateGoalScreenshotMatrix' --timeout 30m --kill-after 60s`: exit 0; `FAILURE_CLASS=passed`, `EXECUTED_TESTS=1`, `DURATION_SECONDS=430.749`.
+- `./scripts/ambitions-xcode-build-for-testing.sh --batch frontend-remediation`: exit 0; `FAILURE_CLASS=passed`, `DURATION_SECONDS=632.869`.
+
+Screenshot / proof artifacts:
+- `.codex/xcode-summaries/packet-4.1-capture-visual-grammar-r5/20260708T184839Z-AmbitionsUITests-CaptureComposerUITests-testAMB967CaptureCreateGoalScreenshotMat-33870-18307/extract/screenshots/amb-967-capture-activated_0_DE23882B-0177-4691-9C02-A0B20EEBC024.png`: full-screen Capture overlay, private field header, no app fake mic, no chatbot prompt copy; still sparse and Yellow only.
+- `.codex/xcode-summaries/packet-4.1-capture-visual-grammar-r5/20260708T184839Z-AmbitionsUITests-CaptureComposerUITests-testAMB967CaptureCreateGoalScreenshotMat-33870-18307/extract/screenshots/amb-967-capture-keyboard_0_AFC91911-7AF6-43AA-B71B-98314B8267B9.png`: keyboard state remains native; visible mic is iOS keyboard dictation, not an app-level fake voice control.
+- `.codex/xcode-summaries/packet-4.1-capture-visual-grammar-r5/20260708T184839Z-AmbitionsUITests-CaptureComposerUITests-testAMB967CaptureCreateGoalScreenshotMat-33870-18307/extract/screenshots/amb-967-capture-proposal_0_CC329824-BDB2-48DE-9456-78F4E77E573A.png`: proposal now reads as local placement review, not resolver/classifier/chatbot panel; typed-route breadth remains Packet 4.2 scope.
+- `.codex/xcode-summaries/packet-4.1-capture-visual-grammar-r5/20260708T184839Z-AmbitionsUITests-CaptureComposerUITests-testAMB967CaptureCreateGoalScreenshotMat-33870-18307/extract/screenshots/amb-967-create-goal-default_0_B50BACEE-7221-4493-91B6-D3CC911A1D6A.png`: Create Goal copy no longer exposes `local proof`, `receipt path`, or `activation` in the captured viewport.
+- `.codex/xcode-summaries/packet-4.1-capture-visual-grammar-r5/20260708T184839Z-AmbitionsUITests-CaptureComposerUITests-testAMB967CaptureCreateGoalScreenshotMat-33870-18307/extract/screenshots/amb-967-create-goal-large-dynamic-type_0_DC4A4645-5DEA-4573-98C3-60172E935775.png`: large Dynamic Type remains readable in inspected viewport; dense and Yellow only.
+
+Visual Scorecard:
+- Native iOS quality: 4.
+- Visual hierarchy: 4.
+- Surface identity: 4.
+- Object inspectability: 4.
+- Light/dark quality: 3.
+- Material restraint: 4.
+- Typography and spacing: 4.
+- Interaction clarity: 4.
+- SwiftUI realism / proportions: 4.
+- Similarity to Ambitions premium frontend target: 4.
+- Final self-score: 3.9 average, Yellow / Ready For Review because Packet 4.1 visual grammar is repaired within simulator scope, while full light/dark overlay matrix, physical device proof, manual VoiceOver, typed route breadth, persistence, and search lookup remain future scope.
+
+Frontend-wide evaluation:
+- Root quality: roots remain Today / Goals / Time / You only; this packet did not add root surfaces.
+- Drilldown/sub-surface quality: Capture proposal is materially more native and understandable, but full route depth is Packet 4.2.
+- Light/dark quality: current proof is dark-mode simulator screenshots only for this packet; light-mode Capture overlay proof remains required later.
+- Object inspectability: proposal now exposes captured input, destination, object, time fit, goal/area, local status, reason, accept, and cancel.
+- SwiftUI realism / proportions: improved from prompt-box/classifier panel; still visually sparse in empty state and therefore Yellow, not Green.
+
+Repair cycles performed:
+- 3 cycles. First repair removed AI/proof-harness copy and prompt glyphs. Second repair reduced field/panel heaviness and added native route hints. Third repair fixed hidden/background copy leaks and Create Goal proof-harness language exposed by screenshots.
+
+Remaining visual deltas:
+- Capture route breadth, attachments, typed object routing, persistence, lookup, and full receipt depth are Packet 4.2/4.3.
+- Light-mode Capture overlay screenshot proof was not part of this packet and remains required for broader appearance maturity.
+- Empty Capture state remains sparse; acceptable only as Yellow because this packet did not own route-depth/persistence maturity.
+- Physical-device visual proof and manual VoiceOver proof remain unavailable.
+
+Required closeout sentence:
+- Passing tests did not determine this status. The status is based on source proof, runtime proof, screenshot inspection, repair-loop completion, and fidelity to the Ambitions premium frontend target: premium roots, native light/dark drilldowns and entire frontend, deeply inspectable object surfaces, and realistic SwiftUI proportions.
+
+Validation not run:
+- Physical iPhone screenshots/videos: unavailable in this environment.
+- Manual VoiceOver: unavailable in this environment.
+- Full test execution: not run; this packet ran the focused Capture UI screenshot lane plus broad build-for-testing lane.
+
+Known risks:
+- Visual Green impossible without physical-device proof.
+- Accessibility Green impossible without manual VoiceOver.
+- Capture persistence/search lookup/relaunch proof remains Packet 4.3.
+- Some legacy `Needs a Place` domain/runtime strings remain outside the primary composer rendering path and require a separate scoped copy/domain migration if product canon fully retires that term.
+
+Follow-up required:
+- Packet 4.2 - Capture Route System.
+- Packet 4.3 - Capture Persistence and Lookup.
+- Later light/dark overlay proof for Capture/Search under broader appearance matrix.
+
+Commit:
+- Planned commit: `Frontend remediation: capture visual grammar repair`; SHA read after commit.
+
+Next packet:
+- Packet 4.2 - Capture Route System.
 
 ### Packet 1.5 - Baseline Validation Recovery
 
@@ -2762,10 +2920,10 @@ Mapping confidence: High for the scoped active helper/default-source residue; Me
 
 ## 11. Product Decisions Needed
 
-None for Packet 3.7 at this checkpoint.
+None for Packet 4.2 at this checkpoint.
 
 Decision trigger:
-- If Packet 3.8 requires destructive export/delete/reset/account behavior beyond visible, confirmed, local-first controls, stop and classify the required product/security decision before implementing destructive actions.
+- If Packet 4.2 requires changing Capture from a global composer/action into a root destination, adding broad route architecture, or deciding product semantics for unsupported capture object types, stop and classify the product decision before implementing.
 
 ## 12. Commit Ledger
 
@@ -2805,19 +2963,23 @@ Packet 3.7 planned commit:
 - `Frontend remediation: you native settings maturity`
 - SHA: read from `git rev-parse HEAD` after commit; the ledger does not embed its own final commit hash because amending that value changes the hash.
 
+Packet 4.1 planned commit:
+- `Frontend remediation: capture visual grammar repair`
+- SHA: read from `git rev-parse HEAD` after commit; the ledger does not embed its own final commit hash because amending that value changes the hash.
+
 ## 13. Resume Instructions
 
 To resume from this checkpoint:
 1. Stay on branch `main` unless explicitly instructed otherwise.
 2. Run `git status --short --branch`.
-3. Confirm Packet 3.7 is committed/pushed and current packet is Packet 3.8.
+3. Confirm Packet 4.1 is committed/pushed and current packet is Packet 4.2.
 4. Inspect the current diff before editing.
 5. Rerun `git diff --check`.
-6. Begin Packet 3.8 - You Privacy Controls.
-7. Write the Packet 3.8 depth map and Visual Delta before coding.
-8. Inspect You privacy/local-data/account/export/delete/reset/source/privacy-control source, tests, current screenshots, and known issue mappings before editing.
-9. Repair only bounded You privacy-control depth in this packet: export, delete, reset, account connection, local data status, privacy/source settings, confirmation/error/unavailable states, and screenshot/accessibility proof.
-10. Run focused You privacy-control validation, then required source/governance scans and the broad `frontend-remediation` build lane if source/test code changes.
+6. Begin Packet 4.2 - Capture Route System.
+7. Write the Packet 4.2 depth map and Visual Delta before coding.
+8. Inspect Capture route presentation, Create Goal presentation consistency, typed route affordances, current screenshots, tests, and known issue mappings before editing.
+9. Repair only bounded route-system depth in this packet: consistent Create Goal presentation, route affordances before typing, free capture, goal seed, step seed, proof, protected time, note/thought, constraint/fixed point, attachment, cancel/undo, and one coherent composer law where existing runtime paths support it.
+10. Run focused Capture route-system validation, then required source/governance scans and the broad `frontend-remediation` build lane if source/test code changes.
 11. Inspect any generated screenshots manually, update this ledger with exact commands, exits, artifacts, risks, and next packet, and commit only if validation passes and the change is coherent.
 
 ## 14. Packet Closeout Template
