@@ -402,6 +402,88 @@ final class TodaySurfaceUITests: AmbitionsUITestCase {
         XCTAssertTrue(waitForTodayScreenReady(in: app, timeout: 30))
     }
 
+    func testPacket32TodayActionClosureProofLoop() throws {
+        executionTimeAllowance = 300
+
+        let app = makeApp(
+            bootstrapMode: "demo",
+            extraEnvironment: [
+                "AmbitionsScreenshotMode": "YES",
+                "AmbitionsInitialSurface": "today"
+            ]
+        )
+        app.launch()
+
+        XCTAssertTrue(waitForTodayScreenReady(in: app, timeout: 90))
+        XCTAssertTrue(openTodayStepDetail(in: app), "Today should open the Start Here Step detail as object depth.")
+        XCTAssertTrue(app.descendants(matching: .any)["TodayStepDetail"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["TodayStepDetailTitle"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilElementExists("TodayStepDetailDurationLabel", in: app))
+        XCTAssertTrue(scrollUntilElementExists("TodayStepDetailSourceLabel", in: app))
+        XCTAssertTrue(scrollUntilElementExists("TodayStepDetailContextLabel", in: app))
+        XCTAssertTrue(scrollUntilElementExists("TodayStepDetailGoalLinkLabel", in: app))
+        XCTAssertTrue(scrollUntilElementExists("TodayStepDetailWhyThis", in: app))
+        XCTAssertTrue(scrollUntilElementExists("TodayStepDetailProofReceiptAccess", in: app))
+        captureTodayScreenshot(named: "packet-3.2-today-step-detail", in: app)
+
+        let closureAction = scrollUntilButtonHittable(
+            "TodayStepDetailClosureAction",
+            fallbackLabel: "Close the loop",
+            in: app,
+            maxAttempts: 10
+        )
+        XCTAssertTrue(closureAction.waitForExistence(timeout: 10))
+        XCTAssertTrue(closureAction.isHittable)
+        closureAction.tap()
+
+        XCTAssertTrue(app.descendants(matching: .any)["TodayActionClosureSheet"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["TodayActionClosureContext"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.descendants(matching: .any)["TodayActionClosureConsequencePreview"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.buttons["TodayActionClosureOutcome.moved"].waitForExistence(timeout: 5))
+        app.buttons["TodayActionClosureOutcome.moved"].tap()
+        XCTAssertTrue(app.descendants(matching: .any)["TodayActionClosureConsequencePreview"].waitForExistence(timeout: 5))
+        let receiptDisclosure = scrollUntilButtonHittable(
+            "TodayActionClosureReceiptDisclosure",
+            fallbackLabel: "Receipt and review",
+            in: app,
+            maxAttempts: 10
+        )
+        XCTAssertTrue(receiptDisclosure.waitForExistence(timeout: 10))
+        XCTAssertTrue(receiptDisclosure.isHittable)
+        receiptDisclosure.tap()
+        XCTAssertTrue(scrollUntilElementExists("TodayActionClosureReceiptPreview", in: app, maxAttempts: 10))
+        captureTodayScreenshot(named: "packet-3.2-today-closure-preview", in: app)
+
+        let confirmOutcome = scrollUntilButtonHittable(
+            "TodayActionClosureConfirm",
+            fallbackLabel: "Save outcome",
+            in: app,
+            maxAttempts: 10
+        )
+        XCTAssertTrue(confirmOutcome.waitForExistence(timeout: 10))
+        XCTAssertTrue(confirmOutcome.isHittable)
+        confirmOutcome.tap()
+
+        XCTAssertTrue(
+            waitForTodayInlineReceipt(in: app, title: "Needs confirmation", bodyFragment: "Rescheduled", timeout: 15),
+            "Saving a moved Today closure outcome should return to Today with the placement-review receipt. \(todayInlineReceiptDebugDescription(in: app))"
+        )
+        XCTAssertTrue(
+            waitForTodayInlineReceipt(in: app, title: "Needs confirmation", bodyFragment: "Stored on this device", timeout: 5),
+            "The moved closure receipt should make local storage visible. \(todayInlineReceiptDebugDescription(in: app))"
+        )
+        XCTAssertTrue(waitForTodayScreenReady(in: app, timeout: 30))
+        XCTAssertTrue(app.descendants(matching: .any)["today.inline-message"].waitForExistence(timeout: 10))
+        captureTodayScreenshot(named: "packet-3.2-today-inline-receipt", in: app)
+
+        for forbidden in ["failed", "overdue", "lazy", "avoidance", "streak broken", "productivity dropped", "AI recommends"] {
+            XCTAssertFalse(
+                app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", forbidden)).firstMatch.exists,
+                "Today action loop must not expose shame, score, or AI-wrapper copy: \(forbidden)"
+            )
+        }
+    }
+
     func testTodayCanHandOffToGoalDetail() throws {
         let app = makeApp(bootstrapMode: "demo")
         app.launch()

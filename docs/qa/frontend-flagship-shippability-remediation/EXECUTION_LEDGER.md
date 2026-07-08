@@ -6,7 +6,7 @@ Owner: Codex frontend remediation operator
 Repository: agentdevan/ambitions
 Branch: frontend-flagship-shippability-remediation
 Session start SHA: 9362e940eec5e7d118df418d00022c3588df6610
-Current packet: Packet 3.2 - Today Action / Closure / Proof Loop (next unresolved packet)
+Current packet: Packet 3.3 - Goals State Legibility (next unresolved packet)
 
 This ledger is process evidence only. It is not product acceptance, owner visual acceptance, release proof, accessibility proof, Visual Green, Accessibility Green, or Release Green.
 
@@ -29,8 +29,8 @@ No packet may be marked Done by Codex in this program.
 
 - Branch: `frontend-flagship-shippability-remediation`
 - Base SHA: `9362e940eec5e7d118df418d00022c3588df6610`
-- Current packet status: Packet 3.1 is Yellow / Ready For Review; Packet 3.2 is the next unresolved packet.
-- Working tree expectation: Packet 3.1 proof is complete within simulator/source ceilings and ready to commit.
+- Current packet status: Packet 3.2 is Yellow / Ready For Review under the stronger visual fidelity contract; Packet 3.3 is the next unresolved packet.
+- Working tree expectation: Packet 3.2 source/test/ledger changes are ready to commit after final diff check.
 - Linear: not touched this session; local ledger is the active progress record.
 - Xcode: `Xcode 26.6`, build `17F113`
 - Simulator used: iPhone 17 Pro Max, iOS 26.5, UDID `DD9B9C84-7188-48FA-AA2A-AB5C1D0EE2B6`
@@ -222,7 +222,7 @@ Do not start Project 3 until Project 1 is at least Accepted Yellow and Product L
 | Packet | Status | Entry Condition | Required Proof |
 | --- | --- | --- | --- |
 | 3.1 Today Core Thesis Proof | Ready For Review | Red-gate rendering cleared | Today first-viewport screenshots and mutation evidence |
-| 3.2 Today Action / Closure / Proof Loop | Backlog | Today thesis visible | Start, pause/defer, close, undo, receipt, proof/source proof |
+| 3.2 Today Action / Closure / Proof Loop | Ready For Review | Today thesis visible | Start, pause/defer, close, undo, receipt, proof/source proof |
 | 3.3 Goals State Legibility | Backlog | Goals rendering stable | Distinct selected/proof/recovery states |
 | 3.4 Goals Editing / Proof / Handoff | Backlog | Goals state legible | Add/edit/move/handoff/crash regression proof |
 | 3.5 Time Calendar-Grade Redesign | Backlog | Time layout safe | Day/week/protected/open/conflict/proposal proof |
@@ -931,7 +931,7 @@ Follow-up required:
 
 ### Packet 3.1 - Today Core Thesis Proof
 
-Status: In Progress
+Status: Yellow / Ready For Review
 
 Target:
 - Today must prove the core product thesis: show the step that fits when one exists, and show a useful no-step/recovery state when no real step exists.
@@ -1073,6 +1073,121 @@ Packet 3.1 closeout:
 
 Next packet:
 - Packet 3.2 - Today Action / Closure / Proof Loop.
+
+### Packet 3.2 - Today Action / Closure / Proof Loop
+
+Status: In Progress
+
+Target:
+- Today must prove the actionable loop after the Start Here object exists: start/open the step, pause/defer or move without shame, close the step, undo/control where available, show receipt, and expose proof/source inspection.
+- Primary actions must visibly mutate state or open a real detail/control surface; no dead primary controls or fake success.
+- Receipts must be clear, local, non-obstructive, and connected to the changed object.
+- The loop must remain deep, not wide: no new root surfaces and no dashboard/task-app/action-console drift.
+
+Depth map before coding:
+- Root state: Today remains one of the four persistent roots and continues to present the Start Here object from Packet 3.1.
+- Valid drilldowns: Step detail, closure outcome sheet, receipt/proof disclosure, source/reason access, replacement/rejection controls, Time shape/protection review surfaces if already present, and inline receipt after mutation.
+- Invalid extra surfaces: no Today task console, closure dashboard, separate proof/receipt/history root, Capture tab, Motion surface, or generic action-center module.
+- Object types involved: `DayRailHeroStepState`, `DayRailStepDetailState`, `TodayActionClosureSheetState`, `TodayInlineAction`, `TodayInlineMessage`, `TodayViewModel`, `TodayReceiptCommandService`, and Today UI screenshot lanes.
+- Inspection details: Step detail must answer what the step is, why it fits, what goal/time/source/proof it carries, what action is available, what closure will change, and what receipt/proof will remain.
+- Edit/control paths: Start now, Move it, Still counts/Complete, Waiting/Blocked/Not needed outcomes, confirmation, dismissal/cancel, and available undo/control affordances if the runtime already exposes them.
+- Receipt/proof/history paths: closure confirmation and runtime mutation must produce a visible inline receipt and preserve proof/source/receipt detail access; no silent local changes.
+- Accessibility expectations: primary action, closure action, outcome picker, consequence preview, receipt disclosure, confirm, dismiss/cancel, and inline receipt must be automation-visible and have concise labels/hints. Manual VoiceOver remains unavailable.
+- Screenshot proof required: Step detail before action, closure sheet with outcome preview, post-confirm inline receipt, and root return state after mutation; light/dark if practical without broadening beyond Today.
+
+Visual Delta:
+- Current screenshot/source state: Packet 3.1 proves Today root thesis but not the full action loop. Existing UI tests show Step detail, closure sheet, completion/move controls, and receipt assertions in fragments, but current Packet 3.2 proof is not yet a single coherent screenshot-backed loop. Step detail currently uses rounded proof/receipt panels and sheet-style controls; closure sheet exposes outcome tiles, preview, receipt disclosure, and confirm, but final visual quality and mutation evidence need current screenshots.
+- Target screenshot state: a user can open the Start Here step, see why it fits, start or close it through a real detail surface, select an outcome, preview what changes, confirm, return to Today, and see a local receipt without root dock/header collision. The loop should feel like native object depth, not a task manager or proof harness.
+- Gap from desired premium frontend target: Today has a credible root object, but its depth is not proven as premium and inspectable. Existing proof may pass from separate tests while screenshots still show ordinary sheet UI, generic receipt copy, or missing mutation visibility.
+- Exact visual deltas to close: inspect current Step detail/closure/receipt screenshots; repair any obvious mediocre sheet proportions, dead/disabled controls, unclear receipt placement, or proof-harness copy within Today scope; keep controls native and proportionate.
+- Exact inspectability deltas to close: make the loop proof end-to-end in one focused lane where practical: Step detail -> closure outcome -> consequence/receipt preview -> confirm -> inline receipt/root update -> source/proof access remains reachable.
+- Exact realism/proportion deltas to close: avoid giant fantasy panels, dashboard walls, nested card stacks, and concept-shot layouts; use practical iPhone sheet/list density and controls that survive Dynamic Type.
+- Likely files: `Native/Ambitions/Surfaces/Today/Overlays/TodayStepDetailSheet.swift`, `Native/Ambitions/Surfaces/Today/Overlays/TodayActionClosureSheet.swift`, `Native/Ambitions/Surfaces/Today/TodaySurface+02-autoLoad.swift`, `Native/Ambitions/Surfaces/Today/Projection/TodayActionClosureSheetState.swift`, `Native/Ambitions/Surfaces/Today/Projection/DayRailStepDetailState.swift`, `Native/AmbitionsUITests/TodaySurfaceUITests.swift`, `Native/AmbitionsTests/Today/TodayViewModelTests.swift`, and this ledger.
+- Product-law risks: do not add root destinations, do not turn Capture/Search/Motion/proof/receipt/history into roots, do not add hosted-AI or cloud grammar, do not collapse Today into a task list.
+- Accessibility risks: automated UI proof cannot claim VoiceOver Green; large Dynamic Type proof may need a focused follow-up if sheet content crowds.
+- Proof required: focused unit/source tests for closure/proof mutation if source changes require them, focused UI screenshot/action lane for the end-to-end Today loop, source/governance scans, and `./scripts/ambitions-xcode-build-for-testing.sh --batch frontend-remediation` before commit.
+- Self-review criteria: the loop visibly changes state; the receipt is understandable and local; proof/source detail remains inspectable; no controls are dead; no receipt covers primary controls; no shame/productivity copy; screenshots score at least 4.0 average within simulator Yellow limits.
+- Repair-loop conditions: if current screenshots look visually mediocre and repair is in Today detail/closure/receipt scope, repair immediately and rerun. If undo/persistence requires broader runtime architecture or product decision, document the exact hard boundary and do not fake completeness.
+
+Implementation completed:
+- Added a focused end-to-end UI proof lane, `testPacket32TodayActionClosureProofLoop()`, covering Today root readiness, Step detail object inspection, closure outcome selection, receipt preview disclosure, confirmation, return to Today, inline local receipt, and shame/productivity/AI-copy absence checks.
+- Repaired the closure receipt disclosure identifier in `TodayActionClosureSheet` so automation can open the disclosure without masking the nested receipt preview identity.
+- Kept the product law unchanged: no new roots, no Capture/Search/Motion root drift, no hosted-AI grammar, and no proof/receipt/history root surface.
+
+Repair cycles performed:
+- Cycle 1: initial focused selector without `()` executed zero tests and reported `test_discovery_failure`; reran with the exact Swift test selector `testPacket32TodayActionClosureProofLoop()`.
+- Cycle 2: the focused UI lane failed because the receipt preview was behind a collapsed disclosure; updated the test to open `Receipt and review` before asserting the preview.
+- Cycle 3: the first disclosure identifier repair was too broad and hid `TodayActionClosureReceiptPreview`; moved the identifier to the disclosure label only and reran.
+- Cycle 4: receipt assertions were aligned to the implemented moved-step contract: `Needs confirmation`, `Rescheduled`, and `Stored on this device`, avoiding a fake-success claim for a placement-review outcome.
+
+Validation run:
+- `git status --short --branch` -> exit 0; only expected Packet 3.2 files changed before closeout.
+- `git diff --check` -> exit 0.
+- `xcodegen generate` -> exit 0.
+- `python3 scripts/ambitions-architecture-inventory.py` -> exit 0; `GREEN final-tree parity achieved`.
+- `python3 scripts/ambitions-green-standard-audit.py` -> exit 0; no disallowed architecture-as-UI strings found in active primary UI source.
+- `python3 scripts/ambitions-vocabulary-drift-scan.py` -> exit 0.
+- `python3 scripts/ambitions-local-first-boundary-scan.py` -> exit 0.
+- `python3 scripts/ambitions-remediation-governance-check.py` -> exit 0; `GREEN remediation governance guard passed`.
+- `./scripts/ambitions-xcode-test-focused.sh --batch packet-3.2-today-loop-proof-final --test 'AmbitionsUITests/TodaySurfaceUITests/testPacket32TodayActionClosureProofLoop()' --skip-prebuild --timeout 25m --kill-after 60s` -> exit 0; `FAILURE_CLASS=passed`, `EXECUTED_TESTS=1`, `DURATION_SECONDS=200.509`.
+- `./scripts/ambitions-xcode-build-for-testing.sh --batch frontend-remediation` -> exit 0; `FAILURE_CLASS=passed`, `DURATION_SECONDS=685.645`.
+
+Screenshot / proof artifacts:
+- Focused UI summary: `.codex/xcode-summaries/packet-3.2-today-loop-proof-final/20260708T073840Z-AmbitionsUITests-TodaySurfaceUITests-testPacket32TodayActionClosureProofLoop---98264-25107/extract/summary.json`
+- Step detail screenshot: `.codex/xcode-summaries/packet-3.2-today-loop-proof-final/20260708T073840Z-AmbitionsUITests-TodaySurfaceUITests-testPacket32TodayActionClosureProofLoop---98264-25107/extract/screenshots/packet-3_0_4040EAE4-0DE3-4501-AFBF-93818ED761F8.2-today-step-detail`
+- Closure preview screenshot: `.codex/xcode-summaries/packet-3.2-today-loop-proof-final/20260708T073840Z-AmbitionsUITests-TodaySurfaceUITests-testPacket32TodayActionClosureProofLoop---98264-25107/extract/screenshots/packet-3_0_32DA07C8-0C78-4619-A94A-F20C9CE0B2BC.2-today-closure-preview`
+- Inline receipt screenshot: `.codex/xcode-summaries/packet-3.2-today-loop-proof-final/20260708T073840Z-AmbitionsUITests-TodaySurfaceUITests-testPacket32TodayActionClosureProofLoop---98264-25107/extract/screenshots/packet-3_0_F118B06C-7980-4FF5-AC2F-DFF362C89D75.2-today-inline-receipt`
+- Broad build-for-testing summary: `.codex/xcode-summaries/frontend-remediation/20260708T074429Z/extract/summary.json`
+
+Visual inspection notes:
+- Step detail screenshot: real route depth is visible. The surface shows Step identity, duration/source/context/goal, reason bullets, proof/receipt attachment, and Start now / Close the loop controls. It is dense and still simulator-Yellow, but it is not a fake detail page and does not read as chatbot or dashboard UI.
+- Closure preview screenshot: the outcome picker, selected Move it state, consequence preview, and receipt preview are present in one native sheet. The card treatment remains heavier than the eventual flagship target, but the screen answers what will change before saving and does not present fake success.
+- Inline receipt screenshot: the root returns to Today with a clear `Needs confirmation` local receipt above the Start Here object. The receipt does not cover the dock or primary Start now control and makes local storage/receipt history visible.
+- No screenshot in this packet is Visual Green. Simulator proof supports Yellow maximum only.
+
+Visual Scorecard:
+- Native iOS quality: 4
+- Visual hierarchy: 4
+- Surface identity: 4
+- Object inspectability: 4
+- Light/dark quality: 4 for preserving the current dark proof lane; this packet did not broaden into a fresh appearance matrix.
+- Material restraint: 4
+- Typography and spacing: 4
+- Interaction clarity: 4
+- SwiftUI realism / proportions: 4
+- Similarity to Ambitions premium frontend target: 4
+- Average: 4.0; Ready For Review within simulator/source Yellow ceilings, not owner acceptance.
+
+Remaining visual deltas:
+- The closure sheet still uses heavy rounded review panels and should be revisited in later design-system/copy packets for final flagship restraint.
+- Step detail density at larger Dynamic Type is not manually VoiceOver-verified and should receive later accessibility proof.
+- The moved outcome intentionally creates a placement-review receipt rather than completing placement in the same flow; deeper Time placement/reflow proof remains later packets.
+- Undo/relaunch persistence proof is not claimed by this Packet 3.2 focused lane and remains a later runtime interaction/proof need.
+
+Validation not run:
+- Physical-device proof: unavailable in this environment.
+- Manual VoiceOver proof: not performed.
+- Full test-suite execution: not run; focused UI proof plus broad build-for-testing passed.
+
+Known risks:
+- Accessibility Green is impossible without manual VoiceOver proof.
+- Visual Green is impossible without physical-device proof.
+- Today action depth is Yellow, not complete product acceptance; later packets must still prove persistence, undo/control richness, broader light/dark overlay appearance, and final material/copy polish.
+
+Packet 3.2 closeout:
+- Status: Yellow / Ready For Review.
+- Source status: focused source/test changes are scoped to Today closure proof and automation identity.
+- Runtime status: focused simulator UI proof passed for the Today Step detail -> closure review -> receipt preview -> confirm -> inline receipt loop.
+- Interaction status: Yellow; automation proves the loop and visible mutation, but not manual/device interaction.
+- Visual status: Yellow maximum; simulator screenshots inspected and score 4.0 average, but no physical device proof.
+- Accessibility status: Yellow maximum; automation visibility improved, but no manual VoiceOver proof.
+- Release status: not Green; this is not release validation.
+- Product law preserved: Today / Goals / Time / You only as roots; Capture is not a root tab; Search remains local Find / Act / Inspect; Motion not a root destination; depth law preserved; local-first/offline trust not weakened; no hosted-AI grammar added.
+- Commit: to be recorded after the packet closeout commit is created.
+- Required closeout sentence: Passing tests did not determine this status. The status is based on source proof, runtime proof, screenshot inspection, repair-loop completion, and fidelity to the Ambitions premium frontend target: premium roots, native light/dark drilldowns and entire frontend, deeply inspectable object surfaces, and realistic SwiftUI proportions.
+
+Next packet:
+- Packet 3.3 - Goals State Legibility.
 
 ### Packet 1.5 - Baseline Validation Recovery
 
