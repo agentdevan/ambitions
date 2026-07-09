@@ -45,9 +45,10 @@ No packet may be marked Done by Codex in this program.
 
 - Owner real-device review supersedes prior self-scored Yellow when it is contradicted by product usability.
 - Prior Packet 4.2 sequencing is frozen behind this owner-rejection rebaseline.
-- Packet 4.2 implementation must not continue until P0.1 through relevant P0 gates are complete or explicitly re-authorized.
+- The pre-rebaseline packet queue is historical evidence only and must not be treated as the active execution queue until the owner explicitly re-authorizes it.
+- This rebaseline did not continue into implementation; this session was docs-only and no source files were edited.
 - Next implementation packet is **P0.1 Navigation and Object Reality Gate**.
-- This is a docs-only governance install. No source files were edited in this session.
+- Future work must read `OWNER_REJECTION_REBASELINE.md` and `VISUAL_FIDELITY_CONTRACT.md` before implementation.
 
 
 ## 2. Authority Read This Session
@@ -204,7 +205,23 @@ Surface maturity acceptance:
 - Human review is deferred until final owner review package.
 - Codex must self-score and run repair cycles until the packet meets the contract or a hard stop rule applies.
 
-## 4. Program Queue
+## 4. Active Owner-Rejection P0 Queue
+
+This is the active implementation queue after owner real-device rejection.
+
+The historical pre-rebaseline packet queue below is frozen. Do not resume old Packet 4.2 until the P0 owner-rejection sequence is complete or the owner explicitly re-authorizes a narrower sequence.
+
+| Packet | Status | Entry Condition | Required Proof |
+| --- | --- | --- | --- |
+| P0.1 Navigation and Object Reality Gate | Ready For Codex | Owner rejection rebaseline installed; working tree clean | Back works from current detail routes; created goal appears in Goals; created object opens; created object is searchable if Search exists; relaunch honesty/persistence proof if supported; exact destination receipt; no fake success |
+| P0.2 Shell / Chrome Clarity Rebuild | Backlog | P0.1 no longer Red | Working back behavior; obvious top command header; rounded bottom dock; clear selected root; global Capture/Search; practical touch targets; content scrolls under stable chrome; no dock/header collision; light/dark proof where practical |
+| P0.3 Capture First-Class Surface Reconstruction | Backlog | P0.1 object reality stable and shell not blocking Capture | Full-screen safe-area Capture; no prompt/modal feel; route affordances; free capture, goal seed, step seed, proof, protected time, note/thought, constraint/fixed point, attachment if supported; review before save; destination before and after save; open destination; cancel/back |
+| P0.4 Goals Native Hierarchy Reconstruction | Backlog | P0.1 object reality stable | Retire constellation/atlas; native list hierarchy; life areas as groups/folders/sections; goals as visible rows; active paths as rows/details; add goal creates visible row; goal detail native drilldown |
+| P0.5 Today Actionable Rotary Meridian | Backlog | P0.1 object reality stable and shell navigation repaired enough for temporal movement | Today scrolls forward/backward through time windows; current/previous/next windows; no-step primary action; Start Here when real step exists; Capture/build/protect/review paths |
+| P0.6 Time Calendar-Native Reconstruction | Backlog | P0.1 object reality stable and shell navigation repaired enough for calendar movement | Day/week calendar grammar; now line; protected/open/fixed blocks; scheduled Step block; conflict/reflow review; placement proposal; no segmented card dashboard or abstract gauge |
+| P0.7 You Runtime Settings Cleanup | Backlog | P0.1 navigation stable and You detail routing repaired enough for settings validation | Remove trailing value words beside chevrons; move secondary values to subtitles/details; connect settings to runtime; repair Appearance detail unreadability; verify Appearance back navigation and setting changes; unavailable states honest |
+
+## 5. Program Queue
 
 ### Project 1 - Red-Gate Rendering Foundation
 
@@ -281,7 +298,7 @@ Do not start Project 3 until Project 1 is at least Accepted Yellow and Product L
 | 7.5 Account / Entitlement / Privacy Release Proof | Backlog | Account/privacy runtime paths ready | Account optionality, entitlement, R2, egress, privacy proof |
 | 7.6 Owner Acceptance Gate | Blocked | Requires repaired Red blockers and physical review package | Owner review package; Codex must not request early acceptance |
 
-## 5. Active Packet Log
+## 6. Active Packet Log
 
 ### Packet 1.1 - Root Shell Safe-Area + Dock Clearance
 
@@ -2283,7 +2300,7 @@ Remaining visual deltas:
 
 Passing tests did not determine this status. The status is based on source proof, runtime proof, screenshot inspection, repair-loop completion, and fidelity to the Ambitions premium frontend target: premium roots, native light/dark drilldowns and entire frontend, deeply inspectable object surfaces, and realistic SwiftUI proportions.
 
-## 6. Validation Log
+## 7. Validation Log
 
 ### Baseline before Packet 1.1 source edits
 
@@ -2507,7 +2524,7 @@ Validation classification:
 - Accessibility Green is impossible because manual VoiceOver proof was not performed.
 - Release Green is impossible; release validation, device proof, accessibility proof, and later Red blockers remain.
 
-## 7. Screenshot And Proof Artifact Ledger
+## 8. Screenshot And Proof Artifact Ledger
 
 ### Historical/current-main starting evidence
 
@@ -2823,7 +2840,7 @@ Additional proof notes:
 - The first focused Packet 2.2 unit run timed out before tests executed and is not counted as source proof.
 - This packet proves Motion is not a root destination or screenshot surface in current active helpers and route fallback. It does not prove physical-device Motion behavior, haptics, transition smoothness, owner acceptance, or release readiness.
 
-## 8. Known Remaining Red Blockers
+## 9. Known Remaining Red Blockers
 
 Owner rebaseline overrides prior readiness for the following items:
 
@@ -2854,7 +2871,7 @@ Owner rebaseline overrides prior readiness for the following items:
 - Motion active screenshot/helper residue is repaired for the scoped `motion.current.screen` / `motion.current.scroll` debt, but transition/haptic/device proof remains incomplete.
 - Local-first/privacy source gates passing but runtime/private-egress proof incomplete.
 
-## 9. Known-Issue Mapping
+## 10. Known-Issue Mapping
 
 Current Packet 1.1 maps to:
 - AMB-ISSUE-1706: Shell root dock/content overlap remains visually failed in baseline artifacts.
@@ -2933,7 +2950,7 @@ Packet 2.2 current evidence:
 
 Mapping confidence: High for the scoped active helper/default-source residue; Medium for broader Motion behavior quality because transition, haptic, and physical-device proof remain future scope.
 
-## 10. Proof Ceilings
+## 11. Proof Ceilings
 
 - Source gates passing can support source status only.
 - Simulator screenshots can support Visual Yellow maximum.
@@ -2942,7 +2959,7 @@ Mapping confidence: High for the scoped active helper/default-source residue; Me
 - Release Green is impossible while open Red blockers, missing device proof, missing accessibility proof, and missing release validation remain.
 - Owner acceptance is not requested by this ledger.
 
-## 11. Product Decisions Needed
+## 12. Product Decisions Needed
 
 Owner-rejection rebaseline active blockers and direction:
 
@@ -2954,7 +2971,7 @@ Owner-rejection rebaseline active blockers and direction:
 - Shell/chrome should be rebuilt for clear navigation: obvious top header, rounded bottom dock, clear active root, and global Capture/Search action surfaces.
 - You settings must remove noisy right-side labels and connect settings to runtime where possible; show unavailable honestly.
 
-## 12. Commit Ledger
+## 13. Commit Ledger
 
 Packet 1.1 planned commit:
 - `Frontend remediation: root shell safe-area clearance`
@@ -3000,7 +3017,7 @@ Packet 4.1 planned commit:
 - `Frontend remediation: capture visual grammar repair`
 - SHA: read from `git rev-parse HEAD` after commit; the ledger does not embed its own final commit hash because amending that value changes the hash.
 
-## 13. Resume Instructions
+## 14. Resume Instructions
 
 To resume from this checkpoint:
 1. Stay on branch `main` unless explicitly instructed otherwise.
@@ -3015,7 +3032,7 @@ To resume from this checkpoint:
 10. Run focused scoped validation, then required source/governance scans and the broad `frontend-remediation` build lane only when source work begins.
 11. Update this ledger with exact commands, exits, artifacts, risks, and next implementation packet, then commit only if validation passes and the change is coherent.
 
-## 14. Packet Closeout Template
+## 15. Packet Closeout Template
 
 Use this template after every packet:
 
