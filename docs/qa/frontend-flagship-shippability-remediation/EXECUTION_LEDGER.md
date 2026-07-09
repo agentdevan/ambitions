@@ -43,12 +43,15 @@ No packet may be marked Done by Codex in this program.
 
 ## Owner Rejection Rebaseline — Installed
 
-- Owner real-device review supersedes prior self-scored Yellow when it is contradicted by product usability.
+- Owner real-device review supersedes prior self-scored Yellow when contradicted by product usability.
 - Prior Packet 4.2 sequencing is frozen behind this owner-rejection rebaseline.
 - The pre-rebaseline packet queue is historical evidence only and must not be treated as the active execution queue until the owner explicitly re-authorizes it.
-- This rebaseline did not continue into implementation; this session was docs-only and no source files were edited.
+- This rebaseline did not continue into implementation; this was docs-only and no source files were edited.
 - Next implementation packet is **P0.1 Navigation and Object Reality Gate**.
-- Future work must read `OWNER_REJECTION_REBASELINE.md` and `VISUAL_FIDELITY_CONTRACT.md` before implementation.
+- Future work must read:
+  - `docs/qa/frontend-flagship-shippability-remediation/OWNER_REJECTION_REBASELINE.md`
+  - `docs/qa/frontend-flagship-shippability-remediation/VISUAL_FIDELITY_CONTRACT.md`
+  - `docs/qa/frontend-flagship-shippability-remediation/EXECUTION_LEDGER.md`
 
 
 ## 2. Authority Read This Session
@@ -202,7 +205,7 @@ Surface maturity acceptance:
 - Every visual repair packet and surface maturity packet must evaluate root quality, drilldown quality, light/dark quality, object inspectability, and SwiftUI realism.
 - Packets can pass tests and still be Needs Repair.
 - Repairable visual failure must be repaired immediately, not merely documented.
-- Human review is deferred until final owner review package.
+- Scheduled owner review is not required during automated packet work, but owner real-device review may override simulator-Yellow, Ready For Review, or self-scored packet status at any time.
 - Codex must self-score and run repair cycles until the packet meets the contract or a hard stop rule applies.
 
 ## 4. Active Owner-Rejection P0 Queue
@@ -221,7 +224,12 @@ The historical pre-rebaseline packet queue below is frozen. Do not resume old Pa
 | P0.6 Time Calendar-Native Reconstruction | Backlog | P0.1 object reality stable and shell navigation repaired enough for calendar movement | Day/week calendar grammar; now line; protected/open/fixed blocks; scheduled Step block; conflict/reflow review; placement proposal; no segmented card dashboard or abstract gauge |
 | P0.7 You Runtime Settings Cleanup | Backlog | P0.1 navigation stable and You detail routing repaired enough for settings validation | Remove trailing value words beside chevrons; move secondary values to subtitles/details; connect settings to runtime; repair Appearance detail unreadability; verify Appearance back navigation and setting changes; unavailable states honest |
 
-## 5. Program Queue
+## 5. Historical Pre-Rebaseline Program Queue — Frozen
+
+This queue is preserved as historical process evidence. It is not the active implementation queue after owner real-device rejection.
+Historical status caveat: prior Ready For Review / Yellow statuses are simulator/source evidence only. They are superseded by owner real-device rejection where contradicted by the P0 queue, `OWNER_REJECTION_REBASELINE.md`, or `VISUAL_FIDELITY_CONTRACT.md`.
+Do not resume Packet 4.2 or any later pre-rebaseline packet until P0.1 through the relevant P0 gates are complete or the owner explicitly re-authorizes a narrower sequence.
+Old Packet 4.2 is frozen behind the owner-rejection P0 queue. The next implementation packet is P0.1 Navigation and Object Reality Gate.
 
 ### Project 1 - Red-Gate Rendering Foundation
 
@@ -2967,9 +2975,10 @@ Owner-rejection rebaseline active blockers and direction:
 - Capture must be a full-screen safe-area-respecting global composer and route to destinations with clear post-save destination receipt.
 - Goals must move to a native Apple-Reminders-style hierarchy; constellation/atlas visual grammar is retired.
 - Time must become Calendar-grade with day/week windows, now line, protected/open/fixed blocks, and placement review.
-- Today must remain actionable and scrollable forward/backward across time windows.
-- Shell/chrome should be rebuilt for clear navigation: obvious top header, rounded bottom dock, clear active root, and global Capture/Search action surfaces.
-- You settings must remove noisy right-side labels and connect settings to runtime where possible; show unavailable honestly.
+- Today must become actionable and rotary, including scrollable forward/backward time windows.
+- Shell/chrome must become Facebook-clear, Apple-native, Ambitions-private: obvious top header, rounded bottom dock, clear active root, working back, and global Capture/Search action surfaces.
+- You settings must remove noisy trailing chevron values, connect settings to runtime where possible, and show unavailable honestly.
+- P0.1 Navigation and Object Reality Gate is the next implementation packet. Old Packet 4.2 remains frozen unless the owner explicitly re-authorizes it.
 
 ## 13. Commit Ledger
 
@@ -3011,7 +3020,17 @@ Packet 3.7 planned commit:
 
 Owner rebaseline docs commit:
 - `Docs: install owner rejection rebaseline`
-- SHA: read from `git rev-parse HEAD` after commit; the ledger does not embed its own final commit hash because amending that value changes the hash.
+- SHA: `9ae82fe7c0d604d994b4f0edb81369bb3b135453`
+
+Owner rebaseline alignment commits:
+- `Docs: tighten owner rejection rebaseline alignment`
+- SHA: `06f51383f151f976bb571d62111a9cacd99af43f`
+- `Docs: align visual fidelity contract with owner rebaseline`
+- SHA: `7bbee9177a378de794ad802457373ed3c8d18e3d`
+
+Owner P0 queue ledger cleanup commit:
+- `Docs: align execution ledger with owner P0 queue`
+- SHA: read from `git rev-parse HEAD` after commit
 
 Packet 4.1 planned commit:
 - `Frontend remediation: capture visual grammar repair`
@@ -3022,14 +3041,20 @@ Packet 4.1 planned commit:
 To resume from this checkpoint:
 1. Stay on branch `main` unless explicitly instructed otherwise.
 2. Run `git status --short --branch`.
-3. Confirm rebaseline install state: Packet 4.2 is frozen and current implementation packet is P0.1.
-4. Inspect the current diff before editing.
-5. Rerun `git diff --check`.
-6. Begin with P0.1 Navigation and Object Reality Gate only unless the owner explicitly re-authorizes a different sequence.
-7. Write the P0.1 depth map and visual delta before coding.
-8. Validate back navigation, created-object discoverability, Capture destination clarity, and runtime-state honesty before editing source.
-9. Repair only bounded P0 gates in order; do not start Packet 4.2 scope or any later packet until the rebaseline gates are complete.
-10. Run focused scoped validation, then required source/governance scans and the broad `frontend-remediation` build lane only when source work begins.
+3. Confirm these owner-rebaseline commits are present:
+   - `9ae82fe7c0d604d994b4f0edb81369bb3b135453`
+   - `06f51383f151f976bb571d62111a9cacd99af43f`
+   - `7bbee9177a378de794ad802457373ed3c8d18e3d`
+4. Confirm old Packet 4.2 is frozen.
+5. Confirm the active implementation packet is P0.1 Navigation and Object Reality Gate.
+6. Read:
+   - `docs/qa/frontend-flagship-shippability-remediation/OWNER_REJECTION_REBASELINE.md`
+   - `docs/qa/frontend-flagship-shippability-remediation/VISUAL_FIDELITY_CONTRACT.md`
+   - `docs/qa/frontend-flagship-shippability-remediation/EXECUTION_LEDGER.md`
+7. Begin P0.1 Navigation and Object Reality Gate only.
+8. Write the P0.1 Depth Map and Visual Delta before source edits.
+9. Do not begin P0.2, old Packet 4.2, or any visual reconstruction packet until P0.1 closes or the owner explicitly re-authorizes a different sequence.
+10. Do not claim Ready For Review from tests alone. Created objects must be visible, openable, truthfully routed, and discoverable where supported.
 11. Update this ledger with exact commands, exits, artifacts, risks, and next implementation packet, then commit only if validation passes and the change is coherent.
 
 ## 15. Packet Closeout Template
@@ -3103,7 +3128,7 @@ Remaining visual deltas:
 - `<remaining deltas or none>`
 
 Required closeout sentence:
-- Passing tests did not determine this status. The status is based on source proof, runtime proof, screenshot inspection, repair-loop completion, and fidelity to the Ambitions premium frontend target: premium roots, native light/dark drilldowns and entire frontend, deeply inspectable object surfaces, and realistic SwiftUI proportions.
+- Passing tests did not determine this status. The status is based on source proof, runtime proof, screenshot inspection, repair-loop completion, actual navigability, object discoverability where relevant, and fidelity to the Ambitions premium frontend target: premium roots, native light/dark drilldowns and entire frontend, deeply inspectable object surfaces, and realistic SwiftUI proportions.
 
 Validation not run:
 - `<command or lane>`: `<why>`
