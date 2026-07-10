@@ -239,9 +239,11 @@ def _validate_row(row: RegistryRow) -> list[RegistryIssue]:
         issues.append(RegistryIssue("registry-status-unknown", row.line, f"Unknown registry status `{row.status}`."))
     if row.status in POSITIVE_STATUSES:
         required_lineage = {"executorOwner", "eventKind", "projectionOwner", "receiptOwner", "replayTestID", "proofTestIDs"}
+        if row.status == "durable":
+            required_lineage.add("durableStores")
         for field in sorted(required_lineage):
             value = row.fields.get(field, "")
-            populated = bool(string_array_value(value)) if field == "proofTestIDs" else bool(string_value(value))
+            populated = bool(string_array_value(value)) if field in {"proofTestIDs", "durableStores"} else bool(string_value(value))
             if not populated:
                 issues.append(RegistryIssue("registry-positive-proof-missing", row.line, f"Positive `{row.status}` row requires row-specific `{field}` evidence."))
     return issues

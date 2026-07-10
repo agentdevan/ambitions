@@ -42,6 +42,9 @@ final class MeaningfulMutationRegistryTests: XCTestCase {
                 XCTAssertNotNil(descriptor.replayTestID, descriptor.sourcePath)
                 XCTAssertFalse(descriptor.proofTestIDs.isEmpty, descriptor.sourcePath)
             }
+            if descriptor.status == .durable {
+                XCTAssertFalse(descriptor.durableStores.isEmpty, descriptor.sourcePath)
+            }
         }
         for writePath in writePaths {
             XCTAssertFalse(writePath.rationale.isEmpty, writePath.sourcePath)
@@ -57,6 +60,20 @@ final class MeaningfulMutationRegistryTests: XCTestCase {
             "CaptureViewModel.turnIntoGoal",
         ]
         let registered = Set(MeaningfulMutationRegistry.descriptors.map(\.sourcePath))
+
+        XCTAssertEqual(expected.filter { registered.contains($0) == false }, [])
+    }
+
+    func testShellAndExternalResultMutationEntryPointsAreRegisteredUnproven() {
+        let expected = [
+            "AppShellActivatedCaptureSeam.saveCapture",
+            "EventKitOutbox.recordCalendarResult",
+        ]
+        let registered = Set(
+            MeaningfulMutationRegistry.descriptors
+                .filter { $0.status == .unproven }
+                .map(\.sourcePath)
+        )
 
         XCTAssertEqual(expected.filter { registered.contains($0) == false }, [])
     }

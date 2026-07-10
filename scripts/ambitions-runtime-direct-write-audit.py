@@ -11,6 +11,7 @@ import argparse
 import json
 import re
 import sys
+import tempfile
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
@@ -177,71 +178,157 @@ def proof_test_is_executable(proof_test_id: str) -> bool:
     return any(re.search(rf"\bfunc\s+{re.escape(method)}\s*\(", path.read_text(encoding="utf-8", errors="replace")) for path in candidates)
 
 
-SEMANTIC_ENTRYPOINT_SPECS: tuple[tuple[str, str, tuple[str, ...]], ...] = (
-    (
-        "Native/Ambitions/Composer/Capture/CaptureViewModel.swift",
-        "CaptureViewModel",
-        (
-            "captureService.createCapture(", "commandRouter.execute(", "captureService.updateCaptureState(",
-            "captureService.routeToTimeSeed(", "captureService.markAsWaiting(", "captureService.markAsOptionalSomeday(",
-            "captureService.markAsDeliverableSeed(", "captureService.attachCaptureToGoal(", "captureService.turnCaptureIntoGoal(",
-        ),
-    ),
-    (
-        "Native/Ambitions/Surfaces/Time/TimeViewModel.swift",
-        "TimeViewModel",
-        ("TimeFieldMutationCoordinator().perform(", "TimeFieldMutationCoordinator().undo(", "service.makeTimeCalendarAware("),
-    ),
-    (
-        "Native/Ambitions/Surfaces/Today/TodayViewModel.swift",
-        "TodayViewModel",
-        ("service.performAction(", "receiptCommands.recordActionClosure("),
-    ),
-    (
-        "Native/Ambitions/Surfaces/Goals/GoalsViewModels.swift",
-        "GoalDetailViewModel",
-        ("service.performAction(", "service.submitClarificationAnswer(", "service.submitExplainabilityCorrection("),
-    ),
-    (
-        "Native/Ambitions/Surfaces/Goals/CreateGoalViewModel.swift",
-        "CreateGoalViewModel",
-        ("service.createGoal(",),
-    ),
-    (
-        "Native/Ambitions/Surfaces/You/YouViewModel.swift",
-        "YouViewModel",
-        ("preferencesCommands.saveYouPreferences(",),
-    ),
-    (
-        "Native/Ambitions/Surfaces/Time/TimeRitualsViewModel.swift",
-        "TimeRitualsViewModel",
-        ("service.performAction(",),
-    ),
+SEMANTIC_SCAN_ROOTS = (
+    ROOT / "Native" / "Ambitions" / "App",
+    ROOT / "Native" / "Ambitions" / "Composer",
+    ROOT / "Native" / "Ambitions" / "Surfaces",
+    ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "ExternalWrites",
+    ROOT / "Native" / "Ambitions" / "Core" / "Permissions",
+    ROOT / "Native" / "Ambitions" / "Projection" / "ExternalSnapshots",
+    ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Repair",
 )
 
+SEMANTIC_MUTATION_SINK_PATTERNS = tuple(
+    re.compile(pattern)
+    for pattern in (
+        r"\b(?:commandRouter|commandExecutor|externalActionService|runtimeExecutor|actionExecutor)\.execute\s*\(",
+        r"\bTimeFieldMutationCoordinator\(\)\.(?:perform|undo)\s*\(",
+        r"\b(?:captureService|service|receiptCommands|preferencesCommands)\.(?:createGoal|createCapture|performAction|submitClarificationAnswer|submitExplainabilityCorrection|saveYouPreferences|makeTimeCalendarAware|updateCaptureState|routeToTimeSeed|markAsWaiting|markAsOptionalSomeday|markAsDeliverableSeed|attachCaptureToGoal|turnCaptureIntoGoal)\s*\(",
+        r"\b(?:repositories\.[A-Za-z0-9_]+|repository|appStateRepository|eventLedger|recorder|outbox)\.(?:save[A-Za-z0-9_]*|append|insert|delete|record[A-Za-z0-9_]*|enqueue[A-Za-z0-9_]*)\s*\(",
+        r"\.(?:enqueueExternalCreation|recordCalendarSideEffect|recordCalendarResult|recordResult)\s*\(",
+        r"\b(?:replaceLocalStore|mergeWithConflictReport|importSnapshot)\s*\(",
+    )
+)
 
-def discover_semantic_entry_points() -> set[str]:
-    discovered: set[str] = set()
-    declaration = re.compile(r"(?m)^\s{4}func\s+([A-Za-z_][A-Za-z0-9_]*)\b")
-    for relative, owner, needles in SEMANTIC_ENTRYPOINT_SPECS:
-        path = ROOT / relative
-        if not path.exists():
+# Discovered candidates may be excluded only when the function is demonstrably
+# non-mutating; each exclusion is reviewed as a row with its own rationale.
+SEMANTIC_NON_MUTATING_EXCLUSIONS: dict[str, str] = {}
+
+
+def _swift_code_skip(text: str, index: int) -> int:
+    if text.startswith("//", index):
+        newline = text.find("\n", index + 2)
+        return len(text) if newline == -1 else newline + 1
+    if text.startswith("/*", index):
+        end = text.find("*/", index + 2)
+        return len(text) if end == -1 else end + 2
+    if text[index] == '"':
+        index += 1
+        while index < len(text):
+            if text[index] == "\\":
+                index += 2
+            elif text[index] == '"':
+                return index + 1
+            else:
+                index += 1
+        return len(text)
+    return index
+
+
+def _matching_swift_brace(text: str, open_index: int) -> int | None:
+    depth = 0
+    index = open_index
+    while index < len(text):
+        skipped = _swift_code_skip(text, index)
+        if skipped != index:
+            index = skipped
             continue
-        text = path.read_text(encoding="utf-8", errors="replace")
-        matches = list(declaration.finditer(text))
-        for index, match in enumerate(matches):
-            end = matches[index + 1].start() if index + 1 < len(matches) else len(text)
-            body = text[match.start():end]
-            if any(needle in body for needle in needles):
-                discovered.add(f"{owner}.{match.group(1)}")
+        if text[index] == "{":
+            depth += 1
+        elif text[index] == "}":
+            depth -= 1
+            if depth == 0:
+                return index
+        index += 1
+    return None
+
+
+def _function_body_open(text: str, start: int) -> int | None:
+    parentheses = 0
+    index = start
+    while index < len(text):
+        skipped = _swift_code_skip(text, index)
+        if skipped != index:
+            index = skipped
+            continue
+        char = text[index]
+        if char == "(":
+            parentheses += 1
+        elif char == ")":
+            parentheses -= 1
+        elif char == "{" and parentheses == 0:
+            return index
+        elif char == "}" and parentheses == 0:
+            return None
+        index += 1
+    return None
+
+
+def _swift_type_spans(text: str) -> list[tuple[int, int, str]]:
+    spans: list[tuple[int, int, str]] = []
+    pattern = re.compile(r"\b(?:class|struct|actor|enum|extension)\s+([A-Za-z_][A-Za-z0-9_.]*)[^\{]*\{")
+    for match in pattern.finditer(text):
+        open_index = text.find("{", match.start())
+        close_index = _matching_swift_brace(text, open_index)
+        if close_index is not None:
+            spans.append((open_index, close_index, match.group(1).split(".")[-1]))
+    return spans
+
+
+def semantic_functions_in_text(text: str) -> set[str]:
+    discovered: set[str] = set()
+    type_spans = _swift_type_spans(text)
+    function_pattern = re.compile(
+        r"(?m)^[ \t]*(?P<mods>(?:(?:public|internal|package|private|fileprivate|static|class|nonisolated|mutating|nonmutating|override|final)\s+)*)func\s+(?P<name>[A-Za-z_][A-Za-z0-9_]*)\b"
+    )
+    for match in function_pattern.finditer(text):
+        body_open = _function_body_open(text, match.end())
+        if body_open is None:
+            continue
+        body_close = _matching_swift_brace(text, body_open)
+        if body_close is None:
+            continue
+        owners = [span for span in type_spans if span[0] < match.start() < span[1]]
+        if not owners:
+            continue
+        owner = min(owners, key=lambda span: span[1] - span[0])[2]
+        body = text[body_open + 1:body_close]
+        if any(pattern.search(body) for pattern in SEMANTIC_MUTATION_SINK_PATTERNS):
+            discovered.add(f"{owner}.{match.group('name')}")
     return discovered
 
 
-def semantic_entrypoint_findings(discovered: set[str], registered: set[str]) -> list[Finding]:
-    return [
-        Finding(source, "machine-detected semantic mutation entry point is missing from MeaningfulMutationRegistry")
-        for source in sorted(discovered - registered)
+def discover_semantic_entry_points(
+    scan_roots: tuple[Path, ...] = SEMANTIC_SCAN_ROOTS,
+    *,
+    enforce_production_scope: bool = True,
+) -> set[str]:
+    discovered: set[str] = set()
+    seen: set[Path] = set()
+    for root in scan_roots:
+        if not root.exists():
+            continue
+        for path in sorted(root.rglob("*.swift")):
+            if path in seen or (enforce_production_scope and not is_production_swift(path)):
+                continue
+            seen.add(path)
+            discovered.update(semantic_functions_in_text(path.read_text(encoding="utf-8", errors="replace")))
+    return discovered
+
+
+def semantic_entrypoint_findings(
+    discovered: set[str],
+    registered: set[str],
+    exclusions: dict[str, str] = SEMANTIC_NON_MUTATING_EXCLUSIONS,
+) -> list[Finding]:
+    findings = [
+        Finding(source, "machine-detected semantic mutation entry point is missing from MeaningfulMutationRegistry or the reviewed non-mutating exclusions")
+        for source in sorted(discovered - registered - set(exclusions))
     ]
+    for source, rationale in sorted(exclusions.items()):
+        if not rationale.strip():
+            findings.append(Finding(source, "semantic non-mutating exclusion requires a row-specific rationale"))
+    return findings
 
 
 def classify(relative: str, registry: dict[str, RegistryWritePath]) -> tuple[str, str, str]:
@@ -375,11 +462,51 @@ def run_self_test() -> int:
     assert len(parsed.mutations) == 1 and len(parsed.write_paths) == 1
     assert semantic_entrypoint_findings({"CaptureViewModel.fixture"}, set())
     assert not semantic_entrypoint_findings({"CaptureViewModel.fixture"}, {"CaptureViewModel.fixture"})
+    with tempfile.TemporaryDirectory() as temporary_directory:
+        unseen_root = Path(temporary_directory) / "PreviouslyUnseen" / "NestedMutationDirectory"
+        unseen_root.mkdir(parents=True)
+        unseen_file = unseen_root / "NewSemanticMutation.swift"
+        unseen_file.write_text(
+            """
+            struct NewSemanticMutation {
+                func commitPreviouslyUnseenMutation() async {
+                    _ = await commandExecutor.execute(command)
+                }
+            }
+            """,
+            encoding="utf-8",
+        )
+        unseen = discover_semantic_entry_points((Path(temporary_directory),), enforce_production_scope=False)
+        assert unseen == {"NewSemanticMutation.commitPreviouslyUnseenMutation"}
+        assert semantic_entrypoint_findings(unseen, set())
+        assert not semantic_entrypoint_findings(unseen, unseen)
+        assert not semantic_entrypoint_findings(
+            unseen,
+            set(),
+            {"NewSemanticMutation.commitPreviouslyUnseenMutation": "Fixture is demonstrably non-mutating."},
+        )
+        assert semantic_entrypoint_findings(unseen, set(), {})
     malformed = valid_fixture.replace('rationale: "Fixture lacks executable lineage."\n    )', 'rationale: "Fixture lacks executable lineage."\n    mutation(')
     assert any(issue.code == "registry-call-unbalanced" for issue in parse_registry(malformed).issues)
     assert any(issue.code == "registry-status-unknown" for issue in parse_registry(valid_fixture.replace(".unproven", ".mystery", 1)).issues)
     assert any(issue.code == "registry-field-missing" for issue in parse_registry(valid_fixture.replace("status: .unproven,", "", 1)).issues)
     assert any(issue.code == "registry-positive-proof-missing" for issue in parse_registry(valid_fixture.replace(".unproven", ".durable", 1)).issues)
+    durable_empty_store_fixture = valid_fixture.replace(
+        "status: .unproven,",
+        '''executorOwner: "FixtureExecutor",
+        durableStores: [],
+        eventKind: "fixture.event",
+        projectionOwner: "FixtureProjection",
+        receiptOwner: "FixtureReceiptStore",
+        replayTestID: "FixtureTests/testReplay",
+        proofTestIDs: ["FixtureTests/testProof"],
+        status: .durable,''',
+        1,
+    )
+    assert any(
+        issue.code == "registry-positive-proof-missing" and "`durableStores`" in issue.message
+        for issue in parse_registry(durable_empty_store_fixture).issues
+    )
     assert any(issue.code == "registry-parser-count-loss" for issue in parse_registry(valid_fixture.replace("declaredMutationRowCount = 1", "declaredMutationRowCount = 2")).issues)
     assert proof_test_is_executable("AmbitionsTests/MeaningfulMutationRegistryTests/testRegistryRowsHaveUniqueIdentityExplicitClassificationAndRationale")
     fixture = {
@@ -429,7 +556,8 @@ def main() -> int:
         {
             "semanticEntryPointCount": len(discovered_semantic_entries),
             "registeredSemanticEntryPointCount": len(discovered_semantic_entries & mutation_sources),
-            "missingSemanticEntryPointCount": len(discovered_semantic_entries - mutation_sources),
+            "excludedSemanticEntryPointCount": len(discovered_semantic_entries & set(SEMANTIC_NON_MUTATING_EXCLUSIONS)),
+            "missingSemanticEntryPointCount": len(discovered_semantic_entries - mutation_sources - set(SEMANTIC_NON_MUTATING_EXCLUSIONS)),
         }
     )
     payload = {

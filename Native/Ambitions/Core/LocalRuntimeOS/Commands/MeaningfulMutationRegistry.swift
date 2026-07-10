@@ -31,7 +31,7 @@ struct MeaningfulMutationWritePathDescriptor: Sendable, Hashable {
 }
 
 enum MeaningfulMutationRegistry {
-    static let declaredMutationRowCount = 72
+    static let declaredMutationRowCount = 89
     static let declaredWritePathRowCount = 50
 
     static let descriptors: [MeaningfulMutationDescriptor] = [
@@ -105,8 +105,25 @@ enum MeaningfulMutationRegistry {
         mutation(id: "app-intent.goal-draft", sourcePath: "CreateAmbitionsGoalDraftIntent.perform", commandKind: .createGoal, status: .unproven, rationale: "App Intent goal draft handoff lacks terminated-app lineage proof."),
         mutation(id: "share.intake", sourcePath: "ShareExtensionIntake.recordDurableIntake", commandKind: .quickCapture, status: .unproven, rationale: "Share intake lacks row-specific extension lifecycle and replay proof."),
         mutation(id: "eventkit.outbox", sourcePath: "EventKitOutbox.recordCalendarSideEffect", commandKind: .scheduleItem, status: .unproven, rationale: "EventKit outbox path lacks row-specific end-to-end replay proof."),
+        mutation(id: "eventkit.outbox-result", sourcePath: "EventKitOutbox.recordCalendarResult", commandKind: .scheduleItem, status: .unproven, rationale: "External result receipt mutation lacks row-specific replay and reconciliation proof."),
         mutation(id: "widget.outbox", sourcePath: "WidgetRefreshOutbox.recordSnapshotRefresh", commandKind: .openDestination, status: .unproven, rationale: "Widget refresh outbox lacks row-specific reconstruction proof."),
         mutation(id: "repair.portable-snapshot", sourcePath: "PortableSnapshotService.importSnapshot", commandKind: .updateGoal, status: .unproven, rationale: "Portable snapshot import lacks complete migration and replay proof."),
+        mutation(id: "shell.activated-capture", sourcePath: "AppShellActivatedCaptureSeam.saveCapture", commandKind: .quickCapture, status: .unproven, rationale: "Global shell command execution lacks row-specific restart and replay proof."),
+        mutation(id: "app-intent.bridge-enqueue", sourcePath: "AppIntentBridge.enqueueExternalCreation", commandKind: .quickCapture, status: .unproven, rationale: "App Intent bridge enqueue lacks row-specific terminated-app replay and reconciliation proof."),
+        mutation(id: "app-intent.bridge-command", sourcePath: "AppIntentBridge.recordCommandBridge", commandKind: .quickCapture, status: .unproven, rationale: "App Intent command bridge lacks row-specific durable receipt and replay proof."),
+        mutation(id: "external-creation.import", sourcePath: "DefaultExternalCreationImportService.importPendingCreations", commandKind: .quickCapture, status: .unproven, rationale: "External creation import lacks row-specific idempotent restart and reconciliation proof."),
+        mutation(id: "shell.command-router", sourcePath: "DefaultShellCommandRouter.execute", commandKind: .openDestination, status: .unproven, rationale: "Shell command routing spans mutation kinds without row-specific durable replay proof."),
+        mutation(id: "eventkit.integration-side-effect", sourcePath: "EventKitIntegrationService.recordCalendarSideEffect", commandKind: .scheduleItem, status: .unproven, rationale: "EventKit integration side-effect recording lacks row-specific device restart and replay proof."),
+        mutation(id: "eventkit.integration-result", sourcePath: "EventKitIntegrationService.recordCalendarResult", commandKind: .scheduleItem, status: .unproven, rationale: "EventKit integration result recording lacks row-specific reconciliation and replay proof."),
+        mutation(id: "notification.outbox-refresh", sourcePath: "NotificationOutbox.recordRefresh", commandKind: .openDestination, status: .unproven, rationale: "Notification refresh outbox mutation lacks row-specific restart and reconstruction proof."),
+        mutation(id: "repair.portable-merge", sourcePath: "PortableSnapshotService.mergeWithConflictReport", commandKind: .updateGoal, status: .unproven, rationale: "Portable snapshot merge lacks complete conflict reconciliation and replay proof."),
+        mutation(id: "repair.portable-replace", sourcePath: "PortableSnapshotService.replaceLocalStore", commandKind: .updateGoal, status: .unproven, rationale: "Portable snapshot replacement lacks complete rollback and replay proof."),
+        mutation(id: "repair.receipt-history-save", sourcePath: "PortableSnapshotService.saveActionReceiptHistory", commandKind: .completeAction, status: .unproven, rationale: "Imported action receipt history lacks row-specific restart and replay equivalence proof."),
+        mutation(id: "repair.tombstone-save", sourcePath: "PortableSnapshotService.saveEntityRevisionTombstones", commandKind: .updateGoal, status: .unproven, rationale: "Imported revision tombstones lack row-specific restart and replay equivalence proof."),
+        mutation(id: "goals.detail-materialization", sourcePath: "RepositoryBackedGoalsService.makeDetail", commandKind: .updateGoal, status: .unproven, rationale: "Goal detail materialization may persist repository state without row-specific replay proof."),
+        mutation(id: "today.feedback-action", sourcePath: "RepositoryBackedTodayService.performFeedbackAction", commandKind: .completeAction, status: .unproven, rationale: "Today feedback action mutates legacy repositories without row-specific atomic replay proof."),
+        mutation(id: "repair.restore-rollback", sourcePath: "RestoreRollback.restoreSnapshotWithRollback", commandKind: .updateGoal, status: .unproven, rationale: "Restore rollback mutation lacks row-specific crash-boundary and replay proof."),
+        mutation(id: "preview.capture-seed", sourcePath: "PersistenceBootstrap.applyPreviewCaptureSeedIfNeeded", commandKind: .quickCapture, status: .unproven, rationale: "Preview capture seeding lacks row-specific isolation and replay proof for its repository mutation."),
     ]
 
     static let writePaths: [MeaningfulMutationWritePathDescriptor] = [
