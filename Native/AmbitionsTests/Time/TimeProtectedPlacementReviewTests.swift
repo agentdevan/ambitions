@@ -5,12 +5,12 @@ import XCTest
 final class TimeProtectedPlacementReviewTests: XCTestCase {
     private let now = ISO8601DateFormatter().date(from: "2027-02-19T12:20:00Z")!
 
-    func testP2BBTimePlacementShowsProtectedReviewBeforeMutation() throws {
+    func testP2BBTimePlacementShowsProtectedReviewBeforeMutation() async throws {
         let state = PreviewTimeScenarios.seeded.withProtectedPlacementReviewCandidate(realPlacementCandidate())
         let mark = try XCTUnwrap(state.lifeSuite.field.semanticMarks.first { $0.kind == .freeTimeQuality })
         let viewModel = TimeViewModel(state: .loaded(state))
 
-        viewModel.performLifeShapeMutation(.placeStep, selectedMark: mark, now: now)
+        await requestProtectedPlacement(viewModel, mark: mark)
 
         let review = try XCTUnwrap(viewModel.protectedPlacementReview)
         XCTAssertEqual(review.stepTitle, "Draft the real proposal section")
@@ -33,34 +33,46 @@ final class TimeProtectedPlacementReviewTests: XCTestCase {
         )
     }
 
-    func testP2BBApproveProtectedReviewAppliesPlacementAfterExplicitAction() throws {
+    func testP2BBApproveProtectedReviewAppliesPlacementAfterExplicitAction() async throws {
         let state = PreviewTimeScenarios.seeded.withProtectedPlacementReviewCandidate(realPlacementCandidate())
+        let committedState = PreviewTimeScenarios.seeded.withCommittedScheduledRow()
         let mark = try XCTUnwrap(state.lifeSuite.field.semanticMarks.first { $0.kind == .freeTimeQuality })
         let viewModel = TimeViewModel(state: .loaded(state))
 
-        viewModel.performLifeShapeMutation(.placeStep, selectedMark: mark, now: now)
+        await requestProtectedPlacement(viewModel, mark: mark)
         XCTAssertNotNil(viewModel.protectedPlacementReview)
 
-        viewModel.approveProtectedPlacementReview(now: now)
+        await viewModel.approveProtectedPlacementReview(
+            now: now,
+            runtimeClient: committedRuntimeClient(),
+            service: StubTimeService(timeState: committedState, weeklyReviewState: PreviewTimeScenarios.weeklyReview),
+            calendar: utcCalendar,
+            timeZone: utcCalendar.timeZone
+        )
 
         XCTAssertNil(viewModel.protectedPlacementReview)
         XCTAssertEqual(viewModel.protectedPlacementReviewOutcome, .moved)
         XCTAssertEqual(viewModel.visibleTimeMutation?.stageMutation.visibleUserFacingChange, "Step placed")
+        XCTAssertEqual(viewModel.visibleTimeMutation?.stageMutation.receipt.receiptID, "runtime.receipt.time-placement")
+        XCTAssertTrue(viewModel.visibleTimeMutation?.stageMutation.undoAvailability.isAvailable == true)
+        XCTAssertFalse(viewModel.visibleTimeMutation?.stageMutation.accessibilityAnnouncement.message.isEmpty ?? true)
         guard case let .loaded(updatedState) = viewModel.state else {
             return XCTFail("Expected Time state to remain loaded.")
         }
-        XCTAssertNotEqual(
-            updatedState.lifeSuite.field.reading(for: .week).title,
-            state.lifeSuite.field.reading(for: .week).title
-        )
+        XCTAssertEqual(updatedState.lifeSuite.field.reading(for: .week).title, committedState.lifeSuite.field.reading(for: .week).title)
+        XCTAssertEqual(updatedState.lifeSuite.field.placementCandidate?.id, committedState.lifeSuite.field.placementCandidate?.id)
+        let scheduledRow = try XCTUnwrap(updatedState.lifeSuite.field.calendarRows.first { $0.kind == .scheduledStep })
+        let committedScheduledRow = try XCTUnwrap(committedState.lifeSuite.field.calendarRows.first { $0.kind == .scheduledStep })
+        XCTAssertEqual(scheduledRow.detail, committedScheduledRow.detail)
+        XCTAssertEqual(scheduledRow.isOperational, committedScheduledRow.isOperational)
     }
 
-    func testP2CBPriorityChangeUpdatesReviewStateWithoutApprovingPlacement() throws {
+    func testP2CBPriorityChangeUpdatesReviewStateWithoutApprovingPlacement() async throws {
         let state = PreviewTimeScenarios.seeded.withProtectedPlacementReviewCandidate(realPlacementCandidate())
         let mark = try XCTUnwrap(state.lifeSuite.field.semanticMarks.first { $0.kind == .freeTimeQuality })
         let viewModel = TimeViewModel(state: .loaded(state))
 
-        viewModel.performLifeShapeMutation(.placeStep, selectedMark: mark, now: now)
+        await requestProtectedPlacement(viewModel, mark: mark)
         XCTAssertEqual(viewModel.protectedPlacementReview?.priorityDecision.priority, .normal)
 
         viewModel.updateProtectedPlacementPriority(.high)
@@ -84,12 +96,12 @@ final class TimeProtectedPlacementReviewTests: XCTestCase {
         )
     }
 
-    func testP2BBKeepProtectedReviewLeavesPlacementUnchanged() throws {
+    func testP2BBKeepProtectedReviewLeavesPlacementUnchanged() async throws {
         let state = PreviewTimeScenarios.seeded.withProtectedPlacementReviewCandidate(realPlacementCandidate())
         let mark = try XCTUnwrap(state.lifeSuite.field.semanticMarks.first { $0.kind == .freeTimeQuality })
         let viewModel = TimeViewModel(state: .loaded(state))
 
-        viewModel.performLifeShapeMutation(.placeStep, selectedMark: mark, now: now)
+        await requestProtectedPlacement(viewModel, mark: mark)
         XCTAssertNotNil(viewModel.protectedPlacementReview)
 
         viewModel.keepProtectedPlacementReview()
@@ -106,12 +118,12 @@ final class TimeProtectedPlacementReviewTests: XCTestCase {
         )
     }
 
-    func testP2BBReviewAccessibilityCopyIsPlainAndNonInternal() throws {
+    func testP2BBReviewAccessibilityCopyIsPlainAndNonInternal() async throws {
         let state = PreviewTimeScenarios.seeded.withProtectedPlacementReviewCandidate(realPlacementCandidate())
         let mark = try XCTUnwrap(state.lifeSuite.field.semanticMarks.first { $0.kind == .freeTimeQuality })
         let viewModel = TimeViewModel(state: .loaded(state))
 
-        viewModel.performLifeShapeMutation(.placeStep, selectedMark: mark, now: now)
+        await requestProtectedPlacement(viewModel, mark: mark)
 
         let review = try XCTUnwrap(viewModel.protectedPlacementReview)
         let copy = [
@@ -147,5 +159,95 @@ final class TimeProtectedPlacementReviewTests: XCTestCase {
             sourceLabel: "Visible goal",
             kind: .goalLinked
         )
+    }
+
+    private var utcCalendar: Calendar {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+        return calendar
+    }
+
+    private func requestProtectedPlacement(_ viewModel: TimeViewModel, mark: LifeShapeSemanticMark) async {
+        await viewModel.performLifeShapeMutation(
+            .placeStep,
+            selectedMark: mark,
+            now: now,
+            runtimeClient: committedRuntimeClient(),
+            service: StubTimeService(timeState: PreviewTimeScenarios.seeded, weeklyReviewState: PreviewTimeScenarios.weeklyReview),
+            calendar: utcCalendar,
+            timeZone: utcCalendar.timeZone
+        )
+    }
+
+    private func committedRuntimeClient() -> RuntimeCommandClient {
+        RuntimeCommandClient(
+            execute: { command, _ in
+                AmbitionsCommandExecutionResult(
+                    status: .succeeded,
+                    summary: "Step placed in Time.",
+                    route: .time,
+                    target: command.target,
+                    metadata: [
+                        "runtimeReceiptID": "runtime.receipt.time-placement",
+                        "runtimeProjectionStoreStatus": "saved",
+                        "timeMaterialization": "saved_post_authority",
+                        "runtimeMaterializedProjectionCursorIDs": "time",
+                        "runtimeMaterializedProjectionCursorSequences": "7",
+                        "runtimeMaterializedProjectionCursorChecksums": "checksum-time-7",
+                    ]
+                )
+            },
+            projection: { request in
+                guard request == .time else { throw RuntimeProjectionClientError.projectionUnavailable(request) }
+                return RuntimeProjectionSnapshot(
+                    projectionID: "time",
+                    payload: Data("{}".utf8),
+                    eventSequence: 7,
+                    cursorChecksum: "checksum-time-7",
+                    payloadChecksum: "checksum-time-7",
+                    materializedAt: "2027-02-19T12:20:00Z"
+                )
+            }
+        )
+    }
+}
+
+private extension TimeSurfaceState {
+    func withCommittedScheduledRow() -> TimeSurfaceState {
+        let scheduledRow = TimeCalendarRow(
+            id: "time.calendar.scheduled-step",
+            kind: .scheduledStep,
+            title: "Scheduled Step",
+            value: "Scheduled, 1:00 PM",
+            detail: "Draft the real proposal section. Saved locally in Life Calendar.",
+            visualState: .selected,
+            isOperational: true
+        )
+        let field = LifeShapeFieldState(
+            defaultHorizon: lifeSuite.field.defaultHorizon,
+            capacityFit: lifeSuite.field.capacityFit,
+            segments: lifeSuite.field.segments,
+            semanticMarks: lifeSuite.field.semanticMarks,
+            renderState: lifeSuite.field.renderState,
+            readings: lifeSuite.field.readings,
+            placementCandidate: nil,
+            placementUnavailableReason: lifeSuite.field.placementUnavailableReason,
+            calendarRows: lifeSuite.field.calendarRows.filter { $0.kind != .scheduledStep } + [scheduledRow],
+            sourceState: lifeSuite.field.sourceState,
+            reflowProposal: lifeSuite.field.reflowProposal,
+            receipt: lifeSuite.field.receipt,
+            continuityDockItems: lifeSuite.field.continuityDockItems
+        )
+        let suite = TimeLifeSuiteState(
+            title: lifeSuite.title,
+            subtitle: lifeSuite.subtitle,
+            shapes: lifeSuite.shapes,
+            field: field,
+            drillDown: lifeSuite.drillDown,
+            calendarBoundaryLabel: lifeSuite.calendarBoundaryLabel,
+            manualFallbackLabel: lifeSuite.manualFallbackLabel,
+            trustLabel: lifeSuite.trustLabel
+        )
+        return replacing(lifeSuite: suite)
     }
 }

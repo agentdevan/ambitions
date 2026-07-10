@@ -11,6 +11,7 @@ struct TodayDerivedReadModelCacheKey: Hashable, Sendable {
     let evidenceFingerprint: String
     let feedbackFingerprint: String
     let eventLedgerFingerprint: String
+    let timeBlockFingerprint: String
     let heroFingerprint: String
     let supportFingerprint: String
     let appStateID: String
@@ -32,6 +33,7 @@ struct TodayDerivedReadModelCacheKey: Hashable, Sendable {
         self.evidenceFingerprint = Self.fingerprint(snapshot.evidence.map { "\($0.id):\($0.capturedAt)" })
         self.feedbackFingerprint = Self.fingerprint(snapshot.feedback.map { "\($0.base.id):\($0.base.occurredAt):\($0.kind.rawValue)" })
         self.eventLedgerFingerprint = Self.fingerprint(snapshot.eventLedger.map { "\($0.id):\($0.occurredAt):\($0.kind.rawValue)" })
+        self.timeBlockFingerprint = Self.fingerprint(snapshot.timeBlocks.map { "\($0.id):\($0.start.timeIntervalSince1970):\($0.end.timeIntervalSince1970):\($0.kind.rawValue):\($0.eventID ?? "none")" })
         self.heroFingerprint = Self.fingerprint([
             hero.truth.greeting,
             hero.truth.dominantText,
@@ -109,7 +111,13 @@ struct TodayReadModelProjector {
             goals: activeGoals,
             captures: snapshot.captures
         )
-        let reality = makeRealitySnapshot(now: now, lens: activeLens, goals: activeGoals, captures: snapshot.captures)
+        let reality = makeRealitySnapshot(
+            now: now,
+            lens: activeLens,
+            goals: activeGoals,
+            captures: snapshot.captures,
+            timeBlocks: snapshot.timeBlocks
+        )
         let believabilityProjector = GoalBelievabilityProjector()
         let goalAssessments = activeGoals.flatMap { goal in
             goalBelievabilityInputs(
@@ -286,15 +294,47 @@ private extension TodayReadModelProjector {
         return goalLenses.first ?? .all
     }
 
-    func makeRealitySnapshot(now: Date, lens: NowContextLens, goals: [Goal], captures: [Capture]) -> RealitySnapshot {
+    func makeRealitySnapshot(
+        now: Date,
+        lens: NowContextLens,
+        goals: [Goal],
+        captures: [Capture],
+        timeBlocks: [TimeBlock]
+    ) -> RealitySnapshot {
         let horizon = DateInterval(start: now, end: now.addingTimeInterval(24 * 60 * 60))
         let deadlineHints = deadlineDates(goals: goals, captures: captures)
+        let scheduledBlocks = timeBlocks.filter(\.kind.appearsAsScheduledTodayBlock).map { block in
+            ScheduledAmbitionsBlock(
+                id: block.id,
+                title: block.title,
+                start: block.start,
+                end: block.end,
+                relatedGoalID: block.goalID,
+                relatedPlanID: block.stepID,
+                isUserConfirmed: true
+            )
+        }
+        let flexibleWindows = timeBlocks.filter { !$0.kind.appearsAsScheduledTodayBlock }.map { block in
+            RealityWindow(
+                id: "window.life-calendar.\(block.id)",
+                kind: .flexible,
+                source: .ambitionsPlan,
+                start: block.start,
+                end: block.end,
+                title: block.title,
+                relatedGoalID: block.goalID,
+                relatedPlanID: block.stepID,
+                eventLedgerEntryIDs: [block.eventID].compactMap { $0 }
+            )
+        }
 
         return RealityModelProjector().project(
             input: RealityProjectionInput(
                 now: now,
                 horizon: horizon,
                 activeContextLens: lens,
+                flexibleWindows: flexibleWindows,
+                scheduledBlocks: scheduledBlocks,
                 deadlineHints: deadlineHints,
                 minimumWindowMinutes: 30
             )

@@ -8,6 +8,7 @@ struct RepositoryBackedTimeService: TimeServicing {
     let calendarAvailabilityHorizon: String
     let clock: any AmbitionsClock
     let fixedCalendar: Calendar?
+    let lifeCalendarStore: LifeCalendarStore?
 
     var calendar: Calendar {
         fixedCalendar ?? clock.calendar
@@ -16,6 +17,7 @@ struct RepositoryBackedTimeService: TimeServicing {
     init(
         repositories: AppRepositories,
         calendarRealityService: (any CalendarRealityServicing)? = nil,
+        lifeCalendarStoreFileURL: URL? = nil,
         timeProjectionService: TimeProjectionService = .init(),
         calendarAvailabilityHorizon: String = "week",
         clock: any AmbitionsClock = SystemClock(),
@@ -27,6 +29,7 @@ struct RepositoryBackedTimeService: TimeServicing {
         self.calendarAvailabilityHorizon = calendarAvailabilityHorizon
         self.clock = clock
         self.fixedCalendar = calendar
+        self.lifeCalendarStore = lifeCalendarStoreFileURL.map { LifeCalendarStore(fileURL: $0) }
     }
 
     func loadTimeSurfaceState(now: Date) async throws -> TimeSurfaceState {

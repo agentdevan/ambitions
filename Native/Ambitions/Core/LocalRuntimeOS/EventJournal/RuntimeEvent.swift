@@ -72,6 +72,17 @@ struct StepPlacedDomainEvent: Sendable, Codable, Equatable, Hashable {
     let timeBlockID: String
     let start: String
     let end: String
+    let title: String?
+    let goalID: String?
+
+    init(stepID: String, timeBlockID: String, start: String, end: String, title: String? = nil, goalID: String? = nil) {
+        self.stepID = stepID
+        self.timeBlockID = timeBlockID
+        self.start = start
+        self.end = end
+        self.title = title
+        self.goalID = goalID
+    }
 }
 
 struct TimeWindowDomainEvent: Sendable, Codable, Equatable, Hashable {
@@ -168,8 +179,32 @@ extension RuntimeDomainEvent {
             return .stepPlaced(StepPlacedDomainEvent(
                 stepID: stepID,
                 timeBlockID: timeBlockID,
-                start: command.payload.metadata["start"] ?? occurredAt,
-                end: command.payload.metadata["end"] ?? occurredAt
+                start: command.payload.metadata["startAt"] ?? command.payload.metadata["start"] ?? occurredAt,
+                end: command.payload.metadata["endAt"] ?? command.payload.metadata["end"] ?? occurredAt,
+                title: command.payload.title,
+                goalID: command.target.goalID
+            ))
+        case .protectTimeWindow:
+            guard let windowID = command.target.timeID,
+                  let start = command.payload.metadata["startAt"] ?? command.payload.metadata["start"],
+                  let end = command.payload.metadata["endAt"] ?? command.payload.metadata["end"] else { return nil }
+            return .timeWindowProtected(TimeWindowDomainEvent(
+                windowID: windowID, start: start, end: end,
+                reason: command.payload.notes ?? command.payload.title ?? "user_protected"
+            ))
+        case .correctTimeWindow:
+            if let originalReceiptID = command.payload.metadata["undoOriginalReceiptID"] {
+                return .mutationUndone(MutationUndoneDomainEvent(
+                    originalReceiptID: originalReceiptID,
+                    affectedObjectIDs: [command.target.timeID, command.target.stepID].compactMap { $0 }
+                ))
+            }
+            guard let windowID = command.target.timeID,
+                  let start = command.payload.metadata["startAt"] ?? command.payload.metadata["start"],
+                  let end = command.payload.metadata["endAt"] ?? command.payload.metadata["end"] else { return nil }
+            return .timeWindowCorrected(TimeWindowDomainEvent(
+                windowID: windowID, start: start, end: end,
+                reason: command.payload.metadata["correctionKind"] ?? "corrected"
             ))
         default:
             return nil

@@ -45,6 +45,7 @@ struct AppUserSystemCapability {
 
 struct AppFeatureFactoryCapability {
     let clock: any AmbitionsClock
+    let runtimeCommandClient: RuntimeCommandClient
     let todayService: any TodayServicing
     let todayReceiptCommands: any TodayReceiptCommanding
     let captureService: any CaptureServicing

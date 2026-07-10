@@ -56,12 +56,20 @@ extension RepositoryBackedTimeService {
     func makeWeekDays(
         summaries: [RepositoryBackedTimeService.GoalWeekSummary],
         missingGoalSummaries: [RepositoryBackedTimeService.GoalWeekSummary],
+        timeBlocks: [TimeBlock] = [],
         now: Date
     ) -> [TimeElasticWeekDayState] {
         let ticks = RuntimeTickPolicy(calendar: calendar)
         let start = ticks.startOfDay(for: now)
 
-        let contextsByDay = Dictionary(grouping: summaries.flatMap(\.contexts), by: \.dayIndex)
+        let scheduledStepIDs = Set(timeBlocks.compactMap(\.stepID))
+        let contextsByDay = Dictionary(
+            grouping: summaries.flatMap(\.contexts).filter { scheduledStepIDs.contains($0.step.id) == false },
+            by: \.dayIndex
+        )
+        let blocksByDay = Dictionary(grouping: timeBlocks.filter { $0.end > start }) { block in
+            calendar.dateComponents([.day], from: start, to: calendar.startOfDay(for: block.start)).day ?? -1
+        }
 
         return (0..<7).map { dayIndex in
             let date = ticks.date(byAdding: .day, value: dayIndex, to: start) ?? start
@@ -71,27 +79,31 @@ extension RepositoryBackedTimeService {
                 }
                 return shapingRank(for: lhs.visualState) < shapingRank(for: rhs.visualState)
             }
-            let load = contexts.reduce(0.0) { partial, context in
+            let durableBlocks = (blocksByDay[dayIndex] ?? []).sorted { $0.start < $1.start }
+            let capacityBlockCount = durableBlocks.filter(\.kind.consumesCapacity).count
+            let load = contexts.reduce(Double(capacityBlockCount)) { partial, context in
                 partial + loadWeight(for: context.blockKind, visualState: context.visualState)
             }
             let remainingCapacity = 3.0 - load
             let level: TimeWeekPressureLevel = {
-                if remainingCapacity < -0.3 || contexts.count >= 4 { return .overloaded }
-                if remainingCapacity < 0.7 || contexts.count >= 3 { return .tight }
-                if contexts.isEmpty || remainingCapacity > 1.7 { return .open }
+                let count = contexts.count + capacityBlockCount
+                if remainingCapacity < -0.3 || count >= 4 { return .overloaded }
+                if remainingCapacity < 0.7 || count >= 3 { return .tight }
+                if count == 0 || remainingCapacity > 1.7 { return .open }
                 return .steady
             }()
             let suggestedSummary = missingGoalSummaries.first ?? summaries.first(where: {
                 $0.contexts.contains(where: { $0.dayIndex == dayIndex }) == false && ($0.evaluation?.feasibilityLevel == .tight || $0.evaluation?.feasibilityLevel == .fragile)
             })
-            let roomLabel = roomLabel(for: level, remainingCapacity: remainingCapacity, contextCount: contexts.count)
+            let blockCount = contexts.count + capacityBlockCount
+            let roomLabel = roomLabel(for: level, remainingCapacity: remainingCapacity, contextCount: blockCount)
             let openWindow = makeOpenWindow(
                 level: level,
                 remainingCapacity: remainingCapacity,
                 suggestedSummary: suggestedSummary,
-                contextCount: contexts.count
+                contextCount: blockCount
             )
-            let visibleBlocks = Array(contexts.prefix(level == .overloaded ? 4 : 3)).map { context in
+            let contextBlocks = contexts.map { context in
                 TimeWeekBlockState(
                     id: "\(context.goal.id)-\(context.step.id)",
                     target: GoalRouteTarget(goalID: context.goal.id),
@@ -103,6 +115,20 @@ extension RepositoryBackedTimeService {
                     visualState: context.visualState
                 )
             }
+            let persistedBlocks = durableBlocks.map { block in
+                TimeWeekBlockState(
+                    id: block.id,
+                    target: block.goalID.map { GoalRouteTarget(goalID: $0) },
+                    title: block.title,
+                    detail: "Saved locally in Life Calendar",
+                    goalLabel: block.goalID ?? "Time",
+                    timingLabel: Self.timingLabel(for: block, calendar: calendar),
+                    kind: Self.weekBlockKind(block.kind),
+                    visualState: block.kind.protectsBoundary ? .selected : .default
+                )
+            }
+            let allBlocks = (persistedBlocks + contextBlocks)
+            let visibleBlocks = Array(allBlocks.prefix(level == .overloaded ? 4 : 3))
             let highlight = dayHighlight(
                 level: level,
                 contexts: contexts,
@@ -114,15 +140,34 @@ extension RepositoryBackedTimeService {
                 weekdayLabel: ticks.shortWeekdayLabel(for: date),
                 dateLabel: ticks.dayOfMonthLabel(for: date),
                 level: level,
-                intensity: dayIntensity(for: level, blockCount: contexts.count),
+                intensity: dayIntensity(for: level, blockCount: blockCount),
                 roomLabel: roomLabel,
-                capacityLabel: contexts.isEmpty ? "No blocks yet" : "\(contexts.count) block\(contexts.count == 1 ? "" : "s")",
+                capacityLabel: allBlocks.isEmpty ? "No blocks yet" : "\(allBlocks.count) block\(allBlocks.count == 1 ? "" : "s")",
                 highlight: highlight,
                 blocks: visibleBlocks,
-                overflowCount: max(contexts.count - visibleBlocks.count, 0),
+                overflowCount: max(allBlocks.count - visibleBlocks.count, 0),
                 openWindow: openWindow
             )
         }
+    }
+
+    private static func weekBlockKind(_ kind: TimeBlockKind) -> TimeWeekBlockKind {
+        switch kind {
+        case .protected: .protected
+        case .fixed, .externalBusy: .fixed
+        case .flexible, .scheduledStep, .recovery, .buffer, .needsMoreTime, .lighterPressure: .flexible
+        case .unavailable, .keepClear: .protected
+        }
+    }
+
+    private static func timingLabel(for block: TimeBlock, calendar: Calendar) -> String {
+        let formatter = DateFormatter()
+        formatter.calendar = calendar
+        formatter.timeZone = calendar.timeZone
+        formatter.dateStyle = .none
+        formatter.timeStyle = .short
+        let time = formatter.string(from: block.start)
+        return block.kind == .scheduledStep ? "Scheduled, \(time)" : time
     }
 
     func makeOpenWindow(

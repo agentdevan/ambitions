@@ -88,6 +88,39 @@ final class AppContainerFactoryTests: XCTestCase {
         XCTAssertFalse(factorySource.contains("EventKitIntegrationService("))
         XCTAssertTrue(factorySource.contains("AmbitionsCommandExecutor("))
         XCTAssertTrue(factorySource.contains("RuntimeCommandClient("))
+        XCTAssertTrue(factorySource.contains("scheduleStoreFileURL: scheduleStoreFileURL"))
+        XCTAssertTrue(factorySource.contains("let lifeCalendarURL = lifeCalendarStoreURL(for: configuration)"))
+        XCTAssertTrue(factorySource.contains(".applicationSupportDirectory"))
+        XCTAssertTrue(factorySource.contains("URL.temporaryDirectory"))
+        XCTAssertFalse(factorySource.contains("scheduleStoreFileURL: nil"))
+        let capabilitySource = try source("Native/Ambitions/App/AppCapabilities.swift")
+        let timeSurfaceSource = try source("Native/Ambitions/Surfaces/Time/TimeSurface.swift")
+        XCTAssertTrue(capabilitySource.contains("let runtimeCommandClient: RuntimeCommandClient"))
+        XCTAssertTrue(timeSurfaceSource.contains("featureFactory.runtimeCommandClient"))
+    }
+
+    func testPreviewAndDemoLifeCalendarStoresCannotResolveToLiveApplicationSupport() {
+        let isolationID = UUID(uuidString: "B323E7AD-4E2C-4C42-A820-99E1D6B0CACE")!
+        let secondIsolationID = UUID(uuidString: "A671B919-2DBD-4B24-B8FC-2EF29DF29C97")!
+        let live = AppContainerFactory.lifeCalendarStoreURL(for: .live, isolatedStoreID: isolationID)
+        let preview = AppContainerFactory.lifeCalendarStoreURL(for: .preview, isolatedStoreID: isolationID)
+        let secondPreview = AppContainerFactory.lifeCalendarStoreURL(for: .preview, isolatedStoreID: secondIsolationID)
+        #if DEBUG
+        let demo = AppContainerFactory.lifeCalendarStoreURL(for: .demo, isolatedStoreID: isolationID)
+        #endif
+
+        XCTAssertTrue(live.path.hasPrefix(URL.applicationSupportDirectory.path))
+        XCTAssertFalse(live.path.hasPrefix(URL.temporaryDirectory.path))
+        XCTAssertTrue(preview.path.hasPrefix(URL.temporaryDirectory.path))
+        XCTAssertNotEqual(preview, live)
+        XCTAssertNotEqual(secondPreview, preview)
+        #if DEBUG
+        XCTAssertTrue(demo.path.hasPrefix(URL.temporaryDirectory.path))
+        XCTAssertNotEqual(demo, live)
+        XCTAssertNotEqual(demo, preview)
+        #endif
+        XCTAssertEqual(live.lastPathComponent, "LifeCalendar.json")
+        XCTAssertEqual(preview.lastPathComponent, "LifeCalendar.json")
     }
 
     func testAppBootstrapDependencyGraphArtifactNamesCurrentOwners() throws {

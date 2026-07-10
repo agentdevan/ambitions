@@ -255,7 +255,7 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
             "Native/Ambitions/Core/LocalRuntimeOS/Projections/PathIntelligenceProjector.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/Projections/RealityModelProjector.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/Projections/ReviewsV1Projector.swift",
-            "Native/Ambitions/Core/LocalRuntimeOS/Boundary/AmbitionsRuntimeContracts.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Boundary/RuntimeCommandClient.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/Boundary/AmbitionsRuntimeFactory.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/Boundary/AmbitionsRuntimeServices.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/Boundary/AppServices.swift",
@@ -279,6 +279,12 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
                 "Missing AMB-1730 canonical owner after full legacy runtime pass: \(requiredPath)"
             )
         }
+        XCTAssertFalse(
+            FileManager.default.fileExists(
+                atPath: root.appendingPathComponent("Native/Ambitions/Core/LocalRuntimeOS/Boundary/AmbitionsRuntimeContracts.swift").path
+            ),
+            "The superseded AmbitionsRuntimeContracts owner must remain deleted after RuntimeCommandClient extraction."
+        )
     }
 
     func testRuntimeProjectionPipelineProducesLocalSnapshotWithProofCapacityAndRecovery() throws {

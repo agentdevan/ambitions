@@ -15,6 +15,7 @@ struct RepositoryBackedTodayService: TodayServicing {
     let goalIntelligenceService: (any RuntimeGoalIntelligenceServicing)?
     let derivedReadModelCache: TodayDerivedReadModelCache
     let clock: any AmbitionsClock
+    let lifeCalendarStore: LifeCalendarStore?
 
     init(
         repositories: AppRepositories,
@@ -31,6 +32,7 @@ struct RepositoryBackedTodayService: TodayServicing {
         explainabilityProjector: any GoalExplainabilityProjecting = DefaultGoalExplainabilityProjector(),
         goalIntelligenceService: (any RuntimeGoalIntelligenceServicing)? = nil,
         derivedReadModelCache: TodayDerivedReadModelCache = TodayDerivedReadModelCache(),
+        lifeCalendarStoreFileURL: URL? = nil,
         clock: any AmbitionsClock = SystemClock()
     ) {
         self.repositories = repositories
@@ -50,6 +52,7 @@ struct RepositoryBackedTodayService: TodayServicing {
         self.explainabilityProjector = explainabilityProjector
         self.goalIntelligenceService = goalIntelligenceService
         self.derivedReadModelCache = derivedReadModelCache
+        self.lifeCalendarStore = lifeCalendarStoreFileURL.map { LifeCalendarStore(fileURL: $0) }
         self.clock = clock
     }
 

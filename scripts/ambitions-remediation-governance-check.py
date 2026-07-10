@@ -112,6 +112,7 @@ STAGE_OVERLAY_REHOME_NEW_PREFIXES = (
 )
 
 APP_BOOTSTRAP_WIRING_FILES = {
+    "Native/Ambitions/App/AppContainerFactory.swift",
     "Native/Ambitions/App/Bootstrap/PersistenceBootstrap.swift",
     "Native/Ambitions/App/Bootstrap/RuntimeBootstrap.swift",
     "Native/Ambitions/App/Bootstrap/SystemSurfaceBootstrap.swift",
@@ -235,6 +236,24 @@ def is_local_runtime(path: str) -> bool:
 
 def is_app_bootstrap_wiring(path: str) -> bool:
     return path in APP_BOOTSTRAP_WIRING_FILES
+
+
+def has_mutation_authority_type(text: str) -> bool:
+    term_pattern = "|".join(NON_RUNTIME_MUTATION_TERMS)
+    declaration_pattern = re.compile(
+        rf"\b(?P<kind>struct|class|actor|enum|protocol)\s+(?P<name>\w*(?:{term_pattern})\w*)[^{{]*{{"
+    )
+    for match in declaration_pattern.finditer(text):
+        kind = match.group("kind")
+        name = match.group("name")
+        if kind == "struct" and name.endswith("Result"):
+            body_start = match.end()
+            body_end = text.find("}", body_start)
+            body = text[body_start:] if body_end < 0 else text[body_start:body_end]
+            if re.search(r"\bvar\s+\w+\s*:", body) is None:
+                continue
+        return True
+    return False
 
 
 def is_suffix_split_name(name: str) -> bool:
@@ -688,11 +707,10 @@ def governance_findings(args: argparse.Namespace) -> list[Finding]:
                     )
                 )
 
-            type_pattern = r"\b(struct|class|actor|enum|protocol)\s+\w*(?:" + "|".join(NON_RUNTIME_MUTATION_TERMS) + r")\w*"
             if (
                 not is_local_runtime(path)
                 and not is_app_bootstrap_wiring(path)
-                and (re.search(type_pattern, text) or has_any(MUTATION_WRITE_PATTERNS, text))
+                and (has_mutation_authority_type(text) or has_any(MUTATION_WRITE_PATTERNS, text))
             ):
                 findings.append(
                     Finding(
@@ -793,6 +811,14 @@ def self_test() -> int:
     assert rel(ROOT / "Native/AmbitionsTests/AppTests.swift").startswith("Native/AmbitionsTests/")
     assert is_local_runtime("Native/Ambitions/Core/LocalRuntimeOS/Commands/AmbitionsCommandExecutor.swift")
     assert not is_local_runtime("Native/Ambitions/Core/Runtime/CaptureService.swift")
+    assert is_app_bootstrap_wiring("Native/Ambitions/App/AppContainerFactory.swift")
+    assert not has_mutation_authority_type(
+        "struct TimeFeatureMutationResult: Sendable { let receiptID: String; let projectionVersion: Int64 }"
+    )
+    assert has_mutation_authority_type(
+        "struct MutableMutationResult { var projectionVersion: Int64 }"
+    )
+    assert has_mutation_authority_type("actor TimeMutationCoordinator {}")
     assert is_suffix_split_name("SwiftDataModels+04-AmbitionGraphProjectionRecordModel.swift")
     assert not is_suffix_split_name("SourceAtlasPackModels+06-SourceAtlasPack.swift")
     assert is_legacy_runtime_to_localruntimeos_suffix_move(

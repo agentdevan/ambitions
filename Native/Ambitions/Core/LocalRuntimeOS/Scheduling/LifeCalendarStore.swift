@@ -68,22 +68,41 @@ actor LifeCalendarStore {
     }
 
     func save(_ block: TimeBlock, occurredAt: Date = .now) throws -> LifeCalendarStoreReceipt {
-        blocksByID[block.id] = block
-        try persistIfNeeded(savedAt: occurredAt)
+        var candidate = blocksByID
+        candidate[block.id] = block
+        try persistIfNeeded(candidate: candidate, savedAt: occurredAt)
+        blocksByID = candidate
         return LifeCalendarStoreReceipt(action: "save", blockIDs: [block.id], graph: graph(), persisted: fileURL != nil, occurredAt: occurredAt)
     }
 
     func save(_ blocks: [TimeBlock], occurredAt: Date = .now) throws -> LifeCalendarStoreReceipt {
-        for block in blocks {
-            blocksByID[block.id] = block
-        }
-        try persistIfNeeded(savedAt: occurredAt)
+        var candidate = blocksByID
+        for block in blocks { candidate[block.id] = block }
+        try persistIfNeeded(candidate: candidate, savedAt: occurredAt)
+        blocksByID = candidate
         return LifeCalendarStoreReceipt(action: "save-many", blockIDs: blocks.map(\.id), graph: graph(), persisted: fileURL != nil, occurredAt: occurredAt)
     }
 
+    func replace(with blocks: [TimeBlock], occurredAt: Date = .now) throws -> LifeCalendarStoreReceipt {
+        let candidate = blocks.reduce(into: [String: TimeBlock]()) { result, block in
+            result[block.id] = block
+        }
+        try persistIfNeeded(candidate: candidate, savedAt: occurredAt)
+        blocksByID = candidate
+        return LifeCalendarStoreReceipt(
+            action: "replace",
+            blockIDs: blocks.map(\.id),
+            graph: graph(),
+            persisted: fileURL != nil,
+            occurredAt: occurredAt
+        )
+    }
+
     func delete(blockID: String, occurredAt: Date = .now) throws -> LifeCalendarStoreReceipt {
-        blocksByID[blockID] = nil
-        try persistIfNeeded(savedAt: occurredAt)
+        var candidate = blocksByID
+        candidate[blockID] = nil
+        try persistIfNeeded(candidate: candidate, savedAt: occurredAt)
+        blocksByID = candidate
         return LifeCalendarStoreReceipt(action: "delete", blockIDs: [blockID], graph: graph(), persisted: fileURL != nil, occurredAt: occurredAt)
     }
 
@@ -111,7 +130,7 @@ actor LifeCalendarStore {
         }
     }
 
-    private func persistIfNeeded(savedAt: Date) throws {
+    private func persistIfNeeded(candidate: [String: TimeBlock], savedAt: Date) throws {
         guard let fileURL else { return }
         do {
             let directory = fileURL.deletingLastPathComponent()
@@ -119,7 +138,7 @@ actor LifeCalendarStore {
             let snapshot = LifeCalendarStoreSnapshot(
                 schemaVersion: "life_calendar_store.native.v1",
                 savedAt: TemporalMath.string(from: savedAt),
-                blocks: graph().blocks
+                blocks: TimeBlockGraph(blocks: Array(candidate.values)).blocks
             )
             let encoder = JSONEncoder()
             encoder.dateEncodingStrategy = .iso8601

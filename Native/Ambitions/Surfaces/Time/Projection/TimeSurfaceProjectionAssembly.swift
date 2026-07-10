@@ -14,12 +14,13 @@ extension RepositoryBackedTimeService {
             guard let step = TimeRitualGoalSemantics.preferredStep(in: goal) else { return goal.mode == .habit }
             return goal.mode == .habit || TimeRitualGoalSemantics.isRitualLike(goal: goal, step: step)
         }
-        let mode: TimeSurfaceMode = activeGoals.isEmpty && snapshot.drafts.isEmpty && openCaptures.isEmpty ? .empty : .active
+        let mode: TimeSurfaceMode = activeGoals.isEmpty && snapshot.drafts.isEmpty && openCaptures.isEmpty && snapshot.timeBlocks.isEmpty ? .empty : .active
         let missingGoalSummaries = activeGoalSummaries.filter { $0.contexts.isEmpty }
         let mostPressuredGoal = pressuredGoalSummary(from: activeGoalSummaries)
         let weekDays = makeWeekDays(
             summaries: activeGoalSummaries,
             missingGoalSummaries: missingGoalSummaries,
+            timeBlocks: snapshot.timeBlocks,
             now: now
         )
         let placementCandidates = makePlacementCandidates(

@@ -230,7 +230,7 @@ extension EventStoreSQLite {
 
     static func requiresSemanticEvent(_ kind: AmbitionsCommandKind) -> Bool {
         switch kind {
-        case .quickCapture, .createTimeItem, .placeStepInTime: true
+        case .quickCapture, .createTimeItem, .placeStepInTime, .protectTimeWindow, .correctTimeWindow: true
         default: false
         }
     }

@@ -7,24 +7,32 @@ enum TimeBlockKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable
     case scheduledStep = "scheduled_step"
     case recovery
     case buffer
+    case unavailable
+    case needsMoreTime = "needs_more_time"
+    case keepClear = "keep_clear"
+    case lighterPressure = "lighter_pressure"
     case externalBusy = "external_busy"
 
     var consumesCapacity: Bool {
         switch self {
-        case .protected, .fixed, .scheduledStep, .buffer, .externalBusy:
+        case .protected, .fixed, .scheduledStep, .buffer, .unavailable, .keepClear, .externalBusy:
             true
-        case .flexible, .recovery:
+        case .flexible, .recovery, .needsMoreTime, .lighterPressure:
             false
         }
     }
 
     var protectsBoundary: Bool {
         switch self {
-        case .protected, .fixed:
+        case .protected, .fixed, .keepClear:
             true
-        case .flexible, .scheduledStep, .recovery, .buffer, .externalBusy:
+        case .flexible, .scheduledStep, .recovery, .buffer, .unavailable, .needsMoreTime, .lighterPressure, .externalBusy:
             false
         }
+    }
+
+    var appearsAsScheduledTodayBlock: Bool {
+        consumesCapacity
     }
 }
 

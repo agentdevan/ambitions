@@ -15,6 +15,7 @@ extension RepositoryBackedTimeService {
         let weekDays = makeWeekDays(
             summaries: activeGoalSummaries,
             missingGoalSummaries: missingGoalSummaries,
+            timeBlocks: snapshot.timeBlocks,
             now: now
         )
         let posture = postureState(

@@ -82,7 +82,8 @@ struct RuntimeCommitReceipt: Sendable, Codable, Equatable, Hashable, Identifiabl
     }
 
     func resultMetadata(disposition: RuntimeTransactionCommitDisposition) -> [String: String] {
-        [
+        let orderedProjectionCursors = projectionCursors.sorted()
+        return [
             "runtimeTransactionDisposition": disposition.rawValue,
             "runtimeTransactionID": transactionID,
             "runtimeEventID": eventID,
@@ -90,7 +91,10 @@ struct RuntimeCommitReceipt: Sendable, Codable, Equatable, Hashable, Identifiabl
             "runtimeRollbackPlanID": rollbackPlanID,
             "runtimeReplayTraceID": replayTraceID,
             "runtimeProjectionCursorCount": String(projectionCursors.count),
-            "runtimeProjectionIDs": projectionCursors.map(\.projectionID.rawValue).sorted().joined(separator: ","),
+            "runtimeProjectionIDs": orderedProjectionCursors.map(\.projectionID.rawValue).joined(separator: ","),
+            "runtimeProjectionCursorIDs": orderedProjectionCursors.map(\.projectionID.rawValue).joined(separator: ","),
+            "runtimeProjectionCursorSequences": orderedProjectionCursors.map { String($0.sequence) }.joined(separator: ","),
+            "runtimeProjectionCursorChecksums": orderedProjectionCursors.map(\.checksum).joined(separator: ","),
         ]
     }
 }

@@ -8,9 +8,10 @@ extension RepositoryBackedTimeService {
         let evidence: [ProgressEvidence]
         let feedback: [GoalFeedbackEvent]
         let captures: [Capture]
+        let timeBlocks: [TimeBlock]
 
         static var empty: Self {
-            Self(goals: [], drafts: [], evidence: [], feedback: [], captures: [])
+            Self(goals: [], drafts: [], evidence: [], feedback: [], captures: [], timeBlocks: [])
         }
     }
 
@@ -39,13 +40,21 @@ extension RepositoryBackedTimeService {
         async let evidence = repositories.evidence.listEvidence(goalID: nil)
         async let feedback = repositories.feedback.listEvents(goalID: nil)
         async let captures = repositories.captures.listCaptures()
+        let timeBlocks: [TimeBlock]
+        if let lifeCalendarStore {
+            _ = try await lifeCalendarStore.loadFromDisk()
+            timeBlocks = await lifeCalendarStore.graph().blocks
+        } else {
+            timeBlocks = []
+        }
 
         return try await Snapshot(
             goals: goals,
             drafts: drafts,
             evidence: evidence,
             feedback: feedback,
-            captures: captures
+            captures: captures,
+            timeBlocks: timeBlocks
         )
     }
 

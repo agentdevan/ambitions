@@ -53,6 +53,7 @@ final class AppContainer {
         bootstrapConfiguration: AppBootstrapConfiguration,
         session: AppSession,
         clock: any AmbitionsClock,
+        runtimeCommandClient: RuntimeCommandClient,
         runtime: AmbitionsRuntime,
         appearancePreference: AppAppearancePreference,
         accentFamily: AmbitionAccentFamily,
@@ -112,6 +113,7 @@ final class AppContainer {
         )
         self.featureFactory = AppFeatureFactoryCapability(
             clock: clock,
+            runtimeCommandClient: runtimeCommandClient,
             todayService: todayService,
             todayReceiptCommands: todayReceiptCommands,
             captureService: captureService,

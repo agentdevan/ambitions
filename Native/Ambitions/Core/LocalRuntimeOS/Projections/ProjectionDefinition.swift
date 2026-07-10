@@ -100,7 +100,7 @@ extension ProjectionDefinition {
             return ProjectionDefinition(
                 id: .today,
                 family: .surface,
-                consumesEventKinds: [.commandExecution, .captureRouteDecided, .closureRecorded, .correctionRecorded, .timePlacementProposed, .tombstoneRecorded],
+                consumesEventKinds: [.commandExecution, .captureRouteDecided, .closureRecorded, .correctionRecorded, .domainMutation, .timePlacementProposed, .tombstoneRecorded],
                 readModelInventory: [
                     .init(sourcePath: "Native/Ambitions/Surfaces/Today/Projection/TodayReadModelProjector.swift", responsibility: "Today execution read model assembly", migrationTarget: .today),
                     .init(sourcePath: "Native/Ambitions/Surfaces/Today/Projection/TodayExecutionProjector.swift", responsibility: "Today Stage execution projection", migrationTarget: .today),

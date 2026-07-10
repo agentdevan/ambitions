@@ -9,6 +9,7 @@ extension RepositoryBackedTodayService {
         let captures: [Capture]
         let eventLedger: [EventLedgerEntry]
         let appState: AppStateSnapshot
+        let timeBlocks: [TimeBlock]
     }
 
     func loadSnapshot() async throws -> Snapshot {
@@ -23,6 +24,13 @@ extension RepositoryBackedTodayService {
         let rejectionFeedback = rejectionFeedbackEvents(from: receiptHistoryRecords)
         let accomplishmentFeedback = accomplishmentFeedbackEvents(from: receiptHistoryRecords)
         let feedback = Self.sortedFeedbackEvents(baseFeedback + rejectionFeedback + accomplishmentFeedback)
+        let timeBlocks: [TimeBlock]
+        if let lifeCalendarStore {
+            _ = try await lifeCalendarStore.loadFromDisk()
+            timeBlocks = await lifeCalendarStore.graph().blocks
+        } else {
+            timeBlocks = []
+        }
 
         return try await Snapshot(
             goals: goals,
@@ -31,7 +39,8 @@ extension RepositoryBackedTodayService {
             feedback: feedback,
             captures: captures,
             eventLedger: eventLedger,
-            appState: appState
+            appState: appState,
+            timeBlocks: timeBlocks
         )
     }
 

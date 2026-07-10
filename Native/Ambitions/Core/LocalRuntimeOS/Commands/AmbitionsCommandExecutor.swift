@@ -97,6 +97,10 @@ struct AmbitionsCommandExecutor: CommandExecuting {
                 let materialized = await materializeQuickCapture(command, context: context, committedResult: replayed)
                 return await persistFinalMaterialization(command: command, result: materialized, at: context.now)
             }
+            if command.kind.isTimeMutation, authorityReceipt != nil {
+                let materialized = await materializeTime(command, context: context, committedResult: replayed)
+                return await persistFinalMaterialization(command: command, result: materialized, at: context.now)
+            }
             return replayed
         case .commandRecordWithoutRuntimeEvent(let record):
             return replayAdapter.commandRecordWithoutRuntimeEventResult(for: command, record: record)
@@ -191,6 +195,8 @@ struct AmbitionsCommandExecutor: CommandExecuting {
             result = await executeConfirmedCalendarWriteIntent(command, context: context)
         case .createTimeItem, .scheduleItem:
             result = await executePlanSeedRepresentation(command, context: context)
+        case .placeStepInTime, .protectTimeWindow, .correctTimeWindow:
+            result = await executeTimeCommand(command)
         default:
             result = AmbitionsCommandExecutionResult(
                 status: .unsupported,
@@ -218,6 +224,12 @@ struct AmbitionsCommandExecutor: CommandExecuting {
            persistedResult.status == .succeeded,
            RuntimeTransactionCommitPolicy.hasCommittedEvidence(persistedResult) {
             let materialized = await materializeQuickCapture(command, context: context, committedResult: persistedResult)
+            return await persistFinalMaterialization(command: command, result: materialized, at: context.now)
+        }
+        if command.kind.isTimeMutation,
+           persistedResult.status == .succeeded,
+           RuntimeTransactionCommitPolicy.hasCommittedEvidence(persistedResult) {
+            let materialized = await materializeTime(command, context: context, committedResult: persistedResult)
             return await persistFinalMaterialization(command: command, result: materialized, at: context.now)
         }
         return persistedResult

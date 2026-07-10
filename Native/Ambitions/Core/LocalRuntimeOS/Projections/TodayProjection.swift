@@ -7,7 +7,18 @@ struct TodayProjection: Codable, Equatable, Hashable {
     let captureRouteEventIDs: [String]
     let closureEventIDs: [String]
     let timePlacementEventIDs: [String]
+    let timeMutationEventIDs: [String]
     let recentRecords: [ProjectionEventRecord]
+
+    private enum CodingKeys: String, CodingKey {
+        case cursor
+        case startHereCommandEventIDs
+        case captureRouteEventIDs
+        case closureEventIDs
+        case timePlacementEventIDs
+        case timeMutationEventIDs
+        case recentRecords
+    }
 
     init(context: ProjectionBuildContext) throws {
         let todayRecords = context.records.filter { record in
@@ -16,7 +27,8 @@ struct TodayProjection: Codable, Equatable, Hashable {
                 record.route == .captureInbox ||
                 record.kind == .captureRouteDecided ||
                 record.kind == .closureRecorded ||
-                record.kind == .timePlacementProposed
+                record.kind == .timePlacementProposed ||
+                Self.isTimeMutation(record)
         }
         startHereCommandEventIDs = todayRecords
             .filter { $0.kind == .commandExecution }
@@ -30,12 +42,33 @@ struct TodayProjection: Codable, Equatable, Hashable {
         timePlacementEventIDs = todayRecords
             .filter { $0.kind == .timePlacementProposed }
             .map(\.id)
+        timeMutationEventIDs = todayRecords
+            .filter(Self.isTimeMutation)
+            .map(\.id)
         recentRecords = Array(todayRecords.suffix(12))
         cursor = try context.cursor(payloadFingerprint: ProjectionChecksum.digest([
             "startHere": startHereCommandEventIDs,
             "captureRoutes": captureRouteEventIDs,
             "closures": closureEventIDs,
             "timePlacements": timePlacementEventIDs,
+            "timeMutations": timeMutationEventIDs,
         ]))
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        cursor = try container.decode(ProjectionCursor.self, forKey: .cursor)
+        startHereCommandEventIDs = try container.decode([String].self, forKey: .startHereCommandEventIDs)
+        captureRouteEventIDs = try container.decode([String].self, forKey: .captureRouteEventIDs)
+        closureEventIDs = try container.decode([String].self, forKey: .closureEventIDs)
+        timePlacementEventIDs = try container.decode([String].self, forKey: .timePlacementEventIDs)
+        timeMutationEventIDs = try container.decodeIfPresent([String].self, forKey: .timeMutationEventIDs) ?? []
+        recentRecords = try container.decode([ProjectionEventRecord].self, forKey: .recentRecords)
+    }
+
+    private static func isTimeMutation(_ record: ProjectionEventRecord) -> Bool {
+        guard record.kind == .domainMutation else { return false }
+        return record.metadata["domainEventTypeID"]?.hasPrefix("ambitions.time.") == true ||
+            (record.metadata["domainEventTypeID"] == "ambitions.mutation.undone" && record.source == .time)
     }
 }

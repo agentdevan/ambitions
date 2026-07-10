@@ -31,9 +31,7 @@ enum PreviewAppContainerFactory {
             repositories: runtime.repositories,
             loadDashboard: { try await youService.loadYouDashboard() }
         )
-        let commandRouter = DefaultShellCommandRouter(
-            navigation: navigation,
-            commandExecutor: AmbitionsCommandExecutor(
+        let commandExecutor = AmbitionsCommandExecutor(
                 captureService: captureService,
                 eventLedger: runtime.repositories.eventLedger,
                 commandExecutionRecords: runtime.repositories.commandExecutionRecords,
@@ -43,7 +41,29 @@ enum PreviewAppContainerFactory {
                 commandJournal: runtime.repositories.commandJournal,
                 runtimeTransactionIdempotencyStore: RuntimeIdempotencyStore(),
                 receiptFactory: CommandReceiptFactory()
-            )
+        )
+        let runtimeCommandClient = RuntimeCommandClient(
+            execute: { command, context in
+                await commandExecutor.execute(command, context: context)
+            },
+            projection: { request in
+                guard let projectionStore = runtime.repositories.projectionStore,
+                      let record = try await projectionStore.fetchRecord(id: request.projectionID) else {
+                    throw RuntimeProjectionClientError.projectionUnavailable(request)
+                }
+                return RuntimeProjectionSnapshot(
+                    projectionID: record.id.rawValue,
+                    payload: record.payloadData,
+                    eventSequence: record.cursor.sequence,
+                    cursorChecksum: record.cursor.checksum,
+                    payloadChecksum: record.payloadChecksum,
+                    materializedAt: record.materializedAt
+                )
+            }
+        )
+        let commandRouter = DefaultShellCommandRouter(
+            navigation: navigation,
+            commandExecutor: commandExecutor
         )
         let memoryLensService = DefaultMemoryLensService(repositories: runtime.repositories)
         return AppContainer(
@@ -59,6 +79,7 @@ enum PreviewAppContainerFactory {
                 shouldShowOnboarding: false
             ),
             clock: clock,
+            runtimeCommandClient: runtimeCommandClient,
             runtime: runtime,
             appearancePreference: fixtures.preferences.appearancePreference,
             accentFamily: fixtures.preferences.accentFamily,

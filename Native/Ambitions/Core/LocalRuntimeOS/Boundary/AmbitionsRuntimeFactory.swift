@@ -9,6 +9,7 @@ enum AmbitionsRuntimeFactory {
         capabilities: AmbitionsRuntimeCapabilities = .currentLocalRuntime,
         notificationService: any NotificationServicing,
         calendarRemindersService: any CalendarRemindersServicing,
+        scheduleStoreFileURL: URL? = nil,
         syncCapability: any SyncCapability = LocalOnlySyncCapability(),
         externalSnapshotReader: any RuntimeExternalSurfaceSnapshotReading = FileRuntimeExternalSurfaceSnapshotReader(),
         knowledgeProvider: any KnowledgeProviding = LocalOnlyKnowledgeProvider()
@@ -55,6 +56,7 @@ enum AmbitionsRuntimeFactory {
                 energyLearningService: energyLearningService,
                 selector: selector,
                 goalIntelligenceService: goalIntelligenceService,
+                lifeCalendarStoreFileURL: scheduleStoreFileURL,
                 clock: clock
             ),
             snapshotWriter: snapshotWriter
@@ -120,6 +122,7 @@ enum AmbitionsRuntimeFactory {
             timeService: RepositoryBackedTimeService(
                 repositories: repositories,
                 calendarRealityService: calendarRemindersService as? any CalendarRealityServicing,
+                lifeCalendarStoreFileURL: scheduleStoreFileURL,
                 clock: clock
             ),
             insightsService: RepositoryBackedInsightsService(repositories: repositories),

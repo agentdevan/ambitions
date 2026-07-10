@@ -160,7 +160,26 @@ extension TodayExecutionProjector {
     }
 
     func todayTimeLayer(_ input: TodayExecutionProjectionInput, hero: TodayExecutionHeroState) -> TodayTimeLayerState {
-        var items: [TodayTimeLayerItemState] = input.legacySupport.fixedCommitments.items.prefix(3).map {
+        var items: [TodayTimeLayerItemState] = (input.realitySnapshot?.scheduledBlocks ?? []).prefix(3).map { block in
+            TodayTimeLayerItemState(
+                id: "today2.time.life-calendar.\(block.id)",
+                title: block.title.shortened(maxLength: 48),
+                subtitle: "Saved locally in Life Calendar.",
+                timingLabel: Self.timeLabel(block.start),
+                sourceLabel: "Based on your Time",
+                semanticState: .focus,
+                action: TodayInlineAction(
+                    kind: .openTime,
+                    title: "Open Time",
+                    systemImage: "calendar.badge.clock",
+                    state: .selected,
+                    target: TodayActionTarget(goalID: block.relatedGoalID, stepID: block.relatedPlanID)
+                )
+            )
+        }
+
+        if items.count < 3 {
+            let fixedItems = input.legacySupport.fixedCommitments.items.prefix(3 - items.count).map {
             TodayTimeLayerItemState(
                 id: "today2.time.fixed.\($0.id)",
                 title: $0.title.shortened(maxLength: 48),
@@ -170,6 +189,8 @@ extension TodayExecutionProjector {
                 semanticState: .protected,
                 action: $0.action ?? hero.primaryAction
             )
+            }
+            items.append(contentsOf: fixedItems)
         }
 
         if items.count < 3 {
@@ -244,6 +265,13 @@ extension TodayExecutionProjector {
                 : "\(items.count) planned item\(items.count == 1 ? "" : "s"). \(compactTimeline). \(source). \(openWindow).",
             accessibilityHint: "Shows the planned day and visible buttons to start, adjust, park, or mark done without requesting calendar access here."
         )
+    }
+
+    private static func timeLabel(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .none
+        formatter.timeStyle = .short
+        return formatter.string(from: date)
     }
 
     func oneStepGoalsPanel(_ input: TodayExecutionProjectionInput) -> TodayOneStepGoalsPanelState {

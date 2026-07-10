@@ -17,10 +17,6 @@ struct RuntimeMutation: Sendable, Equatable, Identifiable {
         timeMutation: TimeMutation? = nil
     ) {
         guard validation.canMutate else { return nil }
-        guard Self.requiresTimeTodayCoupling(command) == false || timeMutation?.todayRecompute.recomputedToday == true else {
-            return nil
-        }
-
         let affectedIDs = Self.affectedObjectIDs(command, timeMutation: timeMutation)
         let actionReference = MutationActionReference(
             commandID: command.id,
@@ -101,15 +97,6 @@ struct RuntimeMutation: Sendable, Equatable, Identifiable {
         validation.canMutate &&
             stageMutation.isCanonComplete &&
             userVisibleMutation.isCanonComplete
-    }
-
-    private static func requiresTimeTodayCoupling(_ command: AmbitionsCommand) -> Bool {
-        switch command.kind {
-        case .placeStepInTime, .protectTimeWindow, .correctTimeWindow:
-            true
-        default:
-            false
-        }
     }
 
     private static func affectedObjectIDs(_ command: AmbitionsCommand, timeMutation: TimeMutation?) -> [String] {

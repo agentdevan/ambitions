@@ -162,11 +162,29 @@ struct TimeSurface: View {
     }
 
     private func performLifeShapeMutation(_ action: TimeFieldMutationAction, selectedMark: LifeShapeSemanticMark?) {
-        viewModel.performLifeShapeMutation(action, selectedMark: selectedMark, now: clock.now)
+        Task {
+            await viewModel.performLifeShapeMutation(
+                action,
+                selectedMark: selectedMark,
+                now: clock.now,
+                runtimeClient: featureFactory.runtimeCommandClient,
+                service: featureFactory.timeService,
+                calendar: clock.calendar,
+                timeZone: clock.timeZone
+            )
+        }
     }
 
     private func undoLifeShapeMutation() {
-        viewModel.undoLastLifeShapeMutation(now: clock.now)
+        Task {
+            await viewModel.undoLastLifeShapeMutation(
+                now: clock.now,
+                runtimeClient: featureFactory.runtimeCommandClient,
+                service: featureFactory.timeService,
+                calendar: clock.calendar,
+                timeZone: clock.timeZone
+            )
+        }
     }
 
     @ViewBuilder
@@ -214,7 +232,15 @@ struct TimeSurface: View {
     }
 
     private func approveProtectedPlacementReview() {
-        viewModel.approveProtectedPlacementReview(now: clock.now)
+        Task {
+            await viewModel.approveProtectedPlacementReview(
+                now: clock.now,
+                runtimeClient: featureFactory.runtimeCommandClient,
+                service: featureFactory.timeService,
+                calendar: clock.calendar,
+                timeZone: clock.timeZone
+            )
+        }
     }
 
     private func updateProtectedPlacementPriority(_ priority: PlacementPriority) {

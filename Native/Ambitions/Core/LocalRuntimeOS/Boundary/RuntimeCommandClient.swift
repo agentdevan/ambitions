@@ -30,6 +30,7 @@ struct RuntimeProjectionSnapshot: Sendable, Equatable {
     let projectionID: String
     let payload: Data
     let eventSequence: Int64
+    let cursorChecksum: String
     let payloadChecksum: String
     let materializedAt: String
 }

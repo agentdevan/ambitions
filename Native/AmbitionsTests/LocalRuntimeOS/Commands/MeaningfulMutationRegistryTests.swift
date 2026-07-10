@@ -2,23 +2,26 @@ import XCTest
 @testable import Ambitions
 
 final class MeaningfulMutationRegistryTests: XCTestCase {
-    func testKnownSyntheticTimeMutationEntryPointsAreRegisteredAsUnproven() {
-        let expected = [
+    func testTimeMutationEntryPointsRequireDurableRuntimeLineage() {
+        let expected = Set([
             "TimeViewModel.performLifeShapeMutation",
             "TimeViewModel.approveProtectedPlacementReview",
             "TimeViewModel.undoLastLifeShapeMutation",
-        ]
-        let registered = Set(
-            MeaningfulMutationRegistry.descriptors
-                .filter { $0.status == .unproven }
-                .map(\.sourcePath)
-        )
-        let missing = expected.filter { registered.contains($0) == false }
+        ])
+        let registered = MeaningfulMutationRegistry.descriptors.filter { expected.contains($0.sourcePath) }
 
-        XCTAssertTrue(
-            missing.isEmpty,
-            "Unproven Time mutation entry points missing from the registry: \(missing.joined(separator: ", "))"
-        )
+        XCTAssertEqual(Set(registered.map(\.sourcePath)), expected)
+        for descriptor in registered {
+            XCTAssertEqual(descriptor.status, .durable, descriptor.sourcePath)
+            XCTAssertEqual(descriptor.executorOwner, "AmbitionsCommandExecutor", descriptor.sourcePath)
+            XCTAssertTrue(descriptor.durableStores.contains("EventStoreSQLite"), descriptor.sourcePath)
+            XCTAssertTrue(descriptor.durableStores.contains("LifeCalendarStore"), descriptor.sourcePath)
+            XCTAssertNotNil(descriptor.eventKind, descriptor.sourcePath)
+            XCTAssertEqual(descriptor.projectionOwner, "RepositoryBackedTimeService", descriptor.sourcePath)
+            XCTAssertEqual(descriptor.receiptOwner, "RuntimeCommitReceipt", descriptor.sourcePath)
+            XCTAssertNotNil(descriptor.replayTestID, descriptor.sourcePath)
+            XCTAssertFalse(descriptor.proofTestIDs.isEmpty, descriptor.sourcePath)
+        }
     }
 
     func testRegistryRowsHaveUniqueIdentityExplicitClassificationAndRationale() {

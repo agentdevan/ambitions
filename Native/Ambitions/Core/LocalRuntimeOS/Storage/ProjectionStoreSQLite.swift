@@ -24,6 +24,7 @@ struct ProjectionStoreCommitReceipt: Codable, Sendable, Equatable, Hashable, Ide
     let id: String
     let storedProjectionIDs: [ProjectionID]
     let cursorSequencesByProjectionID: [ProjectionID: Int64]
+    let cursorChecksumsByProjectionID: [ProjectionID: String]
     let updatedAt: String
     let storageTier: LocalRuntimeStorageTier
     let localOnly: Bool
@@ -36,6 +37,7 @@ struct ProjectionStoreCommitReceipt: Codable, Sendable, Equatable, Hashable, Ide
     ) {
         storedProjectionIDs = records.map(\.id).sorted()
         cursorSequencesByProjectionID = Dictionary(uniqueKeysWithValues: records.map { ($0.id, $0.cursor.sequence) })
+        cursorChecksumsByProjectionID = Dictionary(uniqueKeysWithValues: records.map { ($0.id, $0.cursor.checksum) })
         self.updatedAt = updatedAt
         storageTier = .projectionStoreSQLite
         localOnly = true

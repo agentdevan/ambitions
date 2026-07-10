@@ -33,7 +33,13 @@ struct PrivateLifeRuntime: Sendable {
         targetSurface: StageMutationTargetSurface,
         timeMutation: TimeMutation? = nil
     ) -> RuntimeMutation? {
-        RuntimeMutation(
+        switch command.kind {
+        case .placeStepInTime, .protectTimeWindow, .correctTimeWindow:
+            guard timeMutation?.todayRecompute.recomputedToday == true else { return nil }
+        default:
+            break
+        }
+        return RuntimeMutation(
             command: command,
             validation: validate(command),
             beforeSnapshot: beforeSnapshot,

@@ -10,13 +10,15 @@ enum RuntimeBootstrap {
         repositories: AppRepositories,
         clock: any AmbitionsClock,
         notificationService: any NotificationServicing,
-        calendarRemindersService: any CalendarRemindersServicing
+        calendarRemindersService: any CalendarRemindersServicing,
+        scheduleStoreFileURL: URL
     ) -> AmbitionsRuntime {
         AmbitionsRuntimeFactory.make(
             repositories: repositories,
             clock: clock,
             notificationService: notificationService,
-            calendarRemindersService: calendarRemindersService
+            calendarRemindersService: calendarRemindersService,
+            scheduleStoreFileURL: scheduleStoreFileURL
         )
     }
 

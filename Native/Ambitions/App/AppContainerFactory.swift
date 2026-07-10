@@ -52,11 +52,13 @@ enum AppContainerFactory {
         let repositories = try await prepareRepositories(for: configuration)
         let clock = RuntimeBootstrap.clock(for: configuration)
         let platformServices = SystemSurfaceBootstrap.makePlatformServices(repositories: repositories)
+        let lifeCalendarURL = lifeCalendarStoreURL(for: configuration)
         let runtime = RuntimeBootstrap.makeRuntime(
             repositories: repositories,
             clock: clock,
             notificationService: platformServices.notificationService,
-            calendarRemindersService: platformServices.calendarRemindersService
+            calendarRemindersService: platformServices.calendarRemindersService,
+            scheduleStoreFileURL: lifeCalendarURL
         )
         let session = try await SystemSurfaceBootstrap.prepareSession(
             configuration: configuration,
@@ -67,7 +69,8 @@ enum AppContainerFactory {
         let externalRouter = DefaultAppExternalRouter(navigation: navigation)
         let runtimeCommandClient = makeRuntimeCommandClient(
             repositories: repositories,
-            captureService: runtime.captureService
+            captureService: runtime.captureService,
+            scheduleStoreFileURL: lifeCalendarURL
         )
         let surfaceServices = SystemSurfaceBootstrap.makeServices(
             repositories: repositories,
@@ -89,6 +92,7 @@ enum AppContainerFactory {
             bootstrapConfiguration: configuration,
             session: session,
             clock: clock,
+            runtimeCommandClient: runtimeCommandClient,
             runtime: runtime,
             appearancePreference: session.appearancePreference,
             accentFamily: session.accentFamily,
@@ -124,7 +128,8 @@ enum AppContainerFactory {
 
     private static func makeRuntimeCommandClient(
         repositories: AppRepositories,
-        captureService: any CaptureServicing
+        captureService: any CaptureServicing,
+        scheduleStoreFileURL: URL
     ) -> RuntimeCommandClient {
         let executor = AmbitionsCommandExecutor(
             captureService: captureService,
@@ -142,7 +147,7 @@ enum AppContainerFactory {
             runtimeValidator: nil,
             compiler: nil,
             receiptFactory: CommandReceiptFactory(),
-            scheduleStoreFileURL: nil
+            scheduleStoreFileURL: scheduleStoreFileURL
         )
         let projectionStore = repositories.projectionStore
 
@@ -159,11 +164,30 @@ enum AppContainerFactory {
                     projectionID: record.id.rawValue,
                     payload: record.payloadData,
                     eventSequence: record.cursor.sequence,
+                    cursorChecksum: record.cursor.checksum,
                     payloadChecksum: record.payloadChecksum,
                     materializedAt: record.materializedAt
                 )
             }
         )
+    }
+
+    static func lifeCalendarStoreURL(
+        for configuration: AppBootstrapConfiguration,
+        isolatedStoreID: UUID = UUID()
+    ) -> URL {
+        let root: URL
+        switch configuration.sessionSource {
+        case .live:
+            root = URL.applicationSupportDirectory
+                .appendingPathComponent("AmbitionsLocalRuntimeOS", isDirectory: true)
+        case .preview, .demo:
+            root = URL.temporaryDirectory
+                .appendingPathComponent("AmbitionsPreviewData", isDirectory: true)
+                .appendingPathComponent(configuration.sessionSource.rawValue, isDirectory: true)
+                .appendingPathComponent(isolatedStoreID.uuidString, isDirectory: true)
+        }
+        return root.appendingPathComponent("LifeCalendar.json", isDirectory: false)
     }
 
     static func appRoute(

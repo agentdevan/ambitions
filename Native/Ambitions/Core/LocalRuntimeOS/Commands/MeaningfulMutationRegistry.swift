@@ -31,13 +31,47 @@ struct MeaningfulMutationWritePathDescriptor: Sendable, Hashable {
 }
 
 enum MeaningfulMutationRegistry {
-    static let declaredMutationRowCount = 113
+    static let declaredMutationRowCount = 114
     static let declaredWritePathRowCount = 50
 
     static let descriptors: [MeaningfulMutationDescriptor] = [
-        mutation(id: "time.life-shape", sourcePath: "TimeViewModel.performLifeShapeMutation", commandKind: .placeStepInTime, status: .unproven, rationale: "Time applies synthetic projection state without durable restart or replay proof."),
-        mutation(id: "time.protected-placement-approval", sourcePath: "TimeViewModel.approveProtectedPlacementReview", commandKind: .protectTimeWindow, status: .unproven, rationale: "Protected placement approval mutates in-memory Time state without a durable receipt."),
-        mutation(id: "time.undo", sourcePath: "TimeViewModel.undoLastLifeShapeMutation", commandKind: .correctTimeWindow, status: .unproven, rationale: "Time undo restores a cached snapshot rather than replaying a durable command."),
+        mutation(
+            id: "preview.runtime-command-client",
+            sourcePath: "PreviewAppContainerFactory.preview",
+            commandKind: .placeStepInTime,
+            status: .previewOnly,
+            rationale: "DEBUG-only preview composition installs an in-memory runtime command closure; it is not production mutation authority."
+        ),
+        mutation(
+            id: "time.life-shape", sourcePath: "TimeViewModel.performLifeShapeMutation", commandKind: .placeStepInTime,
+            status: .durable, rationale: "Time executes through the durable command journal and SQLite authority, then reloads the Life Calendar projection.",
+            executorOwner: "AmbitionsCommandExecutor", durableStores: ["FileCommandJournal", "EventStoreSQLite", "LifeCalendarStore"],
+            eventKind: "ambitions.step.placed", projectionOwner: "RepositoryBackedTimeService", receiptOwner: "RuntimeCommitReceipt",
+            replayTestID: "AmbitionsTests/TimeCommandReplayTests/testUndoRequiresReceiptAndProjectionVersionAndCannotApplyTwice",
+            proofTestIDs: [
+                "AmbitionsTests/TimeDurableMutationIntegrationTests/testPlaceStepSurvivesRuntimeRestartWithIdenticalProjectionReceiptAndSchedule",
+                "AmbitionsTests/TimeDurableMutationIntegrationTests/testDuplicateCommandReturnsOneReceiptOneJournalEnvelopeAndOneScheduleBlock",
+            ]
+        ),
+        mutation(
+            id: "time.protected-placement-approval", sourcePath: "TimeViewModel.approveProtectedPlacementReview", commandKind: .placeStepInTime,
+            status: .durable, rationale: "Explicit protected-placement approval executes the same durable Time command and reloads committed projection state.",
+            executorOwner: "AmbitionsCommandExecutor", durableStores: ["FileCommandJournal", "EventStoreSQLite", "LifeCalendarStore"],
+            eventKind: "ambitions.step.placed", projectionOwner: "RepositoryBackedTimeService", receiptOwner: "RuntimeCommitReceipt",
+            replayTestID: "AmbitionsTests/TimeDurableMutationIntegrationTests/testPlaceStepSurvivesRuntimeRestartWithIdenticalProjectionReceiptAndSchedule",
+            proofTestIDs: ["AmbitionsTests/TimeProtectedPlacementReviewTests/testP2BBApproveProtectedReviewAppliesPlacementAfterExplicitAction"]
+        ),
+        mutation(
+            id: "time.undo", sourcePath: "TimeViewModel.undoLastLifeShapeMutation", commandKind: .correctTimeWindow,
+            status: .durable, rationale: "Undo requires the original committed receipt and expected projection version, emits a semantic undo, and reconstructs the schedule on replay.",
+            executorOwner: "AmbitionsCommandExecutor", durableStores: ["FileCommandJournal", "EventStoreSQLite", "LifeCalendarStore"],
+            eventKind: "ambitions.mutation.undone", projectionOwner: "RepositoryBackedTimeService", receiptOwner: "RuntimeCommitReceipt",
+            replayTestID: "AmbitionsTests/TimeCommandReplayTests/testUndoRequiresReceiptAndProjectionVersionAndCannotApplyTwice",
+            proofTestIDs: [
+                "AmbitionsTests/TimeCommandReplayTests/testUndoRejectsStaleProjectionVersionWithoutChangingSchedule",
+                "AmbitionsTests/TimeCommandReplayTests/testUndoRequiresReceiptAndProjectionVersionAndCannotApplyTwice",
+            ]
+        ),
         mutation(id: "time.calendar-aware-view-model", sourcePath: "TimeViewModel.makeCalendarAware", commandKind: .scheduleItem, status: .unproven, rationale: "Time ViewModel calendar-aware action delegates to a legacy projection service."),
         mutation(id: "today.view-model-action", sourcePath: "TodayViewModel.handle", commandKind: .completeAction, status: .unproven, rationale: "Today ViewModel action has no row-specific restart and replay evidence."),
         mutation(id: "today.view-model-closure", sourcePath: "TodayViewModel.confirmActionClosure", commandKind: .completeAction, status: .unproven, rationale: "Today closure presentation applies returned state without full durable lineage proof."),

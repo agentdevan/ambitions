@@ -37,6 +37,12 @@ struct AmbitionsCommandValidator: Sendable {
         case .protectTimeWindow:
             return command.target.timeID == nil ? .needsMissingTarget : .valid
         case .correctTimeWindow:
+            if command.payload.metadata["undoOriginalReceiptID"] != nil {
+                guard command.payload.metadata["expectedProjectionVersion"].flatMap(Int64.init) != nil else {
+                    return .invalid
+                }
+                return command.target.timeID == nil ? .needsMissingTarget : .valid
+            }
             guard let correctionKind = command.payload.metadata["correctionKind"],
                   let timeCorrection = TimeMutationActionKind(rawValue: correctionKind),
                   TimeMutationActionKind.correctionKinds.contains(timeCorrection) else {

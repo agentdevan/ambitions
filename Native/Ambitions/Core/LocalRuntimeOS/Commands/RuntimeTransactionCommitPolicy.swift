@@ -168,11 +168,23 @@ enum RuntimeTransactionCommitPolicy {
             var runtimeMetadata = outcome.receipt.resultMetadata(disposition: outcome.disposition).merging([
                 "runtimeReplayDecision": outcome.replayOutcome.decision.rawValue,
                 "runtimeDoubleApplyDisposition": outcome.replayOutcome.doubleApplyDisposition.rawValue,
-                "runtimeProjectionStoreStatus": outcome.projectionStoreReceipt == nil ? "not_configured" : "saved",
+                "runtimeProjectionStoreStatus": outcome.projectionStoreReceipt != nil
+                    ? "saved"
+                    : (projectionStore == nil ? "not_configured" : "needs_recovery"),
                 "runtimeProjectionStoreIDs": outcome.projectionStoreReceipt?.storedProjectionIDs.map(\.rawValue).joined(separator: ",") ?? "",
                 "runtimeSearchStoreStatus": outcome.searchRebuildReceipt == nil ? "not_configured" : "rebuilt",
                 "runtimeSearchStoreIndexedRecordCount": outcome.searchRebuildReceipt.map { String($0.indexedRecordCount) } ?? "",
             ], uniquingKeysWith: { _, new in new })
+            if let projectionReceipt = outcome.projectionStoreReceipt {
+                let projectionIDs = projectionReceipt.storedProjectionIDs.sorted()
+                runtimeMetadata["runtimeMaterializedProjectionCursorIDs"] = projectionIDs.map(\.rawValue).joined(separator: ",")
+                runtimeMetadata["runtimeMaterializedProjectionCursorSequences"] = projectionIDs.compactMap {
+                    projectionReceipt.cursorSequencesByProjectionID[$0].map(String.init)
+                }.joined(separator: ",")
+                runtimeMetadata["runtimeMaterializedProjectionCursorChecksums"] = projectionIDs.compactMap {
+                    projectionReceipt.cursorChecksumsByProjectionID[$0]
+                }.joined(separator: ",")
+            }
             if journalReceipt != nil {
                 do {
                     let linkReceipt = try await commandJournal.linkRuntimeCommit(
