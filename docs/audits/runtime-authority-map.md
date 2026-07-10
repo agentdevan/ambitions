@@ -38,6 +38,27 @@ correctness, device behavior, accessibility behavior, privacy/legal approval,
 build health, TestFlight readiness, App Store readiness, or total
 LocalRuntimeOS completion.
 
+## 2026-07-09 Semantic Mutation Registry Addendum
+
+`Native/Ambitions/Core/LocalRuntimeOS/Commands/MeaningfulMutationRegistry.swift`
+is now the explicit inventory for meaningful mutation entry points and
+write-capable production paths. Directory placement is no longer a mutation
+proof classification. Every direct-write marker requires a typed registry row
+and an executable proof-test ID; missing or stale rows fail the audit.
+
+The registry deliberately records current Time, Today, Goals, Capture, You,
+adapter, outbox, and repair entry points without upgrading their behavior.
+`TimeViewModel.performLifeShapeMutation`,
+`TimeViewModel.approveProtectedPlacementReview`, and
+`TimeViewModel.undoLastLifeShapeMutation` are `unproven` because they currently
+apply synthetic/in-memory state instead of completing durable
+Command -> Event -> Projection -> Receipt -> Replay lineage. All `unproven`
+mutation and write-path rows remain blockers in LocalRuntimeProof.
+
+This addendum supersedes older wording in this historical map that inferred
+`canonical command` from a path under `Core/LocalRuntimeOS`. Those historical
+owner moves remain provenance only; they are not runtime proof.
+
 ## AMB-1730 Legacy Runtime Owner-Move Addendum
 
 AMB-1730 moved `111` legacy runtime production files out of
@@ -525,27 +546,30 @@ classifies 50 production/support direct-write marker files:
 
 | Classification | Count | Meaning |
 | --- | ---: | --- |
-| canonical command | 45 | Direct-write markers are inside `Core/LocalRuntimeOS`. |
-| adapter into command | 2 | System/external paths hand off to command/outbox authority. |
-| projection-only read | 2 | External snapshot paths materialize projection data for external readers. |
-| test-only support | 1 | DEBUG preview support uses temporary storage but is not production runtime authority. |
+| durable | 6 | The registry names current durable journal/ledger/storage evidence; this is not app-wide mutation proof. |
+| adapter | 6 | System, Source Atlas, or external paths hand off to bounded adapter/outbox authority. |
+| projection-only | 7 | Projection and inspection paths materialize derived/read data rather than canonical private life state. |
+| preview-only | 1 | DEBUG preview support uses temporary storage and is not production runtime authority. |
+| unproven | 30 | The write path lacks complete executable mutation lineage and remains a LocalRuntimeProof blocker. |
 
 Marker counts: FileManager 24, SwiftData 22, write_call 14, context_insert 8,
 try_save 3, context_delete 3, ModelContext 3, context_save 1.
 
 Current direct-write guard result: `status=green`,
-`proofStatus=Implemented Green`, `findingCount=0`, and
-`unsafeOrUnknownProductionRowCount=0`. This Green is limited to the static
-direct-write audit scope. It does not prove total runtime correctness, visual
-behavior, release readiness, privacy/legal approval, or total LocalRuntimeOS
-completion.
+`proofStatus=Implemented Yellow`, `findingCount=0`,
+`unsafeOrUnknownProductionRowCount=0`, and
+`unprovenProductionRowCount=30`. Structural Green means the marker inventory
+is complete against the typed registry. It does not make any unproven row
+durable or prove total runtime correctness, visual behavior, release readiness,
+privacy/legal approval, or total LocalRuntimeOS completion.
 
-## Forbidden-Root Direct-Write Classifications
+## Explicit Direct-Write Registry Classifications
 
-The direct-write audit treats any unsafe or unknown production/support
-direct-write marker outside `Native/Ambitions/Core/LocalRuntimeOS/` as a
-finding unless it is explicitly classified here as adapter, projection, or
-test-only support.
+The direct-write audit treats every unregistered production/support
+direct-write marker as a structural finding, including markers inside
+`Native/Ambitions/Core/LocalRuntimeOS/`. Path ownership is necessary but no
+longer sufficient. The Swift registry is the machine-readable authority; this
+map explains its proof ceiling.
 
 AMB-1731 removed the AMB-1709/AMB-1719 unsafe direct-write rows from the guard
 by moving the effective source into `Core/LocalRuntimeOS/Storage`,
@@ -587,13 +611,13 @@ Audit behavior:
 - Scan production/support Swift roots for direct-write markers:
   SwiftData, ModelContext, FileManager, UserDefaults, `.write(`,
   context insert/delete/save, and repository/store save calls.
-- Treat `Native/Ambitions/Core/LocalRuntimeOS/` as the canonical owner for
-  current direct-write markers, still with Implemented Yellow proof ceiling.
-- Treat listed non-LocalRuntimeOS paths as classified Yellow debt only when
-  this map mentions both the path and the follow-up.
-- Fail on new unclassified direct-write markers outside LocalRuntimeOS.
-- Fail when this map is missing, stale, or does not mention the classified
-  forbidden-root path and follow-up.
+- Parse typed write-path rows from `MeaningfulMutationRegistry.swift`.
+- Require every current direct-write marker, regardless of directory, to have
+  exactly one registry status and an executable proof-test ID.
+- Fail on unregistered markers, duplicate rows, stale rows, unknown statuses,
+  missing proof IDs, or proof IDs that do not resolve to an XCTest method.
+- Report `unproven` rows as Implemented Yellow and pass them through to
+  LocalRuntimeProof as blockers until a later vertical slice earns durability.
 
 This audit is a governance guard, not proof that unsafe writes are fixed.
 

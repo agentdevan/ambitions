@@ -17,6 +17,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 AUTHORITY_MAP = ROOT / "docs" / "audits" / "runtime-authority-map.md"
+MUTATION_REGISTRY = ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Commands" / "MeaningfulMutationRegistry.swift"
 
 PRODUCTION_SWIFT_ROOTS = (
     "Native/Ambitions/",
@@ -57,40 +58,21 @@ DIRECT_WRITE_PATTERNS = (
     ),
 )
 
-CANONICAL_CLASSIFICATION = "canonical command"
-ADAPTER_CLASSIFICATION = "adapter into command"
-PROJECTION_CLASSIFICATION = "projection-only read"
-TEST_ONLY_CLASSIFICATION = "test-only support"
+CANONICAL_CLASSIFICATION = "durable"
+ADAPTER_CLASSIFICATION = "adapter"
+PROJECTION_CLASSIFICATION = "projection-only"
+TEST_ONLY_CLASSIFICATION = "preview-only"
+UNPROVEN_CLASSIFICATION = "unproven"
 UNSAFE_CLASSIFICATION = "unsafe write"
 UNKNOWN_CLASSIFICATION = "unknown"
 DIRECT_WRITE_PROOF_FOLLOW_UP = "AMB-1719"
 
-KNOWN_FORBIDDEN_CLASSIFICATIONS: dict[str, tuple[str, str, str]] = {
-    "Native/Ambitions/PreviewSupport/PreviewAppContainer.swift": (
-        TEST_ONLY_CLASSIFICATION,
-        "",
-        "DEBUG-only preview fixture composition uses temporary FileManager storage and is not production runtime authority.",
-    ),
-    "Native/Ambitions/Projection/ExternalSnapshots/ExternalCreationContracts.swift": (
-        ADAPTER_CLASSIFICATION,
-        "AMB-1708",
-        "External creation handoff queue is imported by DefaultExternalCreationImportService into AmbitionsCommand.",
-    ),
-    "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceSnapshotWriter.swift": (
-        PROJECTION_CLASSIFICATION,
-        "AMB-1708",
-        "External snapshot export writes app-group projection data after privacy validation; it is not canonical private graph state.",
-    ),
-    "Native/Ambitions/Projection/ExternalSnapshots/SharedExternalSnapshotStore.swift": (
-        PROJECTION_CLASSIFICATION,
-        "AMB-1708",
-        "Shared snapshot URL helper supports projection export and external-surface reads.",
-    ),
-    "Native/Ambitions/Core/Permissions/LocalNotificationFoundation.swift": (
-        ADAPTER_CLASSIFICATION,
-        "AMB-1708",
-        "Notification scheduling reads safe external snapshots and records side effects; action payloads route back through app command handling.",
-    ),
+REGISTRY_STATUS_CLASSIFICATIONS = {
+    "durable": CANONICAL_CLASSIFICATION,
+    "projectionOnly": PROJECTION_CLASSIFICATION,
+    "adapter": ADAPTER_CLASSIFICATION,
+    "previewOnly": TEST_ONLY_CLASSIFICATION,
+    "unproven": UNPROVEN_CLASSIFICATION,
 }
 
 
@@ -107,6 +89,13 @@ class AuditRow:
 class Finding:
     path: str
     detail: str
+
+
+@dataclass(frozen=True)
+class RegistryWritePath:
+    path: str
+    status: str
+    proof_test_id: str
 
 
 def rel(path: Path) -> str:
@@ -138,23 +127,59 @@ def direct_write_markers(text: str) -> list[str]:
     return [name for name, pattern in DIRECT_WRITE_PATTERNS if re.search(pattern, text)]
 
 
-def classify(relative: str) -> tuple[str, str, str]:
-    if relative.startswith("Native/Ambitions/Core/LocalRuntimeOS/"):
+def load_registry_write_paths() -> tuple[dict[str, RegistryWritePath], list[Finding]]:
+    if not MUTATION_REGISTRY.exists():
+        return {}, [Finding(rel(MUTATION_REGISTRY), "meaningful mutation registry is missing")]
+
+    text = MUTATION_REGISTRY.read_text(encoding="utf-8", errors="replace")
+    proof_match = re.search(r'private static let inventoryProof\s*=\s*\n?\s*"([^"]+)"', text)
+    if proof_match is None:
+        return {}, [Finding(rel(MUTATION_REGISTRY), "meaningful mutation registry has no inventory proof test ID")]
+    proof_test_id = proof_match.group(1)
+
+    rows: dict[str, RegistryWritePath] = {}
+    findings: list[Finding] = []
+    for path, status in re.findall(r'writePath\(\s*"([^"]+)"\s*,\s*\.(\w+)\s*\)', text):
+        if status not in REGISTRY_STATUS_CLASSIFICATIONS:
+            findings.append(Finding(path, f"meaningful mutation registry uses unknown status `{status}`"))
+            continue
+        if path in rows:
+            findings.append(Finding(path, "meaningful mutation registry contains a duplicate write-path row"))
+            continue
+        rows[path] = RegistryWritePath(path, status, proof_test_id)
+
+    if not rows:
+        findings.append(Finding(rel(MUTATION_REGISTRY), "meaningful mutation registry has no write-path rows"))
+    return rows, findings
+
+
+def proof_test_is_executable(proof_test_id: str) -> bool:
+    parts = proof_test_id.split("/")
+    if len(parts) != 3 or parts[0] != "AmbitionsTests":
+        return False
+    suite, method = parts[1], parts[2]
+    tests = ROOT / "Native" / "AmbitionsTests"
+    candidates = list(tests.rglob(f"{suite}.swift"))
+    return any(re.search(rf"\bfunc\s+{re.escape(method)}\s*\(", path.read_text(encoding="utf-8", errors="replace")) for path in candidates)
+
+
+def classify(relative: str, registry: dict[str, RegistryWritePath]) -> tuple[str, str, str]:
+    row = registry.get(relative)
+    if row is not None:
+        classification = REGISTRY_STATUS_CLASSIFICATIONS[row.status]
         return (
-            CANONICAL_CLASSIFICATION,
-            "",
-            "Direct-write marker is inside the canonical LocalRuntimeOS owner and remains subject to command/event/projection/receipt/replay proof.",
+            classification,
+            "" if classification in {CANONICAL_CLASSIFICATION, TEST_ONLY_CLASSIFICATION} else DIRECT_WRITE_PROOF_FOLLOW_UP,
+            f"Explicit MeaningfulMutationRegistry write-path row classifies this marker as {row.status}; path placement alone is not proof.",
         )
-    if relative in KNOWN_FORBIDDEN_CLASSIFICATIONS:
-        return KNOWN_FORBIDDEN_CLASSIFICATIONS[relative]
     return (
         UNKNOWN_CLASSIFICATION,
         "",
-        "Direct-write marker is outside Core/LocalRuntimeOS and has no AMB-1665 classification.",
+        "Direct-write marker has no explicit MeaningfulMutationRegistry write-path row.",
     )
 
 
-def audit_rows() -> list[AuditRow]:
+def audit_rows(registry: dict[str, RegistryWritePath]) -> list[AuditRow]:
     rows: list[AuditRow] = []
     for path in swift_files():
         text = path.read_text(encoding="utf-8", errors="replace")
@@ -162,7 +187,7 @@ def audit_rows() -> list[AuditRow]:
         if not markers:
             continue
         relative = rel(path)
-        classification, follow_up, detail = classify(relative)
+        classification, follow_up, detail = classify(relative, registry)
         rows.append(
             AuditRow(
                 path=relative,
@@ -181,25 +206,27 @@ def map_text() -> str:
     return AUTHORITY_MAP.read_text(encoding="utf-8", errors="replace")
 
 
-def findings_for(rows: list[AuditRow], authority_map: str) -> list[Finding]:
-    findings: list[Finding] = []
+def findings_for(
+    rows: list[AuditRow],
+    authority_map: str,
+    registry: dict[str, RegistryWritePath],
+    registry_findings: list[Finding],
+) -> list[Finding]:
+    findings = list(registry_findings)
     for row in rows:
-        known_forbidden = row.path in KNOWN_FORBIDDEN_CLASSIFICATIONS
         if row.classification == UNSAFE_CLASSIFICATION:
             findings.append(Finding(row.path, "unsafe production direct-write marker must move under Core/LocalRuntimeOS, become an adapter, or become test-only"))
             continue
         if row.classification == UNKNOWN_CLASSIFICATION:
-            findings.append(Finding(row.path, "unclassified direct-write marker outside Core/LocalRuntimeOS"))
+            findings.append(Finding(row.path, "direct-write marker lacks a semantic mutation-registry row"))
             continue
-        if known_forbidden and row.path not in authority_map:
-            findings.append(Finding(row.path, f"{AUTHORITY_MAP.relative_to(ROOT)} does not mention classified path"))
-        if known_forbidden and row.follow_up and row.follow_up not in authority_map:
-            findings.append(Finding(row.path, f"{AUTHORITY_MAP.relative_to(ROOT)} does not mention follow-up {row.follow_up}"))
+        registry_row = registry[row.path]
+        if not registry_row.proof_test_id or not proof_test_is_executable(registry_row.proof_test_id):
+            findings.append(Finding(row.path, f"registry proof test `{registry_row.proof_test_id}` is not executable"))
 
-    known_paths = set(KNOWN_FORBIDDEN_CLASSIFICATIONS)
     found_paths = {row.path for row in rows}
-    for stale_path in sorted(known_paths - found_paths):
-        findings.append(Finding(stale_path, "classification table references a path without a current direct-write marker"))
+    for stale_path in sorted(set(registry) - found_paths):
+        findings.append(Finding(stale_path, "meaningful mutation registry references a path without a current direct-write marker"))
 
     if not AUTHORITY_MAP.exists():
         findings.append(Finding(rel(AUTHORITY_MAP), "runtime authority map document is missing"))
@@ -220,24 +247,30 @@ def summary(rows: list[AuditRow], findings: list[Finding]) -> dict[str, object]:
         + classification_counts.get(UNKNOWN_CLASSIFICATION, 0)
     )
 
+    unproven_count = classification_counts.get(UNPROVEN_CLASSIFICATION, 0)
     return {
         "status": "red" if findings or unsafe_or_unknown_count else "green",
-        "proofStatus": "Implemented Yellow" if findings or unsafe_or_unknown_count else "Implemented Green",
+        "proofStatus": "Implemented Yellow" if findings or unsafe_or_unknown_count or unproven_count else "Implemented Green",
         "directWriteMarkerCount": len(rows),
         "classificationCounts": dict(sorted(classification_counts.items())),
         "markerCounts": dict(sorted(marker_counts.items())),
         "findingCount": len(findings),
         "unsafeOrUnknownProductionRowCount": unsafe_or_unknown_count,
+        "unprovenProductionRowCount": unproven_count,
     }
 
 
 def run_self_test() -> int:
-    assert classify("Native/Ambitions/Core/LocalRuntimeOS/Commands/CommandJournal.swift")[0] == CANONICAL_CLASSIFICATION
-    assert classify("Native/Ambitions/Core/Persistence/SwiftDataRepositories.swift")[0] == UNKNOWN_CLASSIFICATION
-    assert classify("Native/Ambitions/Projection/ExternalSnapshots/ExternalCreationContracts.swift")[0] == ADAPTER_CLASSIFICATION
-    assert classify("Native/Ambitions/Projection/ExternalSnapshots/SharedExternalSnapshotStore.swift")[0] == PROJECTION_CLASSIFICATION
-    assert classify("Native/Ambitions/PreviewSupport/PreviewAppContainer.swift")[0] == TEST_ONLY_CLASSIFICATION
-    assert classify("Native/Ambitions/Core/Domain/NewDirectStore.swift")[1] == ""
+    fixture = {
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/CommandJournal.swift": RegistryWritePath(
+            "Native/Ambitions/Core/LocalRuntimeOS/Commands/CommandJournal.swift",
+            "durable",
+            "AmbitionsTests/MeaningfulMutationRegistryTests/testRegistryRowsHaveUniqueSemanticIdentityAndExecutableProofIDs",
+        )
+    }
+    assert classify("Native/Ambitions/Core/LocalRuntimeOS/Commands/CommandJournal.swift", fixture)[0] == CANONICAL_CLASSIFICATION
+    assert classify("Native/Ambitions/Core/LocalRuntimeOS/Storage/NewStore.swift", fixture)[0] == UNKNOWN_CLASSIFICATION
+    assert proof_test_is_executable(next(iter(fixture.values())).proof_test_id)
     assert "SwiftData" in direct_write_markers("import SwiftData\n")
     assert "write_call" in direct_write_markers("try data.write(to: url)")
     green_summary = summary(
@@ -266,8 +299,9 @@ def main() -> int:
     if args.self_test:
         return run_self_test()
 
-    rows = audit_rows()
-    findings = findings_for(rows, map_text())
+    registry, registry_findings = load_registry_write_paths()
+    rows = audit_rows(registry)
+    findings = findings_for(rows, map_text(), registry, registry_findings)
     payload = {
         "summary": summary(rows, findings),
         "findings": [asdict(finding) for finding in findings],

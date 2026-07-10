@@ -18,6 +18,7 @@ IMPLEMENTATION_TRUTH = ROOT / "docs" / "truth" / "IMPLEMENTATION_TRUTH.md"
 PRODUCT_DESIGN_TRUTH = ROOT / "docs" / "truth" / "PRODUCT_DESIGN_TRUTH.md"
 KNOWN_ISSUES = ROOT / "docs" / "qa" / "KNOWN_ISSUES.md"
 PR_REVIEW_WORKFLOW = ROOT / ".github" / "workflows" / "ambitions-pr-review.yml"
+MEANINGFUL_MUTATION_REGISTRY = ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Commands" / "MeaningfulMutationRegistry.swift"
 
 LOCAL_RUNTIME_ROOT = ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS"
 PRODUCTION_SWIFT_ROOTS = [
@@ -470,6 +471,10 @@ def normalize_source_atlas_egress_value(value: str) -> str:
     return value.lower().replace("-", "_").replace(" ", "_").replace(".", "_")
 
 
+def mutation_finding_code_suffix(value: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
+
+
 def production_swift_files() -> list[Path]:
     files: list[Path] = []
     ignored_parts = {".build", "DerivedData", "Resources", "PreviewSupport", "Previews"}
@@ -864,6 +869,60 @@ def scan_mutation_bypasses() -> CheckResult:
             for code, pattern, message in MUTATION_PATTERNS:
                 if pattern.search(stripped):
                     findings.append(Finding("blocker", code, rel, index, message))
+    if not MEANINGFUL_MUTATION_REGISTRY.exists():
+        findings.append(
+            Finding(
+                "blocker",
+                "meaningful-mutation-registry-missing",
+                relative(MEANINGFUL_MUTATION_REGISTRY),
+                None,
+                "Meaningful mutation registry is required for semantic mutation proof.",
+            )
+        )
+    else:
+        registry_text = read_text(MEANINGFUL_MUTATION_REGISTRY)
+        registry_lines = registry_text.splitlines()
+        mutation_rows = re.findall(
+            r'mutation\("([^"]+)",\s*"([^"]+)",\s*\.\w+(?:,\s*status:\s*\.(\w+))?\)',
+            registry_text,
+        )
+        write_rows = re.findall(
+            r'writePath\("([^"]+)",\s*\.(\w+)\)',
+            registry_text,
+        )
+        for mutation_id, source_path, explicit_status in mutation_rows:
+            status = explicit_status or "unproven"
+            if status != "unproven":
+                continue
+            line_number = next(
+                (index for index, line in enumerate(registry_lines, start=1) if f'"{source_path}"' in line),
+                None,
+            )
+            findings.append(
+                Finding(
+                    "blocker",
+                    f"meaningful-mutation-unproven-{mutation_finding_code_suffix(mutation_id)}",
+                    relative(MEANINGFUL_MUTATION_REGISTRY),
+                    line_number,
+                    f"Meaningful mutation `{source_path}` is registered as unproven and blocks LocalRuntimeProof.",
+                )
+            )
+        for source_path, status in write_rows:
+            if status != "unproven":
+                continue
+            line_number = next(
+                (index for index, line in enumerate(registry_lines, start=1) if f'"{source_path}"' in line),
+                None,
+            )
+            findings.append(
+                Finding(
+                    "blocker",
+                    f"meaningful-write-path-unproven-{mutation_finding_code_suffix(source_path)}",
+                    relative(MEANINGFUL_MUTATION_REGISTRY),
+                    line_number,
+                    f"Write-capable production path `{source_path}` is registered as unproven and blocks LocalRuntimeProof.",
+                )
+            )
     return make_result(
         "mutation_bypass_scan",
         findings,
