@@ -1,7 +1,7 @@
 # Ambitions Engineering Constitution — Normative Annex Index
 
 **Canonical parent:** `docs/truth/PRODUCT_DESIGN_TRUTH.md`  
-**Status:** Wave 0 draft in PR #23  
+**Status:** Normative candidate in PR #23; active only after merge to `main`  
 **Applies to:** all Ambitions source, tests, migrations, SwiftUI, LocalRuntimeOS, persistence, extensions, CloudKit, release, and Codex work
 
 This index and the article files under `docs/constitution/articles/` form one normative engineering annex. They add implementation specificity without weakening the parent Constitution. Live source and `IMPLEMENTATION_TRUTH.md` own current implementation status. `RELEASE_TRUTH.md` owns release claims.

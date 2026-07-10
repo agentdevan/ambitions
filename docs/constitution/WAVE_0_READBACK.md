@@ -77,7 +77,7 @@ Not claimed:
 
 ## Wave 0 status
 
-**Yellow — constitutional registry, current-head CI enforcement, and Linear control plane installed.**
+**Yellow — ruthless review repaired; awaiting exact-head Green audit, canonical Parent Feature capacity, and merge.**
 
 Remaining before Wave 0 can close Green:
 
@@ -90,3 +90,8 @@ Remaining before Wave 0 can close Green:
 ## Rollback
 
 Revert the Wave 0 commits on PR #23, cancel the governance Initiative/Project/milestone and five newly created Planned Projects, and retain existing implementation Projects unchanged.
+
+
+## Ruthless review repair
+
+Blocking registry and authority defects are documented in `PR_23_RUTHLESS_REVIEW.md` and repaired in the reviewed candidate. Numeric performance calibration remains a downstream `Spec Ready` gate rather than a Wave 0 registry-completeness claim.

@@ -1,9 +1,0 @@
-RED article/law mismatch missing_registry=[] orphan_registry=['A11Y-002', 'IA-OFFLINE-001', 'OBJECT-IDENTITY-001', 'OBJECT-STATE-001', 'RUNTIME-LOCAL-001', 'RUNTIME-MUTATION-001', 'VALIDATION-008']
-Traceback (most recent call last):
-  File "/home/runner/work/ambitions/ambitions/scripts/wave0-ruthless-repair.py", line 555, in <module>
-    main()
-  File "/home/runner/work/ambitions/ambitions/scripts/wave0-ruthless-repair.py", line 551, in main
-    subprocess.run(["python3", "scripts/ambitions-constitution-audit.py"], cwd=ROOT, check=True)
-  File "/usr/lib/python3.12/subprocess.py", line 571, in run
-    raise CalledProcessError(retcode, process.args,
-subprocess.CalledProcessError: Command '['python3', 'scripts/ambitions-constitution-audit.py']' returned non-zero exit status 1.

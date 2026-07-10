@@ -4,7 +4,7 @@
 **Status:** Active product/design constitution; canonical product-source root
 **Applies to:** native SwiftUI, iPhone-first, local-first Ambitions architecture
 **Owner posture:** product constitution and implementation-shaping law, not implementation or release proof
-**Last updated:** 2026-07-09
+**Last updated:** 2026-07-10
 **Decision basis:** owner decisions `1–201`, including the 2026-07-09 owner-approved reconciliation amendment
 **Mission lens:** read through `docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md`, the supreme mission canon
 
@@ -161,6 +161,44 @@ These reconciliations supersede conflicting literal wording in Decisions `1–20
 - `RELEASE_TRUTH.md` — validation, proof, release, and claim authority.
 - `CODEX_PROCESS_TRUTH.md` — Codex operating process.
 - `docs/truth/2026-06-22-runtime-remediation-decision-register.md` and `docs/qa/remediation/2026-06-22-codex-remediation-law.md` — retained subordinate remediation history and execution law where not superseded here.
+
+
+## AUTH-005A — Normative engineering annex binding
+
+`docs/constitution/ENGINEERING_CONSTITUTION.md`, its Article `25–43` files under `docs/constitution/articles/`, and the machine-readable registries named by that annex are a **normative subordinate part of this Ambitions Product Constitution**.
+
+The binding order is:
+
+```text
+PRIVATE_LIFE_ORCHESTRATION_TRUTH.md
+→ PRODUCT_DESIGN_TRUTH.md
+→ ENGINEERING_CONSTITUTION.md + Articles 25–43
+→ machine-readable constitutional registries
+→ Project design specifications
+→ Parent Feature acceptance objects
+→ Codex implementation leaves
+→ live source, tests, proof, and release evidence
+```
+
+The engineering annex may add implementation specificity, measurable obligations, source/test/proof routing, and fail-closed enforcement. It may not weaken or reinterpret the parent product law, root IA, privacy boundary, local-first runtime law, user-control law, accessibility equivalence, or proof ceiling.
+
+The following files are constitutionally required while this binding is active:
+
+- `docs/constitution/ENGINEERING_CONSTITUTION.md`
+- exactly one Article file for each Article `25–43`
+- `docs/constitution/opportunity-register.json`
+- `docs/constitution/laws.json`
+- `docs/constitution/law-source-map.json`
+- `docs/constitution/law-test-map.json`
+- `docs/constitution/scenarios.json`
+- `docs/constitution/performance-budgets.json`
+- `docs/constitution/data-classification.json`
+- `docs/constitution/dependency-graph.json`
+- `scripts/ambitions-constitution-audit.py`
+
+A missing, malformed, duplicated, cyclic, orphaned, or internally inconsistent constitutional registry is a hard Red for constitutional integrity. It blocks constitutional Green, affected `Spec Ready` promotion, and unsupported implementation claims; it does not by itself assert runtime or release failure.
+
+Changes to the annex or registries require the amendment, independent-review, audit, proof, and rollback rules in Articles `42–43`. Current implementation and release claims remain governed by live evidence, `IMPLEMENTATION_TRUTH.md`, `IMPLEMENTATION_ACCEPTANCE_TRUTH.md`, and `RELEASE_TRUTH.md`.
 
 ## AUTH-006 — Claim discipline
 
