@@ -11,6 +11,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Iterable
 
+from meaningful_mutation_registry import parse_registry_file
+
 
 ROOT = Path(__file__).resolve().parents[1]
 ARCHITECTURE_INVENTORY = ROOT / "scripts" / "ambitions-architecture-inventory.py"
@@ -880,46 +882,41 @@ def scan_mutation_bypasses() -> CheckResult:
             )
         )
     else:
-        registry_text = read_text(MEANINGFUL_MUTATION_REGISTRY)
-        registry_lines = registry_text.splitlines()
-        mutation_rows = re.findall(
-            r'mutation\("([^"]+)",\s*"([^"]+)",\s*\.\w+(?:,\s*status:\s*\.(\w+))?\)',
-            registry_text,
-        )
-        write_rows = re.findall(
-            r'writePath\("([^"]+)",\s*\.(\w+)\)',
-            registry_text,
-        )
-        for mutation_id, source_path, explicit_status in mutation_rows:
-            status = explicit_status or "unproven"
-            if status != "unproven":
-                continue
-            line_number = next(
-                (index for index, line in enumerate(registry_lines, start=1) if f'"{source_path}"' in line),
-                None,
+        inventory = parse_registry_file(MEANINGFUL_MUTATION_REGISTRY)
+        for issue in inventory.issues:
+            findings.append(
+                Finding(
+                    "blocker",
+                    f"meaningful-mutation-registry-{issue.code}",
+                    relative(MEANINGFUL_MUTATION_REGISTRY),
+                    issue.line,
+                    issue.message,
+                )
             )
+        for row in inventory.mutations:
+            if row.status != "unproven":
+                continue
+            mutation_id = row.fields.get("id", row.source_path)
+            source_path = row.source_path
             findings.append(
                 Finding(
                     "blocker",
                     f"meaningful-mutation-unproven-{mutation_finding_code_suffix(mutation_id)}",
                     relative(MEANINGFUL_MUTATION_REGISTRY),
-                    line_number,
+                    row.line,
                     f"Meaningful mutation `{source_path}` is registered as unproven and blocks LocalRuntimeProof.",
                 )
             )
-        for source_path, status in write_rows:
-            if status != "unproven":
+        for row in inventory.write_paths:
+            if row.status != "unproven":
                 continue
-            line_number = next(
-                (index for index, line in enumerate(registry_lines, start=1) if f'"{source_path}"' in line),
-                None,
-            )
+            source_path = row.source_path
             findings.append(
                 Finding(
                     "blocker",
                     f"meaningful-write-path-unproven-{mutation_finding_code_suffix(source_path)}",
                     relative(MEANINGFUL_MUTATION_REGISTRY),
-                    line_number,
+                    row.line,
                     f"Write-capable production path `{source_path}` is registered as unproven and blocks LocalRuntimeProof.",
                 )
             )

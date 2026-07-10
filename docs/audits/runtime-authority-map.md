@@ -43,17 +43,29 @@ LocalRuntimeOS completion.
 `Native/Ambitions/Core/LocalRuntimeOS/Commands/MeaningfulMutationRegistry.swift`
 is now the explicit inventory for meaningful mutation entry points and
 write-capable production paths. Directory placement is no longer a mutation
-proof classification. Every direct-write marker requires a typed registry row
-and an executable proof-test ID; missing or stale rows fail the audit.
+proof classification. Every direct-write marker requires a typed registry row,
+an explicit classification, and a row-specific rationale; positive durable,
+projection-only, or adapter claims additionally require executable lineage
+test IDs. Missing, malformed, stale, or parser-count-lost rows fail the audit.
 
 The registry deliberately records current Time, Today, Goals, Capture, You,
 adapter, outbox, and repair entry points without upgrading their behavior.
+The current inventory has 72 semantic mutation rows plus 50 direct-write rows;
+source scanning independently discovers the current Capture, Time, Today,
+Goals, You, and Time Ritual ViewModel mutation entry points and fails when a
+discovered entry is missing. Declared row counts make parser loss fail closed.
 `TimeViewModel.performLifeShapeMutation`,
 `TimeViewModel.approveProtectedPlacementReview`, and
 `TimeViewModel.undoLastLifeShapeMutation` are `unproven` because they currently
 apply synthetic/in-memory state instead of completing durable
 Command -> Event -> Projection -> Receipt -> Replay lineage. All `unproven`
 mutation and write-path rows remain blockers in LocalRuntimeProof.
+
+Inventory/governance tests prove row presence, explicit classification,
+rationale, parser behavior, and source-discovery coverage only. They do not
+prove executor ownership, durable stores, semantic events, projections,
+receipts, restart behavior, or replay. Those fields remain nil/empty for
+`unproven` rows.
 
 This addendum supersedes older wording in this historical map that inferred
 `canonical command` from a path under `Core/LocalRuntimeOS`. Those historical
@@ -546,11 +558,8 @@ classifies 50 production/support direct-write marker files:
 
 | Classification | Count | Meaning |
 | --- | ---: | --- |
-| durable | 6 | The registry names current durable journal/ledger/storage evidence; this is not app-wide mutation proof. |
-| adapter | 6 | System, Source Atlas, or external paths hand off to bounded adapter/outbox authority. |
-| projection-only | 7 | Projection and inspection paths materialize derived/read data rather than canonical private life state. |
 | preview-only | 1 | DEBUG preview support uses temporary storage and is not production runtime authority. |
-| unproven | 30 | The write path lacks complete executable mutation lineage and remains a LocalRuntimeProof blocker. |
+| unproven | 49 | The write path lacks row-specific executable lineage and remains a LocalRuntimeProof blocker. |
 
 Marker counts: FileManager 24, SwiftData 22, write_call 14, context_insert 8,
 try_save 3, context_delete 3, ModelContext 3, context_save 1.
@@ -558,7 +567,7 @@ try_save 3, context_delete 3, ModelContext 3, context_save 1.
 Current direct-write guard result: `status=green`,
 `proofStatus=Implemented Yellow`, `findingCount=0`,
 `unsafeOrUnknownProductionRowCount=0`, and
-`unprovenProductionRowCount=30`. Structural Green means the marker inventory
+`unprovenProductionRowCount=49`. Structural Green means the marker inventory
 is complete against the typed registry. It does not make any unproven row
 durable or prove total runtime correctness, visual behavior, release readiness,
 privacy/legal approval, or total LocalRuntimeOS completion.
@@ -613,7 +622,9 @@ Audit behavior:
   context insert/delete/save, and repository/store save calls.
 - Parse typed write-path rows from `MeaningfulMutationRegistry.swift`.
 - Require every current direct-write marker, regardless of directory, to have
-  exactly one registry status and an executable proof-test ID.
+  exactly one explicit registry status and row-specific rationale.
+- Require positive durable, projection-only, or adapter rows to name
+  row-specific executable lineage tests that resolve into `AmbitionsTests`.
 - Fail on unregistered markers, duplicate rows, stale rows, unknown statuses,
   missing proof IDs, or proof IDs that do not resolve to an XCTest method.
 - Report `unproven` rows as Implemented Yellow and pass them through to

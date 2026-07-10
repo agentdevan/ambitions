@@ -14,6 +14,14 @@ import sys
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
+from meaningful_mutation_registry import (
+    KNOWN_STATUSES,
+    POSITIVE_STATUSES,
+    RegistryIssue,
+    parse_registry,
+    parse_registry_file,
+)
+
 
 ROOT = Path(__file__).resolve().parents[1]
 AUTHORITY_MAP = ROOT / "docs" / "audits" / "runtime-authority-map.md"
@@ -95,7 +103,8 @@ class Finding:
 class RegistryWritePath:
     path: str
     status: str
-    proof_test_id: str
+    proof_test_ids: tuple[str, ...]
+    rationale: str
 
 
 def rel(path: Path) -> str:
@@ -127,30 +136,35 @@ def direct_write_markers(text: str) -> list[str]:
     return [name for name, pattern in DIRECT_WRITE_PATTERNS if re.search(pattern, text)]
 
 
-def load_registry_write_paths() -> tuple[dict[str, RegistryWritePath], list[Finding]]:
+def load_registry() -> tuple[dict[str, RegistryWritePath], set[str], list[Finding]]:
     if not MUTATION_REGISTRY.exists():
-        return {}, [Finding(rel(MUTATION_REGISTRY), "meaningful mutation registry is missing")]
+        return {}, set(), [Finding(rel(MUTATION_REGISTRY), "meaningful mutation registry is missing")]
 
-    text = MUTATION_REGISTRY.read_text(encoding="utf-8", errors="replace")
-    proof_match = re.search(r'private static let inventoryProof\s*=\s*\n?\s*"([^"]+)"', text)
-    if proof_match is None:
-        return {}, [Finding(rel(MUTATION_REGISTRY), "meaningful mutation registry has no inventory proof test ID")]
-    proof_test_id = proof_match.group(1)
-
+    inventory = parse_registry_file(MUTATION_REGISTRY)
     rows: dict[str, RegistryWritePath] = {}
-    findings: list[Finding] = []
-    for path, status in re.findall(r'writePath\(\s*"([^"]+)"\s*,\s*\.(\w+)\s*\)', text):
-        if status not in REGISTRY_STATUS_CLASSIFICATIONS:
-            findings.append(Finding(path, f"meaningful mutation registry uses unknown status `{status}`"))
+    findings = [Finding(rel(MUTATION_REGISTRY), f"line {issue.line}: {issue.message}") for issue in inventory.issues]
+    for registry_row in inventory.write_paths:
+        path = registry_row.source_path
+        status = registry_row.status
+        if not path or status not in REGISTRY_STATUS_CLASSIFICATIONS:
             continue
         if path in rows:
             findings.append(Finding(path, "meaningful mutation registry contains a duplicate write-path row"))
             continue
-        rows[path] = RegistryWritePath(path, status, proof_test_id)
+        rows[path] = RegistryWritePath(path, status, tuple(registry_row.proof_test_ids), registry_row.rationale)
 
     if not rows:
         findings.append(Finding(rel(MUTATION_REGISTRY), "meaningful mutation registry has no write-path rows"))
-    return rows, findings
+    for registry_row in inventory.mutations:
+        if registry_row.status not in POSITIVE_STATUSES:
+            continue
+        for proof_test_id in [registry_row.replay_test_id, *registry_row.proof_test_ids]:
+            if "MeaningfulMutationRegistryTests" in proof_test_id:
+                findings.append(Finding(registry_row.source_path, "inventory/governance tests cannot prove positive executable mutation lineage"))
+            elif not proof_test_is_executable(proof_test_id):
+                findings.append(Finding(registry_row.source_path, f"registry proof test `{proof_test_id}` is not executable in AmbitionsTests"))
+    mutation_sources = {row.source_path for row in inventory.mutations if row.source_path}
+    return rows, mutation_sources, findings
 
 
 def proof_test_is_executable(proof_test_id: str) -> bool:
@@ -161,6 +175,73 @@ def proof_test_is_executable(proof_test_id: str) -> bool:
     tests = ROOT / "Native" / "AmbitionsTests"
     candidates = list(tests.rglob(f"{suite}.swift"))
     return any(re.search(rf"\bfunc\s+{re.escape(method)}\s*\(", path.read_text(encoding="utf-8", errors="replace")) for path in candidates)
+
+
+SEMANTIC_ENTRYPOINT_SPECS: tuple[tuple[str, str, tuple[str, ...]], ...] = (
+    (
+        "Native/Ambitions/Composer/Capture/CaptureViewModel.swift",
+        "CaptureViewModel",
+        (
+            "captureService.createCapture(", "commandRouter.execute(", "captureService.updateCaptureState(",
+            "captureService.routeToTimeSeed(", "captureService.markAsWaiting(", "captureService.markAsOptionalSomeday(",
+            "captureService.markAsDeliverableSeed(", "captureService.attachCaptureToGoal(", "captureService.turnCaptureIntoGoal(",
+        ),
+    ),
+    (
+        "Native/Ambitions/Surfaces/Time/TimeViewModel.swift",
+        "TimeViewModel",
+        ("TimeFieldMutationCoordinator().perform(", "TimeFieldMutationCoordinator().undo(", "service.makeTimeCalendarAware("),
+    ),
+    (
+        "Native/Ambitions/Surfaces/Today/TodayViewModel.swift",
+        "TodayViewModel",
+        ("service.performAction(", "receiptCommands.recordActionClosure("),
+    ),
+    (
+        "Native/Ambitions/Surfaces/Goals/GoalsViewModels.swift",
+        "GoalDetailViewModel",
+        ("service.performAction(", "service.submitClarificationAnswer(", "service.submitExplainabilityCorrection("),
+    ),
+    (
+        "Native/Ambitions/Surfaces/Goals/CreateGoalViewModel.swift",
+        "CreateGoalViewModel",
+        ("service.createGoal(",),
+    ),
+    (
+        "Native/Ambitions/Surfaces/You/YouViewModel.swift",
+        "YouViewModel",
+        ("preferencesCommands.saveYouPreferences(",),
+    ),
+    (
+        "Native/Ambitions/Surfaces/Time/TimeRitualsViewModel.swift",
+        "TimeRitualsViewModel",
+        ("service.performAction(",),
+    ),
+)
+
+
+def discover_semantic_entry_points() -> set[str]:
+    discovered: set[str] = set()
+    declaration = re.compile(r"(?m)^\s{4}func\s+([A-Za-z_][A-Za-z0-9_]*)\b")
+    for relative, owner, needles in SEMANTIC_ENTRYPOINT_SPECS:
+        path = ROOT / relative
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8", errors="replace")
+        matches = list(declaration.finditer(text))
+        for index, match in enumerate(matches):
+            end = matches[index + 1].start() if index + 1 < len(matches) else len(text)
+            body = text[match.start():end]
+            if any(needle in body for needle in needles):
+                discovered.add(f"{owner}.{match.group(1)}")
+    return discovered
+
+
+def semantic_entrypoint_findings(discovered: set[str], registered: set[str]) -> list[Finding]:
+    return [
+        Finding(source, "machine-detected semantic mutation entry point is missing from MeaningfulMutationRegistry")
+        for source in sorted(discovered - registered)
+    ]
 
 
 def classify(relative: str, registry: dict[str, RegistryWritePath]) -> tuple[str, str, str]:
@@ -210,9 +291,11 @@ def findings_for(
     rows: list[AuditRow],
     authority_map: str,
     registry: dict[str, RegistryWritePath],
+    mutation_sources: set[str],
     registry_findings: list[Finding],
 ) -> list[Finding]:
     findings = list(registry_findings)
+    findings.extend(semantic_entrypoint_findings(discover_semantic_entry_points(), mutation_sources))
     for row in rows:
         if row.classification == UNSAFE_CLASSIFICATION:
             findings.append(Finding(row.path, "unsafe production direct-write marker must move under Core/LocalRuntimeOS, become an adapter, or become test-only"))
@@ -221,8 +304,14 @@ def findings_for(
             findings.append(Finding(row.path, "direct-write marker lacks a semantic mutation-registry row"))
             continue
         registry_row = registry[row.path]
-        if not registry_row.proof_test_id or not proof_test_is_executable(registry_row.proof_test_id):
-            findings.append(Finding(row.path, f"registry proof test `{registry_row.proof_test_id}` is not executable"))
+        if registry_row.status in POSITIVE_STATUSES:
+            if not registry_row.proof_test_ids:
+                findings.append(Finding(row.path, "positive registry status has no row-specific executable proof test ID"))
+            for proof_test_id in registry_row.proof_test_ids:
+                if "MeaningfulMutationRegistryTests" in proof_test_id:
+                    findings.append(Finding(row.path, "inventory/governance tests cannot prove a positive write-path status"))
+                elif not proof_test_is_executable(proof_test_id):
+                    findings.append(Finding(row.path, f"registry proof test `{proof_test_id}` is not executable in AmbitionsTests"))
 
     found_paths = {row.path for row in rows}
     for stale_path in sorted(set(registry) - found_paths):
@@ -261,16 +350,48 @@ def summary(rows: list[AuditRow], findings: list[Finding]) -> dict[str, object]:
 
 
 def run_self_test() -> int:
+    valid_fixture = '''
+    static let declaredMutationRowCount = 1
+    static let declaredWritePathRowCount = 1
+    static let descriptors = [
+    mutation(
+        id: "capture.fixture",
+        sourcePath: "CaptureViewModel.fixture",
+        commandKind: .quickCapture,
+        status: .unproven,
+        rationale: "Fixture lacks executable lineage."
+    )
+    ]
+    static let writePaths = [
+    writePath(
+        sourcePath: "Native/Ambitions/Fixture.swift",
+        status: .unproven,
+        rationale: "Fixture write is unproven."
+    )
+    ]
+    '''
+    parsed = parse_registry(valid_fixture)
+    assert not parsed.issues
+    assert len(parsed.mutations) == 1 and len(parsed.write_paths) == 1
+    assert semantic_entrypoint_findings({"CaptureViewModel.fixture"}, set())
+    assert not semantic_entrypoint_findings({"CaptureViewModel.fixture"}, {"CaptureViewModel.fixture"})
+    malformed = valid_fixture.replace('rationale: "Fixture lacks executable lineage."\n    )', 'rationale: "Fixture lacks executable lineage."\n    mutation(')
+    assert any(issue.code == "registry-call-unbalanced" for issue in parse_registry(malformed).issues)
+    assert any(issue.code == "registry-status-unknown" for issue in parse_registry(valid_fixture.replace(".unproven", ".mystery", 1)).issues)
+    assert any(issue.code == "registry-field-missing" for issue in parse_registry(valid_fixture.replace("status: .unproven,", "", 1)).issues)
+    assert any(issue.code == "registry-positive-proof-missing" for issue in parse_registry(valid_fixture.replace(".unproven", ".durable", 1)).issues)
+    assert any(issue.code == "registry-parser-count-loss" for issue in parse_registry(valid_fixture.replace("declaredMutationRowCount = 1", "declaredMutationRowCount = 2")).issues)
+    assert proof_test_is_executable("AmbitionsTests/MeaningfulMutationRegistryTests/testRegistryRowsHaveUniqueIdentityExplicitClassificationAndRationale")
     fixture = {
         "Native/Ambitions/Core/LocalRuntimeOS/Commands/CommandJournal.swift": RegistryWritePath(
             "Native/Ambitions/Core/LocalRuntimeOS/Commands/CommandJournal.swift",
-            "durable",
-            "AmbitionsTests/MeaningfulMutationRegistryTests/testRegistryRowsHaveUniqueSemanticIdentityAndExecutableProofIDs",
+            "unproven",
+            (),
+            "Fixture is unproven.",
         )
     }
-    assert classify("Native/Ambitions/Core/LocalRuntimeOS/Commands/CommandJournal.swift", fixture)[0] == CANONICAL_CLASSIFICATION
+    assert classify("Native/Ambitions/Core/LocalRuntimeOS/Commands/CommandJournal.swift", fixture)[0] == UNPROVEN_CLASSIFICATION
     assert classify("Native/Ambitions/Core/LocalRuntimeOS/Storage/NewStore.swift", fixture)[0] == UNKNOWN_CLASSIFICATION
-    assert proof_test_is_executable(next(iter(fixture.values())).proof_test_id)
     assert "SwiftData" in direct_write_markers("import SwiftData\n")
     assert "write_call" in direct_write_markers("try data.write(to: url)")
     green_summary = summary(
@@ -299,11 +420,20 @@ def main() -> int:
     if args.self_test:
         return run_self_test()
 
-    registry, registry_findings = load_registry_write_paths()
+    registry, mutation_sources, registry_findings = load_registry()
     rows = audit_rows(registry)
-    findings = findings_for(rows, map_text(), registry, registry_findings)
+    findings = findings_for(rows, map_text(), registry, mutation_sources, registry_findings)
+    discovered_semantic_entries = discover_semantic_entry_points()
+    summary_payload = summary(rows, findings)
+    summary_payload.update(
+        {
+            "semanticEntryPointCount": len(discovered_semantic_entries),
+            "registeredSemanticEntryPointCount": len(discovered_semantic_entries & mutation_sources),
+            "missingSemanticEntryPointCount": len(discovered_semantic_entries - mutation_sources),
+        }
+    )
     payload = {
-        "summary": summary(rows, findings),
+        "summary": summary_payload,
         "findings": [asdict(finding) for finding in findings],
         "rows": [asdict(row) for row in rows],
     }

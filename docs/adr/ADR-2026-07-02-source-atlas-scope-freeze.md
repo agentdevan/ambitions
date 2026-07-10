@@ -249,6 +249,14 @@ public-pack, R2, product-surface, or private runtime scope:
 
 - Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/Scheduling/ProtectedStepPlacementPolicy.swift`
 
+The meaningful-mutation registry inventories three existing public-reference
+Source Atlas cache write paths so direct-write governance remains exhaustive.
+This inventory-only allowance does not authorize a new pack, new network
+behavior, R2 production growth, private context, private-life-graph egress, or
+any change to Source Atlas behavior:
+
+- Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/Commands/MeaningfulMutationRegistry.swift`
+
 ## Inspection Requirements
 
 Source Atlas work must keep inspection boring and bounded:
