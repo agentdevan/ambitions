@@ -41,10 +41,9 @@ laws=124 source_maps=34 test_maps=34
 scenarios=16 budgets=9 classifications=6
 ```
 
-The exact final PR head `aa8faf16c723810d4146dfef0e70318dab01446b` passed GitHub Actions run `29065144187`:
+The exact final PR head is verified by the latest successful `Ambitions Constitution Audit` check associated with the PR before merge. The merge gate requires:
 
 ```text
-Ambitions Constitution Audit
 job: Constitutional registry integrity
 status: completed
 conclusion: success
