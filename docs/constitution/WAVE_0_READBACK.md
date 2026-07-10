@@ -34,13 +34,13 @@ laws=124 source_maps=30 test_maps=30
 scenarios=10 budgets=9 classifications=6
 ```
 
-GitHub Actions run `29063321233` completed successfully for commit `d59c46f2b0836c6a7fbb2f71d8917b3a50e0e5f1`:
+GitHub Actions run `29063385816` completed successfully for PR head commit `44a676ce8fc58857d39e8adef09f869a754d6c81`:
 
 ```text
 Ambitions Constitution Audit
 status: completed
 conclusion: success
-run number: 6
+run number: 7
 ```
 
 The workflow compiles and executes:
@@ -77,7 +77,7 @@ Not claimed:
 
 ## Wave 0 status
 
-**Yellow — constitutional registry, CI enforcement, and Linear control plane installed.**
+**Yellow — constitutional registry, current-head CI enforcement, and Linear control plane installed.**
 
 Remaining before Wave 0 can close Green:
 
