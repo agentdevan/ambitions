@@ -10,8 +10,18 @@ PR: #23
 - Registered 18 P0 and 100 P1 mandatory launch opportunities.
 - Added stable law, source-owner, test/proof, scenario, performance, data-classification, and dependency registries.
 - Added the fail-closed constitutional registry audit.
-- Produced an initial Linear coverage map and identified six probable Project gaps.
+- Added GitHub Actions execution for relevant constitutional changes.
+- Added the constitutional PR compliance manifest template.
 - Corrected dependency cycles in the P0 registry before acceptance.
+- Installed the canonical Linear launch Initiative, governance Project, and Wave 0 milestone.
+- Created the temporary Wave 0 acceptance document because the workspace issue limit blocked the required Parent Issue.
+- Confirmed and created the five non-governance Project gaps:
+  - Swift Concurrency + Actor Isolation Design
+  - CloudKit Continuity + Multi-Device Merge Design
+  - Localization + Temporal Culture Design
+  - Dependency + Supply-Chain Governance Design
+  - App Lifecycle + Background Execution Design
+- Updated the Linear coverage map without bulk-rewriting existing active Projects.
 
 ## Validation
 
@@ -24,7 +34,25 @@ laws=124 source_maps=30 test_maps=30
 scenarios=10 budgets=9 classifications=6
 ```
 
-The GitHub connector cannot execute repository scripts. Remote file presence and content require branch readback; CI integration remains follow-up work.
+GitHub Actions now runs:
+
+```bash
+python3 -m py_compile scripts/ambitions-constitution-audit.py
+python3 scripts/ambitions-constitution-audit.py
+```
+
+A current PR workflow result remains required before Wave 0 can claim CI-backed registry Green.
+
+## Linear control plane
+
+Canonical objects:
+
+- Initiative: `Ambitions Constitution → Market-Leading App Store Launch`
+- Project: `Ambitions Constitution Compliance + Implementation Program`
+- Milestone: `Wave 0 — Constitution Enforcement`
+- Temporary acceptance document: `Wave 0 — Constitutional Enforcement Acceptance Packet`
+
+The canonical Parent Feature Issue could not be created because the Linear workspace free issue limit was reached. The document preserves acceptance scope temporarily but does not replace the required hierarchy.
 
 ## Claim ceiling
 
@@ -42,13 +70,17 @@ Not claimed:
 
 ## Wave 0 status
 
-**Yellow — constitutional registry installed and locally audited.**
+**Yellow — constitutional registry and Linear control plane installed; local registry audit Green.**
 
 Remaining before Wave 0 can close Green:
 
-1. create the Linear Constitution governance Initiative/Project and Wave 0 Parent Feature,
-2. confirm or fold the five non-governance Project gaps,
-3. register the engineering annex explicitly from the parent Product Constitution,
-4. add CI execution for `scripts/ambitions-constitution-audit.py`,
-5. independently review PR #23,
-6. calibrate numeric performance budgets in the owning Project before those budgets become Spec Ready.
+1. register `docs/constitution/ENGINEERING_CONSTITUTION.md` explicitly from the parent `PRODUCT_DESIGN_TRUTH.md`,
+2. obtain a current Green GitHub Actions result for the constitutional audit,
+3. complete independent review of PR #23,
+4. create the canonical Wave 0 Parent Feature Issue when Linear issue capacity is available,
+5. independently verify the 118-opportunity Linear ownership map as each existing Project is next touched,
+6. calibrate numeric performance budgets in the owning Project before affected specifications become Spec Ready.
+
+## Rollback
+
+Revert the Wave 0 commits on PR #23, cancel the governance Initiative/Project/milestone and five newly created Planned Projects, and retain existing implementation Projects unchanged.
