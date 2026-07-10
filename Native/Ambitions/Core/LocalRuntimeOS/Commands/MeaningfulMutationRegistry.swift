@@ -31,7 +31,7 @@ struct MeaningfulMutationWritePathDescriptor: Sendable, Hashable {
 }
 
 enum MeaningfulMutationRegistry {
-    static let declaredMutationRowCount = 111
+    static let declaredMutationRowCount = 112
     static let declaredWritePathRowCount = 50
 
     static let descriptors: [MeaningfulMutationDescriptor] = [
@@ -129,6 +129,23 @@ enum MeaningfulMutationRegistry {
         mutation(id: "runtime.calendar-write", sourcePath: "AmbitionsCommandExecutor.executeConfirmedCalendarWriteIntent", commandKind: .scheduleItem, status: .unproven, rationale: "Confirmed calendar write execution lacks row-specific device reconciliation and replay proof."),
         mutation(id: "runtime.plan-seed", sourcePath: "AmbitionsCommandExecutor.executePlanSeedRepresentation", commandKind: .routeCommitment, status: .unproven, rationale: "Plan-seed execution lacks row-specific durable reconstruction proof."),
         mutation(id: "runtime.quick-capture", sourcePath: "AmbitionsCommandExecutor.executeQuickCapture", commandKind: .quickCapture, status: .unproven, rationale: "Quick Capture execution lacks row-specific atomic restart and replay proof."),
+        mutation(
+            id: "runtime.quick-capture-materialization",
+            sourcePath: "AmbitionsCommandExecutor.materializeQuickCapture",
+            commandKind: .quickCapture,
+            status: .projectionOnly,
+            rationale: "Capture object persistence is a post-authority materialization recovered from the committed semantic event on replay.",
+            executorOwner: "EventStoreSQLite.commitAuthority",
+            durableStores: ["EventStoreSQLite", "CaptureRepository"],
+            eventKind: "ambitions.capture.created",
+            projectionOwner: "DefaultCaptureService",
+            receiptOwner: "RuntimeCommitReceipt",
+            replayTestID: "AmbitionsTests/RuntimeAtomicCommitTests/testCommittedCaptureMaterializationCatchesUpOnReplay",
+            proofTestIDs: [
+                "AmbitionsTests/RuntimeAtomicCommitTests/testQuickCaptureAuthorityFailureLeavesNoCaptureMaterialization",
+                "AmbitionsTests/RuntimeAtomicCommitTests/testCommittedCaptureMaterializationCatchesUpOnReplay",
+            ]
+        ),
         mutation(id: "runtime.route-commitment", sourcePath: "AmbitionsCommandExecutor.executeRouteCommitment", commandKind: .routeCommitment, status: .unproven, rationale: "Commitment routing execution lacks row-specific atomic replay proof."),
         mutation(id: "stage.capture-attachment", sourcePath: "AmbitionsStage.attachCaptureToCreatedGoal", commandKind: .attachToGoal, status: .unproven, rationale: "Stage capture attachment lacks row-specific restart and cross-object replay proof."),
         mutation(id: "prototype.runtime-perform", sourcePath: "DedicatedDevicePrototypeRuntime.perform", commandKind: .updateGoal, status: .unproven, rationale: "Prototype runtime mutation lacks production durable lineage and replay proof."),

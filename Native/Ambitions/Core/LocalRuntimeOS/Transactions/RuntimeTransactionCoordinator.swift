@@ -129,7 +129,12 @@ struct RuntimeTransactionCoordinator: Sendable {
         guard key.isWellFormed else {
             throw RuntimeTransactionError.idempotencyKeyMalformed(command.id)
         }
-        if let existing = await idempotencyStore.receipt(for: key) {
+        if let sqliteStore = eventStore as? EventStoreSQLite,
+           let existing = try await sqliteStore.authorityReceipt(commandID: command.id) {
+            return .replayed(receipt: existing)
+        }
+        if !(eventStore is EventStoreSQLite),
+           let existing = await idempotencyStore.receipt(for: key) {
             return .replayed(receipt: existing)
         }
 
@@ -154,6 +159,42 @@ struct RuntimeTransactionCoordinator: Sendable {
         }
 
         let committedAt = DomainTimestamp.string(from: occurredAt)
+        if let sqliteStore = eventStore as? EventStoreSQLite {
+            let semanticEvent = executionResult.flatMap {
+                RuntimeDomainEvent.semanticEvent(command: command, result: $0, occurredAt: committedAt)
+            }
+            let authority = try await sqliteStore.commitAuthority(
+                transaction: transaction,
+                semanticEvent: semanticEvent,
+                committedAt: committedAt
+            )
+            guard authority.disposition == .committed else {
+                return .replayed(receipt: authority.receipt)
+            }
+
+            // Projections are recoverable materializations. Once the SQLite authority
+            // transaction commits, a projection failure must not rewrite history as a
+            // blocked command; the durable receipt cursor drives deterministic catch-up.
+            let materialized = try? await ProjectionMaterializer(store: eventStore).materializeAll(
+                materializedAt: committedAt
+            )
+            let projectionStoreReceipt: ProjectionStoreCommitReceipt?
+            let searchRebuildReceipt: SearchRebuildIndexReceipt?
+            if let materialized {
+                projectionStoreReceipt = try? await projectionStore?.saveWithReceipt(batch: materialized, updatedAt: committedAt)
+                searchRebuildReceipt = try? await searchIndex?.rebuild(from: materialized.search, updatedAt: committedAt)
+            } else {
+                projectionStoreReceipt = nil
+                searchRebuildReceipt = nil
+            }
+            return .committed(
+                transaction: transaction,
+                receipt: authority.receipt,
+                projectionStoreReceipt: projectionStoreReceipt,
+                searchRebuildReceipt: searchRebuildReceipt
+            )
+        }
+
         let envelope = try await eventStore.append(transaction.writeSet.event)
         let materialized = try await ProjectionMaterializer(store: eventStore).materializeAll(
             previousCursors: projectionCursors,

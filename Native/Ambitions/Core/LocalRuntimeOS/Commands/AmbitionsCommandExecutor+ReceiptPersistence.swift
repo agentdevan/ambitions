@@ -34,7 +34,16 @@ extension AmbitionsCommandExecutor {
             recordedAt: recordedAt
         )
 
-        try? await commandExecutionRecords?.append(record)
+        if let commandExecutionRecords {
+            do {
+                try await commandExecutionRecords.append(record)
+            } catch {
+                return enrichedResult.mergingMetadata([
+                    "commandRecordMaterialization": "needs_recovery",
+                    "commandRecordMaterializationError": String(describing: error),
+                ])
+            }
+        }
         return enrichedResult
     }
 

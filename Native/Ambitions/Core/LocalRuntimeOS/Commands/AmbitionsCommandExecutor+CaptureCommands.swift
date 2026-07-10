@@ -5,7 +5,7 @@ extension AmbitionsCommandExecutor {
         _ command: AmbitionsCommand,
         context: CommandExecutionContext
     ) async -> AmbitionsCommandExecutionResult {
-        guard let captureService else {
+        guard captureService != nil else {
             return AmbitionsCommandExecutionResult(
                 status: .blocked,
                 summary: "Quick capture is valid, but capture persistence is unavailable in this execution context.",
@@ -18,8 +18,7 @@ extension AmbitionsCommandExecutor {
         }
         let sourceType = captureSourceType(for: command)
 
-        do {
-            let smartAttachment = smartAttachmentService?.route(
+        let smartAttachment = smartAttachmentService?.route(
                 SmartAttachmentInput(
                     rawText: text,
                     sourceContext: SmartAttachmentSourceContext(
@@ -31,13 +30,63 @@ extension AmbitionsCommandExecutor {
                 candidates: [],
                 maxCandidateCount: 5
             )
+        let captureID = "capture.\(command.id)"
+        let resolvedRoute = route(for: command.payload.destinationRoute) ?? smartAttachment?.captureRoute ?? .captureInbox
+        let resolvedKind = captureKind(for: command.payload.commitmentKind) ?? smartAttachment?.captureKind ?? .raw
+        var metadata: [String: String] = [
+                "captureID": captureID,
+                "commandKind": command.kind.rawValue,
+                "commandSource": command.source.rawValue,
+                "captureSourceType": sourceType.rawValue,
+                "captureRoute": resolvedRoute.rawValue,
+                "captureKind": resolvedKind.rawValue,
+                "captureLocalOnly": "true",
+                "captureMaterialization": "pending_authority_commit",
+            ]
+        if let smartAttachment {
+            metadata["smartAttachmentResult"] = smartAttachment.resultState.rawValue
+            metadata["smartAttachmentConfidence"] = smartAttachment.confidence.rawValue
+            metadata["smartAttachmentReceipt"] = smartAttachment.receiptLine
+        }
+        return AmbitionsCommandExecutionResult(
+            status: .succeeded,
+            summary: smartAttachment?.receiptLine ?? "Saved to Needs a Place",
+            route: .captureInbox,
+            target: AmbitionsCommandTarget(
+                goalID: command.target.goalID,
+                captureID: captureID,
+                destination: .captureInbox
+            ),
+            recommendationExplanationIDs: command.relations.recommendationExplanationIDs,
+            metadata: metadata
+        )
+    }
+
+    func materializeQuickCapture(
+        _ command: AmbitionsCommand,
+        context: CommandExecutionContext,
+        committedResult: AmbitionsCommandExecutionResult
+    ) async -> AmbitionsCommandExecutionResult {
+        guard let captureService,
+              let text = command.payload.primaryText,
+              let captureID = committedResult.target?.captureID else { return committedResult }
+        let sourceType = captureSourceType(for: command)
+        if let captures = try? await captureService.listCaptures(),
+           let existing = captures.first(where: { $0.id == captureID }) {
+            return committedResult.mergingMetadata(["captureMaterialization": "saved", "captureMaturityState": existing.maturityState.rawValue])
+        }
+        let smartAttachment = smartAttachmentService?.route(
+            SmartAttachmentInput(rawText: text, sourceContext: SmartAttachmentSourceContext(sourceType: sourceType, sourceSurface: context.sourceSurface, commandID: command.id)),
+            candidates: [], maxCandidateCount: 5
+        )
+        do {
             let capture = try await captureService.createCapture(
                 CreateCaptureRequest(
                     rawText: text,
+                    requestedID: captureID,
                     sourceType: sourceType,
                     linkedGoalID: command.target.goalID,
                     triage: externalCreationTriageMetadata(for: command),
-                    revisitAfter: nil,
                     kind: captureKind(for: command.payload.commitmentKind) ?? smartAttachment?.captureKind,
                     route: route(for: command.payload.destinationRoute) ?? smartAttachment?.captureRoute,
                     triageStatus: smartAttachment?.triageStatus,
@@ -47,27 +96,10 @@ extension AmbitionsCommandExecutor {
                     contextLensHint: command.payload.contextLens,
                     priorityHints: CapturePriorityHints(commandHints: command.payload.priorityHints),
                     assumptionSummary: smartAttachment?.captureAssumptionSummary
-                ),
-                now: context.now
+                ), now: context.now
             )
-            var eventIDs: [String] = []
-            var metadata: [String: String] = [
-                "captureID": capture.id,
-                "commandKind": command.kind.rawValue,
-                "commandSource": command.source.rawValue,
-                "captureSourceType": sourceType.rawValue,
-                "captureRoute": capture.route.rawValue,
-                "captureMaturityState": capture.maturityState.rawValue,
-                "captureLocalOnly": String(capture.localOnly)
-            ]
-            if let smartAttachment {
-                metadata["smartAttachmentResult"] = smartAttachment.resultState.rawValue
-                metadata["smartAttachmentConfidence"] = smartAttachment.confidence.rawValue
-                metadata["smartAttachmentReceipt"] = smartAttachment.receiptLine
-                metadata["smartAttachmentRoute"] = smartAttachment.selectedCandidate?.target.routeType.rawValue
-                metadata["smartAttachmentDestination"] = smartAttachment.selectedCandidate?.target.destinationKind.rawValue
-            }
-
+            var metadata = ["captureMaterialization": "saved", "captureMaturityState": capture.maturityState.rawValue]
+            var ledgerIDs = committedResult.eventLedgerEntryIDs
             if context.allowsEventLedgerEmission, let eventLedger {
                 let event = EventLedgerEntry.commandCaptureCreated(
                     command: command,
@@ -76,32 +108,24 @@ extension AmbitionsCommandExecutor {
                 )
                 do {
                     try await eventLedger.append(event)
-                    eventIDs = [event.id]
+                    ledgerIDs.append(event.id)
+                    metadata["eventLedgerEmission"] = "saved_post_authority"
                 } catch {
-                    metadata["eventLedgerEmission"] = "failed"
+                    metadata["eventLedgerEmission"] = "needs_recovery"
                 }
             }
-
+            let enriched = committedResult.mergingMetadata(metadata)
             return AmbitionsCommandExecutionResult(
-                status: .succeeded,
-                summary: smartAttachment?.receiptLine ?? "Saved to Needs a Place",
-                route: .captureInbox,
-                target: AmbitionsCommandTarget(
-                    goalID: command.target.goalID,
-                    captureID: capture.id,
-                    destination: .captureInbox
-                ),
-                eventLedgerEntryIDs: eventIDs,
-                recommendationExplanationIDs: command.relations.recommendationExplanationIDs,
-                metadata: metadata
+                status: enriched.status,
+                summary: enriched.summary,
+                route: enriched.route,
+                target: enriched.target,
+                eventLedgerEntryIDs: ledgerIDs,
+                recommendationExplanationIDs: enriched.recommendationExplanationIDs,
+                metadata: enriched.metadata
             )
         } catch {
-            return AmbitionsCommandExecutionResult(
-                status: .failed,
-                summary: error.localizedDescription,
-                target: command.target,
-                metadata: ["error": String(describing: error)]
-            )
+            return committedResult.mergingMetadata(["captureMaterialization": "needs_recovery", "captureMaterializationError": String(describing: error)])
         }
     }
 

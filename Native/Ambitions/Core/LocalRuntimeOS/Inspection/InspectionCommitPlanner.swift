@@ -340,6 +340,12 @@ struct InspectionCommitPlanner: Sendable {
             return .goalArchived
         case .compactionSnapshot:
             return .reviewCompleted
+        case .domainMutation:
+            switch commandKind {
+            case .quickCapture: return .captureCreated
+            case .createTimeItem, .scheduleItem, .placeStepInTime: return .itemScheduled
+            default: return .userCorrectionAdded
+            }
         case .commandExecution:
             switch commandKind {
             case .quickCapture:

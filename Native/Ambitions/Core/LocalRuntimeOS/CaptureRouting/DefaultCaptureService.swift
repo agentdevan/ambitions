@@ -40,7 +40,7 @@ struct DefaultCaptureService: CaptureServicing {
         }
 
         let timestamp = DomainTimestamp.string(from: now)
-        let captureID = idProvider()
+        let captureID = request.requestedID ?? idProvider()
         let routingPreparation = try await prepareCaptureRoutingDecision(
             captureID: captureID,
             rawText: trimmed,

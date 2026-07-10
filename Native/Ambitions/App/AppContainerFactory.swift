@@ -134,6 +134,8 @@ enum AppContainerFactory {
             projectionStore: repositories.projectionStore,
             searchIndex: repositories.searchIndex,
             commandJournal: repositories.commandJournal,
+            // Durable idempotency is owned by EventStoreSQLite's authority transaction.
+            // This actor is retained only for non-SQLite preview/test stores.
             runtimeTransactionIdempotencyStore: RuntimeIdempotencyStore(),
             smartAttachmentService: DefaultSmartAttachmentService(),
             validator: AmbitionsCommandValidator(),

@@ -13,8 +13,8 @@ struct EventStoreSQLiteHealth: Codable, Sendable, Equatable, Hashable {
 }
 
 actor EventStoreSQLite: RuntimeEventStore {
-    private let databaseURL: URL
-    private let deviceID: String
+    let databaseURL: URL
+    let deviceID: String
     private let legacyJSONLImportURL: URL?
     private var legacyJSONLImportAttempted = false
 
@@ -92,7 +92,7 @@ actor EventStoreSQLite: RuntimeEventStore {
     }
 }
 
-private extension EventStoreSQLite {
+extension EventStoreSQLite {
     func openDatabase() throws -> LocalRuntimeSQLiteDatabase {
         try LocalRuntimeSQLiteDatabase(url: databaseURL)
     }

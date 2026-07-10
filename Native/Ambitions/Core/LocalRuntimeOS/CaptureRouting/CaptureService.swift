@@ -1,6 +1,7 @@
 import Foundation
 
 struct CreateCaptureRequest: Sendable, Equatable {
+    let requestedID: String?
     let rawText: String
     let sourceType: CaptureSourceType?
     let linkedGoalID: String?
@@ -23,6 +24,7 @@ struct CreateCaptureRequest: Sendable, Equatable {
 
     init(
         rawText: String,
+        requestedID: String? = nil,
         sourceType: CaptureSourceType? = nil,
         linkedGoalID: String? = nil,
         triage: CaptureTriageMetadata? = nil,
@@ -43,6 +45,7 @@ struct CreateCaptureRequest: Sendable, Equatable {
         recommendationExplanationIDs: [String] = []
     ) {
         self.rawText = rawText
+        self.requestedID = requestedID
         self.sourceType = sourceType
         self.linkedGoalID = linkedGoalID
         self.triage = triage

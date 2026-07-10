@@ -1,6 +1,95 @@
 import Foundation
 
 let runtimeEventSchemaVersion = "runtime_event.native.v1"
+let runtimeDomainEventSchemaVersion = 2
+
+enum RuntimeDomainEvent: Sendable, Codable, Equatable, Hashable {
+    case captureCreated(CaptureCreatedDomainEvent)
+    case stepPlaced(StepPlacedDomainEvent)
+    case timeWindowProtected(TimeWindowDomainEvent)
+    case timeWindowCorrected(TimeWindowDomainEvent)
+    case mutationUndone(MutationUndoneDomainEvent)
+
+    var typeID: String {
+        switch self {
+        case .captureCreated: "ambitions.capture.created"
+        case .stepPlaced: "ambitions.time.step_placed"
+        case .timeWindowProtected: "ambitions.time.window_protected"
+        case .timeWindowCorrected: "ambitions.time.window_corrected"
+        case .mutationUndone: "ambitions.mutation.undone"
+        }
+    }
+
+    var schemaVersion: Int { runtimeDomainEventSchemaVersion }
+}
+
+struct CaptureCreatedDomainEvent: Sendable, Codable, Equatable, Hashable {
+    let captureID: String
+    let rawText: String
+    let route: CaptureRoute
+    let kind: CaptureKind
+    let createdAt: String
+    let linkedGoalID: String?
+}
+
+struct StepPlacedDomainEvent: Sendable, Codable, Equatable, Hashable {
+    let stepID: String
+    let timeBlockID: String
+    let start: String
+    let end: String
+}
+
+struct TimeWindowDomainEvent: Sendable, Codable, Equatable, Hashable {
+    let windowID: String
+    let start: String
+    let end: String
+    let reason: String
+}
+
+struct MutationUndoneDomainEvent: Sendable, Codable, Equatable, Hashable {
+    let originalReceiptID: String
+    let affectedObjectIDs: [String]
+}
+
+struct RuntimeDomainEventRecord: Sendable, Codable, Equatable, Hashable {
+    let typeID: String
+    let schemaVersion: Int
+    let event: RuntimeDomainEvent
+
+    init(_ event: RuntimeDomainEvent) {
+        typeID = event.typeID
+        schemaVersion = event.schemaVersion
+        self.event = event
+    }
+}
+
+extension RuntimeDomainEvent {
+    static func semanticEvent(command: AmbitionsCommand, result: AmbitionsCommandExecutionResult, occurredAt: String) -> RuntimeDomainEvent? {
+        switch command.kind {
+        case .quickCapture:
+            guard let captureID = result.target?.captureID ?? result.metadata["captureID"],
+                  let rawText = command.payload.primaryText else { return nil }
+            return .captureCreated(CaptureCreatedDomainEvent(
+                captureID: captureID,
+                rawText: rawText,
+                route: result.metadata["captureRoute"].flatMap(CaptureRoute.init(rawValue:)) ?? .captureInbox,
+                kind: result.metadata["captureKind"].flatMap(CaptureKind.init(rawValue:)) ?? .raw,
+                createdAt: occurredAt,
+                linkedGoalID: command.target.goalID
+            ))
+        case .createTimeItem, .placeStepInTime:
+            guard let stepID = command.target.stepID, let timeBlockID = command.target.timeID else { return nil }
+            return .stepPlaced(StepPlacedDomainEvent(
+                stepID: stepID,
+                timeBlockID: timeBlockID,
+                start: command.payload.metadata["start"] ?? occurredAt,
+                end: command.payload.metadata["end"] ?? occurredAt
+            ))
+        default:
+            return nil
+        }
+    }
+}
 
 enum RuntimeEventKind: String, Codable, Equatable, Hashable, CaseIterable {
     case commandExecution = "command_execution"
@@ -11,6 +100,7 @@ enum RuntimeEventKind: String, Codable, Equatable, Hashable, CaseIterable {
     case proofAttached = "proof_attached"
     case tombstoneRecorded = "tombstone_recorded"
     case compactionSnapshot = "compaction_snapshot"
+    case domainMutation = "domain_mutation"
 }
 
 enum RuntimeCommandEventPhase: String, Codable, Equatable, Hashable, CaseIterable {
@@ -129,6 +219,7 @@ enum RuntimeEventPayload: Codable, Equatable, Hashable {
     case proofAttached(RuntimeProofAttachmentEventPayload)
     case tombstoneRecorded(RuntimeTombstoneEventPayload)
     case compactionSnapshot(RuntimeEventCompactionSnapshot)
+    case domainMutation(RuntimeDomainEventRecord)
 
     var kind: RuntimeEventKind {
         switch self {
@@ -148,6 +239,8 @@ enum RuntimeEventPayload: Codable, Equatable, Hashable {
             return .tombstoneRecorded
         case .compactionSnapshot:
             return .compactionSnapshot
+        case .domainMutation:
+            return .domainMutation
         }
     }
 }

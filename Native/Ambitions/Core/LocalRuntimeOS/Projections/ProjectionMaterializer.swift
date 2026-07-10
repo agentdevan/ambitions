@@ -167,6 +167,24 @@ struct ProjectionEventRecord: Codable, Equatable, Hashable, Identifiable {
                     "checksumHead": snapshot.checksumHead,
                 ]
             )
+        case let .domainMutation(record):
+            return (
+                record.typeID,
+                nil,
+                nil,
+                Self.objectIDs(for: record.event),
+                [],
+                ["domainEventTypeID": record.typeID, "domainEventSchemaVersion": String(record.schemaVersion)]
+            )
+        }
+    }
+
+    private static func objectIDs(for event: RuntimeDomainEvent) -> [String] {
+        switch event {
+        case let .captureCreated(value): [value.captureID]
+        case let .stepPlaced(value): [value.stepID, value.timeBlockID]
+        case let .timeWindowProtected(value), let .timeWindowCorrected(value): [value.windowID]
+        case let .mutationUndone(value): value.affectedObjectIDs
         }
     }
 }

@@ -86,11 +86,15 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         )
         switch await replayAdapter.lookup(command) {
         case .runtimeEvent(let projection, let commandRecordMaterialization):
-            return replayAdapter.replayResult(
+            let replayed = replayAdapter.replayResult(
                 for: command,
                 projection: projection,
                 commandRecordMaterialization: commandRecordMaterialization
             )
+            if command.kind == .quickCapture {
+                return await materializeQuickCapture(command, context: context, committedResult: replayed)
+            }
+            return replayed
         case .commandRecordWithoutRuntimeEvent(let record):
             return replayAdapter.commandRecordWithoutRuntimeEventResult(for: command, record: record)
         case .lookupUnavailable:
@@ -198,13 +202,19 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         let commandsResult = result
             .mergingMetadata(compilation.resultMetadata)
             .mergingMetadata(journalReceipt.resultMetadata)
-        return await persistExecution(
+        let persistedResult = await persistExecution(
             command: command,
             result: commandsResult,
             at: context.now,
             compilation: compilation,
             journalReceipt: journalReceipt
         )
+        if command.kind == .quickCapture,
+           persistedResult.status == .succeeded,
+           RuntimeTransactionCommitPolicy.hasCommittedEvidence(persistedResult) {
+            return await materializeQuickCapture(command, context: context, committedResult: persistedResult)
+        }
+        return persistedResult
     }
 
 }
