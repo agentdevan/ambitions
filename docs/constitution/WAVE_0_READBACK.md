@@ -41,9 +41,10 @@ laws=124 source_maps=34 test_maps=34
 scenarios=16 budgets=9 classifications=6
 ```
 
-The exact final PR head is verified by the latest successful `Ambitions Constitution Audit` check associated with the PR before merge. The merge gate requires:
+The final merge gate requires a successful GitHub Actions result on the exact PR head:
 
 ```text
+Ambitions Constitution Audit
 job: Constitutional registry integrity
 status: completed
 conclusion: success
