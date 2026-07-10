@@ -6,15 +6,20 @@ PR: #23
 
 ## Scope completed
 
-- Added the Engineering Constitution index and Articles 25–43.
-- Registered 18 P0 and 100 P1 mandatory launch opportunities.
+- Elevated `PRODUCT_DESIGN_TRUTH.md` into the Ambitions Product Constitution with Decisions 1–201 and the five owner-approved reconciliations.
+- Explicitly bound `docs/constitution/ENGINEERING_CONSTITUTION.md`, Articles 25–43, and their machine-readable registries through `AUTH-005A`.
+- Registered exactly 18 P0 and 100 P1 mandatory launch opportunities.
+- Normalized every P0 and P1 record to the complete First-Class Green acceptance dimensions and proof contract.
+- Removed duplicate P0 authority and retained exactly six canonical opportunity-part files.
 - Added stable law, source-owner, test/proof, scenario, performance, data-classification, and dependency registries.
-- Added the fail-closed constitutional registry audit.
+- Expanded the constitutional scenario corpus to 16 scenarios with coverage for every P0 domain.
+- Added the strengthened fail-closed constitutional registry audit.
 - Added GitHub Actions execution for relevant constitutional changes.
 - Added the constitutional PR compliance manifest template.
-- Corrected dependency cycles in the P0 registry before acceptance.
+- Repaired the P0 dependency cycles found during independent review.
+- Added missing source/test mappings for parent constitutional law prefixes.
 - Installed the canonical Linear launch Initiative, governance Project, and Wave 0 milestone.
-- Created the temporary Wave 0 acceptance document because the workspace issue limit blocked the required Parent Issue.
+- Created the temporary Wave 0 acceptance document because the Linear workspace issue limit blocked the required Parent Feature.
 - Confirmed and created the five non-governance Project gaps:
   - Swift Concurrency + Actor Isolation Design
   - CloudKit Continuity + Multi-Device Merge Design
@@ -22,25 +27,18 @@ PR: #23
   - Dependency + Supply-Chain Governance Design
   - App Lifecycle + Background Execution Design
 - Updated the Linear coverage map without bulk-rewriting existing active Projects.
+- Completed the independent ruthless review recorded in `PR_23_RUTHLESS_REVIEW.md` and repaired every blocking finding.
+- Removed all temporary repair workflows, triggers, scripts, and diagnostic artifacts from the reviewed candidate.
 
 ## Validation
 
-Executed against an exact local assembly of the committed registry content:
+The strengthened audit passed in the repair runner before the reviewed candidate was committed:
 
 ```text
 GREEN ambitions constitutional registry audit
 opportunities=118 p0=18 p1=100
-laws=124 source_maps=30 test_maps=30
-scenarios=10 budgets=9 classifications=6
-```
-
-GitHub Actions run `29063385816` completed successfully for PR head commit `44a676ce8fc58857d39e8adef09f869a754d6c81`:
-
-```text
-Ambitions Constitution Audit
-status: completed
-conclusion: success
-run number: 7
+laws=124 source_maps=34 test_maps=34
+scenarios=16 budgets=9 classifications=6
 ```
 
 The workflow compiles and executes:
@@ -49,6 +47,8 @@ The workflow compiles and executes:
 python3 -m py_compile scripts/ambitions-constitution-audit.py
 python3 scripts/ambitions-constitution-audit.py
 ```
+
+This readback commit exists to trigger the required GitHub Actions audit on the exact post-review candidate. Wave 0 may not merge or close Green until that exact-head run succeeds.
 
 ## Linear control plane
 
@@ -59,7 +59,7 @@ Canonical objects:
 - Milestone: `Wave 0 — Constitution Enforcement`
 - Temporary acceptance document: `Wave 0 — Constitutional Enforcement Acceptance Packet`
 
-The canonical Parent Feature Issue could not be created because the Linear workspace free issue limit was reached. The document preserves acceptance scope temporarily but does not replace the required hierarchy.
+The canonical Parent Feature Issue could not be created because the Linear workspace free issue limit was reached. The document preserves acceptance scope temporarily but does not replace the required hierarchy. Parent Feature creation remains a tracked capacity condition and must occur when Linear permits it.
 
 ## Claim ceiling
 
@@ -77,21 +77,19 @@ Not claimed:
 
 ## Wave 0 status
 
-**Yellow — ruthless review repaired; awaiting exact-head Green audit, canonical Parent Feature capacity, and merge.**
+**Yellow — constitution bound and ruthlessly reviewed; awaiting exact-head Green audit, canonical Parent Feature capacity, and merge.**
 
 Remaining before Wave 0 can close Green:
 
-1. register `docs/constitution/ENGINEERING_CONSTITUTION.md` explicitly from the parent `PRODUCT_DESIGN_TRUTH.md`,
-2. complete independent review of PR #23,
-3. create the canonical Wave 0 Parent Feature Issue when Linear issue capacity is available,
-4. independently verify the 118-opportunity Linear ownership map as each existing Project is next touched,
-5. calibrate numeric performance budgets in the owning Project before affected specifications become Spec Ready.
+1. obtain a successful `Ambitions Constitution Audit` run on the exact final PR head,
+2. create the canonical Wave 0 Parent Feature Issue when Linear issue capacity is available,
+3. merge only the exact independently reviewed and audited head.
+
+Downstream gates that do not block Wave 0 registry integrity:
+
+- independently confirm existing Project ownership as each Project is next touched,
+- calibrate numeric performance budgets before affected specifications become `Spec Ready`.
 
 ## Rollback
 
 Revert the Wave 0 commits on PR #23, cancel the governance Initiative/Project/milestone and five newly created Planned Projects, and retain existing implementation Projects unchanged.
-
-
-## Ruthless review repair
-
-Blocking registry and authority defects are documented in `PR_23_RUTHLESS_REVIEW.md` and repaired in the reviewed candidate. Numeric performance calibration remains a downstream `Spec Ready` gate rather than a Wave 0 registry-completeness claim.
