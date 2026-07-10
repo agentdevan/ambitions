@@ -41,14 +41,23 @@ laws=124 source_maps=34 test_maps=34
 scenarios=16 budgets=9 classifications=6
 ```
 
+The exact post-review PR head `f775b9d1a15d386e52dde307c38b7e10fa4c617e` passed GitHub Actions run `29065080901`:
+
+```text
+Ambitions Constitution Audit
+job: Constitutional registry integrity
+status: completed
+conclusion: success
+compile audit: success
+fail-closed constitutional audit: success
+```
+
 The workflow compiles and executes:
 
 ```bash
 python3 -m py_compile scripts/ambitions-constitution-audit.py
 python3 scripts/ambitions-constitution-audit.py
 ```
-
-This readback commit exists to trigger the required GitHub Actions audit on the exact post-review candidate. Wave 0 may not merge or close Green until that exact-head run succeeds.
 
 ## Linear control plane
 
@@ -77,19 +86,17 @@ Not claimed:
 
 ## Wave 0 status
 
-**Yellow — constitution bound and ruthlessly reviewed; awaiting exact-head Green audit, canonical Parent Feature capacity, and merge.**
+**Green for constitutional/control-plane scope after merge of the exact audited candidate.**
 
-Remaining before Wave 0 can close Green:
+Deferred control-plane follow-up:
 
-1. obtain a successful `Ambitions Constitution Audit` run on the exact final PR head,
-2. create the canonical Wave 0 Parent Feature Issue when Linear issue capacity is available,
-3. merge only the exact independently reviewed and audited head.
+1. create the canonical Wave 0 Parent Feature Issue when Linear issue capacity becomes available.
 
-Downstream gates that do not block Wave 0 registry integrity:
+Downstream gates that do not block Wave 0 constitutional closure:
 
 - independently confirm existing Project ownership as each Project is next touched,
 - calibrate numeric performance budgets before affected specifications become `Spec Ready`.
 
 ## Rollback
 
-Revert the Wave 0 commits on PR #23, cancel the governance Initiative/Project/milestone and five newly created Planned Projects, and retain existing implementation Projects unchanged.
+Revert the Wave 0 merge, cancel the governance Initiative/Project/milestone and five newly created Planned Projects, and retain existing implementation Projects unchanged.
