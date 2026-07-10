@@ -34,14 +34,21 @@ laws=124 source_maps=30 test_maps=30
 scenarios=10 budgets=9 classifications=6
 ```
 
-GitHub Actions now runs:
+GitHub Actions run `29063321233` completed successfully for commit `d59c46f2b0836c6a7fbb2f71d8917b3a50e0e5f1`:
+
+```text
+Ambitions Constitution Audit
+status: completed
+conclusion: success
+run number: 6
+```
+
+The workflow compiles and executes:
 
 ```bash
 python3 -m py_compile scripts/ambitions-constitution-audit.py
 python3 scripts/ambitions-constitution-audit.py
 ```
-
-A current PR workflow result remains required before Wave 0 can claim CI-backed registry Green.
 
 ## Linear control plane
 
@@ -70,16 +77,15 @@ Not claimed:
 
 ## Wave 0 status
 
-**Yellow — constitutional registry and Linear control plane installed; local registry audit Green.**
+**Yellow — constitutional registry, CI enforcement, and Linear control plane installed.**
 
 Remaining before Wave 0 can close Green:
 
 1. register `docs/constitution/ENGINEERING_CONSTITUTION.md` explicitly from the parent `PRODUCT_DESIGN_TRUTH.md`,
-2. obtain a current Green GitHub Actions result for the constitutional audit,
-3. complete independent review of PR #23,
-4. create the canonical Wave 0 Parent Feature Issue when Linear issue capacity is available,
-5. independently verify the 118-opportunity Linear ownership map as each existing Project is next touched,
-6. calibrate numeric performance budgets in the owning Project before affected specifications become Spec Ready.
+2. complete independent review of PR #23,
+3. create the canonical Wave 0 Parent Feature Issue when Linear issue capacity is available,
+4. independently verify the 118-opportunity Linear ownership map as each existing Project is next touched,
+5. calibrate numeric performance budgets in the owning Project before affected specifications become Spec Ready.
 
 ## Rollback
 
