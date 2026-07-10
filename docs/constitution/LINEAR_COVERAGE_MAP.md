@@ -1,6 +1,6 @@
 # Wave 0 — Linear Coverage Map
 
-Status: Initial repo/Linear mapping; requires owner-approved Linear control-plane update  
+Status: Wave 0 control plane installed; ongoing Project-by-Project coverage reconciliation required  
 Registry: `docs/constitution/opportunity-register.json`
 
 ## Baseline
@@ -10,9 +10,18 @@ Registry: `docs/constitution/opportunity-register.json`
 - Total mandatory launch opportunities: 118
 - Current implementation claim: none from this registry
 
+## Canonical launch control plane
+
+- Initiative: **Ambitions Constitution → Market-Leading App Store Launch**
+- Governance Project: **Ambitions Constitution Compliance + Implementation Program**
+- Milestone: **Wave 0 — Constitution Enforcement**
+- Acceptance document: **Wave 0 — Constitutional Enforcement Acceptance Packet**
+
+A required Parent Issue could not be created because the Linear workspace issue limit was reached. The acceptance document temporarily preserves the packet but does not replace the canonical Parent Feature hierarchy. Create the Parent Issue when capacity is available.
+
 ## Existing Project reuse
 
-The registry intentionally maps work into existing Projects wherever their Epic boundary already fits. Examples include:
+The registry maps work into existing Projects wherever their Epic boundary already fits. Examples include:
 
 - Domain Model Design
 - SwiftData Persistence Design
@@ -34,9 +43,9 @@ The registry intentionally maps work into existing Projects wherever their Epic 
 - EventKit / Reminders Design
 - WidgetKit, App Intents, Share Extension, and Deep Links design Projects
 
-## Proposed missing Projects
+## Confirmed and created Project gaps
 
-The initial coverage audit identifies six probable portfolio gaps. Create only after confirming no existing active Project fully owns the scope:
+Wave 0 confirmed and created the six missing Project/Epic boundaries:
 
 - Ambitions Constitution Compliance + Implementation Program
 - App Lifecycle + Background Execution Design
@@ -44,6 +53,8 @@ The initial coverage audit identifies six probable portfolio gaps. Create only a
 - Dependency + Supply-Chain Governance Design
 - Localization + Temporal Culture Design
 - Swift Concurrency + Actor Isolation Design
+
+These Projects are Planned except the governance Project, which is In Progress. They contain no implementation claim and require full source-aware design specifications before Parent Features or Codex leaves.
 
 ## Control-plane rule
 
@@ -61,9 +72,9 @@ Each opportunity remains traceable through its registry ID and may map to more t
 
 ## Next Linear pass
 
-1. Create or designate the Constitution compliance governance Project.
-2. Attach existing Projects to the launch initiative as they are touched.
-3. Resolve the six proposed gaps.
-4. Create one Parent Feature per P0 acceptance domain.
-5. Create P1 Parent Features in their owning Projects only after their design spec is Spec Ready.
-6. Do not bulk rewrite active Projects; migrate them when next touched.
+1. Attach existing Projects to the launch Initiative only when next touched.
+2. Upgrade each owning Project to the constitutional Full Design Spec Standard.
+3. Create one Parent Feature per P0 acceptance domain when issue capacity is available.
+4. Create P1 Parent Features in their owning Projects only after the design spec is Spec Ready.
+5. Do not bulk rewrite active Projects; migrate them when next touched.
+6. Keep Accepted Yellow distinct from First-Class Green and forbidden as final launch acceptance.
