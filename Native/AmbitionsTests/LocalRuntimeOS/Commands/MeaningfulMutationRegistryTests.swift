@@ -68,6 +68,7 @@ final class MeaningfulMutationRegistryTests: XCTestCase {
         let expected = [
             "AppShellActivatedCaptureSeam.saveCapture",
             "EventKitOutbox.recordCalendarResult",
+            "ShareViewController.save",
         ]
         let registered = Set(
             MeaningfulMutationRegistry.descriptors

@@ -31,7 +31,7 @@ struct MeaningfulMutationWritePathDescriptor: Sendable, Hashable {
 }
 
 enum MeaningfulMutationRegistry {
-    static let declaredMutationRowCount = 89
+    static let declaredMutationRowCount = 111
     static let declaredWritePathRowCount = 50
 
     static let descriptors: [MeaningfulMutationDescriptor] = [
@@ -124,6 +124,28 @@ enum MeaningfulMutationRegistry {
         mutation(id: "today.feedback-action", sourcePath: "RepositoryBackedTodayService.performFeedbackAction", commandKind: .completeAction, status: .unproven, rationale: "Today feedback action mutates legacy repositories without row-specific atomic replay proof."),
         mutation(id: "repair.restore-rollback", sourcePath: "RestoreRollback.restoreSnapshotWithRollback", commandKind: .updateGoal, status: .unproven, rationale: "Restore rollback mutation lacks row-specific crash-boundary and replay proof."),
         mutation(id: "preview.capture-seed", sourcePath: "PersistenceBootstrap.applyPreviewCaptureSeedIfNeeded", commandKind: .quickCapture, status: .unproven, rationale: "Preview capture seeding lacks row-specific isolation and replay proof for its repository mutation."),
+        mutation(id: "runtime.command-envelope", sourcePath: "AmbitionsCommandExecutor.appendCommandEnvelope", commandKind: .updateGoal, status: .unproven, rationale: "Command envelope append lacks row-specific atomic event, receipt, and replay proof."),
+        mutation(id: "runtime.attach-goal", sourcePath: "AmbitionsCommandExecutor.executeAttachToGoal", commandKind: .attachToGoal, status: .unproven, rationale: "Attach-to-Goal execution lacks row-specific atomic restart and replay proof."),
+        mutation(id: "runtime.calendar-write", sourcePath: "AmbitionsCommandExecutor.executeConfirmedCalendarWriteIntent", commandKind: .scheduleItem, status: .unproven, rationale: "Confirmed calendar write execution lacks row-specific device reconciliation and replay proof."),
+        mutation(id: "runtime.plan-seed", sourcePath: "AmbitionsCommandExecutor.executePlanSeedRepresentation", commandKind: .routeCommitment, status: .unproven, rationale: "Plan-seed execution lacks row-specific durable reconstruction proof."),
+        mutation(id: "runtime.quick-capture", sourcePath: "AmbitionsCommandExecutor.executeQuickCapture", commandKind: .quickCapture, status: .unproven, rationale: "Quick Capture execution lacks row-specific atomic restart and replay proof."),
+        mutation(id: "runtime.route-commitment", sourcePath: "AmbitionsCommandExecutor.executeRouteCommitment", commandKind: .routeCommitment, status: .unproven, rationale: "Commitment routing execution lacks row-specific atomic replay proof."),
+        mutation(id: "stage.capture-attachment", sourcePath: "AmbitionsStage.attachCaptureToCreatedGoal", commandKind: .attachToGoal, status: .unproven, rationale: "Stage capture attachment lacks row-specific restart and cross-object replay proof."),
+        mutation(id: "prototype.runtime-perform", sourcePath: "DedicatedDevicePrototypeRuntime.perform", commandKind: .updateGoal, status: .unproven, rationale: "Prototype runtime mutation lacks production durable lineage and replay proof."),
+        mutation(id: "capture.event-append", sourcePath: "DefaultCaptureService.appendCaptureEvent", commandKind: .quickCapture, status: .unproven, rationale: "Capture event append lacks row-specific projection, receipt, and replay proof."),
+        mutation(id: "external-action.execute", sourcePath: "DefaultExternalActionCommandService.execute", commandKind: .completeAction, status: .unproven, rationale: "External action execution lacks row-specific durable reconciliation and replay proof."),
+        mutation(id: "external-action.rejection", sourcePath: "DefaultExternalActionCommandService.recordRejectedExternalActionIfNeeded", commandKind: .dismissRecommendation, status: .unproven, rationale: "Rejected external action recording lacks row-specific restart and replay proof."),
+        mutation(id: "goal.teaching-signal", sourcePath: "DefaultGoalTeachingSignalService.capture", commandKind: .updateGoal, status: .unproven, rationale: "Goal teaching-signal capture lacks row-specific receipt and replay proof."),
+        mutation(id: "startup.prepare-session", sourcePath: "DefaultStartupService.prepareSession", commandKind: .updateGoal, status: .unproven, rationale: "Startup session preparation may commit runtime repair state without row-specific replay proof."),
+        mutation(id: "demo.time-foundation-seed", sourcePath: "DemoSeedPipeline.applyRenderedTimeFoundationSeedIfNeeded", commandKind: .placeStepInTime, status: .unproven, rationale: "Rendered Time demo seeding lacks row-specific isolation and replay proof."),
+        mutation(id: "demo.seed", sourcePath: "DemoSeedPipeline.seedIfNeeded", commandKind: .updateGoal, status: .unproven, rationale: "Demo seed pipeline mutation lacks row-specific isolation and replay proof."),
+        mutation(id: "inspection.record", sourcePath: "InspectionRecorder.record", commandKind: .updateGoal, status: .unproven, rationale: "Inspection recording lacks row-specific projection-only and restart proof."),
+        mutation(id: "preferences.repository-save", sourcePath: "RepositoryBackedAppPreferencesStore.savePreferences", commandKind: .updateUserPreferences, status: .unproven, rationale: "Repository-backed preference save lacks row-specific durable replay proof."),
+        mutation(id: "runtime.committer", sourcePath: "RuntimeCommandMutationCommitter.commit", commandKind: .updateGoal, status: .unproven, rationale: "Runtime mutation commit lacks row-specific atomic event, projection, receipt, and replay proof."),
+        mutation(id: "runtime.transaction-commit", sourcePath: "RuntimeTransactionCoordinator.commit", commandKind: .updateGoal, status: .unproven, rationale: "Runtime transaction commit lacks row-specific crash-boundary and replay proof."),
+        mutation(id: "share.save", sourcePath: "ShareViewController.save", commandKind: .quickCapture, status: .unproven, rationale: "External durable enqueue lacks app-process replay proof."),
+        mutation(id: "app-state.swiftdata-save", sourcePath: "SwiftDataAppStateStore.save", commandKind: .updateGoal, status: .unproven, rationale: "SwiftData app-state save lacks row-specific command, receipt, and replay proof."),
+        mutation(id: "today.command-evidence", sourcePath: "TodayCommandActionHandler.emitTodayCommandEvidence", commandKind: .completeAction, status: .unproven, rationale: "Today command evidence append lacks row-specific durable receipt and replay proof."),
     ]
 
     static let writePaths: [MeaningfulMutationWritePathDescriptor] = [

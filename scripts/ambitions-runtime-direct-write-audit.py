@@ -178,16 +178,6 @@ def proof_test_is_executable(proof_test_id: str) -> bool:
     return any(re.search(rf"\bfunc\s+{re.escape(method)}\s*\(", path.read_text(encoding="utf-8", errors="replace")) for path in candidates)
 
 
-SEMANTIC_SCAN_ROOTS = (
-    ROOT / "Native" / "Ambitions" / "App",
-    ROOT / "Native" / "Ambitions" / "Composer",
-    ROOT / "Native" / "Ambitions" / "Surfaces",
-    ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "ExternalWrites",
-    ROOT / "Native" / "Ambitions" / "Core" / "Permissions",
-    ROOT / "Native" / "Ambitions" / "Projection" / "ExternalSnapshots",
-    ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Repair",
-)
-
 SEMANTIC_MUTATION_SINK_PATTERNS = tuple(
     re.compile(pattern)
     for pattern in (
@@ -195,7 +185,8 @@ SEMANTIC_MUTATION_SINK_PATTERNS = tuple(
         r"\bTimeFieldMutationCoordinator\(\)\.(?:perform|undo)\s*\(",
         r"\b(?:captureService|service|receiptCommands|preferencesCommands)\.(?:createGoal|createCapture|performAction|submitClarificationAnswer|submitExplainabilityCorrection|saveYouPreferences|makeTimeCalendarAware|updateCaptureState|routeToTimeSeed|markAsWaiting|markAsOptionalSomeday|markAsDeliverableSeed|attachCaptureToGoal|turnCaptureIntoGoal)\s*\(",
         r"\b(?:repositories\.[A-Za-z0-9_]+|repository|appStateRepository|eventLedger|recorder|outbox)\.(?:save[A-Za-z0-9_]*|append|insert|delete|record[A-Za-z0-9_]*|enqueue[A-Za-z0-9_]*)\s*\(",
-        r"\.(?:enqueueExternalCreation|recordCalendarSideEffect|recordCalendarResult|recordResult)\s*\(",
+        r"\b(?:commandJournal|eventStore|runtimeEventStore)\.(?:append|commit)\s*\(",
+        r"\.(?:enqueueDurableRequest|enqueueExternalCreation|recordCalendarSideEffect|recordCalendarResult|recordResult)\s*\(",
         r"\b(?:replaceLocalStore|mergeWithConflictReport|importSnapshot)\s*\(",
     )
 )
@@ -298,11 +289,17 @@ def semantic_functions_in_text(text: str) -> set[str]:
     return discovered
 
 
+def production_swift_scan_roots() -> tuple[Path, ...]:
+    return tuple(ROOT / prefix.rstrip("/") for prefix in PRODUCTION_SWIFT_ROOTS)
+
+
 def discover_semantic_entry_points(
-    scan_roots: tuple[Path, ...] = SEMANTIC_SCAN_ROOTS,
+    scan_roots: tuple[Path, ...] | None = None,
     *,
     enforce_production_scope: bool = True,
 ) -> set[str]:
+    if scan_roots is None:
+        scan_roots = production_swift_scan_roots()
     discovered: set[str] = set()
     seen: set[Path] = set()
     for root in scan_roots:
@@ -462,6 +459,17 @@ def run_self_test() -> int:
     assert len(parsed.mutations) == 1 and len(parsed.write_paths) == 1
     assert semantic_entrypoint_findings({"CaptureViewModel.fixture"}, set())
     assert not semantic_entrypoint_findings({"CaptureViewModel.fixture"}, {"CaptureViewModel.fixture"})
+    assert production_swift_scan_roots() == tuple(ROOT / prefix.rstrip("/") for prefix in PRODUCTION_SWIFT_ROOTS)
+    default_discovered = discover_semantic_entry_points()
+    required_production_entries = {
+        "TodayCommandActionHandler.performAction",
+        "ShareViewController.save",
+    }
+    assert required_production_entries <= default_discovered
+    production_registry = parse_registry_file(MUTATION_REGISTRY)
+    registered_production_entries = {row.source_path for row in production_registry.mutations}
+    for source in required_production_entries:
+        assert semantic_entrypoint_findings({source}, registered_production_entries - {source})
     with tempfile.TemporaryDirectory() as temporary_directory:
         unseen_root = Path(temporary_directory) / "PreviouslyUnseen" / "NestedMutationDirectory"
         unseen_root.mkdir(parents=True)
