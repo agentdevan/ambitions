@@ -1,0 +1,115 @@
+name: Wave 0 Ruthless Repair V6
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    paths:
+      - ".github/wave0-ruthless-repair-v6.trigger"
+      - ".github/workflows/wave0-ruthless-repair-v6.yml"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  repair:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout PR head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - name: Correct one-shot script and mapping gaps
+        run: |
+          python3 <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path('scripts/wave0-ruthless-repair.py')
+          text = path.read_text()
+          old = "audit = textwrap.dedent(\n        r'''#!/usr/bin/env python3"
+          new = "audit = textwrap.dedent(\n        r'''\n        #!/usr/bin/env python3"
+          if old in text:
+              text = text.replace(old, new, 1)
+          marker = "    p0_items = [normalize_opportunity(item) for item in p0_items]\n"
+          replacement = marker + "    for item in p0_items:\n        if item['id'] == 'P0-006':\n            item['dependencies'] = []\n        if item['id'] == 'P0-015':\n            item['dependencies'] = [dep for dep in item['dependencies'] if dep != 'P0-012']\n"
+          if replacement not in text:
+              if marker not in text:
+                  raise SystemExit('P0 normalization marker missing')
+              text = text.replace(marker, replacement, 1)
+          path.write_text(text)
+
+          source_index = Path('docs/constitution/law-source-map.json')
+          source_meta = json.loads(source_index.read_text())
+          source_part = Path('docs/constitution/law-source-map/map-03.json')
+          source_data = json.loads(source_part.read_text())
+          source_additions = {
+              'A11Y': ['Native/Ambitions/DesignSystem/Accessibility','Native/Ambitions/Quality','Native/Ambitions/Surfaces','Native/AmbitionsTests','Native/AmbitionsUITests'],
+              'IA': ['docs/truth/PRODUCT_DESIGN_TRUTH.md','Native/Ambitions/Stage','Native/Ambitions/Surfaces','Native/Ambitions/Composer'],
+              'OBJECT': ['Native/Ambitions/Core/Domain','Native/Ambitions/Core/LocalRuntimeOS/State','Native/Ambitions/Core/LocalRuntimeOS/Transactions','Native/Ambitions/Core/LocalRuntimeOS/Projections'],
+              'RUNTIME': ['docs/truth/PRODUCT_DESIGN_TRUTH.md','Native/Ambitions/Core/LocalRuntimeOS','Native/Ambitions/Scenarios','Native/AmbitionsTests'],
+          }
+          existing = {item['law_prefix'] for item in source_data['prefix_mappings']}
+          for prefix, owners in source_additions.items():
+              if prefix not in existing:
+                  source_data['prefix_mappings'].append({'law_prefix':prefix,'canonical_source_owners':owners})
+          source_data['prefix_mappings'] = sorted(source_data['prefix_mappings'], key=lambda item: item['law_prefix'])
+          source_part.write_text(json.dumps(source_data,separators=(',',':'))+'\n')
+          source_meta['count'] = sum(len(json.loads((Path('docs/constitution')/part).read_text())['prefix_mappings']) for part in source_meta['parts'])
+          source_index.write_text(json.dumps(source_meta,separators=(',',':'))+'\n')
+
+          test_index = Path('docs/constitution/law-test-map.json')
+          test_meta = json.loads(test_index.read_text())
+          test_part = Path('docs/constitution/law-test-map/map-02.json')
+          test_data = json.loads(test_part.read_text())
+          test_additions = {
+              'A11Y': ['voiceover_semantics','dynamic_type','reduce_motion','focus_restoration','accessibility_actions'],
+              'IA': ['root_ia_audit','route_depth','surface_ownership','capture_motion_destination_denial'],
+              'OBJECT': ['domain_invariants','state_axes','canonical_identity','projection_consistency','conversion_receipts'],
+              'RUNTIME': ['command_event_projection_receipt_replay','runtime_scenarios','offline_replay','failure_injection'],
+          }
+          existing = {item['law_prefix'] for item in test_data['prefix_mappings']}
+          for prefix, families in test_additions.items():
+              if prefix not in existing:
+                  test_data['prefix_mappings'].append({'law_prefix':prefix,'required_test_families':families,'required_proof':['test-log','current-commit','claim-ceiling']})
+          test_data['prefix_mappings'] = sorted(test_data['prefix_mappings'], key=lambda item: item['law_prefix'])
+          test_part.write_text(json.dumps(test_data,separators=(',',':'))+'\n')
+          test_meta['count'] = sum(len(json.loads((Path('docs/constitution')/part).read_text())['prefix_mappings']) for part in test_meta['parts'])
+          test_index.write_text(json.dumps(test_meta,separators=(',',':'))+'\n')
+          PY
+
+      - name: Apply repair and audit
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set +e
+          python3 scripts/wave0-ruthless-repair.py > /tmp/wave0-repair.log 2>&1
+          status=$?
+          cat /tmp/wave0-repair.log
+          if [ $status -ne 0 ]; then
+            summary=$(tail -n 40 /tmp/wave0-repair.log | sed 's/`/\`/g')
+            gh api "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments" -f body="Wave 0 ruthless repair V6 failed before commit.\n\n\`\`\`text\n${summary}\n\`\`\`"
+            exit $status
+          fi
+
+      - name: Commit repaired candidate when changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          git restore scripts/wave0-ruthless-repair.py
+          if git diff --quiet; then
+            echo "No repair diff remains."
+            exit 0
+          fi
+          git config user.name "ambitions-constitution-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add docs/truth/PRODUCT_DESIGN_TRUTH.md docs/constitution scripts/ambitions-constitution-audit.py
+          git commit -m "docs: bind and harden Wave 0 constitution after ruthless review"
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
+          gh api "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments" -f body="Wave 0 ruthless repair V6 committed successfully. The strengthened fail-closed audit passed before push."
