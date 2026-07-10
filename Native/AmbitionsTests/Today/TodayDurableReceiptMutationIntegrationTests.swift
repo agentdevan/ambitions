@@ -64,13 +64,15 @@ final class TodayDurableReceiptMutationIntegrationTests: XCTestCase {
     func testRecommendationRejectionRestartReconstructsSensitiveReceiptWithoutDoubleApply() async throws {
         let root = try makeRoot("rejection-restart")
         defer { try? FileManager.default.removeItem(at: root) }
-        let events = EventStoreSQLite(databaseURL: root.appendingPathComponent("EventStore.sqlite"))
-        let projections = ProjectionStoreSQLite(databaseURL: root.appendingPathComponent("ProjectionStore.sqlite"))
-        let history = InMemoryActionReceiptHistoryRepository()
-        let executor = makeExecutor(events: events, projections: projections, history: history)
-        let service = TodayReceiptCommandService(
-            actionReceiptHistory: history,
-            runtimeCommandClient: client(executor, projections)
+        let eventURL = root.appendingPathComponent("EventStore.sqlite")
+        let projectionURL = root.appendingPathComponent("ProjectionStore.sqlite")
+        let firstEvents = EventStoreSQLite(databaseURL: eventURL)
+        let firstProjections = ProjectionStoreSQLite(databaseURL: projectionURL)
+        let firstHistory = InMemoryActionReceiptHistoryRepository()
+        let firstExecutor = makeExecutor(events: firstEvents, projections: firstProjections, history: firstHistory)
+        let firstService = TodayReceiptCommandService(
+            actionReceiptHistory: firstHistory,
+            runtimeCommandClient: client(firstExecutor, firstProjections)
         )
         let input = TodayRecommendationRejectionInput(
             candidateID: "candidate-1",
@@ -83,16 +85,30 @@ final class TodayDurableReceiptMutationIntegrationTests: XCTestCase {
             recordedAt: "2027-02-20T09:00:00Z"
         )
 
-        let first = try await service.recordRecommendationRejection(input)
-        let duplicate = try await service.recordRecommendationRejection(input)
-        let records = try await history.listRecords()
+        let first = try await firstService.recordRecommendationRejection(input)
+        let firstRecords = try await firstHistory.listRecords()
+
+        let restartedEvents = EventStoreSQLite(databaseURL: eventURL)
+        let restartedProjections = ProjectionStoreSQLite(databaseURL: projectionURL)
+        let restartedHistory = InMemoryActionReceiptHistoryRepository()
+        let restartedExecutor = makeExecutor(
+            events: restartedEvents,
+            projections: restartedProjections,
+            history: restartedHistory
+        )
+        let replay = try await TodayReceiptCommandService(
+            actionReceiptHistory: restartedHistory,
+            runtimeCommandClient: client(restartedExecutor, restartedProjections)
+        ).recordRecommendationRejection(input)
+        let replayRecords = try await restartedHistory.listRecords()
 
         XCTAssertEqual(first.message?.title, "Reason saved")
-        XCTAssertEqual(duplicate.message?.title, "Reason saved")
-        XCTAssertEqual(records.count, 1)
-        XCTAssertEqual(records[0].privacyLevel, .sensitive)
-        XCTAssertTrue(records[0].runtimeLineage?.hasCompleteTrustTrace == true)
-        let semanticEvents = try await events.fetchEvents(matching: .kind(.domainMutation), limit: nil)
+        XCTAssertEqual(replay.message?.title, "Reason saved")
+        XCTAssertEqual(firstRecords.count, 1)
+        XCTAssertEqual(replayRecords, firstRecords)
+        XCTAssertEqual(replayRecords[0].privacyLevel, .sensitive)
+        XCTAssertTrue(replayRecords[0].runtimeLineage?.hasCompleteTrustTrace == true)
+        let semanticEvents = try await restartedEvents.fetchEvents(matching: .kind(.domainMutation), limit: nil)
         XCTAssertEqual(semanticEvents.count, 1)
     }
 

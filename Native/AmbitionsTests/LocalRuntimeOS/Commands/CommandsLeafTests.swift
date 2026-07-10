@@ -2,6 +2,27 @@ import XCTest
 @testable import Ambitions
 
 final class CommandsLeafTests: XCTestCase {
+    func testMarkedTodayRecommendationRejectionCompilesAsLocalRuntimeMutation() {
+        let command = AmbitionsCommand(
+            id: "today.rejection.command.reducer-proof",
+            kind: .dismissRecommendation,
+            source: .today,
+            target: AmbitionsCommandTarget(stepID: "step-1", recommendationID: "candidate-1", destination: .today),
+            payload: AmbitionsCommandPayload(metadata: [TodayReceiptDomainEvent.mutationMarkerKey: "true"]),
+            createdAt: "2027-02-20T09:00:00Z",
+            privacy: .privateUserText
+        )
+
+        let plan = CommandReducer().reduce(command: command, validation: .valid)
+
+        XCTAssertEqual(plan.mutationKind, .runtimeMutation)
+        XCTAssertTrue(plan.canMutate)
+        XCTAssertEqual(plan.sideEffectPolicy, .localOnly)
+        XCTAssertEqual(plan.fallback.kind, "no_apply")
+        XCTAssertEqual(plan.undoShape.kind, "receipt_backed_undo")
+        XCTAssertTrue(plan.expectedProjectionIDs.contains(ProjectionID.today.rawValue))
+    }
+
     func testCommandCompilerBuildsEnvelopeWithMutationPlanAndPolicy() {
         let now = Date(timeIntervalSince1970: 1_777_113_600)
         let command = quickCaptureCommand(id: "command.compiler.proof", now: now)
@@ -138,7 +159,7 @@ final class CommandsLeafTests: XCTestCase {
         XCTAssertEqual(result.metadata["commandEnvelopePhase"], CommandEnvelopePhase.acceptedBeforeMutation.rawValue)
         XCTAssertEqual(result.metadata["commandReceiptID"], "command.receipt.command.journal-gated-capture")
         let savedCaptures = try await captureRepository.listCaptures()
-        XCTAssertEqual(savedCaptures.map(\.id), ["capture-journal-gated"])
+        XCTAssertEqual(savedCaptures.map(\.id), ["capture.command.journal-gated-capture"])
         let envelopes = try await commandJournal.fetchEnvelopes(matching: .commandID(command.id), limit: nil)
         XCTAssertEqual(envelopes.count, 1)
         let record = try await commandRecordRepository.fetchRecord(commandID: command.id)

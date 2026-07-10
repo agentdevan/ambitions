@@ -109,6 +109,8 @@ struct CommandReducer: Sendable {
 
     private func mutationKind(for command: AmbitionsCommand) -> CommandMutationKind {
         switch command.kind {
+        case .dismissRecommendation where command.isTodayReceiptMutation:
+            return .runtimeMutation
         case .openDestination, .askWhy, .dismissRecommendation:
             return .readOnlyInspect
         case .prepareExport, .performExport:
