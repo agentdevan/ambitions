@@ -24,6 +24,26 @@ final class RuntimeDomainEventReplayTests: XCTestCase {
         XCTAssertEqual(decoded.schemaVersion, runtimeDomainEventSchemaVersion)
     }
 
+    func testPersistedV1JournalRowUpcastsThroughStoreLoadPath() async throws {
+        let directory = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+            .appendingPathComponent("domain-v1-journal-\(UUID().uuidString)", isDirectory: true)
+        defer { try? FileManager.default.removeItem(at: directory) }
+        let store = EventStoreSQLite(databaseURL: directory.appendingPathComponent("EventStore.sqlite"))
+        let bytes = Data(#"{"typeID":"ambitions.capture.created","schemaVersion":1,"payload":"eyJjYXB0dXJlSUQiOiJjYXB0dXJlLXYxIiwiY3JlYXRlZEF0IjoiMjAyNi0wNy0xMFQxMjowMDowMFoiLCJyYXdUZXh0IjoiT2xkIGZpeHR1cmUiLCJyb3V0ZSI6ImNhcHR1cmVfaW5ib3gifQ=="}"#.utf8)
+        _ = try await store.append(RuntimeEvent(
+            commandID: "v1-command", actor: .user, source: .system,
+            occurredAt: "2026-07-10T12:00:00Z",
+            payload: .domainMutation(RuntimeDomainEventRecord(
+                typeID: "ambitions.capture.created", schemaVersion: 1, encodedPayload: bytes
+            ))
+        ))
+
+        let reconstructed = try await RuntimeDomainEventReplay(store: store).reconstruct()
+        XCTAssertEqual(reconstructed.captures.map(\.captureID), ["capture-v1"])
+        let quarantine = try await store.quarantineRecords()
+        XCTAssertEqual(quarantine, [])
+    }
+
     func testFutureSchemaIsRejectedWithoutMutatingSourceBytes() throws {
         let payload = try JSONEncoder().encode(RuntimeDomainEvent.captureCreated(
             CaptureCreatedDomainEvent(captureID: "capture-1", rawText: "Keep me", route: .captureInbox, kind: .raw, createdAt: "2026-07-10T12:00:00Z", linkedGoalID: nil)
@@ -43,18 +63,22 @@ final class RuntimeDomainEventReplayTests: XCTestCase {
             .appendingPathComponent("domain-quarantine-\(UUID().uuidString)", isDirectory: true)
         defer { try? FileManager.default.removeItem(at: directory) }
         let store = EventStoreSQLite(databaseURL: directory.appendingPathComponent("EventStore.sqlite"))
-        let before = try await store.fetchEvents(matching: .all, limit: nil)
         let event = RuntimeDomainEvent.captureCreated(
             CaptureCreatedDomainEvent(captureID: "capture-future", rawText: "Future", route: .captureInbox, kind: .raw, createdAt: "2026-07-10T12:00:00Z", linkedGoalID: nil)
         )
         let bytes = try RuntimeDomainEventCodec().encode(event, schemaVersion: 999)
+        _ = try await store.append(RuntimeEvent(
+            commandID: "future-command", actor: .user, source: .system,
+            occurredAt: "2026-07-10T12:00:00Z",
+            payload: .domainMutation(RuntimeDomainEventRecord(
+                typeID: event.typeID, schemaVersion: 999, encodedPayload: bytes
+            ))
+        ))
 
-        let decoded = try await store.decodeDomainEventOrQuarantine(bytes, typeID: event.typeID, schemaVersion: 999, quarantinedAt: "2026-07-10T12:01:00Z")
         let after = try await store.fetchEvents(matching: .all, limit: nil)
         let quarantine = try await store.quarantineRecords()
 
-        XCTAssertNil(decoded)
-        XCTAssertEqual(after, before)
+        XCTAssertEqual(after.count, 1)
         XCTAssertEqual(quarantine.map(\.typeID), [event.typeID])
         XCTAssertEqual(quarantine.map(\.schemaVersion), [999])
     }
@@ -75,17 +99,30 @@ final class RuntimeDomainEventReplayTests: XCTestCase {
             .appendingPathComponent("domain-reconstruction-\(UUID().uuidString)", isDirectory: true)
         defer { try? FileManager.default.removeItem(at: directory) }
         let store = EventStoreSQLite(databaseURL: directory.appendingPathComponent("EventStore.sqlite"), deviceID: "replay-test")
-        let semanticEvents: [RuntimeDomainEvent] = [
-            .captureCreated(CaptureCreatedDomainEvent(captureID: "capture-1", rawText: "Call Sam", route: .captureInbox, kind: .raw, createdAt: "2026-07-10T12:00:00Z", linkedGoalID: nil)),
-            .stepPlaced(StepPlacedDomainEvent(stepID: "step-1", timeBlockID: "block-1", start: "2026-07-10T13:00:00Z", end: "2026-07-10T13:30:00Z")),
-        ]
-        for (index, semantic) in semanticEvents.enumerated() {
-            _ = try await store.append(RuntimeEvent(
-                commandID: "replay-\(index)", actor: .user, source: .system,
-                occurredAt: "2026-07-10T12:0\(index):00Z",
-                payload: .domainMutation(RuntimeDomainEventRecord(semantic))
-            ))
-        }
+        let baselineCaptureRepository = PreviewCaptureRepository()
+        let captureCommand = AmbitionsCommand(
+            id: "replay-capture", kind: .quickCapture, source: .capture,
+            payload: AmbitionsCommandPayload(rawText: "Call Sam"), createdAt: "2026-07-10T12:00:00Z"
+        )
+        let captureResult = await AmbitionsCommandExecutor.test(
+            captureService: DefaultCaptureService(repository: baselineCaptureRepository), runtimeEvents: store
+        ).execute(captureCommand, context: CommandExecutionContext(
+            now: try XCTUnwrap(DomainTimestamp.date(from: captureCommand.createdAt))
+        ))
+        XCTAssertEqual(captureResult.status, .succeeded)
+        let timeCommand = AmbitionsCommand(
+            id: "replay-time", kind: .createTimeItem, source: .time,
+            target: AmbitionsCommandTarget(timeID: "block-1", stepID: "step-1"),
+            payload: AmbitionsCommandPayload(title: "Place step", metadata: [
+                "start": "2026-07-10T13:00:00Z", "end": "2026-07-10T13:30:00Z",
+                "userConfirmed": "true",
+            ]), createdAt: "2026-07-10T12:01:00Z"
+        )
+        let timeResult = AmbitionsCommandExecutionResult(status: .succeeded, summary: "Prepared", target: timeCommand.target)
+        _ = try await RuntimeTransactionCoordinator(eventStore: store).commit(
+            command: timeCommand, beforeSnapshot: "before", afterSnapshot: "after", targetSurface: .time,
+            executionResult: timeResult, occurredAt: try XCTUnwrap(DomainTimestamp.date(from: timeCommand.createdAt))
+        )
         let projectionURL = directory.appendingPathComponent("ProjectionStore.sqlite")
         let searchURL = directory.appendingPathComponent("SearchStore.sqlite")
         let baselineBatch = try await ProjectionMaterializer(store: store).materializeAll(materializedAt: "2026-07-10T12:10:00Z")
@@ -103,6 +140,8 @@ final class RuntimeDomainEventReplayTests: XCTestCase {
         }
 
         let reconstructed = try await RuntimeDomainEventReplay(store: store).reconstruct()
+        let rebuiltCaptureRepository = PreviewCaptureRepository()
+        try await rebuiltCaptureRepository.saveCaptures(reconstructed.captures.map(\.capture))
         let rebuiltBatch = try await ProjectionMaterializer(store: store).materializeAll(materializedAt: "2026-07-10T12:10:00Z")
         let rebuiltProjectionStore = ProjectionStoreSQLite(databaseURL: projectionURL)
         try await rebuiltProjectionStore.save(batch: rebuiltBatch, updatedAt: "2026-07-10T12:10:00Z")
@@ -111,13 +150,16 @@ final class RuntimeDomainEventReplayTests: XCTestCase {
         let rebuiltRecords = try await rebuiltProjectionStore.fetchAllRecords()
         let rebuiltResults = try await rebuiltSearch.search(SearchQuery(rawText: "", limit: 100), searchedAt: "2026-07-10T12:10:01Z")
 
-        XCTAssertEqual(reconstructed.captures.map(\.captureID), ["capture-1"])
+        let baselineCaptures = try await baselineCaptureRepository.listCaptures()
+        XCTAssertEqual(reconstructed.captures.map(\.capture), baselineCaptures)
         XCTAssertEqual(reconstructed.timePlacements.map(\.stepID), ["step-1"])
         XCTAssertEqual(rebuiltRecords, baselineRecords)
         XCTAssertEqual(rebuiltResults, baselineResults)
+        let rebuiltCaptures = try await rebuiltCaptureRepository.listCaptures()
+        XCTAssertEqual(rebuiltCaptures, reconstructed.captures.map(\.capture))
+        let expectedCaptureRow = "capture|\(try RuntimeEventChecksum.encoder.encode(reconstructed.captures[0].capture).base64EncodedString())"
         XCTAssertEqual(reconstructed.canonicalChecksum, RuntimeTransactionDigest.digest([
-            "capture|capture-1|Call Sam|capture_inbox|raw|2026-07-10T12:00:00Z",
-            "time|step-1|block-1|2026-07-10T13:00:00Z|2026-07-10T13:30:00Z",
+            expectedCaptureRow, "time|step-1|block-1|2026-07-10T13:00:00Z|2026-07-10T13:30:00Z",
         ]))
     }
 

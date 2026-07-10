@@ -165,22 +165,14 @@ enum RuntimeTransactionCommitPolicy {
                 commandRecordID: commandRecordID,
                 occurredAt: timestamp
             )
-            var runtimeMetadata = [
-                "runtimeTransactionDisposition": outcome.disposition.rawValue,
-                "runtimeTransactionID": outcome.receipt.transactionID,
-                "runtimeEventID": outcome.receipt.eventID,
-                "runtimeReceiptID": outcome.receipt.receiptID,
-                "runtimeRollbackPlanID": outcome.receipt.rollbackPlanID,
-                "runtimeReplayTraceID": outcome.receipt.replayTraceID,
+            var runtimeMetadata = outcome.receipt.resultMetadata(disposition: outcome.disposition).merging([
                 "runtimeReplayDecision": outcome.replayOutcome.decision.rawValue,
                 "runtimeDoubleApplyDisposition": outcome.replayOutcome.doubleApplyDisposition.rawValue,
-                "runtimeProjectionCursorCount": String(outcome.receipt.projectionCursors.count),
-                "runtimeProjectionIDs": outcome.receipt.projectionCursors.map(\.projectionID.rawValue).sorted().joined(separator: ","),
                 "runtimeProjectionStoreStatus": outcome.projectionStoreReceipt == nil ? "not_configured" : "saved",
                 "runtimeProjectionStoreIDs": outcome.projectionStoreReceipt?.storedProjectionIDs.map(\.rawValue).joined(separator: ",") ?? "",
                 "runtimeSearchStoreStatus": outcome.searchRebuildReceipt == nil ? "not_configured" : "rebuilt",
                 "runtimeSearchStoreIndexedRecordCount": outcome.searchRebuildReceipt.map { String($0.indexedRecordCount) } ?? "",
-            ]
+            ], uniquingKeysWith: { _, new in new })
             if journalReceipt != nil {
                 do {
                     let linkReceipt = try await commandJournal.linkRuntimeCommit(

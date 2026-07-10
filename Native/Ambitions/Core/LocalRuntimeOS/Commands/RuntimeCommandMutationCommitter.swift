@@ -47,10 +47,12 @@ struct RuntimeCommandMutationCommitter: Sendable {
             commandExecutionRecords: commandExecutionRecords
         )
         switch await replayAdapter.lookup(command) {
-        case .runtimeEvent(let projection, let commandRecordMaterialization):
+        case .runtimeEvent(let projection, let authorityReceipt, let commandRecord, let commandRecordMaterialization):
             return replayAdapter.replayResult(
                 for: command,
                 projection: projection,
+                authorityReceipt: authorityReceipt,
+                commandRecord: commandRecord,
                 commandRecordMaterialization: commandRecordMaterialization
             )
         case .commandRecordWithoutRuntimeEvent(let record):

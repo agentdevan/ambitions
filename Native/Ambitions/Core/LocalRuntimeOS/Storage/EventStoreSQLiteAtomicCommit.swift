@@ -6,10 +6,53 @@ struct RuntimeSQLiteAuthorityCommit: Sendable, Equatable {
     let receipt: RuntimeCommitReceipt
 }
 
+enum RuntimeOutboxIntentKind: String, Sendable, Codable, Equatable, Hashable {
+    case widgetRefresh = "widget_refresh"
+    case notificationRefresh = "notification_refresh"
+}
+
 struct RuntimeOutboxIntent: Sendable, Codable, Equatable, Hashable {
     let id: String
-    let kind: String
+    let kind: RuntimeOutboxIntentKind
+    let payloadSchemaVersion: Int
     let payload: Data
+
+    init(id: String, kind: RuntimeOutboxIntentKind, payloadSchemaVersion: Int = 1, payload: Data) {
+        self.id = id
+        self.kind = kind
+        self.payloadSchemaVersion = payloadSchemaVersion
+        self.payload = payload
+    }
+}
+
+struct RuntimeTransitionProposal: Sendable, Equatable {
+    let semanticEvent: RuntimeDomainEvent?
+    let receiptDraftID: String
+    let outboxIntents: [RuntimeOutboxIntent]
+
+    static func make(
+        command: AmbitionsCommand,
+        result: AmbitionsCommandExecutionResult,
+        occurredAt: String
+    ) -> RuntimeTransitionProposal {
+        let semanticEvent = RuntimeDomainEvent.semanticEvent(command: command, result: result, occurredAt: occurredAt)
+        let intents: [RuntimeOutboxIntent]
+        switch command.kind {
+        case .createTimeItem, .placeStepInTime:
+            intents = [RuntimeOutboxIntent(
+                id: "runtime.outbox.widget.\(command.id)",
+                kind: .widgetRefresh,
+                payload: Data(command.id.utf8)
+            )]
+        default:
+            intents = []
+        }
+        return RuntimeTransitionProposal(
+            semanticEvent: semanticEvent,
+            receiptDraftID: "runtime.receipt-draft.\(command.id)",
+            outboxIntents: intents
+        )
+    }
 }
 
 struct RuntimeEventQuarantineRecord: Sendable, Codable, Equatable, Hashable {
@@ -21,9 +64,26 @@ struct RuntimeEventQuarantineRecord: Sendable, Codable, Equatable, Hashable {
 
 enum RuntimeSQLiteAuthorityError: Error, Equatable {
     case semanticEventRequired(commandID: String)
+    case invalidReceiptDraft(commandID: String)
 }
 
 extension EventStoreSQLite {
+    func commitAuthority(
+        transaction: RuntimeTransaction,
+        proposal: RuntimeTransitionProposal,
+        committedAt: String
+    ) throws -> RuntimeSQLiteAuthorityCommit {
+        guard proposal.receiptDraftID == "runtime.receipt-draft.\(transaction.commandID)" else {
+            throw RuntimeSQLiteAuthorityError.invalidReceiptDraft(commandID: transaction.commandID)
+        }
+        return try commitAuthority(
+            transaction: transaction,
+            semanticEvent: proposal.semanticEvent,
+            outboxIntents: proposal.outboxIntents,
+            committedAt: committedAt
+        )
+    }
+
     func commitAuthority(
         transaction: RuntimeTransaction,
         semanticEvent: RuntimeDomainEvent?,
@@ -52,7 +112,7 @@ extension EventStoreSQLite {
                     privacy: transaction.mutationPlan.command.privacy,
                     localOnly: true,
                     occurredAt: committedAt,
-                    payload: .domainMutation(RuntimeDomainEventRecord(semanticEvent))
+                    payload: .domainMutation(try RuntimeDomainEventRecord(semanticEvent))
                 )
                 let envelope = try RuntimeEventEnvelope.make(
                     sequence: (previous?.sequence ?? 0) + 1,
@@ -109,10 +169,28 @@ extension EventStoreSQLite {
         schemaVersion: Int,
         quarantinedAt: String
     ) throws -> RuntimeDomainEvent? {
+        let database = try openDatabase()
+        try createAuthoritySchema(database)
+        return try decodeDomainEventOrQuarantine(
+            data, typeID: typeID, schemaVersion: schemaVersion,
+            quarantinedAt: quarantinedAt, database: database
+        )
+    }
+
+    func decodeDomainEventOrQuarantine(
+        _ data: Data,
+        typeID: String,
+        schemaVersion: Int,
+        quarantinedAt: String,
+        database: LocalRuntimeSQLiteDatabase
+    ) throws -> RuntimeDomainEvent? {
         do {
-            return try RuntimeDomainEventCodec().decode(data)
+            return try RuntimeDomainEventCodec().decode(
+                data,
+                expectedTypeID: typeID,
+                expectedSchemaVersion: schemaVersion
+            )
         } catch {
-            let database = try openDatabase()
             try createAuthoritySchema(database)
             let id = "runtime.quarantine.\(LocalRuntimeStorageChecksum.sha256Hex(for: data))"
             let sql = "INSERT OR IGNORE INTO runtime_event_quarantine (quarantine_id, type_id, schema_version, payload, reason, quarantined_at) VALUES (?, ?, ?, ?, ?, ?)"

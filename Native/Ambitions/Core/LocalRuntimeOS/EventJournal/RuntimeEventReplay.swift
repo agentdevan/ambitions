@@ -4,6 +4,7 @@ enum RuntimeDomainEventCodecError: Error, Equatable {
     case unknownTypeID(String)
     case futureSchema(typeID: String, version: Int)
     case typeMismatch(expected: String, actual: String)
+    case recordSchemaMismatch(expected: Int, actual: Int)
 }
 
 struct RuntimeDomainEventCodec: Sendable {
@@ -51,6 +52,21 @@ struct RuntimeDomainEventCodec: Sendable {
             throw RuntimeDomainEventCodecError.typeMismatch(expected: wire.typeID, actual: event.typeID)
         }
         return event
+    }
+
+    func decode(
+        _ data: Data,
+        expectedTypeID: String,
+        expectedSchemaVersion: Int
+    ) throws -> RuntimeDomainEvent {
+        let wire = try decoder.decode(WireEnvelope.self, from: data)
+        guard wire.typeID == expectedTypeID else {
+            throw RuntimeDomainEventCodecError.typeMismatch(expected: expectedTypeID, actual: wire.typeID)
+        }
+        guard wire.schemaVersion == expectedSchemaVersion else {
+            throw RuntimeDomainEventCodecError.recordSchemaMismatch(expected: expectedSchemaVersion, actual: wire.schemaVersion)
+        }
+        return try decode(data)
     }
 
     static let knownTypeIDs: Set<String> = [
@@ -131,7 +147,7 @@ struct RuntimeDomainEventReplay: Sendable {
         let envelopes = try await store.fetchEvents(matching: .kind(.domainMutation), limit: nil)
         let events = envelopes.compactMap { envelope -> RuntimeDomainEvent? in
             guard case let .domainMutation(record) = envelope.event.payload else { return nil }
-            return record.event
+            return try? record.decodedEvent()
         }
         let captures = events.compactMap { event -> CaptureCreatedDomainEvent? in
             guard case let .captureCreated(value) = event else { return nil }
@@ -141,7 +157,9 @@ struct RuntimeDomainEventReplay: Sendable {
             guard case let .stepPlaced(value) = event else { return nil }
             return value
         }.sorted { $0.stepID < $1.stepID }
-        let canonicalRows = captures.map { "capture|\($0.captureID)|\($0.rawText)|\($0.route.rawValue)|\($0.kind.rawValue)|\($0.createdAt)" }
+        let canonicalRows = try captures.map {
+            "capture|\(try RuntimeEventChecksum.encoder.encode($0.capture).base64EncodedString())"
+        }
             + placements.map { "time|\($0.stepID)|\($0.timeBlockID)|\($0.start)|\($0.end)" }
         return RuntimeDomainReconstruction(
             captures: captures,

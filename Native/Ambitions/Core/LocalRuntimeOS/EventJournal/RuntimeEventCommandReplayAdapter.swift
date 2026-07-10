@@ -1,7 +1,12 @@
 import Foundation
 
 enum RuntimeEventCommandReplayLookupResult: Sendable, Equatable {
-    case runtimeEvent(RuntimeCommandReplayProjection, commandRecordMaterialization: String)
+    case runtimeEvent(
+        RuntimeCommandReplayProjection,
+        authorityReceipt: RuntimeCommitReceipt?,
+        commandRecord: AmbitionsCommandExecutionRecord?,
+        commandRecordMaterialization: String
+    )
     case commandRecordWithoutRuntimeEvent(AmbitionsCommandExecutionRecord)
     case lookupUnavailable
     case noRecord
@@ -24,7 +29,14 @@ struct RuntimeEventCommandReplayAdapter: Sendable {
             do {
                 if let projection = try await RuntimeEventReplay(store: runtimeEvents).replay(commandID: command.id) {
                     let materialization = await materializeCommandRecordIfNeeded(for: command, projection: projection)
-                    return .runtimeEvent(projection, commandRecordMaterialization: materialization)
+                    let authorityReceipt = try await (runtimeEvents as? EventStoreSQLite)?.authorityReceipt(commandID: command.id)
+                    let commandRecord = try await commandExecutionRecords?.fetchRecord(commandID: command.id)
+                    return .runtimeEvent(
+                        projection,
+                        authorityReceipt: authorityReceipt,
+                        commandRecord: commandRecord,
+                        commandRecordMaterialization: materialization
+                    )
                 }
             } catch {
                 return .lookupUnavailable
@@ -45,9 +57,15 @@ struct RuntimeEventCommandReplayAdapter: Sendable {
     func replayResult(
         for command: AmbitionsCommand,
         projection: RuntimeCommandReplayProjection,
+        authorityReceipt: RuntimeCommitReceipt?,
+        commandRecord: AmbitionsCommandExecutionRecord?,
         commandRecordMaterialization: String
     ) -> AmbitionsCommandExecutionResult {
-        var metadata = projection.metadata
+        let recordedResult = authorityReceipt == nil ? nil : commandRecord?.result
+        var metadata = recordedResult?.metadata ?? projection.metadata
+        if let authorityReceipt {
+            metadata.merge(authorityReceipt.resultMetadata(disposition: .replayedExistingReceipt)) { _, new in new }
+        }
         metadata["ledgerRecordKind"] = LedgerRecordTaxonomyKind.event.rawValue
         metadata["replayDecision"] = projection.replayOutcome.decision.rawValue
         metadata["idempotencyKey"] = command.id
@@ -59,12 +77,12 @@ struct RuntimeEventCommandReplayAdapter: Sendable {
         metadata["runtimeReplayCommandRecordMaterialization"] = commandRecordMaterialization
 
         return AmbitionsCommandExecutionResult(
-            status: projection.resultStatus,
-            summary: "Replayed runtime event receipt: \(projection.resultSummary)",
-            route: projection.resultRoute,
-            target: projection.target,
-            eventLedgerEntryIDs: projection.eventLedgerEntryIDs,
-            recommendationExplanationIDs: projection.recommendationExplanationIDs,
+            status: recordedResult?.status ?? projection.resultStatus,
+            summary: "Replayed runtime event receipt: \(recordedResult?.summary ?? projection.resultSummary)",
+            route: recordedResult?.route ?? projection.resultRoute,
+            target: recordedResult?.target ?? projection.target,
+            eventLedgerEntryIDs: recordedResult?.eventLedgerEntryIDs ?? projection.eventLedgerEntryIDs,
+            recommendationExplanationIDs: recordedResult?.recommendationExplanationIDs ?? projection.recommendationExplanationIDs,
             metadata: metadata
         )
     }
@@ -130,6 +148,8 @@ struct RuntimeEventCommandReplayAdapter: Sendable {
                     result: replayResult(
                         for: command,
                         projection: projection,
+                        authorityReceipt: nil,
+                        commandRecord: nil,
                         commandRecordMaterialization: "repaired_from_runtime_event"
                     ),
                     recordedAt: projection.recordedAt

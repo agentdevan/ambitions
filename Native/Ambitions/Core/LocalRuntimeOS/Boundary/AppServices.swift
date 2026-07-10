@@ -123,6 +123,10 @@ protocol CaptureServicing: Sendable {
     func markCaptureArchived(id: String, now: Date) async throws -> Capture?
 }
 
+protocol CaptureSnapshotMaterializing: Sendable {
+    func materializeCaptureSnapshot(_ capture: Capture) async throws
+}
+
 protocol MemoryLensServicing: Sendable {
     func search(query: String, seedIntent: ShellCommandIntent?, origin: AmbitionsSurface?) async -> [MemoryLensResult]
 }

@@ -1,6 +1,28 @@
 import Foundation
 
 extension AmbitionsCommandExecutor {
+    func persistFinalMaterialization(
+        command: AmbitionsCommand,
+        result: AmbitionsCommandExecutionResult,
+        at timestamp: Date
+    ) async -> AmbitionsCommandExecutionResult {
+        guard let commandExecutionRecords else { return result }
+        do {
+            try await commandExecutionRecords.append(AmbitionsCommandExecutionRecord(
+                id: "command.execution.\(command.id)",
+                command: command,
+                result: result,
+                recordedAt: DomainTimestamp.string(from: timestamp)
+            ))
+            return result.mergingMetadata(["commandRecordMaterialization": "finalized_post_authority"])
+        } catch {
+            return result.mergingMetadata([
+                "commandRecordMaterialization": "needs_recovery",
+                "commandRecordMaterializationError": String(describing: error),
+            ])
+        }
+    }
+
     @discardableResult
     func persistExecution(
         command: AmbitionsCommand,

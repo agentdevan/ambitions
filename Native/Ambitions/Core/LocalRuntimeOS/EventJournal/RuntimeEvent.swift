@@ -24,12 +24,47 @@ enum RuntimeDomainEvent: Sendable, Codable, Equatable, Hashable {
 }
 
 struct CaptureCreatedDomainEvent: Sendable, Codable, Equatable, Hashable {
-    let captureID: String
-    let rawText: String
-    let route: CaptureRoute
-    let kind: CaptureKind
-    let createdAt: String
-    let linkedGoalID: String?
+    let capture: Capture
+
+    var captureID: String { capture.id }
+    var rawText: String { capture.rawText }
+    var route: CaptureRoute { capture.route }
+    var kind: CaptureKind { capture.kind }
+    var createdAt: String { capture.createdAt }
+    var linkedGoalID: String? { capture.linkedGoalID }
+
+    init(capture: Capture) {
+        self.capture = capture
+    }
+
+    init(
+        captureID: String,
+        rawText: String,
+        route: CaptureRoute,
+        kind: CaptureKind,
+        createdAt: String,
+        linkedGoalID: String?
+    ) {
+        capture = Capture(
+            id: captureID,
+            createdAt: createdAt,
+            updatedAt: createdAt,
+            rawText: rawText,
+            sourceType: nil,
+            status: route == .captureInbox ? .needsTriage : .seed,
+            linkedGoalID: linkedGoalID,
+            triage: CaptureTriageMetadata(destination: route.triageDestination),
+            kind: kind,
+            route: route,
+            triageStatus: route == .captureInbox ? .needsTriage : .assumedRoute
+        )
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(capture.id)
+        hasher.combine(capture.updatedAt)
+        hasher.combine(capture.rawText)
+    }
 }
 
 struct StepPlacedDomainEvent: Sendable, Codable, Equatable, Hashable {
@@ -54,12 +89,49 @@ struct MutationUndoneDomainEvent: Sendable, Codable, Equatable, Hashable {
 struct RuntimeDomainEventRecord: Sendable, Codable, Equatable, Hashable {
     let typeID: String
     let schemaVersion: Int
-    let event: RuntimeDomainEvent
+    let encodedPayload: Data
 
-    init(_ event: RuntimeDomainEvent) {
+    init(_ event: RuntimeDomainEvent) throws {
         typeID = event.typeID
         schemaVersion = event.schemaVersion
-        self.event = event
+        encodedPayload = try RuntimeDomainEventCodec().encode(event)
+    }
+
+    init(typeID: String, schemaVersion: Int, encodedPayload: Data) {
+        self.typeID = typeID
+        self.schemaVersion = schemaVersion
+        self.encodedPayload = encodedPayload
+    }
+
+    func decodedEvent() throws -> RuntimeDomainEvent {
+        try RuntimeDomainEventCodec().decode(
+            encodedPayload,
+            expectedTypeID: typeID,
+            expectedSchemaVersion: schemaVersion
+        )
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case typeID, schemaVersion, encodedPayload, event
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        typeID = try container.decode(String.self, forKey: .typeID)
+        schemaVersion = try container.decode(Int.self, forKey: .schemaVersion)
+        if let bytes = try container.decodeIfPresent(Data.self, forKey: .encodedPayload) {
+            encodedPayload = bytes
+        } else {
+            let legacyEvent = try container.decode(RuntimeDomainEvent.self, forKey: .event)
+            encodedPayload = try RuntimeDomainEventCodec().encode(legacyEvent, schemaVersion: schemaVersion)
+        }
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(typeID, forKey: .typeID)
+        try container.encode(schemaVersion, forKey: .schemaVersion)
+        try container.encode(encodedPayload, forKey: .encodedPayload)
     }
 }
 
@@ -69,14 +141,28 @@ extension RuntimeDomainEvent {
         case .quickCapture:
             guard let captureID = result.target?.captureID ?? result.metadata["captureID"],
                   let rawText = command.payload.primaryText else { return nil }
-            return .captureCreated(CaptureCreatedDomainEvent(
-                captureID: captureID,
-                rawText: rawText,
-                route: result.metadata["captureRoute"].flatMap(CaptureRoute.init(rawValue:)) ?? .captureInbox,
-                kind: result.metadata["captureKind"].flatMap(CaptureKind.init(rawValue:)) ?? .raw,
+            let route = result.metadata["captureRoute"].flatMap(CaptureRoute.init(rawValue:)) ?? .captureInbox
+            let kind = result.metadata["captureKind"].flatMap(CaptureKind.init(rawValue:)) ?? .raw
+            return .captureCreated(CaptureCreatedDomainEvent(capture: Capture(
+                id: captureID,
                 createdAt: occurredAt,
-                linkedGoalID: command.target.goalID
-            ))
+                updatedAt: occurredAt,
+                rawText: rawText.trimmingCharacters(in: .whitespacesAndNewlines),
+                sourceType: result.metadata["captureSourceType"].flatMap(CaptureSourceType.init(rawValue:)),
+                status: route == .captureInbox ? .needsTriage : .seed,
+                linkedGoalID: command.target.goalID,
+                triage: CaptureTriageMetadata(destination: route.triageDestination, hint: result.metadata["smartAttachmentReceipt"]),
+                kind: kind,
+                route: route,
+                triageStatus: route == .captureInbox ? .needsTriage : .assumedRoute,
+                commitmentKind: command.payload.commitmentKind,
+                deadlineText: command.payload.deadlineText ?? command.payload.dueText,
+                deadlineKind: command.payload.deadlineText == nil && command.payload.dueText == nil ? .none : .hard,
+                contextLensHint: command.payload.contextLens,
+                priorityHints: CapturePriorityHints(commandHints: command.payload.priorityHints),
+                assumptionSummary: result.metadata["smartAttachmentReceipt"],
+                recommendationExplanationIDs: command.relations.recommendationExplanationIDs
+            )))
         case .createTimeItem, .placeStepInTime:
             guard let stepID = command.target.stepID, let timeBlockID = command.target.timeID else { return nil }
             return .stepPlaced(StepPlacedDomainEvent(

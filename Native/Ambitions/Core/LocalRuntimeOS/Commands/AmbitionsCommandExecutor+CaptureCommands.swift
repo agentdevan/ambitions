@@ -71,33 +71,39 @@ extension AmbitionsCommandExecutor {
               let text = command.payload.primaryText,
               let captureID = committedResult.target?.captureID else { return committedResult }
         let sourceType = captureSourceType(for: command)
-        if let captures = try? await captureService.listCaptures(),
-           let existing = captures.first(where: { $0.id == captureID }) {
-            return committedResult.mergingMetadata(["captureMaterialization": "saved", "captureMaturityState": existing.maturityState.rawValue])
-        }
         let smartAttachment = smartAttachmentService?.route(
             SmartAttachmentInput(rawText: text, sourceContext: SmartAttachmentSourceContext(sourceType: sourceType, sourceSurface: context.sourceSurface, commandID: command.id)),
             candidates: [], maxCandidateCount: 5
         )
         do {
-            let capture = try await captureService.createCapture(
-                CreateCaptureRequest(
-                    rawText: text,
-                    requestedID: captureID,
-                    sourceType: sourceType,
-                    linkedGoalID: command.target.goalID,
-                    triage: externalCreationTriageMetadata(for: command),
-                    kind: captureKind(for: command.payload.commitmentKind) ?? smartAttachment?.captureKind,
-                    route: route(for: command.payload.destinationRoute) ?? smartAttachment?.captureRoute,
-                    triageStatus: smartAttachment?.triageStatus,
-                    commitmentKind: command.payload.commitmentKind,
-                    deadlineText: command.payload.deadlineText ?? command.payload.dueText,
-                    deadlineKind: command.payload.deadlineText == nil && command.payload.dueText == nil ? .none : .hard,
-                    contextLensHint: command.payload.contextLens,
-                    priorityHints: CapturePriorityHints(commandHints: command.payload.priorityHints),
-                    assumptionSummary: smartAttachment?.captureAssumptionSummary
-                ), now: context.now
-            )
+            let existing = try await captureService.listCaptures().first(where: { $0.id == captureID })
+            let capture: Capture
+            if let existing {
+                capture = existing
+            } else if let snapshot = await authorityCaptureSnapshot(commandID: command.id),
+                      let materializer = captureService as? any CaptureSnapshotMaterializing {
+                try await materializer.materializeCaptureSnapshot(snapshot)
+                capture = snapshot
+            } else {
+                capture = try await captureService.createCapture(
+                    CreateCaptureRequest(
+                        rawText: text,
+                        requestedID: captureID,
+                        sourceType: sourceType,
+                        linkedGoalID: command.target.goalID,
+                        triage: externalCreationTriageMetadata(for: command),
+                        kind: captureKind(for: command.payload.commitmentKind) ?? smartAttachment?.captureKind,
+                        route: route(for: command.payload.destinationRoute) ?? smartAttachment?.captureRoute,
+                        triageStatus: smartAttachment?.triageStatus,
+                        commitmentKind: command.payload.commitmentKind,
+                        deadlineText: command.payload.deadlineText ?? command.payload.dueText,
+                        deadlineKind: command.payload.deadlineText == nil && command.payload.dueText == nil ? .none : .hard,
+                        contextLensHint: command.payload.contextLens,
+                        priorityHints: CapturePriorityHints(commandHints: command.payload.priorityHints),
+                        assumptionSummary: smartAttachment?.captureAssumptionSummary
+                    ), now: context.now
+                )
+            }
             var metadata = ["captureMaterialization": "saved", "captureMaturityState": capture.maturityState.rawValue]
             var ledgerIDs = committedResult.eventLedgerEntryIDs
             if context.allowsEventLedgerEmission, let eventLedger {
@@ -127,6 +133,19 @@ extension AmbitionsCommandExecutor {
         } catch {
             return committedResult.mergingMetadata(["captureMaterialization": "needs_recovery", "captureMaterializationError": String(describing: error)])
         }
+    }
+
+    private func authorityCaptureSnapshot(commandID: String) async -> Capture? {
+        guard let runtimeEvents,
+              let envelopes = try? await runtimeEvents.fetchEvents(matching: .commandID(commandID), limit: nil)
+        else { return nil }
+        return envelopes.reversed().compactMap { envelope -> Capture? in
+            guard case let .domainMutation(record) = envelope.event.payload,
+                  let event = try? record.decodedEvent(),
+                  case let .captureCreated(created) = event
+            else { return nil }
+            return created.capture
+        }.first
     }
 
 
@@ -268,6 +287,27 @@ extension AmbitionsCommandExecutor {
 
 
     func executePlanSeedRepresentation(_ command: AmbitionsCommand, context: CommandExecutionContext) async -> AmbitionsCommandExecutionResult {
+        if command.kind == .createTimeItem {
+            guard let stepID = command.target.stepID, let timeID = command.target.timeID else {
+                return AmbitionsCommandExecutionResult(
+                    status: .blocked,
+                    summary: "Time placement needs a canonical step and time block before authority commit.",
+                    target: command.target,
+                    metadata: ["blockedBy": "missing_semantic_time_target"]
+                )
+            }
+            return AmbitionsCommandExecutionResult(
+                status: .succeeded,
+                summary: "Time placement proposal prepared for authority commit.",
+                route: .time,
+                target: command.target,
+                metadata: [
+                    "timePlacementMaterialization": "authority_only",
+                    "stepID": stepID,
+                    "timeBlockID": timeID,
+                ]
+            )
+        }
         guard let captureService else {
             return AmbitionsCommandExecutionResult(status: .blocked, summary: "Time-owned planning representation is unavailable without capture persistence.", target: command.target, metadata: ["blockedBy": "missing_capture_service"])
         }

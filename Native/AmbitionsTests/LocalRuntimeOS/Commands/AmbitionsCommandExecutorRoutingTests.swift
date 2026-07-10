@@ -62,7 +62,7 @@ final class AmbitionsCommandExecutorRoutingTests: XCTestCase {
         let events = try await ledger.fetchRecent(limit: 10)
         XCTAssertEqual(result.status, .succeeded)
         XCTAssertEqual(result.route, .captureInbox)
-        XCTAssertEqual(result.target?.captureID, "capture-command")
+        XCTAssertEqual(result.target?.captureID, "capture.command-capture")
         XCTAssertEqual(result.metadata["runtimeTransactionDisposition"], RuntimeTransactionCommitDisposition.committed.rawValue)
         XCTAssertEqual(result.metadata["runtimeTransactionID"], "runtime.transaction.command-capture")
         XCTAssertNotNil(result.metadata["runtimeEventID"])
@@ -80,7 +80,7 @@ final class AmbitionsCommandExecutorRoutingTests: XCTestCase {
         XCTAssertEqual(events.first?.id, "ledger.command.command-capture")
         XCTAssertEqual(events.first?.kind, .captureCreated)
         XCTAssertEqual(events.first?.source, .today)
-        XCTAssertEqual(events.first?.captureID, "capture-command")
+        XCTAssertEqual(events.first?.captureID, "capture.command-capture")
         XCTAssertEqual(events.first?.privacy, .privateUserText)
         XCTAssertEqual(result.eventLedgerEntryIDs, ["ledger.command.command-capture"])
 
@@ -115,7 +115,7 @@ final class AmbitionsCommandExecutorRoutingTests: XCTestCase {
             context: CommandExecutionContext(now: now, allowsEventLedgerEmission: false)
         )
 
-        let proofCaptureRecord = try await proofRepository.capture(id: "capture-proof-route")
+        let proofCaptureRecord = try await proofRepository.capture(id: "capture.command-proof-route")
         let proofCapture = try XCTUnwrap(proofCaptureRecord)
         XCTAssertEqual(proofResult.status, .succeeded)
         XCTAssertEqual(proofCapture.route, .proofItem)
@@ -141,7 +141,7 @@ final class AmbitionsCommandExecutorRoutingTests: XCTestCase {
             context: CommandExecutionContext(now: now.addingTimeInterval(60), allowsEventLedgerEmission: false)
         )
 
-        let constraintCaptureRecord = try await constraintRepository.capture(id: "capture-constraint-route")
+        let constraintCaptureRecord = try await constraintRepository.capture(id: "capture.command-constraint-route")
         let constraintCapture = try XCTUnwrap(constraintCaptureRecord)
         XCTAssertEqual(constraintResult.status, .succeeded)
         XCTAssertEqual(constraintCapture.route, .constraintItem)

@@ -65,7 +65,19 @@ actor EventStoreSQLite: RuntimeEventStore {
         try createSchema(database)
         try importLegacyJSONLIfNeeded(database)
         let envelopes = try selectEnvelopes(query: query, limit: limit, database: database)
-        return try envelopes.map(validateLoaded)
+        return try envelopes.map { envelope in
+            let validated = try validateLoaded(envelope)
+            if case let .domainMutation(record) = validated.event.payload {
+                _ = try decodeDomainEventOrQuarantine(
+                    record.encodedPayload,
+                    typeID: record.typeID,
+                    schemaVersion: record.schemaVersion,
+                    quarantinedAt: DomainTimestamp.string(from: .now),
+                    database: database
+                )
+            }
+            return validated
+        }
     }
 
     func latestCursor() async throws -> RuntimeEventCursor? {

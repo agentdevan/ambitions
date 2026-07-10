@@ -102,7 +102,7 @@ final class RuntimeAtomicCommitTests: XCTestCase {
         let transaction = try await coordinator.prepare(
             command: command, beforeSnapshot: "before", afterSnapshot: "after", targetSurface: .today
         )
-        let intent = RuntimeOutboxIntent(id: "outbox-1", kind: "widget_refresh", payload: Data("{}".utf8))
+        let intent = RuntimeOutboxIntent(id: "outbox-1", kind: .widgetRefresh, payload: Data("{}".utf8))
 
         _ = try await store.commitAuthority(
             transaction: transaction,
@@ -141,6 +141,125 @@ final class RuntimeAtomicCommitTests: XCTestCase {
         XCTAssertEqual(captures.map(\.id), ["capture.command.capture.catchup"])
     }
 
+    func testPublicExecutorRestartReplaysExactAuthorityReceiptAndOneSemanticTransition() async throws {
+        let directory = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+            .appendingPathComponent("executor-authority-replay-\(UUID().uuidString)", isDirectory: true)
+        defer { try? FileManager.default.removeItem(at: directory) }
+        let databaseURL = directory.appendingPathComponent("EventStore.sqlite")
+        let repository = PreviewCaptureRepository()
+        let records = InMemoryAmbitionsCommandExecutionRecordRepository()
+        let command = AmbitionsCommand(
+            id: "command.executor.authority", kind: .quickCapture, source: .capture,
+            payload: AmbitionsCommandPayload(rawText: "Exact replay"), createdAt: "2026-07-10T12:00:00Z"
+        )
+        let context = CommandExecutionContext(now: try XCTUnwrap(DomainTimestamp.date(from: command.createdAt)))
+        let firstStore = EventStoreSQLite(databaseURL: databaseURL)
+        let first = await AmbitionsCommandExecutor.test(
+            captureService: DefaultCaptureService(repository: repository),
+            commandExecutionRecords: records, runtimeEvents: firstStore
+        ).execute(command, context: context)
+        let restartedStore = EventStoreSQLite(databaseURL: databaseURL)
+        let replay = await AmbitionsCommandExecutor.test(
+            captureService: DefaultCaptureService(repository: repository),
+            commandExecutionRecords: records, runtimeEvents: restartedStore
+        ).execute(command, context: context)
+
+        for key in RuntimeTransactionCommitPolicy.requiredEvidenceKeys {
+            XCTAssertEqual(replay.metadata[key], first.metadata[key], key)
+        }
+        XCTAssertEqual(replay.eventLedgerEntryIDs, first.eventLedgerEntryIDs)
+        let semantic = try await restartedStore.fetchEvents(matching: .kind(.domainMutation), limit: nil)
+        XCTAssertEqual(semantic.count, 1)
+    }
+
+    func testCreateTimeItemMissingSemanticTargetDoesNotMutateCapture() async throws {
+        let seed = Capture(
+            id: "capture-time", createdAt: "2026-07-10T12:00:00Z", updatedAt: "2026-07-10T12:00:00Z",
+            rawText: "Place me", sourceType: .shellComposer, status: .needsTriage, linkedGoalID: nil
+        )
+        let repository = PreviewCaptureRepository(seedCaptures: [seed])
+        let command = AmbitionsCommand(
+            id: "command.time.no-semantic", kind: .createTimeItem, source: .time,
+            target: AmbitionsCommandTarget(captureID: seed.id), payload: AmbitionsCommandPayload(title: "Place me"),
+            createdAt: seed.createdAt
+        )
+        let before = try await repository.listCaptures()
+        let result = await AmbitionsCommandExecutor.test(
+            captureService: DefaultCaptureService(repository: repository)
+        ).execute(command, context: CommandExecutionContext(now: try XCTUnwrap(DomainTimestamp.date(from: seed.createdAt))))
+
+        XCTAssertEqual(result.status, .blocked)
+        XCTAssertEqual(result.metadata["blockedBy"], "missing_semantic_time_target")
+        let after = try await repository.listCaptures()
+        XCTAssertEqual(after, before)
+    }
+
+    func testLedgerFailureAfterCaptureSaveRecoversOnceAndFinalizesCommandRecord() async throws {
+        let directory = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+            .appendingPathComponent("ledger-catchup-\(UUID().uuidString)", isDirectory: true)
+        defer { try? FileManager.default.removeItem(at: directory) }
+        let store = EventStoreSQLite(databaseURL: directory.appendingPathComponent("EventStore.sqlite"))
+        let captures = PreviewCaptureRepository()
+        let ledger = FailFirstEventLedgerRepository()
+        let records = InMemoryAmbitionsCommandExecutionRecordRepository()
+        let command = AmbitionsCommand(
+            id: "command.ledger.catchup", kind: .quickCapture, source: .capture,
+            payload: AmbitionsCommandPayload(rawText: "Recover ledger"), createdAt: "2026-07-10T12:00:00Z"
+        )
+        let context = CommandExecutionContext(now: try XCTUnwrap(DomainTimestamp.date(from: command.createdAt)))
+        let executor = AmbitionsCommandExecutor.test(
+            captureService: DefaultCaptureService(repository: captures), eventLedger: ledger,
+            commandExecutionRecords: records, runtimeEvents: store
+        )
+
+        let first = await executor.execute(command, context: context)
+        XCTAssertEqual(first.metadata["eventLedgerEmission"], "needs_recovery")
+        let replay = await executor.execute(command, context: context)
+        XCTAssertEqual(replay.metadata["eventLedgerEmission"], "saved_post_authority")
+        XCTAssertEqual(replay.eventLedgerEntryIDs, ["ledger.command.command.ledger.catchup"])
+        let ledgerEvents = try await ledger.fetchRecent(limit: 10)
+        XCTAssertEqual(ledgerEvents.count, 1)
+        let fetchedRecord = try await records.fetchRecord(commandID: command.id)
+        let finalRecord = try XCTUnwrap(fetchedRecord)
+        XCTAssertEqual(finalRecord.result.eventLedgerEntryIDs, replay.eventLedgerEntryIDs)
+        XCTAssertEqual(finalRecord.result.metadata["eventLedgerEmission"], "saved_post_authority")
+    }
+
+    func testProductionTransitionProposalPersistsEmptyAndTypedNonemptyIntents() async throws {
+        let directory = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+            .appendingPathComponent("proposal-production-\(UUID().uuidString)", isDirectory: true)
+        defer { try? FileManager.default.removeItem(at: directory) }
+        let store = EventStoreSQLite(databaseURL: directory.appendingPathComponent("EventStore.sqlite"))
+        let captureCommand = AmbitionsCommand(
+            id: "command.proposal.capture", kind: .quickCapture, source: .capture,
+            payload: AmbitionsCommandPayload(rawText: "Proposal"), createdAt: "2026-07-10T12:00:00Z"
+        )
+        let captureResult = AmbitionsCommandExecutionResult(
+            status: .succeeded, summary: "Prepared", target: AmbitionsCommandTarget(captureID: "capture.command.proposal.capture"),
+            metadata: ["captureID": "capture.command.proposal.capture", "captureRoute": CaptureRoute.captureInbox.rawValue, "captureKind": CaptureKind.raw.rawValue]
+        )
+        _ = try await RuntimeTransactionCoordinator(eventStore: store).commit(
+            command: captureCommand.resolvedForRuntimeTransaction(result: captureResult), beforeSnapshot: "before", afterSnapshot: "after",
+            targetSurface: .today, executionResult: captureResult
+        )
+        let captureIntents = try await store.outboxIntents(commandID: captureCommand.id)
+        XCTAssertEqual(captureIntents, [])
+
+        let timeCommand = AmbitionsCommand(
+            id: "command.proposal.time", kind: .createTimeItem, source: .time,
+            target: AmbitionsCommandTarget(timeID: "block-1", stepID: "step-1"),
+            payload: AmbitionsCommandPayload(title: "Place"), createdAt: "2026-07-10T12:00:00Z"
+        )
+        let timeResult = AmbitionsCommandExecutionResult(status: .succeeded, summary: "Prepared", target: timeCommand.target)
+        _ = try await RuntimeTransactionCoordinator(eventStore: store).commit(
+            command: timeCommand, beforeSnapshot: "before", afterSnapshot: "after", targetSurface: .time,
+            executionResult: timeResult
+        )
+        let intents = try await store.outboxIntents(commandID: timeCommand.id)
+        XCTAssertEqual(intents.map(\.kind), [.widgetRefresh])
+        XCTAssertEqual(intents.map(\.payloadSchemaVersion), [1])
+    }
+
     private func stepCommand(id: String) -> AmbitionsCommand {
         AmbitionsCommand(
             id: id,
@@ -174,4 +293,24 @@ private actor AtomicCommitFailingEventStore: RuntimeEventStore {
     func fetchEvents(matching query: RuntimeEventQuery, limit: Int?) async throws -> [RuntimeEventEnvelope] { [] }
     func latestCursor() async throws -> RuntimeEventCursor? { nil }
     enum Failure: Error { case append }
+}
+
+private actor FailFirstEventLedgerRepository: EventLedgerRepository {
+    private var shouldFail = true
+    private var events: [EventLedgerEntry] = []
+    func append(_ event: EventLedgerEntry) async throws {
+        if shouldFail { shouldFail = false; throw Failure.injected }
+        events.removeAll { $0.id == event.id }
+        events.append(event)
+    }
+    func fetchRecent(limit: Int) async throws -> [EventLedgerEntry] { Array(events.prefix(limit)) }
+    func fetchEvents(goalID: String) async throws -> [EventLedgerEntry] { events.filter { $0.goalID == goalID } }
+    func fetchEvents(captureID: String) async throws -> [EventLedgerEntry] { events.filter { $0.captureID == captureID } }
+    func fetchEvents(kind: EventLedgerKind) async throws -> [EventLedgerEntry] { events.filter { $0.kind == kind } }
+    func fetchEvents(from start: String, through end: String) async throws -> [EventLedgerEntry] { events.filter { $0.occurredAt >= start && $0.occurredAt <= end } }
+    func redactEvent(id: String, at timestamp: String) async throws {
+        if let index = events.firstIndex(where: { $0.id == id }) { events[index] = events[index].redacted(at: timestamp) }
+    }
+    func deleteEvent(id: String) async throws { events.removeAll { $0.id == id } }
+    enum Failure: Error { case injected }
 }

@@ -80,4 +80,17 @@ struct RuntimeCommitReceipt: Sendable, Codable, Equatable, Hashable, Identifiabl
             affectedObjectIDs.isEmpty == false &&
             localOnly
     }
+
+    func resultMetadata(disposition: RuntimeTransactionCommitDisposition) -> [String: String] {
+        [
+            "runtimeTransactionDisposition": disposition.rawValue,
+            "runtimeTransactionID": transactionID,
+            "runtimeEventID": eventID,
+            "runtimeReceiptID": receiptID,
+            "runtimeRollbackPlanID": rollbackPlanID,
+            "runtimeReplayTraceID": replayTraceID,
+            "runtimeProjectionCursorCount": String(projectionCursors.count),
+            "runtimeProjectionIDs": projectionCursors.map(\.projectionID.rawValue).sorted().joined(separator: ","),
+        ]
+    }
 }

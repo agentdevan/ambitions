@@ -168,11 +168,12 @@ struct ProjectionEventRecord: Codable, Equatable, Hashable, Identifiable {
                 ]
             )
         case let .domainMutation(record):
+            let decodedEvent = try? record.decodedEvent()
             return (
                 record.typeID,
                 nil,
                 nil,
-                Self.objectIDs(for: record.event),
+                decodedEvent.map(Self.objectIDs(for:)) ?? [],
                 [],
                 ["domainEventTypeID": record.typeID, "domainEventSchemaVersion": String(record.schemaVersion)]
             )

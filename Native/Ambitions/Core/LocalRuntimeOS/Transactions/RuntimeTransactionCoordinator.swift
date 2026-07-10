@@ -160,12 +160,16 @@ struct RuntimeTransactionCoordinator: Sendable {
 
         let committedAt = DomainTimestamp.string(from: occurredAt)
         if let sqliteStore = eventStore as? EventStoreSQLite {
-            let semanticEvent = executionResult.flatMap {
-                RuntimeDomainEvent.semanticEvent(command: command, result: $0, occurredAt: committedAt)
-            }
+            let proposal = executionResult.map {
+                RuntimeTransitionProposal.make(command: command, result: $0, occurredAt: committedAt)
+            } ?? RuntimeTransitionProposal(
+                semanticEvent: nil,
+                receiptDraftID: "runtime.receipt-draft.\(command.id)",
+                outboxIntents: []
+            )
             let authority = try await sqliteStore.commitAuthority(
                 transaction: transaction,
-                semanticEvent: semanticEvent,
+                proposal: proposal,
                 committedAt: committedAt
             )
             guard authority.disposition == .committed else {

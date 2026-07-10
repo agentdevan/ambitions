@@ -85,14 +85,17 @@ struct AmbitionsCommandExecutor: CommandExecuting {
             commandExecutionRecords: commandExecutionRecords
         )
         switch await replayAdapter.lookup(command) {
-        case .runtimeEvent(let projection, let commandRecordMaterialization):
+        case .runtimeEvent(let projection, let authorityReceipt, let commandRecord, let commandRecordMaterialization):
             let replayed = replayAdapter.replayResult(
                 for: command,
                 projection: projection,
+                authorityReceipt: authorityReceipt,
+                commandRecord: commandRecord,
                 commandRecordMaterialization: commandRecordMaterialization
             )
-            if command.kind == .quickCapture {
-                return await materializeQuickCapture(command, context: context, committedResult: replayed)
+            if command.kind == .quickCapture, authorityReceipt != nil {
+                let materialized = await materializeQuickCapture(command, context: context, committedResult: replayed)
+                return await persistFinalMaterialization(command: command, result: materialized, at: context.now)
             }
             return replayed
         case .commandRecordWithoutRuntimeEvent(let record):
@@ -212,7 +215,8 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         if command.kind == .quickCapture,
            persistedResult.status == .succeeded,
            RuntimeTransactionCommitPolicy.hasCommittedEvidence(persistedResult) {
-            return await materializeQuickCapture(command, context: context, committedResult: persistedResult)
+            let materialized = await materializeQuickCapture(command, context: context, committedResult: persistedResult)
+            return await persistFinalMaterialization(command: command, result: materialized, at: context.now)
         }
         return persistedResult
     }

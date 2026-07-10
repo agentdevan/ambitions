@@ -1,6 +1,6 @@
 import Foundation
 
-struct DefaultCaptureService: CaptureServicing {
+struct DefaultCaptureService: CaptureServicing, CaptureSnapshotMaterializing {
     let repository: any CaptureRepository
     let goalRepository: (any GoalRepository)?
     let goalsService: (any GoalsServicing)?
@@ -115,6 +115,10 @@ struct DefaultCaptureService: CaptureServicing {
 
     func listCaptures() async throws -> [Capture] {
         try await repository.listCaptures()
+    }
+
+    func materializeCaptureSnapshot(_ capture: Capture) async throws {
+        try await repository.saveCaptures([capture])
     }
 
     func updateCaptureState(_ request: CaptureStateUpdateRequest, now: Date) async throws -> Capture? {
