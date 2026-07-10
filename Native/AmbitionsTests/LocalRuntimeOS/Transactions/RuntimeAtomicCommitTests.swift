@@ -172,6 +172,42 @@ final class RuntimeAtomicCommitTests: XCTestCase {
         XCTAssertEqual(semantic.count, 1)
     }
 
+    func testSQLiteDiagnosticCommandRowWithoutAuthorityReceiptBlocksWithoutMaterialization() async throws {
+        let directory = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+            .appendingPathComponent("orphan-diagnostic-\(UUID().uuidString)", isDirectory: true)
+        defer { try? FileManager.default.removeItem(at: directory) }
+        let store = EventStoreSQLite(databaseURL: directory.appendingPathComponent("EventStore.sqlite"))
+        let captures = PreviewCaptureRepository()
+        let ledger = InMemoryEventLedgerRepository()
+        let command = AmbitionsCommand(
+            id: "command.orphan.diagnostic", kind: .quickCapture, source: .capture,
+            payload: AmbitionsCommandPayload(rawText: "Must not materialize"), createdAt: "2026-07-10T12:00:00Z"
+        )
+        let diagnosticResult = AmbitionsCommandExecutionResult(
+            status: .succeeded, summary: "Diagnostic only", route: .captureInbox,
+            target: AmbitionsCommandTarget(captureID: "capture.command.orphan.diagnostic")
+        )
+        _ = try await store.append(RuntimeEvent.commandExecution(
+            command: command, result: diagnosticResult, recordedAt: command.createdAt,
+            commandRecordID: "command.execution.\(command.id)"
+        ))
+
+        let result = await AmbitionsCommandExecutor.test(
+            captureService: DefaultCaptureService(repository: captures), eventLedger: ledger,
+            runtimeEvents: store
+        ).execute(command, context: CommandExecutionContext(
+            now: try XCTUnwrap(DomainTimestamp.date(from: command.createdAt))
+        ))
+
+        XCTAssertEqual(result.status, .blocked)
+        XCTAssertEqual(result.metadata["blockedBy"], "sqlite_diagnostic_without_authority_receipt")
+        XCTAssertEqual(result.metadata["runtimeReplayAuthority"], "sqlite_authority_receipt_required")
+        let storedCaptures = try await captures.listCaptures()
+        let storedLedgerEvents = try await ledger.fetchRecent(limit: 10)
+        XCTAssertEqual(storedCaptures.count, 0)
+        XCTAssertEqual(storedLedgerEvents.count, 0)
+    }
+
     func testCreateTimeItemMissingSemanticTargetDoesNotMutateCapture() async throws {
         let seed = Capture(
             id: "capture-time", createdAt: "2026-07-10T12:00:00Z", updatedAt: "2026-07-10T12:00:00Z",

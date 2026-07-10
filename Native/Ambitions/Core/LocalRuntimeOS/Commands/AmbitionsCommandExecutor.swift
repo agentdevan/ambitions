@@ -100,6 +100,8 @@ struct AmbitionsCommandExecutor: CommandExecuting {
             return replayed
         case .commandRecordWithoutRuntimeEvent(let record):
             return replayAdapter.commandRecordWithoutRuntimeEventResult(for: command, record: record)
+        case .sqliteDiagnosticWithoutAuthority(let projection):
+            return replayAdapter.sqliteDiagnosticWithoutAuthorityResult(for: command, projection: projection)
         case .lookupUnavailable:
             return replayAdapter.lookupUnavailableResult(for: command)
         case .noRecord:

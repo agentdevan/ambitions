@@ -8,6 +8,7 @@ enum RuntimeEventCommandReplayLookupResult: Sendable, Equatable {
         commandRecordMaterialization: String
     )
     case commandRecordWithoutRuntimeEvent(AmbitionsCommandExecutionRecord)
+    case sqliteDiagnosticWithoutAuthority(RuntimeCommandReplayProjection)
     case lookupUnavailable
     case noRecord
 }
@@ -28,8 +29,11 @@ struct RuntimeEventCommandReplayAdapter: Sendable {
         if let runtimeEvents {
             do {
                 if let projection = try await RuntimeEventReplay(store: runtimeEvents).replay(commandID: command.id) {
-                    let materialization = await materializeCommandRecordIfNeeded(for: command, projection: projection)
                     let authorityReceipt = try await (runtimeEvents as? EventStoreSQLite)?.authorityReceipt(commandID: command.id)
+                    if runtimeEvents is EventStoreSQLite, authorityReceipt == nil {
+                        return .sqliteDiagnosticWithoutAuthority(projection)
+                    }
+                    let materialization = await materializeCommandRecordIfNeeded(for: command, projection: projection)
                     let commandRecord = try await commandExecutionRecords?.fetchRecord(commandID: command.id)
                     return .runtimeEvent(
                         projection,
@@ -52,6 +56,30 @@ struct RuntimeEventCommandReplayAdapter: Sendable {
         } catch {
             return .lookupUnavailable
         }
+    }
+
+    func sqliteDiagnosticWithoutAuthorityResult(
+        for command: AmbitionsCommand,
+        projection: RuntimeCommandReplayProjection
+    ) -> AmbitionsCommandExecutionResult {
+        AmbitionsCommandExecutionResult(
+            status: .blocked,
+            summary: "A diagnostic command row exists without an atomic authority receipt, so Ambitions paused replay for repair before mutation.",
+            route: projection.resultRoute,
+            target: projection.target,
+            recommendationExplanationIDs: projection.recommendationExplanationIDs,
+            metadata: [
+                "ledgerRecordKind": LedgerRecordTaxonomyKind.receipt.rawValue,
+                "replayDecision": LedgerReplayDecision.lookupUnavailable.rawValue,
+                "idempotencyKey": command.id,
+                "commandIdempotencyKey": command.id,
+                "doubleApplyDisposition": LedgerDoubleApplyDisposition.skipUnverifiedMutation.rawValue,
+                "blockedBy": "sqlite_diagnostic_without_authority_receipt",
+                "runtimeReplayAuthority": "sqlite_authority_receipt_required",
+                "runtimeReplaySource": "diagnostic_row_repair_state",
+                "diagnosticRuntimeEventID": projection.eventCursor.eventID,
+            ]
+        )
     }
 
     func replayResult(

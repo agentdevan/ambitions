@@ -42,6 +42,10 @@ struct TodayCommandActionHandler {
             let result = replayAdapter.commandRecordWithoutRuntimeEventResult(for: command, record: record)
             await persistCommandExecution(command: command, result: result, at: now)
             return TodayActionCopyBuilder.blockedActionResponse(for: .blockedByMissingFoundation)
+        case .sqliteDiagnosticWithoutAuthority(let projection):
+            let result = replayAdapter.sqliteDiagnosticWithoutAuthorityResult(for: command, projection: projection)
+            await persistCommandExecution(command: command, result: result, at: now)
+            return TodayActionCopyBuilder.blockedActionResponse(for: .blockedByMissingFoundation)
         case .lookupUnavailable:
             let result = replayAdapter.lookupUnavailableResult(for: command)
             await persistCommandExecution(command: command, result: result, at: now)

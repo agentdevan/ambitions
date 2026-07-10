@@ -31,7 +31,7 @@ struct MeaningfulMutationWritePathDescriptor: Sendable, Hashable {
 }
 
 enum MeaningfulMutationRegistry {
-    static let declaredMutationRowCount = 112
+    static let declaredMutationRowCount = 113
     static let declaredWritePathRowCount = 50
 
     static let descriptors: [MeaningfulMutationDescriptor] = [
@@ -70,6 +70,24 @@ enum MeaningfulMutationRegistry {
         mutation(id: "capture.attach-view-model", sourcePath: "CaptureViewModel.attachToGoal", commandKind: .attachToGoal, status: .unproven, rationale: "Capture attachment lacks atomic cross-object replay proof."),
         mutation(id: "capture.goal-view-model", sourcePath: "CaptureViewModel.turnIntoGoal", commandKind: .createGoal, status: .unproven, rationale: "Capture-to-Goal conversion lacks atomic restart proof."),
         mutation(id: "capture.create", sourcePath: "DefaultCaptureService.createCapture", commandKind: .quickCapture, status: .unproven, rationale: "Default Capture creation mutates legacy repositories before full lineage proof."),
+        mutation(
+            id: "capture.semantic-snapshot-materialization",
+            sourcePath: "DefaultCaptureService.materializeCaptureSnapshot",
+            commandKind: .quickCapture,
+            status: .projectionOnly,
+            rationale: "The Capture repository write materializes the exact full snapshot from the already committed ambitions.capture.created semantic event and is idempotently recovered on authority replay.",
+            executorOwner: "EventStoreSQLite.commitAuthority",
+            durableStores: ["EventStoreSQLite", "CaptureRepository"],
+            eventKind: "ambitions.capture.created",
+            projectionOwner: "DefaultCaptureService",
+            receiptOwner: "RuntimeCommitReceipt",
+            replayTestID: "AmbitionsTests/RuntimeAtomicCommitTests/testCommittedCaptureMaterializationCatchesUpOnReplay",
+            proofTestIDs: [
+                "AmbitionsTests/RuntimeAtomicCommitTests/testQuickCaptureAuthorityFailureLeavesNoCaptureMaterialization",
+                "AmbitionsTests/RuntimeAtomicCommitTests/testPublicExecutorRestartReplaysExactAuthorityReceiptAndOneSemanticTransition",
+                "AmbitionsTests/RuntimeDomainEventReplayTests/testEmptyDerivedStoresReconstructFromPersistedSemanticJournal",
+            ]
+        ),
         mutation(id: "capture.update-state", sourcePath: "DefaultCaptureService.updateCaptureState", commandKind: .updateGoal, status: .unproven, rationale: "Capture state update lacks event-first reconstruction proof."),
         mutation(id: "capture.update-route", sourcePath: "DefaultCaptureService.updateCaptureRoute", commandKind: .routeCommitment, status: .unproven, rationale: "Capture route update lacks row-specific replay evidence."),
         mutation(id: "capture.one-time", sourcePath: "DefaultCaptureService.markAsOneTimeCommitment", commandKind: .routeCommitment, status: .unproven, rationale: "One-time commitment conversion lacks durable lineage proof."),

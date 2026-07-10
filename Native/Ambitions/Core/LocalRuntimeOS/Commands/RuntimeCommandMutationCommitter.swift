@@ -57,6 +57,8 @@ struct RuntimeCommandMutationCommitter: Sendable {
             )
         case .commandRecordWithoutRuntimeEvent(let record):
             return replayAdapter.commandRecordWithoutRuntimeEventResult(for: command, record: record)
+        case .sqliteDiagnosticWithoutAuthority(let projection):
+            return replayAdapter.sqliteDiagnosticWithoutAuthorityResult(for: command, projection: projection)
         case .lookupUnavailable:
             return await persist(
                 command: command,
