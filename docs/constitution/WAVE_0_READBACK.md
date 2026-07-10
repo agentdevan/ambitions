@@ -41,7 +41,7 @@ laws=124 source_maps=34 test_maps=34
 scenarios=16 budgets=9 classifications=6
 ```
 
-The exact post-review PR head `f775b9d1a15d386e52dde307c38b7e10fa4c617e` passed GitHub Actions run `29065080901`:
+The exact final PR head `aa8faf16c723810d4146dfef0e70318dab01446b` passed GitHub Actions run `29065144187`:
 
 ```text
 Ambitions Constitution Audit
