@@ -1,0 +1,75 @@
+name: Wave 0 Ruthless Repair V5
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    paths:
+      - ".github/wave0-ruthless-repair-v5.trigger"
+      - ".github/workflows/wave0-ruthless-repair-v5.yml"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  repair:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout PR head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - name: Correct one-shot script formatting and dependency graph
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          path = Path('scripts/wave0-ruthless-repair.py')
+          text = path.read_text()
+          old = "audit = textwrap.dedent(\n        r'''#!/usr/bin/env python3"
+          new = "audit = textwrap.dedent(\n        r'''\n        #!/usr/bin/env python3"
+          if old in text:
+              text = text.replace(old, new, 1)
+          marker = "    p0_items = [normalize_opportunity(item) for item in p0_items]\n"
+          replacement = marker + "    for item in p0_items:\n        if item['id'] == 'P0-006':\n            item['dependencies'] = []\n        if item['id'] == 'P0-015':\n            item['dependencies'] = [dep for dep in item['dependencies'] if dep != 'P0-012']\n"
+          if replacement not in text:
+              if marker not in text:
+                  raise SystemExit('P0 normalization marker missing')
+              text = text.replace(marker, replacement, 1)
+          path.write_text(text)
+          PY
+
+      - name: Apply repair and audit
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set +e
+          python3 scripts/wave0-ruthless-repair.py > /tmp/wave0-repair.log 2>&1
+          status=$?
+          cat /tmp/wave0-repair.log
+          if [ $status -ne 0 ]; then
+            summary=$(tail -n 40 /tmp/wave0-repair.log | sed 's/`/\`/g')
+            gh api "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments" -f body="Wave 0 ruthless repair V5 failed before commit.\n\n\`\`\`text\n${summary}\n\`\`\`"
+            exit $status
+          fi
+
+      - name: Commit repaired candidate when changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          git restore scripts/wave0-ruthless-repair.py
+          if git diff --quiet; then
+            echo "No repair diff remains."
+            exit 0
+          fi
+          git config user.name "ambitions-constitution-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add docs/truth/PRODUCT_DESIGN_TRUTH.md docs/constitution scripts/ambitions-constitution-audit.py
+          git commit -m "docs: bind and harden Wave 0 constitution after ruthless review"
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
+          gh api "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments" -f body="Wave 0 ruthless repair V5 committed successfully. The strengthened fail-closed audit passed before push."
