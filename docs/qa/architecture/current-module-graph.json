@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-07-09",
+  "commit": "b123ea6f569ecfa61f354a22251c31382b07f019",
+  "branch": "main",
+  "authorities": {
+    "appAndExtensionGraph": "project.yml",
+    "reusableModuleGraph": "Package.swift"
+  },
+  "nodes": [
+    {"name": "Ambitions", "kind": "xcode-application"},
+    {"name": "AmbitionsWidgetExtension", "kind": "xcode-extension"},
+    {"name": "AmbitionsShareExtension", "kind": "xcode-extension"},
+    {"name": "AmbitionsTests", "kind": "xcode-unit-tests"},
+    {"name": "AmbitionsUITests", "kind": "xcode-ui-tests"},
+    {"name": "AmbitionsDesignSystem", "kind": "swift-package-library"},
+    {"name": "AmbitionsWidgetUI", "kind": "swift-package-library"}
+  ],
+  "edges": [
+    {"from": "Ambitions", "to": "AmbitionsDesignSystem"},
+    {"from": "Ambitions", "to": "AmbitionsWidgetUI"},
+    {"from": "Ambitions", "to": "AmbitionsWidgetExtension"},
+    {"from": "Ambitions", "to": "AmbitionsShareExtension"},
+    {"from": "AmbitionsTests", "to": "Ambitions"},
+    {"from": "AmbitionsTests", "to": "AmbitionsDesignSystem"},
+    {"from": "AmbitionsUITests", "to": "Ambitions"},
+    {"from": "AmbitionsWidgetUI", "to": "AmbitionsDesignSystem"}
+  ],
+  "currentCompileBoundary": {
+    "nativeAppSwiftFiles": 1329,
+    "description": "Most Native/Ambitions production source compiles in the Ambitions application target; canonical folders are not compiler-enforced feature/runtime modules.",
+    "extensionSourceFileCherryPicking": true
+  },
+  "duplicateCompilationRisks": [
+    "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift",
+    "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceContractModels.swift",
+    "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceActionPayloads.swift",
+    "Native/Ambitions/Projection/ExternalSnapshots/ExternalObjectReopeningProjector.swift",
+    "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceGlanceState.swift",
+    "Native/Ambitions/Projection/ExternalSnapshots/SharedExternalSnapshotStore.swift"
+  ],
+  "assessment": {
+    "status": "red",
+    "reason": "The intended architecture module boundaries are not compiler-enforced and extension targets compile selected app source files directly."
+  }
+}

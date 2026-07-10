@@ -1,6 +1,6 @@
 # Ambitions Known Issues — Live Register
 
-**Status:** Runtime device review, AMB-1199 final proof, and LocalRuntimeOS proof-gate reconciliation are current. Current proof ceiling is **LocalRuntimeProof Gate Green / Runtime device Yellow / Visual Yellow-Red / Accessibility Yellow / Release Red-Yellow**.
+**Status:** Runtime device review, AMB-1199 final proof, and the 2026-07-09 architecture modernization baseline are current. Current proof ceiling is **Architecture Red / LocalRuntimeProof Red / Runtime device Yellow / Visual Yellow-Red / Accessibility Yellow / Release Red-Yellow**.
 
 **Last source reconciliation:** 2026-07-01 (`79b4a0101b0675e08c0658ba06b7e78a27b59dca`, `docs/qa/local-runtime-proof/current-local-runtime-proof.{json,md}`)
 **Last final-proof evidence pass:** 2026-06-23 (`docs/qa/evidence/2026-06-23-final-proof/`)
@@ -18,6 +18,14 @@
 - Device-observed failures are **runtime verified**.
 - Do not mark `Closed - verified` without proof artifacts in `docs/validation`, current screenshot/video evidence, audit output, or an explicit current testing report.
 - Visual Green, Runtime Green, and Release Green are impossible while this file has open P0 issues.
+
+## 2026-07-09 architecture modernization baseline
+
+The earned-score ledger at `docs/qa/architecture/architecture-10-scorecard.{md,json}` freezes `main` at `b123ea6f569ecfa61f354a22251c31382b07f019`. Its five numeric working scores are advisory and all five dimensions remain Red. Structural scorecard validation does not upgrade the failing architecture inventory, strict quality gate, or LocalRuntimeProof audit.
+
+Current blockers include the architecture inventory's stale Final Architecture Tree heading, strict quality-gate findings, two missing EventKit side-effect commit-receipt markers, absent compiler-enforced target boundaries, and missing comprehensive restart/fault/lane-integrity proof. The older 2026-07-01 LocalRuntimeProof Green artifact below remains historical evidence for its commit; it is not current proof for this baseline.
+
+Physical-device execution is foregone for this architecture program by owner direction. Simulator evidence cannot support physical-device behavior, manual VoiceOver quality, independent Visual Green, TestFlight readiness, App Store readiness, or Release Green.
 
 ## Codex remediation dossiers
 

@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "baseline": {
+    "capturedAt": "2026-07-09",
+    "commit": "b123ea6f569ecfa61f354a22251c31382b07f019",
+    "branch": "main",
+    "toolchain": "Xcode 26.6 / Swift 6.3.3",
+    "status": "red",
+    "scoreSemantics": "Working scores are advisory. Green requires score 10, linked evidence, and every required gate passing on the same commit."
+  },
+  "sourceCounts": {
+    "productionSwiftFiles": 1410,
+    "supportSwiftFiles": 466,
+    "nativeAppSwiftFiles": 1329,
+    "nativeWidgetExtensionSwiftFiles": 3,
+    "nativeShareExtensionSwiftFiles": 2,
+    "testSwiftFiles": 425,
+    "architectureNounFiles": 319,
+    "blockedSuffixSplitFiles": 111,
+    "suffixSplitFiles": 147,
+    "sourceAtlasFiles": 102,
+    "productionFilesOver600Lines": 0,
+    "supportFilesOver600Lines": 38
+  },
+  "targetGraph": {
+    "evidencePath": "docs/qa/architecture/current-module-graph.json",
+    "currentTargetCount": 7,
+    "currentStatus": "red",
+    "intendedTargets": [
+      "AmbitionsDomain",
+      "PrivateLifeRuntimeAPI",
+      "PrivateLifeRuntimeCore",
+      "PrivateLifeRuntimeStorage",
+      "PrivateLifeRuntimeAppleAdapters",
+      "AmbitionsExternalSurfaceContracts",
+      "AmbitionsFeatureToday",
+      "AmbitionsFeatureGoals",
+      "AmbitionsFeatureTime",
+      "AmbitionsFeatureYou",
+      "AmbitionsFeatureCapture",
+      "AmbitionsTrust",
+      "AmbitionsStage",
+      "AmbitionsApp",
+      "AmbitionsDesignSystem"
+    ]
+  },
+  "validatorResults": {
+    "remediationGovernance": {
+      "command": "python3 scripts/ambitions-remediation-governance-check.py --json",
+      "exitCode": 0,
+      "status": "pass",
+      "summary": "No changed-scope remediation governance findings; report records 1410 production and 466 support Swift files."
+    },
+    "architectureInventory": {
+      "command": "python3 scripts/ambitions-architecture-inventory.py --json",
+      "exitCode": 1,
+      "status": "fail",
+      "summary": "Inventory expects the obsolete heading '## 17. Final Architecture Tree' and cannot parse current Article 22 truth."
+    },
+    "strictQualityGate": {
+      "command": "python3 scripts/ambitions-quality-gate.py --json",
+      "exitCode": 1,
+      "status": "fail",
+      "summary": "Findings remain in action mutation proof, design tokens, final-tree inventory, forbidden language, and hosted-AI boundary wording."
+    },
+    "localRuntimeProof": {
+      "command": "python3 scripts/ambitions-local-runtime-proof.py --json --audit-only",
+      "exitCode": 0,
+      "status": "fail",
+      "summary": "Audit status is Red with three blockers: architecture inventory and two EventKit side-effect commit-receipt markers."
+    }
+  },
+  "dimensions": {
+    "overallArchitecture": {
+      "workingScore": 4,
+      "status": "red",
+      "evidence": ["docs/truth/PRODUCT_DESIGN_TRUTH.md", "docs/qa/architecture/current-module-graph.json"],
+      "requiredGates": ["target-graph-acyclic", "one-mutation-authority", "stage-presentation-only", "zero-noncanonical-production-owners", "behavior-backed-architecture-proof"],
+      "gateResults": {"target-graph-acyclic": "fail", "one-mutation-authority": "fail", "stage-presentation-only": "fail", "zero-noncanonical-production-owners": "fail", "behavior-backed-architecture-proof": "fail"}
+    },
+    "runtimeFoundations": {
+      "workingScore": 4.5,
+      "status": "red",
+      "evidence": ["docs/qa/local-runtime-proof/current-local-runtime-proof.json", "scripts/ambitions-local-runtime-proof.py"],
+      "requiredGates": ["all-mutations-enumerated", "runtime-restart", "duplicate-idempotency", "rollback", "corruption-recovery", "outbox-faults"],
+      "gateResults": {"all-mutations-enumerated": "fail", "runtime-restart": "fail", "duplicate-idempotency": "fail", "rollback": "fail", "corruption-recovery": "fail", "outbox-faults": "fail"}
+    },
+    "compileTimeModularity": {
+      "workingScore": 2,
+      "status": "red",
+      "evidence": ["Package.swift", "project.yml", "docs/qa/architecture/current-module-graph.json"],
+      "requiredGates": ["compiler-enforced-targets", "acyclic-target-graph", "incremental-feature-rebuild"],
+      "gateResults": {"compiler-enforced-targets": "fail", "acyclic-target-graph": "fail", "incremental-feature-rebuild": "fail"}
+    },
+    "dependencyDiscipline": {
+      "workingScore": 3,
+      "status": "red",
+      "evidence": ["Native/Ambitions/App/AppContainerFactory.swift", "docs/qa/architecture/current-module-graph.json"],
+      "requiredGates": ["no-feature-service-locator", "no-optional-live-dependencies", "no-default-live-runtime", "no-internal-notification-routing", "app-only-composition"],
+      "gateResults": {"no-feature-service-locator": "fail", "no-optional-live-dependencies": "fail", "no-default-live-runtime": "fail", "no-internal-notification-routing": "fail", "app-only-composition": "fail"}
+    },
+    "proofTestIntegrity": {
+      "workingScore": 4,
+      "status": "red",
+      "evidence": ["scripts/ambitions-quality-gate.py", "docs/truth/RELEASE_TRUTH.md"],
+      "requiredGates": ["executable-behavior-assertions", "lexical-tests-governance-only", "real-store-restart-replay", "zero-skips", "zero-retries", "zero-expected-failures"],
+      "gateResults": {"executable-behavior-assertions": "fail", "lexical-tests-governance-only": "fail", "real-store-restart-replay": "fail", "zero-skips": "fail", "zero-retries": "fail", "zero-expected-failures": "fail"}
+    }
+  },
+  "evidencePaths": [
+    "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+    "docs/truth/RELEASE_TRUTH.md",
+    "docs/qa/architecture/current-module-graph.json",
+    "docs/qa/local-runtime-proof/current-local-runtime-proof.json",
+    "project.yml",
+    "Package.swift",
+    "scripts/ambitions-remediation-governance-check.py",
+    "scripts/ambitions-architecture-inventory.py",
+    "scripts/ambitions-quality-gate.py",
+    "scripts/ambitions-local-runtime-proof.py"
+  ],
+  "blockers": [
+    "Architecture inventory cannot parse the current Final Architecture Tree authority.",
+    "Strict quality gate is Red.",
+    "Current LocalRuntimeProof audit is Red.",
+    "Intended target boundaries are not compiler-enforced.",
+    "Critical restart, fault, real-store, and lane-integrity gates are not proven on this baseline commit."
+  ],
+  "forbiddenClaims": [
+    "Architecture modernization is Green or 10/10.",
+    "All meaningful mutations route through one proven authority.",
+    "Runtime restart, corruption, rollback, duplicate, and outbox behavior is comprehensively proven.",
+    "Canonical folder ownership is compiler-enforced.",
+    "Simulator or source evidence proves physical-device, manual accessibility, independent Visual Green, TestFlight, App Store, or Release Green."
+  ]
+}
