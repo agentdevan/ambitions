@@ -127,8 +127,8 @@ final class ExternalActionCommandServiceTests: XCTestCase {
             result: RuntimeActionResult(outcome: .routed, routeIntent: .returnToToday)
         )
         let router = RecordingExternalActionRouter()
-        let service = DefaultExternalActionCommandService(
-            runtimeExecutor: runtimeExecutor,
+        let service = AppExternalActionRoutingAdapter(
+            coreService: DefaultExternalActionCommandService(runtimeExecutor: runtimeExecutor),
             externalRouter: router,
             appRouteForIntent: AppContainerFactory.appRoute
         )
@@ -139,7 +139,7 @@ final class ExternalActionCommandServiceTests: XCTestCase {
         )
 
         XCTAssertEqual(result.outcome, .routed)
-        XCTAssertEqual(result.route, .openTab(.today))
+        XCTAssertEqual(result.routeIntent, .returnToToday)
         XCTAssertEqual(result.pipelineTrace?.taxonomy, .shellNavigationOverlay)
         XCTAssertTrue(result.pipelineTrace?.isHonestShellNonRuntime == true)
         XCTAssertEqual(router.dispatchedRoutes.map(\.route), [.openTab(.today)])
@@ -151,8 +151,8 @@ final class ExternalActionCommandServiceTests: XCTestCase {
             result: RuntimeActionResult(outcome: .routed, routeIntent: .openMemoryLens)
         )
         let router = RecordingExternalActionRouter()
-        let service = DefaultExternalActionCommandService(
-            runtimeExecutor: runtimeExecutor,
+        let service = AppExternalActionRoutingAdapter(
+            coreService: DefaultExternalActionCommandService(runtimeExecutor: runtimeExecutor),
             externalRouter: router,
             appRouteForIntent: AppContainerFactory.appRoute
         )
@@ -163,7 +163,7 @@ final class ExternalActionCommandServiceTests: XCTestCase {
         )
 
         XCTAssertEqual(result.outcome, .routed)
-        XCTAssertEqual(result.route, .presentOverlay(.memoryLens(entrySource: .appIntent)))
+        XCTAssertEqual(result.routeIntent, .openMemoryLens)
         XCTAssertEqual(router.dispatchedRoutes.map(\.source), [.appIntent])
     }
 
@@ -172,8 +172,8 @@ final class ExternalActionCommandServiceTests: XCTestCase {
             result: RuntimeActionResult(outcome: .performed, messageTitle: "Recorded")
         )
         let router = RecordingExternalActionRouter()
-        let service = DefaultExternalActionCommandService(
-            runtimeExecutor: runtimeExecutor,
+        let service = AppExternalActionRoutingAdapter(
+            coreService: DefaultExternalActionCommandService(runtimeExecutor: runtimeExecutor),
             externalRouter: router,
             appRouteForIntent: AppContainerFactory.appRoute
         )
@@ -189,7 +189,7 @@ final class ExternalActionCommandServiceTests: XCTestCase {
 
         XCTAssertEqual(result.outcome, .performed)
         XCTAssertEqual(result.messageTitle, "Recorded")
-        XCTAssertNil(result.route)
+        XCTAssertNil(result.routeIntent)
         XCTAssertEqual(result.pipelineTrace?.taxonomy, .productRuntime)
         XCTAssertEqual(result.pipelineTrace?.runtimeMutation.state, .satisfied)
         XCTAssertEqual(result.pipelineTrace?.proofReceipt.state, .unavailable)
@@ -201,8 +201,8 @@ final class ExternalActionCommandServiceTests: XCTestCase {
             result: RuntimeActionResult(outcome: .failed, messageTitle: "Action could not complete")
         )
         let router = RecordingExternalActionRouter()
-        let service = DefaultExternalActionCommandService(
-            runtimeExecutor: runtimeExecutor,
+        let service = AppExternalActionRoutingAdapter(
+            coreService: DefaultExternalActionCommandService(runtimeExecutor: runtimeExecutor),
             externalRouter: router,
             appRouteForIntent: AppContainerFactory.appRoute
         )
@@ -218,7 +218,7 @@ final class ExternalActionCommandServiceTests: XCTestCase {
 
         XCTAssertEqual(result.outcome, .failed)
         XCTAssertEqual(result.messageTitle, "Action could not complete")
-        XCTAssertNil(result.route)
+        XCTAssertNil(result.routeIntent)
         XCTAssertEqual(result.pipelineTrace?.taxonomy, .productRuntime)
         XCTAssertEqual(result.pipelineTrace?.runtimeMutation.state, .blocked)
         XCTAssertTrue(router.dispatchedRoutes.isEmpty)
@@ -390,16 +390,18 @@ private extension ExternalActionCommandServiceTests {
         captureService: RecordingExternalActionCaptureService = RecordingExternalActionCaptureService(),
         router: RecordingExternalActionRouter? = nil,
         rejectionRecorder: (any SideEffectOutboxing)? = nil
-    ) -> DefaultExternalActionCommandService {
+    ) -> AppExternalActionRoutingAdapter {
         let todayService = todayService ?? RecordingExternalActionTodayService()
         let router = router ?? RecordingExternalActionRouter()
-        return DefaultExternalActionCommandService(
-            todayService: todayService,
-            goalsService: goalsService,
-            captureService: captureService,
+        return AppExternalActionRoutingAdapter(
+            coreService: DefaultExternalActionCommandService(
+                todayService: todayService,
+                goalsService: goalsService,
+                captureService: captureService,
+                rejectionRecorder: rejectionRecorder
+            ),
             externalRouter: router,
-            appRouteForIntent: AppContainerFactory.appRoute,
-            rejectionRecorder: rejectionRecorder
+            appRouteForIntent: AppContainerFactory.appRoute
         )
     }
 }

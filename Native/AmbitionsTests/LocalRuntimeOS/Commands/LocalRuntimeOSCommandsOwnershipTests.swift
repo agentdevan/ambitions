@@ -104,6 +104,25 @@ final class LocalRuntimeOSCommandsOwnershipTests: XCTestCase {
         XCTAssertEqual(record.privacy, .privateUserText)
     }
 
+    func testExternalActionCoreBoundaryContainsNoAppPresentationAuthority() throws {
+        let sourceURL = repoRoot().appendingPathComponent(
+            "Native/Ambitions/Core/LocalRuntimeOS/Commands/ExternalActionCommandService.swift"
+        )
+        let source = try String(contentsOf: sourceURL, encoding: .utf8)
+
+        for forbiddenType in [
+            "AppExternalRoute",
+            "AppExternalRouting",
+            "AppExternalRouteSource",
+            "ShellOverlayState",
+        ] {
+            XCTAssertFalse(
+                source.contains(forbiddenType),
+                "Core external-action authority must not reference App presentation type \(forbiddenType)."
+            )
+        }
+    }
+
     func testCommandExecutorValidationRoutesThroughRuntimeValidator() {
         let executor = AmbitionsCommandExecutor.test()
         let command = AmbitionsCommand(

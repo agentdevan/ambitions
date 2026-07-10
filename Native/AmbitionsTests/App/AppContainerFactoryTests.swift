@@ -193,7 +193,7 @@ final class AppContainerFactoryTests: XCTestCase {
         XCTAssertTrue(container.featureFactory.youService is RepositoryBackedYouService)
         XCTAssertEqual(container.persistence.bootstrapConfiguration, .preview)
         XCTAssertTrue(container.persistence.usesInMemoryStore)
-        XCTAssertTrue(container.platform.externalActionService is DefaultExternalActionCommandService)
+        XCTAssertTrue(container.platform.externalActionService is AppExternalActionRoutingAdapter)
         XCTAssertTrue(container.sourceAtlasLifecycleRefreshService is SourceAtlasPublicPackLifecycleRefreshService)
         XCTAssertTrue(container.platform.sourceAtlasLifecycleRefreshService is SourceAtlasPublicPackLifecycleRefreshService)
         let sourceAtlasRefresh = await container.sourceAtlasLifecycleRefreshService.refreshPublicSourceAtlasPacks(

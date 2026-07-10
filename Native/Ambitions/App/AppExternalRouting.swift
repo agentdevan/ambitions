@@ -9,6 +9,47 @@ protocol AppExternalRouting: AnyObject {
 }
 
 @MainActor
+final class AppExternalActionRoutingAdapter: ExternalActionCommandExecuting {
+    private let coreService: any ExternalActionCommandExecuting
+    private let externalRouter: any AppExternalRouting
+    private let appRouteForIntent: (RuntimeRouteIntent, ExternalActionSource) -> AppExternalRoute
+
+    init(
+        coreService: any ExternalActionCommandExecuting,
+        externalRouter: any AppExternalRouting,
+        appRouteForIntent: @escaping (RuntimeRouteIntent, ExternalActionSource) -> AppExternalRoute
+    ) {
+        self.coreService = coreService
+        self.externalRouter = externalRouter
+        self.appRouteForIntent = appRouteForIntent
+    }
+
+    func execute(_ command: ExternalActionCommand, now: Date) async -> ExternalActionResult {
+        let result = await coreService.execute(command, now: now)
+        guard let routeIntent = result.routeIntent else { return result }
+
+        externalRouter.dispatch(
+            appRouteForIntent(routeIntent, command.source),
+            source: routeSource(for: command.source)
+        )
+        return result
+    }
+
+    private func routeSource(for source: ExternalActionSource) -> AppExternalRouteSource {
+        switch source {
+        case .deepLink:
+            return .deepLink
+        case .notification:
+            return .notificationAction
+        case .appIntent:
+            return .appIntent
+        case .widget, .futureExternalPayload:
+            return .widgetAction
+        }
+    }
+}
+
+@MainActor
 final class DefaultAppExternalRouter: AppExternalRouting {
     private let navigation: StageStore
     private let translator: AppExternalRouteTranslator

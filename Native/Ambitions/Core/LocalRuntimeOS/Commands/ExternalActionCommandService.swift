@@ -246,20 +246,20 @@ enum ExternalActionOutcome: Equatable, Sendable {
 
 struct ExternalActionResult: Equatable, Sendable {
     let outcome: ExternalActionOutcome
-    let route: AppExternalRoute?
+    let routeIntent: RuntimeRouteIntent?
     let messageTitle: String?
     let pipelineTrace: StageActionPipelineTrace?
     let sideEffectReceipt: SideEffectReceipt?
 
     init(
         outcome: ExternalActionOutcome,
-        route: AppExternalRoute? = nil,
+        routeIntent: RuntimeRouteIntent? = nil,
         messageTitle: String? = nil,
         pipelineTrace: StageActionPipelineTrace? = nil,
         sideEffectReceipt: SideEffectReceipt? = nil
     ) {
         self.outcome = outcome
-        self.route = route
+        self.routeIntent = routeIntent
         self.messageTitle = messageTitle
         self.pipelineTrace = pipelineTrace
         self.sideEffectReceipt = sideEffectReceipt
@@ -274,19 +274,13 @@ protocol ExternalActionCommandExecuting: AnyObject {
 @MainActor
 final class DefaultExternalActionCommandService: ExternalActionCommandExecuting {
     private let runtimeExecutor: any RuntimeActionCommandExecuting
-    private let externalRouter: any AppExternalRouting
     private let rejectionRecorder: (any SideEffectOutboxing)?
-    private let appRouteForIntent: (RuntimeRouteIntent, ExternalActionSource) -> AppExternalRoute
 
     init(
         runtimeExecutor: any RuntimeActionCommandExecuting,
-        externalRouter: any AppExternalRouting,
-        appRouteForIntent: @escaping (RuntimeRouteIntent, ExternalActionSource) -> AppExternalRoute,
         rejectionRecorder: (any SideEffectOutboxing)? = nil
     ) {
         self.runtimeExecutor = runtimeExecutor
-        self.externalRouter = externalRouter
-        self.appRouteForIntent = appRouteForIntent
         self.rejectionRecorder = rejectionRecorder
     }
 
@@ -294,15 +288,11 @@ final class DefaultExternalActionCommandService: ExternalActionCommandExecuting 
         todayService: any TodayServicing,
         goalsService: any GoalsServicing,
         captureService: any CaptureServicing,
-        externalRouter: any AppExternalRouting,
-        appRouteForIntent: @escaping (RuntimeRouteIntent, ExternalActionSource) -> AppExternalRoute,
         rejectionRecorder: (any SideEffectOutboxing)? = nil
     ) {
         _ = goalsService
         _ = captureService
         self.runtimeExecutor = DefaultRuntimeActionCommandExecutor(todayService: todayService)
-        self.externalRouter = externalRouter
-        self.appRouteForIntent = appRouteForIntent
         self.rejectionRecorder = rejectionRecorder
     }
 
@@ -314,17 +304,10 @@ final class DefaultExternalActionCommandService: ExternalActionCommandExecuting 
             result: result,
             now: now
         )
-        guard let routeIntent = result.routeIntent else {
-            return ExternalActionResult(
-                outcome: result.outcome,
-                messageTitle: result.messageTitle,
-                pipelineTrace: pipelineTrace,
-                sideEffectReceipt: sideEffectReceipt
-            )
-        }
-        return route(
-            appRouteForIntent(routeIntent, command.source),
-            source: command.source,
+        return ExternalActionResult(
+            outcome: result.outcome,
+            routeIntent: result.routeIntent,
+            messageTitle: result.messageTitle,
             pipelineTrace: pipelineTrace,
             sideEffectReceipt: sideEffectReceipt
         )
@@ -369,21 +352,6 @@ final class DefaultExternalActionCommandService: ExternalActionCommandExecuting 
         case .routed:
             return command.shellPipelineTrace()
         }
-    }
-
-    private func route(
-        _ route: AppExternalRoute,
-        source: ExternalActionSource,
-        pipelineTrace: StageActionPipelineTrace?,
-        sideEffectReceipt: SideEffectReceipt?
-    ) -> ExternalActionResult {
-        externalRouter.dispatch(route, source: routeSource(for: source))
-        return ExternalActionResult(
-            outcome: .routed,
-            route: route,
-            pipelineTrace: pipelineTrace,
-            sideEffectReceipt: sideEffectReceipt
-        )
     }
 
     private func recordRejectedExternalActionIfNeeded(
@@ -435,19 +403,6 @@ final class DefaultExternalActionCommandService: ExternalActionCommandExecuting 
             )
         } catch {
             return nil
-        }
-    }
-
-    private func routeSource(for source: ExternalActionSource) -> AppExternalRouteSource {
-        switch source {
-        case .deepLink:
-            return .deepLink
-        case .notification:
-            return .notificationAction
-        case .appIntent:
-            return .appIntent
-        case .widget, .futureExternalPayload:
-            return .widgetAction
         }
     }
 

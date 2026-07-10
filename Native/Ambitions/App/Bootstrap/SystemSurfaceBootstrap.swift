@@ -65,8 +65,10 @@ enum SystemSurfaceBootstrap {
             repositories: repositories,
             loadDashboard: { try await runtime.youService.loadYouDashboard() }
         )
-        let externalActionService = DefaultExternalActionCommandService(
-            runtimeExecutor: runtime.actionExecutor,
+        let externalActionService = AppExternalActionRoutingAdapter(
+            coreService: DefaultExternalActionCommandService(
+                runtimeExecutor: runtime.actionExecutor
+            ),
             externalRouter: externalRouter,
             appRouteForIntent: appRouteForIntent
         )

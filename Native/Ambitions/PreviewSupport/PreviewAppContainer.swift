@@ -79,10 +79,12 @@ enum PreviewAppContainerFactory {
             calendarRemindersService: StubCalendarRemindersService(),
             actionRouter: DefaultAppActionRouter(navigation: navigation),
             externalRouter: externalRouter,
-            externalActionService: DefaultExternalActionCommandService(
-                todayService: todayService,
-                goalsService: goalsService,
-                captureService: captureService,
+            externalActionService: AppExternalActionRoutingAdapter(
+                coreService: DefaultExternalActionCommandService(
+                    todayService: todayService,
+                    goalsService: goalsService,
+                    captureService: captureService
+                ),
                 externalRouter: externalRouter,
                 appRouteForIntent: AppContainerFactory.appRoute
             ),
