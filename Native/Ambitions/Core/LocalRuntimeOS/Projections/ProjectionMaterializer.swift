@@ -186,6 +186,8 @@ struct ProjectionEventRecord: Codable, Equatable, Hashable, Identifiable {
         case let .stepPlaced(value): [value.stepID, value.timeBlockID]
         case let .timeWindowProtected(value), let .timeWindowCorrected(value): [value.windowID]
         case let .mutationUndone(value): value.affectedObjectIDs
+        case let .todayReceiptRecorded(value):
+            value.receipt.affectedObjects.map(\.id)
         }
     }
 }

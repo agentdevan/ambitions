@@ -28,6 +28,7 @@ struct TodayProjection: Codable, Equatable, Hashable {
                 record.kind == .captureRouteDecided ||
                 record.kind == .closureRecorded ||
                 record.kind == .timePlacementProposed ||
+                Self.isTodayReceipt(record) ||
                 Self.isTimeMutation(record)
         }
         startHereCommandEventIDs = todayRecords
@@ -70,5 +71,10 @@ struct TodayProjection: Codable, Equatable, Hashable {
         guard record.kind == .domainMutation else { return false }
         return record.metadata["domainEventTypeID"]?.hasPrefix("ambitions.time.") == true ||
             (record.metadata["domainEventTypeID"] == "ambitions.mutation.undone" && record.source == .time)
+    }
+
+    private static func isTodayReceipt(_ record: ProjectionEventRecord) -> Bool {
+        record.kind == .domainMutation &&
+            record.metadata["domainEventTypeID"] == "ambitions.today.receipt_recorded"
     }
 }

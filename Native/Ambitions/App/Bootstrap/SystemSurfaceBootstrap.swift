@@ -60,7 +60,10 @@ enum SystemSurfaceBootstrap {
         runtimeCommandClient: RuntimeCommandClient,
         appRouteForIntent: @escaping (RuntimeRouteIntent, ExternalActionSource) -> AppExternalRoute
     ) -> SystemSurfaceServices {
-        let todayReceiptCommands = TodayReceiptCommandService(repositories: repositories)
+        let todayReceiptCommands = TodayReceiptCommandService(
+            repositories: repositories,
+            runtimeCommandClient: runtimeCommandClient
+        )
         let youPreferencesCommands = YouPreferencesCommandService(
             repositories: repositories,
             loadDashboard: { try await runtime.youService.loadYouDashboard() }

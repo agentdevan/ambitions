@@ -5,6 +5,7 @@ extension AmbitionsCommandExecutor {
     static func test(
         captureService: (any CaptureServicing)? = nil,
         eventLedger: (any EventLedgerRepository)? = nil,
+        actionReceiptHistory: (any ActionReceiptHistoryRepository)? = nil,
         commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)? = nil,
         runtimeEvents: (any RuntimeEventStore)? = InMemoryRuntimeEventStore(),
         projectionStore: ProjectionStoreSQLite? = nil,
@@ -21,6 +22,7 @@ extension AmbitionsCommandExecutor {
         AmbitionsCommandExecutor(
             captureService: captureService,
             eventLedger: eventLedger,
+            actionReceiptHistory: actionReceiptHistory,
             commandExecutionRecords: commandExecutionRecords,
             runtimeEvents: runtimeEvents,
             projectionStore: projectionStore,

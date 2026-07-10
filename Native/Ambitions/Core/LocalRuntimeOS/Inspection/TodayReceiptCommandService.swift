@@ -11,21 +11,23 @@ protocol TodayReceiptCommanding: Sendable {
 
 struct TodayReceiptCommandService: TodayReceiptCommanding {
     let actionReceiptHistory: (any ActionReceiptHistoryRepository)?
-    let committer: RuntimeCommandMutationCommitter
+    let runtimeCommandClient: RuntimeCommandClient?
 
-    init(repositories: AppRepositories) {
+    init(repositories: AppRepositories, runtimeCommandClient: RuntimeCommandClient? = nil) {
         actionReceiptHistory = repositories.actionReceiptHistory
-        committer = RuntimeCommandMutationCommitter(
-            commandJournal: repositories.commandJournal,
-            commandExecutionRecords: repositories.commandExecutionRecords,
-            runtimeEvents: repositories.runtimeEvents,
-            projectionStore: repositories.projectionStore,
-            searchIndex: repositories.searchIndex
-        )
+        self.runtimeCommandClient = runtimeCommandClient
+    }
+
+    init(
+        actionReceiptHistory: any ActionReceiptHistoryRepository,
+        runtimeCommandClient: RuntimeCommandClient
+    ) {
+        self.actionReceiptHistory = actionReceiptHistory
+        self.runtimeCommandClient = runtimeCommandClient
     }
 
     func recordRecommendationRejection(_ input: TodayRecommendationRejectionInput) async throws -> TodayActionResponse {
-        guard let actionReceiptHistory else {
+        guard actionReceiptHistory != nil, let runtimeCommandClient else {
             return TodayActionResponse(
                 message: TodayInlineMessage(
                     title: "Not this saved locally",
@@ -36,42 +38,44 @@ struct TodayReceiptCommandService: TodayReceiptCommanding {
         }
 
         let recordedAt = PersistedTemporalValue.date(from: input.recordedAt)
-        let command = rejectionCommand(for: input)
-        let response = await committer.commit(
-            command: command,
-            context: CommandExecutionContext(now: recordedAt, actor: .user, sourceSurface: "today")
-        ) {
-            let receipt = ActionReceipt.stepRejectedReceipt(
-                id: "today.rejection.\(input.candidateID).\(input.recordedAt)",
-                candidateID: input.candidateID,
-                sourceStepID: input.sourceStepID,
-                sourceCandidateID: input.sourceCandidateID,
-                reason: input.reason,
-                contextFingerprint: input.contextFingerprint,
-                recordedAt: input.recordedAt,
-                customReasonText: input.customText,
-                skippedReason: input.skippedReason
-            )
-            let record = ActionReceiptHistoryRecord(
-                receipt: receipt,
-                privacyLevel: input.reason.code.isSensitive ? .sensitive : .safeToShow,
-                localOnly: true
-            )
-            try await actionReceiptHistory.save([record])
-            return AmbitionsCommandExecutionResult(
-                status: .succeeded,
-                summary: input.skippedReason ? "Recommendation rejection recorded without a reason." : "Recommendation rejection recorded.",
-                route: .today,
-                target: command.target,
-                recommendationExplanationIDs: [input.contextFingerprint],
-                metadata: [
-                    "receiptID": record.id,
-                    "rejectionReason": input.reason.storageLabel,
-                    "skippedReason": input.skippedReason ? "true" : "false",
-                    "sourceCandidateID": input.sourceCandidateID ?? "",
-                    "sourceStepID": input.sourceStepID,
-                ]
-            )
+        let receipt = ActionReceipt.stepRejectedReceipt(
+            id: "today.rejection.\(input.candidateID).\(input.recordedAt)",
+            candidateID: input.candidateID,
+            sourceStepID: input.sourceStepID,
+            sourceCandidateID: input.sourceCandidateID,
+            reason: input.reason,
+            contextFingerprint: input.contextFingerprint,
+            recordedAt: input.recordedAt,
+            customReasonText: input.customText,
+            skippedReason: input.skippedReason
+        )
+        let record = ActionReceiptHistoryRecord(
+            receipt: receipt,
+            privacyLevel: input.reason.code.isSensitive ? .sensitive : .safeToShow,
+            localOnly: true
+        )
+        let event = TodayReceiptDomainEvent(
+            kind: .recommendationRejection,
+            receipt: record.receipt,
+            privacyLevel: record.privacyLevel,
+            localOnly: record.localOnly,
+            proofRelevance: record.proofRelevance,
+            requiresConfirmationBeforeBroaderUse: record.requiresConfirmationBeforeBroaderUse
+        )
+        let command = rejectionCommand(for: input, eventPayload: try event.encodedCommandPayload())
+        let response = await runtimeCommandClient.execute(
+            command,
+            CommandExecutionContext(now: recordedAt, actor: .user, sourceSurface: "today")
+        )
+
+        guard await hasCommittedTodayProjection(response, client: runtimeCommandClient) else {
+            return TodayActionResponse(message: TodayInlineMessage(
+                title: response.metadata["todayReceiptMaterialization"] == "needs_recovery"
+                    ? "Reason saved; history needs recovery"
+                    : "Reason not saved",
+                body: "The durable Today receipt or matching read model was unavailable, so no success state was shown.",
+                state: .warning
+            ))
         }
 
         return TodayActionResponse(
@@ -90,7 +94,7 @@ struct TodayReceiptCommandService: TodayReceiptCommanding {
         outcome: TodayActionClosureOutcomeState,
         now: Date
     ) async throws -> TodayActionResponse {
-        guard let actionReceiptHistory else {
+        guard actionReceiptHistory != nil, let runtimeCommandClient else {
             return TodayActionResponse(
                 message: TodayInlineMessage(
                     title: "Closure receipt not saved",
@@ -101,50 +105,45 @@ struct TodayReceiptCommandService: TodayReceiptCommanding {
         }
 
         let occurredAt = DomainTimestamp.string(from: now)
-        let command = closureCommand(for: closure, outcome: outcome, occurredAt: occurredAt)
         let record = closure.actionReceiptHistoryRecord(for: outcome, occurredAt: occurredAt)
         let peek = closure.proofReceiptPeek(for: outcome, occurredAt: occurredAt)
-        let result: AmbitionsCommandExecutionResult = await committer.commit(
-            command: command,
-            context: CommandExecutionContext(now: now, actor: .user, sourceSurface: "today")
-        ) {
-            try await actionReceiptHistory.save([record])
-            return AmbitionsCommandExecutionResult(
-                status: .succeeded,
-                summary: "Today closure receipt recorded.",
-                route: .today,
-                target: command.target,
-                metadata: [
-                    "receiptID": record.id,
-                    "closureState": outcome.closureState.rawValue,
-                    "objectTitle": closure.objectTitle,
-                    "proofRelevance": record.proofRelevance.rawValue,
-                ]
-            )
+        let event = TodayReceiptDomainEvent(
+            kind: .closure,
+            receipt: record.receipt,
+            privacyLevel: record.privacyLevel,
+            localOnly: record.localOnly,
+            proofRelevance: record.proofRelevance,
+            requiresConfirmationBeforeBroaderUse: record.requiresConfirmationBeforeBroaderUse
+        )
+        let command = closureCommand(
+            for: closure,
+            outcome: outcome,
+            occurredAt: occurredAt,
+            eventPayload: try event.encodedCommandPayload()
+        )
+        let result = await runtimeCommandClient.execute(
+            command,
+            CommandExecutionContext(now: now, actor: .user, sourceSurface: "today")
+        )
+        guard await hasCommittedTodayProjection(result, client: runtimeCommandClient) else {
+            return TodayActionResponse(message: TodayInlineMessage(
+                title: result.metadata["todayReceiptMaterialization"] == "needs_recovery"
+                    ? "Closure saved; history needs recovery"
+                    : "Closure receipt not saved",
+                body: "The durable Today receipt or matching read model was unavailable, so no success state was shown.",
+                state: .warning
+            ))
         }
-
-        let stageRecord = TodayClosureRecord(
-            stepID: closure.target.stepID,
-            goalID: closure.target.goalID,
-            outcome: outcome.closureState,
-            occurredAt: now
-        )
-        let stageMutation = TodayClosureStageMutation(
-            record: stageRecord,
-            stepTitle: closure.objectTitle,
-            receiptSaved: result.status == .succeeded
-        )
         return TodayActionResponse(
             message: TodayInlineMessage(
                 title: peek.title,
                 body: "\(peek.subtitle). \(peek.privacyLabel). \(record.sourceRecordLabel). \(record.replayTraceLabel). You inspection can find this through local receipt history.",
                 state: outcome.createsProof ? .success : .selected
-            ),
-            stageMutation: stageMutation
+            )
         )
     }
 
-    private func rejectionCommand(for input: TodayRecommendationRejectionInput) -> AmbitionsCommand {
+    private func rejectionCommand(for input: TodayRecommendationRejectionInput, eventPayload: String) -> AmbitionsCommand {
         AmbitionsCommand(
             id: "today.rejection.command.\(input.candidateID).\(Self.commandIDComponent(input.recordedAt))",
             kind: .dismissRecommendation,
@@ -165,6 +164,8 @@ struct TodayReceiptCommandService: TodayReceiptCommanding {
                     "contextFingerprint": input.contextFingerprint,
                     "rejectionReason": input.reason.storageLabel,
                     "skippedReason": input.skippedReason ? "true" : "false",
+                    TodayReceiptDomainEvent.mutationMarkerKey: "true",
+                    TodayReceiptDomainEvent.commandMetadataKey: eventPayload,
                 ]
             ),
             createdAt: input.recordedAt,
@@ -178,7 +179,8 @@ struct TodayReceiptCommandService: TodayReceiptCommanding {
     private func closureCommand(
         for closure: TodayActionClosureSheetState,
         outcome: TodayActionClosureOutcomeState,
-        occurredAt: String
+        occurredAt: String,
+        eventPayload: String
     ) -> AmbitionsCommand {
         AmbitionsCommand(
             id: "today.closure.command.\(closure.id).\(outcome.id).\(Self.commandIDComponent(occurredAt))",
@@ -196,6 +198,8 @@ struct TodayReceiptCommandService: TodayReceiptCommanding {
                     "closureState": outcome.closureState.rawValue,
                     "closureOutcomeID": outcome.id,
                     "closureSheetID": closure.id,
+                    TodayReceiptDomainEvent.mutationMarkerKey: "true",
+                    TodayReceiptDomainEvent.commandMetadataKey: eventPayload,
                 ]
             ),
             createdAt: occurredAt,
@@ -204,6 +208,24 @@ struct TodayReceiptCommandService: TodayReceiptCommanding {
             relations: AmbitionsCommandRelations(goalIDs: [closure.target.goalID].compactMap { $0 }),
             privacy: .standard
         )
+    }
+
+    private func hasCommittedTodayProjection(
+        _ result: AmbitionsCommandExecutionResult,
+        client: RuntimeCommandClient
+    ) async -> Bool {
+        guard result.status == .succeeded,
+              result.metadata["todayReceiptMaterialization"] == "saved_post_authority",
+              result.metadata["runtimeReceiptID"]?.isEmpty == false,
+              let projection = try? await client.projection(.today) else { return false }
+        let ids = result.metadata["runtimeMaterializedProjectionCursorIDs"]?.split(separator: ",").map(String.init) ?? []
+        let sequences = result.metadata["runtimeMaterializedProjectionCursorSequences"]?.split(separator: ",").compactMap { Int64($0) } ?? []
+        let checksums = result.metadata["runtimeMaterializedProjectionCursorChecksums"]?.split(separator: ",").map(String.init) ?? []
+        guard ids.count == sequences.count, ids.count == checksums.count,
+              let index = ids.firstIndex(of: ProjectionID.today.rawValue) else { return false }
+        return projection.projectionID == ProjectionID.today.rawValue &&
+            projection.eventSequence == sequences[index] &&
+            projection.cursorChecksum == checksums[index]
     }
 
     private static func commandIDComponent(_ value: String) -> String {

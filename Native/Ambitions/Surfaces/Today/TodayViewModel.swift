@@ -117,9 +117,6 @@ final class TodayViewModel {
             let response = try await receiptCommands.recordActionClosure(closure, outcome: outcome, now: now)
             transientMessage = response.message
             await refresh(using: refreshService, userDisplayName: userDisplayName, now: now, calendar: calendar, entryContext: entryContext, timeZone: timeZone)
-            if let stageMutation = response.stageMutation {
-                applyClosureStageMutation(stageMutation)
-            }
         } catch {
             transientMessage = TodayInlineMessage(
                 title: "Closure could not be saved",
@@ -142,8 +139,4 @@ final class TodayViewModel {
         )
     }
 
-    private func applyClosureStageMutation(_ mutation: TodayClosureStageMutation) {
-        guard case let .loaded(experience) = state else { return }
-        state = .loaded(experience.applyingClosure(mutation))
-    }
 }

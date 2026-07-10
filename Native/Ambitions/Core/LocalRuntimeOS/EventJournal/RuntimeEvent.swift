@@ -3,12 +3,13 @@ import Foundation
 let runtimeEventSchemaVersion = "runtime_event.native.v1"
 let runtimeDomainEventSchemaVersion = 2
 
-enum RuntimeDomainEvent: Sendable, Codable, Equatable, Hashable {
+enum RuntimeDomainEvent: Sendable, Codable, Equatable {
     case captureCreated(CaptureCreatedDomainEvent)
     case stepPlaced(StepPlacedDomainEvent)
     case timeWindowProtected(TimeWindowDomainEvent)
     case timeWindowCorrected(TimeWindowDomainEvent)
     case mutationUndone(MutationUndoneDomainEvent)
+    case todayReceiptRecorded(TodayReceiptDomainEvent)
 
     var typeID: String {
         switch self {
@@ -17,10 +18,51 @@ enum RuntimeDomainEvent: Sendable, Codable, Equatable, Hashable {
         case .timeWindowProtected: "ambitions.time.window_protected"
         case .timeWindowCorrected: "ambitions.time.window_corrected"
         case .mutationUndone: "ambitions.mutation.undone"
+        case .todayReceiptRecorded: "ambitions.today.receipt_recorded"
         }
     }
 
     var schemaVersion: Int { runtimeDomainEventSchemaVersion }
+}
+
+struct TodayReceiptDomainEvent: Sendable, Codable, Equatable {
+    enum Kind: String, Sendable, Codable, Equatable {
+        case closure
+        case recommendationRejection = "recommendation_rejection"
+    }
+
+    static let commandMetadataKey = "todayReceiptPayload"
+    static let mutationMarkerKey = "todayReceiptMutation"
+
+    let kind: Kind
+    let receipt: ActionReceipt
+    let privacyLevel: ActionReceiptPrivacyLevel
+    let localOnly: Bool
+    let proofRelevance: ActionReceiptProofRelevance
+    let requiresConfirmationBeforeBroaderUse: Bool
+
+    var record: ActionReceiptHistoryRecord {
+        ActionReceiptHistoryRecord(
+            receipt: receipt,
+            privacyLevel: privacyLevel,
+            localOnly: localOnly,
+            proofRelevance: proofRelevance,
+            requiresConfirmationBeforeBroaderUse: requiresConfirmationBeforeBroaderUse
+        )
+    }
+
+    func encodedCommandPayload() throws -> String {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.sortedKeys]
+        return try encoder.encode(self).base64EncodedString()
+    }
+
+    static func decode(command: AmbitionsCommand) -> TodayReceiptDomainEvent? {
+        guard command.payload.metadata[mutationMarkerKey] == "true",
+              let encoded = command.payload.metadata[commandMetadataKey],
+              let data = Data(base64Encoded: encoded) else { return nil }
+        return try? JSONDecoder().decode(TodayReceiptDomainEvent.self, from: data)
+    }
 }
 
 struct CaptureCreatedDomainEvent: Sendable, Codable, Equatable, Hashable {
@@ -206,6 +248,10 @@ extension RuntimeDomainEvent {
                 windowID: windowID, start: start, end: end,
                 reason: command.payload.metadata["correctionKind"] ?? "corrected"
             ))
+        case .completeAction, .dismissRecommendation:
+            guard result.status == .succeeded,
+                  let receipt = TodayReceiptDomainEvent.decode(command: command) else { return nil }
+            return .todayReceiptRecorded(receipt)
         default:
             return nil
         }

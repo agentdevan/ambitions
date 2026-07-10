@@ -72,6 +72,7 @@ struct RuntimeDomainEventCodec: Sendable {
     static let knownTypeIDs: Set<String> = [
         "ambitions.capture.created", "ambitions.time.step_placed",
         "ambitions.time.window_protected", "ambitions.time.window_corrected", "ambitions.mutation.undone",
+        "ambitions.today.receipt_recorded",
     ]
 }
 

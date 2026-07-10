@@ -134,6 +134,7 @@ enum AppContainerFactory {
         let executor = AmbitionsCommandExecutor(
             captureService: captureService,
             eventLedger: repositories.eventLedger,
+            actionReceiptHistory: repositories.actionReceiptHistory,
             commandExecutionRecords: repositories.commandExecutionRecords,
             runtimeEvents: repositories.runtimeEvents,
             projectionStore: repositories.projectionStore,

@@ -27,6 +27,7 @@ protocol CommandExecuting: Sendable {
 struct AmbitionsCommandExecutor: CommandExecuting {
     let captureService: (any CaptureServicing)?
     let eventLedger: (any EventLedgerRepository)?
+    let actionReceiptHistory: (any ActionReceiptHistoryRepository)?
     let commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)?
     let runtimeEvents: (any RuntimeEventStore)?
     let projectionStore: ProjectionStoreSQLite?
@@ -43,6 +44,7 @@ struct AmbitionsCommandExecutor: CommandExecuting {
     init(
         captureService: (any CaptureServicing)? = nil,
         eventLedger: (any EventLedgerRepository)?,
+        actionReceiptHistory: (any ActionReceiptHistoryRepository)? = nil,
         commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)?,
         runtimeEvents: (any RuntimeEventStore)?,
         projectionStore: ProjectionStoreSQLite?,
@@ -58,6 +60,7 @@ struct AmbitionsCommandExecutor: CommandExecuting {
     ) {
         self.captureService = captureService
         self.eventLedger = eventLedger
+        self.actionReceiptHistory = actionReceiptHistory
         self.commandExecutionRecords = commandExecutionRecords
         self.runtimeEvents = runtimeEvents
         self.projectionStore = projectionStore
@@ -99,6 +102,10 @@ struct AmbitionsCommandExecutor: CommandExecuting {
             }
             if command.kind.isTimeMutation, authorityReceipt != nil {
                 let materialized = await materializeTime(command, context: context, committedResult: replayed)
+                return await persistFinalMaterialization(command: command, result: materialized, at: context.now)
+            }
+            if command.isTodayReceiptMutation, authorityReceipt != nil {
+                let materialized = await materializeTodayReceipt(command, committedResult: replayed)
                 return await persistFinalMaterialization(command: command, result: materialized, at: context.now)
             }
             return replayed
@@ -197,6 +204,9 @@ struct AmbitionsCommandExecutor: CommandExecuting {
             result = await executePlanSeedRepresentation(command, context: context)
         case .placeStepInTime, .protectTimeWindow, .correctTimeWindow:
             result = await executeTimeCommand(command)
+        case .completeAction where command.isTodayReceiptMutation,
+             .dismissRecommendation where command.isTodayReceiptMutation:
+            result = executeTodayReceipt(command)
         default:
             result = AmbitionsCommandExecutionResult(
                 status: .unsupported,
@@ -230,6 +240,12 @@ struct AmbitionsCommandExecutor: CommandExecuting {
            persistedResult.status == .succeeded,
            RuntimeTransactionCommitPolicy.hasCommittedEvidence(persistedResult) {
             let materialized = await materializeTime(command, context: context, committedResult: persistedResult)
+            return await persistFinalMaterialization(command: command, result: materialized, at: context.now)
+        }
+        if command.isTodayReceiptMutation,
+           persistedResult.status == .succeeded,
+           RuntimeTransactionCommitPolicy.hasCommittedEvidence(persistedResult) {
+            let materialized = await materializeTodayReceipt(command, committedResult: persistedResult)
             return await persistFinalMaterialization(command: command, result: materialized, at: context.now)
         }
         return persistedResult

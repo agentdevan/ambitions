@@ -25,7 +25,6 @@ enum PreviewAppContainerFactory {
             ? PreviewTimeScenarios.protectedPlacementReviewSeeded
             : PreviewTimeScenarios.seeded
         let goalsService = runtime.goalsService
-        let todayReceiptCommands = TodayReceiptCommandService(repositories: runtime.repositories)
         let youService = StubYouService(fixtures: fixtures)
         let youPreferencesCommands = YouPreferencesCommandService(
             repositories: runtime.repositories,
@@ -34,6 +33,7 @@ enum PreviewAppContainerFactory {
         let commandExecutor = AmbitionsCommandExecutor(
                 captureService: captureService,
                 eventLedger: runtime.repositories.eventLedger,
+                actionReceiptHistory: runtime.repositories.actionReceiptHistory,
                 commandExecutionRecords: runtime.repositories.commandExecutionRecords,
                 runtimeEvents: runtime.repositories.runtimeEvents,
                 projectionStore: runtime.repositories.projectionStore,
@@ -60,6 +60,10 @@ enum PreviewAppContainerFactory {
                     materializedAt: record.materializedAt
                 )
             }
+        )
+        let todayReceiptCommands = TodayReceiptCommandService(
+            repositories: runtime.repositories,
+            runtimeCommandClient: runtimeCommandClient
         )
         let commandRouter = DefaultShellCommandRouter(
             navigation: navigation,

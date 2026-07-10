@@ -74,13 +74,40 @@ enum MeaningfulMutationRegistry {
         ),
         mutation(id: "time.calendar-aware-view-model", sourcePath: "TimeViewModel.makeCalendarAware", commandKind: .scheduleItem, status: .unproven, rationale: "Time ViewModel calendar-aware action delegates to a legacy projection service."),
         mutation(id: "today.view-model-action", sourcePath: "TodayViewModel.handle", commandKind: .completeAction, status: .unproven, rationale: "Today ViewModel action has no row-specific restart and replay evidence."),
-        mutation(id: "today.view-model-closure", sourcePath: "TodayViewModel.confirmActionClosure", commandKind: .completeAction, status: .unproven, rationale: "Today closure presentation applies returned state without full durable lineage proof."),
+        mutation(
+            id: "today.view-model-closure", sourcePath: "TodayViewModel.confirmActionClosure", commandKind: .completeAction,
+            status: .durable, rationale: "Today closure confirmation delegates to the runtime receipt command, then refreshes committed projection-backed state without applying a synthetic stage mutation.",
+            executorOwner: "AmbitionsCommandExecutor", durableStores: ["EventStoreSQLite", "ProjectionStoreSQLite", "ActionReceiptHistoryRepository"],
+            eventKind: "ambitions.today.receipt_recorded", projectionOwner: "TodayProjection", receiptOwner: "RuntimeCommitReceipt",
+            replayTestID: "AmbitionsTests/TodayDurableReceiptMutationIntegrationTests/testClosureRestartReplaysExactAuthorityReceiptAndReconstructsHistoryOnce",
+            proofTestIDs: [
+                "AmbitionsTests/TodayClosureRuntimeTests/testActionClosureRefreshIgnoresSyntheticStageMutationFromCommandResponse",
+                "AmbitionsTests/TodayDurableReceiptMutationIntegrationTests/testPostAuthorityHistoryFailureReturnsNoVisibleSuccessAndReplayRepairsMaterialization",
+            ]
+        ),
         mutation(id: "today.inline-action", sourcePath: "TodayCommandActionHandler.performAction", commandKind: .completeAction, status: .unproven, rationale: "Today handler lineage lacks row-specific atomic restart and replay proof."),
         mutation(id: "today.feature-action", sourcePath: "RepositoryBackedTodayService.performAction", commandKind: .completeAction, status: .unproven, rationale: "Repository-backed Today action still has legacy repository mutation paths."),
         mutation(id: "today.recommendation-rejection", sourcePath: "RepositoryBackedTodayService.recordRecommendationRejection", commandKind: .dismissRecommendation, status: .unproven, rationale: "Recommendation rejection lacks row-specific replay equivalence proof."),
         mutation(id: "today.action-closure", sourcePath: "RepositoryBackedTodayService.recordActionClosure", commandKind: .completeAction, status: .unproven, rationale: "Action closure lacks row-specific atomic persistence proof."),
-        mutation(id: "today.receipt-rejection", sourcePath: "TodayReceiptCommandService.recordRecommendationRejection", commandKind: .dismissRecommendation, status: .unproven, rationale: "Receipt service source presence does not prove durable rejection replay."),
-        mutation(id: "today.receipt-closure", sourcePath: "TodayReceiptCommandService.recordActionClosure", commandKind: .completeAction, status: .unproven, rationale: "Receipt service source presence does not prove closure reconstruction."),
+        mutation(
+            id: "today.receipt-rejection", sourcePath: "TodayReceiptCommandService.recordRecommendationRejection", commandKind: .dismissRecommendation,
+            status: .durable, rationale: "Recommendation rejection commits an exact semantic receipt snapshot before idempotent ActionReceiptHistory materialization and verifies the committed Today projection cursor.",
+            executorOwner: "AmbitionsCommandExecutor", durableStores: ["EventStoreSQLite", "ProjectionStoreSQLite", "ActionReceiptHistoryRepository"],
+            eventKind: "ambitions.today.receipt_recorded", projectionOwner: "TodayProjection", receiptOwner: "RuntimeCommitReceipt",
+            replayTestID: "AmbitionsTests/TodayDurableReceiptMutationIntegrationTests/testRecommendationRejectionRestartReconstructsSensitiveReceiptWithoutDoubleApply",
+            proofTestIDs: ["AmbitionsTests/TodayDurableReceiptMutationIntegrationTests/testRecommendationRejectionRestartReconstructsSensitiveReceiptWithoutDoubleApply"]
+        ),
+        mutation(
+            id: "today.receipt-closure", sourcePath: "TodayReceiptCommandService.recordActionClosure", commandKind: .completeAction,
+            status: .durable, rationale: "Closure commits an exact semantic receipt snapshot before idempotent ActionReceiptHistory materialization; restart returns the same authority receipt and projection checksum.",
+            executorOwner: "AmbitionsCommandExecutor", durableStores: ["EventStoreSQLite", "ProjectionStoreSQLite", "ActionReceiptHistoryRepository"],
+            eventKind: "ambitions.today.receipt_recorded", projectionOwner: "TodayProjection", receiptOwner: "RuntimeCommitReceipt",
+            replayTestID: "AmbitionsTests/TodayDurableReceiptMutationIntegrationTests/testClosureRestartReplaysExactAuthorityReceiptAndReconstructsHistoryOnce",
+            proofTestIDs: [
+                "AmbitionsTests/TodayDurableReceiptMutationIntegrationTests/testAuthorityFailureLeavesHistoryAndProjectionEmpty",
+                "AmbitionsTests/TodayDurableReceiptMutationIntegrationTests/testPostAuthorityHistoryFailureReturnsNoVisibleSuccessAndReplayRepairsMaterialization",
+            ]
+        ),
         mutation(id: "goals.view-model-action", sourcePath: "GoalDetailViewModel.perform", commandKind: .updateGoal, status: .unproven, rationale: "Goal Detail action delegates to legacy feature-service mutation."),
         mutation(id: "goals.view-model-clarification", sourcePath: "GoalDetailViewModel.saveClarificationAnswer", commandKind: .updateGoal, status: .unproven, rationale: "Clarification answer lacks durable event and replay proof."),
         mutation(id: "goals.view-model-correction", sourcePath: "GoalDetailViewModel.submitExplainabilityCorrection", commandKind: .updateGoal, status: .unproven, rationale: "Explainability correction lacks row-specific durable lineage proof."),

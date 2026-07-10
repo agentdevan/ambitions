@@ -36,16 +36,15 @@ struct RuntimeTransitionProposal: Sendable, Equatable {
         occurredAt: String
     ) -> RuntimeTransitionProposal {
         let semanticEvent = RuntimeDomainEvent.semanticEvent(command: command, result: result, occurredAt: occurredAt)
-        let intents: [RuntimeOutboxIntent]
-        switch command.kind {
+        let intents: [RuntimeOutboxIntent] = switch command.kind {
         case .createTimeItem, .placeStepInTime:
-            intents = [RuntimeOutboxIntent(
+            [RuntimeOutboxIntent(
                 id: "runtime.outbox.widget.\(command.id)",
                 kind: .widgetRefresh,
                 payload: Data(command.id.utf8)
             )]
         default:
-            intents = []
+            []
         }
         return RuntimeTransitionProposal(
             semanticEvent: semanticEvent,
@@ -99,7 +98,7 @@ extension EventStoreSQLite {
                 return RuntimeSQLiteAuthorityCommit(disposition: .replayedExistingReceipt, receipt: receipt)
             }
 
-            if Self.requiresSemanticEvent(transaction.mutationPlan.command.kind), semanticEvent == nil {
+            if Self.requiresSemanticEvent(transaction.mutationPlan.command), semanticEvent == nil {
                 throw RuntimeSQLiteAuthorityError.semanticEventRequired(commandID: transaction.commandID)
             }
             var previous = try latestEnvelope(database)
@@ -228,10 +227,15 @@ extension EventStoreSQLite {
     }
 
 
-    static func requiresSemanticEvent(_ kind: AmbitionsCommandKind) -> Bool {
-        switch kind {
-        case .quickCapture, .createTimeItem, .placeStepInTime, .protectTimeWindow, .correctTimeWindow: true
-        default: false
+    static func requiresSemanticEvent(_ command: AmbitionsCommand) -> Bool {
+        if command.payload.metadata[TodayReceiptDomainEvent.mutationMarkerKey] == "true" {
+            return true
+        }
+        return switch command.kind {
+        case .quickCapture, .createTimeItem, .placeStepInTime, .protectTimeWindow, .correctTimeWindow:
+            true
+        default:
+            false
         }
     }
 }
