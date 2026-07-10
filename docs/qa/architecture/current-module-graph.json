@@ -31,13 +31,19 @@
     "description": "Most Native/Ambitions production source compiles in the Ambitions application target; canonical folders are not compiler-enforced feature/runtime modules.",
     "extensionSourceFileCherryPicking": true
   },
+  "duplicateCompilationRiskCount": 11,
   "duplicateCompilationRisks": [
-    "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift",
-    "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceContractModels.swift",
-    "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceActionPayloads.swift",
-    "Native/Ambitions/Projection/ExternalSnapshots/ExternalObjectReopeningProjector.swift",
-    "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceGlanceState.swift",
-    "Native/Ambitions/Projection/ExternalSnapshots/SharedExternalSnapshotStore.swift"
+    {"path": "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift", "targets": ["Ambitions", "AmbitionsWidgetExtension", "AmbitionsShareExtension"]},
+    {"path": "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceContractModels.swift", "targets": ["Ambitions", "AmbitionsWidgetExtension", "AmbitionsShareExtension"]},
+    {"path": "Native/Ambitions/Projection/ExternalSnapshots/ExternalWidgetProjection.swift", "targets": ["Ambitions", "AmbitionsWidgetExtension"]},
+    {"path": "Native/Ambitions/Projection/ExternalSnapshots/SharedExternalSnapshotStore.swift", "targets": ["Ambitions", "AmbitionsWidgetExtension", "AmbitionsShareExtension"]},
+    {"path": "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceActionPayloads.swift", "targets": ["Ambitions", "AmbitionsWidgetExtension", "AmbitionsShareExtension"]},
+    {"path": "Native/Ambitions/Projection/ExternalSnapshots/ExternalObjectReopeningProjector.swift", "targets": ["Ambitions", "AmbitionsWidgetExtension", "AmbitionsShareExtension"]},
+    {"path": "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceGlanceState.swift", "targets": ["Ambitions", "AmbitionsWidgetExtension", "AmbitionsShareExtension"]},
+    {"path": "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceControlContracts.swift", "targets": ["Ambitions", "AmbitionsWidgetExtension"]},
+    {"path": "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceScopeAllowlist.swift", "targets": ["Ambitions", "AmbitionsWidgetExtension"]},
+    {"path": "Native/Ambitions/Projection/ExternalSnapshots/NextStepActivityAttributes.swift", "targets": ["Ambitions", "AmbitionsWidgetExtension"]},
+    {"path": "Native/Ambitions/Projection/ExternalSnapshots/ExternalCreationContracts.swift", "targets": ["Ambitions", "AmbitionsShareExtension"]}
   ],
   "assessment": {
     "status": "red",

@@ -4,6 +4,8 @@
 
 This ledger freezes the starting point for the owner-approved architecture modernization program. Scores are working estimates, not proof. A dimension can become Green only when its score is 10, it links current evidence, and every mandatory gate passes on the same commit. The fail-closed machine authority is `architecture-10-scorecard.json` and is checked by `scripts/ambitions-architecture-10-scorecard-check.py`.
 
+Mandatory gates are validator-owned, not scorecard-authored. A future Green row must match the scorer's exact gate set and link one repo-relative JSON artifact per gate through `gateEvidence`. Each artifact must contain the exact gate name, `status: pass`, and the scored commit SHA. Missing, malformed, unlinked, nonexistent, or commit-mismatched gate evidence fails closed.
+
 ## Working scores
 
 | Dimension | Advisory score | Status | Current ceiling |
