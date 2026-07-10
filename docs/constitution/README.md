@@ -16,8 +16,9 @@ This directory turns the Ambitions Product Constitution into an enforceable engi
 - `performance-budgets.json` — required budget registry; numeric values remain blocked pending device/data calibration.
 - `data-classification.json` — initial data-classification and allowed-location policy.
 - `dependency-graph.json` — machine-readable blocking graph.
-- `LINEAR_COVERAGE_MAP.md` — initial Project mapping and proposed new Projects.
-- `WAVE_0_READBACK.md` — claim-bounded closeout/readback.
+- `PR_COMPLIANCE_TEMPLATE.md` — mandatory substantive-PR compliance manifest.
+- `LINEAR_COVERAGE_MAP.md` — Project mapping and control-plane state.
+- `WAVE_0_READBACK.md` — claim-bounded Wave 0 readback.
 
 ## Authority
 
@@ -38,5 +39,7 @@ Accepted Yellow at final launch = forbidden
 ```bash
 python3 scripts/ambitions-constitution-audit.py
 ```
+
+GitHub Actions runs the same fail-closed audit for relevant PR and `main` changes.
 
 Wave 0 validates registry integrity only. It does not claim the opportunities are implemented.
