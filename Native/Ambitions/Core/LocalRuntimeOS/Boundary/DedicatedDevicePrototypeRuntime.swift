@@ -28,22 +28,22 @@ struct DedicatedDevicePrototypeProjection: Codable, Sendable, Equatable {
     let blockerSummary: ExternalSurfaceBlockerSummary
     let ritualCue: ExternalSurfaceRitualCue?
     let commandOptions: [DedicatedDevicePrototypeCommandOption]
-    let defaultFallbackRouteRequest: RuntimeRouteRequest
+    let defaultFallbackRouteIntent: RuntimeRouteIntent
 }
 
 struct DedicatedDevicePrototypeActionResult: Sendable, Equatable {
     let disposition: DedicatedDevicePrototypeActionDisposition
     let runtimeResult: RuntimeActionResult?
-    let fallbackRouteRequest: RuntimeRouteRequest?
+    let fallbackRouteIntent: RuntimeRouteIntent?
 
     init(
         disposition: DedicatedDevicePrototypeActionDisposition,
         runtimeResult: RuntimeActionResult? = nil,
-        fallbackRouteRequest: RuntimeRouteRequest? = nil
+        fallbackRouteIntent: RuntimeRouteIntent? = nil
     ) {
         self.disposition = disposition
         self.runtimeResult = runtimeResult
-        self.fallbackRouteRequest = fallbackRouteRequest
+        self.fallbackRouteIntent = fallbackRouteIntent
     }
 }
 
@@ -79,7 +79,7 @@ struct DedicatedDevicePrototypeRuntime {
             blockerSummary: glance.blockerSummary,
             ritualCue: glance.ritualCue,
             commandOptions: commandOptions(from: glance.supportedCommands),
-            defaultFallbackRouteRequest: .openToday
+            defaultFallbackRouteIntent: .returnToToday
         )
     }
 
@@ -107,12 +107,12 @@ struct DedicatedDevicePrototypeRuntime {
                 runtimeResult: result
             )
         case .fallbackToPhone:
-            guard let route = fallbackRouteRequest(for: command) else {
+            guard let route = fallbackRouteIntent(for: command) else {
                 return DedicatedDevicePrototypeActionResult(disposition: .missingTarget)
             }
             return DedicatedDevicePrototypeActionResult(
                 disposition: .fallbackToPhone,
-                fallbackRouteRequest: route
+                fallbackRouteIntent: route
             )
         }
     }
@@ -146,17 +146,17 @@ struct DedicatedDevicePrototypeRuntime {
         }
     }
 
-    private func fallbackRouteRequest(for command: ExternalActionCommand) -> RuntimeRouteRequest? {
+    private func fallbackRouteIntent(for command: ExternalActionCommand) -> RuntimeRouteIntent? {
         switch command.kind {
         case .openGoal:
             guard let goalID = command.target.goalID, goalID.isEmpty == false else {
                 return nil
             }
-            return .openGoalDetail(goalID: goalID)
+            return .openGoal(id: goalID)
         case .openToday:
-            return .openToday
+            return .returnToToday
         case .openCaptureComposer:
-            return .openCaptureComposer
+            return .composeCapture
         case .openMemoryLens:
             return .openMemoryLens
         case .complete, .delay, .snooze, .askForSmallerStep, .unsupported(_):

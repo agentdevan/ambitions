@@ -103,10 +103,10 @@ final class AmbitionsRuntimeBoundaryTests: XCTestCase {
         )
 
         XCTAssertEqual(complete.outcome, .performed)
-        XCTAssertNil(complete.routeRequest)
+        XCTAssertNil(complete.routeIntent)
         XCTAssertEqual(today.performedActions.map(\.kind), [.complete])
         XCTAssertEqual(openGoal.outcome, .routed)
-        XCTAssertEqual(openGoal.routeRequest, .openGoalDetail(goalID: "goal-1"))
+        XCTAssertEqual(openGoal.routeIntent, .openGoal(id: "goal-1"))
     }
 
     @MainActor

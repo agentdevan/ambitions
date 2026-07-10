@@ -276,14 +276,17 @@ final class DefaultExternalActionCommandService: ExternalActionCommandExecuting 
     private let runtimeExecutor: any RuntimeActionCommandExecuting
     private let externalRouter: any AppExternalRouting
     private let rejectionRecorder: (any SideEffectOutboxing)?
+    private let appRouteForIntent: (RuntimeRouteIntent, ExternalActionSource) -> AppExternalRoute
 
     init(
         runtimeExecutor: any RuntimeActionCommandExecuting,
         externalRouter: any AppExternalRouting,
+        appRouteForIntent: @escaping (RuntimeRouteIntent, ExternalActionSource) -> AppExternalRoute,
         rejectionRecorder: (any SideEffectOutboxing)? = nil
     ) {
         self.runtimeExecutor = runtimeExecutor
         self.externalRouter = externalRouter
+        self.appRouteForIntent = appRouteForIntent
         self.rejectionRecorder = rejectionRecorder
     }
 
@@ -292,12 +295,14 @@ final class DefaultExternalActionCommandService: ExternalActionCommandExecuting 
         goalsService: any GoalsServicing,
         captureService: any CaptureServicing,
         externalRouter: any AppExternalRouting,
+        appRouteForIntent: @escaping (RuntimeRouteIntent, ExternalActionSource) -> AppExternalRoute,
         rejectionRecorder: (any SideEffectOutboxing)? = nil
     ) {
         _ = goalsService
         _ = captureService
         self.runtimeExecutor = DefaultRuntimeActionCommandExecutor(todayService: todayService)
         self.externalRouter = externalRouter
+        self.appRouteForIntent = appRouteForIntent
         self.rejectionRecorder = rejectionRecorder
     }
 
@@ -309,7 +314,7 @@ final class DefaultExternalActionCommandService: ExternalActionCommandExecuting 
             result: result,
             now: now
         )
-        guard let routeRequest = result.routeRequest else {
+        guard let routeIntent = result.routeIntent else {
             return ExternalActionResult(
                 outcome: result.outcome,
                 messageTitle: result.messageTitle,
@@ -318,7 +323,7 @@ final class DefaultExternalActionCommandService: ExternalActionCommandExecuting 
             )
         }
         return route(
-            appRoute(for: routeRequest, source: command.source),
+            appRouteForIntent(routeIntent, command.source),
             source: command.source,
             pipelineTrace: pipelineTrace,
             sideEffectReceipt: sideEffectReceipt
@@ -329,7 +334,7 @@ final class DefaultExternalActionCommandService: ExternalActionCommandExecuting 
         for command: ExternalActionCommand,
         result: RuntimeActionResult
     ) -> StageActionPipelineTrace {
-        if result.routeRequest != nil || command.stageActionTaxonomy == .shellNavigationOverlay {
+        if result.routeIntent != nil || command.stageActionTaxonomy == .shellNavigationOverlay {
             return command.shellPipelineTrace()
         }
 
@@ -395,7 +400,7 @@ final class DefaultExternalActionCommandService: ExternalActionCommandExecuting 
             "No private life graph state changed.",
             "Rejected external action was recorded as a local-only command bridge receipt."
         ]
-        if result.routeRequest != nil {
+        if result.routeIntent != nil {
             degradedFacts.append("Ambitions opened a safe review route instead of applying \(rejectedKind.pipelineIDComponent).")
         }
         let request = SideEffectOutboxRequest(
@@ -446,30 +451,6 @@ final class DefaultExternalActionCommandService: ExternalActionCommandExecuting 
         }
     }
 
-    private func appRoute(for request: RuntimeRouteRequest, source: ExternalActionSource) -> AppExternalRoute {
-        switch request {
-        case .openToday:
-            return .openTab(.today)
-        case let .openGoalDetail(goalID):
-            return .openGoalDetail(goalID: goalID)
-        case .openCaptureComposer:
-            return .openCaptureComposer
-        case .openMemoryLens:
-            return .presentOverlay(.memoryLens(entrySource: entrySource(for: source)))
-        case let .presentOverlay(overlay):
-            return .presentOverlay(overlay)
-        }
-    }
-
-    private func entrySource(for source: ExternalActionSource) -> ShellCommandEntrySource {
-        switch source {
-        case .deepLink: .deepLink
-        case .notification: .notification
-        case .widget: .widget
-        case .appIntent: .appIntent
-        case .futureExternalPayload: .external
-        }
-    }
 }
 
 private extension ExternalActionCommand {

@@ -130,7 +130,7 @@ final class RuntimeEventJournalTests: XCTestCase {
         let commandRecords = InMemoryAmbitionsCommandExecutionRecordRepository()
         let runtimeEvents = InMemoryRuntimeEventStore()
         let commandJournal = InMemoryCommandJournal()
-        let executor = AmbitionsCommandExecutor(
+        let executor = AmbitionsCommandExecutor.test(
             captureService: captureService,
             eventLedger: InMemoryEventLedgerRepository(),
             commandExecutionRecords: commandRecords,

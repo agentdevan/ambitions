@@ -14,7 +14,7 @@ final class MessyIntentLoopScenarioTests: XCTestCase {
         let eventLedger = InMemoryEventLedgerRepository()
         let commandRecords = InMemoryAmbitionsCommandExecutionRecordRepository()
         let runtimeEvents = InMemoryRuntimeEventStore()
-        let executor = AmbitionsCommandExecutor(
+        let executor = AmbitionsCommandExecutor.test(
             captureService: captureService,
             eventLedger: eventLedger,
             commandExecutionRecords: commandRecords,

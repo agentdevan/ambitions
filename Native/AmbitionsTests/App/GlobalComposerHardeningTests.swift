@@ -28,7 +28,6 @@ final class GlobalComposerHardeningTests: XCTestCase {
         let executor = RecordingCaptureCommandExecutor()
         let router = DefaultShellCommandRouter(
             navigation: navigation,
-            captureService: StubCaptureService(captures: []),
             commandExecutor: executor
         )
 
@@ -63,7 +62,6 @@ final class GlobalComposerHardeningTests: XCTestCase {
         let executor = RecordingCaptureCommandExecutor()
         let router = DefaultShellCommandRouter(
             navigation: navigation,
-            captureService: StubCaptureService(captures: []),
             commandExecutor: executor
         )
         let viewModel = CaptureViewModel(state: .loaded(CaptureViewState(captures: [], activeGoalOptions: [])))
@@ -95,14 +93,13 @@ final class GlobalComposerHardeningTests: XCTestCase {
         let captureService = DefaultCaptureService(repository: repository, idProvider: { "capture-raw-local" })
         let records = InMemoryAmbitionsCommandExecutionRecordRepository()
         let journal = InMemoryCommandJournal()
-        let executor = AmbitionsCommandExecutor(
+        let executor = AmbitionsCommandExecutor.test(
             captureService: captureService,
             commandExecutionRecords: records,
             commandJournal: journal
         )
         let router = DefaultShellCommandRouter(
             navigation: navigation,
-            captureService: captureService,
             commandExecutor: executor
         )
 

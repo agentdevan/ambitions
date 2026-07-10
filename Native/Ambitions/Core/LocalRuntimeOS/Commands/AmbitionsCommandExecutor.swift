@@ -42,18 +42,18 @@ struct AmbitionsCommandExecutor: CommandExecuting {
 
     init(
         captureService: (any CaptureServicing)? = nil,
-        eventLedger: (any EventLedgerRepository)? = nil,
-        commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)? = nil,
-        runtimeEvents: (any RuntimeEventStore)? = InMemoryRuntimeEventStore(),
-        projectionStore: ProjectionStoreSQLite? = nil,
+        eventLedger: (any EventLedgerRepository)?,
+        commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)?,
+        runtimeEvents: (any RuntimeEventStore)?,
+        projectionStore: ProjectionStoreSQLite?,
         searchIndex: FTSIndex? = nil,
-        commandJournal: any CommandJournal = InMemoryCommandJournal(),
-        runtimeTransactionIdempotencyStore: RuntimeIdempotencyStore = RuntimeIdempotencyStore(),
+        commandJournal: any CommandJournal,
+        runtimeTransactionIdempotencyStore: RuntimeIdempotencyStore,
         smartAttachmentService: (any SmartAttachmentRouting)? = DefaultSmartAttachmentService(),
         validator: AmbitionsCommandValidator = AmbitionsCommandValidator(),
         runtimeValidator: RuntimeValidator? = nil,
         compiler: CommandCompiler? = nil,
-        receiptFactory: CommandReceiptFactory = CommandReceiptFactory(),
+        receiptFactory: CommandReceiptFactory,
         scheduleStoreFileURL: URL? = nil
     ) {
         self.captureService = captureService

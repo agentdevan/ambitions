@@ -79,14 +79,15 @@ final class AppContainerFactoryTests: XCTestCase {
         XCTAssertTrue(runtimeSource.contains("AmbitionsRuntimeFactory.make("))
         XCTAssertTrue(systemSurfaceSource.contains("LocalNotificationFoundation("))
         XCTAssertTrue(systemSurfaceSource.contains("EventKitIntegrationService("))
-        XCTAssertTrue(systemSurfaceSource.contains("AmbitionsCommandExecutor("))
+        XCTAssertFalse(systemSurfaceSource.contains("AmbitionsCommandExecutor("))
         XCTAssertTrue(systemSurfaceSource.contains("SourceAtlasPublicPackLifecycleRefreshService("))
 
         XCTAssertFalse(factorySource.contains("SwiftDataGoalRepository(store:"))
         XCTAssertFalse(factorySource.contains("AmbitionsRuntimeFactory.make("))
         XCTAssertFalse(factorySource.contains("LocalNotificationFoundation("))
         XCTAssertFalse(factorySource.contains("EventKitIntegrationService("))
-        XCTAssertFalse(factorySource.contains("AmbitionsCommandExecutor("))
+        XCTAssertTrue(factorySource.contains("AmbitionsCommandExecutor("))
+        XCTAssertTrue(factorySource.contains("RuntimeCommandClient("))
     }
 
     func testAppBootstrapDependencyGraphArtifactNamesCurrentOwners() throws {

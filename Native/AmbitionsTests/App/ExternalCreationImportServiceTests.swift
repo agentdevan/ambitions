@@ -26,7 +26,7 @@ final class ExternalCreationImportServiceTests: XCTestCase {
         )
         let commandRecords = InMemoryAmbitionsCommandExecutionRecordRepository()
         let commandJournal = InMemoryCommandJournal()
-        let executor = AmbitionsCommandExecutor(
+        let executor = AmbitionsCommandExecutor.test(
             captureService: captureService,
             commandExecutionRecords: commandRecords,
             commandJournal: commandJournal
@@ -68,7 +68,7 @@ final class ExternalCreationImportServiceTests: XCTestCase {
         let repository = PreviewCaptureRepository()
         let captureService = DefaultCaptureService(repository: repository, idProvider: { "capture-goal-seed" })
         let commandJournal = InMemoryCommandJournal()
-        let executor = AmbitionsCommandExecutor(
+        let executor = AmbitionsCommandExecutor.test(
             captureService: captureService,
             commandExecutionRecords: InMemoryAmbitionsCommandExecutionRecordRepository(),
             commandJournal: commandJournal
@@ -102,7 +102,7 @@ final class ExternalCreationImportServiceTests: XCTestCase {
         let captureService = DefaultCaptureService(repository: repository, idProvider: { "capture-replayed" })
         let commandRecords = InMemoryAmbitionsCommandExecutionRecordRepository()
         let commandJournal = InMemoryCommandJournal()
-        let executor = AmbitionsCommandExecutor(
+        let executor = AmbitionsCommandExecutor.test(
             captureService: captureService,
             commandExecutionRecords: commandRecords,
             commandJournal: commandJournal

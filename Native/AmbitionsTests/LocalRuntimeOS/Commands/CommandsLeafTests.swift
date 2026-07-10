@@ -124,7 +124,7 @@ final class CommandsLeafTests: XCTestCase {
         )
         let captureService = DefaultCaptureService(repository: captureRepository, idProvider: { "capture-journal-gated" })
         let commandRecordRepository = InMemoryAmbitionsCommandExecutionRecordRepository()
-        let executor = AmbitionsCommandExecutor(
+        let executor = AmbitionsCommandExecutor.test(
             captureService: captureService,
             commandExecutionRecords: commandRecordRepository,
             commandJournal: commandJournal
@@ -149,7 +149,7 @@ final class CommandsLeafTests: XCTestCase {
         let now = Date(timeIntervalSince1970: 1_777_113_600)
         let captureRepository = PreviewCaptureRepository()
         let captureService = DefaultCaptureService(repository: captureRepository, idProvider: { "capture-should-not-save" })
-        let executor = AmbitionsCommandExecutor(
+        let executor = AmbitionsCommandExecutor.test(
             captureService: captureService,
             commandJournal: FailingCommandJournal()
         )
@@ -168,7 +168,7 @@ final class CommandsLeafTests: XCTestCase {
         let captureRepository = PreviewCaptureRepository()
         let captureService = DefaultCaptureService(repository: captureRepository, idProvider: { "capture-runtime-failure" })
         let commandRecordRepository = InMemoryAmbitionsCommandExecutionRecordRepository()
-        let executor = AmbitionsCommandExecutor(
+        let executor = AmbitionsCommandExecutor.test(
             captureService: captureService,
             commandExecutionRecords: commandRecordRepository,
             runtimeEvents: FailingRuntimeEventStore()

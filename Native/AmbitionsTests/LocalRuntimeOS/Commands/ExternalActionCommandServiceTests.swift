@@ -122,14 +122,15 @@ final class ExternalActionCommandServiceTests: XCTestCase {
         XCTAssertEqual(openToday.pipelineTrace?.proofReceipt.state, .notApplicable)
     }
 
-    func testAppAdapterDispatchesRuntimeRouteRequestsThroughExternalRouter() async {
+    func testAppAdapterDispatchesRuntimeRouteIntentsThroughExternalRouter() async {
         let runtimeExecutor = StaticRuntimeActionExecutor(
-            result: RuntimeActionResult(outcome: .routed, routeRequest: .openToday)
+            result: RuntimeActionResult(outcome: .routed, routeIntent: .returnToToday)
         )
         let router = RecordingExternalActionRouter()
         let service = DefaultExternalActionCommandService(
             runtimeExecutor: runtimeExecutor,
-            externalRouter: router
+            externalRouter: router,
+            appRouteForIntent: AppContainerFactory.appRoute
         )
 
         let result = await service.execute(
@@ -147,12 +148,13 @@ final class ExternalActionCommandServiceTests: XCTestCase {
 
     func testD25AppIntentSourceRoutesAsAppIntentInsteadOfWidgetFallback() async {
         let runtimeExecutor = StaticRuntimeActionExecutor(
-            result: RuntimeActionResult(outcome: .routed, routeRequest: .openMemoryLens)
+            result: RuntimeActionResult(outcome: .routed, routeIntent: .openMemoryLens)
         )
         let router = RecordingExternalActionRouter()
         let service = DefaultExternalActionCommandService(
             runtimeExecutor: runtimeExecutor,
-            externalRouter: router
+            externalRouter: router,
+            appRouteForIntent: AppContainerFactory.appRoute
         )
 
         let result = await service.execute(
@@ -172,7 +174,8 @@ final class ExternalActionCommandServiceTests: XCTestCase {
         let router = RecordingExternalActionRouter()
         let service = DefaultExternalActionCommandService(
             runtimeExecutor: runtimeExecutor,
-            externalRouter: router
+            externalRouter: router,
+            appRouteForIntent: AppContainerFactory.appRoute
         )
 
         let result = await service.execute(
@@ -200,7 +203,8 @@ final class ExternalActionCommandServiceTests: XCTestCase {
         let router = RecordingExternalActionRouter()
         let service = DefaultExternalActionCommandService(
             runtimeExecutor: runtimeExecutor,
-            externalRouter: router
+            externalRouter: router,
+            appRouteForIntent: AppContainerFactory.appRoute
         )
 
         let result = await service.execute(
@@ -394,6 +398,7 @@ private extension ExternalActionCommandServiceTests {
             goalsService: goalsService,
             captureService: captureService,
             externalRouter: router,
+            appRouteForIntent: AppContainerFactory.appRoute,
             rejectionRecorder: rejectionRecorder
         )
     }

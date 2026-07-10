@@ -1,6 +1,18 @@
 import XCTest
 @testable import Ambitions
 
+private extension DefaultShellCommandRouter {
+    convenience init(
+        navigation: StageStore,
+        captureService: any CaptureServicing
+    ) {
+        self.init(
+            navigation: navigation,
+            commandExecutor: AmbitionsCommandExecutor.test(captureService: captureService)
+        )
+    }
+}
+
 @MainActor
 final class ShellCommandRouterTests: XCTestCase {
     func testQuickCaptureCreatesCaptureAndRoutesToGlobalCaptureOverlay() async throws {

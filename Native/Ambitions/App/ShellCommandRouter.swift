@@ -63,12 +63,11 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
 
     init(
         navigation: StageStore,
-        captureService: any CaptureServicing,
+        commandExecutor: any CommandExecuting,
         smartAttachmentAdapter: SmartAttachmentCaptureAdapter = SmartAttachmentCaptureAdapter(),
-        commandExecutor: (any CommandExecuting)? = nil
     ) {
         self.navigation = navigation
-        self.commandExecutor = commandExecutor ?? AmbitionsCommandExecutor(captureService: captureService)
+        self.commandExecutor = commandExecutor
         self.smartAttachmentAdapter = smartAttachmentAdapter
     }
 

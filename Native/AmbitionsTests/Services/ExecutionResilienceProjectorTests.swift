@@ -327,7 +327,7 @@ final class ExecutionResilienceProjectorTests: XCTestCase {
         let option = try XCTUnwrap(assessment.recommendedRecoveryOption)
         let command = try XCTUnwrap(projector.command(for: option, assessment: assessment))
         let ledger = InMemoryEventLedgerRepository()
-        let executor = AmbitionsCommandExecutor(eventLedger: ledger)
+        let executor = AmbitionsCommandExecutor.test(eventLedger: ledger)
 
         XCTAssertEqual(command.kind, .recoverAction)
         XCTAssertEqual(command.payload.metadata["resilienceAssessmentID"], assessment.id)

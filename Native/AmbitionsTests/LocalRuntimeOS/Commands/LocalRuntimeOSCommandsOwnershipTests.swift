@@ -105,7 +105,7 @@ final class LocalRuntimeOSCommandsOwnershipTests: XCTestCase {
     }
 
     func testCommandExecutorValidationRoutesThroughRuntimeValidator() {
-        let executor = AmbitionsCommandExecutor()
+        let executor = AmbitionsCommandExecutor.test()
         let command = AmbitionsCommand(
             id: "command-empty-capture",
             kind: .quickCapture,

@@ -26,7 +26,7 @@ final class DedicatedDevicePrototypeRuntimeTests: XCTestCase {
         XCTAssertEqual(projection.ritualCue?.kind, .middayReset)
         XCTAssertEqual(projection.commandOptions.map(\.descriptor.kind), [.complete, .snooze, .openGoal, .openToday, .openCaptureComposer, .openMemoryLens])
         XCTAssertEqual(projection.commandOptions.map(\.disposition), [.deviceSafeQuickAction, .deviceSafeQuickAction, .fallbackToPhone, .fallbackToPhone, .fallbackToPhone, .fallbackToPhone])
-        XCTAssertEqual(projection.defaultFallbackRouteRequest, .openToday)
+        XCTAssertEqual(projection.defaultFallbackRouteIntent, .returnToToday)
     }
 
     func testMissingSnapshotProducesSafeFallbackProjection() {
@@ -39,7 +39,7 @@ final class DedicatedDevicePrototypeRuntimeTests: XCTestCase {
         XCTAssertEqual(projection.openCaptureUrgency, .none)
         XCTAssertEqual(projection.commandOptions.map(\.descriptor.kind), [.openToday, .openMemoryLens])
         XCTAssertEqual(projection.commandOptions.map(\.disposition), [.fallbackToPhone, .fallbackToPhone])
-        XCTAssertEqual(projection.defaultFallbackRouteRequest, .openToday)
+        XCTAssertEqual(projection.defaultFallbackRouteIntent, .returnToToday)
     }
 
     func testProjectionRemainsPrivacySafeAndDoesNotExposeUserEnteredText() throws {
@@ -115,9 +115,9 @@ final class DedicatedDevicePrototypeRuntimeTests: XCTestCase {
         )
 
         XCTAssertEqual(openGoal.disposition, .fallbackToPhone)
-        XCTAssertEqual(openGoal.fallbackRouteRequest, .openGoalDetail(goalID: "goal-1"))
+        XCTAssertEqual(openGoal.fallbackRouteIntent, .openGoal(id: "goal-1"))
         XCTAssertEqual(openToday.disposition, .fallbackToPhone)
-        XCTAssertEqual(openToday.fallbackRouteRequest, .openToday)
+        XCTAssertEqual(openToday.fallbackRouteIntent, .returnToToday)
         XCTAssertTrue(executor.executedCommands.isEmpty)
     }
 }

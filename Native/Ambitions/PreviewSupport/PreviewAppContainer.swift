@@ -33,7 +33,6 @@ enum PreviewAppContainerFactory {
         )
         let commandRouter = DefaultShellCommandRouter(
             navigation: navigation,
-            captureService: captureService,
             commandExecutor: AmbitionsCommandExecutor(
                 captureService: captureService,
                 eventLedger: runtime.repositories.eventLedger,
@@ -41,7 +40,9 @@ enum PreviewAppContainerFactory {
                 runtimeEvents: runtime.repositories.runtimeEvents,
                 projectionStore: runtime.repositories.projectionStore,
                 searchIndex: runtime.repositories.searchIndex,
-                commandJournal: runtime.repositories.commandJournal
+                commandJournal: runtime.repositories.commandJournal,
+                runtimeTransactionIdempotencyStore: RuntimeIdempotencyStore(),
+                receiptFactory: CommandReceiptFactory()
             )
         )
         let memoryLensService = DefaultMemoryLensService(repositories: runtime.repositories)
@@ -82,7 +83,8 @@ enum PreviewAppContainerFactory {
                 todayService: todayService,
                 goalsService: goalsService,
                 captureService: captureService,
-                externalRouter: externalRouter
+                externalRouter: externalRouter,
+                appRouteForIntent: AppContainerFactory.appRoute
             ),
             externalCreationImportService: DefaultExternalCreationImportService(
                 store: SharedExternalCreationStore(baseURL: FileManager.default.temporaryDirectory),
@@ -93,7 +95,9 @@ enum PreviewAppContainerFactory {
                     runtimeEvents: runtime.repositories.runtimeEvents,
                     projectionStore: runtime.repositories.projectionStore,
                     searchIndex: runtime.repositories.searchIndex,
-                    commandJournal: runtime.repositories.commandJournal
+                    commandJournal: runtime.repositories.commandJournal,
+                    runtimeTransactionIdempotencyStore: RuntimeIdempotencyStore(),
+                    receiptFactory: CommandReceiptFactory()
                 )
             ),
             commandRouter: commandRouter,

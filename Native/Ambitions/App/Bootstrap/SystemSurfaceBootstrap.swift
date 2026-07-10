@@ -56,7 +56,9 @@ enum SystemSurfaceBootstrap {
         repositories: AppRepositories,
         runtime: AmbitionsRuntime,
         navigation: StageStore,
-        externalRouter: any AppExternalRouting
+        externalRouter: any AppExternalRouting,
+        runtimeCommandClient: RuntimeCommandClient,
+        appRouteForIntent: @escaping (RuntimeRouteIntent, ExternalActionSource) -> AppExternalRoute
     ) -> SystemSurfaceServices {
         let todayReceiptCommands = TodayReceiptCommandService(repositories: repositories)
         let youPreferencesCommands = YouPreferencesCommandService(
@@ -65,19 +67,11 @@ enum SystemSurfaceBootstrap {
         )
         let externalActionService = DefaultExternalActionCommandService(
             runtimeExecutor: runtime.actionExecutor,
-            externalRouter: externalRouter
-        )
-        let externalCreationCommandExecutor = AmbitionsCommandExecutor(
-            captureService: runtime.captureService,
-            eventLedger: repositories.eventLedger,
-            commandExecutionRecords: repositories.commandExecutionRecords,
-            runtimeEvents: repositories.runtimeEvents,
-            projectionStore: repositories.projectionStore,
-            searchIndex: repositories.searchIndex,
-            commandJournal: repositories.commandJournal
+            externalRouter: externalRouter,
+            appRouteForIntent: appRouteForIntent
         )
         let externalCreationImportService = DefaultExternalCreationImportService(
-            commandExecutor: externalCreationCommandExecutor,
+            commandExecutor: runtimeCommandClient,
             externalSurfaceSideEffectLedger: FileSideEffectLedgerRepository.defaultExternalSurfaceLedger(),
             appSideEffectLedger: repositories.sideEffectLedger
         )
@@ -97,8 +91,7 @@ enum SystemSurfaceBootstrap {
             sourceAtlasLifecycleRefreshService: sourceAtlasLifecycleRefreshService,
             commandRouter: DefaultShellCommandRouter(
                 navigation: navigation,
-                captureService: runtime.captureService,
-                commandExecutor: externalCreationCommandExecutor
+                commandExecutor: runtimeCommandClient
             ),
             memoryLensService: DefaultMemoryLensService(repositories: repositories),
             onboardingService: RepositoryBackedOnboardingService(appStateRepository: repositories.appState)

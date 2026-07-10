@@ -53,7 +53,7 @@ REQUIRED_LOCAL_RUNTIME_OWNERS = [
 
 INTEGRATION_MARKERS = {
     "command_journal_live_wiring": {
-        "path": "Native/Ambitions/App/Bootstrap/SystemSurfaceBootstrap.swift",
+        "path": "Native/Ambitions/App/AppContainerFactory.swift",
         "markers": [
             "AmbitionsCommandExecutor",
             "commandJournal",

@@ -65,11 +65,17 @@ enum AppContainerFactory {
         )
         let navigation = StageStore(selectedSurface: session.initialTab)
         let externalRouter = DefaultAppExternalRouter(navigation: navigation)
+        let runtimeCommandClient = makeRuntimeCommandClient(
+            repositories: repositories,
+            captureService: runtime.captureService
+        )
         let surfaceServices = SystemSurfaceBootstrap.makeServices(
             repositories: repositories,
             runtime: runtime,
             navigation: navigation,
-            externalRouter: externalRouter
+            externalRouter: externalRouter,
+            runtimeCommandClient: runtimeCommandClient,
+            appRouteForIntent: appRoute
         )
         let todayService = RuntimeBootstrap.todayService(for: configuration, runtime: runtime)
         let timeService = RuntimeBootstrap.timeService(runtime: runtime)
@@ -114,6 +120,78 @@ enum AppContainerFactory {
         store overrideStore: AmbitionsPersistenceStore? = nil
     ) async throws -> AppRepositories {
         try await PersistenceBootstrap.prepareRepositories(for: configuration, store: overrideStore)
+    }
+
+    private static func makeRuntimeCommandClient(
+        repositories: AppRepositories,
+        captureService: any CaptureServicing
+    ) -> RuntimeCommandClient {
+        let executor = AmbitionsCommandExecutor(
+            captureService: captureService,
+            eventLedger: repositories.eventLedger,
+            commandExecutionRecords: repositories.commandExecutionRecords,
+            runtimeEvents: repositories.runtimeEvents,
+            projectionStore: repositories.projectionStore,
+            searchIndex: repositories.searchIndex,
+            commandJournal: repositories.commandJournal,
+            runtimeTransactionIdempotencyStore: RuntimeIdempotencyStore(),
+            smartAttachmentService: DefaultSmartAttachmentService(),
+            validator: AmbitionsCommandValidator(),
+            runtimeValidator: nil,
+            compiler: nil,
+            receiptFactory: CommandReceiptFactory(),
+            scheduleStoreFileURL: nil
+        )
+        let projectionStore = repositories.projectionStore
+
+        return RuntimeCommandClient(
+            execute: { command, context in
+                await executor.execute(command, context: context)
+            },
+            projection: { request in
+                guard let projectionStore,
+                      let record = try await projectionStore.fetchRecord(id: request.projectionID) else {
+                    throw RuntimeProjectionClientError.projectionUnavailable(request)
+                }
+                return RuntimeProjectionSnapshot(
+                    projectionID: record.id.rawValue,
+                    payload: record.payloadData,
+                    eventSequence: record.cursor.sequence,
+                    payloadChecksum: record.payloadChecksum,
+                    materializedAt: record.materializedAt
+                )
+            }
+        )
+    }
+
+    static func appRoute(
+        for intent: RuntimeRouteIntent,
+        source: ExternalActionSource
+    ) -> AppExternalRoute {
+        switch intent {
+        case let .openGoal(id):
+            return .openGoalDetail(goalID: id)
+        case let .openCapture(id):
+            return .genericExternalEntry(kind: "capture", payload: ["captureID": id])
+        case let .openReceipt(id):
+            return .genericExternalEntry(kind: "receipt", payload: ["receiptID": id])
+        case .returnToToday:
+            return .openTab(.today)
+        case .composeCapture:
+            return .openCaptureComposer
+        case .openMemoryLens:
+            return .presentOverlay(.memoryLens(entrySource: entrySource(for: source)))
+        }
+    }
+
+    private static func entrySource(for source: ExternalActionSource) -> ShellCommandEntrySource {
+        switch source {
+        case .deepLink: .deepLink
+        case .notification: .notification
+        case .widget: .widget
+        case .appIntent: .appIntent
+        case .futureExternalPayload: .external
+        }
     }
 
     private static func configuration(for source: AppSession.BootstrapSource) -> AppBootstrapConfiguration {
