@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ambitions.local/canon/schemas/specification.schema.json",
+  "title": "Ambitions Canon Specification Front Matter",
+  "description": "Machine documentation for accepted TOML front-matter fields in a normative Markdown specification.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "spec_id",
+    "title",
+    "kind",
+    "status",
+    "owner_domain",
+    "canon_revision",
+    "owns_concepts",
+    "inherits",
+    "depends_on",
+    "source_owners"
+  ],
+  "properties": {
+    "spec_id": {
+      "description": "Globally unique stable specification identifier.",
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "description": "Human-readable specification title.",
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "description": "Completeness and ownership profile used by the specification.",
+      "type": "string",
+      "enum": ["constitution", "app", "surface", "global", "object", "journey", "system", "standard"]
+    },
+    "status": {
+      "description": "Declared normative lifecycle status.",
+      "type": "string",
+      "minLength": 1
+    },
+    "owner_domain": {
+      "description": "Domain accountable for the specification's concepts.",
+      "type": "string",
+      "minLength": 1
+    },
+    "canon_revision": {
+      "description": "Canon revision in which this specification content is declared.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "profile": {
+      "description": "Optional named completeness profile refinement.",
+      "type": "string",
+      "minLength": 1
+    },
+    "owns_concepts": {
+      "description": "Normalized concepts owned exclusively by this specification.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"
+      }
+    },
+    "inherits": {
+      "description": "Active requirement IDs whose laws this specification inherits.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "depends_on": {
+      "description": "Specification IDs required to interpret this specification.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "source_owners": {
+      "description": "Current source ownership paths relevant to implementation mapping.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

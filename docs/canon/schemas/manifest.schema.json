@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ambitions.local/canon/schemas/manifest.schema.json",
+  "title": "Ambitions Canon Manifest",
+  "description": "Machine documentation for the closed MANIFEST.toml contract validated by the Python canon compiler.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "canon_revision",
+    "authority_state",
+    "compiler_version",
+    "normative_files",
+    "generated_files"
+  ],
+  "properties": {
+    "schema_version": {
+      "description": "Manifest contract version.",
+      "type": "integer",
+      "const": 1
+    },
+    "canon_revision": {
+      "description": "Non-negative revision of the declared canon source set.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "authority_state": {
+      "description": "Whether the package is non-authoritative shadow material or the active authority.",
+      "type": "string",
+      "enum": ["shadow", "active"]
+    },
+    "compiler_version": {
+      "description": "Canon compiler semantic version required to build this revision.",
+      "type": "string",
+      "minLength": 1
+    },
+    "normative_files": {
+      "description": "Unique canonical Markdown paths relative to docs/canon and outside generated/.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "generated_files": {
+      "description": "Unique projection paths relative to docs/canon and rooted under generated/.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^generated/.+"
+      }
+    }
+  }
+}

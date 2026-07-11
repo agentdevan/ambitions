@@ -1,0 +1,21 @@
+schema_version = 1
+canon_revision = 0
+authority_state = "shadow"
+compiler_version = "0.1.0"
+normative_files = []
+
+generated_files = [
+  "generated/CODEX_START_HERE.md",
+  "generated/INDEX.md",
+  "generated/canon-index.json",
+  "generated/concept-ownership.json",
+  "generated/requirement-graph.json",
+  "generated/specification-coverage.md",
+  "generated/unresolved-conflicts.md",
+  "generated/law-source-map.json",
+  "generated/law-test-map.json",
+  "generated/law-proof-map.json",
+  "generated/visual-authority-manifest.json",
+  "generated/external-reference-impact.md",
+  "generated/supersession-manifest.json",
+]

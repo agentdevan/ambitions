@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ambitions.local/canon/schemas/task-pack.schema.json",
+  "title": "Ambitions Canon Task Pack",
+  "description": "Machine documentation for deterministic bounded Codex task-pack content.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "canon_revision",
+    "source_sha",
+    "compiler_version",
+    "task_type",
+    "scope",
+    "constitutional_laws",
+    "specifications",
+    "object_lifecycles",
+    "journeys",
+    "standards",
+    "source_owners",
+    "implementation_posture",
+    "known_risks",
+    "visual_authority",
+    "required_tests",
+    "required_validation",
+    "required_proof",
+    "forbidden_changes",
+    "open_conflicts",
+    "claim_ceiling",
+    "rollback_requirements"
+  ],
+  "properties": {
+    "schema_version": {
+      "description": "Task-pack contract version.",
+      "type": "integer",
+      "const": 1
+    },
+    "canon_revision": {
+      "description": "Canon revision from which the pack was compiled.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "source_sha": {
+      "description": "Git source SHA used to detect stale packs.",
+      "type": "string",
+      "minLength": 1
+    },
+    "compiler_version": {
+      "description": "Compiler version that generated the pack.",
+      "type": "string",
+      "minLength": 1
+    },
+    "task_type": {
+      "description": "Bounded implementation or inspection task classification.",
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "description": "Canonical concept, specification, issue, or source boundary for the task.",
+      "type": "string",
+      "minLength": 1
+    },
+    "constitutional_laws": {
+      "description": "Applicable constitutional requirement IDs.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "specifications": {
+      "description": "Applicable specification IDs.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "object_lifecycles": {
+      "description": "Applicable object-lifecycle requirement IDs.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "journeys": {
+      "description": "Applicable journey specification IDs.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "standards": {
+      "description": "Applicable cross-cutting standard IDs.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "source_owners": {
+      "description": "Current implementation paths that own the bounded scope.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "implementation_posture": {
+      "description": "Evidence-bounded current implementation status text.",
+      "type": "string"
+    },
+    "known_risks": {
+      "description": "Known bounded risks and issue references.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "visual_authority": {
+      "description": "Applicable approved or explicitly missing visual authority references.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "required_tests": {
+      "description": "Focused tests required for the task claim.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "required_validation": {
+      "description": "Validation commands or gates required before closeout.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "required_proof": {
+      "description": "Proof artifacts required to support the permitted claim.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "forbidden_changes": {
+      "description": "Explicit scope, product-law, architecture, or proof changes forbidden in the task.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "open_conflicts": {
+      "description": "Unresolved conflict IDs that constrain or block the task.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "claim_ceiling": {
+      "description": "Highest evidence-supported claim permitted from this pack.",
+      "type": "string",
+      "minLength": 1
+    },
+    "rollback_requirements": {
+      "description": "Required rollback behavior or evidence for the bounded task.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    }
+  }
+}
