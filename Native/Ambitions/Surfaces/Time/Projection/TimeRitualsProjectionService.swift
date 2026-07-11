@@ -146,3 +146,4 @@ struct RepositoryBackedTimeRitualsService: TimeRitualsServicing {
         return try await Snapshot(goals: goals, drafts: drafts, evidence: evidence, feedback: feedback, appState: appState)
     }
 }
+import AmbitionsTimeFoundation

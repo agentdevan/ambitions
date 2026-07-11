@@ -1,12 +1,12 @@
 import Foundation
 
-struct TimeZoneProvider: Equatable, Sendable {
+public struct TimeZoneProvider: Equatable, Sendable {
     private let fixedIdentifier: String?
 
-    static let current = TimeZoneProvider(fixedIdentifier: nil)
-    static let utc = TimeZoneProvider(timeZone: TimeZone(secondsFromGMT: 0)!)
+    public static let current = TimeZoneProvider(fixedIdentifier: nil)
+    public static let utc = TimeZoneProvider(timeZone: TimeZone(secondsFromGMT: 0)!)
 
-    init(timeZone: TimeZone) {
+    public init(timeZone: TimeZone) {
         fixedIdentifier = timeZone.identifier
     }
 
@@ -14,7 +14,7 @@ struct TimeZoneProvider: Equatable, Sendable {
         self.fixedIdentifier = fixedIdentifier
     }
 
-    var timeZone: TimeZone {
+    public var timeZone: TimeZone {
         guard let fixedIdentifier else {
             return .current
         }

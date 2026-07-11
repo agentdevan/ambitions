@@ -161,12 +161,7 @@ extension RepositoryBackedTimeService {
     }
 
     private static func timingLabel(for block: TimeBlock, calendar: Calendar) -> String {
-        let formatter = DateFormatter()
-        formatter.calendar = calendar
-        formatter.timeZone = calendar.timeZone
-        formatter.dateStyle = .none
-        formatter.timeStyle = .short
-        let time = formatter.string(from: block.start)
+        let time = RuntimeTickPolicy(calendar: calendar).shortTimeLabel(for: block.start)
         return block.kind == .scheduledStep ? "Scheduled, \(time)" : time
     }
 
@@ -228,3 +223,4 @@ extension RepositoryBackedTimeService {
     }
 
 }
+import AmbitionsTimeFoundation

@@ -1,4 +1,5 @@
 import AmbitionsDesignSystem
+import AmbitionsTimeFoundation
 import Foundation
 
 extension TodayExecutionProjector {
@@ -268,10 +269,7 @@ extension TodayExecutionProjector {
     }
 
     private static func timeLabel(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .none
-        formatter.timeStyle = .short
-        return formatter.string(from: date)
+        RuntimeTickPolicy.system.shortTimeLabel(for: date)
     }
 
     func oneStepGoalsPanel(_ input: TodayExecutionProjectionInput) -> TodayOneStepGoalsPanelState {

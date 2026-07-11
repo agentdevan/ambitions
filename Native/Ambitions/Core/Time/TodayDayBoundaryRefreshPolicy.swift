@@ -1,23 +1,25 @@
 import Foundation
 
-struct TodayDayBoundaryRefreshPolicy: Equatable, Sendable {
-    typealias LoadedClockContext = DayBoundaryScheduler.LoadedClockContext
+public struct TodayDayBoundaryRefreshPolicy: Equatable, Sendable {
+    public typealias LoadedClockContext = DayBoundaryScheduler.LoadedClockContext
 
     private let scheduler = DayBoundaryScheduler()
 
-    func loadedDayStart(for now: Date, calendar: Calendar) -> Date {
+    public init() {}
+
+    public func loadedDayStart(for now: Date, calendar: Calendar) -> Date {
         scheduler.loadedDayStart(for: now, calendar: calendar)
     }
 
-    func loadedClockContext(for now: Date, calendar: Calendar, timeZone: TimeZone) -> LoadedClockContext {
+    public func loadedClockContext(for now: Date, calendar: Calendar, timeZone: TimeZone) -> LoadedClockContext {
         scheduler.loadedClockContext(for: now, calendar: calendar, timeZone: timeZone)
     }
 
-    func shouldRefresh(lastLoadedDayStart: Date?, now: Date, calendar: Calendar) -> Bool {
+    public func shouldRefresh(lastLoadedDayStart: Date?, now: Date, calendar: Calendar) -> Bool {
         scheduler.shouldRefresh(lastLoadedDayStart: lastLoadedDayStart, now: now, calendar: calendar)
     }
 
-    func shouldRefresh(lastLoadedClockContext: LoadedClockContext?, now: Date, calendar: Calendar, timeZone: TimeZone) -> Bool {
+    public func shouldRefresh(lastLoadedClockContext: LoadedClockContext?, now: Date, calendar: Calendar, timeZone: TimeZone) -> Bool {
         scheduler.shouldRefresh(lastLoadedClockContext: lastLoadedClockContext, now: now, calendar: calendar, timeZone: timeZone)
     }
 }

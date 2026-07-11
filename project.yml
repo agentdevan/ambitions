@@ -21,6 +21,13 @@ targets:
           - "**/*.md"
           - "Resources/**"
           - "Support/Info.plist"
+          - "Core/Time/AmbitionsClock.swift"
+          - "Core/Time/DayBoundaryScheduler.swift"
+          - "Core/Time/PreviewClock.swift"
+          - "Core/Time/RuntimeTickPolicy.swift"
+          - "Core/Time/SystemClock.swift"
+          - "Core/Time/TimeZoneProvider.swift"
+          - "Core/Time/TodayDayBoundaryRefreshPolicy.swift"
       - path: Native/Ambitions/Resources/Assets.xcassets
         buildPhase: resources
       - path: Native/Ambitions/Resources/PrivacyInfo.xcprivacy
@@ -42,6 +49,7 @@ targets:
         DEVELOPMENT_ASSET_PATHS: Native/Ambitions/PreviewSupport
         CODE_SIGN_ENTITLEMENTS: Native/Ambitions/Support/Ambitions.entitlements
     dependencies:
+      - target: AmbitionsTimeFoundation
       - package: AmbitionsPackages
         product: AmbitionsDesignSystem
       - package: AmbitionsPackages
@@ -50,6 +58,24 @@ targets:
         embed: true
       - target: AmbitionsShareExtension
         embed: true
+  AmbitionsTimeFoundation:
+    type: framework
+    platform: iOS
+    deploymentTarget: "26.0"
+    sources:
+      - path: Native/Ambitions/Core/Time/AmbitionsClock.swift
+      - path: Native/Ambitions/Core/Time/DayBoundaryScheduler.swift
+      - path: Native/Ambitions/Core/Time/PreviewClock.swift
+      - path: Native/Ambitions/Core/Time/RuntimeTickPolicy.swift
+      - path: Native/Ambitions/Core/Time/SystemClock.swift
+      - path: Native/Ambitions/Core/Time/TimeZoneProvider.swift
+      - path: Native/Ambitions/Core/Time/TodayDayBoundaryRefreshPolicy.swift
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ambitions.timefoundation
+        GENERATE_INFOPLIST_FILE: YES
+        MACH_O_TYPE: staticlib
+        SKIP_INSTALL: YES
   AmbitionsWidgetExtension:
     type: app-extension
     platform: iOS
@@ -118,8 +144,20 @@ targets:
         GENERATE_INFOPLIST_FILE: YES
     dependencies:
       - target: Ambitions
+      - target: AmbitionsTimeFoundation
       - package: AmbitionsPackages
         product: AmbitionsDesignSystem
+  AmbitionsModuleTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: "26.0"
+    sources:
+      - path: Native/AmbitionsModuleTests
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+    dependencies:
+      - target: AmbitionsTimeFoundation
   AmbitionsUITests:
     type: bundle.ui-testing
     platform: iOS
@@ -165,6 +203,17 @@ schemes:
       gatherCoverageData: false
       targets:
         - name: AmbitionsTests
+  AmbitionsModuleTests:
+    build:
+      targets:
+        AmbitionsModuleTests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      gatherCoverageData: false
+      targets:
+        - name: AmbitionsModuleTests
   AmbitionsSmoke:
     build:
       targets:

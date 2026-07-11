@@ -1,51 +1,69 @@
 import Foundation
 
-struct RuntimeTickPolicy: Equatable, Sendable {
-    let timeZoneProvider: TimeZoneProvider
-    let localeIdentifier: String
+public struct RuntimeTickPolicy: Equatable, Sendable {
+    private let timeZoneProvider: TimeZoneProvider
+    private let localeIdentifier: String
+    private let calendarIdentifier: Calendar.Identifier
 
-    static let system = RuntimeTickPolicy()
-    static let utc = RuntimeTickPolicy(timeZoneProvider: .utc, localeIdentifier: "en_US_POSIX")
+    public static let system = RuntimeTickPolicy(calendar: .current)
+    public static let utc = RuntimeTickPolicy(
+        timeZoneProvider: .utc,
+        localeIdentifier: "en_US_POSIX",
+        calendarIdentifier: .gregorian
+    )
 
-    init(
+    public init(
         timeZoneProvider: TimeZoneProvider = .current,
         localeIdentifier: String = Locale.current.identifier
     ) {
         self.timeZoneProvider = timeZoneProvider
         self.localeIdentifier = localeIdentifier
+        calendarIdentifier = .gregorian
     }
 
-    init(calendar: Calendar, locale: Locale = .current) {
-        self.init(timeZoneProvider: TimeZoneProvider(timeZone: calendar.timeZone), localeIdentifier: locale.identifier)
+    public init(calendar: Calendar, locale: Locale = .current) {
+        timeZoneProvider = TimeZoneProvider(timeZone: calendar.timeZone)
+        localeIdentifier = locale.identifier
+        calendarIdentifier = calendar.identifier
     }
 
-    var calendar: Calendar {
-        var calendar = Calendar(identifier: .gregorian)
+    private init(
+        timeZoneProvider: TimeZoneProvider,
+        localeIdentifier: String,
+        calendarIdentifier: Calendar.Identifier
+    ) {
+        self.timeZoneProvider = timeZoneProvider
+        self.localeIdentifier = localeIdentifier
+        self.calendarIdentifier = calendarIdentifier
+    }
+
+    public var calendar: Calendar {
+        var calendar = Calendar(identifier: calendarIdentifier)
         calendar.timeZone = timeZoneProvider.timeZone
         return calendar
     }
 
-    var locale: Locale {
+    private var locale: Locale {
         Locale(identifier: localeIdentifier)
     }
 
-    func startOfDay(for date: Date) -> Date {
+    public func startOfDay(for date: Date) -> Date {
         calendar.startOfDay(for: date)
     }
 
-    func date(byAdding component: Calendar.Component, value: Int, to date: Date) -> Date? {
+    public func date(byAdding component: Calendar.Component, value: Int, to date: Date) -> Date? {
         calendar.date(byAdding: component, value: value, to: date)
     }
 
-    func dayDistance(from start: Date, to end: Date) -> Int? {
+    public func dayDistance(from start: Date, to end: Date) -> Int? {
         calendar.dateComponents([.day], from: start, to: end).day
     }
 
-    func isSameDay(_ lhs: Date, _ rhs: Date) -> Bool {
+    public func isSameDay(_ lhs: Date, _ rhs: Date) -> Bool {
         calendar.isDate(lhs, inSameDayAs: rhs)
     }
 
-    func localizedLabel(for date: Date, template: String) -> String {
+    private func localizedLabel(for date: Date, template: String) -> String {
         let formatter = DateFormatter()
         formatter.calendar = calendar
         formatter.locale = locale
@@ -54,19 +72,19 @@ struct RuntimeTickPolicy: Equatable, Sendable {
         return formatter.string(from: date)
     }
 
-    func shortMonthDayLabel(for date: Date) -> String {
+    public func shortMonthDayLabel(for date: Date) -> String {
         localizedLabel(for: date, template: "MMM d")
     }
 
-    func shortWeekdayLabel(for date: Date) -> String {
+    public func shortWeekdayLabel(for date: Date) -> String {
         localizedLabel(for: date, template: "EEE")
     }
 
-    func dayOfMonthLabel(for date: Date) -> String {
+    public func dayOfMonthLabel(for date: Date) -> String {
         localizedLabel(for: date, template: "d")
     }
 
-    func shortTimeLabel(for date: Date) -> String {
+    public func shortTimeLabel(for date: Date) -> String {
         let formatter = DateFormatter()
         formatter.calendar = calendar
         formatter.locale = locale
@@ -76,7 +94,7 @@ struct RuntimeTickPolicy: Equatable, Sendable {
         return formatter.string(from: date)
     }
 
-    func parseDateOnly(_ value: String) -> Date? {
+    public func parseDateOnly(_ value: String) -> Date? {
         let formatter = DateFormatter()
         formatter.calendar = calendar
         formatter.locale = Locale(identifier: "en_US_POSIX")
@@ -85,7 +103,7 @@ struct RuntimeTickPolicy: Equatable, Sendable {
         return formatter.date(from: value)
     }
 
-    func parseISODate(_ value: String) -> Date? {
+    public func parseISODate(_ value: String) -> Date? {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         if let date = formatter.date(from: value) {

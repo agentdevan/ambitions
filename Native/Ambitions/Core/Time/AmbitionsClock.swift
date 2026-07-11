@@ -1,6 +1,6 @@
 import Foundation
 
-protocol AmbitionsClock: Sendable {
+public protocol AmbitionsClock: Sendable {
     var now: Date { get }
     var calendar: Calendar { get }
     var timeZone: TimeZone { get }
@@ -8,13 +8,13 @@ protocol AmbitionsClock: Sendable {
 }
 
 #if DEBUG
-struct TestClock: AmbitionsClock, Equatable {
-    let now: Date
-    let calendar: Calendar
-    let timeZone: TimeZone
-    let advancesAutomatically: Bool = false
+public struct TestClock: AmbitionsClock, Equatable {
+    public let now: Date
+    public let calendar: Calendar
+    public let timeZone: TimeZone
+    public let advancesAutomatically: Bool = false
 
-    init(
+    public init(
         now: Date,
         calendar: Calendar = PreviewClock.utcCalendar,
         timeZone: TimeZone = PreviewClock.utcTimeZone
@@ -26,25 +26,8 @@ struct TestClock: AmbitionsClock, Equatable {
         self.timeZone = timeZone
     }
 
-    func advanced(by interval: TimeInterval) -> TestClock {
+    public func advanced(by interval: TimeInterval) -> TestClock {
         TestClock(now: now.addingTimeInterval(interval), calendar: calendar, timeZone: timeZone)
     }
 }
 #endif
-
-enum AmbitionsClockFactory {
-    static func clock(
-        for source: AppSession.BootstrapSource,
-        environment: [String: String] = ProcessInfo.processInfo.environment
-    ) -> any AmbitionsClock {
-        #if DEBUG
-        if let override = PreviewClock.environmentOverride(environment) {
-            return override
-        }
-        if source == .preview {
-            return PreviewClock.default
-        }
-        #endif
-        return SystemClock()
-    }
-}

@@ -1,17 +1,17 @@
 import Foundation
 
 #if DEBUG
-struct PreviewClock: AmbitionsClock, Equatable {
-    static let environmentKey = "AMBITIONS_PREVIEW_CLOCK_ISO"
-    static let defaultNow = Date(timeIntervalSince1970: 1_776_254_400)
-    static let utcTimeZone = TimeZoneProvider.utc.timeZone
+public struct PreviewClock: AmbitionsClock, Equatable {
+    public static let environmentKey = "AMBITIONS_PREVIEW_CLOCK_ISO"
+    public static let defaultNow = Date(timeIntervalSince1970: 1_776_254_400)
+    public static let utcTimeZone = TimeZoneProvider.utc.timeZone
 
-    let now: Date
-    let calendar: Calendar
-    let timeZone: TimeZone
-    let advancesAutomatically: Bool = false
+    public let now: Date
+    public let calendar: Calendar
+    public let timeZone: TimeZone
+    public let advancesAutomatically: Bool = false
 
-    init(
+    public init(
         now: Date = Self.defaultNow,
         calendar: Calendar = Self.utcCalendar,
         timeZone: TimeZone = Self.utcTimeZone
@@ -23,15 +23,15 @@ struct PreviewClock: AmbitionsClock, Equatable {
         self.timeZone = timeZone
     }
 
-    static var `default`: PreviewClock {
+    public static var `default`: PreviewClock {
         PreviewClock()
     }
 
-    static var utcCalendar: Calendar {
+    public static var utcCalendar: Calendar {
         RuntimeTickPolicy(timeZoneProvider: .utc).calendar
     }
 
-    static func environmentOverride(_ environment: [String: String] = ProcessInfo.processInfo.environment) -> PreviewClock? {
+    public static func environmentOverride(_ environment: [String: String] = ProcessInfo.processInfo.environment) -> PreviewClock? {
         guard let value = environment[environmentKey]?.trimmingCharacters(in: .whitespacesAndNewlines),
               value.isEmpty == false,
               let date = RuntimeTickPolicy.utc.parseISODate(value) else {

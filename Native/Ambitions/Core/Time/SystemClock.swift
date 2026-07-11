@@ -1,17 +1,17 @@
 import Foundation
 
-struct SystemClock: AmbitionsClock {
-    let timeZoneProvider: TimeZoneProvider
+public struct SystemClock: AmbitionsClock {
+    private let timeZoneProvider: TimeZoneProvider
 
-    init(timeZoneProvider: TimeZoneProvider = .current) {
+    public init(timeZoneProvider: TimeZoneProvider = .current) {
         self.timeZoneProvider = timeZoneProvider
     }
 
-    var now: Date { Date() }
-    var timeZone: TimeZone { timeZoneProvider.timeZone }
-    var advancesAutomatically: Bool { true }
+    public var now: Date { Date() }
+    public var timeZone: TimeZone { timeZoneProvider.timeZone }
+    public var advancesAutomatically: Bool { true }
 
-    var calendar: Calendar {
+    public var calendar: Calendar {
         RuntimeTickPolicy(timeZoneProvider: timeZoneProvider).calendar
     }
 }
