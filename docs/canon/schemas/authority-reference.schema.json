@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ambitions.local/canon/schemas/authority-reference.schema.json",
+  "title": "Ambitions Authority Reference",
+  "description": "Machine documentation for an authority or evidence reference linked to canon requirements.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "reference_id",
+    "authority_class",
+    "source",
+    "revision",
+    "requirement_ids",
+    "approval_state"
+  ],
+  "properties": {
+    "schema_version": {
+      "description": "External-reference contract version.",
+      "type": "integer",
+      "const": 1
+    },
+    "reference_id": {
+      "description": "Stable identifier for the referenced external artifact or evidence item.",
+      "type": "string",
+      "minLength": 1
+    },
+    "authority_class": {
+      "description": "Authority or evidence role of the referenced artifact.",
+      "type": "string",
+      "enum": ["constitution", "specification", "standard", "decision_docket", "generated_projection", "source_and_tests", "linear", "figma"]
+    },
+    "source": {
+      "description": "Repository path or stable external entity locator.",
+      "type": "string",
+      "minLength": 1
+    },
+    "revision": {
+      "description": "Version, commit, frame version, or update token for staleness checks.",
+      "type": "string",
+      "minLength": 1
+    },
+    "requirement_ids": {
+      "description": "Canonical requirement IDs supported or interpreted by this reference.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "approved_by": {
+      "description": "Optional owner identity that approved this external authority.",
+      "type": "string",
+      "minLength": 1
+    },
+    "approval_state": {
+      "description": "Current review state; it never upgrades implementation or release proof by itself.",
+      "type": "string",
+      "enum": ["unreviewed", "approved", "rejected", "stale"]
+    },
+    "implementation_status": {
+      "description": "Optional evidence-bounded implementation posture associated with the reference.",
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

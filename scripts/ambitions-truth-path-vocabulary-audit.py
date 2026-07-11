@@ -161,9 +161,12 @@ def main() -> int:
 
             if in_allowed_stale_section or _stale_context_allowed(line):
                 continue
-            lower = line.lower()
             for term, replacement in STALE_ACTIVE_TERMS.items():
-                if term.lower() in lower:
+                pattern = re.compile(
+                    rf"(?<!\w){re.escape(term)}(?!\w)",
+                    re.IGNORECASE,
+                )
+                if pattern.search(line):
                     rel = path.relative_to(ROOT)
                     stale_terms.append(f"{rel}:{line_number}: active stale term `{term}`; use {replacement}")
 
