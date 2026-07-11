@@ -89,7 +89,33 @@ class ChangedFileTestRouterTests(unittest.TestCase):
         self.assertEqual([lane["kind"] for lane in plan["lanes"]], ["integration"])
         self.assertNotIn("AmbitionsDomain", json.dumps(plan))
         self.assertNotIn("DomainModuleBoundaryTests", json.dumps(plan))
-        self.assertEqual(len(self.filters(plan, "integration")), 8)
+        self.assertEqual(self.filters(plan, "integration"), ["AmbitionsTests"])
+
+    def test_fixed_point_cannot_omit_direct_consumers_because_route_selects_entire_hosted_target(self):
+        plan = self.plan_live(ROUTER.Change("M", "Native/Ambitions/Core/Domain/FixedPoint.swift"))
+
+        self.assertEqual(plan["status"], "planned", plan)
+        self.assertEqual(self.filters(plan, "integration"), ["AmbitionsTests"])
+        launch = next(command for command in plan["commands"] if "scripts/ambitions-xcode-test-focused.sh" in command)
+        self.assertEqual(launch.count("--only-testing"), 1)
+        self.assertIn("AmbitionsTests", launch)
+        self.assertNotIn("AmbitionsTests/OpenCapacityEngineTests", launch)
+        self.assertNotIn("AmbitionsTests/ProtectionEngineTests", launch)
+
+    def test_target_only_selector_must_match_its_lane_and_live_target(self):
+        config = json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
+        domain_route = next(route for route in config["routes"] if route["id"] == "domain-hosted-integration")
+        domain_route["integration"] = ["AmbitionsUITests"]
+        plan = ROUTER.plan_changes(
+            REPO_ROOT,
+            [ROUTER.Change("M", "Native/Ambitions/Core/Domain/FixedPoint.swift")],
+            config,
+            self.evidence,
+        )
+
+        self.assertEqual(plan["status"], "invalid")
+        self.assertEqual(plan["commands"], [])
+        self.assertIn("invalid_test_filter", {finding["code"] for finding in plan["findings"]})
 
     def test_changed_module_test_routes_only_hostless_module_lane(self):
         plan = self.plan_live(ROUTER.Change("M", "Native/AmbitionsModuleTests/TimeFoundationModuleTests.swift"))
@@ -386,6 +412,26 @@ class ChangedFileTestRouterTests(unittest.TestCase):
                 plan = self.plan_live(ROUTER.Change("M", path))
                 self.assertEqual(plan["status"], "planned", plan)
                 self.assertEqual(plan["commands"], [["python3", "-m", "unittest", expected, "-v"]])
+
+    def test_bounded_xcodebuild_routes_to_reliability_and_lane_lock_tests_only(self):
+        bounded = self.plan_live(ROUTER.Change("M", "scripts/ambitions-bounded-xcodebuild.sh"))
+        focused = self.plan_live(ROUTER.Change("M", "scripts/ambitions-xcode-test-focused.sh"))
+
+        self.assertEqual(
+            bounded["commands"],
+            [[
+                "python3",
+                "-m",
+                "unittest",
+                "scripts.tests.test_ambitions_xcode_runner_reliability",
+                "scripts.tests.test_ambitions_xcode_lane_lock",
+                "-v",
+            ]],
+        )
+        self.assertEqual(
+            focused["commands"],
+            [["python3", "-m", "unittest", "scripts.tests.test_ambitions_xcode_runner_reliability", "-v"]],
+        )
 
 
 class ChangedFileTestRouterCLITests(unittest.TestCase):

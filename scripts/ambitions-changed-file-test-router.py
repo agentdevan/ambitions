@@ -308,6 +308,7 @@ def _append_unique(destination: list[str], values: Sequence[str]) -> None:
 def _validate_selected_suites(
     root: Path,
     lane_tests: dict[str, list[str]],
+    evidence: Evidence,
     findings: list[dict[str, str]],
 ) -> None:
     index = _suite_index(root)
@@ -321,6 +322,16 @@ def _validate_selected_suites(
             continue
         expected_target = expected_targets[lane]
         for test_filter in filters:
+            if test_filter == expected_target:
+                if expected_target not in evidence.nodes:
+                    findings.append(
+                        _finding(
+                            "test_target_not_live",
+                            test_filter,
+                            f"target-only selector for {lane} is absent from the live graph",
+                        )
+                    )
+                continue
             target, separator, suite = test_filter.partition("/")
             if not separator or target != expected_target or not suite:
                 findings.append(_finding("invalid_test_filter", test_filter, f"filter is incompatible with {lane}"))
@@ -519,7 +530,7 @@ def plan_changes(
         if not re.search(r"\b(?:class\s+\w+\s*\([^)]*(?:TestCase|unittest\.TestCase)[^)]*\)|def\s+test_\w+)", text):
             findings.append(_finding("test_support_without_suite", module, "configured Python module has no discoverable test"))
 
-    _validate_selected_suites(root, lane_tests, findings)
+    _validate_selected_suites(root, lane_tests, evidence, findings)
     if findings:
         return {
             "schema_version": 1,

@@ -26,10 +26,19 @@
   ],
   "toolingRoutes": [
     {
+      "id": "bounded-xcodebuild-reliability",
+      "patterns": [
+        "scripts/ambitions-bounded-xcodebuild.sh"
+      ],
+      "pythonTests": [
+        "scripts.tests.test_ambitions_xcode_runner_reliability",
+        "scripts.tests.test_ambitions_xcode_lane_lock"
+      ]
+    },
+    {
       "id": "focused-runner-reliability",
       "patterns": [
         ".xcodebuildmcp/config.yaml",
-        "scripts/ambitions-bounded-xcodebuild.sh",
         "scripts/ambitions-xcode-failure-classifier.py",
         "scripts/ambitions-xcode-sim-health.sh",
         "scripts/ambitions-xcode-test-focused.sh"
@@ -130,14 +139,7 @@
         "Ambitions"
       ],
       "integration": [
-        "AmbitionsTests/GoalCreationServiceTests",
-        "AmbitionsTests/GoalPathCompilerModelsTests",
-        "AmbitionsTests/RescheduleEngineTests",
-        "AmbitionsTests/LivingPlanSchemaMigrationTests",
-        "AmbitionsTests/AmbitionLifecycleGoldenScenarioTests",
-        "AmbitionsTests/AmbitionsOSProofTrustModelsTests",
-        "AmbitionsTests/GoalsShellIntegrationTests",
-        "AmbitionsTests/TimeDurableMutationIntegrationTests"
+        "AmbitionsTests"
       ]
     },
     {
