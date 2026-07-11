@@ -40,6 +40,11 @@ REVIEW_CHECKS = (
     "reflectionFixturesRegistriesChecked",
     "localRuntimeConstructionChecked",
 )
+GENERATED_FACT_KEYS = (
+    "schemaVersion", "repositoryRoot", "domainRoot", "files", "outsideConsumers",
+    "compilerDiagnostics", "compilerPublicInterface", "consolidationCandidates",
+    "deletionAuthorizations",
+)
 
 
 def _strip_comments_and_strings(text: str) -> str:
@@ -160,13 +165,40 @@ def _compiler_public_interface(path: Path | None) -> list[str]:
     if path is None:
         return []
     signatures: list[str] = []
-    declaration = re.compile(
-        r"^(?:@[A-Za-z_][^ ]*\s+)*(?:public|open)\s+(?:final\s+|static\s+|class\s+|mutating\s+|nonmutating\s+|convenience\s+|required\s+|override\s+|indirect\s+)*(?:class|struct|enum|protocol|actor|extension|typealias|init[!?]?|func|subscript|case|var|let)\b"
+    start = re.compile(
+        r"^(?:(?:@[A-Za-z_][\w.]*(?:\([^)]*\))?)\s+)*"
+        r"(?:(?:public|open)\s+(?:(?:final|static|class|mutating|nonmutating|convenience|required|override|indirect)\s+)*"
+        r"(?:class|struct|enum|protocol|actor|typealias|init[!?]?|func|subscript|var|let)\b|extension\b|case\b)"
     )
+    pending: list[str] = []
+    parens = 0
+
+    def finish(parts: list[str]) -> str:
+        signature = re.sub(r"\s+", " ", " ".join(parts)).strip()
+        signature = re.sub(r"\(\s*", "(", signature)
+        signature = re.sub(r"\s*\)", ")", signature)
+        signature = re.sub(r",\s*", ", ", signature)
+        if re.search(r"\b(?:class|struct|enum|protocol|actor|extension)\b", signature):
+            signature = re.sub(r"\s*\{$", "", signature)
+        elif not re.search(r"\{\s*(?:get|set|_read|_modify)(?:\s+(?:get|set|_read|_modify))*\s*\}$", signature):
+            signature = re.sub(r"\s*\{.*$", "", signature)
+        return signature.rstrip()
+
     for raw in path.read_text(encoding="utf-8", errors="replace").splitlines():
         line = raw.strip()
-        if declaration.match(line):
-            signatures.append(re.sub(r"\s+\{.*$", "", line).rstrip())
+        if not pending:
+            if not start.match(line):
+                continue
+            pending = [line]
+            parens = line.count("(") - line.count(")")
+        else:
+            pending.append(line)
+            parens += line.count("(") - line.count(")")
+        if parens == 0 and not line.endswith((",", "->")):
+            signatures.append(finish(pending))
+            pending = []
+    if pending:
+        signatures.append(finish(pending))
     return sorted(set(signatures))
 
 
@@ -298,7 +330,11 @@ def collect_boundary(root: Path, project: Path, disposition: Path) -> dict[str, 
         "publicContracts": [],
         "consolidationCandidates": candidates,
         "deletionAuthorizations": [],
-        "consolidationReview": {"status": "unreviewed", **{key: False for key in REVIEW_CHECKS}, "provenCandidatePaths": []},
+        "consolidationReview": {
+            "status": "unreviewed", "reviewer": None, "reviewArtifact": None,
+            "reviewedContentHash": None, "findings": [],
+            **{key: False for key in REVIEW_CHECKS}, "provenCandidatePaths": [],
+        },
         "review": {"status": "unreviewed", "reviewer": None, "reviewArtifact": None, "reviewedContentHash": None, "findings": []},
     }
     payload["generatedContentHash"] = reviewed_content_hash(root, payload)
@@ -307,7 +343,10 @@ def collect_boundary(root: Path, project: Path, disposition: Path) -> dict[str, 
 
 def reviewed_content_hash(root: Path, payload: dict[str, object]) -> str:
     """Hash normalized generated facts, diagnostics, interface, and declaration/consumer files."""
-    normalized = {key: value for key, value in payload.items() if key not in {"review", "generatedContentHash"}}
+    normalized = {
+        key: value for key, value in payload.items()
+        if key not in {"review", "consolidationReview", "generatedContentHash"}
+    }
     digest = hashlib.sha256(json.dumps(normalized, sort_keys=True, separators=(",", ":")).encode())
     paths = sorted({row["path"] for row in payload.get("files", [])} | {row["path"] for row in payload.get("outsideConsumers", [])})
     for relative in paths:
@@ -349,19 +388,25 @@ def validate_boundary(payload: dict[str, object], require_review: bool) -> list[
     if review.get("status") != "approved":
         findings.append("boundary review is not approved")
     contracts = payload.get("publicContracts", [])
-    approved = set()
+    approved_counts: Counter[str] = Counter()
     for contract in contracts:
         symbol = contract.get("symbol", "<missing>")
         if contract.get("status") not in PUBLIC_STATUSES or contract.get("status") != "approved":
             findings.append(f"public contract lacks approved decision: {symbol}")
         else:
-            approved.add(symbol)
+            approved_counts[symbol] += 1
             if any(not contract.get(field) for field in ("declarationPaths", "consumerPaths", "coverage", "decision")):
                 findings.append(f"public contract has incomplete evidence: {symbol}")
-    interface = set(payload.get("compilerPublicInterface", []))
-    for signature in sorted(interface - approved):
-        findings.append(f"unapproved compiler public declaration: {signature}")
-    for signature in sorted(approved - interface):
+    interface_rows = payload.get("compilerPublicInterface", [])
+    interface_counts = Counter(interface_rows)
+    for signature in sorted(interface_counts):
+        count = approved_counts[signature]
+        if count != 1:
+            if count == 0:
+                findings.append(f"unapproved compiler public declaration: {signature}")
+            else:
+                findings.append(f"compiler public declaration must have exactly one approved contract: {signature} (found {count})")
+    for signature in sorted(set(approved_counts) - set(interface_counts)):
         findings.append(f"approved public contract absent from compiler interface: {signature}")
     if any(item.startswith(("Critical:", "Important:")) for item in review.get("findings", [])):
         findings.append("boundary review retains Critical or Important findings")
@@ -374,7 +419,15 @@ def validate_boundary(payload: dict[str, object], require_review: bool) -> list[
     for check in REVIEW_CHECKS:
         if not consolidation.get(check):
             findings.append(f"consolidation review is incomplete: {check}")
+    if not consolidation.get("reviewer") or not consolidation.get("reviewArtifact"):
+        findings.append("consolidation review lacks reviewer or artifact")
+    if consolidation.get("reviewedContentHash") != current_hash:
+        findings.append("consolidation reviewed content hash does not match current boundary content")
     return findings
+
+
+def _generated_fact_snapshot(payload: dict[str, object]) -> dict[str, object]:
+    return {key: payload.get(key) for key in GENERATED_FACT_KEYS}
 
 
 def main() -> int:
@@ -390,16 +443,39 @@ def main() -> int:
     parser.add_argument("--review-artifact", type=Path)
     args = parser.parse_args()
     root = Path.cwd()
-    payload = collect_boundary(root, args.project, args.disposition)
+    fresh = collect_boundary(root, args.project, args.disposition)
+    if args.swift_interface:
+        fresh["compilerPublicInterface"] = _compiler_public_interface(args.swift_interface)
+        fresh["compilerDiagnostics"] = []
+    if args.validate_only:
+        if not args.output.exists():
+            print("finding: stored boundary manifest is missing")
+            return 1
+        payload = json.loads(args.output.read_text(encoding="utf-8"))
+        stale_findings = []
+        if _generated_fact_snapshot(payload) != _generated_fact_snapshot(fresh):
+            stale_findings.append("stored generated boundary facts differ from current collection")
+        stored_hash = payload.get("generatedContentHash")
+        current_stored_hash = reviewed_content_hash(root, payload)
+        if stored_hash != current_stored_hash:
+            stale_findings.append("stored generated content hash is stale or tampered")
+        findings = stale_findings + validate_boundary(payload, args.require_review)
+        print(f"domain-files={len(payload.get('files', []))}")
+        print(f"outside-consumers={len(payload.get('outsideConsumers', []))}")
+        print(f"consolidation-candidates={len(payload.get('consolidationCandidates', []))}")
+        for finding in findings:
+            print(f"finding: {finding}")
+        return 1 if findings else 0
+    payload = fresh
     if args.output.exists():
         previous = json.loads(args.output.read_text(encoding="utf-8"))
         for key in ("publicContracts", "consolidationReview", "review"):
             if key in previous:
                 payload[key] = previous[key]
-    if args.swift_interface:
-        payload["compilerPublicInterface"] = _compiler_public_interface(args.swift_interface)
-        payload["compilerDiagnostics"] = []
     payload["generatedContentHash"] = reviewed_content_hash(root, payload)
+    consolidation = payload.get("consolidationReview", {})
+    if consolidation.get("status") == "approved" and consolidation.get("reviewedContentHash") != payload["generatedContentHash"]:
+        consolidation["status"] = "unreviewed"
     if args.approve_review:
         if not args.reviewer or not args.review_artifact:
             parser.error("--approve-review requires --reviewer and --review-artifact")

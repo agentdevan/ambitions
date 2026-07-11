@@ -1,5 +1,6 @@
 import importlib.util
 import json
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -14,6 +15,7 @@ SPEC.loader.exec_module(MODULE)
 collect_boundary = MODULE.collect_boundary
 validate_boundary = MODULE.validate_boundary
 reviewed_content_hash = MODULE.reviewed_content_hash
+compiler_public_interface = MODULE._compiler_public_interface
 
 
 class DomainBoundaryAuditTests(unittest.TestCase):
@@ -81,6 +83,9 @@ class DomainBoundaryAuditTests(unittest.TestCase):
         payload["publicContracts"] = [self.approved_contract("public struct Step")]
         payload["consolidationReview"] = {
             "status": "approved",
+            "reviewer": "independent-reviewer",
+            "reviewArtifact": ".superpowers/sdd/domain-boundary-consolidation-review.md",
+            "reviewedContentHash": None,
             "dynamicPersistenceMigrationReplayChecked": True,
             "appIntentsWidgetsShareChecked": True,
             "reflectionFixturesRegistriesChecked": True,
@@ -89,7 +94,15 @@ class DomainBoundaryAuditTests(unittest.TestCase):
         }
         payload["review"] = {"status": "approved", "findings": []}
         payload["review"]["reviewedContentHash"] = reviewed_content_hash(self.root, payload)
+        payload["consolidationReview"]["reviewedContentHash"] = payload["review"]["reviewedContentHash"]
         return payload
+
+    def run_cli(self, *arguments: str) -> subprocess.CompletedProcess[str]:
+        return subprocess.run(
+            ["python3", str(SCRIPT_PATH), "--project", str(self.project),
+             "--disposition", str(self.disposition), "--output", "boundary.json", *arguments],
+            cwd=self.root, text=True, capture_output=True,
+        )
 
     def test_collects_recursive_domain_files_and_outside_consumers(self) -> None:
         payload = collect_boundary(self.root, self.project, self.disposition)
@@ -138,6 +151,14 @@ class DomainBoundaryAuditTests(unittest.TestCase):
         findings = validate_boundary(payload, require_review=True)
         self.assertIn("unapproved compiler public declaration: public init(id: Swift.String)", findings)
 
+    def test_rejects_duplicate_approved_contract_rows(self) -> None:
+        payload = self.complete_reviewed_payload()
+        payload["publicContracts"].append(self.approved_contract("public struct Step"))
+        payload["review"]["reviewedContentHash"] = reviewed_content_hash(self.root, payload)
+        payload["consolidationReview"]["reviewedContentHash"] = payload["review"]["reviewedContentHash"]
+        findings = validate_boundary(payload, require_review=True)
+        self.assertIn("compiler public declaration must have exactly one approved contract: public struct Step (found 2)", findings)
+
     def test_rejects_approved_contract_absent_from_compiler_interface(self) -> None:
         payload = self.complete_reviewed_payload()
         payload["publicContracts"].append(self.approved_contract("public var phantom: Swift.String"))
@@ -163,6 +184,53 @@ class DomainBoundaryAuditTests(unittest.TestCase):
         payload["consolidationReview"]["appIntentsWidgetsShareChecked"] = False
         findings = validate_boundary(payload, require_review=True)
         self.assertIn("consolidation review is incomplete: appIntentsWidgetsShareChecked", findings)
+
+    def test_consolidation_review_is_bound_to_reviewer_artifact_and_content(self) -> None:
+        payload = self.complete_reviewed_payload()
+        payload["consolidationReview"]["reviewer"] = None
+        payload["consolidationReview"]["reviewArtifact"] = None
+        payload["files"][0]["loc"] += 1
+        findings = validate_boundary(payload, require_review=True)
+        self.assertIn("consolidation review lacks reviewer or artifact", findings)
+        self.assertIn("consolidation reviewed content hash does not match current boundary content", findings)
+
+    def test_parses_multiline_compiler_interface_declarations_exactly(self) -> None:
+        interface = self.root / "AmbitionsDomain.swiftinterface"
+        interface.write_text(
+            "public struct Step {\n"
+            "  public init(\n    id: Swift.String,\n    title: Swift.String\n  )\n"
+            "  public var title: Swift.String { get }\n}\n"
+            "extension AmbitionsDomain.Step : Swift.Sendable {\n"
+            "  public func renamed(\n    to value: Swift.String\n  ) -> AmbitionsDomain.Step\n}\n"
+            "public enum State {\n  case ready\n  case blocked(reason: Swift.String)\n}\n"
+            "public typealias Identifier = Swift.String\n"
+            "public subscript(\n  index: Swift.Int\n) -> Swift.String { get }\n",
+            encoding="utf-8",
+        )
+        self.assertEqual(compiler_public_interface(interface), [
+            "case blocked(reason: Swift.String)",
+            "case ready",
+            "extension AmbitionsDomain.Step : Swift.Sendable",
+            "public enum State",
+            "public func renamed(to value: Swift.String) -> AmbitionsDomain.Step",
+            "public init(id: Swift.String, title: Swift.String)",
+            "public struct Step",
+            "public subscript(index: Swift.Int) -> Swift.String { get }",
+            "public typealias Identifier = Swift.String",
+            "public var title: Swift.String { get }",
+        ])
+
+    def test_validate_only_rejects_stale_or_tampered_committed_generated_facts(self) -> None:
+        self.assertEqual(self.run_cli().returncode, 0)
+        output = self.root / "boundary.json"
+        payload = json.loads(output.read_text(encoding="utf-8"))
+        payload["files"][0]["loc"] += 1
+        payload["generatedContentHash"] = "sha256:tampered"
+        output.write_text(json.dumps(payload), encoding="utf-8")
+        result = self.run_cli("--validate-only")
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("stored generated boundary facts differ from current collection", result.stdout)
+        self.assertIn("stored generated content hash is stale or tampered", result.stdout)
 
     def test_declarations_do_not_cross_lines_or_promote_nested_private_types(self) -> None:
         self.write_domain(
