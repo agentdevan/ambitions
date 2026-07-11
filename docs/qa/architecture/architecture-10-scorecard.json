@@ -30,7 +30,7 @@
     "currentStatus": "yellow",
     "authorizedFutureTargets": [],
     "futureTargetTree": "none predetermined; candidate policy authorization is required before any target proposal",
-    "authorizationEvidenceModel": "Prospective authorization is derived on a clean tracked worktree from typed, hash-bound artifacts tied to candidate identity, live repository and authority hashes, raw compiler/graph/symbolgraph/routes, result-bundle metadata and logs, linked raw benchmark/result summaries, and an independent review fingerprint map."
+    "authorizationEvidenceModel": "Typed, hash-bound candidate artifacts are untrusted inputs, not authority. On a clean tracked worktree the CLI/default provider runs XcodeGen with environment expansion disabled, requires the proposed target to remain a framework, derives all live target product types and graph roles, generates ephemeral source-truth PBX evidence, and requires its complete nodes, edges, product types, and source memberships to equal the ignored/untracked current generated Ambitions.xcodeproj derivative. It also re-plans exact selectors through the live changed-file router with suite validation. Its execution environment is an external trust precondition, and absent trusted compiler/symbolgraph, xcresult, benchmark, and external-review rederivation keeps every current candidate observed or rejected; zero future targets are authorized."
   },
   "validatorResults": {
     "remediationGovernance": {

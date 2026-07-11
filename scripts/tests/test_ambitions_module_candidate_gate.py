@@ -4,6 +4,7 @@ import hashlib
 import importlib.util
 import io
 import json
+import os
 import subprocess
 import tempfile
 import unittest
@@ -21,6 +22,16 @@ def load_gate():
     assert spec.loader is not None
     spec.loader.exec_module(module)
     return module
+
+
+class FixtureTrustedProvider:
+    def __init__(self, gate, *, observed: tuple[str, ...] = (), rejected: tuple[str, ...] = ()) -> None:
+        self.gate = gate
+        self.observed = observed
+        self.rejected = rejected
+
+    def verify(self, request):
+        return self.gate.ProviderResult(self.observed, self.rejected)
 
 
 class ModuleCandidateGateTests(unittest.TestCase):
@@ -57,6 +68,14 @@ class ModuleCandidateGateTests(unittest.TestCase):
                     source.write(f"// touch {number}\n")
             cls.git("add", *cls.paths)
             cls.git("commit", "-q", "-m", f"fixture {number}")
+        cls.fixture_head = cls.git("rev-parse", "HEAD")
+        cls.fixture_commits = tuple(
+            cls.git("rev-list", "--first-parent", "--max-count=250", "HEAD").splitlines()
+        )
+        cls.fixture_authority_hashes = {
+            relative: "sha256:" + hashlib.sha256((cls.root / relative).read_bytes()).hexdigest()
+            for relative in ("project.yml", "scripts/ambitions-changed-file-test-routes.json")
+        }
 
     @classmethod
     def tearDownClass(cls) -> None:
@@ -75,6 +94,7 @@ class ModuleCandidateGateTests(unittest.TestCase):
 
     def setUp(self) -> None:
         self.gate = load_gate()
+        self.provider = FixtureTrustedProvider(self.gate)
         for evidence in self.root.glob(".evidence*"):
             if evidence.is_dir():
                 for path in sorted(evidence.rglob("*"), reverse=True):
@@ -102,7 +122,7 @@ class ModuleCandidateGateTests(unittest.TestCase):
         payload = {
             "candidateID": candidate_id,
             "proposedTarget": target,
-            "repositoryHead": self.git("rev-parse", "HEAD"),
+            "repositoryHead": self.fixture_head,
             "authorityHashes": authority_hashes,
             "sourceContentHash": source_hash,
             "sourceFiles": sorted(files),
@@ -111,10 +131,7 @@ class ModuleCandidateGateTests(unittest.TestCase):
         return "sha256:" + hashlib.sha256(encoded).hexdigest()
 
     def authority_hashes(self) -> dict[str, str]:
-        authority_hashes = {}
-        for relative in ("project.yml", "scripts/ambitions-changed-file-test-routes.json"):
-            authority_hashes[relative] = "sha256:" + hashlib.sha256((self.root / relative).read_bytes()).hexdigest()
-        return authority_hashes
+        return dict(self.fixture_authority_hashes)
 
     def common(self, artifact_type: str, candidate_id: str, target: str, source_hash: str) -> dict:
         return {
@@ -123,7 +140,7 @@ class ModuleCandidateGateTests(unittest.TestCase):
             "candidateID": candidate_id,
             "candidateIdentity": self.identity(candidate_id, target, self.paths, source_hash),
             "proposedTarget": target,
-            "repositoryHead": self.git("rev-parse", "HEAD"),
+            "repositoryHead": self.fixture_head,
             "authorityHashes": self.authority_hashes(),
             "sourceFiles": sorted(self.paths),
             "sourceContentHash": source_hash,
@@ -218,10 +235,8 @@ class ModuleCandidateGateTests(unittest.TestCase):
         absolute_derived_data: bool = False,
     ) -> dict:
         source_hash = self.gate.source_set_hash(self.root, self.paths)
-        head = self.git("rev-parse", "HEAD")
-        commits = self.git(
-            "rev-list", "--first-parent", "--max-count=250", "HEAD"
-        ).splitlines()
+        head = self.fixture_head
+        commits = list(self.fixture_commits)
         def common(kind: str) -> dict:
             return self.common(kind, candidate_id, target, source_hash)
 
@@ -492,7 +507,9 @@ class ModuleCandidateGateTests(unittest.TestCase):
         }
 
     def result(self, candidate: dict):
-        return self.gate.evaluate_candidate(self.root, self.thresholds(), candidate)
+        return self.gate.evaluate_candidate(
+            self.root, self.thresholds(), candidate, provider=self.provider
+        )
 
     def policy(self, candidate: dict) -> dict:
         return {
@@ -501,6 +518,68 @@ class ModuleCandidateGateTests(unittest.TestCase):
             "candidates": [candidate],
             "authorizedFutureTargets": [candidate["proposedTarget"]],
         }
+
+    def provider_request(self):
+        target = "AmbitionsHotLeaf"
+        module_target = f"{target}Tests"
+        integration_target = "AmbitionsTests"
+        nodes = {target, module_target, integration_target, "Ambitions"}
+        edges = {
+            (module_target, target),
+            (integration_target, target),
+            (integration_target, "Ambitions"),
+        }
+        graph = {
+            "nodes": nodes,
+            "kinds": {
+                target: "production",
+                module_target: "module-test",
+                integration_target: "integration-test",
+                "Ambitions": "application",
+            },
+            "edges": edges,
+            "memberships": {path: (target,) for path in self.paths},
+            "dependencies": [],
+            "moduleTestTarget": module_target,
+            "integrationTestTarget": integration_target,
+            "applicationTargets": ("Ambitions",),
+            "extensionTargets": (),
+        }
+        routes = {
+            path: {
+                "module": (f"{module_target}.test{index}",),
+                "integration": (f"{integration_target}.test{index}",),
+            }
+            for index, path in enumerate(self.paths, start=1)
+        }
+        context = self.gate.GitContext(
+            self.fixture_head,
+            self.fixture_commits,
+            {path: 1 for path in self.paths},
+            self.authority_hashes(),
+        )
+        module = self.gate.TestProof(
+            "module-result", frozenset(value for row in routes.values() for value in row["module"]),
+            ".evidence/module.xcresult", ".evidence/module.log", module_target, "module",
+        )
+        integration = self.gate.TestProof(
+            "integration-result", frozenset(value for row in routes.values() for value in row["integration"]),
+            ".evidence/integration.xcresult", ".evidence/integration.log",
+            integration_target, "hosted-integration",
+        )
+        return self.gate.VerificationRequest(
+            self.root,
+            context,
+            "sha256:" + "a" * 64,
+            target,
+            tuple(self.paths),
+            graph,
+            routes,
+            frozenset({("s:CandidateA", "sha256:" + "b" * 64)}),
+            module,
+            integration,
+            {},
+        )
 
     def test_typed_artifacts_in_live_git_repo_authorize_candidate(self) -> None:
         result = self.result(self.authorized_candidate())
@@ -884,6 +963,25 @@ class ModuleCandidateGateTests(unittest.TestCase):
         result = self.result(self.authorized_candidate(absolute_derived_data=True))
         self.assertEqual(result.status, "authorized", result.findings)
 
+    def test_benchmark_baseline_commit_must_be_strict_first_parent_ancestor(self) -> None:
+        candidate = self.authorized_candidate()
+        head = self.git("rev-parse", "HEAD")
+        for cohort in ("leafProofHostedBaseline", "appNoChangeBaseline"):
+            for index in range(3):
+                self.mutate_benchmark_summary(
+                    candidate, cohort, index, lambda row, value=head: row.update(commit=value)
+                )
+                self.mutate_benchmark_result(
+                    candidate,
+                    cohort,
+                    index,
+                    lambda row, value=head: row.update(benchmark_commit=value),
+                )
+        self.refresh_review_fingerprints(candidate)
+        result = self.result(candidate)
+        self.assertEqual(result.status, "rejected")
+        self.assertIn("benchmark baseline commit is not a strict first-parent ancestor", result.findings)
+
     def test_missing_artifact_is_observed_but_tampered_or_invalid_artifact_is_rejected(self) -> None:
         missing = self.authorized_candidate()
         (self.root / missing["artifacts"]["compiler"]["path"]).unlink()
@@ -932,15 +1030,458 @@ class ModuleCandidateGateTests(unittest.TestCase):
 
     def test_policy_authorization_is_derived_and_declared_set_must_match(self) -> None:
         candidate = self.authorized_candidate()
-        result = self.gate.evaluate_policy(self.root, self.policy(candidate))
+        result = self.gate.evaluate_policy(self.root, self.policy(candidate), provider=self.provider)
         self.assertTrue(result.ok, result.findings)
         self.assertEqual(result.authorized_targets, ("AmbitionsHotLeaf",))
 
         policy = self.policy(self.authorized_candidate())
         policy["authorizedFutureTargets"] = []
-        result = self.gate.evaluate_policy(self.root, policy)
+        result = self.gate.evaluate_policy(self.root, policy, provider=self.provider)
         self.assertFalse(result.ok)
         self.assertIn("authorizedFutureTargets does not equal the evaluated authorized target set", result.findings)
+
+    def test_injected_trusted_provider_failure_blocks_authorization(self) -> None:
+        candidate = self.authorized_candidate()
+        provider = FixtureTrustedProvider(
+            self.gate, observed=("trusted provider review authority is unavailable",)
+        )
+        result = self.gate.evaluate_candidate(
+            self.root, self.thresholds(), candidate, provider=provider
+        )
+        self.assertEqual(result.status, "observed")
+        self.assertIn("trusted provider review authority is unavailable", result.findings)
+
+    def test_live_provider_project_and_router_mismatch_helpers_fail_closed(self) -> None:
+        request = self.provider_request()
+        xcodegen_target_types = {
+            request.target: "framework",
+            request.graph["moduleTestTarget"]: "bundle.unit-test",
+            request.graph["integrationTestTarget"]: "bundle.unit-test",
+            "Ambitions": "application",
+        }
+        pbx_target_types = {
+            request.target: "com.apple.product-type.framework",
+            request.graph["moduleTestTarget"]: "com.apple.product-type.bundle.unit-test",
+            request.graph["integrationTestTarget"]: "com.apple.product-type.bundle.unit-test",
+            "Ambitions": "com.apple.product-type.application",
+        }
+        memberships = {path: (request.target,) for path in request.source_files}
+        exact = self.gate.ProjectFacts(
+            xcodegen_nodes=frozenset(request.graph["nodes"]),
+            xcodegen_edges=frozenset(request.graph["edges"]),
+            xcodegen_target_types=xcodegen_target_types,
+            source_truth_nodes=frozenset(request.graph["nodes"]),
+            source_truth_edges=frozenset(request.graph["edges"]),
+            source_truth_memberships=memberships,
+            source_truth_target_types=pbx_target_types,
+            generated_pbx_nodes=frozenset(request.graph["nodes"]),
+            generated_pbx_edges=frozenset(request.graph["edges"]),
+            generated_pbx_memberships=memberships,
+            generated_pbx_target_types=pbx_target_types,
+            target_sources=frozenset(request.source_files),
+            target_dependencies=frozenset(),
+            application_targets=frozenset(request.graph["applicationTargets"]),
+            extension_targets=frozenset(request.graph["extensionTargets"]),
+        )
+        self.assertEqual(self.gate.LiveVerificationProvider.project_findings(request, exact), ())
+
+        adversarial_types = {
+            **exact.xcodegen_target_types,
+            request.target: "bundle.unit-test",
+        }
+        adversarial_pbx_types = {
+            **exact.source_truth_target_types,
+            request.target: "com.apple.product-type.bundle.unit-test",
+        }
+        adversarial = exact._replace(
+            xcodegen_target_types=adversarial_types,
+            source_truth_target_types=adversarial_pbx_types,
+            generated_pbx_target_types=adversarial_pbx_types,
+        )
+        adversarial_findings = self.gate.LiveVerificationProvider.project_findings(
+            request, adversarial
+        )
+        self.assertIn(
+            "live XcodeGen proposed target is not a framework",
+            adversarial_findings,
+        )
+        self.assertIn(
+            "live XcodeGen target product kinds do not match candidate graph roles",
+            adversarial_findings,
+        )
+
+        probes = (
+            (
+                exact._replace(target_sources=exact.target_sources | {"Native/Ambitions/Core/Time/Extra.swift"}),
+                "live XcodeGen target sources do not equal the exact candidate source set",
+            ),
+            (
+                exact._replace(target_dependencies=frozenset({"WrongDependency"})),
+                "live XcodeGen target dependencies do not match the candidate graph",
+            ),
+            (
+                exact._replace(xcodegen_edges=frozenset()),
+                "live XcodeGen target edges do not match the candidate graph",
+            ),
+            (
+                exact._replace(source_truth_nodes=frozenset()),
+                "source-truth generated PBX nodes do not match live XcodeGen target nodes",
+            ),
+            (
+                exact._replace(generated_pbx_nodes=frozenset()),
+                "current generated PBX target nodes do not match source truth",
+            ),
+            (
+                exact._replace(generated_pbx_edges=frozenset()),
+                "current generated PBX target edges do not match source truth",
+            ),
+            (
+                exact._replace(
+                    generated_pbx_memberships={self.paths[0]: (request.target,)}
+                ),
+                "current generated PBX full source memberships do not match source truth",
+            ),
+            (
+                exact._replace(
+                    generated_pbx_target_types={
+                        **pbx_target_types,
+                        request.target: "com.apple.product-type.bundle.unit-test",
+                    }
+                ),
+                "current generated PBX target product types do not match source truth",
+            ),
+            (
+                exact._replace(
+                    generated_pbx_memberships={
+                        self.paths[0]: (request.target, "Ambitions"),
+                        self.paths[1]: (request.target,),
+                    }
+                ),
+                "candidate source does not have exactly one current generated PBX target membership",
+            ),
+        )
+        for facts, finding in probes:
+            with self.subTest(finding=finding):
+                self.assertIn(finding, self.gate.LiveVerificationProvider.project_findings(request, facts))
+
+        relabelled_graph = {**request.graph, "applicationTargets": ()}
+        relabelled_request = request._replace(graph=relabelled_graph)
+        self.assertIn(
+            "live XcodeGen application targets do not match the candidate graph",
+            self.gate.LiveVerificationProvider.project_findings(relabelled_request, exact),
+        )
+
+        hosted_edges = exact.xcodegen_edges | {
+            (request.graph["moduleTestTarget"], "Ambitions"),
+        }
+        hosted_graph = {
+            **request.graph,
+            "edges": hosted_edges,
+            "applicationTargets": (),
+        }
+        hosted_request = request._replace(graph=hosted_graph)
+        hosted_facts = exact._replace(
+            xcodegen_edges=hosted_edges,
+            source_truth_edges=hosted_edges,
+            generated_pbx_edges=hosted_edges,
+        )
+        hosted_findings = self.gate.LiveVerificationProvider.project_findings(
+            hosted_request, hosted_facts
+        )
+        self.assertIn("live XcodeGen application targets do not match the candidate graph", hosted_findings)
+        self.assertIn("live module test target reaches an app or extension", hosted_findings)
+
+        route_facts = copy.deepcopy(request.routes)
+        route_facts[self.paths[0]]["module"] = ("WrongTests/WrongSuite",)
+        self.assertIn(
+            f"live router selectors do not match candidate routes for {self.paths[0]}",
+            self.gate.LiveVerificationProvider.route_findings(request, route_facts),
+        )
+
+    def test_live_project_probe_derives_full_xcodegen_graph_kinds_and_pbx_parity(self) -> None:
+        request = self.provider_request()
+        widget = "AmbitionsWidgetExtension"
+        document = {
+            "targets": {
+                request.target: {
+                    "type": "framework",
+                    "sources": [{"path": path} for path in request.source_files],
+                    "dependencies": [],
+                },
+                request.graph["moduleTestTarget"]: {
+                    "type": "bundle.unit-test",
+                    "sources": [{"path": "Native/AmbitionsModuleTests"}],
+                    "dependencies": [{"target": request.target}],
+                },
+                request.graph["integrationTestTarget"]: {
+                    "type": "bundle.unit-test",
+                    "sources": [{"path": "Native/AmbitionsTests"}],
+                    "dependencies": [{"target": request.target}, {"target": "Ambitions"}],
+                },
+                "Ambitions": {
+                    "type": "application",
+                    "sources": [{"path": "Native/Ambitions"}],
+                    "dependencies": [{"target": request.target}, {"target": widget}],
+                },
+                widget: {
+                    "type": "app-extension",
+                    "sources": [{"path": "Native/AmbitionsWidgetExtension"}],
+                    "dependencies": [],
+                },
+            },
+        }
+        xcodegen_edges = {
+            (request.graph["moduleTestTarget"], request.target),
+            (request.graph["integrationTestTarget"], request.target),
+            (request.graph["integrationTestTarget"], "Ambitions"),
+            ("Ambitions", request.target),
+            ("Ambitions", widget),
+        }
+        pbx_target_types = {
+            request.target: "com.apple.product-type.framework",
+            request.graph["moduleTestTarget"]: "com.apple.product-type.bundle.unit-test",
+            request.graph["integrationTestTarget"]: "com.apple.product-type.bundle.unit-test",
+            "Ambitions": "com.apple.product-type.application",
+            widget: "com.apple.product-type.app-extension",
+        }
+        router = self.gate._load_router_module(ROOT)
+        evidence = router.Evidence(
+            memberships={path: (request.target,) for path in request.source_files},
+            nodes=tuple(sorted(document["targets"])),
+            edges=tuple(sorted(xcodegen_edges)),
+            cycles=(),
+            target_types=pbx_target_types,
+        )
+        captured_argv = []
+
+        def run(argv, **_):
+            captured_argv.extend(argv)
+            return subprocess.CompletedProcess(argv, 0, stdout=json.dumps(document), stderr="")
+
+        class RouterAdapter:
+            load_source_truth_evidence = staticmethod(lambda *_: evidence)
+            load_live_evidence = staticmethod(lambda *_: evidence)
+
+        original_which = self.gate.shutil.which
+        original_run = self.gate.subprocess.run
+        original_loader = self.gate._load_router_module
+        self.gate.shutil.which = lambda _: "/trusted/bin/xcodegen"
+        self.gate.subprocess.run = run
+        self.gate._load_router_module = lambda _: RouterAdapter
+        try:
+            facts = self.gate.LiveVerificationProvider._live_project_facts(request)
+        finally:
+            self.gate.shutil.which = original_which
+            self.gate.subprocess.run = original_run
+            self.gate._load_router_module = original_loader
+
+        self.assertIn("--no-env", captured_argv)
+        self.assertEqual(facts.xcodegen_nodes, frozenset(document["targets"]))
+        self.assertEqual(facts.xcodegen_edges, frozenset(xcodegen_edges))
+        self.assertEqual(
+            facts.xcodegen_target_types,
+            {name: target["type"] for name, target in document["targets"].items()},
+        )
+        self.assertEqual(facts.source_truth_nodes, facts.xcodegen_nodes)
+        self.assertEqual(facts.source_truth_edges, facts.xcodegen_edges)
+        self.assertEqual(facts.source_truth_target_types, pbx_target_types)
+        self.assertEqual(facts.generated_pbx_nodes, facts.source_truth_nodes)
+        self.assertEqual(facts.generated_pbx_edges, facts.source_truth_edges)
+        self.assertEqual(facts.generated_pbx_target_types, pbx_target_types)
+        self.assertEqual(facts.application_targets, frozenset({"Ambitions"}))
+        self.assertEqual(facts.extension_targets, frozenset({widget}))
+
+    def test_live_project_probe_treats_xcodegen_timeout_as_unavailable(self) -> None:
+        request = self.provider_request()
+        original_which = self.gate.shutil.which
+        original_run = self.gate.subprocess.run
+
+        def timeout(*_, **__):
+            raise subprocess.TimeoutExpired("xcodegen", 30)
+
+        self.gate.shutil.which = lambda _: "/trusted/bin/xcodegen"
+        self.gate.subprocess.run = timeout
+        try:
+            with self.assertRaisesRegex(
+                self.gate.ProviderUnavailable,
+                r"could not run live project verification",
+            ):
+                self.gate.LiveVerificationProvider._live_project_facts(request)
+        finally:
+            self.gate.shutil.which = original_which
+            self.gate.subprocess.run = original_run
+
+    def test_live_route_probe_rejects_selector_without_unique_live_suite(self) -> None:
+        request = self.provider_request()
+        router = self.gate._load_router_module(ROOT)
+        config = {
+            "project": "Ambitions.xcodeproj",
+            "projectEvidencePatterns": [],
+            "documentationPatterns": [],
+            "toolingRoutes": [],
+            "membershipRoutes": [],
+            "requiredEdges": [],
+            "testTargets": {
+                "AmbitionsModuleTests": {
+                    "kind": "module",
+                    "scheme": "Ambitions",
+                    "forbiddenReachability": ["Ambitions"],
+                },
+            },
+            "routes": [
+                {
+                    "id": "candidate",
+                    "patterns": list(request.source_files),
+                    "specificity": 100,
+                    "requiredMembership": [request.target],
+                    "module": ["AmbitionsModuleTests/MissingSuite"],
+                    "integration": [],
+                    "ui": [],
+                },
+            ],
+        }
+        evidence = router.Evidence(
+            memberships={path: (request.target,) for path in request.source_files},
+            nodes=("Ambitions", "AmbitionsModuleTests", request.target),
+            edges=(("AmbitionsModuleTests", request.target),),
+            cycles=(),
+        )
+
+        class RouterAdapter:
+            Change = router.Change
+            load_config = staticmethod(lambda _: config)
+            load_live_evidence = staticmethod(lambda *_: evidence)
+            plan_changes = staticmethod(router.plan_changes)
+
+        original_loader = self.gate._load_router_module
+        self.gate._load_router_module = lambda _: RouterAdapter
+        try:
+            with self.assertRaisesRegex(
+                self.gate.ProviderMismatch,
+                r"test_suite_not_unique",
+            ):
+                self.gate.LiveVerificationProvider._live_route_facts(request)
+        finally:
+            self.gate._load_router_module = original_loader
+
+    def test_live_provider_observes_unavailable_external_proofs(self) -> None:
+        request = self.provider_request()
+        project = self.gate.ProjectFacts(
+            xcodegen_nodes=frozenset(request.graph["nodes"]),
+            xcodegen_edges=frozenset(request.graph["edges"]),
+            xcodegen_target_types={
+                request.target: "framework",
+                request.graph["moduleTestTarget"]: "bundle.unit-test",
+                request.graph["integrationTestTarget"]: "bundle.unit-test",
+                "Ambitions": "application",
+            },
+            source_truth_nodes=frozenset(request.graph["nodes"]),
+            source_truth_edges=frozenset(request.graph["edges"]),
+            source_truth_memberships={path: (request.target,) for path in request.source_files},
+            source_truth_target_types={
+                request.target: "com.apple.product-type.framework",
+                request.graph["moduleTestTarget"]: "com.apple.product-type.bundle.unit-test",
+                request.graph["integrationTestTarget"]: "com.apple.product-type.bundle.unit-test",
+                "Ambitions": "com.apple.product-type.application",
+            },
+            generated_pbx_nodes=frozenset(request.graph["nodes"]),
+            generated_pbx_edges=frozenset(request.graph["edges"]),
+            generated_pbx_memberships={path: (request.target,) for path in request.source_files},
+            generated_pbx_target_types={
+                request.target: "com.apple.product-type.framework",
+                request.graph["moduleTestTarget"]: "com.apple.product-type.bundle.unit-test",
+                request.graph["integrationTestTarget"]: "com.apple.product-type.bundle.unit-test",
+                "Ambitions": "com.apple.product-type.application",
+            },
+            target_sources=frozenset(request.source_files),
+            target_dependencies=frozenset(),
+            application_targets=frozenset(request.graph["applicationTargets"]),
+            extension_targets=frozenset(request.graph["extensionTargets"]),
+        )
+        provider = self.gate.LiveVerificationProvider(
+            project_probe=lambda _: project,
+            route_probe=lambda _: copy.deepcopy(request.routes),
+        )
+        result = provider.verify(request)
+        self.assertEqual(result.rejected, ())
+        self.assertIn("trusted live compiler and symbolgraph rederivation is unavailable", result.observed)
+        self.assertIn("trusted xcresult rederivation is unavailable", result.observed)
+        self.assertIn("external trusted review attestation is unavailable", result.observed)
+        self.assertIn("trusted benchmark rederivation is unavailable", result.observed)
+
+        compiler_mismatch = self.gate.LiveVerificationProvider(
+            project_probe=lambda _: project,
+            route_probe=lambda _: copy.deepcopy(request.routes),
+            compiler_probe=lambda _: frozenset(),
+            test_probe=lambda _, proof: proof.identifiers,
+            review_probe=lambda _: True,
+            benchmark_probe=lambda _: True,
+        ).verify(request)
+        self.assertIn(
+            "trusted compiler public declarations do not match candidate API evidence",
+            compiler_mismatch.rejected,
+        )
+
+        xcresult_mismatch = self.gate.LiveVerificationProvider(
+            project_probe=lambda _: project,
+            route_probe=lambda _: copy.deepcopy(request.routes),
+            compiler_probe=lambda _: request.public_declarations,
+            test_probe=lambda _, __: frozenset(),
+            review_probe=lambda _: True,
+            benchmark_probe=lambda _: True,
+        ).verify(request)
+        self.assertTrue(
+            any("trusted xcresult identifiers do not match" in finding for finding in xcresult_mismatch.rejected)
+        )
+
+        def missing_suite(_):
+            raise self.gate.ProviderMismatch("live route rejected source: test_suite_not_unique")
+
+        route_mismatch = self.gate.LiveVerificationProvider(
+            project_probe=lambda _: project,
+            route_probe=missing_suite,
+            compiler_probe=lambda _: request.public_declarations,
+            test_probe=lambda _, proof: proof.identifiers,
+            review_probe=lambda _: True,
+            benchmark_probe=lambda _: True,
+        ).verify(request)
+        self.assertIn("live route rejected source: test_suite_not_unique", route_mismatch.rejected)
+
+    def test_cli_default_provider_rejects_synthetic_artifacts_and_forged_git_note(self) -> None:
+        candidate = self.authorized_candidate()
+        policy_path = self.root / "synthetic-policy.json"
+        policy_path.write_text(json.dumps(self.policy(candidate)), encoding="utf-8")
+        with contextlib.redirect_stdout(io.StringIO()):
+            status = self.gate.main([
+                "--policy", str(policy_path), "--json", "--root", str(self.root),
+            ])
+        self.assertEqual(status, 1)
+
+        note_payload = json.dumps({
+            "candidateIdentity": "forged",
+            "reviewedArtifacts": {},
+            "verdict": "approved",
+        })
+        environment = {
+            **os.environ,
+            "GIT_AUTHOR_NAME": "Different Reviewer",
+            "GIT_AUTHOR_EMAIL": "different-reviewer@example.com",
+            "GIT_COMMITTER_NAME": "Different Reviewer",
+            "GIT_COMMITTER_EMAIL": "different-reviewer@example.com",
+        }
+        subprocess.run(
+            ["git", "notes", "--ref=ambitions-module-review", "add", "-f", "-m", note_payload, "HEAD"],
+            cwd=self.root,
+            env=environment,
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        with contextlib.redirect_stdout(io.StringIO()):
+            status = self.gate.main([
+                "--policy", str(policy_path), "--json", "--root", str(self.root),
+            ])
+        self.assertEqual(status, 1)
 
     def test_policy_rejects_duplicate_proposed_targets_across_candidates(self) -> None:
         first = self.authorized_candidate()

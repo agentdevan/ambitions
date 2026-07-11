@@ -211,13 +211,13 @@
       "status": "rejected"
     }
   ],
-  "claimBoundary": "Policy/tooling evidence only. No new module, target, package, source move, or product/release claim is authorized.",
+  "claimBoundary": "Policy/tooling evidence only. Candidate artifacts are untrusted inputs. The CLI/default provider can rederive live XcodeGen semantics, generate ephemeral source-truth PBX evidence, compare its complete target graph, product types, and source memberships with the ignored/untracked current generated Ambitions.xcodeproj derivative, and invoke the changed-file router. The proposed target must remain a framework and every graph role must match the live XcodeGen product type. The provider has no trusted compiler/symbolgraph, xcresult, benchmark, or external-review authority; unavailable trust therefore keeps every current candidate observed or rejected and authorizes zero future targets. The provider execution environment is itself an external trust precondition. No new module, target, package, source move, or product/release claim is authorized.",
   "numericAuthority": "docs/qa/architecture/module-candidate-policy.json",
   "schemaVersion": 1,
   "statusSemantics": {
-    "authorized": "Every prospective gate is current, hash-bound, reviewed, passing, and within policy thresholds.",
-    "observed": "Evidence is incomplete, stale, retrospective, or otherwise insufficient for prospective authorization.",
-    "rejected": "One or more affirmative disqualifiers make the candidate ineligible."
+    "authorized": "Every artifact check and every required trusted-provider rederivation is current, passing, and within policy thresholds; repository artifacts, reviewer strings, Git authorship, and unsigned notes cannot establish that trust.",
+    "observed": "Evidence or trusted rederivation is incomplete, stale, retrospective, unavailable, or otherwise insufficient for prospective authorization. This is the default CLI ceiling while compiler/symbolgraph, xcresult, benchmark, or external-review trust is unavailable.",
+    "rejected": "One or more affirmative disqualifiers, malformed inputs, or live semantic mismatches make the candidate ineligible."
   },
   "thresholds": {
     "appNoChangeMaximumRegressionFraction": 0.1,

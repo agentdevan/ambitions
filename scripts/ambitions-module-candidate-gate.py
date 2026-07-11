@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.util
 import json
 import math
 import plistlib
@@ -12,6 +13,7 @@ import re
 import shutil
 import statistics
 import subprocess
+import sys
 from collections import Counter
 from pathlib import Path, PurePosixPath
 from typing import Any, NamedTuple
@@ -36,6 +38,16 @@ BENCHMARK_COHORTS = (
 TEST_BENCHMARK_COHORTS = {"moduleTest", "leafProofCandidate", "leafProofHostedBaseline"}
 AUTHORITY_PATHS = ("project.yml", "scripts/ambitions-changed-file-test-routes.json")
 TARGET_PATTERN = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
+XCODEGEN_PBX_PRODUCT_TYPES = {
+    "application": "com.apple.product-type.application",
+    "app-extension": "com.apple.product-type.app-extension",
+    "bundle": "com.apple.product-type.bundle",
+    "bundle.unit-test": "com.apple.product-type.bundle.unit-test",
+    "bundle.ui-testing": "com.apple.product-type.bundle.ui-testing",
+    "dynamic-library": "com.apple.product-type.library.dynamic",
+    "framework": "com.apple.product-type.framework",
+    "static-library": "com.apple.product-type.library.static",
+}
 DISQUALIFIER_FINDINGS = {
     "folder_derived": "source set is folder-derived rather than explicit",
     "compiler_closure_failed": "compiler closure did not pass",
@@ -67,6 +79,60 @@ class GitContext(NamedTuple):
     commits: tuple[str, ...]
     touches: dict[str, int]
     authority_hashes: dict[str, str]
+
+
+class ProviderResult(NamedTuple):
+    observed: tuple[str, ...]
+    rejected: tuple[str, ...]
+
+
+class TestProof(NamedTuple):
+    result_id: str
+    identifiers: frozenset[str]
+    bundle_path: str
+    raw_log_path: str
+    target: str
+    lane: str
+
+
+class VerificationRequest(NamedTuple):
+    root: Path
+    context: GitContext
+    candidate_identity: str
+    target: str
+    source_files: tuple[str, ...]
+    graph: dict[str, Any]
+    routes: dict[str, dict[str, tuple[str, ...]]]
+    public_declarations: frozenset[tuple[str, str]]
+    module_test: TestProof
+    integration_test: TestProof
+    evidence_fingerprints: dict[str, str]
+
+
+class ProjectFacts(NamedTuple):
+    xcodegen_nodes: frozenset[str]
+    xcodegen_edges: frozenset[tuple[str, str]]
+    xcodegen_target_types: dict[str, str]
+    source_truth_nodes: frozenset[str]
+    source_truth_edges: frozenset[tuple[str, str]]
+    source_truth_memberships: dict[str, tuple[str, ...]]
+    source_truth_target_types: dict[str, str]
+    generated_pbx_nodes: frozenset[str]
+    generated_pbx_edges: frozenset[tuple[str, str]]
+    generated_pbx_memberships: dict[str, tuple[str, ...]]
+    generated_pbx_target_types: dict[str, str]
+    target_sources: frozenset[str]
+    target_dependencies: frozenset[str]
+    application_targets: frozenset[str]
+    extension_targets: frozenset[str]
+
+
+class ProviderUnavailable(RuntimeError):
+    pass
+
+
+class ProviderMismatch(RuntimeError):
+    pass
 
 
 def _mapping(value: Any, label: str) -> dict[str, Any]:
@@ -470,8 +536,11 @@ def _parse_graph(payload: dict[str, Any], target: str, files: list[str], rejecte
     if reachable.intersection(set(applications + extensions)):
         _append(rejected, "module tests can reach an application or extension target")
     return {
-        "nodes": set(kinds), "dependencies": sorted(adjacency[target]),
+        "nodes": set(kinds), "kinds": dict(kinds), "edges": set(edges),
+        "memberships": {path: tuple(targets) for path, targets in memberships.items()},
+        "dependencies": sorted(adjacency[target]),
         "moduleTestTarget": module_test, "integrationTestTarget": integration_test,
+        "applicationTargets": tuple(applications), "extensionTargets": tuple(extensions),
     }
 
 
@@ -560,15 +629,15 @@ def _evaluate_public_api(
     fingerprints: dict[str, str],
     observed: list[str],
     rejected: list[str],
-) -> None:
+) -> frozenset[tuple[str, str]]:
     if payload is None:
-        return
+        return frozenset()
 
     symbol_ref = payload.get("symbolGraph")
     _remember_reference(symbol_ref, fingerprints)
     contents = _reference_bytes(root, "public API symbol graph", symbol_ref, observed, rejected)
     if contents is None:
-        return
+        return frozenset()
 
     def parse():
         symbol_graph = _mapping(_json_loads(contents), "symbol graph")
@@ -608,13 +677,14 @@ def _evaluate_public_api(
 
     parsed = _schema(rejected, "public API", parse)
     if parsed is None:
-        return
+        return frozenset()
     declarations, contracts = parsed
     counts = Counter((usr, signature) for usr, signature, _ in contracts)
     if set(counts) != set(declarations) or any(counts[key] != 1 for key in declarations):
         _append(rejected, "compiler-public declarations lack exactly one approved consumer contract")
     if graph is not None and any(consumer not in graph["nodes"] for _, _, consumer in contracts):
         _append(rejected, "public API contract names an unknown consumer target")
+    return frozenset(declarations)
 
 
 def _evaluate_routes(
@@ -623,9 +693,9 @@ def _evaluate_routes(
     module_executed: set[str],
     integration_executed: set[str],
     rejected: list[str],
-) -> None:
+) -> dict[str, dict[str, tuple[str, ...]]]:
     if payload is None:
-        return
+        return {}
 
     def parse():
         rows = [_mapping(row, "changed-file route") for row in _list(payload.get("routes"), "routes")]
@@ -641,7 +711,7 @@ def _evaluate_routes(
 
     rows = _schema(rejected, "routes", parse)
     if rows is None:
-        return
+        return {}
     sources = [source for source, _, _ in rows]
     if sorted(sources) != sorted(files) or len(sources) != len(set(sources)):
         _append(rejected, "changed-file routes do not cover the exact source set")
@@ -653,6 +723,10 @@ def _evaluate_routes(
         _append(rejected, "changed-file route names a module test that did not execute")
     if any(identifier not in integration_executed for _, _, hosted in rows for identifier in hosted):
         _append(rejected, "changed-file route names a hosted integration test that did not execute")
+    return {
+        source: {"module": tuple(module), "integration": tuple(hosted)}
+        for source, module, hosted in rows
+    }
 
 
 def _parse_test(
@@ -664,7 +738,7 @@ def _parse_test(
     fingerprints: dict[str, str],
     observed: list[str],
     rejected: list[str],
-) -> tuple[str, set[str]] | None:
+) -> TestProof | None:
     if payload is None:
         return None
 
@@ -702,7 +776,7 @@ def _parse_test(
         bundle_path.resolve().relative_to(root.resolve())
     except ValueError:
         _append(rejected, f"{label} test result bundle is outside the repository root")
-        return result_id, set(identifiers)
+        return TestProof(result_id, frozenset(identifiers), bundle, "", observed_target or "", observed_lane or "")
     if not bundle_path.is_dir():
         _append(observed, f"{label} test result bundle is missing")
     for reference in (info_ref, log_ref):
@@ -744,7 +818,15 @@ def _parse_test(
                 _append(rejected, f"{label} test identifiers do not match raw log")
             if len(identifiers) != executed:
                 _append(rejected, f"{label} test identifier count does not match executed count")
-    return result_id, set(identifiers)
+    raw_log_path = log_ref.get("path", "") if isinstance(log_ref, dict) else ""
+    return TestProof(
+        result_id,
+        frozenset(identifiers),
+        bundle,
+        raw_log_path,
+        observed_target if isinstance(observed_target, str) else "",
+        observed_lane if isinstance(observed_lane, str) else "",
+    )
 
 
 def _reference_map(artifacts: dict[str, Any]) -> dict[str, str]:
@@ -990,8 +1072,8 @@ def _evaluate_benchmarks(
                 _append(rejected, "benchmark commit must be a full live Git SHA")
                 valid = False
             elif cohort.endswith("Baseline"):
-                if _git(root, "merge-base", "--is-ancestor", commit, context.head) is None:
-                    _append(rejected, "benchmark baseline commit is not a live Git ancestor")
+                if commit not in context.commits[1:]:
+                    _append(rejected, "benchmark baseline commit is not a strict first-parent ancestor")
                     valid = False
                 baseline_commits.add(commit)
             elif commit != context.head:
@@ -1059,6 +1141,330 @@ def _evaluate_benchmarks(
         _append(rejected, "app no-change worst regression exceeds policy maximum")
 
 
+def _load_router_module(root: Path):
+    path = root / "scripts/ambitions-changed-file-test-router.py"
+    if not path.is_file():
+        raise ProviderUnavailable("live changed-file router is missing")
+    name = f"ambitions_candidate_router_{hashlib.sha256(str(root).encode()).hexdigest()[:12]}"
+    spec = importlib.util.spec_from_file_location(name, path)
+    if spec is None or spec.loader is None:
+        raise ProviderUnavailable("live changed-file router cannot be loaded")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
+    try:
+        spec.loader.exec_module(module)
+    except (OSError, ImportError, ValueError) as error:
+        raise ProviderUnavailable(f"live changed-file router cannot be loaded: {error}") from error
+    return module
+
+
+class LiveVerificationProvider:
+    """Semantic checks whose caller owns the execution-environment trust boundary."""
+
+    def __init__(
+        self,
+        *,
+        project_probe=None,
+        route_probe=None,
+        compiler_probe=None,
+        test_probe=None,
+        review_probe=None,
+        benchmark_probe=None,
+    ) -> None:
+        self.project_probe = project_probe or self._live_project_facts
+        self.route_probe = route_probe or self._live_route_facts
+        self.compiler_probe = compiler_probe
+        self.test_probe = test_probe
+        self.review_probe = review_probe
+        self.benchmark_probe = benchmark_probe
+
+    @staticmethod
+    def _live_project_facts(request: VerificationRequest) -> ProjectFacts:
+        xcodegen = shutil.which("xcodegen")
+        if xcodegen is None:
+            raise ProviderUnavailable("xcodegen is unavailable for live project verification")
+        try:
+            completed = subprocess.run(
+                [
+                    xcodegen, "dump", "--no-env", "-s", str(request.root / "project.yml"),
+                    "-t", "parsed-json",
+                ],
+                cwd=request.root,
+                capture_output=True,
+                text=True,
+                timeout=30,
+            )
+        except (OSError, subprocess.TimeoutExpired) as error:
+            raise ProviderUnavailable(f"xcodegen could not run live project verification: {error}") from error
+        if completed.returncode != 0:
+            raise ProviderUnavailable("xcodegen could not parse live project.yml")
+        try:
+            document = _mapping(_json_loads(completed.stdout), "xcodegen parsed project")
+            raw_targets = _mapping(document.get("targets"), "xcodegen targets")
+            targets = {
+                name: _mapping(value, f"xcodegen target {name}")
+                for name, value in raw_targets.items()
+                if isinstance(name, str) and name
+            }
+            if len(targets) != len(raw_targets):
+                raise EvidenceFormatError("xcodegen target names must be nonempty strings")
+            target = _mapping(targets.get(request.target), f"xcodegen target {request.target}")
+            target_types: dict[str, str] = {}
+            xcodegen_edges: set[tuple[str, str]] = set()
+            for name, specification in targets.items():
+                target_type = specification.get("type")
+                if not isinstance(target_type, str) or not target_type:
+                    raise EvidenceFormatError(f"xcodegen target {name} has no typed product kind")
+                target_types[name] = target_type
+                for raw_dependency in _list(
+                    specification.get("dependencies"), f"xcodegen target {name} dependencies"
+                ):
+                    dependency = _mapping(raw_dependency, f"xcodegen target {name} dependency")
+                    dependency_target = dependency.get("target")
+                    if dependency_target is None:
+                        continue
+                    if not isinstance(dependency_target, str) or dependency_target not in targets:
+                        raise EvidenceFormatError(
+                            f"xcodegen target {name} has an invalid target dependency"
+                        )
+                    xcodegen_edges.add((name, dependency_target))
+            source_rows = [
+                _mapping(row, "xcodegen source")
+                for row in _list(target.get("sources"), "xcodegen sources")
+            ]
+            source_paths = frozenset(row.get("path") for row in source_rows if isinstance(row.get("path"), str))
+            if len(source_paths) != len(source_rows):
+                raise EvidenceFormatError("candidate target has non-path source entries")
+            dependencies = frozenset(
+                destination for source, destination in xcodegen_edges if source == request.target
+            )
+            application_targets = frozenset(
+                name for name, target_type in target_types.items() if target_type == "application"
+            )
+            extension_targets = frozenset(
+                name for name, target_type in target_types.items() if target_type.endswith("-extension")
+            )
+        except EvidenceFormatError as error:
+            raise ProviderMismatch(f"live project.yml target evidence is invalid: {error}") from error
+
+        router = _load_router_module(request.root)
+        project = request.root / "Ambitions.xcodeproj"
+        try:
+            source_truth = router.load_source_truth_evidence(
+                request.root, request.root / "project.yml"
+            )
+            generated_pbx = router.load_live_evidence(request.root, project)
+        except Exception as error:
+            raise ProviderUnavailable(f"generated PBX evidence is unavailable: {error}") from error
+        if source_truth.target_types is None or generated_pbx.target_types is None:
+            raise ProviderUnavailable("generated PBX target product types are unavailable")
+        return ProjectFacts(
+            frozenset(targets),
+            frozenset(xcodegen_edges),
+            dict(target_types),
+            frozenset(source_truth.nodes),
+            frozenset(source_truth.edges),
+            dict(source_truth.memberships),
+            dict(source_truth.target_types),
+            frozenset(generated_pbx.nodes),
+            frozenset(generated_pbx.edges),
+            dict(generated_pbx.memberships),
+            dict(generated_pbx.target_types),
+            source_paths,
+            dependencies,
+            application_targets,
+            extension_targets,
+        )
+
+    @staticmethod
+    def _live_route_facts(request: VerificationRequest) -> dict[str, dict[str, tuple[str, ...]]]:
+        router = _load_router_module(request.root)
+        try:
+            config = router.load_config(request.root / "scripts/ambitions-changed-file-test-routes.json")
+            evidence = router.load_live_evidence(request.root, request.root / config["project"])
+        except Exception as error:
+            raise ProviderUnavailable(f"live route authority is unavailable: {error}") from error
+        facts: dict[str, dict[str, tuple[str, ...]]] = {}
+        for path in request.source_files:
+            plan = router.plan_changes(request.root, [router.Change("M", path)], config, evidence)
+            if plan.get("status") == "invalid":
+                codes = sorted({finding.get("code", "unknown") for finding in plan.get("findings", [])})
+                raise ProviderMismatch(f"live route rejected {path}: {', '.join(codes)}")
+            lanes = {lane["kind"]: tuple(lane.get("tests", [])) for lane in plan.get("lanes", [])}
+            facts[path] = {
+                "module": lanes.get("module", ()),
+                "integration": lanes.get("integration", ()),
+            }
+        return facts
+
+    @staticmethod
+    def _xcodegen_roles(request: VerificationRequest, target_types: dict[str, str]) -> dict[str, str]:
+        module_target = request.graph.get("moduleTestTarget")
+        integration_target = request.graph.get("integrationTestTarget")
+        roles: dict[str, str] = {}
+        for name, target_type in target_types.items():
+            if target_type == "application":
+                roles[name] = "application"
+            elif target_type.endswith("-extension"):
+                roles[name] = "extension"
+            elif target_type == "bundle.unit-test":
+                if name == module_target:
+                    roles[name] = "module-test"
+                elif name == integration_target:
+                    roles[name] = "integration-test"
+                else:
+                    roles[name] = "test"
+            elif target_type == "bundle.ui-testing":
+                roles[name] = "ui-test"
+            else:
+                roles[name] = "production"
+        return roles
+
+    @staticmethod
+    def project_findings(request: VerificationRequest, facts: ProjectFacts) -> tuple[str, ...]:
+        findings: list[str] = []
+        expected_sources = frozenset(request.source_files)
+        if facts.target_sources != expected_sources:
+            findings.append("live XcodeGen target sources do not equal the exact candidate source set")
+        if facts.target_dependencies != frozenset(request.graph.get("dependencies", [])):
+            findings.append("live XcodeGen target dependencies do not match the candidate graph")
+        if facts.xcodegen_nodes != frozenset(request.graph.get("nodes", set())):
+            findings.append("live XcodeGen target nodes do not match the candidate graph")
+        if facts.xcodegen_edges != frozenset(request.graph.get("edges", set())):
+            findings.append("live XcodeGen target edges do not match the candidate graph")
+        if facts.xcodegen_target_types.get(request.target) != "framework":
+            findings.append("live XcodeGen proposed target is not a framework")
+        expected_roles = LiveVerificationProvider._xcodegen_roles(
+            request, facts.xcodegen_target_types
+        )
+        if expected_roles != request.graph.get("kinds", {}):
+            findings.append("live XcodeGen target product kinds do not match candidate graph roles")
+        if facts.source_truth_nodes != facts.xcodegen_nodes:
+            findings.append("source-truth generated PBX nodes do not match live XcodeGen target nodes")
+        if facts.source_truth_edges != facts.xcodegen_edges:
+            findings.append("source-truth generated PBX edges do not match live XcodeGen target edges")
+        expected_product_types = {
+            name: XCODEGEN_PBX_PRODUCT_TYPES[target_type]
+            for name, target_type in facts.xcodegen_target_types.items()
+            if target_type in XCODEGEN_PBX_PRODUCT_TYPES
+        }
+        if len(expected_product_types) != len(facts.xcodegen_target_types):
+            findings.append("live XcodeGen contains an unsupported target product type")
+        elif facts.source_truth_target_types != expected_product_types:
+            findings.append("source-truth generated PBX target product types do not match XcodeGen")
+        if facts.generated_pbx_nodes != facts.source_truth_nodes:
+            findings.append("current generated PBX target nodes do not match source truth")
+        if facts.generated_pbx_edges != facts.source_truth_edges:
+            findings.append("current generated PBX target edges do not match source truth")
+        if facts.generated_pbx_memberships != facts.source_truth_memberships:
+            findings.append("current generated PBX full source memberships do not match source truth")
+        if facts.generated_pbx_target_types != facts.source_truth_target_types:
+            findings.append("current generated PBX target product types do not match source truth")
+        if facts.application_targets != frozenset(request.graph.get("applicationTargets", ())):
+            findings.append("live XcodeGen application targets do not match the candidate graph")
+        if facts.extension_targets != frozenset(request.graph.get("extensionTargets", ())):
+            findings.append("live XcodeGen extension targets do not match the candidate graph")
+        target_members = frozenset(
+            path
+            for path, targets in facts.generated_pbx_memberships.items()
+            if request.target in targets
+        )
+        if target_members != expected_sources:
+            findings.append("current generated PBX candidate target has missing or extra source membership")
+        if any(
+            facts.generated_pbx_memberships.get(path) != (request.target,)
+            for path in request.source_files
+        ):
+            findings.append(
+                "candidate source does not have exactly one current generated PBX target membership"
+            )
+
+        adjacency: dict[str, set[str]] = {node: set() for node in facts.source_truth_nodes}
+        for source, destination in facts.source_truth_edges:
+            adjacency.setdefault(source, set()).add(destination)
+
+        def reachable(start: str) -> set[str]:
+            reached: set[str] = set()
+            pending = list(adjacency.get(start, ()))
+            while pending:
+                node = pending.pop()
+                if node not in reached:
+                    reached.add(node)
+                    pending.extend(set(adjacency.get(node, ())) - reached)
+            return reached
+
+        module_target = request.graph.get("moduleTestTarget")
+        integration_target = request.graph.get("integrationTestTarget")
+        module_reached = reachable(module_target) if isinstance(module_target, str) else set()
+        integration_reached = reachable(integration_target) if isinstance(integration_target, str) else set()
+        if request.target not in module_reached:
+            findings.append("live module test target does not reach candidate target")
+        forbidden = set(facts.application_targets) | set(facts.extension_targets)
+        if module_reached.intersection(forbidden):
+            findings.append("live module test target reaches an app or extension")
+        if request.target not in integration_reached:
+            findings.append("live integration test target does not reach candidate target")
+        return tuple(findings)
+
+    @staticmethod
+    def route_findings(
+        request: VerificationRequest,
+        facts: dict[str, dict[str, tuple[str, ...]]],
+    ) -> tuple[str, ...]:
+        findings = []
+        if set(facts) != set(request.source_files):
+            findings.append("live router does not cover the exact candidate source set")
+        for path in request.source_files:
+            if facts.get(path) != request.routes.get(path):
+                findings.append(f"live router selectors do not match candidate routes for {path}")
+        return tuple(findings)
+
+    def verify(self, request: VerificationRequest) -> ProviderResult:
+        observed: list[str] = []
+        rejected: list[str] = []
+        try:
+            project = self.project_probe(request)
+        except ProviderUnavailable as error:
+            _append(observed, str(error))
+        except ProviderMismatch as error:
+            _append(rejected, str(error))
+        else:
+            for finding in self.project_findings(request, project):
+                _append(rejected, finding)
+        try:
+            routes = self.route_probe(request)
+        except ProviderUnavailable as error:
+            _append(observed, str(error))
+        except ProviderMismatch as error:
+            _append(rejected, str(error))
+        else:
+            for finding in self.route_findings(request, routes):
+                _append(rejected, finding)
+
+        if self.compiler_probe is None:
+            _append(observed, "trusted live compiler and symbolgraph rederivation is unavailable")
+        else:
+            declarations = self.compiler_probe(request)
+            if declarations is None:
+                _append(observed, "trusted live compiler and symbolgraph rederivation is unavailable")
+            elif frozenset(declarations) != request.public_declarations:
+                _append(rejected, "trusted compiler public declarations do not match candidate API evidence")
+        if self.test_probe is None:
+            _append(observed, "trusted xcresult rederivation is unavailable")
+        else:
+            for proof in (request.module_test, request.integration_test):
+                identifiers = self.test_probe(request, proof)
+                if identifiers is None:
+                    _append(observed, f"trusted xcresult rederivation is unavailable for {proof.lane}")
+                elif frozenset(identifiers) != proof.identifiers:
+                    _append(rejected, f"trusted xcresult identifiers do not match {proof.lane} evidence")
+        if self.review_probe is None or self.review_probe(request) is not True:
+            _append(observed, "external trusted review attestation is unavailable")
+        if self.benchmark_probe is None or self.benchmark_probe(request) is not True:
+            _append(observed, "trusted benchmark rederivation is unavailable")
+        return ProviderResult(tuple(observed), tuple(rejected))
+
+
 def _validate_supporting(root: Path, raw: Any, observed: list[str], rejected: list[str]) -> None:
     if raw is None:
         return
@@ -1066,7 +1472,13 @@ def _validate_supporting(root: Path, raw: Any, observed: list[str], rejected: li
         _reference_bytes(root, "supporting evidence", reference, observed, rejected, missing_is_observed=False)
 
 
-def evaluate_candidate(root: Path, thresholds: dict[str, Any], candidate: dict[str, Any]) -> CandidateResult:
+def evaluate_candidate(
+    root: Path,
+    thresholds: dict[str, Any],
+    candidate: dict[str, Any],
+    *,
+    provider=None,
+) -> CandidateResult:
     candidate = _mapping(candidate, "candidate")
     candidate_id, declared, target = candidate.get("id"), candidate.get("status"), candidate.get("proposedTarget")
     if not isinstance(candidate_id, str) or not candidate_id:
@@ -1154,7 +1566,9 @@ def evaluate_candidate(root: Path, thresholds: dict[str, Any], candidate: dict[s
                 _evaluate_history(history, context, thresholds, files, rejected)
                 graph = _parse_graph(graph_payload, target, files, rejected) if graph_payload else None
                 _evaluate_compiler(root, compiler, target, files, graph, fingerprints, observed, rejected)
-                _evaluate_public_api(api, root, target, graph, fingerprints, observed, rejected)
+                public_declarations = _evaluate_public_api(
+                    api, root, target, graph, fingerprints, observed, rejected
+                )
                 module_proof = _parse_test(
                     root, module_tests, "module", "module",
                     graph["moduleTestTarget"] if graph else None,
@@ -1167,7 +1581,9 @@ def evaluate_candidate(root: Path, thresholds: dict[str, Any], candidate: dict[s
                 )
                 module_ids = module_proof[1] if module_proof else set()
                 integration_ids = integration_proof[1] if integration_proof else set()
-                _evaluate_routes(routes, files, module_ids, integration_ids, rejected)
+                route_facts = _evaluate_routes(
+                    routes, files, module_ids, integration_ids, rejected
+                )
                 if module_proof is not None and integration_proof is not None and module_proof[0] == integration_proof[0]:
                     _append(rejected, "test result identities are replayed")
                 _evaluate_benchmarks(
@@ -1176,6 +1592,31 @@ def evaluate_candidate(root: Path, thresholds: dict[str, Any], candidate: dict[s
                 )
                 review = load("independent review", artifacts.get("review"), "review")
                 _evaluate_review(review, fingerprints, bool(observed), rejected)
+                if graph is not None and module_proof is not None and integration_proof is not None:
+                    request = VerificationRequest(
+                        root,
+                        context,
+                        identity,
+                        target,
+                        tuple(sorted(files)),
+                        graph,
+                        route_facts,
+                        public_declarations,
+                        module_proof,
+                        integration_proof,
+                        dict(fingerprints),
+                    )
+                    verifier = provider if provider is not None else LiveVerificationProvider()
+                    try:
+                        verification = verifier.verify(request)
+                    except Exception as error:
+                        raise EvidenceFormatError(f"trusted verification provider failed: {error}") from error
+                    if not isinstance(verification, ProviderResult):
+                        raise EvidenceFormatError("trusted verification provider returned an invalid result")
+                    for finding in verification.observed:
+                        _append(observed, finding)
+                    for finding in verification.rejected:
+                        _append(rejected, finding)
     status = "rejected" if rejected else "observed" if observed else "authorized"
     return CandidateResult(candidate_id, declared, status, tuple(rejected + observed), target)
 
@@ -1201,7 +1642,7 @@ def _validate_thresholds(raw: Any) -> dict[str, Any]:
     return thresholds
 
 
-def evaluate_policy(root: Path, policy: dict[str, Any]) -> PolicyResult:
+def evaluate_policy(root: Path, policy: dict[str, Any], *, provider=None) -> PolicyResult:
     policy = _mapping(policy, "policy")
     if type(policy.get("schemaVersion")) is not int or policy["schemaVersion"] != 1:
         raise EvidenceFormatError("unsupported policy schemaVersion")
@@ -1217,7 +1658,10 @@ def evaluate_policy(root: Path, policy: dict[str, Any]) -> PolicyResult:
         raise EvidenceFormatError("candidate proposedTarget must be a valid Swift target identifier")
     if len(set(proposed)) != len(proposed):
         raise EvidenceFormatError("candidate proposedTarget values must be unique")
-    results = tuple(evaluate_candidate(root, thresholds, candidate) for candidate in candidates_raw)
+    results = tuple(
+        evaluate_candidate(root, thresholds, candidate, provider=provider)
+        for candidate in candidates_raw
+    )
     ids = [result.candidate_id for result in results]
     if len(set(ids)) != len(ids):
         raise EvidenceFormatError("candidate ids must be unique")
