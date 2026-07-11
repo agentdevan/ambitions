@@ -562,6 +562,7 @@ TEST_CMD=(
   -skipMacroValidation
   -disableAutomaticPackageResolution
   -onlyUsePackageVersionsFromResolvedFile
+  -skipPackageUpdates
   -project Ambitions.xcodeproj
   -scheme "$RESOLVED_SCHEME"
   -sdk iphonesimulator

@@ -192,6 +192,7 @@ BUILD_CMD=(
   -skipMacroValidation
   -disableAutomaticPackageResolution
   -onlyUsePackageVersionsFromResolvedFile
+  -skipPackageUpdates
   -project Ambitions.xcodeproj
   -scheme "$SCHEME"
   -sdk iphonesimulator

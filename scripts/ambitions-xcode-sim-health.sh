@@ -139,23 +139,6 @@ fail_health() {
   exit "$exit_code"
 }
 
-DEVICES=""
-if ! capture_bounded DEVICES "$SIMCTL_TIMEOUT" xcrun simctl list devices available; then
-  if (( REPAIR == 1 )); then
-    reset_simctl_transport_for_retry
-    if capture_bounded DEVICES "$SIMCTL_TIMEOUT" xcrun simctl list devices available; then
-      :
-    else
-      fail_health "simctl_unresponsive" "simctl list devices available exceeded ${SIMCTL_TIMEOUT} after transport reset" 25
-    fi
-  else
-    fail_health "simctl_unresponsive" "simctl list devices available exceeded ${SIMCTL_TIMEOUT}" 25
-  fi
-fi
-if [[ -z "$DEVICES" ]]; then
-  fail_health "simctl_unavailable" "simctl list devices available returned no output" 1
-fi
-
 ALL_DEVICES=""
 if ! capture_bounded ALL_DEVICES "$SIMCTL_TIMEOUT" xcrun simctl list devices; then
   if (( REPAIR == 1 )); then
@@ -172,6 +155,7 @@ fi
 if [[ -z "$ALL_DEVICES" ]]; then
   fail_health "simctl_unavailable" "simctl list devices returned no output" 1
 fi
+DEVICES="$ALL_DEVICES"
 
 booted_udids() {
   awk '/[0-9A-Fa-f-]{36}/ && /\(Booted\)/ {

@@ -140,6 +140,20 @@ esac
         self.assertEqual(payload.get("selection_source"), "mcp_profile_udid")
         self.assertEqual(payload.get("exact_name_match_count"), 2)
 
+    def test_health_uses_one_simctl_device_inventory(self):
+        devices = device_listing(("iPhone 17 Pro Max", MCP_UDID, "Booted"))
+        env = self.health_env(devices)
+
+        result, payload = self.run_health(env)
+
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        inventory_calls = [
+            line
+            for line in self.xcrun_log.read_text(encoding="utf-8").splitlines()
+            if line.startswith("simctl list devices")
+        ]
+        self.assertEqual(inventory_calls, ["simctl list devices"])
+
     def test_duplicate_exact_name_without_udid_fails_structurally(self):
         devices = device_listing(
             ("iPhone 17", MCP_UDID, "Booted"),
@@ -643,11 +657,14 @@ done
         canonical = str(REPO_ROOT / ".codex/DerivedData/Ambitions")
         config = MCP_CONFIG.read_text(encoding="utf-8")
         focused = FOCUSED_RUNNER.read_text(encoding="utf-8")
+        prebuild = BUILD_FOR_TESTING.read_text(encoding="utf-8")
 
         self.assertIn(f"derivedDataPath: {canonical}", config)
         self.assertNotIn("output/DerivedData-XcodeBuildMCP", config)
         self.assertIn('DERIVED_DATA="$REPO_ROOT/.codex/DerivedData/Ambitions"', focused)
         self.assertIn('--test-launch-timeout "$TEST_LAUNCH_TIMEOUT"', focused)
+        self.assertIn("-skipPackageUpdates", focused)
+        self.assertIn("-skipPackageUpdates", prebuild)
 
     def test_focused_runner_batches_repeated_only_testing_filters_in_one_xcodebuild(self):
         env = self.focused_env()
