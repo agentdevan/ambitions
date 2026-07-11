@@ -273,11 +273,6 @@ run_with_test_launch_monitor() {
   esac
 
   if [[ -n "$termination_reason" ]]; then
-    if [[ "$termination_reason" == "test_launch_timeout" ]]; then
-      echo "XCODEBUILD_TEST_LAUNCH_TIMEOUT=1" | tee -a "$monitor_log" >&2
-    else
-      echo "XCODEBUILD_SIMULATOR_LAUNCH_FAILURE=1" | tee -a "$monitor_log" >&2
-    fi
     terminate_owned_process_tree "$runner_pid"
   fi
 
@@ -285,9 +280,11 @@ run_with_test_launch_monitor() {
   wait_status=$?
 
   if [[ "$termination_reason" == "test_launch_timeout" ]]; then
+    echo "XCODEBUILD_TEST_LAUNCH_TIMEOUT=1" | tee -a "$monitor_log" >&2
     return 124
   fi
   if [[ "$termination_reason" == "simulator_launcher_failure" ]]; then
+    echo "XCODEBUILD_SIMULATOR_LAUNCH_FAILURE=1" | tee -a "$monitor_log" >&2
     return 65
   fi
   if [[ -s "$MONITOR_STATUS_FILE" ]]; then

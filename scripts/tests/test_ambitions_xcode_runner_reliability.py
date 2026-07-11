@@ -317,6 +317,41 @@ echo "Executed ${FAKE_EXECUTED_TESTS:-2} tests, with 0 failures (0 unexpected) i
         )
         self.assertEqual(json.loads(classified.stdout)["classification"], "simulator_launcher_failure")
 
+    def test_launch_timeout_marker_survives_late_pipeline_log_flush(self):
+        env = self.install_fake_timeout_and_xcodebuild("sleep 4\nexit 0\n")
+        self._write_executable(
+            "tee",
+            r'''#!/bin/sh
+set -eu
+if [ "${1:-}" = "-a" ]; then
+  exec /usr/bin/tee "$@"
+fi
+target="${1:?missing log path}"
+trap 'printf "late pipeline flush\n" > "$target"; exit 143' TERM
+while :; do
+  sleep 0.05
+done
+''',
+        )
+        log = self.root / "late-pipeline-flush.log"
+
+        result, elapsed = self.run_bounded(env, log, "1s")
+
+        self.assertEqual(result.returncode, 124, result.stdout + result.stderr)
+        self.assertLess(elapsed, 3.0)
+        log_text = log.read_text(encoding="utf-8")
+        self.assertIn("late pipeline flush", log_text)
+        self.assertIn("XCODEBUILD_TEST_LAUNCH_TIMEOUT=1", log_text)
+        self.assertNotIn("XCODEBUILD_TIMEOUT_NO_TEST_LOG=1", log_text)
+        classified = subprocess.run(
+            ["python3", str(CLASSIFIER), "--log", str(log), "--json"],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        self.assertEqual(json.loads(classified.stdout)["classification"], "simulator_launcher_failure")
+
     def test_launcher_signature_stops_sleeping_owned_build_early(self):
         env = self.install_fake_timeout_and_xcodebuild(
             "echo 'IDELaunchiPhoneSimulatorLauncher: NSMachErrorDomain Code: -308'\n"
