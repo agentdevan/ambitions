@@ -69,6 +69,48 @@ and producing current proof artifacts. It must not be used to relabel a hung
 test, simulator failure, corrupt result bundle, or missing test discovery as
 Green proof.
 
+## Focused Test Throughput Gate
+
+The focused test-speed target is evaluated from exactly three comparable warm
+samples after one successful build-for-testing prebuild for the measured
+scheme. Wrap the same focused-runner command three times with one batch, one
+lane, and explicit `--state warm`, then gate only those three benchmark
+summaries:
+
+```bash
+python3 scripts/ambitions-build-benchmark-report.py \
+  sample-1.json sample-2.json sample-3.json \
+  --target-seconds 30 \
+  --require-samples 3 \
+  --fail-on-miss \
+  --output report.json
+```
+
+Gate evidence is valid only when all samples form one warm or cold cohort and
+have the same nonempty `commit`, `package_path`, `package_identity`, and
+`derived_data` values. The retained `lane`, `command`, and `scenario` fields
+must also be nonempty and identical, and every sample must carry a distinct
+nonempty `run_id` or `timestamp_utc`; duplicate sample evidence is rejected.
+Missing or mixed identity, mixed warm/cold state, replayed evidence, or mixed
+cohort fields is invalid evidence and exits `2`. A sample-count miss, any
+nonzero command exit, or a median above the target writes the report and exits
+`1`. A met gate exits `0`. `--fail-on-miss` requires `--require-samples`;
+omitting both options keeps the reporter's informative warm/cold aggregation
+behavior.
+
+The median is the binding speed threshold. The report also records every
+duration and exit plus the worst duration for diagnosis. For example,
+`20, 30, 90` meets a 30-second median target while still reporting the
+90-second outlier. Each benchmark sample must also link to the corresponding
+focused-runner summary showing at least one executed test; the timing report
+does not replace executed-test proof.
+
+Cache-invalidated build-for-testing is a separate optimization lane. Do not
+mix the measured 439-second cold rebuild or any other cold/cache-invalidated
+sample into a warm focused-test cohort. Prebuild duration, cold rebuild
+duration, warm module-test duration, and warm hosted-test duration remain
+separate reports with separate claims.
+
 ## Simulator Preflight Contention Policy
 
 `scripts/ambitions-xcode-sim-health.sh --json` is a strict preflight. It must
