@@ -256,29 +256,29 @@ public enum EB27AccessibilityAdjustmentEvidence {
     public static let sourceTruth: [String] = [
         "docs/canon/Ambitions_4_0_Accessibility_And_Cognitive_Load_Kernel.md",
         "docs/codex/batches/EB27_Dynamic_Type_VoiceOver_And_Reduce_Motion_Prompt.md",
-        "Sources/Accessibility/AccessibilityNutrition.swift",
-        "Sources/Theme/PanelDensitySize.swift",
-        "Sources/Components/DynamicAdaptiveVisualPrimitives.swift"
+        "Packages/AmbitionsDesignSystem/Sources/Accessibility/AccessibilityNutrition.swift",
+        "Packages/AmbitionsDesignSystem/Sources/Theme/PanelDensitySize.swift",
+        "Packages/AmbitionsDesignSystem/Sources/Components/DynamicAdaptiveVisualPrimitives.swift"
     ]
 
     public static let requirements: [AccessibilityAdjustmentEvidenceRequirement] = [
         AccessibilityAdjustmentEvidenceRequirement(
             axis: .dynamicTypeLayout,
-            ownerFile: "Sources/Theme/PanelDensitySize.swift",
+            ownerFile: "Packages/AmbitionsDesignSystem/Sources/Theme/PanelDensitySize.swift",
             automatedProofTarget: "Native/AmbitionsTests/App/PanelDensitySizeDesignSystemTests.swift",
             requiredFallback: "Accessibility text sizes force lower density and keep the primary decision visible.",
             manualProofStillRequired: "Accessibility-size screenshots and no-clipping review remain required before public claims."
         ),
         AccessibilityAdjustmentEvidenceRequirement(
             axis: .voiceOverOrder,
-            ownerFile: "Sources/Accessibility/AccessibilityNutrition.swift",
+            ownerFile: "Packages/AmbitionsDesignSystem/Sources/Accessibility/AccessibilityNutrition.swift",
             automatedProofTarget: "Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift",
             requiredFallback: "Every screen evidence record must name purpose, state, primary action, and manual traversal need.",
             manualProofStillRequired: "Manual VoiceOver traversal across top-level and detail surfaces remains required before public claims."
         ),
         AccessibilityAdjustmentEvidenceRequirement(
             axis: .reduceMotionEquivalent,
-            ownerFile: "Sources/Components/DynamicAdaptiveVisualPrimitives.swift",
+            ownerFile: "Packages/AmbitionsDesignSystem/Sources/Components/DynamicAdaptiveVisualPrimitives.swift",
             automatedProofTarget: "Native/AmbitionsTests/App/PanelDensitySizeDesignSystemTests.swift",
             requiredFallback: "Reduced Motion must preserve meaning through static state, text, icon, disclosure, or opacity fallback.",
             manualProofStillRequired: "A toggled Reduce Motion walkthrough remains required before public claims."

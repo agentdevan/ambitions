@@ -175,9 +175,9 @@ def is_build_included(root: Path, path: Path) -> bool:
         return True
     if rel.startswith("Native/AmbitionsShareExtension/"):
         return True
-    if rel.startswith("Sources/"):
+    if rel.startswith("Packages/AmbitionsDesignSystem/Sources/"):
         return True
-    if rel.startswith("AppUI/Sources/"):
+    if rel.startswith("Packages/AmbitionsDesignSystem/AppUI/Sources/"):
         return True
     if rel.startswith("Packages/AmbitionsExperienceKernel/Sources/"):
         return True

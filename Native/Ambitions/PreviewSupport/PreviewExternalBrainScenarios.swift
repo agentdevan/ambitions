@@ -72,7 +72,7 @@ extension PreviewFixtures {
             id: "eb35-overloaded-recovery",
             title: "Overloaded recovery path",
             surface: "Today / Time",
-            fixtureOwner: "Sources/Previews/DynamicAdaptiveVisualPreviews.swift",
+            fixtureOwner: "Packages/AmbitionsDesignSystem/Sources/Previews/DynamicAdaptiveVisualPreviews.swift",
             sourceTruth: "Cognitive Load / Recovery",
             commandIntent: .quickRecovery,
             memoryQuery: nil,

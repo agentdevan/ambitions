@@ -1,11 +1,12 @@
 {
   "schemaVersion": 1,
-  "capturedAt": "2026-07-09",
-  "commit": "b123ea6f569ecfa61f354a22251c31382b07f019",
+  "capturedAt": "2026-07-10",
+  "commit": "31901512a5a90fb9e9b0e221b7ce191704d8e83a",
+  "captureBasis": "Post-relocation pre-commit working tree based on the recorded parent commit.",
   "branch": "main",
   "authorities": {
     "appAndExtensionGraph": "project.yml",
-    "reusableModuleGraph": "Package.swift"
+    "reusableModuleGraph": "Packages/AmbitionsDesignSystem/Package.swift"
   },
   "nodes": [
     {"name": "Ambitions", "kind": "xcode-application"},

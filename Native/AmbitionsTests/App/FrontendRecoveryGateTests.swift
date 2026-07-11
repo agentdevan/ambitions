@@ -66,7 +66,7 @@ final class FrontendRecoveryGateTests: XCTestCase {
             "Native/Ambitions/Surfaces/Goals/GoalsSurface.swift",
             "Native/Ambitions/Surfaces/Time/TimeSurface.swift",
             "Native/Ambitions/Surfaces/You/YouRootSurface.swift",
-            "Sources/Components/TopLevelSurfaceCompositionPrimitives.swift"
+            "Packages/AmbitionsDesignSystem/Sources/Components/TopLevelSurfaceCompositionPrimitives.swift"
         ]
 
         let contents = try filePaths

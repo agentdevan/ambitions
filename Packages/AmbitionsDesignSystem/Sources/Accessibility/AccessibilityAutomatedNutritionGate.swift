@@ -94,7 +94,7 @@ public enum AMB1814AutomatedNutritionGate {
         sourceTruth: [
             "docs/truth/PRODUCT_DESIGN_TRUTH.md",
             "docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md",
-            "Sources/Accessibility/AccessibilityAutomatedNutritionGate.swift",
+            "Packages/AmbitionsDesignSystem/Sources/Accessibility/AccessibilityAutomatedNutritionGate.swift",
             "Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift",
             "docs/qa/accessibility/amb-1814-automated-nutrition-gate.md"
         ],
@@ -102,7 +102,7 @@ public enum AMB1814AutomatedNutritionGate {
             AccessibilityAutomatedNutritionGateRequirement(
                 axis: .voiceOverOrder,
                 category: .voiceOver,
-                ownerFile: "Sources/Accessibility/AccessibilityNutrition.swift",
+                ownerFile: "Packages/AmbitionsDesignSystem/Sources/Accessibility/AccessibilityNutrition.swift",
                 automatedProofTarget: "Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift",
                 automatedEvidenceScope: "Static XCTest gate asserts labels, values, hints, grouping, reading-order ownership, and the manual traversal proof boundary.",
                 requiredFallback: "Every nutrition record must name purpose, state, primary action, and manual traversal need before claim review.",
@@ -112,7 +112,7 @@ public enum AMB1814AutomatedNutritionGate {
             AccessibilityAutomatedNutritionGateRequirement(
                 axis: .dynamicTypeLayout,
                 category: .dynamicType,
-                ownerFile: "Sources/Theme/PanelDensitySize.swift",
+                ownerFile: "Packages/AmbitionsDesignSystem/Sources/Theme/PanelDensitySize.swift",
                 automatedProofTarget: "Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift",
                 automatedEvidenceScope: "Static XCTest gate asserts large-text fallback ownership and the screenshot/no-clipping proof boundary.",
                 requiredFallback: "Large text must preserve the primary object, state, source, and primary action before supporting detail.",
@@ -122,7 +122,7 @@ public enum AMB1814AutomatedNutritionGate {
             AccessibilityAutomatedNutritionGateRequirement(
                 axis: .reduceMotionEquivalent,
                 category: .reduceMotion,
-                ownerFile: "Sources/Components/DynamicAdaptiveVisualPrimitives.swift",
+                ownerFile: "Packages/AmbitionsDesignSystem/Sources/Components/DynamicAdaptiveVisualPrimitives.swift",
                 automatedProofTarget: "Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift",
                 automatedEvidenceScope: "Static XCTest gate asserts static fallback ownership and the toggled Reduce Motion walkthrough proof boundary.",
                 requiredFallback: "State changes, route transitions, completion, recovery, and reflow must preserve meaning without motion.",

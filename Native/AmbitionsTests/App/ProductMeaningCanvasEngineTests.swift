@@ -25,7 +25,7 @@ final class ProductMeaningCanvasEngineTests: XCTestCase {
     }
 
     func testAMB583CanvasEngineSourceIncludesStaticFallbackAndNoTimelineLoop() throws {
-        let source = try source("Sources/Components/ProductMeaningCanvasEngine.swift", root: repoRoot())
+        let source = try source("Packages/AmbitionsDesignSystem/Sources/Components/ProductMeaningCanvasEngine.swift", root: repoRoot())
 
         XCTAssertTrue(source.contains("public struct ProductMeaningCanvasEngine: View"))
         XCTAssertTrue(source.contains("Canvas { context, size in"))

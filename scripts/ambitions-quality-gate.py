@@ -279,14 +279,14 @@ STAGE_ALLOWED_PREFIXES = (
     "Native/Ambitions/Stage/",
     "Native/Ambitions/App/",
     "Native/Ambitions/DesignSystem/",
-    "Sources/",
+    "Packages/AmbitionsDesignSystem/Sources/",
 )
 
 DESIGN_ALLOWED_PREFIXES = (
     "Native/Ambitions/DesignSystem/",
     "Native/Ambitions/Rendering/",
-    "Sources/Theme/",
-    "Sources/Components/",
+    "Packages/AmbitionsDesignSystem/Sources/Theme/",
+    "Packages/AmbitionsDesignSystem/Sources/Components/",
 )
 
 POLICY_AUDIT_FILES = {
@@ -568,7 +568,7 @@ def copy_exposure_for_path(relative: str) -> str:
         "Native/Ambitions/Scenarios/",
         "Native/Ambitions/Stage/Motion/",
         "Native/Ambitions/Support/",
-        "Sources/Theme/",
+        "Packages/AmbitionsDesignSystem/Sources/Theme/",
     )):
         return "internal"
     if relative.startswith((
@@ -581,8 +581,8 @@ def copy_exposure_for_path(relative: str) -> str:
         "Native/Ambitions/Composer/",
         "Native/Ambitions/DesignSystem/",
         "Native/Ambitions/Surfaces/",
-        "Sources/Components/",
-        "AppUI/Sources/",
+        "Packages/AmbitionsDesignSystem/Sources/Components/",
+        "Packages/AmbitionsDesignSystem/AppUI/Sources/",
     )):
         return "primary"
     return "contextual"

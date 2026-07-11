@@ -82,11 +82,11 @@ def path_kind(path: Path) -> str:
     relative = rel(path)
     if relative.startswith("Native/AmbitionsTests/"):
         return "test"
-    if relative.startswith("Sources/Previews/"):
+    if relative.startswith("Packages/AmbitionsDesignSystem/Sources/Previews/"):
         return "preview"
-    if relative.startswith("Sources/Accessibility/"):
+    if relative.startswith("Packages/AmbitionsDesignSystem/Sources/Accessibility/"):
         return "accessibility"
-    if relative.startswith("Sources/Components/"):
+    if relative.startswith("Packages/AmbitionsDesignSystem/Sources/Components/"):
         return "design_system_component"
     if relative.startswith("Native/Ambitions/Quality/"):
         return "quality"

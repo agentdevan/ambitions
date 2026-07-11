@@ -7,10 +7,10 @@ public enum SI15AccessibilityAdaptiveInterfaceReview {
     public static let runtimeBehaviorChanged = false
 
     public static let sourceFiles: [String] = [
-        "Sources/Components/AccessibilityAdaptiveInterfacePrimitives.swift",
-        "Sources/Components/LoadingDegradedStatePrimitives.swift",
-        "Sources/Components/IconographyStatusPrimitives.swift",
-        "Sources/Previews/AccessibilityAdaptiveInterfacePreviews.swift",
+        "Packages/AmbitionsDesignSystem/Sources/Components/AccessibilityAdaptiveInterfacePrimitives.swift",
+        "Packages/AmbitionsDesignSystem/Sources/Components/LoadingDegradedStatePrimitives.swift",
+        "Packages/AmbitionsDesignSystem/Sources/Components/IconographyStatusPrimitives.swift",
+        "Packages/AmbitionsDesignSystem/Sources/Previews/AccessibilityAdaptiveInterfacePreviews.swift",
         "Native/AmbitionsTests/App/AccessibilityAdaptiveInterfaceDesignSystemTests.swift"
     ]
 

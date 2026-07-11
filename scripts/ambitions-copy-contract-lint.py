@@ -28,8 +28,8 @@ PRODUCTION_UI_PREFIXES = (
 )
 
 PRODUCTION_COMPONENT_PREFIXES = (
-    "Sources/Components/",
-    "Sources/Accessibility/",
+    "Packages/AmbitionsDesignSystem/Sources/Components/",
+    "Packages/AmbitionsDesignSystem/Sources/Accessibility/",
 )
 
 EXCLUDED_PARTS = {

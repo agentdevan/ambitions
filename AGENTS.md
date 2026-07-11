@@ -140,7 +140,7 @@ Mandatory read order:
 14. `README.md`
 15. `docs/README.md`
 16. `project.yml`
-17. `Package.swift`
+17. `Packages/AmbitionsDesignSystem/Package.swift`
 18. relevant source, tests, retained scripts, build docs, and current local logs
 19. `.agents/skills/README.md` skill registry
 20. relevant retained `.agents/skills/*/SKILL.md` files only after truth files and registry routing

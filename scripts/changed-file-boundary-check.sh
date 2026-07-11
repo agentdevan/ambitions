@@ -21,9 +21,9 @@ while [ "$#" -gt 0 ]; do
 done
 
 changed=$(git diff --name-only HEAD --)
-pattern='^(Native/|Sources/|AppUI/Sources/|project.yml|Package.resolved|.*\.xcodeproj|.*PrivacyInfo\.xcprivacy)'
+pattern='^(Native/|Packages/AmbitionsDesignSystem/Sources/|Packages/AmbitionsDesignSystem/AppUI/Sources/|project.yml|Package.resolved|.*\.xcodeproj|.*PrivacyInfo\.xcprivacy)'
 if [ "$allow_workflows" -eq 0 ]; then
-  pattern='^(Native/|Sources/|AppUI/Sources/|project.yml|Package.resolved|\.github/workflows/|.*\.xcodeproj|.*PrivacyInfo\.xcprivacy)'
+  pattern='^(Native/|Packages/AmbitionsDesignSystem/Sources/|Packages/AmbitionsDesignSystem/AppUI/Sources/|project.yml|Package.resolved|\.github/workflows/|.*\.xcodeproj|.*PrivacyInfo\.xcprivacy)'
 fi
 if echo "$changed" | rg -q "$pattern"; then
   echo "RED forbidden boundary touched"

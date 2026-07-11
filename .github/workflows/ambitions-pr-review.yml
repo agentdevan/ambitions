@@ -202,7 +202,7 @@ jobs:
             git fetch origin "${base_ref}" --depth=1
             base="$(git merge-base HEAD "origin/${base_ref}")"
             if git diff --name-only "${base}" HEAD -- \
-              Native Package.swift project.yml Ambitions.xcodeproj Native/Ambitions.xcodeproj \
+              Native Packages/AmbitionsDesignSystem/Package.swift project.yml Ambitions.xcodeproj Native/Ambitions.xcodeproj \
               | grep -E '^(Native/|Package\.swift|project\.yml|Ambitions\.xcodeproj/|Native/Ambitions\.xcodeproj/)'; then
               should_run=true
             fi
@@ -254,7 +254,7 @@ jobs:
             base="$(git merge-base HEAD "origin/${base_ref}")"
             if git diff --name-only "${base}" HEAD -- \
               docs/qa/evidence/2026-07-05-needs-repair-proof-trigger.md \
-              Native Package.swift project.yml scripts \
+              Native Packages/AmbitionsDesignSystem/Package.swift project.yml scripts \
               | grep -E '^(docs/qa/evidence/2026-07-05-needs-repair-proof-trigger\.md|Native/|Package\.swift|project\.yml|scripts/)'; then
               should_run=true
             fi

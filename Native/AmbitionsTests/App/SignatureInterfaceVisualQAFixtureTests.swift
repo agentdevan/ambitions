@@ -104,7 +104,7 @@ final class SignatureInterfaceVisualQAFixtureTests: XCTestCase {
     func testSI16SourceFilesStayWithinAllowedOwnerFamilies() {
         for path in SI16PreviewFixtureCatalog.sourceFiles {
             XCTAssertTrue(
-                path.hasPrefix("Sources/Previews/") ||
+                path.hasPrefix("Packages/AmbitionsDesignSystem/Sources/Previews/") ||
                     path.hasPrefix("Native/AmbitionsTests/"),
                 "Unexpected SI16 owner path: \(path)"
             )

@@ -42,7 +42,7 @@ For non-trivial Ambitions work, read in this order:
 14. `README.md`
 15. `docs/README.md`
 16. `project.yml`
-17. `Package.swift`
+17. `Packages/AmbitionsDesignSystem/Package.swift`
 18. Relevant source, tests, retained scripts, build docs, current logs, and current issue/proof artifacts
 
 Use the task matrix below to choose a smaller safe read path only when the task is clearly bounded and no instruction requires the full path.

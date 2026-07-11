@@ -12,6 +12,7 @@ import json
 import re
 import subprocess
 import sys
+import tempfile
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
@@ -22,8 +23,8 @@ PRODUCTION_SWIFT_ROOTS = (
     "Native/Ambitions/",
     "Native/AmbitionsWidgetExtension/",
     "Native/AmbitionsShareExtension/",
-    "Sources/",
-    "AppUI/Sources/",
+    "Packages/AmbitionsDesignSystem/Sources/",
+    "Packages/AmbitionsDesignSystem/AppUI/Sources/",
     "Packages/AmbitionsExperienceKernel/Sources/",
 )
 
@@ -31,7 +32,7 @@ SUPPORT_SWIFT_ROOTS = (
     "Native/AmbitionsTests/",
     "Native/AmbitionsUITests/",
     "Native/Ambitions/PreviewSupport/",
-    "Sources/Previews/",
+    "Packages/AmbitionsDesignSystem/Sources/Previews/",
 )
 
 NON_RUNTIME_MUTATION_TERMS = (
@@ -138,8 +139,33 @@ class Finding:
     detail: str
 
 
-def run_git(args: list[str]) -> str:
-    return subprocess.check_output(["git", *args], cwd=ROOT, text=True)
+@dataclass(frozen=True)
+class GitDiffSpec:
+    arguments: tuple[str, ...]
+    old_revision: str
+
+
+def run_git(args: list[str], root: Path = ROOT) -> str:
+    return subprocess.check_output(["git", *args], cwd=root, text=True)
+
+
+def normalize_diff_spec(base: str | None, root: Path = ROOT) -> GitDiffSpec:
+    if not base:
+        return GitDiffSpec(("HEAD",), "HEAD")
+    if "..." in base:
+        left, right = base.split("...", 1)
+        right = right or "HEAD"
+        return GitDiffSpec(
+            (base,),
+            run_git(["merge-base", left, right], root).strip(),
+        )
+    if ".." in base:
+        left, _ = base.split("..", 1)
+        return GitDiffSpec((base,), run_git(["rev-parse", left], root).strip())
+    return GitDiffSpec(
+        (base, "HEAD"),
+        run_git(["rev-parse", base], root).strip(),
+    )
 
 
 def rel(path: Path) -> str:
@@ -161,16 +187,25 @@ def parse_name_status(output: str) -> list[ChangedPath]:
     return changed
 
 
-def diff_changed_paths(base: str | None, include_untracked: bool) -> list[ChangedPath]:
+def introduces_new_filename(item: ChangedPath) -> bool:
+    if item.status == "A":
+        return True
+    if item.status != "R" or not item.old_path:
+        return False
+    return Path(item.old_path).name != Path(item.path).name
+
+
+def diff_changed_paths(
+    spec: GitDiffSpec,
+    include_untracked: bool,
+    root: Path = ROOT,
+) -> list[ChangedPath]:
     args = ["diff", "--name-status", "-M", "--diff-filter=ACMRD"]
-    if base:
-        args.extend([base, "HEAD", "--"])
-    else:
-        args.extend(["HEAD", "--"])
-    changed = parse_name_status(run_git(args))
+    args.extend([*spec.arguments, "--"])
+    changed = parse_name_status(run_git(args, root))
 
     if include_untracked:
-        for raw in run_git(["ls-files", "--others", "--exclude-standard"]).splitlines():
+        for raw in run_git(["ls-files", "--others", "--exclude-standard"], root).splitlines():
             if raw:
                 changed.append(ChangedPath("A", raw, untracked=True))
 
@@ -180,23 +215,26 @@ def diff_changed_paths(base: str | None, include_untracked: bool) -> list[Change
     return sorted(deduped.values(), key=lambda item: item.path)
 
 
-def added_lines(path: str, base: str | None, untracked: bool, old_path: str | None = None) -> list[str]:
-    full_path = ROOT / path
+def added_lines(
+    path: str,
+    spec: GitDiffSpec,
+    untracked: bool,
+    old_path: str | None = None,
+    root: Path = ROOT,
+) -> list[str]:
+    full_path = root / path
     if untracked:
         if full_path.exists() and full_path.is_file():
             return full_path.read_text(encoding="utf-8", errors="replace").splitlines()
         return []
 
     args = ["diff", "--unified=0"]
-    if base:
-        args.extend([base, "HEAD", "--"])
-    else:
-        args.extend(["HEAD", "--"])
+    args.extend([*spec.arguments, "--"])
     if old_path:
         args.append(old_path)
     args.append(path)
     try:
-        diff = run_git(args)
+        diff = run_git(args, root)
     except subprocess.CalledProcessError:
         return []
 
@@ -297,8 +335,8 @@ def has_any(patterns: tuple[str, ...], text: str) -> bool:
     return any(re.search(pattern, text) for pattern in patterns)
 
 
-def added_text(item: ChangedPath, base: str | None) -> str:
-    return "\n".join(added_lines(item.path, base, item.untracked, item.old_path))
+def added_text(item: ChangedPath, spec: GitDiffSpec) -> str:
+    return "\n".join(added_lines(item.path, spec, item.untracked, item.old_path))
 
 
 def source_deletion_present(changed: list[ChangedPath]) -> bool:
@@ -308,6 +346,32 @@ def source_deletion_present(changed: list[ChangedPath]) -> bool:
         if item.status == "R" and item.old_path and is_production_swift(item.old_path):
             return True
     return False
+
+
+def is_behavior_neutral_package_relocation(
+    changed: list[ChangedPath],
+    spec: GitDiffSpec,
+) -> bool:
+    manifest_move = next(
+        (
+            item
+            for item in changed
+            if item.status == "R"
+            and item.old_path == "Package.swift"
+            and item.path == "Packages/AmbitionsDesignSystem/Package.swift"
+        ),
+        None,
+    )
+    if manifest_move is None:
+        return False
+    try:
+        previous = subprocess.check_output(
+            ["git", "show", f"{spec.old_revision}:Package.swift"], cwd=ROOT
+        )
+        current = (ROOT / manifest_move.path).read_bytes()
+    except (subprocess.CalledProcessError, OSError):
+        return False
+    return previous == current
 
 
 def production_swift_files() -> list[Path]:
@@ -353,12 +417,12 @@ def source_root(relative: str) -> str:
         return "Native/AmbitionsWidgetExtension"
     if relative.startswith("Native/AmbitionsShareExtension/"):
         return "Native/AmbitionsShareExtension"
-    if relative.startswith("AppUI/Sources/"):
-        return "AppUI/Sources"
+    if relative.startswith("Packages/AmbitionsDesignSystem/AppUI/Sources/"):
+        return "Packages/AmbitionsDesignSystem/AppUI/Sources"
     if relative.startswith("Packages/AmbitionsExperienceKernel/Sources/"):
         return "Packages/AmbitionsExperienceKernel/Sources"
-    if relative.startswith("Sources/") and len(parts) >= 2:
-        return "Sources" if len(parts) == 2 else "/".join(parts[:2])
+    if relative.startswith("Packages/AmbitionsDesignSystem/Sources/") and len(parts) >= 4:
+        return "Packages/AmbitionsDesignSystem/Sources" if len(parts) == 4 else "/".join(parts[:4])
     return parts[0] if parts else relative
 
 
@@ -371,8 +435,8 @@ def changed_owner(path: str) -> str:
             return "Native/AmbitionsUITests"
         if path.startswith("Native/Ambitions/PreviewSupport/"):
             return "Native/Ambitions/PreviewSupport"
-        if path.startswith("Sources/Previews/"):
-            return "Sources/Previews"
+        if path.startswith("Packages/AmbitionsDesignSystem/Sources/Previews/"):
+            return "Packages/AmbitionsDesignSystem/Sources/Previews"
     if is_production_swift(path):
         return source_root(path)
     if path.startswith("scripts/"):
@@ -558,7 +622,7 @@ def source_atlas_growth_guard(
         return False, None
     if is_central_projection_rehome(item):
         return False, None
-    if item.status in {"A", "R"} and item.path not in source_atlas_allowlist:
+    if introduces_new_filename(item) and item.path not in source_atlas_allowlist:
         return True, Finding(
             "source-atlas-growth-adr",
             item.path,
@@ -627,19 +691,23 @@ def check_accepted_yellow_misuse_guard() -> list[Finding]:
     ]
 
 
-def governance_findings(args: argparse.Namespace) -> list[Finding]:
-    changed = diff_changed_paths(args.base, not args.no_untracked)
+def governance_findings(
+    args: argparse.Namespace,
+    spec: GitDiffSpec,
+) -> list[Finding]:
+    changed = diff_changed_paths(spec, not args.no_untracked)
     findings: list[Finding] = []
     deletion_present = source_deletion_present(changed)
+    behavior_neutral_package_relocation = is_behavior_neutral_package_relocation(changed, spec)
     source_atlas_scope_changed = False
     source_atlas_allowlist = source_atlas_adr_allowlist()
 
     for item in changed:
         path = item.path
         path_obj = Path(path)
-        text = added_text(item, args.base)
+        text = added_text(item, spec)
 
-        if item.status in {"A", "R"} and is_production_swift(path):
+        if introduces_new_filename(item) and is_production_swift(path):
             if (
                 is_suffix_split_name(path_obj.name)
                 and not is_legacy_runtime_to_localruntimeos_suffix_move(item)
@@ -764,11 +832,10 @@ def governance_findings(args: argparse.Namespace) -> list[Finding]:
             package_boundary_text,
         )
         if (
-            path == "Package.swift"
+            path == "Packages/AmbitionsDesignSystem/Package.swift"
             or project_package_boundary
-            or path.startswith("Packages/")
-            or path.startswith("AppUI/Package.swift")
-        ) and not args.allow_package_boundary:
+            or path.startswith("Packages/AmbitionsDesignSystem/AppUI/Package.swift")
+        ) and not args.allow_package_boundary and not behavior_neutral_package_relocation:
             findings.append(
                 Finding(
                     "no-package-extraction-theater",
@@ -786,11 +853,72 @@ def governance_findings(args: argparse.Namespace) -> list[Finding]:
     return findings
 
 
+def assert_diff_spec_end_to_end() -> None:
+    with tempfile.TemporaryDirectory(prefix="ambitions-governance-diff-") as raw_root:
+        root = Path(raw_root)
+        run_git(["init", "-q"], root)
+        run_git(["config", "user.email", "governance@example.invalid"], root)
+        run_git(["config", "user.name", "Governance Fixture"], root)
+        (root / "Package.swift").write_text("manifest\n", encoding="utf-8")
+        (root / "tracked.txt").write_text("base\n", encoding="utf-8")
+        run_git(["add", "."], root)
+        run_git(["commit", "-q", "-m", "base"], root)
+        base = run_git(["rev-parse", "HEAD"], root).strip()
+
+        (root / "Packages/AmbitionsDesignSystem").mkdir(parents=True)
+        run_git(["mv", "Package.swift", "Packages/AmbitionsDesignSystem/Package.swift"], root)
+        (root / "tracked.txt").write_text("first\n", encoding="utf-8")
+        (root / "first.txt").write_text("first\n", encoding="utf-8")
+        run_git(["add", "."], root)
+        run_git(["commit", "-q", "-m", "first"], root)
+        first = run_git(["rev-parse", "HEAD"], root).strip()
+
+        (root / "second.txt").write_text("second\n", encoding="utf-8")
+        run_git(["add", "."], root)
+        run_git(["commit", "-q", "-m", "second"], root)
+
+        plain_spec = normalize_diff_spec(base, root)
+        plain_paths = {item.path for item in diff_changed_paths(plain_spec, False, root)}
+        assert "first.txt" in plain_paths and "second.txt" in plain_paths
+        assert "Packages/AmbitionsDesignSystem/Package.swift" in plain_paths
+
+        two_dot_spec = normalize_diff_spec(f"{base}..{first}", root)
+        two_dot_paths = {item.path for item in diff_changed_paths(two_dot_spec, False, root)}
+        assert "first.txt" in two_dot_paths and "second.txt" not in two_dot_paths
+        assert added_lines("first.txt", two_dot_spec, False, root=root) == ["first"]
+
+        three_dot_spec = normalize_diff_spec(f"{base}...{first}", root)
+        three_dot_paths = {item.path for item in diff_changed_paths(three_dot_spec, False, root)}
+        assert three_dot_paths == two_dot_paths
+        assert three_dot_spec.old_revision == base
+
+
 def self_test() -> int:
+    assert introduces_new_filename(ChangedPath("A", "Sources/New.swift"))
+    assert not introduces_new_filename(ChangedPath("R", "Packages/Design/Sources/Old.swift", "Sources/Old.swift"))
+    assert introduces_new_filename(ChangedPath("R", "Sources/New.swift", "Sources/Old.swift"))
+    assert_diff_spec_end_to_end()
+    parent = run_git(["rev-parse", "HEAD^"]).strip()
+    manifest_relocation = ChangedPath(
+        "R",
+        "Packages/AmbitionsDesignSystem/Package.swift",
+        "Package.swift",
+    )
+    if subprocess.run(
+        ["git", "cat-file", "-e", f"{parent}:Package.swift"],
+        cwd=ROOT,
+        check=False,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    ).returncode == 0:
+        assert is_behavior_neutral_package_relocation(
+            [manifest_relocation],
+            normalize_diff_spec(parent),
+        )
     assert is_production_swift("Native/Ambitions/App/AmbitionsApp.swift")
     assert not is_production_swift("Native/AmbitionsTests/AppTests.swift")
     assert not is_production_swift("Native/Ambitions/PreviewSupport/PreviewFixtures.swift")
-    assert not is_production_swift("Sources/Previews/ThemePreview.swift")
+    assert not is_production_swift("Packages/AmbitionsDesignSystem/Sources/Previews/ThemePreview.swift")
     assert is_support_swift("Native/AmbitionsTests/AppTests.swift")
     assert is_support_swift("Native/AmbitionsUITests/AppUITests.swift")
     assert is_support_swift("Native/Ambitions/PreviewSupport/PreviewFixtures.swift")
@@ -890,8 +1018,9 @@ def main() -> int:
     if args.self_test:
         return self_test()
 
-    changed = diff_changed_paths(args.base, not args.no_untracked)
-    findings = governance_findings(args)
+    spec = normalize_diff_spec(args.base)
+    changed = diff_changed_paths(spec, not args.no_untracked)
+    findings = governance_findings(args, spec)
     report = governance_report(changed)
     payload = {
         "valid": not findings,

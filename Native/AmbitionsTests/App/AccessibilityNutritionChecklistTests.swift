@@ -172,17 +172,17 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
 
         XCTAssertTrue(requirements.contains {
             $0.axis == .dynamicTypeLayout &&
-                $0.ownerFile == "Sources/Theme/PanelDensitySize.swift" &&
+                $0.ownerFile == "Packages/AmbitionsDesignSystem/Sources/Theme/PanelDensitySize.swift" &&
                 $0.requiredFallback.localizedCaseInsensitiveContains("lower density")
         })
         XCTAssertTrue(requirements.contains {
             $0.axis == .voiceOverOrder &&
-                $0.ownerFile == "Sources/Accessibility/AccessibilityNutrition.swift" &&
+                $0.ownerFile == "Packages/AmbitionsDesignSystem/Sources/Accessibility/AccessibilityNutrition.swift" &&
                 $0.manualProofStillRequired.localizedCaseInsensitiveContains("Manual VoiceOver")
         })
         XCTAssertTrue(requirements.contains {
             $0.axis == .reduceMotionEquivalent &&
-                $0.ownerFile == "Sources/Components/DynamicAdaptiveVisualPrimitives.swift" &&
+                $0.ownerFile == "Packages/AmbitionsDesignSystem/Sources/Components/DynamicAdaptiveVisualPrimitives.swift" &&
                 $0.requiredFallback.localizedCaseInsensitiveContains("static state")
         })
     }
@@ -197,7 +197,7 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
         XCTAssertEqual(Set(gate.coveredAxes), Set(AccessibilityAdjustmentAxis.allCases))
         XCTAssertEqual(Set(gate.coveredCategories), [.voiceOver, .dynamicType, .reduceMotion])
         XCTAssertEqual(requirements.count, 3)
-        XCTAssertTrue(gate.sourceTruth.contains("Sources/Accessibility/AccessibilityAutomatedNutritionGate.swift"))
+        XCTAssertTrue(gate.sourceTruth.contains("Packages/AmbitionsDesignSystem/Sources/Accessibility/AccessibilityAutomatedNutritionGate.swift"))
         XCTAssertTrue(gate.sourceTruth.contains("docs/qa/accessibility/amb-1814-automated-nutrition-gate.md"))
         XCTAssertFalse(AMB1814AutomatedNutritionGate.userFacingClaimsAllowed)
         XCTAssertFalse(AMB1814AutomatedNutritionGate.releaseClaimsAllowed)
@@ -232,7 +232,7 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
         XCTAssertTrue(requirements.contains {
             $0.axis == .dynamicTypeLayout &&
                 $0.category == .dynamicType &&
-                $0.ownerFile == "Sources/Theme/PanelDensitySize.swift" &&
+                $0.ownerFile == "Packages/AmbitionsDesignSystem/Sources/Theme/PanelDensitySize.swift" &&
                 $0.requiredFallback.localizedCaseInsensitiveContains("Large text") &&
                 $0.manualProofStillRequired.localizedCaseInsensitiveContains("screenshot") &&
                 $0.deviceProofStillRequired.localizedCaseInsensitiveContains("Physical-device Dynamic Type")
@@ -240,7 +240,7 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
         XCTAssertTrue(requirements.contains {
             $0.axis == .reduceMotionEquivalent &&
                 $0.category == .reduceMotion &&
-                $0.ownerFile == "Sources/Components/DynamicAdaptiveVisualPrimitives.swift" &&
+                $0.ownerFile == "Packages/AmbitionsDesignSystem/Sources/Components/DynamicAdaptiveVisualPrimitives.swift" &&
                 $0.requiredFallback.localizedCaseInsensitiveContains("without motion") &&
                 $0.manualProofStillRequired.localizedCaseInsensitiveContains("Reduce Motion walkthrough") &&
                 $0.deviceProofStillRequired.localizedCaseInsensitiveContains("Physical-device Reduce Motion")
@@ -443,7 +443,7 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
         })
         XCTAssertTrue(requirements.contains {
             $0.axis == .gestureAlternative &&
-                $0.ownerFile == "Sources/Components/GroupedNavigationList.swift" &&
+                $0.ownerFile == "Packages/AmbitionsDesignSystem/Sources/Components/GroupedNavigationList.swift" &&
                 $0.requiredAlternative.localizedCaseInsensitiveContains("non-gesture activation")
         })
     }
@@ -485,7 +485,7 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
         XCTAssertTrue(hasOverloadedTimeShapeRequirement)
         XCTAssertTrue(requirements.contains {
             $0.axis == .lowLoadRecovery &&
-                $0.ownerFile == "Sources/Theme/PanelDensitySize.swift" &&
+                $0.ownerFile == "Packages/AmbitionsDesignSystem/Sources/Theme/PanelDensitySize.swift" &&
                 $0.requiredAdaptation.localizedCaseInsensitiveContains("larger panels") &&
                 $0.forbiddenAdaptation.localizedCaseInsensitiveContains("motion-only state")
         })

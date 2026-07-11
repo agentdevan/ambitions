@@ -95,7 +95,7 @@ Active truth hierarchy:
 10. `docs/truth/CODEX_PROCESS_TRUTH.md` — Codex operating authority.
 11. `docs/truth/HISTORICAL_POLICY.md` — repo retention and stale-file deletion authority.
 12. `AGENTS.md` — front-door agent contract.
-13. Current source, tests, scripts, logs, proof artifacts, `project.yml`, and `Package.swift`.
+13. Current source, tests, scripts, logs, proof artifacts, `project.yml`, and `Packages/AmbitionsDesignSystem/Package.swift`.
 
 Conflict rules:
 

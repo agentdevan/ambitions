@@ -22,11 +22,11 @@ on:
       - '.github/workflows/ambitions-strict-build-launch.yml'
       - 'Native/**'
       - 'Packages/**'
-      - 'Sources/**'
+      - 'Packages/AmbitionsDesignSystem/Sources/**'
       - 'scripts/ci/**'
       - 'scripts/release_recovery/**'
       - 'project.yml'
-      - 'Package.swift'
+      - 'Packages/AmbitionsDesignSystem/Package.swift'
 
 permissions:
   contents: read

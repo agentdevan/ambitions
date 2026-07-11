@@ -23,7 +23,7 @@ Applies to: Humans, Codex, and implementation agents working in the Ambitions re
 13. `README.md`.
 14. `docs/README.md`.
 15. `project.yml`.
-16. `Package.swift`.
+16. `Packages/AmbitionsDesignSystem/Package.swift`.
 17. Relevant source, tests, retained scripts, build docs, and current local logs.
 18. `.agents/skills/README.md` skill registry, then relevant retained `.agents/skills/*/SKILL.md` files only after truth files.
 

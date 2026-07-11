@@ -99,7 +99,7 @@ Primary evidence paths:
 README.md
 AGENTS.md
 project.yml
-Package.swift
+Packages/AmbitionsDesignSystem/Package.swift
 docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md
 docs/truth/PRODUCT_DESIGN_TRUTH.md
 docs/truth/PRODUCT_EXPERIENCE_CANON.md

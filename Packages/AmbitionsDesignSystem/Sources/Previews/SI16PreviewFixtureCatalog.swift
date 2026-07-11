@@ -13,14 +13,14 @@ public enum SI16PreviewFixtureCatalog {
     public static let canonicalTopLevelSurfaces = ["Today", "Goals", "Time", "You"]
 
     public static let sourceFiles: [String] = [
-        "Sources/Previews/SI16VisualQAStateFamily.swift",
-        "Sources/Previews/SI16VisualQAFixture.swift",
-        "Sources/Previews/SI16VisualQAFixtureSnapshotCard.swift",
-        "Sources/Previews/SI16PreviewFixtureCatalog.swift",
-        "Sources/Previews/SI16PreviewSurfaceCoverageRow.swift",
-        "Sources/Previews/AmbitionsCanonPreviewFixtureCatalog.swift",
-        "Sources/Previews/AFI13VisualQACatalog.swift",
-        "Sources/Previews/SignatureInterfaceVisualQAPreviews.swift",
+        "Packages/AmbitionsDesignSystem/Sources/Previews/SI16VisualQAStateFamily.swift",
+        "Packages/AmbitionsDesignSystem/Sources/Previews/SI16VisualQAFixture.swift",
+        "Packages/AmbitionsDesignSystem/Sources/Previews/SI16VisualQAFixtureSnapshotCard.swift",
+        "Packages/AmbitionsDesignSystem/Sources/Previews/SI16PreviewFixtureCatalog.swift",
+        "Packages/AmbitionsDesignSystem/Sources/Previews/SI16PreviewSurfaceCoverageRow.swift",
+        "Packages/AmbitionsDesignSystem/Sources/Previews/AmbitionsCanonPreviewFixtureCatalog.swift",
+        "Packages/AmbitionsDesignSystem/Sources/Previews/AFI13VisualQACatalog.swift",
+        "Packages/AmbitionsDesignSystem/Sources/Previews/SignatureInterfaceVisualQAPreviews.swift",
         "Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift"
     ]
 

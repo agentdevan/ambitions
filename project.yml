@@ -9,7 +9,7 @@ settings:
     IPHONEOS_DEPLOYMENT_TARGET: 26.0
 packages:
   AmbitionsPackages:
-    path: .
+    path: Packages/AmbitionsDesignSystem
 targets:
   Ambitions:
     type: application

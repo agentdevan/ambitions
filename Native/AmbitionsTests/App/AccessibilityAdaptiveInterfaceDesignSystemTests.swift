@@ -169,8 +169,8 @@ final class AccessibilityAdaptiveInterfaceDesignSystemTests: XCTestCase {
     func testSI15SourceFilesStayWithinAllowedOwnerFamilies() {
         for path in SI15AccessibilityAdaptiveInterfaceReview.sourceFiles {
             XCTAssertTrue(
-                path.hasPrefix("Sources/Components/") ||
-                    path.hasPrefix("Sources/Previews/") ||
+                path.hasPrefix("Packages/AmbitionsDesignSystem/Sources/Components/") ||
+                    path.hasPrefix("Packages/AmbitionsDesignSystem/Sources/Previews/") ||
                     path.hasPrefix("Native/AmbitionsTests/"),
                 "Unexpected SI15 owner path: \(path)"
             )

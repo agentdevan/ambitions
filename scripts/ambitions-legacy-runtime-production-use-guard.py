@@ -155,8 +155,8 @@ PRODUCTION_SWIFT_ROOTS = (
     "Native/Ambitions/",
     "Native/AmbitionsWidgetExtension/",
     "Native/AmbitionsShareExtension/",
-    "Sources/",
-    "AppUI/Sources/",
+    "Packages/AmbitionsDesignSystem/Sources/",
+    "Packages/AmbitionsDesignSystem/AppUI/Sources/",
     "Packages/AmbitionsExperienceKernel/Sources/",
 )
 
@@ -189,12 +189,25 @@ class Finding:
     detail: str
 
 
+@dataclass(frozen=True)
+class GitDiffSpec:
+    arguments: tuple[str, ...]
+
+
 def rel(path: Path) -> str:
     return str(path.relative_to(ROOT))
 
 
 def run_git(args: list[str]) -> str:
     return subprocess.check_output(["git", *args], cwd=ROOT, text=True)
+
+
+def normalize_diff_spec(base: str | None) -> GitDiffSpec:
+    if not base:
+        return GitDiffSpec(("HEAD",))
+    if ".." in base:
+        return GitDiffSpec((base,))
+    return GitDiffSpec((base, "HEAD"))
 
 
 def parse_name_status(output: str) -> list[ChangedPath]:
@@ -212,12 +225,9 @@ def parse_name_status(output: str) -> list[ChangedPath]:
     return changed
 
 
-def diff_changed_paths(base: str | None, include_untracked: bool) -> list[ChangedPath]:
+def diff_changed_paths(spec: GitDiffSpec, include_untracked: bool) -> list[ChangedPath]:
     args = ["diff", "--name-status", "-M", "--diff-filter=ACMRD"]
-    if base:
-        args.extend([base, "HEAD", "--"])
-    else:
-        args.extend(["HEAD", "--"])
+    args.extend([*spec.arguments, "--"])
     changed = parse_name_status(run_git(args))
 
     if include_untracked:
@@ -231,7 +241,7 @@ def diff_changed_paths(base: str | None, include_untracked: bool) -> list[Change
     return sorted(deduped.values(), key=lambda item: item.path)
 
 
-def added_lines(path: str, base: str | None, untracked: bool) -> list[str]:
+def added_lines(path: str, spec: GitDiffSpec, untracked: bool) -> list[str]:
     full_path = ROOT / path
     if untracked:
         if full_path.exists() and full_path.is_file():
@@ -239,10 +249,7 @@ def added_lines(path: str, base: str | None, untracked: bool) -> list[str]:
         return []
 
     args = ["diff", "--unified=0"]
-    if base:
-        args.extend([base, "HEAD", "--", path])
-    else:
-        args.extend(["HEAD", "--", path])
+    args.extend([*spec.arguments, "--", path])
     try:
         diff = run_git(args)
     except subprocess.CalledProcessError:
@@ -340,7 +347,7 @@ def reference_finding_for_path_text(path: str, text: str) -> Finding | None:
     return None
 
 
-def explicit_reference_findings(changed: list[ChangedPath], base: str | None) -> tuple[list[Finding], list[str]]:
+def explicit_reference_findings(changed: list[ChangedPath], spec: GitDiffSpec) -> tuple[list[Finding], list[str]]:
     findings: list[Finding] = []
     allowed_test_or_preview_paths: list[str] = []
 
@@ -348,7 +355,7 @@ def explicit_reference_findings(changed: list[ChangedPath], base: str | None) ->
         path = item.path
         if not is_swift(path):
             continue
-        text = "\n".join(added_lines(path, base, item.untracked))
+        text = "\n".join(added_lines(path, spec, item.untracked))
         if not text or not contains_legacy_runtime_reference(text):
             continue
         if is_test_or_preview_path(path):
@@ -402,7 +409,7 @@ def legacy_owner_findings(baseline: set[str], current: set[str]) -> list[Finding
     return findings
 
 
-def guard_findings(changed: list[ChangedPath], base: str | None) -> tuple[list[Finding], list[str], set[str], set[str]]:
+def guard_findings(changed: list[ChangedPath], spec: GitDiffSpec) -> tuple[list[Finding], list[str], set[str], set[str]]:
     findings: list[Finding] = []
     try:
         baseline = baseline_legacy_runtime_paths()
@@ -442,7 +449,7 @@ def guard_findings(changed: list[ChangedPath], base: str | None) -> tuple[list[F
             )
         )
 
-    reference_findings, _diff_allowed_test_or_preview_paths = explicit_reference_findings(changed, base)
+    reference_findings, _diff_allowed_test_or_preview_paths = explicit_reference_findings(changed, spec)
     findings.extend(reference_findings)
     return findings, current_test_or_preview_reference_paths, baseline, current
 
@@ -517,8 +524,9 @@ def main() -> int:
     if args.self_test:
         return self_test()
 
-    changed = diff_changed_paths(args.base, not args.no_untracked)
-    findings, allowed_test_or_preview_paths, baseline, current = guard_findings(changed, args.base)
+    spec = normalize_diff_spec(args.base)
+    changed = diff_changed_paths(spec, not args.no_untracked)
+    findings, allowed_test_or_preview_paths, baseline, current = guard_findings(changed, spec)
     payload = {
         "valid": not findings,
         "findingCount": len(findings),

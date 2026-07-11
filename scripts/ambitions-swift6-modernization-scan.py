@@ -26,12 +26,12 @@ SOURCE_ROOTS = (
     "Native/AmbitionsWidgetExtension",
     "Native/AmbitionsShareExtension",
     "Sources",
-    "AppUI/Sources",
+    "Packages/AmbitionsDesignSystem/AppUI/Sources",
 )
 
 SETTINGS_FILES = (
     "project.yml",
-    "Package.swift",
+    "Packages/AmbitionsDesignSystem/Package.swift",
 )
 
 EXCLUDED_DIR_NAMES = {
@@ -153,7 +153,7 @@ MODULE_BOUNDARY_RULES: tuple[tuple[str, str, re.Pattern[str], str], ...] = (
     ),
     (
         "widget-ui-imports-swiftdata",
-        "AppUI/Sources",
+        "Packages/AmbitionsDesignSystem/AppUI/Sources",
         re.compile(r"^\s*import\s+SwiftData\b"),
         "Widget UI package must consume snapshots/contracts, not persistence records.",
     ),
@@ -265,7 +265,7 @@ def scan_module_boundaries(root: Path) -> list[Finding]:
 def scan_settings(root: Path) -> list[Finding]:
     findings: list[Finding] = []
     project = root / "project.yml"
-    package = root / "Package.swift"
+    package = root / "Packages/AmbitionsDesignSystem/Package.swift"
 
     if not project.exists():
         findings.append(
@@ -344,7 +344,7 @@ def write_fixture(root: Path, project_swift_version: str = "6.0", strict: str = 
         f"settings:\n  base:\n    SWIFT_VERSION: {project_swift_version}\n    SWIFT_STRICT_CONCURRENCY: {strict}\n",
         encoding="utf-8",
     )
-    (root / "Package.swift").write_text(f"// swift-tools-version: {package_tools}\n", encoding="utf-8")
+    (root / "Packages/AmbitionsDesignSystem/Package.swift").write_text(f"// swift-tools-version: {package_tools}\n", encoding="utf-8")
     (root / "Native/Ambitions/Surfaces/Today/TodayViewModel.swift").write_text(
         "import Observation\n\n@MainActor @Observable final class TodayViewModel {}\n",
         encoding="utf-8",

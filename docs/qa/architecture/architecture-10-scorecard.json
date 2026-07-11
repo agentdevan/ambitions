@@ -88,7 +88,7 @@
     "compileTimeModularity": {
       "workingScore": 2,
       "status": "red",
-      "evidence": ["Package.swift", "project.yml", "docs/qa/architecture/current-module-graph.json"],
+      "evidence": ["Packages/AmbitionsDesignSystem/Package.swift", "project.yml", "docs/qa/architecture/current-module-graph.json"],
       "requiredGates": ["compiler-enforced-targets", "acyclic-target-graph", "incremental-feature-rebuild"],
       "gateResults": {"compiler-enforced-targets": "fail", "acyclic-target-graph": "fail", "incremental-feature-rebuild": "fail"}
     },
@@ -113,7 +113,7 @@
     "docs/qa/architecture/current-module-graph.json",
     "docs/qa/local-runtime-proof/current-local-runtime-proof.json",
     "project.yml",
-    "Package.swift",
+    "Packages/AmbitionsDesignSystem/Package.swift",
     "scripts/ambitions-remediation-governance-check.py",
     "scripts/ambitions-architecture-inventory.py",
     "scripts/ambitions-quality-gate.py",

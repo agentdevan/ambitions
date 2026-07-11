@@ -32,8 +32,8 @@ PRODUCTION_SWIFT_ROOTS = (
     "Native/Ambitions/",
     "Native/AmbitionsWidgetExtension/",
     "Native/AmbitionsShareExtension/",
-    "Sources/",
-    "AppUI/Sources/",
+    "Packages/AmbitionsDesignSystem/Sources/",
+    "Packages/AmbitionsDesignSystem/AppUI/Sources/",
     "Packages/AmbitionsExperienceKernel/Sources/",
 )
 

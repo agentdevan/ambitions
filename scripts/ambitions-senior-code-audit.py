@@ -82,9 +82,9 @@ NON_CLAIMS = [
 
 PRODUCTION_PATTERNS = [
     re.compile(r"^Native/"),
-    re.compile(r"^Sources/"),
+    re.compile(r"^Packages/AmbitionsDesignSystem/Sources/"),
     re.compile(r"^Packages/"),
-    re.compile(r"^AppUI/"),
+    re.compile(r"^Packages/AmbitionsDesignSystem/AppUI/"),
     re.compile(r"^project\.yml$"),
     re.compile(r"^Package\.swift$"),
     re.compile(r"^Package\.resolved$"),
@@ -126,9 +126,9 @@ FORBIDDEN_LANGUAGE_TERMS = [
 
 SWIFT_SOURCE_ROOTS = (
     "Native/Ambitions/",
-    "Sources/",
+    "Packages/AmbitionsDesignSystem/Sources/",
     "Packages/",
-    "AppUI/Sources/",
+    "Packages/AmbitionsDesignSystem/AppUI/Sources/",
 )
 
 TEST_PATH_MARKERS = (
@@ -550,7 +550,7 @@ def audit_design_tokens(file_inventory: dict, n: int) -> tuple[list[Finding], in
         path = entry.get("path", "")
         if not file_exists(path) or not is_production_swift(path):
             continue
-        if not any(token in path for token in ("/Surfaces/", "/Features/", "/Stage/", "/Composer/", "AppUI/Sources/")):
+        if not any(token in path for token in ("/Surfaces/", "/Features/", "/Stage/", "/Composer/", "Packages/AmbitionsDesignSystem/AppUI/Sources/")):
             continue
         text = read_text(path)
         if re.search(r"\bColor\s*\((?:\s*red:|\s*white|\s*black|\s*\.sRGB|\s*UIColor)", text):

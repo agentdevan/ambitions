@@ -19,7 +19,7 @@ Motion is not a root destination. Capture is not a tab.
 - [Truth index](docs/truth/README.md)
 - [Docs front door](docs/README.md)
 - [Native build and release](docs/native-build-and-release.md)
-- Source: [Native](Native/), [Sources](Sources/), [Packages](Packages/), [AppUI](AppUI/)
-- Build config: [project.yml](project.yml), [Package.swift](Package.swift)
+- Source: [Native](Native/), [Design system sources](Packages/AmbitionsDesignSystem/Sources/), [Design system app UI](Packages/AmbitionsDesignSystem/AppUI/), [Packages](Packages/)
+- Build config: [project.yml](project.yml), [design-system Package.swift](Packages/AmbitionsDesignSystem/Package.swift)
 
 Generated Codex state, old proof artifacts, prompts, train material, and stale historical docs are not retained in this repo.

@@ -98,6 +98,6 @@ echo "Remotes (Redacted):"
 git remote -v | sed 's#https://.*@#https://REDACTED@#g'
 echo ""
 echo "Project structures found:"
-find . -maxdepth 3 -name 'project.yml' -o -name '*.xcodeproj' -o -name '*.xcworkspace' -o -name 'Package.swift'
+find . -maxdepth 4 -name 'project.yml' -o -name '*.xcodeproj' -o -name '*.xcworkspace' -o -name 'Package.swift'
 echo "\`\`\`"
 echo ""

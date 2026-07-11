@@ -6,7 +6,7 @@ cd "$REPO_ROOT"
 
 PROJECT_FILE="project.yml"
 SCHEME_FILE="Ambitions.xcodeproj/project.pbxproj"
-PACKAGE_FILE="Package.swift"
+PACKAGE_FILE="Packages/AmbitionsDesignSystem/Package.swift"
 STAMP_FILE=".xcode-version"
 
 if [[ ! -f "$PROJECT_FILE" ]]; then

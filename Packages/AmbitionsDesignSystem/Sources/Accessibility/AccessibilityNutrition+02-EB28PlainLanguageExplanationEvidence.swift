@@ -112,14 +112,14 @@ public enum EB29InputAlternativeEvidence {
         ),
         AccessibilityInputAlternativeRequirement(
             axis: .motorAlternative,
-            ownerFile: "Sources/Accessibility/AccessibilityNutrition.swift",
+            ownerFile: "Packages/AmbitionsDesignSystem/Sources/Accessibility/AccessibilityNutrition.swift",
             automatedProofTarget: "Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift",
             requiredAlternative: "Every precision, drag, swipe, or long-press path needs a button, menu, or row alternative.",
             privacyBoundary: "Motor alternatives must not expose extra private context or create hidden automation."
         ),
         AccessibilityInputAlternativeRequirement(
             axis: .gestureAlternative,
-            ownerFile: "Sources/Components/GroupedNavigationList.swift",
+            ownerFile: "Packages/AmbitionsDesignSystem/Sources/Components/GroupedNavigationList.swift",
             automatedProofTarget: "Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift",
             requiredAlternative: "Disclosure and navigation rows need stable labels, hit areas, and non-gesture activation.",
             privacyBoundary: "Navigation alternatives must preserve the same destination and privacy-safe label."
@@ -190,7 +190,7 @@ public enum EB30OverloadAdaptationEvidence {
     public static let sourceTruth: [String] = [
         "docs/canon/Ambitions_4_0_Accessibility_And_Cognitive_Load_Kernel.md",
         "docs/codex/batches/EB30_Overloaded_Day_Adaptation_And_Low_Cognitive_Load_Flows_Prompt.md",
-        "Sources/Theme/PanelDensitySize.swift",
+        "Packages/AmbitionsDesignSystem/Sources/Theme/PanelDensitySize.swift",
         "Native/Ambitions/Surfaces/Today/TodaySurface.swift",
         "Native/Ambitions/Surfaces/Time/TimeSurface.swift"
     ]
@@ -212,7 +212,7 @@ public enum EB30OverloadAdaptationEvidence {
         ),
         AccessibilityOverloadAdaptationRequirement(
             axis: .lowLoadRecovery,
-            ownerFile: "Sources/Theme/PanelDensitySize.swift",
+            ownerFile: "Packages/AmbitionsDesignSystem/Sources/Theme/PanelDensitySize.swift",
             automatedProofTarget: "Native/AmbitionsTests/App/PanelDensitySizeDesignSystemTests.swift",
             requiredAdaptation: "Low-load recovery uses larger panels, lower density, non-color meaning, and optional detail collapsed by default.",
             forbiddenAdaptation: "No motion-only state, color-only severity, or dense explanation wall."
@@ -298,9 +298,9 @@ public enum AccessibilityNutritionChecklist {
         [
             screenAudit("today", "Today", "tab.today", "Today", source: "Native/Ambitions/Surfaces/Today/TodaySurface.swift", tests: "Native/AmbitionsTests/Today"),
             screenAudit("reviews-archive", "Reviews / Archive", "you.reviews", "You", source: "Native/Ambitions/Services/ReviewsV1Projector.swift", tests: "Native/AmbitionsTests/Services/ReviewsV1ProjectorTests.swift"),
-            screenAudit("rich-panels", "Rich Panels", "component.rich-panels", "Design System", source: "Sources/Components/RichPanelPrimitives.swift", tests: "Native/AmbitionsTests/App/RichPanelDesignSystemTests.swift"),
+            screenAudit("rich-panels", "Rich Panels", "component.rich-panels", "Design System", source: "Packages/AmbitionsDesignSystem/Sources/Components/RichPanelPrimitives.swift", tests: "Native/AmbitionsTests/App/RichPanelDesignSystemTests.swift"),
             screenAudit("you", "You", "tab.you", "You", source: "Native/Ambitions/Surfaces/You/YouScreen.swift", tests: "Native/AmbitionsTests/You"),
-            screenAudit("grouped-navigation-list", "GroupedNavigationList", "component.grouped-navigation-list", "Design System", source: "Sources/Components/GroupedNavigationList.swift", tests: "Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift"),
+            screenAudit("grouped-navigation-list", "GroupedNavigationList", "component.grouped-navigation-list", "Design System", source: "Packages/AmbitionsDesignSystem/Sources/Components/GroupedNavigationList.swift", tests: "Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift"),
             screenAudit("goal-detail", "Goal Detail", "goals.detail", "Goals", source: "Native/Ambitions/Surfaces/Goals/GoalDetailScreen.swift", tests: "Native/AmbitionsTests/Goals"),
             screenAudit("capture", "Capture Composer", "overlay.capture-composer", "Composer / Capture", source: "Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift", tests: "Native/AmbitionsTests/Capture"),
             screenAudit("time", "Time", "tab.time", "Time", source: "Native/Ambitions/Surfaces/Time/TimeSurface.swift", tests: "Native/AmbitionsTests/Time"),
