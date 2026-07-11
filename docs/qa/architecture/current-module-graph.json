@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "capturedAt": "2026-07-10",
-  "commit": "648b0cfc9680e878646b46095fdc92377bb747d6",
-  "captureBasis": "Post-pilot pre-commit working-tree capture based on the recorded base commit; this document commit does not claim to be its own future commit SHA.",
+  "capturedAt": "2026-07-11",
+  "commit": "f2de23dd5",
+  "captureBasis": "Current graph and superseding decomposition decision captured from the rebased implementation-start commit; this document commit does not claim to be its own future commit SHA.",
   "branch": "main",
   "authorities": {
     "appAndExtensionGraph": "project.yml",
@@ -49,6 +49,28 @@
     "benchmarkEvidence": ".codex/xcode-benchmarks/BUILD-ARCH-PILOT/report.json",
     "dispositionEvidence": ".codex/architecture/source-disposition.json"
   },
+  "decompositionPolicy": {
+    "status": "active",
+    "wholeDomainExtractionAuthorized": false,
+    "domainCensusEvidence": "docs/qa/architecture/domain-module-boundary.json",
+    "domainCensusFileCount": 166,
+    "domainCompilerBlocker": {
+      "failedFileCount": 11,
+      "diagnosticCount": 123,
+      "firstReverseOwnedTypeCount": 12,
+      "conservativeIndependentlySeparableFileCount": 45,
+      "claimBoundary": "The compiler blocker is current failed-boundary evidence and the 45-file lexical estimate is triage evidence only; neither authorizes an AmbitionsDomain target."
+    },
+    "futureCandidateRequirements": [
+      "explicit canonical source-file membership",
+      "current high-churn evidence",
+      "compiler-proven dependency closure bound to source content",
+      "acyclic graph and single production membership",
+      "hostless tests plus affected app integration tests",
+      "identity-matched before-and-after throughput proof with no material regression"
+    ],
+    "coldBuildSeparation": "The 439-second cache-invalidated build is a separate optimization from the verified 8-second warm build and 21.262-second health-selected hosted focused test."
+  },
   "duplicateCompilationRiskCount": 11,
   "duplicateCompilationRisks": [
     {"path": "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift", "targets": ["Ambitions", "AmbitionsWidgetExtension", "AmbitionsShareExtension"]},
@@ -65,6 +87,6 @@
   ],
   "assessment": {
     "status": "yellow",
-    "reason": "The seven-file time pilot and its module tests are compiler-enforced and acyclic, but the intended whole-app architecture graph is not compiler-enforced and extension targets still compile selected app source files directly."
+    "reason": "The seven-file TimeFoundation pilot and its module tests are compiler-enforced and acyclic, and the warm focused loop is within its provisional target on the configured healthy simulator. Broader decomposition remains unimplemented; whole-folder Domain extraction is superseded as a speed prerequisite, the cache-invalidated app build remains expensive, and extension targets still compile selected app source files directly."
   }
 }

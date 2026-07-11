@@ -1,10 +1,10 @@
 # Ambitions Build Architecture and Throughput Design
 
-Status: Owner-approved implementation direction
-Date: 2026-07-10
+Status: Implemented foundation with active measured-decomposition policy
+Date: 2026-07-11
 Decision record: `ADR-BUILD-001`
 Scope: Xcode/Swift package startup, module decomposition, evidence-backed source destruction, build workflow, and development-throughput proof
-Claim status: Aspirational until source changes and current measurements prove each implemented slice
+Claim status: Implemented Yellow — the package relocation, cache/lane controls, TimeFoundation pilot, and warm focused loop have current evidence; broader decomposition and cache-invalidated build improvement remain unproven
 
 ## 1. Purpose
 
@@ -20,12 +20,12 @@ The design has four linked parts:
 
 1. Remove the repo-root Swift package scan.
 2. Delete obsolete and duplicate source before it becomes module API.
-3. Decompose the monolithic application into a balanced acyclic build graph.
+3. Decompose only measured high-churn, compiler-closed cohorts into a balanced acyclic build graph.
 4. Make build throughput a measured, regression-gated engineering property.
 
 ## 2. Evidence and problem statement
 
-Current live evidence establishes:
+Implementation-start evidence, captured before the completed package relocation and pilot, established:
 
 - `project.yml` declares the existing local Swift package with `path: .`.
 - Xcode therefore treats the repository root as the local package container.
@@ -52,6 +52,16 @@ Historical retained local logs also show:
 - fresh cache/package identities forcing rebuilds beyond 20 minutes.
 
 The 20-minute result is not the expected steady-state development loop. It combines discarded cache identity, package-graph churn, a repo-root package scan, a large monolithic target, and four-core hardware limits.
+
+Current Xcode 26.6 evidence after the foundation pilot separates the remaining costs:
+
+| Scenario | Result | Interpretation |
+|---|---:|---|
+| Cache-invalidated `AmbitionsUnitTests` build-for-testing | 439 seconds | Cold/full-target compile cost remains a separate optimization problem. |
+| Immediate no-change build-for-testing repeat | 8 seconds | The steady-state compile lane is already fast when cache identity is preserved. |
+| Retained health-selected hosted focused test | 21.262 seconds; 15/15 passed | The normal focused runner is within the provisional 30-second target on the configured healthy simulator. |
+
+The attempted exact-folder `Core/Domain` extraction is not a dependency-closed module candidate. Its compiler probe produced 123 errors across 11 files and exposed reverse dependencies on 12 declarations owned by LocalRuntimeOS, Persistence, Today projection, and You projection. A broader conservative lexical pass found only 45 of the 166 census files independently separable; that estimate is supporting triage evidence, not compiler closure or extraction authorization. Current 250-commit churn is concentrated in App composition, LocalRuntimeOS, Time, Stage, and visible surfaces rather than the Domain folder as a whole.
 
 ## 3. Goals
 
@@ -135,7 +145,7 @@ The proposed module names are build-graph labels, not product language or perman
 
 ### 5.3 Balanced target graph
 
-The target graph should converge toward:
+The following graph is a responsibility sketch, not an exact-folder extraction sequence:
 
 ```text
 AmbitionsDomain
@@ -180,9 +190,9 @@ AmbitionsTestSupport
   deterministic shared fixtures and test builders only
 ```
 
-The dependency graph must be acyclic. Lower modules cannot import Stage, App, Composer, Trust, or Surfaces. `Core` imports of UI/design-system types must be removed through ownership correction or narrow domain contracts before Domain and Runtime extraction.
+The dependency graph must be acyclic. Lower modules cannot import Stage, App, Composer, Trust, or Surfaces. `Core` imports of UI/design-system types must be removed through ownership correction or narrow domain contracts before any affected cohort is extracted.
 
-The graph intentionally avoids one target per folder or per concept. Too many targets increase module loading, linking, and API maintenance. New targets must earn their existence through ownership clarity and measured incremental-build improvement.
+The graph intentionally avoids one target per folder or per concept. Too many targets increase module loading, linking, and API maintenance. New targets must earn their existence through ownership clarity, high current churn, compiler-proven dependency closure, graph-safe target membership, focused tests, and measured incremental-build improvement. Whole-folder `Core/Domain` extraction is explicitly superseded as a test-speed prerequisite; its reviewed census remains architectural evidence only.
 
 ## 6. Destruction policy
 
@@ -391,9 +401,12 @@ Finish validation, independent review repair, and bounded commit of the currentl
 - Benchmark leaf edit, no-change build, clean build, and focused tests.
 - Continue only if quality remains intact and the boundary is neutral or beneficial for throughput.
 
-### Slice 5 — domain, runtime, projection, and UI foundations
+### Slice 5 — measured dependency-closed cohorts
 
-- Extract low-level modules in dependency order.
+- Rank explicit source cohorts by current change frequency and compile invalidation cost.
+- Compile the exact candidate source set with only declared lower/system dependencies before authorizing a target.
+- Reject folder-shaped candidates that require reverse edges, duplicate membership, or broad public API.
+- Extract only candidates whose hostless and app-integration proof remains Green and whose measured edit-through-proof loop is materially faster.
 - Delete duplicate authority during each extraction.
 - Keep the runtime law and canonical source owners intact.
 - Require a reviewed commit after each independently provable boundary.
@@ -429,15 +442,15 @@ Finish validation, independent review repair, and bounded commit of the currentl
 
 ## 13. Proof ceiling and non-claims
 
-This approved design proves only the intended approach.
+This design plus current artifacts proves only the implemented foundation and the active decision policy.
 
 It does not prove:
 
-- package relocation is implemented;
-- any module exists or is correctly wired;
+- broader decomposition is implemented;
+- a future module candidate is dependency-closed or beneficial;
 - source destruction is safe or complete;
 - build or test success;
-- the provisional performance targets are achieved;
+- the provisional performance targets are achieved outside the specifically measured warm lanes;
 - clean-build speed on other machines;
 - CI, device, accessibility, visual, privacy/legal, TestFlight, App Store, or release readiness.
 
@@ -448,7 +461,8 @@ Those claims require the current implementation and proof artifacts defined abov
 Owner-approved direction:
 
 - structural package relocation;
-- balanced module decomposition now rather than after all modernization;
+- balanced module decomposition only for measured high-churn, compiler-closed cohorts;
 - evidence-backed destruction before, during, and after decomposition;
 - speed improvements without lowering the existing code-quality and proof standards;
-- package relocation first, after the current dirty Today slice reaches a clean reviewed commit boundary.
+- whole-folder Domain extraction is not a focused-test prerequisite;
+- cache-invalidated build cost remains a separate optimization from the already-fast warm loop.
