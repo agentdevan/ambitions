@@ -177,7 +177,7 @@ def collect_inventory(
         if declarations:
             evidence.append(f"declared symbols: {len(declarations)}; external lexical references: {reference_count}")
         else:
-            evidence.append("no nominal type declarations detected")
+            evidence.append("no supported declarations detected")
         rows.append(
             {
                 "path": relative,

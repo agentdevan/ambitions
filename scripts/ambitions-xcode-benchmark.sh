@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd -P)"
+REPO_ROOT="${AMBITIONS_REPO_ROOT:-$(git rev-parse --show-toplevel 2>/dev/null || pwd -P)}"
 cd "$REPO_ROOT"
 
 usage() {
@@ -9,6 +9,7 @@ usage() {
 Usage:
   bash scripts/ambitions-xcode-benchmark.sh [--batch <BATCH>] [--scheme auto|Ambitions|AmbitionsUnitTests] [--test <ONLY_TESTING>] [--test-plan <PLAN>] [--workers <1,2,4>] [--refresh-packages]
   bash scripts/ambitions-xcode-benchmark.sh --status
+  bash scripts/ambitions-xcode-benchmark.sh --identity
   bash scripts/ambitions-xcode-benchmark.sh --batch <BATCH> --lane <LANE> -- <command> [args...]
 
 Purpose:
@@ -42,13 +43,54 @@ RESULT_ROOT=".codex/xcode-benchmarks"
 DERIVED_DATA="$REPO_ROOT/.codex/DerivedData/Ambitions"
 LANE=""
 STATUS=0
+IDENTITY_ONLY=0
 COMMAND_MODE=0
 REFRESH_PACKAGES=0
 SAMPLE_STATE="warm"
 
 capture_identity() {
-  PACKAGE_PATH="${AMBITIONS_PACKAGE_RESOLVED_PATH:-$(find "$REPO_ROOT" -name Package.resolved -type f -print -quit)}"
-  PACKAGE_IDENTITY="$([[ -n "$PACKAGE_PATH" && -f "$PACKAGE_PATH" ]] && shasum -a 256 "$PACKAGE_PATH" | awk '{print $1}' || echo missing)"
+  local candidates=()
+  local candidate
+  local workspace_candidates=(
+    "$REPO_ROOT/Ambitions.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+    "$REPO_ROOT/Ambitions.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+    "$REPO_ROOT/Native/Ambitions.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+    "$REPO_ROOT/Native/Ambitions.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+  )
+  for candidate in "${workspace_candidates[@]}"; do
+    [[ -f "$candidate" ]] && candidates+=("$candidate")
+  done
+  if (( ${#candidates[@]} > 1 )); then
+    PACKAGE_PATH=""
+    PACKAGE_IDENTITY="unknown"
+    PACKAGE_IDENTITY_SOURCE="workspace-resolved"
+    PACKAGE_IDENTITY_STATUS="ambiguous"
+    return 3
+  elif (( ${#candidates[@]} == 1 )); then
+    PACKAGE_PATH="${candidates[0]}"
+    PACKAGE_IDENTITY="$(shasum -a 256 "$PACKAGE_PATH" | awk '{print $1}')"
+    PACKAGE_IDENTITY_SOURCE="workspace-resolved"
+    PACKAGE_IDENTITY_STATUS="resolved"
+  elif [[ -f "$REPO_ROOT/Packages/AmbitionsDesignSystem/Package.resolved" ]]; then
+    PACKAGE_PATH="$REPO_ROOT/Packages/AmbitionsDesignSystem/Package.resolved"
+    PACKAGE_IDENTITY="$(shasum -a 256 "$PACKAGE_PATH" | awk '{print $1}')"
+    PACKAGE_IDENTITY_SOURCE="package-resolved"
+    PACKAGE_IDENTITY_STATUS="resolved"
+  elif [[ -f "$REPO_ROOT/Packages/AmbitionsDesignSystem/Package.swift" && -f "$REPO_ROOT/project.yml" ]]; then
+    PACKAGE_PATH="$REPO_ROOT/Packages/AmbitionsDesignSystem/Package.swift+$REPO_ROOT/project.yml#packages"
+    PACKAGE_IDENTITY="$(
+      { cat "$REPO_ROOT/Packages/AmbitionsDesignSystem/Package.swift"; awk '/^packages:/{emit=1} emit && /^[^[:space:]]/ && !/^packages:/{exit} emit{print}' "$REPO_ROOT/project.yml"; } \
+        | shasum -a 256 | awk '{print $1}'
+    )"
+    PACKAGE_IDENTITY_SOURCE="manifest-fallback"
+    PACKAGE_IDENTITY_STATUS="resolved"
+  else
+    PACKAGE_PATH=""
+    PACKAGE_IDENTITY="unknown"
+    PACKAGE_IDENTITY_SOURCE="none"
+    PACKAGE_IDENTITY_STATUS="unknown"
+    return 4
+  fi
   COMMIT="$(git rev-parse HEAD)"
   DIRTY_STATE="$([[ -n "$(git status --porcelain --untracked-files=no)" ]] && echo dirty || echo clean)"
   CACHE_IDENTITY="$DERIVED_DATA"
@@ -66,6 +108,7 @@ while [[ "$#" -gt 0 ]]; do
     --state) SAMPLE_STATE="${2:-}"; shift 2 ;;
     --refresh-packages) REFRESH_PACKAGES=1; shift ;;
     --status) STATUS=1; shift ;;
+    --identity) IDENTITY_ONLY=1; shift ;;
     --) COMMAND_MODE=1; shift; break ;;
     -h|--help)
       usage
@@ -78,6 +121,14 @@ while [[ "$#" -gt 0 ]]; do
       ;;
   esac
 done
+
+if [[ "$IDENTITY_ONLY" -eq 1 ]]; then
+  identity_status=0
+  capture_identity || identity_status=$?
+  printf 'package_identity_status=%s\npackage_identity_source=%s\npackage_path=%s\npackage_identity=%s\n' \
+    "$PACKAGE_IDENTITY_STATUS" "$PACKAGE_IDENTITY_SOURCE" "$PACKAGE_PATH" "$PACKAGE_IDENTITY"
+  exit "$identity_status"
+fi
 
 if [[ "$STATUS" -eq 1 ]]; then
   cat <<EOF
@@ -107,7 +158,7 @@ if [[ "$COMMAND_MODE" -eq 1 ]]; then
   end_epoch="$(date +%s)"
   duration=$((end_epoch - start_epoch))
 
-  capture_identity
+  capture_identity || { echo "package identity is ${PACKAGE_IDENTITY_STATUS}; refusing benchmark sample" >&2; exit 25; }
   XCODE_VERSION="$(xcodebuild -version 2>/dev/null | tr '\n' ' ' || true)"
   MACOS_VERSION="$(sw_vers -productVersion 2>/dev/null || true)"
   CPU="$(sysctl -n machdep.cpu.brand_string 2>/dev/null || uname -m)"
@@ -274,7 +325,7 @@ if [[ -n "${AMBITIONS_SIM_UDID:-}" || -n "$sim_udid" ]]; then
   [[ -n "$sim" ]] && SIM_DEST="platform=iOS Simulator,id=${sim}"
 fi
 RESOLVED_SCHEME="$(resolve_scheme)"
-capture_identity
+capture_identity || { echo "package identity is ${PACKAGE_IDENTITY_STATUS}; refusing benchmark sample" >&2; exit 25; }
 XCODE_VERSION="$(xcodebuild -version 2>/dev/null | tr '\n' ' ' || true)"
 MACOS_VERSION="$(sw_vers -productVersion 2>/dev/null || true)"
 CPU="$(sysctl -n machdep.cpu.brand_string 2>/dev/null || uname -m)"
@@ -313,7 +364,7 @@ BUILD_CMD=(
 
 if [[ "$REFRESH_PACKAGES" -eq 1 ]]; then
   run_step "refresh-packages" "cold" scripts/ambitions-bounded-xcodebuild.sh -- xcodebuild -project Ambitions.xcodeproj -scheme "$RESOLVED_SCHEME" -resolvePackageDependencies
-  capture_identity
+  capture_identity || { echo "package identity is ${PACKAGE_IDENTITY_STATUS} after refresh" >&2; exit 25; }
 fi
 BUILD_CMD=(xcodebuild -disableAutomaticPackageResolution -onlyUsePackageVersionsFromResolvedFile "${BUILD_CMD[@]:1}")
 
