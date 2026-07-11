@@ -433,6 +433,26 @@ class ChangedFileTestRouterTests(unittest.TestCase):
             [["python3", "-m", "unittest", "scripts.tests.test_ambitions_xcode_runner_reliability", "-v"]],
         )
 
+    def test_result_extraction_and_prebuild_tooling_have_exact_python_routes(self):
+        cases = {
+            "scripts/ambitions-xcode-result-extract.sh": [
+                "scripts.tests.test_ambitions_xcode_result_extract",
+                "scripts.tests.test_ambitions_xcode_runner_reliability",
+            ],
+            "scripts/ambitions-xcode-build-for-testing.sh": [
+                "scripts.tests.test_ambitions_xcode_runner_reliability",
+            ],
+        }
+
+        for path, expected_tests in cases.items():
+            with self.subTest(path=path):
+                plan = self.plan_live(ROUTER.Change("M", path))
+                self.assertEqual(plan["status"], "planned", plan)
+                self.assertEqual(
+                    plan["commands"],
+                    [["python3", "-m", "unittest", *expected_tests, "-v"]],
+                )
+
 
 class ChangedFileTestRouterCLITests(unittest.TestCase):
     def test_malformed_config_exits_two(self):

@@ -13,6 +13,7 @@ SIM_HEALTH = REPO_ROOT / "scripts/ambitions-xcode-sim-health.sh"
 BOUNDED_XCODEBUILD = REPO_ROOT / "scripts/ambitions-bounded-xcodebuild.sh"
 CLASSIFIER = REPO_ROOT / "scripts/ambitions-xcode-failure-classifier.py"
 FOCUSED_RUNNER = REPO_ROOT / "scripts/ambitions-xcode-test-focused.sh"
+BUILD_FOR_TESTING = REPO_ROOT / "scripts/ambitions-xcode-build-for-testing.sh"
 MCP_CONFIG = REPO_ROOT / ".xcodebuildmcp/config.yaml"
 
 MCP_UDID = "DD9B9C84-7188-48FA-AA2A-AB5C1D0EE2B6"
@@ -33,6 +34,7 @@ class RunnerReliabilityTests(unittest.TestCase):
         self.bin.mkdir()
         self.xcrun_log = self.root / "xcrun.log"
         self.xcodebuild_log = self.root / "xcodebuild.log"
+        self.xcparse_log = self.root / "xcparse.log"
         self.booted_marker = self.root / "booted"
         self._write_executable(
             "xcrun",
@@ -221,17 +223,25 @@ if [ -n "$result_bundle" ]; then
 fi
 echo 'Testing started'
 echo "Executed ${FAKE_EXECUTED_TESTS:-2} tests, with 0 failures (0 unexpected) in 0.001 (0.002) seconds"
+if [ "${FAKE_TEST_FAILURE:-0}" = "1" ]; then
+  echo 'Testing failed:'
+fi
+exit "${FAKE_XCODEBUILD_EXIT:-0}"
 '''
         )
         self._write_executable("xcodegen", "#!/bin/sh\nexit 0\n")
         self._write_executable("xcbeautify", "#!/bin/sh\ncat\n")
-        self._write_executable("xcparse", "#!/bin/sh\nexit 0\n")
+        self._write_executable(
+            "xcparse",
+            "#!/bin/sh\nset -eu\nprintf '%s\\n' \"$*\" >> \"$FAKE_XCPARSE_LOG\"\n",
+        )
         env.update(self.health_env(devices))
         env["PATH"] = str(self.bin) + os.pathsep + os.environ["PATH"]
         env["AMBITIONS_SIM_UDID"] = MCP_UDID
         env["AMBITIONS_SIM_HEALTH_ALLOW_ACTIVE_XCODE"] = "1"
         env["AMBITIONS_XCODE_LANE_ROOT"] = str(self.root / "focused-lane")
         env["FAKE_XCODEBUILD_LOG"] = str(self.xcodebuild_log)
+        env["FAKE_XCPARSE_LOG"] = str(self.xcparse_log)
         return env
 
     def run_focused(self, env: dict[str, str], batch: str, *filter_args: str) -> tuple[subprocess.CompletedProcess[str], dict]:
@@ -273,6 +283,37 @@ echo "Executed ${FAKE_EXECUTED_TESTS:-2} tests, with 0 failures (0 unexpected) i
             elif line.startswith("ARG=") and calls:
                 calls[-1].append(line.removeprefix("ARG="))
         return calls
+
+    def xcparse_calls(self) -> list[str]:
+        return self.xcparse_log.read_text(encoding="utf-8").splitlines() if self.xcparse_log.exists() else []
+
+    def run_build_for_testing(self, env: dict[str, str], batch: str) -> tuple[subprocess.CompletedProcess[str], dict]:
+        result = subprocess.run(
+            [
+                "bash",
+                str(BUILD_FOR_TESTING),
+                "--batch",
+                batch,
+                "--scheme",
+                "AmbitionsUnitTests",
+                "--results-dir",
+                str(self.root / "results"),
+                "--logs-dir",
+                str(self.root / "logs"),
+                "--summaries-dir",
+                str(self.root / "summaries"),
+                "--timeout",
+                "10s",
+            ],
+            cwd=REPO_ROOT,
+            env=env,
+            capture_output=True,
+            text=True,
+            timeout=12,
+        )
+        summaries = sorted((self.root / "summaries" / batch).glob("*/build-for-testing-summary.json"))
+        payload = json.loads(summaries[-1].read_text(encoding="utf-8")) if summaries else {}
+        return result, payload
 
     def run_bounded(self, env: dict[str, str], log: Path, launch_timeout: str) -> tuple[subprocess.CompletedProcess[str], float]:
         started = time.monotonic()
@@ -434,6 +475,95 @@ done
         self.assertEqual(summary["requested_filter_count"], 3)
         self.assertGreater(summary["executed_tests"], 0)
 
+    def test_focused_runner_auto_extraction_is_metadata_for_fast_lanes_and_full_for_ui(self):
+        env = self.focused_env()
+        cases = (
+            ("module-auto-extract", "AmbitionsModuleTests/MetadataAutoTests", "metadata", 0),
+            ("unit-auto-extract", "AmbitionsTests/MetadataAutoTests", "metadata", 0),
+            ("ui-auto-extract", "AmbitionsUITests/FullAutoTests", "full", 4),
+        )
+
+        for batch, test_filter, expected_mode, expected_calls in cases:
+            with self.subTest(batch=batch):
+                self.xcparse_log.unlink(missing_ok=True)
+                result, summary = self.run_focused(env, batch, "--test", test_filter)
+                self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+                self.assertEqual(summary["requested_result_extraction_mode"], "auto")
+                self.assertEqual(summary["result_extraction_mode"], expected_mode)
+                self.assertEqual(len(self.xcparse_calls()), expected_calls)
+                self.assertTrue(Path(summary["result_bundle"]).exists())
+                extraction = json.loads(Path(summary["result_extraction_summary"]).read_text(encoding="utf-8"))
+                self.assertEqual(extraction["extraction_mode"], expected_mode)
+                self.assertTrue(extraction["result_bundle_retained"])
+
+    def test_focused_runner_honors_explicit_metadata_and_full_extraction_overrides(self):
+        env = self.focused_env()
+        cases = (
+            ("ui-metadata-override", "AmbitionsUITests/MetadataOverrideTests", "metadata", 0),
+            ("module-full-override", "AmbitionsModuleTests/FullOverrideTests", "full", 4),
+        )
+
+        for batch, test_filter, mode, expected_calls in cases:
+            with self.subTest(batch=batch):
+                self.xcparse_log.unlink(missing_ok=True)
+                result, summary = self.run_focused(
+                    env,
+                    batch,
+                    "--result-extraction",
+                    mode,
+                    "--test",
+                    test_filter,
+                )
+                self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+                self.assertEqual(summary["requested_result_extraction_mode"], mode)
+                self.assertEqual(summary["result_extraction_mode"], mode)
+                self.assertEqual(len(self.xcparse_calls()), expected_calls)
+
+    def test_failed_auto_focused_run_upgrades_to_full_extraction_for_diagnostics(self):
+        env = self.focused_env()
+        env["FAKE_TEST_FAILURE"] = "1"
+
+        result, summary = self.run_focused(
+            env,
+            "failed-auto-extract",
+            "--test",
+            "AmbitionsModuleTests/FailedAutoExtractionTests",
+        )
+
+        self.assertEqual(result.returncode, 65, result.stdout + result.stderr)
+        self.assertEqual(summary["requested_result_extraction_mode"], "auto")
+        self.assertEqual(summary["result_extraction_mode"], "full")
+        self.assertEqual(len(self.xcparse_calls()), 4)
+        extraction = json.loads(Path(summary["result_extraction_summary"]).read_text(encoding="utf-8"))
+        self.assertEqual(extraction["extraction_mode"], "full")
+
+    def test_successful_build_for_testing_uses_metadata_extraction(self):
+        env = self.focused_env()
+
+        result, summary = self.run_build_for_testing(env, "successful-prebuild-extract")
+
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertEqual(summary["result_extraction_mode"], "metadata")
+        self.assertEqual(self.xcparse_calls(), [])
+        self.assertTrue(Path(summary["result_bundle"]).exists())
+        extraction = json.loads(Path(summary["result_extraction_summary"]).read_text(encoding="utf-8"))
+        self.assertEqual(extraction["extraction_mode"], "metadata")
+        self.assertTrue(extraction["result_bundle_retained"])
+
+    def test_failed_build_for_testing_uses_full_extraction_for_diagnostics(self):
+        env = self.focused_env()
+        env["FAKE_XCODEBUILD_EXIT"] = "65"
+
+        result, summary = self.run_build_for_testing(env, "failed-prebuild-extract")
+
+        self.assertEqual(result.returncode, 65, result.stdout + result.stderr)
+        self.assertEqual(summary["result_extraction_mode"], "full")
+        self.assertEqual(len(self.xcparse_calls()), 4)
+        self.assertTrue(Path(summary["result_bundle"]).exists())
+        extraction = json.loads(Path(summary["result_extraction_summary"]).read_text(encoding="utf-8"))
+        self.assertEqual(extraction["extraction_mode"], "full")
+        self.assertTrue(extraction["result_bundle_retained"])
+
     def test_focused_runner_preserves_single_test_and_only_testing_behavior(self):
         env = self.focused_env()
         cases = (
@@ -507,6 +637,11 @@ done
                 "scheme-mismatch",
                 ("--scheme", "AmbitionsUnitTests", "--test", "AmbitionsUITests/TwoTests"),
                 "does not accept",
+            ),
+            (
+                "invalid-result-extraction",
+                ("--result-extraction", "quick", "--test", "AmbitionsTests/OneTests"),
+                "unsupported result extraction mode",
             ),
         )
 

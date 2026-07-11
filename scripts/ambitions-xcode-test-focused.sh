@@ -19,6 +19,7 @@ UI_PREBUILD_TIMEOUT_DURATION="${AMBITIONS_XCODE_UI_PREBUILD_TIMEOUT:-${AMBITIONS
 UI_PREBUILD_KILL_AFTER="${AMBITIONS_XCODE_UI_PREBUILD_KILL_AFTER:-$KILL_AFTER}"
 SIM_HEALTH_TIMEOUT="${AMBITIONS_XCODE_SIM_HEALTH_TIMEOUT:-${AMBITIONS_SIM_HEALTH_TIMEOUT:-30s}}"
 TEST_LAUNCH_TIMEOUT="${AMBITIONS_XCODE_TEST_LAUNCH_TIMEOUT:-30s}"
+RESULT_EXTRACTION_REQUESTED="${AMBITIONS_XCODE_RESULT_EXTRACTION:-auto}"
 
 while [[ "$#" -gt 0 ]]; do
   case "$1" in
@@ -40,13 +41,14 @@ while [[ "$#" -gt 0 ]]; do
     --timeout) TIMEOUT_DURATION="${2:-$TIMEOUT_DURATION}"; shift 2 ;;
     --kill-after) KILL_AFTER="${2:-$KILL_AFTER}"; shift 2 ;;
     --test-launch-timeout) TEST_LAUNCH_TIMEOUT="${2:-$TEST_LAUNCH_TIMEOUT}"; shift 2 ;;
+    --result-extraction) RESULT_EXTRACTION_REQUESTED="${2:-}"; shift 2 ;;
     --without-building|--test-without-building) XCODEBUILD_ACTION="test-without-building"; shift ;;
     --prebuild) UI_PREBUILD_MODE="always"; shift ;;
     --skip-prebuild) UI_PREBUILD_MODE="never"; shift ;;
     --prebuild-timeout) UI_PREBUILD_TIMEOUT_DURATION="${2:-$UI_PREBUILD_TIMEOUT_DURATION}"; shift 2 ;;
     --prebuild-kill-after) UI_PREBUILD_KILL_AFTER="${2:-$UI_PREBUILD_KILL_AFTER}"; shift 2 ;;
     -h|--help)
-      echo "Usage: scripts/ambitions-xcode-test-focused.sh --batch <BATCH> (--test <TEST_ID>... | --only-testing <FILTER>...) [--scheme auto|Ambitions|AmbitionsModuleTests|AmbitionsUnitTests|AmbitionsUITests] [--timeout 15m] [--kill-after 60s] [--test-launch-timeout 30s] [--without-building] [--prebuild|--skip-prebuild] [--prebuild-timeout 35m]" >&2
+      echo "Usage: scripts/ambitions-xcode-test-focused.sh --batch <BATCH> (--test <TEST_ID>... | --only-testing <FILTER>...) [--scheme auto|Ambitions|AmbitionsModuleTests|AmbitionsUnitTests|AmbitionsUITests] [--timeout 15m] [--kill-after 60s] [--test-launch-timeout 30s] [--result-extraction auto|metadata|full] [--without-building] [--prebuild|--skip-prebuild] [--prebuild-timeout 35m]" >&2
       exit 0
       ;;
     *)
@@ -55,6 +57,14 @@ while [[ "$#" -gt 0 ]]; do
       ;;
   esac
 done
+
+case "$RESULT_EXTRACTION_REQUESTED" in
+  auto|metadata|full) ;;
+  *)
+    echo "unsupported result extraction mode: $RESULT_EXTRACTION_REQUESTED (expected auto, metadata, or full)" >&2
+    exit 2
+    ;;
+esac
 
 [[ -n "$BATCH" ]] || { echo "--batch is required" >&2; exit 1; }
 if ((${#TEST_IDS[@]} > 0 && ${#ONLY_TESTING_FILTERS[@]} > 0)); then
@@ -153,6 +163,14 @@ if ! RESOLVED_SCHEME="$(resolve_scheme)"; then
   exit 2
 fi
 
+RESULT_EXTRACTION_MODE="$RESULT_EXTRACTION_REQUESTED"
+if [[ "$RESULT_EXTRACTION_MODE" == "auto" ]]; then
+  case "$RESOLVED_SCHEME" in
+    AmbitionsModuleTests|AmbitionsUnitTests) RESULT_EXTRACTION_MODE="metadata" ;;
+    *) RESULT_EXTRACTION_MODE="full" ;;
+  esac
+fi
+
 REQUESTED_FILTER_COUNT="${#TEST_FILTERS[@]}"
 test_filter="${TEST_FILTERS[0]}"
 if ((REQUESTED_FILTER_COUNT == 1)); then
@@ -194,6 +212,7 @@ RUN_ID="$TS-$test_slug-$$-${RANDOM:-0}"
 RESULT_BUNDLE="$RESULT_DIR/$BATCH/$RUN_ID/focused-test.xcresult"
 LOG_FILE="$LOG_DIR/$BATCH/$RUN_ID/focused-test.log"
 SUMMARY_FILE="$SUMMARY_DIR/$BATCH/$RUN_ID/focused-test-summary.json"
+RESULT_EXTRACTION_SUMMARY_FILE=""
 mkdir -p "$RESULT_DIR/$BATCH/$RUN_ID" "$LOG_DIR/$BATCH/$RUN_ID" "$SUMMARY_DIR/$BATCH/$RUN_ID"
 DERIVED_DATA="$REPO_ROOT/.codex/DerivedData/Ambitions"
 mkdir -p "$DERIVED_DATA"
@@ -268,6 +287,8 @@ if [[ "$need_flag" == "1" ]]; then
   "tests": $TESTS_JSON,
   "requested_filter_count": $REQUESTED_FILTER_COUNT,
   "scheme": "$RESOLVED_SCHEME",
+  "requested_result_extraction_mode": "$RESULT_EXTRACTION_REQUESTED",
+  "result_extraction_mode": "$RESULT_EXTRACTION_MODE",
   "xcodebuild_action": "$XCODEBUILD_ACTION",
   "status": "failed",
   "failure_category": "tool_missing",
@@ -313,6 +334,10 @@ write_sim_health_failure_summary() {
   "requested_filter_count": $REQUESTED_FILTER_COUNT,
   "scheme": "$RESOLVED_SCHEME",
   "proof_scope": "$PROOF_SCOPE",
+  "requested_result_extraction_mode": "$RESULT_EXTRACTION_REQUESTED",
+  "result_extraction_mode": "$RESULT_EXTRACTION_MODE",
+  "result_extraction_summary": "$RESULT_EXTRACTION_SUMMARY_FILE",
+  "result_bundle_retained": false,
   "requested_xcodebuild_action": "$REQUESTED_XCODEBUILD_ACTION",
   "xcodebuild_action": "not_run",
   "status": "failed",
@@ -489,6 +514,10 @@ PY
   "requested_filter_count": $REQUESTED_FILTER_COUNT,
   "scheme": "$RESOLVED_SCHEME",
   "proof_scope": "$PROOF_SCOPE",
+  "requested_result_extraction_mode": "$RESULT_EXTRACTION_REQUESTED",
+  "result_extraction_mode": "$RESULT_EXTRACTION_MODE",
+  "result_extraction_summary": "$RESULT_EXTRACTION_SUMMARY_FILE",
+  "result_bundle_retained": false,
   "requested_xcodebuild_action": "$REQUESTED_XCODEBUILD_ACTION",
   "xcodebuild_action": "not_run",
   "status": "failed",
@@ -623,11 +652,23 @@ if [[ "$status" -ne 0 ]]; then
   fi
 fi
 
+if [[ "$RESULT_EXTRACTION_REQUESTED" == "auto" && "$status" -ne 0 && -f "$RESULT_BUNDLE/Info.plist" ]]; then
+  RESULT_EXTRACTION_MODE="full"
+fi
 if command -v scripts/ambitions-xcode-result-extract.sh >/dev/null 2>&1; then
-  scripts/ambitions-xcode-result-extract.sh --result "$RESULT_BUNDLE" --output-dir "$SUMMARY_DIR/$BATCH/$RUN_ID/extract" || true
+  RESULT_EXTRACTION_SUMMARY_FILE="$(
+    scripts/ambitions-xcode-result-extract.sh \
+      --result "$RESULT_BUNDLE" \
+      --output-dir "$SUMMARY_DIR/$BATCH/$RUN_ID/extract" \
+      --mode "$RESULT_EXTRACTION_MODE" || true
+  )"
 fi
 
 result_bundle_corrupt=false
+RESULT_BUNDLE_RETAINED=false
+if [[ -e "$RESULT_BUNDLE" ]]; then
+  RESULT_BUNDLE_RETAINED=true
+fi
 if [[ -e "$RESULT_BUNDLE" && ! -f "$RESULT_BUNDLE/Info.plist" ]]; then
   result_bundle_corrupt=true
 fi
@@ -683,6 +724,10 @@ cat > "$SUMMARY_FILE" <<JSON
   "requested_filter_count": $REQUESTED_FILTER_COUNT,
   "scheme": "$RESOLVED_SCHEME",
   "proof_scope": "$PROOF_SCOPE",
+  "requested_result_extraction_mode": "$RESULT_EXTRACTION_REQUESTED",
+  "result_extraction_mode": "$RESULT_EXTRACTION_MODE",
+  "result_extraction_summary": "$RESULT_EXTRACTION_SUMMARY_FILE",
+  "result_bundle_retained": $RESULT_BUNDLE_RETAINED,
   "requested_xcodebuild_action": "$REQUESTED_XCODEBUILD_ACTION",
   "xcodebuild_action": "$XCODEBUILD_ACTION",
   "status": "$([ "$status" -eq 0 ] && echo passed || echo failed)",

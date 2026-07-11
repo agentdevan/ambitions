@@ -48,6 +48,25 @@
       ]
     },
     {
+      "id": "result-extraction-reliability",
+      "patterns": [
+        "scripts/ambitions-xcode-result-extract.sh"
+      ],
+      "pythonTests": [
+        "scripts.tests.test_ambitions_xcode_result_extract",
+        "scripts.tests.test_ambitions_xcode_runner_reliability"
+      ]
+    },
+    {
+      "id": "build-for-testing-reliability",
+      "patterns": [
+        "scripts/ambitions-xcode-build-for-testing.sh"
+      ],
+      "pythonTests": [
+        "scripts.tests.test_ambitions_xcode_runner_reliability"
+      ]
+    },
+    {
       "id": "changed-file-router",
       "patterns": [
         "scripts/ambitions-changed-file-test-router.py",

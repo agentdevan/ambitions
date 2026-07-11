@@ -228,8 +228,22 @@ print(round(time.time() - float(sys.argv[1]), 3))
 PY
 )"
 
+RESULT_EXTRACTION_MODE="full"
+if [[ "$status" -eq 0 ]]; then
+  RESULT_EXTRACTION_MODE="metadata"
+fi
+RESULT_EXTRACTION_SUMMARY_FILE=""
 if command -v scripts/ambitions-xcode-result-extract.sh >/dev/null 2>&1; then
-  scripts/ambitions-xcode-result-extract.sh --result "$RESULT_BUNDLE" --output-dir "$SUMMARY_DIR/$BATCH/$TS/extract" || true
+  RESULT_EXTRACTION_SUMMARY_FILE="$(
+    scripts/ambitions-xcode-result-extract.sh \
+      --result "$RESULT_BUNDLE" \
+      --output-dir "$SUMMARY_DIR/$BATCH/$RUN_ID/extract" \
+      --mode "$RESULT_EXTRACTION_MODE" || true
+  )"
+fi
+RESULT_BUNDLE_RETAINED=false
+if [[ -e "$RESULT_BUNDLE" ]]; then
+  RESULT_BUNDLE_RETAINED=true
 fi
 
 classification="passed"
@@ -263,6 +277,9 @@ cat > "$SUMMARY_FILE" <<JSON
   "build_timing_summary": "enabled",
   "duration_seconds": $duration_seconds,
   "result_bundle": "$RESULT_BUNDLE",
+  "result_bundle_retained": $RESULT_BUNDLE_RETAINED,
+  "result_extraction_mode": "$RESULT_EXTRACTION_MODE",
+  "result_extraction_summary": "$RESULT_EXTRACTION_SUMMARY_FILE",
   "log_file": "$LOG_FILE",
   "timestamp_utc": "$TS",
   "run_id": "$RUN_ID",
