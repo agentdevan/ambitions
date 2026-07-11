@@ -228,6 +228,21 @@ print(round(time.time() - float(sys.argv[1]), 3))
 PY
 )"
 
+RESULT_BUNDLE_RETAINED=false
+if [[ -e "$RESULT_BUNDLE" ]]; then
+  RESULT_BUNDLE_RETAINED=true
+fi
+RESULT_BUNDLE_FAILURE_CLASS=""
+if [[ "$status" -eq 0 ]]; then
+  if [[ "$RESULT_BUNDLE_RETAINED" != "true" ]]; then
+    status=65
+    RESULT_BUNDLE_FAILURE_CLASS="missing_xcresult"
+  elif [[ ! -f "$RESULT_BUNDLE/Info.plist" ]]; then
+    status=65
+    RESULT_BUNDLE_FAILURE_CLASS="corrupt_xcresult"
+  fi
+fi
+
 RESULT_EXTRACTION_MODE="full"
 if [[ "$status" -eq 0 ]]; then
   RESULT_EXTRACTION_MODE="metadata"
@@ -241,13 +256,11 @@ if command -v scripts/ambitions-xcode-result-extract.sh >/dev/null 2>&1; then
       --mode "$RESULT_EXTRACTION_MODE" || true
   )"
 fi
-RESULT_BUNDLE_RETAINED=false
-if [[ -e "$RESULT_BUNDLE" ]]; then
-  RESULT_BUNDLE_RETAINED=true
-fi
 
 classification="passed"
-if [[ "$status" -eq 0 ]]; then
+if [[ -n "$RESULT_BUNDLE_FAILURE_CLASS" ]]; then
+  classification="$RESULT_BUNDLE_FAILURE_CLASS"
+elif [[ "$status" -eq 0 ]]; then
   classification="passed"
 elif [[ "$status" -eq 124 ]]; then
   detected="$(python3 scripts/ambitions-xcode-failure-classifier.py --log "$LOG_FILE" --json | python3 -c 'import sys, json; print(json.load(sys.stdin).get("classification","unknown"))' )"

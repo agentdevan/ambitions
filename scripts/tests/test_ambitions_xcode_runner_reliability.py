@@ -217,9 +217,11 @@ for argument in "$@"; do
   fi
   previous="$argument"
 done
-if [ -n "$result_bundle" ]; then
+if [ -n "$result_bundle" ] && [ "${FAKE_SKIP_RESULT_BUNDLE:-0}" != "1" ]; then
   mkdir -p "$result_bundle"
-  : > "$result_bundle/Info.plist"
+  if [ "${FAKE_CORRUPT_RESULT_BUNDLE:-0}" != "1" ]; then
+    : > "$result_bundle/Info.plist"
+  fi
 fi
 echo 'Testing started'
 echo "Executed ${FAKE_EXECUTED_TESTS:-2} tests, with 0 failures (0 unexpected) in 0.001 (0.002) seconds"
@@ -537,6 +539,73 @@ done
         extraction = json.loads(Path(summary["result_extraction_summary"]).read_text(encoding="utf-8"))
         self.assertEqual(extraction["extraction_mode"], "full")
 
+    def test_failed_explicit_metadata_focused_run_does_not_escalate_extraction(self):
+        env = self.focused_env()
+        env["FAKE_TEST_FAILURE"] = "1"
+
+        result, summary = self.run_focused(
+            env,
+            "failed-explicit-metadata-extract",
+            "--result-extraction",
+            "metadata",
+            "--test",
+            "AmbitionsModuleTests/FailedExplicitMetadataExtractionTests",
+        )
+
+        self.assertEqual(result.returncode, 65, result.stdout + result.stderr)
+        self.assertEqual(summary["requested_result_extraction_mode"], "metadata")
+        self.assertEqual(summary["result_extraction_mode"], "metadata")
+        self.assertEqual(self.xcparse_calls(), [])
+        extraction = json.loads(Path(summary["result_extraction_summary"]).read_text(encoding="utf-8"))
+        self.assertEqual(extraction["extraction_mode"], "metadata")
+
+    def test_focused_success_requires_a_valid_retained_result_bundle(self):
+        cases = (
+            ("missing", "FAKE_SKIP_RESULT_BUNDLE", "missing_xcresult", False),
+            ("corrupt", "FAKE_CORRUPT_RESULT_BUNDLE", "corrupt_xcresult", True),
+        )
+
+        for label, environment_key, expected_category, expected_retained in cases:
+            with self.subTest(label=label):
+                env = self.focused_env()
+                env[environment_key] = "1"
+                self.xcparse_log.unlink(missing_ok=True)
+
+                result, summary = self.run_focused(
+                    env,
+                    f"focused-{label}-result-bundle",
+                    "--test",
+                    "AmbitionsModuleTests/ResultBundleRequiredTests",
+                )
+
+                self.assertEqual(result.returncode, 65, result.stdout + result.stderr)
+                self.assertEqual(summary["status"], "failed")
+                self.assertEqual(summary["failure_category"], expected_category)
+                self.assertEqual(summary["executed_tests"], 2)
+                self.assertEqual(summary["result_bundle_retained"], expected_retained)
+                self.assertEqual(self.xcparse_calls(), [])
+
+    def test_build_for_testing_success_requires_a_valid_retained_result_bundle(self):
+        cases = (
+            ("missing", "FAKE_SKIP_RESULT_BUNDLE", "missing_xcresult", False),
+            ("corrupt", "FAKE_CORRUPT_RESULT_BUNDLE", "corrupt_xcresult", True),
+        )
+
+        for label, environment_key, expected_category, expected_retained in cases:
+            with self.subTest(label=label):
+                env = self.focused_env()
+                env[environment_key] = "1"
+                self.xcparse_log.unlink(missing_ok=True)
+
+                result, summary = self.run_build_for_testing(env, f"prebuild-{label}-result-bundle")
+
+                self.assertEqual(result.returncode, 65, result.stdout + result.stderr)
+                self.assertEqual(summary["status"], "failed")
+                self.assertEqual(summary["failure_category"], expected_category)
+                self.assertEqual(summary["result_extraction_mode"], "full")
+                self.assertEqual(summary["result_bundle_retained"], expected_retained)
+                self.assertEqual(self.xcparse_calls(), [])
+
     def test_successful_build_for_testing_uses_metadata_extraction(self):
         env = self.focused_env()
 
@@ -621,6 +690,13 @@ done
         self.assertEqual(summary["failure_category"], "test_discovery_failure")
         self.assertEqual(summary["executed_tests"], 0)
         self.assertEqual(summary["requested_filter_count"], 2)
+        self.assertEqual(summary["requested_result_extraction_mode"], "auto")
+        self.assertEqual(summary["result_extraction_mode"], "full")
+        self.assertTrue(summary["result_bundle_retained"])
+        self.assertEqual(len(self.xcparse_calls()), 4)
+        extraction = json.loads(Path(summary["result_extraction_summary"]).read_text(encoding="utf-8"))
+        self.assertEqual(extraction["extraction_mode"], "full")
+        self.assertTrue(extraction["result_bundle_retained"])
         self.assertEqual(len(self.xcodebuild_calls()), 1)
 
     def test_invalid_filter_batches_fail_before_xcodebuild(self):

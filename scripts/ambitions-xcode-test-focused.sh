@@ -652,18 +652,6 @@ if [[ "$status" -ne 0 ]]; then
   fi
 fi
 
-if [[ "$RESULT_EXTRACTION_REQUESTED" == "auto" && "$status" -ne 0 && -f "$RESULT_BUNDLE/Info.plist" ]]; then
-  RESULT_EXTRACTION_MODE="full"
-fi
-if command -v scripts/ambitions-xcode-result-extract.sh >/dev/null 2>&1; then
-  RESULT_EXTRACTION_SUMMARY_FILE="$(
-    scripts/ambitions-xcode-result-extract.sh \
-      --result "$RESULT_BUNDLE" \
-      --output-dir "$SUMMARY_DIR/$BATCH/$RUN_ID/extract" \
-      --mode "$RESULT_EXTRACTION_MODE" || true
-  )"
-fi
-
 result_bundle_corrupt=false
 RESULT_BUNDLE_RETAINED=false
 if [[ -e "$RESULT_BUNDLE" ]]; then
@@ -687,25 +675,23 @@ else
 fi
 executed_tests="$(extract_executed_tests "$LOG_FILE")"
 if [[ "$status" -eq 0 ]]; then
-  if [[ "$executed_tests" =~ ^[0-9]+$ && "$executed_tests" -gt 0 ]]; then
-    classification="passed"
-  else
+  if [[ ! "$executed_tests" =~ ^[0-9]+$ || "$executed_tests" -eq 0 ]]; then
     status=65
     classification="test_discovery_failure"
+  elif [[ "$RESULT_BUNDLE_RETAINED" != "true" ]]; then
+    status=65
+    classification="missing_xcresult"
+  elif [[ "$result_bundle_corrupt" == "true" ]]; then
+    status=65
+    classification="corrupt_xcresult"
+  else
+    classification="passed"
   fi
 fi
 if [[ "$status" -ne 0 && -e "$RESULT_BUNDLE" && ! -f "$RESULT_BUNDLE/Info.plist" && "$classification" == "unknown" ]]; then
   classification="corrupt_xcresult"
 fi
 [[ -z "$classification" ]] && classification="unknown"
-duration_seconds="$(python3 - "$run_start" <<'PY'
-import sys
-import time
-print(round(time.time() - float(sys.argv[1]), 3))
-PY
-)"
-xcode_observer_seconds="$(extract_xcode_observer_seconds "$LOG_FILE")"
-xctest_wall_seconds="$(extract_xctest_wall_seconds "$LOG_FILE")"
 if [[ "$result_bundle_corrupt" == "true" && "$executed_tests" =~ ^[0-9]+$ && "$executed_tests" -eq 0 ]]; then
   status=65
   if [[ -z "$(grep -E "Test Suite|Test Case|Testing started" "$LOG_FILE" 2>/dev/null || true)" ]]; then
@@ -714,6 +700,27 @@ if [[ "$result_bundle_corrupt" == "true" && "$executed_tests" =~ ^[0-9]+$ && "$e
     classification="corrupt_xcresult"
   fi
 fi
+
+if [[ "$RESULT_EXTRACTION_REQUESTED" == "auto" && "$status" -ne 0 && -f "$RESULT_BUNDLE/Info.plist" ]]; then
+  RESULT_EXTRACTION_MODE="full"
+fi
+if command -v scripts/ambitions-xcode-result-extract.sh >/dev/null 2>&1; then
+  RESULT_EXTRACTION_SUMMARY_FILE="$(
+    scripts/ambitions-xcode-result-extract.sh \
+      --result "$RESULT_BUNDLE" \
+      --output-dir "$SUMMARY_DIR/$BATCH/$RUN_ID/extract" \
+      --mode "$RESULT_EXTRACTION_MODE" || true
+  )"
+fi
+
+duration_seconds="$(python3 - "$run_start" <<'PY'
+import sys
+import time
+print(round(time.time() - float(sys.argv[1]), 3))
+PY
+)"
+xcode_observer_seconds="$(extract_xcode_observer_seconds "$LOG_FILE")"
+xctest_wall_seconds="$(extract_xctest_wall_seconds "$LOG_FILE")"
 
 cat > "$SUMMARY_FILE" <<JSON
 {
