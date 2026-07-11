@@ -18,6 +18,7 @@ UI_PREBUILD_MODE="${AMBITIONS_XCODE_UI_PREBUILD:-auto}"
 UI_PREBUILD_TIMEOUT_DURATION="${AMBITIONS_XCODE_UI_PREBUILD_TIMEOUT:-${AMBITIONS_XCODE_BUILD_FOR_TESTING_TIMEOUT:-45m}}"
 UI_PREBUILD_KILL_AFTER="${AMBITIONS_XCODE_UI_PREBUILD_KILL_AFTER:-$KILL_AFTER}"
 SIM_HEALTH_TIMEOUT="${AMBITIONS_XCODE_SIM_HEALTH_TIMEOUT:-${AMBITIONS_SIM_HEALTH_TIMEOUT:-30s}}"
+TEST_LAUNCH_TIMEOUT="${AMBITIONS_XCODE_TEST_LAUNCH_TIMEOUT:-30s}"
 
 while [[ "$#" -gt 0 ]]; do
   case "$1" in
@@ -30,13 +31,14 @@ while [[ "$#" -gt 0 ]]; do
     --summaries-dir) SUMMARY_DIR="${2:-$SUMMARY_DIR}"; shift 2 ;;
     --timeout) TIMEOUT_DURATION="${2:-$TIMEOUT_DURATION}"; shift 2 ;;
     --kill-after) KILL_AFTER="${2:-$KILL_AFTER}"; shift 2 ;;
+    --test-launch-timeout) TEST_LAUNCH_TIMEOUT="${2:-$TEST_LAUNCH_TIMEOUT}"; shift 2 ;;
     --without-building|--test-without-building) XCODEBUILD_ACTION="test-without-building"; shift ;;
     --prebuild) UI_PREBUILD_MODE="always"; shift ;;
     --skip-prebuild) UI_PREBUILD_MODE="never"; shift ;;
     --prebuild-timeout) UI_PREBUILD_TIMEOUT_DURATION="${2:-$UI_PREBUILD_TIMEOUT_DURATION}"; shift 2 ;;
     --prebuild-kill-after) UI_PREBUILD_KILL_AFTER="${2:-$UI_PREBUILD_KILL_AFTER}"; shift 2 ;;
     -h|--help)
-      echo "Usage: scripts/ambitions-xcode-test-focused.sh --batch <BATCH> --test <TEST_ID> [--scheme auto|Ambitions|AmbitionsUnitTests|AmbitionsUITests] [--timeout 15m] [--kill-after 60s] [--without-building] [--prebuild|--skip-prebuild] [--prebuild-timeout 35m]" >&2
+      echo "Usage: scripts/ambitions-xcode-test-focused.sh --batch <BATCH> --test <TEST_ID> [--scheme auto|Ambitions|AmbitionsUnitTests|AmbitionsUITests] [--timeout 15m] [--kill-after 60s] [--test-launch-timeout 30s] [--without-building] [--prebuild|--skip-prebuild] [--prebuild-timeout 35m]" >&2
       exit 0
       ;;
     *)
@@ -173,17 +175,20 @@ write_sim_health_failure_summary() {
   local failure_class="$1"
   local health_payload="$2"
   local exit_code="${3:-22}"
-  local selected_udid selected_name selected_state booted_count app_pid_count xcode_process_count
+  local selected_udid selected_name selected_state selection_source exact_name_match_count booted_count app_pid_count xcode_process_count
 
   selected_udid="$(json_field udid "$health_payload")"
   selected_name="$(json_field sim_name "$health_payload")"
   selected_state="$(json_field state "$health_payload")"
+  selection_source="$(json_field selection_source "$health_payload")"
+  exact_name_match_count="$(json_field exact_name_match_count "$health_payload")"
   booted_count="$(json_field booted_simulator_count "$health_payload")"
   app_pid_count="$(json_field ambitions_app_pid_count "$health_payload")"
   xcode_process_count="$(json_field xcode_process_count "$health_payload")"
   [[ -n "$booted_count" ]] || booted_count=0
   [[ -n "$app_pid_count" ]] || app_pid_count=0
   [[ -n "$xcode_process_count" ]] || xcode_process_count=0
+  [[ -n "$exact_name_match_count" ]] || exact_name_match_count=0
 
   cat > "$SUMMARY_FILE" <<JSON
 {
@@ -207,6 +212,8 @@ write_sim_health_failure_summary() {
   "selected_sim_name": "$selected_name",
   "selected_sim_udid": "$selected_udid",
   "selected_sim_state": "$selected_state",
+  "simulator_selection_source": "$selection_source",
+  "simulator_exact_name_match_count": $exact_name_match_count,
   "booted_simulator_count": $booted_count,
   "ambitions_app_pid_count": $app_pid_count,
   "xcode_process_count": $xcode_process_count,
@@ -252,7 +259,11 @@ if [[ "$sim_status" -ne 0 ]]; then
 fi
 
 sim_udid="$(json_field udid "$sim_json")"
+sim_name="$(json_field sim_name "$sim_json")"
 sim_state="$(json_field state "$sim_json")"
+sim_selection_source="$(json_field selection_source "$sim_json")"
+sim_exact_name_match_count="$(json_field exact_name_match_count "$sim_json")"
+[[ -n "$sim_exact_name_match_count" ]] || sim_exact_name_match_count=0
 if [[ -z "$sim_udid" || "$sim_state" != "Booted" ]]; then
   write_sim_health_failure_summary "simulator_not_booted" "$sim_json" 22
 fi
@@ -373,6 +384,11 @@ PY
   "timestamp_utc": "$TS",
   "run_id": "$RUN_ID",
   "sim_destination": "$SIM_DEST",
+  "selected_sim_name": "$sim_name",
+  "selected_sim_udid": "$sim_udid",
+  "selected_sim_state": "$sim_state",
+  "simulator_selection_source": "$sim_selection_source",
+  "simulator_exact_name_match_count": $sim_exact_name_match_count,
   "ui_prebuild_required": true,
   "ui_prebuild_status": "failed",
   "ui_prebuild_failure_category": "$UI_PREBUILD_FAILURE_CLASS",
@@ -412,7 +428,7 @@ TEST_CMD=(
   ONLY_ACTIVE_ARCH=YES
   -resultBundlePath "$RESULT_BUNDLE"
 )
-BOUNDED_TEST_CMD=(scripts/ambitions-bounded-xcodebuild.sh --timeout "$TIMEOUT_DURATION" --kill-after "$KILL_AFTER" --log "$LOG_FILE" -- "${TEST_CMD[@]}")
+BOUNDED_TEST_CMD=(scripts/ambitions-bounded-xcodebuild.sh --timeout "$TIMEOUT_DURATION" --kill-after "$KILL_AFTER" --test-launch-timeout "$TEST_LAUNCH_TIMEOUT" --log "$LOG_FILE" -- "${TEST_CMD[@]}")
 
 classify_log_failure() {
   python3 scripts/ambitions-xcode-failure-classifier.py --log "$LOG_FILE" --json \
@@ -442,14 +458,10 @@ mark_status_from_log_failure() {
 
 repair_simulator_for_retry() {
   if [[ "$classification" == "simulator_launcher_failure" && -n "${sim:-}" ]]; then
-    xcrun simctl shutdown "$sim" >/dev/null 2>&1 || true
-    xcrun simctl erase "$sim" >/dev/null 2>&1 || true
+    run_with_optional_timeout "$SIM_HEALTH_TIMEOUT" xcrun simctl shutdown "$sim" >/dev/null 2>&1 || true
   fi
 
-  scripts/ambitions-xcode-sim-health.sh --repair --json --timeout "$SIM_HEALTH_TIMEOUT" >/dev/null 2>&1 || true
-  if [[ -n "${sim:-}" ]]; then
-    xcrun simctl bootstatus "$sim" -b >/dev/null 2>&1 || true
-  fi
+  scripts/ambitions-xcode-sim-health.sh --repair --json --timeout "$SIM_HEALTH_TIMEOUT" >/dev/null 2>&1
 }
 
 classification=""
@@ -467,17 +479,25 @@ mark_status_from_log_failure
 if [[ "$status" -ne 0 ]]; then
   [[ -n "$classification" ]] || classification="$(classify_log_failure)"
   if is_simulator_retry_class "$classification"; then
+    set +e
     repair_simulator_for_retry
-    run_once
-    status=$?
-    classification=""
-    if [[ "$status" -eq 0 ]] && grep -Eq "Testing failed:|\\*\\* TEST EXECUTE FAILED \\*\\*" "$LOG_FILE"; then
-      status=65
+    repair_status=$?
+    set -e
+    if [[ "$repair_status" -eq 0 ]]; then
+      run_once
+      status=$?
+      classification=""
+      if [[ "$status" -eq 0 ]] && grep -Eq "Testing failed:|\\*\\* TEST EXECUTE FAILED \\*\\*" "$LOG_FILE"; then
+        status=65
+      fi
+      if [[ "$status" -eq 0 ]] && grep -Eq "Test Case '.+' failed|Test Suite '.+' failed|XCTAssert.+ failed|: error: -\\[.+\\] : XCTAssert" "$LOG_FILE"; then
+        status=65
+      fi
+      mark_status_from_log_failure
+    else
+      status="$repair_status"
+      classification="simulator_boot_failure"
     fi
-    if [[ "$status" -eq 0 ]] && grep -Eq "Test Case '.+' failed|Test Suite '.+' failed|XCTAssert.+ failed|: error: -\\[.+\\] : XCTAssert" "$LOG_FILE"; then
-      status=65
-    fi
-    mark_status_from_log_failure
   fi
 fi
 
@@ -552,6 +572,11 @@ cat > "$SUMMARY_FILE" <<JSON
   "timestamp_utc": "$TS",
   "run_id": "$RUN_ID",
   "sim_destination": "$SIM_DEST",
+  "selected_sim_name": "$sim_name",
+  "selected_sim_udid": "$sim_udid",
+  "selected_sim_state": "$sim_state",
+  "simulator_selection_source": "$sim_selection_source",
+  "simulator_exact_name_match_count": $sim_exact_name_match_count,
   "ui_prebuild_required": $UI_PREBUILD_REQUIRED,
   "ui_prebuild_status": "$([[ "$UI_PREBUILD_REQUIRED" == "true" ]] && { [ "$UI_PREBUILD_STATUS" -eq 0 ] && echo passed || echo failed; } || echo not_run)",
   "ui_prebuild_failure_category": "$UI_PREBUILD_FAILURE_CLASS",

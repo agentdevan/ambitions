@@ -18,7 +18,7 @@ sessionDefaultsProfiles:
     simulatorName: iPhone 17 Pro Max
     simulatorId: DD9B9C84-7188-48FA-AA2A-AB5C1D0EE2B6
     useLatestOS: false
-    derivedDataPath: /Users/devan/Documents/GitHub/ambitions/output/DerivedData-XcodeBuildMCP
+    derivedDataPath: /Users/devan/Documents/GitHub/ambitions/.codex/DerivedData/Ambitions
     preferXcodebuild: true
     bundleId: com.ambitions.ios
     simulatorPlatform: iOS Simulator

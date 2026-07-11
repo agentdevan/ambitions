@@ -1,6 +1,7 @@
 import argparse
 import json
 import re
+import time
 from pathlib import Path
 
 
@@ -54,6 +55,8 @@ PATTERNS = {
         r"An error was encountered while attempting to boot",
     ],
     "simulator_launcher_failure": [
+        r"XCODEBUILD_TEST_LAUNCH_TIMEOUT=1",
+        r"XCODEBUILD_SIMULATOR_LAUNCH_FAILURE=1",
         r"IDELaunchiPhoneSimulatorLauncher",
         r"NSMachErrorDomain\s+Code:\s*-308",
         r"Mach error -308",
@@ -152,10 +155,33 @@ def read_input(path: str) -> str:
         return ""
 
 
+def watch_test_launch(log_path: str, completion_path: str, timeout_seconds: float) -> str:
+    deadline = time.monotonic() + timeout_seconds
+    completion = Path(completion_path)
+    test_started = False
+    while True:
+        text = read_input(log_path)
+        if re.search(r"Testing started|Test Suite|Test Case", text, re.IGNORECASE | re.MULTILINE):
+            test_started = True
+        classification = classify(text)
+        if classification == "simulator_launcher_failure":
+            return classification
+        if completion.exists() and completion.stat().st_size > 0:
+            if classification != "unknown":
+                return classification
+            return "test_completed" if test_started else "process_exited"
+        if not test_started and time.monotonic() >= deadline:
+            return "test_launch_timeout"
+        time.sleep(0.1)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--log")
     ap.add_argument("--result")
+    ap.add_argument("--watch-test-launch", action="store_true")
+    ap.add_argument("--completion-file")
+    ap.add_argument("--timeout-seconds", type=float)
     ap.add_argument("--json", action="store_true")
     args = ap.parse_args()
 
@@ -165,7 +191,12 @@ def main() -> int:
     elif args.result:
         text = args.result
 
-    classification = classify(text)
+    if args.watch_test_launch:
+        if not args.log or not args.completion_file or not args.timeout_seconds or args.timeout_seconds <= 0:
+            ap.error("--watch-test-launch requires --log, --completion-file, and positive --timeout-seconds")
+        classification = watch_test_launch(args.log, args.completion_file, args.timeout_seconds)
+    else:
+        classification = classify(text)
     payload = {
         "classification": classification,
         "input": {

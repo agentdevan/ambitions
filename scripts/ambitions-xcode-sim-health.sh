@@ -18,6 +18,10 @@ NO_SIM=0
 ALLOW_ACTIVE_XCODE="${AMBITIONS_SIM_HEALTH_ALLOW_ACTIVE_XCODE:-0}"
 KILL_ACTIVE_XCODE=0
 SIMCTL_TIMEOUT="${AMBITIONS_SIM_HEALTH_TIMEOUT:-15s}"
+select_udid=""
+select_name=""
+selection_source="unselected"
+exact_name_match_count=0
 while [[ "$#" -gt 0 ]]; do
   case "$1" in
     --json) JSON=1 ;;
@@ -115,11 +119,21 @@ fail_health() {
   local message="$2"
   local exit_code="${3:-1}"
   if (( JSON == 1 )); then
-    printf '{"sim_required":true,"status":"failed","failure_category":"%s","message":"%s","simctl_timeout":"%s"}\n' \
-      "$(json_escape "$class")" "$(json_escape "$message")" "$(json_escape "$SIMCTL_TIMEOUT")"
+    printf '{"sim_required":true,"status":"failed","failure_category":"%s","message":"%s","sim_name":"%s","udid":"%s","selection_source":"%s","exact_name_match_count":%s,"simctl_timeout":"%s"}\n' \
+      "$(json_escape "$class")" \
+      "$(json_escape "$message")" \
+      "$(json_escape "$select_name")" \
+      "$(json_escape "$select_udid")" \
+      "$(json_escape "$selection_source")" \
+      "$exact_name_match_count" \
+      "$(json_escape "$SIMCTL_TIMEOUT")"
   else
     echo "FAILURE_CLASS=$class"
     echo "sim_health_message=$message"
+    echo "selected_sim_name=$select_name"
+    echo "selected_sim_udid=$select_udid"
+    echo "selection_source=$selection_source"
+    echo "exact_name_match_count=$exact_name_match_count"
     echo "simctl_timeout=$SIMCTL_TIMEOUT"
   fi
   exit "$exit_code"
@@ -261,29 +275,39 @@ for sig, delay in ((signal.SIGTERM, 2.0), (signal.SIGKILL, 0.0)):
 PY
 }
 
-find_sim_udid() {
+available_device_rows() {
+  python3 - "$DEVICES" <<'PY'
+import re
+import sys
+
+pattern = re.compile(r"^\s*(.*?)\s+\(([0-9A-Fa-f-]{36})\)\s+\(([^)]+)\)\s*$")
+for raw in sys.argv[1].splitlines():
+    match = pattern.match(raw)
+    if match:
+        print("\t".join(match.groups()))
+PY
+}
+
+AVAILABLE_DEVICE_ROWS="$(available_device_rows)"
+
+device_name_for_udid() {
   local needle="$1"
-  local udid
-  if [[ -z "$needle" ]]; then
-    return 1
-  fi
-  udid="$(echo "$DEVICES" | awk -v needle="$needle" '
-    /^[[:space:]]*-- / { next }
-    /[0-9A-Fa-f-]{36}/ {
-      name=$0
-      sub(/^[[:space:]]*/, "", name)
-      sub(/[[:space:]]*\([0-9A-Fa-f-]{36}\).*/, "", name)
-      if (name != needle) next
-      for (i = 1; i <= NF; i++) {
-        value=$i;
-        gsub(/[()]/, "", value);
-        if (value ~ /^[0-9A-Fa-f-]{36}$/) { udid=value }
-      }
-    }
-    END { if (udid != "") print udid }
-  ')"
-  [[ -n "$udid" ]] && { echo "$udid"; return 0; }
-  return 1
+  awk -F '\t' -v needle="$needle" '$2 == needle {print $1; exit}' <<<"$AVAILABLE_DEVICE_ROWS"
+}
+
+available_udid_exists() {
+  local needle="$1"
+  awk -F '\t' -v needle="$needle" '$2 == needle {found=1} END {exit(found ? 0 : 1)}' <<<"$AVAILABLE_DEVICE_ROWS"
+}
+
+exact_udids_for_name() {
+  local needle="$1"
+  awk -F '\t' -v needle="$needle" '$1 == needle {print $2}' <<<"$AVAILABLE_DEVICE_ROWS"
+}
+
+exact_count_for_name() {
+  local needle="$1"
+  exact_udids_for_name "$needle" | count_lines
 }
 
 xcodebuildmcp_default_simulator_field() {
@@ -324,61 +348,71 @@ for raw in lines:
 PY
 }
 
-select_udid=""
-select_name=""
+mcp_default_udid="$(xcodebuildmcp_default_simulator_field simulatorId || true)"
+mcp_default_name="$(xcodebuildmcp_default_simulator_field simulatorName || true)"
+
+select_unique_exact_name() {
+  local requested_name="$1"
+  local source="$2"
+  local matches
+
+  select_name="$requested_name"
+  selection_source="$source"
+  matches="$(exact_udids_for_name "$requested_name")"
+  exact_name_match_count="$(printf '%s\n' "$matches" | count_lines)"
+
+  if [[ "$exact_name_match_count" -eq 0 ]]; then
+    fail_health "simulator_not_available" "no available simulator exactly named ${requested_name}" 2
+  fi
+  if [[ "$exact_name_match_count" -gt 1 ]]; then
+    fail_health "simulator_name_ambiguous" "${exact_name_match_count} available simulators are exactly named ${requested_name}; provide AMBITIONS_SIM_UDID or a valid MCP simulatorId" 2
+  fi
+
+  select_udid="$(printf '%s\n' "$matches" | awk 'NF {print; exit}')"
+}
 
 if [[ -n "${AMBITIONS_SIM_UDID:-}" ]]; then
   select_udid="${AMBITIONS_SIM_UDID}"
-  select_name="$(echo "$DEVICES" | awk -v udid="$select_udid" 'index($0, udid) {line=$0; sub(/^[[:space:]]*/, "", line); marker=index(line, " ("); if (marker > 0) line=substr(line, 1, marker - 1); print line; exit}')"
+  selection_source="environment_udid"
+  if ! available_udid_exists "$select_udid"; then
+    fail_health "simulator_not_available" "AMBITIONS_SIM_UDID ${select_udid} is not an available simulator" 2
+  fi
+  select_name="$(device_name_for_udid "$select_udid")"
+  exact_name_match_count="$(exact_count_for_name "$select_name")"
 elif [[ -n "${AMBITIONS_SIM_NAME:-}" ]]; then
   select_name="${AMBITIONS_SIM_NAME}"
-  mcp_default_udid="$(xcodebuildmcp_default_simulator_field simulatorId || true)"
-  mcp_default_name="$(xcodebuildmcp_default_simulator_field simulatorName || true)"
-  if [[ "$mcp_default_name" == "$select_name" && -n "$mcp_default_udid" ]] && grep -q "$mcp_default_udid" <<<"$DEVICES"; then
+  selection_source="environment_name"
+  if [[ -n "$mcp_default_udid" ]] \
+    && [[ "$mcp_default_name" == "$select_name" ]] \
+    && available_udid_exists "$mcp_default_udid" \
+    && [[ "$(device_name_for_udid "$mcp_default_udid")" == "$select_name" ]]; then
     select_udid="$mcp_default_udid"
+    selection_source="mcp_profile_udid"
+    exact_name_match_count="$(exact_count_for_name "$select_name")"
   else
-    select_udid="$(find_sim_udid "${AMBITIONS_SIM_NAME}")"
+    select_unique_exact_name "$select_name" "environment_name"
   fi
+elif [[ -n "$mcp_default_udid" ]] && available_udid_exists "$mcp_default_udid"; then
+  select_udid="$mcp_default_udid"
+  select_name="$(device_name_for_udid "$select_udid")"
+  selection_source="mcp_profile_udid"
+  exact_name_match_count="$(exact_count_for_name "$select_name")"
+elif [[ -n "$mcp_default_name" ]]; then
+  select_unique_exact_name "$mcp_default_name" "mcp_profile_name"
 else
-  mcp_default_udid="$(xcodebuildmcp_default_simulator_field simulatorId || true)"
-  if [[ -n "$mcp_default_udid" ]] && grep -q "$mcp_default_udid" <<<"$DEVICES"; then
-    select_udid="$mcp_default_udid"
-    select_name="$(echo "$DEVICES" | awk -v udid="$select_udid" 'index($0, udid) {line=$0; sub(/^[[:space:]]*/, "", line); marker=index(line, " ("); if (marker > 0) line=substr(line, 1, marker - 1); print line; exit}')"
-  fi
-
-  if [[ -z "$select_udid" ]]; then
-    mcp_default_name="$(xcodebuildmcp_default_simulator_field simulatorName || true)"
-    if [[ -n "$mcp_default_name" ]]; then
-      select_udid="$(find_sim_udid "$mcp_default_name")"
-      select_name="$mcp_default_name"
+  for candidate in "iPhone 17 Pro Max" "iPhone 17 Pro" "iPhone 17" "iPhone 16" "iPhone 15"; do
+    candidate_count="$(exact_count_for_name "$candidate")"
+    if [[ "$candidate_count" -eq 0 ]]; then
+      continue
     fi
-  fi
-
-  if [[ -z "$select_udid" ]]; then
-    for candidate in "iPhone 17 Pro Max" "iPhone 17 Pro" "iPhone 17" "iPhone 16" "iPhone 15"; do
-      select_udid="$(find_sim_udid "$candidate")"
-      if [[ -n "$select_udid" ]]; then
-        select_name="$candidate"
-        break
-      fi
-    done
-  fi
+    select_unique_exact_name "$candidate" "fallback_name"
+    break
+  done
 fi
 
 if [[ -z "$select_udid" ]]; then
-  select_udid="$(echo "$DEVICES" | awk '/iPhone/ && /[0-9A-Fa-f-]{36}/ {
-      for (i = 1; i <= NF; i++) {
-        value=$i;
-        gsub(/[()]/, "", value);
-        if (value ~ /^[0-9A-Fa-f-]{36}$/) {print value; exit}
-      }
-    }')"
-  select_name="$(echo "$DEVICES" | awk -v udid="$select_udid" 'index($0, udid) {line=$0; sub(/^[[:space:]]*/, "", line); marker=index(line, " ("); if (marker > 0) line=substr(line, 1, marker - 1); print line; exit}')"
-fi
-
-if [[ -z "$select_udid" ]]; then
-  echo "no available simulator found" >&2
-  exit 2
+  selection_source="fallback_name"
+  fail_health "simulator_not_available" "no supported available iPhone simulator found" 2
 fi
 
 state="$(awk -v udid="$select_udid" 'index($0,udid){
@@ -418,8 +452,16 @@ if [[ "$KILL_ACTIVE_XCODE" -eq 1 ]]; then
   terminate_xcode_process_tree
 fi
 
+boot_output=""
 if [[ "$state" != "Booted" && "$REPAIR" -eq 1 ]]; then
-  xcrun simctl boot "$select_udid" >/dev/null 2>&1 || true
+  capture_bounded boot_output "$SIMCTL_TIMEOUT" xcrun simctl boot "$select_udid" || true
+fi
+
+if [[ "$REPAIR" -eq 1 ]]; then
+  bootstatus_output=""
+  if ! capture_bounded bootstatus_output "$SIMCTL_TIMEOUT" xcrun simctl bootstatus "$select_udid" -b; then
+    fail_health "simulator_boot_failure" "simctl bootstatus -b failed for ${select_udid}: ${bootstatus_output}${boot_output:+; boot: ${boot_output}}" 22
+  fi
 fi
 
 if [[ "$REPAIR" -eq 1 || "$ERASE_SELECTED" -eq 1 ]]; then
@@ -454,11 +496,13 @@ elif [[ "$xcode_process_count_after" -gt 0 && "$ALLOW_ACTIVE_XCODE" -ne 1 ]]; th
 fi
 
 if [[ "$JSON" -eq 1 ]]; then
-  printf '{"sim_required":true,"status":"%s","failure_category":"%s","sim_name":"%s","udid":"%s","state":"%s","repair":%s,"erase_selected":%s,"allow_active_xcode":%s,"kill_active_xcode":%s,"xcode_process_blocking":%s,"simctl_timeout":"%s","booted_simulator_count":%s,"booted_simulator_count_before":%s,"booted_udids":"%s","booted_udids_before":"%s","ambitions_app_pid_count":%s,"ambitions_app_pid_count_before":%s,"ambitions_app_pids":"%s","ambitions_app_pids_before":"%s","xcode_process_count":%s,"xcode_process_count_before":%s,"xcode_process_pids":"%s","xcode_process_pids_before":"%s"}\n' \
+  printf '{"sim_required":true,"status":"%s","failure_category":"%s","sim_name":"%s","udid":"%s","selection_source":"%s","exact_name_match_count":%s,"state":"%s","repair":%s,"erase_selected":%s,"allow_active_xcode":%s,"kill_active_xcode":%s,"xcode_process_blocking":%s,"simctl_timeout":"%s","booted_simulator_count":%s,"booted_simulator_count_before":%s,"booted_udids":"%s","booted_udids_before":"%s","ambitions_app_pid_count":%s,"ambitions_app_pid_count_before":%s,"ambitions_app_pids":"%s","ambitions_app_pids_before":"%s","xcode_process_count":%s,"xcode_process_count_before":%s,"xcode_process_pids":"%s","xcode_process_pids_before":"%s"}\n' \
     "$health_status" \
     "$failure_category" \
     "$(json_escape "$select_name")" \
     "$(json_escape "$select_udid")" \
+    "$(json_escape "$selection_source")" \
+    "$exact_name_match_count" \
     "$(json_escape "$state")" \
     "$([[ "$REPAIR" -eq 1 ]] && echo true || echo false)" \
     "$([[ "$ERASE_SELECTED" -eq 1 ]] && echo true || echo false)" \
@@ -481,6 +525,8 @@ if [[ "$JSON" -eq 1 ]]; then
 else
   echo "selected_sim_name=${select_name}"
   echo "selected_sim_udid=${select_udid}"
+  echo "selection_source=${selection_source}"
+  echo "exact_name_match_count=${exact_name_match_count}"
   echo "selected_sim_state=${state}"
   echo "simctl_timeout=${SIMCTL_TIMEOUT}"
   echo "booted_simulator_count=${booted_count_after}"
