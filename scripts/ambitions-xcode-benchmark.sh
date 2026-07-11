@@ -18,7 +18,8 @@ Purpose:
   test-without-building timings for a focused test or test plan.
 
   With --lane and --, the helper runs a local command, records elapsed time and exit code under ignored
-  .codex/xcode-benchmarks artifacts, and returns the command exit code.
+  .codex/xcode-benchmarks artifacts, and returns the command exit code. Direct focused-runner commands
+  also bind the sample to the one newly retained focused summary; missing or zero-test proof fails closed.
 
 Defaults:
   --batch XCODE-BENCHMARK
@@ -148,7 +149,41 @@ if [[ "$COMMAND_MODE" -eq 1 ]]; then
   TS="$(date -u +%Y%m%dT%H%M%SZ)"
   OUT_DIR="$RESULT_ROOT/$BATCH/$TS"
   SUMMARY_FILE="$OUT_DIR/benchmark-summary.json"
+  EVIDENCE_METADATA_FILE="$OUT_DIR/evidence-metadata.json"
+  FOCUSED_SUMMARY_BASELINE="$OUT_DIR/focused-summary-baseline.txt"
   mkdir -p "$OUT_DIR"
+
+  focused_command=0
+  focused_summary_root="$REPO_ROOT/.codex/xcode-summaries"
+  expect_summary_root=0
+  for command_arg in "$@"; do
+    if [[ "$expect_summary_root" -eq 1 ]]; then
+      focused_summary_root="$command_arg"
+      expect_summary_root=0
+      continue
+    fi
+    case "$command_arg" in
+      --summaries-dir) expect_summary_root=1 ;;
+      scripts/ambitions-xcode-test-focused.sh|./scripts/ambitions-xcode-test-focused.sh|"$REPO_ROOT/scripts/ambitions-xcode-test-focused.sh")
+        focused_command=1
+        ;;
+    esac
+  done
+  if [[ "$expect_summary_root" -eq 1 ]]; then
+    echo "focused command --summaries-dir requires a value" >&2
+    exit 2
+  fi
+  if [[ "$focused_summary_root" != /* ]]; then
+    focused_summary_root="$REPO_ROOT/$focused_summary_root"
+  fi
+
+  if [[ "$focused_command" -eq 1 ]]; then
+    if [[ -d "$focused_summary_root" ]]; then
+      find "$focused_summary_root" -type f -name focused-test-summary.json -print 2>/dev/null | sort > "$FOCUSED_SUMMARY_BASELINE"
+    else
+      : > "$FOCUSED_SUMMARY_BASELINE"
+    fi
+  fi
 
   start_epoch="$(date +%s)"
   set +e
@@ -158,17 +193,115 @@ if [[ "$COMMAND_MODE" -eq 1 ]]; then
   end_epoch="$(date +%s)"
   duration=$((end_epoch - start_epoch))
 
+  if [[ "$focused_command" -eq 1 ]]; then
+    mapfile -t focused_summaries < <(
+      python3 - "$FOCUSED_SUMMARY_BASELINE" "$focused_summary_root" <<'PY'
+import sys
+from pathlib import Path
+
+baseline_path = Path(sys.argv[1])
+summary_root = Path(sys.argv[2])
+baseline = set(baseline_path.read_text(encoding="utf-8").splitlines())
+current = sorted(
+    str(path.resolve())
+    for path in summary_root.rglob("focused-test-summary.json")
+) if summary_root.is_dir() else []
+for path in current:
+    if path not in baseline:
+        print(path)
+PY
+    )
+
+    focused_evidence_status=65
+    if (( ${#focused_summaries[@]} == 1 )); then
+      set +e
+      python3 - "${focused_summaries[0]}" "$EVIDENCE_METADATA_FILE" <<'PY'
+import hashlib
+import json
+import sys
+from pathlib import Path
+
+summary_path = Path(sys.argv[1]).resolve()
+metadata_path = Path(sys.argv[2])
+source = summary_path.read_bytes()
+try:
+    summary = json.loads(source)
+except (json.JSONDecodeError, UnicodeError):
+    summary = {}
+
+executed_tests = summary.get("executed_tests") if isinstance(summary, dict) else None
+selected_sim_udid = summary.get("selected_sim_udid") if isinstance(summary, dict) else None
+focused_run_id = summary.get("run_id") if isinstance(summary, dict) else None
+summary_status = summary.get("status") if isinstance(summary, dict) else None
+valid = (
+    isinstance(summary, dict)
+    and summary_status == "passed"
+    and type(executed_tests) is int
+    and executed_tests > 0
+    and isinstance(selected_sim_udid, str)
+    and bool(selected_sim_udid.strip())
+    and isinstance(focused_run_id, str)
+    and bool(focused_run_id.strip())
+)
+metadata = {
+    "evidence_kind": "focused-test" if valid else "focused-test-invalid",
+    "executed_tests": executed_tests,
+    "selected_sim_udid": selected_sim_udid,
+    "focused_test_run_id": focused_run_id,
+    "focused_test_summary": str(summary_path),
+    "focused_test_summary_sha256": hashlib.sha256(source).hexdigest(),
+    "focused_test_summary_status": summary_status,
+}
+metadata_path.write_text(
+    json.dumps(metadata, indent=2, sort_keys=True) + "\n",
+    encoding="utf-8",
+)
+raise SystemExit(0 if valid else 65)
+PY
+      focused_evidence_status=$?
+      set -e
+    else
+      python3 - "$EVIDENCE_METADATA_FILE" "${#focused_summaries[@]}" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+Path(sys.argv[1]).write_text(
+    json.dumps({
+        "evidence_kind": "focused-test-invalid",
+        "focused_test_summary_count": int(sys.argv[2]),
+    }, indent=2, sort_keys=True) + "\n",
+    encoding="utf-8",
+)
+PY
+    fi
+    if [[ "$status" -eq 0 && "$focused_evidence_status" -ne 0 ]]; then
+      status=65
+    fi
+  else
+    python3 - "$EVIDENCE_METADATA_FILE" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+Path(sys.argv[1]).write_text(
+    json.dumps({"evidence_kind": "generic-command"}, indent=2, sort_keys=True) + "\n",
+    encoding="utf-8",
+)
+PY
+  fi
+
   capture_identity || { echo "package identity is ${PACKAGE_IDENTITY_STATUS}; refusing benchmark sample" >&2; exit 25; }
   XCODE_VERSION="$(xcodebuild -version 2>/dev/null | tr '\n' ' ' || true)"
   MACOS_VERSION="$(sw_vers -productVersion 2>/dev/null || true)"
   CPU="$(sysctl -n machdep.cpu.brand_string 2>/dev/null || uname -m)"
   MEMORY_BYTES="$(sysctl -n hw.memsize 2>/dev/null || echo unknown)"
-  python3 - "$SUMMARY_FILE" "$BATCH" "$LANE" "$TS" "$status" "$duration" "$*" "$COMMIT" "$DIRTY_STATE" "$XCODE_VERSION" "$MACOS_VERSION" "$CPU" "$MEMORY_BYTES" "$CACHE_IDENTITY" "$SAMPLE_STATE" "$PACKAGE_PATH" "$PACKAGE_IDENTITY" <<'PY'
+  python3 - "$SUMMARY_FILE" "$BATCH" "$LANE" "$TS" "$status" "$duration" "$*" "$COMMIT" "$DIRTY_STATE" "$XCODE_VERSION" "$MACOS_VERSION" "$CPU" "$MEMORY_BYTES" "$CACHE_IDENTITY" "$SAMPLE_STATE" "$PACKAGE_PATH" "$PACKAGE_IDENTITY" "$EVIDENCE_METADATA_FILE" <<'PY'
 import json
 import sys
 from pathlib import Path
 
-summary, batch, lane, ts, status, duration, command, commit, dirty, xcode, macos, cpu, memory, cache, state, package, package_identity = sys.argv[1:]
+summary, batch, lane, ts, status, duration, command, commit, dirty, xcode, macos, cpu, memory, cache, state, package, package_identity, evidence_metadata = sys.argv[1:]
 payload = {
     "batch": batch,
     "lane": lane,
@@ -190,6 +323,7 @@ payload = {
     "artifact_root": ".codex/xcode-benchmarks",
     "claim_boundary": "timing evidence only; not build, test, release, accessibility, device, TestFlight, or App Store proof",
 }
+payload.update(json.loads(Path(evidence_metadata).read_text(encoding="utf-8")))
 Path(summary).write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 PY
 

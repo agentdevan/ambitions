@@ -1,3 +1,4 @@
+import hashlib
 import importlib.util
 import json
 import math
@@ -41,7 +42,47 @@ class BenchmarkReportTests(unittest.TestCase):
             "exit_code": exit_code,
         }
 
-    def run_cli(self, root, samples, *, require_samples=None, fail_on_miss=False, output=True):
+    def focused_sample(
+        self,
+        root,
+        state,
+        duration,
+        *,
+        executed_tests=1,
+        selected_sim_udid="SIM-ONE",
+        exit_code=0,
+    ):
+        sample = self.sample(state, duration, exit_code=exit_code)
+        run_id = f"focused-{self.sample_number}"
+        summary_path = root / f"{run_id}-summary.json"
+        summary_payload = {
+            "status": "passed" if exit_code == 0 else "failed",
+            "executed_tests": executed_tests,
+            "selected_sim_udid": selected_sim_udid,
+            "run_id": run_id,
+        }
+        summary_bytes = (json.dumps(summary_payload, sort_keys=True) + "\n").encode()
+        summary_path.write_bytes(summary_bytes)
+        sample.update({
+            "evidence_kind": "focused-test",
+            "executed_tests": executed_tests,
+            "selected_sim_udid": selected_sim_udid,
+            "focused_test_run_id": run_id,
+            "focused_test_summary": str(summary_path),
+            "focused_test_summary_sha256": hashlib.sha256(summary_bytes).hexdigest(),
+        })
+        return sample
+
+    def run_cli(
+        self,
+        root,
+        samples,
+        *,
+        require_samples=None,
+        fail_on_miss=False,
+        output=True,
+        evidence_kind=None,
+    ):
         sample_paths = []
         for index, sample in enumerate(samples, start=1):
             path = root / f"sample-{index}.json"
@@ -53,9 +94,19 @@ class BenchmarkReportTests(unittest.TestCase):
             require_samples=require_samples,
             fail_on_miss=fail_on_miss,
             output=output,
+            evidence_kind=evidence_kind,
         )
 
-    def run_cli_paths(self, root, sample_paths, *, require_samples=None, fail_on_miss=False, output=True):
+    def run_cli_paths(
+        self,
+        root,
+        sample_paths,
+        *,
+        require_samples=None,
+        fail_on_miss=False,
+        output=True,
+        evidence_kind=None,
+    ):
         command = [
             sys.executable,
             str(SCRIPT),
@@ -65,6 +116,8 @@ class BenchmarkReportTests(unittest.TestCase):
         ]
         if require_samples is not None:
             command.extend(["--require-samples", str(require_samples)])
+        if evidence_kind is not None:
+            command.extend(["--evidence-kind", evidence_kind])
         if fail_on_miss:
             command.append("--fail-on-miss")
         output_path = root / "report.json"
@@ -228,6 +281,112 @@ class BenchmarkReportTests(unittest.TestCase):
                 samples[1][key] = ""
                 with self.assertRaisesRegex(ValueError, "identical nonempty cohort fields"):
                     self.module.build_report(samples, 30, require_samples=3)
+
+    def test_focused_test_gate_accepts_three_positive_runs_on_one_simulator(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            samples = [
+                self.focused_sample(root, "warm", duration, executed_tests=count)
+                for duration, count in ((20, 1), (30, 4), (90, 2))
+            ]
+            report = self.module.build_report(
+                samples,
+                target_seconds=30,
+                require_samples=3,
+                evidence_kind="focused-test",
+            )
+            self.assertEqual(report["evidence_kind"], "focused-test")
+            self.assertEqual(report["focused_test_evidence"]["executed_tests"], [1, 4, 2])
+            self.assertEqual(report["focused_test_evidence"]["selected_sim_udid"], "SIM-ONE")
+            self.assertEqual(report["warm"]["target_state"], "met")
+
+    def test_focused_test_gate_rejects_nonpositive_or_noninteger_execution_counts(self):
+        invalid_counts = (0, -1, True, 1.5, "1", None)
+        for invalid_count in invalid_counts:
+            with self.subTest(executed_tests=invalid_count), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                samples = [
+                    self.focused_sample(root, "warm", 10 + index)
+                    for index in range(3)
+                ]
+                samples[1] = self.focused_sample(
+                    root,
+                    "warm",
+                    11,
+                    executed_tests=invalid_count,
+                )
+                with self.assertRaisesRegex(ValueError, "positive exact-integer executed_tests"):
+                    self.module.build_report(
+                        samples,
+                        30,
+                        require_samples=3,
+                        evidence_kind="focused-test",
+                    )
+
+    def test_focused_test_gate_rejects_missing_or_mixed_simulator_udid(self):
+        for replacement in ("", "SIM-TWO"):
+            with self.subTest(selected_sim_udid=replacement), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                samples = [
+                    self.focused_sample(root, "warm", 10 + index)
+                    for index in range(3)
+                ]
+                samples[1] = self.focused_sample(
+                    root,
+                    "warm",
+                    11,
+                    selected_sim_udid=replacement,
+                )
+                with self.assertRaisesRegex(ValueError, "identical nonempty selected_sim_udid"):
+                    self.module.build_report(
+                        samples,
+                        30,
+                        require_samples=3,
+                        evidence_kind="focused-test",
+                    )
+
+    def test_focused_test_gate_rejects_generic_successful_commands(self):
+        samples = [self.sample("warm", 10 + index) for index in range(3)]
+        with self.assertRaisesRegex(ValueError, "focused-test wrapper evidence"):
+            self.module.build_report(
+                samples,
+                30,
+                require_samples=3,
+                evidence_kind="focused-test",
+            )
+
+    def test_focused_test_gate_requires_exactly_three_samples(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            samples = [self.focused_sample(root, "warm", 10 + index) for index in range(2)]
+            with self.assertRaisesRegex(ValueError, "requires --require-samples 3"):
+                self.module.build_report(
+                    samples,
+                    30,
+                    require_samples=2,
+                    evidence_kind="focused-test",
+                )
+
+    def test_focused_test_gate_rejects_tampered_linked_summary(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            samples = [self.focused_sample(root, "warm", 10 + index) for index in range(3)]
+            Path(samples[1]["focused_test_summary"]).write_text(
+                json.dumps({
+                    "status": "passed",
+                    "executed_tests": 99,
+                    "selected_sim_udid": "SIM-ONE",
+                    "run_id": samples[1]["focused_test_run_id"],
+                }),
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(ValueError, "focused-test summary hash mismatch"):
+                self.module.build_report(
+                    samples,
+                    30,
+                    require_samples=3,
+                    evidence_kind="focused-test",
+                )
 
     def test_informative_mode_remains_compatible_with_two_cohorts(self):
         report = self.module.build_report(
@@ -463,6 +622,120 @@ class BenchmarkReportTests(unittest.TestCase):
             self.assertNotEqual(samples[0]["package_identity"], samples[1]["package_identity"])
             with self.assertRaisesRegex(ValueError, "mixed benchmark identities"):
                 self.module.build_report(samples, 10)
+
+    def command_benchmark_fixture(self, root, *, focused_summary=None):
+        self.manifest_fixture(root)
+        results = root / "results"
+        fake_bin = root / "bin"
+        fake_bin.mkdir()
+        (fake_bin / "xcodebuild").write_text("#!/bin/sh\necho 'Xcode fixture'\n")
+        os.chmod(fake_bin / "xcodebuild", 0o755)
+        if focused_summary is not None:
+            runner = root / "scripts/ambitions-xcode-test-focused.sh"
+            runner.parent.mkdir(parents=True)
+            payload = json.dumps(focused_summary, sort_keys=True)
+            runner.write_text(
+                "#!/bin/sh\n"
+                "set -eu\n"
+                "summary_dir=\"$PWD/.codex/xcode-summaries/fixture/run-1\"\n"
+                "mkdir -p \"$summary_dir\"\n"
+                f"printf '%s\\n' '{payload}' > \"$summary_dir/focused-test-summary.json\"\n"
+            )
+            os.chmod(runner, 0o755)
+        env = os.environ.copy()
+        env["PATH"] = str(fake_bin) + os.pathsep + env["PATH"]
+        env["AMBITIONS_REPO_ROOT"] = str(root)
+        return results, env
+
+    def run_command_benchmark(self, root, results, env, command):
+        result = subprocess.run(
+            [
+                "bash",
+                str(BENCHMARK),
+                "--results-dir",
+                str(results),
+                "--batch",
+                "fixture-benchmark",
+                "--lane",
+                "fixture-focused",
+                "--",
+                *command,
+            ],
+            cwd=REPO_ROOT,
+            env=env,
+            text=True,
+            capture_output=True,
+        )
+        summary = next((results / "fixture-benchmark").glob("*/benchmark-summary.json"))
+        return result, json.loads(summary.read_text(encoding="utf-8"))
+
+    def test_command_benchmark_carries_retained_focused_test_evidence(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            focused_summary = {
+                "status": "passed",
+                "executed_tests": 4,
+                "selected_sim_udid": "SIM-ONE",
+                "run_id": "focused-run-1",
+            }
+            results, env = self.command_benchmark_fixture(
+                root,
+                focused_summary=focused_summary,
+            )
+            result, sample = self.run_command_benchmark(
+                root,
+                results,
+                env,
+                ["bash", "scripts/ambitions-xcode-test-focused.sh"],
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(sample["evidence_kind"], "focused-test")
+            self.assertEqual(sample["executed_tests"], 4)
+            self.assertEqual(sample["selected_sim_udid"], "SIM-ONE")
+            self.assertEqual(sample["focused_test_run_id"], "focused-run-1")
+            linked = Path(sample["focused_test_summary"])
+            self.assertTrue(linked.is_absolute())
+            self.assertEqual(
+                sample["focused_test_summary_sha256"],
+                hashlib.sha256(linked.read_bytes()).hexdigest(),
+            )
+
+    def test_command_benchmark_rejects_zero_test_focused_summary(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            results, env = self.command_benchmark_fixture(
+                root,
+                focused_summary={
+                    "status": "passed",
+                    "executed_tests": 0,
+                    "selected_sim_udid": "SIM-ONE",
+                    "run_id": "focused-run-1",
+                },
+            )
+            result, sample = self.run_command_benchmark(
+                root,
+                results,
+                env,
+                ["bash", "scripts/ambitions-xcode-test-focused.sh"],
+            )
+            self.assertEqual(result.returncode, 65, result.stderr)
+            self.assertEqual(sample["exit_code"], 65)
+            self.assertEqual(sample["evidence_kind"], "focused-test-invalid")
+
+    def test_arbitrary_successful_command_is_typed_as_generic_not_focused_test(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            results, env = self.command_benchmark_fixture(root)
+            result, sample = self.run_command_benchmark(
+                root,
+                results,
+                env,
+                ["true"],
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(sample["evidence_kind"], "generic-command")
+            self.assertNotIn("executed_tests", sample)
+            self.assertNotIn("selected_sim_udid", sample)
 
     def identity(self, root):
         env = os.environ.copy()

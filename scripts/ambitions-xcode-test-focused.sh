@@ -213,6 +213,7 @@ RESULT_BUNDLE="$RESULT_DIR/$BATCH/$RUN_ID/focused-test.xcresult"
 LOG_FILE="$LOG_DIR/$BATCH/$RUN_ID/focused-test.log"
 SUMMARY_FILE="$SUMMARY_DIR/$BATCH/$RUN_ID/focused-test-summary.json"
 RESULT_EXTRACTION_SUMMARY_FILE=""
+RESULT_EXTRACTION_STATUS=0
 mkdir -p "$RESULT_DIR/$BATCH/$RUN_ID" "$LOG_DIR/$BATCH/$RUN_ID" "$SUMMARY_DIR/$BATCH/$RUN_ID"
 DERIVED_DATA="$REPO_ROOT/.codex/DerivedData/Ambitions"
 mkdir -p "$DERIVED_DATA"
@@ -705,12 +706,38 @@ if [[ "$RESULT_EXTRACTION_REQUESTED" == "auto" && "$status" -ne 0 && -f "$RESULT
   RESULT_EXTRACTION_MODE="full"
 fi
 if command -v scripts/ambitions-xcode-result-extract.sh >/dev/null 2>&1; then
-  RESULT_EXTRACTION_SUMMARY_FILE="$(
-    scripts/ambitions-xcode-result-extract.sh \
-      --result "$RESULT_BUNDLE" \
-      --output-dir "$SUMMARY_DIR/$BATCH/$RUN_ID/extract" \
-      --mode "$RESULT_EXTRACTION_MODE" || true
-  )"
+  RESULT_EXTRACT_CMD=(
+    scripts/ambitions-xcode-result-extract.sh
+    --result "$RESULT_BUNDLE"
+    --output-dir "$SUMMARY_DIR/$BATCH/$RUN_ID/extract"
+    --mode "$RESULT_EXTRACTION_MODE"
+  )
+  for test_filter_candidate in "${TEST_FILTERS[@]}"; do
+    RESULT_EXTRACT_CMD+=(--expected-test-filter "$test_filter_candidate")
+  done
+  set +e
+  RESULT_EXTRACTION_SUMMARY_FILE="$("${RESULT_EXTRACT_CMD[@]}")"
+  RESULT_EXTRACTION_STATUS=$?
+  set -e
+else
+  RESULT_EXTRACTION_STATUS=127
+fi
+if [[ "$status" -eq 0 && "$RESULT_EXTRACTION_STATUS" -ne 0 ]]; then
+  status=65
+  classification="result_evidence_failure"
+  if [[ -f "$RESULT_EXTRACTION_SUMMARY_FILE" ]]; then
+    extraction_failure="$(python3 - "$RESULT_EXTRACTION_SUMMARY_FILE" <<'PY'
+import json
+import sys
+from pathlib import Path
+try:
+    print(json.loads(Path(sys.argv[1]).read_text(encoding="utf-8")).get("failure_category", ""))
+except (OSError, UnicodeError, json.JSONDecodeError):
+    print("")
+PY
+)"
+    [[ -n "$extraction_failure" && "$extraction_failure" != "None" ]] && classification="$extraction_failure"
+  fi
 fi
 
 duration_seconds="$(python3 - "$run_start" <<'PY'
@@ -734,6 +761,7 @@ cat > "$SUMMARY_FILE" <<JSON
   "requested_result_extraction_mode": "$RESULT_EXTRACTION_REQUESTED",
   "result_extraction_mode": "$RESULT_EXTRACTION_MODE",
   "result_extraction_summary": "$RESULT_EXTRACTION_SUMMARY_FILE",
+  "result_extraction_status": $RESULT_EXTRACTION_STATUS,
   "result_bundle_retained": $RESULT_BUNDLE_RETAINED,
   "requested_xcodebuild_action": "$REQUESTED_XCODEBUILD_ACTION",
   "xcodebuild_action": "$XCODEBUILD_ACTION",

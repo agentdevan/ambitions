@@ -30,6 +30,49 @@ class XcodeResultExtractorTests(unittest.TestCase):
         self.env = os.environ.copy()
         self.env["PATH"] = str(self.bin) + os.pathsep + self.env["PATH"]
         self.env["FAKE_XCPARSE_CALLS"] = str(self.calls)
+        xcrun = self.bin / "xcrun"
+        xcrun.write_text(
+            "#!/bin/sh\n"
+            "set -eu\n"
+            "if [ \"${1:-}\" = xcresulttool ]; then\n"
+            "  printf '%s\\n' \"${FAKE_XCRESULT_TESTS_JSON:?}\"\n"
+            "  exit \"${FAKE_XCRESULT_EXIT:-0}\"\n"
+            "fi\n"
+            "exit 2\n",
+            encoding="utf-8",
+        )
+        xcrun.chmod(0o755)
+        self.env["FAKE_XCRESULT_TESTS_JSON"] = json.dumps(
+            {
+                "devices": [{"deviceId": "SIM-ONE"}],
+                "testNodes": [
+                    {
+                        "name": "Ambitions",
+                        "nodeType": "Test Plan",
+                        "children": [
+                            {
+                                "name": "AmbitionsTests",
+                                "nodeType": "Unit test bundle",
+                                "children": [
+                                    {
+                                        "name": "FirstTests",
+                                        "nodeType": "Test Suite",
+                                        "children": [
+                                            {
+                                                "name": "testOne()",
+                                                "nodeIdentifier": "FirstTests/testOne()",
+                                                "nodeType": "Test Case",
+                                                "result": "Passed",
+                                            }
+                                        ],
+                                    }
+                                ],
+                            }
+                        ],
+                    }
+                ],
+            }
+        )
 
     def tearDown(self):
         self.temp.cleanup()
@@ -125,6 +168,53 @@ class XcodeResultExtractorTests(unittest.TestCase):
         self.assertIsNone(summary["screenshots"])
         self.assertIsNone(summary["logs"])
         self.assertIsNone(summary["coverage"])
+
+    def test_expected_selector_is_proved_from_xcresult_test_nodes(self):
+        result, summary = self.run_extract(
+            "--mode",
+            "metadata",
+            "--expected-test-filter",
+            "AmbitionsTests/FirstTests/testOne",
+        )
+
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertTrue(summary["test_results_validated"])
+        self.assertEqual(summary["expected_test_filters"], ["AmbitionsTests/FirstTests/testOne"])
+        self.assertEqual(summary["matched_test_filters"], ["AmbitionsTests/FirstTests/testOne"])
+        self.assertEqual(summary["missing_test_filters"], [])
+        self.assertEqual(summary["executed_test_identifiers"], ["AmbitionsTests/FirstTests/testOne"])
+        self.assertEqual(summary["simulator_udids"], ["SIM-ONE"])
+
+    def test_missing_selector_fails_even_when_another_selector_executed(self):
+        result, summary = self.run_extract(
+            "--mode",
+            "metadata",
+            "--expected-test-filter",
+            "AmbitionsTests/FirstTests",
+            "--expected-test-filter",
+            "AmbitionsTests/MissingTests",
+        )
+
+        self.assertEqual(result.returncode, 65, result.stdout + result.stderr)
+        self.assertEqual(summary["status"], "failed")
+        self.assertEqual(summary["failure_category"], "test_selector_not_executed")
+        self.assertEqual(summary["matched_test_filters"], ["AmbitionsTests/FirstTests"])
+        self.assertEqual(summary["missing_test_filters"], ["AmbitionsTests/MissingTests"])
+
+    def test_xcresulttool_failure_is_not_accepted_as_selector_proof(self):
+        self.env["FAKE_XCRESULT_EXIT"] = "9"
+
+        result, summary = self.run_extract(
+            "--mode",
+            "metadata",
+            "--expected-test-filter",
+            "AmbitionsTests/FirstTests",
+        )
+
+        self.assertEqual(result.returncode, 65, result.stdout + result.stderr)
+        self.assertEqual(summary["status"], "failed")
+        self.assertEqual(summary["failure_category"], "xcresult_test_results_unavailable")
+        self.assertFalse(summary["test_results_validated"])
 
 
 if __name__ == "__main__":

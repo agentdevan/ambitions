@@ -2,6 +2,7 @@
 """Aggregate comparable Ambitions build benchmark samples."""
 
 import argparse
+import hashlib
 import json
 import math
 import statistics
@@ -12,6 +13,7 @@ IDENTITY_KEYS = ("commit", "package_path", "package_identity", "derived_data")
 COHORT_STATES = ("warm", "cold")
 COHORT_IDENTITY_KEYS = ("lane", "command", "scenario")
 EXECUTION_IDENTITY_KEYS = ("run_id", "timestamp_utc")
+EVIDENCE_KINDS = ("generic", "build", "focused-test")
 
 
 def nonempty_text(value):
@@ -30,6 +32,89 @@ def exact_exit_code(value):
     if type(value) is not int:
         raise ValueError("exit_code must be an exact integer")
     return value
+
+
+def exact_positive_executed_tests(value):
+    if type(value) is not int or value <= 0:
+        raise ValueError(
+            "focused-test gate requires positive exact-integer executed_tests"
+        )
+    return value
+
+
+def focused_test_evidence(samples):
+    if any(sample.get("evidence_kind") != "focused-test" for sample in samples):
+        raise ValueError(
+            "focused-test gate requires focused-test wrapper evidence for every sample"
+        )
+
+    executed_tests = [
+        exact_positive_executed_tests(sample.get("executed_tests"))
+        for sample in samples
+    ]
+    simulator_udids = [sample.get("selected_sim_udid") for sample in samples]
+    if (
+        any(not nonempty_text(udid) for udid in simulator_udids)
+        or len(set(simulator_udids)) != 1
+    ):
+        raise ValueError(
+            "focused-test gate requires one identical nonempty selected_sim_udid"
+        )
+
+    summary_paths = [sample.get("focused_test_summary") for sample in samples]
+    if any(not nonempty_text(path) for path in summary_paths):
+        raise ValueError(
+            "focused-test gate requires a linked focused_test_summary for every sample"
+        )
+    if len(set(summary_paths)) != len(summary_paths):
+        raise ValueError(
+            "focused-test gate requires a distinct focused_test_summary for every sample"
+        )
+
+    focused_run_ids = []
+    for sample, summary_name in zip(samples, summary_paths):
+        path = Path(summary_name)
+        try:
+            source = path.read_bytes()
+        except OSError as error:
+            raise ValueError(
+                f"unable to read linked focused-test summary {path}: {error}"
+            ) from error
+        actual_hash = hashlib.sha256(source).hexdigest()
+        expected_hash = sample.get("focused_test_summary_sha256")
+        if not nonempty_text(expected_hash) or actual_hash != expected_hash:
+            raise ValueError(f"focused-test summary hash mismatch: {path}")
+        try:
+            summary = json.loads(source)
+        except (json.JSONDecodeError, UnicodeError) as error:
+            raise ValueError(f"invalid linked focused-test summary {path}") from error
+        if not isinstance(summary, dict):
+            raise ValueError(f"linked focused-test summary must be an object: {path}")
+        if summary.get("status") != "passed":
+            raise ValueError(f"linked focused-test summary is not passed: {path}")
+        summary_executed = exact_positive_executed_tests(summary.get("executed_tests"))
+        summary_udid = summary.get("selected_sim_udid")
+        summary_run_id = summary.get("run_id")
+        if summary_executed != sample.get("executed_tests"):
+            raise ValueError(f"focused-test executed_tests mismatch: {path}")
+        if summary_udid != sample.get("selected_sim_udid"):
+            raise ValueError(f"focused-test selected_sim_udid mismatch: {path}")
+        if (
+            not nonempty_text(summary_run_id)
+            or summary_run_id != sample.get("focused_test_run_id")
+        ):
+            raise ValueError(f"focused-test run_id mismatch: {path}")
+        focused_run_ids.append(summary_run_id)
+
+    if len(set(focused_run_ids)) != len(focused_run_ids):
+        raise ValueError("focused-test gate requires distinct focused test run IDs")
+
+    return {
+        "executed_tests": executed_tests,
+        "selected_sim_udid": simulator_udids[0],
+        "focused_test_run_ids": focused_run_ids,
+        "focused_test_summaries": summary_paths,
+    }
 
 
 def load_samples(sample_paths):
@@ -53,7 +138,12 @@ def load_samples(sample_paths):
     return samples
 
 
-def build_report(samples, target_seconds, require_samples=None):
+def build_report(
+    samples,
+    target_seconds,
+    require_samples=None,
+    evidence_kind="generic",
+):
     if not samples:
         raise ValueError("no benchmark samples")
     if any(not isinstance(sample, dict) for sample in samples):
@@ -66,6 +156,13 @@ def build_report(samples, target_seconds, require_samples=None):
         raise ValueError("benchmark requires finite nonnegative target seconds")
     if require_samples is not None and require_samples <= 0:
         raise ValueError("required sample count must be positive")
+    if evidence_kind not in EVIDENCE_KINDS:
+        raise ValueError("unsupported benchmark evidence kind")
+    focused_evidence = None
+    if evidence_kind == "focused-test":
+        if require_samples != 3:
+            raise ValueError("focused-test gate requires --require-samples 3")
+        focused_evidence = focused_test_evidence(samples)
 
     identities = {tuple(sample.get(key) for key in IDENTITY_KEYS) for sample in samples}
     if len(identities) != 1:
@@ -103,7 +200,9 @@ def build_report(samples, target_seconds, require_samples=None):
         if len(set(execution_identities)) != len(execution_identities):
             raise ValueError("gate requires distinct execution identities for every sample")
 
-    report = {"identity": identity}
+    report = {"identity": identity, "evidence_kind": evidence_kind}
+    if focused_evidence is not None:
+        report["focused_test_evidence"] = focused_evidence
     if require_samples is not None:
         report["cohort_identity"] = dict(
             zip(COHORT_IDENTITY_KEYS, next(iter(cohort_identities)))
@@ -161,6 +260,7 @@ def main():
     parser.add_argument("samples", nargs="+")
     parser.add_argument("--target-seconds", type=float, required=True)
     parser.add_argument("--require-samples", type=int)
+    parser.add_argument("--evidence-kind", choices=EVIDENCE_KINDS, default="generic")
     parser.add_argument("--fail-on-miss", action="store_true")
     parser.add_argument("--output")
     args = parser.parse_args()
@@ -175,6 +275,7 @@ def main():
             samples,
             args.target_seconds,
             require_samples=args.require_samples,
+            evidence_kind=args.evidence_kind,
         )
     except ValueError as error:
         parser.error(str(error))

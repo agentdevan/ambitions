@@ -1,5 +1,6 @@
 import importlib.util
 import json
+import shutil
 import subprocess
 import tempfile
 import unittest
@@ -53,6 +54,20 @@ class ChangedFileTestRouterTests(unittest.TestCase):
                 "AmbitionsTests/TodayRecoveryViewModelTests",
             ],
         )
+
+    @unittest.skipUnless(shutil.which("xcodegen"), "xcodegen is required for source-truth routing")
+    def test_source_truth_evidence_is_generated_from_project_yml(self):
+        generated = ROUTER.load_source_truth_evidence(REPO_ROOT, REPO_ROOT / "project.yml")
+
+        self.assertEqual(generated.nodes, self.evidence.nodes)
+        self.assertEqual(generated.edges, self.evidence.edges)
+        self.assertEqual(generated.cycles, self.evidence.cycles)
+        self.assertEqual(generated.target_types, self.evidence.target_types)
+        self.assertEqual(
+            generated.memberships["Native/Ambitions/Core/Time/RuntimeTickPolicy.swift"],
+            ("AmbitionsTimeFoundation",),
+        )
+        self.assertFalse(any(path.startswith("../") for path in generated.memberships))
 
     def test_time_foundation_routing_follows_live_membership_not_folder(self):
         moved_path = "Native/Ambitions/Core/Domain/FixedPoint.swift"
@@ -192,7 +207,7 @@ class ChangedFileTestRouterTests(unittest.TestCase):
         self.assertEqual(plan["lanes"], [])
         self.assertEqual(plan["commands"], [])
 
-    def test_unknown_production_path_fails_closed(self):
+    def test_unknown_core_path_falls_back_to_full_hosted_integration(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             path = root / "Native/Ambitions/Core/Unrouted.swift"
@@ -200,15 +215,35 @@ class ChangedFileTestRouterTests(unittest.TestCase):
             path.write_text("struct Unrouted {}\n", encoding="utf-8")
             evidence = ROUTER.Evidence(
                 memberships={path.relative_to(root).as_posix(): ("Ambitions",)},
-                nodes=("Ambitions",),
-                edges=(),
+                nodes=("Ambitions", "AmbitionsTests", "AmbitionsUITests"),
+                edges=(("AmbitionsTests", "Ambitions"), ("AmbitionsUITests", "Ambitions")),
                 cycles=(),
             )
             plan = ROUTER.plan_changes(root, [ROUTER.Change("M", path.relative_to(root).as_posix())], self.config, evidence)
 
-        self.assertEqual(plan["status"], "invalid")
-        self.assertEqual(plan["commands"], [])
-        self.assertIn("unknown_production_path", {finding["code"] for finding in plan["findings"]})
+        self.assertEqual(plan["status"], "planned", plan)
+        self.assertEqual([lane["kind"] for lane in plan["lanes"]], ["integration"])
+        self.assertEqual(self.filters(plan, "integration"), ["AmbitionsTests"])
+
+    def test_unknown_ui_capable_path_falls_back_to_hosted_and_ui_targets(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            path = root / "Native/Ambitions/Rendering/UnroutedRenderer.swift"
+            path.parent.mkdir(parents=True)
+            path.write_text("struct UnroutedRenderer {}\n", encoding="utf-8")
+            relative = path.relative_to(root).as_posix()
+            evidence = ROUTER.Evidence(
+                memberships={relative: ("Ambitions",)},
+                nodes=("Ambitions", "AmbitionsTests", "AmbitionsUITests"),
+                edges=(("AmbitionsTests", "Ambitions"), ("AmbitionsUITests", "Ambitions")),
+                cycles=(),
+            )
+            plan = ROUTER.plan_changes(root, [ROUTER.Change("M", relative)], self.config, evidence)
+
+        self.assertEqual(plan["status"], "planned", plan)
+        self.assertEqual([lane["kind"] for lane in plan["lanes"]], ["integration", "ui"])
+        self.assertEqual(self.filters(plan, "integration"), ["AmbitionsTests"])
+        self.assertEqual(self.filters(plan, "ui"), ["AmbitionsUITests"])
 
     def test_test_support_file_without_suite_fails_closed(self):
         plan = self.plan_live(ROUTER.Change("M", "Native/AmbitionsUITests/AmbitionsShellUITestSupport.swift"))
@@ -277,9 +312,39 @@ class ChangedFileTestRouterTests(unittest.TestCase):
             )
         )
 
+        self.assertEqual(plan["status"], "planned", plan)
+        self.assertEqual([lane["kind"] for lane in plan["lanes"]], ["module", "integration"])
+        self.assertEqual(self.filters(plan, "integration"), ["AmbitionsTests"] + [
+            "AmbitionsTests/LifeShapeAntiFakeAuditTests",
+            "AmbitionsTests/TimeClockTests",
+            "AmbitionsTests/TodayClockTests",
+            "AmbitionsTests/TodayFreshGoalVisibilityTests",
+            "AmbitionsTests/TodayRealityMeridianExperienceElevationTests",
+            "AmbitionsTests/TodayRecoveryViewModelTests",
+        ])
+
+    def test_selected_suite_must_belong_to_the_expected_live_test_target(self):
+        locations = ROUTER._suite_index(REPO_ROOT)[("AmbitionsTests", "TimeClockTests")]
+        self.assertEqual(len(locations), 1)
+        memberships = dict(self.evidence.memberships)
+        memberships[locations[0]] = ("AmbitionsUITests",)
+        evidence = ROUTER.Evidence(
+            memberships=memberships,
+            nodes=self.evidence.nodes,
+            edges=self.evidence.edges,
+            cycles=self.evidence.cycles,
+        )
+
+        plan = ROUTER.plan_changes(
+            REPO_ROOT,
+            [ROUTER.Change("M", "Native/Ambitions/Core/Time/RuntimeTickPolicy.swift")],
+            self.config,
+            evidence,
+        )
+
         self.assertEqual(plan["status"], "invalid")
         self.assertEqual(plan["commands"], [])
-        self.assertIn("rename_path_uncovered", {finding["code"] for finding in plan["findings"]})
+        self.assertIn("test_suite_target_mismatch", {finding["code"] for finding in plan["findings"]})
 
     def test_mixed_change_set_orders_module_hosted_then_ui(self):
         plan = self.plan_live(
@@ -406,6 +471,7 @@ class ChangedFileTestRouterTests(unittest.TestCase):
             ".xcodebuildmcp/config.yaml": "scripts.tests.test_ambitions_xcode_runner_reliability",
             "scripts/ambitions-changed-file-test-router.py": "scripts.tests.test_ambitions_changed_file_test_router",
             "scripts/ambitions-changed-file-test-routes.json": "scripts.tests.test_ambitions_changed_file_test_router",
+            "docs/qa/architecture/module-candidate-policy.json": "scripts.tests.test_ambitions_module_candidate_gate",
         }
         for path, expected in cases.items():
             with self.subTest(path=path):

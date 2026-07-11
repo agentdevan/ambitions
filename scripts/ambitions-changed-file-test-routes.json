@@ -24,6 +24,29 @@
       "AmbitionsTimeFoundation"
     ]
   ],
+  "fallbackRoutes": {
+    "integration": [
+      "AmbitionsTests"
+    ],
+    "ui": [
+      "AmbitionsUITests"
+    ],
+    "uiCapablePatterns": [
+      "Native/Ambitions/App/**",
+      "Native/Ambitions/Stage/**",
+      "Native/Ambitions/Projection/**",
+      "Native/Ambitions/Language/**",
+      "Native/Ambitions/Trust/**",
+      "Native/Ambitions/Interaction/**",
+      "Native/Ambitions/Rendering/**",
+      "Native/Ambitions/DesignSystem/**",
+      "Native/Ambitions/Surfaces/**",
+      "Native/Ambitions/Composer/**",
+      "Native/AmbitionsShareExtension/**",
+      "Native/AmbitionsWidgetExtension/**",
+      "Packages/AmbitionsDesignSystem/**"
+    ]
+  },
   "toolingRoutes": [
     {
       "id": "bounded-xcodebuild-reliability",
@@ -74,6 +97,15 @@
       ],
       "pythonTests": [
         "scripts.tests.test_ambitions_changed_file_test_router"
+      ]
+    },
+    {
+      "id": "module-candidate-policy",
+      "patterns": [
+        "docs/qa/architecture/module-candidate-policy.json"
+      ],
+      "pythonTests": [
+        "scripts.tests.test_ambitions_module_candidate_gate"
       ]
     }
   ],

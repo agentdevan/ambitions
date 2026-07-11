@@ -7,8 +7,10 @@ import argparse
 import importlib.util
 import json
 import re
+import shutil
 import subprocess
 import sys
+import tempfile
 from collections import defaultdict
 from pathlib import Path, PurePosixPath
 from typing import Callable, NamedTuple, Sequence
@@ -46,6 +48,7 @@ class Evidence(NamedTuple):
     nodes: tuple[str, ...]
     edges: tuple[tuple[str, str], ...]
     cycles: tuple[tuple[str, ...], ...]
+    target_types: dict[str, str] | None = None
 
 
 def _load_script(path: Path, name: str):
@@ -70,9 +73,26 @@ def load_live_evidence(root: Path, project: Path) -> Evidence:
             "ambitions_build_graph_audit_for_router",
         )
         document = source_audit.load_pbx_json(project)
-        memberships = source_audit.target_membership_from_pbx_json(document)
+        raw_memberships = source_audit.target_membership_from_pbx_json(document)
+        memberships: dict[str, set[str]] = defaultdict(set)
+        resolved_root = root.resolve()
+        for raw_path, targets in raw_memberships.items():
+            source = Path(raw_path)
+            resolved = source.resolve() if source.is_absolute() else (project.parent / source).resolve()
+            try:
+                relative = resolved.relative_to(resolved_root).as_posix()
+            except ValueError as error:
+                raise ConfigurationError(f"project source resolves outside repository: {raw_path}") from error
+            memberships[relative].update(targets)
         objects = graph_audit._load_objects(project)
-        nodes = tuple(sorted(graph_audit.native_targets(objects)))
+        target_ids = graph_audit.native_targets(objects)
+        nodes = tuple(sorted(target_ids))
+        target_types = {
+            name: objects[object_id].get("productType")
+            for name, object_id in target_ids.items()
+        }
+        if any(not isinstance(product_type, str) or not product_type for product_type in target_types.values()):
+            raise ConfigurationError("live project evidence has an untyped native target")
         edges = tuple(sorted(graph_audit.target_edges(objects)))
         cycles = tuple(tuple(cycle) for cycle in graph_audit.dependency_cycles(edges))
     except (OSError, ValueError, KeyError, subprocess.CalledProcessError, json.JSONDecodeError) as error:
@@ -84,7 +104,55 @@ def load_live_evidence(root: Path, project: Path) -> Evidence:
         nodes=nodes,
         edges=edges,
         cycles=cycles,
+        target_types=target_types,
     )
+
+
+def load_source_truth_evidence(root: Path, spec: Path) -> Evidence:
+    """Generate ephemeral PBX evidence from the live XcodeGen source of truth."""
+    try:
+        resolved_root = root.resolve(strict=True)
+        resolved_spec = spec.resolve(strict=True)
+        resolved_spec.relative_to(resolved_root)
+    except (OSError, ValueError) as error:
+        raise ConfigurationError(f"project spec is missing or outside repository: {spec}") from error
+    xcodegen = shutil.which("xcodegen")
+    if xcodegen is None:
+        raise ConfigurationError("xcodegen is required to derive source-truth project evidence")
+    temporary_root = resolved_root / ".codex"
+    temporary_root.mkdir(parents=True, exist_ok=True)
+    try:
+        with tempfile.TemporaryDirectory(prefix="changed-file-router-", dir=temporary_root) as directory:
+            output = Path(directory)
+            completed = subprocess.run(
+                [
+                    xcodegen,
+                    "generate",
+                    "--no-env",
+                    "--quiet",
+                    "--spec",
+                    str(resolved_spec),
+                    "--project",
+                    str(output),
+                    "--project-root",
+                    str(resolved_root),
+                ],
+                cwd=resolved_root,
+                capture_output=True,
+                text=True,
+                timeout=30,
+            )
+            if completed.returncode != 0:
+                detail = completed.stderr.strip() or completed.stdout.strip() or "unknown xcodegen failure"
+                raise ConfigurationError(f"xcodegen source-truth generation failed: {detail}")
+            projects = sorted(output.glob("*.xcodeproj"))
+            if len(projects) != 1:
+                raise ConfigurationError(
+                    f"xcodegen source-truth generation produced {len(projects)} projects"
+                )
+            return load_live_evidence(resolved_root, projects[0])
+    except (OSError, subprocess.TimeoutExpired) as error:
+        raise ConfigurationError(f"xcodegen source-truth generation could not complete: {error}") from error
 
 
 def load_config(path: Path) -> dict:
@@ -119,6 +187,16 @@ def load_config(path: Path) -> dict:
         )
     ):
         raise ConfigurationError("requiredEdges must contain two-node string pairs")
+    fallback = payload.get("fallbackRoutes")
+    if not isinstance(fallback, dict):
+        raise ConfigurationError("fallbackRoutes must be an object")
+    require_strings(fallback.get("integration"), "fallbackRoutes integration", allow_empty=False)
+    require_strings(fallback.get("ui"), "fallbackRoutes ui", allow_empty=False)
+    require_strings(
+        fallback.get("uiCapablePatterns"),
+        "fallbackRoutes uiCapablePatterns",
+        allow_empty=False,
+    )
     for target_name, target in payload["testTargets"].items():
         if not isinstance(target_name, str) or not isinstance(target, dict):
             raise ConfigurationError("testTargets must map names to objects")
@@ -345,6 +423,16 @@ def _validate_selected_suites(
                         f"expected one live declaration, found {len(locations)}",
                     )
                 )
+                continue
+            membership = tuple(sorted(evidence.memberships.get(locations[0], ())))
+            if membership != (expected_target,):
+                findings.append(
+                    _finding(
+                        "test_suite_target_mismatch",
+                        test_filter,
+                        f"suite source has membership {list(membership)}, expected only {expected_target}",
+                    )
+                )
 
 
 def _xcode_commands(batch: str, lane: str, scheme: str, tests: Sequence[str]) -> list[list[str]]:
@@ -394,14 +482,14 @@ def plan_changes(
         if _matches(normalized, config.get("projectEvidencePatterns", [])):
             findings.append(_finding("project_evidence_changed", normalized, "project or test-plan changes require an explicit reviewed route"))
             return
-        if _matches(normalized, config.get("documentationPatterns", [])):
-            return
         tooling_route, tooling_error = _tooling_route_for_path(normalized, config)
         if tooling_error:
             findings.append(_finding(tooling_error, normalized, "multiple explicit tooling routes matched"))
             return
         if tooling_route is not None:
             _append_unique(script_modules, tooling_route["pythonTests"])
+            return
+        if _matches(normalized, config.get("documentationPatterns", [])):
             return
         if normalized.startswith("scripts/tests/") and normalized.endswith(".py"):
             module = normalized[:-3].replace("/", ".")
@@ -460,11 +548,46 @@ def plan_changes(
             findings.append(_finding(code, normalized, "multiple equal-specificity routes matched"))
             return
         if route is None:
-            if rename_side:
-                findings.append(_finding("rename_path_uncovered", normalized, f"{rename_side} rename path has no explicit route"))
-            elif any(normalized == production or normalized.startswith(production + "/") for production in PRODUCTION_ROOTS):
-                findings.append(_finding("unknown_production_path", normalized, "no explicit production route"))
-            else:
+            is_production = any(
+                normalized == production or normalized.startswith(production + "/")
+                for production in PRODUCTION_ROOTS
+            )
+            if not is_production:
+                if rename_side:
+                    findings.append(
+                        _finding(
+                            "rename_path_uncovered",
+                            normalized,
+                            f"{rename_side} rename path has no explicit route",
+                        )
+                    )
+                else:
+                    findings.append(_finding("unrouted_path", normalized, "no explicit no-test or test route"))
+                return
+            if status not in {"D", "R-old"}:
+                if not membership:
+                    findings.append(
+                        _finding(
+                            "source_not_in_live_membership",
+                            normalized,
+                            "unknown production source is absent from live PBX membership",
+                        )
+                    )
+                    return
+                if not (root / normalized).is_file():
+                    findings.append(
+                        _finding(
+                            "live_membership_source_missing",
+                            normalized,
+                            "live PBX membership references a missing source file",
+                        )
+                    )
+                    return
+            fallback = config["fallbackRoutes"]
+            _append_unique(lane_tests["integration"], fallback["integration"])
+            if _matches(normalized, fallback["uiCapablePatterns"]):
+                _append_unique(lane_tests["ui"], fallback["ui"])
+            if not lane_tests["integration"]:
                 findings.append(_finding("unrouted_path", normalized, "no explicit no-test or test route"))
             return
         if status not in {"D", "R-old"}:
@@ -674,7 +797,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     try:
         config = load_config(args.config)
         project = args.project if args.project.is_absolute() else ROOT / args.project
-        evidence = load_live_evidence(ROOT, project)
+        evidence = load_source_truth_evidence(ROOT, project.parent / "project.yml")
         if args.path or args.rename:
             changes = [Change("M", path) for path in args.path]
             changes.extend(Change("R", new, old_path=old) for old, new in args.rename)

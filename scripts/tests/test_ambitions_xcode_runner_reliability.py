@@ -1,6 +1,7 @@
 import json
 import os
 import re
+import signal
 import subprocess
 import tempfile
 import time
@@ -42,6 +43,10 @@ class RunnerReliabilityTests(unittest.TestCase):
 set -eu
 printf '%s\n' "$*" >> "$FAKE_XCRUN_LOG"
 if [ "${1:-}" != "simctl" ]; then
+  if [ "${1:-}" = "xcresulttool" ]; then
+    printf '%s\n' "${FAKE_XCRESULT_TESTS_JSON:?}"
+    exit "${FAKE_XCRESULT_EXIT:-0}"
+  fi
   exit 2
 fi
 shift
@@ -204,6 +209,117 @@ exec "$@"
         env["AMBITIONS_XCODE_LANE_ROOT"] = str(self.root / "lane")
         return env
 
+    def install_signal_process_tree(self) -> tuple[dict[str, str], list[Path]]:
+        pid_files = [self.root / f"owned-{name}.pid" for name in ("root", "child", "grandchild")]
+        env = self.install_fake_timeout_and_xcodebuild(
+            r'''printf '%s\n' "$$" > "$FAKE_OWNED_ROOT_PID_FILE"
+(
+  grandchild_pid=""
+  cleanup_child() {
+    if [ -n "$grandchild_pid" ]; then
+      kill -TERM "$grandchild_pid" 2>/dev/null || true
+      wait "$grandchild_pid" 2>/dev/null || true
+    fi
+    exit 0
+  }
+  trap cleanup_child INT TERM
+  sleep 30 &
+  grandchild_pid=$!
+  printf '%s\n' "$grandchild_pid" > "$FAKE_OWNED_GRANDCHILD_PID_FILE"
+  wait "$grandchild_pid"
+) &
+child_pid=$!
+printf '%s\n' "$child_pid" > "$FAKE_OWNED_CHILD_PID_FILE"
+trap 'exit 0' INT TERM
+wait "$child_pid"
+'''
+        )
+        env["FAKE_OWNED_ROOT_PID_FILE"] = str(pid_files[0])
+        env["FAKE_OWNED_CHILD_PID_FILE"] = str(pid_files[1])
+        env["FAKE_OWNED_GRANDCHILD_PID_FILE"] = str(pid_files[2])
+        return env, pid_files
+
+    @staticmethod
+    def pid_is_live(pid: int) -> bool:
+        try:
+            os.kill(pid, 0)
+        except ProcessLookupError:
+            return False
+        return True
+
+    def assert_signal_cleans_owned_tree(
+        self,
+        sig: signal.Signals,
+        expected_status: int,
+        *,
+        monitor_test_launch: bool = False,
+    ):
+        env, pid_files = self.install_signal_process_tree()
+        sentinel = subprocess.Popen(["/bin/sleep", "30"])
+        monitor_args = ["--test-launch-timeout", "30s"] if monitor_test_launch else []
+        runner = subprocess.Popen(
+            [
+                "bash",
+                str(BOUNDED_XCODEBUILD),
+                "--timeout",
+                "30s",
+                "--kill-after",
+                "1s",
+                *monitor_args,
+                "--",
+                "test-without-building",
+            ],
+            cwd=REPO_ROOT,
+            env=env,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+        owned_pids: list[int] = []
+        try:
+            deadline = time.monotonic() + 3
+            while time.monotonic() < deadline and not all(path.exists() for path in pid_files):
+                time.sleep(0.01)
+            self.assertTrue(all(path.exists() for path in pid_files), "fake owned process tree did not start")
+            owned_pids = [int(path.read_text(encoding="utf-8")) for path in pid_files]
+
+            os.kill(runner.pid, sig)
+            self.assertEqual(runner.wait(timeout=3), expected_status)
+
+            deadline = time.monotonic() + 1
+            while time.monotonic() < deadline and any(self.pid_is_live(pid) for pid in owned_pids):
+                time.sleep(0.01)
+            self.assertEqual(
+                [pid for pid in owned_pids if self.pid_is_live(pid)],
+                [],
+                "owned runner descendants survived signal cleanup",
+            )
+            self.assertIsNone(sentinel.poll(), "unrelated sentinel process was terminated")
+        finally:
+            for pid in reversed(owned_pids):
+                try:
+                    os.kill(pid, signal.SIGKILL)
+                except ProcessLookupError:
+                    pass
+            if runner.poll() is None:
+                runner.kill()
+            try:
+                runner.wait(timeout=2)
+            except subprocess.TimeoutExpired:
+                pass
+            if sentinel.poll() is None:
+                sentinel.terminate()
+            try:
+                sentinel.wait(timeout=2)
+            except subprocess.TimeoutExpired:
+                sentinel.kill()
+                sentinel.wait(timeout=2)
+
+    def test_sigint_terminates_and_reaps_only_owned_runner_descendants(self):
+        self.assert_signal_cleans_owned_tree(signal.SIGINT, 130, monitor_test_launch=True)
+
+    def test_sigterm_terminates_and_reaps_only_owned_runner_descendants(self):
+        self.assert_signal_cleans_owned_tree(signal.SIGTERM, 143)
+
     def focused_env(self) -> dict[str, str]:
         devices = device_listing(("iPhone 17 Pro Max", MCP_UDID, "Booted"))
         env = self.install_fake_timeout_and_xcodebuild(
@@ -247,6 +363,45 @@ exit "${FAKE_XCODEBUILD_EXIT:-0}"
         return env
 
     def run_focused(self, env: dict[str, str], batch: str, *filter_args: str) -> tuple[subprocess.CompletedProcess[str], dict]:
+        selected = [
+            filter_args[index + 1]
+            for index, value in enumerate(filter_args[:-1])
+            if value in {"--only-testing", "--test"}
+        ]
+        bundles: dict[str, dict[str, list[str]]] = {}
+        for test_filter in selected:
+            parts = test_filter.split("/")
+            target = parts[0]
+            suite = parts[1] if len(parts) > 1 else "TargetWideTests"
+            method = parts[2] if len(parts) > 2 else "testOne"
+            bundles.setdefault(target, {}).setdefault(suite, []).append(method)
+        test_bundles = []
+        for target, suites in bundles.items():
+            suite_nodes = []
+            for suite, methods in suites.items():
+                suite_nodes.append({
+                    "name": suite,
+                    "nodeType": "Test Suite",
+                    "children": [
+                        {
+                            "name": f"{method}()",
+                            "nodeIdentifier": f"{suite}/{method}()",
+                            "nodeType": "Test Case",
+                            "result": "Passed",
+                        }
+                        for method in methods
+                    ],
+                })
+            test_bundles.append({
+                "name": target,
+                "nodeType": "UI test bundle" if target.endswith("UITests") else "Unit test bundle",
+                "children": suite_nodes,
+            })
+        if env.get("FAKE_XCRESULT_TESTS_JSON_LOCKED") != "1":
+            env["FAKE_XCRESULT_TESTS_JSON"] = json.dumps({
+                "devices": [{"deviceId": MCP_UDID}],
+                "testNodes": [{"name": "Ambitions", "nodeType": "Test Plan", "children": test_bundles}],
+            })
         result = subprocess.run(
             [
                 "bash",
@@ -276,6 +431,48 @@ exit "${FAKE_XCODEBUILD_EXIT:-0}"
         summaries = sorted((self.root / "summaries" / batch).glob("*/focused-test-summary.json"))
         payload = json.loads(summaries[-1].read_text(encoding="utf-8")) if summaries else {}
         return result, payload
+
+    def test_batched_focused_run_requires_every_selector_in_xcresult(self):
+        env = self.focused_env()
+        env["FAKE_XCRESULT_TESTS_JSON"] = json.dumps({
+            "devices": [{"deviceId": MCP_UDID}],
+            "testNodes": [{
+                "name": "Ambitions",
+                "nodeType": "Test Plan",
+                "children": [{
+                    "name": "AmbitionsTests",
+                    "nodeType": "Unit test bundle",
+                    "children": [{
+                        "name": "FirstTests",
+                        "nodeType": "Test Suite",
+                        "children": [{
+                            "name": "testOne()",
+                            "nodeIdentifier": "FirstTests/testOne()",
+                            "nodeType": "Test Case",
+                            "result": "Passed",
+                        }],
+                    }],
+                }],
+            }],
+        })
+        env["FAKE_XCRESULT_TESTS_JSON_LOCKED"] = "1"
+
+        result, payload = self.run_focused(
+            env,
+            "SELECTOR-PROOF",
+            "--scheme",
+            "AmbitionsUnitTests",
+            "--only-testing",
+            "AmbitionsTests/FirstTests",
+            "--only-testing",
+            "AmbitionsTests/MissingTests",
+        )
+
+        self.assertEqual(result.returncode, 65, result.stdout + result.stderr)
+        self.assertEqual(payload["failure_category"], "test_selector_not_executed")
+        extraction = json.loads(Path(payload["result_extraction_summary"]).read_text(encoding="utf-8"))
+        self.assertEqual(extraction["matched_test_filters"], ["AmbitionsTests/FirstTests"])
+        self.assertEqual(extraction["missing_test_filters"], ["AmbitionsTests/MissingTests"])
 
     def xcodebuild_calls(self) -> list[list[str]]:
         calls: list[list[str]] = []

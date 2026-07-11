@@ -7,13 +7,15 @@ cd "$REPO_ROOT"
 RESULT=""
 OUT_DIR=""
 MODE="full"
+EXPECTED_TEST_FILTERS=()
 while [[ "$#" -gt 0 ]]; do
   case "$1" in
     --result) RESULT="$2"; shift 2 ;;
     --output-dir) OUT_DIR="$2"; shift 2 ;;
     --mode) MODE="${2:-}"; shift 2 ;;
+    --expected-test-filter) EXPECTED_TEST_FILTERS+=("${2:-}"); shift 2 ;;
     -h|--help)
-      echo "Usage: scripts/ambitions-xcode-result-extract.sh --result <path> --output-dir <dir> [--mode full|metadata]" >&2
+      echo "Usage: scripts/ambitions-xcode-result-extract.sh --result <path> --output-dir <dir> [--mode full|metadata] [--expected-test-filter <target[/suite[/test]]>]..." >&2
       exit 0
       ;;
     *)
@@ -32,7 +34,7 @@ case "$MODE" in
 esac
 
 if [[ -z "$RESULT" || -z "$OUT_DIR" ]]; then
-  echo "Usage: scripts/ambitions-xcode-result-extract.sh --result <path> --output-dir <dir> [--mode full|metadata]" >&2
+  echo "Usage: scripts/ambitions-xcode-result-extract.sh --result <path> --output-dir <dir> [--mode full|metadata] [--expected-test-filter <target[/suite[/test]]>]..." >&2
   exit 1
 fi
 
@@ -88,6 +90,8 @@ attachments_path=""
 screenshots_path=""
 logs_path=""
 coverage_path=""
+test_validation_file=""
+test_validation_status=0
 
 if command -v xcparse >/dev/null 2>&1; then
   xcparse_available=true
@@ -120,6 +124,129 @@ if [[ "$MODE" == "full" ]]; then
   fi
 fi
 
+if ((${#EXPECTED_TEST_FILTERS[@]} > 0)); then
+  test_results_json="$OUT_DIR/test-results.json"
+  test_results_error="$OUT_DIR/test-results.stderr.log"
+  test_validation_file="$OUT_DIR/test-validation.json"
+  set +e
+  xcrun xcresulttool get test-results tests --path "$RESULT" --compact \
+    >"$test_results_json" 2>"$test_results_error"
+  xcresulttool_status=$?
+  python3 - \
+    "$test_results_json" \
+    "$test_validation_file" \
+    "$xcresulttool_status" \
+    "${EXPECTED_TEST_FILTERS[@]}" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+raw_path = Path(sys.argv[1])
+output_path = Path(sys.argv[2])
+tool_status = int(sys.argv[3])
+expected = sys.argv[4:]
+
+result = {
+    "expected_test_filters": expected,
+    "matched_test_filters": [],
+    "missing_test_filters": expected,
+    "executed_test_identifiers": [],
+    "simulator_udids": [],
+    "test_results_validated": False,
+}
+
+if not expected or len(set(expected)) != len(expected) or any(
+    not value or len(value.split("/")) not in {1, 2, 3} or any(not part for part in value.split("/"))
+    for value in expected
+):
+    result.update(status="failed", failure_category="invalid_expected_test_filter")
+    output_path.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    raise SystemExit(2)
+
+if tool_status != 0:
+    result.update(status="failed", failure_category="xcresult_test_results_unavailable")
+    output_path.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    raise SystemExit(65)
+
+try:
+    document = json.loads(raw_path.read_text(encoding="utf-8"))
+except (OSError, UnicodeError, json.JSONDecodeError):
+    result.update(status="failed", failure_category="xcresult_test_results_unavailable")
+    output_path.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    raise SystemExit(65)
+
+devices = document.get("devices")
+nodes = document.get("testNodes")
+if not isinstance(devices, list) or not isinstance(nodes, list):
+    result.update(status="failed", failure_category="xcresult_test_results_unavailable")
+    output_path.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    raise SystemExit(65)
+
+records = []
+
+def walk(node, target=None, suite=None):
+    if not isinstance(node, dict):
+        return
+    node_type = node.get("nodeType")
+    name = node.get("name")
+    if node_type in {"Unit test bundle", "UI test bundle", "Test bundle"} and isinstance(name, str):
+        target = name
+    elif node_type == "Test Suite" and isinstance(name, str):
+        suite = name
+    elif node_type == "Test Case" and all(isinstance(value, str) and value for value in (target, suite, name)):
+        method = name[:-2] if name.endswith("()") else name
+        if node.get("result") == "Passed":
+            records.append((target, suite, method))
+    children = node.get("children", [])
+    if isinstance(children, list):
+        for child in children:
+            walk(child, target, suite)
+
+for node in nodes:
+    walk(node)
+
+records = sorted(set(records))
+executed = ["/".join(record) for record in records]
+simulators = sorted(
+    {
+        row.get("deviceId")
+        for row in devices
+        if isinstance(row, dict) and isinstance(row.get("deviceId"), str) and row.get("deviceId")
+    }
+)
+
+def matches(test_filter):
+    parts = test_filter.split("/")
+    for target, suite, method in records:
+        if parts[0] != target:
+            continue
+        if len(parts) >= 2 and parts[1] != suite:
+            continue
+        if len(parts) == 3 and parts[2] != method:
+            continue
+        return True
+    return False
+
+matched = [value for value in expected if matches(value)]
+missing = [value for value in expected if value not in matched]
+result.update(
+    matched_test_filters=matched,
+    missing_test_filters=missing,
+    executed_test_identifiers=executed,
+    simulator_udids=simulators,
+    test_results_validated=not missing,
+)
+if missing:
+    result.update(status="failed", failure_category="test_selector_not_executed")
+else:
+    result.update(status="passed", failure_category=None)
+output_path.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+raise SystemExit(65 if missing else 0)
+PY
+  test_validation_status=$?
+  set -e
+fi
+
 summary_file="$OUT_DIR/summary.json"
 python3 - \
   "$summary_file" \
@@ -134,7 +261,8 @@ python3 - \
   "$attachments_path" \
   "$screenshots_path" \
   "$logs_path" \
-  "$coverage_path" <<'PY'
+  "$coverage_path" \
+  "$test_validation_file" <<'PY'
 import json
 import sys
 from pathlib import Path
@@ -153,6 +281,7 @@ from pathlib import Path
     screenshots,
     logs,
     coverage,
+    test_validation_file,
 ) = sys.argv[1:]
 
 payload = {
@@ -175,7 +304,19 @@ payload = {
         else "rich artifact extraction attempt; individual pass counts report actual extraction"
     ),
 }
+validation = {
+    "expected_test_filters": [],
+    "matched_test_filters": [],
+    "missing_test_filters": [],
+    "executed_test_identifiers": [],
+    "simulator_udids": [],
+    "test_results_validated": False,
+}
+if test_validation_file:
+    validation.update(json.loads(Path(test_validation_file).read_text(encoding="utf-8")))
+payload.update(validation)
 Path(summary_file).write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 PY
 
 echo "$summary_file"
+exit "$test_validation_status"

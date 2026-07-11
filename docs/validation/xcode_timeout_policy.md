@@ -78,10 +78,21 @@ lane, and explicit `--state warm`, then gate only those three benchmark
 summaries:
 
 ```bash
+bash scripts/ambitions-xcode-benchmark.sh \
+  --batch FOCUSED-THREE-REPEAT \
+  --lane module-focused \
+  --state warm \
+  -- scripts/ambitions-xcode-test-focused.sh \
+    --batch FOCUSED-THREE-REPEAT \
+    --scheme AmbitionsModuleTests \
+    --only-testing AmbitionsModuleTests/TimeFoundationModuleTests \
+    --without-building
+
 python3 scripts/ambitions-build-benchmark-report.py \
   sample-1.json sample-2.json sample-3.json \
   --target-seconds 30 \
   --require-samples 3 \
+  --evidence-kind focused-test \
   --fail-on-miss \
   --output report.json
 ```
@@ -99,13 +110,33 @@ must never be coerced to zero. A sample-count miss, any exact-integer nonzero
 command exit, or a median above the target writes the report and exits `1`. A
 met gate exits `0`. `--fail-on-miss` requires `--require-samples`; omitting
 both options keeps the reporter's informative warm/cold aggregation behavior.
+`--evidence-kind focused-test` is an exact-three proof lane: every benchmark
+sample must be typed `focused-test`, carry a positive exact-integer
+`executed_tests`, and name the same nonempty `selected_sim_udid`. The wrapper
+derives those fields from the newly retained `focused-test-summary.json`, links
+its absolute path, run ID, and SHA-256, and fails a successful focused command
+with exit `65` when that summary is missing or invalid. The reporter rereads
+and hash-checks all three linked summaries. An arbitrary successful command is
+typed `generic-command` and cannot satisfy the focused-test gate. Generic and
+build timing aggregation remains available through `--evidence-kind generic`
+or `--evidence-kind build` without turning those timings into test proof.
 
 The median is the binding speed threshold. The report also records every
 duration and exit plus the worst duration for diagnosis. For example,
 `20, 30, 90` meets a 30-second median target while still reporting the
-90-second outlier. Each benchmark sample must also link to the corresponding
-focused-runner summary showing at least one executed test; the timing report
-does not replace executed-test proof.
+90-second outlier. The linked focused-runner summaries are execution proof for
+the named focused runs only; the timing report does not establish broader test,
+device, UI, accessibility, release, TestFlight, or App Store proof.
+
+A successful focused run also validates every requested `--only-testing`
+selector against `xcresulttool get test-results tests`. Each target, suite, or
+test-method selector must have at least one passed test node in the retained
+`.xcresult`; a positive aggregate count cannot hide a missing selector in a
+batched launch. Missing selector evidence fails with
+`test_selector_not_executed`, and unavailable or malformed xcresult test data
+fails with `xcresult_test_results_unavailable`. Metadata mode still skips all
+four rich `xcparse` passes; this selector check reads only structured test
+metadata and preserves the result bundle.
 
 Cache-invalidated build-for-testing is a separate optimization lane. Do not
 mix the measured 439-second cold rebuild or any other cold/cache-invalidated

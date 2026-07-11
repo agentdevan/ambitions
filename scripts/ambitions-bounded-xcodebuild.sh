@@ -11,6 +11,8 @@ LANE_TOKEN=""
 TEST_LAUNCH_TIMEOUT=""
 MONITOR_TEMP_LOG=""
 MONITOR_STATUS_FILE=""
+MONITOR_WATCH_FILE=""
+RUNNER_CLEANUP_STARTED=0
 
 usage() {
   cat >&2 <<'EOF'
@@ -143,13 +145,6 @@ release_xcode_lane() {
   python3 scripts/ambitions-xcode-lane-lock.py release --token "$LANE_TOKEN" >/dev/null || true
   LANE_TOKEN=""
 }
-cleanup_bounded_runner() {
-  release_xcode_lane
-  [[ -z "$MONITOR_TEMP_LOG" ]] || rm -f "$MONITOR_TEMP_LOG"
-  [[ -z "$MONITOR_STATUS_FILE" ]] || rm -f "$MONITOR_STATUS_FILE"
-}
-trap cleanup_bounded_runner EXIT
-
 duration_seconds_ceil() {
   python3 - "$1" <<'PY'
 import math
@@ -228,10 +223,54 @@ for pid in sorted(targets, reverse=True):
 PY
 }
 
+cleanup_bounded_runner() {
+  if [[ "$RUNNER_CLEANUP_STARTED" -eq 1 ]]; then
+    return 0
+  fi
+  RUNNER_CLEANUP_STARTED=1
+  trap '' INT TERM
+  terminate_owned_process_tree "$$" || true
+  wait 2>/dev/null || true
+  release_xcode_lane
+  [[ -z "$MONITOR_TEMP_LOG" ]] || rm -f "$MONITOR_TEMP_LOG"
+  [[ -z "$MONITOR_STATUS_FILE" ]] || rm -f "$MONITOR_STATUS_FILE"
+  [[ -z "$MONITOR_WATCH_FILE" ]] || rm -f "$MONITOR_WATCH_FILE"
+}
+
+handle_bounded_runner_signal() {
+  local signal_status="$1"
+  cleanup_bounded_runner
+  exit "$signal_status"
+}
+
+trap cleanup_bounded_runner EXIT
+trap 'handle_bounded_runner_signal 130' INT
+trap 'handle_bounded_runner_signal 143' TERM
+
+run_owned_command() {
+  local runner_pid
+  local wait_status
+
+  if [[ -n "$LOG_FILE" ]]; then
+    (
+      set +e
+      "${RUN_CMD[@]}" 2>&1 | tee "$LOG_FILE"
+      exit "${PIPESTATUS[0]}"
+    ) &
+  else
+    "${RUN_CMD[@]}" &
+  fi
+  runner_pid=$!
+  wait "$runner_pid"
+  wait_status=$?
+  return "$wait_status"
+}
+
 run_with_test_launch_monitor() {
   local monitor_log="$LOG_FILE"
   local launch_timeout_seconds
   local runner_pid
+  local watcher_pid
   local termination_reason=""
   local detected=""
   local watch_payload=""
@@ -246,6 +285,7 @@ run_with_test_launch_monitor() {
     monitor_log="$MONITOR_TEMP_LOG"
   fi
   MONITOR_STATUS_FILE="$(mktemp "${TMPDIR:-/tmp}/ambitions-xcode-status.XXXXXX")"
+  MONITOR_WATCH_FILE="$(mktemp "${TMPDIR:-/tmp}/ambitions-xcode-watch.XXXXXX")"
   : > "$monitor_log"
   : > "$MONITOR_STATUS_FILE"
 
@@ -259,12 +299,15 @@ run_with_test_launch_monitor() {
   ) &
   runner_pid=$!
 
-  watch_payload="$(python3 scripts/ambitions-xcode-failure-classifier.py \
+  python3 scripts/ambitions-xcode-failure-classifier.py \
     --log "$monitor_log" \
     --watch-test-launch \
     --completion-file "$MONITOR_STATUS_FILE" \
     --timeout-seconds "$launch_timeout_seconds" \
-    --json 2>/dev/null || true)"
+    --json > "$MONITOR_WATCH_FILE" 2>/dev/null &
+  watcher_pid=$!
+  wait "$watcher_pid" || true
+  watch_payload="$(<"$MONITOR_WATCH_FILE")"
   detected="$(python3 -c 'import json, sys; print(json.load(sys.stdin).get("classification", "unknown"))' \
     <<<"$watch_payload" 2>/dev/null || true)"
   case "$detected" in
@@ -302,11 +345,8 @@ set +e
 if [[ -n "$TEST_LAUNCH_TIMEOUT" ]]; then
   run_with_test_launch_monitor
   status=$?
-elif [[ -n "$LOG_FILE" ]]; then
-  "${RUN_CMD[@]}" 2>&1 | tee "$LOG_FILE"
-  status=${PIPESTATUS[0]}
 else
-  "${RUN_CMD[@]}"
+  run_owned_command
   status=$?
 fi
 set -e
