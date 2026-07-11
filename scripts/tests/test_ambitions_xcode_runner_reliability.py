@@ -1,5 +1,6 @@
 import json
 import os
+import re
 import subprocess
 import tempfile
 import time
@@ -31,6 +32,7 @@ class RunnerReliabilityTests(unittest.TestCase):
         self.bin = self.root / "bin"
         self.bin.mkdir()
         self.xcrun_log = self.root / "xcrun.log"
+        self.xcodebuild_log = self.root / "xcodebuild.log"
         self.booted_marker = self.root / "booted"
         self._write_executable(
             "xcrun",
@@ -200,6 +202,78 @@ exec "$@"
         env["AMBITIONS_XCODE_LANE_ROOT"] = str(self.root / "lane")
         return env
 
+    def focused_env(self) -> dict[str, str]:
+        devices = device_listing(("iPhone 17 Pro Max", MCP_UDID, "Booted"))
+        env = self.install_fake_timeout_and_xcodebuild(
+            r'''printf 'CALL\n' >> "$FAKE_XCODEBUILD_LOG"
+result_bundle=""
+previous=""
+for argument in "$@"; do
+  printf 'ARG=%s\n' "$argument" >> "$FAKE_XCODEBUILD_LOG"
+  if [ "$previous" = "-resultBundlePath" ]; then
+    result_bundle="$argument"
+  fi
+  previous="$argument"
+done
+if [ -n "$result_bundle" ]; then
+  mkdir -p "$result_bundle"
+  : > "$result_bundle/Info.plist"
+fi
+echo 'Testing started'
+echo "Executed ${FAKE_EXECUTED_TESTS:-2} tests, with 0 failures (0 unexpected) in 0.001 (0.002) seconds"
+'''
+        )
+        self._write_executable("xcodegen", "#!/bin/sh\nexit 0\n")
+        self._write_executable("xcbeautify", "#!/bin/sh\ncat\n")
+        self._write_executable("xcparse", "#!/bin/sh\nexit 0\n")
+        env.update(self.health_env(devices))
+        env["PATH"] = str(self.bin) + os.pathsep + os.environ["PATH"]
+        env["AMBITIONS_SIM_UDID"] = MCP_UDID
+        env["AMBITIONS_SIM_HEALTH_ALLOW_ACTIVE_XCODE"] = "1"
+        env["AMBITIONS_XCODE_LANE_ROOT"] = str(self.root / "focused-lane")
+        env["FAKE_XCODEBUILD_LOG"] = str(self.xcodebuild_log)
+        return env
+
+    def run_focused(self, env: dict[str, str], batch: str, *filter_args: str) -> tuple[subprocess.CompletedProcess[str], dict]:
+        result = subprocess.run(
+            [
+                "bash",
+                str(FOCUSED_RUNNER),
+                "--batch",
+                batch,
+                "--results-dir",
+                str(self.root / "results"),
+                "--logs-dir",
+                str(self.root / "logs"),
+                "--summaries-dir",
+                str(self.root / "summaries"),
+                "--timeout",
+                "10s",
+                "--test-launch-timeout",
+                "3s",
+                "--without-building",
+                "--skip-prebuild",
+                *filter_args,
+            ],
+            cwd=REPO_ROOT,
+            env=env,
+            capture_output=True,
+            text=True,
+            timeout=12,
+        )
+        summaries = sorted((self.root / "summaries" / batch).glob("*/focused-test-summary.json"))
+        payload = json.loads(summaries[-1].read_text(encoding="utf-8")) if summaries else {}
+        return result, payload
+
+    def xcodebuild_calls(self) -> list[list[str]]:
+        calls: list[list[str]] = []
+        for line in self.xcodebuild_log.read_text(encoding="utf-8").splitlines() if self.xcodebuild_log.exists() else []:
+            if line == "CALL":
+                calls.append([])
+            elif line.startswith("ARG=") and calls:
+                calls[-1].append(line.removeprefix("ARG="))
+        return calls
+
     def run_bounded(self, env: dict[str, str], log: Path, launch_timeout: str) -> tuple[subprocess.CompletedProcess[str], float]:
         started = time.monotonic()
         result = subprocess.run(
@@ -299,6 +373,115 @@ exec "$@"
         self.assertNotIn("output/DerivedData-XcodeBuildMCP", config)
         self.assertIn('DERIVED_DATA="$REPO_ROOT/.codex/DerivedData/Ambitions"', focused)
         self.assertIn('--test-launch-timeout "$TEST_LAUNCH_TIMEOUT"', focused)
+
+    def test_focused_runner_batches_repeated_only_testing_filters_in_one_xcodebuild(self):
+        env = self.focused_env()
+        filters = [
+            "AmbitionsModuleTests/FirstModuleTests",
+            "AmbitionsModuleTests/SecondModuleTests/testOne",
+            "AmbitionsModuleTests/ThirdModuleTests",
+        ]
+        args = [item for test_filter in filters for item in ("--only-testing", test_filter)]
+
+        result, summary = self.run_focused(env, "module-batch", *args)
+
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        calls = self.xcodebuild_calls()
+        self.assertEqual(len(calls), 1)
+        self.assertEqual(
+            [arg.removeprefix("-only-testing:") for arg in calls[0] if arg.startswith("-only-testing:")],
+            filters,
+        )
+        self.assertEqual(summary["scheme"], "AmbitionsModuleTests")
+        self.assertEqual(summary["proof_scope"], "module-focused-fast")
+        self.assertEqual(summary["test"], ",".join(filters))
+        self.assertEqual(summary["tests"], filters)
+        self.assertEqual(summary["requested_filter_count"], 3)
+        self.assertGreater(summary["executed_tests"], 0)
+
+    def test_focused_runner_preserves_single_test_and_only_testing_behavior(self):
+        env = self.focused_env()
+        cases = (
+            ("single-test", "--test", "AmbitionsTests/SingleTestFormTests", "AmbitionsUnitTests"),
+            ("single-only", "--only-testing", "AmbitionsUITests/SingleOnlyTestingFormTests", "AmbitionsUITests"),
+        )
+
+        for batch, option, test_filter, expected_scheme in cases:
+            with self.subTest(option=option):
+                result, summary = self.run_focused(env, batch, option, test_filter)
+                self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+                self.assertEqual(summary["scheme"], expected_scheme)
+                self.assertEqual(summary["test"], test_filter)
+                self.assertEqual(summary["tests"], [test_filter])
+                self.assertEqual(summary["requested_filter_count"], 1)
+                expected_slug = re.sub(r"[^A-Za-z0-9._-]", "-", test_filter)[:80]
+                self.assertIn(f"-{expected_slug}-", summary["run_id"])
+        self.assertEqual(len(self.xcodebuild_calls()), 2)
+
+    def test_repeated_test_form_uses_order_sensitive_multi_filter_slug(self):
+        env = self.focused_env()
+        first = "AmbitionsTests/StableFirstTests"
+        orders = (
+            [first, "AmbitionsTests/SecondTests", "AmbitionsTests/ThirdTests"],
+            [first, "AmbitionsTests/ThirdTests", "AmbitionsTests/SecondTests"],
+        )
+        slugs = []
+
+        for index, filters in enumerate(orders):
+            args = [item for test_filter in filters for item in ("--test", test_filter)]
+            result, summary = self.run_focused(env, f"ordered-{index}", *args)
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            self.assertEqual(summary["tests"], filters)
+            slug_match = re.search(r"-(AmbitionsTests-StableFirstTests-plus-2-[0-9a-f]{10})-", summary["run_id"])
+            self.assertIsNotNone(slug_match, summary["run_id"])
+            slugs.append(slug_match.group(1))
+
+        self.assertNotEqual(slugs[0], slugs[1])
+        self.assertEqual(len(self.xcodebuild_calls()), 2)
+
+    def test_multi_filter_run_still_requires_positive_aggregate_discovery(self):
+        env = self.focused_env()
+        env["FAKE_EXECUTED_TESTS"] = "0"
+
+        result, summary = self.run_focused(
+            env,
+            "zero-discovery",
+            "--only-testing",
+            "AmbitionsTests/FirstTests",
+            "--only-testing",
+            "AmbitionsTests/SecondTests",
+        )
+
+        self.assertEqual(result.returncode, 65, result.stdout + result.stderr)
+        self.assertEqual(summary["failure_category"], "test_discovery_failure")
+        self.assertEqual(summary["executed_tests"], 0)
+        self.assertEqual(summary["requested_filter_count"], 2)
+        self.assertEqual(len(self.xcodebuild_calls()), 1)
+
+    def test_invalid_filter_batches_fail_before_xcodebuild(self):
+        env = self.focused_env()
+        cases = (
+            ("mixed-forms", ("--test", "AmbitionsTests/OneTests", "--only-testing", "AmbitionsTests/TwoTests"), "cannot mix"),
+            ("empty-filter", ("--test", ""), "must not be empty"),
+            (
+                "heterogeneous-auto",
+                ("--only-testing", "AmbitionsTests/OneTests", "--only-testing", "AmbitionsUITests/TwoTests"),
+                "same test target prefix",
+            ),
+            (
+                "scheme-mismatch",
+                ("--scheme", "AmbitionsUnitTests", "--test", "AmbitionsUITests/TwoTests"),
+                "does not accept",
+            ),
+        )
+
+        for batch, args, expected_error in cases:
+            with self.subTest(batch=batch):
+                result, summary = self.run_focused(env, batch, *args)
+                self.assertEqual(result.returncode, 2, result.stdout + result.stderr)
+                self.assertEqual(summary, {})
+                self.assertIn(expected_error, result.stderr)
+        self.assertEqual(self.xcodebuild_calls(), [])
 
 
 if __name__ == "__main__":

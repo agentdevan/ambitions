@@ -5,8 +5,8 @@ REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd -P)"
 cd "$REPO_ROOT"
 
 BATCH=""
-TEST_ID=""
-ONLY_TESTING=""
+TEST_IDS=()
+ONLY_TESTING_FILTERS=()
 SCHEME="auto"
 RESULT_DIR=".codex/xcode-results"
 LOG_DIR=".codex/xcode-logs"
@@ -23,8 +23,16 @@ TEST_LAUNCH_TIMEOUT="${AMBITIONS_XCODE_TEST_LAUNCH_TIMEOUT:-30s}"
 while [[ "$#" -gt 0 ]]; do
   case "$1" in
     --batch) BATCH="${2:-}"; shift 2 ;;
-    --test) TEST_ID="${2:-}"; shift 2 ;;
-    --only-testing) ONLY_TESTING="${2:-}"; shift 2 ;;
+    --test)
+      [[ "$#" -ge 2 ]] || { echo "--test requires a value" >&2; exit 2; }
+      TEST_IDS+=("$2")
+      shift 2
+      ;;
+    --only-testing)
+      [[ "$#" -ge 2 ]] || { echo "--only-testing requires a value" >&2; exit 2; }
+      ONLY_TESTING_FILTERS+=("$2")
+      shift 2
+      ;;
     --scheme) SCHEME="${2:-$SCHEME}"; shift 2 ;;
     --results-dir) RESULT_DIR="${2:-$RESULT_DIR}"; shift 2 ;;
     --logs-dir) LOG_DIR="${2:-$LOG_DIR}"; shift 2 ;;
@@ -38,7 +46,7 @@ while [[ "$#" -gt 0 ]]; do
     --prebuild-timeout) UI_PREBUILD_TIMEOUT_DURATION="${2:-$UI_PREBUILD_TIMEOUT_DURATION}"; shift 2 ;;
     --prebuild-kill-after) UI_PREBUILD_KILL_AFTER="${2:-$UI_PREBUILD_KILL_AFTER}"; shift 2 ;;
     -h|--help)
-      echo "Usage: scripts/ambitions-xcode-test-focused.sh --batch <BATCH> --test <TEST_ID> [--scheme auto|Ambitions|AmbitionsUnitTests|AmbitionsUITests] [--timeout 15m] [--kill-after 60s] [--test-launch-timeout 30s] [--without-building] [--prebuild|--skip-prebuild] [--prebuild-timeout 35m]" >&2
+      echo "Usage: scripts/ambitions-xcode-test-focused.sh --batch <BATCH> (--test <TEST_ID>... | --only-testing <FILTER>...) [--scheme auto|Ambitions|AmbitionsModuleTests|AmbitionsUnitTests|AmbitionsUITests] [--timeout 15m] [--kill-after 60s] [--test-launch-timeout 30s] [--without-building] [--prebuild|--skip-prebuild] [--prebuild-timeout 35m]" >&2
       exit 0
       ;;
     *)
@@ -49,15 +57,138 @@ while [[ "$#" -gt 0 ]]; do
 done
 
 [[ -n "$BATCH" ]] || { echo "--batch is required" >&2; exit 1; }
-if [[ -z "$TEST_ID" && -z "$ONLY_TESTING" ]]; then
-  echo "one of --test or --only-testing is required" >&2
-  exit 1
+if ((${#TEST_IDS[@]} > 0 && ${#ONLY_TESTING_FILTERS[@]} > 0)); then
+  echo "cannot mix --test and --only-testing in one focused run" >&2
+  exit 2
 fi
+if ((${#TEST_IDS[@]} == 0 && ${#ONLY_TESTING_FILTERS[@]} == 0)); then
+  echo "one of --test or --only-testing is required" >&2
+  exit 2
+fi
+
+if ((${#TEST_IDS[@]} > 0)); then
+  TEST_FILTERS=("${TEST_IDS[@]}")
+else
+  TEST_FILTERS=("${ONLY_TESTING_FILTERS[@]}")
+fi
+for test_filter_candidate in "${TEST_FILTERS[@]}"; do
+  if [[ -z "${test_filter_candidate//[[:space:]]/}" ]]; then
+    echo "test filters must not be empty" >&2
+    exit 2
+  fi
+done
+
+filter_prefix() {
+  case "$1" in
+    AmbitionsModuleTests|AmbitionsModuleTests/*) printf '%s\n' module ;;
+    AmbitionsTests|AmbitionsTests/*) printf '%s\n' unit ;;
+    AmbitionsUITests|AmbitionsUITests/*) printf '%s\n' ui ;;
+    *) printf '%s\n' unknown ;;
+  esac
+}
+
+scheme_accepts_prefix() {
+  local scheme="$1"
+  local prefix="$2"
+  case "$scheme:$prefix" in
+    AmbitionsModuleTests:module|AmbitionsUnitTests:unit|AmbitionsUITests:ui) return 0 ;;
+    Ambitions:unit|Ambitions:ui|Ambitions:unknown) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
+resolve_scheme() {
+  local prefix first_prefix
+  if [[ "$SCHEME" != "auto" ]]; then
+    case "$SCHEME" in
+      Ambitions|AmbitionsModuleTests|AmbitionsUnitTests|AmbitionsUITests) ;;
+      *)
+        echo "unsupported focused-test scheme: $SCHEME" >&2
+        return 2
+        ;;
+    esac
+    if ((${#TEST_FILTERS[@]} > 1)); then
+      for test_filter_candidate in "${TEST_FILTERS[@]}"; do
+        if [[ "$(filter_prefix "$test_filter_candidate")" == "unknown" ]]; then
+          echo "multi-filter runs require recognized test target prefixes" >&2
+          return 2
+        fi
+      done
+    fi
+    for test_filter_candidate in "${TEST_FILTERS[@]}"; do
+      prefix="$(filter_prefix "$test_filter_candidate")"
+      if ! scheme_accepts_prefix "$SCHEME" "$prefix"; then
+        echo "scheme $SCHEME does not accept filter prefix for $test_filter_candidate" >&2
+        return 2
+      fi
+    done
+    printf '%s\n' "$SCHEME"
+    return
+  fi
+
+  first_prefix="$(filter_prefix "${TEST_FILTERS[0]}")"
+  if ((${#TEST_FILTERS[@]} > 1)); then
+    if [[ "$first_prefix" == "unknown" ]]; then
+      echo "multi-filter auto runs require recognized test target prefixes" >&2
+      return 2
+    fi
+    for test_filter_candidate in "${TEST_FILTERS[@]:1}"; do
+      prefix="$(filter_prefix "$test_filter_candidate")"
+      if [[ "$prefix" != "$first_prefix" ]]; then
+        echo "auto-scheme batches require the same test target prefix" >&2
+        return 2
+      fi
+    done
+  fi
+
+  case "$first_prefix" in
+    module) printf '%s\n' "${AMBITIONS_XCODE_MODULE_TEST_SCHEME:-AmbitionsModuleTests}" ;;
+    unit) printf '%s\n' "${AMBITIONS_XCODE_UNIT_TEST_SCHEME:-AmbitionsUnitTests}" ;;
+    ui) printf '%s\n' "${AMBITIONS_XCODE_UI_TEST_SCHEME:-AmbitionsUITests}" ;;
+    unknown) printf '%s\n' "${AMBITIONS_XCODE_FULL_TEST_SCHEME:-Ambitions}" ;;
+  esac
+}
+
+if ! RESOLVED_SCHEME="$(resolve_scheme)"; then
+  exit 2
+fi
+
+REQUESTED_FILTER_COUNT="${#TEST_FILTERS[@]}"
+test_filter="${TEST_FILTERS[0]}"
+if ((REQUESTED_FILTER_COUNT == 1)); then
+  test_display="$test_filter"
+else
+  test_display="$(IFS=,; printf '%s' "${TEST_FILTERS[*]}")"
+fi
+TESTS_JSON="$(python3 - "${TEST_FILTERS[@]}" <<'PY'
+import json
+import sys
+print(json.dumps(sys.argv[1:], separators=(",", ":")))
+PY
+)"
+TEST_FILTER_JSON="$(python3 - "$test_display" <<'PY'
+import json
+import sys
+print(json.dumps(sys.argv[1]))
+PY
+)"
 
 mkdir -p "$RESULT_DIR/$BATCH" "$LOG_DIR/$BATCH" "$SUMMARY_DIR/$BATCH"
 TS="$(date -u +%Y%m%dT%H%M%SZ)"
-test_filter="${ONLY_TESTING:-$TEST_ID}"
-test_slug="$(printf '%s' "$test_filter" | tr -c 'A-Za-z0-9._-' '-' | cut -c1-80)"
+if ((REQUESTED_FILTER_COUNT == 1)); then
+  test_slug="$(printf '%s' "$test_filter" | tr -c 'A-Za-z0-9._-' '-' | cut -c1-80)"
+else
+  first_slug="$(printf '%s' "$test_filter" | tr -c 'A-Za-z0-9._-' '-' | cut -c1-60)"
+  filter_hash="$(python3 - "${TEST_FILTERS[@]}" <<'PY'
+import hashlib
+import json
+import sys
+payload = json.dumps(sys.argv[1:], ensure_ascii=False, separators=(",", ":"))
+print(hashlib.sha256(payload.encode("utf-8")).hexdigest()[:10])
+PY
+)"
+  test_slug="${first_slug}-plus-$((REQUESTED_FILTER_COUNT - 1))-${filter_hash}"
+fi
 [[ -n "$test_slug" ]] || test_slug="focused"
 RUN_ID="$TS-$test_slug-$$-${RANDOM:-0}"
 RESULT_BUNDLE="$RESULT_DIR/$BATCH/$RUN_ID/focused-test.xcresult"
@@ -100,28 +231,9 @@ else:
 PY
 }
 
-resolve_scheme() {
-  if [[ "$SCHEME" != "auto" ]]; then
-    printf '%s\n' "$SCHEME"
-    return
-  fi
-
-  case "$test_filter" in
-    AmbitionsTests|AmbitionsTests/*)
-      printf '%s\n' "${AMBITIONS_XCODE_UNIT_TEST_SCHEME:-AmbitionsUnitTests}"
-      ;;
-    AmbitionsUITests|AmbitionsUITests/*)
-      printf '%s\n' "${AMBITIONS_XCODE_UI_TEST_SCHEME:-AmbitionsUITests}"
-      ;;
-    *)
-      printf '%s\n' "${AMBITIONS_XCODE_FULL_TEST_SCHEME:-Ambitions}"
-      ;;
-  esac
-}
-
-RESOLVED_SCHEME="$(resolve_scheme)"
 PROOF_SCOPE="focused"
 case "$RESOLVED_SCHEME" in
+  AmbitionsModuleTests) PROOF_SCOPE="module-focused-fast" ;;
   AmbitionsUnitTests) PROOF_SCOPE="unit-focused-fast" ;;
   AmbitionsUITests) PROOF_SCOPE="ui-focused-fast" ;;
   Ambitions) PROOF_SCOPE="full-scheme-focused" ;;
@@ -152,7 +264,9 @@ if [[ "$need_flag" == "1" ]]; then
 {
   "batch": "$BATCH",
   "lane": "focused-test",
-  "test": "$test_filter",
+  "test": $TEST_FILTER_JSON,
+  "tests": $TESTS_JSON,
+  "requested_filter_count": $REQUESTED_FILTER_COUNT,
   "scheme": "$RESOLVED_SCHEME",
   "xcodebuild_action": "$XCODEBUILD_ACTION",
   "status": "failed",
@@ -194,7 +308,9 @@ write_sim_health_failure_summary() {
 {
   "batch": "$BATCH",
   "lane": "focused-test",
-  "test": "$test_filter",
+  "test": $TEST_FILTER_JSON,
+  "tests": $TESTS_JSON,
+  "requested_filter_count": $REQUESTED_FILTER_COUNT,
   "scheme": "$RESOLVED_SCHEME",
   "proof_scope": "$PROOF_SCOPE",
   "requested_xcodebuild_action": "$REQUESTED_XCODEBUILD_ACTION",
@@ -368,7 +484,9 @@ PY
 {
   "batch": "$BATCH",
   "lane": "focused-test",
-  "test": "$test_filter",
+  "test": $TEST_FILTER_JSON,
+  "tests": $TESTS_JSON,
+  "requested_filter_count": $REQUESTED_FILTER_COUNT,
   "scheme": "$RESOLVED_SCHEME",
   "proof_scope": "$PROOF_SCOPE",
   "requested_xcodebuild_action": "$REQUESTED_XCODEBUILD_ACTION",
@@ -421,7 +539,11 @@ TEST_CMD=(
   -derivedDataPath "$DERIVED_DATA"
   -parallel-testing-enabled NO
   "$XCODEBUILD_ACTION"
-  "-only-testing:$test_filter"
+)
+for test_filter_candidate in "${TEST_FILTERS[@]}"; do
+  TEST_CMD+=("-only-testing:$test_filter_candidate")
+done
+TEST_CMD+=(
   CODE_SIGNING_ALLOWED=NO
   CODE_SIGNING_REQUIRED=NO
   COMPILER_INDEX_STORE_ENABLE=NO
@@ -556,7 +678,9 @@ cat > "$SUMMARY_FILE" <<JSON
 {
   "batch": "$BATCH",
   "lane": "focused-test",
-  "test": "$test_filter",
+  "test": $TEST_FILTER_JSON,
+  "tests": $TESTS_JSON,
+  "requested_filter_count": $REQUESTED_FILTER_COUNT,
   "scheme": "$RESOLVED_SCHEME",
   "proof_scope": "$PROOF_SCOPE",
   "requested_xcodebuild_action": "$REQUESTED_XCODEBUILD_ACTION",
