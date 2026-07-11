@@ -65,6 +65,20 @@ def canon_content_sha(
     entries: list[tuple[str, bytes]] = [
         ("MANIFEST.toml", _read_confined_bytes(canon_root, Path("MANIFEST.toml")))
     ]
+    ledger_path = Path("decisions/SUPERSESSION_LEDGER.toml")
+    try:
+        ledger_bytes = _read_confined_bytes(canon_root, ledger_path)
+    except CanonError:
+        ledger_bytes = None
+    if ledger_bytes is not None:
+        entries.append((ledger_path.as_posix(), ledger_bytes))
+    index_path = Path("migration/impact-reference-index.json")
+    try:
+        index_bytes = _read_confined_bytes(canon_root, index_path)
+    except CanonError:
+        index_bytes = None
+    if index_bytes is not None:
+        entries.append((index_path.as_posix(), index_bytes))
     for source_path in source_paths:
         absolute = _normalized_absolute(source_path)
         try:
@@ -502,6 +516,13 @@ def build_canon(root: Path, *, check: bool = False) -> tuple[Finding, ...]:
 def _load_audited_registry(root: Path) -> CanonRegistry:
     manifest = load_manifest(root)
     documents = load_documents(root, manifest)
+    current_manifest = load_manifest(root)
+    if current_manifest.source_bytes != manifest.source_bytes:
+        raise CanonError(
+            "CANON_CONTENT_CHANGED",
+            "canonical source changed during generation",
+            manifest.source_path,
+        )
     registry = build_registry(manifest, documents)
     findings = audit_registry(registry)
     if findings:
@@ -520,6 +541,33 @@ def _registry_content_sha(registry: CanonRegistry) -> str:
     entries: list[tuple[str, bytes]] = [
         ("MANIFEST.toml", registry.manifest.source_bytes)
     ]
+    if registry.supersession_ledger_bytes is None:
+        raise CanonError(
+            "CANON_PROVENANCE_MISSING",
+            "loaded supersession ledger bytes are unavailable",
+            registry.manifest.source_path,
+        )
+    entries.append(
+        (
+            "decisions/SUPERSESSION_LEDGER.toml",
+            registry.supersession_ledger_bytes,
+        )
+    )
+    if (
+        registry.reference_index is None
+        or registry.reference_index.source_bytes is None
+    ):
+        raise CanonError(
+            "CANON_PROVENANCE_MISSING",
+            "loaded impact reference index bytes are unavailable",
+            registry.manifest.source_path,
+        )
+    entries.append(
+        (
+            "migration/impact-reference-index.json",
+            registry.reference_index.source_bytes,
+        )
+    )
     prefix = Path("docs/canon")
     for document in registry.documents:
         if document.source_bytes is None:

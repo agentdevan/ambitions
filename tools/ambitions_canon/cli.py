@@ -21,6 +21,7 @@ from tools.ambitions_canon.build import (
     _read_descriptor,
 )
 from tools.ambitions_canon.coverage import coverage_findings, load_profiles
+from tools.ambitions_canon.impact import write_amendment_scaffold
 from tools.ambitions_canon.manifest import load_documents, load_manifest
 from tools.ambitions_canon.model import (
     CanonDocument,
@@ -144,6 +145,26 @@ def main(argv: Sequence[str] | None = None) -> int:
         action="store_true",
         help="reject a stored pack that does not match current state",
     )
+    amend_parser = subparsers.add_parser(
+        "amend", help="prepare a governed temporary canon amendment"
+    )
+    amend_subparsers = amend_parser.add_subparsers(
+        dest="amend_command", required=True
+    )
+    scaffold_parser = amend_subparsers.add_parser(
+        "scaffold", help="write a complete non-normative amendment docket"
+    )
+    scaffold_parser.add_argument(
+        "--concept",
+        required=True,
+        help="exact normalized concept key under amendment",
+    )
+    scaffold_parser.add_argument(
+        "--output",
+        required=True,
+        type=Path,
+        help="output below .codex/canon-migration",
+    )
     arguments = parser.parse_args(argv)
 
     if arguments.command == "version":
@@ -175,7 +196,27 @@ def main(argv: Sequence[str] | None = None) -> int:
             issue_path = Path.cwd() / issue_path
         return _pack(Path.cwd(), issue_path, check=arguments.check)
 
+    if arguments.command == "amend":
+        assert arguments.amend_command == "scaffold"
+        return _amend_scaffold(
+            Path.cwd(),
+            concept=arguments.concept,
+            output=arguments.output,
+        )
+
     raise AssertionError(f"unhandled command: {arguments.command}")
+
+
+def _amend_scaffold(root: Path, *, concept: str, output: Path) -> int:
+    try:
+        written = write_amendment_scaffold(root, output, concept)
+    except CanonError as error:
+        location = error.path.as_posix() if error.path is not None else "<registry>"
+        location = f"{location}:{error.line or 0}"
+        print(f"{error.code} {location} {error.message}")
+        return 1
+    print(f"GREEN ambitions canon amendment scaffold {written.as_posix()}")
+    return 0
 
 
 def _audit(root: Path) -> int:
@@ -435,9 +476,17 @@ def _pack(root: Path, issue_path: Path, *, check: bool) -> int:
         intake = TaskIntake.from_json(data).with_source_path(
             _display_path(root, issue_path)
         )
-        manifest = load_manifest(root)
-        documents = load_documents(root, manifest)
-        registry = build_registry(manifest, documents)
+        try:
+            manifest = load_manifest(root)
+            documents = load_documents(root, manifest)
+            registry = build_registry(manifest, documents)
+        except CanonError as exc:
+            if check:
+                raise CanonError(
+                    "PACK_CANON_STALE",
+                    "canon changed during task-pack use",
+                ) from exc
+            raise
         findings = audit_registry(registry)
         if findings:
             finding = findings[0]
@@ -612,10 +661,17 @@ def _require_source_snapshot(
     intake = TaskIntake.from_json(data).with_source_path(
         _display_path(root, issue_path)
     )
-    manifest = load_manifest(root)
-    documents = load_documents(root, manifest)
-    registry = build_registry(manifest, documents)
-    pack = build_task_pack(registry, intake, _repository_state_sha(root), ())
+    repository_sha = _repository_state_sha(root)
+    try:
+        manifest = load_manifest(root)
+        documents = load_documents(root, manifest)
+        registry = build_registry(manifest, documents)
+        pack = build_task_pack(registry, intake, repository_sha, ())
+    except CanonError as exc:
+        raise CanonError(
+            "PACK_CANON_STALE",
+            "canon changed during task-pack use",
+        ) from exc
     current = _pack_source_snapshot(pack, raw_bytes)
     if (
         current.canon_revision != expected.canon_revision

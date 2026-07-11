@@ -42,6 +42,33 @@ def render_outputs(registry: CanonRegistry) -> Mapping[Path, bytes]:
     entries: list[tuple[str, bytes]] = [
         ("MANIFEST.toml", registry.manifest.source_bytes)
     ]
+    if registry.supersession_ledger_bytes is None:
+        raise CanonError(
+            "CANON_PROVENANCE_MISSING",
+            "loaded supersession ledger bytes are required for rendering",
+            registry.manifest.source_path,
+        )
+    entries.append(
+        (
+            "decisions/SUPERSESSION_LEDGER.toml",
+            registry.supersession_ledger_bytes,
+        )
+    )
+    if (
+        registry.reference_index is None
+        or registry.reference_index.source_bytes is None
+    ):
+        raise CanonError(
+            "CANON_PROVENANCE_MISSING",
+            "loaded impact reference index bytes are required for rendering",
+            registry.manifest.source_path,
+        )
+    entries.append(
+        (
+            "migration/impact-reference-index.json",
+            registry.reference_index.source_bytes,
+        )
+    )
     canon_prefix = Path("docs/canon")
     for document in registry.documents:
         if document.source_bytes is None:
@@ -179,7 +206,7 @@ def _render_outputs(
         ),
         Path("external-reference-impact.md"): _external_impact(metadata),
         Path("supersession-manifest.json"): _supersession_manifest(
-            metadata, requirements
+            metadata, registry
         ),
     }
 
@@ -363,13 +390,17 @@ def _markdown_cell(value: object) -> str:
     )
 
 
-def _supersession_manifest(metadata, requirements) -> bytes:
-    rows = sorted(
-        (
-            {"retired_id": retired, "replacement_id": requirement.requirement_id}
-            for requirement in requirements
-            for retired in requirement.supersedes
-        ),
-        key=lambda row: (row["retired_id"], row["replacement_id"]),
-    )
+def _supersession_manifest(metadata, registry) -> bytes:
+    rows = [
+        {
+            "conflict_id": entry.conflict_id,
+            "old_ids": list(entry.old_ids),
+            "resulting_id": entry.resulting_id,
+            "decision_date": entry.decision_date,
+            "owner": entry.owner,
+            "commit": entry.commit,
+            "superseded_artifacts": list(entry.superseded_artifacts),
+        }
+        for entry in registry.supersession_entries
+    ]
     return stable_json({**metadata, "supersessions": rows})

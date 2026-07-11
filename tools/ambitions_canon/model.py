@@ -81,6 +81,15 @@ class GapSeverity(StrEnum):
     INFORMATIONAL = "INFORMATIONAL"
 
 
+class AuthorityReferenceKind(StrEnum):
+    SOURCE = "source"
+    TEST = "test"
+    PROOF = "proof"
+    SCENARIO = "scenario"
+    FIGMA = "figma"
+    LINEAR = "linear"
+
+
 @dataclass(frozen=True, slots=True)
 class Requirement:
     requirement_id: str
@@ -178,12 +187,112 @@ class Finding:
 
 
 @dataclass(frozen=True, slots=True)
+class SupersessionEntry:
+    conflict_id: str
+    old_ids: tuple[str, ...]
+    resulting_id: str | None
+    decision_date: str
+    owner: str
+    commit: str
+    superseded_artifacts: tuple[str, ...]
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "old_ids", tuple(self.old_ids))
+        object.__setattr__(
+            self,
+            "superseded_artifacts",
+            tuple(self.superseded_artifacts),
+        )
+
+
+@dataclass(frozen=True, slots=True)
+class AuthorityReference:
+    schema_version: int
+    reference_id: str
+    authority_class: AuthorityClass
+    reference_kind: AuthorityReferenceKind
+    source: str
+    revision: str
+    requirement_ids: tuple[str, ...]
+    approval_state: str
+    approved_by: str | None = None
+    implementation_status: str | None = None
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "requirement_ids", tuple(self.requirement_ids))
+
+
+@dataclass(frozen=True, slots=True)
+class TaskPackReference:
+    schema_version: int
+    pack_id: str
+    source: str
+    canon_revision: int
+    canon_sha: str
+    requirement_ids: tuple[str, ...]
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "requirement_ids", tuple(self.requirement_ids))
+
+
+@dataclass(frozen=True, slots=True)
+class SpecificationGapRecord:
+    gap_id: str
+    severity: GapSeverity
+    affected_ids: tuple[str, ...]
+    message: str
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "affected_ids", tuple(self.affected_ids))
+
+
+@dataclass(frozen=True, slots=True)
+class ImpactReferenceIndex:
+    schema_version: int
+    complete: bool
+    authority_references: tuple[AuthorityReference, ...]
+    task_packs: tuple[TaskPackReference, ...]
+    specification_gaps: tuple[SpecificationGapRecord, ...]
+    canon_revision: int | None = None
+    indexed_requirement_ids: tuple[str, ...] = ()
+    source_path: Path | None = None
+    source_bytes: bytes | None = None
+    source_sha: str | None = None
+
+    def __post_init__(self) -> None:
+        object.__setattr__(
+            self,
+            "authority_references",
+            tuple(self.authority_references),
+        )
+        object.__setattr__(self, "task_packs", tuple(self.task_packs))
+        object.__setattr__(
+            self,
+            "specification_gaps",
+            tuple(self.specification_gaps),
+        )
+        object.__setattr__(
+            self,
+            "indexed_requirement_ids",
+            tuple(self.indexed_requirement_ids),
+        )
+        if self.source_path is not None:
+            object.__setattr__(self, "source_path", Path(self.source_path))
+        if self.source_bytes is not None:
+            object.__setattr__(self, "source_bytes", bytes(self.source_bytes))
+
+
+@dataclass(frozen=True, slots=True)
 class CanonRegistry:
     manifest: CanonManifest
     documents: tuple[CanonDocument, ...]
     requirements: tuple[Requirement, ...]
     concept_owners: tuple[tuple[str, str], ...]
     superseded_ids: frozenset[str]
+    supersession_entries: tuple[SupersessionEntry, ...] = ()
+    supersession_ledger_complete: bool = False
+    supersession_ledger_bytes: bytes | None = None
+    reference_index: ImpactReferenceIndex | None = None
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "documents", tuple(self.documents))
@@ -194,3 +303,14 @@ class CanonRegistry:
             tuple(tuple(pair) for pair in self.concept_owners),
         )
         object.__setattr__(self, "superseded_ids", frozenset(self.superseded_ids))
+        object.__setattr__(
+            self,
+            "supersession_entries",
+            tuple(self.supersession_entries),
+        )
+        if self.supersession_ledger_bytes is not None:
+            object.__setattr__(
+                self,
+                "supersession_ledger_bytes",
+                bytes(self.supersession_ledger_bytes),
+            )

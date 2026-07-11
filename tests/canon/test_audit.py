@@ -18,6 +18,7 @@ from tools.ambitions_canon.model import (
     Modality,
     Requirement,
 )
+from tests.canon.canon_test_support import write_required_governance_artifacts
 
 
 def requirement(
@@ -170,6 +171,17 @@ def run_filesystem_audit(documents: dict[str, str]) -> tuple[int, str]:
             destination = canon_root / relative_path
             destination.parent.mkdir(parents=True, exist_ok=True)
             destination.write_text(text, encoding="utf-8")
+        requirement_ids = tuple(
+            line.split(" ", 2)[1]
+            for text in documents.values()
+            for line in text.splitlines()
+            if line.startswith("## ") and " —" in line
+        )
+        write_required_governance_artifacts(
+            canon_root,
+            canon_revision=1,
+            requirement_ids=requirement_ids,
+        )
         previous = Path.cwd()
         try:
             os.chdir(root)
@@ -383,6 +395,10 @@ class AuditTests(unittest.TestCase):
                 "normative_files = []\n"
                 "generated_files = []\n",
                 encoding="utf-8",
+            )
+            write_required_governance_artifacts(
+                canon_root,
+                canon_revision=1,
             )
             previous = Path.cwd()
             try:

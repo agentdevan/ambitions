@@ -831,6 +831,33 @@ def _registry_canon_sha(registry: CanonRegistry) -> str:
             registry.manifest.source_path,
         )
     entries: list[tuple[str, bytes]] = [("MANIFEST.toml", manifest_bytes)]
+    if registry.supersession_ledger_bytes is None:
+        raise CanonError(
+            "CANON_PROVENANCE_MISSING",
+            "loaded supersession ledger provenance is required for task packs",
+            registry.manifest.source_path,
+        )
+    entries.append(
+        (
+            "decisions/SUPERSESSION_LEDGER.toml",
+            registry.supersession_ledger_bytes,
+        )
+    )
+    if (
+        registry.reference_index is None
+        or registry.reference_index.source_bytes is None
+    ):
+        raise CanonError(
+            "CANON_PROVENANCE_MISSING",
+            "loaded impact reference index provenance is required for task packs",
+            registry.manifest.source_path,
+        )
+    entries.append(
+        (
+            "migration/impact-reference-index.json",
+            registry.reference_index.source_bytes,
+        )
+    )
     prefix = Path("docs/canon")
     for document in registry.documents:
         if document.source_bytes is None:

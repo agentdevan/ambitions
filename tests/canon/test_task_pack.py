@@ -23,6 +23,7 @@ from tools.ambitions_canon.model import (
     Requirement,
 )
 from tools.ambitions_canon.registry import build_registry
+from tools.ambitions_canon.reference_index import parse_reference_index_bytes
 from tools.ambitions_canon.task_pack import (
     PACK_BUDGETS,
     PACK_SECTION_ORDER,
@@ -36,6 +37,7 @@ from tools.ambitions_canon.task_pack import (
     write_task_pack,
 )
 from tests.canon.test_audit import markdown_document
+from tests.canon.canon_test_support import write_required_governance_artifacts
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -177,10 +179,39 @@ def sample_registry(*, oversized_body: str | None = None, reverse: bool = False)
         normative_files=(),
         generated_files=(),
         source_path=Path("docs/canon/MANIFEST.toml"),
-        repository_root=ROOT,
+        repository_root=None,
         source_bytes=b"manifest\n",
     )
-    return build_registry(manifest, documents)
+    built = build_registry(manifest, documents)
+    indexed_ids = tuple(
+        sorted(requirement.requirement_id for requirement in built.requirements)
+    )
+    reference_bytes = (
+        json.dumps(
+            {
+                "authority_references": [],
+                "canon_revision": 7,
+                "indexed_requirement_ids": indexed_ids,
+                "schema_version": 1,
+                "specification_gaps": [],
+                "task_packs": [],
+            },
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n"
+    ).encode()
+    return replace(
+        built,
+        supersession_ledger_complete=True,
+        supersession_ledger_bytes=b"schema_version = 1\nentries = []\n",
+        reference_index=parse_reference_index_bytes(
+            reference_bytes,
+            Path("docs/canon/migration/impact-reference-index.json"),
+            canon_revision=7,
+            requirement_ids=indexed_ids,
+        ),
+    )
 
 
 def intake(task_type: str = "swiftui") -> TaskIntake:
@@ -227,6 +258,7 @@ def initialize_empty_cli_root(root: Path) -> Path:
         "generated_files = []\n",
         encoding="utf-8",
     )
+    write_required_governance_artifacts(canon, canon_revision=0)
     (root / ".gitignore").write_text(".codex/\n", encoding="utf-8")
     intake_path = root / ".codex" / "intake" / "AMB-1842.json"
     intake_path.parent.mkdir(parents=True)
@@ -360,7 +392,7 @@ class TaskPackTests(unittest.TestCase):
             registry.manifest,
             authority_state=AuthorityState.ACTIVE,
         )
-        active = build_registry(manifest, registry.documents)
+        active = replace(registry, manifest=manifest)
         unknown_scope = replace(intake(), scope=("surface.unknown",))
 
         with self.assertRaises(CanonError) as raised:
@@ -781,6 +813,7 @@ class TaskPackTests(unittest.TestCase):
                 "generated_files = []\n",
                 encoding="utf-8",
             )
+            write_required_governance_artifacts(canon, canon_revision=0)
             (root / ".gitignore").write_text(".codex/\n", encoding="utf-8")
             intake_path = root / ".codex" / "intake" / "AMB-1842.json"
             intake_path.parent.mkdir(parents=True)
@@ -879,6 +912,10 @@ class TaskPackTests(unittest.TestCase):
                     depends_on=("SPEC-A",),
                 ),
                 encoding="utf-8",
+            )
+            write_required_governance_artifacts(
+                canon,
+                canon_revision=1,
             )
             (root / ".gitignore").write_text(".codex/\n", encoding="utf-8")
             intake_path = root / ".codex" / "intake" / "AMB-1842.json"

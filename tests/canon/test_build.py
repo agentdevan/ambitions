@@ -22,6 +22,7 @@ from tools.ambitions_canon.manifest import load_documents, load_manifest
 from tools.ambitions_canon.model import CanonError, CanonRegistry
 from tools.ambitions_canon.registry import build_registry
 from tools.ambitions_canon.render import render_outputs
+from tests.canon.canon_test_support import write_required_governance_artifacts
 
 
 GENERATED_FILES = (
@@ -117,6 +118,20 @@ class BuildTests(unittest.TestCase):
             destination = self.canon_root / relative_path
             destination.parent.mkdir(parents=True, exist_ok=True)
             destination.write_text(text, encoding="utf-8")
+        requirement_ids = tuple(
+            match.group(1)
+            for text in documents.values()
+            for match in re.finditer(
+                r"^## ([A-Z][A-Z0-9-]+-\d{3}) —",
+                text,
+                re.MULTILINE,
+            )
+        )
+        write_required_governance_artifacts(
+            self.canon_root,
+            canon_revision=0,
+            requirement_ids=requirement_ids,
+        )
 
     def registry(self) -> CanonRegistry:
         manifest = load_manifest(self.root)
@@ -258,6 +273,10 @@ class BuildTests(unittest.TestCase):
             requirements=tuple(reversed(registry.requirements)),
             concept_owners=tuple(reversed(registry.concept_owners)),
             superseded_ids=registry.superseded_ids,
+            supersession_entries=registry.supersession_entries,
+            supersession_ledger_complete=registry.supersession_ledger_complete,
+            supersession_ledger_bytes=registry.supersession_ledger_bytes,
+            reference_index=registry.reference_index,
         )
 
         expected = self.render_in_repository(registry)
@@ -1696,6 +1715,10 @@ class BuildTests(unittest.TestCase):
             manifest_text(canon_revision=7),
             encoding="utf-8",
         )
+        write_required_governance_artifacts(
+            self.canon_root,
+            canon_revision=7,
+        )
         registry = self.registry()
         expected_sha = canon_content_sha(manifest_path, ())
         unrelated = self.root / "unrelated"
@@ -1705,6 +1728,10 @@ class BuildTests(unittest.TestCase):
         (unrelated_canon / "MANIFEST.toml").write_text(
             manifest_text(canon_revision=99),
             encoding="utf-8",
+        )
+        write_required_governance_artifacts(
+            unrelated_canon,
+            canon_revision=99,
         )
         previous = Path.cwd()
         try:

@@ -14,6 +14,8 @@ from tools.ambitions_canon.model import (
     DocumentKind,
     Requirement,
 )
+from tools.ambitions_canon.supersession import load_manifest_supersession_ledger
+from tools.ambitions_canon.reference_index import load_manifest_reference_index
 
 
 CONCEPT_KEY = re.compile(r"^[a-z0-9]+(?:[.-][a-z0-9]+)*$")
@@ -50,11 +52,16 @@ def build_registry(
     )
     _reject_duplicate_requirements(ordered_requirements)
     _reject_cross_kind_id_collisions(ordered_documents, ordered_requirements)
-    superseded_ids = frozenset(
+    declared_superseded_ids = frozenset(
         superseded
         for requirement in ordered_requirements
         for superseded in requirement.supersedes
     )
+    ledger = load_manifest_supersession_ledger(manifest)
+    ledger_superseded_ids = (
+        ledger.retired_ids if ledger is not None else frozenset()
+    )
+    superseded_ids = declared_superseded_ids | ledger_superseded_ids
     concept_owners = _concept_owners(ordered_documents)
     _require_document_concept_ownership(ordered_documents)
     _resolve_references(
@@ -98,12 +105,24 @@ def build_registry(
             line,
         )
 
+    reference_index = load_manifest_reference_index(
+        manifest,
+        tuple(item.requirement_id for item in ordered_requirements),
+        tuple(item.spec_id for item in ordered_documents),
+    )
+
     return CanonRegistry(
         manifest=manifest,
         documents=ordered_documents,
         requirements=ordered_requirements,
         concept_owners=concept_owners,
         superseded_ids=superseded_ids,
+        supersession_entries=ledger.entries if ledger is not None else (),
+        supersession_ledger_complete=ledger is not None,
+        supersession_ledger_bytes=(
+            ledger.source_bytes if ledger is not None else None
+        ),
+        reference_index=reference_index,
     )
 
 
