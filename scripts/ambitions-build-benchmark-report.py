@@ -26,9 +26,38 @@ def execution_identity(sample):
     return None
 
 
+def exact_exit_code(value):
+    if type(value) is not int:
+        raise ValueError("exit_code must be an exact integer")
+    return value
+
+
+def load_samples(sample_paths):
+    samples = []
+    for name in sample_paths:
+        path = Path(name)
+        try:
+            source = path.read_text(encoding="utf-8")
+        except (OSError, UnicodeError) as error:
+            raise ValueError(f"unable to read benchmark sample {path}: {error}") from error
+        try:
+            data = json.loads(source)
+        except json.JSONDecodeError as error:
+            raise ValueError(
+                f"invalid JSON benchmark sample {path}: {error.msg}"
+            ) from error
+        entries = data if isinstance(data, list) else [data]
+        if any(not isinstance(entry, dict) for entry in entries):
+            raise ValueError(f"benchmark samples must be JSON objects: {path}")
+        samples.extend(entries)
+    return samples
+
+
 def build_report(samples, target_seconds, require_samples=None):
     if not samples:
         raise ValueError("no benchmark samples")
+    if any(not isinstance(sample, dict) for sample in samples):
+        raise ValueError("benchmark samples must be JSON objects")
     try:
         target_seconds = float(target_seconds)
     except (TypeError, ValueError) as error:
@@ -86,9 +115,9 @@ def build_report(samples, target_seconds, require_samples=None):
             continue
         try:
             durations = [float(sample["duration_seconds"]) for sample in selected]
-            exits = [int(sample["exit_code"]) for sample in selected]
         except (KeyError, TypeError, ValueError) as error:
             raise ValueError(f"invalid {state} benchmark sample: {error}") from error
+        exits = [exact_exit_code(sample.get("exit_code")) for sample in selected]
         if any(not math.isfinite(duration) or duration < 0 for duration in durations):
             raise ValueError(
                 f"invalid {state} benchmark sample: expected finite nonnegative duration"
@@ -140,11 +169,8 @@ def main():
     if args.require_samples is not None and args.require_samples <= 0:
         parser.error("--require-samples must be positive")
 
-    samples = []
-    for name in args.samples:
-        data = json.loads(Path(name).read_text(encoding="utf-8"))
-        samples.extend(data if isinstance(data, list) else [data])
     try:
+        samples = load_samples(args.samples)
         report = build_report(
             samples,
             args.target_seconds,

@@ -47,6 +47,15 @@ class BenchmarkReportTests(unittest.TestCase):
             path = root / f"sample-{index}.json"
             path.write_text(json.dumps(sample), encoding="utf-8")
             sample_paths.append(path)
+        return self.run_cli_paths(
+            root,
+            sample_paths,
+            require_samples=require_samples,
+            fail_on_miss=fail_on_miss,
+            output=output,
+        )
+
+    def run_cli_paths(self, root, sample_paths, *, require_samples=None, fail_on_miss=False, output=True):
         command = [
             sys.executable,
             str(SCRIPT),
@@ -131,6 +140,21 @@ class BenchmarkReportTests(unittest.TestCase):
         self.assertEqual(report["warm"]["exits"], [0, 65, 0])
         self.assertEqual(report["warm"]["miss_reasons"], ["nonzero_exit"])
         self.assertEqual(report["warm"]["target_state"], "miss")
+
+    def test_fractional_boolean_or_non_integer_exit_code_is_invalid_evidence(self):
+        for exit_code in (0.5, True, "0", None):
+            with self.subTest(exit_code=exit_code):
+                samples = [
+                    self.sample("warm", 10),
+                    self.sample("warm", 11, exit_code),
+                    self.sample("warm", 12),
+                ]
+                with self.assertRaisesRegex(ValueError, "exit_code must be an exact integer"):
+                    self.module.build_report(samples, 30, require_samples=3)
+
+    def test_non_object_sample_entry_is_invalid_evidence(self):
+        with self.assertRaisesRegex(ValueError, "benchmark samples must be JSON objects"):
+            self.module.build_report([self.sample("warm", 10), 42], 30)
 
     def test_mixed_commit_package_or_cache_identity_is_rejected(self):
         keys = {"commit": "def", "package_path": "/other", "package_identity": "pkg-b", "derived_data": "/cache/b"}
@@ -243,6 +267,34 @@ class BenchmarkReportTests(unittest.TestCase):
             self.assertEqual(report["warm"]["target_state"], "miss")
             self.assertEqual(report["warm"]["miss_reasons"], ["sample_count", "median"])
 
+    def test_cli_exact_integer_nonzero_exit_writes_miss_report_and_exits_one(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            result, output_path = self.run_cli(
+                root,
+                [self.sample("warm", 10), self.sample("warm", 11, 65), self.sample("warm", 12)],
+                require_samples=3,
+                fail_on_miss=True,
+            )
+            self.assertEqual(result.returncode, 1, result.stderr)
+            report = json.loads(output_path.read_text(encoding="utf-8"))
+            self.assertEqual(report["warm"]["exits"], [0, 65, 0])
+            self.assertEqual(report["warm"]["miss_reasons"], ["nonzero_exit"])
+
+    def test_cli_non_exact_integer_exit_code_exits_two_without_writing_report(self):
+        for exit_code in (0.5, True, "0", None):
+            with self.subTest(exit_code=exit_code), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                result, output_path = self.run_cli(
+                    root,
+                    [self.sample("warm", 10), self.sample("warm", 11, exit_code), self.sample("warm", 12)],
+                    require_samples=3,
+                    fail_on_miss=True,
+                )
+                self.assertEqual(result.returncode, 2)
+                self.assertIn("exit_code must be an exact integer", result.stderr)
+                self.assertFalse(output_path.exists())
+
     def test_cli_gate_miss_is_informative_without_fail_on_miss(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
@@ -307,6 +359,70 @@ class BenchmarkReportTests(unittest.TestCase):
             self.assertEqual(result.returncode, 2)
             self.assertIn("distinct execution identities", result.stderr)
             self.assertFalse(output_path.exists())
+
+    def test_cli_missing_sample_file_exits_two_without_writing_report(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            result, output_path = self.run_cli_paths(
+                root,
+                [root / "missing.json"],
+                require_samples=3,
+                fail_on_miss=True,
+            )
+            self.assertEqual(result.returncode, 2)
+            self.assertIn("unable to read benchmark sample", result.stderr)
+            self.assertFalse(output_path.exists())
+
+    def test_cli_malformed_json_exits_two_without_writing_report(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            malformed = root / "malformed.json"
+            malformed.write_text("{", encoding="utf-8")
+            result, output_path = self.run_cli_paths(
+                root,
+                [malformed],
+                require_samples=3,
+                fail_on_miss=True,
+            )
+            self.assertEqual(result.returncode, 2)
+            self.assertIn("invalid JSON benchmark sample", result.stderr)
+            self.assertFalse(output_path.exists())
+
+    def test_cli_non_object_sample_entries_exit_two_without_writing_report(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            for index, payload in enumerate((42, [self.sample("warm", 10), 42]), start=1):
+                with self.subTest(payload=payload):
+                    invalid = root / f"invalid-{index}.json"
+                    invalid.write_text(json.dumps(payload), encoding="utf-8")
+                    output_path = root / "report.json"
+                    output_path.unlink(missing_ok=True)
+                    result, output_path = self.run_cli_paths(
+                        root,
+                        [invalid],
+                        require_samples=3,
+                        fail_on_miss=True,
+                    )
+                    self.assertEqual(result.returncode, 2)
+                    self.assertIn("benchmark samples must be JSON objects", result.stderr)
+                    self.assertFalse(output_path.exists())
+
+    def test_cli_valid_json_list_remains_supported(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            sample_list = root / "samples.json"
+            sample_list.write_text(
+                json.dumps([self.sample("warm", 10), self.sample("warm", 11), self.sample("warm", 12)]),
+                encoding="utf-8",
+            )
+            result, output_path = self.run_cli_paths(
+                root,
+                [sample_list],
+                require_samples=3,
+                fail_on_miss=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(json.loads(output_path.read_text())["warm"]["sample_count"], 3)
 
     def test_cli_prints_informative_report_without_new_options(self):
         with tempfile.TemporaryDirectory() as temporary:

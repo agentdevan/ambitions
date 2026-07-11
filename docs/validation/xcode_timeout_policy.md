@@ -92,11 +92,13 @@ have the same nonempty `commit`, `package_path`, `package_identity`, and
 must also be nonempty and identical, and every sample must carry a distinct
 nonempty `run_id` or `timestamp_utc`; duplicate sample evidence is rejected.
 Missing or mixed identity, mixed warm/cold state, replayed evidence, or mixed
-cohort fields is invalid evidence and exits `2`. A sample-count miss, any
-nonzero command exit, or a median above the target writes the report and exits
-`1`. A met gate exits `0`. `--fail-on-miss` requires `--require-samples`;
-omitting both options keeps the reporter's informative warm/cold aggregation
-behavior.
+cohort fields is invalid evidence and exits `2`. Missing/unreadable files,
+malformed JSON, non-object sample entries, and any `exit_code` that is not an
+exact JSON integer are also invalid evidence; fractional or boolean exit values
+must never be coerced to zero. A sample-count miss, any exact-integer nonzero
+command exit, or a median above the target writes the report and exits `1`. A
+met gate exits `0`. `--fail-on-miss` requires `--require-samples`; omitting
+both options keeps the reporter's informative warm/cold aggregation behavior.
 
 The median is the binding speed threshold. The report also records every
 duration and exit plus the worst duration for diagnosis. For example,
