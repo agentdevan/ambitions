@@ -24,8 +24,8 @@
   },
   "targetGraph": {
     "evidencePath": "docs/qa/architecture/current-module-graph.json",
-    "currentTargetCount": 7,
-    "currentStatus": "red",
+    "currentTargetCount": 9,
+    "currentStatus": "yellow",
     "intendedTargets": [
       "AmbitionsDomain",
       "PrivateLifeRuntimeAPI",
@@ -86,8 +86,8 @@
       "gateResults": {"all-mutations-enumerated": "fail", "runtime-restart": "fail", "duplicate-idempotency": "fail", "rollback": "fail", "corruption-recovery": "fail", "outbox-faults": "fail"}
     },
     "compileTimeModularity": {
-      "workingScore": 2,
-      "status": "red",
+      "workingScore": 3,
+      "status": "yellow",
       "evidence": ["Packages/AmbitionsDesignSystem/Package.swift", "project.yml", "docs/qa/architecture/current-module-graph.json"],
       "requiredGates": ["compiler-enforced-targets", "acyclic-target-graph", "incremental-feature-rebuild"],
       "gateResults": {"compiler-enforced-targets": "fail", "acyclic-target-graph": "fail", "incremental-feature-rebuild": "fail"}
