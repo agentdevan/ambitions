@@ -7,6 +7,7 @@ import os
 import re
 import stat
 import tomllib
+from dataclasses import replace
 from pathlib import Path, PurePosixPath
 
 from tools.ambitions_canon.model import (
@@ -137,6 +138,8 @@ def load_manifest(root: Path) -> CanonManifest:
         normative_files=tuple(ManifestEntry(path) for path in normative_paths),
         generated_files=tuple(generated_paths),
         source_path=source_path,
+        repository_root=repository_root,
+        source_bytes=text.encode("utf-8"),
     )
 
 
@@ -162,7 +165,10 @@ def load_documents(
             read_message="unable to read normative document",
         )
         documents.append(
-            parse_canon_document(document_source_path, text)
+            replace(
+                parse_canon_document(document_source_path, text),
+                source_bytes=text.encode("utf-8"),
+            )
         )
 
     ordered = tuple(

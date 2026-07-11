@@ -9,6 +9,7 @@ from pathlib import Path
 
 from tools.ambitions_canon import __version__
 from tools.ambitions_canon.audit import audit_registry
+from tools.ambitions_canon.build import build_canon
 from tools.ambitions_canon.manifest import load_documents, load_manifest
 from tools.ambitions_canon.model import CanonError, Finding, GapSeverity
 from tools.ambitions_canon.registry import build_registry
@@ -62,6 +63,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     subparsers = parser.add_subparsers(dest="command", required=True)
     subparsers.add_parser("version", help="print the compiler version")
     subparsers.add_parser("audit", help="audit the canonical registry")
+    build_parser = subparsers.add_parser(
+        "build", help="generate deterministic canon projections"
+    )
+    build_parser.add_argument(
+        "--check",
+        action="store_true",
+        help="compare generated outputs without writing",
+    )
     arguments = parser.parse_args(argv)
 
     if arguments.command == "version":
@@ -70,6 +79,9 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     if arguments.command == "audit":
         return _audit(Path.cwd())
+
+    if arguments.command == "build":
+        return _build(Path.cwd(), check=arguments.check)
 
     raise AssertionError(f"unhandled command: {arguments.command}")
 
@@ -121,4 +133,27 @@ def _audit(root: Path) -> int:
         f"concepts={len(registry.concept_owners)} "
         f"authority_state={manifest.authority_state.value}"
     )
+    return 0
+
+
+def _build(root: Path, *, check: bool) -> int:
+    try:
+        findings = build_canon(root, check=check)
+    except CanonError as error:
+        location = error.path.as_posix() if error.path is not None else "<registry>"
+        location = f"{location}:{error.line or 0}"
+        print(f"P0_BLOCKER {error.code} {location} {error.message}")
+        return 1
+
+    if findings:
+        for finding in findings:
+            location = finding.path.as_posix() if finding.path is not None else "<registry>"
+            location = f"{location}:{finding.line or 0}"
+            print(
+                f"{finding.severity.value} {finding.code} "
+                f"{location} {finding.message}"
+            )
+        return 1
+
+    print("GREEN ambitions canon generated outputs")
     return 0

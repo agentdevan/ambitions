@@ -124,6 +124,7 @@ class CanonDocument:
     not_applicable: tuple[NotApplicable, ...]
     requirements: tuple[Requirement, ...]
     source_path: Path
+    source_bytes: bytes | None = None
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "owns_concepts", tuple(self.owns_concepts))
@@ -133,6 +134,8 @@ class CanonDocument:
         object.__setattr__(self, "sections", frozenset(self.sections))
         object.__setattr__(self, "not_applicable", tuple(self.not_applicable))
         object.__setattr__(self, "requirements", tuple(self.requirements))
+        if self.source_bytes is not None:
+            object.__setattr__(self, "source_bytes", bytes(self.source_bytes))
 
 
 @dataclass(frozen=True, slots=True)
@@ -149,10 +152,20 @@ class CanonManifest:
     normative_files: tuple[ManifestEntry, ...]
     generated_files: tuple[Path, ...]
     source_path: Path
+    repository_root: Path | None = None
+    source_bytes: bytes | None = None
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "normative_files", tuple(self.normative_files))
         object.__setattr__(self, "generated_files", tuple(self.generated_files))
+        if self.repository_root is not None:
+            object.__setattr__(
+                self,
+                "repository_root",
+                Path(self.repository_root),
+            )
+        if self.source_bytes is not None:
+            object.__setattr__(self, "source_bytes", bytes(self.source_bytes))
 
 
 @dataclass(frozen=True, slots=True)

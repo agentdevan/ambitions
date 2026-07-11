@@ -200,6 +200,48 @@ class ModelTests(unittest.TestCase):
         self.assertEqual(manifest.generated_files, (Path("generated/INDEX.md"),))
         self.assertIsInstance(manifest.generated_files, tuple)
 
+    def test_loaded_provenance_is_copied_into_immutable_value_types(self):
+        manifest_bytes = bytearray(b"manifest\n")
+        document_bytes = bytearray(b"document\n")
+        document = CanonDocument(
+            spec_id="SURFACE-TODAY",
+            title="Today",
+            kind=DocumentKind.SURFACE,
+            status="normative",
+            owner_domain="product",
+            canon_revision=1,
+            profile=None,
+            owns_concepts=(),
+            inherits=(),
+            depends_on=(),
+            source_owners=(),
+            sections=frozenset(),
+            not_applicable=(),
+            requirements=(),
+            source_path=Path("docs/canon/today.md"),
+            source_bytes=document_bytes,
+        )
+        manifest = CanonManifest(
+            schema_version=1,
+            canon_revision=1,
+            authority_state=AuthorityState.SHADOW,
+            compiler_version="0.1.0",
+            normative_files=(),
+            generated_files=(),
+            source_path=Path("docs/canon/MANIFEST.toml"),
+            repository_root="/tmp/repository",
+            source_bytes=manifest_bytes,
+        )
+
+        manifest_bytes[:] = b"changed\n"
+        document_bytes[:] = b"changed\n"
+
+        self.assertEqual(manifest.repository_root, Path("/tmp/repository"))
+        self.assertEqual(manifest.source_bytes, b"manifest\n")
+        self.assertEqual(document.source_bytes, b"document\n")
+        self.assertIsInstance(manifest.source_bytes, bytes)
+        self.assertIsInstance(document.source_bytes, bytes)
+
     def test_registry_normalizes_mutable_inputs_and_nested_concept_owner_pairs(self):
         requirement = Requirement(
             requirement_id="TODAY-IDENTITY-001",
