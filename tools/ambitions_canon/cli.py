@@ -23,6 +23,11 @@ from tools.ambitions_canon.build import (
 from tools.ambitions_canon.coverage import coverage_findings, load_profiles
 from tools.ambitions_canon.impact import write_amendment_scaffold
 from tools.ambitions_canon.manifest import load_documents, load_manifest
+from tools.ambitions_canon.migration import (
+    register_repo_sources,
+    register_source,
+    verify_catalog,
+)
 from tools.ambitions_canon.model import (
     CanonDocument,
     CanonError,
@@ -148,9 +153,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     amend_parser = subparsers.add_parser(
         "amend", help="prepare a governed temporary canon amendment"
     )
-    amend_subparsers = amend_parser.add_subparsers(
-        dest="amend_command", required=True
-    )
+    amend_subparsers = amend_parser.add_subparsers(dest="amend_command", required=True)
     scaffold_parser = amend_subparsers.add_parser(
         "scaffold", help="write a complete non-normative amendment docket"
     )
@@ -164,6 +167,37 @@ def main(argv: Sequence[str] | None = None) -> int:
         required=True,
         type=Path,
         help="output below .codex/canon-migration",
+    )
+    migration_parser = subparsers.add_parser(
+        "migration", help="register and verify offline migration sources"
+    )
+    migration_subparsers = migration_parser.add_subparsers(
+        dest="migration_command", required=True
+    )
+    register_parser = migration_subparsers.add_parser(
+        "register", help="register exact ignored connector bytes"
+    )
+    register_parser.add_argument("--catalog", type=Path, required=True)
+    register_parser.add_argument("--raw", type=Path, required=True)
+    register_parser.add_argument("--source-id", required=True)
+    register_parser.add_argument("--kind", required=True)
+    register_parser.add_argument("--title", required=True)
+    register_parser.add_argument("--locator", required=True)
+    register_parser.add_argument("--updated-at", required=True)
+    register_parser.add_argument("--owner", required=True)
+    register_parser.add_argument("--authority-claim", required=True)
+    repo_parser = migration_subparsers.add_parser(
+        "register-repo", help="register clean tracked repo authority sources"
+    )
+    repo_parser.add_argument("--catalog", type=Path, required=True)
+    repo_parser.add_argument("--pathspec", action="append", required=True)
+    verify_parser = migration_subparsers.add_parser(
+        "verify", help="verify all migration sources offline"
+    )
+    verify_parser.add_argument(
+        "--catalog",
+        type=Path,
+        default=Path("docs/canon/migration/source-catalog.json"),
     )
     arguments = parser.parse_args(argv)
 
@@ -204,7 +238,72 @@ def main(argv: Sequence[str] | None = None) -> int:
             output=arguments.output,
         )
 
+    if arguments.command == "migration":
+        return _migration(Path.cwd(), arguments)
+
     raise AssertionError(f"unhandled command: {arguments.command}")
+
+
+def _migration(root: Path, arguments: argparse.Namespace) -> int:
+    catalog = arguments.catalog
+    if not catalog.is_absolute():
+        catalog = root / catalog
+    try:
+        if arguments.migration_command == "register":
+            raw = arguments.raw
+            if not raw.is_absolute():
+                raw = root / raw
+            record = register_source(
+                catalog,
+                raw,
+                {
+                    "source_id": arguments.source_id,
+                    "kind": arguments.kind,
+                    "title": arguments.title,
+                    "locator": arguments.locator,
+                    "updated_at": arguments.updated_at,
+                    "owner": arguments.owner,
+                    "authority_claim": arguments.authority_claim,
+                },
+            )
+            print(
+                "GREEN ambitions canon migration source "
+                f"source_id={record.source_id} sha256={record.raw_sha256}"
+            )
+            return 0
+        if arguments.migration_command == "register-repo":
+            records = register_repo_sources(catalog, root, arguments.pathspec)
+            print(
+                "GREEN ambitions canon migration repo sources "
+                f"registered={len(records)}"
+            )
+            return 0
+        if arguments.migration_command == "verify":
+            findings = verify_catalog(catalog, root)
+            if findings:
+                for finding in findings:
+                    location = (
+                        finding.path.as_posix()
+                        if finding.path is not None
+                        else "<migration>"
+                    )
+                    print(
+                        f"{finding.severity.value} {finding.code} "
+                        f"{location}:{finding.line or 0} {finding.message}"
+                    )
+                return 1
+            from tools.ambitions_canon.migration import load_source_catalog
+
+            records = load_source_catalog(catalog)
+            print(f"GREEN ambitions canon migration verify sources={len(records)}")
+            return 0
+        raise AssertionError(
+            f"unhandled migration command: {arguments.migration_command}"
+        )
+    except CanonError as error:
+        location = error.path.as_posix() if error.path is not None else "<migration>"
+        print(f"P0_BLOCKER {error.code} {location}:{error.line or 0} {error.message}")
+        return 1
 
 
 def _amend_scaffold(root: Path, *, concept: str, output: Path) -> int:
@@ -242,20 +341,20 @@ def _audit(root: Path) -> int:
     if findings:
         for finding in findings:
             location = (
-                finding.path.as_posix()
-                if finding.path is not None
-                else "<registry>"
+                finding.path.as_posix() if finding.path is not None else "<registry>"
             )
             location = f"{location}:{finding.line or 0}"
             print(
-                f"{finding.severity.value} {finding.code} "
-                f"{location} {finding.message}"
+                f"{finding.severity.value} {finding.code} {location} {finding.message}"
             )
-        return 1 if any(
-            finding.severity
-            in (GapSeverity.P0_BLOCKER, GapSeverity.P1_REQUIRED)
-            for finding in findings
-        ) else 0
+        return (
+            1
+            if any(
+                finding.severity in (GapSeverity.P0_BLOCKER, GapSeverity.P1_REQUIRED)
+                for finding in findings
+            )
+            else 0
+        )
 
     assert manifest is not None
     assert registry is not None
@@ -280,11 +379,12 @@ def _build(root: Path, *, check: bool) -> int:
 
     if findings:
         for finding in findings:
-            location = finding.path.as_posix() if finding.path is not None else "<registry>"
+            location = (
+                finding.path.as_posix() if finding.path is not None else "<registry>"
+            )
             location = f"{location}:{finding.line or 0}"
             print(
-                f"{finding.severity.value} {finding.code} "
-                f"{location} {finding.message}"
+                f"{finding.severity.value} {finding.code} {location} {finding.message}"
             )
         return 1
 
@@ -297,9 +397,7 @@ def _coverage(root: Path, *, fail_on_p0_gap: bool) -> int:
         manifest = load_manifest(root)
         documents = load_documents(root, manifest)
         registry = build_registry(manifest, documents)
-        profiles = load_profiles(
-            root / "docs/canon/schemas/completeness-profiles.toml"
-        )
+        profiles = load_profiles(root / "docs/canon/schemas/completeness-profiles.toml")
         findings = coverage_findings(registry, profiles)
     except CanonError as error:
         location = error.path.as_posix() if error.path is not None else "<registry>"
@@ -310,14 +408,11 @@ def _coverage(root: Path, *, fail_on_p0_gap: bool) -> int:
     if findings:
         for finding in findings:
             location = (
-                finding.path.as_posix()
-                if finding.path is not None
-                else "<registry>"
+                finding.path.as_posix() if finding.path is not None else "<registry>"
             )
             location = f"{location}:{finding.line or 0}"
             print(
-                f"{finding.severity.value} {finding.code} "
-                f"{location} {finding.message}"
+                f"{finding.severity.value} {finding.code} {location} {finding.message}"
             )
         if fail_on_p0_gap and any(
             finding.severity is GapSeverity.P0_BLOCKER for finding in findings
