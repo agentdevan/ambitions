@@ -162,15 +162,21 @@ docs/canon/
 
 ## Plan Set
 
-This master plan delegates executable task detail to five train plans:
+This master plan delegates executable task detail to eleven bounded plan files across five review trains:
 
-1. [`2026-07-11-ambitions-canon-train-1-foundation.md`](2026-07-11-ambitions-canon-train-1-foundation.md) — Tasks 0–8.
-2. [`2026-07-11-ambitions-canon-train-2-reconciliation.md`](2026-07-11-ambitions-canon-train-2-reconciliation.md) — Tasks 9–12.
-3. [`2026-07-11-ambitions-canon-train-3-atlas.md`](2026-07-11-ambitions-canon-train-3-atlas.md) — Tasks 13–19.
-4. [`2026-07-11-ambitions-canon-train-4-consumption.md`](2026-07-11-ambitions-canon-train-4-consumption.md) — Tasks 20–23.
-5. [`2026-07-11-ambitions-canon-train-5-cutover.md`](2026-07-11-ambitions-canon-train-5-cutover.md) — Tasks 24–29.
+1. [`2026-07-11-ambitions-canon-train-1a-foundation.md`](2026-07-11-ambitions-canon-train-1a-foundation.md) — Tasks 0–2.
+2. [`2026-07-11-ambitions-canon-train-1b-foundation.md`](2026-07-11-ambitions-canon-train-1b-foundation.md) — Tasks 3–5.
+3. [`2026-07-11-ambitions-canon-train-1c-foundation.md`](2026-07-11-ambitions-canon-train-1c-foundation.md) — Tasks 6–8.
+4. [`2026-07-11-ambitions-canon-train-2a-reconciliation.md`](2026-07-11-ambitions-canon-train-2a-reconciliation.md) — Tasks 9–10.
+5. [`2026-07-11-ambitions-canon-train-2b-reconciliation.md`](2026-07-11-ambitions-canon-train-2b-reconciliation.md) — Tasks 11–12.
+6. [`2026-07-11-ambitions-canon-train-3a-atlas.md`](2026-07-11-ambitions-canon-train-3a-atlas.md) — Tasks 13–15.
+7. [`2026-07-11-ambitions-canon-train-3b-atlas.md`](2026-07-11-ambitions-canon-train-3b-atlas.md) — Tasks 16–19.
+8. [`2026-07-11-ambitions-canon-train-4a-consumption.md`](2026-07-11-ambitions-canon-train-4a-consumption.md) — Tasks 20–21.
+9. [`2026-07-11-ambitions-canon-train-4b-consumption.md`](2026-07-11-ambitions-canon-train-4b-consumption.md) — Tasks 22–23.
+10. [`2026-07-11-ambitions-canon-train-5a-cutover.md`](2026-07-11-ambitions-canon-train-5a-cutover.md) — Tasks 24–26.
+11. [`2026-07-11-ambitions-canon-train-5b-cutover.md`](2026-07-11-ambitions-canon-train-5b-cutover.md) — Tasks 27–29.
 
-The train files are authoritative for task steps. This master file owns sequence, global constraints, branch/PR posture, and program closeout.
+The bounded plan files are authoritative for task steps. This master file owns sequence, global constraints, branch/PR posture, and program closeout. Execute slices serially within each train; the slice boundary is for Codex context quality, not permission to parallelize normative or implementation writes.
 
 ## Task Index
 
