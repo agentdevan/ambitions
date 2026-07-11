@@ -1,6 +1,6 @@
 # Ambitions Build Architecture and Throughput Design
 
-Status: Owner-approved design direction; written specification awaiting owner review
+Status: Owner-approved implementation direction
 Date: 2026-07-10
 Decision record: `ADR-BUILD-001`
 Scope: Xcode/Swift package startup, module decomposition, evidence-backed source destruction, build workflow, and development-throughput proof
