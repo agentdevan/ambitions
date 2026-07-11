@@ -1,6 +1,6 @@
 # Ambitions Domain Module Extraction Design
 
-Status: Owner-approved design direction; written specification awaiting owner review
+Status: Owner-approved implementation direction
 Date: 2026-07-11
 Decision record: ADR-BUILD-002
 Depends on: ADR-BUILD-001 and the completed Build Architecture Foundation and Pilot
