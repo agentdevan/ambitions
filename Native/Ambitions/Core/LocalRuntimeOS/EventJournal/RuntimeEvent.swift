@@ -10,6 +10,7 @@ enum RuntimeDomainEvent: Sendable, Codable, Equatable {
     case timeWindowCorrected(TimeWindowDomainEvent)
     case mutationUndone(MutationUndoneDomainEvent)
     case todayReceiptRecorded(TodayReceiptDomainEvent)
+    case todayGoalStepActionApplied(TodayGoalStepActionPlan)
 
     var typeID: String {
         switch self {
@@ -19,6 +20,7 @@ enum RuntimeDomainEvent: Sendable, Codable, Equatable {
         case .timeWindowCorrected: "ambitions.time.window_corrected"
         case .mutationUndone: "ambitions.mutation.undone"
         case .todayReceiptRecorded: "ambitions.today.receipt_recorded"
+        case .todayGoalStepActionApplied: "ambitions.today.goal_step_action_applied"
         }
     }
 
@@ -248,7 +250,12 @@ extension RuntimeDomainEvent {
                 windowID: windowID, start: start, end: end,
                 reason: command.payload.metadata["correctionKind"] ?? "corrected"
             ))
-        case .completeAction, .dismissRecommendation:
+        case .completeAction, .updateGoal, .delayAction, .splitAction, .recoverAction, .archiveItem:
+            if let plan = TodayGoalStepActionPlan.decode(command: command), result.status == .succeeded {
+                return .todayGoalStepActionApplied(plan)
+            }
+            fallthrough
+        case .dismissRecommendation:
             guard result.status == .succeeded,
                   let receipt = TodayReceiptDomainEvent.decode(command: command) else { return nil }
             return .todayReceiptRecorded(receipt)

@@ -148,7 +148,9 @@ enum AppContainerFactory {
             runtimeValidator: nil,
             compiler: nil,
             receiptFactory: CommandReceiptFactory(),
-            scheduleStoreFileURL: scheduleStoreFileURL
+            scheduleStoreFileURL: scheduleStoreFileURL,
+            todayActionMaterializer: repositories.todayGoalStepActionMaterializer
+                ?? RepositoryTodayGoalStepActionMaterializer(repositories: repositories)
         )
         let projectionStore = repositories.projectionStore
 

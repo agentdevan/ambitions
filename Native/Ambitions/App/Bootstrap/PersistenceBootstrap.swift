@@ -47,6 +47,7 @@ enum PersistenceBootstrap {
             lifeContext: SwiftDataLifeContextRepository(store: store),
             goalCreationUnitOfWork: SwiftDataGoalCreationUnitOfWork(store: store),
             capturePromotionUnitOfWork: SwiftDataCapturePromotionUnitOfWork(store: store),
+            todayGoalStepActionMaterializer: SwiftDataTodayGoalStepActionMaterializer(store: store),
             appState: SwiftDataAppStateRepository(store: store)
         )
     }

@@ -40,6 +40,7 @@ struct AmbitionsCommandExecutor: CommandExecuting {
     let compiler: CommandCompiler
     let receiptFactory: CommandReceiptFactory
     let scheduleStoreFileURL: URL?
+    let todayActionMaterializer: (any TodayGoalStepActionMaterializing)?
 
     init(
         captureService: (any CaptureServicing)? = nil,
@@ -56,7 +57,8 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         runtimeValidator: RuntimeValidator? = nil,
         compiler: CommandCompiler? = nil,
         receiptFactory: CommandReceiptFactory,
-        scheduleStoreFileURL: URL? = nil
+        scheduleStoreFileURL: URL? = nil,
+        todayActionMaterializer: (any TodayGoalStepActionMaterializing)? = nil
     ) {
         self.captureService = captureService
         self.eventLedger = eventLedger
@@ -73,6 +75,7 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         self.compiler = compiler ?? CommandCompiler(validator: validator)
         self.receiptFactory = receiptFactory
         self.scheduleStoreFileURL = scheduleStoreFileURL
+        self.todayActionMaterializer = todayActionMaterializer
     }
 
     func validate(_ command: AmbitionsCommand) -> AmbitionsCommandValidationState {
@@ -106,6 +109,10 @@ struct AmbitionsCommandExecutor: CommandExecuting {
             }
             if command.isTodayReceiptMutation, authorityReceipt != nil {
                 let materialized = await materializeTodayReceipt(command, committedResult: replayed)
+                return await persistFinalMaterialization(command: command, result: materialized, at: context.now)
+            }
+            if command.isTodayGoalStepActionMutation, authorityReceipt != nil {
+                let materialized = await materializeTodayGoalStepAction(command, committedResult: replayed)
                 return await persistFinalMaterialization(command: command, result: materialized, at: context.now)
             }
             return replayed
@@ -204,6 +211,13 @@ struct AmbitionsCommandExecutor: CommandExecuting {
             result = await executePlanSeedRepresentation(command, context: context)
         case .placeStepInTime, .protectTimeWindow, .correctTimeWindow:
             result = await executeTimeCommand(command)
+        case .completeAction where command.isTodayGoalStepActionMutation,
+             .updateGoal where command.isTodayGoalStepActionMutation,
+             .delayAction where command.isTodayGoalStepActionMutation,
+             .splitAction where command.isTodayGoalStepActionMutation,
+             .recoverAction where command.isTodayGoalStepActionMutation,
+             .archiveItem where command.isTodayGoalStepActionMutation:
+            result = await executeTodayGoalStepAction(command)
         case .completeAction where command.isTodayReceiptMutation,
              .dismissRecommendation where command.isTodayReceiptMutation:
             result = executeTodayReceipt(command)
@@ -246,6 +260,12 @@ struct AmbitionsCommandExecutor: CommandExecuting {
            persistedResult.status == .succeeded,
            RuntimeTransactionCommitPolicy.hasCommittedEvidence(persistedResult) {
             let materialized = await materializeTodayReceipt(command, committedResult: persistedResult)
+            return await persistFinalMaterialization(command: command, result: materialized, at: context.now)
+        }
+        if command.isTodayGoalStepActionMutation,
+           persistedResult.status == .succeeded,
+           RuntimeTransactionCommitPolicy.hasCommittedEvidence(persistedResult) {
+            let materialized = await materializeTodayGoalStepAction(command, committedResult: persistedResult)
             return await persistFinalMaterialization(command: command, result: materialized, at: context.now)
         }
         return persistedResult

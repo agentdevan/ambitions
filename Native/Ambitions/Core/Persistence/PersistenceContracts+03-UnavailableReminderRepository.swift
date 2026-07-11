@@ -169,6 +169,7 @@ struct AppRepositories: Sendable {
     let lifeContext: (any LifeContextRepository)?
     let goalCreationUnitOfWork: (any GoalCreationUnitOfWorking)?
     let capturePromotionUnitOfWork: (any CapturePromotionUnitOfWorking)?
+    let todayGoalStepActionMaterializer: (any TodayGoalStepActionMaterializing)?
     let appState: any AppStateRepository
 
     init(
@@ -197,6 +198,7 @@ struct AppRepositories: Sendable {
         lifeContext: (any LifeContextRepository)? = nil,
         goalCreationUnitOfWork: (any GoalCreationUnitOfWorking)? = nil,
         capturePromotionUnitOfWork: (any CapturePromotionUnitOfWorking)? = nil,
+        todayGoalStepActionMaterializer: (any TodayGoalStepActionMaterializing)? = nil,
         appState: any AppStateRepository
     ) {
         self.goals = goals
@@ -224,6 +226,7 @@ struct AppRepositories: Sendable {
         self.lifeContext = lifeContext
         self.goalCreationUnitOfWork = goalCreationUnitOfWork
         self.capturePromotionUnitOfWork = capturePromotionUnitOfWork
+        self.todayGoalStepActionMaterializer = todayGoalStepActionMaterializer
         self.appState = appState
     }
 }

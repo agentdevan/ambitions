@@ -158,6 +158,7 @@ extension TodaySurface {
                 await viewModel.handle(
                     action,
                     using: featureFactory.todayService,
+                    runtimeClient: featureFactory.runtimeCommandClient,
                     userDisplayName: userSystem.session.userDisplayName,
                     now: clock.now,
                     calendar: clock.calendar,

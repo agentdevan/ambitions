@@ -31,7 +31,7 @@ struct MeaningfulMutationWritePathDescriptor: Sendable, Hashable {
 }
 
 enum MeaningfulMutationRegistry {
-    static let declaredMutationRowCount = 114
+    static let declaredMutationRowCount = 115
     static let declaredWritePathRowCount = 50
 
     static let descriptors: [MeaningfulMutationDescriptor] = [
@@ -86,6 +86,22 @@ enum MeaningfulMutationRegistry {
             ]
         ),
         mutation(id: "today.inline-action", sourcePath: "TodayCommandActionHandler.performAction", commandKind: .completeAction, status: .unproven, rationale: "Today handler lineage lacks row-specific atomic restart and replay proof."),
+        mutation(
+            id: "today.goal-step-action", sourcePath: "SwiftDataTodayGoalStepActionMaterializer.materialize", commandKind: .completeAction,
+            status: .durable, rationale: "The six scoped Today goal-step actions validate revision before authority, commit one semantic event and runtime receipt, then atomically and idempotently materialize goal, feedback, and evidence from committed authority.",
+            executorOwner: "AmbitionsCommandExecutor", durableStores: ["EventStoreSQLite", "ProjectionStoreSQLite", "AmbitionsPersistenceStore"],
+            eventKind: "ambitions.today.goal_step_action_applied", projectionOwner: "TodayProjection", receiptOwner: "RuntimeCommitReceipt",
+            replayTestID: "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testEveryHandledKindReopensAndReplaysExactAuthorityOnce",
+            proofTestIDs: [
+                "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testEveryHandledKindReopensAndReplaysExactAuthorityOnce",
+                "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testDuplicateCompleteCommitsOneSemanticEventAndMaterializesOnce",
+                "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testAllHandledKindsProduceDeterministicPlansWithoutPreAuthorityWrites",
+                "AmbitionsTests/TodayDurableActionMutationIntegrationTests/testJournalFailureLeavesAllDerivedStoresUnchanged",
+                "AmbitionsTests/TodayGoalStepActionAtomicityTests/testStaleRevisionBlocksBeforeAuthorityCommit",
+                "AmbitionsTests/TodayGoalStepActionAtomicityTests/testIntermediateFailureRollsBackAllDerivedWritesAndReplayRepairsOnce",
+                "AmbitionsTests/TodayGoalStepActionAtomicityTests/testRecurringCompletionPreservesStepAndAdvancesCadence",
+            ]
+        ),
         mutation(id: "today.feature-action", sourcePath: "RepositoryBackedTodayService.performAction", commandKind: .completeAction, status: .unproven, rationale: "Repository-backed Today action still has legacy repository mutation paths."),
         mutation(id: "today.recommendation-rejection", sourcePath: "RepositoryBackedTodayService.recordRecommendationRejection", commandKind: .dismissRecommendation, status: .unproven, rationale: "Recommendation rejection lacks row-specific replay equivalence proof."),
         mutation(id: "today.action-closure", sourcePath: "RepositoryBackedTodayService.recordActionClosure", commandKind: .completeAction, status: .unproven, rationale: "Action closure lacks row-specific atomic persistence proof."),

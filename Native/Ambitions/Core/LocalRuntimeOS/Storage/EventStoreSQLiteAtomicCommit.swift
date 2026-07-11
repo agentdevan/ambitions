@@ -231,6 +231,7 @@ extension EventStoreSQLite {
         if command.payload.metadata[TodayReceiptDomainEvent.mutationMarkerKey] == "true" {
             return true
         }
+        if command.isTodayGoalStepActionMutation { return true }
         return switch command.kind {
         case .quickCapture, .createTimeItem, .placeStepInTime, .protectTimeWindow, .correctTimeWindow:
             true
