@@ -10,6 +10,7 @@ from pathlib import Path
 from tools.ambitions_canon import __version__
 from tools.ambitions_canon.audit import audit_registry
 from tools.ambitions_canon.build import build_canon
+from tools.ambitions_canon.coverage import coverage_findings, load_profiles
 from tools.ambitions_canon.manifest import load_documents, load_manifest
 from tools.ambitions_canon.model import CanonError, Finding, GapSeverity
 from tools.ambitions_canon.registry import build_registry
@@ -71,6 +72,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         action="store_true",
         help="compare generated outputs without writing",
     )
+    coverage_parser = subparsers.add_parser(
+        "coverage", help="check specification completeness profiles"
+    )
+    coverage_parser.add_argument(
+        "--fail-on-p0-gap",
+        action="store_true",
+        help="exit nonzero when a P0 completeness gap exists",
+    )
     arguments = parser.parse_args(argv)
 
     if arguments.command == "version":
@@ -82,6 +91,12 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     if arguments.command == "build":
         return _build(Path.cwd(), check=arguments.check)
+
+    if arguments.command == "coverage":
+        return _coverage(
+            Path.cwd(),
+            fail_on_p0_gap=arguments.fail_on_p0_gap,
+        )
 
     raise AssertionError(f"unhandled command: {arguments.command}")
 
@@ -156,4 +171,46 @@ def _build(root: Path, *, check: bool) -> int:
         return 1
 
     print("GREEN ambitions canon generated outputs")
+    return 0
+
+
+def _coverage(root: Path, *, fail_on_p0_gap: bool) -> int:
+    try:
+        manifest = load_manifest(root)
+        documents = load_documents(root, manifest)
+        registry = build_registry(manifest, documents)
+        profiles = load_profiles(
+            root / "docs/canon/schemas/completeness-profiles.toml"
+        )
+        findings = coverage_findings(registry, profiles)
+    except CanonError as error:
+        location = error.path.as_posix() if error.path is not None else "<registry>"
+        location = f"{location}:{error.line or 0}"
+        print(f"P0_BLOCKER {error.code} {location} {error.message}")
+        return 1
+
+    if findings:
+        for finding in findings:
+            location = (
+                finding.path.as_posix()
+                if finding.path is not None
+                else "<registry>"
+            )
+            location = f"{location}:{finding.line or 0}"
+            print(
+                f"{finding.severity.value} {finding.code} "
+                f"{location} {finding.message}"
+            )
+        if fail_on_p0_gap and any(
+            finding.severity is GapSeverity.P0_BLOCKER for finding in findings
+        ):
+            return 1
+        return 0
+
+    print(
+        "GREEN ambitions canon coverage "
+        f"documents={len(documents)} "
+        f"profiles={len(profiles)} "
+        f"authority_state={manifest.authority_state.value}"
+    )
     return 0

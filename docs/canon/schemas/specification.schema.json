@@ -81,6 +81,31 @@
         "minLength": 1
       }
     },
+    "not_applicable": {
+      "description": "Required completeness cells explicitly waived with accountable rationale.",
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[a-z0-9]+(?:-[a-z0-9]+)*$": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["rationale", "owner"],
+          "properties": {
+            "rationale": {
+              "type": "string",
+              "minLength": 1
+            },
+            "owner": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
     "source_owners": {
       "description": "Current source ownership paths relevant to implementation mapping.",
       "type": "array",
