@@ -264,6 +264,32 @@ exec "$@"
         )
         self.assertEqual(json.loads(classified.stdout)["classification"], "simulator_launcher_failure")
 
+    def test_launcher_signature_after_test_start_stops_owned_build_and_preserves_unrelated_process(self):
+        env = self.install_fake_timeout_and_xcodebuild(
+            "echo 'Testing started'\n"
+            "sleep 0.3\n"
+            "echo 'IDELaunchiPhoneSimulatorLauncher: NSMachErrorDomain Code: -308'\n"
+            "sleep 5\n"
+            "exit 0\n"
+        )
+        log = self.root / "post-start-launcher-signature.log"
+        sentinel = subprocess.Popen(["/bin/sleep", "30"])
+        try:
+            result, elapsed = self.run_bounded(env, log, "5s")
+
+            self.assertEqual(result.returncode, 65, result.stdout + result.stderr)
+            self.assertLess(elapsed, 4.0)
+            self.assertIn("XCODEBUILD_SIMULATOR_LAUNCH_FAILURE=1", log.read_text())
+            self.assertIsNone(sentinel.poll(), "unrelated sentinel process was terminated")
+        finally:
+            if sentinel.poll() is None:
+                sentinel.terminate()
+            try:
+                sentinel.wait(timeout=2)
+            except subprocess.TimeoutExpired:
+                sentinel.kill()
+                sentinel.wait(timeout=2)
+
     def test_mcp_and_retained_runners_use_canonical_cache(self):
         canonical = str(REPO_ROOT / ".codex/DerivedData/Ambitions")
         config = MCP_CONFIG.read_text(encoding="utf-8")
