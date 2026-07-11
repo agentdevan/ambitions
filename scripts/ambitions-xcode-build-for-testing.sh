@@ -139,7 +139,7 @@ sim_failure="$(json_field failure_category "$sim_json")"
 [[ -n "$sim_failure" ]] || sim_failure="simulator_health_unavailable"
 if [[ "$sim_status" -ne 0 ]] && sim_health_retryable "$sim_failure"; then
   set +e
-  sim_json="$(scripts/ambitions-xcode-sim-health.sh --json --repair --kill-active-xcode --timeout "$SIM_HEALTH_TIMEOUT")"
+  sim_json="$(scripts/ambitions-xcode-sim-health.sh --json --repair --timeout "$SIM_HEALTH_TIMEOUT")"
   sim_status=$?
   set -e
   sim_failure="$(json_field failure_category "$sim_json")"
@@ -190,6 +190,8 @@ BUILD_CMD=(
   xcodebuild
   -skipPackagePluginValidation
   -skipMacroValidation
+  -disableAutomaticPackageResolution
+  -onlyUsePackageVersionsFromResolvedFile
   -project Ambitions.xcodeproj
   -scheme "$SCHEME"
   -sdk iphonesimulator

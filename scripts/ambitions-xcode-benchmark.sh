@@ -7,7 +7,7 @@ cd "$REPO_ROOT"
 usage() {
   cat <<'USAGE'
 Usage:
-  bash scripts/ambitions-xcode-benchmark.sh [--batch <BATCH>] [--scheme auto|Ambitions|AmbitionsUnitTests] [--test <ONLY_TESTING>] [--test-plan <PLAN>] [--workers <1,2,4>]
+  bash scripts/ambitions-xcode-benchmark.sh [--batch <BATCH>] [--scheme auto|Ambitions|AmbitionsUnitTests] [--test <ONLY_TESTING>] [--test-plan <PLAN>] [--workers <1,2,4>] [--refresh-packages]
   bash scripts/ambitions-xcode-benchmark.sh --status
   bash scripts/ambitions-xcode-benchmark.sh --batch <BATCH> --lane <LANE> -- <command> [args...]
 
@@ -43,6 +43,16 @@ DERIVED_DATA="$REPO_ROOT/.codex/DerivedData/Ambitions"
 LANE=""
 STATUS=0
 COMMAND_MODE=0
+REFRESH_PACKAGES=0
+SAMPLE_STATE="warm"
+
+capture_identity() {
+  PACKAGE_PATH="${AMBITIONS_PACKAGE_RESOLVED_PATH:-$(find "$REPO_ROOT" -name Package.resolved -type f -print -quit)}"
+  PACKAGE_IDENTITY="$([[ -n "$PACKAGE_PATH" && -f "$PACKAGE_PATH" ]] && shasum -a 256 "$PACKAGE_PATH" | awk '{print $1}' || echo missing)"
+  COMMIT="$(git rev-parse HEAD)"
+  DIRTY_STATE="$([[ -n "$(git status --porcelain --untracked-files=no)" ]] && echo dirty || echo clean)"
+  CACHE_IDENTITY="$DERIVED_DATA"
+}
 
 while [[ "$#" -gt 0 ]]; do
   case "$1" in
@@ -53,6 +63,8 @@ while [[ "$#" -gt 0 ]]; do
     --workers) WORKERS="${2:-$WORKERS}"; shift 2 ;;
     --results-dir) RESULT_ROOT="${2:-$RESULT_ROOT}"; shift 2 ;;
     --lane) LANE="${2:-}"; shift 2 ;;
+    --state) SAMPLE_STATE="${2:-}"; shift 2 ;;
+    --refresh-packages) REFRESH_PACKAGES=1; shift ;;
     --status) STATUS=1; shift ;;
     --) COMMAND_MODE=1; shift; break ;;
     -h|--help)
@@ -95,12 +107,17 @@ if [[ "$COMMAND_MODE" -eq 1 ]]; then
   end_epoch="$(date +%s)"
   duration=$((end_epoch - start_epoch))
 
-  python3 - "$SUMMARY_FILE" "$BATCH" "$LANE" "$TS" "$status" "$duration" "$*" <<'PY'
+  capture_identity
+  XCODE_VERSION="$(xcodebuild -version 2>/dev/null | tr '\n' ' ' || true)"
+  MACOS_VERSION="$(sw_vers -productVersion 2>/dev/null || true)"
+  CPU="$(sysctl -n machdep.cpu.brand_string 2>/dev/null || uname -m)"
+  MEMORY_BYTES="$(sysctl -n hw.memsize 2>/dev/null || echo unknown)"
+  python3 - "$SUMMARY_FILE" "$BATCH" "$LANE" "$TS" "$status" "$duration" "$*" "$COMMIT" "$DIRTY_STATE" "$XCODE_VERSION" "$MACOS_VERSION" "$CPU" "$MEMORY_BYTES" "$CACHE_IDENTITY" "$SAMPLE_STATE" "$PACKAGE_PATH" "$PACKAGE_IDENTITY" <<'PY'
 import json
 import sys
 from pathlib import Path
 
-summary, batch, lane, ts, status, duration, command = sys.argv[1:]
+summary, batch, lane, ts, status, duration, command, commit, dirty, xcode, macos, cpu, memory, cache, state, package, package_identity = sys.argv[1:]
 payload = {
     "batch": batch,
     "lane": lane,
@@ -108,6 +125,17 @@ payload = {
     "exit_code": int(status),
     "duration_seconds": int(duration),
     "command": command,
+    "commit": commit,
+    "dirty_state": dirty,
+    "xcode_version": xcode,
+    "macos_version": macos,
+    "cpu": cpu,
+    "memory_bytes": memory,
+    "derived_data": cache,
+    "warm_cold": state,
+    "package_path": package,
+    "package_identity": package_identity,
+    "scenario": lane,
     "artifact_root": ".codex/xcode-benchmarks",
     "claim_boundary": "timing evidence only; not build, test, release, accessibility, device, TestFlight, or App Store proof",
 }
@@ -163,25 +191,32 @@ json_append_step() {
   local status="$2"
   local duration="$3"
   local log_file="$4"
-  python3 - "$STEPS_JSONL" "$name" "$status" "$duration" "$log_file" <<'PY'
+  local state="$5"
+  python3 - "$STEPS_JSONL" "$name" "$status" "$duration" "$log_file" "$state" "$COMMIT" "$DIRTY_STATE" "$XCODE_VERSION" "$MACOS_VERSION" "$CPU" "$MEMORY_BYTES" "$DERIVED_DATA" "$PACKAGE_PATH" "$PACKAGE_IDENTITY" "$COMMAND_TEXT" <<'PY'
 import json
 import sys
 from pathlib import Path
 path = Path(sys.argv[1])
-name, status, duration, log_file = sys.argv[2], int(sys.argv[3]), float(sys.argv[4]), sys.argv[5]
+name, status, duration, log_file, state, commit, dirty, xcode, macos, cpu, memory, cache, package, package_identity, command = sys.argv[2:]
 with path.open("a", encoding="utf-8") as fh:
     fh.write(json.dumps({
-        "name": name,
-        "status": status,
-        "duration_seconds": round(duration, 3),
+        "name": name, "scenario": name,
+        "status": int(status), "exit_code": int(status),
+        "duration_seconds": round(float(duration), 3),
         "log_file": log_file,
+        "warm_cold": state, "commit": commit, "dirty_state": dirty,
+        "xcode_version": xcode, "macos_version": macos, "cpu": cpu,
+        "memory_bytes": memory, "derived_data": cache, "package_path": package,
+        "package_identity": package_identity,
+        "command": command,
     }) + "\n")
 PY
 }
 
 run_step() {
   local name="$1"
-  shift
+  local state="$2"
+  shift 2
   local safe_name
   safe_name="$(printf '%s' "$name" | tr '/ :' '___')"
   local log_file="$OUT_DIR/$safe_name.log"
@@ -211,7 +246,8 @@ import sys
 print(float(sys.argv[2]) - float(sys.argv[1]))
 PY
 )"
-  json_append_step "$name" "$status" "$duration" "$log_file"
+  printf -v COMMAND_TEXT '%q ' "$@"
+  json_append_step "$name" "$status" "$duration" "$log_file" "$state"
   echo "[xcode-benchmark] $name status=$status duration=${duration}s log=$log_file"
   return "$status"
 }
@@ -238,6 +274,12 @@ if [[ -n "${AMBITIONS_SIM_UDID:-}" || -n "$sim_udid" ]]; then
   [[ -n "$sim" ]] && SIM_DEST="platform=iOS Simulator,id=${sim}"
 fi
 RESOLVED_SCHEME="$(resolve_scheme)"
+capture_identity
+XCODE_VERSION="$(xcodebuild -version 2>/dev/null | tr '\n' ' ' || true)"
+MACOS_VERSION="$(sw_vers -productVersion 2>/dev/null || true)"
+CPU="$(sysctl -n machdep.cpu.brand_string 2>/dev/null || uname -m)"
+MEMORY_BYTES="$(sysctl -n hw.memsize 2>/dev/null || echo unknown)"
+COMMAND_TEXT=""
 
 need_output="$(scripts/ambitions-xcodegen-needed.sh || true)"
 need_flag="$(awk -F= '/^XCODEGEN_NEEDED=/{print $2}' <<<"$need_output")"
@@ -269,8 +311,14 @@ BUILD_CMD=(
   -resultBundlePath "$BUILD_RESULT"
 )
 
+if [[ "$REFRESH_PACKAGES" -eq 1 ]]; then
+  run_step "refresh-packages" "cold" scripts/ambitions-bounded-xcodebuild.sh -- xcodebuild -project Ambitions.xcodeproj -scheme "$RESOLVED_SCHEME" -resolvePackageDependencies
+  capture_identity
+fi
+BUILD_CMD=(xcodebuild -disableAutomaticPackageResolution -onlyUsePackageVersionsFromResolvedFile "${BUILD_CMD[@]:1}")
+
 build_status=0
-run_step "build-for-testing" "${BUILD_CMD[@]}" || build_status=$?
+run_step "build-for-testing" "cold" scripts/ambitions-bounded-xcodebuild.sh -- "${BUILD_CMD[@]}" || build_status=$?
 
 if [[ "$build_status" -eq 0 && -n "$ONLY_TESTING" ]]; then
   for worker in $(normalize_workers); do
@@ -293,7 +341,8 @@ if [[ "$build_status" -eq 0 && -n "$ONLY_TESTING" ]]; then
       ONLY_ACTIVE_ARCH=YES
       -resultBundlePath "$TEST_RESULT"
     )
-    run_step "focused-test workers=$worker" "${TEST_CMD[@]}" || true
+    TEST_CMD=(xcodebuild -disableAutomaticPackageResolution -onlyUsePackageVersionsFromResolvedFile "${TEST_CMD[@]:1}")
+    run_step "focused-test workers=$worker" "warm" scripts/ambitions-bounded-xcodebuild.sh -- "${TEST_CMD[@]}" || true
   done
 fi
 
@@ -318,7 +367,8 @@ if [[ "$build_status" -eq 0 && -n "$TEST_PLAN" ]]; then
       ONLY_ACTIVE_ARCH=YES
       -resultBundlePath "$PLAN_RESULT"
     )
-    run_step "test-plan $TEST_PLAN workers=$worker" "${PLAN_CMD[@]}" || true
+    PLAN_CMD=(xcodebuild -disableAutomaticPackageResolution -onlyUsePackageVersionsFromResolvedFile "${PLAN_CMD[@]:1}")
+    run_step "test-plan $TEST_PLAN workers=$worker" "warm" scripts/ambitions-bounded-xcodebuild.sh -- "${PLAN_CMD[@]}" || true
   done
 fi
 
