@@ -143,56 +143,13 @@ Module boundaries are implemented as XcodeGen-managed Swift framework targets re
 
 The proposed module names are build-graph labels, not product language or permanent source-tree law. A boundary may be combined or adjusted when dependency evidence proves the initial split would create cycles, excessive API, or worse build performance.
 
-### 5.3 Balanced target graph
+### 5.3 Policy-authorized target evolution
 
-The following graph is a responsibility sketch, not an exact-folder extraction sequence:
+There is no predetermined future target tree, target-name list, folder-to-target translation, or extraction sequence. The current generated target graph is recorded in `docs/qa/architecture/current-module-graph.json`. A future target may be proposed only for an explicit canonical source-file cohort whose status evaluates `authorized` under `docs/qa/architecture/module-candidate-policy.json`.
 
-```text
-AmbitionsDomain
-  Core/Domain
-  Core/Time
+That policy file is the single numeric authority for prospective decomposition. The retained gate verifies pre-extraction churn, source-content identity, compiler closure, graph and membership safety, hostless and hosted tests, compiler-public API review, changed-file routing, independent review, linked artifact hashes, and identity-stable benchmark evidence. Missing or stale proof remains `observed`; an affirmative disqualifier is `rejected`; only complete current evidence may evaluate `authorized`.
 
-AmbitionsLanguage
-  Language
-
-AmbitionsRuntime
-  Core/LocalRuntimeOS
-  depends on AmbitionsDomain
-
-AmbitionsProjection
-  Projection
-  depends on AmbitionsDomain and narrow runtime contracts
-
-AmbitionsUIFoundation
-  DesignSystem
-  Interaction
-  Rendering
-  depends on AmbitionsDomain and AmbitionsLanguage where required
-
-AmbitionsTrust
-AmbitionsComposer
-AmbitionsToday
-AmbitionsGoals
-AmbitionsTime
-AmbitionsYou
-  depend on the minimum required domain, runtime-contract,
-  projection, language, and UI-foundation modules
-
-AmbitionsStage
-  Stage
-  composes surface modules without owning their product policy
-
-Ambitions
-  App
-  executable composition and dependency assembly only
-
-AmbitionsTestSupport
-  deterministic shared fixtures and test builders only
-```
-
-The dependency graph must be acyclic. Lower modules cannot import Stage, App, Composer, Trust, or Surfaces. `Core` imports of UI/design-system types must be removed through ownership correction or narrow domain contracts before any affected cohort is extracted.
-
-The graph intentionally avoids one target per folder or per concept. Too many targets increase module loading, linking, and API maintenance. New targets must earn their existence through ownership clarity, high current churn, compiler-proven dependency closure, graph-safe target membership, focused tests, and measured incremental-build improvement. Whole-folder `Core/Domain` extraction is explicitly superseded as a test-speed prerequisite; its reviewed census remains architectural evidence only.
+The generated graph must remain acyclic, canonical source ownership does not move merely to create a build boundary, and lower-level candidates cannot gain reverse dependencies on App, Stage, surfaces, or other upper owners. The policy deliberately avoids one target per folder or concept. Whole-folder `Core/Domain` remains rejected as a speed prerequisite; its reviewed census and failed compiler probe are supporting evidence, not target authority.
 
 ## 6. Destruction policy
 
@@ -324,21 +281,9 @@ The benchmark suite measures:
 
 Each scenario runs enough times to report median and worst observed result on the current constrained VM. Cold and warm results are not mixed.
 
-### 9.3 Provisional targets
+### 9.3 Binding candidate thresholds
 
-These are design targets, not current performance claims:
-
-| Scenario | Provisional target |
-|---|---:|
-| Project/package startup | ≤15 seconds |
-| No-change focused invocation | ≤30 seconds |
-| Focused test-without-building | ≤30 seconds |
-| Leaf-module edit through focused proof | ≤60 seconds |
-| Single-surface edit through focused proof | ≤90 seconds |
-| Runtime edit through affected contract proof | ≤180 seconds |
-| Clean unit-test build | At least 2× faster than measured pre-change baseline |
-
-Absolute clean-build thresholds become binding only after the baseline and first decomposition pilot establish repeatable measurements. A result outside tolerance blocks the throughput claim; it does not imply product or release failure.
+All numeric thresholds and cohort-size requirements that can authorize a future module live only in `docs/qa/architecture/module-candidate-policy.json`. This design names the required benchmark scenarios and evidence shape but does not duplicate their numeric values. A policy miss blocks module authorization; it does not imply product or release failure.
 
 ## 10. Quality and acceptance gates
 
@@ -401,28 +346,17 @@ Finish validation, independent review repair, and bounded commit of the currentl
 - Benchmark leaf edit, no-change build, clean build, and focused tests.
 - Continue only if quality remains intact and the boundary is neutral or beneficial for throughput.
 
-### Slice 5 — measured dependency-closed cohorts
+### Slice 5 — policy-authorized dependency-closed cohorts
 
-- Rank explicit source cohorts by current change frequency and compile invalidation cost.
-- Compile the exact candidate source set with only declared lower/system dependencies before authorizing a target.
-- Reject folder-shaped candidates that require reverse edges, duplicate membership, or broad public API.
-- Extract only candidates whose hostless and app-integration proof remains Green and whose measured edit-through-proof loop is materially faster.
+- Evaluate explicit source cohorts with `scripts/ambitions-module-candidate-gate.py` and the single policy authority.
+- Compile the exact candidate source set with only declared lower/system dependencies before any target proposal.
+- Reject folder-shaped candidates that require reverse edges, duplicate membership, broad public API, incomplete routes, or self-asserted proof.
+- Extract only a candidate whose status is `authorized`; an `observed` or `rejected` record cannot justify source, target, or project changes.
 - Delete duplicate authority during each extraction.
 - Keep the runtime law and canonical source owners intact.
 - Require a reviewed commit after each independently provable boundary.
 
-### Slice 6 — Trust, Composer, and surface modules
-
-- Extract Trust and Capture.
-- Extract Today, Goals, Time, and You independently.
-- Prove each surface still receives runtime projections and submits commands without gaining storage authority.
-
-### Slice 7 — Stage and app composition
-
-- Extract Stage after surfaces are stable.
-- Reduce the app target to entry point, root scene, dependency assembly, feature flags, and platform composition.
-
-### Slice 8 — final destruction and regression proof
+### Slice 6 — final destruction and regression proof
 
 - Remove temporary migration shims.
 - Remove orphan target membership, adapters, imports, and public declarations.

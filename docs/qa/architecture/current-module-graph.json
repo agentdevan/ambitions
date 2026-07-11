@@ -51,6 +51,10 @@
   },
   "decompositionPolicy": {
     "status": "active",
+    "authority": "docs/qa/architecture/module-candidate-policy.json",
+    "authorizedFutureTargets": [],
+    "timeFoundationPilotStatus": "observed",
+    "wholeDomainCandidateStatus": "rejected",
     "wholeDomainExtractionAuthorized": false,
     "domainCensusEvidence": "docs/qa/architecture/domain-module-boundary.json",
     "domainCensusFileCount": 166,
@@ -61,14 +65,8 @@
       "conservativeIndependentlySeparableFileCount": 45,
       "claimBoundary": "The compiler blocker is current failed-boundary evidence and the 45-file lexical estimate is triage evidence only; neither authorizes an AmbitionsDomain target."
     },
-    "futureCandidateRequirements": [
-      "explicit canonical source-file membership",
-      "current high-churn evidence",
-      "compiler-proven dependency closure bound to source content",
-      "acyclic graph and single production membership",
-      "hostless tests plus affected app integration tests",
-      "identity-matched before-and-after throughput proof with no material regression"
-    ],
+    "futureCandidateRequirements": "All prospective status, evidence, and numeric authorization requirements are owned exclusively by docs/qa/architecture/module-candidate-policy.json.",
+    "futureTargetTree": "none predetermined; only a policy-authorized explicit source cohort may justify a proposed target",
     "coldBuildSeparation": "The 439-second cache-invalidated build is a separate optimization from the verified 8-second warm build and 21.262-second health-selected hosted focused test."
   },
   "duplicateCompilationRiskCount": 11,

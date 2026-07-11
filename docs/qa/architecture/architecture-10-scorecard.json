@@ -24,25 +24,11 @@
   },
   "targetGraph": {
     "evidencePath": "docs/qa/architecture/current-module-graph.json",
+    "candidatePolicy": "docs/qa/architecture/module-candidate-policy.json",
     "currentTargetCount": 9,
     "currentStatus": "yellow",
-    "intendedTargets": [
-      "AmbitionsDomain",
-      "PrivateLifeRuntimeAPI",
-      "PrivateLifeRuntimeCore",
-      "PrivateLifeRuntimeStorage",
-      "PrivateLifeRuntimeAppleAdapters",
-      "AmbitionsExternalSurfaceContracts",
-      "AmbitionsFeatureToday",
-      "AmbitionsFeatureGoals",
-      "AmbitionsFeatureTime",
-      "AmbitionsFeatureYou",
-      "AmbitionsFeatureCapture",
-      "AmbitionsTrust",
-      "AmbitionsStage",
-      "AmbitionsApp",
-      "AmbitionsDesignSystem"
-    ]
+    "authorizedFutureTargets": [],
+    "futureTargetTree": "none predetermined; candidate policy authorization is required before any target proposal"
   },
   "validatorResults": {
     "remediationGovernance": {
@@ -88,7 +74,7 @@
     "compileTimeModularity": {
       "workingScore": 3,
       "status": "yellow",
-      "evidence": ["Packages/AmbitionsDesignSystem/Package.swift", "project.yml", "docs/qa/architecture/current-module-graph.json"],
+      "evidence": ["Packages/AmbitionsDesignSystem/Package.swift", "project.yml", "docs/qa/architecture/current-module-graph.json", "docs/qa/architecture/module-candidate-policy.json"],
       "requiredGates": ["compiler-enforced-targets", "acyclic-target-graph", "incremental-feature-rebuild"],
       "gateResults": {"compiler-enforced-targets": "fail", "acyclic-target-graph": "fail", "incremental-feature-rebuild": "fail"}
     },
@@ -111,6 +97,7 @@
     "docs/truth/PRODUCT_DESIGN_TRUTH.md",
     "docs/truth/RELEASE_TRUTH.md",
     "docs/qa/architecture/current-module-graph.json",
+    "docs/qa/architecture/module-candidate-policy.json",
     "docs/qa/local-runtime-proof/current-local-runtime-proof.json",
     "project.yml",
     "Packages/AmbitionsDesignSystem/Package.swift",
@@ -123,7 +110,7 @@
     "Architecture inventory cannot parse the current Final Architecture Tree authority.",
     "Strict quality gate is Red.",
     "Current LocalRuntimeProof audit is Red.",
-    "Intended target boundaries are not compiler-enforced.",
+    "No future module candidate is currently authorized by the measured candidate policy.",
     "Critical restart, fault, real-store, and lane-integrity gates are not proven on this baseline commit."
   ],
   "forbiddenClaims": [
