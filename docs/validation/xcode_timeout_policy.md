@@ -53,9 +53,12 @@ The retained wrappers route through `scripts/ambitions-bounded-xcodebuild.sh`:
 
 Local retained Xcode runners pass `-skipPackagePluginValidation` and
 `-skipMacroValidation` because this repo pins trusted local project/package
-inputs and validation proof should not spend repeated wall-clock time on those
-checks. Do not add `-skipPackageSignatureValidation` to proof lanes without a
-separate security review.
+inputs. The focused and build-for-testing runners additionally pass
+`-disableAutomaticPackageResolution`,
+`-onlyUsePackageVersionsFromResolvedFile`, and `-skipPackageUpdates` so their
+proof lanes do not spend repeated wall-clock time on package update checks. Do
+not add `-skipPackageSignatureValidation` to proof lanes without a separate
+security review.
 
 The timeout values are environment-tunable without editing scripts:
 
@@ -138,6 +141,16 @@ fails with `xcresult_test_results_unavailable`. Metadata mode still skips all
 four rich `xcparse` passes; this selector check reads only structured test
 metadata and preserves the result bundle.
 
+The focused runner retries a simulator boot or launcher failure at most once.
+Before retrying, it moves the initial log and any partial result bundle to
+attempt-1 paths so the second `xcodebuild` receives a clean result-bundle path.
+The final summary records `retry_performed`, `initial_failure_category`,
+`initial_log_file`, and `initial_result_bundle`. A repeated launcher failure
+must remain classified `simulator_launcher_failure`; a corrupt partial bundle
+must not overwrite that more precise cause. Tests that finish after Xcode has
+already been terminated at the launch deadline are not accepted because their
+result bundle cannot be finalized.
+
 Cache-invalidated build-for-testing is a separate optimization lane. Do not
 mix the measured 439-second cold rebuild or any other cold/cache-invalidated
 sample into a warm focused-test cohort. Prebuild duration, cold rebuild
@@ -162,6 +175,12 @@ That repair path terminates matching Ambitions Xcode process trees, shuts down
 extra booted simulators, terminates the Ambitions app in booted simulators, and
 boots the selected simulator. It is intentionally scoped to Ambitions/Xcode
 commands and should not be generalized to unrelated user builds.
+
+`--erase-selected` is an explicit last-resort repair, not normal focused-test
+preparation. When combined with `--repair`, it must complete a bounded selected
+simulator shutdown, validate erase success, boot the same UDID, and validate
+`simctl bootstatus -b`. First boot can include long data migration and is cold
+infrastructure evidence; never include it in a warm throughput cohort.
 
 ## XcodeBuildMCP Transport Policy
 

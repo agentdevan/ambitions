@@ -68,8 +68,14 @@ case "$*" in
   bootstatus\ *)
     exit "${FAKE_BOOTSTATUS_EXIT:-0}"
     ;;
-  terminate\ *|shutdown\ *|erase\ *)
+  terminate\ *)
     exit 0
+    ;;
+  shutdown\ *)
+    exit "${FAKE_SHUTDOWN_EXIT:-0}"
+    ;;
+  erase\ *)
+    exit "${FAKE_ERASE_EXIT:-0}"
     ;;
   *)
     exit 2
@@ -206,6 +212,35 @@ esac
         self.assertEqual(payload["failure_category"], "simulator_boot_failure")
         self.assertIn(f"simctl bootstatus {MCP_UDID} -b", self.xcrun_log.read_text())
 
+    def test_erase_selected_shutdowns_before_erasing_and_rebooting(self):
+        before = device_listing(("iPhone 17 Pro Max", MCP_UDID, "Booted"))
+        after = device_listing(("iPhone 17 Pro Max", MCP_UDID, "Booted"))
+        env = self.health_env(before)
+        env["AMBITIONS_SIM_UDID"] = MCP_UDID
+        env["FAKE_ALL_DEVICES_AFTER_BOOT"] = after
+
+        result, payload = self.run_health(env, "--repair", "--erase-selected", "--timeout", "2s")
+
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        calls = self.xcrun_log.read_text(encoding="utf-8").splitlines()
+        shutdown_index = calls.index(f"simctl shutdown {MCP_UDID}")
+        erase_index = calls.index(f"simctl erase {MCP_UDID}")
+        boot_index = calls.index(f"simctl boot {MCP_UDID}")
+        self.assertLess(shutdown_index, erase_index)
+        self.assertLess(erase_index, boot_index)
+        self.assertTrue(payload["erase_selected"])
+
+    def test_erase_selected_reports_erase_failure(self):
+        devices = device_listing(("iPhone 17 Pro Max", MCP_UDID, "Booted"))
+        env = self.health_env(devices)
+        env["AMBITIONS_SIM_UDID"] = MCP_UDID
+        env["FAKE_ERASE_EXIT"] = "9"
+
+        result, payload = self.run_health(env, "--repair", "--erase-selected", "--timeout", "2s")
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertEqual(payload["failure_category"], "simulator_erase_failure")
+
     def install_fake_timeout_and_xcodebuild(self, xcodebuild_body: str) -> dict[str, str]:
         timeout_body = """#!/bin/sh
 set -eu
@@ -338,6 +373,7 @@ wait "$child_pid"
         devices = device_listing(("iPhone 17 Pro Max", MCP_UDID, "Booted"))
         env = self.install_fake_timeout_and_xcodebuild(
             r'''printf 'CALL\n' >> "$FAKE_XCODEBUILD_LOG"
+call_count="$(grep -c '^CALL$' "$FAKE_XCODEBUILD_LOG")"
 result_bundle=""
 previous=""
 for argument in "$@"; do
@@ -347,11 +383,19 @@ for argument in "$@"; do
   fi
   previous="$argument"
 done
+launch_failure=0
+if [ "${FAKE_ALWAYS_LAUNCH_FAILURE:-0}" = "1" ] || { [ "${FAKE_FIRST_LAUNCH_FAILURE:-0}" = "1" ] && [ "$call_count" = "1" ]; }; then
+  launch_failure=1
+fi
 if [ -n "$result_bundle" ] && [ "${FAKE_SKIP_RESULT_BUNDLE:-0}" != "1" ]; then
   mkdir -p "$result_bundle"
-  if [ "${FAKE_CORRUPT_RESULT_BUNDLE:-0}" != "1" ]; then
+  if [ "$launch_failure" != "1" ] && [ "${FAKE_CORRUPT_RESULT_BUNDLE:-0}" != "1" ]; then
     : > "$result_bundle/Info.plist"
   fi
+fi
+if [ "$launch_failure" = "1" ]; then
+  echo 'XCODEBUILD_TEST_LAUNCH_TIMEOUT=1'
+  exit 124
 fi
 echo 'Testing started'
 echo "Executed ${FAKE_EXECUTED_TESTS:-2} tests, with 0 failures (0 unexpected) in 0.001 (0.002) seconds"
@@ -690,6 +734,67 @@ done
         self.assertEqual(summary["tests"], filters)
         self.assertEqual(summary["requested_filter_count"], 3)
         self.assertGreater(summary["executed_tests"], 0)
+
+    def test_focused_retry_isolates_initial_launcher_failure_artifacts(self):
+        env = self.focused_env()
+        env["FAKE_FIRST_LAUNCH_FAILURE"] = "1"
+
+        result, summary = self.run_focused(
+            env,
+            "isolated-launch-retry",
+            "--test",
+            "AmbitionsModuleTests/RetryArtifactTests",
+        )
+
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertEqual(len(self.xcodebuild_calls()), 2)
+        self.assertTrue(summary["retry_performed"])
+        self.assertEqual(summary["initial_failure_category"], "simulator_launcher_failure")
+        initial_log = Path(summary["initial_log_file"])
+        initial_result = Path(summary["initial_result_bundle"])
+        final_result = Path(summary["result_bundle"])
+        self.assertIn("XCODEBUILD_TEST_LAUNCH_TIMEOUT=1", initial_log.read_text(encoding="utf-8"))
+        self.assertTrue(initial_result.exists())
+        self.assertFalse((initial_result / "Info.plist").exists())
+        self.assertTrue((final_result / "Info.plist").exists())
+        self.assertEqual(summary["failure_category"], "passed")
+
+    def test_repeated_launcher_failure_retains_precise_classification(self):
+        env = self.focused_env()
+        env["FAKE_ALWAYS_LAUNCH_FAILURE"] = "1"
+
+        result, summary = self.run_focused(
+            env,
+            "repeated-launch-failure",
+            "--test",
+            "AmbitionsModuleTests/RepeatedLauncherFailureTests",
+        )
+
+        self.assertEqual(result.returncode, 65, result.stdout + result.stderr)
+        self.assertEqual(len(self.xcodebuild_calls()), 2)
+        self.assertTrue(summary["retry_performed"])
+        self.assertEqual(summary["initial_failure_category"], "simulator_launcher_failure")
+        self.assertEqual(summary["failure_category"], "simulator_launcher_failure")
+        self.assertEqual(summary["executed_tests"], 0)
+
+    def test_launcher_retry_boot_failure_retains_repair_classification(self):
+        env = self.focused_env()
+        env["FAKE_FIRST_LAUNCH_FAILURE"] = "1"
+        env["FAKE_BOOTSTATUS_EXIT"] = "9"
+
+        result, summary = self.run_focused(
+            env,
+            "launch-retry-boot-failure",
+            "--test",
+            "AmbitionsModuleTests/RetryBootFailureTests",
+        )
+
+        self.assertEqual(result.returncode, 22, result.stdout + result.stderr)
+        self.assertEqual(len(self.xcodebuild_calls()), 1)
+        self.assertTrue(summary["retry_performed"])
+        self.assertEqual(summary["initial_failure_category"], "simulator_launcher_failure")
+        self.assertEqual(summary["failure_category"], "simulator_boot_failure")
+        self.assertEqual(summary["executed_tests"], 0)
 
     def test_focused_runner_auto_extraction_is_metadata_for_fast_lanes_and_full_for_ui(self):
         env = self.focused_env()

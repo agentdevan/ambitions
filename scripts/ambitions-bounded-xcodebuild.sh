@@ -202,7 +202,9 @@ for pid in sorted(targets, reverse=True):
     except (ProcessLookupError, PermissionError):
         pass
 
-deadline = time.monotonic() + 0.1
+# Give TERM handlers enough time to flush the final diagnostic line even when
+# the host is contended. This runs only during owned-tree cleanup.
+deadline = time.monotonic() + 0.5
 while time.monotonic() < deadline:
     remaining = []
     for pid in targets:

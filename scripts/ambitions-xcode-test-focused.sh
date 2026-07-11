@@ -214,6 +214,10 @@ LOG_FILE="$LOG_DIR/$BATCH/$RUN_ID/focused-test.log"
 SUMMARY_FILE="$SUMMARY_DIR/$BATCH/$RUN_ID/focused-test-summary.json"
 RESULT_EXTRACTION_SUMMARY_FILE=""
 RESULT_EXTRACTION_STATUS=0
+RETRY_PERFORMED=false
+INITIAL_FAILURE_CATEGORY=""
+INITIAL_LOG_FILE=""
+INITIAL_RESULT_BUNDLE=""
 mkdir -p "$RESULT_DIR/$BATCH/$RUN_ID" "$LOG_DIR/$BATCH/$RUN_ID" "$SUMMARY_DIR/$BATCH/$RUN_ID"
 DERIVED_DATA="$REPO_ROOT/.codex/DerivedData/Ambitions"
 mkdir -p "$DERIVED_DATA"
@@ -617,6 +621,20 @@ repair_simulator_for_retry() {
   scripts/ambitions-xcode-sim-health.sh --repair --json --timeout "$SIM_HEALTH_TIMEOUT" >/dev/null 2>&1
 }
 
+preserve_initial_attempt_artifacts() {
+  RETRY_PERFORMED=true
+  INITIAL_FAILURE_CATEGORY="$classification"
+  INITIAL_LOG_FILE="${LOG_FILE%.log}-attempt-1.log"
+  INITIAL_RESULT_BUNDLE="${RESULT_BUNDLE%.xcresult}-attempt-1.xcresult"
+
+  if [[ -f "$LOG_FILE" ]]; then
+    mv -- "$LOG_FILE" "$INITIAL_LOG_FILE"
+  fi
+  if [[ -e "$RESULT_BUNDLE" ]]; then
+    mv -- "$RESULT_BUNDLE" "$INITIAL_RESULT_BUNDLE"
+  fi
+}
+
 classification=""
 run_once
 status=$?
@@ -632,6 +650,7 @@ mark_status_from_log_failure
 if [[ "$status" -ne 0 ]]; then
   [[ -n "$classification" ]] || classification="$(classify_log_failure)"
   if is_simulator_retry_class "$classification"; then
+    preserve_initial_attempt_artifacts
     set +e
     repair_simulator_for_retry
     repair_status=$?
@@ -673,7 +692,12 @@ if [[ "$status" -eq 124 ]]; then
     classification="timeout"
   fi
 else
-  classification="$(classify_log_failure)"
+  detected="$(classify_log_failure)"
+  if [[ "$detected" != "unknown" && -n "$detected" ]]; then
+    classification="$detected"
+  elif [[ -z "$classification" ]]; then
+    classification="unknown"
+  fi
 fi
 executed_tests="$(extract_executed_tests "$LOG_FILE")"
 if [[ "$status" -eq 0 ]]; then
@@ -696,10 +720,12 @@ fi
 [[ -z "$classification" ]] && classification="unknown"
 if [[ "$result_bundle_corrupt" == "true" && "$executed_tests" =~ ^[0-9]+$ && "$executed_tests" -eq 0 ]]; then
   status=65
-  if [[ -z "$(grep -E "Test Suite|Test Case|Testing started" "$LOG_FILE" 2>/dev/null || true)" ]]; then
-    classification="mcp_timeout_no_test_log"
-  else
-    classification="corrupt_xcresult"
+  if [[ "$classification" == "unknown" || "$classification" == "corrupt_xcresult" ]]; then
+    if [[ -z "$(grep -E "Test Suite|Test Case|Testing started" "$LOG_FILE" 2>/dev/null || true)" ]]; then
+      classification="mcp_timeout_no_test_log"
+    else
+      classification="corrupt_xcresult"
+    fi
   fi
 fi
 
@@ -774,6 +800,10 @@ cat > "$SUMMARY_FILE" <<JSON
   "xctest_wall_seconds": $xctest_wall_seconds,
   "result_bundle": "$RESULT_BUNDLE",
   "log_file": "$LOG_FILE",
+  "retry_performed": $RETRY_PERFORMED,
+  "initial_failure_category": "$INITIAL_FAILURE_CATEGORY",
+  "initial_log_file": "$INITIAL_LOG_FILE",
+  "initial_result_bundle": "$INITIAL_RESULT_BUNDLE",
   "timestamp_utc": "$TS",
   "run_id": "$RUN_ID",
   "sim_destination": "$SIM_DEST",

@@ -428,7 +428,16 @@ if [[ "$REPAIR" -eq 1 ]]; then
 fi
 
 if [[ "$ERASE_SELECTED" -eq 1 ]]; then
-  xcrun simctl erase "$select_udid" >/dev/null 2>&1 || true
+  erase_output=""
+  if [[ "$state" != "Shutdown" ]]; then
+    shutdown_output=""
+    if ! capture_bounded shutdown_output "$SIMCTL_TIMEOUT" xcrun simctl shutdown "$select_udid"; then
+      fail_health "simulator_shutdown_failure" "simctl shutdown failed for ${select_udid}: ${shutdown_output}" 22
+    fi
+  fi
+  if ! capture_bounded erase_output "$SIMCTL_TIMEOUT" xcrun simctl erase "$select_udid"; then
+    fail_health "simulator_erase_failure" "simctl erase failed for ${select_udid}: ${erase_output}" 22
+  fi
   state="Shutdown"
 fi
 
