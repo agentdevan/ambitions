@@ -1,0 +1,240 @@
+{
+  "schemaVersion": 1,
+  "project": "Ambitions.xcodeproj",
+  "documentationPatterns": [
+    "*.md",
+    "docs/**"
+  ],
+  "projectEvidencePatterns": [
+    "project.yml",
+    "Ambitions.xcodeproj/**",
+    "**/*.xctestplan"
+  ],
+  "requiredEdges": [
+    [
+      "Ambitions",
+      "AmbitionsTimeFoundation"
+    ],
+    [
+      "AmbitionsTests",
+      "AmbitionsTimeFoundation"
+    ],
+    [
+      "AmbitionsModuleTests",
+      "AmbitionsTimeFoundation"
+    ]
+  ],
+  "toolingRoutes": [
+    {
+      "id": "focused-runner-reliability",
+      "patterns": [
+        ".xcodebuildmcp/config.yaml",
+        "scripts/ambitions-bounded-xcodebuild.sh",
+        "scripts/ambitions-xcode-failure-classifier.py",
+        "scripts/ambitions-xcode-sim-health.sh",
+        "scripts/ambitions-xcode-test-focused.sh"
+      ],
+      "pythonTests": [
+        "scripts.tests.test_ambitions_xcode_runner_reliability"
+      ]
+    },
+    {
+      "id": "changed-file-router",
+      "patterns": [
+        "scripts/ambitions-changed-file-test-router.py",
+        "scripts/ambitions-changed-file-test-routes.json"
+      ],
+      "pythonTests": [
+        "scripts.tests.test_ambitions_changed_file_test_router"
+      ]
+    }
+  ],
+  "testTargets": {
+    "AmbitionsModuleTests": {
+      "kind": "module",
+      "scheme": "AmbitionsModuleTests",
+      "forbiddenReachability": [
+        "Ambitions",
+        "AmbitionsShareExtension",
+        "AmbitionsUITests",
+        "AmbitionsWidgetExtension"
+      ]
+    },
+    "AmbitionsTests": {
+      "kind": "integration",
+      "scheme": "AmbitionsUnitTests"
+    },
+    "AmbitionsUITests": {
+      "kind": "ui",
+      "scheme": "AmbitionsUITests"
+    }
+  },
+  "membershipRoutes": [
+    {
+      "id": "time-foundation-membership",
+      "requiredMembership": [
+        "AmbitionsTimeFoundation"
+      ],
+      "module": [
+        "AmbitionsModuleTests/TimeFoundationModuleTests"
+      ],
+      "integration": [
+        "AmbitionsTests/LifeShapeAntiFakeAuditTests",
+        "AmbitionsTests/TimeClockTests",
+        "AmbitionsTests/TodayClockTests",
+        "AmbitionsTests/TodayFreshGoalVisibilityTests",
+        "AmbitionsTests/TodayRealityMeridianExperienceElevationTests",
+        "AmbitionsTests/TodayRecoveryViewModelTests"
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "id": "time-calendar-ui",
+      "patterns": [
+        "Native/Ambitions/Surfaces/Time/**/TimeCalendar*.swift",
+        "Native/Ambitions/Surfaces/Time/**/TimePlacementCalendarContracts.swift"
+      ],
+      "specificity": 200,
+      "requiredMembership": [
+        "Ambitions"
+      ],
+      "integration": [
+        "AmbitionsTests/TimeDurableMutationIntegrationTests"
+      ],
+      "ui": [
+        "AmbitionsUITests/TimeSurfaceUITests",
+        "AmbitionsUITests/TimeCalendarGradeUITests"
+      ]
+    },
+    {
+      "id": "app-owned-time",
+      "patterns": [
+        "Native/Ambitions/Core/Time/**"
+      ],
+      "specificity": 50,
+      "requiredMembership": [
+        "Ambitions"
+      ],
+      "integration": [
+        "AmbitionsTests/LifeShapeBucketizerTests"
+      ]
+    },
+    {
+      "id": "domain-hosted-integration",
+      "patterns": [
+        "Native/Ambitions/Core/Domain/**"
+      ],
+      "specificity": 150,
+      "requiredMembership": [
+        "Ambitions"
+      ],
+      "integration": [
+        "AmbitionsTests/GoalCreationServiceTests",
+        "AmbitionsTests/GoalPathCompilerModelsTests",
+        "AmbitionsTests/RescheduleEngineTests",
+        "AmbitionsTests/LivingPlanSchemaMigrationTests",
+        "AmbitionsTests/AmbitionLifecycleGoldenScenarioTests",
+        "AmbitionsTests/AmbitionsOSProofTrustModelsTests",
+        "AmbitionsTests/GoalsShellIntegrationTests",
+        "AmbitionsTests/TimeDurableMutationIntegrationTests"
+      ]
+    },
+    {
+      "id": "today-ui",
+      "patterns": [
+        "Native/Ambitions/Surfaces/Today/**"
+      ],
+      "specificity": 100,
+      "requiredMembership": [
+        "Ambitions"
+      ],
+      "integration": [
+        "AmbitionsTests/TodayShellIntegrationTests"
+      ],
+      "ui": [
+        "AmbitionsUITests/TodaySurfaceUITests"
+      ]
+    },
+    {
+      "id": "goals-ui",
+      "patterns": [
+        "Native/Ambitions/Surfaces/Goals/**"
+      ],
+      "specificity": 100,
+      "requiredMembership": [
+        "Ambitions"
+      ],
+      "integration": [
+        "AmbitionsTests/GoalsShellIntegrationTests"
+      ],
+      "ui": [
+        "AmbitionsUITests/GoalsSurfaceUITests"
+      ]
+    },
+    {
+      "id": "time-ui",
+      "patterns": [
+        "Native/Ambitions/Surfaces/Time/**"
+      ],
+      "specificity": 100,
+      "requiredMembership": [
+        "Ambitions"
+      ],
+      "integration": [
+        "AmbitionsTests/LifeShapeFieldViewReconstructionTests"
+      ],
+      "ui": [
+        "AmbitionsUITests/TimeSurfaceUITests"
+      ]
+    },
+    {
+      "id": "you-ui",
+      "patterns": [
+        "Native/Ambitions/Surfaces/You/**"
+      ],
+      "specificity": 100,
+      "requiredMembership": [
+        "Ambitions"
+      ],
+      "integration": [
+        "AmbitionsTests/YouUserSystemProfileReconstructionTests"
+      ],
+      "ui": [
+        "AmbitionsUITests/YouSurfaceUITests"
+      ]
+    },
+    {
+      "id": "capture-ui",
+      "patterns": [
+        "Native/Ambitions/Composer/Capture/**"
+      ],
+      "specificity": 100,
+      "requiredMembership": [
+        "Ambitions"
+      ],
+      "integration": [
+        "AmbitionsTests/CaptureViewModelTests"
+      ],
+      "ui": [
+        "AmbitionsUITests/CaptureComposerUITests"
+      ]
+    },
+    {
+      "id": "stage-ui",
+      "patterns": [
+        "Native/Ambitions/Stage/**"
+      ],
+      "specificity": 100,
+      "requiredMembership": [
+        "Ambitions"
+      ],
+      "integration": [
+        "AmbitionsTests/AppShellNavigationTests"
+      ],
+      "ui": [
+        "AmbitionsUITests/BootstrapShellUITests"
+      ]
+    }
+  ]
+}
