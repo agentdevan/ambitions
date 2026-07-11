@@ -30,12 +30,12 @@
       "id": "whole-core-domain",
       "prospectiveGateEvidence": true,
       "rejection": "Whole-folder Domain is not a high-churn dependency-closed candidate; the retained census remains supporting evidence only.",
-      "rejectionEvidence": {
-        "compilerFailureDesign": "docs/superpowers/specs/2026-07-11-domain-dependency-closure-repair-design.md",
-        "exactPathMedianFileTouches": 0.0,
-        "productionTopDecileMedianFileTouches": 2.0,
-        "retainedCensus": "docs/qa/architecture/domain-module-boundary.json"
-      },
+      "supportingEvidence": [
+        {
+          "path": "docs/qa/architecture/domain-module-boundary.json",
+          "sha256": "sha256:a02673ffae028890eb06d8fd84a614ea8c2798a1e114576a1ae3cf6f867ad35f"
+        }
+      ],
       "sourceSet": {
         "contentHash": "sha256:4da8196f789f233b0f313e07110fbf057d5dc8217e97d08b4ce577f20afc3181",
         "files": [
@@ -218,22 +218,6 @@
     "authorized": "Every prospective gate is current, hash-bound, reviewed, passing, and within policy thresholds.",
     "observed": "Evidence is incomplete, stale, retrospective, or otherwise insufficient for prospective authorization.",
     "rejected": "One or more affirmative disqualifiers make the candidate ineligible."
-  },
-  "supportingEvidence": {
-    "captureHead": "bc46a22e2196a717aebd895e6f685e97981233a8",
-    "claimBoundary": "The churn snapshot and retained Domain census support rejection and planning only; neither authorizes a target or proves compiler closure.",
-    "domainCensus": "docs/qa/architecture/domain-module-boundary.json",
-    "domainCensusContentHash": "sha256:e60402bdd2be0f82b281b38312e882459bb71cbd09fcc5866db7437cc204ab97",
-    "domainCensusFileCount": 166,
-    "domainCompilerDiagnosticCount": 123,
-    "domainCompilerFailedFileCount": 11,
-    "domainConservativeSeparabilityCount": 45,
-    "domainCurrentExactPathMedianFileTouches": 0.0,
-    "domainFirstReverseOwnedTypeCount": 12,
-    "historyFirstParentCommitCount": 250,
-    "productionSwiftFileCount": 1459,
-    "productionTopDecileFileCount": 146,
-    "productionTopDecileMedianFileTouches": 2.0
   },
   "thresholds": {
     "appNoChangeMaximumRegressionFraction": 0.1,

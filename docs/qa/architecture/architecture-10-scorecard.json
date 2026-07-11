@@ -25,10 +25,12 @@
   "targetGraph": {
     "evidencePath": "docs/qa/architecture/current-module-graph.json",
     "candidatePolicy": "docs/qa/architecture/module-candidate-policy.json",
+    "candidateGate": "scripts/ambitions-module-candidate-gate.py",
     "currentTargetCount": 9,
     "currentStatus": "yellow",
     "authorizedFutureTargets": [],
-    "futureTargetTree": "none predetermined; candidate policy authorization is required before any target proposal"
+    "futureTargetTree": "none predetermined; candidate policy authorization is required before any target proposal",
+    "authorizationEvidenceModel": "Prospective authorization is derived on a clean tracked worktree from typed, hash-bound artifacts tied to candidate identity, live repository and authority hashes, raw compiler/graph/symbolgraph/routes, result-bundle metadata and logs, linked raw benchmark/result summaries, and an independent review fingerprint map."
   },
   "validatorResults": {
     "remediationGovernance": {

@@ -65,7 +65,9 @@
       "conservativeIndependentlySeparableFileCount": 45,
       "claimBoundary": "The compiler blocker is current failed-boundary evidence and the 45-file lexical estimate is triage evidence only; neither authorizes an AmbitionsDomain target."
     },
-    "futureCandidateRequirements": "All prospective status, evidence, and numeric authorization requirements are owned exclusively by docs/qa/architecture/module-candidate-policy.json.",
+    "futureCandidateRequirements": "All prospective status, evidence, and numeric authorization requirements are owned exclusively by docs/qa/architecture/module-candidate-policy.json and evaluated by scripts/ambitions-module-candidate-gate.py.",
+    "authorizationEvidenceModel": "Pointer-only candidate rows reference typed JSON artifacts. On a clean tracked worktree, the gate derives history, raw compiler, graph, symbolgraph API, executed route/test, review, and linked raw benchmark/result facts and binds them to one candidate identity, live repository HEAD, project.yml, and changed-file router authority.",
+    "authorizationReviewBinding": "Independent approval must fingerprint every authorizing artifact, including test result-bundle metadata and raw logs, and retain zero Critical and Important findings; missing evidence remains observed and invalid or swapped evidence is rejected.",
     "futureTargetTree": "none predetermined; only a policy-authorized explicit source cohort may justify a proposed target",
     "coldBuildSeparation": "The 439-second cache-invalidated build is a separate optimization from the verified 8-second warm build and 21.262-second health-selected hosted focused test."
   },
