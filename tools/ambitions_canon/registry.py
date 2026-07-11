@@ -50,15 +50,19 @@ def build_registry(
     )
     _reject_duplicate_requirements(ordered_requirements)
     _reject_cross_kind_id_collisions(ordered_documents, ordered_requirements)
-    concept_owners = _concept_owners(ordered_documents)
-    _require_document_concept_ownership(ordered_documents)
-    _resolve_references(ordered_documents, ordered_requirements)
-
     superseded_ids = frozenset(
         superseded
         for requirement in ordered_requirements
         for superseded in requirement.supersedes
     )
+    concept_owners = _concept_owners(ordered_documents)
+    _require_document_concept_ownership(ordered_documents)
+    _resolve_references(
+        ordered_documents,
+        ordered_requirements,
+        superseded_ids,
+    )
+
     active_ids = {item.spec_id for item in ordered_documents} | {
         item.requirement_id for item in ordered_requirements
     }
@@ -213,12 +217,19 @@ def _require_document_concept_ownership(
 def _resolve_references(
     documents: tuple[CanonDocument, ...],
     requirements: tuple[Requirement, ...],
+    superseded_ids: frozenset[str],
 ) -> None:
     requirement_ids = {item.requirement_id for item in requirements}
     spec_ids = {item.spec_id for item in documents}
     for document in documents:
         for requirement_id in sorted(document.inherits):
             if requirement_id not in requirement_ids:
+                if requirement_id in superseded_ids:
+                    raise CanonError(
+                        "CANON_SUPERSEDED_REFERENCE",
+                        f"inherited requirement is superseded: {requirement_id}",
+                        document.source_path,
+                    )
                 raise CanonError(
                     "CANON_DEPENDENCY_UNKNOWN",
                     f"unknown inherited requirement ID: {requirement_id}",
@@ -226,6 +237,12 @@ def _resolve_references(
                 )
         for spec_id in sorted(document.depends_on):
             if spec_id not in spec_ids:
+                if spec_id in superseded_ids:
+                    raise CanonError(
+                        "CANON_SUPERSEDED_REFERENCE",
+                        f"dependent specification is superseded: {spec_id}",
+                        document.source_path,
+                    )
                 raise CanonError(
                     "CANON_DEPENDENCY_UNKNOWN",
                     f"unknown dependent spec_id: {spec_id}",
