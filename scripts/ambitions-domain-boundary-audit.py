@@ -172,6 +172,7 @@ def _compiler_public_interface(path: Path | None) -> list[str]:
     )
     pending: list[str] = []
     parens = 0
+    scopes: list[str] = []
 
     def finish(parts: list[str]) -> str:
         signature = re.sub(r"\s+", " ", " ".join(parts)).strip()
@@ -184,9 +185,19 @@ def _compiler_public_interface(path: Path | None) -> list[str]:
             signature = re.sub(r"\s*\{.*$", "", signature)
         return signature.rstrip()
 
+    def kind_and_scope(signature: str) -> tuple[str, str | None]:
+        match = re.search(r"\b(extension|class|struct|enum|protocol|actor|typealias|init[!?]?|func|subscript|case|var|let)\b(?:\s+([A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*))?", signature)
+        if not match:
+            return "", None
+        kind, name = match.groups()
+        return kind, name
+
     for raw in path.read_text(encoding="utf-8", errors="replace").splitlines():
         line = raw.strip()
         if not pending:
+            for _ in range(len(line) - len(line.lstrip("}"))):
+                if scopes:
+                    scopes.pop()
             if not start.match(line):
                 continue
             pending = [line]
@@ -195,11 +206,19 @@ def _compiler_public_interface(path: Path | None) -> list[str]:
             pending.append(line)
             parens += line.count("(") - line.count(")")
         if parens == 0 and not line.endswith((",", "->")):
-            signatures.append(finish(pending))
+            combined = " ".join(pending)
+            signature = finish(pending)
+            kind, declared_scope = kind_and_scope(signature)
+            if scopes and kind != "extension":
+                signature = f"{'.'.join(scopes)} :: {signature}"
+            signatures.append(signature)
+            if (kind in {"class", "struct", "enum", "protocol", "actor", "extension"}
+                    and combined.count("{") > combined.count("}") and declared_scope):
+                scopes.append(declared_scope)
             pending = []
     if pending:
         signatures.append(finish(pending))
-    return sorted(set(signatures))
+    return sorted(signatures)
 
 
 def _candidate_reasons(path: str, declarations: list[dict[str, str]], loc: int, duplicates: Counter[str]) -> list[str]:
@@ -400,12 +419,15 @@ def validate_boundary(payload: dict[str, object], require_review: bool) -> list[
     interface_rows = payload.get("compilerPublicInterface", [])
     interface_counts = Counter(interface_rows)
     for signature in sorted(interface_counts):
+        expected = interface_counts[signature]
         count = approved_counts[signature]
-        if count != 1:
+        if count != expected:
             if count == 0:
                 findings.append(f"unapproved compiler public declaration: {signature}")
-            else:
+            elif expected == 1:
                 findings.append(f"compiler public declaration must have exactly one approved contract: {signature} (found {count})")
+            else:
+                findings.append(f"compiler public declaration must have exactly {expected} approved contracts: {signature} (found {count})")
     for signature in sorted(set(approved_counts) - set(interface_counts)):
         findings.append(f"approved public contract absent from compiler interface: {signature}")
     if any(item.startswith(("Critical:", "Important:")) for item in review.get("findings", [])):

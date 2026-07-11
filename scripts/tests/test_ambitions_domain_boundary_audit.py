@@ -208,17 +208,43 @@ class DomainBoundaryAuditTests(unittest.TestCase):
             encoding="utf-8",
         )
         self.assertEqual(compiler_public_interface(interface), [
-            "case blocked(reason: Swift.String)",
-            "case ready",
+            "AmbitionsDomain.Step :: public func renamed(to value: Swift.String) -> AmbitionsDomain.Step",
+            "State :: case blocked(reason: Swift.String)",
+            "State :: case ready",
+            "Step :: public init(id: Swift.String, title: Swift.String)",
+            "Step :: public var title: Swift.String { get }",
             "extension AmbitionsDomain.Step : Swift.Sendable",
             "public enum State",
-            "public func renamed(to value: Swift.String) -> AmbitionsDomain.Step",
-            "public init(id: Swift.String, title: Swift.String)",
             "public struct Step",
             "public subscript(index: Swift.Int) -> Swift.String { get }",
             "public typealias Identifier = Swift.String",
-            "public var title: Swift.String { get }",
         ])
+
+    def test_compiler_interface_preserves_scope_and_requires_each_identical_member(self) -> None:
+        interface = self.root / "Scoped.swiftinterface"
+        interface.write_text(
+            "public struct Alpha {\n"
+            "  public init()\n"
+            "  public var id: Swift.String { get }\n"
+            "}\n"
+            "public struct Beta {\n"
+            "  public init()\n"
+            "  public var id: Swift.String { get }\n"
+            "}\n",
+            encoding="utf-8",
+        )
+        signatures = compiler_public_interface(interface)
+        self.assertIn("Alpha :: public init()", signatures)
+        self.assertIn("Beta :: public init()", signatures)
+        self.assertIn("Alpha :: public var id: Swift.String { get }", signatures)
+        self.assertIn("Beta :: public var id: Swift.String { get }", signatures)
+        payload = self.complete_reviewed_payload()
+        payload["compilerPublicInterface"] = signatures
+        payload["publicContracts"] = [self.approved_contract(signature) for signature in signatures[:-1]]
+        payload["review"]["reviewedContentHash"] = reviewed_content_hash(self.root, payload)
+        payload["consolidationReview"]["reviewedContentHash"] = payload["review"]["reviewedContentHash"]
+        findings = validate_boundary(payload, require_review=True)
+        self.assertIn(f"unapproved compiler public declaration: {signatures[-1]}", findings)
 
     def test_validate_only_rejects_stale_or_tampered_committed_generated_facts(self) -> None:
         self.assertEqual(self.run_cli().returncode, 0)
