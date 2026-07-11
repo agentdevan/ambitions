@@ -82,9 +82,9 @@ python3 scripts/ambitions-canon.py migration claims coverage \
 
 - [ ] **Step 2: Write object specifications in four serialized batches**
 
-Batch A: Life Area, Goal, Goal Path, Step.  
-Batch B: Event, Reminder, Note, Saved-for-Later Draft.  
-Batch C: Proof, Attachment, Closure, Schedule Placement, Notification Rule.  
+Batch A: Life Area, Goal, Goal Path, Step.
+Batch B: Event, Reminder, Note, Saved-for-Later Draft.
+Batch C: Proof, Attachment, Closure, Schedule Placement, Notification Rule.
 Batch D: Receipt, History Event, Source Reference, Recovery Segment, Import/Diff Record.
 
 After each batch run audit/coverage before writing the next. No parallel writers.
@@ -204,9 +204,9 @@ python3 scripts/ambitions-canon.py migration claims coverage \
 
 - [ ] **Step 2: Write system specs in serialized domain batches**
 
-Batch A: runtime, persistence/replay, scheduling/capacity.  
-Batch B: privacy/data classification, sync/continuity, local learning.  
-Batch C: notifications, Apple ecosystem, Source Atlas.  
+Batch A: runtime, persistence/replay, scheduling/capacity.
+Batch B: privacy/data classification, sync/continuity, local learning.
+Batch C: notifications, Apple ecosystem, Source Atlas.
 Batch D: diagnostics, import/export/repair.
 
 - [ ] **Step 3: Run privacy and boundary review**
