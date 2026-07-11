@@ -114,6 +114,7 @@ def write_outputs_atomic(
     root: Path,
     outputs: Mapping[Path, bytes],
     *,
+    precondition: Callable[[], None] | None = None,
     postcondition: Callable[[], None] | None = None,
 ) -> None:
     """Commit a complete tree and retain recovery material until validation.
@@ -196,6 +197,9 @@ def write_outputs_atomic(
                     "staged generated tree does not match expected outputs",
                     root,
                 )
+
+            if precondition is not None:
+                precondition()
 
             previous_identity: tuple[int, int] | None = None
             if root_kind == "directory":
