@@ -505,33 +505,30 @@ class CoverageTests(unittest.TestCase):
 
         self.assertEqual(findings[0].code, "CANON_PROFILE_SECTION_MISSING")
 
-    def test_marker_inside_toml_front_matter_is_not_body_evidence(self):
-        document = document_from_text(
-            "+++\n"
-            'spec_id = "STANDARD-TEST"\n'
-            'title = "Test"\n'
-            'kind = "standard"\n'
-            'status = "normative"\n'
-            'owner_domain = "product"\n'
-            "canon_revision = 1\n"
-            'profile = "one-cell"\n'
-            'owns_concepts = ["standard.test"]\n'
-            "inherits = []\n"
-            "depends_on = []\n"
-            "source_owners = []\n"
-            "example = '''\n"
-            "<!-- canon-section: purpose -->\n"
-            "Front-matter example text is not normative body evidence.\n"
-            "'''\n"
-            "+++\n"
-        )
+    def test_marker_cannot_be_smuggled_through_unknown_front_matter(self):
+        with self.assertRaises(CanonError) as raised:
+            document_from_text(
+                "+++\n"
+                'spec_id = "STANDARD-TEST"\n'
+                'title = "Test"\n'
+                'kind = "standard"\n'
+                'status = "normative"\n'
+                'owner_domain = "product"\n'
+                "canon_revision = 1\n"
+                'profile = "one-cell"\n'
+                'owns_concepts = ["standard.test"]\n'
+                "inherits = []\n"
+                "depends_on = []\n"
+                "source_owners = []\n"
+                "example = '''\n"
+                "<!-- canon-section: purpose -->\n"
+                "Front-matter example text is not normative body evidence.\n"
+                "'''\n"
+                "+++\n"
+            )
 
-        findings = coverage_findings(
-            registry(document),
-            {"one-cell": ("purpose",)},
-        )
-
-        self.assertEqual(findings[0].code, "CANON_PROFILE_SECTION_MISSING")
+        self.assertEqual(raised.exception.code, "CANON_PARSE_FRONT_MATTER")
+        self.assertEqual(raised.exception.message, "unknown field: example")
 
     def test_comment_only_content_after_real_marker_is_not_body_evidence(self):
         value = registry(
@@ -612,17 +609,14 @@ class CoverageTests(unittest.TestCase):
 
         self.assertEqual(findings, ())
 
-    def test_not_applicable_without_owner_fails(self):
-        value = registry(fixture_document("not-applicable-without-owner.md"))
+    def test_not_applicable_without_owner_fails_at_parser_boundary(self):
+        path = FIXTURES / "not-applicable-without-owner.md"
 
-        findings = coverage_findings(value, self.profiles)
+        with self.assertRaises(CanonError) as raised:
+            parse_canon_document(path, path.read_text(encoding="utf-8"))
 
-        self.assertEqual(
-            tuple(item.code for item in findings),
-            ("CANON_PROFILE_NOT_APPLICABLE_INVALID",),
-        )
-        self.assertIs(findings[0].severity, GapSeverity.P0_BLOCKER)
-        self.assertIn("affected_ids=STANDARD-PROVENANCE-INVALID", findings[0].message)
+        self.assertEqual(raised.exception.code, "CANON_PARSE_FRONT_MATTER")
+        self.assertIn("exactly rationale and owner", raised.exception.message)
 
     def test_not_applicable_placeholder_rationale_fails(self):
         valid = fixture_document("not-applicable-with-rationale.md")

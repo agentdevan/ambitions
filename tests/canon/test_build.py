@@ -191,16 +191,12 @@ class BuildTests(unittest.TestCase):
             / "ambitions-canon-shadow-audit.yml"
         ).read_text(encoding="utf-8")
 
-        for trigger_path in (
-            '"docs/canon/**"',
-            '"tools/ambitions_canon/**"',
-            '"tests/canon/**"',
-            '"scripts/ambitions-canon.py"',
-            '"scripts/ambitions-authority-freeze-check.py"',
-            '"scripts/tests/test_ambitions_authority_freeze_check.py"',
-            '".github/workflows/ambitions-canon-shadow-audit.yml"',
-        ):
-            self.assertIn(trigger_path, workflow)
+        trigger_contract = workflow.split("permissions:", 1)[0]
+        self.assertIn("pull_request:\n", trigger_contract)
+        self.assertIn("push:\n", trigger_contract)
+        self.assertNotIn("paths:", trigger_contract)
+        self.assertNotIn("paths-ignore:", trigger_contract)
+        self.assertNotIn("branches:", trigger_contract)
         self.assertIn("actions/setup-python@v5", workflow)
         self.assertIn('python-version: "3.12"', workflow)
         for command in (
@@ -209,11 +205,40 @@ class BuildTests(unittest.TestCase):
             "python3 -m unittest scripts/tests/test_ambitions_authority_freeze_check.py -v",
             "python3 -m compileall -q tools/ambitions_canon scripts/ambitions-canon.py",
             "python3 scripts/ambitions-canon.py audit",
+            "python3 scripts/ambitions-canon.py coverage --fail-on-p0-gap",
             "python3 scripts/ambitions-canon.py build --check",
             "python3 scripts/ambitions-constitution-audit.py",
             "git diff --check",
         ):
             self.assertIn(command, workflow)
+
+        self.assertLess(
+            workflow.index("python3 scripts/ambitions-canon.py audit"),
+            workflow.index(
+                "python3 scripts/ambitions-canon.py coverage --fail-on-p0-gap"
+            ),
+        )
+        self.assertLess(
+            workflow.index(
+                "python3 scripts/ambitions-canon.py coverage --fail-on-p0-gap"
+            ),
+            workflow.index("python3 scripts/ambitions-canon.py build --check"),
+        )
+
+    def test_shadow_workflow_runs_for_external_authority_only_changes(self):
+        workflow = (
+            Path(__file__).resolve().parents[2]
+            / ".github/workflows/ambitions-canon-shadow-audit.yml"
+        ).read_text(encoding="utf-8")
+        trigger_contract = workflow.split("permissions:", 1)[0]
+        external_authority_only_change = "docs/product/NEW_PRODUCT_TRUTH.md"
+
+        self.assertEqual(external_authority_only_change.split("/", 1)[0], "docs")
+        self.assertIn("pull_request:\n", trigger_contract)
+        self.assertIn("push:\n", trigger_contract)
+        self.assertNotIn("paths:", trigger_contract)
+        self.assertNotIn("paths-ignore:", trigger_contract)
+        self.assertNotIn("branches:", trigger_contract)
 
     def test_document_insertion_order_does_not_alter_output(self):
         self.write_canon(

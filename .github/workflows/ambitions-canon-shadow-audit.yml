@@ -2,25 +2,7 @@ name: Ambitions Canon Shadow Audit
 
 on:
   pull_request:
-    paths:
-      - "docs/canon/**"
-      - "tools/ambitions_canon/**"
-      - "tests/canon/**"
-      - "scripts/ambitions-canon.py"
-      - "scripts/ambitions-authority-freeze-check.py"
-      - "scripts/tests/test_ambitions_authority_freeze_check.py"
-      - ".github/workflows/ambitions-canon-shadow-audit.yml"
   push:
-    branches:
-      - main
-    paths:
-      - "docs/canon/**"
-      - "tools/ambitions_canon/**"
-      - "tests/canon/**"
-      - "scripts/ambitions-canon.py"
-      - "scripts/ambitions-authority-freeze-check.py"
-      - "scripts/tests/test_ambitions_authority_freeze_check.py"
-      - ".github/workflows/ambitions-canon-shadow-audit.yml"
   workflow_dispatch:
 
 permissions:
@@ -59,6 +41,9 @@ jobs:
 
       - name: Audit shadow canon
         run: python3 scripts/ambitions-canon.py audit
+
+      - name: Enforce P0 specification completeness
+        run: python3 scripts/ambitions-canon.py coverage --fail-on-p0-gap
 
       - name: Verify generated projections
         run: python3 scripts/ambitions-canon.py build --check

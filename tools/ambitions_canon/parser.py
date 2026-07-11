@@ -11,6 +11,7 @@ from tools.ambitions_canon.model import (
     CanonError,
     DocumentKind,
     Modality,
+    NotApplicable,
     Requirement,
 )
 
@@ -46,6 +47,22 @@ REQUIRED_FRONT_MATTER = {
     "depends_on": list,
     "source_owners": list,
 }
+OPTIONAL_FRONT_MATTER = frozenset({"profile", "not_applicable"})
+FRONT_MATTER_FIELDS = frozenset(REQUIRED_FRONT_MATTER) | OPTIONAL_FRONT_MATTER
+STRING_FRONT_MATTER = (
+    "spec_id",
+    "title",
+    "status",
+    "owner_domain",
+)
+ARRAY_FRONT_MATTER = (
+    "owns_concepts",
+    "inherits",
+    "depends_on",
+    "source_owners",
+)
+CONCEPT_KEY = re.compile(r"^[a-z0-9]+(?:[.-][a-z0-9]+)*$")
+SECTION_KEY = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 REQUIRED_FIELDS = (
     "Concept",
     "Modality",
@@ -140,13 +157,7 @@ def parse_canon_document(path: Path, text: str) -> CanonDocument:
         ) from exc
 
     profile = metadata.get("profile")
-    if profile is not None and not isinstance(profile, str):
-        raise CanonError(
-            "CANON_PARSE_FRONT_MATTER",
-            "profile must be a string",
-            path,
-            1,
-        )
+    assert profile is None or isinstance(profile, str)
 
     return CanonDocument(
         spec_id=_string(metadata, "spec_id"),
@@ -161,13 +172,21 @@ def parse_canon_document(path: Path, text: str) -> CanonDocument:
         depends_on=_string_tuple(metadata, "depends_on"),
         source_owners=_string_tuple(metadata, "source_owners"),
         sections=sections,
-        not_applicable=(),
+        not_applicable=_not_applicable(metadata, path),
         requirements=requirements,
         source_path=path,
     )
 
 
 def _validate_front_matter(metadata: dict[str, object], path: Path) -> None:
+    unknown = sorted(set(metadata) - FRONT_MATTER_FIELDS)
+    if unknown:
+        raise CanonError(
+            "CANON_PARSE_FRONT_MATTER",
+            f"unknown field: {unknown[0]}",
+            path,
+            1,
+        )
     for key, expected_type in REQUIRED_FRONT_MATTER.items():
         if key not in metadata:
             raise CanonError(
@@ -189,16 +208,128 @@ def _validate_front_matter(metadata: dict[str, object], path: Path) -> None:
                 1,
             )
 
-    for key in ("owns_concepts", "inherits", "depends_on", "source_owners"):
+    for key in STRING_FRONT_MATTER:
         value = metadata[key]
-        assert isinstance(value, list)
-        if not all(isinstance(item, str) for item in value):
+        assert isinstance(value, str)
+        if not value.strip():
             raise CanonError(
                 "CANON_PARSE_FRONT_MATTER",
-                f"field must contain only strings: {key}",
+                f"field must be a non-empty string: {key}",
                 path,
                 1,
             )
+
+    kind = metadata["kind"]
+    assert isinstance(kind, str)
+    if kind not in {item.value for item in DocumentKind}:
+        raise CanonError(
+            "CANON_PARSE_FRONT_MATTER",
+            f"invalid kind: {kind}",
+            path,
+            1,
+        )
+
+    revision = metadata["canon_revision"]
+    assert isinstance(revision, int) and not isinstance(revision, bool)
+    if revision < 0:
+        raise CanonError(
+            "CANON_PARSE_FRONT_MATTER",
+            "canon_revision must be non-negative",
+            path,
+            1,
+        )
+
+    profile = metadata.get("profile")
+    if profile is not None and (
+        not isinstance(profile, str) or not profile.strip()
+    ):
+        raise CanonError(
+            "CANON_PARSE_FRONT_MATTER",
+            "profile must be a non-empty string",
+            path,
+            1,
+        )
+
+    for key in ARRAY_FRONT_MATTER:
+        value = metadata[key]
+        assert isinstance(value, list)
+        if not all(isinstance(item, str) and item.strip() for item in value):
+            raise CanonError(
+                "CANON_PARSE_FRONT_MATTER",
+                f"field must contain only non-empty strings: {key}",
+                path,
+                1,
+            )
+        if len(value) != len(set(value)):
+            raise CanonError(
+                "CANON_PARSE_FRONT_MATTER",
+                f"field must contain unique values: {key}",
+                path,
+                1,
+            )
+
+    concepts = metadata["owns_concepts"]
+    assert isinstance(concepts, list)
+    if any(CONCEPT_KEY.fullmatch(item) is None for item in concepts):
+        raise CanonError(
+            "CANON_PARSE_FRONT_MATTER",
+            "owns_concepts contains an invalid normalized concept",
+            path,
+            1,
+        )
+
+    _not_applicable(metadata, path)
+
+
+def _not_applicable(
+    metadata: dict[str, object],
+    path: Path,
+) -> tuple[NotApplicable, ...]:
+    raw = metadata.get("not_applicable")
+    if raw is None:
+        return ()
+    if not isinstance(raw, dict):
+        raise CanonError(
+            "CANON_PARSE_FRONT_MATTER",
+            "not_applicable must be a table",
+            path,
+            1,
+        )
+    entries: list[NotApplicable] = []
+    for section in sorted(raw):
+        if not isinstance(section, str) or SECTION_KEY.fullmatch(section) is None:
+            raise CanonError(
+                "CANON_PARSE_FRONT_MATTER",
+                f"invalid not_applicable section: {section}",
+                path,
+                1,
+            )
+        entry = raw[section]
+        if not isinstance(entry, dict) or set(entry) != {"rationale", "owner"}:
+            raise CanonError(
+                "CANON_PARSE_FRONT_MATTER",
+                f"not_applicable.{section} must contain exactly rationale and owner",
+                path,
+                1,
+            )
+        rationale = entry["rationale"]
+        owner = entry["owner"]
+        if not isinstance(rationale, str) or not rationale.strip():
+            raise CanonError(
+                "CANON_PARSE_FRONT_MATTER",
+                f"not_applicable.{section}.rationale must be a non-empty string",
+                path,
+                1,
+            )
+        if not isinstance(owner, str) or not owner.strip():
+            raise CanonError(
+                "CANON_PARSE_FRONT_MATTER",
+                f"not_applicable.{section}.owner must be a non-empty string",
+                path,
+                1,
+            )
+        entries.append(NotApplicable(section, rationale, owner))
+    return tuple(entries)
 
 
 def _requirement_starts(
@@ -266,6 +397,13 @@ def _parse_requirement(
     _reject_metadata_residue(path, lines, cursor, end, body_start_line)
 
     concept = _backtick_value(path, fields["Concept"], "Concept")
+    if CONCEPT_KEY.fullmatch(concept) is None:
+        raise CanonError(
+            "CANON_REQUIREMENT_FIELD",
+            f"invalid normalized Concept: {concept}",
+            path,
+            fields["Concept"][1],
+        )
     modality_text = _backtick_value(path, fields["Modality"], "Modality")
     try:
         modality = Modality(modality_text)
@@ -277,7 +415,7 @@ def _parse_requirement(
             fields["Modality"][1],
         ) from exc
     scope = fields["Scope"][0]
-    if not scope:
+    if not scope.strip():
         raise CanonError(
             "CANON_REQUIREMENT_FIELD",
             "empty requirement field: Scope",
@@ -375,6 +513,13 @@ def _backtick_list(
         raise CanonError(
             "CANON_REQUIREMENT_FIELD",
             f"{name} contains an invalid backtick value",
+            path,
+            line,
+        )
+    if len(items) != len(set(items)):
+        raise CanonError(
+            "CANON_REQUIREMENT_FIELD",
+            f"{name} contains a duplicate value",
             path,
             line,
         )

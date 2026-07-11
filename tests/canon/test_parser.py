@@ -1,6 +1,11 @@
+import os
+import tempfile
 import unittest
+from contextlib import redirect_stdout
+from io import StringIO
 from pathlib import Path
 
+from tools.ambitions_canon.cli import main
 from tools.ambitions_canon.model import CanonError, DocumentKind, Modality
 from tools.ambitions_canon.parser import parse_canon_document, parse_front_matter
 
@@ -76,6 +81,135 @@ class ParserTests(unittest.TestCase):
         )
         self.assertEqual(requirement.source_path, path)
         self.assertEqual(requirement.line, 20)
+
+    def test_front_matter_validation_matches_closed_specification_schema(self):
+        path, valid = self.fixture("valid-surface.md")
+        cases = {
+            "unknown-key": valid.replace(
+                'title = "Today"\n', 'title = "Today"\nextra = "forbidden"\n'
+            ),
+            "empty-spec-id": valid.replace(
+                'spec_id = "SURFACE-TODAY"', 'spec_id = ""'
+            ),
+            "whitespace-owner": valid.replace(
+                'owner_domain = "product"', 'owner_domain = "   "'
+            ),
+            "negative-revision": valid.replace(
+                "canon_revision = 1", "canon_revision = -1"
+            ),
+            "empty-profile": valid.replace(
+                'profile = "surface-v1"', 'profile = ""'
+            ),
+            "duplicate-concept": valid.replace(
+                'owns_concepts = ["surface.today.primary-identity"]',
+                'owns_concepts = ["surface.today.primary-identity", '
+                '"surface.today.primary-identity"]',
+            ),
+            "invalid-concept": valid.replace(
+                'owns_concepts = ["surface.today.primary-identity"]',
+                'owns_concepts = ["Surface Today"]',
+            ),
+            "empty-source-owner": valid.replace(
+                'source_owners = ["Native/Ambitions/Surfaces/Today"]',
+                'source_owners = [" "]',
+            ),
+            "not-applicable-extra-key": valid.replace(
+                "+++\n\n## Purpose",
+                '[not_applicable.performance]\n'
+                'rationale = "No runtime work."\n'
+                'owner = "Product"\n'
+                'extra = "forbidden"\n'
+                "+++\n\n## Purpose",
+                1,
+            ),
+            "not-applicable-invalid-section": valid.replace(
+                "+++\n\n## Purpose",
+                '[not_applicable."Performance Work"]\n'
+                'rationale = "No runtime work."\n'
+                'owner = "Product"\n'
+                "+++\n\n## Purpose",
+                1,
+            ),
+        }
+
+        for name, text in cases.items():
+            with self.subTest(name=name):
+                with self.assertRaises(CanonError) as raised:
+                    parse_canon_document(path, text)
+                self.assertEqual(raised.exception.code, "CANON_PARSE_FRONT_MATTER")
+
+    def test_valid_not_applicable_contract_is_parsed_deterministically(self):
+        path, text = self.fixture("valid-surface.md")
+        text = text.replace(
+            "+++\n\n## Purpose",
+            '[not_applicable.performance]\n'
+            'rationale = "This specification performs no runtime work."\n'
+            'owner = "Product"\n'
+            "+++\n\n## Purpose",
+            1,
+        )
+
+        document = parse_canon_document(path, text)
+
+        self.assertEqual(len(document.not_applicable), 1)
+        self.assertEqual(document.not_applicable[0].section, "performance")
+        self.assertEqual(
+            document.not_applicable[0].rationale,
+            "This specification performs no runtime work.",
+        )
+        self.assertEqual(document.not_applicable[0].owner, "Product")
+
+    def test_requirement_contract_rejects_duplicate_unique_array_members(self):
+        path, text = self.fixture("valid-surface.md")
+        text = text.replace(
+            "`SCENARIO-TODAY-001`",
+            "`SCENARIO-TODAY-001`, `SCENARIO-TODAY-001`",
+        )
+
+        with self.assertRaises(CanonError) as raised:
+            parse_canon_document(path, text)
+
+        self.assertEqual(raised.exception.code, "CANON_REQUIREMENT_FIELD")
+        self.assertIn("duplicate", raised.exception.message)
+
+    def test_public_audit_and_build_fail_closed_on_schema_invalid_markdown(self):
+        _, valid = self.fixture("valid-surface.md")
+        invalid = valid.replace(
+            'title = "Today"\n', 'title = "Today"\nextra = "forbidden"\n'
+        )
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            canon = root / "docs/canon"
+            (canon / "specifications").mkdir(parents=True)
+            (canon / "specifications/today.md").write_text(
+                invalid, encoding="utf-8"
+            )
+            (canon / "MANIFEST.toml").write_text(
+                "schema_version = 1\n"
+                "canon_revision = 1\n"
+                'authority_state = "shadow"\n'
+                'compiler_version = "0.1.0"\n'
+                'normative_files = ["specifications/today.md"]\n'
+                "generated_files = []\n",
+                encoding="utf-8",
+            )
+            previous = Path.cwd()
+            try:
+                os.chdir(root)
+                outputs = []
+                results = []
+                for arguments in (("audit",), ("build", "--check")):
+                    output = StringIO()
+                    with redirect_stdout(output):
+                        results.append(main(arguments))
+                    outputs.append(output.getvalue())
+            finally:
+                os.chdir(previous)
+
+        self.assertEqual(results, [1, 1])
+        for output in outputs:
+            self.assertIn("CANON_PARSE_FRONT_MATTER", output)
+            self.assertIn("unknown field: extra", output)
 
     def test_literal_none_produces_empty_reference_tuples(self):
         path, text = self.fixture("invalid-modality.md")

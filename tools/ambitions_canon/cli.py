@@ -22,8 +22,16 @@ from tools.ambitions_canon.build import (
 )
 from tools.ambitions_canon.coverage import coverage_findings, load_profiles
 from tools.ambitions_canon.manifest import load_documents, load_manifest
-from tools.ambitions_canon.model import CanonError, Finding, GapSeverity
+from tools.ambitions_canon.model import (
+    CanonDocument,
+    CanonError,
+    Finding,
+    GapSeverity,
+    Requirement,
+)
+from tools.ambitions_canon.query import query_by_concept, query_by_id
 from tools.ambitions_canon.registry import build_registry
+from tools.ambitions_canon.render import stable_json
 from tools.ambitions_canon.task_pack import (
     TaskIntake,
     TaskPack,
@@ -109,6 +117,19 @@ def main(argv: Sequence[str] | None = None) -> int:
         action="store_true",
         help="exit nonzero when a P0 completeness gap exists",
     )
+    query_parser = subparsers.add_parser(
+        "query", help="query the canonical registry by exact ID or concept"
+    )
+    query_selector = query_parser.add_mutually_exclusive_group(required=True)
+    query_selector.add_argument(
+        "--id",
+        dest="identifier",
+        help="exact specification or requirement ID",
+    )
+    query_selector.add_argument(
+        "--concept",
+        help="exact normalized concept",
+    )
     pack_parser = subparsers.add_parser(
         "pack", help="generate a bounded, stale-safe Codex task pack"
     )
@@ -139,6 +160,13 @@ def main(argv: Sequence[str] | None = None) -> int:
         return _coverage(
             Path.cwd(),
             fail_on_p0_gap=arguments.fail_on_p0_gap,
+        )
+
+    if arguments.command == "query":
+        return _query(
+            Path.cwd(),
+            identifier=arguments.identifier,
+            concept=arguments.concept,
         )
 
     if arguments.command == "pack":
@@ -263,6 +291,118 @@ def _coverage(root: Path, *, fail_on_p0_gap: bool) -> int:
         f"authority_state={manifest.authority_state.value}"
     )
     return 0
+
+
+def _query(
+    root: Path,
+    *,
+    identifier: str | None,
+    concept: str | None,
+) -> int:
+    """Render one deterministic exact registry query as stable JSON."""
+
+    try:
+        manifest = load_manifest(root)
+        documents = load_documents(root, manifest)
+        registry = build_registry(manifest, documents)
+        findings = audit_registry(registry)
+        if findings:
+            finding = findings[0]
+            raise CanonError(
+                normalize_audit_error_code(finding.code),
+                finding.message,
+                finding.path,
+                finding.line,
+            )
+        if identifier is not None:
+            payload = _query_item_payload(query_by_id(registry, identifier))
+        else:
+            assert concept is not None
+            requirements = query_by_concept(registry, concept)
+            if not requirements:
+                raise CanonError(
+                    "CANON_QUERY_NOT_FOUND",
+                    f"canonical concept was not found: {concept}",
+                    manifest.source_path,
+                )
+            payload = {
+                "schema_version": 1,
+                "concept": concept,
+                "requirements": [
+                    _requirement_payload(requirement)
+                    for requirement in sorted(
+                        requirements,
+                        key=lambda item: item.requirement_id,
+                    )
+                ],
+            }
+        print(stable_json(payload).decode("utf-8"), end="")
+        return 0
+    except CanonError as error:
+        location = error.path.as_posix() if error.path is not None else "<registry>"
+        location = f"{location}:{error.line or 0}"
+        print(f"{error.code} {location} {error.message}")
+        return 1
+
+
+def _query_item_payload(item: object) -> dict[str, object]:
+    if isinstance(item, CanonDocument):
+        return {
+            "schema_version": 1,
+            "item_type": "specification",
+            "spec_id": item.spec_id,
+            "title": item.title,
+            "kind": item.kind.value,
+            "status": item.status,
+            "owner_domain": item.owner_domain,
+            "canon_revision": item.canon_revision,
+            "profile": item.profile,
+            "owns_concepts": sorted(item.owns_concepts),
+            "inherits": sorted(item.inherits),
+            "depends_on": sorted(item.depends_on),
+            "source_owners": sorted(item.source_owners),
+            "not_applicable": [
+                {
+                    "section": entry.section,
+                    "rationale": entry.rationale,
+                    "owner": entry.owner,
+                }
+                for entry in sorted(
+                    item.not_applicable,
+                    key=lambda entry: entry.section,
+                )
+            ],
+            "requirement_ids": sorted(
+                requirement.requirement_id for requirement in item.requirements
+            ),
+            "source_path": item.source_path.as_posix(),
+        }
+    if isinstance(item, Requirement):
+        return {
+            "schema_version": 1,
+            "item_type": "requirement",
+            **_requirement_payload(item),
+        }
+    raise CanonError(
+        "CANON_QUERY_RESULT_INVALID",
+        "query returned an unsupported registry item",
+    )
+
+
+def _requirement_payload(requirement: Requirement) -> dict[str, object]:
+    return {
+        "requirement_id": requirement.requirement_id,
+        "title": requirement.title,
+        "concept": requirement.concept,
+        "modality": requirement.modality.value,
+        "scope": requirement.scope,
+        "status": requirement.status,
+        "verification": sorted(requirement.verification),
+        "supersedes": sorted(requirement.supersedes),
+        "body": requirement.body,
+        "source_path": requirement.source_path.as_posix(),
+        "line": requirement.line,
+    }
 
 
 def _pack(root: Path, issue_path: Path, *, check: bool) -> int:
