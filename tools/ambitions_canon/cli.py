@@ -21,6 +21,12 @@ from tools.ambitions_canon.build import (
     _read_descriptor,
 )
 from tools.ambitions_canon.coverage import coverage_findings, load_profiles
+from tools.ambitions_canon.conflicts import (
+    docket_known_issues,
+    load_conflict_dockets,
+    report_conflicts,
+    validate_conflict_repository,
+)
 from tools.ambitions_canon.impact import write_amendment_scaffold
 from tools.ambitions_canon.manifest import load_documents, load_manifest
 from tools.ambitions_canon.migration import (
@@ -33,6 +39,7 @@ from tools.ambitions_canon.migration import (
 from tools.ambitions_canon.model import (
     CanonDocument,
     CanonError,
+    CanonRegistry,
     Finding,
     GapSeverity,
     Requirement,
@@ -232,6 +239,20 @@ def main(argv: Sequence[str] | None = None) -> int:
     claims_coverage_parser.add_argument("--concept-prefix")
     claims_coverage_parser.add_argument("--target-class")
     claims_coverage_parser.add_argument("--output", type=Path)
+    conflicts_parser = subparsers.add_parser(
+        "conflicts", help="report shadow conceptual-conflict dockets"
+    )
+    conflicts_subparsers = conflicts_parser.add_subparsers(
+        dest="conflicts_command", required=True
+    )
+    conflicts_report_parser = conflicts_subparsers.add_parser(
+        "report", help="validate and render unresolved owner dockets"
+    )
+    conflicts_report_parser.add_argument(
+        "--require-resolved",
+        action="store_true",
+        help="exit nonzero while any owner docket is unresolved",
+    )
     arguments = parser.parse_args(argv)
 
     if arguments.command == "version":
@@ -273,6 +294,12 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     if arguments.command == "migration":
         return _migration(Path.cwd(), arguments)
+
+    if arguments.command == "conflicts":
+        assert arguments.conflicts_command == "report"
+        return _conflicts_report(
+            Path.cwd(), require_resolved=arguments.require_resolved
+        )
 
     raise AssertionError(f"unhandled command: {arguments.command}")
 
@@ -389,6 +416,26 @@ def _rooted(root: Path, path: Path) -> Path:
     return path if path.is_absolute() else root / path
 
 
+def _conflicts_report(root: Path, *, require_resolved: bool) -> int:
+    try:
+        manifest = load_manifest(root)
+        code, report = report_conflicts(
+            root,
+            require_resolved=require_resolved,
+            canon_revision=manifest.canon_revision,
+            compiler_version=manifest.compiler_version,
+            authority_state=manifest.authority_state.value,
+        )
+        print(report.decode("utf-8"), end="")
+        if code:
+            print("P0_BLOCKER CANON_CONFLICTS_UNRESOLVED owner decision required")
+        return code
+    except CanonError as error:
+        location = error.path.as_posix() if error.path is not None else "<conflicts>"
+        print(f"P0_BLOCKER {error.code} {location}:{error.line or 0} {error.message}")
+        return 1
+
+
 def _amend_scaffold(root: Path, *, concept: str, output: Path) -> int:
     try:
         written = write_amendment_scaffold(root, output, concept)
@@ -406,6 +453,7 @@ def _audit(root: Path) -> int:
         manifest = load_manifest(root)
         documents = load_documents(root, manifest)
         registry = build_registry(manifest, documents)
+        _validated_docket_issues(root, registry)
         findings = audit_registry(registry)
     except CanonError as error:
         findings = (
@@ -674,8 +722,14 @@ def _pack(root: Path, issue_path: Path, *, check: bool) -> int:
                 finding.path,
                 finding.line,
             )
+        known_issues = _validated_docket_issues(root, registry)
         repository_sha = _repository_state_sha(root)
-        pack = build_task_pack(registry, intake, repository_sha, ())
+        pack = build_task_pack(
+            registry,
+            intake,
+            repository_sha,
+            known_issues,
+        )
         source_snapshot = _pack_source_snapshot(pack, raw_bytes)
 
         if check:
@@ -844,12 +898,13 @@ def _require_source_snapshot(
         manifest = load_manifest(root)
         documents = load_documents(root, manifest)
         registry = build_registry(manifest, documents)
-        pack = build_task_pack(registry, intake, repository_sha, ())
     except CanonError as exc:
         raise CanonError(
             "PACK_CANON_STALE",
             "canon changed during task-pack use",
         ) from exc
+    known_issues = _validated_docket_issues(root, registry)
+    pack = build_task_pack(registry, intake, repository_sha, known_issues)
     current = _pack_source_snapshot(pack, raw_bytes)
     if (
         current.canon_revision != expected.canon_revision
@@ -871,6 +926,22 @@ def _require_source_snapshot(
         or current.pack_content_sha != expected.pack_content_sha
     ):
         raise CanonError("PACK_SOURCE_STALE", "pack source inputs changed")
+
+
+def _validated_docket_issues(
+    root: Path,
+    registry: CanonRegistry,
+) -> tuple[dict[str, object], ...]:
+    """Validate the complete conflict graph before task-specific filtering."""
+
+    dockets = load_conflict_dockets(root)
+    validate_conflict_repository(
+        root,
+        dockets,
+        (item.requirement_id for item in registry.requirements),
+        registry.supersession_entries,
+    )
+    return docket_known_issues(dockets)
 
 
 def _read_intake_bytes(path: Path) -> bytes:

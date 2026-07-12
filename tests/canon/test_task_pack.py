@@ -282,6 +282,40 @@ def initialize_empty_cli_root(root: Path) -> Path:
     return intake_path
 
 
+def initialize_live_conflict_cli_root(
+    root: Path,
+    *,
+    scope: str,
+) -> Path:
+    shutil.copytree(ROOT / "docs/canon", root / "docs/canon")
+    (root / ".gitignore").write_text(".codex/\n", encoding="utf-8")
+    intake_path = root / ".codex" / "intake" / "AMB-1842.json"
+    intake_path.parent.mkdir(parents=True)
+    intake_data = json.loads(FIXTURE.read_text(encoding="utf-8"))
+    intake_data["scope"] = [scope]
+    intake_path.write_text(
+        json.dumps(intake_data, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    subprocess.run(("git", "init", "-q"), cwd=root, check=True)
+    subprocess.run(("git", "add", "."), cwd=root, check=True)
+    subprocess.run(
+        (
+            "git",
+            "-c",
+            "user.name=Canon Tests",
+            "-c",
+            "user.email=canon@example.invalid",
+            "commit",
+            "-qm",
+            "fixture",
+        ),
+        cwd=root,
+        check=True,
+    )
+    return intake_path
+
+
 class TaskIntakeTests(unittest.TestCase):
     def test_fixture_parses_exact_closed_intake_contract(self):
         value = TaskIntake.from_json(json.loads(FIXTURE.read_text(encoding="utf-8")))
@@ -871,6 +905,74 @@ class TaskPackTests(unittest.TestCase):
             with redirect_stdout(output):
                 self.assertEqual(_pack(root, intake_path, check=True), 1)
             self.assertIn("PACK_INTAKE_STALE", output.getvalue())
+
+    def test_cli_pack_generate_fails_closed_when_today_docket_is_deleted(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            intake_path = initialize_live_conflict_cli_root(
+                root,
+                scope="surface.unrelated",
+            )
+            today = (
+                root
+                / "docs/canon/decisions/open/conflict-today-primary-identity.md"
+            )
+            today.unlink()
+            output = io.StringIO()
+            with redirect_stdout(output):
+                self.assertEqual(_pack(root, intake_path, check=False), 1)
+            self.assertIn("CONFLICT_DOCKET_REMOVAL_BLOCKED", output.getvalue())
+            self.assertFalse((root / ".codex/canon-packs").exists())
+
+    def test_cli_pack_check_revalidates_all_dockets_before_scope_filtering(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            intake_path = initialize_live_conflict_cli_root(
+                root,
+                scope="surface.unrelated",
+            )
+            self.assertEqual(_pack(root, intake_path, check=False), 0)
+            today = (
+                root
+                / "docs/canon/decisions/open/conflict-today-primary-identity.md"
+            )
+            today.unlink()
+            output = io.StringIO()
+            with redirect_stdout(output):
+                self.assertEqual(_pack(root, intake_path, check=True), 1)
+            self.assertIn("CONFLICT_DOCKET_REMOVAL_BLOCKED", output.getvalue())
+
+    def test_cli_pack_resume_revalidates_dockets_after_pinned_pack_read(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            intake_path = initialize_live_conflict_cli_root(
+                root,
+                scope="surface.unrelated",
+            )
+            self.assertEqual(_pack(root, intake_path, check=False), 0)
+            original_require = canon_cli._require_source_snapshot
+            mutated = False
+
+            def delete_docket_before_resume(*arguments):
+                nonlocal mutated
+                if not mutated:
+                    mutated = True
+                    (
+                        root
+                        / "docs/canon/decisions/open/"
+                        "conflict-today-primary-identity.md"
+                    ).unlink()
+                return original_require(*arguments)
+
+            output = io.StringIO()
+            with mock.patch.object(
+                canon_cli,
+                "_require_source_snapshot",
+                side_effect=delete_docket_before_resume,
+            ):
+                with redirect_stdout(output):
+                    self.assertEqual(_pack(root, intake_path, check=True), 1)
+            self.assertIn("CONFLICT_DOCKET_REMOVAL_BLOCKED", output.getvalue())
 
     def test_cli_pack_check_reports_not_found_when_pack_root_is_absent(self):
         with tempfile.TemporaryDirectory() as temporary_directory:

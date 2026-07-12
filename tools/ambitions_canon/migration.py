@@ -145,6 +145,35 @@ TRACKED_COVERAGE_FIELDS = frozenset(
         "source_location",
     }
 )
+TRACKED_DISPOSITION_FIELDS = frozenset(
+    {
+        "catalog_sha256",
+        "claims",
+        "coverage",
+        "decision_evidence_sha256",
+        "decision_mapping_counts",
+        "linear_decision_count",
+        "schema_version",
+        "section_count",
+        "semantic_groups",
+        "source_count",
+        "uncovered",
+    }
+)
+
+
+@dataclass(frozen=True, slots=True)
+class TrackedCanonEvidenceSnapshot:
+    """Closed tracked migration evidence usable without raw source snapshots."""
+
+    source_catalog_bytes: bytes
+    claim_dispositions_bytes: bytes
+    conflict_baseline_bytes: bytes
+    source_count: int
+    claim_count: int
+    section_count: int
+    linear_decision_count: int
+    decision_evidence_fingerprint_sha256: str | None
 
 
 @dataclass(frozen=True, slots=True)
@@ -2688,22 +2717,19 @@ def _atomic_claim_from_dict(value: object, path: Path) -> AtomicClaim:
                 path,
             )
         _require_utf8(owner_approval, path)
+    decision_owner_approval_valid = False
+    decision_evidence_valid = False
     if location_kind == "decision":
         evidence_match = (
             DECISION_EVIDENCE_PATTERN.fullmatch(owner_approval)
             if owner_approval is not None
             else None
         )
-        if (
-            strings["source_id"] != "LINEAR-CANON-V3"
-            or evidence_match is None
-            or int(evidence_match.group(1)) != location_number
-        ):
-            raise CanonError(
-                "CLAIM_DECISION_PROVENANCE_REQUIRED",
-                "decision claim requires number-matched owner evidence; range inference is forbidden",
-                path,
-            )
+        decision_owner_approval_valid = bool(
+            strings["source_id"] == "LINEAR-CANON-V3"
+            and evidence_match is not None
+            and int(evidence_match.group(1)) == location_number
+        )
         if not DECISION_CLAIM_FIELDS.issubset(value):
             raise CanonError(
                 "CLAIM_DECISION_PROVENANCE_REQUIRED",
@@ -2714,6 +2740,7 @@ def _atomic_claim_from_dict(value: object, path: Path) -> AtomicClaim:
         owner_evidence_rationale = _claim_string(
             value, "owner_evidence_rationale", path
         )
+        decision_evidence_valid = True
     else:
         if DECISION_CLAIM_FIELDS & set(value):
             raise CanonError(
@@ -2745,15 +2772,19 @@ def _atomic_claim_from_dict(value: object, path: Path) -> AtomicClaim:
             path,
         ) from exc
     _validate_claim_destination(disposition, target_class, target_id, path)
-    if location_kind == "decision" and disposition not in {
-        ClaimDisposition.PROVENANCE_ONLY,
-        ClaimDisposition.CONFLICT,
-    }:
-        raise CanonError(
-            "CLAIM_DECISION_MAPPING_AUTHORITY",
-            "decision claims must remain provenance_only or conflict",
-            path,
-        )
+    _validate_decision_claim_law(
+        source_id=strings["source_id"],
+        location_kind=location_kind,
+        location_number=location_number,
+        disposition=disposition,
+        target_class=target_class,
+        target_id=target_id,
+        owner_approval_valid=decision_owner_approval_valid,
+        owner_evidence_valid=decision_evidence_valid,
+        path=path,
+        provenance_code="CLAIM_DECISION_PROVENANCE_REQUIRED",
+        authority_code="CLAIM_DECISION_MAPPING_AUTHORITY",
+    )
     return AtomicClaim(
         claim_id=strings["claim_id"],
         source_id=strings["source_id"],
@@ -2801,6 +2832,52 @@ def _validate_claim_destination(
         raise CanonError(
             "CLAIM_TARGET_FORBIDDEN",
             f"{disposition.value} cannot carry an automatic canonical winner",
+            path,
+        )
+
+
+def _validate_decision_claim_law(
+    *,
+    source_id: str,
+    location_kind: str,
+    location_number: int | None,
+    disposition: ClaimDisposition,
+    target_class: ClaimTargetClass,
+    target_id: str | None,
+    owner_approval_valid: bool,
+    owner_evidence_valid: bool,
+    path: Path,
+    provenance_code: str,
+    authority_code: str,
+) -> None:
+    """Enforce the shared raw/tracked Decision 1-201 authority boundary."""
+
+    if location_kind != "decision":
+        return
+    if (
+        source_id != "LINEAR-CANON-V3"
+        or location_number is None
+        or not 1 <= location_number <= 201
+        or not owner_approval_valid
+        or not owner_evidence_valid
+    ):
+        raise CanonError(
+            provenance_code,
+            "Decision 1-201 requires exact owner approval and owner evidence",
+            path,
+        )
+    expected_target_class = {
+        ClaimDisposition.PROVENANCE_ONLY: ClaimTargetClass.PROVENANCE,
+        ClaimDisposition.CONFLICT: ClaimTargetClass.DECISION_DOCKET,
+    }
+    if (
+        disposition not in expected_target_class
+        or target_id is not None
+        or target_class is not expected_target_class[disposition]
+    ):
+        raise CanonError(
+            authority_code,
+            "Decision mappings are provenance/conflict evidence, not canonical owners",
             path,
         )
 
@@ -4264,6 +4341,424 @@ def _write_claim_json(
             ) from exc
 
 
+def validate_tracked_canon_evidence(
+    root: Path,
+) -> TrackedCanonEvidenceSnapshot | None:
+    """Validate tracked migration evidence offline, without raw source content."""
+
+    root = _normalized_absolute(root)
+    migration_root = root / "docs/canon/migration"
+    catalog_path = migration_root / "source-catalog.json"
+    dispositions_path = migration_root / "claim-dispositions.json"
+    baseline_path = migration_root / "conflict-docket-baseline.json"
+    paths = (catalog_path, dispositions_path, baseline_path)
+    present = tuple(os.path.lexists(path) for path in paths)
+    if not any(present):
+        return None
+    if not all(present):
+        missing = paths[present.index(False)]
+        raise CanonError(
+            "TRACKED_EVIDENCE_MISSING",
+            "source catalog, claim dispositions, and conflict baseline are all required",
+            missing,
+        )
+
+    catalog_bytes = _read_catalog_bytes(catalog_path, allow_missing=False)
+    disposition_bytes = _read_catalog_bytes(dispositions_path, allow_missing=False)
+    baseline_bytes = _read_catalog_bytes(baseline_path, allow_missing=False)
+    assert catalog_bytes is not None
+    assert disposition_bytes is not None
+    assert baseline_bytes is not None
+    records = _parse_catalog_bytes(catalog_bytes, catalog_path)
+    payload = _tracked_json_object(disposition_bytes, dispositions_path)
+    if set(payload) != TRACKED_DISPOSITION_FIELDS or payload.get("schema_version") != 1:
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "claim dispositions use an unsupported closed shape",
+            dispositions_path,
+        )
+    if payload.get("catalog_sha256") != hashlib.sha256(catalog_bytes).hexdigest():
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_STALE",
+            "claim dispositions are not bound to the current source catalog",
+            dispositions_path,
+        )
+
+    collections = {
+        name: payload.get(name)
+        for name in ("claims", "coverage", "semantic_groups", "uncovered")
+    }
+    if not all(isinstance(value, list) for value in collections.values()):
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "claim disposition record collections must be arrays",
+            dispositions_path,
+        )
+    claims = tuple(
+        _validate_tracked_claim(item, dispositions_path)
+        for item in collections["claims"]
+    )
+    claim_ids = tuple(str(item["claim_id"]) for item in claims)
+    if claim_ids != tuple(sorted(set(claim_ids))):
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "tracked claims must have unique sorted claim IDs",
+            dispositions_path,
+        )
+    source_ids = tuple(record.source_id for record in records)
+    source_id_set = set(source_ids)
+    for claim in claims:
+        if claim["source_id"] not in source_id_set:
+            raise CanonError(
+                "CLAIM_DISPOSITIONS_INVALID",
+                f"tracked claim references unknown source_id: {claim['source_id']}",
+                dispositions_path,
+            )
+
+    decision_numbers = tuple(
+        int(str(item["source_location"]).split(":", 1)[1])
+        for item in claims
+        if item["source_id"] == "LINEAR-CANON-V3"
+        and str(item["source_location"]).startswith("decision:")
+    )
+    if "LINEAR-CANON-V3" in source_id_set and decision_numbers != tuple(range(1, 202)):
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "tracked dispositions require exact Decision 1 through 201 claims",
+            dispositions_path,
+        )
+    evidence_sha = payload.get("decision_evidence_sha256")
+    if "LINEAR-CANON-V3" in source_id_set:
+        if not _is_sha256(evidence_sha):
+            raise CanonError(
+                "CLAIM_DISPOSITIONS_INVALID",
+                "decision evidence checksum is invalid",
+                dispositions_path,
+            )
+    elif evidence_sha is not None:
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "decision evidence checksum requires a Linear source",
+            dispositions_path,
+        )
+    decision_fingerprint = _decision_evidence_fingerprint_sha256(
+        claims,
+        evidence_sha,
+        dispositions_path,
+    )
+
+    claim_by_id = {str(item["claim_id"]): item for item in claims}
+    coverage_keys: list[tuple[str, str]] = []
+    covered_claim_ids: list[str] = []
+    for item in collections["coverage"]:
+        if not isinstance(item, dict) or set(item) != TRACKED_COVERAGE_FIELDS:
+            raise CanonError(
+                "CLAIM_DISPOSITIONS_INVALID",
+                "coverage entry uses an unsupported closed shape",
+                dispositions_path,
+            )
+        source_id = _claim_string(item, "source_id", dispositions_path)
+        source_location = _claim_string(item, "source_location", dispositions_path)
+        _parse_source_location(source_location, dispositions_path)
+        if source_id not in source_id_set:
+            raise CanonError(
+                "CLAIM_DISPOSITIONS_INVALID",
+                f"coverage references unknown source_id: {source_id}",
+                dispositions_path,
+            )
+        entry_ids = item.get("claim_ids")
+        disposition = item.get("disposition")
+        rationale_sha = item.get("rationale_sha256")
+        if (
+            disposition not in {"claims", "no_normative_claims"}
+            or not isinstance(entry_ids, list)
+            or any(not isinstance(claim_id, str) for claim_id in entry_ids)
+            or entry_ids != sorted(set(entry_ids))
+        ):
+            raise CanonError(
+                "CLAIM_DISPOSITIONS_INVALID",
+                "coverage disposition or claim IDs are invalid",
+                dispositions_path,
+            )
+        if disposition == "claims":
+            valid_disposition = bool(entry_ids) and rationale_sha is None
+        else:
+            valid_disposition = not entry_ids and _is_sha256(rationale_sha)
+        if not valid_disposition:
+            raise CanonError(
+                "CLAIM_DISPOSITIONS_INVALID",
+                "coverage rationale and claim IDs contradict its disposition",
+                dispositions_path,
+            )
+        for claim_id in entry_ids:
+            claim = claim_by_id.get(claim_id)
+            if claim is None or claim["source_id"] != source_id:
+                raise CanonError(
+                    "CLAIM_DISPOSITIONS_INVALID",
+                    "coverage references an unknown or cross-source claim ID",
+                    dispositions_path,
+                )
+        coverage_keys.append((source_id, source_location))
+        covered_claim_ids.extend(entry_ids)
+    if coverage_keys != sorted(set(coverage_keys)):
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "coverage entries must be unique and sorted",
+            dispositions_path,
+        )
+    if set(source_ids) != {source_id for source_id, _ in coverage_keys}:
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "coverage must retain every catalog source",
+            dispositions_path,
+        )
+    if tuple(sorted(covered_claim_ids)) != claim_ids or len(covered_claim_ids) != len(
+        set(covered_claim_ids)
+    ):
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "coverage must retain every tracked claim exactly once",
+            dispositions_path,
+        )
+
+    grouped_claim_ids: list[str] = []
+    previous_group_sha = ""
+    for item in collections["semantic_groups"]:
+        if not isinstance(item, dict) or set(item) != {
+            "claim_ids",
+            "semantic_sha256",
+        }:
+            raise CanonError(
+                "CLAIM_DISPOSITIONS_INVALID",
+                "semantic group uses an unsupported closed shape",
+                dispositions_path,
+            )
+        semantic_sha = item.get("semantic_sha256")
+        group_ids = item.get("claim_ids")
+        if (
+            not _is_sha256(semantic_sha)
+            or not isinstance(group_ids, list)
+            or any(not isinstance(claim_id, str) for claim_id in group_ids)
+            or group_ids != sorted(set(group_ids))
+            or any(claim_id not in claim_by_id for claim_id in group_ids)
+            or str(semantic_sha) <= previous_group_sha
+        ):
+            raise CanonError(
+                "CLAIM_DISPOSITIONS_INVALID",
+                "semantic groups must be sorted and reference exact claim IDs",
+                dispositions_path,
+            )
+        previous_group_sha = str(semantic_sha)
+        grouped_claim_ids.extend(group_ids)
+    if tuple(sorted(grouped_claim_ids)) != claim_ids or len(grouped_claim_ids) != len(
+        set(grouped_claim_ids)
+    ):
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "semantic groups must retain every claim exactly once",
+            dispositions_path,
+        )
+
+    uncovered_keys: list[tuple[str, str]] = []
+    for item in collections["uncovered"]:
+        if not isinstance(item, dict) or set(item) != {"source_id", "source_location"}:
+            raise CanonError(
+                "CLAIM_DISPOSITIONS_INVALID",
+                "uncovered entry uses an unsupported closed shape",
+                dispositions_path,
+            )
+        source_id = _claim_string(item, "source_id", dispositions_path)
+        location = _claim_string(item, "source_location", dispositions_path)
+        _parse_source_location(location, dispositions_path)
+        if source_id not in source_id_set:
+            raise CanonError(
+                "CLAIM_DISPOSITIONS_INVALID",
+                "uncovered entry references an unknown source",
+                dispositions_path,
+            )
+        uncovered_keys.append((source_id, location))
+    if uncovered_keys != sorted(set(uncovered_keys)) or uncovered_keys:
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "tracked coverage must be complete, unique, and sorted",
+            dispositions_path,
+        )
+
+    counts = {
+        "source_count": len(records),
+        "section_count": len(coverage_keys),
+        "linear_decision_count": len(decision_numbers),
+    }
+    for name, expected in counts.items():
+        if (
+            not isinstance(payload.get(name), int)
+            or isinstance(payload.get(name), bool)
+            or payload[name] != expected
+        ):
+            raise CanonError(
+                "CLAIM_DISPOSITIONS_INVALID",
+                f"{name} differs from the tracked evidence graph",
+                dispositions_path,
+            )
+    expected_mapping_counts = {
+        status: sum(item["decision_mapping_status"] == status for item in claims)
+        for status in ("independently_reviewed", "unreviewed")
+    }
+    if payload.get("decision_mapping_counts") != expected_mapping_counts:
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "decision mapping counts differ from tracked claims",
+            dispositions_path,
+        )
+    baseline = _tracked_json_object(baseline_bytes, baseline_path)
+    if (
+        set(baseline)
+        != {
+            "schema_version",
+            "claim_dispositions_sha256",
+            "decision_evidence_fingerprint_sha256",
+            "dockets",
+        }
+        or baseline.get("schema_version") != 1
+        or not isinstance(baseline.get("dockets"), list)
+    ):
+        raise CanonError(
+            "CONFLICT_BASELINE_INVALID",
+            "conflict baseline uses an unsupported closed shape",
+            baseline_path,
+        )
+    if baseline.get("decision_evidence_fingerprint_sha256") != decision_fingerprint:
+        raise CanonError(
+            "CONFLICT_DECISION_EVIDENCE_STALE",
+            "conflict baseline is not bound to exact Decision 1-201 evidence",
+            baseline_path,
+        )
+    if baseline.get("claim_dispositions_sha256") != hashlib.sha256(
+        disposition_bytes
+    ).hexdigest():
+        raise CanonError(
+            "CONFLICT_BASELINE_STALE",
+            "conflict baseline is not bound to current claim dispositions",
+            baseline_path,
+        )
+    return TrackedCanonEvidenceSnapshot(
+        source_catalog_bytes=catalog_bytes,
+        claim_dispositions_bytes=disposition_bytes,
+        conflict_baseline_bytes=baseline_bytes,
+        source_count=len(records),
+        claim_count=len(claims),
+        section_count=len(coverage_keys),
+        linear_decision_count=len(decision_numbers),
+        decision_evidence_fingerprint_sha256=decision_fingerprint,
+    )
+
+
+def tracked_decision_evidence_fingerprint_sha256(
+    disposition_bytes: bytes,
+    path: Path | None = None,
+) -> str | None:
+    """Fingerprint ordered tracked Decision 1-201 evidence without raw content."""
+
+    source_path = path or Path("docs/canon/migration/claim-dispositions.json")
+    payload = _tracked_json_object(disposition_bytes, source_path)
+    if (
+        set(payload) != TRACKED_DISPOSITION_FIELDS
+        or payload.get("schema_version") != 1
+        or not isinstance(payload.get("claims"), list)
+    ):
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "claim dispositions use an unsupported closed shape",
+            source_path,
+        )
+    claims = tuple(
+        _validate_tracked_claim(item, source_path) for item in payload["claims"]
+    )
+    evidence_sha = payload.get("decision_evidence_sha256")
+    has_linear_decisions = any(
+        item["source_id"] == "LINEAR-CANON-V3"
+        and str(item["source_location"]).startswith("decision:")
+        for item in claims
+    )
+    if has_linear_decisions and not _is_sha256(evidence_sha):
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "decision evidence checksum is invalid",
+            source_path,
+        )
+    if not has_linear_decisions and evidence_sha is not None:
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "decision evidence checksum requires Linear Decision claims",
+            source_path,
+        )
+    return _decision_evidence_fingerprint_sha256(claims, evidence_sha, source_path)
+
+
+def _decision_evidence_fingerprint_sha256(
+    claims: Sequence[Mapping[str, object]],
+    decision_evidence_sha256: object,
+    path: Path,
+) -> str | None:
+    rows = [
+        {
+            "claim_id": item["claim_id"],
+            "source_id": item["source_id"],
+            "source_location": item["source_location"],
+            "owner_approval_sha256": item["owner_approval_sha256"],
+            "owner_evidence_text_sha256": item["owner_evidence_text_sha256"],
+            "owner_evidence_rationale_sha256": item[
+                "owner_evidence_rationale_sha256"
+            ],
+            "decision_mapping_status": item["decision_mapping_status"],
+            "disposition": item["disposition"],
+            "target_class": item["target_class"],
+            "target_id": item["target_id"],
+        }
+        for item in claims
+        if item["source_id"] == "LINEAR-CANON-V3"
+        and str(item["source_location"]).startswith("decision:")
+    ]
+    if not rows:
+        return None
+    decision_numbers = tuple(
+        int(str(item["source_location"]).split(":", 1)[1]) for item in rows
+    )
+    if decision_numbers != tuple(range(1, 202)):
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "Decision evidence fingerprint requires ordered Decisions 1 through 201",
+            path,
+        )
+    return hashlib.sha256(
+        stable_json(
+            {
+                "decision_evidence_sha256": decision_evidence_sha256,
+                "decisions": rows,
+            }
+        )
+    ).hexdigest()
+
+
+def _tracked_json_object(raw: bytes, path: Path) -> dict[str, object]:
+    try:
+        value = json.loads(raw.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise CanonError(
+            "TRACKED_EVIDENCE_INVALID",
+            "tracked evidence must be valid UTF-8 JSON",
+            path,
+        ) from exc
+    _validate_json_utf8_strings(value, path)
+    if not isinstance(value, dict):
+        raise CanonError(
+            "TRACKED_EVIDENCE_INVALID",
+            "tracked evidence root must be an object",
+            path,
+        )
+    return value
+
+
 def claim_coverage(
     disposition_path: Path,
     *,
@@ -4329,22 +4824,9 @@ def claim_coverage(
             "claim dispositions must be valid UTF-8 JSON",
             disposition_path,
         ) from exc
-    required = {
-        "catalog_sha256",
-        "claims",
-        "coverage",
-        "decision_evidence_sha256",
-        "decision_mapping_counts",
-        "linear_decision_count",
-        "schema_version",
-        "section_count",
-        "semantic_groups",
-        "source_count",
-        "uncovered",
-    }
     if (
         not isinstance(payload, dict)
-        or set(payload) != required
+        or set(payload) != TRACKED_DISPOSITION_FIELDS
         or payload["schema_version"] != 1
     ):
         raise CanonError(
@@ -4702,7 +5184,9 @@ def _validate_tracked_claim(value: object, path: Path) -> dict[str, object]:
             "tracked concept key is invalid",
             path,
         )
-    _parse_source_location(str(value["source_location"]), path)
+    location_kind, location_number = _parse_source_location(
+        str(value["source_location"]), path
+    )
     try:
         disposition = ClaimDisposition(str(value["disposition"]))
         target_class = ClaimTargetClass(str(value["target_class"]))
@@ -4729,7 +5213,8 @@ def _validate_tracked_claim(value: object, path: Path) -> dict[str, object]:
             path,
         )
     owner_approval_sha = value["owner_approval_sha256"]
-    if owner_approval_sha is not None and not _is_sha256(owner_approval_sha):
+    owner_approval_valid = _is_sha256(owner_approval_sha)
+    if owner_approval_sha is not None and not owner_approval_valid:
         raise CanonError(
             "CLAIM_DISPOSITIONS_INVALID",
             "tracked owner approval checksum is invalid",
@@ -4753,18 +5238,30 @@ def _validate_tracked_claim(value: object, path: Path) -> dict[str, object]:
             "tracked decision_mapping_status is invalid",
             path,
         )
-    is_decision = str(value["source_location"]).startswith("decision:")
     has_decision_evidence = (
         mapping_status is not None
-        and value["owner_evidence_text_sha256"] is not None
-        and value["owner_evidence_rationale_sha256"] is not None
+        and _is_sha256(value["owner_evidence_text_sha256"])
+        and _is_sha256(value["owner_evidence_rationale_sha256"])
     )
-    if is_decision != has_decision_evidence:
+    if location_kind != "decision" and has_decision_evidence:
         raise CanonError(
             "CLAIM_DISPOSITIONS_INVALID",
             "tracked decision evidence fields contradict source_location",
             path,
         )
+    _validate_decision_claim_law(
+        source_id=str(value["source_id"]),
+        location_kind=location_kind,
+        location_number=location_number,
+        disposition=disposition,
+        target_class=target_class,
+        target_id=target_id,
+        owner_approval_valid=owner_approval_valid,
+        owner_evidence_valid=has_decision_evidence,
+        path=path,
+        provenance_code="CLAIM_DISPOSITIONS_INVALID",
+        authority_code="CLAIM_DISPOSITIONS_INVALID",
+    )
     if not _is_sha256(value["rationale_sha256"]):
         raise CanonError(
             "CLAIM_DISPOSITIONS_INVALID",

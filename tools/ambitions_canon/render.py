@@ -86,15 +86,55 @@ def render_outputs(registry: CanonRegistry) -> Mapping[Path, bytes]:
                 document.source_path,
             ) from exc
         entries.append((relative.as_posix(), document.source_bytes))
+    from tools.ambitions_canon.conflicts import (
+        docket_filename,
+        load_conflict_dockets,
+        render_conflict_docket,
+        validate_conflict_repository,
+    )
+
+    dockets = load_conflict_dockets(registry.manifest.repository_root)
+    conflict_snapshot = validate_conflict_repository(
+        registry.manifest.repository_root,
+        dockets,
+        (item.requirement_id for item in registry.requirements),
+        registry.supersession_entries,
+    )
+    entries.extend(
+        (
+            f"decisions/open/{docket_filename(docket).as_posix()}",
+            render_conflict_docket(docket).encode("utf-8"),
+        )
+        for docket in dockets
+    )
+    if conflict_snapshot is not None:
+        entries.extend(
+            (
+                (
+                    "migration/source-catalog.json",
+                    conflict_snapshot.source_catalog_bytes,
+                ),
+                (
+                    "migration/claim-dispositions.json",
+                    conflict_snapshot.claim_dispositions_bytes,
+                ),
+                (
+                    "migration/conflict-docket-baseline.json",
+                    conflict_snapshot.baseline_bytes,
+                ),
+            )
+        )
     return _render_outputs(
         registry,
         _content_sha_entries(entries),
+        dockets,
     )
 
 
 def _render_outputs(
     registry: CanonRegistry,
     content_sha: str,
+    dockets: tuple[object, ...] = (),
 ) -> Mapping[Path, bytes]:
     metadata = {
         "schema_version": 1,
@@ -182,7 +222,7 @@ def _render_outputs(
         ),
         Path("specification-coverage.md"): _coverage(metadata, documents),
         Path("unresolved-conflicts.md"): _unresolved_conflicts(
-            metadata, documents
+            metadata, documents, dockets
         ),
         Path("law-source-map.json"): _law_map(
             metadata, requirements, documents
@@ -326,7 +366,17 @@ def _coverage(metadata, documents) -> bytes:
     return _markdown(lines)
 
 
-def _unresolved_conflicts(metadata, documents) -> bytes:
+def _unresolved_conflicts(metadata, documents, dockets=()) -> bytes:
+    if dockets:
+        from tools.ambitions_canon.conflicts import render_unresolved_report
+
+        return render_unresolved_report(
+            dockets,
+            canon_revision=int(metadata["canon_revision"]),
+            canon_content_sha=str(metadata["canon_content_sha"]),
+            compiler_version=str(metadata["compiler_version"]),
+            authority_state=str(metadata["authority_state"]),
+        )
     lines = _markdown_header("Ambitions Unresolved Conflicts", metadata)
     lines.extend(
         [
