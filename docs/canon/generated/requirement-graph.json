@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "4dc5e1743928aa134eeccb5be77340294c15f48c8f77e6814db028c36197dfee",
+  "canon_content_sha": "2f4c85796cbbca4acbf511a55f8426e39eedc98ce254e2ea4addc59365be8400",
   "canon_revision": 1,
   "compiler_version": "0.1.0",
   "document_edges": [
@@ -103,6 +103,338 @@
     {
       "from": "GLOBAL-TRUST-INSPECTION",
       "to": "CONSTITUTION"
+    },
+    {
+      "from": "OBJECT-ATTACHMENT",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "OBJECT-ATTACHMENT",
+      "to": "GLOBAL-CAPTURE"
+    },
+    {
+      "from": "OBJECT-ATTACHMENT",
+      "to": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
+      "from": "OBJECT-ATTACHMENT",
+      "to": "OBJECT-PROOF"
+    },
+    {
+      "from": "OBJECT-CLOSURE",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "OBJECT-CLOSURE",
+      "to": "GLOBAL-MOTION"
+    },
+    {
+      "from": "OBJECT-CLOSURE",
+      "to": "OBJECT-GOAL"
+    },
+    {
+      "from": "OBJECT-CLOSURE",
+      "to": "OBJECT-PROOF"
+    },
+    {
+      "from": "OBJECT-CLOSURE",
+      "to": "OBJECT-STEP"
+    },
+    {
+      "from": "OBJECT-EVENT",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "OBJECT-EVENT",
+      "to": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
+      "from": "OBJECT-EVENT",
+      "to": "OBJECT-STEP"
+    },
+    {
+      "from": "OBJECT-EVENT",
+      "to": "SURFACE-TIME"
+    },
+    {
+      "from": "OBJECT-GOAL",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "OBJECT-GOAL",
+      "to": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
+      "from": "OBJECT-GOAL",
+      "to": "OBJECT-LIFE-AREA"
+    },
+    {
+      "from": "OBJECT-GOAL",
+      "to": "SURFACE-GOALS"
+    },
+    {
+      "from": "OBJECT-GOAL",
+      "to": "SURFACE-TIME"
+    },
+    {
+      "from": "OBJECT-GOAL-PATH",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "OBJECT-GOAL-PATH",
+      "to": "GLOBAL-MOTION"
+    },
+    {
+      "from": "OBJECT-GOAL-PATH",
+      "to": "OBJECT-GOAL"
+    },
+    {
+      "from": "OBJECT-GOAL-PATH",
+      "to": "SURFACE-GOALS"
+    },
+    {
+      "from": "OBJECT-GOAL-PATH",
+      "to": "SURFACE-TIME"
+    },
+    {
+      "from": "OBJECT-HISTORY-EVENT",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "OBJECT-HISTORY-EVENT",
+      "to": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
+      "from": "OBJECT-HISTORY-EVENT",
+      "to": "OBJECT-RECEIPT"
+    },
+    {
+      "from": "OBJECT-HISTORY-EVENT",
+      "to": "SURFACE-YOU"
+    },
+    {
+      "from": "OBJECT-IMPORT-DIFF-RECORD",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "OBJECT-IMPORT-DIFF-RECORD",
+      "to": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
+      "from": "OBJECT-IMPORT-DIFF-RECORD",
+      "to": "OBJECT-EVENT"
+    },
+    {
+      "from": "OBJECT-IMPORT-DIFF-RECORD",
+      "to": "OBJECT-SOURCE-REFERENCE"
+    },
+    {
+      "from": "OBJECT-IMPORT-DIFF-RECORD",
+      "to": "SURFACE-TIME"
+    },
+    {
+      "from": "OBJECT-LIFE-AREA",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "OBJECT-LIFE-AREA",
+      "to": "GLOBAL-CAPTURE"
+    },
+    {
+      "from": "OBJECT-LIFE-AREA",
+      "to": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
+      "from": "OBJECT-LIFE-AREA",
+      "to": "SURFACE-GOALS"
+    },
+    {
+      "from": "OBJECT-NOTE",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "OBJECT-NOTE",
+      "to": "GLOBAL-CAPTURE"
+    },
+    {
+      "from": "OBJECT-NOTE",
+      "to": "GLOBAL-SEARCH"
+    },
+    {
+      "from": "OBJECT-NOTE",
+      "to": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
+      "from": "OBJECT-NOTE",
+      "to": "OBJECT-STEP"
+    },
+    {
+      "from": "OBJECT-NOTIFICATION-RULE",
+      "to": "APP-PERMISSIONS"
+    },
+    {
+      "from": "OBJECT-NOTIFICATION-RULE",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "OBJECT-NOTIFICATION-RULE",
+      "to": "OBJECT-EVENT"
+    },
+    {
+      "from": "OBJECT-NOTIFICATION-RULE",
+      "to": "OBJECT-REMINDER"
+    },
+    {
+      "from": "OBJECT-NOTIFICATION-RULE",
+      "to": "SURFACE-YOU"
+    },
+    {
+      "from": "OBJECT-PROOF",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "OBJECT-PROOF",
+      "to": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
+      "from": "OBJECT-PROOF",
+      "to": "OBJECT-GOAL"
+    },
+    {
+      "from": "OBJECT-PROOF",
+      "to": "OBJECT-STEP"
+    },
+    {
+      "from": "OBJECT-RECEIPT",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "OBJECT-RECEIPT",
+      "to": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
+      "from": "OBJECT-RECEIPT",
+      "to": "OBJECT-PROOF"
+    },
+    {
+      "from": "OBJECT-RECEIPT",
+      "to": "SURFACE-YOU"
+    },
+    {
+      "from": "OBJECT-RECOVERY-SEGMENT",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "OBJECT-RECOVERY-SEGMENT",
+      "to": "GLOBAL-MOTION"
+    },
+    {
+      "from": "OBJECT-RECOVERY-SEGMENT",
+      "to": "OBJECT-GOAL-PATH"
+    },
+    {
+      "from": "OBJECT-RECOVERY-SEGMENT",
+      "to": "OBJECT-STEP"
+    },
+    {
+      "from": "OBJECT-REMINDER",
+      "to": "APP-PERMISSIONS"
+    },
+    {
+      "from": "OBJECT-REMINDER",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "OBJECT-REMINDER",
+      "to": "OBJECT-STEP"
+    },
+    {
+      "from": "OBJECT-REMINDER",
+      "to": "SURFACE-TIME"
+    },
+    {
+      "from": "OBJECT-REMINDER",
+      "to": "SURFACE-TODAY"
+    },
+    {
+      "from": "OBJECT-SAVED-FOR-LATER-DRAFT",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "OBJECT-SAVED-FOR-LATER-DRAFT",
+      "to": "GLOBAL-CAPTURE"
+    },
+    {
+      "from": "OBJECT-SAVED-FOR-LATER-DRAFT",
+      "to": "GLOBAL-SEARCH"
+    },
+    {
+      "from": "OBJECT-SAVED-FOR-LATER-DRAFT",
+      "to": "OBJECT-NOTE"
+    },
+    {
+      "from": "OBJECT-SAVED-FOR-LATER-DRAFT",
+      "to": "OBJECT-STEP"
+    },
+    {
+      "from": "OBJECT-SCHEDULE-PLACEMENT",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "OBJECT-SCHEDULE-PLACEMENT",
+      "to": "GLOBAL-MOTION"
+    },
+    {
+      "from": "OBJECT-SCHEDULE-PLACEMENT",
+      "to": "OBJECT-EVENT"
+    },
+    {
+      "from": "OBJECT-SCHEDULE-PLACEMENT",
+      "to": "OBJECT-STEP"
+    },
+    {
+      "from": "OBJECT-SCHEDULE-PLACEMENT",
+      "to": "SURFACE-TIME"
+    },
+    {
+      "from": "OBJECT-SOURCE-REFERENCE",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "OBJECT-SOURCE-REFERENCE",
+      "to": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
+      "from": "OBJECT-SOURCE-REFERENCE",
+      "to": "OBJECT-EVENT"
+    },
+    {
+      "from": "OBJECT-SOURCE-REFERENCE",
+      "to": "SURFACE-YOU"
+    },
+    {
+      "from": "OBJECT-STEP",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "OBJECT-STEP",
+      "to": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
+      "from": "OBJECT-STEP",
+      "to": "OBJECT-GOAL-PATH"
+    },
+    {
+      "from": "OBJECT-STEP",
+      "to": "SURFACE-GOALS"
+    },
+    {
+      "from": "OBJECT-STEP",
+      "to": "SURFACE-TIME"
+    },
+    {
+      "from": "OBJECT-STEP",
+      "to": "SURFACE-TODAY"
     },
     {
       "from": "SURFACE-GOALS",
@@ -767,6 +1099,582 @@
       "to": "PLATFORM-NATIVE-IPHONE-001"
     },
     {
+      "from": "OBJ-ARCHIVE-SEMANTICS-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-ARCHIVE-SEMANTICS-001",
+      "to": "OBJECT-CANONICAL-GRAPH-001"
+    },
+    {
+      "from": "OBJ-ARCHIVE-SEMANTICS-001",
+      "to": "OBJECT-LIFECYCLE-DELETION-001"
+    },
+    {
+      "from": "OBJ-ARCHIVE-SEMANTICS-001",
+      "to": "OBJECT-TAXONOMY-001"
+    },
+    {
+      "from": "OBJ-ATTACHMENT-IDENTITY-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-ATTACHMENT-IDENTITY-001",
+      "to": "LAW-LOCAL-AUTHORITY-001"
+    },
+    {
+      "from": "OBJ-ATTACHMENT-IDENTITY-001",
+      "to": "OBJECT-LIFECYCLE-DELETION-001"
+    },
+    {
+      "from": "OBJ-CANONICAL-IDENTITY-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-CANONICAL-IDENTITY-001",
+      "to": "OBJECT-CANONICAL-GRAPH-001"
+    },
+    {
+      "from": "OBJ-CANONICAL-IDENTITY-001",
+      "to": "OBJECT-LIFECYCLE-DELETION-001"
+    },
+    {
+      "from": "OBJ-CANONICAL-IDENTITY-001",
+      "to": "OBJECT-TAXONOMY-001"
+    },
+    {
+      "from": "OBJ-CANONICAL-OWNER-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-CANONICAL-OWNER-001",
+      "to": "OBJECT-CANONICAL-GRAPH-001"
+    },
+    {
+      "from": "OBJ-CANONICAL-OWNER-001",
+      "to": "OBJECT-LIFECYCLE-DELETION-001"
+    },
+    {
+      "from": "OBJ-CANONICAL-OWNER-001",
+      "to": "OBJECT-TAXONOMY-001"
+    },
+    {
+      "from": "OBJ-CAPTURE-DRAFT-IDENTITY-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-CAPTURE-DRAFT-IDENTITY-001",
+      "to": "OBJECT-LIFECYCLE-DELETION-001"
+    },
+    {
+      "from": "OBJ-CAPTURE-DRAFT-IDENTITY-001",
+      "to": "OBJECT-SAVED-FOR-LATER-001"
+    },
+    {
+      "from": "OBJ-CLOSURE-IDENTITY-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-CLOSURE-IDENTITY-001",
+      "to": "CONTROL-UNDO-RECOVERY-001"
+    },
+    {
+      "from": "OBJ-CLOSURE-IDENTITY-001",
+      "to": "OBJECT-LIFECYCLE-DELETION-001"
+    },
+    {
+      "from": "OBJ-CLOSURE-IDENTITY-001",
+      "to": "OBJECT-PROOF-REQUIREMENT-001"
+    },
+    {
+      "from": "OBJ-COMMON-ENVELOPE-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-COMMON-ENVELOPE-001",
+      "to": "OBJECT-CANONICAL-GRAPH-001"
+    },
+    {
+      "from": "OBJ-COMMON-ENVELOPE-001",
+      "to": "OBJECT-LIFECYCLE-DELETION-001"
+    },
+    {
+      "from": "OBJ-COMMON-ENVELOPE-001",
+      "to": "OBJECT-TAXONOMY-001"
+    },
+    {
+      "from": "OBJ-CONVERSION-LAW-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-CONVERSION-LAW-001",
+      "to": "OBJECT-FUTURE-STEP-IDENTITY-001"
+    },
+    {
+      "from": "OBJ-CONVERSION-LAW-001",
+      "to": "OBJECT-LIFECYCLE-DELETION-001"
+    },
+    {
+      "from": "OBJ-CONVERSION-LAW-001",
+      "to": "OBJECT-PROOF-REQUIREMENT-001"
+    },
+    {
+      "from": "OBJ-CONVERSION-LAW-001",
+      "to": "OBJECT-REMINDER-COMPLETION-001"
+    },
+    {
+      "from": "OBJ-DELETION-RESTORE-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-DELETION-RESTORE-001",
+      "to": "OBJECT-FUTURE-STEP-IDENTITY-001"
+    },
+    {
+      "from": "OBJ-DELETION-RESTORE-001",
+      "to": "OBJECT-LIFECYCLE-DELETION-001"
+    },
+    {
+      "from": "OBJ-DELETION-RESTORE-001",
+      "to": "OBJECT-PROOF-REQUIREMENT-001"
+    },
+    {
+      "from": "OBJ-DELETION-RESTORE-001",
+      "to": "OBJECT-REMINDER-COMPLETION-001"
+    },
+    {
+      "from": "OBJ-EVENT-IDENTITY-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-EVENT-IDENTITY-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "OBJ-EVENT-IDENTITY-001",
+      "to": "OBJECT-LIFECYCLE-DELETION-001"
+    },
+    {
+      "from": "OBJ-EVENT-IDENTITY-001",
+      "to": "OBJECT-TAXONOMY-001"
+    },
+    {
+      "from": "OBJ-FUTURE-STEP-RECEIPT-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-FUTURE-STEP-RECEIPT-001",
+      "to": "OBJECT-FUTURE-STEP-IDENTITY-001"
+    },
+    {
+      "from": "OBJ-FUTURE-STEP-RECEIPT-001",
+      "to": "OBJECT-LIFECYCLE-DELETION-001"
+    },
+    {
+      "from": "OBJ-FUTURE-STEP-RECEIPT-001",
+      "to": "OBJECT-PROOF-REQUIREMENT-001"
+    },
+    {
+      "from": "OBJ-FUTURE-STEP-RECEIPT-001",
+      "to": "OBJECT-REMINDER-COMPLETION-001"
+    },
+    {
+      "from": "OBJ-GOAL-CREATION-FAILURE-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-GOAL-CREATION-FAILURE-001",
+      "to": "OBJECT-GOAL-LIFECYCLE-001"
+    },
+    {
+      "from": "OBJ-GOAL-CREATION-FAILURE-001",
+      "to": "OBJECT-LIFECYCLE-DELETION-001"
+    },
+    {
+      "from": "OBJ-GOAL-CREATION-FAILURE-001",
+      "to": "OBJECT-PROOF-REQUIREMENT-001"
+    },
+    {
+      "from": "OBJ-GOAL-IDENTITY-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-GOAL-IDENTITY-001",
+      "to": "OBJECT-GOAL-LIFECYCLE-001"
+    },
+    {
+      "from": "OBJ-GOAL-IDENTITY-001",
+      "to": "OBJECT-LIFECYCLE-DELETION-001"
+    },
+    {
+      "from": "OBJ-GOAL-IDENTITY-001",
+      "to": "OBJECT-PROOF-REQUIREMENT-001"
+    },
+    {
+      "from": "OBJ-GOAL-LINK-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-GOAL-LINK-001",
+      "to": "OBJECT-FUTURE-STEP-IDENTITY-001"
+    },
+    {
+      "from": "OBJ-GOAL-LINK-001",
+      "to": "OBJECT-LIFECYCLE-DELETION-001"
+    },
+    {
+      "from": "OBJ-GOAL-LINK-001",
+      "to": "OBJECT-PROOF-REQUIREMENT-001"
+    },
+    {
+      "from": "OBJ-GOAL-LINK-001",
+      "to": "OBJECT-REMINDER-COMPLETION-001"
+    },
+    {
+      "from": "OBJ-GOAL-PATH-IDENTITY-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-GOAL-PATH-IDENTITY-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "OBJ-GOAL-PATH-IDENTITY-001",
+      "to": "OBJECT-CANONICAL-GRAPH-001"
+    },
+    {
+      "from": "OBJ-GOAL-PATH-IDENTITY-001",
+      "to": "OBJECT-FUTURE-STEP-IDENTITY-001"
+    },
+    {
+      "from": "OBJ-GOAL-PATH-RECEIPT-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-GOAL-PATH-RECEIPT-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "OBJ-GOAL-PATH-RECEIPT-001",
+      "to": "OBJECT-CANONICAL-GRAPH-001"
+    },
+    {
+      "from": "OBJ-GOAL-PATH-RECEIPT-001",
+      "to": "OBJECT-FUTURE-STEP-IDENTITY-001"
+    },
+    {
+      "from": "OBJ-HISTORY-EVENT-IDENTITY-001",
+      "to": "CONST-PROOF-EVIDENCE-001"
+    },
+    {
+      "from": "OBJ-HISTORY-EVENT-IDENTITY-001",
+      "to": "CONTROL-UNDO-RECOVERY-001"
+    },
+    {
+      "from": "OBJ-HISTORY-EVENT-IDENTITY-001",
+      "to": "RUNTIME-MUTATION-SEQUENCE-001"
+    },
+    {
+      "from": "OBJ-IMPORT-DIFF-RECORD-IDENTITY-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-IMPORT-DIFF-RECORD-IDENTITY-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "OBJ-IMPORT-DIFF-RECORD-IDENTITY-001",
+      "to": "TIME-EXTERNAL-VISIBILITY-001"
+    },
+    {
+      "from": "OBJ-LIFE-AREA-IDENTITY-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-LIFE-AREA-IDENTITY-001",
+      "to": "OBJECT-CANONICAL-GRAPH-001"
+    },
+    {
+      "from": "OBJ-LIFE-AREA-IDENTITY-001",
+      "to": "OBJECT-LIFECYCLE-DELETION-001"
+    },
+    {
+      "from": "OBJ-LIFE-AREA-IDENTITY-001",
+      "to": "OBJECT-TAXONOMY-001"
+    },
+    {
+      "from": "OBJ-LIFECYCLE-SEPARATION-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-LIFECYCLE-SEPARATION-001",
+      "to": "OBJECT-FUTURE-STEP-IDENTITY-001"
+    },
+    {
+      "from": "OBJ-LIFECYCLE-SEPARATION-001",
+      "to": "OBJECT-LIFECYCLE-DELETION-001"
+    },
+    {
+      "from": "OBJ-LIFECYCLE-SEPARATION-001",
+      "to": "OBJECT-PROOF-REQUIREMENT-001"
+    },
+    {
+      "from": "OBJ-LIFECYCLE-SEPARATION-001",
+      "to": "OBJECT-REMINDER-COMPLETION-001"
+    },
+    {
+      "from": "OBJ-MEMORY-RETENTION-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-MEMORY-RETENTION-001",
+      "to": "OBJECT-CANONICAL-GRAPH-001"
+    },
+    {
+      "from": "OBJ-MEMORY-RETENTION-001",
+      "to": "OBJECT-LIFECYCLE-DELETION-001"
+    },
+    {
+      "from": "OBJ-MEMORY-RETENTION-001",
+      "to": "OBJECT-TAXONOMY-001"
+    },
+    {
+      "from": "OBJ-NOTE-IDENTITY-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-NOTE-IDENTITY-001",
+      "to": "OBJECT-LIFECYCLE-DELETION-001"
+    },
+    {
+      "from": "OBJ-NOTE-IDENTITY-001",
+      "to": "OBJECT-TAXONOMY-001"
+    },
+    {
+      "from": "OBJ-NOTIFICATION-RULE-IDENTITY-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-NOTIFICATION-RULE-IDENTITY-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "OBJ-NOTIFICATION-RULE-IDENTITY-001",
+      "to": "OBJECT-REMINDER-COMPLETION-001"
+    },
+    {
+      "from": "OBJ-PROOF-IDENTITY-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-PROOF-IDENTITY-001",
+      "to": "OBJECT-LIFECYCLE-DELETION-001"
+    },
+    {
+      "from": "OBJ-PROOF-IDENTITY-001",
+      "to": "OBJECT-PROOF-REQUIREMENT-001"
+    },
+    {
+      "from": "OBJ-RECEIPT-IDENTITY-001",
+      "to": "CONST-PROOF-EVIDENCE-001"
+    },
+    {
+      "from": "OBJ-RECEIPT-IDENTITY-001",
+      "to": "LAW-RUNTIME-DURABLE-SUCCESS-001"
+    },
+    {
+      "from": "OBJ-RECEIPT-IDENTITY-001",
+      "to": "RUNTIME-MUTATION-SEQUENCE-001"
+    },
+    {
+      "from": "OBJ-RECOVERY-SEGMENT-IDENTITY-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-RECOVERY-SEGMENT-IDENTITY-001",
+      "to": "CONTROL-UNDO-RECOVERY-001"
+    },
+    {
+      "from": "OBJ-RECOVERY-SEGMENT-IDENTITY-001",
+      "to": "OBJECT-CANONICAL-GRAPH-001"
+    },
+    {
+      "from": "OBJ-RECURRENCE-BOUNDARY-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-RECURRENCE-BOUNDARY-001",
+      "to": "OBJECT-FUTURE-STEP-IDENTITY-001"
+    },
+    {
+      "from": "OBJ-RECURRENCE-BOUNDARY-001",
+      "to": "OBJECT-LIFECYCLE-DELETION-001"
+    },
+    {
+      "from": "OBJ-RECURRENCE-BOUNDARY-001",
+      "to": "OBJECT-PROOF-REQUIREMENT-001"
+    },
+    {
+      "from": "OBJ-RECURRENCE-BOUNDARY-001",
+      "to": "OBJECT-REMINDER-COMPLETION-001"
+    },
+    {
+      "from": "OBJ-RECURRENCE-SERIES-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-RECURRENCE-SERIES-001",
+      "to": "OBJECT-FUTURE-STEP-IDENTITY-001"
+    },
+    {
+      "from": "OBJ-RECURRENCE-SERIES-001",
+      "to": "OBJECT-LIFECYCLE-DELETION-001"
+    },
+    {
+      "from": "OBJ-RECURRENCE-SERIES-001",
+      "to": "OBJECT-PROOF-REQUIREMENT-001"
+    },
+    {
+      "from": "OBJ-RECURRENCE-SERIES-001",
+      "to": "OBJECT-REMINDER-COMPLETION-001"
+    },
+    {
+      "from": "OBJ-REMINDER-IDENTITY-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-REMINDER-IDENTITY-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "OBJ-REMINDER-IDENTITY-001",
+      "to": "OBJECT-LIFECYCLE-DELETION-001"
+    },
+    {
+      "from": "OBJ-REMINDER-IDENTITY-001",
+      "to": "OBJECT-REMINDER-COMPLETION-001"
+    },
+    {
+      "from": "OBJ-SCHEDULE-PLACEMENT-IDENTITY-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-SCHEDULE-PLACEMENT-IDENTITY-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "OBJ-SCHEDULE-PLACEMENT-IDENTITY-001",
+      "to": "OBJECT-CANONICAL-GRAPH-001"
+    },
+    {
+      "from": "OBJ-SCHEDULE-STATE-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-SCHEDULE-STATE-001",
+      "to": "OBJECT-FUTURE-STEP-IDENTITY-001"
+    },
+    {
+      "from": "OBJ-SCHEDULE-STATE-001",
+      "to": "OBJECT-LIFECYCLE-DELETION-001"
+    },
+    {
+      "from": "OBJ-SCHEDULE-STATE-001",
+      "to": "OBJECT-PROOF-REQUIREMENT-001"
+    },
+    {
+      "from": "OBJ-SCHEDULE-STATE-001",
+      "to": "OBJECT-REMINDER-COMPLETION-001"
+    },
+    {
+      "from": "OBJ-SOURCE-REFERENCE-IDENTITY-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-SOURCE-REFERENCE-IDENTITY-001",
+      "to": "LAW-R2-PUBLIC-ONLY-001"
+    },
+    {
+      "from": "OBJ-SOURCE-REFERENCE-IDENTITY-001",
+      "to": "TIME-EXTERNAL-VISIBILITY-001"
+    },
+    {
+      "from": "OBJ-STATE-AXES-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-STATE-AXES-001",
+      "to": "OBJECT-CANONICAL-GRAPH-001"
+    },
+    {
+      "from": "OBJ-STATE-AXES-001",
+      "to": "OBJECT-LIFECYCLE-DELETION-001"
+    },
+    {
+      "from": "OBJ-STATE-AXES-001",
+      "to": "OBJECT-TAXONOMY-001"
+    },
+    {
+      "from": "OBJ-STEP-IDENTITY-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-STEP-IDENTITY-001",
+      "to": "OBJECT-FUTURE-STEP-IDENTITY-001"
+    },
+    {
+      "from": "OBJ-STEP-IDENTITY-001",
+      "to": "OBJECT-LIFECYCLE-DELETION-001"
+    },
+    {
+      "from": "OBJ-STEP-IDENTITY-001",
+      "to": "OBJECT-PROOF-REQUIREMENT-001"
+    },
+    {
+      "from": "OBJ-STEP-IDENTITY-001",
+      "to": "OBJECT-REMINDER-COMPLETION-001"
+    },
+    {
+      "from": "OBJ-SUBSTEP-IDENTITY-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-SUBSTEP-IDENTITY-001",
+      "to": "OBJECT-FUTURE-STEP-IDENTITY-001"
+    },
+    {
+      "from": "OBJ-SUBSTEP-IDENTITY-001",
+      "to": "OBJECT-LIFECYCLE-DELETION-001"
+    },
+    {
+      "from": "OBJ-SUBSTEP-IDENTITY-001",
+      "to": "OBJECT-PROOF-REQUIREMENT-001"
+    },
+    {
+      "from": "OBJ-SUBSTEP-IDENTITY-001",
+      "to": "OBJECT-REMINDER-COMPLETION-001"
+    },
+    {
+      "from": "OBJ-TYPE-BOUNDARY-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "OBJ-TYPE-BOUNDARY-001",
+      "to": "OBJECT-FUTURE-STEP-IDENTITY-001"
+    },
+    {
+      "from": "OBJ-TYPE-BOUNDARY-001",
+      "to": "OBJECT-LIFECYCLE-DELETION-001"
+    },
+    {
+      "from": "OBJ-TYPE-BOUNDARY-001",
+      "to": "OBJECT-PROOF-REQUIREMENT-001"
+    },
+    {
+      "from": "OBJ-TYPE-BOUNDARY-001",
+      "to": "OBJECT-REMINDER-COMPLETION-001"
+    },
+    {
       "from": "SPEC-APP-NAVIGATION-IA-MAP-001",
       "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
     },
@@ -1713,6 +2621,30 @@
     {
       "from": "SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001",
       "to": "SURFACE-YOU-DEPTH-001"
+    },
+    {
+      "from": "SYS-CANONICAL-GRAPH-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "SYS-CANONICAL-GRAPH-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "SYS-CANONICAL-GRAPH-001",
+      "to": "OBJECT-CANONICAL-GRAPH-001"
+    },
+    {
+      "from": "SYS-PROJECTION-OWNERSHIP-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "SYS-PROJECTION-OWNERSHIP-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "SYS-PROJECTION-OWNERSHIP-001",
+      "to": "OBJECT-CANONICAL-GRAPH-001"
     }
   ],
   "requirement_ids": [
@@ -1792,6 +2724,42 @@
     "MISSION-RUNTIME-RELATION-001",
     "MISSION-SUCCESS-001",
     "MISSION-USER-001",
+    "OBJ-ARCHIVE-SEMANTICS-001",
+    "OBJ-ATTACHMENT-IDENTITY-001",
+    "OBJ-CANONICAL-IDENTITY-001",
+    "OBJ-CANONICAL-OWNER-001",
+    "OBJ-CAPTURE-DRAFT-IDENTITY-001",
+    "OBJ-CLOSURE-IDENTITY-001",
+    "OBJ-COMMON-ENVELOPE-001",
+    "OBJ-CONVERSION-LAW-001",
+    "OBJ-DELETION-RESTORE-001",
+    "OBJ-EVENT-IDENTITY-001",
+    "OBJ-FUTURE-STEP-RECEIPT-001",
+    "OBJ-GOAL-CREATION-FAILURE-001",
+    "OBJ-GOAL-IDENTITY-001",
+    "OBJ-GOAL-LINK-001",
+    "OBJ-GOAL-PATH-IDENTITY-001",
+    "OBJ-GOAL-PATH-RECEIPT-001",
+    "OBJ-HISTORY-EVENT-IDENTITY-001",
+    "OBJ-IMPORT-DIFF-RECORD-IDENTITY-001",
+    "OBJ-LIFE-AREA-IDENTITY-001",
+    "OBJ-LIFECYCLE-SEPARATION-001",
+    "OBJ-MEMORY-RETENTION-001",
+    "OBJ-NOTE-IDENTITY-001",
+    "OBJ-NOTIFICATION-RULE-IDENTITY-001",
+    "OBJ-PROOF-IDENTITY-001",
+    "OBJ-RECEIPT-IDENTITY-001",
+    "OBJ-RECOVERY-SEGMENT-IDENTITY-001",
+    "OBJ-RECURRENCE-BOUNDARY-001",
+    "OBJ-RECURRENCE-SERIES-001",
+    "OBJ-REMINDER-IDENTITY-001",
+    "OBJ-SCHEDULE-PLACEMENT-IDENTITY-001",
+    "OBJ-SCHEDULE-STATE-001",
+    "OBJ-SOURCE-REFERENCE-IDENTITY-001",
+    "OBJ-STATE-AXES-001",
+    "OBJ-STEP-IDENTITY-001",
+    "OBJ-SUBSTEP-IDENTITY-001",
+    "OBJ-TYPE-BOUNDARY-001",
     "OBJECT-CANONICAL-GRAPH-001",
     "OBJECT-FUTURE-STEP-IDENTITY-001",
     "OBJECT-GOAL-LIFECYCLE-001",
@@ -1855,6 +2823,8 @@
     "SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001",
     "SURFACE-TODAY-IDENTITY-001",
     "SURFACE-YOU-DEPTH-001",
+    "SYS-CANONICAL-GRAPH-001",
+    "SYS-PROJECTION-OWNERSHIP-001",
     "TIME-EXTERNAL-VISIBILITY-001"
   ],
   "schema_version": 1

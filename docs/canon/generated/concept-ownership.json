@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "4dc5e1743928aa134eeccb5be77340294c15f48c8f77e6814db028c36197dfee",
+  "canon_content_sha": "2f4c85796cbbca4acbf511a55f8426e39eedc98ce254e2ea4addc59365be8400",
   "canon_revision": 1,
   "compiler_version": "0.1.0",
   "concepts": [
@@ -365,32 +365,184 @@
       "spec_id": "CONSTITUTION"
     },
     {
+      "concept": "object.archive.planning-influence",
+      "spec_id": "OBJECT-LIFE-AREA"
+    },
+    {
+      "concept": "object.attachment.identity-privacy",
+      "spec_id": "OBJECT-ATTACHMENT"
+    },
+    {
+      "concept": "object.boundary.conversion",
+      "spec_id": "OBJECT-STEP"
+    },
+    {
+      "concept": "object.boundary.recurrence",
+      "spec_id": "OBJECT-STEP"
+    },
+    {
+      "concept": "object.boundary.shared-metadata",
+      "spec_id": "OBJECT-STEP"
+    },
+    {
       "concept": "object.canonical-graph",
       "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "object.capture-draft.identity-lifecycle",
+      "spec_id": "OBJECT-SAVED-FOR-LATER-DRAFT"
+    },
+    {
+      "concept": "object.closure.identity-lifecycle",
+      "spec_id": "OBJECT-CLOSURE"
+    },
+    {
+      "concept": "object.event.identity-lifecycle",
+      "spec_id": "OBJECT-EVENT"
     },
     {
       "concept": "object.future-step-identity",
       "spec_id": "CONSTITUTION"
     },
     {
+      "concept": "object.future-step.receipt",
+      "spec_id": "OBJECT-STEP"
+    },
+    {
       "concept": "object.goal-lifecycle",
       "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "object.goal-link.primary",
+      "spec_id": "OBJECT-STEP"
+    },
+    {
+      "concept": "object.goal-path.identity-lifecycle",
+      "spec_id": "OBJECT-GOAL-PATH"
+    },
+    {
+      "concept": "object.goal-path.receipt",
+      "spec_id": "OBJECT-GOAL-PATH"
+    },
+    {
+      "concept": "object.goal.creation-failure",
+      "spec_id": "OBJECT-GOAL"
+    },
+    {
+      "concept": "object.goal.identity",
+      "spec_id": "OBJECT-GOAL"
+    },
+    {
+      "concept": "object.graph.projection-ownership",
+      "spec_id": "OBJECT-SCHEDULE-PLACEMENT"
+    },
+    {
+      "concept": "object.graph.single-canonical",
+      "spec_id": "OBJECT-SCHEDULE-PLACEMENT"
+    },
+    {
+      "concept": "object.history-event.identity",
+      "spec_id": "OBJECT-HISTORY-EVENT"
+    },
+    {
+      "concept": "object.identity-common-fields",
+      "spec_id": "OBJECT-LIFE-AREA"
+    },
+    {
+      "concept": "object.identity.canonical",
+      "spec_id": "OBJECT-LIFE-AREA"
+    },
+    {
+      "concept": "object.import-diff-record.identity-lifecycle",
+      "spec_id": "OBJECT-IMPORT-DIFF-RECORD"
+    },
+    {
+      "concept": "object.life-area.identity",
+      "spec_id": "OBJECT-LIFE-AREA"
     },
     {
       "concept": "object.lifecycle-deletion",
       "spec_id": "CONSTITUTION"
     },
     {
+      "concept": "object.lifecycle.conversion-deletion-restore",
+      "spec_id": "OBJECT-STEP"
+    },
+    {
+      "concept": "object.lifecycle.semantic-separation",
+      "spec_id": "OBJECT-STEP"
+    },
+    {
+      "concept": "object.memory.lifecycle-retention",
+      "spec_id": "OBJECT-LIFE-AREA"
+    },
+    {
+      "concept": "object.note.identity-execution",
+      "spec_id": "OBJECT-NOTE"
+    },
+    {
+      "concept": "object.notification-rule.identity",
+      "spec_id": "OBJECT-NOTIFICATION-RULE"
+    },
+    {
+      "concept": "object.owner.mutation",
+      "spec_id": "OBJECT-LIFE-AREA"
+    },
+    {
       "concept": "object.proof-requirement",
       "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "object.proof.identity",
+      "spec_id": "OBJECT-PROOF"
+    },
+    {
+      "concept": "object.receipt.identity-lifecycle",
+      "spec_id": "OBJECT-RECEIPT"
+    },
+    {
+      "concept": "object.recovery-segment.identity",
+      "spec_id": "OBJECT-RECOVERY-SEGMENT"
+    },
+    {
+      "concept": "object.recurrence.series-model",
+      "spec_id": "OBJECT-STEP"
     },
     {
       "concept": "object.reminder-completion",
       "spec_id": "CONSTITUTION"
     },
     {
+      "concept": "object.reminder.identity-capacity",
+      "spec_id": "OBJECT-REMINDER"
+    },
+    {
       "concept": "object.saved-for-later",
       "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "object.schedule-placement.identity",
+      "spec_id": "OBJECT-SCHEDULE-PLACEMENT"
+    },
+    {
+      "concept": "object.schedule-state.orthogonality",
+      "spec_id": "OBJECT-STEP"
+    },
+    {
+      "concept": "object.source-reference.identity-visibility",
+      "spec_id": "OBJECT-SOURCE-REFERENCE"
+    },
+    {
+      "concept": "object.state.orthogonal-axes",
+      "spec_id": "OBJECT-LIFE-AREA"
+    },
+    {
+      "concept": "object.step.identity-lifecycle",
+      "spec_id": "OBJECT-STEP"
+    },
+    {
+      "concept": "object.substep.identity-scheduling",
+      "spec_id": "OBJECT-STEP"
     },
     {
       "concept": "object.taxonomy",

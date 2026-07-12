@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "4dc5e1743928aa134eeccb5be77340294c15f48c8f77e6814db028c36197dfee",
+  "canon_content_sha": "2f4c85796cbbca4acbf511a55f8426e39eedc98ce254e2ea4addc59365be8400",
   "canon_revision": 1,
   "compiler_version": "0.1.0",
   "documents": [
@@ -102,6 +102,168 @@
       "spec_id": "GLOBAL-TRUST-INSPECTION",
       "status": "normative",
       "title": "Trust Inspection"
+    },
+    {
+      "kind": "object",
+      "owner_domain": "object-attachment",
+      "profile": "object-v1",
+      "source_path": "docs/canon/specifications/objects/attachment.md",
+      "spec_id": "OBJECT-ATTACHMENT",
+      "status": "normative",
+      "title": "Attachment"
+    },
+    {
+      "kind": "object",
+      "owner_domain": "object-closure",
+      "profile": "object-v1",
+      "source_path": "docs/canon/specifications/objects/closure.md",
+      "spec_id": "OBJECT-CLOSURE",
+      "status": "normative",
+      "title": "Closure"
+    },
+    {
+      "kind": "object",
+      "owner_domain": "object-event",
+      "profile": "object-v1",
+      "source_path": "docs/canon/specifications/objects/event.md",
+      "spec_id": "OBJECT-EVENT",
+      "status": "normative",
+      "title": "Event"
+    },
+    {
+      "kind": "object",
+      "owner_domain": "object-goal",
+      "profile": "object-v1",
+      "source_path": "docs/canon/specifications/objects/goal.md",
+      "spec_id": "OBJECT-GOAL",
+      "status": "normative",
+      "title": "Goal"
+    },
+    {
+      "kind": "object",
+      "owner_domain": "object-goal-path",
+      "profile": "object-v1",
+      "source_path": "docs/canon/specifications/objects/goal-path.md",
+      "spec_id": "OBJECT-GOAL-PATH",
+      "status": "normative",
+      "title": "Goal Path"
+    },
+    {
+      "kind": "object",
+      "owner_domain": "object-history-event",
+      "profile": "object-v1",
+      "source_path": "docs/canon/specifications/objects/history-event.md",
+      "spec_id": "OBJECT-HISTORY-EVENT",
+      "status": "normative",
+      "title": "History Event"
+    },
+    {
+      "kind": "object",
+      "owner_domain": "object-import-diff-record",
+      "profile": "object-v1",
+      "source_path": "docs/canon/specifications/objects/import-diff-record.md",
+      "spec_id": "OBJECT-IMPORT-DIFF-RECORD",
+      "status": "normative",
+      "title": "Import / Diff Record"
+    },
+    {
+      "kind": "object",
+      "owner_domain": "object-life-area",
+      "profile": "object-v1",
+      "source_path": "docs/canon/specifications/objects/life-area.md",
+      "spec_id": "OBJECT-LIFE-AREA",
+      "status": "normative",
+      "title": "Life Area"
+    },
+    {
+      "kind": "object",
+      "owner_domain": "object-note",
+      "profile": "object-v1",
+      "source_path": "docs/canon/specifications/objects/note.md",
+      "spec_id": "OBJECT-NOTE",
+      "status": "normative",
+      "title": "Note"
+    },
+    {
+      "kind": "object",
+      "owner_domain": "object-notification-rule",
+      "profile": "object-v1",
+      "source_path": "docs/canon/specifications/objects/notification-rule.md",
+      "spec_id": "OBJECT-NOTIFICATION-RULE",
+      "status": "normative",
+      "title": "Notification Rule"
+    },
+    {
+      "kind": "object",
+      "owner_domain": "object-proof",
+      "profile": "object-v1",
+      "source_path": "docs/canon/specifications/objects/proof.md",
+      "spec_id": "OBJECT-PROOF",
+      "status": "normative",
+      "title": "Proof"
+    },
+    {
+      "kind": "object",
+      "owner_domain": "object-receipt",
+      "profile": "object-v1",
+      "source_path": "docs/canon/specifications/objects/receipt.md",
+      "spec_id": "OBJECT-RECEIPT",
+      "status": "normative",
+      "title": "Receipt"
+    },
+    {
+      "kind": "object",
+      "owner_domain": "object-recovery-segment",
+      "profile": "object-v1",
+      "source_path": "docs/canon/specifications/objects/recovery-segment.md",
+      "spec_id": "OBJECT-RECOVERY-SEGMENT",
+      "status": "normative",
+      "title": "Recovery Segment"
+    },
+    {
+      "kind": "object",
+      "owner_domain": "object-reminder",
+      "profile": "object-v1",
+      "source_path": "docs/canon/specifications/objects/reminder.md",
+      "spec_id": "OBJECT-REMINDER",
+      "status": "normative",
+      "title": "Reminder"
+    },
+    {
+      "kind": "object",
+      "owner_domain": "object-saved-for-later-draft",
+      "profile": "object-v1",
+      "source_path": "docs/canon/specifications/objects/saved-for-later-draft.md",
+      "spec_id": "OBJECT-SAVED-FOR-LATER-DRAFT",
+      "status": "normative",
+      "title": "Saved-for-Later Draft"
+    },
+    {
+      "kind": "object",
+      "owner_domain": "object-schedule-placement",
+      "profile": "object-v1",
+      "source_path": "docs/canon/specifications/objects/schedule-placement.md",
+      "spec_id": "OBJECT-SCHEDULE-PLACEMENT",
+      "status": "normative",
+      "title": "Schedule Placement"
+    },
+    {
+      "kind": "object",
+      "owner_domain": "object-source-reference",
+      "profile": "object-v1",
+      "source_path": "docs/canon/specifications/objects/source-reference.md",
+      "spec_id": "OBJECT-SOURCE-REFERENCE",
+      "status": "normative",
+      "title": "Source Reference"
+    },
+    {
+      "kind": "object",
+      "owner_domain": "object-step",
+      "profile": "object-v1",
+      "source_path": "docs/canon/specifications/objects/step.md",
+      "spec_id": "OBJECT-STEP",
+      "status": "normative",
+      "title": "Step"
     },
     {
       "kind": "surface",
@@ -826,6 +988,330 @@
       "title": "Primary user"
     },
     {
+      "concept": "object.archive.planning-influence",
+      "line": 91,
+      "modality": "MUST",
+      "requirement_id": "OBJ-ARCHIVE-SEMANTICS-001",
+      "source_path": "docs/canon/specifications/objects/life-area.md",
+      "status": "normative",
+      "title": "Archive removes planning influence"
+    },
+    {
+      "concept": "object.attachment.identity-privacy",
+      "line": 17,
+      "modality": "MUST",
+      "requirement_id": "OBJ-ATTACHMENT-IDENTITY-001",
+      "source_path": "docs/canon/specifications/objects/attachment.md",
+      "status": "normative",
+      "title": "Durable local media, file, or link record"
+    },
+    {
+      "concept": "object.identity.canonical",
+      "line": 47,
+      "modality": "MUST",
+      "requirement_id": "OBJ-CANONICAL-IDENTITY-001",
+      "source_path": "docs/canon/specifications/objects/life-area.md",
+      "status": "normative",
+      "title": "One identity for one object"
+    },
+    {
+      "concept": "object.owner.mutation",
+      "line": 58,
+      "modality": "MUST",
+      "requirement_id": "OBJ-CANONICAL-OWNER-001",
+      "source_path": "docs/canon/specifications/objects/life-area.md",
+      "status": "normative",
+      "title": "One mutation owner"
+    },
+    {
+      "concept": "object.capture-draft.identity-lifecycle",
+      "line": 17,
+      "modality": "MUST",
+      "requirement_id": "OBJ-CAPTURE-DRAFT-IDENTITY-001",
+      "source_path": "docs/canon/specifications/objects/saved-for-later-draft.md",
+      "status": "normative",
+      "title": "Durable unresolved input"
+    },
+    {
+      "concept": "object.closure.identity-lifecycle",
+      "line": 17,
+      "modality": "MUST",
+      "requirement_id": "OBJ-CLOSURE-IDENTITY-001",
+      "source_path": "docs/canon/specifications/objects/closure.md",
+      "status": "normative",
+      "title": "Honest completion or ending event"
+    },
+    {
+      "concept": "object.identity-common-fields",
+      "line": 36,
+      "modality": "MUST",
+      "requirement_id": "OBJ-COMMON-ENVELOPE-001",
+      "source_path": "docs/canon/specifications/objects/life-area.md",
+      "status": "normative",
+      "title": "Common canonical envelope"
+    },
+    {
+      "concept": "object.boundary.conversion",
+      "line": 64,
+      "modality": "MUST",
+      "requirement_id": "OBJ-CONVERSION-LAW-001",
+      "source_path": "docs/canon/specifications/objects/step.md",
+      "status": "normative",
+      "title": "Explicit compatible conversion"
+    },
+    {
+      "concept": "object.lifecycle.conversion-deletion-restore",
+      "line": 119,
+      "modality": "MUST",
+      "requirement_id": "OBJ-DELETION-RESTORE-001",
+      "source_path": "docs/canon/specifications/objects/step.md",
+      "status": "normative",
+      "title": "Preserve lineage through conversion and deletion"
+    },
+    {
+      "concept": "object.event.identity-lifecycle",
+      "line": 30,
+      "modality": "MUST NOT",
+      "requirement_id": "OBJ-EVENT-IDENTITY-001",
+      "source_path": "docs/canon/specifications/objects/event.md",
+      "status": "normative",
+      "title": "Time-range commitment"
+    },
+    {
+      "concept": "object.future-step.receipt",
+      "line": 152,
+      "modality": "MUST",
+      "requirement_id": "OBJ-FUTURE-STEP-RECEIPT-001",
+      "source_path": "docs/canon/specifications/objects/step.md",
+      "status": "normative",
+      "title": "Future Step changes preserve one lineage"
+    },
+    {
+      "concept": "object.goal.creation-failure",
+      "line": 28,
+      "modality": "MUST",
+      "requirement_id": "OBJ-GOAL-CREATION-FAILURE-001",
+      "source_path": "docs/canon/specifications/objects/goal.md",
+      "status": "normative",
+      "title": "Preserve provisional intent"
+    },
+    {
+      "concept": "object.goal.identity",
+      "line": 17,
+      "modality": "MUST",
+      "requirement_id": "OBJ-GOAL-IDENTITY-001",
+      "source_path": "docs/canon/specifications/objects/goal.md",
+      "status": "normative",
+      "title": "Desired outcome with a living route"
+    },
+    {
+      "concept": "object.goal-link.primary",
+      "line": 141,
+      "modality": "MAY",
+      "requirement_id": "OBJ-GOAL-LINK-001",
+      "source_path": "docs/canon/specifications/objects/step.md",
+      "status": "normative",
+      "title": "Primary Goal without type collapse"
+    },
+    {
+      "concept": "object.goal-path.identity-lifecycle",
+      "line": 17,
+      "modality": "MUST",
+      "requirement_id": "OBJ-GOAL-PATH-IDENTITY-001",
+      "source_path": "docs/canon/specifications/objects/goal-path.md",
+      "status": "normative",
+      "title": "Versioned adaptive route"
+    },
+    {
+      "concept": "object.goal-path.receipt",
+      "line": 28,
+      "modality": "MUST",
+      "requirement_id": "OBJ-GOAL-PATH-RECEIPT-001",
+      "source_path": "docs/canon/specifications/objects/goal-path.md",
+      "status": "normative",
+      "title": "Material path changes are receipted"
+    },
+    {
+      "concept": "object.history-event.identity",
+      "line": 17,
+      "modality": "MUST",
+      "requirement_id": "OBJ-HISTORY-EVENT-IDENTITY-001",
+      "source_path": "docs/canon/specifications/objects/history-event.md",
+      "status": "normative",
+      "title": "Before-and-after mutation fact"
+    },
+    {
+      "concept": "object.import-diff-record.identity-lifecycle",
+      "line": 17,
+      "modality": "MUST",
+      "requirement_id": "OBJ-IMPORT-DIFF-RECORD-IDENTITY-001",
+      "source_path": "docs/canon/specifications/objects/import-diff-record.md",
+      "status": "normative",
+      "title": "External-calendar review state"
+    },
+    {
+      "concept": "object.life-area.identity",
+      "line": 25,
+      "modality": "MUST",
+      "requirement_id": "OBJ-LIFE-AREA-IDENTITY-001",
+      "source_path": "docs/canon/specifications/objects/life-area.md",
+      "status": "normative",
+      "title": "Broad editable life region"
+    },
+    {
+      "concept": "object.lifecycle.semantic-separation",
+      "line": 108,
+      "modality": "MUST NOT",
+      "requirement_id": "OBJ-LIFECYCLE-SEPARATION-001",
+      "source_path": "docs/canon/specifications/objects/step.md",
+      "status": "normative",
+      "title": "Completion is not deletion"
+    },
+    {
+      "concept": "object.memory.lifecycle-retention",
+      "line": 80,
+      "modality": "MUST",
+      "requirement_id": "OBJ-MEMORY-RETENTION-001",
+      "source_path": "docs/canon/specifications/objects/life-area.md",
+      "status": "normative",
+      "title": "Retain until governed deletion"
+    },
+    {
+      "concept": "object.note.identity-execution",
+      "line": 30,
+      "modality": "MUST NOT",
+      "requirement_id": "OBJ-NOTE-IDENTITY-001",
+      "source_path": "docs/canon/specifications/objects/note.md",
+      "status": "normative",
+      "title": "Non-executable information"
+    },
+    {
+      "concept": "object.notification-rule.identity",
+      "line": 17,
+      "modality": "MUST",
+      "requirement_id": "OBJ-NOTIFICATION-RULE-IDENTITY-001",
+      "source_path": "docs/canon/specifications/objects/notification-rule.md",
+      "status": "normative",
+      "title": "Editable local-first alert behavior"
+    },
+    {
+      "concept": "object.proof.identity",
+      "line": 17,
+      "modality": "MUST",
+      "requirement_id": "OBJ-PROOF-IDENTITY-001",
+      "source_path": "docs/canon/specifications/objects/proof.md",
+      "status": "normative",
+      "title": "User-approved evidence or reflection"
+    },
+    {
+      "concept": "object.receipt.identity-lifecycle",
+      "line": 17,
+      "modality": "MUST",
+      "requirement_id": "OBJ-RECEIPT-IDENTITY-001",
+      "source_path": "docs/canon/specifications/objects/receipt.md",
+      "status": "normative",
+      "title": "User-readable meaningful-mutation record"
+    },
+    {
+      "concept": "object.recovery-segment.identity",
+      "line": 17,
+      "modality": "MUST",
+      "requirement_id": "OBJ-RECOVERY-SEGMENT-IDENTITY-001",
+      "source_path": "docs/canon/specifications/objects/recovery-segment.md",
+      "status": "normative",
+      "title": "Inspectable reality-changed path segment"
+    },
+    {
+      "concept": "object.boundary.recurrence",
+      "line": 53,
+      "modality": "MUST",
+      "requirement_id": "OBJ-RECURRENCE-BOUNDARY-001",
+      "source_path": "docs/canon/specifications/objects/step.md",
+      "status": "normative",
+      "title": "Recurrence remains type-specific"
+    },
+    {
+      "concept": "object.recurrence.series-model",
+      "line": 97,
+      "modality": "MUST",
+      "requirement_id": "OBJ-RECURRENCE-SERIES-001",
+      "source_path": "docs/canon/specifications/objects/step.md",
+      "status": "normative",
+      "title": "Series identity and occurrence scope"
+    },
+    {
+      "concept": "object.reminder.identity-capacity",
+      "line": 30,
+      "modality": "MUST NOT",
+      "requirement_id": "OBJ-REMINDER-IDENTITY-001",
+      "source_path": "docs/canon/specifications/objects/reminder.md",
+      "status": "normative",
+      "title": "Notification intent without independent capacity"
+    },
+    {
+      "concept": "object.schedule-placement.identity",
+      "line": 17,
+      "modality": "MUST NOT",
+      "requirement_id": "OBJ-SCHEDULE-PLACEMENT-IDENTITY-001",
+      "source_path": "docs/canon/specifications/objects/schedule-placement.md",
+      "status": "normative",
+      "title": "Relationship between object and Time"
+    },
+    {
+      "concept": "object.schedule-state.orthogonality",
+      "line": 86,
+      "modality": "MUST",
+      "requirement_id": "OBJ-SCHEDULE-STATE-001",
+      "source_path": "docs/canon/specifications/objects/step.md",
+      "status": "normative",
+      "title": "Placement is orthogonal"
+    },
+    {
+      "concept": "object.source-reference.identity-visibility",
+      "line": 17,
+      "modality": "MUST",
+      "requirement_id": "OBJ-SOURCE-REFERENCE-IDENTITY-001",
+      "source_path": "docs/canon/specifications/objects/source-reference.md",
+      "status": "normative",
+      "title": "Inspectable provenance after native import"
+    },
+    {
+      "concept": "object.state.orthogonal-axes",
+      "line": 69,
+      "modality": "MUST NOT",
+      "requirement_id": "OBJ-STATE-AXES-001",
+      "source_path": "docs/canon/specifications/objects/life-area.md",
+      "status": "normative",
+      "title": "Orthogonal state axes"
+    },
+    {
+      "concept": "object.step.identity-lifecycle",
+      "line": 42,
+      "modality": "MUST",
+      "requirement_id": "OBJ-STEP-IDENTITY-001",
+      "source_path": "docs/canon/specifications/objects/step.md",
+      "status": "normative",
+      "title": "Executable unit of work"
+    },
+    {
+      "concept": "object.substep.identity-scheduling",
+      "line": 130,
+      "modality": "MUST NOT",
+      "requirement_id": "OBJ-SUBSTEP-IDENTITY-001",
+      "source_path": "docs/canon/specifications/objects/step.md",
+      "status": "normative",
+      "title": "Substep stays subordinate"
+    },
+    {
+      "concept": "object.boundary.shared-metadata",
+      "line": 75,
+      "modality": "MUST NOT",
+      "requirement_id": "OBJ-TYPE-BOUNDARY-001",
+      "source_path": "docs/canon/specifications/objects/step.md",
+      "status": "normative",
+      "title": "Shared metadata does not erase type"
+    },
+    {
       "concept": "object.canonical-graph",
       "line": 602,
       "modality": "MUST",
@@ -1391,6 +1877,24 @@
       "source_path": "docs/canon/CONSTITUTION.md",
       "status": "normative",
       "title": "You boundary"
+    },
+    {
+      "concept": "object.graph.single-canonical",
+      "line": 28,
+      "modality": "MUST",
+      "requirement_id": "SYS-CANONICAL-GRAPH-001",
+      "source_path": "docs/canon/specifications/objects/schedule-placement.md",
+      "status": "normative",
+      "title": "One graph across objects and surfaces"
+    },
+    {
+      "concept": "object.graph.projection-ownership",
+      "line": 39,
+      "modality": "MUST NOT",
+      "requirement_id": "SYS-PROJECTION-OWNERSHIP-001",
+      "source_path": "docs/canon/specifications/objects/schedule-placement.md",
+      "status": "normative",
+      "title": "Projections never own divergent copies"
     },
     {
       "concept": "surface.time-external-visibility",

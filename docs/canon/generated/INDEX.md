@@ -6,7 +6,7 @@
 - Canon revision: `1`
 - Authority state: `shadow`
 - Compiler version: `0.1.0`
-- Canon content SHA: `4dc5e1743928aa134eeccb5be77340294c15f48c8f77e6814db028c36197dfee`
+- Canon content SHA: `2f4c85796cbbca4acbf511a55f8426e39eedc98ce254e2ea4addc59365be8400`
 
 ## Specifications
 
@@ -23,6 +23,24 @@
 | `GLOBAL-MOTION` | global | Motion | `docs/canon/specifications/global/motion.md` |
 | `GLOBAL-SEARCH` | global | Search | `docs/canon/specifications/global/search.md` |
 | `GLOBAL-TRUST-INSPECTION` | global | Trust Inspection | `docs/canon/specifications/global/trust-inspection.md` |
+| `OBJECT-ATTACHMENT` | object | Attachment | `docs/canon/specifications/objects/attachment.md` |
+| `OBJECT-CLOSURE` | object | Closure | `docs/canon/specifications/objects/closure.md` |
+| `OBJECT-EVENT` | object | Event | `docs/canon/specifications/objects/event.md` |
+| `OBJECT-GOAL` | object | Goal | `docs/canon/specifications/objects/goal.md` |
+| `OBJECT-GOAL-PATH` | object | Goal Path | `docs/canon/specifications/objects/goal-path.md` |
+| `OBJECT-HISTORY-EVENT` | object | History Event | `docs/canon/specifications/objects/history-event.md` |
+| `OBJECT-IMPORT-DIFF-RECORD` | object | Import / Diff Record | `docs/canon/specifications/objects/import-diff-record.md` |
+| `OBJECT-LIFE-AREA` | object | Life Area | `docs/canon/specifications/objects/life-area.md` |
+| `OBJECT-NOTE` | object | Note | `docs/canon/specifications/objects/note.md` |
+| `OBJECT-NOTIFICATION-RULE` | object | Notification Rule | `docs/canon/specifications/objects/notification-rule.md` |
+| `OBJECT-PROOF` | object | Proof | `docs/canon/specifications/objects/proof.md` |
+| `OBJECT-RECEIPT` | object | Receipt | `docs/canon/specifications/objects/receipt.md` |
+| `OBJECT-RECOVERY-SEGMENT` | object | Recovery Segment | `docs/canon/specifications/objects/recovery-segment.md` |
+| `OBJECT-REMINDER` | object | Reminder | `docs/canon/specifications/objects/reminder.md` |
+| `OBJECT-SAVED-FOR-LATER-DRAFT` | object | Saved-for-Later Draft | `docs/canon/specifications/objects/saved-for-later-draft.md` |
+| `OBJECT-SCHEDULE-PLACEMENT` | object | Schedule Placement | `docs/canon/specifications/objects/schedule-placement.md` |
+| `OBJECT-SOURCE-REFERENCE` | object | Source Reference | `docs/canon/specifications/objects/source-reference.md` |
+| `OBJECT-STEP` | object | Step | `docs/canon/specifications/objects/step.md` |
 | `SURFACE-GOALS` | surface | Goals | `docs/canon/specifications/surfaces/goals.md` |
 | `SURFACE-TIME` | surface | Time | `docs/canon/specifications/surfaces/time.md` |
 | `SURFACE-TODAY` | surface | Today | `docs/canon/specifications/surfaces/today.md` |
@@ -108,6 +126,42 @@
 | `MISSION-RUNTIME-RELATION-001` | MUST | `mission.runtime-relation` | `docs/canon/CONSTITUTION.md:246` |
 | `MISSION-SUCCESS-001` | MUST | `mission.success` | `docs/canon/CONSTITUTION.md:323` |
 | `MISSION-USER-001` | MUST | `mission.user` | `docs/canon/CONSTITUTION.md:334` |
+| `OBJ-ARCHIVE-SEMANTICS-001` | MUST | `object.archive.planning-influence` | `docs/canon/specifications/objects/life-area.md:91` |
+| `OBJ-ATTACHMENT-IDENTITY-001` | MUST | `object.attachment.identity-privacy` | `docs/canon/specifications/objects/attachment.md:17` |
+| `OBJ-CANONICAL-IDENTITY-001` | MUST | `object.identity.canonical` | `docs/canon/specifications/objects/life-area.md:47` |
+| `OBJ-CANONICAL-OWNER-001` | MUST | `object.owner.mutation` | `docs/canon/specifications/objects/life-area.md:58` |
+| `OBJ-CAPTURE-DRAFT-IDENTITY-001` | MUST | `object.capture-draft.identity-lifecycle` | `docs/canon/specifications/objects/saved-for-later-draft.md:17` |
+| `OBJ-CLOSURE-IDENTITY-001` | MUST | `object.closure.identity-lifecycle` | `docs/canon/specifications/objects/closure.md:17` |
+| `OBJ-COMMON-ENVELOPE-001` | MUST | `object.identity-common-fields` | `docs/canon/specifications/objects/life-area.md:36` |
+| `OBJ-CONVERSION-LAW-001` | MUST | `object.boundary.conversion` | `docs/canon/specifications/objects/step.md:64` |
+| `OBJ-DELETION-RESTORE-001` | MUST | `object.lifecycle.conversion-deletion-restore` | `docs/canon/specifications/objects/step.md:119` |
+| `OBJ-EVENT-IDENTITY-001` | MUST NOT | `object.event.identity-lifecycle` | `docs/canon/specifications/objects/event.md:30` |
+| `OBJ-FUTURE-STEP-RECEIPT-001` | MUST | `object.future-step.receipt` | `docs/canon/specifications/objects/step.md:152` |
+| `OBJ-GOAL-CREATION-FAILURE-001` | MUST | `object.goal.creation-failure` | `docs/canon/specifications/objects/goal.md:28` |
+| `OBJ-GOAL-IDENTITY-001` | MUST | `object.goal.identity` | `docs/canon/specifications/objects/goal.md:17` |
+| `OBJ-GOAL-LINK-001` | MAY | `object.goal-link.primary` | `docs/canon/specifications/objects/step.md:141` |
+| `OBJ-GOAL-PATH-IDENTITY-001` | MUST | `object.goal-path.identity-lifecycle` | `docs/canon/specifications/objects/goal-path.md:17` |
+| `OBJ-GOAL-PATH-RECEIPT-001` | MUST | `object.goal-path.receipt` | `docs/canon/specifications/objects/goal-path.md:28` |
+| `OBJ-HISTORY-EVENT-IDENTITY-001` | MUST | `object.history-event.identity` | `docs/canon/specifications/objects/history-event.md:17` |
+| `OBJ-IMPORT-DIFF-RECORD-IDENTITY-001` | MUST | `object.import-diff-record.identity-lifecycle` | `docs/canon/specifications/objects/import-diff-record.md:17` |
+| `OBJ-LIFE-AREA-IDENTITY-001` | MUST | `object.life-area.identity` | `docs/canon/specifications/objects/life-area.md:25` |
+| `OBJ-LIFECYCLE-SEPARATION-001` | MUST NOT | `object.lifecycle.semantic-separation` | `docs/canon/specifications/objects/step.md:108` |
+| `OBJ-MEMORY-RETENTION-001` | MUST | `object.memory.lifecycle-retention` | `docs/canon/specifications/objects/life-area.md:80` |
+| `OBJ-NOTE-IDENTITY-001` | MUST NOT | `object.note.identity-execution` | `docs/canon/specifications/objects/note.md:30` |
+| `OBJ-NOTIFICATION-RULE-IDENTITY-001` | MUST | `object.notification-rule.identity` | `docs/canon/specifications/objects/notification-rule.md:17` |
+| `OBJ-PROOF-IDENTITY-001` | MUST | `object.proof.identity` | `docs/canon/specifications/objects/proof.md:17` |
+| `OBJ-RECEIPT-IDENTITY-001` | MUST | `object.receipt.identity-lifecycle` | `docs/canon/specifications/objects/receipt.md:17` |
+| `OBJ-RECOVERY-SEGMENT-IDENTITY-001` | MUST | `object.recovery-segment.identity` | `docs/canon/specifications/objects/recovery-segment.md:17` |
+| `OBJ-RECURRENCE-BOUNDARY-001` | MUST | `object.boundary.recurrence` | `docs/canon/specifications/objects/step.md:53` |
+| `OBJ-RECURRENCE-SERIES-001` | MUST | `object.recurrence.series-model` | `docs/canon/specifications/objects/step.md:97` |
+| `OBJ-REMINDER-IDENTITY-001` | MUST NOT | `object.reminder.identity-capacity` | `docs/canon/specifications/objects/reminder.md:30` |
+| `OBJ-SCHEDULE-PLACEMENT-IDENTITY-001` | MUST NOT | `object.schedule-placement.identity` | `docs/canon/specifications/objects/schedule-placement.md:17` |
+| `OBJ-SCHEDULE-STATE-001` | MUST | `object.schedule-state.orthogonality` | `docs/canon/specifications/objects/step.md:86` |
+| `OBJ-SOURCE-REFERENCE-IDENTITY-001` | MUST | `object.source-reference.identity-visibility` | `docs/canon/specifications/objects/source-reference.md:17` |
+| `OBJ-STATE-AXES-001` | MUST NOT | `object.state.orthogonal-axes` | `docs/canon/specifications/objects/life-area.md:69` |
+| `OBJ-STEP-IDENTITY-001` | MUST | `object.step.identity-lifecycle` | `docs/canon/specifications/objects/step.md:42` |
+| `OBJ-SUBSTEP-IDENTITY-001` | MUST NOT | `object.substep.identity-scheduling` | `docs/canon/specifications/objects/step.md:130` |
+| `OBJ-TYPE-BOUNDARY-001` | MUST NOT | `object.boundary.shared-metadata` | `docs/canon/specifications/objects/step.md:75` |
 | `OBJECT-CANONICAL-GRAPH-001` | MUST | `object.canonical-graph` | `docs/canon/CONSTITUTION.md:602` |
 | `OBJECT-FUTURE-STEP-IDENTITY-001` | MUST | `object.future-step-identity` | `docs/canon/CONSTITUTION.md:615` |
 | `OBJECT-GOAL-LIFECYCLE-001` | MUST | `object.goal-lifecycle` | `docs/canon/CONSTITUTION.md:559` |
@@ -171,4 +225,6 @@
 | `SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001` | MUST | `surface.you.visual-authority` | `docs/canon/specifications/surfaces/you.md:84` |
 | `SURFACE-TODAY-IDENTITY-001` | MUST | `surface.today-primary-identity` | `docs/canon/CONSTITUTION.md:496` |
 | `SURFACE-YOU-DEPTH-001` | MUST | `surface.you-depth` | `docs/canon/CONSTITUTION.md:509` |
+| `SYS-CANONICAL-GRAPH-001` | MUST | `object.graph.single-canonical` | `docs/canon/specifications/objects/schedule-placement.md:28` |
+| `SYS-PROJECTION-OWNERSHIP-001` | MUST NOT | `object.graph.projection-ownership` | `docs/canon/specifications/objects/schedule-placement.md:39` |
 | `TIME-EXTERNAL-VISIBILITY-001` | MUST | `surface.time-external-visibility` | `docs/canon/CONSTITUTION.md:641` |

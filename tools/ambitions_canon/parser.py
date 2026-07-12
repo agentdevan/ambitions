@@ -12,6 +12,7 @@ from tools.ambitions_canon.model import (
     DocumentKind,
     Modality,
     NotApplicable,
+    ObjectBoundary,
     Requirement,
 )
 
@@ -47,7 +48,7 @@ REQUIRED_FRONT_MATTER = {
     "depends_on": list,
     "source_owners": list,
 }
-OPTIONAL_FRONT_MATTER = frozenset({"profile", "not_applicable"})
+OPTIONAL_FRONT_MATTER = frozenset({"profile", "not_applicable", "object_boundary"})
 FRONT_MATTER_FIELDS = frozenset(REQUIRED_FRONT_MATTER) | OPTIONAL_FRONT_MATTER
 STRING_FRONT_MATTER = (
     "spec_id",
@@ -70,6 +71,25 @@ REQUIRED_FIELDS = (
     "Status",
     "Verification",
     "Supersedes",
+)
+OBJECT_BOUNDARY_CAPABILITIES = (
+    "executable_completable",
+    "occupies_duration",
+    "consumes_capacity",
+    "due_date",
+    "recurrence",
+    "substeps",
+    "goal_path_node",
+    "proof_requirement",
+    "attendees_rsvp",
+    "alerts",
+    "type_conversion",
+)
+OBJECT_BOUNDARY_LAWS = (
+    "schedule_placement_nonduplication",
+    "future_step_singularity",
+    "reminder_acknowledgement_noncompletion",
+    "proof_receipt_separation",
 )
 
 
@@ -175,6 +195,7 @@ def parse_canon_document(path: Path, text: str) -> CanonDocument:
         not_applicable=_not_applicable(metadata, path),
         requirements=requirements,
         source_path=path,
+        object_boundary=_object_boundary(metadata, path),
     )
 
 
@@ -279,6 +300,61 @@ def _validate_front_matter(metadata: dict[str, object], path: Path) -> None:
         )
 
     _not_applicable(metadata, path)
+    _object_boundary(metadata, path)
+
+
+def _object_boundary(
+    metadata: dict[str, object], path: Path
+) -> ObjectBoundary | None:
+    raw = metadata.get("object_boundary")
+    if raw is None:
+        return None
+    if metadata.get("kind") != DocumentKind.OBJECT.value or not isinstance(raw, dict):
+        raise CanonError(
+            "CANON_OBJECT_BOUNDARY_INVALID",
+            "object_boundary requires kind=object and a TOML table",
+            path,
+            1,
+        )
+    required = set(OBJECT_BOUNDARY_CAPABILITIES) | {"laws"}
+    if set(raw) != required:
+        raise CanonError(
+            "CANON_OBJECT_BOUNDARY_INVALID",
+            "object_boundary must contain exactly 11 capabilities and laws",
+            path,
+            1,
+        )
+    capabilities: list[tuple[str, str]] = []
+    for key in OBJECT_BOUNDARY_CAPABILITIES:
+        value = raw[key]
+        if not isinstance(value, str) or not value.strip() or value != value.strip():
+            raise CanonError(
+                "CANON_OBJECT_BOUNDARY_INVALID",
+                f"object_boundary.{key} must be a trimmed non-empty string",
+                path,
+                1,
+            )
+        capabilities.append((key, value))
+    laws = raw["laws"]
+    if not isinstance(laws, dict) or set(laws) != set(OBJECT_BOUNDARY_LAWS):
+        raise CanonError(
+            "CANON_OBJECT_BOUNDARY_INVALID",
+            "object_boundary.laws must contain exactly four stable law references",
+            path,
+            1,
+        )
+    law_items: list[tuple[str, str]] = []
+    for key in OBJECT_BOUNDARY_LAWS:
+        value = laws[key]
+        if not isinstance(value, str) or not value.strip() or value != value.strip():
+            raise CanonError(
+                "CANON_OBJECT_BOUNDARY_INVALID",
+                f"object_boundary.laws.{key} must be a stable requirement ID",
+                path,
+                1,
+            )
+        law_items.append((key, value))
+    return ObjectBoundary(tuple(capabilities), tuple(law_items))
 
 
 def _not_applicable(

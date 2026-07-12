@@ -14,6 +14,22 @@ FIXTURES = Path(__file__).with_name("fixtures")
 
 
 class ParserTests(unittest.TestCase):
+    OBJECT_BOUNDARY = (
+        '[object_boundary]\n'
+        'executable_completable = "Yes"\n'
+        'occupies_duration = "Optional"\n'
+        'consumes_capacity = "When scheduled"\n'
+        'due_date = "Yes"\n'
+        'recurrence = "Repeatable Step series"\n'
+        'substeps = "Yes"\n'
+        'goal_path_node = "Yes"\n'
+        'proof_requirement = "Optional/suggested/required"\n'
+        'attendees_rsvp = "No"\n'
+        'alerts = "Optional"\n'
+        'type_conversion = "Explicit, receipt-backed"\n'
+        'laws = { schedule_placement_nonduplication = "OBJ-SCHEDULE-PLACEMENT-IDENTITY-001", future_step_singularity = "OBJECT-FUTURE-STEP-IDENTITY-001", reminder_acknowledgement_noncompletion = "OBJECT-REMINDER-COMPLETION-001", proof_receipt_separation = "OBJECT-PROOF-REQUIREMENT-001" }\n'
+    )
+
     def fixture(self, name: str) -> tuple[Path, str]:
         path = FIXTURES / name
         return path, path.read_text(encoding="utf-8")
@@ -158,6 +174,47 @@ class ParserTests(unittest.TestCase):
             "This specification performs no runtime work.",
         )
         self.assertEqual(document.not_applicable[0].owner, "Product")
+
+    def test_object_boundary_front_matter_parses_closed_structured_contract(self):
+        path, text = self.fixture("valid-surface.md")
+        text = text.replace('kind = "surface"', 'kind = "object"')
+        text = text.replace("+++\n\n## Purpose", self.OBJECT_BOUNDARY + "+++\n\n## Purpose", 1)
+
+        document = parse_canon_document(path, text)
+
+        self.assertEqual(
+            dict(document.object_boundary.capabilities),
+            {
+                "alerts": "Optional",
+                "attendees_rsvp": "No",
+                "consumes_capacity": "When scheduled",
+                "due_date": "Yes",
+                "executable_completable": "Yes",
+                "goal_path_node": "Yes",
+                "occupies_duration": "Optional",
+                "proof_requirement": "Optional/suggested/required",
+                "recurrence": "Repeatable Step series",
+                "substeps": "Yes",
+                "type_conversion": "Explicit, receipt-backed",
+            },
+        )
+        self.assertEqual(len(document.object_boundary.laws), 4)
+
+    def test_object_boundary_rejects_missing_extra_and_invalid_capability(self):
+        path, valid = self.fixture("valid-surface.md")
+        valid = valid.replace('kind = "surface"', 'kind = "object"')
+        valid = valid.replace("+++\n\n## Purpose", self.OBJECT_BOUNDARY + "+++\n\n## Purpose", 1)
+        cases = {
+            "missing": valid.replace('alerts = "Optional"\n', ""),
+            "extra": valid.replace('alerts = "Optional"\n', 'alerts = "Optional"\nscore = "forbidden"\n'),
+            "invalid": valid.replace('alerts = "Optional"', 'alerts = ""'),
+        }
+
+        for name, text in cases.items():
+            with self.subTest(name=name):
+                with self.assertRaises(CanonError) as raised:
+                    parse_canon_document(path, text)
+                self.assertEqual(raised.exception.code, "CANON_OBJECT_BOUNDARY_INVALID")
 
     def test_requirement_contract_rejects_duplicate_unique_array_members(self):
         path, text = self.fixture("valid-surface.md")

@@ -165,6 +165,16 @@ class NotApplicable:
 
 
 @dataclass(frozen=True, slots=True)
+class ObjectBoundary:
+    capabilities: tuple[tuple[str, str], ...]
+    laws: tuple[tuple[str, str], ...]
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "capabilities", tuple(self.capabilities))
+        object.__setattr__(self, "laws", tuple(self.laws))
+
+
+@dataclass(frozen=True, slots=True)
 class CanonDocument:
     spec_id: str
     title: str
@@ -182,6 +192,7 @@ class CanonDocument:
     requirements: tuple[Requirement, ...]
     source_path: Path
     source_bytes: bytes | None = None
+    object_boundary: ObjectBoundary | None = None
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "owns_concepts", tuple(self.owns_concepts))

@@ -244,6 +244,513 @@
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-LFT-0203"
     },
     {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-001",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-001",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-LIFE-AREA-IDENTITY-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-003",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-003",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-GOAL-PATH-IDENTITY-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-004",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-004",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-STEP-IDENTITY-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-005",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-005",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-EVENT-IDENTITY-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-006",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-006",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-REMINDER-IDENTITY-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-007",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-007",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-NOTE-IDENTITY-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-008",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-008",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-CAPTURE-DRAFT-IDENTITY-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-010",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-010",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-ATTACHMENT-IDENTITY-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-011",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-011",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-CLOSURE-IDENTITY-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-012",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-012",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-SCHEDULE-PLACEMENT-IDENTITY-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-013",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-013",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-NOTIFICATION-RULE-IDENTITY-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-014",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-014",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-RECEIPT-IDENTITY-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-015",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-015",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-HISTORY-EVENT-IDENTITY-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-016",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-016",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-SOURCE-REFERENCE-IDENTITY-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-017",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-017",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-RECOVERY-SEGMENT-IDENTITY-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-018",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-018",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-IMPORT-DIFF-RECORD-IDENTITY-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-019",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-019",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-COMMON-ENVELOPE-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-021",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-021",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-RECURRENCE-BOUNDARY-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-022",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-022",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-CONVERSION-LAW-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-023",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-023",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-TYPE-BOUNDARY-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-024",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-024",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "SYS-CANONICAL-GRAPH-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-025",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-025",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "SYS-PROJECTION-OWNERSHIP-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-026",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-026",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-SCHEDULE-STATE-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-027",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-027",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-RECURRENCE-SERIES-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-028",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-028",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-LIFECYCLE-SEPARATION-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-029",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-029",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-DELETION-RESTORE-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-030",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-030",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-CANONICAL-IDENTITY-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-031",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-031",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-CANONICAL-OWNER-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-032",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-032",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-STATE-AXES-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-033",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-033",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-SUBSTEP-IDENTITY-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-035",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-035",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-CONVERSION-LAW-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-036",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-036",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-GOAL-LINK-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-037",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-037",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-DELETION-RESTORE-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-052",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-052",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-MEMORY-RETENTION-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-053",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-053",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-ARCHIVE-SEMANTICS-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-054",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-054",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-DELETION-RESTORE-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-056",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-056",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-GOAL-CREATION-FAILURE-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-057",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-057",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-GOAL-PATH-RECEIPT-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
+      "schema_version": 1,
+      "reference_id": "MIGRATION-TARGET-CLAIM-OBJ-059",
+      "authority_class": "source_and_tests",
+      "reference_kind": "source",
+      "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-059",
+      "revision": "8dc8de70e4f4eb77d07f4b1b43eea93cc660e1d369eb0161921e3df42c885109",
+      "requirement_ids": [
+        "OBJ-FUTURE-STEP-RECEIPT-001"
+      ],
+      "approval_state": "approved",
+      "implementation_status": "materialized shadow specification target"
+    },
+    {
       "approval_state": "approved",
       "authority_class": "source_and_tests",
       "implementation_status": "materialized shadow specification target",
@@ -486,6 +993,42 @@
     "MISSION-RUNTIME-RELATION-001",
     "MISSION-SUCCESS-001",
     "MISSION-USER-001",
+    "OBJ-ARCHIVE-SEMANTICS-001",
+    "OBJ-ATTACHMENT-IDENTITY-001",
+    "OBJ-CANONICAL-IDENTITY-001",
+    "OBJ-CANONICAL-OWNER-001",
+    "OBJ-CAPTURE-DRAFT-IDENTITY-001",
+    "OBJ-CLOSURE-IDENTITY-001",
+    "OBJ-COMMON-ENVELOPE-001",
+    "OBJ-CONVERSION-LAW-001",
+    "OBJ-DELETION-RESTORE-001",
+    "OBJ-EVENT-IDENTITY-001",
+    "OBJ-FUTURE-STEP-RECEIPT-001",
+    "OBJ-GOAL-CREATION-FAILURE-001",
+    "OBJ-GOAL-IDENTITY-001",
+    "OBJ-GOAL-LINK-001",
+    "OBJ-GOAL-PATH-IDENTITY-001",
+    "OBJ-GOAL-PATH-RECEIPT-001",
+    "OBJ-HISTORY-EVENT-IDENTITY-001",
+    "OBJ-IMPORT-DIFF-RECORD-IDENTITY-001",
+    "OBJ-LIFE-AREA-IDENTITY-001",
+    "OBJ-LIFECYCLE-SEPARATION-001",
+    "OBJ-MEMORY-RETENTION-001",
+    "OBJ-NOTE-IDENTITY-001",
+    "OBJ-NOTIFICATION-RULE-IDENTITY-001",
+    "OBJ-PROOF-IDENTITY-001",
+    "OBJ-RECEIPT-IDENTITY-001",
+    "OBJ-RECOVERY-SEGMENT-IDENTITY-001",
+    "OBJ-RECURRENCE-BOUNDARY-001",
+    "OBJ-RECURRENCE-SERIES-001",
+    "OBJ-REMINDER-IDENTITY-001",
+    "OBJ-SCHEDULE-PLACEMENT-IDENTITY-001",
+    "OBJ-SCHEDULE-STATE-001",
+    "OBJ-SOURCE-REFERENCE-IDENTITY-001",
+    "OBJ-STATE-AXES-001",
+    "OBJ-STEP-IDENTITY-001",
+    "OBJ-SUBSTEP-IDENTITY-001",
+    "OBJ-TYPE-BOUNDARY-001",
     "OBJECT-CANONICAL-GRAPH-001",
     "OBJECT-FUTURE-STEP-IDENTITY-001",
     "OBJECT-GOAL-LIFECYCLE-001",
@@ -549,6 +1092,8 @@
     "SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001",
     "SURFACE-TODAY-IDENTITY-001",
     "SURFACE-YOU-DEPTH-001",
+    "SYS-CANONICAL-GRAPH-001",
+    "SYS-PROJECTION-OWNERSHIP-001",
     "TIME-EXTERNAL-VISIBILITY-001"
   ],
   "schema_version": 1,
