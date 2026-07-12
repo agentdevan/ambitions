@@ -42,6 +42,33 @@ def render_outputs(registry: CanonRegistry) -> Mapping[Path, bytes]:
     entries: list[tuple[str, bytes]] = [
         ("MANIFEST.toml", registry.manifest.source_bytes)
     ]
+    if registry.supersession_ledger_bytes is None:
+        raise CanonError(
+            "CANON_PROVENANCE_MISSING",
+            "loaded supersession ledger bytes are required for rendering",
+            registry.manifest.source_path,
+        )
+    entries.append(
+        (
+            "decisions/SUPERSESSION_LEDGER.toml",
+            registry.supersession_ledger_bytes,
+        )
+    )
+    if (
+        registry.reference_index is None
+        or registry.reference_index.source_bytes is None
+    ):
+        raise CanonError(
+            "CANON_PROVENANCE_MISSING",
+            "loaded impact reference index bytes are required for rendering",
+            registry.manifest.source_path,
+        )
+    entries.append(
+        (
+            "migration/impact-reference-index.json",
+            registry.reference_index.source_bytes,
+        )
+    )
     canon_prefix = Path("docs/canon")
     for document in registry.documents:
         if document.source_bytes is None:
@@ -59,15 +86,55 @@ def render_outputs(registry: CanonRegistry) -> Mapping[Path, bytes]:
                 document.source_path,
             ) from exc
         entries.append((relative.as_posix(), document.source_bytes))
+    from tools.ambitions_canon.conflicts import (
+        docket_filename,
+        load_conflict_dockets,
+        render_conflict_docket,
+        validate_conflict_repository,
+    )
+
+    dockets = load_conflict_dockets(registry.manifest.repository_root)
+    conflict_snapshot = validate_conflict_repository(
+        registry.manifest.repository_root,
+        dockets,
+        (item.requirement_id for item in registry.requirements),
+        registry.supersession_entries,
+    )
+    entries.extend(
+        (
+            f"decisions/open/{docket_filename(docket).as_posix()}",
+            render_conflict_docket(docket).encode("utf-8"),
+        )
+        for docket in dockets
+    )
+    if conflict_snapshot is not None:
+        entries.extend(
+            (
+                (
+                    "migration/source-catalog.json",
+                    conflict_snapshot.source_catalog_bytes,
+                ),
+                (
+                    "migration/claim-dispositions.json",
+                    conflict_snapshot.claim_dispositions_bytes,
+                ),
+                (
+                    "migration/conflict-docket-baseline.json",
+                    conflict_snapshot.baseline_bytes,
+                ),
+            )
+        )
     return _render_outputs(
         registry,
         _content_sha_entries(entries),
+        dockets,
     )
 
 
 def _render_outputs(
     registry: CanonRegistry,
     content_sha: str,
+    dockets: tuple[object, ...] = (),
 ) -> Mapping[Path, bytes]:
     metadata = {
         "schema_version": 1,
@@ -155,7 +222,7 @@ def _render_outputs(
         ),
         Path("specification-coverage.md"): _coverage(metadata, documents),
         Path("unresolved-conflicts.md"): _unresolved_conflicts(
-            metadata, documents
+            metadata, documents, dockets
         ),
         Path("law-source-map.json"): _law_map(
             metadata, requirements, documents
@@ -179,7 +246,7 @@ def _render_outputs(
         ),
         Path("external-reference-impact.md"): _external_impact(metadata),
         Path("supersession-manifest.json"): _supersession_manifest(
-            metadata, requirements
+            metadata, registry
         ),
     }
 
@@ -299,7 +366,17 @@ def _coverage(metadata, documents) -> bytes:
     return _markdown(lines)
 
 
-def _unresolved_conflicts(metadata, documents) -> bytes:
+def _unresolved_conflicts(metadata, documents, dockets=()) -> bytes:
+    if dockets:
+        from tools.ambitions_canon.conflicts import render_unresolved_report
+
+        return render_unresolved_report(
+            dockets,
+            canon_revision=int(metadata["canon_revision"]),
+            canon_content_sha=str(metadata["canon_content_sha"]),
+            compiler_version=str(metadata["compiler_version"]),
+            authority_state=str(metadata["authority_state"]),
+        )
     lines = _markdown_header("Ambitions Unresolved Conflicts", metadata)
     lines.extend(
         [
@@ -363,13 +440,17 @@ def _markdown_cell(value: object) -> str:
     )
 
 
-def _supersession_manifest(metadata, requirements) -> bytes:
-    rows = sorted(
-        (
-            {"retired_id": retired, "replacement_id": requirement.requirement_id}
-            for requirement in requirements
-            for retired in requirement.supersedes
-        ),
-        key=lambda row: (row["retired_id"], row["replacement_id"]),
-    )
+def _supersession_manifest(metadata, registry) -> bytes:
+    rows = [
+        {
+            "conflict_id": entry.conflict_id,
+            "old_ids": list(entry.old_ids),
+            "resulting_id": entry.resulting_id,
+            "decision_date": entry.decision_date,
+            "owner": entry.owner,
+            "commit": entry.commit,
+            "superseded_artifacts": list(entry.superseded_artifacts),
+        }
+        for entry in registry.supersession_entries
+    ]
     return stable_json({**metadata, "supersessions": rows})

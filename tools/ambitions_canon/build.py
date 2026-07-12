@@ -9,7 +9,7 @@ import os
 import secrets
 import stat
 import sys
-from collections.abc import Callable, Iterable, Mapping
+from collections.abc import Callable, Iterable, Mapping, Sequence
 from contextlib import contextmanager
 from pathlib import Path, PurePosixPath
 
@@ -65,6 +65,20 @@ def canon_content_sha(
     entries: list[tuple[str, bytes]] = [
         ("MANIFEST.toml", _read_confined_bytes(canon_root, Path("MANIFEST.toml")))
     ]
+    ledger_path = Path("decisions/SUPERSESSION_LEDGER.toml")
+    try:
+        ledger_bytes = _read_confined_bytes(canon_root, ledger_path)
+    except CanonError:
+        ledger_bytes = None
+    if ledger_bytes is not None:
+        entries.append((ledger_path.as_posix(), ledger_bytes))
+    index_path = Path("migration/impact-reference-index.json")
+    try:
+        index_bytes = _read_confined_bytes(canon_root, index_path)
+    except CanonError:
+        index_bytes = None
+    if index_bytes is not None:
+        entries.append((index_path.as_posix(), index_bytes))
     for source_path in source_paths:
         absolute = _normalized_absolute(source_path)
         try:
@@ -472,13 +486,35 @@ def check_outputs(
 def build_canon(root: Path, *, check: bool = False) -> tuple[Finding, ...]:
     """Render one loaded snapshot and verify it across output commit/check."""
 
+    from tools.ambitions_canon.conflicts import (
+        load_conflict_dockets,
+        validate_conflict_repository,
+    )
+
     registry = _load_audited_registry(root)
-    snapshot_sha = _registry_content_sha(registry)
-    outputs = _render_outputs(registry, snapshot_sha)
+    dockets = load_conflict_dockets(root)
+    conflict_snapshot = validate_conflict_repository(
+        root,
+        dockets,
+        (item.requirement_id for item in registry.requirements),
+        registry.supersession_entries,
+    )
+    snapshot_sha = _registry_content_sha(registry, dockets, conflict_snapshot)
+    outputs = _render_outputs(registry, snapshot_sha, dockets)
 
     def assert_snapshot_current() -> None:
         current = _load_audited_registry(root)
-        if _registry_content_sha(current) != snapshot_sha:
+        current_dockets = load_conflict_dockets(root)
+        current_conflicts = validate_conflict_repository(
+            root,
+            current_dockets,
+            (item.requirement_id for item in current.requirements),
+            current.supersession_entries,
+        )
+        if (
+            _registry_content_sha(current, current_dockets, current_conflicts)
+            != snapshot_sha
+        ):
             raise CanonError(
                 "CANON_CONTENT_CHANGED",
                 "canonical source changed during generation",
@@ -502,6 +538,13 @@ def build_canon(root: Path, *, check: bool = False) -> tuple[Finding, ...]:
 def _load_audited_registry(root: Path) -> CanonRegistry:
     manifest = load_manifest(root)
     documents = load_documents(root, manifest)
+    current_manifest = load_manifest(root)
+    if current_manifest.source_bytes != manifest.source_bytes:
+        raise CanonError(
+            "CANON_CONTENT_CHANGED",
+            "canonical source changed during generation",
+            manifest.source_path,
+        )
     registry = build_registry(manifest, documents)
     findings = audit_registry(registry)
     if findings:
@@ -510,7 +553,11 @@ def _load_audited_registry(root: Path) -> CanonRegistry:
     return registry
 
 
-def _registry_content_sha(registry: CanonRegistry) -> str:
+def _registry_content_sha(
+    registry: CanonRegistry,
+    dockets: Sequence[object] = (),
+    conflict_snapshot: object | None = None,
+) -> str:
     if registry.manifest.source_bytes is None:
         raise CanonError(
             "CANON_PROVENANCE_MISSING",
@@ -520,6 +567,33 @@ def _registry_content_sha(registry: CanonRegistry) -> str:
     entries: list[tuple[str, bytes]] = [
         ("MANIFEST.toml", registry.manifest.source_bytes)
     ]
+    if registry.supersession_ledger_bytes is None:
+        raise CanonError(
+            "CANON_PROVENANCE_MISSING",
+            "loaded supersession ledger bytes are unavailable",
+            registry.manifest.source_path,
+        )
+    entries.append(
+        (
+            "decisions/SUPERSESSION_LEDGER.toml",
+            registry.supersession_ledger_bytes,
+        )
+    )
+    if (
+        registry.reference_index is None
+        or registry.reference_index.source_bytes is None
+    ):
+        raise CanonError(
+            "CANON_PROVENANCE_MISSING",
+            "loaded impact reference index bytes are unavailable",
+            registry.manifest.source_path,
+        )
+    entries.append(
+        (
+            "migration/impact-reference-index.json",
+            registry.reference_index.source_bytes,
+        )
+    )
     prefix = Path("docs/canon")
     for document in registry.documents:
         if document.source_bytes is None:
@@ -537,6 +611,36 @@ def _registry_content_sha(registry: CanonRegistry) -> str:
                 document.source_path,
             ) from exc
         entries.append((relative.as_posix(), document.source_bytes))
+    if dockets:
+        from tools.ambitions_canon.conflicts import (
+            docket_filename,
+            render_conflict_docket,
+        )
+
+        entries.extend(
+            (
+                f"decisions/open/{docket_filename(docket).as_posix()}",
+                render_conflict_docket(docket).encode("utf-8"),
+            )
+            for docket in dockets
+        )
+    if conflict_snapshot is not None:
+        entries.extend(
+            (
+                (
+                    "migration/source-catalog.json",
+                    conflict_snapshot.source_catalog_bytes,
+                ),
+                (
+                    "migration/claim-dispositions.json",
+                    conflict_snapshot.claim_dispositions_bytes,
+                ),
+                (
+                    "migration/conflict-docket-baseline.json",
+                    conflict_snapshot.baseline_bytes,
+                ),
+            )
+        )
     return _content_sha_entries(entries)
 
 

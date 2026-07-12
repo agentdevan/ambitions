@@ -23,6 +23,7 @@ from tools.ambitions_canon.model import (
     Requirement,
 )
 from tools.ambitions_canon.registry import build_registry
+from tools.ambitions_canon.reference_index import parse_reference_index_bytes
 from tools.ambitions_canon.task_pack import (
     PACK_BUDGETS,
     PACK_SECTION_ORDER,
@@ -36,6 +37,7 @@ from tools.ambitions_canon.task_pack import (
     write_task_pack,
 )
 from tests.canon.test_audit import markdown_document
+from tests.canon.canon_test_support import write_required_governance_artifacts
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -177,10 +179,39 @@ def sample_registry(*, oversized_body: str | None = None, reverse: bool = False)
         normative_files=(),
         generated_files=(),
         source_path=Path("docs/canon/MANIFEST.toml"),
-        repository_root=ROOT,
+        repository_root=None,
         source_bytes=b"manifest\n",
     )
-    return build_registry(manifest, documents)
+    built = build_registry(manifest, documents)
+    indexed_ids = tuple(
+        sorted(requirement.requirement_id for requirement in built.requirements)
+    )
+    reference_bytes = (
+        json.dumps(
+            {
+                "authority_references": [],
+                "canon_revision": 7,
+                "indexed_requirement_ids": indexed_ids,
+                "schema_version": 1,
+                "specification_gaps": [],
+                "task_packs": [],
+            },
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n"
+    ).encode()
+    return replace(
+        built,
+        supersession_ledger_complete=True,
+        supersession_ledger_bytes=b"schema_version = 1\nentries = []\n",
+        reference_index=parse_reference_index_bytes(
+            reference_bytes,
+            Path("docs/canon/migration/impact-reference-index.json"),
+            canon_revision=7,
+            requirement_ids=indexed_ids,
+        ),
+    )
 
 
 def intake(task_type: str = "swiftui") -> TaskIntake:
@@ -227,10 +258,45 @@ def initialize_empty_cli_root(root: Path) -> Path:
         "generated_files = []\n",
         encoding="utf-8",
     )
+    write_required_governance_artifacts(canon, canon_revision=0)
     (root / ".gitignore").write_text(".codex/\n", encoding="utf-8")
     intake_path = root / ".codex" / "intake" / "AMB-1842.json"
     intake_path.parent.mkdir(parents=True)
     intake_path.write_text(FIXTURE.read_text(encoding="utf-8"), encoding="utf-8")
+    subprocess.run(("git", "init", "-q"), cwd=root, check=True)
+    subprocess.run(("git", "add", "."), cwd=root, check=True)
+    subprocess.run(
+        (
+            "git",
+            "-c",
+            "user.name=Canon Tests",
+            "-c",
+            "user.email=canon@example.invalid",
+            "commit",
+            "-qm",
+            "fixture",
+        ),
+        cwd=root,
+        check=True,
+    )
+    return intake_path
+
+
+def initialize_live_conflict_cli_root(
+    root: Path,
+    *,
+    scope: str,
+) -> Path:
+    shutil.copytree(ROOT / "docs/canon", root / "docs/canon")
+    (root / ".gitignore").write_text(".codex/\n", encoding="utf-8")
+    intake_path = root / ".codex" / "intake" / "AMB-1842.json"
+    intake_path.parent.mkdir(parents=True)
+    intake_data = json.loads(FIXTURE.read_text(encoding="utf-8"))
+    intake_data["scope"] = [scope]
+    intake_path.write_text(
+        json.dumps(intake_data, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
     subprocess.run(("git", "init", "-q"), cwd=root, check=True)
     subprocess.run(("git", "add", "."), cwd=root, check=True)
     subprocess.run(
@@ -360,7 +426,7 @@ class TaskPackTests(unittest.TestCase):
             registry.manifest,
             authority_state=AuthorityState.ACTIVE,
         )
-        active = build_registry(manifest, registry.documents)
+        active = replace(registry, manifest=manifest)
         unknown_scope = replace(intake(), scope=("surface.unknown",))
 
         with self.assertRaises(CanonError) as raised:
@@ -781,6 +847,7 @@ class TaskPackTests(unittest.TestCase):
                 "generated_files = []\n",
                 encoding="utf-8",
             )
+            write_required_governance_artifacts(canon, canon_revision=0)
             (root / ".gitignore").write_text(".codex/\n", encoding="utf-8")
             intake_path = root / ".codex" / "intake" / "AMB-1842.json"
             intake_path.parent.mkdir(parents=True)
@@ -839,6 +906,74 @@ class TaskPackTests(unittest.TestCase):
                 self.assertEqual(_pack(root, intake_path, check=True), 1)
             self.assertIn("PACK_INTAKE_STALE", output.getvalue())
 
+    def test_cli_pack_generate_fails_closed_when_today_docket_is_deleted(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            intake_path = initialize_live_conflict_cli_root(
+                root,
+                scope="surface.unrelated",
+            )
+            today = (
+                root
+                / "docs/canon/decisions/open/conflict-today-primary-identity.md"
+            )
+            today.unlink()
+            output = io.StringIO()
+            with redirect_stdout(output):
+                self.assertEqual(_pack(root, intake_path, check=False), 1)
+            self.assertIn("CONFLICT_DOCKET_REMOVAL_BLOCKED", output.getvalue())
+            self.assertFalse((root / ".codex/canon-packs").exists())
+
+    def test_cli_pack_check_revalidates_all_dockets_before_scope_filtering(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            intake_path = initialize_live_conflict_cli_root(
+                root,
+                scope="surface.unrelated",
+            )
+            self.assertEqual(_pack(root, intake_path, check=False), 0)
+            today = (
+                root
+                / "docs/canon/decisions/open/conflict-today-primary-identity.md"
+            )
+            today.unlink()
+            output = io.StringIO()
+            with redirect_stdout(output):
+                self.assertEqual(_pack(root, intake_path, check=True), 1)
+            self.assertIn("CONFLICT_DOCKET_REMOVAL_BLOCKED", output.getvalue())
+
+    def test_cli_pack_resume_revalidates_dockets_after_pinned_pack_read(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            intake_path = initialize_live_conflict_cli_root(
+                root,
+                scope="surface.unrelated",
+            )
+            self.assertEqual(_pack(root, intake_path, check=False), 0)
+            original_require = canon_cli._require_source_snapshot
+            mutated = False
+
+            def delete_docket_before_resume(*arguments):
+                nonlocal mutated
+                if not mutated:
+                    mutated = True
+                    (
+                        root
+                        / "docs/canon/decisions/open/"
+                        "conflict-today-primary-identity.md"
+                    ).unlink()
+                return original_require(*arguments)
+
+            output = io.StringIO()
+            with mock.patch.object(
+                canon_cli,
+                "_require_source_snapshot",
+                side_effect=delete_docket_before_resume,
+            ):
+                with redirect_stdout(output):
+                    self.assertEqual(_pack(root, intake_path, check=True), 1)
+            self.assertIn("CONFLICT_DOCKET_REMOVAL_BLOCKED", output.getvalue())
+
     def test_cli_pack_check_reports_not_found_when_pack_root_is_absent(self):
         with tempfile.TemporaryDirectory() as temporary_directory:
             root = Path(temporary_directory)
@@ -879,6 +1014,10 @@ class TaskPackTests(unittest.TestCase):
                     depends_on=("SPEC-A",),
                 ),
                 encoding="utf-8",
+            )
+            write_required_governance_artifacts(
+                canon,
+                canon_revision=1,
             )
             (root / ".gitignore").write_text(".codex/\n", encoding="utf-8")
             intake_path = root / ".codex" / "intake" / "AMB-1842.json"

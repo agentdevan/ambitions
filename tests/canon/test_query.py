@@ -10,6 +10,7 @@ from tools.ambitions_canon.model import CanonError
 from tools.ambitions_canon.query import query_by_concept, query_by_id
 
 from tests.canon.test_task_pack import sample_registry
+from tests.canon.canon_test_support import write_required_governance_artifacts
 
 
 class QueryTests(unittest.TestCase):
@@ -90,6 +91,11 @@ class QueryCliTests(unittest.TestCase):
             "- **Supersedes:** none\n\n"
             "Primary law.\n",
             encoding="utf-8",
+        )
+        write_required_governance_artifacts(
+            canon,
+            canon_revision=1,
+            requirement_ids=("TODAY-001", "TODAY-002"),
         )
 
     def run_cli(self, arguments):

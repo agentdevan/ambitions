@@ -21,10 +21,25 @@ from tools.ambitions_canon.build import (
     _read_descriptor,
 )
 from tools.ambitions_canon.coverage import coverage_findings, load_profiles
+from tools.ambitions_canon.conflicts import (
+    docket_known_issues,
+    load_conflict_dockets,
+    report_conflicts,
+    validate_conflict_repository,
+)
+from tools.ambitions_canon.impact import write_amendment_scaffold
 from tools.ambitions_canon.manifest import load_documents, load_manifest
+from tools.ambitions_canon.migration import (
+    claim_coverage,
+    import_claim_batches,
+    register_repo_sources,
+    register_source,
+    verify_catalog,
+)
 from tools.ambitions_canon.model import (
     CanonDocument,
     CanonError,
+    CanonRegistry,
     Finding,
     GapSeverity,
     Requirement,
@@ -144,6 +159,100 @@ def main(argv: Sequence[str] | None = None) -> int:
         action="store_true",
         help="reject a stored pack that does not match current state",
     )
+    amend_parser = subparsers.add_parser(
+        "amend", help="prepare a governed temporary canon amendment"
+    )
+    amend_subparsers = amend_parser.add_subparsers(dest="amend_command", required=True)
+    scaffold_parser = amend_subparsers.add_parser(
+        "scaffold", help="write a complete non-normative amendment docket"
+    )
+    scaffold_parser.add_argument(
+        "--concept",
+        required=True,
+        help="exact normalized concept key under amendment",
+    )
+    scaffold_parser.add_argument(
+        "--output",
+        required=True,
+        type=Path,
+        help="output below .codex/canon-migration",
+    )
+    migration_parser = subparsers.add_parser(
+        "migration", help="register and verify offline migration sources"
+    )
+    migration_subparsers = migration_parser.add_subparsers(
+        dest="migration_command", required=True
+    )
+    register_parser = migration_subparsers.add_parser(
+        "register", help="register exact ignored connector bytes"
+    )
+    register_parser.add_argument("--catalog", type=Path, required=True)
+    register_parser.add_argument("--raw", type=Path, required=True)
+    register_parser.add_argument("--source-id", required=True)
+    register_parser.add_argument("--kind", required=True)
+    register_parser.add_argument("--title", required=True)
+    register_parser.add_argument("--locator", required=True)
+    register_parser.add_argument("--updated-at", required=True)
+    register_parser.add_argument("--owner", required=True)
+    register_parser.add_argument("--authority-claim", required=True)
+    repo_parser = migration_subparsers.add_parser(
+        "register-repo", help="register clean tracked repo authority sources"
+    )
+    repo_parser.add_argument("--catalog", type=Path, required=True)
+    repo_parser.add_argument("--pathspec", action="append", required=True)
+    verify_parser = migration_subparsers.add_parser(
+        "verify", help="verify all migration sources offline"
+    )
+    verify_parser.add_argument(
+        "--catalog",
+        type=Path,
+        default=Path("docs/canon/migration/source-catalog.json"),
+    )
+    claims_parser = migration_subparsers.add_parser(
+        "claims", help="import and check atomic migration claims"
+    )
+    claims_subparsers = claims_parser.add_subparsers(
+        dest="claims_command", required=True
+    )
+    claims_import_parser = claims_subparsers.add_parser(
+        "import", help="validate and integrate ignored atomic-claim batches"
+    )
+    claims_import_parser.add_argument("--input-dir", type=Path, required=True)
+    claims_import_parser.add_argument(
+        "--catalog",
+        type=Path,
+        default=Path("docs/canon/migration/source-catalog.json"),
+    )
+    claims_import_parser.add_argument(
+        "--output",
+        type=Path,
+        default=Path("docs/canon/migration/claim-dispositions.json"),
+    )
+    claims_coverage_parser = claims_subparsers.add_parser(
+        "coverage", help="check registered source-section claim coverage"
+    )
+    claims_coverage_parser.add_argument(
+        "--dispositions",
+        type=Path,
+        default=Path("docs/canon/migration/claim-dispositions.json"),
+    )
+    claims_coverage_parser.add_argument("--concept-prefix")
+    claims_coverage_parser.add_argument("--target-class")
+    claims_coverage_parser.add_argument("--output", type=Path)
+    conflicts_parser = subparsers.add_parser(
+        "conflicts", help="report shadow conceptual-conflict dockets"
+    )
+    conflicts_subparsers = conflicts_parser.add_subparsers(
+        dest="conflicts_command", required=True
+    )
+    conflicts_report_parser = conflicts_subparsers.add_parser(
+        "report", help="validate and render unresolved owner dockets"
+    )
+    conflicts_report_parser.add_argument(
+        "--require-resolved",
+        action="store_true",
+        help="exit nonzero while any owner docket is unresolved",
+    )
     arguments = parser.parse_args(argv)
 
     if arguments.command == "version":
@@ -175,7 +284,168 @@ def main(argv: Sequence[str] | None = None) -> int:
             issue_path = Path.cwd() / issue_path
         return _pack(Path.cwd(), issue_path, check=arguments.check)
 
+    if arguments.command == "amend":
+        assert arguments.amend_command == "scaffold"
+        return _amend_scaffold(
+            Path.cwd(),
+            concept=arguments.concept,
+            output=arguments.output,
+        )
+
+    if arguments.command == "migration":
+        return _migration(Path.cwd(), arguments)
+
+    if arguments.command == "conflicts":
+        assert arguments.conflicts_command == "report"
+        return _conflicts_report(
+            Path.cwd(), require_resolved=arguments.require_resolved
+        )
+
     raise AssertionError(f"unhandled command: {arguments.command}")
+
+
+def _migration(root: Path, arguments: argparse.Namespace) -> int:
+    if arguments.migration_command == "claims":
+        return _migration_claims(root, arguments)
+    catalog = arguments.catalog
+    if not catalog.is_absolute():
+        catalog = root / catalog
+    try:
+        if arguments.migration_command == "register":
+            raw = arguments.raw
+            if not raw.is_absolute():
+                raw = root / raw
+            record = register_source(
+                catalog,
+                raw,
+                {
+                    "source_id": arguments.source_id,
+                    "kind": arguments.kind,
+                    "title": arguments.title,
+                    "locator": arguments.locator,
+                    "updated_at": arguments.updated_at,
+                    "owner": arguments.owner,
+                    "authority_claim": arguments.authority_claim,
+                },
+            )
+            print(
+                "GREEN ambitions canon migration source "
+                f"source_id={record.source_id} sha256={record.raw_sha256}"
+            )
+            return 0
+        if arguments.migration_command == "register-repo":
+            records = register_repo_sources(catalog, root, arguments.pathspec)
+            print(
+                "GREEN ambitions canon migration repo sources "
+                f"registered={len(records)}"
+            )
+            return 0
+        if arguments.migration_command == "verify":
+            findings = verify_catalog(catalog, root)
+            if findings:
+                for finding in findings:
+                    location = (
+                        finding.path.as_posix()
+                        if finding.path is not None
+                        else "<migration>"
+                    )
+                    print(
+                        f"{finding.severity.value} {finding.code} "
+                        f"{location}:{finding.line or 0} {finding.message}"
+                    )
+                return 1
+            from tools.ambitions_canon.migration import load_source_catalog
+
+            records = load_source_catalog(catalog)
+            print(f"GREEN ambitions canon migration verify sources={len(records)}")
+            return 0
+        raise AssertionError(
+            f"unhandled migration command: {arguments.migration_command}"
+        )
+    except CanonError as error:
+        location = error.path.as_posix() if error.path is not None else "<migration>"
+        print(f"P0_BLOCKER {error.code} {location}:{error.line or 0} {error.message}")
+        return 1
+
+
+def _migration_claims(root: Path, arguments: argparse.Namespace) -> int:
+    try:
+        if arguments.claims_command == "import":
+            input_dir = _rooted(root, arguments.input_dir)
+            catalog = _rooted(root, arguments.catalog)
+            output = _rooted(root, arguments.output)
+            result = import_claim_batches(root, input_dir, catalog, output)
+            print(
+                "GREEN ambitions canon migration claims import "
+                f"sources={result.source_count} sections={result.section_count} "
+                f"decisions={result.linear_decision_count} claims={result.claim_count}"
+            )
+            return 0
+        if arguments.claims_command == "coverage":
+            dispositions = _rooted(root, arguments.dispositions)
+            report = claim_coverage(
+                dispositions,
+                concept_prefix=arguments.concept_prefix,
+                target_class=arguments.target_class,
+            )
+            if arguments.output is not None:
+                from tools.ambitions_canon.migration import _write_claim_json
+
+                _write_claim_json(_rooted(root, arguments.output), report.to_dict())
+            if not report.complete:
+                for item in report.uncovered:
+                    print(
+                        "P0_BLOCKER CLAIM_COVERAGE_INCOMPLETE "
+                        f"{item['source_id']}:{item['source_location']}"
+                    )
+                return 1
+            print(
+                "GREEN ambitions canon migration claims coverage "
+                f"sources={report.source_count} sections={report.section_count} "
+                f"decisions={report.linear_decision_count} claims={len(report.claims)}"
+            )
+            return 0
+        raise AssertionError(f"unhandled claims command: {arguments.claims_command}")
+    except CanonError as error:
+        location = error.path.as_posix() if error.path is not None else "<claims>"
+        print(f"P0_BLOCKER {error.code} {location}:{error.line or 0} {error.message}")
+        return 1
+
+
+def _rooted(root: Path, path: Path) -> Path:
+    return path if path.is_absolute() else root / path
+
+
+def _conflicts_report(root: Path, *, require_resolved: bool) -> int:
+    try:
+        manifest = load_manifest(root)
+        code, report = report_conflicts(
+            root,
+            require_resolved=require_resolved,
+            canon_revision=manifest.canon_revision,
+            compiler_version=manifest.compiler_version,
+            authority_state=manifest.authority_state.value,
+        )
+        print(report.decode("utf-8"), end="")
+        if code:
+            print("P0_BLOCKER CANON_CONFLICTS_UNRESOLVED owner decision required")
+        return code
+    except CanonError as error:
+        location = error.path.as_posix() if error.path is not None else "<conflicts>"
+        print(f"P0_BLOCKER {error.code} {location}:{error.line or 0} {error.message}")
+        return 1
+
+
+def _amend_scaffold(root: Path, *, concept: str, output: Path) -> int:
+    try:
+        written = write_amendment_scaffold(root, output, concept)
+    except CanonError as error:
+        location = error.path.as_posix() if error.path is not None else "<registry>"
+        location = f"{location}:{error.line or 0}"
+        print(f"{error.code} {location} {error.message}")
+        return 1
+    print(f"GREEN ambitions canon amendment scaffold {written.as_posix()}")
+    return 0
 
 
 def _audit(root: Path) -> int:
@@ -183,6 +453,7 @@ def _audit(root: Path) -> int:
         manifest = load_manifest(root)
         documents = load_documents(root, manifest)
         registry = build_registry(manifest, documents)
+        _validated_docket_issues(root, registry)
         findings = audit_registry(registry)
     except CanonError as error:
         findings = (
@@ -201,20 +472,20 @@ def _audit(root: Path) -> int:
     if findings:
         for finding in findings:
             location = (
-                finding.path.as_posix()
-                if finding.path is not None
-                else "<registry>"
+                finding.path.as_posix() if finding.path is not None else "<registry>"
             )
             location = f"{location}:{finding.line or 0}"
             print(
-                f"{finding.severity.value} {finding.code} "
-                f"{location} {finding.message}"
+                f"{finding.severity.value} {finding.code} {location} {finding.message}"
             )
-        return 1 if any(
-            finding.severity
-            in (GapSeverity.P0_BLOCKER, GapSeverity.P1_REQUIRED)
-            for finding in findings
-        ) else 0
+        return (
+            1
+            if any(
+                finding.severity in (GapSeverity.P0_BLOCKER, GapSeverity.P1_REQUIRED)
+                for finding in findings
+            )
+            else 0
+        )
 
     assert manifest is not None
     assert registry is not None
@@ -239,11 +510,12 @@ def _build(root: Path, *, check: bool) -> int:
 
     if findings:
         for finding in findings:
-            location = finding.path.as_posix() if finding.path is not None else "<registry>"
+            location = (
+                finding.path.as_posix() if finding.path is not None else "<registry>"
+            )
             location = f"{location}:{finding.line or 0}"
             print(
-                f"{finding.severity.value} {finding.code} "
-                f"{location} {finding.message}"
+                f"{finding.severity.value} {finding.code} {location} {finding.message}"
             )
         return 1
 
@@ -256,9 +528,7 @@ def _coverage(root: Path, *, fail_on_p0_gap: bool) -> int:
         manifest = load_manifest(root)
         documents = load_documents(root, manifest)
         registry = build_registry(manifest, documents)
-        profiles = load_profiles(
-            root / "docs/canon/schemas/completeness-profiles.toml"
-        )
+        profiles = load_profiles(root / "docs/canon/schemas/completeness-profiles.toml")
         findings = coverage_findings(registry, profiles)
     except CanonError as error:
         location = error.path.as_posix() if error.path is not None else "<registry>"
@@ -269,14 +539,11 @@ def _coverage(root: Path, *, fail_on_p0_gap: bool) -> int:
     if findings:
         for finding in findings:
             location = (
-                finding.path.as_posix()
-                if finding.path is not None
-                else "<registry>"
+                finding.path.as_posix() if finding.path is not None else "<registry>"
             )
             location = f"{location}:{finding.line or 0}"
             print(
-                f"{finding.severity.value} {finding.code} "
-                f"{location} {finding.message}"
+                f"{finding.severity.value} {finding.code} {location} {finding.message}"
             )
         if fail_on_p0_gap and any(
             finding.severity is GapSeverity.P0_BLOCKER for finding in findings
@@ -435,9 +702,17 @@ def _pack(root: Path, issue_path: Path, *, check: bool) -> int:
         intake = TaskIntake.from_json(data).with_source_path(
             _display_path(root, issue_path)
         )
-        manifest = load_manifest(root)
-        documents = load_documents(root, manifest)
-        registry = build_registry(manifest, documents)
+        try:
+            manifest = load_manifest(root)
+            documents = load_documents(root, manifest)
+            registry = build_registry(manifest, documents)
+        except CanonError as exc:
+            if check:
+                raise CanonError(
+                    "PACK_CANON_STALE",
+                    "canon changed during task-pack use",
+                ) from exc
+            raise
         findings = audit_registry(registry)
         if findings:
             finding = findings[0]
@@ -447,8 +722,14 @@ def _pack(root: Path, issue_path: Path, *, check: bool) -> int:
                 finding.path,
                 finding.line,
             )
+        known_issues = _validated_docket_issues(root, registry)
         repository_sha = _repository_state_sha(root)
-        pack = build_task_pack(registry, intake, repository_sha, ())
+        pack = build_task_pack(
+            registry,
+            intake,
+            repository_sha,
+            known_issues,
+        )
         source_snapshot = _pack_source_snapshot(pack, raw_bytes)
 
         if check:
@@ -612,10 +893,18 @@ def _require_source_snapshot(
     intake = TaskIntake.from_json(data).with_source_path(
         _display_path(root, issue_path)
     )
-    manifest = load_manifest(root)
-    documents = load_documents(root, manifest)
-    registry = build_registry(manifest, documents)
-    pack = build_task_pack(registry, intake, _repository_state_sha(root), ())
+    repository_sha = _repository_state_sha(root)
+    try:
+        manifest = load_manifest(root)
+        documents = load_documents(root, manifest)
+        registry = build_registry(manifest, documents)
+    except CanonError as exc:
+        raise CanonError(
+            "PACK_CANON_STALE",
+            "canon changed during task-pack use",
+        ) from exc
+    known_issues = _validated_docket_issues(root, registry)
+    pack = build_task_pack(registry, intake, repository_sha, known_issues)
     current = _pack_source_snapshot(pack, raw_bytes)
     if (
         current.canon_revision != expected.canon_revision
@@ -637,6 +926,22 @@ def _require_source_snapshot(
         or current.pack_content_sha != expected.pack_content_sha
     ):
         raise CanonError("PACK_SOURCE_STALE", "pack source inputs changed")
+
+
+def _validated_docket_issues(
+    root: Path,
+    registry: CanonRegistry,
+) -> tuple[dict[str, object], ...]:
+    """Validate the complete conflict graph before task-specific filtering."""
+
+    dockets = load_conflict_dockets(root)
+    validate_conflict_repository(
+        root,
+        dockets,
+        (item.requirement_id for item in registry.requirements),
+        registry.supersession_entries,
+    )
+    return docket_known_issues(dockets)
 
 
 def _read_intake_bytes(path: Path) -> bytes:

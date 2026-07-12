@@ -26,6 +26,7 @@ from tools.ambitions_canon.model import (
     NotApplicable,
 )
 from tools.ambitions_canon.parser import parse_canon_document
+from tests.canon.canon_test_support import write_required_governance_artifacts
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -1281,6 +1282,16 @@ class CoverageCliTests(unittest.TestCase):
                 'normative_files = ["specifications/incomplete.md"]\n'
                 "generated_files = []\n",
                 encoding="utf-8",
+            )
+            write_required_governance_artifacts(
+                canon,
+                canon_revision=1,
+                requirement_ids=tuple(
+                    requirement.requirement_id
+                    for requirement in fixture_document(
+                        "incomplete-surface.md"
+                    ).requirements
+                ),
             )
             previous = Path.cwd()
             try:

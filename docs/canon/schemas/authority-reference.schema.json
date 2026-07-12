@@ -9,6 +9,7 @@
     "schema_version",
     "reference_id",
     "authority_class",
+    "reference_kind",
     "source",
     "revision",
     "requirement_ids",
@@ -29,6 +30,11 @@
       "description": "Authority or evidence role of the referenced artifact.",
       "type": "string",
       "enum": ["constitution", "specification", "standard", "decision_docket", "generated_projection", "source_and_tests", "linear", "figma"]
+    },
+    "reference_kind": {
+      "description": "Explicit impact family; callers must not infer this from arbitrary strings.",
+      "type": "string",
+      "enum": ["source", "test", "proof", "scenario", "figma", "linear"]
     },
     "source": {
       "description": "Repository path or stable external entity locator.",
