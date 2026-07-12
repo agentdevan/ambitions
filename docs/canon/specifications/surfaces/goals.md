@@ -6,13 +6,14 @@ status = "normative"
 owner_domain = "surface-goals"
 canon_revision = 1
 profile = "surface-v1"
-owns_concepts = [
-  "surface.goals.identity",
-  "surface.goals.anti-patterns",
-  "surface.goals.screen-inventory",
-  "surface.goals.first-viewport",
-  "surface.goals.purpose",
-  "surface.goals.visual-authority",
+owns_concepts = ["surface.goals.anti-patterns", "surface.goals.execution-stack", "surface.goals.first-viewport", "surface.goals.identity", "surface.goals.purpose", "surface.goals.screen-inventory", "surface.goals.visual-authority",
+  "surface.goals.path-visual",
+  "surface.goals.closure",
+  "surface.goals.detail",
+  "surface.goals.path-interaction",
+  "surface.goals.reviews",
+  "surface.goals.root-viewport",
+  "surface.goal-detail.viewport",
 ]
 inherits = [
   "CONST-IA-ROOT-001",
@@ -35,7 +36,7 @@ source_owners = [
 
 # Goals
 
-This shadow specification defines the intended Goals surface and living Goal Path behavior without claiming present implementation, visual parity, or release readiness.
+
 
 ## SPEC-SURFACE-GOALS-IDENTITY-001 — Life-area-first direction and path
 
@@ -47,6 +48,10 @@ This shadow specification defines the intended Goals surface and living Goal Pat
 - **Supersedes:** none
 
 Goals MUST organize direction through editable Life Areas and living Goal Paths, answering what the user is building, where they are on the path, and the next meaningful movement. It must preserve proof, recovery, Future Steps, schedule fit, and closure without exposing runtime architecture.
+
+Goals MUST begin with editable Life Areas, MUST open into Life Area operating pages, and MUST expose each Goal as a living operating object with a horizontal Goal Path.
+
+Goals SHOULD combine grouped Life Area sections, a visual overview, and drilldown lists and details.
 
 ## SPEC-SURFACE-GOALS-ANTI-PATTERNS-001 — No dashboard or project board drift
 
@@ -70,6 +75,16 @@ Goals MUST NOT become a metrics dashboard, project-management board, generic lis
 
 Goals owns the Life Area index and detail, Goal creation/review/activation, Goal detail, full Goal Path, recovery packet, and Goal closure. Time owns calendar editing; Today owns the execution slice; Trust owns contextual receipts/source/privacy/history inspection; Capture owns global intake.
 
+Goal detail MUST combine native task metadata with Ambitions direction, Proof, and current-Step layers.
+
+The full Goal Path SHOULD use a horizontal, scrollable path timeline.
+
+The horizontal Goal Path MUST snap to nodes, anchor on the current position by default, provide haptic selection feedback, support semantic node types, show selected-node detail, and provide a compact jump control for Start, Now, Next, and Finish.
+
+When a goal reaches completion, Ambitions MUST show a first-class closure surface with final status, completed path, proof moments, recovery segments, remaining open items, schedule cleanup, final receipt, optional reflection, and next suggested direction.
+
+Reviews MUST be both reflective and operational.
+
 ## SPEC-SURFACE-GOALS-FIRST-VIEWPORT-001 — Direction before metadata
 
 - **Concept:** `surface.goals.first-viewport`
@@ -79,7 +94,7 @@ Goals owns the Life Area index and detail, Goal creation/review/activation, Goal
 - **Verification:** `PROOF-GOALS-FIRST-VIEWPORT-001`
 - **Supersedes:** none
 
-The root first viewport MUST foreground Life Areas, current direction, current movement, next movement, and relevant proof or recovery state. Goal detail MUST foreground humane lifecycle, current route, next movement, proof state, schedule fit, and compact path preview. Metadata and broad stats remain subordinate.
+Goals first-viewport behavior MUST be owned by the separate root, Goal-detail, and Goal-Path interaction contracts and MUST NOT collapse their independently verifiable states.
 
 ## SPEC-SURFACE-GOALS-PURPOSE-001 — Full path that adapts without forcing
 
@@ -92,6 +107,10 @@ The root first viewport MUST foreground Life Areas, current direction, current m
 
 A Goal MUST carry an inspectable route from current reality to closure, including planned and completed Steps, Future Steps, proof, recovery, schedule changes, assumptions, and review points. Vague intent preserves a provisional shell and requests clarification. Material scheduling or path changes require preview and confirmation; no fake confident path or forced choice is allowed.
 
+Goals SHOULD show direction, goal paths, Life Capital relevance, proof, milestones, and progress.
+
+Onboarding progress SHOULD show as a percentage.
+
 ## SPEC-SURFACE-GOALS-VISUAL-AUTHORITY-001 — Approved Goals package, separate implementation proof
 
 - **Concept:** `surface.goals.visual-authority`
@@ -102,6 +121,85 @@ A Goal MUST carry an inspectable route from current reality to closure, includin
 - **Supersedes:** none
 
 Visual mapping MUST use stable external IDs and distinguish approved design target from implementation proof. Owner-approved VSP-03 package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:177:93` is the Goals visual target. Candidate naming does not weaken the durable owner approval, and approval does not prove SwiftUI parity, accessibility, device behavior, runtime behavior, Visual Green, or release status.
+
+The horizontal Goal Path MUST communicate meaning through restrained shape, weight, material, micro-symbol, and line treatment.
+
+## SPEC-SURFACE-GOALS-PATH-VISUAL-001 — Goal Path visual contract
+
+- **Concept:** `surface.goals.path-visual`
+- **Modality:** `MUST`
+- **Scope:** Goal Path presentation
+- **Status:** `normative`
+- **Verification:** `REVIEW-GOAL-PATH-VISUAL-001`
+- **Supersedes:** none
+
+Goal Path presentation MUST keep current route and next Step legible at rest and reveal chronology, Proof, recovery, schedule change, and adaptation on drilldown.
+
+## SPEC-SURFACE-GOALS-CLOSURE-001 — Goal closure presentation
+
+- **Concept:** `surface.goals.closure`
+- **Modality:** `MUST`
+- **Scope:** Goals closure controls
+- **Status:** `normative`
+- **Verification:** `SCENARIO-GOALS-CLOSURE-001`
+- **Supersedes:** none
+
+Goals MUST present explicit closure outcomes, consequence preview, Proof requirement or status, rollback, and History without collapsing them into completion.
+
+## SPEC-SURFACE-GOALS-DETAIL-001 — Goals detail
+
+- **Concept:** `surface.goals.detail`
+- **Modality:** `MUST`
+- **Scope:** Life Area and Goal detail
+- **Status:** `normative`
+- **Verification:** `SCENARIO-GOALS-DETAIL-001`
+- **Supersedes:** none
+
+Goals detail MUST present the selected object, current direction, active relationships, next meaningful Step, Proof or recovery state, path health, and contextual actions.
+
+## SPEC-SURFACE-GOALS-PATH-INTERACTION-001 — Goal Path interaction
+
+- **Concept:** `surface.goals.path-interaction`
+- **Modality:** `MUST`
+- **Scope:** Goal Path at rest and drilldown
+- **Status:** `normative`
+- **Verification:** `SCENARIO-GOALS-PATH-INTERACTION-001`
+- **Supersedes:** none
+
+Goal Path MUST be useful at rest through current route and next Step, while drilldown reveals chronology, Proof, recovery, schedule change, and adaptation.
+
+## SPEC-SURFACE-GOALS-REVIEWS-001 — Goals reviews
+
+- **Concept:** `surface.goals.reviews`
+- **Modality:** `MUST`
+- **Scope:** Goal review states
+- **Status:** `normative`
+- **Verification:** `SCENARIO-GOALS-REVIEWS-001`
+- **Supersedes:** none
+
+Goals reviews MUST present due context, affected Goal and path state, recommended user-controlled choices, consequences, deferral, rollback, and History.
+
+## SPEC-SURFACE-GOALS-ROOT-VIEWPORT-001 — Goals root viewport
+
+- **Concept:** `surface.goals.root-viewport`
+- **Modality:** `MUST`
+- **Scope:** Goals root first viewport
+- **Status:** `normative`
+- **Verification:** `PROOF-GOALS-ROOT-VIEWPORT-001`
+- **Supersedes:** none
+
+The Goals root first viewport MUST foreground editable Life Areas, current direction, meaningful Goal movement, next Step, Proof or recovery state, and quiet path health.
+
+## SPEC-SURFACE-GOAL-DETAIL-VIEWPORT-001 — Goal detail viewport
+
+- **Concept:** `surface.goal-detail.viewport`
+- **Modality:** `MUST`
+- **Scope:** Goal detail first viewport
+- **Status:** `normative`
+- **Verification:** `PROOF-GOAL-DETAIL-VIEWPORT-001`
+- **Supersedes:** none
+
+Goal detail first viewport MUST foreground Goal identity and status, current route, next Step, Proof requirement or status, schedule fit, and a compact path preview.
 
 ## Completeness contract
 
@@ -164,7 +262,7 @@ The named package controls geometry, hierarchy, composition, states, and adaptiv
 Stable package ID `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:177:93` supplies approved Goals design authority. Source rendering, semantic behavior, accessibility/device evidence, implementation parity, and release proof remain separate.
 
 <!-- canon-section: source-ownership -->
-Canonical target ownership is exact: `Surfaces/Goals/` owns presentation; `Core/Domain/`, `Core/LocalRuntimeOS/Planning/`, `PrivateLifeRuntimeKernel/`, `Scheduling/`, and `Inspection/` own canonical behavior; `Quality/` owns proof. Current implementation compliance is unclaimed.
+Canonical target ownership is exact: `Surfaces/Goals/` owns presentation; `Core/Domain/`, `Core/LocalRuntimeOS/Planning/`, `PrivateLifeRuntimeKernel/`, `Scheduling/`, and `Inspection/` own canonical behavior; `Quality/` owns proof.
 
 <!-- canon-section: tests -->
 Tests cover Life Area organization, path generation/clarification, material confirmation, activation, Future Steps, conflict, priority override, proof transfer, recovery, closure, archive/Trash/restore, replay, offline, Goal Path semantic list/actions, Dynamic Type, reduced effects, focus, and non-color encoding.
@@ -174,4 +272,15 @@ Required proof includes path and lifecycle scenario logs, receipts/replay, scree
 
 <!-- canon-section: performance -->
 Resource behavior is bounded, cancellable, local, and foreground-safe.
-Goals root, path materialization, selection, and semantic-node lookup MUST remain bounded, cancellable, and deterministically paged; perform no interaction-path network gating or synchronous disk I/O; use no polling or unbounded background loop; and preserve foreground responsiveness under Low Power Mode, thermal pressure, protected-data unavailability, and storage pressure. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. Implementation authorization requires an owner-approved performance-registry record declaring device floor, OS, build configuration, representative Life Area/Goal/path data scale, warm/cold state, measurement tool, percentile/maximum, and regression threshold. Current performance and physical-device proof remain absent.
+Goals root, path materialization, selection, and semantic-node lookup MUST remain bounded, cancellable, and deterministically paged; perform no interaction-path network gating or synchronous disk I/O; use no polling or unbounded background loop; and preserve foreground responsiveness under Low Power Mode, thermal pressure, protected-data unavailability, and storage pressure. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. Implementation authorization requires an owner-approved performance-registry record declaring device floor, OS, build configuration, representative Life Area/Goal/path data scale, warm/cold state, measurement tool, percentile/maximum, and regression threshold.
+
+## SPEC-SURFACE-GOALS-EXECUTION-STACK-001 — Goal execution stack
+
+- **Concept:** `surface.goals.execution-stack`
+- **Modality:** `MUST`
+- **Scope:** Goal execution stack
+- **Status:** `normative`
+- **Verification:** `REVIEW-SPEC-SURFACE-GOALS-EXECUTION-STACK-001`
+- **Supersedes:** none
+
+Goal detail MUST expose current, next scheduled, and unscheduled upcoming Steps, Substep groups, Proof, schedule and recovery state, and actions to inspect, schedule, complete, or revise work linked to the Goal Path.

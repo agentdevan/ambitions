@@ -7,12 +7,24 @@ owner_domain = "surface-time"
 canon_revision = 1
 profile = "surface-v1"
 owns_concepts = [
+  "surface.time.creation-routes",
+  "surface.time.step-membership",
+  "surface.time.today-control",
   "surface.time.primary-identity",
   "surface.time.views",
   "surface.time.day",
   "surface.time.first-viewport",
   "surface.time.purpose",
   "surface.time.visual-authority",
+  "surface.time.visual-geometry",
+  "surface.time.imported-source",
+  "surface.time.search",
+  "surface.time.view-switching",
+  "surface.time.week",
+  "surface.time.month",
+  "surface.time.year",
+  "surface.time.list",
+  "surface.time.object-detail",
 ]
 inherits = [
   "CONST-IA-ROOT-001",
@@ -35,7 +47,7 @@ source_owners = [
 
 # Time
 
-This shadow specification defines Time as the intended first-class temporal operating surface. It states a replacement target and acceptance bar, not current parity, migration completion, or readiness.
+This shadow specification defines Time as the intended first-class temporal operating surface.
 
 ## SPEC-SURFACE-TIME-PRIMARY-IDENTITY-001 — First-class Life Calendar target
 
@@ -46,7 +58,15 @@ This shadow specification defines Time as the intended first-class temporal oper
 - **Verification:** `PROOF-CALENDAR-GRADE-001`
 - **Supersedes:** none
 
-Time MUST target first-class replacement of ordinary personal calendar planning while expressing Protected, Fixed, Flexible, and Suggested time, capacity, conflict, and adjustment. It is neither an anti-calendar nor a calendar clone. This target MUST NOT be described as current external-calendar parity or readiness until the complete proof bar is current.
+Time MUST target first-class replacement of ordinary personal calendar planning while expressing Protected, Fixed, Flexible, and Suggested time, capacity, conflict, and adjustment. It is neither an anti-calendar nor a calendar clone.
+
+Time MUST provide first-class native calendar behavior and a complete temporal operating surface.
+
+Time MUST provide continuous temporal zoom and a practical scheduled-reflow review mode.
+
+Time MUST preserve native calendar comprehension while adding Ambitions scheduling, capacity, reflow, and recovery semantics.
+
+Time MUST distinguish Protected, Fixed, flexible, capacity, and reflow states while preserving native calendar comprehension.
 
 ## SPEC-SURFACE-TIME-VIEWS-001 — Calendar-grade view family
 
@@ -57,7 +77,7 @@ Time MUST target first-class replacement of ordinary personal calendar planning 
 - **Verification:** `SCENARIO-TIME-VIEWS-001`, `A11Y-TIME-LIST-PARITY-001`
 - **Supersedes:** none
 
-Time MUST provide Day, Week, Month, Year, and List with a visible Today control, last-used-view restoration, and discoverable view switching. List is the complete chronological and screen-reader-friendly counterpart to grids. Month and Year expose semantic summaries and drilldown rather than illegible object density.
+Time view-family behavior MUST be owned by the separate switching, Day, Week, Month, Year, List, Today-control, and reduced-effects contracts and MUST preserve their independent verification boundaries.
 
 ## SPEC-SURFACE-TIME-DAY-001 — Direct, inspectable day planning
 
@@ -70,6 +90,10 @@ Time MUST provide Day, Week, Month, Year, and List with a visible Today control,
 
 Day MUST show the current-time marker, all-day rail, Events, Steps, Reminders, time-authority semantics, Goal context, and relevant proof or adjustment markers. Drag and resize MUST have explicit Move, Change start, Change duration, and typed edit alternatives with the same conflict preview, consequence summary, confirmation, focus return, and receipt.
 
+Events MUST use time-range blocks.
+
+When the user taps an object in Time, Ambitions MUST open a compact native detail sheet with title, time, calendar/source, notes, recurrence, alerts, schedule state, goal link, proof/reflow markers, and edit actions.
+
 ## SPEC-SURFACE-TIME-FIRST-VIEWPORT-001 — Temporal reality before controls
 
 - **Concept:** `surface.time.first-viewport`
@@ -80,6 +104,8 @@ Day MUST show the current-time marker, all-day rail, Events, Steps, Reminders, t
 - **Supersedes:** none
 
 The first viewport MUST foreground the selected range, Now or Today anchor, protected and fixed reality, flexible capacity, visible conflicts, and the next meaningful temporal object. View switching, search/filter, external-diff review, and creation remain discoverable but subordinate to temporal reality.
+
+Ambitions Time semantics MUST alter weight, material, edge treatment, and line treatment without reducing basic calendar comprehensibility.
 
 ## SPEC-SURFACE-TIME-PURPOSE-001 — Fit, consequence, and user authority
 
@@ -92,6 +118,10 @@ The first viewport MUST foreground the selected range, Now or Today anchor, prot
 
 Time MUST answer how time is arranged, what is protected or fixed, what can move, and what happens when reality changes. It previews conflict, recurrence, deadline, external-write, and adjustment consequences before material commit. External visibility and capacity reservation remain separate; an unreviewed external candidate never appears as an Ambitions Event.
 
+Time MUST own schedule reality, capacity, conflicts, and planning changes.
+
+Apple Calendar bridge, routing, and external-diff failures MUST affect only their related controls and MUST NOT block Ambitions-native calendar use.
+
 ## SPEC-SURFACE-TIME-VISUAL-AUTHORITY-001 — Approved Time package, separate implementation proof
 
 - **Concept:** `surface.time.visual-authority`
@@ -102,6 +132,147 @@ Time MUST answer how time is arranged, what is protected or fixed, what can move
 - **Supersedes:** none
 
 Visual authority MUST use stable external IDs and keep approved package authority and implementation evidence distinct. Owner-approved VSP-04 package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:202:93` is the Time visual target. Candidate naming does not weaken its durable owner approval. The package does not prove calendar parity, direct-manipulation behavior, SwiftUI parity, accessibility, device behavior, runtime behavior, Visual Green, or release status.
+
+## SPEC-SURFACE-TIME-TODAY-CONTROL-001 — Return to current temporal context
+- **Concept:** `surface.time.today-control`
+- **Modality:** `MUST`
+- **Scope:** Day, Week, Month, Year, and List navigation away from now
+- **Status:** `normative`
+- **Verification:** `SCENARIO-TIME-TODAY-CONTROL-001`
+- **Supersedes:** none
+
+Time MUST expose a Today control when the selected range is away from the current context. It returns Day or List to today, Week to the current week, Month toward the current day, and Year toward the current month without discarding the user's preferred view.
+
+Time MUST show the Now marker in Day and Week and MUST provide a current-period return control in Month, Year, and List.
+
+## SPEC-SURFACE-TIME-CREATION-ROUTES-001 — Creation begins in temporal context
+- **Concept:** `surface.time.creation-routes`
+- **Modality:** `SHOULD`
+- **Scope:** Top action and direct creation from a Time position
+- **Status:** `normative`
+- **Verification:** `SCENARIO-TIME-CREATION-ROUTES-001`
+- **Supersedes:** none
+
+Time SHOULD provide a top creation action biased to Event, Reminder, or Step and a direct time-position creation path where native interaction permits. Both routes preserve the selected temporal context and enter the canonical Capture proposal flow rather than committing from the view.
+
+Time MUST have top-right create that opens Capture biased to Event/Reminder/Step.
+
+Time creation MUST use a compact native sheet and MUST route through the same object model as Capture.
+
+When the user taps an empty Time slot, the creation sheet defaults to Event because Time MUST be calendar-native.
+
+## SPEC-SURFACE-TIME-STEP-MEMBERSHIP-001 — Only accepted placements are scheduled work
+- **Concept:** `surface.time.step-membership`
+- **Modality:** `MUST`
+- **Scope:** Goal-linked Steps in Time
+- **Status:** `normative`
+- **Verification:** `SCENARIO-TIME-STEP-MEMBERSHIP-001`
+- **Supersedes:** none
+
+Time MUST present scheduled Goal Steps as placed temporal objects. An unscheduled Step may appear only as a clearly non-durable fit or reflow proposal until the user accepts a placement; proposal visibility never implies schedule commitment.
+
+Goal-related scheduled items MUST appear in Goals.
+
+Unscheduled goal steps MUST NOT appear as placed work unless accepted.
+
+## SPEC-SURFACE-TIME-VISUAL-GEOMETRY-001 — Time visual geometry
+
+- **Concept:** `surface.time.visual-geometry`
+- **Modality:** `MUST`
+- **Scope:** Time grids and temporal objects
+- **Status:** `normative`
+- **Verification:** `REVIEW-TIME-VISUAL-GEOMETRY-001`
+- **Supersedes:** none
+
+Time visual geometry MUST preserve calendar comprehension while distinguishing temporal authority, capacity, conflict, reflow, Proof, and Goal context.
+
+## SPEC-SURFACE-TIME-IMPORTED-SOURCE-001 — Imported source distinction
+
+- **Concept:** `surface.time.imported-source`
+- **Modality:** `MUST`
+- **Scope:** Imported temporal records
+- **Status:** `normative`
+- **Verification:** `SCENARIO-TIME-IMPORTED-SOURCE-001`
+- **Supersedes:** none
+
+Time MUST distinguish external source facts, local candidates, accepted Ambitions Events, and pending outbound changes.
+
+## SPEC-SURFACE-TIME-SEARCH-001 — Time search
+
+- **Concept:** `surface.time.search`
+- **Modality:** `MUST`
+- **Scope:** Temporal search
+- **Status:** `normative`
+- **Verification:** `TEST-TIME-SEARCH-001`
+- **Supersedes:** none
+
+Time search MUST be local and object-first and MUST preserve selected temporal context when opening a result.
+
+## SPEC-SURFACE-TIME-VIEW-SWITCHING-001 — Time view switching
+
+- **Concept:** `surface.time.view-switching`
+- **Modality:** `MUST`
+- **Scope:** Day, Week, Month, Year, and List navigation
+- **Status:** `normative`
+- **Verification:** `A11Y-TIME-VIEW-SWITCHING-001`
+- **Supersedes:** none
+
+Time MUST expose visible, discoverable, accessible Day, Week, Month, Year, and List switching, remember the last-used view, preserve intentional range context, and keep gestures optional accelerators.
+
+## SPEC-SURFACE-TIME-WEEK-001 — Week view
+
+- **Concept:** `surface.time.week`
+- **Modality:** `MUST`
+- **Scope:** Time Week view
+- **Status:** `normative`
+- **Verification:** `SCENARIO-TIME-WEEK-001`
+- **Supersedes:** none
+
+Week MUST remain familiar and scannable while showing protected, fixed, flexible, suggested, Goal-linked, conflict, recovery, capacity, reflow, and Proof semantics.
+
+## SPEC-SURFACE-TIME-MONTH-001 — Month view
+
+- **Concept:** `surface.time.month`
+- **Modality:** `MUST`
+- **Scope:** Time Month view
+- **Status:** `normative`
+- **Verification:** `SCENARIO-TIME-MONTH-001`
+- **Supersedes:** none
+
+Month MUST remain a scannable calendar grid with semantic summaries for density, protected time, Goal movement, recovery, Proof, conflicts, and scheduled Steps without illegible object density.
+
+## SPEC-SURFACE-TIME-YEAR-001 — Year view
+
+- **Concept:** `surface.time.year`
+- **Modality:** `MUST`
+- **Scope:** Time Year view
+- **Status:** `normative`
+- **Verification:** `SCENARIO-TIME-YEAR-001`
+- **Supersedes:** none
+
+Year MUST remain a high-level navigational overview of monthly density, protected seasons, Goal movement, recovery, Proof, and conflict pressure, revealing granular objects only after drilldown.
+
+## SPEC-SURFACE-TIME-LIST-001 — List view
+
+- **Concept:** `surface.time.list`
+- **Modality:** `MUST`
+- **Scope:** Time chronological list
+- **Status:** `normative`
+- **Verification:** `A11Y-TIME-LIST-001`
+- **Supersedes:** none
+
+List MUST be the chronological, semantic, screen-reader-friendly counterpart to grids and preserve temporal authority, Goal context, due, recovery, Proof, conflict, and reflow markers.
+
+## SPEC-SURFACE-TIME-OBJECT-DETAIL-001 — Time object detail
+
+- **Concept:** `surface.time.object-detail`
+- **Modality:** `MUST`
+- **Scope:** Temporal object detail
+- **Status:** `normative`
+- **Verification:** `SCENARIO-TIME-OBJECT-DETAIL-001`
+- **Supersedes:** none
+
+Selecting a Time object MUST open compact native detail with identity, time, source, notes, recurrence, alerts, schedule state, Goal link, Proof or reflow markers, and canonical edit actions.
 
 ## Completeness contract
 
@@ -162,7 +333,7 @@ The named package controls geometry, hierarchy, composition, states, and adaptiv
 Stable package ID `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:202:93` supplies approved Time design authority. Calendar behavior, source rendering, accessibility/device evidence, implementation parity, replacement readiness, and release proof remain separate.
 
 <!-- canon-section: source-ownership -->
-Canonical target ownership is exact: `Surfaces/Time/` owns presentation; `Core/Time/` owns temporal primitives; `Core/LocalRuntimeOS/Scheduling/`, `ExternalWrites/`, `Continuity/`, and `Inspection/` own behavior and facts; `Quality/` owns proof. Current compliance is unclaimed.
+Canonical target ownership is exact: `Surfaces/Time/` owns presentation; `Core/Time/` owns temporal primitives; `Core/LocalRuntimeOS/Scheduling/`, `ExternalWrites/`, `Continuity/`, and `Inspection/` own behavior and facts; `Quality/` owns proof.
 
 <!-- canon-section: tests -->
 Tests cover five views, recurrence/exceptions, time zones/DST, all-day/multi-day, authority/rules, drag and named alternatives, conflict/adjustment, creation/edit/delete/restore, import outcomes, external failures, search/filter/export, notifications, offline/replay, scale, VoiceOver/List parity, Dynamic Type, reduced effects, contrast, and focus.
@@ -172,4 +343,4 @@ Calendar replacement claims require current calendar-grade scenario, migration, 
 
 <!-- canon-section: performance -->
 Resource behavior is bounded, cancellable, local, and foreground-safe.
-Time range loading, recurrence expansion, scrolling, direct manipulation, named-edit preview, and List search MUST remain bounded and cancellable, perform no interaction-path network gating or synchronous disk I/O, use no polling or unbounded background loop, and preserve foreground responsiveness under Low Power Mode, thermal pressure, protected-data unavailability, and storage pressure. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. Implementation authorization requires an owner-approved performance-registry record declaring device floor, OS, build configuration, representative temporal/recurrence data scale, warm/cold state, measurement tool, percentile/maximum, frame/scroll metric, and regression threshold. Current performance and physical-device proof remain absent.
+Time range loading, recurrence expansion, scrolling, direct manipulation, named-edit preview, and List search MUST remain bounded and cancellable, perform no interaction-path network gating or synchronous disk I/O, use no polling or unbounded background loop, and preserve foreground responsiveness under Low Power Mode, thermal pressure, protected-data unavailability, and storage pressure. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. Implementation authorization requires an owner-approved performance-registry record declaring device floor, OS, build configuration, representative temporal/recurrence data scale, warm/cold state, measurement tool, percentile/maximum, frame/scroll metric, and regression threshold.

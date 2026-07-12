@@ -14,7 +14,7 @@ source_owners = ["Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/", "Native
 
 # Import Export and Repair
 
-This shadow target coordinates hostile-input import, reviewed export, and protected repair. It does not assert an enabled import/export/backup format, automatic repair, data-safety proof, or release readiness.
+This shadow target coordinates hostile-input import, reviewed export, and protected repair.
 
 ## SYSTEM-IMPORTED-SOURCE-001 — Imported source changes never silently alter native truth
 
@@ -27,6 +27,8 @@ This shadow target coordinates hostile-input import, reviewed export, and protec
 
 An imported or linked source change MUST produce a local durable diff/provenance record and impact preview before it can alter an Ambitions-native object, placement, notification rule, or capacity decision. Adapters parse and report facts but never mutate. Accept, keep local, split, unlink, ignore, quarantine, or reject decisions use stable source lineage and the runtime mutation sequence; source removal never silently deletes native data.
 
+External-only Events MUST remain outside Ambitions Time until imported.
+
 ## SYSTEM-EXPORT-001 — Export is explicit reviewed egress, distinct from backup
 
 - **Concept:** `system.data.export`
@@ -37,6 +39,12 @@ An imported or linked source change MUST produce a local durable diff/provenance
 - **Supersedes:** none
 
 Export MUST preview selected fields, redactions, format, destination, sensitivity, included/excluded relationships and attachments, and non-restorable status unless an owning verified backup contract explicitly says otherwise. Successful generation leaves canonical private content unchanged and durably records artifact identity/result, egress scope, Receipt/History, and replay state. Deleting the artifact does not erase that history.
+
+Goals, Receipts, Proof items, Time plans or views, and relevant objects MAY use contextual native iOS share, print, or export behavior.
+
+Reviewed export egress MUST support a single object, range, calendar, or filtered set selected by the user.
+
+Reviews SHOULD be exportable.
 
 ## SYSTEM-REPAIR-001 — Repair is previewed, protected, receipt-backed, and verified
 
@@ -80,7 +88,7 @@ Local redacted evidence binds operation/artifact/source/command IDs, schema/fing
 
 <!-- canon-section: source-ownership -->
 Canonical ownership is divided among ExternalWrites, Storage, Repair, PrivacySecurity, Commands, Inspection, and Quality.
-Exact targets are `Core/LocalRuntimeOS/ExternalWrites/`, `Storage/`, `Repair/`, `PrivacySecurity/`, `Commands/`, and `Inspection/`; `Quality/` owns hostile fixtures, crash matrices, and data-safety proof. Current source presence does not prove full format coverage, direct-upgrade horizon, destructive repair, backup/restore, or release safety.
+Exact targets are `Core/LocalRuntimeOS/ExternalWrites/`, `Storage/`, `Repair/`, `PrivacySecurity/`, `Commands/`, and `Inspection/`; `Quality/` owns hostile fixtures, crash matrices, and data-safety proof.
 
 <!-- canon-section: tests-proof -->
 Cover malformed/oversized/decompression/path/encoding input, duplicates/recurrence/time-zone, source update/removal, no-silent-change target, partial import, export full/selective/redaction/cancel/artifact deletion, export-not-backup, tampered backup, every migration path/crash point, low storage, quarantine, rollback, invariant/replay/projection rebuild, permission/network loss, privacy egress attacks, and accessibility.

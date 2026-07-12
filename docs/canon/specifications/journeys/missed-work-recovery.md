@@ -27,6 +27,16 @@ This shadow journey coordinates humane recovery choices while owning objects ret
 
 Recovery MUST preserve the last honest state and present non-shaming choices. Moving committed time, changing required work, altering a path, or affecting protected boundaries remains a non-durable proposal until materially confirmed; missed work never authorizes silent reflow.
 
+When a Goal enters Needs Attention or Recovering, Ambitions MUST show what changed, why attention is needed, the Recommended step, route and schedule impact, Proof gaps, and one clear recovery action.
+
+Minor recovery MAY apply only within user-authorized automation and MUST remain visible through a marker, Receipt, History, and Undo.
+
+After a missed Step, Ambitions MAY ask one necessary non-shaming question about what changed.
+
+A review MAY suggest a future Goal Path change but MUST NOT commit it silently.
+
+After several days of plan divergence, Ambitions MAY ask one necessary non-shaming question and MUST keep any response contextual, inspectable, and correctable.
+
 <!-- canon-section: trigger-starting-state -->
 Triggers are elapsed placement without closure, user-declared miss/block, repeated mismatch the user chooses to review, or return after interruption; starting state identifies affected Steps/path, proof/closure state, current capacity, deadlines, dependencies, protected boundaries, and prior recovery history.
 

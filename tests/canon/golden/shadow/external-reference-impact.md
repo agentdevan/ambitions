@@ -6,7 +6,7 @@
 - Canon revision: `1`
 - Authority state: `shadow`
 - Compiler version: `0.1.0`
-- Canon content SHA: `5dc62407e500e5b12762f9b417884892cc06f1dc71fc79ab9afdf0f1c4defa18`
+- Canon content SHA: `12f110471863c2f38c9a4f611022f2162365785a201df345bc6633f93fb2a31c`
 
 **Representation status:** Unrepresented
 

@@ -7,11 +7,13 @@ owner_domain = "app-launch-setup"
 canon_revision = 1
 profile = "system-v1"
 owns_concepts = [
+  "account.launch-commitment",
   "app.launch.readiness",
   "app.launch.recovery",
   "app.setup.interruption-resume",
   "app.setup.progressive-first-use",
   "app.setup.state",
+  "app.setup.progress",
 ]
 inherits = [
   "MISSION-LAUNCH-BAR-001",
@@ -25,7 +27,7 @@ inherits = [
 depends_on = ["CONSTITUTION", "APP-NAVIGATION"]
 source_owners = [
   "Native/Ambitions/App/",
-  "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/LaunchGateView.swift",
+  "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/",
   "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
   "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
   "Native/Ambitions/Surfaces/You/",
@@ -35,7 +37,30 @@ source_owners = [
 
 # Launch and Progressive Setup
 
-This shadow specification defines the intended boundary between local-store readiness, first useful launch, and optional progressive setup. It does not assert that the current launch chain, setup UI, account flow, persistence, or proof is complete.
+
+
+## APP-ACCOUNT-LAUNCH-001 — Optional account support ships at launch
+
+- **Concept:** `account.launch-commitment`
+- **Modality:** `MUST`
+- **Scope:** Launch account availability and no-account product entry
+- **Status:** `normative`
+- **Verification:** `SCENARIO-APP-ACCOUNT-OPTIONAL-001`
+- **Supersedes:** none
+
+Ambitions Account support MUST be available at launch while remaining optional. The user MUST be able to enter and use the complete local core without creating or signing into an account; account availability does not weaken the local-authority, private-data, or network boundaries.
+
+Ambitions Account MAY support Sign in with Apple, Google Sign-In, identity, entitlement, approved recovery/support, and future approved services.
+
+Ambitions Account MAY support continuity, sync, and account-backed capabilities but MUST NOT gate the local core.
+
+Ambitions Account MUST NOT gate Today, Goals, Time, Capture, Search, or local data.
+
+Ambitions Account MUST NOT gate the local core or become the private-graph backend.
+
+Ambitions Account MAY support identity, entitlements, approved recovery or support, and non-sensitive service state.
+
+Account status and sign-out consequences MUST be explicit.
 
 ## APP-SETUP-PROGRESSIVE-FIRST-USE-001 — Local core precedes optional setup
 
@@ -50,6 +75,16 @@ First use MUST open a useful local core before account sign-in or optional netwo
 
 Setup may encourage a first Goal and may preview a first Path when enough information exists; it cannot require either before the local app becomes usable. It must not present a long mandatory permission wall, chatbot center, or static completion checklist as the product.
 
+Ambitions MUST open to usable product value immediately and MUST prompt setup only when needed.
+
+Onboarding SHOULD be a conversational guided interview.
+
+Onboarding MUST use chapters.
+
+Onboarding SHOULD recommend adding a first goal but allow skipping.
+
+Ambitions SHOULD ask questions that quickly improve pathing.
+
 ## APP-LAUNCH-READINESS-001 — Launch gate protects durable local readiness
 
 - **Concept:** `app.launch.readiness`
@@ -59,7 +94,9 @@ Setup may encourage a first Goal and may preview a first Path when enough inform
 - **Verification:** `SCENARIO-APP-LAUNCH-READY-001`, `SCENARIO-APP-LAUNCH-DEGRADED-001`
 - **Supersedes:** none
 
-Launch MUST establish enough local readiness to avoid presenting a false usable state: readable local authority, a valid app/navigation root, and a safe path for pending repair or recovery. Optional account, sync, R2, Source Atlas, permission, and external-source checks cannot block entry to the healthy local core. A launch indicator may communicate real bounded work; it must not hide indefinite network waits or report success before local readiness is truthful.
+Launch MUST establish enough local readiness to avoid presenting a false usable state: readable local authority, a valid app/navigation root, and a safe path for pending repair or recovery. Optional account, sync, R2, Source Atlas, permission, and external-source checks cannot block entry to the healthy local core. A launch indicator may communicate real bounded work;
+
+Skipping onboarding MUST NOT block the app.
 
 ## APP-LAUNCH-RECOVERY-001 — Launch failure offers repair without destructive reset
 
@@ -93,6 +130,17 @@ Each accepted setup answer MUST persist before the next question is presented. I
 - **Supersedes:** none
 
 Setup state MUST distinguish not started, in progress, skipped, sufficient for local use, and revisitable. Any displayed progress reflects the weighted usefulness of durable accepted context rather than pressuring completion through raw question count. Completion does not grant permissions, create an account, enable continuity, or prove that a first path was generated unless the owning flow separately commits and proves that result.
+
+## APP-SETUP-PROGRESS-001 — Setup progress
+
+- **Concept:** `app.setup.progress`
+- **Modality:** `MUST`
+- **Scope:** First-use setup
+- **Status:** `normative`
+- **Verification:** `SCENARIO-SETUP-PROGRESS-001`
+- **Supersedes:** none
+
+Setup MUST disclose bounded progress for work that is not immediate, remain resumable, and never block useful local entry on network availability.
 
 ## Completeness contract
 
@@ -134,4 +182,4 @@ Scoped evidence records launch phase, local-readiness decision, failure class, r
 Required proof covers cold/warm/offline launch, no-account entry, optional-service outage, migration/replay failure, non-destructive repair, crash/interruption resume, skip behavior, durable per-answer save, accessibility focus/order/actions, Dynamic Type, Reduce Motion, and private diagnostic redaction.
 
 <!-- canon-section: performance-resource-constraints -->
-On the oldest supported physical iPhone in an optimized build with 10,000 canonical objects, 50,000 events, and 5,000 receipts, a healthy cold launch MUST present the first useful local frame within 1.5 seconds at P95 across 20 launches; warm entry MUST complete within 500 ms at P95. The readiness decision itself MUST complete within 250 ms at P95 and read no more than 16 MiB before first useful presentation. An operation exceeding 2 seconds MUST expose truthful progress and yield the main actor at least every 50 ms. A setup-answer commit MUST complete within 100 ms at P95 and use one local transaction; resume decision MUST complete within 250 ms at P95. Launch/readiness memory growth MUST remain at or below 40 MiB, make zero network calls, and perform no polling after readiness. Current device, launch, storage-I/O, memory, migration, replay, and energy proof is not claimed.
+On the oldest supported physical iPhone in an optimized build with 10,000 canonical objects, 50,000 events, and 5,000 receipts, a healthy cold launch MUST present the first useful local frame within 1.5 seconds at P95 across 20 launches; warm entry MUST complete within 500 ms at P95. The readiness decision itself MUST complete within 250 ms at P95 and read no more than 16 MiB before first useful presentation. An operation exceeding 2 seconds MUST expose truthful progress and yield the main actor at least every 50 ms. A setup-answer commit MUST complete within 100 ms at P95 and use one local transaction; resume decision MUST complete within 250 ms at P95. Launch/readiness memory growth MUST remain at or below 40 MiB, make zero network calls, and perform no polling after readiness.

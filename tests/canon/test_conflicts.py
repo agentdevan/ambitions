@@ -198,6 +198,7 @@ def disposition_bytes(value: ConflictDocket) -> bytes:
                 "claim_id": item.claim_id,
                 "source_id": item.source_id,
                 "source_location": item.source_location,
+                "source_text_sha256": item.evidence_sha256,
                 "concept": item.concept,
                 "disposition": "conflict",
                 "decision_mapping_status": None,

@@ -454,6 +454,14 @@ class ManifestTests(unittest.TestCase):
                 Path("specifications/systems/scheduling-and-capacity.md"),
                 Path("specifications/systems/source-atlas.md"),
                 Path("specifications/systems/sync-and-continuity.md"),
+                Path("standards/accessibility.md"),
+                Path("standards/copy-and-state-language.md"),
+                Path("standards/native-ios-engineering.md"),
+                Path("standards/performance-and-energy.md"),
+                Path("standards/security-and-privacy.md"),
+                Path("standards/swiftui-and-design-system.md"),
+                Path("standards/testing-and-fixtures.md"),
+                Path("standards/validation-and-release.md"),
             ),
         )
         self.assertEqual(

@@ -1,74 +1,116 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "5dc62407e500e5b12762f9b417884892cc06f1dc71fc79ab9afdf0f1c4defa18",
+  "canon_content_sha": "12f110471863c2f38c9a4f611022f2162365785a201df345bc6633f93fb2a31c",
   "canon_revision": 1,
   "compiler_version": "0.1.0",
   "mappings": [
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/Accessibility/",
+        "Native/Ambitions/Quality/Accessibility/"
+      ],
+      "requirement_id": "A11Y-002"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/Accessibility/",
+        "Native/Ambitions/Quality/Accessibility/"
+      ],
+      "requirement_id": "A11Y-DYNAMIC-TYPE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/Accessibility/",
+        "Native/Ambitions/Quality/Accessibility/"
+      ],
+      "requirement_id": "A11Y-INPUT-EQUIVALENCE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/Accessibility/",
+        "Native/Ambitions/Quality/Accessibility/"
+      ],
+      "requirement_id": "A11Y-PROOF-MATRIX-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/Accessibility/",
+        "Native/Ambitions/Quality/Accessibility/"
+      ],
+      "requirement_id": "A11Y-READING-FOCUS-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/Accessibility/",
+        "Native/Ambitions/Quality/Accessibility/"
+      ],
+      "requirement_id": "A11Y-REDUCED-EFFECTS-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/Accessibility/",
+        "Native/Ambitions/Quality/Accessibility/"
+      ],
+      "requirement_id": "A11Y-STATUS-ERRORS-001"
+    },
     {
       "references": [],
       "requirement_id": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
     },
     {
       "references": [
-        "Native/Ambitions/App/AppDeepLinkRegistry.swift",
-        "Native/Ambitions/App/AppExternalRouteModels.swift",
-        "Native/Ambitions/App/AppExternalRouteOverlayTranslation.swift",
-        "Native/Ambitions/App/AppExternalRoutePayloadTranslation.swift",
-        "Native/Ambitions/App/AppExternalRouteTranslator.swift",
-        "Native/Ambitions/App/AppIntentLaunchRouter.swift",
-        "Native/Ambitions/PreviewSupport/AppDeepLinkPreviewRouter.swift",
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "APP-ACCOUNT-LAUNCH-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/PreviewSupport/",
         "Native/Ambitions/Quality/"
       ],
       "requirement_id": "APP-DEEP-LINK-EXTERNAL-ENTRY-001"
     },
     {
       "references": [
-        "Native/Ambitions/App/AppDeepLinkRegistry.swift",
-        "Native/Ambitions/App/AppExternalRouteModels.swift",
-        "Native/Ambitions/App/AppExternalRouteOverlayTranslation.swift",
-        "Native/Ambitions/App/AppExternalRoutePayloadTranslation.swift",
-        "Native/Ambitions/App/AppExternalRouteTranslator.swift",
-        "Native/Ambitions/App/AppIntentLaunchRouter.swift",
-        "Native/Ambitions/PreviewSupport/AppDeepLinkPreviewRouter.swift",
+        "Native/Ambitions/App/",
+        "Native/Ambitions/PreviewSupport/",
         "Native/Ambitions/Quality/"
       ],
       "requirement_id": "APP-DEEP-LINK-FALLBACK-001"
     },
     {
       "references": [
-        "Native/Ambitions/App/AppDeepLinkRegistry.swift",
-        "Native/Ambitions/App/AppExternalRouteModels.swift",
-        "Native/Ambitions/App/AppExternalRouteOverlayTranslation.swift",
-        "Native/Ambitions/App/AppExternalRoutePayloadTranslation.swift",
-        "Native/Ambitions/App/AppExternalRouteTranslator.swift",
-        "Native/Ambitions/App/AppIntentLaunchRouter.swift",
-        "Native/Ambitions/PreviewSupport/AppDeepLinkPreviewRouter.swift",
+        "Native/Ambitions/App/",
+        "Native/Ambitions/PreviewSupport/",
         "Native/Ambitions/Quality/"
       ],
       "requirement_id": "APP-DEEP-LINK-PRIVACY-001"
     },
     {
       "references": [
-        "Native/Ambitions/App/AppDeepLinkRegistry.swift",
-        "Native/Ambitions/App/AppExternalRouteModels.swift",
-        "Native/Ambitions/App/AppExternalRouteOverlayTranslation.swift",
-        "Native/Ambitions/App/AppExternalRoutePayloadTranslation.swift",
-        "Native/Ambitions/App/AppExternalRouteTranslator.swift",
-        "Native/Ambitions/App/AppIntentLaunchRouter.swift",
-        "Native/Ambitions/PreviewSupport/AppDeepLinkPreviewRouter.swift",
+        "Native/Ambitions/App/",
+        "Native/Ambitions/PreviewSupport/",
         "Native/Ambitions/Quality/"
       ],
       "requirement_id": "APP-DEEP-LINK-RESOLVE-001"
     },
     {
       "references": [
-        "Native/Ambitions/App/AppDeepLinkRegistry.swift",
-        "Native/Ambitions/App/AppExternalRouteModels.swift",
-        "Native/Ambitions/App/AppExternalRouteOverlayTranslation.swift",
-        "Native/Ambitions/App/AppExternalRoutePayloadTranslation.swift",
-        "Native/Ambitions/App/AppExternalRouteTranslator.swift",
-        "Native/Ambitions/App/AppIntentLaunchRouter.swift",
-        "Native/Ambitions/PreviewSupport/AppDeepLinkPreviewRouter.swift",
+        "Native/Ambitions/App/",
+        "Native/Ambitions/PreviewSupport/",
         "Native/Ambitions/Quality/"
       ],
       "requirement_id": "APP-DEEP-LINK-STATE-001"
@@ -148,7 +190,7 @@
         "Native/Ambitions/App/",
         "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
         "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
-        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/LaunchGateView.swift",
+        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/",
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/You/"
       ],
@@ -159,7 +201,7 @@
         "Native/Ambitions/App/",
         "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
         "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
-        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/LaunchGateView.swift",
+        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/",
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/You/"
       ],
@@ -168,7 +210,7 @@
     {
       "references": [
         "Native/Ambitions/App/",
-        "Native/Ambitions/Quality/RouteDepthChromeAudit.swift",
+        "Native/Ambitions/Quality/",
         "Native/Ambitions/Stage/"
       ],
       "requirement_id": "APP-NAVIGATION-RESTORATION-001"
@@ -176,7 +218,7 @@
     {
       "references": [
         "Native/Ambitions/App/",
-        "Native/Ambitions/Quality/RouteDepthChromeAudit.swift",
+        "Native/Ambitions/Quality/",
         "Native/Ambitions/Stage/"
       ],
       "requirement_id": "APP-NAVIGATION-STATE-001"
@@ -236,7 +278,18 @@
         "Native/Ambitions/App/",
         "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
         "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
-        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/LaunchGateView.swift",
+        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "APP-SETUP-PROGRESS-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/",
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/You/"
       ],
@@ -247,7 +300,7 @@
         "Native/Ambitions/App/",
         "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
         "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
-        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/LaunchGateView.swift",
+        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/",
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/You/"
       ],
@@ -258,7 +311,7 @@
         "Native/Ambitions/App/",
         "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
         "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
-        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/LaunchGateView.swift",
+        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/",
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/You/"
       ],
@@ -307,6 +360,126 @@
       "requirement_id": "CANON-DESTRUCTIVE-SUPERSESSION-001"
     },
     {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "CODEX-DEPT-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "CODEX-DEPT-002"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "CODEX-DEPT-003"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "CODEX-DEPT-004"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "CODEX-ISSUE-READINESS-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "CODEX-PREFLIGHT-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "CONCURRENCY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "CONCURRENCY-002"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "CONCURRENCY-003"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "CONCURRENCY-004"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "CONCURRENCY-005"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "CONCURRENCY-006"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "CONCURRENCY-007"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "CONCURRENCY-008"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "CONCURRENCY-009"
+    },
+    {
       "references": [],
       "requirement_id": "CONST-HISTORY-NO-GRAVEYARD-001"
     },
@@ -339,6 +512,391 @@
       "requirement_id": "CONTROL-UNDO-RECOVERY-001"
     },
     {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Language/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "COPY-HUMANE-TONE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Language/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "COPY-LOCKED-VOCABULARY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Language/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "COPY-STATE-CONSEQUENCE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Language/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "COPY-VISIBILITY-CLASSIFICATION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Rendering/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "DESIGN-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Rendering/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "DESIGN-002"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Rendering/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "DESIGN-003"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Rendering/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "DESIGN-004"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Rendering/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "DESIGN-005"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Rendering/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "DESIGN-006"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Rendering/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "DESIGN-007"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "DETERMINISM-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "DETERMINISM-002"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "DETERMINISM-003"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "DETERMINISM-004"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "DETERMINISM-005"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "DETERMINISM-006"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "DETERMINISM-007"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "ENFORCEMENT-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "ENFORCEMENT-002"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "ENFORCEMENT-003"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "ENFORCEMENT-004"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "ENFORCEMENT-ARCHITECTURE-OWNERSHIP-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "ENFORCEMENT-VALIDATION-STATE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/Security/"
+      ],
+      "requirement_id": "ENTITLEMENT-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/Security/"
+      ],
+      "requirement_id": "ENTITLEMENT-002"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/Security/"
+      ],
+      "requirement_id": "ENTITLEMENT-003"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/Security/"
+      ],
+      "requirement_id": "ENTITLEMENT-004"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "EVOLUTION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "EVOLUTION-002"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "EVOLUTION-003"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "EVOLUTION-004"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "EVOLUTION-HORIZON-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Rendering/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "FRONTEND-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Rendering/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "FRONTEND-002"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Rendering/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "FRONTEND-003"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Rendering/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "FRONTEND-004"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Rendering/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "FRONTEND-005"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Rendering/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "FRONTEND-006"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Rendering/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "FRONTEND-007"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Rendering/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "FRONTEND-008"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Rendering/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "FRONTEND-009"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Rendering/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "FRONTEND-010"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/Performance/"
+      ],
+      "requirement_id": "GAP-PERFORMANCE-CALIBRATION-ATLAS-001"
+    },
+    {
       "references": [],
       "requirement_id": "GOVERNANCE-LINEAR-RETENTION-001"
     },
@@ -356,7 +914,79 @@
         "Native/Ambitions/Surfaces/Time/",
         "Native/Ambitions/Trust/"
       ],
+      "requirement_id": "JOURNEY-CALENDAR-CANDIDATE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "JOURNEY-CALENDAR-CONFLICT-CHOICE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Trust/"
+      ],
       "requirement_id": "JOURNEY-CALENDAR-DIFF-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "JOURNEY-CALENDAR-DIFF-GROUPING-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "JOURNEY-CALENDAR-IMPORT-COMMIT-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "JOURNEY-CALENDAR-INVITE-DIFF-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "JOURNEY-CALENDAR-NOTIFICATION-HANDOFF-001"
     },
     {
       "references": [
@@ -542,6 +1172,70 @@
       "requirement_id": "LAW-SHELL-STAGE-001"
     },
     {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "LIFECYCLE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "LIFECYCLE-002"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "LIFECYCLE-003"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "LIFECYCLE-004"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Language/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "LOCALIZATION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Language/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "LOCALIZATION-002"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Language/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "LOCALIZATION-003"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Language/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "LOCALIZATION-004"
+    },
+    {
       "references": [],
       "requirement_id": "MISSION-ANTI-METRICS-001"
     },
@@ -698,6 +1392,17 @@
         "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
         "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
         "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/Motion/"
+      ],
+      "requirement_id": "OBJ-CLOSURE-SEPARATION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/Goals/"
       ],
       "requirement_id": "OBJ-COMMON-ENVELOPE-001"
@@ -740,7 +1445,81 @@
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/Time/"
       ],
+      "requirement_id": "OBJ-EVENT-ALL-DAY-CAPACITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
       "requirement_id": "OBJ-EVENT-IDENTITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "OBJ-EVENT-MULTI-DAY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "OBJ-EVENT-RECURRENCE-EDIT-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "OBJ-EVENT-SOURCE-SELECTION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "OBJ-EVENT-TIME-ZONE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/"
+      ],
+      "requirement_id": "OBJ-FUTURE-STEP-NEAR-TERM-001"
     },
     {
       "references": [
@@ -766,7 +1545,31 @@
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/Goals/"
       ],
+      "requirement_id": "OBJ-GOAL-AUTOMATION-LADDER-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/"
+      ],
       "requirement_id": "OBJ-GOAL-CREATION-FAILURE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/"
+      ],
+      "requirement_id": "OBJ-GOAL-FORM-001"
     },
     {
       "references": [
@@ -804,6 +1607,54 @@
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/Goals/"
       ],
+      "requirement_id": "OBJ-GOAL-PATH-ACCESSIBILITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/"
+      ],
+      "requirement_id": "OBJ-GOAL-PATH-ADAPTATION-BOUNDARY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/"
+      ],
+      "requirement_id": "OBJ-GOAL-PATH-ADAPTATION-TRIGGERS-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/"
+      ],
+      "requirement_id": "OBJ-GOAL-PATH-EMOTIONAL-POSTURE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/"
+      ],
       "requirement_id": "OBJ-GOAL-PATH-IDENTITY-001"
     },
     {
@@ -817,6 +1668,30 @@
         "Native/Ambitions/Surfaces/Goals/"
       ],
       "requirement_id": "OBJ-GOAL-PATH-RECEIPT-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/"
+      ],
+      "requirement_id": "OBJ-GOAL-PATH-STRATEGY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/"
+      ],
+      "requirement_id": "OBJ-GOAL-PRIORITY-001"
     },
     {
       "references": [
@@ -851,6 +1726,39 @@
         "Native/Ambitions/Surfaces/Goals/"
       ],
       "requirement_id": "OBJ-LIFE-AREA-IDENTITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/"
+      ],
+      "requirement_id": "OBJ-LIFE-AREA-SUGGESTED-DEFAULTS-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/"
+      ],
+      "requirement_id": "OBJ-LIFE-CAPITAL-ANTI-GAMIFICATION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/"
+      ],
+      "requirement_id": "OBJ-LIFE-CAPITAL-EDITABILITY-001"
     },
     {
       "references": [
@@ -981,6 +1889,40 @@
         "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
         "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
         "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/"
+      ],
+      "requirement_id": "OBJ-REMINDER-REPLACEMENT-TARGET-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "OBJ-SCHEDULE-CHANGE-SET-IDENTITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "OBJ-SCHEDULE-PLACEMENT-ATOMICITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/Time/"
       ],
       "requirement_id": "OBJ-SCHEDULE-PLACEMENT-IDENTITY-001"
@@ -998,6 +1940,17 @@
         "Native/Ambitions/Surfaces/Today/"
       ],
       "requirement_id": "OBJ-SCHEDULE-STATE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "OBJ-SCHEDULING-EXACTNESS-001"
     },
     {
       "references": [
@@ -1035,6 +1988,20 @@
         "Native/Ambitions/Surfaces/Today/"
       ],
       "requirement_id": "OBJ-STEP-IDENTITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/"
+      ],
+      "requirement_id": "OBJ-STEP-URGENCY-METADATA-001"
     },
     {
       "references": [
@@ -1097,6 +2064,41 @@
       "requirement_id": "OBJECT-TAXONOMY-001"
     },
     {
+      "references": [
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/Performance/"
+      ],
+      "requirement_id": "PERF-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/Performance/"
+      ],
+      "requirement_id": "PERF-002"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/Performance/"
+      ],
+      "requirement_id": "PERF-003"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/Performance/"
+      ],
+      "requirement_id": "PERF-004"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/Performance/"
+      ],
+      "requirement_id": "PERF-005"
+    },
+    {
       "references": [],
       "requirement_id": "PLATFORM-CALENDAR-REPLACEMENT-001"
     },
@@ -1117,6 +2119,80 @@
       "requirement_id": "PROOF-FIGMA-AUTHORITY-001"
     },
     {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "RELEASE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "RELEASE-002"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "RELEASE-003"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "RELEASE-004"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "RELIABILITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "RELIABILITY-002"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "RELIABILITY-003"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "RELIABILITY-004"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "RELIABILITY-005"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "RELIABILITY-006"
+    },
+    {
       "references": [],
       "requirement_id": "RUNTIME-MUTATION-SEQUENCE-001"
     },
@@ -1126,8 +2202,56 @@
     },
     {
       "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/Security/"
+      ],
+      "requirement_id": "SECURITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/Security/"
+      ],
+      "requirement_id": "SECURITY-002"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/Security/"
+      ],
+      "requirement_id": "SECURITY-003"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/Security/"
+      ],
+      "requirement_id": "SECURITY-004"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/Security/"
+      ],
+      "requirement_id": "SECURITY-005"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/Security/"
+      ],
+      "requirement_id": "SECURITY-006"
+    },
+    {
+      "references": [
         "Native/Ambitions/App/",
-        "Native/Ambitions/Quality/RouteDepthChromeAudit.swift",
+        "Native/Ambitions/Quality/",
         "Native/Ambitions/Stage/"
       ],
       "requirement_id": "SPEC-APP-NAVIGATION-IA-MAP-001"
@@ -1135,7 +2259,7 @@
     {
       "references": [
         "Native/Ambitions/App/",
-        "Native/Ambitions/Quality/RouteDepthChromeAudit.swift",
+        "Native/Ambitions/Quality/",
         "Native/Ambitions/Stage/"
       ],
       "requirement_id": "SPEC-APP-NAVIGATION-PRESENTATION-001"
@@ -1143,7 +2267,7 @@
     {
       "references": [
         "Native/Ambitions/App/",
-        "Native/Ambitions/Quality/RouteDepthChromeAudit.swift",
+        "Native/Ambitions/Quality/",
         "Native/Ambitions/Stage/"
       ],
       "requirement_id": "SPEC-APP-NAVIGATION-ROOT-INTERACTION-001"
@@ -1174,6 +2298,46 @@
         "Native/Ambitions/Stage/"
       ],
       "requirement_id": "SPEC-APP-SHELL-ROOT-NAVIGATION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Language/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "SPEC-COMPLETED-CONTEXTUAL-PLACEMENT-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Composer/Capture/",
+        "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "SPEC-GLOBAL-CAPTURE-ATTACHMENT-INTAKE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Composer/Capture/",
+        "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "SPEC-GLOBAL-CAPTURE-CLASSIFICATION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Composer/Capture/",
+        "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "SPEC-GLOBAL-CAPTURE-CLOSE-BEHAVIOR-001"
     },
     {
       "references": [
@@ -1271,6 +2435,17 @@
         "Native/Ambitions/Stage/",
         "Native/Ambitions/Trust/"
       ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ACTIONS-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ],
       "requirement_id": "SPEC-GLOBAL-SEARCH-FIRST-VIEWPORT-001"
     },
     {
@@ -1293,7 +2468,29 @@
         "Native/Ambitions/Stage/",
         "Native/Ambitions/Trust/"
       ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-INDEX-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ],
       "requirement_id": "SPEC-GLOBAL-SEARCH-INDEX-ACTIONS-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-PLACEMENT-001"
     },
     {
       "references": [
@@ -1334,6 +2531,16 @@
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Trust/"
       ],
+      "requirement_id": "SPEC-GLOBAL-TRUST-PROPORTIONAL-RECEIPTS-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Language/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Trust/"
+      ],
       "requirement_id": "SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001"
     },
     {
@@ -1346,7 +2553,55 @@
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/Goals/"
       ],
+      "requirement_id": "SPEC-SURFACE-GOAL-DETAIL-VIEWPORT-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/"
+      ],
       "requirement_id": "SPEC-SURFACE-GOALS-ANTI-PATTERNS-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/"
+      ],
+      "requirement_id": "SPEC-SURFACE-GOALS-CLOSURE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/"
+      ],
+      "requirement_id": "SPEC-SURFACE-GOALS-DETAIL-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/"
+      ],
+      "requirement_id": "SPEC-SURFACE-GOALS-EXECUTION-STACK-001"
     },
     {
       "references": [
@@ -1382,7 +2637,55 @@
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/Goals/"
       ],
+      "requirement_id": "SPEC-SURFACE-GOALS-PATH-INTERACTION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/"
+      ],
+      "requirement_id": "SPEC-SURFACE-GOALS-PATH-VISUAL-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/"
+      ],
       "requirement_id": "SPEC-SURFACE-GOALS-PURPOSE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/"
+      ],
+      "requirement_id": "SPEC-SURFACE-GOALS-REVIEWS-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/"
+      ],
+      "requirement_id": "SPEC-SURFACE-GOALS-ROOT-VIEWPORT-001"
     },
     {
       "references": [
@@ -1418,6 +2721,18 @@
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/Time/"
       ],
+      "requirement_id": "SPEC-SURFACE-TIME-CREATION-ROUTES-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/Time/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
       "requirement_id": "SPEC-SURFACE-TIME-DAY-001"
     },
     {
@@ -1431,6 +2746,54 @@
         "Native/Ambitions/Surfaces/Time/"
       ],
       "requirement_id": "SPEC-SURFACE-TIME-FIRST-VIEWPORT-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/Time/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "SPEC-SURFACE-TIME-IMPORTED-SOURCE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/Time/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "SPEC-SURFACE-TIME-LIST-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/Time/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "SPEC-SURFACE-TIME-MONTH-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/Time/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "SPEC-SURFACE-TIME-OBJECT-DETAIL-001"
     },
     {
       "references": [
@@ -1466,6 +2829,54 @@
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/Time/"
       ],
+      "requirement_id": "SPEC-SURFACE-TIME-SEARCH-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/Time/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "SPEC-SURFACE-TIME-STEP-MEMBERSHIP-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/Time/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "SPEC-SURFACE-TIME-TODAY-CONTROL-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/Time/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "SPEC-SURFACE-TIME-VIEW-SWITCHING-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/Time/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
       "requirement_id": "SPEC-SURFACE-TIME-VIEWS-001"
     },
     {
@@ -1479,6 +2890,42 @@
         "Native/Ambitions/Surfaces/Time/"
       ],
       "requirement_id": "SPEC-SURFACE-TIME-VISUAL-AUTHORITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/Time/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "SPEC-SURFACE-TIME-VISUAL-GEOMETRY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/Time/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "SPEC-SURFACE-TIME-WEEK-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/Time/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "SPEC-SURFACE-TIME-YEAR-001"
     },
     {
       "references": [
@@ -1508,7 +2955,27 @@
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/Today/"
       ],
+      "requirement_id": "SPEC-SURFACE-TODAY-MISSED-CONTINUITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Today/"
+      ],
       "requirement_id": "SPEC-SURFACE-TODAY-PURPOSE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Today/"
+      ],
+      "requirement_id": "SPEC-SURFACE-TODAY-ROW-001"
     },
     {
       "references": [
@@ -1560,6 +3027,42 @@
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/You/"
       ],
+      "requirement_id": "SPEC-SURFACE-YOU-APPEARANCE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SPEC-SURFACE-YOU-CONTEXTUAL-EDUCATION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SPEC-SURFACE-YOU-DATA-CONTROLS-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
       "requirement_id": "SPEC-SURFACE-YOU-DEPTH-001"
     },
     {
@@ -1596,6 +3099,42 @@
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/You/"
       ],
+      "requirement_id": "SPEC-SURFACE-YOU-NO-KNOWLEDGE-MODEL-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SPEC-SURFACE-YOU-PRIVACY-DATA-BOUNDARY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SPEC-SURFACE-YOU-PROFILE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
       "requirement_id": "SPEC-SURFACE-YOU-SCREEN-INVENTORY-001"
     },
     {
@@ -1608,7 +3147,293 @@
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/You/"
       ],
+      "requirement_id": "SPEC-SURFACE-YOU-SETTINGS-DRILLDOWN-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SPEC-SURFACE-YOU-TIME-PREFERENCES-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
       "requirement_id": "SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/Accessibility/",
+        "Native/Ambitions/Quality/Accessibility/"
+      ],
+      "requirement_id": "STANDARD-ACCEPTANCE-ACCESSIBILITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "STANDARD-ACCEPTANCE-BUILD-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "STANDARD-ACCEPTANCE-DOCS-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "STANDARD-ACCEPTANCE-IA-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "STANDARD-ACCEPTANCE-INTERACTION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "STANDARD-ACCEPTANCE-OBJECTS-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "STANDARD-ACCEPTANCE-PROOF-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "STANDARD-ACCEPTANCE-REPLACEMENT-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "STANDARD-ACCEPTANCE-SCENARIOS-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "STANDARD-ACCEPTANCE-SOURCE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "STANDARD-ACCEPTANCE-STATUS-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "STANDARD-ACCEPTANCE-VIEWPORTS-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "STANDARD-ACCEPTANCE-VISUAL-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "STANDARD-ACCEPTANCE-VISUAL-COPY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Quality/",
+        "docs/canon/",
+        "scripts/"
+      ],
+      "requirement_id": "STANDARD-SCREENSHOT-MATRIX-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Rendering/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "STANDARD-SPACING-CORNERS-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Rendering/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "STANDARD-TYPOGRAPHY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Rendering/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "STANDARD-VISUAL-PACKAGE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Rendering/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "STANDARD-VISUAL-REVIEW-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Rendering/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "STD-INTERACTION-DISMISSAL-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Rendering/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "STD-INTERACTION-DRAG-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Rendering/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "STD-INTERACTION-FOCUS-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Rendering/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "STD-INTERACTION-LONG-PRESS-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Rendering/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "STD-INTERACTION-NATIVE-EQUIVALENCE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Rendering/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "STD-INTERACTION-SWIPE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Rendering/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "STD-INTERACTION-TAP-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/Security/"
+      ],
+      "requirement_id": "SUPPLY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/Security/"
+      ],
+      "requirement_id": "SUPPLY-002"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/Security/"
+      ],
+      "requirement_id": "SUPPLY-003"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/Security/"
+      ],
+      "requirement_id": "SUPPLY-004"
     },
     {
       "references": [],
@@ -1664,7 +3489,94 @@
         "Native/AmbitionsShareExtension/",
         "Native/AmbitionsWidgetExtension/"
       ],
+      "requirement_id": "SYSTEM-APPLE-INTENTS-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/App/Intents/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Projection/ExternalSnapshots/",
+        "Native/Ambitions/Quality/",
+        "Native/AmbitionsShareExtension/",
+        "Native/AmbitionsWidgetExtension/"
+      ],
+      "requirement_id": "SYSTEM-APPLE-PLATFORM-BASELINE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/App/Intents/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Projection/ExternalSnapshots/",
+        "Native/Ambitions/Quality/",
+        "Native/AmbitionsShareExtension/",
+        "Native/AmbitionsWidgetExtension/"
+      ],
       "requirement_id": "SYSTEM-APPLE-PROJECTION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/App/Intents/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Projection/ExternalSnapshots/",
+        "Native/Ambitions/Quality/",
+        "Native/AmbitionsShareExtension/",
+        "Native/AmbitionsWidgetExtension/"
+      ],
+      "requirement_id": "SYSTEM-APPLE-SHARE-HANDOFF-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/App/Intents/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Projection/ExternalSnapshots/",
+        "Native/Ambitions/Quality/",
+        "Native/AmbitionsShareExtension/",
+        "Native/AmbitionsWidgetExtension/"
+      ],
+      "requirement_id": "SYSTEM-APPLE-WIDGET-ACTION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/App/Intents/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Projection/ExternalSnapshots/",
+        "Native/Ambitions/Quality/",
+        "Native/AmbitionsShareExtension/",
+        "Native/AmbitionsWidgetExtension/"
+      ],
+      "requirement_id": "SYSTEM-APPLE-WIDGET-PROJECTION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SYSTEM-CONTINUITY-CONFLICT-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SYSTEM-CONTINUITY-CONTROL-CENTER-001"
     },
     {
       "references": [
@@ -1676,6 +3588,50 @@
         "Native/Ambitions/Surfaces/You/"
       ],
       "requirement_id": "SYSTEM-CONTINUITY-DISABLED-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SYSTEM-CONTINUITY-ENVIRONMENT-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SYSTEM-CONTINUITY-FAILURE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SYSTEM-CONTINUITY-RECORD-IDENTITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SYSTEM-CONTINUITY-RESTORE-001"
     },
     {
       "references": [
@@ -1724,6 +3680,17 @@
     },
     {
       "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "SYSTEM-EXTERNAL-ASSISTANCE-BOUNDARY-001"
+    },
+    {
+      "references": [
         "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
         "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
         "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
@@ -1743,7 +3710,29 @@
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/You/"
       ],
+      "requirement_id": "SYSTEM-LEARNING-CAPABILITY-RETENTION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
       "requirement_id": "SYSTEM-LEARNING-CONTROL-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SYSTEM-LEARNING-GOAL-SUGGESTION-001"
     },
     {
       "references": [
@@ -1789,6 +3778,42 @@
         "Native/Ambitions/Quality/"
       ],
       "requirement_id": "SYSTEM-PERSISTENCE-ATOMIC-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+        "Native/Ambitions/Core/LocalRuntimeOS/State/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Storage/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "SYSTEM-PERSISTENCE-COMPACTION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+        "Native/Ambitions/Core/LocalRuntimeOS/State/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Storage/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "SYSTEM-PERSISTENCE-CORRUPTION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+        "Native/Ambitions/Core/LocalRuntimeOS/State/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Storage/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "SYSTEM-PERSISTENCE-MIGRATION-001"
     },
     {
       "references": [
@@ -1848,6 +3873,34 @@
         "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
         "Native/Ambitions/Quality/"
       ],
+      "requirement_id": "SYSTEM-RUNTIME-CLOUD-INDEPENDENCE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/State/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "SYSTEM-RUNTIME-COMMAND-VALIDATION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/State/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/"
+      ],
       "requirement_id": "SYSTEM-RUNTIME-MUTATION-001"
     },
     {
@@ -1863,6 +3916,34 @@
         "Native/Ambitions/Quality/"
       ],
       "requirement_id": "SYSTEM-RUNTIME-ORCHESTRATION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/State/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "SYSTEM-RUNTIME-PROOF-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/State/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "SYSTEM-RUNTIME-SIMULATION-001"
     },
     {
       "references": [
@@ -1884,7 +3965,40 @@
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/Time/"
       ],
+      "requirement_id": "SYSTEM-SCHEDULING-FIT-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/Time/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "SYSTEM-SCHEDULING-INFEASIBILITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/Time/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
       "requirement_id": "SYSTEM-SCHEDULING-REFLOW-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/Time/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "SYSTEM-SCHEDULING-TRANSITION-BUFFER-001"
     },
     {
       "references": [
@@ -1907,6 +4021,76 @@
         "Native/Ambitions/Quality/"
       ],
       "requirement_id": "SYSTEM-SOURCE-ATLAS-PUBLIC-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "TEST-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "TEST-002"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "TEST-003"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "TEST-004"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "TEST-005"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "TEST-006"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "TEST-007"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "TEST-RUNTIME-CONTRACT-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "TEST-SCENARIO-EXECUTABILITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "TEST-SCOPE-MATRIX-001"
     },
     {
       "references": [],

@@ -36,7 +36,7 @@ from tools.ambitions_canon.task_pack import (
     validate_task_pack,
     write_task_pack,
 )
-from tests.canon.test_audit import markdown_document
+from tests.canon.test_audit import markdown_document, requirement_block
 from tests.canon.canon_test_support import write_required_governance_artifacts
 
 
@@ -1000,6 +1000,9 @@ class TaskPackTests(unittest.TestCase):
                     "SPEC-A",
                     "system.a",
                     depends_on=("SPEC-B",),
+                    requirement_blocks=(
+                        requirement_block("A-001", "system.a"),
+                    ),
                 ),
                 encoding="utf-8",
             )
@@ -1008,12 +1011,16 @@ class TaskPackTests(unittest.TestCase):
                     "SPEC-B",
                     "system.b",
                     depends_on=("SPEC-A",),
+                    requirement_blocks=(
+                        requirement_block("B-001", "system.b"),
+                    ),
                 ),
                 encoding="utf-8",
             )
             write_required_governance_artifacts(
                 canon,
                 canon_revision=1,
+                requirement_ids=("A-001", "B-001"),
             )
             (root / ".gitignore").write_text(".codex/\n", encoding="utf-8")
             intake_path = root / ".codex" / "intake" / "AMB-1842.json"

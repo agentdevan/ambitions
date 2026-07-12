@@ -1,16 +1,48 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "5dc62407e500e5b12762f9b417884892cc06f1dc71fc79ab9afdf0f1c4defa18",
+  "canon_content_sha": "12f110471863c2f38c9a4f611022f2162365785a201df345bc6633f93fb2a31c",
   "canon_revision": 1,
   "compiler_version": "0.1.0",
   "concepts": [
+    {
+      "concept": "accessibility.dynamic-type",
+      "spec_id": "STANDARD-ACCESSIBILITY"
+    },
+    {
+      "concept": "accessibility.input-equivalence",
+      "spec_id": "STANDARD-ACCESSIBILITY"
+    },
+    {
+      "concept": "accessibility.proof-matrix",
+      "spec_id": "STANDARD-ACCESSIBILITY"
+    },
+    {
+      "concept": "accessibility.reading-focus",
+      "spec_id": "STANDARD-ACCESSIBILITY"
+    },
+    {
+      "concept": "accessibility.reduced-effects",
+      "spec_id": "STANDARD-ACCESSIBILITY"
+    },
     {
       "concept": "accessibility.semantic-equivalence",
       "spec_id": "CONSTITUTION"
     },
     {
+      "concept": "accessibility.semantic-equivalence.application",
+      "spec_id": "STANDARD-ACCESSIBILITY"
+    },
+    {
+      "concept": "accessibility.status-errors",
+      "spec_id": "STANDARD-ACCESSIBILITY"
+    },
+    {
       "concept": "account.boundary",
       "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "account.launch-commitment",
+      "spec_id": "APP-LAUNCH-SETUP"
     },
     {
       "concept": "app.deep-linking.external-entry",
@@ -105,6 +137,10 @@
       "spec_id": "APP-LAUNCH-SETUP"
     },
     {
+      "concept": "app.setup.progress",
+      "spec_id": "APP-LAUNCH-SETUP"
+    },
+    {
       "concept": "app.setup.progressive-first-use",
       "spec_id": "APP-LAUNCH-SETUP"
     },
@@ -181,8 +217,388 @@
       "spec_id": "CONSTITUTION"
     },
     {
+      "concept": "copy.visibility-classification",
+      "spec_id": "STANDARD-COPY-STATE-LANGUAGE"
+    },
+    {
       "concept": "data.loss-stop-ship",
       "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "engineering.codex.issue-readiness",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.codex.preflight",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.concurrency.backpressure",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.concurrency.cancellation",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.concurrency.clock",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.concurrency.isolation",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.concurrency.main-actor",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.concurrency.race-proof",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.concurrency.reentrancy",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.concurrency.sendable",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.concurrency.tasks",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.design.change-control",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.design.component-maturity",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.design.constant-audit",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.design.positive-target",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.design.theme-completeness",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.design.token-domains",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.design.tokens",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.determinism.causal-order",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.determinism.decisions",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.determinism.golden-corpus",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.determinism.idempotency",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.determinism.policy-version",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.determinism.randomness",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.determinism.replay",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.entitlement.ethics",
+      "spec_id": "STANDARD-SECURITY-PRIVACY"
+    },
+    {
+      "concept": "engineering.entitlement.offline-data",
+      "spec_id": "STANDARD-SECURITY-PRIVACY"
+    },
+    {
+      "concept": "engineering.entitlement.purchase",
+      "spec_id": "STANDARD-SECURITY-PRIVACY"
+    },
+    {
+      "concept": "engineering.entitlement.states",
+      "spec_id": "STANDARD-SECURITY-PRIVACY"
+    },
+    {
+      "concept": "engineering.frontend.abstraction",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.frontend.assets",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.frontend.body-purity",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.frontend.component-contract",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.frontend.exhaustive-state",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.frontend.layout",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.frontend.navigation",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.frontend.presentation-state",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.frontend.preview-matrix",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.frontend.view-responsibility",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "engineering.governance.amendment",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.governance.architecture-ownership",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.governance.audit",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.governance.change-manifest",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.governance.evidence-amendment",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.governance.evolution-horizon",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.governance.handoff",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.governance.independent-acceptance",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.governance.periodic-audit",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.governance.registry",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.governance.registry-integrity",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.governance.role-separation",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.governance.stable-ids",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.governance.stop-conditions",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.governance.validation-state",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.lifecycle.background",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.lifecycle.extension",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.lifecycle.scene",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.lifecycle.system-change",
+      "spec_id": "STANDARD-NATIVE-IOS-ENGINEERING"
+    },
+    {
+      "concept": "engineering.performance.calibration-gap",
+      "spec_id": "STANDARD-PERFORMANCE-ENERGY"
+    },
+    {
+      "concept": "engineering.performance.claim-proof",
+      "spec_id": "STANDARD-PERFORMANCE-ENERGY"
+    },
+    {
+      "concept": "engineering.performance.context",
+      "spec_id": "STANDARD-PERFORMANCE-ENERGY"
+    },
+    {
+      "concept": "engineering.performance.registry",
+      "spec_id": "STANDARD-PERFORMANCE-ENERGY"
+    },
+    {
+      "concept": "engineering.performance.regression",
+      "spec_id": "STANDARD-PERFORMANCE-ENERGY"
+    },
+    {
+      "concept": "engineering.performance.resource-aware",
+      "spec_id": "STANDARD-PERFORMANCE-ENERGY"
+    },
+    {
+      "concept": "engineering.release.claim-ceiling",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.release.domains",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.release.identity",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.release.rollout",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "engineering.reliability.crash-hang",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "engineering.reliability.diagnostics",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "engineering.reliability.failure-taxonomy",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "engineering.reliability.health",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "engineering.reliability.incident",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "engineering.reliability.no-silent-repair",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "engineering.security.abuse-proof",
+      "spec_id": "STANDARD-SECURITY-PRIVACY"
+    },
+    {
+      "concept": "engineering.security.dependencies",
+      "spec_id": "STANDARD-SECURITY-PRIVACY"
+    },
+    {
+      "concept": "engineering.security.hostile-input",
+      "spec_id": "STANDARD-SECURITY-PRIVACY"
+    },
+    {
+      "concept": "engineering.security.secrets-keys",
+      "spec_id": "STANDARD-SECURITY-PRIVACY"
+    },
+    {
+      "concept": "engineering.security.sensitive-surfaces",
+      "spec_id": "STANDARD-SECURITY-PRIVACY"
+    },
+    {
+      "concept": "engineering.security.threat-model",
+      "spec_id": "STANDARD-SECURITY-PRIVACY"
+    },
+    {
+      "concept": "engineering.supply.admission",
+      "spec_id": "STANDARD-SECURITY-PRIVACY"
+    },
+    {
+      "concept": "engineering.supply.egress",
+      "spec_id": "STANDARD-SECURITY-PRIVACY"
+    },
+    {
+      "concept": "engineering.supply.minimal",
+      "spec_id": "STANDARD-SECURITY-PRIVACY"
+    },
+    {
+      "concept": "engineering.supply.sbom",
+      "spec_id": "STANDARD-SECURITY-PRIVACY"
+    },
+    {
+      "concept": "engineering.testing.coverage-meaning",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "engineering.testing.failure-injection",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "engineering.testing.fixtures",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "engineering.testing.lanes",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "engineering.testing.no-theater",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "engineering.testing.property-priorities",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "engineering.testing.regression",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "global.capture.attachment-intake",
+      "spec_id": "GLOBAL-CAPTURE"
+    },
+    {
+      "concept": "global.capture.classification",
+      "spec_id": "GLOBAL-CAPTURE"
+    },
+    {
+      "concept": "global.capture.close-behavior",
+      "spec_id": "GLOBAL-CAPTURE"
     },
     {
       "concept": "global.capture.draft-recovery",
@@ -209,8 +625,8 @@
       "spec_id": "GLOBAL-CAPTURE"
     },
     {
-      "concept": "global.motion-capture-ownership",
-      "spec_id": "CONSTITUTION"
+      "concept": "global.completed.contextual-placement",
+      "spec_id": "GLOBAL-TRUST-INSPECTION"
     },
     {
       "concept": "global.motion.accessibility",
@@ -225,6 +641,10 @@
       "spec_id": "GLOBAL-MOTION"
     },
     {
+      "concept": "global.search.canonical-actions",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
       "concept": "global.search.first-viewport",
       "spec_id": "GLOBAL-SEARCH"
     },
@@ -234,6 +654,14 @@
     },
     {
       "concept": "global.search.index-actions",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.index-ranking",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.placement",
       "spec_id": "GLOBAL-SEARCH"
     },
     {
@@ -250,6 +678,10 @@
     },
     {
       "concept": "global.trust.layers",
+      "spec_id": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
+      "concept": "global.trust.proportional-receipts",
       "spec_id": "GLOBAL-TRUST-INSPECTION"
     },
     {
@@ -273,11 +705,39 @@
       "spec_id": "CONSTITUTION"
     },
     {
+      "concept": "ia.root-state-invariance",
+      "spec_id": "CONSTITUTION"
+    },
+    {
       "concept": "ia.root-surfaces",
       "spec_id": "CONSTITUTION"
     },
     {
+      "concept": "journey.calendar-diff.conflict-choice",
+      "spec_id": "JOURNEY-EXTERNAL-CALENDAR-IMPORT"
+    },
+    {
+      "concept": "journey.calendar-diff.grouping",
+      "spec_id": "JOURNEY-EXTERNAL-CALENDAR-IMPORT"
+    },
+    {
       "concept": "journey.calendar-diff.no-silent-mutation",
+      "spec_id": "JOURNEY-EXTERNAL-CALENDAR-IMPORT"
+    },
+    {
+      "concept": "journey.calendar-diff.notification-handoff",
+      "spec_id": "JOURNEY-EXTERNAL-CALENDAR-IMPORT"
+    },
+    {
+      "concept": "journey.calendar-import.candidate",
+      "spec_id": "JOURNEY-EXTERNAL-CALENDAR-IMPORT"
+    },
+    {
+      "concept": "journey.calendar-import.commit",
+      "spec_id": "JOURNEY-EXTERNAL-CALENDAR-IMPORT"
+    },
+    {
+      "concept": "journey.calendar-invite-diff",
       "spec_id": "JOURNEY-EXTERNAL-CALENDAR-IMPORT"
     },
     {
@@ -325,8 +785,36 @@
       "spec_id": "JOURNEY-SCHEDULE-REFLOW"
     },
     {
+      "concept": "language.humane-tone",
+      "spec_id": "STANDARD-COPY-STATE-LANGUAGE"
+    },
+    {
+      "concept": "language.layout-resilience",
+      "spec_id": "STANDARD-COPY-STATE-LANGUAGE"
+    },
+    {
+      "concept": "language.localization-construction",
+      "spec_id": "STANDARD-COPY-STATE-LANGUAGE"
+    },
+    {
+      "concept": "language.locked-vocabulary",
+      "spec_id": "STANDARD-COPY-STATE-LANGUAGE"
+    },
+    {
       "concept": "language.root-labels",
       "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "language.state-consequence",
+      "spec_id": "STANDARD-COPY-STATE-LANGUAGE"
+    },
+    {
+      "concept": "language.store-localization",
+      "spec_id": "STANDARD-COPY-STATE-LANGUAGE"
+    },
+    {
+      "concept": "language.temporal-locale",
+      "spec_id": "STANDARD-COPY-STATE-LANGUAGE"
     },
     {
       "concept": "mission.anti-metrics",
@@ -445,12 +933,40 @@
       "spec_id": "OBJECT-CLOSURE"
     },
     {
+      "concept": "object.closure.separation",
+      "spec_id": "OBJECT-CLOSURE"
+    },
+    {
+      "concept": "object.event.all-day-capacity",
+      "spec_id": "OBJECT-EVENT"
+    },
+    {
       "concept": "object.event.identity-lifecycle",
+      "spec_id": "OBJECT-EVENT"
+    },
+    {
+      "concept": "object.event.multi-day",
+      "spec_id": "OBJECT-EVENT"
+    },
+    {
+      "concept": "object.event.recurrence-edit",
+      "spec_id": "OBJECT-EVENT"
+    },
+    {
+      "concept": "object.event.source-selection",
+      "spec_id": "OBJECT-EVENT"
+    },
+    {
+      "concept": "object.event.time-zone",
       "spec_id": "OBJECT-EVENT"
     },
     {
       "concept": "object.future-step-identity",
       "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "object.future-step.near-term",
+      "spec_id": "OBJECT-STEP"
     },
     {
       "concept": "object.future-step.receipt",
@@ -465,6 +981,22 @@
       "spec_id": "OBJECT-STEP"
     },
     {
+      "concept": "object.goal-path.accessibility",
+      "spec_id": "OBJECT-GOAL-PATH"
+    },
+    {
+      "concept": "object.goal-path.adaptation-boundary",
+      "spec_id": "OBJECT-GOAL-PATH"
+    },
+    {
+      "concept": "object.goal-path.adaptation-triggers",
+      "spec_id": "OBJECT-GOAL-PATH"
+    },
+    {
+      "concept": "object.goal-path.emotional-posture",
+      "spec_id": "OBJECT-GOAL-PATH"
+    },
+    {
       "concept": "object.goal-path.identity-lifecycle",
       "spec_id": "OBJECT-GOAL-PATH"
     },
@@ -473,11 +1005,27 @@
       "spec_id": "OBJECT-GOAL-PATH"
     },
     {
+      "concept": "object.goal-path.strategy",
+      "spec_id": "OBJECT-GOAL-PATH"
+    },
+    {
+      "concept": "object.goal.automation-ladder",
+      "spec_id": "OBJECT-GOAL"
+    },
+    {
       "concept": "object.goal.creation-failure",
       "spec_id": "OBJECT-GOAL"
     },
     {
+      "concept": "object.goal.form",
+      "spec_id": "OBJECT-GOAL"
+    },
+    {
       "concept": "object.goal.identity",
+      "spec_id": "OBJECT-GOAL"
+    },
+    {
+      "concept": "object.goal.priority",
       "spec_id": "OBJECT-GOAL"
     },
     {
@@ -506,6 +1054,18 @@
     },
     {
       "concept": "object.life-area.identity",
+      "spec_id": "OBJECT-LIFE-AREA"
+    },
+    {
+      "concept": "object.life-area.suggested-defaults",
+      "spec_id": "OBJECT-LIFE-AREA"
+    },
+    {
+      "concept": "object.life-capital.anti-gamification",
+      "spec_id": "OBJECT-LIFE-AREA"
+    },
+    {
+      "concept": "object.life-capital.editability",
       "spec_id": "OBJECT-LIFE-AREA"
     },
     {
@@ -565,8 +1125,20 @@
       "spec_id": "OBJECT-REMINDER"
     },
     {
+      "concept": "object.reminder.replacement-target",
+      "spec_id": "OBJECT-REMINDER"
+    },
+    {
       "concept": "object.saved-for-later",
       "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "object.schedule-change-set.identity",
+      "spec_id": "OBJECT-SCHEDULE-PLACEMENT"
+    },
+    {
+      "concept": "object.schedule-placement.atomicity",
+      "spec_id": "OBJECT-SCHEDULE-PLACEMENT"
     },
     {
       "concept": "object.schedule-placement.identity",
@@ -575,6 +1147,10 @@
     {
       "concept": "object.schedule-state.orthogonality",
       "spec_id": "OBJECT-STEP"
+    },
+    {
+      "concept": "object.scheduling.exactness",
+      "spec_id": "OBJECT-SCHEDULE-PLACEMENT"
     },
     {
       "concept": "object.source-reference.identity-visibility",
@@ -586,6 +1162,10 @@
     },
     {
       "concept": "object.step.identity-lifecycle",
+      "spec_id": "OBJECT-STEP"
+    },
+    {
+      "concept": "object.step.urgency-metadata",
       "spec_id": "OBJECT-STEP"
     },
     {
@@ -610,6 +1190,10 @@
     },
     {
       "concept": "privacy.local-authority",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "privacy.no-account-core",
       "spec_id": "CONSTITUTION"
     },
     {
@@ -653,7 +1237,127 @@
       "spec_id": "CONSTITUTION"
     },
     {
+      "concept": "standard.acceptance.accessibility",
+      "spec_id": "STANDARD-ACCESSIBILITY"
+    },
+    {
+      "concept": "standard.acceptance.build",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "standard.acceptance.documentation",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "standard.acceptance.first-viewports",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "standard.acceptance.ia",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "standard.acceptance.interaction",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "standard.acceptance.object-model",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "standard.acceptance.proof",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "standard.acceptance.replacement",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "standard.acceptance.scenario-proof",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "standard.acceptance.source",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "standard.acceptance.status",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "standard.acceptance.visual",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "standard.acceptance.visual-copy",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "standard.interaction.dismissal",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "standard.interaction.drag",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "standard.interaction.focus",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "standard.interaction.long-press",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "standard.interaction.native-equivalence",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "standard.interaction.swipe",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "standard.interaction.tap",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "standard.spacing-corners.semantic-rhythm",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "standard.typography.copy-budget",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "standard.visual-proof.screenshot-matrix",
+      "spec_id": "STANDARD-VALIDATION-RELEASE"
+    },
+    {
+      "concept": "standard.visual.independent-review",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "standard.visual.package-readiness",
+      "spec_id": "STANDARD-SWIFTUI-DESIGN-SYSTEM"
+    },
+    {
+      "concept": "surface.goal-detail.viewport",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
       "concept": "surface.goals.anti-patterns",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
+      "concept": "surface.goals.closure",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
+      "concept": "surface.goals.detail",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
+      "concept": "surface.goals.execution-stack",
       "spec_id": "SURFACE-GOALS"
     },
     {
@@ -665,7 +1369,23 @@
       "spec_id": "SURFACE-GOALS"
     },
     {
+      "concept": "surface.goals.path-interaction",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
+      "concept": "surface.goals.path-visual",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
       "concept": "surface.goals.purpose",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
+      "concept": "surface.goals.reviews",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
+      "concept": "surface.goals.root-viewport",
       "spec_id": "SURFACE-GOALS"
     },
     {
@@ -681,11 +1401,31 @@
       "spec_id": "CONSTITUTION"
     },
     {
+      "concept": "surface.time.creation-routes",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
       "concept": "surface.time.day",
       "spec_id": "SURFACE-TIME"
     },
     {
       "concept": "surface.time.first-viewport",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.imported-source",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.list",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.month",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.object-detail",
       "spec_id": "SURFACE-TIME"
     },
     {
@@ -697,11 +1437,39 @@
       "spec_id": "SURFACE-TIME"
     },
     {
+      "concept": "surface.time.search",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.step-membership",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.today-control",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.view-switching",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
       "concept": "surface.time.views",
       "spec_id": "SURFACE-TIME"
     },
     {
       "concept": "surface.time.visual-authority",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.visual-geometry",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.week",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.year",
       "spec_id": "SURFACE-TIME"
     },
     {
@@ -714,6 +1482,14 @@
     },
     {
       "concept": "surface.today.first-viewport",
+      "spec_id": "SURFACE-TODAY"
+    },
+    {
+      "concept": "surface.today.missed-placement-continuity",
+      "spec_id": "SURFACE-TODAY"
+    },
+    {
+      "concept": "surface.today.object-row",
       "spec_id": "SURFACE-TODAY"
     },
     {
@@ -741,6 +1517,18 @@
       "spec_id": "CONSTITUTION"
     },
     {
+      "concept": "surface.you.appearance",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
+      "concept": "surface.you.contextual-education",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
+      "concept": "surface.you.data-controls",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
       "concept": "surface.you.depth",
       "spec_id": "SURFACE-YOU"
     },
@@ -753,7 +1541,27 @@
       "spec_id": "SURFACE-YOU"
     },
     {
+      "concept": "surface.you.no-knowledge-model",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
+      "concept": "surface.you.privacy-data-boundary",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
+      "concept": "surface.you.profile",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
       "concept": "surface.you.screen-inventory",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
+      "concept": "surface.you.settings-drilldown",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
+      "concept": "surface.you.time-preferences",
       "spec_id": "SURFACE-YOU"
     },
     {
@@ -765,11 +1573,55 @@
       "spec_id": "SYSTEM-APPLE-ECOSYSTEM"
     },
     {
+      "concept": "system.apple.intents",
+      "spec_id": "SYSTEM-APPLE-ECOSYSTEM"
+    },
+    {
+      "concept": "system.apple.platform-baseline",
+      "spec_id": "SYSTEM-APPLE-ECOSYSTEM"
+    },
+    {
       "concept": "system.apple.projection",
       "spec_id": "SYSTEM-APPLE-ECOSYSTEM"
     },
     {
+      "concept": "system.apple.share-handoff",
+      "spec_id": "SYSTEM-APPLE-ECOSYSTEM"
+    },
+    {
+      "concept": "system.apple.widget-action",
+      "spec_id": "SYSTEM-APPLE-ECOSYSTEM"
+    },
+    {
+      "concept": "system.apple.widget-projection",
+      "spec_id": "SYSTEM-APPLE-ECOSYSTEM"
+    },
+    {
+      "concept": "system.continuity.conflict",
+      "spec_id": "SYSTEM-SYNC-CONTINUITY"
+    },
+    {
+      "concept": "system.continuity.control-center",
+      "spec_id": "SYSTEM-SYNC-CONTINUITY"
+    },
+    {
       "concept": "system.continuity.disabled-gate",
+      "spec_id": "SYSTEM-SYNC-CONTINUITY"
+    },
+    {
+      "concept": "system.continuity.environment",
+      "spec_id": "SYSTEM-SYNC-CONTINUITY"
+    },
+    {
+      "concept": "system.continuity.failure",
+      "spec_id": "SYSTEM-SYNC-CONTINUITY"
+    },
+    {
+      "concept": "system.continuity.record-identity",
+      "spec_id": "SYSTEM-SYNC-CONTINUITY"
+    },
+    {
+      "concept": "system.continuity.restore",
       "spec_id": "SYSTEM-SYNC-CONTINUITY"
     },
     {
@@ -797,6 +1649,14 @@
       "spec_id": "SYSTEM-IMPORT-EXPORT-REPAIR"
     },
     {
+      "concept": "system.learning.capability-retention",
+      "spec_id": "SYSTEM-LOCAL-LEARNING"
+    },
+    {
+      "concept": "system.learning.goal-suggestion",
+      "spec_id": "SYSTEM-LOCAL-LEARNING"
+    },
+    {
       "concept": "system.learning.local-inspectable",
       "spec_id": "SYSTEM-LOCAL-LEARNING"
     },
@@ -817,6 +1677,18 @@
       "spec_id": "SYSTEM-PERSISTENCE-REPLAY"
     },
     {
+      "concept": "system.persistence.compaction",
+      "spec_id": "SYSTEM-PERSISTENCE-REPLAY"
+    },
+    {
+      "concept": "system.persistence.corruption",
+      "spec_id": "SYSTEM-PERSISTENCE-REPLAY"
+    },
+    {
+      "concept": "system.persistence.migration",
+      "spec_id": "SYSTEM-PERSISTENCE-REPLAY"
+    },
+    {
       "concept": "system.persistence.replay",
       "spec_id": "SYSTEM-PERSISTENCE-REPLAY"
     },
@@ -829,6 +1701,18 @@
       "spec_id": "SYSTEM-PRIVACY-DATA-CLASSIFICATION"
     },
     {
+      "concept": "system.privacy.external-assistance",
+      "spec_id": "SYSTEM-PRIVACY-DATA-CLASSIFICATION"
+    },
+    {
+      "concept": "system.runtime.cloud-independence",
+      "spec_id": "SYSTEM-PRIVATE-LIFE-RUNTIME"
+    },
+    {
+      "concept": "system.runtime.command-validation",
+      "spec_id": "SYSTEM-PRIVATE-LIFE-RUNTIME"
+    },
+    {
       "concept": "system.runtime.local-orchestration",
       "spec_id": "SYSTEM-PRIVATE-LIFE-RUNTIME"
     },
@@ -837,11 +1721,31 @@
       "spec_id": "SYSTEM-PRIVATE-LIFE-RUNTIME"
     },
     {
+      "concept": "system.runtime.proof-bar",
+      "spec_id": "SYSTEM-PRIVATE-LIFE-RUNTIME"
+    },
+    {
+      "concept": "system.runtime.simulation",
+      "spec_id": "SYSTEM-PRIVATE-LIFE-RUNTIME"
+    },
+    {
       "concept": "system.scheduling.capacity",
       "spec_id": "SYSTEM-SCHEDULING-CAPACITY"
     },
     {
+      "concept": "system.scheduling.fit",
+      "spec_id": "SYSTEM-SCHEDULING-CAPACITY"
+    },
+    {
+      "concept": "system.scheduling.infeasibility",
+      "spec_id": "SYSTEM-SCHEDULING-CAPACITY"
+    },
+    {
       "concept": "system.scheduling.reflow",
+      "spec_id": "SYSTEM-SCHEDULING-CAPACITY"
+    },
+    {
+      "concept": "system.scheduling.transition-buffer",
       "spec_id": "SYSTEM-SCHEDULING-CAPACITY"
     },
     {
@@ -851,6 +1755,18 @@
     {
       "concept": "system.source-atlas.public-reference",
       "spec_id": "SYSTEM-SOURCE-ATLAS"
+    },
+    {
+      "concept": "test.runtime-contract",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "test.scenario-executability",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
+    },
+    {
+      "concept": "test.scope-matrix",
+      "spec_id": "STANDARD-TESTING-FIXTURES"
     }
   ],
   "schema_version": 1

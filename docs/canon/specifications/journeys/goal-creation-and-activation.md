@@ -27,6 +27,8 @@ This shadow journey composes Goal, Goal Path, Step, and placement owners without
 
 Goal creation MUST first commit a typed durable provisional Goal shell and original intent with Receipt/replay. Accepted clarification edits are separate typed durable Goal commits. Generated Goal Path versions, Steps, dates, proof expectations, and placements remain non-durable proposals until reviewed; activation is a later confirmed commit, and optional scheduling is distinct again.
 
+Goal creation MUST immediately produce an inspectable draft route with assumptions, milestones, Steps, Substeps, Proof requirements, and schedule suggestions and MAY ask only a necessary clarifying question; the draft MUST receive dedicated review and MUST NOT commit placements before reviewed activation; activation MUST create the Goal, record its Receipt, open its operating page, highlight the route and Recommended step, show accepted placements, and offer a handoff to Today or Time.
+
 <!-- canon-section: trigger-starting-state -->
 Triggers are Goals create, Capture promotion, template/reference handoff, or restoration of provisional intent; starting state records Life Area context, source intent, existing related Goals, constraints, and local availability.
 

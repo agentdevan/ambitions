@@ -6,7 +6,10 @@ status = "normative"
 owner_domain = "object-goal"
 canon_revision = 1
 profile = "object-v1"
-owns_concepts = ["object.goal.identity", "object.goal.creation-failure"]
+owns_concepts = ["object.goal.automation-ladder", "object.goal.identity", "object.goal.creation-failure",
+  "object.goal.form",
+  "object.goal.priority",
+]
 inherits = ["OBJECT-GOAL-LIFECYCLE-001", "OBJECT-PROOF-REQUIREMENT-001", "OBJECT-LIFECYCLE-DELETION-001", "CONST-RUNTIME-MUTATION-001"]
 depends_on = ["CONSTITUTION", "OBJECT-LIFE-AREA", "SURFACE-GOALS", "SURFACE-TIME", "GLOBAL-TRUST-INSPECTION"]
 source_owners = ["Native/Ambitions/Core/Domain/", "Native/Ambitions/Core/LocalRuntimeOS/Planning/", "Native/Ambitions/Core/LocalRuntimeOS/Commands/", "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/", "Native/Ambitions/Core/LocalRuntimeOS/Inspection/", "Native/Ambitions/Surfaces/Goals/", "Native/Ambitions/Quality/"]
@@ -25,6 +28,32 @@ source_owners = ["Native/Ambitions/Core/Domain/", "Native/Ambitions/Core/LocalRu
 
 A Goal MUST be one stable desired outcome with a living route. It belongs to one Life Area, owns at most one current Goal Path plus version history, and may relate Steps, Proof, placements, recovery, and closure without absorbing their identities.
 
+Goal structure SHOULD support Life Area → Goal → Steps → Substeps while also preserving richer Ambitions fidelity around goal-thread history/proof/current movement.
+
+Ambitions MAY apply advisory states such as Needs Attention, Recovering, Waiting, or Blocked based on path and schedule signals, with a record and easy reversal.
+
+Goals MUST open to a native Life Area index with editable Life Areas, current state, and entry actions.
+
+Ambitions MUST support every goal type.
+
+## OBJ-GOAL-AUTOMATION-LADDER-001 — Global defaults permit visible Goal overrides
+- **Concept:** `object.goal.automation-ladder`
+- **Modality:** `MUST`
+- **Scope:** Goal activation, Goal settings, and You automation defaults
+- **Status:** `normative`
+- **Verification:** `SCENARIO-GOAL-AUTOMATION-LADDER-001`
+- **Supersedes:** none
+
+Each Goal MUST expose Manual, Suggest Only, Auto Minor, or Adaptive with Confirmations. Activation review sets the initial level, Goal settings can change it, and You supplies searchable global defaults. A Goal override never bypasses Protected or Fixed time, proof requirements, material confirmation, or Force Nothing.
+
+Goal automation MUST NOT override Protected or Fixed time or Proof-required boundaries.
+
+Goal automation controls MUST expose conservative or adaptive posture, learned completion behavior, reflow authority, Goal Path adaptation, Proof prompting, and Reminder recommendations.
+
+The runtime MUST maintain an adaptive strategy path beneath the visible Proof path.
+
+Ambitions MAY suggest a Goal only from local non-sensitive evidence and MUST expose rationale, uncertainty, confirmation, correction, and disablement before creation.
+
 ## OBJ-GOAL-CREATION-FAILURE-001 — Preserve provisional intent
 
 - **Concept:** `object.goal.creation-failure`
@@ -35,6 +64,8 @@ A Goal MUST be one stable desired outcome with a living route. It belongs to one
 - **Supersedes:** none
 
 If pathing cannot complete, Ambitions MUST durably retain a provisional Goal shell and original intent, identify the missing clarification, and allow manual continuation, retry, or safe reversal without fabricating a finished path.
+
+When a goal cannot fit by the deadline, Ambitions MUST say so calmly and offer options.
 
 <!-- canon-section: stable-identity -->
 Goal identity survives lifecycle, advisory, path-version, schedule, proof, recovery, closure, archive, Trash, restore, and source changes. A Goal card, generated route, or completion view is a projection.
@@ -83,4 +114,26 @@ Semantic order is outcome, lifecycle, advisory/recovery state, next Step, proof 
 VoiceOver exposes each action with the affected Goal and consequence in its label or hint.
 
 <!-- canon-section: source-test-ownership -->
-Canonical target ownership is `Core/Domain/` plus `Core/LocalRuntimeOS/Planning/`, `Commands/`, `Scheduling/`, and `Inspection/`; `Surfaces/Goals/` presents it and `Quality/` owns generated-route, lifecycle/advisory separation, recovery/closure, receipt/replay, deletion, privacy, offline, and accessibility proof. Current implementation compliance is unclaimed.
+Canonical target ownership is `Core/Domain/` plus `Core/LocalRuntimeOS/Planning/`, `Commands/`, `Scheduling/`, and `Inspection/`; `Surfaces/Goals/` presents it and `Quality/` owns generated-route, lifecycle/advisory separation, recovery/closure, receipt/replay, deletion, privacy, offline, and accessibility proof.
+
+## OBJ-GOAL-FORM-001 — Goal form
+
+- **Concept:** `object.goal.form`
+- **Modality:** `MUST`
+- **Scope:** Goal creation and editing
+- **Status:** `normative`
+- **Verification:** `SCENARIO-GOAL-FORM-001`
+- **Supersedes:** none
+
+Goal creation and editing MUST collect the minimum identity, intent, lifecycle, planning, privacy, and accessibility fields applicable to the selected Goal type.
+
+## OBJ-GOAL-PRIORITY-001 — Goal priority
+
+- **Concept:** `object.goal.priority`
+- **Modality:** `MUST`
+- **Scope:** Goal scheduling priority
+- **Status:** `normative`
+- **Verification:** `TEST-GOAL-PRIORITY-001`
+- **Supersedes:** none
+
+Goal priority MUST remain explicit, user-controlled, contextual, and separate from shame, score, streak, or hidden learned authority.

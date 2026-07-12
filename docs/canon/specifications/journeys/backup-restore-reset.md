@@ -14,7 +14,7 @@ source_owners = ["Native/Ambitions/Surfaces/You/", "Native/Ambitions/Core/LocalR
 
 # Backup Restore Reset
 
-This shadow journey coordinates distinct backup, restore, export, Trash, reset, and deletion operations without asserting a currently enabled backup/continuity mechanism or redefining per-object deletion lifecycle. `Storage/` owns backup/migration stores, `Repair/` owns schema/migration planning, backup verification, quarantine, repair, and rollback, and `PrivacySecurity/` owns scoped export/egress.
+`Storage/` owns backup/migration stores, `Repair/` owns schema/migration planning, backup verification, quarantine, repair, and rollback, and `PrivacySecurity/` owns scoped export/egress.
 
 ## JOURNEY-DELETE-RESTORE-001 — Trash, restore, reset, and permanent deletion stay distinct
 
@@ -26,6 +26,8 @@ This shadow journey coordinates distinct backup, restore, export, Trash, reset, 
 - **Supersedes:** none
 
 Trash MUST remain recoverable and distinct from permanent deletion or reset. Backup MUST be a verified restorable recovery artifact before it may satisfy a safe-recovery-point precondition. No cited owning contract declares ordinary data export restorable, so export in this journey is a scoped, previewed egress package and is explicitly not restorable. Export cannot serve as a backup or recovery point. Restore and reset previews are non-durable until validation and explicit scope confirmation; irreversible operations require precise consequence, retained/excluded data, rollback limit, account/continuity distinction, and proof of a safe local boundary before success.
+
+The Data control journey MUST expose scoped export/import, verified backup/restore, storage usage, Trash, local reset, continuity-aware reset, and delete-all-data flows with previews and operation-specific Receipts.
 
 <!-- canon-section: trigger-starting-state -->
 The trigger record binds one chosen operation to a local store fingerprint, exact data scope, artifact class, and user-visible origin.

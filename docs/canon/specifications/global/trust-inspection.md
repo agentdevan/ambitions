@@ -6,11 +6,7 @@ status = "normative"
 owner_domain = "global-trust-inspection"
 canon_revision = 1
 profile = "surface-v1"
-owns_concepts = [
-  "global.trust.identity",
-  "global.trust.layers",
-  "global.trust.visual-authority",
-]
+owns_concepts = ["global.completed.contextual-placement", "global.trust.identity", "global.trust.layers", "global.trust.proportional-receipts", "global.trust.visual-authority"]
 inherits = [
   "LAW-IA-TRUST-001",
   "PRIVACY-VISIBILITY-001",
@@ -43,6 +39,12 @@ Trust Inspection uses `surface-v1` because it presents contextual compact and de
 
 Trust MUST expose Proof, Source, Privacy, History, Receipts, and relevant rationale in the context of the object or change being inspected. It MUST NOT become a root, global dashboard, analytics feed, permanent badge field, architecture browser, or replacement for the object.
 
+Proof MUST appear in completed Step, Goal detail, Receipt, Search result, and related detail flows when relevant.
+
+Proof-required status MUST be visible before execution.
+
+Required proof SHOULD be shown in Today, Goal detail, Capture proposal, and step detail wherever relevant.
+
 ## SPEC-GLOBAL-TRUST-LAYERS-001 — Disclosure expands only as needed
 
 - **Concept:** `global.trust.layers`
@@ -53,6 +55,22 @@ Trust MUST expose Proof, Source, Privacy, History, Receipts, and relevant ration
 - **Supersedes:** none
 
 Trust disclosure MUST progress from an inline marker where a fact matters, to a compact detail row, to deep object-specific inspection, with searchable archives reachable through You. Proof requirements appear before execution/completion. Source/privacy details appear at meaningful boundaries. Every claim identifies provenance, freshness/status, affected object/change, and available correction or recovery without overstating evidence.
+
+Source details SHOULD remain inspection-level, not prominent on every recommendation.
+
+Ambitions SHOULD NOT show when a path used external/reference knowledge by default.
+
+Source Atlas SHOULD be invisible by default.
+
+## SPEC-GLOBAL-TRUST-PROPORTIONAL-RECEIPTS-001 — Receipt disclosure matches consequence
+- **Concept:** `global.trust.proportional-receipts`
+- **Modality:** `MUST`
+- **Scope:** Accepted mutations and their immediate confirmation
+- **Status:** `normative`
+- **Verification:** `SCENARIO-TRUST-PROPORTIONAL-RECEIPT-001`
+- **Supersedes:** none
+
+Every accepted mutation MUST create its durable Receipt while disclosure remains proportional: small changes receive lightweight confirmation; meaningful or externally consequential changes expose a Receipt with inspect and Undo where supported; Save for Later uses its specified durable confirmation and exit path.
 
 ## SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001 — Approved Trust package preserves evidence distinctions
 
@@ -126,7 +144,7 @@ The named successor package controls geometry, hierarchy, composition, states, a
 Stable IDs `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:250:104` and `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:257:93` preserve direction/successor provenance. Source rendering, evidence correctness, accessibility/device behavior, implementation parity, and release proof remain separate.
 
 <!-- canon-section: source-ownership -->
-Canonical target ownership is exact: `Trust/` owns contextual presentation/disclosure policy; `Core/LocalRuntimeOS/Inspection/` owns facts, receipts, proof, undo, and history; `PrivacySecurity/` owns classification/egress; `Language/` owns humane copy; `Quality/` owns proof. Current compliance is unclaimed.
+Canonical target ownership is exact: `Trust/` owns contextual presentation/disclosure policy; `Core/LocalRuntimeOS/Inspection/` owns facts, receipts, proof, undo, and history; `PrivacySecurity/` owns classification/egress; `Language/` owns humane copy; `Quality/` owns proof.
 
 <!-- canon-section: tests -->
 The scenario matrix spans disclosure, evidence, source, receipt, privacy, correction, history, replay, accessibility, and focus behavior.
@@ -138,4 +156,15 @@ Required proof includes object-scoped receipts/history/proof fixtures, privacy a
 
 <!-- canon-section: performance -->
 Resource behavior is bounded, cancellable, local, and foreground-safe.
-Trust detail, proof/receipt/history paging, correction/undo validation, and freshness work MUST remain bounded and cancellable, perform no interaction-path network gating or synchronous disk I/O, use no polling or unbounded background loop, and preserve the originating object and foreground responsiveness under resource pressure. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. Implementation authorization requires an owner-approved performance-registry record declaring device floor, OS, build configuration, representative proof/receipt/history data scale, warm/cold state, measurement tool, percentile/maximum, and regression threshold. Current performance and physical-device proof remain absent.
+Trust detail, proof/receipt/history paging, correction/undo validation, and freshness work MUST remain bounded and cancellable, perform no interaction-path network gating or synchronous disk I/O, use no polling or unbounded background loop, and preserve the originating object and foreground responsiveness under resource pressure. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. Implementation authorization requires an owner-approved performance-registry record declaring device floor, OS, build configuration, representative proof/receipt/history data scale, warm/cold state, measurement tool, percentile/maximum, and regression threshold.
+
+## SPEC-COMPLETED-CONTEXTUAL-PLACEMENT-001 — Contextual Completed placement
+
+- **Concept:** `global.completed.contextual-placement`
+- **Modality:** `MUST NOT`
+- **Scope:** Contextual Completed placement
+- **Status:** `normative`
+- **Verification:** `REVIEW-SPEC-COMPLETED-CONTEXTUAL-PLACEMENT-001`
+- **Supersedes:** none
+
+Completed MUST remain contextual across Today recent activity, Goals proof/history, Time past context, and You Receipts/History; it MUST NOT become a fifth root or mere completed bin.

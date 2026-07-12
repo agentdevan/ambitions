@@ -1130,6 +1130,7 @@ class ClaimCoverageTests(unittest.TestCase):
                     "rationale_sha256": "2" * 64,
                     "source_id": "SOURCE-A",
                     "source_location": "line:1",
+                    "source_text_sha256": "4" * 64,
                     "target_class": "specification",
                     "target_id": "SURFACE-TODAY-001",
                 }

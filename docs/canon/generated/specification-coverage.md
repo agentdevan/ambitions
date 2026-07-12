@@ -6,7 +6,7 @@
 - Canon revision: `1`
 - Authority state: `shadow`
 - Compiler version: `0.1.0`
-- Canon content SHA: `5dc62407e500e5b12762f9b417884892cc06f1dc71fc79ab9afdf0f1c4defa18`
+- Canon content SHA: `12f110471863c2f38c9a4f611022f2162365785a201df345bc6633f93fb2a31c`
 
 | Specification | Profile | Section markers |
 | --- | --- | ---: |
@@ -48,6 +48,14 @@
 | `OBJECT-SCHEDULE-PLACEMENT` | object-v1 | 15 |
 | `OBJECT-SOURCE-REFERENCE` | object-v1 | 15 |
 | `OBJECT-STEP` | object-v1 | 15 |
+| `STANDARD-ACCESSIBILITY` | standard-v1 | 8 |
+| `STANDARD-COPY-STATE-LANGUAGE` | standard-v1 | 8 |
+| `STANDARD-NATIVE-IOS-ENGINEERING` | standard-v1 | 8 |
+| `STANDARD-PERFORMANCE-ENERGY` | standard-v1 | 8 |
+| `STANDARD-SECURITY-PRIVACY` | standard-v1 | 8 |
+| `STANDARD-SWIFTUI-DESIGN-SYSTEM` | standard-v1 | 8 |
+| `STANDARD-TESTING-FIXTURES` | standard-v1 | 8 |
+| `STANDARD-VALIDATION-RELEASE` | standard-v1 | 8 |
 | `SURFACE-GOALS` | surface-v1 | 22 |
 | `SURFACE-TIME` | surface-v1 | 22 |
 | `SURFACE-TODAY` | surface-v1 | 22 |

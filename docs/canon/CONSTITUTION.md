@@ -21,12 +21,12 @@ owns_concepts = [
   "control.material-confirmation",
   "control.undo-recovery",
   "data.loss-stop-ship",
-  "global.motion-capture-ownership",
   "global.trust-ownership",
   "history.supersession",
   "ia.nonroot-ownership",
   "ia.plain-language",
   "ia.root-labels",
+  "ia.root-state-invariance",
   "ia.root-surfaces",
   "language.root-labels",
   "mission.anti-metrics",
@@ -62,6 +62,7 @@ owns_concepts = [
   "platform.native-iphone",
   "privacy.cloudkit-continuity",
   "privacy.local-authority",
+  "privacy.no-account-core",
   "privacy.r2-public-only",
   "privacy.visibility",
   "proof.evidence",
@@ -331,6 +332,8 @@ Ambitions MUST treat the origin problem as missing or mismatched operating struc
 
 Ambitions succeeds when the user can see a meaningful future, understand the path, start what fits, recover when life changes, and retain evidence that progress still counts. Success is not measured constitutionally by task count, schedule density, engagement, streak, model usage, or account conversion. Product metrics may support operations, but they cannot replace the human outcome or pressure the user into behavior that conflicts with reality.
 
+Success evaluation MUST test future intelligence, product, runtime, and launch-readiness claims against the canonical orchestration scenarios.
+
 ## MISSION-USER-001 — Primary user
 
 - **Concept:** `mission.user`
@@ -416,7 +419,7 @@ Ambitions MUST have exactly four persistent root surfaces: Today, Goals, Time, a
 
 ## LAW-IA-ROOT-001 — Four-surface invariance
 
-- **Concept:** `ia.root-surfaces`
+- **Concept:** `ia.root-state-invariance`
 - **Modality:** `MUST`
 - **Scope:** App shell, root routes, tests, visual authority, and product language
 - **Status:** `normative`
@@ -595,6 +598,8 @@ User-supplied Proof MAY be optional, suggested, or explicitly required before wo
 
 Proof remains user-approved evidence on the honor system. A requirement may support path integrity without turning Ambitions into a proof-grading or compliance product. Automatic receipts attest to system behavior, not the truth or quality of the user’s evidence.
 
+Historical Proof MUST remain linked to its original context and applicability state; later path or requirement changes MUST describe the new relationship positively without declaring prior user evidence invalid.
+
 # Article 5 — Canonical object-boundary law
 
 The object ecology must be stable enough for identity, history, replay, privacy, import, and projection to remain coherent. Detailed object definitions belong in the Atlas. Constitutionally, the same real-world object cannot become independent copies across surfaces, and a role, state, or visual projection cannot silently acquire a new canonical identity.
@@ -757,7 +762,7 @@ Core private life data and decision authority MUST remain local by default. The 
 
 ## LAW-OFFLINE-NO-ACCOUNT-001 — Complete no-account core
 
-- **Concept:** `privacy.local-authority`
+- **Concept:** `privacy.no-account-core`
 - **Modality:** `MUST`
 - **Scope:** Core Today, Goals, Time, You, Capture, Search, closure, proof, and history value
 - **Status:** `normative`

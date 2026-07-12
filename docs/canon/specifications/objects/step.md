@@ -7,6 +7,7 @@ owner_domain = "object-step"
 canon_revision = 1
 profile = "object-v1"
 owns_concepts = [
+  "object.step.urgency-metadata",
   "object.step.identity-lifecycle",
   "object.boundary.recurrence",
   "object.boundary.conversion",
@@ -18,6 +19,7 @@ owns_concepts = [
   "object.substep.identity-scheduling",
   "object.goal-link.primary",
   "object.future-step.receipt",
+  "object.future-step.near-term",
 ]
 inherits = ["OBJECT-FUTURE-STEP-IDENTITY-001", "OBJECT-PROOF-REQUIREMENT-001", "OBJECT-LIFECYCLE-DELETION-001", "OBJECT-REMINDER-COMPLETION-001", "CONST-RUNTIME-MUTATION-001"]
 depends_on = ["CONSTITUTION", "OBJECT-GOAL-PATH", "SURFACE-TODAY", "SURFACE-GOALS", "SURFACE-TIME", "GLOBAL-TRUST-INSPECTION"]
@@ -50,6 +52,10 @@ laws = { schedule_placement_nonduplication = "OBJ-SCHEDULE-PLACEMENT-IDENTITY-00
 
 A Step MUST be one executable unit of user work with optional primary Goal/Goal Path participation, Substeps, due date, Proof rule, recurrence series, and Schedule Placement relationship. Future Step is this same identity in a flexible future role/placement state, never a second record.
 
+Due dates, reminders, notes, attachments, and repeaters MAY exist, but fit is primary.
+
+Ambitions MUST create a scheduled flexible future planning node.
+
 ## OBJ-RECURRENCE-BOUNDARY-001 — Recurrence remains type-specific
 
 - **Concept:** `object.boundary.recurrence`
@@ -60,6 +66,8 @@ A Step MUST be one executable unit of user work with optional primary Goal/Goal 
 - **Supersedes:** none
 
 Recurrence MUST preserve distinct semantics: Steps use repeatable work series, Events use time-range series with exceptions, Reminders repeat notification intent, and Notes do not recur.
+
+Recurrence MUST remain a repeatable Step series, an Event series with exceptions, or Reminder repetition; Notes MUST NOT recur.
 
 ## OBJ-CONVERSION-LAW-001 — Explicit compatible conversion
 
@@ -83,6 +91,8 @@ Compatible conversion MUST show source/destination meaning, field-impact summary
 
 Shared attachments, tags, alerts, Source References, notes, locations, dates, or Goal links MUST NOT erase the Step/Event/Reminder/Note boundary or promote a role, projection, or implementation type into a new canonical object.
 
+Ambitions MUST support due date, reminder, alarm reminder, repeating, location, flag, hashtag/tracking, attachment, notes, and related detail metadata.
+
 ## OBJ-SCHEDULE-STATE-001 — Placement is orthogonal
 
 - **Concept:** `object.schedule-state.orthogonality`
@@ -93,6 +103,10 @@ Shared attachments, tags, alerts, Source References, notes, locations, dates, or
 - **Supersedes:** none
 
 Schedule state MUST remain orthogonal to object type, lifecycle, execution, proof, and recovery. Scheduling creates or changes a Schedule Placement relationship; it never copies or converts the object implicitly.
+
+Time-bearing objects MUST expose explicit protection semantics and per-item reflow rules.
+
+Ambitions SHOULD assign scheduling status automatically by object type, source, and context, while exposing a visible override during creation and edit.
 
 ## OBJ-RECURRENCE-SERIES-001 — Series identity and occurrence scope
 
@@ -116,6 +130,8 @@ Recurrence MUST use one series identity with occurrence projections and exceptio
 
 Completion MUST NOT mean deletion; Closure MUST NOT mean archive; archive MUST NOT mean Trash or permanent deletion. Each operation retains its own consequence, history, planning influence, restore, and rollback semantics.
 
+Steps MUST remain executable and completable; Events, Reminders, and Notes MUST NOT be executable or completable, and a linked Step MUST retain execution and completion authority.
+
 ## OBJ-DELETION-RESTORE-001 — Preserve lineage through conversion and deletion
 
 - **Concept:** `object.lifecycle.conversion-deletion-restore`
@@ -127,6 +143,10 @@ Completion MUST NOT mean deletion; Closure MUST NOT mean archive; archive MUST N
 
 Conversion MUST preserve or explicitly retire identity lineage, source, attachments, relationships, Proof, recurrence scope, and Receipt. Supported soft deletion moves to Trash; restore creates history and revalidates projections; permanent deletion confirms exact object/series/dependent/history/search/export scope, irreversibility, rollback limit, and tombstone handling only if an approved continuity system exists.
 
+Soft deletion MUST move supported objects to Trash while preserving lineage.
+
+Restore MUST create History and MUST revalidate projections.
+
 ## OBJ-SUBSTEP-IDENTITY-001 — Substep stays subordinate
 
 - **Concept:** `object.substep.identity-scheduling`
@@ -137,6 +157,10 @@ Conversion MUST preserve or explicitly retire identity lineage, source, attachme
 - **Supersedes:** none
 
 A Substep MUST NOT be independently scheduled or treated as a top-level canonical Step until explicit promotion previews identity, parent relationship, placement/capacity, due date, proof, and recurrence consequences and commits through a Receipt-backed command.
+
+Substeps MAY live inside a Step as preparation, detail, or checklist structure.
+
+Substeps MUST NOT become first-class schedule items unless explicitly promoted into their own Step.
 
 ## OBJ-GOAL-LINK-001 — Primary Goal without type collapse
 
@@ -159,6 +183,24 @@ A Step MAY have one primary Goal/Path participation. Events and Reminders may li
 - **Supersedes:** none
 
 A path- or placement-affecting Future Step change MUST mutate the same Step identity and produce a Receipt/History Event. Near/far horizon changes may differ in preview depth, but never in identity, mutation owner, or replay lineage.
+
+Future Step changes that affect paths MUST produce Receipts.
+
+Near-term Future Steps MUST behave like ordinary editable Steps.
+
+## OBJ-STEP-URGENCY-METADATA-001 — Flagged and Urgent remain humane metadata
+- **Concept:** `object.step.urgency-metadata`
+- **Modality:** `MAY`
+- **Scope:** Step metadata in Today, Goals, Time, and Search
+- **Status:** `normative`
+- **Verification:** `SCENARIO-STEP-URGENCY-METADATA-001`
+- **Supersedes:** none
+
+A Step MAY carry Flagged or Urgent metadata and expose it contextually across Today, Goals, Time, and Search. This metadata does not create a root, score, streak, rank, shame signal, or automatic priority override; presentation remains legible and subordinate to the Step's actual constraints and user choices.
+
+Ambitions MAY expose Flagged and Urgent as native sections/metadata.
+
+Flagged and Urgent MUST be metadata visible contextually across Today, Goals, Time, and Search.
 
 <!-- canon-section: stable-identity -->
 Step identity survives editing, scheduling, start, waiting/blocking, completion, closure, recurrence occurrence projection, Future Step horizon changes, archive, Trash, restore, and compatible conversion lineage.
@@ -209,6 +251,17 @@ Today projects executable fit, Goals projects path participation, Time projects 
 Semantics expose executable state, lifecycle, placement/time, due date, recurrence scope, proof rule, Goal/parent relation, recovery, consequence, and actions without color, drag, timeline position, or animation dependence; alternatives exist for schedule/reorder/series scope.
 
 <!-- canon-section: source-test-ownership -->
-Canonical target ownership is `Core/Domain/` and `Core/LocalRuntimeOS/Planning/`, `Scheduling/`, `Commands/`, and `Inspection/`; Today/Goals/Time present projections and `Quality/` proves boundary matrix, axes, Future Step singularity, recurrence scope, conversion, Proof/Receipt separation, Reminder noncompletion, Trash/restore, replay, offline, privacy, and accessibility. Current source compliance is unclaimed.
+Canonical target ownership is `Core/Domain/` and `Core/LocalRuntimeOS/Planning/`, `Scheduling/`, `Commands/`, and `Inspection/`; Today/Goals/Time present projections and `Quality/` proves boundary matrix, axes, Future Step singularity, recurrence scope, conversion, Proof/Receipt separation, Reminder noncompletion, Trash/restore, replay, offline, privacy, and accessibility.
 
 Tests resolve every action and expected event to the stable Step, series, placement, and lineage identifiers.
+
+## OBJ-FUTURE-STEP-NEAR-TERM-001 — Future Step near-term boundary
+
+- **Concept:** `object.future-step.near-term`
+- **Modality:** `MUST`
+- **Scope:** Future Step promotion
+- **Status:** `normative`
+- **Verification:** `TEST-FUTURE-STEP-NEAR-TERM-001`
+- **Supersedes:** none
+
+A Future Step MUST remain singular and unscheduled until explicit promotion into the near-term executable Step boundary.

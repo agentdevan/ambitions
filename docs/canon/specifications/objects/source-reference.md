@@ -72,6 +72,6 @@ Trust owns contextual source inspection; You owns broad Sources & Imports contro
 Semantics expose source name/type, imported/linked object, freshness, permission/availability, privacy boundary, changed fields, and review/retry/detach actions without technical locator noise in primary labels.
 
 <!-- canon-section: source-test-ownership -->
-Canonical provenance semantics belong to `Core/Domain/`; external adapters/reconciliation, public references, commands, and inspection belong to `Core/LocalRuntimeOS/ExternalWrites/`, `SourceAtlas/`, `Commands/`, and `Inspection/`; Trust/You present it and `Quality/` proves native-import visibility, stale/unavailable recovery, local authority, R2 firewall, diff/replay, Trash/restore, offline, privacy, and accessibility. Tests bind provenance to source/native identifiers; current implementation compliance is unclaimed.
+Canonical provenance semantics belong to `Core/Domain/`; external adapters/reconciliation, public references, commands, and inspection belong to `Core/LocalRuntimeOS/ExternalWrites/`, `SourceAtlas/`, `Commands/`, and `Inspection/`; Trust/You present it and `Quality/` proves native-import visibility, stale/unavailable recovery, local authority, R2 firewall, diff/replay, Trash/restore, offline, privacy, and accessibility. Tests bind provenance to source/native identifiers;
 
 Scenario fixtures bind every source transition to stable provenance identifiers.

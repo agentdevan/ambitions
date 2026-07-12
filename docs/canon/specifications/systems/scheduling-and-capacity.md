@@ -6,7 +6,10 @@ status = "normative"
 owner_domain = "system-scheduling-capacity"
 canon_revision = 1
 profile = "system-v1"
-owns_concepts = ["system.scheduling.capacity", "system.scheduling.reflow"]
+owns_concepts = ["system.scheduling.capacity", "system.scheduling.reflow", "system.scheduling.transition-buffer",
+  "system.scheduling.fit",
+  "system.scheduling.infeasibility",
+]
 inherits = ["MISSION-REFLOW-001", "TIME-EXTERNAL-VISIBILITY-001", "CONTROL-MATERIAL-CONFIRMATION-001", "RUNTIME-MUTATION-SEQUENCE-001"]
 depends_on = ["CONSTITUTION", "SURFACE-TIME", "OBJECT-SCHEDULE-PLACEMENT", "JOURNEY-SCHEDULE-REFLOW", "SYSTEM-PRIVATE-LIFE-RUNTIME"]
 source_owners = ["Native/Ambitions/Core/Time/", "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/", "Native/Ambitions/Core/LocalRuntimeOS/Commands/", "Native/Ambitions/Core/LocalRuntimeOS/Inspection/", "Native/Ambitions/Surfaces/Time/", "Native/Ambitions/Quality/"]
@@ -14,7 +17,7 @@ source_owners = ["Native/Ambitions/Core/Time/", "Native/Ambitions/Core/LocalRunt
 
 # Scheduling and Capacity
 
-This shadow system target defines capacity and reflow behavior; object and journey specifications retain identity and user-flow law. It does not claim calendar parity or current scheduling completeness.
+This shadow system target defines capacity and reflow behavior; object and journey specifications retain identity and user-flow law.
 
 ## SYSTEM-SCHEDULING-CAPACITY-001 — Capacity is honest and semantically unequal
 
@@ -27,6 +30,18 @@ This shadow system target defines capacity and reflow behavior; object and journ
 
 Capacity MUST derive from canonical placements, constraints, recurrence, locale/calendar/time-zone rules, user availability and energy, and reviewed external-capacity decisions. External visibility and capacity reservation remain separate. Protected time is not violated by default, Fixed time requires scoped override, Flexible time moves only within its rule, and Suggested time is not committed capacity.
 
+Today fit suggestions SHOULD appear only when open space satisfies duration, transition buffer, Protected and Fixed boundaries, upcoming Event risk, deadline safety, learned completion likelihood, Step shape, and a clear user-facing reason.
+
+External candidate visibility and capacity awareness MUST be separate.
+
+Ambitions MUST NOT treat all time as equivalent.
+
+Ambitions MUST state when current constraints cannot accommodate all work by the deadline.
+
+Priority MUST tell Ambitions how much a Goal matters.
+
+Priority MUST be both inferred and user-controlled.
+
 ## SYSTEM-SCHEDULING-REFLOW-001 — Reflow is inspectable and locally committed
 
 - **Concept:** `system.scheduling.reflow`
@@ -37,6 +52,42 @@ Capacity MUST derive from canonical placements, constraints, recurrence, locale/
 - **Supersedes:** none
 
 A material schedule change MUST present the trigger, changed objects, before/after placements, protected/fixed boundaries, conflicts, downstream Goal/deadline/notification/external effects, rationale, confirmation scope, and rollback. Preview is non-durable; acceptance follows the runtime mutation sequence and local commit before notification/EventKit/widget effects.
+
+Reflow MUST consider deadline safety, calendar fit, Protected and Fixed boundaries, Goal priority, learned completion behavior, Step shape, energy and context, transitions, and downstream impact and MUST show near-term conflicts without silently moving near-term work; minor future placement changes MAY commit without blocking confirmation only when explicitly authorized outside Protected, Fixed, and protected near-term boundaries and MUST remain visible through an inline marker, Receipt, History, and Undo; material or grouped changes MUST require confirmation.
+
+## SYSTEM-SCHEDULING-TRANSITION-BUFFER-001 — Transition time is inspectable capacity
+- **Concept:** `system.scheduling.transition-buffer`
+- **Modality:** `MUST`
+- **Scope:** Optional location-aware pre-event and post-event time
+- **Status:** `normative`
+- **Verification:** `SCENARIO-SCHEDULING-TRANSITION-BUFFER-001`
+- **Supersedes:** none
+
+When sufficient local context exists, Scheduling MAY propose inspectable pre-event or post-event transition buffers that consume capacity. It MUST NOT insert them silently unless an explicit user rule permits it. Manual locations and no-location use remain first class; location permission is just in time, and network routing is optional enrichment rather than core authority.
+
+Events and scheduled Steps MAY carry a manual or permission-backed location.
+
+## SYSTEM-SCHEDULING-FIT-001 — Scheduling fit
+
+- **Concept:** `system.scheduling.fit`
+- **Modality:** `MUST`
+- **Scope:** Placement and reflow
+- **Status:** `normative`
+- **Verification:** `TEST-SCHEDULING-FIT-001`
+- **Supersedes:** none
+
+Scheduling fit MUST evaluate temporal authority, capacity, duration, recurrence, deadlines, travel or transition needs, protected boundaries, and user preference without silently mutating state.
+
+## SYSTEM-SCHEDULING-INFEASIBILITY-001 — Scheduling infeasibility
+
+- **Concept:** `system.scheduling.infeasibility`
+- **Modality:** `MUST`
+- **Scope:** Unsatisfied scheduling constraints
+- **Status:** `normative`
+- **Verification:** `SCENARIO-SCHEDULING-INFEASIBILITY-001`
+- **Supersedes:** none
+
+When constraints are infeasible, scheduling MUST preserve state, explain the blocking constraints, offer user-controlled repair options, and avoid false certainty or silent degradation.
 
 ## Completeness contract
 
@@ -71,7 +122,7 @@ Local redacted traces bind fit inputs, selected change, and durable result.
 Inspection records trigger, input revisions, constraint/policy version, candidates considered, selected/rejected reasons, before/after placement facts, protected boundaries, confirmation, Receipt, rollback, and external result with private content redacted from diagnostics.
 
 <!-- canon-section: source-ownership -->
-Exact target owners are `Core/Time/`, `Core/LocalRuntimeOS/Scheduling/`, `Commands/`, and `Inspection/`; `Surfaces/Time/` presents and `Quality/` proves. Current legacy scheduling names, app-wide consumption, calendar-grade coverage, capacity/recovery/correction ownership gaps, and suffix/file-size debt remain separate implementation debt.
+Exact target owners are `Core/Time/`, `Core/LocalRuntimeOS/Scheduling/`, `Commands/`, and `Inspection/`; `Surfaces/Time/` presents and `Quality/` proves.
 
 <!-- canon-section: tests-proof -->
 Cover Protected/Fixed/Flexible/Suggested rules, overload, impossible deadline, recurrence/exception scopes, DST/time-zone/calendar/locale, external-hidden-capacity, conflict and no-safe-fit, material confirmation, cancellation/interruption, duplicate commands, replay/undo, notification/external-write failure, offline, accessibility summaries, and historical policy replay.

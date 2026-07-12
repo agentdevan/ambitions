@@ -6,7 +6,10 @@ status = "normative"
 owner_domain = "journey-external-calendar-import"
 canon_revision = 1
 profile = "journey-v1"
-owns_concepts = ["journey.calendar-diff.no-silent-mutation"]
+owns_concepts = ["journey.calendar-diff.conflict-choice", "journey.calendar-diff.grouping", "journey.calendar-diff.no-silent-mutation", "journey.calendar-diff.notification-handoff", "journey.calendar-invite-diff",
+  "journey.calendar-import.commit",
+  "journey.calendar-import.candidate",
+]
 inherits = ["TIME-EXTERNAL-VISIBILITY-001", "CONTROL-MATERIAL-CONFIRMATION-001", "LAW-RUNTIME-NO-DIRECT-WRITE-001", "LAW-RUNTIME-DURABLE-SUCCESS-001"]
 depends_on = ["CONSTITUTION", "APP-PERMISSIONS", "SURFACE-TIME", "OBJECT-IMPORT-DIFF-RECORD", "OBJECT-EVENT", "OBJECT-SOURCE-REFERENCE", "GLOBAL-TRUST-INSPECTION"]
 source_owners = ["Native/Ambitions/Surfaces/Time/", "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/", "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/", "Native/Ambitions/Core/LocalRuntimeOS/Commands/", "Native/Ambitions/Core/LocalRuntimeOS/Inspection/", "Native/Ambitions/Trust/", "Native/Ambitions/Quality/"]
@@ -26,6 +29,64 @@ This shadow journey coordinates reviewed import; Event and Import/Diff Record ow
 - **Supersedes:** none
 
 An external calendar adapter MUST supply facts to typed discovery/refresh commands, never mutate state itself. Discovery and refresh are durable local commits of the Import/Diff Record, source lineage, unreviewed state, and badge contribution with Receipt/replay; that commit creates no Ambitions Event and reserves no planning capacity until an explicit review outcome. `Import into Ambitions`, Link, Replace, `Keep external but reserve time`, `Ignore for planning`, and `Reject permanently` remain non-durable outcome previews until confirmed.
+
+Ambitions MUST NOT silently import, mutate, or reflow when the user adds or changes items in Apple Calendar.
+
+Imported or replaced Ambitions-owned objects MUST NOT mutate silently when Apple Calendar changes.
+
+Time MUST NOT show persistent source markers for imported native objects.
+
+Rejected or ignored external calendar items MUST be dismissed and MUST NOT continue contributing to the badge count.
+
+Pending external-import review MUST appear as a small actionable control in the Time header or toolbar with the unreviewed-item count.
+
+An external calendar change MUST NOT commit silently.
+
+Apple Calendar and other approved calendar sources MUST be onboarding, migration, and external-change sources.
+
+Import MUST create an Ambitions-owned object with provenance and a Receipt.
+
+An external calendar change MUST NOT silently mutate an Ambitions-owned object.
+
+An External Calendar Candidate MUST be an external item awaiting user review.
+
+## JOURNEY-CALENDAR-DIFF-GROUPING-001 — Pending review is grouped by schedule impact
+- **Concept:** `journey.calendar-diff.grouping`
+- **Modality:** `MUST`
+- **Scope:** External calendar diff review
+- **Status:** `normative`
+- **Verification:** `SCENARIO-CALENDAR-DIFF-GROUPING-001`
+- **Supersedes:** none
+
+External diff review MUST group pending items as Needs attention, Safe to import, Duplicate or link candidates, Removed source, or Ignored history so schedule consequence outranks raw chronology or source administration.
+
+## JOURNEY-CALENDAR-CONFLICT-CHOICE-001 — Import conflicts are chosen before commit
+- **Concept:** `journey.calendar-diff.conflict-choice`
+- **Modality:** `MUST`
+- **Scope:** Selected external item conflicting with Ambitions Time
+- **Status:** `normative`
+- **Verification:** `SCENARIO-CALENDAR-IMPORT-CONFLICT-001`
+- **Supersedes:** none
+
+Before import commit, Ambitions MUST show affected objects, available reflow, and consequences and let the user choose Import and reflow, Import without reflow, Keep external, Ignore, or Edit before import. Import never silently triggers reflow.
+
+An External Calendar Candidate MUST NOT appear as an Ambitions Event before import.
+
+## JOURNEY-CALENDAR-NOTIFICATION-HANDOFF-001 — Import never silently duplicates alerts
+- **Concept:** `journey.calendar-diff.notification-handoff`
+- **Modality:** `MUST NOT`
+- **Scope:** External alerts and Ambitions Notification Rules during import
+- **Status:** `normative`
+- **Verification:** `SCENARIO-CALENDAR-NOTIFICATION-HANDOFF-001`
+- **Supersedes:** none
+
+Import MUST NOT silently alter Apple Calendar alerts or create duplicate notifications. Review shows existing alerts, proposed Ambitions rules, and duplication risk and offers Import with Ambitions notifications, Import without them, Edit notification rules, or Keep external.
+
+Imported Apple Calendar alerts MUST become Ambitions-native notification settings on the imported Event.
+
+During import review, Ambitions MUST show existing external alerts, the Ambitions-native notification rules that will be created, and any duplicate-notification risk.
+
+Calendar notification handoff MUST offer Import with Ambitions notifications, Import without Ambitions notifications, Edit notification rules, and Keep external.
 
 <!-- canon-section: trigger-starting-state -->
 Triggers are permission-approved source scan, manual import, changed external fingerprint, Time review, or reconciliation notice; starting state identifies source, privacy-filtered fact, fingerprint, prior decision, native link, diff, recurrence range, capacity effect, permission, and freshness.
@@ -72,3 +133,38 @@ Ambitions-owned Time and previously committed Import/Diff Records, source lineag
 
 <!-- canon-section: scenario-tests -->
 Execute `SCENARIO-JOURNEY-CALENDAR-DISCOVERY-COMMIT-001`, `SCENARIO-JOURNEY-CALENDAR-REFRESH-COMMIT-001`, `SCENARIO-JOURNEY-CALENDAR-PREDISCOVERY-CANCEL-001`, `SCENARIO-JOURNEY-CALENDAR-REVIEW-DISMISS-001`, `SCENARIO-JOURNEY-CALENDAR-IMPORT-NATIVE-001`, `SCENARIO-JOURNEY-CALENDAR-KEEP-EXTERNAL-RESERVE-001`, `SCENARIO-JOURNEY-CALENDAR-IGNORE-PLANNING-001`, `SCENARIO-JOURNEY-CALENDAR-REJECT-PERMANENTLY-001`, `SCENARIO-JOURNEY-CALENDAR-RECURRENCE-001`, `SCENARIO-JOURNEY-CALENDAR-PERMISSION-001`, `SCENARIO-JOURNEY-CALENDAR-EXTERNAL-FAILURE-001`, and `SCENARIO-JOURNEY-CALENDAR-UNDO-001`; independently assert discovery/refresh durable Record/source-lineage/unreviewed-badge Receipt/replay, no Event or capacity from discovery alone, pre-discovery preview non-durability, review dismissal preservation, each outcome's native/capacity/lineage/badge effects, materially-new-item reappearance, adapter non-mutation, stable IDs, local-before-external ordering, offline safety, and accessible diff review.
+
+
+
+## JOURNEY-CALENDAR-INVITE-DIFF-001 — Imported invite diff review
+
+- **Concept:** `journey.calendar-invite-diff`
+- **Modality:** `MUST NOT`
+- **Scope:** Imported invite diff review
+- **Status:** `normative`
+- **Verification:** `REVIEW-JOURNEY-CALENDAR-INVITE-DIFF-001`
+- **Supersedes:** none
+
+Imported invite Events MUST preserve attendee, organizer, RSVP, location, notes, and source metadata; later changes MUST enter external diff review with explicit accept, keep, split, unlink, or ignore choices and MUST NOT silently mutate native truth.
+
+## JOURNEY-CALENDAR-IMPORT-COMMIT-001 — Calendar import commit
+
+- **Concept:** `journey.calendar-import.commit`
+- **Modality:** `MUST`
+- **Scope:** Accepted import decisions
+- **Status:** `normative`
+- **Verification:** `SCENARIO-CALENDAR-IMPORT-COMMIT-001`
+- **Supersedes:** none
+
+An accepted calendar import MUST validate the selected diff, commit local canonical state atomically, preserve source lineage, and issue Receipt and History evidence.
+
+## JOURNEY-CALENDAR-CANDIDATE-001 — Calendar import candidate
+
+- **Concept:** `journey.calendar-import.candidate`
+- **Modality:** `MUST`
+- **Scope:** Unreviewed imported records
+- **Status:** `normative`
+- **Verification:** `SCENARIO-CALENDAR-CANDIDATE-001`
+- **Supersedes:** none
+
+An unreviewed imported record MUST remain a candidate and MUST NOT silently become an Ambitions Event, reserve canonical capacity, or authorize outbound mutation.

@@ -6,7 +6,7 @@ status = "normative"
 owner_domain = "object-reminder"
 canon_revision = 1
 profile = "object-v1"
-owns_concepts = ["object.reminder.identity-capacity"]
+owns_concepts = ["object.reminder.identity-capacity", "object.reminder.replacement-target"]
 inherits = ["OBJECT-REMINDER-COMPLETION-001", "OBJECT-LIFECYCLE-DELETION-001", "CONTROL-MATERIAL-CONFIRMATION-001", "CONST-RUNTIME-MUTATION-001"]
 depends_on = ["CONSTITUTION", "OBJECT-STEP", "SURFACE-TODAY", "SURFACE-TIME", "APP-PERMISSIONS"]
 source_owners = ["Native/Ambitions/Core/Domain/", "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/", "Native/Ambitions/Core/LocalRuntimeOS/Commands/", "Native/Ambitions/Core/LocalRuntimeOS/Inspection/", "Native/Ambitions/Surfaces/Today/", "Native/Ambitions/Surfaces/Time/", "Native/Ambitions/Quality/"]
@@ -37,6 +37,18 @@ laws = { schedule_placement_nonduplication = "OBJ-SCHEDULE-PLACEMENT-IDENTITY-00
 - **Supersedes:** none
 
 A Reminder is one notification intent that may link to a Step, Event, or Goal and may carry time/location triggers. It MUST NOT consume capacity independently or complete user work; linkage preserves the capacity and completion authority of the linked object.
+
+A Reminder MUST represent notification intent.
+
+Reminders MUST remain notification intents and MAY link to a Step, Event, or Goal with optional date, time, or location metadata.
+
+An empty Time slot MUST support tap or long-press creation of an Event, Step, or Reminder with date and time prefilled.
+
+A Reminder MAY carry date, time, location, recurrence, urgency, notes, and notification rules.
+
+Imported alerts MAY become Ambitions-native notification rules on the Event, not separate Reminders.
+
+A Reminder MUST be a return point that asks the user to remember or act.
 
 <!-- canon-section: stable-identity -->
 Reminder identity survives trigger edits, delivery, snooze, dismissal, acknowledgement, recurrence, archive, Trash, restore, conversion, and linked-object changes. Delivery instances reference the canonical Reminder/series.
@@ -81,4 +93,17 @@ Today and Time may project relevant Reminders, Goals shows contextual links, and
 Semantics expose reminder text, trigger, recurrence scope, linked object, delivery state, privacy, and distinct snooze/dismiss/acknowledge/open-linked-work actions. Labels never call acknowledgement completion.
 
 <!-- canon-section: source-test-ownership -->
-Canonical semantics belong to `Core/Domain/`; trigger/recurrence/notification mutation and inspection belong to `Core/LocalRuntimeOS/Scheduling/`, `Commands/`, and `Inspection/`; Today/Time present it and `Quality/` proves acknowledgement noncompletion, linked capacity, recurrence scope, permission denial, replay, Trash/restore, privacy, and accessibility. Tests bind actions to stable Reminder identifiers; current implementation compliance is unclaimed.
+Canonical semantics belong to `Core/Domain/`; trigger/recurrence/notification mutation and inspection belong to `Core/LocalRuntimeOS/Scheduling/`, `Commands/`, and `Inspection/`; Today/Time present it and `Quality/` proves acknowledgement noncompletion, linked capacity, recurrence scope, permission denial, replay, Trash/restore, privacy, and accessibility. Tests bind actions to stable Reminder identifiers;
+
+
+
+## OBJ-REMINDER-REPLACEMENT-TARGET-001 — Reminder replacement target and claim ceiling
+
+- **Concept:** `object.reminder.replacement-target`
+- **Modality:** `MUST NOT`
+- **Scope:** Reminder replacement target and claim ceiling
+- **Status:** `normative`
+- **Verification:** `REVIEW-OBJ-REMINDER-REPLACEMENT-TARGET-001`
+- **Supersedes:** none
+
+Ambitions SHOULD target first-class replacement of ordinary personal reminder planning while preserving Reminder notification, capacity, recurrence, and completion boundaries; it MUST NOT claim parity until complete current evidence satisfies the replacement bar.

@@ -14,7 +14,7 @@ source_owners = ["Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/", "Native/Am
 
 # Source Atlas
 
-This shadow target constrains Source Atlas and R2 to public/reference/freshness infrastructure. It neither expands current Source Atlas scope nor claims live harvest, production R2, freshness, runtime quality, or release readiness.
+This shadow target constrains Source Atlas and R2 to public/reference/freshness infrastructure.
 
 ## SYSTEM-SOURCE-ATLAS-PUBLIC-001 — Source Atlas supplies verified public context only
 
@@ -26,6 +26,8 @@ This shadow target constrains Source Atlas and R2 to public/reference/freshness 
 - **Supersedes:** none
 
 Source Atlas MAY retrieve, verify, cache, and project approved public/reference/provenance/freshness data. Local Planning may deterministically match that public corpus to private intent entirely on device while preserving source, freshness, uncertainty, correction, rejection, and unavailable fallback. Source Atlas is not a marketplace, private intelligence store, canonical life graph, or mutation authority.
+
+Source Atlas and R2 MAY store or deliver approved public or reference packs, manifests, freshness, provenance, non-sensitive schemas, and non-sensitive connector or account state; Source Atlas and R2 MUST remain public, reference, and freshness infrastructure only and MUST NOT become a planner, private backend, hidden recommendation engine, or private-graph store.
 
 ## SYSTEM-SOURCE-ATLAS-FIREWALL-001 — Requests and R2 artifacts contain no private graph signal
 
@@ -72,7 +74,7 @@ Local redacted traces record allowlisted artifact/request ID, manifest/hash/prov
 
 <!-- canon-section: source-ownership -->
 Canonical ownership is divided among SourceAtlas, Boundary, PrivacySecurity, local Planning, Inspection, and Quality.
-Exact target owners are `Core/LocalRuntimeOS/SourceAtlas/`, `Boundary/`, `PrivacySecurity/`, local `Planning/`, and `Inspection/`; `Quality/` owns firewall and pack proof. The remediation freeze bars Source Atlas production growth without ADR allowlist and Green changed-scope boundary audit. Current source/proof remains narrower than production R2, live freshness, app-wide use, or release.
+Exact target owners are `Core/LocalRuntimeOS/SourceAtlas/`, `Boundary/`, `PrivacySecurity/`, local `Planning/`, and `Inspection/`; `Quality/` owns firewall and pack proof. The remediation freeze bars Source Atlas production growth without ADR allowlist and Green changed-scope boundary audit.
 
 <!-- canon-section: tests-proof -->
 Test finite request allowlist, every prohibited private category in URL/path/header/body/key/log/feedback, mixed payload, identifier joining, free-form private queries, malicious pack/manifest, signature/hash/schema, cache quarantine, offline/stale/bundled fallback, no-account access, entitlement loss, deterministic local composition, correction/rejection privacy, and the exact no-private-graph egress audit.

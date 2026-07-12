@@ -6,7 +6,7 @@ status = "normative"
 owner_domain = "system-sync-continuity"
 canon_revision = 1
 profile = "system-v1"
-owns_concepts = ["system.continuity.user-owned-cloudkit", "system.continuity.disabled-gate"]
+owns_concepts = ["system.continuity.conflict", "system.continuity.control-center", "system.continuity.disabled-gate", "system.continuity.environment", "system.continuity.failure", "system.continuity.record-identity", "system.continuity.restore", "system.continuity.user-owned-cloudkit"]
 inherits = ["LAW-LOCAL-AUTHORITY-001", "LAW-OFFLINE-NO-ACCOUNT-001", "LAW-ACCOUNT-BOUNDARY-001", "PRIVACY-CLOUDKIT-CONTINUITY-001", "LAW-DATA-LOSS-STOP-SHIP-001"]
 depends_on = ["CONSTITUTION", "SYSTEM-PRIVATE-LIFE-RUNTIME", "SYSTEM-PERSISTENCE-REPLAY", "SYSTEM-PRIVACY-DATA-CLASSIFICATION", "SURFACE-YOU"]
 source_owners = ["Native/Ambitions/Core/LocalRuntimeOS/Continuity/", "Native/Ambitions/Core/LocalRuntimeOS/Boundary/", "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/", "Native/Ambitions/Core/LocalRuntimeOS/Inspection/", "Native/Ambitions/Surfaces/You/", "Native/Ambitions/Quality/"]
@@ -14,7 +14,7 @@ source_owners = ["Native/Ambitions/Core/LocalRuntimeOS/Continuity/", "Native/Amb
 
 # Sync and Continuity
 
-This shadow target specifies a possible user-owned CloudKit continuity boundary. Continuity remains disabled; source scaffolding or tests do not constitute approval, enablement, production CloudKit proof, or release readiness.
+This shadow target specifies a possible user-owned CloudKit continuity boundary.
 
 ## SYSTEM-CONTINUITY-SEPARATION-001 — CloudKit continuity is separate and locally subordinate
 
@@ -26,6 +26,12 @@ This shadow target specifies a possible user-owned CloudKit continuity boundary.
 - **Supersedes:** none
 
 User-owned CloudKit continuity MUST remain separate from Ambitions Account identity/entitlement and R2/Source Atlas public-reference infrastructure. Local device state remains readable, mutable, replayable, and authoritative offline; CloudKit transports only explicitly eligible versioned envelopes and never becomes command, policy, sole-copy, or local-core authority. Sign-out and account deletion do not delete local data without a separate explicit destructive action.
+
+CloudKit continuity MUST NOT become the only readable copy, block the local core, or become canonical command authority.
+
+CloudKit sync MAY be optional and user-owned through iCloud.
+
+CloudKit MAY provide optional continuity.
 
 ## SYSTEM-CONTINUITY-DISABLED-001 — Continuity stays disabled until the full gate passes
 
@@ -41,7 +47,8 @@ Continuity MUST stay disabled until owner-approved design and executable exact-r
 ## Completeness contract
 
 <!-- canon-section: responsibility-non-responsibility -->
-Owns optional continuity eligibility, envelope transport, causal merge, conflict/quarantine, tombstone propagation, sync state, and enablement gate. It does not own Ambitions Account identity, R2, public references, canonical command decisions, local store meaning, backup as a synonym for sync, or current enablement.
+Owns optional continuity eligibility, envelope transport, causal merge, conflict/quarantine, tombstone propagation, sync state, and enablement gate.
+It does not own Ambitions Account identity, R2, public references, canonical command decisions, local store meaning, or backup as a synonym for sync.
 
 <!-- canon-section: inputs-outputs -->
 Inputs are committed local event/object envelopes, stable identities, schema/policy revisions, causal clocks, tombstones, eligibility/consent, local/account/iCloud state, server tokens, and environment. Outputs are disabled/eligible state, upload/download batch, deterministic merge or quarantine, local Command proposal, sync cursor/status, conflict review, and Receipt/history.
@@ -71,7 +78,7 @@ Local redacted sync evidence includes environment/container class, enablement-ga
 
 <!-- canon-section: source-ownership -->
 Canonical ownership resides in the exact Continuity, Boundary, PrivacySecurity, and Inspection domains.
-Exact target owner is `Core/LocalRuntimeOS/Continuity/`, with `Boundary/`, `PrivacySecurity/`, and `Inspection/` enforcement; `Surfaces/You/` presents controls and `Quality/` owns gate proof. Current Continuity source/tests are source-present only; production enablement, CloudKit schema/container, full app-wide consumption, approvals, device matrix, migration/restore, and release proof remain absent.
+Exact target owner is `Core/LocalRuntimeOS/Continuity/`, with `Boundary/`, `PrivacySecurity/`, and `Inspection/` enforcement; `Surfaces/You/` presents controls and `Quality/` owns gate proof.
 
 <!-- canon-section: tests-proof -->
 Executable gate scenarios exercise every required continuity and separation cell.
@@ -79,3 +86,69 @@ Test the entire disabled gate, separation from Account/R2, local-first offline m
 
 <!-- canon-section: performance-resource-constraints -->
 Envelope creation, batching, merge, retry, attachment work, and reconciliation are bounded, cancellable, backpressured, off-main where material, and lifecycle-safe. Article 31 calibration must define device/OS/build, graph/envelope/device/conflict/blob scale, network conditions, tools, percentile/maximum, memory/energy/storage/quota, and regression thresholds; no budget or readiness is claimed here.
+
+## SYSTEM-CONTINUITY-CONFLICT-001 — Continuity conflict handling
+
+- **Concept:** `system.continuity.conflict`
+- **Modality:** `MUST NOT`
+- **Scope:** Continuity conflict handling
+- **Status:** `normative`
+- **Verification:** `REVIEW-SYSTEM-CONTINUITY-CONFLICT-001`
+- **Supersedes:** none
+
+Continuity conflict merge behavior MUST be deterministic; unresolvable conflicts MUST be quarantined and presented as human-meaningful changes, and silent last-write-wins data loss MUST NOT occur.
+
+## SYSTEM-CONTINUITY-CONTROL-CENTER-001 — Continuity control center
+
+- **Concept:** `system.continuity.control-center`
+- **Modality:** `MUST`
+- **Scope:** Continuity control center
+- **Status:** `normative`
+- **Verification:** `REVIEW-SYSTEM-CONTINUITY-CONTROL-CENTER-001`
+- **Supersedes:** none
+
+The continuity control center MUST distinguish Ambitions Account from private-graph continuity and show enablement, last success, pending local changes, devices, reviewable conflicts, retry state, and recovery/reset actions; conflict resolution MUST be explicit and receipt-backed, and destructive reset MUST preview scope and provide an export or recovery path.
+
+## SYSTEM-CONTINUITY-ENVIRONMENT-001 — Continuity environment separation
+
+- **Concept:** `system.continuity.environment`
+- **Modality:** `MUST`
+- **Scope:** Continuity environment separation
+- **Status:** `normative`
+- **Verification:** `REVIEW-SYSTEM-CONTINUITY-ENVIRONMENT-001`
+- **Supersedes:** none
+
+Development and production continuity schemas and containers MUST remain separate and use reviewed deployment procedures; production schema mutation MUST have migration and rollback plans.
+
+## SYSTEM-CONTINUITY-FAILURE-001 — Continuity failure matrix
+
+- **Concept:** `system.continuity.failure`
+- **Modality:** `MUST`
+- **Scope:** Continuity failure matrix
+- **Status:** `normative`
+- **Verification:** `REVIEW-SYSTEM-CONTINUITY-FAILURE-001`
+- **Supersedes:** none
+
+Continuity failure behavior MUST define retry and backoff, batching and quotas, token expiration, partial failure, network changes, disabled iCloud, account changes, old clients, and device removal.
+
+## SYSTEM-CONTINUITY-RECORD-IDENTITY-001 — Continuity record identity
+
+- **Concept:** `system.continuity.record-identity`
+- **Modality:** `MUST`
+- **Scope:** Continuity record identity
+- **Status:** `normative`
+- **Verification:** `REVIEW-SYSTEM-CONTINUITY-RECORD-IDENTITY-001`
+- **Supersedes:** none
+
+Private continuity records MUST preserve canonical object identity, schema version, causal metadata, tombstones, and attachment references without exposing data outside the user-owned private container boundary.
+
+## SYSTEM-CONTINUITY-RESTORE-001 — Continuity-aware restore
+
+- **Concept:** `system.continuity.restore`
+- **Modality:** `MUST`
+- **Scope:** Continuity-aware restore
+- **Status:** `normative`
+- **Verification:** `REVIEW-SYSTEM-CONTINUITY-RESTORE-001`
+- **Supersedes:** none
+
+Restore while continuity is active MUST define duplicate prevention, causal reset, upload/download precedence, and user-visible consequence review before commit.

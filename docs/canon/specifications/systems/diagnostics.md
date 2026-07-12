@@ -27,6 +27,8 @@ This shadow target specifies private, local, redacted diagnostics and user-under
 
 Each major subsystem MUST report healthy, degraded, recoverable, quarantined, blocked, or unknown from current evidence with affected scope, freshness, correlation, safe actions, and privacy annotation. User-facing health appears only when action or interpretation changes and uses product language rather than raw architecture. Logs and support packages exclude private content by default.
 
+Diagnostics MUST expose sync health, local-store health, index status, extension status, and a privacy-reviewed debug export.
+
 ## SYSTEM-DIAGNOSTICS-AUTHORITY-001 — Diagnostics observe and propose; they never decide or repair silently
 
 - **Concept:** `system.diagnostics.non-authority`
@@ -36,7 +38,7 @@ Each major subsystem MUST report healthy, degraded, recoverable, quarantined, bl
 - **Verification:** `AUDIT-SYSTEM-DIAGNOSTICS-NO-MUTATION-001`
 - **Supersedes:** none
 
-Diagnostics MUST NOT mutate canonical state, mark an operation successful, weaken privacy, enable continuity, or self-certify readiness. A diagnostic may produce a redacted diagnosis and typed repair proposal; any repair that changes state requires preview, rollback/backup protection, runtime Command/Event/Projection/Receipt/Replay, and post-repair invariants.
+A diagnostic may produce a redacted diagnosis and typed repair proposal; any repair that changes state requires preview, rollback/backup protection, runtime Command/Event/Projection/Receipt/Replay, and post-repair invariants.
 
 ## Completeness contract
 
@@ -71,7 +73,7 @@ The diagnostic system observes itself through bounded volume/drop/retention/expo
 
 <!-- canon-section: source-ownership -->
 Canonical ownership is divided among runtime Diagnostics, Inspection, PrivacySecurity, app presentation, and Quality.
-Exact targets are `Core/LocalRuntimeOS/Diagnostics/`, `Inspection/`, and `PrivacySecurity/`; app `Diagnostics/` and `Surfaces/You/` present, while `Quality/` owns proof. Current inspectors and ledgers are source-present only; app-wide consumption, calibrated budgets, incident operations, privacy approval, and release evidence remain separate.
+Exact targets are `Core/LocalRuntimeOS/Diagnostics/`, `Inspection/`, and `PrivacySecurity/`; app `Diagnostics/` and `Surfaces/You/` present, while `Quality/` owns proof. app-wide consumption, calibrated budgets, incident operations, privacy approval, and release evidence remain separate.
 
 <!-- canon-section: tests-proof -->
 Executable scenarios exercise every health class, redaction boundary, and non-mutation rule.

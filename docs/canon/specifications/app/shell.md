@@ -33,7 +33,7 @@ source_owners = [
 
 # App Shell
 
-This shadow specification defines intended app-shell composition. It refines the Constitution without becoming active authority, and it makes no claim that the current shell, runtime, accessibility behavior, or rendered product satisfies these requirements.
+This shadow specification defines intended app-shell composition.
 
 ## SPEC-APP-SHELL-ROOT-NAVIGATION-001 — Root-depth shell ownership
 
@@ -48,6 +48,22 @@ The shell MUST render one root-dock instance for the persistent roots declared b
 
 The default root treatment is icon-only. Plain accessible labels remain available to assistive technology and may become visible only for onboarding, long-press disclosure, or an evidence-backed comprehension fallback. Long press is never the only way to learn or activate a root.
 
+Capture MUST NOT be a tab.
+
+The root dock MUST contain four icon-only root controls and MUST appear only at root depth.
+
+Capture MUST NOT be a tab, destination, inbox, or permanent root state.
+
+Capture MUST NOT become a root destination or content category.
+
+The root dock MUST contain four icon-only controls for Today, Goals, Time, and You.
+
+The root dock MUST appear only at root and MUST dissolve or leave in drilldowns, full-screen Capture, deep inspection, and appropriate deep Time states.
+
+The root shell MUST NOT add roots beyond Today, Goals, Time, and You.
+
+Root MUST have bottom navigation at rest, but it collapses/dissolves in drilldowns, composer, inspection, and Time zoom.
+
 ## SPEC-APP-SHELL-GLOBAL-ACTIONS-001 — Integrated global-action access
 
 - **Concept:** `app.shell.global-actions`
@@ -59,6 +75,10 @@ The default root treatment is icon-only. Plain accessible labels remain availabl
 
 The shell MUST provide integrated, context-appropriate access to the constitutionally non-root global systems. It MUST NOT create an additional dock position, persistent floating button, duplicate first-viewport control, or alternate mutation owner. The global system specifications own their behavior and data; the shell owns only entry, presentation handoff, return context, focus transfer, and duplicate-control prevention.
 
+Capture SHOULD use a root-chrome action and MUST NOT use a persistent floating-plus control that obscures content.
+
+Capture MAY remain visible at root depth and MUST hide in drilldowns.
+
 ## SPEC-APP-SHELL-FIRST-VIEWPORT-001 — Product object dominates shell chrome
 
 - **Concept:** `app.shell.first-viewport`
@@ -69,6 +89,10 @@ The shell MUST provide integrated, context-appropriate access to the constitutio
 - **Supersedes:** none
 
 The shell MUST reserve system safe areas for status, compact contextual actions, the active surface, and root navigation while leaving the active surface's primary product object visually and semantically dominant. Atmosphere may extend full-screen; readable content and controls remain safe. Shell material must feel integrated rather than boxed, bordered, detached, or layered over the product object. No shell action may obscure actionable content.
+
+A floating plus button MUST NOT obscure content.
+
+A product object MUST dominate shell chrome, and the first viewport MUST avoid a heavy header or context crown.
 
 ## APP-SHELL-STATE-001 — Shell state follows route state
 
@@ -95,7 +119,8 @@ When shell composition or route presentation fails, the app MUST preserve or rec
 ## Completeness contract
 
 <!-- canon-section: responsibility-non-responsibility -->
-The shell is responsible for root-depth chrome, safe-area composition, contextual global-system entry, presentation containment, return context, and focus handoff. It is not responsible for constitutional root IA, surface content, Capture/Search behavior, object mutation, privacy policy, or current implementation status.
+The shell is responsible for root-depth chrome, safe-area composition, contextual global-system entry, presentation containment, return context, and focus handoff.
+It is not responsible for constitutional root IA, surface content, Capture/Search behavior, object mutation, or privacy policy.
 
 <!-- canon-section: inputs-outputs -->
 Inputs are the current route, presentation depth, active-surface chrome contract, safe-area environment, accessibility environment, and recoverable prior focus. Outputs are one composed shell state, visible chrome policy, presentation handoff, and deterministic return/focus target; no output is canonical product data.
@@ -104,7 +129,7 @@ Inputs are the current route, presentation depth, active-surface chrome contract
 `LAW-SHELL-STAGE-001` and the constitutional IA laws remain authoritative for Stage and root ownership. This file refines shell composition only, references the root set rather than restating it, and delegates all global-system and surface behavior to their owning specifications.
 
 <!-- canon-section: data-classification -->
-Shell route and focus state are local operational metadata. Shell chrome must not surface private object titles, proof, source, receipt, account, permission, or diagnostic details unless the active owning view explicitly authorizes that disclosure for the current context.
+Shell route and focus state are local operational metadata.
 
 <!-- canon-section: state-model -->
 The shell record separates route depth, presentation ownership, return, and focus.
@@ -121,7 +146,7 @@ Root switching, shell presentation, Capture/Search entry, dismissal, and recover
 Given the same valid route, presentation depth, active-surface contract, and accessibility environment, the shell produces the same ownership, visibility, dismissal, and focus policy. Presentation heuristics may not invent a root or duplicate a global action.
 
 <!-- canon-section: observability -->
-Scoped proof must be able to inspect route depth, active presentation owner, dock visibility, global-action ownership, return route, focus target, and recovery result without recording private content. Observability requirements do not assert that current diagnostics already provide this evidence.
+Scoped proof must be able to inspect route depth, active presentation owner, dock visibility, global-action ownership, return route, focus target, and recovery result without recording private content.
 
 <!-- canon-section: source-ownership -->
 Stable implementation routing is `App/` for app assembly and route intake, `Stage/` for shell and presentation ownership, semantic Stage primitives for shared chrome, and `Quality/` for shell proof. The listed paths are implementation mappings, not proof that the behavior is complete.
@@ -130,4 +155,4 @@ Stable implementation routing is `App/` for app assembly and route intake, `Stag
 Required proof covers root-only dock visibility, no extra root/global control, native drilldown return, preserved return context, focus restoration, safe-area behavior, VoiceOver labels/actions/order, Dynamic Type, Reduce Motion, Reduce Transparency, contrast, and failure recovery. Current passing evidence is required before any scoped Green claim.
 
 <!-- canon-section: performance-resource-constraints -->
-On the oldest supported physical iPhone in an optimized build, measured across 200 root, drilldown, overlay, and dismissal transitions with all four constitutional roots, depth up to 20, and three simultaneous presentation classes, shell policy evaluation MUST complete within 8 ms at P95 and accepted root-switch dispatch within 50 ms at P95. The first stable product frame after dispatch MUST arrive within 100 ms at P95, with no main-thread stall above 50 ms. The 200-transition run MUST add no more than 5 MiB resident memory, perform zero synchronous disk I/O and zero network calls on the interaction path, and leave no duplicate presentation owner. Shell state uses no polling or autonomous background work. Current device, frame, latency, memory, and energy proof is not claimed.
+On the oldest supported physical iPhone in an optimized build, measured across 200 root, drilldown, overlay, and dismissal transitions with all four constitutional roots, depth up to 20, and three simultaneous presentation classes, shell policy evaluation MUST complete within 8 ms at P95 and accepted root-switch dispatch within 50 ms at P95. The first stable product frame after dispatch MUST arrive within 100 ms at P95, with no main-thread stall above 50 ms. The 200-transition run MUST add no more than 5 MiB resident memory, perform zero synchronous disk I/O and zero network calls on the interaction path, and leave no duplicate presentation owner. Shell state uses no polling or autonomous background work.

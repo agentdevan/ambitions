@@ -6,7 +6,7 @@ status = "normative"
 owner_domain = "object-event"
 canon_revision = 1
 profile = "object-v1"
-owns_concepts = ["object.event.identity-lifecycle"]
+owns_concepts = ["object.event.all-day-capacity", "object.event.identity-lifecycle", "object.event.multi-day", "object.event.recurrence-edit", "object.event.source-selection", "object.event.time-zone"]
 inherits = ["OBJECT-TAXONOMY-001", "OBJECT-LIFECYCLE-DELETION-001", "CONTROL-MATERIAL-CONFIRMATION-001", "CONST-RUNTIME-MUTATION-001"]
 depends_on = ["CONSTITUTION", "OBJECT-STEP", "SURFACE-TIME", "GLOBAL-TRUST-INSPECTION"]
 source_owners = ["Native/Ambitions/Core/Domain/", "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/", "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/", "Native/Ambitions/Core/LocalRuntimeOS/Commands/", "Native/Ambitions/Core/LocalRuntimeOS/Inspection/", "Native/Ambitions/Surfaces/Time/", "Native/Ambitions/Quality/"]
@@ -37,6 +37,52 @@ laws = { schedule_placement_nonduplication = "OBJ-SCHEDULE-PLACEMENT-IDENTITY-00
 - **Supersedes:** none
 
 An Event is one fixed-by-default time-range commitment with recurrence, attendees, location, alerts, source, and Schedule Placement. It MUST NOT be completed like a Step; occurrence elapsed/cancelled/attended state never fabricates user-work completion.
+
+When an Apple Calendar item is imported into Ambitions Time, it MUST become an Ambitions-native Fixed Event by default.
+
+An Event MUST occupy a time range.
+
+Events MAY be all-day, multi-day, recurring, located, or attendee-bearing.
+
+Events MUST remain time-range commitments with schedule placement, recurrence, attendees, location, alerts, and source metadata, and MUST be Fixed by default.
+
+An Event MUST be a time-range commitment or occurrence.
+
+## OBJ-EVENT-SOURCE-SELECTION-001 — Time creation keeps source visible
+- **Concept:** `object.event.source-selection`
+- **Modality:** `MUST`
+- **Scope:** Event creation from Time
+- **Status:** `normative`
+- **Verification:** `SCENARIO-EVENT-SOURCE-SELECTION-001`
+- **Supersedes:** none
+
+An Event created from Time MUST default to the Ambitions-owned local source and expose an explicit source picker for eligible Apple Calendar calendars. Selecting an external source preserves preview, permission, local receipt, and external-result separation.
+
+## OBJ-EVENT-ALL-DAY-CAPACITY-001 — All-day identity and capacity are separate
+- **Concept:** `object.event.all-day-capacity`
+- **Modality:** `MUST`
+- **Scope:** Imported and native all-day Events
+- **Status:** `normative`
+- **Verification:** `SCENARIO-EVENT-ALL-DAY-CAPACITY-001`
+- **Supersedes:** none
+
+An all-day Event MUST remain one date-based Event shown in the all-day rail and chronological views. Import defaults it to Fixed without consuming hourly capacity; review exposes No capacity impact, Light context marker, Protected day, and Reduces available working time, and the selected effect remains editable.
+
+All-day Events MUST NOT consume hourly capacity unless the user marks them Protected or blocking.
+
+After import, an external calendar item MUST become an Ambitions-native Event and MUST default to Fixed.
+
+## OBJ-EVENT-TIME-ZONE-001 — Explicit zone mode prevents silent shifts
+- **Concept:** `object.event.time-zone`
+- **Modality:** `MUST`
+- **Scope:** Timed and all-day Event storage, display, edit, recurrence, and import
+- **Status:** `normative`
+- **Verification:** `SCENARIO-EVENT-TIME-ZONE-DST-001`
+- **Supersedes:** none
+
+A timed Event MUST store whether it is anchored to an event zone, floating local time, or following the device zone; an all-day Event remains date-based. Display uses the active view zone while Detail exposes the stored zone and original time. Zone changes preview results, and DST ambiguity or missing local time uses system calendar APIs and a Receipt for any visible change.
+
+Explicit zone mode prevents silent shifts MUST preserve authored time-zone semantics.
 
 <!-- canon-section: stable-identity -->
 Event and recurring-series identities survive edit, move, exception, cancellation, archive, Trash, restore, import reconciliation, and projection changes. Stable identifiers bind occurrences to their series.
@@ -81,4 +127,28 @@ Time owns primary Event presentation; Today may show execution-relevant context,
 Semantics expose title, range/time zone, fixed/flexible state, recurrence scope, attendees, location, alerts, source, conflict, consequence, and actions with non-drag alternatives. Ordered controls state each affected occurrence scope.
 
 <!-- canon-section: source-test-ownership -->
-Canonical value semantics belong to `Core/Domain/`; mutation, recurrence, placement, external reconciliation, and inspection belong to `Core/LocalRuntimeOS/Scheduling/`, `ExternalWrites/`, `Commands/`, and `Inspection/`; Time presents it and `Quality/` proves boundary, series exceptions, import/link, rollback, offline, privacy, and accessibility. Tests bind outcomes to stable Event identifiers; current implementation compliance is unclaimed.
+Canonical value semantics belong to `Core/Domain/`; mutation, recurrence, placement, external reconciliation, and inspection belong to `Core/LocalRuntimeOS/Scheduling/`, `ExternalWrites/`, `Commands/`, and `Inspection/`; Time presents it and `Quality/` proves boundary, series exceptions, import/link, rollback, offline, privacy, and accessibility. Tests bind outcomes to stable Event identifiers;
+
+
+
+## OBJ-EVENT-MULTI-DAY-001 — Multi-day Event identity
+
+- **Concept:** `object.event.multi-day`
+- **Modality:** `MUST`
+- **Scope:** Multi-day Event identity
+- **Status:** `normative`
+- **Verification:** `REVIEW-OBJ-EVENT-MULTI-DAY-001`
+- **Supersedes:** none
+
+A multi-day Event MUST retain one identity across continuous Week and Month treatment, per-day Day portions, and one complete List range, and edit, recurrence, Receipt, source, deletion, and capacity consequences MUST operate on that identity.
+
+## OBJ-EVENT-RECURRENCE-EDIT-001 — Recurring Event edit scope
+
+- **Concept:** `object.event.recurrence-edit`
+- **Modality:** `MUST`
+- **Scope:** Recurring Event edit scope
+- **Status:** `normative`
+- **Verification:** `REVIEW-OBJ-EVENT-RECURRENCE-EDIT-001`
+- **Supersedes:** none
+
+Imported native recurring Events MUST support this occurrence, this and following, and entire series scopes, previewing affected occurrences, conflicts, reflow, Protected/Fixed consequences, and Receipt creation before commit.

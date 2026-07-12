@@ -27,6 +27,10 @@ This shadow specification defines notification policy and external-effect bounda
 
 Notification permission MUST be requested only when a user chooses notification-dependent behavior, with purpose, fields, fallback, and settings path explained. Rules bind a canonical object and user policy; previews redact sensitive content by default; copy is calm and non-shaming; quiet hours and duplicate-source risk are honored. Generic return prompts, productivity pressure, learning insights, and hidden private detail are forbidden.
 
+Lock-screen notification copy SHOULD be private by default.
+
+Notifications MUST NOT be aggressive, overly personal, or emotionally interpretive.
+
 ## SYSTEM-NOTIFICATIONS-EFFECT-001 — Scheduling and actions preserve local authority
 
 - **Concept:** `system.notifications.external-effect`
@@ -37,6 +41,10 @@ Notification permission MUST be requested only when a user chooses notification-
 - **Supersedes:** none
 
 Local validated commit of a Notification Rule or object mutation MUST precede notification scheduling/removal. Delivery state is an outbox result, not canonical success. Every mutating action preserves command/idempotency identity and follows validation through Event, Projection, Receipt, and Replay; Reminder acknowledgment alone never completes underlying work.
+
+Notifications MUST be object-aware and action-oriented.
+
+Notification actions MAY include Complete, Start, Snooze, Reschedule, Add Proof, Open Event, and Review Reflow.
 
 ## Completeness contract
 

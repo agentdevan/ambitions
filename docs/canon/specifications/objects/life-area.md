@@ -7,6 +7,7 @@ owner_domain = "object-life-area"
 canon_revision = 1
 profile = "object-v1"
 owns_concepts = [
+  "object.life-area.suggested-defaults",
   "object.life-area.identity",
   "object.identity-common-fields",
   "object.identity.canonical",
@@ -14,6 +15,8 @@ owns_concepts = [
   "object.state.orthogonal-axes",
   "object.memory.lifecycle-retention",
   "object.archive.planning-influence",
+  "object.life-capital.editability",
+  "object.life-capital.anti-gamification",
 ]
 inherits = ["OBJECT-TAXONOMY-001", "OBJECT-CANONICAL-GRAPH-001", "OBJECT-LIFECYCLE-DELETION-001", "CONST-RUNTIME-MUTATION-001"]
 depends_on = ["CONSTITUTION", "SURFACE-GOALS", "GLOBAL-CAPTURE", "GLOBAL-TRUST-INSPECTION"]
@@ -33,6 +36,10 @@ source_owners = ["Native/Ambitions/Core/Domain/", "Native/Ambitions/Core/LocalRu
 
 A Life Area MUST be one stable, editable region of life that contains Goals and may relate free Steps or Notes. Active, hidden, archived, restored, and Trashed presentations retain that identity and do not create per-surface copies.
 
+Life Areas MUST remain a broad editable atlas rather than ranked score cards.
+
+A Life Area MUST be a broad, editable organizing region for direction, goals, proof, recovery, and related context.
+
 ## OBJ-COMMON-ENVELOPE-001 — Common canonical envelope
 
 - **Concept:** `object.identity-common-fields`
@@ -42,7 +49,7 @@ A Life Area MUST be one stable, editable region of life that contains Goals and 
 - **Verification:** `AUDIT-OBJECT-COMMON-ENVELOPE-001`
 - **Supersedes:** none
 
-Every canonical object MUST carry stable local identity, created/updated timestamps, applicable lifecycle and orthogonal state axes, provenance, private-data and continuity classification, relationship lineage, and a recoverable soft-delete path where supported. Inapplicable axes remain absent rather than receiving false placeholder states.
+Every canonical object MUST carry stable local identity, created/updated timestamps, applicable lifecycle and orthogonal state axes, provenance, private-data and continuity classification, relationship lineage, and a recoverable soft-delete path where supported.
 
 ## OBJ-CANONICAL-IDENTITY-001 — One identity for one object
 
@@ -88,6 +95,8 @@ Applicable lifecycle, placement, time, execution, proof, recovery, source, and s
 
 Accepted canonical meaning, lineage, and history MUST remain locally inspectable until the user performs the applicable governed deletion; archive, hide, completion, and closure do not erase it.
 
+Ambitions memory MUST remain retained until the user performs governed deletion.
+
 ## OBJ-ARCHIVE-SEMANTICS-001 — Archive removes planning influence
 
 - **Concept:** `object.archive.planning-influence`
@@ -98,6 +107,18 @@ Accepted canonical meaning, lineage, and history MUST remain locally inspectable
 - **Supersedes:** none
 
 Archive MUST stop the archived object from influencing ordinary future planning while preserving identity, relationships, history, receipts, restore, and explicit inspection.
+
+## OBJ-LIFE-AREA-SUGGESTED-DEFAULTS-001 — Defaults remain suggestions
+- **Concept:** `object.life-area.suggested-defaults`
+- **Modality:** `MAY`
+- **Scope:** First-use Life Area suggestions and later organization
+- **Status:** `normative`
+- **Verification:** `SCENARIO-LIFE-AREA-DEFAULTS-001`
+- **Supersedes:** none
+
+Ambitions MAY offer suggested Life Areas as a starting point. The user can rename, hide, reorder, replace, or remove every suggestion; no default silently becomes identity, planning priority, or permanent taxonomy.
+
+Ambitions MUST start with suggested Life Area defaults, and the user MAY rename, hide, reorder, or customize them.
 
 <!-- canon-section: stable-identity -->
 Life Area identity is generated locally once and survives rename, hide, archive, restore, reordering, and projection changes. A title, color, icon, or Goals grouping is not identity.
@@ -130,7 +151,7 @@ Trash preserves lineage and affected-child review. Restore repairs projections a
 Material edits, child moves, archive, Trash, restore, and permanent-deletion acceptance emit automatic mutation Receipts and History Events; these are not user Proof.
 
 <!-- canon-section: privacy-sync-classification -->
-Life Area names, relationships, and planning influence are private local graph data. Account and R2 never receive them. Optional private continuity remains disabled until separately approved; classification changes require preview and receipt.
+Life Area names, relationships, and planning influence are private local graph data. Account and R2 never receive them. classification changes require preview and receipt.
 
 <!-- canon-section: import-export -->
 Import creates or links one local identity only after preview. Export is explicit and scoped. Re-import reconciles provenance/lineage instead of duplicating a Life Area; deletion/export interactions state what cannot be restored.
@@ -144,4 +165,26 @@ Every projection exposes name, lifecycle, planning influence, child count, conse
 VoiceOver actions name the affected Life Area and the exact lifecycle consequence.
 
 <!-- canon-section: source-test-ownership -->
-Canonical target ownership is `Core/Domain/` for value semantics and `Core/LocalRuntimeOS/Planning/`, `Commands/`, and `Inspection/` for mutation/history; `Surfaces/Goals/` presents it and `Quality/` proves lifecycle, child-impact, Trash/restore, replay, offline, privacy, and accessibility scenarios. Current source compliance is unclaimed.
+Canonical target ownership is `Core/Domain/` for value semantics and `Core/LocalRuntimeOS/Planning/`, `Commands/`, and `Inspection/` for mutation/history; `Surfaces/Goals/` presents it and `Quality/` proves lifecycle, child-impact, Trash/restore, replay, offline, privacy, and accessibility scenarios.
+
+## OBJ-LIFE-CAPITAL-EDITABILITY-001 — Life Capital editability
+
+- **Concept:** `object.life-capital.editability`
+- **Modality:** `MUST`
+- **Scope:** Life Capital records
+- **Status:** `normative`
+- **Verification:** `SCENARIO-LIFE-CAPITAL-EDIT-001`
+- **Supersedes:** none
+
+Life Capital records MUST remain inspectable and user-editable without converting them into scores, streaks, or hidden behavioral authority.
+
+## OBJ-LIFE-CAPITAL-ANTI-GAMIFICATION-001 — Life Capital anti-gamification
+
+- **Concept:** `object.life-capital.anti-gamification`
+- **Modality:** `MUST NOT`
+- **Scope:** Life Capital presentation and use
+- **Status:** `normative`
+- **Verification:** `AUDIT-LIFE-CAPITAL-ANTI-GAMIFICATION-001`
+- **Supersedes:** none
+
+Life Capital MUST NOT become a score, streak, rank, XP system, shame mechanism, or hidden mutation authority.

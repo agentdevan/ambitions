@@ -25,13 +25,13 @@ depends_on = ["CONSTITUTION", "APP-SHELL"]
 source_owners = [
   "Native/Ambitions/App/",
   "Native/Ambitions/Stage/",
-  "Native/Ambitions/Quality/RouteDepthChromeAudit.swift",
+  "Native/Ambitions/Quality/",
 ]
 +++
 
 # App Navigation
 
-This shadow specification owns route relationships and presentation semantics, not the root IA itself. It is normative target text inside a non-authoritative package and does not prove current route wiring, accessibility, restoration, or UI behavior.
+This shadow specification owns route relationships and presentation semantics, not the root IA itself.
 
 ## SPEC-APP-NAVIGATION-IA-MAP-001 — Navigation maps constitutional owners
 
@@ -55,6 +55,8 @@ The navigation graph MUST map each constitutional root to its owning root presen
 
 A root route MUST present at Stage root with root switching available. A normal drilldown uses native full-screen depth and native return. Compact object detail, small choices, and contextual inspection use the smallest native presentation that preserves clarity and accessibility. Complex review, Capture, and Search use full-screen presentation with their own cancellation and recovery contracts. Root chrome visibility is delegated to `APP-SHELL`; presentation choice may not create an alternate root.
 
+Root navigation MAY appear at root depth.
+
 ## SPEC-APP-NAVIGATION-ROOT-INTERACTION-001 — Root interaction preserves useful state
 
 - **Concept:** `app.navigation.root-interaction`
@@ -66,6 +68,10 @@ A root route MUST present at Stage root with root switching available. A normal 
 
 Activating a different root MUST switch to that root while preserving reasonable per-root navigation and content state. Re-activating the current root returns to the canonical anchor defined by that surface specification, without deleting drafts or accepted state. Long press may disclose a label and description but is never required. Assistive activation exposes the same roots, labels, selection state, and predictable result.
 
+Tapping a root icon MUST switch roots while preserving each root’s reasonable state.
+
+Ambitions MUST support thin use and deep use.
+
 ## APP-NAVIGATION-RESTORATION-001 — Restoration validates before presentation
 
 - **Concept:** `app.navigation.restoration`
@@ -76,6 +82,8 @@ Activating a different root MUST switch to that root while preserving reasonable
 - **Supersedes:** none
 
 Navigation restoration MUST validate that the target owner and referenced local object still exist and remain eligible before presenting depth. A valid route restores the prior root, depth, selection, and focus as far as product meaning permits. An invalid or unavailable target degrades to the nearest valid owning context with a calm explanation and repair action; it must not fabricate an object, reveal a private fallback, or trap the user at an empty route.
+
+Required proof MUST be visible before completion.
 
 ## APP-NAVIGATION-STATE-001 — One route owner at each depth
 
@@ -122,10 +130,10 @@ The same typed route, eligibility result, current stack, and presentation policy
 Proof must expose route ID, owner, source class, resolution result, selected root, depth, presentation owner, dismissal target, and focus result with private payloads redacted. Logs and maps are evidence aids, not claims of runtime correctness.
 
 <!-- canon-section: source-ownership -->
-Canonical target ownership is exact: `Stage/` owns the navigation graph, route depth, presentation, restoration, and focus containment; `App/` owns external route entry, root-scene assembly, and dependency injection only; `Quality/` owns route-depth proof. The current `App/AppNavigationGraph.swift` location is non-canonical architecture debt and current implementation mapping, not target ownership. A source repair must move or collapse that graph into `Stage/` without treating `App/` as an equivalent owner. Source presence remains implementation evidence and does not establish compliance.
+Canonical target ownership is exact: `Stage/` owns the navigation graph, route depth, presentation, restoration, and focus containment; `App/` owns external route entry, root-scene assembly, and dependency injection only; `Quality/` owns route-depth proof. A source repair must move or collapse that graph into `Stage/` without treating `App/` as an equivalent owner. Source presence remains implementation evidence and does not establish compliance.
 
 <!-- canon-section: tests-proof -->
 Required tests cover every route kind, root switch and re-tap, per-root state preservation, back and edge swipe, cancellation, interrupted restoration, stale object targets, duplicate-owner rejection, VoiceOver selection and focus order, Dynamic Type, Reduce Motion, and safe offline behavior.
 
 <!-- canon-section: performance-resource-constraints -->
-On the oldest supported physical iPhone in an optimized build, measured with a graph of 4 roots, 250 typed route definitions, maximum depth 20, and a queue capped at 32 requests, local route resolution MUST complete within 20 ms at P95, transition dispatch within 50 ms at P95, and restoration decision within 100 ms at P95 across 1,000 operations. Requests beyond the depth or queue ceiling MUST fail closed. Ten thousand resolutions MUST add no more than 8 MiB resident memory, perform zero synchronous disk I/O on the interaction path, and perform zero network calls. Navigation MUST use no polling or autonomous background loop. These are normative targets; current device, latency, memory, and energy proof is not claimed.
+On the oldest supported physical iPhone in an optimized build, measured with a graph of 4 roots, 250 typed route definitions, maximum depth 20, and a queue capped at 32 requests, local route resolution MUST complete within 20 ms at P95, transition dispatch within 50 ms at P95, and restoration decision within 100 ms at P95 across 1,000 operations. Requests beyond the depth or queue ceiling MUST fail closed. Ten thousand resolutions MUST add no more than 8 MiB resident memory, perform zero synchronous disk I/O on the interaction path, and perform zero network calls. Navigation MUST use no polling or autonomous background loop. These are normative targets;

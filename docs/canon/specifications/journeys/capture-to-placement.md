@@ -19,7 +19,7 @@ source_owners = ["Native/Ambitions/Composer/Capture/", "Native/Ambitions/Core/Lo
 
 # Capture to Placement
 
-This shadow journey coordinates owning contracts; it does not redefine object lifecycle or claim current implementation.
+This shadow journey coordinates owning contracts;
 
 ## JOURNEY-FIRST-USE-001 — First useful intent starts without setup coercion
 

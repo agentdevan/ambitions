@@ -6,7 +6,10 @@ status = "normative"
 owner_domain = "system-local-learning"
 canon_revision = 1
 profile = "system-v1"
-owns_concepts = ["system.learning.local-inspectable", "system.learning.user-control"]
+owns_concepts = ["system.learning.local-inspectable", "system.learning.user-control",
+  "system.learning.goal-suggestion",
+  "system.learning.capability-retention",
+]
 inherits = ["MISSION-MOAT-CONTINUITY-001", "CONTROL-FORCE-NOTHING-001", "LAW-LOCAL-AUTHORITY-001", "LAW-OFFLINE-NO-ACCOUNT-001", "CONST-PROOF-EVIDENCE-001"]
 depends_on = ["CONSTITUTION", "SYSTEM-PRIVATE-LIFE-RUNTIME", "SYSTEM-PRIVACY-DATA-CLASSIFICATION", "SURFACE-YOU", "GLOBAL-TRUST-INSPECTION"]
 source_owners = ["Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/", "Native/Ambitions/Core/LocalRuntimeOS/Planning/", "Native/Ambitions/Core/LocalRuntimeOS/Inspection/", "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/", "Native/Ambitions/Surfaces/You/", "Native/Ambitions/Quality/"]
@@ -14,7 +17,7 @@ source_owners = ["Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/
 
 # Local Learning
 
-This shadow target defines intended inspectable local adaptation, not a model-training claim, intelligence-quality proof, or current implementation completion.
+
 
 ## SYSTEM-LEARNING-LOCAL-001 — Learning remains local, evidence-linked, and non-judgmental
 
@@ -27,6 +30,10 @@ This shadow target defines intended inspectable local adaptation, not a model-tr
 
 Learning MUST derive locally from canonical observations and explicit corrections, retain evidence/policy lineage and uncertainty, and influence only declared inspectable decisions. It MUST NOT create emotional labels, productivity scores, streak pressure, hidden personality profiles, server-side profiling, hosted-model dependency, or certainty unsupported by context.
 
+Local learning MAY infer broad patterns, behavioral obstacles, and capabilities only from local non-sensitive evidence while preserving uncertainty, evidence linkage, inspection, correction, disablement, and non-judgmental language; local learning MUST NOT infer sensitive traits outside explicit product scope, fabricate certainty, or silently commit a material planning change; when context is insufficient, Ambitions MAY offer neutral actions, ask one necessary question, expose alternatives, or remain quiet.
+
+Life Capital MUST NOT become a badge, score, streak, or gamification system.
+
 ## SYSTEM-LEARNING-CONTROL-001 — The user can inspect, correct, disable, reset, archive, and delete influences
 
 - **Concept:** `system.learning.user-control`
@@ -37,6 +44,34 @@ Learning MUST derive locally from canonical observations and explicit correction
 - **Supersedes:** none
 
 Every learned influence MUST expose what changed, evidence category, where it is used, and controls appropriate to inspect, correct, disable, reset, archive, or delete it. Correction is a runtime mutation with Receipt/history; deletion has explicit downstream consequence and never silently rewrites historical truth. Passive learning may suggest but cannot silently make material commitments.
+
+Deleted Life Capital MUST no longer influence future planning.
+
+When Life Capital changes, Ambitions MUST resimulate affected paths and show impact.
+
+Capabilities MUST NOT decay automatically.
+
+## SYSTEM-LEARNING-GOAL-SUGGESTION-001 — Goal suggestion learning
+
+- **Concept:** `system.learning.goal-suggestion`
+- **Modality:** `MUST`
+- **Scope:** Local Goal suggestions
+- **Status:** `normative`
+- **Verification:** `TEST-LEARNING-GOAL-SUGGESTION-001`
+- **Supersedes:** none
+
+Goal suggestions MUST be local, inspectable, reversible, confidence-bounded, and incapable of mutating canonical Goal state without user confirmation.
+
+## SYSTEM-LEARNING-CAPABILITY-RETENTION-001 — Learning capability retention
+
+- **Concept:** `system.learning.capability-retention`
+- **Modality:** `MUST`
+- **Scope:** Learning reset and deletion
+- **Status:** `normative`
+- **Verification:** `TEST-LEARNING-CAPABILITY-RETENTION-001`
+- **Supersedes:** none
+
+Deleting learned observations MUST remove derived influence and preserve only explicitly user-owned settings and capabilities needed for deterministic local operation.
 
 ## Completeness contract
 

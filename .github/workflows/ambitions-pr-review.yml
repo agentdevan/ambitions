@@ -12,6 +12,65 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  pr_scope:
+    name: pr-scope
+    runs-on: ubuntu-latest
+    outputs:
+      active_law: ${{ steps.scope.outputs.active_law }}
+      source_atlas: ${{ steps.scope.outputs.source_atlas }}
+      xcode_runtime: ${{ steps.scope.outputs.xcode_runtime }}
+      shell: ${{ steps.scope.outputs.shell }}
+      markdown: ${{ steps.scope.outputs.markdown }}
+      yaml: ${{ steps.scope.outputs.yaml }}
+      base_sha: ${{ steps.scope.outputs.base_sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Classify introduced paths
+        id: scope
+        shell: bash
+        run: |
+          set -euo pipefail
+          base_ref="${GITHUB_BASE_REF:-main}"
+          git fetch --no-tags origin "${base_ref}"
+          base="$(git merge-base HEAD "origin/${base_ref}")"
+          paths="${RUNNER_TEMP}/ambitions-pr-changed-paths.txt"
+          if [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
+            git ls-files > "$paths"
+          else
+            git diff --name-only "$base" HEAD > "$paths"
+          fi
+          echo "base_sha=${base}" >> "$GITHUB_OUTPUT"
+          echo "base=${base}"
+          echo "changed_paths:"
+          sed 's/^/  /' "$paths"
+
+          classify() {
+            local scope="$1"
+            local output="$2"
+            local applicable=false
+            if [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
+              applicable=true
+            elif python3 scripts/ci/ambitions-pr-scope.py "$scope" < "$paths"; then
+              applicable=true
+            else
+              local status=$?
+              if [[ "$status" -ne 1 ]]; then
+                exit "$status"
+              fi
+            fi
+            echo "${output}=${applicable}" >> "$GITHUB_OUTPUT"
+            echo "${output}=${applicable}"
+          }
+
+          classify active-law active_law
+          classify source-atlas source_atlas
+          classify xcode-runtime xcode_runtime
+          classify shell shell
+          classify markdown markdown
+          classify yaml yaml
+
   repo-hygiene:
     name: repo-hygiene
     runs-on: ubuntu-latest
@@ -25,12 +84,14 @@ jobs:
 
   ambitions-law-audit:
     name: ambitions-law-audit
+    needs: pr_scope
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Run Ambitions law audits
+        if: needs.pr_scope.outputs.active_law == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -39,6 +100,10 @@ jobs:
           bash scripts/release-claim-safety-scan.sh
           python3 scripts/ambitions-local-runtime-proof.py
           python3 scripts/ci/ambitions-no-weak-implementation-scan.py
+      - name: Skip Ambitions law audits
+        if: needs.pr_scope.outputs.active_law != 'true'
+        shell: bash
+        run: echo "No active product/source/law paths changed; Ambitions law audits skipped."
 
   remediation-governance-check:
     name: remediation-governance-check
@@ -81,25 +146,38 @@ jobs:
 
   semgrep-local:
     name: semgrep-local
+    needs: pr_scope
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Install Semgrep local CLI
+        if: needs.pr_scope.outputs.source_atlas == 'true'
         shell: bash
         run: |
           set -euo pipefail
           python3 -m pip install --upgrade pip
           python3 -m pip install semgrep
       - name: Run repo-local Semgrep rules
+        if: needs.pr_scope.outputs.source_atlas == 'true'
         shell: bash
         run: semgrep scan --config .semgrep/ambitions-source-atlas.yml --error
+      - name: Skip Semgrep
+        if: needs.pr_scope.outputs.source_atlas != 'true'
+        shell: bash
+        run: echo "No Source Atlas implementation/config paths changed; Semgrep skipped."
 
   shellcheck:
     name: shellcheck
+    needs: pr_scope
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Install ShellCheck
+        if: needs.pr_scope.outputs.shell == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -108,8 +186,27 @@ jobs:
             sudo apt-get install -y shellcheck
           fi
       - name: Run ShellCheck
+        if: needs.pr_scope.outputs.shell == 'true'
         shell: bash
-        run: find scripts -name "*.sh" -print0 | xargs -0 shellcheck
+        run: |
+          set -euo pipefail
+          paths="${RUNNER_TEMP}/ambitions-shell-paths.txt"
+          if [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
+            git ls-files | python3 scripts/ci/ambitions-pr-scope.py shell --format paths > "$paths"
+          else
+            git diff --name-only "${{ needs.pr_scope.outputs.base_sha }}" HEAD \
+              | python3 scripts/ci/ambitions-pr-scope.py shell --format paths > "$paths"
+          fi
+          files=()
+          while IFS= read -r file; do
+            files+=("$file")
+          done < "$paths"
+          printf 'ShellCheck changed paths:\n  %s\n' "${files[@]}"
+          shellcheck "${files[@]}"
+      - name: Skip ShellCheck
+        if: needs.pr_scope.outputs.shell != 'true'
+        shell: bash
+        run: echo "No changed shell scripts; ShellCheck skipped."
 
   workflow-lint:
     name: workflow-lint
@@ -130,10 +227,14 @@ jobs:
 
   docs-lint:
     name: docs-lint
+    needs: pr_scope
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Install docs linters
+        if: needs.pr_scope.outputs.markdown == 'true' || needs.pr_scope.outputs.yaml == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -141,14 +242,53 @@ jobs:
           python3 -m pip install --upgrade pip
           python3 -m pip install yamllint
       - name: Run markdownlint
+        if: needs.pr_scope.outputs.markdown == 'true'
         shell: bash
-        run: markdownlint-cli2 "**/*.md" "#Pods" "#DerivedData" "#.build"
+        run: |
+          set -euo pipefail
+          paths="${RUNNER_TEMP}/ambitions-markdown-paths.txt"
+          if [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
+            git ls-files | python3 scripts/ci/ambitions-pr-scope.py markdown --format paths > "$paths"
+          else
+            git diff --name-only "${{ needs.pr_scope.outputs.base_sha }}" HEAD \
+              | python3 scripts/ci/ambitions-pr-scope.py markdown --format paths > "$paths"
+          fi
+          files=()
+          while IFS= read -r file; do
+            files+=("$file")
+          done < "$paths"
+          printf 'markdownlint changed paths:\n  %s\n' "${files[@]}"
+          markdownlint-cli2 --no-globs "${files[@]}"
+      - name: Skip markdownlint
+        if: needs.pr_scope.outputs.markdown != 'true'
+        shell: bash
+        run: echo "No changed Markdown files; markdownlint skipped."
       - name: Run yamllint
+        if: needs.pr_scope.outputs.yaml == 'true'
         shell: bash
-        run: yamllint .github .semgrep .yamllint.yml .markdownlint-cli2.yaml
+        run: |
+          set -euo pipefail
+          paths="${RUNNER_TEMP}/ambitions-yaml-paths.txt"
+          if [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
+            git ls-files | python3 scripts/ci/ambitions-pr-scope.py yaml --format paths > "$paths"
+          else
+            git diff --name-only "${{ needs.pr_scope.outputs.base_sha }}" HEAD \
+              | python3 scripts/ci/ambitions-pr-scope.py yaml --format paths > "$paths"
+          fi
+          files=()
+          while IFS= read -r file; do
+            files+=("$file")
+          done < "$paths"
+          printf 'yamllint changed paths:\n  %s\n' "${files[@]}"
+          yamllint "${files[@]}"
+      - name: Skip yamllint
+        if: needs.pr_scope.outputs.yaml != 'true'
+        shell: bash
+        run: echo "No changed relevant YAML files; yamllint skipped."
 
   secrets-scan:
     name: secrets-scan
+    needs: pr_scope
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -163,52 +303,51 @@ jobs:
             | sudo tar -xz -C /usr/local/bin gitleaks
           gitleaks version
       - name: Run Gitleaks locally
+        env:
+          GITHUB_BASE_SHA: ${{ needs.pr_scope.outputs.base_sha }}
         shell: bash
-        run: bash scripts/ci/ambitions-gitleaks-scan.sh
+        run: |
+          if [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
+            bash scripts/ci/ambitions-gitleaks-scan.sh
+          else
+            bash scripts/ci/ambitions-gitleaks-scan.sh --range-only
+          fi
 
   python-tests:
     name: python-tests
+    needs: pr_scope
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Install Python CI dependencies
+        if: needs.pr_scope.outputs.source_atlas == 'true'
         shell: bash
         run: |
           set -euo pipefail
           python3 -m pip install --upgrade pip
           python3 -m pip install -r requirements-ci.txt
       - name: Run Source Atlas Python tests
+        if: needs.pr_scope.outputs.source_atlas == 'true'
         shell: bash
         run: python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests
+      - name: Skip Source Atlas Python tests
+        if: needs.pr_scope.outputs.source_atlas != 'true'
+        shell: bash
+        run: echo "No Source Atlas implementation/config paths changed; Python tests skipped."
 
   xcode-build-for-testing:
     name: xcode-build-for-testing
+    needs: pr_scope
     runs-on: [self-hosted, Ambitions-XCode26]
     timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Decide whether Xcode validation applies
-        id: xcode_paths
-        shell: bash
-        run: |
-          set -euo pipefail
-          should_run=false
-          if [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
-            should_run=true
-          else
-            base_ref="${GITHUB_BASE_REF:-main}"
-            git fetch origin "${base_ref}" --depth=1
-            base="$(git merge-base HEAD "origin/${base_ref}")"
-            if git diff --name-only "${base}" HEAD | scripts/ambitions-pr-xcode-scope.sh; then
-              should_run=true
-            fi
-          fi
-          echo "should_run=${should_run}" >> "$GITHUB_OUTPUT"
-          echo "xcode-build-for-testing should_run=${should_run}"
       - name: Install XcodeGen if needed
-        if: steps.xcode_paths.outputs.should_run == 'true'
+        if: needs.pr_scope.outputs.xcode_runtime == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -216,16 +355,17 @@ jobs:
             brew install xcodegen
           fi
       - name: Run build-for-testing
-        if: steps.xcode_paths.outputs.should_run == 'true'
+        if: needs.pr_scope.outputs.xcode_runtime == 'true'
         shell: bash
         run: scripts/ambitions-xcode-build-for-testing.sh --batch green-standard
       - name: Skip build-for-testing
-        if: steps.xcode_paths.outputs.should_run != 'true'
+        if: needs.pr_scope.outputs.xcode_runtime != 'true'
         shell: bash
-        run: echo "No Native/Package/project Swift paths changed; Xcode build-for-testing skipped for this PR."
+        run: echo "No production/package/project/Xcode-tooling paths changed; Xcode build-for-testing skipped for this PR."
 
   needs-repair-proof:
     name: needs-repair-proof
+    needs: pr_scope
     runs-on: [self-hosted, Ambitions-XCode26]
     timeout-minutes: 150
     env:
@@ -238,26 +378,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Decide whether Needs Repair proof applies
-        id: needs_repair_paths
-        shell: bash
-        run: |
-          set -euo pipefail
-          should_run=false
-          if [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
-            should_run=true
-          else
-            base_ref="${GITHUB_BASE_REF:-main}"
-            git fetch origin "${base_ref}" --depth=1
-            base="$(git merge-base HEAD "origin/${base_ref}")"
-            if git diff --name-only "${base}" HEAD | scripts/ambitions-pr-xcode-scope.sh; then
-              should_run=true
-            fi
-          fi
-          echo "should_run=${should_run}" >> "$GITHUB_OUTPUT"
-          echo "needs-repair-proof should_run=${should_run}"
       - name: Install XcodeGen if needed
-        if: steps.needs_repair_paths.outputs.should_run == 'true'
+        if: needs.pr_scope.outputs.xcode_runtime == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -265,7 +387,7 @@ jobs:
             brew install xcodegen
           fi
       - name: Run static repair gates
-        if: steps.needs_repair_paths.outputs.should_run == 'true'
+        if: needs.pr_scope.outputs.xcode_runtime == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -281,7 +403,7 @@ jobs:
           python3 scripts/source-atlas-boundary-audit.py
           python3 scripts/source-atlas-no-private-graph-egress-audit.py
       - name: Run Needs Repair proof lanes
-        if: steps.needs_repair_paths.outputs.should_run == 'true'
+        if: needs.pr_scope.outputs.xcode_runtime == 'true'
         shell: bash
         run: |
           set -uo pipefail
@@ -376,7 +498,7 @@ jobs:
           PY
           exit "$overall"
       - name: Upload Needs Repair proof artifacts
-        if: always() && steps.needs_repair_paths.outputs.should_run == 'true'
+        if: always() && needs.pr_scope.outputs.xcode_runtime == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: ambitions-needs-repair-proof
@@ -387,6 +509,6 @@ jobs:
             .codex/xcode-summaries/**
           if-no-files-found: warn
       - name: Skip Needs Repair proof lanes
-        if: steps.needs_repair_paths.outputs.should_run != 'true'
+        if: needs.pr_scope.outputs.xcode_runtime != 'true'
         shell: bash
-        run: echo "No Needs Repair proof trigger or Native/project/script paths changed; proof lanes skipped."
+        run: echo "No production/package/project/Xcode-tooling paths changed; Needs Repair proof lanes skipped."

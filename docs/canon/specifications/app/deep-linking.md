@@ -23,20 +23,15 @@ inherits = [
 ]
 depends_on = ["CONSTITUTION", "APP-NAVIGATION", "APP-DEGRADED-STATES"]
 source_owners = [
-  "Native/Ambitions/App/AppDeepLinkRegistry.swift",
-  "Native/Ambitions/App/AppExternalRouteModels.swift",
-  "Native/Ambitions/App/AppExternalRouteTranslator.swift",
-  "Native/Ambitions/App/AppExternalRoutePayloadTranslation.swift",
-  "Native/Ambitions/App/AppExternalRouteOverlayTranslation.swift",
-  "Native/Ambitions/App/AppIntentLaunchRouter.swift",
-  "Native/Ambitions/PreviewSupport/AppDeepLinkPreviewRouter.swift",
+  "Native/Ambitions/App/",
+  "Native/Ambitions/PreviewSupport/",
   "Native/Ambitions/Quality/",
 ]
 +++
 
 # Deep Linking and External Route Entry
 
-This shadow specification defines how trusted local route requests and external ecosystem entry resolve into app navigation. It does not authorize an external mutation path, public indexing of private content, or claim current widgets, intents, Spotlight, share extension, notifications, routes, privacy, or accessibility are proven.
+This shadow specification defines how trusted local route requests and external ecosystem entry resolve into app navigation.
 
 ## APP-DEEP-LINK-EXTERNAL-ENTRY-001 — External entry preserves owning-system boundaries
 
@@ -133,7 +128,7 @@ Redacted route evidence records the decision without copying protected payload c
 Evidence records source class, route version, redacted target class, resolution result, action eligibility, presentation result, fallback, and consumption/idempotency result. Private identifiers and payload content remain redacted in routine diagnostics.
 
 <!-- canon-section: source-ownership -->
-`App/` owns the registry, typed external-route models, translators, payload/overlay translation, and App Intent launch routing; preview routing remains non-authoritative; `Quality/` owns route, privacy, replay, and accessibility proof. Existing source does not prove end-to-end behavior.
+`App/` owns the registry, typed external-route models, translators, payload/overlay translation, and App Intent launch routing; preview routing remains non-authoritative; `Quality/` owns route, privacy, replay, and accessibility proof.
 
 <!-- canon-section: tests-proof -->
 The verification matrix executes each approved source class and route outcome.
@@ -141,4 +136,4 @@ The verification matrix executes each approved source class and route outcome.
 Required proof covers every approved source class, versions, malformed and unknown routes, missing/deleted/trashed/locked targets, authorization denial, privacy redaction, offline resolution, duplicate delivery, interrupted intake, action confirmation, no direct mutation, focus restoration, VoiceOver destination announcement, Dynamic Type, and Reduce Motion.
 
 <!-- canon-section: performance-resource-constraints -->
-An external route envelope MUST be at most 16 KiB, use maximum nesting depth 8, and enter a queue capped at 32 items; larger or deeper input fails closed before allocation proportional to claimed size. On the oldest supported physical iPhone in an optimized build with 250 typed routes and maximum app route depth 20, parse plus local resolution MUST complete within 25 ms at P95 and presentation dispatch within 50 ms at P95 across 10,000 routes. The run MUST add no more than 8 MiB resident memory, perform zero synchronous disk I/O and zero network calls on resolution, and consume each single-use action at most once. Extension and app handling MUST use no polling or autonomous retry loop. Current device, adversarial-input, latency, memory, extension-energy, and security proof is not claimed.
+An external route envelope MUST be at most 16 KiB, use maximum nesting depth 8, and enter a queue capped at 32 items; larger or deeper input fails closed before allocation proportional to claimed size. On the oldest supported physical iPhone in an optimized build with 250 typed routes and maximum app route depth 20, parse plus local resolution MUST complete within 25 ms at P95 and presentation dispatch within 50 ms at P95 across 10,000 routes. The run MUST add no more than 8 MiB resident memory, perform zero synchronous disk I/O and zero network calls on resolution, and consume each single-use action at most once. Extension and app handling MUST use no polling or autonomous retry loop.

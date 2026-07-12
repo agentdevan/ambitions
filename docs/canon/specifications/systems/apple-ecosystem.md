@@ -6,7 +6,7 @@ status = "normative"
 owner_domain = "system-apple-ecosystem"
 canon_revision = 1
 profile = "system-v1"
-owns_concepts = ["system.apple.projection", "system.apple.command-handoff"]
+owns_concepts = ["system.apple.command-handoff", "system.apple.intents", "system.apple.platform-baseline", "system.apple.projection", "system.apple.share-handoff", "system.apple.widget-action", "system.apple.widget-projection"]
 inherits = ["PLATFORM-NATIVE-IPHONE-001", "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001", "RUNTIME-MUTATION-SEQUENCE-001", "LAW-OFFLINE-NO-ACCOUNT-001"]
 depends_on = ["CONSTITUTION", "APP-DEEP-LINKING", "SYSTEM-PRIVATE-LIFE-RUNTIME", "SYSTEM-PRIVACY-DATA-CLASSIFICATION", "SYSTEM-NOTIFICATIONS"]
 source_owners = ["Native/Ambitions/App/", "Native/Ambitions/App/Intents/", "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/", "Native/Ambitions/Core/LocalRuntimeOS/Projections/", "Native/Ambitions/Projection/ExternalSnapshots/", "Native/AmbitionsWidgetExtension/", "Native/AmbitionsShareExtension/", "Native/Ambitions/Quality/"]
@@ -14,7 +14,18 @@ source_owners = ["Native/Ambitions/App/", "Native/Ambitions/App/Intents/", "Nati
 
 # Apple Ecosystem
 
-This shadow target covers widgets, Lock Screen, App Intents/Shortcuts/Siri, Share, Spotlight, deep links, and lifecycle handoffs. It does not claim current feature coverage, entitlement approval, device behavior, or platform readiness.
+This shadow target covers widgets, Lock Screen, App Intents/Shortcuts/Siri, Share, Spotlight, deep links, and lifecycle handoffs.
+
+## SYSTEM-APPLE-PLATFORM-BASELINE-001 — iOS 26 native baseline
+
+- **Concept:** `system.apple.platform-baseline`
+- **Modality:** `MUST`
+- **Scope:** Native app, extensions, platform API selection, and availability fallbacks
+- **Status:** `normative`
+- **Verification:** `AUDIT-SYSTEM-APPLE-PLATFORM-BASELINE-001`
+- **Supersedes:** none
+
+Ambitions MUST target iOS 26 as its native platform baseline. Every selected Apple API MUST be valid for that deployment target; a newer API requires an availability-gated fallback that preserves the owning product, privacy, accessibility, and failure contract.
 
 ## SYSTEM-APPLE-PROJECTION-001 — Ecosystem surfaces use minimized disposable projections
 
@@ -27,6 +38,12 @@ This shadow target covers widgets, Lock Screen, App Intents/Shortcuts/Siri, Shar
 
 Apple ecosystem surfaces MUST consume minimized, versioned, read-only, privacy-filtered Projections or snapshots. They do not open the canonical store, retain an unrestricted private graph, become a fifth root, or invent separate object identity. Sensitive content is hidden by default where ambient exposure is possible, and every visual/spatial action has semantic accessibility parity.
 
+Apple ecosystem projections MUST NOT duplicate or unnecessarily expose the full private life graph.
+
+App Group data MUST remain a minimized projection and MUST NOT become a second full private graph.
+
+Extensions MUST NOT open unrestricted canonical stores or become independent mutation authorities.
+
 ## SYSTEM-APPLE-HANDOFF-001 — Every ecosystem action preserves command identity and safe fallback
 
 - **Concept:** `system.apple.command-handoff`
@@ -37,6 +54,10 @@ Apple ecosystem surfaces MUST consume minimized, versioned, read-only, privacy-f
 - **Supersedes:** none
 
 A mutating handoff MUST preserve minimum payload, source, stable command/idempotency identity, privacy and confirmation requirements, timeout/cancellation behavior, and safe open-app fallback. Share intake durably preserves original input before classification; deep links and Spotlight resolve identifiers and permitted actions separately; external callbacks never mutate canonical state directly.
+
+Supported categories SHOULD include Capture, Start, Complete, Add Proof, Show Today, Show next Event, schedule/reschedule with confirmation, and review pending external diffs.
+
+Apple ecosystem handoff MUST preserve command identity and safe fallback and MUST NOT become an alternate private-graph store.
 
 ## Completeness contract
 
@@ -70,10 +91,54 @@ Local redacted evidence binds entry/snapshot/route/command IDs, schema/API avail
 
 <!-- canon-section: source-ownership -->
 Canonical ownership is divided among App bridges, LocalRuntimeOS projections/effects, extension targets, and Quality.
-Exact target owners are `App/`, `App/Intents/`, `Core/LocalRuntimeOS/Projections/`, `ExternalWrites/`, `Projection/ExternalSnapshots/`, widget/share targets, and `Quality/`. Current bridges and projections remain implementation facts; app-wide parity, availability review, extensions, entitlements, accessibility, device, and release proof are separate.
+Exact target owners are `App/`, `App/Intents/`, `Core/LocalRuntimeOS/Projections/`, `ExternalWrites/`, `Projection/ExternalSnapshots/`, widget/share targets, and `Quality/`. app-wide parity, availability review, extensions, entitlements, accessibility, device, and release proof are separate.
 
 <!-- canon-section: tests-proof -->
 Cover every entry point, snapshot privacy state, stale/protected data, permission denial, malformed/spoofed route/entity, duplicate command, timeout/cancel/termination, background handoff, Share preservation, open-app fallback, no direct store access/write, VoiceOver/Dynamic Type/Reduce Motion, API availability fallback, and device-family evidence.
 
 <!-- canon-section: performance-resource-constraints -->
 Snapshots, intents, indexing, handoffs, and background work are bounded, cancellable, idempotent, memory-safe, timeout-aware, and never assume background completion. Article 31 calibration must define representative projection/entity/payload scale, device/OS/build/tool, latency/launch/energy/memory measures, percentile/maximum, and regressions; no numeric budget is invented.
+
+## SYSTEM-APPLE-INTENTS-001 — App Intents command boundary
+
+- **Concept:** `system.apple.intents`
+- **Modality:** `MUST NOT`
+- **Scope:** App Intents command boundary
+- **Status:** `normative`
+- **Verification:** `REVIEW-SYSTEM-APPLE-INTENTS-001`
+- **Supersedes:** none
+
+App Intents MUST use canonical objects and validated runtime commands for Capture, object creation, Step start/completion, Proof, root/date navigation, and local Search; they MUST NOT require a cloud model. Material or ambiguous mutations MUST require confirmation.
+
+## SYSTEM-APPLE-SHARE-HANDOFF-001 — Share handoff draft intake
+
+- **Concept:** `system.apple.share-handoff`
+- **Modality:** `MUST NOT`
+- **Scope:** Share handoff draft intake
+- **Status:** `normative`
+- **Verification:** `REVIEW-SYSTEM-APPLE-SHARE-HANDOFF-001`
+- **Supersedes:** none
+
+Share intake MUST create a durable offline Capture draft with source reference and attachments before classification, then continue through the in-app proposal flow; it MUST NOT become an alternate private-graph store.
+
+## SYSTEM-APPLE-WIDGET-ACTION-001 — Widget action boundary
+
+- **Concept:** `system.apple.widget-action`
+- **Modality:** `MUST`
+- **Scope:** Widget action boundary
+- **Status:** `normative`
+- **Verification:** `REVIEW-SYSTEM-APPLE-WIDGET-ACTION-001`
+- **Supersedes:** none
+
+Every interactive widget action MUST validate and mutate the canonical local object through the runtime command sequence, preserve idempotency, and create a Receipt.
+
+## SYSTEM-APPLE-WIDGET-PROJECTION-001 — Widget projection boundary
+
+- **Concept:** `system.apple.widget-projection`
+- **Modality:** `MUST NOT`
+- **Scope:** Widget projection boundary
+- **Status:** `normative`
+- **Verification:** `REVIEW-SYSTEM-APPLE-WIDGET-PROJECTION-001`
+- **Supersedes:** none
+
+Widgets MAY show minimized Now/Next, Today, Time, or Goal-next-action projections; Lock Screen content MUST honor user redaction and device-lock state, and widgets MUST NOT expose the full private graph or substitute for a root surface.

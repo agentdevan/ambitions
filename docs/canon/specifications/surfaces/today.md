@@ -7,6 +7,7 @@ owner_domain = "surface-today"
 canon_revision = 1
 profile = "surface-v1"
 owns_concepts = [
+  "surface.today.missed-placement-continuity",
   "surface.today.purpose",
   "surface.today.temporal-rail",
   "surface.today.eligibility",
@@ -14,6 +15,7 @@ owns_concepts = [
   "surface.today.first-viewport",
   "surface.today.states",
   "surface.today.visual-authority",
+  "surface.today.object-row",
 ]
 inherits = [
   "CONST-IA-ROOT-001",
@@ -34,7 +36,7 @@ source_owners = [
 
 # Today
 
-This shadow specification defines the intended Today surface. It does not cut over active authority or prove current runtime, rendered, accessibility, device, or release behavior.
+This shadow specification defines the intended Today surface.
 
 ## SPEC-SURFACE-TODAY-PURPOSE-001 — Reality around now
 
@@ -47,6 +49,14 @@ This shadow specification defines the intended Today surface. It does not cut ov
 
 Today MUST remain an object-led reality surface answering what reality can hold around now and what the user should act on next. It must not become a generic agenda, task backlog, dashboard, recommendation feed, full calendar, or CTA stack. The temporal rail supports this identity; it does not replace it.
 
+Today’s temporal rail MUST NOT replace the object-led current-reality viewport as the primary product identity.
+
+
+
+Today SHOULD show today’s schedule and current operating reality.
+
+Today MUST present reality around now rather than a task list or dashboard.
+
 ## SPEC-SURFACE-TODAY-TEMPORAL-RAIL-001 — Supporting temporal anatomy
 
 - **Concept:** `surface.today.temporal-rail`
@@ -57,6 +67,12 @@ Today MUST remain an object-led reality surface answering what reality can hold 
 - **Supersedes:** none
 
 The supporting rail MUST provide a rolling plus-or-minus twenty-four-hour context anchored on Now, expanding meaningful periods and compressing empty stretches. Now is semantically strongest and Next is secondary. Ordered list navigation, date/time headings, jump-to-Now, and explicit object actions MUST provide complete non-spatial access without requiring rail position, drag, or visual distance.
+
+Today’s temporal rail MUST span a rolling 48-hour window, with upward scrolling revealing the prior 24 hours and downward scrolling revealing the next 24 hours.
+
+Today’s rolling `±24-hour` rail MUST remain supporting temporal anatomy and MUST NOT become the primary product identity.
+
+Time order MUST remain the temporal rail’s legibility law.
 
 ## SPEC-SURFACE-TODAY-ELIGIBILITY-001 — Execution-relevant projection only
 
@@ -69,6 +85,10 @@ The supporting rail MUST provide a rolling plus-or-minus twenty-four-hour contex
 
 Today MUST project only execution-relevant scheduled Steps, Reminders, Events, all-day or due items, recovery-eligible flexible work, and at most one earned fit suggestion. It MUST exclude broad backlog, unscheduled Goal inventory, Saved for Later inventory, and unreviewed external candidates.
 
+Today MUST contain only execution-relevant objects, not broad backlog or project inventory.
+
+Today MUST NOT show broad backlog, unscheduled goal inventory, future project lists, or Saved for Later.
+
 ## SPEC-SURFACE-TODAY-SCREEN-INVENTORY-001 — Root and owned depth
 
 - **Concept:** `surface.today.screen-inventory`
@@ -80,6 +100,10 @@ Today MUST project only execution-relevant scheduled Steps, Reminders, Events, a
 
 Today owns its root Reality Window, Start here object presentation, supporting temporal rail, compact closure/recovery affordances, and Today-specific empty or degraded states. Object detail, complex rescheduling, recurrence, multi-item adjustment, and long-range editing hand off to their canonical object, Time, Motion, or Trust owners; they do not become duplicate Today stores or routes.
 
+Each Today row MUST have an explicit primary action.
+
+Today MUST use a compact reschedule sheet offering later today, tomorrow, pick time, flexible or Fixed state, and a suggested slot for low-risk single-object changes.
+
 ## SPEC-SURFACE-TODAY-FIRST-VIEWPORT-001 — Start here dominates
 
 - **Concept:** `surface.today.first-viewport`
@@ -90,6 +114,14 @@ Today owns its root Reality Window, Start here object presentation, supporting t
 - **Supersedes:** none
 
 When available, the first viewport MUST communicate Now, usable capacity, one dominant `Start here` Step or action, protected boundaries, the next fixed point, why the Step fits, and current closure, proof, or recovery state. `Start here` is a real best executable fit, not an enlarged task row. The semantic order presents context, Start here identity and reason, primary action, boundaries, next fixed point, then supporting rail.
+
+Today MUST present one object-led current-reality viewport centered on `Start here`.
+
+Today’s first viewport MUST NOT show a broad backlog, motivational paragraph, score, or multiple suggestion cards.
+
+Today fit suggestions SHOULD be executable and object-aware.
+
+Today SHOULD use one shared object-row system exposing time, object title, primary action, status marker, relevant trust marker, and optional Goal or source context.
 
 ## SPEC-SURFACE-TODAY-STATES-001 — Calm complete state set
 
@@ -111,7 +143,28 @@ Today MUST distinguish loading, low-density, empty, populated, dense, stale exte
 - **Verification:** `PROOF-TODAY-VISUAL-MAPPING-001`
 - **Supersedes:** none
 
-Today visual review MUST use stable external reference IDs and preserve the difference between approved direction, approved final package, and implementation proof. Owner-approved VSP-02 package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:160:93` is the Today visual target. Its approval is Yellow design authority only and does not prove SwiftUI parity, accessibility, device behavior, runtime behavior, Visual Green, or release status.
+Today visual review MUST use stable external reference IDs and preserve the difference between approved direction, approved final package, and implementation proof. Owner-approved VSP-02 package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:160:93` is the Today visual target.
+
+## SPEC-SURFACE-TODAY-MISSED-CONTINUITY-001 — Missed time preserves history and current status
+- **Concept:** `surface.today.missed-placement-continuity`
+- **Modality:** `MUST`
+- **Scope:** A Today item that did not happen at its planned time
+- **Status:** `normative`
+- **Verification:** `SCENARIO-TODAY-MISSED-CONTINUITY-001`
+- **Supersedes:** none
+
+Today MUST retain the original placement in inspection, present the object's current status near Now, and offer at most one new-placement suggestion only when the complete fit threshold passes. Missing a time never silently moves the object or erases its prior schedule truth.
+
+## SPEC-SURFACE-TODAY-ROW-001 — Today object row
+
+- **Concept:** `surface.today.object-row`
+- **Modality:** `MUST`
+- **Scope:** Today object rows
+- **Status:** `normative`
+- **Verification:** `A11Y-TODAY-ROW-001`
+- **Supersedes:** none
+
+A Today object row MUST expose object identity, relevant context and state, primary action, secondary controls, and nonvisual semantics without duplicating Start here authority.
 
 ## Completeness contract
 
@@ -171,7 +224,7 @@ The named package controls geometry, hierarchy, composition, states, and adaptiv
 Stable package ID `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:160:93` supplies approved Today design authority. It remains distinct from source rendering, accessibility/device evidence, implementation parity, and release proof.
 
 <!-- canon-section: source-ownership -->
-Canonical target ownership is exact: `Surfaces/Today/` owns presentation; `Core/LocalRuntimeOS/Projections/`, `PrivateLifeRuntimeKernel/`, and `Scheduling/` own local facts and fit; `Quality/` owns proof. This spec does not claim current paths comply.
+Canonical target ownership is exact: `Surfaces/Today/` owns presentation; `Core/LocalRuntimeOS/Projections/`, `PrivateLifeRuntimeKernel/`, and `Scheduling/` own local facts and fit; `Quality/` owns proof.
 
 <!-- canon-section: tests -->
 Tests cover eligibility and exclusion, one-suggestion threshold, state matrix, Start here actions, completion/proof/undo/replay, restoration, dense data, offline, stale external facts, VoiceOver order/actions, list equivalence, Dynamic Type, Reduce Motion/Transparency, contrast, and focus.
@@ -182,4 +235,4 @@ Required proof includes current-revision scenario logs, receipts/replay evidence
 
 <!-- canon-section: performance -->
 Resource behavior is bounded, cancellable, local, and foreground-safe.
-Today projection, refresh, and primary-action work MUST remain bounded and cancellable, perform no interaction-path network gating or synchronous disk I/O, use no polling or unbounded background loop, and preserve foreground responsiveness under Low Power Mode, thermal pressure, protected-data unavailability, and storage pressure. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. Implementation authorization requires an owner-approved performance-registry record declaring device floor, OS, build configuration, representative Today data scale, warm/cold state, measurement tool, percentile/maximum, and regression threshold. Current performance and physical-device proof remain absent.
+Today projection, refresh, and primary-action work MUST remain bounded and cancellable, perform no interaction-path network gating or synchronous disk I/O, use no polling or unbounded background loop, and preserve foreground responsiveness under Low Power Mode, thermal pressure, protected-data unavailability, and storage pressure. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. Implementation authorization requires an owner-approved performance-registry record declaring device floor, OS, build configuration, representative Today data scale, warm/cold state, measurement tool, percentile/maximum, and regression threshold.

@@ -34,7 +34,9 @@ from tools.ambitions_canon.migration import (
     import_claim_batches,
     register_repo_sources,
     register_source,
+    validate_compact_semantic_loss_review,
     validate_materialized_specification_target_references,
+    validate_semantic_loss_review,
     verify_catalog,
 )
 from tools.ambitions_canon.model import (
@@ -63,6 +65,7 @@ PUBLIC_AUDIT_CODES = frozenset(
         "CANON_ID_DUPLICATE",
         "CANON_CONCEPT_DUPLICATE_OWNER",
         "CANON_CONCEPT_UNOWNED",
+        "CANON_CONCEPT_ORPHAN",
         "CANON_DEPENDENCY_UNKNOWN",
         "CANON_DEPENDENCY_CYCLE",
         "CANON_MODALITY_INVALID",
@@ -75,6 +78,7 @@ AUDIT_CODE_BY_DISCOVERY_CODE = {
     "CANON_REQUIREMENT_DUPLICATE": "CANON_ID_DUPLICATE",
     "CANON_CONCEPT_DUPLICATE_OWNER": "CANON_CONCEPT_DUPLICATE_OWNER",
     "CANON_CONCEPT_UNOWNED": "CANON_CONCEPT_UNOWNED",
+    "CANON_CONCEPT_ORPHAN": "CANON_CONCEPT_ORPHAN",
     "CANON_DEPENDENCY_UNKNOWN": "CANON_DEPENDENCY_UNKNOWN",
     "CANON_DEPENDENCY_CYCLE": "CANON_DEPENDENCY_CYCLE",
     "CANON_REQUIREMENT_MODALITY": "CANON_MODALITY_INVALID",
@@ -240,6 +244,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     claims_coverage_parser.add_argument("--concept-prefix")
     claims_coverage_parser.add_argument("--target-class")
     claims_coverage_parser.add_argument("--output", type=Path)
+    claims_subparsers.add_parser(
+        "semantic-verify",
+        help="verify semantic evidence against protected ignored claim bytes",
+    )
     conflicts_parser = subparsers.add_parser(
         "conflicts", help="report shadow conceptual-conflict dockets"
     )
@@ -406,6 +414,19 @@ def _migration_claims(root: Path, arguments: argparse.Namespace) -> int:
                 f"decisions={report.linear_decision_count} claims={len(report.claims)}"
             )
             return 0
+        if arguments.claims_command == "semantic-verify":
+            manifest = load_manifest(root)
+            registry = build_registry(
+                manifest,
+                load_documents(root, manifest),
+            )
+            review = validate_semantic_loss_review(root, registry)
+            print(
+                "GREEN ambitions canon migration claims semantic verify "
+                f"claims={review.claim_count} decisions={review.decision_count} "
+                f"review_status={review.review_status}"
+            )
+            return 0
         raise AssertionError(f"unhandled claims command: {arguments.claims_command}")
     except CanonError as error:
         location = error.path.as_posix() if error.path is not None else "<claims>"
@@ -455,6 +476,7 @@ def _audit(root: Path) -> int:
         documents = load_documents(root, manifest)
         registry = build_registry(manifest, documents)
         _validated_docket_issues(root, registry)
+        validate_compact_semantic_loss_review(root, registry)
         findings = audit_registry(registry)
     except CanonError as error:
         findings = (
@@ -502,6 +524,11 @@ def _audit(root: Path) -> int:
 
 def _build(root: Path, *, check: bool) -> int:
     try:
+        if (root / "docs/canon/migration/claim-dispositions.json").is_file():
+            manifest = load_manifest(root)
+            documents = load_documents(root, manifest)
+            registry = build_registry(manifest, documents)
+            validate_compact_semantic_loss_review(root, registry)
         findings = build_canon(root, check=check)
     except CanonError as error:
         location = error.path.as_posix() if error.path is not None else "<registry>"

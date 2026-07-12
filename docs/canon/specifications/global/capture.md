@@ -6,13 +6,9 @@ status = "normative"
 owner_domain = "global-capture"
 canon_revision = 1
 profile = "surface-v1"
-owns_concepts = [
-  "global.capture.identity",
-  "global.capture.keyboard",
-  "global.capture.saved-for-later",
-  "global.capture.draft-recovery",
-  "global.capture.proposal-flow",
-  "global.capture.visual-authority",
+owns_concepts = ["global.capture.close-behavior", "global.capture.draft-recovery", "global.capture.identity", "global.capture.keyboard", "global.capture.proposal-flow", "global.capture.saved-for-later", "global.capture.visual-authority",
+  "global.capture.classification",
+  "global.capture.attachment-intake",
 ]
 inherits = [
   "LAW-IA-NONROOT-001",
@@ -33,7 +29,7 @@ source_owners = [
 
 # Capture
 
-Capture uses `surface-v1` because it presents a full-screen, user-operated composer with first-viewport, presentation, state, accessibility, and visual contracts. It remains a global overlay, not a root or tab. This shadow target does not prove current behavior.
+Capture uses `surface-v1` because it presents a full-screen, user-operated composer with first-viewport, presentation, state, accessibility, and visual contracts. It remains a global overlay, not a root or tab.
 
 ## SPEC-GLOBAL-CAPTURE-IDENTITY-001 — Global durable composer
 
@@ -46,6 +42,18 @@ Capture uses `surface-v1` because it presents a full-screen, user-operated compo
 
 Capture MUST be a global full-screen composer that preserves intent, allows or infers type, previews material consequences, and routes accepted objects to canonical owners. It MUST NOT become a root, tab, half-sheet quick box, inbox, category wall, chatbot, notes feed, or permanent floating control.
 
+Capture MUST be full-screen, durable, field-first, and multi-surface.
+
+Capture SHOULD NOT primarily be a bottom floating composer.
+
+Capture MUST start as a blank full-screen composer with quick chips/actions for Step, Goal, Reminder, Event, Proof, Note, and Save for Later.
+
+Capture attachment intake MUST support Camera, Photos, Files, Scan Document, Scan Text, Voice, web links, and a proof-specific attachment mode.
+
+Capture MUST use a global typed route graph and a full-screen Stage composer instead of a tab, inbox, or note feed.
+
+Simple captures MUST save quickly.
+
 ## SPEC-GLOBAL-CAPTURE-KEYBOARD-001 — Composer remains primary with keyboard present
 
 - **Concept:** `global.capture.keyboard`
@@ -56,6 +64,8 @@ Capture MUST be a global full-screen composer that preserves intent, allows or i
 - **Supersedes:** none
 
 Keyboard presentation MUST preserve the text field, visible type override, primary save/continue action, attachment access, cancellation, validation feedback, and safe-area clearance without shrinking Capture into a utility sheet. Hardware keyboard, dictation, Switch Control, and VoiceOver actions provide equivalent entry and focus behavior.
+
+The Capture field MUST rise above the keyboard, expand cleanly, and then scroll internally.
 
 ## SPEC-GLOBAL-CAPTURE-SAVED-FOR-LATER-001 — Unresolved state, never destination
 
@@ -68,6 +78,8 @@ Keyboard presentation MUST preserve the text field, visible type override, prima
 
 Saved for Later MUST remain a durable, searchable, locally recoverable unresolved state with explicit promotion. It MUST NOT become a Capture inbox, root, Today backlog, or persistent destination. Only explicit scheduling/promotion or one earned fit suggestion may bring it into active execution.
 
+Save for Later bypasses the proposal wizard, stores the current input and attachments durably, then MUST show a confirmation with View All Saved for Later or Okay.
+
 ## SPEC-GLOBAL-CAPTURE-DRAFT-RECOVERY-001 — Original input survives every branch
 
 - **Concept:** `global.capture.draft-recovery`
@@ -78,6 +90,14 @@ Saved for Later MUST remain a durable, searchable, locally recoverable unresolve
 - **Supersedes:** none
 
 The original Capture Draft MUST survive navigation away, app interruption, crash, permission denial, attachment failure, validation failure, and routing failure. Recovery restores text, type choice, metadata, attachment states, proposal state, prior context, and focus. Explicit discard confirmation is required; no failure may destroy original input.
+
+A Capture Draft MUST durably save each accepted edit before dismissal or route transition.
+
+Ambitions MAY infer Goal, Step, Reminder, Event, Proof, Note, or Attachment intake from content and context.
+
+A Capture Draft MUST be durable unresolved input.
+
+Every answer MUST save immediately.
 
 ## SPEC-GLOBAL-CAPTURE-PROPOSAL-FLOW-001 — Adaptive complexity without interrogation
 
@@ -90,6 +110,14 @@ The original Capture Draft MUST survive navigation away, app interruption, crash
 
 Simple input MUST save quickly. Complexity introduces only the required type/destination, metadata, schedule proposal, conflict check, confirmation, and receipt steps. Classification is visible, editable, deterministic, and local for core paths. Material interpretation or placement never commits silently; alternatives remain available without an interrogation wizard.
 
+Step, Goal, Reminder, Event, Proof, and Note saves MUST proceed through a proposal flow that routes or confirms the owning Today, Goals, Time, You, Proof, Receipt, or inspection destination.
+
+The Capture proposal flow MUST use native controls, preserve its draft locally, and provide reversible navigation.
+
+Events, Reminders, Steps, Goals, and Proof MUST each expose controls relevant to that object type.
+
+When enough information exists, Capture MUST preselect one recommended placement with fit rationale and MUST expose alternatives on demand.
+
 ## SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001 — Approved Capture package, separate implementation proof
 
 - **Concept:** `global.capture.visual-authority`
@@ -99,7 +127,29 @@ Simple input MUST save quickly. Complexity introduces only the required type/des
 - **Verification:** `PROOF-CAPTURE-VISUAL-MAPPING-001`
 - **Supersedes:** none
 
-Visual review MUST reference stable external IDs and separate approved package authority from implementation proof. Owner-approved VSP-05 package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:217:93` is the Capture visual target. Its Yellow approval does not prove draft recovery, mutation behavior, SwiftUI parity, accessibility, device behavior, runtime behavior, Visual Green, or release status.
+Visual review MUST reference stable external IDs and separate approved package authority from implementation proof. Owner-approved VSP-05 package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:217:93` is the Capture visual target.
+
+## SPEC-GLOBAL-CAPTURE-CLASSIFICATION-001 — Capture classification
+
+- **Concept:** `global.capture.classification`
+- **Modality:** `MUST`
+- **Scope:** Captured drafts
+- **Status:** `normative`
+- **Verification:** `TEST-CAPTURE-CLASSIFICATION-001`
+- **Supersedes:** none
+
+Capture classification MUST remain local, inspectable, reversible, and nonmutating until the user accepts a typed proposal.
+
+## SPEC-GLOBAL-CAPTURE-ATTACHMENT-INTAKE-001 — Capture attachment intake
+
+- **Concept:** `global.capture.attachment-intake`
+- **Modality:** `MUST`
+- **Scope:** Capture attachments
+- **Status:** `normative`
+- **Verification:** `TEST-CAPTURE-ATTACHMENT-INTAKE-001`
+- **Supersedes:** none
+
+Capture attachment intake MUST preserve original bytes and draft linkage, stream within bounded resources, disclose failure per attachment, and remain local by default.
 
 ## Completeness contract
 
@@ -164,7 +214,7 @@ The named package controls geometry, hierarchy, composition, states, and adaptiv
 Stable package ID `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:217:93` supplies approved Capture design authority. Draft/runtime behavior, source rendering, accessibility/device evidence, implementation parity, and release proof remain separate.
 
 <!-- canon-section: source-ownership -->
-Canonical target ownership is exact: `Composer/Capture/` owns presentation; `Core/LocalRuntimeOS/CaptureRouting/` owns durable intake/classification/routing; `Commands/` owns accepted mutation; `Inspection/` owns receipts/history; `Quality/` owns proof. Current compliance is unclaimed.
+Canonical target ownership is exact: `Composer/Capture/` owns presentation; `Core/LocalRuntimeOS/CaptureRouting/` owns durable intake/classification/routing; `Commands/` owns accepted mutation; `Inspection/` owns receipts/history; `Quality/` owns proof.
 
 <!-- canon-section: tests -->
 Tests cover simple/complex proposals, type correction, draft persistence across every failure, Saved for Later reachability/promotion, attachment per-part failure, conflict confirmation, idempotent save, undo/replay, offline, privacy denial, keyboard/focus, VoiceOver actions/order, Dynamic Type, reduced effects, contrast, and return context.
@@ -174,4 +224,15 @@ Required proof includes crash/interruption recovery, attachment/permission failu
 
 <!-- canon-section: performance -->
 Resource behavior is bounded, cancellable, local, and foreground-safe.
-Capture draft restoration, classification, proposal, attachment streaming, and local save acknowledgement MUST remain bounded and cancellable, use bounded media buffers, perform no core-path network gating or interaction-path synchronous disk I/O, use no polling or unbounded background loop, and preserve original input under resource pressure. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. Implementation authorization requires an owner-approved performance-registry record declaring device floor, OS, build configuration, representative draft/attachment/proposal data scale, warm/cold state, measurement tool, percentile/maximum, memory and storage-pressure measures, and regression threshold. Current performance and physical-device proof remain absent.
+Capture draft restoration, classification, proposal, attachment streaming, and local save acknowledgement MUST remain bounded and cancellable, use bounded media buffers, perform no core-path network gating or interaction-path synchronous disk I/O, use no polling or unbounded background loop, and preserve original input under resource pressure. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. Implementation authorization requires an owner-approved performance-registry record declaring device floor, OS, build configuration, representative draft/attachment/proposal data scale, warm/cold state, measurement tool, percentile/maximum, memory and storage-pressure measures, and regression threshold.
+
+## SPEC-GLOBAL-CAPTURE-CLOSE-BEHAVIOR-001 — Capture close behavior
+
+- **Concept:** `global.capture.close-behavior`
+- **Modality:** `MUST`
+- **Scope:** Capture close behavior
+- **Status:** `normative`
+- **Verification:** `REVIEW-SPEC-GLOBAL-CAPTURE-CLOSE-BEHAVIOR-001`
+- **Supersedes:** none
+
+Save for Later MUST commit durably, show `View all saved for later` and `Okay`, and close on `Okay`; Step, Goal, Reminder, Event, Proof, and Note saves MUST continue through proposal.

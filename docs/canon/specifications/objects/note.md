@@ -38,6 +38,8 @@ laws = { schedule_placement_nonduplication = "OBJ-SCHEDULE-PLACEMENT-IDENTITY-00
 
 A Note is one durable non-executable information object optionally linked to a Life Area, Goal, source, or attachments. It MUST NOT gain execution, capacity, recurrence, due-date, attendee, alert, completion, or Goal Path Step semantics until explicit receipt-backed promotion.
 
+A Note MUST be context without inherent execution, duration, or completion law.
+
 <!-- canon-section: stable-identity -->
 Note identity survives content edits, links, attachments, archive, Trash, restore, source changes, and promotion lineage. Editor buffers and surface cards remain projections of the canonical Note.
 
@@ -83,4 +85,4 @@ Capture creates it, Search and Trust inspect it, Goals/You may show contextual l
 Semantics expose content summary, links, source, attachments, lifecycle, privacy, and explicit promote/archive/Trash actions without implying executability. Reading and editing order remains stable at large text sizes.
 
 <!-- canon-section: source-test-ownership -->
-Canonical semantics belong to `Core/Domain/`; capture routing, mutation, conversion lineage, and inspection belong to `Core/LocalRuntimeOS/CaptureRouting/`, `Commands/`, and `Inspection/`; Capture presents creation and `Quality/` proves nonexecution, promotion, attachment/privacy, Trash/restore, replay, offline, and accessibility. Tests bind changes to stable Note identifiers; current implementation compliance is unclaimed.
+Canonical semantics belong to `Core/Domain/`; capture routing, mutation, conversion lineage, and inspection belong to `Core/LocalRuntimeOS/CaptureRouting/`, `Commands/`, and `Inspection/`; Capture presents creation and `Quality/` proves nonexecution, promotion, attachment/privacy, Trash/restore, replay, offline, and accessibility. Tests bind changes to stable Note identifiers;

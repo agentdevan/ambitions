@@ -127,14 +127,14 @@ def render_outputs(registry: CanonRegistry) -> Mapping[Path, bytes]:
     return _render_outputs(
         registry,
         _content_sha_entries(entries),
-        dockets,
+        dockets if conflict_snapshot is not None else None,
     )
 
 
 def _render_outputs(
     registry: CanonRegistry,
     content_sha: str,
-    dockets: tuple[object, ...] = (),
+    dockets: tuple[object, ...] | None = None,
 ) -> Mapping[Path, bytes]:
     metadata = {
         "schema_version": 1,
@@ -480,8 +480,8 @@ def _coverage(metadata, documents) -> bytes:
     return _markdown(lines)
 
 
-def _unresolved_conflicts(metadata, documents, dockets=()) -> bytes:
-    if dockets:
+def _unresolved_conflicts(metadata, documents, dockets=None) -> bytes:
+    if dockets is not None:
         from tools.ambitions_canon.conflicts import render_unresolved_report
 
         return render_unresolved_report(

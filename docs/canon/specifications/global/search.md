@@ -6,11 +6,9 @@ status = "normative"
 owner_domain = "global-search"
 canon_revision = 1
 profile = "surface-v1"
-owns_concepts = [
-  "global.search.identity",
-  "global.search.first-viewport",
-  "global.search.index-actions",
-  "global.search.visual-authority",
+owns_concepts = ["global.search.first-viewport", "global.search.identity", "global.search.index-actions", "global.search.placement", "global.search.visual-authority",
+  "global.search.index-ranking",
+  "global.search.canonical-actions",
 ]
 inherits = [
   "LAW-IA-NONROOT-001",
@@ -55,6 +53,10 @@ Search MUST be deterministic, local-first Find / Act / Inspect across approved p
 
 The first viewport MUST foreground the query field, privacy-safe scope, useful recent or exact local results when appropriate, result identity/state, and contextual safe actions. Empty-query content remains calm and bounded; it MUST NOT become a recommendation feed, dashboard, or exposed behavioral dossier.
 
+Time search MUST be local and object-first.
+
+Search MUST index labels, synonyms, and relevant object state.
+
 ## SPEC-GLOBAL-SEARCH-INDEX-ACTIONS-001 — One index, canonical actions
 
 - **Concept:** `global.search.index-actions`
@@ -64,7 +66,7 @@ The first viewport MUST foreground the query field, privacy-safe scope, useful r
 - **Verification:** `TEST-SEARCH-RANKING-001`, `SCENARIO-SEARCH-ACTION-001`
 - **Supersedes:** none
 
-Search MUST find approved Life Areas, Goals, useful path nodes, Steps, Future Steps, Reminders, Events, Notes, Proof, Life Capital, receipts/history, provenance, and settings. Ranking is measurable and deterministic. Complete/start/schedule/add proof/pause/review/open-setting actions validate against canonical owners; material actions preview and produce receipts. Corruption recovery rebuilds locally without private egress.
+Search index and canonical actions MUST remain separate child contracts: SPEC-GLOBAL-SEARCH-INDEX-001 owns local indexing and ranking; SPEC-GLOBAL-SEARCH-ACTIONS-001 owns validated canonical actions.
 
 ## SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001 — Search mapping is a scoped gap
 
@@ -75,7 +77,29 @@ Search MUST find approved Life Areas, Goals, useful path nodes, Steps, Future St
 - **Verification:** `PROOF-SEARCH-VISUAL-MAPPING-001`
 - **Supersedes:** none
 
-Visual references MUST use stable external IDs and distinguish shell placement authority, dedicated overlay authority, and implementation proof. Owner-approved VSP-01 shell `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:87:2` governs Search placement only. No Search-specific approved overlay package is mapped, leaving a structured P1 gap and no Search visual or implementation claim.
+Visual references MUST use stable external IDs and distinguish shell placement authority, dedicated overlay authority, and implementation proof. Owner-approved VSP-01 shell `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:87:2` governs Search placement only.
+
+## SPEC-GLOBAL-SEARCH-INDEX-001 — Search index and ranking
+
+- **Concept:** `global.search.index-ranking`
+- **Modality:** `MUST`
+- **Scope:** Local search index
+- **Status:** `normative`
+- **Verification:** `TEST-SEARCH-RANKING-001`
+- **Supersedes:** none
+
+Search MUST index approved local object identity, state, synonyms, and privacy-safe fields; ranking, filtering, grouping, refresh, and rebuild MUST be deterministic, measurable, local, and nonauthoritative.
+
+## SPEC-GLOBAL-SEARCH-ACTIONS-001 — Canonical search actions
+
+- **Concept:** `global.search.canonical-actions`
+- **Modality:** `MUST`
+- **Scope:** Search result actions
+- **Status:** `normative`
+- **Verification:** `SCENARIO-SEARCH-ACTION-001`
+- **Supersedes:** none
+
+Search actions MUST resolve the current canonical object, validate through its owner, preview material consequences, commit through canonical commands, and preserve Receipt, undo, and return context.
 
 ## Completeness contract
 
@@ -132,11 +156,11 @@ Search and result materials become opaque semantic surfaces with equivalent grou
 Use Find, Search, Open step, Start now, Review, Source, Receipt, History, Privacy, and Undo contextually. Avoid Ask AI, confidence, runtime/index taxonomy, shame, or productivity scoring.
 
 <!-- canon-section: visual-authority -->
-The named shell package controls placement only; overlay geometry remains unmapped.
-Stable shell ID `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:87:2` governs Search placement but does not close the dedicated Search-overlay P1 mapping gap. Search rendering, accessibility/device evidence, implementation parity, and release proof remain separate.
+The named shell package controls placement only;
+Search rendering, accessibility/device evidence, implementation parity, and release proof remain separate.
 
 <!-- canon-section: source-ownership -->
-Canonical target ownership is exact: `Stage/` owns presentation containment; `Core/LocalRuntimeOS/Search/` owns index/ranking/rebuild; `Projections/` supplies views; `Commands/` owns actions; `Trust/` owns inspection; `Quality/` owns proof. Current compliance is unclaimed.
+Canonical target ownership is exact: `Stage/` owns presentation containment; `Core/LocalRuntimeOS/Search/` owns index/ranking/rebuild; `Projections/` supplies views; `Commands/` owns actions; `Trust/` owns inspection; `Quality/` owns proof.
 
 <!-- canon-section: tests -->
 Tests cover exact/prefix/typo/date/context ranking, suppression/privacy, every object family, action safety/material preview, stale object, index corruption/rebuild, partial results, offline, replay/undo, return focus, VoiceOver order/actions/rotor, Dynamic Type, reduced effects, contrast, and scale.
@@ -146,4 +170,15 @@ Required proof includes declared-corpus ranking metrics, privacy/filter fixtures
 
 <!-- canon-section: performance -->
 Resource behavior is bounded, cancellable, local, and foreground-safe.
-Search query, ranking, action revalidation, result paging, and index rebuild MUST remain bounded and cancellable, apply explicit product-scale input/result caps, perform no query-path network gating or synchronous disk write, use no polling or unbounded background loop, and preserve foreground responsiveness during rebuild. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. Implementation authorization requires an owner-approved performance-registry record declaring device floor, OS, build configuration, representative indexed-record/query/result data scale, warm/cold state, measurement tool, percentile/maximum, rebuild resource measures, and regression threshold. Current performance and physical-device proof remain absent.
+Search query, ranking, action revalidation, result paging, and index rebuild MUST remain bounded and cancellable, apply explicit product-scale input/result caps, perform no query-path network gating or synchronous disk write, use no polling or unbounded background loop, and preserve foreground responsiveness during rebuild. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. Implementation authorization requires an owner-approved performance-registry record declaring device floor, OS, build configuration, representative indexed-record/query/result data scale, warm/cold state, measurement tool, percentile/maximum, rebuild resource measures, and regression threshold.
+
+## SPEC-GLOBAL-SEARCH-PLACEMENT-001 — Global Search placement
+
+- **Concept:** `global.search.placement`
+- **Modality:** `MUST`
+- **Scope:** Global Search placement
+- **Status:** `normative`
+- **Verification:** `REVIEW-SPEC-GLOBAL-SEARCH-PLACEMENT-001`
+- **Supersedes:** none
+
+Global Search MUST be available from root chrome, while dense owning surfaces MAY also expose scoped local search.

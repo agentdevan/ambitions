@@ -25,6 +25,10 @@ source_owners = ["Native/Ambitions/Core/Domain/", "Native/Ambitions/Core/LocalRu
 
 Proof MUST be one user-approved evidence or reflection object linked to a Step, Goal, Closure, or Life Capital context. It works on the honor system, is never graded by strength, and remains distinct from the automatic Receipt that attests to a system mutation.
 
+Proof MAY be required by explicit user rule, goal closure, goal or step category, repeated recovery segments, or when proof is needed to preserve Goal Path integrity.
+
+Proof MUST be optional by default and valuable; it becomes required only through an explicit configured rule disclosed before the relevant commit boundary.
+
 <!-- canon-section: stable-identity -->
 Proof identity survives attachment edits, links, requirement-level context, progress transfer, archive, Trash, restore, and relevance changes. Stable identifiers preserve evidence lineage.
 
@@ -68,4 +72,4 @@ Goals, Today, You/Life Capital, Search, and Trust may project relevant Proof. Ev
 Semantics expose evidence type, summary, linked object, requirement level established before work, privacy/source, lifecycle, and actions without image-only or color-only meaning. Attachments include accessible descriptions.
 
 <!-- canon-section: source-test-ownership -->
-Canonical semantics belong to `Core/Domain/`; links, planning effects, commands, and inspection belong to `Core/LocalRuntimeOS/Planning/`, `Commands/`, and `Inspection/`; Trust presents inspection and `Quality/` proves requirement notice, non-grading, Proof/Receipt separation, transfer without false completion, Trash/restore, privacy, offline, and accessibility. Tests bind evidence to stable Proof identifiers; current implementation compliance is unclaimed.
+Canonical semantics belong to `Core/Domain/`; links, planning effects, commands, and inspection belong to `Core/LocalRuntimeOS/Planning/`, `Commands/`, and `Inspection/`; Trust presents inspection and `Quality/` proves requirement notice, non-grading, Proof/Receipt separation, transfer without false completion, Trash/restore, privacy, offline, and accessibility. Tests bind evidence to stable Proof identifiers;

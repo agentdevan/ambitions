@@ -56,6 +56,14 @@ normative_files = [
   "specifications/systems/scheduling-and-capacity.md",
   "specifications/systems/source-atlas.md",
   "specifications/systems/sync-and-continuity.md",
+  "standards/accessibility.md",
+  "standards/copy-and-state-language.md",
+  "standards/native-ios-engineering.md",
+  "standards/performance-and-energy.md",
+  "standards/security-and-privacy.md",
+  "standards/swiftui-and-design-system.md",
+  "standards/testing-and-fixtures.md",
+  "standards/validation-and-release.md",
 ]
 
 generated_files = [

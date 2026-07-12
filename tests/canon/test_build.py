@@ -18,10 +18,11 @@ from tools.ambitions_canon.build import (
     write_outputs_atomic,
 )
 from tools.ambitions_canon.cli import main
+from tools.ambitions_canon.identifiers import CANONICAL_ID_GRAMMAR
 from tools.ambitions_canon.manifest import load_documents, load_manifest
 from tools.ambitions_canon.model import CanonError, CanonRegistry
 from tools.ambitions_canon.registry import build_registry
-from tools.ambitions_canon.render import render_outputs
+from tools.ambitions_canon.render import _unresolved_conflicts, render_outputs
 from tests.canon.canon_test_support import write_required_governance_artifacts
 
 
@@ -110,6 +111,42 @@ class BuildTests(unittest.TestCase):
         self.generated_root = self.canon_root / "generated"
         self.canon_root.mkdir(parents=True)
 
+    def test_conflict_renderer_distinguishes_absent_model_from_resolved_empty_model(self):
+        metadata = {
+            "authority_state": "shadow",
+            "canon_content_sha": "a" * 64,
+            "canon_revision": 7,
+            "compiler_version": "0.1.0",
+            "schema_version": 1,
+        }
+
+        unrepresented = _unresolved_conflicts(metadata, (), None).decode("utf-8")
+        represented = _unresolved_conflicts(metadata, (), ()).decode("utf-8")
+
+        self.assertIn("**Representation status:** Unrepresented", unrepresented)
+        self.assertNotIn("**Representation status:** Unrepresented", represented)
+        self.assertIn("- Open dockets: `0`", represented)
+
+    def test_build_canon_preserves_absent_conflict_model_as_unrepresented(self):
+        self.write_canon()
+
+        self.assertEqual(build_canon(self.root), ())
+
+        rendered = self.generated_root.joinpath("unresolved-conflicts.md").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("**Representation status:** Unrepresented", rendered)
+        self.assertNotIn("- Open dockets: `0`", rendered)
+
+    def test_build_canon_renders_validated_empty_conflict_model_as_resolved(self):
+        self.assertEqual(build_canon(ROOT, check=True), ())
+
+        rendered = ROOT.joinpath(
+            "docs/canon/generated/unresolved-conflicts.md"
+        ).read_text(encoding="utf-8")
+        self.assertNotIn("**Representation status:** Unrepresented", rendered)
+        self.assertIn("- Open dockets: `0`", rendered)
+
     def write_canon(self, documents: dict[str, str] | None = None) -> None:
         documents = documents or {}
         (self.canon_root / "MANIFEST.toml").write_text(
@@ -124,7 +161,7 @@ class BuildTests(unittest.TestCase):
             match.group(1)
             for text in documents.values()
             for match in re.finditer(
-                r"^## ([A-Z][A-Z0-9-]+-\d{3}) —",
+                rf"^## ({CANONICAL_ID_GRAMMAR}) —",
                 text,
                 re.MULTILINE,
             )

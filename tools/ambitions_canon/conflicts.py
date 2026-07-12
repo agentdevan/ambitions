@@ -21,6 +21,7 @@ from tools.ambitions_canon.build import (
     _read_file_at,
     _tree_files_descriptor,
 )
+from tools.ambitions_canon.identifiers import CANONICAL_ID_PATTERN
 from tools.ambitions_canon.model import AtomicClaim, CanonError, Modality
 
 
@@ -41,7 +42,7 @@ ALLOWED_SEVERITIES = frozenset(
     {"P0_BLOCKER", "P1_REQUIRED", "P2_IMPROVEMENT", "INFORMATIONAL"}
 )
 ALLOWED_PRIORITIES = frozenset({"P0", "P1", "P2", "INFORMATIONAL"})
-_IDENTIFIER = re.compile(r"^[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)+$")
+_IDENTIFIER = CANONICAL_ID_PATTERN
 _CONCEPT = re.compile(r"^[a-z0-9]+(?:[._-][a-z0-9]+)*$")
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
 _DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
@@ -729,6 +730,50 @@ def render_conflict_baseline(
         ],
     }
     return _stable_json(payload)
+
+
+def rebind_resolved_conflict_baseline(
+    baseline_bytes: bytes,
+    claim_dispositions_bytes: bytes,
+    requirement_ids: Iterable[str],
+    supersession_entries: Sequence[object],
+) -> bytes:
+    """Rebind an all-resolved baseline after metadata-only claim-schema change."""
+
+    path = Path("docs/canon/migration/conflict-docket-baseline.json")
+    baseline = _parse_conflict_baseline(baseline_bytes, path)
+    tracked = _parse_tracked_claims(
+        claim_dispositions_bytes,
+        Path("docs/canon/migration/claim-dispositions.json"),
+    )
+    from tools.ambitions_canon.migration import (
+        tracked_decision_evidence_fingerprint_sha256,
+    )
+
+    fingerprint = tracked_decision_evidence_fingerprint_sha256(
+        claim_dispositions_bytes
+    )
+    if fingerprint != baseline["decision_evidence_fingerprint_sha256"]:
+        raise _error(
+            "CONFLICT_BASELINE_REBIND_BLOCKED",
+            "Decision evidence changed; metadata-only rebind is forbidden",
+            path,
+        )
+    requirements = set(requirement_ids)
+    for record in baseline["dockets"]:
+        _validate_removed_baseline_record(
+            record,
+            requirements,
+            supersession_entries,
+            baseline["resolution_provenance"],
+            path,
+        )
+    _validate_baseline_claim_coverage(baseline["dockets"], tracked)
+    rebound = dict(baseline)
+    rebound["claim_dispositions_sha256"] = hashlib.sha256(
+        claim_dispositions_bytes
+    ).hexdigest()
+    return _stable_json(rebound)
 
 
 def validate_conflict_repository(

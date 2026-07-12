@@ -6,6 +6,7 @@ import re
 import tomllib
 from pathlib import Path
 
+from tools.ambitions_canon.identifiers import CANONICAL_ID_GRAMMAR
 from tools.ambitions_canon.model import (
     CanonDocument,
     CanonError,
@@ -19,8 +20,9 @@ from tools.ambitions_canon.model import (
 
 FRONT = "+++"
 REQ_HEADING = re.compile(
-    r"^##\s+([A-Z][A-Z0-9-]+-\d{3})\s+—\s+(.+?)\s*$"
+    rf"^##\s+({CANONICAL_ID_GRAMMAR})\s+—\s+(.+?)\s*$"
 )
+REQ_HEADING_CANDIDATE = re.compile(r"^##\s+(\S+)\s+—\s+(.+?)\s*$")
 SECTION = re.compile(r"^<!--\s*canon-section:\s*([a-z0-9-]+)\s*-->$")
 LEVEL_TWO_HEADING = re.compile(r"^##\s+.+?\s*$")
 FIELD = re.compile(
@@ -418,6 +420,13 @@ def _requirement_starts(
     for index, line in enumerate(lines):
         match = REQ_HEADING.fullmatch(line)
         if match is None:
+            if REQ_HEADING_CANDIDATE.fullmatch(line) is not None:
+                raise CanonError(
+                    "CANON_REQUIREMENT_FIELD",
+                    "requirement heading uses an invalid canonical ID",
+                    path,
+                    body_start_line + index,
+                )
             continue
         requirement_id = match.group(1)
         if requirement_id in seen:

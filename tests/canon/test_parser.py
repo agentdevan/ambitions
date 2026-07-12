@@ -98,6 +98,27 @@ class ParserTests(unittest.TestCase):
         self.assertEqual(requirement.source_path, path)
         self.assertEqual(requirement.line, 20)
 
+    def test_requirement_heading_accepts_global_stable_target_ids(self):
+        path, text = self.fixture("valid-surface.md")
+        stable_id = "SPEC-PRIVACY-EGRESS-001-EGRESS-REVIEW-5AC00A76"
+        text = text.replace("TODAY-IDENTITY-001", stable_id)
+
+        document = parse_canon_document(path, text)
+
+        self.assertEqual(document.requirements[0].requirement_id, stable_id)
+
+    def test_requirement_heading_keeps_numeric_ids_and_rejects_unsafe_ids(self):
+        path, valid = self.fixture("valid-surface.md")
+        self.assertEqual(
+            parse_canon_document(path, valid).requirements[0].requirement_id,
+            "TODAY-IDENTITY-001",
+        )
+        for invalid in ("spec-privacy-001", "SPEC/PRIVACY-001", "SPEC--001"):
+            with self.subTest(invalid=invalid):
+                text = valid.replace("TODAY-IDENTITY-001", invalid)
+                with self.assertRaises(CanonError):
+                    parse_canon_document(path, text)
+
     def test_front_matter_validation_matches_closed_specification_schema(self):
         path, valid = self.fixture("valid-surface.md")
         cases = {

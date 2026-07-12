@@ -25,6 +25,8 @@ source_owners = ["Native/Ambitions/Core/Domain/", "Native/Ambitions/Core/LocalRu
 
 A History Event MUST be one immutable before-and-after mutation fact linked to affected object/relationship, actor, timestamp/order, command/idempotency key, source, reversal/correction, Receipt, and replay/conflict metadata.
 
+When a goal changes or pivots, previous progress SHOULD transfer as context, proof, skill, resource knowledge, or capability knowledge.
+
 <!-- canon-section: stable-identity -->
 History Event identity and deterministic order survive projections, compaction that preserves semantics, replay, conflict resolution, subject archive/Trash, and correction. Stable identifiers retain causal lineage.
 
@@ -68,4 +70,4 @@ Trust and You present readable history; object detail and Search provide context
 Semantics expose chronological/causal order, affected object, change summary, actor/source, result, reversal/correction, external status, and available recovery without color/timeline-position dependence.
 
 <!-- canon-section: source-test-ownership -->
-Canonical event facts belong to `Core/Domain/`; commit ordering, replay, conflict, reversal, compaction, and inspection belong to `Core/LocalRuntimeOS/Commands/` and `Inspection/`; Trust/You present it and `Quality/` proves atomic ordering, idempotent replay, correction, rollback, deletion/redaction, privacy, offline, and accessibility. Tests bind facts to stable History Event and object identifiers; current implementation compliance is unclaimed.
+Canonical event facts belong to `Core/Domain/`; commit ordering, replay, conflict, reversal, compaction, and inspection belong to `Core/LocalRuntimeOS/Commands/` and `Inspection/`; Trust/You present it and `Quality/` proves atomic ordering, idempotent replay, correction, rollback, deletion/redaction, privacy, offline, and accessibility. Tests bind facts to stable History Event and object identifiers;

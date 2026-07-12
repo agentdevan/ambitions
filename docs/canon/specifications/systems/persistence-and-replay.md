@@ -6,7 +6,10 @@ status = "normative"
 owner_domain = "system-persistence-replay"
 canon_revision = 1
 profile = "system-v1"
-owns_concepts = ["system.persistence.atomicity", "system.persistence.replay"]
+owns_concepts = ["system.persistence.atomicity", "system.persistence.corruption", "system.persistence.replay",
+  "system.persistence.compaction",
+  "system.persistence.migration",
+]
 inherits = ["RUNTIME-MUTATION-SEQUENCE-001", "LAW-RUNTIME-DURABLE-SUCCESS-001", "RUNTIME-SOURCE-OWNER-001", "LAW-DATA-LOSS-STOP-SHIP-001"]
 depends_on = ["CONSTITUTION", "SYSTEM-PRIVATE-LIFE-RUNTIME", "JOURNEY-BACKUP-RESTORE-RESET"]
 source_owners = ["Native/Ambitions/Core/LocalRuntimeOS/Transactions/", "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/", "Native/Ambitions/Core/LocalRuntimeOS/State/", "Native/Ambitions/Core/LocalRuntimeOS/Projections/", "Native/Ambitions/Core/LocalRuntimeOS/Storage/", "Native/Ambitions/Core/LocalRuntimeOS/Repair/", "Native/Ambitions/Quality/"]
@@ -14,7 +17,7 @@ source_owners = ["Native/Ambitions/Core/LocalRuntimeOS/Transactions/", "Native/A
 
 # Persistence and Replay
 
-This shadow specification defines intended persistence semantics independently of SwiftData, SQLite, files, or another substrate. It does not claim current migration or data-integrity completeness.
+This shadow specification defines intended persistence semantics independently of SwiftData, SQLite, files, or another substrate.
 
 ## SYSTEM-PERSISTENCE-ATOMIC-001 — Accepted local intent is atomic and crash-consistent
 
@@ -27,6 +30,12 @@ This shadow specification defines intended persistence semantics independently o
 
 A declared local transaction MUST durably commit its complete write set or none. Partial durable stages are permitted only when explicitly modeled with a recovery path and truthful Receipt. The last honest store remains readable across interruption, migration, compaction, backup, restore, projection rebuild, and storage pressure.
 
+Storage failure MUST preserve input or MUST provide a safe export or recovery path.
+
+Relaunch MUST NOT duplicate accepted intent, lose accepted intent, or expose impossible mixed state.
+
+A migration MUST NOT destroy the only readable copy of user data.
+
 ## SYSTEM-PERSISTENCE-REPLAY-001 — Canonical history replays equivalently
 
 - **Concept:** `system.persistence.replay`
@@ -37,6 +46,48 @@ A declared local transaction MUST durably commit its complete write set or none.
 - **Supersedes:** none
 
 Historical Event meaning MUST be immutable and version-decodable. Replaying durable history reproduces logically equivalent canonical state and disposable Projections with validated cursors/checksums; ordinary replay does not repeat external effects. Unsupported stores receive explicit recovery/export handling, never silent reset.
+
+Compaction MUST preserve causal meaning, auditability required by product law, replay equivalence, and deletion semantics.
+
+Migrations MUST preserve object identity, History, recurrence, source, and Receipts.
+
+The owning persistence specification MUST define the minimum supported direct-upgrade version and the behavior for older stores.
+
+Unsupported historical stores MUST require an explicit export/recovery path.
+
+Canonical command, event, and replay identities MUST NOT be silently reset.
+
+Event payloads MUST be versioned and decoded through explicit adapters.
+
+New code MAY reinterpret an old event only through a reviewed migration that preserves auditability and replay equivalence.
+
+External effects MUST NOT be automatically reissued during ordinary replay.
+
+Relaunch MUST reconstruct the same local recommendations, placements, closure, Receipts, and recovery state unless source data changed.
+
+Interrupted commands MUST roll back or resume from an inspectable pending state.
+
+## SYSTEM-PERSISTENCE-COMPACTION-001 — Persistence compaction
+
+- **Concept:** `system.persistence.compaction`
+- **Modality:** `MUST`
+- **Scope:** Event and projection compaction
+- **Status:** `normative`
+- **Verification:** `TEST-PERSISTENCE-COMPACTION-001`
+- **Supersedes:** none
+
+Compaction MUST preserve canonical outcome, History and Receipt linkage, replay determinism, rollback horizon, crash safety, and privacy deletion obligations.
+
+## SYSTEM-PERSISTENCE-MIGRATION-001 — Persistence migration
+
+- **Concept:** `system.persistence.migration`
+- **Modality:** `MUST`
+- **Scope:** Schema and event migration
+- **Status:** `normative`
+- **Verification:** `TEST-PERSISTENCE-MIGRATION-001`
+- **Supersedes:** none
+
+Persistence migration MUST be deterministic, idempotent, crash-safe, directly upgrade from the supported horizon, preserve rollback or repair, and prove exact pre/post replay equivalence.
 
 ## Completeness contract
 
@@ -69,10 +120,21 @@ Stable causal order, schema adapters, migration plans, compaction rules, project
 Redacted evidence includes transaction/event/projection cursors, schema IDs, store health, invariant/checksum results, migration/backup/restore phase, retained rollback point, and correlation IDs.
 
 <!-- canon-section: source-ownership -->
-Exact target owners are `Core/LocalRuntimeOS/Transactions/`, `EventJournal/`, `State/`, `Projections/`, `Storage/`, and `Repair/`; `Quality/` owns fixtures and replay proof. Existing `Core/Persistence/`, incomplete State consumption, app-wide replay, migration horizon, backup/restore, and direct-write debt remain current implementation concerns, not target aliases.
+Exact target owners are `Core/LocalRuntimeOS/Transactions/`, `EventJournal/`, `State/`, `Projections/`, `Storage/`, and `Repair/`; `Quality/` owns fixtures and replay proof.
 
 <!-- canon-section: tests-proof -->
 Test atomic crash points, concurrent conflicts, duplicate commands, schema decoding, every supported upgrade path, unsupported old store, corrupt/tampered records, projection deletion/rebuild equivalence, compaction, tombstones, blob quarantine, low storage, backup/restore interruption, no external reissue, and machine-checkable invariants.
 
 <!-- canon-section: performance-resource-constraints -->
 I/O is isolated from the main actor; queues, batches, buffers, retention, compaction, rebuild, migration, and backup work are bounded and cancellable. Article 31 calibration must supply representative event/object/blob scales and device/OS/build/tool/percentile/maximum/energy/memory/storage/regression context; no numeric budget or performance proof is invented here.
+
+## SYSTEM-PERSISTENCE-CORRUPTION-001 — Persistence corruption containment
+
+- **Concept:** `system.persistence.corruption`
+- **Modality:** `MUST NOT`
+- **Scope:** Persistence corruption containment
+- **Status:** `normative`
+- **Verification:** `REVIEW-SYSTEM-PERSISTENCE-CORRUPTION-001`
+- **Supersedes:** none
+
+Detected persistence corruption MUST produce a redacted diagnosis, quarantine, a safe export or backup opportunity when available, and a repair preview; silent deletion and automatic destructive reset MUST NOT occur.

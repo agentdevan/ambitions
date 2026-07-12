@@ -25,6 +25,10 @@ source_owners = ["Native/Ambitions/Core/Domain/", "Native/Ambitions/Core/LocalRu
 
 A Receipt MUST be one durable, searchable, user-readable automatic record of a meaningful mutation, linked to command, accepted/rejected result, affected objects, History Events, source/actor, consequence, external-effect status, replay, and rollback. It attests to system behavior and remains separate from user Proof.
 
+A Receipt MUST expose Undo when the owning mutation is reversible.
+
+A Schedule Change Set MUST be a proposed or accepted group of placement changes with rationale, affected objects, confirmation state, receipt, and rollback context.
+
 <!-- canon-section: stable-identity -->
 Receipt identity is issued once for an idempotent mutation result and survives projection, search, external reconciliation, subject archive/Trash, correction links, and replay. Stable identifiers bind command and history lineage.
 
@@ -72,4 +76,4 @@ Semantics expose result, affected objects, before/after summary, source/actor, t
 Ordered actions name the exact affected object and reversal consequence.
 
 <!-- canon-section: source-test-ownership -->
-Canonical facts belong to `Core/Domain/`; issuance, idempotency binding, inspection, replay, reconciliation, and governed deletion belong to `Core/LocalRuntimeOS/Inspection/` and `Commands/`; Trust/You present it and `Quality/` proves durable-success ordering, rejection, Proof separation, replay, rollback, external reconciliation, deletion/privacy, offline, search, and accessibility. Tests bind every Receipt to command/history/object identifiers; current implementation compliance is unclaimed.
+Canonical facts belong to `Core/Domain/`; issuance, idempotency binding, inspection, replay, reconciliation, and governed deletion belong to `Core/LocalRuntimeOS/Inspection/` and `Commands/`; Trust/You present it and `Quality/` proves durable-success ordering, rejection, Proof separation, replay, rollback, external reconciliation, deletion/privacy, offline, search, and accessibility. Tests bind every Receipt to command/history/object identifiers;

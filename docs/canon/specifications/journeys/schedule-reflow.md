@@ -27,6 +27,14 @@ This shadow journey coordinates changed-time consequences without redefining Ste
 
 Direct manipulation or its named alternative MUST produce a non-durable preview of conflicts, protected/fixed boundaries, affected objects, capacity, recurrence scope, and external effects. No drop gesture commits a material change without valid confirmation or an exact revocable rule.
 
+Simple reflows MUST show inline ghost previews directly in the grid before commit.
+
+When the user causes an adjustment by adding a new Step, adding a new Goal, changing a deadline, changing a constraint, or creating a conflict, Ambitions SHOULD show the impact.
+
+If a Goal does not fit and the user chooses to add it anyway, Ambitions SHOULD create the Goal and path while keeping the conflict visible until resolved.
+
+Capabilities and other Life Capital MUST be manually editable.
+
 <!-- canon-section: trigger-starting-state -->
 Triggers are drag/resize, Move it, Make this fit, Resolve conflict, new capacity fact, or changed commitment; starting state captures canonical placements, current range/time zone, protected/fixed/flexible rules, recurrence scope, source authority, and pending external state.
 

@@ -377,8 +377,8 @@ class AuditTests(unittest.TestCase):
         self.assertEqual(result, 0)
         self.assertEqual(
             output.getvalue(),
-            "GREEN ambitions canon audit documents=53 requirements=213 "
-            "concepts=212 authority_state=shadow\n",
+            "GREEN ambitions canon audit documents=61 requirements=441 "
+            "concepts=441 authority_state=shadow\n",
         )
 
     def test_cli_audit_renders_red_finding_and_exits_one(self):
@@ -530,6 +530,7 @@ class AuditTests(unittest.TestCase):
             "CANON_ID_DUPLICATE",
             "CANON_CONCEPT_DUPLICATE_OWNER",
             "CANON_CONCEPT_UNOWNED",
+            "CANON_CONCEPT_ORPHAN",
             "CANON_DEPENDENCY_UNKNOWN",
             "CANON_DEPENDENCY_CYCLE",
             "CANON_MODALITY_INVALID",

@@ -6,7 +6,11 @@ status = "normative"
 owner_domain = "object-schedule-placement"
 canon_revision = 1
 profile = "object-v1"
-owns_concepts = ["object.schedule-placement.identity", "object.graph.single-canonical", "object.graph.projection-ownership"]
+owns_concepts = ["object.schedule-placement.identity", "object.graph.single-canonical", "object.graph.projection-ownership",
+  "object.schedule-change-set.identity",
+  "object.scheduling.exactness",
+  "object.schedule-placement.atomicity",
+]
 inherits = ["OBJECT-CANONICAL-GRAPH-001", "CONTROL-MATERIAL-CONFIRMATION-001", "CONST-RUNTIME-MUTATION-001"]
 depends_on = ["CONSTITUTION", "OBJECT-STEP", "OBJECT-EVENT", "SURFACE-TIME", "GLOBAL-MOTION"]
 source_owners = ["Native/Ambitions/Core/Domain/", "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/", "Native/Ambitions/Core/LocalRuntimeOS/Commands/", "Native/Ambitions/Core/LocalRuntimeOS/Inspection/", "Native/Ambitions/Surfaces/Time/", "Native/Ambitions/Quality/"]
@@ -25,6 +29,14 @@ source_owners = ["Native/Ambitions/Core/Domain/", "Native/Ambitions/Core/LocalRu
 
 A Schedule Placement is one identified relationship between a canonical capacity-bearing object and Time, containing range/window, fixed/flexible/protected state, fit assumptions, and reflow rule. It MUST NOT duplicate the Step or Event or acquire its lifecycle/execution identity.
 
+Goals MAY have target dates or windows, while Steps, Reminders, and Events MUST carry exact scheduling when scheduled.
+
+A Schedule Placement MUST relate one object to Time.
+
+A Placement MUST be the relationship between an object and time reality.
+
+Ambitions MUST NOT create vague someday goals.
+
 ## SYS-CANONICAL-GRAPH-001 — One graph across objects and surfaces
 
 - **Concept:** `object.graph.single-canonical`
@@ -36,6 +48,8 @@ A Schedule Placement is one identified relationship between a canonical capacity
 
 The Atlas MUST represent one canonical local identity graph of objects and typed relationships. Surface, Search, widget, App Intent, import, accessibility, and Time views resolve graph identifiers and cannot become separate stores.
 
+Surfaces MUST be lenses.
+
 ## SYS-PROJECTION-OWNERSHIP-001 — Projections never own divergent copies
 
 - **Concept:** `object.graph.projection-ownership`
@@ -46,6 +60,10 @@ The Atlas MUST represent one canonical local identity graph of objects and typed
 - **Supersedes:** none
 
 A projection MUST NOT own a divergent object copy or mutate canonical state directly. An actionable projection carries canonical object/relationship identifiers and routes a typed command to the owning runtime authority.
+
+Surfaces MUST NOT own divergent copies of canonical objects.
+
+Projection loss MUST NOT equal user-data loss.
 
 <!-- canon-section: stable-identity -->
 Placement identity survives range/window edits, reflow, conflict, protection, detachment, Trash governed by the subject, restore, and projection changes. It always references one canonical subject identity.
@@ -90,4 +108,37 @@ Time owns primary placement presentation; Today and Goals show fit/path context,
 Semantics expose subject, exact range/window, fixed/flexible/protected state, conflict, rationale, affected objects, recurrence scope, and move/resize alternatives without drag, timeline position, motion, or color dependence.
 
 <!-- canon-section: source-test-ownership -->
-Relationship semantics belong to `Core/Domain/`; capacity, proposal, reflow, conflict, commands, and inspection belong to `Core/LocalRuntimeOS/Scheduling/`, `Commands/`, and `Inspection/`; Time presents it and `Quality/` proves nonduplication, axes, protected boundaries, recurrence scope, external visibility, rollback/replay, offline, privacy, and accessibility. Tests bind each change to placement and subject identifiers; current implementation compliance is unclaimed.
+Relationship semantics belong to `Core/Domain/`; capacity, proposal, reflow, conflict, commands, and inspection belong to `Core/LocalRuntimeOS/Scheduling/`, `Commands/`, and `Inspection/`; Time presents it and `Quality/` proves nonduplication, axes, protected boundaries, recurrence scope, external visibility, rollback/replay, offline, privacy, and accessibility. Tests bind each change to placement and subject identifiers;
+
+## OBJ-SCHEDULE-CHANGE-SET-IDENTITY-001 — Schedule change-set identity
+
+- **Concept:** `object.schedule-change-set.identity`
+- **Modality:** `MUST`
+- **Scope:** Schedule mutation proposals
+- **Status:** `normative`
+- **Verification:** `TEST-SCHEDULE-CHANGE-SET-001`
+- **Supersedes:** none
+
+A schedule change set MUST have stable identity, ordered proposed mutations, validation state, consequences, commit boundary, rollback linkage, and Receipt linkage.
+
+## OBJ-SCHEDULING-EXACTNESS-001 — Scheduling exactness
+
+- **Concept:** `object.scheduling.exactness`
+- **Modality:** `MUST`
+- **Scope:** Accepted schedule placements
+- **Status:** `normative`
+- **Verification:** `TEST-SCHEDULING-EXACTNESS-001`
+- **Supersedes:** none
+
+An accepted placement MUST preserve exact subject, interval, authority, recurrence scope, capacity consequence, provenance, and conflict state.
+
+## OBJ-SCHEDULE-PLACEMENT-ATOMICITY-001 — Placement atomicity
+
+- **Concept:** `object.schedule-placement.atomicity`
+- **Modality:** `MUST`
+- **Scope:** Schedule placement mutation
+- **Status:** `normative`
+- **Verification:** `TEST-SCHEDULE-PLACEMENT-ATOMICITY-001`
+- **Supersedes:** none
+
+A placement mutation MUST atomically preserve object, interval, capacity, conflict, recurrence, History, Receipt, and rollback consistency.

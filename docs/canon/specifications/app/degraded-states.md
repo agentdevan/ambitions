@@ -37,7 +37,7 @@ source_owners = [
 
 # App Degraded States
 
-This shadow specification defines a shared classification and presentation contract for whole-app degradation. Owning features retain their specific failure semantics. This file does not assert that current recovery, data safety, diagnostics, or UI proof is complete.
+This shadow specification defines a shared classification and presentation contract for whole-app degradation. Owning features retain their specific failure semantics.
 
 ## APP-DEGRADED-FAILURE-TAXONOMY-001 — Failures keep distinct user consequences
 
@@ -63,6 +63,8 @@ No class implies that optional CloudKit continuity, account, R2, Source Atlas, e
 
 A degraded presentation MUST state what is affected, what remains available, whether displayed information is current, and the safest next action. It appears at the narrowest level that explains the consequence and does not turn private status, diagnostics, or architecture vocabulary into ambient root chrome. Color, motion, or spatial position may not be the sole carrier of severity or recovery state.
 
+The app MUST NOT show a persistent offline warning when the requested action is fully available locally.
+
 ## APP-DEGRADED-PRESERVE-001 — Failure preserves accepted input and local truth
 
 - **Concept:** `app.degraded.input-preservation`
@@ -84,6 +86,8 @@ Failure MUST preserve original input, accepted local intent, canonical object id
 - **Supersedes:** none
 
 Recovery MUST match the failure class and current canonical state. Retry revalidates preconditions and is idempotent. Conflicts require human-meaningful review; quarantine isolates suspect data without silently deleting it; repair previews consequences before commit; export preserves user agency where feasible. Destructive reset is a separately confirmed last resort and cannot be presented as routine recovery for an unclassified failure.
+
+Controls MUST NOT report success before durable mutation.
 
 ## APP-DEGRADED-STATE-001 — Degraded state retains scope and freshness
 
@@ -132,7 +136,7 @@ Redacted evidence identifies the failure class, affected scope, and recovery res
 Evidence records class, scope, local health, freshness, operation phase, preserved-input status, retry count/result, recovery chosen, and resolution with private content redacted. Evidence age and source revision remain explicit.
 
 <!-- canon-section: source-ownership -->
-Canonical target ownership is exact: `Core/LocalRuntimeOS/Repair/` and `Core/LocalRuntimeOS/Diagnostics/` own repair and health facts; `DesignSystem/` owns shared degraded-state product components; each owning root under `Surfaces/Today/`, `Goals/`, `Time/`, or `You/` owns contextual placement; app `Diagnostics/` owns redacted diagnostic presentation; and `Quality/` owns scenario and accessibility proof. Current `Surfaces/SurfaceLaw/DegradedStateModels.swift` and `DegradedStateOrchestrator.swift` locations are non-canonical architecture debt and current implementation mappings, not target owners. A source repair must move or collapse their authority into the exact owners above.
+Canonical target ownership is exact: `Core/LocalRuntimeOS/Repair/` and `Core/LocalRuntimeOS/Diagnostics/` own repair and health facts; `DesignSystem/` owns shared degraded-state product components; each owning root under `Surfaces/Today/`, `Goals/`, `Time/`, or `You/` owns contextual placement; app `Diagnostics/` owns redacted diagnostic presentation; and `Quality/` owns scenario and accessibility proof. A source repair must move or collapse their authority into the exact owners above.
 
 <!-- canon-section: tests-proof -->
 The scenario matrix executes every shared failure class and recovery outcome.
@@ -140,4 +144,4 @@ The scenario matrix executes every shared failure class and recovery outcome.
 Required proof exercises every taxonomy class, unknown failure, offline-healthy operation, stale data, partial results, idempotent retry, conflict review, quarantine, repair preview, preserved drafts/local objects, redaction, VoiceOver semantics/actions, Dynamic Type, Reduce Motion, contrast, and focus recovery.
 
 <!-- canon-section: performance-resource-constraints -->
-With 100 simultaneous health signals across 25 affected scopes, classification MUST complete within 10 ms at P95 and shared presentation-model derivation within 16 ms at P95 across 1,000 evaluations. The active degraded-state queue MUST cap at 128 records and coalesce repeated facts by scope; each redacted diagnostic record MUST remain at or below 4 KiB. One thousand retained records MUST add no more than 4 MiB resident memory. Classification performs zero synchronous disk or network I/O. Automatic retry is capped at 3 attempts per operation with delays of at least 1, 5, and 30 seconds; further action requires user intent or an owning repair contract. No degraded-state classifier may poll or run an unbounded background loop. Current device, latency, storage, memory, retry-energy, and repair-throughput proof is not claimed.
+With 100 simultaneous health signals across 25 affected scopes, classification MUST complete within 10 ms at P95 and shared presentation-model derivation within 16 ms at P95 across 1,000 evaluations. The active degraded-state queue MUST cap at 128 records and coalesce repeated facts by scope; each redacted diagnostic record MUST remain at or below 4 KiB. One thousand retained records MUST add no more than 4 MiB resident memory. Classification performs zero synchronous disk or network I/O. Automatic retry is capped at 3 attempts per operation with delays of at least 1, 5, and 30 seconds; further action requires user intent or an owning repair contract. No degraded-state classifier may poll or run an unbounded background loop.

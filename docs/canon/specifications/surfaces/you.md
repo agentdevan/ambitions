@@ -6,12 +6,12 @@ status = "normative"
 owner_domain = "surface-you"
 canon_revision = 1
 profile = "surface-v1"
-owns_concepts = [
-  "surface.you.identity",
-  "surface.you.screen-inventory",
-  "surface.you.first-viewport",
-  "surface.you.depth",
-  "surface.you.visual-authority",
+owns_concepts = ["surface.you.depth", "surface.you.first-viewport", "surface.you.identity", "surface.you.no-knowledge-model", "surface.you.screen-inventory", "surface.you.settings-drilldown", "surface.you.time-preferences", "surface.you.visual-authority",
+  "surface.you.profile",
+  "surface.you.appearance",
+  "surface.you.data-controls",
+  "surface.you.privacy-data-boundary",
+  "surface.you.contextual-education",
 ]
 inherits = [
   "CONST-IA-ROOT-001",
@@ -35,7 +35,7 @@ source_owners = [
 
 # You
 
-This shadow specification defines the intended personal-system surface without asserting current account, sync, privacy, diagnostics, accessibility, or release behavior.
+
 
 ## SPEC-SURFACE-YOU-IDENTITY-001 — Searchable personal-system command center
 
@@ -48,6 +48,10 @@ This shadow specification defines the intended personal-system surface without a
 
 You MUST be a low-scroll, searchable command center for identity, Setup & Personalization, Life Capital, preferences, automation, privacy, data, security, continuity, notifications, sources, receipts, history, and redacted diagnostics. It is not a profile feed, manifesto, help center, memory dossier, or debug console.
 
+The local profile MUST contain the user’s name, image, preferences, and personal presentation.
+
+You MUST represent a high-agency user who lacks a reliable life operating system and MUST NOT frame the user as low-agency.
+
 ## SPEC-SURFACE-YOU-SCREEN-INVENTORY-001 — Plain groups with owned depth
 
 - **Concept:** `surface.you.screen-inventory`
@@ -59,6 +63,26 @@ You MUST be a low-scroll, searchable command center for identity, Setup & Person
 
 You owns Account & Sync, Privacy & Security, Automation & Behavior, Notifications & Presence, Appearance, Data & Storage, Sources & Imports, Receipts & History, Diagnostics, Setup & Personalization, and Life Capital entry. Contextual Trust details remain owned by Trust inspection even when searchable archives are reachable through You.
 
+Top-level sections MUST be concise and organized.
+
+Appearance SHOULD offer color, material, mood, and photo options through constrained semantic design-system controls.
+
+You MUST provide a Data center for export, import, reset, deletion, sync, backup, storage, Receipts, History, and account data.
+
+Privacy and Data controls MUST remain distinct in You and MUST use low-scroll drilldowns.
+
+You MUST NOT add a dedicated Help section.
+
+You MUST expose sync status, account status, export, account/data controls, diagnostics, and recovery controls.
+
+Each level MUST be intentionally shallow and compact, usually one viewport or a short grouped list.
+
+You’s plain groups MUST NOT obscure hierarchy or object meaning.
+
+You MUST embed education contextually and MUST NOT create a standalone Help destination.
+
+Appearance controls MUST use semantic design-system controls and MAY offer system, light, dark, accent, material-intensity, built-in-theme, photo-theme, custom-photo, and accessibility appearance choices.
+
 ## SPEC-SURFACE-YOU-FIRST-VIEWPORT-001 — Identity and current state first
 
 - **Concept:** `surface.you.first-viewport`
@@ -69,6 +93,8 @@ You owns Account & Sync, Privacy & Security, Automation & Behavior, Notification
 - **Supersedes:** none
 
 The first viewport MUST show a quiet identity/profile summary, optional account and continuity state, privacy state, automation posture, notification state, data/security shortcuts, and settings search. Only current problems or required actions are elevated; broad stats, patterns, and diagnostics remain deeper and object-specific.
+
+You MUST prioritize local settings, personalization, privacy, learning, Source, Receipts, and account control over social, admin, or generic profile framing.
 
 ## SPEC-SURFACE-YOU-DEPTH-001 — Useful depth without dashboard drift
 
@@ -90,7 +116,74 @@ Life Capital, broad Patterns, learning controls, receipts/history, sync conflict
 - **Verification:** `PROOF-YOU-VISUAL-MAPPING-001`
 - **Supersedes:** none
 
-Visual references MUST use stable external IDs and distinguish approved design target from implementation evidence. Owner-approved VSP-06 package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:240:93` is the You visual target. Its Yellow approval does not prove SwiftUI parity, accessibility, device behavior, account/R2/privacy readiness, runtime behavior, Visual Green, or release status.
+Visual references MUST use stable external IDs and distinguish approved design target from implementation evidence. Owner-approved VSP-06 package `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:240:93` is the You visual target.
+
+## SPEC-SURFACE-YOU-NO-KNOWLEDGE-MODEL-001 — Data control without an AI-memory dashboard
+- **Concept:** `surface.you.no-knowledge-model`
+- **Modality:** `MUST NOT`
+- **Scope:** You, Search, setup, privacy, and learning controls
+- **Status:** `normative`
+- **Verification:** `AUDIT-YOU-NO-KNOWLEDGE-MODEL-001`
+- **Supersedes:** none
+
+You MUST NOT expose a user-facing model of “what Ambitions knows” or present private context as an AI memory dashboard. Searchable privacy, data, learning, automation, export, reset, deletion, sync, backup, storage, Receipt, and History controls remain available through their plain owning sections.
+
+You MUST expose privacy and data controls without presenting an explicit knowledge model that creates anxiety or resembles an AI memory dashboard.
+
+## SPEC-SURFACE-YOU-PROFILE-001 — You profile
+
+- **Concept:** `surface.you.profile`
+- **Modality:** `MUST`
+- **Scope:** User profile controls
+- **Status:** `normative`
+- **Verification:** `SCENARIO-YOU-PROFILE-001`
+- **Supersedes:** none
+
+You MUST present user-owned profile, preference, privacy, continuity, and support controls without turning identity into hosted product authority.
+
+## SPEC-SURFACE-YOU-APPEARANCE-001 — Appearance controls
+
+- **Concept:** `surface.you.appearance`
+- **Modality:** `MUST`
+- **Scope:** Appearance preferences
+- **Status:** `normative`
+- **Verification:** `SCENARIO-YOU-APPEARANCE-001`
+- **Supersedes:** none
+
+Appearance controls MUST preserve system defaults, explicit user overrides, accessibility settings, preview, persistence, reset, and offline behavior.
+
+## SPEC-SURFACE-YOU-DATA-CONTROLS-001 — Data controls
+
+- **Concept:** `surface.you.data-controls`
+- **Modality:** `MUST`
+- **Scope:** User data management
+- **Status:** `normative`
+- **Verification:** `SCENARIO-YOU-DATA-CONTROLS-001`
+- **Supersedes:** none
+
+You data controls MUST expose export, backup, restore, Trash, reset, diagnostics, and continuity consequences with confirmation, progress, recovery, and proof.
+
+## SPEC-SURFACE-YOU-PRIVACY-DATA-BOUNDARY-001 — Privacy and data boundary
+
+- **Concept:** `surface.you.privacy-data-boundary`
+- **Modality:** `MUST`
+- **Scope:** Privacy and continuity controls
+- **Status:** `normative`
+- **Verification:** `SCENARIO-YOU-PRIVACY-DATA-001`
+- **Supersedes:** none
+
+You MUST distinguish local private data, optional account identity, optional continuity, public reference infrastructure, and external-platform data before user action.
+
+## SPEC-SURFACE-YOU-CONTEXTUAL-EDUCATION-001 — Contextual education
+
+- **Concept:** `surface.you.contextual-education`
+- **Modality:** `SHOULD`
+- **Scope:** Settings and unfamiliar states
+- **Status:** `normative`
+- **Verification:** `A11Y-YOU-CONTEXTUAL-EDUCATION-001`
+- **Supersedes:** none
+
+You SHOULD provide concise contextual education at the relevant control or state and MUST NOT require a separate Help destination for discoverability.
 
 ## Completeness contract
 
@@ -153,7 +246,7 @@ The named package controls geometry, hierarchy, composition, states, and adaptiv
 Stable package ID `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:240:93` supplies approved You design authority. Source rendering, privacy/account behavior, accessibility/device evidence, implementation parity, and release proof remain separate.
 
 <!-- canon-section: source-ownership -->
-Canonical target ownership is exact: `Surfaces/You/` owns presentation; `Core/LocalRuntimeOS/PrivacySecurity/`, `Continuity/`, `Inspection/`, and `Diagnostics/` own facts/behavior; app `Diagnostics/` presents redacted health; `Quality/` owns proof. Current source compliance is unclaimed.
+Canonical target ownership is exact: `Surfaces/You/` owns presentation; `Core/LocalRuntimeOS/PrivacySecurity/`, `Continuity/`, `Inspection/`, and `Diagnostics/` own facts/behavior; app `Diagnostics/` presents redacted health; `Quality/` owns proof.
 
 <!-- canon-section: tests -->
 Tests cover grouping/search/deep links, no-account use, privacy boundaries, permission recovery, automation scope, Life Capital impact/archive/delete, sign-out local retention, continuity conflict, export/diagnostic redaction, destructive previews, offline, VoiceOver order/actions, Dynamic Type, reduced effects, contrast, and focus.
@@ -163,4 +256,26 @@ Required proof includes state/scenario logs, privacy-boundary evidence, redacted
 
 <!-- canon-section: performance -->
 Resource behavior is bounded, cancellable, local, and foreground-safe.
-You root loading, settings search, Life Capital/history access, and redacted diagnostics refresh MUST remain bounded and cancellable, perform no interaction-path network gating or synchronous disk I/O, use no polling or unbounded background loop, and preserve foreground responsiveness under Low Power Mode, thermal pressure, protected-data unavailability, and storage pressure. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. Implementation authorization requires an owner-approved performance-registry record declaring device floor, OS, build configuration, representative settings/Life Capital/history data scale, warm/cold state, measurement tool, percentile/maximum, and regression threshold. Current performance and physical-device proof remain absent.
+You root loading, settings search, Life Capital/history access, and redacted diagnostics refresh MUST remain bounded and cancellable, perform no interaction-path network gating or synchronous disk I/O, use no polling or unbounded background loop, and preserve foreground responsiveness under Low Power Mode, thermal pressure, protected-data unavailability, and storage pressure. `GAP-PERFORMANCE-CALIBRATION-SURFACES-GLOBALS-001` records the missing Article 31 calibration. Implementation authorization requires an owner-approved performance-registry record declaring device floor, OS, build configuration, representative settings/Life Capital/history data scale, warm/cold state, measurement tool, percentile/maximum, and regression threshold.
+
+## SPEC-SURFACE-YOU-SETTINGS-DRILLDOWN-001 — Settings drilldown presentation
+
+- **Concept:** `surface.you.settings-drilldown`
+- **Modality:** `MUST`
+- **Scope:** Settings drilldown presentation
+- **Status:** `normative`
+- **Verification:** `REVIEW-SPEC-SURFACE-YOU-SETTINGS-DRILLDOWN-001`
+- **Supersedes:** none
+
+Major settings areas MUST open as focused full-screen native drilldowns with low-scroll, scoped content.
+
+## SPEC-SURFACE-YOU-TIME-PREFERENCES-001 — Time preference inventory
+
+- **Concept:** `surface.you.time-preferences`
+- **Modality:** `MUST`
+- **Scope:** Time preference inventory
+- **Status:** `normative`
+- **Verification:** `REVIEW-SPEC-SURFACE-YOU-TIME-PREFERENCES-001`
+- **Supersedes:** none
+
+You MUST expose searchable Time preferences for week start, time format, working bounds, default duration, alerts, schedule state/reflow rule, time zone, transition buffers, import sources, and visual density.

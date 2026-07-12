@@ -140,7 +140,7 @@ class TrackedEvidenceTests(unittest.TestCase):
                 ),
             )
 
-    def test_valid_clean_archive_entrypoints_pass_tracked_validation(self):
+    def test_clean_archive_builds_structurally_but_semantic_audit_fails_closed(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             shutil.copytree(ROOT / "docs/canon", root / "docs/canon")
@@ -167,10 +167,29 @@ class TrackedEvidenceTests(unittest.TestCase):
                 check=True,
             )
 
-            self.assertEqual(_audit(root), 0)
+            audit_output = io.StringIO()
+            with redirect_stdout(audit_output):
+                self.assertEqual(_audit(root), 0)
+            self.assertIn("GREEN ambitions canon audit", audit_output.getvalue())
             self.assertEqual(build_canon(root, check=True), ())
+            self.assertEqual(canon_cli._build(root, check=True), 0)
             self.assertEqual(report_conflicts(root, require_resolved=False)[0], 0)
-            self.assertEqual(_pack(root, issue_path, check=False), 0)
+            pack_output = io.StringIO()
+            with redirect_stdout(pack_output):
+                self.assertEqual(_pack(root, issue_path, check=False), 0)
+            self.assertIn("SHADOW task pack cannot authorize implementation", pack_output.getvalue())
+
+            semantic_output = io.StringIO()
+            with mock.patch.object(Path, "cwd", return_value=root):
+                with redirect_stdout(semantic_output):
+                    self.assertEqual(
+                        canon_cli.main(["migration", "claims", "semantic-verify"]),
+                        1,
+                    )
+            self.assertIn(
+                "CANON_PROTECTED_SOURCE_MISSING",
+                semantic_output.getvalue(),
+            )
 
     def test_decision_snapshot_sha_changes_fingerprint_and_every_removal_hash(self):
         disposition_path = ROOT / EVIDENCE_PATHS[1]

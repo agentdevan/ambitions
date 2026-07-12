@@ -27,6 +27,14 @@ This shadow journey coordinates closure evidence; owning object specifications r
 
 Closure MUST apply the Proof rule disclosed before the current work began. Required Proof blocks validated closure until user-approved evidence is attached; it cannot appear as a surprise, be graded, be replaced by an automatic Receipt, or be weakened during closure. A predeclared-rule edit applies only to future work because no cited owning law authorizes a current-closure override.
 
+Goal closure SHOULD show a compact review of the path, proof, recovery segments, remaining open items, schedule cleanup, and final receipt.
+
+Completion and closure MUST be distinct where product meaning requires it.
+
+Ambitions SHOULD NOT state that old Proof does not apply.
+
+Ambitions MUST operate on the honor system.
+
 <!-- canon-section: trigger-starting-state -->
 Triggers are completion, Still counts, Goal close/end review, Proof addition, or correction/undo; starting state identifies the canonical object, declared Proof rule, existing evidence, closure options, dependent path effects, and prior Receipts.
 
@@ -45,11 +53,11 @@ Canceling review or Proof selection leaves object, evidence draft, and path unch
 
 <!-- canon-section: interruption-resume -->
 The recovery record binds object identity, closure choice, current-work Proof rule, proof draft, attachment results, consequence fingerprint, and semantic focus.
-Resume the same object, closure option, current-work Proof rule, proof draft, attachment states, consequence preview version, and focus. A separately accepted future-work rule edit does not change the resumed current-work rule; changed dependencies invalidate the preview and require renewed review.
+Resume the same object, closure option, current-work Proof rule, proof draft, attachment states, consequence preview version, and focus. changed dependencies invalidate the preview and require renewed review.
 
 <!-- canon-section: commit-boundary -->
 The closure command validates the canonical object ID, current-work rule fingerprint, evidence IDs, recurrence scope, and consequence fingerprint before local commit.
-Closure choice, Proof draft, and consequence preview are non-durable proposals. Closure becomes durable only after the unchanged current-work rule and evidence validate, explicit confirmation where material, authoritative local commit, projection, and Receipt; attachment persistence or a future-work rule edit does not itself close current work.
+Closure choice, Proof draft, and consequence preview are non-durable proposals. Closure becomes durable only after the unchanged current-work rule and evidence validate, explicit confirmation where material, authoritative local commit, projection, and Receipt;
 
 <!-- canon-section: failure -->
 Missing required Proof, attachment failure, stale object/path, invalid recurrence scope, command rejection, or projection failure preserves the prior honest state and never shows closure success.
@@ -64,7 +72,7 @@ Undo/correction of a committed closure restores prior object and path influence 
 
 <!-- canon-section: receipts-proof -->
 The rule records use distinct scope IDs and history entries, so neither can substitute for the other.
-Proof is user-approved honor-system evidence; Receipt is automatic mutation evidence. The chain records the rule visible before current work, any rejected current-closure attempt, closure choice/scope, evidence linkage, local commit, downstream changes, undo/correction, and external state without grading Proof. Separate history records a future-work rule edit and proves it did not alter the current closure.
+Proof is user-approved honor-system evidence; Receipt is automatic mutation evidence. The chain records the rule visible before current work, any rejected current-closure attempt, closure choice/scope, evidence linkage, local commit, downstream changes, undo/correction, and external state without grading Proof.
 
 <!-- canon-section: accessibility -->
 Semantics expose object, closure choice, proof rule/status, attachments, downstream consequences, confirmation, and recovery; evidence actions have labels/status, comparisons are verbalized, Dynamic Type stacks content, reduced motion preserves sequence, and focus returns to the object or failed field.

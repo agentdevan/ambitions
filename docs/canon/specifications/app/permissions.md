@@ -33,7 +33,7 @@ source_owners = [
 
 # Contextual Permissions
 
-This shadow specification defines permission request, denial, recovery, and reconciliation behavior. It does not grant a permission, approve a data flow, or prove current platform configuration, privacy review, accessibility, or release readiness.
+This shadow specification defines permission request, denial, recovery, and reconciliation behavior.
 
 ## APP-PERMISSIONS-CONTRACT-001 — Every request explains its boundary
 
@@ -46,6 +46,8 @@ This shadow specification defines permission request, denial, recovery, and reco
 
 Every permission request MUST occur in the context of a user-understandable feature and state: what the feature needs, what Ambitions reads or writes, what remains available without permission, and where the choice can later be changed. The app asks only when the capability is relevant and the user has a meaningful choice. Setup may explain a future capability but cannot batch-request unrelated access or treat consent as mandatory product completion.
 
+Ambitions MUST NOT open with a permission wall.
+
 ## APP-PERMISSION-DENIAL-001 — Denial preserves useful local behavior
 
 - **Concept:** `app.permissions.denied-fallback`
@@ -56,6 +58,8 @@ Every permission request MUST occur in the context of a user-understandable feat
 - **Supersedes:** none
 
 Denial MUST produce a useful degraded state rather than a dead end. The owning feature continues with local manual entry, local-only content, reduced integration, or another explicitly specified fallback. The app does not repeatedly prompt, shame, conceal core actions, or imply that denied access erased existing Ambitions-owned data.
+
+Prompts MUST be contextual and explain value.
 
 ## APP-PERMISSION-STATE-001 — Permission state remains distinct from feature data
 
@@ -121,7 +125,7 @@ Permission interpretation, local fallback, and Settings recovery require no acco
 Given the same platform state, request history, feature need, and explicit user action, the permission system produces the same request eligibility and fallback. It does not infer consent from usage, setup completion, or account state.
 
 <!-- canon-section: observability -->
-Evidence records permission class, prior and current authorization, request decision, fallback selected, Settings handoff, and reconciliation result without protected resource content. Any privacy or readiness claim still requires current scoped proof and approval.
+Evidence records permission class, prior and current authorization, request decision, fallback selected, Settings handoff, and reconciliation result without protected resource content.
 
 <!-- canon-section: source-ownership -->
 `Core/Permissions/` maps platform authorization and request coordination; LocalRuntimeOS Boundary and PrivacySecurity enforce capability and egress law; You owns global discoverability and repair; `Quality/` owns verification. Existing files are implementation evidence only.
@@ -130,4 +134,4 @@ Evidence records permission class, prior and current authorization, request deci
 Required proof covers every state transition, first request, denial, repeated denial without nagging, restriction, limited access where supported, revocation, Settings return, foreground reconciliation, offline fallback, local-data preservation, VoiceOver explanation/actions, Dynamic Type, and focus restoration.
 
 <!-- canon-section: performance-resource-constraints -->
-For 8 declared permission classes on the oldest supported physical iPhone in an optimized build, cached authorization lookup MUST complete within 10 ms at P95, a platform-state refresh excluding system-owned prompt time within 100 ms at P95, and foreground reconciliation within 250 ms at P95 across 1,000 checks. The reconciliation queue MUST cap at 8 classes and coalesce duplicate lifecycle signals. One thousand checks MUST add no more than 2 MiB resident memory and perform zero network calls and zero synchronous disk writes. A failed platform read may retry once per foreground transition; further retry requires a new lifecycle event or user action. Permission coordination MUST not poll in foreground or background. Current device, platform, latency, memory, and energy proof is not claimed.
+For 8 declared permission classes on the oldest supported physical iPhone in an optimized build, cached authorization lookup MUST complete within 10 ms at P95, a platform-state refresh excluding system-owned prompt time within 100 ms at P95, and foreground reconciliation within 250 ms at P95 across 1,000 checks. The reconciliation queue MUST cap at 8 classes and coalesce duplicate lifecycle signals. One thousand checks MUST add no more than 2 MiB resident memory and perform zero network calls and zero synchronous disk writes. A failed platform read may retry once per foreground transition; further retry requires a new lifecycle event or user action. Permission coordination MUST not poll in foreground or background.
