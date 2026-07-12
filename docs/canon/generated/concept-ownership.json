@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "6e2453eb459b472cca38af5f9cad2562a27c577343ce559741e8bd92c02e01ac",
+  "canon_content_sha": "4dc5e1743928aa134eeccb5be77340294c15f48c8f77e6814db028c36197dfee",
   "canon_revision": 1,
   "compiler_version": "0.1.0",
   "concepts": [
@@ -185,12 +185,76 @@
       "spec_id": "CONSTITUTION"
     },
     {
+      "concept": "global.capture.draft-recovery",
+      "spec_id": "GLOBAL-CAPTURE"
+    },
+    {
+      "concept": "global.capture.identity",
+      "spec_id": "GLOBAL-CAPTURE"
+    },
+    {
+      "concept": "global.capture.keyboard",
+      "spec_id": "GLOBAL-CAPTURE"
+    },
+    {
+      "concept": "global.capture.proposal-flow",
+      "spec_id": "GLOBAL-CAPTURE"
+    },
+    {
+      "concept": "global.capture.saved-for-later",
+      "spec_id": "GLOBAL-CAPTURE"
+    },
+    {
+      "concept": "global.capture.visual-authority",
+      "spec_id": "GLOBAL-CAPTURE"
+    },
+    {
       "concept": "global.motion-capture-ownership",
       "spec_id": "CONSTITUTION"
     },
     {
+      "concept": "global.motion.accessibility",
+      "spec_id": "GLOBAL-MOTION"
+    },
+    {
+      "concept": "global.motion.responsibility",
+      "spec_id": "GLOBAL-MOTION"
+    },
+    {
+      "concept": "global.motion.state-continuity",
+      "spec_id": "GLOBAL-MOTION"
+    },
+    {
+      "concept": "global.search.first-viewport",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.identity",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.index-actions",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.visual-authority",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
       "concept": "global.trust-ownership",
       "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "global.trust.identity",
+      "spec_id": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
+      "concept": "global.trust.layers",
+      "spec_id": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
+      "concept": "global.trust.visual-authority",
+      "spec_id": "GLOBAL-TRUST-INSPECTION"
     },
     {
       "concept": "history.supersession",
@@ -389,16 +453,112 @@
       "spec_id": "CONSTITUTION"
     },
     {
+      "concept": "surface.goals.anti-patterns",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
+      "concept": "surface.goals.first-viewport",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
+      "concept": "surface.goals.identity",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
+      "concept": "surface.goals.purpose",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
+      "concept": "surface.goals.screen-inventory",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
+      "concept": "surface.goals.visual-authority",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
       "concept": "surface.time-external-visibility",
       "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "surface.time.day",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.first-viewport",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.primary-identity",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.purpose",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.views",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
+      "concept": "surface.time.visual-authority",
+      "spec_id": "SURFACE-TIME"
     },
     {
       "concept": "surface.today-primary-identity",
       "spec_id": "CONSTITUTION"
     },
     {
+      "concept": "surface.today.eligibility",
+      "spec_id": "SURFACE-TODAY"
+    },
+    {
+      "concept": "surface.today.first-viewport",
+      "spec_id": "SURFACE-TODAY"
+    },
+    {
+      "concept": "surface.today.purpose",
+      "spec_id": "SURFACE-TODAY"
+    },
+    {
+      "concept": "surface.today.screen-inventory",
+      "spec_id": "SURFACE-TODAY"
+    },
+    {
+      "concept": "surface.today.states",
+      "spec_id": "SURFACE-TODAY"
+    },
+    {
+      "concept": "surface.today.temporal-rail",
+      "spec_id": "SURFACE-TODAY"
+    },
+    {
+      "concept": "surface.today.visual-authority",
+      "spec_id": "SURFACE-TODAY"
+    },
+    {
       "concept": "surface.you-depth",
       "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "surface.you.depth",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
+      "concept": "surface.you.first-viewport",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
+      "concept": "surface.you.identity",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
+      "concept": "surface.you.screen-inventory",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
+      "concept": "surface.you.visual-authority",
+      "spec_id": "SURFACE-YOU"
     }
   ],
   "schema_version": 1

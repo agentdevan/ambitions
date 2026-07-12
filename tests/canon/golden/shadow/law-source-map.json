@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "6e2453eb459b472cca38af5f9cad2562a27c577343ce559741e8bd92c02e01ac",
+  "canon_content_sha": "4dc5e1743928aa134eeccb5be77340294c15f48c8f77e6814db028c36197dfee",
   "canon_revision": 1,
   "compiler_version": "0.1.0",
   "mappings": [
@@ -596,6 +596,441 @@
         "Native/Ambitions/Stage/"
       ],
       "requirement_id": "SPEC-APP-SHELL-ROOT-NAVIGATION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Composer/Capture/",
+        "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "SPEC-GLOBAL-CAPTURE-DRAFT-RECOVERY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Composer/Capture/",
+        "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "SPEC-GLOBAL-CAPTURE-IDENTITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Composer/Capture/",
+        "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "SPEC-GLOBAL-CAPTURE-KEYBOARD-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Composer/Capture/",
+        "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "SPEC-GLOBAL-CAPTURE-PROPOSAL-FLOW-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Composer/Capture/",
+        "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "SPEC-GLOBAL-CAPTURE-SAVED-FOR-LATER-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Composer/Capture/",
+        "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/Motion/"
+      ],
+      "requirement_id": "SPEC-GLOBAL-MOTION-ACCESSIBILITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/Motion/"
+      ],
+      "requirement_id": "SPEC-GLOBAL-MOTION-RESPONSIBILITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/Motion/"
+      ],
+      "requirement_id": "SPEC-GLOBAL-MOTION-STATE-CONTINUITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-FIRST-VIEWPORT-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-IDENTITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-INDEX-ACTIONS-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Language/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "SPEC-GLOBAL-TRUST-INSPECTION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Language/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "SPEC-GLOBAL-TRUST-LAYERS-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Language/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/"
+      ],
+      "requirement_id": "SPEC-SURFACE-GOALS-ANTI-PATTERNS-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/"
+      ],
+      "requirement_id": "SPEC-SURFACE-GOALS-FIRST-VIEWPORT-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/"
+      ],
+      "requirement_id": "SPEC-SURFACE-GOALS-IDENTITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/"
+      ],
+      "requirement_id": "SPEC-SURFACE-GOALS-PURPOSE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/"
+      ],
+      "requirement_id": "SPEC-SURFACE-GOALS-SCREEN-INVENTORY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/Domain/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/"
+      ],
+      "requirement_id": "SPEC-SURFACE-GOALS-VISUAL-AUTHORITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/Time/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "SPEC-SURFACE-TIME-DAY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/Time/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "SPEC-SURFACE-TIME-FIRST-VIEWPORT-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/Time/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "SPEC-SURFACE-TIME-PRIMARY-IDENTITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/Time/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "SPEC-SURFACE-TIME-PURPOSE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/Time/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "SPEC-SURFACE-TIME-VIEWS-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/Time/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "SPEC-SURFACE-TIME-VISUAL-AUTHORITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Today/"
+      ],
+      "requirement_id": "SPEC-SURFACE-TODAY-ELIGIBILITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Today/"
+      ],
+      "requirement_id": "SPEC-SURFACE-TODAY-FIRST-VIEWPORT-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Today/"
+      ],
+      "requirement_id": "SPEC-SURFACE-TODAY-PURPOSE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Today/"
+      ],
+      "requirement_id": "SPEC-SURFACE-TODAY-SCREEN-INVENTORY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Today/"
+      ],
+      "requirement_id": "SPEC-SURFACE-TODAY-STATES-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Today/"
+      ],
+      "requirement_id": "SPEC-SURFACE-TODAY-TEMPORAL-RAIL-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Today/"
+      ],
+      "requirement_id": "SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SPEC-SURFACE-YOU-DEPTH-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SPEC-SURFACE-YOU-FIRST-VIEWPORT-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SPEC-SURFACE-YOU-IDENTITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SPEC-SURFACE-YOU-SCREEN-INVENTORY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001"
     },
     {
       "references": [],

@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "6e2453eb459b472cca38af5f9cad2562a27c577343ce559741e8bd92c02e01ac",
+  "canon_content_sha": "4dc5e1743928aa134eeccb5be77340294c15f48c8f77e6814db028c36197dfee",
   "canon_revision": 1,
   "compiler_version": "0.1.0",
   "documents": [
@@ -66,6 +66,78 @@
       "spec_id": "CONSTITUTION",
       "status": "normative",
       "title": "Ambitions Constitution"
+    },
+    {
+      "kind": "global",
+      "owner_domain": "global-capture",
+      "profile": "surface-v1",
+      "source_path": "docs/canon/specifications/global/capture.md",
+      "spec_id": "GLOBAL-CAPTURE",
+      "status": "normative",
+      "title": "Capture"
+    },
+    {
+      "kind": "global",
+      "owner_domain": "global-motion",
+      "profile": "system-v1",
+      "source_path": "docs/canon/specifications/global/motion.md",
+      "spec_id": "GLOBAL-MOTION",
+      "status": "normative",
+      "title": "Motion"
+    },
+    {
+      "kind": "global",
+      "owner_domain": "global-search",
+      "profile": "surface-v1",
+      "source_path": "docs/canon/specifications/global/search.md",
+      "spec_id": "GLOBAL-SEARCH",
+      "status": "normative",
+      "title": "Search"
+    },
+    {
+      "kind": "global",
+      "owner_domain": "global-trust-inspection",
+      "profile": "surface-v1",
+      "source_path": "docs/canon/specifications/global/trust-inspection.md",
+      "spec_id": "GLOBAL-TRUST-INSPECTION",
+      "status": "normative",
+      "title": "Trust Inspection"
+    },
+    {
+      "kind": "surface",
+      "owner_domain": "surface-goals",
+      "profile": "surface-v1",
+      "source_path": "docs/canon/specifications/surfaces/goals.md",
+      "spec_id": "SURFACE-GOALS",
+      "status": "normative",
+      "title": "Goals"
+    },
+    {
+      "kind": "surface",
+      "owner_domain": "surface-time",
+      "profile": "surface-v1",
+      "source_path": "docs/canon/specifications/surfaces/time.md",
+      "spec_id": "SURFACE-TIME",
+      "status": "normative",
+      "title": "Time"
+    },
+    {
+      "kind": "surface",
+      "owner_domain": "surface-today",
+      "profile": "surface-v1",
+      "source_path": "docs/canon/specifications/surfaces/today.md",
+      "spec_id": "SURFACE-TODAY",
+      "status": "normative",
+      "title": "Today"
+    },
+    {
+      "kind": "surface",
+      "owner_domain": "surface-you",
+      "profile": "surface-v1",
+      "source_path": "docs/canon/specifications/surfaces/you.md",
+      "spec_id": "SURFACE-YOU",
+      "status": "normative",
+      "title": "You"
     }
   ],
   "requirements": [
@@ -941,6 +1013,366 @@
       "source_path": "docs/canon/specifications/app/shell.md",
       "status": "normative",
       "title": "Root-depth shell ownership"
+    },
+    {
+      "concept": "global.capture.draft-recovery",
+      "line": 71,
+      "modality": "MUST",
+      "requirement_id": "SPEC-GLOBAL-CAPTURE-DRAFT-RECOVERY-001",
+      "source_path": "docs/canon/specifications/global/capture.md",
+      "status": "normative",
+      "title": "Original input survives every branch"
+    },
+    {
+      "concept": "global.capture.identity",
+      "line": 38,
+      "modality": "MUST",
+      "requirement_id": "SPEC-GLOBAL-CAPTURE-IDENTITY-001",
+      "source_path": "docs/canon/specifications/global/capture.md",
+      "status": "normative",
+      "title": "Global durable composer"
+    },
+    {
+      "concept": "global.capture.keyboard",
+      "line": 49,
+      "modality": "MUST",
+      "requirement_id": "SPEC-GLOBAL-CAPTURE-KEYBOARD-001",
+      "source_path": "docs/canon/specifications/global/capture.md",
+      "status": "normative",
+      "title": "Composer remains primary with keyboard present"
+    },
+    {
+      "concept": "global.capture.proposal-flow",
+      "line": 82,
+      "modality": "MUST",
+      "requirement_id": "SPEC-GLOBAL-CAPTURE-PROPOSAL-FLOW-001",
+      "source_path": "docs/canon/specifications/global/capture.md",
+      "status": "normative",
+      "title": "Adaptive complexity without interrogation"
+    },
+    {
+      "concept": "global.capture.saved-for-later",
+      "line": 60,
+      "modality": "MUST",
+      "requirement_id": "SPEC-GLOBAL-CAPTURE-SAVED-FOR-LATER-001",
+      "source_path": "docs/canon/specifications/global/capture.md",
+      "status": "normative",
+      "title": "Unresolved state, never destination"
+    },
+    {
+      "concept": "global.capture.visual-authority",
+      "line": 93,
+      "modality": "MUST",
+      "requirement_id": "SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001",
+      "source_path": "docs/canon/specifications/global/capture.md",
+      "status": "normative",
+      "title": "Approved Capture package, separate implementation proof"
+    },
+    {
+      "concept": "global.motion.accessibility",
+      "line": 55,
+      "modality": "MUST",
+      "requirement_id": "SPEC-GLOBAL-MOTION-ACCESSIBILITY-001",
+      "source_path": "docs/canon/specifications/global/motion.md",
+      "status": "normative",
+      "title": "Semantic and reduced alternatives are complete"
+    },
+    {
+      "concept": "global.motion.responsibility",
+      "line": 33,
+      "modality": "MUST",
+      "requirement_id": "SPEC-GLOBAL-MOTION-RESPONSIBILITY-001",
+      "source_path": "docs/canon/specifications/global/motion.md",
+      "status": "normative",
+      "title": "Behavior, never destination"
+    },
+    {
+      "concept": "global.motion.state-continuity",
+      "line": 44,
+      "modality": "MUST",
+      "requirement_id": "SPEC-GLOBAL-MOTION-STATE-CONTINUITY-001",
+      "source_path": "docs/canon/specifications/global/motion.md",
+      "status": "normative",
+      "title": "Animation follows durable state"
+    },
+    {
+      "concept": "global.search.first-viewport",
+      "line": 47,
+      "modality": "MUST",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-FIRST-VIEWPORT-001",
+      "source_path": "docs/canon/specifications/global/search.md",
+      "status": "normative",
+      "title": "Query and useful local results first"
+    },
+    {
+      "concept": "global.search.identity",
+      "line": 36,
+      "modality": "MUST",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-IDENTITY-001",
+      "source_path": "docs/canon/specifications/global/search.md",
+      "status": "normative",
+      "title": "Local Find / Act / Inspect"
+    },
+    {
+      "concept": "global.search.index-actions",
+      "line": 58,
+      "modality": "MUST",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-INDEX-ACTIONS-001",
+      "source_path": "docs/canon/specifications/global/search.md",
+      "status": "normative",
+      "title": "One index, canonical actions"
+    },
+    {
+      "concept": "global.search.visual-authority",
+      "line": 69,
+      "modality": "MUST",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001",
+      "source_path": "docs/canon/specifications/global/search.md",
+      "status": "normative",
+      "title": "Search mapping is a scoped gap"
+    },
+    {
+      "concept": "global.trust.identity",
+      "line": 35,
+      "modality": "MUST",
+      "requirement_id": "SPEC-GLOBAL-TRUST-INSPECTION-001",
+      "source_path": "docs/canon/specifications/global/trust-inspection.md",
+      "status": "normative",
+      "title": "Contextual Proof / Source / Privacy / History / Receipts"
+    },
+    {
+      "concept": "global.trust.layers",
+      "line": 46,
+      "modality": "MUST",
+      "requirement_id": "SPEC-GLOBAL-TRUST-LAYERS-001",
+      "source_path": "docs/canon/specifications/global/trust-inspection.md",
+      "status": "normative",
+      "title": "Disclosure expands only as needed"
+    },
+    {
+      "concept": "global.trust.visual-authority",
+      "line": 57,
+      "modality": "MUST",
+      "requirement_id": "SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001",
+      "source_path": "docs/canon/specifications/global/trust-inspection.md",
+      "status": "normative",
+      "title": "Approved Trust package preserves evidence distinctions"
+    },
+    {
+      "concept": "surface.goals.anti-patterns",
+      "line": 51,
+      "modality": "MUST NOT",
+      "requirement_id": "SPEC-SURFACE-GOALS-ANTI-PATTERNS-001",
+      "source_path": "docs/canon/specifications/surfaces/goals.md",
+      "status": "normative",
+      "title": "No dashboard or project board drift"
+    },
+    {
+      "concept": "surface.goals.first-viewport",
+      "line": 73,
+      "modality": "MUST",
+      "requirement_id": "SPEC-SURFACE-GOALS-FIRST-VIEWPORT-001",
+      "source_path": "docs/canon/specifications/surfaces/goals.md",
+      "status": "normative",
+      "title": "Direction before metadata"
+    },
+    {
+      "concept": "surface.goals.identity",
+      "line": 40,
+      "modality": "MUST",
+      "requirement_id": "SPEC-SURFACE-GOALS-IDENTITY-001",
+      "source_path": "docs/canon/specifications/surfaces/goals.md",
+      "status": "normative",
+      "title": "Life-area-first direction and path"
+    },
+    {
+      "concept": "surface.goals.purpose",
+      "line": 84,
+      "modality": "MUST",
+      "requirement_id": "SPEC-SURFACE-GOALS-PURPOSE-001",
+      "source_path": "docs/canon/specifications/surfaces/goals.md",
+      "status": "normative",
+      "title": "Full path that adapts without forcing"
+    },
+    {
+      "concept": "surface.goals.screen-inventory",
+      "line": 62,
+      "modality": "MUST",
+      "requirement_id": "SPEC-SURFACE-GOALS-SCREEN-INVENTORY-001",
+      "source_path": "docs/canon/specifications/surfaces/goals.md",
+      "status": "normative",
+      "title": "Owned Goal experience"
+    },
+    {
+      "concept": "surface.goals.visual-authority",
+      "line": 95,
+      "modality": "MUST",
+      "requirement_id": "SPEC-SURFACE-GOALS-VISUAL-AUTHORITY-001",
+      "source_path": "docs/canon/specifications/surfaces/goals.md",
+      "status": "normative",
+      "title": "Approved Goals package, separate implementation proof"
+    },
+    {
+      "concept": "surface.time.day",
+      "line": 62,
+      "modality": "MUST",
+      "requirement_id": "SPEC-SURFACE-TIME-DAY-001",
+      "source_path": "docs/canon/specifications/surfaces/time.md",
+      "status": "normative",
+      "title": "Direct, inspectable day planning"
+    },
+    {
+      "concept": "surface.time.first-viewport",
+      "line": 73,
+      "modality": "MUST",
+      "requirement_id": "SPEC-SURFACE-TIME-FIRST-VIEWPORT-001",
+      "source_path": "docs/canon/specifications/surfaces/time.md",
+      "status": "normative",
+      "title": "Temporal reality before controls"
+    },
+    {
+      "concept": "surface.time.primary-identity",
+      "line": 40,
+      "modality": "MUST",
+      "requirement_id": "SPEC-SURFACE-TIME-PRIMARY-IDENTITY-001",
+      "source_path": "docs/canon/specifications/surfaces/time.md",
+      "status": "normative",
+      "title": "First-class Life Calendar target"
+    },
+    {
+      "concept": "surface.time.purpose",
+      "line": 84,
+      "modality": "MUST",
+      "requirement_id": "SPEC-SURFACE-TIME-PURPOSE-001",
+      "source_path": "docs/canon/specifications/surfaces/time.md",
+      "status": "normative",
+      "title": "Fit, consequence, and user authority"
+    },
+    {
+      "concept": "surface.time.views",
+      "line": 51,
+      "modality": "MUST",
+      "requirement_id": "SPEC-SURFACE-TIME-VIEWS-001",
+      "source_path": "docs/canon/specifications/surfaces/time.md",
+      "status": "normative",
+      "title": "Calendar-grade view family"
+    },
+    {
+      "concept": "surface.time.visual-authority",
+      "line": 95,
+      "modality": "MUST",
+      "requirement_id": "SPEC-SURFACE-TIME-VISUAL-AUTHORITY-001",
+      "source_path": "docs/canon/specifications/surfaces/time.md",
+      "status": "normative",
+      "title": "Approved Time package, separate implementation proof"
+    },
+    {
+      "concept": "surface.today.eligibility",
+      "line": 61,
+      "modality": "MUST",
+      "requirement_id": "SPEC-SURFACE-TODAY-ELIGIBILITY-001",
+      "source_path": "docs/canon/specifications/surfaces/today.md",
+      "status": "normative",
+      "title": "Execution-relevant projection only"
+    },
+    {
+      "concept": "surface.today.first-viewport",
+      "line": 83,
+      "modality": "MUST",
+      "requirement_id": "SPEC-SURFACE-TODAY-FIRST-VIEWPORT-001",
+      "source_path": "docs/canon/specifications/surfaces/today.md",
+      "status": "normative",
+      "title": "Start here dominates"
+    },
+    {
+      "concept": "surface.today.purpose",
+      "line": 39,
+      "modality": "MUST",
+      "requirement_id": "SPEC-SURFACE-TODAY-PURPOSE-001",
+      "source_path": "docs/canon/specifications/surfaces/today.md",
+      "status": "normative",
+      "title": "Reality around now"
+    },
+    {
+      "concept": "surface.today.screen-inventory",
+      "line": 72,
+      "modality": "MUST",
+      "requirement_id": "SPEC-SURFACE-TODAY-SCREEN-INVENTORY-001",
+      "source_path": "docs/canon/specifications/surfaces/today.md",
+      "status": "normative",
+      "title": "Root and owned depth"
+    },
+    {
+      "concept": "surface.today.states",
+      "line": 94,
+      "modality": "MUST",
+      "requirement_id": "SPEC-SURFACE-TODAY-STATES-001",
+      "source_path": "docs/canon/specifications/surfaces/today.md",
+      "status": "normative",
+      "title": "Calm complete state set"
+    },
+    {
+      "concept": "surface.today.temporal-rail",
+      "line": 50,
+      "modality": "MUST",
+      "requirement_id": "SPEC-SURFACE-TODAY-TEMPORAL-RAIL-001",
+      "source_path": "docs/canon/specifications/surfaces/today.md",
+      "status": "normative",
+      "title": "Supporting temporal anatomy"
+    },
+    {
+      "concept": "surface.today.visual-authority",
+      "line": 105,
+      "modality": "MUST",
+      "requirement_id": "SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001",
+      "source_path": "docs/canon/specifications/surfaces/today.md",
+      "status": "normative",
+      "title": "Approved Today package, separate implementation proof"
+    },
+    {
+      "concept": "surface.you.depth",
+      "line": 73,
+      "modality": "MUST",
+      "requirement_id": "SPEC-SURFACE-YOU-DEPTH-001",
+      "source_path": "docs/canon/specifications/surfaces/you.md",
+      "status": "normative",
+      "title": "Useful depth without dashboard drift"
+    },
+    {
+      "concept": "surface.you.first-viewport",
+      "line": 62,
+      "modality": "MUST",
+      "requirement_id": "SPEC-SURFACE-YOU-FIRST-VIEWPORT-001",
+      "source_path": "docs/canon/specifications/surfaces/you.md",
+      "status": "normative",
+      "title": "Identity and current state first"
+    },
+    {
+      "concept": "surface.you.identity",
+      "line": 40,
+      "modality": "MUST",
+      "requirement_id": "SPEC-SURFACE-YOU-IDENTITY-001",
+      "source_path": "docs/canon/specifications/surfaces/you.md",
+      "status": "normative",
+      "title": "Searchable personal-system command center"
+    },
+    {
+      "concept": "surface.you.screen-inventory",
+      "line": 51,
+      "modality": "MUST",
+      "requirement_id": "SPEC-SURFACE-YOU-SCREEN-INVENTORY-001",
+      "source_path": "docs/canon/specifications/surfaces/you.md",
+      "status": "normative",
+      "title": "Plain groups with owned depth"
+    },
+    {
+      "concept": "surface.you.visual-authority",
+      "line": 84,
+      "modality": "MUST",
+      "requirement_id": "SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001",
+      "source_path": "docs/canon/specifications/surfaces/you.md",
+      "status": "normative",
+      "title": "Approved You package, separate implementation proof"
     },
     {
       "concept": "surface.today-primary-identity",

@@ -277,6 +277,65 @@ class ProfileTests(unittest.TestCase):
             (),
         )
 
+    def test_global_kind_allows_presented_surface_or_cross_surface_system_profile(self):
+        profiles = load_profiles(PROFILE_PATH)
+        for profile in ("surface-v1", "system-v1"):
+            sections = "\n".join(
+                f"<!-- canon-section: {section} -->\nDefined {section}."
+                for section in EXPECTED_PROFILES[profile]
+            )
+            document = document_from_text(
+                "+++\n"
+                f'spec_id = "GLOBAL-{profile.upper()}"\n'
+                f'title = "Global {profile}"\n'
+                'kind = "global"\n'
+                'status = "normative"\n'
+                'owner_domain = "global"\n'
+                "canon_revision = 1\n"
+                f'profile = "{profile}"\n'
+                f'owns_concepts = ["global.{profile}"]\n'
+                "inherits = []\n"
+                "depends_on = []\n"
+                "source_owners = []\n"
+                "+++\n\n"
+                f"{sections}\n"
+            )
+
+            self.assertEqual(coverage_findings(registry(document), profiles), ())
+
+    def test_global_kind_rejects_non_global_completeness_profiles(self):
+        profiles = load_profiles(PROFILE_PATH)
+        for profile in ("object-v1", "journey-v1", "standard-v1"):
+            with self.subTest(profile=profile):
+                sections = "\n".join(
+                    f"<!-- canon-section: {section} -->\nDefined {section}."
+                    for section in EXPECTED_PROFILES[profile]
+                )
+                document = document_from_text(
+                    "+++\n"
+                    f'spec_id = "GLOBAL-REJECT-{profile.upper()}"\n'
+                    f'title = "Global reject {profile}"\n'
+                    'kind = "global"\n'
+                    'status = "normative"\n'
+                    'owner_domain = "global"\n'
+                    "canon_revision = 1\n"
+                    f'profile = "{profile}"\n'
+                    f'owns_concepts = ["global.reject-{profile}"]\n'
+                    "inherits = []\n"
+                    "depends_on = []\n"
+                    "source_owners = []\n"
+                    "+++\n\n"
+                    f"{sections}\n"
+                )
+
+                findings = coverage_findings(registry(document), profiles)
+                self.assertEqual(len(findings), 1)
+                self.assertEqual(findings[0].code, "CANON_PROFILE_KIND_MISMATCH")
+                self.assertIn(
+                    "expected=surface-v1,system-v1",
+                    findings[0].message,
+                )
+
 
 class CoverageTests(unittest.TestCase):
     def setUp(self):
@@ -1281,7 +1340,7 @@ class CoverageCliTests(unittest.TestCase):
         self.assertEqual(result, 0)
         self.assertEqual(
             output.getvalue(),
-            "GREEN ambitions canon coverage documents=7 profiles=5 "
+            "GREEN ambitions canon coverage documents=15 profiles=5 "
             "authority_state=shadow\n",
         )
 

@@ -77,6 +77,7 @@ PROFILE_REQUIRED_KINDS = frozenset(
     {
         DocumentKind.APP,
         DocumentKind.SURFACE,
+        DocumentKind.GLOBAL,
         DocumentKind.OBJECT,
         DocumentKind.JOURNEY,
         DocumentKind.SYSTEM,
@@ -93,6 +94,7 @@ PROFILE_BY_KIND: Mapping[DocumentKind, str] = MappingProxyType(
         DocumentKind.STANDARD: "standard-v1",
     }
 )
+GLOBAL_PROFILES = frozenset({"surface-v1", "system-v1"})
 SECTION_KEY = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 SECTION_MARKER = re.compile(r"^<!--\s*canon-section:\s*([a-z0-9-]+)\s*-->$")
 FENCE_START = re.compile(r"^\s*(`{3,}|~{3,})")
@@ -628,14 +630,19 @@ def coverage_findings(
             )
             continue
         expected_profile = PROFILE_BY_KIND.get(document.kind)
-        if document.profile in PROFILE_NAMES and document.profile != expected_profile:
+        allowed_profiles = (
+            GLOBAL_PROFILES
+            if document.kind is DocumentKind.GLOBAL
+            else frozenset({expected_profile})
+        )
+        if document.profile in PROFILE_NAMES and document.profile not in allowed_profiles:
             findings.append(
                 _coverage_finding(
                     document,
                     "CANON_PROFILE_KIND_MISMATCH",
                     (
                         f"profile={document.profile} does not match kind={document.kind.value}; "
-                        f"expected={expected_profile or 'none'}"
+                        f"expected={','.join(sorted(value for value in allowed_profiles if value)) or 'none'}"
                     ),
                 )
             )

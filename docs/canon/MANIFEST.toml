@@ -10,6 +10,14 @@ normative_files = [
   "specifications/app/navigation.md",
   "specifications/app/permissions.md",
   "specifications/app/shell.md",
+  "specifications/global/capture.md",
+  "specifications/global/motion.md",
+  "specifications/global/search.md",
+  "specifications/global/trust-inspection.md",
+  "specifications/surfaces/goals.md",
+  "specifications/surfaces/time.md",
+  "specifications/surfaces/today.md",
+  "specifications/surfaces/you.md",
 ]
 
 generated_files = [

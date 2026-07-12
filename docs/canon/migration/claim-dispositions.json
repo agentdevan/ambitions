@@ -4049,7 +4049,7 @@
       "source_id": "LINEAR-CANON-V3",
       "source_location": "line:543",
       "target_class": "specification",
-      "target_id": "GLOBAL-SEARCH-FIRST-VIEWPORT-001"
+      "target_id": "SPEC-GLOBAL-SEARCH-FIRST-VIEWPORT-001"
     },
     {
       "authority_claim": false,

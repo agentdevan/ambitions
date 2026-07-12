@@ -6,14 +6,14 @@
 - Canon revision: `1`
 - Authority state: `shadow`
 - Compiler version: `0.1.0`
-- Canon content SHA: `6e2453eb459b472cca38af5f9cad2562a27c577343ce559741e8bd92c02e01ac`
+- Canon content SHA: `4dc5e1743928aa134eeccb5be77340294c15f48c8f77e6814db028c36197dfee`
 
 This generated surface is shadow-only until authority cutover.
 
 ## Registry summary
 
-- Specifications: 7
-- Requirements: 100
-- Concept owners: 99
+- Specifications: 15
+- Requirements: 140
+- Concept owners: 139
 
 Run `python3 scripts/ambitions-canon.py audit` before relying on this registry.

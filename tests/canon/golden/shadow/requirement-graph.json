@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "6e2453eb459b472cca38af5f9cad2562a27c577343ce559741e8bd92c02e01ac",
+  "canon_content_sha": "4dc5e1743928aa134eeccb5be77340294c15f48c8f77e6814db028c36197dfee",
   "canon_revision": 1,
   "compiler_version": "0.1.0",
   "document_edges": [
@@ -50,6 +50,114 @@
     },
     {
       "from": "APP-SHELL",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "GLOBAL-CAPTURE",
+      "to": "APP-NAVIGATION"
+    },
+    {
+      "from": "GLOBAL-CAPTURE",
+      "to": "APP-PERMISSIONS"
+    },
+    {
+      "from": "GLOBAL-CAPTURE",
+      "to": "APP-SHELL"
+    },
+    {
+      "from": "GLOBAL-CAPTURE",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "GLOBAL-MOTION",
+      "to": "APP-NAVIGATION"
+    },
+    {
+      "from": "GLOBAL-MOTION",
+      "to": "APP-SHELL"
+    },
+    {
+      "from": "GLOBAL-MOTION",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "GLOBAL-SEARCH",
+      "to": "APP-NAVIGATION"
+    },
+    {
+      "from": "GLOBAL-SEARCH",
+      "to": "APP-SHELL"
+    },
+    {
+      "from": "GLOBAL-SEARCH",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "GLOBAL-TRUST-INSPECTION",
+      "to": "APP-NAVIGATION"
+    },
+    {
+      "from": "GLOBAL-TRUST-INSPECTION",
+      "to": "APP-SHELL"
+    },
+    {
+      "from": "GLOBAL-TRUST-INSPECTION",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "SURFACE-GOALS",
+      "to": "APP-NAVIGATION"
+    },
+    {
+      "from": "SURFACE-GOALS",
+      "to": "APP-SHELL"
+    },
+    {
+      "from": "SURFACE-GOALS",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "SURFACE-TIME",
+      "to": "APP-NAVIGATION"
+    },
+    {
+      "from": "SURFACE-TIME",
+      "to": "APP-PERMISSIONS"
+    },
+    {
+      "from": "SURFACE-TIME",
+      "to": "APP-SHELL"
+    },
+    {
+      "from": "SURFACE-TIME",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "SURFACE-TODAY",
+      "to": "APP-NAVIGATION"
+    },
+    {
+      "from": "SURFACE-TODAY",
+      "to": "APP-SHELL"
+    },
+    {
+      "from": "SURFACE-TODAY",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "SURFACE-YOU",
+      "to": "APP-NAVIGATION"
+    },
+    {
+      "from": "SURFACE-YOU",
+      "to": "APP-PERMISSIONS"
+    },
+    {
+      "from": "SURFACE-YOU",
+      "to": "APP-SHELL"
+    },
+    {
+      "from": "SURFACE-YOU",
       "to": "CONSTITUTION"
     }
   ],
@@ -813,6 +921,798 @@
     {
       "from": "SPEC-APP-SHELL-ROOT-NAVIGATION-001",
       "to": "PLATFORM-NATIVE-IPHONE-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-DRAFT-RECOVERY-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-DRAFT-RECOVERY-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-DRAFT-RECOVERY-001",
+      "to": "LAW-IA-NONROOT-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-DRAFT-RECOVERY-001",
+      "to": "LAW-LOCAL-AUTHORITY-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-DRAFT-RECOVERY-001",
+      "to": "OBJECT-SAVED-FOR-LATER-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-IDENTITY-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-IDENTITY-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-IDENTITY-001",
+      "to": "LAW-IA-NONROOT-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-IDENTITY-001",
+      "to": "LAW-LOCAL-AUTHORITY-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-IDENTITY-001",
+      "to": "OBJECT-SAVED-FOR-LATER-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-KEYBOARD-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-KEYBOARD-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-KEYBOARD-001",
+      "to": "LAW-IA-NONROOT-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-KEYBOARD-001",
+      "to": "LAW-LOCAL-AUTHORITY-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-KEYBOARD-001",
+      "to": "OBJECT-SAVED-FOR-LATER-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-PROPOSAL-FLOW-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-PROPOSAL-FLOW-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-PROPOSAL-FLOW-001",
+      "to": "LAW-IA-NONROOT-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-PROPOSAL-FLOW-001",
+      "to": "LAW-LOCAL-AUTHORITY-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-PROPOSAL-FLOW-001",
+      "to": "OBJECT-SAVED-FOR-LATER-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-SAVED-FOR-LATER-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-SAVED-FOR-LATER-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-SAVED-FOR-LATER-001",
+      "to": "LAW-IA-NONROOT-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-SAVED-FOR-LATER-001",
+      "to": "LAW-LOCAL-AUTHORITY-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-SAVED-FOR-LATER-001",
+      "to": "OBJECT-SAVED-FOR-LATER-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001",
+      "to": "LAW-IA-NONROOT-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001",
+      "to": "LAW-LOCAL-AUTHORITY-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001",
+      "to": "OBJECT-SAVED-FOR-LATER-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-MOTION-ACCESSIBILITY-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-MOTION-ACCESSIBILITY-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-MOTION-ACCESSIBILITY-001",
+      "to": "CONTROL-UNDO-RECOVERY-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-MOTION-ACCESSIBILITY-001",
+      "to": "LAW-IA-NONROOT-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-MOTION-RESPONSIBILITY-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-MOTION-RESPONSIBILITY-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-MOTION-RESPONSIBILITY-001",
+      "to": "CONTROL-UNDO-RECOVERY-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-MOTION-RESPONSIBILITY-001",
+      "to": "LAW-IA-NONROOT-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-MOTION-STATE-CONTINUITY-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-MOTION-STATE-CONTINUITY-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-MOTION-STATE-CONTINUITY-001",
+      "to": "CONTROL-UNDO-RECOVERY-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-MOTION-STATE-CONTINUITY-001",
+      "to": "LAW-IA-NONROOT-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-SEARCH-FIRST-VIEWPORT-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-SEARCH-FIRST-VIEWPORT-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-SEARCH-FIRST-VIEWPORT-001",
+      "to": "LAW-IA-NONROOT-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-SEARCH-FIRST-VIEWPORT-001",
+      "to": "LAW-LOCAL-AUTHORITY-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-SEARCH-IDENTITY-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-SEARCH-IDENTITY-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-SEARCH-IDENTITY-001",
+      "to": "LAW-IA-NONROOT-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-SEARCH-IDENTITY-001",
+      "to": "LAW-LOCAL-AUTHORITY-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-SEARCH-INDEX-ACTIONS-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-SEARCH-INDEX-ACTIONS-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-SEARCH-INDEX-ACTIONS-001",
+      "to": "LAW-IA-NONROOT-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-SEARCH-INDEX-ACTIONS-001",
+      "to": "LAW-LOCAL-AUTHORITY-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001",
+      "to": "CONST-RUNTIME-MUTATION-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001",
+      "to": "LAW-IA-NONROOT-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001",
+      "to": "LAW-LOCAL-AUTHORITY-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-TRUST-INSPECTION-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-TRUST-INSPECTION-001",
+      "to": "CONST-PROOF-EVIDENCE-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-TRUST-INSPECTION-001",
+      "to": "LAW-IA-TRUST-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-TRUST-INSPECTION-001",
+      "to": "OBJECT-PROOF-REQUIREMENT-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-TRUST-INSPECTION-001",
+      "to": "PRIVACY-VISIBILITY-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-TRUST-LAYERS-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-TRUST-LAYERS-001",
+      "to": "CONST-PROOF-EVIDENCE-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-TRUST-LAYERS-001",
+      "to": "LAW-IA-TRUST-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-TRUST-LAYERS-001",
+      "to": "OBJECT-PROOF-REQUIREMENT-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-TRUST-LAYERS-001",
+      "to": "PRIVACY-VISIBILITY-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001",
+      "to": "CONST-PROOF-EVIDENCE-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001",
+      "to": "LAW-IA-TRUST-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001",
+      "to": "OBJECT-PROOF-REQUIREMENT-001"
+    },
+    {
+      "from": "SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001",
+      "to": "PRIVACY-VISIBILITY-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-ANTI-PATTERNS-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-ANTI-PATTERNS-001",
+      "to": "CONST-IA-ROOT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-ANTI-PATTERNS-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-ANTI-PATTERNS-001",
+      "to": "OBJECT-CANONICAL-GRAPH-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-ANTI-PATTERNS-001",
+      "to": "OBJECT-GOAL-LIFECYCLE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-FIRST-VIEWPORT-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-FIRST-VIEWPORT-001",
+      "to": "CONST-IA-ROOT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-FIRST-VIEWPORT-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-FIRST-VIEWPORT-001",
+      "to": "OBJECT-CANONICAL-GRAPH-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-FIRST-VIEWPORT-001",
+      "to": "OBJECT-GOAL-LIFECYCLE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-IDENTITY-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-IDENTITY-001",
+      "to": "CONST-IA-ROOT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-IDENTITY-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-IDENTITY-001",
+      "to": "OBJECT-CANONICAL-GRAPH-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-IDENTITY-001",
+      "to": "OBJECT-GOAL-LIFECYCLE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-PURPOSE-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-PURPOSE-001",
+      "to": "CONST-IA-ROOT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-PURPOSE-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-PURPOSE-001",
+      "to": "OBJECT-CANONICAL-GRAPH-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-PURPOSE-001",
+      "to": "OBJECT-GOAL-LIFECYCLE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-SCREEN-INVENTORY-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-SCREEN-INVENTORY-001",
+      "to": "CONST-IA-ROOT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-SCREEN-INVENTORY-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-SCREEN-INVENTORY-001",
+      "to": "OBJECT-CANONICAL-GRAPH-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-SCREEN-INVENTORY-001",
+      "to": "OBJECT-GOAL-LIFECYCLE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-VISUAL-AUTHORITY-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-VISUAL-AUTHORITY-001",
+      "to": "CONST-IA-ROOT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-VISUAL-AUTHORITY-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-VISUAL-AUTHORITY-001",
+      "to": "OBJECT-CANONICAL-GRAPH-001"
+    },
+    {
+      "from": "SPEC-SURFACE-GOALS-VISUAL-AUTHORITY-001",
+      "to": "OBJECT-GOAL-LIFECYCLE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-DAY-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-DAY-001",
+      "to": "CONST-IA-ROOT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-DAY-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-DAY-001",
+      "to": "PLATFORM-CALENDAR-REPLACEMENT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-DAY-001",
+      "to": "TIME-EXTERNAL-VISIBILITY-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-FIRST-VIEWPORT-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-FIRST-VIEWPORT-001",
+      "to": "CONST-IA-ROOT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-FIRST-VIEWPORT-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-FIRST-VIEWPORT-001",
+      "to": "PLATFORM-CALENDAR-REPLACEMENT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-FIRST-VIEWPORT-001",
+      "to": "TIME-EXTERNAL-VISIBILITY-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-PRIMARY-IDENTITY-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-PRIMARY-IDENTITY-001",
+      "to": "CONST-IA-ROOT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-PRIMARY-IDENTITY-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-PRIMARY-IDENTITY-001",
+      "to": "PLATFORM-CALENDAR-REPLACEMENT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-PRIMARY-IDENTITY-001",
+      "to": "TIME-EXTERNAL-VISIBILITY-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-PURPOSE-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-PURPOSE-001",
+      "to": "CONST-IA-ROOT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-PURPOSE-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-PURPOSE-001",
+      "to": "PLATFORM-CALENDAR-REPLACEMENT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-PURPOSE-001",
+      "to": "TIME-EXTERNAL-VISIBILITY-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-VIEWS-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-VIEWS-001",
+      "to": "CONST-IA-ROOT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-VIEWS-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-VIEWS-001",
+      "to": "PLATFORM-CALENDAR-REPLACEMENT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-VIEWS-001",
+      "to": "TIME-EXTERNAL-VISIBILITY-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-VISUAL-AUTHORITY-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-VISUAL-AUTHORITY-001",
+      "to": "CONST-IA-ROOT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-VISUAL-AUTHORITY-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-VISUAL-AUTHORITY-001",
+      "to": "PLATFORM-CALENDAR-REPLACEMENT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TIME-VISUAL-AUTHORITY-001",
+      "to": "TIME-EXTERNAL-VISIBILITY-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-ELIGIBILITY-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-ELIGIBILITY-001",
+      "to": "CONST-IA-ROOT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-ELIGIBILITY-001",
+      "to": "CONST-PROOF-EVIDENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-ELIGIBILITY-001",
+      "to": "CONTROL-FORCE-NOTHING-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-ELIGIBILITY-001",
+      "to": "SURFACE-TODAY-IDENTITY-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-FIRST-VIEWPORT-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-FIRST-VIEWPORT-001",
+      "to": "CONST-IA-ROOT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-FIRST-VIEWPORT-001",
+      "to": "CONST-PROOF-EVIDENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-FIRST-VIEWPORT-001",
+      "to": "CONTROL-FORCE-NOTHING-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-FIRST-VIEWPORT-001",
+      "to": "SURFACE-TODAY-IDENTITY-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-PURPOSE-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-PURPOSE-001",
+      "to": "CONST-IA-ROOT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-PURPOSE-001",
+      "to": "CONST-PROOF-EVIDENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-PURPOSE-001",
+      "to": "CONTROL-FORCE-NOTHING-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-PURPOSE-001",
+      "to": "SURFACE-TODAY-IDENTITY-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-SCREEN-INVENTORY-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-SCREEN-INVENTORY-001",
+      "to": "CONST-IA-ROOT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-SCREEN-INVENTORY-001",
+      "to": "CONST-PROOF-EVIDENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-SCREEN-INVENTORY-001",
+      "to": "CONTROL-FORCE-NOTHING-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-SCREEN-INVENTORY-001",
+      "to": "SURFACE-TODAY-IDENTITY-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-STATES-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-STATES-001",
+      "to": "CONST-IA-ROOT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-STATES-001",
+      "to": "CONST-PROOF-EVIDENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-STATES-001",
+      "to": "CONTROL-FORCE-NOTHING-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-STATES-001",
+      "to": "SURFACE-TODAY-IDENTITY-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-TEMPORAL-RAIL-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-TEMPORAL-RAIL-001",
+      "to": "CONST-IA-ROOT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-TEMPORAL-RAIL-001",
+      "to": "CONST-PROOF-EVIDENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-TEMPORAL-RAIL-001",
+      "to": "CONTROL-FORCE-NOTHING-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-TEMPORAL-RAIL-001",
+      "to": "SURFACE-TODAY-IDENTITY-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001",
+      "to": "CONST-IA-ROOT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001",
+      "to": "CONST-PROOF-EVIDENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001",
+      "to": "CONTROL-FORCE-NOTHING-001"
+    },
+    {
+      "from": "SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001",
+      "to": "SURFACE-TODAY-IDENTITY-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-DEPTH-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-DEPTH-001",
+      "to": "CONST-IA-ROOT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-DEPTH-001",
+      "to": "LAW-ACCOUNT-BOUNDARY-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-DEPTH-001",
+      "to": "LAW-OFFLINE-NO-ACCOUNT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-DEPTH-001",
+      "to": "PRIVACY-VISIBILITY-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-DEPTH-001",
+      "to": "SURFACE-YOU-DEPTH-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-FIRST-VIEWPORT-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-FIRST-VIEWPORT-001",
+      "to": "CONST-IA-ROOT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-FIRST-VIEWPORT-001",
+      "to": "LAW-ACCOUNT-BOUNDARY-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-FIRST-VIEWPORT-001",
+      "to": "LAW-OFFLINE-NO-ACCOUNT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-FIRST-VIEWPORT-001",
+      "to": "PRIVACY-VISIBILITY-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-FIRST-VIEWPORT-001",
+      "to": "SURFACE-YOU-DEPTH-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-IDENTITY-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-IDENTITY-001",
+      "to": "CONST-IA-ROOT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-IDENTITY-001",
+      "to": "LAW-ACCOUNT-BOUNDARY-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-IDENTITY-001",
+      "to": "LAW-OFFLINE-NO-ACCOUNT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-IDENTITY-001",
+      "to": "PRIVACY-VISIBILITY-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-IDENTITY-001",
+      "to": "SURFACE-YOU-DEPTH-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-SCREEN-INVENTORY-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-SCREEN-INVENTORY-001",
+      "to": "CONST-IA-ROOT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-SCREEN-INVENTORY-001",
+      "to": "LAW-ACCOUNT-BOUNDARY-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-SCREEN-INVENTORY-001",
+      "to": "LAW-OFFLINE-NO-ACCOUNT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-SCREEN-INVENTORY-001",
+      "to": "PRIVACY-VISIBILITY-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-SCREEN-INVENTORY-001",
+      "to": "SURFACE-YOU-DEPTH-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001",
+      "to": "CONST-IA-ROOT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001",
+      "to": "LAW-ACCOUNT-BOUNDARY-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001",
+      "to": "LAW-OFFLINE-NO-ACCOUNT-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001",
+      "to": "PRIVACY-VISIBILITY-001"
+    },
+    {
+      "from": "SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001",
+      "to": "SURFACE-YOU-DEPTH-001"
     }
   ],
   "requirement_ids": [
@@ -913,6 +1813,46 @@
     "SPEC-APP-SHELL-FIRST-VIEWPORT-001",
     "SPEC-APP-SHELL-GLOBAL-ACTIONS-001",
     "SPEC-APP-SHELL-ROOT-NAVIGATION-001",
+    "SPEC-GLOBAL-CAPTURE-DRAFT-RECOVERY-001",
+    "SPEC-GLOBAL-CAPTURE-IDENTITY-001",
+    "SPEC-GLOBAL-CAPTURE-KEYBOARD-001",
+    "SPEC-GLOBAL-CAPTURE-PROPOSAL-FLOW-001",
+    "SPEC-GLOBAL-CAPTURE-SAVED-FOR-LATER-001",
+    "SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001",
+    "SPEC-GLOBAL-MOTION-ACCESSIBILITY-001",
+    "SPEC-GLOBAL-MOTION-RESPONSIBILITY-001",
+    "SPEC-GLOBAL-MOTION-STATE-CONTINUITY-001",
+    "SPEC-GLOBAL-SEARCH-FIRST-VIEWPORT-001",
+    "SPEC-GLOBAL-SEARCH-IDENTITY-001",
+    "SPEC-GLOBAL-SEARCH-INDEX-ACTIONS-001",
+    "SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001",
+    "SPEC-GLOBAL-TRUST-INSPECTION-001",
+    "SPEC-GLOBAL-TRUST-LAYERS-001",
+    "SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001",
+    "SPEC-SURFACE-GOALS-ANTI-PATTERNS-001",
+    "SPEC-SURFACE-GOALS-FIRST-VIEWPORT-001",
+    "SPEC-SURFACE-GOALS-IDENTITY-001",
+    "SPEC-SURFACE-GOALS-PURPOSE-001",
+    "SPEC-SURFACE-GOALS-SCREEN-INVENTORY-001",
+    "SPEC-SURFACE-GOALS-VISUAL-AUTHORITY-001",
+    "SPEC-SURFACE-TIME-DAY-001",
+    "SPEC-SURFACE-TIME-FIRST-VIEWPORT-001",
+    "SPEC-SURFACE-TIME-PRIMARY-IDENTITY-001",
+    "SPEC-SURFACE-TIME-PURPOSE-001",
+    "SPEC-SURFACE-TIME-VIEWS-001",
+    "SPEC-SURFACE-TIME-VISUAL-AUTHORITY-001",
+    "SPEC-SURFACE-TODAY-ELIGIBILITY-001",
+    "SPEC-SURFACE-TODAY-FIRST-VIEWPORT-001",
+    "SPEC-SURFACE-TODAY-PURPOSE-001",
+    "SPEC-SURFACE-TODAY-SCREEN-INVENTORY-001",
+    "SPEC-SURFACE-TODAY-STATES-001",
+    "SPEC-SURFACE-TODAY-TEMPORAL-RAIL-001",
+    "SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001",
+    "SPEC-SURFACE-YOU-DEPTH-001",
+    "SPEC-SURFACE-YOU-FIRST-VIEWPORT-001",
+    "SPEC-SURFACE-YOU-IDENTITY-001",
+    "SPEC-SURFACE-YOU-SCREEN-INVENTORY-001",
+    "SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001",
     "SURFACE-TODAY-IDENTITY-001",
     "SURFACE-YOU-DEPTH-001",
     "TIME-EXTERNAL-VISIBILITY-001"

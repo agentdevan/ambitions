@@ -407,6 +407,14 @@ class ManifestTests(unittest.TestCase):
                 Path("specifications/app/navigation.md"),
                 Path("specifications/app/permissions.md"),
                 Path("specifications/app/shell.md"),
+                Path("specifications/global/capture.md"),
+                Path("specifications/global/motion.md"),
+                Path("specifications/global/search.md"),
+                Path("specifications/global/trust-inspection.md"),
+                Path("specifications/surfaces/goals.md"),
+                Path("specifications/surfaces/time.md"),
+                Path("specifications/surfaces/today.md"),
+                Path("specifications/surfaces/you.md"),
             ),
         )
         self.assertEqual(

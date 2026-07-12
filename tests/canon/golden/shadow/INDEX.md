@@ -6,7 +6,7 @@
 - Canon revision: `1`
 - Authority state: `shadow`
 - Compiler version: `0.1.0`
-- Canon content SHA: `6e2453eb459b472cca38af5f9cad2562a27c577343ce559741e8bd92c02e01ac`
+- Canon content SHA: `4dc5e1743928aa134eeccb5be77340294c15f48c8f77e6814db028c36197dfee`
 
 ## Specifications
 
@@ -19,6 +19,14 @@
 | `APP-PERMISSIONS` | app | Contextual Permissions | `docs/canon/specifications/app/permissions.md` |
 | `APP-SHELL` | app | App Shell | `docs/canon/specifications/app/shell.md` |
 | `CONSTITUTION` | constitution | Ambitions Constitution | `docs/canon/CONSTITUTION.md` |
+| `GLOBAL-CAPTURE` | global | Capture | `docs/canon/specifications/global/capture.md` |
+| `GLOBAL-MOTION` | global | Motion | `docs/canon/specifications/global/motion.md` |
+| `GLOBAL-SEARCH` | global | Search | `docs/canon/specifications/global/search.md` |
+| `GLOBAL-TRUST-INSPECTION` | global | Trust Inspection | `docs/canon/specifications/global/trust-inspection.md` |
+| `SURFACE-GOALS` | surface | Goals | `docs/canon/specifications/surfaces/goals.md` |
+| `SURFACE-TIME` | surface | Time | `docs/canon/specifications/surfaces/time.md` |
+| `SURFACE-TODAY` | surface | Today | `docs/canon/specifications/surfaces/today.md` |
+| `SURFACE-YOU` | surface | You | `docs/canon/specifications/surfaces/you.md` |
 
 ## Requirements
 
@@ -121,6 +129,46 @@
 | `SPEC-APP-SHELL-FIRST-VIEWPORT-001` | MUST | `app.shell.first-viewport` | `docs/canon/specifications/app/shell.md:62` |
 | `SPEC-APP-SHELL-GLOBAL-ACTIONS-001` | MUST | `app.shell.global-actions` | `docs/canon/specifications/app/shell.md:51` |
 | `SPEC-APP-SHELL-ROOT-NAVIGATION-001` | MUST | `app.shell.root-navigation` | `docs/canon/specifications/app/shell.md:38` |
+| `SPEC-GLOBAL-CAPTURE-DRAFT-RECOVERY-001` | MUST | `global.capture.draft-recovery` | `docs/canon/specifications/global/capture.md:71` |
+| `SPEC-GLOBAL-CAPTURE-IDENTITY-001` | MUST | `global.capture.identity` | `docs/canon/specifications/global/capture.md:38` |
+| `SPEC-GLOBAL-CAPTURE-KEYBOARD-001` | MUST | `global.capture.keyboard` | `docs/canon/specifications/global/capture.md:49` |
+| `SPEC-GLOBAL-CAPTURE-PROPOSAL-FLOW-001` | MUST | `global.capture.proposal-flow` | `docs/canon/specifications/global/capture.md:82` |
+| `SPEC-GLOBAL-CAPTURE-SAVED-FOR-LATER-001` | MUST | `global.capture.saved-for-later` | `docs/canon/specifications/global/capture.md:60` |
+| `SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001` | MUST | `global.capture.visual-authority` | `docs/canon/specifications/global/capture.md:93` |
+| `SPEC-GLOBAL-MOTION-ACCESSIBILITY-001` | MUST | `global.motion.accessibility` | `docs/canon/specifications/global/motion.md:55` |
+| `SPEC-GLOBAL-MOTION-RESPONSIBILITY-001` | MUST | `global.motion.responsibility` | `docs/canon/specifications/global/motion.md:33` |
+| `SPEC-GLOBAL-MOTION-STATE-CONTINUITY-001` | MUST | `global.motion.state-continuity` | `docs/canon/specifications/global/motion.md:44` |
+| `SPEC-GLOBAL-SEARCH-FIRST-VIEWPORT-001` | MUST | `global.search.first-viewport` | `docs/canon/specifications/global/search.md:47` |
+| `SPEC-GLOBAL-SEARCH-IDENTITY-001` | MUST | `global.search.identity` | `docs/canon/specifications/global/search.md:36` |
+| `SPEC-GLOBAL-SEARCH-INDEX-ACTIONS-001` | MUST | `global.search.index-actions` | `docs/canon/specifications/global/search.md:58` |
+| `SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001` | MUST | `global.search.visual-authority` | `docs/canon/specifications/global/search.md:69` |
+| `SPEC-GLOBAL-TRUST-INSPECTION-001` | MUST | `global.trust.identity` | `docs/canon/specifications/global/trust-inspection.md:35` |
+| `SPEC-GLOBAL-TRUST-LAYERS-001` | MUST | `global.trust.layers` | `docs/canon/specifications/global/trust-inspection.md:46` |
+| `SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001` | MUST | `global.trust.visual-authority` | `docs/canon/specifications/global/trust-inspection.md:57` |
+| `SPEC-SURFACE-GOALS-ANTI-PATTERNS-001` | MUST NOT | `surface.goals.anti-patterns` | `docs/canon/specifications/surfaces/goals.md:51` |
+| `SPEC-SURFACE-GOALS-FIRST-VIEWPORT-001` | MUST | `surface.goals.first-viewport` | `docs/canon/specifications/surfaces/goals.md:73` |
+| `SPEC-SURFACE-GOALS-IDENTITY-001` | MUST | `surface.goals.identity` | `docs/canon/specifications/surfaces/goals.md:40` |
+| `SPEC-SURFACE-GOALS-PURPOSE-001` | MUST | `surface.goals.purpose` | `docs/canon/specifications/surfaces/goals.md:84` |
+| `SPEC-SURFACE-GOALS-SCREEN-INVENTORY-001` | MUST | `surface.goals.screen-inventory` | `docs/canon/specifications/surfaces/goals.md:62` |
+| `SPEC-SURFACE-GOALS-VISUAL-AUTHORITY-001` | MUST | `surface.goals.visual-authority` | `docs/canon/specifications/surfaces/goals.md:95` |
+| `SPEC-SURFACE-TIME-DAY-001` | MUST | `surface.time.day` | `docs/canon/specifications/surfaces/time.md:62` |
+| `SPEC-SURFACE-TIME-FIRST-VIEWPORT-001` | MUST | `surface.time.first-viewport` | `docs/canon/specifications/surfaces/time.md:73` |
+| `SPEC-SURFACE-TIME-PRIMARY-IDENTITY-001` | MUST | `surface.time.primary-identity` | `docs/canon/specifications/surfaces/time.md:40` |
+| `SPEC-SURFACE-TIME-PURPOSE-001` | MUST | `surface.time.purpose` | `docs/canon/specifications/surfaces/time.md:84` |
+| `SPEC-SURFACE-TIME-VIEWS-001` | MUST | `surface.time.views` | `docs/canon/specifications/surfaces/time.md:51` |
+| `SPEC-SURFACE-TIME-VISUAL-AUTHORITY-001` | MUST | `surface.time.visual-authority` | `docs/canon/specifications/surfaces/time.md:95` |
+| `SPEC-SURFACE-TODAY-ELIGIBILITY-001` | MUST | `surface.today.eligibility` | `docs/canon/specifications/surfaces/today.md:61` |
+| `SPEC-SURFACE-TODAY-FIRST-VIEWPORT-001` | MUST | `surface.today.first-viewport` | `docs/canon/specifications/surfaces/today.md:83` |
+| `SPEC-SURFACE-TODAY-PURPOSE-001` | MUST | `surface.today.purpose` | `docs/canon/specifications/surfaces/today.md:39` |
+| `SPEC-SURFACE-TODAY-SCREEN-INVENTORY-001` | MUST | `surface.today.screen-inventory` | `docs/canon/specifications/surfaces/today.md:72` |
+| `SPEC-SURFACE-TODAY-STATES-001` | MUST | `surface.today.states` | `docs/canon/specifications/surfaces/today.md:94` |
+| `SPEC-SURFACE-TODAY-TEMPORAL-RAIL-001` | MUST | `surface.today.temporal-rail` | `docs/canon/specifications/surfaces/today.md:50` |
+| `SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001` | MUST | `surface.today.visual-authority` | `docs/canon/specifications/surfaces/today.md:105` |
+| `SPEC-SURFACE-YOU-DEPTH-001` | MUST | `surface.you.depth` | `docs/canon/specifications/surfaces/you.md:73` |
+| `SPEC-SURFACE-YOU-FIRST-VIEWPORT-001` | MUST | `surface.you.first-viewport` | `docs/canon/specifications/surfaces/you.md:62` |
+| `SPEC-SURFACE-YOU-IDENTITY-001` | MUST | `surface.you.identity` | `docs/canon/specifications/surfaces/you.md:40` |
+| `SPEC-SURFACE-YOU-SCREEN-INVENTORY-001` | MUST | `surface.you.screen-inventory` | `docs/canon/specifications/surfaces/you.md:51` |
+| `SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001` | MUST | `surface.you.visual-authority` | `docs/canon/specifications/surfaces/you.md:84` |
 | `SURFACE-TODAY-IDENTITY-001` | MUST | `surface.today-primary-identity` | `docs/canon/CONSTITUTION.md:496` |
 | `SURFACE-YOU-DEPTH-001` | MUST | `surface.you-depth` | `docs/canon/CONSTITUTION.md:509` |
 | `TIME-EXTERNAL-VISIBILITY-001` | MUST | `surface.time-external-visibility` | `docs/canon/CONSTITUTION.md:641` |
