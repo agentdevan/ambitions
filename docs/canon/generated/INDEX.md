@@ -6,12 +6,18 @@
 - Canon revision: `1`
 - Authority state: `shadow`
 - Compiler version: `0.1.0`
-- Canon content SHA: `a81fe53d1ba082647446713e7083e8f1077877306b7c342931d14f70788d792c`
+- Canon content SHA: `6e2453eb459b472cca38af5f9cad2562a27c577343ce559741e8bd92c02e01ac`
 
 ## Specifications
 
 | ID | Kind | Title | Source |
 | --- | --- | --- | --- |
+| `APP-DEEP-LINKING` | app | Deep Linking and External Route Entry | `docs/canon/specifications/app/deep-linking.md` |
+| `APP-DEGRADED-STATES` | app | App Degraded States | `docs/canon/specifications/app/degraded-states.md` |
+| `APP-LAUNCH-SETUP` | app | Launch and Progressive Setup | `docs/canon/specifications/app/launch-and-setup.md` |
+| `APP-NAVIGATION` | app | App Navigation | `docs/canon/specifications/app/navigation.md` |
+| `APP-PERMISSIONS` | app | Contextual Permissions | `docs/canon/specifications/app/permissions.md` |
+| `APP-SHELL` | app | App Shell | `docs/canon/specifications/app/shell.md` |
 | `CONSTITUTION` | constitution | Ambitions Constitution | `docs/canon/CONSTITUTION.md` |
 
 ## Requirements
@@ -19,6 +25,30 @@
 | ID | Modality | Concept | Source |
 | --- | --- | --- | --- |
 | `ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001` | MUST | `accessibility.semantic-equivalence` | `docs/canon/CONSTITUTION.md:832` |
+| `APP-DEEP-LINK-EXTERNAL-ENTRY-001` | MUST | `app.deep-linking.external-entry` | `docs/canon/specifications/app/deep-linking.md:41` |
+| `APP-DEEP-LINK-FALLBACK-001` | MUST | `app.deep-linking.fallback` | `docs/canon/specifications/app/deep-linking.md:74` |
+| `APP-DEEP-LINK-PRIVACY-001` | MUST | `app.deep-linking.privacy` | `docs/canon/specifications/app/deep-linking.md:63` |
+| `APP-DEEP-LINK-RESOLVE-001` | MUST | `app.deep-linking.resolution` | `docs/canon/specifications/app/deep-linking.md:52` |
+| `APP-DEEP-LINK-STATE-001` | MUST | `app.deep-linking.state` | `docs/canon/specifications/app/deep-linking.md:85` |
+| `APP-DEGRADED-FAILURE-TAXONOMY-001` | MUST | `app.degraded.failure-taxonomy` | `docs/canon/specifications/app/degraded-states.md:42` |
+| `APP-DEGRADED-PRESENTATION-001` | MUST | `app.degraded.presentation` | `docs/canon/specifications/app/degraded-states.md:55` |
+| `APP-DEGRADED-PRESERVE-001` | MUST | `app.degraded.input-preservation` | `docs/canon/specifications/app/degraded-states.md:66` |
+| `APP-DEGRADED-RECOVERY-001` | MUST | `app.degraded.recovery` | `docs/canon/specifications/app/degraded-states.md:77` |
+| `APP-DEGRADED-STATE-001` | MUST | `app.degraded.state` | `docs/canon/specifications/app/degraded-states.md:88` |
+| `APP-LAUNCH-READINESS-001` | MUST | `app.launch.readiness` | `docs/canon/specifications/app/launch-and-setup.md:53` |
+| `APP-LAUNCH-RECOVERY-001` | MUST | `app.launch.recovery` | `docs/canon/specifications/app/launch-and-setup.md:64` |
+| `APP-NAVIGATION-RESTORATION-001` | MUST | `app.navigation.restoration` | `docs/canon/specifications/app/navigation.md:69` |
+| `APP-NAVIGATION-STATE-001` | MUST | `app.navigation.state` | `docs/canon/specifications/app/navigation.md:80` |
+| `APP-PERMISSION-DENIAL-001` | MUST | `app.permissions.denied-fallback` | `docs/canon/specifications/app/permissions.md:49` |
+| `APP-PERMISSION-RECONCILE-001` | MUST | `app.permissions.reconciliation` | `docs/canon/specifications/app/permissions.md:82` |
+| `APP-PERMISSION-RECOVERY-001` | MUST | `app.permissions.recovery` | `docs/canon/specifications/app/permissions.md:71` |
+| `APP-PERMISSION-STATE-001` | MUST | `app.permissions.state` | `docs/canon/specifications/app/permissions.md:60` |
+| `APP-PERMISSIONS-CONTRACT-001` | MUST | `app.permissions.contextual-request` | `docs/canon/specifications/app/permissions.md:38` |
+| `APP-SETUP-PROGRESSIVE-FIRST-USE-001` | MUST | `app.setup.progressive-first-use` | `docs/canon/specifications/app/launch-and-setup.md:40` |
+| `APP-SETUP-RESUME-001` | MUST | `app.setup.interruption-resume` | `docs/canon/specifications/app/launch-and-setup.md:75` |
+| `APP-SETUP-STATE-001` | MUST | `app.setup.state` | `docs/canon/specifications/app/launch-and-setup.md:86` |
+| `APP-SHELL-FAILURE-001` | MUST | `app.shell.failure-recovery` | `docs/canon/specifications/app/shell.md:84` |
+| `APP-SHELL-STATE-001` | MUST | `app.shell.state` | `docs/canon/specifications/app/shell.md:73` |
 | `AUTHORITY-AMENDMENT-001` | MUST | `authority.amendment` | `docs/canon/CONSTITUTION.md:934` |
 | `AUTHORITY-MIGRATION-CORPUS-001` | MUST | `authority.migration-corpus` | `docs/canon/CONSTITUTION.md:154` |
 | `AUTHORITY-MISSION-001` | MUST | `authority.mission` | `docs/canon/CONSTITUTION.md:121` |
@@ -85,6 +115,12 @@
 | `PROOF-FIGMA-AUTHORITY-001` | MUST | `proof.figma-authority` | `docs/canon/CONSTITUTION.md:871` |
 | `RUNTIME-MUTATION-SEQUENCE-001` | MUST | `runtime.mutation-sequence` | `docs/canon/CONSTITUTION.md:717` |
 | `RUNTIME-SOURCE-OWNER-001` | MUST | `runtime.source-owner` | `docs/canon/CONSTITUTION.md:730` |
+| `SPEC-APP-NAVIGATION-IA-MAP-001` | MUST | `app.navigation.ia-map` | `docs/canon/specifications/app/navigation.md:36` |
+| `SPEC-APP-NAVIGATION-PRESENTATION-001` | MUST | `app.navigation.presentation` | `docs/canon/specifications/app/navigation.md:47` |
+| `SPEC-APP-NAVIGATION-ROOT-INTERACTION-001` | MUST | `app.navigation.root-interaction` | `docs/canon/specifications/app/navigation.md:58` |
+| `SPEC-APP-SHELL-FIRST-VIEWPORT-001` | MUST | `app.shell.first-viewport` | `docs/canon/specifications/app/shell.md:62` |
+| `SPEC-APP-SHELL-GLOBAL-ACTIONS-001` | MUST | `app.shell.global-actions` | `docs/canon/specifications/app/shell.md:51` |
+| `SPEC-APP-SHELL-ROOT-NAVIGATION-001` | MUST | `app.shell.root-navigation` | `docs/canon/specifications/app/shell.md:38` |
 | `SURFACE-TODAY-IDENTITY-001` | MUST | `surface.today-primary-identity` | `docs/canon/CONSTITUTION.md:496` |
 | `SURFACE-YOU-DEPTH-001` | MUST | `surface.you-depth` | `docs/canon/CONSTITUTION.md:509` |
 | `TIME-EXTERNAL-VISIBILITY-001` | MUST | `surface.time-external-visibility` | `docs/canon/CONSTITUTION.md:641` |

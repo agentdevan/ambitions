@@ -13394,7 +13394,7 @@
       "source_id": "REPO-43E0D80464B2869224C805D8",
       "source_location": "line:2131",
       "target_class": "specification",
-      "target_id": "SPEC-SYSTEM-001-PROGRESSIVE-FIRST-USE-71E46D72"
+      "target_id": "APP-SETUP-PROGRESSIVE-FIRST-USE-001"
     },
     {
       "authority_claim": true,
@@ -13409,7 +13409,7 @@
       "source_id": "REPO-43E0D80464B2869224C805D8",
       "source_location": "line:2139",
       "target_class": "specification",
-      "target_id": "SPEC-SYSTEM-002-PERMISSION-CONTRACT-F0D678AE"
+      "target_id": "APP-PERMISSIONS-CONTRACT-001"
     },
     {
       "authority_claim": true,
@@ -13469,7 +13469,7 @@
       "source_id": "REPO-43E0D80464B2869224C805D8",
       "source_location": "line:2175",
       "target_class": "specification",
-      "target_id": "SPEC-SYSTEM-006-SHARE-SPOTLIGHT-DEEP-LINKS-916E4863"
+      "target_id": "APP-DEEP-LINK-EXTERNAL-ENTRY-001"
     },
     {
       "authority_claim": true,
@@ -13484,7 +13484,7 @@
       "source_id": "REPO-43E0D80464B2869224C805D8",
       "source_location": "line:2182",
       "target_class": "specification",
-      "target_id": "SPEC-SYSTEM-007-FAILURE-TAXONOMY-28374647"
+      "target_id": "APP-DEGRADED-FAILURE-TAXONOMY-001"
     },
     {
       "authority_claim": true,

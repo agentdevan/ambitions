@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "a81fe53d1ba082647446713e7083e8f1077877306b7c342931d14f70788d792c",
+  "canon_content_sha": "6e2453eb459b472cca38af5f9cad2562a27c577343ce559741e8bd92c02e01ac",
   "canon_revision": 1,
   "compiler_version": "0.1.0",
   "concepts": [
@@ -11,6 +11,126 @@
     {
       "concept": "account.boundary",
       "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "app.deep-linking.external-entry",
+      "spec_id": "APP-DEEP-LINKING"
+    },
+    {
+      "concept": "app.deep-linking.fallback",
+      "spec_id": "APP-DEEP-LINKING"
+    },
+    {
+      "concept": "app.deep-linking.privacy",
+      "spec_id": "APP-DEEP-LINKING"
+    },
+    {
+      "concept": "app.deep-linking.resolution",
+      "spec_id": "APP-DEEP-LINKING"
+    },
+    {
+      "concept": "app.deep-linking.state",
+      "spec_id": "APP-DEEP-LINKING"
+    },
+    {
+      "concept": "app.degraded.failure-taxonomy",
+      "spec_id": "APP-DEGRADED-STATES"
+    },
+    {
+      "concept": "app.degraded.input-preservation",
+      "spec_id": "APP-DEGRADED-STATES"
+    },
+    {
+      "concept": "app.degraded.presentation",
+      "spec_id": "APP-DEGRADED-STATES"
+    },
+    {
+      "concept": "app.degraded.recovery",
+      "spec_id": "APP-DEGRADED-STATES"
+    },
+    {
+      "concept": "app.degraded.state",
+      "spec_id": "APP-DEGRADED-STATES"
+    },
+    {
+      "concept": "app.launch.readiness",
+      "spec_id": "APP-LAUNCH-SETUP"
+    },
+    {
+      "concept": "app.launch.recovery",
+      "spec_id": "APP-LAUNCH-SETUP"
+    },
+    {
+      "concept": "app.navigation.ia-map",
+      "spec_id": "APP-NAVIGATION"
+    },
+    {
+      "concept": "app.navigation.presentation",
+      "spec_id": "APP-NAVIGATION"
+    },
+    {
+      "concept": "app.navigation.restoration",
+      "spec_id": "APP-NAVIGATION"
+    },
+    {
+      "concept": "app.navigation.root-interaction",
+      "spec_id": "APP-NAVIGATION"
+    },
+    {
+      "concept": "app.navigation.state",
+      "spec_id": "APP-NAVIGATION"
+    },
+    {
+      "concept": "app.permissions.contextual-request",
+      "spec_id": "APP-PERMISSIONS"
+    },
+    {
+      "concept": "app.permissions.denied-fallback",
+      "spec_id": "APP-PERMISSIONS"
+    },
+    {
+      "concept": "app.permissions.reconciliation",
+      "spec_id": "APP-PERMISSIONS"
+    },
+    {
+      "concept": "app.permissions.recovery",
+      "spec_id": "APP-PERMISSIONS"
+    },
+    {
+      "concept": "app.permissions.state",
+      "spec_id": "APP-PERMISSIONS"
+    },
+    {
+      "concept": "app.setup.interruption-resume",
+      "spec_id": "APP-LAUNCH-SETUP"
+    },
+    {
+      "concept": "app.setup.progressive-first-use",
+      "spec_id": "APP-LAUNCH-SETUP"
+    },
+    {
+      "concept": "app.setup.state",
+      "spec_id": "APP-LAUNCH-SETUP"
+    },
+    {
+      "concept": "app.shell.failure-recovery",
+      "spec_id": "APP-SHELL"
+    },
+    {
+      "concept": "app.shell.first-viewport",
+      "spec_id": "APP-SHELL"
+    },
+    {
+      "concept": "app.shell.global-actions",
+      "spec_id": "APP-SHELL"
+    },
+    {
+      "concept": "app.shell.root-navigation",
+      "spec_id": "APP-SHELL"
+    },
+    {
+      "concept": "app.shell.state",
+      "spec_id": "APP-SHELL"
     },
     {
       "concept": "authority.amendment",

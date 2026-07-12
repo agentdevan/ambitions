@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "a81fe53d1ba082647446713e7083e8f1077877306b7c342931d14f70788d792c",
+  "canon_content_sha": "6e2453eb459b472cca38af5f9cad2562a27c577343ce559741e8bd92c02e01ac",
   "canon_revision": 1,
   "compiler_version": "0.1.0",
   "reason": "visual authority inputs are not represented by the current model",

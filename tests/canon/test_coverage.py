@@ -250,6 +250,33 @@ class ProfileTests(unittest.TestCase):
                 load_profiles(path)
             self.assertEqual(raised.exception.code, "CANON_PROFILE_SCHEMA")
 
+    def test_app_kind_uses_the_system_completeness_profile(self):
+        sections = "\n".join(
+            f"<!-- canon-section: {section} -->\nDefined {section}."
+            for section in EXPECTED_PROFILES["system-v1"]
+        )
+        document = document_from_text(
+            "+++\n"
+            'spec_id = "APP-TEST"\n'
+            'title = "App Test"\n'
+            'kind = "app"\n'
+            'status = "normative"\n'
+            'owner_domain = "app"\n'
+            "canon_revision = 1\n"
+            'profile = "system-v1"\n'
+            'owns_concepts = ["app.test"]\n'
+            "inherits = []\n"
+            "depends_on = []\n"
+            "source_owners = []\n"
+            "+++\n\n"
+            f"{sections}\n"
+        )
+
+        self.assertEqual(
+            coverage_findings(registry(document), load_profiles(PROFILE_PATH)),
+            (),
+        )
+
 
 class CoverageTests(unittest.TestCase):
     def setUp(self):
@@ -1254,7 +1281,7 @@ class CoverageCliTests(unittest.TestCase):
         self.assertEqual(result, 0)
         self.assertEqual(
             output.getvalue(),
-            "GREEN ambitions canon coverage documents=1 profiles=5 "
+            "GREEN ambitions canon coverage documents=7 profiles=5 "
             "authority_state=shadow\n",
         )
 

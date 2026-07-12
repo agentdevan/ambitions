@@ -86,6 +86,38 @@ def rebind_decision_snapshot_sha(root: Path, value: object) -> None:
 
 
 class TrackedEvidenceTests(unittest.TestCase):
+    def test_materialized_specification_target_reference_must_match_tracked_claim(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            shutil.copytree(ROOT / "docs/canon", root / "docs/canon")
+            index_path = root / "docs/canon/migration/impact-reference-index.json"
+            index = json.loads(index_path.read_text(encoding="utf-8"))
+            dispositions = root / "docs/canon/migration/claim-dispositions.json"
+            index["authority_references"] = [
+                {
+                    "schema_version": 1,
+                    "reference_id": "MIGRATION-TARGET-CLAIM-STB-0185",
+                    "authority_class": "source_and_tests",
+                    "reference_kind": "source",
+                    "source": (
+                        "docs/canon/migration/claim-dispositions.json"
+                        "#CLAIM-STB-0185"
+                    ),
+                    "revision": hashlib.sha256(dispositions.read_bytes()).hexdigest(),
+                    "requirement_ids": ["APP-PERMISSIONS-CONTRACT-001"],
+                    "approval_state": "approved",
+                    "implementation_status": "materialized shadow specification target",
+                }
+            ]
+            write_json(index_path, index)
+            output = io.StringIO()
+
+            with redirect_stdout(output):
+                result = _audit(root)
+
+            self.assertEqual(result, 1)
+            self.assertIn("CANON_MATERIALIZED_TARGET_MISMATCH", output.getvalue())
+
     def test_valid_tracked_evidence_passes_without_codex_or_network_inputs(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

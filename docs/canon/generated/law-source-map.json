@@ -1,12 +1,286 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "a81fe53d1ba082647446713e7083e8f1077877306b7c342931d14f70788d792c",
+  "canon_content_sha": "6e2453eb459b472cca38af5f9cad2562a27c577343ce559741e8bd92c02e01ac",
   "canon_revision": 1,
   "compiler_version": "0.1.0",
   "mappings": [
     {
       "references": [],
       "requirement_id": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/AppDeepLinkRegistry.swift",
+        "Native/Ambitions/App/AppExternalRouteModels.swift",
+        "Native/Ambitions/App/AppExternalRouteOverlayTranslation.swift",
+        "Native/Ambitions/App/AppExternalRoutePayloadTranslation.swift",
+        "Native/Ambitions/App/AppExternalRouteTranslator.swift",
+        "Native/Ambitions/App/AppIntentLaunchRouter.swift",
+        "Native/Ambitions/PreviewSupport/AppDeepLinkPreviewRouter.swift",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "APP-DEEP-LINK-EXTERNAL-ENTRY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/AppDeepLinkRegistry.swift",
+        "Native/Ambitions/App/AppExternalRouteModels.swift",
+        "Native/Ambitions/App/AppExternalRouteOverlayTranslation.swift",
+        "Native/Ambitions/App/AppExternalRoutePayloadTranslation.swift",
+        "Native/Ambitions/App/AppExternalRouteTranslator.swift",
+        "Native/Ambitions/App/AppIntentLaunchRouter.swift",
+        "Native/Ambitions/PreviewSupport/AppDeepLinkPreviewRouter.swift",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "APP-DEEP-LINK-FALLBACK-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/AppDeepLinkRegistry.swift",
+        "Native/Ambitions/App/AppExternalRouteModels.swift",
+        "Native/Ambitions/App/AppExternalRouteOverlayTranslation.swift",
+        "Native/Ambitions/App/AppExternalRoutePayloadTranslation.swift",
+        "Native/Ambitions/App/AppExternalRouteTranslator.swift",
+        "Native/Ambitions/App/AppIntentLaunchRouter.swift",
+        "Native/Ambitions/PreviewSupport/AppDeepLinkPreviewRouter.swift",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "APP-DEEP-LINK-PRIVACY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/AppDeepLinkRegistry.swift",
+        "Native/Ambitions/App/AppExternalRouteModels.swift",
+        "Native/Ambitions/App/AppExternalRouteOverlayTranslation.swift",
+        "Native/Ambitions/App/AppExternalRoutePayloadTranslation.swift",
+        "Native/Ambitions/App/AppExternalRouteTranslator.swift",
+        "Native/Ambitions/App/AppIntentLaunchRouter.swift",
+        "Native/Ambitions/PreviewSupport/AppDeepLinkPreviewRouter.swift",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "APP-DEEP-LINK-RESOLVE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/AppDeepLinkRegistry.swift",
+        "Native/Ambitions/App/AppExternalRouteModels.swift",
+        "Native/Ambitions/App/AppExternalRouteOverlayTranslation.swift",
+        "Native/Ambitions/App/AppExternalRoutePayloadTranslation.swift",
+        "Native/Ambitions/App/AppExternalRouteTranslator.swift",
+        "Native/Ambitions/App/AppIntentLaunchRouter.swift",
+        "Native/Ambitions/PreviewSupport/AppDeepLinkPreviewRouter.swift",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "APP-DEEP-LINK-STATE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "APP-DEGRADED-FAILURE-TAXONOMY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "APP-DEGRADED-PRESENTATION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "APP-DEGRADED-PRESERVE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "APP-DEGRADED-RECOVERY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "APP-DEGRADED-STATE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/LaunchGateView.swift",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "APP-LAUNCH-READINESS-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/LaunchGateView.swift",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "APP-LAUNCH-RECOVERY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Quality/RouteDepthChromeAudit.swift",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "APP-NAVIGATION-RESTORATION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Quality/RouteDepthChromeAudit.swift",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "APP-NAVIGATION-STATE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Core/Permissions/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "APP-PERMISSION-DENIAL-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Core/Permissions/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "APP-PERMISSION-RECONCILE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Core/Permissions/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "APP-PERMISSION-RECOVERY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Core/Permissions/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "APP-PERMISSION-STATE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Core/Permissions/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "APP-PERMISSIONS-CONTRACT-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/LaunchGateView.swift",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "APP-SETUP-PROGRESSIVE-FIRST-USE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/LaunchGateView.swift",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "APP-SETUP-RESUME-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/LaunchGateView.swift",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "APP-SETUP-STATE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/DesignSystem/StagePrimitives/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "APP-SHELL-FAILURE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/DesignSystem/StagePrimitives/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "APP-SHELL-STATE-001"
     },
     {
       "references": [],
@@ -271,6 +545,57 @@
     {
       "references": [],
       "requirement_id": "RUNTIME-SOURCE-OWNER-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Quality/RouteDepthChromeAudit.swift",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "SPEC-APP-NAVIGATION-IA-MAP-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Quality/RouteDepthChromeAudit.swift",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "SPEC-APP-NAVIGATION-PRESENTATION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Quality/RouteDepthChromeAudit.swift",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "SPEC-APP-NAVIGATION-ROOT-INTERACTION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/DesignSystem/StagePrimitives/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "SPEC-APP-SHELL-FIRST-VIEWPORT-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/DesignSystem/StagePrimitives/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "SPEC-APP-SHELL-GLOBAL-ACTIONS-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/DesignSystem/StagePrimitives/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/"
+      ],
+      "requirement_id": "SPEC-APP-SHELL-ROOT-NAVIGATION-001"
     },
     {
       "references": [],

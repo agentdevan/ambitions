@@ -399,7 +399,15 @@ class ManifestTests(unittest.TestCase):
         self.assertEqual(manifest.compiler_version, "0.1.0")
         self.assertEqual(
             tuple(item.path for item in manifest.normative_files),
-            (Path("CONSTITUTION.md"),),
+            (
+                Path("CONSTITUTION.md"),
+                Path("specifications/app/deep-linking.md"),
+                Path("specifications/app/degraded-states.md"),
+                Path("specifications/app/launch-and-setup.md"),
+                Path("specifications/app/navigation.md"),
+                Path("specifications/app/permissions.md"),
+                Path("specifications/app/shell.md"),
+            ),
         )
         self.assertEqual(
             manifest.generated_files,

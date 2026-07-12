@@ -2,7 +2,15 @@ schema_version = 1
 canon_revision = 1
 authority_state = "shadow"
 compiler_version = "0.1.0"
-normative_files = ["CONSTITUTION.md"]
+normative_files = [
+  "CONSTITUTION.md",
+  "specifications/app/deep-linking.md",
+  "specifications/app/degraded-states.md",
+  "specifications/app/launch-and-setup.md",
+  "specifications/app/navigation.md",
+  "specifications/app/permissions.md",
+  "specifications/app/shell.md",
+]
 
 generated_files = [
   "generated/CODEX_START_HERE.md",

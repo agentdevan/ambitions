@@ -34,6 +34,7 @@ from tools.ambitions_canon.migration import (
     import_claim_batches,
     register_repo_sources,
     register_source,
+    validate_materialized_specification_target_references,
     verify_catalog,
 )
 from tools.ambitions_canon.model import (
@@ -941,6 +942,12 @@ def _validated_docket_issues(
         (item.requirement_id for item in registry.requirements),
         registry.supersession_entries,
     )
+    if registry.reference_index is not None:
+        validate_materialized_specification_target_references(
+            root,
+            registry.reference_index.authority_references,
+            tuple(item.requirement_id for item in registry.requirements),
+        )
     return docket_known_issues(dockets)
 
 

@@ -26,6 +26,7 @@ from tools.ambitions_canon.build import (
 )
 from tools.ambitions_canon.model import (
     AtomicClaim,
+    AuthorityReference,
     CanonError,
     ClaimDisposition,
     ClaimTargetClass,
@@ -160,6 +161,9 @@ TRACKED_DISPOSITION_FIELDS = frozenset(
         "uncovered",
     }
 )
+MATERIALIZED_TARGET_REFERENCE_PREFIX = "MIGRATION-TARGET-"
+MATERIALIZED_TARGET_SOURCE = "docs/canon/migration/claim-dispositions.json#"
+MATERIALIZED_TARGET_STATUS = "materialized shadow specification target"
 
 
 @dataclass(frozen=True, slots=True)
@@ -4652,6 +4656,60 @@ def validate_tracked_canon_evidence(
         linear_decision_count=len(decision_numbers),
         decision_evidence_fingerprint_sha256=decision_fingerprint,
     )
+
+
+def validate_materialized_specification_target_references(
+    root: Path,
+    references: Sequence[AuthorityReference],
+    active_requirement_ids: Sequence[str],
+) -> None:
+    """Bind registered materialized migration targets to live requirements."""
+
+    snapshot = validate_tracked_canon_evidence(root)
+    if snapshot is None:
+        return
+    path = root / "docs/canon/migration/claim-dispositions.json"
+    payload = _tracked_json_object(snapshot.claim_dispositions_bytes, path)
+    claims = {
+        str(item["claim_id"]): _validate_tracked_claim(item, path)
+        for item in payload["claims"]
+    }
+    active = set(active_requirement_ids)
+    revision = hashlib.sha256(snapshot.claim_dispositions_bytes).hexdigest()
+    for reference in references:
+        if not reference.reference_id.startswith(MATERIALIZED_TARGET_REFERENCE_PREFIX):
+            continue
+        claim_id = reference.reference_id.removeprefix(
+            MATERIALIZED_TARGET_REFERENCE_PREFIX
+        )
+        claim = claims.get(claim_id)
+        target_id = claim.get("target_id") if claim is not None else None
+        valid = bool(
+            claim is not None
+            and claim["target_class"] == ClaimTargetClass.SPECIFICATION.value
+            and claim["disposition"]
+            in {
+                ClaimDisposition.KEEP.value,
+                ClaimDisposition.REWRITE.value,
+                ClaimDisposition.COMPOSE.value,
+            }
+            and isinstance(target_id, str)
+            and reference.source == f"{MATERIALIZED_TARGET_SOURCE}{claim_id}"
+            and reference.revision == revision
+            and reference.requirement_ids == (target_id,)
+            and target_id in active
+            and reference.approval_state == "approved"
+            and reference.implementation_status == MATERIALIZED_TARGET_STATUS
+        )
+        if not valid:
+            raise CanonError(
+                "CANON_MATERIALIZED_TARGET_MISMATCH",
+                (
+                    "materialized specification target reference does not match "
+                    f"its accepted tracked claim: {claim_id}"
+                ),
+                path,
+            )
 
 
 def tracked_decision_evidence_fingerprint_sha256(

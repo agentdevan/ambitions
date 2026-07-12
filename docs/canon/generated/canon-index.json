@@ -1,9 +1,63 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "a81fe53d1ba082647446713e7083e8f1077877306b7c342931d14f70788d792c",
+  "canon_content_sha": "6e2453eb459b472cca38af5f9cad2562a27c577343ce559741e8bd92c02e01ac",
   "canon_revision": 1,
   "compiler_version": "0.1.0",
   "documents": [
+    {
+      "kind": "app",
+      "owner_domain": "app-deep-linking",
+      "profile": "system-v1",
+      "source_path": "docs/canon/specifications/app/deep-linking.md",
+      "spec_id": "APP-DEEP-LINKING",
+      "status": "normative",
+      "title": "Deep Linking and External Route Entry"
+    },
+    {
+      "kind": "app",
+      "owner_domain": "app-degraded-states",
+      "profile": "system-v1",
+      "source_path": "docs/canon/specifications/app/degraded-states.md",
+      "spec_id": "APP-DEGRADED-STATES",
+      "status": "normative",
+      "title": "App Degraded States"
+    },
+    {
+      "kind": "app",
+      "owner_domain": "app-launch-setup",
+      "profile": "system-v1",
+      "source_path": "docs/canon/specifications/app/launch-and-setup.md",
+      "spec_id": "APP-LAUNCH-SETUP",
+      "status": "normative",
+      "title": "Launch and Progressive Setup"
+    },
+    {
+      "kind": "app",
+      "owner_domain": "app-navigation",
+      "profile": "system-v1",
+      "source_path": "docs/canon/specifications/app/navigation.md",
+      "spec_id": "APP-NAVIGATION",
+      "status": "normative",
+      "title": "App Navigation"
+    },
+    {
+      "kind": "app",
+      "owner_domain": "app-permissions",
+      "profile": "system-v1",
+      "source_path": "docs/canon/specifications/app/permissions.md",
+      "spec_id": "APP-PERMISSIONS",
+      "status": "normative",
+      "title": "Contextual Permissions"
+    },
+    {
+      "kind": "app",
+      "owner_domain": "app-shell",
+      "profile": "system-v1",
+      "source_path": "docs/canon/specifications/app/shell.md",
+      "spec_id": "APP-SHELL",
+      "status": "normative",
+      "title": "App Shell"
+    },
     {
       "kind": "constitution",
       "owner_domain": "product-and-engineering",
@@ -23,6 +77,222 @@
       "source_path": "docs/canon/CONSTITUTION.md",
       "status": "normative",
       "title": "Accessibility is equivalent product access"
+    },
+    {
+      "concept": "app.deep-linking.external-entry",
+      "line": 41,
+      "modality": "MUST",
+      "requirement_id": "APP-DEEP-LINK-EXTERNAL-ENTRY-001",
+      "source_path": "docs/canon/specifications/app/deep-linking.md",
+      "status": "normative",
+      "title": "External entry preserves owning-system boundaries"
+    },
+    {
+      "concept": "app.deep-linking.fallback",
+      "line": 74,
+      "modality": "MUST",
+      "requirement_id": "APP-DEEP-LINK-FALLBACK-001",
+      "source_path": "docs/canon/specifications/app/deep-linking.md",
+      "status": "normative",
+      "title": "Unavailable targets degrade safely"
+    },
+    {
+      "concept": "app.deep-linking.privacy",
+      "line": 63,
+      "modality": "MUST",
+      "requirement_id": "APP-DEEP-LINK-PRIVACY-001",
+      "source_path": "docs/canon/specifications/app/deep-linking.md",
+      "status": "normative",
+      "title": "Routes disclose minimum necessary identity"
+    },
+    {
+      "concept": "app.deep-linking.resolution",
+      "line": 52,
+      "modality": "MUST",
+      "requirement_id": "APP-DEEP-LINK-RESOLVE-001",
+      "source_path": "docs/canon/specifications/app/deep-linking.md",
+      "status": "normative",
+      "title": "Resolution validates target and action separately"
+    },
+    {
+      "concept": "app.deep-linking.state",
+      "line": 85,
+      "modality": "MUST",
+      "requirement_id": "APP-DEEP-LINK-STATE-001",
+      "source_path": "docs/canon/specifications/app/deep-linking.md",
+      "status": "normative",
+      "title": "Route handling is replay-safe and single-use where required"
+    },
+    {
+      "concept": "app.degraded.failure-taxonomy",
+      "line": 42,
+      "modality": "MUST",
+      "requirement_id": "APP-DEGRADED-FAILURE-TAXONOMY-001",
+      "source_path": "docs/canon/specifications/app/degraded-states.md",
+      "status": "normative",
+      "title": "Failures keep distinct user consequences"
+    },
+    {
+      "concept": "app.degraded.presentation",
+      "line": 55,
+      "modality": "MUST",
+      "requirement_id": "APP-DEGRADED-PRESENTATION-001",
+      "source_path": "docs/canon/specifications/app/degraded-states.md",
+      "status": "normative",
+      "title": "Degradation is calm, scoped, and actionable"
+    },
+    {
+      "concept": "app.degraded.input-preservation",
+      "line": 66,
+      "modality": "MUST",
+      "requirement_id": "APP-DEGRADED-PRESERVE-001",
+      "source_path": "docs/canon/specifications/app/degraded-states.md",
+      "status": "normative",
+      "title": "Failure preserves accepted input and local truth"
+    },
+    {
+      "concept": "app.degraded.recovery",
+      "line": 77,
+      "modality": "MUST",
+      "requirement_id": "APP-DEGRADED-RECOVERY-001",
+      "source_path": "docs/canon/specifications/app/degraded-states.md",
+      "status": "normative",
+      "title": "Recovery is class-specific and reversible"
+    },
+    {
+      "concept": "app.degraded.state",
+      "line": 88,
+      "modality": "MUST",
+      "requirement_id": "APP-DEGRADED-STATE-001",
+      "source_path": "docs/canon/specifications/app/degraded-states.md",
+      "status": "normative",
+      "title": "Degraded state retains scope and freshness"
+    },
+    {
+      "concept": "app.launch.readiness",
+      "line": 53,
+      "modality": "MUST",
+      "requirement_id": "APP-LAUNCH-READINESS-001",
+      "source_path": "docs/canon/specifications/app/launch-and-setup.md",
+      "status": "normative",
+      "title": "Launch gate protects durable local readiness"
+    },
+    {
+      "concept": "app.launch.recovery",
+      "line": 64,
+      "modality": "MUST",
+      "requirement_id": "APP-LAUNCH-RECOVERY-001",
+      "source_path": "docs/canon/specifications/app/launch-and-setup.md",
+      "status": "normative",
+      "title": "Launch failure offers repair without destructive reset"
+    },
+    {
+      "concept": "app.navigation.restoration",
+      "line": 69,
+      "modality": "MUST",
+      "requirement_id": "APP-NAVIGATION-RESTORATION-001",
+      "source_path": "docs/canon/specifications/app/navigation.md",
+      "status": "normative",
+      "title": "Restoration validates before presentation"
+    },
+    {
+      "concept": "app.navigation.state",
+      "line": 80,
+      "modality": "MUST",
+      "requirement_id": "APP-NAVIGATION-STATE-001",
+      "source_path": "docs/canon/specifications/app/navigation.md",
+      "status": "normative",
+      "title": "One route owner at each depth"
+    },
+    {
+      "concept": "app.permissions.denied-fallback",
+      "line": 49,
+      "modality": "MUST",
+      "requirement_id": "APP-PERMISSION-DENIAL-001",
+      "source_path": "docs/canon/specifications/app/permissions.md",
+      "status": "normative",
+      "title": "Denial preserves useful local behavior"
+    },
+    {
+      "concept": "app.permissions.reconciliation",
+      "line": 82,
+      "modality": "MUST",
+      "requirement_id": "APP-PERMISSION-RECONCILE-001",
+      "source_path": "docs/canon/specifications/app/permissions.md",
+      "status": "normative",
+      "title": "Authorization changes reconcile deterministically"
+    },
+    {
+      "concept": "app.permissions.recovery",
+      "line": 71,
+      "modality": "MUST",
+      "requirement_id": "APP-PERMISSION-RECOVERY-001",
+      "source_path": "docs/canon/specifications/app/permissions.md",
+      "status": "normative",
+      "title": "Recovery uses exact settings and safe return"
+    },
+    {
+      "concept": "app.permissions.state",
+      "line": 60,
+      "modality": "MUST",
+      "requirement_id": "APP-PERMISSION-STATE-001",
+      "source_path": "docs/canon/specifications/app/permissions.md",
+      "status": "normative",
+      "title": "Permission state remains distinct from feature data"
+    },
+    {
+      "concept": "app.permissions.contextual-request",
+      "line": 38,
+      "modality": "MUST",
+      "requirement_id": "APP-PERMISSIONS-CONTRACT-001",
+      "source_path": "docs/canon/specifications/app/permissions.md",
+      "status": "normative",
+      "title": "Every request explains its boundary"
+    },
+    {
+      "concept": "app.setup.progressive-first-use",
+      "line": 40,
+      "modality": "MUST",
+      "requirement_id": "APP-SETUP-PROGRESSIVE-FIRST-USE-001",
+      "source_path": "docs/canon/specifications/app/launch-and-setup.md",
+      "status": "normative",
+      "title": "Local core precedes optional setup"
+    },
+    {
+      "concept": "app.setup.interruption-resume",
+      "line": 75,
+      "modality": "MUST",
+      "requirement_id": "APP-SETUP-RESUME-001",
+      "source_path": "docs/canon/specifications/app/launch-and-setup.md",
+      "status": "normative",
+      "title": "Setup interruption never loses accepted progress"
+    },
+    {
+      "concept": "app.setup.state",
+      "line": 86,
+      "modality": "MUST",
+      "requirement_id": "APP-SETUP-STATE-001",
+      "source_path": "docs/canon/specifications/app/launch-and-setup.md",
+      "status": "normative",
+      "title": "Setup progress reflects useful context"
+    },
+    {
+      "concept": "app.shell.failure-recovery",
+      "line": 84,
+      "modality": "MUST",
+      "requirement_id": "APP-SHELL-FAILURE-001",
+      "source_path": "docs/canon/specifications/app/shell.md",
+      "status": "normative",
+      "title": "Shell failure preserves a usable local root"
+    },
+    {
+      "concept": "app.shell.state",
+      "line": 73,
+      "modality": "MUST",
+      "requirement_id": "APP-SHELL-STATE-001",
+      "source_path": "docs/canon/specifications/app/shell.md",
+      "status": "normative",
+      "title": "Shell state follows route state"
     },
     {
       "concept": "authority.amendment",
@@ -617,6 +887,60 @@
       "source_path": "docs/canon/CONSTITUTION.md",
       "status": "normative",
       "title": "Canonical runtime owner"
+    },
+    {
+      "concept": "app.navigation.ia-map",
+      "line": 36,
+      "modality": "MUST",
+      "requirement_id": "SPEC-APP-NAVIGATION-IA-MAP-001",
+      "source_path": "docs/canon/specifications/app/navigation.md",
+      "status": "normative",
+      "title": "Navigation maps constitutional owners"
+    },
+    {
+      "concept": "app.navigation.presentation",
+      "line": 47,
+      "modality": "MUST",
+      "requirement_id": "SPEC-APP-NAVIGATION-PRESENTATION-001",
+      "source_path": "docs/canon/specifications/app/navigation.md",
+      "status": "normative",
+      "title": "Presentation follows route kind"
+    },
+    {
+      "concept": "app.navigation.root-interaction",
+      "line": 58,
+      "modality": "MUST",
+      "requirement_id": "SPEC-APP-NAVIGATION-ROOT-INTERACTION-001",
+      "source_path": "docs/canon/specifications/app/navigation.md",
+      "status": "normative",
+      "title": "Root interaction preserves useful state"
+    },
+    {
+      "concept": "app.shell.first-viewport",
+      "line": 62,
+      "modality": "MUST",
+      "requirement_id": "SPEC-APP-SHELL-FIRST-VIEWPORT-001",
+      "source_path": "docs/canon/specifications/app/shell.md",
+      "status": "normative",
+      "title": "Product object dominates shell chrome"
+    },
+    {
+      "concept": "app.shell.global-actions",
+      "line": 51,
+      "modality": "MUST",
+      "requirement_id": "SPEC-APP-SHELL-GLOBAL-ACTIONS-001",
+      "source_path": "docs/canon/specifications/app/shell.md",
+      "status": "normative",
+      "title": "Integrated global-action access"
+    },
+    {
+      "concept": "app.shell.root-navigation",
+      "line": 38,
+      "modality": "MUST",
+      "requirement_id": "SPEC-APP-SHELL-ROOT-NAVIGATION-001",
+      "source_path": "docs/canon/specifications/app/shell.md",
+      "status": "normative",
+      "title": "Root-depth shell ownership"
     },
     {
       "concept": "surface.today-primary-identity",

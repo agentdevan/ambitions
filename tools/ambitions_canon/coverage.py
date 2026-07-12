@@ -75,6 +75,7 @@ APPROVED_PROFILES: Mapping[str, tuple[str, ...]] = MappingProxyType(
 PROFILE_NAMES = frozenset(APPROVED_PROFILES)
 PROFILE_REQUIRED_KINDS = frozenset(
     {
+        DocumentKind.APP,
         DocumentKind.SURFACE,
         DocumentKind.OBJECT,
         DocumentKind.JOURNEY,
@@ -84,6 +85,7 @@ PROFILE_REQUIRED_KINDS = frozenset(
 )
 PROFILE_BY_KIND: Mapping[DocumentKind, str] = MappingProxyType(
     {
+        DocumentKind.APP: "system-v1",
         DocumentKind.SURFACE: "surface-v1",
         DocumentKind.OBJECT: "object-v1",
         DocumentKind.JOURNEY: "journey-v1",
