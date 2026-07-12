@@ -1,0 +1,34 @@
+{
+  "batch_id": "test-domain",
+  "claims": [
+    {
+      "authority_claim": true,
+      "claim_id": "CLAIM-TEST-001",
+      "concept": "surface.today.primary-identity",
+      "conditions": [],
+      "disposition": "keep",
+      "exceptions": [],
+      "modality": "MUST",
+      "original_text": "Today MUST present Start here.",
+      "owner_approval": "owner-approved:test",
+      "predicate": "presents",
+      "rationale": "Preserves the approved primary decision object.",
+      "scope": "surface.today",
+      "source_id": "LINEAR-CANON-V3",
+      "source_location": "line:1",
+      "subject": "Today",
+      "target_class": "specification",
+      "target_id": "SURFACE-TODAY-PRIMARY-001",
+      "value": "Start here"
+    }
+  ],
+  "schema_version": 1,
+  "source_section_dispositions": [
+    {
+      "disposition": "no_normative_claims",
+      "rationale": "Metadata only.",
+      "source_id": "LINEAR-CANON-V3",
+      "source_location": "line:2"
+    }
+  ]
+}

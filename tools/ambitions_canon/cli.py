@@ -24,6 +24,8 @@ from tools.ambitions_canon.coverage import coverage_findings, load_profiles
 from tools.ambitions_canon.impact import write_amendment_scaffold
 from tools.ambitions_canon.manifest import load_documents, load_manifest
 from tools.ambitions_canon.migration import (
+    claim_coverage,
+    import_claim_batches,
     register_repo_sources,
     register_source,
     verify_catalog,
@@ -199,6 +201,37 @@ def main(argv: Sequence[str] | None = None) -> int:
         type=Path,
         default=Path("docs/canon/migration/source-catalog.json"),
     )
+    claims_parser = migration_subparsers.add_parser(
+        "claims", help="import and check atomic migration claims"
+    )
+    claims_subparsers = claims_parser.add_subparsers(
+        dest="claims_command", required=True
+    )
+    claims_import_parser = claims_subparsers.add_parser(
+        "import", help="validate and integrate ignored atomic-claim batches"
+    )
+    claims_import_parser.add_argument("--input-dir", type=Path, required=True)
+    claims_import_parser.add_argument(
+        "--catalog",
+        type=Path,
+        default=Path("docs/canon/migration/source-catalog.json"),
+    )
+    claims_import_parser.add_argument(
+        "--output",
+        type=Path,
+        default=Path("docs/canon/migration/claim-dispositions.json"),
+    )
+    claims_coverage_parser = claims_subparsers.add_parser(
+        "coverage", help="check registered source-section claim coverage"
+    )
+    claims_coverage_parser.add_argument(
+        "--dispositions",
+        type=Path,
+        default=Path("docs/canon/migration/claim-dispositions.json"),
+    )
+    claims_coverage_parser.add_argument("--concept-prefix")
+    claims_coverage_parser.add_argument("--target-class")
+    claims_coverage_parser.add_argument("--output", type=Path)
     arguments = parser.parse_args(argv)
 
     if arguments.command == "version":
@@ -245,6 +278,8 @@ def main(argv: Sequence[str] | None = None) -> int:
 
 
 def _migration(root: Path, arguments: argparse.Namespace) -> int:
+    if arguments.migration_command == "claims":
+        return _migration_claims(root, arguments)
     catalog = arguments.catalog
     if not catalog.is_absolute():
         catalog = root / catalog
@@ -304,6 +339,54 @@ def _migration(root: Path, arguments: argparse.Namespace) -> int:
         location = error.path.as_posix() if error.path is not None else "<migration>"
         print(f"P0_BLOCKER {error.code} {location}:{error.line or 0} {error.message}")
         return 1
+
+
+def _migration_claims(root: Path, arguments: argparse.Namespace) -> int:
+    try:
+        if arguments.claims_command == "import":
+            input_dir = _rooted(root, arguments.input_dir)
+            catalog = _rooted(root, arguments.catalog)
+            output = _rooted(root, arguments.output)
+            result = import_claim_batches(root, input_dir, catalog, output)
+            print(
+                "GREEN ambitions canon migration claims import "
+                f"sources={result.source_count} sections={result.section_count} "
+                f"decisions={result.linear_decision_count} claims={result.claim_count}"
+            )
+            return 0
+        if arguments.claims_command == "coverage":
+            dispositions = _rooted(root, arguments.dispositions)
+            report = claim_coverage(
+                dispositions,
+                concept_prefix=arguments.concept_prefix,
+                target_class=arguments.target_class,
+            )
+            if arguments.output is not None:
+                from tools.ambitions_canon.migration import _write_claim_json
+
+                _write_claim_json(_rooted(root, arguments.output), report.to_dict())
+            if not report.complete:
+                for item in report.uncovered:
+                    print(
+                        "P0_BLOCKER CLAIM_COVERAGE_INCOMPLETE "
+                        f"{item['source_id']}:{item['source_location']}"
+                    )
+                return 1
+            print(
+                "GREEN ambitions canon migration claims coverage "
+                f"sources={report.source_count} sections={report.section_count} "
+                f"decisions={report.linear_decision_count} claims={len(report.claims)}"
+            )
+            return 0
+        raise AssertionError(f"unhandled claims command: {arguments.claims_command}")
+    except CanonError as error:
+        location = error.path.as_posix() if error.path is not None else "<claims>"
+        print(f"P0_BLOCKER {error.code} {location}:{error.line or 0} {error.message}")
+        return 1
+
+
+def _rooted(root: Path, path: Path) -> Path:
+    return path if path.is_absolute() else root / path
 
 
 def _amend_scaffold(root: Path, *, concept: str, output: Path) -> int:

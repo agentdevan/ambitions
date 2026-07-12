@@ -7,6 +7,7 @@ import errno
 import hashlib
 import json
 import os
+import re
 import stat
 import subprocess
 import sys
@@ -18,11 +19,20 @@ from typing import Never
 
 from tools.ambitions_canon.build import (
     _normalized_absolute,
+    _open_directory_absolute_nofollow,
     _open_parent_nofollow,
     _read_descriptor,
     _rename_noreplace,
 )
-from tools.ambitions_canon.model import CanonError, Finding, GapSeverity
+from tools.ambitions_canon.model import (
+    AtomicClaim,
+    CanonError,
+    ClaimDisposition,
+    ClaimTargetClass,
+    Finding,
+    GapSeverity,
+    Modality,
+)
 from tools.ambitions_canon.render import stable_json
 
 
@@ -57,6 +67,84 @@ RECORD_FIELDS = METADATA_FIELDS | frozenset(
 )
 RAW_FIELDS = frozenset({"raw_path", "raw_sha256", "raw_byte_length"})
 REPO_FIELDS = frozenset({"repo_path", "content_sha256", "repository_revision"})
+CLAIM_FIELDS = frozenset(
+    {
+        "claim_id",
+        "source_id",
+        "source_location",
+        "original_text",
+        "concept",
+        "subject",
+        "predicate",
+        "value",
+        "modality",
+        "scope",
+        "conditions",
+        "exceptions",
+        "authority_claim",
+        "owner_approval",
+        "disposition",
+        "target_id",
+        "target_class",
+        "rationale",
+    }
+)
+DECISION_CLAIM_FIELDS = frozenset({"owner_evidence_text", "owner_evidence_rationale"})
+CLAIM_BATCH_FIELDS = frozenset(
+    {"schema_version", "batch_id", "claims", "source_section_dispositions"}
+)
+SECTION_DISPOSITION_FIELDS = frozenset(
+    {"source_id", "source_location", "disposition", "rationale"}
+)
+TARGET_REQUIRED_DISPOSITIONS = frozenset(
+    {ClaimDisposition.KEEP, ClaimDisposition.REWRITE, ClaimDisposition.COMPOSE}
+)
+TARGET_CLASSES = frozenset(
+    {
+        ClaimTargetClass.CONSTITUTION,
+        ClaimTargetClass.SPECIFICATION,
+        ClaimTargetClass.STANDARD,
+    }
+)
+CLAIM_ID_PATTERN = re.compile(r"^[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)+$")
+TARGET_ID_PATTERN = re.compile(r"^[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)+$")
+CONCEPT_PATTERN = re.compile(r"^[a-z0-9]+(?:[._-][a-z0-9]+)*$")
+LINE_LOCATION_PATTERN = re.compile(r"^line:([1-9][0-9]*)$")
+DECISION_LOCATION_PATTERN = re.compile(r"^decision:([1-9][0-9]*)$")
+DECISION_EVIDENCE_PATTERN = re.compile(
+    r"^linear-(?:comment|ledger):[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-"
+    r"[0-9a-f]{4}-[0-9a-f]{12}:decision:([1-9][0-9]*)$"
+)
+UUID_PATTERN = re.compile(
+    r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+)
+MARKDOWN_HEADING_PATTERN = re.compile(r"^#{1,6}[ \t]+\S")
+TRACKED_CLAIM_FIELDS = frozenset(
+    {
+        "authority_claim",
+        "claim_id",
+        "concept",
+        "decision_mapping_status",
+        "disposition",
+        "owner_approval_sha256",
+        "owner_evidence_rationale_sha256",
+        "owner_evidence_text_sha256",
+        "rationale_sha256",
+        "source_id",
+        "source_location",
+        "target_class",
+        "target_id",
+    }
+)
+TRACKED_COVERAGE_FIELDS = frozenset(
+    {
+        "claim_ids",
+        "disposition",
+        "rationale_sha256",
+        "source_id",
+        "source_location",
+    }
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -2218,3 +2306,2473 @@ def _finding(code: str, message: str, path: Path) -> Finding:
     return Finding(
         code=code, severity=GapSeverity.P0_BLOCKER, message=message, path=path
     )
+
+
+@dataclass(frozen=True, slots=True)
+class SourceSectionDisposition:
+    source_id: str
+    source_location: str
+    rationale: str
+
+
+@dataclass(frozen=True, slots=True)
+class ClaimBatch:
+    batch_id: str
+    claims: tuple[AtomicClaim, ...]
+    source_section_dispositions: tuple[SourceSectionDisposition, ...]
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "claims", tuple(self.claims))
+        object.__setattr__(
+            self,
+            "source_section_dispositions",
+            tuple(self.source_section_dispositions),
+        )
+
+
+@dataclass(frozen=True, slots=True)
+class DecisionEvidenceEntry:
+    decision_number: int
+    evidence_kind: str
+    entity_id: str
+    evidence_locator: str
+    author: str
+    owner_evidence_text: str
+    owner_evidence_rationale: str
+    v3_clause: str
+    mapping_status: str
+    mapping_reviewed_by: str | None
+    mapping_rationale: str
+
+
+@dataclass(frozen=True, slots=True)
+class DecisionEvidenceSnapshot:
+    linear_v3_document_id: str
+    owner: str
+    evidence_entries: tuple[DecisionEvidenceEntry, ...]
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "evidence_entries", tuple(self.evidence_entries))
+
+
+@dataclass(frozen=True, slots=True)
+class ClaimImportResult:
+    source_count: int
+    section_count: int
+    linear_decision_count: int
+    claim_count: int
+    output_path: Path
+
+
+@dataclass(frozen=True, slots=True)
+class ClaimCoverageReport:
+    complete: bool
+    claims: tuple[dict[str, object], ...]
+    uncovered: tuple[dict[str, str], ...]
+    source_count: int
+    section_count: int
+    linear_decision_count: int
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "claims", tuple(dict(item) for item in self.claims))
+        object.__setattr__(
+            self,
+            "uncovered",
+            tuple(dict(item) for item in self.uncovered),
+        )
+
+    def to_dict(self) -> dict[str, object]:
+        return {
+            "claims": list(self.claims),
+            "complete": self.complete,
+            "linear_decision_count": self.linear_decision_count,
+            "schema_version": 1,
+            "section_count": self.section_count,
+            "source_count": self.source_count,
+            "uncovered": list(self.uncovered),
+        }
+
+
+@dataclass(frozen=True, slots=True)
+class _SourceInventory:
+    record: SourceRecord
+    source_path: Path
+    raw: bytes
+    identity: tuple[int, int, int, int, int]
+    byte_length: int
+    content_sha256: str
+    text: str
+    lines: tuple[str, ...]
+    sections: tuple[str, ...]
+    heading_lines: tuple[int, ...]
+
+
+def parse_claim_batch(raw: bytes, path: Path) -> ClaimBatch:
+    """Parse one closed, ignored atomic-claim interchange batch."""
+
+    try:
+        payload = json.loads(raw.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise CanonError(
+            "CLAIM_BATCH_INVALID",
+            "claim batch must be valid UTF-8 JSON",
+            path,
+        ) from exc
+    _validate_json_utf8_strings(payload, path)
+    if not isinstance(payload, dict) or set(payload) != CLAIM_BATCH_FIELDS:
+        raise CanonError(
+            "CLAIM_BATCH_INVALID",
+            "claim batch must contain exactly the supported top-level fields",
+            path,
+        )
+    if payload["schema_version"] != 1 or isinstance(payload["schema_version"], bool):
+        raise CanonError(
+            "CLAIM_BATCH_INVALID",
+            "claim batch schema_version must equal 1",
+            path,
+        )
+    batch_id = _claim_string(payload, "batch_id", path)
+    raw_claims = payload["claims"]
+    raw_dispositions = payload["source_section_dispositions"]
+    if not isinstance(raw_claims, list) or not isinstance(raw_dispositions, list):
+        raise CanonError(
+            "CLAIM_BATCH_INVALID",
+            "claims and source_section_dispositions must be arrays",
+            path,
+        )
+    claims = tuple(_atomic_claim_from_dict(item, path) for item in raw_claims)
+    dispositions = tuple(
+        _section_disposition_from_dict(item, path) for item in raw_dispositions
+    )
+    _require_unique(
+        (item.claim_id for item in claims),
+        "CLAIM_ID_DUPLICATE",
+        "claim_id",
+        path,
+    )
+    _require_unique(
+        (f"{item.source_id}\0{item.source_location}" for item in dispositions),
+        "CLAIM_SECTION_DISPOSITION_DUPLICATE",
+        "source section disposition",
+        path,
+    )
+    return ClaimBatch(batch_id, claims, dispositions)
+
+
+def parse_decision_evidence_snapshot(
+    raw: bytes,
+    path: Path,
+) -> DecisionEvidenceSnapshot:
+    """Parse exact ignored owner evidence for Linear Decisions 1 through 201."""
+
+    try:
+        payload = json.loads(raw.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise CanonError(
+            "CLAIM_DECISION_EVIDENCE_INVALID",
+            "decision evidence snapshot must be valid UTF-8 JSON",
+            path,
+        ) from exc
+    _validate_json_utf8_strings(payload, path)
+    top_fields = {
+        "schema_version",
+        "linear_v3_document_id",
+        "owner",
+        "evidence_entries",
+    }
+    if not isinstance(payload, dict) or set(payload) != top_fields:
+        raise CanonError(
+            "CLAIM_DECISION_EVIDENCE_INVALID",
+            "decision evidence snapshot uses an unsupported closed shape",
+            path,
+        )
+    if payload["schema_version"] != 1 or isinstance(payload["schema_version"], bool):
+        raise CanonError(
+            "CLAIM_DECISION_EVIDENCE_INVALID",
+            "decision evidence schema_version must equal 1",
+            path,
+        )
+    document_id = _claim_string(payload, "linear_v3_document_id", path)
+    owner = _claim_string(payload, "owner", path)
+    if document_id != "96b93346-271d-46fc-beab-43ff7e286b5d" or owner != "Devan Warner":
+        raise CanonError(
+            "CLAIM_DECISION_EVIDENCE_INVALID",
+            "decision evidence must bind the exact v3 document and owner",
+            path,
+        )
+    raw_entries = payload["evidence_entries"]
+    if not isinstance(raw_entries, list):
+        raise CanonError(
+            "CLAIM_DECISION_EVIDENCE_INVALID",
+            "evidence_entries must be an array",
+            path,
+        )
+    entry_fields = {
+        "decision_number",
+        "evidence_kind",
+        "entity_id",
+        "evidence_locator",
+        "author",
+        "owner_evidence_text",
+        "owner_evidence_rationale",
+        "v3_clause",
+        "mapping_status",
+        "mapping_reviewed_by",
+        "mapping_rationale",
+    }
+    entries: list[DecisionEvidenceEntry] = []
+    locators: set[str] = set()
+    for raw_entry in raw_entries:
+        if not isinstance(raw_entry, dict) or set(raw_entry) != entry_fields:
+            raise CanonError(
+                "CLAIM_DECISION_EVIDENCE_INVALID",
+                "decision evidence entry uses an unsupported closed shape",
+                path,
+            )
+        decision_number = raw_entry["decision_number"]
+        if (
+            not isinstance(decision_number, int)
+            or isinstance(decision_number, bool)
+            or not 1 <= decision_number <= 201
+        ):
+            raise CanonError(
+                "CLAIM_DECISION_EVIDENCE_INVALID",
+                "decision_number must be 1 through 201",
+                path,
+            )
+        evidence_kind = _claim_string(raw_entry, "evidence_kind", path)
+        entity_id = _claim_string(raw_entry, "entity_id", path)
+        locator = _claim_string(raw_entry, "evidence_locator", path)
+        author = _claim_string(raw_entry, "author", path)
+        owner_text = _claim_string(raw_entry, "owner_evidence_text", path)
+        owner_rationale = _claim_string(raw_entry, "owner_evidence_rationale", path)
+        v3_clause = _claim_string(raw_entry, "v3_clause", path)
+        mapping_status = _claim_string(raw_entry, "mapping_status", path)
+        mapping_rationale = _claim_string(raw_entry, "mapping_rationale", path)
+        reviewed_by = raw_entry["mapping_reviewed_by"]
+        if reviewed_by is not None:
+            if not isinstance(reviewed_by, str) or not reviewed_by.strip():
+                raise CanonError(
+                    "CLAIM_DECISION_EVIDENCE_INVALID",
+                    "mapping_reviewed_by must be null or nonblank",
+                    path,
+                )
+        if (
+            evidence_kind not in {"ledger", "comment"}
+            or UUID_PATTERN.fullmatch(entity_id) is None
+        ):
+            raise CanonError(
+                "CLAIM_DECISION_EVIDENCE_INVALID",
+                "evidence kind or entity UUID is invalid",
+                path,
+            )
+        expected_locator = (
+            f"linear-{evidence_kind}:{entity_id}:decision:{decision_number}"
+        )
+        if locator != expected_locator or author != owner:
+            raise CanonError(
+                "CLAIM_DECISION_EVIDENCE_INVALID",
+                "evidence locator, author, and decision number must agree",
+                path,
+            )
+        if mapping_status == "independently_reviewed":
+            if reviewed_by is None:
+                raise CanonError(
+                    "CLAIM_DECISION_EVIDENCE_INVALID",
+                    "reviewed mapping requires mapping_reviewed_by",
+                    path,
+                )
+        elif mapping_status == "unreviewed":
+            if reviewed_by is not None:
+                raise CanonError(
+                    "CLAIM_DECISION_EVIDENCE_INVALID",
+                    "unreviewed mapping cannot name a reviewer",
+                    path,
+                )
+        else:
+            raise CanonError(
+                "CLAIM_DECISION_EVIDENCE_INVALID",
+                "mapping_status must be independently_reviewed or unreviewed",
+                path,
+            )
+        if locator in locators:
+            raise CanonError(
+                "CLAIM_DECISION_EVIDENCE_INVALID",
+                f"duplicate evidence locator: {locator}",
+                path,
+            )
+        locators.add(locator)
+        entries.append(
+            DecisionEvidenceEntry(
+                decision_number,
+                evidence_kind,
+                entity_id,
+                locator,
+                author,
+                owner_text,
+                owner_rationale,
+                v3_clause,
+                mapping_status,
+                reviewed_by,
+                mapping_rationale,
+            )
+        )
+    if tuple(item.decision_number for item in entries) != tuple(range(1, 202)):
+        raise CanonError(
+            "CLAIM_DECISION_EVIDENCE_INVALID",
+            "decision evidence must contain sorted unique Decisions 1 through 201",
+            path,
+        )
+    return DecisionEvidenceSnapshot(document_id, owner, tuple(entries))
+
+
+def _atomic_claim_from_dict(value: object, path: Path) -> AtomicClaim:
+    value_fields = frozenset(value) if isinstance(value, dict) else frozenset()
+    if not isinstance(value, dict) or value_fields not in (
+        CLAIM_FIELDS,
+        CLAIM_FIELDS | DECISION_CLAIM_FIELDS,
+    ):
+        raise CanonError(
+            "CLAIM_INVALID",
+            "claim must contain exactly the supported fields",
+            path,
+        )
+    strings = {
+        field: _claim_string(value, field, path)
+        for field in (
+            "claim_id",
+            "source_id",
+            "source_location",
+            "original_text",
+            "concept",
+            "subject",
+            "predicate",
+            "value",
+            "modality",
+            "scope",
+            "disposition",
+            "target_class",
+            "rationale",
+        )
+    }
+    if CLAIM_ID_PATTERN.fullmatch(strings["claim_id"]) is None:
+        raise CanonError(
+            "CLAIM_ID_INVALID",
+            "claim_id must use a stable uppercase domain-prefixed ID",
+            path,
+        )
+    if CONCEPT_PATTERN.fullmatch(strings["concept"]) is None:
+        raise CanonError(
+            "CLAIM_CONCEPT_INVALID",
+            "concept must be a normalized lowercase key",
+            path,
+        )
+    location_kind, location_number = _parse_source_location(
+        strings["source_location"], path
+    )
+    conditions = _claim_string_array(value, "conditions", path)
+    exceptions = _claim_string_array(value, "exceptions", path)
+    authority_claim = value["authority_claim"]
+    if not isinstance(authority_claim, bool):
+        raise CanonError(
+            "CLAIM_INVALID",
+            "authority_claim must be a boolean",
+            path,
+        )
+    owner_approval = value["owner_approval"]
+    if owner_approval is not None:
+        if not isinstance(owner_approval, str) or not owner_approval.strip():
+            raise CanonError(
+                "CLAIM_INVALID",
+                "owner_approval must be null or a nonblank evidence string",
+                path,
+            )
+        _require_utf8(owner_approval, path)
+    if location_kind == "decision":
+        evidence_match = (
+            DECISION_EVIDENCE_PATTERN.fullmatch(owner_approval)
+            if owner_approval is not None
+            else None
+        )
+        if (
+            strings["source_id"] != "LINEAR-CANON-V3"
+            or evidence_match is None
+            or int(evidence_match.group(1)) != location_number
+        ):
+            raise CanonError(
+                "CLAIM_DECISION_PROVENANCE_REQUIRED",
+                "decision claim requires number-matched owner evidence; range inference is forbidden",
+                path,
+            )
+        if not DECISION_CLAIM_FIELDS.issubset(value):
+            raise CanonError(
+                "CLAIM_DECISION_PROVENANCE_REQUIRED",
+                "decision claim requires exact owner evidence text and rationale",
+                path,
+            )
+        owner_evidence_text = _claim_string(value, "owner_evidence_text", path)
+        owner_evidence_rationale = _claim_string(
+            value, "owner_evidence_rationale", path
+        )
+    else:
+        if DECISION_CLAIM_FIELDS & set(value):
+            raise CanonError(
+                "CLAIM_INVALID",
+                "owner evidence fields are decision-claim-only",
+                path,
+            )
+        owner_evidence_text = None
+        owner_evidence_rationale = None
+    target_id = value["target_id"]
+    if target_id is not None:
+        if (
+            not isinstance(target_id, str)
+            or TARGET_ID_PATTERN.fullmatch(target_id) is None
+        ):
+            raise CanonError(
+                "CLAIM_TARGET_INVALID",
+                "target_id must be null or a globally valid planned stable ID",
+                path,
+            )
+    try:
+        modality = Modality(strings["modality"])
+        disposition = ClaimDisposition(strings["disposition"])
+        target_class = ClaimTargetClass(strings["target_class"])
+    except ValueError as exc:
+        raise CanonError(
+            "CLAIM_ENUM_INVALID",
+            "claim uses an unsupported closed enum value",
+            path,
+        ) from exc
+    _validate_claim_destination(disposition, target_class, target_id, path)
+    if location_kind == "decision" and disposition not in {
+        ClaimDisposition.PROVENANCE_ONLY,
+        ClaimDisposition.CONFLICT,
+    }:
+        raise CanonError(
+            "CLAIM_DECISION_MAPPING_AUTHORITY",
+            "decision claims must remain provenance_only or conflict",
+            path,
+        )
+    return AtomicClaim(
+        claim_id=strings["claim_id"],
+        source_id=strings["source_id"],
+        source_location=strings["source_location"],
+        concept=strings["concept"],
+        subject=strings["subject"],
+        predicate=strings["predicate"],
+        value=strings["value"],
+        modality=modality,
+        scope=strings["scope"],
+        conditions=conditions,
+        exceptions=exceptions,
+        authority_claim=authority_claim,
+        owner_approval=owner_approval,
+        disposition=disposition,
+        target_id=target_id,
+        original_text=strings["original_text"],
+        target_class=target_class,
+        rationale=strings["rationale"],
+        owner_evidence_text=owner_evidence_text,
+        owner_evidence_rationale=owner_evidence_rationale,
+    )
+
+
+def _validate_claim_destination(
+    disposition: ClaimDisposition,
+    target_class: ClaimTargetClass,
+    target_id: str | None,
+    path: Path,
+) -> None:
+    if disposition in TARGET_REQUIRED_DISPOSITIONS:
+        if target_id is None or target_class not in TARGET_CLASSES:
+            raise CanonError(
+                "CLAIM_TARGET_REQUIRED",
+                "keep, rewrite, and compose require a planned canonical target",
+                path,
+            )
+        return
+    expected = {
+        ClaimDisposition.CONFLICT: ClaimTargetClass.DECISION_DOCKET,
+        ClaimDisposition.PROVENANCE_ONLY: ClaimTargetClass.PROVENANCE,
+        ClaimDisposition.REJECT: ClaimTargetClass.REJECTION,
+    }[disposition]
+    if target_id is not None or target_class is not expected:
+        raise CanonError(
+            "CLAIM_TARGET_FORBIDDEN",
+            f"{disposition.value} cannot carry an automatic canonical winner",
+            path,
+        )
+
+
+def _section_disposition_from_dict(
+    value: object,
+    path: Path,
+) -> SourceSectionDisposition:
+    if not isinstance(value, dict) or set(value) != SECTION_DISPOSITION_FIELDS:
+        raise CanonError(
+            "CLAIM_SECTION_DISPOSITION_INVALID",
+            "source section disposition must contain exactly the supported fields",
+            path,
+        )
+    if value["disposition"] != "no_normative_claims":
+        raise CanonError(
+            "CLAIM_SECTION_DISPOSITION_INVALID",
+            "section disposition must equal no_normative_claims",
+            path,
+        )
+    source_id = _claim_string(value, "source_id", path)
+    source_location = _claim_string(value, "source_location", path)
+    rationale = _claim_string(value, "rationale", path)
+    _parse_source_location(source_location, path)
+    return SourceSectionDisposition(source_id, source_location, rationale)
+
+
+def _claim_string(value: Mapping[str, object], field: str, path: Path) -> str:
+    result = value.get(field)
+    if not isinstance(result, str) or not result.strip():
+        raise CanonError(
+            "CLAIM_INVALID",
+            f"{field} must be a nonblank string",
+            path,
+        )
+    _require_utf8(result, path)
+    return result
+
+
+def _claim_string_array(
+    value: Mapping[str, object],
+    field: str,
+    path: Path,
+) -> tuple[str, ...]:
+    raw = value.get(field)
+    if not isinstance(raw, list):
+        raise CanonError("CLAIM_INVALID", f"{field} must be an array", path)
+    result: list[str] = []
+    for item in raw:
+        if not isinstance(item, str) or not item.strip():
+            raise CanonError(
+                "CLAIM_INVALID",
+                f"{field} entries must be nonblank strings",
+                path,
+            )
+        _require_utf8(item, path)
+        result.append(item)
+    return tuple(result)
+
+
+def _require_utf8(value: str, path: Path) -> None:
+    try:
+        value.encode("utf-8")
+    except UnicodeEncodeError as exc:
+        raise CanonError(
+            "CLAIM_INVALID", "claim strings must be valid UTF-8", path
+        ) from exc
+
+
+def _parse_source_location(value: str, path: Path) -> tuple[str, int | None]:
+    if value == "document":
+        return ("document", None)
+    if match := LINE_LOCATION_PATTERN.fullmatch(value):
+        return ("line", int(match.group(1)))
+    if match := DECISION_LOCATION_PATTERN.fullmatch(value):
+        return ("decision", int(match.group(1)))
+    raise CanonError(
+        "CLAIM_SOURCE_LOCATION_INVALID",
+        "source_location must be document, line:N, or decision:N",
+        path,
+    )
+
+
+def _require_unique(
+    values: Sequence[str] | object,
+    code: str,
+    label: str,
+    path: Path,
+) -> None:
+    seen: set[str] = set()
+    for value in values:
+        if value in seen:
+            raise CanonError(code, f"duplicate {label}: {value}", path)
+        seen.add(value)
+
+
+def import_claim_batches(
+    root: Path,
+    input_dir: Path,
+    catalog_path: Path,
+    output_path: Path,
+    decision_evidence_path: Path | None = None,
+) -> ClaimImportResult:
+    """Validate and deterministically integrate all ignored claim batches."""
+
+    root = _normalized_absolute(root)
+    input_dir = _normalized_absolute(input_dir)
+    catalog_path = _normalized_absolute(catalog_path)
+    output_path = _normalized_absolute(output_path)
+    expected_input = root / ".codex/canon-migration/claims"
+    if input_dir != expected_input:
+        raise CanonError(
+            "CLAIM_INPUT_PATH_UNSAFE",
+            "claim input must be the ignored .codex/canon-migration/claims directory",
+            input_dir,
+        )
+    _require_ignored_claim_input(root, input_dir)
+    expected_output = root / "docs/canon/migration/claim-dispositions.json"
+    if output_path != expected_output:
+        raise CanonError(
+            "CLAIM_OUTPUT_PATH_UNSAFE",
+            "tracked claim dispositions must use the canonical migration path",
+            output_path,
+        )
+    _require_claim_sources_verified(catalog_path, root)
+    catalog_bytes = _read_catalog_bytes(catalog_path, allow_missing=False)
+    assert catalog_bytes is not None
+    records = _parse_catalog_bytes(catalog_bytes, catalog_path)
+    inventories = _source_inventories(root, records)
+    batches = _read_claim_batches(input_dir)
+    claims = tuple(
+        sorted(
+            (claim for batch_item in batches for claim in batch_item.claims),
+            key=lambda item: item.claim_id,
+        )
+    )
+    dispositions = tuple(
+        sorted(
+            (
+                item
+                for batch_item in batches
+                for item in batch_item.source_section_dispositions
+            ),
+            key=lambda item: (item.source_id, item.source_location),
+        )
+    )
+    _require_unique(
+        (item.claim_id for item in claims),
+        "CLAIM_ID_DUPLICATE",
+        "claim_id",
+        input_dir,
+    )
+    _require_unique_semantic_owner(claims, input_dir)
+    inventory_by_id = {item.record.source_id: item for item in inventories}
+    decision_evidence_bytes: bytes | None = None
+    decision_snapshot: DecisionEvidenceSnapshot | None = None
+    linear_inventory = inventory_by_id.get("LINEAR-CANON-V3")
+    if linear_inventory is not None:
+        if decision_evidence_path is None:
+            decision_evidence_path = (
+                root / ".codex/canon-migration/sources/linear-decision-evidence.json"
+            )
+        decision_evidence_path = _normalized_absolute(decision_evidence_path)
+        _require_ignored_decision_evidence(root, decision_evidence_path)
+        decision_evidence_bytes = _read_catalog_bytes(
+            decision_evidence_path, allow_missing=False
+        )
+        assert decision_evidence_bytes is not None
+        decision_snapshot = parse_decision_evidence_snapshot(
+            decision_evidence_bytes, decision_evidence_path
+        )
+        _validate_decision_claim_bindings(
+            claims,
+            decision_snapshot,
+            linear_inventory,
+            input_dir,
+        )
+    section_claims: dict[tuple[str, str], list[str]] = {}
+    for item in claims:
+        inventory = inventory_by_id.get(item.source_id)
+        if inventory is None:
+            raise CanonError(
+                "CLAIM_SOURCE_UNKNOWN",
+                f"claim references unknown source_id: {item.source_id}",
+                input_dir,
+            )
+        section = _claim_section(inventory, item.source_location, input_dir)
+        _validate_original_text(inventory, item, input_dir)
+        section_claims.setdefault((item.source_id, section), []).append(item.claim_id)
+    section_dispositions: dict[tuple[str, str], SourceSectionDisposition] = {}
+    for item in dispositions:
+        inventory = inventory_by_id.get(item.source_id)
+        if inventory is None:
+            raise CanonError(
+                "CLAIM_SOURCE_UNKNOWN",
+                f"section disposition references unknown source_id: {item.source_id}",
+                input_dir,
+            )
+        section = _claim_section(inventory, item.source_location, input_dir)
+        key = (item.source_id, section)
+        if key in section_dispositions:
+            raise CanonError(
+                "CLAIM_SECTION_DISPOSITION_DUPLICATE",
+                f"duplicate source section disposition: {item.source_id} {section}",
+                input_dir,
+            )
+        if key in section_claims:
+            raise CanonError(
+                "CLAIM_SECTION_DISPOSITION_CONFLICT",
+                "a source section cannot contain claims and also declare no normative claims",
+                input_dir,
+            )
+        section_dispositions[key] = item
+    expected_sections = tuple(
+        (inventory.record.source_id, section)
+        for inventory in inventories
+        for section in inventory.sections
+    )
+    uncovered = tuple(
+        {"source_id": source_id, "source_location": section}
+        for source_id, section in expected_sections
+        if (source_id, section) not in section_claims
+        and (source_id, section) not in section_dispositions
+    )
+    if uncovered:
+        preview = ", ".join(
+            f"{item['source_id']}:{item['source_location']}" for item in uncovered[:8]
+        )
+        raise CanonError(
+            "CLAIM_COVERAGE_INCOMPLETE",
+            f"registered source sections lack disposition ({len(uncovered)}): {preview}",
+            input_dir,
+        )
+    payload = _claim_disposition_payload(
+        catalog_bytes,
+        inventories,
+        claims,
+        section_claims,
+        section_dispositions,
+        uncovered,
+        decision_evidence_bytes,
+        decision_snapshot,
+    )
+    _require_inventory_snapshots_bound(inventories)
+    _require_claim_sources_verified(catalog_path, root)
+    final_catalog_bytes = _read_catalog_bytes(catalog_path, allow_missing=False)
+    if final_catalog_bytes != catalog_bytes:
+        raise CanonError(
+            "CLAIM_SOURCE_VERIFICATION_FAILED",
+            "source catalog changed during claim import",
+            catalog_path,
+        )
+    if decision_evidence_path is not None and decision_evidence_bytes is not None:
+        final_evidence = _read_catalog_bytes(
+            decision_evidence_path, allow_missing=False
+        )
+        if final_evidence != decision_evidence_bytes:
+            raise CanonError(
+                "CLAIM_DECISION_EVIDENCE_CHANGED",
+                "decision evidence changed during claim import",
+                decision_evidence_path,
+            )
+    _revalidate_inventory_snapshots(inventories)
+    _write_claim_json(
+        output_path,
+        payload,
+        validate=lambda: _revalidate_inventory_snapshots(inventories),
+    )
+    return ClaimImportResult(
+        source_count=len(inventories),
+        section_count=len(expected_sections),
+        linear_decision_count=sum(
+            1
+            for inventory in inventories
+            for section in inventory.sections
+            if inventory.record.source_id == "LINEAR-CANON-V3"
+            and section.startswith("decision:")
+        ),
+        claim_count=len(claims),
+        output_path=output_path,
+    )
+
+
+def _require_claim_sources_verified(catalog_path: Path, root: Path) -> None:
+    findings = verify_catalog(catalog_path, root)
+    if not findings:
+        return
+    finding = findings[0]
+    raise CanonError(
+        "CLAIM_SOURCE_VERIFICATION_FAILED",
+        f"{finding.code}: {finding.message}",
+        finding.path or catalog_path,
+        finding.line,
+    )
+
+
+def _require_ignored_decision_evidence(root: Path, path: Path) -> None:
+    expected = root / ".codex/canon-migration/sources/linear-decision-evidence.json"
+    if path != expected:
+        raise CanonError(
+            "CLAIM_DECISION_EVIDENCE_PATH_UNSAFE",
+            "decision evidence must use the exact ignored migration path",
+            path,
+        )
+    relative = path.relative_to(root).as_posix()
+    ignored = _git_result(root, "check-ignore", "--no-index", "-q", "--", relative)
+    tracked = _git_result(root, "ls-files", "--", relative)
+    if ignored.returncode != 0 or tracked.returncode != 0 or tracked.stdout.strip():
+        raise CanonError(
+            "CLAIM_DECISION_EVIDENCE_PATH_UNSAFE",
+            "decision evidence must remain ignored and untracked",
+            path,
+        )
+
+
+def _validate_decision_claim_bindings(
+    claims: tuple[AtomicClaim, ...],
+    snapshot: DecisionEvidenceSnapshot,
+    linear_inventory: _SourceInventory,
+    path: Path,
+) -> None:
+    decision_claims: dict[int, AtomicClaim] = {}
+    for item in claims:
+        kind, number = _parse_source_location(item.source_location, path)
+        if item.source_id != "LINEAR-CANON-V3" or kind != "decision":
+            continue
+        assert number is not None
+        if number in decision_claims:
+            raise CanonError(
+                "CLAIM_DECISION_MAPPING_DUPLICATE",
+                f"duplicate claim mapping for Decision {number}",
+                path,
+            )
+        decision_claims[number] = item
+    if tuple(sorted(decision_claims)) != tuple(range(1, 202)):
+        raise CanonError(
+            "CLAIM_DECISION_MAPPING_INCOMPLETE",
+            "Linear v3 requires exactly one evidence-backed claim for Decisions 1 through 201",
+            path,
+        )
+    for entry in snapshot.evidence_entries:
+        item = decision_claims[entry.decision_number]
+        if (
+            item.owner_approval != entry.evidence_locator
+            or item.owner_evidence_text != entry.owner_evidence_text
+            or item.owner_evidence_rationale != entry.owner_evidence_rationale
+            or item.original_text != entry.v3_clause
+            or item.value != entry.v3_clause
+        ):
+            raise CanonError(
+                "CLAIM_DECISION_MAPPING_MISMATCH",
+                f"Decision {entry.decision_number} claim does not match exact owner evidence and v3 clause",
+                path,
+            )
+        if entry.v3_clause not in linear_inventory.text:
+            raise CanonError(
+                "CLAIM_DECISION_MAPPING_MISMATCH",
+                f"Decision {entry.decision_number} v3 clause is absent from exact registered bytes",
+                path,
+            )
+        if (
+            item.disposition
+            not in {
+                ClaimDisposition.PROVENANCE_ONLY,
+                ClaimDisposition.CONFLICT,
+            }
+            or item.target_id is not None
+        ):
+            raise CanonError(
+                "CLAIM_DECISION_MAPPING_AUTHORITY",
+                "decision mappings are provenance/conflict evidence, not automatic canonical owners",
+                path,
+            )
+        if entry.mapping_status == "unreviewed" and item.disposition not in {
+            ClaimDisposition.PROVENANCE_ONLY,
+            ClaimDisposition.CONFLICT,
+        }:
+            raise CanonError(
+                "CLAIM_DECISION_MAPPING_UNREVIEWED",
+                f"unreviewed Decision {entry.decision_number} mapping must remain provenance/conflict only",
+                path,
+            )
+
+
+def _require_ignored_claim_input(root: Path, input_dir: Path) -> None:
+    try:
+        relative = input_dir.relative_to(root).as_posix()
+    except ValueError as exc:
+        raise CanonError(
+            "CLAIM_INPUT_PATH_UNSAFE",
+            "claim input must be inside the repository",
+            input_dir,
+        ) from exc
+    ignored = _git_result(root, "check-ignore", "--no-index", "-q", "--", relative)
+    if ignored.returncode != 0:
+        raise CanonError(
+            "CLAIM_INPUT_NOT_IGNORED",
+            "raw claim batches must remain under ignored repository state",
+            input_dir,
+        )
+    tracked = _git_result(root, "ls-files", "--", relative)
+    if tracked.returncode != 0 or tracked.stdout.strip():
+        raise CanonError(
+            "CLAIM_INPUT_TRACKED",
+            "raw claim batches must not be tracked or staged",
+            input_dir,
+        )
+
+
+def _read_claim_batches(input_dir: Path) -> tuple[ClaimBatch, ...]:
+    batches: list[ClaimBatch] = []
+    with _open_directory_absolute_nofollow(input_dir) as descriptor:
+        try:
+            names = sorted(os.listdir(descriptor))
+        except OSError as exc:
+            raise CanonError(
+                "CLAIM_INPUT_PATH_UNSAFE",
+                "unable to inspect claim batch directory",
+                input_dir,
+            ) from exc
+        if not names:
+            raise CanonError("CLAIM_BATCH_MISSING", "no claim batches found", input_dir)
+        for name in names:
+            if not name.endswith(".json") or "/" in name or name in {".", ".."}:
+                raise CanonError(
+                    "CLAIM_INPUT_PATH_UNSAFE",
+                    f"unsupported claim batch entry: {name}",
+                    input_dir / name,
+                )
+            try:
+                before = os.stat(name, dir_fd=descriptor, follow_symlinks=False)
+                if not stat.S_ISREG(before.st_mode):
+                    raise OSError(errno.ELOOP, "claim batch is not a regular file")
+                file_descriptor = os.open(
+                    name,
+                    os.O_RDONLY | os.O_NOFOLLOW | getattr(os, "O_CLOEXEC", 0),
+                    dir_fd=descriptor,
+                )
+                try:
+                    opened = os.fstat(file_descriptor)
+                    if _claim_file_signature(before) != _claim_file_signature(opened):
+                        raise OSError(errno.ESTALE, "claim batch changed before open")
+                    raw = _read_descriptor(file_descriptor)
+                    opened_after = os.fstat(file_descriptor)
+                    after = os.stat(name, dir_fd=descriptor, follow_symlinks=False)
+                    if _claim_file_signature(opened_after) != _claim_file_signature(
+                        opened
+                    ) or _claim_file_signature(after) != _claim_file_signature(opened):
+                        raise CanonError(
+                            "CLAIM_INPUT_CHANGED",
+                            "claim batch changed during descriptor read",
+                            input_dir / name,
+                        )
+                finally:
+                    os.close(file_descriptor)
+            except OSError as exc:
+                raise CanonError(
+                    "CLAIM_INPUT_PATH_UNSAFE",
+                    "claim batch must be a stable no-follow regular file",
+                    input_dir / name,
+                ) from exc
+            batches.append(parse_claim_batch(raw, input_dir / name))
+    _require_unique(
+        (item.batch_id for item in batches),
+        "CLAIM_BATCH_DUPLICATE",
+        "batch_id",
+        input_dir,
+    )
+    return tuple(sorted(batches, key=lambda item: item.batch_id))
+
+
+def _claim_file_signature(info: os.stat_result) -> tuple[int, int, int, int, int]:
+    return (
+        info.st_dev,
+        info.st_ino,
+        info.st_size,
+        info.st_mtime_ns,
+        info.st_ctime_ns,
+    )
+
+
+def _source_inventories(
+    root: Path,
+    records: tuple[SourceRecord, ...],
+) -> tuple[_SourceInventory, ...]:
+    inventories: list[_SourceInventory] = []
+    for record in records:
+        relative_text = record.repo_path or record.raw_path
+        assert relative_text is not None
+        relative = Path(relative_text)
+        if relative.is_absolute() or ".." in relative.parts:
+            raise CanonError(
+                "CLAIM_SOURCE_PATH_UNSAFE",
+                "registered source path is unsafe",
+                relative,
+            )
+        source_path = root / relative
+        raw, identity = _read_claim_source_snapshot(source_path)
+        content_sha256 = hashlib.sha256(raw).hexdigest()
+        expected_sha256 = record.content_sha256 or record.raw_sha256
+        assert expected_sha256 is not None
+        if content_sha256 != expected_sha256 or (
+            record.raw_byte_length is not None and len(raw) != record.raw_byte_length
+        ):
+            raise CanonError(
+                "CLAIM_SOURCE_VERIFICATION_FAILED",
+                "inventory bytes do not match the registered source snapshot",
+                source_path,
+            )
+        try:
+            text = raw.decode("utf-8")
+        except UnicodeDecodeError as exc:
+            raise CanonError(
+                "CLAIM_SOURCE_INVALID_UTF8",
+                "claim source must be valid UTF-8",
+                source_path,
+            ) from exc
+        lines = tuple(text.splitlines())
+        is_markdown = relative.suffix.lower() in {".md", ".markdown"}
+        heading_lines = tuple(
+            number
+            for number, line in enumerate(lines, 1)
+            if is_markdown and MARKDOWN_HEADING_PATTERN.match(line)
+        )
+        sections = tuple(f"line:{number}" for number in heading_lines)
+        if not sections:
+            sections = ("document",)
+        if record.source_id == "LINEAR-CANON-V3":
+            sections = (*sections, *(f"decision:{number}" for number in range(1, 202)))
+        inventories.append(
+            _SourceInventory(
+                record,
+                source_path,
+                raw,
+                identity,
+                len(raw),
+                content_sha256,
+                text,
+                lines,
+                sections,
+                heading_lines,
+            )
+        )
+    return tuple(sorted(inventories, key=lambda item: item.record.source_id))
+
+
+def _require_inventory_snapshots_bound(
+    inventories: tuple[_SourceInventory, ...],
+) -> None:
+    for inventory in inventories:
+        raw = inventory.raw
+        expected_sha256 = inventory.record.content_sha256 or inventory.record.raw_sha256
+        assert expected_sha256 is not None
+        if (
+            len(raw) != inventory.byte_length
+            or hashlib.sha256(raw).hexdigest() != inventory.content_sha256
+            or inventory.content_sha256 != expected_sha256
+            or (
+                inventory.record.raw_byte_length is not None
+                and inventory.byte_length != inventory.record.raw_byte_length
+            )
+        ):
+            raise CanonError(
+                "CLAIM_SOURCE_VERIFICATION_FAILED",
+                "inventory snapshot changed or is not bound to registered bytes",
+                Path(inventory.record.repo_path or inventory.record.raw_path or ""),
+            )
+
+
+def _read_claim_source_snapshot(
+    source_path: Path,
+) -> tuple[bytes, tuple[int, int, int, int, int]]:
+    try:
+        with _open_parent_nofollow(source_path) as (
+            parent_descriptor,
+            name,
+            absolute,
+        ):
+            before = os.stat(name, dir_fd=parent_descriptor, follow_symlinks=False)
+            if not stat.S_ISREG(before.st_mode):
+                raise CanonError(
+                    "CLAIM_SOURCE_PATH_UNSAFE",
+                    "claim source must be a no-follow regular file",
+                    absolute,
+                )
+            descriptor = os.open(
+                name,
+                os.O_RDONLY | os.O_NOFOLLOW | getattr(os, "O_CLOEXEC", 0),
+                dir_fd=parent_descriptor,
+            )
+            try:
+                opened = os.fstat(descriptor)
+                if _claim_file_signature(before) != _claim_file_signature(opened):
+                    raise CanonError(
+                        "CLAIM_SOURCE_CHANGED",
+                        "claim source changed before descriptor open",
+                        absolute,
+                    )
+                raw = _read_descriptor(descriptor)
+                opened_after = os.fstat(descriptor)
+                after = os.stat(name, dir_fd=parent_descriptor, follow_symlinks=False)
+                identity = _claim_file_signature(opened)
+                if (
+                    _claim_file_signature(opened_after) != identity
+                    or _claim_file_signature(after) != identity
+                ):
+                    raise CanonError(
+                        "CLAIM_SOURCE_CHANGED",
+                        "claim source changed during descriptor read",
+                        absolute,
+                    )
+                return raw, identity
+            finally:
+                os.close(descriptor)
+    except CanonError:
+        raise
+    except (FileNotFoundError, OSError) as exc:
+        raise CanonError(
+            "CLAIM_SOURCE_PATH_UNSAFE",
+            "claim source must be a stable no-follow regular file",
+            source_path,
+        ) from exc
+
+
+def _revalidate_inventory_snapshots(
+    inventories: tuple[_SourceInventory, ...],
+) -> None:
+    _require_inventory_snapshots_bound(inventories)
+    for inventory in inventories:
+        raw, identity = _read_claim_source_snapshot(inventory.source_path)
+        if raw != inventory.raw or identity != inventory.identity:
+            raise CanonError(
+                "CLAIM_SOURCE_CHANGED",
+                "claim source changed after inventory snapshot",
+                inventory.source_path,
+            )
+
+
+def _claim_section(
+    inventory: _SourceInventory,
+    location: str,
+    path: Path,
+) -> str:
+    kind, number = _parse_source_location(location, path)
+    if kind == "document":
+        if inventory.heading_lines:
+            raise CanonError(
+                "CLAIM_SOURCE_LOCATION_INVALID",
+                "document location is invalid for a sectioned Markdown source",
+                path,
+            )
+        return "document"
+    assert number is not None
+    if kind == "decision":
+        if inventory.record.source_id != "LINEAR-CANON-V3" or not 1 <= number <= 201:
+            raise CanonError(
+                "CLAIM_SOURCE_LOCATION_INVALID",
+                "decision locations are Linear v3 Decision 1 through 201 only",
+                path,
+            )
+        return f"decision:{number}"
+    if number > len(inventory.lines):
+        raise CanonError(
+            "CLAIM_SOURCE_LOCATION_INVALID",
+            f"source line does not exist: {location}",
+            path,
+        )
+    if not inventory.heading_lines:
+        return "document"
+    headings = tuple(item for item in inventory.heading_lines if item <= number)
+    if not headings:
+        raise CanonError(
+            "CLAIM_SOURCE_LOCATION_INVALID",
+            "source line precedes the first Markdown section",
+            path,
+        )
+    return f"line:{headings[-1]}"
+
+
+def _validate_original_text(
+    inventory: _SourceInventory,
+    claim: AtomicClaim,
+    path: Path,
+) -> None:
+    kind, number = _parse_source_location(claim.source_location, path)
+    if kind != "line":
+        if not _source_contains_original_text(inventory, claim.original_text):
+            raise CanonError(
+                "CLAIM_ORIGINAL_TEXT_MISMATCH",
+                f"claim original_text is absent from exact source bytes for {claim.source_location}",
+                path,
+            )
+        return
+    assert number is not None
+    line = inventory.lines[number - 1]
+    if claim.original_text not in line:
+        raise CanonError(
+            "CLAIM_ORIGINAL_TEXT_MISMATCH",
+            f"claim original_text is not present at {claim.source_location}",
+            path,
+        )
+
+
+def _source_contains_original_text(
+    inventory: _SourceInventory,
+    original_text: str,
+) -> bool:
+    if original_text in inventory.text:
+        return True
+    source_path = inventory.record.repo_path or inventory.record.raw_path or ""
+    if Path(source_path).suffix.lower() != ".json":
+        return False
+    try:
+        payload = json.loads(inventory.text)
+    except json.JSONDecodeError:
+        return False
+    return original_text in _json_scalar_strings(payload)
+
+
+def _json_scalar_strings(value: object) -> frozenset[str]:
+    strings: set[str] = set()
+    if isinstance(value, str):
+        strings.add(value)
+    elif isinstance(value, list):
+        for item in value:
+            strings.update(_json_scalar_strings(item))
+    elif isinstance(value, dict):
+        for key, item in value.items():
+            strings.add(str(key))
+            strings.update(_json_scalar_strings(item))
+    return frozenset(strings)
+
+
+def _semantic_payload(item: AtomicClaim) -> dict[str, object]:
+    return {
+        "concept": item.concept,
+        "subject": item.subject,
+        "predicate": item.predicate,
+        "value": item.value,
+        "modality": item.modality.value,
+        "scope": item.scope,
+        "conditions": list(item.conditions),
+        "exceptions": list(item.exceptions),
+        "authority_claim": item.authority_claim,
+    }
+
+
+def _require_unique_semantic_owner(
+    claims: tuple[AtomicClaim, ...],
+    path: Path,
+) -> None:
+    owners_by_semantic: dict[str, set[tuple[str, str]]] = {}
+    claim_ids_by_semantic: dict[str, list[str]] = {}
+    for item in claims:
+        semantic_sha = hashlib.sha256(stable_json(_semantic_payload(item))).hexdigest()
+        claim_ids_by_semantic.setdefault(semantic_sha, []).append(item.claim_id)
+        if (
+            item.target_id is not None
+            and item.disposition is not ClaimDisposition.CONFLICT
+        ):
+            owners_by_semantic.setdefault(semantic_sha, set()).add(
+                (item.target_class.value, item.target_id)
+            )
+    for semantic_sha, owners in sorted(owners_by_semantic.items()):
+        if len(owners) > 1:
+            claim_ids = ", ".join(sorted(claim_ids_by_semantic[semantic_sha]))
+            raise CanonError(
+                "CLAIM_SEMANTIC_OWNER_CONFLICT",
+                f"identical normalized semantics have divergent target owners: {claim_ids}",
+                path,
+            )
+
+
+def _claim_disposition_payload(
+    catalog_bytes: bytes,
+    inventories: tuple[_SourceInventory, ...],
+    claims: tuple[AtomicClaim, ...],
+    section_claims: dict[tuple[str, str], list[str]],
+    section_dispositions: dict[tuple[str, str], SourceSectionDisposition],
+    uncovered: tuple[dict[str, str], ...],
+    decision_evidence_bytes: bytes | None,
+    decision_snapshot: DecisionEvidenceSnapshot | None,
+) -> dict[str, object]:
+    decision_entry_by_number = {
+        entry.decision_number: entry
+        for entry in (decision_snapshot.evidence_entries if decision_snapshot else ())
+    }
+    groups: dict[str, list[str]] = {}
+    for item in claims:
+        semantic_sha = hashlib.sha256(stable_json(_semantic_payload(item))).hexdigest()
+        groups.setdefault(semantic_sha, []).append(item.claim_id)
+    coverage: list[dict[str, object]] = []
+    for inventory in inventories:
+        for section in inventory.sections:
+            key = (inventory.record.source_id, section)
+            claim_ids = sorted(section_claims.get(key, ()))
+            disposition = section_dispositions.get(key)
+            coverage.append(
+                {
+                    "claim_ids": claim_ids,
+                    "disposition": "claims" if claim_ids else "no_normative_claims",
+                    "rationale_sha256": (
+                        hashlib.sha256(
+                            disposition.rationale.encode("utf-8")
+                        ).hexdigest()
+                        if disposition is not None
+                        else None
+                    ),
+                    "source_id": inventory.record.source_id,
+                    "source_location": section,
+                }
+            )
+    return {
+        "catalog_sha256": hashlib.sha256(catalog_bytes).hexdigest(),
+        "decision_evidence_sha256": (
+            hashlib.sha256(decision_evidence_bytes).hexdigest()
+            if decision_evidence_bytes is not None
+            else None
+        ),
+        "decision_mapping_counts": {
+            "independently_reviewed": sum(
+                entry.mapping_status == "independently_reviewed"
+                for entry in (
+                    decision_snapshot.evidence_entries if decision_snapshot else ()
+                )
+            ),
+            "unreviewed": sum(
+                entry.mapping_status == "unreviewed"
+                for entry in (
+                    decision_snapshot.evidence_entries if decision_snapshot else ()
+                )
+            ),
+        },
+        "claims": [
+            {
+                "authority_claim": item.authority_claim,
+                "claim_id": item.claim_id,
+                "concept": item.concept,
+                "decision_mapping_status": (
+                    decision_entry_by_number[
+                        int(item.source_location.split(":", 1)[1])
+                    ].mapping_status
+                    if item.source_id == "LINEAR-CANON-V3"
+                    and item.source_location.startswith("decision:")
+                    else None
+                ),
+                "disposition": item.disposition.value,
+                "owner_approval_sha256": (
+                    hashlib.sha256(item.owner_approval.encode("utf-8")).hexdigest()
+                    if item.owner_approval is not None
+                    else None
+                ),
+                "owner_evidence_rationale_sha256": (
+                    hashlib.sha256(
+                        item.owner_evidence_rationale.encode("utf-8")
+                    ).hexdigest()
+                    if item.owner_evidence_rationale is not None
+                    else None
+                ),
+                "owner_evidence_text_sha256": (
+                    hashlib.sha256(item.owner_evidence_text.encode("utf-8")).hexdigest()
+                    if item.owner_evidence_text is not None
+                    else None
+                ),
+                "rationale_sha256": hashlib.sha256(
+                    item.rationale.encode("utf-8")
+                ).hexdigest(),
+                "source_id": item.source_id,
+                "source_location": item.source_location,
+                "target_class": item.target_class.value,
+                "target_id": item.target_id,
+            }
+            for item in claims
+        ],
+        "coverage": sorted(
+            coverage,
+            key=lambda item: (str(item["source_id"]), str(item["source_location"])),
+        ),
+        "linear_decision_count": sum(
+            1
+            for inventory in inventories
+            for section in inventory.sections
+            if inventory.record.source_id == "LINEAR-CANON-V3"
+            and section.startswith("decision:")
+        ),
+        "schema_version": 1,
+        "section_count": sum(len(item.sections) for item in inventories),
+        "semantic_groups": [
+            {"claim_ids": sorted(claim_ids), "semantic_sha256": semantic_sha}
+            for semantic_sha, claim_ids in sorted(groups.items())
+        ],
+        "source_count": len(inventories),
+        "uncovered": list(uncovered),
+    }
+
+
+def _retain_claim_recovery(
+    parent_descriptor: int,
+    name: str,
+    content: bytes,
+    absolute: Path,
+    label: str,
+    *,
+    created_names: set[str] | None = None,
+) -> Path:
+    digest = hashlib.sha256(content).hexdigest()
+    base = f".{name}.claim-recovery-{label}-{digest}"
+    for collision in range(256):
+        candidate = base if collision == 0 else f"{base}-{collision:02x}"
+        candidate_path = absolute.with_name(candidate)
+        try:
+            descriptor = os.open(
+                candidate,
+                os.O_WRONLY
+                | os.O_CREAT
+                | os.O_EXCL
+                | os.O_NOFOLLOW
+                | getattr(os, "O_CLOEXEC", 0),
+                0o600,
+                dir_fd=parent_descriptor,
+            )
+        except FileExistsError:
+            try:
+                info = os.stat(
+                    candidate,
+                    dir_fd=parent_descriptor,
+                    follow_symlinks=False,
+                )
+                if not stat.S_ISREG(info.st_mode):
+                    continue
+                existing_descriptor = os.open(
+                    candidate,
+                    os.O_RDONLY
+                    | os.O_NONBLOCK
+                    | os.O_NOFOLLOW
+                    | getattr(os, "O_CLOEXEC", 0),
+                    dir_fd=parent_descriptor,
+                )
+                try:
+                    opened = os.fstat(existing_descriptor)
+                    if not stat.S_ISREG(opened.st_mode) or _claim_file_signature(
+                        opened
+                    ) != _claim_file_signature(info):
+                        continue
+                    existing = _read_descriptor(existing_descriptor)
+                    opened_after = os.fstat(existing_descriptor)
+                    if _claim_file_signature(opened_after) != _claim_file_signature(
+                        opened
+                    ):
+                        continue
+                finally:
+                    os.close(existing_descriptor)
+                if existing == content:
+                    return candidate_path
+            except (FileNotFoundError, OSError):
+                pass
+            continue
+        except OSError as exc:
+            raise CanonError(
+                "CLAIM_OUTPUT_RECOVERY_REQUIRED",
+                "unable to create deterministic claim recovery",
+                candidate_path,
+            ) from exc
+        try:
+            view = memoryview(content)
+            while view:
+                written = os.write(descriptor, view)
+                if written == 0:
+                    raise OSError(errno.EIO, "short recovery write")
+                view = view[written:]
+            os.fsync(descriptor)
+        except OSError:
+            try:
+                os.unlink(candidate, dir_fd=parent_descriptor)
+            except OSError:
+                pass
+            raise CanonError(
+                "CLAIM_OUTPUT_RECOVERY_REQUIRED",
+                "unable to retain exact claim recovery bytes",
+                candidate_path,
+            )
+        finally:
+            os.close(descriptor)
+        try:
+            os.fsync(parent_descriptor)
+        except OSError as exc:
+            raise CanonError(
+                "CLAIM_OUTPUT_RECOVERY_REQUIRED",
+                "claim recovery bytes retained but directory sync failed",
+                candidate_path,
+            ) from exc
+        if created_names is not None:
+            created_names.add(candidate)
+        return candidate_path
+    raise CanonError(
+        "CLAIM_OUTPUT_RECOVERY_REQUIRED",
+        f"deterministic claim recovery probes exhausted for {label}",
+        absolute.with_name(base),
+    )
+
+
+def _remove_created_claim_recovery(
+    parent_descriptor: int,
+    artifact: Path | None,
+    expected: bytes,
+    created_names: set[str],
+) -> None:
+    if artifact is None or artifact.name not in created_names:
+        return
+    raw, _identity = _read_claim_output_at(
+        parent_descriptor,
+        artifact.name,
+        artifact,
+        allow_missing=False,
+    )
+    if raw != expected:
+        raise CanonError(
+            "CLAIM_OUTPUT_RECOVERY_REQUIRED",
+            "claim recovery changed before successful cleanup",
+            artifact,
+        )
+    os.unlink(artifact.name, dir_fd=parent_descriptor)
+    created_names.remove(artifact.name)
+
+
+def _read_claim_output_at(
+    parent_descriptor: int,
+    name: str,
+    path: Path,
+    *,
+    allow_missing: bool,
+) -> tuple[bytes | None, tuple[int, int] | None]:
+    try:
+        before = os.stat(name, dir_fd=parent_descriptor, follow_symlinks=False)
+    except FileNotFoundError:
+        if allow_missing:
+            return None, None
+        raise CanonError(
+            "CLAIM_OUTPUT_PATH_UNSAFE",
+            "claim output disappeared during transaction",
+            path,
+        )
+    if not stat.S_ISREG(before.st_mode):
+        raise CanonError(
+            "CLAIM_OUTPUT_PATH_UNSAFE",
+            "claim output must remain a no-follow regular file",
+            path,
+        )
+    try:
+        descriptor = os.open(
+            name,
+            os.O_RDONLY | os.O_NONBLOCK | os.O_NOFOLLOW | getattr(os, "O_CLOEXEC", 0),
+            dir_fd=parent_descriptor,
+        )
+    except OSError as exc:
+        raise CanonError(
+            "CLAIM_OUTPUT_PATH_UNSAFE",
+            "claim output must remain a stable no-follow regular file",
+            path,
+        ) from exc
+    try:
+        opened = os.fstat(descriptor)
+        if _claim_file_signature(opened) != _claim_file_signature(before):
+            raise CanonError(
+                "CLAIM_OUTPUT_CHANGED",
+                "claim output changed before descriptor open",
+                path,
+            )
+        raw = _read_descriptor(descriptor)
+        opened_after = os.fstat(descriptor)
+        after = os.stat(name, dir_fd=parent_descriptor, follow_symlinks=False)
+        if _claim_file_signature(opened_after) != _claim_file_signature(
+            opened
+        ) or _claim_file_signature(after) != _claim_file_signature(opened):
+            raise CanonError(
+                "CLAIM_OUTPUT_CHANGED",
+                "claim output changed during descriptor read",
+                path,
+            )
+        return raw, (opened.st_dev, opened.st_ino)
+    finally:
+        os.close(descriptor)
+
+
+def _write_claim_json(
+    path: Path,
+    payload: object,
+    *,
+    validate: Callable[[], None] | None = None,
+) -> None:
+    content = stable_json(payload)
+    with _open_parent_nofollow(path) as (parent_descriptor, name, absolute):
+        try:
+            initial_bytes, initial_identity = _read_claim_output_at(
+                parent_descriptor,
+                name,
+                absolute,
+                allow_missing=True,
+            )
+        except CanonError as exc:
+            raise CanonError(
+                "CLAIM_OUTPUT_PATH_UNSAFE",
+                "claim output must be a no-follow regular file",
+                absolute,
+            ) from exc
+        temporary = f".{name}.claim-tmp-{hashlib.sha256(content).hexdigest()}"
+        temporary_exists = False
+        displaced_retained = False
+        created_recoveries: set[str] = set()
+        transaction_recovery: Path | None = None
+        prior_recovery: Path | None = None
+        try:
+            descriptor = os.open(
+                temporary,
+                os.O_WRONLY
+                | os.O_CREAT
+                | os.O_EXCL
+                | os.O_NOFOLLOW
+                | getattr(os, "O_CLOEXEC", 0),
+                0o600,
+                dir_fd=parent_descriptor,
+            )
+            temporary_exists = True
+            try:
+                view = memoryview(content)
+                while view:
+                    written = os.write(descriptor, view)
+                    if written == 0:
+                        raise OSError(errno.EIO, "short claim output write")
+                    view = view[written:]
+                os.fsync(descriptor)
+            finally:
+                os.close(descriptor)
+            if validate is not None:
+                validate()
+            if initial_identity is None:
+                try:
+                    transaction_recovery = _retain_claim_recovery(
+                        parent_descriptor,
+                        name,
+                        content,
+                        absolute,
+                        "transaction",
+                        created_names=created_recoveries,
+                    )
+                except CanonError as recovery_error:
+                    displaced_retained = True
+                    raise CanonError(
+                        "CLAIM_OUTPUT_RECOVERY_REQUIRED",
+                        f"transaction staging retained at {temporary}",
+                        absolute.with_name(temporary),
+                    ) from recovery_error
+                try:
+                    _rename_noreplace(
+                        temporary,
+                        name,
+                        source_directory=parent_descriptor,
+                        destination_directory=parent_descriptor,
+                    )
+                except FileExistsError as exc:
+                    _remove_created_claim_recovery(
+                        parent_descriptor,
+                        transaction_recovery,
+                        content,
+                        created_recoveries,
+                    )
+                    raise CanonError(
+                        "CLAIM_OUTPUT_CHANGED",
+                        "claim output appeared during atomic installation",
+                        absolute,
+                    ) from exc
+                temporary_exists = False
+                installed_bytes, installed_identity = _read_claim_output_at(
+                    parent_descriptor,
+                    name,
+                    absolute,
+                    allow_missing=False,
+                )
+                if validate is not None:
+                    try:
+                        validate()
+                    except CanonError:
+                        displaced_retained = True
+                        try:
+                            current_bytes, current_identity = _read_claim_output_at(
+                                parent_descriptor,
+                                name,
+                                absolute,
+                                allow_missing=False,
+                            )
+                        except CanonError as concurrent_error:
+                            recovery = _retain_claim_recovery(
+                                parent_descriptor,
+                                name,
+                                content,
+                                absolute,
+                                "transaction",
+                            )
+                            raise CanonError(
+                                "CLAIM_OUTPUT_RECOVERY_REQUIRED",
+                                "unsafe concurrent output preserved; transaction retained at "
+                                f"{recovery.name}",
+                                recovery,
+                            ) from concurrent_error
+                        if (
+                            current_identity != installed_identity
+                            or current_bytes != installed_bytes
+                        ):
+                            recovery = _retain_claim_recovery(
+                                parent_descriptor,
+                                name,
+                                content,
+                                absolute,
+                                "transaction",
+                            )
+                            raise CanonError(
+                                "CLAIM_OUTPUT_RECOVERY_REQUIRED",
+                                f"concurrent output preserved; transaction retained at {recovery.name}",
+                                recovery,
+                            )
+                        os.unlink(name, dir_fd=parent_descriptor)
+                        _remove_created_claim_recovery(
+                            parent_descriptor,
+                            transaction_recovery,
+                            content,
+                            created_recoveries,
+                        )
+                        os.fsync(parent_descriptor)
+                        raise
+            else:
+                current_bytes, current_identity = _read_claim_output_at(
+                    parent_descriptor,
+                    name,
+                    absolute,
+                    allow_missing=False,
+                )
+                if (
+                    current_identity != initial_identity
+                    or current_bytes != initial_bytes
+                ):
+                    raise CanonError(
+                        "CLAIM_OUTPUT_CHANGED",
+                        "claim output changed before atomic installation",
+                        absolute,
+                    )
+                try:
+                    transaction_recovery = _retain_claim_recovery(
+                        parent_descriptor,
+                        name,
+                        content,
+                        absolute,
+                        "transaction",
+                        created_names=created_recoveries,
+                    )
+                    prior_recovery = _retain_claim_recovery(
+                        parent_descriptor,
+                        name,
+                        initial_bytes or b"",
+                        absolute,
+                        "prior",
+                        created_names=created_recoveries,
+                    )
+                except CanonError as recovery_error:
+                    displaced_retained = True
+                    raise CanonError(
+                        "CLAIM_OUTPUT_RECOVERY_REQUIRED",
+                        "prior output remains canonical; transaction staging retained at "
+                        f"{temporary}",
+                        absolute.with_name(temporary),
+                    ) from recovery_error
+                _rename_exchange(
+                    temporary,
+                    name,
+                    source_directory=parent_descriptor,
+                    destination_directory=parent_descriptor,
+                )
+                displaced_bytes, displaced_identity = _read_claim_output_at(
+                    parent_descriptor,
+                    temporary,
+                    absolute.with_name(temporary),
+                    allow_missing=False,
+                )
+                if (
+                    displaced_identity != initial_identity
+                    or displaced_bytes != initial_bytes
+                ):
+                    try:
+                        _rename_exchange(
+                            temporary,
+                            name,
+                            source_directory=parent_descriptor,
+                            destination_directory=parent_descriptor,
+                        )
+                    except (CanonError, OSError) as rollback_error:
+                        displaced_retained = True
+                        raise CanonError(
+                            "CLAIM_OUTPUT_RECOVERY_REQUIRED",
+                            f"concurrent output retained at {temporary}",
+                            absolute.with_name(temporary),
+                        ) from rollback_error
+                    raise CanonError(
+                        "CLAIM_OUTPUT_CHANGED",
+                        "claim output changed during atomic installation",
+                        absolute,
+                    )
+                installed_bytes, installed_identity = _read_claim_output_at(
+                    parent_descriptor,
+                    name,
+                    absolute,
+                    allow_missing=False,
+                )
+                if installed_bytes != content:
+                    displaced_retained = True
+                    raise CanonError(
+                        "CLAIM_OUTPUT_RECOVERY_REQUIRED",
+                        f"prior claim output retained at {temporary}",
+                        absolute.with_name(temporary),
+                    )
+                if validate is not None:
+                    try:
+                        validate()
+                    except CanonError:
+                        displaced_retained = True
+                        try:
+                            current_bytes, current_identity = _read_claim_output_at(
+                                parent_descriptor,
+                                name,
+                                absolute,
+                                allow_missing=False,
+                            )
+                        except CanonError as concurrent_error:
+                            transaction_recovery = _retain_claim_recovery(
+                                parent_descriptor,
+                                name,
+                                content,
+                                absolute,
+                                "transaction",
+                            )
+                            prior_recovery = _retain_claim_recovery(
+                                parent_descriptor,
+                                name,
+                                initial_bytes or b"",
+                                absolute,
+                                "prior",
+                            )
+                            displaced_retained = True
+                            os.fsync(parent_descriptor)
+                            raise CanonError(
+                                "CLAIM_OUTPUT_RECOVERY_REQUIRED",
+                                "unsafe concurrent output preserved; recovery artifacts retained at "
+                                f"{prior_recovery.name} and {transaction_recovery.name}; "
+                                f"ambiguous exchange artifact retained at {temporary}",
+                                prior_recovery,
+                            ) from concurrent_error
+                        if (
+                            current_identity != installed_identity
+                            or current_bytes != installed_bytes
+                        ):
+                            transaction_recovery = _retain_claim_recovery(
+                                parent_descriptor,
+                                name,
+                                content,
+                                absolute,
+                                "transaction",
+                            )
+                            prior_recovery = _retain_claim_recovery(
+                                parent_descriptor,
+                                name,
+                                initial_bytes or b"",
+                                absolute,
+                                "prior",
+                            )
+                            displaced_retained = True
+                            os.fsync(parent_descriptor)
+                            raise CanonError(
+                                "CLAIM_OUTPUT_RECOVERY_REQUIRED",
+                                "concurrent output preserved; recovery artifacts retained at "
+                                f"{prior_recovery.name} and {transaction_recovery.name}; "
+                                f"ambiguous exchange artifact retained at {temporary}",
+                                prior_recovery,
+                            )
+                        try:
+                            _rename_exchange(
+                                temporary,
+                                name,
+                                source_directory=parent_descriptor,
+                                destination_directory=parent_descriptor,
+                            )
+                            os.unlink(temporary, dir_fd=parent_descriptor)
+                            temporary_exists = False
+                            _remove_created_claim_recovery(
+                                parent_descriptor,
+                                transaction_recovery,
+                                content,
+                                created_recoveries,
+                            )
+                            _remove_created_claim_recovery(
+                                parent_descriptor,
+                                prior_recovery,
+                                initial_bytes or b"",
+                                created_recoveries,
+                            )
+                            os.fsync(parent_descriptor)
+                        except (CanonError, OSError) as rollback_error:
+                            transaction_recovery = _retain_claim_recovery(
+                                parent_descriptor,
+                                name,
+                                content,
+                                absolute,
+                                "transaction",
+                            )
+                            prior_recovery = _retain_claim_recovery(
+                                parent_descriptor,
+                                name,
+                                initial_bytes or b"",
+                                absolute,
+                                "prior",
+                            )
+                            displaced_retained = True
+                            os.fsync(parent_descriptor)
+                            raise CanonError(
+                                "CLAIM_OUTPUT_RECOVERY_REQUIRED",
+                                "source-validation rollback failed; recovery artifacts retained at "
+                                f"{prior_recovery.name} and {transaction_recovery.name}; "
+                                f"ambiguous exchange artifact retained at {temporary}",
+                                prior_recovery,
+                            ) from rollback_error
+                        raise
+                os.unlink(temporary, dir_fd=parent_descriptor)
+                temporary_exists = False
+            _remove_created_claim_recovery(
+                parent_descriptor,
+                transaction_recovery,
+                content,
+                created_recoveries,
+            )
+            _remove_created_claim_recovery(
+                parent_descriptor,
+                prior_recovery,
+                initial_bytes or b"",
+                created_recoveries,
+            )
+            os.fsync(parent_descriptor)
+        except CanonError:
+            if temporary_exists and not displaced_retained:
+                try:
+                    os.unlink(temporary, dir_fd=parent_descriptor)
+                except OSError:
+                    pass
+            raise
+        except OSError as exc:
+            if temporary_exists and not displaced_retained:
+                try:
+                    os.unlink(temporary, dir_fd=parent_descriptor)
+                except OSError:
+                    pass
+            raise CanonError(
+                "CLAIM_OUTPUT_WRITE",
+                "unable to atomically write deterministic claim output",
+                absolute,
+            ) from exc
+
+
+def claim_coverage(
+    disposition_path: Path,
+    *,
+    concept_prefix: str | None = None,
+    target_class: str | None = None,
+    repository_root: Path | None = None,
+    catalog_path: Path | None = None,
+) -> ClaimCoverageReport:
+    """Load deterministic disposition evidence and filter only its claim view."""
+
+    disposition_path = _normalized_absolute(disposition_path)
+    if repository_root is None:
+        try:
+            repository_root = disposition_path.parents[3]
+        except IndexError as exc:
+            raise CanonError(
+                "CLAIM_DISPOSITIONS_PATH_UNSAFE",
+                "unable to derive repository root from canonical disposition path",
+                disposition_path,
+            ) from exc
+    repository_root = _normalized_absolute(repository_root)
+    if catalog_path is None:
+        catalog_path = repository_root / "docs/canon/migration/source-catalog.json"
+    catalog_path = _normalized_absolute(catalog_path)
+    _require_claim_sources_verified(catalog_path, repository_root)
+    catalog_bytes = _read_catalog_bytes(catalog_path, allow_missing=False)
+    assert catalog_bytes is not None
+    records = _parse_catalog_bytes(catalog_bytes, catalog_path)
+    inventories = _source_inventories(repository_root, records)
+    inventory_by_id = {item.record.source_id: item for item in inventories}
+    coverage_decision_evidence_bytes: bytes | None = None
+    coverage_decision_snapshot: DecisionEvidenceSnapshot | None = None
+    coverage_decision_path: Path | None = None
+    if "LINEAR-CANON-V3" in inventory_by_id:
+        coverage_decision_path = (
+            repository_root
+            / ".codex/canon-migration/sources/linear-decision-evidence.json"
+        )
+        _require_ignored_decision_evidence(repository_root, coverage_decision_path)
+        coverage_decision_evidence_bytes = _read_catalog_bytes(
+            coverage_decision_path, allow_missing=False
+        )
+        assert coverage_decision_evidence_bytes is not None
+        coverage_decision_snapshot = parse_decision_evidence_snapshot(
+            coverage_decision_evidence_bytes,
+            coverage_decision_path,
+        )
+    expected_keys = tuple(
+        sorted(
+            (inventory.record.source_id, section)
+            for inventory in inventories
+            for section in inventory.sections
+        )
+    )
+    expected_key_set = set(expected_keys)
+    raw = _read_catalog_bytes(disposition_path, allow_missing=False)
+    assert raw is not None
+    try:
+        payload = json.loads(raw.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "claim dispositions must be valid UTF-8 JSON",
+            disposition_path,
+        ) from exc
+    required = {
+        "catalog_sha256",
+        "claims",
+        "coverage",
+        "decision_evidence_sha256",
+        "decision_mapping_counts",
+        "linear_decision_count",
+        "schema_version",
+        "section_count",
+        "semantic_groups",
+        "source_count",
+        "uncovered",
+    }
+    if (
+        not isinstance(payload, dict)
+        or set(payload) != required
+        or payload["schema_version"] != 1
+    ):
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "claim dispositions use an unsupported closed shape",
+            disposition_path,
+        )
+    catalog_sha = hashlib.sha256(catalog_bytes).hexdigest()
+    if payload["catalog_sha256"] != catalog_sha:
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_STALE",
+            "claim dispositions are not bound to the current source catalog",
+            disposition_path,
+        )
+    expected_evidence_sha = (
+        hashlib.sha256(coverage_decision_evidence_bytes).hexdigest()
+        if coverage_decision_evidence_bytes is not None
+        else None
+    )
+    if payload["decision_evidence_sha256"] != expected_evidence_sha:
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_STALE",
+            "claim dispositions are not bound to current decision evidence",
+            disposition_path,
+        )
+    expected_mapping_counts = {
+        "independently_reviewed": sum(
+            entry.mapping_status == "independently_reviewed"
+            for entry in (
+                coverage_decision_snapshot.evidence_entries
+                if coverage_decision_snapshot
+                else ()
+            )
+        ),
+        "unreviewed": sum(
+            entry.mapping_status == "unreviewed"
+            for entry in (
+                coverage_decision_snapshot.evidence_entries
+                if coverage_decision_snapshot
+                else ()
+            )
+        ),
+    }
+    if payload["decision_mapping_counts"] != expected_mapping_counts:
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_STALE",
+            "decision mapping counts differ from current evidence",
+            disposition_path,
+        )
+    claims = payload["claims"]
+    coverage = payload["coverage"]
+    semantic_groups = payload["semantic_groups"]
+    uncovered = payload["uncovered"]
+    if not all(
+        isinstance(items, list)
+        for items in (claims, coverage, semantic_groups, uncovered)
+    ):
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "claim disposition record collections must be arrays",
+            disposition_path,
+        )
+    normalized_claims = tuple(
+        _validate_tracked_claim(item, disposition_path) for item in claims
+    )
+    derived_claim_ids: dict[tuple[str, str], list[str]] = {
+        key: [] for key in expected_keys
+    }
+    for item in normalized_claims:
+        source_id = str(item["source_id"])
+        inventory = inventory_by_id.get(source_id)
+        if inventory is None:
+            raise CanonError(
+                "CLAIM_DISPOSITIONS_INVALID",
+                f"tracked claim references unknown source_id: {source_id}",
+                disposition_path,
+            )
+        section = _claim_section(
+            inventory,
+            str(item["source_location"]),
+            disposition_path,
+        )
+        derived_claim_ids[(source_id, section)].append(str(item["claim_id"]))
+    exact_claim_ids_by_section = {
+        key: sorted(value) for key, value in derived_claim_ids.items()
+    }
+    if coverage_decision_snapshot is not None:
+        decision_claims = {
+            int(str(item["source_location"]).split(":", 1)[1]): item
+            for item in normalized_claims
+            if item["source_id"] == "LINEAR-CANON-V3"
+            and str(item["source_location"]).startswith("decision:")
+        }
+        if tuple(sorted(decision_claims)) != tuple(range(1, 202)):
+            raise CanonError(
+                "CLAIM_DISPOSITIONS_INVALID",
+                "tracked dispositions require exact Decision 1 through 201 claims",
+                disposition_path,
+            )
+        for entry in coverage_decision_snapshot.evidence_entries:
+            expected_hash = hashlib.sha256(
+                entry.evidence_locator.encode("utf-8")
+            ).hexdigest()
+            tracked_decision = decision_claims[entry.decision_number]
+            if (
+                tracked_decision["owner_approval_sha256"] != expected_hash
+                or tracked_decision["owner_evidence_text_sha256"]
+                != hashlib.sha256(entry.owner_evidence_text.encode("utf-8")).hexdigest()
+                or tracked_decision["owner_evidence_rationale_sha256"]
+                != hashlib.sha256(
+                    entry.owner_evidence_rationale.encode("utf-8")
+                ).hexdigest()
+                or tracked_decision["decision_mapping_status"] != entry.mapping_status
+            ):
+                raise CanonError(
+                    "CLAIM_DISPOSITIONS_STALE",
+                    f"Decision {entry.decision_number} evidence hashes or review state differ",
+                    disposition_path,
+                )
+    claim_ids = tuple(str(item["claim_id"]) for item in normalized_claims)
+    if claim_ids != tuple(sorted(claim_ids)) or len(claim_ids) != len(set(claim_ids)):
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "tracked claims must have unique sorted claim IDs",
+            disposition_path,
+        )
+    coverage_keys: list[tuple[str, str]] = []
+    for item in coverage:
+        if not isinstance(item, dict) or set(item) != TRACKED_COVERAGE_FIELDS:
+            raise CanonError(
+                "CLAIM_DISPOSITIONS_INVALID",
+                "coverage entry uses an unsupported closed shape",
+                disposition_path,
+            )
+        source_id = _claim_string(item, "source_id", disposition_path)
+        source_location = _claim_string(item, "source_location", disposition_path)
+        _parse_source_location(source_location, disposition_path)
+        disposition = item["disposition"]
+        entry_claim_ids = item["claim_ids"]
+        rationale_sha = item["rationale_sha256"]
+        if disposition not in {"claims", "no_normative_claims"} or not isinstance(
+            entry_claim_ids, list
+        ):
+            raise CanonError(
+                "CLAIM_DISPOSITIONS_INVALID",
+                "coverage disposition or claim IDs are invalid",
+                disposition_path,
+            )
+        if any(
+            not isinstance(claim_id, str) or claim_id not in set(claim_ids)
+            for claim_id in entry_claim_ids
+        ):
+            raise CanonError(
+                "CLAIM_DISPOSITIONS_INVALID",
+                "coverage references an unknown claim ID",
+                disposition_path,
+            )
+        if entry_claim_ids != sorted(set(entry_claim_ids)):
+            raise CanonError(
+                "CLAIM_DISPOSITIONS_INVALID",
+                "coverage claim IDs must be unique and sorted",
+                disposition_path,
+            )
+        if disposition == "claims":
+            valid = bool(entry_claim_ids) and rationale_sha is None
+        else:
+            valid = not entry_claim_ids and _is_sha256(rationale_sha)
+        if not valid:
+            raise CanonError(
+                "CLAIM_DISPOSITIONS_INVALID",
+                "coverage rationale and claim IDs contradict its disposition",
+                disposition_path,
+            )
+        if entry_claim_ids != exact_claim_ids_by_section.get(
+            (source_id, source_location)
+        ):
+            raise CanonError(
+                "CLAIM_DISPOSITIONS_INVALID",
+                "coverage claim IDs do not match tracked claims for the source section",
+                disposition_path,
+            )
+        coverage_keys.append((source_id, source_location))
+    if coverage_keys != sorted(coverage_keys) or len(coverage_keys) != len(
+        set(coverage_keys)
+    ):
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "coverage entries must be unique and sorted",
+            disposition_path,
+        )
+    extra_keys = set(coverage_keys) - expected_key_set
+    if extra_keys:
+        first = sorted(extra_keys)[0]
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            f"coverage contains an unregistered source section: {first[0]}:{first[1]}",
+            disposition_path,
+        )
+    grouped_claim_ids: list[str] = []
+    previous_group_sha = ""
+    for item in semantic_groups:
+        if not isinstance(item, dict) or set(item) != {
+            "claim_ids",
+            "semantic_sha256",
+        }:
+            raise CanonError(
+                "CLAIM_DISPOSITIONS_INVALID",
+                "semantic group uses an unsupported closed shape",
+                disposition_path,
+            )
+        semantic_sha = item["semantic_sha256"]
+        group_ids = item["claim_ids"]
+        if (
+            not _is_sha256(semantic_sha)
+            or not isinstance(group_ids, list)
+            or group_ids != sorted(set(group_ids))
+            or any(claim_id not in set(claim_ids) for claim_id in group_ids)
+            or semantic_sha <= previous_group_sha
+        ):
+            raise CanonError(
+                "CLAIM_DISPOSITIONS_INVALID",
+                "semantic groups must be sorted and reference exact claim IDs",
+                disposition_path,
+            )
+        previous_group_sha = semantic_sha
+        grouped_claim_ids.extend(group_ids)
+    if sorted(grouped_claim_ids) != sorted(claim_ids):
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "semantic groups must retain every claim exactly once",
+            disposition_path,
+        )
+    if target_class is not None:
+        try:
+            ClaimTargetClass(target_class)
+        except ValueError as exc:
+            raise CanonError(
+                "CLAIM_FILTER_INVALID",
+                "target-class filter is not a closed target class",
+                disposition_path,
+            ) from exc
+    filtered = tuple(
+        dict(item)
+        for item in normalized_claims
+        if isinstance(item, dict)
+        and (
+            concept_prefix is None
+            or str(item.get("concept", "")).startswith(concept_prefix)
+        )
+        and (target_class is None or item.get("target_class") == target_class)
+    )
+    normalized_uncovered: list[dict[str, str]] = []
+    for item in uncovered:
+        if not isinstance(item, dict) or set(item) != {"source_id", "source_location"}:
+            raise CanonError(
+                "CLAIM_DISPOSITIONS_INVALID",
+                "uncovered entry is invalid",
+                disposition_path,
+            )
+        normalized_uncovered.append(
+            {
+                "source_id": _claim_string(item, "source_id", disposition_path),
+                "source_location": _claim_string(
+                    item, "source_location", disposition_path
+                ),
+            }
+        )
+    for count_field in ("source_count", "section_count", "linear_decision_count"):
+        if (
+            not isinstance(payload[count_field], int)
+            or isinstance(payload[count_field], bool)
+            or payload[count_field] < 0
+        ):
+            raise CanonError(
+                "CLAIM_DISPOSITIONS_INVALID",
+                f"{count_field} must be a non-negative integer",
+                disposition_path,
+            )
+    if payload["section_count"] != len(coverage):
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "section_count must equal the exact coverage inventory",
+            disposition_path,
+        )
+    missing_keys = expected_key_set - set(coverage_keys)
+    derived_uncovered = {
+        (item["source_id"], item["source_location"]) for item in normalized_uncovered
+    }
+    derived_uncovered.update(missing_keys)
+    actual_source_count = len(inventories)
+    actual_section_count = len(expected_keys)
+    actual_decision_count = sum(
+        source_id == "LINEAR-CANON-V3" and location.startswith("decision:")
+        for source_id, location in expected_keys
+    )
+    counts_match = (
+        payload["source_count"] == actual_source_count
+        and payload["section_count"] == actual_section_count
+        and payload["linear_decision_count"] == actual_decision_count
+    )
+    _require_claim_sources_verified(catalog_path, repository_root)
+    final_catalog_bytes = _read_catalog_bytes(catalog_path, allow_missing=False)
+    if final_catalog_bytes != catalog_bytes:
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_STALE",
+            "source catalog changed during coverage validation",
+            catalog_path,
+        )
+    if coverage_decision_path is not None:
+        final_evidence = _read_catalog_bytes(
+            coverage_decision_path, allow_missing=False
+        )
+        if final_evidence != coverage_decision_evidence_bytes:
+            raise CanonError(
+                "CLAIM_DECISION_EVIDENCE_CHANGED",
+                "decision evidence changed during coverage validation",
+                coverage_decision_path,
+            )
+    return ClaimCoverageReport(
+        complete=not derived_uncovered and counts_match,
+        claims=tuple(sorted(filtered, key=lambda item: str(item.get("claim_id", "")))),
+        uncovered=tuple(
+            sorted(
+                (
+                    {"source_id": source_id, "source_location": location}
+                    for source_id, location in derived_uncovered
+                ),
+                key=lambda item: (item["source_id"], item["source_location"]),
+            )
+        ),
+        source_count=actual_source_count,
+        section_count=actual_section_count,
+        linear_decision_count=actual_decision_count,
+    )
+
+
+def _validate_tracked_claim(value: object, path: Path) -> dict[str, object]:
+    if not isinstance(value, dict) or set(value) != TRACKED_CLAIM_FIELDS:
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "tracked claim uses an unsupported closed shape",
+            path,
+        )
+    for field_name in ("claim_id", "concept", "source_id", "source_location"):
+        _claim_string(value, field_name, path)
+    if CLAIM_ID_PATTERN.fullmatch(str(value["claim_id"])) is None:
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "tracked claim_id is invalid",
+            path,
+        )
+    if CONCEPT_PATTERN.fullmatch(str(value["concept"])) is None:
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "tracked concept key is invalid",
+            path,
+        )
+    _parse_source_location(str(value["source_location"]), path)
+    try:
+        disposition = ClaimDisposition(str(value["disposition"]))
+        target_class = ClaimTargetClass(str(value["target_class"]))
+    except ValueError as exc:
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "tracked claim uses an unsupported disposition or target class",
+            path,
+        ) from exc
+    target_id = value["target_id"]
+    if target_id is not None and (
+        not isinstance(target_id, str) or TARGET_ID_PATTERN.fullmatch(target_id) is None
+    ):
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "tracked target ID is invalid",
+            path,
+        )
+    _validate_claim_destination(disposition, target_class, target_id, path)
+    if not isinstance(value["authority_claim"], bool):
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "tracked claim authority_claim must be boolean",
+            path,
+        )
+    owner_approval_sha = value["owner_approval_sha256"]
+    if owner_approval_sha is not None and not _is_sha256(owner_approval_sha):
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "tracked owner approval checksum is invalid",
+            path,
+        )
+    for evidence_hash_field in (
+        "owner_evidence_text_sha256",
+        "owner_evidence_rationale_sha256",
+    ):
+        evidence_hash = value[evidence_hash_field]
+        if evidence_hash is not None and not _is_sha256(evidence_hash):
+            raise CanonError(
+                "CLAIM_DISPOSITIONS_INVALID",
+                f"tracked {evidence_hash_field} is invalid",
+                path,
+            )
+    mapping_status = value["decision_mapping_status"]
+    if mapping_status not in {None, "independently_reviewed", "unreviewed"}:
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "tracked decision_mapping_status is invalid",
+            path,
+        )
+    is_decision = str(value["source_location"]).startswith("decision:")
+    has_decision_evidence = (
+        mapping_status is not None
+        and value["owner_evidence_text_sha256"] is not None
+        and value["owner_evidence_rationale_sha256"] is not None
+    )
+    if is_decision != has_decision_evidence:
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "tracked decision evidence fields contradict source_location",
+            path,
+        )
+    if not _is_sha256(value["rationale_sha256"]):
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "tracked claim rationale checksum is invalid",
+            path,
+        )
+    return dict(value)
+
+
+def _is_sha256(value: object) -> bool:
+    return isinstance(value, str) and re.fullmatch(r"[0-9a-f]{64}", value) is not None

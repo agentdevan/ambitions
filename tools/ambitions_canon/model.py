@@ -90,6 +90,54 @@ class AuthorityReferenceKind(StrEnum):
     LINEAR = "linear"
 
 
+class ClaimDisposition(StrEnum):
+    KEEP = "keep"
+    REWRITE = "rewrite"
+    COMPOSE = "compose"
+    REJECT = "reject"
+    PROVENANCE_ONLY = "provenance_only"
+    CONFLICT = "conflict"
+
+
+class ClaimTargetClass(StrEnum):
+    CONSTITUTION = "constitution"
+    SPECIFICATION = "specification"
+    STANDARD = "standard"
+    DECISION_DOCKET = "decision_docket"
+    PROVENANCE = "provenance"
+    REJECTION = "rejection"
+
+
+@dataclass(frozen=True, slots=True)
+class AtomicClaim:
+    """One immutable source claim with provenance and normalized semantics."""
+
+    claim_id: str
+    source_id: str
+    source_location: str
+    concept: str
+    subject: str
+    predicate: str
+    value: str
+    modality: Modality
+    scope: str
+    conditions: tuple[str, ...]
+    exceptions: tuple[str, ...]
+    authority_claim: bool
+    owner_approval: str | None
+    disposition: ClaimDisposition
+    target_id: str | None
+    original_text: str
+    target_class: ClaimTargetClass
+    rationale: str
+    owner_evidence_text: str | None = None
+    owner_evidence_rationale: str | None = None
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "conditions", tuple(self.conditions))
+        object.__setattr__(self, "exceptions", tuple(self.exceptions))
+
+
 @dataclass(frozen=True, slots=True)
 class Requirement:
     requirement_id: str
