@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "2f4c85796cbbca4acbf511a55f8426e39eedc98ce254e2ea4addc59365be8400",
+  "canon_content_sha": "84dbc3cf732ea87d3d09ed4885f404e6ec8973334785cb97b1dc4f224a71c776",
   "canon_revision": 1,
   "compiler_version": "0.1.0",
   "concepts": [
@@ -275,6 +275,54 @@
     {
       "concept": "ia.root-surfaces",
       "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "journey.calendar-diff.no-silent-mutation",
+      "spec_id": "JOURNEY-EXTERNAL-CALENDAR-IMPORT"
+    },
+    {
+      "concept": "journey.capture.commit-boundary",
+      "spec_id": "JOURNEY-CAPTURE-TO-PLACEMENT"
+    },
+    {
+      "concept": "journey.delete-restore.trash",
+      "spec_id": "JOURNEY-BACKUP-RESTORE-RESET"
+    },
+    {
+      "concept": "journey.first-use.trigger",
+      "spec_id": "JOURNEY-CAPTURE-TO-PLACEMENT"
+    },
+    {
+      "concept": "journey.goal-activation.route-generation",
+      "spec_id": "JOURNEY-GOAL-CREATION-AND-ACTIVATION"
+    },
+    {
+      "concept": "journey.offline-create.trigger",
+      "spec_id": "JOURNEY-CAPTURE-TO-PLACEMENT"
+    },
+    {
+      "concept": "journey.recovery.material-confirmation",
+      "spec_id": "JOURNEY-MISSED-WORK-RECOVERY"
+    },
+    {
+      "concept": "journey.saved-for-later.durable-save",
+      "spec_id": "JOURNEY-CAPTURE-TO-PLACEMENT"
+    },
+    {
+      "concept": "journey.search.find-act-inspect",
+      "spec_id": "JOURNEY-SEARCH-FIND-ACT-INSPECT"
+    },
+    {
+      "concept": "journey.step-closure.required-proof",
+      "spec_id": "JOURNEY-CLOSURE-AND-PROOF"
+    },
+    {
+      "concept": "journey.step.start-complete",
+      "spec_id": "JOURNEY-START-AND-COMPLETE-STEP"
+    },
+    {
+      "concept": "journey.time-direct-manipulation.conflict-preview",
+      "spec_id": "JOURNEY-SCHEDULE-REFLOW"
     },
     {
       "concept": "language.root-labels",

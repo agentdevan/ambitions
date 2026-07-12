@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "2f4c85796cbbca4acbf511a55f8426e39eedc98ce254e2ea4addc59365be8400",
+  "canon_content_sha": "84dbc3cf732ea87d3d09ed4885f404e6ec8973334785cb97b1dc4f224a71c776",
   "canon_revision": 1,
   "compiler_version": "0.1.0",
   "documents": [
@@ -102,6 +102,87 @@
       "spec_id": "GLOBAL-TRUST-INSPECTION",
       "status": "normative",
       "title": "Trust Inspection"
+    },
+    {
+      "kind": "journey",
+      "owner_domain": "journey-backup-restore-reset",
+      "profile": "journey-v1",
+      "source_path": "docs/canon/specifications/journeys/backup-restore-reset.md",
+      "spec_id": "JOURNEY-BACKUP-RESTORE-RESET",
+      "status": "normative",
+      "title": "Backup Restore Reset"
+    },
+    {
+      "kind": "journey",
+      "owner_domain": "journey-capture-to-placement",
+      "profile": "journey-v1",
+      "source_path": "docs/canon/specifications/journeys/capture-to-placement.md",
+      "spec_id": "JOURNEY-CAPTURE-TO-PLACEMENT",
+      "status": "normative",
+      "title": "Capture to Placement"
+    },
+    {
+      "kind": "journey",
+      "owner_domain": "journey-closure-and-proof",
+      "profile": "journey-v1",
+      "source_path": "docs/canon/specifications/journeys/closure-and-proof.md",
+      "spec_id": "JOURNEY-CLOSURE-AND-PROOF",
+      "status": "normative",
+      "title": "Closure and Proof"
+    },
+    {
+      "kind": "journey",
+      "owner_domain": "journey-external-calendar-import",
+      "profile": "journey-v1",
+      "source_path": "docs/canon/specifications/journeys/external-calendar-import.md",
+      "spec_id": "JOURNEY-EXTERNAL-CALENDAR-IMPORT",
+      "status": "normative",
+      "title": "External Calendar Import"
+    },
+    {
+      "kind": "journey",
+      "owner_domain": "journey-goal-creation-and-activation",
+      "profile": "journey-v1",
+      "source_path": "docs/canon/specifications/journeys/goal-creation-and-activation.md",
+      "spec_id": "JOURNEY-GOAL-CREATION-AND-ACTIVATION",
+      "status": "normative",
+      "title": "Goal Creation and Activation"
+    },
+    {
+      "kind": "journey",
+      "owner_domain": "journey-missed-work-recovery",
+      "profile": "journey-v1",
+      "source_path": "docs/canon/specifications/journeys/missed-work-recovery.md",
+      "spec_id": "JOURNEY-MISSED-WORK-RECOVERY",
+      "status": "normative",
+      "title": "Missed Work Recovery"
+    },
+    {
+      "kind": "journey",
+      "owner_domain": "journey-schedule-reflow",
+      "profile": "journey-v1",
+      "source_path": "docs/canon/specifications/journeys/schedule-reflow.md",
+      "spec_id": "JOURNEY-SCHEDULE-REFLOW",
+      "status": "normative",
+      "title": "Schedule Reflow"
+    },
+    {
+      "kind": "journey",
+      "owner_domain": "journey-search-find-act-inspect",
+      "profile": "journey-v1",
+      "source_path": "docs/canon/specifications/journeys/search-find-act-inspect.md",
+      "spec_id": "JOURNEY-SEARCH-FIND-ACT-INSPECT",
+      "status": "normative",
+      "title": "Search Find Act Inspect"
+    },
+    {
+      "kind": "journey",
+      "owner_domain": "journey-start-and-complete-step",
+      "profile": "journey-v1",
+      "source_path": "docs/canon/specifications/journeys/start-and-complete-step.md",
+      "spec_id": "JOURNEY-START-AND-COMPLETE-STEP",
+      "status": "normative",
+      "title": "Start and Complete Step"
     },
     {
       "kind": "object",
@@ -671,6 +752,114 @@
       "source_path": "docs/canon/CONSTITUTION.md",
       "status": "normative",
       "title": "Plain root and object naming"
+    },
+    {
+      "concept": "journey.calendar-diff.no-silent-mutation",
+      "line": 19,
+      "modality": "MUST",
+      "requirement_id": "JOURNEY-CALENDAR-DIFF-001",
+      "source_path": "docs/canon/specifications/journeys/external-calendar-import.md",
+      "status": "normative",
+      "title": "External facts never silently mutate native Time"
+    },
+    {
+      "concept": "journey.capture.commit-boundary",
+      "line": 35,
+      "modality": "MUST",
+      "requirement_id": "JOURNEY-CAPTURE-PLACEMENT-001",
+      "source_path": "docs/canon/specifications/journeys/capture-to-placement.md",
+      "status": "normative",
+      "title": "Proposal is not placement"
+    },
+    {
+      "concept": "journey.delete-restore.trash",
+      "line": 19,
+      "modality": "MUST",
+      "requirement_id": "JOURNEY-DELETE-RESTORE-001",
+      "source_path": "docs/canon/specifications/journeys/backup-restore-reset.md",
+      "status": "normative",
+      "title": "Trash, restore, reset, and permanent deletion stay distinct"
+    },
+    {
+      "concept": "journey.first-use.trigger",
+      "line": 24,
+      "modality": "MUST",
+      "requirement_id": "JOURNEY-FIRST-USE-001",
+      "source_path": "docs/canon/specifications/journeys/capture-to-placement.md",
+      "status": "normative",
+      "title": "First useful intent starts without setup coercion"
+    },
+    {
+      "concept": "journey.goal-activation.route-generation",
+      "line": 19,
+      "modality": "MUST",
+      "requirement_id": "JOURNEY-GOAL-ACTIVATION-001",
+      "source_path": "docs/canon/specifications/journeys/goal-creation-and-activation.md",
+      "status": "normative",
+      "title": "Activation follows reviewed route generation"
+    },
+    {
+      "concept": "journey.offline-create.trigger",
+      "line": 57,
+      "modality": "MUST",
+      "requirement_id": "JOURNEY-OFFLINE-CREATE-001",
+      "source_path": "docs/canon/specifications/journeys/capture-to-placement.md",
+      "status": "normative",
+      "title": "Offline creation uses the same local boundary"
+    },
+    {
+      "concept": "journey.recovery.material-confirmation",
+      "line": 19,
+      "modality": "MUST",
+      "requirement_id": "JOURNEY-RECOVERY-001",
+      "source_path": "docs/canon/specifications/journeys/missed-work-recovery.md",
+      "status": "normative",
+      "title": "Material recovery requires confirmation"
+    },
+    {
+      "concept": "journey.saved-for-later.durable-save",
+      "line": 46,
+      "modality": "MUST",
+      "requirement_id": "JOURNEY-SAVED-FOR-LATER-001",
+      "source_path": "docs/canon/specifications/journeys/capture-to-placement.md",
+      "status": "normative",
+      "title": "Unresolved save is durable without promotion"
+    },
+    {
+      "concept": "journey.search.find-act-inspect",
+      "line": 19,
+      "modality": "MUST",
+      "requirement_id": "JOURNEY-SEARCH-FIND-ACT-INSPECT-001",
+      "source_path": "docs/canon/specifications/journeys/search-find-act-inspect.md",
+      "status": "normative",
+      "title": "Search never becomes mutation authority"
+    },
+    {
+      "concept": "journey.step-closure.required-proof",
+      "line": 19,
+      "modality": "MUST",
+      "requirement_id": "JOURNEY-STEP-CLOSURE-001",
+      "source_path": "docs/canon/specifications/journeys/closure-and-proof.md",
+      "status": "normative",
+      "title": "Required Proof is known before closure"
+    },
+    {
+      "concept": "journey.step.start-complete",
+      "line": 19,
+      "modality": "MUST",
+      "requirement_id": "JOURNEY-STEP-START-COMPLETE-001",
+      "source_path": "docs/canon/specifications/journeys/start-and-complete-step.md",
+      "status": "normative",
+      "title": "Start now preserves honest completion"
+    },
+    {
+      "concept": "journey.time-direct-manipulation.conflict-preview",
+      "line": 19,
+      "modality": "MUST",
+      "requirement_id": "JOURNEY-TIME-DIRECT-MANIPULATION-001",
+      "source_path": "docs/canon/specifications/journeys/schedule-reflow.md",
+      "status": "normative",
+      "title": "Spatial change previews conflict before commit"
     },
     {
       "concept": "account.boundary",

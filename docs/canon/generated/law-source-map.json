@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "2f4c85796cbbca4acbf511a55f8426e39eedc98ce254e2ea4addc59365be8400",
+  "canon_content_sha": "84dbc3cf732ea87d3d09ed4885f404e6ec8973334785cb97b1dc4f224a71c776",
   "canon_revision": 1,
   "compiler_version": "0.1.0",
   "mappings": [
@@ -345,6 +345,145 @@
     {
       "references": [],
       "requirement_id": "IA-PLAIN-BRANDED-NAMING-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "JOURNEY-CALENDAR-DIFF-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Composer/Capture/",
+        "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "JOURNEY-CAPTURE-PLACEMENT-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Storage/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "JOURNEY-DELETE-RESTORE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Composer/Capture/",
+        "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "JOURNEY-FIRST-USE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/"
+      ],
+      "requirement_id": "JOURNEY-GOAL-ACTIVATION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Composer/Capture/",
+        "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "JOURNEY-OFFLINE-CREATE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/Motion/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/"
+      ],
+      "requirement_id": "JOURNEY-RECOVERY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Composer/Capture/",
+        "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "JOURNEY-SAVED-FOR-LATER-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "JOURNEY-SEARCH-FIND-ACT-INSPECT-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/Motion/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "JOURNEY-STEP-CLOSURE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/Motion/",
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "JOURNEY-STEP-START-COMPLETE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/Motion/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "JOURNEY-TIME-DIRECT-MANIPULATION-001"
     },
     {
       "references": [],

@@ -6,7 +6,7 @@
 - Canon revision: `1`
 - Authority state: `shadow`
 - Compiler version: `0.1.0`
-- Canon content SHA: `2f4c85796cbbca4acbf511a55f8426e39eedc98ce254e2ea4addc59365be8400`
+- Canon content SHA: `84dbc3cf732ea87d3d09ed4885f404e6ec8973334785cb97b1dc4f224a71c776`
 
 | Specification | Profile | Section markers |
 | --- | --- | ---: |
@@ -21,6 +21,15 @@
 | `GLOBAL-MOTION` | system-v1 | 12 |
 | `GLOBAL-SEARCH` | surface-v1 | 22 |
 | `GLOBAL-TRUST-INSPECTION` | surface-v1 | 22 |
+| `JOURNEY-BACKUP-RESTORE-RESET` | journey-v1 | 14 |
+| `JOURNEY-CAPTURE-TO-PLACEMENT` | journey-v1 | 14 |
+| `JOURNEY-CLOSURE-AND-PROOF` | journey-v1 | 14 |
+| `JOURNEY-EXTERNAL-CALENDAR-IMPORT` | journey-v1 | 14 |
+| `JOURNEY-GOAL-CREATION-AND-ACTIVATION` | journey-v1 | 14 |
+| `JOURNEY-MISSED-WORK-RECOVERY` | journey-v1 | 14 |
+| `JOURNEY-SCHEDULE-REFLOW` | journey-v1 | 14 |
+| `JOURNEY-SEARCH-FIND-ACT-INSPECT` | journey-v1 | 14 |
+| `JOURNEY-START-AND-COMPLETE-STEP` | journey-v1 | 14 |
 | `OBJECT-ATTACHMENT` | object-v1 | 15 |
 | `OBJECT-CLOSURE` | object-v1 | 15 |
 | `OBJECT-EVENT` | object-v1 | 15 |

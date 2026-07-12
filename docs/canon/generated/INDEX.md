@@ -6,7 +6,7 @@
 - Canon revision: `1`
 - Authority state: `shadow`
 - Compiler version: `0.1.0`
-- Canon content SHA: `2f4c85796cbbca4acbf511a55f8426e39eedc98ce254e2ea4addc59365be8400`
+- Canon content SHA: `84dbc3cf732ea87d3d09ed4885f404e6ec8973334785cb97b1dc4f224a71c776`
 
 ## Specifications
 
@@ -23,6 +23,15 @@
 | `GLOBAL-MOTION` | global | Motion | `docs/canon/specifications/global/motion.md` |
 | `GLOBAL-SEARCH` | global | Search | `docs/canon/specifications/global/search.md` |
 | `GLOBAL-TRUST-INSPECTION` | global | Trust Inspection | `docs/canon/specifications/global/trust-inspection.md` |
+| `JOURNEY-BACKUP-RESTORE-RESET` | journey | Backup Restore Reset | `docs/canon/specifications/journeys/backup-restore-reset.md` |
+| `JOURNEY-CAPTURE-TO-PLACEMENT` | journey | Capture to Placement | `docs/canon/specifications/journeys/capture-to-placement.md` |
+| `JOURNEY-CLOSURE-AND-PROOF` | journey | Closure and Proof | `docs/canon/specifications/journeys/closure-and-proof.md` |
+| `JOURNEY-EXTERNAL-CALENDAR-IMPORT` | journey | External Calendar Import | `docs/canon/specifications/journeys/external-calendar-import.md` |
+| `JOURNEY-GOAL-CREATION-AND-ACTIVATION` | journey | Goal Creation and Activation | `docs/canon/specifications/journeys/goal-creation-and-activation.md` |
+| `JOURNEY-MISSED-WORK-RECOVERY` | journey | Missed Work Recovery | `docs/canon/specifications/journeys/missed-work-recovery.md` |
+| `JOURNEY-SCHEDULE-REFLOW` | journey | Schedule Reflow | `docs/canon/specifications/journeys/schedule-reflow.md` |
+| `JOURNEY-SEARCH-FIND-ACT-INSPECT` | journey | Search Find Act Inspect | `docs/canon/specifications/journeys/search-find-act-inspect.md` |
+| `JOURNEY-START-AND-COMPLETE-STEP` | journey | Start and Complete Step | `docs/canon/specifications/journeys/start-and-complete-step.md` |
 | `OBJECT-ATTACHMENT` | object | Attachment | `docs/canon/specifications/objects/attachment.md` |
 | `OBJECT-CLOSURE` | object | Closure | `docs/canon/specifications/objects/closure.md` |
 | `OBJECT-EVENT` | object | Event | `docs/canon/specifications/objects/event.md` |
@@ -91,6 +100,18 @@
 | `CONTROL-UNDO-RECOVERY-001` | MUST | `control.undo-recovery` | `docs/canon/CONSTITUTION.md:548` |
 | `GOVERNANCE-LINEAR-RETENTION-001` | MUST | `canon.external-linear-retention` | `docs/canon/CONSTITUTION.md:921` |
 | `IA-PLAIN-BRANDED-NAMING-001` | MUST | `ia.root-labels` | `docs/canon/CONSTITUTION.md:483` |
+| `JOURNEY-CALENDAR-DIFF-001` | MUST | `journey.calendar-diff.no-silent-mutation` | `docs/canon/specifications/journeys/external-calendar-import.md:19` |
+| `JOURNEY-CAPTURE-PLACEMENT-001` | MUST | `journey.capture.commit-boundary` | `docs/canon/specifications/journeys/capture-to-placement.md:35` |
+| `JOURNEY-DELETE-RESTORE-001` | MUST | `journey.delete-restore.trash` | `docs/canon/specifications/journeys/backup-restore-reset.md:19` |
+| `JOURNEY-FIRST-USE-001` | MUST | `journey.first-use.trigger` | `docs/canon/specifications/journeys/capture-to-placement.md:24` |
+| `JOURNEY-GOAL-ACTIVATION-001` | MUST | `journey.goal-activation.route-generation` | `docs/canon/specifications/journeys/goal-creation-and-activation.md:19` |
+| `JOURNEY-OFFLINE-CREATE-001` | MUST | `journey.offline-create.trigger` | `docs/canon/specifications/journeys/capture-to-placement.md:57` |
+| `JOURNEY-RECOVERY-001` | MUST | `journey.recovery.material-confirmation` | `docs/canon/specifications/journeys/missed-work-recovery.md:19` |
+| `JOURNEY-SAVED-FOR-LATER-001` | MUST | `journey.saved-for-later.durable-save` | `docs/canon/specifications/journeys/capture-to-placement.md:46` |
+| `JOURNEY-SEARCH-FIND-ACT-INSPECT-001` | MUST | `journey.search.find-act-inspect` | `docs/canon/specifications/journeys/search-find-act-inspect.md:19` |
+| `JOURNEY-STEP-CLOSURE-001` | MUST | `journey.step-closure.required-proof` | `docs/canon/specifications/journeys/closure-and-proof.md:19` |
+| `JOURNEY-STEP-START-COMPLETE-001` | MUST | `journey.step.start-complete` | `docs/canon/specifications/journeys/start-and-complete-step.md:19` |
+| `JOURNEY-TIME-DIRECT-MANIPULATION-001` | MUST | `journey.time-direct-manipulation.conflict-preview` | `docs/canon/specifications/journeys/schedule-reflow.md:19` |
 | `LAW-ACCOUNT-BOUNDARY-001` | MUST NOT | `account.boundary` | `docs/canon/CONSTITUTION.md:769` |
 | `LAW-AUTHORITY-PRODUCT-DEFINITION-001` | MUST | `authority.product-definition` | `docs/canon/CONSTITUTION.md:110` |
 | `LAW-DATA-LOSS-STOP-SHIP-001` | MUST | `data.loss-stop-ship` | `docs/canon/CONSTITUTION.md:884` |

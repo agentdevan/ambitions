@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "2f4c85796cbbca4acbf511a55f8426e39eedc98ce254e2ea4addc59365be8400",
+  "canon_content_sha": "84dbc3cf732ea87d3d09ed4885f404e6ec8973334785cb97b1dc4f224a71c776",
   "canon_revision": 1,
   "compiler_version": "0.1.0",
   "document_edges": [
@@ -103,6 +103,242 @@
     {
       "from": "GLOBAL-TRUST-INSPECTION",
       "to": "CONSTITUTION"
+    },
+    {
+      "from": "JOURNEY-BACKUP-RESTORE-RESET",
+      "to": "APP-DEGRADED-STATES"
+    },
+    {
+      "from": "JOURNEY-BACKUP-RESTORE-RESET",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "JOURNEY-BACKUP-RESTORE-RESET",
+      "to": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
+      "from": "JOURNEY-BACKUP-RESTORE-RESET",
+      "to": "OBJECT-HISTORY-EVENT"
+    },
+    {
+      "from": "JOURNEY-BACKUP-RESTORE-RESET",
+      "to": "OBJECT-RECEIPT"
+    },
+    {
+      "from": "JOURNEY-BACKUP-RESTORE-RESET",
+      "to": "SURFACE-YOU"
+    },
+    {
+      "from": "JOURNEY-CAPTURE-TO-PLACEMENT",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "JOURNEY-CAPTURE-TO-PLACEMENT",
+      "to": "GLOBAL-CAPTURE"
+    },
+    {
+      "from": "JOURNEY-CAPTURE-TO-PLACEMENT",
+      "to": "OBJECT-SAVED-FOR-LATER-DRAFT"
+    },
+    {
+      "from": "JOURNEY-CAPTURE-TO-PLACEMENT",
+      "to": "OBJECT-SCHEDULE-PLACEMENT"
+    },
+    {
+      "from": "JOURNEY-CAPTURE-TO-PLACEMENT",
+      "to": "SURFACE-TIME"
+    },
+    {
+      "from": "JOURNEY-CLOSURE-AND-PROOF",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "JOURNEY-CLOSURE-AND-PROOF",
+      "to": "GLOBAL-MOTION"
+    },
+    {
+      "from": "JOURNEY-CLOSURE-AND-PROOF",
+      "to": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
+      "from": "JOURNEY-CLOSURE-AND-PROOF",
+      "to": "OBJECT-CLOSURE"
+    },
+    {
+      "from": "JOURNEY-CLOSURE-AND-PROOF",
+      "to": "OBJECT-GOAL"
+    },
+    {
+      "from": "JOURNEY-CLOSURE-AND-PROOF",
+      "to": "OBJECT-PROOF"
+    },
+    {
+      "from": "JOURNEY-CLOSURE-AND-PROOF",
+      "to": "OBJECT-RECEIPT"
+    },
+    {
+      "from": "JOURNEY-CLOSURE-AND-PROOF",
+      "to": "OBJECT-STEP"
+    },
+    {
+      "from": "JOURNEY-EXTERNAL-CALENDAR-IMPORT",
+      "to": "APP-PERMISSIONS"
+    },
+    {
+      "from": "JOURNEY-EXTERNAL-CALENDAR-IMPORT",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "JOURNEY-EXTERNAL-CALENDAR-IMPORT",
+      "to": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
+      "from": "JOURNEY-EXTERNAL-CALENDAR-IMPORT",
+      "to": "OBJECT-EVENT"
+    },
+    {
+      "from": "JOURNEY-EXTERNAL-CALENDAR-IMPORT",
+      "to": "OBJECT-IMPORT-DIFF-RECORD"
+    },
+    {
+      "from": "JOURNEY-EXTERNAL-CALENDAR-IMPORT",
+      "to": "OBJECT-SOURCE-REFERENCE"
+    },
+    {
+      "from": "JOURNEY-EXTERNAL-CALENDAR-IMPORT",
+      "to": "SURFACE-TIME"
+    },
+    {
+      "from": "JOURNEY-GOAL-CREATION-AND-ACTIVATION",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "JOURNEY-GOAL-CREATION-AND-ACTIVATION",
+      "to": "OBJECT-GOAL"
+    },
+    {
+      "from": "JOURNEY-GOAL-CREATION-AND-ACTIVATION",
+      "to": "OBJECT-GOAL-PATH"
+    },
+    {
+      "from": "JOURNEY-GOAL-CREATION-AND-ACTIVATION",
+      "to": "OBJECT-SCHEDULE-PLACEMENT"
+    },
+    {
+      "from": "JOURNEY-GOAL-CREATION-AND-ACTIVATION",
+      "to": "OBJECT-STEP"
+    },
+    {
+      "from": "JOURNEY-GOAL-CREATION-AND-ACTIVATION",
+      "to": "SURFACE-GOALS"
+    },
+    {
+      "from": "JOURNEY-MISSED-WORK-RECOVERY",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "JOURNEY-MISSED-WORK-RECOVERY",
+      "to": "GLOBAL-MOTION"
+    },
+    {
+      "from": "JOURNEY-MISSED-WORK-RECOVERY",
+      "to": "OBJECT-GOAL-PATH"
+    },
+    {
+      "from": "JOURNEY-MISSED-WORK-RECOVERY",
+      "to": "OBJECT-RECOVERY-SEGMENT"
+    },
+    {
+      "from": "JOURNEY-MISSED-WORK-RECOVERY",
+      "to": "OBJECT-STEP"
+    },
+    {
+      "from": "JOURNEY-MISSED-WORK-RECOVERY",
+      "to": "SURFACE-GOALS"
+    },
+    {
+      "from": "JOURNEY-MISSED-WORK-RECOVERY",
+      "to": "SURFACE-TIME"
+    },
+    {
+      "from": "JOURNEY-MISSED-WORK-RECOVERY",
+      "to": "SURFACE-TODAY"
+    },
+    {
+      "from": "JOURNEY-SCHEDULE-REFLOW",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "JOURNEY-SCHEDULE-REFLOW",
+      "to": "GLOBAL-MOTION"
+    },
+    {
+      "from": "JOURNEY-SCHEDULE-REFLOW",
+      "to": "OBJECT-EVENT"
+    },
+    {
+      "from": "JOURNEY-SCHEDULE-REFLOW",
+      "to": "OBJECT-RECOVERY-SEGMENT"
+    },
+    {
+      "from": "JOURNEY-SCHEDULE-REFLOW",
+      "to": "OBJECT-SCHEDULE-PLACEMENT"
+    },
+    {
+      "from": "JOURNEY-SCHEDULE-REFLOW",
+      "to": "OBJECT-STEP"
+    },
+    {
+      "from": "JOURNEY-SCHEDULE-REFLOW",
+      "to": "SURFACE-TIME"
+    },
+    {
+      "from": "JOURNEY-SEARCH-FIND-ACT-INSPECT",
+      "to": "APP-DEEP-LINKING"
+    },
+    {
+      "from": "JOURNEY-SEARCH-FIND-ACT-INSPECT",
+      "to": "APP-NAVIGATION"
+    },
+    {
+      "from": "JOURNEY-SEARCH-FIND-ACT-INSPECT",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "JOURNEY-SEARCH-FIND-ACT-INSPECT",
+      "to": "GLOBAL-SEARCH"
+    },
+    {
+      "from": "JOURNEY-SEARCH-FIND-ACT-INSPECT",
+      "to": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
+      "from": "JOURNEY-START-AND-COMPLETE-STEP",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "JOURNEY-START-AND-COMPLETE-STEP",
+      "to": "GLOBAL-MOTION"
+    },
+    {
+      "from": "JOURNEY-START-AND-COMPLETE-STEP",
+      "to": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
+      "from": "JOURNEY-START-AND-COMPLETE-STEP",
+      "to": "OBJECT-CLOSURE"
+    },
+    {
+      "from": "JOURNEY-START-AND-COMPLETE-STEP",
+      "to": "OBJECT-PROOF"
+    },
+    {
+      "from": "JOURNEY-START-AND-COMPLETE-STEP",
+      "to": "OBJECT-STEP"
+    },
+    {
+      "from": "JOURNEY-START-AND-COMPLETE-STEP",
+      "to": "SURFACE-TODAY"
     },
     {
       "from": "OBJECT-ATTACHMENT",
@@ -1097,6 +1333,198 @@
     {
       "from": "APP-SHELL-STATE-001",
       "to": "PLATFORM-NATIVE-IPHONE-001"
+    },
+    {
+      "from": "JOURNEY-CALENDAR-DIFF-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "JOURNEY-CALENDAR-DIFF-001",
+      "to": "LAW-RUNTIME-DURABLE-SUCCESS-001"
+    },
+    {
+      "from": "JOURNEY-CALENDAR-DIFF-001",
+      "to": "LAW-RUNTIME-NO-DIRECT-WRITE-001"
+    },
+    {
+      "from": "JOURNEY-CALENDAR-DIFF-001",
+      "to": "TIME-EXTERNAL-VISIBILITY-001"
+    },
+    {
+      "from": "JOURNEY-CAPTURE-PLACEMENT-001",
+      "to": "CONTROL-FORCE-NOTHING-001"
+    },
+    {
+      "from": "JOURNEY-CAPTURE-PLACEMENT-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "JOURNEY-CAPTURE-PLACEMENT-001",
+      "to": "LAW-OFFLINE-NO-ACCOUNT-001"
+    },
+    {
+      "from": "JOURNEY-CAPTURE-PLACEMENT-001",
+      "to": "LAW-RUNTIME-DURABLE-SUCCESS-001"
+    },
+    {
+      "from": "JOURNEY-DELETE-RESTORE-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "JOURNEY-DELETE-RESTORE-001",
+      "to": "CONTROL-UNDO-RECOVERY-001"
+    },
+    {
+      "from": "JOURNEY-DELETE-RESTORE-001",
+      "to": "LAW-DATA-LOSS-STOP-SHIP-001"
+    },
+    {
+      "from": "JOURNEY-DELETE-RESTORE-001",
+      "to": "OBJECT-LIFECYCLE-DELETION-001"
+    },
+    {
+      "from": "JOURNEY-FIRST-USE-001",
+      "to": "CONTROL-FORCE-NOTHING-001"
+    },
+    {
+      "from": "JOURNEY-FIRST-USE-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "JOURNEY-FIRST-USE-001",
+      "to": "LAW-OFFLINE-NO-ACCOUNT-001"
+    },
+    {
+      "from": "JOURNEY-FIRST-USE-001",
+      "to": "LAW-RUNTIME-DURABLE-SUCCESS-001"
+    },
+    {
+      "from": "JOURNEY-GOAL-ACTIVATION-001",
+      "to": "CONTROL-FORCE-NOTHING-001"
+    },
+    {
+      "from": "JOURNEY-GOAL-ACTIVATION-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "JOURNEY-GOAL-ACTIVATION-001",
+      "to": "LAW-RUNTIME-DURABLE-SUCCESS-001"
+    },
+    {
+      "from": "JOURNEY-GOAL-ACTIVATION-001",
+      "to": "OBJECT-GOAL-LIFECYCLE-001"
+    },
+    {
+      "from": "JOURNEY-OFFLINE-CREATE-001",
+      "to": "CONTROL-FORCE-NOTHING-001"
+    },
+    {
+      "from": "JOURNEY-OFFLINE-CREATE-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "JOURNEY-OFFLINE-CREATE-001",
+      "to": "LAW-OFFLINE-NO-ACCOUNT-001"
+    },
+    {
+      "from": "JOURNEY-OFFLINE-CREATE-001",
+      "to": "LAW-RUNTIME-DURABLE-SUCCESS-001"
+    },
+    {
+      "from": "JOURNEY-RECOVERY-001",
+      "to": "CONTROL-FORCE-NOTHING-001"
+    },
+    {
+      "from": "JOURNEY-RECOVERY-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "JOURNEY-RECOVERY-001",
+      "to": "CONTROL-UNDO-RECOVERY-001"
+    },
+    {
+      "from": "JOURNEY-RECOVERY-001",
+      "to": "LAW-RUNTIME-DURABLE-SUCCESS-001"
+    },
+    {
+      "from": "JOURNEY-SAVED-FOR-LATER-001",
+      "to": "CONTROL-FORCE-NOTHING-001"
+    },
+    {
+      "from": "JOURNEY-SAVED-FOR-LATER-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "JOURNEY-SAVED-FOR-LATER-001",
+      "to": "LAW-OFFLINE-NO-ACCOUNT-001"
+    },
+    {
+      "from": "JOURNEY-SAVED-FOR-LATER-001",
+      "to": "LAW-RUNTIME-DURABLE-SUCCESS-001"
+    },
+    {
+      "from": "JOURNEY-SEARCH-FIND-ACT-INSPECT-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "JOURNEY-SEARCH-FIND-ACT-INSPECT-001",
+      "to": "LAW-LOCAL-AUTHORITY-001"
+    },
+    {
+      "from": "JOURNEY-SEARCH-FIND-ACT-INSPECT-001",
+      "to": "LAW-RUNTIME-DURABLE-SUCCESS-001"
+    },
+    {
+      "from": "JOURNEY-SEARCH-FIND-ACT-INSPECT-001",
+      "to": "OBJECT-CANONICAL-GRAPH-001"
+    },
+    {
+      "from": "JOURNEY-STEP-CLOSURE-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "JOURNEY-STEP-CLOSURE-001",
+      "to": "CONTROL-UNDO-RECOVERY-001"
+    },
+    {
+      "from": "JOURNEY-STEP-CLOSURE-001",
+      "to": "LAW-RUNTIME-DURABLE-SUCCESS-001"
+    },
+    {
+      "from": "JOURNEY-STEP-CLOSURE-001",
+      "to": "OBJECT-PROOF-REQUIREMENT-001"
+    },
+    {
+      "from": "JOURNEY-STEP-START-COMPLETE-001",
+      "to": "CONTROL-FORCE-NOTHING-001"
+    },
+    {
+      "from": "JOURNEY-STEP-START-COMPLETE-001",
+      "to": "CONTROL-UNDO-RECOVERY-001"
+    },
+    {
+      "from": "JOURNEY-STEP-START-COMPLETE-001",
+      "to": "LAW-RUNTIME-DURABLE-SUCCESS-001"
+    },
+    {
+      "from": "JOURNEY-STEP-START-COMPLETE-001",
+      "to": "OBJECT-PROOF-REQUIREMENT-001"
+    },
+    {
+      "from": "JOURNEY-TIME-DIRECT-MANIPULATION-001",
+      "to": "CONTROL-FORCE-NOTHING-001"
+    },
+    {
+      "from": "JOURNEY-TIME-DIRECT-MANIPULATION-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "JOURNEY-TIME-DIRECT-MANIPULATION-001",
+      "to": "CONTROL-UNDO-RECOVERY-001"
+    },
+    {
+      "from": "JOURNEY-TIME-DIRECT-MANIPULATION-001",
+      "to": "LAW-RUNTIME-DURABLE-SUCCESS-001"
     },
     {
       "from": "OBJ-ARCHIVE-SEMANTICS-001",
@@ -2689,6 +3117,18 @@
     "CONTROL-UNDO-RECOVERY-001",
     "GOVERNANCE-LINEAR-RETENTION-001",
     "IA-PLAIN-BRANDED-NAMING-001",
+    "JOURNEY-CALENDAR-DIFF-001",
+    "JOURNEY-CAPTURE-PLACEMENT-001",
+    "JOURNEY-DELETE-RESTORE-001",
+    "JOURNEY-FIRST-USE-001",
+    "JOURNEY-GOAL-ACTIVATION-001",
+    "JOURNEY-OFFLINE-CREATE-001",
+    "JOURNEY-RECOVERY-001",
+    "JOURNEY-SAVED-FOR-LATER-001",
+    "JOURNEY-SEARCH-FIND-ACT-INSPECT-001",
+    "JOURNEY-STEP-CLOSURE-001",
+    "JOURNEY-STEP-START-COMPLETE-001",
+    "JOURNEY-TIME-DIRECT-MANIPULATION-001",
     "LAW-ACCOUNT-BOUNDARY-001",
     "LAW-AUTHORITY-PRODUCT-DEFINITION-001",
     "LAW-DATA-LOSS-STOP-SHIP-001",
