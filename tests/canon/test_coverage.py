@@ -1340,7 +1340,7 @@ class CoverageCliTests(unittest.TestCase):
         self.assertEqual(result, 0)
         self.assertEqual(
             output.getvalue(),
-            "GREEN ambitions canon coverage documents=42 profiles=5 "
+            "GREEN ambitions canon coverage documents=53 profiles=5 "
             "authority_state=shadow\n",
         )
 

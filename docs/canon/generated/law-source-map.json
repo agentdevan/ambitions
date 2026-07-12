@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "84dbc3cf732ea87d3d09ed4885f404e6ec8973334785cb97b1dc4f224a71c776",
+  "canon_content_sha": "5dc62407e500e5b12762f9b417884892cc06f1dc71fc79ab9afdf0f1c4defa18",
   "canon_revision": 1,
   "compiler_version": "0.1.0",
   "mappings": [
@@ -1639,6 +1639,274 @@
         "Native/Ambitions/Surfaces/Time/"
       ],
       "requirement_id": "SYS-PROJECTION-OWNERSHIP-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/App/Intents/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Projection/ExternalSnapshots/",
+        "Native/Ambitions/Quality/",
+        "Native/AmbitionsShareExtension/",
+        "Native/AmbitionsWidgetExtension/"
+      ],
+      "requirement_id": "SYSTEM-APPLE-HANDOFF-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/App/Intents/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Projection/ExternalSnapshots/",
+        "Native/Ambitions/Quality/",
+        "Native/AmbitionsShareExtension/",
+        "Native/AmbitionsWidgetExtension/"
+      ],
+      "requirement_id": "SYSTEM-APPLE-PROJECTION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SYSTEM-CONTINUITY-DISABLED-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SYSTEM-CONTINUITY-SEPARATION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SYSTEM-DIAGNOSTICS-AUTHORITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SYSTEM-DIAGNOSTICS-HEALTH-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Storage/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "SYSTEM-EXPORT-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Storage/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "SYSTEM-IMPORTED-SOURCE-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SYSTEM-LEARNING-CONTROL-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SYSTEM-LEARNING-LOCAL-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/Permissions/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SYSTEM-NOTIFICATIONS-EFFECT-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/Permissions/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SYSTEM-NOTIFICATIONS-POLICY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+        "Native/Ambitions/Core/LocalRuntimeOS/State/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Storage/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "SYSTEM-PERSISTENCE-ATOMIC-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+        "Native/Ambitions/Core/LocalRuntimeOS/State/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Storage/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "SYSTEM-PERSISTENCE-REPLAY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "SYSTEM-PRIVACY-CLASSIFICATION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "SYSTEM-PRIVACY-EGRESS-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Storage/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "SYSTEM-REPAIR-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/State/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "SYSTEM-RUNTIME-MUTATION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/State/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "SYSTEM-RUNTIME-ORCHESTRATION-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/Time/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "SYSTEM-SCHEDULING-CAPACITY-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/Time/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "SYSTEM-SCHEDULING-REFLOW-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "SYSTEM-SOURCE-ATLAS-FIREWALL-001"
+    },
+    {
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "SYSTEM-SOURCE-ATLAS-PUBLIC-001"
     },
     {
       "references": [],

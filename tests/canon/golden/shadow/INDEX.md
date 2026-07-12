@@ -6,7 +6,7 @@
 - Canon revision: `1`
 - Authority state: `shadow`
 - Compiler version: `0.1.0`
-- Canon content SHA: `84dbc3cf732ea87d3d09ed4885f404e6ec8973334785cb97b1dc4f224a71c776`
+- Canon content SHA: `5dc62407e500e5b12762f9b417884892cc06f1dc71fc79ab9afdf0f1c4defa18`
 
 ## Specifications
 
@@ -54,6 +54,17 @@
 | `SURFACE-TIME` | surface | Time | `docs/canon/specifications/surfaces/time.md` |
 | `SURFACE-TODAY` | surface | Today | `docs/canon/specifications/surfaces/today.md` |
 | `SURFACE-YOU` | surface | You | `docs/canon/specifications/surfaces/you.md` |
+| `SYSTEM-APPLE-ECOSYSTEM` | system | Apple Ecosystem | `docs/canon/specifications/systems/apple-ecosystem.md` |
+| `SYSTEM-DIAGNOSTICS` | system | Diagnostics | `docs/canon/specifications/systems/diagnostics.md` |
+| `SYSTEM-IMPORT-EXPORT-REPAIR` | system | Import Export and Repair | `docs/canon/specifications/systems/import-export-repair.md` |
+| `SYSTEM-LOCAL-LEARNING` | system | Local Learning | `docs/canon/specifications/systems/local-learning.md` |
+| `SYSTEM-NOTIFICATIONS` | system | Notifications | `docs/canon/specifications/systems/notifications.md` |
+| `SYSTEM-PERSISTENCE-REPLAY` | system | Persistence and Replay | `docs/canon/specifications/systems/persistence-and-replay.md` |
+| `SYSTEM-PRIVACY-DATA-CLASSIFICATION` | system | Privacy and Data Classification | `docs/canon/specifications/systems/privacy-and-data-classification.md` |
+| `SYSTEM-PRIVATE-LIFE-RUNTIME` | system | Private Life Runtime | `docs/canon/specifications/systems/private-life-runtime.md` |
+| `SYSTEM-SCHEDULING-CAPACITY` | system | Scheduling and Capacity | `docs/canon/specifications/systems/scheduling-and-capacity.md` |
+| `SYSTEM-SOURCE-ATLAS` | system | Source Atlas | `docs/canon/specifications/systems/source-atlas.md` |
+| `SYSTEM-SYNC-CONTINUITY` | system | Sync and Continuity | `docs/canon/specifications/systems/sync-and-continuity.md` |
 
 ## Requirements
 
@@ -248,4 +259,27 @@
 | `SURFACE-YOU-DEPTH-001` | MUST | `surface.you-depth` | `docs/canon/CONSTITUTION.md:509` |
 | `SYS-CANONICAL-GRAPH-001` | MUST | `object.graph.single-canonical` | `docs/canon/specifications/objects/schedule-placement.md:28` |
 | `SYS-PROJECTION-OWNERSHIP-001` | MUST NOT | `object.graph.projection-ownership` | `docs/canon/specifications/objects/schedule-placement.md:39` |
+| `SYSTEM-APPLE-HANDOFF-001` | MUST | `system.apple.command-handoff` | `docs/canon/specifications/systems/apple-ecosystem.md:30` |
+| `SYSTEM-APPLE-PROJECTION-001` | MUST | `system.apple.projection` | `docs/canon/specifications/systems/apple-ecosystem.md:19` |
+| `SYSTEM-CONTINUITY-DISABLED-001` | MUST | `system.continuity.disabled-gate` | `docs/canon/specifications/systems/sync-and-continuity.md:30` |
+| `SYSTEM-CONTINUITY-SEPARATION-001` | MUST | `system.continuity.user-owned-cloudkit` | `docs/canon/specifications/systems/sync-and-continuity.md:19` |
+| `SYSTEM-DIAGNOSTICS-AUTHORITY-001` | MUST NOT | `system.diagnostics.non-authority` | `docs/canon/specifications/systems/diagnostics.md:30` |
+| `SYSTEM-DIAGNOSTICS-HEALTH-001` | MUST | `system.diagnostics.redacted-health` | `docs/canon/specifications/systems/diagnostics.md:19` |
+| `SYSTEM-EXPORT-001` | MUST | `system.data.export` | `docs/canon/specifications/systems/import-export-repair.md:30` |
+| `SYSTEM-IMPORTED-SOURCE-001` | MUST | `system.imported-source.no-silent-change` | `docs/canon/specifications/systems/import-export-repair.md:19` |
+| `SYSTEM-LEARNING-CONTROL-001` | MUST | `system.learning.user-control` | `docs/canon/specifications/systems/local-learning.md:30` |
+| `SYSTEM-LEARNING-LOCAL-001` | MUST | `system.learning.local-inspectable` | `docs/canon/specifications/systems/local-learning.md:19` |
+| `SYSTEM-NOTIFICATIONS-EFFECT-001` | MUST | `system.notifications.external-effect` | `docs/canon/specifications/systems/notifications.md:30` |
+| `SYSTEM-NOTIFICATIONS-POLICY-001` | MUST | `system.notifications.object-aware` | `docs/canon/specifications/systems/notifications.md:19` |
+| `SYSTEM-PERSISTENCE-ATOMIC-001` | MUST | `system.persistence.atomicity` | `docs/canon/specifications/systems/persistence-and-replay.md:19` |
+| `SYSTEM-PERSISTENCE-REPLAY-001` | MUST | `system.persistence.replay` | `docs/canon/specifications/systems/persistence-and-replay.md:30` |
+| `SYSTEM-PRIVACY-CLASSIFICATION-001` | MUST | `system.privacy.classification` | `docs/canon/specifications/systems/privacy-and-data-classification.md:19` |
+| `SYSTEM-PRIVACY-EGRESS-001` | MUST NOT | `system.privacy.egress-firewall` | `docs/canon/specifications/systems/privacy-and-data-classification.md:30` |
+| `SYSTEM-REPAIR-001` | MUST | `system.data.repair` | `docs/canon/specifications/systems/import-export-repair.md:41` |
+| `SYSTEM-RUNTIME-MUTATION-001` | MUST | `system.runtime.mutation-sequence` | `docs/canon/specifications/systems/private-life-runtime.md:19` |
+| `SYSTEM-RUNTIME-ORCHESTRATION-001` | MUST | `system.runtime.local-orchestration` | `docs/canon/specifications/systems/private-life-runtime.md:30` |
+| `SYSTEM-SCHEDULING-CAPACITY-001` | MUST | `system.scheduling.capacity` | `docs/canon/specifications/systems/scheduling-and-capacity.md:19` |
+| `SYSTEM-SCHEDULING-REFLOW-001` | MUST | `system.scheduling.reflow` | `docs/canon/specifications/systems/scheduling-and-capacity.md:30` |
+| `SYSTEM-SOURCE-ATLAS-FIREWALL-001` | MUST NOT | `system.source-atlas.egress-firewall` | `docs/canon/specifications/systems/source-atlas.md:30` |
+| `SYSTEM-SOURCE-ATLAS-PUBLIC-001` | MUST | `system.source-atlas.public-reference` | `docs/canon/specifications/systems/source-atlas.md:19` |
 | `TIME-EXTERNAL-VISIBILITY-001` | MUST | `surface.time-external-visibility` | `docs/canon/CONSTITUTION.md:641` |

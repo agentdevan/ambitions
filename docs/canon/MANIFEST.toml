@@ -45,6 +45,17 @@ normative_files = [
   "specifications/surfaces/time.md",
   "specifications/surfaces/today.md",
   "specifications/surfaces/you.md",
+  "specifications/systems/apple-ecosystem.md",
+  "specifications/systems/diagnostics.md",
+  "specifications/systems/import-export-repair.md",
+  "specifications/systems/local-learning.md",
+  "specifications/systems/notifications.md",
+  "specifications/systems/persistence-and-replay.md",
+  "specifications/systems/privacy-and-data-classification.md",
+  "specifications/systems/private-life-runtime.md",
+  "specifications/systems/scheduling-and-capacity.md",
+  "specifications/systems/source-atlas.md",
+  "specifications/systems/sync-and-continuity.md",
 ]
 
 generated_files = [

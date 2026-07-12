@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "84dbc3cf732ea87d3d09ed4885f404e6ec8973334785cb97b1dc4f224a71c776",
+  "canon_content_sha": "5dc62407e500e5b12762f9b417884892cc06f1dc71fc79ab9afdf0f1c4defa18",
   "canon_revision": 1,
   "compiler_version": "0.1.0",
   "concepts": [
@@ -759,6 +759,98 @@
     {
       "concept": "surface.you.visual-authority",
       "spec_id": "SURFACE-YOU"
+    },
+    {
+      "concept": "system.apple.command-handoff",
+      "spec_id": "SYSTEM-APPLE-ECOSYSTEM"
+    },
+    {
+      "concept": "system.apple.projection",
+      "spec_id": "SYSTEM-APPLE-ECOSYSTEM"
+    },
+    {
+      "concept": "system.continuity.disabled-gate",
+      "spec_id": "SYSTEM-SYNC-CONTINUITY"
+    },
+    {
+      "concept": "system.continuity.user-owned-cloudkit",
+      "spec_id": "SYSTEM-SYNC-CONTINUITY"
+    },
+    {
+      "concept": "system.data.export",
+      "spec_id": "SYSTEM-IMPORT-EXPORT-REPAIR"
+    },
+    {
+      "concept": "system.data.repair",
+      "spec_id": "SYSTEM-IMPORT-EXPORT-REPAIR"
+    },
+    {
+      "concept": "system.diagnostics.non-authority",
+      "spec_id": "SYSTEM-DIAGNOSTICS"
+    },
+    {
+      "concept": "system.diagnostics.redacted-health",
+      "spec_id": "SYSTEM-DIAGNOSTICS"
+    },
+    {
+      "concept": "system.imported-source.no-silent-change",
+      "spec_id": "SYSTEM-IMPORT-EXPORT-REPAIR"
+    },
+    {
+      "concept": "system.learning.local-inspectable",
+      "spec_id": "SYSTEM-LOCAL-LEARNING"
+    },
+    {
+      "concept": "system.learning.user-control",
+      "spec_id": "SYSTEM-LOCAL-LEARNING"
+    },
+    {
+      "concept": "system.notifications.external-effect",
+      "spec_id": "SYSTEM-NOTIFICATIONS"
+    },
+    {
+      "concept": "system.notifications.object-aware",
+      "spec_id": "SYSTEM-NOTIFICATIONS"
+    },
+    {
+      "concept": "system.persistence.atomicity",
+      "spec_id": "SYSTEM-PERSISTENCE-REPLAY"
+    },
+    {
+      "concept": "system.persistence.replay",
+      "spec_id": "SYSTEM-PERSISTENCE-REPLAY"
+    },
+    {
+      "concept": "system.privacy.classification",
+      "spec_id": "SYSTEM-PRIVACY-DATA-CLASSIFICATION"
+    },
+    {
+      "concept": "system.privacy.egress-firewall",
+      "spec_id": "SYSTEM-PRIVACY-DATA-CLASSIFICATION"
+    },
+    {
+      "concept": "system.runtime.local-orchestration",
+      "spec_id": "SYSTEM-PRIVATE-LIFE-RUNTIME"
+    },
+    {
+      "concept": "system.runtime.mutation-sequence",
+      "spec_id": "SYSTEM-PRIVATE-LIFE-RUNTIME"
+    },
+    {
+      "concept": "system.scheduling.capacity",
+      "spec_id": "SYSTEM-SCHEDULING-CAPACITY"
+    },
+    {
+      "concept": "system.scheduling.reflow",
+      "spec_id": "SYSTEM-SCHEDULING-CAPACITY"
+    },
+    {
+      "concept": "system.source-atlas.egress-firewall",
+      "spec_id": "SYSTEM-SOURCE-ATLAS"
+    },
+    {
+      "concept": "system.source-atlas.public-reference",
+      "spec_id": "SYSTEM-SOURCE-ATLAS"
     }
   ],
   "schema_version": 1

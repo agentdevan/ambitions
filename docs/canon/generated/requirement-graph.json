@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "84dbc3cf732ea87d3d09ed4885f404e6ec8973334785cb97b1dc4f224a71c776",
+  "canon_content_sha": "5dc62407e500e5b12762f9b417884892cc06f1dc71fc79ab9afdf0f1c4defa18",
   "canon_revision": 1,
   "compiler_version": "0.1.0",
   "document_edges": [
@@ -727,6 +727,206 @@
     {
       "from": "SURFACE-YOU",
       "to": "CONSTITUTION"
+    },
+    {
+      "from": "SYSTEM-APPLE-ECOSYSTEM",
+      "to": "APP-DEEP-LINKING"
+    },
+    {
+      "from": "SYSTEM-APPLE-ECOSYSTEM",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "SYSTEM-APPLE-ECOSYSTEM",
+      "to": "SYSTEM-NOTIFICATIONS"
+    },
+    {
+      "from": "SYSTEM-APPLE-ECOSYSTEM",
+      "to": "SYSTEM-PRIVACY-DATA-CLASSIFICATION"
+    },
+    {
+      "from": "SYSTEM-APPLE-ECOSYSTEM",
+      "to": "SYSTEM-PRIVATE-LIFE-RUNTIME"
+    },
+    {
+      "from": "SYSTEM-DIAGNOSTICS",
+      "to": "APP-DEGRADED-STATES"
+    },
+    {
+      "from": "SYSTEM-DIAGNOSTICS",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "SYSTEM-DIAGNOSTICS",
+      "to": "SURFACE-YOU"
+    },
+    {
+      "from": "SYSTEM-DIAGNOSTICS",
+      "to": "SYSTEM-PERSISTENCE-REPLAY"
+    },
+    {
+      "from": "SYSTEM-DIAGNOSTICS",
+      "to": "SYSTEM-PRIVACY-DATA-CLASSIFICATION"
+    },
+    {
+      "from": "SYSTEM-IMPORT-EXPORT-REPAIR",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "SYSTEM-IMPORT-EXPORT-REPAIR",
+      "to": "JOURNEY-BACKUP-RESTORE-RESET"
+    },
+    {
+      "from": "SYSTEM-IMPORT-EXPORT-REPAIR",
+      "to": "JOURNEY-EXTERNAL-CALENDAR-IMPORT"
+    },
+    {
+      "from": "SYSTEM-IMPORT-EXPORT-REPAIR",
+      "to": "SYSTEM-DIAGNOSTICS"
+    },
+    {
+      "from": "SYSTEM-IMPORT-EXPORT-REPAIR",
+      "to": "SYSTEM-PERSISTENCE-REPLAY"
+    },
+    {
+      "from": "SYSTEM-IMPORT-EXPORT-REPAIR",
+      "to": "SYSTEM-PRIVACY-DATA-CLASSIFICATION"
+    },
+    {
+      "from": "SYSTEM-LOCAL-LEARNING",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "SYSTEM-LOCAL-LEARNING",
+      "to": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
+      "from": "SYSTEM-LOCAL-LEARNING",
+      "to": "SURFACE-YOU"
+    },
+    {
+      "from": "SYSTEM-LOCAL-LEARNING",
+      "to": "SYSTEM-PRIVACY-DATA-CLASSIFICATION"
+    },
+    {
+      "from": "SYSTEM-LOCAL-LEARNING",
+      "to": "SYSTEM-PRIVATE-LIFE-RUNTIME"
+    },
+    {
+      "from": "SYSTEM-NOTIFICATIONS",
+      "to": "APP-PERMISSIONS"
+    },
+    {
+      "from": "SYSTEM-NOTIFICATIONS",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "SYSTEM-NOTIFICATIONS",
+      "to": "OBJECT-NOTIFICATION-RULE"
+    },
+    {
+      "from": "SYSTEM-NOTIFICATIONS",
+      "to": "SYSTEM-PRIVACY-DATA-CLASSIFICATION"
+    },
+    {
+      "from": "SYSTEM-NOTIFICATIONS",
+      "to": "SYSTEM-PRIVATE-LIFE-RUNTIME"
+    },
+    {
+      "from": "SYSTEM-PERSISTENCE-REPLAY",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "SYSTEM-PERSISTENCE-REPLAY",
+      "to": "JOURNEY-BACKUP-RESTORE-RESET"
+    },
+    {
+      "from": "SYSTEM-PERSISTENCE-REPLAY",
+      "to": "SYSTEM-PRIVATE-LIFE-RUNTIME"
+    },
+    {
+      "from": "SYSTEM-PRIVACY-DATA-CLASSIFICATION",
+      "to": "APP-PERMISSIONS"
+    },
+    {
+      "from": "SYSTEM-PRIVACY-DATA-CLASSIFICATION",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "SYSTEM-PRIVACY-DATA-CLASSIFICATION",
+      "to": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
+      "from": "SYSTEM-PRIVACY-DATA-CLASSIFICATION",
+      "to": "SURFACE-YOU"
+    },
+    {
+      "from": "SYSTEM-PRIVACY-DATA-CLASSIFICATION",
+      "to": "SYSTEM-PRIVATE-LIFE-RUNTIME"
+    },
+    {
+      "from": "SYSTEM-PRIVATE-LIFE-RUNTIME",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "SYSTEM-PRIVATE-LIFE-RUNTIME",
+      "to": "GLOBAL-TRUST-INSPECTION"
+    },
+    {
+      "from": "SYSTEM-SCHEDULING-CAPACITY",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "SYSTEM-SCHEDULING-CAPACITY",
+      "to": "JOURNEY-SCHEDULE-REFLOW"
+    },
+    {
+      "from": "SYSTEM-SCHEDULING-CAPACITY",
+      "to": "OBJECT-SCHEDULE-PLACEMENT"
+    },
+    {
+      "from": "SYSTEM-SCHEDULING-CAPACITY",
+      "to": "SURFACE-TIME"
+    },
+    {
+      "from": "SYSTEM-SCHEDULING-CAPACITY",
+      "to": "SYSTEM-PRIVATE-LIFE-RUNTIME"
+    },
+    {
+      "from": "SYSTEM-SOURCE-ATLAS",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "SYSTEM-SOURCE-ATLAS",
+      "to": "OBJECT-SOURCE-REFERENCE"
+    },
+    {
+      "from": "SYSTEM-SOURCE-ATLAS",
+      "to": "SYSTEM-PRIVACY-DATA-CLASSIFICATION"
+    },
+    {
+      "from": "SYSTEM-SOURCE-ATLAS",
+      "to": "SYSTEM-PRIVATE-LIFE-RUNTIME"
+    },
+    {
+      "from": "SYSTEM-SYNC-CONTINUITY",
+      "to": "CONSTITUTION"
+    },
+    {
+      "from": "SYSTEM-SYNC-CONTINUITY",
+      "to": "SURFACE-YOU"
+    },
+    {
+      "from": "SYSTEM-SYNC-CONTINUITY",
+      "to": "SYSTEM-PERSISTENCE-REPLAY"
+    },
+    {
+      "from": "SYSTEM-SYNC-CONTINUITY",
+      "to": "SYSTEM-PRIVACY-DATA-CLASSIFICATION"
+    },
+    {
+      "from": "SYSTEM-SYNC-CONTINUITY",
+      "to": "SYSTEM-PRIVATE-LIFE-RUNTIME"
     }
   ],
   "requirement_edges": [
@@ -3073,6 +3273,442 @@
     {
       "from": "SYS-PROJECTION-OWNERSHIP-001",
       "to": "OBJECT-CANONICAL-GRAPH-001"
+    },
+    {
+      "from": "SYSTEM-APPLE-HANDOFF-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SYSTEM-APPLE-HANDOFF-001",
+      "to": "LAW-OFFLINE-NO-ACCOUNT-001"
+    },
+    {
+      "from": "SYSTEM-APPLE-HANDOFF-001",
+      "to": "PLATFORM-NATIVE-IPHONE-001"
+    },
+    {
+      "from": "SYSTEM-APPLE-HANDOFF-001",
+      "to": "RUNTIME-MUTATION-SEQUENCE-001"
+    },
+    {
+      "from": "SYSTEM-APPLE-PROJECTION-001",
+      "to": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"
+    },
+    {
+      "from": "SYSTEM-APPLE-PROJECTION-001",
+      "to": "LAW-OFFLINE-NO-ACCOUNT-001"
+    },
+    {
+      "from": "SYSTEM-APPLE-PROJECTION-001",
+      "to": "PLATFORM-NATIVE-IPHONE-001"
+    },
+    {
+      "from": "SYSTEM-APPLE-PROJECTION-001",
+      "to": "RUNTIME-MUTATION-SEQUENCE-001"
+    },
+    {
+      "from": "SYSTEM-CONTINUITY-DISABLED-001",
+      "to": "LAW-ACCOUNT-BOUNDARY-001"
+    },
+    {
+      "from": "SYSTEM-CONTINUITY-DISABLED-001",
+      "to": "LAW-DATA-LOSS-STOP-SHIP-001"
+    },
+    {
+      "from": "SYSTEM-CONTINUITY-DISABLED-001",
+      "to": "LAW-LOCAL-AUTHORITY-001"
+    },
+    {
+      "from": "SYSTEM-CONTINUITY-DISABLED-001",
+      "to": "LAW-OFFLINE-NO-ACCOUNT-001"
+    },
+    {
+      "from": "SYSTEM-CONTINUITY-DISABLED-001",
+      "to": "PRIVACY-CLOUDKIT-CONTINUITY-001"
+    },
+    {
+      "from": "SYSTEM-CONTINUITY-SEPARATION-001",
+      "to": "LAW-ACCOUNT-BOUNDARY-001"
+    },
+    {
+      "from": "SYSTEM-CONTINUITY-SEPARATION-001",
+      "to": "LAW-DATA-LOSS-STOP-SHIP-001"
+    },
+    {
+      "from": "SYSTEM-CONTINUITY-SEPARATION-001",
+      "to": "LAW-LOCAL-AUTHORITY-001"
+    },
+    {
+      "from": "SYSTEM-CONTINUITY-SEPARATION-001",
+      "to": "LAW-OFFLINE-NO-ACCOUNT-001"
+    },
+    {
+      "from": "SYSTEM-CONTINUITY-SEPARATION-001",
+      "to": "PRIVACY-CLOUDKIT-CONTINUITY-001"
+    },
+    {
+      "from": "SYSTEM-DIAGNOSTICS-AUTHORITY-001",
+      "to": "CONST-PROOF-EVIDENCE-001"
+    },
+    {
+      "from": "SYSTEM-DIAGNOSTICS-AUTHORITY-001",
+      "to": "LAW-DATA-LOSS-STOP-SHIP-001"
+    },
+    {
+      "from": "SYSTEM-DIAGNOSTICS-AUTHORITY-001",
+      "to": "LAW-LOCAL-AUTHORITY-001"
+    },
+    {
+      "from": "SYSTEM-DIAGNOSTICS-AUTHORITY-001",
+      "to": "PRIVACY-VISIBILITY-001"
+    },
+    {
+      "from": "SYSTEM-DIAGNOSTICS-HEALTH-001",
+      "to": "CONST-PROOF-EVIDENCE-001"
+    },
+    {
+      "from": "SYSTEM-DIAGNOSTICS-HEALTH-001",
+      "to": "LAW-DATA-LOSS-STOP-SHIP-001"
+    },
+    {
+      "from": "SYSTEM-DIAGNOSTICS-HEALTH-001",
+      "to": "LAW-LOCAL-AUTHORITY-001"
+    },
+    {
+      "from": "SYSTEM-DIAGNOSTICS-HEALTH-001",
+      "to": "PRIVACY-VISIBILITY-001"
+    },
+    {
+      "from": "SYSTEM-EXPORT-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "SYSTEM-EXPORT-001",
+      "to": "CONTROL-UNDO-RECOVERY-001"
+    },
+    {
+      "from": "SYSTEM-EXPORT-001",
+      "to": "LAW-DATA-LOSS-STOP-SHIP-001"
+    },
+    {
+      "from": "SYSTEM-EXPORT-001",
+      "to": "LAW-RUNTIME-NO-DIRECT-WRITE-001"
+    },
+    {
+      "from": "SYSTEM-EXPORT-001",
+      "to": "RUNTIME-MUTATION-SEQUENCE-001"
+    },
+    {
+      "from": "SYSTEM-IMPORTED-SOURCE-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "SYSTEM-IMPORTED-SOURCE-001",
+      "to": "CONTROL-UNDO-RECOVERY-001"
+    },
+    {
+      "from": "SYSTEM-IMPORTED-SOURCE-001",
+      "to": "LAW-DATA-LOSS-STOP-SHIP-001"
+    },
+    {
+      "from": "SYSTEM-IMPORTED-SOURCE-001",
+      "to": "LAW-RUNTIME-NO-DIRECT-WRITE-001"
+    },
+    {
+      "from": "SYSTEM-IMPORTED-SOURCE-001",
+      "to": "RUNTIME-MUTATION-SEQUENCE-001"
+    },
+    {
+      "from": "SYSTEM-LEARNING-CONTROL-001",
+      "to": "CONST-PROOF-EVIDENCE-001"
+    },
+    {
+      "from": "SYSTEM-LEARNING-CONTROL-001",
+      "to": "CONTROL-FORCE-NOTHING-001"
+    },
+    {
+      "from": "SYSTEM-LEARNING-CONTROL-001",
+      "to": "LAW-LOCAL-AUTHORITY-001"
+    },
+    {
+      "from": "SYSTEM-LEARNING-CONTROL-001",
+      "to": "LAW-OFFLINE-NO-ACCOUNT-001"
+    },
+    {
+      "from": "SYSTEM-LEARNING-CONTROL-001",
+      "to": "MISSION-MOAT-CONTINUITY-001"
+    },
+    {
+      "from": "SYSTEM-LEARNING-LOCAL-001",
+      "to": "CONST-PROOF-EVIDENCE-001"
+    },
+    {
+      "from": "SYSTEM-LEARNING-LOCAL-001",
+      "to": "CONTROL-FORCE-NOTHING-001"
+    },
+    {
+      "from": "SYSTEM-LEARNING-LOCAL-001",
+      "to": "LAW-LOCAL-AUTHORITY-001"
+    },
+    {
+      "from": "SYSTEM-LEARNING-LOCAL-001",
+      "to": "LAW-OFFLINE-NO-ACCOUNT-001"
+    },
+    {
+      "from": "SYSTEM-LEARNING-LOCAL-001",
+      "to": "MISSION-MOAT-CONTINUITY-001"
+    },
+    {
+      "from": "SYSTEM-NOTIFICATIONS-EFFECT-001",
+      "to": "LAW-RUNTIME-DURABLE-SUCCESS-001"
+    },
+    {
+      "from": "SYSTEM-NOTIFICATIONS-EFFECT-001",
+      "to": "OBJECT-REMINDER-COMPLETION-001"
+    },
+    {
+      "from": "SYSTEM-NOTIFICATIONS-EFFECT-001",
+      "to": "PLATFORM-NATIVE-IPHONE-001"
+    },
+    {
+      "from": "SYSTEM-NOTIFICATIONS-EFFECT-001",
+      "to": "PRIVACY-VISIBILITY-001"
+    },
+    {
+      "from": "SYSTEM-NOTIFICATIONS-EFFECT-001",
+      "to": "RUNTIME-MUTATION-SEQUENCE-001"
+    },
+    {
+      "from": "SYSTEM-NOTIFICATIONS-POLICY-001",
+      "to": "LAW-RUNTIME-DURABLE-SUCCESS-001"
+    },
+    {
+      "from": "SYSTEM-NOTIFICATIONS-POLICY-001",
+      "to": "OBJECT-REMINDER-COMPLETION-001"
+    },
+    {
+      "from": "SYSTEM-NOTIFICATIONS-POLICY-001",
+      "to": "PLATFORM-NATIVE-IPHONE-001"
+    },
+    {
+      "from": "SYSTEM-NOTIFICATIONS-POLICY-001",
+      "to": "PRIVACY-VISIBILITY-001"
+    },
+    {
+      "from": "SYSTEM-NOTIFICATIONS-POLICY-001",
+      "to": "RUNTIME-MUTATION-SEQUENCE-001"
+    },
+    {
+      "from": "SYSTEM-PERSISTENCE-ATOMIC-001",
+      "to": "LAW-DATA-LOSS-STOP-SHIP-001"
+    },
+    {
+      "from": "SYSTEM-PERSISTENCE-ATOMIC-001",
+      "to": "LAW-RUNTIME-DURABLE-SUCCESS-001"
+    },
+    {
+      "from": "SYSTEM-PERSISTENCE-ATOMIC-001",
+      "to": "RUNTIME-MUTATION-SEQUENCE-001"
+    },
+    {
+      "from": "SYSTEM-PERSISTENCE-ATOMIC-001",
+      "to": "RUNTIME-SOURCE-OWNER-001"
+    },
+    {
+      "from": "SYSTEM-PERSISTENCE-REPLAY-001",
+      "to": "LAW-DATA-LOSS-STOP-SHIP-001"
+    },
+    {
+      "from": "SYSTEM-PERSISTENCE-REPLAY-001",
+      "to": "LAW-RUNTIME-DURABLE-SUCCESS-001"
+    },
+    {
+      "from": "SYSTEM-PERSISTENCE-REPLAY-001",
+      "to": "RUNTIME-MUTATION-SEQUENCE-001"
+    },
+    {
+      "from": "SYSTEM-PERSISTENCE-REPLAY-001",
+      "to": "RUNTIME-SOURCE-OWNER-001"
+    },
+    {
+      "from": "SYSTEM-PRIVACY-CLASSIFICATION-001",
+      "to": "LAW-ACCOUNT-BOUNDARY-001"
+    },
+    {
+      "from": "SYSTEM-PRIVACY-CLASSIFICATION-001",
+      "to": "LAW-LOCAL-AUTHORITY-001"
+    },
+    {
+      "from": "SYSTEM-PRIVACY-CLASSIFICATION-001",
+      "to": "LAW-OFFLINE-NO-ACCOUNT-001"
+    },
+    {
+      "from": "SYSTEM-PRIVACY-CLASSIFICATION-001",
+      "to": "LAW-R2-PUBLIC-ONLY-001"
+    },
+    {
+      "from": "SYSTEM-PRIVACY-CLASSIFICATION-001",
+      "to": "PRIVACY-CLOUDKIT-CONTINUITY-001"
+    },
+    {
+      "from": "SYSTEM-PRIVACY-CLASSIFICATION-001",
+      "to": "PRIVACY-VISIBILITY-001"
+    },
+    {
+      "from": "SYSTEM-PRIVACY-EGRESS-001",
+      "to": "LAW-ACCOUNT-BOUNDARY-001"
+    },
+    {
+      "from": "SYSTEM-PRIVACY-EGRESS-001",
+      "to": "LAW-LOCAL-AUTHORITY-001"
+    },
+    {
+      "from": "SYSTEM-PRIVACY-EGRESS-001",
+      "to": "LAW-OFFLINE-NO-ACCOUNT-001"
+    },
+    {
+      "from": "SYSTEM-PRIVACY-EGRESS-001",
+      "to": "LAW-R2-PUBLIC-ONLY-001"
+    },
+    {
+      "from": "SYSTEM-PRIVACY-EGRESS-001",
+      "to": "PRIVACY-CLOUDKIT-CONTINUITY-001"
+    },
+    {
+      "from": "SYSTEM-PRIVACY-EGRESS-001",
+      "to": "PRIVACY-VISIBILITY-001"
+    },
+    {
+      "from": "SYSTEM-REPAIR-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "SYSTEM-REPAIR-001",
+      "to": "CONTROL-UNDO-RECOVERY-001"
+    },
+    {
+      "from": "SYSTEM-REPAIR-001",
+      "to": "LAW-DATA-LOSS-STOP-SHIP-001"
+    },
+    {
+      "from": "SYSTEM-REPAIR-001",
+      "to": "LAW-RUNTIME-NO-DIRECT-WRITE-001"
+    },
+    {
+      "from": "SYSTEM-REPAIR-001",
+      "to": "RUNTIME-MUTATION-SEQUENCE-001"
+    },
+    {
+      "from": "SYSTEM-RUNTIME-MUTATION-001",
+      "to": "LAW-OFFLINE-NO-ACCOUNT-001"
+    },
+    {
+      "from": "SYSTEM-RUNTIME-MUTATION-001",
+      "to": "LAW-RUNTIME-DURABLE-SUCCESS-001"
+    },
+    {
+      "from": "SYSTEM-RUNTIME-MUTATION-001",
+      "to": "LAW-RUNTIME-NO-DIRECT-WRITE-001"
+    },
+    {
+      "from": "SYSTEM-RUNTIME-MUTATION-001",
+      "to": "MISSION-ORCHESTRATION-LOOP-001"
+    },
+    {
+      "from": "SYSTEM-RUNTIME-MUTATION-001",
+      "to": "RUNTIME-MUTATION-SEQUENCE-001"
+    },
+    {
+      "from": "SYSTEM-RUNTIME-MUTATION-001",
+      "to": "RUNTIME-SOURCE-OWNER-001"
+    },
+    {
+      "from": "SYSTEM-RUNTIME-ORCHESTRATION-001",
+      "to": "LAW-OFFLINE-NO-ACCOUNT-001"
+    },
+    {
+      "from": "SYSTEM-RUNTIME-ORCHESTRATION-001",
+      "to": "LAW-RUNTIME-DURABLE-SUCCESS-001"
+    },
+    {
+      "from": "SYSTEM-RUNTIME-ORCHESTRATION-001",
+      "to": "LAW-RUNTIME-NO-DIRECT-WRITE-001"
+    },
+    {
+      "from": "SYSTEM-RUNTIME-ORCHESTRATION-001",
+      "to": "MISSION-ORCHESTRATION-LOOP-001"
+    },
+    {
+      "from": "SYSTEM-RUNTIME-ORCHESTRATION-001",
+      "to": "RUNTIME-MUTATION-SEQUENCE-001"
+    },
+    {
+      "from": "SYSTEM-RUNTIME-ORCHESTRATION-001",
+      "to": "RUNTIME-SOURCE-OWNER-001"
+    },
+    {
+      "from": "SYSTEM-SCHEDULING-CAPACITY-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "SYSTEM-SCHEDULING-CAPACITY-001",
+      "to": "MISSION-REFLOW-001"
+    },
+    {
+      "from": "SYSTEM-SCHEDULING-CAPACITY-001",
+      "to": "RUNTIME-MUTATION-SEQUENCE-001"
+    },
+    {
+      "from": "SYSTEM-SCHEDULING-CAPACITY-001",
+      "to": "TIME-EXTERNAL-VISIBILITY-001"
+    },
+    {
+      "from": "SYSTEM-SCHEDULING-REFLOW-001",
+      "to": "CONTROL-MATERIAL-CONFIRMATION-001"
+    },
+    {
+      "from": "SYSTEM-SCHEDULING-REFLOW-001",
+      "to": "MISSION-REFLOW-001"
+    },
+    {
+      "from": "SYSTEM-SCHEDULING-REFLOW-001",
+      "to": "RUNTIME-MUTATION-SEQUENCE-001"
+    },
+    {
+      "from": "SYSTEM-SCHEDULING-REFLOW-001",
+      "to": "TIME-EXTERNAL-VISIBILITY-001"
+    },
+    {
+      "from": "SYSTEM-SOURCE-ATLAS-FIREWALL-001",
+      "to": "CONST-PROOF-EVIDENCE-001"
+    },
+    {
+      "from": "SYSTEM-SOURCE-ATLAS-FIREWALL-001",
+      "to": "LAW-LOCAL-AUTHORITY-001"
+    },
+    {
+      "from": "SYSTEM-SOURCE-ATLAS-FIREWALL-001",
+      "to": "LAW-OFFLINE-NO-ACCOUNT-001"
+    },
+    {
+      "from": "SYSTEM-SOURCE-ATLAS-FIREWALL-001",
+      "to": "LAW-R2-PUBLIC-ONLY-001"
+    },
+    {
+      "from": "SYSTEM-SOURCE-ATLAS-PUBLIC-001",
+      "to": "CONST-PROOF-EVIDENCE-001"
+    },
+    {
+      "from": "SYSTEM-SOURCE-ATLAS-PUBLIC-001",
+      "to": "LAW-LOCAL-AUTHORITY-001"
+    },
+    {
+      "from": "SYSTEM-SOURCE-ATLAS-PUBLIC-001",
+      "to": "LAW-OFFLINE-NO-ACCOUNT-001"
+    },
+    {
+      "from": "SYSTEM-SOURCE-ATLAS-PUBLIC-001",
+      "to": "LAW-R2-PUBLIC-ONLY-001"
     }
   ],
   "requirement_ids": [
@@ -3265,6 +3901,29 @@
     "SURFACE-YOU-DEPTH-001",
     "SYS-CANONICAL-GRAPH-001",
     "SYS-PROJECTION-OWNERSHIP-001",
+    "SYSTEM-APPLE-HANDOFF-001",
+    "SYSTEM-APPLE-PROJECTION-001",
+    "SYSTEM-CONTINUITY-DISABLED-001",
+    "SYSTEM-CONTINUITY-SEPARATION-001",
+    "SYSTEM-DIAGNOSTICS-AUTHORITY-001",
+    "SYSTEM-DIAGNOSTICS-HEALTH-001",
+    "SYSTEM-EXPORT-001",
+    "SYSTEM-IMPORTED-SOURCE-001",
+    "SYSTEM-LEARNING-CONTROL-001",
+    "SYSTEM-LEARNING-LOCAL-001",
+    "SYSTEM-NOTIFICATIONS-EFFECT-001",
+    "SYSTEM-NOTIFICATIONS-POLICY-001",
+    "SYSTEM-PERSISTENCE-ATOMIC-001",
+    "SYSTEM-PERSISTENCE-REPLAY-001",
+    "SYSTEM-PRIVACY-CLASSIFICATION-001",
+    "SYSTEM-PRIVACY-EGRESS-001",
+    "SYSTEM-REPAIR-001",
+    "SYSTEM-RUNTIME-MUTATION-001",
+    "SYSTEM-RUNTIME-ORCHESTRATION-001",
+    "SYSTEM-SCHEDULING-CAPACITY-001",
+    "SYSTEM-SCHEDULING-REFLOW-001",
+    "SYSTEM-SOURCE-ATLAS-FIREWALL-001",
+    "SYSTEM-SOURCE-ATLAS-PUBLIC-001",
     "TIME-EXTERNAL-VISIBILITY-001"
   ],
   "schema_version": 1

@@ -443,12 +443,66 @@ class ManifestTests(unittest.TestCase):
                 Path("specifications/surfaces/time.md"),
                 Path("specifications/surfaces/today.md"),
                 Path("specifications/surfaces/you.md"),
+                Path("specifications/systems/apple-ecosystem.md"),
+                Path("specifications/systems/diagnostics.md"),
+                Path("specifications/systems/import-export-repair.md"),
+                Path("specifications/systems/local-learning.md"),
+                Path("specifications/systems/notifications.md"),
+                Path("specifications/systems/persistence-and-replay.md"),
+                Path("specifications/systems/privacy-and-data-classification.md"),
+                Path("specifications/systems/private-life-runtime.md"),
+                Path("specifications/systems/scheduling-and-capacity.md"),
+                Path("specifications/systems/source-atlas.md"),
+                Path("specifications/systems/sync-and-continuity.md"),
             ),
         )
         self.assertEqual(
             manifest.generated_files,
             tuple(Path(path) for path in GENERATED_FILES),
         )
+
+        systems_root = REPO_ROOT / "docs/canon/specifications/systems"
+        with self.subTest(task18_finding="I1-reviewed-egress-boundary"):
+            privacy = (systems_root / "privacy-and-data-classification.md").read_text(
+                encoding="utf-8"
+            )
+            egress = privacy.split("## SYSTEM-PRIVACY-EGRESS-001", 1)[1].split(
+                "## Completeness contract", 1
+            )[0]
+            self.assertNotIn("every network/external boundary", egress)
+            for hard_banned_destination in (
+                "Ambitions backend",
+                "Account service",
+                "R2",
+                "Source Atlas",
+                "hosted AI/cloud model",
+                "server profiler",
+            ):
+                self.assertIn(hard_banned_destination, egress)
+            self.assertIn("user-controlled reviewed export", egress)
+            self.assertIn("minimum fields", egress)
+            self.assertIn("destination preview", egress)
+            self.assertIn("Receipt/History", egress)
+            self.assertIn("durable outbox/result", egress)
+
+        with self.subTest(task18_finding="I2-widget-owner"):
+            apple = (systems_root / "apple-ecosystem.md").read_text(encoding="utf-8")
+            self.assertIn("Native/AmbitionsWidgetExtension/", apple)
+            self.assertNotIn("Native/AmbitionsWidget/", apple)
+
+        with self.subTest(task18_finding="I3-external-writes-owner"):
+            runtime = (systems_root / "private-life-runtime.md").read_text(
+                encoding="utf-8"
+            )
+            front_matter = runtime.split("+++", 2)[1]
+            source_ownership = runtime.split(
+                "<!-- canon-section: source-ownership -->", 1
+            )[1].split("<!-- canon-section: tests-proof -->", 1)[0]
+            self.assertIn(
+                '"Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/"',
+                front_matter,
+            )
+            self.assertIn("`ExternalWrites/`", source_ownership)
 
     def test_all_schema_documents_are_valid_closed_json_objects(self):
         schema_root = Path("docs/canon/schemas")

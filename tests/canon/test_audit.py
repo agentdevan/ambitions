@@ -377,8 +377,8 @@ class AuditTests(unittest.TestCase):
         self.assertEqual(result, 0)
         self.assertEqual(
             output.getvalue(),
-            "GREEN ambitions canon audit documents=42 requirements=190 "
-            "concepts=189 authority_state=shadow\n",
+            "GREEN ambitions canon audit documents=53 requirements=213 "
+            "concepts=212 authority_state=shadow\n",
         )
 
     def test_cli_audit_renders_red_finding_and_exits_one(self):

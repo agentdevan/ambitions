@@ -6,7 +6,7 @@
 - Canon revision: `1`
 - Authority state: `shadow`
 - Compiler version: `0.1.0`
-- Canon content SHA: `84dbc3cf732ea87d3d09ed4885f404e6ec8973334785cb97b1dc4f224a71c776`
+- Canon content SHA: `5dc62407e500e5b12762f9b417884892cc06f1dc71fc79ab9afdf0f1c4defa18`
 
 | Specification | Profile | Section markers |
 | --- | --- | ---: |
@@ -52,3 +52,14 @@
 | `SURFACE-TIME` | surface-v1 | 22 |
 | `SURFACE-TODAY` | surface-v1 | 22 |
 | `SURFACE-YOU` | surface-v1 | 22 |
+| `SYSTEM-APPLE-ECOSYSTEM` | system-v1 | 12 |
+| `SYSTEM-DIAGNOSTICS` | system-v1 | 12 |
+| `SYSTEM-IMPORT-EXPORT-REPAIR` | system-v1 | 12 |
+| `SYSTEM-LOCAL-LEARNING` | system-v1 | 12 |
+| `SYSTEM-NOTIFICATIONS` | system-v1 | 12 |
+| `SYSTEM-PERSISTENCE-REPLAY` | system-v1 | 12 |
+| `SYSTEM-PRIVACY-DATA-CLASSIFICATION` | system-v1 | 12 |
+| `SYSTEM-PRIVATE-LIFE-RUNTIME` | system-v1 | 12 |
+| `SYSTEM-SCHEDULING-CAPACITY` | system-v1 | 12 |
+| `SYSTEM-SOURCE-ATLAS` | system-v1 | 12 |
+| `SYSTEM-SYNC-CONTINUITY` | system-v1 | 12 |

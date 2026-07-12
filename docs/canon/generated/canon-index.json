@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "84dbc3cf732ea87d3d09ed4885f404e6ec8973334785cb97b1dc4f224a71c776",
+  "canon_content_sha": "5dc62407e500e5b12762f9b417884892cc06f1dc71fc79ab9afdf0f1c4defa18",
   "canon_revision": 1,
   "compiler_version": "0.1.0",
   "documents": [
@@ -381,6 +381,105 @@
       "spec_id": "SURFACE-YOU",
       "status": "normative",
       "title": "You"
+    },
+    {
+      "kind": "system",
+      "owner_domain": "system-apple-ecosystem",
+      "profile": "system-v1",
+      "source_path": "docs/canon/specifications/systems/apple-ecosystem.md",
+      "spec_id": "SYSTEM-APPLE-ECOSYSTEM",
+      "status": "normative",
+      "title": "Apple Ecosystem"
+    },
+    {
+      "kind": "system",
+      "owner_domain": "system-diagnostics",
+      "profile": "system-v1",
+      "source_path": "docs/canon/specifications/systems/diagnostics.md",
+      "spec_id": "SYSTEM-DIAGNOSTICS",
+      "status": "normative",
+      "title": "Diagnostics"
+    },
+    {
+      "kind": "system",
+      "owner_domain": "system-import-export-repair",
+      "profile": "system-v1",
+      "source_path": "docs/canon/specifications/systems/import-export-repair.md",
+      "spec_id": "SYSTEM-IMPORT-EXPORT-REPAIR",
+      "status": "normative",
+      "title": "Import Export and Repair"
+    },
+    {
+      "kind": "system",
+      "owner_domain": "system-local-learning",
+      "profile": "system-v1",
+      "source_path": "docs/canon/specifications/systems/local-learning.md",
+      "spec_id": "SYSTEM-LOCAL-LEARNING",
+      "status": "normative",
+      "title": "Local Learning"
+    },
+    {
+      "kind": "system",
+      "owner_domain": "system-notifications",
+      "profile": "system-v1",
+      "source_path": "docs/canon/specifications/systems/notifications.md",
+      "spec_id": "SYSTEM-NOTIFICATIONS",
+      "status": "normative",
+      "title": "Notifications"
+    },
+    {
+      "kind": "system",
+      "owner_domain": "system-persistence-replay",
+      "profile": "system-v1",
+      "source_path": "docs/canon/specifications/systems/persistence-and-replay.md",
+      "spec_id": "SYSTEM-PERSISTENCE-REPLAY",
+      "status": "normative",
+      "title": "Persistence and Replay"
+    },
+    {
+      "kind": "system",
+      "owner_domain": "system-privacy-data-classification",
+      "profile": "system-v1",
+      "source_path": "docs/canon/specifications/systems/privacy-and-data-classification.md",
+      "spec_id": "SYSTEM-PRIVACY-DATA-CLASSIFICATION",
+      "status": "normative",
+      "title": "Privacy and Data Classification"
+    },
+    {
+      "kind": "system",
+      "owner_domain": "system-private-life-runtime",
+      "profile": "system-v1",
+      "source_path": "docs/canon/specifications/systems/private-life-runtime.md",
+      "spec_id": "SYSTEM-PRIVATE-LIFE-RUNTIME",
+      "status": "normative",
+      "title": "Private Life Runtime"
+    },
+    {
+      "kind": "system",
+      "owner_domain": "system-scheduling-capacity",
+      "profile": "system-v1",
+      "source_path": "docs/canon/specifications/systems/scheduling-and-capacity.md",
+      "spec_id": "SYSTEM-SCHEDULING-CAPACITY",
+      "status": "normative",
+      "title": "Scheduling and Capacity"
+    },
+    {
+      "kind": "system",
+      "owner_domain": "system-source-atlas",
+      "profile": "system-v1",
+      "source_path": "docs/canon/specifications/systems/source-atlas.md",
+      "spec_id": "SYSTEM-SOURCE-ATLAS",
+      "status": "normative",
+      "title": "Source Atlas"
+    },
+    {
+      "kind": "system",
+      "owner_domain": "system-sync-continuity",
+      "profile": "system-v1",
+      "source_path": "docs/canon/specifications/systems/sync-and-continuity.md",
+      "spec_id": "SYSTEM-SYNC-CONTINUITY",
+      "status": "normative",
+      "title": "Sync and Continuity"
     }
   ],
   "requirements": [
@@ -2084,6 +2183,213 @@
       "source_path": "docs/canon/specifications/objects/schedule-placement.md",
       "status": "normative",
       "title": "Projections never own divergent copies"
+    },
+    {
+      "concept": "system.apple.command-handoff",
+      "line": 30,
+      "modality": "MUST",
+      "requirement_id": "SYSTEM-APPLE-HANDOFF-001",
+      "source_path": "docs/canon/specifications/systems/apple-ecosystem.md",
+      "status": "normative",
+      "title": "Every ecosystem action preserves command identity and safe fallback"
+    },
+    {
+      "concept": "system.apple.projection",
+      "line": 19,
+      "modality": "MUST",
+      "requirement_id": "SYSTEM-APPLE-PROJECTION-001",
+      "source_path": "docs/canon/specifications/systems/apple-ecosystem.md",
+      "status": "normative",
+      "title": "Ecosystem surfaces use minimized disposable projections"
+    },
+    {
+      "concept": "system.continuity.disabled-gate",
+      "line": 30,
+      "modality": "MUST",
+      "requirement_id": "SYSTEM-CONTINUITY-DISABLED-001",
+      "source_path": "docs/canon/specifications/systems/sync-and-continuity.md",
+      "status": "normative",
+      "title": "Continuity stays disabled until the full gate passes"
+    },
+    {
+      "concept": "system.continuity.user-owned-cloudkit",
+      "line": 19,
+      "modality": "MUST",
+      "requirement_id": "SYSTEM-CONTINUITY-SEPARATION-001",
+      "source_path": "docs/canon/specifications/systems/sync-and-continuity.md",
+      "status": "normative",
+      "title": "CloudKit continuity is separate and locally subordinate"
+    },
+    {
+      "concept": "system.diagnostics.non-authority",
+      "line": 30,
+      "modality": "MUST NOT",
+      "requirement_id": "SYSTEM-DIAGNOSTICS-AUTHORITY-001",
+      "source_path": "docs/canon/specifications/systems/diagnostics.md",
+      "status": "normative",
+      "title": "Diagnostics observe and propose; they never decide or repair silently"
+    },
+    {
+      "concept": "system.diagnostics.redacted-health",
+      "line": 19,
+      "modality": "MUST",
+      "requirement_id": "SYSTEM-DIAGNOSTICS-HEALTH-001",
+      "source_path": "docs/canon/specifications/systems/diagnostics.md",
+      "status": "normative",
+      "title": "Health is evidence-backed, scoped, and redacted"
+    },
+    {
+      "concept": "system.data.export",
+      "line": 30,
+      "modality": "MUST",
+      "requirement_id": "SYSTEM-EXPORT-001",
+      "source_path": "docs/canon/specifications/systems/import-export-repair.md",
+      "status": "normative",
+      "title": "Export is explicit reviewed egress, distinct from backup"
+    },
+    {
+      "concept": "system.imported-source.no-silent-change",
+      "line": 19,
+      "modality": "MUST",
+      "requirement_id": "SYSTEM-IMPORTED-SOURCE-001",
+      "source_path": "docs/canon/specifications/systems/import-export-repair.md",
+      "status": "normative",
+      "title": "Imported source changes never silently alter native truth"
+    },
+    {
+      "concept": "system.learning.user-control",
+      "line": 30,
+      "modality": "MUST",
+      "requirement_id": "SYSTEM-LEARNING-CONTROL-001",
+      "source_path": "docs/canon/specifications/systems/local-learning.md",
+      "status": "normative",
+      "title": "The user can inspect, correct, disable, reset, archive, and delete influences"
+    },
+    {
+      "concept": "system.learning.local-inspectable",
+      "line": 19,
+      "modality": "MUST",
+      "requirement_id": "SYSTEM-LEARNING-LOCAL-001",
+      "source_path": "docs/canon/specifications/systems/local-learning.md",
+      "status": "normative",
+      "title": "Learning remains local, evidence-linked, and non-judgmental"
+    },
+    {
+      "concept": "system.notifications.external-effect",
+      "line": 30,
+      "modality": "MUST",
+      "requirement_id": "SYSTEM-NOTIFICATIONS-EFFECT-001",
+      "source_path": "docs/canon/specifications/systems/notifications.md",
+      "status": "normative",
+      "title": "Scheduling and actions preserve local authority"
+    },
+    {
+      "concept": "system.notifications.object-aware",
+      "line": 19,
+      "modality": "MUST",
+      "requirement_id": "SYSTEM-NOTIFICATIONS-POLICY-001",
+      "source_path": "docs/canon/specifications/systems/notifications.md",
+      "status": "normative",
+      "title": "Notifications are contextual, object-aware, private, and non-coercive"
+    },
+    {
+      "concept": "system.persistence.atomicity",
+      "line": 19,
+      "modality": "MUST",
+      "requirement_id": "SYSTEM-PERSISTENCE-ATOMIC-001",
+      "source_path": "docs/canon/specifications/systems/persistence-and-replay.md",
+      "status": "normative",
+      "title": "Accepted local intent is atomic and crash-consistent"
+    },
+    {
+      "concept": "system.persistence.replay",
+      "line": 30,
+      "modality": "MUST",
+      "requirement_id": "SYSTEM-PERSISTENCE-REPLAY-001",
+      "source_path": "docs/canon/specifications/systems/persistence-and-replay.md",
+      "status": "normative",
+      "title": "Canonical history replays equivalently"
+    },
+    {
+      "concept": "system.privacy.classification",
+      "line": 19,
+      "modality": "MUST",
+      "requirement_id": "SYSTEM-PRIVACY-CLASSIFICATION-001",
+      "source_path": "docs/canon/specifications/systems/privacy-and-data-classification.md",
+      "status": "normative",
+      "title": "Every datum and derived fact has one handling class"
+    },
+    {
+      "concept": "system.privacy.egress-firewall",
+      "line": 30,
+      "modality": "MUST NOT",
+      "requirement_id": "SYSTEM-PRIVACY-EGRESS-001",
+      "source_path": "docs/canon/specifications/systems/privacy-and-data-classification.md",
+      "status": "normative",
+      "title": "Private graph egress fails closed"
+    },
+    {
+      "concept": "system.data.repair",
+      "line": 41,
+      "modality": "MUST",
+      "requirement_id": "SYSTEM-REPAIR-001",
+      "source_path": "docs/canon/specifications/systems/import-export-repair.md",
+      "status": "normative",
+      "title": "Repair is previewed, protected, receipt-backed, and verified"
+    },
+    {
+      "concept": "system.runtime.mutation-sequence",
+      "line": 19,
+      "modality": "MUST",
+      "requirement_id": "SYSTEM-RUNTIME-MUTATION-001",
+      "source_path": "docs/canon/specifications/systems/private-life-runtime.md",
+      "status": "normative",
+      "title": "Meaningful change follows one ordered local sequence"
+    },
+    {
+      "concept": "system.runtime.local-orchestration",
+      "line": 30,
+      "modality": "MUST",
+      "requirement_id": "SYSTEM-RUNTIME-ORCHESTRATION-001",
+      "source_path": "docs/canon/specifications/systems/private-life-runtime.md",
+      "status": "normative",
+      "title": "Runtime serves contextual life orchestration"
+    },
+    {
+      "concept": "system.scheduling.capacity",
+      "line": 19,
+      "modality": "MUST",
+      "requirement_id": "SYSTEM-SCHEDULING-CAPACITY-001",
+      "source_path": "docs/canon/specifications/systems/scheduling-and-capacity.md",
+      "status": "normative",
+      "title": "Capacity is honest and semantically unequal"
+    },
+    {
+      "concept": "system.scheduling.reflow",
+      "line": 30,
+      "modality": "MUST",
+      "requirement_id": "SYSTEM-SCHEDULING-REFLOW-001",
+      "source_path": "docs/canon/specifications/systems/scheduling-and-capacity.md",
+      "status": "normative",
+      "title": "Reflow is inspectable and locally committed"
+    },
+    {
+      "concept": "system.source-atlas.egress-firewall",
+      "line": 30,
+      "modality": "MUST NOT",
+      "requirement_id": "SYSTEM-SOURCE-ATLAS-FIREWALL-001",
+      "source_path": "docs/canon/specifications/systems/source-atlas.md",
+      "status": "normative",
+      "title": "Requests and R2 artifacts contain no private graph signal"
+    },
+    {
+      "concept": "system.source-atlas.public-reference",
+      "line": 19,
+      "modality": "MUST",
+      "requirement_id": "SYSTEM-SOURCE-ATLAS-PUBLIC-001",
+      "source_path": "docs/canon/specifications/systems/source-atlas.md",
+      "status": "normative",
+      "title": "Source Atlas supplies verified public context only"
     },
     {
       "concept": "surface.time-external-visibility",

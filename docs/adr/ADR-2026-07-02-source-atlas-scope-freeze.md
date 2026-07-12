@@ -257,6 +257,15 @@ any change to Source Atlas behavior:
 
 - Source Atlas growth allowlist: `Native/Ambitions/Core/LocalRuntimeOS/Commands/MeaningfulMutationRegistry.swift`
 
+### Canon Task 18 shadow specification
+
+Task 18 may add the shadow normative system specification below for review.
+This is review permission only: it authorizes no Swift/runtime, R2, public-pack,
+product-surface, or network growth and provides no implementation or release
+Green claim:
+
+- Source Atlas growth allowlist: `docs/canon/specifications/systems/source-atlas.md`
+
 ## Inspection Requirements
 
 Source Atlas work must keep inspection boring and bounded:
