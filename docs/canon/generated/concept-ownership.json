@@ -1,8 +1,285 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "d53009910834302ef66dee2738bed133bd21ca2a4896680abac0a47879aa1cb4",
-  "canon_revision": 0,
+  "canon_content_sha": "a81fe53d1ba082647446713e7083e8f1077877306b7c342931d14f70788d792c",
+  "canon_revision": 1,
   "compiler_version": "0.1.0",
-  "concepts": [],
+  "concepts": [
+    {
+      "concept": "accessibility.semantic-equivalence",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "account.boundary",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "authority.amendment",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "authority.migration-corpus",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "authority.mission",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "authority.moat",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "authority.origin",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "authority.product-definition",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "canon.destructive-supersession",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "canon.external-linear-retention",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "canon.no-active-graveyard",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "control.force-nothing",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "control.material-confirmation",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "control.undo-recovery",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "data.loss-stop-ship",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "global.motion-capture-ownership",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "global.trust-ownership",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "history.supersession",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "ia.nonroot-ownership",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "ia.plain-language",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "ia.root-labels",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "ia.root-surfaces",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "language.root-labels",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.anti-metrics",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.capabilities",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.capability-meaning",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.category",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.core-loop",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.foundation-runtime",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.function",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.hard-red",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.integration",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.launch-bar",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.moat",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.moat-continuity",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.naming-stack",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.non-commodity",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.origin-outcome",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.origin-problem",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.origin-structure",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.reflow",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.runtime-relation",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.success",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "mission.user",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "object.canonical-graph",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "object.future-step-identity",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "object.goal-lifecycle",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "object.lifecycle-deletion",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "object.proof-requirement",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "object.reminder-completion",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "object.saved-for-later",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "object.taxonomy",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "platform.calendar-replacement",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "platform.native-iphone",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "privacy.cloudkit-continuity",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "privacy.local-authority",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "privacy.r2-public-only",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "privacy.visibility",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "proof.evidence",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "proof.figma-authority",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "runtime.durable-success",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "runtime.mutation-invariant",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "runtime.mutation-sequence",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "runtime.no-direct-write",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "runtime.source-owner",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "shell.stage",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "surface.time-external-visibility",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "surface.today-primary-identity",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "surface.you-depth",
+      "spec_id": "CONSTITUTION"
+    }
+  ],
   "schema_version": 1
 }

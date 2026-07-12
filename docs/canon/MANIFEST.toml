@@ -1,8 +1,8 @@
 schema_version = 1
-canon_revision = 0
+canon_revision = 1
 authority_state = "shadow"
 compiler_version = "0.1.0"
-normative_files = []
+normative_files = ["CONSTITUTION.md"]
 
 generated_files = [
   "generated/CODEX_START_HERE.md",

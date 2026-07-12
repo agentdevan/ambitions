@@ -4617,6 +4617,7 @@ def validate_tracked_canon_evidence(
             "schema_version",
             "claim_dispositions_sha256",
             "decision_evidence_fingerprint_sha256",
+            "resolution_provenance",
             "dockets",
         }
         or baseline.get("schema_version") != 1

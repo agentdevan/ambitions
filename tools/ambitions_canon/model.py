@@ -241,7 +241,10 @@ class SupersessionEntry:
     resulting_id: str | None
     decision_date: str
     owner: str
-    commit: str
+    decision_source: str
+    resolution: str
+    decision_base_commit: str
+    integration_evidence_sha256: str
     superseded_artifacts: tuple[str, ...]
 
     def __post_init__(self) -> None:

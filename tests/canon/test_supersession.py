@@ -1,6 +1,7 @@
 import tempfile
 import unittest
 import json
+import hashlib
 from dataclasses import replace
 from pathlib import Path
 
@@ -16,7 +17,53 @@ from tools.ambitions_canon.model import (
 from tools.ambitions_canon.registry import build_registry
 from tools.ambitions_canon.build import _registry_content_sha
 from tools.ambitions_canon.render import _supersession_manifest
-from tools.ambitions_canon.supersession import load_supersession_ledger
+from tools.ambitions_canon.supersession import (
+    integration_evidence_digest,
+    load_supersession_ledger,
+)
+
+
+def ledger_text(
+    *,
+    conflict_id: str,
+    old_ids: tuple[str, ...],
+    resulting_id: str | None,
+    decision_date: str,
+    owner: str,
+    decision_source: str,
+    superseded_artifacts: tuple[str, ...],
+    resolution: str = "compose",
+    decision_base_commit: str = "0123456789abcdef0123456789abcdef01234567",
+) -> str:
+    digest = integration_evidence_digest(
+        conflict_id=conflict_id,
+        old_ids=old_ids,
+        resulting_id=resulting_id,
+        decision_date=decision_date,
+        owner=owner,
+        decision_source=decision_source,
+        resolution=resolution,
+        decision_base_commit=decision_base_commit,
+        superseded_artifacts=superseded_artifacts,
+    )
+    resulting_line = (
+        f'resulting_id = "{resulting_id}"\n' if resulting_id is not None else ""
+    )
+    old_ids_text = ", ".join(f'"{item}"' for item in old_ids)
+    artifacts_text = ", ".join(f'"{item}"' for item in superseded_artifacts)
+    return f'''schema_version = 1
+
+[[entries]]
+conflict_id = "{conflict_id}"
+old_ids = [{old_ids_text}]
+{resulting_line}decision_date = "{decision_date}"
+owner = "{owner}"
+decision_source = "{decision_source}"
+resolution = "{resolution}"
+decision_base_commit = "{decision_base_commit}"
+integration_evidence_sha256 = "{digest}"
+superseded_artifacts = [{artifacts_text}]
+'''
 
 
 def manifest(root: Path) -> CanonManifest:
@@ -108,32 +155,40 @@ class SupersessionLedgerTests(unittest.TestCase):
                 "CANON_SUPERSESSION_LEDGER_MISSING",
             )
 
-    def test_initial_ledger_is_exact_closed_and_empty(self):
+    def test_repository_ledger_is_closed_and_owner_decision_bound(self):
         path = Path("docs/canon/decisions/SUPERSESSION_LEDGER.toml")
 
         ledger = load_supersession_ledger(path)
 
-        self.assertEqual(path.read_bytes(), b"schema_version = 1\nentries = []\n")
         self.assertEqual(ledger.schema_version, 1)
-        self.assertEqual(ledger.entries, ())
-        self.assertEqual(ledger.retired_ids, frozenset())
+        self.assertEqual(len(ledger.entries), 20)
+        self.assertEqual(
+            tuple(item.conflict_id for item in ledger.entries),
+            tuple(sorted(item.conflict_id for item in ledger.entries)),
+        )
+        self.assertTrue(
+            all(
+                item.decision_source
+                == "Owner approval on 2026-07-12: “Approve all 20 recommended resolutions and proposed canonical laws.”"
+                for item in ledger.entries
+            )
+        )
+        self.assertTrue(ledger.retired_ids)
 
     def test_registry_loads_closed_durable_ledger_ids(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             write_ledger(
                 root,
-                """schema_version = 1
-
-[[entries]]
-conflict_id = "CONFLICT-TODAY-001"
-old_ids = ["TODAY-001"]
-resulting_id = "TODAY-002"
-decision_date = "2026-07-11"
-owner = "Devan Warner"
-commit = "0123456789abcdef0123456789abcdef01234567"
-superseded_artifacts = ["docs/truth/PRODUCT_DESIGN_TRUTH.md"]
-""",
+                ledger_text(
+                    conflict_id="CONFLICT-TODAY-001",
+                    old_ids=("TODAY-001",),
+                    resulting_id="TODAY-002",
+                    decision_date="2026-07-11",
+                    owner="Devan Warner",
+                    decision_source="Owner approval recorded in the Task 13 instruction.",
+                    superseded_artifacts=("docs/truth/PRODUCT_DESIGN_TRUTH.md",),
+                ),
             )
 
             registry = build_registry(manifest(root), ())
@@ -152,6 +207,97 @@ superseded_artifacts = ["docs/truth/PRODUCT_DESIGN_TRUTH.md"]
                 ).read_bytes(),
             )
 
+    def test_ledger_preserves_owner_decision_source_in_generated_manifest(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            write_ledger(
+                root,
+                ledger_text(
+                    conflict_id="CONFLICT-TODAY-001",
+                    old_ids=("TODAY-001",),
+                    resulting_id="TODAY-002",
+                    decision_date="2026-07-12",
+                    owner="Devan Warner",
+                    decision_source="Owner approval: Approve the recommended resolution and proposed canonical law.",
+                    superseded_artifacts=("docs/truth/PRODUCT_DESIGN_TRUTH.md",),
+                ),
+            )
+
+            registry = build_registry(manifest(root), ())
+            entry = registry.supersession_entries[0]
+            payload = json.loads(
+                _supersession_manifest(
+                    {"schema_version": 1, "canon_content_sha": "abc"},
+                    registry,
+                )
+            )
+
+            self.assertEqual(
+                entry.decision_source,
+                "Owner approval: Approve the recommended resolution and proposed canonical law.",
+            )
+            self.assertEqual(
+                payload["supersessions"][0]["decision_source"],
+                entry.decision_source,
+            )
+
+    def test_ledger_uses_decision_base_and_content_evidence_not_false_commit(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            evidence_fields = {
+                "conflict_id": "CONFLICT-TODAY-001",
+                "decision_base_commit": "0123456789abcdef0123456789abcdef01234567",
+                "decision_date": "2026-07-12",
+                "decision_source": "Owner approval",
+                "old_ids": ["TODAY-001"],
+                "owner": "Devan Warner",
+                "resolution": "compose",
+                "resulting_id": "TODAY-002",
+                "superseded_artifacts": ["docs/truth/PRODUCT_DESIGN_TRUTH.md"],
+            }
+            digest = hashlib.sha256(
+                json.dumps(
+                    evidence_fields,
+                    ensure_ascii=False,
+                    separators=(",", ":"),
+                    sort_keys=True,
+                ).encode("utf-8")
+            ).hexdigest()
+            write_ledger(
+                root,
+                f'''schema_version = 1
+
+[[entries]]
+conflict_id = "CONFLICT-TODAY-001"
+old_ids = ["TODAY-001"]
+resulting_id = "TODAY-002"
+decision_date = "2026-07-12"
+owner = "Devan Warner"
+decision_source = "Owner approval"
+resolution = "compose"
+decision_base_commit = "0123456789abcdef0123456789abcdef01234567"
+integration_evidence_sha256 = "{digest}"
+superseded_artifacts = ["docs/truth/PRODUCT_DESIGN_TRUTH.md"]
+''',
+            )
+
+            registry = build_registry(manifest(root), ())
+            entry = registry.supersession_entries[0]
+            payload = json.loads(
+                _supersession_manifest(
+                    {"schema_version": 1, "canon_content_sha": "abc"},
+                    registry,
+                )
+            )
+
+            self.assertEqual(entry.resolution, "compose")
+            self.assertEqual(
+                entry.decision_base_commit,
+                "0123456789abcdef0123456789abcdef01234567",
+            )
+            self.assertEqual(entry.integration_evidence_sha256, digest)
+            self.assertNotIn("commit", payload["supersessions"][0])
+
     def test_ledger_bytes_change_registry_sha_and_generated_manifest(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -162,15 +308,15 @@ superseded_artifacts = ["docs/truth/PRODUCT_DESIGN_TRUTH.md"]
             first_sha = _registry_content_sha(first)
 
             ledger_path.write_text(
-                """schema_version = 1
-[[entries]]
-conflict_id = "CONFLICT-001"
-old_ids = ["OLD-001"]
-decision_date = "2026-07-11"
-owner = "Devan Warner"
-commit = "0123456789abcdef0123456789abcdef01234567"
-superseded_artifacts = ["docs/truth/PRODUCT_DESIGN_TRUTH.md"]
-""",
+                ledger_text(
+                    conflict_id="CONFLICT-001",
+                    old_ids=("OLD-001",),
+                    resulting_id=None,
+                    decision_date="2026-07-11",
+                    owner="Devan Warner",
+                    decision_source="Owner approval recorded in the Task 13 instruction.",
+                    superseded_artifacts=("docs/truth/PRODUCT_DESIGN_TRUTH.md",),
+                ),
                 encoding="utf-8",
             )
             second = build_registry(first_manifest, ())
@@ -183,15 +329,19 @@ superseded_artifacts = ["docs/truth/PRODUCT_DESIGN_TRUTH.md"]
             )
 
             self.assertNotEqual(first_sha, second_sha)
+            entry = second.supersession_entries[0]
             self.assertEqual(
                 payload["supersessions"],
                 [
                     {
-                        "commit": "0123456789abcdef0123456789abcdef01234567",
                         "conflict_id": "CONFLICT-001",
+                        "decision_base_commit": entry.decision_base_commit,
                         "decision_date": "2026-07-11",
+                        "decision_source": "Owner approval recorded in the Task 13 instruction.",
+                        "integration_evidence_sha256": entry.integration_evidence_sha256,
                         "old_ids": ["OLD-001"],
                         "owner": "Devan Warner",
+                        "resolution": "compose",
                         "resulting_id": None,
                         "superseded_artifacts": [
                             "docs/truth/PRODUCT_DESIGN_TRUTH.md"
@@ -205,16 +355,15 @@ superseded_artifacts = ["docs/truth/PRODUCT_DESIGN_TRUTH.md"]
             root = Path(directory)
             write_ledger(
                 root,
-                """schema_version = 1
-
-[[entries]]
-conflict_id = "CONFLICT-TODAY-001"
-old_ids = ["TODAY-001"]
-decision_date = "2026-07-11"
-owner = "Devan Warner"
-commit = "0123456789abcdef0123456789abcdef01234567"
-superseded_artifacts = []
-""",
+                ledger_text(
+                    conflict_id="CONFLICT-TODAY-001",
+                    old_ids=("TODAY-001",),
+                    resulting_id=None,
+                    decision_date="2026-07-11",
+                    owner="Devan Warner",
+                    decision_source="Owner approval recorded in the Task 13 instruction.",
+                    superseded_artifacts=(),
+                ),
                 indexed_requirement_ids=("TODAY-001",),
             )
 
@@ -232,6 +381,7 @@ conflict_id = "CONFLICT-1"
 old_ids = ["OLD-1", "OLD-1"]
 decision_date = "2026-07-11"
 owner = "Owner"
+decision_source = "Owner decision source"
 commit = "0123456789abcdef0123456789abcdef01234567"
 superseded_artifacts = []
 """,
@@ -241,6 +391,7 @@ conflict_id = "CONFLICT-2"
 old_ids = ["OLD-2"]
 decision_date = "not-a-date"
 owner = "Owner"
+decision_source = "Owner decision source"
 commit = "not-a-commit"
 superseded_artifacts = []
 """,

@@ -390,14 +390,17 @@ class ManifestTests(unittest.TestCase):
                     lambda: load_manifest(self.root),
                 )
 
-    def test_initial_manifest_matches_the_shadow_contract_exactly(self):
+    def test_repository_manifest_matches_the_shadow_constitution_contract(self):
         manifest = load_manifest(REPO_ROOT)
 
         self.assertEqual(manifest.schema_version, 1)
-        self.assertEqual(manifest.canon_revision, 0)
+        self.assertEqual(manifest.canon_revision, 1)
         self.assertIs(manifest.authority_state, AuthorityState.SHADOW)
         self.assertEqual(manifest.compiler_version, "0.1.0")
-        self.assertEqual(manifest.normative_files, ())
+        self.assertEqual(
+            tuple(item.path for item in manifest.normative_files),
+            (Path("CONSTITUTION.md"),),
+        )
         self.assertEqual(
             manifest.generated_files,
             tuple(Path(path) for path in GENERATED_FILES),

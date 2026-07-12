@@ -448,7 +448,10 @@ def _supersession_manifest(metadata, registry) -> bytes:
             "resulting_id": entry.resulting_id,
             "decision_date": entry.decision_date,
             "owner": entry.owner,
-            "commit": entry.commit,
+            "decision_source": entry.decision_source,
+            "resolution": entry.resolution,
+            "decision_base_commit": entry.decision_base_commit,
+            "integration_evidence_sha256": entry.integration_evidence_sha256,
             "superseded_artifacts": list(entry.superseded_artifacts),
         }
         for entry in registry.supersession_entries

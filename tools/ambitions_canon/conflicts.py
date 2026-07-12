@@ -44,6 +44,7 @@ ALLOWED_PRIORITIES = frozenset({"P0", "P1", "P2", "INFORMATIONAL"})
 _IDENTIFIER = re.compile(r"^[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)+$")
 _CONCEPT = re.compile(r"^[a-z0-9]+(?:[._-][a-z0-9]+)*$")
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
+_DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 _FRONT_MATTER = re.compile(r"\A\+\+\+\n(.*?)\n\+\+\+\n", re.DOTALL)
 _GLOBAL_SCOPES = frozenset({"*", "all", "global", "everywhere"})
 _STRUCTURED_SCOPE = re.compile(r"^[a-z0-9]+(?:\.[a-z0-9_-]+)*$")
@@ -721,6 +722,7 @@ def render_conflict_baseline(
             claim_dispositions_bytes
         ).hexdigest(),
         "decision_evidence_fingerprint_sha256": decision_fingerprint,
+        "resolution_provenance": None,
         "dockets": [
             _baseline_docket_record(item, tracked, decision_fingerprint)
             for item in ordered
@@ -763,6 +765,7 @@ def validate_conflict_repository(
             baseline_path,
         )
     current = {item.conflict_id: item for item in dockets}
+    requirements = set(requirement_ids)
     if len(current) != len(dockets):
         raise _error(
             "CONFLICT_DOCKET_DUPLICATE",
@@ -795,8 +798,9 @@ def validate_conflict_repository(
             continue
         _validate_removed_baseline_record(
             record,
-            set(requirement_ids),
+            requirements,
             supersession_entries,
+            baseline["resolution_provenance"],
             baseline_path,
         )
     _validate_baseline_claim_coverage(baseline["dockets"], tracked)
@@ -994,6 +998,7 @@ def _validate_removed_baseline_record(
     record: Mapping[str, object],
     requirement_ids: set[str],
     supersession_entries: Sequence[object],
+    resolution_provenance: Mapping[str, object] | None,
     path: Path,
 ) -> None:
     conflict_id = str(record["conflict_id"])
@@ -1029,7 +1034,18 @@ def _validate_removed_baseline_record(
         )
     entry = matches[0]
     if (
-        getattr(entry, "resulting_id", None) != target
+        resolution_provenance is None
+        or getattr(entry, "resolution", None) != decision
+        or getattr(entry, "owner", None) != resolution_provenance["owner"]
+        or getattr(entry, "decision_date", None)
+        != resolution_provenance["decision_date"]
+        or hashlib.sha256(
+            str(getattr(entry, "decision_source", "")).encode("utf-8")
+        ).hexdigest()
+        != resolution_provenance["decision_source_sha256"]
+        or getattr(entry, "decision_base_commit", None)
+        != resolution_provenance["decision_base_commit"]
+        or getattr(entry, "resulting_id", None) != target
         or tuple(getattr(entry, "old_ids", ()))
         != tuple(item["claim_id"] for item in record["claims"])
         or tuple(getattr(entry, "superseded_artifacts", ()))
@@ -1058,6 +1074,7 @@ def _parse_conflict_baseline(raw: bytes, path: Path) -> dict[str, object]:
             "schema_version",
             "claim_dispositions_sha256",
             "decision_evidence_fingerprint_sha256",
+            "resolution_provenance",
             "dockets",
         }
         or value.get("schema_version") != 1
@@ -1074,6 +1091,34 @@ def _parse_conflict_baseline(raw: bytes, path: Path) -> dict[str, object]:
         raise _error(
             "CONFLICT_BASELINE_INVALID",
             "conflict baseline uses an unsupported closed shape",
+            path,
+        )
+    resolution_provenance = value["resolution_provenance"]
+    if resolution_provenance is not None and (
+        not isinstance(resolution_provenance, dict)
+        or set(resolution_provenance)
+        != {
+            "owner",
+            "decision_date",
+            "decision_source_sha256",
+            "decision_base_commit",
+        }
+        or not isinstance(resolution_provenance.get("owner"), str)
+        or not resolution_provenance["owner"].strip()
+        or _DATE.fullmatch(str(resolution_provenance.get("decision_date"))) is None
+        or _SHA256.fullmatch(
+            str(resolution_provenance.get("decision_source_sha256"))
+        )
+        is None
+        or re.fullmatch(
+            r"[0-9a-f]{40}",
+            str(resolution_provenance.get("decision_base_commit")),
+        )
+        is None
+    ):
+        raise _error(
+            "CONFLICT_BASELINE_INVALID",
+            "resolution provenance is invalid",
             path,
         )
     expected_docket_keys = {

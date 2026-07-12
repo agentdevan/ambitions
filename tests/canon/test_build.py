@@ -177,7 +177,7 @@ class BuildTests(unittest.TestCase):
             tuple(sorted((Path(path) for path in GENERATED_FILES), key=lambda path: path.as_posix())),
         )
 
-    def test_shadow_goldens_match_the_live_empty_manifest_render(self):
+    def test_shadow_goldens_match_the_live_manifest_render(self):
         repository_root = Path(__file__).resolve().parents[2]
         manifest = load_manifest(repository_root)
         registry = build_registry(

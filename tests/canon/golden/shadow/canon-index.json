@@ -1,9 +1,650 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "d53009910834302ef66dee2738bed133bd21ca2a4896680abac0a47879aa1cb4",
-  "canon_revision": 0,
+  "canon_content_sha": "a81fe53d1ba082647446713e7083e8f1077877306b7c342931d14f70788d792c",
+  "canon_revision": 1,
   "compiler_version": "0.1.0",
-  "documents": [],
-  "requirements": [],
+  "documents": [
+    {
+      "kind": "constitution",
+      "owner_domain": "product-and-engineering",
+      "profile": null,
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "spec_id": "CONSTITUTION",
+      "status": "normative",
+      "title": "Ambitions Constitution"
+    }
+  ],
+  "requirements": [
+    {
+      "concept": "accessibility.semantic-equivalence",
+      "line": 832,
+      "modality": "MUST",
+      "requirement_id": "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Accessibility is equivalent product access"
+    },
+    {
+      "concept": "authority.amendment",
+      "line": 934,
+      "modality": "MUST",
+      "requirement_id": "AUTHORITY-AMENDMENT-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Explicit constitutional amendment"
+    },
+    {
+      "concept": "authority.migration-corpus",
+      "line": 154,
+      "modality": "MUST",
+      "requirement_id": "AUTHORITY-MIGRATION-CORPUS-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Migration corpus disposition"
+    },
+    {
+      "concept": "authority.mission",
+      "line": 121,
+      "modality": "MUST",
+      "requirement_id": "AUTHORITY-MISSION-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Supreme mission interpretation"
+    },
+    {
+      "concept": "authority.moat",
+      "line": 143,
+      "modality": "MUST",
+      "requirement_id": "AUTHORITY-MOAT-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Moat authority boundary"
+    },
+    {
+      "concept": "authority.origin",
+      "line": 132,
+      "modality": "MUST",
+      "requirement_id": "AUTHORITY-ORIGIN-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Origin doctrine boundary"
+    },
+    {
+      "concept": "canon.destructive-supersession",
+      "line": 945,
+      "modality": "MUST NOT",
+      "requirement_id": "CANON-DESTRUCTIVE-SUPERSESSION-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Gate destructive authority change"
+    },
+    {
+      "concept": "canon.no-active-graveyard",
+      "line": 910,
+      "modality": "MUST NOT",
+      "requirement_id": "CONST-HISTORY-NO-GRAVEYARD-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "No active authority graveyard"
+    },
+    {
+      "concept": "history.supersession",
+      "line": 899,
+      "modality": "MUST",
+      "requirement_id": "CONST-HISTORY-SUPERSESSION-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Rewrite or destructively supersede stale doctrine"
+    },
+    {
+      "concept": "ia.root-surfaces",
+      "line": 406,
+      "modality": "MUST",
+      "requirement_id": "CONST-IA-ROOT-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Canonical root law"
+    },
+    {
+      "concept": "proof.evidence",
+      "line": 860,
+      "modality": "MUST",
+      "requirement_id": "CONST-PROOF-EVIDENCE-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Evidence sets the claim ceiling"
+    },
+    {
+      "concept": "runtime.mutation-invariant",
+      "line": 684,
+      "modality": "MUST",
+      "requirement_id": "CONST-RUNTIME-MUTATION-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Mutation invariant"
+    },
+    {
+      "concept": "control.force-nothing",
+      "line": 526,
+      "modality": "MUST",
+      "requirement_id": "CONTROL-FORCE-NOTHING-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "User remains final authority"
+    },
+    {
+      "concept": "control.material-confirmation",
+      "line": 537,
+      "modality": "MUST",
+      "requirement_id": "CONTROL-MATERIAL-CONFIRMATION-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Material consequence confirmation"
+    },
+    {
+      "concept": "control.undo-recovery",
+      "line": 548,
+      "modality": "MUST",
+      "requirement_id": "CONTROL-UNDO-RECOVERY-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Undo, rollback, and humane recovery"
+    },
+    {
+      "concept": "canon.external-linear-retention",
+      "line": 921,
+      "modality": "MUST",
+      "requirement_id": "GOVERNANCE-LINEAR-RETENTION-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "External doctrine cleanup"
+    },
+    {
+      "concept": "ia.root-labels",
+      "line": 483,
+      "modality": "MUST",
+      "requirement_id": "IA-PLAIN-BRANDED-NAMING-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Plain root and object naming"
+    },
+    {
+      "concept": "account.boundary",
+      "line": 769,
+      "modality": "MUST NOT",
+      "requirement_id": "LAW-ACCOUNT-BOUNDARY-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Optional Ambitions Account"
+    },
+    {
+      "concept": "authority.product-definition",
+      "line": 110,
+      "modality": "MUST",
+      "requirement_id": "LAW-AUTHORITY-PRODUCT-DEFINITION-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Product-definition authority"
+    },
+    {
+      "concept": "data.loss-stop-ship",
+      "line": 884,
+      "modality": "MUST",
+      "requirement_id": "LAW-DATA-LOSS-STOP-SHIP-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Data-loss risk blocks the affected claim"
+    },
+    {
+      "concept": "ia.nonroot-ownership",
+      "line": 428,
+      "modality": "MUST",
+      "requirement_id": "LAW-IA-NONROOT-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Global non-root ownership"
+    },
+    {
+      "concept": "ia.plain-language",
+      "line": 439,
+      "modality": "MUST",
+      "requirement_id": "LAW-IA-PLAIN-LANGUAGE-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Plain user mental model"
+    },
+    {
+      "concept": "ia.root-surfaces",
+      "line": 417,
+      "modality": "MUST",
+      "requirement_id": "LAW-IA-ROOT-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Four-surface invariance"
+    },
+    {
+      "concept": "global.trust-ownership",
+      "line": 461,
+      "modality": "MUST",
+      "requirement_id": "LAW-IA-TRUST-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Contextual trust ownership"
+    },
+    {
+      "concept": "language.root-labels",
+      "line": 450,
+      "modality": "MUST",
+      "requirement_id": "LAW-LANGUAGE-ROOT-LABELS-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Locked root labels"
+    },
+    {
+      "concept": "privacy.local-authority",
+      "line": 747,
+      "modality": "MUST",
+      "requirement_id": "LAW-LOCAL-AUTHORITY-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Local private-data authority"
+    },
+    {
+      "concept": "privacy.local-authority",
+      "line": 758,
+      "modality": "MUST",
+      "requirement_id": "LAW-OFFLINE-NO-ACCOUNT-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Complete no-account core"
+    },
+    {
+      "concept": "privacy.r2-public-only",
+      "line": 780,
+      "modality": "MUST NOT",
+      "requirement_id": "LAW-R2-PUBLIC-ONLY-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Public-reference firewall"
+    },
+    {
+      "concept": "runtime.durable-success",
+      "line": 695,
+      "modality": "MUST",
+      "requirement_id": "LAW-RUNTIME-DURABLE-SUCCESS-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Truthful durable success"
+    },
+    {
+      "concept": "runtime.no-direct-write",
+      "line": 706,
+      "modality": "MUST NOT",
+      "requirement_id": "LAW-RUNTIME-NO-DIRECT-WRITE-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "No direct mutation bypass"
+    },
+    {
+      "concept": "shell.stage",
+      "line": 472,
+      "modality": "MUST",
+      "requirement_id": "LAW-SHELL-STAGE-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "One native Stage"
+    },
+    {
+      "concept": "mission.anti-metrics",
+      "line": 378,
+      "modality": "MUST NOT",
+      "requirement_id": "MISSION-ANTI-METRICS-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Anti-metric discipline"
+    },
+    {
+      "concept": "mission.capabilities",
+      "line": 224,
+      "modality": "MUST",
+      "requirement_id": "MISSION-CAPABILITIES-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Capability layers serve orchestration"
+    },
+    {
+      "concept": "mission.capability-meaning",
+      "line": 235,
+      "modality": "MUST",
+      "requirement_id": "MISSION-CAPABILITY-MEANING-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Capability semantics"
+    },
+    {
+      "concept": "mission.category",
+      "line": 169,
+      "modality": "MUST",
+      "requirement_id": "MISSION-CATEGORY-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Product category"
+    },
+    {
+      "concept": "mission.foundation-runtime",
+      "line": 301,
+      "modality": "MUST",
+      "requirement_id": "MISSION-FOUNDATION-RUNTIME-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Foundation and runtime relationship"
+    },
+    {
+      "concept": "mission.function",
+      "line": 180,
+      "modality": "MUST",
+      "requirement_id": "MISSION-FUNCTION-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Primary function"
+    },
+    {
+      "concept": "mission.hard-red",
+      "line": 268,
+      "modality": "MUST NOT",
+      "requirement_id": "MISSION-HARD-RED-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Mission drift hard red"
+    },
+    {
+      "concept": "mission.integration",
+      "line": 202,
+      "modality": "MUST",
+      "requirement_id": "MISSION-INTEGRATION-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Integrated function"
+    },
+    {
+      "concept": "mission.launch-bar",
+      "line": 213,
+      "modality": "MUST",
+      "requirement_id": "MISSION-LAUNCH-BAR-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Integrated launch bar"
+    },
+    {
+      "concept": "mission.moat",
+      "line": 345,
+      "modality": "MUST",
+      "requirement_id": "MISSION-MOAT-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Private Life Runtime moat"
+    },
+    {
+      "concept": "mission.moat-continuity",
+      "line": 356,
+      "modality": "MUST",
+      "requirement_id": "MISSION-MOAT-CONTINUITY-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Continuity scope"
+    },
+    {
+      "concept": "mission.naming-stack",
+      "line": 191,
+      "modality": "MUST",
+      "requirement_id": "MISSION-NAMING-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Strategic naming stack"
+    },
+    {
+      "concept": "mission.non-commodity",
+      "line": 367,
+      "modality": "MUST NOT",
+      "requirement_id": "MISSION-NON-COMMODITY-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Anti-commodity center"
+    },
+    {
+      "concept": "mission.core-loop",
+      "line": 389,
+      "modality": "MUST",
+      "requirement_id": "MISSION-ORCHESTRATION-LOOP-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Complete orchestration loop"
+    },
+    {
+      "concept": "mission.origin-outcome",
+      "line": 290,
+      "modality": "MUST",
+      "requirement_id": "MISSION-ORIGIN-OUTCOME-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Origin-to-product outcome"
+    },
+    {
+      "concept": "mission.origin-problem",
+      "line": 279,
+      "modality": "MUST",
+      "requirement_id": "MISSION-ORIGIN-PROBLEM-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Core origin problem"
+    },
+    {
+      "concept": "mission.origin-structure",
+      "line": 312,
+      "modality": "MUST",
+      "requirement_id": "MISSION-ORIGIN-STRUCTURE-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Structure, not moral judgment"
+    },
+    {
+      "concept": "mission.reflow",
+      "line": 257,
+      "modality": "MUST",
+      "requirement_id": "MISSION-REFLOW-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Schedule adaptation is core"
+    },
+    {
+      "concept": "mission.runtime-relation",
+      "line": 246,
+      "modality": "MUST",
+      "requirement_id": "MISSION-RUNTIME-RELATION-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Runtime serves the product"
+    },
+    {
+      "concept": "mission.success",
+      "line": 323,
+      "modality": "MUST",
+      "requirement_id": "MISSION-SUCCESS-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Product success"
+    },
+    {
+      "concept": "mission.user",
+      "line": 334,
+      "modality": "MUST",
+      "requirement_id": "MISSION-USER-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Primary user"
+    },
+    {
+      "concept": "object.canonical-graph",
+      "line": 602,
+      "modality": "MUST",
+      "requirement_id": "OBJECT-CANONICAL-GRAPH-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "One canonical local identity graph"
+    },
+    {
+      "concept": "object.future-step-identity",
+      "line": 615,
+      "modality": "MUST",
+      "requirement_id": "OBJECT-FUTURE-STEP-IDENTITY-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Future Step identity must be singular"
+    },
+    {
+      "concept": "object.goal-lifecycle",
+      "line": 559,
+      "modality": "MUST",
+      "requirement_id": "OBJECT-GOAL-LIFECYCLE-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "User-controlled Goal lifecycle"
+    },
+    {
+      "concept": "object.lifecycle-deletion",
+      "line": 572,
+      "modality": "MUST",
+      "requirement_id": "OBJECT-LIFECYCLE-DELETION-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Lifecycle, conversion, and deletion distinction"
+    },
+    {
+      "concept": "object.proof-requirement",
+      "line": 585,
+      "modality": "MUST",
+      "requirement_id": "OBJECT-PROOF-REQUIREMENT-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Proof choice and advance notice"
+    },
+    {
+      "concept": "object.reminder-completion",
+      "line": 654,
+      "modality": "MUST NOT",
+      "requirement_id": "OBJECT-REMINDER-COMPLETION-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Reminder acknowledgement is not work completion"
+    },
+    {
+      "concept": "object.saved-for-later",
+      "line": 667,
+      "modality": "MUST",
+      "requirement_id": "OBJECT-SAVED-FOR-LATER-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Durable unresolved input"
+    },
+    {
+      "concept": "object.taxonomy",
+      "line": 628,
+      "modality": "MUST",
+      "requirement_id": "OBJECT-TAXONOMY-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Canonical taxonomy boundary"
+    },
+    {
+      "concept": "platform.calendar-replacement",
+      "line": 843,
+      "modality": "MUST",
+      "requirement_id": "PLATFORM-CALENDAR-REPLACEMENT-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Replacement target and proof bar"
+    },
+    {
+      "concept": "platform.native-iphone",
+      "line": 821,
+      "modality": "MUST",
+      "requirement_id": "PLATFORM-NATIVE-IPHONE-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Native-first implementation"
+    },
+    {
+      "concept": "privacy.cloudkit-continuity",
+      "line": 791,
+      "modality": "MUST",
+      "requirement_id": "PRIVACY-CLOUDKIT-CONTINUITY-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Disabled-until-approved continuity"
+    },
+    {
+      "concept": "privacy.visibility",
+      "line": 804,
+      "modality": "MUST",
+      "requirement_id": "PRIVACY-VISIBILITY-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Contextual and discoverable privacy"
+    },
+    {
+      "concept": "proof.figma-authority",
+      "line": 871,
+      "modality": "MUST",
+      "requirement_id": "PROOF-FIGMA-AUTHORITY-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Figma authority is scoped"
+    },
+    {
+      "concept": "runtime.mutation-sequence",
+      "line": 717,
+      "modality": "MUST",
+      "requirement_id": "RUNTIME-MUTATION-SEQUENCE-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Complete safe mutation sequence"
+    },
+    {
+      "concept": "runtime.source-owner",
+      "line": 730,
+      "modality": "MUST",
+      "requirement_id": "RUNTIME-SOURCE-OWNER-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Canonical runtime owner"
+    },
+    {
+      "concept": "surface.today-primary-identity",
+      "line": 496,
+      "modality": "MUST",
+      "requirement_id": "SURFACE-TODAY-IDENTITY-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "Today boundary"
+    },
+    {
+      "concept": "surface.you-depth",
+      "line": 509,
+      "modality": "MUST",
+      "requirement_id": "SURFACE-YOU-DEPTH-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "You boundary"
+    },
+    {
+      "concept": "surface.time-external-visibility",
+      "line": 641,
+      "modality": "MUST",
+      "requirement_id": "TIME-EXTERNAL-VISIBILITY-001",
+      "source_path": "docs/canon/CONSTITUTION.md",
+      "status": "normative",
+      "title": "External visibility and capacity distinction"
+    }
+  ],
   "schema_version": 1
 }

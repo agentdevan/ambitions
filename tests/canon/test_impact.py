@@ -27,6 +27,44 @@ from tools.ambitions_canon.model import (
     SupersessionEntry,
 )
 from tools.ambitions_canon.reference_index import parse_reference_index_bytes
+from tools.ambitions_canon.supersession import integration_evidence_digest
+
+
+def supersession_entry(
+    *,
+    conflict_id: str,
+    old_ids: tuple[str, ...],
+    resulting_id: str | None,
+    decision_date: str,
+    owner: str,
+    decision_source: str,
+    decision_base_commit: str,
+    superseded_artifacts: tuple[str, ...],
+    resolution: str = "compose",
+) -> SupersessionEntry:
+    digest = integration_evidence_digest(
+        conflict_id=conflict_id,
+        old_ids=old_ids,
+        resulting_id=resulting_id,
+        decision_date=decision_date,
+        owner=owner,
+        decision_source=decision_source,
+        resolution=resolution,
+        decision_base_commit=decision_base_commit,
+        superseded_artifacts=superseded_artifacts,
+    )
+    return SupersessionEntry(
+        conflict_id=conflict_id,
+        old_ids=old_ids,
+        resulting_id=resulting_id,
+        decision_date=decision_date,
+        owner=owner,
+        decision_source=decision_source,
+        resolution=resolution,
+        decision_base_commit=decision_base_commit,
+        integration_evidence_sha256=digest,
+        superseded_artifacts=superseded_artifacts,
+    )
 
 
 def requirement(
@@ -115,13 +153,14 @@ def registry(
         ledger_entries
         if ledger_entries is not None
         else tuple(
-            SupersessionEntry(
+            supersession_entry(
                 conflict_id=f"CONFLICT-{identifier}",
                 old_ids=(identifier,),
                 resulting_id=None,
                 decision_date="2026-07-11",
                 owner="Test owner",
-                commit="0123456789abcdef0123456789abcdef01234567",
+                decision_source="Owner approval",
+                decision_base_commit="0123456789abcdef0123456789abcdef01234567",
                 superseded_artifacts=(),
             )
             for identifier in sorted(retired)
@@ -409,13 +448,14 @@ class ImpactReportTests(unittest.TestCase):
             registry(
                 (document("SURFACE-TODAY", (after_item,)),),
                 ledger_entries=(
-                    SupersessionEntry(
+                    supersession_entry(
                         conflict_id="CONFLICT-TODAY-001",
                         old_ids=("TODAY-001",),
                         resulting_id="TODAY-002",
                         decision_date="2026-07-11",
                         owner="Owner",
-                        commit="0123456789abcdef0123456789abcdef01234567",
+                        decision_source="Owner approval",
+                        decision_base_commit="0123456789abcdef0123456789abcdef01234567",
                         superseded_artifacts=("docs/canon/old.md",),
                     ),
                 ),
@@ -483,13 +523,14 @@ class ImpactReportTests(unittest.TestCase):
         )
 
     def test_existing_ledger_entries_are_append_only_and_byte_semantic(self):
-        original = SupersessionEntry(
+        original = supersession_entry(
             conflict_id="CONFLICT-001",
             old_ids=("OLD-001",),
             resulting_id=None,
             decision_date="2026-07-11",
             owner="Owner A",
-            commit="0123456789abcdef0123456789abcdef01234567",
+            decision_source="Owner approval",
+            decision_base_commit="0123456789abcdef0123456789abcdef01234567",
             superseded_artifacts=("docs/truth/old.md",),
         )
         rewritten = replace(original, owner="Owner B")
@@ -514,13 +555,14 @@ class ImpactReportTests(unittest.TestCase):
         )
         invalid_results = (None, "TODAY-999")
         for resulting_id in invalid_results:
-            entry = SupersessionEntry(
+            entry = supersession_entry(
                 conflict_id="CONFLICT-TODAY-001",
                 old_ids=("TODAY-001",),
                 resulting_id=resulting_id,
                 decision_date="2026-07-11",
                 owner="Owner",
-                commit="0123456789abcdef0123456789abcdef01234567",
+                decision_source="Owner approval",
+                decision_base_commit="0123456789abcdef0123456789abcdef01234567",
                 superseded_artifacts=("docs/canon/old.md",),
             )
             with self.subTest(resulting_id=resulting_id):
@@ -539,13 +581,14 @@ class ImpactReportTests(unittest.TestCase):
 
     def test_pure_removal_requires_null_ledger_result(self):
         before_item = requirement("TODAY-001")
-        entry = SupersessionEntry(
+        entry = supersession_entry(
             conflict_id="CONFLICT-TODAY-001",
             old_ids=("TODAY-001",),
             resulting_id="TODAY-002",
             decision_date="2026-07-11",
             owner="Owner",
-            commit="0123456789abcdef0123456789abcdef01234567",
+            decision_source="Owner approval",
+            decision_base_commit="0123456789abcdef0123456789abcdef01234567",
             superseded_artifacts=("docs/canon/old.md",),
         )
 

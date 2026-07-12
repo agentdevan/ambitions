@@ -17,6 +17,7 @@ from tools.ambitions_canon import cli as canon_cli
 from tools.ambitions_canon.build import build_canon
 from tools.ambitions_canon.cli import _audit, _pack
 from tools.ambitions_canon.conflicts import (
+    _removal_state_sha256,
     load_conflict_dockets,
     render_conflict_baseline,
     report_conflicts,
@@ -159,11 +160,14 @@ class TrackedEvidenceTests(unittest.TestCase):
         )
         self.assertNotEqual(original_fingerprint, changed_fingerprint)
 
-        dockets = load_conflict_dockets(ROOT)
-        original_baseline = json.loads(
-            render_conflict_baseline(dockets, original_bytes)
-        )
-        changed_baseline = json.loads(render_conflict_baseline(dockets, changed_bytes))
+        original_baseline = json.loads((ROOT / EVIDENCE_PATHS[2]).read_bytes())
+        changed_baseline = json.loads((ROOT / EVIDENCE_PATHS[2]).read_bytes())
+        changed_baseline["decision_evidence_fingerprint_sha256"] = changed_fingerprint
+        for item in changed_baseline["dockets"]:
+            item["removal_state_sha256"] = _removal_state_sha256(
+                item,
+                changed_fingerprint,
+            )
         self.assertEqual(len(original_baseline["dockets"]), 20)
         self.assertEqual(len(changed_baseline["dockets"]), 20)
         self.assertNotEqual(
