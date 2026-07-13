@@ -36,7 +36,7 @@ from tools.ambitions_canon.task_pack import (
     validate_task_pack,
     write_task_pack,
 )
-from tests.canon.test_audit import markdown_document
+from tests.canon.test_audit import markdown_document, requirement_block
 from tests.canon.canon_test_support import write_required_governance_artifacts
 
 
@@ -314,6 +314,14 @@ def initialize_live_conflict_cli_root(
         check=True,
     )
     return intake_path
+
+
+def remove_first_supersession_entry(root: Path) -> None:
+    ledger = root / "docs/canon/decisions/SUPERSESSION_LEDGER.toml"
+    text = ledger.read_text(encoding="utf-8")
+    first = text.index("[[entries]]")
+    second = text.index("[[entries]]", first + 1)
+    ledger.write_text(text[:first] + text[second:], encoding="utf-8")
 
 
 class TaskIntakeTests(unittest.TestCase):
@@ -906,18 +914,14 @@ class TaskPackTests(unittest.TestCase):
                 self.assertEqual(_pack(root, intake_path, check=True), 1)
             self.assertIn("PACK_INTAKE_STALE", output.getvalue())
 
-    def test_cli_pack_generate_fails_closed_when_today_docket_is_deleted(self):
+    def test_cli_pack_generate_fails_closed_when_supersession_entry_is_deleted(self):
         with tempfile.TemporaryDirectory() as temporary_directory:
             root = Path(temporary_directory)
             intake_path = initialize_live_conflict_cli_root(
                 root,
                 scope="surface.unrelated",
             )
-            today = (
-                root
-                / "docs/canon/decisions/open/conflict-today-primary-identity.md"
-            )
-            today.unlink()
+            remove_first_supersession_entry(root)
             output = io.StringIO()
             with redirect_stdout(output):
                 self.assertEqual(_pack(root, intake_path, check=False), 1)
@@ -932,11 +936,7 @@ class TaskPackTests(unittest.TestCase):
                 scope="surface.unrelated",
             )
             self.assertEqual(_pack(root, intake_path, check=False), 0)
-            today = (
-                root
-                / "docs/canon/decisions/open/conflict-today-primary-identity.md"
-            )
-            today.unlink()
+            remove_first_supersession_entry(root)
             output = io.StringIO()
             with redirect_stdout(output):
                 self.assertEqual(_pack(root, intake_path, check=True), 1)
@@ -953,22 +953,18 @@ class TaskPackTests(unittest.TestCase):
             original_require = canon_cli._require_source_snapshot
             mutated = False
 
-            def delete_docket_before_resume(*arguments):
+            def delete_supersession_before_resume(*arguments):
                 nonlocal mutated
                 if not mutated:
                     mutated = True
-                    (
-                        root
-                        / "docs/canon/decisions/open/"
-                        "conflict-today-primary-identity.md"
-                    ).unlink()
+                    remove_first_supersession_entry(root)
                 return original_require(*arguments)
 
             output = io.StringIO()
             with mock.patch.object(
                 canon_cli,
                 "_require_source_snapshot",
-                side_effect=delete_docket_before_resume,
+                side_effect=delete_supersession_before_resume,
             ):
                 with redirect_stdout(output):
                     self.assertEqual(_pack(root, intake_path, check=True), 1)
@@ -1004,6 +1000,9 @@ class TaskPackTests(unittest.TestCase):
                     "SPEC-A",
                     "system.a",
                     depends_on=("SPEC-B",),
+                    requirement_blocks=(
+                        requirement_block("A-001", "system.a"),
+                    ),
                 ),
                 encoding="utf-8",
             )
@@ -1012,12 +1011,16 @@ class TaskPackTests(unittest.TestCase):
                     "SPEC-B",
                     "system.b",
                     depends_on=("SPEC-A",),
+                    requirement_blocks=(
+                        requirement_block("B-001", "system.b"),
+                    ),
                 ),
                 encoding="utf-8",
             )
             write_required_governance_artifacts(
                 canon,
                 canon_revision=1,
+                requirement_ids=("A-001", "B-001"),
             )
             (root / ".gitignore").write_text(".codex/\n", encoding="utf-8")
             intake_path = root / ".codex" / "intake" / "AMB-1842.json"

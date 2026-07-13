@@ -12,6 +12,16 @@ depends_on = []
 source_owners = []
 +++
 
+## SURFACE-INCOMPLETE-REQ-001 — Incomplete surface identity
+- **Concept:** `surface.incomplete`
+- **Modality:** `MUST`
+- **Scope:** Incomplete surface fixture
+- **Status:** `normative`
+- **Verification:** `TEST-SURFACE-INCOMPLETE-001`
+- **Supersedes:** none
+
+The incomplete surface MUST retain one exact concept owner while coverage cells are tested independently.
+
 <!-- canon-section: purpose-user-question -->
 Explains the surface purpose and user question.
 

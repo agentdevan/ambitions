@@ -4,6 +4,24 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 cd "$ROOT"
 
+MODE="full"
+case "${1:-}" in
+  "")
+    ;;
+  --range-only)
+    MODE="range-only"
+    shift
+    ;;
+  *)
+    echo "usage: $0 [--range-only]" >&2
+    exit 2
+    ;;
+esac
+if [[ "$#" -ne 0 ]]; then
+  echo "usage: $0 [--range-only]" >&2
+  exit 2
+fi
+
 if ! command -v gitleaks >/dev/null 2>&1; then
   echo "gitleaks is required. Install it locally with Homebrew or run inside CI." >&2
   exit 127
@@ -52,17 +70,22 @@ copy_repo_material_for_dir_scan() {
 }
 
 echo "# Ambitions Gitleaks Scan"
+echo "mode=${MODE}"
 echo "timeout_seconds=${TIMEOUT_SECONDS}"
 
-echo
-echo "## current repo material"
-copy_repo_material_for_dir_scan
-gitleaks dir "$SCAN_ROOT" \
-  --config "$ROOT/.gitleaks.toml" \
-  --no-banner \
-  --redact \
-  --exit-code 1 \
-  --timeout "$TIMEOUT_SECONDS"
+if [[ "$MODE" == "full" ]]; then
+  echo
+  echo "## current repo material"
+  copy_repo_material_for_dir_scan
+  gitleaks dir "$SCAN_ROOT" \
+    --config "$ROOT/.gitleaks.toml" \
+    --no-banner \
+    --redact \
+    --exit-code 1 \
+    --timeout "$TIMEOUT_SECONDS"
+else
+  echo "current repo material skipped: mode=range-only"
+fi
 
 echo
 echo "## introduced git history"
@@ -80,4 +103,8 @@ else
     --timeout "$TIMEOUT_SECONDS"
 fi
 
-echo "GREEN: Gitleaks found no secrets in current repo material or introduced commit range"
+if [[ "$MODE" == "full" ]]; then
+  echo "GREEN: Gitleaks found no secrets in current repo material or introduced commit range"
+else
+  echo "GREEN: Gitleaks found no secrets in introduced commit range"
+fi

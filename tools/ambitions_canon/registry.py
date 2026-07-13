@@ -63,7 +63,6 @@ def build_registry(
     )
     superseded_ids = declared_superseded_ids | ledger_superseded_ids
     concept_owners = _concept_owners(ordered_documents)
-    _require_document_concept_ownership(ordered_documents)
     _resolve_references(
         ordered_documents,
         ordered_requirements,
@@ -104,6 +103,11 @@ def build_registry(
             path,
             line,
         )
+
+    # Reverse ownership is a final integrity constraint.  More specific
+    # duplicate, dependency, supersession, and unowned-requirement failures
+    # retain their stable precedence for malformed registries.
+    _require_document_concept_ownership(ordered_documents)
 
     reference_index = load_manifest_reference_index(
         manifest,
@@ -217,6 +221,7 @@ def _require_document_concept_ownership(
 ) -> None:
     for document in documents:
         owned = set(document.owns_concepts)
+        requirement_concepts = {item.concept for item in document.requirements}
         for requirement in sorted(
             document.requirements,
             key=lambda item: (item.requirement_id, item.line),
@@ -231,6 +236,13 @@ def _require_document_concept_ownership(
                     requirement.source_path,
                     requirement.line,
                 )
+        orphaned = sorted(owned - requirement_concepts)
+        if orphaned:
+            raise CanonError(
+                "CANON_CONCEPT_ORPHAN",
+                f"declared concept has no requirement owner: {orphaned[0]}",
+                document.source_path,
+            )
 
 
 def _resolve_references(

@@ -500,7 +500,11 @@ def build_canon(root: Path, *, check: bool = False) -> tuple[Finding, ...]:
         registry.supersession_entries,
     )
     snapshot_sha = _registry_content_sha(registry, dockets, conflict_snapshot)
-    outputs = _render_outputs(registry, snapshot_sha, dockets)
+    outputs = _render_outputs(
+        registry,
+        snapshot_sha,
+        dockets if conflict_snapshot is not None else None,
+    )
 
     def assert_snapshot_current() -> None:
         current = _load_audited_registry(root)

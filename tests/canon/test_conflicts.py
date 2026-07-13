@@ -16,6 +16,7 @@ import tools.ambitions_canon.build as canon_build
 from tests.canon.canon_test_support import write_required_governance_artifacts
 
 from tools.ambitions_canon.conflicts import (
+    _validate_removed_baseline_record,
     ConflictClaim,
     ConflictDocket,
     ConflictRecommendation,
@@ -30,6 +31,7 @@ from tools.ambitions_canon.conflicts import (
     validate_docket_removals,
     validate_conflict_repository,
 )
+from tools.ambitions_canon.supersession import integration_evidence_digest
 from tools.ambitions_canon.model import (
     AtomicClaim,
     CanonError,
@@ -39,6 +41,43 @@ from tools.ambitions_canon.model import (
     SupersessionEntry,
 )
 from tools.ambitions_canon.cli import main
+
+
+def supersession_entry(
+    *,
+    conflict_id: str,
+    old_ids: tuple[str, ...],
+    resulting_id: str | None,
+    decision_date: str,
+    owner: str,
+    decision_source: str,
+    decision_base_commit: str,
+    superseded_artifacts: tuple[str, ...],
+    resolution: str = "compose",
+) -> SupersessionEntry:
+    digest = integration_evidence_digest(
+        conflict_id=conflict_id,
+        old_ids=old_ids,
+        resulting_id=resulting_id,
+        decision_date=decision_date,
+        owner=owner,
+        decision_source=decision_source,
+        resolution=resolution,
+        decision_base_commit=decision_base_commit,
+        superseded_artifacts=superseded_artifacts,
+    )
+    return SupersessionEntry(
+        conflict_id=conflict_id,
+        old_ids=old_ids,
+        resulting_id=resulting_id,
+        decision_date=decision_date,
+        owner=owner,
+        decision_source=decision_source,
+        resolution=resolution,
+        decision_base_commit=decision_base_commit,
+        integration_evidence_sha256=digest,
+        superseded_artifacts=superseded_artifacts,
+    )
 
 
 def claim(
@@ -159,6 +198,7 @@ def disposition_bytes(value: ConflictDocket) -> bytes:
                 "claim_id": item.claim_id,
                 "source_id": item.source_id,
                 "source_location": item.source_location,
+                "source_text_sha256": item.evidence_sha256,
                 "concept": item.concept,
                 "disposition": "conflict",
                 "decision_mapping_status": None,
@@ -572,13 +612,14 @@ class DocketContractTests(unittest.TestCase):
         previous = (docket(),)
         with self.assertRaises(CanonError):
             validate_docket_removals(previous, (), (), ())
-        entry = SupersessionEntry(
+        entry = supersession_entry(
             conflict_id="CONFLICT-TODAY-PRIMARY-IDENTITY",
             old_ids=("CLAIM-A", "CLAIM-B"),
             resulting_id="TODAY-IDENTITY-001",
             decision_date="2026-07-11",
             owner="Devan Warner",
-            commit="a" * 40,
+            decision_source="Owner approval",
+            decision_base_commit="a" * 40,
             superseded_artifacts=("SOURCE-B:line:2",),
         )
         with self.assertRaises(CanonError):
@@ -601,6 +642,124 @@ class DocketContractTests(unittest.TestCase):
             validate_docket_removals(
                 (resolved,), (), ("TODAY-IDENTITY-001",), (mismatched,)
             )
+
+    def test_repository_multiple_removals_reuse_one_shot_requirement_ids(self):
+        disposition = b"claims"
+        baseline = {
+            "claim_dispositions_sha256": hashlib.sha256(disposition).hexdigest(),
+            "decision_evidence_fingerprint_sha256": None,
+            "resolution_provenance": None,
+            "dockets": [
+                {"conflict_id": "CONFLICT-A"},
+                {"conflict_id": "CONFLICT-B"},
+            ],
+        }
+        seen_requirement_sets: list[set[str]] = []
+
+        def record_requirements(
+            record, requirement_ids, entries, resolution_provenance, path
+        ):
+            seen_requirement_sets.append(requirement_ids)
+
+        with (
+            mock.patch(
+                "tools.ambitions_canon.migration.validate_tracked_canon_evidence",
+                return_value=SimpleNamespace(
+                    source_catalog_bytes=b"catalog",
+                    claim_dispositions_bytes=disposition,
+                    conflict_baseline_bytes=b"baseline",
+                ),
+            ),
+            mock.patch(
+                "tools.ambitions_canon.conflicts._parse_tracked_claims",
+                return_value={},
+            ),
+            mock.patch(
+                "tools.ambitions_canon.conflicts._parse_conflict_baseline",
+                return_value=baseline,
+            ),
+            mock.patch(
+                "tools.ambitions_canon.conflicts._validate_removed_baseline_record",
+                side_effect=record_requirements,
+            ),
+            mock.patch(
+                "tools.ambitions_canon.conflicts._validate_baseline_claim_coverage"
+            ),
+            mock.patch(
+                "tools.ambitions_canon.conflicts._validate_docket_claim_graph"
+            ),
+        ):
+            validate_conflict_repository(
+                Path("."),
+                (),
+                (item for item in ("LAW-A", "LAW-B")),
+                (),
+            )
+
+        self.assertEqual(
+            seen_requirement_sets,
+            [{"LAW-A", "LAW-B"}, {"LAW-A", "LAW-B"}],
+        )
+
+    def test_removed_docket_rejects_arbitrary_or_mismatched_provenance(self):
+        value = docket(
+            status="resolved",
+            owner_decision="compose",
+            target_requirement_status="created",
+            target_requirement_id="TODAY-IDENTITY-001",
+        )
+        old_ids = tuple(item.claim_id for item in value.claims)
+        provenance = {
+            "owner": "Devan Warner",
+            "decision_date": "2026-07-12",
+            "decision_source_sha256": hashlib.sha256(
+                b"Exact owner approval"
+            ).hexdigest(),
+            "decision_base_commit": "a" * 40,
+        }
+        entry = supersession_entry(
+            conflict_id=value.conflict_id,
+            old_ids=old_ids,
+            resulting_id="TODAY-IDENTITY-001",
+            decision_date="2026-07-12",
+            owner="Devan Warner",
+            decision_source="Exact owner approval",
+            resolution="compose",
+            decision_base_commit="a" * 40,
+            superseded_artifacts=value.artifacts_to_supersede,
+        )
+        record = {
+            "conflict_id": value.conflict_id,
+            "status": "resolved",
+            "owner_decision": "compose",
+            "target_requirement_status": "created",
+            "target_requirement_id": "TODAY-IDENTITY-001",
+            "claims": [{"claim_id": item} for item in old_ids],
+            "artifacts_to_supersede": list(value.artifacts_to_supersede),
+        }
+
+        _validate_removed_baseline_record(
+            record,
+            {"TODAY-IDENTITY-001"},
+            (entry,),
+            provenance,
+            Path("baseline.json"),
+        )
+        for changed in (
+            {"decision_source": "arbitrary"},
+            {"owner": "Someone Else"},
+            {"decision_date": "2026-07-11"},
+            {"decision_base_commit": "b" * 40},
+            {"resolution": "keep_a"},
+        ):
+            with self.subTest(changed=changed), self.assertRaises(CanonError):
+                _validate_removed_baseline_record(
+                    record,
+                    {"TODAY-IDENTITY-001"},
+                    (replace(entry, **changed),),
+                    provenance,
+                    Path("baseline.json"),
+                )
 
     def test_repository_validation_compares_every_docket_claim_field(self):
         value = docket()
@@ -639,6 +798,7 @@ class DocketContractTests(unittest.TestCase):
                 "schema_version",
                 "claim_dispositions_sha256",
                 "decision_evidence_fingerprint_sha256",
+                "resolution_provenance",
                 "dockets",
             },
         )
@@ -692,26 +852,40 @@ class DocketContractTests(unittest.TestCase):
             target_requirement_status="created",
             target_requirement_id="TODAY-IDENTITY-001",
         )
-        entry = SupersessionEntry(
+        entry = supersession_entry(
             conflict_id=value.conflict_id,
             old_ids=tuple(item.claim_id for item in value.claims),
             resulting_id="TODAY-IDENTITY-001",
             decision_date="2026-07-11",
             owner="Devan Warner",
-            commit="a" * 40,
+            decision_source="Owner approval",
+            decision_base_commit="a" * 40,
             superseded_artifacts=value.artifacts_to_supersede,
         )
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             write_conflict_repository(root, value)
+            baseline_path = (
+                root / "docs/canon/migration/conflict-docket-baseline.json"
+            )
+            baseline = json.loads(baseline_path.read_text(encoding="utf-8"))
+            baseline["resolution_provenance"] = {
+                "owner": "Devan Warner",
+                "decision_date": "2026-07-11",
+                "decision_source_sha256": hashlib.sha256(
+                    b"Owner approval"
+                ).hexdigest(),
+                "decision_base_commit": "a" * 40,
+            }
+            baseline_path.write_text(
+                json.dumps(baseline, indent=2, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
             validate_conflict_repository(
                 root,
                 (),
                 ("TODAY-IDENTITY-001",),
                 (entry,),
-            )
-            baseline_path = (
-                root / "docs/canon/migration/conflict-docket-baseline.json"
             )
             baseline = json.loads(baseline_path.read_text(encoding="utf-8"))
             baseline["dockets"][0]["removal_state_sha256"] = "0" * 64

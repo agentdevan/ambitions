@@ -18,13 +18,15 @@ from tools.ambitions_canon.build import (
     write_outputs_atomic,
 )
 from tools.ambitions_canon.cli import main
+from tools.ambitions_canon.identifiers import CANONICAL_ID_GRAMMAR
 from tools.ambitions_canon.manifest import load_documents, load_manifest
 from tools.ambitions_canon.model import CanonError, CanonRegistry
 from tools.ambitions_canon.registry import build_registry
-from tools.ambitions_canon.render import render_outputs
+from tools.ambitions_canon.render import _unresolved_conflicts, render_outputs
 from tests.canon.canon_test_support import write_required_governance_artifacts
 
 
+ROOT = Path(__file__).resolve().parents[2]
 GENERATED_FILES = (
     "CODEX_START_HERE.md",
     "INDEX.md",
@@ -39,6 +41,7 @@ GENERATED_FILES = (
     "visual-authority-manifest.json",
     "external-reference-impact.md",
     "supersession-manifest.json",
+    "object-boundary-matrix.md",
 )
 
 
@@ -108,6 +111,42 @@ class BuildTests(unittest.TestCase):
         self.generated_root = self.canon_root / "generated"
         self.canon_root.mkdir(parents=True)
 
+    def test_conflict_renderer_distinguishes_absent_model_from_resolved_empty_model(self):
+        metadata = {
+            "authority_state": "shadow",
+            "canon_content_sha": "a" * 64,
+            "canon_revision": 7,
+            "compiler_version": "0.1.0",
+            "schema_version": 1,
+        }
+
+        unrepresented = _unresolved_conflicts(metadata, (), None).decode("utf-8")
+        represented = _unresolved_conflicts(metadata, (), ()).decode("utf-8")
+
+        self.assertIn("**Representation status:** Unrepresented", unrepresented)
+        self.assertNotIn("**Representation status:** Unrepresented", represented)
+        self.assertIn("- Open dockets: `0`", represented)
+
+    def test_build_canon_preserves_absent_conflict_model_as_unrepresented(self):
+        self.write_canon()
+
+        self.assertEqual(build_canon(self.root), ())
+
+        rendered = self.generated_root.joinpath("unresolved-conflicts.md").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("**Representation status:** Unrepresented", rendered)
+        self.assertNotIn("- Open dockets: `0`", rendered)
+
+    def test_build_canon_renders_validated_empty_conflict_model_as_resolved(self):
+        self.assertEqual(build_canon(ROOT, check=True), ())
+
+        rendered = ROOT.joinpath(
+            "docs/canon/generated/unresolved-conflicts.md"
+        ).read_text(encoding="utf-8")
+        self.assertNotIn("**Representation status:** Unrepresented", rendered)
+        self.assertIn("- Open dockets: `0`", rendered)
+
     def write_canon(self, documents: dict[str, str] | None = None) -> None:
         documents = documents or {}
         (self.canon_root / "MANIFEST.toml").write_text(
@@ -122,7 +161,7 @@ class BuildTests(unittest.TestCase):
             match.group(1)
             for text in documents.values()
             for match in re.finditer(
-                r"^## ([A-Z][A-Z0-9-]+-\d{3}) —",
+                rf"^## ({CANONICAL_ID_GRAMMAR}) —",
                 text,
                 re.MULTILINE,
             )
@@ -177,7 +216,7 @@ class BuildTests(unittest.TestCase):
             tuple(sorted((Path(path) for path in GENERATED_FILES), key=lambda path: path.as_posix())),
         )
 
-    def test_shadow_goldens_match_the_live_empty_manifest_render(self):
+    def test_shadow_goldens_match_the_live_manifest_render(self):
         repository_root = Path(__file__).resolve().parents[2]
         manifest = load_manifest(repository_root)
         registry = build_registry(
@@ -1624,6 +1663,82 @@ class BuildTests(unittest.TestCase):
         )
         self.assertIn('"spec_id": "SURFACE-TODAY"', index)
         self.assertIn('"requirement_id": "TODAY-001"', index)
+
+    def test_object_boundary_matrix_reports_distinct_step_event_reminder_note_laws(self):
+        shutil.rmtree(self.canon_root)
+        shutil.copytree(ROOT / "docs/canon", self.canon_root)
+
+        findings = build_canon(self.root)
+
+        self.assertEqual(findings, ())
+        report = (self.generated_root / "object-boundary-matrix.md").read_text(
+            encoding="utf-8"
+        )
+        self.assertFalse(report.endswith("\n\n"))
+        expected_rows = (
+            "| Executable / completable | Yes | No | No, unless linked to Step | No |",
+            "| Occupies duration | Optional | Required for timed event | No | No |",
+            "| Consumes capacity | When scheduled | Yes according to blocking state | No | No |",
+            "| Due date | Yes | End time is not a due date | Optional reminder date | No until promoted |",
+            "| Recurrence | Repeatable Step series | Event series + exceptions | Reminder repetition | No |",
+            "| Substeps | Yes | No | No | No |",
+            "| Goal Path node | Yes | May be contextual | May support a Step | No until promoted |",
+            "| Proof requirement | Optional/suggested/required | Normally no | No | No |",
+            "| Attendees / RSVP | No | Yes | No | No |",
+            "| Alerts | Optional | Optional | Core capability | Optional only after promotion |",
+            "| Type conversion | Explicit, receipt-backed | Explicit, receipt-backed | Explicit, receipt-backed | Promote explicitly |",
+        )
+        for row in expected_rows:
+            self.assertIn(row, report)
+        for law_id in (
+            "OBJ-SCHEDULE-PLACEMENT-IDENTITY-001",
+            "OBJECT-FUTURE-STEP-IDENTITY-001",
+            "OBJECT-REMINDER-COMPLETION-001",
+            "OBJECT-PROOF-REQUIREMENT-001",
+        ):
+            self.assertIn(law_id, report)
+
+    def test_object_boundary_matrix_fails_closed_on_law_mismatch_and_unknown_id(self):
+        for name, old, new in (
+            (
+                "mismatch",
+                'future_step_singularity = "OBJECT-FUTURE-STEP-IDENTITY-001"',
+                'future_step_singularity = "OBJECT-REMINDER-COMPLETION-001"',
+            ),
+            (
+                "unknown",
+                'future_step_singularity = "OBJECT-FUTURE-STEP-IDENTITY-001"',
+                'future_step_singularity = "OBJECT-UNKNOWN-001"',
+            ),
+        ):
+            with self.subTest(name=name), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                shutil.copytree(ROOT / "docs/canon", root / "docs/canon")
+                step = root / "docs/canon/specifications/objects/step.md"
+                step.write_text(step.read_text(encoding="utf-8").replace(old, new, 1), encoding="utf-8")
+
+                with self.assertRaises(CanonError) as raised:
+                    build_canon(root)
+                self.assertEqual(raised.exception.code, "CANON_OBJECT_BOUNDARY_LAW_INVALID")
+
+    def test_object_boundary_spec_drift_is_detected_by_build_check(self):
+        shutil.rmtree(self.canon_root)
+        shutil.copytree(ROOT / "docs/canon", self.canon_root)
+        self.assertEqual(build_canon(self.root), ())
+        step = self.canon_root / "specifications/objects/step.md"
+        step.write_text(
+            step.read_text(encoding="utf-8").replace(
+                'occupies_duration = "Optional"',
+                'occupies_duration = "Changed by source"',
+                1,
+            ),
+            encoding="utf-8",
+        )
+
+        findings = build_canon(self.root, check=True)
+
+        self.assertTrue(findings)
+        self.assertIn("object-boundary-matrix.md", {item.path.name for item in findings})
 
     def test_manifest_change_between_load_and_hash_blocks_generation(self):
         self.write_canon()

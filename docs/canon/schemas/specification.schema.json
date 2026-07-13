@@ -106,6 +106,36 @@
         }
       }
     },
+    "object_boundary": {
+      "description": "Structured Step, Event, Reminder, or Note boundary cells and stable owning-law references.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["executable_completable", "occupies_duration", "consumes_capacity", "due_date", "recurrence", "substeps", "goal_path_node", "proof_requirement", "attendees_rsvp", "alerts", "type_conversion", "laws"],
+      "properties": {
+        "executable_completable": {"type": "string", "minLength": 1},
+        "occupies_duration": {"type": "string", "minLength": 1},
+        "consumes_capacity": {"type": "string", "minLength": 1},
+        "due_date": {"type": "string", "minLength": 1},
+        "recurrence": {"type": "string", "minLength": 1},
+        "substeps": {"type": "string", "minLength": 1},
+        "goal_path_node": {"type": "string", "minLength": 1},
+        "proof_requirement": {"type": "string", "minLength": 1},
+        "attendees_rsvp": {"type": "string", "minLength": 1},
+        "alerts": {"type": "string", "minLength": 1},
+        "type_conversion": {"type": "string", "minLength": 1},
+        "laws": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["schedule_placement_nonduplication", "future_step_singularity", "reminder_acknowledgement_noncompletion", "proof_receipt_separation"],
+          "properties": {
+            "schedule_placement_nonduplication": {"type": "string", "minLength": 1},
+            "future_step_singularity": {"type": "string", "minLength": 1},
+            "reminder_acknowledgement_noncompletion": {"type": "string", "minLength": 1},
+            "proof_receipt_separation": {"type": "string", "minLength": 1}
+          }
+        }
+      }
+    },
     "source_owners": {
       "description": "Current source ownership paths relevant to implementation mapping.",
       "type": "array",

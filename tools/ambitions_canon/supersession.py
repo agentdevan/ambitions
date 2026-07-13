@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import hashlib
+import json
 import os
 import re
 import stat
@@ -20,13 +22,18 @@ _ENTRY_REQUIRED = frozenset(
         "old_ids",
         "decision_date",
         "owner",
-        "commit",
+        "decision_source",
+        "resolution",
+        "decision_base_commit",
+        "integration_evidence_sha256",
         "superseded_artifacts",
     }
 )
 _ENTRY_ALLOWED = _ENTRY_REQUIRED | {"resulting_id"}
 _DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
-_COMMIT = re.compile(r"^[0-9a-f]{7,40}$")
+_COMMIT = re.compile(r"^[0-9a-f]{40}$")
+_SHA256 = re.compile(r"^[0-9a-f]{64}$")
+_RESOLUTIONS = frozenset({"keep_a", "keep_b", "compose", "reject_both"})
 
 
 @dataclass(frozen=True, slots=True)
@@ -103,7 +110,16 @@ def load_supersession_ledger(path: Path) -> SupersessionLedger:
         )
         decision_date = _string(raw["decision_date"], path, "decision_date")
         owner = _string(raw["owner"], path, "owner")
-        commit = _string(raw["commit"], path, "commit")
+        decision_source = _string(raw["decision_source"], path, "decision_source")
+        resolution = _string(raw["resolution"], path, "resolution")
+        decision_base_commit = _string(
+            raw["decision_base_commit"], path, "decision_base_commit"
+        )
+        integration_evidence_sha256 = _string(
+            raw["integration_evidence_sha256"],
+            path,
+            "integration_evidence_sha256",
+        )
         artifacts = _string_list(
             raw["superseded_artifacts"],
             path,
@@ -115,7 +131,21 @@ def load_supersession_ledger(path: Path) -> SupersessionLedger:
             or seen_old_ids.intersection(old_ids)
             or resulting_id in old_ids
             or _DATE.fullmatch(decision_date) is None
-            or _COMMIT.fullmatch(commit) is None
+            or resolution not in _RESOLUTIONS
+            or _COMMIT.fullmatch(decision_base_commit) is None
+            or _SHA256.fullmatch(integration_evidence_sha256) is None
+            or integration_evidence_sha256
+            != integration_evidence_digest(
+                conflict_id=conflict_id,
+                old_ids=old_ids,
+                resulting_id=resulting_id,
+                decision_date=decision_date,
+                owner=owner,
+                decision_source=decision_source,
+                resolution=resolution,
+                decision_base_commit=decision_base_commit,
+                superseded_artifacts=artifacts,
+            )
         ):
             raise _schema_error(path, "ledger entry identity or provenance is invalid")
         seen_conflicts.add(conflict_id)
@@ -127,7 +157,10 @@ def load_supersession_ledger(path: Path) -> SupersessionLedger:
                 resulting_id=resulting_id,
                 decision_date=decision_date,
                 owner=owner,
-                commit=commit,
+                decision_source=decision_source,
+                resolution=resolution,
+                decision_base_commit=decision_base_commit,
+                integration_evidence_sha256=integration_evidence_sha256,
                 superseded_artifacts=artifacts,
             )
         )
@@ -183,6 +216,39 @@ def _string_list(
 
 def _schema_error(path: Path, message: str) -> CanonError:
     return CanonError("CANON_SUPERSESSION_LEDGER_SCHEMA", message, path)
+
+
+def integration_evidence_digest(
+    *,
+    conflict_id: str,
+    old_ids: tuple[str, ...],
+    resulting_id: str | None,
+    decision_date: str,
+    owner: str,
+    decision_source: str,
+    resolution: str,
+    decision_base_commit: str,
+    superseded_artifacts: tuple[str, ...],
+) -> str:
+    payload = {
+        "conflict_id": conflict_id,
+        "decision_base_commit": decision_base_commit,
+        "decision_date": decision_date,
+        "decision_source": decision_source,
+        "old_ids": list(old_ids),
+        "owner": owner,
+        "resolution": resolution,
+        "resulting_id": resulting_id,
+        "superseded_artifacts": list(superseded_artifacts),
+    }
+    return hashlib.sha256(
+        json.dumps(
+            payload,
+            ensure_ascii=False,
+            separators=(",", ":"),
+            sort_keys=True,
+        ).encode("utf-8")
+    ).hexdigest()
 
 
 def _open_file_nofollow(path: Path) -> int:

@@ -127,14 +127,14 @@ def render_outputs(registry: CanonRegistry) -> Mapping[Path, bytes]:
     return _render_outputs(
         registry,
         _content_sha_entries(entries),
-        dockets,
+        dockets if conflict_snapshot is not None else None,
     )
 
 
 def _render_outputs(
     registry: CanonRegistry,
     content_sha: str,
-    dockets: tuple[object, ...] = (),
+    dockets: tuple[object, ...] | None = None,
 ) -> Mapping[Path, bytes]:
     metadata = {
         "schema_version": 1,
@@ -248,6 +248,9 @@ def _render_outputs(
         Path("supersession-manifest.json"): _supersession_manifest(
             metadata, registry
         ),
+        Path("object-boundary-matrix.md"): _object_boundary_matrix(
+            metadata, documents, requirements
+        ),
     }
 
     expected = tuple(
@@ -272,6 +275,117 @@ def _render_outputs(
         path: rendered[path]
         for path in sorted(rendered, key=lambda item: item.as_posix())
     }
+
+
+def _object_boundary_matrix(
+    metadata: Mapping[str, object],
+    documents: tuple[object, ...],
+    requirements: tuple[object, ...],
+) -> bytes:
+    """Render the executable Step/Event/Reminder/Note distinction contract."""
+
+    columns = (
+        ("OBJECT-STEP", "Step"),
+        ("OBJECT-EVENT", "Event"),
+        ("OBJECT-REMINDER", "Reminder"),
+        ("OBJECT-NOTE", "Note"),
+    )
+    capabilities = (
+        ("executable_completable", "Executable / completable"),
+        ("occupies_duration", "Occupies duration"),
+        ("consumes_capacity", "Consumes capacity"),
+        ("due_date", "Due date"),
+        ("recurrence", "Recurrence"),
+        ("substeps", "Substeps"),
+        ("goal_path_node", "Goal Path node"),
+        ("proof_requirement", "Proof requirement"),
+        ("attendees_rsvp", "Attendees / RSVP"),
+        ("alerts", "Alerts"),
+        ("type_conversion", "Type conversion"),
+    )
+    law_references = (
+        ("schedule_placement_nonduplication", "Schedule Placement nonduplication", "OBJ-SCHEDULE-PLACEMENT-IDENTITY-001"),
+        ("future_step_singularity", "Future Step singularity", "OBJECT-FUTURE-STEP-IDENTITY-001"),
+        ("reminder_acknowledgement_noncompletion", "Reminder acknowledgement noncompletion", "OBJECT-REMINDER-COMPLETION-001"),
+        ("proof_receipt_separation", "Proof / Receipt separation", "OBJECT-PROOF-REQUIREMENT-001"),
+    )
+    by_spec = {document.spec_id: document for document in documents}
+    present = {spec_id for spec_id, _ in columns if spec_id in by_spec}
+    lines = _markdown_header("Object Boundary Matrix", metadata)
+    if not present:
+        lines.extend(
+            [
+                "- Representation status: `unrepresented`",
+                "- Reason: Step, Event, Reminder, and Note specifications are not all materialized.",
+            ]
+        )
+        return ("\n".join(lines) + "\n").encode("utf-8")
+    required_specs = {spec_id for spec_id, _ in columns}
+    if present != required_specs:
+        missing = sorted(required_specs - present)
+        raise CanonError(
+            "CANON_OBJECT_BOUNDARY_MISSING",
+            f"object boundary contract is missing specifications: {','.join(missing)}",
+            by_spec[next(iter(present))].source_path,
+        )
+    boundary_documents = tuple(by_spec[spec_id] for spec_id, _ in columns)
+    if any(document.object_boundary is None for document in boundary_documents):
+        missing = next(
+            document for document in boundary_documents if document.object_boundary is None
+        )
+        raise CanonError(
+            "CANON_OBJECT_BOUNDARY_MISSING",
+            f"object boundary data is missing: {missing.spec_id}",
+            missing.source_path,
+        )
+    boundary_values = tuple(
+        dict(document.object_boundary.capabilities) for document in boundary_documents
+    )
+    expected_laws = dict((key, requirement_id) for key, _, requirement_id in law_references)
+    for document in boundary_documents:
+        if dict(document.object_boundary.laws) != expected_laws:
+            raise CanonError(
+                "CANON_OBJECT_BOUNDARY_LAW_INVALID",
+                f"object boundary law references drifted: {document.spec_id}",
+                document.source_path,
+            )
+    requirement_by_id = {
+        requirement.requirement_id: requirement for requirement in requirements
+    }
+    resolved_laws = []
+    for key, label, requirement_id in law_references:
+        requirement = requirement_by_id.get(requirement_id)
+        if requirement is None:
+            raise CanonError(
+                "CANON_OBJECT_BOUNDARY_LAW_INVALID",
+                f"object boundary law does not resolve: {key}={requirement_id}",
+            )
+        first_paragraph = requirement.body.strip().split("\n\n", 1)[0]
+        resolved_laws.append(
+            (label, requirement_id, " ".join(first_paragraph.splitlines()))
+        )
+    rows = tuple(
+        (label, *(values[key] for values in boundary_values))
+        for key, label in capabilities
+    )
+    lines.extend(
+        [
+            "- Representation status: `materialized`",
+            "- Scope: validated spec-owned semantic boundaries; not implementation proof",
+            "",
+            "| Capability | Step | Event | Reminder | Note |",
+            "|---|---|---|---|---|",
+            *("| " + " | ".join(row) + " |" for row in rows),
+            "",
+            "## Owning boundary laws",
+            "",
+            *(
+                f"- **{label}** (`{requirement_id}`): {body}"
+                for label, requirement_id, body in resolved_laws
+            ),
+        ]
+    )
+    return ("\n".join(lines) + "\n").encode("utf-8")
 
 
 def _markdown_header(title: str, metadata: Mapping[str, object]) -> list[str]:
@@ -366,8 +480,8 @@ def _coverage(metadata, documents) -> bytes:
     return _markdown(lines)
 
 
-def _unresolved_conflicts(metadata, documents, dockets=()) -> bytes:
-    if dockets:
+def _unresolved_conflicts(metadata, documents, dockets=None) -> bytes:
+    if dockets is not None:
         from tools.ambitions_canon.conflicts import render_unresolved_report
 
         return render_unresolved_report(
@@ -448,7 +562,10 @@ def _supersession_manifest(metadata, registry) -> bytes:
             "resulting_id": entry.resulting_id,
             "decision_date": entry.decision_date,
             "owner": entry.owner,
-            "commit": entry.commit,
+            "decision_source": entry.decision_source,
+            "resolution": entry.resolution,
+            "decision_base_commit": entry.decision_base_commit,
+            "integration_evidence_sha256": entry.integration_evidence_sha256,
             "superseded_artifacts": list(entry.superseded_artifacts),
         }
         for entry in registry.supersession_entries

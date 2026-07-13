@@ -114,8 +114,18 @@ def audit_registry(registry: CanonRegistry) -> tuple[Finding, ...]:
     documents_by_id = {document.spec_id for document in documents}
     requirements_by_id = {requirement.requirement_id for requirement in requirements}
     superseded = set(registry.superseded_ids)
+    orphan_candidates: list[Finding] = []
     for document in documents:
         owned = set(document.owns_concepts)
+        requirement_concepts = {item.concept for item in document.requirements}
+        for concept in sorted(owned - requirement_concepts):
+            orphan_candidates.append(
+                _finding(
+                    "CANON_CONCEPT_ORPHAN",
+                    f"declared concept has no requirement owner: {concept}",
+                    document.source_path,
+                )
+            )
         for requirement in document.requirements:
             if requirement.concept not in owned:
                 findings.append(
@@ -223,5 +233,10 @@ def audit_registry(registry: CanonRegistry) -> tuple[Finding, ...]:
                     registry.manifest.source_path,
                 )
             )
+
+    # Reverse ownership is reported when it is the operative defect; it does
+    # not obscure or multiply stronger malformed-registry findings.
+    if not findings:
+        findings.extend(orphan_candidates)
 
     return tuple(sorted(findings, key=_sort_key))

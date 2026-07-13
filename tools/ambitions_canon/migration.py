@@ -24,9 +24,12 @@ from tools.ambitions_canon.build import (
     _read_descriptor,
     _rename_noreplace,
 )
+from tools.ambitions_canon.identifiers import CANONICAL_ID_PATTERN
 from tools.ambitions_canon.model import (
     AtomicClaim,
+    AuthorityReference,
     CanonError,
+    CanonRegistry,
     ClaimDisposition,
     ClaimTargetClass,
     Finding,
@@ -106,8 +109,8 @@ TARGET_CLASSES = frozenset(
         ClaimTargetClass.STANDARD,
     }
 )
-CLAIM_ID_PATTERN = re.compile(r"^[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)+$")
-TARGET_ID_PATTERN = re.compile(r"^[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)+$")
+CLAIM_ID_PATTERN = CANONICAL_ID_PATTERN
+TARGET_ID_PATTERN = CANONICAL_ID_PATTERN
 CONCEPT_PATTERN = re.compile(r"^[a-z0-9]+(?:[._-][a-z0-9]+)*$")
 LINE_LOCATION_PATTERN = re.compile(r"^line:([1-9][0-9]*)$")
 DECISION_LOCATION_PATTERN = re.compile(r"^decision:([1-9][0-9]*)$")
@@ -132,6 +135,7 @@ TRACKED_CLAIM_FIELDS = frozenset(
         "rationale_sha256",
         "source_id",
         "source_location",
+        "source_text_sha256",
         "target_class",
         "target_id",
     }
@@ -160,6 +164,9 @@ TRACKED_DISPOSITION_FIELDS = frozenset(
         "uncovered",
     }
 )
+MATERIALIZED_TARGET_REFERENCE_PREFIX = "MIGRATION-TARGET-"
+MATERIALIZED_TARGET_SOURCE = "docs/canon/migration/claim-dispositions.json#"
+MATERIALIZED_TARGET_STATUS = "materialized shadow specification target"
 
 
 @dataclass(frozen=True, slots=True)
@@ -174,6 +181,16 @@ class TrackedCanonEvidenceSnapshot:
     section_count: int
     linear_decision_count: int
     decision_evidence_fingerprint_sha256: str | None
+
+
+@dataclass(frozen=True, slots=True)
+class SemanticLossReview:
+    """Deterministic, source-bound representation audit summary."""
+
+    claim_count: int
+    decision_count: int
+    classification_counts: Mapping[str, int]
+    review_status: str
 
 
 @dataclass(frozen=True, slots=True)
@@ -3747,6 +3764,13 @@ def _claim_disposition_payload(
                 ).hexdigest(),
                 "source_id": item.source_id,
                 "source_location": item.source_location,
+                "source_text_sha256": hashlib.sha256(
+                    (
+                        item.owner_evidence_text
+                        if item.owner_evidence_text is not None
+                        else item.original_text
+                    ).encode("utf-8")
+                ).hexdigest(),
                 "target_class": item.target_class.value,
                 "target_id": item.target_id,
             }
@@ -4617,6 +4641,7 @@ def validate_tracked_canon_evidence(
             "schema_version",
             "claim_dispositions_sha256",
             "decision_evidence_fingerprint_sha256",
+            "resolution_provenance",
             "dockets",
         }
         or baseline.get("schema_version") != 1
@@ -4651,6 +4676,64 @@ def validate_tracked_canon_evidence(
         linear_decision_count=len(decision_numbers),
         decision_evidence_fingerprint_sha256=decision_fingerprint,
     )
+
+
+def validate_materialized_specification_target_references(
+    root: Path,
+    references: Sequence[AuthorityReference],
+    active_requirement_ids: Sequence[str],
+) -> None:
+    """Bind registered materialized migration targets to live requirements."""
+
+    snapshot = validate_tracked_canon_evidence(root)
+    if snapshot is None:
+        return
+    path = root / "docs/canon/migration/claim-dispositions.json"
+    payload = _tracked_json_object(snapshot.claim_dispositions_bytes, path)
+    claims = {
+        str(item["claim_id"]): _validate_tracked_claim(item, path)
+        for item in payload["claims"]
+    }
+    active = set(active_requirement_ids)
+    revision = hashlib.sha256(snapshot.claim_dispositions_bytes).hexdigest()
+    for reference in references:
+        if not reference.reference_id.startswith(MATERIALIZED_TARGET_REFERENCE_PREFIX):
+            continue
+        claim_id = reference.reference_id.removeprefix(
+            MATERIALIZED_TARGET_REFERENCE_PREFIX
+        )
+        claim = claims.get(claim_id)
+        target_id = claim.get("target_id") if claim is not None else None
+        valid = bool(
+            claim is not None
+            and claim["target_class"]
+            in {
+                ClaimTargetClass.SPECIFICATION.value,
+                ClaimTargetClass.STANDARD.value,
+            }
+            and claim["disposition"]
+            in {
+                ClaimDisposition.KEEP.value,
+                ClaimDisposition.REWRITE.value,
+                ClaimDisposition.COMPOSE.value,
+            }
+            and isinstance(target_id, str)
+            and reference.source == f"{MATERIALIZED_TARGET_SOURCE}{claim_id}"
+            and reference.revision == revision
+            and reference.requirement_ids == (target_id,)
+            and target_id in active
+            and reference.approval_state == "approved"
+            and reference.implementation_status == MATERIALIZED_TARGET_STATUS
+        )
+        if not valid:
+            raise CanonError(
+                "CANON_MATERIALIZED_TARGET_MISMATCH",
+                (
+                    "materialized specification target reference does not match "
+                    f"its accepted tracked claim: {claim_id}"
+                ),
+                path,
+            )
 
 
 def tracked_decision_evidence_fingerprint_sha256(
@@ -5178,6 +5261,12 @@ def _validate_tracked_claim(value: object, path: Path) -> dict[str, object]:
             "tracked claim_id is invalid",
             path,
         )
+    if not _is_sha256(value["source_text_sha256"]):
+        raise CanonError(
+            "CLAIM_DISPOSITIONS_INVALID",
+            "tracked source_text_sha256 is invalid",
+            path,
+        )
     if CONCEPT_PATTERN.fullmatch(str(value["concept"])) is None:
         raise CanonError(
             "CLAIM_DISPOSITIONS_INVALID",
@@ -5273,3 +5362,1226 @@ def _validate_tracked_claim(value: object, path: Path) -> dict[str, object]:
 
 def _is_sha256(value: object) -> bool:
     return isinstance(value, str) and re.fullmatch(r"[0-9a-f]{64}", value) is not None
+
+
+SEMANTIC_LOSS_CLASSIFICATIONS = (
+    "duplicated",
+    "missing",
+    "provenance_only",
+    "rejected_by_owner",
+    "represented",
+    "represented_with_composition",
+    "weakened",
+)
+SEMANTIC_LOSS_REVIEW_PATH = Path("docs/canon/migration/semantic-loss-review.json")
+SEMANTIC_EQUIVALENCE_LEDGER_PATH = Path(
+    "docs/canon/migration/semantic-equivalence-sets.json"
+)
+PROTECTED_CLAIM_INPUT_PATH = Path(".codex/canon-migration/claims")
+INDEPENDENT_REVIEW_FIELDS = {
+    "finding_counts",
+    "reviewed_candidate_diff_sha256",
+    "reviewed_path_count",
+    "reviewed_semantic_content_sha256",
+    "reviewer_report_sha256",
+    "schema_version",
+    "verdict",
+}
+
+
+def semantic_review_content_sha256(ledger: Mapping[str, object]) -> str:
+    """Hash semantic bytes while excluding the independently reviewed status."""
+
+    return hashlib.sha256(
+        stable_json(
+            {
+                "clause_count": ledger.get("clause_count"),
+                "schema_version": ledger.get("schema_version"),
+                "source_claim_count": ledger.get("source_claim_count"),
+                "source_claims": ledger.get("source_claims"),
+            }
+        )
+    ).hexdigest()
+
+
+def owner_clause_declares_modality(text: str, modality: str) -> bool:
+    """Return whether exact owner-body evidence states the declared modality."""
+
+    patterns = {
+        "MUST": r"\bMUST\b(?!\s+NOT\b)",
+        "MUST NOT": r"\bMUST\s+NOT\b",
+        "SHOULD": r"\bSHOULD\b(?!\s+NOT\b)",
+        "SHOULD NOT": r"\bSHOULD\s+NOT\b",
+        "MAY": r"\bMAY\b",
+        "INFORMATIONAL": r"$^",
+    }
+    pattern = patterns.get(modality)
+    return pattern is not None and re.search(pattern, text, re.IGNORECASE) is not None
+
+
+def load_protected_semantic_sources(
+    root: Path,
+    ledger: Mapping[str, object],
+) -> dict[str, str]:
+    """Resolve exact ignored claim bytes and bind them to tracked metadata."""
+
+    root = _normalized_absolute(root)
+    path = root / PROTECTED_CLAIM_INPUT_PATH
+    if not os.path.lexists(path):
+        raise CanonError(
+            "CANON_PROTECTED_SOURCE_MISSING",
+            "ignored atomic claim inputs are required for semantic review",
+            path,
+        )
+    _require_ignored_claim_input(root, path)
+
+    # Revalidate the existing registered raw sources and Decision evidence before
+    # consuming the ignored claim catalog.  The claim catalog is an input, never a
+    # second authority or a generated raw-source archive.
+    claim_coverage(
+        root / "docs/canon/migration/claim-dispositions.json",
+        repository_root=root,
+    )
+    snapshot = validate_tracked_canon_evidence(root)
+    if snapshot is None:
+        raise CanonError(
+            "CANON_PROTECTED_SOURCE_STALE",
+            "tracked migration evidence is required for semantic review",
+            path,
+        )
+    dispositions_path = root / "docs/canon/migration/claim-dispositions.json"
+    dispositions = _tracked_json_object(
+        snapshot.claim_dispositions_bytes, dispositions_path
+    )
+    tracked_claims = {
+        str(item["claim_id"]): _validate_tracked_claim(item, dispositions_path)
+        for item in dispositions["claims"]
+    }
+    batches = _read_claim_batches(path)
+    protected_claims = tuple(
+        sorted(
+            (claim for batch in batches for claim in batch.claims),
+            key=lambda item: item.claim_id,
+        )
+    )
+    _require_unique(
+        (item.claim_id for item in protected_claims),
+        "CLAIM_ID_DUPLICATE",
+        "claim_id",
+        path,
+    )
+    tracked = ledger.get("source_claims")
+    if not isinstance(tracked, list):
+        raise CanonError(
+            "CANON_PROTECTED_SOURCE_STALE",
+            "tracked semantic sources must be an array",
+            path,
+        )
+    tracked_by_id = {
+        str(source.get("claim_id")): source
+        for source in tracked
+        if isinstance(source, dict) and isinstance(source.get("claim_id"), str)
+    }
+    if len(tracked_by_id) != len(tracked):
+        raise CanonError(
+            "CANON_PROTECTED_SOURCE_STALE",
+            "tracked semantic source metadata is invalid",
+            path,
+        )
+    loaded: dict[str, str] = {}
+    for claim in protected_claims:
+        source = tracked_by_id.get(claim.claim_id)
+        tracked_claim = tracked_claims.get(claim.claim_id)
+        if source is None or tracked_claim is None:
+            raise CanonError(
+                "CANON_PROTECTED_SOURCE_STALE",
+                f"ignored claim is absent from tracked evidence: {claim.claim_id}",
+                path,
+            )
+        if (
+            claim.source_id != tracked_claim["source_id"]
+            or claim.source_location != tracked_claim["source_location"]
+            or claim.source_location != source.get("source_location")
+        ):
+            raise CanonError(
+                "CANON_PROTECTED_SOURCE_STALE",
+                f"ignored claim provenance diverges: {claim.claim_id}",
+                path,
+            )
+        text = (
+            claim.owner_evidence_text
+            if claim.owner_evidence_text is not None
+            else claim.original_text
+        )
+        length = source.get("source_text_length")
+        digest = source.get("source_text_sha256")
+        if (
+            not isinstance(length, int)
+            or length <= 0
+            or length != len(text)
+            or not _is_sha256(digest)
+            or hashlib.sha256(text.encode("utf-8")).hexdigest() != digest
+            or tracked_claim["source_text_sha256"] != digest
+        ):
+            raise CanonError(
+                "CANON_PROTECTED_SOURCE_HASH",
+                f"ignored claim bytes diverge from tracked metadata: {claim.claim_id}",
+                path,
+            )
+        loaded[claim.claim_id] = text
+    if set(loaded) != set(tracked_by_id) or set(loaded) != set(tracked_claims):
+        raise CanonError(
+            "CANON_PROTECTED_SOURCE_STALE",
+            "ignored claim catalog is incomplete or contains extra claims",
+            path,
+        )
+    return loaded
+
+
+def clause_modalities_are_compatible(adopted: str, owner: str) -> bool:
+    """Require equal-or-stronger owner modality without polarity reversal."""
+
+    positive = {"MAY": 1, "SHOULD": 2, "MUST": 3}
+    negative = {"SHOULD NOT": 1, "MUST NOT": 2}
+    if adopted == "INFORMATIONAL":
+        return True
+    if adopted in positive and owner in positive:
+        return positive[owner] >= positive[adopted]
+    if adopted in negative and owner in negative:
+        return negative[owner] >= negative[adopted]
+    return False
+
+
+def relationship_modalities_are_valid(
+    adopted: str,
+    owner: str,
+    relationship: str,
+    modality_rationale: object,
+) -> bool:
+    """Validate ordinary compatibility or an explicit owner polarity decision."""
+
+    if clause_modalities_are_compatible(adopted, owner):
+        return True
+    return (
+        relationship in {"owner_supersession", "rejected_by_owner"}
+        and isinstance(modality_rationale, str)
+        and modality_rationale.startswith("Owner-approved ")
+    )
+
+
+def owner_body_span_is_exact_clause(
+    body: str, start: int, end: int, modality: str
+) -> bool:
+    """Validate a complete live owner-body clause and its stated modality."""
+
+    if start < 0 or end <= start or end > len(body):
+        return False
+    prefix = re.sub(
+        r"(?:<!--[^>]*-->\s*)+$",
+        "",
+        body[:start],
+        flags=re.DOTALL,
+    ).rstrip()
+    suffix = body[end:].lstrip()
+    if prefix and prefix[-1] not in ".!?;:\n":
+        return False
+    if suffix and body[end - 1] not in ".!?;:\n":
+        return False
+    text = body[start:end].strip()
+    return bool(text) and owner_clause_declares_modality(text, modality)
+
+
+def _semantic_target_fingerprint(registry: CanonRegistry, identifier: str) -> str:
+    requirement = next(
+        (item for item in registry.requirements if item.requirement_id == identifier),
+        None,
+    )
+    if requirement is not None:
+        payload: object = {
+            "body": requirement.body,
+            "concept": requirement.concept,
+            "id": requirement.requirement_id,
+            "modality": requirement.modality.value,
+            "scope": requirement.scope,
+            "status": requirement.status,
+            "title": requirement.title,
+        }
+    else:
+        document = next(
+            (item for item in registry.documents if item.spec_id == identifier),
+            None,
+        )
+        if document is None or document.source_bytes is None:
+            raise CanonError(
+                "CANON_SEMANTIC_LOSS_TARGET",
+                f"semantic-loss target is not active canonical identity: {identifier}",
+                SEMANTIC_LOSS_REVIEW_PATH,
+            )
+        payload = {
+            "content_sha256": hashlib.sha256(document.source_bytes).hexdigest(),
+            "id": document.spec_id,
+            "kind": document.kind.value,
+            "owner_domain": document.owner_domain,
+        }
+    return hashlib.sha256(stable_json(payload)).hexdigest()
+
+
+def _semantic_loss_evidence_sha256(
+    registry: CanonRegistry,
+    claim: Mapping[str, object],
+    entry: Mapping[str, object],
+    supersession: object | None,
+) -> str:
+    canonical_ids = entry["canonical_ids"]
+    assert isinstance(canonical_ids, list)
+    evidence_payload = {
+        "canonical_target_fingerprints": {
+            identifier: _semantic_target_fingerprint(registry, identifier)
+            for identifier in canonical_ids
+        },
+        "claim": claim,
+        "classification": entry["classification"],
+        "decision_mapping_status": entry["decision_mapping_status"],
+        "intended_target_id": entry["intended_target_id"],
+        "mapping_rationale": entry["mapping_rationale"],
+        "priority": entry["priority"],
+        "priority_basis": entry["priority_basis"],
+        "source_text_sha256": entry["source_text_sha256"],
+        "stale_target_disposition": entry["stale_target_disposition"],
+        "supersession": (
+            {
+                "conflict_id": supersession.conflict_id,
+                "decision_base_commit": supersession.decision_base_commit,
+                "integration_evidence_sha256": supersession.integration_evidence_sha256,
+                "resolution": supersession.resolution,
+                "resulting_id": supersession.resulting_id,
+            }
+            if supersession is not None
+            else None
+        ),
+    }
+    return hashlib.sha256(stable_json(evidence_payload)).hexdigest()
+
+
+def _legacy_semantic_review_projection(
+    root: Path,
+    registry: CanonRegistry,
+) -> dict[str, object]:
+    """Validate the explicit equivalence ledger and project semantic review."""
+
+    ledger_path = root / SEMANTIC_EQUIVALENCE_LEDGER_PATH
+    ledger_bytes = _read_catalog_bytes(ledger_path, allow_missing=False)
+    assert ledger_bytes is not None
+    ledger = _tracked_json_object(ledger_bytes, ledger_path)
+    if set(ledger) != {
+        "equivalence_sets",
+        "expected_claim_count",
+        "mapped_claim_count",
+        "provenance_claim_count",
+        "provenance_entries",
+        "review_status",
+        "schema_version",
+    } or ledger.get("schema_version") != 1:
+        raise CanonError(
+            "CANON_SEMANTIC_EQUIVALENCE_INVALID",
+            "semantic-equivalence ledger uses an unsupported closed shape",
+            ledger_path,
+        )
+    if ledger.get("review_status") != "complete":
+        raise CanonError(
+            "CANON_SEMANTIC_EQUIVALENCE_INVALID",
+            "semantic-equivalence review must be complete after independent review",
+            ledger_path,
+        )
+    disposition_path = root / "docs/canon/migration/claim-dispositions.json"
+    disposition_bytes = _read_catalog_bytes(disposition_path, allow_missing=False)
+    assert disposition_bytes is not None
+    dispositions = _tracked_json_object(disposition_bytes, disposition_path)
+    claims = tuple(
+        _validate_tracked_claim(item, disposition_path)
+        for item in dispositions["claims"]
+    )
+    claims_by_id = {str(item["claim_id"]): item for item in claims}
+    requirements = {item.requirement_id: item for item in registry.requirements}
+    concept_owners: dict[str, str] = {}
+    for requirement in registry.requirements:
+        previous = concept_owners.setdefault(
+            requirement.concept, requirement.requirement_id
+        )
+        if previous != requirement.requirement_id:
+            raise CanonError(
+                "CANON_SEMANTIC_DUPLICATE_CONCEPT",
+                f"concept has parallel requirements: {requirement.concept}",
+                ledger_path,
+            )
+    sets = ledger.get("equivalence_sets")
+    provenance = ledger.get("provenance_entries")
+    if not isinstance(sets, list) or not isinstance(provenance, list):
+        raise CanonError(
+            "CANON_SEMANTIC_EQUIVALENCE_INVALID",
+            "equivalence sets and provenance entries must be arrays",
+            ledger_path,
+        )
+    entries: list[dict[str, object]] = []
+    seen: set[str] = set()
+    hash_owner: dict[str, str] = {}
+    decision_ids: set[str] = set()
+    decision_status_counts: dict[str, int] = {
+        "independently_reviewed": 0,
+        "unreviewed": 0,
+    }
+    valid_modalities = {item.value for item in Modality}
+    valid_relationships = {
+        "composition",
+        "exact",
+        "integrated_v3",
+        "mapping_only",
+        "owner_evidence_review",
+        "owner_supersession",
+    }
+    for equivalence in sets:
+        if not isinstance(equivalence, dict) or set(equivalence) != {
+            "claims",
+            "concept",
+            "owner_modality",
+            "owner_requirement_id",
+            "rationale",
+            "rationale_sha256",
+        }:
+            raise CanonError(
+                "CANON_SEMANTIC_EQUIVALENCE_INVALID",
+                "equivalence set uses an unsupported closed shape",
+                ledger_path,
+            )
+        owner = equivalence["owner_requirement_id"]
+        if not isinstance(owner, str) or owner not in requirements:
+            raise CanonError(
+                "CANON_SEMANTIC_EQUIVALENCE_OWNER",
+                f"equivalence owner is not an active requirement: {owner}",
+                ledger_path,
+            )
+        requirement = requirements[owner]
+        if (
+            equivalence["concept"] != requirement.concept
+            or equivalence["owner_modality"] != requirement.modality.value
+            or concept_owners.get(requirement.concept) != owner
+            or not isinstance(equivalence["rationale"], str)
+            or hashlib.sha256(equivalence["rationale"].encode()).hexdigest()
+            != equivalence["rationale_sha256"]
+        ):
+            raise CanonError(
+                "CANON_SEMANTIC_EQUIVALENCE_OWNER",
+                f"equivalence owner contract is stale: {owner}",
+                ledger_path,
+            )
+        members = equivalence["claims"]
+        if not isinstance(members, list) or not members:
+            raise CanonError(
+                "CANON_SEMANTIC_EQUIVALENCE_INVALID",
+                f"equivalence set has no claims: {owner}",
+                ledger_path,
+            )
+        for member in members:
+            if not isinstance(member, dict):
+                raise CanonError(
+                    "CANON_SEMANTIC_EQUIVALENCE_INVALID",
+                    "equivalence claim must be an object",
+                    ledger_path,
+                )
+            required = {
+                "adopted_modality",
+                "claim_id",
+                "relationship",
+                "review_batch",
+                "source_clause_sha256",
+                "source_modality",
+            }
+            if not required <= set(member):
+                raise CanonError(
+                    "CANON_SEMANTIC_EQUIVALENCE_INVALID",
+                    "equivalence claim is missing required fields",
+                    ledger_path,
+                )
+            claim_id = member["claim_id"]
+            if not isinstance(claim_id, str) or claim_id not in claims_by_id or claim_id in seen:
+                raise CanonError(
+                    "CANON_SEMANTIC_EQUIVALENCE_INVALID",
+                    f"claim is missing, extra, or duplicated: {claim_id}",
+                    ledger_path,
+                )
+            seen.add(claim_id)
+            source_hash = member["source_clause_sha256"]
+            source_modality = member["source_modality"]
+            adopted_modality = member["adopted_modality"]
+            relationship = member["relationship"]
+            if (
+                not _is_sha256(source_hash)
+                or source_hash != claims_by_id[claim_id]["source_text_sha256"]
+                or source_modality not in valid_modalities
+                or adopted_modality not in valid_modalities
+                or relationship not in valid_relationships
+            ):
+                raise CanonError(
+                    "CANON_SEMANTIC_EQUIVALENCE_INVALID",
+                    f"claim hash/modality/relationship is invalid: {claim_id}",
+                    ledger_path,
+                )
+            previous_owner = hash_owner.setdefault(str(source_hash), owner)
+            if previous_owner != owner:
+                raise CanonError(
+                    "CANON_SEMANTIC_DUPLICATE_SOURCE",
+                    f"identical source clauses have parallel owners: {claim_id}",
+                    ledger_path,
+                )
+            decision_status = member.get("decision_mapping_status")
+            decision_number = member.get("decision_number")
+            tracked = claims_by_id[claim_id]
+            if decision_status is not None:
+                if (
+                    decision_status != tracked["decision_mapping_status"]
+                    or not isinstance(decision_number, int)
+                    or not _is_sha256(member.get("owner_evidence_sha256"))
+                    or member["owner_evidence_sha256"]
+                    != tracked["owner_evidence_text_sha256"]
+                ):
+                    raise CanonError(
+                        "CANON_SEMANTIC_DECISION_INVALID",
+                        f"Decision evidence/status is stale: {claim_id}",
+                        ledger_path,
+                    )
+                decision_ids.add(claim_id)
+                decision_status_counts[str(decision_status)] += 1
+            if source_modality == "INFORMATIONAL":
+                if relationship != "mapping_only" or adopted_modality != "INFORMATIONAL":
+                    raise CanonError(
+                        "CANON_SEMANTIC_MODALITY_WEAKENED",
+                        f"informational mapping was promoted: {claim_id}",
+                        ledger_path,
+                    )
+            elif decision_number == 75:
+                if member.get("modality_review") != "extraction_anomaly_preserved":
+                    raise CanonError(
+                        "CANON_SEMANTIC_MODALITY_WEAKENED",
+                        "Decision 75 anomaly is not explicit",
+                        ledger_path,
+                    )
+            elif adopted_modality != source_modality:
+                raise CanonError(
+                    "CANON_SEMANTIC_MODALITY_WEAKENED",
+                    f"source modality changed without approval: {claim_id}",
+                    ledger_path,
+                )
+            classification = (
+                "represented"
+                if relationship == "exact"
+                else "represented_with_composition"
+            )
+            entries.append(
+                {
+                    "adopted_modality": adopted_modality,
+                    "canonical_ids": [owner],
+                    "claim_id": claim_id,
+                    "classification": classification,
+                    "decision_mapping_status": decision_status,
+                    "decision_number": decision_number,
+                    "decision_relationship": member.get("decision_relationship"),
+                    "equivalence_rationale_sha256": equivalence["rationale_sha256"],
+                    "modality_review": member.get("modality_review"),
+                    "priority": "unknown",
+                    "priority_basis": "source-bound migration claim declares no priority; hard-gated conservatively",
+                    "relationship": relationship,
+                    "source_modality": source_modality,
+                    "source_text_sha256": source_hash,
+                }
+            )
+    for item in provenance:
+        if not isinstance(item, dict):
+            raise CanonError(
+                "CANON_SEMANTIC_PROVENANCE_INVALID",
+                "provenance entry must be an object",
+                ledger_path,
+            )
+        required = {
+            "claim_id",
+            "rationale",
+            "rationale_sha256",
+            "review_batch",
+            "source_clause_sha256",
+            "source_modality",
+        }
+        if not required <= set(item):
+            raise CanonError(
+                "CANON_SEMANTIC_PROVENANCE_INVALID",
+                "provenance entry is missing required fields",
+                ledger_path,
+            )
+        claim_id = item["claim_id"]
+        if not isinstance(claim_id, str) or claim_id not in claims_by_id or claim_id in seen:
+            raise CanonError(
+                "CANON_SEMANTIC_PROVENANCE_INVALID",
+                f"provenance claim is missing, extra, or duplicated: {claim_id}",
+                ledger_path,
+            )
+        if (
+            not isinstance(item["rationale"], str)
+            or hashlib.sha256(item["rationale"].encode()).hexdigest()
+            != item["rationale_sha256"]
+            or not _is_sha256(item["source_clause_sha256"])
+            or item["source_clause_sha256"]
+            != claims_by_id[claim_id]["source_text_sha256"]
+        ):
+            raise CanonError(
+                "CANON_SEMANTIC_PROVENANCE_INVALID",
+                f"provenance rationale/hash is stale: {claim_id}",
+                ledger_path,
+            )
+        seen.add(claim_id)
+        decision_status = item.get("decision_mapping_status")
+        decision_number = item.get("decision_number")
+        if decision_status is not None:
+            tracked = claims_by_id[claim_id]
+            if (
+                decision_status != tracked["decision_mapping_status"]
+                or decision_number != 69
+                or item.get("owner_evidence_sha256")
+                != tracked["owner_evidence_text_sha256"]
+            ):
+                raise CanonError(
+                    "CANON_SEMANTIC_DECISION_INVALID",
+                    f"provenance Decision evidence/status is stale: {claim_id}",
+                    ledger_path,
+                )
+            decision_ids.add(claim_id)
+            decision_status_counts[str(decision_status)] += 1
+        entries.append(
+            {
+                "adopted_modality": "INFORMATIONAL",
+                "canonical_ids": [],
+                "claim_id": claim_id,
+                "classification": "provenance_only",
+                "decision_mapping_status": decision_status,
+                "decision_number": decision_number,
+                "decision_relationship": None,
+                "equivalence_rationale_sha256": item["rationale_sha256"],
+                "modality_review": None,
+                "priority": "unknown",
+                "priority_basis": "source-bound migration claim declares no priority; hard-gated conservatively",
+                "relationship": "provenance",
+                "source_modality": item["source_modality"],
+                "source_text_sha256": item["source_clause_sha256"],
+            }
+        )
+    if seen != set(claims_by_id) or len(seen) != 1542:
+        raise CanonError(
+            "CANON_SEMANTIC_EQUIVALENCE_INCOMPLETE",
+            "equivalence ledger must classify every source claim exactly once",
+            ledger_path,
+        )
+    if len(decision_ids) != 201 or decision_status_counts != {
+        "independently_reviewed": 156,
+        "unreviewed": 45,
+    }:
+        raise CanonError(
+            "CANON_SEMANTIC_DECISION_INVALID",
+            "equivalence ledger must preserve all 201 Decision statuses",
+            ledger_path,
+        )
+    entries.sort(key=lambda item: str(item["claim_id"]))
+    counts = {
+        value: sum(item["classification"] == value for item in entries)
+        for value in SEMANTIC_LOSS_CLASSIFICATIONS
+    }
+    if counts["missing"] or counts["weakened"] or counts["duplicated"]:
+        raise CanonError(
+            "CANON_SEMANTIC_LOSS_BLOCKER",
+            "semantic-loss review contains a hard-gated unresolved classification",
+            ledger_path,
+        )
+    return {
+        "claim_count": len(entries),
+        "claim_dispositions_sha256": hashlib.sha256(disposition_bytes).hexdigest(),
+        "classification_counts": counts,
+        "decision_claim_ids": sorted(decision_ids),
+        "decision_count": len(decision_ids),
+        "entries": entries,
+        "equivalence_ledger_sha256": hashlib.sha256(ledger_bytes).hexdigest(),
+        "review_status": "complete",
+        "schema_version": 2,
+    }
+
+
+def _atomic_semantic_review_projection(
+    root: Path,
+    registry: CanonRegistry,
+    ledger: Mapping[str, object],
+    ledger_bytes: bytes,
+    ledger_path: Path,
+    *,
+    verify_protected_sources: bool = True,
+) -> dict[str, object]:
+    """Validate complete source-span atomization and project one claim result."""
+
+    if set(ledger) != {
+        "clause_count",
+        "independent_review",
+        "review_status",
+        "schema_version",
+        "source_claim_count",
+        "source_claims",
+    } or ledger.get("schema_version") != 3:
+        raise CanonError(
+            "CANON_SEMANTIC_CLAUSE_INVALID",
+            "atomic semantic ledger uses an unsupported closed shape",
+            ledger_path,
+        )
+    review_status = ledger.get("review_status")
+    independent_review = ledger.get("independent_review")
+    if review_status not in {"candidate", "independently_reviewed"}:
+        raise CanonError(
+            "CANON_SEMANTIC_CLAUSE_INVALID",
+            "atomic semantic review status is invalid",
+            ledger_path,
+        )
+    disposition_path = root / "docs/canon/migration/claim-dispositions.json"
+    disposition_bytes = _read_catalog_bytes(disposition_path, allow_missing=False)
+    assert disposition_bytes is not None
+    dispositions = _tracked_json_object(disposition_bytes, disposition_path)
+    tracked = {
+        str(item["claim_id"]): _validate_tracked_claim(item, disposition_path)
+        for item in dispositions["claims"]
+    }
+    requirements = {item.requirement_id: item for item in registry.requirements}
+    concept_owners: dict[str, str] = {}
+    for requirement in registry.requirements:
+        previous = concept_owners.setdefault(
+            requirement.concept, requirement.requirement_id
+        )
+        if previous != requirement.requirement_id:
+            raise CanonError(
+                "CANON_SEMANTIC_DUPLICATE_CONCEPT",
+                f"concept has parallel requirements: {requirement.concept}",
+                ledger_path,
+            )
+    source_claims = ledger.get("source_claims")
+    if not isinstance(source_claims, list):
+        raise CanonError(
+            "CANON_SEMANTIC_CLAUSE_INVALID",
+            "source_claims must be an array",
+            ledger_path,
+        )
+    protected_sources = (
+        load_protected_semantic_sources(root, ledger)
+        if verify_protected_sources
+        else None
+    )
+    source_fields = {
+        "claim_id",
+        "clauses",
+        "decision_mapping_status",
+        "decision_number",
+        "source_location",
+        "source_text_length",
+        "source_text_sha256",
+    }
+    clause_fields = {
+        "adopted_modality",
+        "clause_sha256",
+        "modality_rationale",
+        "ordinal",
+        "owner_body_span_end",
+        "owner_body_span_start",
+        "owner_clause_modality",
+        "owner_clause_sha256",
+        "owner_requirement_sha256",
+        "relationship",
+        "requirement_id",
+        "review_batch",
+        "semantic_rationale",
+        "semantic_rationale_sha256",
+        "source_modality",
+        "span_end",
+        "span_start",
+    }
+    valid_modalities = {item.value for item in Modality}
+    valid_relationships = {
+        "composition",
+        "exact",
+        "integrated_v3",
+        "mapping_only",
+        "owner_evidence_review",
+        "owner_supersession",
+        "provenance",
+        "rejected_by_owner",
+    }
+    seen_claims: set[str] = set()
+    clause_owner: dict[str, str | None] = {}
+    entries: list[dict[str, object]] = []
+    decision_ids: set[str] = set()
+    decision_status_counts = {"independently_reviewed": 0, "unreviewed": 0}
+    total_clauses = 0
+    for source in source_claims:
+        if not isinstance(source, dict) or set(source) != source_fields:
+            raise CanonError(
+                "CANON_SEMANTIC_CLAUSE_INVALID",
+                "source claim uses an unsupported closed shape",
+                ledger_path,
+            )
+        claim_id = source["claim_id"]
+        if (
+            not isinstance(claim_id, str)
+            or claim_id not in tracked
+            or claim_id in seen_claims
+        ):
+            raise CanonError(
+                "CANON_SEMANTIC_CLAUSE_INVALID",
+                f"source claim is missing, extra, or duplicated: {claim_id}",
+                ledger_path,
+            )
+        seen_claims.add(claim_id)
+        claim = tracked[claim_id]
+        source_length = source["source_text_length"]
+        source_text = (
+            protected_sources.get(str(claim_id))
+            if protected_sources is not None
+            else None
+        )
+        if (
+            source["source_text_sha256"] != claim["source_text_sha256"]
+            or source["source_location"] != claim["source_location"]
+            or not isinstance(source_length, int)
+            or source_length <= 0
+            or (
+                verify_protected_sources
+                and (
+                    not isinstance(source_text, str)
+                    or source_length != len(source_text)
+                    or hashlib.sha256(source_text.encode()).hexdigest()
+                    != source["source_text_sha256"]
+                )
+            )
+        ):
+            raise CanonError(
+                "CANON_SEMANTIC_CLAUSE_SOURCE",
+                f"source identity/hash/length is invalid: {claim_id}",
+                ledger_path,
+            )
+        expected_decision = None
+        location = str(claim["source_location"])
+        if location.startswith("decision:"):
+            try:
+                expected_decision = int(location.removeprefix("decision:"))
+            except ValueError as error:
+                raise CanonError(
+                    "CANON_SEMANTIC_DECISION_INVALID",
+                    f"Decision location is invalid: {claim_id}",
+                    ledger_path,
+                ) from error
+        if (
+            source["decision_number"] != expected_decision
+            or source["decision_mapping_status"] != claim["decision_mapping_status"]
+        ):
+            raise CanonError(
+                "CANON_SEMANTIC_DECISION_INVALID",
+                f"Decision identity/status is stale: {claim_id}",
+                ledger_path,
+            )
+        if expected_decision is not None:
+            decision_ids.add(claim_id)
+            decision_status_counts[str(source["decision_mapping_status"])] += 1
+        clauses = source["clauses"]
+        if not isinstance(clauses, list) or not clauses:
+            raise CanonError(
+                "CANON_SEMANTIC_CLAUSE_COVERAGE",
+                f"source claim has no clauses: {claim_id}",
+                ledger_path,
+            )
+        cursor = 0
+        canonical_ids: list[str] = []
+        relationships: list[str] = []
+        for ordinal, clause in enumerate(clauses, start=1):
+            if not isinstance(clause, dict) or set(clause) != clause_fields:
+                raise CanonError(
+                    "CANON_SEMANTIC_CLAUSE_INVALID",
+                    f"clause uses an unsupported closed shape: {claim_id}",
+                    ledger_path,
+                )
+            start = clause["span_start"]
+            end = clause["span_end"]
+            if (
+                clause["ordinal"] != ordinal
+                or not isinstance(start, int)
+                or not isinstance(end, int)
+                or start != cursor
+                or end <= start
+                or end > source_length
+                or not _is_sha256(clause["clause_sha256"])
+                or (
+                    verify_protected_sources
+                    and (
+                        not isinstance(source_text, str)
+                        or hashlib.sha256(source_text[start:end].encode()).hexdigest()
+                        != clause["clause_sha256"]
+                    )
+                )
+            ):
+                raise CanonError(
+                    "CANON_SEMANTIC_CLAUSE_COVERAGE",
+                    f"clause spans must exactly cover source in order: {claim_id}",
+                    ledger_path,
+                )
+            cursor = end
+            total_clauses += 1
+            source_modality = clause["source_modality"]
+            adopted_modality = clause["adopted_modality"]
+            relationship = clause["relationship"]
+            rationale = clause["semantic_rationale"]
+            requirement_id = clause["requirement_id"]
+            if (
+                source_modality not in valid_modalities
+                or adopted_modality not in valid_modalities
+                or relationship not in valid_relationships
+                or not isinstance(rationale, str)
+                or not rationale.strip()
+                or hashlib.sha256(rationale.encode()).hexdigest()
+                != clause["semantic_rationale_sha256"]
+            ):
+                raise CanonError(
+                    "CANON_SEMANTIC_CLAUSE_INVALID",
+                    f"clause modality/relationship/evidence is invalid: {claim_id}:{ordinal}",
+                    ledger_path,
+                )
+            if adopted_modality != source_modality:
+                allowed_anomaly = (
+                    expected_decision == 75
+                    and source_modality == "MUST NOT"
+                    and adopted_modality == "MUST"
+                    and clause["modality_rationale"]
+                    == "Decision 75 extraction polarity anomaly preserved against affirmative owner evidence."
+                )
+                if not allowed_anomaly:
+                    raise CanonError(
+                        "CANON_SEMANTIC_CLAUSE_MODALITY",
+                        f"clause modality changed without approved rationale: {claim_id}:{ordinal}",
+                        ledger_path,
+                    )
+            if requirement_id is None:
+                if (
+                    relationship != "provenance"
+                    or clause["owner_requirement_sha256"] is not None
+                    or clause["owner_body_span_start"] is not None
+                    or clause["owner_body_span_end"] is not None
+                    or clause["owner_clause_sha256"] is not None
+                    or clause["owner_clause_modality"] is not None
+                ):
+                    raise CanonError(
+                        "CANON_SEMANTIC_CLAUSE_OWNER",
+                        f"provenance clause has an owner: {claim_id}:{ordinal}",
+                        ledger_path,
+                    )
+                if rationale.startswith("Exact owner clause") or rationale.startswith(
+                    "Exact live owner clause"
+                ) or rationale.startswith("Exact modular owner clause") or rationale.startswith(
+                    "Exact live clause"
+                ):
+                    raise CanonError(
+                        "CANON_SEMANTIC_CLAUSE_OWNER",
+                        f"exact owner evidence lacks traceability edge: {claim_id}:{ordinal}",
+                        ledger_path,
+                    )
+            else:
+                if not isinstance(requirement_id, str) or requirement_id not in requirements:
+                    raise CanonError(
+                        "CANON_SEMANTIC_CLAUSE_OWNER",
+                        f"clause owner is not an active requirement: {claim_id}:{ordinal}",
+                        ledger_path,
+                    )
+                requirement = requirements[requirement_id]
+                if clause["owner_requirement_sha256"] != _semantic_target_fingerprint(
+                    registry, requirement_id
+                ):
+                    raise CanonError(
+                        "CANON_SEMANTIC_CLAUSE_OWNER",
+                        f"clause owner evidence is stale: {claim_id}:{ordinal}",
+                        ledger_path,
+                    )
+                owner_start = clause["owner_body_span_start"]
+                owner_end = clause["owner_body_span_end"]
+                owner_modality = clause["owner_clause_modality"]
+                if (
+                    not isinstance(owner_start, int)
+                    or not isinstance(owner_end, int)
+                    or owner_start < 0
+                    or owner_end <= owner_start
+                    or owner_end > len(requirement.body)
+                    or owner_modality not in valid_modalities
+                ):
+                    raise CanonError(
+                        "CANON_SEMANTIC_CLAUSE_OWNER",
+                        f"owner body clause span/modality is invalid: {claim_id}:{ordinal}",
+                        ledger_path,
+                    )
+                owner_text = requirement.body[owner_start:owner_end]
+                if hashlib.sha256(owner_text.encode()).hexdigest() != clause[
+                    "owner_clause_sha256"
+                ]:
+                    raise CanonError(
+                        "CANON_SEMANTIC_CLAUSE_OWNER",
+                        f"owner body clause hash is stale: {claim_id}:{ordinal}",
+                        ledger_path,
+                    )
+                exact_evidence = re.match(
+                    r"^Exact (?:live |modular )?(?:owner )?clause “(.+?)” "
+                    r"(?:entails|displaces|supersedes)",
+                    rationale,
+                )
+                if (
+                    exact_evidence is not None
+                    and exact_evidence.group(1) not in owner_text
+                ):
+                    raise CanonError(
+                        "CANON_SEMANTIC_CLAUSE_OWNER",
+                        f"exact rationale evidence is outside owner span: {claim_id}:{ordinal}",
+                        ledger_path,
+                    )
+                if not owner_body_span_is_exact_clause(
+                    requirement.body,
+                    owner_start,
+                    owner_end,
+                    str(owner_modality),
+                ):
+                    raise CanonError(
+                        "CANON_SEMANTIC_CLAUSE_MODALITY",
+                        f"declared owner-clause modality is absent from body span: {claim_id}:{ordinal}",
+                        ledger_path,
+                    )
+                compatible = relationship_modalities_are_valid(
+                    str(adopted_modality),
+                    str(owner_modality),
+                    str(relationship),
+                    clause["modality_rationale"],
+                ) and (
+                    adopted_modality != "INFORMATIONAL"
+                    or relationship == "mapping_only"
+                )
+                if not compatible:
+                    raise CanonError(
+                        "CANON_SEMANTIC_CLAUSE_MODALITY",
+                        f"clause polarity/modality is incompatible with owner: {claim_id}:{ordinal}",
+                        ledger_path,
+                    )
+                canonical_ids.append(requirement_id)
+            prior_owner = clause_owner.setdefault(
+                str(clause["clause_sha256"]), requirement_id
+            )
+            if prior_owner != requirement_id:
+                raise CanonError(
+                    "CANON_SEMANTIC_DUPLICATE_SOURCE",
+                    f"identical clauses have parallel owners: {claim_id}:{ordinal}",
+                    ledger_path,
+                )
+            relationships.append(str(relationship))
+        if cursor != source_length:
+            raise CanonError(
+                "CANON_SEMANTIC_CLAUSE_COVERAGE",
+                f"source suffix is uncovered: {claim_id}",
+                ledger_path,
+            )
+        if relationships and all(
+            item == "rejected_by_owner" for item in relationships
+        ):
+            classification = "rejected_by_owner"
+        elif canonical_ids:
+            classification = (
+                "represented"
+                if all(item == "exact" for item in relationships)
+                else "represented_with_composition"
+            )
+        else:
+            classification = "provenance_only"
+        entries.append(
+            {
+                "canonical_ids": canonical_ids,
+                "claim_id": claim_id,
+                "classification": classification,
+                "clause_count": len(clauses),
+                "decision_mapping_status": source["decision_mapping_status"],
+                "decision_number": source["decision_number"],
+                "priority": "unknown",
+                "priority_basis": "source-bound migration claim declares no priority; hard-gated conservatively",
+                "source_text_sha256": source["source_text_sha256"],
+            }
+        )
+    if seen_claims != set(tracked) or len(seen_claims) != 1542:
+        raise CanonError(
+            "CANON_SEMANTIC_CLAUSE_INCOMPLETE",
+            "atomic ledger must close all 1,542 source claims",
+            ledger_path,
+        )
+    if (
+        ledger["source_claim_count"] != len(source_claims)
+        or ledger["clause_count"] != total_clauses
+    ):
+        raise CanonError(
+            "CANON_SEMANTIC_CLAUSE_INCOMPLETE",
+            "declared source/clause counts differ from reviewed records",
+            ledger_path,
+        )
+    if len(decision_ids) != 201 or decision_status_counts != {
+        "independently_reviewed": 156,
+        "unreviewed": 45,
+    }:
+        raise CanonError(
+            "CANON_SEMANTIC_DECISION_INVALID",
+            "atomic ledger must preserve all 201 Decision statuses",
+            ledger_path,
+        )
+    if review_status == "candidate":
+        if independent_review is not None:
+            raise CanonError(
+                "CANON_SEMANTIC_REVIEW_BINDING",
+                "candidate semantic review cannot carry independent-review evidence",
+                ledger_path,
+            )
+    elif (
+        not isinstance(independent_review, dict)
+        or set(independent_review) != INDEPENDENT_REVIEW_FIELDS
+        or independent_review.get("schema_version") != 1
+        or independent_review.get("verdict") != "clean"
+        or not isinstance(independent_review.get("reviewed_path_count"), int)
+        or independent_review.get("reviewed_path_count", 0) <= 0
+        or not _is_sha256(independent_review.get("reviewed_candidate_diff_sha256"))
+        or not _is_sha256(independent_review.get("reviewer_report_sha256"))
+        or not _is_sha256(independent_review.get("reviewed_semantic_content_sha256"))
+        or independent_review.get("reviewed_semantic_content_sha256")
+        != semantic_review_content_sha256(ledger)
+        or independent_review.get("finding_counts")
+        != {"critical": 0, "important": 0, "minor": 0}
+    ):
+        raise CanonError(
+            "CANON_SEMANTIC_REVIEW_BINDING",
+            "independently reviewed status lacks an exact clean review binding",
+            ledger_path,
+        )
+    entries.sort(key=lambda item: str(item["claim_id"]))
+    counts = {
+        value: sum(item["classification"] == value for item in entries)
+        for value in SEMANTIC_LOSS_CLASSIFICATIONS
+    }
+    return {
+        "claim_count": len(entries),
+        "clause_count": total_clauses,
+        "claim_dispositions_sha256": hashlib.sha256(disposition_bytes).hexdigest(),
+        "classification_counts": counts,
+        "decision_claim_ids": sorted(decision_ids),
+        "decision_count": len(decision_ids),
+        "entries": entries,
+        "equivalence_ledger_sha256": hashlib.sha256(ledger_bytes).hexdigest(),
+        "independent_review": independent_review,
+        "review_status": str(ledger["review_status"]),
+        "schema_version": 4,
+    }
+
+
+def _semantic_review_projection(
+    root: Path,
+    registry: CanonRegistry,
+    *,
+    verify_protected_sources: bool = True,
+) -> dict[str, object]:
+    """Validate the atomic clause ledger and project semantic review."""
+
+    ledger_path = root / SEMANTIC_EQUIVALENCE_LEDGER_PATH
+    ledger_bytes = _read_catalog_bytes(ledger_path, allow_missing=False)
+    assert ledger_bytes is not None
+    ledger = _tracked_json_object(ledger_bytes, ledger_path)
+    if ledger.get("schema_version") != 3:
+        raise CanonError(
+            "CANON_SEMANTIC_CLAUSE_INVALID",
+            "legacy one-claim/one-owner semantic ledgers are forbidden",
+            ledger_path,
+        )
+    return _atomic_semantic_review_projection(
+        root,
+        registry,
+        ledger,
+        ledger_bytes,
+        ledger_path,
+        verify_protected_sources=verify_protected_sources,
+    )
+
+
+def render_semantic_loss_review(root: Path, registry: CanonRegistry) -> bytes:
+    """Render the deterministic review projection from the explicit ledger."""
+
+    return stable_json(_semantic_review_projection(root, registry))
+
+
+def render_compact_semantic_loss_review(
+    root: Path,
+    registry: CanonRegistry,
+) -> bytes:
+    """Render tracked semantic parity without requiring ignored source bytes."""
+
+    return stable_json(
+        _semantic_review_projection(
+            root,
+            registry,
+            verify_protected_sources=False,
+        )
+    )
+
+
+def validate_semantic_loss_review(
+    root: Path,
+    registry: CanonRegistry,
+) -> SemanticLossReview:
+    """Validate explicit equivalence ownership and deterministic review parity."""
+
+    path = root / SEMANTIC_LOSS_REVIEW_PATH
+    actual = _read_catalog_bytes(path, allow_missing=False)
+    assert actual is not None
+    expected = render_semantic_loss_review(root, registry)
+    if actual != expected:
+        raise CanonError(
+            "CANON_SEMANTIC_LOSS_STALE",
+            "semantic-loss review differs from the explicit equivalence ledger",
+            path,
+        )
+    value = _tracked_json_object(actual, path)
+    counts = value["classification_counts"]
+    return SemanticLossReview(
+        claim_count=int(value["claim_count"]),
+        decision_count=int(value["decision_count"]),
+        classification_counts={
+            item: int(counts[item]) for item in SEMANTIC_LOSS_CLASSIFICATIONS
+        },
+        review_status=str(value["review_status"]),
+    )
+
+
+def validate_compact_semantic_loss_review(
+    root: Path,
+    registry: CanonRegistry,
+) -> SemanticLossReview:
+    """Validate tracked semantic structure in clean, connector-free checkouts."""
+
+    path = root / SEMANTIC_LOSS_REVIEW_PATH
+    actual = _read_catalog_bytes(path, allow_missing=False)
+    assert actual is not None
+    expected = render_compact_semantic_loss_review(root, registry)
+    if actual != expected:
+        raise CanonError(
+            "CANON_SEMANTIC_LOSS_STALE",
+            "semantic-loss review differs from compact tracked evidence",
+            path,
+        )
+    value = _tracked_json_object(actual, path)
+    counts = value["classification_counts"]
+    return SemanticLossReview(
+        claim_count=int(value["claim_count"]),
+        decision_count=int(value["decision_count"]),
+        classification_counts={
+            item: int(counts[item]) for item in SEMANTIC_LOSS_CLASSIFICATIONS
+        },
+        review_status=str(value["review_status"]),
+    )

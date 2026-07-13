@@ -32,6 +32,7 @@ GENERATED_FILES = (
     "generated/visual-authority-manifest.json",
     "generated/external-reference-impact.md",
     "generated/supersession-manifest.json",
+    "generated/object-boundary-matrix.md",
 )
 
 
@@ -390,18 +391,126 @@ class ManifestTests(unittest.TestCase):
                     lambda: load_manifest(self.root),
                 )
 
-    def test_initial_manifest_matches_the_shadow_contract_exactly(self):
+    def test_repository_manifest_matches_the_shadow_constitution_contract(self):
         manifest = load_manifest(REPO_ROOT)
 
         self.assertEqual(manifest.schema_version, 1)
-        self.assertEqual(manifest.canon_revision, 0)
+        self.assertEqual(manifest.canon_revision, 1)
         self.assertIs(manifest.authority_state, AuthorityState.SHADOW)
         self.assertEqual(manifest.compiler_version, "0.1.0")
-        self.assertEqual(manifest.normative_files, ())
+        self.assertEqual(
+            tuple(item.path for item in manifest.normative_files),
+            (
+                Path("CONSTITUTION.md"),
+                Path("specifications/app/deep-linking.md"),
+                Path("specifications/app/degraded-states.md"),
+                Path("specifications/app/launch-and-setup.md"),
+                Path("specifications/app/navigation.md"),
+                Path("specifications/app/permissions.md"),
+                Path("specifications/app/shell.md"),
+                Path("specifications/global/capture.md"),
+                Path("specifications/global/motion.md"),
+                Path("specifications/global/search.md"),
+                Path("specifications/global/trust-inspection.md"),
+                Path("specifications/journeys/backup-restore-reset.md"),
+                Path("specifications/journeys/capture-to-placement.md"),
+                Path("specifications/journeys/closure-and-proof.md"),
+                Path("specifications/journeys/external-calendar-import.md"),
+                Path("specifications/journeys/goal-creation-and-activation.md"),
+                Path("specifications/journeys/missed-work-recovery.md"),
+                Path("specifications/journeys/schedule-reflow.md"),
+                Path("specifications/journeys/search-find-act-inspect.md"),
+                Path("specifications/journeys/start-and-complete-step.md"),
+                Path("specifications/objects/attachment.md"),
+                Path("specifications/objects/closure.md"),
+                Path("specifications/objects/event.md"),
+                Path("specifications/objects/goal-path.md"),
+                Path("specifications/objects/goal.md"),
+                Path("specifications/objects/history-event.md"),
+                Path("specifications/objects/import-diff-record.md"),
+                Path("specifications/objects/life-area.md"),
+                Path("specifications/objects/note.md"),
+                Path("specifications/objects/notification-rule.md"),
+                Path("specifications/objects/proof.md"),
+                Path("specifications/objects/receipt.md"),
+                Path("specifications/objects/recovery-segment.md"),
+                Path("specifications/objects/reminder.md"),
+                Path("specifications/objects/saved-for-later-draft.md"),
+                Path("specifications/objects/schedule-placement.md"),
+                Path("specifications/objects/source-reference.md"),
+                Path("specifications/objects/step.md"),
+                Path("specifications/surfaces/goals.md"),
+                Path("specifications/surfaces/time.md"),
+                Path("specifications/surfaces/today.md"),
+                Path("specifications/surfaces/you.md"),
+                Path("specifications/systems/apple-ecosystem.md"),
+                Path("specifications/systems/diagnostics.md"),
+                Path("specifications/systems/import-export-repair.md"),
+                Path("specifications/systems/local-learning.md"),
+                Path("specifications/systems/notifications.md"),
+                Path("specifications/systems/persistence-and-replay.md"),
+                Path("specifications/systems/privacy-and-data-classification.md"),
+                Path("specifications/systems/private-life-runtime.md"),
+                Path("specifications/systems/scheduling-and-capacity.md"),
+                Path("specifications/systems/source-atlas.md"),
+                Path("specifications/systems/sync-and-continuity.md"),
+                Path("standards/accessibility.md"),
+                Path("standards/copy-and-state-language.md"),
+                Path("standards/native-ios-engineering.md"),
+                Path("standards/performance-and-energy.md"),
+                Path("standards/security-and-privacy.md"),
+                Path("standards/swiftui-and-design-system.md"),
+                Path("standards/testing-and-fixtures.md"),
+                Path("standards/validation-and-release.md"),
+            ),
+        )
         self.assertEqual(
             manifest.generated_files,
             tuple(Path(path) for path in GENERATED_FILES),
         )
+
+        systems_root = REPO_ROOT / "docs/canon/specifications/systems"
+        with self.subTest(task18_finding="I1-reviewed-egress-boundary"):
+            privacy = (systems_root / "privacy-and-data-classification.md").read_text(
+                encoding="utf-8"
+            )
+            egress = privacy.split("## SYSTEM-PRIVACY-EGRESS-001", 1)[1].split(
+                "## Completeness contract", 1
+            )[0]
+            self.assertNotIn("every network/external boundary", egress)
+            for hard_banned_destination in (
+                "Ambitions backend",
+                "Account service",
+                "R2",
+                "Source Atlas",
+                "hosted AI/cloud model",
+                "server profiler",
+            ):
+                self.assertIn(hard_banned_destination, egress)
+            self.assertIn("user-controlled reviewed export", egress)
+            self.assertIn("minimum fields", egress)
+            self.assertIn("destination preview", egress)
+            self.assertIn("Receipt/History", egress)
+            self.assertIn("durable outbox/result", egress)
+
+        with self.subTest(task18_finding="I2-widget-owner"):
+            apple = (systems_root / "apple-ecosystem.md").read_text(encoding="utf-8")
+            self.assertIn("Native/AmbitionsWidgetExtension/", apple)
+            self.assertNotIn("Native/AmbitionsWidget/", apple)
+
+        with self.subTest(task18_finding="I3-external-writes-owner"):
+            runtime = (systems_root / "private-life-runtime.md").read_text(
+                encoding="utf-8"
+            )
+            front_matter = runtime.split("+++", 2)[1]
+            source_ownership = runtime.split(
+                "<!-- canon-section: source-ownership -->", 1
+            )[1].split("<!-- canon-section: tests-proof -->", 1)[0]
+            self.assertIn(
+                '"Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/"',
+                front_matter,
+            )
+            self.assertIn("`ExternalWrites/`", source_ownership)
 
     def test_all_schema_documents_are_valid_closed_json_objects(self):
         schema_root = Path("docs/canon/schemas")

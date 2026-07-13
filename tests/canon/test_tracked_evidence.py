@@ -17,6 +17,7 @@ from tools.ambitions_canon import cli as canon_cli
 from tools.ambitions_canon.build import build_canon
 from tools.ambitions_canon.cli import _audit, _pack
 from tools.ambitions_canon.conflicts import (
+    _removal_state_sha256,
     load_conflict_dockets,
     render_conflict_baseline,
     report_conflicts,
@@ -85,6 +86,38 @@ def rebind_decision_snapshot_sha(root: Path, value: object) -> None:
 
 
 class TrackedEvidenceTests(unittest.TestCase):
+    def test_materialized_specification_target_reference_must_match_tracked_claim(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            shutil.copytree(ROOT / "docs/canon", root / "docs/canon")
+            index_path = root / "docs/canon/migration/impact-reference-index.json"
+            index = json.loads(index_path.read_text(encoding="utf-8"))
+            dispositions = root / "docs/canon/migration/claim-dispositions.json"
+            index["authority_references"] = [
+                {
+                    "schema_version": 1,
+                    "reference_id": "MIGRATION-TARGET-CLAIM-STB-0185",
+                    "authority_class": "source_and_tests",
+                    "reference_kind": "source",
+                    "source": (
+                        "docs/canon/migration/claim-dispositions.json"
+                        "#CLAIM-STB-0185"
+                    ),
+                    "revision": hashlib.sha256(dispositions.read_bytes()).hexdigest(),
+                    "requirement_ids": ["APP-PERMISSIONS-CONTRACT-001"],
+                    "approval_state": "approved",
+                    "implementation_status": "materialized shadow specification target",
+                }
+            ]
+            write_json(index_path, index)
+            output = io.StringIO()
+
+            with redirect_stdout(output):
+                result = _audit(root)
+
+            self.assertEqual(result, 1)
+            self.assertIn("CANON_MATERIALIZED_TARGET_MISMATCH", output.getvalue())
+
     def test_valid_tracked_evidence_passes_without_codex_or_network_inputs(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
@@ -107,7 +140,7 @@ class TrackedEvidenceTests(unittest.TestCase):
                 ),
             )
 
-    def test_valid_clean_archive_entrypoints_pass_tracked_validation(self):
+    def test_clean_archive_builds_structurally_but_semantic_audit_fails_closed(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             shutil.copytree(ROOT / "docs/canon", root / "docs/canon")
@@ -134,10 +167,29 @@ class TrackedEvidenceTests(unittest.TestCase):
                 check=True,
             )
 
-            self.assertEqual(_audit(root), 0)
+            audit_output = io.StringIO()
+            with redirect_stdout(audit_output):
+                self.assertEqual(_audit(root), 0)
+            self.assertIn("GREEN ambitions canon audit", audit_output.getvalue())
             self.assertEqual(build_canon(root, check=True), ())
+            self.assertEqual(canon_cli._build(root, check=True), 0)
             self.assertEqual(report_conflicts(root, require_resolved=False)[0], 0)
-            self.assertEqual(_pack(root, issue_path, check=False), 0)
+            pack_output = io.StringIO()
+            with redirect_stdout(pack_output):
+                self.assertEqual(_pack(root, issue_path, check=False), 0)
+            self.assertIn("SHADOW task pack cannot authorize implementation", pack_output.getvalue())
+
+            semantic_output = io.StringIO()
+            with mock.patch.object(Path, "cwd", return_value=root):
+                with redirect_stdout(semantic_output):
+                    self.assertEqual(
+                        canon_cli.main(["migration", "claims", "semantic-verify"]),
+                        1,
+                    )
+            self.assertIn(
+                "CANON_PROTECTED_SOURCE_MISSING",
+                semantic_output.getvalue(),
+            )
 
     def test_decision_snapshot_sha_changes_fingerprint_and_every_removal_hash(self):
         disposition_path = ROOT / EVIDENCE_PATHS[1]
@@ -159,11 +211,14 @@ class TrackedEvidenceTests(unittest.TestCase):
         )
         self.assertNotEqual(original_fingerprint, changed_fingerprint)
 
-        dockets = load_conflict_dockets(ROOT)
-        original_baseline = json.loads(
-            render_conflict_baseline(dockets, original_bytes)
-        )
-        changed_baseline = json.loads(render_conflict_baseline(dockets, changed_bytes))
+        original_baseline = json.loads((ROOT / EVIDENCE_PATHS[2]).read_bytes())
+        changed_baseline = json.loads((ROOT / EVIDENCE_PATHS[2]).read_bytes())
+        changed_baseline["decision_evidence_fingerprint_sha256"] = changed_fingerprint
+        for item in changed_baseline["dockets"]:
+            item["removal_state_sha256"] = _removal_state_sha256(
+                item,
+                changed_fingerprint,
+            )
         self.assertEqual(len(original_baseline["dockets"]), 20)
         self.assertEqual(len(changed_baseline["dockets"]), 20)
         self.assertNotEqual(
