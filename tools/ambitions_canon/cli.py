@@ -38,7 +38,10 @@ from tools.ambitions_canon.conflicts import (
 from tools.ambitions_canon.impact import write_amendment_scaffold
 from tools.ambitions_canon.external_authority import (
     external_reference_findings,
+    load_external_reference_snapshot,
     load_external_references,
+    validate_external_reference_snapshot,
+    validate_linear_reconciliation,
 )
 from tools.ambitions_canon.manifest import load_documents, load_manifest
 from tools.ambitions_canon.migration import (
@@ -52,6 +55,7 @@ from tools.ambitions_canon.migration import (
     verify_catalog,
 )
 from tools.ambitions_canon.model import (
+    AuthorityReferenceKind,
     CanonDocument,
     CanonError,
     CanonRegistry,
@@ -155,6 +159,22 @@ def main(argv: Sequence[str] | None = None) -> int:
         action="store_true",
         required=True,
         help="validate stable references and report posture gaps without upgrading them",
+    )
+    external_authority_parser = subparsers.add_parser(
+        "external-authority",
+        help="validate one tracked external-authority family offline",
+    )
+    external_authority_parser.add_argument(
+        "--kind",
+        required=True,
+        choices=("linear", "figma"),
+        help="external-authority family to validate",
+    )
+    external_authority_parser.add_argument(
+        "--check",
+        action="store_true",
+        required=True,
+        help="validate tracked references without writing or using the network",
     )
     coverage_parser = subparsers.add_parser(
         "coverage", help="check specification completeness profiles"
@@ -306,6 +326,9 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     if arguments.command == "traceability":
         return _traceability(Path.cwd())
+
+    if arguments.command == "external-authority":
+        return _external_authority(Path.cwd(), kind=arguments.kind)
 
     if arguments.command == "coverage":
         return _coverage(
@@ -640,6 +663,53 @@ def _traceability(root: Path) -> int:
         "GREEN ambitions canon traceability "
         f"requirements={len(report.records)} references={len(references)} "
         f"posture_gaps={len(report.findings)} authority_state={manifest.authority_state.value}"
+    )
+    return 0
+
+
+def _external_authority(root: Path, *, kind: str) -> int:
+    try:
+        manifest = load_manifest(root)
+        documents = load_documents(root, manifest)
+        registry = build_registry(manifest, documents)
+        reference_snapshot = load_external_reference_snapshot(root)
+        reference_kind = AuthorityReferenceKind(kind)
+        references = tuple(
+            item
+            for item in reference_snapshot.references
+            if item.reference_kind is reference_kind
+        )
+        validate_external_reference_snapshot(root, reference_snapshot)
+        invalid = external_reference_findings(registry, references, root)
+        reconciliation = (
+            validate_linear_reconciliation(root, registry, references)
+            if reference_kind is AuthorityReferenceKind.LINEAR
+            else None
+        )
+        validate_external_reference_snapshot(root, reference_snapshot)
+    except CanonError as error:
+        location = error.path.as_posix() if error.path is not None else "<references>"
+        print(f"P0_BLOCKER {error.code} {location}:{error.line or 0} {error.message}")
+        return 1
+
+    if invalid:
+        for finding in invalid:
+            location = (
+                finding.path.as_posix()
+                if finding.path is not None
+                else "<references>"
+            )
+            print(
+                f"{finding.severity.value} {finding.code} "
+                f"{location}:{finding.line or 0} {finding.message}"
+            )
+        return 1
+    print(
+        "GREEN ambitions canon external-authority "
+        f"kind={kind} references={len(references)} "
+        "reconciliation_entities="
+        f"{reconciliation.entity_count if reconciliation is not None else 0} "
+        f"authority_state={manifest.authority_state.value}"
     )
     return 0
 

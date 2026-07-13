@@ -11,8 +11,19 @@
 - Figma references: `9`
 - Proof references: `8`
 - Invalid external findings: `0`
+- Linear reconciliation SHA: `b7a81dea9496fe532dc513995b65e46ce26ec59166e8e7a564cee63daad85847`
+- Reconciliation entities: `285`
+- Reconciliation disposition: `initiative_applied_verified_broader_withheld`
+- External mutations applied: `true`
+- Owner gate required: `true`
+- Reconciliation action `delete_after_extraction`: `3`
+- Reconciliation action `owner_review`: `2`
+- Reconciliation action `retain_provenance_only`: `178`
+- Reconciliation action `rewrite_to_requirement_references`: `102`
+- Reconciliation status `applied_verified`: `1`
+- Reconciliation status `proposed_not_applied`: `284`
 
-This stable-link inventory is non-normative shadow input and does not prove implementation or readiness.
+This stable-link inventory does not prove implementation or readiness; the reconciliation record is also non-normative shadow input.
 
 | Reference | Kind | Role | Approval | Requirements |
 | --- | --- | --- | --- | --- |

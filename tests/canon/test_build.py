@@ -147,6 +147,98 @@ class BuildTests(unittest.TestCase):
         self.assertNotIn("**Representation status:** Unrepresented", rendered)
         self.assertIn("- Open dockets: `0`", rendered)
 
+    def test_build_canon_binds_linear_reconciliation_into_external_impact(self):
+        self.assertEqual(build_canon(ROOT, check=True), ())
+
+        rendered = ROOT.joinpath(
+            "docs/canon/generated/external-reference-impact.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn("- Reconciliation entities: `285`", rendered)
+        self.assertIn(
+            "- Reconciliation disposition: `initiative_applied_verified_broader_withheld`",
+            rendered,
+        )
+        self.assertIn("- External mutations applied: `true`", rendered)
+        self.assertIn("- Owner gate required: `true`", rendered)
+        self.assertIn("- Reconciliation status `applied_verified`: `1`", rendered)
+        self.assertIn("- Reconciliation status `proposed_not_applied`: `284`", rendered)
+        self.assertRegex(rendered, r"- Linear reconciliation SHA: `[0-9a-f]{64}`")
+
+    def test_live_linear_reconciliation_records_exact_initiative_only_receipt(self):
+        data = json.loads(
+            ROOT.joinpath(
+                "docs/canon/migration/linear-reconciliation.json"
+            ).read_text(encoding="utf-8")
+        )
+        self.assertEqual(
+            data["disposition_state"],
+            "initiative_applied_verified_broader_withheld",
+        )
+        self.assertIs(data["external_mutations_applied"], True)
+        applied = [
+            entity
+            for entity in data["entities"]
+            if entity["action_status"] == "applied_verified"
+        ]
+        self.assertEqual(
+            [entity["entity_id"] for entity in applied],
+            ["1df52f0d-da30-4bcc-8f21-5761596cac19"],
+        )
+        self.assertEqual(applied[0]["entity_type"], "initiative")
+        project = next(
+            entity
+            for entity in data["entities"]
+            if entity["entity_id"] == "0affb0e0-87cf-4417-b0c2-fbf7490c9975"
+        )
+        self.assertEqual(project["action_status"], "proposed_not_applied")
+        receipt = data["initiative_execution"]
+        self.assertEqual(
+            receipt,
+            {
+                "approved_option": "initiative-only",
+                "approval_authority": "controller_on_owner_behalf_under_tasks_22_29_delegation",
+                "approval_review": "INITIATIVE_GATE_CLEAN",
+                "broader_actions": "withheld_not_authorized",
+                "destructive_actions": "withheld_gate_c",
+                "entity_id": "1df52f0d-da30-4bcc-8f21-5761596cac19",
+                "status": "applied_verified",
+                "validation": "dedicated_full_read_exact",
+                "before_bytes": 428,
+                "before_raw_sha256": "234f459c9fb0f0f0f58aae2382753a9bbc6ebc672f87b64f89bda303f9884a90",
+                "before_canonical_sha256": "d76d80d58de54c1f2224c6b41903498873f0b448dbb1ae347b24b366e624cd09",
+                "before_updated_at": "2026-07-13T18:09:43.544Z",
+                "after_bytes": 2431,
+                "after_raw_sha256": "4e1a19a1919e7aa4957dddd45f6e25654bd04791cf221542af5f8877f7e2a133",
+                "after_canonical_sha256": "3a7b802cc30a75075621785e00d61da18c587eba5a98dcc4aaf1900754279a46",
+                "after_updated_at": "2026-07-13T18:27:59.441Z",
+                "after_terminal_lf": False,
+            },
+        )
+        self.assertEqual(receipt["entity_id"], applied[0]["entity_id"])
+        self.assertEqual(receipt["status"], applied[0]["action_status"])
+        self.assertEqual(
+            receipt["after_canonical_sha256"], applied[0]["content_sha256"]
+        )
+        self.assertEqual(
+            receipt["after_updated_at"], applied[0]["live_metadata"]["updated_at"]
+        )
+        batches = {batch["batch_id"]: batch for batch in data["batches"]}
+        self.assertEqual(
+            batches["pilot-owner-gate"]["status"], "withheld_not_authorized"
+        )
+        self.assertEqual(
+            batches["initiative-only-owner-gate"]["status"], "applied_verified"
+        )
+        for batch_id, batch in batches.items():
+            if batch_id in {"pilot-owner-gate", "initiative-only-owner-gate"}:
+                continue
+            self.assertEqual(
+                batch["status"],
+                "withheld_gate_c"
+                if batch["action"] in {"delete_after_extraction", "archive_after_extraction"}
+                else "withheld_not_authorized",
+            )
+
     def write_canon(self, documents: dict[str, str] | None = None) -> None:
         documents = documents or {}
         (self.canon_root / "MANIFEST.toml").write_text(

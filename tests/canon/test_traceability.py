@@ -343,6 +343,628 @@ implementation_status = "fixture; not implementation proof"
             encoding="utf-8",
         )
 
+    def write_linear_external_authority_fixture(
+        self,
+        *,
+        reconciliation_requirement: str = "TODAY-001",
+        reconciliation_revision: str = "fixture-v1",
+        external_mutations_applied: bool = False,
+    ) -> None:
+        self.write_build_fixture()
+        references = self.root / "docs/canon/references"
+        (references / "linear.toml").write_text(
+            '''schema_version = 1
+kind = "linear"
+
+[[references]]
+reference_id = "LINEAR:fixture-document"
+source = "linear:fixture-document"
+revision = "fixture-v1"
+requirement_ids = ["TODAY-001"]
+approval_state = "approved"
+approved_by = "Fixture owner"
+implementation_status = "migration corpus; not implementation proof"
+''',
+            encoding="utf-8",
+        )
+        reconciliation = {
+            "schema_version": 1,
+            "canon_revision": 0,
+            "authority_state": "shadow",
+            "disposition_state": "proposed_not_applied_owner_gate",
+            "external_mutations_applied": external_mutations_applied,
+            "generated_from": {
+                "inventory_date": "2026-07-13",
+                "method": "live_linear_oauth_reads",
+            },
+            "content_checksum_contract": {
+                "algorithm": "sha256",
+                "encoding": "utf-8",
+                "json_ensure_ascii": False,
+                "json_key_order": ["title", "content", "summary"],
+                "json_separators": [",", ":"],
+                "null_or_absent_text": "",
+                "terminal_newline": False,
+                "extractors": {
+                    "comment": ["derived_parent_title", "body", ""],
+                    "document": ["title", "content", ""],
+                    "initiative": ["name", "description", "summary"],
+                    "issue": ["title", "description", ""],
+                    "milestone": ["name", "description", ""],
+                    "project": ["name", "description", "summary"],
+                    "status_update": ["derived_parent_title", "body", ""],
+                },
+                "offline_validation": "format_and_internal_bindings_only",
+                "write_time_guard": "fresh_connector_read_and_exact_recomputation_required",
+            },
+            "inventory_scope": {
+                "pilot_named_entity": "fixture-document",
+                "pilot_live_entity_type": "document",
+                "pilot_plan_label_type": "document",
+                "linked_pilot_projects": [],
+                "active_related_initiatives": [],
+                "issue_filter": "fixture",
+                "raw_exports_tracked": False,
+                "limitations": ["fixture inventory"],
+            },
+            "allowed_actions": [
+                "keep_execution_reference",
+                "rewrite_to_requirement_references",
+                "delete_after_extraction",
+                "retain_provenance_only",
+                "owner_review",
+                "archive_after_extraction",
+            ],
+            "action_rules": {
+                "all_external_actions": "owner approval and fresh hash verification required",
+                "archive_after_extraction": "temporary Yellow only when deletion is unavailable; manual deletion remains required",
+                "destructive_actions": "deferred to Gate C and not authorized by this manifest",
+            },
+            "pilot_decision_required": {
+                "mismatch": "fixture type check",
+                "options": [
+                    {"option_id": "fixture", "entity_ids": ["fixture-document"]}
+                ],
+                "recommended_option": "fixture",
+                "rationale": "fixture owner review",
+            },
+            "inventory_counts": {"document": 1},
+            "batches": [
+                {
+                    "batch_id": "fixture-owner-gate",
+                    "action": "owner_review",
+                    "entity_ids": ["fixture-document"],
+                    "status": "not_applied",
+                }
+            ],
+            "entities": [
+                {
+                    "entity_id": "fixture-document",
+                    "entity_type": "document",
+                    "title": "Fixture Linear document",
+                    "parent_id": None,
+                    "claimed_authority": "fixture_migration_provenance",
+                    "represented_requirement_ids": [reconciliation_requirement],
+                    "unique_accepted_content_summary": "redacted_fixture_summary",
+                    "current_execution_value": "migration_provenance",
+                    "recommended_action": "retain_provenance_only",
+                    "action_status": "proposed_not_applied",
+                    "replacement_ids": [],
+                    "owner_approval_required": True,
+                    "live_metadata": {
+                        "created_at": "fixture-created",
+                        "updated_at": reconciliation_revision,
+                        "status": "active",
+                    },
+                    "content_sha256": "0" * 64,
+                }
+            ],
+        }
+        migration = self.root / "docs/canon/migration"
+        migration.mkdir(exist_ok=True)
+        (migration / "linear-reconciliation.json").write_text(
+            json.dumps(reconciliation, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+
+    def run_cli(self, arguments: list[str]) -> tuple[int, str]:
+        previous = Path.cwd()
+        output = StringIO()
+        try:
+            import os
+
+            os.chdir(self.root)
+            with redirect_stdout(output):
+                code = main(arguments)
+        finally:
+            os.chdir(previous)
+        return code, output.getvalue()
+
+    def write_applied_pilot_fixture(self) -> None:
+        self.write_linear_external_authority_fixture()
+        path = self.root / "docs/canon/migration/linear-reconciliation.json"
+        data = json.loads(path.read_text(encoding="utf-8"))
+        document = data["entities"][0]
+        project = json.loads(json.dumps(document))
+        project.update(
+            {
+                "entity_id": "fixture-project",
+                "entity_type": "project",
+                "title": "Fixture project",
+                "parent_id": None,
+                "claimed_authority": "fixture_execution_container",
+                "content_sha256": "1" * 64,
+            }
+        )
+        comment = json.loads(json.dumps(document))
+        comment.update(
+            {
+                "entity_id": "fixture-comment",
+                "entity_type": "comment",
+                "title": "Fixture comment",
+                "parent_id": "fixture-document",
+                "claimed_authority": "fixture_provenance",
+                "content_sha256": "2" * 64,
+            }
+        )
+        for entity in (document, project):
+            entity["recommended_action"] = "rewrite_to_requirement_references"
+            entity["action_status"] = "applied_verified"
+        data["entities"] = [comment, document, project]
+        data["inventory_counts"] = {"comment": 1, "document": 1, "project": 1}
+        data["disposition_state"] = "pilot_applied_verified_broader_withheld"
+        data["external_mutations_applied"] = True
+        data["pilot_decision_required"]["options"] = [
+            {
+                "option_id": "bounded-pair",
+                "entity_ids": ["fixture-document", "fixture-project"],
+            }
+        ]
+        data["pilot_decision_required"]["recommended_option"] = "bounded-pair"
+        data["batches"] = [
+            {
+                "batch_id": "fixture-owner-gate",
+                "action": "rewrite_to_requirement_references",
+                "entity_ids": ["fixture-document", "fixture-project"],
+                "status": "applied_verified",
+            },
+            {
+                "batch_id": "fixture-broader-withheld",
+                "action": "retain_provenance_only",
+                "entity_ids": ["fixture-comment"],
+                "status": "withheld_not_authorized",
+            },
+        ]
+        data["pilot_execution"] = {
+            "approved_option": "bounded-pair",
+            "approval_scope": "exact_reviewed_bytes_only",
+            "broader_actions": "withheld_not_authorized",
+            "destructive_actions": "withheld_gate_c",
+            "entity_ids": ["fixture-document", "fixture-project"],
+            "status": "applied_verified",
+        }
+        path.write_text(json.dumps(data, sort_keys=True) + "\n", encoding="utf-8")
+
+    def write_applied_initiative_fixture(self) -> None:
+        self.write_linear_external_authority_fixture()
+        path = self.root / "docs/canon/migration/linear-reconciliation.json"
+        data = json.loads(path.read_text(encoding="utf-8"))
+        initiative = data["entities"][0]
+        initiative.update(
+            {
+                "entity_id": "fixture-document",
+                "entity_type": "initiative",
+                "title": "Fixture initiative",
+                "recommended_action": "rewrite_to_requirement_references",
+                "action_status": "applied_verified",
+                "content_sha256": "3" * 64,
+            }
+        )
+        project = json.loads(json.dumps(initiative))
+        project.update(
+            {
+                "entity_id": "fixture-project",
+                "entity_type": "project",
+                "title": "Fixture project",
+                "parent_id": "fixture-document",
+                "action_status": "proposed_not_applied",
+                "content_sha256": "4" * 64,
+            }
+        )
+        comment = json.loads(json.dumps(initiative))
+        comment.update(
+            {
+                "entity_id": "fixture-comment",
+                "entity_type": "comment",
+                "title": "Fixture comment",
+                "parent_id": "fixture-document",
+                "recommended_action": "retain_provenance_only",
+                "action_status": "proposed_not_applied",
+                "content_sha256": "5" * 64,
+            }
+        )
+        data["entities"] = [comment, initiative, project]
+        data["inventory_counts"] = {"comment": 1, "initiative": 1, "project": 1}
+        data["disposition_state"] = "initiative_applied_verified_broader_withheld"
+        data["external_mutations_applied"] = True
+        data["pilot_decision_required"]["options"] = [
+            {
+                "option_id": "bounded-pair",
+                "entity_ids": ["fixture-document", "fixture-project"],
+            },
+            {
+                "option_id": "initiative-only",
+                "entity_ids": ["fixture-document"],
+            },
+        ]
+        data["pilot_decision_required"]["recommended_option"] = "bounded-pair"
+        data["batches"] = [
+            {
+                "batch_id": "fixture-bounded-pair-owner-gate",
+                "action": "owner_review",
+                "entity_ids": ["fixture-document", "fixture-project"],
+                "status": "withheld_not_authorized",
+            },
+            {
+                "batch_id": "fixture-initiative-owner-gate",
+                "action": "rewrite_to_requirement_references",
+                "entity_ids": ["fixture-document"],
+                "status": "applied_verified",
+            },
+            {
+                "batch_id": "fixture-broader-withheld",
+                "action": "retain_provenance_only",
+                "entity_ids": ["fixture-comment"],
+                "status": "withheld_not_authorized",
+            },
+        ]
+        data["initiative_execution"] = {
+            "approved_option": "initiative-only",
+            "approval_authority": "controller_on_owner_behalf_under_tasks_22_29_delegation",
+            "approval_review": "INITIATIVE_GATE_CLEAN",
+            "broader_actions": "withheld_not_authorized",
+            "destructive_actions": "withheld_gate_c",
+            "entity_id": "fixture-document",
+            "status": "applied_verified",
+            "validation": "dedicated_full_read_exact",
+            "before_bytes": 428,
+            "before_raw_sha256": "6" * 64,
+            "before_canonical_sha256": "7" * 64,
+            "before_updated_at": "fixture-before",
+            "after_bytes": 2431,
+            "after_raw_sha256": "8" * 64,
+            "after_canonical_sha256": "3" * 64,
+            "after_updated_at": "fixture-v1",
+            "after_terminal_lf": False,
+        }
+        path.write_text(json.dumps(data, sort_keys=True) + "\n", encoding="utf-8")
+
+    def test_external_authority_linear_check_is_offline_deterministic_and_green(self):
+        self.write_linear_external_authority_fixture()
+
+        first = self.run_cli(["external-authority", "--kind", "linear", "--check"])
+        second = self.run_cli(["external-authority", "--kind", "linear", "--check"])
+
+        self.assertEqual(first, second)
+        self.assertEqual(first[0], 0)
+        self.assertEqual(
+            first[1],
+            "GREEN ambitions canon external-authority kind=linear references=1 "
+            "reconciliation_entities=1 authority_state=shadow\n",
+        )
+
+    def test_external_authority_allows_absent_update_metadata_for_unreferenced_entity(self):
+        self.write_linear_external_authority_fixture()
+        path = self.root / "docs/canon/migration/linear-reconciliation.json"
+        reconciliation = json.loads(path.read_text(encoding="utf-8"))
+        milestone = dict(reconciliation["entities"][0])
+        milestone.update(
+            {
+                "entity_id": "fixture-milestone",
+                "entity_type": "milestone",
+                "title": "Fixture milestone",
+                "live_metadata": {
+                    "created_at": "fixture-created",
+                    "updated_at": None,
+                    "status": "progress:0%",
+                },
+            }
+        )
+        reconciliation["entities"].append(milestone)
+        reconciliation["inventory_counts"] = {"document": 1, "milestone": 1}
+        path.write_text(
+            json.dumps(reconciliation, sort_keys=True) + "\n", encoding="utf-8"
+        )
+
+        code, output = self.run_cli(
+            ["external-authority", "--kind", "linear", "--check"]
+        )
+
+        self.assertEqual(code, 0)
+        self.assertIn("reconciliation_entities=2", output)
+
+    def test_external_authority_figma_kind_uses_shared_offline_check_contract(self):
+        self.write_build_fixture()
+
+        code, output = self.run_cli(
+            ["external-authority", "--kind", "figma", "--check"]
+        )
+
+        self.assertEqual(code, 0)
+        self.assertEqual(
+            output,
+            "GREEN ambitions canon external-authority kind=figma references=1 "
+            "reconciliation_entities=0 authority_state=shadow\n",
+        )
+
+    def test_external_authority_linear_check_rejects_invalid_reconciliation_state(self):
+        self.write_linear_external_authority_fixture(external_mutations_applied=True)
+
+        code, output = self.run_cli(
+            ["external-authority", "--kind", "linear", "--check"]
+        )
+
+        self.assertEqual(code, 1)
+        self.assertIn("CANON_LINEAR_RECONCILIATION_STATE", output)
+
+    def test_external_authority_linear_check_rejects_stale_reference_revision(self):
+        self.write_linear_external_authority_fixture(
+            reconciliation_revision="fixture-v2"
+        )
+
+        code, output = self.run_cli(
+            ["external-authority", "--kind", "linear", "--check"]
+        )
+
+        self.assertEqual(code, 1)
+        self.assertIn("CANON_LINEAR_RECONCILIATION_STALE", output)
+
+    def test_external_authority_linear_check_rejects_unknown_requirement(self):
+        self.write_linear_external_authority_fixture(
+            reconciliation_requirement="UNKNOWN-001"
+        )
+
+        code, output = self.run_cli(
+            ["external-authority", "--kind", "linear", "--check"]
+        )
+
+        self.assertEqual(code, 1)
+        self.assertIn("CANON_LINEAR_RECONCILIATION_REQUIREMENT_UNKNOWN", output)
+
+    def test_external_authority_linear_schema_is_closed_at_every_layer(self):
+        mutations = {
+            "root extra": lambda data: data.__setitem__("raw_export", "forbidden"),
+            "root missing": lambda data: data.pop("generated_from"),
+            "batch extra": lambda data: data["batches"][0].__setitem__(
+                "approval", "implicit"
+            ),
+            "batch missing": lambda data: data["batches"][0].pop("status"),
+            "entity extra": lambda data: data["entities"][0].__setitem__(
+                "content", "raw content"
+            ),
+            "entity missing": lambda data: data["entities"][0].pop(
+                "claimed_authority"
+            ),
+            "metadata extra": lambda data: data["entities"][0][
+                "live_metadata"
+            ].__setitem__("priority", "High"),
+            "metadata missing": lambda data: data["entities"][0][
+                "live_metadata"
+            ].pop("created_at"),
+            "checksum extra": lambda data: data["content_checksum_contract"].__setitem__(
+                "serializer", "ambiguous"
+            ),
+        }
+        self.write_linear_external_authority_fixture()
+        path = self.root / "docs/canon/migration/linear-reconciliation.json"
+        baseline = json.loads(path.read_text(encoding="utf-8"))
+        for label, mutate in mutations.items():
+            with self.subTest(label=label):
+                data = json.loads(json.dumps(baseline))
+                mutate(data)
+                path.write_text(json.dumps(data, sort_keys=True) + "\n", encoding="utf-8")
+
+                code, output = self.run_cli(
+                    ["external-authority", "--kind", "linear", "--check"]
+                )
+
+                self.assertEqual(code, 1)
+                self.assertIn("CANON_LINEAR_RECONCILIATION_STATE", output)
+
+    def test_external_authority_linear_rejects_invalid_enums_duplicates_and_counts(self):
+        mutations = {
+            "entity type": lambda data: data["entities"][0].__setitem__(
+                "entity_type", "workspace"
+            ),
+            "action": lambda data: data["entities"][0].__setitem__(
+                "recommended_action", "publish"
+            ),
+            "duplicate entity": lambda data: data["entities"].append(
+                dict(data["entities"][0])
+            ),
+            "count drift": lambda data: data.__setitem__(
+                "inventory_counts", {"document": 2}
+            ),
+            "approval": lambda data: data["entities"][0].__setitem__(
+                "owner_approval_required", False
+            ),
+        }
+        self.write_linear_external_authority_fixture()
+        path = self.root / "docs/canon/migration/linear-reconciliation.json"
+        baseline = json.loads(path.read_text(encoding="utf-8"))
+        for label, mutate in mutations.items():
+            with self.subTest(label=label):
+                data = json.loads(json.dumps(baseline))
+                mutate(data)
+                path.write_text(json.dumps(data, sort_keys=True) + "\n", encoding="utf-8")
+
+                code, output = self.run_cli(
+                    ["external-authority", "--kind", "linear", "--check"]
+                )
+
+                self.assertEqual(code, 1)
+                self.assertIn("CANON_LINEAR_RECONCILIATION_STATE", output)
+
+    def test_external_authority_linear_rejects_destructive_action_before_gate_c(self):
+        self.write_linear_external_authority_fixture()
+        path = self.root / "docs/canon/migration/linear-reconciliation.json"
+        data = json.loads(path.read_text(encoding="utf-8"))
+        data["entities"][0]["recommended_action"] = "delete_after_extraction"
+        data["entities"][0]["replacement_ids"] = ["replacement"]
+        data["batches"][0]["action"] = "delete_after_extraction"
+        path.write_text(json.dumps(data, sort_keys=True) + "\n", encoding="utf-8")
+
+        code, output = self.run_cli(
+            ["external-authority", "--kind", "linear", "--check"]
+        )
+
+        self.assertEqual(code, 1)
+        self.assertIn("CANON_LINEAR_RECONCILIATION_STATE", output)
+
+    def test_external_authority_linear_accepts_exact_two_applied_pilot_records(self):
+        self.write_applied_pilot_fixture()
+
+        code, output = self.run_cli(
+            ["external-authority", "--kind", "linear", "--check"]
+        )
+
+        self.assertEqual(code, 0)
+        self.assertIn("reconciliation_entities=3", output)
+
+    def test_external_authority_linear_accepts_exact_one_applied_initiative_record(self):
+        self.write_applied_initiative_fixture()
+
+        code, output = self.run_cli(
+            ["external-authority", "--kind", "linear", "--check"]
+        )
+
+        self.assertEqual(code, 0)
+        self.assertIn("reconciliation_entities=3", output)
+
+    def test_external_authority_linear_rejects_initiative_receipt_after_hash_mismatch(self):
+        self.write_applied_initiative_fixture()
+        path = self.root / "docs/canon/migration/linear-reconciliation.json"
+        data = json.loads(path.read_text(encoding="utf-8"))
+        data["initiative_execution"]["after_canonical_sha256"] = "9" * 64
+        path.write_text(json.dumps(data, sort_keys=True) + "\n", encoding="utf-8")
+
+        code, output = self.run_cli(
+            ["external-authority", "--kind", "linear", "--check"]
+        )
+
+        self.assertEqual(code, 1)
+        self.assertIn("CANON_LINEAR_RECONCILIATION_STATE", output)
+
+    def test_external_authority_linear_rejects_initiative_receipt_after_revision_mismatch(self):
+        self.write_applied_initiative_fixture()
+        path = self.root / "docs/canon/migration/linear-reconciliation.json"
+        data = json.loads(path.read_text(encoding="utf-8"))
+        data["initiative_execution"]["after_updated_at"] = "fixture-after"
+        path.write_text(json.dumps(data, sort_keys=True) + "\n", encoding="utf-8")
+
+        code, output = self.run_cli(
+            ["external-authority", "--kind", "linear", "--check"]
+        )
+
+        self.assertEqual(code, 1)
+        self.assertIn("CANON_LINEAR_RECONCILIATION_STATE", output)
+
+    def test_external_authority_linear_rejects_non_initiative_execution_entity(self):
+        self.write_applied_initiative_fixture()
+        path = self.root / "docs/canon/migration/linear-reconciliation.json"
+        data = json.loads(path.read_text(encoding="utf-8"))
+        data["entities"][1]["entity_type"] = "document"
+        data["inventory_counts"] = {"comment": 1, "document": 1, "project": 1}
+        path.write_text(json.dumps(data, sort_keys=True) + "\n", encoding="utf-8")
+
+        code, output = self.run_cli(
+            ["external-authority", "--kind", "linear", "--check"]
+        )
+
+        self.assertEqual(code, 1)
+        self.assertIn("CANON_LINEAR_RECONCILIATION_STATE", output)
+
+    def test_external_authority_linear_initiative_only_state_fails_closed(self):
+        mutations = {
+            "initiative proposed": lambda data: data["entities"][1].__setitem__(
+                "action_status", "proposed_not_applied"
+            ),
+            "project applied": lambda data: data["entities"][2].__setitem__(
+                "action_status", "applied_verified"
+            ),
+            "bounded pair falsely complete": lambda data: data["batches"][0].__setitem__(
+                "status", "applied_verified"
+            ),
+            "initiative batch not applied": lambda data: data["batches"][1].__setitem__(
+                "status", "withheld_not_authorized"
+            ),
+            "execution points to project": lambda data: data[
+                "initiative_execution"
+            ].__setitem__("entity_id", "fixture-project"),
+            "wrong approval option": lambda data: data[
+                "initiative_execution"
+            ].__setitem__("approved_option", "bounded-pair"),
+            "missing delegated approval": lambda data: data[
+                "initiative_execution"
+            ].pop("approval_review"),
+            "terminal LF accepted": lambda data: data[
+                "initiative_execution"
+            ].__setitem__("after_terminal_lf", True),
+        }
+        self.write_applied_initiative_fixture()
+        path = self.root / "docs/canon/migration/linear-reconciliation.json"
+        baseline = json.loads(path.read_text(encoding="utf-8"))
+        for label, mutate in mutations.items():
+            with self.subTest(label=label):
+                data = json.loads(json.dumps(baseline))
+                mutate(data)
+                path.write_text(
+                    json.dumps(data, sort_keys=True) + "\n", encoding="utf-8"
+                )
+
+                code, output = self.run_cli(
+                    ["external-authority", "--kind", "linear", "--check"]
+                )
+
+                self.assertEqual(code, 1)
+                self.assertIn("CANON_LINEAR_RECONCILIATION_STATE", output)
+
+    def test_external_authority_linear_mixed_state_fails_closed(self):
+        mutations = {
+            "one applied": lambda data: data["entities"][1].__setitem__(
+                "action_status", "proposed_not_applied"
+            ),
+            "three applied": lambda data: data["entities"][0].__setitem__(
+                "action_status", "applied_verified"
+            ),
+            "mutation flag false": lambda data: data.__setitem__(
+                "external_mutations_applied", False
+            ),
+            "pilot batch not applied": lambda data: data["batches"][0].__setitem__(
+                "status", "not_applied"
+            ),
+            "broader batch applied": lambda data: data["batches"][1].__setitem__(
+                "status", "applied_verified"
+            ),
+        }
+        self.write_applied_pilot_fixture()
+        path = self.root / "docs/canon/migration/linear-reconciliation.json"
+        baseline = json.loads(path.read_text(encoding="utf-8"))
+        for label, mutate in mutations.items():
+            with self.subTest(label=label):
+                data = json.loads(json.dumps(baseline))
+                mutate(data)
+                path.write_text(
+                    json.dumps(data, sort_keys=True) + "\n", encoding="utf-8"
+                )
+
+                code, output = self.run_cli(
+                    ["external-authority", "--kind", "linear", "--check"]
+                )
+
+                self.assertEqual(code, 1)
+                self.assertIn("CANON_LINEAR_RECONCILIATION_STATE", output)
+
     def test_build_rejects_invalid_external_requirement_reference(self):
         self.write_build_fixture(figma_requirement="UNKNOWN-001")
 
@@ -376,6 +998,20 @@ implementation_status = "fixture; not implementation proof"
 
         self.assertGreaterEqual(external_validate.call_count, 2)
         self.assertGreaterEqual(inventory_validate.call_count, 2)
+
+    def test_build_revalidates_pinned_linear_reconciliation_snapshot(self):
+        from tools.ambitions_canon.external_authority import (
+            validate_linear_reconciliation_snapshot,
+        )
+
+        self.write_linear_external_authority_fixture()
+        with mock.patch(
+            "tools.ambitions_canon.external_authority.validate_linear_reconciliation_snapshot",
+            wraps=validate_linear_reconciliation_snapshot,
+        ) as linear_validate:
+            self.assertEqual(build_canon(self.root), ())
+
+        self.assertGreaterEqual(linear_validate.call_count, 2)
 
     def test_gap_families_remain_distinct(self):
         item = requirement("TODAY-001")

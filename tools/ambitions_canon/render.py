@@ -181,6 +181,7 @@ def _render_outputs(
     from tools.ambitions_canon.external_authority import (
         external_reference_findings,
         load_external_reference_snapshot,
+        load_linear_reconciliation_if_present,
         render_external_reference_impact,
         render_visual_authority_manifest,
     )
@@ -221,6 +222,11 @@ def _render_outputs(
         snapshot=traceability_snapshot,
     )
     traceability_outputs = render_traceability_maps(traceability, metadata)
+    linear_reconciliation = load_linear_reconciliation_if_present(
+        repository_root,
+        registry,
+        references,
+    )
     visual_manifest = {
         **metadata,
         **render_visual_authority_manifest(registry, references),
@@ -298,6 +304,11 @@ def _render_outputs(
             references,
             invalid_references,
             metadata,
+            linear_reconciliation=(
+                linear_reconciliation.summary()
+                if linear_reconciliation is not None
+                else None
+            ),
         ),
         Path("supersession-manifest.json"): _supersession_manifest(
             metadata, registry

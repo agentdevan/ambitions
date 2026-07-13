@@ -315,6 +315,21 @@ implementation_status = "fixture; not implementation proof"
             (linear, figma),
             (),
             {"traceability_input_sha": "a" * 64},
+            linear_reconciliation={
+                "action_counts": {
+                    "owner_review": 2,
+                    "retain_provenance_only": 3,
+                },
+                "disposition_state": "proposed_not_applied_owner_gate",
+                "entity_count": 5,
+                "external_mutations_applied": False,
+                "input_sha": "b" * 64,
+                "owner_gate_required": True,
+                "status_counts": {
+                    "applied_verified": 2,
+                    "proposed_not_applied": 3,
+                },
+            },
         ).decode("utf-8")
 
         self.assertIn("**Representation status:** Represented", rendered)
@@ -322,6 +337,14 @@ implementation_status = "fixture; not implementation proof"
         self.assertIn("- Invalid external findings: `0`", rendered)
         self.assertIn("`FIGMA:FILE:1:2`", rendered)
         self.assertIn("`LINEAR:DOC`", rendered)
+        self.assertIn(f"- Linear reconciliation SHA: `{'b' * 64}`", rendered)
+        self.assertIn("- Reconciliation entities: `5`", rendered)
+        self.assertIn("- Reconciliation action `owner_review`: `2`", rendered)
+        self.assertIn("- Reconciliation action `retain_provenance_only`: `3`", rendered)
+        self.assertIn("- External mutations applied: `false`", rendered)
+        self.assertIn("- Owner gate required: `true`", rendered)
+        self.assertIn("- Reconciliation status `applied_verified`: `2`", rendered)
+        self.assertIn("- Reconciliation status `proposed_not_applied`: `3`", rendered)
         self.assertIn("does not prove implementation or readiness", rendered)
         self.assertTrue(rendered.endswith("\n"))
 
