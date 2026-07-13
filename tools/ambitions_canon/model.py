@@ -2,9 +2,29 @@
 
 from __future__ import annotations
 
+import unicodedata
 from dataclasses import dataclass
 from enum import StrEnum
 from pathlib import Path
+
+
+def normalize_visible_attribution(value: object) -> str:
+    """Return NFKC, space-collapsed visible attribution or reject it."""
+
+    if not isinstance(value, str):
+        raise ValueError("attribution must be a string")
+    if any(unicodedata.category(character).startswith("C") for character in value):
+        raise ValueError("attribution contains a Unicode control category")
+    normalized = unicodedata.normalize("NFKC", value)
+    if any(
+        unicodedata.category(character).startswith("C")
+        for character in normalized
+    ):
+        raise ValueError("normalized attribution contains a Unicode control category")
+    visible = " ".join(normalized.split())
+    if not visible:
+        raise ValueError("attribution must contain visible text")
+    return visible
 
 
 class CanonError(Exception):

@@ -1052,7 +1052,16 @@ implementation_status = "fixture; not implementation proof"
                     )
                 }
                 self.assertNotIn("CANON_EVIDENCE_APPROVER_REQUIRED", codes)
-            for approved_by in (None, "   "):
+            for approved_by in (
+                None,
+                "   ",
+                "\u200b",
+                "Owner\x00",
+                "Owner\u202e",
+                "Owner\ue000",
+                "Owner\ud800",
+                "Owner\u0378",
+            ):
                 with self.subTest(
                     kind=reference.reference_kind.value, approved_by=approved_by
                 ):
@@ -1065,6 +1074,25 @@ implementation_status = "fixture; not implementation proof"
                         )
                     }
                     self.assertIn("CANON_EVIDENCE_APPROVER_REQUIRED", codes)
+
+            for approved_by in (
+                "Devan Warner",
+                "  Élodie   山田  ",
+                "محمد",
+            ):
+                with self.subTest(
+                    kind=reference.reference_kind.value,
+                    approved_by=approved_by,
+                ):
+                    codes = {
+                        finding.code
+                        for finding in external_reference_findings(
+                            self.current,
+                            (replace(reference, approved_by=approved_by),),
+                            self.root,
+                        )
+                    }
+                    self.assertNotIn("CANON_EVIDENCE_APPROVER_REQUIRED", codes)
 
     def test_two_argument_validator_fails_closed_for_local_proof_without_repository_root(self):
         local = external_reference(

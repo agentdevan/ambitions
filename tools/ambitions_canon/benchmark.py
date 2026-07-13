@@ -7,7 +7,6 @@ import json
 import os
 import re
 import tempfile
-import unicodedata
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from pathlib import Path
@@ -20,7 +19,11 @@ from tools.ambitions_canon.conflicts import (
     validate_conflict_repository,
 )
 from tools.ambitions_canon.manifest import load_documents, load_manifest
-from tools.ambitions_canon.model import CanonError, CanonRegistry
+from tools.ambitions_canon.model import (
+    CanonError,
+    CanonRegistry,
+    normalize_visible_attribution,
+)
 from tools.ambitions_canon.registry import build_registry
 from tools.ambitions_canon.render import stable_json
 from tools.ambitions_canon.task_pack import (
@@ -849,17 +852,14 @@ def _validate_semantic_response(
 
 
 def _normalized_reviewer_identity(value: str) -> str:
-    return _normalized_attribution(value)
+    return _normalized_attribution(value).casefold()
 
 
-def _normalized_attribution(value: str) -> str:
-    normalized = unicodedata.normalize("NFKC", value).casefold()
-    visible = "".join(
-        character
-        for character in normalized
-        if unicodedata.category(character) != "Cf"
-    )
-    return " ".join(visible.split())
+def _normalized_attribution(value: object) -> str:
+    try:
+        return normalize_visible_attribution(value)
+    except ValueError:
+        return ""
 
 
 def _score_verdict(old_score: int, new_score: int) -> str:

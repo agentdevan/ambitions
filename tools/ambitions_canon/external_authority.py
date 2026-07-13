@@ -22,6 +22,7 @@ from tools.ambitions_canon.model import (
     Finding,
     FigmaAuthorityRole,
     GapSeverity,
+    normalize_visible_attribution,
 )
 
 
@@ -1574,10 +1575,9 @@ def external_reference_findings(
                         ),
                     )
                 )
-            if (
-                not isinstance(reference.approved_by, str)
-                or not reference.approved_by.strip()
-            ):
+            try:
+                normalize_visible_attribution(reference.approved_by)
+            except ValueError:
                 findings.append(
                     Finding(
                         code="CANON_EVIDENCE_APPROVER_REQUIRED",

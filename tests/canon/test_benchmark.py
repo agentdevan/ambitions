@@ -730,8 +730,8 @@ class BenchmarkTest(unittest.TestCase):
 
     def test_semantic_review_ingests_strict_hash_bound_comparison_after_responses(self):
         benchmark = self.benchmark_module()
-        old_response = semantic_response("Old response reviewer", "old-model", "old")
-        new_response = semantic_response("New response reviewer", "new-model", "new")
+        old_response = semantic_response("Élodie 山田", "modèle α", "old")
+        new_response = semantic_response("Мария", "модель β", "new")
         pending = benchmark.build_semantic_review_bundle(
             ROOT,
             FIXTURES,
@@ -764,8 +764,8 @@ class BenchmarkTest(unittest.TestCase):
             )
         comparison = {
             "schema_version": 1,
-            "comparison_reviewer": "Independent comparison reviewer",
-            "comparison_model": "comparison-model",
+            "comparison_reviewer": "محمد",
+            "comparison_model": "比較モデル",
             "canon_sha256": record["canon_sha256"],
             "old_prompt_sha256": record["old_prompt_sha256"],
             "new_prompt_sha256": record["new_prompt_sha256"],
@@ -799,22 +799,37 @@ class BenchmarkTest(unittest.TestCase):
         )
         self.assertEqual(
             recorded["comparison_reviewer"],
-            "Independent comparison reviewer",
+            "محمد",
         )
-        self.assertEqual(recorded["comparison_model"], "comparison-model")
-        self.assertEqual(recorded["old_response_reviewer"], "Old response reviewer")
-        self.assertEqual(recorded["new_response_reviewer"], "New response reviewer")
+        self.assertEqual(recorded["comparison_model"], "比較モデル")
+        self.assertEqual(recorded["old_response_reviewer"], "Élodie 山田")
+        self.assertEqual(recorded["new_response_reviewer"], "Мария")
 
     def test_semantic_review_responses_require_closed_attributable_json(self):
         benchmark = self.benchmark_module()
         valid = semantic_response("Response reviewer", "response-model", "response")
-        invalid = (
+        invalid = [
             b'{"response":"missing metadata"}\n',
             semantic_response("   ", "response-model", "response"),
             semantic_response("\u200b", "response-model", "response"),
             semantic_response("Response reviewer", "   ", "response"),
             b'{"model":"response-model","response":"response","reviewer":"Response reviewer","schema_version":1,"unexpected":true}\n',
             b'not json\n',
+        ]
+        control_values = (
+            "Reviewer\x00",
+            "Reviewer\u202e",
+            "Reviewer\ue000",
+            "Reviewer\ud800",
+            "Reviewer\u0378",
+        )
+        invalid.extend(
+            semantic_response(value, "response-model", "response")
+            for value in control_values
+        )
+        invalid.extend(
+            semantic_response("Response reviewer", value, "response")
+            for value in control_values
         )
 
         for response in invalid:
@@ -835,8 +850,8 @@ class BenchmarkTest(unittest.TestCase):
 
     def test_semantic_comparison_requires_independent_reviewer_and_consistent_verdicts(self):
         benchmark = self.benchmark_module()
-        old_response = semantic_response("Old Response Reviewer", "old-model", "old")
-        new_response = semantic_response("New Response Reviewer", "new-model", "new")
+        old_response = semantic_response("Old Reviewer", "old-model", "old")
+        new_response = semantic_response("New Reviewer", "new-model", "new")
         pending = benchmark.build_semantic_review_bundle(
             ROOT,
             FIXTURES,
@@ -880,16 +895,20 @@ class BenchmarkTest(unittest.TestCase):
         insufficient["dimensions"][0]["verdict"] = "insufficient_evidence"
         cases = (
             (
-                {**base, "comparison_reviewer": "  old   response REVIEWER  "},
+                {**base, "comparison_reviewer": "  old   REVIEWER  "},
                 "BENCHMARK_SEMANTIC_COMPARISON_INDEPENDENCE",
             ),
             (
-                {**base, "comparison_reviewer": "Ｎｅｗ response reviewer"},
+                {**base, "comparison_reviewer": "Ｎｅｗ reviewer"},
                 "BENCHMARK_SEMANTIC_COMPARISON_INDEPENDENCE",
             ),
             (
-                {**base, "comparison_reviewer": "Old\u200b Response Reviewer"},
-                "BENCHMARK_SEMANTIC_COMPARISON_INDEPENDENCE",
+                {**base, "comparison_reviewer": "Old Reviewer\x00"},
+                "BENCHMARK_SEMANTIC_COMPARISON_INVALID",
+            ),
+            (
+                {**base, "comparison_reviewer": "Old\u200b Reviewer"},
+                "BENCHMARK_SEMANTIC_COMPARISON_INVALID",
             ),
             (contradictory_dimension, "BENCHMARK_SEMANTIC_COMPARISON_INVALID"),
             (contradictory_overall, "BENCHMARK_SEMANTIC_COMPARISON_INVALID"),
@@ -908,6 +927,28 @@ class BenchmarkTest(unittest.TestCase):
                         comparison=(json.dumps(payload, sort_keys=True) + "\n").encode(),
                     )
                 self.assertEqual(raised.exception.code, code)
+
+        controls = ("\x00", "\u202e", "\ue000", "\ud800", "\u0378")
+        for field in ("comparison_reviewer", "comparison_model"):
+            for control in controls:
+                with self.subTest(field=field, control=repr(control)):
+                    payload = {**base, field: f"Independent{control} reviewer"}
+                    with self.assertRaises(CanonError) as raised:
+                        benchmark.build_semantic_review_bundle(
+                            ROOT,
+                            FIXTURES,
+                            reviewer="Bundle operator",
+                            model="bundle-model",
+                            old_response=old_response,
+                            new_response=new_response,
+                            comparison=(
+                                json.dumps(payload, sort_keys=True) + "\n"
+                            ).encode(),
+                        )
+                    self.assertEqual(
+                        raised.exception.code,
+                        "BENCHMARK_SEMANTIC_COMPARISON_INVALID",
+                    )
 
     def test_semantic_review_comparison_omission_mismatch_and_scores_fail_closed(self):
         benchmark = self.benchmark_module()
