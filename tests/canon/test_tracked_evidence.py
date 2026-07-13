@@ -28,6 +28,10 @@ from tools.ambitions_canon.migration import (
     validate_tracked_canon_evidence,
 )
 from tools.ambitions_canon.model import CanonError
+from tools.ambitions_canon.traceability import (
+    IMPLEMENTATION_SUFFIXES,
+    SOURCE_SCAN_ROOTS,
+)
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -44,6 +48,15 @@ def copy_evidence(root: Path) -> None:
         target = root / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(ROOT / relative, target)
+
+
+def copy_traceability_inventory(root: Path) -> None:
+    for scan_root in SOURCE_SCAN_ROOTS:
+        for source in (ROOT / scan_root).rglob("*"):
+            if source.is_file() and source.suffix.lower() in IMPLEMENTATION_SUFFIXES:
+                target = root / source.relative_to(ROOT)
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes(b"")
 
 
 def write_json(path: Path, value: object) -> None:
@@ -144,6 +157,11 @@ class TrackedEvidenceTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             shutil.copytree(ROOT / "docs/canon", root / "docs/canon")
+            shutil.copytree(
+                ROOT / "docs/design/provenance/owner-approvals",
+                root / "docs/design/provenance/owner-approvals",
+            )
+            copy_traceability_inventory(root)
             (root / ".gitignore").write_text(".codex/\n", encoding="utf-8")
             self.assertFalse((root / ".codex").exists())
             issue_path = root / "issue.json"

@@ -1,0 +1,92 @@
+schema_version = 1
+kind = "figma"
+
+[[references]]
+reference_id = "FIGMA-CANDIDATE:SWtHm9ouHTPbEFfNrrtZwv:250:104"
+source = "figma:SWtHm9ouHTPbEFfNrrtZwv:250:104"
+revision = "250:104"
+requirement_ids = ["SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001"]
+authority_role = "superseded"
+approval_state = "stale"
+approved_by = "Devan Warner"
+implementation_status = "approved direction superseded as final target by node 257:93; retained as a non-authoritative candidate and not implementation proof"
+
+[[references]]
+reference_id = "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:160:93"
+source = "figma:SWtHm9ouHTPbEFfNrrtZwv:160:93"
+revision = "160:93"
+requirement_ids = ["SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001"]
+authority_role = "approved_target"
+approval_state = "approved"
+approved_by = "Devan Warner"
+implementation_status = "owner-approved VSP-02 Today design target with a Yellow proof ceiling; not implementation proof"
+
+[[references]]
+reference_id = "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:177:93"
+source = "figma:SWtHm9ouHTPbEFfNrrtZwv:177:93"
+revision = "177:93"
+requirement_ids = ["SPEC-SURFACE-GOALS-VISUAL-AUTHORITY-001"]
+authority_role = "approved_target"
+approval_state = "approved"
+approved_by = "Devan Warner"
+implementation_status = "owner-approved VSP-03 Goals design target with a Yellow proof ceiling; not implementation proof"
+
+[[references]]
+reference_id = "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:202:93"
+source = "figma:SWtHm9ouHTPbEFfNrrtZwv:202:93"
+revision = "202:93"
+requirement_ids = ["SPEC-SURFACE-TIME-VISUAL-AUTHORITY-001"]
+authority_role = "approved_target"
+approval_state = "approved"
+approved_by = "Devan Warner"
+implementation_status = "owner-approved VSP-04 Time design target with a Yellow proof ceiling; not parity or implementation proof"
+
+[[references]]
+reference_id = "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:217:93"
+source = "figma:SWtHm9ouHTPbEFfNrrtZwv:217:93"
+revision = "217:93"
+requirement_ids = ["SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001"]
+authority_role = "approved_target"
+approval_state = "approved"
+approved_by = "Devan Warner"
+implementation_status = "owner-approved VSP-05 Capture design target with a Yellow proof ceiling; not implementation proof"
+
+[[references]]
+reference_id = "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:240:93"
+source = "figma:SWtHm9ouHTPbEFfNrrtZwv:240:93"
+revision = "240:93"
+requirement_ids = ["SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001"]
+authority_role = "approved_target"
+approval_state = "approved"
+approved_by = "Devan Warner"
+implementation_status = "owner-approved VSP-06 You design target with a Yellow proof ceiling; not implementation proof"
+
+[[references]]
+reference_id = "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:257:93"
+source = "figma:SWtHm9ouHTPbEFfNrrtZwv:257:93"
+revision = "257:93"
+requirement_ids = ["SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001"]
+authority_role = "approved_target"
+approval_state = "approved"
+approved_by = "Devan Warner"
+implementation_status = "owner-approved VSP-07 Trust successor design target with a Yellow proof ceiling; not implementation proof"
+
+[[references]]
+reference_id = "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:87:2"
+source = "figma:SWtHm9ouHTPbEFfNrrtZwv:87:2"
+revision = "87:2"
+requirement_ids = ["SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001"]
+authority_role = "approved_target"
+approval_state = "approved"
+approved_by = "Devan Warner"
+implementation_status = "owner-approved VSP-01 shell placement authority for Search; not a dedicated Search overlay or implementation proof"
+
+[[references]]
+reference_id = "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:92:2"
+source = "figma:SWtHm9ouHTPbEFfNrrtZwv:92:2"
+revision = "92:2"
+requirement_ids = ["SPEC-GLOBAL-MOTION-ACCESSIBILITY-001"]
+authority_role = "approved_target"
+approval_state = "approved"
+approved_by = "Devan Warner"
+implementation_status = "owner-approved VSP-09 motion and accessibility design rubric with a Yellow proof ceiling; not conformance or implementation proof"

@@ -176,6 +176,12 @@ class BuildTests(unittest.TestCase):
         manifest = load_manifest(self.root)
         return build_registry(manifest, load_documents(self.root, manifest))
 
+    def clear_local_proof_references(self, canon_root: Path) -> None:
+        canon_root.joinpath("references/proof-sources.toml").write_text(
+            'schema_version = 1\nkind = "proof"\nreferences = []\n',
+            encoding="utf-8",
+        )
+
     def render_in_repository(self, registry: CanonRegistry):
         previous = Path.cwd()
         try:
@@ -1667,6 +1673,7 @@ class BuildTests(unittest.TestCase):
     def test_object_boundary_matrix_reports_distinct_step_event_reminder_note_laws(self):
         shutil.rmtree(self.canon_root)
         shutil.copytree(ROOT / "docs/canon", self.canon_root)
+        self.clear_local_proof_references(self.canon_root)
 
         findings = build_canon(self.root)
 
@@ -1714,6 +1721,7 @@ class BuildTests(unittest.TestCase):
             with self.subTest(name=name), tempfile.TemporaryDirectory() as temporary:
                 root = Path(temporary)
                 shutil.copytree(ROOT / "docs/canon", root / "docs/canon")
+                self.clear_local_proof_references(root / "docs/canon")
                 step = root / "docs/canon/specifications/objects/step.md"
                 step.write_text(step.read_text(encoding="utf-8").replace(old, new, 1), encoding="utf-8")
 
@@ -1724,6 +1732,7 @@ class BuildTests(unittest.TestCase):
     def test_object_boundary_spec_drift_is_detected_by_build_check(self):
         shutil.rmtree(self.canon_root)
         shutil.copytree(ROOT / "docs/canon", self.canon_root)
+        self.clear_local_proof_references(self.canon_root)
         self.assertEqual(build_canon(self.root), ())
         step = self.canon_root / "specifications/objects/step.md"
         step.write_text(
@@ -1861,7 +1870,7 @@ class BuildTests(unittest.TestCase):
         for content in outputs.values():
             self.assertNotIn(str(self.root).encode("utf-8"), content)
 
-    def test_unmodeled_traceability_and_external_inputs_are_explicitly_unknown(self):
+    def test_traceability_and_external_inputs_are_explicitly_represented(self):
         self.write_canon(
             {
                 "specifications/today.md": document_text(
@@ -1876,19 +1885,18 @@ class BuildTests(unittest.TestCase):
 
         for filename in ("law-test-map.json", "law-proof-map.json"):
             payload = json.loads(outputs[Path(filename)])
-            self.assertEqual(payload["representation_status"], "unrepresented")
-            self.assertNotIn("SCENARIO-001", payload.get("mappings", []))
-            self.assertNotIn("PROOF-001", payload.get("mappings", []))
+            self.assertEqual(payload["mappings"][0]["mapping_status"], "mapped")
+            self.assertTrue(payload["mappings"][0]["verification_ids"])
         visual = json.loads(outputs[Path("visual-authority-manifest.json")])
-        self.assertEqual(visual["representation_status"], "unrepresented")
-        self.assertNotIn("visual_authorities", visual)
+        self.assertEqual(visual["authorities"], [])
+        self.assertFalse(visual["ui_readiness"])
         self.assertIn(
             "Unrepresented",
             outputs[Path("unresolved-conflicts.md")].decode("utf-8"),
         )
         external = outputs[Path("external-reference-impact.md")].decode("utf-8")
-        self.assertIn("Unrepresented", external)
-        self.assertNotIn("No tracked external authority changes", external)
+        self.assertIn("**Representation status:** Represented", external)
+        self.assertIn("- Stable references: `0`", external)
 
     def test_markdown_tables_escape_cell_delimiters(self):
         self.write_canon(

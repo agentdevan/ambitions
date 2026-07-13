@@ -4525,5 +4525,6 @@
       "title": "External visibility and capacity distinction"
     }
   ],
-  "schema_version": 1
+  "schema_version": 1,
+  "traceability_input_sha": "d863424549cdcf74ec66d3f0ada240e879424746ee65c1548c7302517c8ac231"
 }

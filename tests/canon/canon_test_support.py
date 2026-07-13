@@ -26,3 +26,15 @@ def write_required_governance_artifacts(
         json.dumps(payload, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
     )
+
+    references = canon_root / "references"
+    references.mkdir(parents=True, exist_ok=True)
+    for filename, kind in (
+        ("figma.toml", "figma"),
+        ("linear.toml", "linear"),
+        ("proof-sources.toml", "proof"),
+    ):
+        references.joinpath(filename).write_text(
+            f'schema_version = 1\nkind = "{kind}"\nreferences = []\n',
+            encoding="utf-8",
+        )

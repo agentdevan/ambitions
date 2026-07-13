@@ -90,6 +90,12 @@ class AuthorityReferenceKind(StrEnum):
     LINEAR = "linear"
 
 
+class FigmaAuthorityRole(StrEnum):
+    APPROVED_TARGET = "approved_target"
+    CANDIDATE = "candidate"
+    SUPERSEDED = "superseded"
+
+
 class ClaimDisposition(StrEnum):
     KEEP = "keep"
     REWRITE = "rewrite"
@@ -279,6 +285,7 @@ class AuthorityReference:
     approval_state: str
     approved_by: str | None = None
     implementation_status: str | None = None
+    authority_role: FigmaAuthorityRole | None = None
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "requirement_ids", tuple(self.requirement_ids))

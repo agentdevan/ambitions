@@ -492,6 +492,21 @@ def build_canon(root: Path, *, check: bool = False) -> tuple[Finding, ...]:
     )
 
     registry = _load_audited_registry(root)
+    from tools.ambitions_canon.external_authority import (
+        load_external_reference_snapshot,
+        validate_external_reference_snapshot,
+    )
+    from tools.ambitions_canon.traceability import (
+        capture_traceability_input_snapshot,
+        validate_traceability_input_snapshot,
+    )
+
+    reference_snapshot = load_external_reference_snapshot(root)
+    traceability_snapshot = capture_traceability_input_snapshot(
+        registry,
+        root,
+        reference_snapshot,
+    )
     dockets = load_conflict_dockets(root)
     conflict_snapshot = validate_conflict_repository(
         root,
@@ -504,6 +519,7 @@ def build_canon(root: Path, *, check: bool = False) -> tuple[Finding, ...]:
         registry,
         snapshot_sha,
         dockets if conflict_snapshot is not None else None,
+        traceability_snapshot,
     )
 
     def assert_snapshot_current() -> None:
@@ -524,6 +540,12 @@ def build_canon(root: Path, *, check: bool = False) -> tuple[Finding, ...]:
                 "canonical source changed during generation",
                 registry.manifest.source_path,
             )
+        validate_external_reference_snapshot(root, reference_snapshot)
+        validate_traceability_input_snapshot(
+            current,
+            root,
+            traceability_snapshot,
+        )
 
     assert_snapshot_current()
     generated_root = root / "docs" / "canon" / "generated"

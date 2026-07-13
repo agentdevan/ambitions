@@ -28,6 +28,10 @@ from tools.ambitions_canon.conflicts import (
     validate_conflict_repository,
 )
 from tools.ambitions_canon.impact import write_amendment_scaffold
+from tools.ambitions_canon.external_authority import (
+    external_reference_findings,
+    load_external_references,
+)
 from tools.ambitions_canon.manifest import load_documents, load_manifest
 from tools.ambitions_canon.migration import (
     claim_coverage,
@@ -58,6 +62,7 @@ from tools.ambitions_canon.task_pack import (
     validate_task_pack,
     write_task_pack,
 )
+from tools.ambitions_canon.traceability import build_traceability
 
 
 PUBLIC_AUDIT_CODES = frozenset(
@@ -128,6 +133,16 @@ def main(argv: Sequence[str] | None = None) -> int:
         "--check",
         action="store_true",
         help="compare generated outputs without writing",
+    )
+    traceability_parser = subparsers.add_parser(
+        "traceability",
+        help="inspect generated source, test, proof, and external-reference posture",
+    )
+    traceability_parser.add_argument(
+        "--check",
+        action="store_true",
+        required=True,
+        help="validate stable references and report posture gaps without upgrading them",
     )
     coverage_parser = subparsers.add_parser(
         "coverage", help="check specification completeness profiles"
@@ -273,6 +288,9 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     if arguments.command == "build":
         return _build(Path.cwd(), check=arguments.check)
+
+    if arguments.command == "traceability":
+        return _traceability(Path.cwd())
 
     if arguments.command == "coverage":
         return _coverage(
@@ -548,6 +566,59 @@ def _build(root: Path, *, check: bool) -> int:
         return 1
 
     print("GREEN ambitions canon generated outputs")
+    return 0
+
+
+def _traceability(root: Path) -> int:
+    try:
+        manifest = load_manifest(root)
+        documents = load_documents(root, manifest)
+        registry = build_registry(manifest, documents)
+        from tools.ambitions_canon.external_authority import (
+            load_external_reference_snapshot,
+            validate_external_reference_snapshot,
+        )
+        from tools.ambitions_canon.traceability import (
+            capture_traceability_input_snapshot,
+            validate_traceability_input_snapshot,
+        )
+
+        reference_snapshot = load_external_reference_snapshot(root)
+        references = reference_snapshot.references
+        traceability_snapshot = capture_traceability_input_snapshot(
+            registry,
+            root,
+            reference_snapshot,
+        )
+        validate_external_reference_snapshot(root, reference_snapshot)
+        validate_traceability_input_snapshot(registry, root, traceability_snapshot)
+        invalid = external_reference_findings(registry, references, root)
+        report = build_traceability(
+            registry,
+            root,
+            references,
+            snapshot=traceability_snapshot,
+        )
+        validate_external_reference_snapshot(root, reference_snapshot)
+        validate_traceability_input_snapshot(registry, root, traceability_snapshot)
+    except CanonError as error:
+        location = error.path.as_posix() if error.path is not None else "<traceability>"
+        print(f"P0_BLOCKER {error.code} {location}:{error.line or 0} {error.message}")
+        return 1
+
+    if invalid:
+        for finding in invalid:
+            location = finding.path.as_posix() if finding.path is not None else "<references>"
+            print(
+                f"{finding.severity.value} {finding.code} "
+                f"{location}:{finding.line or 0} {finding.message}"
+            )
+        return 1
+    print(
+        "GREEN ambitions canon traceability "
+        f"requirements={len(report.records)} references={len(references)} "
+        f"posture_gaps={len(report.findings)} authority_state={manifest.authority_state.value}"
+    )
     return 0
 
 

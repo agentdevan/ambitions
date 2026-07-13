@@ -124,10 +124,26 @@ def render_outputs(registry: CanonRegistry) -> Mapping[Path, bytes]:
                 ),
             )
         )
+    from tools.ambitions_canon.external_authority import (
+        load_external_reference_snapshot,
+    )
+    from tools.ambitions_canon.traceability import (
+        capture_traceability_input_snapshot,
+    )
+
+    reference_snapshot = load_external_reference_snapshot(
+        registry.manifest.repository_root
+    )
+    traceability_snapshot = capture_traceability_input_snapshot(
+        registry,
+        registry.manifest.repository_root,
+        reference_snapshot,
+    )
     return _render_outputs(
         registry,
         _content_sha_entries(entries),
         dockets if conflict_snapshot is not None else None,
+        traceability_snapshot,
     )
 
 
@@ -135,6 +151,7 @@ def _render_outputs(
     registry: CanonRegistry,
     content_sha: str,
     dockets: tuple[object, ...] | None = None,
+    traceability_snapshot: object | None = None,
 ) -> Mapping[Path, bytes]:
     metadata = {
         "schema_version": 1,
@@ -160,6 +177,54 @@ def _render_outputs(
         )
     )
     concept_owners = tuple(sorted(registry.concept_owners))
+
+    from tools.ambitions_canon.external_authority import (
+        external_reference_findings,
+        load_external_reference_snapshot,
+        render_external_reference_impact,
+        render_visual_authority_manifest,
+    )
+    from tools.ambitions_canon.traceability import (
+        build_traceability,
+        capture_traceability_input_snapshot,
+        render_traceability_maps,
+    )
+
+    repository_root = registry.manifest.repository_root
+    if repository_root is None:
+        raise CanonError(
+            "CANON_PROVENANCE_MISSING",
+            "repository root is required for traceability rendering",
+            registry.manifest.source_path,
+        )
+    if traceability_snapshot is None:
+        reference_snapshot = load_external_reference_snapshot(repository_root)
+        traceability_snapshot = capture_traceability_input_snapshot(
+            registry,
+            repository_root,
+            reference_snapshot,
+        )
+    references = traceability_snapshot.reference_snapshot.references
+    metadata["traceability_input_sha"] = traceability_snapshot.input_sha
+    invalid_references = external_reference_findings(
+        registry,
+        references,
+        repository_root,
+    )
+    if invalid_references:
+        first = invalid_references[0]
+        raise CanonError(first.code, first.message, first.path, first.line)
+    traceability = build_traceability(
+        registry,
+        repository_root,
+        references,
+        snapshot=traceability_snapshot,
+    )
+    traceability_outputs = render_traceability_maps(traceability, metadata)
+    visual_manifest = {
+        **metadata,
+        **render_visual_authority_manifest(registry, references),
+    }
 
     rendered: dict[Path, bytes] = {
         Path("CODEX_START_HERE.md"): _codex_start_here(
@@ -224,27 +289,16 @@ def _render_outputs(
         Path("unresolved-conflicts.md"): _unresolved_conflicts(
             metadata, documents, dockets
         ),
-        Path("law-source-map.json"): _law_map(
-            metadata, requirements, documents
-        ),
-        Path("law-test-map.json"): _unrepresented_map(
+        Path("law-source-map.json"): traceability_outputs[Path("law-source-map.json")],
+        Path("law-test-map.json"): traceability_outputs[Path("law-test-map.json")],
+        Path("law-proof-map.json"): traceability_outputs[Path("law-proof-map.json")],
+        Path("visual-authority-manifest.json"): stable_json(visual_manifest),
+        Path("external-reference-impact.md"): render_external_reference_impact(
+            registry,
+            references,
+            invalid_references,
             metadata,
-            requirements,
-            "test-specific authority is not represented by the current model",
         ),
-        Path("law-proof-map.json"): _unrepresented_map(
-            metadata,
-            requirements,
-            "proof-specific authority is not represented by the current model",
-        ),
-        Path("visual-authority-manifest.json"): stable_json(
-            {
-                **metadata,
-                "representation_status": "unrepresented",
-                "reason": "visual authority inputs are not represented by the current model",
-            }
-        ),
-        Path("external-reference-impact.md"): _external_impact(metadata),
         Path("supersession-manifest.json"): _supersession_manifest(
             metadata, registry
         ),
@@ -497,46 +551,6 @@ def _unresolved_conflicts(metadata, documents, dockets=None) -> bytes:
             "**Representation status:** Unrepresented",
             "",
             "Conflict-docket identity is not represented by the current model.",
-        ]
-    )
-    return _markdown(lines)
-
-
-def _law_map(metadata, requirements, documents) -> bytes:
-    documents_by_path = {item.source_path: item for item in documents}
-    mappings = []
-    for requirement in requirements:
-        document = documents_by_path.get(requirement.source_path)
-        values = document.source_owners if document is not None else ()
-        mappings.append(
-            {
-                "requirement_id": requirement.requirement_id,
-                "references": sorted(values),
-            }
-        )
-    return stable_json({**metadata, "mappings": mappings})
-
-
-def _unrepresented_map(metadata, requirements, reason) -> bytes:
-    return stable_json(
-        {
-            **metadata,
-            "representation_status": "unrepresented",
-            "reason": reason,
-            "requirement_ids": [
-                requirement.requirement_id for requirement in requirements
-            ],
-        }
-    )
-
-
-def _external_impact(metadata) -> bytes:
-    lines = _markdown_header("Ambitions External Reference Impact", metadata)
-    lines.extend(
-        [
-            "**Representation status:** Unrepresented",
-            "",
-            "External authority impact inputs are not represented by the current model.",
         ]
     )
     return _markdown(lines)
