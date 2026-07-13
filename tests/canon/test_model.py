@@ -19,10 +19,63 @@ from tools.ambitions_canon.model import (
     Modality,
     NotApplicable,
     Requirement,
+    normalize_visible_attribution,
 )
 
 
 class ModelTests(unittest.TestCase):
+    def test_visible_attribution_rejects_every_unicode_16_default_ignorable_range(self):
+        range_boundaries = (
+            0x00AD,
+            0x034F,
+            0x061C,
+            0x115F, 0x1160,
+            0x17B4, 0x17B5,
+            0x180B, 0x180D,
+            0x180E,
+            0x180F,
+            0x200B, 0x200F,
+            0x202A, 0x202E,
+            0x2060, 0x2064,
+            0x2065,
+            0x2066, 0x206F,
+            0x3164,
+            0xFE00, 0xFE0F,
+            0xFEFF,
+            0xFFA0,
+            0xFFF0, 0xFFF8,
+            0x1BCA0, 0x1BCA3,
+            0x1D173, 0x1D17A,
+            0xE0000,
+            0xE0001,
+            0xE0002, 0xE001F,
+            0xE0020, 0xE007F,
+            0xE0080, 0xE00FF,
+            0xE0100, 0xE01EF,
+            0xE01F0, 0xE0FFF,
+        )
+
+        for code_point in range_boundaries:
+            with self.subTest(code_point=f"U+{code_point:04X}"):
+                with self.assertRaises(ValueError):
+                    normalize_visible_attribution(f"Owner{chr(code_point)}")
+
+    def test_visible_attribution_requires_base_and_preserves_international_names(self):
+        for mark_only in ("\u0301", "\u093c", "\ufe0f", "\u034f", "\u180b"):
+            with self.subTest(mark_only=repr(mark_only)):
+                with self.assertRaises(ValueError):
+                    normalize_visible_attribution(mark_only)
+
+        valid = {
+            "  E\u0301lodie   山田  ": "Élodie 山田",
+            "مُحَمَّد": "مُحَمَّد",
+            "अनन्या": "अनन्या",
+            "山田 太郎": "山田 太郎",
+        }
+        for source, expected in valid.items():
+            with self.subTest(source=source):
+                self.assertEqual(normalize_visible_attribution(source), expected)
+
     def test_requirement_is_immutable(self):
         requirement = Requirement(
             requirement_id="TODAY-IDENTITY-001",

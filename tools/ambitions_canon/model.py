@@ -8,22 +8,76 @@ from enum import StrEnum
 from pathlib import Path
 
 
+# Unicode 16.0.0 DerivedCoreProperties.txt, property
+# Default_Ignorable_Code_Point (4,174 code points across 27 ranges):
+# https://www.unicode.org/Public/16.0.0/ucd/DerivedCoreProperties.txt
+# This explicit table keeps attribution validation independent of optional
+# third-party Unicode-property engines.
+ATTRIBUTION_UNICODE_VERSION = "16.0.0"
+_DEFAULT_IGNORABLE_CODE_POINT_RANGES = (
+    (0x00AD, 0x00AD),
+    (0x034F, 0x034F),
+    (0x061C, 0x061C),
+    (0x115F, 0x1160),
+    (0x17B4, 0x17B5),
+    (0x180B, 0x180D),
+    (0x180E, 0x180E),
+    (0x180F, 0x180F),
+    (0x200B, 0x200F),
+    (0x202A, 0x202E),
+    (0x2060, 0x2064),
+    (0x2065, 0x2065),
+    (0x2066, 0x206F),
+    (0x3164, 0x3164),
+    (0xFE00, 0xFE0F),
+    (0xFEFF, 0xFEFF),
+    (0xFFA0, 0xFFA0),
+    (0xFFF0, 0xFFF8),
+    (0x1BCA0, 0x1BCA3),
+    (0x1D173, 0x1D17A),
+    (0xE0000, 0xE0000),
+    (0xE0001, 0xE0001),
+    (0xE0002, 0xE001F),
+    (0xE0020, 0xE007F),
+    (0xE0080, 0xE00FF),
+    (0xE0100, 0xE01EF),
+    (0xE01F0, 0xE0FFF),
+)
+
+
+def _is_default_ignorable(character: str) -> bool:
+    code_point = ord(character)
+    for lower, upper in _DEFAULT_IGNORABLE_CODE_POINT_RANGES:
+        if code_point < lower:
+            return False
+        if code_point <= upper:
+            return True
+    return False
+
+
+def _validate_attribution_scalars(value: str) -> None:
+    if any(unicodedata.category(character).startswith("C") for character in value):
+        raise ValueError("attribution contains a Unicode control category")
+    if any(_is_default_ignorable(character) for character in value):
+        raise ValueError("attribution contains a default-ignorable code point")
+
+
 def normalize_visible_attribution(value: object) -> str:
     """Return NFKC, space-collapsed visible attribution or reject it."""
 
     if not isinstance(value, str):
         raise ValueError("attribution must be a string")
-    if any(unicodedata.category(character).startswith("C") for character in value):
-        raise ValueError("attribution contains a Unicode control category")
+    _validate_attribution_scalars(value)
     normalized = unicodedata.normalize("NFKC", value)
-    if any(
-        unicodedata.category(character).startswith("C")
-        for character in normalized
-    ):
-        raise ValueError("normalized attribution contains a Unicode control category")
+    _validate_attribution_scalars(normalized)
     visible = " ".join(normalized.split())
     if not visible:
         raise ValueError("attribution must contain visible text")
+    if not any(
+        unicodedata.category(character)[0] in "LNPS"
+        for character in visible
+    ):
+        raise ValueError("attribution must contain a visible base scalar")
     return visible
 
 

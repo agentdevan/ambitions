@@ -1061,6 +1061,15 @@ implementation_status = "fixture; not implementation proof"
                 "Owner\ue000",
                 "Owner\ud800",
                 "Owner\u0378",
+                "Owner\ufe0f",
+                "Owner\u034f",
+                "Owner\u180b",
+                "Owner\u115f",
+                "Owner\u3164",
+                "Owner\uffa0",
+                "Owner\U000e0020",
+                "Owner\U000e0100",
+                "\u0301",
             ):
                 with self.subTest(
                     kind=reference.reference_kind.value, approved_by=approved_by
@@ -1078,7 +1087,9 @@ implementation_status = "fixture; not implementation proof"
             for approved_by in (
                 "Devan Warner",
                 "  Élodie   山田  ",
+                "  E\u0301lodie   山田  ",
                 "محمد",
+                "अनन्या",
             ):
                 with self.subTest(
                     kind=reference.reference_kind.value,
