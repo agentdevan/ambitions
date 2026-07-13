@@ -464,6 +464,7 @@ class TaskPackTests(unittest.TestCase):
             "known_issue_ids",
             "intake_path",
             "constitutional_laws",
+            "applicable_requirement_ids",
             "specifications",
             "object_lifecycles",
             "journeys",
@@ -510,7 +511,7 @@ class TaskPackTests(unittest.TestCase):
             {
                 "mechanical": "mechanical",
                 "docs": "normal",
-                "release": "normal",
+                "release": "complex",
                 "swiftui": "complex",
                 "runtime": "complex",
                 "privacy": "complex",
@@ -520,6 +521,7 @@ class TaskPackTests(unittest.TestCase):
         for task_type, budget_class in (
             ("mechanical", "mechanical"),
             ("docs", "normal"),
+            ("release", "complex"),
             ("swiftui", "complex"),
             ("constitutional-audit", "constitutional-audit"),
         ):

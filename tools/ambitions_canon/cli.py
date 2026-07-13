@@ -20,6 +20,14 @@ from tools.ambitions_canon.build import (
     _open_parent_nofollow,
     _read_descriptor,
 )
+from tools.ambitions_canon.benchmark import (
+    BENCHMARK_FIXTURE_DIR,
+    BENCHMARK_REPORT,
+    run_benchmark,
+    write_benchmark_report,
+    write_representative_packs,
+    write_semantic_review_packs,
+)
 from tools.ambitions_canon.coverage import coverage_findings, load_profiles
 from tools.ambitions_canon.conflicts import (
     docket_known_issues,
@@ -59,6 +67,7 @@ from tools.ambitions_canon.task_pack import (
     TaskPack,
     build_task_pack,
     read_task_pack_pair,
+    require_pack_authorization_current,
     validate_task_pack,
     write_task_pack,
 )
@@ -134,6 +143,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         action="store_true",
         help="compare generated outputs without writing",
     )
+    subparsers.add_parser(
+        "benchmark", help="benchmark deterministic bounded Codex canon consumption"
+    )
     traceability_parser = subparsers.add_parser(
         "traceability",
         help="inspect generated source, test, proof, and external-reference posture",
@@ -171,13 +183,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     pack_parser.add_argument(
         "--issue-json",
         type=Path,
-        required=True,
         help="closed task-intake JSON contract",
     )
     pack_parser.add_argument(
         "--check",
-        action="store_true",
-        help="reject a stored pack that does not match current state",
+        type=Path,
+        metavar="PACK_JSON",
+        help="reject this stored pack unless every authorization input is current",
     )
     amend_parser = subparsers.add_parser(
         "amend", help="prepare a governed temporary canon amendment"
@@ -289,6 +301,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     if arguments.command == "build":
         return _build(Path.cwd(), check=arguments.check)
 
+    if arguments.command == "benchmark":
+        return _benchmark(Path.cwd())
+
     if arguments.command == "traceability":
         return _traceability(Path.cwd())
 
@@ -306,10 +321,17 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
 
     if arguments.command == "pack":
+        if arguments.check is not None:
+            pack_path = arguments.check
+            if not pack_path.is_absolute():
+                pack_path = Path.cwd() / pack_path
+            return _check_pack_path(Path.cwd(), pack_path)
         issue_path = arguments.issue_json
+        if issue_path is None:
+            parser.error("pack requires --issue-json or --check PACK_JSON")
         if not issue_path.is_absolute():
             issue_path = Path.cwd() / issue_path
-        return _pack(Path.cwd(), issue_path, check=arguments.check)
+        return _pack(Path.cwd(), issue_path, check=False)
 
     if arguments.command == "amend":
         assert arguments.amend_command == "scaffold"
@@ -907,6 +929,198 @@ def _pack(root: Path, issue_path: Path, *, check: bool) -> int:
         location = error.path.as_posix() if error.path is not None else "<pack>"
         location = f"{location}:{error.line or 0}"
         print(f"P0_BLOCKER {error.code} {location} {error.message}")
+        return 1
+
+
+def _check_pack_path(root: Path, pack_path: Path) -> int:
+    """Validate the exact stored JSON pack before it can authorize source edits."""
+
+    try:
+        pack_root = (root / ".codex" / "canon-packs").absolute()
+        absolute = pack_path.absolute()
+        try:
+            relative = absolute.relative_to(pack_root)
+        except ValueError as exc:
+            raise CanonError(
+                "PACK_PATH_ESCAPE",
+                "checked task pack must be below .codex/canon-packs",
+                pack_path,
+            ) from exc
+        if (
+            len(relative.parts) != 2
+            or len(relative.parts[0]) != 64
+            or any(character not in "0123456789abcdef" for character in relative.parts[0])
+            or relative.suffix != ".json"
+        ):
+            raise CanonError(
+                "PACK_PATH_ESCAPE",
+                "checked task pack path is not a canonical JSON pack path",
+                pack_path,
+            )
+        json_bytes = _read_pack_member(pack_path)
+        try:
+            stored = json.loads(json_bytes.decode("utf-8"))
+        except (UnicodeError, json.JSONDecodeError) as exc:
+            raise CanonError(
+                "PACK_READ_FAILED",
+                "stored task pack is not valid UTF-8 JSON",
+                pack_path,
+            ) from exc
+        if not isinstance(stored, dict):
+            raise CanonError(
+                "PACK_READ_FAILED", "stored task pack must be a JSON object", pack_path
+            )
+        intake_value = stored.get("intake_path")
+        if not isinstance(intake_value, str) or not intake_value:
+            raise CanonError(
+                "PACK_INTAKE_STALE",
+                "stored task pack has no valid intake path",
+                pack_path,
+            )
+        intake_relative = Path(intake_value)
+        if intake_relative.is_absolute() or ".." in intake_relative.parts:
+            raise CanonError(
+                "PACK_PATH_ESCAPE",
+                "stored intake path must remain repository-relative",
+                pack_path,
+            )
+        issue_path = root / intake_relative
+        raw_bytes = _read_intake_bytes(issue_path)
+        try:
+            intake_data = json.loads(raw_bytes.decode("utf-8"))
+        except (UnicodeError, json.JSONDecodeError) as exc:
+            raise CanonError(
+                "PACK_INTAKE_STALE",
+                "stored task-pack intake is no longer valid UTF-8 JSON",
+                issue_path,
+            ) from exc
+        if not isinstance(intake_data, dict):
+            raise CanonError(
+                "PACK_INTAKE_STALE", "stored task-pack intake root changed", issue_path
+            )
+        intake = TaskIntake.from_json(intake_data).with_source_path(intake_value)
+        try:
+            manifest = load_manifest(root)
+            registry = build_registry(manifest, load_documents(root, manifest))
+        except CanonError as exc:
+            raise CanonError(
+                "PACK_CANON_STALE", "canon changed during task-pack use"
+            ) from exc
+        findings = audit_registry(registry)
+        if findings:
+            raise CanonError(
+                "PACK_CANON_STALE",
+                f"canon audit changed: {findings[0].code}",
+            )
+        current = build_task_pack(
+            registry,
+            intake,
+            _repository_state_sha(root),
+            _validated_docket_issues(root, registry),
+        )
+        (
+            markdown_path,
+            json_path,
+            markdown_bytes,
+            json_bytes,
+        ) = read_task_pack_pair(root, current)
+        if json_path.absolute() != absolute:
+            raise CanonError(
+                "PACK_CONTENT_STALE",
+                "checked task-pack path is not the deterministic current pack",
+                pack_path,
+            )
+        try:
+            stored = json.loads(json_bytes.decode("utf-8"))
+        except (UnicodeError, json.JSONDecodeError) as exc:
+            raise CanonError(
+                "PACK_READ_FAILED",
+                "stored task pack is not valid UTF-8 JSON",
+                json_path,
+            ) from exc
+        if not isinstance(stored, dict):
+            raise CanonError(
+                "PACK_READ_FAILED", "stored task pack must be a JSON object", json_path
+            )
+        require_pack_authorization_current(stored, current.to_dict())
+        if markdown_bytes.decode("utf-8") != current.to_markdown():
+            raise CanonError(
+                "PACK_CONTENT_STALE",
+                "stored Markdown task pack differs from deterministic current output",
+                markdown_path,
+            )
+        source_snapshot = _pack_source_snapshot(current, raw_bytes)
+        _require_source_snapshot(root, issue_path, source_snapshot)
+        print(
+            "GREEN ambitions canon task pack check "
+            f"issue={current.issue_id} authority_state={current.authority_state} "
+            f"json={_display_path(root, pack_path)}"
+        )
+        return 0
+    except (UnicodeError, OSError, CanonError) as error:
+        if not isinstance(error, CanonError):
+            error = CanonError(
+                "PACK_READ_FAILED", "unable to read stored task-pack pair", pack_path
+            )
+        location = error.path.as_posix() if error.path is not None else "<pack>"
+        print(f"P0_BLOCKER {error.code} {location}:{error.line or 0} {error.message}")
+        return 1
+
+
+def _read_pack_member(path: Path) -> bytes:
+    """Read one pack member without following its parent or final symlink."""
+
+    try:
+        with _open_parent_nofollow(path) as (parent_descriptor, name, _absolute):
+            descriptor = os.open(
+                name,
+                os.O_RDONLY | os.O_NOFOLLOW | getattr(os, "O_CLOEXEC", 0),
+                dir_fd=parent_descriptor,
+            )
+            try:
+                if not stat.S_ISREG(os.fstat(descriptor).st_mode):
+                    raise OSError("pack member is not a regular file")
+                return _read_descriptor(descriptor)
+            finally:
+                os.close(descriptor)
+    except (OSError, CanonError) as exc:
+        raise CanonError(
+            "PACK_PATH_ESCAPE",
+            "task-pack pair must contain real regular files",
+            path,
+        ) from exc
+
+
+def _benchmark(root: Path) -> int:
+    """Write deterministic benchmark evidence and ignored representative packs."""
+
+    try:
+        fixture_directory = root / BENCHMARK_FIXTURE_DIR
+        report_path = root / BENCHMARK_REPORT
+        result = run_benchmark(root, fixture_directory)
+        write_benchmark_report(report_path, result)
+        repository_sha = _repository_state_sha(root)
+        packs = write_representative_packs(
+            root,
+            fixture_directory,
+            repository_sha,
+        )
+        semantic_packs = write_semantic_review_packs(root, fixture_directory)
+        print(
+            "GREEN ambitions canon benchmark "
+            f"scenarios={len(result.scenarios)} "
+            f"report={BENCHMARK_REPORT.as_posix()} "
+            f"representative_pack_files={len(packs)}"
+            f" semantic_review_pack_files={len(semantic_packs)}"
+        )
+        return 0
+    except (OSError, CanonError) as error:
+        if not isinstance(error, CanonError):
+            error = CanonError(
+                "BENCHMARK_WRITE_FAILED", "unable to write benchmark evidence"
+            )
+        location = error.path.as_posix() if error.path is not None else "<benchmark>"
+        print(f"P0_BLOCKER {error.code} {location}:{error.line or 0} {error.message}")
         return 1
 
 

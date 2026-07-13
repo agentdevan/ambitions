@@ -124,7 +124,7 @@
   "compiler_version": "0.1.0",
   "owner_approval_complete": false,
   "schema_version": 1,
-  "traceability_input_sha": "d863424549cdcf74ec66d3f0ada240e879424746ee65c1548c7302517c8ac231",
+  "traceability_input_sha": "7b6888dd778cef1308c58c62476853e9411d2c93923ec1a9c51c7cae272a3ea3",
   "ui_readiness": false,
   "ui_readiness_reason": "visual authority references do not prove implementation, accessibility, device, visual, or release readiness"
 }

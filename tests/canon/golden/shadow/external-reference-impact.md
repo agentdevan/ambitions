@@ -2,7 +2,7 @@
 
 - Canon revision: `1`
 - Authority state: `shadow`
-- Traceability input SHA: `d863424549cdcf74ec66d3f0ada240e879424746ee65c1548c7302517c8ac231`
+- Traceability input SHA: `7b6888dd778cef1308c58c62476853e9411d2c93923ec1a9c51c7cae272a3ea3`
 
 **Representation status:** Represented
 

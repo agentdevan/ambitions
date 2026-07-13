@@ -7876,6 +7876,16 @@
     },
     {
       "affected_ids": [
+        "tools/ambitions_canon/benchmark.py"
+      ],
+      "code": "CANON_TRACE_CODE_TO_CANON",
+      "gap_class": "code_to_canon",
+      "message": "gap_class=code_to_canon affected_ids=tools/ambitions_canon/benchmark.py unowned implementation file",
+      "path": "tools/ambitions_canon/benchmark.py",
+      "severity": "P0_BLOCKER"
+    },
+    {
+      "affected_ids": [
         "tools/ambitions_canon/build.py"
       ],
       "code": "CANON_TRACE_CODE_TO_CANON",
@@ -33166,5 +33176,5 @@
       "status": "source_files_present"
     }
   ],
-  "traceability_input_sha": "d863424549cdcf74ec66d3f0ada240e879424746ee65c1548c7302517c8ac231"
+  "traceability_input_sha": "7b6888dd778cef1308c58c62476853e9411d2c93923ec1a9c51c7cae272a3ea3"
 }

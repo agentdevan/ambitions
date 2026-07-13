@@ -65,7 +65,7 @@ PACK_BUDGETS = {
 TASK_TYPE_BUDGET_CLASS = {
     "mechanical": "mechanical",
     "docs": "normal",
-    "release": "normal",
+    "release": "complex",
     "swiftui": "complex",
     "runtime": "complex",
     "privacy": "complex",
@@ -101,8 +101,6 @@ _ISSUE_STATUSES = frozenset({"open", "unresolved", "resolved", "closed"})
 _ISSUE_KINDS = frozenset({"conflict", "risk"})
 _SLUG_COMPONENT = re.compile(r"[^a-z0-9]+")
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
-
-
 @dataclass(frozen=True, slots=True)
 class TaskIntake:
     schema_version: int
@@ -189,6 +187,7 @@ class TaskPack:
     known_issue_ids: tuple[str, ...]
     intake_path: str
     constitutional_laws: tuple[str, ...]
+    applicable_requirement_ids: tuple[str, ...]
     specifications: tuple[str, ...]
     object_lifecycles: tuple[str, ...]
     journeys: tuple[str, ...]
@@ -228,6 +227,7 @@ class TaskPack:
             "known_issue_ids": list(self.known_issue_ids),
             "intake_path": self.intake_path,
             "constitutional_laws": list(self.constitutional_laws),
+            "applicable_requirement_ids": list(self.applicable_requirement_ids),
             "specifications": list(self.specifications),
             "object_lifecycles": list(self.object_lifecycles),
             "journeys": list(self.journeys),
@@ -335,7 +335,7 @@ def build_task_pack(
     }
     directly_scoped_law_ids = {
         requirement.requirement_id
-        for document in closure
+        for document in roots
         if document.kind is DocumentKind.CONSTITUTION
         for requirement in document.requirements
     }
@@ -358,11 +358,15 @@ def build_task_pack(
         )
     )
 
+    requirement_graph = _requirement_inclusion_graph(roots, closure, intake.scope)
+    semantic_documents = tuple(
+        document for document in closure if document.spec_id in requirement_graph
+    )
     specifications = tuple(
         sorted(
             (
                 document
-                for document in closure
+                for document in semantic_documents
                 if document.kind
                 not in {
                     DocumentKind.CONSTITUTION,
@@ -374,12 +378,17 @@ def build_task_pack(
             key=lambda item: item.spec_id,
         )
     )
-    objects = _documents_of_kind(closure, DocumentKind.OBJECT)
-    journeys = _documents_of_kind(closure, DocumentKind.JOURNEY)
-    standards = _documents_of_kind(closure, DocumentKind.STANDARD)
+    objects = _documents_of_kind(semantic_documents, DocumentKind.OBJECT)
+    journeys = _documents_of_kind(semantic_documents, DocumentKind.JOURNEY)
+    standards = _documents_of_kind(semantic_documents, DocumentKind.STANDARD)
     source_owners = tuple(
-        sorted({owner for document in closure for owner in document.source_owners})
+        sorted({owner for document in semantic_documents for owner in document.source_owners})
     )
+    selected_requirement_ids = {
+        requirement_id
+        for requirement_ids in requirement_graph.values()
+        for requirement_id in requirement_ids
+    }
     selected_requirements = tuple(
         sorted(
             {
@@ -391,6 +400,7 @@ def build_task_pack(
                     *standards,
                 )
                 for requirement in document.requirements
+                if requirement.requirement_id in selected_requirement_ids
             }.values(),
             key=lambda item: item.requirement_id,
         )
@@ -474,6 +484,12 @@ def build_task_pack(
         known_issue_ids=intake.known_issue_ids,
         intake_path=intake_path,
         constitutional_laws=tuple(law.requirement_id for law in laws),
+        applicable_requirement_ids=tuple(
+            sorted(
+                selected_requirement_ids
+                | {document.spec_id for document in semantic_documents}
+            )
+        ),
         specifications=tuple(document.spec_id for document in specifications),
         object_lifecycles=tuple(document.spec_id for document in objects),
         journeys=tuple(document.spec_id for document in journeys),
@@ -495,10 +511,12 @@ def build_task_pack(
         section_content = _render_sections(
             pack,
             laws=laws,
+            embedded_law_ids=frozenset(directly_scoped_law_ids),
             specifications=specifications,
             objects=objects,
             journeys=journeys,
             standards=standards,
+            selected_requirement_ids=frozenset(selected_requirement_ids),
         )
         candidate = replace(pack, _section_content=section_content)
         estimate = estimate_tokens(candidate.to_markdown())
@@ -540,6 +558,49 @@ def validate_task_pack(
     for field, current, code in checks:
         if data.get(field) != current:
             raise CanonError(code, f"task pack {field} does not match current state")
+
+
+def require_pack_authorization_current(
+    stored: Mapping[str, object],
+    current: Mapping[str, object],
+) -> None:
+    """Fail closed when any source-edit authorization input has changed."""
+
+    checks = (
+        (("canon_revision", "canon_sha", "compiler_version"), "PACK_CANON_STALE"),
+        (("repository_sha",), "PACK_REPOSITORY_STALE"),
+        (("intake_sha", "intake_path"), "PACK_INTAKE_STALE"),
+        (
+            ("issue_id", "task_type", "scope", "changed_files", "claim_type"),
+            "PACK_ISSUE_STALE",
+        ),
+        (("source_owners",), "PACK_SOURCE_STALE"),
+        (("open_conflicts",), "PACK_CONFLICT_STALE"),
+        (("known_issue_ids", "known_risks"), "PACK_KNOWN_ISSUES_STALE"),
+        (
+            (
+                "authority_state",
+                "required_tests",
+                "required_validation",
+                "required_proof",
+                "visual_authority",
+                "claim_ceiling",
+            ),
+            "PACK_PROOF_POSTURE_STALE",
+        ),
+    )
+    for fields, code in checks:
+        for field in fields:
+            if stored.get(field) != current.get(field):
+                raise CanonError(
+                    code,
+                    f"task pack {field} no longer matches source-edit authority",
+                )
+    if dict(stored) != dict(current):
+        raise CanonError(
+            "PACK_CONTENT_STALE",
+            "stored task-pack content differs from deterministic current output",
+        )
 
 
 def task_pack_paths(root: Path, pack: TaskPack) -> tuple[Path, Path]:
@@ -904,6 +965,79 @@ def _scope_overlap(left: str, right: str) -> bool:
     return left == right or left.startswith(f"{right}.") or right.startswith(f"{left}.")
 
 
+def _requirement_matches_scope(
+    document: CanonDocument,
+    requirement: Requirement,
+    scopes: tuple[str, ...],
+) -> bool:
+    return any(
+        scope in {document.spec_id, requirement.requirement_id}
+        or _scope_overlap(requirement.concept, scope)
+        for scope in scopes
+    )
+
+
+def _requirement_inclusion_graph(
+    roots: tuple[CanonDocument, ...],
+    closure: tuple[CanonDocument, ...],
+    scopes: tuple[str, ...],
+) -> dict[str, tuple[str, ...]]:
+    """Select exact root requirements plus complete transitive dependency contracts."""
+
+    documents = {document.spec_id: document for document in closure}
+    graph: dict[str, tuple[str, ...]] = {}
+    root_spec_ids = {root.spec_id for root in roots}
+    for root in roots:
+        scoped_requirement_ids = tuple(
+            requirement.requirement_id
+            for requirement in root.requirements
+            if _requirement_matches_scope(root, requirement, scopes)
+        )
+        if not scoped_requirement_ids:
+            raise CanonError(
+                "PACK_REQUIREMENT_GRAPH_EMPTY",
+                f"owning document has no requirement semantics for scope: {root.spec_id}",
+                root.source_path,
+            )
+        graph[root.spec_id] = scoped_requirement_ids
+    selected = set(root_spec_ids)
+    pending = [
+        (dependency_id, root)
+        for root in reversed(roots)
+        for dependency_id in sorted(root.depends_on, reverse=True)
+    ]
+    while pending:
+        dependency_id, parent = pending.pop()
+        if dependency_id in selected:
+            continue
+        dependency = documents.get(dependency_id)
+        if dependency is None:
+            raise CanonError(
+                "PACK_DEPENDENCY_OWNER_MISSING",
+                f"required downstream semantic owner is absent: {dependency_id}",
+                parent.source_path,
+            )
+        selected.add(dependency_id)
+        if dependency.kind is DocumentKind.CONSTITUTION:
+            continue
+        dependency_ids = tuple(
+            requirement.requirement_id for requirement in dependency.requirements
+        )
+        if not dependency_ids:
+            raise CanonError(
+                "PACK_DEPENDENCY_SEMANTICS_EMPTY",
+                f"required dependency has no requirement semantics: {dependency_id}",
+                dependency.source_path,
+            )
+        graph[dependency_id] = dependency_ids
+        pending.extend(
+            (child_id, dependency)
+            for child_id in sorted(dependency.depends_on, reverse=True)
+            if child_id not in selected
+        )
+    return {identifier: graph[identifier] for identifier in sorted(graph)}
+
+
 def _dependency_closure(
     registry: CanonRegistry,
     roots: tuple[CanonDocument, ...],
@@ -1025,10 +1159,12 @@ def _render_sections(
     pack: TaskPack,
     *,
     laws: tuple[Requirement, ...],
+    embedded_law_ids: frozenset[str],
     specifications: tuple[CanonDocument, ...],
     objects: tuple[CanonDocument, ...],
     journeys: tuple[CanonDocument, ...],
     standards: tuple[CanonDocument, ...],
+    selected_requirement_ids: frozenset[str],
 ) -> tuple[tuple[str, tuple[str, ...]], ...]:
     identity = (
         f"- Canon revision: `{pack.canon_revision}`",
@@ -1049,13 +1185,19 @@ def _render_sections(
     )
     values = {
         "Identity": identity,
-        "Constitutional laws": tuple(_render_requirement(item) for item in laws),
+        "Constitutional laws": _render_laws(laws, embedded_law_ids),
         "Owning specifications": tuple(
-            _render_document(item) for item in specifications
+            _render_document(item, selected_requirement_ids) for item in specifications
         ),
-        "Object lifecycles": tuple(_render_document(item) for item in objects),
-        "Journeys": tuple(_render_document(item) for item in journeys),
-        "Cross-cutting standards": tuple(_render_document(item) for item in standards),
+        "Object lifecycles": tuple(
+            _render_document(item, selected_requirement_ids) for item in objects
+        ),
+        "Journeys": tuple(
+            _render_document(item, selected_requirement_ids) for item in journeys
+        ),
+        "Cross-cutting standards": tuple(
+            _render_document(item, selected_requirement_ids) for item in standards
+        ),
         "Source ownership": _bullet_values(pack.source_owners),
         "Implementation posture": (pack.implementation_posture,),
         "Known risks": _bullet_values(pack.known_risks),
@@ -1075,18 +1217,46 @@ def _render_requirement(requirement: Requirement) -> str:
     body = requirement.body.strip()
     quoted_body = "\n".join(f"  > {line}" for line in body.splitlines())
     return (
-        f"- **{requirement.requirement_id} — {_inline(requirement.title)}** "
-        f"(`{requirement.modality.value}`, `{requirement.concept}`):\n{quoted_body}"
+        f"- **{requirement.requirement_id}** (`{requirement.modality.value}`):\n{quoted_body}"
     )
 
 
-def _render_document(document: CanonDocument) -> str:
+def _render_laws(
+    laws: tuple[Requirement, ...],
+    embedded_law_ids: frozenset[str],
+) -> tuple[str, ...]:
+    """Embed direct laws and explicitly reference the complete inherited-law set."""
+
+    embedded = tuple(
+        _render_requirement(law)
+        for law in laws
+        if law.requirement_id in embedded_law_ids
+    )
+    referenced = tuple(
+        law.requirement_id
+        for law in laws
+        if law.requirement_id not in embedded_law_ids
+    )
+    if not referenced:
+        return embedded
+    reference = (
+        "- Complete inherited-law bodies are bound by the Canon SHA and referenced, "
+        "not embedded: " + ", ".join(f"`{identifier}`" for identifier in referenced) + "."
+    )
+    return (*embedded, reference)
+
+
+def _render_document(
+    document: CanonDocument,
+    selected_requirement_ids: frozenset[str],
+) -> str:
     requirements = "\n".join(
         f"  {_render_requirement(requirement)}"
         for requirement in sorted(
             document.requirements,
             key=lambda item: item.requirement_id,
         )
+        if requirement.requirement_id in selected_requirement_ids
     )
     heading = (
         f"- **{document.spec_id} — {_inline(document.title)}** "
