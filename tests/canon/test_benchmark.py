@@ -1,8 +1,6 @@
 import importlib
 import importlib.util
-import hashlib
 import json
-import shutil
 import tempfile
 import unittest
 from copy import deepcopy
@@ -14,15 +12,10 @@ from tools.ambitions_canon import cli as canon_cli
 from tools.ambitions_canon import build as canon_build
 from tools.ambitions_canon.model import CanonError
 from tools.ambitions_canon.model import Modality
-from tools.ambitions_canon.render import stable_json
 
 
 ROOT = Path(__file__).resolve().parents[2]
 FIXTURES = Path(__file__).with_name("fixtures") / "benchmarks"
-SEMANTIC_COMPARISON = (
-    Path(__file__).with_name("fixtures")
-    / "benchmark-semantic-evidence/final-semantic-comparison.json"
-)
 SCENARIO_IDS = (
     "today-swiftui",
     "time-recurrence",
@@ -443,6 +436,24 @@ class BenchmarkTest(unittest.TestCase):
                 self.assertTrue(scenario.proof_present)
                 self.assertTrue(scenario.passed)
 
+    def test_visually_governed_benchmark_packs_include_scope_authority(self):
+        benchmark = self.benchmark_module()
+        result = benchmark.run_benchmark(ROOT, FIXTURES)
+        packs = {scenario.scenario_id: scenario.pack for scenario in result.scenarios}
+
+        today = packs["today-swiftui"]
+        capture = packs["capture-proposal"]
+        self.assertIn(
+            "SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001",
+            today["applicable_requirement_ids"],
+        )
+        self.assertTrue(any("VSP-02" in item for item in today["visual_authority"]))
+        self.assertIn(
+            "SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001",
+            capture["applicable_requirement_ids"],
+        )
+        self.assertTrue(any("VSP-05" in item for item in capture["visual_authority"]))
+
     def test_benchmark_budget_enforcement_uses_estimated_tokens_not_characters(self):
         benchmark = self.benchmark_module()
         fixture = next(
@@ -587,140 +598,80 @@ class BenchmarkTest(unittest.TestCase):
         self.assertTrue(first.endswith("\n"))
         positions = [first.index(scenario_id) for scenario_id in SCENARIO_IDS]
         self.assertEqual(positions, sorted(positions))
-        self.assertIn("Semantic quality comparison", first)
-        self.assertIn("separate evidence", first)
-        self.assertIn("never a CI, network, or LLM dependency", first)
-        self.assertIn("task21_final_score_v3", first)
-        self.assertIn("63/96", first)
-        self.assertIn("96/96", first)
-        self.assertIn("856/856", first)
-        self.assertIn("independently recomputed", first)
-        self.assertIn("generalized model quality", first)
+        self.assertIn("Semantic review posture", first)
+        self.assertIn("not run by this deterministic benchmark", first)
+        self.assertIn("explicit non-CI", first)
+        self.assertNotIn("| Response path | Score |", first)
+        self.assertNotIn("Final semantic-ID recall", first)
         self.assertIn(
             "| Scenario | Characters (informational) | Estimated tokens | Budget class | Token ceiling |",
             first,
         )
-        self.assertNotIn("review is pending", first)
+        self.assertIn("No semantic quality winner is claimed", first)
 
-    def test_semantic_comparison_contract_records_independent_bounded_evidence(self):
+    def test_deterministic_benchmark_does_not_load_model_semantic_evidence(self):
         benchmark = self.benchmark_module()
 
-        comparison = benchmark.load_semantic_comparison(SEMANTIC_COMPARISON)
-
-        raw = SEMANTIC_COMPARISON.read_bytes()
-        self.assertTrue(raw.endswith(b"\n"))
-        json.loads(raw)
-        self.assertEqual(comparison.reviewer, "task21_final_score_v3")
-        self.assertEqual(comparison.model, "Ultra")
-        self.assertEqual(comparison.prompt_sha256, "928a72050ce0f978e2827aa93654e11cda41cc0cfdccaaa55bff6e87bf3d69ec")
-        self.assertEqual(comparison.canon_sha256, "7613037640f38d7771c9efc3d922acd5978e2cc5a47d51ec91944bf5ad093865")
-        self.assertEqual(
-            comparison.score_evidence_sha256,
-            "c6172e41528ef4cd281aa5c995d6420f3fc8836eb57f0c9ffd646544489ebfb9",
-        )
-        self.assertEqual(
-            comparison.new_evidence_sha256,
-            "77616d5171d6cb2ab7fb81b8e02ee1dbfa9d88fc48072fd8622c863a7ec5bad3",
-        )
-        self.assertEqual((comparison.old_score, comparison.new_score), (63, 96))
-        self.assertEqual(
-            (
-                comparison.semantic_recall_numerator,
-                comparison.semantic_recall_denominator,
-                comparison.semantic_precision_numerator,
-                comparison.semantic_precision_denominator,
-            ),
-            (856, 856, 856, 856),
-        )
-        self.assertEqual(tuple(item.scenario_id for item in comparison.scenarios), SCENARIO_IDS)
-        self.assertEqual(tuple(item.old_score for item in comparison.scenarios), (8, 8, 8, 8, 8, 8, 8, 7))
-        self.assertEqual(tuple(item.new_score for item in comparison.scenarios), (12,) * 8)
-        self.assertIn("generalized model quality", comparison.proof_ceiling)
-
-    def test_semantic_comparison_is_offline_bound_to_evidence_and_pack_bytes(self):
-        benchmark = self.benchmark_module()
-        comparison = benchmark.load_semantic_comparison(SEMANTIC_COMPARISON)
-
-        self.assertTrue(hasattr(comparison, "prompt_path"))
-        self.assertTrue(hasattr(comparison, "old_evidence_path"))
-        self.assertTrue(hasattr(comparison, "new_evidence_path"))
-        self.assertTrue(hasattr(comparison, "score_evidence_path"))
-        self.assertTrue(hasattr(comparison, "compiler_input_sha256"))
-        self.assertTrue(hasattr(comparison, "evaluated_pack_hashes"))
-        self.assertEqual(
-            tuple(item.scenario_id for item in comparison.evaluated_pack_hashes),
-            SCENARIO_IDS,
-        )
-        self.assertEqual(
-            comparison.compiler_input_sha256,
-            "654e4701084520ef2058fbd20473a7a2bd91005900369356d4396ab90917fd5b",
-        )
-
-    def test_semantic_compiler_input_is_recomputed_from_current_pack_bytes(self):
-        benchmark = self.benchmark_module()
+        self.assertFalse(hasattr(benchmark, "load_semantic_comparison"))
         result = benchmark.run_benchmark(ROOT, FIXTURES)
-        entries = []
-        for scenario in result.scenarios:
-            entries.extend(
-                (
-                    (
-                        f"{scenario.scenario_id}.md",
-                        scenario.pack_markdown.encode("utf-8"),
-                    ),
-                    (
-                        f"{scenario.scenario_id}.json",
-                        stable_json(scenario.pack),
-                    ),
-                )
-            )
-        self.assertEqual(
-            canon_build._content_sha_entries(entries),
-            result.semantic_comparison.compiler_input_sha256,
+
+        self.assertFalse(hasattr(result, "semantic_comparison"))
+
+    def test_semantic_review_prompts_are_symmetric_and_fixture_blind(self):
+        benchmark = self.benchmark_module()
+        fixtures = benchmark.load_benchmark_fixtures(FIXTURES)
+
+        old_prompt = benchmark.render_semantic_review_prompt(
+            fixtures,
+            context_label="old-truth-path",
+            context_entries=("docs/truth/README.md",),
+        )
+        new_prompt = benchmark.render_semantic_review_prompt(
+            fixtures,
+            context_label="new-task-packs",
+            context_entries=("today-swiftui.md",),
         )
 
-    def test_semantic_comparison_rejects_release_budget_binding_tamper(self):
-        benchmark = self.benchmark_module()
-        with tempfile.TemporaryDirectory(
-            dir=SEMANTIC_COMPARISON.parent.parent
-        ) as temporary_directory:
-            evidence = Path(temporary_directory)
-            shutil.copytree(SEMANTIC_COMPARISON.parent, evidence, dirs_exist_ok=True)
-            comparison_path = evidence / "final-semantic-comparison.json"
-            payload = json.loads(comparison_path.read_bytes())
-            payload["evidence"]["verification"][
-                "release_fixture_approved_budget_class"
-            ] = "normal"
-            comparison_path.write_text(
-                json.dumps(payload, indent=2) + "\n", encoding="utf-8"
-            )
-            hashes = dict(benchmark.SEMANTIC_EVIDENCE_HASHES)
-            hashes["final-semantic-comparison.json"] = hashlib.sha256(
-                comparison_path.read_bytes()
-            ).hexdigest()
-            with mock.patch.object(benchmark, "SEMANTIC_EVIDENCE_HASHES", hashes):
-                with self.assertRaises(CanonError) as raised:
-                    benchmark.load_semantic_comparison(comparison_path)
-        self.assertEqual(raised.exception.code, "BENCHMARK_SEMANTIC_STALE")
+        old_instructions = old_prompt.split("## Symmetric task instructions", 1)[1]
+        new_instructions = new_prompt.split("## Symmetric task instructions", 1)[1]
+        old_instructions = old_instructions.split("## Supplied context", 1)[0]
+        new_instructions = new_instructions.split("## Supplied context", 1)[0]
+        self.assertEqual(old_instructions, new_instructions)
+        for prompt in (old_prompt, new_prompt):
+            self.assertNotIn("expected_requirement", prompt)
+            self.assertNotIn("expected_source", prompt)
+            self.assertNotIn("shared_law_allowlist", prompt)
+            self.assertNotIn("Response path | Score", prompt)
+            self.assertIn("semantic equivalence", prompt)
+            self.assertIn("relevant-law recall", prompt)
+            self.assertIn("unauthorized assumptions", prompt)
+            self.assertIn("source ownership", prompt)
+            self.assertIn("validation", prompt)
+            self.assertIn("proof discipline", prompt)
 
-    def test_semantic_evidence_tamper_fails_closed_offline(self):
+    def test_semantic_review_bundle_records_honest_hash_posture(self):
         benchmark = self.benchmark_module()
-        with tempfile.TemporaryDirectory() as temporary_directory:
-            evidence = Path(temporary_directory) / "evidence"
-            shutil.copytree(SEMANTIC_COMPARISON.parent, evidence)
-            prompt = evidence / "final-new-pack-prompt.md"
-            prompt.write_bytes(prompt.read_bytes() + b"tampered\n")
-            with self.assertRaises(CanonError) as raised:
-                benchmark.load_semantic_comparison(
-                    evidence / "final-semantic-comparison.json"
-                )
-        self.assertEqual(raised.exception.code, "BENCHMARK_SEMANTIC_STALE")
 
-    def test_tracked_semantic_evidence_has_exact_single_terminal_newline(self):
-        for path in sorted(SEMANTIC_COMPARISON.parent.iterdir()):
-            with self.subTest(path=path.name):
-                raw = path.read_bytes()
-                self.assertTrue(raw.endswith(b"\n"))
-                self.assertFalse(raw.endswith(b"\n\n"))
+        outputs = benchmark.build_semantic_review_bundle(
+            ROOT,
+            FIXTURES,
+            reviewer="Independent reviewer",
+            model="review-model",
+        )
+        record = json.loads(outputs[Path("semantic-review-record.json")])
+
+        self.assertEqual(record["reviewer"], "Independent reviewer")
+        self.assertEqual(record["model"], "review-model")
+        self.assertEqual(record["status"], "awaiting_independent_responses")
+        self.assertIsNone(record["old_response_sha256"])
+        self.assertIsNone(record["new_response_sha256"])
+        self.assertRegex(record["old_prompt_sha256"], r"^[0-9a-f]{64}$")
+        self.assertRegex(record["new_prompt_sha256"], r"^[0-9a-f]{64}$")
+        self.assertRegex(record["canon_sha256"], r"^[0-9a-f]{64}$")
+        self.assertEqual(len(record["pack_hashes"]), 8)
+        self.assertNotIn("winner", record)
+        self.assertNotIn("score", record)
+
 
     def test_report_write_is_atomic_and_check_detects_stale_bytes(self):
         benchmark = self.benchmark_module()
@@ -771,6 +722,27 @@ class BenchmarkTest(unittest.TestCase):
         with mock.patch.object(canon_cli, "_benchmark", return_value=0) as run:
             self.assertEqual(canon_cli.main(["benchmark"]), 0)
         run.assert_called_once_with(ROOT)
+
+        with mock.patch.object(canon_cli, "_semantic_review", return_value=0) as review:
+            self.assertEqual(
+                canon_cli.main(
+                    [
+                        "semantic-review",
+                        "--reviewer",
+                        "Independent reviewer",
+                        "--model",
+                        "review-model",
+                    ]
+                ),
+                0,
+            )
+        review.assert_called_once_with(
+            ROOT,
+            reviewer="Independent reviewer",
+            model="review-model",
+            old_response=None,
+            new_response=None,
+        )
 
     def test_fixture_json_is_canonical_newline_terminated_input(self):
         for path in sorted(FIXTURES.glob("*.json")):

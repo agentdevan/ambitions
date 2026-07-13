@@ -33,6 +33,7 @@ from tools.ambitions_canon.model import (
     Requirement,
 )
 from tools.ambitions_canon.render import stable_json
+from tools.ambitions_canon.traceability import TraceabilityReport
 
 
 PACK_SECTION_ORDER = (
@@ -278,6 +279,8 @@ def build_task_pack(
     intake: TaskIntake,
     repository_sha: str,
     known_issues: Sequence[Mapping[str, object]],
+    *,
+    traceability: TraceabilityReport | None = None,
 ) -> TaskPack:
     """Compile the dependency-closed, scope-bounded task pack or fail closed."""
 
@@ -358,7 +361,12 @@ def build_task_pack(
         )
     )
 
-    requirement_graph = _requirement_inclusion_graph(roots, closure, intake.scope)
+    requirement_graph = _requirement_inclusion_graph(
+        roots,
+        closure,
+        intake.scope,
+        include_visual_authority=intake.task_type == "swiftui",
+    )
     semantic_documents = tuple(
         document for document in closure if document.spec_id in requirement_graph
     )
@@ -415,6 +423,25 @@ def build_task_pack(
         )
     )
 
+    evidence_requirement_ids = frozenset(
+        selected_requirement_ids | {law.requirement_id for law in laws}
+    )
+    evidence_records = tuple(
+        record
+        for record in (traceability.records if traceability is not None else ())
+        if record.requirement_id in evidence_requirement_ids
+    )
+    current_test_reference_ids = tuple(
+        sorted(
+            {
+                reference.reference_id
+                for record in evidence_records
+                for reference in record.test_references
+            }
+        )
+    )
+    required_tests = tuple(sorted(set(required_tests) | set(current_test_reference_ids)))
+
     shadow = registry.manifest.authority_state is AuthorityState.SHADOW
     no_owner = not roots
     implementation_posture = (
@@ -423,12 +450,46 @@ def build_task_pack(
         if shadow
         else "Implementation posture must be verified from current source, tests, and proof."
     )
-    known_risks = tuple(
+    implementation_posture += " " + _traceability_posture(
+        evidence_records,
+        evidence_requirement_ids,
+        supplied=traceability is not None,
+    )
+    known_risk_values = (
         sorted(
             {str(issue["summary"]) for issue in relevant_issues}
             | (
                 {"Declared scope has no owning specification in the current canon."}
                 if no_owner
+                else set()
+            )
+        )
+    )
+    visual_references = tuple(
+        sorted(
+            {
+                reference.reference_id: reference
+                for record in evidence_records
+                for reference in record.figma_references
+                if reference.authority_role is not None
+                and reference.authority_role.value == "approved_target"
+                and reference.approval_state == "approved"
+            }.values(),
+            key=lambda item: item.reference_id,
+        )
+    )
+    visual_required = intake.task_type == "swiftui" or any(
+        "VISUAL-AUTHORITY" in identifier for identifier in evidence_requirement_ids
+    )
+    visual_gap = visual_required and not visual_references
+    known_risks = tuple(
+        sorted(
+            set(known_risk_values)
+            | (
+                {
+                    "Required visual authority is missing; UI readiness remains stopped."
+                }
+                if visual_gap
                 else set()
             )
         )
@@ -441,15 +502,38 @@ def build_task_pack(
         )
     )
     visual_authority = (
-        "No task-scoped visual authority is represented in this compiler stage.",
+        tuple(_visual_authority_line(item) for item in visual_references)
+        if visual_references
+        else (
+            "UI-readiness stop: required visual authority is not mapped for this scope.",
+        )
+        if visual_gap
+        else ("No applicable governed visual authority is mapped for this scope.",)
     )
     required_validation = (
         "python3 scripts/ambitions-canon.py audit",
         "python3 scripts/ambitions-canon.py build --check",
         "git diff --check",
     )
+    proof_references = tuple(
+        sorted(
+            {
+                reference.reference_id: reference
+                for record in evidence_records
+                for reference in record.proof_references
+            }.values(),
+            key=lambda item: item.reference_id,
+        )
+    )
     required_proof = (
         "Current source, focused tests, regression tests, and claim-specific proof.",
+        *tuple(
+            "Current proof reference "
+            f"{item.reference_id} at {item.source}; posture: "
+            f"{item.implementation_status or 'evidence only; claim status unverified'}."
+            for item in proof_references
+        ),
+        _proof_gap_line(evidence_records, evidence_requirement_ids),
     )
     forbidden_changes = (
         "Changes outside the declared task scope and changed-file boundary.",
@@ -460,6 +544,8 @@ def build_task_pack(
         if shadow
         else "Source/governance claim only within the declared scope and current linked evidence."
     )
+    if visual_gap:
+        claim_ceiling += " UI work is blocked by the visual-authority gap."
     rollback_requirements = (
         "Record the pre-change Git SHA and provide a scoped revert path.",
     )
@@ -539,6 +625,91 @@ def build_task_pack(
             ),
         )
     return pack
+
+
+def load_task_pack_traceability(root: Path, registry: CanonRegistry) -> TraceabilityReport:
+    """Load the same tracked, offline evidence used by Train 4 projections."""
+
+    from tools.ambitions_canon.external_authority import (
+        load_external_reference_snapshot,
+        validate_external_reference_snapshot,
+    )
+    from tools.ambitions_canon.traceability import build_traceability
+
+    snapshot = load_external_reference_snapshot(root)
+    validate_external_reference_snapshot(root, snapshot)
+    report = build_traceability(registry, root, snapshot.references)
+    validate_external_reference_snapshot(root, snapshot)
+    return report
+
+
+def _traceability_posture(
+    records: Sequence[object],
+    required_ids: frozenset[str],
+    *,
+    supplied: bool,
+) -> str:
+    if not supplied:
+        return "Current traceability evidence was not supplied; mappings remain unknown."
+    by_status: dict[str, int] = {}
+    test_mapped: list[str] = []
+    proof_mapped: list[str] = []
+    for record in records:
+        source_statuses = {item.status for item in record.source_mappings}
+        status = (
+            "source_files_present"
+            if "source_files_present" in source_statuses
+            else "source_mapping_gap"
+        )
+        by_status[status] = by_status.get(status, 0) + 1
+        if record.test_references:
+            test_mapped.append(record.requirement_id)
+        if record.proof_references:
+            proof_mapped.append(record.requirement_id)
+    represented = {record.requirement_id for record in records}
+    missing = sorted(required_ids - represented)
+    parts = [
+        f"Current traceability covers {len(represented)}/{len(required_ids)} requirements."
+    ]
+    for status in sorted(by_status):
+        parts.append(f"{status}: {by_status[status]} requirements.")
+    parts.append(
+        "current test evidence mapped: "
+        + (",".join(sorted(test_mapped)) if test_mapped else "none")
+        + "."
+    )
+    parts.append(
+        "current proof evidence mapped: "
+        + (",".join(sorted(proof_mapped)) if proof_mapped else "none")
+        + "."
+    )
+    if missing:
+        parts.append(f"traceability gap: {len(missing)} requirements absent from the report.")
+    return " ".join(parts)
+
+
+def _visual_authority_line(reference: object) -> str:
+    variants = ", ".join(reference.accessibility_variants) or "none recorded"
+    return (
+        f"{reference.visual_authority_id or 'visual-authority'} | "
+        f"{reference.reference_id} | frame {reference.frame_version or reference.revision} | "
+        f"owner {reference.approved_by or 'unrecorded'} | "
+        f"SwiftUI {reference.swiftui_plausibility or 'unrecorded'} | "
+        f"accessibility variants: {variants} | posture: "
+        f"{reference.implementation_status or 'visual evidence only; implementation unverified'}"
+    )
+
+
+def _proof_gap_line(records: Sequence[object], required_ids: frozenset[str]) -> str:
+    mapped = {
+        record.requirement_id for record in records if record.proof_references
+    }
+    gap_count = len(required_ids - mapped)
+    return (
+        f"Current proof mapping gaps: {gap_count} applicable requirements lack current proof references."
+        if gap_count
+        else "Current proof mappings exist for every applicable requirement; execution still requires validation."
+    )
 
 
 def validate_task_pack(
@@ -981,6 +1152,8 @@ def _requirement_inclusion_graph(
     roots: tuple[CanonDocument, ...],
     closure: tuple[CanonDocument, ...],
     scopes: tuple[str, ...],
+    *,
+    include_visual_authority: bool = False,
 ) -> dict[str, tuple[str, ...]]:
     """Select exact root requirements plus complete transitive dependency contracts."""
 
@@ -992,6 +1165,10 @@ def _requirement_inclusion_graph(
             requirement.requirement_id
             for requirement in root.requirements
             if _requirement_matches_scope(root, requirement, scopes)
+            or (
+                include_visual_authority
+                and "VISUAL-AUTHORITY" in requirement.requirement_id
+            )
         )
         if not scoped_requirement_ids:
             raise CanonError(

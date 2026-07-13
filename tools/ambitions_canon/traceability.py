@@ -116,9 +116,13 @@ def build_traceability(
         for requirement in document.requirements
     }
     records: list[TraceabilityRecord] = []
-    findings: list[Finding] = list(
-        external_reference_findings(registry, reference_rows, repo_root)
-    )
+    external_findings = external_reference_findings(registry, reference_rows, repo_root)
+    findings: list[Finding] = list(external_findings)
+    invalid_reference_ids = {
+        match.group(1)
+        for finding in external_findings
+        if (match := re.search(r"reference_id=([^\s]+)", finding.message))
+    }
     owner_values = tuple(
         sorted(
             {
@@ -152,7 +156,14 @@ def build_traceability(
                 )
         linked = tuple(
             sorted(
-                references_by_requirement.get(requirement.requirement_id, ()),
+                (
+                    item
+                    for item in references_by_requirement.get(
+                        requirement.requirement_id, ()
+                    )
+                    if item.reference_id not in invalid_reference_ids
+                    and item.approval_state == "approved"
+                ),
                 key=lambda item: item.reference_id,
             )
         )
@@ -416,6 +427,12 @@ def _of_kind(
 
 
 def _source_row(record: TraceabilityRecord) -> dict[str, object]:
+    if any(item.has_implementation for item in record.source_mappings):
+        current_claim_posture = "source_present_unverified"
+    elif record.source_mappings:
+        current_claim_posture = "source_mapping_gap"
+    else:
+        current_claim_posture = "source_owner_gap"
     return {
         "requirement_id": record.requirement_id,
         "references": list(record.source_owners),
@@ -430,6 +447,7 @@ def _source_row(record: TraceabilityRecord) -> dict[str, object]:
             for item in record.source_mappings
         ],
         "gaps": [item.message for item in record.findings],
+        "current_claim_posture": current_claim_posture,
     }
 
 
@@ -461,6 +479,7 @@ def _reference_row(
         for item in record.verification_ids
         if _verification_kind(item) == kind
     )
+    mapped = bool(references)
     return {
         "requirement_id": record.requirement_id,
         "references": [
@@ -472,11 +491,18 @@ def _reference_row(
             }
             for item in references
         ],
-        "verification_ids": list(verification),
-        "mapping_status": "mapped" if references or verification else "gap",
+        "required_verification_ids": list(verification),
+        "mapping_status": "mapped" if mapped else "gap",
+        "current_claim_posture": (
+            "current_evidence_mapped"
+            if mapped
+            else "required_but_unverified"
+            if verification
+            else "no_current_evidence"
+        ),
         "gap_note": (
             None
-            if references or verification
+            if mapped
             else "missing mapping is a gap and does not prove absent implementation"
         ),
     }

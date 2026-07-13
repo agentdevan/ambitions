@@ -14,6 +14,9 @@ from tools.ambitions_canon import cli as canon_cli
 from tools.ambitions_canon import task_pack as task_pack_module
 from tools.ambitions_canon.cli import _pack
 from tools.ambitions_canon.model import (
+    AuthorityClass,
+    AuthorityReference,
+    AuthorityReferenceKind,
     AuthorityState,
     CanonDocument,
     CanonError,
@@ -21,6 +24,7 @@ from tools.ambitions_canon.model import (
     DocumentKind,
     Modality,
     Requirement,
+    FigmaAuthorityRole,
 )
 from tools.ambitions_canon.registry import build_registry
 from tools.ambitions_canon.reference_index import parse_reference_index_bytes
@@ -36,6 +40,7 @@ from tools.ambitions_canon.task_pack import (
     validate_task_pack,
     write_task_pack,
 )
+from tools.ambitions_canon.traceability import build_traceability
 from tests.canon.test_audit import markdown_document, requirement_block
 from tests.canon.canon_test_support import write_required_governance_artifacts
 
@@ -491,6 +496,100 @@ class TaskPackTests(unittest.TestCase):
         self.assertEqual(set(schema["properties"]), expected)
         self.assertEqual(set(schema["required"]), expected)
         self.assertFalse(schema["additionalProperties"])
+
+    def test_pack_consumes_current_traceability_and_visual_authority(self):
+        current = sample_registry()
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            source = root / "Native/Ambitions/Surfaces/Today/TodayView.swift"
+            source.parent.mkdir(parents=True)
+            source.write_text("struct TodayView {}\n", encoding="utf-8")
+            test_path = root / "tests/TodayTests.swift"
+            test_path.parent.mkdir(parents=True)
+            test_path.write_text("final class TodayTests {}\n", encoding="utf-8")
+            proof_path = root / "docs/proof/today.json"
+            proof_path.parent.mkdir(parents=True)
+            proof_path.write_text("{}\n", encoding="utf-8")
+            references = (
+                AuthorityReference(
+                    schema_version=1,
+                    reference_id="TEST-TODAY-001",
+                    authority_class=AuthorityClass.SOURCE_AND_TESTS,
+                    reference_kind=AuthorityReferenceKind.TEST,
+                    source="tests/TodayTests.swift",
+                    revision="fixture-v1",
+                    requirement_ids=("TODAY-001",),
+                    approval_state="approved",
+                    implementation_status="focused test reference; execution not claimed",
+                ),
+                AuthorityReference(
+                    schema_version=1,
+                    reference_id="PROOF-TODAY-001",
+                    authority_class=AuthorityClass.SOURCE_AND_TESTS,
+                    reference_kind=AuthorityReferenceKind.PROOF,
+                    source="docs/proof/today.json",
+                    revision="fixture-v1",
+                    requirement_ids=("TODAY-001",),
+                    approval_state="approved",
+                    approved_by="Fixture owner",
+                    implementation_status="fixture evidence with a Yellow ceiling",
+                ),
+                AuthorityReference(
+                    schema_version=1,
+                    reference_id="FIGMA:fixture:160:93",
+                    authority_class=AuthorityClass.FIGMA,
+                    reference_kind=AuthorityReferenceKind.FIGMA,
+                    source="figma:fixture:160:93",
+                    revision="160:93",
+                    requirement_ids=("TODAY-001",),
+                    approval_state="approved",
+                    approved_by="Fixture owner",
+                    implementation_status="approved target; not implementation proof",
+                    authority_role=FigmaAuthorityRole.APPROVED_TARGET,
+                    visual_authority_id="VSP-02",
+                    canon_revision=7,
+                    frame_version="R1",
+                    swiftui_plausibility="plausible_unverified",
+                    accessibility_variants=("Dynamic Type", "VoiceOver"),
+                    reconciliation_status="applied_verified",
+                ),
+            )
+            traceability = build_traceability(current, root, references)
+
+            pack = build_task_pack(
+                current,
+                intake(),
+                "repo-sha",
+                (),
+                traceability=traceability,
+            )
+
+        self.assertIn("source_files_present", pack.implementation_posture)
+        self.assertIn("TEST-TODAY-001", pack.required_tests)
+        self.assertTrue(any("PROOF-TODAY-001" in item for item in pack.required_proof))
+        self.assertTrue(any("VSP-02" in item for item in pack.visual_authority))
+        self.assertTrue(any("FIGMA:fixture:160:93" in item for item in pack.visual_authority))
+        self.assertNotIn("No task-scoped visual authority", pack.to_markdown())
+
+    def test_swiftui_pack_without_applicable_visual_authority_carries_stop(self):
+        current = sample_registry()
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            traceability = build_traceability(
+                current,
+                Path(temporary_directory),
+                (),
+            )
+            pack = build_task_pack(
+                current,
+                intake(),
+                "repo-sha",
+                (),
+                traceability=traceability,
+            )
+
+        self.assertTrue(any("UI-readiness stop" in item for item in pack.visual_authority))
+        self.assertTrue(any("visual authority" in item for item in pack.known_risks))
+        self.assertIn("visual-authority gap", pack.claim_ceiling)
 
     def test_token_estimate_and_budget_contracts_are_exact(self):
         self.assertEqual(estimate_tokens(""), 0)

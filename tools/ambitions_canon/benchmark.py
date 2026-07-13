@@ -6,14 +6,13 @@ import hashlib
 import json
 import os
 import re
-import stat
 import tempfile
 from collections.abc import Mapping, Sequence
-from dataclasses import dataclass, replace
+from dataclasses import dataclass
 from pathlib import Path
 
 from tools.ambitions_canon.audit import audit_registry
-from tools.ambitions_canon.build import _content_sha_entries, write_outputs_atomic
+from tools.ambitions_canon.build import write_outputs_atomic
 from tools.ambitions_canon.conflicts import (
     docket_known_issues,
     load_conflict_dockets,
@@ -27,6 +26,7 @@ from tools.ambitions_canon.task_pack import (
     TaskIntake,
     build_task_pack,
     estimate_tokens,
+    load_task_pack_traceability,
     require_pack_authorization_current as _require_pack_authorization_current,
     write_task_pack,
 )
@@ -34,18 +34,19 @@ from tools.ambitions_canon.task_pack import (
 
 BENCHMARK_FIXTURE_DIR = Path("tests/canon/fixtures/benchmarks")
 BENCHMARK_REPORT = Path("docs/canon/generated/codex-consumption-benchmark.md")
-SEMANTIC_COMPARISON = Path(
-    "tests/canon/fixtures/benchmark-semantic-evidence/final-semantic-comparison.json"
-)
-SEMANTIC_EVIDENCE_HASHES = {
-    "final-new-pack-evaluation.json": "77616d5171d6cb2ab7fb81b8e02ee1dbfa9d88fc48072fd8622c863a7ec5bad3",
-    "final-new-pack-prompt.md": "928a72050ce0f978e2827aa93654e11cda41cc0cfdccaaa55bff6e87bf3d69ec",
-    "final-semantic-comparison.json": "c6172e41528ef4cd281aa5c995d6420f3fc8836eb57f0c9ffd646544489ebfb9",
-    "old-path-evaluation.json": "dca20fc2ade0981a5aaa6554edd05d2f54ec2782cf18357b2fc8a0e1ad069c3a",
-    "old-path-prompt.md": "833c89beb06195668634252bd9407ee371ca54e710add4a41bf5a279f97ae1b1",
-}
 BENCHMARK_REPOSITORY_STATE = "benchmark-repository-state-v1"
 SEMANTIC_REVIEW_PACK_DIR = Path(".codex/canon-semantic-review")
+SEMANTIC_REVIEW_TRUTH_PATHS = (
+    Path("docs/truth/README.md"),
+    Path("docs/truth/CODEX_START_HERE.md"),
+    Path("docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md"),
+    Path("docs/truth/PRODUCT_DESIGN_TRUTH.md"),
+    Path("docs/truth/PRODUCT_EXPERIENCE_CANON.md"),
+    Path("docs/truth/IMPLEMENTATION_TRUTH.md"),
+    Path("docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md"),
+    Path("docs/truth/RELEASE_TRUTH.md"),
+    Path("docs/truth/CODEX_PROCESS_TRUTH.md"),
+)
 ROOT_SURFACE_LAWS = frozenset(
     {
         "SURFACE-TODAY-IDENTITY-001",
@@ -138,77 +139,11 @@ class ScenarioResult:
 
 
 @dataclass(frozen=True, slots=True)
-class SemanticDimensionScore:
-    dimension: str
-    old_score: int
-    new_score: int
-
-
-@dataclass(frozen=True, slots=True)
-class SemanticScenarioScore:
-    scenario_id: str
-    old_score: int
-    new_score: int
-
-
-@dataclass(frozen=True, slots=True)
-class SemanticPackEvidence:
-    scenario_id: str
-    markdown_sha256: str
-    json_sha256: str
-    applicable_requirement_ids: tuple[str, ...]
-    applicable_laws: tuple[str, ...]
-    source_owners: tuple[str, ...]
-    required_validation: tuple[str, ...]
-    required_proof: tuple[str, ...]
-    forbidden_changes: tuple[str, ...]
-    claim_ceiling: str
-
-
-@dataclass(frozen=True, slots=True)
-class SemanticComparison:
-    reviewer: str
-    model: str
-    prompt_sha256: str
-    canon_sha256: str
-    git_base_sha: str
-    old_evidence_sha256: str
-    new_evidence_sha256: str
-    score_evidence_sha256: str
-    score_max: int
-    old_score: int
-    new_score: int
-    dimension_score_max: int
-    dimensions: tuple[SemanticDimensionScore, ...]
-    scenario_score_max: int
-    scenarios: tuple[SemanticScenarioScore, ...]
-    protocol_deviations: tuple[str, ...]
-    winner: str
-    proof_ceiling: str
-    prompt_path: str
-    old_evidence_path: str
-    new_evidence_path: str
-    score_evidence_path: str
-    compiler_input_sha256: str
-    semantic_recall_numerator: int
-    semantic_recall_denominator: int
-    semantic_precision_numerator: int
-    semantic_precision_denominator: int
-    missing_identifier_count: int
-    unexpected_identifier_count: int
-    owner_false_negative_count: int
-    owner_false_positive_count: int
-    conclusion: str
-    evaluated_pack_hashes: tuple[SemanticPackEvidence, ...]
-
-
-@dataclass(frozen=True, slots=True)
 class BenchmarkResult:
     canon_revision: int
     canon_sha: str
     authority_state: str
     scenarios: tuple[ScenarioResult, ...]
-    semantic_comparison: SemanticComparison
 
 
 def load_benchmark_fixtures(directory: Path) -> tuple[BenchmarkFixture, ...]:
@@ -302,625 +237,24 @@ def load_benchmark_fixtures(directory: Path) -> tuple[BenchmarkFixture, ...]:
     return tuple(fixtures)
 
 
-def load_semantic_comparison(path: Path) -> SemanticComparison:
-    """Verify confined semantic evidence bytes and derive the bounded score summary."""
-
-    evidence_root = path.parent
-    artifacts: dict[str, bytes] = {}
-    for name, expected_sha in SEMANTIC_EVIDENCE_HASHES.items():
-        candidate = evidence_root / name
-        try:
-            info = candidate.lstat()
-            content = candidate.read_bytes()
-        except OSError as exc:
-            raise CanonError(
-                "BENCHMARK_SEMANTIC_INVALID",
-                "semantic evidence artifact is missing or unreadable",
-                candidate,
-            ) from exc
-        if not stat.S_ISREG(info.st_mode):
-            raise CanonError(
-                "BENCHMARK_SEMANTIC_INVALID",
-                "semantic evidence artifact must be a real regular file",
-                candidate,
-            )
-        actual_sha = hashlib.sha256(content).hexdigest()
-        if actual_sha != expected_sha:
-            raise CanonError(
-                "BENCHMARK_SEMANTIC_STALE",
-                f"semantic evidence hash mismatch: {name}",
-                candidate,
-            )
-        artifacts[name] = content
-
-    try:
-        comparison = json.loads(artifacts["final-semantic-comparison.json"])
-        final_evaluation = json.loads(artifacts["final-new-pack-evaluation.json"])
-        json.loads(artifacts["old-path-evaluation.json"])
-    except (UnicodeError, json.JSONDecodeError) as exc:
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_INVALID",
-            "semantic evidence JSON is invalid",
-            path,
-        ) from exc
-    expected_fields = {
-        "schema_version",
-        "reviewer",
-        "model_assignment",
-        "evidence",
-        "scoring_protocol",
-        "paths",
-        "winner",
-        "score_delta",
-        "protocol_deviations",
-        "conclusion",
-        "proof_ceiling",
-    }
-    if not isinstance(comparison, dict) or set(comparison) != expected_fields:
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_INVALID",
-            "final semantic comparison fields do not match schema version 2",
-            path,
-        )
-    if comparison.get("schema_version") != 2:
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_INVALID",
-            "final semantic comparison schema_version must be integer 2",
-            path,
-        )
-    evaluation_fields = {
-        "reviewer",
-        "model",
-        "prompt_sha256",
-        "compiler_input_sha256",
-        "evaluation_metadata",
-        "verified_pack_hashes",
-        "scenarios",
-        "proof_ceiling",
-    }
-    if not isinstance(final_evaluation, dict) or set(final_evaluation) != evaluation_fields:
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_INVALID",
-            "final semantic evaluation fields do not match the closed v3 contract",
-            path,
-        )
-    evaluation_metadata = final_evaluation.get("evaluation_metadata")
-    metadata_fields = {
-        "evaluation_base_commit",
-        "scenario_count",
-        "pack_authority_state",
-        "pack_repository_sha",
-        "canon_revision",
-        "canon_sha256",
-        "compiler_version",
-        "schema_version",
-        "all_binding_hashes_verified",
-    }
-    if (
-        not isinstance(evaluation_metadata, dict)
-        or set(evaluation_metadata) != metadata_fields
-    ):
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_INVALID",
-            "final evaluation metadata does not match the closed v3 contract",
-            path,
-        )
-    evidence = comparison.get("evidence")
-    paths = comparison.get("paths")
-    if not isinstance(evidence, dict) or not isinstance(paths, dict):
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_INVALID",
-            "semantic evidence and score paths must be objects",
-            path,
-        )
-    old_binding = evidence.get("old_path")
-    new_binding = evidence.get("final_new_pack")
-    if not isinstance(old_binding, dict) or not isinstance(new_binding, dict):
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_INVALID",
-            "semantic evidence bindings are missing",
-            path,
-        )
-    expected_old_sha = SEMANTIC_EVIDENCE_HASHES["old-path-evaluation.json"]
-    expected_old_prompt_sha = SEMANTIC_EVIDENCE_HASHES["old-path-prompt.md"]
-    expected_new_sha = SEMANTIC_EVIDENCE_HASHES["final-new-pack-evaluation.json"]
-    expected_prompt_sha = SEMANTIC_EVIDENCE_HASHES["final-new-pack-prompt.md"]
-    if (
-        old_binding.get("sha256") != expected_old_sha
-        or old_binding.get("prompt_sha256") != expected_old_prompt_sha
-        or new_binding.get("sha256") != expected_new_sha
-        or new_binding.get("prompt_sha256") != expected_prompt_sha
-    ):
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_STALE",
-            "semantic comparison does not bind the tracked prompt/response bytes",
-            path,
-        )
-    compiler_input_sha = _semantic_string(
-        new_binding.get("compiler_input_sha256"),
-        "compiler_input_sha256",
-        path,
-    )
-    evaluation_base = _semantic_string(
-        new_binding.get("evaluation_base_commit"),
-        "evaluation_base_commit",
-        path,
-    )
-    if _SHA256.fullmatch(compiler_input_sha) is None or _GIT_SHA.fullmatch(
-        evaluation_base
-    ) is None:
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_INVALID",
-            "compiler input or evaluation base is malformed",
-            path,
-        )
-    prompt_text = artifacts["final-new-pack-prompt.md"].decode("utf-8")
-    if compiler_input_sha not in prompt_text or evaluation_base not in prompt_text:
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_STALE",
-            "frozen prompt does not bind compiler input and evaluation base",
-            evidence_root / "final-new-pack-prompt.md",
-        )
-    if (
-        final_evaluation.get("reviewer") != "task_21_transitive_final_new_pack_eval"
-        or final_evaluation.get("model") != "Ultra"
-        or final_evaluation.get("prompt_sha256") != expected_prompt_sha
-        or final_evaluation.get("compiler_input_sha256") != compiler_input_sha
-        or evaluation_metadata.get("evaluation_base_commit") != evaluation_base
-        or evaluation_metadata.get("scenario_count") != len(SCENARIO_ORDER)
-        or evaluation_metadata.get("pack_authority_state") != "shadow"
-        or evaluation_metadata.get("pack_repository_sha")
-        != BENCHMARK_REPOSITORY_STATE
-        or evaluation_metadata.get("canon_revision") != 1
-        or evaluation_metadata.get("schema_version") != 1
-        or evaluation_metadata.get("all_binding_hashes_verified") is not True
-    ):
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_STALE",
-            "final response metadata differs from its frozen prompt/comparison",
-            evidence_root / "final-new-pack-evaluation.json",
-        )
-
-    fixture_hashes = evidence.get("fixture_sha256")
-    if not isinstance(fixture_hashes, dict):
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_INVALID", "fixture hashes are missing", path
-        )
-    try:
-        repository_root = path.parents[4]
-    except IndexError as exc:
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_INVALID",
-            "semantic evidence path is outside the repository fixture tree",
-            path,
-        ) from exc
-    fixtures = load_benchmark_fixtures(repository_root / BENCHMARK_FIXTURE_DIR)
-    for fixture in fixtures:
-        actual_fixture_sha = hashlib.sha256(fixture.source_path.read_bytes()).hexdigest()
-        if fixture_hashes.get(fixture.scenario_id) != actual_fixture_sha:
-            raise CanonError(
-                "BENCHMARK_SEMANTIC_STALE",
-                f"semantic comparison fixture hash mismatch: {fixture.scenario_id}",
-                fixture.source_path,
-            )
-
-    verification = evidence.get("verification")
-    expected_verification = {
-        "old_evidence_hash_matches": True,
-        "new_evidence_hash_matches": True,
-        "old_prompt_hash_matches": True,
-        "new_prompt_hash_matches": True,
-        "compiler_input_value_matches_prompt_and_new_response": True,
-        "compiler_input_independently_recomputed_from_output_corpus": True,
-        "evaluation_base_matches_head": True,
-        "canon_sha_matches_between_responses_and_all_packs": True,
-        "all_sixteen_pack_file_hashes_match_disk_prompt_and_new_response": True,
-        "scenario_count_old": len(SCENARIO_ORDER),
-        "scenario_count_new": len(SCENARIO_ORDER),
-        "scenario_ids_exact_and_ordered_old": True,
-        "scenario_ids_exact_and_ordered_new": True,
-        "new_semantic_arrays_exact_and_ordered_against_fixtures": True,
-        "new_owner_validation_and_proof_arrays_exact_and_ordered": True,
-        "release_fixture_task_type": "release",
-        "release_fixture_approved_budget_class": "complex",
-        "release_fixture_approved_token_budget": 30_000,
-        "budget_ceiling_unit": "estimated_tokens",
-        "characters_are_informational_only": True,
-    }
-    if verification != expected_verification:
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_STALE",
-            "semantic verification bindings differ from the approved v3 contract",
-            path,
-        )
-
-    score_paths = {
-        name: paths.get(name) for name in ("old_path", "final_new_pack")
-    }
-    if not all(isinstance(value, dict) for value in score_paths.values()):
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_INVALID",
-            "semantic score paths are incomplete",
-            path,
-        )
-    old_path = score_paths["old_path"]
-    new_path = score_paths["final_new_pack"]
-    assert isinstance(old_path, dict) and isinstance(new_path, dict)
-    old_aggregate = old_path.get("aggregate")
-    new_aggregate = new_path.get("aggregate")
-    if not isinstance(old_aggregate, dict) or not isinstance(new_aggregate, dict):
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_INVALID",
-            "semantic aggregate scores are missing",
-            path,
-        )
-    score_max = _integer(new_aggregate.get("total_possible"), "score_max", path)
-    old_score = _integer(old_aggregate.get("total"), "old_score", path)
-    new_score = _integer(new_aggregate.get("total"), "new_score", path)
-    if score_max != 96 or old_score != 63 or new_score != 96:
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_STALE",
-            "semantic aggregate scores differ from frozen evidence",
-            path,
-        )
-    final_recall = new_aggregate.get("exact_identifier_recall")
-    final_precision = new_aggregate.get("exact_identifier_precision")
-    if not isinstance(final_recall, dict) or not isinstance(final_precision, dict):
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_INVALID",
-            "final semantic recall and precision aggregates are missing",
-            path,
-        )
-    semantic_recall_numerator = _integer(
-        final_recall.get("numerator"), "semantic recall numerator", path
-    )
-    semantic_recall_denominator = _integer(
-        final_recall.get("denominator"), "semantic recall denominator", path
-    )
-    semantic_precision_numerator = _integer(
-        final_precision.get("numerator"), "semantic precision numerator", path
-    )
-    semantic_precision_denominator = _integer(
-        final_precision.get("denominator"), "semantic precision denominator", path
-    )
-    missing_identifier_count = _integer(
-        new_aggregate.get("missing_identifier_count"),
-        "missing identifier count",
-        path,
-    )
-    unexpected_identifier_count = _integer(
-        new_aggregate.get("unexpected_identifier_count"),
-        "unexpected identifier count",
-        path,
-    )
-    owner_false_negative_count = _integer(
-        new_aggregate.get("owner_false_negative_count"),
-        "owner false-negative count",
-        path,
-    )
-    owner_false_positive_count = _integer(
-        new_aggregate.get("owner_false_positive_count"),
-        "owner false-positive count",
-        path,
-    )
-    semantic_total = sum(
-        len(fixture.applicable_requirement_ids)
-        + len(fixture.shared_law_allowlist)
-        for fixture in fixtures
-    )
-    if (
-        semantic_recall_numerator,
-        semantic_recall_denominator,
-        semantic_precision_numerator,
-        semantic_precision_denominator,
-        missing_identifier_count,
-        unexpected_identifier_count,
-        owner_false_negative_count,
-        owner_false_positive_count,
-    ) != (
-        semantic_total,
-        semantic_total,
-        semantic_total,
-        semantic_total,
-        0,
-        0,
-        0,
-        0,
-    ):
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_STALE",
-            "final semantic union or owner mapping differs from frozen evidence",
-            path,
-        )
-    protocol = comparison.get("scoring_protocol")
-    if not isinstance(protocol, dict):
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_INVALID", "scoring protocol is missing", path
-        )
-    dimension_names = protocol.get("dimensions")
-    old_dimensions = old_aggregate.get("dimension_totals")
-    new_dimensions = new_aggregate.get("dimension_totals")
-    if (
-        not isinstance(dimension_names, list)
-        or not isinstance(old_dimensions, dict)
-        or not isinstance(new_dimensions, dict)
-        or tuple(dimension_names) != tuple(old_dimensions)
-        or tuple(dimension_names) != tuple(new_dimensions)
-    ):
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_INVALID",
-            "semantic dimension rows are not exact and ordered",
-            path,
-        )
-    dimensions = tuple(
-        SemanticDimensionScore(
-            dimension=str(name).replace("_", "-"),
-            old_score=_integer(old_dimensions[name], "old dimension score", path),
-            new_score=_integer(new_dimensions[name], "new dimension score", path),
-        )
-        for name in dimension_names
-    )
-    old_rows = old_path.get("scenarios")
-    new_rows = new_path.get("scenarios")
-    evaluation_rows = final_evaluation.get("scenarios")
-    if not all(isinstance(rows, list) for rows in (old_rows, new_rows, evaluation_rows)):
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_INVALID", "semantic scenario rows are missing", path
-        )
-    assert isinstance(old_rows, list)
-    assert isinstance(new_rows, list)
-    assert isinstance(evaluation_rows, list)
-    if tuple(row.get("scenario_id") for row in old_rows) != SCENARIO_ORDER or tuple(
-        row.get("scenario_id") for row in new_rows
-    ) != SCENARIO_ORDER or tuple(
-        row.get("scenario_id") for row in evaluation_rows
-    ) != SCENARIO_ORDER:
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_INVALID",
-            "semantic scenario IDs are not exact and ordered",
-            path,
-        )
-    scenarios = tuple(
-        SemanticScenarioScore(
-            scenario_id=scenario_id,
-            old_score=_integer(old_rows[index].get("total"), "old scenario score", path),
-            new_score=_integer(new_rows[index].get("total"), "new scenario score", path),
-        )
-        for index, scenario_id in enumerate(SCENARIO_ORDER)
-    )
-    comparison_pack_hashes = evidence.get("evaluated_pack_hashes")
-    evaluation_pack_hashes = final_evaluation.get("verified_pack_hashes")
-    if not isinstance(comparison_pack_hashes, dict) or comparison_pack_hashes != evaluation_pack_hashes:
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_STALE",
-            "comparison and response pack hashes differ",
-            path,
-        )
-    pack_evidence: list[SemanticPackEvidence] = []
-    for index, scenario_id in enumerate(SCENARIO_ORDER):
-        hashes = comparison_pack_hashes.get(scenario_id)
-        row = evaluation_rows[index]
-        if not isinstance(hashes, dict) or not isinstance(row, dict):
-            raise CanonError(
-                "BENCHMARK_SEMANTIC_INVALID", "pack evidence row is malformed", path
-            )
-        markdown_sha = _semantic_string(
-            hashes.get("markdown_sha256"), "pack markdown hash", path
-        )
-        json_sha = _semantic_string(hashes.get("json_sha256"), "pack json hash", path)
-        if _SHA256.fullmatch(markdown_sha) is None or _SHA256.fullmatch(json_sha) is None:
-            raise CanonError(
-                "BENCHMARK_SEMANTIC_INVALID", "pack hashes are malformed", path
-            )
-        if markdown_sha not in prompt_text or json_sha not in prompt_text:
-            raise CanonError(
-                "BENCHMARK_SEMANTIC_STALE",
-                f"frozen prompt omits pack hashes: {scenario_id}",
-                evidence_root / "final-new-pack-prompt.md",
-            )
-        assumptions = _semantic_strings(
-            row.get("assumptions"), "assumptions", path, allow_empty=True
-        )
-        contradictions = _semantic_strings(
-            row.get("contradictions"),
-            "contradictions",
-            path,
-            allow_empty=True,
-        )
-        comparison_row = new_rows[index]
-        if (
-            comparison_row.get("reported_assumption_count") != len(assumptions)
-            or comparison_row.get("reported_contradiction_count")
-            != len(contradictions)
-        ):
-            raise CanonError(
-                "BENCHMARK_SEMANTIC_STALE",
-                f"final response assumption/contradiction counts differ: {scenario_id}",
-                path,
-            )
-        pack_evidence.append(
-            SemanticPackEvidence(
-                scenario_id=scenario_id,
-                markdown_sha256=markdown_sha,
-                json_sha256=json_sha,
-                applicable_requirement_ids=_semantic_strings(
-                    row.get("applicable_requirement_ids"),
-                    "applicable_requirement_ids",
-                    path,
-                ),
-                applicable_laws=_semantic_strings(
-                    row.get("applicable_laws"), "applicable_laws", path
-                ),
-                source_owners=_semantic_strings(
-                    row.get("source_owners"), "source_owners", path
-                ),
-                required_validation=_semantic_strings(
-                    row.get("required_validation"), "required_validation", path
-                ),
-                required_proof=_semantic_strings(
-                    row.get("required_proof"), "required_proof", path
-                ),
-                forbidden_changes=_semantic_strings(
-                    row.get("forbidden_changes"), "forbidden_changes", path
-                ),
-                claim_ceiling=_semantic_string(
-                    row.get("claim_ceiling"), "claim_ceiling", path
-                ),
-            )
-        )
-    if sum(item.old_score for item in scenarios) != old_score or sum(
-        item.new_score for item in scenarios
-    ) != new_score:
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_INVALID",
-            "semantic scenario totals do not equal aggregates",
-            path,
-        )
-    if sum(item.old_score for item in dimensions) != old_score or sum(
-        item.new_score for item in dimensions
-    ) != new_score:
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_INVALID",
-            "semantic dimension totals do not equal aggregates",
-            path,
-        )
-    if comparison.get("winner") != "new-pack":
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_INVALID", "semantic winner is not exact", path
-        )
-    return SemanticComparison(
-        reviewer=_semantic_string(comparison.get("reviewer"), "reviewer", path),
-        model=_semantic_string(comparison.get("model_assignment"), "model", path),
-        prompt_sha256=expected_prompt_sha,
-        canon_sha256=_semantic_string(
-            evaluation_metadata.get("canon_sha256"), "canon_sha256", path
-        ),
-        git_base_sha=evaluation_base,
-        old_evidence_sha256=expected_old_sha,
-        new_evidence_sha256=expected_new_sha,
-        score_evidence_sha256=SEMANTIC_EVIDENCE_HASHES[
-            "final-semantic-comparison.json"
-        ],
-        score_max=score_max,
-        old_score=old_score,
-        new_score=new_score,
-        dimension_score_max=_integer(
-            new_aggregate.get("dimension_score_max"),
-            "dimension_score_max",
-            path,
-        ),
-        dimensions=dimensions,
-        scenario_score_max=_integer(
-            protocol.get("scenario_score_max"), "scenario_score_max", path
-        ),
-        scenarios=scenarios,
-        protocol_deviations=_semantic_strings(
-            comparison.get("protocol_deviations"),
-            "protocol_deviations",
-            path,
-            allow_empty=True,
-        ),
-        winner="new-pack",
-        proof_ceiling=_semantic_string(
-            comparison.get("proof_ceiling"), "proof_ceiling", path
-        ),
-        prompt_path=(evidence_root / "final-new-pack-prompt.md").as_posix(),
-        old_evidence_path=(evidence_root / "old-path-evaluation.json").as_posix(),
-        new_evidence_path=(
-            evidence_root / "final-new-pack-evaluation.json"
-        ).as_posix(),
-        score_evidence_path=(
-            evidence_root / "final-semantic-comparison.json"
-        ).as_posix(),
-        compiler_input_sha256=compiler_input_sha,
-        semantic_recall_numerator=semantic_recall_numerator,
-        semantic_recall_denominator=semantic_recall_denominator,
-        semantic_precision_numerator=semantic_precision_numerator,
-        semantic_precision_denominator=semantic_precision_denominator,
-        missing_identifier_count=missing_identifier_count,
-        unexpected_identifier_count=unexpected_identifier_count,
-        owner_false_negative_count=owner_false_negative_count,
-        owner_false_positive_count=owner_false_positive_count,
-        conclusion=_semantic_string(comparison.get("conclusion"), "conclusion", path),
-        evaluated_pack_hashes=tuple(pack_evidence),
-    )
-
 
 def run_benchmark(root: Path, fixture_directory: Path) -> BenchmarkResult:
     """Build and measure every representative task pack without network/model use."""
 
     registry = _load_registry(root)
     known_issues = _known_issues(root, registry)
+    traceability = load_task_pack_traceability(root, registry)
     fixtures = load_benchmark_fixtures(fixture_directory)
     scenarios = tuple(
-        _measure_scenario(registry, known_issues, fixture)
+        _measure_scenario(registry, known_issues, fixture, traceability)
         for fixture in fixtures
     )
     first_pack = scenarios[0].pack
-    semantic_comparison = load_semantic_comparison(root / SEMANTIC_COMPARISON)
-    if semantic_comparison.canon_sha256 != first_pack["canon_sha"]:
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_STALE",
-            "semantic comparison canon SHA does not match benchmark canon",
-            root / SEMANTIC_COMPARISON,
-        )
-    fixture_by_id = {fixture.scenario_id: fixture for fixture in fixtures}
-    evidence_by_id = {
-        item.scenario_id: item
-        for item in semantic_comparison.evaluated_pack_hashes
-    }
-    compiler_entries: list[tuple[str, bytes]] = []
-    for scenario in scenarios:
-        evidence = evidence_by_id[scenario.scenario_id]
-        fixture = fixture_by_id[scenario.scenario_id]
-        markdown_bytes = scenario.pack_markdown.encode("utf-8")
-        json_bytes = stable_json(scenario.pack)
-        compiler_entries.extend(
-            (
-                (f"{scenario.scenario_id}.md", markdown_bytes),
-                (f"{scenario.scenario_id}.json", json_bytes),
-            )
-        )
-        if (
-            hashlib.sha256(markdown_bytes).hexdigest()
-            != evidence.markdown_sha256
-            or hashlib.sha256(json_bytes).hexdigest() != evidence.json_sha256
-            or tuple(scenario.pack["applicable_requirement_ids"])
-            != evidence.applicable_requirement_ids
-            or tuple(scenario.pack["constitutional_laws"])
-            != evidence.applicable_laws
-            or tuple(scenario.pack["source_owners"]) != evidence.source_owners
-            or tuple(scenario.pack["required_validation"])
-            != evidence.required_validation
-            or tuple(scenario.pack["required_proof"]) != evidence.required_proof
-            or tuple(scenario.pack["forbidden_changes"])
-            != evidence.forbidden_changes
-            or scenario.pack["claim_ceiling"] != evidence.claim_ceiling
-            or set(evidence.applicable_requirement_ids)
-            | set(evidence.applicable_laws)
-            != set(fixture.applicable_requirement_ids)
-            | set(fixture.shared_law_allowlist)
-        ):
-            raise CanonError(
-                "BENCHMARK_SEMANTIC_STALE",
-                f"tracked semantic evidence differs from current pack: {scenario.scenario_id}",
-                root / SEMANTIC_COMPARISON,
-            )
-    if (
-        _content_sha_entries(compiler_entries)
-        != semantic_comparison.compiler_input_sha256
-    ):
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_STALE",
-            "framed compiler input differs from current 16 pack bytes",
-            root / SEMANTIC_COMPARISON,
-        )
     return BenchmarkResult(
         canon_revision=registry.manifest.canon_revision,
         canon_sha=str(first_pack["canon_sha"]),
         authority_state=registry.manifest.authority_state.value,
         scenarios=scenarios,
-        semantic_comparison=semantic_comparison,
     )
 
 
@@ -928,12 +262,14 @@ def _measure_scenario(
     registry: CanonRegistry,
     known_issues: Sequence[Mapping[str, object]],
     fixture: BenchmarkFixture,
+    traceability: object | None = None,
 ) -> ScenarioResult:
     pack = build_task_pack(
         registry,
         fixture.intake,
         BENCHMARK_REPOSITORY_STATE,
         known_issues,
+        traceability=traceability,
     )
     if (
         pack.budget_class != fixture.approved_budget_class
@@ -966,7 +302,7 @@ def _measure_scenario(
     missing_verification = tuple(sorted(expected_verification - actual_verification))
     unexpected_verification = tuple(sorted(actual_verification - expected_verification))
     validation_present = tuple(pack.required_validation) == fixture.expected_validation
-    proof_present = tuple(pack.required_proof) == fixture.expected_proof
+    proof_present = set(fixture.expected_proof).issubset(pack.required_proof)
     contradictions = _active_contradictions(
         registry,
         present_ids,
@@ -1061,6 +397,195 @@ def require_pack_authorization_current(
     _require_pack_authorization_current(stored, current)
 
 
+def render_semantic_review_prompt(
+    fixtures: Sequence[BenchmarkFixture],
+    *,
+    context_label: str,
+    context_entries: Sequence[str],
+) -> str:
+    """Render one fixture-blind prompt from the shared semantic-review protocol."""
+
+    lines = [
+        "# Ambitions Canon Semantic Review",
+        "",
+        f"- Comparison path: `{context_label}`",
+        "- Lane: explicit non-CI independent semantic review",
+        "",
+        "## Symmetric task instructions",
+        "",
+        "Evaluate only the supplied context for each scenario. Do not infer an expected answer from benchmark fixtures or another response path. Return one independent response per scenario with the laws and source owners you believe apply, required validation and proof, assumptions, contradictions, and claim ceiling.",
+        "",
+        "Compare semantic equivalence, relevant-law recall, contradiction control, unauthorized assumptions, source ownership, validation completeness, and proof discipline. A separate reviewer may score the two blinded response sets only after both are complete.",
+        "",
+        "Scenario tasks:",
+        "",
+    ]
+    for fixture in fixtures:
+        lines.append(
+            "- "
+            f"`{fixture.scenario_id}` — {fixture.title}; "
+            f"task type `{fixture.intake.task_type}`; "
+            f"scope {', '.join(fixture.intake.scope)}; "
+            f"changed files {', '.join(fixture.intake.changed_files)}; "
+            f"claim type `{fixture.intake.claim_type}`."
+        )
+    lines.extend(("", "## Supplied context", ""))
+    lines.extend(f"- `{entry}`" for entry in context_entries)
+    lines.extend(
+        (
+            "",
+            "## Evidence boundary",
+            "",
+            "This prompt contains no expected answer arrays or scoring fixture. Record the reviewer, model, prompt hash, canon hash, context or pack hashes, and response evidence hash before any comparison claim.",
+        )
+    )
+    return "\n".join(lines).rstrip() + "\n"
+
+
+def build_semantic_review_bundle(
+    root: Path,
+    fixture_directory: Path,
+    *,
+    reviewer: str,
+    model: str,
+    old_response: bytes | None = None,
+    new_response: bytes | None = None,
+) -> dict[Path, bytes]:
+    """Build an ignored, explicit, non-CI semantic-review evidence bundle."""
+
+    reviewer = _semantic_string(reviewer, "reviewer", root)
+    model = _semantic_string(model, "model", root)
+    if (old_response is None) != (new_response is None):
+        raise CanonError(
+            "BENCHMARK_SEMANTIC_RESPONSE_PAIR_REQUIRED",
+            "old and new semantic responses must be supplied together",
+        )
+
+    registry = _load_registry(root)
+    known_issues = _known_issues(root, registry)
+    traceability = load_task_pack_traceability(root, registry)
+    fixtures = load_benchmark_fixtures(fixture_directory)
+    outputs: dict[Path, bytes] = {}
+    pack_hashes: list[dict[str, str]] = []
+    new_context_entries: list[str] = []
+    for fixture in fixtures:
+        pack = build_task_pack(
+            registry,
+            fixture.intake,
+            BENCHMARK_REPOSITORY_STATE,
+            known_issues,
+            traceability=traceability,
+        )
+        markdown_path = Path("new-task-packs") / f"{fixture.scenario_id}.md"
+        json_path = Path("new-task-packs") / f"{fixture.scenario_id}.json"
+        markdown_bytes = pack.to_markdown().encode("utf-8")
+        json_bytes = pack.to_json_bytes()
+        outputs[markdown_path] = markdown_bytes
+        outputs[json_path] = json_bytes
+        markdown_sha = hashlib.sha256(markdown_bytes).hexdigest()
+        json_sha = hashlib.sha256(json_bytes).hexdigest()
+        pack_hashes.append(
+            {
+                "scenario_id": fixture.scenario_id,
+                "markdown_sha256": markdown_sha,
+                "json_sha256": json_sha,
+            }
+        )
+        new_context_entries.append(
+            f"{markdown_path.as_posix()} sha256={markdown_sha}; "
+            f"{json_path.as_posix()} sha256={json_sha}"
+        )
+
+    old_context_entries: list[str] = []
+    for relative in SEMANTIC_REVIEW_TRUTH_PATHS:
+        content = (root / relative).read_bytes()
+        old_context_entries.append(
+            f"{relative.as_posix()} sha256={hashlib.sha256(content).hexdigest()}"
+        )
+    old_prompt = render_semantic_review_prompt(
+        fixtures,
+        context_label="old-truth-path",
+        context_entries=old_context_entries,
+    ).encode("utf-8")
+    new_prompt = render_semantic_review_prompt(
+        fixtures,
+        context_label="new-task-packs",
+        context_entries=new_context_entries,
+    ).encode("utf-8")
+    outputs[Path("old-path-prompt.md")] = old_prompt
+    outputs[Path("new-pack-prompt.md")] = new_prompt
+
+    if old_response is not None and new_response is not None:
+        outputs[Path("responses/old-response.json")] = old_response
+        outputs[Path("responses/new-response.json")] = new_response
+    record = {
+        "schema_version": 1,
+        "lane": "explicit_non_ci_semantic_review",
+        "reviewer": reviewer,
+        "model": model,
+        "canon_revision": registry.manifest.canon_revision,
+        "canon_sha256": _registry_canon_sha_for_review(registry),
+        "old_prompt_sha256": hashlib.sha256(old_prompt).hexdigest(),
+        "new_prompt_sha256": hashlib.sha256(new_prompt).hexdigest(),
+        "pack_hashes": pack_hashes,
+        "old_response_sha256": (
+            hashlib.sha256(old_response).hexdigest()
+            if old_response is not None
+            else None
+        ),
+        "new_response_sha256": (
+            hashlib.sha256(new_response).hexdigest()
+            if new_response is not None
+            else None
+        ),
+        "status": (
+            "responses_recorded_pending_blinded_comparison"
+            if old_response is not None
+            else "awaiting_independent_responses"
+        ),
+        "comparison_dimensions": [
+            "semantic_equivalence",
+            "relevant_law_recall",
+            "contradiction_control",
+            "unauthorized_assumptions",
+            "source_ownership",
+            "validation_completeness",
+            "proof_discipline",
+        ],
+        "claim_posture": "No winner or semantic-quality score is claimed by bundle generation.",
+    }
+    outputs[Path("semantic-review-record.json")] = stable_json(record)
+    return outputs
+
+
+def write_semantic_review_bundle(
+    root: Path,
+    fixture_directory: Path,
+    *,
+    reviewer: str,
+    model: str,
+    old_response: bytes | None = None,
+    new_response: bytes | None = None,
+) -> tuple[Path, ...]:
+    outputs = build_semantic_review_bundle(
+        root,
+        fixture_directory,
+        reviewer=reviewer,
+        model=model,
+        old_response=old_response,
+        new_response=new_response,
+    )
+    output_root = root / SEMANTIC_REVIEW_PACK_DIR
+    write_outputs_atomic(output_root, outputs)
+    return tuple(output_root / path for path in sorted(outputs))
+
+
+def _registry_canon_sha_for_review(registry: CanonRegistry) -> str:
+    from tools.ambitions_canon.task_pack import _registry_canon_sha
+
+    return _registry_canon_sha(registry)
+
+
 def render_benchmark_report(result: BenchmarkResult) -> str:
     """Render deterministic tracked benchmark evidence with a bounded proof ceiling."""
 
@@ -1110,64 +635,14 @@ def render_benchmark_report(result: BenchmarkResult) -> str:
             "",
             "A stored pack fails closed after canon revision or content, Git HEAD or diff, intake or issue identity, source ownership, conflicts or known issues, and validation/proof posture changes.",
             "",
-            "## Semantic quality comparison",
+            "## Semantic review posture",
             "",
-            "Semantic quality comparison is separate evidence and never a CI, network, or LLM dependency.",
+            "Semantic review is not run by this deterministic benchmark. It belongs to the explicit non-CI semantic-review lane, where both paths receive symmetric fixture-blind instructions and independent evidence hashes.",
             "",
-            f"- Reviewer: `{result.semantic_comparison.reviewer}`",
-            f"- Model: `{result.semantic_comparison.model}`",
-            f"- Prompt SHA: `{result.semantic_comparison.prompt_sha256}`",
-            f"- Compiler input SHA: `{result.semantic_comparison.compiler_input_sha256}`",
-            "- Compiler input verification: independently recomputed from the current 16 framed pack files",
-            f"- Canon SHA: `{result.semantic_comparison.canon_sha256}`",
-            f"- Git base: `{result.semantic_comparison.git_base_sha}`",
-            f"- Old evidence SHA: `{result.semantic_comparison.old_evidence_sha256}`",
-            f"- New evidence SHA: `{result.semantic_comparison.new_evidence_sha256}`",
-            f"- Score evidence SHA: `{result.semantic_comparison.score_evidence_sha256}`",
-            "- Tracked evidence directory: `tests/canon/fixtures/benchmark-semantic-evidence/`",
-            "",
-            "| Response path | Score |",
-            "| --- | ---: |",
-            f"| Old truth-file path | {result.semantic_comparison.old_score}/{result.semantic_comparison.score_max} |",
-            f"| New task pack | {result.semantic_comparison.new_score}/{result.semantic_comparison.score_max} |",
-            "",
-            f"- Final semantic-ID recall: `{result.semantic_comparison.semantic_recall_numerator}/{result.semantic_comparison.semantic_recall_denominator}`",
-            f"- Final semantic-ID precision: `{result.semantic_comparison.semantic_precision_numerator}/{result.semantic_comparison.semantic_precision_denominator}`",
-            f"- Final missing/unexpected IDs: `{result.semantic_comparison.missing_identifier_count}/{result.semantic_comparison.unexpected_identifier_count}`",
-            f"- Final owner false negatives/false positives: `{result.semantic_comparison.owner_false_negative_count}/{result.semantic_comparison.owner_false_positive_count}`",
-            "",
-            "| Dimension | Old | New |",
-            "| --- | ---: | ---: |",
-        )
-    )
-    for dimension in result.semantic_comparison.dimensions:
-        lines.append(
-            f"| `{dimension.dimension}` | {dimension.old_score}/{result.semantic_comparison.dimension_score_max} | {dimension.new_score}/{result.semantic_comparison.dimension_score_max} |"
-        )
-    lines.extend(
-        (
-            "",
-            "| Scenario | Old | New |",
-            "| --- | ---: | ---: |",
-        )
-    )
-    for scenario in result.semantic_comparison.scenarios:
-        lines.append(
-            f"| `{scenario.scenario_id}` | {scenario.old_score}/{result.semantic_comparison.scenario_score_max} | {scenario.new_score}/{result.semantic_comparison.scenario_score_max} |"
-        )
-    lines.extend(("", "Protocol deviations:", ""))
-    lines.extend(
-        f"- {deviation}"
-        for deviation in result.semantic_comparison.protocol_deviations
-    )
-    lines.extend(
-        (
-            "",
-            result.semantic_comparison.conclusion,
+            "No semantic quality winner is claimed. The earlier asymmetric comparison is not retained because it did not use the required symmetric protocol.",
             "",
             "## Proof ceiling",
             "",
-            result.semantic_comparison.proof_ceiling,
             "The deterministic benchmark separately proves only pack construction and the measured fixture assertions at the recorded shadow canon; it does not authorize implementation.",
         )
     )
@@ -1221,6 +696,7 @@ def write_representative_packs(
 
     registry = _load_registry(root)
     known_issues = _known_issues(root, registry)
+    traceability = load_task_pack_traceability(root, registry)
     outputs: list[Path] = []
     intake_root = root / ".codex" / "canon-benchmark-intakes"
     intake_root.mkdir(parents=True, exist_ok=True)
@@ -1239,39 +715,16 @@ def write_representative_packs(
         intake = TaskIntake.from_json(payload).with_source_path(
             intake_path.relative_to(root).as_posix()
         )
-        pack = build_task_pack(registry, intake, repository_sha, known_issues)
-        markdown_path, json_path = write_task_pack(root, pack)
-        outputs.extend((markdown_path, json_path))
-    return tuple(outputs)
-
-
-def write_semantic_review_packs(
-    root: Path,
-    fixture_directory: Path,
-) -> tuple[Path, ...]:
-    """Write stable ignored pack bytes for independent semantic evaluation."""
-
-    registry = _load_registry(root)
-    known_issues = _known_issues(root, registry)
-    outputs: dict[Path, bytes] = {}
-    for fixture in load_benchmark_fixtures(fixture_directory):
-        intake = replace(
-            fixture.intake,
-            source_path=(BENCHMARK_FIXTURE_DIR / fixture.source_path.name).as_posix(),
-        )
         pack = build_task_pack(
             registry,
             intake,
-            BENCHMARK_REPOSITORY_STATE,
+            repository_sha,
             known_issues,
+            traceability=traceability,
         )
-        outputs[Path(f"{fixture.scenario_id}.md")] = pack.to_markdown().encode(
-            "utf-8"
-        )
-        outputs[Path(f"{fixture.scenario_id}.json")] = pack.to_json_bytes()
-    output_root = root / SEMANTIC_REVIEW_PACK_DIR
-    write_outputs_atomic(output_root, outputs)
-    return tuple(output_root / path for path in sorted(outputs))
+        markdown_path, json_path = write_task_pack(root, pack)
+        outputs.extend((markdown_path, json_path))
+    return tuple(outputs)
 
 
 def _write_json_atomic(path: Path, payload: Mapping[str, object]) -> None:
@@ -1315,56 +768,6 @@ def _known_issues(
         registry.supersession_entries,
     )
     return docket_known_issues(dockets)
-
-
-def _integer(value: object, field: str, path: Path) -> int:
-    if isinstance(value, bool) or not isinstance(value, int) or value < 0:
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_INVALID",
-            f"{field} must be a non-negative integer",
-            path,
-        )
-    return value
-
-
-def _score_rows(
-    value: object,
-    *,
-    key: str,
-    expected: tuple[str, ...],
-    maximum: int,
-    path: Path,
-    row_type: type[SemanticDimensionScore] | type[SemanticScenarioScore],
-) -> tuple[SemanticDimensionScore, ...] | tuple[SemanticScenarioScore, ...]:
-    if not isinstance(value, list):
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_INVALID", "score rows must be an array", path
-        )
-    rows: list[SemanticDimensionScore | SemanticScenarioScore] = []
-    for raw in value:
-        if not isinstance(raw, dict) or set(raw) != {key, "old_score", "new_score"}:
-            raise CanonError(
-                "BENCHMARK_SEMANTIC_INVALID",
-                "score row fields do not match the closed contract",
-                path,
-            )
-        identifier = _semantic_string(raw[key], key, path)
-        old_score = _integer(raw["old_score"], "old_score", path)
-        new_score = _integer(raw["new_score"], "new_score", path)
-        if old_score > maximum or new_score > maximum:
-            raise CanonError(
-                "BENCHMARK_SEMANTIC_INVALID",
-                "score row exceeds its closed range",
-                path,
-            )
-        rows.append(row_type(identifier, old_score, new_score))
-    if tuple(getattr(row, key) for row in rows) != expected:
-        raise CanonError(
-            "BENCHMARK_SEMANTIC_INVALID",
-            "score rows do not match the exact ordered comparison contract",
-            path,
-        )
-    return tuple(rows)
 
 
 def _semantic_string(value: object, field: str, path: Path) -> str:

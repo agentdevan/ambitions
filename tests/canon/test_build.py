@@ -1983,8 +1983,12 @@ class BuildTests(unittest.TestCase):
 
         for filename in ("law-test-map.json", "law-proof-map.json"):
             payload = json.loads(outputs[Path(filename)])
-            self.assertEqual(payload["mappings"][0]["mapping_status"], "mapped")
-            self.assertTrue(payload["mappings"][0]["verification_ids"])
+            self.assertEqual(payload["mappings"][0]["mapping_status"], "gap")
+            self.assertEqual(
+                payload["mappings"][0]["current_claim_posture"],
+                "required_but_unverified",
+            )
+            self.assertTrue(payload["mappings"][0]["required_verification_ids"])
         visual = json.loads(outputs[Path("visual-authority-manifest.json")])
         self.assertEqual(visual["authorities"], [])
         self.assertFalse(visual["ui_readiness"])

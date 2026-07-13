@@ -157,6 +157,9 @@ class TraceabilityTests(unittest.TestCase):
         )
 
     def test_requirement_verification_and_stable_references_feed_separate_maps(self):
+        proof = self.root / "docs/proof/today.json"
+        proof.parent.mkdir(parents=True)
+        proof.write_text("{}\n", encoding="utf-8")
         item = requirement(
             "TODAY-001",
             verification=("SCENARIO-TODAY-001", "PROOF-TODAY-001"),
@@ -183,6 +186,63 @@ class TraceabilityTests(unittest.TestCase):
         self.assertEqual(record.verification_ids, ("PROOF-TODAY-001", "SCENARIO-TODAY-001"))
         self.assertEqual(tuple(item.reference_id for item in record.test_references), ("TEST-TODAY",))
         self.assertEqual(tuple(item.reference_id for item in record.proof_references), ("PROOF-TODAY",))
+
+    def test_declared_verification_is_required_future_work_not_current_mapping(self):
+        item = requirement(
+            "TODAY-001",
+            verification=("SCENARIO-TODAY-001", "PROOF-TODAY-001"),
+        )
+        current = registry((document("SURFACE-TODAY", (item,)),))
+
+        outputs = render_traceability_maps(
+            build_traceability(current, self.root, ())
+        )
+        test_row = json.loads(outputs[Path("law-test-map.json")])["mappings"][0]
+        proof_row = json.loads(outputs[Path("law-proof-map.json")])["mappings"][0]
+
+        self.assertEqual(test_row["required_verification_ids"], ["SCENARIO-TODAY-001"])
+        self.assertEqual(proof_row["required_verification_ids"], ["PROOF-TODAY-001"])
+        self.assertEqual(test_row["references"], [])
+        self.assertEqual(proof_row["references"], [])
+        self.assertEqual(test_row["mapping_status"], "gap")
+        self.assertEqual(proof_row["mapping_status"], "gap")
+        self.assertEqual(test_row["current_claim_posture"], "required_but_unverified")
+        self.assertEqual(proof_row["current_claim_posture"], "required_but_unverified")
+        self.assertNotIn("verification_ids", test_row)
+        self.assertNotIn("verification_ids", proof_row)
+
+    def test_current_reference_mapping_and_source_posture_are_explicit(self):
+        source = self.root / "Native/Ambitions/Surfaces/Today/TodayView.swift"
+        source.parent.mkdir(parents=True)
+        source.write_text("struct TodayView {}\n", encoding="utf-8")
+        item = requirement("TODAY-001", verification=("SCENARIO-TODAY-001",))
+        current = registry(
+            (
+                document(
+                    "SURFACE-TODAY",
+                    (item,),
+                    source_owners=("Native/Ambitions/Surfaces/Today/",),
+                ),
+            )
+        )
+        references = (
+            reference(
+                "TEST-TODAY",
+                AuthorityReferenceKind.TEST,
+                "tests/canon/test_traceability.py",
+                ("TODAY-001",),
+            ),
+        )
+
+        outputs = render_traceability_maps(
+            build_traceability(current, self.root, references)
+        )
+        source_row = json.loads(outputs[Path("law-source-map.json")])["mappings"][0]
+        test_row = json.loads(outputs[Path("law-test-map.json")])["mappings"][0]
+
+        self.assertEqual(source_row["current_claim_posture"], "source_present_unverified")
+        self.assertEqual(test_row["mapping_status"], "mapped")
+        self.assertEqual(test_row["current_claim_posture"], "current_evidence_mapped")
 
     def test_generated_maps_are_sorted_by_requirement_id_and_newline_terminated(self):
         second = requirement("ZZZ-002", concept="surface.today.second", line=30)

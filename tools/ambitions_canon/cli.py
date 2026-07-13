@@ -26,7 +26,7 @@ from tools.ambitions_canon.benchmark import (
     run_benchmark,
     write_benchmark_report,
     write_representative_packs,
-    write_semantic_review_packs,
+    write_semantic_review_bundle,
 )
 from tools.ambitions_canon.coverage import coverage_findings, load_profiles
 from tools.ambitions_canon.conflicts import (
@@ -71,6 +71,7 @@ from tools.ambitions_canon.task_pack import (
     TaskIntake,
     TaskPack,
     build_task_pack,
+    load_task_pack_traceability,
     read_task_pack_pair,
     require_pack_authorization_current,
     validate_task_pack,
@@ -151,6 +152,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     subparsers.add_parser(
         "benchmark", help="benchmark deterministic bounded Codex canon consumption"
     )
+    semantic_review_parser = subparsers.add_parser(
+        "semantic-review",
+        help="prepare or record an explicit non-CI symmetric semantic review",
+    )
+    semantic_review_parser.add_argument("--reviewer", required=True)
+    semantic_review_parser.add_argument("--model", required=True)
+    semantic_review_parser.add_argument("--old-response", type=Path)
+    semantic_review_parser.add_argument("--new-response", type=Path)
     traceability_parser = subparsers.add_parser(
         "traceability",
         help="inspect generated source, test, proof, and external-reference posture",
@@ -324,6 +333,15 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     if arguments.command == "benchmark":
         return _benchmark(Path.cwd())
+
+    if arguments.command == "semantic-review":
+        return _semantic_review(
+            Path.cwd(),
+            reviewer=arguments.reviewer,
+            model=arguments.model,
+            old_response=arguments.old_response,
+            new_response=arguments.new_response,
+        )
 
     if arguments.command == "traceability":
         return _traceability(Path.cwd())
@@ -926,11 +944,13 @@ def _pack(root: Path, issue_path: Path, *, check: bool) -> int:
             )
         known_issues = _validated_docket_issues(root, registry)
         repository_sha = _repository_state_sha(root)
+        traceability = load_task_pack_traceability(root, registry)
         pack = build_task_pack(
             registry,
             intake,
             repository_sha,
             known_issues,
+            traceability=traceability,
         )
         source_snapshot = _pack_source_snapshot(pack, raw_bytes)
 
@@ -1098,6 +1118,7 @@ def _check_pack_path(root: Path, pack_path: Path) -> int:
             intake,
             _repository_state_sha(root),
             _validated_docket_issues(root, registry),
+            traceability=load_task_pack_traceability(root, registry),
         )
         (
             markdown_path,
@@ -1186,13 +1207,11 @@ def _benchmark(root: Path) -> int:
             fixture_directory,
             repository_sha,
         )
-        semantic_packs = write_semantic_review_packs(root, fixture_directory)
         print(
             "GREEN ambitions canon benchmark "
             f"scenarios={len(result.scenarios)} "
             f"report={BENCHMARK_REPORT.as_posix()} "
             f"representative_pack_files={len(packs)}"
-            f" semantic_review_pack_files={len(semantic_packs)}"
         )
         return 0
     except (OSError, CanonError) as error:
@@ -1203,6 +1222,70 @@ def _benchmark(root: Path) -> int:
         location = error.path.as_posix() if error.path is not None else "<benchmark>"
         print(f"P0_BLOCKER {error.code} {location}:{error.line or 0} {error.message}")
         return 1
+
+
+def _semantic_review(
+    root: Path,
+    *,
+    reviewer: str,
+    model: str,
+    old_response: Path | None,
+    new_response: Path | None,
+) -> int:
+    """Write ignored semantic-review prompts/evidence outside build and CI."""
+
+    try:
+        if (old_response is None) != (new_response is None):
+            raise CanonError(
+                "BENCHMARK_SEMANTIC_RESPONSE_PAIR_REQUIRED",
+                "--old-response and --new-response must be supplied together",
+            )
+        old_bytes = _read_semantic_response(root, old_response)
+        new_bytes = _read_semantic_response(root, new_response)
+        outputs = write_semantic_review_bundle(
+            root,
+            root / BENCHMARK_FIXTURE_DIR,
+            reviewer=reviewer,
+            model=model,
+            old_response=old_bytes,
+            new_response=new_bytes,
+        )
+        print(
+            "GREEN ambitions canon semantic-review "
+            f"files={len(outputs)} status="
+            f"{'responses_recorded' if old_bytes is not None else 'awaiting_responses'}"
+        )
+        return 0
+    except (OSError, CanonError) as error:
+        if not isinstance(error, CanonError):
+            error = CanonError(
+                "BENCHMARK_SEMANTIC_RESPONSE_READ",
+                "unable to read semantic response evidence",
+            )
+        location = error.path.as_posix() if error.path is not None else "<semantic-review>"
+        print(f"P0_BLOCKER {error.code} {location}:{error.line or 0} {error.message}")
+        return 1
+
+
+def _read_semantic_response(root: Path, path: Path | None) -> bytes | None:
+    if path is None:
+        return None
+    candidate = path if path.is_absolute() else root / path
+    info = candidate.lstat()
+    if not stat.S_ISREG(info.st_mode):
+        raise CanonError(
+            "BENCHMARK_SEMANTIC_RESPONSE_READ",
+            "semantic response must be a real regular file",
+            candidate,
+        )
+    content = candidate.read_bytes()
+    if not content:
+        raise CanonError(
+            "BENCHMARK_SEMANTIC_RESPONSE_READ",
+            "semantic response must not be empty",
+            candidate,
+        )
+    return content
 
 
 def _repository_state_sha(root: Path) -> str:
@@ -1298,7 +1381,13 @@ def _require_source_snapshot(
             "canon changed during task-pack use",
         ) from exc
     known_issues = _validated_docket_issues(root, registry)
-    pack = build_task_pack(registry, intake, repository_sha, known_issues)
+    pack = build_task_pack(
+        registry,
+        intake,
+        repository_sha,
+        known_issues,
+        traceability=load_task_pack_traceability(root, registry),
+    )
     current = _pack_source_snapshot(pack, raw_bytes)
     if (
         current.canon_revision != expected.canon_revision

@@ -10757,6 +10757,7 @@
   ],
   "mappings": [
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=A11Y-002 owner=Native/Ambitions/Interaction/Accessibility/; missing mapping is a gap and does not prove absent implementation",
         "gap_class=canon_to_code affected_ids=A11Y-002 owner=Native/Ambitions/Quality/Accessibility/; missing mapping is a gap and does not prove absent implementation"
@@ -10794,6 +10795,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=A11Y-DYNAMIC-TYPE-001 owner=Native/Ambitions/Interaction/Accessibility/; missing mapping is a gap and does not prove absent implementation",
         "gap_class=canon_to_code affected_ids=A11Y-DYNAMIC-TYPE-001 owner=Native/Ambitions/Quality/Accessibility/; missing mapping is a gap and does not prove absent implementation"
@@ -10831,6 +10833,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=A11Y-INPUT-EQUIVALENCE-001 owner=Native/Ambitions/Interaction/Accessibility/; missing mapping is a gap and does not prove absent implementation",
         "gap_class=canon_to_code affected_ids=A11Y-INPUT-EQUIVALENCE-001 owner=Native/Ambitions/Quality/Accessibility/; missing mapping is a gap and does not prove absent implementation"
@@ -10868,6 +10871,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=A11Y-PROOF-MATRIX-001 owner=Native/Ambitions/Interaction/Accessibility/; missing mapping is a gap and does not prove absent implementation",
         "gap_class=canon_to_code affected_ids=A11Y-PROOF-MATRIX-001 owner=Native/Ambitions/Quality/Accessibility/; missing mapping is a gap and does not prove absent implementation"
@@ -10905,6 +10909,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=A11Y-READING-FOCUS-001 owner=Native/Ambitions/Interaction/Accessibility/; missing mapping is a gap and does not prove absent implementation",
         "gap_class=canon_to_code affected_ids=A11Y-READING-FOCUS-001 owner=Native/Ambitions/Quality/Accessibility/; missing mapping is a gap and does not prove absent implementation"
@@ -10942,6 +10947,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=A11Y-REDUCED-EFFECTS-001 owner=Native/Ambitions/Interaction/Accessibility/; missing mapping is a gap and does not prove absent implementation",
         "gap_class=canon_to_code affected_ids=A11Y-REDUCED-EFFECTS-001 owner=Native/Ambitions/Quality/Accessibility/; missing mapping is a gap and does not prove absent implementation"
@@ -10979,6 +10985,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=A11Y-STATUS-ERRORS-001 owner=Native/Ambitions/Interaction/Accessibility/; missing mapping is a gap and does not prove absent implementation",
         "gap_class=canon_to_code affected_ids=A11Y-STATUS-ERRORS-001 owner=Native/Ambitions/Quality/Accessibility/; missing mapping is a gap and does not prove absent implementation"
@@ -11016,6 +11023,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -11025,6 +11033,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -11083,6 +11092,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -11117,6 +11127,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -11151,6 +11162,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -11185,6 +11197,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -11219,6 +11232,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -11253,6 +11267,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -11335,6 +11350,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -11417,6 +11433,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -11499,6 +11516,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -11581,6 +11599,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -11663,6 +11682,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -11721,6 +11741,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -11779,6 +11800,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -11813,6 +11835,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -11847,6 +11870,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -11897,6 +11921,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -11947,6 +11972,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -11997,6 +12023,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -12047,6 +12074,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -12097,6 +12125,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -12155,6 +12184,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -12213,6 +12243,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -12271,6 +12302,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -12329,6 +12361,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -12371,6 +12404,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -12413,6 +12447,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=AUTHORITY-AMENDMENT-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -12422,6 +12457,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=AUTHORITY-MIGRATION-CORPUS-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -12431,6 +12467,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=AUTHORITY-MISSION-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -12440,6 +12477,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=AUTHORITY-MOAT-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -12449,6 +12487,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=AUTHORITY-ORIGIN-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -12458,6 +12497,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=CANON-DESTRUCTIVE-SUPERSESSION-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -12467,6 +12507,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=CODEX-DEPT-001 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -12503,6 +12544,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=CODEX-DEPT-002 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -12539,6 +12581,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=CODEX-DEPT-003 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -12575,6 +12618,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=CODEX-DEPT-004 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -12611,6 +12655,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=CODEX-ISSUE-READINESS-001 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -12647,6 +12692,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=CODEX-PREFLIGHT-001 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -12683,6 +12729,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -12717,6 +12764,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -12751,6 +12799,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -12785,6 +12834,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -12819,6 +12869,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -12853,6 +12904,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -12887,6 +12939,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -12921,6 +12974,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -12955,6 +13009,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -12989,6 +13044,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=CONST-HISTORY-NO-GRAVEYARD-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -12998,6 +13054,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=CONST-HISTORY-SUPERSESSION-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -13007,6 +13064,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=CONST-IA-ROOT-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -13016,6 +13074,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=CONST-PROOF-EVIDENCE-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -13025,6 +13084,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=CONST-RUNTIME-MUTATION-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -13034,6 +13094,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=CONTROL-FORCE-NOTHING-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -13043,6 +13104,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=CONTROL-MATERIAL-CONFIRMATION-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -13052,6 +13114,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=CONTROL-UNDO-RECOVERY-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -13061,6 +13124,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -13095,6 +13159,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -13129,6 +13194,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -13163,6 +13229,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -13197,6 +13264,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -13247,6 +13315,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -13297,6 +13366,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -13347,6 +13417,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -13397,6 +13468,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -13447,6 +13519,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -13497,6 +13570,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -13547,6 +13621,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -13581,6 +13656,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -13615,6 +13691,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -13649,6 +13726,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -13683,6 +13761,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -13717,6 +13796,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -13751,6 +13831,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -13785,6 +13866,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=ENFORCEMENT-001 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -13821,6 +13903,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=ENFORCEMENT-002 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -13857,6 +13940,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=ENFORCEMENT-003 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -13893,6 +13977,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=ENFORCEMENT-004 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -13929,6 +14014,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=ENFORCEMENT-ARCHITECTURE-OWNERSHIP-001 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -13965,6 +14051,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=ENFORCEMENT-VALIDATION-STATE-001 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -14001,6 +14088,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=ENTITLEMENT-001 owner=Native/Ambitions/Quality/Security/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -14037,6 +14125,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=ENTITLEMENT-002 owner=Native/Ambitions/Quality/Security/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -14073,6 +14162,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=ENTITLEMENT-003 owner=Native/Ambitions/Quality/Security/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -14109,6 +14199,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=ENTITLEMENT-004 owner=Native/Ambitions/Quality/Security/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -14145,6 +14236,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=EVOLUTION-001 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -14181,6 +14273,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=EVOLUTION-002 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -14217,6 +14310,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=EVOLUTION-003 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -14253,6 +14347,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=EVOLUTION-004 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -14289,6 +14384,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=EVOLUTION-HORIZON-001 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -14325,6 +14421,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -14375,6 +14472,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -14425,6 +14523,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -14475,6 +14574,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -14525,6 +14625,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -14575,6 +14676,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -14625,6 +14727,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -14675,6 +14778,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -14725,6 +14829,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -14775,6 +14880,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -14825,6 +14931,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=GAP-PERFORMANCE-CALIBRATION-ATLAS-001 owner=Native/Ambitions/Quality/Performance/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -14853,6 +14960,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=GOVERNANCE-LINEAR-RETENTION-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -14862,6 +14970,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=IA-PLAIN-BRANDED-NAMING-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -14871,6 +14980,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -14937,6 +15047,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -15003,6 +15114,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -15069,6 +15181,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -15135,6 +15248,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -15201,6 +15315,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -15267,6 +15382,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -15333,6 +15449,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -15391,6 +15508,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -15465,6 +15583,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -15523,6 +15642,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -15581,6 +15701,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -15639,6 +15760,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -15721,6 +15843,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -15779,6 +15902,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -15845,6 +15969,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -15895,6 +16020,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -15953,6 +16079,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -16019,6 +16146,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=LAW-ACCOUNT-BOUNDARY-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16028,6 +16156,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=LAW-AUTHORITY-PRODUCT-DEFINITION-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16037,6 +16166,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=LAW-DATA-LOSS-STOP-SHIP-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16046,6 +16176,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=LAW-IA-NONROOT-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16055,6 +16186,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=LAW-IA-PLAIN-LANGUAGE-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16064,6 +16196,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=LAW-IA-ROOT-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16073,6 +16206,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=LAW-IA-TRUST-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16082,6 +16216,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=LAW-LANGUAGE-ROOT-LABELS-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16091,6 +16226,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=LAW-LOCAL-AUTHORITY-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16100,6 +16236,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=LAW-OFFLINE-NO-ACCOUNT-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16109,6 +16246,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=LAW-R2-PUBLIC-ONLY-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16118,6 +16256,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=LAW-RUNTIME-DURABLE-SUCCESS-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16127,6 +16266,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=LAW-RUNTIME-NO-DIRECT-WRITE-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16136,6 +16276,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=LAW-SHELL-STAGE-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16145,6 +16286,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -16179,6 +16321,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -16213,6 +16356,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -16247,6 +16391,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -16281,6 +16426,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -16315,6 +16461,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -16349,6 +16496,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -16383,6 +16531,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -16417,6 +16566,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=MISSION-ANTI-METRICS-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16426,6 +16576,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=MISSION-CAPABILITIES-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16435,6 +16586,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=MISSION-CAPABILITY-MEANING-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16444,6 +16596,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=MISSION-CATEGORY-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16453,6 +16606,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=MISSION-FOUNDATION-RUNTIME-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16462,6 +16616,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=MISSION-FUNCTION-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16471,6 +16626,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=MISSION-HARD-RED-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16480,6 +16636,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=MISSION-INTEGRATION-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16489,6 +16646,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=MISSION-LAUNCH-BAR-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16498,6 +16656,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=MISSION-MOAT-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16507,6 +16666,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=MISSION-MOAT-CONTINUITY-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16516,6 +16676,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=MISSION-NAMING-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16525,6 +16686,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=MISSION-NON-COMMODITY-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16534,6 +16696,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=MISSION-ORCHESTRATION-LOOP-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16543,6 +16706,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=MISSION-ORIGIN-OUTCOME-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16552,6 +16716,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=MISSION-ORIGIN-PROBLEM-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16561,6 +16726,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=MISSION-ORIGIN-STRUCTURE-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16570,6 +16736,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=MISSION-REFLOW-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16579,6 +16746,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=MISSION-RUNTIME-RELATION-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16588,6 +16756,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=MISSION-SUCCESS-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16597,6 +16766,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=MISSION-USER-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -16606,6 +16776,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -16664,6 +16835,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -16722,6 +16894,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -16780,6 +16953,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -16838,6 +17012,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -16896,6 +17071,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -16954,6 +17130,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -17012,6 +17189,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -17070,6 +17248,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -17152,6 +17331,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -17234,6 +17414,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -17300,6 +17481,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -17366,6 +17548,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -17432,6 +17615,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -17498,6 +17682,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -17564,6 +17749,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -17630,6 +17816,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -17712,6 +17899,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -17794,6 +17982,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -17860,6 +18049,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -17926,6 +18116,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -17992,6 +18183,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -18058,6 +18250,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -18140,6 +18333,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -18206,6 +18400,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -18272,6 +18467,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -18338,6 +18534,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -18404,6 +18601,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -18470,6 +18668,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -18536,6 +18735,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -18602,6 +18802,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -18668,6 +18869,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -18726,6 +18928,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -18792,6 +18995,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -18850,6 +19054,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -18908,6 +19113,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -18966,6 +19172,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -19024,6 +19231,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -19106,6 +19314,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -19164,6 +19373,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -19222,6 +19432,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -19288,6 +19499,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -19346,6 +19558,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -19404,6 +19617,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -19470,6 +19684,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -19552,6 +19767,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -19634,6 +19850,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -19700,6 +19917,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -19766,6 +19984,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -19824,6 +20043,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -19882,6 +20102,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -19940,6 +20161,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -20022,6 +20244,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -20080,6 +20303,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -20146,6 +20370,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -20204,6 +20429,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -20286,6 +20512,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -20368,6 +20595,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -20450,6 +20678,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -20532,6 +20761,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=OBJECT-CANONICAL-GRAPH-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -20541,6 +20771,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=OBJECT-FUTURE-STEP-IDENTITY-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -20550,6 +20781,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=OBJECT-GOAL-LIFECYCLE-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -20559,6 +20791,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=OBJECT-LIFECYCLE-DELETION-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -20568,6 +20801,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=OBJECT-PROOF-REQUIREMENT-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -20577,6 +20811,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=OBJECT-REMINDER-COMPLETION-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -20586,6 +20821,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=OBJECT-SAVED-FOR-LATER-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -20595,6 +20831,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=OBJECT-TAXONOMY-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -20604,6 +20841,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=PERF-001 owner=Native/Ambitions/Quality/Performance/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -20632,6 +20870,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=PERF-002 owner=Native/Ambitions/Quality/Performance/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -20660,6 +20899,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=PERF-003 owner=Native/Ambitions/Quality/Performance/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -20688,6 +20928,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=PERF-004 owner=Native/Ambitions/Quality/Performance/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -20716,6 +20957,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=PERF-005 owner=Native/Ambitions/Quality/Performance/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -20744,6 +20986,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=PLATFORM-CALENDAR-REPLACEMENT-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -20753,6 +20996,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=PLATFORM-NATIVE-IPHONE-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -20762,6 +21006,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=PRIVACY-CLOUDKIT-CONTINUITY-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -20771,6 +21016,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=PRIVACY-VISIBILITY-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -20780,6 +21026,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=PROOF-FIGMA-AUTHORITY-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -20789,6 +21036,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=RELEASE-001 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -20825,6 +21073,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=RELEASE-002 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -20861,6 +21110,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=RELEASE-003 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -20897,6 +21147,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=RELEASE-004 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -20933,6 +21184,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -20959,6 +21211,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -20985,6 +21238,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -21011,6 +21265,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -21037,6 +21292,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -21063,6 +21319,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -21089,6 +21346,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=RUNTIME-MUTATION-SEQUENCE-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -21098,6 +21356,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=RUNTIME-SOURCE-OWNER-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -21107,6 +21366,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=SECURITY-001 owner=Native/Ambitions/Quality/Security/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -21143,6 +21403,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=SECURITY-002 owner=Native/Ambitions/Quality/Security/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -21179,6 +21440,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=SECURITY-003 owner=Native/Ambitions/Quality/Security/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -21215,6 +21477,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=SECURITY-004 owner=Native/Ambitions/Quality/Security/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -21251,6 +21514,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=SECURITY-005 owner=Native/Ambitions/Quality/Security/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -21287,6 +21551,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=SECURITY-006 owner=Native/Ambitions/Quality/Security/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -21323,6 +21588,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -21357,6 +21623,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -21391,6 +21658,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -21425,6 +21693,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -21467,6 +21736,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -21509,6 +21779,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -21551,6 +21822,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -21601,6 +21873,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -21651,6 +21924,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -21701,6 +21975,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -21751,6 +22026,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -21801,6 +22077,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -21851,6 +22128,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -21901,6 +22179,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -21951,6 +22230,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -22001,6 +22281,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -22051,6 +22332,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -22093,6 +22375,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -22135,6 +22418,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -22177,6 +22461,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -22235,6 +22520,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -22293,6 +22579,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -22351,6 +22638,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -22409,6 +22697,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -22467,6 +22756,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -22525,6 +22815,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -22583,6 +22874,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -22633,6 +22925,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -22683,6 +22976,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -22733,6 +23027,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -22783,6 +23078,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -22849,6 +23145,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -22915,6 +23212,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -22981,6 +23279,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -23047,6 +23346,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -23113,6 +23413,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -23179,6 +23480,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -23245,6 +23547,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -23311,6 +23614,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -23377,6 +23681,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -23443,6 +23748,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -23509,6 +23815,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -23575,6 +23882,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -23641,6 +23949,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -23707,6 +24016,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -23773,6 +24083,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -23839,6 +24150,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -23905,6 +24217,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -23971,6 +24284,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -24037,6 +24351,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -24103,6 +24418,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -24169,6 +24485,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -24235,6 +24552,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -24301,6 +24619,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -24367,6 +24686,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -24433,6 +24753,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -24499,6 +24820,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -24565,6 +24887,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -24631,6 +24954,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -24697,6 +25021,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -24763,6 +25088,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -24829,6 +25155,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -24895,6 +25222,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -24945,6 +25273,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -24995,6 +25324,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -25045,6 +25375,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -25095,6 +25426,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -25145,6 +25477,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -25195,6 +25528,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -25245,6 +25579,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -25295,6 +25630,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -25345,6 +25681,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -25411,6 +25748,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -25477,6 +25815,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -25543,6 +25882,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -25609,6 +25949,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -25675,6 +26016,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -25741,6 +26083,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -25807,6 +26150,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -25873,6 +26217,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -25939,6 +26284,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -26005,6 +26351,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -26071,6 +26418,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -26137,6 +26485,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -26203,6 +26552,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=STANDARD-ACCEPTANCE-ACCESSIBILITY-001 owner=Native/Ambitions/Interaction/Accessibility/; missing mapping is a gap and does not prove absent implementation",
         "gap_class=canon_to_code affected_ids=STANDARD-ACCEPTANCE-ACCESSIBILITY-001 owner=Native/Ambitions/Quality/Accessibility/; missing mapping is a gap and does not prove absent implementation"
@@ -26240,6 +26590,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=STANDARD-ACCEPTANCE-BUILD-001 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -26276,6 +26627,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=STANDARD-ACCEPTANCE-DOCS-001 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -26312,6 +26664,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=STANDARD-ACCEPTANCE-IA-001 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -26348,6 +26701,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=STANDARD-ACCEPTANCE-INTERACTION-001 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -26384,6 +26738,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=STANDARD-ACCEPTANCE-OBJECTS-001 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -26420,6 +26775,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=STANDARD-ACCEPTANCE-PROOF-001 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -26456,6 +26812,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=STANDARD-ACCEPTANCE-REPLACEMENT-001 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -26492,6 +26849,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=STANDARD-ACCEPTANCE-SCENARIOS-001 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -26528,6 +26886,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=STANDARD-ACCEPTANCE-SOURCE-001 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -26564,6 +26923,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=STANDARD-ACCEPTANCE-STATUS-001 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -26600,6 +26960,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=STANDARD-ACCEPTANCE-VIEWPORTS-001 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -26636,6 +26997,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=STANDARD-ACCEPTANCE-VISUAL-001 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -26672,6 +27034,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=STANDARD-ACCEPTANCE-VISUAL-COPY-001 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -26708,6 +27071,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=STANDARD-SCREENSHOT-MATRIX-001 owner=docs/canon/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -26744,6 +27108,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -26794,6 +27159,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -26844,6 +27210,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -26894,6 +27261,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -26944,6 +27312,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -26994,6 +27363,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -27044,6 +27414,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -27094,6 +27465,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -27144,6 +27516,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -27194,6 +27567,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -27244,6 +27618,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -27294,6 +27669,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=SUPPLY-001 owner=Native/Ambitions/Quality/Security/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -27330,6 +27706,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=SUPPLY-002 owner=Native/Ambitions/Quality/Security/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -27366,6 +27743,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=SUPPLY-003 owner=Native/Ambitions/Quality/Security/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -27402,6 +27780,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [
         "gap_class=canon_to_code affected_ids=SUPPLY-004 owner=Native/Ambitions/Quality/Security/; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -27438,6 +27817,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=SURFACE-TODAY-IDENTITY-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -27447,6 +27827,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=SURFACE-YOU-DEPTH-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
@@ -27456,6 +27837,7 @@
       "source_owners": []
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -27514,6 +27896,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -27572,6 +27955,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -27646,6 +28030,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -27720,6 +28105,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -27794,6 +28180,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -27868,6 +28255,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -27942,6 +28330,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -28016,6 +28405,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -28090,6 +28480,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -28148,6 +28539,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -28206,6 +28598,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -28264,6 +28657,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -28322,6 +28716,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -28380,6 +28775,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -28438,6 +28834,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -28496,6 +28893,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -28554,6 +28952,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -28612,6 +29011,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -28670,6 +29070,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -28736,6 +29137,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -28794,6 +29196,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -28860,6 +29263,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -28918,6 +29322,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -28976,6 +29381,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -29034,6 +29440,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -29092,6 +29499,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -29150,6 +29558,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -29208,6 +29617,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -29274,6 +29684,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -29340,6 +29751,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -29406,6 +29818,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -29472,6 +29885,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -29538,6 +29952,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -29596,6 +30011,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -29654,6 +30070,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -29720,6 +30137,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -29802,6 +30220,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -29884,6 +30303,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -29966,6 +30386,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -30048,6 +30469,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -30130,6 +30552,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -30212,6 +30635,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -30270,6 +30694,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -30328,6 +30753,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -30386,6 +30812,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -30444,6 +30871,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -30502,6 +30930,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -30560,6 +30989,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -30618,6 +31048,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -30644,6 +31075,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -30670,6 +31102,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -30696,6 +31129,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -30722,6 +31156,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -30748,6 +31183,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -30774,6 +31210,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -30800,6 +31237,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -30826,6 +31264,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -30852,6 +31291,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_present_unverified",
       "gaps": [],
       "mappings": [
         {
@@ -30878,6 +31318,7 @@
       ]
     },
     {
+      "current_claim_posture": "source_owner_gap",
       "gaps": [
         "gap_class=canon_to_code affected_ids=TIME-EXTERNAL-VISIBILITY-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
       ],
