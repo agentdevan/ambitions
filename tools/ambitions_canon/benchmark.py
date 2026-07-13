@@ -83,6 +83,37 @@ _FIXTURE_FIELDS = frozenset(
 )
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
 _GIT_SHA = re.compile(r"^[0-9a-f]{40}$")
+SEMANTIC_COMPARISON_DIMENSIONS = (
+    "semantic_equivalence",
+    "relevant_law_recall",
+    "contradiction_control",
+    "unauthorized_assumptions",
+    "source_ownership",
+    "validation_completeness",
+    "proof_discipline",
+)
+_SEMANTIC_COMPARISON_FIELDS = frozenset(
+    {
+        "schema_version",
+        "comparison_reviewer",
+        "comparison_model",
+        "canon_sha256",
+        "old_prompt_sha256",
+        "new_prompt_sha256",
+        "old_response_sha256",
+        "new_response_sha256",
+        "dimensions",
+        "overall_verdict",
+        "old_total_score",
+        "new_total_score",
+    }
+)
+_SEMANTIC_DIMENSION_FIELDS = frozenset(
+    {"dimension", "verdict", "old_score", "new_score", "rationale"}
+)
+_SEMANTIC_VERDICTS = frozenset(
+    {"old_better", "new_better", "equivalent", "insufficient_evidence"}
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -450,6 +481,7 @@ def build_semantic_review_bundle(
     model: str,
     old_response: bytes | None = None,
     new_response: bytes | None = None,
+    comparison: bytes | None = None,
 ) -> dict[Path, bytes]:
     """Build an ignored, explicit, non-CI semantic-review evidence bundle."""
 
@@ -459,6 +491,12 @@ def build_semantic_review_bundle(
         raise CanonError(
             "BENCHMARK_SEMANTIC_RESPONSE_PAIR_REQUIRED",
             "old and new semantic responses must be supplied together",
+        )
+    if comparison is not None and old_response is None:
+        raise CanonError(
+            "BENCHMARK_SEMANTIC_COMPARISON_RESPONSE_REQUIRED",
+            "comparison evidence requires both blinded response artifacts",
+            root,
         )
 
     registry = _load_registry(root)
@@ -518,7 +556,7 @@ def build_semantic_review_bundle(
     if old_response is not None and new_response is not None:
         outputs[Path("responses/old-response.json")] = old_response
         outputs[Path("responses/new-response.json")] = new_response
-    record = {
+    record: dict[str, object] = {
         "schema_version": 1,
         "lane": "explicit_non_ci_semantic_review",
         "reviewer": reviewer,
@@ -543,17 +581,27 @@ def build_semantic_review_bundle(
             if old_response is not None
             else "awaiting_independent_responses"
         ),
-        "comparison_dimensions": [
-            "semantic_equivalence",
-            "relevant_law_recall",
-            "contradiction_control",
-            "unauthorized_assumptions",
-            "source_ownership",
-            "validation_completeness",
-            "proof_discipline",
-        ],
+        "comparison_dimensions": list(SEMANTIC_COMPARISON_DIMENSIONS),
         "claim_posture": "No winner or semantic-quality score is claimed by bundle generation.",
     }
+    if comparison is not None:
+        comparison_record = _validate_semantic_comparison(comparison, record, root)
+        outputs[Path("comparison/comparison.json")] = comparison
+        record.update(
+            {
+                "status": "comparison_recorded",
+                "comparison_sha256": hashlib.sha256(comparison).hexdigest(),
+                "comparison_reviewer": comparison_record["comparison_reviewer"],
+                "comparison_model": comparison_record["comparison_model"],
+                "comparison_overall_verdict": comparison_record["overall_verdict"],
+                "comparison_old_total_score": comparison_record["old_total_score"],
+                "comparison_new_total_score": comparison_record["new_total_score"],
+                "claim_posture": (
+                    "Independent comparison evidence is recorded as supplied; bundle "
+                    "generation does not invent or independently endorse its result."
+                ),
+            }
+        )
     outputs[Path("semantic-review-record.json")] = stable_json(record)
     return outputs
 
@@ -566,6 +614,7 @@ def write_semantic_review_bundle(
     model: str,
     old_response: bytes | None = None,
     new_response: bytes | None = None,
+    comparison: bytes | None = None,
 ) -> tuple[Path, ...]:
     outputs = build_semantic_review_bundle(
         root,
@@ -574,10 +623,133 @@ def write_semantic_review_bundle(
         model=model,
         old_response=old_response,
         new_response=new_response,
+        comparison=comparison,
     )
     output_root = root / SEMANTIC_REVIEW_PACK_DIR
     write_outputs_atomic(output_root, outputs)
     return tuple(output_root / path for path in sorted(outputs))
+
+
+def _validate_semantic_comparison(
+    source_bytes: bytes,
+    binding: Mapping[str, object],
+    path: Path,
+) -> Mapping[str, object]:
+    """Validate an independently produced comparison without scoring it."""
+
+    try:
+        data = json.loads(source_bytes.decode("utf-8"))
+    except (UnicodeError, json.JSONDecodeError) as exc:
+        raise CanonError(
+            "BENCHMARK_SEMANTIC_COMPARISON_INVALID",
+            "comparison evidence must be valid UTF-8 JSON",
+            path,
+        ) from exc
+    if not isinstance(data, dict) or set(data) != _SEMANTIC_COMPARISON_FIELDS:
+        raise CanonError(
+            "BENCHMARK_SEMANTIC_COMPARISON_INVALID",
+            "comparison evidence fields do not match schema version 1",
+            path,
+        )
+    if type(data["schema_version"]) is not int or data["schema_version"] != 1:
+        raise CanonError(
+            "BENCHMARK_SEMANTIC_COMPARISON_INVALID",
+            "comparison schema_version must be integer 1",
+            path,
+        )
+    for field in ("comparison_reviewer", "comparison_model"):
+        if not isinstance(data[field], str) or not data[field].strip():
+            raise CanonError(
+                "BENCHMARK_SEMANTIC_COMPARISON_INVALID",
+                f"{field} must be a non-empty string",
+                path,
+            )
+    bindings = {
+        "canon_sha256": binding["canon_sha256"],
+        "old_prompt_sha256": binding["old_prompt_sha256"],
+        "new_prompt_sha256": binding["new_prompt_sha256"],
+        "old_response_sha256": binding["old_response_sha256"],
+        "new_response_sha256": binding["new_response_sha256"],
+    }
+    if any(data[field] != expected for field, expected in bindings.items()):
+        raise CanonError(
+            "BENCHMARK_SEMANTIC_COMPARISON_STALE",
+            "comparison evidence hashes do not bind the current canon, prompts, and responses",
+            path,
+        )
+    dimensions = data["dimensions"]
+    if not isinstance(dimensions, list) or len(dimensions) != len(
+        SEMANTIC_COMPARISON_DIMENSIONS
+    ):
+        raise CanonError(
+            "BENCHMARK_SEMANTIC_COMPARISON_INVALID",
+            "comparison must contain all seven dimensions exactly once",
+            path,
+        )
+    parsed_dimensions: list[str] = []
+    old_total = 0
+    new_total = 0
+    for row in dimensions:
+        if not isinstance(row, dict) or set(row) != _SEMANTIC_DIMENSION_FIELDS:
+            raise CanonError(
+                "BENCHMARK_SEMANTIC_COMPARISON_INVALID",
+                "comparison dimension fields are closed",
+                path,
+            )
+        dimension = row["dimension"]
+        if not isinstance(dimension, str):
+            raise CanonError(
+                "BENCHMARK_SEMANTIC_COMPARISON_INVALID",
+                "comparison dimension identifier must be a string",
+                path,
+            )
+        parsed_dimensions.append(dimension)
+        if row["verdict"] not in _SEMANTIC_VERDICTS:
+            raise CanonError(
+                "BENCHMARK_SEMANTIC_COMPARISON_INVALID",
+                "comparison verdict is outside the bounded vocabulary",
+                path,
+            )
+        if not isinstance(row["rationale"], str) or not row["rationale"].strip():
+            raise CanonError(
+                "BENCHMARK_SEMANTIC_COMPARISON_INVALID",
+                "comparison rationale must be a non-empty string",
+                path,
+            )
+        for field in ("old_score", "new_score"):
+            score = row[field]
+            if type(score) is not int or not 0 <= score <= 4:
+                raise CanonError(
+                    "BENCHMARK_SEMANTIC_COMPARISON_INVALID",
+                    "comparison dimension scores must be integers from 0 through 4",
+                    path,
+                )
+        old_total += row["old_score"]
+        new_total += row["new_score"]
+    if tuple(parsed_dimensions) != SEMANTIC_COMPARISON_DIMENSIONS:
+        raise CanonError(
+            "BENCHMARK_SEMANTIC_COMPARISON_INVALID",
+            "comparison dimensions must be the exact ordered seven-dimension contract",
+            path,
+        )
+    if data["overall_verdict"] not in _SEMANTIC_VERDICTS:
+        raise CanonError(
+            "BENCHMARK_SEMANTIC_COMPARISON_INVALID",
+            "overall verdict is outside the bounded vocabulary",
+            path,
+        )
+    if (
+        type(data["old_total_score"]) is not int
+        or type(data["new_total_score"]) is not int
+        or data["old_total_score"] != old_total
+        or data["new_total_score"] != new_total
+    ):
+        raise CanonError(
+            "BENCHMARK_SEMANTIC_COMPARISON_INVALID",
+            "comparison total scores must equal the seven bounded dimension scores",
+            path,
+        )
+    return data
 
 
 def _registry_canon_sha_for_review(registry: CanonRegistry) -> str:

@@ -1,8 +1,8 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "12f110471863c2f38c9a4f611022f2162365785a201df345bc6633f93fb2a31c",
+  "canon_content_sha": "85094c7a431d4331f4168740725a1e6b8647115ec1fd9f21a4d80131f3c0dabf",
   "canon_revision": 1,
-  "compiler_version": "0.1.0",
+  "compiler_version": "0.2.0",
   "mappings": [
     {
       "current_claim_posture": "required_but_unverified",
@@ -2289,6 +2289,7 @@
       "references": [
         {
           "approval_state": "approved",
+          "implementation_status": "owner-approval provenance with a Yellow proof ceiling; not implementation proof",
           "reference_id": "PROOF-VSP-05-CAPTURE-APPROVAL",
           "revision": "6f7b33b92ca4a06cb2dcb36e99949337861b7322401a4b4c192e2a132ee0995d",
           "source": "docs/design/provenance/owner-approvals/VSP-05-F-Quiet-Placement-Review-package-approval.md"
@@ -2306,6 +2307,7 @@
       "references": [
         {
           "approval_state": "approved",
+          "implementation_status": "owner-approval provenance with a Yellow proof ceiling; not accessibility conformance or implementation proof",
           "reference_id": "PROOF-VSP-09-MOTION-A11Y-APPROVAL",
           "revision": "c6c3963f99464e2bdf56799e12ddeeaafa06c752c2ca38f844a415a32fec4694",
           "source": "docs/design/provenance/owner-approvals/VSP-09-Accessibility-Motion-Haptics-Matrix-approval.md"
@@ -2387,6 +2389,7 @@
       "references": [
         {
           "approval_state": "approved",
+          "implementation_status": "owner-approval provenance for Search placement only; not a dedicated overlay or implementation proof",
           "reference_id": "PROOF-VSP-01-SHELL-APPROVAL",
           "revision": "ca183ef9526dfe8de78013211909e2576085628c009b90afc58bb7efbc18bd21",
           "source": "docs/design/provenance/owner-approvals/VSP-01-Nightglass-Authority-Shell-approval.md"
@@ -2428,6 +2431,7 @@
       "references": [
         {
           "approval_state": "approved",
+          "implementation_status": "owner-approval provenance with a Yellow proof ceiling; not implementation proof",
           "reference_id": "PROOF-VSP-07-TRUST-APPROVAL",
           "revision": "79558e99f83e7ca10547b7b7fd62fd28b6ee7a14db70eaafd19f7fcebb130644",
           "source": "docs/design/provenance/owner-approvals/VSP-07-Object-Wake-Stack-package-approval.md"
@@ -2555,6 +2559,7 @@
       "references": [
         {
           "approval_state": "approved",
+          "implementation_status": "owner-approval provenance with a Yellow proof ceiling; not implementation proof",
           "reference_id": "PROOF-VSP-03-GOALS-APPROVAL",
           "revision": "c3888ee61ba27245b24b6bda9ea11c202e913ff84fe8bf1abb1e0f888ce47705",
           "source": "docs/design/provenance/owner-approvals/VSP-03-D5-Focus-Lens-Territory-approval.md"
@@ -2688,6 +2693,7 @@
       "references": [
         {
           "approval_state": "approved",
+          "implementation_status": "owner-approval provenance with a Yellow proof ceiling; not parity or implementation proof",
           "reference_id": "PROOF-VSP-04-TIME-APPROVAL",
           "revision": "c40c2e5cd469dd2bf63609e7701efc9b85692d650112c85f19854f6c24891fbf",
           "source": "docs/design/provenance/owner-approvals/VSP-04-F-Apple-Native-Life-Calendar-package-approval.md"
@@ -2795,6 +2801,7 @@
       "references": [
         {
           "approval_state": "approved",
+          "implementation_status": "owner-approval provenance with a Yellow proof ceiling; not implementation proof",
           "reference_id": "PROOF-VSP-02-TODAY-APPROVAL",
           "revision": "2b5d6b0d13da654cff4a1875ac665bca7971aaac58b12e9d8578d41b76fdc28b",
           "source": "docs/design/provenance/owner-approvals/VSP-02-Rail-Aperture-Today-approval.md"
@@ -2910,6 +2917,7 @@
       "references": [
         {
           "approval_state": "approved",
+          "implementation_status": "owner-approval provenance with a Yellow proof ceiling; not implementation proof",
           "reference_id": "PROOF-VSP-06-YOU-APPROVAL",
           "revision": "e185df1706ef1eca4244b3ce57c0a8aa52f6205ced8bef3f10a4fb6622e2adcf",
           "source": "docs/design/provenance/owner-approvals/VSP-06-Preference-Weave-package-approval.md"
@@ -3663,6 +3671,6 @@
       "requirement_id": "TIME-EXTERNAL-VISIBILITY-001"
     }
   ],
-  "schema_version": 1,
+  "schema_version": 2,
   "traceability_input_sha": "fbd4b01f57288edb03d999898f1f0e48ffdcc1b0dd68bab08c5669de8ba9c904"
 }

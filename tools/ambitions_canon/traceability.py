@@ -276,7 +276,8 @@ def render_traceability_maps(
 ) -> Mapping[Path, bytes]:
     """Render the three law maps with stable IDs, records, and gap posture."""
 
-    base = dict(metadata or {"schema_version": 1})
+    base = dict(metadata or {})
+    base["schema_version"] = 2
     finding_inventory = _finding_inventory(report)
     return {
         Path("law-source-map.json"): stable_json(
@@ -427,7 +428,13 @@ def _of_kind(
 
 
 def _source_row(record: TraceabilityRecord) -> dict[str, object]:
-    if any(item.has_implementation for item in record.source_mappings):
+    has_source = any(item.has_implementation for item in record.source_mappings)
+    has_gap = not record.source_mappings or any(
+        not item.has_implementation for item in record.source_mappings
+    )
+    if has_source and has_gap:
+        current_claim_posture = "partial_source_mapping_gap"
+    elif has_source:
         current_claim_posture = "source_present_unverified"
     elif record.source_mappings:
         current_claim_posture = "source_mapping_gap"
@@ -442,7 +449,14 @@ def _source_row(record: TraceabilityRecord) -> dict[str, object]:
                 "exists": item.exists,
                 "has_implementation": item.has_implementation,
                 "owner_path": item.owner_path,
+                "source_inventory_ref": item.owner_path,
                 "status": item.status,
+                "gaps": [
+                    finding.message
+                    for finding in record.findings
+                    if finding.path is not None
+                    and finding.path.as_posix() == item.owner_path.rstrip("/")
+                ],
             }
             for item in record.source_mappings
         ],
@@ -460,6 +474,15 @@ def _source_inventory(report: TraceabilityReport) -> list[dict[str, object]]:
     return [
         {
             "exists": item.exists,
+            "gaps": sorted(
+                {
+                    finding.message
+                    for record in report.records
+                    for finding in record.findings
+                    if finding.path is not None
+                    and finding.path.as_posix() == item.owner_path.rstrip("/")
+                }
+            ),
             "implementation_file_count": len(item.implementation_files),
             "implementation_files": list(item.implementation_files),
             "owner_path": item.owner_path,
@@ -485,6 +508,7 @@ def _reference_row(
         "references": [
             {
                 "approval_state": item.approval_state,
+                "implementation_status": item.implementation_status,
                 "reference_id": item.reference_id,
                 "revision": item.revision,
                 "source": item.source,

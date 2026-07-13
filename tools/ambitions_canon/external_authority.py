@@ -1559,18 +1559,75 @@ def external_reference_findings(
                     )
                 )
 
-        if reference.reference_kind is AuthorityReferenceKind.PROOF:
-            if not _valid_proof_source(reference.source, effective_root):
+        if reference.reference_kind in {
+            AuthorityReferenceKind.TEST,
+            AuthorityReferenceKind.PROOF,
+        }:
+            if reference.approval_state != "approved":
                 findings.append(
                     Finding(
-                        code="CANON_PROOF_SOURCE_INVALID",
+                        code="CANON_EVIDENCE_APPROVAL_REQUIRED",
                         severity=GapSeverity.P0_BLOCKER,
                         message=(
-                            "proof source must be repository-confined or use an allowed "
-                            f"stable external locator reference_id={reference.reference_id}"
+                            "current test/proof evidence requires explicit approval "
+                            f"reference_id={reference.reference_id}"
                         ),
                     )
                 )
+
+        if reference.reference_kind is AuthorityReferenceKind.TEST:
+            content = _local_evidence_bytes(reference.source, effective_root)
+            if content is None:
+                findings.append(
+                    Finding(
+                        code="CANON_TEST_SOURCE_INVALID",
+                        severity=GapSeverity.P0_BLOCKER,
+                        message=(
+                            "test source must be a repository-confined real regular "
+                            f"non-symlink file reference_id={reference.reference_id}"
+                        ),
+                    )
+                )
+            elif hashlib.sha256(content).hexdigest() != reference.revision:
+                findings.append(
+                    Finding(
+                        code="CANON_EVIDENCE_REVISION_STALE",
+                        severity=GapSeverity.P0_BLOCKER,
+                        message=(
+                            "local test/proof revision must equal the SHA-256 of current "
+                            f"bytes reference_id={reference.reference_id}"
+                        ),
+                    )
+                )
+
+        if reference.reference_kind is AuthorityReferenceKind.PROOF:
+            if reference.source.startswith(_ALLOWED_EXTERNAL_PROOF_PREFIXES):
+                pass
+            else:
+                content = _local_evidence_bytes(reference.source, effective_root)
+                if content is None:
+                    findings.append(
+                        Finding(
+                            code="CANON_PROOF_SOURCE_INVALID",
+                            severity=GapSeverity.P0_BLOCKER,
+                            message=(
+                                "proof source must be repository-confined or use an allowed "
+                                "stable external locator "
+                                f"reference_id={reference.reference_id}"
+                            ),
+                        )
+                    )
+                elif hashlib.sha256(content).hexdigest() != reference.revision:
+                    findings.append(
+                        Finding(
+                            code="CANON_EVIDENCE_REVISION_STALE",
+                            severity=GapSeverity.P0_BLOCKER,
+                            message=(
+                                "local test/proof revision must equal the SHA-256 of current "
+                                f"bytes reference_id={reference.reference_id}"
+                            ),
+                        )
+                    )
 
     for requirement_id, reference_ids in sorted(approved_targets.items()):
         if len(reference_ids) > 1:
@@ -1885,21 +1942,18 @@ def _load_reference_file_bytes(
     return ordered
 
 
-def _valid_proof_source(source: str, repo_root: Path | None) -> bool:
-    if source.startswith(_ALLOWED_EXTERNAL_PROOF_PREFIXES):
-        return True
-    if "://" in source:
-        return False
+def _local_evidence_bytes(source: str, repo_root: Path | None) -> bytes | None:
+    """Read one repository-confined evidence file without following links."""
+
+    if "://" in source or repo_root is None:
+        return None
     pure = PurePosixPath(source)
     if pure.is_absolute() or not pure.parts or ".." in pure.parts:
-        return False
-    if repo_root is None:
-        return False
+        return None
     try:
-        _read_regular_nofollow(repo_root, Path(*pure.parts))
+        return _read_regular_nofollow(repo_root, Path(*pure.parts))
     except (OSError, ValueError):
-        return False
-    return True
+        return None
 
 
 def _validate_figma_role(

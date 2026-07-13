@@ -160,6 +160,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     semantic_review_parser.add_argument("--model", required=True)
     semantic_review_parser.add_argument("--old-response", type=Path)
     semantic_review_parser.add_argument("--new-response", type=Path)
+    semantic_review_parser.add_argument(
+        "--comparison",
+        type=Path,
+        help="ingest an independent comparison JSON after both blinded responses",
+    )
     traceability_parser = subparsers.add_parser(
         "traceability",
         help="inspect generated source, test, proof, and external-reference posture",
@@ -341,6 +346,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             model=arguments.model,
             old_response=arguments.old_response,
             new_response=arguments.new_response,
+            comparison=arguments.comparison,
         )
 
     if arguments.command == "traceability":
@@ -1231,6 +1237,7 @@ def _semantic_review(
     model: str,
     old_response: Path | None,
     new_response: Path | None,
+    comparison: Path | None,
 ) -> int:
     """Write ignored semantic-review prompts/evidence outside build and CI."""
 
@@ -1242,6 +1249,7 @@ def _semantic_review(
             )
         old_bytes = _read_semantic_response(root, old_response)
         new_bytes = _read_semantic_response(root, new_response)
+        comparison_bytes = _read_semantic_comparison(root, comparison)
         outputs = write_semantic_review_bundle(
             root,
             root / BENCHMARK_FIXTURE_DIR,
@@ -1249,11 +1257,12 @@ def _semantic_review(
             model=model,
             old_response=old_bytes,
             new_response=new_bytes,
+            comparison=comparison_bytes,
         )
         print(
             "GREEN ambitions canon semantic-review "
             f"files={len(outputs)} status="
-            f"{'responses_recorded' if old_bytes is not None else 'awaiting_responses'}"
+            f"{'comparison_recorded' if comparison_bytes is not None else 'responses_recorded' if old_bytes is not None else 'awaiting_responses'}"
         )
         return 0
     except (OSError, CanonError) as error:
@@ -1283,6 +1292,34 @@ def _read_semantic_response(root: Path, path: Path | None) -> bytes | None:
         raise CanonError(
             "BENCHMARK_SEMANTIC_RESPONSE_READ",
             "semantic response must not be empty",
+            candidate,
+        )
+    return content
+
+
+def _read_semantic_comparison(root: Path, path: Path | None) -> bytes | None:
+    if path is None:
+        return None
+    candidate = path if path.is_absolute() else root / path
+    try:
+        info = candidate.lstat()
+    except OSError as exc:
+        raise CanonError(
+            "BENCHMARK_SEMANTIC_COMPARISON_READ",
+            "unable to read semantic comparison evidence",
+            candidate,
+        ) from exc
+    if not stat.S_ISREG(info.st_mode):
+        raise CanonError(
+            "BENCHMARK_SEMANTIC_COMPARISON_READ",
+            "semantic comparison must be a real regular file",
+            candidate,
+        )
+    content = candidate.read_bytes()
+    if not content:
+        raise CanonError(
+            "BENCHMARK_SEMANTIC_COMPARISON_READ",
+            "semantic comparison must not be empty",
             candidate,
         )
     return content

@@ -1,5 +1,6 @@
 import json
 import io
+import hashlib
 import shutil
 import subprocess
 import tempfile
@@ -510,6 +511,8 @@ class TaskPackTests(unittest.TestCase):
             proof_path = root / "docs/proof/today.json"
             proof_path.parent.mkdir(parents=True)
             proof_path.write_text("{}\n", encoding="utf-8")
+            test_revision = hashlib.sha256(test_path.read_bytes()).hexdigest()
+            proof_revision = hashlib.sha256(proof_path.read_bytes()).hexdigest()
             references = (
                 AuthorityReference(
                     schema_version=1,
@@ -517,7 +520,7 @@ class TaskPackTests(unittest.TestCase):
                     authority_class=AuthorityClass.SOURCE_AND_TESTS,
                     reference_kind=AuthorityReferenceKind.TEST,
                     source="tests/TodayTests.swift",
-                    revision="fixture-v1",
+                    revision=test_revision,
                     requirement_ids=("TODAY-001",),
                     approval_state="approved",
                     implementation_status="focused test reference; execution not claimed",
@@ -528,7 +531,7 @@ class TaskPackTests(unittest.TestCase):
                     authority_class=AuthorityClass.SOURCE_AND_TESTS,
                     reference_kind=AuthorityReferenceKind.PROOF,
                     source="docs/proof/today.json",
-                    revision="fixture-v1",
+                    revision=proof_revision,
                     requirement_ids=("TODAY-001",),
                     approval_state="approved",
                     approved_by="Fixture owner",
@@ -564,9 +567,33 @@ class TaskPackTests(unittest.TestCase):
                 traceability=traceability,
             )
 
-        self.assertIn("source_files_present", pack.implementation_posture)
-        self.assertIn("TEST-TODAY-001", pack.required_tests)
-        self.assertTrue(any("PROOF-TODAY-001" in item for item in pack.required_proof))
+        posture = json.loads(pack.implementation_posture)
+        self.assertIn("source_files_present", posture["source_status_counts"])
+        self.assertNotIn("TEST-TODAY-001", pack.required_tests)
+        self.assertIn("SCENARIO-TODAY-001", pack.required_tests)
+        self.assertEqual(
+            posture["current_test_references"],
+            [
+                {
+                    "approval_state": "approved",
+                    "implementation_status": "focused test reference; execution not claimed",
+                    "reference_id": "TEST-TODAY-001",
+                    "revision": test_revision,
+                    "source": "tests/TodayTests.swift",
+                }
+            ],
+        )
+        proof_line = next(
+            item for item in pack.required_proof if "PROOF-TODAY-001" in item
+        )
+        for exact_value in (
+            "reference_id=PROOF-TODAY-001",
+            "source=docs/proof/today.json",
+            f"revision={proof_revision}",
+            "approval=approved",
+            "posture=fixture evidence with a Yellow ceiling",
+        ):
+            self.assertIn(exact_value, proof_line)
         self.assertTrue(any("VSP-02" in item for item in pack.visual_authority))
         self.assertTrue(any("FIGMA:fixture:160:93" in item for item in pack.visual_authority))
         self.assertNotIn("No task-scoped visual authority", pack.to_markdown())

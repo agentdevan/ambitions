@@ -631,7 +631,7 @@ def render_unresolved_report(
     *,
     canon_revision: int,
     canon_content_sha: str | None = None,
-    compiler_version: str = "0.1.0",
+    compiler_version: str = "0.2.0",
     authority_state: str = "shadow",
 ) -> bytes:
     """Render the sorted non-authoritative owner-gate inventory."""
@@ -1268,7 +1268,7 @@ def report_conflicts(
     require_resolved: bool,
     canon_revision: int = 0,
     canon_content_sha: str | None = None,
-    compiler_version: str = "0.1.0",
+    compiler_version: str = "0.2.0",
     authority_state: str = "shadow",
 ) -> tuple[int, bytes]:
     """Validate the tracked claim-to-docket graph and render its report."""

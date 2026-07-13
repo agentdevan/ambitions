@@ -1,7 +1,9 @@
 import json
+import hashlib
 import tempfile
 import unittest
 from contextlib import redirect_stdout
+from dataclasses import replace
 from io import StringIO
 from pathlib import Path
 from unittest import mock
@@ -157,6 +159,9 @@ class TraceabilityTests(unittest.TestCase):
         )
 
     def test_requirement_verification_and_stable_references_feed_separate_maps(self):
+        test_path = self.root / "tests/canon/test_traceability.py"
+        test_path.parent.mkdir(parents=True)
+        test_path.write_text("def test_today(): pass\n", encoding="utf-8")
         proof = self.root / "docs/proof/today.json"
         proof.parent.mkdir(parents=True)
         proof.write_text("{}\n", encoding="utf-8")
@@ -166,17 +171,23 @@ class TraceabilityTests(unittest.TestCase):
         )
         current = registry((document("SURFACE-TODAY", (item,)),))
         references = (
-            reference(
-                "TEST-TODAY",
-                AuthorityReferenceKind.TEST,
-                "tests/canon/test_traceability.py",
-                ("TODAY-001",),
+            replace(
+                reference(
+                    "TEST-TODAY",
+                    AuthorityReferenceKind.TEST,
+                    "tests/canon/test_traceability.py",
+                    ("TODAY-001",),
+                ),
+                revision=hashlib.sha256(test_path.read_bytes()).hexdigest(),
             ),
-            reference(
-                "PROOF-TODAY",
-                AuthorityReferenceKind.PROOF,
-                "docs/proof/today.json",
-                ("TODAY-001",),
+            replace(
+                reference(
+                    "PROOF-TODAY",
+                    AuthorityReferenceKind.PROOF,
+                    "docs/proof/today.json",
+                    ("TODAY-001",),
+                ),
+                revision=hashlib.sha256(proof.read_bytes()).hexdigest(),
             ),
         )
 
@@ -215,6 +226,9 @@ class TraceabilityTests(unittest.TestCase):
         source = self.root / "Native/Ambitions/Surfaces/Today/TodayView.swift"
         source.parent.mkdir(parents=True)
         source.write_text("struct TodayView {}\n", encoding="utf-8")
+        test_path = self.root / "tests/canon/test_traceability.py"
+        test_path.parent.mkdir(parents=True)
+        test_path.write_text("def test_today(): pass\n", encoding="utf-8")
         item = requirement("TODAY-001", verification=("SCENARIO-TODAY-001",))
         current = registry(
             (
@@ -226,11 +240,14 @@ class TraceabilityTests(unittest.TestCase):
             )
         )
         references = (
-            reference(
-                "TEST-TODAY",
-                AuthorityReferenceKind.TEST,
-                "tests/canon/test_traceability.py",
-                ("TODAY-001",),
+            replace(
+                reference(
+                    "TEST-TODAY",
+                    AuthorityReferenceKind.TEST,
+                    "tests/canon/test_traceability.py",
+                    ("TODAY-001",),
+                ),
+                revision=hashlib.sha256(test_path.read_bytes()).hexdigest(),
             ),
         )
 
@@ -243,6 +260,234 @@ class TraceabilityTests(unittest.TestCase):
         self.assertEqual(source_row["current_claim_posture"], "source_present_unverified")
         self.assertEqual(test_row["mapping_status"], "mapped")
         self.assertEqual(test_row["current_claim_posture"], "current_evidence_mapped")
+
+    def test_current_test_and_proof_require_approved_digest_bound_regular_files(self):
+        test_path = self.root / "tests/TodayTests.swift"
+        test_path.parent.mkdir(parents=True)
+        test_path.write_text("final class TodayTests {}\n", encoding="utf-8")
+        proof_path = self.root / "docs/proof/today.json"
+        proof_path.parent.mkdir(parents=True)
+        proof_path.write_text("{}\n", encoding="utf-8")
+        item = requirement(
+            "TODAY-001",
+            verification=("SCENARIO-TODAY-001", "PROOF-TODAY-001"),
+        )
+        current = registry((document("SURFACE-TODAY", (item,)),))
+        references = (
+            replace(
+                reference(
+                    "TEST-TODAY",
+                    AuthorityReferenceKind.TEST,
+                    "tests/TodayTests.swift",
+                    ("TODAY-001",),
+                ),
+                revision=hashlib.sha256(test_path.read_bytes()).hexdigest(),
+            ),
+            replace(
+                reference(
+                    "PROOF-TODAY",
+                    AuthorityReferenceKind.PROOF,
+                    "docs/proof/today.json",
+                    ("TODAY-001",),
+                ),
+                revision=hashlib.sha256(proof_path.read_bytes()).hexdigest(),
+            ),
+        )
+
+        outputs = render_traceability_maps(
+            build_traceability(current, self.root, references)
+        )
+        test_row = json.loads(outputs[Path("law-test-map.json")])["mappings"][0]
+        proof_row = json.loads(outputs[Path("law-proof-map.json")])["mappings"][0]
+
+        self.assertEqual(test_row["mapping_status"], "mapped")
+        self.assertEqual(proof_row["mapping_status"], "mapped")
+        self.assertEqual(test_row["references"][0]["source"], "tests/TodayTests.swift")
+        self.assertEqual(
+            proof_row["references"][0]["revision"],
+            hashlib.sha256(proof_path.read_bytes()).hexdigest(),
+        )
+
+    def test_missing_test_and_stale_proof_remain_explicit_current_evidence_gaps(self):
+        proof_path = self.root / "docs/proof/today.json"
+        proof_path.parent.mkdir(parents=True)
+        proof_path.write_text("{}\n", encoding="utf-8")
+        item = requirement(
+            "TODAY-001",
+            verification=("SCENARIO-TODAY-001", "PROOF-TODAY-001"),
+        )
+        current = registry((document("SURFACE-TODAY", (item,)),))
+        references = (
+            reference(
+                "TEST-MISSING",
+                AuthorityReferenceKind.TEST,
+                "tests/MissingTests.swift",
+                ("TODAY-001",),
+            ),
+            replace(
+                reference(
+                    "PROOF-STALE",
+                    AuthorityReferenceKind.PROOF,
+                    "docs/proof/today.json",
+                    ("TODAY-001",),
+                ),
+                revision="0" * 64,
+            ),
+        )
+
+        report = build_traceability(current, self.root, references)
+        outputs = render_traceability_maps(report)
+        test_row = json.loads(outputs[Path("law-test-map.json")])["mappings"][0]
+        proof_row = json.loads(outputs[Path("law-proof-map.json")])["mappings"][0]
+
+        self.assertEqual(report.records[0].test_references, ())
+        self.assertEqual(report.records[0].proof_references, ())
+        self.assertEqual(test_row["current_claim_posture"], "required_but_unverified")
+        self.assertEqual(proof_row["current_claim_posture"], "required_but_unverified")
+        self.assertIn(
+            "CANON_TEST_SOURCE_INVALID",
+            {finding.code for finding in report.findings},
+        )
+        self.assertIn(
+            "CANON_EVIDENCE_REVISION_STALE",
+            {finding.code for finding in report.findings},
+        )
+
+    def test_test_evidence_rejects_symlink_path_escape_and_unapproved_posture(self):
+        outside = self.root.parent / f"{self.root.name}-outside-test.swift"
+        outside.write_text("final class OutsideTests {}\n", encoding="utf-8")
+        self.addCleanup(outside.unlink)
+        link = self.root / "tests/LinkedTests.swift"
+        link.parent.mkdir(parents=True)
+        link.symlink_to(outside)
+        item = requirement("TODAY-001", verification=("SCENARIO-TODAY-001",))
+        current = registry((document("SURFACE-TODAY", (item,)),))
+        references = (
+            replace(
+                reference(
+                    "TEST-SYMLINK",
+                    AuthorityReferenceKind.TEST,
+                    "tests/LinkedTests.swift",
+                    ("TODAY-001",),
+                ),
+                revision=hashlib.sha256(outside.read_bytes()).hexdigest(),
+            ),
+            replace(
+                reference(
+                    "TEST-ESCAPE",
+                    AuthorityReferenceKind.TEST,
+                    "../outside-test.swift",
+                    ("TODAY-001",),
+                ),
+                revision=hashlib.sha256(outside.read_bytes()).hexdigest(),
+            ),
+            replace(
+                reference(
+                    "TEST-UNAPPROVED",
+                    AuthorityReferenceKind.TEST,
+                    "tests/LinkedTests.swift",
+                    ("TODAY-001",),
+                ),
+                approval_state="unreviewed",
+            ),
+        )
+
+        report = build_traceability(current, self.root, references)
+
+        self.assertEqual(report.records[0].test_references, ())
+        codes = {finding.code for finding in report.findings}
+        self.assertIn("CANON_TEST_SOURCE_INVALID", codes)
+        self.assertIn("CANON_EVIDENCE_APPROVAL_REQUIRED", codes)
+
+    def test_mixed_source_mapping_is_partial_and_preserves_per_owner_files_and_gaps(self):
+        source = self.root / "Native/Ambitions/Interaction/Accessibility/VoiceOver.swift"
+        source.parent.mkdir(parents=True)
+        source.write_text("struct VoiceOverSupport {}\n", encoding="utf-8")
+        item = requirement("A11Y-002")
+        current = registry(
+            (
+                document(
+                    "STANDARD-ACCESSIBILITY",
+                    (item,),
+                    source_owners=(
+                        "Native/Ambitions/Interaction/Accessibility/",
+                        "Native/Ambitions/Quality/Accessibility/",
+                    ),
+                ),
+            )
+        )
+
+        outputs = render_traceability_maps(build_traceability(current, self.root, ()))
+        payload = json.loads(outputs[Path("law-source-map.json")])
+        row = payload["mappings"][0]
+
+        self.assertEqual(payload["schema_version"], 2)
+        self.assertEqual(row["current_claim_posture"], "partial_source_mapping_gap")
+        self.assertEqual(
+            [mapping["owner_path"] for mapping in row["mappings"]],
+            [
+                "Native/Ambitions/Interaction/Accessibility/",
+                "Native/Ambitions/Quality/Accessibility/",
+            ],
+        )
+        inventory = {
+            item["owner_path"]: item for item in payload["source_inventory"]
+        }
+        self.assertEqual(
+            inventory["Native/Ambitions/Interaction/Accessibility/"][
+                "implementation_files"
+            ],
+            ["Native/Ambitions/Interaction/Accessibility/VoiceOver.swift"],
+        )
+        self.assertEqual(
+            inventory["Native/Ambitions/Quality/Accessibility/"][
+                "implementation_files"
+            ],
+            [],
+        )
+        self.assertTrue(any("Quality/Accessibility" in gap for gap in row["gaps"]))
+        self.assertEqual(row["mappings"][0]["gaps"], [])
+        self.assertEqual(
+            row["mappings"][0]["source_inventory_ref"],
+            "Native/Ambitions/Interaction/Accessibility/",
+        )
+        self.assertTrue(
+            any(
+                "Quality/Accessibility" in gap
+                for gap in row["mappings"][1]["gaps"]
+            )
+        )
+        self.assertTrue(
+            any(
+                "Quality/Accessibility" in gap
+                for gap in inventory["Native/Ambitions/Quality/Accessibility/"][
+                    "gaps"
+                ]
+            )
+        )
+
+    def test_traceability_v2_does_not_bump_unrelated_input_or_reference_schemas(self):
+        item = requirement("TODAY-001")
+        current = registry((document("SURFACE-TODAY", (item,)),))
+
+        outputs = render_traceability_maps(
+            build_traceability(current, self.root, ()),
+            {
+                "schema_version": 1,
+                "canon_revision": 1,
+                "compiler_version": "0.2.0",
+            },
+        )
+
+        for path in (
+            Path("law-source-map.json"),
+            Path("law-test-map.json"),
+            Path("law-proof-map.json"),
+        ):
+            payload = json.loads(outputs[path])
+            self.assertEqual(payload["schema_version"], 2)
+            self.assertEqual(payload["compiler_version"], "0.2.0")
+        self.assertEqual(current.manifest.schema_version, 1)
 
     def test_generated_maps_are_sorted_by_requirement_id_and_newline_terminated(self):
         second = requirement("ZZZ-002", concept="surface.today.second", line=30)

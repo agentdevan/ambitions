@@ -1,9 +1,12 @@
 import importlib
 import importlib.util
+import hashlib
 import json
+import io
 import tempfile
 import unittest
 from copy import deepcopy
+from contextlib import redirect_stdout
 from dataclasses import replace
 from pathlib import Path
 from unittest import mock
@@ -617,6 +620,44 @@ class BenchmarkTest(unittest.TestCase):
 
         self.assertFalse(hasattr(result, "semantic_comparison"))
 
+    def test_accessibility_and_release_packs_count_every_mixed_owner_gap(self):
+        benchmark = self.benchmark_module()
+        scenarios = {
+            item.scenario_id: item.pack
+            for item in benchmark.run_benchmark(ROOT, FIXTURES).scenarios
+        }
+
+        accessibility = json.loads(
+            scenarios["accessibility-repair"]["implementation_posture"]
+        )
+        release = json.loads(scenarios["release-proof-claim"]["implementation_posture"])
+        self.assertEqual(accessibility["source_gap_requirement_count"], 3)
+        self.assertEqual(accessibility["applicable_requirement_count"], 3)
+        self.assertEqual(release["source_gap_requirement_count"], 48)
+        self.assertEqual(release["applicable_requirement_count"], 235)
+        a11y = next(
+            item
+            for item in release["source_gap_records"]
+            if item["requirement_id"] == "A11Y-002"
+        )
+        self.assertEqual(
+            a11y["source_owners"],
+            [
+                "Native/Ambitions/DesignSystem/",
+                "Native/Ambitions/Interaction/Accessibility/",
+                "Native/Ambitions/Quality/Accessibility/",
+            ],
+        )
+        self.assertTrue(a11y["mappings"][0]["implementation_files"])
+        self.assertEqual(a11y["mappings"][1]["status"], "owner_path_absent")
+        self.assertEqual(a11y["mappings"][1]["implementation_files"], [])
+        self.assertTrue(
+            any(
+                "gap_class=canon_to_code affected_ids=A11Y-002" in gap
+                for gap in a11y["gaps"]
+            )
+        )
+
     def test_semantic_review_prompts_are_symmetric_and_fixture_blind(self):
         benchmark = self.benchmark_module()
         fixtures = benchmark.load_benchmark_fixtures(FIXTURES)
@@ -671,6 +712,140 @@ class BenchmarkTest(unittest.TestCase):
         self.assertEqual(len(record["pack_hashes"]), 8)
         self.assertNotIn("winner", record)
         self.assertNotIn("score", record)
+
+    def test_semantic_review_ingests_strict_hash_bound_comparison_after_responses(self):
+        benchmark = self.benchmark_module()
+        old_response = b'{"response":"old"}\n'
+        new_response = b'{"response":"new"}\n'
+        pending = benchmark.build_semantic_review_bundle(
+            ROOT,
+            FIXTURES,
+            reviewer="Response reviewer",
+            model="response-model",
+            old_response=old_response,
+            new_response=new_response,
+        )
+        record = json.loads(pending[Path("semantic-review-record.json")])
+        dimensions = [
+            {
+                "dimension": dimension,
+                "verdict": "equivalent",
+                "old_score": 3,
+                "new_score": 3,
+                "rationale": "Independently reviewed evidence is equivalent.",
+            }
+            for dimension in record["comparison_dimensions"]
+        ]
+        comparison = {
+            "schema_version": 1,
+            "comparison_reviewer": "Independent comparison reviewer",
+            "comparison_model": "comparison-model",
+            "canon_sha256": record["canon_sha256"],
+            "old_prompt_sha256": record["old_prompt_sha256"],
+            "new_prompt_sha256": record["new_prompt_sha256"],
+            "old_response_sha256": record["old_response_sha256"],
+            "new_response_sha256": record["new_response_sha256"],
+            "dimensions": dimensions,
+            "overall_verdict": "equivalent",
+            "old_total_score": 21,
+            "new_total_score": 21,
+        }
+        comparison_bytes = (json.dumps(comparison, sort_keys=True) + "\n").encode()
+
+        outputs = benchmark.build_semantic_review_bundle(
+            ROOT,
+            FIXTURES,
+            reviewer="Response reviewer",
+            model="response-model",
+            old_response=old_response,
+            new_response=new_response,
+            comparison=comparison_bytes,
+        )
+        recorded = json.loads(outputs[Path("semantic-review-record.json")])
+
+        self.assertEqual(
+            outputs[Path("comparison/comparison.json")], comparison_bytes
+        )
+        self.assertEqual(recorded["status"], "comparison_recorded")
+        self.assertEqual(
+            recorded["comparison_sha256"],
+            hashlib.sha256(comparison_bytes).hexdigest(),
+        )
+        self.assertEqual(
+            recorded["comparison_reviewer"],
+            "Independent comparison reviewer",
+        )
+        self.assertEqual(recorded["comparison_model"], "comparison-model")
+
+    def test_semantic_review_comparison_omission_mismatch_and_scores_fail_closed(self):
+        benchmark = self.benchmark_module()
+        old_response = b'{"response":"old"}\n'
+        new_response = b'{"response":"new"}\n'
+        pending = benchmark.build_semantic_review_bundle(
+            ROOT,
+            FIXTURES,
+            reviewer="Response reviewer",
+            model="response-model",
+            old_response=old_response,
+            new_response=new_response,
+        )
+        record = json.loads(pending[Path("semantic-review-record.json")])
+        base = {
+            "schema_version": 1,
+            "comparison_reviewer": "Independent comparison reviewer",
+            "comparison_model": "comparison-model",
+            "canon_sha256": record["canon_sha256"],
+            "old_prompt_sha256": record["old_prompt_sha256"],
+            "new_prompt_sha256": record["new_prompt_sha256"],
+            "old_response_sha256": record["old_response_sha256"],
+            "new_response_sha256": record["new_response_sha256"],
+            "dimensions": [
+                {
+                    "dimension": dimension,
+                    "verdict": "equivalent",
+                    "old_score": 3,
+                    "new_score": 3,
+                    "rationale": "Independent comparison.",
+                }
+                for dimension in record["comparison_dimensions"]
+            ],
+            "overall_verdict": "equivalent",
+            "old_total_score": 21,
+            "new_total_score": 21,
+        }
+        cases = (
+            ({key: value for key, value in base.items() if key != "comparison_model"}, "BENCHMARK_SEMANTIC_COMPARISON_INVALID"),
+            ({**base, "old_prompt_sha256": "0" * 64}, "BENCHMARK_SEMANTIC_COMPARISON_STALE"),
+            ({**base, "dimensions": base["dimensions"][:-1]}, "BENCHMARK_SEMANTIC_COMPARISON_INVALID"),
+            ({**base, "dimensions": [{**base["dimensions"][0], "old_score": 5}, *base["dimensions"][1:]]}, "BENCHMARK_SEMANTIC_COMPARISON_INVALID"),
+            ({**base, "old_total_score": 20}, "BENCHMARK_SEMANTIC_COMPARISON_INVALID"),
+        )
+        for payload, code in cases:
+            with self.subTest(code=code, payload=payload):
+                with self.assertRaises(CanonError) as raised:
+                    benchmark.build_semantic_review_bundle(
+                        ROOT,
+                        FIXTURES,
+                        reviewer="Response reviewer",
+                        model="response-model",
+                        old_response=old_response,
+                        new_response=new_response,
+                        comparison=(json.dumps(payload, sort_keys=True) + "\n").encode(),
+                    )
+                self.assertEqual(raised.exception.code, code)
+
+        with self.assertRaises(CanonError) as raised:
+            benchmark.build_semantic_review_bundle(
+                ROOT,
+                FIXTURES,
+                reviewer="Response reviewer",
+                model="response-model",
+                comparison=(json.dumps(base, sort_keys=True) + "\n").encode(),
+            )
+        self.assertEqual(
+            raised.exception.code,
+            "BENCHMARK_SEMANTIC_COMPARISON_RESPONSE_REQUIRED",
+        )
 
 
     def test_report_write_is_atomic_and_check_detects_stale_bytes(self):
@@ -742,7 +917,45 @@ class BenchmarkTest(unittest.TestCase):
             model="review-model",
             old_response=None,
             new_response=None,
+            comparison=None,
         )
+
+        comparison_path = ROOT / ".codex/input/comparison.json"
+        with mock.patch.object(canon_cli, "_semantic_review", return_value=0) as review:
+            self.assertEqual(
+                canon_cli.main(
+                    [
+                        "semantic-review",
+                        "--reviewer",
+                        "Response reviewer",
+                        "--model",
+                        "response-model",
+                        "--old-response",
+                        "old.json",
+                        "--new-response",
+                        "new.json",
+                        "--comparison",
+                        str(comparison_path),
+                    ]
+                ),
+                0,
+            )
+        review.assert_called_once_with(
+            ROOT,
+            reviewer="Response reviewer",
+            model="response-model",
+            old_response=Path("old.json"),
+            new_response=Path("new.json"),
+            comparison=comparison_path,
+        )
+
+    def test_semantic_review_help_documents_comparison_ingestion(self):
+        output = io.StringIO()
+        with redirect_stdout(output), self.assertRaises(SystemExit) as raised:
+            canon_cli.main(["semantic-review", "--help"])
+        self.assertEqual(raised.exception.code, 0)
+        self.assertIn("--comparison", output.getvalue())
+        self.assertIn("independent comparison", output.getvalue())
 
     def test_fixture_json_is_canonical_newline_terminated_input(self):
         for path in sorted(FIXTURES.glob("*.json")):

@@ -1083,11 +1083,14 @@ implementation_status = "fixture; not implementation proof"
         proof = self.root / "docs/proof/today.json"
         proof.parent.mkdir(parents=True)
         proof.write_text("{}\n", encoding="utf-8")
-        valid = external_reference(
-            "PROOF-LOCAL",
-            AuthorityReferenceKind.PROOF,
-            ("TODAY-001",),
-            source="docs/proof/today.json",
+        valid = replace(
+            external_reference(
+                "PROOF-LOCAL",
+                AuthorityReferenceKind.PROOF,
+                ("TODAY-001",),
+                source="docs/proof/today.json",
+            ),
+            revision=hashlib.sha256(proof.read_bytes()).hexdigest(),
         )
 
         self.assertEqual(

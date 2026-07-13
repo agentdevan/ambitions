@@ -436,7 +436,7 @@ class ModelTests(unittest.TestCase):
             result = main(("version",))
 
         self.assertEqual(result, 0)
-        self.assertEqual(output.getvalue(), "ambitions-canon 0.1.0\n")
+        self.assertEqual(output.getvalue(), "ambitions-canon 0.2.0\n")
 
     def test_thin_script_loads_package_from_repository_root(self):
         root = Path(__file__).parents[2]
@@ -449,7 +449,7 @@ class ModelTests(unittest.TestCase):
         )
 
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertEqual(result.stdout, "ambitions-canon 0.1.0\n")
+        self.assertEqual(result.stdout, "ambitions-canon 0.2.0\n")
         self.assertEqual(result.stderr, "")
 
 

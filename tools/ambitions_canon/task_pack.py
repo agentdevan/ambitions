@@ -431,29 +431,21 @@ def build_task_pack(
         for record in (traceability.records if traceability is not None else ())
         if record.requirement_id in evidence_requirement_ids
     )
-    current_test_reference_ids = tuple(
-        sorted(
-            {
-                reference.reference_id
-                for record in evidence_records
-                for reference in record.test_references
-            }
-        )
-    )
-    required_tests = tuple(sorted(set(required_tests) | set(current_test_reference_ids)))
-
     shadow = registry.manifest.authority_state is AuthorityState.SHADOW
     no_owner = not roots
-    implementation_posture = (
+    authority_posture = (
         "Shadow canon is non-authoritative; implementation posture must be "
         "verified directly from current source, tests, and proof."
         if shadow
         else "Implementation posture must be verified from current source, tests, and proof."
     )
-    implementation_posture += " " + _traceability_posture(
-        evidence_records,
-        evidence_requirement_ids,
-        supplied=traceability is not None,
+    implementation_posture = _combine_implementation_posture(
+        authority_posture,
+        _traceability_posture(
+            evidence_records,
+            evidence_requirement_ids,
+            supplied=traceability is not None,
+        ),
     )
     known_risk_values = (
         sorted(
@@ -529,7 +521,8 @@ def build_task_pack(
         "Current source, focused tests, regression tests, and claim-specific proof.",
         *tuple(
             "Current proof reference "
-            f"{item.reference_id} at {item.source}; posture: "
+            f"reference_id={item.reference_id}; source={item.source}; "
+            f"revision={item.revision}; approval={item.approval_state}; posture="
             f"{item.implementation_status or 'evidence only; claim status unverified'}."
             for item in proof_references
         ),
@@ -650,42 +643,162 @@ def _traceability_posture(
     supplied: bool,
 ) -> str:
     if not supplied:
-        return "Current traceability evidence was not supplied; mappings remain unknown."
+        return json.dumps(
+            {
+                "applicable_requirement_count": len(required_ids),
+                "covered_requirement_count": 0,
+                "current_proof_references": [],
+                "current_test_references": [],
+                "missing_requirement_ids": sorted(required_ids),
+                "source_gap_records": [],
+                "source_gap_requirement_count": len(required_ids),
+                "source_status_counts": {"unknown": len(required_ids)},
+                "summary": "Current traceability evidence was not supplied; mappings remain unknown.",
+            },
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        )
     by_status: dict[str, int] = {}
-    test_mapped: list[str] = []
-    proof_mapped: list[str] = []
+    source_gap_records: list[object] = []
     for record in records:
-        source_statuses = {item.status for item in record.source_mappings}
+        has_source = any(item.has_implementation for item in record.source_mappings)
+        has_gap = not record.source_mappings or any(
+            not item.has_implementation for item in record.source_mappings
+        )
         status = (
-            "source_files_present"
-            if "source_files_present" in source_statuses
+            "partial_source_mapping_gap"
+            if has_source and has_gap
+            else "source_files_present"
+            if has_source
             else "source_mapping_gap"
         )
         by_status[status] = by_status.get(status, 0) + 1
-        if record.test_references:
-            test_mapped.append(record.requirement_id)
-        if record.proof_references:
-            proof_mapped.append(record.requirement_id)
+        if has_gap:
+            source_gap_records.append(record)
     represented = {record.requirement_id for record in records}
     missing = sorted(required_ids - represented)
-    parts = [
-        f"Current traceability covers {len(represented)}/{len(required_ids)} requirements."
-    ]
-    for status in sorted(by_status):
-        parts.append(f"{status}: {by_status[status]} requirements.")
-    parts.append(
-        "current test evidence mapped: "
-        + (",".join(sorted(test_mapped)) if test_mapped else "none")
-        + "."
+    test_references = tuple(
+        sorted(
+            {
+                reference.reference_id: reference
+                for record in records
+                for reference in record.test_references
+            }.values(),
+            key=lambda item: item.reference_id,
+        )
     )
-    parts.append(
-        "current proof evidence mapped: "
-        + (",".join(sorted(proof_mapped)) if proof_mapped else "none")
-        + "."
+    proof_references = tuple(
+        sorted(
+            {
+                reference.reference_id: reference
+                for record in records
+                for reference in record.proof_references
+            }.values(),
+            key=lambda item: item.reference_id,
+        )
     )
-    if missing:
-        parts.append(f"traceability gap: {len(missing)} requirements absent from the report.")
-    return " ".join(parts)
+    summary = (
+        f"Current traceability covers {len(represented)}/{len(required_ids)} requirements; "
+        f"{len(source_gap_records)}/{len(required_ids)} have at least one source gap."
+    )
+    return json.dumps(
+        {
+            "applicable_requirement_count": len(required_ids),
+            "covered_requirement_count": len(represented),
+            "current_proof_references": [
+                _evidence_reference_dict(reference) for reference in proof_references
+            ],
+            "current_test_references": [
+                _evidence_reference_dict(reference) for reference in test_references
+            ],
+            "missing_requirement_ids": missing,
+            "source_gap_records": [
+                {
+                    "gaps": [finding.message for finding in record.findings],
+                    "mappings": [
+                        {
+                            "exists": mapping.exists,
+                            "implementation_files": list(mapping.implementation_files),
+                            "owner_path": mapping.owner_path,
+                            "status": mapping.status,
+                        }
+                        for mapping in record.source_mappings
+                    ],
+                    "requirement_id": record.requirement_id,
+                    "source_owners": list(record.source_owners),
+                }
+                for record in source_gap_records
+            ],
+            "source_gap_requirement_count": len(source_gap_records),
+            "source_status_counts": {
+                status: by_status[status] for status in sorted(by_status)
+            },
+            "summary": summary,
+        },
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+
+
+def _evidence_reference_dict(reference: object) -> dict[str, object]:
+    return {
+        "approval_state": reference.approval_state,
+        "implementation_status": reference.implementation_status,
+        "reference_id": reference.reference_id,
+        "revision": reference.revision,
+        "source": reference.source,
+    }
+
+
+def _combine_implementation_posture(authority_posture: str, traceability: str) -> str:
+    try:
+        payload = json.loads(traceability)
+    except json.JSONDecodeError:
+        return f"{authority_posture} {traceability}"
+    if not isinstance(payload, dict):
+        return f"{authority_posture} {traceability}"
+    payload["authority_posture"] = authority_posture
+    payload["summary"] = f"{authority_posture} {payload.get('summary', '')}".strip()
+    return json.dumps(
+        payload,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+
+
+def _implementation_posture_markdown(value: str) -> str:
+    try:
+        posture = json.loads(value)
+    except json.JSONDecodeError:
+        return value
+    if not isinstance(posture, dict):
+        return value
+    summary = str(posture.get("summary", value))
+    gap_records = posture.get("source_gap_records", [])
+    if isinstance(gap_records, list) and gap_records:
+        identifiers = ",".join(
+            str(item.get("requirement_id"))
+            for item in gap_records
+            if isinstance(item, dict)
+        )
+        summary += f" Source gap requirement IDs: [{identifiers}]."
+    for kind in ("test", "proof"):
+        references = posture.get(f"current_{kind}_references", [])
+        if not isinstance(references, list):
+            continue
+        for reference in references:
+            if not isinstance(reference, dict):
+                continue
+            summary += (
+                f" Current {kind} evidence reference_id={reference.get('reference_id')}; "
+                f"source={reference.get('source')}; revision={reference.get('revision')}; "
+                f"approval={reference.get('approval_state')}; posture="
+                f"{reference.get('implementation_status')}."
+            )
+    return summary
 
 
 def _visual_authority_line(reference: object) -> str:
@@ -1376,7 +1489,9 @@ def _render_sections(
             _render_document(item, selected_requirement_ids) for item in standards
         ),
         "Source ownership": _bullet_values(pack.source_owners),
-        "Implementation posture": (pack.implementation_posture,),
+        "Implementation posture": (
+            _implementation_posture_markdown(pack.implementation_posture),
+        ),
         "Known risks": _bullet_values(pack.known_risks),
         "Visual authority": _bullet_values(pack.visual_authority),
         "Required tests": _bullet_values(pack.required_tests),
