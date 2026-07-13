@@ -32,6 +32,7 @@ from tools.ambitions_canon.traceability import (
     IMPLEMENTATION_SUFFIXES,
     SOURCE_SCAN_ROOTS,
 )
+from tests.canon.canon_test_support import copy_figma_reconciliation_evidence
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -103,6 +104,7 @@ class TrackedEvidenceTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             shutil.copytree(ROOT / "docs/canon", root / "docs/canon")
+            copy_figma_reconciliation_evidence(ROOT, root)
             index_path = root / "docs/canon/migration/impact-reference-index.json"
             index = json.loads(index_path.read_text(encoding="utf-8"))
             dispositions = root / "docs/canon/migration/claim-dispositions.json"
@@ -157,10 +159,7 @@ class TrackedEvidenceTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             shutil.copytree(ROOT / "docs/canon", root / "docs/canon")
-            shutil.copytree(
-                ROOT / "docs/design/provenance/owner-approvals",
-                root / "docs/design/provenance/owner-approvals",
-            )
+            copy_figma_reconciliation_evidence(ROOT, root)
             copy_traceability_inventory(root)
             (root / ".gitignore").write_text(".codex/\n", encoding="utf-8")
             self.assertFalse((root / ".codex").exists())
@@ -284,6 +283,7 @@ class TrackedEvidenceTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             shutil.copytree(ROOT / "docs/canon", root / "docs/canon")
+            copy_figma_reconciliation_evidence(ROOT, root)
             (root / ".gitignore").write_text(".codex/\n", encoding="utf-8")
             self.assertFalse((root / ".codex").exists())
             issue_path = root / "issue.json"
@@ -337,6 +337,7 @@ class TrackedEvidenceTests(unittest.TestCase):
             with self.subTest(phase=phase), tempfile.TemporaryDirectory() as temporary:
                 root = Path(temporary)
                 shutil.copytree(ROOT / "docs/canon", root / "docs/canon")
+                copy_figma_reconciliation_evidence(ROOT, root)
                 (root / ".gitignore").write_text(".codex/\n", encoding="utf-8")
                 self.assertFalse((root / ".codex").exists())
                 issue_path = root / "issue.json"
@@ -499,6 +500,7 @@ class TrackedEvidenceTests(unittest.TestCase):
                 )
                 root = Path(temporary)
                 shutil.copytree(ROOT / "docs/canon", root / "docs/canon")
+                copy_figma_reconciliation_evidence(ROOT, root)
                 issue_path = root / "issue.json"
                 issue_path.write_bytes(ISSUE_FIXTURE.read_bytes())
                 (root / ".gitignore").write_text(".codex/\n", encoding="utf-8")
@@ -543,6 +545,7 @@ class TrackedEvidenceTests(unittest.TestCase):
             with self.subTest(phase=phase), tempfile.TemporaryDirectory() as temporary:
                 root = Path(temporary)
                 shutil.copytree(ROOT / "docs/canon", root / "docs/canon")
+                copy_figma_reconciliation_evidence(ROOT, root)
                 (root / ".gitignore").write_text(".codex/\n", encoding="utf-8")
                 issue_path = root / "issue.json"
                 issue = json.loads(ISSUE_FIXTURE.read_text(encoding="utf-8"))
@@ -730,6 +733,7 @@ class TrackedEvidenceTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             shutil.copytree(ROOT / "docs/canon", root / "docs/canon")
+            copy_figma_reconciliation_evidence(ROOT, root)
             self.assertFalse((root / ".codex").exists())
             issue_path = root / "issue.json"
             issue_path.write_bytes(ISSUE_FIXTURE.read_bytes())

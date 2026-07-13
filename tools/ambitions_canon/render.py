@@ -181,6 +181,7 @@ def _render_outputs(
     from tools.ambitions_canon.external_authority import (
         external_reference_findings,
         load_external_reference_snapshot,
+        load_figma_reconciliation_if_present,
         load_linear_reconciliation_if_present,
         render_external_reference_impact,
         render_visual_authority_manifest,
@@ -227,9 +228,18 @@ def _render_outputs(
         registry,
         references,
     )
+    figma_reconciliation = load_figma_reconciliation_if_present(
+        repository_root,
+        registry,
+        references,
+    )
     visual_manifest = {
         **metadata,
-        **render_visual_authority_manifest(registry, references),
+        **render_visual_authority_manifest(
+            registry,
+            references,
+            figma_reconciliation=figma_reconciliation,
+        ),
     }
 
     rendered: dict[Path, bytes] = {

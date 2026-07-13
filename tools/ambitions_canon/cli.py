@@ -40,6 +40,7 @@ from tools.ambitions_canon.external_authority import (
     external_reference_findings,
     load_external_reference_snapshot,
     load_external_references,
+    load_figma_reconciliation_if_present,
     validate_external_reference_snapshot,
     validate_linear_reconciliation,
 )
@@ -681,11 +682,21 @@ def _external_authority(root: Path, *, kind: str) -> int:
         )
         validate_external_reference_snapshot(root, reference_snapshot)
         invalid = external_reference_findings(registry, references, root)
-        reconciliation = (
-            validate_linear_reconciliation(root, registry, references)
-            if reference_kind is AuthorityReferenceKind.LINEAR
-            else None
-        )
+        if reference_kind is AuthorityReferenceKind.LINEAR:
+            reconciliation = validate_linear_reconciliation(
+                root, registry, references
+            )
+            reconciliation_count = reconciliation.entity_count
+        elif reference_kind is AuthorityReferenceKind.FIGMA:
+            reconciliation = load_figma_reconciliation_if_present(
+                root, registry, references
+            )
+            reconciliation_count = (
+                reconciliation.node_count if reconciliation is not None else 0
+            )
+        else:
+            reconciliation = None
+            reconciliation_count = 0
         validate_external_reference_snapshot(root, reference_snapshot)
     except CanonError as error:
         location = error.path.as_posix() if error.path is not None else "<references>"
@@ -708,7 +719,7 @@ def _external_authority(root: Path, *, kind: str) -> int:
         "GREEN ambitions canon external-authority "
         f"kind={kind} references={len(references)} "
         "reconciliation_entities="
-        f"{reconciliation.entity_count if reconciliation is not None else 0} "
+        f"{reconciliation_count} "
         f"authority_state={manifest.authority_state.value}"
     )
     return 0

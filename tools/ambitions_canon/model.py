@@ -286,9 +286,20 @@ class AuthorityReference:
     approved_by: str | None = None
     implementation_status: str | None = None
     authority_role: FigmaAuthorityRole | None = None
+    visual_authority_id: str | None = None
+    canon_revision: int | None = None
+    frame_version: str | None = None
+    swiftui_plausibility: str | None = None
+    accessibility_variants: tuple[str, ...] = ()
+    reconciliation_status: str | None = None
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "requirement_ids", tuple(self.requirement_ids))
+        object.__setattr__(
+            self,
+            "accessibility_variants",
+            tuple(self.accessibility_variants),
+        )
 
 
 @dataclass(frozen=True, slots=True)

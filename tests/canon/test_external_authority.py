@@ -1,9 +1,13 @@
+import copy
+import hashlib
 import tempfile
 import unittest
+import json
 from dataclasses import replace
 from pathlib import Path
 
 from tests.canon.test_impact import document, registry, requirement
+from tests.canon.canon_test_support import copy_figma_reconciliation_evidence
 from tools.ambitions_canon.external_authority import (
     external_reference_findings,
     load_external_references,
@@ -165,6 +169,637 @@ implementation_status = "migration corpus; not implementation proof"
         self.assertEqual(manifest["authorities"][0]["authority_status"], "non_authoritative")
         self.assertFalse(manifest["ui_readiness"])
 
+    def test_figma_reference_contract_carries_governed_visual_authority_fields(self):
+        references_root = self.write_reference_files()
+        (references_root / "figma.toml").write_text(
+            '''schema_version = 1
+kind = "figma"
+
+[[references]]
+reference_id = "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:1:2"
+source = "figma:SWtHm9ouHTPbEFfNrrtZwv:1:2"
+revision = "1:2"
+visual_authority_id = "VSP-01"
+canon_revision = 1
+frame_version = "R1"
+requirement_ids = ["TODAY-001"]
+authority_role = "approved_target"
+approval_state = "approved"
+approved_by = "Devan Warner"
+swiftui_plausibility = "plausible_unverified"
+accessibility_variants = ["Dynamic Type", "Reduce Motion", "VoiceOver"]
+implementation_status = "Yellow; not implementation proof"
+''',
+            encoding="utf-8",
+        )
+
+        loaded = load_external_references(self.root)[0]
+        manifest = render_visual_authority_manifest(self.current, (loaded,))
+        authority = manifest["authorities"][0]
+
+        self.assertEqual(authority["visual_authority_id"], "VSP-01")
+        self.assertEqual(authority["canon_revision"], 1)
+        self.assertEqual(authority["frame_version"], "R1")
+        self.assertEqual(authority["swiftui_plausibility"], "plausible_unverified")
+        self.assertEqual(
+            authority["accessibility_variants"],
+            ["Dynamic Type", "Reduce Motion", "VoiceOver"],
+        )
+
+    def test_figma_reference_contract_rejects_missing_governance_fields(self):
+        references_root = self.write_reference_files()
+        (references_root / "figma.toml").write_text(
+            '''schema_version = 1
+kind = "figma"
+
+[[references]]
+reference_id = "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:1:2"
+source = "figma:SWtHm9ouHTPbEFfNrrtZwv:1:2"
+revision = "1:2"
+visual_authority_id = "VSP-01"
+requirement_ids = ["TODAY-001"]
+authority_role = "approved_target"
+approval_state = "approved"
+approved_by = "Devan Warner"
+implementation_status = "Yellow; not implementation proof"
+''',
+            encoding="utf-8",
+        )
+
+        with self.assertRaises(Exception) as raised:
+            load_external_references(self.root)
+
+        self.assertEqual(raised.exception.code, "CANON_EXTERNAL_REFERENCE_SCHEMA")
+
+    def test_figma_reconciliation_binds_retained_authority_to_reference(self):
+        from tools.ambitions_canon.external_authority import (
+            validate_figma_reconciliation,
+        )
+
+        references_root = self.write_reference_files()
+        (references_root / "figma.toml").write_text(
+            '''schema_version = 1
+kind = "figma"
+
+[[references]]
+reference_id = "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:1:2"
+source = "figma:SWtHm9ouHTPbEFfNrrtZwv:1:2"
+revision = "1:2"
+visual_authority_id = "VSP-01"
+canon_revision = 1
+frame_version = "R1"
+requirement_ids = ["TODAY-001"]
+authority_role = "approved_target"
+approval_state = "approved"
+approved_by = "Devan Warner"
+swiftui_plausibility = "plausible_unverified"
+accessibility_variants = ["Dynamic Type"]
+implementation_status = "Yellow; not implementation proof"
+''',
+            encoding="utf-8",
+        )
+        migration = self.root / "docs/canon/migration"
+        migration.mkdir(parents=True)
+        approval = self.root / "docs/approval.md"
+        approval.write_text("approved\n", encoding="utf-8")
+        approval_digest = hashlib.sha256(approval.read_bytes()).hexdigest()
+        expected_file_keys = sorted(
+            [
+                "SWtHm9ouHTPbEFfNrrtZwv",
+                "XSpaP7NkB2efoTgSy0KpFq",
+                "hnVi8KV2SAuWP3V5hV160W",
+                "9FhOWjt1KGmDg31rq2XP9e",
+                "lDslntJK8Xtmap7paJz7f5",
+                "tJzwkJCg7piFbb3LGy91vD",
+                "syAY6U5srUCifJgKq0wSSH",
+                "TgKZkoanB1hLaSYbthAIr3",
+            ]
+        )
+        payload = {
+            "schema_version": 1,
+            "canon_revision": 1,
+            "authority_state": "shadow",
+            "disposition_state": "proposed_not_applied_owner_gate",
+            "external_mutations_applied": False,
+            "allowed_actions": [
+                "retain_authority",
+                "merge_unique_visual_content",
+                "downgrade_candidate",
+                "delete_duplicate_node",
+                "delete_duplicate_file",
+                "retain_failure_evidence",
+                "owner_review",
+            ],
+            "generated_from": {
+                "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+                "inventory_date": "2026-07-13",
+                "linear_issue_ids": ["AMB-1480"],
+                "page_id": "0:1",
+                "repo_provenance": "docs/design/provenance/vsp-provenance.json",
+            },
+            "inventory_counts": {
+                "files": 8,
+                "nodes": 1,
+                "pages": 8,
+                "retained_authorities": 1,
+            },
+            "expected_live_file_keys": expected_file_keys,
+            "file_inventory": [
+                {
+                    "file_key": file_key,
+                    "linear_issue_ids": ["AMB-1480"],
+                    "pages": [
+                        {
+                            "page_id": "0:1",
+                            "page_name": "Fixture page",
+                            "root_node_ids": ["1:2"],
+                            "metadata_request_id": "metadata-request",
+                            "screenshot_request_id": "screenshot-request",
+                            "screenshot_sha256": "b" * 64,
+                            "original_width": 430,
+                            "original_height": 932,
+                            "repository_screenshots": [],
+                        }
+                    ],
+                    "authority_claims": ["fixture live label"],
+                    "governed_approved_requirement_ids": (
+                        ["TODAY-001"]
+                        if file_key == "SWtHm9ouHTPbEFfNrrtZwv"
+                        else []
+                    ),
+                    "unique_visual_content": "fixture content",
+                    "duplicate_or_competing_authority": "fixture comparison",
+                    "inbound_links": [],
+                    "recommended_action": (
+                        "retain_authority"
+                        if file_key == "SWtHm9ouHTPbEFfNrrtZwv"
+                        else "owner_review"
+                    ),
+                    "action_status": "proposed_not_applied",
+                }
+                for file_key in expected_file_keys
+            ],
+            "manual_file_deletions": [],
+            "text_repairs": [
+                {
+                    "root_node_id": "177:93",
+                    "text_node_id": "177:926",
+                    "before": "Before owner-approval claim.",
+                    "after": "After owner-approval non-claim.",
+                    "rollback": "Restore exact before string.",
+                    "action_status": "proposed_not_applied",
+                }
+            ],
+            "nodes": [
+                {
+                    "visual_authority_id": "VSP-01",
+                    "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+                    "page_id": "0:1",
+                    "page_name": "Candidate page",
+                    "node_id": "1:2",
+                    "frame_label": "AUTHORITY - VSP-01 - fixture - R1",
+                    "frame_version": "R1",
+                    "owner_approval": {
+                        "state": "approved",
+                        "approved_by": "Devan Warner",
+                        "evidence": [
+                            {
+                                "path": "docs/approval.md",
+                                "sha256": approval_digest,
+                            }
+                        ],
+                    },
+                    "requirement_ids": ["TODAY-001"],
+                    "duplicate_or_competing_authority": "none",
+                    "unique_visual_content": "fixture shell",
+                    "accessibility_variants": ["Dynamic Type"],
+                    "swiftui_plausibility": "plausible_unverified",
+                    "recommended_action": "retain_authority",
+                    "action_status": "proposed_not_applied",
+                    "replacement_node_ids": [],
+                    "evidence": {
+                        "metadata_request_id": "metadata-request",
+                        "screenshot_request_id": "screenshot-request",
+                        "screenshot_sha256": "a" * 64,
+                        "original_width": 430,
+                        "original_height": 932,
+                        "repository_paths": [],
+                    },
+                    "rollback": "No mutation; tracked proposal may be reverted.",
+                    "claim_ceiling": "Yellow; Figma is visual authority only.",
+                }
+            ],
+        }
+        (migration / "figma-reconciliation.json").write_text(
+            json.dumps(payload, sort_keys=True) + "\n", encoding="utf-8"
+        )
+
+        # An inventoried live page can be empty; the page itself and its
+        # screenshot still prove that the Linear-linked page was inspected.
+        payload["file_inventory"][0]["pages"][0]["root_node_ids"] = []
+        (migration / "figma-reconciliation.json").write_text(
+            json.dumps(payload, sort_keys=True) + "\n", encoding="utf-8"
+        )
+
+        snapshot = validate_figma_reconciliation(
+            self.root,
+            self.rooted_registry(),
+            load_external_references(self.root),
+        )
+
+        self.assertEqual(snapshot.node_count, 1)
+        self.assertEqual(snapshot.action_counts, {"retain_authority": 1})
+        self.assertFalse(snapshot.external_mutations_applied)
+        self.assertTrue(snapshot.owner_gate_required)
+
+        valid_evidence = payload["nodes"][0]["owner_approval"]["evidence"]
+        approval_link = self.root / "docs/approval-link.md"
+        approval_link.symlink_to("approval.md")
+        for name, evidence in (
+            (
+                "stale_digest",
+                [{"path": "docs/approval.md", "sha256": "0" * 64}],
+            ),
+            (
+                "missing",
+                [{"path": "docs/missing.md", "sha256": approval_digest}],
+            ),
+            (
+                "duplicate",
+                [valid_evidence[0], valid_evidence[0]],
+            ),
+            (
+                "path_escape",
+                [{"path": "../approval.md", "sha256": approval_digest}],
+            ),
+            (
+                "symlink",
+                [{"path": "docs/approval-link.md", "sha256": approval_digest}],
+            ),
+        ):
+            with self.subTest(name=name):
+                payload["nodes"][0]["owner_approval"]["evidence"] = evidence
+                (migration / "figma-reconciliation.json").write_text(
+                    json.dumps(payload, sort_keys=True) + "\n", encoding="utf-8"
+                )
+                with self.assertRaises(Exception) as raised:
+                    validate_figma_reconciliation(
+                        self.root,
+                        self.rooted_registry(),
+                        load_external_references(self.root),
+                    )
+                self.assertEqual(
+                    raised.exception.code,
+                    "CANON_FIGMA_RECONCILIATION_STATE",
+                )
+        payload["nodes"][0]["owner_approval"]["evidence"] = valid_evidence
+
+        payload["file_inventory"][0]["governed_approved_requirement_ids"] = [
+            "TODAY-001"
+        ]
+        (migration / "figma-reconciliation.json").write_text(
+            json.dumps(payload, sort_keys=True) + "\n", encoding="utf-8"
+        )
+        with self.assertRaises(Exception) as raised:
+            validate_figma_reconciliation(
+                self.root,
+                self.rooted_registry(),
+                load_external_references(self.root),
+            )
+        self.assertEqual(
+            raised.exception.code,
+            "CANON_FIGMA_MULTIPLE_APPROVED_TARGETS",
+        )
+        payload["file_inventory"][0]["governed_approved_requirement_ids"] = []
+
+        payload["file_inventory"].pop()
+        payload["inventory_counts"]["files"] = 7
+        payload["inventory_counts"]["pages"] = 7
+        (migration / "figma-reconciliation.json").write_text(
+            json.dumps(payload, sort_keys=True) + "\n", encoding="utf-8"
+        )
+        with self.assertRaises(Exception) as raised:
+            validate_figma_reconciliation(
+                self.root,
+                self.rooted_registry(),
+                load_external_references(self.root),
+            )
+        self.assertEqual(
+            raised.exception.code,
+            "CANON_FIGMA_RECONCILIATION_STATE",
+        )
+
+    def test_live_figma_retained_approval_evidence_is_digest_bound(self):
+        from tools.ambitions_canon.external_authority import (
+            validate_figma_reconciliation,
+        )
+        from tools.ambitions_canon.manifest import load_documents, load_manifest
+        from tools.ambitions_canon.registry import build_registry
+
+        root = Path(__file__).resolve().parents[2]
+        manifest = load_manifest(root)
+        current = build_registry(manifest, load_documents(root, manifest))
+        snapshot = validate_figma_reconciliation(
+            root,
+            current,
+            load_external_references(root),
+        )
+        payload = json.loads(snapshot.source_bytes)
+        retained = [
+            node for node in payload["nodes"]
+            if node["recommended_action"] == "retain_authority"
+        ]
+
+        self.assertEqual(len(retained), 9)
+        for node in retained:
+            evidence = node["owner_approval"]["evidence"]
+            self.assertTrue(evidence, node["node_id"])
+            for binding in evidence:
+                evidence_path = root / binding["path"]
+                self.assertEqual(
+                    hashlib.sha256(evidence_path.read_bytes()).hexdigest(),
+                    binding["sha256"],
+                )
+
+    def test_live_figma_reconciliation_records_exact_applied_authority_receipts(self):
+        root = Path(__file__).resolve().parents[2]
+        data = json.loads(
+            root.joinpath(
+                "docs/canon/migration/figma-reconciliation.json"
+            ).read_text(encoding="utf-8")
+        )
+        self.assertEqual(
+            data["disposition_state"],
+            "authority_metadata_and_text_applied_verified",
+        )
+        self.assertIs(data["external_mutations_applied"], True)
+
+        applied_nodes = [
+            node["node_id"]
+            for node in data["nodes"]
+            if node["action_status"] == "applied_verified"
+        ]
+        self.assertEqual(
+            applied_nodes,
+            [
+                "87:2",
+                "160:93",
+                "177:93",
+                "202:93",
+                "217:93",
+                "240:93",
+                "257:93",
+                "272:93",
+                "92:2",
+            ],
+        )
+        self.assertTrue(
+            all(
+                repair["action_status"] == "applied_verified"
+                for repair in data["text_repairs"]
+            )
+        )
+
+        receipt = data["execution_receipt"]
+        self.assertEqual(receipt["status"], "applied_verified")
+        self.assertEqual(receipt["file_key"], "SWtHm9ouHTPbEFfNrrtZwv")
+        self.assertEqual(receipt["page_id"], "0:1")
+        self.assertEqual(receipt["shared_plugin_namespace"], "ambitions.canon")
+        self.assertEqual(receipt["deleted_node_ids"], [])
+        self.assertEqual(receipt["created_node_ids"], [])
+        self.assertEqual(
+            [item["node_id"] for item in receipt["metadata_writes"]],
+            applied_nodes,
+        )
+        self.assertEqual(
+            [item["text_node_id"] for item in receipt["text_writes"]],
+            ["177:783", "177:926", "240:948", "272:652", "272:97"],
+        )
+        for item in receipt["metadata_writes"]:
+            self.assertEqual(item["deleted_node_ids"], [])
+            self.assertEqual(item["created_node_ids"], [])
+            self.assertEqual(item["mutated_node_ids"], [item["node_id"]])
+            self.assertTrue(all(value == "" for value in item["before"].values()))
+            self.assertEqual(len(item["after"]), 10)
+            self.assertEqual(
+                item["before_screenshot"]["sha256"],
+                item["after_screenshot"]["sha256"],
+            )
+        for item in receipt["text_writes"]:
+            self.assertEqual(item["deleted_node_ids"], [])
+            self.assertEqual(item["created_node_ids"], [])
+            self.assertEqual(item["mutated_node_ids"], [item["text_node_id"]])
+            repair = next(
+                repair
+                for repair in data["text_repairs"]
+                if repair["text_node_id"] == item["text_node_id"]
+            )
+            self.assertEqual(item["before"], repair["before"])
+            self.assertEqual(item["after"], repair["after"])
+
+        references = load_external_references(root)
+        approved = [
+            reference
+            for reference in references
+            if reference.reference_kind is AuthorityReferenceKind.FIGMA
+            and reference.authority_role is FigmaAuthorityRole.APPROVED_TARGET
+        ]
+        self.assertEqual(len(approved), 9)
+        self.assertTrue(
+            all(
+                reference.reconciliation_status == "applied_verified"
+                for reference in approved
+            )
+        )
+
+        manifest = json.loads(
+            root.joinpath(
+                "docs/canon/generated/visual-authority-manifest.json"
+            ).read_text(encoding="utf-8")
+        )
+        self.assertEqual(
+            manifest["reconciliation"]["disposition_state"],
+            "authority_metadata_and_text_applied_verified",
+        )
+        self.assertEqual(
+            len(manifest["reconciliation"]["execution_receipt"]["metadata_writes"]),
+            9,
+        )
+        self.assertTrue(
+            all(
+                authority["reconciliation_status"] == "applied_verified"
+                for authority in manifest["authorities"]
+                if authority["authority_role"] == "approved_target"
+            )
+        )
+
+    def test_applied_figma_metadata_receipts_are_exactly_cross_bound(self):
+        from tools.ambitions_canon.external_authority import (
+            validate_figma_reconciliation,
+        )
+        from tools.ambitions_canon.manifest import load_documents, load_manifest
+        from tools.ambitions_canon.registry import build_registry
+
+        root = Path(__file__).resolve().parents[2]
+        manifest = load_manifest(root)
+        current = build_registry(manifest, load_documents(root, manifest))
+        references = load_external_references(root)
+        data = json.loads(
+            root.joinpath("docs/canon/migration/figma-reconciliation.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        reference_by_source = {
+            reference.source: reference
+            for reference in references
+            if reference.reference_kind is AuthorityReferenceKind.FIGMA
+        }
+        nodes_by_id = {node["node_id"]: node for node in data["nodes"]}
+
+        for receipt in data["execution_receipt"]["metadata_writes"]:
+            node = nodes_by_id[receipt["node_id"]]
+            reference = reference_by_source[
+                f"figma:{node['file_key']}:{node['node_id']}"
+            ]
+            expected = {
+                "accessibility_variants": json.dumps(
+                    list(reference.accessibility_variants), separators=(",", ":")
+                ),
+                "approved_by": node["owner_approval"]["approved_by"],
+                "authority_boundary": "visual_only_canon_and_source_own_product_law",
+                "canon_revision": str(manifest.canon_revision),
+                "frame_version": reference.frame_version,
+                "implementation_status": reference.implementation_status,
+                "owner_approval_state": node["owner_approval"]["state"],
+                "requirement_ids": json.dumps(
+                    sorted(reference.requirement_ids), separators=(",", ":")
+                ),
+                "swiftui_plausibility": reference.swiftui_plausibility,
+                "visual_authority_id": reference.visual_authority_id,
+            }
+            self.assertEqual(receipt["after"], expected)
+
+        with tempfile.TemporaryDirectory() as temp:
+            temp_root = Path(temp)
+            reconciliation_path = (
+                temp_root / "docs/canon/migration/figma-reconciliation.json"
+            )
+            reconciliation_path.parent.mkdir(parents=True)
+            copy_figma_reconciliation_evidence(root, temp_root)
+
+            def rejects(
+                mutated: dict[str, object],
+                checked_references: tuple[AuthorityReference, ...] = references,
+                expected_code: str = "CANON_FIGMA_RECONCILIATION_STATE",
+            ) -> None:
+                reconciliation_path.write_text(
+                    json.dumps(mutated, sort_keys=True) + "\n", encoding="utf-8"
+                )
+                with self.assertRaises(Exception) as raised:
+                    validate_figma_reconciliation(
+                        temp_root, current, checked_references
+                    )
+                self.assertEqual(
+                    raised.exception.code, expected_code
+                )
+
+            for field in sorted(data["execution_receipt"]["metadata_writes"][0]["after"]):
+                with self.subTest(metadata_field=field):
+                    mutated = copy.deepcopy(data)
+                    mutated["execution_receipt"]["metadata_writes"][0]["after"][field] += "-tampered"
+                    rejects(mutated)
+
+            envelope_tampers = {
+                "file_key": "wrong-file",
+                "page_id": "9:9",
+                "approval_authority": "wrong-authority",
+                "approval_review": "wrong-review",
+                "status": "proposed_not_applied",
+                "shared_plugin_namespace": "wrong.namespace",
+                "created_node_ids": ["1:1"],
+                "deleted_node_ids": ["1:2"],
+            }
+            for field, value in envelope_tampers.items():
+                with self.subTest(envelope_field=field):
+                    mutated = copy.deepcopy(data)
+                    mutated["execution_receipt"][field] = value
+                    rejects(mutated)
+
+            for field, value in (
+                ("mutated_node_ids", ["160:93"]),
+                ("created_node_ids", ["1:1"]),
+                ("deleted_node_ids", ["1:2"]),
+            ):
+                with self.subTest(metadata_identity_field=field):
+                    mutated = copy.deepcopy(data)
+                    mutated["execution_receipt"]["metadata_writes"][0][field] = value
+                    rejects(mutated)
+
+            for field in ("before", "after"):
+                with self.subTest(text_field=field):
+                    mutated = copy.deepcopy(data)
+                    mutated["execution_receipt"]["text_writes"][0][field] += "-tampered"
+                    rejects(mutated)
+
+            first_applied_source = (
+                f"figma:{data['execution_receipt']['file_key']}:"
+                f"{data['execution_receipt']['metadata_writes'][0]['node_id']}"
+            )
+            status_tampered_references = tuple(
+                replace(reference, reconciliation_status="proposed_not_applied")
+                if reference.source == first_applied_source
+                else reference
+                for reference in references
+            )
+            rejects(data, status_tampered_references)
+
+            coordinated_approval_tamper = copy.deepcopy(data)
+            first_node_id = coordinated_approval_tamper["execution_receipt"][
+                "metadata_writes"
+            ][0]["node_id"]
+            first_node = next(
+                node
+                for node in coordinated_approval_tamper["nodes"]
+                if node["node_id"] == first_node_id
+            )
+            first_node["owner_approval"]["state"] = "direction_approved"
+            coordinated_approval_tamper["execution_receipt"]["metadata_writes"][0][
+                "after"
+            ]["owner_approval_state"] = "direction_approved"
+            rejects(
+                coordinated_approval_tamper,
+                expected_code="CANON_FIGMA_RECONCILIATION_STALE",
+            )
+
+    def test_legacy_figma_reference_without_governance_fields_loads(self):
+        references_root = self.write_reference_files()
+        (references_root / "figma.toml").write_text(
+            '''schema_version = 1
+kind = "figma"
+
+[[references]]
+reference_id = "FIGMA-CANDIDATE:FILE:1:2"
+source = "figma:FILE:1:2"
+revision = "1:2"
+requirement_ids = ["TODAY-001"]
+authority_role = "candidate"
+approval_state = "unreviewed"
+implementation_status = "legacy candidate; not implementation proof"
+''',
+            encoding="utf-8",
+        )
+
+        loaded = [
+            reference
+            for reference in load_external_references(self.root)
+            if reference.reference_kind is AuthorityReferenceKind.FIGMA
+        ]
+
+        self.assertEqual(len(loaded), 1)
+        self.assertIsNone(loaded[0].visual_authority_id)
+        self.assertIsNone(loaded[0].canon_revision)
+        self.assertEqual(loaded[0].accessibility_variants, ())
+
     def test_typed_figma_role_ignores_adversarial_reference_id_spelling(self):
         from tools.ambitions_canon.model import FigmaAuthorityRole
 
@@ -203,6 +838,7 @@ implementation_status = "migration corpus; not implementation proof"
         self.assertEqual(
             by_id[candidate.reference_id]["authority_role"], "candidate"
         )
+        self.assertTrue(manifest["owner_approval_complete"])
 
     def test_multiple_approved_figma_targets_for_one_requirement_fail(self):
         from tools.ambitions_canon.model import FigmaAuthorityRole

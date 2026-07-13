@@ -23,7 +23,10 @@ from tools.ambitions_canon.manifest import load_documents, load_manifest
 from tools.ambitions_canon.model import CanonError, CanonRegistry
 from tools.ambitions_canon.registry import build_registry
 from tools.ambitions_canon.render import _unresolved_conflicts, render_outputs
-from tests.canon.canon_test_support import write_required_governance_artifacts
+from tests.canon.canon_test_support import (
+    copy_figma_reconciliation_evidence,
+    write_required_governance_artifacts,
+)
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -1765,6 +1768,7 @@ class BuildTests(unittest.TestCase):
     def test_object_boundary_matrix_reports_distinct_step_event_reminder_note_laws(self):
         shutil.rmtree(self.canon_root)
         shutil.copytree(ROOT / "docs/canon", self.canon_root)
+        copy_figma_reconciliation_evidence(ROOT, self.root)
         self.clear_local_proof_references(self.canon_root)
 
         findings = build_canon(self.root)
@@ -1813,6 +1817,7 @@ class BuildTests(unittest.TestCase):
             with self.subTest(name=name), tempfile.TemporaryDirectory() as temporary:
                 root = Path(temporary)
                 shutil.copytree(ROOT / "docs/canon", root / "docs/canon")
+                copy_figma_reconciliation_evidence(ROOT, root)
                 self.clear_local_proof_references(root / "docs/canon")
                 step = root / "docs/canon/specifications/objects/step.md"
                 step.write_text(step.read_text(encoding="utf-8").replace(old, new, 1), encoding="utf-8")
@@ -1824,6 +1829,7 @@ class BuildTests(unittest.TestCase):
     def test_object_boundary_spec_drift_is_detected_by_build_check(self):
         shutil.rmtree(self.canon_root)
         shutil.copytree(ROOT / "docs/canon", self.canon_root)
+        copy_figma_reconciliation_evidence(ROOT, self.root)
         self.clear_local_proof_references(self.canon_root)
         self.assertEqual(build_canon(self.root), ())
         step = self.canon_root / "specifications/objects/step.md"

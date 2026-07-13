@@ -513,8 +513,10 @@ def build_canon(root: Path, *, check: bool = False) -> tuple[Finding, ...]:
     registry = _load_audited_registry(root)
     from tools.ambitions_canon.external_authority import (
         load_external_reference_snapshot,
+        load_figma_reconciliation_if_present,
         load_linear_reconciliation_if_present,
         validate_external_reference_snapshot,
+        validate_figma_reconciliation_snapshot,
         validate_linear_reconciliation_snapshot,
     )
     from tools.ambitions_canon.traceability import (
@@ -529,6 +531,11 @@ def build_canon(root: Path, *, check: bool = False) -> tuple[Finding, ...]:
         reference_snapshot,
     )
     linear_reconciliation_snapshot = load_linear_reconciliation_if_present(
+        root,
+        registry,
+        reference_snapshot.references,
+    )
+    figma_reconciliation_snapshot = load_figma_reconciliation_if_present(
         root,
         registry,
         reference_snapshot.references,
@@ -575,6 +582,11 @@ def build_canon(root: Path, *, check: bool = False) -> tuple[Finding, ...]:
             validate_linear_reconciliation_snapshot(
                 root,
                 linear_reconciliation_snapshot,
+            )
+        if figma_reconciliation_snapshot is not None:
+            validate_figma_reconciliation_snapshot(
+                root,
+                figma_reconciliation_snapshot,
             )
         validate_traceability_input_snapshot(
             current,

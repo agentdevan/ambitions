@@ -2,13 +2,13 @@
 
 - Canon revision: `1`
 - Authority state: `shadow`
-- Traceability input SHA: `7b6888dd778cef1308c58c62476853e9411d2c93923ec1a9c51c7cae272a3ea3`
+- Traceability input SHA: `fbd4b01f57288edb03d999898f1f0e48ffdcc1b0dd68bab08c5669de8ba9c904`
 
 **Representation status:** Represented
 
-- Stable references: `18`
+- Stable references: `19`
 - Linear references: `1`
-- Figma references: `9`
+- Figma references: `10`
 - Proof references: `8`
 - Invalid external findings: `0`
 - Linear reconciliation SHA: `b7a81dea9496fe532dc513995b65e46ce26ec59166e8e7a564cee63daad85847`
@@ -34,8 +34,9 @@ This stable-link inventory does not prove implementation or readiness; the recon
 | `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:217:93` | figma | approved_target | approved | `SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001` |
 | `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:240:93` | figma | approved_target | approved | `SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001` |
 | `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:257:93` | figma | approved_target | approved | `SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001` |
-| `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:87:2` | figma | approved_target | approved | `SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001` |
-| `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:92:2` | figma | approved_target | approved | `SPEC-GLOBAL-MOTION-ACCESSIBILITY-001` |
+| `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:272:93` | figma | approved_target | approved | `SYSTEM-PRIVACY-EGRESS-001`, `SYSTEM-SOURCE-ATLAS-FIREWALL-001` |
+| `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:87:2` | figma | approved_target | approved | `SPEC-APP-SHELL-FIRST-VIEWPORT-001`, `SPEC-APP-SHELL-GLOBAL-ACTIONS-001`, `SPEC-APP-SHELL-ROOT-NAVIGATION-001`, `SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001` |
+| `FIGMA:SWtHm9ouHTPbEFfNrrtZwv:92:2` | figma | approved_target | approved | `A11Y-DYNAMIC-TYPE-001`, `A11Y-INPUT-EQUIVALENCE-001`, `A11Y-PROOF-MATRIX-001`, `A11Y-READING-FOCUS-001`, `A11Y-REDUCED-EFFECTS-001`, `SPEC-GLOBAL-MOTION-ACCESSIBILITY-001` |
 | `LINEAR:96b93346-271d-46fc-beab-43ff7e286b5d` | linear | n/a | approved | `AUTHORITY-MIGRATION-CORPUS-001`, `GOVERNANCE-LINEAR-RETENTION-001` |
 | `PROOF-VSP-01-SHELL-APPROVAL` | proof | n/a | approved | `SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001` |
 | `PROOF-VSP-02-TODAY-APPROVAL` | proof | n/a | approved | `SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001` |

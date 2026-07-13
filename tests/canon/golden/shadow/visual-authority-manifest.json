@@ -1,130 +1,846 @@
 {
   "authorities": [
     {
+      "accessibility_variants": [
+        "not_assessed"
+      ],
       "approval_state": "stale",
       "approved_by": "Devan Warner",
       "authority_role": "superseded",
       "authority_status": "non_authoritative",
+      "canon_revision": 1,
+      "frame_version": "R1 selected direction",
       "implementation_status": "approved direction superseded as final target by node 257:93; retained as a non-authoritative candidate and not implementation proof",
+      "reconciliation_action": "downgrade_candidate",
+      "reconciliation_status": "proposed_not_applied",
       "reference_id": "FIGMA-CANDIDATE:SWtHm9ouHTPbEFfNrrtZwv:250:104",
       "requirement_ids": [
         "SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001"
       ],
       "revision": "250:104",
-      "source": "figma:SWtHm9ouHTPbEFfNrrtZwv:250:104"
+      "source": "figma:SWtHm9ouHTPbEFfNrrtZwv:250:104",
+      "swiftui_plausibility": "not_assessed",
+      "visual_authority_id": "VSP-07"
     },
     {
+      "accessibility_variants": [
+        "Dynamic Type",
+        "Increase Contrast",
+        "Reduce Motion",
+        "Reduce Transparency",
+        "VoiceOver"
+      ],
       "approval_state": "approved",
       "approved_by": "Devan Warner",
       "authority_role": "approved_target",
       "authority_status": "approved",
+      "canon_revision": 1,
+      "frame_version": "R1",
       "implementation_status": "owner-approved VSP-02 Today design target with a Yellow proof ceiling; not implementation proof",
+      "reconciliation_action": "retain_authority",
+      "reconciliation_status": "applied_verified",
       "reference_id": "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:160:93",
       "requirement_ids": [
         "SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001"
       ],
       "revision": "160:93",
-      "source": "figma:SWtHm9ouHTPbEFfNrrtZwv:160:93"
+      "source": "figma:SWtHm9ouHTPbEFfNrrtZwv:160:93",
+      "swiftui_plausibility": "plausible_unverified",
+      "visual_authority_id": "VSP-02"
     },
     {
+      "accessibility_variants": [
+        "Dynamic Type",
+        "Increase Contrast",
+        "Reduce Motion",
+        "Reduce Transparency",
+        "VoiceOver"
+      ],
       "approval_state": "approved",
       "approved_by": "Devan Warner",
       "authority_role": "approved_target",
       "authority_status": "approved",
+      "canon_revision": 1,
+      "frame_version": "R1",
       "implementation_status": "owner-approved VSP-03 Goals design target with a Yellow proof ceiling; not implementation proof",
+      "reconciliation_action": "retain_authority",
+      "reconciliation_status": "applied_verified",
       "reference_id": "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:177:93",
       "requirement_ids": [
         "SPEC-SURFACE-GOALS-VISUAL-AUTHORITY-001"
       ],
       "revision": "177:93",
-      "source": "figma:SWtHm9ouHTPbEFfNrrtZwv:177:93"
+      "source": "figma:SWtHm9ouHTPbEFfNrrtZwv:177:93",
+      "swiftui_plausibility": "plausible_unverified",
+      "visual_authority_id": "VSP-03"
     },
     {
+      "accessibility_variants": [
+        "Dynamic Type",
+        "Increase Contrast",
+        "Reduce Motion",
+        "Reduce Transparency",
+        "VoiceOver"
+      ],
       "approval_state": "approved",
       "approved_by": "Devan Warner",
       "authority_role": "approved_target",
       "authority_status": "approved",
+      "canon_revision": 1,
+      "frame_version": "R1",
       "implementation_status": "owner-approved VSP-04 Time design target with a Yellow proof ceiling; not parity or implementation proof",
+      "reconciliation_action": "retain_authority",
+      "reconciliation_status": "applied_verified",
       "reference_id": "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:202:93",
       "requirement_ids": [
         "SPEC-SURFACE-TIME-VISUAL-AUTHORITY-001"
       ],
       "revision": "202:93",
-      "source": "figma:SWtHm9ouHTPbEFfNrrtZwv:202:93"
+      "source": "figma:SWtHm9ouHTPbEFfNrrtZwv:202:93",
+      "swiftui_plausibility": "plausible_unverified",
+      "visual_authority_id": "VSP-04"
     },
     {
+      "accessibility_variants": [
+        "Dynamic Type",
+        "Increase Contrast",
+        "Reduce Motion",
+        "Reduce Transparency",
+        "VoiceOver"
+      ],
       "approval_state": "approved",
       "approved_by": "Devan Warner",
       "authority_role": "approved_target",
       "authority_status": "approved",
+      "canon_revision": 1,
+      "frame_version": "R3",
       "implementation_status": "owner-approved VSP-05 Capture design target with a Yellow proof ceiling; not implementation proof",
+      "reconciliation_action": "retain_authority",
+      "reconciliation_status": "applied_verified",
       "reference_id": "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:217:93",
       "requirement_ids": [
         "SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001"
       ],
       "revision": "217:93",
-      "source": "figma:SWtHm9ouHTPbEFfNrrtZwv:217:93"
+      "source": "figma:SWtHm9ouHTPbEFfNrrtZwv:217:93",
+      "swiftui_plausibility": "plausible_unverified",
+      "visual_authority_id": "VSP-05"
     },
     {
+      "accessibility_variants": [
+        "Dynamic Type",
+        "Increase Contrast",
+        "Reduce Motion",
+        "Reduce Transparency",
+        "VoiceOver"
+      ],
       "approval_state": "approved",
       "approved_by": "Devan Warner",
       "authority_role": "approved_target",
       "authority_status": "approved",
+      "canon_revision": 1,
+      "frame_version": "R1",
       "implementation_status": "owner-approved VSP-06 You design target with a Yellow proof ceiling; not implementation proof",
+      "reconciliation_action": "retain_authority",
+      "reconciliation_status": "applied_verified",
       "reference_id": "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:240:93",
       "requirement_ids": [
         "SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001"
       ],
       "revision": "240:93",
-      "source": "figma:SWtHm9ouHTPbEFfNrrtZwv:240:93"
+      "source": "figma:SWtHm9ouHTPbEFfNrrtZwv:240:93",
+      "swiftui_plausibility": "plausible_unverified",
+      "visual_authority_id": "VSP-06"
     },
     {
+      "accessibility_variants": [
+        "Dynamic Type",
+        "Increase Contrast",
+        "Reduce Motion",
+        "Reduce Transparency",
+        "VoiceOver"
+      ],
       "approval_state": "approved",
       "approved_by": "Devan Warner",
       "authority_role": "approved_target",
       "authority_status": "approved",
+      "canon_revision": 1,
+      "frame_version": "R1",
       "implementation_status": "owner-approved VSP-07 Trust successor design target with a Yellow proof ceiling; not implementation proof",
+      "reconciliation_action": "retain_authority",
+      "reconciliation_status": "applied_verified",
       "reference_id": "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:257:93",
       "requirement_ids": [
         "SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001"
       ],
       "revision": "257:93",
-      "source": "figma:SWtHm9ouHTPbEFfNrrtZwv:257:93"
+      "source": "figma:SWtHm9ouHTPbEFfNrrtZwv:257:93",
+      "swiftui_plausibility": "plausible_unverified",
+      "visual_authority_id": "VSP-07"
     },
     {
+      "accessibility_variants": [
+        "Dynamic Type",
+        "Increase Contrast",
+        "Reduce Motion",
+        "Reduce Transparency",
+        "VoiceOver"
+      ],
       "approval_state": "approved",
       "approved_by": "Devan Warner",
       "authority_role": "approved_target",
       "authority_status": "approved",
+      "canon_revision": 1,
+      "frame_version": "R1",
+      "implementation_status": "owner-approved VSP-08 Airlock Review Gate visual target with a Yellow proof ceiling; not privacy, request-shape, offline, implementation, or release proof",
+      "reconciliation_action": "retain_authority",
+      "reconciliation_status": "applied_verified",
+      "reference_id": "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:272:93",
+      "requirement_ids": [
+        "SYSTEM-PRIVACY-EGRESS-001",
+        "SYSTEM-SOURCE-ATLAS-FIREWALL-001"
+      ],
+      "revision": "272:93",
+      "source": "figma:SWtHm9ouHTPbEFfNrrtZwv:272:93",
+      "swiftui_plausibility": "plausible_unverified",
+      "visual_authority_id": "VSP-08"
+    },
+    {
+      "accessibility_variants": [
+        "Dynamic Type",
+        "Increase Contrast",
+        "Reduce Motion",
+        "Reduce Transparency",
+        "VoiceOver"
+      ],
+      "approval_state": "approved",
+      "approved_by": "Devan Warner",
+      "authority_role": "approved_target",
+      "authority_status": "approved",
+      "canon_revision": 1,
+      "frame_version": "R1",
       "implementation_status": "owner-approved VSP-01 shell placement authority for Search; not a dedicated Search overlay or implementation proof",
+      "reconciliation_action": "retain_authority",
+      "reconciliation_status": "applied_verified",
       "reference_id": "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:87:2",
       "requirement_ids": [
+        "SPEC-APP-SHELL-FIRST-VIEWPORT-001",
+        "SPEC-APP-SHELL-GLOBAL-ACTIONS-001",
+        "SPEC-APP-SHELL-ROOT-NAVIGATION-001",
         "SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001"
       ],
       "revision": "87:2",
-      "source": "figma:SWtHm9ouHTPbEFfNrrtZwv:87:2"
+      "source": "figma:SWtHm9ouHTPbEFfNrrtZwv:87:2",
+      "swiftui_plausibility": "plausible_unverified",
+      "visual_authority_id": "VSP-01"
     },
     {
+      "accessibility_variants": [
+        "Differentiate Without Color",
+        "Dynamic Type",
+        "Haptics",
+        "Hit Targets",
+        "Increase Contrast",
+        "Reduce Motion",
+        "Reduce Transparency",
+        "Static Equivalents",
+        "Switch Control and Focus",
+        "VoiceOver"
+      ],
       "approval_state": "approved",
       "approved_by": "Devan Warner",
       "authority_role": "approved_target",
       "authority_status": "approved",
+      "canon_revision": 1,
+      "frame_version": "R1",
       "implementation_status": "owner-approved VSP-09 motion and accessibility design rubric with a Yellow proof ceiling; not conformance or implementation proof",
+      "reconciliation_action": "retain_authority",
+      "reconciliation_status": "applied_verified",
       "reference_id": "FIGMA:SWtHm9ouHTPbEFfNrrtZwv:92:2",
       "requirement_ids": [
+        "A11Y-DYNAMIC-TYPE-001",
+        "A11Y-INPUT-EQUIVALENCE-001",
+        "A11Y-PROOF-MATRIX-001",
+        "A11Y-READING-FOCUS-001",
+        "A11Y-REDUCED-EFFECTS-001",
         "SPEC-GLOBAL-MOTION-ACCESSIBILITY-001"
       ],
       "revision": "92:2",
-      "source": "figma:SWtHm9ouHTPbEFfNrrtZwv:92:2"
+      "source": "figma:SWtHm9ouHTPbEFfNrrtZwv:92:2",
+      "swiftui_plausibility": "plausible_unverified",
+      "visual_authority_id": "VSP-09"
     }
   ],
   "authority_state": "shadow",
   "canon_content_sha": "12f110471863c2f38c9a4f611022f2162365785a201df345bc6633f93fb2a31c",
   "canon_revision": 1,
   "compiler_version": "0.1.0",
-  "owner_approval_complete": false,
+  "owner_approval_complete": true,
+  "reconciliation": {
+    "action_counts": {
+      "downgrade_candidate": 3,
+      "owner_review": 1,
+      "retain_authority": 9,
+      "retain_failure_evidence": 2
+    },
+    "disposition_state": "authority_metadata_and_text_applied_verified",
+    "execution_receipt": {
+      "approval_authority": "controller_on_owner_behalf_under_tasks_22_29_delegation",
+      "approval_review": "OWNER_GATE_CLEAN",
+      "created_node_ids": [],
+      "deleted_node_ids": [],
+      "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "metadata_writes": [
+        {
+          "after": {
+            "accessibility_variants": "[\"Dynamic Type\",\"Increase Contrast\",\"Reduce Motion\",\"Reduce Transparency\",\"VoiceOver\"]",
+            "approved_by": "Devan Warner",
+            "authority_boundary": "visual_only_canon_and_source_own_product_law",
+            "canon_revision": "1",
+            "frame_version": "R1",
+            "implementation_status": "owner-approved VSP-01 shell placement authority for Search; not a dedicated Search overlay or implementation proof",
+            "owner_approval_state": "approved",
+            "requirement_ids": "[\"SPEC-APP-SHELL-FIRST-VIEWPORT-001\",\"SPEC-APP-SHELL-GLOBAL-ACTIONS-001\",\"SPEC-APP-SHELL-ROOT-NAVIGATION-001\",\"SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001\"]",
+            "swiftui_plausibility": "plausible_unverified",
+            "visual_authority_id": "VSP-01"
+          },
+          "after_screenshot": {
+            "request_id": "3596838d-8ebd-4ecd-a3a7-9c2333df41cc",
+            "sha256": "3c92f5cb4ce95bb033ebff8e89064bd7a3763a54d4b3521aae39ac8f4da3da8c"
+          },
+          "before": {
+            "accessibility_variants": "",
+            "approved_by": "",
+            "authority_boundary": "",
+            "canon_revision": "",
+            "frame_version": "",
+            "implementation_status": "",
+            "owner_approval_state": "",
+            "requirement_ids": "",
+            "swiftui_plausibility": "",
+            "visual_authority_id": ""
+          },
+          "before_screenshot": {
+            "request_id": "b3534084-cbc1-4b21-a677-61aebdc3c562",
+            "sha256": "3c92f5cb4ce95bb033ebff8e89064bd7a3763a54d4b3521aae39ac8f4da3da8c"
+          },
+          "created_node_ids": [],
+          "deleted_node_ids": [],
+          "mutated_node_ids": [
+            "87:2"
+          ],
+          "node_id": "87:2",
+          "readback_request_id": "371c336b-5c39-4ae4-b9a3-7a6a43ff315e"
+        },
+        {
+          "after": {
+            "accessibility_variants": "[\"Dynamic Type\",\"Increase Contrast\",\"Reduce Motion\",\"Reduce Transparency\",\"VoiceOver\"]",
+            "approved_by": "Devan Warner",
+            "authority_boundary": "visual_only_canon_and_source_own_product_law",
+            "canon_revision": "1",
+            "frame_version": "R1",
+            "implementation_status": "owner-approved VSP-02 Today design target with a Yellow proof ceiling; not implementation proof",
+            "owner_approval_state": "approved",
+            "requirement_ids": "[\"SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001\"]",
+            "swiftui_plausibility": "plausible_unverified",
+            "visual_authority_id": "VSP-02"
+          },
+          "after_screenshot": {
+            "request_id": "4b555be6-05aa-4542-b912-c7ece38ce806",
+            "sha256": "f806ee59cc121d4aac9013342999892556227760c9f4336b7cbfd9dfed0d9b9c"
+          },
+          "before": {
+            "accessibility_variants": "",
+            "approved_by": "",
+            "authority_boundary": "",
+            "canon_revision": "",
+            "frame_version": "",
+            "implementation_status": "",
+            "owner_approval_state": "",
+            "requirement_ids": "",
+            "swiftui_plausibility": "",
+            "visual_authority_id": ""
+          },
+          "before_screenshot": {
+            "request_id": "a5fa1cff-483e-49ad-ab3a-0dec269ef9f7",
+            "sha256": "f806ee59cc121d4aac9013342999892556227760c9f4336b7cbfd9dfed0d9b9c"
+          },
+          "created_node_ids": [],
+          "deleted_node_ids": [],
+          "mutated_node_ids": [
+            "160:93"
+          ],
+          "node_id": "160:93",
+          "readback_request_id": "a1c34117-1b85-42f4-8799-5dcf5774dab8"
+        },
+        {
+          "after": {
+            "accessibility_variants": "[\"Dynamic Type\",\"Increase Contrast\",\"Reduce Motion\",\"Reduce Transparency\",\"VoiceOver\"]",
+            "approved_by": "Devan Warner",
+            "authority_boundary": "visual_only_canon_and_source_own_product_law",
+            "canon_revision": "1",
+            "frame_version": "R1",
+            "implementation_status": "owner-approved VSP-03 Goals design target with a Yellow proof ceiling; not implementation proof",
+            "owner_approval_state": "approved",
+            "requirement_ids": "[\"SPEC-SURFACE-GOALS-VISUAL-AUTHORITY-001\"]",
+            "swiftui_plausibility": "plausible_unverified",
+            "visual_authority_id": "VSP-03"
+          },
+          "after_screenshot": {
+            "request_id": "46184444-c419-4fe4-a88a-339a34738dad",
+            "sha256": "1bceaba58d50106bd54d349228e5d3ccb0801374aa227b210b12a8b9db9bdab5"
+          },
+          "before": {
+            "accessibility_variants": "",
+            "approved_by": "",
+            "authority_boundary": "",
+            "canon_revision": "",
+            "frame_version": "",
+            "implementation_status": "",
+            "owner_approval_state": "",
+            "requirement_ids": "",
+            "swiftui_plausibility": "",
+            "visual_authority_id": ""
+          },
+          "before_screenshot": {
+            "request_id": "05ae8bb9-5e40-47a4-ba42-c18ef3040a75",
+            "sha256": "1bceaba58d50106bd54d349228e5d3ccb0801374aa227b210b12a8b9db9bdab5"
+          },
+          "created_node_ids": [],
+          "deleted_node_ids": [],
+          "mutated_node_ids": [
+            "177:93"
+          ],
+          "node_id": "177:93",
+          "readback_request_id": "a1c34117-1b85-42f4-8799-5dcf5774dab8"
+        },
+        {
+          "after": {
+            "accessibility_variants": "[\"Dynamic Type\",\"Increase Contrast\",\"Reduce Motion\",\"Reduce Transparency\",\"VoiceOver\"]",
+            "approved_by": "Devan Warner",
+            "authority_boundary": "visual_only_canon_and_source_own_product_law",
+            "canon_revision": "1",
+            "frame_version": "R1",
+            "implementation_status": "owner-approved VSP-04 Time design target with a Yellow proof ceiling; not parity or implementation proof",
+            "owner_approval_state": "approved",
+            "requirement_ids": "[\"SPEC-SURFACE-TIME-VISUAL-AUTHORITY-001\"]",
+            "swiftui_plausibility": "plausible_unverified",
+            "visual_authority_id": "VSP-04"
+          },
+          "after_screenshot": {
+            "request_id": "d999c947-46ed-428d-978c-4f83b2bc7f29",
+            "sha256": "c4f5303204d5de46158e56400aac859165d14d6c1b587539d1f0b8163b69dce0"
+          },
+          "before": {
+            "accessibility_variants": "",
+            "approved_by": "",
+            "authority_boundary": "",
+            "canon_revision": "",
+            "frame_version": "",
+            "implementation_status": "",
+            "owner_approval_state": "",
+            "requirement_ids": "",
+            "swiftui_plausibility": "",
+            "visual_authority_id": ""
+          },
+          "before_screenshot": {
+            "request_id": "6a43229d-861c-41aa-b530-bc6fe2b83ced",
+            "sha256": "c4f5303204d5de46158e56400aac859165d14d6c1b587539d1f0b8163b69dce0"
+          },
+          "created_node_ids": [],
+          "deleted_node_ids": [],
+          "mutated_node_ids": [
+            "202:93"
+          ],
+          "node_id": "202:93",
+          "readback_request_id": "a1c34117-1b85-42f4-8799-5dcf5774dab8"
+        },
+        {
+          "after": {
+            "accessibility_variants": "[\"Dynamic Type\",\"Increase Contrast\",\"Reduce Motion\",\"Reduce Transparency\",\"VoiceOver\"]",
+            "approved_by": "Devan Warner",
+            "authority_boundary": "visual_only_canon_and_source_own_product_law",
+            "canon_revision": "1",
+            "frame_version": "R3",
+            "implementation_status": "owner-approved VSP-05 Capture design target with a Yellow proof ceiling; not implementation proof",
+            "owner_approval_state": "approved",
+            "requirement_ids": "[\"SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001\"]",
+            "swiftui_plausibility": "plausible_unverified",
+            "visual_authority_id": "VSP-05"
+          },
+          "after_screenshot": {
+            "request_id": "e178cde1-48aa-4910-b725-28faaac3633a",
+            "sha256": "296c3553a5a5385f01296212762f3429c48f04033487612597e1a38974e556e7"
+          },
+          "before": {
+            "accessibility_variants": "",
+            "approved_by": "",
+            "authority_boundary": "",
+            "canon_revision": "",
+            "frame_version": "",
+            "implementation_status": "",
+            "owner_approval_state": "",
+            "requirement_ids": "",
+            "swiftui_plausibility": "",
+            "visual_authority_id": ""
+          },
+          "before_screenshot": {
+            "request_id": "07496a9e-5e7d-451d-b0dd-82dad7df5ec4",
+            "sha256": "296c3553a5a5385f01296212762f3429c48f04033487612597e1a38974e556e7"
+          },
+          "created_node_ids": [],
+          "deleted_node_ids": [],
+          "mutated_node_ids": [
+            "217:93"
+          ],
+          "node_id": "217:93",
+          "readback_request_id": "a1c34117-1b85-42f4-8799-5dcf5774dab8"
+        },
+        {
+          "after": {
+            "accessibility_variants": "[\"Dynamic Type\",\"Increase Contrast\",\"Reduce Motion\",\"Reduce Transparency\",\"VoiceOver\"]",
+            "approved_by": "Devan Warner",
+            "authority_boundary": "visual_only_canon_and_source_own_product_law",
+            "canon_revision": "1",
+            "frame_version": "R1",
+            "implementation_status": "owner-approved VSP-06 You design target with a Yellow proof ceiling; not implementation proof",
+            "owner_approval_state": "approved",
+            "requirement_ids": "[\"SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001\"]",
+            "swiftui_plausibility": "plausible_unverified",
+            "visual_authority_id": "VSP-06"
+          },
+          "after_screenshot": {
+            "request_id": "9ca8bcf3-96f7-43d0-8493-b6efbac6bf42",
+            "sha256": "77253c8d7f02168eae96382b090623af6c717edd1adbb13c15bd54793e200ae1"
+          },
+          "before": {
+            "accessibility_variants": "",
+            "approved_by": "",
+            "authority_boundary": "",
+            "canon_revision": "",
+            "frame_version": "",
+            "implementation_status": "",
+            "owner_approval_state": "",
+            "requirement_ids": "",
+            "swiftui_plausibility": "",
+            "visual_authority_id": ""
+          },
+          "before_screenshot": {
+            "request_id": "04a50982-b316-41c7-9c04-615b6b7f332e",
+            "sha256": "77253c8d7f02168eae96382b090623af6c717edd1adbb13c15bd54793e200ae1"
+          },
+          "created_node_ids": [],
+          "deleted_node_ids": [],
+          "mutated_node_ids": [
+            "240:93"
+          ],
+          "node_id": "240:93",
+          "readback_request_id": "4e9e0d0a-5121-49db-8996-79363f6aa73a"
+        },
+        {
+          "after": {
+            "accessibility_variants": "[\"Dynamic Type\",\"Increase Contrast\",\"Reduce Motion\",\"Reduce Transparency\",\"VoiceOver\"]",
+            "approved_by": "Devan Warner",
+            "authority_boundary": "visual_only_canon_and_source_own_product_law",
+            "canon_revision": "1",
+            "frame_version": "R1",
+            "implementation_status": "owner-approved VSP-07 Trust successor design target with a Yellow proof ceiling; not implementation proof",
+            "owner_approval_state": "approved",
+            "requirement_ids": "[\"SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001\"]",
+            "swiftui_plausibility": "plausible_unverified",
+            "visual_authority_id": "VSP-07"
+          },
+          "after_screenshot": {
+            "request_id": "ca9f226b-2834-4708-b362-434a2b908703",
+            "sha256": "5f4f6f9b4165b285b509f753bd09e4d654b6fecaaa4615cce8c06ebd54f1b7d8"
+          },
+          "before": {
+            "accessibility_variants": "",
+            "approved_by": "",
+            "authority_boundary": "",
+            "canon_revision": "",
+            "frame_version": "",
+            "implementation_status": "",
+            "owner_approval_state": "",
+            "requirement_ids": "",
+            "swiftui_plausibility": "",
+            "visual_authority_id": ""
+          },
+          "before_screenshot": {
+            "request_id": "c51cf37d-8b18-48bf-b849-f3e417950b05",
+            "sha256": "5f4f6f9b4165b285b509f753bd09e4d654b6fecaaa4615cce8c06ebd54f1b7d8"
+          },
+          "created_node_ids": [],
+          "deleted_node_ids": [],
+          "mutated_node_ids": [
+            "257:93"
+          ],
+          "node_id": "257:93",
+          "readback_request_id": "4e9e0d0a-5121-49db-8996-79363f6aa73a"
+        },
+        {
+          "after": {
+            "accessibility_variants": "[\"Dynamic Type\",\"Increase Contrast\",\"Reduce Motion\",\"Reduce Transparency\",\"VoiceOver\"]",
+            "approved_by": "Devan Warner",
+            "authority_boundary": "visual_only_canon_and_source_own_product_law",
+            "canon_revision": "1",
+            "frame_version": "R1",
+            "implementation_status": "owner-approved VSP-08 Airlock Review Gate visual target with a Yellow proof ceiling; not privacy, request-shape, offline, implementation, or release proof",
+            "owner_approval_state": "approved",
+            "requirement_ids": "[\"SYSTEM-PRIVACY-EGRESS-001\",\"SYSTEM-SOURCE-ATLAS-FIREWALL-001\"]",
+            "swiftui_plausibility": "plausible_unverified",
+            "visual_authority_id": "VSP-08"
+          },
+          "after_screenshot": {
+            "request_id": "81fe3edf-9de7-4da2-98fc-517f0f9d5f9e",
+            "sha256": "b6d9abd590b0899eb334b8b5c7f73765813114a6fed1de714a05df8fb6e09611"
+          },
+          "before": {
+            "accessibility_variants": "",
+            "approved_by": "",
+            "authority_boundary": "",
+            "canon_revision": "",
+            "frame_version": "",
+            "implementation_status": "",
+            "owner_approval_state": "",
+            "requirement_ids": "",
+            "swiftui_plausibility": "",
+            "visual_authority_id": ""
+          },
+          "before_screenshot": {
+            "request_id": "bbf5c8e3-eb21-4867-9e1b-52729310cca3",
+            "sha256": "b6d9abd590b0899eb334b8b5c7f73765813114a6fed1de714a05df8fb6e09611"
+          },
+          "created_node_ids": [],
+          "deleted_node_ids": [],
+          "mutated_node_ids": [
+            "272:93"
+          ],
+          "node_id": "272:93",
+          "readback_request_id": "4e9e0d0a-5121-49db-8996-79363f6aa73a"
+        },
+        {
+          "after": {
+            "accessibility_variants": "[\"Differentiate Without Color\",\"Dynamic Type\",\"Haptics\",\"Hit Targets\",\"Increase Contrast\",\"Reduce Motion\",\"Reduce Transparency\",\"Static Equivalents\",\"Switch Control and Focus\",\"VoiceOver\"]",
+            "approved_by": "Devan Warner",
+            "authority_boundary": "visual_only_canon_and_source_own_product_law",
+            "canon_revision": "1",
+            "frame_version": "R1",
+            "implementation_status": "owner-approved VSP-09 motion and accessibility design rubric with a Yellow proof ceiling; not conformance or implementation proof",
+            "owner_approval_state": "approved",
+            "requirement_ids": "[\"A11Y-DYNAMIC-TYPE-001\",\"A11Y-INPUT-EQUIVALENCE-001\",\"A11Y-PROOF-MATRIX-001\",\"A11Y-READING-FOCUS-001\",\"A11Y-REDUCED-EFFECTS-001\",\"SPEC-GLOBAL-MOTION-ACCESSIBILITY-001\"]",
+            "swiftui_plausibility": "plausible_unverified",
+            "visual_authority_id": "VSP-09"
+          },
+          "after_screenshot": {
+            "request_id": "b59ea15e-7d54-499c-bc8e-f656c593ab20",
+            "sha256": "0eb631f0792d72046c6fa29bbd52e3800d487c73e0093e00585af03d29515e77"
+          },
+          "before": {
+            "accessibility_variants": "",
+            "approved_by": "",
+            "authority_boundary": "",
+            "canon_revision": "",
+            "frame_version": "",
+            "implementation_status": "",
+            "owner_approval_state": "",
+            "requirement_ids": "",
+            "swiftui_plausibility": "",
+            "visual_authority_id": ""
+          },
+          "before_screenshot": {
+            "request_id": "19dd6926-39c9-4720-8768-69e5c9955b8b",
+            "sha256": "0eb631f0792d72046c6fa29bbd52e3800d487c73e0093e00585af03d29515e77"
+          },
+          "created_node_ids": [],
+          "deleted_node_ids": [],
+          "mutated_node_ids": [
+            "92:2"
+          ],
+          "node_id": "92:2",
+          "readback_request_id": "4e9e0d0a-5121-49db-8996-79363f6aa73a"
+        }
+      ],
+      "page_id": "0:1",
+      "shared_plugin_namespace": "ambitions.canon",
+      "status": "applied_verified",
+      "text_writes": [
+        {
+          "after": "This board may feed Codex only through the owner-approved package record and a canon-bound handoff that names exact frame IDs, screenshots, non-goals, and acceptance criteria.",
+          "after_screenshot": {
+            "request_id": "f7e9a7ee-9ddb-4b04-9568-31cff3f42150",
+            "sha256": "225ed4f12a81227a6d3250025b3f5901c5e982a4411d5e357feac53869eed5a5"
+          },
+          "before": "This board can feed Codex only after owner approval and Linear handoff notes record exact frame IDs, screenshots, non-goals, and acceptance criteria.",
+          "before_screenshot": {
+            "request_id": "05ae8bb9-5e40-47a4-ba42-c18ef3040a75",
+            "sha256": "1bceaba58d50106bd54d349228e5d3ccb0801374aa227b210b12a8b9db9bdab5"
+          },
+          "created_node_ids": [],
+          "deleted_node_ids": [],
+          "font_family": "Inter",
+          "font_style": "Regular",
+          "mutated_node_ids": [
+            "177:783"
+          ],
+          "readback_request_id": "029969fe-9c49-4d52-9c23-17cc59f0db2b",
+          "root_node_id": "177:93",
+          "text_node_id": "177:783"
+        },
+        {
+          "after": "This owner-approved package is VSP-03 Figma visual authority only. It does not certify source parity, device behavior, accessibility proof, Visual Green, release readiness, or Done.",
+          "after_screenshot": {
+            "request_id": "f7e9a7ee-9ddb-4b04-9568-31cff3f42150",
+            "sha256": "225ed4f12a81227a6d3250025b3f5901c5e982a4411d5e357feac53869eed5a5"
+          },
+          "before": "This package strengthens the VSP-03 Figma authority candidate. It does not certify source parity, owner approval, device behavior, accessibility proof, or release readiness.",
+          "before_screenshot": {
+            "request_id": "05ae8bb9-5e40-47a4-ba42-c18ef3040a75",
+            "sha256": "1bceaba58d50106bd54d349228e5d3ccb0801374aa227b210b12a8b9db9bdab5"
+          },
+          "created_node_ids": [],
+          "deleted_node_ids": [],
+          "font_family": "Inter",
+          "font_style": "Regular",
+          "mutated_node_ids": [
+            "177:926"
+          ],
+          "readback_request_id": "029969fe-9c49-4d52-9c23-17cc59f0db2b",
+          "root_node_id": "177:93",
+          "text_node_id": "177:926"
+        },
+        {
+          "after": "Implementation handoff map only. These tags do not claim source exists, compiles, or matches the owner-approved Figma frame until separately implemented and proven.",
+          "after_screenshot": {
+            "request_id": "140370ea-5633-4320-913d-cb5732207f8b",
+            "sha256": "6a0319f65b29e63b4957deee7a80c206eaa9d732aa3cd56f416a5f51e6527c6f"
+          },
+          "before": "Implementation handoff map only. These tags do not claim source exists, compiles, or matches the Figma frame until Codex implements after owner approval.",
+          "before_screenshot": {
+            "request_id": "04a50982-b316-41c7-9c04-615b6b7f332e",
+            "sha256": "77253c8d7f02168eae96382b090623af6c717edd1adbb13c15bd54793e200ae1"
+          },
+          "created_node_ids": [],
+          "deleted_node_ids": [],
+          "font_family": "Inter",
+          "font_style": "Regular",
+          "mutated_node_ids": [
+            "240:948"
+          ],
+          "readback_request_id": "029969fe-9c49-4d52-9c23-17cc59f0db2b",
+          "root_node_id": "240:93",
+          "text_node_id": "240:948"
+        },
+        {
+          "after": "Owner approval is recorded for this R1 visual package only. No runtime, privacy, request-shape, offline, accessibility, implementation, Visual Green, release, or Done claim is made.",
+          "after_screenshot": {
+            "request_id": "5f8cac18-ef9c-4220-bf27-faaf7ece7906",
+            "sha256": "735c2f220a15ed8298078b3fedc2894a3af9b401b4afeee1798e60eab3177f08"
+          },
+          "before": "No final owner approval is claimed until the owner approves this R1 package.",
+          "before_screenshot": {
+            "request_id": "bbf5c8e3-eb21-4867-9e1b-52729310cca3",
+            "sha256": "b6d9abd590b0899eb334b8b5c7f73765813114a6fed1de714a05df8fb6e09611"
+          },
+          "created_node_ids": [],
+          "deleted_node_ids": [],
+          "font_family": "Inter",
+          "font_style": "Medium",
+          "mutated_node_ids": [
+            "272:652"
+          ],
+          "readback_request_id": "029969fe-9c49-4d52-9c23-17cc59f0db2b",
+          "root_node_id": "272:93",
+          "text_node_id": "272:652"
+        },
+        {
+          "after": "Owner-selected Option B built forward as a single external-boundary object. Yellow proof ceiling: owner-approved Figma visual authority and handoff only; runtime, privacy, request-shape, offline, accessibility, and release proof remain absent.",
+          "after_screenshot": {
+            "request_id": "5f8cac18-ef9c-4220-bf27-faaf7ece7906",
+            "sha256": "735c2f220a15ed8298078b3fedc2894a3af9b401b4afeee1798e60eab3177f08"
+          },
+          "before": "Owner-selected Option B built forward as a single external-boundary object. Yellow proof ceiling: Figma authority and handoff only until owner final approval plus runtime/privacy/accessibility proof exist.",
+          "before_screenshot": {
+            "request_id": "bbf5c8e3-eb21-4867-9e1b-52729310cca3",
+            "sha256": "b6d9abd590b0899eb334b8b5c7f73765813114a6fed1de714a05df8fb6e09611"
+          },
+          "created_node_ids": [],
+          "deleted_node_ids": [],
+          "font_family": "Inter",
+          "font_style": "Medium",
+          "mutated_node_ids": [
+            "272:97"
+          ],
+          "readback_request_id": "029969fe-9c49-4d52-9c23-17cc59f0db2b",
+          "root_node_id": "272:93",
+          "text_node_id": "272:97"
+        }
+      ]
+    },
+    "expected_live_file_keys": [
+      "9FhOWjt1KGmDg31rq2XP9e",
+      "SWtHm9ouHTPbEFfNrrtZwv",
+      "TgKZkoanB1hLaSYbthAIr3",
+      "XSpaP7NkB2efoTgSy0KpFq",
+      "hnVi8KV2SAuWP3V5hV160W",
+      "lDslntJK8Xtmap7paJz7f5",
+      "syAY6U5srUCifJgKq0wSSH",
+      "tJzwkJCg7piFbb3LGy91vD"
+    ],
+    "external_mutations_applied": true,
+    "file_count": 8,
+    "input_sha": "a32410383e0536daaebf968b88de3f17809acc294e72084dbb55dc34968cbe96",
+    "node_count": 15,
+    "owner_gate_required": false,
+    "status_counts": {
+      "applied_verified": 9,
+      "proposed_not_applied": 6
+    },
+    "text_repairs": [
+      {
+        "action_status": "applied_verified",
+        "after": "This board may feed Codex only through the owner-approved package record and a canon-bound handoff that names exact frame IDs, screenshots, non-goals, and acceptance criteria.",
+        "before": "This board can feed Codex only after owner approval and Linear handoff notes record exact frame IDs, screenshots, non-goals, and acceptance criteria.",
+        "rollback": "Restore the exact before string if the separately owner-approved write is rolled back.",
+        "root_node_id": "177:93",
+        "text_node_id": "177:783"
+      },
+      {
+        "action_status": "applied_verified",
+        "after": "This owner-approved package is VSP-03 Figma visual authority only. It does not certify source parity, device behavior, accessibility proof, Visual Green, release readiness, or Done.",
+        "before": "This package strengthens the VSP-03 Figma authority candidate. It does not certify source parity, owner approval, device behavior, accessibility proof, or release readiness.",
+        "rollback": "Restore the exact before string if the separately owner-approved write is rolled back.",
+        "root_node_id": "177:93",
+        "text_node_id": "177:926"
+      },
+      {
+        "action_status": "applied_verified",
+        "after": "Implementation handoff map only. These tags do not claim source exists, compiles, or matches the owner-approved Figma frame until separately implemented and proven.",
+        "before": "Implementation handoff map only. These tags do not claim source exists, compiles, or matches the Figma frame until Codex implements after owner approval.",
+        "rollback": "Restore the exact before string if the separately owner-approved write is rolled back.",
+        "root_node_id": "240:93",
+        "text_node_id": "240:948"
+      },
+      {
+        "action_status": "applied_verified",
+        "after": "Owner approval is recorded for this R1 visual package only. No runtime, privacy, request-shape, offline, accessibility, implementation, Visual Green, release, or Done claim is made.",
+        "before": "No final owner approval is claimed until the owner approves this R1 package.",
+        "rollback": "Restore the exact before string if the separately owner-approved write is rolled back.",
+        "root_node_id": "272:93",
+        "text_node_id": "272:652"
+      },
+      {
+        "action_status": "applied_verified",
+        "after": "Owner-selected Option B built forward as a single external-boundary object. Yellow proof ceiling: owner-approved Figma visual authority and handoff only; runtime, privacy, request-shape, offline, accessibility, and release proof remain absent.",
+        "before": "Owner-selected Option B built forward as a single external-boundary object. Yellow proof ceiling: Figma authority and handoff only until owner final approval plus runtime/privacy/accessibility proof exist.",
+        "rollback": "Restore the exact before string if the separately owner-approved write is rolled back.",
+        "root_node_id": "272:93",
+        "text_node_id": "272:97"
+      }
+    ]
+  },
   "schema_version": 1,
-  "traceability_input_sha": "7b6888dd778cef1308c58c62476853e9411d2c93923ec1a9c51c7cae272a3ea3",
+  "traceability_input_sha": "fbd4b01f57288edb03d999898f1f0e48ffdcc1b0dd68bab08c5669de8ba9c904",
   "ui_readiness": false,
   "ui_readiness_reason": "visual authority references do not prove implementation, accessibility, device, visual, or release readiness"
 }

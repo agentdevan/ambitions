@@ -41,7 +41,17 @@ _REFERENCE_REQUIRED = frozenset(
         "implementation_status",
     }
 )
-_REFERENCE_ALLOWED = _REFERENCE_REQUIRED | {"approved_by", "authority_role"}
+_FIGMA_GOVERNANCE_FIELDS = frozenset(
+    {
+        "accessibility_variants",
+        "canon_revision",
+        "frame_version",
+        "swiftui_plausibility",
+        "visual_authority_id",
+    }
+)
+_REFERENCE_ALLOWED = _REFERENCE_REQUIRED | {"approved_by", "authority_role"} | _FIGMA_GOVERNANCE_FIELDS
+_REFERENCE_ALLOWED = _REFERENCE_ALLOWED | {"reconciliation_status"}
 _APPROVAL_STATES = frozenset({"unreviewed", "approved", "rejected", "stale"})
 _ALLOWED_EXTERNAL_PROOF_PREFIXES = (
     "figma:",
@@ -51,6 +61,161 @@ _ALLOWED_EXTERNAL_PROOF_PREFIXES = (
     "https://",
 )
 _LINEAR_RECONCILIATION = Path("docs/canon/migration/linear-reconciliation.json")
+_FIGMA_RECONCILIATION = Path("docs/canon/migration/figma-reconciliation.json")
+_FIGMA_EXPECTED_LIVE_FILE_KEYS = (
+    "9FhOWjt1KGmDg31rq2XP9e",
+    "SWtHm9ouHTPbEFfNrrtZwv",
+    "TgKZkoanB1hLaSYbthAIr3",
+    "XSpaP7NkB2efoTgSy0KpFq",
+    "hnVi8KV2SAuWP3V5hV160W",
+    "lDslntJK8Xtmap7paJz7f5",
+    "syAY6U5srUCifJgKq0wSSH",
+    "tJzwkJCg7piFbb3LGy91vD",
+)
+_FIGMA_ACTION_ORDER = (
+    "retain_authority",
+    "merge_unique_visual_content",
+    "downgrade_candidate",
+    "delete_duplicate_node",
+    "delete_duplicate_file",
+    "retain_failure_evidence",
+    "owner_review",
+)
+_FIGMA_ROOT_FIELDS = frozenset(
+    {
+        "allowed_actions",
+        "authority_state",
+        "canon_revision",
+        "disposition_state",
+        "external_mutations_applied",
+        "expected_live_file_keys",
+        "file_inventory",
+        "generated_from",
+        "inventory_counts",
+        "manual_file_deletions",
+        "nodes",
+        "schema_version",
+        "text_repairs",
+    }
+)
+_FIGMA_FILE_FIELDS = frozenset(
+    {
+        "action_status",
+        "authority_claims",
+        "duplicate_or_competing_authority",
+        "file_key",
+        "governed_approved_requirement_ids",
+        "inbound_links",
+        "linear_issue_ids",
+        "pages",
+        "recommended_action",
+        "unique_visual_content",
+    }
+)
+_FIGMA_PAGE_FIELDS = frozenset(
+    {
+        "metadata_request_id",
+        "original_height",
+        "original_width",
+        "page_id",
+        "page_name",
+        "repository_screenshots",
+        "root_node_ids",
+        "screenshot_request_id",
+        "screenshot_sha256",
+    }
+)
+_FIGMA_REPOSITORY_SCREENSHOT_FIELDS = frozenset({"node_id", "path", "sha256"})
+_FIGMA_APPROVAL_EVIDENCE_FIELDS = frozenset({"path", "sha256"})
+_FIGMA_TEXT_REPAIR_FIELDS = frozenset(
+    {"action_status", "after", "before", "rollback", "root_node_id", "text_node_id"}
+)
+_FIGMA_EXECUTION_FIELDS = frozenset(
+    {
+        "approval_authority",
+        "approval_review",
+        "created_node_ids",
+        "deleted_node_ids",
+        "file_key",
+        "metadata_writes",
+        "page_id",
+        "shared_plugin_namespace",
+        "status",
+        "text_writes",
+    }
+)
+_FIGMA_METADATA_WRITE_FIELDS = frozenset(
+    {
+        "after",
+        "after_screenshot",
+        "before",
+        "before_screenshot",
+        "created_node_ids",
+        "deleted_node_ids",
+        "mutated_node_ids",
+        "node_id",
+        "readback_request_id",
+    }
+)
+_FIGMA_TEXT_WRITE_FIELDS = frozenset(
+    {
+        "after",
+        "after_screenshot",
+        "before",
+        "before_screenshot",
+        "created_node_ids",
+        "deleted_node_ids",
+        "font_family",
+        "font_style",
+        "mutated_node_ids",
+        "readback_request_id",
+        "root_node_id",
+        "text_node_id",
+    }
+)
+_FIGMA_SCREENSHOT_RECEIPT_FIELDS = frozenset({"request_id", "sha256"})
+_FIGMA_METADATA_KEYS = (
+    "accessibility_variants",
+    "approved_by",
+    "authority_boundary",
+    "canon_revision",
+    "frame_version",
+    "implementation_status",
+    "owner_approval_state",
+    "requirement_ids",
+    "swiftui_plausibility",
+    "visual_authority_id",
+)
+_FIGMA_EXECUTION_FILE_KEY = "SWtHm9ouHTPbEFfNrrtZwv"
+_FIGMA_EXECUTION_PAGE_ID = "0:1"
+_FIGMA_EXECUTION_APPROVAL_AUTHORITY = (
+    "controller_on_owner_behalf_under_tasks_22_29_delegation"
+)
+_FIGMA_EXECUTION_APPROVAL_REVIEW = "OWNER_GATE_CLEAN"
+_FIGMA_AUTHORITY_BOUNDARY = "visual_only_canon_and_source_own_product_law"
+_FIGMA_NODE_FIELDS = frozenset(
+    {
+        "accessibility_variants",
+        "action_status",
+        "claim_ceiling",
+        "duplicate_or_competing_authority",
+        "evidence",
+        "file_key",
+        "frame_label",
+        "frame_version",
+        "node_id",
+        "owner_approval",
+        "page_id",
+        "page_name",
+        "recommended_action",
+        "replacement_node_ids",
+        "requirement_ids",
+        "rollback",
+        "swiftui_plausibility",
+        "unique_visual_content",
+        "visual_authority_id",
+    }
+)
 _LINEAR_ROOT_FIELDS = frozenset(
     {
         "action_rules",
@@ -177,6 +342,42 @@ class LinearReconciliationSnapshot:
         }
 
 
+@dataclass(frozen=True, slots=True)
+class FigmaReconciliationSnapshot:
+    source_bytes: bytes
+    input_sha: str
+    node_count: int
+    action_counts: Mapping[str, int]
+    status_counts: Mapping[str, int]
+    disposition_state: str
+    external_mutations_applied: bool
+    owner_gate_required: bool
+    actions_by_source: Mapping[str, str]
+    expected_live_file_keys: tuple[str, ...]
+    file_count: int
+    text_repairs: tuple[Mapping[str, str], ...]
+    execution_receipt: Mapping[str, object] | None = None
+
+    def summary(self) -> Mapping[str, object]:
+        return {
+            "action_counts": dict(self.action_counts),
+            "disposition_state": self.disposition_state,
+            "external_mutations_applied": self.external_mutations_applied,
+            "expected_live_file_keys": list(self.expected_live_file_keys),
+            "file_count": self.file_count,
+            "input_sha": self.input_sha,
+            "node_count": self.node_count,
+            "owner_gate_required": self.owner_gate_required,
+            "status_counts": dict(self.status_counts),
+            "text_repairs": [dict(item) for item in self.text_repairs],
+            "execution_receipt": (
+                dict(self.execution_receipt)
+                if self.execution_receipt is not None
+                else None
+            ),
+        }
+
+
 def load_external_references(repo_root: Path) -> tuple[AuthorityReference, ...]:
     """Load the fixed tracked reference files without granting them authority."""
 
@@ -239,6 +440,619 @@ def validate_external_reference_snapshot(
             "external reference inputs changed during traceability generation",
             repo_root / "docs/canon/references",
         )
+
+
+def validate_figma_reconciliation(
+    repo_root: Path,
+    registry: CanonRegistry,
+    references: Iterable[AuthorityReference],
+) -> FigmaReconciliationSnapshot:
+    """Validate the tracked Figma proposal without applying external writes."""
+
+    path = repo_root / _FIGMA_RECONCILIATION
+    try:
+        source_bytes = _read_regular_nofollow(repo_root, _FIGMA_RECONCILIATION)
+        data = json.loads(source_bytes.decode("utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as exc:
+        raise CanonError(
+            "CANON_FIGMA_RECONCILIATION_READ",
+            "unable to read tracked Figma reconciliation input",
+            path,
+        ) from exc
+    if not isinstance(data, dict):
+        raise _figma_reconciliation_error(path, "root must be an object")
+    applied = data.get("disposition_state") == "authority_metadata_and_text_applied_verified"
+    expected_root_fields = set(_FIGMA_ROOT_FIELDS)
+    if applied:
+        expected_root_fields.add("execution_receipt")
+    if set(data) != expected_root_fields:
+        raise _figma_reconciliation_error(path, "top-level fields are closed")
+    if data.get("schema_version") != 1:
+        raise _figma_reconciliation_error(path, "schema_version must be 1")
+    if data.get("canon_revision") != registry.manifest.canon_revision:
+        raise _figma_reconciliation_error(path, "canon_revision is stale")
+    if data.get("authority_state") != registry.manifest.authority_state.value:
+        raise _figma_reconciliation_error(path, "authority_state is stale")
+    if data.get("disposition_state") not in {
+        "proposed_not_applied_owner_gate",
+        "authority_metadata_and_text_applied_verified",
+    }:
+        raise _figma_reconciliation_error(path, "disposition_state is invalid")
+    if data.get("external_mutations_applied") is not applied:
+        raise _figma_reconciliation_error(path, "external mutation state is inconsistent")
+    if data.get("allowed_actions") != list(_FIGMA_ACTION_ORDER):
+        raise _figma_reconciliation_error(path, "allowed_actions is closed or stale")
+    expected_file_keys = _figma_string_array(
+        data.get("expected_live_file_keys"), path, "expected_live_file_keys"
+    )
+    if expected_file_keys != _FIGMA_EXPECTED_LIVE_FILE_KEYS:
+        raise _figma_reconciliation_error(
+            path, "expected_live_file_keys differs from the live Linear VSP set"
+        )
+
+    generated = data.get("generated_from")
+    if not isinstance(generated, dict) or set(generated) != {
+        "figma_file_key",
+        "inventory_date",
+        "linear_issue_ids",
+        "page_id",
+        "repo_provenance",
+    }:
+        raise _figma_reconciliation_error(path, "generated_from fields are closed")
+    for field in ("figma_file_key", "inventory_date", "page_id", "repo_provenance"):
+        _figma_string(generated.get(field), path, field)
+    _figma_string_array(generated.get("linear_issue_ids"), path, "linear_issue_ids")
+
+    manual = data.get("manual_file_deletions")
+    if manual != []:
+        raise _figma_reconciliation_error(
+            path, "whole-file deletion is not authorized in this train"
+        )
+    active_ids = {item.requirement_id for item in registry.requirements}
+    file_inventory = data.get("file_inventory")
+    if not isinstance(file_inventory, list) or not file_inventory:
+        raise _figma_reconciliation_error(path, "file_inventory must be non-empty")
+    file_keys: list[str] = []
+    page_count = 0
+    governed_by_file: dict[str, set[str]] = {}
+    for file_record in file_inventory:
+        if not isinstance(file_record, dict) or set(file_record) != _FIGMA_FILE_FIELDS:
+            raise _figma_reconciliation_error(path, "file inventory fields are closed")
+        file_key = _figma_string(file_record.get("file_key"), path, "file_key")
+        file_keys.append(file_key)
+        _figma_string_array(
+            file_record.get("linear_issue_ids"), path, "linear_issue_ids"
+        )
+        _figma_string_array(
+            file_record.get("authority_claims"), path, "authority_claims"
+        )
+        governed = _figma_string_array(
+            file_record.get("governed_approved_requirement_ids"),
+            path,
+            "governed_approved_requirement_ids",
+            allow_empty=True,
+        )
+        unknown_governed = set(governed) - active_ids
+        if unknown_governed:
+            raise CanonError(
+                "CANON_FIGMA_RECONCILIATION_REQUIREMENT_UNKNOWN",
+                f"unknown governed requirement file_key={file_key}",
+                path,
+            )
+        governed_by_file[file_key] = set(governed)
+        _figma_string(file_record.get("unique_visual_content"), path, "unique_visual_content")
+        _figma_string(
+            file_record.get("duplicate_or_competing_authority"),
+            path,
+            "duplicate_or_competing_authority",
+        )
+        _figma_string_array(
+            file_record.get("inbound_links"), path, "inbound_links", allow_empty=True
+        )
+        file_action = _figma_string(
+            file_record.get("recommended_action"), path, "recommended_action"
+        )
+        if file_action not in _FIGMA_ACTION_ORDER:
+            raise _figma_reconciliation_error(path, "file action is invalid")
+        expected_file_status = (
+            "applied_verified"
+            if applied and file_key == generated["figma_file_key"]
+            else "proposed_not_applied"
+        )
+        if file_record.get("action_status") != expected_file_status:
+            raise _figma_reconciliation_error(path, "file action_status is invalid")
+        pages = file_record.get("pages")
+        if not isinstance(pages, list) or not pages:
+            raise _figma_reconciliation_error(path, "file pages must be non-empty")
+        page_ids: list[str] = []
+        for page in pages:
+            if not isinstance(page, dict) or set(page) != _FIGMA_PAGE_FIELDS:
+                raise _figma_reconciliation_error(path, "page fields are closed")
+            page_id = _figma_string(page.get("page_id"), path, "page_id")
+            page_ids.append(page_id)
+            _figma_string(page.get("page_name"), path, "page_name")
+            _figma_string_array(
+                page.get("root_node_ids"), path, "root_node_ids", allow_empty=True
+            )
+            for field in (
+                "metadata_request_id",
+                "screenshot_request_id",
+                "screenshot_sha256",
+            ):
+                _figma_string(page.get(field), path, field)
+            _validate_sha256(page["screenshot_sha256"], path, "screenshot_sha256")
+            for field in ("original_width", "original_height"):
+                if type(page.get(field)) is not int or page[field] < 0:
+                    raise _figma_reconciliation_error(path, f"{field} is invalid")
+            repository_screenshots = page.get("repository_screenshots")
+            if not isinstance(repository_screenshots, list):
+                raise _figma_reconciliation_error(
+                    path, "repository_screenshots must be an array"
+                )
+            for screenshot in repository_screenshots:
+                if (
+                    not isinstance(screenshot, dict)
+                    or set(screenshot) != _FIGMA_REPOSITORY_SCREENSHOT_FIELDS
+                ):
+                    raise _figma_reconciliation_error(
+                        path, "repository screenshot fields are closed"
+                    )
+                screenshot_path = _figma_string(
+                    screenshot.get("path"), path, "repository screenshot path"
+                )
+                _figma_string(screenshot.get("node_id"), path, "repository node_id")
+                expected_sha = _figma_string(
+                    screenshot.get("sha256"), path, "repository screenshot sha256"
+                )
+                _validate_sha256(expected_sha, path, "repository screenshot sha256")
+                actual_bytes = _read_repo_evidence(repo_root, screenshot_path, path)
+                if hashlib.sha256(actual_bytes).hexdigest() != expected_sha:
+                    raise _figma_reconciliation_error(
+                        path, "repository screenshot digest is stale"
+                    )
+        if page_ids != sorted(set(page_ids)):
+            raise _figma_reconciliation_error(path, "page IDs must be sorted and unique")
+        page_count += len(pages)
+    if tuple(file_keys) != expected_file_keys:
+        raise _figma_reconciliation_error(
+            path, "file inventory must exactly match expected live file keys in order"
+        )
+    nodes = data.get("nodes")
+    if not isinstance(nodes, list) or not nodes:
+        raise _figma_reconciliation_error(path, "nodes must be a non-empty array")
+    figma_references = {
+        item.source: item
+        for item in references
+        if item.reference_kind is AuthorityReferenceKind.FIGMA
+    }
+    approved_requirements_by_file: dict[str, set[str]] = {
+        file_key: set() for file_key in expected_file_keys
+    }
+    for reference in figma_references.values():
+        if reference.authority_role is FigmaAuthorityRole.APPROVED_TARGET:
+            parts = reference.source.split(":", 2)
+            if len(parts) != 3 or parts[1] not in approved_requirements_by_file:
+                raise CanonError(
+                    "CANON_FIGMA_RECONCILIATION_STALE",
+                    f"approved reference uses an uninventoried file reference_id={reference.reference_id}",
+                    path,
+                )
+            approved_requirements_by_file[parts[1]].update(reference.requirement_ids)
+    governed_owners: dict[str, list[str]] = {}
+    for file_key, requirement_ids in governed_by_file.items():
+        for requirement_id in requirement_ids:
+            governed_owners.setdefault(requirement_id, []).append(file_key)
+    duplicates = {
+        requirement_id: owners
+        for requirement_id, owners in governed_owners.items()
+        if len(owners) > 1
+    }
+    if duplicates:
+        raise CanonError(
+            "CANON_FIGMA_MULTIPLE_APPROVED_TARGETS",
+            "multiple governed approved files own one requirement",
+            path,
+        )
+    if governed_by_file != approved_requirements_by_file:
+        raise CanonError(
+            "CANON_FIGMA_RECONCILIATION_STALE",
+            "governed approved ownership differs from tracked Figma references",
+            path,
+        )
+
+    raw_text_repairs = data.get("text_repairs")
+    if not isinstance(raw_text_repairs, list) or not raw_text_repairs:
+        raise _figma_reconciliation_error(path, "text_repairs must be non-empty")
+    text_repairs: list[Mapping[str, str]] = []
+    text_ids: list[str] = []
+    for repair in raw_text_repairs:
+        if not isinstance(repair, dict) or set(repair) != _FIGMA_TEXT_REPAIR_FIELDS:
+            raise _figma_reconciliation_error(path, "text repair fields are closed")
+        values = {
+            field: _figma_string(repair.get(field), path, field)
+            for field in (
+                "root_node_id",
+                "text_node_id",
+                "before",
+                "after",
+                "rollback",
+                "action_status",
+            )
+        }
+        if values["before"] == values["after"]:
+            raise _figma_reconciliation_error(path, "text repair must change content")
+        expected_text_status = "applied_verified" if applied else "proposed_not_applied"
+        if values["action_status"] != expected_text_status:
+            raise _figma_reconciliation_error(path, "text repair status is invalid")
+        text_ids.append(values["text_node_id"])
+        text_repairs.append(values)
+    if text_ids != sorted(set(text_ids)):
+        raise _figma_reconciliation_error(path, "text repair IDs must be sorted and unique")
+    seen: set[str] = set()
+    retained_sources: set[str] = set()
+    actions: Counter[str] = Counter()
+    statuses: Counter[str] = Counter()
+    actions_by_source: dict[str, str] = {}
+    for node in nodes:
+        if not isinstance(node, dict) or set(node) != _FIGMA_NODE_FIELDS:
+            raise _figma_reconciliation_error(path, "node fields are closed")
+        file_key = _figma_string(node.get("file_key"), path, "file_key")
+        node_id = _figma_string(node.get("node_id"), path, "node_id")
+        source = f"figma:{file_key}:{node_id}"
+        if source in seen:
+            raise _figma_reconciliation_error(path, "node locators must be unique")
+        seen.add(source)
+        for field in (
+            "visual_authority_id",
+            "page_id",
+            "page_name",
+            "frame_label",
+            "frame_version",
+            "duplicate_or_competing_authority",
+            "unique_visual_content",
+            "swiftui_plausibility",
+            "rollback",
+            "claim_ceiling",
+        ):
+            _figma_string(node.get(field), path, field)
+        requirement_ids = _figma_string_array(
+            node.get("requirement_ids"), path, "requirement_ids", allow_empty=True
+        )
+        unknown = set(requirement_ids) - active_ids
+        if unknown:
+            raise CanonError(
+                "CANON_FIGMA_RECONCILIATION_REQUIREMENT_UNKNOWN",
+                f"unknown requirement node={node_id}",
+                path,
+            )
+        accessibility = _figma_string_array(
+            node.get("accessibility_variants"),
+            path,
+            "accessibility_variants",
+            allow_empty=True,
+        )
+        replacements = _figma_string_array(
+            node.get("replacement_node_ids"),
+            path,
+            "replacement_node_ids",
+            allow_empty=True,
+        )
+        action = _figma_string(node.get("recommended_action"), path, "recommended_action")
+        if action not in _FIGMA_ACTION_ORDER:
+            raise _figma_reconciliation_error(path, "recommended_action is invalid")
+        status = node.get("action_status")
+        expected_node_status = (
+            "applied_verified"
+            if applied and action == "retain_authority"
+            else "proposed_not_applied"
+        )
+        if status != expected_node_status:
+            raise _figma_reconciliation_error(path, "action_status is invalid")
+        owner = node.get("owner_approval")
+        if not isinstance(owner, dict) or set(owner) != {"approved_by", "evidence", "state"}:
+            raise _figma_reconciliation_error(path, "owner_approval fields are closed")
+        state = _figma_string(owner.get("state"), path, "owner_approval.state")
+        approved_by = owner.get("approved_by")
+        if approved_by is not None:
+            approved_by = _figma_string(approved_by, path, "owner_approval.approved_by")
+        raw_owner_evidence = owner.get("evidence")
+        if not isinstance(raw_owner_evidence, list):
+            raise _figma_reconciliation_error(
+                path, "owner_approval.evidence must be an array"
+            )
+        owner_evidence_paths: list[str] = []
+        for binding in raw_owner_evidence:
+            if (
+                not isinstance(binding, dict)
+                or set(binding) != _FIGMA_APPROVAL_EVIDENCE_FIELDS
+            ):
+                raise _figma_reconciliation_error(
+                    path, "owner approval evidence fields are closed"
+                )
+            evidence_path = _figma_string(
+                binding.get("path"), path, "owner_approval.evidence.path"
+            )
+            expected_digest = _figma_string(
+                binding.get("sha256"), path, "owner_approval.evidence.sha256"
+            )
+            _validate_sha256(
+                expected_digest, path, "owner_approval.evidence.sha256"
+            )
+            evidence_bytes = _read_repo_evidence(repo_root, evidence_path, path)
+            if hashlib.sha256(evidence_bytes).hexdigest() != expected_digest:
+                raise _figma_reconciliation_error(
+                    path, "owner approval evidence digest is stale"
+                )
+            owner_evidence_paths.append(evidence_path)
+        if owner_evidence_paths != sorted(set(owner_evidence_paths)):
+            raise _figma_reconciliation_error(
+                path, "owner approval evidence paths must be sorted and unique"
+            )
+        if state == "approved" and (not approved_by or not owner_evidence_paths):
+            raise _figma_reconciliation_error(path, "approved node requires owner evidence")
+        evidence = node.get("evidence")
+        if not isinstance(evidence, dict) or set(evidence) != {
+            "metadata_request_id",
+            "original_height",
+            "original_width",
+            "repository_paths",
+            "screenshot_request_id",
+            "screenshot_sha256",
+        }:
+            raise _figma_reconciliation_error(path, "evidence fields are closed")
+        for field in ("metadata_request_id", "screenshot_request_id", "screenshot_sha256"):
+            _figma_string(evidence.get(field), path, field)
+        digest = evidence["screenshot_sha256"]
+        if len(digest) != 64 or any(ch not in "0123456789abcdef" for ch in digest):
+            raise _figma_reconciliation_error(path, "screenshot_sha256 is invalid")
+        for field in ("original_width", "original_height"):
+            if type(evidence.get(field)) is not int or evidence[field] < 1:
+                raise _figma_reconciliation_error(path, f"{field} is invalid")
+        _figma_string_array(
+            evidence.get("repository_paths"), path, "repository_paths", allow_empty=True
+        )
+        if action == "retain_authority":
+            reference = figma_references.get(source)
+            if reference is None or reference.authority_role is not FigmaAuthorityRole.APPROVED_TARGET:
+                raise _figma_reconciliation_error(path, "retained authority lacks approved reference")
+            if (
+                reference.visual_authority_id != node["visual_authority_id"]
+                or reference.frame_version != node["frame_version"]
+                or reference.canon_revision != registry.manifest.canon_revision
+                or set(reference.requirement_ids) != set(requirement_ids)
+                or tuple(reference.accessibility_variants) != accessibility
+                or reference.swiftui_plausibility != node["swiftui_plausibility"]
+                or reference.approval_state != "approved"
+                or state != reference.approval_state
+                or reference.approved_by != approved_by
+            ):
+                raise CanonError(
+                    "CANON_FIGMA_RECONCILIATION_STALE",
+                    f"retained authority differs from reference node={node_id}",
+                    path,
+                )
+            retained_sources.add(source)
+        if action in {"delete_duplicate_node", "delete_duplicate_file"} and not replacements:
+            raise _figma_reconciliation_error(path, "destructive action requires replacement")
+        actions[action] += 1
+        statuses[status] += 1
+        actions_by_source[source] = action
+
+    expected_retained = {
+        source
+        for source, reference in figma_references.items()
+        if reference.authority_role is FigmaAuthorityRole.APPROVED_TARGET
+    }
+    if retained_sources != expected_retained:
+        raise CanonError(
+            "CANON_FIGMA_RECONCILIATION_STALE",
+            "retained authority set differs from approved references",
+            path,
+        )
+    counts = data.get("inventory_counts")
+    expected_counts = {
+        "files": len(file_inventory),
+        "nodes": len(nodes),
+        "pages": page_count,
+        "retained_authorities": len(retained_sources),
+    }
+    if counts != expected_counts:
+        raise _figma_reconciliation_error(path, "inventory_counts is stale")
+    execution_receipt = None
+    if applied:
+        execution_receipt = _validate_figma_execution_receipt(
+            data.get("execution_receipt"),
+            path,
+            nodes,
+            text_repairs,
+            registry.manifest.canon_revision,
+            figma_references,
+        )
+    return FigmaReconciliationSnapshot(
+        source_bytes=source_bytes,
+        input_sha=hashlib.sha256(source_bytes).hexdigest(),
+        node_count=len(nodes),
+        action_counts=dict(sorted(actions.items())),
+        status_counts=dict(sorted(statuses.items())),
+        disposition_state=data["disposition_state"],
+        external_mutations_applied=applied,
+        owner_gate_required=not applied,
+        actions_by_source=dict(sorted(actions_by_source.items())),
+        expected_live_file_keys=expected_file_keys,
+        file_count=len(file_inventory),
+        text_repairs=tuple(text_repairs),
+        execution_receipt=execution_receipt,
+    )
+
+
+def _validate_figma_execution_receipt(
+    raw: object,
+    path: Path,
+    nodes: list[object],
+    text_repairs: list[Mapping[str, str]],
+    canon_revision: int,
+    figma_references: Mapping[str, AuthorityReference],
+) -> Mapping[str, object]:
+    if not isinstance(raw, dict) or set(raw) != _FIGMA_EXECUTION_FIELDS:
+        raise _figma_reconciliation_error(path, "execution receipt fields are closed")
+    for field in (
+        "approval_authority",
+        "approval_review",
+        "file_key",
+        "page_id",
+        "shared_plugin_namespace",
+        "status",
+    ):
+        _figma_string(raw.get(field), path, field)
+    expected_envelope = {
+        "approval_authority": _FIGMA_EXECUTION_APPROVAL_AUTHORITY,
+        "approval_review": _FIGMA_EXECUTION_APPROVAL_REVIEW,
+        "file_key": _FIGMA_EXECUTION_FILE_KEY,
+        "page_id": _FIGMA_EXECUTION_PAGE_ID,
+        "status": "applied_verified",
+    }
+    for field, expected in expected_envelope.items():
+        if raw[field] != expected:
+            raise _figma_reconciliation_error(
+                path, f"execution receipt {field} is invalid"
+            )
+    if raw["shared_plugin_namespace"] != "ambitions.canon":
+        raise _figma_reconciliation_error(path, "shared plugin namespace is invalid")
+    if raw["deleted_node_ids"] != [] or raw["created_node_ids"] != []:
+        raise _figma_reconciliation_error(path, "execution receipt must record no structural mutation")
+
+    applied_node_ids = [
+        node["node_id"]
+        for node in nodes
+        if isinstance(node, dict) and node.get("action_status") == "applied_verified"
+    ]
+    applied_nodes_by_id = {
+        node["node_id"]: node
+        for node in nodes
+        if isinstance(node, dict) and node.get("action_status") == "applied_verified"
+    }
+    writes = raw.get("metadata_writes")
+    if not isinstance(writes, list) or [item.get("node_id") for item in writes if isinstance(item, dict)] != applied_node_ids:
+        raise _figma_reconciliation_error(path, "metadata receipts must match applied nodes")
+    for item in writes:
+        if not isinstance(item, dict) or set(item) != _FIGMA_METADATA_WRITE_FIELDS:
+            raise _figma_reconciliation_error(path, "metadata receipt fields are closed")
+        node_id = _figma_string(item.get("node_id"), path, "node_id")
+        if item.get("mutated_node_ids") != [node_id]:
+            raise _figma_reconciliation_error(path, "metadata mutated IDs are invalid")
+        if item.get("deleted_node_ids") != [] or item.get("created_node_ids") != []:
+            raise _figma_reconciliation_error(path, "metadata receipt records structural mutation")
+        _figma_string(item.get("readback_request_id"), path, "readback_request_id")
+        before = item.get("before")
+        after = item.get("after")
+        if (
+            not isinstance(before, dict)
+            or not isinstance(after, dict)
+            or tuple(sorted(before)) != _FIGMA_METADATA_KEYS
+            or tuple(sorted(after)) != _FIGMA_METADATA_KEYS
+            or any(value != "" for value in before.values())
+        ):
+            raise _figma_reconciliation_error(path, "metadata before/after values are invalid")
+        for value in after.values():
+            _figma_string(value, path, "metadata after value")
+        node = applied_nodes_by_id[node_id]
+        if (
+            node.get("file_key") != _FIGMA_EXECUTION_FILE_KEY
+            or node.get("page_id") != _FIGMA_EXECUTION_PAGE_ID
+        ):
+            raise _figma_reconciliation_error(
+                path, "applied metadata node is outside the execution target"
+            )
+        source = f"figma:{node['file_key']}:{node_id}"
+        reference = figma_references.get(source)
+        if reference is None:
+            raise _figma_reconciliation_error(
+                path, "applied metadata node lacks a canonical Figma reference"
+            )
+        if reference.reconciliation_status != "applied_verified":
+            raise _figma_reconciliation_error(
+                path, "applied metadata reference status is inconsistent"
+            )
+        expected_after = {
+            "accessibility_variants": json.dumps(
+                list(reference.accessibility_variants),
+                ensure_ascii=False,
+                separators=(",", ":"),
+            ),
+            "approved_by": node["owner_approval"]["approved_by"],
+            "authority_boundary": _FIGMA_AUTHORITY_BOUNDARY,
+            "canon_revision": str(canon_revision),
+            "frame_version": reference.frame_version,
+            "implementation_status": reference.implementation_status,
+            "owner_approval_state": reference.approval_state,
+            "requirement_ids": json.dumps(
+                sorted(reference.requirement_ids),
+                ensure_ascii=False,
+                separators=(",", ":"),
+            ),
+            "swiftui_plausibility": reference.swiftui_plausibility,
+            "visual_authority_id": reference.visual_authority_id,
+        }
+        if after != expected_after:
+            raise _figma_reconciliation_error(
+                path, f"metadata receipt differs from governed authority node={node_id}"
+            )
+        _validate_figma_screenshot_receipt(item.get("before_screenshot"), path)
+        _validate_figma_screenshot_receipt(item.get("after_screenshot"), path)
+        if item["before_screenshot"]["sha256"] != item["after_screenshot"]["sha256"]:
+            raise _figma_reconciliation_error(path, "metadata-only screenshot changed")
+
+    text_writes = raw.get("text_writes")
+    if not isinstance(text_writes, list) or len(text_writes) != len(text_repairs):
+        raise _figma_reconciliation_error(path, "text receipts must match text repairs")
+    repair_by_id = {item["text_node_id"]: item for item in text_repairs}
+    if [item.get("text_node_id") for item in text_writes if isinstance(item, dict)] != list(repair_by_id):
+        raise _figma_reconciliation_error(path, "text receipt IDs are invalid")
+    metadata_by_root = {item["node_id"]: item for item in writes}
+    text_screenshots_by_root: dict[str, Mapping[str, str]] = {}
+    for item in text_writes:
+        if not isinstance(item, dict) or set(item) != _FIGMA_TEXT_WRITE_FIELDS:
+            raise _figma_reconciliation_error(path, "text receipt fields are closed")
+        text_node_id = _figma_string(item.get("text_node_id"), path, "text_node_id")
+        repair = repair_by_id[text_node_id]
+        if item.get("root_node_id") != repair["root_node_id"]:
+            raise _figma_reconciliation_error(path, "text receipt root is stale")
+        root_node_id = item["root_node_id"]
+        metadata_receipt = metadata_by_root.get(root_node_id)
+        if metadata_receipt is None:
+            raise _figma_reconciliation_error(
+                path, "text receipt root lacks applied metadata"
+            )
+        if item.get("before") != repair["before"] or item.get("after") != repair["after"]:
+            raise _figma_reconciliation_error(path, "text receipt content is stale")
+        if item.get("mutated_node_ids") != [text_node_id]:
+            raise _figma_reconciliation_error(path, "text mutated IDs are invalid")
+        if item.get("deleted_node_ids") != [] or item.get("created_node_ids") != []:
+            raise _figma_reconciliation_error(path, "text receipt records structural mutation")
+        for field in ("font_family", "font_style", "readback_request_id"):
+            _figma_string(item.get(field), path, field)
+        _validate_figma_screenshot_receipt(item.get("before_screenshot"), path)
+        _validate_figma_screenshot_receipt(item.get("after_screenshot"), path)
+        if item["before_screenshot"] != metadata_receipt["before_screenshot"]:
+            raise _figma_reconciliation_error(
+                path, "text receipt before screenshot is not bound to its root"
+            )
+        prior_after = text_screenshots_by_root.setdefault(
+            root_node_id, item["after_screenshot"]
+        )
+        if item["after_screenshot"] != prior_after:
+            raise _figma_reconciliation_error(
+                path, "text receipt after screenshots disagree for one root"
+            )
+    return raw
+
+
+def _validate_figma_screenshot_receipt(raw: object, path: Path) -> None:
+    if not isinstance(raw, dict) or set(raw) != _FIGMA_SCREENSHOT_RECEIPT_FIELDS:
+        raise _figma_reconciliation_error(path, "screenshot receipt fields are closed")
+    _figma_string(raw.get("request_id"), path, "screenshot request_id")
+    digest = _figma_string(raw.get("sha256"), path, "screenshot sha256")
+    _validate_sha256(digest, path, "screenshot sha256")
 
 
 def validate_linear_reconciliation(
@@ -580,6 +1394,49 @@ def load_linear_reconciliation_if_present(
     return validate_linear_reconciliation(repo_root, registry, references)
 
 
+def load_figma_reconciliation_if_present(
+    repo_root: Path,
+    registry: CanonRegistry,
+    references: Iterable[AuthorityReference],
+) -> FigmaReconciliationSnapshot | None:
+    """Load the tracked Figma proposal when present without following links."""
+
+    path = repo_root / _FIGMA_RECONCILIATION
+    try:
+        os.lstat(path)
+    except FileNotFoundError:
+        return None
+    except OSError as exc:
+        raise CanonError(
+            "CANON_FIGMA_RECONCILIATION_READ",
+            "unable to inspect tracked Figma reconciliation input",
+            path,
+        ) from exc
+    return validate_figma_reconciliation(repo_root, registry, references)
+
+
+def validate_figma_reconciliation_snapshot(
+    repo_root: Path, snapshot: FigmaReconciliationSnapshot
+) -> None:
+    """Reject Figma proposal changes after a caller pins its input bytes."""
+
+    path = repo_root / _FIGMA_RECONCILIATION
+    try:
+        current = _read_regular_nofollow(repo_root, _FIGMA_RECONCILIATION)
+    except (OSError, ValueError) as exc:
+        raise CanonError(
+            "CANON_FIGMA_RECONCILIATION_READ",
+            "unable to re-read tracked Figma reconciliation input",
+            path,
+        ) from exc
+    if current != snapshot.source_bytes:
+        raise CanonError(
+            "CANON_FIGMA_RECONCILIATION_CHANGED",
+            "Figma reconciliation changed during deterministic generation",
+            path,
+        )
+
+
 def validate_linear_reconciliation_snapshot(
     repo_root: Path, snapshot: LinearReconciliationSnapshot
 ) -> None:
@@ -740,6 +1597,8 @@ def external_reference_findings(
 def render_visual_authority_manifest(
     registry: CanonRegistry,
     references: Iterable[AuthorityReference],
+    *,
+    figma_reconciliation: FigmaReconciliationSnapshot | None = None,
 ) -> dict[str, object]:
     """Project Figma approval posture without claiming implementation readiness."""
 
@@ -763,17 +1622,33 @@ def render_visual_authority_manifest(
                     if reference.authority_role is not None
                     else None
                 ),
+                "reconciliation_action": (
+                    figma_reconciliation.actions_by_source.get(reference.source)
+                    if figma_reconciliation is not None
+                    else None
+                ),
+                "reconciliation_status": reference.reconciliation_status,
                 "implementation_status": reference.implementation_status,
+                "accessibility_variants": list(reference.accessibility_variants),
+                "canon_revision": reference.canon_revision,
+                "frame_version": reference.frame_version,
                 "reference_id": reference.reference_id,
                 "requirement_ids": list(sorted(reference.requirement_ids)),
                 "revision": reference.revision,
                 "source": reference.source,
+                "swiftui_plausibility": reference.swiftui_plausibility,
+                "visual_authority_id": reference.visual_authority_id,
             }
         )
-    approval_complete = bool(authorities) and all(
-        item["authority_status"] == "approved" for item in authorities
+    approved_targets = tuple(
+        item
+        for item in authorities
+        if item["authority_role"] == FigmaAuthorityRole.APPROVED_TARGET.value
     )
-    return {
+    approval_complete = bool(approved_targets) and all(
+        item["authority_status"] == "approved" for item in approved_targets
+    )
+    rendered = {
         "schema_version": 1,
         "authority_state": registry.manifest.authority_state.value,
         "canon_revision": registry.manifest.canon_revision,
@@ -785,6 +1660,9 @@ def render_visual_authority_manifest(
             "device, visual, or release readiness"
         ),
     }
+    if figma_reconciliation is not None:
+        rendered["reconciliation"] = dict(figma_reconciliation.summary())
+    return rendered
 
 
 def render_external_reference_impact(
@@ -901,6 +1779,12 @@ def _load_reference_file_bytes(
         assert isinstance(row, dict)
         if not _REFERENCE_REQUIRED <= set(row) or not set(row) <= _REFERENCE_ALLOWED:
             raise _schema_error(path, "reference fields are closed")
+        if expected_kind is AuthorityReferenceKind.FIGMA:
+            present_governance_fields = set(row) & _FIGMA_GOVERNANCE_FIELDS
+            if present_governance_fields and not _FIGMA_GOVERNANCE_FIELDS <= set(row):
+                raise _schema_error(path, "Figma governance fields are all-or-none")
+        elif set(row) & _FIGMA_GOVERNANCE_FIELDS:
+            raise _schema_error(path, "Figma governance fields are only valid for Figma")
         requirement_ids = _string_list(row["requirement_ids"], path, "requirement_ids")
         approval_state = _string(row["approval_state"], path, "approval_state")
         if approval_state not in _APPROVAL_STATES:
@@ -909,6 +1793,12 @@ def _load_reference_file_bytes(
         if approved_by is not None:
             approved_by = _string(approved_by, path, "approved_by")
         authority_role = None
+        visual_authority_id = None
+        canon_revision = None
+        frame_version = None
+        swiftui_plausibility = None
+        accessibility_variants: tuple[str, ...] = ()
+        reconciliation_status = None
         if expected_kind is AuthorityReferenceKind.FIGMA:
             if "authority_role" not in row:
                 raise _schema_error(path, "Figma reference requires authority_role")
@@ -924,8 +1814,42 @@ def _load_reference_file_bytes(
                 approved_by,
                 path,
             )
+            if _FIGMA_GOVERNANCE_FIELDS <= set(row):
+                visual_authority_id = _string(
+                    row["visual_authority_id"], path, "visual_authority_id"
+                )
+                if not visual_authority_id.startswith("VSP-"):
+                    raise _schema_error(path, "visual_authority_id is invalid")
+                raw_canon_revision = row["canon_revision"]
+                if type(raw_canon_revision) is not int or raw_canon_revision < 1:
+                    raise _schema_error(path, "canon_revision must be a positive integer")
+                canon_revision = raw_canon_revision
+                frame_version = _string(row["frame_version"], path, "frame_version")
+                swiftui_plausibility = _string(
+                    row["swiftui_plausibility"], path, "swiftui_plausibility"
+                )
+                if swiftui_plausibility not in {
+                    "plausible_unverified",
+                    "not_assessed",
+                    "implausible",
+                }:
+                    raise _schema_error(path, "swiftui_plausibility is invalid")
+                accessibility_variants = _string_list(
+                    row["accessibility_variants"], path, "accessibility_variants"
+                )
+            if "reconciliation_status" in row:
+                reconciliation_status = _string(
+                    row["reconciliation_status"], path, "reconciliation_status"
+                )
+                if reconciliation_status not in {
+                    "applied_verified",
+                    "proposed_not_applied",
+                }:
+                    raise _schema_error(path, "reconciliation_status is invalid")
         elif "authority_role" in row:
             raise _schema_error(path, "authority_role is only valid for Figma")
+        elif "reconciliation_status" in row:
+            raise _schema_error(path, "reconciliation_status is only valid for Figma")
         parsed.append(
             AuthorityReference(
                 schema_version=1,
@@ -941,6 +1865,12 @@ def _load_reference_file_bytes(
                     row["implementation_status"], path, "implementation_status"
                 ),
                 authority_role=authority_role,
+                visual_authority_id=visual_authority_id,
+                canon_revision=canon_revision,
+                frame_version=frame_version,
+                swiftui_plausibility=swiftui_plausibility,
+                accessibility_variants=accessibility_variants,
+                reconciliation_status=reconciliation_status,
             )
         )
     ordered = tuple(sorted(parsed, key=lambda item: item.reference_id))
@@ -1085,6 +2015,50 @@ def _schema_error(path: Path, message: str) -> CanonError:
 
 def _linear_reconciliation_error(path: Path, message: str) -> CanonError:
     return CanonError("CANON_LINEAR_RECONCILIATION_STATE", message, path)
+
+
+def _figma_reconciliation_error(path: Path, message: str) -> CanonError:
+    return CanonError("CANON_FIGMA_RECONCILIATION_STATE", message, path)
+
+
+def _figma_string(value: object, path: Path, field: str) -> str:
+    if not isinstance(value, str) or not value or value != value.strip():
+        raise _figma_reconciliation_error(
+            path, f"{field} must be a non-empty trimmed string"
+        )
+    return value
+
+
+def _figma_string_array(
+    value: object, path: Path, field: str, *, allow_empty: bool = False
+) -> tuple[str, ...]:
+    if not isinstance(value, list) or (not value and not allow_empty):
+        raise _figma_reconciliation_error(path, f"{field} must be non-empty")
+    values = tuple(_figma_string(item, path, field) for item in value)
+    if values != tuple(sorted(set(values))):
+        raise _figma_reconciliation_error(path, f"{field} must be sorted and unique")
+    return values
+
+
+def _validate_sha256(value: object, path: Path, field: str) -> None:
+    if (
+        not isinstance(value, str)
+        or len(value) != 64
+        or any(character not in "0123456789abcdef" for character in value)
+    ):
+        raise _figma_reconciliation_error(path, f"{field} is invalid")
+
+
+def _read_repo_evidence(repo_root: Path, value: str, path: Path) -> bytes:
+    pure = PurePosixPath(value)
+    if pure.is_absolute() or not pure.parts or ".." in pure.parts:
+        raise _figma_reconciliation_error(path, "repository evidence path is invalid")
+    try:
+        return _read_regular_nofollow(repo_root, Path(*pure.parts))
+    except (OSError, ValueError) as exc:
+        raise _figma_reconciliation_error(
+            path, f"repository evidence is missing or unsafe path={value}"
+        ) from exc
 
 
 def _validate_linear_generated_from(value: object, path: Path) -> None:
