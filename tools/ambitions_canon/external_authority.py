@@ -1574,6 +1574,21 @@ def external_reference_findings(
                         ),
                     )
                 )
+            if (
+                not isinstance(reference.approved_by, str)
+                or not reference.approved_by.strip()
+            ):
+                findings.append(
+                    Finding(
+                        code="CANON_EVIDENCE_APPROVER_REQUIRED",
+                        severity=GapSeverity.P0_BLOCKER,
+                        message=(
+                            "current test/proof evidence requires a non-empty "
+                            "attributable approver "
+                            f"reference_id={reference.reference_id}"
+                        ),
+                    )
+                )
 
         if reference.reference_kind is AuthorityReferenceKind.TEST:
             content = _local_evidence_bytes(reference.source, effective_root)

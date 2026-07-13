@@ -11,14 +11,14 @@
 
 | Scenario | Characters (informational) | Estimated tokens | Budget class | Token ceiling | Requirement recall | Requirement precision | Shared laws | Contradictions | Owner recall | Owner precision | Verification | Validation | Proof | Result |
 | --- | ---: | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- | --- |
-| `today-swiftui` | 13500 | 3375 | `complex` | 30000 | 15/15 | 15/15 | 9/9 | 0 | 8/8 | 8/8 | exact | present | present | PASS |
+| `today-swiftui` | 13552 | 3388 | `complex` | 30000 | 15/15 | 15/15 | 9/9 | 0 | 8/8 | 8/8 | exact | present | present | PASS |
 | `time-recurrence` | 23526 | 5882 | `complex` | 30000 | 34/34 | 34/34 | 18/18 | 0 | 21/21 | 21/21 | exact | present | present | PASS |
-| `capture-proposal` | 25608 | 6402 | `complex` | 30000 | 35/35 | 35/35 | 18/18 | 0 | 20/20 | 20/20 | exact | present | present | PASS |
-| `local-runtime-mutation` | 17610 | 4403 | `complex` | 30000 | 20/20 | 20/20 | 17/17 | 0 | 15/15 | 15/15 | exact | present | present | PASS |
-| `cloudkit-continuity` | 94541 | 23636 | `complex` | 30000 | 176/176 | 176/176 | 37/37 | 0 | 36/36 | 36/36 | exact | present | present | PASS |
-| `source-atlas-boundary` | 91913 | 22979 | `complex` | 30000 | 171/171 | 171/171 | 37/37 | 0 | 36/36 | 36/36 | exact | present | present | PASS |
+| `capture-proposal` | 25660 | 6415 | `complex` | 30000 | 35/35 | 35/35 | 18/18 | 0 | 20/20 | 20/20 | exact | present | present | PASS |
+| `local-runtime-mutation` | 17662 | 4416 | `complex` | 30000 | 20/20 | 20/20 | 17/17 | 0 | 15/15 | 15/15 | exact | present | present | PASS |
+| `cloudkit-continuity` | 94905 | 23727 | `complex` | 30000 | 176/176 | 176/176 | 37/37 | 0 | 36/36 | 36/36 | exact | present | present | PASS |
+| `source-atlas-boundary` | 92277 | 23070 | `complex` | 30000 | 171/171 | 171/171 | 37/37 | 0 | 36/36 | 36/36 | exact | present | present | PASS |
 | `accessibility-repair` | 3436 | 859 | `complex` | 30000 | 2/2 | 2/2 | 2/2 | 0 | 3/3 | 3/3 | exact | present | present | PASS |
-| `release-proof-claim` | 116267 | 29067 | `complex` | 30000 | 228/228 | 228/228 | 39/39 | 0 | 41/41 | 41/41 | exact | present | present | PASS |
+| `release-proof-claim` | 116631 | 29158 | `complex` | 30000 | 228/228 | 228/228 | 39/39 | 0 | 41/41 | 41/41 | exact | present | present | PASS |
 
 ## Resume-safe authorization checks
 

@@ -7,6 +7,7 @@ import json
 import os
 import re
 import tempfile
+import unicodedata
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from pathlib import Path
@@ -111,8 +112,9 @@ _SEMANTIC_COMPARISON_FIELDS = frozenset(
 _SEMANTIC_DIMENSION_FIELDS = frozenset(
     {"dimension", "verdict", "old_score", "new_score", "rationale"}
 )
-_SEMANTIC_VERDICTS = frozenset(
-    {"old_better", "new_better", "equivalent", "insufficient_evidence"}
+_SEMANTIC_VERDICTS = frozenset({"old_better", "new_better", "equivalent"})
+_SEMANTIC_RESPONSE_FIELDS = frozenset(
+    {"schema_version", "reviewer", "model", "response"}
 )
 
 
@@ -498,6 +500,16 @@ def build_semantic_review_bundle(
             "comparison evidence requires both blinded response artifacts",
             root,
         )
+    old_response_record = (
+        _validate_semantic_response(old_response, "old", root)
+        if old_response is not None
+        else None
+    )
+    new_response_record = (
+        _validate_semantic_response(new_response, "new", root)
+        if new_response is not None
+        else None
+    )
 
     registry = _load_registry(root)
     known_issues = _known_issues(root, registry)
@@ -575,6 +587,18 @@ def build_semantic_review_bundle(
             hashlib.sha256(new_response).hexdigest()
             if new_response is not None
             else None
+        ),
+        "old_response_reviewer": (
+            old_response_record["reviewer"] if old_response_record is not None else None
+        ),
+        "old_response_model": (
+            old_response_record["model"] if old_response_record is not None else None
+        ),
+        "new_response_reviewer": (
+            new_response_record["reviewer"] if new_response_record is not None else None
+        ),
+        "new_response_model": (
+            new_response_record["model"] if new_response_record is not None else None
         ),
         "status": (
             "responses_recorded_pending_blinded_comparison"
@@ -658,12 +682,26 @@ def _validate_semantic_comparison(
             path,
         )
     for field in ("comparison_reviewer", "comparison_model"):
-        if not isinstance(data[field], str) or not data[field].strip():
+        if (
+            not isinstance(data[field], str)
+            or not _normalized_attribution(data[field])
+        ):
             raise CanonError(
                 "BENCHMARK_SEMANTIC_COMPARISON_INVALID",
                 f"{field} must be a non-empty string",
                 path,
             )
+    comparison_identity = _normalized_reviewer_identity(data["comparison_reviewer"])
+    response_identities = {
+        _normalized_reviewer_identity(str(binding["old_response_reviewer"])),
+        _normalized_reviewer_identity(str(binding["new_response_reviewer"])),
+    }
+    if comparison_identity in response_identities:
+        raise CanonError(
+            "BENCHMARK_SEMANTIC_COMPARISON_INDEPENDENCE",
+            "comparison reviewer must differ from both response reviewers",
+            path,
+        )
     bindings = {
         "canon_sha256": binding["canon_sha256"],
         "old_prompt_sha256": binding["old_prompt_sha256"],
@@ -724,6 +762,12 @@ def _validate_semantic_comparison(
                     "comparison dimension scores must be integers from 0 through 4",
                     path,
                 )
+        if row["verdict"] != _score_verdict(row["old_score"], row["new_score"]):
+            raise CanonError(
+                "BENCHMARK_SEMANTIC_COMPARISON_INVALID",
+                "comparison dimension verdict must match its bounded scores",
+                path,
+            )
         old_total += row["old_score"]
         new_total += row["new_score"]
     if tuple(parsed_dimensions) != SEMANTIC_COMPARISON_DIMENSIONS:
@@ -749,7 +793,81 @@ def _validate_semantic_comparison(
             "comparison total scores must equal the seven bounded dimension scores",
             path,
         )
+    if data["overall_verdict"] != _score_verdict(old_total, new_total):
+        raise CanonError(
+            "BENCHMARK_SEMANTIC_COMPARISON_INVALID",
+            "overall comparison verdict must match the total scores",
+            path,
+        )
     return data
+
+
+def _validate_semantic_response(
+    source_bytes: bytes,
+    label: str,
+    path: Path,
+) -> Mapping[str, object]:
+    """Validate one independently attributable blinded response artifact."""
+
+    try:
+        data = json.loads(source_bytes.decode("utf-8"))
+    except (UnicodeError, json.JSONDecodeError) as exc:
+        raise CanonError(
+            "BENCHMARK_SEMANTIC_RESPONSE_INVALID",
+            f"{label} response must be valid UTF-8 JSON",
+            path,
+        ) from exc
+    if not isinstance(data, dict) or set(data) != _SEMANTIC_RESPONSE_FIELDS:
+        raise CanonError(
+            "BENCHMARK_SEMANTIC_RESPONSE_INVALID",
+            f"{label} response fields do not match schema version 1",
+            path,
+        )
+    if type(data["schema_version"]) is not int or data["schema_version"] != 1:
+        raise CanonError(
+            "BENCHMARK_SEMANTIC_RESPONSE_INVALID",
+            f"{label} response schema_version must be integer 1",
+            path,
+        )
+    for field in ("reviewer", "model"):
+        if (
+            not isinstance(data[field], str)
+            or not _normalized_attribution(data[field])
+        ):
+            raise CanonError(
+                "BENCHMARK_SEMANTIC_RESPONSE_INVALID",
+                f"{label} response {field} must be a non-empty string",
+                path,
+            )
+    if not isinstance(data["response"], str) or not data["response"].strip():
+        raise CanonError(
+            "BENCHMARK_SEMANTIC_RESPONSE_INVALID",
+            f"{label} response response must be a non-empty string",
+            path,
+        )
+    return data
+
+
+def _normalized_reviewer_identity(value: str) -> str:
+    return _normalized_attribution(value)
+
+
+def _normalized_attribution(value: str) -> str:
+    normalized = unicodedata.normalize("NFKC", value).casefold()
+    visible = "".join(
+        character
+        for character in normalized
+        if unicodedata.category(character) != "Cf"
+    )
+    return " ".join(visible.split())
+
+
+def _score_verdict(old_score: int, new_score: int) -> str:
+    if old_score > new_score:
+        return "old_better"
+    if new_score > old_score:
+        return "new_better"
+    return "equivalent"
 
 
 def _registry_canon_sha_for_review(registry: CanonRegistry) -> str:

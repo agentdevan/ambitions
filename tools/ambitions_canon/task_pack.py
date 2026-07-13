@@ -522,7 +522,8 @@ def build_task_pack(
         *tuple(
             "Current proof reference "
             f"reference_id={item.reference_id}; source={item.source}; "
-            f"revision={item.revision}; approval={item.approval_state}; posture="
+            f"revision={item.revision}; approval={item.approval_state}; "
+            f"approved_by={item.approved_by}; posture="
             f"{item.implementation_status or 'evidence only; claim status unverified'}."
             for item in proof_references
         ),
@@ -745,6 +746,7 @@ def _traceability_posture(
 def _evidence_reference_dict(reference: object) -> dict[str, object]:
     return {
         "approval_state": reference.approval_state,
+        "approved_by": reference.approved_by,
         "implementation_status": reference.implementation_status,
         "reference_id": reference.reference_id,
         "revision": reference.revision,
@@ -795,7 +797,8 @@ def _implementation_posture_markdown(value: str) -> str:
             summary += (
                 f" Current {kind} evidence reference_id={reference.get('reference_id')}; "
                 f"source={reference.get('source')}; revision={reference.get('revision')}; "
-                f"approval={reference.get('approval_state')}; posture="
+                f"approval={reference.get('approval_state')}; "
+                f"approved_by={reference.get('approved_by')}; posture="
                 f"{reference.get('implementation_status')}."
             )
     return summary

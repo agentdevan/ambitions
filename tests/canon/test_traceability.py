@@ -44,7 +44,7 @@ def reference(
         revision="fixture-v1",
         requirement_ids=requirement_ids,
         approval_state="approved",
-        approved_by="Fixture owner" if kind is AuthorityReferenceKind.PROOF else None,
+        approved_by="Fixture owner",
         implementation_status="fixture evidence; not implementation proof",
     )
 
@@ -303,6 +303,8 @@ class TraceabilityTests(unittest.TestCase):
         self.assertEqual(test_row["mapping_status"], "mapped")
         self.assertEqual(proof_row["mapping_status"], "mapped")
         self.assertEqual(test_row["references"][0]["source"], "tests/TodayTests.swift")
+        self.assertEqual(test_row["references"][0]["approved_by"], "Fixture owner")
+        self.assertEqual(proof_row["references"][0]["approved_by"], "Fixture owner")
         self.assertEqual(
             proof_row["references"][0]["revision"],
             hashlib.sha256(proof_path.read_bytes()).hexdigest(),

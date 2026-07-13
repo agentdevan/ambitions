@@ -1015,6 +1015,57 @@ implementation_status = "fixture; not implementation proof"
         }
         self.assertEqual(invalid_ids, {"PROOF-OUTSIDE", "PROOF-UNSUPPORTED"})
 
+    def test_current_test_and_proof_require_nonempty_attributable_approver(self):
+        test_path = self.root / "tests/TodayTests.swift"
+        test_path.parent.mkdir(parents=True)
+        test_path.write_text("final class TodayTests {}\n", encoding="utf-8")
+        proof_path = self.root / "docs/proof/today.json"
+        proof_path.parent.mkdir(parents=True)
+        proof_path.write_text("{}\n", encoding="utf-8")
+        fixtures = (
+            replace(
+                external_reference(
+                    "TEST-TODAY",
+                    AuthorityReferenceKind.TEST,
+                    ("TODAY-001",),
+                    source="tests/TodayTests.swift",
+                ),
+                revision=hashlib.sha256(test_path.read_bytes()).hexdigest(),
+            ),
+            replace(
+                external_reference(
+                    "PROOF-TODAY",
+                    AuthorityReferenceKind.PROOF,
+                    ("TODAY-001",),
+                    source="docs/proof/today.json",
+                ),
+                revision=hashlib.sha256(proof_path.read_bytes()).hexdigest(),
+            ),
+        )
+
+        for reference in fixtures:
+            with self.subTest(kind=reference.reference_kind.value, approved_by="valid"):
+                codes = {
+                    finding.code
+                    for finding in external_reference_findings(
+                        self.current, (reference,), self.root
+                    )
+                }
+                self.assertNotIn("CANON_EVIDENCE_APPROVER_REQUIRED", codes)
+            for approved_by in (None, "   "):
+                with self.subTest(
+                    kind=reference.reference_kind.value, approved_by=approved_by
+                ):
+                    codes = {
+                        finding.code
+                        for finding in external_reference_findings(
+                            self.current,
+                            (replace(reference, approved_by=approved_by),),
+                            self.root,
+                        )
+                    }
+                    self.assertIn("CANON_EVIDENCE_APPROVER_REQUIRED", codes)
+
     def test_two_argument_validator_fails_closed_for_local_proof_without_repository_root(self):
         local = external_reference(
             "PROOF-LOCAL",

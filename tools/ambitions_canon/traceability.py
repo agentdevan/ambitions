@@ -508,6 +508,7 @@ def _reference_row(
         "references": [
             {
                 "approval_state": item.approval_state,
+                "approved_by": item.approved_by,
                 "implementation_status": item.implementation_status,
                 "reference_id": item.reference_id,
                 "revision": item.revision,

@@ -523,6 +523,7 @@ class TaskPackTests(unittest.TestCase):
                     revision=test_revision,
                     requirement_ids=("TODAY-001",),
                     approval_state="approved",
+                    approved_by="Fixture test owner",
                     implementation_status="focused test reference; execution not claimed",
                 ),
                 AuthorityReference(
@@ -576,6 +577,7 @@ class TaskPackTests(unittest.TestCase):
             [
                 {
                     "approval_state": "approved",
+                    "approved_by": "Fixture test owner",
                     "implementation_status": "focused test reference; execution not claimed",
                     "reference_id": "TEST-TODAY-001",
                     "revision": test_revision,
@@ -591,9 +593,13 @@ class TaskPackTests(unittest.TestCase):
             "source=docs/proof/today.json",
             f"revision={proof_revision}",
             "approval=approved",
+            "approved_by=Fixture owner",
             "posture=fixture evidence with a Yellow ceiling",
         ):
             self.assertIn(exact_value, proof_line)
+        markdown = pack.to_markdown()
+        self.assertIn("approved_by=Fixture test owner", markdown)
+        self.assertIn("approved_by=Fixture owner", markdown)
         self.assertTrue(any("VSP-02" in item for item in pack.visual_authority))
         self.assertTrue(any("FIGMA:fixture:160:93" in item for item in pack.visual_authority))
         self.assertNotIn("No task-scoped visual authority", pack.to_markdown())

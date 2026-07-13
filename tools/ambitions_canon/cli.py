@@ -158,8 +158,15 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     semantic_review_parser.add_argument("--reviewer", required=True)
     semantic_review_parser.add_argument("--model", required=True)
-    semantic_review_parser.add_argument("--old-response", type=Path)
-    semantic_review_parser.add_argument("--new-response", type=Path)
+    response_help = (
+        "strict closed JSON with schema_version/reviewer/model/response fields"
+    )
+    semantic_review_parser.add_argument(
+        "--old-response", type=Path, help=response_help
+    )
+    semantic_review_parser.add_argument(
+        "--new-response", type=Path, help=response_help
+    )
     semantic_review_parser.add_argument(
         "--comparison",
         type=Path,

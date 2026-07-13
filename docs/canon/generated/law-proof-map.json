@@ -2289,6 +2289,7 @@
       "references": [
         {
           "approval_state": "approved",
+          "approved_by": "Devan Warner",
           "implementation_status": "owner-approval provenance with a Yellow proof ceiling; not implementation proof",
           "reference_id": "PROOF-VSP-05-CAPTURE-APPROVAL",
           "revision": "6f7b33b92ca4a06cb2dcb36e99949337861b7322401a4b4c192e2a132ee0995d",
@@ -2307,6 +2308,7 @@
       "references": [
         {
           "approval_state": "approved",
+          "approved_by": "Devan Warner",
           "implementation_status": "owner-approval provenance with a Yellow proof ceiling; not accessibility conformance or implementation proof",
           "reference_id": "PROOF-VSP-09-MOTION-A11Y-APPROVAL",
           "revision": "c6c3963f99464e2bdf56799e12ddeeaafa06c752c2ca38f844a415a32fec4694",
@@ -2389,6 +2391,7 @@
       "references": [
         {
           "approval_state": "approved",
+          "approved_by": "Devan Warner",
           "implementation_status": "owner-approval provenance for Search placement only; not a dedicated overlay or implementation proof",
           "reference_id": "PROOF-VSP-01-SHELL-APPROVAL",
           "revision": "ca183ef9526dfe8de78013211909e2576085628c009b90afc58bb7efbc18bd21",
@@ -2431,6 +2434,7 @@
       "references": [
         {
           "approval_state": "approved",
+          "approved_by": "Devan Warner",
           "implementation_status": "owner-approval provenance with a Yellow proof ceiling; not implementation proof",
           "reference_id": "PROOF-VSP-07-TRUST-APPROVAL",
           "revision": "79558e99f83e7ca10547b7b7fd62fd28b6ee7a14db70eaafd19f7fcebb130644",
@@ -2559,6 +2563,7 @@
       "references": [
         {
           "approval_state": "approved",
+          "approved_by": "Devan Warner",
           "implementation_status": "owner-approval provenance with a Yellow proof ceiling; not implementation proof",
           "reference_id": "PROOF-VSP-03-GOALS-APPROVAL",
           "revision": "c3888ee61ba27245b24b6bda9ea11c202e913ff84fe8bf1abb1e0f888ce47705",
@@ -2693,6 +2698,7 @@
       "references": [
         {
           "approval_state": "approved",
+          "approved_by": "Devan Warner",
           "implementation_status": "owner-approval provenance with a Yellow proof ceiling; not parity or implementation proof",
           "reference_id": "PROOF-VSP-04-TIME-APPROVAL",
           "revision": "c40c2e5cd469dd2bf63609e7701efc9b85692d650112c85f19854f6c24891fbf",
@@ -2801,6 +2807,7 @@
       "references": [
         {
           "approval_state": "approved",
+          "approved_by": "Devan Warner",
           "implementation_status": "owner-approval provenance with a Yellow proof ceiling; not implementation proof",
           "reference_id": "PROOF-VSP-02-TODAY-APPROVAL",
           "revision": "2b5d6b0d13da654cff4a1875ac665bca7971aaac58b12e9d8578d41b76fdc28b",
@@ -2917,6 +2924,7 @@
       "references": [
         {
           "approval_state": "approved",
+          "approved_by": "Devan Warner",
           "implementation_status": "owner-approval provenance with a Yellow proof ceiling; not implementation proof",
           "reference_id": "PROOF-VSP-06-YOU-APPROVAL",
           "revision": "e185df1706ef1eca4244b3ce57c0a8aa52f6205ced8bef3f10a4fb6622e2adcf",
