@@ -4,7 +4,9 @@ import unittest
 from contextlib import redirect_stdout
 from io import StringIO
 from pathlib import Path
+from unittest import mock
 
+import tools.ambitions_canon.model as canon_model
 from tools.ambitions_canon.model import (
     AuthorityClass,
     AuthorityState,
@@ -23,8 +25,110 @@ from tools.ambitions_canon.model import (
 )
 
 
+UNICODE_16_ASSIGNED_RANGES = (
+    (0x0897, 0x0897),
+    (0x1B4E, 0x1B4F),
+    (0x1B7F, 0x1B7F),
+    (0x1C89, 0x1C8A),
+    (0x2427, 0x2429),
+    (0x31E4, 0x31E5),
+    (0xA7CB, 0xA7CD),
+    (0xA7DA, 0xA7DC),
+    (0x105C0, 0x105F3),
+    (0x10D40, 0x10D65),
+    (0x10D69, 0x10D85),
+    (0x10D8E, 0x10D8F),
+    (0x10EC2, 0x10EC4),
+    (0x10EFC, 0x10EFC),
+    (0x11380, 0x11389),
+    (0x1138B, 0x1138B),
+    (0x1138E, 0x1138E),
+    (0x11390, 0x113B5),
+    (0x113B7, 0x113C0),
+    (0x113C2, 0x113C2),
+    (0x113C5, 0x113C5),
+    (0x113C7, 0x113CA),
+    (0x113CC, 0x113D5),
+    (0x113D7, 0x113D8),
+    (0x113E1, 0x113E2),
+    (0x116D0, 0x116E3),
+    (0x11BC0, 0x11BE1),
+    (0x11BF0, 0x11BF9),
+    (0x11F5A, 0x11F5A),
+    (0x13460, 0x143FA),
+    (0x16100, 0x16139),
+    (0x16D40, 0x16D79),
+    (0x18CFF, 0x18CFF),
+    (0x1CC00, 0x1CCF9),
+    (0x1CD00, 0x1CEB3),
+    (0x1E5D0, 0x1E5FA),
+    (0x1E5FF, 0x1E5FF),
+    (0x1F8B2, 0x1F8BB),
+    (0x1F8C0, 0x1F8C1),
+    (0x1FA89, 0x1FA89),
+    (0x1FA8F, 0x1FA8F),
+    (0x1FABE, 0x1FABE),
+    (0x1FAC6, 0x1FAC6),
+    (0x1FADC, 0x1FADC),
+    (0x1FADF, 0x1FADF),
+    (0x1FAE9, 0x1FAE9),
+    (0x1FBCB, 0x1FBEF),
+)
+
+
 class ModelTests(unittest.TestCase):
-    def test_visible_attribution_rejects_every_unicode_16_default_ignorable_range(self):
+    def test_visible_attribution_policy_is_pinned_to_unicode_15(self):
+        self.assertEqual(
+            getattr(canon_model, "ATTRIBUTION_UNICODE_POLICY_VERSION", None),
+            "15.0.0",
+        )
+        policy_ranges = getattr(
+            canon_model,
+            "_POST_UNICODE_15_ASSIGNED_RANGES",
+            (),
+        )
+        self.assertEqual(policy_ranges, UNICODE_16_ASSIGNED_RANGES)
+        self.assertEqual(len(policy_ranges), 47)
+        self.assertEqual(
+            sum(upper - lower + 1 for lower, upper in policy_ranges),
+            5_185,
+        )
+        self.assertTrue(
+            all(
+                left_upper < right_lower
+                for (_, left_upper), (right_lower, _) in zip(
+                    policy_ranges,
+                    policy_ranges[1:],
+                )
+            )
+        )
+
+    def test_visible_attribution_rejects_every_post_unicode_15_range_boundary(self):
+        for lower, upper in UNICODE_16_ASSIGNED_RANGES:
+            for code_point in dict.fromkeys((lower, upper)):
+                with self.subTest(code_point=f"U+{code_point:04X}"):
+                    with self.assertRaises(ValueError):
+                        normalize_visible_attribution(f"Owner{chr(code_point)}")
+
+    def test_visible_attribution_rejects_unicode_16_scalar_before_host_properties(self):
+        unicode_16_scalar = chr(0x105C0)
+        with (
+            mock.patch.object(
+                canon_model.unicodedata,
+                "unidata_version",
+                "99.0.0",
+            ),
+            mock.patch.object(
+                canon_model.unicodedata,
+                "category",
+                return_value="Lo",
+            ) as category,
+        ):
+            with self.assertRaises(ValueError):
+                normalize_visible_attribution(f"Owner{unicode_16_scalar}")
+        self.assertNotIn(unicode_16_scalar, (call.args[0] for call in category.call_args_list))
+
+    def test_visible_attribution_rejects_every_unicode_15_default_ignorable_range(self):
         range_boundaries = (
             0x00AD,
             0x034F,

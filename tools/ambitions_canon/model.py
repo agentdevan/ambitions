@@ -8,12 +8,15 @@ from enum import StrEnum
 from pathlib import Path
 
 
-# Unicode 16.0.0 DerivedCoreProperties.txt, property
+# Attribution follows Python 3.12's Unicode 15.0.0 semantics on every host.
+# Upgrade this policy only by regenerating both checked-in range tables from
+# authoritative UCD data and proving supported-host equivalence in tests. Never
+# infer attribution behavior from the host's unicodedata.unidata_version.
+ATTRIBUTION_UNICODE_POLICY_VERSION = "15.0.0"
+
+# Unicode 15.0.0 DerivedCoreProperties.txt, property
 # Default_Ignorable_Code_Point (4,174 code points across 27 ranges):
-# https://www.unicode.org/Public/16.0.0/ucd/DerivedCoreProperties.txt
-# This explicit table keeps attribution validation independent of optional
-# third-party Unicode-property engines.
-ATTRIBUTION_UNICODE_VERSION = "16.0.0"
+# https://www.unicode.org/Public/15.0.0/ucd/DerivedCoreProperties.txt
 _DEFAULT_IGNORABLE_CODE_POINT_RANGES = (
     (0x00AD, 0x00AD),
     (0x034F, 0x034F),
@@ -44,10 +47,68 @@ _DEFAULT_IGNORABLE_CODE_POINT_RANGES = (
     (0xE01F0, 0xE0FFF),
 )
 
+# Unicode 16.0.0 DerivedAge.txt, property Age=16.0 (5,185 code points
+# across 47 ranges). Rejecting every scalar assigned after Unicode 15 before
+# host normalization/category checks makes newer Python runtimes emulate the
+# pinned Python 3.12 policy without a network or third-party dependency.
+# https://www.unicode.org/Public/16.0.0/ucd/DerivedAge.txt
+_POST_UNICODE_15_ASSIGNED_RANGES = (
+    (0x0897, 0x0897),
+    (0x1B4E, 0x1B4F),
+    (0x1B7F, 0x1B7F),
+    (0x1C89, 0x1C8A),
+    (0x2427, 0x2429),
+    (0x31E4, 0x31E5),
+    (0xA7CB, 0xA7CD),
+    (0xA7DA, 0xA7DC),
+    (0x105C0, 0x105F3),
+    (0x10D40, 0x10D65),
+    (0x10D69, 0x10D85),
+    (0x10D8E, 0x10D8F),
+    (0x10EC2, 0x10EC4),
+    (0x10EFC, 0x10EFC),
+    (0x11380, 0x11389),
+    (0x1138B, 0x1138B),
+    (0x1138E, 0x1138E),
+    (0x11390, 0x113B5),
+    (0x113B7, 0x113C0),
+    (0x113C2, 0x113C2),
+    (0x113C5, 0x113C5),
+    (0x113C7, 0x113CA),
+    (0x113CC, 0x113D5),
+    (0x113D7, 0x113D8),
+    (0x113E1, 0x113E2),
+    (0x116D0, 0x116E3),
+    (0x11BC0, 0x11BE1),
+    (0x11BF0, 0x11BF9),
+    (0x11F5A, 0x11F5A),
+    (0x13460, 0x143FA),
+    (0x16100, 0x16139),
+    (0x16D40, 0x16D79),
+    (0x18CFF, 0x18CFF),
+    (0x1CC00, 0x1CCF9),
+    (0x1CD00, 0x1CEB3),
+    (0x1E5D0, 0x1E5FA),
+    (0x1E5FF, 0x1E5FF),
+    (0x1F8B2, 0x1F8BB),
+    (0x1F8C0, 0x1F8C1),
+    (0x1FA89, 0x1FA89),
+    (0x1FA8F, 0x1FA8F),
+    (0x1FABE, 0x1FABE),
+    (0x1FAC6, 0x1FAC6),
+    (0x1FADC, 0x1FADC),
+    (0x1FADF, 0x1FADF),
+    (0x1FAE9, 0x1FAE9),
+    (0x1FBCB, 0x1FBEF),
+)
 
-def _is_default_ignorable(character: str) -> bool:
+
+def _is_in_ranges(
+    character: str,
+    ranges: tuple[tuple[int, int], ...],
+) -> bool:
     code_point = ord(character)
-    for lower, upper in _DEFAULT_IGNORABLE_CODE_POINT_RANGES:
+    for lower, upper in ranges:
         if code_point < lower:
             return False
         if code_point <= upper:
@@ -56,9 +117,17 @@ def _is_default_ignorable(character: str) -> bool:
 
 
 def _validate_attribution_scalars(value: str) -> None:
+    if any(
+        _is_in_ranges(character, _POST_UNICODE_15_ASSIGNED_RANGES)
+        for character in value
+    ):
+        raise ValueError("attribution contains a post-Unicode-15 code point")
     if any(unicodedata.category(character).startswith("C") for character in value):
         raise ValueError("attribution contains a Unicode control category")
-    if any(_is_default_ignorable(character) for character in value):
+    if any(
+        _is_in_ranges(character, _DEFAULT_IGNORABLE_CODE_POINT_RANGES)
+        for character in value
+    ):
         raise ValueError("attribution contains a default-ignorable code point")
 
 
