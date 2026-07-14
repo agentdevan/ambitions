@@ -1,17 +1,5 @@
 {
   "applicable_requirement_ids": [
-    "APP-NAVIGATION",
-    "APP-NAVIGATION-RESTORATION-001",
-    "APP-NAVIGATION-STATE-001",
-    "APP-SHELL",
-    "APP-SHELL-FAILURE-001",
-    "APP-SHELL-STATE-001",
-    "SPEC-APP-NAVIGATION-IA-MAP-001",
-    "SPEC-APP-NAVIGATION-PRESENTATION-001",
-    "SPEC-APP-NAVIGATION-ROOT-INTERACTION-001",
-    "SPEC-APP-SHELL-FIRST-VIEWPORT-001",
-    "SPEC-APP-SHELL-GLOBAL-ACTIONS-001",
-    "SPEC-APP-SHELL-ROOT-NAVIGATION-001",
     "SPEC-SURFACE-TODAY-FIRST-VIEWPORT-001",
     "SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001",
     "SURFACE-TODAY"
@@ -19,57 +7,31 @@
   "approved_budget": 30000,
   "approved_budget_class": "complex",
   "expected_proof": [
-    "Current source, focused tests, regression tests, and claim-specific proof."
+    "Current source, focused tests, regression tests, and claim-specific proof.",
+    "Claim-specific proof for claim_type=source must cover changed-file boundary Native/Ambitions/Surfaces/Today/ and applicable requirements SPEC-SURFACE-TODAY-FIRST-VIEWPORT-001, SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001, SURFACE-TODAY."
   ],
   "expected_source_owners": [
-    "Native/Ambitions/App/",
     "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
     "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
     "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
-    "Native/Ambitions/DesignSystem/StagePrimitives/",
     "Native/Ambitions/Quality/",
-    "Native/Ambitions/Stage/",
     "Native/Ambitions/Surfaces/Today/"
   ],
   "expected_validation": [
+    "Execute selected verification contracts: A11Y-TODAY-ORDER-001, CANON-AUDIT-ROOT-IA-001, PROOF-CLAIM-CEILING-001, PROOF-TODAY-FIRST-VIEWPORT-001, PROOF-TODAY-VISUAL-MAPPING-001, SCENARIO-TODAY-PRIMARY-OBJECT-001, SCENARIO-USER-CONTROL-001, STANDARD-ACCESSIBILITY-001.",
     "python3 scripts/ambitions-canon.py audit",
     "python3 scripts/ambitions-canon.py build --check",
     "git diff --check"
   ],
   "expected_verification_ids": [
-    "A11Y-ROOT-NAVIGATION-001",
     "A11Y-TODAY-ORDER-001",
-    "AUDIT-APP-NAVIGATION-DEPTH-001",
-    "AUDIT-APP-NAVIGATION-IA-MAP-001",
-    "AUDIT-APP-NAVIGATION-SINGLE-OWNER-001",
-    "AUDIT-APP-SHELL-DUPLICATE-CONTROL-001",
-    "CANON-AUDIT-NONROOT-001",
     "CANON-AUDIT-ROOT-IA-001",
-    "COPY-ROOT-LABELS-001",
-    "PROOF-APP-SHELL-HIERARCHY-001",
     "PROOF-CLAIM-CEILING-001",
     "PROOF-TODAY-FIRST-VIEWPORT-001",
     "PROOF-TODAY-VISUAL-MAPPING-001",
-    "SCENARIO-APP-NAVIGATION-DISMISSAL-001",
-    "SCENARIO-APP-NAVIGATION-INVALIDATED-001",
-    "SCENARIO-APP-NAVIGATION-OWNERSHIP-001",
-    "SCENARIO-APP-NAVIGATION-PRESENTATION-001",
-    "SCENARIO-APP-NAVIGATION-RESTORE-001",
-    "SCENARIO-APP-NAVIGATION-ROOT-RESET-001",
-    "SCENARIO-APP-NAVIGATION-ROOT-SWITCH-001",
-    "SCENARIO-APP-SHELL-DEPTH-002",
-    "SCENARIO-APP-SHELL-FAILURE-001",
-    "SCENARIO-APP-SHELL-FIRST-VIEWPORT-001",
-    "SCENARIO-APP-SHELL-FOCUS-RECOVERY-001",
-    "SCENARIO-APP-SHELL-GLOBAL-ACTIONS-001",
-    "SCENARIO-APP-SHELL-RESTORE-001",
-    "SCENARIO-APP-SHELL-ROOT-001",
-    "SCENARIO-APP-SHELL-STATE-001",
-    "SCENARIO-SHELL-OWNERSHIP-001",
     "SCENARIO-TODAY-PRIMARY-OBJECT-001",
     "SCENARIO-USER-CONTROL-001",
-    "STANDARD-ACCESSIBILITY-001",
-    "STANDARD-NATIVE-IOS-001"
+    "STANDARD-ACCESSIBILITY-001"
   ],
   "intake": {
     "changed_files": [
@@ -91,10 +53,6 @@
     "CONST-IA-ROOT-001",
     "CONST-PROOF-EVIDENCE-001",
     "CONTROL-FORCE-NOTHING-001",
-    "IA-PLAIN-BRANDED-NAMING-001",
-    "LAW-IA-NONROOT-001",
-    "LAW-SHELL-STAGE-001",
-    "PLATFORM-NATIVE-IPHONE-001",
     "SURFACE-TODAY-IDENTITY-001"
   ],
   "title": "Today SwiftUI"

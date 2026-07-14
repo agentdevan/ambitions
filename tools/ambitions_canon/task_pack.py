@@ -12,6 +12,7 @@ from dataclasses import dataclass, replace
 from pathlib import Path
 
 from tools.ambitions_canon.audit import audit_registry
+from tools.ambitions_canon.coverage import profile_section_bodies
 from tools.ambitions_canon.build import (
     _content_sha_entries,
     _assert_parent_path_identity,
@@ -330,37 +331,6 @@ def build_task_pack(
             f"unresolved P0 conflict blocks task pack: {blocking[0]['issue_id']}",
         )
 
-    requirements_by_id = {
-        requirement.requirement_id: requirement for requirement in registry.requirements
-    }
-    inherited_ids = {
-        requirement_id for document in closure for requirement_id in document.inherits
-    }
-    directly_scoped_law_ids = {
-        requirement.requirement_id
-        for document in roots
-        if document.kind is DocumentKind.CONSTITUTION
-        for requirement in document.requirements
-    }
-    applicable_law_ids = tuple(sorted(inherited_ids | directly_scoped_law_ids))
-    laws = tuple(
-        requirements_by_id[identifier]
-        for identifier in applicable_law_ids
-        if identifier in requirements_by_id
-    )
-    constitution_ids = {
-        requirement.requirement_id
-        for document in registry.documents
-        if document.kind is DocumentKind.CONSTITUTION
-        for requirement in document.requirements
-    }
-    laws = tuple(
-        sorted(
-            (law for law in laws if law.requirement_id in constitution_ids),
-            key=lambda item: item.requirement_id,
-        )
-    )
-
     requirement_graph = _requirement_inclusion_graph(
         roots,
         closure,
@@ -369,6 +339,32 @@ def build_task_pack(
     )
     semantic_documents = tuple(
         document for document in closure if document.spec_id in requirement_graph
+    )
+    requirements_by_id = {
+        requirement.requirement_id: requirement for requirement in registry.requirements
+    }
+    inherited_ids = {
+        requirement_id
+        for document in semantic_documents
+        for requirement_id in document.inherits
+    }
+    directly_scoped_law_ids = {
+        requirement.requirement_id
+        for document in roots
+        if document.kind is DocumentKind.CONSTITUTION
+        for requirement in document.requirements
+    }
+    applicable_law_ids = tuple(sorted(inherited_ids | directly_scoped_law_ids))
+    constitution_ids = {
+        requirement.requirement_id
+        for document in registry.documents
+        if document.kind is DocumentKind.CONSTITUTION
+        for requirement in document.requirements
+    }
+    laws = tuple(
+        requirements_by_id[identifier]
+        for identifier in applicable_law_ids
+        if identifier in requirements_by_id and identifier in constitution_ids
     )
     specifications = tuple(
         sorted(
@@ -502,7 +498,13 @@ def build_task_pack(
         if visual_gap
         else ("No applicable governed visual authority is mapped for this scope.",)
     )
+    verification_contract = (
+        "Execute selected verification contracts: "
+        + ", ".join(required_tests)
+        + "."
+    )
     required_validation = (
+        verification_contract,
         "python3 scripts/ambitions-canon.py audit",
         "python3 scripts/ambitions-canon.py build --check",
         "git diff --check",
@@ -519,6 +521,10 @@ def build_task_pack(
     )
     required_proof = (
         "Current source, focused tests, regression tests, and claim-specific proof.",
+        "Claim-specific proof for "
+        f"claim_type={intake.claim_type} must cover changed-file boundary "
+        f"{', '.join(intake.changed_files)} and applicable requirements "
+        f"{', '.join(sorted(selected_requirement_ids | {document.spec_id for document in semantic_documents}))}.",
         *tuple(
             "Current proof reference "
             f"reference_id={item.reference_id}; source={item.source}; "
@@ -591,7 +597,6 @@ def build_task_pack(
         section_content = _render_sections(
             pack,
             laws=laws,
-            embedded_law_ids=frozenset(directly_scoped_law_ids),
             specifications=specifications,
             objects=objects,
             journeys=journeys,
@@ -1271,7 +1276,7 @@ def _requirement_inclusion_graph(
     *,
     include_visual_authority: bool = False,
 ) -> dict[str, tuple[str, ...]]:
-    """Select exact root requirements plus complete transitive dependency contracts."""
+    """Select exact roots plus direct, profile-rich semantic dependencies."""
 
     documents = {document.spec_id: document for document in closure}
     graph: dict[str, tuple[str, ...]] = {}
@@ -1293,41 +1298,27 @@ def _requirement_inclusion_graph(
                 root.source_path,
             )
         graph[root.spec_id] = scoped_requirement_ids
-    selected = set(root_spec_ids)
-    pending = [
-        (dependency_id, root)
-        for root in reversed(roots)
-        for dependency_id in sorted(root.depends_on, reverse=True)
-    ]
-    while pending:
-        dependency_id, parent = pending.pop()
-        if dependency_id in selected:
-            continue
-        dependency = documents.get(dependency_id)
-        if dependency is None:
-            raise CanonError(
-                "PACK_DEPENDENCY_OWNER_MISSING",
-                f"required downstream semantic owner is absent: {dependency_id}",
-                parent.source_path,
+    for parent in roots:
+        for dependency_id in sorted(parent.depends_on):
+            if dependency_id in root_spec_ids:
+                continue
+            dependency = documents.get(dependency_id)
+            if dependency is None:
+                raise CanonError(
+                    "PACK_DEPENDENCY_OWNER_MISSING",
+                    f"required direct semantic owner is absent: {dependency_id}",
+                    parent.source_path,
+                )
+            if dependency.kind is DocumentKind.CONSTITUTION:
+                continue
+            dependency_ids = tuple(
+                requirement.requirement_id
+                for requirement in dependency.requirements
+                if _requirement_matches_scope(dependency, requirement, scopes)
             )
-        selected.add(dependency_id)
-        if dependency.kind is DocumentKind.CONSTITUTION:
-            continue
-        dependency_ids = tuple(
-            requirement.requirement_id for requirement in dependency.requirements
-        )
-        if not dependency_ids:
-            raise CanonError(
-                "PACK_DEPENDENCY_SEMANTICS_EMPTY",
-                f"required dependency has no requirement semantics: {dependency_id}",
-                dependency.source_path,
-            )
-        graph[dependency_id] = dependency_ids
-        pending.extend(
-            (child_id, dependency)
-            for child_id in sorted(dependency.depends_on, reverse=True)
-            if child_id not in selected
-        )
+            if not dependency_ids:
+                continue
+            graph[dependency_id] = dependency_ids
     return {identifier: graph[identifier] for identifier in sorted(graph)}
 
 
@@ -1452,7 +1443,6 @@ def _render_sections(
     pack: TaskPack,
     *,
     laws: tuple[Requirement, ...],
-    embedded_law_ids: frozenset[str],
     specifications: tuple[CanonDocument, ...],
     objects: tuple[CanonDocument, ...],
     journeys: tuple[CanonDocument, ...],
@@ -1478,7 +1468,7 @@ def _render_sections(
     )
     values = {
         "Identity": identity,
-        "Constitutional laws": _render_laws(laws, embedded_law_ids),
+        "Constitutional laws": _render_laws(laws),
         "Owning specifications": tuple(
             _render_document(item, selected_requirement_ids) for item in specifications
         ),
@@ -1491,7 +1481,12 @@ def _render_sections(
         "Cross-cutting standards": tuple(
             _render_document(item, selected_requirement_ids) for item in standards
         ),
-        "Source ownership": _bullet_values(pack.source_owners),
+        "Source ownership": (
+            "- **Declared changed-file boundary:**",
+            *(f"  - `{path}`" for path in pack.changed_files),
+            "- **Coupled canonical owners:**",
+            *(f"  - `{path}`" for path in pack.source_owners),
+        ),
         "Implementation posture": (
             _implementation_posture_markdown(pack.implementation_posture),
         ),
@@ -1518,27 +1513,10 @@ def _render_requirement(requirement: Requirement) -> str:
 
 def _render_laws(
     laws: tuple[Requirement, ...],
-    embedded_law_ids: frozenset[str],
 ) -> tuple[str, ...]:
-    """Embed direct laws and explicitly reference the complete inherited-law set."""
+    """Embed every applicable constitutional body in the self-contained pack."""
 
-    embedded = tuple(
-        _render_requirement(law)
-        for law in laws
-        if law.requirement_id in embedded_law_ids
-    )
-    referenced = tuple(
-        law.requirement_id
-        for law in laws
-        if law.requirement_id not in embedded_law_ids
-    )
-    if not referenced:
-        return embedded
-    reference = (
-        "- Complete inherited-law bodies are bound by the Canon SHA and referenced, "
-        "not embedded: " + ", ".join(f"`{identifier}`" for identifier in referenced) + "."
-    )
-    return (*embedded, reference)
+    return tuple(_render_requirement(law) for law in laws)
 
 
 def _render_document(
@@ -1557,7 +1535,14 @@ def _render_document(
         f"- **{document.spec_id} — {_inline(document.title)}** "
         f"(`{document.kind.value}`)"
     )
-    return f"{heading}\n{requirements}" if requirements else heading
+    profiles = "\n".join(
+        "  - **Profile section "
+        f"`{section}`:**\n"
+        + "\n".join(f"    > {line}" for line in body.splitlines())
+        for section, body in profile_section_bodies(document)
+    )
+    content = "\n".join(value for value in (requirements, profiles) if value)
+    return f"{heading}\n{content}" if content else heading
 
 
 def _bullet_values(values: tuple[str, ...]) -> tuple[str, ...]:

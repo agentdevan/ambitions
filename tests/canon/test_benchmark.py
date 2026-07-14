@@ -3,6 +3,7 @@ import importlib.util
 import hashlib
 import json
 import io
+import re
 import tempfile
 import unittest
 from copy import deepcopy
@@ -29,6 +30,30 @@ SCENARIO_IDS = (
     "accessibility-repair",
     "release-proof-claim",
 )
+SCENARIO_SPEC_INTENT = {
+    "today-swiftui": {"SURFACE-TODAY"},
+    "time-recurrence": {"OBJECT-EVENT", "OBJECT-STEP"},
+    "capture-proposal": {"GLOBAL-CAPTURE"},
+    "local-runtime-mutation": {"SYSTEM-PRIVATE-LIFE-RUNTIME"},
+    "cloudkit-continuity": {
+        "SYSTEM-SYNC-CONTINUITY",
+        "SYSTEM-PRIVATE-LIFE-RUNTIME",
+        "SYSTEM-PERSISTENCE-REPLAY",
+        "SYSTEM-PRIVACY-DATA-CLASSIFICATION",
+    },
+    "source-atlas-boundary": {
+        "OBJECT-SOURCE-REFERENCE",
+        "SYSTEM-PRIVATE-LIFE-RUNTIME",
+        "SYSTEM-PRIVACY-DATA-CLASSIFICATION",
+        "SYSTEM-SOURCE-ATLAS",
+    },
+    "accessibility-repair": {"STANDARD-ACCESSIBILITY"},
+    "release-proof-claim": {
+        "STANDARD-ACCESSIBILITY",
+        "STANDARD-TESTING-FIXTURES",
+        "STANDARD-VALIDATION-RELEASE",
+    },
+}
 
 
 def semantic_response(reviewer: str, model: str, response: str) -> bytes:
@@ -101,60 +126,73 @@ class BenchmarkTest(unittest.TestCase):
                 self.assertTrue(hasattr(fixture, "expected_verification_ids"))
                 self.assertTrue(hasattr(fixture, "expected_proof"))
 
-    def test_fixture_semantics_equal_independent_registry_transitive_closure(self):
+    def test_fixture_semantics_trace_to_separately_authored_scenario_intent(self):
         benchmark = self.benchmark_module()
-        from tools.ambitions_canon import task_pack as task_pack_module
 
         registry = benchmark._load_registry(ROOT)
         requirements = {
             requirement.requirement_id: requirement
             for requirement in registry.requirements
         }
+        documents = {document.spec_id: document for document in registry.documents}
+        constitution_ids = {
+            requirement.requirement_id
+            for document in registry.documents
+            if document.kind.value == "constitution"
+            for requirement in document.requirements
+        }
+
+        def overlaps(left, right):
+            return (
+                left == right
+                or left.startswith(f"{right}.")
+                or right.startswith(f"{left}.")
+            )
+
         for fixture in benchmark.load_benchmark_fixtures(FIXTURES):
             with self.subTest(scenario=fixture.scenario_id):
-                roots = task_pack_module._scope_documents(
-                    registry, fixture.intake.scope
-                )
-                root_spec_ids = {root.spec_id for root in roots}
-                root_requirement_ids = {
-                    requirement.requirement_id
-                    for root in roots
-                    for requirement in root.requirements
-                    if requirement.requirement_id
-                    in fixture.applicable_requirement_ids
-                }
-                semantic_documents = tuple(
-                    document
-                    for document in task_pack_module._dependency_closure(
-                        registry, roots
-                    )
-                    if document.kind.value != "constitution"
-                )
-                dependency_documents = tuple(
-                    document
-                    for document in semantic_documents
-                    if document.spec_id not in root_spec_ids
+                intended_spec_ids = SCENARIO_SPEC_INTENT[fixture.scenario_id]
+                intended_documents = tuple(
+                    documents[identifier] for identifier in sorted(intended_spec_ids)
                 )
                 expected_requirement_ids = {
-                    document.spec_id for document in semantic_documents
-                } | root_requirement_ids | {
                     requirement.requirement_id
-                    for document in dependency_documents
+                    for document in intended_documents
                     for requirement in document.requirements
+                    if any(
+                        scope in {document.spec_id, requirement.requirement_id}
+                        or overlaps(requirement.concept, scope)
+                        for scope in fixture.intake.scope
+                    )
+                    or (
+                        fixture.intake.task_type == "swiftui"
+                        and "VISUAL-AUTHORITY" in requirement.requirement_id
+                    )
                 }
+                expected_requirement_ids.update(intended_spec_ids)
                 expected_owners = {
                     owner
-                    for document in semantic_documents
+                    for document in intended_documents
                     for owner in document.source_owners
+                }
+                expected_laws = {
+                    identifier
+                    for document in intended_documents
+                    for identifier in document.inherits
+                    if identifier in constitution_ids
                 }
                 expected_verification = {
                     verification
                     for identifier in expected_requirement_ids
-                    | set(fixture.shared_law_allowlist)
+                    | expected_laws
                     if identifier in requirements
                     for verification in requirements[identifier].verification
                 }
 
+                self.assertEqual(
+                    fixture.shared_law_allowlist,
+                    tuple(sorted(expected_laws)),
+                )
                 self.assertEqual(
                     fixture.applicable_requirement_ids,
                     tuple(sorted(expected_requirement_ids)),
@@ -184,6 +222,174 @@ class BenchmarkTest(unittest.TestCase):
                 self.assertEqual(scenario.contradictory_active_requirement_count, 0)
                 self.assertEqual(scenario.unrelated_root_surface_laws, ())
 
+    def test_all_eight_packs_embed_applicable_law_and_profile_bodies(self):
+        benchmark = self.benchmark_module()
+        registry = benchmark._load_registry(ROOT)
+        requirements = {
+            requirement.requirement_id: requirement
+            for requirement in registry.requirements
+        }
+        documents = {document.spec_id: document for document in registry.documents}
+
+        for scenario in benchmark.run_benchmark(ROOT, FIXTURES).scenarios:
+            with self.subTest(scenario=scenario.scenario_id):
+                markdown = scenario.pack_markdown
+                for law_id in scenario.pack["constitutional_laws"]:
+                    for line in requirements[law_id].body.strip().splitlines():
+                        self.assertIn(line, markdown)
+                selected_specs = (
+                    *scenario.pack["specifications"],
+                    *scenario.pack["object_lifecycles"],
+                    *scenario.pack["journeys"],
+                    *scenario.pack["standards"],
+                )
+                profiled_specs = 0
+                for spec_id in selected_specs:
+                    document = documents[spec_id]
+                    if document.profile is None:
+                        continue
+                    profiled_specs += 1
+                    source = document.source_bytes.decode("utf-8")
+                    for section in sorted(document.sections):
+                        match = re.search(
+                            rf"(?ms)^<!-- canon-section: {re.escape(section)} -->\n"
+                            r"(.*?)(?=^<!-- canon-section: |\Z)",
+                            source,
+                        )
+                        self.assertIsNotNone(match, (spec_id, section))
+                        body = match.group(1).strip()
+                        if body:
+                            for line in body.splitlines():
+                                self.assertIn(line, markdown)
+                self.assertGreater(profiled_specs, 0)
+                self.assertIn("Declared changed-file boundary", markdown)
+                self.assertIn("Coupled canonical owners", markdown)
+
+    def test_time_recurrence_pack_is_object_semantic_and_excludes_app_shell_tree(self):
+        benchmark = self.benchmark_module()
+        scenario = next(
+            item
+            for item in benchmark.run_benchmark(ROOT, FIXTURES).scenarios
+            if item.scenario_id == "time-recurrence"
+        )
+
+        included = set(scenario.included_ids)
+        for identifier in (
+            "OBJECT-EVENT",
+            "OBJECT-STEP",
+            "OBJ-EVENT-RECURRENCE-EDIT-001",
+            "OBJ-EVENT-TIME-ZONE-001",
+            "OBJ-RECURRENCE-SERIES-001",
+        ):
+            self.assertIn(identifier, included)
+        for identifier in (
+            "SCENARIO-EVENT-TIME-ZONE-DST-001",
+            "SCENARIO-OBJECT-RECURRENCE-BOUNDARY-001",
+            "SCENARIO-RECURRENCE-SCOPE-001",
+            "REVIEW-OBJ-EVENT-RECURRENCE-EDIT-001",
+        ):
+            self.assertIn(identifier, scenario.pack["required_tests"])
+        self.assertFalse(
+            any(identifier.startswith("APP-") for identifier in included),
+            included,
+        )
+        self.assertNotIn("SURFACE-TIME", included)
+        self.assertNotIn("Native/Ambitions/App/", scenario.pack["source_owners"])
+        self.assertIn(
+            "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+            scenario.pack["source_owners"],
+        )
+        self.assertIn(
+            "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+            scenario.pack["source_owners"],
+        )
+
+    def test_fixture_scopes_explicitly_name_every_material_semantic_spec(self):
+        benchmark = self.benchmark_module()
+
+        for fixture in benchmark.load_benchmark_fixtures(FIXTURES):
+            with self.subTest(scenario=fixture.scenario_id):
+                represented_specs = {
+                    identifier
+                    for identifier in fixture.applicable_requirement_ids
+                    if identifier in SCENARIO_SPEC_INTENT[fixture.scenario_id]
+                }
+                self.assertEqual(
+                    represented_specs, SCENARIO_SPEC_INTENT[fixture.scenario_id]
+                )
+                explicitly_scoped = {
+                    scope
+                    for scope in fixture.intake.scope
+                    if scope in SCENARIO_SPEC_INTENT[fixture.scenario_id]
+                }
+                conceptual_roots = (
+                    SCENARIO_SPEC_INTENT[fixture.scenario_id] - explicitly_scoped
+                )
+                expected_conceptual_count = 2 if fixture.scenario_id == "time-recurrence" else 1
+                self.assertLessEqual(len(conceptual_roots), expected_conceptual_count)
+
+    def test_accessibility_pack_carries_complete_contract_and_proof_matrix(self):
+        benchmark = self.benchmark_module()
+        scenario = next(
+            item
+            for item in benchmark.run_benchmark(ROOT, FIXTURES).scenarios
+            if item.scenario_id == "accessibility-repair"
+        )
+
+        for identifier in (
+            "A11Y-002",
+            "A11Y-READING-FOCUS-001",
+            "A11Y-DYNAMIC-TYPE-001",
+            "A11Y-REDUCED-EFFECTS-001",
+            "A11Y-INPUT-EQUIVALENCE-001",
+            "A11Y-STATUS-ERRORS-001",
+            "A11Y-PROOF-MATRIX-001",
+            "STANDARD-ACCEPTANCE-ACCESSIBILITY-001",
+        ):
+            self.assertIn(identifier, scenario.included_ids)
+        self.assertIn(
+            "AUDIT-A11Y-PROOF-MATRIX-001", scenario.pack["required_tests"]
+        )
+
+    def test_all_eight_packs_pin_claim_specific_validation_and_proof(self):
+        benchmark = self.benchmark_module()
+        fixtures = {
+            fixture.scenario_id: fixture
+            for fixture in benchmark.load_benchmark_fixtures(FIXTURES)
+        }
+
+        for scenario in benchmark.run_benchmark(ROOT, FIXTURES).scenarios:
+            with self.subTest(scenario=scenario.scenario_id):
+                fixture = fixtures[scenario.scenario_id]
+                verification_line = next(
+                    item
+                    for item in scenario.pack["required_validation"]
+                    if item.startswith("Execute selected verification contracts:")
+                )
+                for identifier in scenario.pack["required_tests"]:
+                    self.assertIn(identifier, verification_line)
+                proof_line = next(
+                    item
+                    for item in scenario.pack["required_proof"]
+                    if item.startswith("Claim-specific proof for claim_type=")
+                )
+                self.assertIn(f"claim_type={fixture.intake.claim_type}", proof_line)
+                for path in fixture.intake.changed_files:
+                    self.assertIn(path, proof_line)
+
+    def test_direct_material_semantic_dependencies_remain_but_transitive_noise_does_not(self):
+        benchmark = self.benchmark_module()
+        scenarios = {
+            item.scenario_id: item
+            for item in benchmark.run_benchmark(ROOT, FIXTURES).scenarios
+        }
+
+        release_ids = set(scenarios["release-proof-claim"].included_ids)
+        self.assertIn("STANDARD-ACCESSIBILITY", release_ids)
+        self.assertIn("STANDARD-TESTING-FIXTURES", release_ids)
+        self.assertNotIn("SYSTEM-DIAGNOSTICS", release_ids)
+        self.assertNotIn("SYSTEM-IMPORT-EXPORT-REPAIR", release_ids)
+
     def test_machine_pack_exposes_complete_exact_applicable_semantic_id_set(self):
         benchmark = self.benchmark_module()
         fixtures = {
@@ -211,12 +417,16 @@ class BenchmarkTest(unittest.TestCase):
         scenarios = {item.scenario_id: item for item in result.scenarios}
 
         today = scenarios["today-swiftui"].pack
-        self.assertIn("LAW-SHELL-STAGE-001", today["constitutional_laws"])
-        self.assertIn("LAW-IA-NONROOT-001", today["constitutional_laws"])
-        self.assertIn("IA-PLAIN-BRANDED-NAMING-001", today["constitutional_laws"])
-        self.assertIn("PLATFORM-NATIVE-IPHONE-001", today["constitutional_laws"])
-        self.assertIn("SPEC-APP-SHELL-ROOT-NAVIGATION-001", scenarios["today-swiftui"].included_ids)
-        self.assertIn("SPEC-APP-NAVIGATION-IA-MAP-001", scenarios["today-swiftui"].included_ids)
+        for identifier in (
+            "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001",
+            "CONST-IA-ROOT-001",
+            "CONST-PROOF-EVIDENCE-001",
+            "CONTROL-FORCE-NOTHING-001",
+            "SURFACE-TODAY-IDENTITY-001",
+        ):
+            self.assertIn(identifier, today["constitutional_laws"])
+        self.assertNotIn("APP-SHELL", scenarios["today-swiftui"].included_ids)
+        self.assertNotIn("APP-NAVIGATION", scenarios["today-swiftui"].included_ids)
 
         release = scenarios["release-proof-claim"]
         for identifier in (
@@ -251,7 +461,7 @@ class BenchmarkTest(unittest.TestCase):
             markdown = scenario.pack_markdown
             self.assertNotRegex(markdown, r"(?m)^- \*\*[A-Z0-9-]+ — .+\*\* \(`[^`]+`\)\n(?=- \*\*|## )")
 
-    def test_requirement_graph_traverses_two_edge_app_dependency_chain(self):
+    def test_requirement_graph_excludes_two_edge_app_dependency_chain(self):
         benchmark = self.benchmark_module()
         from tools.ambitions_canon import task_pack as task_pack_module
 
@@ -272,15 +482,21 @@ class BenchmarkTest(unittest.TestCase):
         )
 
         self.assertEqual(graph, reversed_graph)
-        self.assertIn("APP-LAUNCH-SETUP", graph)
-        self.assertIn("APP-DEGRADED-STATES", graph)
-        self.assertIn("APP-LAUNCH-READINESS-001", graph["APP-LAUNCH-SETUP"])
-        self.assertIn(
-            "APP-DEGRADED-FAILURE-TAXONOMY-001",
-            graph["APP-DEGRADED-STATES"],
+        self.assertEqual(
+            graph,
+            {
+                "OBJECT-EVENT": (
+                    "OBJ-EVENT-TIME-ZONE-001",
+                    "OBJ-EVENT-RECURRENCE-EDIT-001",
+                ),
+                "OBJECT-STEP": (
+                    "OBJ-RECURRENCE-BOUNDARY-001",
+                    "OBJ-RECURRENCE-SERIES-001",
+                ),
+            },
         )
 
-    def test_requirement_graph_traverses_runtime_trust_app_chain(self):
+    def test_requirement_graph_excludes_runtime_trust_app_chain(self):
         benchmark = self.benchmark_module()
         from tools.ambitions_canon import task_pack as task_pack_module
 
@@ -296,13 +512,12 @@ class BenchmarkTest(unittest.TestCase):
             roots, closure, fixture.intake.scope
         )
 
-        self.assertIn("GLOBAL-TRUST-INSPECTION", graph)
-        self.assertIn("APP-SHELL", graph)
-        self.assertIn("APP-NAVIGATION", graph)
-        self.assertIn("SPEC-APP-SHELL-ROOT-NAVIGATION-001", graph["APP-SHELL"])
-        self.assertIn("SPEC-APP-NAVIGATION-IA-MAP-001", graph["APP-NAVIGATION"])
+        self.assertEqual(
+            graph,
+            {"SYSTEM-PRIVATE-LIFE-RUNTIME": ("SYSTEM-RUNTIME-MUTATION-001",)},
+        )
 
-    def test_requirement_graph_traverses_testing_release_chain(self):
+    def test_requirement_graph_keeps_direct_release_standards_only(self):
         benchmark = self.benchmark_module()
         from tools.ambitions_canon import task_pack as task_pack_module
 
@@ -319,14 +534,13 @@ class BenchmarkTest(unittest.TestCase):
         )
 
         self.assertIn("STANDARD-TESTING-FIXTURES", graph)
-        self.assertIn("SYSTEM-DIAGNOSTICS", graph)
-        self.assertIn("SYSTEM-IMPORT-EXPORT-REPAIR", graph)
-        self.assertIn(
-            "SYSTEM-DIAGNOSTICS-HEALTH-001", graph["SYSTEM-DIAGNOSTICS"]
-        )
-        self.assertIn("SYSTEM-REPAIR-001", graph["SYSTEM-IMPORT-EXPORT-REPAIR"])
+        self.assertIn("STANDARD-ACCESSIBILITY", graph)
+        self.assertNotIn("SYSTEM-DIAGNOSTICS", graph)
+        self.assertNotIn("SYSTEM-IMPORT-EXPORT-REPAIR", graph)
+        self.assertEqual(len(graph["STANDARD-TESTING-FIXTURES"]), 16)
+        self.assertEqual(len(graph["STANDARD-ACCESSIBILITY"]), 8)
 
-    def test_requirement_graph_fails_when_transitive_semantic_owner_is_missing(self):
+    def test_requirement_graph_fails_when_direct_semantic_owner_is_missing(self):
         benchmark = self.benchmark_module()
         from tools.ambitions_canon import task_pack as task_pack_module
 
@@ -334,32 +548,42 @@ class BenchmarkTest(unittest.TestCase):
         fixture = next(
             item
             for item in benchmark.load_benchmark_fixtures(FIXTURES)
-            if item.scenario_id == "time-recurrence"
+            if item.scenario_id == "today-swiftui"
         )
         roots = task_pack_module._scope_documents(registry, fixture.intake.scope)
         closure = tuple(
             document
             for document in task_pack_module._dependency_closure(registry, roots)
-            if document.spec_id != "APP-LAUNCH-SETUP"
+            if document.spec_id != "APP-SHELL"
         )
+        self.assertNotIn("APP-SHELL", {root.spec_id for root in roots})
+        self.assertIn("APP-SHELL", roots[0].depends_on)
+        known_issues = benchmark._known_issues(ROOT, registry)
 
-        with self.assertRaises(CanonError) as raised:
-            task_pack_module._requirement_inclusion_graph(
-                roots, closure, fixture.intake.scope
+        with mock.patch.object(
+            task_pack_module,
+            "_dependency_closure",
+            return_value=closure,
+        ), self.assertRaises(CanonError) as raised:
+            task_pack_module.build_task_pack(
+                registry,
+                fixture.intake,
+                benchmark.BENCHMARK_REPOSITORY_STATE,
+                known_issues,
             )
         self.assertEqual(raised.exception.code, "PACK_DEPENDENCY_OWNER_MISSING")
 
-    def test_transitive_requirement_and_verification_removal_fail_closed(self):
+    def test_direct_requirement_and_verification_removal_fail_closed(self):
         benchmark = self.benchmark_module()
         fixtures = {
             item.scenario_id: item
             for item in benchmark.load_benchmark_fixtures(FIXTURES)
         }
-        fixture = fixtures["time-recurrence"]
-        transitive_requirement = "APP-LAUNCH-READINESS-001"
-        transitive_verification = "SCENARIO-APP-LAUNCH-READY-001"
-        self.assertIn(transitive_requirement, fixture.applicable_requirement_ids)
-        self.assertIn(transitive_verification, fixture.expected_verification_ids)
+        fixture = fixtures["release-proof-claim"]
+        direct_requirement = "TEST-001"
+        direct_verification = "AUDIT-TEST-LANES-001"
+        self.assertIn(direct_requirement, fixture.applicable_requirement_ids)
+        self.assertIn(direct_verification, fixture.expected_verification_ids)
 
         registry = benchmark._load_registry(ROOT)
         known_issues = benchmark._known_issues(ROOT, registry)
@@ -368,7 +592,7 @@ class BenchmarkTest(unittest.TestCase):
             applicable_requirement_ids=tuple(
                 identifier
                 for identifier in fixture.applicable_requirement_ids
-                if identifier != transitive_requirement
+                if identifier != direct_requirement
             ),
         )
         requirement_result = benchmark._measure_scenario(
@@ -377,7 +601,7 @@ class BenchmarkTest(unittest.TestCase):
         self.assertFalse(requirement_result.passed)
         self.assertEqual(
             requirement_result.unexpected_requirement_ids,
-            (transitive_requirement,),
+            (direct_requirement,),
         )
 
         without_verification = replace(
@@ -385,7 +609,7 @@ class BenchmarkTest(unittest.TestCase):
             expected_verification_ids=tuple(
                 identifier
                 for identifier in fixture.expected_verification_ids
-                if identifier != transitive_verification
+                if identifier != direct_verification
             ),
         )
         verification_result = benchmark._measure_scenario(
@@ -394,15 +618,19 @@ class BenchmarkTest(unittest.TestCase):
         self.assertFalse(verification_result.passed)
         self.assertEqual(
             verification_result.unexpected_verification_ids,
-            (transitive_verification,),
+            (direct_verification,),
         )
 
-    def test_dependency_graph_fails_closed_for_semantically_empty_dependency(self):
+    def test_empty_scope_unmatched_dependency_contributes_no_semantics(self):
         benchmark = self.benchmark_module()
         from tools.ambitions_canon import task_pack as task_pack_module
 
         registry = benchmark._load_registry(ROOT)
-        fixture = benchmark.load_benchmark_fixtures(FIXTURES)[0]
+        fixture = next(
+            item
+            for item in benchmark.load_benchmark_fixtures(FIXTURES)
+            if item.scenario_id == "today-swiftui"
+        )
         roots = task_pack_module._scope_documents(registry, fixture.intake.scope)
         closure = task_pack_module._dependency_closure(registry, roots)
         emptied = tuple(
@@ -412,11 +640,12 @@ class BenchmarkTest(unittest.TestCase):
             for document in closure
         )
 
-        with self.assertRaises(CanonError) as raised:
-            task_pack_module._requirement_inclusion_graph(
-                roots, emptied, fixture.intake.scope
-            )
-        self.assertEqual(raised.exception.code, "PACK_DEPENDENCY_SEMANTICS_EMPTY")
+        graph = task_pack_module._requirement_inclusion_graph(
+            roots, emptied, fixture.intake.scope
+        )
+
+        self.assertIn("SURFACE-TODAY", graph)
+        self.assertNotIn("APP-SHELL", graph)
 
     def test_each_scenario_has_owner_validation_proof_and_approved_budget(self):
         benchmark = self.benchmark_module()
@@ -646,10 +875,10 @@ class BenchmarkTest(unittest.TestCase):
             scenarios["accessibility-repair"]["implementation_posture"]
         )
         release = json.loads(scenarios["release-proof-claim"]["implementation_posture"])
-        self.assertEqual(accessibility["source_gap_requirement_count"], 3)
-        self.assertEqual(accessibility["applicable_requirement_count"], 3)
-        self.assertEqual(release["source_gap_requirement_count"], 48)
-        self.assertEqual(release["applicable_requirement_count"], 235)
+        self.assertEqual(accessibility["source_gap_requirement_count"], 10)
+        self.assertEqual(accessibility["applicable_requirement_count"], 10)
+        self.assertEqual(release["source_gap_requirement_count"], 15)
+        self.assertEqual(release["applicable_requirement_count"], 31)
         a11y = next(
             item
             for item in release["source_gap_records"]

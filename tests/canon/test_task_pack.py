@@ -80,6 +80,8 @@ def document(
     inherits: tuple[str, ...] = (),
     depends_on: tuple[str, ...] = (),
     source_owners: tuple[str, ...] = (),
+    profile: str | None = None,
+    source_bytes: bytes | None = None,
 ) -> CanonDocument:
     return CanonDocument(
         spec_id=spec_id,
@@ -88,7 +90,7 @@ def document(
         status="normative",
         owner_domain="product",
         canon_revision=1,
-        profile=None,
+        profile=profile,
         owns_concepts=concepts,
         inherits=inherits,
         depends_on=depends_on,
@@ -97,7 +99,7 @@ def document(
         not_applicable=(),
         requirements=requirements,
         source_path=Path(f"docs/canon/{spec_id.lower()}.md"),
-        source_bytes=f"source:{spec_id}\n".encode(),
+        source_bytes=source_bytes or f"source:{spec_id}\n".encode(),
     )
 
 
@@ -252,6 +254,37 @@ def known_issue(
     }
 
 
+STANDARD_PROFILE_SECTIONS = (
+    "purpose",
+    "scope",
+    "requirements",
+    "exceptions",
+    "verification",
+    "source-ownership",
+    "proof",
+    "amendment-impact",
+)
+
+
+def standard_profile_source(section_lines: tuple[str, ...]) -> bytes:
+    front_matter = (
+        "+++\n"
+        'spec_id = "STANDARD-NATIVE"\n'
+        'title = "STANDARD-NATIVE"\n'
+        'kind = "standard"\n'
+        'status = "normative"\n'
+        'owner_domain = "product"\n'
+        "canon_revision = 1\n"
+        'profile = "standard-v1"\n'
+        'owns_concepts = ["standard.native-ios"]\n'
+        'inherits = ["MISSION-001"]\n'
+        "depends_on = []\n"
+        "source_owners = []\n"
+        "+++\n\n# Standard\n\n"
+    )
+    return (front_matter + "\n".join(section_lines) + "\n").encode()
+
+
 def initialize_empty_cli_root(root: Path) -> Path:
     canon = root / "docs" / "canon"
     canon.mkdir(parents=True)
@@ -362,18 +395,16 @@ class TaskIntakeTests(unittest.TestCase):
 
 
 class TaskPackTests(unittest.TestCase):
-    def test_dependency_closure_includes_inherited_law_objects_and_not_time(self):
+    def test_scope_contract_excludes_unmatched_direct_dependency_semantics(self):
         pack = build_task_pack(sample_registry(), intake(), "repo-sha", ())
 
         self.assertEqual(pack.constitutional_laws, ("MISSION-001",))
-        self.assertEqual(
-            pack.specifications,
-            ("SURFACE-TODAY", "SYSTEM-RUNTIME"),
-        )
-        self.assertEqual(pack.object_lifecycles, ("OBJECT-STEP",))
-        self.assertEqual(pack.journeys, ("JOURNEY-START",))
-        self.assertEqual(pack.standards, ("STANDARD-NATIVE",))
+        self.assertEqual(pack.specifications, ("SURFACE-TODAY",))
+        self.assertEqual(pack.object_lifecycles, ())
+        self.assertEqual(pack.journeys, ())
+        self.assertEqual(pack.standards, ())
         self.assertNotIn("SURFACE-TIME", pack.to_markdown())
+        self.assertNotIn("SYSTEM-RUNTIME", pack.to_markdown())
         self.assertNotIn("Native/Ambitions/Surfaces/Time", pack.source_owners)
 
     def test_direct_constitution_scopes_include_law_bodies_without_unrelated_specs(
@@ -397,6 +428,228 @@ class TaskPackTests(unittest.TestCase):
                     self.assertIn("Required law for MISSION-001.", pack.to_markdown())
                     self.assertEqual(pack.specifications, ())
                     self.assertNotIn("SURFACE-TIME", pack.to_markdown())
+
+    def test_inherited_constitutional_laws_embed_complete_bodies(self):
+        pack = build_task_pack(sample_registry(), intake(), "repo-sha", ())
+
+        self.assertIn("Required law for MISSION-001.", pack.to_markdown())
+        self.assertNotIn(
+            "Complete inherited-law bodies are bound by the Canon SHA and referenced",
+            pack.to_markdown(),
+        )
+
+    def test_profile_section_bodies_are_rendered_for_selected_semantic_documents(self):
+        registry = sample_registry()
+        lines = tuple(
+            value
+            for section in STANDARD_PROFILE_SECTIONS
+            for value in (
+                f"<!-- canon-section: {section} -->",
+                {
+                    "purpose": "Own the exact local mutation boundary.",
+                    "verification": "Execute the runtime scenario matrix.",
+                    "proof": "Retain exact-commit runtime receipts.",
+                }.get(section, f"Body for {section}."),
+            )
+        )
+        profiled = tuple(
+            replace(
+                item,
+                profile="standard-v1",
+                sections=frozenset(STANDARD_PROFILE_SECTIONS),
+                source_bytes=standard_profile_source(lines),
+            )
+            if item.spec_id == "STANDARD-NATIVE"
+            else item
+            for item in registry.documents
+        )
+        pack = build_task_pack(
+            replace(registry, documents=profiled),
+            replace(intake(), scope=("STANDARD-NATIVE", "surface.today")),
+            "repo-sha",
+            (),
+        )
+
+        markdown = pack.to_markdown()
+        self.assertIn("Own the exact local mutation boundary.", markdown)
+        self.assertIn("Execute the runtime scenario matrix.", markdown)
+        self.assertIn("Retain exact-commit runtime receipts.", markdown)
+
+    def test_changed_file_boundary_is_distinct_from_coupled_canonical_owners(self):
+        pack = build_task_pack(sample_registry(), intake(), "repo-sha", ())
+
+        markdown = pack.to_markdown()
+        self.assertIn("Declared changed-file boundary", markdown)
+        self.assertIn("Native/Ambitions/Surfaces/Today", markdown)
+        self.assertIn("Coupled canonical owners", markdown)
+
+    def test_validation_and_proof_are_exact_for_selected_claim_contract(self):
+        pack = build_task_pack(sample_registry(), intake(), "repo-sha", ())
+
+        self.assertIn(
+            "Execute selected verification contracts: SCENARIO-MISSION-001, "
+            "SCENARIO-TODAY-001, SCENARIO-TODAY-002.",
+            pack.required_validation,
+        )
+        self.assertIn(
+            "Claim-specific proof for claim_type=source must cover changed-file "
+            "boundary Native/Ambitions/Surfaces/Today and applicable requirements "
+            "SURFACE-TODAY, TODAY-001, TODAY-002.",
+            pack.required_proof,
+        )
+
+    def test_direct_scoped_dependencies_are_kind_neutral_and_missing_owner_fails(self):
+        base = sample_registry()
+        root = next(item for item in base.documents if item.spec_id == "SURFACE-TODAY")
+        dependencies = tuple(
+            document(
+                f"DEPENDENCY-{kind.value.upper()}",
+                kind=kind,
+                concepts=(f"dependency.{kind.value}",),
+                requirements=(
+                    requirement(
+                        f"DEPENDENCY-{kind.value.upper()}-001",
+                        "surface.today.coupled-contract",
+                    ),
+                ),
+            )
+            for kind in (
+                DocumentKind.OBJECT,
+                DocumentKind.APP,
+                DocumentKind.SURFACE,
+                DocumentKind.GLOBAL,
+            )
+        )
+        rooted = replace(root, depends_on=tuple(item.spec_id for item in dependencies))
+        closure = (rooted, *dependencies)
+
+        graph = task_pack_module._requirement_inclusion_graph(
+            (rooted,), closure, ("surface.today",)
+        )
+
+        self.assertEqual(
+            set(graph),
+            {rooted.spec_id, *(item.spec_id for item in dependencies)},
+        )
+        for dependency in dependencies:
+            self.assertEqual(
+                graph[dependency.spec_id],
+                (dependency.requirements[0].requirement_id,),
+            )
+        with self.assertRaises(CanonError) as raised:
+            task_pack_module._requirement_inclusion_graph(
+                (rooted,), closure[:-1], ("surface.today",)
+            )
+        self.assertEqual(raised.exception.code, "PACK_DEPENDENCY_OWNER_MISSING")
+
+        unrelated = document(
+            "DEPENDENCY-UNRELATED",
+            kind=DocumentKind.APP,
+            concepts=("dependency.unrelated",),
+            requirements=(requirement("DEPENDENCY-UNRELATED-001", "app.unrelated"),),
+        )
+        unrelated_root = replace(rooted, depends_on=(unrelated.spec_id,))
+        self.assertNotIn(
+            unrelated.spec_id,
+            task_pack_module._requirement_inclusion_graph(
+                (unrelated_root,), (unrelated_root, unrelated), ("surface.today",)
+            ),
+        )
+        with self.assertRaises(CanonError) as unrelated_error:
+            task_pack_module._requirement_inclusion_graph(
+                (unrelated_root,), (unrelated_root,), ("surface.today",)
+            )
+        self.assertEqual(
+            unrelated_error.exception.code, "PACK_DEPENDENCY_OWNER_MISSING"
+        )
+
+    def test_object_root_uses_same_scoped_direct_dependency_contract(self):
+        parent = document(
+            "OBJECT-PARENT",
+            kind=DocumentKind.OBJECT,
+            concepts=("object.parent",),
+            requirements=(requirement("OBJECT-PARENT-001", "object.parent"),),
+            depends_on=("APP-COUPLED",),
+        )
+        dependency = document(
+            "APP-COUPLED",
+            kind=DocumentKind.APP,
+            concepts=("app.coupled",),
+            requirements=(
+                requirement("APP-COUPLED-001", "object.parent.coupled-contract"),
+            ),
+        )
+
+        graph = task_pack_module._requirement_inclusion_graph(
+            (parent,), (parent, dependency), ("object.parent",)
+        )
+
+        self.assertIn("APP-COUPLED", graph)
+
+    def test_explicit_spec_scope_selects_the_complete_contract(self):
+        contract = document(
+            "STANDARD-COMPLETE",
+            kind=DocumentKind.STANDARD,
+            concepts=("standard.complete",),
+            requirements=(
+                requirement("STANDARD-COMPLETE-001", "standard.complete.first"),
+                requirement("STANDARD-COMPLETE-002", "standard.complete.second"),
+            ),
+        )
+
+        graph = task_pack_module._requirement_inclusion_graph(
+            (contract,), (contract,), ("STANDARD-COMPLETE",)
+        )
+
+        self.assertEqual(
+            graph[contract.spec_id],
+            ("STANDARD-COMPLETE-001", "STANDARD-COMPLETE-002"),
+        )
+
+    def test_profile_marker_parser_ignores_fenced_markers_and_rejects_open_sets(self):
+        standard = next(
+            item for item in sample_registry().documents if item.spec_id == "STANDARD-NATIVE"
+        )
+        lines: list[str] = []
+        for section in STANDARD_PROFILE_SECTIONS:
+            lines.append(f"<!-- canon-section: {section} -->")
+            if section == "purpose":
+                lines.extend(
+                    (
+                        "Purpose before fence.",
+                        "```markdown",
+                        "<!-- canon-section: proof -->",
+                        "not a real marker",
+                        "```",
+                        "Purpose after fence.",
+                    )
+                )
+            else:
+                lines.append(f"Body for {section}.")
+        profiled = replace(
+            standard,
+            profile="standard-v1",
+            sections=frozenset(STANDARD_PROFILE_SECTIONS),
+            source_bytes=standard_profile_source(tuple(lines)),
+        )
+
+        bodies = task_pack_module.profile_section_bodies(profiled)
+
+        self.assertEqual(tuple(section for section, _ in bodies), STANDARD_PROFILE_SECTIONS)
+        self.assertIn("<!-- canon-section: proof -->", bodies[0][1])
+        self.assertIn("Purpose after fence.", bodies[0][1])
+
+        duplicate_lines = (*lines, "<!-- canon-section: proof -->", "Duplicate proof.")
+        duplicate = replace(profiled, source_bytes=standard_profile_source(duplicate_lines))
+        with self.assertRaises(CanonError) as duplicate_error:
+            task_pack_module.profile_section_bodies(duplicate)
+        self.assertEqual(duplicate_error.exception.code, "PACK_PROFILE_CONTRACT_INVALID")
+
+        extra_lines = (*lines, "<!-- canon-section: unapproved -->", "Extra body.")
+        extra = replace(profiled, source_bytes=standard_profile_source(extra_lines))
+        with self.assertRaises(CanonError) as extra_error:
+            task_pack_module.profile_section_bodies(extra)
+        self.assertEqual(extra_error.exception.code, "PACK_PROFILE_CONTRACT_INVALID")
 
     def test_output_is_deterministic_and_section_order_is_fixed(self):
         first = build_task_pack(sample_registry(), intake(), "repo-sha", ())
