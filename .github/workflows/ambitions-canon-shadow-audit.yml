@@ -21,6 +21,8 @@ jobs:
     steps:
       - name: Checkout exact commit
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Use Python 3.12
         uses: actions/setup-python@v5
@@ -38,6 +40,9 @@ jobs:
 
       - name: Compile canon compiler
         run: python3 -m compileall -q tools/ambitions_canon scripts/ambitions-canon.py
+
+      - name: Verify tracked semantic comparison receipt
+        run: python3 scripts/ambitions-canon.py semantic-review --check-receipt
 
       - name: Audit shadow canon
         run: python3 scripts/ambitions-canon.py audit

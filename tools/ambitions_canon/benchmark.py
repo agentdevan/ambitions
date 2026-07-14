@@ -6,6 +6,7 @@ import hashlib
 import json
 import os
 import re
+import subprocess
 import tempfile
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
@@ -118,6 +119,63 @@ _SEMANTIC_DIMENSION_FIELDS = frozenset(
 _SEMANTIC_VERDICTS = frozenset({"old_better", "new_better", "equivalent"})
 _SEMANTIC_RESPONSE_FIELDS = frozenset(
     {"schema_version", "reviewer", "model", "response"}
+)
+SEMANTIC_RECEIPT_PATH = Path(
+    "docs/qa/evidence/2026-07-13-canon-train-4-semantic-comparison/receipt.json"
+)
+EVALUATED_TASK_PACK_PATHS = (
+    "tools/ambitions_canon/coverage.py",
+    "tools/ambitions_canon/task_pack.py",
+    "tests/canon/fixtures/benchmarks/01-today-swiftui.json",
+    "tests/canon/fixtures/benchmarks/02-time-recurrence.json",
+    "tests/canon/fixtures/benchmarks/03-capture-proposal.json",
+    "tests/canon/fixtures/benchmarks/04-local-runtime-mutation.json",
+    "tests/canon/fixtures/benchmarks/05-cloudkit-continuity.json",
+    "tests/canon/fixtures/benchmarks/06-public-reference-boundary.json",
+    "tests/canon/fixtures/benchmarks/07-accessibility-repair.json",
+    "tests/canon/fixtures/benchmarks/08-release-proof-claim.json",
+)
+_SEMANTIC_RECEIPT_ID = "train-4-task-21-final-semantic-comparison"
+_SEMANTIC_RECEIPT_CLAIM_CEILING = (
+    "This receipt records an explicit non-CI shadow comparison only. It does not "
+    "authorize implementation or claim product, runtime, source, visual, "
+    "accessibility, privacy, device, TestFlight, App Store, or release Green."
+)
+_SEMANTIC_RECEIPT_ROOT_FIELDS = frozenset(
+    {
+        "schema_version",
+        "receipt_id",
+        "lane",
+        "authority_state",
+        "evaluated_task_pack_commit",
+        "compiler_version",
+        "canon_sha256",
+        "old_prompt_sha256",
+        "new_prompt_sha256",
+        "pack_hashes",
+        "old_response",
+        "new_response",
+        "comparison",
+        "claim_ceiling",
+    }
+)
+_SEMANTIC_RECEIPT_PACK_FIELDS = frozenset(
+    {"scenario_id", "markdown_sha256", "json_sha256"}
+)
+_SEMANTIC_RECEIPT_RESPONSE_FIELDS = frozenset({"sha256", "reviewer", "model"})
+_SEMANTIC_RECEIPT_COMPARISON_FIELDS = frozenset(
+    {
+        "sha256",
+        "reviewer",
+        "model",
+        "dimensions",
+        "overall_verdict",
+        "old_total_score",
+        "new_total_score",
+    }
+)
+_SEMANTIC_RECEIPT_DIMENSION_FIELDS = frozenset(
+    {"dimension", "verdict", "old_score", "new_score"}
 )
 
 
@@ -1035,6 +1093,348 @@ def _write_json_atomic(path: Path, payload: Mapping[str, object]) -> None:
     except BaseException:
         temporary_path.unlink(missing_ok=True)
         raise
+
+
+def regenerate_semantic_receipt_bindings(root: Path) -> dict[str, object]:
+    """Regenerate only deterministic prompts and packs from tracked checkout state."""
+
+    outputs = build_semantic_review_bundle(
+        root,
+        root / BENCHMARK_FIXTURE_DIR,
+        reviewer="Offline tracked receipt validator",
+        model="deterministic-no-model-execution",
+    )
+    record = json.loads(outputs[Path("semantic-review-record.json")])
+    manifest = load_manifest(root)
+    return {
+        "compiler_version": manifest.compiler_version,
+        "canon_sha256": record["canon_sha256"],
+        "old_prompt_sha256": record["old_prompt_sha256"],
+        "new_prompt_sha256": record["new_prompt_sha256"],
+        "pack_hashes": record["pack_hashes"],
+    }
+
+
+def load_and_validate_semantic_receipt(root: Path) -> dict[str, object]:
+    """Load the tracked canonical JSON receipt and validate every offline binding."""
+
+    path = root / SEMANTIC_RECEIPT_PATH
+    try:
+        raw = path.read_bytes()
+        receipt = json.loads(raw.decode("utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        raise CanonError(
+            "SEMANTIC_RECEIPT_INVALID",
+            "tracked semantic receipt must be valid UTF-8 JSON",
+            path,
+        ) from exc
+    if not isinstance(receipt, dict):
+        raise _semantic_receipt_invalid(
+            "tracked semantic receipt must be an object", path
+        )
+    canonical = (
+        json.dumps(receipt, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+    ).encode("utf-8")
+    if raw != canonical:
+        raise _semantic_receipt_invalid(
+            "tracked semantic receipt must use canonical JSON bytes", path
+        )
+    validate_semantic_receipt(root, receipt)
+    return receipt
+
+
+def validate_semantic_receipt(
+    root: Path, receipt: Mapping[str, object]
+) -> None:
+    """Fail closed on malformed, stale, or policy-invalid receipt evidence."""
+
+    path = root / SEMANTIC_RECEIPT_PATH
+    _validate_semantic_receipt_closed_schema(receipt, path)
+    evaluated_commit = str(receipt["evaluated_task_pack_commit"])
+    current_pack_commit = _semantic_receipt_current_pack_commit(root, path)
+    if evaluated_commit != current_pack_commit:
+        raise _semantic_receipt_stale(
+            "evaluated task-pack commit does not match checkout", path
+        )
+    _semantic_receipt_require_ancestor(root, evaluated_commit, path)
+    _semantic_receipt_require_evaluated_pack_bytes(root, evaluated_commit, path)
+
+    regenerated = regenerate_semantic_receipt_bindings(root)
+    for field, expected in regenerated.items():
+        if receipt[field] != expected:
+            raise _semantic_receipt_stale(
+                f"{field} does not match regenerated checkout bytes", path
+            )
+
+    comparison = receipt["comparison"]
+    assert isinstance(comparison, Mapping)
+    _validate_semantic_receipt_comparison_policy(comparison, path)
+
+
+def _validate_semantic_receipt_closed_schema(
+    receipt: Mapping[str, object], path: Path
+) -> None:
+    if set(receipt) != _SEMANTIC_RECEIPT_ROOT_FIELDS:
+        raise _semantic_receipt_invalid("semantic receipt root fields are closed", path)
+    if type(receipt["schema_version"]) is not int or receipt["schema_version"] != 1:
+        raise _semantic_receipt_invalid(
+            "semantic receipt schema_version must be integer 1", path
+        )
+    exact_values = {
+        "receipt_id": _SEMANTIC_RECEIPT_ID,
+        "lane": "explicit_non_ci_semantic_review",
+        "authority_state": "shadow",
+        "claim_ceiling": _SEMANTIC_RECEIPT_CLAIM_CEILING,
+    }
+    for field, expected in exact_values.items():
+        if receipt[field] != expected:
+            raise _semantic_receipt_invalid(
+                f"semantic receipt {field} is outside its closed value", path
+            )
+    _semantic_receipt_require_pattern(
+        receipt["evaluated_task_pack_commit"], _GIT_SHA, path
+    )
+    if not isinstance(receipt["compiler_version"], str) or not receipt[
+        "compiler_version"
+    ]:
+        raise _semantic_receipt_invalid(
+            "compiler_version must be a non-empty string", path
+        )
+    for field in ("canon_sha256", "old_prompt_sha256", "new_prompt_sha256"):
+        _semantic_receipt_require_pattern(receipt[field], _SHA256, path)
+
+    packs = receipt["pack_hashes"]
+    if not isinstance(packs, list) or len(packs) != len(SCENARIO_ORDER):
+        raise _semantic_receipt_invalid(
+            "pack_hashes must contain the exact eight scenarios", path
+        )
+    scenario_ids: list[str] = []
+    for row in packs:
+        if not isinstance(row, Mapping) or set(row) != _SEMANTIC_RECEIPT_PACK_FIELDS:
+            raise _semantic_receipt_invalid("pack hash fields are closed", path)
+        scenario_ids.append(str(row["scenario_id"]))
+        _semantic_receipt_require_pattern(row["markdown_sha256"], _SHA256, path)
+        _semantic_receipt_require_pattern(row["json_sha256"], _SHA256, path)
+    if tuple(scenario_ids) != SCENARIO_ORDER:
+        raise _semantic_receipt_invalid(
+            "pack hashes must use the exact ordered scenario corpus", path
+        )
+
+    identities: list[str] = []
+    for name in ("old_response", "new_response"):
+        record = receipt[name]
+        if (
+            not isinstance(record, Mapping)
+            or set(record) != _SEMANTIC_RECEIPT_RESPONSE_FIELDS
+        ):
+            raise _semantic_receipt_invalid(f"{name} fields are closed", path)
+        _semantic_receipt_require_pattern(record["sha256"], _SHA256, path)
+        identities.append(
+            _semantic_receipt_require_attribution(record["reviewer"], path)
+        )
+        _semantic_receipt_require_attribution(record["model"], path)
+    if identities[0].casefold() == identities[1].casefold():
+        raise _semantic_receipt_invalid(
+            "old and new response reviewers must differ", path
+        )
+
+    comparison = receipt["comparison"]
+    if (
+        not isinstance(comparison, Mapping)
+        or set(comparison) != _SEMANTIC_RECEIPT_COMPARISON_FIELDS
+    ):
+        raise _semantic_receipt_invalid("comparison fields are closed", path)
+    _semantic_receipt_require_pattern(comparison["sha256"], _SHA256, path)
+    comparison_identity = _semantic_receipt_require_attribution(
+        comparison["reviewer"], path
+    )
+    _semantic_receipt_require_attribution(comparison["model"], path)
+    if comparison_identity.casefold() in {item.casefold() for item in identities}:
+        raise _semantic_receipt_invalid(
+            "comparison reviewer must be independent", path
+        )
+    dimensions = comparison["dimensions"]
+    if not isinstance(dimensions, list) or len(dimensions) != len(
+        SEMANTIC_COMPARISON_DIMENSIONS
+    ):
+        raise _semantic_receipt_invalid(
+            "comparison must contain exactly seven dimensions", path
+        )
+    parsed_dimensions: list[str] = []
+    for row in dimensions:
+        if (
+            not isinstance(row, Mapping)
+            or set(row) != _SEMANTIC_RECEIPT_DIMENSION_FIELDS
+        ):
+            raise _semantic_receipt_invalid(
+                "comparison dimension fields are closed", path
+            )
+        if not isinstance(row["dimension"], str):
+            raise _semantic_receipt_invalid(
+                "comparison dimension must be a string", path
+            )
+        parsed_dimensions.append(row["dimension"])
+        if row["verdict"] not in _SEMANTIC_VERDICTS:
+            raise _semantic_receipt_invalid(
+                "comparison verdict is outside its closed vocabulary", path
+            )
+        for field in ("old_score", "new_score"):
+            if type(row[field]) is not int or not 0 <= row[field] <= 4:
+                raise _semantic_receipt_invalid(
+                    "comparison scores must be integers from 0 through 4", path
+                )
+        if row["verdict"] != _score_verdict(row["old_score"], row["new_score"]):
+            raise _semantic_receipt_invalid(
+                "dimension verdict must match its scores", path
+            )
+    if tuple(parsed_dimensions) != SEMANTIC_COMPARISON_DIMENSIONS:
+        raise _semantic_receipt_invalid(
+            "comparison dimensions must use the exact ordered contract", path
+        )
+    if comparison["overall_verdict"] not in _SEMANTIC_VERDICTS:
+        raise _semantic_receipt_invalid(
+            "overall verdict is outside its closed vocabulary", path
+        )
+    for field in ("old_total_score", "new_total_score"):
+        if type(comparison[field]) is not int:
+            raise _semantic_receipt_invalid(
+                "comparison totals must be integers", path
+            )
+
+
+def _validate_semantic_receipt_comparison_policy(
+    comparison: Mapping[str, object], path: Path
+) -> None:
+    dimensions = comparison["dimensions"]
+    assert isinstance(dimensions, list)
+    old_total = sum(row["old_score"] for row in dimensions)
+    new_total = sum(row["new_score"] for row in dimensions)
+    if (
+        comparison["old_total_score"] != old_total
+        or comparison["new_total_score"] != new_total
+    ):
+        raise _semantic_receipt_invalid(
+            "comparison totals must equal dimension scores", path
+        )
+    if comparison["overall_verdict"] != _score_verdict(old_total, new_total):
+        raise _semantic_receipt_invalid(
+            "overall verdict must match comparison totals", path
+        )
+    if any(row["verdict"] == "old_better" for row in dimensions):
+        raise CanonError(
+            "SEMANTIC_RECEIPT_POLICY",
+            "tracked migration receipt cannot contain an old_better dimension",
+            path,
+        )
+    if new_total < old_total:
+        raise CanonError(
+            "SEMANTIC_RECEIPT_POLICY",
+            "tracked migration receipt cannot record a lower new-path total",
+            path,
+        )
+
+
+def _semantic_receipt_current_pack_commit(root: Path, path: Path) -> str:
+    result = _semantic_receipt_git(
+        root, "log", "-1", "--format=%H", "--", *EVALUATED_TASK_PACK_PATHS
+    )
+    commit = result.stdout.strip()
+    if not _GIT_SHA.fullmatch(commit):
+        raise _semantic_receipt_invalid(
+            "unable to resolve evaluated task-pack commit", path
+        )
+    return commit
+
+
+def _semantic_receipt_require_ancestor(
+    root: Path, commit: str, path: Path
+) -> None:
+    result = subprocess.run(
+        ("git", "merge-base", "--is-ancestor", commit, "HEAD"),
+        cwd=root,
+        check=False,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    if result.returncode != 0:
+        raise _semantic_receipt_stale(
+            "evaluated task-pack commit is not an ancestor of checkout", path
+        )
+
+
+def _semantic_receipt_require_evaluated_pack_bytes(
+    root: Path, commit: str, path: Path
+) -> None:
+    for relative in EVALUATED_TASK_PACK_PATHS:
+        try:
+            result = subprocess.run(
+                ("git", "show", f"{commit}:{relative}"),
+                cwd=root,
+                check=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+            )
+        except (OSError, subprocess.CalledProcessError) as exc:
+            raise _semantic_receipt_invalid(
+                "unable to read evaluated task-pack bytes", path
+            ) from exc
+        if (root / relative).read_bytes() != result.stdout:
+            raise _semantic_receipt_stale(
+                f"pack-defining bytes changed after {commit}: {relative}", path
+            )
+
+
+def _semantic_receipt_git(
+    root: Path, *arguments: str
+) -> subprocess.CompletedProcess[str]:
+    try:
+        return subprocess.run(
+            ("git", *arguments),
+            cwd=root,
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+    except (OSError, subprocess.CalledProcessError) as exc:
+        raise CanonError(
+            "SEMANTIC_RECEIPT_INVALID",
+            "unable to inspect tracked task-pack history",
+            root,
+        ) from exc
+
+
+def _semantic_receipt_require_pattern(
+    value: object, pattern: re.Pattern[str], path: Path
+) -> str:
+    if not isinstance(value, str) or pattern.fullmatch(value) is None:
+        raise _semantic_receipt_invalid(
+            "semantic receipt hash field is malformed", path
+        )
+    return value
+
+
+def _semantic_receipt_require_attribution(value: object, path: Path) -> str:
+    try:
+        normalized = normalize_visible_attribution(value)
+    except ValueError as exc:
+        raise _semantic_receipt_invalid(
+            "semantic receipt attribution must be visible text", path
+        ) from exc
+    if value != normalized:
+        raise _semantic_receipt_invalid(
+            "semantic receipt attribution must be normalized", path
+        )
+    return normalized
+
+
+def _semantic_receipt_invalid(message: str, path: Path) -> CanonError:
+    return CanonError("SEMANTIC_RECEIPT_INVALID", message, path)
+
+
+def _semantic_receipt_stale(message: str, path: Path) -> CanonError:
+    return CanonError("SEMANTIC_RECEIPT_STALE", message, path)
 
 
 def _load_registry(root: Path) -> CanonRegistry:

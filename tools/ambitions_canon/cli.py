@@ -23,6 +23,7 @@ from tools.ambitions_canon.build import (
 from tools.ambitions_canon.benchmark import (
     BENCHMARK_FIXTURE_DIR,
     BENCHMARK_REPORT,
+    load_and_validate_semantic_receipt,
     run_benchmark,
     write_benchmark_report,
     write_representative_packs,
@@ -156,8 +157,13 @@ def main(argv: Sequence[str] | None = None) -> int:
         "semantic-review",
         help="prepare or record an explicit non-CI symmetric semantic review",
     )
-    semantic_review_parser.add_argument("--reviewer", required=True)
-    semantic_review_parser.add_argument("--model", required=True)
+    semantic_review_parser.add_argument("--reviewer")
+    semantic_review_parser.add_argument("--model")
+    semantic_review_parser.add_argument(
+        "--check-receipt",
+        action="store_true",
+        help="validate the tracked comparison receipt offline without raw evidence",
+    )
     response_help = (
         "strict closed JSON with schema_version/reviewer/model/response fields"
     )
@@ -347,6 +353,25 @@ def main(argv: Sequence[str] | None = None) -> int:
         return _benchmark(Path.cwd())
 
     if arguments.command == "semantic-review":
+        if arguments.check_receipt:
+            if any(
+                value is not None
+                for value in (
+                    arguments.reviewer,
+                    arguments.model,
+                    arguments.old_response,
+                    arguments.new_response,
+                    arguments.comparison,
+                )
+            ):
+                semantic_review_parser.error(
+                    "--check-receipt cannot be combined with review recording options"
+                )
+            return _semantic_review_receipt_check(Path.cwd())
+        if arguments.reviewer is None or arguments.model is None:
+            semantic_review_parser.error(
+                "semantic-review recording requires --reviewer and --model"
+            )
         return _semantic_review(
             Path.cwd(),
             reviewer=arguments.reviewer,
@@ -1279,6 +1304,31 @@ def _semantic_review(
                 "unable to read semantic response evidence",
             )
         location = error.path.as_posix() if error.path is not None else "<semantic-review>"
+        print(f"P0_BLOCKER {error.code} {location}:{error.line or 0} {error.message}")
+        return 1
+
+
+def _semantic_review_receipt_check(root: Path) -> int:
+    """Validate tracked semantic evidence bindings without raw or ignored inputs."""
+
+    try:
+        receipt = load_and_validate_semantic_receipt(root)
+        comparison = receipt["comparison"]
+        assert isinstance(comparison, dict)
+        print(
+            "GREEN ambitions canon semantic-review receipt "
+            f"packs={len(receipt['pack_hashes'])} "
+            f"verdict={comparison['overall_verdict']} "
+            f"scores={comparison['old_total_score']}/{comparison['new_total_score']}"
+        )
+        return 0
+    except (OSError, CanonError) as error:
+        if not isinstance(error, CanonError):
+            error = CanonError(
+                "SEMANTIC_RECEIPT_INVALID",
+                "unable to validate tracked semantic receipt",
+            )
+        location = error.path.as_posix() if error.path is not None else "<receipt>"
         print(f"P0_BLOCKER {error.code} {location}:{error.line or 0} {error.message}")
         return 1
 
