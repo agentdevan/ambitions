@@ -3,7 +3,7 @@
 > Deterministic offline benchmark evidence; not product, runtime, visual, accessibility, privacy, device, TestFlight, App Store, or release proof.
 
 - Canon revision: `1`
-- Canon SHA: `542b43f356bfdca724a808681dbe91f0cfed1923a8e5aab683c50f7114779399`
+- Canon SHA: `9f56bdf001a9ec6d33a9c383b6457e2ef2af3e52fa7b207eb168f16c873ed752`
 - Authority state: `shadow`
 - Token estimate: deterministic four-characters-per-token ceiling
 

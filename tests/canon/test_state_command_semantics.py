@@ -67,7 +67,7 @@ class StateCommandSemanticTests(unittest.TestCase):
             for command in contract.commands
         ]
         self.assertEqual(len(self.contracts), 267)
-        self.assertEqual(len(commands), 330)
+        self.assertEqual(len(commands), 328)
         banned = (
             "command review for ux-state-variant-",
             "truthful status for ux-state-variant-",
@@ -325,7 +325,7 @@ class StateCommandSemanticTests(unittest.TestCase):
         self.assert_semantics(app_lock, "local authentication", "App Lock setting", "Receipt")
 
     def test_trust_commands_distinguish_inspect_correct_save_history_receipt_undo_and_privacy(self):
-        state = "UX-STATE-VARIANT-TRUST-DEEP-CORRECTION-REQUIRED"
+        state = "UX-STATE-VARIANT-TRUST-DEEP-CORRECTING"
         correct = self.command(state, "Correct")
         save = self.command(state, "Save correction")
         history = self.command(
@@ -343,7 +343,7 @@ class StateCommandSemanticTests(unittest.TestCase):
             "Review privacy",
         )
         self.assert_semantics(correct, "before", "current", "proposed", "non-mutating")
-        self.assert_semantics(save, "typed correction", "canonical owner", "Receipt", "History")
+        self.assert_semantics(save, "typed correction", "canonical-owner", "Receipt", "History")
         self.assertNotEqual(correct.destination, save.destination)
         self.assertNotEqual(correct.effect, save.effect)
         self.assert_semantics(
@@ -352,6 +352,77 @@ class StateCommandSemanticTests(unittest.TestCase):
         self.assert_semantics(receipt, "stable Receipt ID", "local inspection", "non-mutating")
         self.assert_semantics(undo, "reversing event", "resulting status", "Receipt")
         self.assert_semantics(privacy, "classification", "destination", "retention", "deny")
+
+    def test_terminal_delete_trash_and_correction_states_only_dismiss_without_mutation(self):
+        cases = (
+            (
+                "UX-STATE-VARIANT-YOU-DATA-PERMANENT-DELETE-IRREVERSIBLE",
+                "the surviving You data root",
+                "the Data and Storage heading and irreversible result",
+                ("Delete local data permanently",),
+                ("deletion command", "append", "restore"),
+            ),
+            (
+                "UX-STATE-VARIANT-YOU-DATA-TRASH-EMPTY",
+                "the You Data and Storage root",
+                "the Trash entry control",
+                ("Restore",),
+                ("restore command", "append", "trashed object identity"),
+            ),
+            (
+                "UX-STATE-VARIANT-TRUST-DEEP-CORRECTION-COMPLETE",
+                "the initiating object or fact inspection",
+                "the corrected value and correction Receipt",
+                ("Correct", "Save correction"),
+                ("typed correction", "append", "proposed correction field"),
+            ),
+            (
+                "UX-STATE-VARIANT-TRUST-DEEP-CORRECTION-REQUIRED",
+                "the initiating object or fact inspection",
+                "the conflicting claim and evidence",
+                ("Correct", "Save correction"),
+                ("typed correction", "append", "proposed correction field"),
+            ),
+        )
+
+        for state_id, destination, focus, impossible_labels, forbidden in cases:
+            with self.subTest(state=state_id):
+                commands = self.contracts[state_id].commands
+                labels = {command.label for command in commands}
+                for label in impossible_labels:
+                    self.assertNotIn(label, labels)
+                self.assertEqual(labels, {"Done"})
+                if labels != {"Done"}:
+                    continue
+                done = commands[0]
+                self.assertIn(destination, done.destination)
+                self.assertIn(focus, done.success_focus)
+                self.assertTrue(done.commit_boundary.startswith("Non-mutating:"))
+                self.assertIn("no canonical commit", done.commit_boundary)
+                self.assertIn("No durable mutation occurs", done.effect)
+                self.assertIn("no Receipt is created", done.effect)
+                self.assertIn("No Undo is required", done.rollback_undo)
+                semantic_text = self.semantic_text(done)
+                for phrase in forbidden:
+                    self.assertNotIn(phrase.casefold(), semantic_text)
+
+    def test_review_cited_malformed_prose_is_absent_from_owning_specs(self):
+        cases = (
+            (
+                "app/shell.md",
+                "Capture, Search, / Trust inspection",
+            ),
+            (
+                "surfaces/time.md",
+                "store, objects, / last verified projection",
+            ),
+        )
+        for relative, malformed in cases:
+            with self.subTest(path=relative):
+                text = (
+                    ROOT / "docs/canon/specifications" / relative
+                ).read_text(encoding="utf-8")
+                self.assertNotIn(malformed, text)
 
     def test_parser_rejects_generic_state_id_interpolation(self):
         path = ROOT / "docs/canon/specifications/app/shell.md"

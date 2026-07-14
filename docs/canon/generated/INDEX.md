@@ -6,7 +6,7 @@
 - Canon revision: `1`
 - Authority state: `shadow`
 - Compiler version: `0.2.0`
-- Canon content SHA: `d46b2bfa6a73b74498ab6a80f0f4a2d9366ab325ad0ab0e43940c7a37b90857e`
+- Canon content SHA: `e3f9d8930e59a04e00860927e2655f706fc4fcc12e5c0a3153473b15adc6dd48`
 
 ## Specifications
 
@@ -350,7 +350,7 @@
 | `SPEC-APP-SHELL-FIRST-VIEWPORT-001` | MUST | `app.shell.first-viewport` | `docs/canon/specifications/app/shell.md:641` |
 | `SPEC-APP-SHELL-GLOBAL-ACTIONS-001` | MUST | `app.shell.global-actions` | `docs/canon/specifications/app/shell.md:626` |
 | `SPEC-APP-SHELL-ROOT-NAVIGATION-001` | MUST | `app.shell.root-navigation` | `docs/canon/specifications/app/shell.md:597` |
-| `SPEC-COMPLETED-CONTEXTUAL-PLACEMENT-001` | MUST NOT | `global.completed.contextual-placement` | `docs/canon/specifications/global/trust-inspection.md:1157` |
+| `SPEC-COMPLETED-CONTEXTUAL-PLACEMENT-001` | MUST NOT | `global.completed.contextual-placement` | `docs/canon/specifications/global/trust-inspection.md:1129` |
 | `SPEC-GLOBAL-CAPTURE-ATTACHMENT-INTAKE-001` | MUST | `global.capture.attachment-intake` | `docs/canon/specifications/global/capture.md:925` |
 | `SPEC-GLOBAL-CAPTURE-CLASSIFICATION-001` | MUST | `global.capture.classification` | `docs/canon/specifications/global/capture.md:914` |
 | `SPEC-GLOBAL-CAPTURE-CLOSE-BEHAVIOR-001` | MUST | `global.capture.close-behavior` | `docs/canon/specifications/global/capture.md:1022` |
@@ -371,11 +371,11 @@
 | `SPEC-GLOBAL-SEARCH-INDEX-ACTIONS-001` | MUST | `global.search.index-actions` | `docs/canon/specifications/global/search.md:60` |
 | `SPEC-GLOBAL-SEARCH-PLACEMENT-001` | MUST | `global.search.placement` | `docs/canon/specifications/global/search.md:175` |
 | `SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001` | MUST | `global.search.visual-authority` | `docs/canon/specifications/global/search.md:71` |
-| `SPEC-GLOBAL-TRUST-COMMAND-CONTRACT-001` | MUST | `global.trust.command-contract` | `docs/canon/specifications/global/trust-inspection.md:1071` |
-| `SPEC-GLOBAL-TRUST-INSPECTION-001` | MUST | `global.trust.identity` | `docs/canon/specifications/global/trust-inspection.md:1016` |
-| `SPEC-GLOBAL-TRUST-LAYERS-001` | MUST | `global.trust.layers` | `docs/canon/specifications/global/trust-inspection.md:1033` |
-| `SPEC-GLOBAL-TRUST-PROPORTIONAL-RECEIPTS-001` | MUST | `global.trust.proportional-receipts` | `docs/canon/specifications/global/trust-inspection.md:1050` |
-| `SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001` | MUST | `global.trust.visual-authority` | `docs/canon/specifications/global/trust-inspection.md:1060` |
+| `SPEC-GLOBAL-TRUST-COMMAND-CONTRACT-001` | MUST | `global.trust.command-contract` | `docs/canon/specifications/global/trust-inspection.md:1043` |
+| `SPEC-GLOBAL-TRUST-INSPECTION-001` | MUST | `global.trust.identity` | `docs/canon/specifications/global/trust-inspection.md:988` |
+| `SPEC-GLOBAL-TRUST-LAYERS-001` | MUST | `global.trust.layers` | `docs/canon/specifications/global/trust-inspection.md:1005` |
+| `SPEC-GLOBAL-TRUST-PROPORTIONAL-RECEIPTS-001` | MUST | `global.trust.proportional-receipts` | `docs/canon/specifications/global/trust-inspection.md:1022` |
+| `SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001` | MUST | `global.trust.visual-authority` | `docs/canon/specifications/global/trust-inspection.md:1032` |
 | `SPEC-SURFACE-GOAL-DETAIL-VIEWPORT-001` | MUST | `surface.goal-detail.viewport` | `docs/canon/specifications/surfaces/goals.md:1631` |
 | `SPEC-SURFACE-GOALS-ANTI-PATTERNS-001` | MUST NOT | `surface.goals.anti-patterns` | `docs/canon/specifications/surfaces/goals.md:1494` |
 | `SPEC-SURFACE-GOALS-CLOSURE-001` | MUST | `surface.goals.closure` | `docs/canon/specifications/surfaces/goals.md:1576` |

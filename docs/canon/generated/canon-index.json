@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "d46b2bfa6a73b74498ab6a80f0f4a2d9366ab325ad0ab0e43940c7a37b90857e",
+  "canon_content_sha": "e3f9d8930e59a04e00860927e2655f706fc4fcc12e5c0a3153473b15adc6dd48",
   "canon_revision": 1,
   "compiler_version": "0.2.0",
   "documents": [
@@ -3005,7 +3005,7 @@
     },
     {
       "concept": "global.completed.contextual-placement",
-      "line": 1157,
+      "line": 1129,
       "modality": "MUST NOT",
       "requirement_id": "SPEC-COMPLETED-CONTEXTUAL-PLACEMENT-001",
       "source_path": "docs/canon/specifications/global/trust-inspection.md",
@@ -3194,7 +3194,7 @@
     },
     {
       "concept": "global.trust.command-contract",
-      "line": 1071,
+      "line": 1043,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-TRUST-COMMAND-CONTRACT-001",
       "source_path": "docs/canon/specifications/global/trust-inspection.md",
@@ -3203,7 +3203,7 @@
     },
     {
       "concept": "global.trust.identity",
-      "line": 1016,
+      "line": 988,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-TRUST-INSPECTION-001",
       "source_path": "docs/canon/specifications/global/trust-inspection.md",
@@ -3212,7 +3212,7 @@
     },
     {
       "concept": "global.trust.layers",
-      "line": 1033,
+      "line": 1005,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-TRUST-LAYERS-001",
       "source_path": "docs/canon/specifications/global/trust-inspection.md",
@@ -3221,7 +3221,7 @@
     },
     {
       "concept": "global.trust.proportional-receipts",
-      "line": 1050,
+      "line": 1022,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-TRUST-PROPORTIONAL-RECEIPTS-001",
       "source_path": "docs/canon/specifications/global/trust-inspection.md",
@@ -3230,7 +3230,7 @@
     },
     {
       "concept": "global.trust.visual-authority",
-      "line": 1060,
+      "line": 1032,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001",
       "source_path": "docs/canon/specifications/global/trust-inspection.md",
