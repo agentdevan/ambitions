@@ -6,7 +6,7 @@
 - Canon revision: `1`
 - Authority state: `shadow`
 - Compiler version: `0.2.0`
-- Canon content SHA: `6faef22812a7d968ec00278404913dfa22f278984e522346ce315828d6e18349`
+- Canon content SHA: `53cccd063211e8135706b8d6b0b69ee56f76f4848acb9e09d3be5680c6713d77`
 
 This generated surface is shadow-only until authority cutover.
 

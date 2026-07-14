@@ -2177,11 +2177,15 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
                         r"(.+?) => destination: (.+); effect: (.+); focus: (.+)\.",
                         line,
                     )
-                    if match is None or " or " in line.casefold():
+                    if match is None:
                         raise UXBlueprintError(
                             f"command transition is not exact: {variant_id}"
                         )
                     command, _destination, effect, _focus = match.groups()
+                    if " or " in command.casefold():
+                        raise UXBlueprintError(
+                            f"command transition is not exact: {variant_id}"
+                        )
                     actual_commands.append(command)
                     if command.startswith(
                         ("Cancel", "Keep ", "Not Now", "Back", "Close", "Done", "Return ")

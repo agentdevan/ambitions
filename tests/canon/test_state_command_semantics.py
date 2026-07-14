@@ -60,6 +60,13 @@ class StateCommandSemanticTests(unittest.TestCase):
             with self.subTest(command=command.command_id, phrase=phrase):
                 self.assertIn(phrase.casefold(), text)
 
+    def test_normative_command_contract_specs_have_no_malformed_comma_slash(self):
+        occurrences = 0
+        for relative in SPECIFICATIONS:
+            path = ROOT / "docs/canon/specifications" / relative
+            occurrences += path.read_text(encoding="utf-8").count(", /")
+        self.assertEqual(occurrences, 0)
+
     def test_all_267_contracts_reject_self_referential_template_semantics(self):
         commands = [
             command

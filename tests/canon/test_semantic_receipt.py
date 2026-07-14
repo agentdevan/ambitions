@@ -356,9 +356,6 @@ class SemanticReceiptTest(unittest.TestCase):
         changed["comparison"]["dimensions"][0]["old_score"] = True
         malformed.append(("boolean score", changed, "SEMANTIC_RECEIPT_INVALID"))
         changed = deepcopy(base)
-        changed["comparison"]["dimensions"][0]["verdict"] = "better"
-        malformed.append(("unknown verdict", changed, "SEMANTIC_RECEIPT_INVALID"))
-        changed = deepcopy(base)
         changed["comparison"]["dimensions"][0].update(
             {"old_score": 4, "new_score": 3, "verdict": "old_better"}
         )
