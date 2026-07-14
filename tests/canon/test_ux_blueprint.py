@@ -37,10 +37,10 @@ class UXBlueprintTests(unittest.TestCase):
         )
         self.assertEqual(summary.screen_count, 40)
         self.assertEqual(summary.state_model_count, 40)
-        self.assertEqual(summary.state_record_count, 360)
+        self.assertEqual(summary.state_taxonomy_count, 360)
         self.assertEqual(summary.object_boundary_count, 18)
         self.assertEqual(summary.journey_count, 12)
-        self.assertEqual(summary.cross_cutting_count, 10)
+        self.assertEqual(summary.cross_cutting_count, 11)
         self.assertGreaterEqual(summary.requirement_link_count, 180)
         self.assertEqual(summary.disposition_count, 441)
         self.assertEqual(
@@ -117,6 +117,7 @@ class UXBlueprintTests(unittest.TestCase):
                 "non-color-semantics",
                 "reduce-motion",
                 "reduce-transparency",
+                "sensitive-exposure-channels",
                 "swiftui-anatomy",
                 "voiceover-reading-order",
             },

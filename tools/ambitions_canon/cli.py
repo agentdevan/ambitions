@@ -826,7 +826,8 @@ def _ux_blueprint(root: Path, *, write: bool) -> int:
     print(
         "GREEN ambitions canon ux-blueprint "
         f"screens={summary.screen_count} state_models={summary.state_model_count} "
-        f"state_records={summary.state_record_count} "
+        f"state_taxonomy={summary.state_taxonomy_count} "
+        f"state_variants={summary.state_variant_count} "
         f"objects={summary.object_boundary_count} journeys={summary.journey_count} "
         f"requirements={summary.disposition_count} "
         f"visual={summary.visual_mapping_count} nonvisual={summary.nonvisual_count} "

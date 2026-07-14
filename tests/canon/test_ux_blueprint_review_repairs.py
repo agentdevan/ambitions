@@ -20,21 +20,11 @@ STATE_KINDS = {
     "rollback",
     "transitional",
 }
-STATE_FIELDS = {
-    "accessibility_focus",
-    "allowed_commands",
-    "blueprint_id",
-    "displayed_objects",
-    "durable_effect",
-    "implementation_status",
-    "kind",
-    "offline_behavior",
-    "proof_ceiling",
-    "recovery_rollback",
-    "requirement_ids",
-    "transition_exit",
-    "visible_content_copy",
-    "visible_presentation",
+TAXONOMY_FIELDS = {
+    "applicability",
+    "generic_kind",
+    "rationale",
+    "variant_ids",
 }
 
 
@@ -76,8 +66,10 @@ class UXBlueprintReviewRepairTests(unittest.TestCase):
                     "blueprint_ids",
                     "disposition",
                     "rationale",
+                    "requirement_text_sha256",
                     "requirement_id",
                     "source_path",
+                    "state_blueprint_ids",
                 },
             )
             self.assertIn(
@@ -86,9 +78,10 @@ class UXBlueprintReviewRepairTests(unittest.TestCase):
             )
             self.assertGreaterEqual(len(item["rationale"].split()), 8)
             if item["disposition"] == "visual_mapping_required":
-                self.assertTrue(item["blueprint_ids"])
+                self.assertTrue(item["blueprint_ids"] or item["state_blueprint_ids"])
             else:
                 self.assertEqual(item["blueprint_ids"], [])
+                self.assertEqual(item["state_blueprint_ids"], [])
 
         by_id = {item["requirement_id"]: item for item in dispositions}
         fixtures = {
@@ -96,9 +89,26 @@ class UXBlueprintReviewRepairTests(unittest.TestCase):
             "SECURITY-003": (
                 "visual_mapping_required",
                 [
+                    "UX-CROSS-SENSITIVE-EXPOSURE-CHANNELS",
+                    "UX-SCREEN-ACCOUNT-SIGN-IN",
+                    "UX-SCREEN-APP-SHELL-ROOT",
+                    "UX-SCREEN-CAPTURE-ATTACHMENT",
                     "UX-SCREEN-CAPTURE-COMPOSER",
+                    "UX-SCREEN-CAPTURE-PROPOSAL",
+                    "UX-SCREEN-PERMISSIONS-NOTIFICATIONS",
+                    "UX-SCREEN-SEARCH-ROOT",
+                    "UX-SCREEN-TRUST-DEEP",
                     "UX-SCREEN-YOU-DATA",
                     "UX-SCREEN-YOU-SETTINGS",
+                    "UX-SECURITY-CHANNEL-APP-SWITCHER",
+                    "UX-SECURITY-CHANNEL-CAPTURE",
+                    "UX-SECURITY-CHANNEL-CLIPBOARD",
+                    "UX-SECURITY-CHANNEL-DIAGNOSTICS",
+                    "UX-SECURITY-CHANNEL-EXPORT",
+                    "UX-SECURITY-CHANNEL-NOTIFICATIONS",
+                    "UX-SECURITY-CHANNEL-SPOTLIGHT",
+                    "UX-SECURITY-CHANNEL-SUPPORT",
+                    "UX-SECURITY-CHANNEL-WIDGETS",
                 ],
             ),
             "OBJ-EVENT-RECURRENCE-EDIT-001": (
@@ -129,7 +139,7 @@ class UXBlueprintReviewRepairTests(unittest.TestCase):
         summary = module.validate_ux_blueprint(REPO_ROOT, payload)
         self.assertEqual(summary.disposition_count, 441)
 
-    def test_each_screen_has_nine_complete_explicit_state_records(self):
+    def test_each_screen_has_nine_fail_closed_taxonomy_dispositions(self):
         module = self._module()
         payload = self._payload()
         screen_ids = {item["blueprint_id"] for item in payload["screens"]}
@@ -138,69 +148,70 @@ class UXBlueprintReviewRepairTests(unittest.TestCase):
         self.assertEqual(
             {item["screen_id"] for item in payload["state_models"]}, screen_ids
         )
-        state_ids = set()
         for model in payload["state_models"]:
-            self.assertEqual({item["kind"] for item in model["states"]}, STATE_KINDS)
-            self.assertEqual(len(model["states"]), 9)
-            for state in model["states"]:
-                self.assertEqual(set(state), STATE_FIELDS)
-                self.assertTrue(state["visible_presentation"])
-                self.assertTrue(state["visible_content_copy"])
-                self.assertTrue(state["displayed_objects"])
-                self.assertTrue(state["allowed_commands"])
-                self.assertTrue(state["transition_exit"])
-                self.assertTrue(state["durable_effect"])
-                self.assertTrue(state["recovery_rollback"])
-                self.assertTrue(state["offline_behavior"])
-                self.assertTrue(state["accessibility_focus"])
-                self.assertTrue(state["requirement_ids"])
-                self.assertNotIn(state["blueprint_id"], state_ids)
-                state_ids.add(state["blueprint_id"])
+            variants_by_kind = {}
+            for variant in model["variants"]:
+                variants_by_kind.setdefault(variant["generic_kind"], []).append(
+                    variant["blueprint_id"]
+                )
+            self.assertEqual(
+                {item["generic_kind"] for item in model["taxonomy"]}, STATE_KINDS
+            )
+            self.assertEqual(len(model["taxonomy"]), 9)
+            for disposition in model["taxonomy"]:
+                self.assertEqual(set(disposition), TAXONOMY_FIELDS)
+                self.assertTrue(disposition["rationale"])
+                expected = sorted(
+                    variants_by_kind.get(disposition["generic_kind"], [])
+                )
+                if expected:
+                    self.assertEqual(disposition["applicability"], "applicable")
+                    self.assertEqual(disposition["variant_ids"], expected)
+                else:
+                    self.assertEqual(
+                        disposition["applicability"], "not_applicable"
+                    )
+                    self.assertEqual(disposition["variant_ids"], [])
 
-        self.assertEqual(len(state_ids), 360)
         summary = module.validate_ux_blueprint(REPO_ROOT, payload)
         self.assertEqual(summary.state_model_count, 40)
-        self.assertEqual(summary.state_record_count, 360)
+        self.assertEqual(summary.state_taxonomy_count, 360)
 
-    def test_state_validator_rejects_omission_mutation_and_generic_labels(self):
+    def test_state_validator_rejects_taxonomy_omission_mutation_and_orphaning(self):
         module = self._module()
 
         missing = self._payload()
-        del missing["state_models"][0]["states"][0]["allowed_commands"]
-        with self.assertRaisesRegex(module.UXBlueprintError, "state record fields"):
+        del missing["state_models"][0]["taxonomy"][0]["variant_ids"]
+        with self.assertRaisesRegex(module.UXBlueprintError, "state taxonomy fields"):
             module.validate_ux_blueprint(REPO_ROOT, missing)
 
         duplicate = self._payload()
-        duplicate["state_models"][0]["states"][0]["kind"] = duplicate[
+        duplicate["state_models"][0]["taxonomy"][0]["generic_kind"] = duplicate[
             "state_models"
-        ][0]["states"][1]["kind"]
-        with self.assertRaisesRegex(module.UXBlueprintError, "state taxonomy"):
+        ][0]["taxonomy"][1]["generic_kind"]
+        with self.assertRaisesRegex(module.UXBlueprintError, "taxonomy variant disposition"):
             module.validate_ux_blueprint(REPO_ROOT, duplicate)
 
-        generic = self._payload()
-        generic["state_models"][0]["states"][0]["visible_content_copy"] = "Loading"
-        with self.assertRaisesRegex(module.UXBlueprintError, "explicit visible content"):
-            module.validate_ux_blueprint(REPO_ROOT, generic)
+        orphaned = self._payload()
+        applicable = next(
+            item
+            for item in orphaned["state_models"][0]["taxonomy"]
+            if item["applicability"] == "applicable"
+        )
+        applicable["variant_ids"] = []
+        with self.assertRaisesRegex(module.UXBlueprintError, "taxonomy variant disposition"):
+            module.validate_ux_blueprint(REPO_ROOT, orphaned)
 
     def test_renderer_includes_complete_state_contracts(self):
         module = self._module()
         payload = self._payload()
         rendered = module.render_ux_blueprint_markdown(payload, REPO_ROOT).decode()
 
-        self.assertIn("## Explicit screen state contracts", rendered)
-        for field in (
-            "Visible presentation",
-            "Content / copy",
-            "Displayed objects",
-            "Allowed commands",
-            "Transition / exit",
-            "Durable effect",
-            "Recovery / rollback",
-            "Offline behavior",
-            "Accessibility / focus",
-        ):
+        self.assertIn("## State taxonomy dispositions", rendered)
+        self.assertIn("## Canonical named state variants", rendered)
+        for field in ("Generic kind", "Applicability", "Named variant IDs"):
             self.assertIn(field, rendered)
-        self.assertIn("`UX-STATE-ACCOUNT-BOUNDARY-DEGRADED`", rendered)
+        self.assertIn("`UX-STATE-VARIANT-ACCOUNT-BOUNDARY-LOCAL-ONLY`", rendered)
 
     def test_executable_logic_has_canonical_tool_owner_and_docs_are_data_only(self):
         spec = importlib.util.find_spec("tools.ambitions_canon.ux_blueprint")
@@ -245,15 +256,16 @@ class UXBlueprintReviewRepairTests(unittest.TestCase):
             payload["object_boundaries"],
             payload["journeys"],
             payload["cross_cutting"],
+            payload["sensitive_exposure_channels"],
         )
         for group in groups:
             for record in group:
                 self.assertEqual(record["implementation_status"], "design_input_only")
                 self.assertEqual(record["proof_ceiling"], module.RECORD_PROOF_CEILING)
         for model in payload["state_models"]:
-            for state in model["states"]:
-                self.assertEqual(state["implementation_status"], "design_input_only")
-                self.assertEqual(state["proof_ceiling"], module.RECORD_PROOF_CEILING)
+            for variant in model["variants"]:
+                self.assertEqual(variant["implementation_status"], "design_input_only")
+                self.assertEqual(variant["proof_ceiling"], module.RECORD_PROOF_CEILING)
 
         overclaim = self._payload()
         overclaim["journeys"][0]["proof_ceiling"] = "Runtime Green"

@@ -16,6 +16,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable, Mapping
 
+from tools.ambitions_canon.parser import parse_canon_document
+
 
 BLUEPRINT_PATH = Path("docs/canon/migration/ux-blueprint.json")
 PROJECTION_PATH = Path("docs/canon/migration/UX_BLUEPRINT.md")
@@ -77,6 +79,7 @@ REQUIRED_FACETS = frozenset(
         "non-color-semantics",
         "reduce-motion",
         "reduce-transparency",
+        "sensitive-exposure-channels",
         "swiftui-anatomy",
         "voiceover-reading-order",
     }
@@ -110,7 +113,444 @@ LEGACY_FIGMA_ROLES = (
     "provenance",
     "unique_content_source",
 )
+STATE_LAWS = {
+    "degraded": frozenset(
+        {"APP-DEGRADED-PRESENTATION-001", "APP-DEGRADED-STATE-001"}
+    ),
+    "empty": frozenset({"COPY-STATE-CONSEQUENCE-001"}),
+    "failure": frozenset({"APP-DEGRADED-FAILURE-TAXONOMY-001"}),
+    "interruption": frozenset({"COPY-STATE-CONSEQUENCE-001"}),
+    "loading": frozenset({"COPY-STATE-CONSEQUENCE-001"}),
+    "recovery": frozenset({"APP-DEGRADED-RECOVERY-001"}),
+    "resting": frozenset({"COPY-STATE-CONSEQUENCE-001"}),
+    "rollback": frozenset({"CONTROL-UNDO-RECOVERY-001"}),
+    "transitional": frozenset({"COPY-STATE-CONSEQUENCE-001"}),
+}
+SEMANTIC_NONVISUAL_SENTINELS = frozenset(
+    {
+        "APP-DEEP-LINK-RESOLVE-001",
+        "APP-DEEP-LINK-STATE-001",
+        "APP-LAUNCH-READINESS-001",
+        "DESIGN-004",
+        "LAW-RUNTIME-NO-DIRECT-WRITE-001",
+        "OBJ-CANONICAL-OWNER-001",
+        "OBJ-COMMON-ENVELOPE-001",
+        "OBJ-SCHEDULE-PLACEMENT-ATOMICITY-001",
+        "PROOF-FIGMA-AUTHORITY-001",
+        "SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001",
+        "SPEC-GLOBAL-SEARCH-INDEX-001",
+        "SPEC-GLOBAL-SEARCH-INDEX-ACTIONS-001",
+        "SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001",
+        "SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001",
+        "SPEC-SURFACE-GOALS-VISUAL-AUTHORITY-001",
+        "SPEC-SURFACE-TIME-VISUAL-AUTHORITY-001",
+        "SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001",
+        "SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001",
+        "STANDARD-VISUAL-REVIEW-001",
+        "SYSTEM-APPLE-HANDOFF-001",
+        "SYSTEM-APPLE-INTENTS-001",
+        "SYSTEM-APPLE-PLATFORM-BASELINE-001",
+        "SYSTEM-APPLE-SHARE-HANDOFF-001",
+        "SYSTEM-APPLE-WIDGET-ACTION-001",
+        "SYSTEM-PERSISTENCE-ATOMIC-001",
+        "SYSTEM-PERSISTENCE-COMPACTION-001",
+        "SYSTEM-PERSISTENCE-CORRUPTION-001",
+        "SYSTEM-PERSISTENCE-MIGRATION-001",
+        "SYSTEM-PERSISTENCE-REPLAY-001",
+        "SYSTEM-SCHEDULING-FIT-001",
+    }
+)
+SEMANTIC_VISUAL_SENTINELS = {
+    "CONST-IA-ROOT-001": tuple(
+        sorted(
+            {
+                "UX-SCREEN-APP-SHELL-ROOT",
+                "UX-SCREEN-GOALS-ROOT",
+                "UX-SCREEN-TIME-DAY",
+                "UX-SCREEN-TODAY-ROOT",
+                "UX-SCREEN-YOU-ROOT",
+            }
+        )
+    ),
+    "LAW-IA-NONROOT-001": tuple(
+        sorted(
+            {
+                "UX-SCREEN-APP-SHELL-DRILLDOWN",
+                "UX-SCREEN-APP-SHELL-SEARCH-CAPTURE",
+                "UX-SCREEN-CAPTURE-COMPOSER",
+                "UX-SCREEN-SEARCH-ROOT",
+                "UX-SCREEN-TRUST-INLINE",
+            }
+        )
+    ),
+    "OBJECT-SAVED-FOR-LATER-001": (
+        "UX-OBJECT-SAVED-FOR-LATER-DRAFT",
+        "UX-SCREEN-CAPTURE-SAVED-FOR-LATER",
+    ),
+    "SECURITY-003": tuple(sorted((
+        "UX-CROSS-SENSITIVE-EXPOSURE-CHANNELS",
+        "UX-SECURITY-CHANNEL-APP-SWITCHER",
+        "UX-SECURITY-CHANNEL-CAPTURE",
+        "UX-SECURITY-CHANNEL-CLIPBOARD",
+        "UX-SECURITY-CHANNEL-DIAGNOSTICS",
+        "UX-SECURITY-CHANNEL-EXPORT",
+        "UX-SECURITY-CHANNEL-NOTIFICATIONS",
+        "UX-SECURITY-CHANNEL-SPOTLIGHT",
+        "UX-SECURITY-CHANNEL-SUPPORT",
+        "UX-SECURITY-CHANNEL-WIDGETS",
+        "UX-SCREEN-ACCOUNT-SIGN-IN",
+        "UX-SCREEN-APP-SHELL-ROOT",
+        "UX-SCREEN-CAPTURE-ATTACHMENT",
+        "UX-SCREEN-CAPTURE-COMPOSER",
+        "UX-SCREEN-CAPTURE-PROPOSAL",
+        "UX-SCREEN-PERMISSIONS-NOTIFICATIONS",
+        "UX-SCREEN-SEARCH-ROOT",
+        "UX-SCREEN-TRUST-DEEP",
+        "UX-SCREEN-YOU-DATA",
+        "UX-SCREEN-YOU-SETTINGS",
+    ))),
+    "SYSTEM-APPLE-PROJECTION-001": (
+        "UX-SECURITY-CHANNEL-APP-SWITCHER",
+        "UX-SECURITY-CHANNEL-SPOTLIGHT",
+        "UX-SECURITY-CHANNEL-WIDGETS",
+    ),
+    "SYSTEM-APPLE-WIDGET-PROJECTION-001": (
+        "UX-SECURITY-CHANNEL-WIDGETS",
+    ),
+}
+
+
+def _required_state_variants() -> dict[str, tuple[str, ...]]:
+    variants: dict[str, tuple[str, ...]] = {
+        "UX-SCREEN-CAPTURE-ATTACHMENT": ("attachment-ready",),
+        "UX-SCREEN-CAPTURE-COMPOSER": (
+            "blank",
+            "composing",
+            "confirmation-required",
+            "discard-review",
+            "recovered",
+            "saved",
+            "saved-undo-eligible",
+            "saved-undo-unavailable",
+            "typed",
+        ),
+        "UX-SCREEN-CAPTURE-PROPOSAL": ("proposal-ready",),
+        "UX-SCREEN-CAPTURE-SAVED-FOR-LATER": ("saved-for-later",),
+        "UX-SCREEN-PERMISSIONS-CALENDAR": (
+            "authorized",
+            "denied",
+            "eligibility-check",
+            "limited",
+            "local-fallback",
+            "not-determined",
+            "reconciling",
+            "restricted",
+            "unavailable",
+        ),
+        "UX-SCREEN-PERMISSIONS-NOTIFICATIONS": (
+            "authorized",
+            "denied",
+            "eligibility-check",
+            "limited",
+            "local-fallback",
+            "not-determined",
+            "reconciling",
+            "restricted",
+            "unavailable",
+        ),
+        "UX-SCREEN-SEARCH-RESULTS": (
+            "action-complete",
+            "action-complete-undo-eligible",
+            "action-complete-undo-unavailable",
+            "action-preview",
+            "filtered",
+            "no-results",
+            "results",
+            "selected",
+        ),
+        "UX-SCREEN-SEARCH-ROOT": (
+            "empty-query",
+            "privacy-suppressed",
+            "querying",
+            "rebuilding",
+            "recent",
+            "restored",
+        ),
+        "UX-SCREEN-TIME-IMPORT": (
+            "committing-import",
+            "external-source-unchanged",
+            "import-undo-unavailable",
+            "native-import-undo",
+            "reviewing-diff",
+        ),
+        "UX-SCREEN-TODAY-ROOT": (
+            "dense",
+            "empty",
+            "low-density",
+            "normal",
+            "offline",
+            "partial-failure",
+            "permission-conflict",
+            "restored",
+            "stale",
+        ),
+        "UX-SCREEN-TODAY-START-HERE": (
+            "active-execution",
+            "closure-ready",
+            "recovery-needed",
+        ),
+        "UX-SCREEN-TRUST-DEEP": (
+            "correction-complete",
+            "correction-required",
+            "history-empty",
+            "history-populated",
+            "privacy-boundary-review",
+            "privacy-redacted",
+            "source-current",
+            "source-stale",
+            "source-unavailable",
+        ),
+        "UX-SCREEN-TRUST-INLINE": (
+            "marker-present",
+            "no-disclosure",
+            "proof-optional",
+            "proof-required",
+            "proof-satisfied",
+            "proof-suggested",
+        ),
+        "UX-SCREEN-TRUST-RECEIPT": (
+            "receipt-committed",
+            "receipt-committed-undo-eligible",
+            "receipt-committed-undo-unavailable",
+            "receipt-external-failed",
+            "receipt-pending",
+            "receipt-undone",
+        ),
+        "UX-SCREEN-YOU-DATA": (
+            "backup-ready",
+            "diagnostics-redacted",
+            "export-failed",
+            "export-preview",
+            "export-progress",
+            "permanent-delete-irreversible",
+            "permanent-delete-review",
+            "reset-review",
+            "reset-rollback",
+            "restore-review",
+            "trash-empty",
+            "trash-populated",
+            "trash-restore",
+        ),
+        "UX-SCREEN-YOU-ROOT": (
+            "account-signed-in",
+            "account-signed-out",
+            "action-required",
+            "continuity-conflicted",
+            "continuity-disabled",
+            "continuity-pending",
+            "diagnostics-degraded",
+            "diagnostics-healthy",
+            "life-capital-empty",
+            "life-capital-populated",
+            "no-account-healthy",
+            "normal",
+            "permissions-available",
+            "permissions-denied",
+            "setup-complete",
+            "setup-partial",
+        ),
+        "UX-SCREEN-YOU-SETTINGS": (
+            "app-lock-disabled",
+            "app-lock-enabled",
+            "appearance-dark",
+            "appearance-light",
+            "appearance-oled-dark",
+            "appearance-system",
+            "automation-policy",
+            "biometric-unavailable",
+            "increase-contrast",
+            "notification-controls",
+            "privacy-review",
+            "time-preferences",
+        ),
+    }
+    time_keys = (
+        "conflicting",
+        "dense",
+        "editing",
+        "empty",
+        "external-hidden-capacity",
+        "importing",
+        "now-anchored",
+        "populated",
+        "previewing",
+        "restored",
+        "selected",
+    )
+    for suffix in ("DAY", "LIST", "MONTH", "WEEK", "YEAR"):
+        variants[f"UX-SCREEN-TIME-{suffix}"] = time_keys
+    variants.update(
+        {
+            "UX-SCREEN-GOALS-CLOSURE": (
+                "completed", "ended", "needs-attention",
+            ),
+            "UX-SCREEN-GOALS-DETAIL": (
+                "active", "archived", "blocked", "completed", "dense", "draft",
+                "ended", "needs-attention", "paused", "ready-to-activate",
+                "recovering", "waiting",
+            ),
+            "UX-SCREEN-GOALS-LIFE-AREA": (
+                "dense", "empty-direction", "needs-attention", "populated",
+            ),
+            "UX-SCREEN-GOALS-PATH": (
+                "active", "blocked", "completed", "dense", "draft",
+                "needs-attention", "paused", "ready-to-activate", "recovering",
+                "selected-node", "waiting",
+            ),
+            "UX-SCREEN-GOALS-RECOVERY": (
+                "blocked", "needs-attention", "recovering", "waiting",
+            ),
+            "UX-SCREEN-GOALS-ROOT": (
+                "dense", "empty-direction", "needs-attention", "populated",
+            ),
+        }
+    )
+    variants.update(
+        {
+            "UX-SCREEN-ACCOUNT-BOUNDARY": (
+                "account-identity-only", "continuity-conflicted",
+                "continuity-disabled", "continuity-enabled", "local-only",
+            ),
+            "UX-SCREEN-ACCOUNT-SIGN-IN": (
+                "apple-in-progress", "cancelled", "failed", "google-in-progress",
+                "provider-choice", "signed-in",
+            ),
+            "UX-SCREEN-ACCOUNT-STATUS": (
+                "continuity-conflicted", "continuity-disabled", "continuity-pending",
+                "entitlement-stale", "signed-in", "signed-out",
+            ),
+            "UX-SCREEN-APP-SHELL-DRILLDOWN": (
+                "dismissed", "full-screen", "pushed", "restored", "sheet",
+            ),
+            "UX-SCREEN-APP-SHELL-ROOT": (
+                "goals-selected", "time-selected", "today-selected", "you-selected",
+            ),
+            "UX-SCREEN-APP-SHELL-SEARCH-CAPTURE": (
+                "capture-presented", "idle", "returning-focus", "search-presented",
+            ),
+            "UX-SCREEN-OFFLINE-DEGRADED-LOCAL-HEALTH": (
+                "degraded-local-store", "local-healthy", "protected-data-unavailable",
+                "stale-external-source", "storage-pressure",
+            ),
+            "UX-SCREEN-OFFLINE-DEGRADED-REPAIR": (
+                "export-only", "repair-available", "repair-complete", "repair-failed",
+                "repair-running",
+            ),
+            "UX-SCREEN-SETUP-FIRST-USE": (
+                "complete", "local-ready", "optional-account", "permissions-choice",
+                "welcome",
+            ),
+            "UX-SCREEN-SETUP-RESUME": (
+                "checkpoint-found", "checkpoint-invalid", "resumed", "revalidating",
+                "start-over",
+            ),
+            "UX-SCREEN-TIME-DETAIL": (
+                "conflict-review", "editing", "saved", "undo-eligible",
+                "undo-unavailable", "viewing",
+            ),
+            "UX-SCREEN-TODAY-DETAIL": (
+                "active-execution", "closure-review", "recovery", "stale", "viewing",
+            ),
+        }
+    )
+    return variants
+
+
+REQUIRED_STATE_VARIANTS = _required_state_variants()
 PLACEHOLDER = re.compile(r"(?<!\w)(?:TBD|TODO|implement later)(?!\w)", re.IGNORECASE)
+STALE_BLUEPRINT_LANGUAGE = re.compile(
+    r"recommended next movement|capture history|\bno now\b|prior-current now",
+    re.IGNORECASE,
+)
+STATE_VARIANT_NARRATIVE_FIELDS = (
+    "visible_presentation",
+    "visible_content_copy",
+    "transition_exit",
+    "durable_effect",
+    "recovery_rollback",
+    "offline_behavior",
+    "accessibility_focus",
+)
+FORMULAIC_STATE_VARIANT_LANGUAGE = (
+    "shows the exact current state, consequence, and available next action",
+    "stable frameable",
+    "uses verified local facts offline; unavailable external context",
+    "returns to the exact owning",
+    "current consequence, displayed objects, then actions",
+    "remains non-durable until its separately confirmed command succeeds",
+    "creates no durable effect",
+    "without changing canonical data",
+    "uses only its operation-specific recovery law",
+    "consequence, consequence",
+    "may produce the consequence declared",
+    "canonical owner",
+    "invoking object",
+    "invoking context",
+    "owner-specific Goal filter controls",
+    "selected owner-specific Goal object",
+    "compact native detail or full destination when depth requires",
+)
+FORMULAIC_STATE_VARIANT_PATTERNS = (
+    re.compile(
+        r"follows the declared owner for .+; .+ preserves or restores the invoking object",
+        re.IGNORECASE,
+    ),
+    re.compile(r"no longer supports the declared condition", re.IGNORECASE),
+    re.compile(
+        r"any command needing external authority is unavailable with its reason",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"Viewing .+ commits nothing; .+ is the explicit primary route",
+        re.IGNORECASE,
+    ),
+)
+NORMALIZED_NARRATIVE_SCREEN_IDS = frozenset(
+    {
+        "UX-SCREEN-ACCOUNT-BOUNDARY",
+        "UX-SCREEN-ACCOUNT-SIGN-IN",
+        "UX-SCREEN-ACCOUNT-STATUS",
+        "UX-SCREEN-APP-SHELL-DRILLDOWN",
+        "UX-SCREEN-APP-SHELL-ROOT",
+        "UX-SCREEN-APP-SHELL-SEARCH-CAPTURE",
+        "UX-SCREEN-GOALS-CLOSURE",
+        "UX-SCREEN-GOALS-DETAIL",
+        "UX-SCREEN-GOALS-LIFE-AREA",
+        "UX-SCREEN-GOALS-PATH",
+        "UX-SCREEN-GOALS-RECOVERY",
+        "UX-SCREEN-GOALS-ROOT",
+        "UX-SCREEN-OFFLINE-DEGRADED-LOCAL-HEALTH",
+        "UX-SCREEN-OFFLINE-DEGRADED-REPAIR",
+        "UX-SCREEN-SETUP-FIRST-USE",
+        "UX-SCREEN-SETUP-RESUME",
+        "UX-SCREEN-TIME-DETAIL",
+        "UX-SCREEN-TODAY-DETAIL",
+    }
+)
+COMPACT_COMMAND_CONTRACT_SCREEN_IDS = frozenset(
+    NORMALIZED_NARRATIVE_SCREEN_IDS
+    - {
+        "UX-SCREEN-GOALS-CLOSURE",
+        "UX-SCREEN-GOALS-DETAIL",
+        "UX-SCREEN-GOALS-LIFE-AREA",
+        "UX-SCREEN-GOALS-PATH",
+        "UX-SCREEN-GOALS-RECOVERY",
+        "UX-SCREEN-GOALS-ROOT",
+    }
+)
+GOALS_COMMAND_CONTRACT_SCREEN_IDS = frozenset(
+    NORMALIZED_NARRATIVE_SCREEN_IDS - COMPACT_COMMAND_CONTRACT_SCREEN_IDS
+)
 
 TOP_LEVEL_FIELDS = frozenset(
     {
@@ -129,6 +569,7 @@ TOP_LEVEL_FIELDS = frozenset(
         "claim_ceiling",
         "screens",
         "state_models",
+        "sensitive_exposure_channels",
         "object_boundaries",
         "journeys",
         "cross_cutting",
@@ -157,26 +598,50 @@ STATE_MODEL_FIELDS = frozenset(
         "blueprint_id",
         "title",
         "screen_id",
-        "states",
+        "taxonomy",
+        "variants",
         "requirement_ids",
         "implementation_status",
         "proof_ceiling",
     }
 )
-STATE_RECORD_FIELDS = frozenset(
+STATE_TAXONOMY_FIELDS = frozenset(
+    {"generic_kind", "applicability", "rationale", "variant_ids"}
+)
+SENSITIVE_EXPOSURE_FIELDS = frozenset(
+    {
+        "blueprint_id",
+        "channel",
+        "visible_fields",
+        "defaults",
+        "consent",
+        "redaction",
+        "retention",
+        "protection",
+        "user_control",
+        "denial_behavior",
+        "proof_behavior",
+        "requirement_ids",
+        "implementation_status",
+        "proof_ceiling",
+    }
+)
+STATE_VARIANT_FIELDS = frozenset(
     {
         "accessibility_focus",
         "allowed_commands",
         "blueprint_id",
         "displayed_objects",
         "durable_effect",
+        "generic_kind",
         "implementation_status",
-        "kind",
         "offline_behavior",
         "proof_ceiling",
         "recovery_rollback",
         "requirement_ids",
+        "title",
         "transition_exit",
+        "variant_key",
         "visible_content_copy",
         "visible_presentation",
     }
@@ -186,8 +651,10 @@ DISPOSITION_FIELDS = frozenset(
         "blueprint_ids",
         "disposition",
         "rationale",
+        "requirement_text_sha256",
         "requirement_id",
         "source_path",
+        "state_blueprint_ids",
     }
 )
 SOURCE_DOCUMENT_FIELDS = frozenset({"path", "sha256"})
@@ -251,7 +718,8 @@ class UXBlueprintError(ValueError):
 class UXBlueprintSummary:
     screen_count: int
     state_model_count: int
-    state_record_count: int
+    state_taxonomy_count: int
+    state_variant_count: int
     object_boundary_count: int
     journey_count: int
     cross_cutting_count: int
@@ -301,6 +769,17 @@ def _string(value: object, label: str) -> str:
 def _strings(value: object, label: str, *, sorted_unique: bool = False) -> tuple[str, ...]:
     if not isinstance(value, list) or not value:
         raise UXBlueprintError(f"{label} must be a non-empty string array")
+    items = tuple(_string(item, label) for item in value)
+    if sorted_unique and items != tuple(sorted(set(items))):
+        raise UXBlueprintError(f"{label} must be sorted and unique")
+    return items
+
+
+def _possibly_empty_strings(
+    value: object, label: str, *, sorted_unique: bool = False
+) -> tuple[str, ...]:
+    if not isinstance(value, list):
+        raise UXBlueprintError(f"{label} must be a string array")
     items = tuple(_string(item, label) for item in value)
     if sorted_unique and items != tuple(sorted(set(items))):
         raise UXBlueprintError(f"{label} must be sorted and unique")
@@ -456,6 +935,77 @@ def _requirement_records(root: Path) -> tuple[dict[str, object], ...]:
     return tuple(records)
 
 
+def _consequence_anchor(body: str) -> str:
+    """Return a stable, requirement-specific anchor from the normative body."""
+
+    paragraphs = [
+        " ".join(paragraph.split())
+        for paragraph in body.split("\n\n")
+        if paragraph.strip()
+    ]
+    if not paragraphs:
+        raise UXBlueprintError("requirement body has no normative paragraph")
+    return paragraphs[0]
+
+
+def normalized_state_narrative_signature(
+    text: str,
+    screen_title: str,
+    variant: Mapping[str, object],
+) -> str:
+    """Remove record tokens so prose interpolation cannot masquerade as authorship."""
+
+    replacements = [(screen_title, "<screen>"), (_string(variant.get("title"), "variant title"), "<state>")]
+    replacements.extend(
+        (value, "<object>")
+        for value in _possibly_empty_strings(
+            variant.get("displayed_objects"), "signature displayed objects"
+        )
+    )
+    replacements.extend(
+        (value, "<command>")
+        for value in _possibly_empty_strings(
+            variant.get("allowed_commands"), "signature allowed commands"
+        )
+    )
+    signature = text.casefold()
+    for value, replacement in sorted(
+        replacements, key=lambda item: len(item[0]), reverse=True
+    ):
+        signature = re.sub(re.escape(value.casefold()), replacement, signature)
+    return " ".join(signature.split())
+
+
+def load_requirement_source_records(root: Path) -> tuple[dict[str, str], ...]:
+    """Load exact normative requirement text from the human-editable canon."""
+
+    index = _requirement_records(root)
+    paths = sorted({_string(item.get("source_path"), "source path") for item in index})
+    parsed = {}
+    for relative in paths:
+        path = root / relative
+        document = parse_canon_document(path, path.read_text(encoding="utf-8"))
+        for requirement in document.requirements:
+            parsed[requirement.requirement_id] = requirement
+    records = []
+    for item in index:
+        requirement_id = _string(item.get("requirement_id"), "requirement ID")
+        requirement = parsed.get(requirement_id)
+        if requirement is None:
+            raise UXBlueprintError(
+                f"requirement source text is missing: {requirement_id}"
+            )
+        records.append(
+            {
+                "requirement_id": requirement_id,
+                "source_path": requirement.source_path.relative_to(root).as_posix(),
+                "normative_text": requirement.body,
+                "consequence_anchor": _consequence_anchor(requirement.body),
+            }
+        )
+    return tuple(records)
+
+
 def build_requirement_dispositions(
     root: Path,
     blueprint: Mapping[str, object],
@@ -464,12 +1014,41 @@ def build_requirement_dispositions(
     """Validate the checked-in per-requirement semantic disposition ledger."""
 
     requirements = {
-        _string(item.get("requirement_id"), "requirement_id"): item
-        for item in _requirement_records(root)
+        item["requirement_id"]: item
+        for item in load_requirement_source_records(root)
     }
     records = _records(
         blueprint.get("requirement_dispositions"), "requirement dispositions"
     )
+    top_level_records = tuple(
+        item
+        for key in (
+            "screens",
+            "state_models",
+            "object_boundaries",
+            "journeys",
+            "cross_cutting",
+            "sensitive_exposure_channels",
+        )
+        for item in blueprint[key]
+    )
+    state_variants = tuple(
+        variant
+        for model in blueprint["state_models"]
+        for variant in model["variants"]
+    )
+    top_level_ids = frozenset(item["blueprint_id"] for item in top_level_records)
+    state_ids = frozenset(item["blueprint_id"] for item in state_variants)
+    top_edges = {
+        (requirement_id, item["blueprint_id"])
+        for item in top_level_records
+        for requirement_id in item["requirement_ids"]
+    }
+    state_edges = {
+        (requirement_id, item["blueprint_id"])
+        for item in state_variants
+        for requirement_id in item["requirement_ids"]
+    }
     identifiers: list[str] = []
     dispositions: list[dict[str, object]] = []
     for item in records:
@@ -478,20 +1057,44 @@ def build_requirement_dispositions(
         source_path = _string(item.get("source_path"), "disposition source path")
         disposition = _string(item.get("disposition"), "requirement disposition")
         rationale = _string(item.get("rationale"), "requirement rationale")
+        requirement_text_sha256 = _string(
+            item.get("requirement_text_sha256"), "requirement text digest"
+        )
         if len(rationale.split()) < 8:
             raise UXBlueprintError(
                 f"requirement rationale is not reviewable: {requirement_id}"
+            )
+        if re.search(r"[,;:]\.", rationale):
+            raise UXBlueprintError(
+                f"requirement rationale punctuation is malformed: {requirement_id}"
+            )
+        if rationale[-1] not in ".!?":
+            raise UXBlueprintError(
+                f"requirement rationale is incomplete: {requirement_id}"
             )
         identifiers.append(requirement_id)
         requirement = requirements.get(requirement_id)
         if requirement is None:
             raise UXBlueprintError(f"unknown requirement disposition: {requirement_id}")
-        expected_source = _string(
-            requirement.get("source_path"), "requirement source path"
-        )
+        expected_source = requirement["source_path"]
         if source_path != expected_source:
             raise UXBlueprintError(
                 f"requirement disposition source mismatch: {requirement_id}"
+            )
+        expected_digest = hashlib.sha256(
+            requirement["normative_text"].encode("utf-8")
+        ).hexdigest()
+        if requirement_text_sha256 != expected_digest:
+            raise UXBlueprintError(
+                f"requirement text digest is stale: {requirement_id}"
+            )
+        if "These records alone present the" in rationale:
+            raise UXBlueprintError(
+                f"formulaic rationale is forbidden: {requirement_id}"
+            )
+        if requirement["consequence_anchor"] not in rationale:
+            raise UXBlueprintError(
+                f"requirement rationale omits its specific consequence: {requirement_id}"
             )
         blueprint_ids_value = item.get("blueprint_ids")
         if not isinstance(blueprint_ids_value, list):
@@ -501,9 +1104,30 @@ def build_requirement_dispositions(
         blueprint_ids = tuple(
             _string(value, "disposition blueprint ID") for value in blueprint_ids_value
         )
+        state_blueprint_ids_value = item.get("state_blueprint_ids")
+        if not isinstance(state_blueprint_ids_value, list):
+            raise UXBlueprintError(
+                f"requirement disposition state blueprint IDs must be an array: {requirement_id}"
+            )
+        state_blueprint_ids = tuple(
+            _string(value, "disposition state blueprint ID")
+            for value in state_blueprint_ids_value
+        )
         if blueprint_ids != tuple(sorted(set(blueprint_ids))):
             raise UXBlueprintError(
                 f"requirement disposition blueprint IDs must be sorted and unique: {requirement_id}"
+            )
+        if state_blueprint_ids != tuple(sorted(set(state_blueprint_ids))):
+            raise UXBlueprintError(
+                f"requirement disposition state blueprint IDs must be sorted and unique: {requirement_id}"
+            )
+        if set(blueprint_ids) - top_level_ids:
+            raise UXBlueprintError(
+                f"disposition blueprint IDs must name top-level records: {requirement_id}"
+            )
+        if set(state_blueprint_ids) - state_ids:
+            raise UXBlueprintError(
+                f"disposition state blueprint IDs must name state records: {requirement_id}"
             )
         unknown = sorted(set(blueprint_ids) - known_blueprint_ids)
         if unknown:
@@ -511,12 +1135,12 @@ def build_requirement_dispositions(
                 f"requirement disposition references unknown blueprint IDs: {unknown}"
             )
         if disposition == "visual_mapping_required":
-            if not blueprint_ids:
+            if not blueprint_ids and not state_blueprint_ids:
                 raise UXBlueprintError(
                     f"visual requirement has no applicable blueprint record: {requirement_id}"
                 )
         elif disposition == "nonvisual_with_rationale":
-            if blueprint_ids:
+            if blueprint_ids or state_blueprint_ids:
                 raise UXBlueprintError(
                     f"nonvisual requirement must not map blueprint records: {requirement_id}"
                 )
@@ -534,6 +1158,54 @@ def build_requirement_dispositions(
         raise UXBlueprintError(f"missing requirement disposition: {missing}")
     if len(identifiers) != len(requirements):
         raise UXBlueprintError("requirement disposition count is incomplete")
+    disposition_by_id = {item["requirement_id"]: item for item in dispositions}
+    for requirement_id in sorted(SEMANTIC_NONVISUAL_SENTINELS):
+        item = disposition_by_id[requirement_id]
+        if (
+            item["disposition"] != "nonvisual_with_rationale"
+            or item["blueprint_ids"]
+            or item["state_blueprint_ids"]
+        ):
+            raise UXBlueprintError(
+                f"semantic disposition sentinel is inverted: {requirement_id}"
+            )
+    for requirement_id, expected_targets in sorted(
+        SEMANTIC_VISUAL_SENTINELS.items()
+    ):
+        item = disposition_by_id[requirement_id]
+        if (
+            item["disposition"] != "visual_mapping_required"
+            or tuple(item["blueprint_ids"]) != expected_targets
+        ):
+            raise UXBlueprintError(
+                f"semantic disposition sentinel is stale: {requirement_id}"
+            )
+    for requirement_id, blueprint_id in sorted(top_edges):
+        item = disposition_by_id[requirement_id]
+        if blueprint_id not in item["blueprint_ids"]:
+            raise UXBlueprintError(
+                f"disposition edge is missing for {requirement_id} -> {blueprint_id}"
+            )
+    for requirement_id, blueprint_id in sorted(state_edges):
+        item = disposition_by_id[requirement_id]
+        if blueprint_id not in item["state_blueprint_ids"]:
+            raise UXBlueprintError(
+                f"state disposition edge is missing for {requirement_id} -> {blueprint_id}"
+            )
+    for item in dispositions:
+        requirement_id = item["requirement_id"]
+        for blueprint_id in item["blueprint_ids"]:
+            if (requirement_id, blueprint_id) not in top_edges:
+                raise UXBlueprintError(
+                    f"disposition edge has no record declaration: "
+                    f"{requirement_id} -> {blueprint_id}"
+                )
+        for blueprint_id in item["state_blueprint_ids"]:
+            if (requirement_id, blueprint_id) not in state_edges:
+                raise UXBlueprintError(
+                    f"state disposition edge has no record declaration: "
+                    f"{requirement_id} -> {blueprint_id}"
+                )
     return tuple(dispositions)
 
 
@@ -553,6 +1225,7 @@ def render_requirement_dispositions(
         blueprint["object_boundaries"],
         blueprint["journeys"],
         blueprint["cross_cutting"],
+        blueprint["sensitive_exposure_channels"],
     )
     all_ids = frozenset(item["blueprint_id"] for group in record_groups for item in group)
     dispositions = build_requirement_dispositions(root, blueprint, all_ids)
@@ -635,19 +1308,34 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
     for text in _walk_strings(blueprint):
         if PLACEHOLDER.search(text):
             raise UXBlueprintError(f"placeholder language is forbidden: {text!r}")
+        if STALE_BLUEPRINT_LANGUAGE.search(text):
+            raise UXBlueprintError(f"stale vocabulary is forbidden: {text!r}")
 
     screens = _records(blueprint.get("screens"), "screens")
     states = _records(blueprint.get("state_models"), "state models")
     objects = _records(blueprint.get("object_boundaries"), "object boundaries")
     journeys = _records(blueprint.get("journeys"), "journeys")
     cross = _records(blueprint.get("cross_cutting"), "cross-cutting records")
+    exposure_channels = _records(
+        blueprint.get("sensitive_exposure_channels"),
+        "sensitive exposure channels",
+    )
     preliminary_ids = [
         _string(item.get("blueprint_id"), "blueprint ID")
-        for records in (screens, states, objects, journeys, cross)
+        for records in (screens, states, objects, journeys, cross, exposure_channels)
         for item in records
     ]
     if len(preliminary_ids) != len(set(preliminary_ids)):
         raise UXBlueprintError("blueprint IDs must be globally unique typed IDs")
+    for state_model in states:
+        screen_id = _string(state_model.get("screen_id"), "state model screen_id")
+        expected_model_id = (
+            "UX-STATE-MODEL-" + screen_id.removeprefix("UX-SCREEN-")
+        )
+        if state_model.get("blueprint_id") != expected_model_id:
+            raise UXBlueprintError(
+                f"state model identity does not match screen owner: {screen_id}"
+            )
     screen_ids = _sorted_unique_records(screens, "screens")
     state_model_ids = _sorted_unique_records(states, "state models")
     object_blueprint_ids = _sorted_unique_records(objects, "object boundaries")
@@ -657,6 +1345,7 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
     linked_requirements: list[str] = []
     scopes: set[str] = set()
     referenced_state_models: set[str] = set()
+    accessibility_contracts: set[tuple[str, ...]] = set()
     for screen in screens:
         _closed(screen, SCREEN_FIELDS, "screen fields")
         _record_posture(screen, "screen")
@@ -671,6 +1360,7 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
         screen_accessibility = _strings(screen.get("accessibility"), "screen accessibility")
         if len(screen_accessibility) != len(set(screen_accessibility)):
             raise UXBlueprintError("screen accessibility entries must be unique")
+        accessibility_contracts.add(screen_accessibility)
         linked_requirements.extend(
             _linked_ids(screen.get("requirement_ids"), "screen requirement IDs")
         )
@@ -678,11 +1368,24 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
         raise UXBlueprintError(f"screen scopes are incomplete or invented: {sorted(scopes)}")
     if referenced_state_models != set(state_model_ids):
         raise UXBlueprintError("every state model must be used by at least one screen")
+    if len(accessibility_contracts) < 35:
+        raise UXBlueprintError("screen accessibility contracts must be screen-specific")
 
     covered_screens: set[str] = set()
     state_kinds: set[str] = set()
-    state_record_ids: list[str] = []
-    state_record_count = 0
+    state_variant_ids: list[str] = []
+    state_taxonomy_count = 0
+    state_variant_count = 0
+    screen_titles = {
+        item["blueprint_id"]: item["title"]
+        for item in screens
+    }
+    variant_narratives: dict[str, set[str]] = {
+        field: set() for field in STATE_VARIANT_NARRATIVE_FIELDS
+    }
+    normalized_narratives: dict[str, dict[str, str]] = {
+        field: {} for field in STATE_VARIANT_NARRATIVE_FIELDS
+    }
     for state_model in states:
         _closed(state_model, STATE_MODEL_FIELDS, "state model fields")
         _record_posture(state_model, "state model")
@@ -692,21 +1395,55 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
         if screen_id in covered_screens:
             raise UXBlueprintError(f"screen has more than one state model: {screen_id}")
         covered_screens.add(screen_id)
-        state_records = _records(state_model.get("states"), "state records")
-        if len(state_records) != len(REQUIRED_STATE_KINDS):
-            raise UXBlueprintError("each screen requires nine explicit state records")
-        kinds: set[str] = set()
-        for state_record in state_records:
-            _closed(state_record, STATE_RECORD_FIELDS, "state record fields")
-            _record_posture(state_record, "state")
-            kind = _string(state_record.get("kind"), "state kind")
-            kinds.add(kind)
-            state_kinds.add(kind)
-            state_record_id = _string(
-                state_record.get("blueprint_id"), "state record blueprint ID"
+        expected_model_id = (
+            "UX-STATE-MODEL-" + screen_id.removeprefix("UX-SCREEN-")
+        )
+        if state_model.get("blueprint_id") != expected_model_id:
+            raise UXBlueprintError(
+                f"state model identity does not match screen owner: {screen_id}"
             )
-            state_record_ids.append(state_record_id)
+        variant_value = state_model.get("variants")
+        if not isinstance(variant_value, list):
+            raise UXBlueprintError("state variants must be an array")
+        variant_records = [
+            _object(item, f"state variants[{index}]")
+            for index, item in enumerate(variant_value)
+        ]
+        expected_variant_keys = REQUIRED_STATE_VARIANTS.get(screen_id, ())
+        actual_variant_keys = tuple(
+            _string(item.get("variant_key"), "state variant key")
+            for item in variant_records
+        )
+        if actual_variant_keys != expected_variant_keys:
+            raise UXBlueprintError(
+                f"state variant inventory is incomplete or invented: {screen_id}"
+            )
+        for variant in variant_records:
+            _closed(variant, STATE_VARIANT_FIELDS, "state variant fields")
+            _record_posture(variant, "state variant")
+            variant_key = _string(variant.get("variant_key"), "state variant key")
+            generic_kind = _string(
+                variant.get("generic_kind"), "state variant generic kind"
+            )
+            if generic_kind not in REQUIRED_STATE_KINDS:
+                raise UXBlueprintError(
+                    f"state variant generic kind is invalid: {variant_key}"
+                )
+            state_kinds.add(generic_kind)
+            expected_variant_id = (
+                f"UX-STATE-VARIANT-{screen_id.removeprefix('UX-SCREEN-')}-"
+                f"{variant_key.upper()}"
+            )
+            variant_id = _string(
+                variant.get("blueprint_id"), "state variant blueprint ID"
+            )
+            if variant_id != expected_variant_id:
+                raise UXBlueprintError(
+                    f"state variant identity does not match owner and key: {variant_id}"
+                )
+            state_variant_ids.append(variant_id)
             for field in (
+                "title",
                 "visible_presentation",
                 "visible_content_copy",
                 "transition_exit",
@@ -715,23 +1452,175 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
                 "offline_behavior",
                 "accessibility_focus",
             ):
-                text = _string(state_record.get(field), f"state {field}")
-                if field == "visible_content_copy" and (
-                    len(text.split()) < 4
-                    or text.casefold()
-                    in {"loading", "empty", "error", "failure", "try again", "no data"}
+                value = variant.get(field)
+                if (
+                    variant_id == "UX-STATE-VARIANT-TRUST-INLINE-NO-DISCLOSURE"
+                    and field == "visible_content_copy"
+                    and value == ""
                 ):
-                    raise UXBlueprintError(
-                        f"state requires explicit visible content: {state_record_id}"
-                    )
-            _strings(state_record.get("displayed_objects"), "state displayed objects")
-            _strings(state_record.get("allowed_commands"), "state allowed commands")
-            linked_requirements.extend(
-                _linked_ids(state_record.get("requirement_ids"), "state requirement IDs")
+                    text = ""
+                else:
+                    text = _string(value, f"state variant {field}")
+                if field in variant_narratives:
+                    folded = text.casefold()
+                    if any(
+                        formula.casefold() in folded
+                        for formula in FORMULAIC_STATE_VARIANT_LANGUAGE
+                    ) or any(
+                        pattern.search(text)
+                        for pattern in FORMULAIC_STATE_VARIANT_PATTERNS
+                    ):
+                        raise UXBlueprintError(
+                            f"formulaic state variant narrative: {variant_id} {field}"
+                        )
+                    if text in variant_narratives[field]:
+                        raise UXBlueprintError(
+                            f"state variant narrative must be unique: {field}"
+                        )
+                    variant_narratives[field].add(text)
+                    if screen_id in NORMALIZED_NARRATIVE_SCREEN_IDS:
+                        signature = normalized_state_narrative_signature(
+                            text, screen_titles[screen_id], variant
+                        )
+                        prior = normalized_narratives[field].get(signature)
+                        if prior is not None:
+                            raise UXBlueprintError(
+                                "normalized narrative skeleton is repeated: "
+                                f"{field} {prior} {variant_id}"
+                            )
+                        normalized_narratives[field][signature] = variant_id
+            displayed_objects = _possibly_empty_strings(
+                variant.get("displayed_objects"),
+                "state variant displayed objects",
             )
-            state_record_count += 1
-        if kinds != REQUIRED_STATE_KINDS:
-            raise UXBlueprintError("each state model must cover the complete state taxonomy")
+            allowed_commands = _possibly_empty_strings(
+                variant.get("allowed_commands"),
+                "state variant allowed commands",
+            )
+            if variant_id == "UX-STATE-VARIANT-TRUST-INLINE-NO-DISCLOSURE":
+                if displayed_objects or allowed_commands or variant.get(
+                    "visible_content_copy"
+                ) != "":
+                    raise UXBlueprintError(
+                        "no-disclosure variant must render no trust object, copy, or command"
+                    )
+            elif not displayed_objects or not allowed_commands:
+                raise UXBlueprintError(
+                    f"state variant requires exact objects and commands: {variant_id}"
+                )
+            invoking_feature_allowed = {
+                "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-ELIGIBILITY-CHECK",
+                "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-ELIGIBILITY-CHECK",
+            }
+            serialized_variant = json.dumps(variant, ensure_ascii=False).casefold()
+            if (
+                "invoking feature" in serialized_variant
+                and variant_id not in invoking_feature_allowed
+            ):
+                raise UXBlueprintError(
+                    f"state variant leaves invoking feature unresolved: {variant_id}"
+                )
+            if screen_id in (
+                COMPACT_COMMAND_CONTRACT_SCREEN_IDS
+                | GOALS_COMMAND_CONTRACT_SCREEN_IDS
+            ):
+                lines = tuple(
+                    line for line in variant["transition_exit"].splitlines() if line
+                )
+                expected_commands = (
+                    allowed_commands
+                    if screen_id in GOALS_COMMAND_CONTRACT_SCREEN_IDS
+                    else allowed_commands
+                )
+                if len(lines) != len(expected_commands):
+                    raise UXBlueprintError(
+                        f"command transition inventory is incomplete: {variant_id}"
+                    )
+                actual_commands = []
+                for line in lines:
+                    match = re.fullmatch(
+                        r"(.+?) => destination: (.+); effect: (.+); focus: (.+)\.",
+                        line,
+                    )
+                    if match is None or " or " in line.casefold():
+                        raise UXBlueprintError(
+                            f"command transition is not exact: {variant_id}"
+                        )
+                    command, _destination, effect, _focus = match.groups()
+                    actual_commands.append(command)
+                    if command.startswith(
+                        ("Cancel", "Keep ", "Not Now", "Back", "Close", "Done", "Return ")
+                    ) and "preserves" not in effect.casefold():
+                        raise UXBlueprintError(
+                            f"no-op command does not preserve state: {variant_id} {command}"
+                        )
+                if tuple(actual_commands) != expected_commands:
+                    raise UXBlueprintError(
+                        f"command transition set contradicts commands: {variant_id}"
+                    )
+            linked_variant_requirements = _linked_ids(
+                variant.get("requirement_ids"),
+                "state variant requirement IDs",
+            )
+            missing_state_laws = STATE_LAWS[generic_kind] - set(
+                linked_variant_requirements
+            )
+            if missing_state_laws:
+                raise UXBlueprintError(
+                    "state variant omits required law: "
+                    f"{variant_key} -> {sorted(missing_state_laws)}"
+                )
+            linked_requirements.extend(linked_variant_requirements)
+            state_variant_count += 1
+        taxonomy_records = _records(
+            state_model.get("taxonomy"), "state taxonomy dispositions"
+        )
+        if len(taxonomy_records) != len(REQUIRED_STATE_KINDS):
+            raise UXBlueprintError(
+                "each screen requires nine compact taxonomy dispositions"
+            )
+        variants_by_kind: dict[str, list[str]] = {
+            kind: [] for kind in REQUIRED_STATE_KINDS
+        }
+        for variant in variant_records:
+            variants_by_kind[variant["generic_kind"]].append(variant["blueprint_id"])
+        taxonomy_kinds: list[str] = []
+        for taxonomy in taxonomy_records:
+            _closed(taxonomy, STATE_TAXONOMY_FIELDS, "state taxonomy fields")
+            kind = _string(taxonomy.get("generic_kind"), "taxonomy generic kind")
+            taxonomy_kinds.append(kind)
+            if kind not in REQUIRED_STATE_KINDS:
+                raise UXBlueprintError(f"unknown taxonomy kind: {kind}")
+            applicability = _string(
+                taxonomy.get("applicability"), "taxonomy applicability"
+            )
+            if applicability not in {"applicable", "not_applicable"}:
+                raise UXBlueprintError(
+                    f"taxonomy applicability is not closed: {screen_id} {kind}"
+                )
+            rationale = _string(taxonomy.get("rationale"), "taxonomy rationale")
+            if len(rationale.split()) < 8:
+                raise UXBlueprintError(
+                    f"taxonomy rationale is not grounded: {screen_id} {kind}"
+                )
+            variant_ids = _possibly_empty_strings(
+                taxonomy.get("variant_ids"), "taxonomy variant IDs"
+            )
+            expected_ids = tuple(sorted(variants_by_kind[kind]))
+            if variant_ids != expected_ids:
+                raise UXBlueprintError(
+                    f"taxonomy variant disposition is stale: {screen_id} {kind}"
+                )
+            expected_applicability = "applicable" if expected_ids else "not_applicable"
+            if applicability != expected_applicability:
+                raise UXBlueprintError(
+                    f"taxonomy applicability contradicts named states: {screen_id} {kind}"
+                )
+            state_taxonomy_count += 1
+        if tuple(taxonomy_kinds) != tuple(sorted(REQUIRED_STATE_KINDS)):
+            raise UXBlueprintError(
+                f"state taxonomy must be sorted and complete: {screen_id}"
+            )
         linked_requirements.extend(
             _linked_ids(
                 state_model.get("requirement_ids"), "state model requirement IDs"
@@ -739,6 +1628,8 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
         )
     if covered_screens != set(screen_ids):
         raise UXBlueprintError("every screen must be covered by a complete state model")
+    if state_variant_count != sum(len(keys) for keys in REQUIRED_STATE_VARIANTS.values()):
+        raise UXBlueprintError("state variant inventory count is stale")
 
     object_ids: set[str] = set()
     for item in objects:
@@ -774,13 +1665,62 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
     if facets != REQUIRED_FACETS:
         raise UXBlueprintError("cross-cutting facet inventory is incomplete or invented")
 
+    required_channels = {
+        "app-switcher",
+        "notifications",
+        "widgets",
+        "spotlight",
+        "clipboard",
+        "capture",
+        "diagnostics",
+        "support",
+        "export",
+    }
+    channel_names: set[str] = set()
+    exposure_ids: list[str] = []
+    for item in exposure_channels:
+        _closed(item, SENSITIVE_EXPOSURE_FIELDS, "sensitive exposure fields")
+        _record_posture(item, "sensitive exposure channel")
+        channel = _string(item.get("channel"), "sensitive exposure channel")
+        channel_names.add(channel)
+        exposure_id = _string(item.get("blueprint_id"), "sensitive exposure ID")
+        expected_id = "UX-SECURITY-CHANNEL-" + channel.upper()
+        if exposure_id != expected_id:
+            raise UXBlueprintError(
+                f"sensitive exposure identity is stale: {exposure_id}"
+            )
+        exposure_ids.append(exposure_id)
+        for field in (
+            "visible_fields",
+            "defaults",
+            "consent",
+            "redaction",
+            "retention",
+            "protection",
+            "user_control",
+            "denial_behavior",
+            "proof_behavior",
+        ):
+            _string(item.get(field), f"sensitive exposure {field}")
+        requirement_ids = _linked_ids(
+            item.get("requirement_ids"), "sensitive exposure requirement IDs"
+        )
+        if "SECURITY-003" not in requirement_ids:
+            raise UXBlueprintError(
+                f"sensitive exposure channel omits SECURITY-003: {channel}"
+            )
+        linked_requirements.extend(requirement_ids)
+    if channel_names != required_channels or len(exposure_channels) != 9:
+        raise UXBlueprintError("sensitive exposure channel inventory is incomplete")
+
     typed_groups = (
         (screen_ids, r"UX-SCREEN-[A-Z0-9-]+"),
         (state_model_ids, r"UX-STATE-MODEL-[A-Z0-9-]+"),
-        (tuple(state_record_ids), r"UX-STATE-[A-Z0-9-]+-(?:DEGRADED|EMPTY|FAILURE|INTERRUPTION|LOADING|RECOVERY|RESTING|ROLLBACK|TRANSITIONAL)"),
+        (tuple(state_variant_ids), r"UX-STATE-VARIANT-[A-Z0-9-]+"),
         (object_blueprint_ids, r"UX-OBJECT-[A-Z0-9-]+"),
         (journey_ids, r"UX-JOURNEY-[A-Z0-9-]+"),
         (cross_ids, r"UX-CROSS-[A-Z0-9-]+"),
+        (tuple(exposure_ids), r"UX-SECURITY-CHANNEL-[A-Z0-9-]+"),
     )
     all_ids: list[str] = []
     for identifiers, pattern in typed_groups:
@@ -795,7 +1735,7 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
     if unknown_requirements:
         raise UXBlueprintError(f"unknown requirement IDs: {unknown_requirements}")
 
-    if len(screens) != 40 or len(states) != 40 or len(objects) != 18 or len(journeys) != 12 or len(cross) != 10:
+    if len(screens) != 40 or len(states) != 40 or len(objects) != 18 or len(journeys) != 12 or len(cross) != 11:
         raise UXBlueprintError("blueprint inventory counts are stale")
 
     dispositions = build_requirement_dispositions(root, blueprint, all_blueprint_ids)
@@ -808,7 +1748,8 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
     return UXBlueprintSummary(
         screen_count=len(screens),
         state_model_count=len(states),
-        state_record_count=state_record_count,
+        state_taxonomy_count=state_taxonomy_count,
+        state_variant_count=state_variant_count,
         object_boundary_count=len(objects),
         journey_count=len(journeys),
         cross_cutting_count=len(cross),
@@ -838,6 +1779,7 @@ def render_ux_blueprint_markdown(
         blueprint["object_boundaries"],
         blueprint["journeys"],
         blueprint["cross_cutting"],
+        blueprint["sensitive_exposure_channels"],
     )
     all_ids = frozenset(item["blueprint_id"] for group in record_groups for item in group)
     dispositions = build_requirement_dispositions(root, blueprint, all_ids)
@@ -876,10 +1818,10 @@ def render_ux_blueprint_markdown(
     lines.extend(
         [
             "",
-            "## Explicit screen state contracts",
+            "## State taxonomy dispositions",
             "",
-            "Every screen owns explicit resting, loading, transitional, empty, degraded, "
-            "failure, recovery, rollback, and interruption records.",
+            "Every screen maps the nine completeness kinds to exact named variants or "
+            "records a grounded not-applicable disposition.",
         ]
     )
     for state_model in blueprint["state_models"]:  # type: ignore[index]
@@ -890,24 +1832,58 @@ def render_ux_blueprint_markdown(
                 "",
                 f"Screen: `{state_model['screen_id']}`",
                 "",
-                "| State ID | Kind | Visible presentation | Content / copy | Displayed objects | Allowed commands | Transition / exit | Durable effect | Recovery / rollback | Offline behavior | Accessibility / focus | Requirements |",
-                "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+                "| Generic kind | Applicability | Named variant IDs | Rationale |",
+                "| --- | --- | --- | --- |",
             ]
         )
-        for state in state_model["states"]:
-            displayed = ", ".join(state["displayed_objects"])
-            commands = ", ".join(state["allowed_commands"])
-            requirements = ", ".join(
-                f"`{item}`" for item in state["requirement_ids"]
+        for taxonomy in state_model["taxonomy"]:
+            variant_ids = ", ".join(
+                f"`{item}`" for item in taxonomy["variant_ids"]
             )
             lines.append(
-                f"| `{state['blueprint_id']}` | `{state['kind']}` | "
-                f"{state['visible_presentation']} | {state['visible_content_copy']} | "
-                f"{displayed} | {commands} | {state['transition_exit']} | "
-                f"{state['durable_effect']} | {state['recovery_rollback']} | "
-                f"{state['offline_behavior']} | {state['accessibility_focus']} | "
-                f"{requirements} |"
+                f"| `{taxonomy['generic_kind']}` | `{taxonomy['applicability']}` | "
+                f"{variant_ids} | {taxonomy['rationale']} |"
             )
+    lines.extend(
+        [
+            "",
+            "## Canonical named state variants",
+            "",
+            "These stable, frameable variants refine the nine completeness kinds without "
+            "collapsing owner-specific state axes.",
+            "",
+            "| Variant ID | Screen | Variant | Generic kind | Visible contract | Commands | Requirements |",
+            "| --- | --- | --- | --- | --- | --- | --- |",
+        ]
+    )
+    for state_model in blueprint["state_models"]:  # type: ignore[index]
+        for variant in state_model["variants"]:
+            commands = ", ".join(variant["allowed_commands"])
+            requirements = ", ".join(
+                f"`{item}`" for item in variant["requirement_ids"]
+            )
+            lines.append(
+                f"| `{variant['blueprint_id']}` | `{state_model['screen_id']}` | "
+                f"{variant['title']} | `{variant['generic_kind']}` | "
+                f"{variant['visible_content_copy']} | {commands} | {requirements} |"
+            )
+    lines.extend(
+        [
+            "",
+            "## Sensitive exposure channels",
+            "",
+            "| Channel ID | Channel | Visible fields | Defaults | Consent and control | Redaction / protection | Denial / proof |",
+            "| --- | --- | --- | --- | --- | --- | --- |",
+        ]
+    )
+    for item in blueprint["sensitive_exposure_channels"]:  # type: ignore[index]
+        lines.append(
+            f"| `{item['blueprint_id']}` | `{item['channel']}` | "
+            f"{item['visible_fields']} | {item['defaults']} | "
+            f"{item['consent']} {item['user_control']} | "
+            f"{item['redaction']} {item['protection']} | "
+            f"{item['denial_behavior']} {item['proof_behavior']} |"
+        )
     lines.extend(
         [
             "",
