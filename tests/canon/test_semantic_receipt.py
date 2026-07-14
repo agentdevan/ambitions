@@ -21,7 +21,7 @@ RECEIPT = (
     ROOT
     / "docs/qa/evidence/2026-07-13-train-4-semantic-comparison/receipt.json"
 )
-EVALUATED_COMMIT = "6e88b61414417cdaeaae9586c606f175de099e48"
+EVALUATED_COMMIT = "15beb50106a641ab3eb02ed10679dd425de69913"
 
 
 class SemanticReceiptTest(unittest.TestCase):
@@ -67,11 +67,11 @@ class SemanticReceiptTest(unittest.TestCase):
                 for row in comparison["dimensions"]
             ),
             (
-                ("semantic_equivalence", "new_better", 3, 4),
+                ("semantic_equivalence", "equivalent", 4, 4),
                 ("relevant_law_recall", "new_better", 3, 4),
                 ("contradiction_control", "equivalent", 4, 4),
                 ("unauthorized_assumptions", "equivalent", 4, 4),
-                ("source_ownership", "equivalent", 4, 4),
+                ("source_ownership", "new_better", 3, 4),
                 ("validation_completeness", "equivalent", 4, 4),
                 ("proof_discipline", "equivalent", 4, 4),
             ),
@@ -359,9 +359,9 @@ class SemanticReceiptTest(unittest.TestCase):
         changed["comparison"]["dimensions"][0].update(
             {"old_score": 4, "new_score": 3, "verdict": "old_better"}
         )
-        changed["comparison"]["old_total_score"] = 27
+        changed["comparison"]["old_total_score"] = 26
         changed["comparison"]["new_total_score"] = 27
-        changed["comparison"]["overall_verdict"] = "equivalent"
+        changed["comparison"]["overall_verdict"] = "new_better"
         malformed.append(("old better policy", changed, "SEMANTIC_RECEIPT_POLICY"))
         changed = deepcopy(base)
         changed["comparison"]["new_total_score"] = 26

@@ -1,14 +1,14 @@
 {
   "authority_state": "shadow",
-  "canon_sha256": "fb9d0e3aa1a058b9b12a132697b48fd70ec0eaa727295d39f3957dee8b28db1b",
+  "canon_sha256": "3b833fa70f1d8de70e1f737062e5b13c3bef4a5b3f1092ac23d0a4082f8ac172",
   "claim_ceiling": "This receipt records an explicit non-CI shadow comparison only. It does not authorize implementation or claim product, runtime, source, visual, accessibility, privacy, device, TestFlight, App Store, or release Green.",
   "comparison": {
     "dimensions": [
       {
         "dimension": "semantic_equivalence",
         "new_score": 4,
-        "old_score": 3,
-        "verdict": "new_better"
+        "old_score": 4,
+        "verdict": "equivalent"
       },
       {
         "dimension": "relevant_law_recall",
@@ -31,8 +31,8 @@
       {
         "dimension": "source_ownership",
         "new_score": 4,
-        "old_score": 4,
-        "verdict": "equivalent"
+        "old_score": 3,
+        "verdict": "new_better"
       },
       {
         "dimension": "validation_completeness",
@@ -51,17 +51,17 @@
     "new_total_score": 28,
     "old_total_score": 26,
     "overall_verdict": "new_better",
-    "reviewer": "Final Regression Independent Semantic Comparator",
-    "sha256": "a87287253097b0d4df819d7ef18f29ea2646186cc2938d79c6e8b53e50e5b1e9"
+    "reviewer": "Polished Independent Semantic Comparator",
+    "sha256": "766308d15fd75bf1c083f545ea2cc64c134daeb12fe9f426377d87e584970bf8"
   },
   "compiler_version": "0.2.0",
-  "evaluated_task_pack_commit": "6e88b61414417cdaeaae9586c606f175de099e48",
+  "evaluated_task_pack_commit": "15beb50106a641ab3eb02ed10679dd425de69913",
   "lane": "explicit_non_ci_semantic_review",
-  "new_prompt_sha256": "9723a35f2f5f3bd810cfac2d082ae2b6934bd72eb59b65e331379c12611cb305",
+  "new_prompt_sha256": "c896601011527dd8a744ce5886f71f31b6d363323cbaad4d378d9828afa4e495",
   "new_response": {
     "model": "gpt-5-sol-high",
-    "reviewer": "Final Regression New Pack Evaluator",
-    "sha256": "064e5e1f7eb28349115bcc538e2eb99c765fd42241eb185ce42c2fe1a54b4a7a"
+    "reviewer": "Polished New Pack Evaluator",
+    "sha256": "4775ffde298474605060b6d6a1e824e7319ea15eac030cb3cd1fee923297b0e9"
   },
   "old_prompt_sha256": "338c2088cc6a74dc06a3fc087bc6848280b117b7638aefdb377b9649face56cb",
   "old_response": {
@@ -71,43 +71,43 @@
   },
   "pack_hashes": [
     {
-      "json_sha256": "159ddc2a5d55ea18447bdc2cc4b4c1f2b12d4e0519356089f028dde271fe377f",
-      "markdown_sha256": "ad3e3c44d3eb4e27a07f9b2d3bf05bb508a27b367a4df449fc8646a878598d64",
+      "json_sha256": "fb32048673ebfd2005c3c33733d690c6799851c348a08f30d24d0a04bd3887dd",
+      "markdown_sha256": "615898227e93de0af5f73e38238cbd4b2f123b8882be5ab17f1721bb12655c23",
       "scenario_id": "today-swiftui"
     },
     {
-      "json_sha256": "42fcfe502d529268fd594b502c4d519d174588684c22489e58e78e1fe2871a5b",
-      "markdown_sha256": "e528559ebb7bbc802fcf9d01f176fcdc7e4b4f7d738dbd8fa059280fc609f6bc",
+      "json_sha256": "f0dc7410394b9cd2124088f86dc0d29a62092341d94a6cd8d96ce072bcd91e6b",
+      "markdown_sha256": "b9fa77a917c2f19deae955d5603b3c2861fbaa76a627573fcac99f2821e5a9b2",
       "scenario_id": "time-recurrence"
     },
     {
-      "json_sha256": "60edbb03769f3dcf94aeeceece1728d447ec46af4d100adc1bdbffc47cc0cc91",
-      "markdown_sha256": "a433779725df492eb1b7037cabf1c82dbc24a9099416d201a7ac46e1cfd92989",
+      "json_sha256": "8b720e60c31c198d38478795e0a6bcb28adeb012577dbdf61b60c862ec619cc8",
+      "markdown_sha256": "0405a603db69e067c4d6d08a25589c74c245d31ddbbfce74a87ab34323201eaf",
       "scenario_id": "capture-proposal"
     },
     {
-      "json_sha256": "f550a40e293bb6134ddeaa63864628503dc2f3264adca8586f6194f829be807e",
-      "markdown_sha256": "3f5f54be73fa68e7758aa435866579d5067db119248f57c517d5e3232e560874",
+      "json_sha256": "27e31ab643bef0e3eecbf947369fc3fc83dad9ffc2abb923eb368a2f10f450d2",
+      "markdown_sha256": "e542803318b3a8fe5b78ac3b9c712b4a2953900f4d526337075a44276c313f23",
       "scenario_id": "local-runtime-mutation"
     },
     {
-      "json_sha256": "7d39d71971d1883b0eec2ae994f9e7b6b6aa5389d54022a89b0318176ad79967",
-      "markdown_sha256": "f0187abb59f1574310231654b27aae62ad482dc6045284289a150883ea4e995a",
+      "json_sha256": "61701c25941f253769b8ca81c6a74d7ca00f002d90440d841ad50783963521b2",
+      "markdown_sha256": "95ca85bd6b09e139b44ae65a6cea5ef80d8ee11754d020ab0d4875b3fc4696a6",
       "scenario_id": "cloudkit-continuity"
     },
     {
-      "json_sha256": "b703c801730400054c135053958c26c7afca1178d8966bfb766d2b3658aee5b4",
-      "markdown_sha256": "13b1961b0fef5613b4da072afd27854e8b32fd1b220a86dbe3474efd49a2b014",
+      "json_sha256": "d829272cdad4c0c74de13e3d7d04f1fb28c366984e5c44f440bfae76f77dbb68",
+      "markdown_sha256": "ab7a0bc158ae069e81c2691d5050be0e37dc4d5f14ab4509dc1874a21aba813d",
       "scenario_id": "source-atlas-boundary"
     },
     {
-      "json_sha256": "afe9d41e2c01112a77bdb06e019c73c3f8af6a6fe8eb64e6996409c8fe7217b2",
-      "markdown_sha256": "f3be91f0327c258b5720fdad746dc416afa96813adab5fa0fc281e2873f590e5",
+      "json_sha256": "4a63224e8d659806db972ae2862a7fc8eab89e877f70e3a10ca329acce311aec",
+      "markdown_sha256": "4f7102e7108cf8e8ac2723461ebc83acfb54b4132394f4f4787ae6d24d418a82",
       "scenario_id": "accessibility-repair"
     },
     {
-      "json_sha256": "e44f19d613b51fea22a601845a8f10a4e68d1ba6e67f4e144fa692497e03611a",
-      "markdown_sha256": "058d98800838978be8d0e3b0c999998fb24a1d5125b3b412fec582f9db7c5200",
+      "json_sha256": "07e667beb849e5613fd6071c1d2559bcef466bd239030c5b693447d0ac390b5c",
+      "markdown_sha256": "5eb14d9a44de08fd7054bac2412586df6f637ffa642f90a79385bb3558cf874c",
       "scenario_id": "release-proof-claim"
     }
   ],
