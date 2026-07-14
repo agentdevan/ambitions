@@ -1,7 +1,7 @@
 {
   "authority_state": "shadow",
   "blueprint_id": "AMB-UX-BLUEPRINT-REBASELINE-001",
-  "canon_content_sha": "e3f9d8930e59a04e00860927e2655f706fc4fcc12e5c0a3153473b15adc6dd48",
+  "canon_content_sha": "6faef22812a7d968ec00278404913dfa22f278984e522346ce315828d6e18349",
   "canon_revision": 1,
   "claim_ceiling": "Visual design input only; no source, runtime, rendered-app, accessibility, device, privacy/legal, distribution, or release claim.",
   "cross_cutting": [
@@ -11129,7 +11129,7 @@
     },
     {
       "path": "docs/canon/specifications/surfaces",
-      "sha256": "df3d4029c926353811aad7b5fc3810599e7f5ec6985893dff4d9b03f8839b7f1"
+      "sha256": "c0db97317182bdd3535dc11063fc8cf9db1b2c8d99f236dc98a3c08d57463799"
     },
     {
       "path": "docs/canon/specifications/systems",
@@ -31832,7 +31832,7 @@
             "affected local data",
             "Permanent Delete Irreversible status"
           ],
-          "durable_effect": "Exact command consequences: Done: No durable mutation occurs and no Receipt is created; dismissal cannot reissue deletion, the destroyed scope remains absent, and the existing permanent-deletion Receipt and History remain unchanged. The durable boundary is specific to this visible evidence: Permanent deletion completed and cannot be undone. The Receipt identifies the deleted scope without exposing deleted content.",
+          "durable_effect": "Exact command consequences: Done: No durable mutation occurs and no Receipt is created; dismissal cannot reissue deletion, the existing irreversible deletion result keeps the destroyed scope unavailable, and the existing permanent-deletion Receipt and History remain unchanged. The durable boundary is specific to this visible evidence: Permanent deletion completed and cannot be undone. The Receipt identifies the deleted scope without exposing deleted content.",
           "generic_kind": "transitional",
           "implementation_status": "design_input_only",
           "offline_behavior": "Settings, private data controls, diagnostics, backup, restore, and App Lock remain local/offline; export uses only a user-chosen destination and continuity remains disabled. Offline rendering retains this state evidence: Permanent deletion completed and cannot be undone or restored. The receipt identifies the deleted scope without exposing deleted content.",
@@ -31849,7 +31849,7 @@
           "specification_gap_ids": [],
           "state_axis": "presentation",
           "title": "Permanent Delete Irreversible",
-          "transition_exit": "Done => destination: the surviving You data root. The handoff starts from Data and Storage explicit state contract / Permanent Delete Irreversible; effect: No durable mutation occurs and no Receipt is created; dismissal cannot reissue deletion, the destroyed scope remains absent, and the existing permanent-deletion Receipt and History remain unchanged; Data and Storage explicit state contract / Permanent Delete Irreversible reports the outcome from this visible condition: Permanent deletion completed and cannot be undone. The Receipt identifies the deleted scope without exposing deleted content; focus: the Data and Storage heading and irreversible result within Data and Storage explicit state contract / Permanent Delete Irreversible.",
+          "transition_exit": "Done => destination: the surviving You data root. The handoff starts from Data and Storage explicit state contract / Permanent Delete Irreversible; effect: No durable mutation occurs and no Receipt is created; dismissal cannot reissue deletion, the existing irreversible deletion result keeps the destroyed scope unavailable, and the existing permanent-deletion Receipt and History remain unchanged; Data and Storage explicit state contract / Permanent Delete Irreversible reports the outcome from this visible condition: Permanent deletion completed and cannot be undone. The Receipt identifies the deleted scope without exposing deleted content; focus: the Data and Storage heading and irreversible result within Data and Storage explicit state contract / Permanent Delete Irreversible.",
           "variant_key": "permanent-delete-irreversible",
           "visible_content_copy": "Permanent deletion completed and cannot be undone or restored. The receipt identifies the deleted scope without exposing deleted content.",
           "visible_presentation": "Data and Storage presents Permanent Delete Irreversible with native hierarchy and the owning object still visible."

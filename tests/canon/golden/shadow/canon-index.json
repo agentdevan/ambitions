@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "e28a6aa1ee8ad317775da10e97e4648ca020768f006305c642f4305bbf90f856",
+  "canon_content_sha": "6faef22812a7d968ec00278404913dfa22f278984e522346ce315828d6e18349",
   "canon_revision": 1,
   "compiler_version": "0.2.0",
   "documents": [
@@ -3005,7 +3005,7 @@
     },
     {
       "concept": "global.completed.contextual-placement",
-      "line": 1157,
+      "line": 1129,
       "modality": "MUST NOT",
       "requirement_id": "SPEC-COMPLETED-CONTEXTUAL-PLACEMENT-001",
       "source_path": "docs/canon/specifications/global/trust-inspection.md",
@@ -3014,7 +3014,7 @@
     },
     {
       "concept": "global.capture.attachment-intake",
-      "line": 917,
+      "line": 925,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-CAPTURE-ATTACHMENT-INTAKE-001",
       "source_path": "docs/canon/specifications/global/capture.md",
@@ -3023,7 +3023,7 @@
     },
     {
       "concept": "global.capture.classification",
-      "line": 906,
+      "line": 914,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-CAPTURE-CLASSIFICATION-001",
       "source_path": "docs/canon/specifications/global/capture.md",
@@ -3032,7 +3032,7 @@
     },
     {
       "concept": "global.capture.close-behavior",
-      "line": 1014,
+      "line": 1022,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-CAPTURE-CLOSE-BEHAVIOR-001",
       "source_path": "docs/canon/specifications/global/capture.md",
@@ -3041,7 +3041,7 @@
     },
     {
       "concept": "global.capture.command-contract",
-      "line": 928,
+      "line": 936,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-CAPTURE-COMMAND-CONTRACT-001",
       "source_path": "docs/canon/specifications/global/capture.md",
@@ -3050,7 +3050,7 @@
     },
     {
       "concept": "global.capture.draft-recovery",
-      "line": 857,
+      "line": 865,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-CAPTURE-DRAFT-RECOVERY-001",
       "source_path": "docs/canon/specifications/global/capture.md",
@@ -3059,7 +3059,7 @@
     },
     {
       "concept": "global.capture.identity",
-      "line": 808,
+      "line": 816,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-CAPTURE-IDENTITY-001",
       "source_path": "docs/canon/specifications/global/capture.md",
@@ -3068,7 +3068,7 @@
     },
     {
       "concept": "global.capture.keyboard",
-      "line": 831,
+      "line": 839,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-CAPTURE-KEYBOARD-001",
       "source_path": "docs/canon/specifications/global/capture.md",
@@ -3077,7 +3077,7 @@
     },
     {
       "concept": "global.capture.proposal-flow",
-      "line": 876,
+      "line": 884,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-CAPTURE-PROPOSAL-FLOW-001",
       "source_path": "docs/canon/specifications/global/capture.md",
@@ -3086,7 +3086,7 @@
     },
     {
       "concept": "global.capture.saved-for-later",
-      "line": 844,
+      "line": 852,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-CAPTURE-SAVED-FOR-LATER-001",
       "source_path": "docs/canon/specifications/global/capture.md",
@@ -3095,7 +3095,7 @@
     },
     {
       "concept": "global.capture.visual-authority",
-      "line": 895,
+      "line": 903,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001",
       "source_path": "docs/canon/specifications/global/capture.md",
@@ -3194,7 +3194,7 @@
     },
     {
       "concept": "global.trust.command-contract",
-      "line": 1071,
+      "line": 1043,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-TRUST-COMMAND-CONTRACT-001",
       "source_path": "docs/canon/specifications/global/trust-inspection.md",
@@ -3203,7 +3203,7 @@
     },
     {
       "concept": "global.trust.identity",
-      "line": 1016,
+      "line": 988,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-TRUST-INSPECTION-001",
       "source_path": "docs/canon/specifications/global/trust-inspection.md",
@@ -3212,7 +3212,7 @@
     },
     {
       "concept": "global.trust.layers",
-      "line": 1033,
+      "line": 1005,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-TRUST-LAYERS-001",
       "source_path": "docs/canon/specifications/global/trust-inspection.md",
@@ -3221,7 +3221,7 @@
     },
     {
       "concept": "global.trust.proportional-receipts",
-      "line": 1050,
+      "line": 1022,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-TRUST-PROPORTIONAL-RECEIPTS-001",
       "source_path": "docs/canon/specifications/global/trust-inspection.md",
@@ -3230,7 +3230,7 @@
     },
     {
       "concept": "global.trust.visual-authority",
-      "line": 1060,
+      "line": 1032,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001",
       "source_path": "docs/canon/specifications/global/trust-inspection.md",
@@ -3554,7 +3554,7 @@
     },
     {
       "concept": "surface.today.command-contract",
-      "line": 708,
+      "line": 710,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TODAY-COMMAND-CONTRACT-001",
       "source_path": "docs/canon/specifications/surfaces/today.md",
@@ -3563,7 +3563,7 @@
     },
     {
       "concept": "surface.today.eligibility",
-      "line": 616,
+      "line": 618,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TODAY-ELIGIBILITY-001",
       "source_path": "docs/canon/specifications/surfaces/today.md",
@@ -3572,7 +3572,7 @@
     },
     {
       "concept": "surface.today.first-viewport",
-      "line": 646,
+      "line": 648,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TODAY-FIRST-VIEWPORT-001",
       "source_path": "docs/canon/specifications/surfaces/today.md",
@@ -3581,7 +3581,7 @@
     },
     {
       "concept": "surface.today.missed-placement-continuity",
-      "line": 687,
+      "line": 689,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TODAY-MISSED-CONTINUITY-001",
       "source_path": "docs/canon/specifications/surfaces/today.md",
@@ -3590,7 +3590,7 @@
     },
     {
       "concept": "surface.today.purpose",
-      "line": 580,
+      "line": 582,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TODAY-PURPOSE-001",
       "source_path": "docs/canon/specifications/surfaces/today.md",
@@ -3599,7 +3599,7 @@
     },
     {
       "concept": "surface.today.object-row",
-      "line": 697,
+      "line": 699,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TODAY-ROW-001",
       "source_path": "docs/canon/specifications/surfaces/today.md",
@@ -3608,7 +3608,7 @@
     },
     {
       "concept": "surface.today.screen-inventory",
-      "line": 631,
+      "line": 633,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TODAY-SCREEN-INVENTORY-001",
       "source_path": "docs/canon/specifications/surfaces/today.md",
@@ -3617,7 +3617,7 @@
     },
     {
       "concept": "surface.today.states",
-      "line": 665,
+      "line": 667,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TODAY-STATES-001",
       "source_path": "docs/canon/specifications/surfaces/today.md",
@@ -3626,7 +3626,7 @@
     },
     {
       "concept": "surface.today.temporal-rail",
-      "line": 599,
+      "line": 601,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TODAY-TEMPORAL-RAIL-001",
       "source_path": "docs/canon/specifications/surfaces/today.md",
@@ -3635,7 +3635,7 @@
     },
     {
       "concept": "surface.today.visual-authority",
-      "line": 676,
+      "line": 678,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001",
       "source_path": "docs/canon/specifications/surfaces/today.md",
@@ -4598,5 +4598,5 @@
     }
   ],
   "schema_version": 1,
-  "traceability_input_sha": "21e77c04d7da895bbeef9a46721a189a41bca828deda2160578f7a8d40209594"
+  "traceability_input_sha": "d0a7d36c7f18fe2a5d8108ddf50092f32b4dbfdc48376aa2f6209d395836f20b"
 }
