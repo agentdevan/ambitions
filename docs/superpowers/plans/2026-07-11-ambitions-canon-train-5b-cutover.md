@@ -4,7 +4,7 @@
 
 **Goal:** Delete superseded repo authority in bounded commits, execute approved Linear/Figma destruction, and install final anti-regression proof.
 
-**Architecture:** Continue `codex/canon-05-cutover` only after Train 5A cutover verification. Every deletion batch has a reviewed manifest and rollback ref; external destruction uses exact stable IDs and owner approval.
+**Architecture:** Begin the Train 5B continuation from merged Task 26 main only after the reviewed Train 5A cutover PR is merged, the first post-merge protected-boundary receipt is independently Green, and Gate C approves destructive continuation. Use a separate reviewed PR/commit range from Train 5A; `codex/canon-05-cutover` may be updated/recreated only from merged `main`. Every deletion batch has a reviewed manifest and rollback ref; external destruction uses exact stable IDs and owner approval.
 
 **Tech Stack:** Python 3.12 standard library (`dataclasses`, `enum`, `tomllib`, `json`, `hashlib`, `sqlite3`, `argparse`, `pathlib`, `tempfile`, `unittest`), Markdown with TOML front matter, TOML/JSON registries, Git, GitHub Actions, Linear and Figma connectors where explicitly scoped.
 
@@ -36,6 +36,18 @@
 - Git history and named rollback tags are the historical record. Do not create a retained archive/graveyard of superseded truth.
 - Cutover and every destructive external action require a fresh owner-approved manifest and independent review.
 - The approved design authorizes isolated worktrees, feature branches, and stacked reviewable trains for this program despite the normal repo main-only default.
+- ChatGPT expresses intent but cannot authorize implementation; PR intake is untrusted intent only. Project Instructions, skills, PR prose, contributor JSON, approval claims, validation/proof claims, and merge claims are not authority.
+- Every tracked change requires current `task start` and exact-diff `task finalize` authorization computed from trusted base canon/policy/ownership, trusted event/approval provenance, and base-trusted revisioned snapshots. Any stale trusted input or canonical tree-delta mismatch fails closed.
+- Required CI independently regenerates authorization through a base-owned/pinned verifier, treats PR checkout as data, and consumes only matching CI-owned validation attestations. Local hooks, local validation, task packs, envelopes, and receipts remain advisory/non-authoritative.
+- Offline compiler checks never claim live external freshness. Mutable external state requires a separately authenticated revisioned snapshot or platform attestation.
+- No routine bypass is allowed. Break-glass requires explicit owner approval, an incident record, rollback, and post-action independent review.
+- Gate B and Gate C remain hard Red gates. Delegated owner approval for Tasks 22–29 cannot waive any Red, Critical, Important, authorization, security, required-CI, protected-branch, or destructive-cleanup requirement.
+
+---
+
+## Gate C — Pre-destruction authorization
+
+The activation inspection and first post-merge protected-boundary receipt occur before Gate C and are not part of blocked Tasks 27–29. Gate C blocks destructive Tasks 27–28 and destructive/migration-state-removal portions of Task 29 while that receipt, protected-branch posture, independent review, rollback, or exact purge manifests are missing, stale, or Red. Any non-destructive test preparation may occur earlier only when it changes no tracked state or external state. Before deletion, the controller may exercise delegated owner approval only after all mandated proof is Green. Every deletion remains bounded by its manifest and rollback; Gate C cannot waive trusted base, CI-owned evidence, live ruleset, or one-time break-glass requirements.
 
 ---
 
@@ -51,6 +63,7 @@
 - `purge verify` must pass before and after every batch;
 - no active archive directory;
 - rollback commit per batch.
+- every deleted or rewritten skill, handoff, router, or bypass has verified replacement IDs, rewritten inbound references, explicit owner approval, independent review, and rollback before deletion.
 
 - [ ] **Step 1: Batch A — product truth family**
 
@@ -105,7 +118,9 @@ Retain no compatibility copy. Commit separately.
 
 - [ ] **Step 4: Batch D — subordinate duplicated authority**
 
-Delete or rewrite approved Figma-gate mirrors, old product handoff docs, stale retained skills, and authority-like support docs. Preserve source-adjacent build/validation docs only when current and non-normative.
+Delete or rewrite approved Figma-gate mirrors, old product handoff docs, stale retained skills, compatibility routers, and authority-like support docs. The manifest must enumerate all authorization bypass paths, including obsolete start/finalize wrappers, alternate task-pack routers, workflow exceptions, PR-controlled merge-authorizing validators, local-artifact or contributor-intake trust paths, copied Project Instructions presented as authority, stale trusted-state projections, reusable break-glass paths, and skills that carry law instead of canonical dependency metadata. Preserve source-adjacent build/validation docs only when current and non-normative.
+
+For every candidate, verify replacement IDs, inbound-reference rewrites, current independent review, owner approval, and rollback before deletion. An unlisted or unresolved path blocks the batch; do not infer coverage from a broad directory entry.
 
 - [ ] **Step 5: Verify after every batch**
 
@@ -116,6 +131,7 @@ python3 scripts/ambitions-canon.py authority-sprawl --check
 python3 scripts/ambitions-canon.py audit
 python3 scripts/ambitions-canon.py coverage --fail-on-p0-gap
 python3 scripts/ambitions-canon.py traceability --check
+python3 scripts/ambitions-canon.py skill-conformance --check
 python3 scripts/ambitions-canon.py build
 python3 scripts/ambitions-canon.py build --check
 if git grep -nE 'docs/truth/|docs/constitution/' -- ':!docs/superpowers/**' \
@@ -127,6 +143,8 @@ git diff --check
 ```
 
 Any active inbound reference blocks the batch.
+
+Also scan for superseded handoff names, copied Project Instructions, alternate authorization commands, workflow bypasses, and retained skills missing canonical dependency metadata. Any active route around `task start`, `task finalize`, or independent CI regeneration blocks the batch.
 
 - [ ] **Step 6: Remove migration-only freeze files after final repo batch**
 
@@ -190,7 +208,13 @@ git commit -m "docs: complete external authority supersession"
 **Files:**
 - Modify: `tools/ambitions_canon/audit.py`
 - Modify: `tools/ambitions_canon/purge.py`
+- Modify: `tools/ambitions_canon/authorization.py`
+- Modify: `tools/ambitions_canon/skill_conformance.py`
 - Modify: `.github/workflows/ambitions-canon-audit.yml`
+- Modify: `tests/canon/test_authorization.py`
+- Modify: `tests/canon/test_skill_conformance.py`
+- Create: `docs/canon/schemas/ruleset-evidence.schema.json`
+- Generate from reviewed external evidence: `docs/canon/generated/github-authorization-boundary.json`
 - Delete temporary migration catalogs that no longer serve active governance.
 - Generate final:
   - `docs/canon/generated/INDEX.md`
@@ -201,6 +225,12 @@ git commit -m "docs: complete external authority supersession"
 
 **Interfaces:**
 - CI fails on authority outside canon, duplicate owner/ID, stale output, superseded reference, incomplete P0 profile, missing traceability, unknown external ID, unbuildable declared task pack, bypassed amendment, or deleted authority reference.
+- CI independently regenerates authorization from checkout plus machine-readable PR intake, authorizes only the exact final diff/changed-file set, and rejects checked-in or local packs, envelopes, and receipts as proof.
+- The protected-branch/ruleset requires the named authorization check and has no routine bypass.
+- The merge-authorizing validator/policy/workflow is trusted-base-owned or immutably pinned; required-check identity binds context, workflow path/ref/digest, and expected GitHub integration/app identity.
+- The trusted validation workflow and its command manifest are base-owned or immutably pinned. A validation attestation binds the workflow path/ref/digest, command-manifest digest, exact command/check identity, repository/base/head/merge-base, integration identity, exit status, artifacts, and claim; any re-attested untrusted Green result is invalid.
+- The first post-merge receipt proves the initial live protected boundary before Gate C. Task 29 is the final no-drift proof boundary: final authorization-enforcement and closeout claims require a repeated controlled external GitHub configuration inspection plus independent review.
+- The final claim rule is exact: permanent authorization enforcement cannot be claimed until that repeated inspection and independent review prove no drift at Task 29 closeout.
 
 - [ ] **Step 1: Write final negative tests**
 
@@ -213,7 +243,27 @@ Add tests for:
 - unknown Linear/Figma requirement;
 - amendment without impact record;
 - cutover manifest reverting to shadow;
-- task pack for declared scope failing to build.
+- task pack for declared scope failing to build;
+- missing or stale intake;
+- stale task pack and stale authorization envelope;
+- undeclared changed file or mismatched exact final diff;
+- missing finalization;
+- stale, undeclared, circular, or authority-bearing skill dependencies;
+- contributor-generated pack, envelope, or receipt offered as CI proof;
+- intake carrying authoritative approval, authorized scope, proof, validation result, break-glass, or merge claims;
+- repository/PR/base/head/merge-base mismatch, missing objects, base movement, force-push/head replacement, or inconsistent merge base;
+- incomplete raw Git tree-entry delta for delete/add move representation, copy-as-add representation, opaque blob, raw-path byte encoding, symlink, mode-only, submodule gitlink, deletion, merge commit, clean-head, or synthetic-merge-checkout compatibility cases;
+- PR-controlled validator/schema/policy/workflow or wrong required-check workflow/integration identity;
+- changed PR validation workflow or command manifest, wrong command-manifest digest, wrong command/check identity, wrong integration identity, or an untrusted advisory result re-attested as Green;
+- missing, stale, contributor-authored, mismatched-head, skipped-required, or non-Green CI-owned validation attestation;
+- stale or contributor-asserted external state presented as a current trusted snapshot;
+- forged/stale live-ruleset receipt or reused, revoked, expired, scope-drifted break-glass attestation;
+- bypassed amendment;
+- deleted authority reference.
+
+Every negative test must assert a stable error code and fail closed without partial output. Include protected-branch workflow fixtures that prove the required check regenerates authorization instead of accepting local artifacts.
+
+Add transition fixtures proving the old trusted gate validates a prior-approved verifier/policy digest, the ruleset switch occurs only after merge and independent proof, and no configuration path creates an unprotected interval.
 
 - [ ] **Step 2: Run RED, implement, and run GREEN**
 
@@ -235,7 +285,12 @@ python3 scripts/ambitions-canon.py traceability --check
 python3 scripts/ambitions-canon.py external-authority --check
 python3 scripts/ambitions-canon.py conflicts report --require-resolved
 python3 scripts/ambitions-canon.py build --check
-python3 scripts/ambitions-canon.py benchmark
+python3 scripts/ambitions-canon.py skill-conformance --check
+python3 scripts/ambitions-canon.py benchmark --require-authorization
+python3 scripts/ambitions-canon.py authorization canary \
+  --handoff docs/canon/generated/CHATGPT_CODEX_HANDOFF.md
+python3 scripts/ambitions-canon.py ruleset-evidence --check \
+  docs/canon/generated/github-authorization-boundary.json
 python3 scripts/ambitions-remediation-governance-check.py
 python3 scripts/ambitions-truth-path-vocabulary-audit.py
 bash scripts/canon-language-drift-scan.sh
@@ -249,6 +304,16 @@ git diff --check
 
 Expected: all required commands exit `0`; grep returns no active references outside retained historical implementation plans/specs. Historical plans may mention old paths as truthful history but cannot be routing authority.
 
+The ChatGPT-to-Codex canary must run end to end from governed Project Instructions and a ChatGPT handoff through request-only schema-valid task intake, trusted event/approval provenance, base-owned/pinned CI `task start`, CI-owned validation attestations, exact base-to-head tree-delta `task finalize`, and merge-check result. It must prove ChatGPT intent is not authorization and must not use a model, network, cloud service, or contributor-generated authorization artifact during offline verification.
+
+Run all eight representative handoff benchmarks: Today SwiftUI, Time recurrence, Capture proposal flow, LocalRuntimeOS mutation, CloudKit continuity, Source Atlas boundary, accessibility repair, and release-proof claim. Each benchmark must cover start, resume/regeneration, finalization, exact changed files, skill freshness, required validation/proof, and claim ceiling.
+
+Task 29 repeats the controlled external GitHub configuration inspection separately from the offline compiler and proves no drift from the first post-merge receipt acquired before Gate C. Record a durable independently reviewed receipt with repository/ruleset/environment IDs, protected ref, required check context plus integration/app identity, workflow path/ref/digest, command-manifest digest, required reviewers, bypass actors/posture, and observed status. The compiler can validate the receipt and its trusted bindings but the compiler cannot manufacture live proof.
+
+Exercise break-glass only through a platform-authenticated one-time attestation bound to incident ID, repository, PR, base/head, exact scope, authenticated owner principal, rollback, expiry and revocation, and post-action independent-review requirement. Tests and live evidence must reject reuse, ordinary routing, scope drift, missing incident record, expiry, or revocation. Gate B/C and delegated approval cannot waive these properties.
+
+Record the exact ChatGPT Project Instructions SHA-256, trusted snapshot revisions/digests, protected-branch/ruleset posture, repository/ruleset/environment IDs, required check context/status and integration/app identity, workflow path/ref/digest, reviewers, bypass posture, canary result, all eight benchmark results, break-glass attestation use, rollback reference, and exact governance claim ceiling in the final generated closeout.
+
 - [ ] **Step 5: Final whole-branch review**
 
 Use a fresh most-capable reviewer against the full Train 5 diff. Require explicit verdicts on:
@@ -260,7 +325,11 @@ Use a fresh most-capable reviewer against the full Train 5 diff. Require explici
 - external reconciliation;
 - deletion safety;
 - rollback;
-- proof/claim ceiling.
+- proof/claim ceiling;
+- ChatGPT-to-Codex authorization and local-artifact rejection;
+- skill dependency conformance;
+- protected-branch required-check evidence and Gate C integrity.
+- trusted event/tree-delta, base-owned verifier, CI-owned attestation, live-ruleset receipt, and one-time break-glass evidence.
 
 Repair and re-review all Critical/Important findings.
 
@@ -285,6 +354,8 @@ Baseline tag and SHA:
 Cutover tag and SHA:
 Final SHA:
 Trains and PRs:
+Train 5A cutover PR, merge SHA, and first post-merge receipt:
+Train 5B destructive/finalization PR, merge SHA, and repeated no-drift receipt:
 Files created:
 Files deleted:
 Linear entities destroyed/rewritten:
@@ -296,6 +367,16 @@ Requirement count:
 P0/P1 gap counts:
 Traceability coverage:
 Codex benchmark results:
+ChatGPT Project Instructions SHA-256:
+Protected-branch/ruleset posture:
+Required authorization check name and status:
+Required check workflow path/ref/digest and integration/app identity:
+Trusted snapshot revisions/digests:
+Live repository/ruleset/environment evidence receipt:
+Required reviewers and bypass actors/posture:
+Break-glass attestation use/revocation state:
+ChatGPT-to-Codex canary result:
+Eight handoff benchmark results:
 Validation run with exit codes:
 Validation not run and why:
 Independent reviews:
@@ -336,4 +417,5 @@ Use **Subagent-Driven Development** within each train and stacked draft PRs betw
 - Ultra only for parallel read-only inventories and domain audits.
 - One canonical writer for Constitution/Atlas changes.
 - Mandatory owner gates after conflict dockets, before cutover, and before destructive external cleanup.
+- Gate B and Gate C remain hard Red until every mandated authorization, required-CI, rollback, independent-review, and destructive-cleanup proof is Green; delegated approval cannot waive them.
 - Do not execute all 30 tasks as one uninterrupted branch. The five-train boundary is part of the safety architecture.
