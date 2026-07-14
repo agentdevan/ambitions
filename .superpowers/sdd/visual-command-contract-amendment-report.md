@@ -93,24 +93,24 @@ Historical frozen-candidate evidence and current repair status:
 
 ### Fresh semantic comparison receipt
 
-The final tracked receipt is bound to deterministic polished-repair commit `15beb50106a641ab3eb02ed10679dd425de69913`. Terminal semantic-repair commit `030cf73f38c6bab9a0096af7706e6a85644026a2` froze the earlier evaluated canon; validator commits `262327c04261deb43bfe3bd3e7ad1e9380c0c0ab` and `f11b414f342346dfd7200381d232045efb34de9a` closed proof-diff, deletion, and rename bypasses; final-regression commit `6e88b61414417cdaeaae9586c606f175de099e48` repaired the three exact discovery failures; polished-repair commit `15beb501` then closed the replacement review's malformed prose and duplicate-test docket and deterministically refreshed the canon, UX blueprint, and shadow goldens. Every receipt bound to an earlier evaluated commit is historical and was invalidated by the later non-proof change.
+The final tracked receipt is bound to deterministic final-review repair commit `f1a37b4f4ffdefb0788d1149bbf2c61393e71a94`. Terminal semantic-repair commit `030cf73f38c6bab9a0096af7706e6a85644026a2` froze the earlier evaluated canon; validator commits `262327c04261deb43bfe3bd3e7ad1e9380c0c0ab` and `f11b414f342346dfd7200381d232045efb34de9a` closed proof-diff, deletion, and rename bypasses; final-regression commit `6e88b61414417cdaeaae9586c606f175de099e48` repaired the exact discovery failures; polished-repair commit `15beb501` closed the replacement docket; and final-review repair `f1a37b4f` made every non-structural slash grammatical, restored the unknown-verdict schema regression, and deterministically refreshed the canon, UX blueprint, and shadow goldens. Every receipt bound to an earlier evaluated commit is historical and was invalidated by the later non-proof change.
 
-The polished independently reviewed result is old 26 / new 28 with overall verdict `new_better`. No dimension is `old_better`: relevant-law recall and source ownership are `new_better`; semantic equivalence, contradiction control, unauthorized assumptions, validation completeness, and proof discipline are equivalent. The receipt records only hashes, attribution, scores, verdicts, and the closed claim ceiling; it does not retain response prose or comparator rationale. This report is part of the final proof-only commit; that commit SHA remains pending until Git creates it and cannot be self-referenced by the commit's own bytes.
+The final polished independently reviewed result is old 22 / new 28 with overall verdict `new_better`. No dimension is `old_better`: semantic equivalence, relevant-law recall, contradiction control, unauthorized assumptions, source ownership, and proof discipline are `new_better`; validation completeness is equivalent. The receipt records only hashes, attribution, scores, verdicts, and the closed claim ceiling; it does not retain response prose or comparator rationale. This report is part of the final proof-only commit; that commit SHA remains pending until Git creates it and cannot be self-referenced by the commit's own bytes.
 
 Evidence bindings:
 
 ```text
-canon SHA-256: 3b833fa70f1d8de70e1f737062e5b13c3bef4a5b3f1092ac23d0a4082f8ac172
+canon SHA-256: 050ad36b253bef7d0b6c53ab25d23483d1ebf1c9007210c653c68ad89aa68c9e
 old prompt SHA-256: 338c2088cc6a74dc06a3fc087bc6848280b117b7638aefdb377b9649face56cb
-new prompt SHA-256: c896601011527dd8a744ce5886f71f31b6d363323cbaad4d378d9828afa4e495
+new prompt SHA-256: e3eed47bc27559428cacbc1cb279f42b6a86c552c1c4124d114c28cb413419ac
 old response SHA-256: f8e73052af92ad97e4f686730190e15532c5107328060c5c9ac8272aa9bd9834
-new response SHA-256: 4775ffde298474605060b6d6a1e824e7319ea15eac030cb3cd1fee923297b0e9
-comparison SHA-256: 766308d15fd75bf1c083f545ea2cc64c134daeb12fe9f426377d87e584970bf8
-comparison totals: old 26 / new 28
+new response SHA-256: 647515a442f05cbe9fc8ea099d04d9be68ece8e0826486b53f0d09a21475ddc4
+comparison SHA-256: 7e45a2155823abdf96c902efe2ff4db2f23e28c837f07895ea1f0f28aecaacbb
+comparison totals: old 22 / new 28
 overall verdict: new_better
 ```
 
-Strict polished receipt TDD began from the unchanged stale receipt after deterministic commit `15beb501`. `uv run --python 3.12 --no-project python -m unittest tests.canon.test_semantic_receipt` failed as expected with exit 1: 13 tests ran with five failures and one error headed by `SEMANTIC_RECEIPT_STALE`; canon, new prompt, and all pack bindings differed. The offline checked-in CLI, `uv run --python 3.12 --no-project python scripts/ambitions-canon.py semantic-review --check-receipt`, also failed closed with exit 1 and `SEMANTIC_RECEIPT_STALE` before the receipt was updated. The synthetic `old_better` policy fixture was mechanically realigned to the polished comparison's unchanged 26/28 arithmetic so it continues to reach `SEMANTIC_RECEIPT_POLICY` without weakening validation. Final Green results are recorded below after verification.
+Strict final receipt TDD began from the unchanged stale receipt after deterministic commit `f1a37b4f`. `uv run --python 3.12 --no-project python -m unittest tests.canon.test_semantic_receipt` failed as expected with exit 1: 13 tests ran with three failures and one error headed by `SEMANTIC_RECEIPT_STALE`; canon, new prompt, and all pack bindings differed. The offline checked-in CLI, `uv run --python 3.12 --no-project python scripts/ambitions-canon.py semantic-review --check-receipt`, also failed closed with exit 1 and `SEMANTIC_RECEIPT_STALE` before the receipt was updated. The synthetic `old_better` policy fixture is realigned to the final comparison's 23/27 mutated arithmetic so it continues to reach `SEMANTIC_RECEIPT_POLICY` without weakening validation. Final Green results are recorded below after verification.
 
 The receipt claim ceiling remains exactly: "This receipt records an explicit non-CI shadow comparison only. It does not authorize implementation or claim product, runtime, source, visual, accessibility, privacy, device, TestFlight, App Store, or release Green."
 
@@ -163,6 +163,18 @@ Focused GREEN: exit 0; the new regression passed with zero malformed occurrences
 
 The polished semantic record binds canon `3b833fa7`, new prompt `c8966010`, all sixteen regenerated pack hashes, old response `f8e73052`, polished new response `4775ffde`, and polished comparison `766308d1`. The accepted comparison is old 26 / new 28, overall `new_better`, with relevant-law recall and source ownership `new_better`, the other five dimensions equivalent, and no `old_better` dimension.
 
+### Final exact-range review repair
+
+The final exact-range reviewer returned 0 Critical, 2 Important, and 0 Minor findings. The first Important finding showed that the comma-only regression was too narrow: the seven owner specifications still contained non-structural prose slashes even though the literal comma-slash count was zero. The second Important finding required the receipt schema/policy suite to retain exactly one unknown-verdict negative case and to isolate schema/policy validation from an intentionally stale external receipt binding.
+
+Strict TDD replaced the narrow assertion with a parsed seven-spec normative-prose law. RED: exit 1; one test failed with 150 `, or  ` repeated-space artifacts and 526 disallowed prose slashes. The first semantic pass reduced the counts to 0 repeated-space artifacts and 4 residual slashes; inspection then repaired those four duplicated transition/command phrases. Final focused GREEN: exit 0 with 0/0. The test preserves every exact `explicit state contract / State` structural delimiter and the locked `Contextual Proof / Source / Privacy / History / Receipts` heading while rejecting every other prose-level ` / ` occurrence.
+
+The seven owner specifications now use explicit conjunctions by meaning: alternative actions, focus targets, and negative verbs use `or`; paired durable Receipt and History records use `and`; reads, paging, cancellation, unavailable-state, proof, privacy, and recovery phrases are grammatical and unambiguous. Command labels, lifecycle, commit posture, durable behavior, and the four future-gated continuity variants did not change. Exactly one `better` unknown-verdict case is present and must raise `SEMANTIC_RECEIPT_INVALID`.
+
+Focused and covering verification was Green: full state semantics passed 14 tests; the isolated receipt schema/policy method passed; Task 19 posture, UX semantic repairs, and the all-fourteen-golden byte comparison passed 46 tests with one skip; parser and UX checks passed 37 tests; and the post-commit state-plus-schema run passed 15 tests. The parsed inventory remains exactly 267 state contracts and 328 commands, with four future-gated variants. Audit reported 61 documents, 449 requirements, and 449 concepts in shadow authority. Deterministic build, UX-blueprint check, and `git diff --check` were Green. All fourteen shadow goldens were regenerated and exact; thirteen changed tracked bytes. Full discovery was intentionally not rerun. The receipt remained correctly stale until this proof-only update.
+
+Deterministic final-review repair commit: `f1a37b4f4ffdefb0788d1149bbf2c61393e71a94`, exactly 39 changed files and no report or receipt JSON. The final semantic record binds canon `050ad36b`, new prompt `e3eed47b`, all sixteen regenerated pack hashes, old response `f8e73052`, final new response `647515a4`, and final comparison `7e45a215`. The accepted comparison is old 22 / new 28, overall `new_better`, with six `new_better` dimensions, validation completeness equivalent, and no `old_better` dimension.
+
 | Command | Exit | Result |
 | --- | ---: | --- |
 | focused semantic/parser/model/schema unittest | 0 | 56 tests passed in 0.460 seconds |
@@ -175,13 +187,18 @@ The polished semantic record binds canon `3b833fa7`, new prompt `c8966010`, all 
 | `ambitions-canon.py build --check` | 0 | Green; generated outputs current |
 | `ambitions-canon.py benchmark` | 0 | Green; 8 scenarios, deterministic report, 16 representative pack files |
 | `ambitions-canon.py ux-blueprint --check` | 0 | Green; 47 screens, 47 state models, 423 taxonomy rows, 433 variants, 18 objects, 12 journeys, 449 requirements, 324 visual and 125 nonvisual dispositions |
-| polished receipt unittest before update | 1 expected | 13 tests; 5 failures and 1 error headed by `SEMANTIC_RECEIPT_STALE` |
-| polished receipt check before update | 1 expected | `SEMANTIC_RECEIPT_STALE`; prior receipt predates evaluated commit `15beb501` |
-| final focused receipt unittest | 0 | 13 tests passed in 36.589 seconds against the polished bindings and closed proof-only diff |
-| final `ambitions-canon.py semantic-review --check-receipt` | 0 | Green; 8 packs, `new_better`, scores 26/28 |
+| prior polished receipt unittest | 0 | Historical: 13 tests passed in 36.589 seconds against evaluated commit `15beb501` |
+| final exact normative-prose TDD | 1 expected, then 0 | Red 150 repeated-space / 526 disallowed-slash; intermediate 0/4; final 0/0 |
+| final state semantics and receipt schema/policy | 0 | 14 state tests and the isolated schema/policy method passed; post-commit covering run passed 15 tests |
+| Task 19 / UX semantics / all fourteen goldens | 0 | 46 tests passed with one skip; all golden bytes exact |
+| parser and UX checks | 0 | 37 tests passed; embedded UX check Green |
+| final receipt unittest before update | 1 expected | 13 tests; 3 failures and 1 error headed by `SEMANTIC_RECEIPT_STALE` |
+| final receipt check before update | 1 expected | `SEMANTIC_RECEIPT_STALE`; prior receipt predates evaluated commit `f1a37b4f` |
+| final focused receipt unittest | 0 | 13 tests passed in 34.724 seconds against the final bindings and closed proof-only diff |
+| final `ambitions-canon.py semantic-review --check-receipt` | 0 | Green; 8 packs, `new_better`, scores 22/28 |
 | `git diff --check` | 0 | clean |
 
-The final proof-only receipt update changes no canon, specification, compiler, generated, fixture, or response-evidence bytes. It records the controller-supplied polished comparison against evaluated deterministic commit `15beb501` and remains a non-CI shadow comparison only.
+The final proof-only receipt update changes no canon, specification, compiler, generated, fixture, or response-evidence bytes. It records the controller-supplied final polished comparison against evaluated deterministic commit `f1a37b4f` and remains a non-CI shadow comparison only.
 
 ### Generated representative-pack owner sets
 
@@ -267,7 +284,7 @@ tools/ambitions_canon/
 
 ### Exact full-range changed-file list
 
-Mechanically generated with `git diff --name-only 3c0957ebb2202f10de53975b2cb74e8f35253808` for the complete `3c0957e..HEAD` repair range: 71 tracked paths. Thirteen shadow-golden paths were already present in the earlier range; the deterministic fourteen-golden refresh adds only the previously unchanged `external-reference-impact.md` path, so Git's exact union increases by one rather than fourteen.
+Mechanically generated with `git diff --name-only 3c0957ebb2202f10de53975b2cb74e8f35253808` for the complete `3c0957e..HEAD` repair range: 71 tracked paths. The final 39-file deterministic repair and this three-file proof update introduce no path outside the existing union. A mechanical tuple comparison confirms that the 71 listed paths equal Git's sorted output exactly.
 
 ```text
 .superpowers/sdd/visual-command-contract-amendment-report.md
@@ -349,13 +366,13 @@ The deterministic canon build and UX-blueprint writer refresh the canon index, r
 
 ## Review and findings
 
-The exact review of `3c0957e..bc5e1e82` returned one Critical semantic-contract finding, one Important report/evidence finding, and one Minor prose finding. Semantic-repair commit `030cf73f` addresses the semantic docket; validator commit `262327c` closes the evaluated-commit binding defect; Important-repair commit `f11b414f` closes deletion and rename bypasses; final-regression commit `6e88b614` closes the three exact full-discovery failures and refreshes all fourteen shadow goldens. The replacement exact-range review then returned 0 Critical, 2 Important, and 1 Minor findings; polished-repair commit `15beb501` closes all three by repairing 150 malformed separators, replacing stale current inventory counts with 267 state contracts and 328 commands, removing the duplicate test case, and refreshing every affected deterministic projection. The final proof-only commit records the fresh independently supplied comparison. Specification-compliance and code-quality re-review of `3c0957e..HEAD` remain required after commit.
+The exact review of `3c0957e..bc5e1e82` returned one Critical semantic-contract finding, one Important report/evidence finding, and one Minor prose finding. Semantic-repair commit `030cf73f` addresses the semantic docket; validator commit `262327c` closes the evaluated-commit binding defect; Important-repair commit `f11b414f` closes deletion and rename bypasses; final-regression commit `6e88b614` closes the exact full-discovery failures and refreshes all fourteen shadow goldens. The replacement review then returned 0 Critical, 2 Important, and 1 Minor findings, closed by `15beb501`. The final exact-range review returned 0 Critical, 2 Important, and 0 Minor findings: the remaining non-structural prose slashes needed semantic conjunctions, and the receipt suite needed exactly one isolated unknown-verdict regression. Deterministic repair `f1a37b4f` closes both Important findings with 0/0 malformed prose and the restored fail-closed schema case. The final proof-only commit records the fresh independently supplied comparison. Specification-compliance and code-quality re-review of `3c0957e..HEAD` remain required after commit.
 
-Residual Minor finding: add further focused duplication assertions if later schema evolution permits semantically equal but byte-distinct cross-document command records. The current inline global duplicate-ID regression is Green.
+Residual Minor findings: none from the final exact-range review. The current inline global duplicate-ID regression remains Green.
 
 ## Rollback and claim ceiling
 
-Rollback before the proof-only commit: discard the three-file bounded worktree diff and return to `15beb50106a641ab3eb02ed10679dd425de69913`. Rollback of only the final proof-only commit after creation: revert `HEAD`. Rollback of the complete multi-commit amendment range: revert the final proof-only `HEAD`, then `15beb50106a641ab3eb02ed10679dd425de69913`, then prior proof commit `d0461881077f8ddc9f01520c31b67b82c01aa247`, then `6e88b61414417cdaeaae9586c606f175de099e48`, then prior proof commit `4cbdfcc9c1ef7018b208255a65f6051ff9ec9d92`, then `f11b414f342346dfd7200381d232045efb34de9a`, then earlier proof commit `534941616edc1dac34d94fc184435b51593e3c79`, then `262327c04261deb43bfe3bd3e7ad1e9380c0c0ab`, then `030cf73f38c6bab9a0096af7706e6a85644026a2`, then `bc5e1e82dbbc506b562fc763e9ea92dba965b88d`, then `1e81d170e997e6895b92cdc080563b28b60ac636` in reverse order, restoring base SHA `3c0957ebb2202f10de53975b2cb74e8f35253808` without rewriting published history.
+Rollback before the proof-only commit: discard the three-file bounded worktree diff and return to `f1a37b4f4ffdefb0788d1149bbf2c61393e71a94`. Rollback of only the final proof-only commit after creation: revert `HEAD`. Rollback of the complete multi-commit amendment range: revert the final proof-only `HEAD`, then `f1a37b4f4ffdefb0788d1149bbf2c61393e71a94`, then prior proof commit `d8278db7eda86221037d97996f1473498dce5b83`, then `15beb50106a641ab3eb02ed10679dd425de69913`, then prior proof commit `d0461881077f8ddc9f01520c31b67b82c01aa247`, then `6e88b61414417cdaeaae9586c606f175de099e48`, then prior proof commit `4cbdfcc9c1ef7018b208255a65f6051ff9ec9d92`, then `f11b414f342346dfd7200381d232045efb34de9a`, then earlier proof commit `534941616edc1dac34d94fc184435b51593e3c79`, then `262327c04261deb43bfe3bd3e7ad1e9380c0c0ab`, then `030cf73f38c6bab9a0096af7706e6a85644026a2`, then `bc5e1e82dbbc506b562fc763e9ea92dba965b88d`, then `1e81d170e997e6895b92cdc080563b28b60ac636` in reverse order, restoring base SHA `3c0957ebb2202f10de53975b2cb74e8f35253808` without rewriting published history.
 
 Allowed claim after final receipt verification and before re-review: deterministic shadow-canon repair candidate only; focused parser/state/schema/UX-blueprint/build, validator, and explicit non-CI semantic-receipt evidence is Green for the exact commands above, and independent re-review remains pending. Four continuity variants remain structured but future-gated.
 

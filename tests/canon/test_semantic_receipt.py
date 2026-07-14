@@ -21,7 +21,7 @@ RECEIPT = (
     ROOT
     / "docs/qa/evidence/2026-07-13-train-4-semantic-comparison/receipt.json"
 )
-EVALUATED_COMMIT = "15beb50106a641ab3eb02ed10679dd425de69913"
+EVALUATED_COMMIT = "f1a37b4f4ffdefb0788d1149bbf2c61393e71a94"
 
 
 class SemanticReceiptTest(unittest.TestCase):
@@ -53,7 +53,7 @@ class SemanticReceiptTest(unittest.TestCase):
         )
         comparison = receipt["comparison"]
         self.assertEqual(comparison["overall_verdict"], "new_better")
-        self.assertEqual(comparison["old_total_score"], 26)
+        self.assertEqual(comparison["old_total_score"], 22)
         self.assertEqual(comparison["new_total_score"], 28)
         self.assertEqual(len(comparison["dimensions"]), 7)
         self.assertEqual(
@@ -67,13 +67,13 @@ class SemanticReceiptTest(unittest.TestCase):
                 for row in comparison["dimensions"]
             ),
             (
-                ("semantic_equivalence", "equivalent", 4, 4),
+                ("semantic_equivalence", "new_better", 3, 4),
                 ("relevant_law_recall", "new_better", 3, 4),
-                ("contradiction_control", "equivalent", 4, 4),
-                ("unauthorized_assumptions", "equivalent", 4, 4),
+                ("contradiction_control", "new_better", 3, 4),
+                ("unauthorized_assumptions", "new_better", 3, 4),
                 ("source_ownership", "new_better", 3, 4),
                 ("validation_completeness", "equivalent", 4, 4),
-                ("proof_discipline", "equivalent", 4, 4),
+                ("proof_discipline", "new_better", 3, 4),
             ),
         )
         self.assertNotIn(
@@ -362,7 +362,7 @@ class SemanticReceiptTest(unittest.TestCase):
         changed["comparison"]["dimensions"][0].update(
             {"old_score": 4, "new_score": 3, "verdict": "old_better"}
         )
-        changed["comparison"]["old_total_score"] = 26
+        changed["comparison"]["old_total_score"] = 23
         changed["comparison"]["new_total_score"] = 27
         changed["comparison"]["overall_verdict"] = "new_better"
         malformed.append(("old better policy", changed, "SEMANTIC_RECEIPT_POLICY"))
