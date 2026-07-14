@@ -8,8 +8,9 @@ from enum import StrEnum
 from pathlib import Path
 
 
-# Attribution follows Python 3.12's Unicode 15.0.0 semantics on every host.
-# Upgrade this policy only by regenerating both checked-in range tables from
+# Attribution follows Python 3.12's Unicode 15.0.0 semantics on every
+# supported host (Python 3.12 through 3.14).
+# Upgrade this policy only by regenerating all checked-in range tables from
 # authoritative UCD data and proving supported-host equivalence in tests. Never
 # infer attribution behavior from the host's unicodedata.unidata_version.
 ATTRIBUTION_UNICODE_POLICY_VERSION = "15.0.0"
@@ -47,12 +48,21 @@ _DEFAULT_IGNORABLE_CODE_POINT_RANGES = (
     (0xE01F0, 0xE0FFF),
 )
 
+# Unicode 16.0.0 DerivedAge.txt, property Age=15.1 (627 code points
+# across 3 ranges).
+# https://www.unicode.org/Public/16.0.0/ucd/DerivedAge.txt
+_UNICODE_15_1_ASSIGNED_RANGES = (
+    (0x2FFC, 0x2FFF),
+    (0x31EF, 0x31EF),
+    (0x2EBF0, 0x2EE5D),
+)
+
 # Unicode 16.0.0 DerivedAge.txt, property Age=16.0 (5,185 code points
 # across 47 ranges). Rejecting every scalar assigned after Unicode 15 before
 # host normalization/category checks makes newer Python runtimes emulate the
 # pinned Python 3.12 policy without a network or third-party dependency.
 # https://www.unicode.org/Public/16.0.0/ucd/DerivedAge.txt
-_POST_UNICODE_15_ASSIGNED_RANGES = (
+_UNICODE_16_ASSIGNED_RANGES = (
     (0x0897, 0x0897),
     (0x1B4E, 0x1B4F),
     (0x1B7F, 0x1B7F),
@@ -117,11 +127,12 @@ def _is_in_ranges(
 
 
 def _validate_attribution_scalars(value: str) -> None:
-    if any(
-        _is_in_ranges(character, _POST_UNICODE_15_ASSIGNED_RANGES)
-        for character in value
+    for ranges in (
+        _UNICODE_15_1_ASSIGNED_RANGES,
+        _UNICODE_16_ASSIGNED_RANGES,
     ):
-        raise ValueError("attribution contains a post-Unicode-15 code point")
+        if any(_is_in_ranges(character, ranges) for character in value):
+            raise ValueError("attribution contains a post-Unicode-15.0 code point")
     if any(unicodedata.category(character).startswith("C") for character in value):
         raise ValueError("attribution contains a Unicode control category")
     if any(

@@ -127,10 +127,10 @@ def normalize_audit_error_code(discovery_code: str) -> str:
 
 
 def ensure_supported_python(version: tuple[int, int]) -> None:
-    if version < (3, 11):
+    if version < (3, 12) or version >= (3, 15):
         raise CanonError(
             "PYTHON_VERSION_UNSUPPORTED",
-            "requires Python 3.11+",
+            "requires Python 3.12-3.14",
         )
 
 

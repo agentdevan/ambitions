@@ -1,7 +1,9 @@
+import runpy
 import subprocess
 import sys
 import unittest
-from contextlib import redirect_stdout
+from collections import namedtuple
+from contextlib import redirect_stderr, redirect_stdout
 from io import StringIO
 from pathlib import Path
 from unittest import mock
@@ -75,6 +77,12 @@ UNICODE_16_ASSIGNED_RANGES = (
     (0x1FBCB, 0x1FBEF),
 )
 
+UNICODE_15_1_ASSIGNED_RANGES = (
+    (0x2FFC, 0x2FFF),
+    (0x31EF, 0x31EF),
+    (0x2EBF0, 0x2EE5D),
+)
+
 
 class ModelTests(unittest.TestCase):
     def test_visible_attribution_policy_is_pinned_to_unicode_15(self):
@@ -82,51 +90,79 @@ class ModelTests(unittest.TestCase):
             getattr(canon_model, "ATTRIBUTION_UNICODE_POLICY_VERSION", None),
             "15.0.0",
         )
-        policy_ranges = getattr(
+        unicode_15_1_ranges = getattr(
             canon_model,
-            "_POST_UNICODE_15_ASSIGNED_RANGES",
+            "_UNICODE_15_1_ASSIGNED_RANGES",
             (),
         )
-        self.assertEqual(policy_ranges, UNICODE_16_ASSIGNED_RANGES)
-        self.assertEqual(len(policy_ranges), 47)
+        unicode_16_ranges = getattr(
+            canon_model,
+            "_UNICODE_16_ASSIGNED_RANGES",
+            (),
+        )
+        self.assertEqual(unicode_15_1_ranges, UNICODE_15_1_ASSIGNED_RANGES)
+        self.assertEqual(unicode_16_ranges, UNICODE_16_ASSIGNED_RANGES)
+        self.assertEqual(len(unicode_15_1_ranges), 3)
         self.assertEqual(
-            sum(upper - lower + 1 for lower, upper in policy_ranges),
+            sum(upper - lower + 1 for lower, upper in unicode_15_1_ranges),
+            627,
+        )
+        self.assertEqual(len(unicode_16_ranges), 47)
+        self.assertEqual(
+            sum(upper - lower + 1 for lower, upper in unicode_16_ranges),
             5_185,
         )
-        self.assertTrue(
-            all(
-                left_upper < right_lower
-                for (_, left_upper), (right_lower, _) in zip(
-                    policy_ranges,
-                    policy_ranges[1:],
+        for ranges in (unicode_15_1_ranges, unicode_16_ranges):
+            self.assertTrue(
+                all(
+                    left_upper < right_lower
+                    for (_, left_upper), (right_lower, _) in zip(
+                        ranges,
+                        ranges[1:],
+                    )
                 )
             )
-        )
 
-    def test_visible_attribution_rejects_every_post_unicode_15_range_boundary(self):
-        for lower, upper in UNICODE_16_ASSIGNED_RANGES:
-            for code_point in dict.fromkeys((lower, upper)):
-                with self.subTest(code_point=f"U+{code_point:04X}"):
+    def test_visible_attribution_rejects_every_post_unicode_15_0_range_boundary(self):
+        for ranges in (UNICODE_15_1_ASSIGNED_RANGES, UNICODE_16_ASSIGNED_RANGES):
+            for lower, upper in ranges:
+                for code_point in dict.fromkeys((lower, upper)):
+                    with self.subTest(code_point=f"U+{code_point:04X}"):
+                        with self.assertRaises(ValueError):
+                            normalize_visible_attribution(
+                                f"Owner{chr(code_point)}"
+                            )
+
+    def test_visible_attribution_rejects_post_policy_scalars_before_host_properties(self):
+        for code_point in (0x2FFC, 0x105C0):
+            post_policy_scalar = chr(code_point)
+            with self.subTest(code_point=f"U+{code_point:04X}"):
+                with (
+                    mock.patch.object(
+                        canon_model.unicodedata,
+                        "unidata_version",
+                        "99.0.0",
+                    ),
+                    mock.patch.object(
+                        canon_model.unicodedata,
+                        "category",
+                        return_value="Lo",
+                    ) as category,
+                ):
                     with self.assertRaises(ValueError):
-                        normalize_visible_attribution(f"Owner{chr(code_point)}")
+                        normalize_visible_attribution(
+                            f"Owner{post_policy_scalar}"
+                        )
+                self.assertNotIn(
+                    post_policy_scalar,
+                    (call.args[0] for call in category.call_args_list),
+                )
 
-    def test_visible_attribution_rejects_unicode_16_scalar_before_host_properties(self):
-        unicode_16_scalar = chr(0x105C0)
-        with (
-            mock.patch.object(
-                canon_model.unicodedata,
-                "unidata_version",
-                "99.0.0",
-            ),
-            mock.patch.object(
-                canon_model.unicodedata,
-                "category",
-                return_value="Lo",
-            ) as category,
-        ):
-            with self.assertRaises(ValueError):
-                normalize_visible_attribution(f"Owner{unicode_16_scalar}")
-        self.assertNotIn(unicode_16_scalar, (call.args[0] for call in category.call_args_list))
+    def test_visible_attribution_preserves_unicode_15_0_letters(self):
+        self.assertEqual(
+            normalize_visible_attribution("Reviewer \U00011f04"),
+            "Reviewer \U00011f04",
+        )
 
     def test_visible_attribution_rejects_every_unicode_15_default_ignorable_range(self):
         range_boundaries = (
@@ -200,8 +236,43 @@ class ModelTests(unittest.TestCase):
     def test_rejects_unsupported_python(self):
         from tools.ambitions_canon.cli import ensure_supported_python
 
-        with self.assertRaisesRegex(CanonError, "PYTHON_VERSION_UNSUPPORTED"):
-            ensure_supported_python((3, 10))
+        for version in ((3, 10), (3, 11), (3, 15)):
+            with self.subTest(version=version):
+                with self.assertRaisesRegex(
+                    CanonError,
+                    "PYTHON_VERSION_UNSUPPORTED.*requires Python 3.12-3.14",
+                ):
+                    ensure_supported_python(version)
+
+        for version in ((3, 12), (3, 13), (3, 14)):
+            with self.subTest(version=version):
+                ensure_supported_python(version)
+
+    def test_launcher_enforces_the_same_supported_python_range(self):
+        version_info = namedtuple(
+            "version_info",
+            ("major", "minor", "micro", "releaselevel", "serial"),
+        )
+        launcher = Path(__file__).resolve().parents[2] / "scripts/ambitions-canon.py"
+
+        for minor in (11, 15):
+            stderr = StringIO()
+            with self.subTest(minor=minor):
+                with (
+                    mock.patch.object(
+                        sys,
+                        "version_info",
+                        version_info(3, minor, 0, "final", 0),
+                    ),
+                    redirect_stderr(stderr),
+                    self.assertRaises(SystemExit) as raised,
+                ):
+                    runpy.run_path(str(launcher), run_name="__main__")
+                self.assertEqual(raised.exception.code, 2)
+                self.assertIn(
+                    "PYTHON_VERSION_UNSUPPORTED requires Python 3.12-3.14",
+                    stderr.getvalue(),
+                )
 
     def test_canon_error_formats_stable_code_path_and_line(self):
         error = CanonError(
