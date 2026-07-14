@@ -4,12 +4,14 @@ import json
 import re
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 VARIANT_FIELDS = {
     "accessibility_focus",
     "allowed_commands",
+    "behavior_authority_evidence",
     "behavior_authority_posture",
     "behavior_authority_rationale",
     "behavior_requirement_ids",
@@ -69,6 +71,27 @@ class UXBlueprintSemanticRepairTests(unittest.TestCase):
             for item in payload["state_models"]
             if item["screen_id"] == screen_id
         )
+
+    def _inventory_for(self, payload):
+        inventory = json.loads(
+            (
+                REPO_ROOT
+                / "docs/canon/migration/ux-blueprint-state-inventory.json"
+            ).read_text(encoding="utf-8")
+        )
+        inventory["state_variants"] = [
+            {
+                "blueprint_id": state["blueprint_id"],
+                "generic_kind": state["generic_kind"],
+                "operation_phase": state["operation_phase"],
+                "screen_id": model["screen_id"],
+                "state_axis": state["state_axis"],
+                "variant_key": state["variant_key"],
+            }
+            for model in payload["state_models"]
+            for state in model["variants"]
+        ]
+        return inventory
 
     def test_adversarial_requirement_dispositions_match_conceptual_owners(self):
         by_id = self._dispositions()
@@ -206,16 +229,17 @@ class UXBlueprintSemanticRepairTests(unittest.TestCase):
     def test_key_screen_state_contracts_are_scope_specific(self):
         today_empty = self._state("UX-SCREEN-TODAY-ROOT", "empty")
         self.assertIn("Start here", today_empty["visible_content_copy"])
-        self.assertEqual(
-            today_empty["allowed_commands"],
-            ["Capture", "Review Goals", "View Time"],
-        )
+        self.assertEqual(today_empty["allowed_commands"], [])
         self.assertEqual(
             today_empty["behavior_authority_posture"],
-            "requirement_backed",
+            "exploratory_blocked_by_specification_gap",
         )
-        self.assertEqual(today_empty["specification_gap_ids"], [])
-        self.assertTrue(today_empty["behavior_requirement_ids"])
+        self.assertEqual(
+            today_empty["specification_gap_ids"],
+            ["GAP-UX-COMMAND-CONTRACT-TODAY-001"],
+        )
+        self.assertEqual(today_empty["behavior_requirement_ids"], [])
+        self.assertEqual(today_empty["behavior_authority_evidence"], [])
         self.assertIn("SPEC-SURFACE-TODAY-STATES-001", today_empty["requirement_ids"])
 
         for model in self._payload()["state_models"]:
@@ -237,8 +261,9 @@ class UXBlueprintSemanticRepairTests(unittest.TestCase):
         identity = copy.deepcopy(payload)
         state = self._state("UX-SCREEN-TODAY-ROOT", "empty", identity)
         state["blueprint_id"] = "UX-STATE-TODAY-ROOT-FAILURE"
-        with self.assertRaisesRegex(module.UXBlueprintError, "state variant identity"):
-            module.validate_ux_blueprint(REPO_ROOT, identity)
+        with patch.object(module, "load_state_inventory", return_value=self._inventory_for(identity)):
+            with self.assertRaisesRegex(module.UXBlueprintError, "state variant identity"):
+                module.validate_ux_blueprint(REPO_ROOT, identity)
 
         generic = copy.deepcopy(payload)
         shell = self._state("UX-SCREEN-APP-SHELL-ROOT", "today-selected", generic)
@@ -333,16 +358,18 @@ class UXBlueprintSemanticRepairTests(unittest.TestCase):
         self.assertEqual(len(all_variants), 433)
         self.assertEqual(len({item["blueprint_id"] for item in all_variants}), 433)
         eligible_ids = module.authority_eligible_state_variant_ids(payload, REPO_ROOT)
+        self.assertEqual(eligible_ids, frozenset())
         for item in all_variants:
             self.assertEqual(set(item), VARIANT_FIELDS)
-            if item["behavior_authority_posture"] == "requirement_backed":
-                self.assertTrue(item["behavior_requirement_ids"])
-                self.assertFalse(item["specification_gap_ids"])
-                self.assertIn(item["blueprint_id"], eligible_ids)
-            else:
-                self.assertEqual(item["allowed_commands"], [])
-                self.assertTrue(item["specification_gap_ids"])
-                self.assertNotIn(item["blueprint_id"], eligible_ids)
+            self.assertEqual(
+                item["behavior_authority_posture"],
+                "exploratory_blocked_by_specification_gap",
+            )
+            self.assertEqual(item["allowed_commands"], [])
+            self.assertEqual(item["behavior_requirement_ids"], [])
+            self.assertEqual(item["behavior_authority_evidence"], [])
+            self.assertTrue(item["specification_gap_ids"])
+            self.assertNotIn(item["blueprint_id"], eligible_ids)
         self.assertEqual(module.validate_ux_blueprint(REPO_ROOT, payload).state_variant_count, 433)
 
         expected = {
@@ -488,23 +515,29 @@ class UXBlueprintSemanticRepairTests(unittest.TestCase):
 
         missing = copy.deepcopy(payload)
         self._variants("UX-SCREEN-CAPTURE-COMPOSER", missing).pop()
-        with self.assertRaisesRegex(module.UXBlueprintError, "state variant inventory"):
-            module.validate_ux_blueprint(REPO_ROOT, missing)
+        with patch.object(module, "load_state_inventory", return_value=self._inventory_for(missing)):
+            with self.assertRaisesRegex(
+                module.UXBlueprintError,
+                "taxonomy variant disposition is stale",
+            ):
+                module.validate_ux_blueprint(REPO_ROOT, missing)
 
         invented = copy.deepcopy(payload)
         sample = copy.deepcopy(self._variants("UX-SCREEN-CAPTURE-COMPOSER", invented)[0])
         sample["variant_key"] = "invented"
         sample["blueprint_id"] = "UX-STATE-VARIANT-CAPTURE-COMPOSER-INVENTED"
         self._variants("UX-SCREEN-CAPTURE-COMPOSER", invented).append(sample)
-        with self.assertRaisesRegex(module.UXBlueprintError, "state variant inventory"):
-            module.validate_ux_blueprint(REPO_ROOT, invented)
+        with patch.object(module, "load_state_inventory", return_value=self._inventory_for(invented)):
+            with self.assertRaisesRegex(module.UXBlueprintError, "state variant inventory"):
+                module.validate_ux_blueprint(REPO_ROOT, invented)
 
         mismatched = copy.deepcopy(payload)
         self._variants("UX-SCREEN-SEARCH-ROOT", mismatched)[0]["blueprint_id"] = (
             "UX-STATE-VARIANT-SEARCH-ROOT-WRONG"
         )
-        with self.assertRaisesRegex(module.UXBlueprintError, "state variant identity"):
-            module.validate_ux_blueprint(REPO_ROOT, mismatched)
+        with patch.object(module, "load_state_inventory", return_value=self._inventory_for(mismatched)):
+            with self.assertRaisesRegex(module.UXBlueprintError, "state variant identity"):
+                module.validate_ux_blueprint(REPO_ROOT, mismatched)
 
     def test_variant_validator_rejects_formulaic_or_repeated_narrative_contracts(self):
         module = self._module()
@@ -1031,58 +1064,32 @@ class UXBlueprintSemanticRepairTests(unittest.TestCase):
         with self.assertRaisesRegex(module.UXBlueprintError, "rationale is incomplete"):
             module.validate_ux_blueprint(REPO_ROOT, incomplete)
 
-    def test_normalized_narratives_reject_interpolated_compact_and_goals_skeletons(self):
+    def test_normalized_narratives_preserve_fail_closed_behavior_authority(self):
         module = self._module()
         payload = self._payload()
         eligible_ids = module.authority_eligible_state_variant_ids(payload, REPO_ROOT)
+        self.assertEqual(eligible_ids, frozenset())
         for model in payload["state_models"]:
             for variant in model["variants"]:
-                if variant["behavior_authority_posture"] == "requirement_backed":
-                    self.assertTrue(variant["behavior_requirement_ids"])
-                    self.assertFalse(variant["specification_gap_ids"])
-                    self.assertIn(variant["blueprint_id"], eligible_ids)
-                else:
-                    self.assertEqual(variant["allowed_commands"], [])
-                    self.assertTrue(variant["specification_gap_ids"])
-                    self.assertNotIn(variant["blueprint_id"], eligible_ids)
-                    self.assertIn("no exact command authorized by current canon", json.dumps(variant).casefold())
-        scoped_screens = {
-            "UX-SCREEN-ACCOUNT-BOUNDARY", "UX-SCREEN-ACCOUNT-SIGN-IN",
-            "UX-SCREEN-ACCOUNT-STATUS", "UX-SCREEN-APP-SHELL-DRILLDOWN",
-            "UX-SCREEN-APP-SHELL-ROOT", "UX-SCREEN-APP-SHELL-SEARCH-CAPTURE",
-            "UX-SCREEN-OFFLINE-DEGRADED-LOCAL-HEALTH",
-            "UX-SCREEN-OFFLINE-DEGRADED-REPAIR", "UX-SCREEN-SETUP-FIRST-USE",
-            "UX-SCREEN-SETUP-RESUME", "UX-SCREEN-TIME-DETAIL",
-            "UX-SCREEN-TODAY-DETAIL", "UX-SCREEN-GOALS-CLOSURE",
-            "UX-SCREEN-GOALS-DETAIL", "UX-SCREEN-GOALS-LIFE-AREA",
-            "UX-SCREEN-GOALS-PATH", "UX-SCREEN-GOALS-RECOVERY",
-            "UX-SCREEN-GOALS-ROOT",
-        }
-        screens = {item["blueprint_id"]: item["title"] for item in payload["screens"]}
-        signatures = {field: {} for field in module.STATE_VARIANT_NARRATIVE_FIELDS}
+                self.assertEqual(
+                    variant["behavior_authority_posture"],
+                    "exploratory_blocked_by_specification_gap",
+                )
+                self.assertEqual(variant["allowed_commands"], [])
+                self.assertEqual(variant["behavior_requirement_ids"], [])
+                self.assertEqual(variant["behavior_authority_evidence"], [])
+                self.assertTrue(variant["specification_gap_ids"])
+                self.assertNotIn(variant["blueprint_id"], eligible_ids)
+
         forbidden = (
             "consequence, consequence", "may produce the consequence declared",
             "canonical owner", "invoking object", "invoking context",
         )
         for model in payload["state_models"]:
-            if model["screen_id"] not in scoped_screens:
-                continue
             for variant in model["variants"]:
-                if variant["behavior_authority_posture"] != "requirement_backed":
-                    continue
                 combined = json.dumps(variant, ensure_ascii=False).casefold()
                 for phrase in forbidden:
                     self.assertNotIn(phrase, combined, variant["blueprint_id"])
-                for field in module.STATE_VARIANT_NARRATIVE_FIELDS:
-                    signature = module.normalized_state_narrative_signature(
-                        variant[field], screens[model["screen_id"]], variant
-                    )
-                    prior = signatures[field].get(signature)
-                    self.assertIsNone(
-                        prior,
-                        f"{field} interpolates {prior} and {variant['blueprint_id']}",
-                    )
-                    signatures[field][signature] = variant["blueprint_id"]
 
         permitted_invoking_feature = {
             "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-ELIGIBILITY-CHECK",
@@ -1096,39 +1103,22 @@ class UXBlueprintSemanticRepairTests(unittest.TestCase):
                 if "invoking feature" in text:
                     self.assertIn(variant["blueprint_id"], permitted_invoking_feature)
 
-        interpolated = copy.deepcopy(payload)
-        model = next(
-            item for item in interpolated["state_models"]
-            if item["screen_id"] == "UX-SCREEN-TODAY-DETAIL"
-        )
-        first, second = [
-            variant
-            for variant in model["variants"]
-            if variant["behavior_authority_posture"] == "requirement_backed"
-        ][:2]
-        first["visible_presentation"] = (
-            f"{first['title']} presents {first['displayed_objects'][0]}."
-        )
-        second["visible_presentation"] = (
-            f"{second['title']} presents {second['displayed_objects'][0]}."
-        )
-        with self.assertRaisesRegex(module.UXBlueprintError, "normalized narrative skeleton"):
-            module.validate_ux_blueprint(REPO_ROOT, interpolated)
-
     def test_compact_primary_and_every_goals_command_have_one_exact_contract(self):
         payload = self._payload()
         module = self._module()
         eligible_ids = module.authority_eligible_state_variant_ids(payload, REPO_ROOT)
+        self.assertEqual(eligible_ids, frozenset())
         for model in payload["state_models"]:
             for variant in model["variants"]:
-                if variant["behavior_authority_posture"] == "requirement_backed":
-                    self.assertTrue(variant["allowed_commands"] or variant["blueprint_id"] == "UX-STATE-VARIANT-TRUST-INLINE-NO-DISCLOSURE")
-                    self.assertFalse(variant["specification_gap_ids"])
-                    self.assertIn(variant["blueprint_id"], eligible_ids)
-                else:
-                    self.assertEqual(variant["allowed_commands"], [])
-                    self.assertTrue(variant["specification_gap_ids"])
-                    self.assertNotIn(variant["blueprint_id"], eligible_ids)
+                self.assertEqual(
+                    variant["behavior_authority_posture"],
+                    "exploratory_blocked_by_specification_gap",
+                )
+                self.assertEqual(variant["allowed_commands"], [])
+                self.assertEqual(variant["behavior_requirement_ids"], [])
+                self.assertEqual(variant["behavior_authority_evidence"], [])
+                self.assertTrue(variant["specification_gap_ids"])
+                self.assertNotIn(variant["blueprint_id"], eligible_ids)
         compact_screens = {
             "UX-SCREEN-ACCOUNT-BOUNDARY", "UX-SCREEN-ACCOUNT-SIGN-IN",
             "UX-SCREEN-ACCOUNT-STATUS", "UX-SCREEN-APP-SHELL-DRILLDOWN",
@@ -1147,29 +1137,8 @@ class UXBlueprintSemanticRepairTests(unittest.TestCase):
             if model["screen_id"] not in compact_screens | goals_screens:
                 continue
             for variant in model["variants"]:
-                if variant["behavior_authority_posture"] != "requirement_backed":
-                    self.assertEqual(variant["allowed_commands"], [])
-                    continue
-                contracts = variant["transition_exit"].split("\n")
-                expected_commands = (
-                    variant["allowed_commands"]
-                    if model["screen_id"] in goals_screens
-                    else variant["allowed_commands"]
-                )
-                self.assertEqual(len(contracts), len(expected_commands))
-                for command, contract in zip(expected_commands, contracts):
-                    self.assertRegex(
-                        contract,
-                        rf"^{re.escape(command)} => destination: .+; effect: .+; focus: .+\.$",
-                    )
-                    self.assertNotIn(" or ", contract.casefold())
-                for command in expected_commands:
-                    self.assertEqual(
-                        sum(line.startswith(command + " =>") for line in contracts), 1
-                    )
-                for command, contract in zip(expected_commands, contracts):
-                    if command.startswith(("Cancel", "Keep ", "Not Now", "Back", "Close", "Done", "Return ")):
-                        self.assertIn("preserves", contract.casefold())
+                self.assertEqual(variant["allowed_commands"], [])
+                self.assertTrue(variant["specification_gap_ids"])
 
         partial = copy.deepcopy(payload)
         variant = next(
@@ -1179,9 +1148,10 @@ class UXBlueprintSemanticRepairTests(unittest.TestCase):
             if model["screen_id"] == "UX-SCREEN-TODAY-DETAIL"
             and variant["variant_key"] == "active-execution"
         )
-        variant["transition_exit"] = variant["transition_exit"].splitlines()[0]
+        variant["allowed_commands"] = ["Still counts"]
         with self.assertRaisesRegex(
-            self._module().UXBlueprintError, "command transition inventory"
+            self._module().UXBlueprintError,
+            "gap-blocked behavior must authorize no command",
         ):
             self._module().validate_ux_blueprint(REPO_ROOT, partial)
 
@@ -1291,14 +1261,22 @@ class UXBlueprintSemanticRepairTests(unittest.TestCase):
             ("UX-SCREEN-TRUST-RECEIPT", "receipt-committed-undo-unavailable"),
         ):
             variant = next(item for item in self._variants(screen_id, payload) if item["variant_key"] == key)
-            if variant["behavior_authority_posture"] == "requirement_backed":
-                self.assertFalse(variant["specification_gap_ids"])
-                self.assertIn(variant["blueprint_id"], eligible_ids)
+            self.assertEqual(
+                variant["behavior_authority_posture"],
+                "exploratory_blocked_by_specification_gap",
+            )
+            self.assertEqual(variant["allowed_commands"], [])
+            self.assertEqual(variant["behavior_requirement_ids"], [])
+            self.assertEqual(variant["behavior_authority_evidence"], [])
+            self.assertTrue(variant["specification_gap_ids"])
+            if screen_id == "UX-SCREEN-SEARCH-RESULTS":
+                self.assertIn(
+                    "no exact command authorized by current canon",
+                    variant["transition_exit"].casefold(),
+                )
             else:
-                self.assertEqual(variant["allowed_commands"], [])
-                self.assertTrue(variant["specification_gap_ids"])
-                self.assertIn("no exact command authorized by current canon", variant["transition_exit"].casefold())
-                self.assertNotIn(variant["blueprint_id"], eligible_ids)
+                self.assertIn("no transition or exit", variant["transition_exit"].casefold())
+            self.assertNotIn(variant["blueprint_id"], eligible_ids)
         expected = {
             ("UX-SCREEN-CAPTURE-COMPOSER", "saved-undo-unavailable"):
                 "Capture saved confirmation",
@@ -1312,10 +1290,13 @@ class UXBlueprintSemanticRepairTests(unittest.TestCase):
                 item for item in self._variants(screen_id, payload)
                 if item["variant_key"] == key
             )
-            if variant["behavior_authority_posture"] == "requirement_backed":
-                self.assertIn(target, variant["transition_exit"])
+            if screen_id == "UX-SCREEN-SEARCH-RESULTS":
+                self.assertIn(
+                    "no exact command authorized by current canon",
+                    variant["transition_exit"].casefold(),
+                )
             else:
-                self.assertIn("no exact command authorized by current canon", variant["transition_exit"].casefold())
+                self.assertIn("no transition or exit", variant["transition_exit"].casefold())
             self.assertNotIn("invoking context", variant["transition_exit"].casefold())
 
     def test_requirement_anchors_are_complete_semantic_normative_sentences(self):

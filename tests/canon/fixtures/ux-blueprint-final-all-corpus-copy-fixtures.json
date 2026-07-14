@@ -57,13 +57,13 @@
     {
       "screen_id": "UX-SCREEN-TODAY-DETAIL",
       "variant_key": "active-execution",
-      "behavior_authority_posture": "requirement_backed",
+      "behavior_authority_posture": "exploratory_blocked_by_specification_gap",
       "visible_content_copy": "This Step is in progress. Still counts, Move it, Blocked, Waiting, and Not needed keep its real outcome visible."
     },
     {
       "screen_id": "UX-SCREEN-TODAY-DETAIL",
       "variant_key": "closure-review",
-      "behavior_authority_posture": "requirement_backed",
+      "behavior_authority_posture": "exploratory_blocked_by_specification_gap",
       "visible_content_copy": "The selected outcome, any required Proof, and the resulting History entry are visible before Confirm Closure."
     },
     {

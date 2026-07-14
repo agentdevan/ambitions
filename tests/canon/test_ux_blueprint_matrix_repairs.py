@@ -1,12 +1,13 @@
 import copy
 import json
 import subprocess
+import sys
 import unittest
 from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-MATRIX_SHA256 = "7e7bf8be8e210d58a30c44bf7cedd9ba282098a4cfb1100bc5da017165e56ac5"
+MATRIX_SHA256 = "f319153d552ab557798f289d7e838e94364a2e21b43903343c672af207dbdbbe"
 
 STATE_REPAIRS = {
     "UX-SCREEN-TODAY-ROOT": ({"loading", "populated", "stale-external-context", "offline-healthy", "permission-denied", "conflict", "recovery", "destructive-confirmation"}, {"normal", "stale", "offline", "permission-conflict"}),
@@ -47,6 +48,7 @@ GAP_IDS = {
     "GAP-UX-COMMAND-CONTRACT-CAPTURE-001", "GAP-UX-COMMAND-CONTRACT-GOALS-001",
     "GAP-UX-COMMAND-CONTRACT-DEGRADED-001", "GAP-UX-COMMAND-CONTRACT-PERMISSIONS-001",
     "GAP-UX-COMMAND-CONTRACT-SEARCH-001", "GAP-UX-COMMAND-CONTRACT-LAUNCH-SETUP-001",
+    "GAP-UX-COMMAND-CONTRACT-TIME-DEGRADED-001",
     "GAP-UX-COMMAND-CONTRACT-TIME-VIEWS-001", "GAP-UX-COMMAND-CONTRACT-TIME-DETAIL-001",
     "GAP-UX-COMMAND-CONTRACT-TIME-IMPORT-001", "GAP-UX-COMMAND-CONTRACT-TODAY-001",
     "GAP-UX-COMMAND-CONTRACT-TRUST-001", "GAP-UX-COMMAND-CONTRACT-YOU-001",
@@ -116,10 +118,11 @@ class UXBlueprintMatrixRepairTests(unittest.TestCase):
         gaps = payload["specification_gaps"]
         self.assertEqual({item["gap_id"] for item in gaps}, GAP_IDS)
         self.assertEqual([item["gap_id"] for item in gaps], sorted(GAP_IDS))
-        self.assertEqual(len(gaps), 19)
+        self.assertEqual(len(gaps), 20)
         for gap in gaps:
-            self.assertEqual(set(gap), {"affected_screen_families", "authority_consequence", "blocked_fields", "gap_id", "source_rationale"})
+            self.assertEqual(set(gap), {"affected_screen_families", "affected_state_ids", "authority_consequence", "blocked_fields", "gap_id", "source_rationale"})
             self.assertTrue(gap["affected_screen_families"])
+            self.assertTrue(gap["affected_state_ids"])
             self.assertTrue(gap["blocked_fields"])
             self.assertIn("not", gap["authority_consequence"].casefold())
             self.assertGreaterEqual(len(gap["source_rationale"].split()), 10)
@@ -134,11 +137,13 @@ class UXBlueprintMatrixRepairTests(unittest.TestCase):
                 posture = state["behavior_authority_posture"]
                 self.assertIn(posture, {"requirement_backed", "exploratory_blocked_by_specification_gap"})
                 if posture == "exploratory_blocked_by_specification_gap":
+                    self.assertEqual(state["behavior_authority_evidence"], [])
                     self.assertEqual(state["allowed_commands"], [])
                     self.assertTrue(set(state["specification_gap_ids"]) <= gap_ids)
                     self.assertIn("no exact command authorized by current canon", json.dumps(state).casefold())
                     self.assertFalse(state["behavior_requirement_ids"])
                 else:
+                    self.assertTrue(state["behavior_authority_evidence"])
                     self.assertFalse(state["specification_gap_ids"])
                     self.assertTrue(state["behavior_requirement_ids"])
                     self.assertTrue(set(state["behavior_requirement_ids"]) <= set(state["requirement_ids"]))
@@ -166,11 +171,11 @@ class UXBlueprintMatrixRepairTests(unittest.TestCase):
         first = module.render_ux_blueprint_markdown(payload, REPO_ROOT)
         second = module.render_ux_blueprint_markdown(payload, REPO_ROOT)
         self.assertEqual(first, second)
-        self.assertIn(b"19 specification gaps", first)
+        self.assertIn(b"20 specification gaps", first)
         self.assertIn(b"exploratory_blocked_by_specification_gap", first)
         result = subprocess.run(
             [
-                "/Users/devan/.local/share/uv/python/cpython-3.12-macos-x86_64-none/bin/python3.12",
+                sys.executable,
                 "scripts/ambitions-canon.py",
                 "ux-blueprint",
                 "--check",

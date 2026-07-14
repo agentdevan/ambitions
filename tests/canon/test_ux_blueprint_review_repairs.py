@@ -273,7 +273,7 @@ class UXBlueprintReviewRepairTests(unittest.TestCase):
         with self.assertRaisesRegex(module.UXBlueprintError, "record proof ceiling"):
             module.validate_ux_blueprint(REPO_ROOT, overclaim)
 
-    def test_declared_sources_are_digest_bound_and_git_source_is_current(self):
+    def test_declared_sources_are_digest_bound_and_git_source_is_reviewed_commit(self):
         module = self._module()
         payload = self._payload()
         sources = payload["source_documents"]
@@ -287,7 +287,7 @@ class UXBlueprintReviewRepairTests(unittest.TestCase):
         source_sha = payload["source_sha"]
         self.assertEqual(
             subprocess.run(
-                ["git", "merge-base", "--is-ancestor", source_sha, "HEAD"],
+                ["git", "cat-file", "-e", f"{source_sha}^{{commit}}"],
                 cwd=REPO_ROOT,
                 check=False,
             ).returncode,

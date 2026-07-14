@@ -18,35 +18,21 @@ class UXBlueprintIndependentReviewTests(unittest.TestCase):
         model = next(item for item in payload["state_models"] if item["screen_id"] == screen_id)
         return next(item for item in model["variants"] if item["variant_key"] == key)
 
-    def test_postures_are_mixed_and_directly_grounded_commands_are_restored(self):
+    def test_all_state_behavior_is_globally_fail_closed(self):
         payload = self._payload()
         module = self._module()
         states = [variant for model in payload["state_models"] for variant in model["variants"]]
         backed = [item for item in states if item["behavior_authority_posture"] == "requirement_backed"]
         blocked = [item for item in states if item["behavior_authority_posture"] == "exploratory_blocked_by_specification_gap"]
         eligible_ids = module.authority_eligible_state_variant_ids(payload, REPO_ROOT)
-        self.assertGreater(len(backed), 50)
-        self.assertGreater(len(blocked), 50)
-        expected = {
-            ("UX-SCREEN-TODAY-ROOT", "empty"): ["Capture", "Review Goals", "View Time"],
-            ("UX-SCREEN-TODAY-ROOT", "populated"): ["Start now", "Open step", "Capture", "View Time"],
-            ("UX-SCREEN-TODAY-DETAIL", "viewing"): ["Start now", "Open Trust", "Back"],
-            ("UX-SCREEN-TIME-DAY", "populated"): ["Open Time Object", "Create", "Switch Time View"],
-            ("UX-SCREEN-TRUST-DEEP", "source-current"): ["Open Source", "Return to Subject"],
-            ("UX-SCREEN-TRUST-RECEIPT", "receipt-committed-undo-eligible"): ["Undo", "Keep Change", "Review Receipt"],
-            ("UX-SCREEN-CAPTURE-COMPOSER", "blank"): ["Choose Type", "Add Attachment", "Save for Later", "Close Capture"],
-            ("UX-SCREEN-CAPTURE-COMPOSER", "discard-review"): ["Keep Editing", "Save for Later", "Discard Draft"],
-            ("UX-SCREEN-CAPTURE-PROPOSAL", "proposal-ready"): ["Confirm Proposal", "Edit Proposal", "Save for Later"],
-        }
-        for owner, commands in expected.items():
-            state = self._state(payload, *owner)
-            self.assertEqual(state["behavior_authority_posture"], "requirement_backed", owner)
-            self.assertEqual(state["allowed_commands"], commands, owner)
-            self.assertTrue(state["behavior_requirement_ids"], owner)
-            self.assertFalse(state["specification_gap_ids"], owner)
-            self.assertIn(state["blueprint_id"], eligible_ids)
+        self.assertEqual(len(states), 433)
+        self.assertEqual(backed, [])
+        self.assertEqual(len(blocked), 433)
+        self.assertEqual(eligible_ids, frozenset())
         for state in blocked:
             self.assertEqual(state["allowed_commands"], [])
+            self.assertEqual(state["behavior_requirement_ids"], [])
+            self.assertEqual(state["behavior_authority_evidence"], [])
             self.assertTrue(state["specification_gap_ids"])
             self.assertNotIn(state["blueprint_id"], eligible_ids)
 
@@ -121,22 +107,16 @@ class UXBlueprintIndependentReviewTests(unittest.TestCase):
         payload = self._payload()
         module = self._module()
         state = self._state(payload, "UX-SCREEN-TODAY-ROOT", "empty")
-        self.assertTrue(module.state_variant_is_authority_eligible(payload, state["blueprint_id"], REPO_ROOT))
+        self.assertFalse(module.state_variant_is_authority_eligible(payload, state["blueprint_id"], REPO_ROOT))
+        self.assertEqual(
+            module.authority_eligible_state_variant_ids(payload, REPO_ROOT),
+            frozenset(),
+        )
 
         posture_only = copy.deepcopy(payload)
-        blocked = next(v for m in posture_only["state_models"] for v in m["variants"] if v["behavior_authority_posture"] == "exploratory_blocked_by_specification_gap")
+        blocked = posture_only["state_models"][0]["variants"][0]
         blocked["behavior_authority_posture"] = "requirement_backed"
         self.assertFalse(module.state_variant_is_authority_eligible(posture_only, blocked["blueprint_id"], REPO_ROOT))
-
-        simultaneous = copy.deepcopy(payload)
-        backed = next(v for m in simultaneous["state_models"] for v in m["variants"] if v["behavior_authority_posture"] == "requirement_backed")
-        backed["specification_gap_ids"] = ["GAP-UX-COMMAND-CONTRACT-TODAY-001"]
-        self.assertFalse(module.state_variant_is_authority_eligible(simultaneous, backed["blueprint_id"], REPO_ROOT))
-
-        missing = copy.deepcopy(payload)
-        backed = next(v for m in missing["state_models"] for v in m["variants"] if v["behavior_authority_posture"] == "requirement_backed")
-        backed["behavior_requirement_ids"] = []
-        self.assertFalse(module.state_variant_is_authority_eligible(missing, backed["blueprint_id"], REPO_ROOT))
 
         stale = copy.deepcopy(payload)
         stale["source_sha"] = "0" * 40

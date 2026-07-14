@@ -45,7 +45,7 @@ owns_concepts = [
 ]
 inherits = ["CONST-PROOF-EVIDENCE-001", "CONST-HISTORY-SUPERSESSION-001", "AUTHORITY-AMENDMENT-001"]
 depends_on = ["CONSTITUTION", "STANDARD-ACCESSIBILITY", "STANDARD-TESTING-FIXTURES"]
-source_owners = ["Native/Ambitions/Quality/", "docs/canon/", "scripts/"]
+source_owners = ["Native/Ambitions/Quality/", "docs/canon/", "scripts/", "tools/ambitions_canon/"]
 +++
 
 # Validation and Release

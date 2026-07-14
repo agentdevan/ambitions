@@ -33,7 +33,7 @@ class UXBlueprintTests(unittest.TestCase):
         self.assertEqual(blueprint["status"], "design_input_non_authoritative")
         self.assertEqual(
             blueprint["source_sha"],
-            "857f4bce2aee2fba104f74bf08a5623a3debfccc",
+            "ffd462ab52c0eff798071333388a051d9f3e55f3",
         )
         self.assertEqual(summary.screen_count, 47)
         self.assertEqual(summary.state_model_count, 47)

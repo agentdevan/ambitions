@@ -3,7 +3,7 @@
 > Deterministic offline benchmark evidence; not product, runtime, visual, accessibility, privacy, device, TestFlight, App Store, or release proof.
 
 - Canon revision: `1`
-- Canon SHA: `ada2dc2f7ad344c6d31ab891410337989d768eb6f8640cf15e4269442335bcf9`
+- Canon SHA: `4cd9043c5de339faecb7c6de9640a44e95d63f4c726c8351d37da1e504d548e0`
 - Authority state: `shadow`
 - Token estimate: deterministic four-characters-per-token ceiling
 
@@ -18,7 +18,7 @@
 | `cloudkit-continuity` | 47375 | 11844 | `complex` | 30000 | 19/19 | 19/19 | 12/12 | 0 | 16/16 | 16/16 | exact | present | present | PASS |
 | `source-atlas-boundary` | 41453 | 10364 | `complex` | 30000 | 15/15 | 15/15 | 14/14 | 0 | 16/16 | 16/16 | exact | present | present | PASS |
 | `accessibility-repair` | 11135 | 2784 | `complex` | 30000 | 9/9 | 9/9 | 2/2 | 0 | 3/3 | 3/3 | exact | present | present | PASS |
-| `release-proof-claim` | 31810 | 7953 | `complex` | 30000 | 28/28 | 28/28 | 6/6 | 0 | 7/7 | 7/7 | exact | present | present | PASS |
+| `release-proof-claim` | 31839 | 7960 | `complex` | 30000 | 28/28 | 28/28 | 6/6 | 0 | 8/8 | 8/8 | exact | present | present | PASS |
 
 ## Resume-safe authorization checks
 
