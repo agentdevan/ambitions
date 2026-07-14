@@ -21,7 +21,7 @@ RECEIPT = (
     ROOT
     / "docs/qa/evidence/2026-07-13-train-4-semantic-comparison/receipt.json"
 )
-EVALUATED_COMMIT = "262327c04261deb43bfe3bd3e7ad1e9380c0c0ab"
+EVALUATED_COMMIT = "f11b414f342346dfd7200381d232045efb34de9a"
 
 
 class SemanticReceiptTest(unittest.TestCase):

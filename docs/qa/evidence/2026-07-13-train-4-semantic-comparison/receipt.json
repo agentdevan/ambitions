@@ -55,7 +55,7 @@
     "sha256": "60e994110892cf84de35ed7ec3da6b1da361470bf6b11f1c5a02481d9e5eb884"
   },
   "compiler_version": "0.2.0",
-  "evaluated_task_pack_commit": "262327c04261deb43bfe3bd3e7ad1e9380c0c0ab",
+  "evaluated_task_pack_commit": "f11b414f342346dfd7200381d232045efb34de9a",
   "lane": "explicit_non_ci_semantic_review",
   "new_prompt_sha256": "6a42ffa78634043744efd8866d1eb90302f7ad2da56338907d4c1e54e084978a",
   "new_response": {
