@@ -1,3 +1,4 @@
+import importlib.util
 import json
 import subprocess
 import unittest
@@ -17,7 +18,7 @@ from tools.ambitions_canon.model import CanonError
 ROOT = Path(__file__).resolve().parents[2]
 RECEIPT = (
     ROOT
-    / "docs/qa/evidence/2026-07-13-canon-train-4-semantic-comparison/receipt.json"
+    / "docs/qa/evidence/2026-07-13-train-4-semantic-comparison/receipt.json"
 )
 EVALUATED_COMMIT = "b39955c34001ed7e15c9adf6654c7a1773336bbb"
 
@@ -116,6 +117,20 @@ class SemanticReceiptTest(unittest.TestCase):
         self.assertFalse(RECEIPT.is_relative_to(ROOT / "docs/canon"))
         self.assertNotIn(RECEIPT.resolve(), canon_inputs)
         self.assertEqual(build_canon(ROOT, check=True), ())
+
+    def test_receipt_path_is_not_an_authority_freeze_candidate(self):
+        relative = RECEIPT.relative_to(ROOT).as_posix()
+        spec = importlib.util.spec_from_file_location(
+            "authority_freeze_for_receipt_test",
+            ROOT / "scripts/ambitions-authority-freeze-check.py",
+        )
+        self.assertIsNotNone(spec)
+        self.assertIsNotNone(spec.loader)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+
+        self.assertEqual(benchmark.SEMANTIC_RECEIPT_PATH.as_posix(), relative)
+        self.assertEqual(module.authority_candidates([relative]), ())
 
     def test_stale_task_compiler_canon_prompt_and_every_pack_hash_fail(self):
         base = self.payload()

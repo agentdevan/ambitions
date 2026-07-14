@@ -121,7 +121,7 @@ _SEMANTIC_RESPONSE_FIELDS = frozenset(
     {"schema_version", "reviewer", "model", "response"}
 )
 SEMANTIC_RECEIPT_PATH = Path(
-    "docs/qa/evidence/2026-07-13-canon-train-4-semantic-comparison/receipt.json"
+    "docs/qa/evidence/2026-07-13-train-4-semantic-comparison/receipt.json"
 )
 EVALUATED_TASK_PACK_PATHS = (
     "tools/ambitions_canon/coverage.py",
