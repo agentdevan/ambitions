@@ -20,7 +20,7 @@ RECEIPT = (
     ROOT
     / "docs/qa/evidence/2026-07-13-train-4-semantic-comparison/receipt.json"
 )
-EVALUATED_COMMIT = "b77a24dc25cc6e612882d670baea15babf1f33d3"
+EVALUATED_COMMIT = "1e81d170e997e6895b92cdc080563b28b60ac636"
 
 
 class SemanticReceiptTest(unittest.TestCase):
@@ -52,7 +52,7 @@ class SemanticReceiptTest(unittest.TestCase):
         )
         comparison = receipt["comparison"]
         self.assertEqual(comparison["overall_verdict"], "new_better")
-        self.assertEqual(comparison["old_total_score"], 25)
+        self.assertEqual(comparison["old_total_score"], 26)
         self.assertEqual(comparison["new_total_score"], 28)
         self.assertEqual(len(comparison["dimensions"]), 7)
         self.assertEqual(
@@ -71,7 +71,7 @@ class SemanticReceiptTest(unittest.TestCase):
                 ("contradiction_control", "equivalent", 4, 4),
                 ("unauthorized_assumptions", "equivalent", 4, 4),
                 ("source_ownership", "new_better", 3, 4),
-                ("validation_completeness", "new_better", 3, 4),
+                ("validation_completeness", "equivalent", 4, 4),
                 ("proof_discipline", "equivalent", 4, 4),
             ),
         )
@@ -180,7 +180,7 @@ class SemanticReceiptTest(unittest.TestCase):
         changed["comparison"]["dimensions"][0].update(
             {"old_score": 4, "new_score": 3, "verdict": "old_better"}
         )
-        changed["comparison"]["old_total_score"] = 25
+        changed["comparison"]["old_total_score"] = 26
         changed["comparison"]["new_total_score"] = 27
         changed["comparison"]["overall_verdict"] = "new_better"
         malformed.append(("old better policy", changed, "SEMANTIC_RECEIPT_POLICY"))

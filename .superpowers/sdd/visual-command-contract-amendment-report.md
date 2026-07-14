@@ -91,6 +91,29 @@ The 714-test discovery and broad audit rows previously recorded for implementati
 
 Current frozen-candidate evidence:
 
+### Fresh semantic comparison receipt
+
+The deterministic task-pack commit is `1e81d170e997e6895b92cdc080563b28b60ac636`. The controller regenerated the ignored semantic-review bundle from that commit and supplied independently authored old-path, new-pack, and comparison evidence. The tracked receipt records only hashes, attribution, scores, verdicts, and the closed claim ceiling; it does not retain response prose or comparator rationale.
+
+Evidence bindings:
+
+```text
+canon SHA-256: 542b43f356bfdca724a808681dbe91f0cfed1923a8e5aab683c50f7114779399
+old prompt SHA-256: 338c2088cc6a74dc06a3fc087bc6848280b117b7638aefdb377b9649face56cb
+new prompt SHA-256: a9e72e32d36bb9db1d00e95df3c76a91d8fb3c4abba80e23f542c992c8a371e6
+old response SHA-256: f8e73052af92ad97e4f686730190e15532c5107328060c5c9ac8272aa9bd9834
+new response SHA-256: 5468e8424bcaf9164ba8389105c42276e6b6485e99dfe42dd7a5e16909ca038a
+comparison SHA-256: 49606fe860d37d39e6966e97480dc007818333e1386f077981a0218a47f88ac4
+comparison totals: old 26 / new 28
+overall verdict: new_better
+```
+
+Strict receipt TDD began from the unchanged historical receipt. `uv run --python 3.12 --no-project python -m unittest tests.canon.test_semantic_receipt` failed as expected with exit 1: 8 tests ran, producing 10 failures and 1 error headed by `SEMANTIC_RECEIPT_STALE`. The requested literal path `uv run --python 3.12 --no-project python tools/ambitions-canon.py semantic-review --check-receipt` does not exist in this repository and exited 2. The actual checked-in CLI path, `uv run --python 3.12 --no-project python scripts/ambitions-canon.py semantic-review --check-receipt`, then failed closed with exit 1 and `SEMANTIC_RECEIPT_STALE` before the receipt was updated.
+
+The first focused post-update run correctly made the CLI Green but exposed one stale negative-test total inherited from the previous 25/28 receipt: 8 tests ran with one failure because schema validation preceded the intended `SEMANTIC_RECEIPT_POLICY` assertion. Updating that fixture total to the current 26/28 arithmetic preserved the negative policy case. The final focused unittest passed all 8 tests in 36.108 seconds with exit 0. The actual CLI then reported `GREEN ambitions canon semantic-review receipt packs=8 verdict=new_better scores=26/28` with exit 0, and `git diff --check` exited 0.
+
+The receipt claim ceiling remains exactly: "This receipt records an explicit non-CI shadow comparison only. It does not authorize implementation or claim product, runtime, source, visual, accessibility, privacy, device, TestFlight, App Store, or release Green."
+
 | Command | Exit | Result |
 | --- | ---: | --- |
 | focused semantic/parser/model/schema unittest | 0 | 56 tests passed in 0.460 seconds |
