@@ -356,6 +356,9 @@ class SemanticReceiptTest(unittest.TestCase):
         changed["comparison"]["dimensions"][0]["old_score"] = True
         malformed.append(("boolean score", changed, "SEMANTIC_RECEIPT_INVALID"))
         changed = deepcopy(base)
+        changed["comparison"]["dimensions"][0]["verdict"] = "better"
+        malformed.append(("unknown verdict", changed, "SEMANTIC_RECEIPT_INVALID"))
+        changed = deepcopy(base)
         changed["comparison"]["dimensions"][0].update(
             {"old_score": 4, "new_score": 3, "verdict": "old_better"}
         )
@@ -367,9 +370,30 @@ class SemanticReceiptTest(unittest.TestCase):
         changed["comparison"]["new_total_score"] = 26
         malformed.append(("new total below old", changed, "SEMANTIC_RECEIPT_INVALID"))
 
-        for label, payload, code in malformed:
-            with self.subTest(label=label):
-                self.assert_error(payload, code)
+        regenerated = {
+            field: base[field]
+            for field in (
+                "compiler_version",
+                "canon_sha256",
+                "old_prompt_sha256",
+                "new_prompt_sha256",
+                "pack_hashes",
+            )
+        }
+        module = self.receipt_module()
+        with (
+            mock.patch.object(module, "_semantic_receipt_require_ancestor"),
+            mock.patch.object(module, "_semantic_receipt_require_only_proof_changes"),
+            mock.patch.object(module, "_semantic_receipt_require_evaluated_pack_bytes"),
+            mock.patch.object(
+                module,
+                "regenerate_semantic_receipt_bindings",
+                return_value=regenerated,
+            ),
+        ):
+            for label, payload, code in malformed:
+                with self.subTest(label=label):
+                    self.assert_error(payload, code)
 
     def test_evaluated_pack_defining_bytes_remain_at_task_commit(self):
         module = self.receipt_module()

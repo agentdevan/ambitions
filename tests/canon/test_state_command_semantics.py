@@ -60,12 +60,65 @@ class StateCommandSemanticTests(unittest.TestCase):
             with self.subTest(command=command.command_id, phrase=phrase):
                 self.assertIn(phrase.casefold(), text)
 
-    def test_normative_command_contract_specs_have_no_malformed_comma_slash(self):
-        occurrences = 0
+    def test_normative_command_contract_specs_have_no_malformed_prose(self):
+        repeated_space_artifacts = []
+        disallowed_prose_slashes = []
+        locked_trust_heading = (
+            "## SPEC-GLOBAL-TRUST-INSPECTION-001 — Contextual Proof / Source / "
+            "Privacy / History / Receipts"
+        )
         for relative in SPECIFICATIONS:
             path = ROOT / "docs/canon/specifications" / relative
-            occurrences += path.read_text(encoding="utf-8").count(", /")
-        self.assertEqual(occurrences, 0)
+            text = path.read_text(encoding="utf-8")
+            document = parse_canon_document(path, text)
+            for contract in document.state_command_contracts:
+                semantic_strings = (
+                    contract.transition_exit,
+                    contract.durable_effect,
+                    contract.recovery_rollback,
+                    contract.offline_behavior,
+                    contract.accessibility_focus,
+                    *(
+                        value
+                        for command in contract.commands
+                        for value in (
+                            *command.preconditions,
+                            command.destination,
+                            command.effect,
+                            command.success_focus,
+                            command.failure_focus,
+                            command.commit_boundary,
+                            command.rollback_undo,
+                            command.privacy_egress,
+                        )
+                    ),
+                )
+                for value in semantic_strings:
+                    repeated_space_artifacts.extend(
+                        (relative, contract.state_id, value)
+                        for _ in range(value.count(", or  "))
+                    )
+
+            for line_number, line in enumerate(text.splitlines(), start=1):
+                if line == locked_trust_heading:
+                    continue
+                search_from = 0
+                while (index := line.find(" / ", search_from)) >= 0:
+                    if not line[:index].endswith("explicit state contract"):
+                        disallowed_prose_slashes.append(
+                            (relative, line_number, line)
+                        )
+                    search_from = index + len(" / ")
+
+        self.assertEqual(
+            (len(repeated_space_artifacts), len(disallowed_prose_slashes)),
+            (0, 0),
+            msg=(
+                "malformed normative prose: "
+                f"repeated-space={len(repeated_space_artifacts)}, "
+                f"disallowed-slash={len(disallowed_prose_slashes)}"
+            ),
+        )
 
     def test_all_267_contracts_reject_self_referential_template_semantics(self):
         commands = [
