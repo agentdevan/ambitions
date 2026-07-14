@@ -1,0 +1,240 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ambitions.local/canon/ux-blueprint.schema.json",
+  "title": "Ambitions visual-rebaseline UX blueprint",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "authority_state",
+    "blueprint_id",
+    "canon_content_sha",
+    "canon_revision",
+    "claim_ceiling",
+    "cross_cutting",
+    "journeys",
+    "legacy_figma_policy",
+    "object_boundaries",
+    "primary_linear_v3",
+    "requirement_disposition_policy",
+    "schema_version",
+    "screens",
+    "source_documents",
+    "source_sha",
+    "state_models",
+    "status",
+    "title"
+  ],
+  "properties": {
+    "authority_state": {"const": "shadow"},
+    "blueprint_id": {"type": "string", "const": "AMB-UX-BLUEPRINT-REBASELINE-001"},
+    "canon_content_sha": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "canon_revision": {"type": "integer", "minimum": 1},
+    "claim_ceiling": {"const": "Visual design input only; no source, runtime, rendered-app, accessibility, device, privacy/legal, distribution, or release claim."},
+    "cross_cutting": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/crossCutting"}
+    },
+    "journeys": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/journey"}
+    },
+    "legacy_figma_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allowed_roles", "destructive_actions", "rejected_as_final_target"],
+      "properties": {
+        "allowed_roles": {
+          "type": "array",
+          "const": ["exploration", "failure_evidence", "implementation_history", "provenance", "unique_content_source"]
+        },
+        "destructive_actions": {"const": "withheld_gate_c"},
+        "rejected_as_final_target": {"const": true}
+      }
+    },
+    "object_boundaries": {
+      "type": "array",
+      "minItems": 18,
+      "maxItems": 18,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/objectBoundary"}
+    },
+    "primary_linear_v3": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["disposition", "document_id", "title"],
+      "properties": {
+        "disposition": {"const": "migration_corpus_unchanged"},
+        "document_id": {"const": "96b93346-271d-46fc-beab-43ff7e286b5d"},
+        "title": {"const": "B1A-D01R — Ambitions Product / IA / Object Model Full Design Spec v3 — Canonical"}
+      }
+    },
+    "requirement_disposition_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nonvisual_sources", "visual_source_routes"],
+      "properties": {
+        "nonvisual_sources": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/nonvisualSource"}
+        },
+        "visual_source_routes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/visualSourceRoute"}
+        }
+      }
+    },
+    "schema_version": {"const": 1},
+    "screens": {
+      "type": "array",
+      "minItems": 40,
+      "maxItems": 40,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/screen"}
+    },
+    "source_documents": {"$ref": "#/$defs/stringArray"},
+    "source_sha": {"type": "string", "const": "002fd07b795173c1c8590c0be986fc1e31569416"},
+    "state_models": {
+      "type": "array",
+      "minItems": 16,
+      "maxItems": 16,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/stateModel"}
+    },
+    "status": {"const": "design_input_non_authoritative"},
+    "title": {"$ref": "#/$defs/nonempty"}
+  },
+  "$defs": {
+    "nonempty": {"type": "string", "minLength": 1},
+    "stringArray": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/nonempty"}
+    },
+    "requirementIds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[A-Z][A-Z0-9-]*-[0-9]{3}$"}
+    },
+    "screen": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["accessibility", "blueprint_id", "entry", "exit", "implementation_status", "objects", "presentation", "proof_ceiling", "purpose", "requirement_ids", "scope", "state_model_id", "swiftui_anatomy", "title"],
+      "properties": {
+        "accessibility": {"$ref": "#/$defs/stringArray"},
+        "blueprint_id": {"type": "string", "pattern": "^UX-SCREEN-[A-Z0-9-]+$"},
+        "entry": {"$ref": "#/$defs/nonempty"},
+        "exit": {"$ref": "#/$defs/nonempty"},
+        "implementation_status": {"const": "design_input_only"},
+        "objects": {"$ref": "#/$defs/stringArray"},
+        "presentation": {"$ref": "#/$defs/nonempty"},
+        "proof_ceiling": {"$ref": "#/$defs/nonempty"},
+        "purpose": {"$ref": "#/$defs/nonempty"},
+        "requirement_ids": {"$ref": "#/$defs/requirementIds"},
+        "scope": {"enum": ["account", "app-shell", "capture", "goals", "offline-degraded", "permissions", "search", "setup", "time", "today", "trust", "you"]},
+        "state_model_id": {"type": "string", "pattern": "^UX-STATE-[A-Z0-9-]+$"},
+        "swiftui_anatomy": {"$ref": "#/$defs/nonempty"},
+        "title": {"$ref": "#/$defs/nonempty"}
+      }
+    },
+    "stateModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["applies_to", "behavior", "blueprint_id", "recovery", "requirement_ids", "state_kinds", "title"],
+      "properties": {
+        "applies_to": {"$ref": "#/$defs/stringArray"},
+        "behavior": {"$ref": "#/$defs/nonempty"},
+        "blueprint_id": {"type": "string", "pattern": "^UX-STATE-[A-Z0-9-]+$"},
+        "recovery": {"$ref": "#/$defs/nonempty"},
+        "requirement_ids": {"$ref": "#/$defs/requirementIds"},
+        "state_kinds": {
+          "type": "array",
+          "const": ["degraded", "empty", "failure", "interruption", "loading", "recovery", "resting", "rollback", "transitional"]
+        },
+        "title": {"$ref": "#/$defs/nonempty"}
+      }
+    },
+    "objectBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["blueprint_id", "create", "delete_restore", "detail", "edit", "history_inspection", "object_id", "presentation_boundaries", "requirement_ids", "title"],
+      "properties": {
+        "blueprint_id": {"type": "string", "pattern": "^UX-OBJECT-[A-Z0-9-]+$"},
+        "create": {"$ref": "#/$defs/nonempty"},
+        "delete_restore": {"$ref": "#/$defs/nonempty"},
+        "detail": {"$ref": "#/$defs/nonempty"},
+        "edit": {"$ref": "#/$defs/nonempty"},
+        "history_inspection": {"$ref": "#/$defs/nonempty"},
+        "object_id": {"$ref": "#/$defs/nonempty"},
+        "presentation_boundaries": {"$ref": "#/$defs/nonempty"},
+        "requirement_ids": {"$ref": "#/$defs/requirementIds"},
+        "title": {"$ref": "#/$defs/nonempty"}
+      }
+    },
+    "journey": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["accessibility", "blueprint_id", "branches", "cancellation", "commit_boundary", "failure", "happy_path", "interruption_resume", "offline", "preconditions", "recovery", "requirement_ids", "rollback", "tests", "title", "trigger"],
+      "properties": {
+        "accessibility": {"$ref": "#/$defs/nonempty"},
+        "blueprint_id": {"type": "string", "pattern": "^UX-JOURNEY-[A-Z0-9-]+$"},
+        "branches": {"$ref": "#/$defs/stringArray"},
+        "cancellation": {"$ref": "#/$defs/nonempty"},
+        "commit_boundary": {"$ref": "#/$defs/nonempty"},
+        "failure": {"$ref": "#/$defs/nonempty"},
+        "happy_path": {"$ref": "#/$defs/stringArray"},
+        "interruption_resume": {"$ref": "#/$defs/nonempty"},
+        "offline": {"$ref": "#/$defs/nonempty"},
+        "preconditions": {"$ref": "#/$defs/stringArray"},
+        "recovery": {"$ref": "#/$defs/nonempty"},
+        "requirement_ids": {"$ref": "#/$defs/requirementIds"},
+        "rollback": {"$ref": "#/$defs/nonempty"},
+        "tests": {"$ref": "#/$defs/stringArray"},
+        "title": {"$ref": "#/$defs/nonempty"},
+        "trigger": {"$ref": "#/$defs/nonempty"}
+      }
+    },
+    "crossCutting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["blueprint_id", "contract", "facet", "requirement_ids", "title", "variants"],
+      "properties": {
+        "blueprint_id": {"type": "string", "pattern": "^UX-CROSS-[A-Z0-9-]+$"},
+        "contract": {"$ref": "#/$defs/nonempty"},
+        "facet": {"$ref": "#/$defs/nonempty"},
+        "requirement_ids": {"$ref": "#/$defs/requirementIds"},
+        "title": {"$ref": "#/$defs/nonempty"},
+        "variants": {"$ref": "#/$defs/stringArray"}
+      }
+    },
+    "nonvisualSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rationale", "source_path"],
+      "properties": {
+        "rationale": {"$ref": "#/$defs/nonempty"},
+        "source_path": {"$ref": "#/$defs/nonempty"}
+      }
+    },
+    "visualSourceRoute": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["blueprint_ids", "source_prefix"],
+      "properties": {
+        "blueprint_ids": {"$ref": "#/$defs/stringArray"},
+        "source_prefix": {"$ref": "#/$defs/nonempty"}
+      }
+    }
+  }
+}
