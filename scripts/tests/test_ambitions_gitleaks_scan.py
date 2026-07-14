@@ -1,13 +1,16 @@
 import os
+import re
 import shutil
 import subprocess
 import tempfile
+import tomllib
 import unittest
 from pathlib import Path
 
 
 SCRIPT = Path(__file__).parents[1] / "ci" / "ambitions-gitleaks-scan.sh"
 REPO_ROOT = SCRIPT.parents[2]
+CONFIG = REPO_ROOT / ".gitleaks.toml"
 
 
 class GitleaksScanModeTests(unittest.TestCase):
@@ -86,6 +89,67 @@ class GitleaksScanModeTests(unittest.TestCase):
         self.assertEqual(result.returncode, 2)
         self.assertEqual(calls, [])
         self.assertIn("usage:", result.stderr)
+
+
+class GitleaksPublicIdentifierPolicyTests(unittest.TestCase):
+    PUBLIC_FIGMA_DOCUMENT_KEY = "SWtHm9ouHTPbEFfNrrtZwv"
+    ALLOWLIST_DESCRIPTION = "Exact reviewed public Figma document key"
+
+    def test_allowlist_is_scoped_to_the_exact_public_identifier(self):
+        config = tomllib.loads(CONFIG.read_text(encoding="utf-8"))
+        matching_allowlists = [
+            entry
+            for entry in config.get("allowlists", [])
+            if entry.get("description") == self.ALLOWLIST_DESCRIPTION
+        ]
+
+        self.assertEqual(len(matching_allowlists), 1)
+        allowlist = matching_allowlists[0]
+        self.assertEqual(allowlist.get("regexTarget"), "secret")
+        self.assertEqual(
+            allowlist.get("regexes"),
+            [rf"^{re.escape(self.PUBLIC_FIGMA_DOCUMENT_KEY)}$"],
+        )
+        self.assertNotIn("paths", allowlist)
+        self.assertNotIn("rules", allowlist)
+        self.assertNotIn("commits", allowlist)
+
+        pattern = re.compile(allowlist["regexes"][0])
+        self.assertIsNotNone(pattern.fullmatch(self.PUBLIC_FIGMA_DOCUMENT_KEY))
+        self.assertIsNone(pattern.fullmatch(self.PUBLIC_FIGMA_DOCUMENT_KEY + "X"))
+
+    @unittest.skipUnless(shutil.which("gitleaks"), "gitleaks is not installed")
+    def test_gitleaks_allows_the_exact_public_identifier(self):
+        result = self.run_gitleaks(self.PUBLIC_FIGMA_DOCUMENT_KEY)
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+
+    @unittest.skipUnless(shutil.which("gitleaks"), "gitleaks is not installed")
+    def test_gitleaks_rejects_an_adjacent_credential_like_value(self):
+        result = self.run_gitleaks(self.PUBLIC_FIGMA_DOCUMENT_KEY + "X")
+
+        self.assertEqual(result.returncode, 1, result.stderr)
+
+    def run_gitleaks(self, candidate):
+        with tempfile.TemporaryDirectory() as temporary:
+            fixture = Path(temporary) / "fixture.toml"
+            fixture.write_text(f'file_key = "{candidate}"\n', encoding="utf-8")
+            return subprocess.run(
+                [
+                    "gitleaks",
+                    "dir",
+                    temporary,
+                    "--config",
+                    str(CONFIG),
+                    "--no-banner",
+                    "--redact",
+                    "--exit-code",
+                    "1",
+                ],
+                cwd=REPO_ROOT,
+                text=True,
+                capture_output=True,
+            )
 
 
 if __name__ == "__main__":
