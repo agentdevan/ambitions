@@ -1,0 +1,1982 @@
+{
+  "schema": "ambitions.ux-blueprint.semantic-residual-docket",
+  "version": 1,
+  "corpus": {
+    "git_head": "17af7f09966c487f8d7d0997d4b414422c587d22",
+    "blueprint_source_sha": "857f4bce2aee2fba104f74bf08a5623a3debfccc",
+    "blueprint_file_sha256": "cc97c29894a87cb3b7557eba5402b0e3eb72443ab7544164e11a3623752de036",
+    "canon_revision": 1,
+    "authority_state": "shadow",
+    "intentional_empty_blueprint_id": "UX-STATE-VARIANT-TRUST-INLINE-NO-DISCLOSURE"
+  },
+  "standard": {
+    "internal_language": "User copy may name supported product objects, surfaces, and actions, but must not expose control or command ownership, commit or event machinery, projections, state or lifecycle machinery, checkpoints, core or root architecture, overlays, drilldown, diffs, revalidation, granularity, runtime, authority, canonical or semantic internals, implementation, governance, or release terminology.",
+    "gap_action_implication": "Gap-blocked copy must not instruct, offer, promise, or state behavior of commands; it may state only the visible condition and neutral consequence."
+  },
+  "counts": {
+    "state_variants_audited": 433,
+    "nonempty_visible_copies_audited": 432,
+    "intentional_empty_visible_copies": 1,
+    "offending_state_variants": 125,
+    "internal_language_state_variants": 82,
+    "gap_action_implication_state_variants": 46,
+    "overlap_state_variants": 3
+  },
+  "offenders": [
+    {
+      "blueprint_id": "UX-STATE-VARIANT-ACCOUNT-SIGN-IN-APPLE-IN-PROGRESS",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Apple In Progress — Apple authentication is in progress and no account state is committed yet.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "committed",
+          "account state"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-ACCOUNT-SIGN-IN-CANCELLED",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Cancelled — Provider sign-in was cancelled; local data and local-core access are unchanged.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "local-core"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-ACCOUNT-SIGN-IN-GOOGLE-IN-PROGRESS",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Google In Progress — Google authentication is in progress and no account state is committed yet.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "committed",
+          "account state"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-ACCOUNT-SIGN-IN-PROVIDER-CHOICE",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Provider Choice — Apple and Google are optional sign-in providers; Continue Without Account preserves full local core use.",
+      "category": [
+        "internal_language",
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "local core"
+        ],
+        "gap_action_implication": [
+          "Continue Without Account preserves full local core use"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence. The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable, using named supported product nouns; remove both the internal terms and action language without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-ACCOUNT-STATUS-SIGNED-OUT",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Signed Out — No account is active; local objects and settings remain available.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "local objects"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-CONSUMED",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "This link has already been used, so the same change will not run again.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "will not run again"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-PRESENTED",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "This link opened its safe destination once; it will not repeat a completed action.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "will not repeat a completed action"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-QUEUED",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Ambitions will open this link after checking its destination and access.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "will open this link after checking its destination and access"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-LAUNCH-GATE-READY",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Ambitions is ready, with the healthy local core available.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "healthy local core"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-SHELL-DRILLDOWN-FULL-SCREEN-OVERLAY",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "A full-screen task covers the app until it is finished or dismissed.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "until it is finished or dismissed"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-APP-SHELL-SEARCH-CAPTURE-RETURNING-FOCUS",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Capture or Search has closed. The previously focused control remains identified.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "previously focused control remains identified"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-COMPOSER-AMBIGUOUS-TYPE",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "The Capture could fit more than one object type; the original words remain unchanged.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "object type"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-COMPOSER-DICTATING",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Spoken words are appearing in the Capture; nothing is saved until the user confirms.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "until the user confirms"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-COMPOSER-INVALID-METADATA",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "A Capture field is invalid. The entered text remains available for correction.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "available for correction"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-COMPOSER-RESTORING",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "A saved Capture checkpoint is being restored with its prior text and cursor context.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "checkpoint"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-COMPOSER-SAVED",
+      "posture": "requirement_backed",
+      "exact_copy": "Saved. The new local object and save receipt are available.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "local object"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-COMPOSER-SAVED-UNDO-ELIGIBLE",
+      "posture": "requirement_backed",
+      "exact_copy": "This Capture change can be undone from its save receipt while the created object is current.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "created object"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-COMPOSER-SCAN-IMPORTING",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Scanned content is being prepared for review before it joins the Capture.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "for review before it joins the Capture"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-COMPOSER-TYPED",
+      "posture": "requirement_backed",
+      "exact_copy": "Text is ready for review. Ambitions has not committed an object or schedule placement.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "committed"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-PROPOSAL-PROPOSAL-READY",
+      "posture": "requirement_backed",
+      "exact_copy": "Proposal ready. Confirm only after object type, placement, conflicts, and proof expectation match your intent.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "object type"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-CAPTURE-SAVED-FOR-LATER-SAVED-FOR-LATER",
+      "posture": "requirement_backed",
+      "exact_copy": "Saved for later. This remains a draft and does not appear as a committed Goal, Step, Reminder, Event, Proof, or Note.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "committed"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-CLOSURE-NEEDS-ATTENTION",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Closure needs review because the outcome, remaining work, or Proof is unresolved.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "Closure needs review"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-DETAIL-ACTIVATING",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "The confirmed Goal is entering its active lifecycle; the prior draft remains visible until completion.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "lifecycle"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-DETAIL-COMPLETED",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "This Goal reached its declared outcome; Proof and remaining items stay separate and visible.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "declared outcome"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-DETAIL-NEEDS-ATTENTION",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "This Goal needs review because a named path, schedule, source, or Proof condition changed.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "This Goal needs review"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-DETAIL-READY-TO-ACTIVATE",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "This Goal is ready for activation review; it is not active yet.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "ready for activation review"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-DETAIL-RECOVERING",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "This Goal keeps its accepted direction visible while recovery choices are considered.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "recovery choices are considered"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-LIFE-AREA-NEEDS-ATTENTION",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "A Goal in this Life Area needs review; the Life Area direction remains visible.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "needs review"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-PATH-DRAFT",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "This Goal Path is a draft. Nothing is scheduled until the user chooses to activate it.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "until the user chooses to activate it"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-PATH-MISSING-REFERENCE-CONTEXT",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "This Goal Path cannot show a referenced source or object that is currently unavailable.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "referenced source or object"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-PATH-NEEDS-ATTENTION",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "This Goal Path needs review because its Proof, schedule fit, source, or route changed.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "needs review"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-PATH-READY-TO-ACTIVATE",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "This Goal Path is ready for activation review but has not changed the active Goal.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "ready for activation review"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-PATH-WAITING",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "This Goal Path is waiting on a named condition, with the next review point visible.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "next review point visible"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-RECOVERY-NEEDS-ATTENTION",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Recovery needs a user review because the proposed consequence is material or uncertain.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "needs a user review"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-RECOVERY-SCHEDULE-CONFLICT",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "The recovery proposal conflicts with protected or fixed time; both choices remain visible.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "both choices remain visible"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-GOALS-ROOT-NEEDS-ATTENTION",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "One or more Goals need review; the reason is named without urgency or score pressure.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "Goals need review"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-CONTINUITY-CONFLICT",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Optional continuity copies disagree; local information remains protected for review.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "protected for review"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-OFFLINE-HEALTHY",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Core local work is fully available without a connection, so no warning is needed.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "Core local"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-STORAGE-PRESSURE",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Storage Pressure — Storage pressure threatens new writes; existing readable data and export remain explicit.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "export remain explicit"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-OFFLINE-DEGRADED-REPAIR-QUARANTINE-INSPECTION",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Protected information is ready for inspection before any repair or export choice.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "ready for inspection before any repair or export choice"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-AUTHORIZED",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Calendar: Allowed. The system reports access as allowed; Ambitions may use only the declared fields.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "declared fields"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-DENIED",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Calendar: Not Allowed. Access was denied; core local use remains available.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "core local"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-ELIGIBILITY-CHECK",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Calendar: Checking. Ambitions is checking whether this permission can be requested.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "whether this permission can be requested"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-AUTHORIZED",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Notifications: Allowed. The system reports access as allowed; Ambitions may use only the declared fields.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "declared fields"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-DENIED",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Notifications: Not Allowed. Access was denied; core local use remains available.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "core local"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-ELIGIBILITY-CHECK",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Notifications: Checking. Ambitions is checking whether this permission can be requested.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "whether this permission can be requested"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-REVOKED",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Notification access was turned off after being granted; underlying Ambitions objects are unchanged.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "underlying Ambitions objects",
+          "Ambitions objects"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ACTION-COMPLETE-UNDO-UNAVAILABLE",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Undo is unavailable for this updated search result; the exact safety, expiry, dependency, or external-ownership reason is shown.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "external-ownership"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-RESULTS-FILTERED",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Filters are active. Result count reflects the visible object types and time scope.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "object types"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-ROOT-ACTION-MUTATING",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "The confirmed search action is being applied locally; the prior result remains visible until completion.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "confirmed search action is being applied locally"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-ROOT-ACTION-REJECTED",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "The selected search action was not accepted; the underlying object remains unchanged.",
+      "category": [
+        "internal_language",
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "underlying object"
+        ],
+        "gap_action_implication": [
+          "selected search action was not accepted"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence. The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable, using named supported product nouns; remove both the internal terms and action language without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-ROOT-ACTION-VALIDATING",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "The selected search action is being checked against current local information before any change.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "selected search action is being checked"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-ROOT-CORRUPT-INDEX",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "The local search list needs a safe rebuild; saved objects remain intact.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "saved objects"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-ROOT-EMPTY-QUERY",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Search is ready. Enter a query; no result set exists yet.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "Enter a query"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-ROOT-INSPECTION-HANDOFF",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Search is opening the selected item’s inspection view without changing the item.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "opening the selected item’s inspection view"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-ROOT-QUERYING",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Searching your local Ambitions objects now.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "Ambitions objects"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-ROOT-RECENT",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Recent searches appear on this device. Clearing them does not change any Goal, Step, Capture, or time item.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "Clearing them does not change"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-ROOT-RESTORED",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Search context restored. Results have not been assumed current until you resume.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "until you resume"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-ROOT-STALE-INDEX",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Search results may be out of date; opening an item rechecks its current local state.",
+      "category": [
+        "internal_language",
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "current local state"
+        ],
+        "gap_action_implication": [
+          "opening an item rechecks"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence. The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable, using named supported product nouns; remove both the internal terms and action language without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-ROOT-UNAVAILABLE-PROJECTION",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "The requested result view is temporarily unavailable; saved objects are not missing.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "saved objects"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SETUP-FIRST-USE-REVISITABLE",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Setup can be revisited later without resetting local information or prior choices.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "can be revisited later"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SETUP-RESUME-CHECKPOINT-FOUND",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Checkpoint Found — A local setup checkpoint is available and no step is assumed complete.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "Checkpoint",
+          "checkpoint"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SETUP-RESUME-START-OVER",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Start Over — Starting over clears setup progress only after review and does not erase product data.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "Start Over",
+          "Starting over clears setup progress"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DAY-CONFLICTING",
+      "posture": "requirement_backed",
+      "exact_copy": "Time Day — conflicting. A conflict is explicit; Ambitions never silently crosses a protected boundary.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "Time Day — conflicting"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DAY-DENSE",
+      "posture": "requirement_backed",
+      "exact_copy": "Time Day — dense. Density is summarized without hiding protected reality or implying productivity failure.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "Time Day — dense"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DAY-EDITING",
+      "posture": "requirement_backed",
+      "exact_copy": "Time Day — editing. The original and proposed placement stay visible until the user saves or cancels.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "Time Day — editing"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DAY-EMPTY",
+      "posture": "requirement_backed",
+      "exact_copy": "Time Day — empty. No Ambitions-owned time objects appear in this range.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "time objects",
+          "Time Day — empty"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DAY-IMPORTING",
+      "posture": "requirement_backed",
+      "exact_copy": "Time Day — importing. External items are being compared; no Ambitions-native copy is committed before diff review.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "committed",
+          "diff review",
+          "Time Day — importing"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DAY-NOW-ANCHORED",
+      "posture": "requirement_backed",
+      "exact_copy": "Time Day — now anchored. Now and Today are explicit anchors; the next object follows chronological reality rather than a productivity ranking.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "Time Day — now anchored"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DAY-POPULATED",
+      "posture": "requirement_backed",
+      "exact_copy": "Time Day — populated. Scheduled objects occupy their truthful positions and remain distinguishable by type.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "Scheduled objects",
+          "Time Day — populated"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DAY-PREVIEWING",
+      "posture": "requirement_backed",
+      "exact_copy": "Time Day — previewing. Preview distinguishes current reality from proposed movement before any commit.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "commit",
+          "Time Day — previewing"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DAY-RESTORED",
+      "posture": "requirement_backed",
+      "exact_copy": "Time Day — restored. The prior range and focus were restored, then revalidated against current local state.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "revalidated",
+          "current local state",
+          "Time Day — restored"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DAY-SELECTED",
+      "posture": "requirement_backed",
+      "exact_copy": "Time Day — selected. One time object is selected; only commands owned by its type are offered.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "commands owned by its type",
+          "time object",
+          "Time Day — selected"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DEGRADED-PENDING-EXTERNAL-DIFF",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Calendar changes are waiting for review before they can alter Ambitions-owned time.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "waiting for review before they can alter"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-DEGRADED-SYNC-CONFLICT",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Two calendar versions disagree; neither replaces the saved choice until review.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "until review"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-IMPORT-NATIVE-IMPORT-UNDO",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "The imported Ambitions-native items remain linked to their unchanged outside source. Their earlier import state is preserved in History.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "import state"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-IMPORT-RESTORED",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "The prior Ambitions calendar state has been restored with its import history intact.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "calendar state"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-LIST-NOW-ANCHORED",
+      "posture": "requirement_backed",
+      "exact_copy": "A current-period control returns the list to today without showing a false minute marker.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "current-period control"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-LIST-SELECTED",
+      "posture": "requirement_backed",
+      "exact_copy": "The chosen list row shows its saved time details and only actions owned by that item type.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "actions owned by that item type"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-YEAR-CONFLICTING",
+      "posture": "requirement_backed",
+      "exact_copy": "Time Year Conflicting — Conflict presence is visible at month-summary level without exposing object detail.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "month-summary level",
+          "object detail",
+          "Time Year Conflicting — Conflict presence is visible at month-summary level without exposing object detail"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-YEAR-DENSE",
+      "posture": "requirement_backed",
+      "exact_copy": "Time Year Dense — Dense annual content remains grouped by month and requires drilldown for object detail.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "drilldown",
+          "object detail",
+          "Time Year Dense — Dense annual content remains grouped by month and requires drilldown for object detail"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-YEAR-EDITING",
+      "posture": "requirement_backed",
+      "exact_copy": "Time Year Editing — Editing is unavailable at year depth and moves to month drilldown.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "drilldown",
+          "Time Year Editing — Editing is unavailable at year depth and moves to month drilldown"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-YEAR-EMPTY",
+      "posture": "requirement_backed",
+      "exact_copy": "Time Year Empty — No month contains local time objects; the year remains a month-summary overview.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "month-summary overview",
+          "time objects",
+          "Time Year Empty — No month contains local time objects; the year remains a month-summary overview"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-YEAR-EXTERNAL-HIDDEN-CAPACITY",
+      "posture": "requirement_backed",
+      "exact_copy": "Time Year External Hidden Capacity — External calendar detail remains hidden; only aggregate month capacity is visible.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "Time Year External Hidden Capacity — External calendar detail remains hidden; only aggregate month capacity is visible"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-YEAR-IMPORTING",
+      "posture": "requirement_backed",
+      "exact_copy": "Time Year Importing — Import progress is summarized by affected month; exact imported objects stay in review depth.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "review depth",
+          "Time Year Importing — Import progress is summarized by affected month; exact imported objects stay in review depth"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-YEAR-NOW-ANCHORED",
+      "posture": "requirement_backed",
+      "exact_copy": "Time Year Now Anchored — Current-period control identifies the year and current month without a day-level Now marker.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "Current-period control",
+          "Time Year Now Anchored — Current-period control identifies the year and current month without a day-level Now marker"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-YEAR-POPULATED",
+      "posture": "requirement_backed",
+      "exact_copy": "Time Year Populated — Month summaries show annual rhythm without exposing granular objects.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "granular",
+          "Time Year Populated — Month summaries show annual rhythm without exposing granular objects"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-YEAR-PREVIEWING",
+      "posture": "requirement_backed",
+      "exact_copy": "Time Year Previewing — Preview is summarized by month and granular consequence review requires drilldown.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "drilldown",
+          "granular",
+          "Time Year Previewing — Preview is summarized by month and granular consequence review requires drilldown"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-YEAR-RESTORED",
+      "posture": "requirement_backed",
+      "exact_copy": "Time Year Restored — Restoration returns to the saved year and month summary without opening an object.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "Time Year Restored — Restoration returns to the saved year and month summary without opening an object"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TIME-YEAR-SELECTED",
+      "posture": "requirement_backed",
+      "exact_copy": "Time Year Selected — Selection identifies one month summary and exposes no granular edit control.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "granular",
+          "Time Year Selected — Selection identifies one month summary and exposes no granular edit control"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TODAY-DETAIL-VIEWING",
+      "posture": "requirement_backed",
+      "exact_copy": "Viewing — Object detail explains why it fits, current state, time context, and safe actions.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "safe actions",
+          "current state",
+          "Object detail",
+          "Viewing — Object detail explains why it fits, current state, time context, and safe actions"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TODAY-START-HERE-ACTIVE-EXECUTION",
+      "posture": "requirement_backed",
+      "exact_copy": "Step in progress. Closure and control actions describe reality without score, streak, or shame.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "control actions"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TODAY-START-HERE-CLOSURE-READY",
+      "posture": "requirement_backed",
+      "exact_copy": "Ready to close. Review the closure meaning and any required proof before committing.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "committing"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-DEEP-SOURCE-STALE",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Source is stale. Decisions must not treat it as current until refresh succeeds.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "Decisions must not treat it as current until refresh succeeds"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-INLINE-PROOF-REQUIRED",
+      "posture": "requirement_backed",
+      "exact_copy": "Proof is required before this specific closure can commit.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "commit"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-INLINE-PROOF-SATISFIED",
+      "posture": "requirement_backed",
+      "exact_copy": "Required proof is attached for this operation.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "this operation"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-RECEIPT-LOCAL-STORE-DEGRADED",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Some receipt detail cannot be read safely; available consequence and subject links remain marked.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "subject links"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-RECEIPT-RECEIPT-COMMITTED-UNDO-ELIGIBLE",
+      "posture": "requirement_backed",
+      "exact_copy": "This recorded change can be reversed; the receipt identifies its exact subject and result.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "exact subject"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-TRUST-RECEIPT-RECEIPT-COMMITTED-UNDO-UNAVAILABLE",
+      "posture": "requirement_backed",
+      "exact_copy": "This recorded change cannot be reversed safely; the receipt keeps the current subject and reason visible.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "current subject"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-CONFLICTED-QUARANTINED",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Conflicting continuity copies are protected until the user reviews a safe resolution.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "until the user reviews a safe resolution"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-INELIGIBLE",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Optional continuity is not available for the current account or device state; local use is unaffected.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "device state"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-RESTORING",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "A chosen continuity copy is being restored while the prior local state stays recoverable.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "prior local state"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DATA-RESET-ROLLBACK",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "The reset has a recorded earlier preference state. Current product data remains unchanged.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "preference state"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DATA-TRASH-EMPTY",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Trash is empty. No restorable objects are present in this scope.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "restorable objects"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DATA-TRASH-POPULATED",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Trash contains restorable local objects with deletion dates and retention deadlines.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "restorable local objects"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DIAGNOSTICS-DIAGNOSIS-READY",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "The detected issue, affected scope, and safe options are ready for review.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "safe options are ready for review"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DIAGNOSTICS-RECOVERABLE",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "The detected issue can be recovered without discarding saved local information.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "can be recovered"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-DIAGNOSTICS-REPAIR-PREVIEW",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "The proposed repair and its consequences are visible before anything changes.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "proposed repair and its consequences are visible before anything changes"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-NOTIFICATIONS-ACTED",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "A notification action was received and will be validated against current local information.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "will be validated against current local information"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-NOTIFICATIONS-DISABLED",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Notifications are off. Underlying Goals, Steps, and time objects remain unchanged.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "Underlying Goals, Steps, and time objects",
+          "time objects"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-NOTIFICATIONS-EXTERNALLY-FAILED",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "The notification could not be scheduled. The underlying Step or object is unchanged.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "underlying Step or object"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-NOTIFICATIONS-PERMISSION-DENIED",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Notification access is off; underlying Ambitions objects remain available.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "underlying Ambitions objects",
+          "Ambitions objects"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-NOTIFICATIONS-RECONCILED",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Notification delivery state is reconciled with its local rule and linked object.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "delivery state",
+          "linked object"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-NOTIFICATIONS-REMOVED",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "The notification request was removed; the underlying Goal, Step, or time object remains.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "underlying Goal, Step, or time object",
+          "time object"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-NOTIFICATIONS-SCHEDULED",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "A notification is scheduled from a confirmed local rule; it does not complete the underlying work.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "underlying work"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-NOTIFICATIONS-SUPERSEDED",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "A newer notification request replaces the older delivery request, not the underlying object.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "underlying object"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ROOT-ACTION-REQUIRED",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "A settings action needs review. Ambitions names the consequence and keeps unrelated local functions available.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "settings action needs review"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ROOT-NO-ACCOUNT-HEALTHY",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "No account. Core Ambitions remains fully usable locally; private life data stays on this device.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "Core Ambitions"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ROOT-PERMISSIONS-AVAILABLE",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Requested capabilities are available within their declared scopes.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "declared scopes"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ROOT-PERMISSIONS-DENIED",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "One or more permissions are denied. Core local use continues; affected capabilities are named.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "Core local"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ROOT-SETUP-COMPLETE",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Setup complete for the selected scope. Optional account and service choices remain changeable later.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "choices remain changeable later"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-ROOT-SETUP-PARTIAL",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Setup is partial. Local core use is available now; unfinished optional choices do not block it.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "Local core"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-SETTINGS-APP-LOCK-ENABLED",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "App Lock is on for the declared scope; device passcode fallback remains available.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "declared scope"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-SETTINGS-AUTOMATION-POLICY",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Automation is set to the displayed permission level. Changes still follow the confirmation choices shown here.",
+      "category": [
+        "gap_action_implication"
+      ],
+      "exact_offending_phrases": {
+        "gap_action_implication": [
+          "Changes still follow the confirmation choices shown here"
+        ]
+      },
+      "why_it_violates": "The state is gap-blocked with no authorized commands, but the copy instructs, offers, promises, or states behavior of a user action.",
+      "rewrite_recommendation": "State only the visible condition and what remains unchanged or unavailable; remove the listed action language and do not mention or predict a command."
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-YOU-SETTINGS-INCREASE-CONTRAST",
+      "posture": "exploratory_blocked_by_specification_gap",
+      "exact_copy": "Increase Contrast strengthens separation while preserving meaning through labels, shape, and state—not color alone.",
+      "category": [
+        "internal_language"
+      ],
+      "exact_offending_phrases": {
+        "internal_language": [
+          "shape, and state"
+        ]
+      },
+      "why_it_violates": "Visible copy exposes implementation, state-machine, presentation, ownership, or governance vocabulary instead of a plain user condition and consequence.",
+      "rewrite_recommendation": "Describe only the visible condition and user consequence using named supported product nouns; remove the listed internal terms without adding behavior."
+    }
+  ],
+  "corpus_wide_validator_recommendations": {
+    "scope": "Apply every detector to every nonempty visible_content_copy before any variant-specific allowlist. Variant IDs may narrow a legitimate product-noun exception, never the detector itself.",
+    "internal_language_patterns": [
+      "(?<!\\w)(?:core|lifecycle|checkpoint|drilldown|granular(?:ity)?|runtime|authority|canonical|semantic|implementation|governance|release|projection|overlay|root)(?!\\w)",
+      "(?<!\\w)commit(?:s|ted|ting)?(?!\\w)",
+      "(?<!\\w)(?:account|local|import|calendar|device|preference|delivery|current)\\s+state(?!\\w)",
+      "(?<!\\w)revalidat(?:e|ed|ing)(?!\\w)|(?<!\\w)diff\\s+review(?!\\w)",
+      "(?<!\\w)(?:commands?|actions?)[^.!?;]{0,64}(?:owned|owner|authority)(?!\\w)|(?<!\\w)(?:owned|owner|authority)[^.!?;]{0,64}(?:commands?|actions?)(?!\\w)",
+      "^(?:Time Day\\s+—\\s+[^.]+|Time Year\\s+[^—]+—|Viewing\\s+—)"
+    ],
+    "gap_action_patterns": [
+      "(?:^|[.!?;—]\\s+)(?:please\\s+)?(?:continue|enter|resume|start|review|undo|try|remove|confirm|restore|enable|export|run|open|clear|activate|inspect|correct|dismiss)\\b",
+      "\\b(?:you|the user)\\s+(?:can|may|will|chooses? to)\\s+(?:continue|enter|resume|start|review|undo|try|remove|confirm|restore|enable|export|run|open|clear|activate|inspect|correct|dismiss)\\b",
+      "\\b(?:ready|available)\\s+(?:for|to)\\s+(?:review|inspection|correction|activation|repair|export|resume)\\b",
+      "\\b(?:clearing|opening|starting over|confirming|restoring|enabling|exporting|repairing)\\b[^.!?]{0,96}\\b(?:does|will|clears|rechecks|creates|changes|removes|returns|sends|restores)\\b",
+      "\\bneeds?\\s+(?:a\\s+|user\\s+)?review\\b"
+    ],
+    "neutral_counterexamples": [
+      "The import did not finish. Existing saved items remain unchanged.",
+      "Undo is unavailable here. The reason is shown.",
+      "Continuity is off. Saved information remains on this device.",
+      "Search has no results for the current words. Saved items are unchanged.",
+      "Earlier setup choices remain saved.",
+      "The Goal Path route is visible. The selected Goal remains unchanged.",
+      "No Events are scheduled for this day."
+    ],
+    "required_negative_tests": [
+      "Reject each banned term in both phrase orders and in every variant ID, including IDs outside reviewed fixtures.",
+      "Reject action imperatives after sentence starts, semicolons, colons, and em dashes.",
+      "Reject command promises and action-effect claims in every gap-blocked record.",
+      "Permit supported product nouns such as Goal Path route and Event only when their linked requirements authorize the concept.",
+      "Assert the live residual docket is empty after repair and bind that assertion to the full 433-record corpus."
+    ]
+  }
+}

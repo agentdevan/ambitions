@@ -35,9 +35,9 @@ class UXBlueprintTests(unittest.TestCase):
             blueprint["source_sha"],
             "857f4bce2aee2fba104f74bf08a5623a3debfccc",
         )
-        self.assertEqual(summary.screen_count, 40)
-        self.assertEqual(summary.state_model_count, 40)
-        self.assertEqual(summary.state_taxonomy_count, 360)
+        self.assertEqual(summary.screen_count, 47)
+        self.assertEqual(summary.state_model_count, 47)
+        self.assertEqual(summary.state_taxonomy_count, 423)
         self.assertEqual(summary.object_boundary_count, 18)
         self.assertEqual(summary.journey_count, 12)
         self.assertEqual(summary.cross_cutting_count, 11)

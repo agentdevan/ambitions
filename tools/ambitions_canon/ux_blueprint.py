@@ -40,6 +40,9 @@ RECORD_PROOF_CEILING = (
     "Design input only; no implementation, runtime, rendered-app, accessibility, "
     "device, privacy/legal, distribution, or release proof."
 )
+REQUIRED_STATE_INVENTORY_SHA256 = (
+    "1e905bec47a17da7583c098ebd134ea8e23c42c09adcb3eeae5183df44cd6e75"
+)
 REQUIRED_SCOPES = frozenset(
     {
         "account",
@@ -128,18 +131,12 @@ STATE_LAWS = {
 }
 SEMANTIC_NONVISUAL_SENTINELS = frozenset(
     {
-        "APP-DEEP-LINK-RESOLVE-001",
-        "APP-DEEP-LINK-STATE-001",
-        "APP-LAUNCH-READINESS-001",
         "DESIGN-004",
         "LAW-RUNTIME-NO-DIRECT-WRITE-001",
         "OBJ-CANONICAL-OWNER-001",
         "OBJ-COMMON-ENVELOPE-001",
-        "OBJ-SCHEDULE-PLACEMENT-ATOMICITY-001",
         "PROOF-FIGMA-AUTHORITY-001",
         "SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001",
-        "SPEC-GLOBAL-SEARCH-INDEX-001",
-        "SPEC-GLOBAL-SEARCH-INDEX-ACTIONS-001",
         "SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001",
         "SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001",
         "SPEC-SURFACE-GOALS-VISUAL-AUTHORITY-001",
@@ -147,17 +144,8 @@ SEMANTIC_NONVISUAL_SENTINELS = frozenset(
         "SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001",
         "SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001",
         "STANDARD-VISUAL-REVIEW-001",
-        "SYSTEM-APPLE-HANDOFF-001",
-        "SYSTEM-APPLE-INTENTS-001",
         "SYSTEM-APPLE-PLATFORM-BASELINE-001",
-        "SYSTEM-APPLE-SHARE-HANDOFF-001",
-        "SYSTEM-APPLE-WIDGET-ACTION-001",
-        "SYSTEM-PERSISTENCE-ATOMIC-001",
         "SYSTEM-PERSISTENCE-COMPACTION-001",
-        "SYSTEM-PERSISTENCE-CORRUPTION-001",
-        "SYSTEM-PERSISTENCE-MIGRATION-001",
-        "SYSTEM-PERSISTENCE-REPLAY-001",
-        "SYSTEM-SCHEDULING-FIT-001",
     }
 )
 SEMANTIC_VISUAL_SENTINELS = {
@@ -218,6 +206,8 @@ SEMANTIC_VISUAL_SENTINELS = {
         "UX-SECURITY-CHANNEL-WIDGETS",
     ),
 }
+if SEMANTIC_NONVISUAL_SENTINELS & frozenset(SEMANTIC_VISUAL_SENTINELS):
+    raise RuntimeError("semantic visual and nonvisual sentinel sets overlap")
 
 
 def _required_state_variants() -> dict[str, tuple[str, ...]]:
@@ -515,6 +505,318 @@ FORMULAIC_STATE_VARIANT_PATTERNS = (
         re.IGNORECASE,
     ),
 )
+BANNED_VISIBLE_INTERNAL_LANGUAGE = re.compile(
+    r"deep link envelope|application launch readiness gate|stop ship data risk|"
+    r"time degraded-state owner|review pressure|shape time|inspect privacy law|"
+    r"requirement[- ]backed|gap[- ]blocked|specification gap|proof ceiling|"
+    r"current canon|canonical owner|architecture vocabulary|release gate|"
+    r"\baffecting\b|the last confirmed information remains unchanged|"
+    r"available local work remains open, with the limitation explained in place|"
+    r"CloudKit|private[- ](?:life )?graph|\bbackend\b|\bactive root\b|"
+    r"\bfifth root\b|durable event (?:order|sequence)|\bsuccess claim\b|"
+    r"command and receipt commit|committed command|canonical (?:data|object)|"
+    r"release or product-completeness proof|private runtime taxonomy|"
+    r"semantic[- ]tokens?|\blocal graph\b|\blocal authority\b|"
+    r"authoritative local copy|private query scope|product objects|"
+    r"primary object precedes|global actions and navigation|"
+    r"checkpoint is being revalidated|optional-service state|last durable state|"
+    r"corrective event|receipt committed|durable consequence|"
+    r"declared external effect|full success|continuity metadata|healthy claim|"
+    r"continuity authority|approved transition commits|declared confirmation policy|"
+    r"productivity scores?",
+    re.IGNORECASE,
+)
+
+GAP_BLOCKED_ACTION_IMPLICATION_PATTERNS = (
+    re.compile(
+        r"(?:^|[.!?]\s+)(?:please\s+)?"
+        r"(?:review|undo(?!\s+(?:history\b|is\s+unavailable\b|"
+        r"remains\s+unavailable\b))|try|remove|confirm|restore|enable|export|run)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"(?:^|[.!?]\s+)(?:enabling|exporting|restoring|confirming|undoing)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\b(?:undo|restore|export|repair)\s+"
+        r"(?:removes?|returns?|creates?|changes?|replaces?|sends?|restores?|runs?)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\b(?:undo|confirm|review|restore|export|repair)\s+"
+        r"(?:is|are)\s+(?:available|possible|ready)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\b(?:you\s+)?(?:can|may)\s+"
+        r"(?:undo|confirm|try|remove|review|restore|enable|export|run)\b",
+        re.IGNORECASE,
+    ),
+)
+
+
+def gap_blocked_copy_implies_action(text: str) -> bool:
+    """Return whether copy tells or promises an unsupported user action."""
+
+    return any(pattern.search(text) for pattern in GAP_BLOCKED_ACTION_IMPLICATION_PATTERNS)
+
+
+ALL_CORPUS_VISIBLE_COPY_REVIEW_IDS = frozenset(
+    {
+        "UX-STATE-VARIANT-ACCOUNT-BOUNDARY-CONTINUITY-CONFLICTED",
+        "UX-STATE-VARIANT-ACCOUNT-STATUS-CONTINUITY-DISABLED",
+        "UX-STATE-VARIANT-APP-SHELL-ROOT-UNAVAILABLE-ROUTE-DUPLICATE-PRESENTATION-OWNER",
+        "UX-STATE-VARIANT-APP-SHELL-SEARCH-CAPTURE-IDLE",
+        "UX-STATE-VARIANT-APP-SHELL-SEARCH-CAPTURE-RETURNING-FOCUS",
+        "UX-STATE-VARIANT-CAPTURE-COMPOSER-PARTIAL-ROUTING",
+        "UX-STATE-VARIANT-CAPTURE-COMPOSER-ROUTING",
+        "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-CONTINUITY-PENDING",
+        "UX-STATE-VARIANT-SETUP-RESUME-CHECKPOINT-INVALID",
+        "UX-STATE-VARIANT-TODAY-DETAIL-ACTIVE-EXECUTION",
+        "UX-STATE-VARIANT-TODAY-DETAIL-CLOSURE-REVIEW",
+        "UX-STATE-VARIANT-TODAY-DETAIL-RECOVERY",
+        "UX-STATE-VARIANT-TRUST-DEEP-RESTORING",
+        "UX-STATE-VARIANT-TRUST-RECEIPT-RECEIPT-RESOLVING",
+        "UX-STATE-VARIANT-TRUST-RECEIPT-RESTORING",
+        "UX-STATE-VARIANT-TRUST-RECEIPT-UNDOING",
+        "UX-STATE-VARIANT-YOU-ROOT-CONTINUITY-CONFLICTED",
+        "UX-STATE-VARIANT-YOU-SETTINGS-APPEARANCE-OLED-DARK",
+    }
+)
+ALL_CORPUS_VISIBLE_COPY_INTERNAL_LANGUAGE = re.compile(
+    r"(?:\bauthoritative\b[^.!?;]{0,64}\blocal copy\b|"
+    r"\blocal copy\b[^.!?;]{0,64}\bauthoritative\b|"
+    r"\bcurrent\b[^.!?;]{0,64}\bauthority\b|"
+    r"\bauthority\b[^.!?;]{0,64}\bcurrent\b|"
+    r"\bduplicate\b[^.!?;]{0,48}\b(?:owner|presentation)\b|"
+    r"\b(?:owner|presentation)\b[^.!?;]{0,48}\bduplicate\b|"
+    r"\banother presentation\b|\bglobal actions\b|\boverlay\b|"
+    r"\boriginating object control\b|\bCapture route\b|"
+    r"\blocal object type\b|\bstale completion\b|\breplay(?:ed|ing)?\b|"
+    r"\bactive execution\b|\bexecution is active\b|"
+    r"\bclosure consequence\b|\bclosure[- ]contract\b|\bproof rule\b|"
+    r"\breceipt preview precedes commitment\b|\bdurable Step state\b|"
+    r"\btrust state\b|\bcurrent subject\b|\bcorrective receipts\b|"
+    r"\bsemantic grouping\b)",
+    re.IGNORECASE,
+)
+
+
+def all_corpus_visible_copy_exposes_internal_language(
+    variant_id: str, text: str
+) -> bool:
+    """Detect reviewed internal phrases without banning legitimate product nouns."""
+
+    return (
+        variant_id in ALL_CORPUS_VISIBLE_COPY_REVIEW_IDS
+        and ALL_CORPUS_VISIBLE_COPY_INTERNAL_LANGUAGE.search(text) is not None
+    )
+
+
+SEMANTIC_CORPUS_REVIEWED_INTERNAL_PHRASES = tuple(["Ambitions objects","Checkpoint","Core Ambitions","Core local","Current-period control","Local core","Object detail","Scheduled objects","Time Day — conflicting","Time Day — dense","Time Day — editing","Time Day — empty","Time Day — importing","Time Day — now anchored","Time Day — populated","Time Day — previewing","Time Day — restored","Time Day — selected","Time Year Conflicting — Conflict presence is visible at month-summary level without exposing object detail","Time Year Dense — Dense annual content remains grouped by month and requires drilldown for object detail","Time Year Editing — Editing is unavailable at year depth and moves to month drilldown","Time Year Empty — No month contains local time objects; the year remains a month-summary overview","Time Year External Hidden Capacity — External calendar detail remains hidden; only aggregate month capacity is visible","Time Year Importing — Import progress is summarized by affected month; exact imported objects stay in review depth","Time Year Now Anchored — Current-period control identifies the year and current month without a day-level Now marker","Time Year Populated — Month summaries show annual rhythm without exposing granular objects","Time Year Previewing — Preview is summarized by month and granular consequence review requires drilldown","Time Year Restored — Restoration returns to the saved year and month summary without opening an object","Time Year Selected — Selection identifies one month summary and exposes no granular edit control","Underlying Goals, Steps, and time objects","Viewing — Object detail explains why it fits, current state, time context, and safe actions","account state","actions owned by that item type","calendar state","checkpoint","commands owned by its type","commit","committed","committing","control actions","core local","created object","current local state","current state","current subject","current-period control","declared fields","declared outcome","declared scope","declared scopes","delivery state","device state","diff review","drilldown","exact subject","external-ownership","granular","healthy local core","import state","lifecycle","linked object","local core","local object","local objects","local-core","month-summary level","month-summary overview","object detail","object type","object types","preference state","previously focused control remains identified","prior local state","referenced source or object","restorable local objects","restorable objects","revalidated","review depth","safe actions","saved objects","shape, and state","subject links","this operation","time object","time objects","underlying Ambitions objects","underlying Goal, Step, or time object","underlying Step or object","underlying object","underlying work"])
+SEMANTIC_CORPUS_REVIEWED_GAP_ACTION_PHRASES = tuple(["Changes still follow the confirmation choices shown here","Clearing them does not change","Closure needs review","Continue Without Account preserves full local core use","Decisions must not treat it as current until refresh succeeds","Enter a query","Goals need review","Start Over","Starting over clears setup progress","This Goal needs review","available for correction","both choices remain visible","can be recovered","can be revisited later","choices remain changeable later","confirmed search action is being applied locally","export remain explicit","for review before it joins the Capture","needs a user review","needs review","next review point visible","opening an item rechecks","opening the selected item’s inspection view","proposed repair and its consequences are visible before anything changes","protected for review","ready for activation review","ready for inspection before any repair or export choice","recovery choices are considered","safe options are ready for review","selected search action is being checked","selected search action was not accepted","settings action needs review","until it is finished or dismissed","until review","until the user chooses to activate it","until the user confirms","until the user reviews a safe resolution","until you resume","waiting for review before they can alter","whether this permission can be requested","will be validated against current local information","will not repeat a completed action","will not run again","will open this link after checking its destination and access"])
+SEMANTIC_CORPUS_INTERNAL_LANGUAGE_PATTERNS = (
+    re.compile(
+        r"(?<!\w)(?:core|lifecycle|checkpoint|drilldown|granular(?:ity)?|"
+        r"runtime|authority|canonical|semantic|implementation|governance|"
+        r"release|projection|overlay|root)(?!\w)",
+        re.IGNORECASE,
+    ),
+    re.compile(r"(?<!\w)commit(?:s|ted|ting)?(?!\w)", re.IGNORECASE),
+    re.compile(
+        r"(?<!\w)(?:account|local|import|calendar|device|preference|"
+        r"delivery|current)\s+state(?!\w)",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"(?<!\w)revalidat(?:e|ed|ing)(?!\w)|"
+        r"(?<!\w)diff\s+review(?!\w)",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"(?<!\w)(?:commands?|actions?)[^.!?;]{0,64}"
+        r"(?:own(?:s|ed)?|owner|authority)(?!\w)|"
+        r"(?<!\w)(?:own(?:s|ed)?|owner|authority)[^.!?;]{0,64}"
+        r"(?:commands?|actions?)(?!\w)",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"^(?:Time Day\s+—\s+[^.]+|Time Year\s+[^—]+—|Viewing\s+—)",
+        re.IGNORECASE,
+    ),
+)
+SEMANTIC_CORPUS_GAP_ACTION_PATTERNS = (
+    re.compile(
+        r"(?:^|[.!?;:—]\s+)(?:please\s+)?"
+        r"(?:continue|enter|resume|start(?!\s+here\b)|review|"
+        r"undo(?!\s+(?:history\b|is\s+unavailable\b|remains\s+unavailable\b))|"
+        r"try|remove|confirm|"
+        r"restore|enable|export|run|open|clear|activate|inspect|correct|"
+        r"dismiss)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\b(?:you|the user)\s+(?:can|may|will|chooses? to)\s+"
+        r"(?:continue|enter|resume|start|review|undo|try|remove|confirm|"
+        r"restore|enable|export|run|open|clear|activate|inspect|correct|"
+        r"dismiss)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\b(?:ready|available)\s+(?:for|to)\s+"
+        r"(?:review|correction|activation|repair|export|resume)\b|"
+        r"\bready\s+for\s+inspection\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\b(?:clearing|opening|starting over|confirming|restoring|"
+        r"enabling|exporting|repairing)\b[^.!?]{0,96}"
+        r"\b(?:does|will|clears|rechecks|creates|changes|removes|returns|"
+        r"sends|restores)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(r"\bneeds?\s+(?:a\s+|user\s+)?review\b", re.IGNORECASE),
+)
+
+
+def _reviewed_phrase_present(text: str, phrase: str) -> bool:
+    return re.search(
+        rf"(?<!\w){re.escape(phrase)}(?!\w)", text, re.IGNORECASE
+    ) is not None
+
+
+def semantic_corpus_internal_language_matches(text: str) -> tuple[str, ...]:
+    """Return corpus-wide internal-language matches for visible user copy."""
+
+    matches = [
+        f"pattern:{index}"
+        for index, pattern in enumerate(SEMANTIC_CORPUS_INTERNAL_LANGUAGE_PATTERNS)
+        if pattern.search(text)
+    ]
+    matches.extend(
+        f"phrase:{phrase}"
+        for phrase in SEMANTIC_CORPUS_REVIEWED_INTERNAL_PHRASES
+        if _reviewed_phrase_present(text, phrase)
+    )
+    return tuple(matches)
+
+
+def semantic_corpus_gap_action_implication_matches(text: str) -> tuple[str, ...]:
+    """Return unsupported action implications in gap-blocked visible copy."""
+
+    matches = [
+        f"pattern:{index}"
+        for index, pattern in enumerate(SEMANTIC_CORPUS_GAP_ACTION_PATTERNS)
+        if pattern.search(text)
+    ]
+    matches.extend(
+        f"phrase:{phrase}"
+        for phrase in SEMANTIC_CORPUS_REVIEWED_GAP_ACTION_PHRASES
+        if _reviewed_phrase_present(text, phrase)
+    )
+    return tuple(matches)
+
+
+def _owner_state_classifications() -> dict[tuple[str, str], tuple[str, str, str]]:
+    """Return owner-law classifications for state machines called out by review."""
+
+    rows: dict[tuple[str, str], tuple[str, str, str]] = {}
+
+    def add(
+        screen_id: str,
+        values: Mapping[str, tuple[str, str, str]],
+    ) -> None:
+        for key, classification in values.items():
+            rows[(screen_id, key)] = classification
+
+    add(
+        "UX-SCREEN-APP-DEEP-LINK-INTAKE",
+        {
+            "consumed": ("resting", "lifecycle", "succeeded"),
+            "presented": ("resting", "lifecycle", "succeeded"),
+            "queued": ("transitional", "lifecycle", "idle"),
+            "recoverable": ("recovery", "lifecycle", "idle"),
+            "rejected": ("failure", "lifecycle", "failed"),
+            "resolving": ("loading", "lifecycle", "in_progress"),
+        },
+    )
+    add(
+        "UX-SCREEN-SETUP-FIRST-USE",
+        {
+            "in-progress": ("loading", "lifecycle", "in_progress"),
+            "not-started": ("empty", "lifecycle", "not_applicable"),
+            "revisitable": ("recovery", "lifecycle", "not_applicable"),
+            "skipped": ("interruption", "lifecycle", "not_applicable"),
+            "sufficient-for-local-use": ("resting", "lifecycle", "succeeded"),
+        },
+    )
+    add(
+        "UX-SCREEN-GOALS-PATH",
+        {
+            "active": ("resting", "lifecycle", "not_applicable"),
+            "blocked": ("degraded", "lifecycle", "not_applicable"),
+            "completed": ("resting", "lifecycle", "succeeded"),
+            "draft": ("resting", "lifecycle", "not_applicable"),
+            "needs-attention": ("degraded", "lifecycle", "not_applicable"),
+            "paused": ("interruption", "lifecycle", "not_applicable"),
+            "ready-to-activate": ("transitional", "lifecycle", "idle"),
+            "recovering": ("recovery", "lifecycle", "in_progress"),
+            "restoring": ("recovery", "lifecycle", "in_progress"),
+            "rolled-back": ("rollback", "lifecycle", "succeeded"),
+            "waiting": ("interruption", "lifecycle", "not_applicable"),
+        },
+    )
+    add(
+        "UX-SCREEN-YOU-ENTITLEMENT",
+        {
+            "active": ("resting", "lifecycle", "not_applicable"),
+            "expired": ("degraded", "lifecycle", "not_applicable"),
+            "grace": ("degraded", "lifecycle", "not_applicable"),
+            "mismatch": ("degraded", "lifecycle", "not_applicable"),
+            "offline-cached": ("degraded", "lifecycle", "not_applicable"),
+            "restored": ("recovery", "lifecycle", "succeeded"),
+            "retry": ("recovery", "lifecycle", "in_progress"),
+            "revoked": ("degraded", "lifecycle", "not_applicable"),
+            "supported-sharing": ("resting", "lifecycle", "not_applicable"),
+            "trial": ("resting", "lifecycle", "not_applicable"),
+            "unknown": ("degraded", "lifecycle", "not_applicable"),
+        },
+    )
+    add(
+        "UX-SCREEN-YOU-NOTIFICATIONS",
+        {
+            "acted": ("resting", "lifecycle", "not_applicable"),
+            "delivered": ("resting", "lifecycle", "not_applicable"),
+            "disabled": ("resting", "lifecycle", "not_applicable"),
+            "externally-failed": ("failure", "lifecycle", "failed"),
+            "permission-allowed": ("resting", "lifecycle", "not_applicable"),
+            "permission-denied": ("failure", "lifecycle", "failed"),
+            "permission-not-requested": ("empty", "lifecycle", "not_applicable"),
+            "reconciled": ("recovery", "lifecycle", "succeeded"),
+            "removed": ("resting", "lifecycle", "not_applicable"),
+            "scheduled": ("resting", "lifecycle", "not_applicable"),
+            "superseded": ("interruption", "lifecycle", "not_applicable"),
+        },
+    )
+    add(
+        "UX-SCREEN-TIME-DEGRADED",
+        {
+            "external-write-failure": ("failure", "availability", "failed"),
+            "local-store-degradation": ("degraded", "availability", "not_applicable"),
+            "offline-healthy": ("resting", "availability", "not_applicable"),
+            "partial-import": ("degraded", "availability", "failed"),
+            "pending-external-diff": ("loading", "availability", "in_progress"),
+            "permission-denied": ("failure", "availability", "failed"),
+            "stale-source": ("degraded", "availability", "not_applicable"),
+            "sync-conflict": ("degraded", "availability", "failed"),
+            "sync-pending": ("loading", "availability", "in_progress"),
+        },
+    )
+    return rows
+
+
+OWNER_STATE_CLASSIFICATIONS = _owner_state_classifications()
 NORMALIZED_NARRATIVE_SCREEN_IDS = frozenset(
     {
         "UX-SCREEN-ACCOUNT-BOUNDARY",
@@ -565,9 +867,11 @@ TOP_LEVEL_FIELDS = frozenset(
         "source_documents",
         "primary_linear_v3",
         "requirement_dispositions",
+        "specification_gaps",
         "legacy_figma_policy",
         "claim_ceiling",
         "screens",
+        "setup_contract",
         "state_models",
         "sensitive_exposure_channels",
         "object_boundaries",
@@ -630,20 +934,41 @@ STATE_VARIANT_FIELDS = frozenset(
     {
         "accessibility_focus",
         "allowed_commands",
+        "behavior_authority_posture",
+        "behavior_authority_rationale",
+        "behavior_requirement_ids",
         "blueprint_id",
         "displayed_objects",
         "durable_effect",
         "generic_kind",
         "implementation_status",
         "offline_behavior",
+        "operation_phase",
         "proof_ceiling",
         "recovery_rollback",
         "requirement_ids",
+        "specification_gap_ids",
+        "state_axis",
         "title",
         "transition_exit",
         "variant_key",
         "visible_content_copy",
         "visible_presentation",
+    }
+)
+SETUP_CONTRACT_FIELDS = frozenset(
+    {"lifecycle_states", "resume_checkpoint_mapping", "subordinate_content"}
+)
+SETUP_CONTENT_FIELDS = frozenset(
+    {"content_id", "purpose", "requirement_ids"}
+)
+SPECIFICATION_GAP_FIELDS = frozenset(
+    {
+        "affected_screen_families",
+        "authority_consequence",
+        "blocked_fields",
+        "gap_id",
+        "source_rationale",
     }
 )
 DISPOSITION_FIELDS = frozenset(
@@ -976,6 +1301,67 @@ def normalized_state_narrative_signature(
     return " ".join(signature.split())
 
 
+def normalized_visible_copy_signature(
+    text: str,
+    screen_id: str,
+    variant_key: str,
+    variant: Mapping[str, object],
+) -> str:
+    """Normalize record labels so title substitution cannot hide repeated copy."""
+
+    replacements = {
+        _string(variant.get("title"), "variant title"),
+        variant_key.replace("-", " "),
+        screen_id.removeprefix("UX-SCREEN-").replace("-", " "),
+    }
+    replacements.update(
+        _possibly_empty_strings(
+            variant.get("displayed_objects"), "copy displayed objects"
+        )
+    )
+    signature = text.casefold()
+    for value in sorted((item for item in replacements if item), key=len, reverse=True):
+        signature = re.sub(
+            rf"(?<!\w){re.escape(value.casefold())}(?!\w)",
+            "<record>",
+            signature,
+        )
+    signature = re.sub(r"[^a-z0-9<>]+", " ", signature)
+    return " ".join(signature.split())
+
+
+VISIBLE_COPY_SEMANTIC_STOPWORDS = frozenset(
+    {
+        "a", "an", "and", "are", "as", "at", "be", "by", "for", "from",
+        "has", "have", "in", "is", "it", "of", "on", "or", "that", "the",
+        "this", "to", "was", "were", "while", "with", "your",
+    }
+)
+
+
+def visible_copy_semantic_bag_signature(
+    text: str,
+    screen_id: str,
+    variant_key: str,
+    variant: Mapping[str, object],
+) -> str:
+    """Collapse word order after record labels are removed from visible copy."""
+
+    normalized = normalized_visible_copy_signature(
+        text, screen_id, variant_key, variant
+    )
+    tokens = []
+    for token in re.findall(r"[a-z0-9]+", normalized):
+        if token in VISIBLE_COPY_SEMANTIC_STOPWORDS or token == "record":
+            continue
+        if token.endswith("ies") and len(token) > 4:
+            token = token[:-3] + "y"
+        elif token.endswith("s") and len(token) > 4 and not token.endswith("ss"):
+            token = token[:-1]
+        tokens.append(token)
+    return " ".join(sorted(tokens))
+
+
 def load_requirement_source_records(root: Path) -> tuple[dict[str, str], ...]:
     """Load exact normative requirement text from the human-editable canon."""
 
@@ -1148,6 +1534,12 @@ def build_requirement_dispositions(
             raise UXBlueprintError(
                 f"requirement disposition is not a closed value: {requirement_id}"
             )
+        described_ids = frozenset(re.findall(r"UX-[A-Z0-9-]+", rationale))
+        structured_ids = frozenset(blueprint_ids) | frozenset(state_blueprint_ids)
+        if described_ids != structured_ids:
+            raise UXBlueprintError(
+                f"requirement rationale UX IDs contradict structured edges: {requirement_id}"
+            )
         dispositions.append(dict(item))
     if identifiers != sorted(identifiers):
         raise UXBlueprintError("requirement dispositions must be sorted by requirement_id")
@@ -1305,6 +1697,39 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
     ):
         raise UXBlueprintError("legacy Figma cannot be treated as final authority")
 
+    setup_contract = _object(blueprint.get("setup_contract"), "setup contract")
+    _closed(setup_contract, SETUP_CONTRACT_FIELDS, "setup contract fields")
+    lifecycle_states = _strings(
+        setup_contract.get("lifecycle_states"),
+        "setup lifecycle states",
+        sorted_unique=True,
+    )
+    if lifecycle_states != (
+        "in-progress",
+        "not-started",
+        "revisitable",
+        "skipped",
+        "sufficient-for-local-use",
+    ):
+        raise UXBlueprintError("setup lifecycle states are incomplete or invented")
+    setup_content = _records(
+        setup_contract.get("subordinate_content"), "setup subordinate content"
+    )
+    content_ids = []
+    for content in setup_content:
+        _closed(content, SETUP_CONTENT_FIELDS, "setup subordinate content fields")
+        content_ids.append(_string(content.get("content_id"), "setup content ID"))
+        _string(content.get("purpose"), "setup content purpose")
+        _linked_ids(content.get("requirement_ids"), "setup content requirement IDs")
+    if content_ids != ["optional-account", "permissions-choice", "welcome"]:
+        raise UXBlueprintError("setup subordinate content is incomplete or invented")
+    resume_mapping = _object(
+        setup_contract.get("resume_checkpoint_mapping"),
+        "setup resume checkpoint mapping",
+    )
+    if set(resume_mapping.values()) - set(lifecycle_states):
+        raise UXBlueprintError("setup resume mapping references an unknown lifecycle")
+
     for text in _walk_strings(blueprint):
         if PLACEHOLDER.search(text):
             raise UXBlueprintError(f"placeholder language is forbidden: {text!r}")
@@ -1320,6 +1745,37 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
         blueprint.get("sensitive_exposure_channels"),
         "sensitive exposure channels",
     )
+    specification_gaps = _records(
+        blueprint.get("specification_gaps"), "specification gaps"
+    )
+    gap_ids: list[str] = []
+    for gap in specification_gaps:
+        _closed(gap, SPECIFICATION_GAP_FIELDS, "specification gap fields")
+        gap_id = _string(gap.get("gap_id"), "specification gap ID")
+        if re.fullmatch(r"GAP-UX-[A-Z0-9-]+-\d{3}", gap_id) is None:
+            raise UXBlueprintError(f"specification gap ID is invalid: {gap_id}")
+        gap_ids.append(gap_id)
+        _strings(
+            gap.get("affected_screen_families"),
+            "specification gap affected screen families",
+            sorted_unique=True,
+        )
+        _strings(
+            gap.get("blocked_fields"),
+            "specification gap blocked fields",
+            sorted_unique=True,
+        )
+        if len(_string(gap.get("source_rationale"), "specification gap source rationale").split()) < 10:
+            raise UXBlueprintError(f"specification gap source rationale is incomplete: {gap_id}")
+        consequence = _string(
+            gap.get("authority_consequence"),
+            "specification gap authority consequence",
+        )
+        if "not" not in consequence.casefold():
+            raise UXBlueprintError(f"specification gap does not fail closed: {gap_id}")
+    if gap_ids != sorted(set(gap_ids)) or len(gap_ids) != 19:
+        raise UXBlueprintError("specification gap inventory is stale")
+    known_gap_ids = frozenset(gap_ids)
     preliminary_ids = [
         _string(item.get("blueprint_id"), "blueprint ID")
         for records in (screens, states, objects, journeys, cross, exposure_channels)
@@ -1386,6 +1842,21 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
     normalized_narratives: dict[str, dict[str, str]] = {
         field: {} for field in STATE_VARIANT_NARRATIVE_FIELDS
     }
+    visible_copy_signatures: dict[str, str] = {}
+    visible_copy_semantic_bags: dict[str, str] = {}
+    visible_copy_clause_counts: dict[str, int] = {}
+    state_inventory = {
+        _string(model.get("screen_id"), "state model screen_id"): [
+            _string(variant.get("variant_key"), "state variant key")
+            for variant in _records(model.get("variants"), "state variants")
+        ]
+        for model in states
+    }
+    inventory_bytes = json.dumps(
+        state_inventory, sort_keys=True, separators=(",", ":")
+    ).encode("utf-8")
+    if hashlib.sha256(inventory_bytes).hexdigest() != REQUIRED_STATE_INVENTORY_SHA256:
+        raise UXBlueprintError("state variant inventory is incomplete or invented")
     for state_model in states:
         _closed(state_model, STATE_MODEL_FIELDS, "state model fields")
         _record_posture(state_model, "state model")
@@ -1409,12 +1880,11 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
             _object(item, f"state variants[{index}]")
             for index, item in enumerate(variant_value)
         ]
-        expected_variant_keys = REQUIRED_STATE_VARIANTS.get(screen_id, ())
         actual_variant_keys = tuple(
             _string(item.get("variant_key"), "state variant key")
             for item in variant_records
         )
-        if actual_variant_keys != expected_variant_keys:
+        if actual_variant_keys != tuple(sorted(set(actual_variant_keys))):
             raise UXBlueprintError(
                 f"state variant inventory is incomplete or invented: {screen_id}"
             )
@@ -1430,6 +1900,35 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
                     f"state variant generic kind is invalid: {variant_key}"
                 )
             state_kinds.add(generic_kind)
+            state_axis = _string(variant.get("state_axis"), "state variant axis")
+            if state_axis not in {
+                "availability", "checkpoint", "interruption", "lifecycle",
+                "operation", "presentation", "recovery",
+            }:
+                raise UXBlueprintError(f"state variant axis is invalid: {variant_key}")
+            operation_phase = _string(
+                variant.get("operation_phase"), "state operation phase"
+            )
+            if operation_phase not in {
+                "failed", "idle", "in_progress", "not_applicable",
+                "rolling_back", "succeeded",
+            }:
+                raise UXBlueprintError(
+                    f"state operation phase is invalid: {variant_key}"
+                )
+            expected_owner_classification = OWNER_STATE_CLASSIFICATIONS.get(
+                (screen_id, variant_key)
+            )
+            if expected_owner_classification is not None and (
+                generic_kind,
+                state_axis,
+                operation_phase,
+            ) != expected_owner_classification:
+                raise UXBlueprintError(
+                    "owner state classification is stale: "
+                    f"{screen_id} {variant_key} expected "
+                    f"{expected_owner_classification}"
+                )
             expected_variant_id = (
                 f"UX-STATE-VARIANT-{screen_id.removeprefix('UX-SCREEN-')}-"
                 f"{variant_key.upper()}"
@@ -1478,7 +1977,66 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
                             f"state variant narrative must be unique: {field}"
                         )
                     variant_narratives[field].add(text)
-                    if screen_id in NORMALIZED_NARRATIVE_SCREEN_IDS:
+                    if field == "visible_content_copy" and text:
+                        if BANNED_VISIBLE_INTERNAL_LANGUAGE.search(text):
+                            raise UXBlueprintError(
+                                f"visible copy exposes internal language: {variant_id}"
+                            )
+                        if semantic_corpus_internal_language_matches(text):
+                            raise UXBlueprintError(
+                                "semantic corpus visible copy exposes internal language: "
+                                f"{variant_id}"
+                            )
+                        if all_corpus_visible_copy_exposes_internal_language(
+                            variant_id, text
+                        ):
+                            raise UXBlueprintError(
+                                "all-corpus visible copy exposes internal language: "
+                                f"{variant_id}"
+                            )
+                        copy_signature = normalized_visible_copy_signature(
+                            text, screen_id, variant_key, variant
+                        )
+                        prior_copy = visible_copy_signatures.get(copy_signature)
+                        if prior_copy is not None:
+                            raise UXBlueprintError(
+                                "normalized visible-copy skeleton is repeated: "
+                                f"{prior_copy} {variant_id}"
+                            )
+                        visible_copy_signatures[copy_signature] = variant_id
+                        semantic_bag = visible_copy_semantic_bag_signature(
+                            text, screen_id, variant_key, variant
+                        )
+                        prior_semantic_bag = visible_copy_semantic_bags.get(
+                            semantic_bag
+                        )
+                        if prior_semantic_bag is not None:
+                            raise UXBlueprintError(
+                                "visible-copy semantic bag is repeated: "
+                                f"{prior_semantic_bag} {variant_id}"
+                            )
+                        visible_copy_semantic_bags[semantic_bag] = variant_id
+                        for clause in re.split(r"[.!?;]+", text):
+                            if not clause.strip():
+                                continue
+                            clause_bag = visible_copy_semantic_bag_signature(
+                                clause, screen_id, variant_key, variant
+                            )
+                            if len(clause_bag.split()) < 4:
+                                continue
+                            visible_copy_clause_counts[clause_bag] = (
+                                visible_copy_clause_counts.get(clause_bag, 0) + 1
+                            )
+                            if visible_copy_clause_counts[clause_bag] > 3:
+                                raise UXBlueprintError(
+                                    "visible-copy clause is repeated: "
+                                    f"{clause_bag}"
+                                )
+                    if (
+                        variant.get("behavior_authority_posture")
+                        == "requirement_backed"
+                        and screen_id in NORMALIZED_NARRATIVE_SCREEN_IDS
+                    ):
                         signature = normalized_state_narrative_signature(
                             text, screen_titles[screen_id], variant
                         )
@@ -1497,6 +2055,93 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
                 variant.get("allowed_commands"),
                 "state variant allowed commands",
             )
+            behavior_posture = _string(
+                variant.get("behavior_authority_posture"),
+                "state behavior authority posture",
+            )
+            behavior_rationale = _string(
+                variant.get("behavior_authority_rationale"),
+                "state behavior authority rationale",
+            )
+            behavior_requirements = _possibly_empty_strings(
+                variant.get("behavior_requirement_ids"),
+                "state behavior requirement IDs",
+            )
+            state_gap_ids = _possibly_empty_strings(
+                variant.get("specification_gap_ids"),
+                "state specification gap IDs",
+            )
+            if state_gap_ids != tuple(sorted(set(state_gap_ids))) or set(state_gap_ids) - known_gap_ids:
+                raise UXBlueprintError(
+                    f"state behavior references unknown specification gap: {variant_id}"
+                )
+            if behavior_posture == "exploratory_blocked_by_specification_gap":
+                if allowed_commands or behavior_requirements or not state_gap_ids:
+                    raise UXBlueprintError(
+                        f"gap-blocked behavior must authorize no command: {variant_id}"
+                    )
+                visible_copy = _string(
+                    variant.get("visible_content_copy"),
+                    "gap-blocked visible content copy",
+                )
+                if gap_blocked_copy_implies_action(visible_copy):
+                    raise UXBlueprintError(
+                        "gap-blocked visible copy implies an unauthorized action: "
+                        f"{variant_id}"
+                    )
+                if semantic_corpus_gap_action_implication_matches(visible_copy):
+                    raise UXBlueprintError(
+                        "semantic corpus gap-blocked copy implies an action: "
+                        f"{variant_id}"
+                    )
+                serialized_behavior = " ".join(
+                    str(variant[field])
+                    for field in (
+                        "transition_exit", "durable_effect", "recovery_rollback",
+                        "offline_behavior", "accessibility_focus",
+                        "behavior_authority_rationale",
+                    )
+                ).casefold()
+                if "no exact command authorized by current canon" not in serialized_behavior:
+                    raise UXBlueprintError(
+                        f"gap-blocked behavior omits authority consequence: {variant_id}"
+                    )
+            elif behavior_posture == "requirement_backed":
+                linked = set(variant.get("requirement_ids", []))
+                if (
+                    not behavior_requirements
+                    or state_gap_ids
+                    or set(behavior_requirements) - linked
+                    or len(behavior_rationale.split()) < 10
+                ):
+                    raise UXBlueprintError(
+                        f"unsupported behavior authority: {variant_id}"
+                    )
+                for command in allowed_commands:
+                    if BANNED_VISIBLE_INTERNAL_LANGUAGE.search(command):
+                        raise UXBlueprintError(
+                            f"command exposes internal language: {variant_id} {command}"
+                        )
+            else:
+                raise UXBlueprintError(f"unsupported behavior authority: {variant_id}")
+            if screen_id == "UX-SCREEN-TIME-DETAIL" and (
+                behavior_posture != "exploratory_blocked_by_specification_gap"
+                or allowed_commands
+                or behavior_requirements
+                or state_gap_ids
+                != ("GAP-UX-COMMAND-CONTRACT-TIME-DETAIL-001",)
+            ):
+                raise UXBlueprintError(
+                    f"Time Detail behavior has no owning requirement: {variant_id}"
+                )
+            if "Undo" in allowed_commands and (
+                "CONTROL-UNDO-RECOVERY-001" not in variant.get("requirement_ids", [])
+                or "CONTROL-UNDO-RECOVERY-001" not in behavior_requirements
+            ):
+                raise UXBlueprintError(
+                    "Undo command omits CONTROL-UNDO-RECOVERY-001: "
+                    f"{variant_id}"
+                )
             if variant_id == "UX-STATE-VARIANT-TRUST-INLINE-NO-DISCLOSURE":
                 if displayed_objects or allowed_commands or variant.get(
                     "visible_content_copy"
@@ -1504,7 +2149,9 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
                     raise UXBlueprintError(
                         "no-disclosure variant must render no trust object, copy, or command"
                     )
-            elif not displayed_objects or not allowed_commands:
+            elif not displayed_objects or (
+                behavior_posture == "requirement_backed" and not allowed_commands
+            ):
                 raise UXBlueprintError(
                     f"state variant requires exact objects and commands: {variant_id}"
                 )
@@ -1520,7 +2167,7 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
                 raise UXBlueprintError(
                     f"state variant leaves invoking feature unresolved: {variant_id}"
                 )
-            if screen_id in (
+            if behavior_posture == "requirement_backed" and screen_id in (
                 COMPACT_COMMAND_CONTRACT_SCREEN_IDS
                 | GOALS_COMMAND_CONTRACT_SCREEN_IDS
             ):
@@ -1628,8 +2275,19 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
         )
     if covered_screens != set(screen_ids):
         raise UXBlueprintError("every screen must be covered by a complete state model")
-    if state_variant_count != sum(len(keys) for keys in REQUIRED_STATE_VARIANTS.values()):
-        raise UXBlueprintError("state variant inventory count is stale")
+    setup_first_use = next(
+        model for model in states if model["screen_id"] == "UX-SCREEN-SETUP-FIRST-USE"
+    )
+    if {
+        variant["variant_key"] for variant in setup_first_use["variants"]
+    } != set(lifecycle_states):
+        raise UXBlueprintError("setup lifecycle variants contradict setup contract")
+    setup_resume = next(
+        model for model in states if model["screen_id"] == "UX-SCREEN-SETUP-RESUME"
+    )
+    resume_keys = {variant["variant_key"] for variant in setup_resume["variants"]}
+    if set(resume_mapping) != resume_keys:
+        raise UXBlueprintError("setup resume checkpoint mapping is incomplete")
 
     object_ids: set[str] = set()
     for item in objects:
@@ -1735,7 +2393,7 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
     if unknown_requirements:
         raise UXBlueprintError(f"unknown requirement IDs: {unknown_requirements}")
 
-    if len(screens) != 40 or len(states) != 40 or len(objects) != 18 or len(journeys) != 12 or len(cross) != 11:
+    if len(screens) != 47 or len(states) != 47 or len(objects) != 18 or len(journeys) != 12 or len(cross) != 11:
         raise UXBlueprintError("blueprint inventory counts are stale")
 
     dispositions = build_requirement_dispositions(root, blueprint, all_blueprint_ids)
@@ -1801,6 +2459,7 @@ def render_ux_blueprint_markdown(
         f"- Canon content SHA: `{blueprint['canon_content_sha']}`",
         f"- Source SHA: `{blueprint['source_sha']}`",
         f"- Authority state: `{blueprint['authority_state']}`",
+        f"- Specification gaps: `{len(blueprint['specification_gaps'])}`; all gap-blocked behavior is ineligible for Phase 2 authority and task-pack selection.",
         disposition_line,
         f"- Claim ceiling: {blueprint['claim_ceiling']}",
         "",
@@ -1852,8 +2511,8 @@ def render_ux_blueprint_markdown(
             "These stable, frameable variants refine the nine completeness kinds without "
             "collapsing owner-specific state axes.",
             "",
-            "| Variant ID | Screen | Variant | Generic kind | Visible contract | Commands | Requirements |",
-            "| --- | --- | --- | --- | --- | --- | --- |",
+            "| Variant ID | Screen | Variant | Generic kind | Behavior posture | Visible contract | Commands | Requirements |",
+            "| --- | --- | --- | --- | --- | --- | --- | --- |",
         ]
     )
     for state_model in blueprint["state_models"]:  # type: ignore[index]
@@ -1865,8 +2524,27 @@ def render_ux_blueprint_markdown(
             lines.append(
                 f"| `{variant['blueprint_id']}` | `{state_model['screen_id']}` | "
                 f"{variant['title']} | `{variant['generic_kind']}` | "
+                f"`{variant['behavior_authority_posture']}` | "
                 f"{variant['visible_content_copy']} | {commands} | {requirements} |"
             )
+    lines.extend(
+        [
+            "",
+            "## Specification gaps",
+            "",
+            "These 19 specification gaps fail closed. A linked state with posture "
+            "`exploratory_blocked_by_specification_gap` is design exploration only and "
+            "must not be selected as Phase 2 visual authority or emitted as task-pack behavior.",
+            "",
+            "| Gap ID | Affected screen families | Blocked fields | Authority consequence |",
+            "| --- | --- | --- | --- |",
+        ]
+    )
+    for gap in blueprint["specification_gaps"]:  # type: ignore[index]
+        lines.append(
+            f"| `{gap['gap_id']}` | {', '.join(gap['affected_screen_families'])} | "
+            f"{', '.join(gap['blocked_fields'])} | {gap['authority_consequence']} |"
+        )
     lines.extend(
         [
             "",
@@ -1944,6 +2622,43 @@ def render_ux_blueprint_markdown(
         ]
     )
     return ("\n".join(lines) + "\n").encode("utf-8")
+
+
+def state_variant_is_authority_eligible(
+    blueprint: Mapping[str, object],
+    variant_id: str,
+    root: Path | None = None,
+) -> bool:
+    """Fail closed when a Phase 2 consumer asks for unresolved behavior."""
+
+    return variant_id in authority_eligible_state_variant_ids(blueprint, root)
+
+
+def authority_eligible_state_variant_ids(
+    blueprint: Mapping[str, object], root: Path | None = None
+) -> frozenset[str]:
+    """Return eligible IDs only after validating current local source and canon."""
+
+    if root is None:
+        root = Path(__file__).resolve().parents[2]
+    try:
+        validate_ux_blueprint(root, blueprint)
+    except (UXBlueprintError, OSError):
+        return frozenset()
+    eligible: set[str] = set()
+    for model in blueprint.get("state_models", []):  # type: ignore[union-attr]
+        for variant in model.get("variants", []):
+            behavior_requirements = variant.get("behavior_requirement_ids")
+            if (
+                variant.get("behavior_authority_posture") == "requirement_backed"
+                and isinstance(behavior_requirements, list)
+                and bool(behavior_requirements)
+                and not variant.get("specification_gap_ids")
+                and set(behavior_requirements)
+                <= set(variant.get("requirement_ids", []))
+            ):
+                eligible.add(str(variant["blueprint_id"]))
+    return frozenset(eligible)
 
 
 def check_ux_blueprint(root: Path) -> int:

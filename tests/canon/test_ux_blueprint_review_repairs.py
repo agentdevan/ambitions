@@ -128,6 +128,7 @@ class UXBlueprintReviewRepairTests(unittest.TestCase):
                 [
                     "UX-SCREEN-ACCOUNT-BOUNDARY",
                     "UX-SCREEN-ACCOUNT-STATUS",
+                    "UX-SCREEN-YOU-CONTINUITY-CONTROL",
                     "UX-SCREEN-YOU-DATA",
                 ],
             ),
@@ -174,8 +175,8 @@ class UXBlueprintReviewRepairTests(unittest.TestCase):
                     self.assertEqual(disposition["variant_ids"], [])
 
         summary = module.validate_ux_blueprint(REPO_ROOT, payload)
-        self.assertEqual(summary.state_model_count, 40)
-        self.assertEqual(summary.state_taxonomy_count, 360)
+        self.assertEqual(summary.state_model_count, 47)
+        self.assertEqual(summary.state_taxonomy_count, 423)
 
     def test_state_validator_rejects_taxonomy_omission_mutation_and_orphaning(self):
         module = self._module()
