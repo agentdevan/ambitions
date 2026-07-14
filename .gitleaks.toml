@@ -26,3 +26,10 @@ regexes = [
 paths = [
   '''(^|/)Native/AmbitionsTests/.*\.swift$''',
 ]
+
+[[allowlists]]
+description = "Exact reviewed public Figma document key"
+regexTarget = "secret"
+regexes = [
+  '''^SWtHm9ouHTPbEFfNrrtZwv$''',
+]

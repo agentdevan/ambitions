@@ -1,0 +1,116 @@
+{
+  "authority_state": "shadow",
+  "canon_sha256": "ada2dc2f7ad344c6d31ab891410337989d768eb6f8640cf15e4269442335bcf9",
+  "claim_ceiling": "This receipt records an explicit non-CI shadow comparison only. It does not authorize implementation or claim product, runtime, source, visual, accessibility, privacy, device, TestFlight, App Store, or release Green.",
+  "comparison": {
+    "dimensions": [
+      {
+        "dimension": "semantic_equivalence",
+        "new_score": 4,
+        "old_score": 4,
+        "verdict": "equivalent"
+      },
+      {
+        "dimension": "relevant_law_recall",
+        "new_score": 4,
+        "old_score": 4,
+        "verdict": "equivalent"
+      },
+      {
+        "dimension": "contradiction_control",
+        "new_score": 4,
+        "old_score": 3,
+        "verdict": "new_better"
+      },
+      {
+        "dimension": "unauthorized_assumptions",
+        "new_score": 4,
+        "old_score": 4,
+        "verdict": "equivalent"
+      },
+      {
+        "dimension": "source_ownership",
+        "new_score": 4,
+        "old_score": 4,
+        "verdict": "equivalent"
+      },
+      {
+        "dimension": "validation_completeness",
+        "new_score": 4,
+        "old_score": 4,
+        "verdict": "equivalent"
+      },
+      {
+        "dimension": "proof_discipline",
+        "new_score": 4,
+        "old_score": 4,
+        "verdict": "equivalent"
+      }
+    ],
+    "model": "gpt-5.6-sol-high",
+    "new_total_score": 28,
+    "old_total_score": 27,
+    "overall_verdict": "new_better",
+    "reviewer": "Train 4 Independent Semantic Comparator",
+    "sha256": "34692f3b932e74f919dd59f743cc1d75f6cfc9bf58a8566aaf48574e8f4d0d42"
+  },
+  "compiler_version": "0.2.0",
+  "evaluated_task_pack_commit": "b39955c34001ed7e15c9adf6654c7a1773336bbb",
+  "lane": "explicit_non_ci_semantic_review",
+  "new_prompt_sha256": "8223ea864053276c88110dc2bb80fbf91599d8c29cf2193a81284375f796cd51",
+  "new_response": {
+    "model": "gpt-5.6-sol-high",
+    "reviewer": "Train 4 New Pack Evaluator",
+    "sha256": "2d1350dcc994990d9f66e1cdac260c32e268fab7e0cd25932894a662036869fb"
+  },
+  "old_prompt_sha256": "338c2088cc6a74dc06a3fc087bc6848280b117b7638aefdb377b9649face56cb",
+  "old_response": {
+    "model": "gpt-5.6-sol-high",
+    "reviewer": "Train 4 Old Path Evaluator",
+    "sha256": "5cb6f64a37bb06da816b781f392296a74a670e1c1cadf2ac2c6d9ed27ccbc82d"
+  },
+  "pack_hashes": [
+    {
+      "json_sha256": "2c5bceb4313c4df4504e721c61ee23eefdfc98ffe28538b070cb69950e8995ef",
+      "markdown_sha256": "6e790b41c113dbfb24f101a4406d66b1b77f90f36598b403d4850bd8b0d90b28",
+      "scenario_id": "today-swiftui"
+    },
+    {
+      "json_sha256": "6b9f38a90fe3749f1c3c3672d1742f2477973bbd4a12768f323b3b6553114197",
+      "markdown_sha256": "33421fd67e1251886d492fb07255512fabe7c8f7143d1b05b72586e4cf08563c",
+      "scenario_id": "time-recurrence"
+    },
+    {
+      "json_sha256": "14e24e9ff3ddbca946f8eaacc3ba3fcf62f10ad8596cf66371d25c3e9be05808",
+      "markdown_sha256": "f32c4d005857779ac6a8a81cd4753d3d295dfdaffc54f4a86f239c4729a3304e",
+      "scenario_id": "capture-proposal"
+    },
+    {
+      "json_sha256": "780ad9a83761329535314a2047fc0fae9ed37258ba75809dfa6f5671ef788ef8",
+      "markdown_sha256": "4630301fd4e3ccd8e02595324da29576afa10d58d4e45e0b55c961ebbe5d60fb",
+      "scenario_id": "local-runtime-mutation"
+    },
+    {
+      "json_sha256": "3b5c4c1fce0707c3c50d4f66d6b88629da70960758d7a9890601fc9e1b261746",
+      "markdown_sha256": "a6aafb932f6d4e533267a7bc53da608d02f6f6a945bf97e0ddf28549754aa167",
+      "scenario_id": "cloudkit-continuity"
+    },
+    {
+      "json_sha256": "4552692dc37a75426018827d787eedc7d77ef5dc584b1a603b4b54178bfb2088",
+      "markdown_sha256": "5402756cd7ea001bfaea13f04de416573161b55571eb8c2950cf1690b5516c88",
+      "scenario_id": "source-atlas-boundary"
+    },
+    {
+      "json_sha256": "1f1e7b16609c584656a0192f143a7d9b1da85d500065f98ea690e8f591881977",
+      "markdown_sha256": "6582f81661cc1d7709df87bf8cafa2ed3a001e4a8dc1a7012eb33e2b9b785eba",
+      "scenario_id": "accessibility-repair"
+    },
+    {
+      "json_sha256": "78ddb17645af978f6cf2764a45ec64873e4285b3f31385aba063f6e0bb182ab0",
+      "markdown_sha256": "710ff30388fb68cdc6048e0e5a3d7a8803620686c6f5c3716cd9083f5fae94aa",
+      "scenario_id": "release-proof-claim"
+    }
+  ],
+  "receipt_id": "train-4-task-21-final-semantic-comparison",
+  "schema_version": 1
+}

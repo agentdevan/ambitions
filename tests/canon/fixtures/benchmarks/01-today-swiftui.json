@@ -1,0 +1,59 @@
+{
+  "applicable_requirement_ids": [
+    "SPEC-SURFACE-TODAY-FIRST-VIEWPORT-001",
+    "SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001",
+    "SURFACE-TODAY"
+  ],
+  "approved_budget": 30000,
+  "approved_budget_class": "complex",
+  "expected_proof": [
+    "Current source, focused tests, regression tests, and claim-specific proof.",
+    "Claim-specific proof for claim_type=source must cover changed-file boundary Native/Ambitions/Surfaces/Today/ and applicable requirements SPEC-SURFACE-TODAY-FIRST-VIEWPORT-001, SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001, SURFACE-TODAY."
+  ],
+  "expected_source_owners": [
+    "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+    "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+    "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+    "Native/Ambitions/Quality/",
+    "Native/Ambitions/Surfaces/Today/"
+  ],
+  "expected_validation": [
+    "Execute selected verification contracts: A11Y-TODAY-ORDER-001, CANON-AUDIT-ROOT-IA-001, PROOF-CLAIM-CEILING-001, PROOF-TODAY-FIRST-VIEWPORT-001, PROOF-TODAY-VISUAL-MAPPING-001, SCENARIO-TODAY-PRIMARY-OBJECT-001, SCENARIO-USER-CONTROL-001, STANDARD-ACCESSIBILITY-001.",
+    "python3 scripts/ambitions-canon.py audit",
+    "python3 scripts/ambitions-canon.py build --check",
+    "git diff --check"
+  ],
+  "expected_verification_ids": [
+    "A11Y-TODAY-ORDER-001",
+    "CANON-AUDIT-ROOT-IA-001",
+    "PROOF-CLAIM-CEILING-001",
+    "PROOF-TODAY-FIRST-VIEWPORT-001",
+    "PROOF-TODAY-VISUAL-MAPPING-001",
+    "SCENARIO-TODAY-PRIMARY-OBJECT-001",
+    "SCENARIO-USER-CONTROL-001",
+    "STANDARD-ACCESSIBILITY-001"
+  ],
+  "intake": {
+    "changed_files": [
+      "Native/Ambitions/Surfaces/Today/"
+    ],
+    "claim_type": "source",
+    "issue_id": "CANON-BENCH-01",
+    "known_issue_ids": [],
+    "schema_version": 1,
+    "scope": [
+      "surface.today.first-viewport"
+    ],
+    "task_type": "swiftui"
+  },
+  "scenario_id": "today-swiftui",
+  "schema_version": 2,
+  "shared_law_allowlist": [
+    "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001",
+    "CONST-IA-ROOT-001",
+    "CONST-PROOF-EVIDENCE-001",
+    "CONTROL-FORCE-NOTHING-001",
+    "SURFACE-TODAY-IDENTITY-001"
+  ],
+  "title": "Today SwiftUI"
+}

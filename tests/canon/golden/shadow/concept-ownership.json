@@ -1,8 +1,8 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "12f110471863c2f38c9a4f611022f2162365785a201df345bc6633f93fb2a31c",
+  "canon_content_sha": "85094c7a431d4331f4168740725a1e6b8647115ec1fd9f21a4d80131f3c0dabf",
   "canon_revision": 1,
-  "compiler_version": "0.1.0",
+  "compiler_version": "0.2.0",
   "concepts": [
     {
       "concept": "accessibility.dynamic-type",
@@ -1769,5 +1769,6 @@
       "spec_id": "STANDARD-TESTING-FIXTURES"
     }
   ],
-  "schema_version": 1
+  "schema_version": 1,
+  "traceability_input_sha": "fbd4b01f57288edb03d999898f1f0e48ffdcc1b0dd68bab08c5669de8ba9c904"
 }

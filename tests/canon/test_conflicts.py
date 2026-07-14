@@ -920,22 +920,32 @@ class DocketContractTests(unittest.TestCase):
                 validate_conflict_repository(root, (value,), (), ())
 
     def test_build_invokes_accepted_claim_and_baseline_validation(self):
-        registry = SimpleNamespace(requirements=(), supersession_entries=())
+        registry = SimpleNamespace(
+            documents=(),
+            requirements=(),
+            supersession_entries=(),
+        )
         validator_error = CanonError("CONFLICT_BUILD_GATE", "blocked")
-        with (
-            mock.patch.object(canon_build, "_load_audited_registry", return_value=registry),
-            mock.patch(
-                "tools.ambitions_canon.conflicts.load_conflict_dockets",
-                return_value=(),
-            ),
-            mock.patch(
-                "tools.ambitions_canon.conflicts.validate_conflict_repository",
-                side_effect=validator_error,
-                create=True,
-            ) as validator,
-            self.assertRaises(CanonError) as caught,
-        ):
-            canon_build.build_canon(Path("/tmp/repository"))
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            write_required_governance_artifacts(
+                root / "docs/canon",
+                canon_revision=0,
+            )
+            with (
+                mock.patch.object(canon_build, "_load_audited_registry", return_value=registry),
+                mock.patch(
+                    "tools.ambitions_canon.conflicts.load_conflict_dockets",
+                    return_value=(),
+                ),
+                mock.patch(
+                    "tools.ambitions_canon.conflicts.validate_conflict_repository",
+                    side_effect=validator_error,
+                    create=True,
+                ) as validator,
+                self.assertRaises(CanonError) as caught,
+            ):
+                canon_build.build_canon(root)
         self.assertEqual(caught.exception.code, "CONFLICT_BUILD_GATE")
         validator.assert_called_once()
 

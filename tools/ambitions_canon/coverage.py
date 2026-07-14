@@ -738,6 +738,75 @@ def _section_evidence(
     return MappingProxyType(evidence)
 
 
+def profile_section_bodies(document: CanonDocument) -> tuple[tuple[str, str], ...]:
+    """Return the closed, fence-aware applicable profile body contract."""
+
+    if document.profile is None:
+        return ()
+    required = APPROVED_PROFILES.get(document.profile)
+    if required is None:
+        raise CanonError(
+            "PACK_PROFILE_CONTRACT_INVALID",
+            f"unknown completeness profile: {document.profile}",
+            document.source_path,
+        )
+    source_contract = _source_contract(document)
+    if source_contract is None:
+        raise CanonError(
+            "PACK_PROFILE_CONTRACT_INVALID",
+            "profile source contract is unavailable",
+            document.source_path,
+        )
+    _, body = source_contract
+    lines = body.splitlines()
+    markers = _unfenced_markers(lines)
+    marker_names = tuple(section for _, section in markers)
+    duplicate_names = tuple(
+        sorted(
+            section
+            for section in set(marker_names)
+            if marker_names.count(section) > 1
+        )
+    )
+    applicable = tuple(
+        section
+        for section in required
+        if section not in {entry.section for entry in document.not_applicable}
+    )
+    unexpected = tuple(sorted(set(marker_names) - set(applicable)))
+    missing = tuple(sorted(set(applicable) - set(marker_names)))
+    if duplicate_names or unexpected or missing:
+        raise CanonError(
+            "PACK_PROFILE_CONTRACT_INVALID",
+            "profile markers must be one closed applicable set; "
+            f"duplicate={','.join(duplicate_names) or 'none'}; "
+            f"unexpected={','.join(unexpected) or 'none'}; "
+            f"missing={','.join(missing) or 'none'}",
+            document.source_path,
+        )
+    positions = {section: index for index, section in markers}
+    ordered_positions = sorted(markers)
+    end_by_section = {
+        section: (
+            ordered_positions[offset + 1][0]
+            if offset + 1 < len(ordered_positions)
+            else len(lines)
+        )
+        for offset, (_, section) in enumerate(ordered_positions)
+    }
+    result: list[tuple[str, str]] = []
+    for section in applicable:
+        content_lines = lines[positions[section] + 1 : end_by_section[section]]
+        if not _has_body_evidence(content_lines):
+            raise CanonError(
+                "PACK_PROFILE_CONTRACT_INVALID",
+                f"profile section lacks body evidence: {section}",
+                document.source_path,
+            )
+        result.append((section, "\n".join(content_lines).strip()))
+    return tuple(result)
+
+
 def _unfenced_markers(lines: list[str]) -> tuple[tuple[int, str], ...]:
     markers: list[tuple[int, str]] = []
     for index, line in _unfenced_lines(lines):

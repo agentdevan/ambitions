@@ -1,0 +1,111 @@
+{
+  "applicable_requirement_ids": [
+    "OBJ-SOURCE-REFERENCE-IDENTITY-001",
+    "OBJECT-SOURCE-REFERENCE",
+    "SYSTEM-EXTERNAL-ASSISTANCE-BOUNDARY-001",
+    "SYSTEM-PRIVACY-CLASSIFICATION-001",
+    "SYSTEM-PRIVACY-DATA-CLASSIFICATION",
+    "SYSTEM-PRIVACY-EGRESS-001",
+    "SYSTEM-PRIVATE-LIFE-RUNTIME",
+    "SYSTEM-RUNTIME-CLOUD-INDEPENDENCE-001",
+    "SYSTEM-RUNTIME-COMMAND-VALIDATION-001",
+    "SYSTEM-RUNTIME-MUTATION-001",
+    "SYSTEM-RUNTIME-ORCHESTRATION-001",
+    "SYSTEM-RUNTIME-PROOF-001",
+    "SYSTEM-RUNTIME-SIMULATION-001",
+    "SYSTEM-SOURCE-ATLAS",
+    "SYSTEM-SOURCE-ATLAS-FIREWALL-001"
+  ],
+  "approved_budget": 30000,
+  "approved_budget_class": "complex",
+  "expected_proof": [
+    "Current source, focused tests, regression tests, and claim-specific proof.",
+    "Claim-specific proof for claim_type=privacy-proof must cover changed-file boundary Native/Ambitions/Core/LocalRuntimeOS/Boundary/, Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/ and applicable requirements OBJ-SOURCE-REFERENCE-IDENTITY-001, OBJECT-SOURCE-REFERENCE, SYSTEM-EXTERNAL-ASSISTANCE-BOUNDARY-001, SYSTEM-PRIVACY-CLASSIFICATION-001, SYSTEM-PRIVACY-DATA-CLASSIFICATION, SYSTEM-PRIVACY-EGRESS-001, SYSTEM-PRIVATE-LIFE-RUNTIME, SYSTEM-RUNTIME-CLOUD-INDEPENDENCE-001, SYSTEM-RUNTIME-COMMAND-VALIDATION-001, SYSTEM-RUNTIME-MUTATION-001, SYSTEM-RUNTIME-ORCHESTRATION-001, SYSTEM-RUNTIME-PROOF-001, SYSTEM-RUNTIME-SIMULATION-001, SYSTEM-SOURCE-ATLAS, SYSTEM-SOURCE-ATLAS-FIREWALL-001."
+  ],
+  "expected_source_owners": [
+    "Native/Ambitions/Core/Domain/",
+    "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+    "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+    "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/",
+    "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+    "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+    "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
+    "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+    "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+    "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+    "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/",
+    "Native/Ambitions/Core/LocalRuntimeOS/State/",
+    "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
+    "Native/Ambitions/Quality/",
+    "Native/Ambitions/Surfaces/You/",
+    "Native/Ambitions/Trust/"
+  ],
+  "expected_validation": [
+    "Execute selected verification contracts: AUDIT-RUNTIME-DIRECT-WRITE-001, AUDIT-RUNTIME-SOURCE-OWNER-001, AUDIT-SYSTEM-PRIVACY-CLASSIFICATION-001, PRIVACY-ACCOUNT-BOUNDARY-001, PRIVACY-CLOUDKIT-APPROVAL-001, PRIVACY-R2-EGRESS-001, PRIVACY-SOURCE-ATLAS-NO-PRIVATE-GRAPH-EGRESS-001, PRIVACY-SYSTEM-NO-PRIVATE-GRAPH-EGRESS-001, PROOF-CLAIM-CEILING-001, REVIEW-SYSTEM-EXTERNAL-ASSISTANCE-BOUNDARY-001, SCENARIO-DURABLE-SUCCESS-001, SCENARIO-EXTERNAL-CAPACITY-001, SCENARIO-OFFLINE-LOCAL-AUTHORITY-001, SCENARIO-OFFLINE-NO-ACCOUNT-001, SCENARIO-ORCHESTRATION-END-TO-END-001, SCENARIO-PRIVACY-INSPECTION-001, SCENARIO-RUNTIME-MUTATION-001, SCENARIO-SOURCE-INSPECTION-001, SCENARIO-SYSTEM-RUNTIME-ATOMIC-001, SCENARIO-SYSTEM-RUNTIME-ORCHESTRATION-001, TEST-RUNTIME-CLOUD-INDEPENDENCE-001, TEST-RUNTIME-COMMAND-VALIDATION-001, TEST-RUNTIME-PROOF-BAR-001, TEST-RUNTIME-SIMULATION-001.",
+    "python3 scripts/ambitions-canon.py audit",
+    "python3 scripts/ambitions-canon.py build --check",
+    "git diff --check"
+  ],
+  "expected_verification_ids": [
+    "AUDIT-RUNTIME-DIRECT-WRITE-001",
+    "AUDIT-RUNTIME-SOURCE-OWNER-001",
+    "AUDIT-SYSTEM-PRIVACY-CLASSIFICATION-001",
+    "PRIVACY-ACCOUNT-BOUNDARY-001",
+    "PRIVACY-CLOUDKIT-APPROVAL-001",
+    "PRIVACY-R2-EGRESS-001",
+    "PRIVACY-SOURCE-ATLAS-NO-PRIVATE-GRAPH-EGRESS-001",
+    "PRIVACY-SYSTEM-NO-PRIVATE-GRAPH-EGRESS-001",
+    "PROOF-CLAIM-CEILING-001",
+    "REVIEW-SYSTEM-EXTERNAL-ASSISTANCE-BOUNDARY-001",
+    "SCENARIO-DURABLE-SUCCESS-001",
+    "SCENARIO-EXTERNAL-CAPACITY-001",
+    "SCENARIO-OFFLINE-LOCAL-AUTHORITY-001",
+    "SCENARIO-OFFLINE-NO-ACCOUNT-001",
+    "SCENARIO-ORCHESTRATION-END-TO-END-001",
+    "SCENARIO-PRIVACY-INSPECTION-001",
+    "SCENARIO-RUNTIME-MUTATION-001",
+    "SCENARIO-SOURCE-INSPECTION-001",
+    "SCENARIO-SYSTEM-RUNTIME-ATOMIC-001",
+    "SCENARIO-SYSTEM-RUNTIME-ORCHESTRATION-001",
+    "TEST-RUNTIME-CLOUD-INDEPENDENCE-001",
+    "TEST-RUNTIME-COMMAND-VALIDATION-001",
+    "TEST-RUNTIME-PROOF-BAR-001",
+    "TEST-RUNTIME-SIMULATION-001"
+  ],
+  "intake": {
+    "changed_files": [
+      "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/",
+      "Native/Ambitions/Core/LocalRuntimeOS/Boundary/"
+    ],
+    "claim_type": "privacy-proof",
+    "issue_id": "CANON-BENCH-06",
+    "known_issue_ids": [],
+    "schema_version": 1,
+    "scope": [
+      "OBJECT-SOURCE-REFERENCE",
+      "SYSTEM-PRIVATE-LIFE-RUNTIME",
+      "SYSTEM-PRIVACY-DATA-CLASSIFICATION",
+      "system.source-atlas.egress-firewall"
+    ],
+    "task_type": "privacy"
+  },
+  "scenario_id": "source-atlas-boundary",
+  "schema_version": 2,
+  "shared_law_allowlist": [
+    "CONST-PROOF-EVIDENCE-001",
+    "CONST-RUNTIME-MUTATION-001",
+    "LAW-ACCOUNT-BOUNDARY-001",
+    "LAW-LOCAL-AUTHORITY-001",
+    "LAW-OFFLINE-NO-ACCOUNT-001",
+    "LAW-R2-PUBLIC-ONLY-001",
+    "LAW-RUNTIME-DURABLE-SUCCESS-001",
+    "LAW-RUNTIME-NO-DIRECT-WRITE-001",
+    "MISSION-ORCHESTRATION-LOOP-001",
+    "PRIVACY-CLOUDKIT-CONTINUITY-001",
+    "PRIVACY-VISIBILITY-001",
+    "RUNTIME-MUTATION-SEQUENCE-001",
+    "RUNTIME-SOURCE-OWNER-001",
+    "TIME-EXTERNAL-VISIBILITY-001"
+  ],
+  "title": "Source Atlas boundary"
+}

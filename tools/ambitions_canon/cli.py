@@ -20,6 +20,15 @@ from tools.ambitions_canon.build import (
     _open_parent_nofollow,
     _read_descriptor,
 )
+from tools.ambitions_canon.benchmark import (
+    BENCHMARK_FIXTURE_DIR,
+    BENCHMARK_REPORT,
+    load_and_validate_semantic_receipt,
+    run_benchmark,
+    write_benchmark_report,
+    write_representative_packs,
+    write_semantic_review_bundle,
+)
 from tools.ambitions_canon.coverage import coverage_findings, load_profiles
 from tools.ambitions_canon.conflicts import (
     docket_known_issues,
@@ -28,6 +37,14 @@ from tools.ambitions_canon.conflicts import (
     validate_conflict_repository,
 )
 from tools.ambitions_canon.impact import write_amendment_scaffold
+from tools.ambitions_canon.external_authority import (
+    external_reference_findings,
+    load_external_reference_snapshot,
+    load_external_references,
+    load_figma_reconciliation_if_present,
+    validate_external_reference_snapshot,
+    validate_linear_reconciliation,
+)
 from tools.ambitions_canon.manifest import load_documents, load_manifest
 from tools.ambitions_canon.migration import (
     claim_coverage,
@@ -40,6 +57,7 @@ from tools.ambitions_canon.migration import (
     verify_catalog,
 )
 from tools.ambitions_canon.model import (
+    AuthorityReferenceKind,
     CanonDocument,
     CanonError,
     CanonRegistry,
@@ -54,10 +72,13 @@ from tools.ambitions_canon.task_pack import (
     TaskIntake,
     TaskPack,
     build_task_pack,
+    load_task_pack_traceability,
     read_task_pack_pair,
+    require_pack_authorization_current,
     validate_task_pack,
     write_task_pack,
 )
+from tools.ambitions_canon.traceability import build_traceability
 
 
 PUBLIC_AUDIT_CODES = frozenset(
@@ -107,10 +128,10 @@ def normalize_audit_error_code(discovery_code: str) -> str:
 
 
 def ensure_supported_python(version: tuple[int, int]) -> None:
-    if version < (3, 11):
+    if version < (3, 12) or version >= (3, 15):
         raise CanonError(
             "PYTHON_VERSION_UNSUPPORTED",
-            "requires Python 3.11+",
+            "requires Python 3.12-3.14",
         )
 
 
@@ -128,6 +149,60 @@ def main(argv: Sequence[str] | None = None) -> int:
         "--check",
         action="store_true",
         help="compare generated outputs without writing",
+    )
+    subparsers.add_parser(
+        "benchmark", help="benchmark deterministic bounded Codex canon consumption"
+    )
+    semantic_review_parser = subparsers.add_parser(
+        "semantic-review",
+        help="prepare or record an explicit non-CI symmetric semantic review",
+    )
+    semantic_review_parser.add_argument("--reviewer")
+    semantic_review_parser.add_argument("--model")
+    semantic_review_parser.add_argument(
+        "--check-receipt",
+        action="store_true",
+        help="validate the tracked comparison receipt offline without raw evidence",
+    )
+    response_help = (
+        "strict closed JSON with schema_version/reviewer/model/response fields"
+    )
+    semantic_review_parser.add_argument(
+        "--old-response", type=Path, help=response_help
+    )
+    semantic_review_parser.add_argument(
+        "--new-response", type=Path, help=response_help
+    )
+    semantic_review_parser.add_argument(
+        "--comparison",
+        type=Path,
+        help="ingest an independent comparison JSON after both blinded responses",
+    )
+    traceability_parser = subparsers.add_parser(
+        "traceability",
+        help="inspect generated source, test, proof, and external-reference posture",
+    )
+    traceability_parser.add_argument(
+        "--check",
+        action="store_true",
+        required=True,
+        help="validate stable references and report posture gaps without upgrading them",
+    )
+    external_authority_parser = subparsers.add_parser(
+        "external-authority",
+        help="validate one tracked external-authority family offline",
+    )
+    external_authority_parser.add_argument(
+        "--kind",
+        required=True,
+        choices=("linear", "figma"),
+        help="external-authority family to validate",
+    )
+    external_authority_parser.add_argument(
+        "--check",
+        action="store_true",
+        required=True,
+        help="validate tracked references without writing or using the network",
     )
     coverage_parser = subparsers.add_parser(
         "coverage", help="check specification completeness profiles"
@@ -156,13 +231,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     pack_parser.add_argument(
         "--issue-json",
         type=Path,
-        required=True,
         help="closed task-intake JSON contract",
     )
     pack_parser.add_argument(
         "--check",
-        action="store_true",
-        help="reject a stored pack that does not match current state",
+        type=Path,
+        metavar="PACK_JSON",
+        help="reject this stored pack unless every authorization input is current",
     )
     amend_parser = subparsers.add_parser(
         "amend", help="prepare a governed temporary canon amendment"
@@ -274,6 +349,44 @@ def main(argv: Sequence[str] | None = None) -> int:
     if arguments.command == "build":
         return _build(Path.cwd(), check=arguments.check)
 
+    if arguments.command == "benchmark":
+        return _benchmark(Path.cwd())
+
+    if arguments.command == "semantic-review":
+        if arguments.check_receipt:
+            if any(
+                value is not None
+                for value in (
+                    arguments.reviewer,
+                    arguments.model,
+                    arguments.old_response,
+                    arguments.new_response,
+                    arguments.comparison,
+                )
+            ):
+                semantic_review_parser.error(
+                    "--check-receipt cannot be combined with review recording options"
+                )
+            return _semantic_review_receipt_check(Path.cwd())
+        if arguments.reviewer is None or arguments.model is None:
+            semantic_review_parser.error(
+                "semantic-review recording requires --reviewer and --model"
+            )
+        return _semantic_review(
+            Path.cwd(),
+            reviewer=arguments.reviewer,
+            model=arguments.model,
+            old_response=arguments.old_response,
+            new_response=arguments.new_response,
+            comparison=arguments.comparison,
+        )
+
+    if arguments.command == "traceability":
+        return _traceability(Path.cwd())
+
+    if arguments.command == "external-authority":
+        return _external_authority(Path.cwd(), kind=arguments.kind)
+
     if arguments.command == "coverage":
         return _coverage(
             Path.cwd(),
@@ -288,10 +401,17 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
 
     if arguments.command == "pack":
+        if arguments.check is not None:
+            pack_path = arguments.check
+            if not pack_path.is_absolute():
+                pack_path = Path.cwd() / pack_path
+            return _check_pack_path(Path.cwd(), pack_path)
         issue_path = arguments.issue_json
+        if issue_path is None:
+            parser.error("pack requires --issue-json or --check PACK_JSON")
         if not issue_path.is_absolute():
             issue_path = Path.cwd() / issue_path
-        return _pack(Path.cwd(), issue_path, check=arguments.check)
+        return _pack(Path.cwd(), issue_path, check=False)
 
     if arguments.command == "amend":
         assert arguments.amend_command == "scaffold"
@@ -551,6 +671,116 @@ def _build(root: Path, *, check: bool) -> int:
     return 0
 
 
+def _traceability(root: Path) -> int:
+    try:
+        manifest = load_manifest(root)
+        documents = load_documents(root, manifest)
+        registry = build_registry(manifest, documents)
+        from tools.ambitions_canon.external_authority import (
+            load_external_reference_snapshot,
+            validate_external_reference_snapshot,
+        )
+        from tools.ambitions_canon.traceability import (
+            capture_traceability_input_snapshot,
+            validate_traceability_input_snapshot,
+        )
+
+        reference_snapshot = load_external_reference_snapshot(root)
+        references = reference_snapshot.references
+        traceability_snapshot = capture_traceability_input_snapshot(
+            registry,
+            root,
+            reference_snapshot,
+        )
+        validate_external_reference_snapshot(root, reference_snapshot)
+        validate_traceability_input_snapshot(registry, root, traceability_snapshot)
+        invalid = external_reference_findings(registry, references, root)
+        report = build_traceability(
+            registry,
+            root,
+            references,
+            snapshot=traceability_snapshot,
+        )
+        validate_external_reference_snapshot(root, reference_snapshot)
+        validate_traceability_input_snapshot(registry, root, traceability_snapshot)
+    except CanonError as error:
+        location = error.path.as_posix() if error.path is not None else "<traceability>"
+        print(f"P0_BLOCKER {error.code} {location}:{error.line or 0} {error.message}")
+        return 1
+
+    if invalid:
+        for finding in invalid:
+            location = finding.path.as_posix() if finding.path is not None else "<references>"
+            print(
+                f"{finding.severity.value} {finding.code} "
+                f"{location}:{finding.line or 0} {finding.message}"
+            )
+        return 1
+    print(
+        "GREEN ambitions canon traceability "
+        f"requirements={len(report.records)} references={len(references)} "
+        f"posture_gaps={len(report.findings)} authority_state={manifest.authority_state.value}"
+    )
+    return 0
+
+
+def _external_authority(root: Path, *, kind: str) -> int:
+    try:
+        manifest = load_manifest(root)
+        documents = load_documents(root, manifest)
+        registry = build_registry(manifest, documents)
+        reference_snapshot = load_external_reference_snapshot(root)
+        reference_kind = AuthorityReferenceKind(kind)
+        references = tuple(
+            item
+            for item in reference_snapshot.references
+            if item.reference_kind is reference_kind
+        )
+        validate_external_reference_snapshot(root, reference_snapshot)
+        invalid = external_reference_findings(registry, references, root)
+        if reference_kind is AuthorityReferenceKind.LINEAR:
+            reconciliation = validate_linear_reconciliation(
+                root, registry, references
+            )
+            reconciliation_count = reconciliation.entity_count
+        elif reference_kind is AuthorityReferenceKind.FIGMA:
+            reconciliation = load_figma_reconciliation_if_present(
+                root, registry, references
+            )
+            reconciliation_count = (
+                reconciliation.node_count if reconciliation is not None else 0
+            )
+        else:
+            reconciliation = None
+            reconciliation_count = 0
+        validate_external_reference_snapshot(root, reference_snapshot)
+    except CanonError as error:
+        location = error.path.as_posix() if error.path is not None else "<references>"
+        print(f"P0_BLOCKER {error.code} {location}:{error.line or 0} {error.message}")
+        return 1
+
+    if invalid:
+        for finding in invalid:
+            location = (
+                finding.path.as_posix()
+                if finding.path is not None
+                else "<references>"
+            )
+            print(
+                f"{finding.severity.value} {finding.code} "
+                f"{location}:{finding.line or 0} {finding.message}"
+            )
+        return 1
+    print(
+        "GREEN ambitions canon external-authority "
+        f"kind={kind} references={len(references)} "
+        "reconciliation_entities="
+        f"{reconciliation_count} "
+        f"authority_state={manifest.authority_state.value}"
+    )
+    return 0
+
+
 def _coverage(root: Path, *, fail_on_p0_gap: bool) -> int:
     try:
         manifest = load_manifest(root)
@@ -752,11 +982,13 @@ def _pack(root: Path, issue_path: Path, *, check: bool) -> int:
             )
         known_issues = _validated_docket_issues(root, registry)
         repository_sha = _repository_state_sha(root)
+        traceability = load_task_pack_traceability(root, registry)
         pack = build_task_pack(
             registry,
             intake,
             repository_sha,
             known_issues,
+            traceability=traceability,
         )
         source_snapshot = _pack_source_snapshot(pack, raw_bytes)
 
@@ -837,6 +1069,317 @@ def _pack(root: Path, issue_path: Path, *, check: bool) -> int:
         location = f"{location}:{error.line or 0}"
         print(f"P0_BLOCKER {error.code} {location} {error.message}")
         return 1
+
+
+def _check_pack_path(root: Path, pack_path: Path) -> int:
+    """Validate the exact stored JSON pack before it can authorize source edits."""
+
+    try:
+        pack_root = (root / ".codex" / "canon-packs").absolute()
+        absolute = pack_path.absolute()
+        try:
+            relative = absolute.relative_to(pack_root)
+        except ValueError as exc:
+            raise CanonError(
+                "PACK_PATH_ESCAPE",
+                "checked task pack must be below .codex/canon-packs",
+                pack_path,
+            ) from exc
+        if (
+            len(relative.parts) != 2
+            or len(relative.parts[0]) != 64
+            or any(character not in "0123456789abcdef" for character in relative.parts[0])
+            or relative.suffix != ".json"
+        ):
+            raise CanonError(
+                "PACK_PATH_ESCAPE",
+                "checked task pack path is not a canonical JSON pack path",
+                pack_path,
+            )
+        json_bytes = _read_pack_member(pack_path)
+        try:
+            stored = json.loads(json_bytes.decode("utf-8"))
+        except (UnicodeError, json.JSONDecodeError) as exc:
+            raise CanonError(
+                "PACK_READ_FAILED",
+                "stored task pack is not valid UTF-8 JSON",
+                pack_path,
+            ) from exc
+        if not isinstance(stored, dict):
+            raise CanonError(
+                "PACK_READ_FAILED", "stored task pack must be a JSON object", pack_path
+            )
+        intake_value = stored.get("intake_path")
+        if not isinstance(intake_value, str) or not intake_value:
+            raise CanonError(
+                "PACK_INTAKE_STALE",
+                "stored task pack has no valid intake path",
+                pack_path,
+            )
+        intake_relative = Path(intake_value)
+        if intake_relative.is_absolute() or ".." in intake_relative.parts:
+            raise CanonError(
+                "PACK_PATH_ESCAPE",
+                "stored intake path must remain repository-relative",
+                pack_path,
+            )
+        issue_path = root / intake_relative
+        raw_bytes = _read_intake_bytes(issue_path)
+        try:
+            intake_data = json.loads(raw_bytes.decode("utf-8"))
+        except (UnicodeError, json.JSONDecodeError) as exc:
+            raise CanonError(
+                "PACK_INTAKE_STALE",
+                "stored task-pack intake is no longer valid UTF-8 JSON",
+                issue_path,
+            ) from exc
+        if not isinstance(intake_data, dict):
+            raise CanonError(
+                "PACK_INTAKE_STALE", "stored task-pack intake root changed", issue_path
+            )
+        intake = TaskIntake.from_json(intake_data).with_source_path(intake_value)
+        try:
+            manifest = load_manifest(root)
+            registry = build_registry(manifest, load_documents(root, manifest))
+        except CanonError as exc:
+            raise CanonError(
+                "PACK_CANON_STALE", "canon changed during task-pack use"
+            ) from exc
+        findings = audit_registry(registry)
+        if findings:
+            raise CanonError(
+                "PACK_CANON_STALE",
+                f"canon audit changed: {findings[0].code}",
+            )
+        current = build_task_pack(
+            registry,
+            intake,
+            _repository_state_sha(root),
+            _validated_docket_issues(root, registry),
+            traceability=load_task_pack_traceability(root, registry),
+        )
+        (
+            markdown_path,
+            json_path,
+            markdown_bytes,
+            json_bytes,
+        ) = read_task_pack_pair(root, current)
+        if json_path.absolute() != absolute:
+            raise CanonError(
+                "PACK_CONTENT_STALE",
+                "checked task-pack path is not the deterministic current pack",
+                pack_path,
+            )
+        try:
+            stored = json.loads(json_bytes.decode("utf-8"))
+        except (UnicodeError, json.JSONDecodeError) as exc:
+            raise CanonError(
+                "PACK_READ_FAILED",
+                "stored task pack is not valid UTF-8 JSON",
+                json_path,
+            ) from exc
+        if not isinstance(stored, dict):
+            raise CanonError(
+                "PACK_READ_FAILED", "stored task pack must be a JSON object", json_path
+            )
+        require_pack_authorization_current(stored, current.to_dict())
+        if markdown_bytes.decode("utf-8") != current.to_markdown():
+            raise CanonError(
+                "PACK_CONTENT_STALE",
+                "stored Markdown task pack differs from deterministic current output",
+                markdown_path,
+            )
+        source_snapshot = _pack_source_snapshot(current, raw_bytes)
+        _require_source_snapshot(root, issue_path, source_snapshot)
+        print(
+            "GREEN ambitions canon task pack check "
+            f"issue={current.issue_id} authority_state={current.authority_state} "
+            f"json={_display_path(root, pack_path)}"
+        )
+        return 0
+    except (UnicodeError, OSError, CanonError) as error:
+        if not isinstance(error, CanonError):
+            error = CanonError(
+                "PACK_READ_FAILED", "unable to read stored task-pack pair", pack_path
+            )
+        location = error.path.as_posix() if error.path is not None else "<pack>"
+        print(f"P0_BLOCKER {error.code} {location}:{error.line or 0} {error.message}")
+        return 1
+
+
+def _read_pack_member(path: Path) -> bytes:
+    """Read one pack member without following its parent or final symlink."""
+
+    try:
+        with _open_parent_nofollow(path) as (parent_descriptor, name, _absolute):
+            descriptor = os.open(
+                name,
+                os.O_RDONLY | os.O_NOFOLLOW | getattr(os, "O_CLOEXEC", 0),
+                dir_fd=parent_descriptor,
+            )
+            try:
+                if not stat.S_ISREG(os.fstat(descriptor).st_mode):
+                    raise OSError("pack member is not a regular file")
+                return _read_descriptor(descriptor)
+            finally:
+                os.close(descriptor)
+    except (OSError, CanonError) as exc:
+        raise CanonError(
+            "PACK_PATH_ESCAPE",
+            "task-pack pair must contain real regular files",
+            path,
+        ) from exc
+
+
+def _benchmark(root: Path) -> int:
+    """Write deterministic benchmark evidence and ignored representative packs."""
+
+    try:
+        fixture_directory = root / BENCHMARK_FIXTURE_DIR
+        report_path = root / BENCHMARK_REPORT
+        result = run_benchmark(root, fixture_directory)
+        write_benchmark_report(report_path, result)
+        repository_sha = _repository_state_sha(root)
+        packs = write_representative_packs(
+            root,
+            fixture_directory,
+            repository_sha,
+        )
+        print(
+            "GREEN ambitions canon benchmark "
+            f"scenarios={len(result.scenarios)} "
+            f"report={BENCHMARK_REPORT.as_posix()} "
+            f"representative_pack_files={len(packs)}"
+        )
+        return 0
+    except (OSError, CanonError) as error:
+        if not isinstance(error, CanonError):
+            error = CanonError(
+                "BENCHMARK_WRITE_FAILED", "unable to write benchmark evidence"
+            )
+        location = error.path.as_posix() if error.path is not None else "<benchmark>"
+        print(f"P0_BLOCKER {error.code} {location}:{error.line or 0} {error.message}")
+        return 1
+
+
+def _semantic_review(
+    root: Path,
+    *,
+    reviewer: str,
+    model: str,
+    old_response: Path | None,
+    new_response: Path | None,
+    comparison: Path | None,
+) -> int:
+    """Write ignored semantic-review prompts/evidence outside build and CI."""
+
+    try:
+        if (old_response is None) != (new_response is None):
+            raise CanonError(
+                "BENCHMARK_SEMANTIC_RESPONSE_PAIR_REQUIRED",
+                "--old-response and --new-response must be supplied together",
+            )
+        old_bytes = _read_semantic_response(root, old_response)
+        new_bytes = _read_semantic_response(root, new_response)
+        comparison_bytes = _read_semantic_comparison(root, comparison)
+        outputs = write_semantic_review_bundle(
+            root,
+            root / BENCHMARK_FIXTURE_DIR,
+            reviewer=reviewer,
+            model=model,
+            old_response=old_bytes,
+            new_response=new_bytes,
+            comparison=comparison_bytes,
+        )
+        print(
+            "GREEN ambitions canon semantic-review "
+            f"files={len(outputs)} status="
+            f"{'comparison_recorded' if comparison_bytes is not None else 'responses_recorded' if old_bytes is not None else 'awaiting_responses'}"
+        )
+        return 0
+    except (OSError, CanonError) as error:
+        if not isinstance(error, CanonError):
+            error = CanonError(
+                "BENCHMARK_SEMANTIC_RESPONSE_READ",
+                "unable to read semantic response evidence",
+            )
+        location = error.path.as_posix() if error.path is not None else "<semantic-review>"
+        print(f"P0_BLOCKER {error.code} {location}:{error.line or 0} {error.message}")
+        return 1
+
+
+def _semantic_review_receipt_check(root: Path) -> int:
+    """Validate tracked semantic evidence bindings without raw or ignored inputs."""
+
+    try:
+        receipt = load_and_validate_semantic_receipt(root)
+        comparison = receipt["comparison"]
+        assert isinstance(comparison, dict)
+        print(
+            "GREEN ambitions canon semantic-review receipt "
+            f"packs={len(receipt['pack_hashes'])} "
+            f"verdict={comparison['overall_verdict']} "
+            f"scores={comparison['old_total_score']}/{comparison['new_total_score']}"
+        )
+        return 0
+    except (OSError, CanonError) as error:
+        if not isinstance(error, CanonError):
+            error = CanonError(
+                "SEMANTIC_RECEIPT_INVALID",
+                "unable to validate tracked semantic receipt",
+            )
+        location = error.path.as_posix() if error.path is not None else "<receipt>"
+        print(f"P0_BLOCKER {error.code} {location}:{error.line or 0} {error.message}")
+        return 1
+
+
+def _read_semantic_response(root: Path, path: Path | None) -> bytes | None:
+    if path is None:
+        return None
+    candidate = path if path.is_absolute() else root / path
+    info = candidate.lstat()
+    if not stat.S_ISREG(info.st_mode):
+        raise CanonError(
+            "BENCHMARK_SEMANTIC_RESPONSE_READ",
+            "semantic response must be a real regular file",
+            candidate,
+        )
+    content = candidate.read_bytes()
+    if not content:
+        raise CanonError(
+            "BENCHMARK_SEMANTIC_RESPONSE_READ",
+            "semantic response must not be empty",
+            candidate,
+        )
+    return content
+
+
+def _read_semantic_comparison(root: Path, path: Path | None) -> bytes | None:
+    if path is None:
+        return None
+    candidate = path if path.is_absolute() else root / path
+    try:
+        info = candidate.lstat()
+    except OSError as exc:
+        raise CanonError(
+            "BENCHMARK_SEMANTIC_COMPARISON_READ",
+            "unable to read semantic comparison evidence",
+            candidate,
+        ) from exc
+    if not stat.S_ISREG(info.st_mode):
+        raise CanonError(
+            "BENCHMARK_SEMANTIC_COMPARISON_READ",
+            "semantic comparison must be a real regular file",
+            candidate,
+        )
+    content = candidate.read_bytes()
+    if not content:
+        raise CanonError(
+            "BENCHMARK_SEMANTIC_COMPARISON_READ",
+            "semantic comparison must not be empty",
+            candidate,
+        )
+    return content
 
 
 def _repository_state_sha(root: Path) -> str:
@@ -932,7 +1475,13 @@ def _require_source_snapshot(
             "canon changed during task-pack use",
         ) from exc
     known_issues = _validated_docket_issues(root, registry)
-    pack = build_task_pack(registry, intake, repository_sha, known_issues)
+    pack = build_task_pack(
+        registry,
+        intake,
+        repository_sha,
+        known_issues,
+        traceability=load_task_pack_traceability(root, registry),
+    )
     current = _pack_source_snapshot(pack, raw_bytes)
     if (
         current.canon_revision != expected.canon_revision

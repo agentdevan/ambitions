@@ -12,6 +12,7 @@ from dataclasses import dataclass, replace
 from pathlib import Path
 
 from tools.ambitions_canon.audit import audit_registry
+from tools.ambitions_canon.coverage import profile_section_bodies
 from tools.ambitions_canon.build import (
     _content_sha_entries,
     _assert_parent_path_identity,
@@ -33,6 +34,7 @@ from tools.ambitions_canon.model import (
     Requirement,
 )
 from tools.ambitions_canon.render import stable_json
+from tools.ambitions_canon.traceability import TraceabilityReport
 
 
 PACK_SECTION_ORDER = (
@@ -65,7 +67,7 @@ PACK_BUDGETS = {
 TASK_TYPE_BUDGET_CLASS = {
     "mechanical": "mechanical",
     "docs": "normal",
-    "release": "normal",
+    "release": "complex",
     "swiftui": "complex",
     "runtime": "complex",
     "privacy": "complex",
@@ -101,8 +103,6 @@ _ISSUE_STATUSES = frozenset({"open", "unresolved", "resolved", "closed"})
 _ISSUE_KINDS = frozenset({"conflict", "risk"})
 _SLUG_COMPONENT = re.compile(r"[^a-z0-9]+")
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
-
-
 @dataclass(frozen=True, slots=True)
 class TaskIntake:
     schema_version: int
@@ -189,6 +189,7 @@ class TaskPack:
     known_issue_ids: tuple[str, ...]
     intake_path: str
     constitutional_laws: tuple[str, ...]
+    applicable_requirement_ids: tuple[str, ...]
     specifications: tuple[str, ...]
     object_lifecycles: tuple[str, ...]
     journeys: tuple[str, ...]
@@ -228,6 +229,7 @@ class TaskPack:
             "known_issue_ids": list(self.known_issue_ids),
             "intake_path": self.intake_path,
             "constitutional_laws": list(self.constitutional_laws),
+            "applicable_requirement_ids": list(self.applicable_requirement_ids),
             "specifications": list(self.specifications),
             "object_lifecycles": list(self.object_lifecycles),
             "journeys": list(self.journeys),
@@ -278,6 +280,8 @@ def build_task_pack(
     intake: TaskIntake,
     repository_sha: str,
     known_issues: Sequence[Mapping[str, object]],
+    *,
+    traceability: TraceabilityReport | None = None,
 ) -> TaskPack:
     """Compile the dependency-closed, scope-bounded task pack or fail closed."""
 
@@ -327,24 +331,30 @@ def build_task_pack(
             f"unresolved P0 conflict blocks task pack: {blocking[0]['issue_id']}",
         )
 
+    requirement_graph = _requirement_inclusion_graph(
+        roots,
+        closure,
+        intake.scope,
+        include_visual_authority=intake.task_type == "swiftui",
+    )
+    semantic_documents = tuple(
+        document for document in closure if document.spec_id in requirement_graph
+    )
     requirements_by_id = {
         requirement.requirement_id: requirement for requirement in registry.requirements
     }
     inherited_ids = {
-        requirement_id for document in closure for requirement_id in document.inherits
+        requirement_id
+        for document in semantic_documents
+        for requirement_id in document.inherits
     }
     directly_scoped_law_ids = {
         requirement.requirement_id
-        for document in closure
+        for document in roots
         if document.kind is DocumentKind.CONSTITUTION
         for requirement in document.requirements
     }
     applicable_law_ids = tuple(sorted(inherited_ids | directly_scoped_law_ids))
-    laws = tuple(
-        requirements_by_id[identifier]
-        for identifier in applicable_law_ids
-        if identifier in requirements_by_id
-    )
     constitution_ids = {
         requirement.requirement_id
         for document in registry.documents
@@ -352,17 +362,15 @@ def build_task_pack(
         for requirement in document.requirements
     }
     laws = tuple(
-        sorted(
-            (law for law in laws if law.requirement_id in constitution_ids),
-            key=lambda item: item.requirement_id,
-        )
+        requirements_by_id[identifier]
+        for identifier in applicable_law_ids
+        if identifier in requirements_by_id and identifier in constitution_ids
     )
-
     specifications = tuple(
         sorted(
             (
                 document
-                for document in closure
+                for document in semantic_documents
                 if document.kind
                 not in {
                     DocumentKind.CONSTITUTION,
@@ -374,12 +382,17 @@ def build_task_pack(
             key=lambda item: item.spec_id,
         )
     )
-    objects = _documents_of_kind(closure, DocumentKind.OBJECT)
-    journeys = _documents_of_kind(closure, DocumentKind.JOURNEY)
-    standards = _documents_of_kind(closure, DocumentKind.STANDARD)
+    objects = _documents_of_kind(semantic_documents, DocumentKind.OBJECT)
+    journeys = _documents_of_kind(semantic_documents, DocumentKind.JOURNEY)
+    standards = _documents_of_kind(semantic_documents, DocumentKind.STANDARD)
     source_owners = tuple(
-        sorted({owner for document in closure for owner in document.source_owners})
+        sorted({owner for document in semantic_documents for owner in document.source_owners})
     )
+    selected_requirement_ids = {
+        requirement_id
+        for requirement_ids in requirement_graph.values()
+        for requirement_id in requirement_ids
+    }
     selected_requirements = tuple(
         sorted(
             {
@@ -391,6 +404,7 @@ def build_task_pack(
                     *standards,
                 )
                 for requirement in document.requirements
+                if requirement.requirement_id in selected_requirement_ids
             }.values(),
             key=lambda item: item.requirement_id,
         )
@@ -405,20 +419,65 @@ def build_task_pack(
         )
     )
 
+    evidence_requirement_ids = frozenset(
+        selected_requirement_ids | {law.requirement_id for law in laws}
+    )
+    evidence_records = tuple(
+        record
+        for record in (traceability.records if traceability is not None else ())
+        if record.requirement_id in evidence_requirement_ids
+    )
     shadow = registry.manifest.authority_state is AuthorityState.SHADOW
     no_owner = not roots
-    implementation_posture = (
+    authority_posture = (
         "Shadow canon is non-authoritative; implementation posture must be "
         "verified directly from current source, tests, and proof."
         if shadow
         else "Implementation posture must be verified from current source, tests, and proof."
     )
-    known_risks = tuple(
+    implementation_posture = _combine_implementation_posture(
+        authority_posture,
+        _traceability_posture(
+            evidence_records,
+            evidence_requirement_ids,
+            supplied=traceability is not None,
+        ),
+    )
+    known_risk_values = (
         sorted(
             {str(issue["summary"]) for issue in relevant_issues}
             | (
                 {"Declared scope has no owning specification in the current canon."}
                 if no_owner
+                else set()
+            )
+        )
+    )
+    visual_references = tuple(
+        sorted(
+            {
+                reference.reference_id: reference
+                for record in evidence_records
+                for reference in record.figma_references
+                if reference.authority_role is not None
+                and reference.authority_role.value == "approved_target"
+                and reference.approval_state == "approved"
+            }.values(),
+            key=lambda item: item.reference_id,
+        )
+    )
+    visual_required = intake.task_type == "swiftui" or any(
+        "VISUAL-AUTHORITY" in identifier for identifier in evidence_requirement_ids
+    )
+    visual_gap = visual_required and not visual_references
+    known_risks = tuple(
+        sorted(
+            set(known_risk_values)
+            | (
+                {
+                    "Required visual authority is missing; UI readiness remains stopped."
+                }
+                if visual_gap
                 else set()
             )
         )
@@ -431,15 +490,50 @@ def build_task_pack(
         )
     )
     visual_authority = (
-        "No task-scoped visual authority is represented in this compiler stage.",
+        tuple(_visual_authority_line(item) for item in visual_references)
+        if visual_references
+        else (
+            "UI-readiness stop: required visual authority is not mapped for this scope.",
+        )
+        if visual_gap
+        else ("No applicable governed visual authority is mapped for this scope.",)
+    )
+    verification_contract = (
+        "Execute selected verification contracts: "
+        + ", ".join(required_tests)
+        + "."
     )
     required_validation = (
+        verification_contract,
         "python3 scripts/ambitions-canon.py audit",
         "python3 scripts/ambitions-canon.py build --check",
         "git diff --check",
     )
+    proof_references = tuple(
+        sorted(
+            {
+                reference.reference_id: reference
+                for record in evidence_records
+                for reference in record.proof_references
+            }.values(),
+            key=lambda item: item.reference_id,
+        )
+    )
     required_proof = (
         "Current source, focused tests, regression tests, and claim-specific proof.",
+        "Claim-specific proof for "
+        f"claim_type={intake.claim_type} must cover changed-file boundary "
+        f"{', '.join(intake.changed_files)} and applicable requirements "
+        f"{', '.join(sorted(selected_requirement_ids | {document.spec_id for document in semantic_documents}))}.",
+        *tuple(
+            "Current proof reference "
+            f"reference_id={item.reference_id}; source={item.source}; "
+            f"revision={item.revision}; approval={item.approval_state}; "
+            f"approved_by={item.approved_by}; posture="
+            f"{item.implementation_status or 'evidence only; claim status unverified'}."
+            for item in proof_references
+        ),
+        _proof_gap_line(evidence_records, evidence_requirement_ids),
     )
     forbidden_changes = (
         "Changes outside the declared task scope and changed-file boundary.",
@@ -450,6 +544,8 @@ def build_task_pack(
         if shadow
         else "Source/governance claim only within the declared scope and current linked evidence."
     )
+    if visual_gap:
+        claim_ceiling += " UI work is blocked by the visual-authority gap."
     rollback_requirements = (
         "Record the pre-change Git SHA and provide a scoped revert path.",
     )
@@ -474,6 +570,12 @@ def build_task_pack(
         known_issue_ids=intake.known_issue_ids,
         intake_path=intake_path,
         constitutional_laws=tuple(law.requirement_id for law in laws),
+        applicable_requirement_ids=tuple(
+            sorted(
+                selected_requirement_ids
+                | {document.spec_id for document in semantic_documents}
+            )
+        ),
         specifications=tuple(document.spec_id for document in specifications),
         object_lifecycles=tuple(document.spec_id for document in objects),
         journeys=tuple(document.spec_id for document in journeys),
@@ -499,6 +601,7 @@ def build_task_pack(
             objects=objects,
             journeys=journeys,
             standards=standards,
+            selected_requirement_ids=frozenset(selected_requirement_ids),
         )
         candidate = replace(pack, _section_content=section_content)
         estimate = estimate_tokens(candidate.to_markdown())
@@ -523,6 +626,213 @@ def build_task_pack(
     return pack
 
 
+def load_task_pack_traceability(root: Path, registry: CanonRegistry) -> TraceabilityReport:
+    """Load the same tracked, offline evidence used by Train 4 projections."""
+
+    from tools.ambitions_canon.external_authority import (
+        load_external_reference_snapshot,
+        validate_external_reference_snapshot,
+    )
+    from tools.ambitions_canon.traceability import build_traceability
+
+    snapshot = load_external_reference_snapshot(root)
+    validate_external_reference_snapshot(root, snapshot)
+    report = build_traceability(registry, root, snapshot.references)
+    validate_external_reference_snapshot(root, snapshot)
+    return report
+
+
+def _traceability_posture(
+    records: Sequence[object],
+    required_ids: frozenset[str],
+    *,
+    supplied: bool,
+) -> str:
+    if not supplied:
+        return json.dumps(
+            {
+                "applicable_requirement_count": len(required_ids),
+                "covered_requirement_count": 0,
+                "current_proof_references": [],
+                "current_test_references": [],
+                "missing_requirement_ids": sorted(required_ids),
+                "source_gap_records": [],
+                "source_gap_requirement_count": len(required_ids),
+                "source_status_counts": {"unknown": len(required_ids)},
+                "summary": "Current traceability evidence was not supplied; mappings remain unknown.",
+            },
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        )
+    by_status: dict[str, int] = {}
+    source_gap_records: list[object] = []
+    for record in records:
+        has_source = any(item.has_implementation for item in record.source_mappings)
+        has_gap = not record.source_mappings or any(
+            not item.has_implementation for item in record.source_mappings
+        )
+        status = (
+            "partial_source_mapping_gap"
+            if has_source and has_gap
+            else "source_files_present"
+            if has_source
+            else "source_mapping_gap"
+        )
+        by_status[status] = by_status.get(status, 0) + 1
+        if has_gap:
+            source_gap_records.append(record)
+    represented = {record.requirement_id for record in records}
+    missing = sorted(required_ids - represented)
+    test_references = tuple(
+        sorted(
+            {
+                reference.reference_id: reference
+                for record in records
+                for reference in record.test_references
+            }.values(),
+            key=lambda item: item.reference_id,
+        )
+    )
+    proof_references = tuple(
+        sorted(
+            {
+                reference.reference_id: reference
+                for record in records
+                for reference in record.proof_references
+            }.values(),
+            key=lambda item: item.reference_id,
+        )
+    )
+    summary = (
+        f"Current traceability covers {len(represented)}/{len(required_ids)} requirements; "
+        f"{len(source_gap_records)}/{len(required_ids)} have at least one source gap."
+    )
+    return json.dumps(
+        {
+            "applicable_requirement_count": len(required_ids),
+            "covered_requirement_count": len(represented),
+            "current_proof_references": [
+                _evidence_reference_dict(reference) for reference in proof_references
+            ],
+            "current_test_references": [
+                _evidence_reference_dict(reference) for reference in test_references
+            ],
+            "missing_requirement_ids": missing,
+            "source_gap_records": [
+                {
+                    "gaps": [finding.message for finding in record.findings],
+                    "mappings": [
+                        {
+                            "exists": mapping.exists,
+                            "implementation_files": list(mapping.implementation_files),
+                            "owner_path": mapping.owner_path,
+                            "status": mapping.status,
+                        }
+                        for mapping in record.source_mappings
+                    ],
+                    "requirement_id": record.requirement_id,
+                    "source_owners": list(record.source_owners),
+                }
+                for record in source_gap_records
+            ],
+            "source_gap_requirement_count": len(source_gap_records),
+            "source_status_counts": {
+                status: by_status[status] for status in sorted(by_status)
+            },
+            "summary": summary,
+        },
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+
+
+def _evidence_reference_dict(reference: object) -> dict[str, object]:
+    return {
+        "approval_state": reference.approval_state,
+        "approved_by": reference.approved_by,
+        "implementation_status": reference.implementation_status,
+        "reference_id": reference.reference_id,
+        "revision": reference.revision,
+        "source": reference.source,
+    }
+
+
+def _combine_implementation_posture(authority_posture: str, traceability: str) -> str:
+    try:
+        payload = json.loads(traceability)
+    except json.JSONDecodeError:
+        return f"{authority_posture} {traceability}"
+    if not isinstance(payload, dict):
+        return f"{authority_posture} {traceability}"
+    payload["authority_posture"] = authority_posture
+    payload["summary"] = f"{authority_posture} {payload.get('summary', '')}".strip()
+    return json.dumps(
+        payload,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+
+
+def _implementation_posture_markdown(value: str) -> str:
+    try:
+        posture = json.loads(value)
+    except json.JSONDecodeError:
+        return value
+    if not isinstance(posture, dict):
+        return value
+    summary = str(posture.get("summary", value))
+    gap_records = posture.get("source_gap_records", [])
+    if isinstance(gap_records, list) and gap_records:
+        identifiers = ",".join(
+            str(item.get("requirement_id"))
+            for item in gap_records
+            if isinstance(item, dict)
+        )
+        summary += f" Source gap requirement IDs: [{identifiers}]."
+    for kind in ("test", "proof"):
+        references = posture.get(f"current_{kind}_references", [])
+        if not isinstance(references, list):
+            continue
+        for reference in references:
+            if not isinstance(reference, dict):
+                continue
+            summary += (
+                f" Current {kind} evidence reference_id={reference.get('reference_id')}; "
+                f"source={reference.get('source')}; revision={reference.get('revision')}; "
+                f"approval={reference.get('approval_state')}; "
+                f"approved_by={reference.get('approved_by')}; posture="
+                f"{reference.get('implementation_status')}."
+            )
+    return summary
+
+
+def _visual_authority_line(reference: object) -> str:
+    variants = ", ".join(reference.accessibility_variants) or "none recorded"
+    return (
+        f"{reference.visual_authority_id or 'visual-authority'} | "
+        f"{reference.reference_id} | frame {reference.frame_version or reference.revision} | "
+        f"owner {reference.approved_by or 'unrecorded'} | "
+        f"SwiftUI {reference.swiftui_plausibility or 'unrecorded'} | "
+        f"accessibility variants: {variants} | posture: "
+        f"{reference.implementation_status or 'visual evidence only; implementation unverified'}"
+    )
+
+
+def _proof_gap_line(records: Sequence[object], required_ids: frozenset[str]) -> str:
+    mapped = {
+        record.requirement_id for record in records if record.proof_references
+    }
+    gap_count = len(required_ids - mapped)
+    return (
+        f"Current proof mapping gaps: {gap_count} applicable requirements lack current proof references."
+        if gap_count
+        else "Current proof mappings exist for every applicable requirement; execution still requires validation."
+    )
+
+
 def validate_task_pack(
     data: Mapping[str, object],
     *,
@@ -540,6 +850,49 @@ def validate_task_pack(
     for field, current, code in checks:
         if data.get(field) != current:
             raise CanonError(code, f"task pack {field} does not match current state")
+
+
+def require_pack_authorization_current(
+    stored: Mapping[str, object],
+    current: Mapping[str, object],
+) -> None:
+    """Fail closed when any source-edit authorization input has changed."""
+
+    checks = (
+        (("canon_revision", "canon_sha", "compiler_version"), "PACK_CANON_STALE"),
+        (("repository_sha",), "PACK_REPOSITORY_STALE"),
+        (("intake_sha", "intake_path"), "PACK_INTAKE_STALE"),
+        (
+            ("issue_id", "task_type", "scope", "changed_files", "claim_type"),
+            "PACK_ISSUE_STALE",
+        ),
+        (("source_owners",), "PACK_SOURCE_STALE"),
+        (("open_conflicts",), "PACK_CONFLICT_STALE"),
+        (("known_issue_ids", "known_risks"), "PACK_KNOWN_ISSUES_STALE"),
+        (
+            (
+                "authority_state",
+                "required_tests",
+                "required_validation",
+                "required_proof",
+                "visual_authority",
+                "claim_ceiling",
+            ),
+            "PACK_PROOF_POSTURE_STALE",
+        ),
+    )
+    for fields, code in checks:
+        for field in fields:
+            if stored.get(field) != current.get(field):
+                raise CanonError(
+                    code,
+                    f"task pack {field} no longer matches source-edit authority",
+                )
+    if dict(stored) != dict(current):
+        raise CanonError(
+            "PACK_CONTENT_STALE",
+            "stored task-pack content differs from deterministic current output",
+        )
 
 
 def task_pack_paths(root: Path, pack: TaskPack) -> tuple[Path, Path]:
@@ -904,6 +1257,71 @@ def _scope_overlap(left: str, right: str) -> bool:
     return left == right or left.startswith(f"{right}.") or right.startswith(f"{left}.")
 
 
+def _requirement_matches_scope(
+    document: CanonDocument,
+    requirement: Requirement,
+    scopes: tuple[str, ...],
+) -> bool:
+    return any(
+        scope in {document.spec_id, requirement.requirement_id}
+        or _scope_overlap(requirement.concept, scope)
+        for scope in scopes
+    )
+
+
+def _requirement_inclusion_graph(
+    roots: tuple[CanonDocument, ...],
+    closure: tuple[CanonDocument, ...],
+    scopes: tuple[str, ...],
+    *,
+    include_visual_authority: bool = False,
+) -> dict[str, tuple[str, ...]]:
+    """Select exact roots plus direct, profile-rich semantic dependencies."""
+
+    documents = {document.spec_id: document for document in closure}
+    graph: dict[str, tuple[str, ...]] = {}
+    root_spec_ids = {root.spec_id for root in roots}
+    for root in roots:
+        scoped_requirement_ids = tuple(
+            requirement.requirement_id
+            for requirement in root.requirements
+            if _requirement_matches_scope(root, requirement, scopes)
+            or (
+                include_visual_authority
+                and "VISUAL-AUTHORITY" in requirement.requirement_id
+            )
+        )
+        if not scoped_requirement_ids:
+            raise CanonError(
+                "PACK_REQUIREMENT_GRAPH_EMPTY",
+                f"owning document has no requirement semantics for scope: {root.spec_id}",
+                root.source_path,
+            )
+        graph[root.spec_id] = scoped_requirement_ids
+    for parent in roots:
+        for dependency_id in sorted(parent.depends_on):
+            if dependency_id in root_spec_ids:
+                continue
+            dependency = documents.get(dependency_id)
+            if dependency is None:
+                raise CanonError(
+                    "PACK_DEPENDENCY_OWNER_MISSING",
+                    f"required direct semantic owner is absent: {dependency_id}",
+                    parent.source_path,
+                )
+            if dependency.kind is DocumentKind.CONSTITUTION:
+                continue
+            dependency_ids = tuple(
+                requirement.requirement_id
+                for requirement in dependency.requirements
+                if _requirement_matches_scope(dependency, requirement, scopes)
+            )
+            if not dependency_ids:
+                continue
+            graph[dependency_id] = dependency_ids
+    return {identifier: graph[identifier] for identifier in sorted(graph)}
+
+
 def _dependency_closure(
     registry: CanonRegistry,
     roots: tuple[CanonDocument, ...],
@@ -1029,6 +1447,7 @@ def _render_sections(
     objects: tuple[CanonDocument, ...],
     journeys: tuple[CanonDocument, ...],
     standards: tuple[CanonDocument, ...],
+    selected_requirement_ids: frozenset[str],
 ) -> tuple[tuple[str, tuple[str, ...]], ...]:
     identity = (
         f"- Canon revision: `{pack.canon_revision}`",
@@ -1049,15 +1468,28 @@ def _render_sections(
     )
     values = {
         "Identity": identity,
-        "Constitutional laws": tuple(_render_requirement(item) for item in laws),
+        "Constitutional laws": _render_laws(laws),
         "Owning specifications": tuple(
-            _render_document(item) for item in specifications
+            _render_document(item, selected_requirement_ids) for item in specifications
         ),
-        "Object lifecycles": tuple(_render_document(item) for item in objects),
-        "Journeys": tuple(_render_document(item) for item in journeys),
-        "Cross-cutting standards": tuple(_render_document(item) for item in standards),
-        "Source ownership": _bullet_values(pack.source_owners),
-        "Implementation posture": (pack.implementation_posture,),
+        "Object lifecycles": tuple(
+            _render_document(item, selected_requirement_ids) for item in objects
+        ),
+        "Journeys": tuple(
+            _render_document(item, selected_requirement_ids) for item in journeys
+        ),
+        "Cross-cutting standards": tuple(
+            _render_document(item, selected_requirement_ids) for item in standards
+        ),
+        "Source ownership": (
+            "- **Declared changed-file boundary:**",
+            *(f"  - `{path}`" for path in pack.changed_files),
+            "- **Coupled canonical owners:**",
+            *(f"  - `{path}`" for path in pack.source_owners),
+        ),
+        "Implementation posture": (
+            _implementation_posture_markdown(pack.implementation_posture),
+        ),
         "Known risks": _bullet_values(pack.known_risks),
         "Visual authority": _bullet_values(pack.visual_authority),
         "Required tests": _bullet_values(pack.required_tests),
@@ -1075,24 +1507,42 @@ def _render_requirement(requirement: Requirement) -> str:
     body = requirement.body.strip()
     quoted_body = "\n".join(f"  > {line}" for line in body.splitlines())
     return (
-        f"- **{requirement.requirement_id} — {_inline(requirement.title)}** "
-        f"(`{requirement.modality.value}`, `{requirement.concept}`):\n{quoted_body}"
+        f"- **{requirement.requirement_id}** (`{requirement.modality.value}`):\n{quoted_body}"
     )
 
 
-def _render_document(document: CanonDocument) -> str:
+def _render_laws(
+    laws: tuple[Requirement, ...],
+) -> tuple[str, ...]:
+    """Embed every applicable constitutional body in the self-contained pack."""
+
+    return tuple(_render_requirement(law) for law in laws)
+
+
+def _render_document(
+    document: CanonDocument,
+    selected_requirement_ids: frozenset[str],
+) -> str:
     requirements = "\n".join(
         f"  {_render_requirement(requirement)}"
         for requirement in sorted(
             document.requirements,
             key=lambda item: item.requirement_id,
         )
+        if requirement.requirement_id in selected_requirement_ids
     )
     heading = (
         f"- **{document.spec_id} — {_inline(document.title)}** "
         f"(`{document.kind.value}`)"
     )
-    return f"{heading}\n{requirements}" if requirements else heading
+    profiles = "\n".join(
+        "  - **Profile section "
+        f"`{section}`:**\n"
+        + "\n".join(f"    > {line}" for line in body.splitlines())
+        for section, body in profile_section_bodies(document)
+    )
+    content = "\n".join(value for value in (requirements, profiles) if value)
+    return f"{heading}\n{content}" if content else heading
 
 
 def _bullet_values(values: tuple[str, ...]) -> tuple[str, ...]:

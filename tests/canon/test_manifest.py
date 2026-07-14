@@ -397,7 +397,7 @@ class ManifestTests(unittest.TestCase):
         self.assertEqual(manifest.schema_version, 1)
         self.assertEqual(manifest.canon_revision, 1)
         self.assertIs(manifest.authority_state, AuthorityState.SHADOW)
-        self.assertEqual(manifest.compiler_version, "0.1.0")
+        self.assertEqual(manifest.compiler_version, "0.2.0")
         self.assertEqual(
             tuple(item.path for item in manifest.normative_files),
             (
