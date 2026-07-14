@@ -11,11 +11,11 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 
 class UXBlueprintTests(unittest.TestCase):
     def _module(self):
-        spec = importlib.util.find_spec("docs.canon.migration.ux_blueprint_tool")
+        spec = importlib.util.find_spec("tools.ambitions_canon.ux_blueprint")
         self.assertIsNotNone(spec, "UX blueprint validator is not implemented")
-        from docs.canon.migration import ux_blueprint_tool
+        from tools.ambitions_canon import ux_blueprint
 
-        return ux_blueprint_tool
+        return ux_blueprint
 
     def _payload(self):
         return json.loads(
@@ -33,10 +33,11 @@ class UXBlueprintTests(unittest.TestCase):
         self.assertEqual(blueprint["status"], "design_input_non_authoritative")
         self.assertEqual(
             blueprint["source_sha"],
-            "002fd07b795173c1c8590c0be986fc1e31569416",
+            "857f4bce2aee2fba104f74bf08a5623a3debfccc",
         )
         self.assertEqual(summary.screen_count, 40)
-        self.assertEqual(summary.state_model_count, 16)
+        self.assertEqual(summary.state_model_count, 40)
+        self.assertEqual(summary.state_record_count, 360)
         self.assertEqual(summary.object_boundary_count, 18)
         self.assertEqual(summary.journey_count, 12)
         self.assertEqual(summary.cross_cutting_count, 10)
@@ -110,10 +111,13 @@ class UXBlueprintTests(unittest.TestCase):
             {
                 "dynamic-type",
                 "focus-keyboard",
+                "light-dark",
                 "localization-long-copy",
+                "motion-haptics",
                 "non-color-semantics",
                 "reduce-motion",
                 "reduce-transparency",
+                "swiftui-anatomy",
                 "voiceover-reading-order",
             },
         )
@@ -169,7 +173,7 @@ class UXBlueprintTests(unittest.TestCase):
         duplicate["screens"][1]["blueprint_id"] = duplicate["screens"][0][
             "blueprint_id"
         ]
-        with self.assertRaisesRegex(module.UXBlueprintError, "duplicate blueprint ID"):
+        with self.assertRaisesRegex(module.UXBlueprintError, "globally unique typed"):
             module.validate_ux_blueprint(REPO_ROOT, duplicate)
 
         unsorted = copy.deepcopy(payload)
@@ -213,8 +217,10 @@ class UXBlueprintTests(unittest.TestCase):
             module.validate_ux_blueprint(REPO_ROOT, overclaim)
 
         unknown_source = self._payload()
-        unknown_source["source_documents"].append("docs/canon/unknown-source.md")
-        unknown_source["source_documents"].sort()
+        unknown_source["source_documents"].append(
+            {"path": "docs/canon/unknown-source.md", "sha256": "0" * 64}
+        )
+        unknown_source["source_documents"].sort(key=lambda item: item["path"])
         with self.assertRaisesRegex(module.UXBlueprintError, "source document"):
             module.validate_ux_blueprint(REPO_ROOT, unknown_source)
 
@@ -223,37 +229,20 @@ class UXBlueprintTests(unittest.TestCase):
         payload = self._payload()
 
         missing = copy.deepcopy(payload)
-        missing["requirement_disposition_policy"]["visual_source_routes"].pop(0)
+        missing["requirement_dispositions"].pop(0)
         with self.assertRaisesRegex(module.UXBlueprintError, "missing requirement disposition"):
             module.validate_ux_blueprint(REPO_ROOT, missing)
 
         duplicate = copy.deepcopy(payload)
-        routed_prefix = duplicate["requirement_disposition_policy"][
-            "visual_source_routes"
-        ][0]["source_prefix"]
-        duplicate["requirement_disposition_policy"]["nonvisual_sources"].append(
-            {
-                "source_path": routed_prefix,
-                "rationale": "This deliberately duplicates a visual route for negative coverage.",
-            }
-        )
-        duplicate["requirement_disposition_policy"]["nonvisual_sources"].sort(
-            key=lambda item: item["source_path"]
+        duplicate["requirement_dispositions"].insert(
+            1, copy.deepcopy(duplicate["requirement_dispositions"][0])
         )
         with self.assertRaisesRegex(module.UXBlueprintError, "duplicate requirement disposition"):
             module.validate_ux_blueprint(REPO_ROOT, duplicate)
 
         unknown = copy.deepcopy(payload)
-        unknown["requirement_disposition_policy"]["visual_source_routes"].append(
-            {
-                "source_prefix": "docs/canon/specifications/unknown/",
-                "blueprint_ids": ["UX-SCREEN-APP-SHELL-ROOT"],
-            }
-        )
-        unknown["requirement_disposition_policy"]["visual_source_routes"].sort(
-            key=lambda item: item["source_prefix"]
-        )
-        with self.assertRaisesRegex(module.UXBlueprintError, "unknown disposition source"):
+        unknown["requirement_dispositions"][0]["requirement_id"] = "UNKNOWN-001"
+        with self.assertRaisesRegex(module.UXBlueprintError, "unknown requirement disposition"):
             module.validate_ux_blueprint(REPO_ROOT, unknown)
 
     def test_renderer_is_deterministic_newline_terminated_and_checked_in(self):

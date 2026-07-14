@@ -15,7 +15,7 @@
     "legacy_figma_policy",
     "object_boundaries",
     "primary_linear_v3",
-    "requirement_disposition_policy",
+    "requirement_dispositions",
     "schema_version",
     "screens",
     "source_documents",
@@ -74,24 +74,12 @@
         "title": {"const": "B1A-D01R — Ambitions Product / IA / Object Model Full Design Spec v3 — Canonical"}
       }
     },
-    "requirement_disposition_policy": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["nonvisual_sources", "visual_source_routes"],
-      "properties": {
-        "nonvisual_sources": {
-          "type": "array",
-          "minItems": 1,
-          "uniqueItems": true,
-          "items": {"$ref": "#/$defs/nonvisualSource"}
-        },
-        "visual_source_routes": {
-          "type": "array",
-          "minItems": 1,
-          "uniqueItems": true,
-          "items": {"$ref": "#/$defs/visualSourceRoute"}
-        }
-      }
+    "requirement_dispositions": {
+      "type": "array",
+      "minItems": 441,
+      "maxItems": 441,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/requirementDisposition"}
     },
     "schema_version": {"const": 1},
     "screens": {
@@ -101,12 +89,17 @@
       "uniqueItems": true,
       "items": {"$ref": "#/$defs/screen"}
     },
-    "source_documents": {"$ref": "#/$defs/stringArray"},
-    "source_sha": {"type": "string", "const": "002fd07b795173c1c8590c0be986fc1e31569416"},
+    "source_documents": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/sourceDocument"}
+    },
+    "source_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
     "state_models": {
       "type": "array",
-      "minItems": 16,
-      "maxItems": 16,
+      "minItems": 40,
+      "maxItems": 40,
       "uniqueItems": true,
       "items": {"$ref": "#/$defs/stateModel"}
     },
@@ -139,7 +132,7 @@
         "implementation_status": {"const": "design_input_only"},
         "objects": {"$ref": "#/$defs/stringArray"},
         "presentation": {"$ref": "#/$defs/nonempty"},
-        "proof_ceiling": {"$ref": "#/$defs/nonempty"},
+        "proof_ceiling": {"const": "Design input only; no implementation, runtime, rendered-app, accessibility, device, privacy/legal, distribution, or release proof."},
         "purpose": {"$ref": "#/$defs/nonempty"},
         "requirement_ids": {"$ref": "#/$defs/requirementIds"},
         "scope": {"enum": ["account", "app-shell", "capture", "goals", "offline-degraded", "permissions", "search", "setup", "time", "today", "trust", "you"]},
@@ -151,16 +144,19 @@
     "stateModel": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["applies_to", "behavior", "blueprint_id", "recovery", "requirement_ids", "state_kinds", "title"],
+      "required": ["blueprint_id", "implementation_status", "proof_ceiling", "requirement_ids", "screen_id", "states", "title"],
       "properties": {
-        "applies_to": {"$ref": "#/$defs/stringArray"},
-        "behavior": {"$ref": "#/$defs/nonempty"},
-        "blueprint_id": {"type": "string", "pattern": "^UX-STATE-[A-Z0-9-]+$"},
-        "recovery": {"$ref": "#/$defs/nonempty"},
+        "blueprint_id": {"type": "string", "pattern": "^UX-STATE-MODEL-[A-Z0-9-]+$"},
+        "implementation_status": {"const": "design_input_only"},
+        "proof_ceiling": {"const": "Design input only; no implementation, runtime, rendered-app, accessibility, device, privacy/legal, distribution, or release proof."},
         "requirement_ids": {"$ref": "#/$defs/requirementIds"},
-        "state_kinds": {
+        "screen_id": {"type": "string", "pattern": "^UX-SCREEN-[A-Z0-9-]+$"},
+        "states": {
           "type": "array",
-          "const": ["degraded", "empty", "failure", "interruption", "loading", "recovery", "resting", "rollback", "transitional"]
+          "minItems": 9,
+          "maxItems": 9,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/stateRecord"}
         },
         "title": {"$ref": "#/$defs/nonempty"}
       }
@@ -168,7 +164,7 @@
     "objectBoundary": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["blueprint_id", "create", "delete_restore", "detail", "edit", "history_inspection", "object_id", "presentation_boundaries", "requirement_ids", "title"],
+      "required": ["blueprint_id", "create", "delete_restore", "detail", "edit", "history_inspection", "implementation_status", "object_id", "presentation_boundaries", "proof_ceiling", "requirement_ids", "title"],
       "properties": {
         "blueprint_id": {"type": "string", "pattern": "^UX-OBJECT-[A-Z0-9-]+$"},
         "create": {"$ref": "#/$defs/nonempty"},
@@ -176,8 +172,10 @@
         "detail": {"$ref": "#/$defs/nonempty"},
         "edit": {"$ref": "#/$defs/nonempty"},
         "history_inspection": {"$ref": "#/$defs/nonempty"},
+        "implementation_status": {"const": "design_input_only"},
         "object_id": {"$ref": "#/$defs/nonempty"},
         "presentation_boundaries": {"$ref": "#/$defs/nonempty"},
+        "proof_ceiling": {"const": "Design input only; no implementation, runtime, rendered-app, accessibility, device, privacy/legal, distribution, or release proof."},
         "requirement_ids": {"$ref": "#/$defs/requirementIds"},
         "title": {"$ref": "#/$defs/nonempty"}
       }
@@ -185,7 +183,7 @@
     "journey": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["accessibility", "blueprint_id", "branches", "cancellation", "commit_boundary", "failure", "happy_path", "interruption_resume", "offline", "preconditions", "recovery", "requirement_ids", "rollback", "tests", "title", "trigger"],
+      "required": ["accessibility", "blueprint_id", "branches", "cancellation", "commit_boundary", "failure", "happy_path", "implementation_status", "interruption_resume", "offline", "preconditions", "proof_ceiling", "recovery", "requirement_ids", "rollback", "tests", "title", "trigger"],
       "properties": {
         "accessibility": {"$ref": "#/$defs/nonempty"},
         "blueprint_id": {"type": "string", "pattern": "^UX-JOURNEY-[A-Z0-9-]+$"},
@@ -194,9 +192,11 @@
         "commit_boundary": {"$ref": "#/$defs/nonempty"},
         "failure": {"$ref": "#/$defs/nonempty"},
         "happy_path": {"$ref": "#/$defs/stringArray"},
+        "implementation_status": {"const": "design_input_only"},
         "interruption_resume": {"$ref": "#/$defs/nonempty"},
         "offline": {"$ref": "#/$defs/nonempty"},
         "preconditions": {"$ref": "#/$defs/stringArray"},
+        "proof_ceiling": {"const": "Design input only; no implementation, runtime, rendered-app, accessibility, device, privacy/legal, distribution, or release proof."},
         "recovery": {"$ref": "#/$defs/nonempty"},
         "requirement_ids": {"$ref": "#/$defs/requirementIds"},
         "rollback": {"$ref": "#/$defs/nonempty"},
@@ -208,32 +208,58 @@
     "crossCutting": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["blueprint_id", "contract", "facet", "requirement_ids", "title", "variants"],
+      "required": ["blueprint_id", "contract", "facet", "implementation_status", "proof_ceiling", "requirement_ids", "title", "variants"],
       "properties": {
         "blueprint_id": {"type": "string", "pattern": "^UX-CROSS-[A-Z0-9-]+$"},
         "contract": {"$ref": "#/$defs/nonempty"},
-        "facet": {"$ref": "#/$defs/nonempty"},
+        "facet": {"enum": ["dynamic-type", "focus-keyboard", "light-dark", "localization-long-copy", "motion-haptics", "non-color-semantics", "reduce-motion", "reduce-transparency", "swiftui-anatomy", "voiceover-reading-order"]},
+        "implementation_status": {"const": "design_input_only"},
+        "proof_ceiling": {"const": "Design input only; no implementation, runtime, rendered-app, accessibility, device, privacy/legal, distribution, or release proof."},
         "requirement_ids": {"$ref": "#/$defs/requirementIds"},
         "title": {"$ref": "#/$defs/nonempty"},
         "variants": {"$ref": "#/$defs/stringArray"}
       }
     },
-    "nonvisualSource": {
+    "stateRecord": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["rationale", "source_path"],
+      "required": ["accessibility_focus", "allowed_commands", "blueprint_id", "displayed_objects", "durable_effect", "implementation_status", "kind", "offline_behavior", "proof_ceiling", "recovery_rollback", "requirement_ids", "transition_exit", "visible_content_copy", "visible_presentation"],
       "properties": {
+        "accessibility_focus": {"$ref": "#/$defs/nonempty"},
+        "allowed_commands": {"$ref": "#/$defs/stringArray"},
+        "blueprint_id": {"type": "string", "pattern": "^UX-STATE-[A-Z0-9-]+-(DEGRADED|EMPTY|FAILURE|INTERRUPTION|LOADING|RECOVERY|RESTING|ROLLBACK|TRANSITIONAL)$"},
+        "displayed_objects": {"$ref": "#/$defs/stringArray"},
+        "durable_effect": {"$ref": "#/$defs/nonempty"},
+        "implementation_status": {"const": "design_input_only"},
+        "kind": {"enum": ["degraded", "empty", "failure", "interruption", "loading", "recovery", "resting", "rollback", "transitional"]},
+        "offline_behavior": {"$ref": "#/$defs/nonempty"},
+        "proof_ceiling": {"const": "Design input only; no implementation, runtime, rendered-app, accessibility, device, privacy/legal, distribution, or release proof."},
+        "recovery_rollback": {"$ref": "#/$defs/nonempty"},
+        "requirement_ids": {"$ref": "#/$defs/requirementIds"},
+        "transition_exit": {"$ref": "#/$defs/nonempty"},
+        "visible_content_copy": {"$ref": "#/$defs/nonempty"},
+        "visible_presentation": {"$ref": "#/$defs/nonempty"}
+      }
+    },
+    "requirementDisposition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["blueprint_ids", "disposition", "rationale", "requirement_id", "source_path"],
+      "properties": {
+        "blueprint_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^UX-[A-Z0-9-]+$"}},
+        "disposition": {"enum": ["nonvisual_with_rationale", "visual_mapping_required"]},
         "rationale": {"$ref": "#/$defs/nonempty"},
+        "requirement_id": {"type": "string", "pattern": "^[A-Z][A-Z0-9-]*-[0-9]{3}$"},
         "source_path": {"$ref": "#/$defs/nonempty"}
       }
     },
-    "visualSourceRoute": {
+    "sourceDocument": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["blueprint_ids", "source_prefix"],
+      "required": ["path", "sha256"],
       "properties": {
-        "blueprint_ids": {"$ref": "#/$defs/stringArray"},
-        "source_prefix": {"$ref": "#/$defs/nonempty"}
+        "path": {"$ref": "#/$defs/nonempty"},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
       }
     }
   }

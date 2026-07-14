@@ -800,7 +800,7 @@ def _external_authority(root: Path, *, kind: str) -> int:
 
 
 def _ux_blueprint(root: Path, *, write: bool) -> int:
-    from docs.canon.migration.ux_blueprint_tool import (
+    from tools.ambitions_canon.ux_blueprint import (
         UXBlueprintError,
         check_ux_blueprint,
         load_ux_blueprint,
@@ -825,7 +825,8 @@ def _ux_blueprint(root: Path, *, write: bool) -> int:
         return 1
     print(
         "GREEN ambitions canon ux-blueprint "
-        f"screens={summary.screen_count} states={summary.state_model_count} "
+        f"screens={summary.screen_count} state_models={summary.state_model_count} "
+        f"state_records={summary.state_record_count} "
         f"objects={summary.object_boundary_count} journeys={summary.journey_count} "
         f"requirements={summary.disposition_count} "
         f"visual={summary.visual_mapping_count} nonvisual={summary.nonvisual_count} "

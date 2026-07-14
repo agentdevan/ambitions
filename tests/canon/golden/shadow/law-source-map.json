@@ -8076,6 +8076,16 @@
     },
     {
       "affected_ids": [
+        "tools/ambitions_canon/ux_blueprint.py"
+      ],
+      "code": "CANON_TRACE_CODE_TO_CANON",
+      "gap_class": "code_to_canon",
+      "message": "gap_class=code_to_canon affected_ids=tools/ambitions_canon/ux_blueprint.py unowned implementation file",
+      "path": "tools/ambitions_canon/ux_blueprint.py",
+      "severity": "P0_BLOCKER"
+    },
+    {
+      "affected_ids": [
         "tools/mcp/ambitions_native_mcp/Package.swift"
       ],
       "code": "CANON_TRACE_CODE_TO_CANON",
@@ -37800,5 +37810,5 @@
       "status": "source_files_present"
     }
   ],
-  "traceability_input_sha": "fbd4b01f57288edb03d999898f1f0e48ffdcc1b0dd68bab08c5669de8ba9c904"
+  "traceability_input_sha": "fedca269f0dcf98d7ede817791a9e579a208f68bb885d83a52606b3fb9b3ac6f"
 }
