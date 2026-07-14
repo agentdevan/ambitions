@@ -157,6 +157,95 @@ class SemanticReceiptTest(unittest.TestCase):
             with self.subTest(label=label):
                 self.assert_error(payload, "SEMANTIC_RECEIPT_STALE")
 
+    def test_evaluated_ancestor_accepts_only_closed_proof_only_changes(self):
+        module = self.receipt_module()
+        receipt = self.payload()
+        regenerated = {
+            field: receipt[field]
+            for field in (
+                "compiler_version",
+                "canon_sha256",
+                "old_prompt_sha256",
+                "new_prompt_sha256",
+                "pack_hashes",
+            )
+        }
+        changed = "\n".join(
+            (
+                ".superpowers/sdd/visual-command-contract-amendment-report.md",
+                "docs/qa/evidence/2026-07-13-train-4-semantic-comparison/receipt.json",
+                "tests/canon/test_semantic_receipt.py",
+            )
+        ) + "\n"
+
+        with (
+            mock.patch.object(module, "_semantic_receipt_require_ancestor"),
+            mock.patch.object(module, "_semantic_receipt_require_evaluated_pack_bytes"),
+            mock.patch.object(
+                module, "regenerate_semantic_receipt_bindings", return_value=regenerated
+            ),
+            mock.patch.object(
+                module,
+                "_semantic_receipt_git",
+                return_value=subprocess.CompletedProcess((), 0, stdout=changed),
+            ) as git,
+        ):
+            module.validate_semantic_receipt(ROOT, receipt)
+
+        git.assert_called_once_with(
+            ROOT,
+            "diff",
+            "--name-only",
+            "--diff-filter=ACMRTUXB",
+            f"{receipt['evaluated_task_pack_commit']}..HEAD",
+            "--",
+        )
+
+    def test_evaluated_ancestor_rejects_any_non_proof_change(self):
+        module = self.receipt_module()
+        receipt = self.payload()
+        for relative in (
+            "docs/canon/specifications/surfaces/today.md",
+            "tools/ambitions_canon/task_pack.py",
+        ):
+            with self.subTest(path=relative):
+                with (
+                    mock.patch.object(module, "_semantic_receipt_require_ancestor"),
+                    mock.patch.object(
+                        module,
+                        "_semantic_receipt_git",
+                        return_value=subprocess.CompletedProcess(
+                            (), 0, stdout=f"{relative}\n"
+                        ),
+                    ),
+                ):
+                    self.assert_error(receipt, "SEMANTIC_RECEIPT_STALE")
+
+    def test_non_ancestor_and_evaluated_pack_byte_mutation_remain_stale(self):
+        module = self.receipt_module()
+        receipt_path = ROOT / module.SEMANTIC_RECEIPT_PATH
+        with mock.patch.object(
+            module.subprocess,
+            "run",
+            return_value=subprocess.CompletedProcess((), 1, stdout="", stderr=""),
+        ):
+            with self.assertRaises(CanonError) as raised:
+                module._semantic_receipt_require_ancestor(
+                    ROOT, "0" * 40, receipt_path
+                )
+        self.assertEqual(raised.exception.code, "SEMANTIC_RECEIPT_STALE")
+
+        with mock.patch.object(
+            module.subprocess,
+            "run",
+            return_value=subprocess.CompletedProcess((), 0, stdout=b"changed"),
+        ):
+            with self.assertRaises(CanonError) as raised:
+                module._semantic_receipt_require_evaluated_pack_bytes(
+                    ROOT, receipt_path.name * 2, receipt_path
+                )
+        self.assertEqual(raised.exception.code, "SEMANTIC_RECEIPT_STALE")
+
     def test_closed_schema_attribution_scores_verdicts_and_policy_fail_closed(self):
         base = self.payload()
         malformed = []
