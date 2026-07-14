@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_sha256": "ada2dc2f7ad344c6d31ab891410337989d768eb6f8640cf15e4269442335bcf9",
+  "canon_sha256": "4cd9043c5de339faecb7c6de9640a44e95d63f4c726c8351d37da1e504d548e0",
   "claim_ceiling": "This receipt records an explicit non-CI shadow comparison only. It does not authorize implementation or claim product, runtime, source, visual, accessibility, privacy, device, TestFlight, App Store, or release Green.",
   "comparison": {
     "dimensions": [
@@ -13,14 +13,14 @@
       {
         "dimension": "relevant_law_recall",
         "new_score": 4,
-        "old_score": 4,
-        "verdict": "equivalent"
+        "old_score": 3,
+        "verdict": "new_better"
       },
       {
         "dimension": "contradiction_control",
         "new_score": 4,
-        "old_score": 3,
-        "verdict": "new_better"
+        "old_score": 4,
+        "verdict": "equivalent"
       },
       {
         "dimension": "unauthorized_assumptions",
@@ -31,14 +31,14 @@
       {
         "dimension": "source_ownership",
         "new_score": 4,
-        "old_score": 4,
-        "verdict": "equivalent"
+        "old_score": 3,
+        "verdict": "new_better"
       },
       {
         "dimension": "validation_completeness",
         "new_score": 4,
-        "old_score": 4,
-        "verdict": "equivalent"
+        "old_score": 3,
+        "verdict": "new_better"
       },
       {
         "dimension": "proof_discipline",
@@ -47,67 +47,67 @@
         "verdict": "equivalent"
       }
     ],
-    "model": "gpt-5.6-sol-high",
+    "model": "gpt-5.6-sol-max",
     "new_total_score": 28,
-    "old_total_score": 27,
+    "old_total_score": 25,
     "overall_verdict": "new_better",
-    "reviewer": "Train 4 Independent Semantic Comparator",
-    "sha256": "34692f3b932e74f919dd59f743cc1d75f6cfc9bf58a8566aaf48574e8f4d0d42"
+    "reviewer": "Visual Authority Phase 1 Independent Semantic Comparator",
+    "sha256": "dfff9043e0ae6145919a4a54061825b85ff4b58ab08042e435f2d78aec655c7c"
   },
   "compiler_version": "0.2.0",
-  "evaluated_task_pack_commit": "b39955c34001ed7e15c9adf6654c7a1773336bbb",
+  "evaluated_task_pack_commit": "b77a24dc25cc6e612882d670baea15babf1f33d3",
   "lane": "explicit_non_ci_semantic_review",
-  "new_prompt_sha256": "8223ea864053276c88110dc2bb80fbf91599d8c29cf2193a81284375f796cd51",
+  "new_prompt_sha256": "d36f363d49eb793f57f6163f8320e2ab46879e7fa505df45cdb19d87b83e0c96",
   "new_response": {
     "model": "gpt-5.6-sol-high",
-    "reviewer": "Train 4 New Pack Evaluator",
-    "sha256": "2d1350dcc994990d9f66e1cdac260c32e268fab7e0cd25932894a662036869fb"
+    "reviewer": "Visual Authority New Pack Evaluator",
+    "sha256": "7098984bf8979a39958086143028590e4aefe9e88a85841a7b44f78335201670"
   },
   "old_prompt_sha256": "338c2088cc6a74dc06a3fc087bc6848280b117b7638aefdb377b9649face56cb",
   "old_response": {
     "model": "gpt-5.6-sol-high",
-    "reviewer": "Train 4 Old Path Evaluator",
-    "sha256": "5cb6f64a37bb06da816b781f392296a74a670e1c1cadf2ac2c6d9ed27ccbc82d"
+    "reviewer": "Visual Authority Old Path Evaluator",
+    "sha256": "fdb5cf03e887ed5c7e13c2eb72ad987e5c2b41f140ce98eb352f52b98185dac8"
   },
   "pack_hashes": [
     {
-      "json_sha256": "2c5bceb4313c4df4504e721c61ee23eefdfc98ffe28538b070cb69950e8995ef",
-      "markdown_sha256": "6e790b41c113dbfb24f101a4406d66b1b77f90f36598b403d4850bd8b0d90b28",
+      "json_sha256": "2542f78f8005c8120e252663fc69930ecc6ac79db4ed58b51b3b13ba0a4c6065",
+      "markdown_sha256": "ce17ed297b956e72bccc6e55fcf9b0124a96aa7cdc898d10cb27c9fb7027ebf1",
       "scenario_id": "today-swiftui"
     },
     {
-      "json_sha256": "6b9f38a90fe3749f1c3c3672d1742f2477973bbd4a12768f323b3b6553114197",
-      "markdown_sha256": "33421fd67e1251886d492fb07255512fabe7c8f7143d1b05b72586e4cf08563c",
+      "json_sha256": "c3274e4eb7be578745a772e8dc85978c88a3bf4b137ae6666864a3f9d3790fc6",
+      "markdown_sha256": "ccf7a722cf0c17d03cf26ba5ea41d1fdc5c72c7c93fa1944397088b5e81972c3",
       "scenario_id": "time-recurrence"
     },
     {
-      "json_sha256": "14e24e9ff3ddbca946f8eaacc3ba3fcf62f10ad8596cf66371d25c3e9be05808",
-      "markdown_sha256": "f32c4d005857779ac6a8a81cd4753d3d295dfdaffc54f4a86f239c4729a3304e",
+      "json_sha256": "6164afd486e1ea2e4cc099bfca64630202d294836d89a839a646ba18546abf4a",
+      "markdown_sha256": "bb872760f5e4b145fdf38f5616b0967d35ec75b7b68b43d0194126614cf553f1",
       "scenario_id": "capture-proposal"
     },
     {
-      "json_sha256": "780ad9a83761329535314a2047fc0fae9ed37258ba75809dfa6f5671ef788ef8",
-      "markdown_sha256": "4630301fd4e3ccd8e02595324da29576afa10d58d4e45e0b55c961ebbe5d60fb",
+      "json_sha256": "747464580abfb29e4005dcc5e9bc45128dace2686bc6bc044f489d78e5410d4d",
+      "markdown_sha256": "95f8c521b820f2c9ed3e897043406150c8dd227d6b068ad7e3439ff80f304cc3",
       "scenario_id": "local-runtime-mutation"
     },
     {
-      "json_sha256": "3b5c4c1fce0707c3c50d4f66d6b88629da70960758d7a9890601fc9e1b261746",
-      "markdown_sha256": "a6aafb932f6d4e533267a7bc53da608d02f6f6a945bf97e0ddf28549754aa167",
+      "json_sha256": "66dc7f3bf65d89e831ec763df27a6742c5c2c162e513b323f31cb46018198eac",
+      "markdown_sha256": "e9b5fa99464f15758afa7a7f9d7853a82cc633e31446fc5090fca98174383a28",
       "scenario_id": "cloudkit-continuity"
     },
     {
-      "json_sha256": "4552692dc37a75426018827d787eedc7d77ef5dc584b1a603b4b54178bfb2088",
-      "markdown_sha256": "5402756cd7ea001bfaea13f04de416573161b55571eb8c2950cf1690b5516c88",
+      "json_sha256": "fceaa532d81ada7549eabb675e1c6a5ae3df18e7a9e73f37124d766f26720207",
+      "markdown_sha256": "3690ece6f25fef4d96448ebe53b95b49c801a14fba6e7f2db05392550af9e2c1",
       "scenario_id": "source-atlas-boundary"
     },
     {
-      "json_sha256": "1f1e7b16609c584656a0192f143a7d9b1da85d500065f98ea690e8f591881977",
-      "markdown_sha256": "6582f81661cc1d7709df87bf8cafa2ed3a001e4a8dc1a7012eb33e2b9b785eba",
+      "json_sha256": "03564ba1fc97f7e2170b021f03c6d0e3140a4bcf6c665bc5df534c7857433904",
+      "markdown_sha256": "0ddb111bbc5f163c2a31d403e83c1fa3cb4f54fef71687f8ff1c49cd04b14ed0",
       "scenario_id": "accessibility-repair"
     },
     {
-      "json_sha256": "78ddb17645af978f6cf2764a45ec64873e4285b3f31385aba063f6e0bb182ab0",
-      "markdown_sha256": "710ff30388fb68cdc6048e0e5a3d7a8803620686c6f5c3716cd9083f5fae94aa",
+      "json_sha256": "6ff6052b6ef0e936bb8bb8f15c120bc975ff754bf4004c796c3410294c087feb",
+      "markdown_sha256": "fa9c82c81f6c353e33b70cede766f5318a5e678633634109506ec66a2ec50ff9",
       "scenario_id": "release-proof-claim"
     }
   ],

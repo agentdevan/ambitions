@@ -204,6 +204,21 @@ def main(argv: Sequence[str] | None = None) -> int:
         required=True,
         help="validate tracked references without writing or using the network",
     )
+    ux_blueprint_parser = subparsers.add_parser(
+        "ux-blueprint",
+        help="validate or render the non-authoritative visual-rebaseline UX blueprint",
+    )
+    ux_blueprint_mode = ux_blueprint_parser.add_mutually_exclusive_group(required=True)
+    ux_blueprint_mode.add_argument(
+        "--check",
+        action="store_true",
+        help="validate source, requirement dispositions, and checked-in projection",
+    )
+    ux_blueprint_mode.add_argument(
+        "--write",
+        action="store_true",
+        help="atomically render the deterministic checked-in projection",
+    )
     coverage_parser = subparsers.add_parser(
         "coverage", help="check specification completeness profiles"
     )
@@ -386,6 +401,9 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     if arguments.command == "external-authority":
         return _external_authority(Path.cwd(), kind=arguments.kind)
+
+    if arguments.command == "ux-blueprint":
+        return _ux_blueprint(Path.cwd(), write=arguments.write)
 
     if arguments.command == "coverage":
         return _coverage(
@@ -777,6 +795,43 @@ def _external_authority(root: Path, *, kind: str) -> int:
         "reconciliation_entities="
         f"{reconciliation_count} "
         f"authority_state={manifest.authority_state.value}"
+    )
+    return 0
+
+
+def _ux_blueprint(root: Path, *, write: bool) -> int:
+    from tools.ambitions_canon.ux_blueprint import (
+        UXBlueprintError,
+        check_ux_blueprint,
+        load_ux_blueprint,
+        validate_ux_blueprint,
+        write_ux_blueprint_projection,
+    )
+
+    try:
+        if write:
+            summary = write_ux_blueprint_projection(root)
+        else:
+            blueprint = load_ux_blueprint(root)
+            summary = validate_ux_blueprint(root, blueprint)
+            if check_ux_blueprint(root) != 0:
+                print(
+                    "P0_BLOCKER CANON_UX_BLUEPRINT_DRIFT "
+                    "docs/canon/migration/UX_BLUEPRINT.md:0 projection is stale"
+                )
+                return 1
+    except (UXBlueprintError, OSError) as error:
+        print(f"P0_BLOCKER CANON_UX_BLUEPRINT_INVALID <ux-blueprint>:0 {error}")
+        return 1
+    print(
+        "GREEN ambitions canon ux-blueprint "
+        f"screens={summary.screen_count} state_models={summary.state_model_count} "
+        f"state_taxonomy={summary.state_taxonomy_count} "
+        f"state_variants={summary.state_variant_count} "
+        f"objects={summary.object_boundary_count} journeys={summary.journey_count} "
+        f"requirements={summary.disposition_count} "
+        f"visual={summary.visual_mapping_count} nonvisual={summary.nonvisual_count} "
+        f"authority_state=shadow mode={'write' if write else 'check'}"
     )
     return 0
 

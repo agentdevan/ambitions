@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "85094c7a431d4331f4168740725a1e6b8647115ec1fd9f21a4d80131f3c0dabf",
+  "canon_content_sha": "866de78044cb3b5f0b4afa349a5c3170a111870fb107579fdbdd6c4243a735df",
   "canon_revision": 1,
   "compiler_version": "0.2.0",
   "finding_inventory": [
@@ -7856,226 +7856,6 @@
     },
     {
       "affected_ids": [
-        "tools/ambitions_canon/__init__.py"
-      ],
-      "code": "CANON_TRACE_CODE_TO_CANON",
-      "gap_class": "code_to_canon",
-      "message": "gap_class=code_to_canon affected_ids=tools/ambitions_canon/__init__.py unowned implementation file",
-      "path": "tools/ambitions_canon/__init__.py",
-      "severity": "P0_BLOCKER"
-    },
-    {
-      "affected_ids": [
-        "tools/ambitions_canon/audit.py"
-      ],
-      "code": "CANON_TRACE_CODE_TO_CANON",
-      "gap_class": "code_to_canon",
-      "message": "gap_class=code_to_canon affected_ids=tools/ambitions_canon/audit.py unowned implementation file",
-      "path": "tools/ambitions_canon/audit.py",
-      "severity": "P0_BLOCKER"
-    },
-    {
-      "affected_ids": [
-        "tools/ambitions_canon/benchmark.py"
-      ],
-      "code": "CANON_TRACE_CODE_TO_CANON",
-      "gap_class": "code_to_canon",
-      "message": "gap_class=code_to_canon affected_ids=tools/ambitions_canon/benchmark.py unowned implementation file",
-      "path": "tools/ambitions_canon/benchmark.py",
-      "severity": "P0_BLOCKER"
-    },
-    {
-      "affected_ids": [
-        "tools/ambitions_canon/build.py"
-      ],
-      "code": "CANON_TRACE_CODE_TO_CANON",
-      "gap_class": "code_to_canon",
-      "message": "gap_class=code_to_canon affected_ids=tools/ambitions_canon/build.py unowned implementation file",
-      "path": "tools/ambitions_canon/build.py",
-      "severity": "P0_BLOCKER"
-    },
-    {
-      "affected_ids": [
-        "tools/ambitions_canon/cli.py"
-      ],
-      "code": "CANON_TRACE_CODE_TO_CANON",
-      "gap_class": "code_to_canon",
-      "message": "gap_class=code_to_canon affected_ids=tools/ambitions_canon/cli.py unowned implementation file",
-      "path": "tools/ambitions_canon/cli.py",
-      "severity": "P0_BLOCKER"
-    },
-    {
-      "affected_ids": [
-        "tools/ambitions_canon/conflicts.py"
-      ],
-      "code": "CANON_TRACE_CODE_TO_CANON",
-      "gap_class": "code_to_canon",
-      "message": "gap_class=code_to_canon affected_ids=tools/ambitions_canon/conflicts.py unowned implementation file",
-      "path": "tools/ambitions_canon/conflicts.py",
-      "severity": "P0_BLOCKER"
-    },
-    {
-      "affected_ids": [
-        "tools/ambitions_canon/coverage.py"
-      ],
-      "code": "CANON_TRACE_CODE_TO_CANON",
-      "gap_class": "code_to_canon",
-      "message": "gap_class=code_to_canon affected_ids=tools/ambitions_canon/coverage.py unowned implementation file",
-      "path": "tools/ambitions_canon/coverage.py",
-      "severity": "P0_BLOCKER"
-    },
-    {
-      "affected_ids": [
-        "tools/ambitions_canon/external_authority.py"
-      ],
-      "code": "CANON_TRACE_CODE_TO_CANON",
-      "gap_class": "code_to_canon",
-      "message": "gap_class=code_to_canon affected_ids=tools/ambitions_canon/external_authority.py unowned implementation file",
-      "path": "tools/ambitions_canon/external_authority.py",
-      "severity": "P0_BLOCKER"
-    },
-    {
-      "affected_ids": [
-        "tools/ambitions_canon/graph.py"
-      ],
-      "code": "CANON_TRACE_CODE_TO_CANON",
-      "gap_class": "code_to_canon",
-      "message": "gap_class=code_to_canon affected_ids=tools/ambitions_canon/graph.py unowned implementation file",
-      "path": "tools/ambitions_canon/graph.py",
-      "severity": "P0_BLOCKER"
-    },
-    {
-      "affected_ids": [
-        "tools/ambitions_canon/identifiers.py"
-      ],
-      "code": "CANON_TRACE_CODE_TO_CANON",
-      "gap_class": "code_to_canon",
-      "message": "gap_class=code_to_canon affected_ids=tools/ambitions_canon/identifiers.py unowned implementation file",
-      "path": "tools/ambitions_canon/identifiers.py",
-      "severity": "P0_BLOCKER"
-    },
-    {
-      "affected_ids": [
-        "tools/ambitions_canon/impact.py"
-      ],
-      "code": "CANON_TRACE_CODE_TO_CANON",
-      "gap_class": "code_to_canon",
-      "message": "gap_class=code_to_canon affected_ids=tools/ambitions_canon/impact.py unowned implementation file",
-      "path": "tools/ambitions_canon/impact.py",
-      "severity": "P0_BLOCKER"
-    },
-    {
-      "affected_ids": [
-        "tools/ambitions_canon/manifest.py"
-      ],
-      "code": "CANON_TRACE_CODE_TO_CANON",
-      "gap_class": "code_to_canon",
-      "message": "gap_class=code_to_canon affected_ids=tools/ambitions_canon/manifest.py unowned implementation file",
-      "path": "tools/ambitions_canon/manifest.py",
-      "severity": "P0_BLOCKER"
-    },
-    {
-      "affected_ids": [
-        "tools/ambitions_canon/migration.py"
-      ],
-      "code": "CANON_TRACE_CODE_TO_CANON",
-      "gap_class": "code_to_canon",
-      "message": "gap_class=code_to_canon affected_ids=tools/ambitions_canon/migration.py unowned implementation file",
-      "path": "tools/ambitions_canon/migration.py",
-      "severity": "P0_BLOCKER"
-    },
-    {
-      "affected_ids": [
-        "tools/ambitions_canon/model.py"
-      ],
-      "code": "CANON_TRACE_CODE_TO_CANON",
-      "gap_class": "code_to_canon",
-      "message": "gap_class=code_to_canon affected_ids=tools/ambitions_canon/model.py unowned implementation file",
-      "path": "tools/ambitions_canon/model.py",
-      "severity": "P0_BLOCKER"
-    },
-    {
-      "affected_ids": [
-        "tools/ambitions_canon/parser.py"
-      ],
-      "code": "CANON_TRACE_CODE_TO_CANON",
-      "gap_class": "code_to_canon",
-      "message": "gap_class=code_to_canon affected_ids=tools/ambitions_canon/parser.py unowned implementation file",
-      "path": "tools/ambitions_canon/parser.py",
-      "severity": "P0_BLOCKER"
-    },
-    {
-      "affected_ids": [
-        "tools/ambitions_canon/query.py"
-      ],
-      "code": "CANON_TRACE_CODE_TO_CANON",
-      "gap_class": "code_to_canon",
-      "message": "gap_class=code_to_canon affected_ids=tools/ambitions_canon/query.py unowned implementation file",
-      "path": "tools/ambitions_canon/query.py",
-      "severity": "P0_BLOCKER"
-    },
-    {
-      "affected_ids": [
-        "tools/ambitions_canon/reference_index.py"
-      ],
-      "code": "CANON_TRACE_CODE_TO_CANON",
-      "gap_class": "code_to_canon",
-      "message": "gap_class=code_to_canon affected_ids=tools/ambitions_canon/reference_index.py unowned implementation file",
-      "path": "tools/ambitions_canon/reference_index.py",
-      "severity": "P0_BLOCKER"
-    },
-    {
-      "affected_ids": [
-        "tools/ambitions_canon/registry.py"
-      ],
-      "code": "CANON_TRACE_CODE_TO_CANON",
-      "gap_class": "code_to_canon",
-      "message": "gap_class=code_to_canon affected_ids=tools/ambitions_canon/registry.py unowned implementation file",
-      "path": "tools/ambitions_canon/registry.py",
-      "severity": "P0_BLOCKER"
-    },
-    {
-      "affected_ids": [
-        "tools/ambitions_canon/render.py"
-      ],
-      "code": "CANON_TRACE_CODE_TO_CANON",
-      "gap_class": "code_to_canon",
-      "message": "gap_class=code_to_canon affected_ids=tools/ambitions_canon/render.py unowned implementation file",
-      "path": "tools/ambitions_canon/render.py",
-      "severity": "P0_BLOCKER"
-    },
-    {
-      "affected_ids": [
-        "tools/ambitions_canon/supersession.py"
-      ],
-      "code": "CANON_TRACE_CODE_TO_CANON",
-      "gap_class": "code_to_canon",
-      "message": "gap_class=code_to_canon affected_ids=tools/ambitions_canon/supersession.py unowned implementation file",
-      "path": "tools/ambitions_canon/supersession.py",
-      "severity": "P0_BLOCKER"
-    },
-    {
-      "affected_ids": [
-        "tools/ambitions_canon/task_pack.py"
-      ],
-      "code": "CANON_TRACE_CODE_TO_CANON",
-      "gap_class": "code_to_canon",
-      "message": "gap_class=code_to_canon affected_ids=tools/ambitions_canon/task_pack.py unowned implementation file",
-      "path": "tools/ambitions_canon/task_pack.py",
-      "severity": "P0_BLOCKER"
-    },
-    {
-      "affected_ids": [
-        "tools/ambitions_canon/traceability.py"
-      ],
-      "code": "CANON_TRACE_CODE_TO_CANON",
-      "gap_class": "code_to_canon",
-      "message": "gap_class=code_to_canon affected_ids=tools/ambitions_canon/traceability.py unowned implementation file",
-      "path": "tools/ambitions_canon/traceability.py",
-      "severity": "P0_BLOCKER"
-    },
-    {
-      "affected_ids": [
         "tools/mcp/ambitions_native_mcp/Package.swift"
       ],
       "code": "CANON_TRACE_CODE_TO_CANON",
@@ -12889,18 +12669,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "CODEX-DEPT-001",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -12934,18 +12724,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "CODEX-DEPT-002",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -12979,18 +12779,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "CODEX-DEPT-003",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -13024,18 +12834,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "CODEX-DEPT-004",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -13069,18 +12889,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "CODEX-ISSUE-READINESS-001",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -13114,18 +12944,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "CODEX-PREFLIGHT-001",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -14486,18 +14326,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "ENFORCEMENT-001",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -14531,18 +14381,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "ENFORCEMENT-002",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -14576,18 +14436,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "ENFORCEMENT-003",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -14621,18 +14491,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "ENFORCEMENT-004",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -14666,18 +14546,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "ENFORCEMENT-ARCHITECTURE-OWNERSHIP-001",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -14711,18 +14601,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "ENFORCEMENT-VALIDATION-STATE-001",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -14936,18 +14836,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "EVOLUTION-001",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -14981,18 +14891,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "EVOLUTION-002",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -15026,18 +14946,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "EVOLUTION-003",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -15071,18 +15001,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "EVOLUTION-004",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -15116,18 +15056,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "EVOLUTION-HORIZON-001",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -23036,18 +22986,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "RELEASE-001",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -23081,18 +23041,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "RELEASE-002",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -23126,18 +23096,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "RELEASE-003",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -23171,18 +23151,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "RELEASE-004",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -29714,18 +29704,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "STANDARD-ACCEPTANCE-BUILD-001",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -29759,18 +29759,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "STANDARD-ACCEPTANCE-DOCS-001",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -29804,18 +29814,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "STANDARD-ACCEPTANCE-IA-001",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -29849,18 +29869,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "STANDARD-ACCEPTANCE-INTERACTION-001",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -29894,18 +29924,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "STANDARD-ACCEPTANCE-OBJECTS-001",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -29939,18 +29979,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "STANDARD-ACCEPTANCE-PROOF-001",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -29984,18 +30034,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "STANDARD-ACCEPTANCE-REPLACEMENT-001",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -30029,18 +30089,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "STANDARD-ACCEPTANCE-SCENARIOS-001",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -30074,18 +30144,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "STANDARD-ACCEPTANCE-SOURCE-001",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -30119,18 +30199,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "STANDARD-ACCEPTANCE-STATUS-001",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -30164,18 +30254,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "STANDARD-ACCEPTANCE-VIEWPORTS-001",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -30209,18 +30309,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "STANDARD-ACCEPTANCE-VISUAL-001",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -30254,18 +30364,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "STANDARD-ACCEPTANCE-VISUAL-COPY-001",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -30299,18 +30419,28 @@
           "owner_path": "scripts/",
           "source_inventory_ref": "scripts/",
           "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "tools/ambitions_canon/",
+          "source_inventory_ref": "tools/ambitions_canon/",
+          "status": "source_files_present"
         }
       ],
       "references": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ],
       "requirement_id": "STANDARD-SCREENSHOT-MATRIX-001",
       "source_owners": [
         "Native/Ambitions/Quality/",
         "docs/canon/",
-        "scripts/"
+        "scripts/",
+        "tools/ambitions_canon/"
       ]
     },
     {
@@ -37798,7 +37928,39 @@
       ],
       "owner_path": "scripts/",
       "status": "source_files_present"
+    },
+    {
+      "exists": true,
+      "gaps": [],
+      "implementation_file_count": 23,
+      "implementation_files": [
+        "tools/ambitions_canon/__init__.py",
+        "tools/ambitions_canon/audit.py",
+        "tools/ambitions_canon/benchmark.py",
+        "tools/ambitions_canon/build.py",
+        "tools/ambitions_canon/cli.py",
+        "tools/ambitions_canon/conflicts.py",
+        "tools/ambitions_canon/coverage.py",
+        "tools/ambitions_canon/external_authority.py",
+        "tools/ambitions_canon/graph.py",
+        "tools/ambitions_canon/identifiers.py",
+        "tools/ambitions_canon/impact.py",
+        "tools/ambitions_canon/manifest.py",
+        "tools/ambitions_canon/migration.py",
+        "tools/ambitions_canon/model.py",
+        "tools/ambitions_canon/parser.py",
+        "tools/ambitions_canon/query.py",
+        "tools/ambitions_canon/reference_index.py",
+        "tools/ambitions_canon/registry.py",
+        "tools/ambitions_canon/render.py",
+        "tools/ambitions_canon/supersession.py",
+        "tools/ambitions_canon/task_pack.py",
+        "tools/ambitions_canon/traceability.py",
+        "tools/ambitions_canon/ux_blueprint.py"
+      ],
+      "owner_path": "tools/ambitions_canon/",
+      "status": "source_files_present"
     }
   ],
-  "traceability_input_sha": "fbd4b01f57288edb03d999898f1f0e48ffdcc1b0dd68bab08c5669de8ba9c904"
+  "traceability_input_sha": "21e77c04d7da895bbeef9a46721a189a41bca828deda2160578f7a8d40209594"
 }

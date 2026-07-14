@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "85094c7a431d4331f4168740725a1e6b8647115ec1fd9f21a4d80131f3c0dabf",
+  "canon_content_sha": "866de78044cb3b5f0b4afa349a5c3170a111870fb107579fdbdd6c4243a735df",
   "canon_revision": 1,
   "compiler_version": "0.2.0",
   "schema_version": 1,
@@ -419,5 +419,5 @@
       ]
     }
   ],
-  "traceability_input_sha": "fbd4b01f57288edb03d999898f1f0e48ffdcc1b0dd68bab08c5669de8ba9c904"
+  "traceability_input_sha": "21e77c04d7da895bbeef9a46721a189a41bca828deda2160578f7a8d40209594"
 }
