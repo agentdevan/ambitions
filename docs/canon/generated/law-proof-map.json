@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "866de78044cb3b5f0b4afa349a5c3170a111870fb107579fdbdd6c4243a735df",
+  "canon_content_sha": "d46b2bfa6a73b74498ab6a80f0f4a2d9366ab325ad0ab0e43940c7a37b90857e",
   "canon_revision": 1,
   "compiler_version": "0.2.0",
   "mappings": [
@@ -2183,6 +2183,14 @@
       "requirement_id": "SPEC-APP-NAVIGATION-ROOT-INTERACTION-001"
     },
     {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "SPEC-APP-SHELL-COMMAND-CONTRACT-001"
+    },
+    {
       "current_claim_posture": "required_but_unverified",
       "gap_note": "missing mapping is a gap and does not prove absent implementation",
       "mapping_status": "gap",
@@ -2239,6 +2247,14 @@
       "references": [],
       "required_verification_ids": [],
       "requirement_id": "SPEC-GLOBAL-CAPTURE-CLOSE-BEHAVIOR-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "SPEC-GLOBAL-CAPTURE-COMMAND-CONTRACT-001"
     },
     {
       "current_claim_posture": "no_current_evidence",
@@ -2409,6 +2425,14 @@
       "mapping_status": "gap",
       "references": [],
       "required_verification_ids": [],
+      "requirement_id": "SPEC-GLOBAL-TRUST-COMMAND-CONTRACT-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
       "requirement_id": "SPEC-GLOBAL-TRUST-INSPECTION-001"
     },
     {
@@ -2471,6 +2495,14 @@
       "references": [],
       "required_verification_ids": [],
       "requirement_id": "SPEC-SURFACE-GOALS-CLOSURE-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
     },
     {
       "current_claim_posture": "no_current_evidence",
@@ -2592,6 +2624,14 @@
       "requirement_id": "SPEC-SURFACE-TIME-DAY-001"
     },
     {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "SPEC-SURFACE-TIME-DEGRADED-COMMAND-CONTRACT-001"
+    },
+    {
       "current_claim_posture": "required_but_unverified",
       "gap_note": "missing mapping is a gap and does not prove absent implementation",
       "mapping_status": "gap",
@@ -2681,6 +2721,14 @@
       "mapping_status": "gap",
       "references": [],
       "required_verification_ids": [],
+      "requirement_id": "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
       "requirement_id": "SPEC-SURFACE-TIME-VIEW-SWITCHING-001"
     },
     {
@@ -2733,6 +2781,14 @@
       "references": [],
       "required_verification_ids": [],
       "requirement_id": "SPEC-SURFACE-TIME-YEAR-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "SPEC-SURFACE-TODAY-COMMAND-CONTRACT-001"
     },
     {
       "current_claim_posture": "no_current_evidence",
@@ -2826,6 +2882,14 @@
       "references": [],
       "required_verification_ids": [],
       "requirement_id": "SPEC-SURFACE-YOU-APPEARANCE-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
     },
     {
       "current_claim_posture": "no_current_evidence",
@@ -3680,5 +3744,5 @@
     }
   ],
   "schema_version": 2,
-  "traceability_input_sha": "21e77c04d7da895bbeef9a46721a189a41bca828deda2160578f7a8d40209594"
+  "traceability_input_sha": "d0a7d36c7f18fe2a5d8108ddf50092f32b4dbfdc48376aa2f6209d395836f20b"
 }

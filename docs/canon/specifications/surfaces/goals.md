@@ -6,14 +6,22 @@ status = "normative"
 owner_domain = "surface-goals"
 canon_revision = 1
 profile = "surface-v1"
-owns_concepts = ["surface.goals.anti-patterns", "surface.goals.execution-stack", "surface.goals.first-viewport", "surface.goals.identity", "surface.goals.purpose", "surface.goals.screen-inventory", "surface.goals.visual-authority",
-  "surface.goals.path-visual",
+owns_concepts = [
+  "surface.goal-detail.viewport",
+  "surface.goals.anti-patterns",
   "surface.goals.closure",
+  "surface.goals.command-contract",
   "surface.goals.detail",
+  "surface.goals.execution-stack",
+  "surface.goals.first-viewport",
+  "surface.goals.identity",
   "surface.goals.path-interaction",
+  "surface.goals.path-visual",
+  "surface.goals.purpose",
   "surface.goals.reviews",
   "surface.goals.root-viewport",
-  "surface.goal-detail.viewport",
+  "surface.goals.screen-inventory",
+  "surface.goals.visual-authority",
 ]
 inherits = [
   "CONST-IA-ROOT-001",
@@ -32,6 +40,1436 @@ source_owners = [
   "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
   "Native/Ambitions/Quality/",
 ]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-CLOSURE-COMPLETED"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal closure explicit state contract / Completed; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal closure explicit state contract / Completed reports the outcome from this visible condition: The Goal outcome is complete, with its final Proof and receipt available; focus: the Goal identity and lifecycle status within Goal closure explicit state contract / Completed."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: The Goal outcome is complete, with its final Proof and receipt available."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: The Goal outcome is complete, with its final Proof and receipt available."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: The Goal outcome is complete, with its final Proof and receipt available."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: The Goal outcome is complete, with its final Proof and receipt available."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-CLOSURE-COMPLETED-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal closure explicit state contract / Completed"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal closure explicit state contract / Completed reports the outcome from this visible condition: The Goal outcome is complete, with its final Proof and receipt available"
+success_focus = "the Goal identity and lifecycle status within Goal closure explicit state contract / Completed"
+failure_focus = "the initiating Goal row or path node while Goal closure explicit state contract / Completed remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-CLOSURE-ENDED"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal closure explicit state contract / Ended; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal closure explicit state contract / Ended reports the outcome from this visible condition: The Goal has ended without a completion claim; its reason and history remain visible; focus: the Goal identity and lifecycle status within Goal closure explicit state contract / Ended."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: The Goal has ended without a completion claim; its reason and history remain visible."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: The Goal has ended without a completion claim; its reason and history remain visible."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: The Goal has ended without a completion claim; its reason and history remain visible."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: The Goal has ended without a completion claim; its reason and history remain visible."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-CLOSURE-ENDED-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal closure explicit state contract / Ended"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal closure explicit state contract / Ended reports the outcome from this visible condition: The Goal has ended without a completion claim; its reason and history remain visible"
+success_focus = "the Goal identity and lifecycle status within Goal closure explicit state contract / Ended"
+failure_focus = "the initiating Goal row or path node while Goal closure explicit state contract / Ended remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-CLOSURE-NEEDS-ATTENTION"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Review recovery => destination: the object-scoped Goal recovery review. The handoff starts from Goal closure explicit state contract / Needs Attention; effect: No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Resolve conflict in Time, Keep unresolved, / Restore previous path; no automatic lifecycle change occurs; Goal closure explicit state contract / Needs Attention reports the outcome from this visible condition: The outcome, remaining work, / Proof is unresolved. The Goal remains unchanged; focus: the Goal status and first valid repair action within Goal closure explicit state contract / Needs Attention."
+durable_effect = "Exact command consequences: Review recovery: No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Resolve conflict in Time, Keep unresolved, or Restore previous path; no automatic lifecycle change occurs. The durable boundary is specific to this visible evidence: The outcome, remaining work, or Proof is unresolved. The Goal remains unchanged."
+recovery_rollback = "Exact rollback and recovery: Review recovery: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: The outcome, remaining work, or Proof is unresolved. The Goal remains unchanged."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: The outcome, remaining work, or Proof is unresolved. The Goal remains unchanged."
+accessibility_focus = "VoiceOver focus contract: Review recovery announces its consequence, then success focuses the Goal status and first valid repair action; rejection focuses the Review recovery control and failure reason. The announcement includes this user-facing evidence before focus moves: The outcome, remaining work, or Proof is unresolved. The Goal remains unchanged."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-CLOSURE-NEEDS-ATTENTION-001"
+label = "Review recovery"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The Goal identity, retained Goal/path revision, and failure class are available"]
+destination = "the object-scoped Goal recovery review. The handoff starts from Goal closure explicit state contract / Needs Attention"
+effect = "No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Resolve conflict in Time, Keep unresolved, / Restore previous path; no automatic lifecycle change occurs; Goal closure explicit state contract / Needs Attention reports the outcome from this visible condition: The outcome, remaining work, / Proof is unresolved. The Goal remains unchanged"
+success_focus = "the Goal status and first valid repair action within Goal closure explicit state contract / Needs Attention"
+failure_focus = "the Review recovery control and failure reason while Goal closure explicit state contract / Needs Attention remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-DETAIL-ACTIVATING"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Review activation => destination: the revision-bound Goal activation review. The handoff starts from Goal detail explicit state contract / Activating; effect: No durable mutation occurs and no Receipt is created; the Life Area, initial path, next Step, proof rule, schedule consequences, automation level, and unresolved assumptions are shown; Activate Goal remains a separate confirmed mutation; Goal detail explicit state contract / Activating reports the outcome from this visible condition: Goal activation is in progress. The saved draft remains visible; focus: the activation review heading and first unresolved assumption within Goal detail explicit state contract / Activating."
+durable_effect = "Exact command consequences: Review activation: No durable mutation occurs and no Receipt is created; the Life Area, initial path, next Step, proof rule, schedule consequences, automation level, and unresolved assumptions are shown; Activate Goal remains a separate confirmed mutation. The durable boundary is specific to this visible evidence: Goal activation is in progress. The saved draft remains visible."
+recovery_rollback = "Exact rollback and recovery: Review activation: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: Goal activation is in progress. The saved draft remains visible."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: Goal activation is in progress. The saved draft remains visible."
+accessibility_focus = "VoiceOver focus contract: Review activation announces its consequence, then success focuses the activation review heading and first unresolved assumption; rejection focuses the Review activation control and retained Goal status. The announcement includes this user-facing evidence before focus moves: Goal activation is in progress. The saved draft remains visible."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-DETAIL-ACTIVATING-001"
+label = "Review activation"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["Clarification is sufficient for an activation preview", "The Goal identity and current reviewed revision exist"]
+destination = "the revision-bound Goal activation review. The handoff starts from Goal detail explicit state contract / Activating"
+effect = "No durable mutation occurs and no Receipt is created; the Life Area, initial path, next Step, proof rule, schedule consequences, automation level, and unresolved assumptions are shown; Activate Goal remains a separate confirmed mutation; Goal detail explicit state contract / Activating reports the outcome from this visible condition: Goal activation is in progress. The saved draft remains visible"
+success_focus = "the activation review heading and first unresolved assumption within Goal detail explicit state contract / Activating"
+failure_focus = "the Review activation control and retained Goal status while Goal detail explicit state contract / Activating remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-DETAIL-ACTIVE"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal detail explicit state contract / Active; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal detail explicit state contract / Active reports the outcome from this visible condition: This Goal is active, with its direction, next Step, and current path health visible; focus: the Goal identity and lifecycle status within Goal detail explicit state contract / Active."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: This Goal is active, with its direction, next Step, and current path health visible."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: This Goal is active, with its direction, next Step, and current path health visible."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: This Goal is active, with its direction, next Step, and current path health visible."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: This Goal is active, with its direction, next Step, and current path health visible."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-DETAIL-ACTIVE-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal detail explicit state contract / Active"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal detail explicit state contract / Active reports the outcome from this visible condition: This Goal is active, with its direction, next Step, and current path health visible"
+success_focus = "the Goal identity and lifecycle status within Goal detail explicit state contract / Active"
+failure_focus = "the initiating Goal row or path node while Goal detail explicit state contract / Active remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-DETAIL-ARCHIVED"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open archive => destination: the archived Goal detail and History. The handoff starts from Goal detail explicit state contract / Archived; effect: No durable mutation occurs and no Receipt is created; the archived Goal, path, Proof, Receipts, and linked work are inspected without restoring / deleting them; Goal detail explicit state contract / Archived reports the outcome from this visible condition: This Goal is outside active planning but remains available with its history; focus: the archived Goal lifecycle status within Goal detail explicit state contract / Archived."
+durable_effect = "Exact command consequences: Open archive: No durable mutation occurs and no Receipt is created; the archived Goal, path, Proof, Receipts, and linked work are inspected without restoring or deleting them. The durable boundary is specific to this visible evidence: This Goal is outside active planning but remains available with its history."
+recovery_rollback = "Exact rollback and recovery: Open archive: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: This Goal is outside active planning but remains available with its history."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: This Goal is outside active planning but remains available with its history."
+accessibility_focus = "VoiceOver focus contract: Open archive announces its consequence, then success focuses the archived Goal lifecycle status; rejection focuses the Open archive control. The announcement includes this user-facing evidence before focus moves: This Goal is outside active planning but remains available with its history."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-DETAIL-ARCHIVED-001"
+label = "Open archive"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The archived Goal identity and History lineage exist"]
+destination = "the archived Goal detail and History. The handoff starts from Goal detail explicit state contract / Archived"
+effect = "No durable mutation occurs and no Receipt is created; the archived Goal, path, Proof, Receipts, and linked work are inspected without restoring / deleting them; Goal detail explicit state contract / Archived reports the outcome from this visible condition: This Goal is outside active planning but remains available with its history"
+success_focus = "the archived Goal lifecycle status within Goal detail explicit state contract / Archived"
+failure_focus = "the Open archive control while Goal detail explicit state contract / Archived remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-DETAIL-BLOCKED"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal detail explicit state contract / Blocked; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal detail explicit state contract / Blocked reports the outcome from this visible condition: A named condition blocks this Goal’s next safe Step without erasing progress; focus: the Goal identity and lifecycle status within Goal detail explicit state contract / Blocked."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: A named condition blocks this Goal’s next safe Step without erasing progress."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: A named condition blocks this Goal’s next safe Step without erasing progress."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: A named condition blocks this Goal’s next safe Step without erasing progress."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: A named condition blocks this Goal’s next safe Step without erasing progress."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-DETAIL-BLOCKED-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal detail explicit state contract / Blocked"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal detail explicit state contract / Blocked reports the outcome from this visible condition: A named condition blocks this Goal’s next safe Step without erasing progress"
+success_focus = "the Goal identity and lifecycle status within Goal detail explicit state contract / Blocked"
+failure_focus = "the initiating Goal row or path node while Goal detail explicit state contract / Blocked remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-DETAIL-CLARIFYING"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal detail explicit state contract / Clarifying; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal detail explicit state contract / Clarifying reports the outcome from this visible condition: A missing Goal decision is being clarified before a path / schedule can change; focus: the Goal identity and lifecycle status within Goal detail explicit state contract / Clarifying."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: A missing Goal decision is being clarified before a path or schedule can change."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: A missing Goal decision is being clarified before a path or schedule can change."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: A missing Goal decision is being clarified before a path or schedule can change."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: A missing Goal decision is being clarified before a path or schedule can change."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-DETAIL-CLARIFYING-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal detail explicit state contract / Clarifying"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal detail explicit state contract / Clarifying reports the outcome from this visible condition: A missing Goal decision is being clarified before a path / schedule can change"
+success_focus = "the Goal identity and lifecycle status within Goal detail explicit state contract / Clarifying"
+failure_focus = "the initiating Goal row or path node while Goal detail explicit state contract / Clarifying remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-DETAIL-COMPLETED"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal detail explicit state contract / Completed; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal detail explicit state contract / Completed reports the outcome from this visible condition: This Goal reached its intended outcome. Proof and remaining Steps stay separate and visible; focus: the Goal identity and lifecycle status within Goal detail explicit state contract / Completed."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: This Goal reached its intended outcome. Proof and remaining Steps stay separate and visible."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: This Goal reached its intended outcome. Proof and remaining Steps stay separate and visible."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: This Goal reached its intended outcome. Proof and remaining Steps stay separate and visible."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: This Goal reached its intended outcome. Proof and remaining Steps stay separate and visible."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-DETAIL-COMPLETED-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal detail explicit state contract / Completed"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal detail explicit state contract / Completed reports the outcome from this visible condition: This Goal reached its intended outcome. Proof and remaining Steps stay separate and visible"
+success_focus = "the Goal identity and lifecycle status within Goal detail explicit state contract / Completed"
+failure_focus = "the initiating Goal row or path node while Goal detail explicit state contract / Completed remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-DETAIL-DENSE"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Filter => destination: the Goal Detail filter sheet, then the same collection with an ephemeral filter applied. The handoff starts from Goal detail explicit state contract / Dense; effect: No durable mutation occurs and no Receipt is created; only visible ordering and inclusion change; Goal, path, lifecycle, Proof, and schedule data remain unchanged; Goal detail explicit state contract / Dense reports the outcome from this visible condition: This Goal has more detail than fits at once; its direction and next Step remain first; focus: the filtered collection heading and first matching object within Goal detail explicit state contract / Dense.\nOpen Goal => destination: the selected Goal section row, then Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal detail explicit state contract / Dense; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal detail explicit state contract / Dense reports the outcome from this visible condition: This Goal has more detail than fits at once; its direction and next Step remain first; focus: the Goal identity and lifecycle status within Goal detail explicit state contract / Dense."
+durable_effect = "Exact command consequences: Filter: No durable mutation occurs and no Receipt is created; only visible ordering and inclusion change; Goal, path, lifecycle, Proof, and schedule data remain unchanged | Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: This Goal has more detail than fits at once; its direction and next Step remain first."
+recovery_rollback = "Exact rollback and recovery: Filter: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. | Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: This Goal has more detail than fits at once; its direction and next Step remain first."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: This Goal has more detail than fits at once; its direction and next Step remain first."
+accessibility_focus = "VoiceOver focus contract: Filter announces its consequence, then success focuses the filtered collection heading and first matching object; rejection focuses the Filter control | Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: This Goal has more detail than fits at once; its direction and next Step remain first."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-DETAIL-DENSE-001"
+label = "Filter"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The current Goal/Life Area/path collection and filter options are available"]
+destination = "the Goal Detail filter sheet, then the same collection with an ephemeral filter applied. The handoff starts from Goal detail explicit state contract / Dense"
+effect = "No durable mutation occurs and no Receipt is created; only visible ordering and inclusion change; Goal, path, lifecycle, Proof, and schedule data remain unchanged; Goal detail explicit state contract / Dense reports the outcome from this visible condition: This Goal has more detail than fits at once; its direction and next Step remain first"
+success_focus = "the filtered collection heading and first matching object within Goal detail explicit state contract / Dense"
+failure_focus = "the Filter control while Goal detail explicit state contract / Dense remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-DETAIL-DENSE-002"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal section row, then Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal detail explicit state contract / Dense"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal detail explicit state contract / Dense reports the outcome from this visible condition: This Goal has more detail than fits at once; its direction and next Step remain first"
+success_focus = "the Goal identity and lifecycle status within Goal detail explicit state contract / Dense"
+failure_focus = "the initiating Goal row or path node while Goal detail explicit state contract / Dense remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-DETAIL-DRAFT"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal detail explicit state contract / Draft; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal detail explicit state contract / Draft reports the outcome from this visible condition: This Goal is a draft. Its direction is saved, but it has not been activated; focus: the Goal identity and lifecycle status within Goal detail explicit state contract / Draft."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: This Goal is a draft. Its direction is saved, but it has not been activated."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: This Goal is a draft. Its direction is saved, but it has not been activated."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: This Goal is a draft. Its direction is saved, but it has not been activated."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: This Goal is a draft. Its direction is saved, but it has not been activated."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-DETAIL-DRAFT-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal detail explicit state contract / Draft"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal detail explicit state contract / Draft reports the outcome from this visible condition: This Goal is a draft. Its direction is saved, but it has not been activated"
+success_focus = "the Goal identity and lifecycle status within Goal detail explicit state contract / Draft"
+failure_focus = "the initiating Goal row or path node while Goal detail explicit state contract / Draft remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-DETAIL-ENDED"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal detail explicit state contract / Ended; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal detail explicit state contract / Ended reports the outcome from this visible condition: This Goal ended without being marked complete; its history and reason remain available; focus: the Goal identity and lifecycle status within Goal detail explicit state contract / Ended."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: This Goal ended without being marked complete; its history and reason remain available."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: This Goal ended without being marked complete; its history and reason remain available."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: This Goal ended without being marked complete; its history and reason remain available."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: This Goal ended without being marked complete; its history and reason remain available."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-DETAIL-ENDED-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal detail explicit state contract / Ended"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal detail explicit state contract / Ended reports the outcome from this visible condition: This Goal ended without being marked complete; its history and reason remain available"
+success_focus = "the Goal identity and lifecycle status within Goal detail explicit state contract / Ended"
+failure_focus = "the initiating Goal row or path node while Goal detail explicit state contract / Ended remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-DETAIL-GENERATION-FAILED"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Review recovery => destination: the object-scoped Goal recovery review. The handoff starts from Goal detail explicit state contract / Generation Failed; effect: No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Resolve conflict in Time, Keep unresolved, / Restore previous path; no automatic lifecycle change occurs; Goal detail explicit state contract / Generation Failed reports the outcome from this visible condition: A Goal Path could not be generated. The Goal and its original direction remain saved; focus: the Goal status and first valid repair action within Goal detail explicit state contract / Generation Failed."
+durable_effect = "Exact command consequences: Review recovery: No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Resolve conflict in Time, Keep unresolved, or Restore previous path; no automatic lifecycle change occurs. The durable boundary is specific to this visible evidence: A Goal Path could not be generated. The Goal and its original direction remain saved."
+recovery_rollback = "Exact rollback and recovery: Review recovery: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: A Goal Path could not be generated. The Goal and its original direction remain saved."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: A Goal Path could not be generated. The Goal and its original direction remain saved."
+accessibility_focus = "VoiceOver focus contract: Review recovery announces its consequence, then success focuses the Goal status and first valid repair action; rejection focuses the Review recovery control and failure reason. The announcement includes this user-facing evidence before focus moves: A Goal Path could not be generated. The Goal and its original direction remain saved."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-DETAIL-GENERATION-FAILED-001"
+label = "Review recovery"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The Goal identity, retained Goal/path revision, and failure class are available"]
+destination = "the object-scoped Goal recovery review. The handoff starts from Goal detail explicit state contract / Generation Failed"
+effect = "No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Resolve conflict in Time, Keep unresolved, / Restore previous path; no automatic lifecycle change occurs; Goal detail explicit state contract / Generation Failed reports the outcome from this visible condition: A Goal Path could not be generated. The Goal and its original direction remain saved"
+success_focus = "the Goal status and first valid repair action within Goal detail explicit state contract / Generation Failed"
+failure_focus = "the Review recovery control and failure reason while Goal detail explicit state contract / Generation Failed remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-DETAIL-NEEDS-ATTENTION"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Review recovery => destination: the object-scoped Goal recovery review. The handoff starts from Goal detail explicit state contract / Needs Attention; effect: No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Resolve conflict in Time, Keep unresolved, / Restore previous path; no automatic lifecycle change occurs; Goal detail explicit state contract / Needs Attention reports the outcome from this visible condition: A Goal Path, schedule, Source, / Proof condition has changed. The Goal remains unchanged; focus: the Goal status and first valid repair action within Goal detail explicit state contract / Needs Attention."
+durable_effect = "Exact command consequences: Review recovery: No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Resolve conflict in Time, Keep unresolved, or Restore previous path; no automatic lifecycle change occurs. The durable boundary is specific to this visible evidence: A Goal Path, schedule, Source, or Proof condition has changed. The Goal remains unchanged."
+recovery_rollback = "Exact rollback and recovery: Review recovery: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: A Goal Path, schedule, Source, or Proof condition has changed. The Goal remains unchanged."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: A Goal Path, schedule, Source, or Proof condition has changed. The Goal remains unchanged."
+accessibility_focus = "VoiceOver focus contract: Review recovery announces its consequence, then success focuses the Goal status and first valid repair action; rejection focuses the Review recovery control and failure reason. The announcement includes this user-facing evidence before focus moves: A Goal Path, schedule, Source, or Proof condition has changed. The Goal remains unchanged."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-DETAIL-NEEDS-ATTENTION-001"
+label = "Review recovery"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The Goal identity, retained Goal/path revision, and failure class are available"]
+destination = "the object-scoped Goal recovery review. The handoff starts from Goal detail explicit state contract / Needs Attention"
+effect = "No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Resolve conflict in Time, Keep unresolved, / Restore previous path; no automatic lifecycle change occurs; Goal detail explicit state contract / Needs Attention reports the outcome from this visible condition: A Goal Path, schedule, Source, / Proof condition has changed. The Goal remains unchanged"
+success_focus = "the Goal status and first valid repair action within Goal detail explicit state contract / Needs Attention"
+failure_focus = "the Review recovery control and failure reason while Goal detail explicit state contract / Needs Attention remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-DETAIL-PAUSED"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal detail explicit state contract / Paused; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal detail explicit state contract / Paused reports the outcome from this visible condition: This Goal is paused. Its Path, Proof, history, and future Steps remain intact; focus: the Goal identity and lifecycle status within Goal detail explicit state contract / Paused."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: This Goal is paused. Its Path, Proof, history, and future Steps remain intact."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: This Goal is paused. Its Path, Proof, history, and future Steps remain intact."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: This Goal is paused. Its Path, Proof, history, and future Steps remain intact."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: This Goal is paused. Its Path, Proof, history, and future Steps remain intact."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-DETAIL-PAUSED-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal detail explicit state contract / Paused"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal detail explicit state contract / Paused reports the outcome from this visible condition: This Goal is paused. Its Path, Proof, history, and future Steps remain intact"
+success_focus = "the Goal identity and lifecycle status within Goal detail explicit state contract / Paused"
+failure_focus = "the initiating Goal row or path node while Goal detail explicit state contract / Paused remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-DETAIL-PREVIEW-REJECTED"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal detail explicit state contract / Preview Rejected; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal detail explicit state contract / Preview Rejected reports the outcome from this visible condition: The proposed Goal change was not accepted; the current Goal remains as it was; focus: the Goal identity and lifecycle status within Goal detail explicit state contract / Preview Rejected."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: The proposed Goal change was not accepted; the current Goal remains as it was."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: The proposed Goal change was not accepted; the current Goal remains as it was."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: The proposed Goal change was not accepted; the current Goal remains as it was."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: The proposed Goal change was not accepted; the current Goal remains as it was."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-DETAIL-PREVIEW-REJECTED-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal detail explicit state contract / Preview Rejected"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal detail explicit state contract / Preview Rejected reports the outcome from this visible condition: The proposed Goal change was not accepted; the current Goal remains as it was"
+success_focus = "the Goal identity and lifecycle status within Goal detail explicit state contract / Preview Rejected"
+failure_focus = "the initiating Goal row or path node while Goal detail explicit state contract / Preview Rejected remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-DETAIL-READY-TO-ACTIVATE"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Review activation => destination: the revision-bound Goal activation review. The handoff starts from Goal detail explicit state contract / Ready To Activate; effect: No durable mutation occurs and no Receipt is created; the Life Area, initial path, next Step, proof rule, schedule consequences, automation level, and unresolved assumptions are shown; Activate Goal remains a separate confirmed mutation; Goal detail explicit state contract / Ready To Activate reports the outcome from this visible condition: This Goal is not active yet. Its saved draft remains unchanged; focus: the activation review heading and first unresolved assumption within Goal detail explicit state contract / Ready To Activate."
+durable_effect = "Exact command consequences: Review activation: No durable mutation occurs and no Receipt is created; the Life Area, initial path, next Step, proof rule, schedule consequences, automation level, and unresolved assumptions are shown; Activate Goal remains a separate confirmed mutation. The durable boundary is specific to this visible evidence: This Goal is not active yet. Its saved draft remains unchanged."
+recovery_rollback = "Exact rollback and recovery: Review activation: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: This Goal is not active yet. Its saved draft remains unchanged."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: This Goal is not active yet. Its saved draft remains unchanged."
+accessibility_focus = "VoiceOver focus contract: Review activation announces its consequence, then success focuses the activation review heading and first unresolved assumption; rejection focuses the Review activation control and retained Goal status. The announcement includes this user-facing evidence before focus moves: This Goal is not active yet. Its saved draft remains unchanged."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-DETAIL-READY-TO-ACTIVATE-001"
+label = "Review activation"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["Clarification is sufficient for an activation preview", "The Goal identity and current reviewed revision exist"]
+destination = "the revision-bound Goal activation review. The handoff starts from Goal detail explicit state contract / Ready To Activate"
+effect = "No durable mutation occurs and no Receipt is created; the Life Area, initial path, next Step, proof rule, schedule consequences, automation level, and unresolved assumptions are shown; Activate Goal remains a separate confirmed mutation; Goal detail explicit state contract / Ready To Activate reports the outcome from this visible condition: This Goal is not active yet. Its saved draft remains unchanged"
+success_focus = "the activation review heading and first unresolved assumption within Goal detail explicit state contract / Ready To Activate"
+failure_focus = "the Review activation control and retained Goal status while Goal detail explicit state contract / Ready To Activate remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-DETAIL-RECOVERING"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Review recovery => destination: the object-scoped Goal recovery review. The handoff starts from Goal detail explicit state contract / Recovering; effect: No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Resolve conflict in Time, Keep unresolved, / Restore previous path; no automatic lifecycle change occurs; Goal detail explicit state contract / Recovering reports the outcome from this visible condition: This Goal’s accepted direction remains visible. No saved Goal information has changed; focus: the Goal status and first valid repair action within Goal detail explicit state contract / Recovering."
+durable_effect = "Exact command consequences: Review recovery: No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Resolve conflict in Time, Keep unresolved, or Restore previous path; no automatic lifecycle change occurs. The durable boundary is specific to this visible evidence: This Goal’s accepted direction remains visible. No saved Goal information has changed."
+recovery_rollback = "Exact rollback and recovery: Review recovery: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: This Goal’s accepted direction remains visible. No saved Goal information has changed."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: This Goal’s accepted direction remains visible. No saved Goal information has changed."
+accessibility_focus = "VoiceOver focus contract: Review recovery announces its consequence, then success focuses the Goal status and first valid repair action; rejection focuses the Review recovery control and failure reason. The announcement includes this user-facing evidence before focus moves: This Goal’s accepted direction remains visible. No saved Goal information has changed."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-DETAIL-RECOVERING-001"
+label = "Review recovery"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The Goal identity, retained Goal/path revision, and failure class are available"]
+destination = "the object-scoped Goal recovery review. The handoff starts from Goal detail explicit state contract / Recovering"
+effect = "No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Resolve conflict in Time, Keep unresolved, / Restore previous path; no automatic lifecycle change occurs; Goal detail explicit state contract / Recovering reports the outcome from this visible condition: This Goal’s accepted direction remains visible. No saved Goal information has changed"
+success_focus = "the Goal status and first valid repair action within Goal detail explicit state contract / Recovering"
+failure_focus = "the Review recovery control and failure reason while Goal detail explicit state contract / Recovering remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-DETAIL-WAITING"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal detail explicit state contract / Waiting; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal detail explicit state contract / Waiting reports the outcome from this visible condition: This Goal is waiting on a person, date, / condition; the next review point remains visible; focus: the Goal identity and lifecycle status within Goal detail explicit state contract / Waiting."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: This Goal is waiting on a person, date, or condition; the next review point remains visible."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: This Goal is waiting on a person, date, or condition; the next review point remains visible."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: This Goal is waiting on a person, date, or condition; the next review point remains visible."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: This Goal is waiting on a person, date, or condition; the next review point remains visible."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-DETAIL-WAITING-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal detail explicit state contract / Waiting"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal detail explicit state contract / Waiting reports the outcome from this visible condition: This Goal is waiting on a person, date, / condition; the next review point remains visible"
+success_focus = "the Goal identity and lifecycle status within Goal detail explicit state contract / Waiting"
+failure_focus = "the initiating Goal row or path node while Goal detail explicit state contract / Waiting remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-LIFE-AREA-DENSE"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Filter => destination: the Life Area Goal filter sheet, then the same collection with an ephemeral filter applied. The handoff starts from Life Area detail explicit state contract / Dense; effect: No durable mutation occurs and no Receipt is created; only visible ordering and inclusion change; Goal, path, lifecycle, Proof, and schedule data remain unchanged; Life Area detail explicit state contract / Dense reports the outcome from this visible condition: This Life Area contains many Goals; direction and active Goals remain ahead of secondary detail; focus: the filtered collection heading and first matching object within Life Area detail explicit state contract / Dense.\nOpen Goal => destination: the selected Goal row in that Life Area, then Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Life Area detail explicit state contract / Dense; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Life Area detail explicit state contract / Dense reports the outcome from this visible condition: This Life Area contains many Goals; direction and active Goals remain ahead of secondary detail; focus: the Goal identity and lifecycle status within Life Area detail explicit state contract / Dense."
+durable_effect = "Exact command consequences: Filter: No durable mutation occurs and no Receipt is created; only visible ordering and inclusion change; Goal, path, lifecycle, Proof, and schedule data remain unchanged | Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: This Life Area contains many Goals; direction and active Goals remain ahead of secondary detail."
+recovery_rollback = "Exact rollback and recovery: Filter: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. | Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: This Life Area contains many Goals; direction and active Goals remain ahead of secondary detail."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: This Life Area contains many Goals; direction and active Goals remain ahead of secondary detail."
+accessibility_focus = "VoiceOver focus contract: Filter announces its consequence, then success focuses the filtered collection heading and first matching object; rejection focuses the Filter control | Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: This Life Area contains many Goals; direction and active Goals remain ahead of secondary detail."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-LIFE-AREA-DENSE-001"
+label = "Filter"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The current Goal/Life Area/path collection and filter options are available"]
+destination = "the Life Area Goal filter sheet, then the same collection with an ephemeral filter applied. The handoff starts from Life Area detail explicit state contract / Dense"
+effect = "No durable mutation occurs and no Receipt is created; only visible ordering and inclusion change; Goal, path, lifecycle, Proof, and schedule data remain unchanged; Life Area detail explicit state contract / Dense reports the outcome from this visible condition: This Life Area contains many Goals; direction and active Goals remain ahead of secondary detail"
+success_focus = "the filtered collection heading and first matching object within Life Area detail explicit state contract / Dense"
+failure_focus = "the Filter control while Life Area detail explicit state contract / Dense remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-LIFE-AREA-DENSE-002"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal row in that Life Area, then Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Life Area detail explicit state contract / Dense"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Life Area detail explicit state contract / Dense reports the outcome from this visible condition: This Life Area contains many Goals; direction and active Goals remain ahead of secondary detail"
+success_focus = "the Goal identity and lifecycle status within Life Area detail explicit state contract / Dense"
+failure_focus = "the initiating Goal row or path node while Life Area detail explicit state contract / Dense remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-LIFE-AREA-EMPTY-DIRECTION"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Life Area detail explicit state contract / Empty Direction; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Life Area detail explicit state contract / Empty Direction reports the outcome from this visible condition: This Life Area has no active direction yet; no Goal is implied; focus: the Goal identity and lifecycle status within Life Area detail explicit state contract / Empty Direction."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: This Life Area has no active direction yet; no Goal is implied."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: This Life Area has no active direction yet; no Goal is implied."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: This Life Area has no active direction yet; no Goal is implied."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: This Life Area has no active direction yet; no Goal is implied."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-LIFE-AREA-EMPTY-DIRECTION-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Life Area detail explicit state contract / Empty Direction"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Life Area detail explicit state contract / Empty Direction reports the outcome from this visible condition: This Life Area has no active direction yet; no Goal is implied"
+success_focus = "the Goal identity and lifecycle status within Life Area detail explicit state contract / Empty Direction"
+failure_focus = "the initiating Goal row or path node while Life Area detail explicit state contract / Empty Direction remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-LIFE-AREA-NEEDS-ATTENTION"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Review recovery => destination: the object-scoped Goal recovery review. The handoff starts from Life Area detail explicit state contract / Needs Attention; effect: No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Resolve conflict in Time, Keep unresolved, / Restore previous path; no automatic lifecycle change occurs; Life Area detail explicit state contract / Needs Attention reports the outcome from this visible condition: A Goal in this Life Area has an unresolved change. The Life Area direction remains visible; focus: the Goal status and first valid repair action within Life Area detail explicit state contract / Needs Attention."
+durable_effect = "Exact command consequences: Review recovery: No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Resolve conflict in Time, Keep unresolved, or Restore previous path; no automatic lifecycle change occurs. The durable boundary is specific to this visible evidence: A Goal in this Life Area has an unresolved change. The Life Area direction remains visible."
+recovery_rollback = "Exact rollback and recovery: Review recovery: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: A Goal in this Life Area has an unresolved change. The Life Area direction remains visible."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: A Goal in this Life Area has an unresolved change. The Life Area direction remains visible."
+accessibility_focus = "VoiceOver focus contract: Review recovery announces its consequence, then success focuses the Goal status and first valid repair action; rejection focuses the Review recovery control and failure reason. The announcement includes this user-facing evidence before focus moves: A Goal in this Life Area has an unresolved change. The Life Area direction remains visible."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-LIFE-AREA-NEEDS-ATTENTION-001"
+label = "Review recovery"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The Goal identity, retained Goal/path revision, and failure class are available"]
+destination = "the object-scoped Goal recovery review. The handoff starts from Life Area detail explicit state contract / Needs Attention"
+effect = "No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Resolve conflict in Time, Keep unresolved, / Restore previous path; no automatic lifecycle change occurs; Life Area detail explicit state contract / Needs Attention reports the outcome from this visible condition: A Goal in this Life Area has an unresolved change. The Life Area direction remains visible"
+success_focus = "the Goal status and first valid repair action within Life Area detail explicit state contract / Needs Attention"
+failure_focus = "the Review recovery control and failure reason while Life Area detail explicit state contract / Needs Attention remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-LIFE-AREA-POPULATED"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Life Area detail explicit state contract / Populated; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Life Area detail explicit state contract / Populated reports the outcome from this visible condition: This Life Area shows its current Goals and how each supports the chosen direction; focus: the Goal identity and lifecycle status within Life Area detail explicit state contract / Populated."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: This Life Area shows its current Goals and how each supports the chosen direction."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: This Life Area shows its current Goals and how each supports the chosen direction."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: This Life Area shows its current Goals and how each supports the chosen direction."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: This Life Area shows its current Goals and how each supports the chosen direction."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-LIFE-AREA-POPULATED-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Life Area detail explicit state contract / Populated"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Life Area detail explicit state contract / Populated reports the outcome from this visible condition: This Life Area shows its current Goals and how each supports the chosen direction"
+success_focus = "the Goal identity and lifecycle status within Life Area detail explicit state contract / Populated"
+failure_focus = "the initiating Goal row or path node while Life Area detail explicit state contract / Populated remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-PATH-ACTIVE"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Full Goal Path explicit state contract / Active; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Full Goal Path explicit state contract / Active reports the outcome from this visible condition: This Goal Path is active, with its current route and next Step visible; focus: the Goal identity and lifecycle status within Full Goal Path explicit state contract / Active."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: This Goal Path is active, with its current route and next Step visible."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: This Goal Path is active, with its current route and next Step visible."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: This Goal Path is active, with its current route and next Step visible."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: This Goal Path is active, with its current route and next Step visible."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-PATH-ACTIVE-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Full Goal Path explicit state contract / Active"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Full Goal Path explicit state contract / Active reports the outcome from this visible condition: This Goal Path is active, with its current route and next Step visible"
+success_focus = "the Goal identity and lifecycle status within Full Goal Path explicit state contract / Active"
+failure_focus = "the initiating Goal row or path node while Full Goal Path explicit state contract / Active remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-PATH-BLOCKED"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Full Goal Path explicit state contract / Blocked; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Full Goal Path explicit state contract / Blocked reports the outcome from this visible condition: A named condition blocks the next Path Step; completed progress remains intact; focus: the Goal identity and lifecycle status within Full Goal Path explicit state contract / Blocked."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: A named condition blocks the next Path Step; completed progress remains intact."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: A named condition blocks the next Path Step; completed progress remains intact."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: A named condition blocks the next Path Step; completed progress remains intact."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: A named condition blocks the next Path Step; completed progress remains intact."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-PATH-BLOCKED-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Full Goal Path explicit state contract / Blocked"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Full Goal Path explicit state contract / Blocked reports the outcome from this visible condition: A named condition blocks the next Path Step; completed progress remains intact"
+success_focus = "the Goal identity and lifecycle status within Full Goal Path explicit state contract / Blocked"
+failure_focus = "the initiating Goal row or path node while Full Goal Path explicit state contract / Blocked remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-PATH-COMPLETED"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Full Goal Path explicit state contract / Completed; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Full Goal Path explicit state contract / Completed reports the outcome from this visible condition: This Goal Path is complete, and its progress and Proof remain available; focus: the Goal identity and lifecycle status within Full Goal Path explicit state contract / Completed."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: This Goal Path is complete, and its progress and Proof remain available."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: This Goal Path is complete, and its progress and Proof remain available."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: This Goal Path is complete, and its progress and Proof remain available."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: This Goal Path is complete, and its progress and Proof remain available."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-PATH-COMPLETED-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Full Goal Path explicit state contract / Completed"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Full Goal Path explicit state contract / Completed reports the outcome from this visible condition: This Goal Path is complete, and its progress and Proof remain available"
+success_focus = "the Goal identity and lifecycle status within Full Goal Path explicit state contract / Completed"
+failure_focus = "the initiating Goal row or path node while Full Goal Path explicit state contract / Completed remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-PATH-DENSE"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Filter => destination: the Goal Path node filter sheet, then the same collection with an ephemeral filter applied. The handoff starts from Full Goal Path explicit state contract / Dense; effect: No durable mutation occurs and no Receipt is created; only visible ordering and inclusion change; Goal, path, lifecycle, Proof, and schedule data remain unchanged; Full Goal Path explicit state contract / Dense reports the outcome from this visible condition: This Goal Path has more points than fit at once; the current route and next Step remain prominent; focus: the filtered collection heading and first matching object within Full Goal Path explicit state contract / Dense.\nOpen step => destination: the selected Path node detail, then the selected Step detail within its Goal Path context. The handoff starts from Full Goal Path explicit state contract / Dense; effect: No durable mutation occurs and no Receipt is created; the Step and path open for inspection without changing lifecycle, order, schedule, / Proof; Full Goal Path explicit state contract / Dense reports the outcome from this visible condition: This Goal Path has more points than fit at once; the current route and next Step remain prominent; focus: the selected Step heading within Full Goal Path explicit state contract / Dense."
+durable_effect = "Exact command consequences: Filter: No durable mutation occurs and no Receipt is created; only visible ordering and inclusion change; Goal, path, lifecycle, Proof, and schedule data remain unchanged | Open step: No durable mutation occurs and no Receipt is created; the Step and path open for inspection without changing lifecycle, order, schedule, or Proof. The durable boundary is specific to this visible evidence: This Goal Path has more points than fit at once; the current route and next Step remain prominent."
+recovery_rollback = "Exact rollback and recovery: Filter: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. | Open step: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: This Goal Path has more points than fit at once; the current route and next Step remain prominent."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: This Goal Path has more points than fit at once; the current route and next Step remain prominent."
+accessibility_focus = "VoiceOver focus contract: Filter announces its consequence, then success focuses the filtered collection heading and first matching object; rejection focuses the Filter control | Open step announces its consequence, then success focuses the selected Step heading; rejection focuses the initiating path node or row. The announcement includes this user-facing evidence before focus moves: This Goal Path has more points than fit at once; the current route and next Step remain prominent."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-PATH-DENSE-001"
+label = "Filter"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The current Goal/Life Area/path collection and filter options are available"]
+destination = "the Goal Path node filter sheet, then the same collection with an ephemeral filter applied. The handoff starts from Full Goal Path explicit state contract / Dense"
+effect = "No durable mutation occurs and no Receipt is created; only visible ordering and inclusion change; Goal, path, lifecycle, Proof, and schedule data remain unchanged; Full Goal Path explicit state contract / Dense reports the outcome from this visible condition: This Goal Path has more points than fit at once; the current route and next Step remain prominent"
+success_focus = "the filtered collection heading and first matching object within Full Goal Path explicit state contract / Dense"
+failure_focus = "the Filter control while Full Goal Path explicit state contract / Dense remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-PATH-DENSE-002"
+label = "Open step"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["A stable path-node Step identity and current Goal revision exist"]
+destination = "the selected Path node detail, then the selected Step detail within its Goal Path context. The handoff starts from Full Goal Path explicit state contract / Dense"
+effect = "No durable mutation occurs and no Receipt is created; the Step and path open for inspection without changing lifecycle, order, schedule, / Proof; Full Goal Path explicit state contract / Dense reports the outcome from this visible condition: This Goal Path has more points than fit at once; the current route and next Step remain prominent"
+success_focus = "the selected Step heading within Full Goal Path explicit state contract / Dense"
+failure_focus = "the initiating path node or row while Full Goal Path explicit state contract / Dense remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-PATH-DRAFT"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Full Goal Path explicit state contract / Draft; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Full Goal Path explicit state contract / Draft reports the outcome from this visible condition: This Goal Path is a draft. Nothing is scheduled; focus: the Goal identity and lifecycle status within Full Goal Path explicit state contract / Draft."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: This Goal Path is a draft. Nothing is scheduled."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: This Goal Path is a draft. Nothing is scheduled."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: This Goal Path is a draft. Nothing is scheduled."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: This Goal Path is a draft. Nothing is scheduled."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-PATH-DRAFT-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Full Goal Path explicit state contract / Draft"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Full Goal Path explicit state contract / Draft reports the outcome from this visible condition: This Goal Path is a draft. Nothing is scheduled"
+success_focus = "the Goal identity and lifecycle status within Full Goal Path explicit state contract / Draft"
+failure_focus = "the initiating Goal row or path node while Full Goal Path explicit state contract / Draft remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-PATH-MISSING-REFERENCE-CONTEXT"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Full Goal Path explicit state contract / Missing Reference Context; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Full Goal Path explicit state contract / Missing Reference Context reports the outcome from this visible condition: A Source / related item for this Goal Path is unavailable. The saved path remains visible; focus: the Goal identity and lifecycle status within Full Goal Path explicit state contract / Missing Reference Context."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: A Source or related item for this Goal Path is unavailable. The saved path remains visible."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: A Source or related item for this Goal Path is unavailable. The saved path remains visible."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: A Source or related item for this Goal Path is unavailable. The saved path remains visible."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: A Source or related item for this Goal Path is unavailable. The saved path remains visible."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-PATH-MISSING-REFERENCE-CONTEXT-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Full Goal Path explicit state contract / Missing Reference Context"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Full Goal Path explicit state contract / Missing Reference Context reports the outcome from this visible condition: A Source / related item for this Goal Path is unavailable. The saved path remains visible"
+success_focus = "the Goal identity and lifecycle status within Full Goal Path explicit state contract / Missing Reference Context"
+failure_focus = "the initiating Goal row or path node while Full Goal Path explicit state contract / Missing Reference Context remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-PATH-NEEDS-ATTENTION"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Review recovery => destination: the Goal Path recovery review. The handoff starts from Full Goal Path explicit state contract / Needs Attention; effect: No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Keep unresolved, / Restore previous path; no choice rewrites prior path History; Full Goal Path explicit state contract / Needs Attention reports the outcome from this visible condition: A Proof, schedule fit, Source, / path condition has changed. The Goal Path remains unchanged; focus: the affected current path node and first valid recovery action within Full Goal Path explicit state contract / Needs Attention."
+durable_effect = "Exact command consequences: Review recovery: No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Keep unresolved, or Restore previous path; no choice rewrites prior path History. The durable boundary is specific to this visible evidence: A Proof, schedule fit, Source, or path condition has changed. The Goal Path remains unchanged."
+recovery_rollback = "Exact rollback and recovery: Review recovery: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: A Proof, schedule fit, Source, or path condition has changed. The Goal Path remains unchanged."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: A Proof, schedule fit, Source, or path condition has changed. The Goal Path remains unchanged."
+accessibility_focus = "VoiceOver focus contract: Review recovery announces its consequence, then success focuses the affected current path node and first valid recovery action; rejection focuses the Review recovery control and retained path status. The announcement includes this user-facing evidence before focus moves: A Proof, schedule fit, Source, or path condition has changed. The Goal Path remains unchanged."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-PATH-NEEDS-ATTENTION-001"
+label = "Review recovery"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The Goal identity, retained path revision, and failure class are available"]
+destination = "the Goal Path recovery review. The handoff starts from Full Goal Path explicit state contract / Needs Attention"
+effect = "No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Keep unresolved, / Restore previous path; no choice rewrites prior path History; Full Goal Path explicit state contract / Needs Attention reports the outcome from this visible condition: A Proof, schedule fit, Source, / path condition has changed. The Goal Path remains unchanged"
+success_focus = "the affected current path node and first valid recovery action within Full Goal Path explicit state contract / Needs Attention"
+failure_focus = "the Review recovery control and retained path status while Full Goal Path explicit state contract / Needs Attention remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-PATH-PARTIAL-SIMULATION"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Cancel => destination: the retained current Goal Path and initiating node. The handoff starts from Full Goal Path explicit state contract / Partial Simulation; effect: No durable mutation occurs and no Receipt is created; the proposed version is rejected; the active path, Steps, schedule, Proof, and History remain unchanged; Full Goal Path explicit state contract / Partial Simulation reports the outcome from this visible condition: Only part of the proposed Path could be tested; untested sections remain clearly marked; this command preserves accepted product state; focus: the initiating path action / current path node within Full Goal Path explicit state contract / Partial Simulation."
+durable_effect = "Exact command consequences: Cancel: No durable mutation occurs and no Receipt is created; the proposed version is rejected; the active path, Steps, schedule, Proof, and History remain unchanged. The durable boundary is specific to this visible evidence: Only part of the proposed Path could be tested; untested sections remain clearly marked."
+recovery_rollback = "Exact rollback and recovery: Cancel: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: Only part of the proposed Path could be tested; untested sections remain clearly marked."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: Only part of the proposed Path could be tested; untested sections remain clearly marked."
+accessibility_focus = "VoiceOver focus contract: Cancel announces its consequence, then success focuses the initiating path action or current path node; rejection focuses the in-progress path status and Cancel control. The announcement includes this user-facing evidence before focus moves: Only part of the proposed Path could be tested; untested sections remain clearly marked."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-PATH-PARTIAL-SIMULATION-001"
+label = "Cancel"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["Only route generation, simulation, or path-change preview remains uncommitted"]
+destination = "the retained current Goal Path and initiating node. The handoff starts from Full Goal Path explicit state contract / Partial Simulation"
+effect = "No durable mutation occurs and no Receipt is created; the proposed version is rejected; the active path, Steps, schedule, Proof, and History remain unchanged; Full Goal Path explicit state contract / Partial Simulation reports the outcome from this visible condition: Only part of the proposed Path could be tested; untested sections remain clearly marked; this command preserves accepted product state"
+success_focus = "the initiating path action / current path node within Full Goal Path explicit state contract / Partial Simulation"
+failure_focus = "the in-progress path status and Cancel control while Full Goal Path explicit state contract / Partial Simulation remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-PATH-PATH-ADJUSTING"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Cancel => destination: the retained current Goal Path and initiating node. The handoff starts from Full Goal Path explicit state contract / Path Adjusting; effect: No durable mutation occurs and no Receipt is created; the proposed version is rejected; the active path, Steps, schedule, Proof, and History remain unchanged; Full Goal Path explicit state contract / Path Adjusting reports the outcome from this visible condition: A proposed Path adjustment is being prepared while the current route remains visible; this command preserves accepted product state; focus: the initiating path action / current path node within Full Goal Path explicit state contract / Path Adjusting."
+durable_effect = "Exact command consequences: Cancel: No durable mutation occurs and no Receipt is created; the proposed version is rejected; the active path, Steps, schedule, Proof, and History remain unchanged. The durable boundary is specific to this visible evidence: A proposed Path adjustment is being prepared while the current route remains visible."
+recovery_rollback = "Exact rollback and recovery: Cancel: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: A proposed Path adjustment is being prepared while the current route remains visible."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: A proposed Path adjustment is being prepared while the current route remains visible."
+accessibility_focus = "VoiceOver focus contract: Cancel announces its consequence, then success focuses the initiating path action or current path node; rejection focuses the in-progress path status and Cancel control. The announcement includes this user-facing evidence before focus moves: A proposed Path adjustment is being prepared while the current route remains visible."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-PATH-PATH-ADJUSTING-001"
+label = "Cancel"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["Only route generation, simulation, or path-change preview remains uncommitted"]
+destination = "the retained current Goal Path and initiating node. The handoff starts from Full Goal Path explicit state contract / Path Adjusting"
+effect = "No durable mutation occurs and no Receipt is created; the proposed version is rejected; the active path, Steps, schedule, Proof, and History remain unchanged; Full Goal Path explicit state contract / Path Adjusting reports the outcome from this visible condition: A proposed Path adjustment is being prepared while the current route remains visible; this command preserves accepted product state"
+success_focus = "the initiating path action / current path node within Full Goal Path explicit state contract / Path Adjusting"
+failure_focus = "the in-progress path status and Cancel control while Full Goal Path explicit state contract / Path Adjusting remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-PATH-PATH-GENERATION-UNCERTAIN"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Full Goal Path explicit state contract / Path Generation Uncertain; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Full Goal Path explicit state contract / Path Generation Uncertain reports the outcome from this visible condition: The proposed route is uncertain; the Goal remains saved without an invented next Step; focus: the Goal identity and lifecycle status within Full Goal Path explicit state contract / Path Generation Uncertain."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: The proposed route is uncertain; the Goal remains saved without an invented next Step."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: The proposed route is uncertain; the Goal remains saved without an invented next Step."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: The proposed route is uncertain; the Goal remains saved without an invented next Step."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: The proposed route is uncertain; the Goal remains saved without an invented next Step."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-PATH-PATH-GENERATION-UNCERTAIN-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Full Goal Path explicit state contract / Path Generation Uncertain"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Full Goal Path explicit state contract / Path Generation Uncertain reports the outcome from this visible condition: The proposed route is uncertain; the Goal remains saved without an invented next Step"
+success_focus = "the Goal identity and lifecycle status within Full Goal Path explicit state contract / Path Generation Uncertain"
+failure_focus = "the initiating Goal row or path node while Full Goal Path explicit state contract / Path Generation Uncertain remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-PATH-PAUSED"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Full Goal Path explicit state contract / Paused; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Full Goal Path explicit state contract / Paused reports the outcome from this visible condition: This Goal Path is paused. Its route, progress, and Proof remain saved for return; focus: the Goal identity and lifecycle status within Full Goal Path explicit state contract / Paused."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: This Goal Path is paused. Its route, progress, and Proof remain saved for return."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: This Goal Path is paused. Its route, progress, and Proof remain saved for return."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: This Goal Path is paused. Its route, progress, and Proof remain saved for return."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: This Goal Path is paused. Its route, progress, and Proof remain saved for return."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-PATH-PAUSED-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Full Goal Path explicit state contract / Paused"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Full Goal Path explicit state contract / Paused reports the outcome from this visible condition: This Goal Path is paused. Its route, progress, and Proof remain saved for return"
+success_focus = "the Goal identity and lifecycle status within Full Goal Path explicit state contract / Paused"
+failure_focus = "the initiating Goal row or path node while Full Goal Path explicit state contract / Paused remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-PATH-READY-TO-ACTIVATE"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Review activation => destination: the revision-bound Goal activation review. The handoff starts from Full Goal Path explicit state contract / Ready To Activate; effect: No durable mutation occurs and no Receipt is created; the Life Area, initial path, next Step, proof rule, schedule consequences, automation level, and unresolved assumptions are shown; Activate Goal remains a separate confirmed mutation; Full Goal Path explicit state contract / Ready To Activate reports the outcome from this visible condition: This Goal Path is still a draft. The active Goal remains unchanged; focus: the activation review heading and first unresolved assumption within Full Goal Path explicit state contract / Ready To Activate."
+durable_effect = "Exact command consequences: Review activation: No durable mutation occurs and no Receipt is created; the Life Area, initial path, next Step, proof rule, schedule consequences, automation level, and unresolved assumptions are shown; Activate Goal remains a separate confirmed mutation. The durable boundary is specific to this visible evidence: This Goal Path is still a draft. The active Goal remains unchanged."
+recovery_rollback = "Exact rollback and recovery: Review activation: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: This Goal Path is still a draft. The active Goal remains unchanged."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: This Goal Path is still a draft. The active Goal remains unchanged."
+accessibility_focus = "VoiceOver focus contract: Review activation announces its consequence, then success focuses the activation review heading and first unresolved assumption; rejection focuses the Review activation control and retained Goal status. The announcement includes this user-facing evidence before focus moves: This Goal Path is still a draft. The active Goal remains unchanged."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-PATH-READY-TO-ACTIVATE-001"
+label = "Review activation"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["Clarification is sufficient for an activation preview", "The Goal identity and current reviewed revision exist"]
+destination = "the revision-bound Goal activation review. The handoff starts from Full Goal Path explicit state contract / Ready To Activate"
+effect = "No durable mutation occurs and no Receipt is created; the Life Area, initial path, next Step, proof rule, schedule consequences, automation level, and unresolved assumptions are shown; Activate Goal remains a separate confirmed mutation; Full Goal Path explicit state contract / Ready To Activate reports the outcome from this visible condition: This Goal Path is still a draft. The active Goal remains unchanged"
+success_focus = "the activation review heading and first unresolved assumption within Full Goal Path explicit state contract / Ready To Activate"
+failure_focus = "the Review activation control and retained Goal status while Full Goal Path explicit state contract / Ready To Activate remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-PATH-RECOVERING"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Review recovery => destination: the Goal Path recovery review. The handoff starts from Full Goal Path explicit state contract / Recovering; effect: No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Keep unresolved, / Restore previous path; no choice rewrites prior path History; Full Goal Path explicit state contract / Recovering reports the outcome from this visible condition: The accepted Goal Path stays visible while a bounded recovery is considered; focus: the affected current path node and first valid recovery action within Full Goal Path explicit state contract / Recovering."
+durable_effect = "Exact command consequences: Review recovery: No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Keep unresolved, or Restore previous path; no choice rewrites prior path History. The durable boundary is specific to this visible evidence: The accepted Goal Path stays visible while a bounded recovery is considered."
+recovery_rollback = "Exact rollback and recovery: Review recovery: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: The accepted Goal Path stays visible while a bounded recovery is considered."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: The accepted Goal Path stays visible while a bounded recovery is considered."
+accessibility_focus = "VoiceOver focus contract: Review recovery announces its consequence, then success focuses the affected current path node and first valid recovery action; rejection focuses the Review recovery control and retained path status. The announcement includes this user-facing evidence before focus moves: The accepted Goal Path stays visible while a bounded recovery is considered."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-PATH-RECOVERING-001"
+label = "Review recovery"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The Goal identity, retained path revision, and failure class are available"]
+destination = "the Goal Path recovery review. The handoff starts from Full Goal Path explicit state contract / Recovering"
+effect = "No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Keep unresolved, / Restore previous path; no choice rewrites prior path History; Full Goal Path explicit state contract / Recovering reports the outcome from this visible condition: The accepted Goal Path stays visible while a bounded recovery is considered"
+success_focus = "the affected current path node and first valid recovery action within Full Goal Path explicit state contract / Recovering"
+failure_focus = "the Review recovery control and retained path status while Full Goal Path explicit state contract / Recovering remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-PATH-RESTORING"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Full Goal Path explicit state contract / Restoring; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Full Goal Path explicit state contract / Restoring reports the outcome from this visible condition: The last accepted Goal Path is being restored with its history and Proof intact; focus: the Goal identity and lifecycle status within Full Goal Path explicit state contract / Restoring."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: The last accepted Goal Path is being restored with its history and Proof intact."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: The last accepted Goal Path is being restored with its history and Proof intact."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: The last accepted Goal Path is being restored with its history and Proof intact."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: The last accepted Goal Path is being restored with its history and Proof intact."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-PATH-RESTORING-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Full Goal Path explicit state contract / Restoring"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Full Goal Path explicit state contract / Restoring reports the outcome from this visible condition: The last accepted Goal Path is being restored with its history and Proof intact"
+success_focus = "the Goal identity and lifecycle status within Full Goal Path explicit state contract / Restoring"
+failure_focus = "the initiating Goal row or path node while Full Goal Path explicit state contract / Restoring remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-PATH-ROLLED-BACK"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Full Goal Path explicit state contract / Rolled Back; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Full Goal Path explicit state contract / Rolled Back reports the outcome from this visible condition: The prior Goal Path has been restored, with the reversal recorded in history; focus: the Goal identity and lifecycle status within Full Goal Path explicit state contract / Rolled Back."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: The prior Goal Path has been restored, with the reversal recorded in history."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: The prior Goal Path has been restored, with the reversal recorded in history."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: The prior Goal Path has been restored, with the reversal recorded in history."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: The prior Goal Path has been restored, with the reversal recorded in history."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-PATH-ROLLED-BACK-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Full Goal Path explicit state contract / Rolled Back"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Full Goal Path explicit state contract / Rolled Back reports the outcome from this visible condition: The prior Goal Path has been restored, with the reversal recorded in history"
+success_focus = "the Goal identity and lifecycle status within Full Goal Path explicit state contract / Rolled Back"
+failure_focus = "the initiating Goal row or path node while Full Goal Path explicit state contract / Rolled Back remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-PATH-ROUTE-GENERATING"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Cancel => destination: the retained current Goal Path and initiating node. The handoff starts from Full Goal Path explicit state contract / Route Generating; effect: No durable mutation occurs and no Receipt is created; the proposed version is rejected; the active path, Steps, schedule, Proof, and History remain unchanged; Full Goal Path explicit state contract / Route Generating reports the outcome from this visible condition: A possible route is being prepared from the Goal’s current direction; nothing is active yet; this command preserves accepted product state; focus: the initiating path action / current path node within Full Goal Path explicit state contract / Route Generating."
+durable_effect = "Exact command consequences: Cancel: No durable mutation occurs and no Receipt is created; the proposed version is rejected; the active path, Steps, schedule, Proof, and History remain unchanged. The durable boundary is specific to this visible evidence: A possible route is being prepared from the Goal’s current direction; nothing is active yet."
+recovery_rollback = "Exact rollback and recovery: Cancel: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: A possible route is being prepared from the Goal’s current direction; nothing is active yet."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: A possible route is being prepared from the Goal’s current direction; nothing is active yet."
+accessibility_focus = "VoiceOver focus contract: Cancel announces its consequence, then success focuses the initiating path action or current path node; rejection focuses the in-progress path status and Cancel control. The announcement includes this user-facing evidence before focus moves: A possible route is being prepared from the Goal’s current direction; nothing is active yet."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-PATH-ROUTE-GENERATING-001"
+label = "Cancel"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["Only route generation, simulation, or path-change preview remains uncommitted"]
+destination = "the retained current Goal Path and initiating node. The handoff starts from Full Goal Path explicit state contract / Route Generating"
+effect = "No durable mutation occurs and no Receipt is created; the proposed version is rejected; the active path, Steps, schedule, Proof, and History remain unchanged; Full Goal Path explicit state contract / Route Generating reports the outcome from this visible condition: A possible route is being prepared from the Goal’s current direction; nothing is active yet; this command preserves accepted product state"
+success_focus = "the initiating path action / current path node within Full Goal Path explicit state contract / Route Generating"
+failure_focus = "the in-progress path status and Cancel control while Full Goal Path explicit state contract / Route Generating remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-PATH-SELECTED-NODE"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open step => destination: the selected Step detail within its Goal Path context. The handoff starts from Full Goal Path explicit state contract / Selected Node; effect: No durable mutation occurs and no Receipt is created; the Step and path open for inspection without changing lifecycle, order, schedule, / Proof; Full Goal Path explicit state contract / Selected Node reports the outcome from this visible condition: The selected Path point shows its position, reason, Proof, and schedule consequence; focus: the selected Step heading within Full Goal Path explicit state contract / Selected Node."
+durable_effect = "Exact command consequences: Open step: No durable mutation occurs and no Receipt is created; the Step and path open for inspection without changing lifecycle, order, schedule, or Proof. The durable boundary is specific to this visible evidence: The selected Path point shows its position, reason, Proof, and schedule consequence."
+recovery_rollback = "Exact rollback and recovery: Open step: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: The selected Path point shows its position, reason, Proof, and schedule consequence."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: The selected Path point shows its position, reason, Proof, and schedule consequence."
+accessibility_focus = "VoiceOver focus contract: Open step announces its consequence, then success focuses the selected Step heading; rejection focuses the initiating path node or row. The announcement includes this user-facing evidence before focus moves: The selected Path point shows its position, reason, Proof, and schedule consequence."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-PATH-SELECTED-NODE-001"
+label = "Open step"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["A stable path-node Step identity and current Goal revision exist"]
+destination = "the selected Step detail within its Goal Path context. The handoff starts from Full Goal Path explicit state contract / Selected Node"
+effect = "No durable mutation occurs and no Receipt is created; the Step and path open for inspection without changing lifecycle, order, schedule, / Proof; Full Goal Path explicit state contract / Selected Node reports the outcome from this visible condition: The selected Path point shows its position, reason, Proof, and schedule consequence"
+success_focus = "the selected Step heading within Full Goal Path explicit state contract / Selected Node"
+failure_focus = "the initiating path node or row while Full Goal Path explicit state contract / Selected Node remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-PATH-SIMULATING"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Full Goal Path explicit state contract / Simulating; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Full Goal Path explicit state contract / Simulating reports the outcome from this visible condition: A possible Goal Path is being tested without changing the active route; focus: the Goal identity and lifecycle status within Full Goal Path explicit state contract / Simulating."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: A possible Goal Path is being tested without changing the active route."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: A possible Goal Path is being tested without changing the active route."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: A possible Goal Path is being tested without changing the active route."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: A possible Goal Path is being tested without changing the active route."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-PATH-SIMULATING-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Full Goal Path explicit state contract / Simulating"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Full Goal Path explicit state contract / Simulating reports the outcome from this visible condition: A possible Goal Path is being tested without changing the active route"
+success_focus = "the Goal identity and lifecycle status within Full Goal Path explicit state contract / Simulating"
+failure_focus = "the initiating Goal row or path node while Full Goal Path explicit state contract / Simulating remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-PATH-WAITING"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Full Goal Path explicit state contract / Waiting; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Full Goal Path explicit state contract / Waiting reports the outcome from this visible condition: This Goal Path is waiting on a named condition. Its saved Steps remain unchanged; focus: the Goal identity and lifecycle status within Full Goal Path explicit state contract / Waiting."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: This Goal Path is waiting on a named condition. Its saved Steps remain unchanged."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: This Goal Path is waiting on a named condition. Its saved Steps remain unchanged."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: This Goal Path is waiting on a named condition. Its saved Steps remain unchanged."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: This Goal Path is waiting on a named condition. Its saved Steps remain unchanged."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-PATH-WAITING-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Full Goal Path explicit state contract / Waiting"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Full Goal Path explicit state contract / Waiting reports the outcome from this visible condition: This Goal Path is waiting on a named condition. Its saved Steps remain unchanged"
+success_focus = "the Goal identity and lifecycle status within Full Goal Path explicit state contract / Waiting"
+failure_focus = "the initiating Goal row or path node while Full Goal Path explicit state contract / Waiting remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-RECOVERY-BLOCKED"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal recovery packet explicit state contract / Blocked; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal recovery packet explicit state contract / Blocked reports the outcome from this visible condition: Recovery cannot continue until the named blocking condition changes; focus: the Goal identity and lifecycle status within Goal recovery packet explicit state contract / Blocked."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: Recovery cannot continue until the named blocking condition changes."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: Recovery cannot continue until the named blocking condition changes."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: Recovery cannot continue until the named blocking condition changes."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: Recovery cannot continue until the named blocking condition changes."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-RECOVERY-BLOCKED-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal recovery packet explicit state contract / Blocked"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal recovery packet explicit state contract / Blocked reports the outcome from this visible condition: Recovery cannot continue until the named blocking condition changes"
+success_focus = "the Goal identity and lifecycle status within Goal recovery packet explicit state contract / Blocked"
+failure_focus = "the initiating Goal row or path node while Goal recovery packet explicit state contract / Blocked remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-RECOVERY-LOCAL-STORE-DEGRADED"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Review recovery => destination: the object-scoped Goal recovery review. The handoff starts from Goal recovery packet explicit state contract / Local Store Degraded; effect: No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Resolve conflict in Time, Keep unresolved, / Restore previous path; no automatic lifecycle change occurs; Goal recovery packet explicit state contract / Local Store Degraded reports the outcome from this visible condition: Some saved Goal information is unavailable; recovery stays limited to verified local facts; focus: the Goal status and first valid repair action within Goal recovery packet explicit state contract / Local Store Degraded."
+durable_effect = "Exact command consequences: Review recovery: No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Resolve conflict in Time, Keep unresolved, or Restore previous path; no automatic lifecycle change occurs. The durable boundary is specific to this visible evidence: Some saved Goal information is unavailable; recovery stays limited to verified local facts."
+recovery_rollback = "Exact rollback and recovery: Review recovery: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: Some saved Goal information is unavailable; recovery stays limited to verified local facts."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: Some saved Goal information is unavailable; recovery stays limited to verified local facts."
+accessibility_focus = "VoiceOver focus contract: Review recovery announces its consequence, then success focuses the Goal status and first valid repair action; rejection focuses the Review recovery control and failure reason. The announcement includes this user-facing evidence before focus moves: Some saved Goal information is unavailable; recovery stays limited to verified local facts."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-RECOVERY-LOCAL-STORE-DEGRADED-001"
+label = "Review recovery"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The Goal identity, retained Goal/path revision, and failure class are available"]
+destination = "the object-scoped Goal recovery review. The handoff starts from Goal recovery packet explicit state contract / Local Store Degraded"
+effect = "No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Resolve conflict in Time, Keep unresolved, / Restore previous path; no automatic lifecycle change occurs; Goal recovery packet explicit state contract / Local Store Degraded reports the outcome from this visible condition: Some saved Goal information is unavailable; recovery stays limited to verified local facts"
+success_focus = "the Goal status and first valid repair action within Goal recovery packet explicit state contract / Local Store Degraded"
+failure_focus = "the Review recovery control and failure reason while Goal recovery packet explicit state contract / Local Store Degraded remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-RECOVERY-NEEDS-ATTENTION"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Review recovery => destination: the object-scoped Goal recovery review. The handoff starts from Goal recovery packet explicit state contract / Needs Attention; effect: No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Resolve conflict in Time, Keep unresolved, / Restore previous path; no automatic lifecycle change occurs; Goal recovery packet explicit state contract / Needs Attention reports the outcome from this visible condition: The proposed recovery consequence is material / uncertain. The Goal remains unchanged; focus: the Goal status and first valid repair action within Goal recovery packet explicit state contract / Needs Attention."
+durable_effect = "Exact command consequences: Review recovery: No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Resolve conflict in Time, Keep unresolved, or Restore previous path; no automatic lifecycle change occurs. The durable boundary is specific to this visible evidence: The proposed recovery consequence is material or uncertain. The Goal remains unchanged."
+recovery_rollback = "Exact rollback and recovery: Review recovery: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: The proposed recovery consequence is material or uncertain. The Goal remains unchanged."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: The proposed recovery consequence is material or uncertain. The Goal remains unchanged."
+accessibility_focus = "VoiceOver focus contract: Review recovery announces its consequence, then success focuses the Goal status and first valid repair action; rejection focuses the Review recovery control and failure reason. The announcement includes this user-facing evidence before focus moves: The proposed recovery consequence is material or uncertain. The Goal remains unchanged."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-RECOVERY-NEEDS-ATTENTION-001"
+label = "Review recovery"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The Goal identity, retained Goal/path revision, and failure class are available"]
+destination = "the object-scoped Goal recovery review. The handoff starts from Goal recovery packet explicit state contract / Needs Attention"
+effect = "No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Resolve conflict in Time, Keep unresolved, / Restore previous path; no automatic lifecycle change occurs; Goal recovery packet explicit state contract / Needs Attention reports the outcome from this visible condition: The proposed recovery consequence is material / uncertain. The Goal remains unchanged"
+success_focus = "the Goal status and first valid repair action within Goal recovery packet explicit state contract / Needs Attention"
+failure_focus = "the Review recovery control and failure reason while Goal recovery packet explicit state contract / Needs Attention remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-RECOVERY-OFFLINE-HEALTHY"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal recovery packet explicit state contract / Offline Healthy; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal recovery packet explicit state contract / Offline Healthy reports the outcome from this visible condition: Goal recovery remains available from saved local information without a connection; focus: the Goal identity and lifecycle status within Goal recovery packet explicit state contract / Offline Healthy."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: Goal recovery remains available from saved local information without a connection."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: Goal recovery remains available from saved local information without a connection."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: Goal recovery remains available from saved local information without a connection."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: Goal recovery remains available from saved local information without a connection."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-RECOVERY-OFFLINE-HEALTHY-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal recovery packet explicit state contract / Offline Healthy"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal recovery packet explicit state contract / Offline Healthy reports the outcome from this visible condition: Goal recovery remains available from saved local information without a connection"
+success_focus = "the Goal identity and lifecycle status within Goal recovery packet explicit state contract / Offline Healthy"
+failure_focus = "the initiating Goal row or path node while Goal recovery packet explicit state contract / Offline Healthy remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-RECOVERY-PARTIAL-SCHEDULE-FAILURE"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal recovery packet explicit state contract / Partial Schedule Failure; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal recovery packet explicit state contract / Partial Schedule Failure reports the outcome from this visible condition: Only part of the recovery schedule change succeeded; completed and pending parts stay distinct; focus: the Goal identity and lifecycle status within Goal recovery packet explicit state contract / Partial Schedule Failure."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: Only part of the recovery schedule change succeeded; completed and pending parts stay distinct."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: Only part of the recovery schedule change succeeded; completed and pending parts stay distinct."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: Only part of the recovery schedule change succeeded; completed and pending parts stay distinct."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: Only part of the recovery schedule change succeeded; completed and pending parts stay distinct."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-RECOVERY-PARTIAL-SCHEDULE-FAILURE-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal recovery packet explicit state contract / Partial Schedule Failure"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal recovery packet explicit state contract / Partial Schedule Failure reports the outcome from this visible condition: Only part of the recovery schedule change succeeded; completed and pending parts stay distinct"
+success_focus = "the Goal identity and lifecycle status within Goal recovery packet explicit state contract / Partial Schedule Failure"
+failure_focus = "the initiating Goal row or path node while Goal recovery packet explicit state contract / Partial Schedule Failure remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-RECOVERY-PROOF-TRANSFERRING"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the Goal Proof transfer review. The handoff starts from Goal recovery packet explicit state contract / Proof Transferring; effect: No durable mutation occurs and no Receipt is created; the same Proof identity, relevance, target relationship, and planning consequence are shown; inspection never duplicates evidence / marks target work complete; Goal recovery packet explicit state contract / Proof Transferring reports the outcome from this visible condition: Relevant Proof is being carried into the recovery view without changing its meaning; focus: the original Proof status and proposed target relationship within Goal recovery packet explicit state contract / Proof Transferring."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the same Proof identity, relevance, target relationship, and planning consequence are shown; inspection never duplicates evidence or marks target work complete. The durable boundary is specific to this visible evidence: Relevant Proof is being carried into the recovery view without changing its meaning."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: Relevant Proof is being carried into the recovery view without changing its meaning."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: Relevant Proof is being carried into the recovery view without changing its meaning."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the original Proof status and proposed target relationship; rejection focuses the Proof transfer status and Open Goal control. The announcement includes this user-facing evidence before focus moves: Relevant Proof is being carried into the recovery view without changing its meaning."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-RECOVERY-PROOF-TRANSFERRING-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The original Proof identity, source Goal/Step/Closure, proposed target, and current revisions exist"]
+destination = "the Goal Proof transfer review. The handoff starts from Goal recovery packet explicit state contract / Proof Transferring"
+effect = "No durable mutation occurs and no Receipt is created; the same Proof identity, relevance, target relationship, and planning consequence are shown; inspection never duplicates evidence / marks target work complete; Goal recovery packet explicit state contract / Proof Transferring reports the outcome from this visible condition: Relevant Proof is being carried into the recovery view without changing its meaning"
+success_focus = "the original Proof status and proposed target relationship within Goal recovery packet explicit state contract / Proof Transferring"
+failure_focus = "the Proof transfer status and Open Goal control while Goal recovery packet explicit state contract / Proof Transferring remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged; inspection never duplicates evidence or marks target work complete."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-RECOVERY-RECOVERING"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Review recovery => destination: the object-scoped Goal recovery review. The handoff starts from Goal recovery packet explicit state contract / Recovering; effect: No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Resolve conflict in Time, Keep unresolved, / Restore previous path; no automatic lifecycle change occurs; Goal recovery packet explicit state contract / Recovering reports the outcome from this visible condition: The Goal and Path remain visible while a bounded recovery is prepared; focus: the Goal status and first valid repair action within Goal recovery packet explicit state contract / Recovering."
+durable_effect = "Exact command consequences: Review recovery: No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Resolve conflict in Time, Keep unresolved, or Restore previous path; no automatic lifecycle change occurs. The durable boundary is specific to this visible evidence: The Goal and Path remain visible while a bounded recovery is prepared."
+recovery_rollback = "Exact rollback and recovery: Review recovery: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: The Goal and Path remain visible while a bounded recovery is prepared."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: The Goal and Path remain visible while a bounded recovery is prepared."
+accessibility_focus = "VoiceOver focus contract: Review recovery announces its consequence, then success focuses the Goal status and first valid repair action; rejection focuses the Review recovery control and failure reason. The announcement includes this user-facing evidence before focus moves: The Goal and Path remain visible while a bounded recovery is prepared."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-RECOVERY-RECOVERING-001"
+label = "Review recovery"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The Goal identity, retained Goal/path revision, and failure class are available"]
+destination = "the object-scoped Goal recovery review. The handoff starts from Goal recovery packet explicit state contract / Recovering"
+effect = "No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Resolve conflict in Time, Keep unresolved, / Restore previous path; no automatic lifecycle change occurs; Goal recovery packet explicit state contract / Recovering reports the outcome from this visible condition: The Goal and Path remain visible while a bounded recovery is prepared"
+success_focus = "the Goal status and first valid repair action within Goal recovery packet explicit state contract / Recovering"
+failure_focus = "the Review recovery control and failure reason while Goal recovery packet explicit state contract / Recovering remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-RECOVERY-SCHEDULE-CONFLICT"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Review conflict => destination: the object-scoped Time schedule conflict review. The handoff starts from Goal recovery packet explicit state contract / Schedule Conflict; effect: No durable mutation occurs and no Receipt is created; the schedule placement conflict is shown without moving, completing, pausing, / ending the Goal; Goal recovery packet explicit state contract / Schedule Conflict reports the outcome from this visible condition: The recovery proposal conflicts with protected / fixed time. The saved schedule remains unchanged; focus: the Time conflict heading and affected schedule placement within Goal recovery packet explicit state contract / Schedule Conflict."
+durable_effect = "Exact command consequences: Review conflict: No durable mutation occurs and no Receipt is created; the schedule placement conflict is shown without moving, completing, pausing, or ending the Goal. The durable boundary is specific to this visible evidence: The recovery proposal conflicts with protected or fixed time. The saved schedule remains unchanged."
+recovery_rollback = "Exact rollback and recovery: Review conflict: No Undo is required; dismissal follows the Goal return anchor with the schedule placement unchanged. Recovery preserves or restores the interface evidence that says: The recovery proposal conflicts with protected or fixed time. The saved schedule remains unchanged."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: The recovery proposal conflicts with protected or fixed time. The saved schedule remains unchanged."
+accessibility_focus = "VoiceOver focus contract: Review conflict announces its consequence, then success focuses the Time conflict heading and affected schedule placement; rejection focuses the Goal recovery status and Review conflict control. The announcement includes this user-facing evidence before focus moves: The recovery proposal conflicts with protected or fixed time. The saved schedule remains unchanged."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-RECOVERY-SCHEDULE-CONFLICT-001"
+label = "Review conflict"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The Goal, affected schedule placement, revision, and Goal return anchor are retained"]
+destination = "the object-scoped Time schedule conflict review. The handoff starts from Goal recovery packet explicit state contract / Schedule Conflict"
+effect = "No durable mutation occurs and no Receipt is created; the schedule placement conflict is shown without moving, completing, pausing, / ending the Goal; Goal recovery packet explicit state contract / Schedule Conflict reports the outcome from this visible condition: The recovery proposal conflicts with protected / fixed time. The saved schedule remains unchanged"
+success_focus = "the Time conflict heading and affected schedule placement within Goal recovery packet explicit state contract / Schedule Conflict"
+failure_focus = "the Goal recovery status and Review conflict control while Goal recovery packet explicit state contract / Schedule Conflict remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal follows the Goal return anchor with the schedule placement unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-RECOVERY-WAITING"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal recovery packet explicit state contract / Waiting; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal recovery packet explicit state contract / Waiting reports the outcome from this visible condition: Recovery is waiting on a named condition; the accepted Goal and Path remain visible; focus: the Goal identity and lifecycle status within Goal recovery packet explicit state contract / Waiting."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: Recovery is waiting on a named condition; the accepted Goal and Path remain visible."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: Recovery is waiting on a named condition; the accepted Goal and Path remain visible."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: Recovery is waiting on a named condition; the accepted Goal and Path remain visible."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: Recovery is waiting on a named condition; the accepted Goal and Path remain visible."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-RECOVERY-WAITING-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goal recovery packet explicit state contract / Waiting"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goal recovery packet explicit state contract / Waiting reports the outcome from this visible condition: Recovery is waiting on a named condition; the accepted Goal and Path remain visible"
+success_focus = "the Goal identity and lifecycle status within Goal recovery packet explicit state contract / Waiting"
+failure_focus = "the initiating Goal row or path node while Goal recovery packet explicit state contract / Waiting remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-ROOT-DENSE"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Filter => destination: the Goals Root Life Area and Goal filter sheet, then the same collection with an ephemeral filter applied. The handoff starts from Goals root explicit state contract / Dense; effect: No durable mutation occurs and no Receipt is created; only visible ordering and inclusion change; Goal, path, lifecycle, Proof, and schedule data remain unchanged; Goals root explicit state contract / Dense reports the outcome from this visible condition: Goals contains more active material than fits at once; direction and active Goals remain first; focus: the filtered collection heading and first matching object within Goals root explicit state contract / Dense.\nOpen Goal => destination: the typed Goals Root result resolved by stable result kind, then Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goals root explicit state contract / Dense; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goals root explicit state contract / Dense reports the outcome from this visible condition: Goals contains more active material than fits at once; direction and active Goals remain first; focus: the Goal identity and lifecycle status within Goals root explicit state contract / Dense."
+durable_effect = "Exact command consequences: Filter: No durable mutation occurs and no Receipt is created; only visible ordering and inclusion change; Goal, path, lifecycle, Proof, and schedule data remain unchanged | Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: Goals contains more active material than fits at once; direction and active Goals remain first."
+recovery_rollback = "Exact rollback and recovery: Filter: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. | Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: Goals contains more active material than fits at once; direction and active Goals remain first."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: Goals contains more active material than fits at once; direction and active Goals remain first."
+accessibility_focus = "VoiceOver focus contract: Filter announces its consequence, then success focuses the filtered collection heading and first matching object; rejection focuses the Filter control | Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: Goals contains more active material than fits at once; direction and active Goals remain first."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-ROOT-DENSE-001"
+label = "Filter"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The current Goal/Life Area/path collection and filter options are available"]
+destination = "the Goals Root Life Area and Goal filter sheet, then the same collection with an ephemeral filter applied. The handoff starts from Goals root explicit state contract / Dense"
+effect = "No durable mutation occurs and no Receipt is created; only visible ordering and inclusion change; Goal, path, lifecycle, Proof, and schedule data remain unchanged; Goals root explicit state contract / Dense reports the outcome from this visible condition: Goals contains more active material than fits at once; direction and active Goals remain first"
+success_focus = "the filtered collection heading and first matching object within Goals root explicit state contract / Dense"
+failure_focus = "the Filter control while Goals root explicit state contract / Dense remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-ROOT-DENSE-002"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the typed Goals Root result resolved by stable result kind, then Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goals root explicit state contract / Dense"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goals root explicit state contract / Dense reports the outcome from this visible condition: Goals contains more active material than fits at once; direction and active Goals remain first"
+success_focus = "the Goal identity and lifecycle status within Goals root explicit state contract / Dense"
+failure_focus = "the initiating Goal row or path node while Goals root explicit state contract / Dense remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-ROOT-EMPTY-DIRECTION"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goals root explicit state contract / Empty Direction; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goals root explicit state contract / Empty Direction reports the outcome from this visible condition: No active Goal direction is shown yet; the view does not invent one; focus: the Goal identity and lifecycle status within Goals root explicit state contract / Empty Direction."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: No active Goal direction is shown yet; the view does not invent one."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: No active Goal direction is shown yet; the view does not invent one."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: No active Goal direction is shown yet; the view does not invent one."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: No active Goal direction is shown yet; the view does not invent one."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-ROOT-EMPTY-DIRECTION-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goals root explicit state contract / Empty Direction"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goals root explicit state contract / Empty Direction reports the outcome from this visible condition: No active Goal direction is shown yet; the view does not invent one"
+success_focus = "the Goal identity and lifecycle status within Goals root explicit state contract / Empty Direction"
+failure_focus = "the initiating Goal row or path node while Goals root explicit state contract / Empty Direction remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-ROOT-NEEDS-ATTENTION"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Review recovery => destination: the object-scoped Goal recovery review. The handoff starts from Goals root explicit state contract / Needs Attention; effect: No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Resolve conflict in Time, Keep unresolved, / Restore previous path; no automatic lifecycle change occurs; Goals root explicit state contract / Needs Attention reports the outcome from this visible condition: One / more Goals have an unresolved change. The reason is shown without urgency / score pressure; focus: the Goal status and first valid repair action within Goals root explicit state contract / Needs Attention."
+durable_effect = "Exact command consequences: Review recovery: No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Resolve conflict in Time, Keep unresolved, or Restore previous path; no automatic lifecycle change occurs. The durable boundary is specific to this visible evidence: One or more Goals have an unresolved change. The reason is shown without urgency or score pressure."
+recovery_rollback = "Exact rollback and recovery: Review recovery: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: One or more Goals have an unresolved change. The reason is shown without urgency or score pressure."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: One or more Goals have an unresolved change. The reason is shown without urgency or score pressure."
+accessibility_focus = "VoiceOver focus contract: Review recovery announces its consequence, then success focuses the Goal status and first valid repair action; rejection focuses the Review recovery control and failure reason. The announcement includes this user-facing evidence before focus moves: One or more Goals have an unresolved change. The reason is shown without urgency or score pressure."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-ROOT-NEEDS-ATTENTION-001"
+label = "Review recovery"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The Goal identity, retained Goal/path revision, and failure class are available"]
+destination = "the object-scoped Goal recovery review. The handoff starts from Goals root explicit state contract / Needs Attention"
+effect = "No durable mutation occurs and no Receipt is created; valid choices are Clarify, Retry path, Edit manually, Resolve conflict in Time, Keep unresolved, / Restore previous path; no automatic lifecycle change occurs; Goals root explicit state contract / Needs Attention reports the outcome from this visible condition: One / more Goals have an unresolved change. The reason is shown without urgency / score pressure"
+success_focus = "the Goal status and first valid repair action within Goals root explicit state contract / Needs Attention"
+failure_focus = "the Review recovery control and failure reason while Goals root explicit state contract / Needs Attention remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-GOALS-ROOT-POPULATED"
+requirement_id = "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Goal => destination: the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goals root explicit state contract / Populated; effect: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goals root explicit state contract / Populated reports the outcome from this visible condition: Goals shows current Life Areas, active Goals, and the next meaningful Step; focus: the Goal identity and lifecycle status within Goals root explicit state contract / Populated."
+durable_effect = "Exact command consequences: Open Goal: No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands. The durable boundary is specific to this visible evidence: Goals shows current Life Areas, active Goals, and the next meaningful Step."
+recovery_rollback = "Exact rollback and recovery: Open Goal: No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged. Recovery preserves or restores the interface evidence that says: Goals shows current Life Areas, active Goals, and the next meaningful Step."
+offline_behavior = "Goal, Path, Step, Proof, lifecycle, recovery, and History inspection use local canonical state without an account or network. Offline rendering retains this state evidence: Goals shows current Life Areas, active Goals, and the next meaningful Step."
+accessibility_focus = "VoiceOver focus contract: Open Goal announces its consequence, then success focuses the Goal identity and lifecycle status; rejection focuses the initiating Goal row or path node. The announcement includes this user-facing evidence before focus moves: Goals shows current Life Areas, active Goals, and the next meaningful Step."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-GOALS-ROOT-POPULATED-001"
+label = "Open Goal"
+canonical_owner = "surface.goals.command-contract"
+preconditions = ["The stable Goal identity and current revision exist"]
+destination = "the selected Goal detail with lifecycle, path, Steps, Proof, schedule, Closure, Archive, Trash, and History context. The handoff starts from Goals root explicit state contract / Populated"
+effect = "No durable mutation occurs and no Receipt is created; the Goal opens for inspection; Pause, Resume, End Goal, Archive Goal, Move to Trash, path update, and Proof transfer remain separate consequence-reviewed commands; Goals root explicit state contract / Populated reports the outcome from this visible condition: Goals shows current Life Areas, active Goals, and the next meaningful Step"
+success_focus = "the Goal identity and lifecycle status within Goals root explicit state contract / Populated"
+failure_focus = "the initiating Goal row or path node while Goals root explicit state contract / Populated remains visible"
+commit_boundary = "Non-mutating: the route, inspection, selection, preview, refresh, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
+privacy_egress = "The operation reads only local canonical data and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001"]
 +++
 
 # Goals
@@ -200,6 +1638,17 @@ The Goals root first viewport MUST foreground editable Life Areas, current direc
 - **Supersedes:** none
 
 Goal detail first viewport MUST foreground Goal identity and status, current route, next Step, Proof requirement or status, schedule fit, and a compact path preview.
+
+## SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001 — Exact state command ownership
+
+- **Concept:** `surface.goals.command-contract`
+- **Modality:** `MUST`
+- **Scope:** Structured state command contracts for this specification
+- **Status:** `normative`
+- **Verification:** `SCENARIO-SURFACE-GOALS-COMMAND-CONTRACT-001`
+- **Supersedes:** none
+
+The owning specification MUST authorize only the state-bound command labels `Cancel`, `Filter`, `Open Goal`, `Open archive`, `Open step`, `Review activation`, `Review conflict`, `Review recovery` for the structured states declared in this file. Every command MUST bind stable state and object identity, current revision, canonical owner, preconditions, destination, exact effect and focus targets; navigation, inspection, selection, preview, refresh, and cancellation remain non-mutating. A durable mutation MUST commit only after current-revision validation and required confirmation through Command -> Event -> Projection -> Receipt -> Replay; cancellation or rejection preserves accepted input, and rollback or Undo uses an owning typed command without rewriting history. Local canonical behavior MUST remain available offline without an account; external results remain separate and retryable without replaying the local commit. Sensitive content MUST remain local unless explicit minimum-field egress review passes. VoiceOver MUST announce object, accepted or rejected outcome, consequence, recovery or Undo availability, and destination focus; no color, motion, gesture, or position may carry command meaning alone. Verification MUST prove every declared state, command, transition, commit boundary, durable effect, rollback, offline, privacy, accessibility, and focus mapping against the structured contract.
 
 ## Completeness contract
 

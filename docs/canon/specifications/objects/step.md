@@ -23,7 +23,7 @@ owns_concepts = [
 ]
 inherits = ["OBJECT-FUTURE-STEP-IDENTITY-001", "OBJECT-PROOF-REQUIREMENT-001", "OBJECT-LIFECYCLE-DELETION-001", "OBJECT-REMINDER-COMPLETION-001", "CONST-RUNTIME-MUTATION-001"]
 depends_on = ["CONSTITUTION", "OBJECT-GOAL-PATH", "SURFACE-TODAY", "SURFACE-GOALS", "SURFACE-TIME", "GLOBAL-TRUST-INSPECTION"]
-source_owners = ["Native/Ambitions/Core/Domain/", "Native/Ambitions/Core/LocalRuntimeOS/Planning/", "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/", "Native/Ambitions/Core/LocalRuntimeOS/Commands/", "Native/Ambitions/Core/LocalRuntimeOS/Inspection/", "Native/Ambitions/Surfaces/Today/", "Native/Ambitions/Surfaces/Goals/", "Native/Ambitions/Surfaces/Time/", "Native/Ambitions/Quality/"]
+source_owners = ["Native/Ambitions/Core/Domain/", "Native/Ambitions/Core/Time/", "Native/Ambitions/Core/LocalRuntimeOS/Transactions/", "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/", "Native/Ambitions/Core/LocalRuntimeOS/State/", "Native/Ambitions/Core/LocalRuntimeOS/Storage/", "Native/Ambitions/Core/LocalRuntimeOS/Projections/", "Native/Ambitions/Core/LocalRuntimeOS/Planning/", "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/", "Native/Ambitions/Core/LocalRuntimeOS/Commands/", "Native/Ambitions/Core/LocalRuntimeOS/Inspection/", "Native/Ambitions/Surfaces/Today/", "Native/Ambitions/Surfaces/Goals/", "Native/Ambitions/Surfaces/Time/", "Native/Ambitions/Quality/"]
 [object_boundary]
 executable_completable = "Yes"
 occupies_duration = "Optional"

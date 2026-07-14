@@ -154,7 +154,7 @@ class UXBlueprintFinalReviewTests(unittest.TestCase):
         )
         with self.assertRaisesRegex(
             module.UXBlueprintError,
-            "unsupported behavior authority|Time Detail behavior has no owning requirement",
+            "independent structured canon field ownership|unsupported behavior authority|Time Detail behavior has no owning requirement",
         ):
             module.validate_ux_blueprint(REPO_ROOT, forged)
 
@@ -166,10 +166,13 @@ class UXBlueprintFinalReviewTests(unittest.TestCase):
                 continue
             undo_states.append(state["blueprint_id"])
             self.assertIn("CONTROL-UNDO-RECOVERY-001", state["requirement_ids"])
-            self.assertIn(
-                "CONTROL-UNDO-RECOVERY-001", state["behavior_requirement_ids"]
-            )
-        self.assertEqual(undo_states, [])
+        self.assertEqual(
+            undo_states,
+            [
+                "UX-STATE-VARIANT-CAPTURE-COMPOSER-SAVED-UNDO-ELIGIBLE",
+                "UX-STATE-VARIANT-TRUST-RECEIPT-RECEIPT-COMMITTED-UNDO-ELIGIBLE",
+            ],
+        )
 
     def test_all_visible_copy_and_backed_command_labels_are_plain_user_language(self):
         payload = self._payload()

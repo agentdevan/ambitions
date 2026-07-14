@@ -6,7 +6,7 @@
 - Canon revision: `1`
 - Authority state: `shadow`
 - Compiler version: `0.2.0`
-- Canon content SHA: `866de78044cb3b5f0b4afa349a5c3170a111870fb107579fdbdd6c4243a735df`
+- Canon content SHA: `d46b2bfa6a73b74498ab6a80f0f4a2d9366ab325ad0ab0e43940c7a37b90857e`
 
 - Representation status: `materialized`
 - Scope: validated spec-owned semantic boundaries; not implementation proof

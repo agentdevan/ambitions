@@ -16,6 +16,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable, Mapping
 
+from tools.ambitions_canon.model import StateCommandContract
 from tools.ambitions_canon.parser import parse_canon_document
 
 
@@ -1065,7 +1066,11 @@ def normalized_state_narrative_signature(
     for value, replacement in sorted(
         replacements, key=lambda item: len(item[0]), reverse=True
     ):
-        signature = re.sub(re.escape(value.casefold()), replacement, signature)
+        signature = re.sub(
+            rf"(?<![\w-]){re.escape(value.casefold())}(?![\w-])",
+            replacement,
+            signature,
+        )
     return " ".join(signature.split())
 
 
@@ -1158,6 +1163,33 @@ def load_requirement_source_records(root: Path) -> tuple[dict[str, str], ...]:
             }
         )
     return tuple(records)
+
+
+def load_state_command_contracts(root: Path) -> tuple[StateCommandContract, ...]:
+    """Load independently authored state-command ownership from normative canon."""
+
+    index = _requirement_records(root)
+    paths = sorted({_string(item.get("source_path"), "source path") for item in index})
+    contracts: list[StateCommandContract] = []
+    state_ids: set[str] = set()
+    command_ids: set[str] = set()
+    for relative in paths:
+        path = root / relative
+        document = parse_canon_document(path, path.read_text(encoding="utf-8"))
+        for contract in document.state_command_contracts:
+            if contract.state_id in state_ids:
+                raise UXBlueprintError(
+                    f"duplicate canonical state command contract: {contract.state_id}"
+                )
+            state_ids.add(contract.state_id)
+            for command in contract.commands:
+                if command.command_id in command_ids:
+                    raise UXBlueprintError(
+                        f"duplicate canonical command ID: {command.command_id}"
+                    )
+                command_ids.add(command.command_id)
+            contracts.append(contract)
+    return tuple(sorted(contracts, key=lambda item: item.state_id))
 
 
 def load_state_inventory(root: Path) -> dict[str, object]:
@@ -1542,6 +1574,17 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
     specification_gaps = _records(
         blueprint.get("specification_gaps"), "specification gaps"
     )
+    state_contracts = load_state_command_contracts(root)
+    state_contracts_by_id = {item.state_id: item for item in state_contracts}
+    for contract in state_contracts:
+        if contract.requirement_id not in known_requirements:
+            raise UXBlueprintError(
+                f"state contract references unknown requirement: {contract.state_id}"
+            )
+        if set(contract.gate_requirement_ids) - known_requirements:
+            raise UXBlueprintError(
+                f"state contract references unknown gate requirement: {contract.state_id}"
+            )
     matrix = json.loads((root / REPAIR_MATRIX_PATH).read_text(encoding="utf-8"))
     matrix_gap_families = {
         _string(item.get("gap_id"), "matrix gap ID"): frozenset(
@@ -1580,7 +1623,7 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
         )
         if "not" not in consequence.casefold():
             raise UXBlueprintError(f"specification gap does not fail closed: {gap_id}")
-    if gap_ids != sorted(set(gap_ids)) or len(gap_ids) != 20:
+    if gap_ids != sorted(set(gap_ids)) or len(gap_ids) != 12:
         raise UXBlueprintError("specification gap inventory is stale")
     known_gap_ids = frozenset(gap_ids)
     preliminary_ids = [
@@ -1590,6 +1633,16 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
     ]
     if len(preliminary_ids) != len(set(preliminary_ids)):
         raise UXBlueprintError("blueprint IDs must be globally unique typed IDs")
+    declared_state_ids = {
+        _string(variant.get("blueprint_id"), "state variant ID")
+        for model in states
+        for variant in _records(model.get("variants"), "state variants")
+    }
+    unknown_contract_states = set(state_contracts_by_id) - declared_state_ids
+    if unknown_contract_states:
+        raise UXBlueprintError(
+            f"state contract references unknown state ID: {sorted(unknown_contract_states)[0]}"
+        )
     for state_model in states:
         screen_id = _string(state_model.get("screen_id"), "state model screen_id")
         expected_model_id = (
@@ -1855,6 +1908,7 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
                         variant.get("behavior_authority_posture")
                         == "requirement_backed"
                         and screen_id in NORMALIZED_NARRATIVE_SCREEN_IDS
+                        and field in BEHAVIOR_OWNED_FIELDS
                     ):
                         signature = normalized_state_narrative_signature(
                             text, screen_titles[screen_id], variant
@@ -1960,6 +2014,12 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
                         f"gap-blocked behavior omits authority consequence: {variant_id}"
                     )
             elif behavior_posture == "requirement_backed":
+                contract = state_contracts_by_id.get(variant_id)
+                if contract is None:
+                    raise UXBlueprintError(
+                        "requirement-backed behavior requires independent structured canon "
+                        f"field ownership: {variant_id}"
+                    )
                 linked = set(variant.get("requirement_ids", []))
                 if (
                     not behavior_requirements
@@ -1971,6 +2031,28 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
                     raise UXBlueprintError(
                         f"unsupported behavior authority: {variant_id}"
                     )
+                if contract.requirement_id not in linked or not set(
+                    contract.gate_requirement_ids
+                ) <= linked:
+                    raise UXBlueprintError(
+                        f"state command contract requirements are not linked: {variant_id}"
+                    )
+                expected_labels = tuple(command.label for command in contract.commands)
+                if allowed_commands != expected_labels:
+                    raise UXBlueprintError(
+                        f"allowed commands drift from structured canon: {variant_id}"
+                    )
+                for field, expected in {
+                    "transition_exit": contract.transition_exit,
+                    "durable_effect": contract.durable_effect,
+                    "recovery_rollback": contract.recovery_rollback,
+                    "offline_behavior": contract.offline_behavior,
+                    "accessibility_focus": contract.accessibility_focus,
+                }.items():
+                    if variant.get(field) != expected:
+                        raise UXBlueprintError(
+                            f"blueprint command contract drift: {variant_id} {field}"
+                        )
                 owned_fields: set[str] = set()
                 evidence_requirements: list[str] = []
                 evidence_clauses: list[str] = []
@@ -2009,6 +2091,10 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
                     raise UXBlueprintError(
                         f"evidence requirement mismatch: {variant_id}"
                     )
+                if set(behavior_requirements) != {contract.requirement_id}:
+                    raise UXBlueprintError(
+                        f"behavior owner contradicts state command contract: {variant_id}"
+                    )
                 if owned_fields != set(BEHAVIOR_OWNED_FIELDS):
                     raise UXBlueprintError(
                         f"behavior fields lack exact ownership: {variant_id}"
@@ -2025,10 +2111,6 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
                         raise UXBlueprintError(
                             f"command lacks exact lexical ownership: {variant_id} {command}"
                         )
-                raise UXBlueprintError(
-                    "requirement-backed behavior requires independent structured canon "
-                    f"field ownership: {variant_id}"
-                )
             else:
                 raise UXBlueprintError(f"unsupported behavior authority: {variant_id}")
             if screen_id == "UX-SCREEN-TIME-DETAIL" and (
@@ -2043,7 +2125,6 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
                 )
             if "Undo" in allowed_commands and (
                 "CONTROL-UNDO-RECOVERY-001" not in variant.get("requirement_ids", [])
-                or "CONTROL-UNDO-RECOVERY-001" not in behavior_requirements
             ):
                 raise UXBlueprintError(
                     "Undo command omits CONTROL-UNDO-RECOVERY-001: "
@@ -2187,6 +2268,17 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
             raise UXBlueprintError(
                 f"gap affected state inventory is stale: {gap_id}"
             )
+    requirement_backed_state_ids = {
+        _string(variant.get("blueprint_id"), "state variant ID")
+        for model in states
+        for variant in _records(model.get("variants"), "state variants")
+        if variant.get("behavior_authority_posture") == "requirement_backed"
+    }
+    if set(state_contracts_by_id) != requirement_backed_state_ids:
+        raise UXBlueprintError(
+            "structured state command contract inventory must exactly equal "
+            "requirement-backed blueprint states"
+        )
     setup_first_use = next(
         model for model in states if model["screen_id"] == "UX-SCREEN-SETUP-FIRST-USE"
     )
@@ -2444,7 +2536,7 @@ def render_ux_blueprint_markdown(
             "",
             "## Specification gaps",
             "",
-            "These 20 specification gaps fail closed. A linked state with posture "
+            f"These {len(blueprint['specification_gaps'])} specification gaps fail closed. A linked state with posture "
             "`exploratory_blocked_by_specification_gap` is design exploration only and "
             "must not be selected as Phase 2 visual authority or emitted as task-pack behavior.",
             "",
@@ -2557,6 +2649,10 @@ def authority_eligible_state_variant_ids(
         validate_ux_blueprint(root, blueprint)
     except (UXBlueprintError, OSError):
         return frozenset()
+    contracts = {
+        contract.state_id: contract
+        for contract in load_state_command_contracts(root)
+    }
     eligible: set[str] = set()
     for model in blueprint.get("state_models", []):  # type: ignore[union-attr]
         for variant in model.get("variants", []):
@@ -2568,6 +2664,9 @@ def authority_eligible_state_variant_ids(
                 and not variant.get("specification_gap_ids")
                 and set(behavior_requirements)
                 <= set(variant.get("requirement_ids", []))
+                and variant.get("blueprint_id") in contracts
+                and contracts[str(variant["blueprint_id"])].activation_posture.value
+                == "active"
             ):
                 eligible.add(str(variant["blueprint_id"]))
     return frozenset(eligible)

@@ -15,6 +15,9 @@ from tools.ambitions_canon.model import (
     NotApplicable,
     ObjectBoundary,
     Requirement,
+    StateCommand,
+    StateCommandActivationPosture,
+    StateCommandContract,
 )
 
 
@@ -50,7 +53,9 @@ REQUIRED_FRONT_MATTER = {
     "depends_on": list,
     "source_owners": list,
 }
-OPTIONAL_FRONT_MATTER = frozenset({"profile", "not_applicable", "object_boundary"})
+OPTIONAL_FRONT_MATTER = frozenset(
+    {"profile", "not_applicable", "object_boundary", "state_command_contracts"}
+)
 FRONT_MATTER_FIELDS = frozenset(REQUIRED_FRONT_MATTER) | OPTIONAL_FRONT_MATTER
 STRING_FRONT_MATTER = (
     "spec_id",
@@ -92,6 +97,44 @@ OBJECT_BOUNDARY_LAWS = (
     "future_step_singularity",
     "reminder_acknowledgement_noncompletion",
     "proof_receipt_separation",
+)
+STATE_COMMAND_CONTRACT_FIELDS = frozenset(
+    {
+        "state_id",
+        "requirement_id",
+        "activation_posture",
+        "gate_requirement_ids",
+        "transition_exit",
+        "durable_effect",
+        "recovery_rollback",
+        "offline_behavior",
+        "accessibility_focus",
+        "commands",
+    }
+)
+STATE_COMMAND_FIELDS = frozenset(
+    {
+        "command_id",
+        "label",
+        "canonical_owner",
+        "preconditions",
+        "destination",
+        "effect",
+        "success_focus",
+        "failure_focus",
+        "commit_boundary",
+        "rollback_undo",
+        "privacy_egress",
+        "verification_ids",
+    }
+)
+STATE_ID = re.compile(r"^UX-STATE-VARIANT-[A-Z0-9]+(?:-[A-Z0-9]+)*$")
+COMMAND_ID = re.compile(r"^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$")
+NO_DISCLOSURE_STATE_ID = "UX-STATE-VARIANT-TRUST-INLINE-NO-DISCLOSURE"
+GENERIC_STATE_COMMAND_PHRASES = (
+    "command review for ux-state-variant-",
+    "truthful status for ux-state-variant-",
+    "preserves current canonical state for ux-state-variant-",
 )
 
 
@@ -198,6 +241,9 @@ def parse_canon_document(path: Path, text: str) -> CanonDocument:
         requirements=requirements,
         source_path=path,
         object_boundary=_object_boundary(metadata, path),
+        state_command_contracts=_state_command_contracts(
+            metadata, path, requirements
+        ),
     )
 
 
@@ -303,6 +349,363 @@ def _validate_front_matter(metadata: dict[str, object], path: Path) -> None:
 
     _not_applicable(metadata, path)
     _object_boundary(metadata, path)
+    _state_command_contracts(metadata, path)
+
+
+def _state_command_error(path: Path, message: str) -> CanonError:
+    return CanonError("CANON_STATE_COMMAND_INVALID", message, path, 1)
+
+
+def _trimmed_state_text(value: object, path: Path, field: str) -> str:
+    if not isinstance(value, str) or not value.strip() or value != value.strip():
+        raise _state_command_error(
+            path, f"state_command_contracts.{field} must be trimmed non-empty text"
+        )
+    return value
+
+
+def _state_string_array(
+    value: object,
+    path: Path,
+    field: str,
+    *,
+    allow_empty: bool = False,
+) -> tuple[str, ...]:
+    if not isinstance(value, list) or (not allow_empty and not value):
+        raise _state_command_error(
+            path, f"state_command_contracts.{field} must be a string array"
+        )
+    items = tuple(_trimmed_state_text(item, path, field) for item in value)
+    if items != tuple(sorted(set(items))):
+        raise _state_command_error(
+            path, f"state_command_contracts.{field} must be sorted and unique"
+        )
+    return items
+
+
+def _state_command_contracts(
+    metadata: dict[str, object],
+    path: Path,
+    requirements: tuple[Requirement, ...] | None = None,
+) -> tuple[StateCommandContract, ...]:
+    raw = metadata.get("state_command_contracts")
+    if raw is None:
+        return ()
+    if not isinstance(raw, list) or not raw:
+        raise _state_command_error(
+            path, "state_command_contracts must be a non-empty array of tables"
+        )
+    contracts: list[StateCommandContract] = []
+    command_ids: set[str] = set()
+    for index, value in enumerate(raw):
+        if not isinstance(value, dict) or set(value) != STATE_COMMAND_CONTRACT_FIELDS:
+            raise _state_command_error(
+                path,
+                f"state_command_contracts[{index}] fields are closed",
+            )
+        state_id = _trimmed_state_text(value["state_id"], path, "state_id")
+        if STATE_ID.fullmatch(state_id) is None:
+            raise _state_command_error(path, f"invalid state ID: {state_id}")
+        requirement_id = _trimmed_state_text(
+            value["requirement_id"], path, "requirement_id"
+        )
+        if re.fullmatch(CANONICAL_ID_GRAMMAR, requirement_id) is None:
+            raise _state_command_error(
+                path, f"invalid owning requirement ID: {requirement_id}"
+            )
+        try:
+            activation_posture = StateCommandActivationPosture(
+                _trimmed_state_text(
+                    value["activation_posture"], path, "activation_posture"
+                )
+            )
+        except ValueError as exc:
+            raise _state_command_error(
+                path, f"invalid activation posture for {state_id}"
+            ) from exc
+        gate_requirement_ids = _state_string_array(
+            value["gate_requirement_ids"],
+            path,
+            "gate_requirement_ids",
+            allow_empty=True,
+        )
+        if any(
+            re.fullmatch(CANONICAL_ID_GRAMMAR, identifier) is None
+            for identifier in gate_requirement_ids
+        ):
+            raise _state_command_error(path, f"invalid gate requirement ID: {state_id}")
+        if (
+            activation_posture is StateCommandActivationPosture.ACTIVE
+            and gate_requirement_ids
+        ) or (
+            activation_posture is StateCommandActivationPosture.FUTURE_GATED
+            and not gate_requirement_ids
+        ):
+            raise _state_command_error(
+                path, f"activation posture and gates contradict: {state_id}"
+            )
+        commands_raw = value["commands"]
+        if not isinstance(commands_raw, list):
+            raise _state_command_error(path, f"commands must be an array: {state_id}")
+        if not commands_raw and state_id != NO_DISCLOSURE_STATE_ID:
+            raise _state_command_error(
+                path, f"state requires at least one command: {state_id}"
+            )
+        commands: list[StateCommand] = []
+        for command_index, command_raw in enumerate(commands_raw):
+            if (
+                not isinstance(command_raw, dict)
+                or set(command_raw) != STATE_COMMAND_FIELDS
+            ):
+                raise _state_command_error(
+                    path,
+                    f"state command fields are closed: {state_id}[{command_index}]",
+                )
+            command_id = _trimmed_state_text(
+                command_raw["command_id"], path, "commands.command_id"
+            )
+            if COMMAND_ID.fullmatch(command_id) is None:
+                raise _state_command_error(path, f"invalid command ID: {command_id}")
+            if command_id in command_ids:
+                raise _state_command_error(path, f"duplicate command ID: {command_id}")
+            command_ids.add(command_id)
+            canonical_owner = _trimmed_state_text(
+                command_raw["canonical_owner"], path, "commands.canonical_owner"
+            )
+            if CONCEPT_KEY.fullmatch(canonical_owner) is None:
+                raise _state_command_error(
+                    path, f"invalid canonical owner concept: {command_id}"
+                )
+            commands.append(
+                StateCommand(
+                    command_id=command_id,
+                    label=_trimmed_state_text(
+                        command_raw["label"], path, "commands.label"
+                    ),
+                    canonical_owner=canonical_owner,
+                    preconditions=_state_string_array(
+                        command_raw["preconditions"],
+                        path,
+                        "commands.preconditions",
+                    ),
+                    destination=_trimmed_state_text(
+                        command_raw["destination"], path, "commands.destination"
+                    ),
+                    effect=_trimmed_state_text(
+                        command_raw["effect"], path, "commands.effect"
+                    ),
+                    success_focus=_trimmed_state_text(
+                        command_raw["success_focus"],
+                        path,
+                        "commands.success_focus",
+                    ),
+                    failure_focus=_trimmed_state_text(
+                        command_raw["failure_focus"],
+                        path,
+                        "commands.failure_focus",
+                    ),
+                    commit_boundary=_trimmed_state_text(
+                        command_raw["commit_boundary"],
+                        path,
+                        "commands.commit_boundary",
+                    ),
+                    rollback_undo=_trimmed_state_text(
+                        command_raw["rollback_undo"],
+                        path,
+                        "commands.rollback_undo",
+                    ),
+                    privacy_egress=_trimmed_state_text(
+                        command_raw["privacy_egress"],
+                        path,
+                        "commands.privacy_egress",
+                    ),
+                    verification_ids=_state_string_array(
+                        command_raw["verification_ids"],
+                        path,
+                        "commands.verification_ids",
+                    ),
+                )
+            )
+        if tuple(item.command_id for item in commands) != tuple(
+            sorted(item.command_id for item in commands)
+        ):
+            raise _state_command_error(path, f"commands must be sorted: {state_id}")
+        transition_exit = _trimmed_state_text(
+            value["transition_exit"], path, "transition_exit"
+        )
+        expected_transition = (
+            "\n".join(
+                f"{item.label} => destination: {item.destination}; effect: "
+                f"{item.effect}; focus: {item.success_focus}."
+                for item in commands
+            )
+            if commands
+            else "No command or transition is exposed."
+        )
+        durable_effect = _trimmed_state_text(
+            value["durable_effect"], path, "durable_effect"
+        )
+        recovery_rollback = _trimmed_state_text(
+            value["recovery_rollback"], path, "recovery_rollback"
+        )
+        offline_behavior = _trimmed_state_text(
+            value["offline_behavior"], path, "offline_behavior"
+        )
+        accessibility_focus = _trimmed_state_text(
+            value["accessibility_focus"], path, "accessibility_focus"
+        )
+        _validate_state_command_semantics(
+            path,
+            state_id,
+            durable_effect,
+            recovery_rollback,
+            offline_behavior,
+            accessibility_focus,
+            commands,
+        )
+        if transition_exit != expected_transition:
+            raise _state_command_error(
+                path, f"state transition contradicts commands: {state_id}"
+            )
+        contracts.append(
+            StateCommandContract(
+                state_id=state_id,
+                requirement_id=requirement_id,
+                activation_posture=activation_posture,
+                gate_requirement_ids=gate_requirement_ids,
+                transition_exit=transition_exit,
+                durable_effect=durable_effect,
+                recovery_rollback=recovery_rollback,
+                offline_behavior=offline_behavior,
+                accessibility_focus=accessibility_focus,
+                commands=tuple(commands),
+            )
+        )
+    if tuple(item.state_id for item in contracts) != tuple(
+        sorted({item.state_id for item in contracts})
+    ):
+        raise _state_command_error(
+            path, "state_command_contracts must be sorted with unique state IDs"
+        )
+    if requirements is not None:
+        by_id = {item.requirement_id: item for item in requirements}
+        concept_counts: dict[str, int] = {}
+        for item in requirements:
+            concept_counts[item.concept] = concept_counts.get(item.concept, 0) + 1
+        owned_concepts = set(metadata["owns_concepts"])
+        for contract in contracts:
+            requirement = by_id.get(contract.requirement_id)
+            if requirement is None:
+                raise _state_command_error(
+                    path,
+                    f"owning requirement is not in the same specification: {contract.state_id}",
+                )
+            if (
+                requirement.modality is not Modality.MUST
+                or requirement.concept not in owned_concepts
+                or concept_counts.get(requirement.concept) != 1
+            ):
+                raise _state_command_error(
+                    path,
+                    f"owning requirement concept is not unique and local: {contract.state_id}",
+                )
+            for command in contract.commands:
+                if command.canonical_owner != requirement.concept:
+                    raise _state_command_error(
+                        path, f"command owner concept mismatch: {command.command_id}"
+                    )
+                if re.search(
+                    rf"(?<!\w){re.escape(command.label)}(?!\w)",
+                    requirement.body,
+                    re.IGNORECASE,
+                ) is None:
+                    raise _state_command_error(
+                        path,
+                        f"owning requirement does not name command label: {command.command_id}",
+                    )
+    return tuple(contracts)
+
+
+def _validate_state_command_semantics(
+    path: Path,
+    state_id: str,
+    durable_effect: str,
+    recovery_rollback: str,
+    offline_behavior: str,
+    accessibility_focus: str,
+    commands: list[StateCommand],
+) -> None:
+    """Reject self-referential templates and undeclared command consequences."""
+
+    state_text = " ".join(
+        (durable_effect, recovery_rollback, offline_behavior, accessibility_focus)
+    ).casefold()
+    if state_id.casefold() in state_text or any(
+        phrase in state_text for phrase in GENERIC_STATE_COMMAND_PHRASES
+    ):
+        raise _state_command_error(
+            path, f"generic or self-referential state semantics: {state_id}"
+        )
+
+    signatures: set[tuple[str, ...]] = set()
+    for command in commands:
+        semantic_fields = (
+            command.destination,
+            command.effect,
+            command.success_focus,
+            command.failure_focus,
+            command.commit_boundary,
+            command.rollback_undo,
+            command.privacy_egress,
+        )
+        semantic_text = " ".join(semantic_fields).casefold()
+        if state_id.casefold() in semantic_text or any(
+            phrase in semantic_text for phrase in GENERIC_STATE_COMMAND_PHRASES
+        ):
+            raise _state_command_error(
+                path,
+                f"generic or self-referential command semantics: {command.command_id}",
+            )
+        if command.commit_boundary.startswith("Non-mutating:"):
+            if (
+                "no durable mutation" not in command.effect.casefold()
+                or "no receipt" not in command.effect.casefold()
+            ):
+                raise _state_command_error(
+                    path,
+                    f"non-mutating command omits no-mutation/Receipt law: {command.command_id}",
+                )
+        elif command.commit_boundary.startswith("Mutation:"):
+            required = ("typed", "event", "projection", "receipt", "history")
+            if any(term not in command.effect.casefold() for term in required):
+                raise _state_command_error(
+                    path,
+                    f"mutation command omits typed source/test/proof consequence: {command.command_id}",
+                )
+        elif command.commit_boundary.startswith("External-result:"):
+            if "no local canonical mutation" not in command.effect.casefold():
+                raise _state_command_error(
+                    path,
+                    f"external-result command can replay local mutation: {command.command_id}",
+                )
+        else:
+            raise _state_command_error(
+                path,
+                f"command commit posture is undeclared: {command.command_id}",
+            )
+        signature = (
+            command.destination,
+            command.effect,
+            command.success_focus,
+            command.commit_boundary,
+            command.rollback_undo,
+        )
+        if signature in signatures:
+            raise _state_command_error(
+                path,
+                f"commands have indistinguishable semantics: {state_id}",
+            )
+        signatures.add(signature)
 
 
 def _object_boundary(

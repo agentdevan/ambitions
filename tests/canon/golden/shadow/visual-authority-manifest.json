@@ -272,7 +272,7 @@
     }
   ],
   "authority_state": "shadow",
-  "canon_content_sha": "866de78044cb3b5f0b4afa349a5c3170a111870fb107579fdbdd6c4243a735df",
+  "canon_content_sha": "e28a6aa1ee8ad317775da10e97e4648ca020768f006305c642f4305bbf90f856",
   "canon_revision": 1,
   "compiler_version": "0.2.0",
   "owner_approval_complete": true,

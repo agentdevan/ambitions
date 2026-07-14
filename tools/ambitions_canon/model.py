@@ -228,6 +228,11 @@ class Modality(StrEnum):
     INFORMATIONAL = "INFORMATIONAL"
 
 
+class StateCommandActivationPosture(StrEnum):
+    ACTIVE = "active"
+    FUTURE_GATED = "future_gated"
+
+
 class GapSeverity(StrEnum):
     P0_BLOCKER = "P0_BLOCKER"
     P1_REQUIRED = "P1_REQUIRED"
@@ -335,6 +340,46 @@ class ObjectBoundary:
 
 
 @dataclass(frozen=True, slots=True)
+class StateCommand:
+    command_id: str
+    label: str
+    canonical_owner: str
+    preconditions: tuple[str, ...]
+    destination: str
+    effect: str
+    success_focus: str
+    failure_focus: str
+    commit_boundary: str
+    rollback_undo: str
+    privacy_egress: str
+    verification_ids: tuple[str, ...]
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "preconditions", tuple(self.preconditions))
+        object.__setattr__(self, "verification_ids", tuple(self.verification_ids))
+
+
+@dataclass(frozen=True, slots=True)
+class StateCommandContract:
+    state_id: str
+    requirement_id: str
+    activation_posture: StateCommandActivationPosture
+    gate_requirement_ids: tuple[str, ...]
+    transition_exit: str
+    durable_effect: str
+    recovery_rollback: str
+    offline_behavior: str
+    accessibility_focus: str
+    commands: tuple[StateCommand, ...]
+
+    def __post_init__(self) -> None:
+        object.__setattr__(
+            self, "gate_requirement_ids", tuple(self.gate_requirement_ids)
+        )
+        object.__setattr__(self, "commands", tuple(self.commands))
+
+
+@dataclass(frozen=True, slots=True)
 class CanonDocument:
     spec_id: str
     title: str
@@ -353,6 +398,7 @@ class CanonDocument:
     source_path: Path
     source_bytes: bytes | None = None
     object_boundary: ObjectBoundary | None = None
+    state_command_contracts: tuple[StateCommandContract, ...] = ()
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "owns_concepts", tuple(self.owns_concepts))
@@ -362,6 +408,9 @@ class CanonDocument:
         object.__setattr__(self, "sections", frozenset(self.sections))
         object.__setattr__(self, "not_applicable", tuple(self.not_applicable))
         object.__setattr__(self, "requirements", tuple(self.requirements))
+        object.__setattr__(
+            self, "state_command_contracts", tuple(self.state_command_contracts)
+        )
         if self.source_bytes is not None:
             object.__setattr__(self, "source_bytes", bytes(self.source_bytes))
 

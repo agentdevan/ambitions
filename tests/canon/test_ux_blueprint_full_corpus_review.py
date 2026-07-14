@@ -132,7 +132,7 @@ class UXBlueprintFullCorpusReviewTests(unittest.TestCase):
             with self.subTest(example=example):
                 self.assertIsNotNone(pattern.search(example))
 
-    def test_exact_21_gap_blocked_copy_fixtures_state_condition_and_consequence(self):
+    def test_exact_21_copy_fixtures_preserve_state_condition_and_consequence(self):
         fixture = json.loads(GAP_COPY_FIXTURE.read_text())["states"]
         self.assertEqual(len(fixture), 21)
         owners = {(item["screen_id"], item["variant_key"]) for item in fixture}
@@ -142,9 +142,9 @@ class UXBlueprintFullCorpusReviewTests(unittest.TestCase):
             owner = (item["screen_id"], item["variant_key"])
             with self.subTest(owner=owner):
                 state = states[owner]
-                self.assertEqual(
+                self.assertIn(
                     state["behavior_authority_posture"],
-                    "exploratory_blocked_by_specification_gap",
+                    {"exploratory_blocked_by_specification_gap", "requirement_backed"},
                 )
                 self.assertEqual(
                     state["visible_content_copy"], item["visible_content_copy"]

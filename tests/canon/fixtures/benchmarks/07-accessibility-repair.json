@@ -17,9 +17,13 @@
     "Claim-specific proof for claim_type=accessibility-proof must cover changed-file boundary Native/Ambitions/Interaction/Accessibility/, Native/Ambitions/Quality/Accessibility/ and applicable requirements A11Y-002, A11Y-DYNAMIC-TYPE-001, A11Y-INPUT-EQUIVALENCE-001, A11Y-PROOF-MATRIX-001, A11Y-READING-FOCUS-001, A11Y-REDUCED-EFFECTS-001, A11Y-STATUS-ERRORS-001, STANDARD-ACCEPTANCE-ACCESSIBILITY-001, STANDARD-ACCESSIBILITY."
   ],
   "expected_source_owners": [
+    "Native/Ambitions/Composer/",
     "Native/Ambitions/DesignSystem/",
     "Native/Ambitions/Interaction/Accessibility/",
-    "Native/Ambitions/Quality/Accessibility/"
+    "Native/Ambitions/Quality/Accessibility/",
+    "Native/Ambitions/Rendering/",
+    "Native/Ambitions/Stage/",
+    "Native/Ambitions/Surfaces/"
   ],
   "expected_validation": [
     "Execute selected verification contracts: AUDIT-A11Y-PROOF-MATRIX-001, PROOF-A11Y-DYNAMIC-TYPE-001, PROOF-A11Y-REDUCED-EFFECTS-001, PROOF-A11Y-SEMANTIC-EQUIVALENCE-001, REVIEW-A11Y-CLAIM-CEILING-001, STANDARD-ACCESSIBILITY-001, STANDARD-NATIVE-IOS-001, TEST-A11Y-INPUT-EQUIVALENCE-001, TEST-A11Y-READING-FOCUS-001, TEST-A11Y-STATUS-ERRORS-001.",

@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "866de78044cb3b5f0b4afa349a5c3170a111870fb107579fdbdd6c4243a735df",
+  "canon_content_sha": "d46b2bfa6a73b74498ab6a80f0f4a2d9366ab325ad0ab0e43940c7a37b90857e",
   "canon_revision": 1,
   "compiler_version": "0.2.0",
   "concepts": [
@@ -147,6 +147,10 @@
     {
       "concept": "app.setup.state",
       "spec_id": "APP-LAUNCH-SETUP"
+    },
+    {
+      "concept": "app.shell.command-contract",
+      "spec_id": "APP-SHELL"
     },
     {
       "concept": "app.shell.failure-recovery",
@@ -601,6 +605,10 @@
       "spec_id": "GLOBAL-CAPTURE"
     },
     {
+      "concept": "global.capture.command-contract",
+      "spec_id": "GLOBAL-CAPTURE"
+    },
+    {
       "concept": "global.capture.draft-recovery",
       "spec_id": "GLOBAL-CAPTURE"
     },
@@ -671,6 +679,10 @@
     {
       "concept": "global.trust-ownership",
       "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "global.trust.command-contract",
+      "spec_id": "GLOBAL-TRUST-INSPECTION"
     },
     {
       "concept": "global.trust.identity",
@@ -1353,6 +1365,10 @@
       "spec_id": "SURFACE-GOALS"
     },
     {
+      "concept": "surface.goals.command-contract",
+      "spec_id": "SURFACE-GOALS"
+    },
+    {
       "concept": "surface.goals.detail",
       "spec_id": "SURFACE-GOALS"
     },
@@ -1409,6 +1425,10 @@
       "spec_id": "SURFACE-TIME"
     },
     {
+      "concept": "surface.time.degraded-command-contract",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
       "concept": "surface.time.first-viewport",
       "spec_id": "SURFACE-TIME"
     },
@@ -1449,6 +1469,10 @@
       "spec_id": "SURFACE-TIME"
     },
     {
+      "concept": "surface.time.view-command-contract",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
       "concept": "surface.time.view-switching",
       "spec_id": "SURFACE-TIME"
     },
@@ -1475,6 +1499,10 @@
     {
       "concept": "surface.today-primary-identity",
       "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "surface.today.command-contract",
+      "spec_id": "SURFACE-TODAY"
     },
     {
       "concept": "surface.today.eligibility",
@@ -1518,6 +1546,10 @@
     },
     {
       "concept": "surface.you.appearance",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
+      "concept": "surface.you.command-contract",
       "spec_id": "SURFACE-YOU"
     },
     {
@@ -1770,5 +1802,5 @@
     }
   ],
   "schema_version": 1,
-  "traceability_input_sha": "21e77c04d7da895bbeef9a46721a189a41bca828deda2160578f7a8d40209594"
+  "traceability_input_sha": "d0a7d36c7f18fe2a5d8108ddf50092f32b4dbfdc48376aa2f6209d395836f20b"
 }

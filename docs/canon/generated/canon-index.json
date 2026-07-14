@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "866de78044cb3b5f0b4afa349a5c3170a111870fb107579fdbdd6c4243a735df",
+  "canon_content_sha": "d46b2bfa6a73b74498ab6a80f0f4a2d9366ab325ad0ab0e43940c7a37b90857e",
   "canon_revision": 1,
   "compiler_version": "0.2.0",
   "documents": [
@@ -845,7 +845,7 @@
     },
     {
       "concept": "app.shell.failure-recovery",
-      "line": 108,
+      "line": 667,
       "modality": "MUST",
       "requirement_id": "APP-SHELL-FAILURE-001",
       "source_path": "docs/canon/specifications/app/shell.md",
@@ -854,7 +854,7 @@
     },
     {
       "concept": "app.shell.state",
-      "line": 97,
+      "line": 656,
       "modality": "MUST",
       "requirement_id": "APP-SHELL-STATE-001",
       "source_path": "docs/canon/specifications/app/shell.md",
@@ -2968,8 +2968,17 @@
       "title": "Root interaction preserves useful state"
     },
     {
+      "concept": "app.shell.command-contract",
+      "line": 678,
+      "modality": "MUST",
+      "requirement_id": "SPEC-APP-SHELL-COMMAND-CONTRACT-001",
+      "source_path": "docs/canon/specifications/app/shell.md",
+      "status": "normative",
+      "title": "Exact state command ownership"
+    },
+    {
       "concept": "app.shell.first-viewport",
-      "line": 82,
+      "line": 641,
       "modality": "MUST",
       "requirement_id": "SPEC-APP-SHELL-FIRST-VIEWPORT-001",
       "source_path": "docs/canon/specifications/app/shell.md",
@@ -2978,7 +2987,7 @@
     },
     {
       "concept": "app.shell.global-actions",
-      "line": 67,
+      "line": 626,
       "modality": "MUST",
       "requirement_id": "SPEC-APP-SHELL-GLOBAL-ACTIONS-001",
       "source_path": "docs/canon/specifications/app/shell.md",
@@ -2987,7 +2996,7 @@
     },
     {
       "concept": "app.shell.root-navigation",
-      "line": 38,
+      "line": 597,
       "modality": "MUST",
       "requirement_id": "SPEC-APP-SHELL-ROOT-NAVIGATION-001",
       "source_path": "docs/canon/specifications/app/shell.md",
@@ -2996,7 +3005,7 @@
     },
     {
       "concept": "global.completed.contextual-placement",
-      "line": 161,
+      "line": 1157,
       "modality": "MUST NOT",
       "requirement_id": "SPEC-COMPLETED-CONTEXTUAL-PLACEMENT-001",
       "source_path": "docs/canon/specifications/global/trust-inspection.md",
@@ -3005,7 +3014,7 @@
     },
     {
       "concept": "global.capture.attachment-intake",
-      "line": 143,
+      "line": 925,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-CAPTURE-ATTACHMENT-INTAKE-001",
       "source_path": "docs/canon/specifications/global/capture.md",
@@ -3014,7 +3023,7 @@
     },
     {
       "concept": "global.capture.classification",
-      "line": 132,
+      "line": 914,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-CAPTURE-CLASSIFICATION-001",
       "source_path": "docs/canon/specifications/global/capture.md",
@@ -3023,7 +3032,7 @@
     },
     {
       "concept": "global.capture.close-behavior",
-      "line": 229,
+      "line": 1022,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-CAPTURE-CLOSE-BEHAVIOR-001",
       "source_path": "docs/canon/specifications/global/capture.md",
@@ -3031,8 +3040,17 @@
       "title": "Capture close behavior"
     },
     {
+      "concept": "global.capture.command-contract",
+      "line": 936,
+      "modality": "MUST",
+      "requirement_id": "SPEC-GLOBAL-CAPTURE-COMMAND-CONTRACT-001",
+      "source_path": "docs/canon/specifications/global/capture.md",
+      "status": "normative",
+      "title": "Exact state command ownership"
+    },
+    {
       "concept": "global.capture.draft-recovery",
-      "line": 83,
+      "line": 865,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-CAPTURE-DRAFT-RECOVERY-001",
       "source_path": "docs/canon/specifications/global/capture.md",
@@ -3041,7 +3059,7 @@
     },
     {
       "concept": "global.capture.identity",
-      "line": 34,
+      "line": 816,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-CAPTURE-IDENTITY-001",
       "source_path": "docs/canon/specifications/global/capture.md",
@@ -3050,7 +3068,7 @@
     },
     {
       "concept": "global.capture.keyboard",
-      "line": 57,
+      "line": 839,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-CAPTURE-KEYBOARD-001",
       "source_path": "docs/canon/specifications/global/capture.md",
@@ -3059,7 +3077,7 @@
     },
     {
       "concept": "global.capture.proposal-flow",
-      "line": 102,
+      "line": 884,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-CAPTURE-PROPOSAL-FLOW-001",
       "source_path": "docs/canon/specifications/global/capture.md",
@@ -3068,7 +3086,7 @@
     },
     {
       "concept": "global.capture.saved-for-later",
-      "line": 70,
+      "line": 852,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-CAPTURE-SAVED-FOR-LATER-001",
       "source_path": "docs/canon/specifications/global/capture.md",
@@ -3077,7 +3095,7 @@
     },
     {
       "concept": "global.capture.visual-authority",
-      "line": 121,
+      "line": 903,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001",
       "source_path": "docs/canon/specifications/global/capture.md",
@@ -3175,8 +3193,17 @@
       "title": "Search mapping is a scoped gap"
     },
     {
+      "concept": "global.trust.command-contract",
+      "line": 1071,
+      "modality": "MUST",
+      "requirement_id": "SPEC-GLOBAL-TRUST-COMMAND-CONTRACT-001",
+      "source_path": "docs/canon/specifications/global/trust-inspection.md",
+      "status": "normative",
+      "title": "Exact state command ownership"
+    },
+    {
       "concept": "global.trust.identity",
-      "line": 31,
+      "line": 1016,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-TRUST-INSPECTION-001",
       "source_path": "docs/canon/specifications/global/trust-inspection.md",
@@ -3185,7 +3212,7 @@
     },
     {
       "concept": "global.trust.layers",
-      "line": 48,
+      "line": 1033,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-TRUST-LAYERS-001",
       "source_path": "docs/canon/specifications/global/trust-inspection.md",
@@ -3194,7 +3221,7 @@
     },
     {
       "concept": "global.trust.proportional-receipts",
-      "line": 65,
+      "line": 1050,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-TRUST-PROPORTIONAL-RECEIPTS-001",
       "source_path": "docs/canon/specifications/global/trust-inspection.md",
@@ -3203,7 +3230,7 @@
     },
     {
       "concept": "global.trust.visual-authority",
-      "line": 75,
+      "line": 1060,
       "modality": "MUST",
       "requirement_id": "SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001",
       "source_path": "docs/canon/specifications/global/trust-inspection.md",
@@ -3212,7 +3239,7 @@
     },
     {
       "concept": "surface.goal-detail.viewport",
-      "line": 193,
+      "line": 1631,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-GOAL-DETAIL-VIEWPORT-001",
       "source_path": "docs/canon/specifications/surfaces/goals.md",
@@ -3221,7 +3248,7 @@
     },
     {
       "concept": "surface.goals.anti-patterns",
-      "line": 56,
+      "line": 1494,
       "modality": "MUST NOT",
       "requirement_id": "SPEC-SURFACE-GOALS-ANTI-PATTERNS-001",
       "source_path": "docs/canon/specifications/surfaces/goals.md",
@@ -3230,7 +3257,7 @@
     },
     {
       "concept": "surface.goals.closure",
-      "line": 138,
+      "line": 1576,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-GOALS-CLOSURE-001",
       "source_path": "docs/canon/specifications/surfaces/goals.md",
@@ -3238,8 +3265,17 @@
       "title": "Goal closure presentation"
     },
     {
+      "concept": "surface.goals.command-contract",
+      "line": 1642,
+      "modality": "MUST",
+      "requirement_id": "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001",
+      "source_path": "docs/canon/specifications/surfaces/goals.md",
+      "status": "normative",
+      "title": "Exact state command ownership"
+    },
+    {
       "concept": "surface.goals.detail",
-      "line": 149,
+      "line": 1587,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-GOALS-DETAIL-001",
       "source_path": "docs/canon/specifications/surfaces/goals.md",
@@ -3248,7 +3284,7 @@
     },
     {
       "concept": "surface.goals.execution-stack",
-      "line": 277,
+      "line": 1726,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-GOALS-EXECUTION-STACK-001",
       "source_path": "docs/canon/specifications/surfaces/goals.md",
@@ -3257,7 +3293,7 @@
     },
     {
       "concept": "surface.goals.first-viewport",
-      "line": 88,
+      "line": 1526,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-GOALS-FIRST-VIEWPORT-001",
       "source_path": "docs/canon/specifications/surfaces/goals.md",
@@ -3266,7 +3302,7 @@
     },
     {
       "concept": "surface.goals.identity",
-      "line": 41,
+      "line": 1479,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-GOALS-IDENTITY-001",
       "source_path": "docs/canon/specifications/surfaces/goals.md",
@@ -3275,7 +3311,7 @@
     },
     {
       "concept": "surface.goals.path-interaction",
-      "line": 160,
+      "line": 1598,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-GOALS-PATH-INTERACTION-001",
       "source_path": "docs/canon/specifications/surfaces/goals.md",
@@ -3284,7 +3320,7 @@
     },
     {
       "concept": "surface.goals.path-visual",
-      "line": 127,
+      "line": 1565,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-GOALS-PATH-VISUAL-001",
       "source_path": "docs/canon/specifications/surfaces/goals.md",
@@ -3293,7 +3329,7 @@
     },
     {
       "concept": "surface.goals.purpose",
-      "line": 99,
+      "line": 1537,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-GOALS-PURPOSE-001",
       "source_path": "docs/canon/specifications/surfaces/goals.md",
@@ -3302,7 +3338,7 @@
     },
     {
       "concept": "surface.goals.reviews",
-      "line": 171,
+      "line": 1609,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-GOALS-REVIEWS-001",
       "source_path": "docs/canon/specifications/surfaces/goals.md",
@@ -3311,7 +3347,7 @@
     },
     {
       "concept": "surface.goals.root-viewport",
-      "line": 182,
+      "line": 1620,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-GOALS-ROOT-VIEWPORT-001",
       "source_path": "docs/canon/specifications/surfaces/goals.md",
@@ -3320,7 +3356,7 @@
     },
     {
       "concept": "surface.goals.screen-inventory",
-      "line": 67,
+      "line": 1505,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-GOALS-SCREEN-INVENTORY-001",
       "source_path": "docs/canon/specifications/surfaces/goals.md",
@@ -3329,7 +3365,7 @@
     },
     {
       "concept": "surface.goals.visual-authority",
-      "line": 114,
+      "line": 1552,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-GOALS-VISUAL-AUTHORITY-001",
       "source_path": "docs/canon/specifications/surfaces/goals.md",
@@ -3338,7 +3374,7 @@
     },
     {
       "concept": "surface.time.creation-routes",
-      "line": 148,
+      "line": 2407,
       "modality": "SHOULD",
       "requirement_id": "SPEC-SURFACE-TIME-CREATION-ROUTES-001",
       "source_path": "docs/canon/specifications/surfaces/time.md",
@@ -3347,7 +3383,7 @@
     },
     {
       "concept": "surface.time.day",
-      "line": 82,
+      "line": 2341,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TIME-DAY-001",
       "source_path": "docs/canon/specifications/surfaces/time.md",
@@ -3355,8 +3391,17 @@
       "title": "Direct, inspectable day planning"
     },
     {
+      "concept": "surface.time.degraded-command-contract",
+      "line": 2547,
+      "modality": "MUST",
+      "requirement_id": "SPEC-SURFACE-TIME-DEGRADED-COMMAND-CONTRACT-001",
+      "source_path": "docs/canon/specifications/surfaces/time.md",
+      "status": "normative",
+      "title": "Exact state command ownership"
+    },
+    {
       "concept": "surface.time.first-viewport",
-      "line": 97,
+      "line": 2356,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TIME-FIRST-VIEWPORT-001",
       "source_path": "docs/canon/specifications/surfaces/time.md",
@@ -3365,7 +3410,7 @@
     },
     {
       "concept": "surface.time.imported-source",
-      "line": 189,
+      "line": 2448,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TIME-IMPORTED-SOURCE-001",
       "source_path": "docs/canon/specifications/surfaces/time.md",
@@ -3374,7 +3419,7 @@
     },
     {
       "concept": "surface.time.list",
-      "line": 255,
+      "line": 2514,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TIME-LIST-001",
       "source_path": "docs/canon/specifications/surfaces/time.md",
@@ -3383,7 +3428,7 @@
     },
     {
       "concept": "surface.time.month",
-      "line": 233,
+      "line": 2492,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TIME-MONTH-001",
       "source_path": "docs/canon/specifications/surfaces/time.md",
@@ -3392,7 +3437,7 @@
     },
     {
       "concept": "surface.time.object-detail",
-      "line": 266,
+      "line": 2525,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TIME-OBJECT-DETAIL-001",
       "source_path": "docs/canon/specifications/surfaces/time.md",
@@ -3401,7 +3446,7 @@
     },
     {
       "concept": "surface.time.primary-identity",
-      "line": 52,
+      "line": 2311,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TIME-PRIMARY-IDENTITY-001",
       "source_path": "docs/canon/specifications/surfaces/time.md",
@@ -3410,7 +3455,7 @@
     },
     {
       "concept": "surface.time.purpose",
-      "line": 110,
+      "line": 2369,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TIME-PURPOSE-001",
       "source_path": "docs/canon/specifications/surfaces/time.md",
@@ -3419,7 +3464,7 @@
     },
     {
       "concept": "surface.time.search",
-      "line": 200,
+      "line": 2459,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TIME-SEARCH-001",
       "source_path": "docs/canon/specifications/surfaces/time.md",
@@ -3428,7 +3473,7 @@
     },
     {
       "concept": "surface.time.step-membership",
-      "line": 164,
+      "line": 2423,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TIME-STEP-MEMBERSHIP-001",
       "source_path": "docs/canon/specifications/surfaces/time.md",
@@ -3437,7 +3482,7 @@
     },
     {
       "concept": "surface.time.today-control",
-      "line": 136,
+      "line": 2395,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TIME-TODAY-CONTROL-001",
       "source_path": "docs/canon/specifications/surfaces/time.md",
@@ -3445,8 +3490,17 @@
       "title": "Return to current temporal context"
     },
     {
+      "concept": "surface.time.view-command-contract",
+      "line": 2536,
+      "modality": "MUST",
+      "requirement_id": "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001",
+      "source_path": "docs/canon/specifications/surfaces/time.md",
+      "status": "normative",
+      "title": "Exact state command ownership"
+    },
+    {
       "concept": "surface.time.view-switching",
-      "line": 211,
+      "line": 2470,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TIME-VIEW-SWITCHING-001",
       "source_path": "docs/canon/specifications/surfaces/time.md",
@@ -3455,7 +3509,7 @@
     },
     {
       "concept": "surface.time.views",
-      "line": 71,
+      "line": 2330,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TIME-VIEWS-001",
       "source_path": "docs/canon/specifications/surfaces/time.md",
@@ -3464,7 +3518,7 @@
     },
     {
       "concept": "surface.time.visual-authority",
-      "line": 125,
+      "line": 2384,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TIME-VISUAL-AUTHORITY-001",
       "source_path": "docs/canon/specifications/surfaces/time.md",
@@ -3473,7 +3527,7 @@
     },
     {
       "concept": "surface.time.visual-geometry",
-      "line": 178,
+      "line": 2437,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TIME-VISUAL-GEOMETRY-001",
       "source_path": "docs/canon/specifications/surfaces/time.md",
@@ -3482,7 +3536,7 @@
     },
     {
       "concept": "surface.time.week",
-      "line": 222,
+      "line": 2481,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TIME-WEEK-001",
       "source_path": "docs/canon/specifications/surfaces/time.md",
@@ -3491,7 +3545,7 @@
     },
     {
       "concept": "surface.time.year",
-      "line": 244,
+      "line": 2503,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TIME-YEAR-001",
       "source_path": "docs/canon/specifications/surfaces/time.md",
@@ -3499,8 +3553,17 @@
       "title": "Year view"
     },
     {
+      "concept": "surface.today.command-contract",
+      "line": 710,
+      "modality": "MUST",
+      "requirement_id": "SPEC-SURFACE-TODAY-COMMAND-CONTRACT-001",
+      "source_path": "docs/canon/specifications/surfaces/today.md",
+      "status": "normative",
+      "title": "Exact state command ownership"
+    },
+    {
       "concept": "surface.today.eligibility",
-      "line": 77,
+      "line": 618,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TODAY-ELIGIBILITY-001",
       "source_path": "docs/canon/specifications/surfaces/today.md",
@@ -3509,7 +3572,7 @@
     },
     {
       "concept": "surface.today.first-viewport",
-      "line": 107,
+      "line": 648,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TODAY-FIRST-VIEWPORT-001",
       "source_path": "docs/canon/specifications/surfaces/today.md",
@@ -3518,7 +3581,7 @@
     },
     {
       "concept": "surface.today.missed-placement-continuity",
-      "line": 148,
+      "line": 689,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TODAY-MISSED-CONTINUITY-001",
       "source_path": "docs/canon/specifications/surfaces/today.md",
@@ -3527,7 +3590,7 @@
     },
     {
       "concept": "surface.today.purpose",
-      "line": 41,
+      "line": 582,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TODAY-PURPOSE-001",
       "source_path": "docs/canon/specifications/surfaces/today.md",
@@ -3536,7 +3599,7 @@
     },
     {
       "concept": "surface.today.object-row",
-      "line": 158,
+      "line": 699,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TODAY-ROW-001",
       "source_path": "docs/canon/specifications/surfaces/today.md",
@@ -3545,7 +3608,7 @@
     },
     {
       "concept": "surface.today.screen-inventory",
-      "line": 92,
+      "line": 633,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TODAY-SCREEN-INVENTORY-001",
       "source_path": "docs/canon/specifications/surfaces/today.md",
@@ -3554,7 +3617,7 @@
     },
     {
       "concept": "surface.today.states",
-      "line": 126,
+      "line": 667,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TODAY-STATES-001",
       "source_path": "docs/canon/specifications/surfaces/today.md",
@@ -3563,7 +3626,7 @@
     },
     {
       "concept": "surface.today.temporal-rail",
-      "line": 60,
+      "line": 601,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TODAY-TEMPORAL-RAIL-001",
       "source_path": "docs/canon/specifications/surfaces/today.md",
@@ -3572,7 +3635,7 @@
     },
     {
       "concept": "surface.today.visual-authority",
-      "line": 137,
+      "line": 678,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001",
       "source_path": "docs/canon/specifications/surfaces/today.md",
@@ -3581,7 +3644,7 @@
     },
     {
       "concept": "surface.you.appearance",
-      "line": 144,
+      "line": 1177,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-YOU-APPEARANCE-001",
       "source_path": "docs/canon/specifications/surfaces/you.md",
@@ -3589,8 +3652,17 @@
       "title": "Appearance controls"
     },
     {
+      "concept": "surface.you.command-contract",
+      "line": 1221,
+      "modality": "MUST",
+      "requirement_id": "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001",
+      "source_path": "docs/canon/specifications/surfaces/you.md",
+      "status": "normative",
+      "title": "Exact state command ownership"
+    },
+    {
       "concept": "surface.you.contextual-education",
-      "line": 177,
+      "line": 1210,
       "modality": "SHOULD",
       "requirement_id": "SPEC-SURFACE-YOU-CONTEXTUAL-EDUCATION-001",
       "source_path": "docs/canon/specifications/surfaces/you.md",
@@ -3599,7 +3671,7 @@
     },
     {
       "concept": "surface.you.data-controls",
-      "line": 155,
+      "line": 1188,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-YOU-DATA-CONTROLS-001",
       "source_path": "docs/canon/specifications/surfaces/you.md",
@@ -3608,7 +3680,7 @@
     },
     {
       "concept": "surface.you.depth",
-      "line": 99,
+      "line": 1132,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-YOU-DEPTH-001",
       "source_path": "docs/canon/specifications/surfaces/you.md",
@@ -3617,7 +3689,7 @@
     },
     {
       "concept": "surface.you.first-viewport",
-      "line": 86,
+      "line": 1119,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-YOU-FIRST-VIEWPORT-001",
       "source_path": "docs/canon/specifications/surfaces/you.md",
@@ -3626,7 +3698,7 @@
     },
     {
       "concept": "surface.you.identity",
-      "line": 40,
+      "line": 1073,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-YOU-IDENTITY-001",
       "source_path": "docs/canon/specifications/surfaces/you.md",
@@ -3635,7 +3707,7 @@
     },
     {
       "concept": "surface.you.no-knowledge-model",
-      "line": 121,
+      "line": 1154,
       "modality": "MUST NOT",
       "requirement_id": "SPEC-SURFACE-YOU-NO-KNOWLEDGE-MODEL-001",
       "source_path": "docs/canon/specifications/surfaces/you.md",
@@ -3644,7 +3716,7 @@
     },
     {
       "concept": "surface.you.privacy-data-boundary",
-      "line": 166,
+      "line": 1199,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-YOU-PRIVACY-DATA-BOUNDARY-001",
       "source_path": "docs/canon/specifications/surfaces/you.md",
@@ -3653,7 +3725,7 @@
     },
     {
       "concept": "surface.you.profile",
-      "line": 133,
+      "line": 1166,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-YOU-PROFILE-001",
       "source_path": "docs/canon/specifications/surfaces/you.md",
@@ -3662,7 +3734,7 @@
     },
     {
       "concept": "surface.you.screen-inventory",
-      "line": 55,
+      "line": 1088,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-YOU-SCREEN-INVENTORY-001",
       "source_path": "docs/canon/specifications/surfaces/you.md",
@@ -3671,7 +3743,7 @@
     },
     {
       "concept": "surface.you.settings-drilldown",
-      "line": 261,
+      "line": 1305,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-YOU-SETTINGS-DRILLDOWN-001",
       "source_path": "docs/canon/specifications/surfaces/you.md",
@@ -3680,7 +3752,7 @@
     },
     {
       "concept": "surface.you.time-preferences",
-      "line": 272,
+      "line": 1316,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-YOU-TIME-PREFERENCES-001",
       "source_path": "docs/canon/specifications/surfaces/you.md",
@@ -3689,7 +3761,7 @@
     },
     {
       "concept": "surface.you.visual-authority",
-      "line": 110,
+      "line": 1143,
       "modality": "MUST",
       "requirement_id": "SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001",
       "source_path": "docs/canon/specifications/surfaces/you.md",
@@ -4526,5 +4598,5 @@
     }
   ],
   "schema_version": 1,
-  "traceability_input_sha": "21e77c04d7da895bbeef9a46721a189a41bca828deda2160578f7a8d40209594"
+  "traceability_input_sha": "d0a7d36c7f18fe2a5d8108ddf50092f32b4dbfdc48376aa2f6209d395836f20b"
 }

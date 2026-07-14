@@ -272,7 +272,7 @@
     }
   ],
   "authority_state": "shadow",
-  "canon_content_sha": "866de78044cb3b5f0b4afa349a5c3170a111870fb107579fdbdd6c4243a735df",
+  "canon_content_sha": "d46b2bfa6a73b74498ab6a80f0f4a2d9366ab325ad0ab0e43940c7a37b90857e",
   "canon_revision": 1,
   "compiler_version": "0.2.0",
   "owner_approval_complete": true,
@@ -840,7 +840,7 @@
     ]
   },
   "schema_version": 1,
-  "traceability_input_sha": "21e77c04d7da895bbeef9a46721a189a41bca828deda2160578f7a8d40209594",
+  "traceability_input_sha": "d0a7d36c7f18fe2a5d8108ddf50092f32b4dbfdc48376aa2f6209d395836f20b",
   "ui_readiness": false,
   "ui_readiness_reason": "visual authority references do not prove implementation, accessibility, device, visual, or release readiness"
 }
