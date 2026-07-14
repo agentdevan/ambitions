@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_sha256": "542b43f356bfdca724a808681dbe91f0cfed1923a8e5aab683c50f7114779399",
+  "canon_sha256": "9f56bdf001a9ec6d33a9c383b6457e2ef2af3e52fa7b207eb168f16c873ed752",
   "claim_ceiling": "This receipt records an explicit non-CI shadow comparison only. It does not authorize implementation or claim product, runtime, source, visual, accessibility, privacy, device, TestFlight, App Store, or release Green.",
   "comparison": {
     "dimensions": [
@@ -25,14 +25,14 @@
       {
         "dimension": "unauthorized_assumptions",
         "new_score": 4,
-        "old_score": 4,
-        "verdict": "equivalent"
+        "old_score": 3,
+        "verdict": "new_better"
       },
       {
         "dimension": "source_ownership",
         "new_score": 4,
-        "old_score": 3,
-        "verdict": "new_better"
+        "old_score": 4,
+        "verdict": "equivalent"
       },
       {
         "dimension": "validation_completeness",
@@ -51,17 +51,17 @@
     "new_total_score": 28,
     "old_total_score": 26,
     "overall_verdict": "new_better",
-    "reviewer": "Independent Semantic Comparator",
-    "sha256": "49606fe860d37d39e6966e97480dc007818333e1386f077981a0218a47f88ac4"
+    "reviewer": "Final Independent Semantic Comparator",
+    "sha256": "60e994110892cf84de35ed7ec3da6b1da361470bf6b11f1c5a02481d9e5eb884"
   },
   "compiler_version": "0.2.0",
-  "evaluated_task_pack_commit": "1e81d170e997e6895b92cdc080563b28b60ac636",
+  "evaluated_task_pack_commit": "262327c04261deb43bfe3bd3e7ad1e9380c0c0ab",
   "lane": "explicit_non_ci_semantic_review",
-  "new_prompt_sha256": "a9e72e32d36bb9db1d00e95df3c76a91d8fb3c4abba80e23f542c992c8a371e6",
+  "new_prompt_sha256": "6a42ffa78634043744efd8866d1eb90302f7ad2da56338907d4c1e54e084978a",
   "new_response": {
     "model": "gpt-5-sol-high",
-    "reviewer": "New Pack Owner Repair Evaluator",
-    "sha256": "5468e8424bcaf9164ba8389105c42276e6b6485e99dfe42dd7a5e16909ca038a"
+    "reviewer": "Final Repaired New Pack Evaluator",
+    "sha256": "15bd77ef9bb199644058a85ff6dff0b2d48b75fc0a2f1955971ba5b5a221e7c4"
   },
   "old_prompt_sha256": "338c2088cc6a74dc06a3fc087bc6848280b117b7638aefdb377b9649face56cb",
   "old_response": {
@@ -71,43 +71,43 @@
   },
   "pack_hashes": [
     {
-      "json_sha256": "c22e5a5a72a0884cbc1f39290fcbb05570ff42c5c95bf0560f92f5438a8942e6",
-      "markdown_sha256": "edafb8debdeee583404d93ab36ca4107f952deed2e2cbd2da896046decd52561",
+      "json_sha256": "4384f6a7943fff51cdfb9e738dd625a40a45c43345b560e36cce7a487d710bd7",
+      "markdown_sha256": "91b6c3f6eb25125b6719c777649e75741fa1ff73e25c0d85eae108f9ed0849a6",
       "scenario_id": "today-swiftui"
     },
     {
-      "json_sha256": "042664b058d123929fce926e09a4d08bcb9a32bfa28bc2ea6464b7f740336781",
-      "markdown_sha256": "2ebf511129de86cfa51b029b7f1925b4e84ebad841749eb3867403668747e5e8",
+      "json_sha256": "1f56ca7e05d1495657629e1ed4f5f0d3cee122706ae49dceee4c80d8b8bb0c28",
+      "markdown_sha256": "5356f4e51fb802c8301441804658e7eecaa7ea9f5bb897d2e7f50c75eef483c3",
       "scenario_id": "time-recurrence"
     },
     {
-      "json_sha256": "46c943e846be55e170c810adf9372d91b02a885ce20d0e4caf792232ec7048c6",
-      "markdown_sha256": "4d84fce70f51c63de9f99bd9610d1fecff74cbbe5d0f264783d125ffcb94ec08",
+      "json_sha256": "4da3088bc9e0f60f2f411cc52c4786b8fa004b0807a9a163f66e1fc4f22e0570",
+      "markdown_sha256": "e1081519b763796fc84fc782e1a57b06780e88f4071c1ee5d93f889b4022be08",
       "scenario_id": "capture-proposal"
     },
     {
-      "json_sha256": "94e9131b6cce9ca143c3b10839c5e03d71c841b8b341dce4190cd35bb8c1723b",
-      "markdown_sha256": "2c9396740aa26b78302133e784cc91b19713d5afefa22ccf09f339ae5c5cf6e8",
+      "json_sha256": "dcab9dd24816d07a6dda4fe9136ae498424cfd40e8f25f9d26343796687be7ad",
+      "markdown_sha256": "b72c9f881037687625237ceabfad68a4951da7e231857ac137c5ee7f65ccf670",
       "scenario_id": "local-runtime-mutation"
     },
     {
-      "json_sha256": "f37ace3f119c4213b52920ddf444c3c9eb7191df6b33ed23ed1a410fcd44d7cf",
-      "markdown_sha256": "2c9f317a36af8bff1175948224adad553c7cd1a42553eeca23c3cb95f1edbcdc",
+      "json_sha256": "6891ed5104e326ddbd23d7205a3dc2d91b857a4823f56afcb8a2bfe3d5ae081f",
+      "markdown_sha256": "f883cb994a81d543172f4c2b729b8849c21374e7b3bbd29867c63afe3bc1f34a",
       "scenario_id": "cloudkit-continuity"
     },
     {
-      "json_sha256": "b0c5be5402eb4545bd368be1286de33d583aa4c47f6de3e8a7ebffec54dda38e",
-      "markdown_sha256": "60df93417673877fbb0d30ef39ca759c250ec0a5e9c69721e438783faa20c90d",
+      "json_sha256": "b187e0a931328129ec8c37e9e9cde826a1b6a66dc6e0561cbaddab58ac618d39",
+      "markdown_sha256": "cfe2f060974010919cc1890d9a5c4d0284554540cf90b39e81e6dcc610115d8e",
       "scenario_id": "source-atlas-boundary"
     },
     {
-      "json_sha256": "0b4358adcc94f4ec6ee0e0e6180a94fd7463ae03ddfd013328b7484650a62eac",
-      "markdown_sha256": "f6dc6205c94ef11af53d276c22bd6aabb9d9645412630067b37f8cda411c207b",
+      "json_sha256": "21cce43c580a2fb4ae9a838404ab0823b78b510a9a09b574c53e262755613edc",
+      "markdown_sha256": "838a06aee2631beb992cdfeb90660b138627ebfd47ebc0892c2f67f9178d9f13",
       "scenario_id": "accessibility-repair"
     },
     {
-      "json_sha256": "d3fc03dcc1cdeeb420277d70c6984a89a43be3d7c215d8efa5f922dcd4d49a34",
-      "markdown_sha256": "f706982569d3e835b12b59928eeef009664f430e5b9ecae8acba995d1a63838d",
+      "json_sha256": "11bea8913e48dca29bdcc1a072158c57b6b3407d40eec8ceb46fcc1812643f9a",
+      "markdown_sha256": "f636770af4c2dee9dc570e297ad4ab43afda20c8997620f81145980522247af1",
       "scenario_id": "release-proof-claim"
     }
   ],

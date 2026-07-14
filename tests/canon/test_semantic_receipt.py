@@ -20,7 +20,7 @@ RECEIPT = (
     ROOT
     / "docs/qa/evidence/2026-07-13-train-4-semantic-comparison/receipt.json"
 )
-EVALUATED_COMMIT = "1e81d170e997e6895b92cdc080563b28b60ac636"
+EVALUATED_COMMIT = "262327c04261deb43bfe3bd3e7ad1e9380c0c0ab"
 
 
 class SemanticReceiptTest(unittest.TestCase):
@@ -69,8 +69,8 @@ class SemanticReceiptTest(unittest.TestCase):
                 ("semantic_equivalence", "equivalent", 4, 4),
                 ("relevant_law_recall", "new_better", 3, 4),
                 ("contradiction_control", "equivalent", 4, 4),
-                ("unauthorized_assumptions", "equivalent", 4, 4),
-                ("source_ownership", "new_better", 3, 4),
+                ("unauthorized_assumptions", "new_better", 3, 4),
+                ("source_ownership", "equivalent", 4, 4),
                 ("validation_completeness", "equivalent", 4, 4),
                 ("proof_discipline", "equivalent", 4, 4),
             ),

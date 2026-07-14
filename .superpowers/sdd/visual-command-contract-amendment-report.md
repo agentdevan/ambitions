@@ -93,28 +93,26 @@ Historical frozen-candidate evidence and current repair status:
 
 ### Fresh semantic comparison receipt
 
-The tracked receipt committed at `bc5e1e82dbbc506b562fc763e9ea92dba965b88d` is bound to deterministic task-pack commit `1e81d170e997e6895b92cdc080563b28b60ac636`. The controller regenerated the ignored semantic-review bundle from that deterministic commit and supplied independently authored old-path, new-pack, and comparison evidence. The receipt was Green immediately before this final deterministic repair. It records only hashes, attribution, scores, verdicts, and the closed claim ceiling; it does not retain response prose or comparator rationale.
+The final tracked receipt is bound to deterministic validator/evaluated commit `262327c04261deb43bfe3bd3e7ad1e9380c0c0ab`. Terminal semantic-repair commit `030cf73f38c6bab9a0096af7706e6a85644026a2` froze the evaluated canon and task-pack bytes; `262327c` then strengthened only the offline receipt validator and its focused tests. Regeneration at `262327c` proved the canon, old/new prompts, all sixteen pack hashes, old/new response hashes, comparison hash, scores, and verdict byte-identical to the already approved final evidence, so no model was rerun.
 
-The present repair changes canonical specification and generated canon bytes after `1e81d170`. Therefore the tracked receipt is now intentionally stale and cannot authorize any current semantic-superiority claim. The following bindings and 26/28 result remain historical evidence for `1e81d170` until the controller performs one new final comparison against the new deterministic repair commit and records a newly bound receipt.
+The independently reviewed result is old 26 / new 28 with overall verdict `new_better`. No dimension is `old_better`: relevant-law recall and unauthorized-assumption control are `new_better`; semantic equivalence, contradiction control, source ownership, validation completeness, and proof discipline are equivalent. The receipt records only hashes, attribution, scores, verdicts, and the closed claim ceiling; it does not retain response prose or comparator rationale. This report is part of the final proof-only commit; that commit SHA remains pending until Git creates it and cannot be self-referenced by the commit's own bytes.
 
 Evidence bindings:
 
 ```text
-canon SHA-256: 542b43f356bfdca724a808681dbe91f0cfed1923a8e5aab683c50f7114779399
+canon SHA-256: 9f56bdf001a9ec6d33a9c383b6457e2ef2af3e52fa7b207eb168f16c873ed752
 old prompt SHA-256: 338c2088cc6a74dc06a3fc087bc6848280b117b7638aefdb377b9649face56cb
-new prompt SHA-256: a9e72e32d36bb9db1d00e95df3c76a91d8fb3c4abba80e23f542c992c8a371e6
+new prompt SHA-256: 6a42ffa78634043744efd8866d1eb90302f7ad2da56338907d4c1e54e084978a
 old response SHA-256: f8e73052af92ad97e4f686730190e15532c5107328060c5c9ac8272aa9bd9834
-new response SHA-256: 5468e8424bcaf9164ba8389105c42276e6b6485e99dfe42dd7a5e16909ca038a
-comparison SHA-256: 49606fe860d37d39e6966e97480dc007818333e1386f077981a0218a47f88ac4
+new response SHA-256: 15bd77ef9bb199644058a85ff6dff0b2d48b75fc0a2f1955971ba5b5a221e7c4
+comparison SHA-256: 60e994110892cf84de35ed7ec3da6b1da361470bf6b11f1c5a02481d9e5eb884
 comparison totals: old 26 / new 28
 overall verdict: new_better
 ```
 
-Strict receipt TDD began from the unchanged historical receipt. `uv run --python 3.12 --no-project python -m unittest tests.canon.test_semantic_receipt` failed as expected with exit 1: 8 tests ran, producing 10 failures and 1 error headed by `SEMANTIC_RECEIPT_STALE`. The requested literal path `uv run --python 3.12 --no-project python tools/ambitions-canon.py semantic-review --check-receipt` does not exist in this repository and exited 2. The actual checked-in CLI path, `uv run --python 3.12 --no-project python scripts/ambitions-canon.py semantic-review --check-receipt`, then failed closed with exit 1 and `SEMANTIC_RECEIPT_STALE` before the receipt was updated.
+Strict final receipt TDD began from the unchanged stale receipt after validator commit `262327c`. `uv run --python 3.12 --no-project python -m unittest tests.canon.test_semantic_receipt` failed as expected with exit 1: 11 tests ran with five failures and one error headed by `SEMANTIC_RECEIPT_STALE`. The offline checked-in CLI, `uv run --python 3.12 --no-project python scripts/ambitions-canon.py semantic-review --check-receipt`, also failed closed with exit 1 and `SEMANTIC_RECEIPT_STALE` before the receipt was updated. Final Green results are recorded below after verification.
 
-The first focused post-update run correctly made the CLI Green but exposed one stale negative-test total inherited from the previous 25/28 receipt: 8 tests ran with one failure because schema validation preceded the intended `SEMANTIC_RECEIPT_POLICY` assertion. Updating that fixture total to the current 26/28 arithmetic preserved the negative policy case. The final focused unittest passed all 8 tests in 36.108 seconds with exit 0. The actual CLI then reported `GREEN ambitions canon semantic-review receipt packs=8 verdict=new_better scores=26/28` with exit 0, and `git diff --check` exited 0.
-
-The historical receipt claim ceiling remains exactly: "This receipt records an explicit non-CI shadow comparison only. It does not authorize implementation or claim product, runtime, source, visual, accessibility, privacy, device, TestFlight, App Store, or release Green."
+The receipt claim ceiling remains exactly: "This receipt records an explicit non-CI shadow comparison only. It does not authorize implementation or claim product, runtime, source, visual, accessibility, privacy, device, TestFlight, App Store, or release Green."
 
 ### Final contract-repair TDD and verification
 
@@ -129,7 +127,15 @@ RED result: exit 1; 13 tests ran with seven intended failures. The failures prov
 
 The minimum repair assigns `Done` only to those four terminal dismissal states, with state-specific return destinations and focus targets. Every replacement command is non-mutating, creates no Receipt, makes no canonical commit, and cannot reissue deletion, invent a restore identity, or reopen/commit correction. The owning requirement bodies name `Done`; the prior destructive/correction labels remain authorized only for states where the action is possible. The two reviewer-cited malformed strings and their byte-identical repetitions were repaired without a broad prose rewrite.
 
-Focused GREEN: exit 0; 13 tests passed in 0.163 seconds. The final bounded parser/model/schema/UX-blueprint covering command passed 100 tests in 37.772 seconds with exit 0. Deterministic canon build and UX-blueprint writers refreshed the checked-in projections. Audit, traceability, build check, and UX-blueprint check are Green. The semantic receipt check exits 1 with `SEMANTIC_RECEIPT_STALE` because `canon_sha256` no longer matches the regenerated checkout bytes; this is the required fail-closed result pending one new final comparison.
+Focused GREEN: exit 0; 13 tests passed in 0.163 seconds. The final bounded parser/model/schema/UX-blueprint covering command passed 100 tests in 37.772 seconds with exit 0. Deterministic canon build and UX-blueprint writers refreshed the checked-in projections. Audit, traceability, build check, and UX-blueprint check are Green. Commit `030cf73f` is the terminal semantic repair: no later commit changes canon, specification, generated, fixture, or semantic evidence bytes.
+
+### Fail-closed evaluated-commit validator repair
+
+The existing validator incorrectly equated the evaluated checkout with the latest commit touching a partial hard-coded task-pack path set. That resolved `1e81d170` even though terminal semantic repair `030cf73f` changed canon and generated bytes. The stronger law permits an evaluated commit only when it is an ancestor and every tracked path changed after it is in the exact closed proof-only allowlist: this report, the tracked receipt, and the receipt test. The validator obtains the changed paths offline with `git diff --name-only --diff-filter=ACMRTUXB <evaluated>..HEAD --`; any canon, specification, generated, tool, compiler, fixture, malformed, duplicate, or other path fails `SEMANTIC_RECEIPT_STALE`. Existing evaluated-byte, ancestor, and deterministic regenerated-binding checks remain mandatory.
+
+Focused validator RED: exit 1. Three tests proved that proof-only ancestor acceptance failed under the old latest-path rule and that changed canon/compiler paths produced the wrong invalid verdict rather than `SEMANTIC_RECEIPT_STALE`. Focused GREEN: exit 0; 3 tests passed in 0.005 seconds. Benchmark/parser regression: exit 0; 64 tests passed in 81.958 seconds. `git diff --check` exited 0 before deterministic validator commit `262327c04261deb43bfe3bd3e7ad1e9380c0c0ab` was created.
+
+The ignored semantic bundle was regenerated at `262327c`: command exit 0, 22 files, status `comparison_recorded`. Canon hash, both prompt hashes, all sixteen task-pack hashes, both response hashes, comparison hash, 26/28 scores, and `new_better` verdict were byte-identical to the approved evidence. No model was rerun.
 
 | Command | Exit | Result |
 | --- | ---: | --- |
@@ -143,11 +149,13 @@ Focused GREEN: exit 0; 13 tests passed in 0.163 seconds. The final bounded parse
 | `ambitions-canon.py build --check` | 0 | Green; generated outputs current |
 | `ambitions-canon.py benchmark` | 0 | Green; 8 scenarios, deterministic report, 16 representative pack files |
 | `ambitions-canon.py ux-blueprint --check` | 0 | Green; 47 screens, 47 state models, 423 taxonomy rows, 433 variants, 18 objects, 12 journeys, 449 requirements, 324 visual and 125 nonvisual dispositions |
-| receipt check immediately after `bc5e1e82` | 0 historical | Green; 8 packs, `new_better`, scores 26/28, bound to `1e81d170` |
-| current `ambitions-canon.py semantic-review --check-receipt` | 1 expected | `SEMANTIC_RECEIPT_STALE`; `canon_sha256` differs after this deterministic repair |
+| final receipt unittest before update | 1 expected | 11 tests; 5 failures and 1 error headed by `SEMANTIC_RECEIPT_STALE` |
+| final receipt check before update | 1 expected | `SEMANTIC_RECEIPT_STALE`; prior receipt predates evaluated commit `262327c` |
+| final focused receipt unittest | 0 | 11 tests passed in 35.976 seconds against the exact final bindings and closed proof-only diff |
+| final `ambitions-canon.py semantic-review --check-receipt` | 0 | Green; 8 packs, `new_better`, scores 26/28 |
 | `git diff --check` | 0 | clean |
 
-The receipt is not updated or rebound in this repair. It MUST remain stale until the controller performs a fresh blinded old/new comparison against the new deterministic commit. The historical 26/28 comparison is not used to claim current semantic superiority.
+The final proof-only receipt update changes no canon, specification, compiler, generated, fixture, or response-evidence bytes. It records the controller-supplied final blinded comparison against evaluated validator commit `262327c` and remains a non-CI shadow comparison only.
 
 ### Generated representative-pack owner sets
 
@@ -233,7 +241,7 @@ tools/ambitions_canon/
 
 ### Exact full-range changed-file list
 
-Mechanically generated with `git diff --name-only 3c0957ebb2202f10de53975b2cb74e8f35253808` for the complete `3c0957e..HEAD` repair range: 69 tracked paths.
+Mechanically generated with `git diff --name-only 3c0957ebb2202f10de53975b2cb74e8f35253808` for the complete `3c0957e..HEAD` repair range: 70 tracked paths.
 
 ```text
 .superpowers/sdd/visual-command-contract-amendment-report.md
@@ -302,6 +310,7 @@ tests/canon/test_ux_blueprint_matrix_repairs.py
 tests/canon/test_ux_blueprint_review_repairs.py
 tests/canon/test_ux_blueprint_semantic_repairs.py
 tests/canon/test_ux_blueprint_whole_range_repair.py
+tools/ambitions_canon/benchmark.py
 tools/ambitions_canon/model.py
 tools/ambitions_canon/parser.py
 tools/ambitions_canon/ux_blueprint.py
@@ -313,14 +322,14 @@ The deterministic canon build and UX-blueprint writer refresh the canon index, r
 
 ## Review and findings
 
-The exact review of `3c0957e..bc5e1e82` returned one Critical semantic-contract finding, one Important report/evidence finding, and one Minor prose finding. This deterministic repair addresses the exact docket only. Specification-compliance and code-quality re-review of `3c0957e..HEAD` remain required after commit.
+The exact review of `3c0957e..bc5e1e82` returned one Critical semantic-contract finding, one Important report/evidence finding, and one Minor prose finding. Terminal semantic-repair commit `030cf73f` addresses the exact semantic docket; validator commit `262327c` closes the evaluated-commit binding defect without changing evaluated semantic bytes. The final proof-only commit records the independently supplied comparison. Specification-compliance and code-quality re-review of `3c0957e..HEAD` remain required after commit.
 
 Residual Minor finding: add further focused duplication assertions if later schema evolution permits semantically equal but byte-distinct cross-document command records. The current inline global duplicate-ID regression is Green.
 
 ## Rollback and claim ceiling
 
-Rollback before commit: discard the bounded worktree diff and return to `bc5e1e82dbbc506b562fc763e9ea92dba965b88d`. Rollback of only this final repair after commit: revert `HEAD`. Rollback of the complete multi-commit amendment range: revert `HEAD`, then `bc5e1e82dbbc506b562fc763e9ea92dba965b88d`, then `1e81d170e997e6895b92cdc080563b28b60ac636` in reverse order, restoring base SHA `3c0957ebb2202f10de53975b2cb74e8f35253808` without rewriting published history.
+Rollback before the proof-only commit: discard the three-file bounded worktree diff and return to `262327c04261deb43bfe3bd3e7ad1e9380c0c0ab`. Rollback of only the final proof-only commit after creation: revert `HEAD`. Rollback of the complete multi-commit amendment range: revert the final proof-only `HEAD`, then `262327c04261deb43bfe3bd3e7ad1e9380c0c0ab`, then `030cf73f38c6bab9a0096af7706e6a85644026a2`, then `bc5e1e82dbbc506b562fc763e9ea92dba965b88d`, then `1e81d170e997e6895b92cdc080563b28b60ac636` in reverse order, restoring base SHA `3c0957ebb2202f10de53975b2cb74e8f35253808` without rewriting published history.
 
-Allowed claim before fresh semantic evaluation and re-review: deterministic shadow-canon repair candidate only; focused parser/state/schema/UX-blueprint/build evidence is Green for the exact commands above, the semantic receipt is stale by design, and independent re-review remains pending. Four continuity variants remain structured but future-gated.
+Allowed claim after final receipt verification and before re-review: deterministic shadow-canon repair candidate only; focused parser/state/schema/UX-blueprint/build, validator, and explicit non-CI semantic-receipt evidence is Green for the exact commands above, and independent re-review remains pending. Four continuity variants remain structured but future-gated.
 
 Forbidden claims: active authority cutover; source UI implemented; Runtime Green; rendered-app Visual Green; Accessibility Green; privacy/legal approval; device readiness; TestFlight readiness; App Store readiness; Release Green.
