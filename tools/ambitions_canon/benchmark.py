@@ -1361,7 +1361,8 @@ def _semantic_receipt_require_only_proof_changes(
         root,
         "diff",
         "--name-only",
-        "--diff-filter=ACMRTUXB",
+        "--no-renames",
+        "--diff-filter=ACMDRTUXB",
         f"{commit}..HEAD",
         "--",
     )

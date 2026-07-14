@@ -1,6 +1,7 @@
 import importlib.util
 import json
 import subprocess
+import tempfile
 import unittest
 from copy import deepcopy
 from contextlib import redirect_stdout
@@ -196,7 +197,8 @@ class SemanticReceiptTest(unittest.TestCase):
             ROOT,
             "diff",
             "--name-only",
-            "--diff-filter=ACMRTUXB",
+            "--no-renames",
+            "--diff-filter=ACMDRTUXB",
             f"{receipt['evaluated_task_pack_commit']}..HEAD",
             "--",
         )
@@ -243,6 +245,97 @@ class SemanticReceiptTest(unittest.TestCase):
             with self.assertRaises(CanonError) as raised:
                 module._semantic_receipt_require_evaluated_pack_bytes(
                     ROOT, receipt_path.name * 2, receipt_path
+                )
+        self.assertEqual(raised.exception.code, "SEMANTIC_RECEIPT_STALE")
+
+    def test_evaluated_ancestor_rejects_tracked_deletion(self):
+        module = self.receipt_module()
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            subprocess.run(("git", "init", "-q"), cwd=root, check=True)
+            subprocess.run(
+                ("git", "config", "user.email", "receipt-test@example.invalid"),
+                cwd=root,
+                check=True,
+            )
+            subprocess.run(
+                ("git", "config", "user.name", "Receipt Test"),
+                cwd=root,
+                check=True,
+            )
+            forbidden = root / "docs/canon/specifications/forbidden.md"
+            forbidden.parent.mkdir(parents=True)
+            forbidden.write_text("forbidden\n", encoding="utf-8")
+            subprocess.run(("git", "add", "."), cwd=root, check=True)
+            subprocess.run(
+                ("git", "commit", "-qm", "base"), cwd=root, check=True
+            )
+            evaluated = subprocess.run(
+                ("git", "rev-parse", "HEAD"),
+                cwd=root,
+                check=True,
+                stdout=subprocess.PIPE,
+                text=True,
+            ).stdout.strip()
+            forbidden.unlink()
+            subprocess.run(("git", "add", "-u"), cwd=root, check=True)
+            subprocess.run(
+                ("git", "commit", "-qm", "delete forbidden"),
+                cwd=root,
+                check=True,
+            )
+
+            with self.assertRaises(CanonError) as raised:
+                module._semantic_receipt_require_only_proof_changes(
+                    root, evaluated, root / "receipt.json"
+                )
+        self.assertEqual(raised.exception.code, "SEMANTIC_RECEIPT_STALE")
+
+    def test_evaluated_ancestor_rejects_forbidden_source_renamed_to_proof_path(self):
+        module = self.receipt_module()
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            subprocess.run(("git", "init", "-q"), cwd=root, check=True)
+            subprocess.run(
+                ("git", "config", "user.email", "receipt-test@example.invalid"),
+                cwd=root,
+                check=True,
+            )
+            subprocess.run(
+                ("git", "config", "user.name", "Receipt Test"),
+                cwd=root,
+                check=True,
+            )
+            forbidden = root / "Native/Ambitions/Forbidden.swift"
+            forbidden.parent.mkdir(parents=True)
+            forbidden.write_text("forbidden\n", encoding="utf-8")
+            subprocess.run(("git", "add", "."), cwd=root, check=True)
+            subprocess.run(
+                ("git", "commit", "-qm", "base"), cwd=root, check=True
+            )
+            evaluated = subprocess.run(
+                ("git", "rev-parse", "HEAD"),
+                cwd=root,
+                check=True,
+                stdout=subprocess.PIPE,
+                text=True,
+            ).stdout.strip()
+            allowed = root / next(iter(module.SEMANTIC_RECEIPT_PROOF_ONLY_PATHS))
+            allowed.parent.mkdir(parents=True)
+            subprocess.run(
+                ("git", "mv", forbidden.relative_to(root), allowed.relative_to(root)),
+                cwd=root,
+                check=True,
+            )
+            subprocess.run(
+                ("git", "commit", "-qm", "rename into proof path"),
+                cwd=root,
+                check=True,
+            )
+
+            with self.assertRaises(CanonError) as raised:
+                module._semantic_receipt_require_only_proof_changes(
+                    root, evaluated, root / "receipt.json"
                 )
         self.assertEqual(raised.exception.code, "SEMANTIC_RECEIPT_STALE")
 
