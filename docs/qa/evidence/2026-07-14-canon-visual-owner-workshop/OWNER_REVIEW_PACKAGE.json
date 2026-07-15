@@ -1,0 +1,969 @@
+{
+  "artifact_state": "EXPLORATION",
+  "canon": {
+    "canon_content_sha256": "0ac3656f1f55c0514ada19da8b36b8a090628e4fa1648a6aaee3f660a3ed27bb",
+    "canon_source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3",
+    "repository_frozen_base_sha": "dcdd0e0e3e91a19e6988c7c372fea5cb1fca6847"
+  },
+  "claim_ceiling": "Visual design input only; no source, runtime, rendered-app, accessibility, device, privacy/legal, distribution, approval, or release proof.",
+  "code_connect": {
+    "available": false,
+    "reason": "Figma Code Connect requires a Dev or Full seat on an Organization or Enterprise plan; local SwiftUI source and Figma component evidence were used for feasibility review."
+  },
+  "current_candidate": {
+    "accessibility_boards": [
+      {
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=54-8",
+        "node_id": "54:8",
+        "screenshot": {
+          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-a11y-class-001-hero.png",
+          "sha256": "c529eba4b6ecf8deee2eb54a23b45fe325d64dc87b06ca1f1d8b395e515bb1c2"
+        },
+        "visual_authority_id": "VA-P4-A11Y-CLASS-001"
+      },
+      {
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=54-105",
+        "node_id": "54:105",
+        "screenshot": {
+          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-a11y-class-002-hero.png",
+          "sha256": "7896fa2fa3e6a7077f90ae8a9271301789cd10c7b1542e6baec70df64d64b4fe"
+        },
+        "visual_authority_id": "VA-P4-A11Y-CLASS-002"
+      },
+      {
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=54-174",
+        "node_id": "54:174",
+        "screenshot": {
+          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-a11y-class-003-hero.png",
+          "sha256": "267a9686afde8d8d8fb6456601c805391ebe835cfb77ea45bcdd0c5e6af66ebe"
+        },
+        "visual_authority_id": "VA-P4-A11Y-CLASS-003"
+      },
+      {
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=54-243",
+        "node_id": "54:243",
+        "screenshot": {
+          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-a11y-class-004-hero.png",
+          "sha256": "dcb966573521617225d830e444b5b7a6b5a617bf53bfb82fe928151b7821b62d"
+        },
+        "visual_authority_id": "VA-P4-A11Y-CLASS-004"
+      },
+      {
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=54-312",
+        "node_id": "54:312",
+        "screenshot": {
+          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-a11y-class-005-hero.png",
+          "sha256": "0d977f707b35db39e5d98b952ea3e0bf7d8e19bf504f7eaf5b59dc4ff521594d"
+        },
+        "visual_authority_id": "VA-P4-A11Y-CLASS-005"
+      },
+      {
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=54-381",
+        "node_id": "54:381",
+        "screenshot": {
+          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-a11y-class-006-hero.png",
+          "sha256": "3c7a91ef32a1a4c41aadf158a48d1367834d34b907c98fdb336880f9dc5301e5"
+        },
+        "visual_authority_id": "VA-P4-A11Y-CLASS-006"
+      }
+    ],
+    "problems": [
+      "Generic beige card/list skeleton with weak spatial identity.",
+      "Root dock exposes text labels despite icon-only canon.",
+      "Today does not convincingly express the ±24-hour Reality Window.",
+      "Goals lacks the standard horizontal living Goal Path.",
+      "Capture and Search do not prove keyboard-active/focus depth.",
+      "Accessibility boards are matrices rather than populated representative reflow."
+    ],
+    "standard_viewports": [
+      {
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=51-10",
+        "node_id": "51:10",
+        "screenshot": {
+          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-candidate-001-viewport.png",
+          "sha256": "5f57ce55c45124457b22fc197e804e1ccee851d4cabd42cd34a25b189261f2bf"
+        },
+        "visual_authority_id": "VA-P4-CANDIDATE-001"
+      },
+      {
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=51-100",
+        "node_id": "51:100",
+        "screenshot": {
+          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-candidate-002-viewport.png",
+          "sha256": "e492134e0d1be8a39f1611fdee134882bbdb79a87820efbd0093562b9e6247f7"
+        },
+        "visual_authority_id": "VA-P4-CANDIDATE-002"
+      },
+      {
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=51-195",
+        "node_id": "51:195",
+        "screenshot": {
+          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-candidate-003-viewport.png",
+          "sha256": "33eb8e4e66aedf9d750d4935f8f5aa93e751cc2a26438e4e27e8966373aa5f31"
+        },
+        "visual_authority_id": "VA-P4-CANDIDATE-003"
+      },
+      {
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=51-292",
+        "node_id": "51:292",
+        "screenshot": {
+          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-candidate-004-viewport.png",
+          "sha256": "46a8ed1fd2a4ea01c266b7928ab351a8a52c5d3e414f11e9af9e68926ffb9033"
+        },
+        "visual_authority_id": "VA-P4-CANDIDATE-004"
+      },
+      {
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=52-57",
+        "node_id": "52:57",
+        "screenshot": {
+          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-candidate-005-viewport.png",
+          "sha256": "1bdd234ded65a9450c98c24fdd0383b3182955dcdf15a98fb969f3fddb6b6230"
+        },
+        "visual_authority_id": "VA-P4-CANDIDATE-005"
+      },
+      {
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=52-157",
+        "node_id": "52:157",
+        "screenshot": {
+          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-candidate-006-viewport.png",
+          "sha256": "a130a7c0e9d1c34356f05eae10be4b866beca3561f3b5c9c7a0e976fb40df2c7"
+        },
+        "visual_authority_id": "VA-P4-CANDIDATE-006"
+      },
+      {
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=52-232",
+        "node_id": "52:232",
+        "screenshot": {
+          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-candidate-007-viewport.png",
+          "sha256": "9549281007b77683d1baf1bc0ad2e4ec2da86e39433ea7df311ef9a950570986"
+        },
+        "visual_authority_id": "VA-P4-CANDIDATE-007"
+      },
+      {
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=52-314",
+        "node_id": "52:314",
+        "screenshot": {
+          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-candidate-008-viewport.png",
+          "sha256": "95b1309c495e3e0de2dfd8b714aac96b779bcc2a748e868a3f6cc5b53e23246b"
+        },
+        "visual_authority_id": "VA-P4-CANDIDATE-008"
+      },
+      {
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=53-69",
+        "node_id": "53:69",
+        "screenshot": {
+          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-candidate-009-viewport.png",
+          "sha256": "90b0fa111c5b5d26c923a69a9510f6ad63682edc1086598567a31b448d577e94"
+        },
+        "visual_authority_id": "VA-P4-CANDIDATE-009"
+      },
+      {
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=53-145",
+        "node_id": "53:145",
+        "screenshot": {
+          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-candidate-010-viewport.png",
+          "sha256": "9b6b2336d7ff669ba59039db4de264894f48588e08d5fa1e7949ba4990abc36e"
+        },
+        "visual_authority_id": "VA-P4-CANDIDATE-010"
+      },
+      {
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=53-228",
+        "node_id": "53:228",
+        "screenshot": {
+          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-candidate-011-viewport.png",
+          "sha256": "aceb9dffc68aea1fd8b40f44f77f1be5577f28cd105f636f301b4ea1a1e3b43b"
+        },
+        "visual_authority_id": "VA-P4-CANDIDATE-011"
+      },
+      {
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=53-322",
+        "node_id": "53:322",
+        "screenshot": {
+          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-candidate-012-viewport.png",
+          "sha256": "ef3f64eefcc3818bdc44c571b953b7e829a75e3ccb942474166dfffb2157db6a"
+        },
+        "visual_authority_id": "VA-P4-CANDIDATE-012"
+      }
+    ],
+    "strengths": [
+      "Complete canonical surface and journey coverage.",
+      "Local-first, privacy, offline, object, and lifecycle boundaries are explicit.",
+      "Stable 393×852 SHA-bound candidate corpus."
+    ]
+  },
+  "current_candidate_screen_assessments": [
+    {
+      "node_id": "51:10",
+      "problems": "Text-labeled root dock conflicts with icon-only canon; generic card stack weakens spatial identity and the ±24-hour Reality Window.",
+      "screen_class": "Root shell and Today overview",
+      "strengths": "Complete four-root shell with contextual Capture, Search, and Trust boundaries."
+    },
+    {
+      "node_id": "51:100",
+      "problems": "Recovery reads as a conventional card/list state and is visually detached from the Reality Window.",
+      "screen_class": "Today recovery",
+      "strengths": "Preserves agency, closure language, receipts, and Undo without shame."
+    },
+    {
+      "node_id": "51:195",
+      "problems": "Goal Path is not expressed as the standard horizontal living route; card density obscures path continuity.",
+      "screen_class": "Goals",
+      "strengths": "Covers Goal, Life Area, path, recovery, closure, and history boundaries."
+    },
+    {
+      "node_id": "51:292",
+      "problems": "Boxed controls and compact density understate Day/Week/Month/Year/List calendar-grade breadth.",
+      "screen_class": "Time",
+      "strengths": "Uses real hour-grid geometry for Protected, Fixed, open capacity, and reflow."
+    },
+    {
+      "node_id": "52:57",
+      "problems": "Settings-list posture feels generic and exposes too much system organization in the first viewport.",
+      "screen_class": "You",
+      "strengths": "Makes local data, optional identity, continuity, privacy, diagnostics, and export inspectable."
+    },
+    {
+      "node_id": "52:157",
+      "problems": "Does not prove an actual keyboard-active composition, focus order, or accessory action boundary.",
+      "screen_class": "Capture",
+      "strengths": "Maintains the global, local-first composer and explicit Save boundary without root chrome."
+    },
+    {
+      "node_id": "52:232",
+      "problems": "Generic result rows provide limited spatial/context depth and weak differentiation from a utility search list.",
+      "screen_class": "Search",
+      "strengths": "Typed, privacy-aware results preserve object identity and action preview."
+    },
+    {
+      "node_id": "52:314",
+      "problems": "Uniform row treatment makes Proof, Source, Privacy, History, Receipts, and Undo feel equally dense.",
+      "screen_class": "Contextual Trust",
+      "strengths": "Keeps trust object-bound and contextual rather than persistent root chrome."
+    },
+    {
+      "node_id": "53:69",
+      "problems": "Text-heavy cards flatten local value, optional permission, and optional account hierarchy.",
+      "screen_class": "Setup and permission",
+      "strengths": "Establishes local value before optional identity or permission and preserves denial/resume."
+    },
+    {
+      "node_id": "53:145",
+      "problems": "Recovery remains a technical card stack and does not visually normalize healthy offline use.",
+      "screen_class": "Offline and degraded recovery",
+      "strengths": "Names exact consequences and preserves continue, inspect, retry, export, and repair paths."
+    },
+    {
+      "node_id": "53:228",
+      "problems": "Many lifecycle states appear in one board, so Active, Trash, Restore, and permanent-delete coherence is not demonstrated.",
+      "screen_class": "Lifecycle boundaries",
+      "strengths": "Includes edit, Archive, Trash, restore, recurrence, History, Receipts, privacy, and ownership."
+    },
+    {
+      "node_id": "53:322",
+      "problems": "Reads as an evidence matrix rather than a real populated product viewport or representative accessibility reflow.",
+      "screen_class": "Journey and accessibility proof",
+      "strengths": "Covers checkpoint, interruption, resume, commit, failure, recovery, receipt, rollback, and focus continuity."
+    }
+  ],
+  "directions": [
+    {
+      "accessibility": "Actual accessibility-size Today, high-contrast Trust, opaque offline treatment, keyboard-active Capture, adjacent VoiceOver and Reduce Motion notes.",
+      "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=69-3",
+      "id": "A",
+      "name": "Quiet Spatial Stage",
+      "problems": [
+        "Warm surfaces require disciplined contrast tuning.",
+        "Spatial affordances require semantic list counterparts and careful accessibility reflow."
+      ],
+      "recommended": true,
+      "screens": [
+        {
+          "accessibility_variant": "standard",
+          "blueprint_ids": [
+            "UX-SCREEN-APP-SHELL-ROOT"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=71-4",
+          "index": 1,
+          "name": "Root shell",
+          "node_id": "71:4",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-a-quiet-spatial-stage/01-root-shell.png",
+            "sha256": "d600b550d36301b97fa6fd03363ff7d3e1856182a7e0433a88bb12937449f4bc",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "standard",
+          "blueprint_ids": [
+            "UX-SCREEN-TODAY-START-HERE"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=71-50",
+          "index": 2,
+          "name": "Today · Start here",
+          "node_id": "71:50",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-a-quiet-spatial-stage/02-today-start-here.png",
+            "sha256": "dc786b58df6c5e1e6958b53b0ead32caf55366d4405836b4bd5d7753a73aca52",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "standard",
+          "blueprint_ids": [
+            "UX-SCREEN-GOALS-ROOT",
+            "UX-SCREEN-GOALS-PATH"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=71-99",
+          "index": 3,
+          "name": "Goals",
+          "node_id": "71:99",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-a-quiet-spatial-stage/03-goals.png",
+            "sha256": "f8e6dd4925a09e20161fb592fe0570752f2985388848ff09619450792133e720",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "standard",
+          "blueprint_ids": [
+            "UX-SCREEN-TIME-DAY"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=73-2",
+          "index": 4,
+          "name": "Time",
+          "node_id": "73:2",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-a-quiet-spatial-stage/04-time.png",
+            "sha256": "29875a3fe28bbebbbbc0c100936abab193c0883359d56ddf68be06e4fd447b80",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "standard",
+          "blueprint_ids": [
+            "UX-SCREEN-YOU-ROOT"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=73-59",
+          "index": 5,
+          "name": "You",
+          "node_id": "73:59",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-a-quiet-spatial-stage/05-you.png",
+            "sha256": "c00f59cdfd7b6a24953bfb7596fda98f510514a69810730e68f2bad02e5547ea",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "keyboard_active",
+          "blueprint_ids": [
+            "UX-SCREEN-CAPTURE-COMPOSER"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=73-109",
+          "index": 6,
+          "name": "Capture",
+          "node_id": "73:109",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-a-quiet-spatial-stage/06-capture-keyboard-active.png",
+            "sha256": "b41cfd88e44bddfae796f5294ce3f9457de61719942a791e4de39230a0b48a86",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "standard",
+          "blueprint_ids": [
+            "UX-SCREEN-SEARCH-ROOT"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=74-2",
+          "index": 7,
+          "name": "Search",
+          "node_id": "74:2",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-a-quiet-spatial-stage/07-search.png",
+            "sha256": "1d55098519548748891006fbca38a66d96cfd60099beb21fecdb69acd25bcf65",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "increase_contrast_actual",
+          "blueprint_ids": [
+            "UX-SCREEN-TRUST-DEEP"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=74-33",
+          "index": 8,
+          "name": "Contextual Trust · Increase Contrast",
+          "node_id": "74:33",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-a-quiet-spatial-stage/08-contextual-trust-increase-contrast.png",
+            "sha256": "0fec0c97b56f34a26f448076de65dbb6efad0f963863cb34563b46a34ef0384c",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "standard",
+          "blueprint_ids": [
+            "UX-SCREEN-SETUP-FIRST-USE",
+            "UX-SCREEN-PERMISSIONS-CALENDAR"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=74-67",
+          "index": 9,
+          "name": "Setup · local value before permission",
+          "node_id": "74:67",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-a-quiet-spatial-stage/09-setup-local-first.png",
+            "sha256": "ea00dcf746cff4347c3cd8efd6ec45a31c1b4766b232426c792dc7c7b95f57e1",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "reduce_transparency_actual",
+          "blueprint_ids": [
+            "UX-SCREEN-OFFLINE-DEGRADED-LOCAL-HEALTH",
+            "UX-SCREEN-OFFLINE-DEGRADED-REPAIR"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=75-2",
+          "index": 10,
+          "name": "Offline healthy · degraded recovery · Reduce Transparency",
+          "node_id": "75:2",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-a-quiet-spatial-stage/10-offline-recovery-reduce-transparency.png",
+            "sha256": "5528942b72cbb25af64871e5d2dc2bc6801c2f363eb66c55804cd0d2f97a633a",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "standard",
+          "blueprint_ids": [
+            "UX-SCREEN-GOALS-DETAIL",
+            "UX-SCREEN-YOU-DATA"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=75-27",
+          "index": 11,
+          "name": "Lifecycle · edit, Archive, Trash, restore, History",
+          "node_id": "75:27",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-a-quiet-spatial-stage/11-lifecycle-boundaries.png",
+            "sha256": "ac1b36256c6066245edf97c561c42770186c102b830da2c6996209d90949bd93",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "accessibility_size_actual",
+          "blueprint_ids": [
+            "UX-SCREEN-TODAY-START-HERE",
+            "UX-CROSS-DYNAMIC-TYPE",
+            "UX-CROSS-VOICEOVER",
+            "UX-CROSS-REDUCE-MOTION",
+            "UX-CROSS-REDUCE-TRANSPARENCY"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=75-72",
+          "index": 12,
+          "name": "Accessibility-size Today reflow",
+          "node_id": "75:72",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-a-quiet-spatial-stage/12-accessibility-today-reflow.png",
+            "sha256": "dbbd605429d77b8be1e7a88aacbc393147c70bacb58cacaa27dcb3c5b3fb22ec",
+            "width": 393
+          }
+        }
+      ],
+      "section_id": "69:3",
+      "strengths": [
+        "Best balance of calm spatial identity, canon clarity, accessibility resilience, and SwiftUI feasibility.",
+        "Unifies Start here, Reality Window, horizontal Goal Path, calendar-grade Time, contextual Trust, local-first setup, and offline health."
+      ],
+      "swiftui_feasibility": "High: native navigation, sheets, controls, scroll views, calendar grid primitives, and semantic overlays.",
+      "tradeoffs": [
+        "Moderate custom layout work without custom rendering.",
+        "Distinctive without forcing a dark default or editorial severity."
+      ]
+    },
+    {
+      "accessibility": "Actual accessibility-size Today, high-contrast Trust, opaque offline treatment, keyboard-active Capture, and adjacent semantic notes.",
+      "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=69-4",
+      "id": "B",
+      "name": "Editorial Native",
+      "problems": [
+        "Least ownable at a glance and may drift toward a premium planner.",
+        "Spatial product moat is quieter outside Goals and Time."
+      ],
+      "recommended": false,
+      "screens": [
+        {
+          "accessibility_variant": "standard",
+          "blueprint_ids": [
+            "UX-SCREEN-APP-SHELL-ROOT"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=80-4",
+          "index": 1,
+          "name": "Root shell",
+          "node_id": "80:4",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-b-editorial-native/01-root-shell.png",
+            "sha256": "36275cdd1da80f10cf0a7a2909531835befb2f4331f6d74ec1184450d4c5db9d",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "standard",
+          "blueprint_ids": [
+            "UX-SCREEN-TODAY-START-HERE"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=80-51",
+          "index": 2,
+          "name": "Today · Start here",
+          "node_id": "80:51",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-b-editorial-native/02-today-start-here.png",
+            "sha256": "15803c087dc20bddf14f305fcc0e584837c2b977a058f38a094be4552feb0ec1",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "standard",
+          "blueprint_ids": [
+            "UX-SCREEN-GOALS-ROOT",
+            "UX-SCREEN-GOALS-PATH"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=80-101",
+          "index": 3,
+          "name": "Goals",
+          "node_id": "80:101",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-b-editorial-native/03-goals.png",
+            "sha256": "c0ac7787f3d7fcff23ef2d49bc3e0817f986107aedd64eddeb9bd5faf3ba320d",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "standard",
+          "blueprint_ids": [
+            "UX-SCREEN-TIME-DAY"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=80-152",
+          "index": 4,
+          "name": "Time",
+          "node_id": "80:152",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-b-editorial-native/04-time.png",
+            "sha256": "6c3380df7591ff18ed98eff52060f500c0c188d4db0a2158141606d9d4e13f6b",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "standard",
+          "blueprint_ids": [
+            "UX-SCREEN-YOU-ROOT"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=81-2",
+          "index": 5,
+          "name": "You",
+          "node_id": "81:2",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-b-editorial-native/05-you.png",
+            "sha256": "0d3b65b749aea42ace2eb45c97360d196b4f7e04733e0e7442b1bb0e8654d3a0",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "keyboard_active",
+          "blueprint_ids": [
+            "UX-SCREEN-CAPTURE-COMPOSER"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=81-53",
+          "index": 6,
+          "name": "Capture",
+          "node_id": "81:53",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-b-editorial-native/06-capture-keyboard-active.png",
+            "sha256": "e56d51510515de4b269ad72ce1e548b8efb0351ffcd63ac3df1cf4e2e9bc8016",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "standard",
+          "blueprint_ids": [
+            "UX-SCREEN-SEARCH-ROOT"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=81-131",
+          "index": 7,
+          "name": "Search",
+          "node_id": "81:131",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-b-editorial-native/07-search.png",
+            "sha256": "7a41ef8a45e5368a0d6a67b0287ac6aea9c1b7c8c4918aabdd7bdd4a425e7f5d",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "increase_contrast_actual",
+          "blueprint_ids": [
+            "UX-SCREEN-TRUST-DEEP"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=81-163",
+          "index": 8,
+          "name": "Contextual Trust · Increase Contrast",
+          "node_id": "81:163",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-b-editorial-native/08-contextual-trust-increase-contrast.png",
+            "sha256": "f1ae9441fad3299a524315f0a4e6bc98141c14d73bedcf11d31d226bf2e51e0c",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "standard",
+          "blueprint_ids": [
+            "UX-SCREEN-SETUP-FIRST-USE",
+            "UX-SCREEN-PERMISSIONS-CALENDAR"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=82-2",
+          "index": 9,
+          "name": "Setup · local value before permission",
+          "node_id": "82:2",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-b-editorial-native/09-setup-local-first.png",
+            "sha256": "7600b52f75f964185bd3f1d62004e0570146e345d993362f6b126c5177e4f758",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "reduce_transparency_actual",
+          "blueprint_ids": [
+            "UX-SCREEN-OFFLINE-DEGRADED-LOCAL-HEALTH",
+            "UX-SCREEN-OFFLINE-DEGRADED-REPAIR"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=82-24",
+          "index": 10,
+          "name": "Offline healthy · degraded recovery · Reduce Transparency",
+          "node_id": "82:24",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-b-editorial-native/10-offline-recovery-reduce-transparency.png",
+            "sha256": "7269327ff9e246798f869c22e75fd720e4f31549197f5d448b186946b5b8a58e",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "standard",
+          "blueprint_ids": [
+            "UX-SCREEN-GOALS-DETAIL",
+            "UX-SCREEN-YOU-DATA"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=82-49",
+          "index": 11,
+          "name": "Lifecycle · edit, Archive, Trash, restore, History",
+          "node_id": "82:49",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-b-editorial-native/11-lifecycle-boundaries.png",
+            "sha256": "aae0941e328484cb65d12cc90cfa829469b304411a3ccb9f7f8a612dea000baa",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "accessibility_size_actual",
+          "blueprint_ids": [
+            "UX-SCREEN-TODAY-START-HERE",
+            "UX-CROSS-DYNAMIC-TYPE",
+            "UX-CROSS-VOICEOVER",
+            "UX-CROSS-REDUCE-MOTION",
+            "UX-CROSS-REDUCE-TRANSPARENCY"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=82-95",
+          "index": 12,
+          "name": "Accessibility-size Today reflow",
+          "node_id": "82:95",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-b-editorial-native/12-accessibility-today-reflow.png",
+            "sha256": "b07c306f52ad625b26c8c4cb4af0bcf34a0a3648611d5d4f0efcf5f844b62d14",
+            "width": 393
+          }
+        }
+      ],
+      "section_id": "69:4",
+      "strengths": [
+        "Strongest typographic scannability and lowest implementation ambiguity.",
+        "Ruled hierarchy maps cleanly to standard SwiftUI controls."
+      ],
+      "swiftui_feasibility": "Very high: native typography, lists, grids, separators, toolbar items, and dialogs.",
+      "tradeoffs": [
+        "Lowest visual implementation risk.",
+        "Requires exceptional typography and copy to avoid genericism."
+      ]
+    },
+    {
+      "accessibility": "Actual accessibility-size Today, no-glow opaque offline and Trust fallbacks, semantic path/list notes, and immediate Reduce Motion substitution.",
+      "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=69-5",
+      "id": "C",
+      "name": "Atmospheric Temporal Field",
+      "problems": [
+        "Highest motion, material, contrast, and dark-posture calibration risk.",
+        "Could become performative if glow, blur, or path motion exceeds the restrained treatment."
+      ],
+      "recommended": false,
+      "screens": [
+        {
+          "accessibility_variant": "standard",
+          "blueprint_ids": [
+            "UX-SCREEN-APP-SHELL-ROOT"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=83-4",
+          "index": 1,
+          "name": "Root shell",
+          "node_id": "83:4",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-c-atmospheric-temporal-field/01-root-shell.png",
+            "sha256": "79ce649545fd94c9f74dcc57ae651610355c6d3e762e2d8a53ea14af44316d1a",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "standard",
+          "blueprint_ids": [
+            "UX-SCREEN-TODAY-START-HERE"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=83-52",
+          "index": 2,
+          "name": "Today · Start here",
+          "node_id": "83:52",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-c-atmospheric-temporal-field/02-today-start-here.png",
+            "sha256": "4c6b914e19d5b844c42bb81afcc64420ea11389ffc7ec640f81dd3df7aad6290",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "standard",
+          "blueprint_ids": [
+            "UX-SCREEN-GOALS-ROOT",
+            "UX-SCREEN-GOALS-PATH"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=83-103",
+          "index": 3,
+          "name": "Goals",
+          "node_id": "83:103",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-c-atmospheric-temporal-field/03-goals.png",
+            "sha256": "d7978e21fedae5b0240c6b036f9d025dca43e099b128c3134737d1e6b9baba4a",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "standard",
+          "blueprint_ids": [
+            "UX-SCREEN-TIME-DAY"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=83-155",
+          "index": 4,
+          "name": "Time",
+          "node_id": "83:155",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-c-atmospheric-temporal-field/04-time.png",
+            "sha256": "6c86bedf4dcaa296abe76b1ec3a1053fb7caa904f6205ae65fa46d6cea34d61b",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "standard",
+          "blueprint_ids": [
+            "UX-SCREEN-YOU-ROOT"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=84-2",
+          "index": 5,
+          "name": "You",
+          "node_id": "84:2",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-c-atmospheric-temporal-field/05-you.png",
+            "sha256": "7b418a9bb5af7d184bd7ec4245c9947b1fb86b09bf2d0a33accc55e303f197a1",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "keyboard_active",
+          "blueprint_ids": [
+            "UX-SCREEN-CAPTURE-COMPOSER"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=84-54",
+          "index": 6,
+          "name": "Capture",
+          "node_id": "84:54",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-c-atmospheric-temporal-field/06-capture-keyboard-active.png",
+            "sha256": "54300e19dee1302f668832194c5a5c016e8d5c9874991865797e699970a27b84",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "standard",
+          "blueprint_ids": [
+            "UX-SCREEN-SEARCH-ROOT"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=84-133",
+          "index": 7,
+          "name": "Search",
+          "node_id": "84:133",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-c-atmospheric-temporal-field/07-search.png",
+            "sha256": "dde647680e0ee90f541f4f55ba135183ade21cdf4355a11cfe3b597d661ce245",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "increase_contrast_actual",
+          "blueprint_ids": [
+            "UX-SCREEN-TRUST-DEEP"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=84-166",
+          "index": 8,
+          "name": "Contextual Trust · Increase Contrast",
+          "node_id": "84:166",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-c-atmospheric-temporal-field/08-contextual-trust-increase-contrast.png",
+            "sha256": "17aa61de4ca039de390e3f9418bc860bb95617b3797e4a12203665d7a07501cf",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "standard",
+          "blueprint_ids": [
+            "UX-SCREEN-SETUP-FIRST-USE",
+            "UX-SCREEN-PERMISSIONS-CALENDAR"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=85-2",
+          "index": 9,
+          "name": "Setup · local value before permission",
+          "node_id": "85:2",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-c-atmospheric-temporal-field/09-setup-local-first.png",
+            "sha256": "ffad9d81a26d6938ed37d753cc74911acdcb745136ca5a848d786f82370599e4",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "reduce_transparency_actual",
+          "blueprint_ids": [
+            "UX-SCREEN-OFFLINE-DEGRADED-LOCAL-HEALTH",
+            "UX-SCREEN-OFFLINE-DEGRADED-REPAIR"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=85-25",
+          "index": 10,
+          "name": "Offline healthy · degraded recovery · Reduce Transparency",
+          "node_id": "85:25",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-c-atmospheric-temporal-field/10-offline-recovery-reduce-transparency.png",
+            "sha256": "abbcd651a75dbb6d37fe77cb4c65cfa64445751e3594ff69eaafdf4929269a2c",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "standard",
+          "blueprint_ids": [
+            "UX-SCREEN-GOALS-DETAIL",
+            "UX-SCREEN-YOU-DATA"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=85-49",
+          "index": 11,
+          "name": "Lifecycle · edit, Archive, Trash, restore, History",
+          "node_id": "85:49",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-c-atmospheric-temporal-field/11-lifecycle-boundaries.png",
+            "sha256": "0fa78a39a5dae4c40d38ca353b7ced5f619fa948209b7280999a061d36d96bac",
+            "width": 393
+          }
+        },
+        {
+          "accessibility_variant": "accessibility_size_actual",
+          "blueprint_ids": [
+            "UX-SCREEN-TODAY-START-HERE",
+            "UX-CROSS-DYNAMIC-TYPE",
+            "UX-CROSS-VOICEOVER",
+            "UX-CROSS-REDUCE-MOTION",
+            "UX-CROSS-REDUCE-TRANSPARENCY"
+          ],
+          "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=85-96",
+          "index": 12,
+          "name": "Accessibility-size Today reflow",
+          "node_id": "85:96",
+          "screenshot": {
+            "height": 852,
+            "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-c-atmospheric-temporal-field/12-accessibility-today-reflow.png",
+            "sha256": "283d86ed2dd2c0edf07cd81ace550b79aa6f3fa8a8e2c805ee941ff958f586bc",
+            "width": 393
+          }
+        }
+      ],
+      "section_id": "69:5",
+      "strengths": [
+        "Most ownable expression of time, continuity, and reality-fit action.",
+        "Anchors use a curved Now meridian, spatial living-path lanes, and capacity/protection calendar bands."
+      ],
+      "swiftui_feasibility": "Medium-high: standard controls plus SwiftUI Path and restrained ambient blur shapes; no custom renderer.",
+      "tradeoffs": [
+        "Strongest differentiation and emotional continuity.",
+        "Requires owner confidence in dark-first posture and a stricter accessibility bar."
+      ]
+    }
+  ],
+  "figma": {
+    "file_key": "Oik7612LSTUHWsNRFoTlTJ",
+    "page_id": "69:2",
+    "page_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=69-2",
+    "page_name": "EXPLORATION — Owner Visual Workshop — 2026-07-14"
+  },
+  "mapping_posture": "Each exploration viewport carries shared EXPLORATION plugin data with existing UX blueprint IDs, exact stable requirement IDs, frozen SHAs, accessibility posture, and SwiftUI plausibility.",
+  "owner_decisions_requested": [
+    "Select Direction A, B, or C; no direction becomes authority without an explicit owner decision.",
+    "Choose light-first, dark-first, or paired light/dark posture.",
+    "Set motion and material intensity.",
+    "Confirm confidence in the icon-only root dock.",
+    "Confirm confidence in the horizontal Goal Path and its semantic list counterpart.",
+    "Confirm typography scale and density.",
+    "Confirm contextual Trust density.",
+    "Confirm Capture/Search depth and keyboard posture.",
+    "Name unresolved accessibility concerns before authority or implementation work."
+  ],
+  "recommendation": {
+    "direction_id": "A",
+    "reason": "Quiet Spatial Stage best balances Ambitions-specific identity, calm native iPhone quality, canon fidelity, accessibility resilience, and SwiftUI plausibility without B's genericism risk or C's material/motion risk."
+  },
+  "schema_version": "1.0.0",
+  "status": "AWAITING_EXPLICIT_OWNER_DIRECTION_SELECTION",
+  "viewport_contract": {
+    "accessibility_viewports_per_direction": 1,
+    "direction_count": 3,
+    "standard_viewports_per_direction": 11,
+    "total_exploration_viewports": 36
+  }
+}
