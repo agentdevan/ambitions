@@ -267,13 +267,18 @@
   ],
   "directions": [
     {
-      "accessibility": "Actual accessibility-size Today, high-contrast Trust, opaque offline treatment, keyboard-active Capture, adjacent VoiceOver and Reduce Motion notes.",
+      "accessibility": "Accessibility-size Today uses materially larger type, full vertical reflow, the same information/order, no horizontal scroll, and square/circle/triangle non-color states. Every represented interactive control has a named >=44x44 pt envelope; visual design input only.",
+      "annotation_node_ids": [],
+      "companion_node_ids": [
+        "78:13"
+      ],
+      "composition_system": "Integrated quiet spatial stage: object-specific fields, orbits, paths, and traces with minimal containers across all 12 frames.",
       "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=69-3",
       "id": "A",
       "name": "Quiet Spatial Stage",
       "problems": [
-        "Warm surfaces require disciplined contrast tuning.",
-        "Spatial affordances require semantic list counterparts and careful accessibility reflow."
+        "Warm spatial fields still require implementation-time contrast verification in the rendered app.",
+        "Spatial relationships require the documented ordered semantic counterpart under accessibility reflow."
       ],
       "recommended": true,
       "screens": [
@@ -289,7 +294,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-a-quiet-spatial-stage/01-root-shell.png",
-            "sha256": "d600b550d36301b97fa6fd03363ff7d3e1856182a7e0433a88bb12937449f4bc",
+            "sha256": "cfa14a2a0a619c4fac4c6bb0493da468e4d2f0a29bdc45bdb6282af9a1959289",
             "width": 393
           }
         },
@@ -305,7 +310,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-a-quiet-spatial-stage/02-today-start-here.png",
-            "sha256": "dc786b58df6c5e1e6958b53b0ead32caf55366d4405836b4bd5d7753a73aca52",
+            "sha256": "3db949b921b70df7ddac8bcda74e58d1c07bc336905cbc367d17781d3d765006",
             "width": 393
           }
         },
@@ -322,7 +327,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-a-quiet-spatial-stage/03-goals.png",
-            "sha256": "f8e6dd4925a09e20161fb592fe0570752f2985388848ff09619450792133e720",
+            "sha256": "9e29c02407175ed2db6a453509e4e470a1ad61621a3576f37c201ec6690cc75e",
             "width": 393
           }
         },
@@ -338,7 +343,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-a-quiet-spatial-stage/04-time.png",
-            "sha256": "29875a3fe28bbebbbbc0c100936abab193c0883359d56ddf68be06e4fd447b80",
+            "sha256": "0234df7fe78951d8918d23d121c733feaac6d498cdc580de1c9ba481f2fae996",
             "width": 393
           }
         },
@@ -354,7 +359,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-a-quiet-spatial-stage/05-you.png",
-            "sha256": "c00f59cdfd7b6a24953bfb7596fda98f510514a69810730e68f2bad02e5547ea",
+            "sha256": "0c3d26867aa503482dbb1d64002c8c8ee92c96acba1fdbd5c86b8446ace120e3",
             "width": 393
           }
         },
@@ -370,7 +375,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-a-quiet-spatial-stage/06-capture-keyboard-active.png",
-            "sha256": "b41cfd88e44bddfae796f5294ce3f9457de61719942a791e4de39230a0b48a86",
+            "sha256": "c93e35746f7fcb5d9b61a8b239308bb0efadc14a9ab5ff654f79d39c88511f51",
             "width": 393
           }
         },
@@ -386,7 +391,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-a-quiet-spatial-stage/07-search.png",
-            "sha256": "1d55098519548748891006fbca38a66d96cfd60099beb21fecdb69acd25bcf65",
+            "sha256": "ab7c9ad56e64467fc15e5a58e5a57244ff61a7c65fde238f8945590dc4cce56e",
             "width": 393
           }
         },
@@ -402,7 +407,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-a-quiet-spatial-stage/08-contextual-trust-increase-contrast.png",
-            "sha256": "0fec0c97b56f34a26f448076de65dbb6efad0f963863cb34563b46a34ef0384c",
+            "sha256": "f3ca8d72dcf9ebcef174b644ece1441395d00ad6bff2acc656e83cb4c8da701d",
             "width": 393
           }
         },
@@ -419,7 +424,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-a-quiet-spatial-stage/09-setup-local-first.png",
-            "sha256": "ea00dcf746cff4347c3cd8efd6ec45a31c1b4766b232426c792dc7c7b95f57e1",
+            "sha256": "eae97a4301c997f32ed47caa880d3ec01c672a5fd9d9ba159fb075cec9b8fdc6",
             "width": 393
           }
         },
@@ -436,7 +441,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-a-quiet-spatial-stage/10-offline-recovery-reduce-transparency.png",
-            "sha256": "5528942b72cbb25af64871e5d2dc2bc6801c2f363eb66c55804cd0d2f97a633a",
+            "sha256": "2e514cc436b4fd2ed58b129bc55278b01cea5e10994e87ecdc32f070bbc880f2",
             "width": 393
           }
         },
@@ -453,7 +458,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-a-quiet-spatial-stage/11-lifecycle-boundaries.png",
-            "sha256": "ac1b36256c6066245edf97c561c42770186c102b830da2c6996209d90949bd93",
+            "sha256": "b2c81a870ffb93b296afd60760d5d71c6ffd6fe0ae9c8aadb3dcadf8045097fb",
             "width": 393
           }
         },
@@ -473,30 +478,36 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-a-quiet-spatial-stage/12-accessibility-today-reflow.png",
-            "sha256": "dbbd605429d77b8be1e7a88aacbc393147c70bacb58cacaa27dcb3c5b3fb22ec",
+            "sha256": "60c510cd45f3d459f8ee5cf9568fd81c17d3546d7dc59abcf56d62f1f22fb422",
             "width": 393
           }
         }
       ],
       "section_id": "69:3",
       "strengths": [
-        "Best balance of calm spatial identity, canon clarity, accessibility resilience, and SwiftUI feasibility.",
-        "Unifies Start here, Reality Window, horizontal Goal Path, calendar-grade Time, contextual Trust, local-first setup, and offline health."
+        "One quiet spatial composition system spans all 12 frames through object-specific fields, orbits, living paths, and lifecycle traces without returning to a generic card/list skeleton.",
+        "Balances canon fidelity and native feasibility across Start here, Reality Window, the horizontal Goal Path, calendar-grade Time, contextual Trust, setup, offline continuity, and lifecycle."
       ],
       "swiftui_feasibility": "High: native navigation, sheets, controls, scroll views, calendar grid primitives, and semantic overlays.",
+      "touch_target_posture": "Named HitTarget/44 envelopes represent every visible interaction at >=44x44 pt; glyphs may be smaller. Runtime hit testing remains unproved.",
       "tradeoffs": [
-        "Moderate custom layout work without custom rendering.",
-        "Distinctive without forcing a dark default or editorial severity."
+        "Moderate custom SwiftUI layout using native shapes and semantic ordering without a custom renderer.",
+        "Most Ambitions-specific light direction; more layout calibration than B and less material/motion risk than C."
       ]
     },
     {
-      "accessibility": "Actual accessibility-size Today, high-contrast Trust, opaque offline treatment, keyboard-active Capture, and adjacent semantic notes.",
+      "accessibility": "Accessibility-size Today uses materially larger type, numbered vertical reflow, the same information/order, no horizontal scroll, and square/circle/triangle non-color states. Every represented interactive control has a named >=44x44 pt envelope; visual design input only.",
+      "annotation_node_ids": [],
+      "companion_node_ids": [
+        "82:129"
+      ],
+      "composition_system": "Edge-to-edge editorial/native hierarchy: asymmetric gutters, numbered sections, large typography, and rules with no A-style card system across all 12 frames.",
       "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=69-4",
       "id": "B",
       "name": "Editorial Native",
       "problems": [
-        "Least ownable at a glance and may drift toward a premium planner.",
-        "Spatial product moat is quieter outside Goals and Time."
+        "Least ownable at a glance and still depends on exceptional typography and copy to avoid premium-planner genericism.",
+        "The spatial product moat is intentionally quieter than A and C."
       ],
       "recommended": false,
       "screens": [
@@ -512,7 +523,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-b-editorial-native/01-root-shell.png",
-            "sha256": "36275cdd1da80f10cf0a7a2909531835befb2f4331f6d74ec1184450d4c5db9d",
+            "sha256": "8c4aff39658348de05c10809b6ad037b8f229045d4e1a863189325ea2fc0a46d",
             "width": 393
           }
         },
@@ -528,7 +539,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-b-editorial-native/02-today-start-here.png",
-            "sha256": "15803c087dc20bddf14f305fcc0e584837c2b977a058f38a094be4552feb0ec1",
+            "sha256": "c2e17314dd2e39b838c20f992ebf8f02a633fc6f12e40e9455ba5032f33b4fbe",
             "width": 393
           }
         },
@@ -545,7 +556,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-b-editorial-native/03-goals.png",
-            "sha256": "c0ac7787f3d7fcff23ef2d49bc3e0817f986107aedd64eddeb9bd5faf3ba320d",
+            "sha256": "de0232a3bcf9922598f0af6e9dc511bcafcbbef472f701a60986cc8a28fe0345",
             "width": 393
           }
         },
@@ -561,7 +572,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-b-editorial-native/04-time.png",
-            "sha256": "6c3380df7591ff18ed98eff52060f500c0c188d4db0a2158141606d9d4e13f6b",
+            "sha256": "e15e5316b87c9518ffdc7539edfa3bf1276ee51e481fd0cdba7f999fbf26873a",
             "width": 393
           }
         },
@@ -577,7 +588,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-b-editorial-native/05-you.png",
-            "sha256": "0d3b65b749aea42ace2eb45c97360d196b4f7e04733e0e7442b1bb0e8654d3a0",
+            "sha256": "a063698e0047ec18242d0a3b662e13d2c6f69860f15c26107695742067cc2797",
             "width": 393
           }
         },
@@ -593,7 +604,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-b-editorial-native/06-capture-keyboard-active.png",
-            "sha256": "e56d51510515de4b269ad72ce1e548b8efb0351ffcd63ac3df1cf4e2e9bc8016",
+            "sha256": "7132a457784bd707966632800c5d38660dd1c14d289530e6aa2f0186f8612ee7",
             "width": 393
           }
         },
@@ -609,7 +620,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-b-editorial-native/07-search.png",
-            "sha256": "7a41ef8a45e5368a0d6a67b0287ac6aea9c1b7c8c4918aabdd7bdd4a425e7f5d",
+            "sha256": "aa5a75a7b7f87a48eab73bc9b80af49c6f826d69aa63282891596f37be9e5dca",
             "width": 393
           }
         },
@@ -625,7 +636,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-b-editorial-native/08-contextual-trust-increase-contrast.png",
-            "sha256": "f1ae9441fad3299a524315f0a4e6bc98141c14d73bedcf11d31d226bf2e51e0c",
+            "sha256": "d1a6fc19c529532820bb93f60b4b67a7a43e8483b66eddaa7fa20c33ffd1ab3a",
             "width": 393
           }
         },
@@ -642,7 +653,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-b-editorial-native/09-setup-local-first.png",
-            "sha256": "7600b52f75f964185bd3f1d62004e0570146e345d993362f6b126c5177e4f758",
+            "sha256": "e7c98c82b97df9dc984001a68c3285df48dcfe1696ada5e1091879b5a994d029",
             "width": 393
           }
         },
@@ -659,7 +670,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-b-editorial-native/10-offline-recovery-reduce-transparency.png",
-            "sha256": "7269327ff9e246798f869c22e75fd720e4f31549197f5d448b186946b5b8a58e",
+            "sha256": "16a5b443bf444abe04930e0b0346bf0bb160749fe04fb5e75632dc66fdfda68d",
             "width": 393
           }
         },
@@ -676,7 +687,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-b-editorial-native/11-lifecycle-boundaries.png",
-            "sha256": "aae0941e328484cb65d12cc90cfa829469b304411a3ccb9f7f8a612dea000baa",
+            "sha256": "6792c0ba0ca0d13d5ef4dd3e13df2c27e2b0a55bc73980605371612f480c5f10",
             "width": 393
           }
         },
@@ -696,30 +707,39 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-b-editorial-native/12-accessibility-today-reflow.png",
-            "sha256": "b07c306f52ad625b26c8c4cb4af0bcf34a0a3648611d5d4f0efcf5f844b62d14",
+            "sha256": "5cd945488f67c2acbf56dd976f17bc0553840437680f1c2e062f70d06dd9cba1",
             "width": 393
           }
         }
       ],
       "section_id": "69:4",
       "strengths": [
-        "Strongest typographic scannability and lowest implementation ambiguity.",
-        "Ruled hierarchy maps cleanly to standard SwiftUI controls."
+        "A materially distinct edge-to-edge editorial system spans all 12 frames through asymmetric gutters, numbered sections, large typography, and rules.",
+        "Strongest typographic scannability and lowest SwiftUI implementation ambiguity while preserving the horizontal Goal Path and native controls."
       ],
       "swiftui_feasibility": "Very high: native typography, lists, grids, separators, toolbar items, and dialogs.",
+      "touch_target_posture": "Named HitTarget/44 envelopes represent every visible interaction at >=44x44 pt; glyphs may be smaller. Runtime hit testing remains unproved.",
       "tradeoffs": [
-        "Lowest visual implementation risk.",
-        "Requires exceptional typography and copy to avoid genericism."
+        "Lowest visual implementation risk and most direct mapping to SwiftUI typography, dividers, lists, grids, and dialogs.",
+        "Gives up some spatial emotion in exchange for editorial clarity and density control."
       ]
     },
     {
-      "accessibility": "Actual accessibility-size Today, no-glow opaque offline and Trust fallbacks, semantic path/list notes, and immediate Reduce Motion substitution.",
+      "accessibility": "Accessibility-size Today uses materially larger type, an opaque no-glow vertical meridian reflow, the same information/order, no horizontal scroll, and square/circle/triangle non-color states. The vertical form is an ordered semantic counterpart, never a vertical Goal Path. Every represented interactive control has a named >=44x44 pt envelope; visual design input only.",
+      "annotation_node_ids": [
+        "88:2",
+        "88:3"
+      ],
+      "companion_node_ids": [
+        "85:129"
+      ],
+      "composition_system": "Temporal/spatial field across all 12 frames: meridians, traces, orbits, capacity bands, and opaque fallbacks; the visual Goal Path remains horizontal.",
       "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=69-5",
       "id": "C",
       "name": "Atmospheric Temporal Field",
       "problems": [
         "Highest motion, material, contrast, and dark-posture calibration risk.",
-        "Could become performative if glow, blur, or path motion exceeds the restrained treatment."
+        "Requires strict restraint so field arcs and transitions remain informative rather than performative."
       ],
       "recommended": false,
       "screens": [
@@ -735,7 +755,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-c-atmospheric-temporal-field/01-root-shell.png",
-            "sha256": "79ce649545fd94c9f74dcc57ae651610355c6d3e762e2d8a53ea14af44316d1a",
+            "sha256": "6efcb5466ebc50e7f34a1f54d19854597e8ed80072193be097900fd2ec5748c4",
             "width": 393
           }
         },
@@ -751,7 +771,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-c-atmospheric-temporal-field/02-today-start-here.png",
-            "sha256": "4c6b914e19d5b844c42bb81afcc64420ea11389ffc7ec640f81dd3df7aad6290",
+            "sha256": "7dfeb2e8fae615d5f52a89a3f88bb461d4745a01b9b1da6798f93651a3fa7336",
             "width": 393
           }
         },
@@ -768,7 +788,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-c-atmospheric-temporal-field/03-goals.png",
-            "sha256": "d7978e21fedae5b0240c6b036f9d025dca43e099b128c3134737d1e6b9baba4a",
+            "sha256": "75379f10d9dc8886a2a84787ab219d1149d3544424e439915a3cf2bcd0533881",
             "width": 393
           }
         },
@@ -784,7 +804,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-c-atmospheric-temporal-field/04-time.png",
-            "sha256": "6c86bedf4dcaa296abe76b1ec3a1053fb7caa904f6205ae65fa46d6cea34d61b",
+            "sha256": "c7603173aa519991a5ed0ca6a55d1b8daf0dac4de2a73752c46f8f74153bf267",
             "width": 393
           }
         },
@@ -800,7 +820,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-c-atmospheric-temporal-field/05-you.png",
-            "sha256": "7b418a9bb5af7d184bd7ec4245c9947b1fb86b09bf2d0a33accc55e303f197a1",
+            "sha256": "1d4f15785b93f09f81dd75f3b0ea9cccbfc47a82c5815a23e5cc83c3722c9b9e",
             "width": 393
           }
         },
@@ -816,7 +836,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-c-atmospheric-temporal-field/06-capture-keyboard-active.png",
-            "sha256": "54300e19dee1302f668832194c5a5c016e8d5c9874991865797e699970a27b84",
+            "sha256": "1c4ea21a5868e4c776f898eae2283bc7f6bb2234575fcf1dba854ef02dee52af",
             "width": 393
           }
         },
@@ -832,7 +852,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-c-atmospheric-temporal-field/07-search.png",
-            "sha256": "dde647680e0ee90f541f4f55ba135183ade21cdf4355a11cfe3b597d661ce245",
+            "sha256": "d64bf8105008861dc80f765259fb5cd459c7819a64163029b01e606d7346af76",
             "width": 393
           }
         },
@@ -848,7 +868,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-c-atmospheric-temporal-field/08-contextual-trust-increase-contrast.png",
-            "sha256": "17aa61de4ca039de390e3f9418bc860bb95617b3797e4a12203665d7a07501cf",
+            "sha256": "26d9e7f7153dee2e53bd794d3f1a2ff1d53665d82c036baaaf5dcb04c07c3a6e",
             "width": 393
           }
         },
@@ -865,7 +885,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-c-atmospheric-temporal-field/09-setup-local-first.png",
-            "sha256": "ffad9d81a26d6938ed37d753cc74911acdcb745136ca5a848d786f82370599e4",
+            "sha256": "055cbd276dff931a3e724c61fc1fc88a89703b04d4b958f6ac7c452f9404839f",
             "width": 393
           }
         },
@@ -882,7 +902,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-c-atmospheric-temporal-field/10-offline-recovery-reduce-transparency.png",
-            "sha256": "abbcd651a75dbb6d37fe77cb4c65cfa64445751e3594ff69eaafdf4929269a2c",
+            "sha256": "700eeaf2063989b5311448a7533427f32d5663da6e9f7211666c1e6ba33245f7",
             "width": 393
           }
         },
@@ -899,7 +919,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-c-atmospheric-temporal-field/11-lifecycle-boundaries.png",
-            "sha256": "0fa78a39a5dae4c40d38ca353b7ced5f619fa948209b7280999a061d36d96bac",
+            "sha256": "ba16451098ec7f6a3631ec485f7c82c9c3b5872bb65d14a0e78996d3ebc0f6ed",
             "width": 393
           }
         },
@@ -919,20 +939,21 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-c-atmospheric-temporal-field/12-accessibility-today-reflow.png",
-            "sha256": "283d86ed2dd2c0edf07cd81ace550b79aa6f3fa8a8e2c805ee941ff958f586bc",
+            "sha256": "2b2db4eabf0bd092933a19f257b3d983fae109a7bcf2142794081d149ffb6d0e",
             "width": 393
           }
         }
       ],
       "section_id": "69:5",
       "strengths": [
-        "Most ownable expression of time, continuity, and reality-fit action.",
-        "Anchors use a curved Now meridian, spatial living-path lanes, and capacity/protection calendar bands."
+        "The temporal-field grammar now spans all 12 frames, including You, setup, recovery, lifecycle, Search, Capture, and contextual Trust rather than only the four anchors.",
+        "Most ownable expression of time, causality, continuity, and reality-fit action; the canonical visual Goal Path remains horizontal."
       ],
       "swiftui_feasibility": "Medium-high: standard controls plus SwiftUI Path and restrained ambient blur shapes; no custom renderer.",
+      "touch_target_posture": "Named HitTarget/44 envelopes represent every visible interaction at >=44x44 pt; glyphs may be smaller. Runtime hit testing remains unproved.",
       "tradeoffs": [
-        "Strongest differentiation and emotional continuity.",
-        "Requires owner confidence in dark-first posture and a stricter accessibility bar."
+        "Strongest differentiation and emotional continuity, with more Path, motion, and contrast calibration than A or B.",
+        "Opaque no-glow fallbacks simplify accessibility behavior but intentionally reduce atmospheric depth."
       ]
     }
   ],
@@ -942,7 +963,7 @@
     "page_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=69-2",
     "page_name": "EXPLORATION — Owner Visual Workshop — 2026-07-14"
   },
-  "mapping_posture": "Each exploration viewport carries shared EXPLORATION plugin data with existing UX blueprint IDs, exact stable requirement IDs, frozen SHAs, accessibility posture, and SwiftUI plausibility.",
+  "mapping_posture": "Each exploration viewport carries shared EXPLORATION data in the stable ambitions.visual_owner_workshop namespace: blueprint and stable-requirement mappings, frozen SHAs, direction-specific composition, accessibility posture, exact represented interaction-target count, and a visual-only >=44x44 pt target contract. Glyphs may be smaller. This is design input, not runtime accessibility proof.",
   "owner_decisions_requested": [
     "Select Direction A, B, or C; no direction becomes authority without an explicit owner decision.",
     "Choose light-first, dark-first, or paired light/dark posture.",

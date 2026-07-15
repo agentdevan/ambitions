@@ -26,6 +26,15 @@ Direction A is recommended because it best balances Ambitions-specific spatial i
 
 No recommendation changes the package status. An explicit owner choice is still required.
 
+## Consolidated review repair
+
+- All 36 exploration viewports were recomposed in place while preserving their outer node IDs.
+- A now uses object-specific quiet spatial forms across the complete set; B uses edge-to-edge asymmetric editorial rules and typography; C carries one temporal-field grammar through all primary and secondary surfaces.
+- The visual Goal Path remains horizontal in every direction. Accessibility uses an ordered semantic-list counterpart; it is not described as a vertical Goal Path.
+- Each accessibility-size Today frame uses materially larger type, true vertical reflow, the same information/order, no horizontal scroll, and square/circle/triangle non-color states.
+- Every represented interactive control has a named `HitTarget/44` envelope of at least 44×44 pt. Glyphs may be smaller. This is visual design input, not runtime hit-testing or accessibility proof.
+- Shared Figma metadata now uses the stable `ambitions.visual_owner_workshop` namespace and keeps `approval_state=EXPLORATION`, mappings, frozen SHAs, composition system, accessibility posture, target count, and the visual-only proof ceiling explicit.
+
 ## Current candidate review
 
 ### Strengths
@@ -94,23 +103,24 @@ Figma section: [`69:3`](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node
 
 ### Strengths
 
-- Best balance of calm spatial identity, canon clarity, accessibility resilience, and SwiftUI feasibility.
-- Unifies Start here, Reality Window, horizontal Goal Path, calendar-grade Time, contextual Trust, local-first setup, and offline health.
+- One quiet spatial composition system spans all 12 frames through object-specific fields, orbits, living paths, and lifecycle traces without returning to a generic card/list skeleton.
+- Balances canon fidelity and native feasibility across Start here, Reality Window, the horizontal Goal Path, calendar-grade Time, contextual Trust, setup, offline continuity, and lifecycle.
 
 ### Problems
 
-- Warm surfaces require disciplined contrast tuning.
-- Spatial affordances require semantic list counterparts and careful accessibility reflow.
+- Warm spatial fields still require implementation-time contrast verification in the rendered app.
+- Spatial relationships require the documented ordered semantic counterpart under accessibility reflow.
 
 ### Consequences and tradeoffs
 
-- Moderate custom layout work without custom rendering.
-- Distinctive without forcing a dark default or editorial severity.
+- Moderate custom SwiftUI layout using native shapes and semantic ordering without a custom renderer.
+- Most Ambitions-specific light direction; more layout calibration than B and less material/motion risk than C.
 
 ### Accessibility and SwiftUI
 
-- Accessibility: Actual accessibility-size Today, high-contrast Trust, opaque offline treatment, keyboard-active Capture, adjacent VoiceOver and Reduce Motion notes.
+- Accessibility: materially larger type, full vertical reflow, the same information/order, no horizontal scroll, square/circle/triangle non-color states, and represented controls with named ≥44×44 pt envelopes. Visual design input only.
 - SwiftUI feasibility: High: native navigation, sheets, controls, scroll views, calendar grid primitives, and semantic overlays.
+- Linked companion node: `78:13`. Direction-level annotation nodes: none.
 
 ### Viewports
 
@@ -135,23 +145,24 @@ Figma section: [`69:4`](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node
 
 ### Strengths
 
-- Strongest typographic scannability and lowest implementation ambiguity.
-- Ruled hierarchy maps cleanly to standard SwiftUI controls.
+- A materially distinct edge-to-edge editorial system spans all 12 frames through asymmetric gutters, numbered sections, large typography, and rules.
+- Strongest typographic scannability and lowest SwiftUI implementation ambiguity while preserving the horizontal Goal Path and native controls.
 
 ### Problems
 
-- Least ownable at a glance and may drift toward a premium planner.
-- Spatial product moat is quieter outside Goals and Time.
+- Least ownable at a glance and still depends on exceptional typography and copy to avoid premium-planner genericism.
+- The spatial product moat is intentionally quieter than A and C.
 
 ### Consequences and tradeoffs
 
-- Lowest visual implementation risk.
-- Requires exceptional typography and copy to avoid genericism.
+- Lowest visual implementation risk and most direct mapping to SwiftUI typography, dividers, lists, grids, and dialogs.
+- Gives up some spatial emotion in exchange for editorial clarity and density control.
 
 ### Accessibility and SwiftUI
 
-- Accessibility: Actual accessibility-size Today, high-contrast Trust, opaque offline treatment, keyboard-active Capture, and adjacent semantic notes.
+- Accessibility: materially larger type, numbered vertical reflow, the same information/order, no horizontal scroll, square/circle/triangle non-color states, and represented controls with named ≥44×44 pt envelopes. Visual design input only.
 - SwiftUI feasibility: Very high: native typography, lists, grids, separators, toolbar items, and dialogs.
+- Linked companion node: `82:129`. Direction-level annotation nodes: none.
 
 ### Viewports
 
@@ -176,23 +187,24 @@ Figma section: [`69:5`](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node
 
 ### Strengths
 
-- Most ownable expression of time, continuity, and reality-fit action.
-- Anchors use a curved Now meridian, spatial living-path lanes, and capacity/protection calendar bands.
+- The temporal-field grammar now spans all 12 frames, including You, setup, recovery, lifecycle, Search, Capture, and contextual Trust rather than only the four anchors.
+- Most ownable expression of time, causality, continuity, and reality-fit action; the canonical visual Goal Path remains horizontal.
 
 ### Problems
 
 - Highest motion, material, contrast, and dark-posture calibration risk.
-- Could become performative if glow, blur, or path motion exceeds the restrained treatment.
+- Requires strict restraint so field arcs and transitions remain informative rather than performative.
 
 ### Consequences and tradeoffs
 
-- Strongest differentiation and emotional continuity.
-- Requires owner confidence in dark-first posture and a stricter accessibility bar.
+- Strongest differentiation and emotional continuity, with more Path, motion, and contrast calibration than A or B.
+- Opaque no-glow fallbacks simplify accessibility behavior but intentionally reduce atmospheric depth.
 
 ### Accessibility and SwiftUI
 
-- Accessibility: Actual accessibility-size Today, no-glow opaque offline and Trust fallbacks, semantic path/list notes, and immediate Reduce Motion substitution.
+- Accessibility: materially larger type, opaque no-glow vertical meridian reflow, the same information/order, no horizontal scroll, square/circle/triangle non-color states, and represented controls with named ≥44×44 pt envelopes. The vertical form is an ordered semantic counterpart, never a vertical Goal Path. Visual design input only.
 - SwiftUI feasibility: Medium-high: standard controls plus SwiftUI Path and restrained ambient blur shapes; no custom renderer.
+- Linked companion node: `85:129`. Direction-level annotation nodes: `88:2`, `88:3`.
 
 ### Viewports
 
@@ -222,10 +234,12 @@ Figma section: [`69:5`](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node
 
 ### Accessibility and Dynamic Type
 
-- Each direction contains one populated Today viewport at an accessibility text size, not an abstract matrix.
+- Each direction contains one populated Today viewport with materially larger type and real vertical reflow, not an abstract matrix or a scaled standard viewport.
+- Each reflow preserves the same information and order without horizontal scrolling or clipping and adds square/circle/triangle state shapes so color is never the only cue.
 - Capture is shown keyboard-active with an explicit native accessory boundary.
 - Increase Contrast is embodied in Trust. Reduce Transparency is embodied in offline/recovery. Neither setting appears as invented product UI.
-- VoiceOver order, Reduce Motion substitution, semantic Goal Path order, and Time list equivalents are adjacent annotations outside product-only screenshots.
+- The visual Goal Path remains horizontal. VoiceOver/Dynamic Type use an ordered semantic-list counterpart; the package does not call that a vertical Goal Path.
+- Every represented interaction, including shell Search/Capture/dock controls, Time controls, and lifecycle actions, has a named ≥44×44 pt envelope. Glyphs may be smaller; runtime hit testing remains unproved.
 - Active + Move to Trash confirmation is separate from the linked Trash state that offers Restore or a separate permanent-delete review.
 
 ### SwiftUI plausibility
