@@ -24,6 +24,9 @@ from tools.ambitions_canon.model import (
     GapSeverity,
     normalize_visible_attribution,
 )
+from tools.ambitions_canon.visual_authority import (
+    load_visual_authority_rebaseline_if_present,
+)
 
 
 REFERENCE_FILES = (
@@ -1402,6 +1405,12 @@ def load_figma_reconciliation_if_present(
 ) -> FigmaReconciliationSnapshot | None:
     """Load the tracked Figma proposal when present without following links."""
 
+    # The Phase 3/4 rebaseline supersedes this Task 23 reconciliation as the
+    # live visual-governance input. The old receipt remains tracked provenance,
+    # but it must not require or reactivate rejected VSP targets.
+    if load_visual_authority_rebaseline_if_present(repo_root) is not None:
+        return None
+
     path = repo_root / _FIGMA_RECONCILIATION
     try:
         os.lstat(path)
@@ -1890,7 +1899,7 @@ def _load_reference_file_bytes(
                 visual_authority_id = _string(
                     row["visual_authority_id"], path, "visual_authority_id"
                 )
-                if not visual_authority_id.startswith("VSP-"):
+                if not visual_authority_id.startswith(("VSP-", "VA-P")):
                     raise _schema_error(path, "visual_authority_id is invalid")
                 raw_canon_revision = row["canon_revision"]
                 if type(raw_canon_revision) is not int or raw_canon_revision < 1:

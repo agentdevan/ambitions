@@ -1,0 +1,507 @@
+{
+  "$id": "https://ambitions.local/schemas/visual-authority-rebaseline.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "authority_state": {
+      "const": "shadow"
+    },
+    "canon": {
+      "additionalProperties": false,
+      "properties": {
+        "content_sha": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "revision": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "source_sha": {
+          "pattern": "^[0-9a-f]{40}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "revision",
+        "source_sha",
+        "content_sha"
+      ],
+      "type": "object"
+    },
+    "claim_ceiling": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "coverage": {
+      "additionalProperties": false,
+      "properties": {
+        "additional_mapped_requirement_ids": {
+          "$ref": "#/$defs/stringSet"
+        },
+        "cross_cutting_count": {
+          "const": 11
+        },
+        "journey_count": {
+          "const": 12
+        },
+        "object_count": {
+          "const": 18
+        },
+        "screen_count": {
+          "const": 47
+        },
+        "sensitive_exposure_channel_count": {
+          "const": 9
+        },
+        "state_count": {
+          "const": 433
+        },
+        "visual_requirement_count": {
+          "const": 324
+        },
+        "visual_requirement_ids": {
+          "$ref": "#/$defs/stringSet"
+        }
+      },
+      "required": [
+        "visual_requirement_count",
+        "visual_requirement_ids",
+        "additional_mapped_requirement_ids",
+        "screen_count",
+        "object_count",
+        "journey_count",
+        "cross_cutting_count",
+        "sensitive_exposure_channel_count",
+        "state_count"
+      ],
+      "type": "object"
+    },
+    "figma": {
+      "additionalProperties": false,
+      "properties": {
+        "additive_page_ids": {
+          "$ref": "#/$defs/stringSet"
+        },
+        "authority_nodes": {
+          "items": {
+            "$ref": "#/$defs/authorityNode"
+          },
+          "maxItems": 120,
+          "minItems": 120,
+          "type": "array"
+        },
+        "file_key": {
+          "const": "Oik7612LSTUHWsNRFoTlTJ"
+        },
+        "phase3_root_node_ids": {
+          "$ref": "#/$defs/stringSet"
+        },
+        "reconciliation_root_node_id": {
+          "const": "37:438"
+        }
+      },
+      "required": [
+        "file_key",
+        "additive_page_ids",
+        "phase3_root_node_ids",
+        "reconciliation_root_node_id",
+        "authority_nodes"
+      ],
+      "type": "object"
+    },
+    "gate_b": {
+      "additionalProperties": false,
+      "properties": {
+        "blocked_state_handling": {
+          "const": "fail_closed_zero_source_authorization"
+        },
+        "independent_semantic_review": {
+          "enum": [
+            "pending",
+            "green"
+          ]
+        },
+        "independent_visual_review": {
+          "enum": [
+            "pending",
+            "green"
+          ]
+        },
+        "rollback_proven": {
+          "type": "boolean"
+        },
+        "state": {
+          "enum": [
+            "pending_independent_review",
+            "green"
+          ]
+        },
+        "task_pack_selection": {
+          "enum": [
+            "blocked_until_gate_b_green",
+            "new_authority_only"
+          ]
+        }
+      },
+      "required": [
+        "state",
+        "task_pack_selection",
+        "blocked_state_handling",
+        "independent_semantic_review",
+        "independent_visual_review",
+        "rollback_proven"
+      ],
+      "type": "object"
+    },
+    "legacy": {
+      "additionalProperties": false,
+      "properties": {
+        "destructive_actions": {
+          "maxItems": 0,
+          "type": "array"
+        },
+        "file_key": {
+          "const": "SWtHm9ouHTPbEFfNrrtZwv"
+        },
+        "legacy_visual_bytes_changed": {
+          "const": false
+        },
+        "nodes": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "disposition": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "legacy_role": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "node_id": {
+                "pattern": "^[0-9]+:[0-9]+$",
+                "type": "string"
+              },
+              "replacement_visual_authority_ids": {
+                "$ref": "#/$defs/stringSet"
+              },
+              "unique_content": {
+                "minLength": 1,
+                "type": "string"
+              }
+            },
+            "required": [
+              "node_id",
+              "legacy_role",
+              "disposition",
+              "replacement_visual_authority_ids",
+              "unique_content"
+            ],
+            "type": "object"
+          },
+          "maxItems": 15,
+          "minItems": 15,
+          "type": "array"
+        },
+        "prior_reconciliation_path": {
+          "const": "docs/canon/migration/figma-reconciliation.json"
+        },
+        "prior_reconciliation_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "proposed_future_destruction_targets": {
+          "const": "withheld_gate_c"
+        }
+      },
+      "required": [
+        "file_key",
+        "prior_reconciliation_path",
+        "prior_reconciliation_sha256",
+        "nodes",
+        "destructive_actions",
+        "legacy_visual_bytes_changed",
+        "proposed_future_destruction_targets"
+      ],
+      "type": "object"
+    },
+    "legacy_before_screenshots": {
+      "items": {
+        "$ref": "#/$defs/legacyScreenshot"
+      },
+      "maxItems": 9,
+      "minItems": 9,
+      "type": "array"
+    },
+    "phase": {
+      "const": "phase3_4"
+    },
+    "repository": {
+      "additionalProperties": false,
+      "properties": {
+        "frozen_base_sha": {
+          "pattern": "^[0-9a-f]{40}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "frozen_base_sha"
+      ],
+      "type": "object"
+    },
+    "rollback": {
+      "type": "object"
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "screenshots": {
+      "items": {
+        "$ref": "#/$defs/screenshot"
+      },
+      "maxItems": 10,
+      "minItems": 10,
+      "type": "array"
+    },
+    "state_posture": {
+      "additionalProperties": false,
+      "properties": {
+        "eligible_state_ids": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/stringSet"
+            },
+            {
+              "maxItems": 263,
+              "minItems": 263
+            }
+          ]
+        },
+        "future_state_ids": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/stringSet"
+            },
+            {
+              "maxItems": 4,
+              "minItems": 4
+            }
+          ]
+        },
+        "gap_blocked_state_ids": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/stringSet"
+            },
+            {
+              "maxItems": 166,
+              "minItems": 166
+            }
+          ]
+        }
+      },
+      "required": [
+        "eligible_state_ids",
+        "future_state_ids",
+        "gap_blocked_state_ids"
+      ],
+      "type": "object"
+    },
+    "status": {
+      "enum": [
+        "candidate_pending_independent_review",
+        "gate_b_green"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "authority_state",
+    "phase",
+    "status",
+    "canon",
+    "repository",
+    "figma",
+    "coverage",
+    "state_posture",
+    "gate_b",
+    "legacy",
+    "screenshots",
+    "legacy_before_screenshots",
+    "rollback",
+    "claim_ceiling"
+  ],
+  "title": "Ambitions Visual Authority Rebaseline",
+  "type": "object",
+  "$defs": {
+    "authorityNode": {
+      "additionalProperties": true,
+      "properties": {
+        "accessibility_variants": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "blueprint_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "canon_content_sha": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "canon_revision": {
+          "const": 1
+        },
+        "canon_source_sha": {
+          "pattern": "^[0-9a-f]{40}$",
+          "type": "string"
+        },
+        "frame_version": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "implementation_status": {
+          "const": "design_authority_candidate_not_source_implementation"
+        },
+        "kind": {
+          "enum": [
+            "infrastructure",
+            "screen",
+            "object",
+            "journey",
+            "cross_cutting",
+            "sensitive_exposure_channel"
+          ]
+        },
+        "metadata_provenance": {
+          "const": "direct_figma_shared_plugin_data"
+        },
+        "name": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "node_id": {
+          "pattern": "^[0-9]+:[0-9]+$",
+          "type": "string"
+        },
+        "owner_approval_state": {
+          "enum": [
+            "candidate_pending_independent_review",
+            "candidate_with_future_gated_states",
+            "mapped_non_authoritative_blocked"
+          ]
+        },
+        "page_id": {
+          "pattern": "^17:(?:[2-9]|10|11)$",
+          "type": "string"
+        },
+        "page_name": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "proof_ceiling": {
+          "const": "visual_design_authority_candidate_only"
+        },
+        "requirement_ids": {
+          "$ref": "#/$defs/stringSet"
+        },
+        "swiftui_plausibility": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "visual_authority_id": {
+          "pattern": "^VA-P[34]-[A-Z0-9-]+$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "accessibility_variants",
+        "blueprint_id",
+        "canon_content_sha",
+        "canon_revision",
+        "canon_source_sha",
+        "frame_version",
+        "implementation_status",
+        "kind",
+        "metadata_provenance",
+        "name",
+        "node_id",
+        "owner_approval_state",
+        "page_id",
+        "page_name",
+        "proof_ceiling",
+        "requirement_ids",
+        "swiftui_plausibility",
+        "visual_authority_id"
+      ],
+      "type": "object"
+    },
+    "legacyScreenshot": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/screenshot"
+        },
+        {
+          "properties": {
+            "proof_posture": {
+              "const": "before_only_not_applied_mutation_proof"
+            }
+          },
+          "required": [
+            "proof_posture"
+          ]
+        }
+      ]
+    },
+    "screenshot": {
+      "properties": {
+        "asset_id": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "binding_id": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "node_id": {
+          "pattern": "^[0-9]+:[0-9]+$",
+          "type": "string"
+        },
+        "path": {
+          "pattern": "^docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/",
+          "type": "string"
+        },
+        "proof_posture": {
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "asset_id",
+        "node_id",
+        "path",
+        "sha256"
+      ],
+      "type": "object"
+    },
+    "stringSet": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  }
+}

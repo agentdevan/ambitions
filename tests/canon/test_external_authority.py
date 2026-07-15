@@ -489,22 +489,19 @@ implementation_status = "Yellow; not implementation proof"
             "CANON_FIGMA_RECONCILIATION_STATE",
         )
 
-    def test_live_figma_retained_approval_evidence_is_digest_bound(self):
-        from tools.ambitions_canon.external_authority import (
-            validate_figma_reconciliation,
-        )
-        from tools.ambitions_canon.manifest import load_documents, load_manifest
-        from tools.ambitions_canon.registry import build_registry
-
+    def test_legacy_figma_approval_evidence_remains_digest_bound_provenance(self):
         root = Path(__file__).resolve().parents[2]
-        manifest = load_manifest(root)
-        current = build_registry(manifest, load_documents(root, manifest))
-        snapshot = validate_figma_reconciliation(
-            root,
-            current,
-            load_external_references(root),
+        reconciliation_path = root / "docs/canon/migration/figma-reconciliation.json"
+        payload = json.loads(reconciliation_path.read_text(encoding="utf-8"))
+        rebaseline = json.loads(
+            root.joinpath(
+                "docs/canon/migration/visual-authority-rebaseline.json"
+            ).read_text(encoding="utf-8")
         )
-        payload = json.loads(snapshot.source_bytes)
+        self.assertEqual(
+            hashlib.sha256(reconciliation_path.read_bytes()).hexdigest(),
+            rebaseline["legacy"]["prior_reconciliation_sha256"],
+        )
         retained = [
             node for node in payload["nodes"]
             if node["recommended_action"] == "retain_authority"
@@ -604,12 +601,24 @@ implementation_status = "Yellow; not implementation proof"
             if reference.reference_kind is AuthorityReferenceKind.FIGMA
             and reference.authority_role is FigmaAuthorityRole.APPROVED_TARGET
         ]
-        self.assertEqual(len(approved), 9)
-        self.assertTrue(
-            all(
-                reference.reconciliation_status == "applied_verified"
-                for reference in approved
-            )
+        superseded = [
+            reference
+            for reference in references
+            if reference.reference_kind is AuthorityReferenceKind.FIGMA
+            and reference.authority_role is FigmaAuthorityRole.SUPERSEDED
+        ]
+        candidates = [
+            reference
+            for reference in references
+            if reference.reference_kind is AuthorityReferenceKind.FIGMA
+            and reference.authority_role is FigmaAuthorityRole.CANDIDATE
+        ]
+        self.assertEqual(approved, [])
+        self.assertEqual(len(superseded), 10)
+        self.assertEqual(len(candidates), 1)
+        self.assertEqual(
+            candidates[0].visual_authority_id,
+            "VA-P4-RECONCILIATION-001",
         )
 
         manifest = json.loads(
@@ -617,19 +626,12 @@ implementation_status = "Yellow; not implementation proof"
                 "docs/canon/generated/visual-authority-manifest.json"
             ).read_text(encoding="utf-8")
         )
-        self.assertEqual(
-            manifest["reconciliation"]["disposition_state"],
-            "authority_metadata_and_text_applied_verified",
-        )
-        self.assertEqual(
-            len(manifest["reconciliation"]["execution_receipt"]["metadata_writes"]),
-            9,
-        )
-        self.assertTrue(
-            all(
-                authority["reconciliation_status"] == "applied_verified"
+        self.assertNotIn("reconciliation", manifest)
+        self.assertFalse(manifest["owner_approval_complete"])
+        self.assertFalse(
+            any(
+                authority["authority_role"] == "approved_target"
                 for authority in manifest["authorities"]
-                if authority["authority_role"] == "approved_target"
             )
         )
 
@@ -643,11 +645,30 @@ implementation_status = "Yellow; not implementation proof"
         root = Path(__file__).resolve().parents[2]
         manifest = load_manifest(root)
         current = build_registry(manifest, load_documents(root, manifest))
-        references = load_external_references(root)
+        current_references = load_external_references(root)
         data = json.loads(
             root.joinpath("docs/canon/migration/figma-reconciliation.json").read_text(
                 encoding="utf-8"
             )
+        )
+        receipt_by_source = {
+            f"figma:{data['execution_receipt']['file_key']}:{receipt['node_id']}": receipt
+            for receipt in data["execution_receipt"]["metadata_writes"]
+        }
+        references = tuple(
+            replace(
+                reference,
+                authority_role=FigmaAuthorityRole.APPROVED_TARGET,
+                approval_state="approved",
+                approved_by=receipt_by_source[reference.source]["after"]["approved_by"],
+                implementation_status=receipt_by_source[reference.source]["after"][
+                    "implementation_status"
+                ],
+                reconciliation_status="applied_verified",
+            )
+            if reference.source in receipt_by_source
+            else reference
+            for reference in current_references
         )
         reference_by_source = {
             reference.source: reference

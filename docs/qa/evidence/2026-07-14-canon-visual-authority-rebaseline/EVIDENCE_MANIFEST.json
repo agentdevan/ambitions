@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "evidence_state": "candidate_pending_independent_review",
+  "authority_state": "shadow_non_authoritative",
+  "repository_base_sha": "4d73857b1c7ec86a0ce4293219c49d56bec18864",
+  "canon_revision": 1,
+  "canon_source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3",
+  "canon_content_sha": "0ac3656f1f55c0514ada19da8b36b8a090628e4fa1648a6aaee3f660a3ed27bb",
+  "figma_file_key": "Oik7612LSTUHWsNRFoTlTJ",
+  "durable_records": [
+    {
+      "path": "docs/canon/migration/VISUAL_AUTHORITY_REBASELINE.md",
+      "sha256": "3947545a7bcfea91573d4f07174a0a763f7cab10f0dddfe3c79f92ca8db760aa"
+    },
+    {
+      "path": "docs/canon/migration/figma-reconciliation.json",
+      "sha256": "a32410383e0536daaebf968b88de3f17809acc294e72084dbb55dc34968cbe96"
+    },
+    {
+      "path": "docs/canon/migration/visual-authority-rebaseline.json",
+      "sha256": "f715f0b27c99aea0f490baa8023b83b5770bac9aeeee37be8e2ca651d74e81c2"
+    },
+    {
+      "path": "docs/canon/schemas/visual-authority-rebaseline.schema.json",
+      "sha256": "392df2ebaea7af583ea45121b70927b96c13e2b48ac8afe006da9fd6a748a84d"
+    }
+  ],
+  "phase3_4_screenshots": [
+    {
+      "node_id": "31:2",
+      "asset_id": "bb108e6f-e20c-4736-b4c3-35861a66a7bd",
+      "path": "screens/phase3-4/accessibility-stress.png",
+      "sha256": "6f1b5c30e4334c2ff80226c899a86a68cb6b2dd9a5ca5b09df1c20fa32fac746"
+    },
+    {
+      "node_id": "34:438",
+      "asset_id": "8afe598f-7451-4115-8eec-e716ad3c4efe",
+      "path": "screens/phase3-4/authority-index.png",
+      "sha256": "66bbc322e950d2cf367600cc2a00321baaaee77decd7cef8d86d27953e7bcbfb"
+    },
+    {
+      "node_id": "24:2",
+      "asset_id": "7849c3f1-4bd1-4258-825d-a0b728185d6d",
+      "path": "screens/phase3-4/components.png",
+      "sha256": "7933b36a4bbc94eed90d19b3cf0761429e916071e94647f3fa7c68fb7f041d29"
+    },
+    {
+      "node_id": "22:2",
+      "asset_id": "5da8f536-b03e-4276-a479-a392d3285a66",
+      "path": "screens/phase3-4/foundations.png",
+      "sha256": "cd2a8ad04cf472d1334619190b45dd06c2815ea230fad1e7153289fe7b554c74"
+    },
+    {
+      "node_id": "29:2",
+      "asset_id": "1cd24ee5-7640-4e3e-bedd-3030bad93515",
+      "path": "screens/phase3-4/objects-journeys.png",
+      "sha256": "fba2b0fbf3d5768cd2ef03d95f95a29e5b2cbd4cb2808446c939deea0d9e2de2"
+    },
+    {
+      "node_id": "37:438",
+      "asset_id": "1c890946-5614-409f-ade4-1e6c096aa4a8",
+      "path": "screens/phase3-4/reconciliation.png",
+      "sha256": "87443265f9c6dc04d911ea7680b7009350dbaed94b1874e44a52d048b116a1f9"
+    },
+    {
+      "node_id": "28:2",
+      "asset_id": "64b4c14d-5c62-4d20-87d2-0286ca995f08",
+      "path": "screens/phase3-4/shell-setup-global.png",
+      "sha256": "21c92a2947ba983e1f545a00d04f1e25491e540747f3cadb6d0c74771f6aa991"
+    },
+    {
+      "node_id": "28:954",
+      "asset_id": "d7577b7c-7b24-4aa2-9460-677dfc9b4de4",
+      "path": "screens/phase3-4/time.png",
+      "sha256": "bc9ab6da6b6ce8b3b6cc0454e974e516974e75d61cd52df80a6c56ef69b47be0"
+    },
+    {
+      "node_id": "28:616",
+      "asset_id": "69f2ca16-62de-4016-8129-80134416ae25",
+      "path": "screens/phase3-4/today-goals.png",
+      "sha256": "4785782918ad574ac71e34a2b1a5d542960bbd90bc70992177a289240a2a497f"
+    },
+    {
+      "node_id": "28:1251",
+      "asset_id": "af0fe11d-618a-48d6-95b6-e709e3f9871d",
+      "path": "screens/phase3-4/you-trust-data.png",
+      "sha256": "b8ba486beabdd055107f040733837dd59d6fc2dc36e76ffafa96106dc0075cf0"
+    }
+  ],
+  "legacy_before_screenshots": [
+    {
+      "node_id": "87:2",
+      "asset_id": "6a930ee1-370e-4dd6-8940-95e0e9645db2",
+      "path": "screens/legacy-before/87-2.png",
+      "sha256": "fc5e6648832e56415f83225b86af938634726325bdbc00ee8b05dedcfded40a8"
+    },
+    {
+      "node_id": "92:2",
+      "asset_id": "f1e301c4-55b0-49de-8a58-a9e941ee2070",
+      "path": "screens/legacy-before/92-2.png",
+      "sha256": "c2e75a3b5edb4a7077407910fcb3f19a66bbb2af289067ce8dee64482dcb1cfe"
+    },
+    {
+      "node_id": "160:93",
+      "asset_id": "41481af2-f23c-4b6c-99d5-92b3c6bd74e9",
+      "path": "screens/legacy-before/160-93.png",
+      "sha256": "5b3ecbaf23bb11128630b0891221945edcdf96b93445de69c697b78a273abd50"
+    },
+    {
+      "node_id": "177:93",
+      "asset_id": "5d5e506f-699a-41cc-b2c7-f3e94c17730d",
+      "path": "screens/legacy-before/177-93.png",
+      "sha256": "ce79798334bc1b5dfaf67c0aaa94fb7868520e0f3c3bea6ce557b86b758e3da7"
+    },
+    {
+      "node_id": "202:93",
+      "asset_id": "bfdf7515-79ac-4663-b8da-482f23d0c80a",
+      "path": "screens/legacy-before/202-93.png",
+      "sha256": "dcfe799254a1fe959cf557b1166389208281e69e3732ceb226eaf14275b60484"
+    },
+    {
+      "node_id": "217:93",
+      "asset_id": "114be772-7321-415a-bdde-99f500ee049c",
+      "path": "screens/legacy-before/217-93.png",
+      "sha256": "97bf44c6f8458b7c5d98fd47c8d9b6764989a7770defc263cb62ab3381f49c0d"
+    },
+    {
+      "node_id": "240:93",
+      "asset_id": "38a80039-3a0d-4dee-82c5-014ce54856cc",
+      "path": "screens/legacy-before/240-93.png",
+      "sha256": "55edc6c34a56fafcf96b307bad1724671440bcb4013f45b1ca83da6a0dda9108"
+    },
+    {
+      "node_id": "257:93",
+      "asset_id": "bace88f8-49fb-4f91-b3fa-5efe12e454e5",
+      "path": "screens/legacy-before/257-93.png",
+      "sha256": "7ed4e970bd76bfc8cc11c0f32c64cc229eb77db6196bab7797c7e5515d9a89d3"
+    },
+    {
+      "node_id": "272:93",
+      "asset_id": "b8907afb-5dec-45d6-9f43-0782f714f68e",
+      "path": "screens/legacy-before/272-93.png",
+      "sha256": "542fea1c4d6f77182b3b74b5cb5db76e102b91c9a508a4c3e40428478f0e5085"
+    }
+  ],
+  "mutation_posture": {
+    "new_candidate_file_is_additive": true,
+    "legacy_visual_bytes_changed": false,
+    "destructive_actions": [],
+    "gate_c_cleanup_authorized": false
+  },
+  "claim_ceiling": "Visual design authority candidate only for the exact Figma/canon mapping scope; no source UI, runtime, rendered-app Visual, accessibility, device, privacy/legal, TestFlight, App Store, or release Green claim."
+}

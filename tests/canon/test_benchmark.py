@@ -683,7 +683,7 @@ class BenchmarkTest(unittest.TestCase):
                 self.assertTrue(scenario.proof_present)
                 self.assertTrue(scenario.passed)
 
-    def test_visually_governed_benchmark_packs_include_scope_authority(self):
+    def test_visually_governed_benchmark_packs_obey_rebaseline_gate(self):
         benchmark = self.benchmark_module()
         result = benchmark.run_benchmark(ROOT, FIXTURES)
         packs = {scenario.scenario_id: scenario.pack for scenario in result.scenarios}
@@ -694,12 +694,24 @@ class BenchmarkTest(unittest.TestCase):
             "SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001",
             today["applicable_requirement_ids"],
         )
-        self.assertTrue(any("VSP-02" in item for item in today["visual_authority"]))
         self.assertIn(
             "SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001",
             capture["applicable_requirement_ids"],
         )
-        self.assertTrue(any("VSP-05" in item for item in capture["visual_authority"]))
+        from tools.ambitions_canon.visual_authority import (
+            load_visual_authority_rebaseline,
+        )
+
+        gate = load_visual_authority_rebaseline(ROOT)
+        for pack in (today, capture):
+            rendered = "\n".join(pack["visual_authority"])
+            self.assertNotIn("SWtHm9ouHTPbEFfNrrtZwv", rendered)
+            self.assertNotIn("VSP-", rendered)
+            if gate.gate_b_state == "green":
+                self.assertIn("figma:Oik7612LSTUHWsNRFoTlTJ:", rendered)
+                self.assertIn("VA-P3-", rendered)
+            else:
+                self.assertIn("UI-readiness stop", rendered)
 
     def test_benchmark_budget_enforcement_uses_estimated_tokens_not_characters(self):
         benchmark = self.benchmark_module()

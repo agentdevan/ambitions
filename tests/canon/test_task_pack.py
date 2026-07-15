@@ -327,6 +327,9 @@ def initialize_live_conflict_cli_root(
     scope: str,
 ) -> Path:
     shutil.copytree(ROOT / "docs/canon", root / "docs/canon")
+    # This synthetic conflict fixture intentionally omits the complete external
+    # UX-blueprint source corpus and therefore must not install its visual gate.
+    (root / "docs/canon/migration/visual-authority-rebaseline.json").unlink()
     (root / ".gitignore").write_text(".codex/\n", encoding="utf-8")
     intake_path = root / ".codex" / "intake" / "AMB-1842.json"
     intake_path.parent.mkdir(parents=True)

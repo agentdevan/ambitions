@@ -1,0 +1,4 @@
+{
+  "expected_code": "VISUAL_AUTHORITY_DESTRUCTIVE_ACTION_FORBIDDEN",
+  "mutation": "destructive_legacy_action"
+}

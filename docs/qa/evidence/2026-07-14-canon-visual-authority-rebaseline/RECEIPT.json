@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "receipt_type": "visual_authority_phase3_4_candidate_verification",
+  "candidate_state": "frozen_pending_exact_range_independent_review",
+  "authority_state": "shadow_non_authoritative",
+  "gate_b_state": "pending",
+  "branch": "codex/canon-visual-authority-phase-3-4",
+  "repository_base_sha": "4d73857b1c7ec86a0ce4293219c49d56bec18864",
+  "python": "/Users/devan/.local/share/uv/python/cpython-3.12-macos-x86_64-none/bin/python3.12",
+  "tdd": {
+    "focused_red": {
+      "command": "/Users/devan/.local/share/uv/python/cpython-3.12-macos-x86_64-none/bin/python3.12 -m unittest tests.canon.test_visual_authority_rebaseline.VisualAuthorityRebaselineTests.test_mixed_or_incomplete_screen_requires_exact_eligible_state_scope",
+      "exit_code": 1,
+      "duration_seconds": 1.265,
+      "result": "expected_red",
+      "failure_count": 3,
+      "observed_gap": "broad mixed-state screen and requirement scopes did not fail closed; all-gap screen returned mapping-missing instead of scope-too-broad"
+    },
+    "focused_green": {
+      "command": "/Users/devan/.local/share/uv/python/cpython-3.12-macos-x86_64-none/bin/python3.12 -m unittest tests.canon.test_visual_authority_rebaseline.VisualAuthorityRebaselineTests.test_mixed_or_incomplete_screen_requires_exact_eligible_state_scope",
+      "exit_code": 0,
+      "duration_seconds": 1.242,
+      "result": "green",
+      "test_count": 1
+    },
+    "visual_authority_suite": {
+      "command": "/Users/devan/.local/share/uv/python/cpython-3.12-macos-x86_64-none/bin/python3.12 -m unittest tests.canon.test_visual_authority_rebaseline",
+      "exit_code": 0,
+      "duration_seconds": 11.592,
+      "result": "green",
+      "test_count": 8
+    }
+  },
+  "covering_regression": {
+    "command": "/Users/devan/.local/share/uv/python/cpython-3.12-macos-x86_64-none/bin/python3.12 -m unittest tests.canon.test_visual_authority_rebaseline tests.canon.test_external_authority tests.canon.test_task_pack tests.canon.test_benchmark",
+    "exit_code": 0,
+    "duration_seconds": 786.231,
+    "result": "green",
+    "test_count": 124,
+    "failures": []
+  },
+  "remaining_required_gates": [
+    "exact-range independent specification-compliance and code-quality review",
+    "final full canon regression",
+    "final governance gates",
+    "explicit Gate B transition receipt"
+  ],
+  "destructive_actions": [],
+  "production_swift_changed": false,
+  "claim_ceiling": "Visual design authority candidate only for the exact Figma/canon mapping scope; no source UI, runtime, rendered-app Visual, accessibility, device, privacy/legal, TestFlight, App Store, or release Green claim."
+}

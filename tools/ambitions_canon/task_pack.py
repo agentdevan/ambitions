@@ -35,6 +35,10 @@ from tools.ambitions_canon.model import (
 )
 from tools.ambitions_canon.render import stable_json
 from tools.ambitions_canon.traceability import TraceabilityReport
+from tools.ambitions_canon.visual_authority import (
+    load_visual_authority_rebaseline_if_present,
+    visual_authority_lines_for_task_pack,
+)
 
 
 PACK_SECTION_ORDER = (
@@ -453,7 +457,7 @@ def build_task_pack(
             )
         )
     )
-    visual_references = tuple(
+    legacy_visual_references = tuple(
         sorted(
             {
                 reference.reference_id: reference
@@ -466,10 +470,27 @@ def build_task_pack(
             key=lambda item: item.reference_id,
         )
     )
+    visual_contract = load_visual_authority_rebaseline_if_present(
+        registry.manifest.repository_root
+    )
+    visual_contract_lines = (
+        visual_authority_lines_for_task_pack(
+            visual_contract,
+            scope_ids=intake.scope,
+            requirement_ids=evidence_requirement_ids,
+        )
+        if visual_contract is not None
+        else ()
+    )
+    visual_references = (
+        () if visual_contract is not None else legacy_visual_references
+    )
     visual_required = intake.task_type == "swiftui" or any(
         "VISUAL-AUTHORITY" in identifier for identifier in evidence_requirement_ids
     )
-    visual_gap = visual_required and not visual_references
+    visual_gap = visual_required and not (
+        visual_contract_lines or visual_references
+    )
     known_risks = tuple(
         sorted(
             set(known_risk_values)
@@ -490,6 +511,9 @@ def build_task_pack(
         )
     )
     visual_authority = (
+        visual_contract_lines
+        if visual_contract_lines
+        else
         tuple(_visual_authority_line(item) for item in visual_references)
         if visual_references
         else (
