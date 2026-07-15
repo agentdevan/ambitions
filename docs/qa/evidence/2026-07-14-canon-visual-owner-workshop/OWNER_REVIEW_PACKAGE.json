@@ -343,7 +343,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-a-quiet-spatial-stage/04-time.png",
-            "sha256": "0234df7fe78951d8918d23d121c733feaac6d498cdc580de1c9ba481f2fae996",
+            "sha256": "5515fff9343ce1ced46f6f4afff296802dda4bbf694aa505316f76b04aade413",
             "width": 393
           }
         },
@@ -902,7 +902,7 @@
           "screenshot": {
             "height": 852,
             "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/direction-c-atmospheric-temporal-field/10-offline-recovery-reduce-transparency.png",
-            "sha256": "700eeaf2063989b5311448a7533427f32d5663da6e9f7211666c1e6ba33245f7",
+            "sha256": "37e7ad9f3308aabbe2aaa069a805109303bb2f190ca6540e66a6785e2be94ecd",
             "width": 393
           }
         },
