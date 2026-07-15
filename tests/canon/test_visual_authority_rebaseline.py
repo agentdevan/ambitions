@@ -35,7 +35,7 @@ class VisualAuthorityRebaselineTests(unittest.TestCase):
             "0ac3656f1f55c0514ada19da8b36b8a090628e4fa1648a6aaee3f660a3ed27bb",
         )
         self.assertEqual(snapshot.figma_file_key, "Oik7612LSTUHWsNRFoTlTJ")
-        self.assertEqual(snapshot.authority_node_count, 120)
+        self.assertEqual(snapshot.authority_node_count, 147)
         self.assertEqual(snapshot.screen_count, 47)
         self.assertEqual(len(snapshot.visual_requirement_ids), 324)
         self.assertEqual(len(snapshot.eligible_state_ids), 263)
@@ -66,8 +66,8 @@ class VisualAuthorityRebaselineTests(unittest.TestCase):
             requirement_ids=("SPEC-SURFACE-TODAY-FIRST-VIEWPORT-001",),
         )
 
-        self.assertTrue(any("VA-P3-SCREEN-037" in item for item in selected))
-        self.assertTrue(any("figma:Oik7612LSTUHWsNRFoTlTJ:28:920" in item for item in selected))
+        self.assertTrue(any("VA-P4-CANDIDATE-002" in item for item in selected))
+        self.assertTrue(any("figma:Oik7612LSTUHWsNRFoTlTJ:51:100" in item for item in selected))
         self.assertFalse(any("SWtHm9ouHTPbEFfNrrtZwv" in item for item in selected))
 
     def test_future_gap_and_stale_canon_fail_closed(self) -> None:
@@ -135,7 +135,7 @@ class VisualAuthorityRebaselineTests(unittest.TestCase):
             scope_ids=("UX-STATE-VARIANT-TIME-DEGRADED-OFFLINE-HEALTHY",),
             requirement_ids=("SPEC-SURFACE-TIME-DEGRADED-COMMAND-CONTRACT-001",),
         )
-        self.assertTrue(any("VA-P3-SCREEN-028" in item for item in selected))
+        self.assertTrue(any("VA-P4-CANDIDATE-004" in item for item in selected))
 
     def test_invalid_fixture_mutations_have_stable_fail_closed_codes(self) -> None:
         payload = json.loads(MANIFEST.read_text(encoding="utf-8"))
@@ -171,7 +171,7 @@ class VisualAuthorityRebaselineTests(unittest.TestCase):
     def test_every_authority_node_requires_exact_frozen_metadata(self) -> None:
         payload = json.loads(MANIFEST.read_text(encoding="utf-8"))
         nodes = payload["figma"]["authority_nodes"]
-        self.assertEqual(len(nodes), 120)
+        self.assertEqual(len(nodes), 147)
         self.assertTrue(all(node["accessibility_variants"] for node in nodes))
         self.assertEqual(
             [
@@ -218,6 +218,131 @@ class VisualAuthorityRebaselineTests(unittest.TestCase):
             raised.exception.code,
             "VISUAL_AUTHORITY_LEGACY_PROVENANCE_STALE",
         )
+
+    def test_binary_labels_and_failure_evidence_never_authorize(self) -> None:
+        payload = json.loads(MANIFEST.read_text(encoding="utf-8"))
+        screen = next(
+            item for item in payload["figma"]["authority_nodes"]
+            if item["kind"] == "screen"
+            and item["authority_eligible_state_count"] > 0
+        )
+
+        unlabeled = json.loads(json.dumps(payload))
+        unlabeled_screen = next(
+            item for item in unlabeled["figma"]["authority_nodes"]
+            if item["visual_authority_id"] == screen["visual_authority_id"]
+        )
+        unlabeled_screen["name"] = "Generic screen without a binary label"
+        with self.assertRaises(CanonError) as raised:
+            validate_visual_authority_payload(ROOT, unlabeled, b"invalid\n")
+        self.assertEqual(raised.exception.code, "VISUAL_AUTHORITY_LABEL_INVALID")
+
+        rejected = json.loads(json.dumps(payload))
+        rejected_screen = next(
+            item for item in rejected["figma"]["authority_nodes"]
+            if item["visual_authority_id"] == screen["visual_authority_id"]
+        )
+        rejected_screen["name"] = (
+            "FAILURE_EVIDENCE — generic skeleton master — R1"
+        )
+        snapshot = validate_visual_authority_payload(ROOT, rejected, b"invalid\n")
+        green = replace(snapshot, gate_b_state="green")
+        selected = select_visual_authority(
+            green,
+            scope_ids=(screen["blueprint_id"], screen["state_variant_ids"][0]),
+            requirement_ids=(),
+        )
+        self.assertFalse(
+            any(screen["visual_authority_id"] in item for item in selected)
+        )
+        self.assertTrue(any("VA-P4-CANDIDATE-" in item for item in selected))
+
+        ineligible = json.loads(json.dumps(payload))
+        ineligible_screen = next(
+            item for item in ineligible["figma"]["authority_nodes"]
+            if item["visual_authority_id"] == screen["visual_authority_id"]
+        )
+        ineligible_screen["task_pack_eligible"] = True
+        with self.assertRaises(CanonError) as raised:
+            validate_visual_authority_payload(ROOT, ineligible, b"invalid\n")
+        self.assertEqual(raised.exception.code, "VISUAL_AUTHORITY_LABEL_INVALID")
+
+    def test_candidate_shell_accessibility_and_proof_contract_is_exact(self) -> None:
+        payload = json.loads(MANIFEST.read_text(encoding="utf-8"))
+        self.assertIn("presentation_matrix", payload)
+        self.assertIn("candidate_proofs", payload)
+
+        matrix = payload["presentation_matrix"]
+        self.assertEqual(
+            matrix["root_navigation_surfaces"],
+            ["Goals", "Time", "Today", "You"],
+        )
+        self.assertEqual(
+            matrix["no_root_chrome_surfaces"],
+            ["Capture", "Search", "Trust/Proof inspection"],
+        )
+        self.assertEqual(
+            matrix["required_accessibility_variants"],
+            [
+                "Accessibility Size",
+                "Increase Contrast",
+                "Large Text",
+                "Reduce Motion",
+                "Reduce Transparency",
+                "Standard",
+                "VoiceOver Order",
+            ],
+        )
+
+        candidate_nodes = [
+            item for item in payload["figma"]["authority_nodes"]
+            if item.get("kind") == "candidate_master"
+        ]
+        self.assertGreaterEqual(len(candidate_nodes), 12)
+        self.assertTrue(
+            all(
+                item["name"].startswith("CANDIDATE — ")
+                and item["task_pack_eligible"] is True
+                and item["presentation_variants"]
+                == matrix["required_accessibility_variants"]
+                for item in candidate_nodes
+            )
+        )
+        proof_ids = {item["visual_authority_id"] for item in payload["candidate_proofs"]}
+        self.assertEqual(
+            proof_ids,
+            {item["visual_authority_id"] for item in candidate_nodes},
+        )
+        self.assertTrue(
+            all(
+                set(item["artifacts"])
+                == {"hero", "presentation", "viewport"}
+                and item["direct_visual_review_note"]
+                for item in payload["candidate_proofs"]
+            )
+        )
+
+        cases = (
+            ("capture_root_chrome", "VISUAL_AUTHORITY_PRESENTATION_MATRIX_INVALID"),
+            ("missing_accessibility_variant", "VISUAL_AUTHORITY_ACCESSIBILITY_MATRIX_INVALID"),
+            ("missing_master_proof", "VISUAL_AUTHORITY_PROOF_INVALID"),
+        )
+        for mutation, code in cases:
+            mutated = json.loads(json.dumps(payload))
+            if mutation == "capture_root_chrome":
+                mutated["presentation_matrix"]["root_navigation_surfaces"].append(
+                    "Capture"
+                )
+            elif mutation == "missing_accessibility_variant":
+                mutated["presentation_matrix"]["required_accessibility_variants"].remove(
+                    "Increase Contrast"
+                )
+            else:
+                mutated["candidate_proofs"].pop()
+            with self.subTest(mutation=mutation):
+                with self.assertRaises(CanonError) as raised:
+                    validate_visual_authority_payload(ROOT, mutated, b"invalid\n")
+                self.assertEqual(raised.exception.code, code)
 
 
 if __name__ == "__main__":

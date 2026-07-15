@@ -1,7 +1,17 @@
 {
   "schema_version": 1,
-  "evidence_state": "candidate_pending_independent_review",
+  "evidence_state": "frozen_candidate_pending_owner_workshop_explicit_approval_and_independent_review",
   "authority_state": "shadow_non_authoritative",
+  "approval_posture": {
+    "owner_workshop_required": true,
+    "explicit_owner_approval_required": true,
+    "semantic_approval_recorded": false,
+    "task_pack_authority_granted": false,
+    "legacy_supersession_approved": false,
+    "legacy_metadata_mutation_approved": false,
+    "pr_or_merge_approved": false,
+    "cutover_approved": false
+  },
   "repository_base_sha": "4d73857b1c7ec86a0ce4293219c49d56bec18864",
   "canon_revision": 1,
   "canon_source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3",
@@ -10,7 +20,7 @@
   "durable_records": [
     {
       "path": "docs/canon/migration/VISUAL_AUTHORITY_REBASELINE.md",
-      "sha256": "3947545a7bcfea91573d4f07174a0a763f7cab10f0dddfe3c79f92ca8db760aa"
+      "sha256": "2479bf51b01ef56e15b74b2dc13d35e8b1f55007c6fa78bc3f9430c11906073d"
     },
     {
       "path": "docs/canon/migration/figma-reconciliation.json",
@@ -18,13 +28,22 @@
     },
     {
       "path": "docs/canon/migration/visual-authority-rebaseline.json",
-      "sha256": "f715f0b27c99aea0f490baa8023b83b5770bac9aeeee37be8e2ca651d74e81c2"
+      "sha256": "9857b82a698d99ce34a143cb43d6e8a3d40b1c47848fd41985188077cc210f7b"
     },
     {
       "path": "docs/canon/schemas/visual-authority-rebaseline.schema.json",
-      "sha256": "392df2ebaea7af583ea45121b70927b96c13e2b48ac8afe006da9fd6a748a84d"
+      "sha256": "7d2dffa420ae6d8f3e42559cf39dcd287fb34f68d5f3b2e141c5353fb488bcd9"
     }
   ],
+  "candidate_master_proofs": {
+    "registry_path": "docs/canon/migration/visual-authority-rebaseline.json",
+    "registry_sha256": "9857b82a698d99ce34a143cb43d6e8a3d40b1c47848fd41985188077cc210f7b",
+    "bundle_count": 18,
+    "artifact_count": 54,
+    "artifact_root": "screens/phase3-4/candidate-masters",
+    "proof_posture": "product_only_hash_bound",
+    "anatomy_boards_excluded": true
+  },
   "phase3_4_screenshots": [
     {
       "node_id": "31:2",
@@ -146,6 +165,8 @@
   "mutation_posture": {
     "new_candidate_file_is_additive": true,
     "legacy_visual_bytes_changed": false,
+    "legacy_supersession_is_proposed_only": true,
+    "legacy_metadata_mutation_approved": false,
     "destructive_actions": [],
     "gate_c_cleanup_authorized": false
   },

@@ -33,6 +33,7 @@ _TOP_LEVEL_FIELDS = frozenset(
         "status",
         "canon",
         "repository",
+        "presentation_matrix",
         "figma",
         "coverage",
         "state_posture",
@@ -42,6 +43,7 @@ _TOP_LEVEL_FIELDS = frozenset(
         "legacy_before_screenshots",
         "rollback",
         "claim_ceiling",
+        "candidate_proofs",
     }
 )
 _CANON_FIELDS = frozenset({"revision", "source_sha", "content_sha"})
@@ -110,6 +112,7 @@ _AUTHORITY_NODE_FIELDS = frozenset(
         "proof_ceiling",
         "requirement_ids",
         "swiftui_plausibility",
+        "task_pack_eligible",
         "visual_authority_id",
     }
 )
@@ -121,6 +124,55 @@ _SCREEN_NODE_FIELDS = _AUTHORITY_NODE_FIELDS | frozenset(
         "gap_blocked_state_count",
     }
 )
+_CANDIDATE_MASTER_FIELDS = _AUTHORITY_NODE_FIELDS | frozenset(
+    {
+        "anatomy_node_id",
+        "presentation_class",
+        "presentation_variants",
+        "screen_mappings",
+    }
+)
+_SCREEN_MAPPING_FIELDS = frozenset(
+    {
+        "authority_eligible_state_count",
+        "blueprint_id",
+        "future_gated_state_count",
+        "gap_blocked_state_count",
+        "state_variant_ids",
+    }
+)
+_PRESENTATION_MATRIX_FIELDS = frozenset(
+    {
+        "contextual_trust_presentation",
+        "no_root_chrome_surfaces",
+        "required_accessibility_variants",
+        "root_chrome_rule",
+        "root_navigation_surfaces",
+    }
+)
+_CANDIDATE_PROOF_FIELDS = frozenset(
+    {
+        "artifacts",
+        "canonical_artifact_role",
+        "canonical_node_id",
+        "direct_visual_review_note",
+        "visual_authority_id",
+    }
+)
+_PROOF_ARTIFACT_FIELDS = frozenset(
+    {"asset_id", "node_id", "path", "proof_posture", "sha256"}
+)
+_REQUIRED_ACCESSIBILITY_VARIANTS = (
+    "Accessibility Size",
+    "Increase Contrast",
+    "Large Text",
+    "Reduce Motion",
+    "Reduce Transparency",
+    "Standard",
+    "VoiceOver Order",
+)
+_ROOT_NAVIGATION_SURFACES = ("Goals", "Time", "Today", "You")
+_NO_ROOT_CHROME_SURFACES = ("Capture", "Search", "Trust/Proof inspection")
 
 
 @dataclass(frozen=True, slots=True)
@@ -266,6 +318,53 @@ def validate_visual_authority_payload(
             "state posture must classify every current UX state exactly once",
         )
 
+    presentation = _object(data["presentation_matrix"], "presentation_matrix")
+    _exact_fields(
+        presentation,
+        _PRESENTATION_MATRIX_FIELDS,
+        "presentation_matrix",
+    )
+    try:
+        root_surfaces = _sorted_unique_strings(
+            presentation["root_navigation_surfaces"],
+            "root navigation surfaces",
+        )
+        no_root_surfaces = _sorted_unique_strings(
+            presentation["no_root_chrome_surfaces"],
+            "no-root-chrome surfaces",
+        )
+    except CanonError as exc:
+        raise _error(
+            "VISUAL_AUTHORITY_PRESENTATION_MATRIX_INVALID",
+            "root navigation and contextual presentation matrix is malformed",
+        ) from exc
+    if (
+        root_surfaces != _ROOT_NAVIGATION_SURFACES
+        or no_root_surfaces != _NO_ROOT_CHROME_SURFACES
+        or presentation.get("contextual_trust_presentation") != "inspection_only"
+        or presentation.get("root_chrome_rule")
+        != "root_navigation_visible_only_on_today_goals_time_you"
+    ):
+        raise _error(
+            "VISUAL_AUTHORITY_PRESENTATION_MATRIX_INVALID",
+            "root navigation and contextual presentation matrix is not exact",
+        )
+    try:
+        required_variants = _sorted_unique_strings(
+            presentation["required_accessibility_variants"],
+            "required accessibility variants",
+        )
+    except CanonError as exc:
+        raise _error(
+            "VISUAL_AUTHORITY_ACCESSIBILITY_MATRIX_INVALID",
+            "accessibility presentation variants are malformed",
+        ) from exc
+    if required_variants != _REQUIRED_ACCESSIBILITY_VARIANTS:
+        raise _error(
+            "VISUAL_AUTHORITY_ACCESSIBILITY_MATRIX_INVALID",
+            "accessibility presentation variants are incomplete or changed",
+        )
+
     figma = _object(data["figma"], "figma")
     _exact_fields(figma, _FIGMA_FIELDS, "figma")
     file_key = _string(figma["file_key"], "Figma file key")
@@ -276,10 +375,10 @@ def validate_visual_authority_payload(
             "additive Phase 3/4 pages do not match the frozen page family",
         )
     records = tuple(_object(item, "authority node") for item in _list(figma["authority_nodes"], "authority nodes"))
-    if len(records) != 120:
+    if len(records) != 147:
         raise _error(
             "VISUAL_AUTHORITY_FIGMA_MAPPING_INVALID",
-            "authority registry must contain exactly 120 nodes",
+            "authority registry must contain exactly 147 nodes",
         )
     node_ids = tuple(_string(item.get("node_id"), "node ID") for item in records)
     authority_ids = tuple(
@@ -301,11 +400,20 @@ def validate_visual_authority_payload(
     mapped_requirement_ids: set[str] = set()
     mapped_state_ids: set[str] = set()
     screen_count = 0
+    candidate_records: dict[str, Mapping[str, object]] = {}
+    anatomy_node_ids: set[str] = set()
     for item in records:
         kind = _string(item.get("kind"), "authority node kind")
+        expected_fields = (
+            _SCREEN_NODE_FIELDS
+            if kind == "screen"
+            else _CANDIDATE_MASTER_FIELDS
+            if kind == "candidate_master"
+            else _AUTHORITY_NODE_FIELDS
+        )
         _exact_fields(
             item,
-            _SCREEN_NODE_FIELDS if kind == "screen" else _AUTHORITY_NODE_FIELDS,
+            expected_fields,
             "authority node",
         )
         authority_id = _string(
@@ -319,6 +427,29 @@ def validate_visual_authority_payload(
             raise _error(
                 "VISUAL_AUTHORITY_CANON_STALE",
                 f"authority node canon metadata is stale: {authority_id}",
+            )
+        name = _string(item.get("name"), "authority node name")
+        labels = tuple(
+            label
+            for label in ("CANDIDATE", "ARCHIVE", "FAILURE_EVIDENCE")
+            if name.startswith(f"{label} — ")
+        )
+        task_pack_eligible = item.get("task_pack_eligible")
+        if len(labels) != 1 or not isinstance(task_pack_eligible, bool):
+            raise _error(
+                "VISUAL_AUTHORITY_LABEL_INVALID",
+                f"authority node lacks one binary posture label: {authority_id}",
+            )
+        label = labels[0]
+        if (
+            (kind == "screen" and (label != "FAILURE_EVIDENCE" or task_pack_eligible))
+            or (kind == "candidate_master" and (label != "CANDIDATE" or not task_pack_eligible))
+            or (kind != "candidate_master" and task_pack_eligible)
+            or (label in {"ARCHIVE", "FAILURE_EVIDENCE"} and task_pack_eligible)
+        ):
+            raise _error(
+                "VISUAL_AUTHORITY_LABEL_INVALID",
+                f"binary authority label and task-pack eligibility conflict: {authority_id}",
             )
         accessibility_variants = _unique_strings_preserve_order(
             item.get("accessibility_variants"), "accessibility variants"
@@ -351,34 +482,25 @@ def validate_visual_authority_payload(
                 "VISUAL_AUTHORITY_NODE_METADATA_INVALID",
                 f"authority node metadata is incomplete or overclaims: {authority_id}",
             )
-        _string(item.get("name"), "authority node name")
         _string(item.get("page_name"), "authority page name")
         _string(item.get("frame_version"), "frame version")
         requirement_ids = _sorted_unique_strings(
             item.get("requirement_ids"), "node requirement IDs"
         )
-        mapped_requirement_ids.update(requirement_ids)
+        if task_pack_eligible:
+            mapped_requirement_ids.update(requirement_ids)
         blueprint_id = item.get("blueprint_id")
         if blueprint_id is not None:
             blueprint_id = _string(blueprint_id, "blueprint ID")
-        state_ids: tuple[str, ...] = ()
-        eligible_count = future_count = gap_count = 0
         if kind == "screen":
-            screen_count += 1
             if not blueprint_id or not blueprint_id.startswith("UX-SCREEN-"):
                 raise _error(
                     "VISUAL_AUTHORITY_FIGMA_MAPPING_INVALID",
-                    "screen authority must resolve one UX screen blueprint",
+                    "failure-evidence screen must retain its UX screen provenance",
                 )
             state_ids = _sorted_unique_strings(
                 item.get("state_variant_ids"), "screen state IDs"
             )
-            if mapped_state_ids.intersection(state_ids):
-                raise _error(
-                    "VISUAL_AUTHORITY_STATE_POSTURE_INVALID",
-                    "one UX state is mapped by more than one screen authority",
-                )
-            mapped_state_ids.update(state_ids)
             eligible_count = _integer(
                 item.get("authority_eligible_state_count"), "eligible state count"
             )
@@ -395,27 +517,123 @@ def validate_visual_authority_payload(
             ):
                 raise _error(
                     "VISUAL_AUTHORITY_STATE_POSTURE_INVALID",
-                    f"screen state counts do not resolve for {blueprint_id}",
+                    f"failure-evidence state provenance does not resolve for {blueprint_id}",
                 )
-        bindings.append(
-            VisualAuthorityBinding(
-                visual_authority_id=_string(
-                    authority_id, "visual authority ID"
-                ),
-                node_id=_string(item.get("node_id"), "node ID"),
-                blueprint_id=blueprint_id,
-                frame_version=_string(item.get("frame_version"), "frame version"),
-                requirement_ids=requirement_ids,
-                state_variant_ids=state_ids,
-                authority_eligible_state_count=eligible_count,
-                future_gated_state_count=future_count,
-                gap_blocked_state_count=gap_count,
+            continue
+        if kind != "candidate_master":
+            continue
+
+        if blueprint_id is not None:
+            raise _error(
+                "VISUAL_AUTHORITY_FIGMA_MAPPING_INVALID",
+                "candidate master uses screen_mappings instead of a monolithic blueprint_id",
             )
+        anatomy_node_id = _string(item.get("anatomy_node_id"), "anatomy node ID")
+        if anatomy_node_id == item.get("node_id") or anatomy_node_id in anatomy_node_ids:
+            raise _error(
+                "VISUAL_AUTHORITY_FIGMA_MAPPING_INVALID",
+                "candidate anatomy nodes must be distinct from canonical task-pack nodes",
+            )
+        anatomy_node_ids.add(anatomy_node_id)
+        presentation_variants = _sorted_unique_strings(
+            item.get("presentation_variants"), "presentation variants"
         )
-    if screen_count != 47 or mapped_state_ids != inventory_ids:
+        if presentation_variants != required_variants:
+            raise _error(
+                "VISUAL_AUTHORITY_ACCESSIBILITY_MATRIX_INVALID",
+                f"candidate master accessibility variants differ: {authority_id}",
+            )
+        if _string(item.get("presentation_class"), "presentation class") not in {
+            "Root surface",
+            "Global overlay",
+            "Contextual detail",
+            "System state",
+            "Object lifecycle",
+            "Journey flow",
+        }:
+            raise _error(
+                "VISUAL_AUTHORITY_PRESENTATION_MATRIX_INVALID",
+                f"candidate presentation class is invalid: {authority_id}",
+            )
+        candidate_records[authority_id] = item
+        screen_mappings = tuple(
+            _object(mapping, "candidate screen mapping")
+            for mapping in _list(item.get("screen_mappings"), "screen mappings")
+        )
+        mapping_blueprints: list[str] = []
+        for mapping in screen_mappings:
+            _exact_fields(mapping, _SCREEN_MAPPING_FIELDS, "candidate screen mapping")
+            mapped_blueprint = _string(mapping.get("blueprint_id"), "screen blueprint ID")
+            mapping_blueprints.append(mapped_blueprint)
+            if not mapped_blueprint.startswith("UX-SCREEN-"):
+                raise _error(
+                    "VISUAL_AUTHORITY_FIGMA_MAPPING_INVALID",
+                    "candidate screen mapping must resolve one UX screen blueprint",
+                )
+            state_ids = _sorted_unique_strings(
+                mapping.get("state_variant_ids"), "candidate screen state IDs"
+            )
+            if mapped_state_ids.intersection(state_ids):
+                raise _error(
+                    "VISUAL_AUTHORITY_STATE_POSTURE_INVALID",
+                    "one UX state is mapped by more than one candidate master",
+                )
+            mapped_state_ids.update(state_ids)
+            eligible_count = _integer(
+                mapping.get("authority_eligible_state_count"), "eligible state count"
+            )
+            future_count = _integer(
+                mapping.get("future_gated_state_count"), "future state count"
+            )
+            gap_count = _integer(
+                mapping.get("gap_blocked_state_count"), "gap state count"
+            )
+            if (
+                eligible_count != len(set(state_ids) & state_sets[0])
+                or future_count != len(set(state_ids) & state_sets[1])
+                or gap_count != len(set(state_ids) & state_sets[2])
+            ):
+                raise _error(
+                    "VISUAL_AUTHORITY_STATE_POSTURE_INVALID",
+                    f"candidate screen state counts do not resolve for {mapped_blueprint}",
+                )
+            screen_count += 1
+            bindings.append(
+                VisualAuthorityBinding(
+                    visual_authority_id=authority_id,
+                    node_id=_string(item.get("node_id"), "node ID"),
+                    blueprint_id=mapped_blueprint,
+                    frame_version=_string(item.get("frame_version"), "frame version"),
+                    requirement_ids=requirement_ids,
+                    state_variant_ids=state_ids,
+                    authority_eligible_state_count=eligible_count,
+                    future_gated_state_count=future_count,
+                    gap_blocked_state_count=gap_count,
+                )
+            )
+        if mapping_blueprints != sorted(mapping_blueprints) or len(set(mapping_blueprints)) != len(mapping_blueprints):
+            raise _error(
+                "VISUAL_AUTHORITY_FIGMA_MAPPING_INVALID",
+                "candidate screen mappings must be sorted and unique",
+            )
+        if not screen_mappings:
+            bindings.append(
+                VisualAuthorityBinding(
+                    visual_authority_id=authority_id,
+                    node_id=_string(item.get("node_id"), "node ID"),
+                    blueprint_id=None,
+                    frame_version=_string(item.get("frame_version"), "frame version"),
+                    requirement_ids=requirement_ids,
+                    state_variant_ids=(),
+                    authority_eligible_state_count=0,
+                    future_gated_state_count=0,
+                    gap_blocked_state_count=0,
+                )
+            )
+    if len(candidate_records) != 18 or screen_count != 47 or mapped_state_ids != inventory_ids:
         raise _error(
             "VISUAL_AUTHORITY_FIGMA_MAPPING_INVALID",
-            "47 screen masters must map every UX state exactly once",
+            "18 candidate masters must map all 47 UX screens and every state exactly once",
         )
 
     coverage = _object(data["coverage"], "coverage")
@@ -481,10 +699,17 @@ def validate_visual_authority_payload(
         replacements = _sorted_unique_strings(
             item.get("replacement_visual_authority_ids"), "replacement authority IDs"
         )
-        if not replacements or not set(replacements).issubset(set(authority_ids)):
+        candidate_replacement_ids = {
+            _string(record.get("visual_authority_id"), "visual authority ID")
+            for record in records
+            if _string(record.get("name"), "authority node name").startswith(
+                "CANDIDATE — "
+            )
+        }
+        if not replacements or not set(replacements).issubset(candidate_replacement_ids):
             raise _error(
                 "VISUAL_AUTHORITY_LEGACY_RECONCILIATION_INVALID",
-                "every legacy node must resolve to retained replacement authority",
+                "every legacy node must resolve to retained candidate replacement authority",
             )
     destructive_actions = _sorted_unique_strings(
         legacy["destructive_actions"], "destructive actions"
@@ -508,6 +733,11 @@ def validate_visual_authority_payload(
         expected_count=9,
         valid_node_ids={_string(item.get("node_id"), "legacy node ID") for item in legacy_nodes},
         legacy=True,
+    )
+    _validate_candidate_proofs(
+        repo_root,
+        data["candidate_proofs"],
+        candidate_records,
     )
 
     gate = _object(data["gate_b"], "gate_b")
@@ -642,12 +872,16 @@ def select_visual_authority(
             "VISUAL_AUTHORITY_MAPPING_MISSING",
             "no Gate-B-Green visual authority resolves the declared task scope",
         )
+    selected_by_id = {item.visual_authority_id: item for item in selected}
     return tuple(
         f"{item.visual_authority_id} | "
         f"figma:{snapshot.figma_file_key}:{item.node_id} | "
         f"frame {item.frame_version} | Gate B Green visual design authority only; "
         "source implementation and rendered-app proof remain unverified"
-        for item in sorted(selected, key=lambda value: value.visual_authority_id)
+        for item in sorted(
+            selected_by_id.values(),
+            key=lambda value: value.visual_authority_id,
+        )
     )
 
 
@@ -666,6 +900,102 @@ def visual_authority_lines_for_task_pack(
         scope_ids=scope_ids,
         requirement_ids=requirement_ids,
     )
+
+
+def _validate_candidate_proofs(
+    root: Path,
+    value: object,
+    candidate_records: Mapping[str, Mapping[str, object]],
+) -> None:
+    records = tuple(
+        _object(item, "candidate proof")
+        for item in _list(value, "candidate proofs")
+    )
+    proof_ids = tuple(
+        _string(item.get("visual_authority_id"), "proof visual authority ID")
+        for item in records
+    )
+    if (
+        len(records) != 18
+        or len(set(proof_ids)) != len(proof_ids)
+        or set(proof_ids) != set(candidate_records)
+    ):
+        raise _error(
+            "VISUAL_AUTHORITY_PROOF_INVALID",
+            "every candidate master requires exactly one proof bundle",
+        )
+    paths: set[str] = set()
+    for proof in records:
+        _exact_fields(proof, _CANDIDATE_PROOF_FIELDS, "candidate proof")
+        authority_id = _string(
+            proof.get("visual_authority_id"), "proof visual authority ID"
+        )
+        candidate = candidate_records[authority_id]
+        canonical_node_id = _string(
+            proof.get("canonical_node_id"), "canonical proof node ID"
+        )
+        if canonical_node_id != candidate.get("node_id"):
+            raise _error(
+                "VISUAL_AUTHORITY_PROOF_INVALID",
+                f"proof does not resolve the canonical candidate node: {authority_id}",
+            )
+        _string(proof.get("direct_visual_review_note"), "direct visual review note")
+        artifacts = _object(proof.get("artifacts"), "candidate proof artifacts")
+        if set(artifacts) != {"hero", "presentation", "viewport"}:
+            raise _error(
+                "VISUAL_AUTHORITY_PROOF_INVALID",
+                f"proof roles are incomplete: {authority_id}",
+            )
+        canonical_role = _string(
+            proof.get("canonical_artifact_role"), "canonical artifact role"
+        )
+        if canonical_role not in artifacts:
+            raise _error(
+                "VISUAL_AUTHORITY_PROOF_INVALID",
+                f"canonical proof role is invalid: {authority_id}",
+            )
+        artifact_node_ids: set[str] = set()
+        for role in ("hero", "presentation", "viewport"):
+            artifact = _object(artifacts[role], f"{role} proof artifact")
+            _exact_fields(artifact, _PROOF_ARTIFACT_FIELDS, "proof artifact")
+            node_id = _string(artifact.get("node_id"), "proof artifact node ID")
+            artifact_node_ids.add(node_id)
+            if artifact.get("proof_posture") != "product_only":
+                raise _error(
+                    "VISUAL_AUTHORITY_PROOF_INVALID",
+                    f"anatomy/spec boards cannot serve as product proof: {authority_id}",
+                )
+            relative = _string(artifact.get("path"), "proof artifact path")
+            expected_path = (
+                "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/"
+                "screens/phase3-4/candidate-masters/"
+                f"{authority_id.lower()}-{role}.png"
+            )
+            if relative != expected_path or relative in paths:
+                raise _error(
+                    "VISUAL_AUTHORITY_PROOF_INVALID",
+                    f"proof artifact path is not exact or unique: {authority_id}",
+                )
+            paths.add(relative)
+            _string(artifact.get("asset_id"), "proof artifact asset ID")
+            content = _read_regular_nofollow(root, Path(relative))
+            if hashlib.sha256(content).hexdigest() != _sha(
+                artifact.get("sha256"), 64, "proof artifact SHA"
+            ):
+                raise _error(
+                    "VISUAL_AUTHORITY_PROOF_INVALID",
+                    f"proof artifact digest is stale: {relative}",
+                )
+        if (
+            len(artifact_node_ids) != 3
+            or candidate.get("anatomy_node_id") in artifact_node_ids
+            or _object(artifacts[canonical_role], "canonical artifact").get("node_id")
+            != canonical_node_id
+        ):
+            raise _error(
+                "VISUAL_AUTHORITY_PROOF_INVALID",
+                f"proof nodes are not product-only and canonical: {authority_id}",
+            )
 
 
 def _validate_screenshot_records(

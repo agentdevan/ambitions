@@ -87,8 +87,8 @@
           "items": {
             "$ref": "#/$defs/authorityNode"
           },
-          "maxItems": 120,
-          "minItems": 120,
+          "maxItems": 147,
+          "minItems": 147,
           "type": "array"
         },
         "file_key": {
@@ -313,6 +313,59 @@
         "candidate_pending_independent_review",
         "gate_b_green"
       ]
+    },
+    "presentation_matrix": {
+      "additionalProperties": false,
+      "properties": {
+        "contextual_trust_presentation": {
+          "const": "inspection_only"
+        },
+        "no_root_chrome_surfaces": {
+          "const": [
+            "Capture",
+            "Search",
+            "Trust/Proof inspection"
+          ]
+        },
+        "required_accessibility_variants": {
+          "const": [
+            "Accessibility Size",
+            "Increase Contrast",
+            "Large Text",
+            "Reduce Motion",
+            "Reduce Transparency",
+            "Standard",
+            "VoiceOver Order"
+          ]
+        },
+        "root_chrome_rule": {
+          "const": "root_navigation_visible_only_on_today_goals_time_you"
+        },
+        "root_navigation_surfaces": {
+          "const": [
+            "Goals",
+            "Time",
+            "Today",
+            "You"
+          ]
+        }
+      },
+      "required": [
+        "contextual_trust_presentation",
+        "no_root_chrome_surfaces",
+        "required_accessibility_variants",
+        "root_chrome_rule",
+        "root_navigation_surfaces"
+      ],
+      "type": "object"
+    },
+    "candidate_proofs": {
+      "items": {
+        "$ref": "#/$defs/candidateProof"
+      },
+      "maxItems": 18,
+      "minItems": 18,
+      "type": "array"
     }
   },
   "required": [
@@ -330,7 +383,9 @@
     "screenshots",
     "legacy_before_screenshots",
     "rollback",
-    "claim_ceiling"
+    "claim_ceiling",
+    "presentation_matrix",
+    "candidate_proofs"
   ],
   "title": "Ambitions Visual Authority Rebaseline",
   "type": "object",
@@ -378,7 +433,8 @@
             "object",
             "journey",
             "cross_cutting",
-            "sensitive_exposure_channel"
+            "sensitive_exposure_channel",
+            "candidate_master"
           ]
         },
         "metadata_provenance": {
@@ -420,6 +476,32 @@
         "visual_authority_id": {
           "pattern": "^VA-P[34]-[A-Z0-9-]+$",
           "type": "string"
+        },
+        "task_pack_eligible": {
+          "type": "boolean"
+        },
+        "anatomy_node_id": {
+          "pattern": "^[0-9]+:[0-9]+$",
+          "type": "string"
+        },
+        "presentation_class": {
+          "enum": [
+            "Root surface",
+            "Global overlay",
+            "Contextual detail",
+            "System state",
+            "Object lifecycle",
+            "Journey flow"
+          ]
+        },
+        "presentation_variants": {
+          "$ref": "#/$defs/stringSet"
+        },
+        "screen_mappings": {
+          "items": {
+            "$ref": "#/$defs/screenMapping"
+          },
+          "type": "array"
         }
       },
       "required": [
@@ -440,7 +522,8 @@
         "proof_ceiling",
         "requirement_ids",
         "swiftui_plausibility",
-        "visual_authority_id"
+        "visual_authority_id",
+        "task_pack_eligible"
       ],
       "type": "object"
     },
@@ -502,6 +585,121 @@
       },
       "type": "array",
       "uniqueItems": true
+    },
+    "screenMapping": {
+      "additionalProperties": false,
+      "properties": {
+        "authority_eligible_state_count": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "blueprint_id": {
+          "pattern": "^UX-SCREEN-",
+          "type": "string"
+        },
+        "future_gated_state_count": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "gap_blocked_state_count": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "state_variant_ids": {
+          "$ref": "#/$defs/stringSet"
+        }
+      },
+      "required": [
+        "authority_eligible_state_count",
+        "blueprint_id",
+        "future_gated_state_count",
+        "gap_blocked_state_count",
+        "state_variant_ids"
+      ],
+      "type": "object"
+    },
+    "proofArtifact": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_id": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "node_id": {
+          "pattern": "^[0-9]+:[0-9]+$",
+          "type": "string"
+        },
+        "path": {
+          "pattern": "^docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/candidate-masters/",
+          "type": "string"
+        },
+        "proof_posture": {
+          "const": "product_only"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "asset_id",
+        "node_id",
+        "path",
+        "proof_posture",
+        "sha256"
+      ],
+      "type": "object"
+    },
+    "candidateProof": {
+      "additionalProperties": false,
+      "properties": {
+        "artifacts": {
+          "additionalProperties": false,
+          "properties": {
+            "hero": {
+              "$ref": "#/$defs/proofArtifact"
+            },
+            "presentation": {
+              "$ref": "#/$defs/proofArtifact"
+            },
+            "viewport": {
+              "$ref": "#/$defs/proofArtifact"
+            }
+          },
+          "required": [
+            "hero",
+            "presentation",
+            "viewport"
+          ],
+          "type": "object"
+        },
+        "canonical_artifact_role": {
+          "enum": [
+            "hero",
+            "viewport"
+          ]
+        },
+        "canonical_node_id": {
+          "pattern": "^[0-9]+:[0-9]+$",
+          "type": "string"
+        },
+        "direct_visual_review_note": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "visual_authority_id": {
+          "pattern": "^VA-P4-(?:CANDIDATE|A11Y-CLASS)-[0-9]{3}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "artifacts",
+        "canonical_artifact_role",
+        "canonical_node_id",
+        "direct_visual_review_note",
+        "visual_authority_id"
+      ],
+      "type": "object"
     }
   }
 }
