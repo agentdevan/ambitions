@@ -18,7 +18,7 @@ class UXBlueprintIndependentReviewTests(unittest.TestCase):
         model = next(item for item in payload["state_models"] if item["screen_id"] == screen_id)
         return next(item for item in model["variants"] if item["variant_key"] == key)
 
-    def test_all_state_behavior_is_globally_fail_closed(self):
+    def test_all_state_behavior_is_globally_fail_closed_or_structured(self):
         payload = self._payload()
         module = self._module()
         states = [variant for model in payload["state_models"] for variant in model["variants"]]
@@ -26,9 +26,13 @@ class UXBlueprintIndependentReviewTests(unittest.TestCase):
         blocked = [item for item in states if item["behavior_authority_posture"] == "exploratory_blocked_by_specification_gap"]
         eligible_ids = module.authority_eligible_state_variant_ids(payload, REPO_ROOT)
         self.assertEqual(len(states), 433)
-        self.assertEqual(backed, [])
-        self.assertEqual(len(blocked), 433)
-        self.assertEqual(eligible_ids, frozenset())
+        self.assertEqual(len(backed), 267)
+        self.assertEqual(len(blocked), 166)
+        self.assertEqual(len(eligible_ids), 263)
+        for state in backed:
+            self.assertTrue(state["behavior_requirement_ids"])
+            self.assertTrue(state["behavior_authority_evidence"])
+            self.assertEqual(state["specification_gap_ids"], [])
         for state in blocked:
             self.assertEqual(state["allowed_commands"], [])
             self.assertEqual(state["behavior_requirement_ids"], [])
@@ -107,10 +111,10 @@ class UXBlueprintIndependentReviewTests(unittest.TestCase):
         payload = self._payload()
         module = self._module()
         state = self._state(payload, "UX-SCREEN-TODAY-ROOT", "empty")
-        self.assertFalse(module.state_variant_is_authority_eligible(payload, state["blueprint_id"], REPO_ROOT))
+        self.assertTrue(module.state_variant_is_authority_eligible(payload, state["blueprint_id"], REPO_ROOT))
         self.assertEqual(
-            module.authority_eligible_state_variant_ids(payload, REPO_ROOT),
-            frozenset(),
+            len(module.authority_eligible_state_variant_ids(payload, REPO_ROOT)),
+            263,
         )
 
         posture_only = copy.deepcopy(payload)

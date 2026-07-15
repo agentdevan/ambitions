@@ -14,7 +14,9 @@
     "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
     "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
     "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+    "Native/Ambitions/DesignSystem/",
     "Native/Ambitions/Quality/",
+    "Native/Ambitions/Stage/",
     "Native/Ambitions/Surfaces/Today/"
   ],
   "expected_validation": [

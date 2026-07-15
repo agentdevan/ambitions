@@ -29,6 +29,32 @@ class ParserTests(unittest.TestCase):
         'type_conversion = "Explicit, receipt-backed"\n'
         'laws = { schedule_placement_nonduplication = "OBJ-SCHEDULE-PLACEMENT-IDENTITY-001", future_step_singularity = "OBJECT-FUTURE-STEP-IDENTITY-001", reminder_acknowledgement_noncompletion = "OBJECT-REMINDER-COMPLETION-001", proof_receipt_separation = "OBJECT-PROOF-REQUIREMENT-001" }\n'
     )
+    STATE_COMMAND_CONTRACT = (
+        '[[state_command_contracts]]\n'
+        'state_id = "UX-STATE-VARIANT-TODAY-DETAIL-OPEN"\n'
+        'requirement_id = "TODAY-IDENTITY-001"\n'
+        'activation_posture = "active"\n'
+        'gate_requirement_ids = []\n'
+        'transition_exit = "Open step => destination: Step detail; effect: No durable mutation occurs and no Receipt is created; the selected Step opens for inspection; focus: Step heading."\n'
+        'durable_effect = "Opening detail is non-mutating and creates no Receipt."\n'
+        'recovery_rollback = "Dismissal returns to the initiating Today row; no rollback is required."\n'
+        'offline_behavior = "Open step uses current local state without an account or network."\n'
+        'accessibility_focus = "VoiceOver announces the Step and focuses the Step heading after navigation."\n'
+        '\n'
+        '[[state_command_contracts.commands]]\n'
+        'command_id = "CMD-TODAY-DETAIL-OPEN-STEP"\n'
+        'label = "Open step"\n'
+        'canonical_owner = "surface.today.primary-identity"\n'
+        'preconditions = ["Current Step identity exists", "Today row revision is current"]\n'
+        'destination = "Step detail"\n'
+        'effect = "No durable mutation occurs and no Receipt is created; the selected Step opens for inspection"\n'
+        'success_focus = "Step heading"\n'
+        'failure_focus = "Initiating Today row"\n'
+        'commit_boundary = "Non-mutating: navigation completes without a canonical commit."\n'
+        'rollback_undo = "Dismissal returns to Today; no Undo is required."\n'
+        'privacy_egress = "No private content leaves the device."\n'
+        'verification_ids = ["SCENARIO-TODAY-001"]\n'
+    )
 
     def fixture(self, name: str) -> tuple[Path, str]:
         path = FIXTURES / name
@@ -236,6 +262,87 @@ class ParserTests(unittest.TestCase):
                 with self.assertRaises(CanonError) as raised:
                     parse_canon_document(path, text)
                 self.assertEqual(raised.exception.code, "CANON_OBJECT_BOUNDARY_INVALID")
+
+    def test_state_command_contract_parses_closed_immutable_owner_records(self):
+        path, text = self.fixture("valid-surface.md")
+        text = text.replace(
+            "Today presents the user’s actionable reality around now.",
+            "Today presents the user’s actionable reality around now and authorizes Open step.",
+        )
+        text = text.replace(
+            "+++\n\n## Purpose",
+            self.STATE_COMMAND_CONTRACT + "+++\n\n## Purpose",
+            1,
+        )
+
+        document = parse_canon_document(path, text)
+
+        self.assertEqual(len(document.state_command_contracts), 1)
+        contract = document.state_command_contracts[0]
+        self.assertEqual(contract.state_id, "UX-STATE-VARIANT-TODAY-DETAIL-OPEN")
+        self.assertEqual(contract.requirement_id, "TODAY-IDENTITY-001")
+        self.assertEqual(contract.activation_posture, "active")
+        self.assertEqual(contract.gate_requirement_ids, ())
+        self.assertEqual(len(contract.commands), 1)
+        command = contract.commands[0]
+        self.assertEqual(command.command_id, "CMD-TODAY-DETAIL-OPEN-STEP")
+        self.assertEqual(command.label, "Open step")
+        self.assertEqual(command.canonical_owner, "surface.today.primary-identity")
+        self.assertEqual(
+            command.preconditions,
+            ("Current Step identity exists", "Today row revision is current"),
+        )
+        self.assertEqual(command.verification_ids, ("SCENARIO-TODAY-001",))
+
+    def test_state_command_contract_rejects_unknown_missing_duplicate_and_unsorted_fields(self):
+        path, valid = self.fixture("valid-surface.md")
+        valid = valid.replace(
+            "Today presents the user’s actionable reality around now.",
+            "Today presents the user’s actionable reality around now and authorizes Open step.",
+        )
+        valid = valid.replace(
+            "+++\n\n## Purpose",
+            self.STATE_COMMAND_CONTRACT + "+++\n\n## Purpose",
+            1,
+        )
+        cases = {
+            "unknown": valid.replace(
+                'activation_posture = "active"\n',
+                'activation_posture = "active"\nextra = "forbidden"\n',
+            ),
+            "missing": valid.replace(
+                'offline_behavior = "Open step uses current local state without an account or network."\n',
+                "",
+            ),
+            "duplicate-command": valid.replace(
+                "[[state_command_contracts.commands]]",
+                "[[state_command_contracts.commands]]\n"
+                'command_id = "CMD-TODAY-DETAIL-OPEN-STEP"\n'
+                'label = "Open step"\n'
+                'canonical_owner = "surface.today.primary-identity"\n'
+                'preconditions = ["Current Step identity exists"]\n'
+                'destination = "Step detail"\n'
+                'effect = "preserves current state"\n'
+                'success_focus = "Step heading"\n'
+                'failure_focus = "Initiating Today row"\n'
+                'commit_boundary = "Navigation is non-mutating."\n'
+                'rollback_undo = "No Undo is required."\n'
+                'privacy_egress = "No private content leaves the device."\n'
+                'verification_ids = ["SCENARIO-TODAY-001"]\n\n'
+                "[[state_command_contracts.commands]]",
+                1,
+            ),
+            "unsorted-preconditions": valid.replace(
+                '["Current Step identity exists", "Today row revision is current"]',
+                '["Today row revision is current", "Current Step identity exists"]',
+            ),
+        }
+
+        for name, text in cases.items():
+            with self.subTest(name=name):
+                with self.assertRaises(CanonError) as raised:
+                    parse_canon_document(path, text)
+                self.assertEqual(raised.exception.code, "CANON_STATE_COMMAND_INVALID")
 
     def test_requirement_contract_rejects_duplicate_unique_array_members(self):
         path, text = self.fixture("valid-surface.md")

@@ -36,11 +36,15 @@
     "Claim-specific proof for claim_type=release-proof must cover changed-file boundary Native/Ambitions/Quality/, docs/canon/ and applicable requirements A11Y-002, A11Y-DYNAMIC-TYPE-001, A11Y-INPUT-EQUIVALENCE-001, A11Y-PROOF-MATRIX-001, A11Y-READING-FOCUS-001, A11Y-REDUCED-EFFECTS-001, A11Y-STATUS-ERRORS-001, RELEASE-004, RELIABILITY-001, RELIABILITY-002, RELIABILITY-003, RELIABILITY-004, RELIABILITY-005, RELIABILITY-006, STANDARD-ACCEPTANCE-ACCESSIBILITY-001, STANDARD-ACCESSIBILITY, STANDARD-TESTING-FIXTURES, STANDARD-VALIDATION-RELEASE, TEST-001, TEST-002, TEST-003, TEST-004, TEST-005, TEST-006, TEST-007, TEST-RUNTIME-CONTRACT-001, TEST-SCENARIO-EXECUTABILITY-001, TEST-SCOPE-MATRIX-001."
   ],
   "expected_source_owners": [
+    "Native/Ambitions/Composer/",
     "Native/Ambitions/DesignSystem/",
     "Native/Ambitions/Diagnostics/",
     "Native/Ambitions/Interaction/Accessibility/",
     "Native/Ambitions/Quality/",
     "Native/Ambitions/Quality/Accessibility/",
+    "Native/Ambitions/Rendering/",
+    "Native/Ambitions/Stage/",
+    "Native/Ambitions/Surfaces/",
     "docs/canon/",
     "scripts/",
     "tools/ambitions_canon/"

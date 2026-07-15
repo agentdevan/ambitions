@@ -1,111 +1,111 @@
 {
   "states": [
     {
+      "behavior_authority_posture": "exploratory_blocked_by_specification_gap",
       "screen_id": "UX-SCREEN-ACCOUNT-BOUNDARY",
       "variant_key": "continuity-conflicted",
-      "behavior_authority_posture": "exploratory_blocked_by_specification_gap",
       "visible_content_copy": "Two continuity copies disagree on some saved fields. This device keeps its saved information unchanged while the difference is shown."
     },
     {
+      "behavior_authority_posture": "exploratory_blocked_by_specification_gap",
       "screen_id": "UX-SCREEN-ACCOUNT-STATUS",
       "variant_key": "continuity-disabled",
-      "behavior_authority_posture": "exploratory_blocked_by_specification_gap",
       "visible_content_copy": "Continuity is off. Signed-in account details and information saved on this device remain available."
     },
     {
+      "behavior_authority_posture": "requirement_backed",
       "screen_id": "UX-SCREEN-APP-SHELL-ROOT",
       "variant_key": "unavailable-route-duplicate-presentation-owner",
-      "behavior_authority_posture": "exploratory_blocked_by_specification_gap",
       "visible_content_copy": "This destination is already open. The screen currently in view remains unchanged."
     },
     {
+      "behavior_authority_posture": "requirement_backed",
       "screen_id": "UX-SCREEN-APP-SHELL-SEARCH-CAPTURE",
       "variant_key": "idle",
-      "behavior_authority_posture": "exploratory_blocked_by_specification_gap",
       "visible_content_copy": "Capture and Search are closed. The current screen and keyboard focus remain unchanged."
     },
     {
+      "behavior_authority_posture": "requirement_backed",
       "screen_id": "UX-SCREEN-APP-SHELL-SEARCH-CAPTURE",
       "variant_key": "returning-focus",
-      "behavior_authority_posture": "exploratory_blocked_by_specification_gap",
       "visible_content_copy": "Capture or Search has closed. The screen used before it opened remains visible."
     },
     {
+      "behavior_authority_posture": "requirement_backed",
       "screen_id": "UX-SCREEN-CAPTURE-COMPOSER",
       "variant_key": "partial-routing",
-      "behavior_authority_posture": "exploratory_blocked_by_specification_gap",
       "visible_content_copy": "Part of the saved Capture has been placed, while the remaining part is still pending. Both portions remain visible."
     },
     {
+      "behavior_authority_posture": "requirement_backed",
       "screen_id": "UX-SCREEN-CAPTURE-COMPOSER",
       "variant_key": "routing",
-      "behavior_authority_posture": "exploratory_blocked_by_specification_gap",
       "visible_content_copy": "The saved Capture is being organized into the selected Ambitions item. Its original text remains visible."
     },
     {
+      "behavior_authority_posture": "exploratory_blocked_by_specification_gap",
       "screen_id": "UX-SCREEN-OFFLINE-DEGRADED-LOCAL-HEALTH",
       "variant_key": "continuity-pending",
-      "behavior_authority_posture": "exploratory_blocked_by_specification_gap",
       "visible_content_copy": "A continuity update is waiting. Information already saved on this device remains unchanged."
     },
     {
+      "behavior_authority_posture": "exploratory_blocked_by_specification_gap",
       "screen_id": "UX-SCREEN-SETUP-RESUME",
       "variant_key": "checkpoint-invalid",
-      "behavior_authority_posture": "exploratory_blocked_by_specification_gap",
       "visible_content_copy": "Saved setup progress cannot be used. Earlier product information and choices outside setup remain unchanged."
     },
     {
+      "behavior_authority_posture": "requirement_backed",
       "screen_id": "UX-SCREEN-TODAY-DETAIL",
       "variant_key": "active-execution",
-      "behavior_authority_posture": "exploratory_blocked_by_specification_gap",
       "visible_content_copy": "This Step is in progress. Still counts, Move it, Blocked, Waiting, and Not needed keep its real outcome visible."
     },
     {
+      "behavior_authority_posture": "requirement_backed",
       "screen_id": "UX-SCREEN-TODAY-DETAIL",
       "variant_key": "closure-review",
-      "behavior_authority_posture": "exploratory_blocked_by_specification_gap",
       "visible_content_copy": "The selected outcome, any required Proof, and the resulting History entry are visible before Confirm Closure."
     },
     {
+      "behavior_authority_posture": "requirement_backed",
       "screen_id": "UX-SCREEN-TODAY-DETAIL",
       "variant_key": "recovery",
-      "behavior_authority_posture": "exploratory_blocked_by_specification_gap",
       "visible_content_copy": "The Step was interrupted. Its last saved progress remains visible."
     },
     {
+      "behavior_authority_posture": "requirement_backed",
       "screen_id": "UX-SCREEN-TRUST-DEEP",
       "variant_key": "restoring",
-      "behavior_authority_posture": "exploratory_blocked_by_specification_gap",
       "visible_content_copy": "Earlier trust details are loading again. The last accepted information and its History links remain visible."
     },
     {
+      "behavior_authority_posture": "requirement_backed",
       "screen_id": "UX-SCREEN-TRUST-RECEIPT",
       "variant_key": "receipt-resolving",
-      "behavior_authority_posture": "exploratory_blocked_by_specification_gap",
       "visible_content_copy": "This recorded change is still being matched with the item it describes. The saved item remains unchanged."
     },
     {
+      "behavior_authority_posture": "requirement_backed",
       "screen_id": "UX-SCREEN-TRUST-RECEIPT",
       "variant_key": "restoring",
-      "behavior_authority_posture": "exploratory_blocked_by_specification_gap",
       "visible_content_copy": "Earlier details for this recorded change are loading again. The saved item and History remain unchanged."
     },
     {
+      "behavior_authority_posture": "requirement_backed",
       "screen_id": "UX-SCREEN-TRUST-RECEIPT",
       "variant_key": "undoing",
-      "behavior_authority_posture": "exploratory_blocked_by_specification_gap",
       "visible_content_copy": "Recovery of an earlier value is in progress. The current value and both History entries remain visible."
     },
     {
+      "behavior_authority_posture": "requirement_backed",
       "screen_id": "UX-SCREEN-YOU-ROOT",
       "variant_key": "continuity-conflicted",
-      "behavior_authority_posture": "exploratory_blocked_by_specification_gap",
       "visible_content_copy": "Continuity copies disagree. Saved Goals, Captures, time, and preferences remain unchanged on this device."
     },
     {
+      "behavior_authority_posture": "requirement_backed",
       "screen_id": "UX-SCREEN-YOU-SETTINGS",
       "variant_key": "appearance-oled-dark",
-      "behavior_authority_posture": "exploratory_blocked_by_specification_gap",
       "visible_content_copy": "OLED Dark appearance is active. True-black backgrounds keep text, controls, and status labels readable."
     }
   ]

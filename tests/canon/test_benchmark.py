@@ -887,14 +887,31 @@ class BenchmarkTest(unittest.TestCase):
         self.assertEqual(
             a11y["source_owners"],
             [
+                "Native/Ambitions/Composer/",
                 "Native/Ambitions/DesignSystem/",
                 "Native/Ambitions/Interaction/Accessibility/",
                 "Native/Ambitions/Quality/Accessibility/",
+                "Native/Ambitions/Rendering/",
+                "Native/Ambitions/Stage/",
+                "Native/Ambitions/Surfaces/",
             ],
         )
         self.assertTrue(a11y["mappings"][0]["implementation_files"])
-        self.assertEqual(a11y["mappings"][1]["status"], "owner_path_absent")
-        self.assertEqual(a11y["mappings"][1]["implementation_files"], [])
+        absent = {
+            mapping["owner_path"]: mapping
+            for mapping in a11y["mappings"]
+            if mapping["status"] == "owner_path_absent"
+        }
+        self.assertEqual(
+            set(absent),
+            {
+                "Native/Ambitions/Interaction/Accessibility/",
+                "Native/Ambitions/Quality/Accessibility/",
+            },
+        )
+        self.assertTrue(
+            all(mapping["implementation_files"] == [] for mapping in absent.values())
+        )
         self.assertTrue(
             any(
                 "gap_class=canon_to_code affected_ids=A11Y-002" in gap

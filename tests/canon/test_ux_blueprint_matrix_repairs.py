@@ -44,14 +44,11 @@ STATE_REPAIRS = {
 }
 
 GAP_IDS = {
-    "GAP-UX-COMMAND-CONTRACT-ACCOUNT-001", "GAP-UX-COMMAND-CONTRACT-SHELL-001",
-    "GAP-UX-COMMAND-CONTRACT-CAPTURE-001", "GAP-UX-COMMAND-CONTRACT-GOALS-001",
+    "GAP-UX-COMMAND-CONTRACT-ACCOUNT-001",
     "GAP-UX-COMMAND-CONTRACT-DEGRADED-001", "GAP-UX-COMMAND-CONTRACT-PERMISSIONS-001",
     "GAP-UX-COMMAND-CONTRACT-SEARCH-001", "GAP-UX-COMMAND-CONTRACT-LAUNCH-SETUP-001",
-    "GAP-UX-COMMAND-CONTRACT-TIME-DEGRADED-001",
-    "GAP-UX-COMMAND-CONTRACT-TIME-VIEWS-001", "GAP-UX-COMMAND-CONTRACT-TIME-DETAIL-001",
-    "GAP-UX-COMMAND-CONTRACT-TIME-IMPORT-001", "GAP-UX-COMMAND-CONTRACT-TODAY-001",
-    "GAP-UX-COMMAND-CONTRACT-TRUST-001", "GAP-UX-COMMAND-CONTRACT-YOU-001",
+    "GAP-UX-COMMAND-CONTRACT-TIME-DETAIL-001",
+    "GAP-UX-COMMAND-CONTRACT-TIME-IMPORT-001",
     "GAP-UX-COMMAND-CONTRACT-DEEP-LINK-001", "GAP-UX-COMMAND-CONTRACT-ENTITLEMENT-001",
     "GAP-UX-COMMAND-CONTRACT-CONTINUITY-001", "GAP-UX-COMMAND-CONTRACT-DIAGNOSTICS-001",
     "GAP-UX-COMMAND-CONTRACT-NOTIFICATIONS-001",
@@ -118,7 +115,7 @@ class UXBlueprintMatrixRepairTests(unittest.TestCase):
         gaps = payload["specification_gaps"]
         self.assertEqual({item["gap_id"] for item in gaps}, GAP_IDS)
         self.assertEqual([item["gap_id"] for item in gaps], sorted(GAP_IDS))
-        self.assertEqual(len(gaps), 20)
+        self.assertEqual(len(gaps), 12)
         for gap in gaps:
             self.assertEqual(set(gap), {"affected_screen_families", "affected_state_ids", "authority_consequence", "blocked_fields", "gap_id", "source_rationale"})
             self.assertTrue(gap["affected_screen_families"])
@@ -153,7 +150,10 @@ class UXBlueprintMatrixRepairTests(unittest.TestCase):
         state["behavior_authority_posture"] = "requirement_backed"
         state["behavior_requirement_ids"] = []
         state["specification_gap_ids"] = []
-        with self.assertRaisesRegex(module.UXBlueprintError, "unsupported behavior authority"):
+        with self.assertRaisesRegex(
+            module.UXBlueprintError,
+            "independent structured canon field ownership|unsupported behavior authority",
+        ):
             module.validate_ux_blueprint(REPO_ROOT, unsupported)
 
     def test_gap_blocked_state_cannot_be_selected_as_visual_authority(self):
@@ -171,7 +171,7 @@ class UXBlueprintMatrixRepairTests(unittest.TestCase):
         first = module.render_ux_blueprint_markdown(payload, REPO_ROOT)
         second = module.render_ux_blueprint_markdown(payload, REPO_ROOT)
         self.assertEqual(first, second)
-        self.assertIn(b"20 specification gaps", first)
+        self.assertIn(b"12 specification gaps", first)
         self.assertIn(b"exploratory_blocked_by_specification_gap", first)
         result = subprocess.run(
             [

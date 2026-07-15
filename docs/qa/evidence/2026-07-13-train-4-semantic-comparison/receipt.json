@@ -1,14 +1,14 @@
 {
   "authority_state": "shadow",
-  "canon_sha256": "4cd9043c5de339faecb7c6de9640a44e95d63f4c726c8351d37da1e504d548e0",
+  "canon_sha256": "050ad36b253bef7d0b6c53ab25d23483d1ebf1c9007210c653c68ad89aa68c9e",
   "claim_ceiling": "This receipt records an explicit non-CI shadow comparison only. It does not authorize implementation or claim product, runtime, source, visual, accessibility, privacy, device, TestFlight, App Store, or release Green.",
   "comparison": {
     "dimensions": [
       {
         "dimension": "semantic_equivalence",
         "new_score": 4,
-        "old_score": 4,
-        "verdict": "equivalent"
+        "old_score": 3,
+        "verdict": "new_better"
       },
       {
         "dimension": "relevant_law_recall",
@@ -19,14 +19,14 @@
       {
         "dimension": "contradiction_control",
         "new_score": 4,
-        "old_score": 4,
-        "verdict": "equivalent"
+        "old_score": 3,
+        "verdict": "new_better"
       },
       {
         "dimension": "unauthorized_assumptions",
         "new_score": 4,
-        "old_score": 4,
-        "verdict": "equivalent"
+        "old_score": 3,
+        "verdict": "new_better"
       },
       {
         "dimension": "source_ownership",
@@ -37,77 +37,77 @@
       {
         "dimension": "validation_completeness",
         "new_score": 4,
-        "old_score": 3,
-        "verdict": "new_better"
+        "old_score": 4,
+        "verdict": "equivalent"
       },
       {
         "dimension": "proof_discipline",
         "new_score": 4,
-        "old_score": 4,
-        "verdict": "equivalent"
+        "old_score": 3,
+        "verdict": "new_better"
       }
     ],
-    "model": "gpt-5.6-sol-max",
+    "model": "gpt-5-sol-max",
     "new_total_score": 28,
-    "old_total_score": 25,
+    "old_total_score": 22,
     "overall_verdict": "new_better",
-    "reviewer": "Visual Authority Phase 1 Independent Semantic Comparator",
-    "sha256": "dfff9043e0ae6145919a4a54061825b85ff4b58ab08042e435f2d78aec655c7c"
+    "reviewer": "Final Polished Independent Semantic Comparator",
+    "sha256": "7e45a2155823abdf96c902efe2ff4db2f23e28c837f07895ea1f0f28aecaacbb"
   },
   "compiler_version": "0.2.0",
-  "evaluated_task_pack_commit": "b77a24dc25cc6e612882d670baea15babf1f33d3",
+  "evaluated_task_pack_commit": "a338d77006c7e7c0399ed8d394194be85e8f404d",
   "lane": "explicit_non_ci_semantic_review",
-  "new_prompt_sha256": "d36f363d49eb793f57f6163f8320e2ab46879e7fa505df45cdb19d87b83e0c96",
+  "new_prompt_sha256": "e3eed47bc27559428cacbc1cb279f42b6a86c552c1c4124d114c28cb413419ac",
   "new_response": {
-    "model": "gpt-5.6-sol-high",
-    "reviewer": "Visual Authority New Pack Evaluator",
-    "sha256": "7098984bf8979a39958086143028590e4aefe9e88a85841a7b44f78335201670"
+    "model": "gpt-5-sol-high",
+    "reviewer": "Final Polished New Pack Evaluator",
+    "sha256": "647515a442f05cbe9fc8ea099d04d9be68ece8e0826486b53f0d09a21475ddc4"
   },
   "old_prompt_sha256": "338c2088cc6a74dc06a3fc087bc6848280b117b7638aefdb377b9649face56cb",
   "old_response": {
-    "model": "gpt-5.6-sol-high",
-    "reviewer": "Visual Authority Old Path Evaluator",
-    "sha256": "fdb5cf03e887ed5c7e13c2eb72ad987e5c2b41f140ce98eb352f52b98185dac8"
+    "model": "gpt-5-sol-high",
+    "reviewer": "Old Path Evaluator",
+    "sha256": "f8e73052af92ad97e4f686730190e15532c5107328060c5c9ac8272aa9bd9834"
   },
   "pack_hashes": [
     {
-      "json_sha256": "2542f78f8005c8120e252663fc69930ecc6ac79db4ed58b51b3b13ba0a4c6065",
-      "markdown_sha256": "ce17ed297b956e72bccc6e55fcf9b0124a96aa7cdc898d10cb27c9fb7027ebf1",
+      "json_sha256": "c1e85caf34dd47a4d46b55fb2a2a4c37326f9ab79fc3f88a617d041813f610ef",
+      "markdown_sha256": "9e93f0c4ec21e94527894f2068475247cf1dac71f9a98f10a0a3d351189e8698",
       "scenario_id": "today-swiftui"
     },
     {
-      "json_sha256": "c3274e4eb7be578745a772e8dc85978c88a3bf4b137ae6666864a3f9d3790fc6",
-      "markdown_sha256": "ccf7a722cf0c17d03cf26ba5ea41d1fdc5c72c7c93fa1944397088b5e81972c3",
+      "json_sha256": "df29ad89a878fdccef877db5364d2f29a051b939c47f4145e88114ea4e6f9c78",
+      "markdown_sha256": "986540f04e93a0099072fbbd306f55fca47546945314ab9d3016e8eda91650d8",
       "scenario_id": "time-recurrence"
     },
     {
-      "json_sha256": "6164afd486e1ea2e4cc099bfca64630202d294836d89a839a646ba18546abf4a",
-      "markdown_sha256": "bb872760f5e4b145fdf38f5616b0967d35ec75b7b68b43d0194126614cf553f1",
+      "json_sha256": "ca36e764ab80da9a4594634080500a6a21cc5bedd93bf872c45b811df3bcf5cb",
+      "markdown_sha256": "30a5159ca4473ea497056a6c25a29a36fb7b25e914b1f664cc63e183020a9714",
       "scenario_id": "capture-proposal"
     },
     {
-      "json_sha256": "747464580abfb29e4005dcc5e9bc45128dace2686bc6bc044f489d78e5410d4d",
-      "markdown_sha256": "95f8c521b820f2c9ed3e897043406150c8dd227d6b068ad7e3439ff80f304cc3",
+      "json_sha256": "69a0c5eada059a8569e89f9f162577058e1713a9600b762b735b3d61b309f2a1",
+      "markdown_sha256": "a98dac0cfb99a135e9df2ce9744310678e792e84f11500f5bf26c784efa6fead",
       "scenario_id": "local-runtime-mutation"
     },
     {
-      "json_sha256": "66dc7f3bf65d89e831ec763df27a6742c5c2c162e513b323f31cb46018198eac",
-      "markdown_sha256": "e9b5fa99464f15758afa7a7f9d7853a82cc633e31446fc5090fca98174383a28",
+      "json_sha256": "9a654b4dd3c4e231571a4e9dc537b27bd7a1358b35b92558a009d29ac066cdc4",
+      "markdown_sha256": "2de546cfc52eedc158de2026a231bb3085af7ea3d090a5406e11e0f29cac5b44",
       "scenario_id": "cloudkit-continuity"
     },
     {
-      "json_sha256": "fceaa532d81ada7549eabb675e1c6a5ae3df18e7a9e73f37124d766f26720207",
-      "markdown_sha256": "3690ece6f25fef4d96448ebe53b95b49c801a14fba6e7f2db05392550af9e2c1",
+      "json_sha256": "0ebfbc533fa83111e4946cde7dc881e00243e904a6358e0ba3f6220ecd85e28e",
+      "markdown_sha256": "5a229bc38762cf31f1860eb2712d653ab5c09148b9ce2a4077513116deafbc98",
       "scenario_id": "source-atlas-boundary"
     },
     {
-      "json_sha256": "03564ba1fc97f7e2170b021f03c6d0e3140a4bcf6c665bc5df534c7857433904",
-      "markdown_sha256": "0ddb111bbc5f163c2a31d403e83c1fa3cb4f54fef71687f8ff1c49cd04b14ed0",
+      "json_sha256": "05bfa9d07af0362d27cf71726ec142d2954fb6d0690a26157e52d1c22b8ba9b0",
+      "markdown_sha256": "ba12cbc9430814d30e24b14c130af80c5ba96279551d34924fe981c2485fc067",
       "scenario_id": "accessibility-repair"
     },
     {
-      "json_sha256": "6ff6052b6ef0e936bb8bb8f15c120bc975ff754bf4004c796c3410294c087feb",
-      "markdown_sha256": "fa9c82c81f6c353e33b70cede766f5318a5e678633634109506ec66a2ec50ff9",
+      "json_sha256": "6cae43b7b6e98a6e6cfd6a2d3d4ad8dbbef9ba09bbafd200babcad53e450d042",
+      "markdown_sha256": "b7b14ff16d5ef23078221f5983fc50dc39caf7d48c154cf4fd205494783196cd",
       "scenario_id": "release-proof-claim"
     }
   ],

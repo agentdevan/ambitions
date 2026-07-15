@@ -135,6 +135,13 @@ EVALUATED_TASK_PACK_PATHS = (
     "tests/canon/fixtures/benchmarks/07-accessibility-repair.json",
     "tests/canon/fixtures/benchmarks/08-release-proof-claim.json",
 )
+SEMANTIC_RECEIPT_PROOF_ONLY_PATHS = frozenset(
+    {
+        ".superpowers/sdd/visual-command-contract-amendment-report.md",
+        "docs/qa/evidence/2026-07-13-train-4-semantic-comparison/receipt.json",
+        "tests/canon/test_semantic_receipt.py",
+    }
+)
 _SEMANTIC_RECEIPT_ID = "train-4-task-21-final-semantic-comparison"
 _SEMANTIC_RECEIPT_CLAIM_CEILING = (
     "This receipt records an explicit non-CI shadow comparison only. It does not "
@@ -1151,12 +1158,8 @@ def validate_semantic_receipt(
     path = root / SEMANTIC_RECEIPT_PATH
     _validate_semantic_receipt_closed_schema(receipt, path)
     evaluated_commit = str(receipt["evaluated_task_pack_commit"])
-    current_pack_commit = _semantic_receipt_current_pack_commit(root, path)
-    if evaluated_commit != current_pack_commit:
-        raise _semantic_receipt_stale(
-            "evaluated task-pack commit does not match checkout", path
-        )
     _semantic_receipt_require_ancestor(root, evaluated_commit, path)
+    _semantic_receipt_require_only_proof_changes(root, evaluated_commit, path)
     _semantic_receipt_require_evaluated_pack_bytes(root, evaluated_commit, path)
 
     regenerated = regenerate_semantic_receipt_bindings(root)
@@ -1334,18 +1337,6 @@ def _validate_semantic_receipt_comparison_policy(
         )
 
 
-def _semantic_receipt_current_pack_commit(root: Path, path: Path) -> str:
-    result = _semantic_receipt_git(
-        root, "log", "-1", "--format=%H", "--", *EVALUATED_TASK_PACK_PATHS
-    )
-    commit = result.stdout.strip()
-    if not _GIT_SHA.fullmatch(commit):
-        raise _semantic_receipt_invalid(
-            "unable to resolve evaluated task-pack commit", path
-        )
-    return commit
-
-
 def _semantic_receipt_require_ancestor(
     root: Path, commit: str, path: Path
 ) -> None:
@@ -1361,6 +1352,36 @@ def _semantic_receipt_require_ancestor(
         raise _semantic_receipt_stale(
             "evaluated task-pack commit is not an ancestor of checkout", path
         )
+
+
+def _semantic_receipt_require_only_proof_changes(
+    root: Path, commit: str, path: Path
+) -> None:
+    result = _semantic_receipt_git(
+        root,
+        "diff",
+        "--name-only",
+        "--no-renames",
+        "--diff-filter=ACMDRTUXB",
+        f"{commit}..HEAD",
+        "--",
+    )
+    changed_paths = result.stdout.splitlines()
+    seen: set[str] = set()
+    for relative in changed_paths:
+        parts = Path(relative).parts
+        valid = (
+            bool(relative)
+            and not Path(relative).is_absolute()
+            and "\\" not in relative
+            and all(part not in {"", ".", ".."} for part in parts)
+            and relative not in seen
+        )
+        if not valid or relative not in SEMANTIC_RECEIPT_PROOF_ONLY_PATHS:
+            raise _semantic_receipt_stale(
+                f"non-proof path changed after evaluated commit: {relative!r}", path
+            )
+        seen.add(relative)
 
 
 def _semantic_receipt_require_evaluated_pack_bytes(

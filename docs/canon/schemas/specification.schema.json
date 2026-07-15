@@ -136,6 +136,71 @@
         }
       }
     },
+    "state_command_contracts": {
+      "description": "Closed normative ownership for exact UX blueprint state commands.",
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "patternProperties": {
+                "^state_id$": {"const": "UX-STATE-VARIANT-TRUST-INLINE-NO-DISCLOSURE"}
+              },
+              "required": ["state_id"]
+            },
+            "then": {
+              "patternProperties": {
+                "^commands$": {"maxItems": 0}
+              }
+            },
+            "else": {
+              "patternProperties": {
+                "^commands$": {"minItems": 1}
+              }
+            }
+          }
+        ],
+        "required": ["state_id", "requirement_id", "activation_posture", "gate_requirement_ids", "transition_exit", "durable_effect", "recovery_rollback", "offline_behavior", "accessibility_focus", "commands"],
+        "properties": {
+          "state_id": {"type": "string", "pattern": "^UX-STATE-VARIANT-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+          "requirement_id": {"type": "string", "minLength": 1},
+          "activation_posture": {"type": "string", "enum": ["active", "future_gated"]},
+          "gate_requirement_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+          "transition_exit": {"type": "string", "minLength": 1},
+          "durable_effect": {"type": "string", "minLength": 1},
+          "recovery_rollback": {"type": "string", "minLength": 1},
+          "offline_behavior": {"type": "string", "minLength": 1},
+          "accessibility_focus": {"type": "string", "minLength": 1},
+          "commands": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["command_id", "label", "canonical_owner", "preconditions", "destination", "effect", "success_focus", "failure_focus", "commit_boundary", "rollback_undo", "privacy_egress", "verification_ids"],
+              "properties": {
+                "command_id": {"type": "string", "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "label": {"type": "string", "minLength": 1},
+                "canonical_owner": {"type": "string", "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"},
+                "preconditions": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+                "destination": {"type": "string", "minLength": 1},
+                "effect": {"type": "string", "minLength": 1},
+                "success_focus": {"type": "string", "minLength": 1},
+                "failure_focus": {"type": "string", "minLength": 1},
+                "commit_boundary": {"type": "string", "minLength": 1},
+                "rollback_undo": {"type": "string", "minLength": 1},
+                "privacy_egress": {"type": "string", "minLength": 1},
+                "verification_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+              }
+            }
+          }
+        }
+      }
+    },
     "source_owners": {
       "description": "Current source ownership paths relevant to implementation mapping.",
       "type": "array",

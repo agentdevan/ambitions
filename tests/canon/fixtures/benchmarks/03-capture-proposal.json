@@ -14,7 +14,15 @@
     "Native/Ambitions/Composer/Capture/",
     "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouting/",
     "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+    "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/",
+    "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
     "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+    "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+    "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+    "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+    "Native/Ambitions/Core/LocalRuntimeOS/State/",
+    "Native/Ambitions/Core/LocalRuntimeOS/Storage/",
+    "Native/Ambitions/Core/LocalRuntimeOS/Transactions/",
     "Native/Ambitions/Quality/"
   ],
   "expected_validation": [

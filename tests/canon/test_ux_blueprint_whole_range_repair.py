@@ -51,7 +51,9 @@ class UXBlueprintWholeRangeRepairTests(unittest.TestCase):
         state = next(
             row
             for row in self._states(payload)
-            if "CONTROL-UNDO-RECOVERY-001" in row["requirement_ids"]
+            if row["behavior_authority_posture"]
+            == "exploratory_blocked_by_specification_gap"
+            and "CONTROL-UNDO-RECOVERY-001" in row["requirement_ids"]
         )
         requirement = self._requirement("CONTROL-UNDO-RECOVERY-001")
         state["behavior_authority_posture"] = "requirement_backed"
@@ -69,6 +71,14 @@ class UXBlueprintWholeRangeRepairTests(unittest.TestCase):
             if state["blueprint_id"] in gap["affected_state_ids"]:
                 gap["affected_state_ids"].remove(state["blueprint_id"])
         return state
+
+    def _backed_state(self, payload):
+        return next(
+            row
+            for row in self._states(payload)
+            if row["blueprint_id"]
+            == "UX-STATE-VARIANT-CAPTURE-COMPOSER-SAVED-UNDO-ELIGIBLE"
+        )
 
     def test_approved_matrix_is_exact_and_counted(self):
         raw = MATRIX_PATH.read_bytes()
@@ -113,15 +123,28 @@ class UXBlueprintWholeRangeRepairTests(unittest.TestCase):
             {(row["screen_id"], row["variant_key"]) for row in rows} <= current
         )
 
-    def test_all_states_fail_closed_after_exact_clause_reaudit(self):
+    def test_resolved_states_are_structured_and_remaining_states_fail_closed(self):
         payload = self._payload()
         states = self._states(payload)
         self.assertEqual(len(states), 433)
-        self.assertEqual(
-            {state["behavior_authority_posture"] for state in states},
-            {"exploratory_blocked_by_specification_gap"},
-        )
-        for state in states:
+        backed = [
+            state for state in states
+            if state["behavior_authority_posture"] == "requirement_backed"
+        ]
+        blocked = [
+            state for state in states
+            if state["behavior_authority_posture"]
+            == "exploratory_blocked_by_specification_gap"
+        ]
+        self.assertEqual(len(backed), 267)
+        self.assertEqual(len(blocked), 166)
+        for state in backed:
+            self.assertTrue(state["behavior_authority_evidence"])
+            self.assertTrue(state["behavior_requirement_ids"])
+            self.assertEqual(state["specification_gap_ids"], [])
+            if state["blueprint_id"] != "UX-STATE-VARIANT-TRUST-INLINE-NO-DISCLOSURE":
+                self.assertTrue(state["allowed_commands"])
+        for state in blocked:
             self.assertEqual(state["behavior_authority_evidence"], [])
             self.assertEqual(state["allowed_commands"], [])
             self.assertEqual(state["behavior_requirement_ids"], [])
@@ -168,29 +191,20 @@ class UXBlueprintWholeRangeRepairTests(unittest.TestCase):
             if model["screen_id"] == "UX-SCREEN-TIME-DEGRADED"
         )
         for state in time_degraded["variants"]:
-            self.assertEqual(
-                state["specification_gap_ids"],
-                ["GAP-UX-COMMAND-CONTRACT-TIME-DEGRADED-001"],
-            )
-        dedicated_gap = next(
+            self.assertEqual(state["specification_gap_ids"], [])
+            self.assertEqual(state["behavior_authority_posture"], "requirement_backed")
+        self.assertNotIn(
+            "GAP-UX-COMMAND-CONTRACT-TIME-DEGRADED-001",
+            {row["gap_id"] for row in payload["specification_gaps"]},
+        )
+        import_gap = next(
             row
             for row in payload["specification_gaps"]
-            if row["gap_id"] == "GAP-UX-COMMAND-CONTRACT-TIME-DEGRADED-001"
+            if row["gap_id"] == "GAP-UX-COMMAND-CONTRACT-TIME-IMPORT-001"
         )
-        self.assertEqual(
-            dedicated_gap["affected_state_ids"],
-            sorted(state["blueprint_id"] for state in time_degraded["variants"]),
+        self.assertFalse(
+            any("TIME-DEGRADED" in state_id for state_id in import_gap["affected_state_ids"])
         )
-        for gap_id in (
-            "GAP-UX-COMMAND-CONTRACT-TIME-VIEWS-001",
-            "GAP-UX-COMMAND-CONTRACT-TIME-IMPORT-001",
-        ):
-            gap = next(
-                row for row in payload["specification_gaps"] if row["gap_id"] == gap_id
-            )
-            self.assertFalse(
-                any("TIME-DEGRADED" in state_id for state_id in gap["affected_state_ids"])
-            )
 
     def test_time_today_trust_and_capture_reclassification_is_fail_closed(self):
         payload = self._payload()
@@ -204,10 +218,8 @@ class UXBlueprintWholeRangeRepairTests(unittest.TestCase):
         ]
         self.assertEqual(len(time_states), 55)
         for state in time_states:
-            self.assertEqual(
-                state["specification_gap_ids"],
-                ["GAP-UX-COMMAND-CONTRACT-TIME-VIEWS-001"],
-            )
+            self.assertEqual(state["specification_gap_ids"], [])
+            self.assertEqual(state["behavior_authority_posture"], "requirement_backed")
         for screen_id, gap_id in (
             ("UX-SCREEN-TODAY-DETAIL", "GAP-UX-COMMAND-CONTRACT-TODAY-001"),
             ("UX-SCREEN-TODAY-START-HERE", "GAP-UX-COMMAND-CONTRACT-TODAY-001"),
@@ -215,37 +227,41 @@ class UXBlueprintWholeRangeRepairTests(unittest.TestCase):
             ("UX-SCREEN-CAPTURE-SAVED-FOR-LATER", "GAP-UX-COMMAND-CONTRACT-CAPTURE-001"),
         ):
             for state in by_screen[screen_id]:
-                self.assertIn(gap_id, state["specification_gap_ids"])
+                self.assertNotIn(gap_id, state["specification_gap_ids"])
+                self.assertEqual(
+                    state["behavior_authority_posture"], "requirement_backed"
+                )
 
     def test_evidence_validation_rejects_nonexact_broad_uncovered_and_unowned_command(self):
         module = self._module()
 
         nonexact = copy.deepcopy(self._payload())
-        state = self._forged_backed_state(nonexact)
+        state = self._backed_state(nonexact)
         state["behavior_authority_evidence"][0]["normative_clause"] += " invented"
         with self.assertRaisesRegex(module.UXBlueprintError, "non-exact normative clause"):
             module.validate_ux_blueprint(REPO_ROOT, nonexact)
 
         broad = copy.deepcopy(self._payload())
-        state = self._forged_backed_state(broad)
-        state["behavior_authority_evidence"][0]["requirement_id"] = next(
-            requirement_id
-            for requirement_id in state["requirement_ids"]
-            if requirement_id != "CONTROL-UNDO-RECOVERY-001"
+        state = self._backed_state(broad)
+        state["behavior_authority_evidence"][0]["requirement_id"] = (
+            "CONTROL-UNDO-RECOVERY-001"
+        )
+        state["behavior_authority_evidence"][0]["normative_clause"] = (
+            self._requirement("CONTROL-UNDO-RECOVERY-001")["normative_text"]
         )
         with self.assertRaisesRegex(module.UXBlueprintError, "evidence requirement mismatch"):
             module.validate_ux_blueprint(REPO_ROOT, broad)
 
         uncovered = copy.deepcopy(self._payload())
-        state = self._forged_backed_state(uncovered)
+        state = self._backed_state(uncovered)
         state["behavior_authority_evidence"][0]["owned_fields"].remove("offline_behavior")
         with self.assertRaisesRegex(module.UXBlueprintError, "behavior fields lack exact ownership"):
             module.validate_ux_blueprint(REPO_ROOT, uncovered)
 
         absent_command = copy.deepcopy(self._payload())
-        state = self._forged_backed_state(absent_command)
+        state = self._backed_state(absent_command)
         state["allowed_commands"] = ["Invented Command"]
-        with self.assertRaisesRegex(module.UXBlueprintError, "command lacks exact lexical ownership"):
+        with self.assertRaisesRegex(module.UXBlueprintError, "allowed commands drift"):
             module.validate_ux_blueprint(REPO_ROOT, absent_command)
 
     def test_authority_eligibility_fails_closed_for_invalid_evidence(self):
