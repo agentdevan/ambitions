@@ -84,6 +84,7 @@ commit_boundary = "Mutation: the typed command commits only after current-revisi
 rollback_undo = "Cancellation before commit changes nothing; after commit, only the named typed Undo or recovery command may append a reversing Event while History remains intact."
 privacy_egress = "The mutation remains local and sends no private content off device; any external side effect requires a separate minimum-field egress review under SYSTEM-PRIVACY-EGRESS-001."
 verification_ids = ["SCENARIO-SURFACE-TODAY-COMMAND-CONTRACT-001"]
+rollback_posture = "inverse_command"
 
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TODAY-DETAIL-RECOVERY"
@@ -234,6 +235,7 @@ commit_boundary = "Mutation: the typed command commits only after current-revisi
 rollback_undo = "Cancellation before commit changes nothing; after commit, only the named typed Undo or recovery command may append a reversing Event while History remains intact."
 privacy_egress = "The mutation remains local and sends no private content off device; any external side effect requires a separate minimum-field egress review under SYSTEM-PRIVACY-EGRESS-001."
 verification_ids = ["SCENARIO-SURFACE-TODAY-COMMAND-CONTRACT-001"]
+rollback_posture = "inverse_command"
 
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TODAY-ROOT-EMPTY"
@@ -548,6 +550,7 @@ commit_boundary = "Mutation: the typed command commits only after current-revisi
 rollback_undo = "Cancellation before commit changes nothing; after commit, only the named typed Undo or recovery command may append a reversing Event while History remains intact."
 privacy_egress = "The mutation remains local and sends no private content off device; any external side effect requires a separate minimum-field egress review under SYSTEM-PRIVACY-EGRESS-001."
 verification_ids = ["SCENARIO-SURFACE-TODAY-COMMAND-CONTRACT-001"]
+rollback_posture = "inverse_command"
 
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TODAY-START-HERE-RECOVERY-NEEDED"

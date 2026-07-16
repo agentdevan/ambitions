@@ -26,6 +26,9 @@ from tools.ambitions_canon.model import (
     Modality,
     Requirement,
     FigmaAuthorityRole,
+    StateCommand,
+    StateCommandActivationPosture,
+    StateCommandContract,
 )
 from tools.ambitions_canon.registry import build_registry
 from tools.ambitions_canon.reference_index import parse_reference_index_bytes
@@ -439,6 +442,101 @@ class TaskPackTests(unittest.TestCase):
         self.assertNotIn(
             "Complete inherited-law bodies are bound by the Canon SHA and referenced",
             pack.to_markdown(),
+        )
+
+    def test_future_gated_commands_are_non_authorizing_task_pack_metadata(self):
+        registry = sample_registry()
+        today = next(
+            item for item in registry.documents if item.spec_id == "SURFACE-TODAY"
+        )
+        gated_requirement = replace(
+            today.requirements[0],
+            body=(
+                "The implementation control is `Purchase`. Purchase is authorized only "
+                "after the separately registered and owner-approved product gate passes."
+            ),
+        )
+        future_command = StateCommand(
+            command_id="CMD-TODAY-PURCHASE-001",
+            label="Purchase",
+            canonical_owner=gated_requirement.concept,
+            preconditions=(
+                "A separately registered and owner-approved StoreKit product registry exists",
+            ),
+            destination="the Apple-owned purchase sheet for the registered product",
+            effect=(
+                "The Purchase external result causes no local canonical mutation; "
+                "verified entitlement observation remains separate"
+            ),
+            success_focus="the verified entitlement status",
+            failure_focus="the Purchase control and exact product-registry reason",
+            commit_boundary=(
+                "External-result: StoreKit result is revalidated before any separately "
+                "authorized local command."
+            ),
+            rollback_undo=(
+                "No Undo is required; cancellation preserves the prior verified state."
+            ),
+            privacy_egress="Only minimum registered product fields reach StoreKit.",
+            verification_ids=("SCENARIO-TODAY-001",),
+            activation_posture=StateCommandActivationPosture.FUTURE_GATED,
+            gate_requirement_ids=("TODAY-002",),
+            rollback_posture=None,
+        )
+        contract = StateCommandContract(
+            state_id="UX-STATE-VARIANT-TODAY-PURCHASE",
+            requirement_id=gated_requirement.requirement_id,
+            activation_posture=StateCommandActivationPosture.ACTIVE,
+            gate_requirement_ids=(),
+            transition_exit=(
+                "Purchase => destination: the Apple-owned purchase sheet for the registered "
+                "product; effect: The Purchase external result causes no local canonical "
+                "mutation; verified entitlement observation remains separate; focus: the "
+                "verified entitlement status."
+            ),
+            durable_effect="No product or entitlement mutation occurs from this state.",
+            recovery_rollback="Cancellation returns to the unchanged entitlement status.",
+            offline_behavior="The future purchase command remains unavailable offline.",
+            accessibility_focus="VoiceOver remains on the exact unavailable control reason.",
+            commands=(future_command,),
+        )
+        future_today = replace(
+            today,
+            requirements=(gated_requirement, today.requirements[1]),
+            state_command_contracts=(contract,),
+        )
+        active = replace(
+            registry,
+            manifest=replace(registry.manifest, authority_state=AuthorityState.ACTIVE),
+            documents=tuple(
+                future_today if item.spec_id == today.spec_id else item
+                for item in registry.documents
+            ),
+        )
+
+        pack = build_task_pack(active, replace(intake("docs"), scope=("surface.today",)), "repo-sha", ())
+        markdown = pack.to_markdown()
+
+        self.assertNotIn("The implementation control is `Purchase`.", markdown)
+        self.assertIn("FUTURE-GATED / NON-AUTHORIZING", markdown)
+        self.assertIn("command_id=`CMD-TODAY-PURCHASE-001`", markdown)
+        self.assertIn("label=`Purchase`", markdown)
+        self.assertIn("gate_requirement_ids=`TODAY-002`", markdown)
+        self.assertIn(
+            "A separately registered and owner-approved StoreKit product registry exists",
+            markdown,
+        )
+        self.assertTrue(
+            any(
+                "CMD-TODAY-PURCHASE-001" in risk and "non-authorizing" in risk
+                for risk in pack.known_risks
+            )
+        )
+        self.assertTrue(
+            any(
+                "future-gated command metadata" in value.casefold()
+                for value in pack.forbidden_changes
+            )
         )
 
     def test_profile_section_bodies_are_rendered_for_selected_semantic_documents(self):

@@ -233,6 +233,13 @@ class StateCommandActivationPosture(StrEnum):
     FUTURE_GATED = "future_gated"
 
 
+class StateCommandRollbackPosture(StrEnum):
+    INVERSE_COMMAND = "inverse_command"
+    CHECKPOINT_RESTORE = "checkpoint_restore"
+    OWNER_RECOVERY_HANDOFF = "owner_recovery_handoff"
+    CONFIRMED_IRREVERSIBLE = "confirmed_irreversible"
+
+
 class GapSeverity(StrEnum):
     P0_BLOCKER = "P0_BLOCKER"
     P1_REQUIRED = "P1_REQUIRED"
@@ -353,10 +360,16 @@ class StateCommand:
     rollback_undo: str
     privacy_egress: str
     verification_ids: tuple[str, ...]
+    activation_posture: StateCommandActivationPosture
+    gate_requirement_ids: tuple[str, ...]
+    rollback_posture: StateCommandRollbackPosture | None
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "preconditions", tuple(self.preconditions))
         object.__setattr__(self, "verification_ids", tuple(self.verification_ids))
+        object.__setattr__(
+            self, "gate_requirement_ids", tuple(self.gate_requirement_ids)
+        )
 
 
 @dataclass(frozen=True, slots=True)

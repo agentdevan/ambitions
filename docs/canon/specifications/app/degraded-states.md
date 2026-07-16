@@ -58,6 +58,9 @@ commit_boundary = "Non-mutating: classified recovery review and owner handoff re
 rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
 privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
 verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-CONTINUITY-PENDING"
 requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
@@ -82,6 +85,9 @@ commit_boundary = "Non-mutating: classified recovery review and owner handoff re
 rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
 privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
 verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-EXTERNAL-WRITE-FAILURE"
 requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
@@ -106,6 +112,8 @@ commit_boundary = "External-result: the external retry remains downstream of acc
 rollback_undo = "Cancellation leaves the accepted local result and failed outbox identity unchanged; another retry requires fresh owner and external-state validation."
 privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
 verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-OFFLINE-DEGRADED-LOCAL-HEALTH-EXTERNAL-WRITE-FAILURE-002"
@@ -120,6 +128,9 @@ commit_boundary = "Non-mutating: classified recovery review and owner handoff re
 rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
 privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
 verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-IMPORT-FAILURE"
 requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
@@ -144,6 +155,8 @@ commit_boundary = "Non-mutating: classified recovery review and owner handoff re
 rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
 privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
 verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-OFFLINE-DEGRADED-LOCAL-HEALTH-IMPORT-FAILURE-002"
@@ -158,6 +171,9 @@ commit_boundary = "Non-mutating: classified recovery review and owner handoff re
 rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
 privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
 verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-LOCAL-STORE-DEGRADATION"
 requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
@@ -182,6 +198,9 @@ commit_boundary = "Non-mutating: classified recovery review and owner handoff re
 rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
 privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
 verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-OFFLINE-HEALTHY"
 requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
@@ -206,6 +225,9 @@ commit_boundary = "Non-mutating: classified recovery review and owner handoff re
 rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
 privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
 verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-PARTIAL-OPERATION"
 requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
@@ -230,6 +252,8 @@ commit_boundary = "Non-mutating: classified recovery review and owner handoff re
 rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
 privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
 verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-OFFLINE-DEGRADED-LOCAL-HEALTH-PARTIAL-OPERATION-002"
@@ -244,6 +268,9 @@ commit_boundary = "Non-mutating: classified recovery review and owner handoff re
 rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
 privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
 verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-PROTECTED-DATA-UNAVAILABLE"
 requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
@@ -268,6 +295,9 @@ commit_boundary = "External-result: authentication itself is not canonical succe
 rollback_undo = "Cancellation or failed authentication changes nothing, reveals no protected content, and returns focus to Unlock and Retry."
 privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
 verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-STALE-EXTERNAL-SOURCE"
 requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
@@ -292,6 +322,8 @@ commit_boundary = "External-result: source refresh produces external facts only;
 rollback_undo = "Cancellation or source failure preserves the last verified local facts and stale marker; another refresh cannot replay an accepted local Event."
 privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
 verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-OFFLINE-DEGRADED-LOCAL-HEALTH-STALE-EXTERNAL-SOURCE-002"
@@ -306,6 +338,9 @@ commit_boundary = "Non-mutating: classified recovery review and owner handoff re
 rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
 privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
 verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-STORAGE-PRESSURE"
 requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
@@ -330,6 +365,8 @@ commit_boundary = "Non-mutating: classified recovery review and owner handoff re
 rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
 privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
 verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-OFFLINE-DEGRADED-LOCAL-HEALTH-STORAGE-PRESSURE-002"
@@ -344,6 +381,9 @@ commit_boundary = "Non-mutating: classified recovery review and owner handoff re
 rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
 privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
 verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-UNAVAILABLE-PERMISSION"
 requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
@@ -368,6 +408,8 @@ commit_boundary = "External-result: Settings owns authorization; return reconcil
 rollback_undo = "Cancellation or unchanged permission preserves the prior status and local data; no repeated prompt is triggered automatically."
 privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
 verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-OFFLINE-DEGRADED-LOCAL-HEALTH-UNAVAILABLE-PERMISSION-002"
@@ -382,6 +424,9 @@ commit_boundary = "Non-mutating: classified recovery review and owner handoff re
 rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
 privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
 verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-REPAIR-EXPORT-ONLY"
 requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
@@ -406,6 +451,9 @@ commit_boundary = "Non-mutating: classified recovery review and owner handoff re
 rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
 privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
 verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-REPAIR-QUARANTINE-INSPECTION"
 requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
@@ -430,6 +478,9 @@ commit_boundary = "Non-mutating: classified recovery review and owner handoff re
 rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
 privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
 verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-REPAIR-REPAIR-AVAILABLE"
 requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
@@ -454,6 +505,9 @@ commit_boundary = "Non-mutating: classified recovery review and owner handoff re
 rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
 privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
 verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-REPAIR-REPAIR-COMPLETE"
 requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
@@ -478,6 +532,9 @@ commit_boundary = "Non-mutating: classified recovery review and owner handoff re
 rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
 privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
 verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-REPAIR-REPAIR-FAILED"
 requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
@@ -502,6 +559,9 @@ commit_boundary = "Non-mutating: classified recovery review and owner handoff re
 rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
 privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
 verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-REPAIR-REPAIR-RUNNING"
 requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
@@ -526,6 +586,9 @@ commit_boundary = "Non-mutating: classified recovery review and owner handoff re
 rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
 privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
 verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 +++
 
 # App Degraded States

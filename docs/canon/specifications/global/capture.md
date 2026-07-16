@@ -65,6 +65,7 @@ commit_boundary = "Mutation: the typed command commits only after current-revisi
 rollback_undo = "Cancellation before commit changes nothing; after commit, only the named typed Undo or recovery command may append a reversing Event while History remains intact."
 privacy_egress = "The mutation remains local and sends no private content off device; any external side effect requires a separate minimum-field egress review under SYSTEM-PRIVACY-EGRESS-001."
 verification_ids = ["SCENARIO-GLOBAL-CAPTURE-COMMAND-CONTRACT-001"]
+rollback_posture = "inverse_command"
 
 [[state_command_contracts.commands]]
 command_id = "CMD-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-002"
@@ -79,6 +80,7 @@ commit_boundary = "Mutation: opening or cancelling the picker is non-mutating; t
 rollback_undo = "Cancellation before commit changes nothing; after commit, only the named typed Undo or recovery command may append a reversing Event while History remains intact."
 privacy_egress = "The mutation remains local and sends no private content off device; any external side effect requires a separate minimum-field egress review under SYSTEM-PRIVACY-EGRESS-001."
 verification_ids = ["SCENARIO-GLOBAL-CAPTURE-COMMAND-CONTRACT-001"]
+rollback_posture = "inverse_command"
 
 [[state_command_contracts.commands]]
 command_id = "CMD-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-003"
@@ -318,6 +320,7 @@ commit_boundary = "Mutation: the typed command commits only after current-revisi
 rollback_undo = "Cancellation before commit changes nothing; after commit, only the named typed Undo or recovery command may append a reversing Event while History remains intact."
 privacy_egress = "The mutation remains local and sends no private content off device; any external side effect requires a separate minimum-field egress review under SYSTEM-PRIVACY-EGRESS-001."
 verification_ids = ["SCENARIO-GLOBAL-CAPTURE-COMMAND-CONTRACT-001"]
+rollback_posture = "inverse_command"
 
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-CAPTURE-COMPOSER-DISCARD-REVIEW"
@@ -340,9 +343,10 @@ effect = "The typed Capture draft discard command appends an Event, updates the 
 success_focus = "the invoking global Capture control or origin object within Capture composer explicit state contract / Discard Review"
 failure_focus = "the Discard confirmation control while Capture composer explicit state contract / Discard Review remains visible"
 commit_boundary = "Mutation: the typed command commits only after current-revision validation, exact consequence review, and any required explicit confirmation."
-rollback_undo = "Cancellation preserves the draft; after confirmed discard, only an available draft checkpoint recovery may append a restoring mutation, otherwise Undo is unavailable."
+rollback_undo = "Cancellation preserves the draft; after confirmed discard, the retained draft checkpoint is the only restore route and any restoring mutation appends History."
 privacy_egress = "The mutation remains local and sends no private content off device; any external side effect requires a separate minimum-field egress review under SYSTEM-PRIVACY-EGRESS-001."
 verification_ids = ["SCENARIO-GLOBAL-CAPTURE-COMMAND-CONTRACT-001"]
+rollback_posture = "checkpoint_restore"
 
 [[state_command_contracts.commands]]
 command_id = "CMD-CAPTURE-COMPOSER-DISCARD-REVIEW-002"
@@ -557,6 +561,7 @@ commit_boundary = "Mutation: the typed command commits only after current-revisi
 rollback_undo = "Cancellation before commit changes nothing; after commit, only the named typed Undo or recovery command may append a reversing Event while History remains intact."
 privacy_egress = "The mutation remains local and sends no private content off device; any external side effect requires a separate minimum-field egress review under SYSTEM-PRIVACY-EGRESS-001."
 verification_ids = ["SCENARIO-GLOBAL-CAPTURE-COMMAND-CONTRACT-001"]
+rollback_posture = "inverse_command"
 
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-CAPTURE-COMPOSER-SAVED-UNDO-UNAVAILABLE"

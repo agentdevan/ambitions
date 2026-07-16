@@ -55,6 +55,9 @@ commit_boundary = "Non-mutating: Trust inspection remains read-only and cannot v
 rollback_undo = "No Undo is required; dismissal returns focus to the selected result or privacy explanation without disclosing protected content."
 privacy_egress = "Search and its derived index remain local; suppressed or protected matches disclose no identity, Trust shows only authorized evidence, and no query or private result leaves the device."
 verification_ids = ["SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SEARCH-RESULTS-ACTION-COMPLETE-UNDO-ELIGIBLE"
 requirement_id = "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001"
@@ -79,6 +82,9 @@ commit_boundary = "Non-mutating: Search ends at the owner-owned inverse preview;
 rollback_undo = "No Search Undo is required; cancellation returns to the completed result and its History while the canonical object remains unchanged."
 privacy_egress = "Search and its derived index remain local; suppressed or protected matches disclose no identity, Trust shows only authorized evidence, and no query or private result leaves the device."
 verification_ids = ["SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SEARCH-RESULTS-ACTION-COMPLETE-UNDO-UNAVAILABLE"
 requirement_id = "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001"
@@ -103,6 +109,9 @@ commit_boundary = "Non-mutating: Trust inspection remains read-only and cannot v
 rollback_undo = "No Undo is required; dismissal returns focus to the selected result or privacy explanation without disclosing protected content."
 privacy_egress = "Search and its derived index remain local; suppressed or protected matches disclose no identity, Trust shows only authorized evidence, and no query or private result leaves the device."
 verification_ids = ["SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SEARCH-RESULTS-ACTION-PREVIEW"
 requirement_id = "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001"
@@ -127,6 +136,9 @@ commit_boundary = "Non-mutating: Trust inspection remains read-only and cannot v
 rollback_undo = "No Undo is required; dismissal returns focus to the selected result or privacy explanation without disclosing protected content."
 privacy_egress = "Search and its derived index remain local; suppressed or protected matches disclose no identity, Trust shows only authorized evidence, and no query or private result leaves the device."
 verification_ids = ["SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SEARCH-RESULTS-FILTERED"
 requirement_id = "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001"
@@ -151,6 +163,9 @@ commit_boundary = "Non-mutating: filter presentation and selection remain local 
 rollback_undo = "No Undo is required; dismissal or Clear Filters restores the prior or unfiltered query projection without changing saved objects."
 privacy_egress = "Search and its derived index remain local; suppressed or protected matches disclose no identity, Trust shows only authorized evidence, and no query or private result leaves the device."
 verification_ids = ["SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SEARCH-RESULTS-NO-RESULTS"
 requirement_id = "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001"
@@ -175,12 +190,15 @@ commit_boundary = "Non-mutating: query editing and clearing remain before any ow
 rollback_undo = "No Undo is required; the query field regains focus and the user may re-enter text without any saved-state consequence."
 privacy_egress = "Search and its derived index remain local; suppressed or protected matches disclose no identity, Trust shows only authorized evidence, and no query or private result leaves the device."
 verification_ids = ["SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SEARCH-RESULTS-RESULTS"
 requirement_id = "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001"
 activation_posture = "active"
 gate_requirement_ids = []
-transition_exit = "Filters => destination: the local Search filter controls from Search results — Results; effect: No durable mutation occurs and no Receipt is created; Filters changes only the in-memory query projection and visible result grouping. Ranking input, canonical objects, privacy suppression, and saved local truth remain unchanged. Visible evidence remains: Matching Goals, Steps, Captures, and time items are grouped by type, with the matching text highlighted.; focus: the Filters destination, Trust heading, or updated results heading in Search results — Results."
+transition_exit = "Filters => destination: the local Search filter controls from Search results — Results; effect: No durable mutation occurs and no Receipt is created; Filters changes only the in-memory query projection and visible result grouping. Ranking input, canonical objects, privacy suppression, and saved local truth remain unchanged. Visible evidence remains: Matching Goals, Steps, Captures, and time items are grouped by type, with the matching text highlighted.; focus: the Filters destination, Trust heading, or updated results heading in Search results — Results.\nApply Filters => destination: the filtered local Search results for the current query; effect: No durable mutation occurs and no Receipt is created; the derived query projection applies the selected filters without changing any canonical object; focus: the filtered results heading or first matching result."
 durable_effect = "Exact local Find, Act, and Inspect consequences: Filters: No durable mutation occurs and no Receipt is created; Filters changes only the in-memory query projection and visible result grouping. Ranking input, canonical objects, privacy suppression, and saved local truth remain unchanged. Visible evidence remains: Matching Goals, Steps, Captures, and time items are grouped by type, with the matching text highlighted. Result actions re-resolve current object revision and route to resolved object owners; Search owns no generic mutation. Rebuild affects only a validated derived index. Current visible status: Matching Goals, Steps, Captures, and time items are grouped by type, with the matching text highlighted."
 recovery_rollback = "Exact stale, deleted, partial, privacy-suppressed, corrupt-index, rebuild, owner-Undo, and inspection recovery: Filters: No Undo is required; dismissal or Clear Filters restores the prior or unfiltered query projection without changing saved objects. The prior valid index stays available until replacement validation. Recovery preserves: Matching Goals, Steps, Captures, and time items are grouped by type, with the matching text highlighted."
 offline_behavior = "Local query, filters, canonical projections, prior valid index, Trust evidence, and owner routes remain available offline. Search never needs a network or cloud service; unavailable protected facts stay suppressed. Offline evidence remains: Matching Goals, Steps, Captures, and time items are grouped by type, with the matching text highlighted."
@@ -199,6 +217,25 @@ commit_boundary = "Non-mutating: filter presentation and selection remain local 
 rollback_undo = "No Undo is required; dismissal or Clear Filters restores the prior or unfiltered query projection without changing saved objects."
 privacy_egress = "Search and its derived index remain local; suppressed or protected matches disclose no identity, Trust shows only authorized evidence, and no query or private result leaves the device."
 verification_ids = ["SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-SEARCH-RESULTS-RESULTS-002"
+label = "Apply Filters"
+canonical_owner = "global.search.command-contract"
+preconditions = ["A changed filter draft is present", "The current local index revision remains valid", "The query and filter values disclose no data outside the device"]
+destination = "the filtered local Search results for the current query"
+effect = "No durable mutation occurs and no Receipt is created; the derived query projection applies the selected filters without changing any canonical object"
+success_focus = "the filtered results heading or first matching result"
+failure_focus = "the Apply Filters control and exact invalid filter"
+commit_boundary = "Non-mutating: the command routes or selects without changing canonical state."
+rollback_undo = "No Undo is required; cancellation returns to the unchanged originating state."
+privacy_egress = "No egress occurs; private object content, History, Proof, and Receipts remain local."
+verification_ids = ["SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SEARCH-RESULTS-SELECTED"
 requirement_id = "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001"
@@ -223,6 +260,9 @@ commit_boundary = "Non-mutating: Trust inspection remains read-only and cannot v
 rollback_undo = "No Undo is required; dismissal returns focus to the selected result or privacy explanation without disclosing protected content."
 privacy_egress = "Search and its derived index remain local; suppressed or protected matches disclose no identity, Trust shows only authorized evidence, and no query or private result leaves the device."
 verification_ids = ["SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SEARCH-ROOT-ACTION-MUTATING"
 requirement_id = "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001"
@@ -247,6 +287,9 @@ commit_boundary = "Non-mutating: Trust inspection remains read-only and cannot v
 rollback_undo = "No Undo is required; dismissal returns focus to the selected result or privacy explanation without disclosing protected content."
 privacy_egress = "Search and its derived index remain local; suppressed or protected matches disclose no identity, Trust shows only authorized evidence, and no query or private result leaves the device."
 verification_ids = ["SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SEARCH-ROOT-ACTION-REJECTED"
 requirement_id = "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001"
@@ -271,6 +314,9 @@ commit_boundary = "Non-mutating: query editing and clearing remain before any ow
 rollback_undo = "No Undo is required; the query field regains focus and the user may re-enter text without any saved-state consequence."
 privacy_egress = "Search and its derived index remain local; suppressed or protected matches disclose no identity, Trust shows only authorized evidence, and no query or private result leaves the device."
 verification_ids = ["SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SEARCH-ROOT-ACTION-VALIDATING"
 requirement_id = "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001"
@@ -295,6 +341,9 @@ commit_boundary = "Non-mutating: Trust inspection remains read-only and cannot v
 rollback_undo = "No Undo is required; dismissal returns focus to the selected result or privacy explanation without disclosing protected content."
 privacy_egress = "Search and its derived index remain local; suppressed or protected matches disclose no identity, Trust shows only authorized evidence, and no query or private result leaves the device."
 verification_ids = ["SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SEARCH-ROOT-CORRUPT-INDEX"
 requirement_id = "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001"
@@ -319,6 +368,9 @@ commit_boundary = "Non-mutating: Search rebuild changes only a validated derived
 rollback_undo = "No canonical Undo is required; failed or cancelled rebuild discards staged output, retains the prior valid index, and restores the prior query and filters."
 privacy_egress = "Search and its derived index remain local; suppressed or protected matches disclose no identity, Trust shows only authorized evidence, and no query or private result leaves the device."
 verification_ids = ["SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SEARCH-ROOT-EMPTY-QUERY"
 requirement_id = "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001"
@@ -343,6 +395,9 @@ commit_boundary = "Non-mutating: filter presentation and selection remain local 
 rollback_undo = "No Undo is required; dismissal or Clear Filters restores the prior or unfiltered query projection without changing saved objects."
 privacy_egress = "Search and its derived index remain local; suppressed or protected matches disclose no identity, Trust shows only authorized evidence, and no query or private result leaves the device."
 verification_ids = ["SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SEARCH-ROOT-INSPECTION-HANDOFF"
 requirement_id = "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001"
@@ -367,6 +422,9 @@ commit_boundary = "Non-mutating: Trust inspection remains read-only and cannot v
 rollback_undo = "No Undo is required; dismissal returns focus to the selected result or privacy explanation without disclosing protected content."
 privacy_egress = "Search and its derived index remain local; suppressed or protected matches disclose no identity, Trust shows only authorized evidence, and no query or private result leaves the device."
 verification_ids = ["SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SEARCH-ROOT-OFFLINE-HEALTHY"
 requirement_id = "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001"
@@ -391,6 +449,9 @@ commit_boundary = "Non-mutating: query editing and clearing remain before any ow
 rollback_undo = "No Undo is required; the query field regains focus and the user may re-enter text without any saved-state consequence."
 privacy_egress = "Search and its derived index remain local; suppressed or protected matches disclose no identity, Trust shows only authorized evidence, and no query or private result leaves the device."
 verification_ids = ["SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SEARCH-ROOT-PARTIAL-RESULTS"
 requirement_id = "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001"
@@ -415,6 +476,9 @@ commit_boundary = "Non-mutating: Trust inspection remains read-only and cannot v
 rollback_undo = "No Undo is required; dismissal returns focus to the selected result or privacy explanation without disclosing protected content."
 privacy_egress = "Search and its derived index remain local; suppressed or protected matches disclose no identity, Trust shows only authorized evidence, and no query or private result leaves the device."
 verification_ids = ["SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SEARCH-ROOT-PERMISSION-DENIED"
 requirement_id = "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001"
@@ -439,6 +503,9 @@ commit_boundary = "Non-mutating: Trust inspection remains read-only and cannot v
 rollback_undo = "No Undo is required; dismissal returns focus to the selected result or privacy explanation without disclosing protected content."
 privacy_egress = "Search and its derived index remain local; suppressed or protected matches disclose no identity, Trust shows only authorized evidence, and no query or private result leaves the device."
 verification_ids = ["SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SEARCH-ROOT-PRIVACY-SUPPRESSED"
 requirement_id = "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001"
@@ -463,6 +530,9 @@ commit_boundary = "Non-mutating: Trust inspection remains read-only and cannot v
 rollback_undo = "No Undo is required; dismissal returns focus to the selected result or privacy explanation without disclosing protected content."
 privacy_egress = "Search and its derived index remain local; suppressed or protected matches disclose no identity, Trust shows only authorized evidence, and no query or private result leaves the device."
 verification_ids = ["SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SEARCH-ROOT-QUERYING"
 requirement_id = "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001"
@@ -487,6 +557,9 @@ commit_boundary = "Non-mutating: query editing and clearing remain before any ow
 rollback_undo = "No Undo is required; the query field regains focus and the user may re-enter text without any saved-state consequence."
 privacy_egress = "Search and its derived index remain local; suppressed or protected matches disclose no identity, Trust shows only authorized evidence, and no query or private result leaves the device."
 verification_ids = ["SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SEARCH-ROOT-REBUILDING"
 requirement_id = "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001"
@@ -511,6 +584,9 @@ commit_boundary = "Non-mutating: cancellation retains the prior valid derived in
 rollback_undo = "No Undo is required; a later rebuild starts from current canonical projections and a new generation identity."
 privacy_egress = "Search and its derived index remain local; suppressed or protected matches disclose no identity, Trust shows only authorized evidence, and no query or private result leaves the device."
 verification_ids = ["SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SEARCH-ROOT-RECENT"
 requirement_id = "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001"
@@ -535,6 +611,9 @@ commit_boundary = "Non-mutating: query editing and clearing remain before any ow
 rollback_undo = "No Undo is required; the query field regains focus and the user may re-enter text without any saved-state consequence."
 privacy_egress = "Search and its derived index remain local; suppressed or protected matches disclose no identity, Trust shows only authorized evidence, and no query or private result leaves the device."
 verification_ids = ["SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SEARCH-ROOT-RESTORED"
 requirement_id = "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001"
@@ -559,6 +638,9 @@ commit_boundary = "Non-mutating: filter presentation and selection remain local 
 rollback_undo = "No Undo is required; dismissal or Clear Filters restores the prior or unfiltered query projection without changing saved objects."
 privacy_egress = "Search and its derived index remain local; suppressed or protected matches disclose no identity, Trust shows only authorized evidence, and no query or private result leaves the device."
 verification_ids = ["SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SEARCH-ROOT-STALE-INDEX"
 requirement_id = "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001"
@@ -583,6 +665,9 @@ commit_boundary = "Non-mutating: Search rebuild changes only a validated derived
 rollback_undo = "No canonical Undo is required; failed or cancelled rebuild discards staged output, retains the prior valid index, and restores the prior query and filters."
 privacy_egress = "Search and its derived index remain local; suppressed or protected matches disclose no identity, Trust shows only authorized evidence, and no query or private result leaves the device."
 verification_ids = ["SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SEARCH-ROOT-UNAVAILABLE-PROJECTION"
 requirement_id = "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001"
@@ -607,6 +692,9 @@ commit_boundary = "Non-mutating: Search rebuild changes only a validated derived
 rollback_undo = "No canonical Undo is required; failed or cancelled rebuild discards staged output, retains the prior valid index, and restores the prior query and filters."
 privacy_egress = "Search and its derived index remain local; suppressed or protected matches disclose no identity, Trust shows only authorized evidence, and no query or private result leaves the device."
 verification_ids = ["SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 +++
 
 # Search

@@ -6,16 +6,19 @@
 
 - Branch: `codex/canon-visual-owner-workshop`
 - Base SHA: `f4909c6a611414ce1782bfaaec32e528ecf14968`
+- Consolidated review-repair base SHA: `d3a7e29fd6d8dc421e6608f70a652f9847c728cb`.
 - Authority posture: shadow canon and frozen visual candidate only.
 - Normative additions: `12` stable requirements in existing specification owners.
 - Newly resolved state contracts: `166`; total structured state contracts: `433`.
-- Structured commands: `520`.
+- Structured commands: `567` (`47` new requirement-local records; `138`
+  unique approved labels and `239` state-bound records in the twelve approved
+  command laws).
 - Requirement/concept owners: `461`.
 - Visual requirement dispositions: `336`; nonvisual dispositions: `125`.
 - Current authority-eligible state contracts after a future approved Gate B: `411`.
 - Future-gated continuity state contracts: `22`.
 - Current command-contract specification gaps: `0`.
-- Canon content SHA: `37ca3d028309c10537e359cc5d9e95dbbc54b40b5a10557e1f34d08ffb90281c`.
+- Canon content SHA: `865157d4d1a8ec074d7b4d233e2e1c021b2eea1aeda6ab9392d63481c6d7d611`.
 - Independent semantic-equivalence review binding: intentionally `candidate` and unbound while this exact deterministic delta awaits review.
 
 The amendment resolves the approved Account, launch/setup, deep-link, degraded,
@@ -26,11 +29,13 @@ record or state gap reference. The compiler still permits a future explicit gap
 only through the same closed, fail-closed structure, and a synthetic negative
 test proves action-implying copy remains rejected for such a state.
 
-Continuity remains structurally closed. Only the disabled review state is active;
-the other continuity contracts remain future-gated by
-`SYSTEM-CONTINUITY-DISABLED-001`. This amendment does not activate continuity,
-approve visual authority, pass Gate B, select task-pack visual authority, change
-production Swift, modify Figma, or perform destructive cleanup.
+Continuity remains structurally closed. Four disabled explanatory/review
+continuity states are active; 22 non-disabled continuity states are
+future-gated. Every future-gated state and command carries nonempty resolved
+gates, projects no active command, and retains exact non-authorizing command-ID
+metadata. This amendment does not activate continuity, approve visual
+authority, pass Gate B, select task-pack visual authority, change production
+Swift, modify Figma, or perform destructive cleanup.
 
 ### TDD evidence
 
@@ -111,6 +116,83 @@ After changing only that stale hand SHA, the focused regression exited `0` with
 `1` test passed in `1.557s`. The identical covering command then exited `0` with
 all `148` tests passed in `138.546s`; its count increased by exactly the new
 regression and its UX-blueprint summary remained unchanged and Green.
+
+### Consolidated Visual R1 review-docket closure
+
+The independent docket identified one Critical and two Important defects: 47
+approved requirement-local command labels were absent from their exact state
+owners; unresolved target and rollback prose could launder incomplete command
+contracts; and future-gated commands could leak as authorizing task-pack prose.
+The bounded repair added the 47 records without adding a product-law registry,
+made all 239 approved state-bound records declare an explicit activation posture
+and exact gate IDs, introduced typed mutation rollback posture, and made target
+and rollback validation fail closed without rejecting legitimate named routes.
+
+Task-pack projection preserves the applicable law while annotating only the
+owning requirement's exact future-gated command tokens as
+`FUTURE-GATED / NON-AUTHORIZING`. It emits the command ID, owning requirement,
+unmet gate IDs, risk, and forbidden-change entry. `Purchase` is future-gated by
+both `ENTITLEMENT-003` and
+`SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001`; active `Restore Purchases`
+remains separately authorizing. No global label substitution was introduced.
+
+The review RED covered the exact missing-command inventory, adversarial target
+and rollback cases, active/future projection separation, stale visual-node
+bindings, and candidate semantic-review lifecycle. The frozen repair's final
+covering command was:
+
+```text
+PYTHONPATH=. /Users/devan/.local/share/uv/python/cpython-3.12-macos-x86_64-none/bin/python3.12 -m unittest \
+  tests.canon.test_visual_r1_command_contracts \
+  tests.canon.test_state_command_semantics \
+  tests.canon.test_visual_authority_rebaseline \
+  tests.canon.test_ux_blueprint \
+  tests.canon.test_ux_blueprint_review_repairs \
+  tests.canon.test_ux_blueprint_whole_range_repair \
+  tests.canon.test_ux_blueprint_semantic_repairs \
+  tests.canon.test_ux_blueprint_independent_review \
+  tests.canon.test_ux_blueprint_final_review \
+  tests.canon.test_ux_blueprint_matrix_repairs \
+  tests.canon.test_ux_blueprint_all_corpus_review \
+  tests.canon.test_ux_blueprint_full_corpus_review \
+  tests.canon.test_ux_blueprint_semantic_residual_docket \
+  tests.canon.test_parser \
+  tests.canon.test_task_pack \
+  tests.canon.test_build.BuildTests.test_shadow_goldens_match_the_live_manifest_render \
+  tests.canon.test_task19_whole_train_repairs \
+  tests.canon.test_audit.AuditTests.test_live_shadow_cli_audit_is_green_and_deterministic
+```
+
+Exit `0`; `241` tests ran in `158.011s`, with one expected skip. The embedded
+UX-blueprint check was Green for `47` screens, `47` state models, `423` taxonomy
+states, `433` state variants, `18` objects, `12` journeys, `461` requirements,
+`336` visual dispositions, `125` nonvisual dispositions, and shadow authority.
+All 147 frozen visual candidate nodes resolve the current canon content SHA.
+
+Post-repair governance gates all exited `0`:
+
+- `scripts/ambitions-canon.py audit`: Green, `61` documents, `461`
+  requirements, `461` concepts, shadow authority.
+- `scripts/ambitions-canon.py build --check`: Green, generated outputs current.
+- `scripts/ambitions-canon.py ux-blueprint --check`: Green with the counts above.
+- `scripts/ambitions-canon.py coverage --fail-on-p0-gap`: Green, `61`
+  documents and `5` profiles.
+- `scripts/ambitions-canon.py traceability --check`: Green, `461`
+  requirements, `20` references, and `1,044` honest shadow posture gaps.
+- `scripts/ambitions-canon.py external-authority --kind figma --check`: Green,
+  `11` references, `0` reconciliation entities, shadow authority.
+- `scripts/ambitions-truth-path-vocabulary-audit.py`: Green.
+- `scripts/ambitions-constitution-audit.py`: Green, `124` laws.
+- `scripts/ambitions-remediation-governance-check.py`: Green, `61` changed
+  paths and no changed production or support Swift.
+- `scripts/canon-language-drift-scan.sh`: exit `0`; no Red. Its Yellow output
+  names explicit anti-AI/anti-score prohibitions and their deterministic
+  projections rather than newly authorized product language.
+- `git diff --check`: exit `0` with no output.
+
+Per controller scope, no new matrix, semantic dimension, semantic evaluation,
+or full discovery run was added. The semantic-loss ledger and receipt remain
+`candidate` and unbound; no stale semantic receipt was promoted or rebound.
 
 ### Claim ceiling
 

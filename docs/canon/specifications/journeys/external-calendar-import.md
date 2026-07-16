@@ -43,6 +43,9 @@ commit_boundary = "Non-mutating: dismissal completes without changing selection,
 rollback_undo = "No Undo is required; reopening Time import restores the durable completed/failed identities, Receipt, and safe recovery route."
 privacy_egress = "Review uses minimum necessary stored source facts; selection and preview never alter the source, and any explicit external write sends only approved event fields with a separate egress Receipt."
 verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-IMPORT-EXTERNAL-SOURCE-UNCHANGED"
 requirement_id = "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001"
@@ -67,6 +70,9 @@ commit_boundary = "Non-mutating: dismissal completes without changing selection,
 rollback_undo = "No Undo is required; reopening Time import restores the durable completed/failed identities, Receipt, and safe recovery route."
 privacy_egress = "Review uses minimum necessary stored source facts; selection and preview never alter the source, and any explicit external write sends only approved event fields with a separate egress Receipt."
 verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-IMPORT-EXTERNAL-WRITE-FAILURE"
 requirement_id = "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001"
@@ -91,6 +97,9 @@ commit_boundary = "External-result: the external write is separately dispatched 
 rollback_undo = "Cancellation leaves the accepted local import and failed external identity list unchanged; another retry starts only after fresh revalidation."
 privacy_egress = "Review uses minimum necessary stored source facts; selection and preview never alter the source, and any explicit external write sends only approved event fields with a separate egress Receipt."
 verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-IMPORT-IMPORT-FAILED"
 requirement_id = "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001"
@@ -112,9 +121,13 @@ effect = "Each failed identity executes one typed Retry Failed Items Command aft
 success_focus = "the first affected record or Retry Failed Items result heading in External calendar review — Import Failed"
 failure_focus = "the Retry Failed Items control and first stale, invalid, or failed record in External calendar review — Import Failed"
 commit_boundary = "Mutation: retry commits only failed identities, one atomic record at a time, through Event, Projection, Receipt, History, and replay-safe idempotency."
-rollback_undo = "Before each record commit, cancellation leaves it failed; after commit, the record moves exactly once to completed and any remaining failed IDs stay explicit."
+rollback_undo = "Before each record commit, cancellation leaves it failed; after commit, the import owner recovery handoff preserves completed IDs and exposes only remaining failed IDs."
 privacy_egress = "Review uses minimum necessary stored source facts; selection and preview never alter the source, and any explicit external write sends only approved event fields with a separate egress Receipt."
 verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "owner_recovery_handoff"
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-IMPORT-IMPORT-UNDO-UNAVAILABLE"
 requirement_id = "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001"
@@ -139,6 +152,9 @@ commit_boundary = "Non-mutating: dismissal completes without changing selection,
 rollback_undo = "No Undo is required; reopening Time import restores the durable completed/failed identities, Receipt, and safe recovery route."
 privacy_egress = "Review uses minimum necessary stored source facts; selection and preview never alter the source, and any explicit external write sends only approved event fields with a separate egress Receipt."
 verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-IMPORT-NATIVE-IMPORT-UNDO"
 requirement_id = "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001"
@@ -163,6 +179,10 @@ commit_boundary = "Mutation: semantic Undo commits only a proven deterministic i
 rollback_undo = "Before commit, cancellation changes nothing; after commit, redo or further recovery is a separately validated typed command, while unsafe Undo routes to detail, Trash or reconciliation."
 privacy_egress = "Review uses minimum necessary stored source facts; selection and preview never alter the source, and any explicit external write sends only approved event fields with a separate egress Receipt."
 verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "inverse_command"
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-IMPORT-PARTIAL-IMPORT"
 requirement_id = "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001"
@@ -184,9 +204,13 @@ effect = "Each failed identity executes one typed Retry Failed Items Command aft
 success_focus = "the first affected record or Retry Failed Items result heading in External calendar review — Partial Import"
 failure_focus = "the Retry Failed Items control and first stale, invalid, or failed record in External calendar review — Partial Import"
 commit_boundary = "Mutation: retry commits only failed identities, one atomic record at a time, through Event, Projection, Receipt, History, and replay-safe idempotency."
-rollback_undo = "Before each record commit, cancellation leaves it failed; after commit, the record moves exactly once to completed and any remaining failed IDs stay explicit."
+rollback_undo = "Before each record commit, cancellation leaves it failed; after commit, the import owner recovery handoff preserves completed IDs and exposes only remaining failed IDs."
 privacy_egress = "Review uses minimum necessary stored source facts; selection and preview never alter the source, and any explicit external write sends only approved event fields with a separate egress Receipt."
 verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "owner_recovery_handoff"
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-IMPORT-RECONCILING"
 requirement_id = "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001"
@@ -211,6 +235,9 @@ commit_boundary = "Non-mutating: selection and consequence preview remain before
 rollback_undo = "No Undo is required; cancellation returns to the exact groups, selection, and first reviewed record with local and external data unchanged."
 privacy_egress = "Review uses minimum necessary stored source facts; selection and preview never alter the source, and any explicit external write sends only approved event fields with a separate egress Receipt."
 verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-IMPORT-RESTORED"
 requirement_id = "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001"
@@ -235,12 +262,15 @@ commit_boundary = "Non-mutating: dismissal completes without changing selection,
 rollback_undo = "No Undo is required; reopening Time import restores the durable completed/failed identities, Receipt, and safe recovery route."
 privacy_egress = "Review uses minimum necessary stored source facts; selection and preview never alter the source, and any explicit external write sends only approved event fields with a separate egress Receipt."
 verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-IMPORT-REVIEWING-DIFF"
 requirement_id = "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001"
 activation_posture = "active"
 gate_requirement_ids = []
-transition_exit = "Import Selected => destination: the ordered import result and first failed record or batch Receipt from External calendar review — Reviewing Diff; effect: Each selected identity executes one typed Import Selected Command that validates source identity, source fingerprint, diff revision, and local revision; appends an Event; updates the import, Time, lineage, capacity, and badge Projection; and creates a Receipt and History entry. The batch is a deterministic ordered collection of atomic per-record commits, so partial results occur only between records with explicit completed and failed IDs. No external source is changed. Visible evidence before commit remains: The import differences are visible. No outside or Ambitions item has changed.; focus: the first affected record or Import Selected result heading in External calendar review — Reviewing Diff.\nReview Selected => destination: the first selected record and its complete consequence preview from External calendar review — Reviewing Diff; effect: No durable mutation occurs and no Receipt is created; Review Selected preserves selection while showing native-object, capacity, lineage, badge, notification, and external consequences for each record. Visible evidence remains: The import differences are visible. No outside or Ambitions item has changed.; focus: the first affected record or Review Selected result heading in External calendar review — Reviewing Diff."
+transition_exit = "Import Selected => destination: the ordered import result and first failed record or batch Receipt from External calendar review — Reviewing Diff; effect: Each selected identity executes one typed Import Selected Command that validates source identity, source fingerprint, diff revision, and local revision; appends an Event; updates the import, Time, lineage, capacity, and badge Projection; and creates a Receipt and History entry. The batch is a deterministic ordered collection of atomic per-record commits, so partial results occur only between records with explicit completed and failed IDs. No external source is changed. Visible evidence before commit remains: The import differences are visible. No outside or Ambitions item has changed.; focus: the first affected record or Import Selected result heading in External calendar review — Reviewing Diff.\nReview Selected => destination: the first selected record and its complete consequence preview from External calendar review — Reviewing Diff; effect: No durable mutation occurs and no Receipt is created; Review Selected preserves selection while showing native-object, capacity, lineage, badge, notification, and external consequences for each record. Visible evidence remains: The import differences are visible. No outside or Ambitions item has changed.; focus: the first affected record or Review Selected result heading in External calendar review — Reviewing Diff.\nClear Selection => destination: the same grouped import diff with no records selected; effect: No durable mutation occurs and no Receipt is created; selection clears without changing source or native objects; focus: the changed selection and its first consequence.\nEdit before import => destination: the bounded local pre-import editor for the selected record; effect: No durable mutation occurs and no Receipt is created; a local review draft opens without changing the external source or canonical objects; focus: the first editable field and conflict consequence.\nEdit notification rules => destination: the owning notification-rule editor with the selected import consequence preview; effect: No durable mutation occurs and no Receipt is created; the import remains uncommitted while notification ownership is reviewed by the owning notification-rule system; focus: the notification-rule heading and selected import consequence.\nIgnore => destination: the reviewed diff with the conflict outcome recorded; effect: The typed Ignore command appends one Event, updates the owning Projection, records a Receipt, and preserves History; the selected conflict is excluded from this import decision without changing its external source; focus: the committed record result or first failed identity.\nIgnore for planning => destination: the reviewed diff with planning exclusion recorded; effect: The typed Ignore for planning command appends one Event, updates the owning Projection, records a Receipt, and preserves History; the selected source record remains external and stops contributing planning capacity under the reviewed outcome; focus: the committed record result or first failed identity.\nImport and reflow => destination: the native import result and reviewed reflow consequence; effect: The typed Import and reflow command appends one Event, updates the owning Projection, records a Receipt, and preserves History; one native object and its atomic schedule change set are created from the reviewed record; focus: the committed record result or first failed identity.\nImport into Ambitions => destination: the native import result for the selected external record; effect: The typed Import into Ambitions command appends one Event, updates the owning Projection, records a Receipt, and preserves History; one native object is created with source lineage and the external source remains unchanged; focus: the committed record result or first failed identity.\nImport with Ambitions notifications => destination: the native import result with Ambitions-owned notification policy; effect: The typed Import with Ambitions notifications command appends one Event, updates the owning Projection, records a Receipt, and preserves History; one native object is created and its separately owned local notification rule is linked; focus: the committed record result or first failed identity.\nImport without Ambitions notifications => destination: the native import result without an Ambitions notification rule; effect: The typed Import without Ambitions notifications command appends one Event, updates the owning Projection, records a Receipt, and preserves History; one native object is created while Ambitions does not own the alert; focus: the committed record result or first failed identity.\nImport without reflow => destination: the native import result with the reviewed schedule unchanged; effect: The typed Import without reflow command appends one Event, updates the owning Projection, records a Receipt, and preserves History; one native object is created without applying a schedule reflow; focus: the committed record result or first failed identity.\nKeep external => destination: the reviewed diff with source ownership retained; effect: The typed Keep external command appends one Event, updates the owning Projection, records a Receipt, and preserves History; the record and alert ownership remain external and no native object is created; focus: the committed record result or first failed identity.\nKeep external but reserve time => destination: the reviewed capacity result for the external record; effect: The typed Keep external but reserve time command appends one Event, updates the owning Projection, records a Receipt, and preserves History; one local capacity reservation is created without importing or editing the external record; focus: the committed record result or first failed identity.\nLink => destination: the linked-source result for the selected record; effect: The typed Link command appends one Event, updates the owning Projection, records a Receipt, and preserves History; one local source reference is linked without taking ownership of the external record; focus: the committed record result or first failed identity.\nReject permanently => destination: the reviewed diff with permanent rejection recorded; effect: The typed Reject permanently command appends one Event, updates the owning Projection, records a Receipt, and preserves History; the exact source identity is rejected from future import proposals without deleting its external record; focus: the committed record result or first failed identity.\nReplace => destination: the replacement preview and native result for the selected record; effect: The typed Replace command appends one Event, updates the owning Projection, records a Receipt, and preserves History; the reviewed native owner is replaced atomically while lineage and prior History remain inspectable; focus: the committed record result or first failed identity.\nSelect All in Group => destination: the same grouped import diff with every eligible record in the group selected; effect: No durable mutation occurs and no Receipt is created; eligible group selection changes only the local review draft; focus: the changed selection and its first consequence.\nSelect Item => destination: the same grouped import diff with the named record selected; effect: No durable mutation occurs and no Receipt is created; record selection changes only the local review draft; focus: the changed selection and its first consequence."
 durable_effect = "Exact import consequences across reviewed groups [Needs attention; Safe to import; Duplicate or link candidates; Removed source; Ignored history]: Import Selected: Each selected identity executes one typed Import Selected Command that validates source identity, source fingerprint, diff revision, and local revision; appends an Event; updates the import, Time, lineage, capacity, and badge Projection; and creates a Receipt and History entry. The batch is a deterministic ordered collection of atomic per-record commits, so partial results occur only between records with explicit completed and failed IDs. No external source is changed. Visible evidence before commit remains: The import differences are visible. No outside or Ambitions item has changed. | Review Selected: No durable mutation occurs and no Receipt is created; Review Selected preserves selection while showing native-object, capacity, lineage, badge, notification, and external consequences for each record. Visible evidence remains: The import differences are visible. No outside or Ambitions item has changed. Outcomes preserve native-object, capacity, lineage, badge, notification, and external effects separately. Current visible status: The import differences are visible. No outside or Ambitions item has changed."
 recovery_rollback = "Exact atomic partial, failed-ID retry, semantic Undo, and external-write recovery: Import Selected: Before the first record commit, cancellation changes nothing; after any record commits, completed and failed IDs stay explicit and recovery never rolls back a completed identity implicitly. | Review Selected: No Undo is required; cancellation returns to the exact groups, selection, and first reviewed record with local and external data unchanged. Completed and failed identities remain explicit, and a changed source fingerprint invalidates confirmation. Recovery preserves: The import differences are visible. No outside or Ambitions item has changed."
 offline_behavior = "Stored Import/Diff Records, exact groups, selection, reviewed outcomes, lineage, completed/failed IDs, Receipts, and recovery remain usable offline. New source reads and external writes wait without changing accepted local truth. Offline evidence remains: The import differences are visible. No outside or Ambitions item has changed."
@@ -259,6 +289,9 @@ commit_boundary = "Mutation: each selected record commits independently through 
 rollback_undo = "Before the first record commit, cancellation changes nothing; after any record commits, completed and failed IDs stay explicit and recovery never rolls back a completed identity implicitly."
 privacy_egress = "Review uses minimum necessary stored source facts; selection and preview never alter the source, and any explicit external write sends only approved event fields with a separate egress Receipt."
 verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "owner_recovery_handoff"
 
 [[state_command_contracts.commands]]
 command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-002"
@@ -273,6 +306,293 @@ commit_boundary = "Non-mutating: selection and consequence preview remain before
 rollback_undo = "No Undo is required; cancellation returns to the exact groups, selection, and first reviewed record with local and external data unchanged."
 privacy_egress = "Review uses minimum necessary stored source facts; selection and preview never alter the source, and any explicit external write sends only approved event fields with a separate egress Receipt."
 verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-003"
+label = "Clear Selection"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["The confirmed source identity, source fingerprint, diff revision, and local revision remain valid", "The target group and record identities remain present in the reviewed diff"]
+destination = "the same grouped import diff with no records selected"
+effect = "No durable mutation occurs and no Receipt is created; selection clears without changing source or native objects"
+success_focus = "the changed selection and its first consequence"
+failure_focus = "the Clear Selection control and exact stale record or group"
+commit_boundary = "Non-mutating: the command routes or selects without changing canonical state."
+rollback_undo = "No Undo is required; cancellation returns to the unchanged originating state."
+privacy_egress = "Selection remains local; the external calendar receives no write or private Ambitions context."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-004"
+label = "Edit before import"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["The confirmed source identity, source fingerprint, diff revision, and local revision remain valid", "The selected conflict record permits a local pre-import draft", "The target group and record identities remain present in the reviewed diff"]
+destination = "the bounded local pre-import editor for the selected record"
+effect = "No durable mutation occurs and no Receipt is created; a local review draft opens without changing the external source or canonical objects"
+success_focus = "the first editable field and conflict consequence"
+failure_focus = "the Edit before import control and exact invalid field"
+commit_boundary = "Non-mutating: the command routes or selects without changing canonical state."
+rollback_undo = "No Undo is required; cancellation returns to the unchanged originating state."
+privacy_egress = "The draft remains local and does not write to the external calendar."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-005"
+label = "Edit notification rules"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["The confirmed source identity, source fingerprint, diff revision, and local revision remain valid", "The selected record has an alert handoff requiring explicit notification ownership", "The target group and record identities remain present in the reviewed diff"]
+destination = "the owning notification-rule editor with the selected import consequence preview"
+effect = "No durable mutation occurs and no Receipt is created; the import remains uncommitted while notification ownership is reviewed by the owning notification-rule system"
+success_focus = "the notification-rule heading and selected import consequence"
+failure_focus = "the Edit notification rules control and unresolved alert ownership"
+commit_boundary = "Non-mutating: the command routes or selects without changing canonical state."
+rollback_undo = "No Undo is required; cancellation returns to the unchanged originating state."
+privacy_egress = "No calendar or notification write occurs from the import review."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-006"
+label = "Ignore"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["Any changed source fingerprint invalidates confirmation before commit", "The confirmed source identity, source fingerprint, diff revision, and local revision remain valid", "The exact reviewed outcome is valid for the selected record class", "The target group and record identities remain present in the reviewed diff"]
+destination = "the reviewed diff with the conflict outcome recorded"
+effect = "The typed Ignore command appends one Event, updates the owning Projection, records a Receipt, and preserves History; the selected conflict is excluded from this import decision without changing its external source"
+success_focus = "the committed record result or first failed identity"
+failure_focus = "the Ignore control and exact stale fingerprint, revision, or outcome"
+commit_boundary = "Mutation: the exact current revision validates before one typed command commits atomically."
+rollback_undo = "The import owner recovery handoff opens a separately authorized correction command; cancellation before commit changes nothing and History preserves the decision."
+privacy_egress = "Only separately confirmed calendar effects may reach EventKit; private graph context never leaves Ambitions."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "owner_recovery_handoff"
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-007"
+label = "Ignore for planning"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["Any changed source fingerprint invalidates confirmation before commit", "The confirmed source identity, source fingerprint, diff revision, and local revision remain valid", "The exact reviewed outcome is valid for the selected record class", "The target group and record identities remain present in the reviewed diff"]
+destination = "the reviewed diff with planning exclusion recorded"
+effect = "The typed Ignore for planning command appends one Event, updates the owning Projection, records a Receipt, and preserves History; the selected source record remains external and stops contributing planning capacity under the reviewed outcome"
+success_focus = "the committed record result or first failed identity"
+failure_focus = "the Ignore for planning control and exact stale fingerprint, revision, or outcome"
+commit_boundary = "Mutation: the exact current revision validates before one typed command commits atomically."
+rollback_undo = "The import owner recovery handoff opens a separately authorized correction command; cancellation before commit changes nothing and History preserves the decision."
+privacy_egress = "Only separately confirmed calendar effects may reach EventKit; private graph context never leaves Ambitions."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "owner_recovery_handoff"
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-008"
+label = "Import and reflow"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["Any changed source fingerprint invalidates confirmation before commit", "The confirmed source identity, source fingerprint, diff revision, and local revision remain valid", "The exact reviewed outcome is valid for the selected record class", "The target group and record identities remain present in the reviewed diff"]
+destination = "the native import result and reviewed reflow consequence"
+effect = "The typed Import and reflow command appends one Event, updates the owning Projection, records a Receipt, and preserves History; one native object and its atomic schedule change set are created from the reviewed record"
+success_focus = "the committed record result or first failed identity"
+failure_focus = "the Import and reflow control and exact stale fingerprint, revision, or outcome"
+commit_boundary = "Mutation: the exact current revision validates before one typed command commits atomically."
+rollback_undo = "Undo Imported Items or the owning typed inverse command reverses the safe local effect while preserving source lineage and History."
+privacy_egress = "Only separately confirmed calendar effects may reach EventKit; private graph context never leaves Ambitions."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "inverse_command"
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-009"
+label = "Import into Ambitions"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["Any changed source fingerprint invalidates confirmation before commit", "The confirmed source identity, source fingerprint, diff revision, and local revision remain valid", "The exact reviewed outcome is valid for the selected record class", "The target group and record identities remain present in the reviewed diff"]
+destination = "the native import result for the selected external record"
+effect = "The typed Import into Ambitions command appends one Event, updates the owning Projection, records a Receipt, and preserves History; one native object is created with source lineage and the external source remains unchanged"
+success_focus = "the committed record result or first failed identity"
+failure_focus = "the Import into Ambitions control and exact stale fingerprint, revision, or outcome"
+commit_boundary = "Mutation: the exact current revision validates before one typed command commits atomically."
+rollback_undo = "Undo Imported Items or the owning typed inverse command reverses the safe local effect while preserving source lineage and History."
+privacy_egress = "Only separately confirmed calendar effects may reach EventKit; private graph context never leaves Ambitions."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "inverse_command"
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-010"
+label = "Import with Ambitions notifications"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["Any changed source fingerprint invalidates confirmation before commit", "The confirmed source identity, source fingerprint, diff revision, and local revision remain valid", "The exact reviewed outcome is valid for the selected record class", "The target group and record identities remain present in the reviewed diff"]
+destination = "the native import result with Ambitions-owned notification policy"
+effect = "The typed Import with Ambitions notifications command appends one Event, updates the owning Projection, records a Receipt, and preserves History; one native object is created and its separately owned local notification rule is linked"
+success_focus = "the committed record result or first failed identity"
+failure_focus = "the Import with Ambitions notifications control and exact stale fingerprint, revision, or outcome"
+commit_boundary = "Mutation: the exact current revision validates before one typed command commits atomically."
+rollback_undo = "Undo Imported Items or the owning typed inverse command reverses the safe local effect while preserving source lineage and History."
+privacy_egress = "Only separately confirmed calendar effects may reach EventKit; private graph context never leaves Ambitions."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "inverse_command"
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-011"
+label = "Import without Ambitions notifications"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["Any changed source fingerprint invalidates confirmation before commit", "The confirmed source identity, source fingerprint, diff revision, and local revision remain valid", "The exact reviewed outcome is valid for the selected record class", "The target group and record identities remain present in the reviewed diff"]
+destination = "the native import result without an Ambitions notification rule"
+effect = "The typed Import without Ambitions notifications command appends one Event, updates the owning Projection, records a Receipt, and preserves History; one native object is created while Ambitions does not own the alert"
+success_focus = "the committed record result or first failed identity"
+failure_focus = "the Import without Ambitions notifications control and exact stale fingerprint, revision, or outcome"
+commit_boundary = "Mutation: the exact current revision validates before one typed command commits atomically."
+rollback_undo = "Undo Imported Items or the owning typed inverse command reverses the safe local effect while preserving source lineage and History."
+privacy_egress = "Only separately confirmed calendar effects may reach EventKit; private graph context never leaves Ambitions."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "inverse_command"
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-012"
+label = "Import without reflow"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["Any changed source fingerprint invalidates confirmation before commit", "The confirmed source identity, source fingerprint, diff revision, and local revision remain valid", "The exact reviewed outcome is valid for the selected record class", "The target group and record identities remain present in the reviewed diff"]
+destination = "the native import result with the reviewed schedule unchanged"
+effect = "The typed Import without reflow command appends one Event, updates the owning Projection, records a Receipt, and preserves History; one native object is created without applying a schedule reflow"
+success_focus = "the committed record result or first failed identity"
+failure_focus = "the Import without reflow control and exact stale fingerprint, revision, or outcome"
+commit_boundary = "Mutation: the exact current revision validates before one typed command commits atomically."
+rollback_undo = "Undo Imported Items or the owning typed inverse command reverses the safe local effect while preserving source lineage and History."
+privacy_egress = "Only separately confirmed calendar effects may reach EventKit; private graph context never leaves Ambitions."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "inverse_command"
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-013"
+label = "Keep external"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["Any changed source fingerprint invalidates confirmation before commit", "The confirmed source identity, source fingerprint, diff revision, and local revision remain valid", "The exact reviewed outcome is valid for the selected record class", "The target group and record identities remain present in the reviewed diff"]
+destination = "the reviewed diff with source ownership retained"
+effect = "The typed Keep external command appends one Event, updates the owning Projection, records a Receipt, and preserves History; the record and alert ownership remain external and no native object is created"
+success_focus = "the committed record result or first failed identity"
+failure_focus = "the Keep external control and exact stale fingerprint, revision, or outcome"
+commit_boundary = "Mutation: the exact current revision validates before one typed command commits atomically."
+rollback_undo = "The import owner recovery handoff opens a separately authorized correction command; cancellation before commit changes nothing and History preserves the decision."
+privacy_egress = "Only separately confirmed calendar effects may reach EventKit; private graph context never leaves Ambitions."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "owner_recovery_handoff"
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-014"
+label = "Keep external but reserve time"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["Any changed source fingerprint invalidates confirmation before commit", "The confirmed source identity, source fingerprint, diff revision, and local revision remain valid", "The exact reviewed outcome is valid for the selected record class", "The target group and record identities remain present in the reviewed diff"]
+destination = "the reviewed capacity result for the external record"
+effect = "The typed Keep external but reserve time command appends one Event, updates the owning Projection, records a Receipt, and preserves History; one local capacity reservation is created without importing or editing the external record"
+success_focus = "the committed record result or first failed identity"
+failure_focus = "the Keep external but reserve time control and exact stale fingerprint, revision, or outcome"
+commit_boundary = "Mutation: the exact current revision validates before one typed command commits atomically."
+rollback_undo = "Undo Imported Items or the owning typed inverse command reverses the safe local effect while preserving source lineage and History."
+privacy_egress = "Only separately confirmed calendar effects may reach EventKit; private graph context never leaves Ambitions."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "inverse_command"
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-015"
+label = "Link"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["Any changed source fingerprint invalidates confirmation before commit", "The confirmed source identity, source fingerprint, diff revision, and local revision remain valid", "The exact reviewed outcome is valid for the selected record class", "The target group and record identities remain present in the reviewed diff"]
+destination = "the linked-source result for the selected record"
+effect = "The typed Link command appends one Event, updates the owning Projection, records a Receipt, and preserves History; one local source reference is linked without taking ownership of the external record"
+success_focus = "the committed record result or first failed identity"
+failure_focus = "the Link control and exact stale fingerprint, revision, or outcome"
+commit_boundary = "Mutation: the exact current revision validates before one typed command commits atomically."
+rollback_undo = "Undo Imported Items or the owning typed inverse command reverses the safe local effect while preserving source lineage and History."
+privacy_egress = "Only separately confirmed calendar effects may reach EventKit; private graph context never leaves Ambitions."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "inverse_command"
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-016"
+label = "Reject permanently"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["Any changed source fingerprint invalidates confirmation before commit", "The confirmed source identity, source fingerprint, diff revision, and local revision remain valid", "The exact reviewed outcome is valid for the selected record class", "The target group and record identities remain present in the reviewed diff"]
+destination = "the reviewed diff with permanent rejection recorded"
+effect = "The typed Reject permanently command appends one Event, updates the owning Projection, records a Receipt, and preserves History; the exact source identity is rejected from future import proposals without deleting its external record"
+success_focus = "the committed record result or first failed identity"
+failure_focus = "the Reject permanently control and exact stale fingerprint, revision, or outcome"
+commit_boundary = "Mutation: the exact current revision validates before one typed command commits atomically."
+rollback_undo = "The import owner recovery handoff opens a separately authorized correction command; cancellation before commit changes nothing and History preserves the decision."
+privacy_egress = "Only separately confirmed calendar effects may reach EventKit; private graph context never leaves Ambitions."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "owner_recovery_handoff"
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-017"
+label = "Replace"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["Any changed source fingerprint invalidates confirmation before commit", "The confirmed source identity, source fingerprint, diff revision, and local revision remain valid", "The exact reviewed outcome is valid for the selected record class", "The target group and record identities remain present in the reviewed diff"]
+destination = "the replacement preview and native result for the selected record"
+effect = "The typed Replace command appends one Event, updates the owning Projection, records a Receipt, and preserves History; the reviewed native owner is replaced atomically while lineage and prior History remain inspectable"
+success_focus = "the committed record result or first failed identity"
+failure_focus = "the Replace control and exact stale fingerprint, revision, or outcome"
+commit_boundary = "Mutation: the exact current revision validates before one typed command commits atomically."
+rollback_undo = "Undo Imported Items or the owning typed inverse command reverses the safe local effect while preserving source lineage and History."
+privacy_egress = "Only separately confirmed calendar effects may reach EventKit; private graph context never leaves Ambitions."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "inverse_command"
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-018"
+label = "Select All in Group"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["The confirmed source identity, source fingerprint, diff revision, and local revision remain valid", "The target group and record identities remain present in the reviewed diff"]
+destination = "the same grouped import diff with every eligible record in the group selected"
+effect = "No durable mutation occurs and no Receipt is created; eligible group selection changes only the local review draft"
+success_focus = "the changed selection and its first consequence"
+failure_focus = "the Select All in Group control and exact stale record or group"
+commit_boundary = "Non-mutating: the command routes or selects without changing canonical state."
+rollback_undo = "No Undo is required; cancellation returns to the unchanged originating state."
+privacy_egress = "Selection remains local; the external calendar receives no write or private Ambitions context."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-019"
+label = "Select Item"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["The confirmed source identity, source fingerprint, diff revision, and local revision remain valid", "The target group and record identities remain present in the reviewed diff"]
+destination = "the same grouped import diff with the named record selected"
+effect = "No durable mutation occurs and no Receipt is created; record selection changes only the local review draft"
+success_focus = "the changed selection and its first consequence"
+failure_focus = "the Select Item control and exact stale record or group"
+commit_boundary = "Non-mutating: the command routes or selects without changing canonical state."
+rollback_undo = "No Undo is required; cancellation returns to the unchanged originating state."
+privacy_egress = "Selection remains local; the external calendar receives no write or private Ambitions context."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 +++
 
 # External Calendar Import

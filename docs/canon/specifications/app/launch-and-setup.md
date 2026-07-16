@@ -59,6 +59,9 @@ commit_boundary = "Non-mutating: navigation, inspection, selection, retry previe
 rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
 privacy_egress = "The operation remains local and sends no private life graph content off device."
 verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-ACCOUNT-BOUNDARY-CONTINUITY-CONFLICTED"
 requirement_id = "APP-ACCOUNT-COMMAND-CONTRACT-001"
@@ -83,6 +86,9 @@ commit_boundary = "Non-mutating: navigation, inspection, selection, retry previe
 rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
 privacy_egress = "The operation remains local and sends no private life graph content off device."
 verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-ACCOUNT-BOUNDARY-CONTINUITY-DISABLED"
 requirement_id = "APP-ACCOUNT-COMMAND-CONTRACT-001"
@@ -107,6 +113,9 @@ commit_boundary = "Non-mutating: navigation, inspection, selection, retry previe
 rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
 privacy_egress = "The operation remains local and sends no private life graph content off device."
 verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-ACCOUNT-BOUNDARY-LOCAL-ONLY"
 requirement_id = "APP-ACCOUNT-COMMAND-CONTRACT-001"
@@ -131,6 +140,9 @@ commit_boundary = "Non-mutating: navigation, inspection, selection, retry previe
 rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
 privacy_egress = "The operation remains local and sends no private life graph content off device."
 verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-ACCOUNT-SIGN-IN-APPLE-IN-PROGRESS"
 requirement_id = "APP-ACCOUNT-COMMAND-CONTRACT-001"
@@ -155,6 +167,9 @@ commit_boundary = "Non-mutating: navigation, inspection, selection, retry previe
 rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
 privacy_egress = "The operation remains local and sends no private life graph content off device."
 verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-ACCOUNT-SIGN-IN-CANCELLED"
 requirement_id = "APP-ACCOUNT-COMMAND-CONTRACT-001"
@@ -179,6 +194,9 @@ commit_boundary = "External-result: provider or system work completes outside th
 rollback_undo = "Cancellation or rejection preserves the last confirmed local state; retry cannot replay an accepted local Event or duplicate provider identity."
 privacy_egress = "Provider egress is limited to minimum identity and authentication fields; the private life graph never leaves the device."
 verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-ACCOUNT-SIGN-IN-FAILED"
 requirement_id = "APP-ACCOUNT-COMMAND-CONTRACT-001"
@@ -203,6 +221,9 @@ commit_boundary = "External-result: provider or system work completes outside th
 rollback_undo = "Cancellation or rejection preserves the last confirmed local state; retry cannot replay an accepted local Event or duplicate provider identity."
 privacy_egress = "Provider egress is limited to minimum identity and authentication fields; the private life graph never leaves the device."
 verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-ACCOUNT-SIGN-IN-GOOGLE-IN-PROGRESS"
 requirement_id = "APP-ACCOUNT-COMMAND-CONTRACT-001"
@@ -227,6 +248,9 @@ commit_boundary = "Non-mutating: navigation, inspection, selection, retry previe
 rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
 privacy_egress = "The operation remains local and sends no private life graph content off device."
 verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-ACCOUNT-SIGN-IN-PROVIDER-CHOICE"
 requirement_id = "APP-ACCOUNT-COMMAND-CONTRACT-001"
@@ -251,6 +275,8 @@ commit_boundary = "External-result: provider or system work completes outside th
 rollback_undo = "Cancellation or rejection preserves the last confirmed local state; retry cannot replay an accepted local Event or duplicate provider identity."
 privacy_egress = "Provider egress is limited to minimum identity and authentication fields; the private life graph never leaves the device."
 verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-ACCOUNT-SIGN-IN-PROVIDER-CHOICE-002"
@@ -265,6 +291,9 @@ commit_boundary = "External-result: provider or system work completes outside th
 rollback_undo = "Cancellation or rejection preserves the last confirmed local state; retry cannot replay an accepted local Event or duplicate provider identity."
 privacy_egress = "Provider egress is limited to minimum identity and authentication fields; the private life graph never leaves the device."
 verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-ACCOUNT-SIGN-IN-SIGNED-IN"
 requirement_id = "APP-ACCOUNT-COMMAND-CONTRACT-001"
@@ -289,6 +318,9 @@ commit_boundary = "Non-mutating: navigation, inspection, selection, retry previe
 rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
 privacy_egress = "The operation remains local and sends no private life graph content off device."
 verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-ACCOUNT-STATUS-CONTINUITY-DISABLED"
 requirement_id = "APP-ACCOUNT-COMMAND-CONTRACT-001"
@@ -313,6 +345,9 @@ commit_boundary = "Non-mutating: navigation, inspection, selection, retry previe
 rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
 privacy_egress = "The operation remains local and sends no private life graph content off device."
 verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-ACCOUNT-STATUS-SIGNED-IN"
 requirement_id = "APP-ACCOUNT-COMMAND-CONTRACT-001"
@@ -337,6 +372,10 @@ commit_boundary = "Mutation: the typed Command commits only after current-revisi
 rollback_undo = "Before commit, cancellation changes nothing; after commit, account recovery uses a separately authorized typed command and Receipt, while sign-out never deletes local data."
 privacy_egress = "The operation remains local and sends no private life graph content off device."
 verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "owner_recovery_handoff"
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-ACCOUNT-STATUS-SIGNED-OUT"
 requirement_id = "APP-ACCOUNT-COMMAND-CONTRACT-001"
@@ -361,6 +400,9 @@ commit_boundary = "Non-mutating: navigation, inspection, selection, retry previe
 rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
 privacy_egress = "The operation remains local and sends no private life graph content off device."
 verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-APP-LAUNCH-GATE-CHECKING-LOCAL-READINESS"
 requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
@@ -385,6 +427,9 @@ commit_boundary = "Non-mutating: navigation, inspection, selection, retry previe
 rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
 privacy_egress = "The operation remains local and sends no private life graph content off device."
 verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-APP-LAUNCH-GATE-QUARANTINED"
 requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
@@ -409,6 +454,9 @@ commit_boundary = "Non-mutating: navigation, inspection, selection, retry previe
 rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
 privacy_egress = "The operation remains local and sends no private life graph content off device."
 verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-APP-LAUNCH-GATE-READY"
 requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
@@ -433,6 +481,9 @@ commit_boundary = "Non-mutating: navigation, inspection, selection, retry previe
 rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
 privacy_egress = "The operation remains local and sends no private life graph content off device."
 verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-APP-LAUNCH-GATE-REPAIR-REQUIRED"
 requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
@@ -457,6 +508,9 @@ commit_boundary = "Non-mutating: navigation, inspection, selection, retry previe
 rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
 privacy_egress = "The operation remains local and sends no private life graph content off device."
 verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-APP-LAUNCH-GATE-RETRYABLE-DELAY"
 requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
@@ -481,6 +535,9 @@ commit_boundary = "Non-mutating: navigation, inspection, selection, retry previe
 rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
 privacy_egress = "The operation remains local and sends no private life graph content off device."
 verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-APP-LAUNCH-GATE-STOP-SHIP-DATA-RISK"
 requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
@@ -505,12 +562,15 @@ commit_boundary = "External-result: provider or system work completes outside th
 rollback_undo = "Cancellation or rejection preserves the last confirmed local state; retry cannot replay an accepted local Event or duplicate provider identity."
 privacy_egress = "The operation remains local and sends no private life graph content off device."
 verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SETUP-FIRST-USE-IN-PROGRESS"
 requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
 activation_posture = "active"
 gate_requirement_ids = []
-transition_exit = "Continue => destination: the next incomplete setup chapter from Progressive first use — In Progress; effect: No durable mutation occurs and no Receipt is created; Continue changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Setup is in progress; completed local choices remain saved if the user leaves.; focus: the In Progress result heading in Progressive first use."
+transition_exit = "Continue => destination: the next incomplete setup chapter from Progressive first use — In Progress; effect: No durable mutation occurs and no Receipt is created; Continue changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Setup is in progress; completed local choices remain saved if the user leaves.; focus: the In Progress result heading in Progressive first use.\nBack => destination: the prior canonical setup chapter and its first relevant field; effect: No durable mutation occurs and no Receipt is created; Back changes only navigation and preserves every accepted answer and checkpoint; focus: the prior chapter heading and first unanswered or invalid field.\nSkip Setup for Now => destination: the local core with setup marked revisitable; effect: The typed Skip Setup for Now command appends one Event, updates the owning Projection, records a Receipt, and preserves History; only the resumable setup checkpoint is marked skipped-for-now and accepted answers remain intact; focus: the local core heading and unobtrusive Resume Setup route.\nSkip This Chapter => destination: the next canonical setup chapter or sufficient-for-local-use result; effect: The typed Skip This Chapter command appends one Event, updates the owning Projection, records a Receipt, and preserves History; only the current chapter skip marker is recorded and every accepted answer remains revisitable; focus: the next chapter heading or sufficient-for-local-use result.\nSkip This Question => destination: the next canonical setup question or chapter; effect: The typed Skip This Question command appends one Event, updates the owning Projection, records a Receipt, and preserves History; only the current question skip marker is recorded and no answer is inferred; focus: the next question or chapter heading."
 durable_effect = "Exact state consequences: Continue: No durable mutation occurs and no Receipt is created; Continue changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Setup is in progress; completed local choices remain saved if the user leaves. Current visible status: Setup is in progress; completed local choices remain saved if the user leaves."
 recovery_rollback = "Exact recovery and rollback: Continue: No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged. Recovery preserves this user-visible evidence: Setup is in progress; completed local choices remain saved if the user leaves."
 offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: Setup is in progress; completed local choices remain saved if the user leaves."
@@ -529,6 +589,76 @@ commit_boundary = "Non-mutating: navigation, inspection, selection, retry previe
 rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
 privacy_egress = "The operation remains local and sends no private life graph content off device."
 verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-SETUP-FIRST-USE-IN-PROGRESS-002"
+label = "Back"
+canonical_owner = "app.launch-setup.command-contract"
+preconditions = ["A prior canonical setup chapter exists", "Accepted answers and the current checkpoint revision remain available"]
+destination = "the prior canonical setup chapter and its first relevant field"
+effect = "No durable mutation occurs and no Receipt is created; Back changes only navigation and preserves every accepted answer and checkpoint"
+success_focus = "the prior chapter heading and first unanswered or invalid field"
+failure_focus = "the Back control and unchanged current chapter"
+commit_boundary = "Non-mutating: the command routes or selects without changing canonical state."
+rollback_undo = "No Undo is required; cancellation returns to the unchanged originating state."
+privacy_egress = "No egress occurs; private object content, History, Proof, and Receipts remain local."
+verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-SETUP-FIRST-USE-IN-PROGRESS-003"
+label = "Skip Setup for Now"
+canonical_owner = "app.launch-setup.command-contract"
+preconditions = ["Local core readiness does not require completing setup", "The command cannot clear or fabricate an accepted answer", "The current setup checkpoint revision is valid"]
+destination = "the local core with setup marked revisitable"
+effect = "The typed Skip Setup for Now command appends one Event, updates the owning Projection, records a Receipt, and preserves History; only the resumable setup checkpoint is marked skipped-for-now and accepted answers remain intact"
+success_focus = "the local core heading and unobtrusive Resume Setup route"
+failure_focus = "the Skip Setup for Now control and exact checkpoint reason"
+commit_boundary = "Mutation: the exact current revision validates before one typed command commits atomically."
+rollback_undo = "Resume Setup is the typed inverse command and reopens the preserved checkpoint without rewriting History."
+privacy_egress = "No egress occurs; private object content, History, Proof, and Receipts remain local."
+verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "checkpoint_restore"
+
+[[state_command_contracts.commands]]
+command_id = "CMD-SETUP-FIRST-USE-IN-PROGRESS-004"
+label = "Skip This Chapter"
+canonical_owner = "app.launch-setup.command-contract"
+preconditions = ["The command cannot clear or fabricate any accepted answer", "The current chapter identity and checkpoint revision are valid", "The next canonical chapter exists or setup can become sufficient for local use"]
+destination = "the next canonical setup chapter or sufficient-for-local-use result"
+effect = "The typed Skip This Chapter command appends one Event, updates the owning Projection, records a Receipt, and preserves History; only the current chapter skip marker is recorded and every accepted answer remains revisitable"
+success_focus = "the next chapter heading or sufficient-for-local-use result"
+failure_focus = "the Skip This Chapter control and exact checkpoint reason"
+commit_boundary = "Mutation: the exact current revision validates before one typed command commits atomically."
+rollback_undo = "Returning to the skipped chapter and accepting an answer is the typed inverse command; History retains both decisions."
+privacy_egress = "No egress occurs; private object content, History, Proof, and Receipts remain local."
+verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "inverse_command"
+
+[[state_command_contracts.commands]]
+command_id = "CMD-SETUP-FIRST-USE-IN-PROGRESS-005"
+label = "Skip This Question"
+canonical_owner = "app.launch-setup.command-contract"
+preconditions = ["The command cannot clear or fabricate an accepted answer", "The current question identity and checkpoint revision are valid", "The next canonical question or chapter is resolved"]
+destination = "the next canonical setup question or chapter"
+effect = "The typed Skip This Question command appends one Event, updates the owning Projection, records a Receipt, and preserves History; only the current question skip marker is recorded and no answer is inferred"
+success_focus = "the next question or chapter heading"
+failure_focus = "the Skip This Question control and exact checkpoint reason"
+commit_boundary = "Mutation: the exact current revision validates before one typed command commits atomically."
+rollback_undo = "Returning to the skipped question and accepting an answer is the typed inverse command; History retains both decisions."
+privacy_egress = "No egress occurs; private object content, History, Proof, and Receipts remain local."
+verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "inverse_command"
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SETUP-FIRST-USE-NOT-STARTED"
 requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
@@ -553,6 +683,9 @@ commit_boundary = "Non-mutating: navigation, inspection, selection, retry previe
 rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
 privacy_egress = "The operation remains local and sends no private life graph content off device."
 verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SETUP-FIRST-USE-REVISITABLE"
 requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
@@ -577,6 +710,9 @@ commit_boundary = "Non-mutating: navigation, inspection, selection, retry previe
 rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
 privacy_egress = "The operation remains local and sends no private life graph content off device."
 verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SETUP-FIRST-USE-SKIPPED"
 requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
@@ -601,6 +737,9 @@ commit_boundary = "Non-mutating: navigation, inspection, selection, retry previe
 rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
 privacy_egress = "The operation remains local and sends no private life graph content off device."
 verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SETUP-FIRST-USE-SUFFICIENT-FOR-LOCAL-USE"
 requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
@@ -625,6 +764,9 @@ commit_boundary = "Non-mutating: navigation, inspection, selection, retry previe
 rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
 privacy_egress = "The operation remains local and sends no private life graph content off device."
 verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SETUP-RESUME-CHECKPOINT-FOUND"
 requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
@@ -649,6 +791,9 @@ commit_boundary = "Non-mutating: navigation, inspection, selection, retry previe
 rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
 privacy_egress = "The operation remains local and sends no private life graph content off device."
 verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SETUP-RESUME-CHECKPOINT-INVALID"
 requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
@@ -673,6 +818,8 @@ commit_boundary = "Non-mutating: navigation, inspection, selection, retry previe
 rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
 privacy_egress = "The operation remains local and sends no private life graph content off device."
 verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-SETUP-RESUME-CHECKPOINT-INVALID-002"
@@ -687,6 +834,9 @@ commit_boundary = "Non-mutating: navigation, inspection, selection, retry previe
 rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
 privacy_egress = "The operation remains local and sends no private life graph content off device."
 verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SETUP-RESUME-RESUMED"
 requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
@@ -711,6 +861,9 @@ commit_boundary = "Non-mutating: navigation, inspection, selection, retry previe
 rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
 privacy_egress = "The operation remains local and sends no private life graph content off device."
 verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SETUP-RESUME-REVALIDATING"
 requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
@@ -735,6 +888,9 @@ commit_boundary = "Non-mutating: navigation, inspection, selection, retry previe
 rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
 privacy_egress = "The operation remains local and sends no private life graph content off device."
 verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SETUP-RESUME-START-OVER"
 requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
@@ -759,6 +915,9 @@ commit_boundary = "Non-mutating: navigation, inspection, selection, retry previe
 rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
 privacy_egress = "The operation remains local and sends no private life graph content off device."
 verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 +++
 
 # Launch and Progressive Setup

@@ -132,7 +132,10 @@ class UXBlueprintWholeRangeRepairTests(unittest.TestCase):
             self.assertTrue(state["behavior_requirement_ids"])
             self.assertEqual(state["specification_gap_ids"], [])
             if state["blueprint_id"] != "UX-STATE-VARIANT-TRUST-INLINE-NO-DISCLOSURE":
-                self.assertTrue(state["allowed_commands"])
+                self.assertTrue(
+                    state["allowed_commands"]
+                    or state["future_gated_commands"]
+                )
         for state in blocked:
             self.assertEqual(state["behavior_authority_evidence"], [])
             self.assertEqual(state["allowed_commands"], [])

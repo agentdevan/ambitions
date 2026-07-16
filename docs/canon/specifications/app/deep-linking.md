@@ -52,6 +52,9 @@ commit_boundary = "Non-mutating: route resolution, retry, fallback, or dismissal
 rollback_undo = "No Undo is required; cancellation preserves the last stable route, local canonical state, and any recoverable Capture input."
 privacy_egress = "Resolution uses only allowlisted source metadata and opaque identifiers; rejected or locked targets disclose no protected identity or content."
 verification_ids = ["SCENARIO-APP-DEEP-LINK-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-PRESENTED"
 requirement_id = "APP-DEEP-LINK-COMMAND-CONTRACT-001"
@@ -76,6 +79,9 @@ commit_boundary = "Non-mutating: route resolution, retry, fallback, or dismissal
 rollback_undo = "No Undo is required; cancellation preserves the last stable route, local canonical state, and any recoverable Capture input."
 privacy_egress = "Resolution uses only allowlisted source metadata and opaque identifiers; rejected or locked targets disclose no protected identity or content."
 verification_ids = ["SCENARIO-APP-DEEP-LINK-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-QUEUED"
 requirement_id = "APP-DEEP-LINK-COMMAND-CONTRACT-001"
@@ -100,6 +106,9 @@ commit_boundary = "Non-mutating: route resolution, retry, fallback, or dismissal
 rollback_undo = "No Undo is required; cancellation preserves the last stable route, local canonical state, and any recoverable Capture input."
 privacy_egress = "Resolution uses only allowlisted source metadata and opaque identifiers; rejected or locked targets disclose no protected identity or content."
 verification_ids = ["SCENARIO-APP-DEEP-LINK-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-RECOVERABLE"
 requirement_id = "APP-DEEP-LINK-COMMAND-CONTRACT-001"
@@ -124,6 +133,8 @@ commit_boundary = "Non-mutating: route resolution, retry, fallback, or dismissal
 rollback_undo = "No Undo is required; cancellation preserves the last stable route, local canonical state, and any recoverable Capture input."
 privacy_egress = "Resolution uses only allowlisted source metadata and opaque identifiers; rejected or locked targets disclose no protected identity or content."
 verification_ids = ["SCENARIO-APP-DEEP-LINK-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-APP-DEEP-LINK-INTAKE-RECOVERABLE-002"
@@ -138,12 +149,15 @@ commit_boundary = "Non-mutating: route resolution, retry, fallback, or dismissal
 rollback_undo = "No Undo is required; cancellation preserves the last stable route, local canonical state, and any recoverable Capture input."
 privacy_egress = "Resolution uses only allowlisted source metadata and opaque identifiers; rejected or locked targets disclose no protected identity or content."
 verification_ids = ["SCENARIO-APP-DEEP-LINK-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-REJECTED"
 requirement_id = "APP-DEEP-LINK-COMMAND-CONTRACT-001"
 activation_posture = "active"
 gate_requirement_ids = []
-transition_exit = "Dismiss => destination: the nearest safe owning context without protected target disclosure from Deep-link intake and resolution — Rejected; effect: No durable mutation occurs and no Receipt is created; Dismiss closes only the route request. It cannot consume, replay, reveal, or mutate the requested target, and recoverable Capture input remains locally preserved. Visible evidence remains: This link could not open safely. No saved information or Capture changed.; focus: the safe destination heading after Rejected."
+transition_exit = "Dismiss => destination: the nearest safe owning context without protected target disclosure from Deep-link intake and resolution — Rejected; effect: No durable mutation occurs and no Receipt is created; Dismiss closes only the route request. It cannot consume, replay, reveal, or mutate the requested target, and recoverable Capture input remains locally preserved. Visible evidence remains: This link could not open safely. No saved information or Capture changed.; focus: the safe destination heading after Rejected.\nUnlock => destination: the native protected-data unlock challenge, then deep-link revalidation; effect: The Unlock external result causes no local canonical mutation; successful authentication only resumes full allowlist, authorization, target, and revision validation; it never commits the requested action; focus: the revalidated owning destination heading or consequence preview.\nUpdate Ambitions => destination: the Apple-managed Ambitions update destination; effect: The Update Ambitions external result causes no local canonical mutation; the handoff reveals no target identity and returning cannot replay or commit the link; focus: the Apple-managed update destination heading."
 durable_effect = "Exact deep-link consequences: Dismiss: No durable mutation occurs and no Receipt is created; Dismiss closes only the route request. It cannot consume, replay, reveal, or mutate the requested target, and recoverable Capture input remains locally preserved. Visible evidence remains: This link could not open safely. No saved information or Capture changed. Current visible status: This link could not open safely. No saved information or Capture changed."
 recovery_rollback = "Exact fallback and replay protection: Dismiss: No Undo is required; cancellation preserves the last stable route, local canonical state, and any recoverable Capture input. Recovery preserves: This link could not open safely. No saved information or Capture changed."
 offline_behavior = "Allowlisted local routes and preserved Capture input remain available offline; network-only destinations wait without changing local truth. Offline evidence remains: This link could not open safely. No saved information or Capture changed."
@@ -162,6 +176,41 @@ commit_boundary = "Non-mutating: route resolution, retry, fallback, or dismissal
 rollback_undo = "No Undo is required; cancellation preserves the last stable route, local canonical state, and any recoverable Capture input."
 privacy_egress = "Resolution uses only allowlisted source metadata and opaque identifiers; rejected or locked targets disclose no protected identity or content."
 verification_ids = ["SCENARIO-APP-DEEP-LINK-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-APP-DEEP-LINK-INTAKE-REJECTED-002"
+label = "Unlock"
+canonical_owner = "app.deep-linking.command-contract"
+preconditions = ["The allowlisted deep-link rejection class is locked-target only", "The protected target identity remains opaque until successful device authentication", "The requested route and object revision will be fully revalidated after authentication"]
+destination = "the native protected-data unlock challenge, then deep-link revalidation"
+effect = "The Unlock external result causes no local canonical mutation; successful authentication only resumes full allowlist, authorization, target, and revision validation; it never commits the requested action"
+success_focus = "the revalidated owning destination heading or consequence preview"
+failure_focus = "the Unlock control and opaque authentication reason"
+commit_boundary = "External-result: the external or protected-system result is revalidated before any separately authorized local command."
+rollback_undo = "No Undo is required; cancellation or external failure preserves the prior verified local state."
+privacy_egress = "Device authentication receives no Ambitions private content or target identity."
+verification_ids = ["SCENARIO-APP-DEEP-LINK-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-APP-DEEP-LINK-INTAKE-REJECTED-003"
+label = "Update Ambitions"
+canonical_owner = "app.deep-linking.command-contract"
+preconditions = ["Returning from the update destination requires cold re-resolution of the link", "The allowlisted deep-link rejection class is stale-or-unsupported-version only", "The update handoff discloses no protected target identity"]
+destination = "the Apple-managed Ambitions update destination"
+effect = "The Update Ambitions external result causes no local canonical mutation; the handoff reveals no target identity and returning cannot replay or commit the link"
+success_focus = "the Apple-managed update destination heading"
+failure_focus = "the Update Ambitions control and safe unsupported-version reason"
+commit_boundary = "External-result: the external or protected-system result is revalidated before any separately authorized local command."
+rollback_undo = "No Undo is required; cancellation or external failure preserves the prior verified local state."
+privacy_egress = "Only the public Ambitions application identity reaches Apple; no private graph data leaves the device."
+verification_ids = ["SCENARIO-APP-DEEP-LINK-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-RESOLVING"
 requirement_id = "APP-DEEP-LINK-COMMAND-CONTRACT-001"
@@ -186,6 +235,9 @@ commit_boundary = "Non-mutating: route resolution, retry, fallback, or dismissal
 rollback_undo = "No Undo is required; cancellation preserves the last stable route, local canonical state, and any recoverable Capture input."
 privacy_egress = "Resolution uses only allowlisted source metadata and opaque identifiers; rejected or locked targets disclose no protected identity or content."
 verification_ids = ["SCENARIO-APP-DEEP-LINK-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 +++
 
 # Deep Linking and External Route Entry

@@ -48,7 +48,7 @@ activation_posture = "active"
 gate_requirement_ids = []
 transition_exit = "Create Backup => destination: the backup verification status and backup Receipt. The handoff starts from Data and Storage explicit state contract / Backup Ready; effect: The typed verified local backup creation command appends an Event, updates the Projection, and creates a Receipt and History; the artifact is created, integrity/schema/restorability are verified, and only then is it designated a recovery point; Data and Storage explicit state contract / Backup Ready reports the outcome from this visible condition: An encrypted backup file is ready with its included scope shown. Saved information in Ambitions is unchanged; focus: the verified backup status and Receipt within Data and Storage explicit state contract / Backup Ready."
 durable_effect = "Exact command consequences: Create Backup: The typed verified local backup creation command appends an Event, updates the Projection, and creates a Receipt and History; the artifact is created, integrity/schema/restorability are verified, and only then is it designated a recovery point. The durable boundary is specific to this visible evidence: An encrypted backup file is ready with its included scope shown. Saved information in Ambitions is unchanged."
-recovery_rollback = "Exact rollback and recovery: Create Backup: Cancellation before recovery-point designation leaves no recovery-point claim; an incomplete artifact is quarantined and the active store remains unchanged. Recovery preserves or restores the interface evidence that says: An encrypted backup file is ready with its included scope shown. Saved information in Ambitions is unchanged."
+recovery_rollback = "Exact rollback and recovery: Create Backup: Cancellation before designation creates no backup authority; an incomplete artifact is quarantined and the active store remains unchanged. After designation, the backup owner recovery handoff exposes a separately authorized artifact-quarantine command while retaining the Receipt and History. Recovery preserves or restores the interface evidence that says: An encrypted backup file is ready with its included scope shown. Saved information in Ambitions is unchanged."
 offline_behavior = "Settings, private data controls, diagnostics, backup, restore, and App Lock remain local/offline; export uses only a user-chosen destination and continuity remains disabled. Offline rendering retains this state evidence: An encrypted backup file is ready with its included scope shown. Saved information in Ambitions is unchanged."
 accessibility_focus = "VoiceOver focus contract: Create Backup announces its consequence, then success focuses the verified backup status and Receipt; rejection focuses the Create Backup control and failed verification reason. The announcement includes this user-facing evidence before focus moves: An encrypted backup file is ready with its included scope shown. Saved information in Ambitions is unchanged."
 
@@ -62,9 +62,11 @@ effect = "The typed verified local backup creation command appends an Event, upd
 success_focus = "the verified backup status and Receipt within Data and Storage explicit state contract / Backup Ready"
 failure_focus = "the Create Backup control and failed verification reason while Data and Storage explicit state contract / Backup Ready remains visible"
 commit_boundary = "Mutation: the typed command commits only after current-revision validation, exact consequence review, and any required explicit confirmation."
-rollback_undo = "Cancellation before recovery-point designation leaves no recovery-point claim; an incomplete artifact is quarantined and the active store remains unchanged."
+rollback_undo = "Cancellation before designation creates no backup authority; an incomplete artifact is quarantined and the active store remains unchanged. After designation, the backup owner recovery handoff exposes a separately authorized artifact-quarantine command while retaining the Receipt and History."
 privacy_egress = "The mutation remains local and sends no private content off device; any external side effect requires a separate minimum-field egress review under SYSTEM-PRIVACY-EGRESS-001."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
+rollback_posture = "owner_recovery_handoff"
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DATA-DIAGNOSTICS-REDACTED"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -134,9 +136,11 @@ effect = "The typed data export command appends an Event, updates the Projection
 success_focus = "the export result and egress Receipt within Data and Storage explicit state contract / Export Preview"
 failure_focus = "the exact export field or confirmation control while Data and Storage explicit state contract / Export Preview remains visible"
 commit_boundary = "Mutation: the typed command commits only after current-revision validation, exact consequence review, and any required explicit confirmation."
-rollback_undo = "Cancellation before successful generation creates no success claim; after success, dismissal cannot erase the artifact result or egress History and export is not a backup."
+rollback_undo = "Cancellation before successful generation creates no success claim; after success, the export owner recovery route retains the artifact result and egress History without treating export as a backup."
 privacy_egress = "Only explicitly selected and redacted fields go to the reviewed destination under SYSTEM-PRIVACY-EGRESS-001; export never authorizes ongoing sync."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
+rollback_posture = "owner_recovery_handoff"
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DATA-EXPORT-PROGRESS"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -158,9 +162,11 @@ effect = "The typed data export command appends an Event, updates the Projection
 success_focus = "the export result and egress Receipt within Data and Storage explicit state contract / Export Progress"
 failure_focus = "the exact export field or confirmation control while Data and Storage explicit state contract / Export Progress remains visible"
 commit_boundary = "Mutation: the typed command commits only after current-revision validation, exact consequence review, and any required explicit confirmation."
-rollback_undo = "Cancellation before successful generation creates no success claim; after success, dismissal cannot erase the artifact result or egress History and export is not a backup."
+rollback_undo = "Cancellation before successful generation creates no success claim; after success, the export owner recovery route retains the artifact result and egress History without treating export as a backup."
 privacy_egress = "Only explicitly selected and redacted fields go to the reviewed destination under SYSTEM-PRIVACY-EGRESS-001; export never authorizes ongoing sync."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
+rollback_posture = "owner_recovery_handoff"
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DATA-PERMANENT-DELETE-IRREVERSIBLE"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -192,7 +198,7 @@ activation_posture = "active"
 gate_requirement_ids = []
 transition_exit = "Delete local data permanently => destination: the surviving You data root and permanent-deletion Receipt. The handoff starts from Data and Storage explicit state contract / Permanent Delete Review; effect: The typed local private data permanent deletion command appends an Event, updates the Projection, and creates a Receipt and History; the explicitly scoped local data is irreversibly removed after preconditions while unrelated account and retained data stay unchanged; Data and Storage explicit state contract / Permanent Delete Review reports the outcome from this visible condition: The exact information marked for permanent deletion is visible. Nothing has been deleted; focus: the surviving data group heading and irreversible result within Data and Storage explicit state contract / Permanent Delete Review."
 durable_effect = "Exact command consequences: Delete local data permanently: The typed local private data permanent deletion command appends an Event, updates the Projection, and creates a Receipt and History; the explicitly scoped local data is irreversibly removed after preconditions while unrelated account and retained data stay unchanged. The durable boundary is specific to this visible evidence: The exact information marked for permanent deletion is visible. Nothing has been deleted."
-recovery_rollback = "Exact rollback and recovery: Delete local data permanently: Cancellation before commit changes nothing; after the irreversible boundary no Undo or Restore is promised, and the Receipt records the exact destroyed scope. Recovery preserves or restores the interface evidence that says: The exact information marked for permanent deletion is visible. Nothing has been deleted."
+recovery_rollback = "Exact rollback and recovery: Delete local data permanently: Cancellation before commit changes nothing; after the confirmed irreversible boundary no Undo or Restore is promised, and the Receipt records the exact destroyed scope. Recovery preserves or restores the interface evidence that says: The exact information marked for permanent deletion is visible. Nothing has been deleted."
 offline_behavior = "Settings, private data controls, diagnostics, backup, restore, and App Lock remain local/offline; export uses only a user-chosen destination and continuity remains disabled. Offline rendering retains this state evidence: The exact information marked for permanent deletion is visible. Nothing has been deleted."
 accessibility_focus = "VoiceOver focus contract: Delete local data permanently announces its consequence, then success focuses the surviving data group heading and irreversible result; rejection focuses the permanent-delete confirmation and unmet precondition. The announcement includes this user-facing evidence before focus moves: The exact information marked for permanent deletion is visible. Nothing has been deleted."
 
@@ -206,9 +212,11 @@ effect = "The typed local private data permanent deletion command appends an Eve
 success_focus = "the surviving data group heading and irreversible result within Data and Storage explicit state contract / Permanent Delete Review"
 failure_focus = "the permanent-delete confirmation and unmet precondition while Data and Storage explicit state contract / Permanent Delete Review remains visible"
 commit_boundary = "Mutation: the typed command commits only after current-revision validation, exact consequence review, and any required explicit confirmation."
-rollback_undo = "Cancellation before commit changes nothing; after the irreversible boundary no Undo or Restore is promised, and the Receipt records the exact destroyed scope."
+rollback_undo = "Cancellation before commit changes nothing; after the confirmed irreversible boundary no Undo or Restore is promised, and the Receipt records the exact destroyed scope."
 privacy_egress = "The mutation remains local and sends no private content off device; any external side effect requires a separate minimum-field egress review under SYSTEM-PRIVACY-EGRESS-001."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
+rollback_posture = "confirmed_irreversible"
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DATA-RESET-REVIEW"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -233,6 +241,8 @@ commit_boundary = "Mutation: the typed command commits only after current-revisi
 rollback_undo = "Cancellation before commit changes nothing; after commit, only the named typed Undo or recovery command may append a reversing Event while History remains intact."
 privacy_egress = "The mutation remains local and sends no private content off device; any external side effect requires a separate minimum-field egress review under SYSTEM-PRIVACY-EGRESS-001."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
+rollback_posture = "inverse_command"
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DATA-RESET-ROLLBACK"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -257,6 +267,8 @@ commit_boundary = "Mutation: the typed command commits only after current-revisi
 rollback_undo = "Cancellation before commit changes nothing; after commit, only the named typed Undo or recovery command may append a reversing Event while History remains intact."
 privacy_egress = "The mutation remains local and sends no private content off device; any external side effect requires a separate minimum-field egress review under SYSTEM-PRIVACY-EGRESS-001."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
+rollback_posture = "inverse_command"
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DATA-RESTORE-REVIEW"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -281,6 +293,8 @@ commit_boundary = "Mutation: the typed command commits only after current-revisi
 rollback_undo = "Failure returns to the last honest store; cancellation before activation changes nothing, and post-activation rollback uses the operation journal without rewriting History."
 privacy_egress = "The mutation remains local and sends no private content off device; any external side effect requires a separate minimum-field egress review under SYSTEM-PRIVACY-EGRESS-001."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
+rollback_posture = "checkpoint_restore"
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DATA-TRASH-EMPTY"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -329,6 +343,8 @@ commit_boundary = "Mutation: the typed command commits only after current-revisi
 rollback_undo = "Cancellation before commit changes nothing; after commit, only the named typed Undo or recovery command may append a reversing Event while History remains intact."
 privacy_egress = "The mutation remains local and sends no private content off device; any external side effect requires a separate minimum-field egress review under SYSTEM-PRIVACY-EGRESS-001."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
+rollback_posture = "inverse_command"
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DATA-TRASH-RESTORE"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -353,6 +369,8 @@ commit_boundary = "Mutation: the typed command commits only after current-revisi
 rollback_undo = "Failure returns to the last honest store; cancellation before activation changes nothing, and post-activation rollback uses the operation journal without rewriting History."
 privacy_egress = "The mutation remains local and sends no private content off device; any external side effect requires a separate minimum-field egress review under SYSTEM-PRIVACY-EGRESS-001."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
+rollback_posture = "checkpoint_restore"
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-ENTITLEMENT-ACTIVE"
 requirement_id = "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"
@@ -377,12 +395,15 @@ commit_boundary = "External-result: Apple subscription management occurs outside
 rollback_undo = "Cancellation or interruption returns to the prior verified status; a later downgrade changes only eligible service access and never local-core data availability."
 privacy_egress = "StoreKit receives only minimum transaction/account fields; Goals, Captures, Time, settings, Proof, History, Receipts, and the private graph never transfer or bind through entitlement controls."
 verification_ids = ["SCENARIO-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-ENTITLEMENT-EXPIRED"
 requirement_id = "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"
 activation_posture = "active"
 gate_requirement_ids = []
-transition_exit = "Restore Purchases => destination: the verified restore result and entitlement status in Entitlement status and recovery — Expired; effect: The Restore Purchases external result causes no local canonical mutation; it validates current signed StoreKit transactions and returns a bounded observation. Any later accepted status persistence is separate, non-sensitive, and Receipt-backed. Restore cannot switch accounts, transfer data, bind the private graph, or restrict the offline core. Visible evidence remains until verified: The plan ended. Private local data is still available.; focus: the verified Restore Purchases result or current status heading in Entitlement status and recovery — Expired."
+transition_exit = "Restore Purchases => destination: the verified restore result and entitlement status in Entitlement status and recovery — Expired; effect: The Restore Purchases external result causes no local canonical mutation; it validates current signed StoreKit transactions and returns a bounded observation. Any later accepted status persistence is separate, non-sensitive, and Receipt-backed. Restore cannot switch accounts, transfer data, bind the private graph, or restrict the offline core. Visible evidence remains until verified: The plan ended. Private local data is still available.; focus: the verified Restore Purchases result or current status heading in Entitlement status and recovery — Expired.\nPurchase => destination: the Apple-owned purchase sheet for the separately registered product; effect: The Purchase external result causes no local canonical mutation; cancellation changes nothing and verified success remains only a StoreKit result until separately observed entitlement state is persisted; focus: the verified entitlement status after StoreKit revalidation."
 durable_effect = "Exact entitlement status and external-result consequences: Restore Purchases: The Restore Purchases external result causes no local canonical mutation; it validates current signed StoreKit transactions and returns a bounded observation. Any later accepted status persistence is separate, non-sensitive, and Receipt-backed. Restore cannot switch accounts, transfer data, bind the private graph, or restrict the offline core. Visible evidence remains until verified: The plan ended. Private local data is still available. No SKU, price, plan, paywall, trial promise, paid-feature boundary, downgrade restriction, or core restriction is created. Current visible status: The plan ended. Private local data is still available."
 recovery_rollback = "Exact cancellation, retry, mismatch, restore, and downgrade recovery: Restore Purchases: Cancellation or failure preserves the prior verified status and all local data; retry cannot duplicate a transaction or entitlement observation. A mismatch cannot bind or transfer the graph, and downgrade never deletes or hides local data. Recovery preserves: The plan ended. Private local data is still available."
 offline_behavior = "The last verified entitlement status shows freshness offline; purchase, restore, check, and Apple management wait when unavailable. The full local core and all local private data remain usable independently. Offline evidence remains: The plan ended. Private local data is still available."
@@ -401,6 +422,25 @@ commit_boundary = "External-result: StoreKit restore completes outside canonical
 rollback_undo = "Cancellation or failure preserves the prior verified status and all local data; retry cannot duplicate a transaction or entitlement observation."
 privacy_egress = "StoreKit receives only minimum transaction/account fields; Goals, Captures, Time, settings, Proof, History, Receipts, and the private graph never transfer or bind through entitlement controls."
 verification_ids = ["SCENARIO-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-ENTITLEMENT-EXPIRED-002"
+label = "Purchase"
+canonical_owner = "surface.you.entitlement-command-contract"
+preconditions = ["A separately registered and owner-approved StoreKit product registry exists", "The current signed StoreKit and account-association evidence has been revalidated", "The selected registered product resolves without inventing a SKU, price, plan, trial, paywall, or paid-feature boundary"]
+destination = "the Apple-owned purchase sheet for the separately registered product"
+effect = "The Purchase external result causes no local canonical mutation; cancellation changes nothing and verified success remains only a StoreKit result until separately observed entitlement state is persisted"
+success_focus = "the verified entitlement status after StoreKit revalidation"
+failure_focus = "the Purchase control and exact registry, StoreKit, or account reason"
+commit_boundary = "External-result: the external or protected-system result is revalidated before any separately authorized local command."
+rollback_undo = "No Undo is required; cancellation or external failure preserves the prior verified local state."
+privacy_egress = "StoreKit receives only minimum registered product and transaction fields; local private data never transfers or becomes account-owned."
+verification_ids = ["SCENARIO-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"]
+activation_posture = "future_gated"
+gate_requirement_ids = ["ENTITLEMENT-003", "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"]
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-ENTITLEMENT-GRACE"
 requirement_id = "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"
@@ -425,6 +465,9 @@ commit_boundary = "External-result: Apple subscription management occurs outside
 rollback_undo = "Cancellation or interruption returns to the prior verified status; a later downgrade changes only eligible service access and never local-core data availability."
 privacy_egress = "StoreKit receives only minimum transaction/account fields; Goals, Captures, Time, settings, Proof, History, Receipts, and the private graph never transfer or bind through entitlement controls."
 verification_ids = ["SCENARIO-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-ENTITLEMENT-MISMATCH"
 requirement_id = "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"
@@ -449,6 +492,9 @@ commit_boundary = "Non-mutating: mismatch review and account navigation complete
 rollback_undo = "No Undo is required; cancellation returns to the mismatch explanation and prior verified entitlement status with all local data unchanged."
 privacy_egress = "StoreKit receives only minimum transaction/account fields; Goals, Captures, Time, settings, Proof, History, Receipts, and the private graph never transfer or bind through entitlement controls."
 verification_ids = ["SCENARIO-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-ENTITLEMENT-OFFLINE-CACHED"
 requirement_id = "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"
@@ -473,6 +519,9 @@ commit_boundary = "Non-mutating: dismissal completes without entitlement, accoun
 rollback_undo = "No Undo is required; reopening Plan & Purchases restores the last verified status and freshness explanation."
 privacy_egress = "StoreKit receives only minimum transaction/account fields; Goals, Captures, Time, settings, Proof, History, Receipts, and the private graph never transfer or bind through entitlement controls."
 verification_ids = ["SCENARIO-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-ENTITLEMENT-RESTORED"
 requirement_id = "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"
@@ -497,6 +546,9 @@ commit_boundary = "Non-mutating: dismissal completes without entitlement, accoun
 rollback_undo = "No Undo is required; reopening Plan & Purchases restores the last verified status and freshness explanation."
 privacy_egress = "StoreKit receives only minimum transaction/account fields; Goals, Captures, Time, settings, Proof, History, Receipts, and the private graph never transfer or bind through entitlement controls."
 verification_ids = ["SCENARIO-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-ENTITLEMENT-RETRY"
 requirement_id = "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"
@@ -521,6 +573,9 @@ commit_boundary = "External-result: entitlement observation completes outside ca
 rollback_undo = "Cancellation, timeout, or invalid response preserves the prior verified status and focuses Check Again without changing local data or access."
 privacy_egress = "StoreKit receives only minimum transaction/account fields; Goals, Captures, Time, settings, Proof, History, Receipts, and the private graph never transfer or bind through entitlement controls."
 verification_ids = ["SCENARIO-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-ENTITLEMENT-REVOKED"
 requirement_id = "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"
@@ -545,6 +600,9 @@ commit_boundary = "External-result: StoreKit restore completes outside canonical
 rollback_undo = "Cancellation or failure preserves the prior verified status and all local data; retry cannot duplicate a transaction or entitlement observation."
 privacy_egress = "StoreKit receives only minimum transaction/account fields; Goals, Captures, Time, settings, Proof, History, Receipts, and the private graph never transfer or bind through entitlement controls."
 verification_ids = ["SCENARIO-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-ENTITLEMENT-SUPPORTED-SHARING"
 requirement_id = "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"
@@ -569,6 +627,9 @@ commit_boundary = "Non-mutating: dismissal completes without entitlement, accoun
 rollback_undo = "No Undo is required; reopening Plan & Purchases restores the last verified status and freshness explanation."
 privacy_egress = "StoreKit receives only minimum transaction/account fields; Goals, Captures, Time, settings, Proof, History, Receipts, and the private graph never transfer or bind through entitlement controls."
 verification_ids = ["SCENARIO-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-ENTITLEMENT-TRIAL"
 requirement_id = "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"
@@ -593,6 +654,9 @@ commit_boundary = "Non-mutating: plan-status viewing remains informational and c
 rollback_undo = "No Undo is required; dismissal restores the observed status and never changes local data, entitlement state, or core availability."
 privacy_egress = "StoreKit receives only minimum transaction/account fields; Goals, Captures, Time, settings, Proof, History, Receipts, and the private graph never transfer or bind through entitlement controls."
 verification_ids = ["SCENARIO-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-ENTITLEMENT-UNKNOWN"
 requirement_id = "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"
@@ -617,6 +681,9 @@ commit_boundary = "External-result: entitlement observation completes outside ca
 rollback_undo = "Cancellation, timeout, or invalid response preserves the prior verified status and focuses Check Again without changing local data or access."
 privacy_egress = "StoreKit receives only minimum transaction/account fields; Goals, Captures, Time, settings, Proof, History, Receipts, and the private graph never transfer or bind through entitlement controls."
 verification_ids = ["SCENARIO-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-ROOT-ACCOUNT-SIGNED-IN"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -1025,6 +1092,8 @@ commit_boundary = "Mutation: the typed command commits only after current-revisi
 rollback_undo = "Cancellation before commit changes nothing; after commit, only the named typed Undo or recovery command may append a reversing Event while History remains intact."
 privacy_egress = "Authentication and the App Lock setting remain local; no Ambitions Account or network is required."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
+rollback_posture = "inverse_command"
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-SETTINGS-APP-LOCK-ENABLED"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -1049,6 +1118,8 @@ commit_boundary = "Mutation: the typed command commits only after current-revisi
 rollback_undo = "Cancellation before commit changes nothing; after commit, only the named typed Undo or recovery command may append a reversing Event while History remains intact."
 privacy_egress = "Authentication and the App Lock setting remain local; no Ambitions Account or network is required."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
+rollback_posture = "inverse_command"
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-SETTINGS-APPEARANCE-DARK"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"

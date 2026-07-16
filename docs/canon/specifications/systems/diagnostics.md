@@ -38,6 +38,9 @@ commit_boundary = "Non-mutating: review and handoff complete before any Repair-o
 rollback_undo = "No Undo is required; dismissal returns focus to the unchanged diagnostic status, and uncertain records remain protected rather than deleted."
 privacy_egress = "Diagnostics uses opaque identifiers and allowlisted redacted fields; it never uploads automatically, and only explicit user-chosen local artifact creation can produce an egress Receipt."
 verification_ids = ["SCENARIO-SYSTEM-DIAGNOSTICS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DIAGNOSTICS-DEGRADED"
 requirement_id = "SYSTEM-DIAGNOSTICS-COMMAND-CONTRACT-001"
@@ -62,6 +65,9 @@ commit_boundary = "Non-mutating: diagnostic inspection observes and explains wit
 rollback_undo = "No Undo is required; dismissal returns to the same evidence-backed status and affected scope."
 privacy_egress = "Diagnostics uses opaque identifiers and allowlisted redacted fields; it never uploads automatically, and only explicit user-chosen local artifact creation can produce an egress Receipt."
 verification_ids = ["SCENARIO-SYSTEM-DIAGNOSTICS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DIAGNOSTICS-DIAGNOSIS-READY"
 requirement_id = "SYSTEM-DIAGNOSTICS-COMMAND-CONTRACT-001"
@@ -86,6 +92,8 @@ commit_boundary = "Non-mutating: diagnostic inspection observes and explains wit
 rollback_undo = "No Undo is required; dismissal returns to the same evidence-backed status and affected scope."
 privacy_egress = "Diagnostics uses opaque identifiers and allowlisted redacted fields; it never uploads automatically, and only explicit user-chosen local artifact creation can produce an egress Receipt."
 verification_ids = ["SCENARIO-SYSTEM-DIAGNOSTICS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-YOU-DIAGNOSTICS-DIAGNOSIS-READY-002"
@@ -100,6 +108,9 @@ commit_boundary = "Non-mutating: redacted export preview remains before local ar
 rollback_undo = "No Undo is required; cancellation returns to the diagnosis with no file, share sheet, upload, or product-state change."
 privacy_egress = "Diagnostics uses opaque identifiers and allowlisted redacted fields; it never uploads automatically, and only explicit user-chosen local artifact creation can produce an egress Receipt."
 verification_ids = ["SCENARIO-SYSTEM-DIAGNOSTICS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DIAGNOSTICS-EXPORT-FAILED"
 requirement_id = "SYSTEM-DIAGNOSTICS-COMMAND-CONTRACT-001"
@@ -124,6 +135,9 @@ commit_boundary = "Non-mutating: observational health inspection completes witho
 rollback_undo = "Cancellation preserves the prior reliable health status; interruption may resume the inspection without replaying a Repair or export action."
 privacy_egress = "Diagnostics uses opaque identifiers and allowlisted redacted fields; it never uploads automatically, and only explicit user-chosen local artifact creation can produce an egress Receipt."
 verification_ids = ["SCENARIO-SYSTEM-DIAGNOSTICS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DIAGNOSTICS-EXPORT-PREVIEW"
 requirement_id = "SYSTEM-DIAGNOSTICS-COMMAND-CONTRACT-001"
@@ -148,6 +162,8 @@ commit_boundary = "Non-mutating: cancellation or dismissal completes without can
 rollback_undo = "No Undo is required; focus returns to the initiating status or command with the inspected local state unchanged."
 privacy_egress = "Diagnostics uses opaque identifiers and allowlisted redacted fields; it never uploads automatically, and only explicit user-chosen local artifact creation can produce an egress Receipt."
 verification_ids = ["SCENARIO-SYSTEM-DIAGNOSTICS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-YOU-DIAGNOSTICS-EXPORT-PREVIEW-002"
@@ -162,6 +178,9 @@ commit_boundary = "External-result: local file creation occurs only after redact
 rollback_undo = "Cancellation before file creation changes nothing; cancellation during safely cancellable creation removes the incomplete temporary artifact and restores the preview; after creation the user controls deletion or sharing while the egress Receipt remains."
 privacy_egress = "Diagnostics uses opaque identifiers and allowlisted redacted fields; it never uploads automatically, and only explicit user-chosen local artifact creation can produce an egress Receipt."
 verification_ids = ["SCENARIO-SYSTEM-DIAGNOSTICS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DIAGNOSTICS-HEALTHY"
 requirement_id = "SYSTEM-DIAGNOSTICS-COMMAND-CONTRACT-001"
@@ -186,6 +205,9 @@ commit_boundary = "Non-mutating: cancellation or dismissal completes without can
 rollback_undo = "No Undo is required; focus returns to the initiating status or command with the inspected local state unchanged."
 privacy_egress = "Diagnostics uses opaque identifiers and allowlisted redacted fields; it never uploads automatically, and only explicit user-chosen local artifact creation can produce an egress Receipt."
 verification_ids = ["SCENARIO-SYSTEM-DIAGNOSTICS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DIAGNOSTICS-QUARANTINED"
 requirement_id = "SYSTEM-DIAGNOSTICS-COMMAND-CONTRACT-001"
@@ -210,6 +232,9 @@ commit_boundary = "Non-mutating: review and handoff complete before any Repair-o
 rollback_undo = "No Undo is required; dismissal returns focus to the unchanged diagnostic status, and uncertain records remain protected rather than deleted."
 privacy_egress = "Diagnostics uses opaque identifiers and allowlisted redacted fields; it never uploads automatically, and only explicit user-chosen local artifact creation can produce an egress Receipt."
 verification_ids = ["SCENARIO-SYSTEM-DIAGNOSTICS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DIAGNOSTICS-RECOVERABLE"
 requirement_id = "SYSTEM-DIAGNOSTICS-COMMAND-CONTRACT-001"
@@ -234,6 +259,9 @@ commit_boundary = "Non-mutating: review and handoff complete before any Repair-o
 rollback_undo = "No Undo is required; dismissal returns focus to the unchanged diagnostic status, and uncertain records remain protected rather than deleted."
 privacy_egress = "Diagnostics uses opaque identifiers and allowlisted redacted fields; it never uploads automatically, and only explicit user-chosen local artifact creation can produce an egress Receipt."
 verification_ids = ["SCENARIO-SYSTEM-DIAGNOSTICS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DIAGNOSTICS-REPAIR-PREVIEW"
 requirement_id = "SYSTEM-DIAGNOSTICS-COMMAND-CONTRACT-001"
@@ -258,6 +286,8 @@ commit_boundary = "Non-mutating: cancellation or dismissal completes without can
 rollback_undo = "No Undo is required; focus returns to the initiating status or command with the inspected local state unchanged."
 privacy_egress = "Diagnostics uses opaque identifiers and allowlisted redacted fields; it never uploads automatically, and only explicit user-chosen local artifact creation can produce an egress Receipt."
 verification_ids = ["SCENARIO-SYSTEM-DIAGNOSTICS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-YOU-DIAGNOSTICS-REPAIR-PREVIEW-002"
@@ -272,6 +302,8 @@ commit_boundary = "Non-mutating: Diagnostics ends at the Repair-owned consequenc
 rollback_undo = "Cancellation before Repair commit changes nothing; cancellation during a safely cancellable Repair operation restores the verified checkpoint; after Repair commit, rollback is a separate typed repair or restore command with its own Receipt."
 privacy_egress = "Diagnostics uses opaque identifiers and allowlisted redacted fields; it never uploads automatically, and only explicit user-chosen local artifact creation can produce an egress Receipt."
 verification_ids = ["SCENARIO-SYSTEM-DIAGNOSTICS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-YOU-DIAGNOSTICS-REPAIR-PREVIEW-003"
@@ -286,6 +318,9 @@ commit_boundary = "Non-mutating: Diagnostics ends at the Repair-owned consequenc
 rollback_undo = "Cancellation before Repair commit changes nothing; cancellation during a safely cancellable Repair operation restores the verified checkpoint; after Repair commit, rollback is a separate typed repair or restore command with its own Receipt."
 privacy_egress = "Diagnostics uses opaque identifiers and allowlisted redacted fields; it never uploads automatically, and only explicit user-chosen local artifact creation can produce an egress Receipt."
 verification_ids = ["SCENARIO-SYSTEM-DIAGNOSTICS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DIAGNOSTICS-UNKNOWN"
 requirement_id = "SYSTEM-DIAGNOSTICS-COMMAND-CONTRACT-001"
@@ -310,6 +345,9 @@ commit_boundary = "Non-mutating: observational health inspection completes witho
 rollback_undo = "Cancellation preserves the prior reliable health status; interruption may resume the inspection without replaying a Repair or export action."
 privacy_egress = "Diagnostics uses opaque identifiers and allowlisted redacted fields; it never uploads automatically, and only explicit user-chosen local artifact creation can produce an egress Receipt."
 verification_ids = ["SCENARIO-SYSTEM-DIAGNOSTICS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 +++
 
 # Diagnostics

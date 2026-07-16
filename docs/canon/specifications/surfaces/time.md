@@ -727,7 +727,7 @@ state_id = "UX-STATE-VARIANT-TIME-DETAIL-CONFLICT-REVIEW"
 requirement_id = "SPEC-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"
 activation_posture = "active"
 gate_requirement_ids = []
-transition_exit = "Cancel => destination: the unchanged owner detail or conflict origin from Time object detail — Conflict Review; effect: No durable mutation occurs and no Receipt is created; Cancel preserves accepted canonical state and closes the draft, conflict preview, or exact-scope confirmation without changing the saved object, recurrence, placement, notification, or external source. Visible evidence remains: The protected conflict stays visible while the current placement remains unchanged.; focus: the Cancel result heading or selected object in Time object detail — Conflict Review."
+transition_exit = "Cancel => destination: the unchanged owner detail or conflict origin from Time object detail — Conflict Review; effect: No durable mutation occurs and no Receipt is created; Cancel preserves accepted canonical state and closes the draft, conflict preview, or exact-scope confirmation without changing the saved object, recurrence, placement, notification, or external source. Visible evidence remains: The protected conflict stays visible while the current placement remains unchanged.; focus: the Cancel result heading or selected object in Time object detail — Conflict Review.\nEntire Series => destination: the recurrence consequence preview for the complete series; effect: No durable mutation occurs and no Receipt is created; the scope selection updates only the nested consequence preview; focus: the selected recurrence scope and first affected object.\nThis Occurrence => destination: the recurrence consequence preview for the selected occurrence; effect: No durable mutation occurs and no Receipt is created; the scope selection updates only the nested consequence preview; focus: the selected recurrence scope and first affected object.\nThis and Following => destination: the recurrence consequence preview from the selected occurrence forward; effect: No durable mutation occurs and no Receipt is created; the scope selection updates only the nested consequence preview; focus: the selected recurrence scope and first affected object."
 durable_effect = "Exact Time detail consequences: Cancel: No durable mutation occurs and no Receipt is created; Cancel preserves accepted canonical state and closes the draft, conflict preview, or exact-scope confirmation without changing the saved object, recurrence, placement, notification, or external source. Visible evidence remains: The protected conflict stays visible while the current placement remains unchanged. External candidates stay source-owned; linked sources hand off explicitly; native local commit precedes external write. Current visible status: The protected conflict stays visible while the current placement remains unchanged."
 recovery_rollback = "Exact draft, Trash, restore, permanent-deletion, and external-failure recovery: Cancel: No Undo is required; the unchanged current object regains focus and any invalid draft remains available only where the user explicitly chose to keep editing. Restore revalidates recurrence, placement, capacity, and notifications; permanent deletion is available only from Trash after a separate exact-scope confirmation. Recovery preserves: The protected conflict stays visible while the current placement remains unchanged."
 offline_behavior = "Ambitions-owned detail, edit, Save, Trash, Restore, History, and Receipts remain local and usable offline. External reads, handoffs, or writes wait; failure cannot roll back accepted local truth. Offline evidence remains: The protected conflict stays visible while the current placement remains unchanged."
@@ -746,6 +746,57 @@ commit_boundary = "Non-mutating: cancellation completes before the canonical mut
 rollback_undo = "No Undo is required; the unchanged current object regains focus and any invalid draft remains available only where the user explicitly chose to keep editing."
 privacy_egress = "Native detail and history remain local; source inspection exposes only approved lineage, and any explicit external handoff sends no private life graph context."
 verification_ids = ["SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-DETAIL-CONFLICT-REVIEW-002"
+label = "Entire Series"
+canonical_owner = "surface.time.detail-command-contract"
+preconditions = ["A recurring Ambitions-owned object and exact occurrence identity are present", "The current object revision and recurrence definition remain valid", "The selected scope can be previewed without committing a mutation"]
+destination = "the recurrence consequence preview for the complete series"
+effect = "No durable mutation occurs and no Receipt is created; the scope selection updates only the nested consequence preview"
+success_focus = "the selected recurrence scope and first affected object"
+failure_focus = "the Entire Series control and exact invalid recurrence boundary"
+commit_boundary = "Non-mutating: the command routes or selects without changing canonical state."
+rollback_undo = "No Undo is required; cancellation returns to the unchanged originating state."
+privacy_egress = "No egress occurs; private object content, History, Proof, and Receipts remain local."
+verification_ids = ["SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-DETAIL-CONFLICT-REVIEW-003"
+label = "This Occurrence"
+canonical_owner = "surface.time.detail-command-contract"
+preconditions = ["A recurring Ambitions-owned object and exact occurrence identity are present", "The current object revision and recurrence definition remain valid", "The selected scope can be previewed without committing a mutation"]
+destination = "the recurrence consequence preview for the selected occurrence"
+effect = "No durable mutation occurs and no Receipt is created; the scope selection updates only the nested consequence preview"
+success_focus = "the selected recurrence scope and first affected object"
+failure_focus = "the This Occurrence control and exact invalid recurrence boundary"
+commit_boundary = "Non-mutating: the command routes or selects without changing canonical state."
+rollback_undo = "No Undo is required; cancellation returns to the unchanged originating state."
+privacy_egress = "No egress occurs; private object content, History, Proof, and Receipts remain local."
+verification_ids = ["SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-DETAIL-CONFLICT-REVIEW-004"
+label = "This and Following"
+canonical_owner = "surface.time.detail-command-contract"
+preconditions = ["A recurring Ambitions-owned object and exact occurrence identity are present", "The current object revision and recurrence definition remain valid", "The selected scope can be previewed without committing a mutation"]
+destination = "the recurrence consequence preview from the selected occurrence forward"
+effect = "No durable mutation occurs and no Receipt is created; the scope selection updates only the nested consequence preview"
+success_focus = "the selected recurrence scope and first affected object"
+failure_focus = "the This and Following control and exact invalid recurrence boundary"
+commit_boundary = "Non-mutating: the command routes or selects without changing canonical state."
+rollback_undo = "No Undo is required; cancellation returns to the unchanged originating state."
+privacy_egress = "No egress occurs; private object content, History, Proof, and Receipts remain local."
+verification_ids = ["SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-DETAIL-EDITING"
 requirement_id = "SPEC-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"
@@ -770,6 +821,8 @@ commit_boundary = "Non-mutating: cancellation completes before the canonical mut
 rollback_undo = "No Undo is required; the unchanged current object regains focus and any invalid draft remains available only where the user explicitly chose to keep editing."
 privacy_egress = "Native detail and history remain local; source inspection exposes only approved lineage, and any explicit external handoff sends no private life graph context."
 verification_ids = ["SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-TIME-DETAIL-EDITING-002"
@@ -784,6 +837,10 @@ commit_boundary = "Mutation: Save commits only through the Time owner after curr
 rollback_undo = "Before commit, Cancel preserves the draft and saved object separately; after commit, a safe inverse uses a typed Undo command, otherwise History or degraded reconciliation preserves the local result."
 privacy_egress = "Native detail and history remain local; source inspection exposes only approved lineage, and any explicit external handoff sends no private life graph context."
 verification_ids = ["SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "inverse_command"
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-DETAIL-SAVED"
 requirement_id = "SPEC-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"
@@ -808,6 +865,9 @@ commit_boundary = "Non-mutating: opening an owner-specific edit draft completes 
 rollback_undo = "No Undo is required; dismissing the editor restores focus to the unchanged saved object, and invalid edits retain the draft while focusing the first invalid field."
 privacy_egress = "Native detail and history remain local; source inspection exposes only approved lineage, and any explicit external handoff sends no private life graph context."
 verification_ids = ["SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-DETAIL-UNDO-ELIGIBLE"
 requirement_id = "SPEC-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"
@@ -832,6 +892,9 @@ commit_boundary = "Non-mutating: opening an owner-specific edit draft completes 
 rollback_undo = "No Undo is required; dismissing the editor restores focus to the unchanged saved object, and invalid edits retain the draft while focusing the first invalid field."
 privacy_egress = "Native detail and history remain local; source inspection exposes only approved lineage, and any explicit external handoff sends no private life graph context."
 verification_ids = ["SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-DETAIL-UNDO-UNAVAILABLE"
 requirement_id = "SPEC-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"
@@ -856,12 +919,15 @@ commit_boundary = "Non-mutating: opening an owner-specific edit draft completes 
 rollback_undo = "No Undo is required; dismissing the editor restores focus to the unchanged saved object, and invalid edits retain the draft while focusing the first invalid field."
 privacy_egress = "Native detail and history remain local; source inspection exposes only approved lineage, and any explicit external handoff sends no private life graph context."
 verification_ids = ["SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-DETAIL-VIEWING"
 requirement_id = "SPEC-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"
 activation_posture = "active"
 gate_requirement_ids = []
-transition_exit = "Edit => destination: the owner-specific native editor for the selected Time object from Time object detail — Viewing; effect: No durable mutation occurs and no Receipt is created; Edit opens a draft separate from the saved object. External candidates and linked external sources route to import review or source inspection instead of native editing. Visible evidence remains: The selected time item shows its current saved details without edit controls.; focus: the Edit result heading or selected object in Time object detail — Viewing.\nMove to Trash => destination: the exact-scope Trash confirmation, then the Time Trash result for Viewing; effect: A typed Move to Trash Command validates current revision, resolved object ownership, and recurrence scope; it appends an Event, updates the Time and Trash Projection, and creates a Receipt and History entry without changing any external source. The object remains recoverable. Visible evidence before confirmation remains: The selected time item shows its current saved details without edit controls.; focus: the Move to Trash result heading or selected object in Time object detail — Viewing."
+transition_exit = "Edit => destination: the owner-specific native editor for the selected Time object from Time object detail — Viewing; effect: No durable mutation occurs and no Receipt is created; Edit opens a draft separate from the saved object. External candidates and linked external sources route to import review or source inspection instead of native editing. Visible evidence remains: The selected time item shows its current saved details without edit controls.; focus: the Edit result heading or selected object in Time object detail — Viewing.\nMove to Trash => destination: the exact-scope Trash confirmation, then the Time Trash result for Viewing; effect: A typed Move to Trash Command validates current revision, resolved object ownership, and recurrence scope; it appends an Event, updates the Time and Trash Projection, and creates a Receipt and History entry without changing any external source. The object remains recoverable. Visible evidence before confirmation remains: The selected time item shows its current saved details without edit controls.; focus: the Move to Trash result heading or selected object in Time object detail — Viewing.\nDelete Permanently => destination: the permanent-deletion result and exact destroyed-scope Receipt; effect: The typed Delete Permanently command appends one Event, updates the owning Projection, records a Receipt, and preserves History; only the confirmed trashed object scope is destroyed and its destruction Receipt remains inspectable; focus: the permanent-deletion result and destroyed-scope Receipt.\nImport into Ambitions => destination: the external-calendar import review with Import into Ambitions preselected; effect: No durable mutation occurs and no Receipt is created; Time detail hands off to import review and performs no import or source write; focus: the import review heading and first consequence.\nKeep external but reserve time => destination: the external-calendar import review with reserve-time outcome preselected; effect: No durable mutation occurs and no Receipt is created; Time detail hands off to reviewed capacity selection, creates no reservation itself, and preserves current canonical state; focus: the reserve-time consequence preview.\nLink => destination: the external-calendar import review with Link preselected; effect: No durable mutation occurs and no Receipt is created; Time detail hands off to link review and creates no link itself; focus: the link consequence preview.\nOpen in Calendar => destination: the selected record in Apple Calendar; effect: The Open in Calendar external result causes no local canonical mutation; the external handoff cannot edit, import, link, reserve, or mutate local state; focus: the selected event in Apple Calendar.\nRestore => destination: the restored owner detail with updated placement and notification consequences; effect: The typed Restore command appends one Event, updates the owning Projection, records a Receipt, and preserves History; the exact trashed object scope returns to its owning lifecycle without erasing Trash History; focus: the restored object heading and changed schedule consequence."
 durable_effect = "Exact Time detail consequences: Edit: No durable mutation occurs and no Receipt is created; Edit opens a draft separate from the saved object. External candidates and linked external sources route to import review or source inspection instead of native editing. Visible evidence remains: The selected time item shows its current saved details without edit controls. | Move to Trash: A typed Move to Trash Command validates current revision, resolved object ownership, and recurrence scope; it appends an Event, updates the Time and Trash Projection, and creates a Receipt and History entry without changing any external source. The object remains recoverable. Visible evidence before confirmation remains: The selected time item shows its current saved details without edit controls. External candidates stay source-owned; linked sources hand off explicitly; native local commit precedes external write. Current visible status: The selected time item shows its current saved details without edit controls."
 recovery_rollback = "Exact draft, Trash, restore, permanent-deletion, and external-failure recovery: Edit: No Undo is required; dismissing the editor restores focus to the unchanged saved object, and invalid edits retain the draft while focusing the first invalid field. | Move to Trash: Before commit, cancellation changes nothing; after commit, Restore is a separate typed command that revalidates recurrence, placement, capacity, and notification effects. Delete Permanently exists only in Trash behind separate irreversible exact-scope confirmation. Restore revalidates recurrence, placement, capacity, and notifications; permanent deletion is available only from Trash after a separate exact-scope confirmation. Recovery preserves: The selected time item shows its current saved details without edit controls."
 offline_behavior = "Ambitions-owned detail, edit, Save, Trash, Restore, History, and Receipts remain local and usable offline. External reads, handoffs, or writes wait; failure cannot roll back accepted local truth. Offline evidence remains: The selected time item shows its current saved details without edit controls."
@@ -880,6 +946,8 @@ commit_boundary = "Non-mutating: opening an owner-specific edit draft completes 
 rollback_undo = "No Undo is required; dismissing the editor restores focus to the unchanged saved object, and invalid edits retain the draft while focusing the first invalid field."
 privacy_egress = "Native detail and history remain local; source inspection exposes only approved lineage, and any explicit external handoff sends no private life graph context."
 verification_ids = ["SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-TIME-DETAIL-VIEWING-002"
@@ -894,6 +962,108 @@ commit_boundary = "Mutation: Move to Trash commits only after exact-scope confir
 rollback_undo = "Before commit, cancellation changes nothing; after commit, Restore is a separate typed command that revalidates recurrence, placement, capacity, and notification effects. Delete Permanently exists only in Trash behind separate irreversible exact-scope confirmation."
 privacy_egress = "Native detail and history remain local; source inspection exposes only approved lineage, and any explicit external handoff sends no private life graph context."
 verification_ids = ["SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "inverse_command"
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-DETAIL-VIEWING-003"
+label = "Delete Permanently"
+canonical_owner = "surface.time.detail-command-contract"
+preconditions = ["A separate exact-scope irreversible confirmation has been accepted", "The current object revision and exact recurrence scope remain valid", "The selected Ambitions-owned object is already in Trash"]
+destination = "the permanent-deletion result and exact destroyed-scope Receipt"
+effect = "The typed Delete Permanently command appends one Event, updates the owning Projection, records a Receipt, and preserves History; only the confirmed trashed object scope is destroyed and its destruction Receipt remains inspectable"
+success_focus = "the permanent-deletion result and destroyed-scope Receipt"
+failure_focus = "the Delete Permanently control and exact failed scope or revision"
+commit_boundary = "Mutation: the exact current revision validates before one typed command commits atomically."
+rollback_undo = "After the confirmed irreversible boundary no inverse is promised; the destruction Receipt preserves the exact destroyed scope and rollback reference."
+privacy_egress = "No egress occurs; private object content, History, Proof, and Receipts remain local."
+verification_ids = ["SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "confirmed_irreversible"
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-DETAIL-VIEWING-004"
+label = "Import into Ambitions"
+canonical_owner = "surface.time.detail-command-contract"
+preconditions = ["The confirmed source identity, fingerprint, and visible revision remain valid", "The selected record is an external candidate or linked source"]
+destination = "the external-calendar import review with Import into Ambitions preselected"
+effect = "No durable mutation occurs and no Receipt is created; Time detail hands off to import review and performs no import or source write"
+success_focus = "the import review heading and first consequence"
+failure_focus = "the Import into Ambitions control and exact source-identity reason"
+commit_boundary = "Non-mutating: the command routes or selects without changing canonical state."
+rollback_undo = "No Undo is required; cancellation returns to the unchanged originating state."
+privacy_egress = "No external write occurs; only the selected source identity enters local import review."
+verification_ids = ["SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-DETAIL-VIEWING-005"
+label = "Keep external but reserve time"
+canonical_owner = "surface.time.detail-command-contract"
+preconditions = ["The confirmed source identity, fingerprint, and visible revision remain valid", "The selected record remains external-owned"]
+destination = "the external-calendar import review with reserve-time outcome preselected"
+effect = "No durable mutation occurs and no Receipt is created; Time detail hands off to reviewed capacity selection, creates no reservation itself, and preserves current canonical state"
+success_focus = "the reserve-time consequence preview"
+failure_focus = "the Keep external but reserve time control and exact source reason"
+commit_boundary = "Non-mutating: the command routes or selects without changing canonical state."
+rollback_undo = "No Undo is required; cancellation returns to the unchanged originating state."
+privacy_egress = "No external write occurs and no private Ambitions context leaves the device."
+verification_ids = ["SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-DETAIL-VIEWING-006"
+label = "Link"
+canonical_owner = "surface.time.detail-command-contract"
+preconditions = ["The confirmed source identity, fingerprint, and visible revision remain valid", "The selected record is an eligible external or duplicate link candidate"]
+destination = "the external-calendar import review with Link preselected"
+effect = "No durable mutation occurs and no Receipt is created; Time detail hands off to link review and creates no link itself"
+success_focus = "the link consequence preview"
+failure_focus = "the Link control and exact identity or lineage reason"
+commit_boundary = "Non-mutating: the command routes or selects without changing canonical state."
+rollback_undo = "No Undo is required; cancellation returns to the unchanged originating state."
+privacy_egress = "No external write occurs; source lineage remains local until a separate confirmed command."
+verification_ids = ["SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-DETAIL-VIEWING-007"
+label = "Open in Calendar"
+canonical_owner = "surface.time.detail-command-contract"
+preconditions = ["The handoff can disclose only the selected external identity", "The selected record has a current allowlisted external Calendar identity"]
+destination = "the selected record in Apple Calendar"
+effect = "The Open in Calendar external result causes no local canonical mutation; the external handoff cannot edit, import, link, reserve, or mutate local state"
+success_focus = "the selected event in Apple Calendar"
+failure_focus = "the Open in Calendar control and exact unavailable-handoff reason"
+commit_boundary = "External-result: the external or protected-system result is revalidated before any separately authorized local command."
+rollback_undo = "No Undo is required; cancellation or external failure preserves the prior verified local state."
+privacy_egress = "Only the selected external Calendar identity reaches EventKit; no private graph context is attached."
+verification_ids = ["SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-DETAIL-VIEWING-008"
+label = "Restore"
+canonical_owner = "surface.time.detail-command-contract"
+preconditions = ["Placement, capacity, and notification consequences have been revalidated", "The current object revision and selected recurrence scope remain valid", "The selected Ambitions-owned object is in Trash"]
+destination = "the restored owner detail with updated placement and notification consequences"
+effect = "The typed Restore command appends one Event, updates the owning Projection, records a Receipt, and preserves History; the exact trashed object scope returns to its owning lifecycle without erasing Trash History"
+success_focus = "the restored object heading and changed schedule consequence"
+failure_focus = "the Restore control and first invalid recurrence, placement, capacity, or notification fact"
+commit_boundary = "Mutation: the exact current revision validates before one typed command commits atomically."
+rollback_undo = "Move to Trash is the typed inverse command when the restored revision remains current; History preserves both lifecycle events."
+privacy_egress = "No egress occurs; private object content, History, Proof, and Receipts remain local."
+verification_ids = ["SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "inverse_command"
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-LIST-CONFLICTING"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"

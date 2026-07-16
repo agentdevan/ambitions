@@ -18,6 +18,7 @@ from tools.ambitions_canon.model import (
     StateCommand,
     StateCommandActivationPosture,
     StateCommandContract,
+    StateCommandRollbackPosture,
 )
 
 
@@ -112,7 +113,7 @@ STATE_COMMAND_CONTRACT_FIELDS = frozenset(
         "commands",
     }
 )
-STATE_COMMAND_FIELDS = frozenset(
+STATE_COMMAND_REQUIRED_FIELDS = frozenset(
     {
         "command_id",
         "label",
@@ -128,6 +129,11 @@ STATE_COMMAND_FIELDS = frozenset(
         "verification_ids",
     }
 )
+STATE_COMMAND_FIELDS = STATE_COMMAND_REQUIRED_FIELDS | {
+    "activation_posture",
+    "gate_requirement_ids",
+    "rollback_posture",
+}
 STATE_ID = re.compile(r"^UX-STATE-VARIANT-[A-Z0-9]+(?:-[A-Z0-9]+)*$")
 COMMAND_ID = re.compile(r"^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$")
 NO_DISCLOSURE_STATE_ID = "UX-STATE-VARIANT-TRUST-INLINE-NO-DISCLOSURE"
@@ -136,10 +142,117 @@ GENERIC_STATE_COMMAND_PHRASES = (
     "truthful status for ux-state-variant-",
     "preserves current canonical state for ux-state-variant-",
 )
-UNRESOLVED_COMMAND_TARGET = re.compile(
-    r"^unresolved (?:destination|focus|route)$",
+UNRESOLVED_COMMAND_MARKER = re.compile(
+    r"^\s*(?:tbd|todo|unknown|unspecified|unresolved|undecided)\s*$",
     re.IGNORECASE,
 )
+UNRESOLVED_COMMAND_TARGET_PREFIX = re.compile(
+    r"^\s*(?:the\s+)?(?:"
+    r"(?:pending|unknown|unspecified|unresolved|undecided|forthcoming)\s+"
+    r"(?:destination|route|focus|target)\b"
+    r"|(?:destination|route|focus|target)\b\s+(?:"
+    r"(?:is|remains|will\s+be)\s+"
+    r"(?:pending|unknown|unspecified|unresolved|undecided|forthcoming)\b"
+    r"|(?:is|has|remains)?\s*not(?:\s+yet)?\s+(?:been\s+)?"
+    r"(?:known|decided|defined|determined|specified|available)\b"
+    r"|to\s+be\s+(?:decided|defined|determined|specified)\b"
+    r"|forthcoming\b"
+    r")"
+    r")",
+    re.IGNORECASE,
+)
+ROLLBACK_PLACEHOLDER = re.compile(
+    r"^\s*(?:tbd|todo|unknown|unspecified|unresolved|undecided)\s*$",
+    re.IGNORECASE,
+)
+
+
+def _is_unresolved_command_target(value: str) -> bool:
+    """Reject placeholder routes/focuses without matching legitimate state titles."""
+
+    normalized = " ".join(value.split())
+    return bool(
+        UNRESOLVED_COMMAND_MARKER.fullmatch(normalized)
+        or UNRESOLVED_COMMAND_TARGET_PREFIX.match(normalized)
+    )
+
+
+def _rollback_term_is_negated(text: str, terms: tuple[str, ...]) -> bool:
+    term_pattern = "(?:" + "|".join(re.escape(term) for term in terms) + ")"
+    patterns = (
+        rf"\b(?:no|without|missing|absent)\b(?:\W+\w+){{0,3}}\W+{term_pattern}\b",
+        rf"\b{term_pattern}\b(?:\W+\w+){{0,6}}\W+"
+        rf"(?:is|are|was|were|remains|has|have)?\s*"
+        rf"(?:not\s+(?:available|defined|provided|specified|supported|safe)|"
+        rf"unavailable|impossible|missing|absent|undefined|unspecified|unsupported|"
+        rf"does\s+not\s+exist|has\s+not\s+been\s+(?:defined|provided|specified))\b",
+    )
+    return any(re.search(pattern, text, re.IGNORECASE | re.DOTALL) for pattern in patterns)
+
+
+def _has_actionable_mutation_rollback(command: StateCommand) -> bool:
+    """Require a positive posture-specific closure, not enum or keyword laundering."""
+
+    posture = command.rollback_posture
+    text = " ".join(command.rollback_undo.split()).casefold()
+    if posture is None or ROLLBACK_PLACEHOLDER.fullmatch(text):
+        return False
+
+    if posture is StateCommandRollbackPosture.INVERSE_COMMAND:
+        if _rollback_term_is_negated(
+            text,
+            (
+                "rollback",
+                "inverse",
+                "undo",
+                "reversing event",
+                "restore",
+                "re-enabling",
+            ),
+        ):
+            return False
+        return bool(
+            "typed inverse command" in text
+            or ("typed inverse" in text and any(token in text for token in ("restore", "revers")))
+            or ("undo" in text and ("typed" in text or "revers" in text))
+            or ("restore" in text and "typed command" in text)
+            or ("inverse control" in text and "typed" in text)
+            or ("re-enabl" in text and "typed command" in text)
+        )
+
+    if posture is StateCommandRollbackPosture.CHECKPOINT_RESTORE:
+        if _rollback_term_is_negated(
+            text,
+            ("checkpoint", "restore", "rollback", "journal", "recovery point"),
+        ):
+            return False
+        return bool(
+            ("checkpoint" in text and any(token in text for token in ("restore", "reopen", "recover")))
+            or ("journal" in text and any(token in text for token in ("rollback", "restore", "recover", "last honest store")))
+        )
+
+    if posture is StateCommandRollbackPosture.OWNER_RECOVERY_HANDOFF:
+        if _rollback_term_is_negated(
+            text,
+            ("recovery", "handoff", "typed command", "recovery point"),
+        ):
+            return False
+        return bool(
+            ("recovery" in text and any(token in text for token in ("handoff", "route", "separately authorized typed command")))
+            or ("separate typed command" in text)
+            or ("recovery-point" in text and "quarantin" in text)
+            or ("recovery" in text and "completed" in text and "failed" in text)
+        )
+
+    if posture is StateCommandRollbackPosture.CONFIRMED_IRREVERSIBLE:
+        if _rollback_term_is_negated(text, ("confirmation", "confirmed")):
+            return False
+        return all(
+            token in text
+            for token in ("irreversible", "confirm", "receipt", "scope")
+        )
+
+    return False
 
 
 def parse_front_matter(
@@ -459,7 +572,8 @@ def _state_command_contracts(
         for command_index, command_raw in enumerate(commands_raw):
             if (
                 not isinstance(command_raw, dict)
-                or set(command_raw) != STATE_COMMAND_FIELDS
+                or not STATE_COMMAND_REQUIRED_FIELDS <= set(command_raw)
+                or not set(command_raw) <= STATE_COMMAND_FIELDS
             ):
                 raise _state_command_error(
                     path,
@@ -480,6 +594,76 @@ def _state_command_contracts(
                 raise _state_command_error(
                     path, f"invalid canonical owner concept: {command_id}"
                 )
+            posture_is_explicit = "activation_posture" in command_raw
+            gates_are_explicit = "gate_requirement_ids" in command_raw
+            if posture_is_explicit != gates_are_explicit:
+                raise _state_command_error(
+                    path,
+                    f"command activation posture and gates must be declared together: {command_id}",
+                )
+            if posture_is_explicit:
+                try:
+                    command_activation_posture = StateCommandActivationPosture(
+                        _trimmed_state_text(
+                            command_raw["activation_posture"],
+                            path,
+                            "commands.activation_posture",
+                        )
+                    )
+                except ValueError as exc:
+                    raise _state_command_error(
+                        path, f"invalid command activation posture: {command_id}"
+                    ) from exc
+                command_gate_requirement_ids = _state_string_array(
+                    command_raw["gate_requirement_ids"],
+                    path,
+                    "commands.gate_requirement_ids",
+                    allow_empty=True,
+                )
+            else:
+                command_activation_posture = activation_posture
+                command_gate_requirement_ids = gate_requirement_ids
+            if any(
+                re.fullmatch(CANONICAL_ID_GRAMMAR, identifier) is None
+                for identifier in command_gate_requirement_ids
+            ):
+                raise _state_command_error(
+                    path, f"invalid command gate requirement ID: {command_id}"
+                )
+            if (
+                command_activation_posture is StateCommandActivationPosture.ACTIVE
+                and command_gate_requirement_ids
+            ) or (
+                command_activation_posture
+                is StateCommandActivationPosture.FUTURE_GATED
+                and not command_gate_requirement_ids
+            ):
+                raise _state_command_error(
+                    path, f"command activation posture and gates contradict: {command_id}"
+                )
+            if (
+                activation_posture is StateCommandActivationPosture.FUTURE_GATED
+                and command_activation_posture is StateCommandActivationPosture.ACTIVE
+            ):
+                raise _state_command_error(
+                    path, f"future-gated state cannot expose active command: {command_id}"
+                )
+            rollback_posture_raw = command_raw.get("rollback_posture")
+            if rollback_posture_raw is None:
+                rollback_posture = None
+            else:
+                try:
+                    rollback_posture = StateCommandRollbackPosture(
+                        _trimmed_state_text(
+                            rollback_posture_raw,
+                            path,
+                            "commands.rollback_posture",
+                        )
+                    )
+                except ValueError as exc:
+                    raise _state_command_error(
+                        path, f"invalid rollback posture: {command_id}"
+                    ) from exc
             commands.append(
                 StateCommand(
                     command_id=command_id,
@@ -528,6 +712,9 @@ def _state_command_contracts(
                         path,
                         "commands.verification_ids",
                     ),
+                    activation_posture=command_activation_posture,
+                    gate_requirement_ids=command_gate_requirement_ids,
+                    rollback_posture=rollback_posture,
                 )
             )
         if tuple(item.command_id for item in commands) != tuple(
@@ -669,7 +856,7 @@ def _validate_state_command_semantics(
         )
         semantic_text = " ".join(semantic_fields).casefold()
         if any(
-            UNRESOLVED_COMMAND_TARGET.fullmatch(value)
+            _is_unresolved_command_target(value)
             for value in (
                 command.destination,
                 command.success_focus,
@@ -703,8 +890,7 @@ def _validate_state_command_semantics(
                     path,
                     f"mutation command omits typed source/test/proof consequence: {command.command_id}",
                 )
-            rollback = command.rollback_undo.casefold()
-            if "no rollback" in rollback or "no undo is declared" in rollback:
+            if not _has_actionable_mutation_rollback(command):
                 raise _state_command_error(
                     path,
                     f"mutation command omits actionable rollback: {command.command_id}",
@@ -733,6 +919,23 @@ def _validate_state_command_semantics(
                 f"commands have indistinguishable semantics: {state_id}",
             )
         signatures.add(signature)
+
+
+def validate_state_command_contract_semantics(
+    path: Path,
+    contract: StateCommandContract,
+) -> None:
+    """Revalidate a parsed or projected contract before downstream use."""
+
+    _validate_state_command_semantics(
+        path,
+        contract.state_id,
+        contract.durable_effect,
+        contract.recovery_rollback,
+        contract.offline_behavior,
+        contract.accessibility_focus,
+        list(contract.commands),
+    )
 
 
 def _object_boundary(

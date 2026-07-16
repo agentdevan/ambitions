@@ -44,12 +44,15 @@ commit_boundary = "Non-mutating: gate, conflict, migration, or restore review re
 rollback_undo = "No Undo is required; dismissal returns to unchanged local truth and preserves every quarantined alternative, checkpoint, and causal identity."
 privacy_egress = "Continuity remains separate from Ambitions Account and R2; no private envelope leaves the device while gated, and future eligible iCloud transport is user-owned, minimized, encrypted, and explicitly consented."
 verification_ids = ["SCENARIO-SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"]
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-CONFLICTED-QUARANTINED"
 requirement_id = "SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"
 activation_posture = "future_gated"
 gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
-transition_exit = "Review Conflict => destination: the quarantined two-sided conflict dry run from Continuity control — Conflicted Quarantined; effect: No durable mutation occurs and no Receipt is created; Review Conflict exposes only gate status, local authority, affected identities, dry-run consequences, or rollback information. It cannot enable, upload, download, merge, restore, migrate, delete, pause, resume, retry, or choose a conflict while gated. Visible evidence remains: Conflicting continuity copies are protected. Information saved on this device remains unchanged.; focus: the Review Conflict gate, preview, or result heading in Continuity control — Conflicted Quarantined."
+transition_exit = "Review Conflict => destination: the quarantined two-sided conflict dry run from Continuity control — Conflicted Quarantined; effect: No durable mutation occurs and no Receipt is created; Review Conflict exposes only gate status, local authority, affected identities, dry-run consequences, or rollback information. It cannot enable, upload, download, merge, restore, migrate, delete, pause, resume, retry, or choose a conflict while gated. Visible evidence remains: Conflicting continuity copies are protected. Information saved on this device remains unchanged.; focus: the Review Conflict gate, preview, or result heading in Continuity control — Conflicted Quarantined.\nKeep Other Copy => destination: the conflict result preserving the reviewed other copy; effect: The typed Keep Other Copy command appends one Event, updates the owning Projection, records a Receipt, and preserves History; the reviewed other copy becomes the accepted local projection without deleting either quarantined alternative; focus: the resolved conflict result and preserved alternatives.\nKeep This Device => destination: the conflict result preserving this device’s reviewed copy; effect: The typed Keep This Device command appends one Event, updates the owning Projection, records a Receipt, and preserves History; this device’s reviewed copy remains local authority without deleting the quarantined alternative; focus: the resolved conflict result and preserved alternatives.\nMerge Selected Changes => destination: the reviewed field-by-field merge result; effect: The typed Merge Selected Changes command appends one Event, updates the owning Projection, records a Receipt, and preserves History; only the explicitly selected changes become the accepted local projection and all alternatives remain receipted; focus: the resolved conflict result and preserved alternatives."
 durable_effect = "This contract is future-gated and must not enter task-pack or visual implementation eligibility while the continuity-disabled gate remains. Exact continuity consequence: Review Conflict: No durable mutation occurs and no Receipt is created; Review Conflict exposes only gate status, local authority, affected identities, dry-run consequences, or rollback information. It cannot enable, upload, download, merge, restore, migrate, delete, pause, resume, retry, or choose a conflict while gated. Visible evidence remains: Conflicting continuity copies are protected. Information saved on this device remains unchanged. No silent last-writer-wins, remote deletion, or nonlocal authority is permitted. Current visible status: Conflicting continuity copies are protected. Information saved on this device remains unchanged."
 recovery_rollback = "Exact checkpoint, conflict, causal-identity, cancellation, and rollback behavior: Review Conflict: No Undo is required; dismissal returns to unchanged local truth and preserves every quarantined alternative, checkpoint, and causal identity. Local truth and both conflicting alternatives remain protected. Recovery preserves: Conflicting continuity copies are protected. Information saved on this device remains unchanged."
 offline_behavior = "The complete local core remains readable, mutable, replayable, and authoritative offline. While gated, no upload, download, merge, migration, restore, retry, or remote deletion is attempted. Offline evidence remains: Conflicting continuity copies are protected. Information saved on this device remains unchanged."
@@ -68,6 +71,60 @@ commit_boundary = "Non-mutating: gate, conflict, migration, or restore review re
 rollback_undo = "No Undo is required; dismissal returns to unchanged local truth and preserves every quarantined alternative, checkpoint, and causal identity."
 privacy_egress = "Continuity remains separate from Ambitions Account and R2; no private envelope leaves the device while gated, and future eligible iCloud transport is user-owned, minimized, encrypted, and explicitly consented."
 verification_ids = ["SCENARIO-SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"]
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-CONTINUITY-CONTROL-CONFLICTED-QUARANTINED-002"
+label = "Keep Other Copy"
+canonical_owner = "system.continuity.command-contract"
+preconditions = ["A current verified backup, dry run, rollback checkpoint, and duplicate-prevention proof exist", "Current explicit consent is present", "Eligible iCloud state and privacy/security gate are verified", "Local source authority, stable schema, and causal identity are verified", "Silent last-writer-wins is forbidden", "The human-readable conflict dry run and exact selected revision are confirmed"]
+destination = "the conflict result preserving the reviewed other copy"
+effect = "The typed Keep Other Copy command appends one Event, updates the owning Projection, records a Receipt, and preserves History; the reviewed other copy becomes the accepted local projection without deleting either quarantined alternative"
+success_focus = "the resolved conflict result and preserved alternatives"
+failure_focus = "the Keep Other Copy control and first stale causal identity or selected field"
+commit_boundary = "Mutation: the exact current revision validates before one typed command commits atomically."
+rollback_undo = "The verified rollback checkpoint restores the pre-resolution local projection through a typed restore command while History retains both outcomes."
+privacy_egress = "Only user-owned encrypted continuity transport may carry approved records after the full gate; no server profiling or Ambitions backend ownership is introduced."
+verification_ids = ["SCENARIO-SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"]
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+rollback_posture = "checkpoint_restore"
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-CONTINUITY-CONTROL-CONFLICTED-QUARANTINED-003"
+label = "Keep This Device"
+canonical_owner = "system.continuity.command-contract"
+preconditions = ["A current verified backup, dry run, rollback checkpoint, and duplicate-prevention proof exist", "Current explicit consent is present", "Eligible iCloud state and privacy/security gate are verified", "Local source authority, stable schema, and causal identity are verified", "Silent last-writer-wins is forbidden", "The human-readable conflict dry run and exact selected revision are confirmed"]
+destination = "the conflict result preserving this device’s reviewed copy"
+effect = "The typed Keep This Device command appends one Event, updates the owning Projection, records a Receipt, and preserves History; this device’s reviewed copy remains local authority without deleting the quarantined alternative"
+success_focus = "the resolved conflict result and preserved alternatives"
+failure_focus = "the Keep This Device control and first stale causal identity or selected field"
+commit_boundary = "Mutation: the exact current revision validates before one typed command commits atomically."
+rollback_undo = "The verified rollback checkpoint restores the pre-resolution local projection through a typed restore command while History retains both outcomes."
+privacy_egress = "Only user-owned encrypted continuity transport may carry approved records after the full gate; no server profiling or Ambitions backend ownership is introduced."
+verification_ids = ["SCENARIO-SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"]
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+rollback_posture = "checkpoint_restore"
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-CONTINUITY-CONTROL-CONFLICTED-QUARANTINED-004"
+label = "Merge Selected Changes"
+canonical_owner = "system.continuity.command-contract"
+preconditions = ["A current verified backup, dry run, rollback checkpoint, and duplicate-prevention proof exist", "Current explicit consent is present", "Eligible iCloud state and privacy/security gate are verified", "Local source authority, stable schema, and causal identity are verified", "Silent last-writer-wins is forbidden", "The human-readable conflict dry run and exact selected revision are confirmed"]
+destination = "the reviewed field-by-field merge result"
+effect = "The typed Merge Selected Changes command appends one Event, updates the owning Projection, records a Receipt, and preserves History; only the explicitly selected changes become the accepted local projection and all alternatives remain receipted"
+success_focus = "the resolved conflict result and preserved alternatives"
+failure_focus = "the Merge Selected Changes control and first stale causal identity or selected field"
+commit_boundary = "Mutation: the exact current revision validates before one typed command commits atomically."
+rollback_undo = "The verified rollback checkpoint restores the pre-resolution local projection through a typed restore command while History retains both outcomes."
+privacy_egress = "Only user-owned encrypted continuity transport may carry approved records after the full gate; no server profiling or Ambitions backend ownership is introduced."
+verification_ids = ["SCENARIO-SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"]
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+rollback_posture = "checkpoint_restore"
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-DISABLED"
 requirement_id = "SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"
@@ -92,6 +149,9 @@ commit_boundary = "Non-mutating: gate, conflict, migration, or restore review re
 rollback_undo = "No Undo is required; dismissal returns to unchanged local truth and preserves every quarantined alternative, checkpoint, and causal identity."
 privacy_egress = "Continuity remains separate from Ambitions Account and R2; no private envelope leaves the device while gated, and future eligible iCloud transport is user-owned, minimized, encrypted, and explicitly consented."
 verification_ids = ["SCENARIO-SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-ELIGIBLE-NOT-ENABLED"
 requirement_id = "SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"
@@ -116,6 +176,10 @@ commit_boundary = "Mutation: future enablement may commit only through Event, Pr
 rollback_undo = "Before commit, cancellation changes nothing; after a future commit, Turn Off is a separate typed command, remote deletion remains separate, and rollback restores the verified local checkpoint."
 privacy_egress = "Continuity remains separate from Ambitions Account and R2; no private envelope leaves the device while gated, and future eligible iCloud transport is user-owned, minimized, encrypted, and explicitly consented."
 verification_ids = ["SCENARIO-SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"]
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+rollback_posture = "checkpoint_restore"
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-ENABLED-IDLE"
 requirement_id = "SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"
@@ -140,6 +204,10 @@ commit_boundary = "Mutation: future Turn Off Continuity may commit only through 
 rollback_undo = "Before commit, cancellation changes nothing; after a future commit, inverse control is separately typed and verified, while remote deletion is never implied."
 privacy_egress = "Continuity remains separate from Ambitions Account and R2; no private envelope leaves the device while gated, and future eligible iCloud transport is user-owned, minimized, encrypted, and explicitly consented."
 verification_ids = ["SCENARIO-SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"]
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+rollback_posture = "inverse_command"
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-INELIGIBLE"
 requirement_id = "SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"
@@ -164,6 +232,9 @@ commit_boundary = "Non-mutating: gate, conflict, migration, or restore review re
 rollback_undo = "No Undo is required; dismissal returns to unchanged local truth and preserves every quarantined alternative, checkpoint, and causal identity."
 privacy_egress = "Continuity remains separate from Ambitions Account and R2; no private envelope leaves the device while gated, and future eligible iCloud transport is user-owned, minimized, encrypted, and explicitly consented."
 verification_ids = ["SCENARIO-SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"]
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-LOCAL-PENDING"
 requirement_id = "SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"
@@ -188,6 +259,10 @@ commit_boundary = "Mutation: future Pause Continuity may commit only through Eve
 rollback_undo = "Before commit, cancellation changes nothing; after a future commit, inverse control is separately typed and verified, while remote deletion is never implied."
 privacy_egress = "Continuity remains separate from Ambitions Account and R2; no private envelope leaves the device while gated, and future eligible iCloud transport is user-owned, minimized, encrypted, and explicitly consented."
 verification_ids = ["SCENARIO-SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"]
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+rollback_posture = "inverse_command"
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-MERGING"
 requirement_id = "SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"
@@ -212,12 +287,15 @@ commit_boundary = "Non-mutating: gate, conflict, migration, or restore review re
 rollback_undo = "No Undo is required; dismissal returns to unchanged local truth and preserves every quarantined alternative, checkpoint, and causal identity."
 privacy_egress = "Continuity remains separate from Ambitions Account and R2; no private envelope leaves the device while gated, and future eligible iCloud transport is user-owned, minimized, encrypted, and explicitly consented."
 verification_ids = ["SCENARIO-SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"]
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-MIGRATING"
 requirement_id = "SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"
 activation_posture = "future_gated"
 gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
-transition_exit = "Review Migration => destination: the migration dry run and verified local checkpoint from Continuity control — Migrating; effect: No durable mutation occurs and no Receipt is created; Review Migration exposes only gate status, local authority, affected identities, dry-run consequences, or rollback information. It cannot enable, upload, download, merge, restore, migrate, delete, pause, resume, retry, or choose a conflict while gated. Visible evidence remains: Continuity settings are being updated. Saved information remains available on this device.; focus: the Review Migration gate, preview, or result heading in Continuity control — Migrating."
+transition_exit = "Review Migration => destination: the migration dry run and verified local checkpoint from Continuity control — Migrating; effect: No durable mutation occurs and no Receipt is created; Review Migration exposes only gate status, local authority, affected identities, dry-run consequences, or rollback information. It cannot enable, upload, download, merge, restore, migrate, delete, pause, resume, retry, or choose a conflict while gated. Visible evidence remains: Continuity settings are being updated. Saved information remains available on this device.; focus: the Review Migration gate, preview, or result heading in Continuity control — Migrating.\nStart Migration => destination: the future migration progress state bound to the reviewed dry run; effect: The typed Start Migration command appends one Event, updates the owning Projection, records a Receipt, and preserves History; the reviewed migration begins once with duplicate prevention and an interruption journal; focus: the migration progress heading and current verified phase."
 durable_effect = "This contract is future-gated and must not enter task-pack or visual implementation eligibility while the continuity-disabled gate remains. Exact continuity consequence: Review Migration: No durable mutation occurs and no Receipt is created; Review Migration exposes only gate status, local authority, affected identities, dry-run consequences, or rollback information. It cannot enable, upload, download, merge, restore, migrate, delete, pause, resume, retry, or choose a conflict while gated. Visible evidence remains: Continuity settings are being updated. Saved information remains available on this device. No silent last-writer-wins, remote deletion, or nonlocal authority is permitted. Current visible status: Continuity settings are being updated. Saved information remains available on this device."
 recovery_rollback = "Exact checkpoint, conflict, causal-identity, cancellation, and rollback behavior: Review Migration: No Undo is required; dismissal returns to unchanged local truth and preserves every quarantined alternative, checkpoint, and causal identity. Local truth and both conflicting alternatives remain protected. Recovery preserves: Continuity settings are being updated. Saved information remains available on this device."
 offline_behavior = "The complete local core remains readable, mutable, replayable, and authoritative offline. While gated, no upload, download, merge, migration, restore, retry, or remote deletion is attempted. Offline evidence remains: Continuity settings are being updated. Saved information remains available on this device."
@@ -236,6 +314,26 @@ commit_boundary = "Non-mutating: gate, conflict, migration, or restore review re
 rollback_undo = "No Undo is required; dismissal returns to unchanged local truth and preserves every quarantined alternative, checkpoint, and causal identity."
 privacy_egress = "Continuity remains separate from Ambitions Account and R2; no private envelope leaves the device while gated, and future eligible iCloud transport is user-owned, minimized, encrypted, and explicitly consented."
 verification_ids = ["SCENARIO-SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"]
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-CONTINUITY-CONTROL-MIGRATING-002"
+label = "Start Migration"
+canonical_owner = "system.continuity.command-contract"
+preconditions = ["A current verified backup, dry run, rollback checkpoint, and duplicate-prevention proof exist", "Current explicit consent is present", "Eligible iCloud state and privacy/security gate are verified", "Local source authority, stable schema, and causal identity are verified", "Silent last-writer-wins is forbidden", "The reviewed migration dry run, exact scope, and interruption journal are explicitly confirmed before progress begins"]
+destination = "the future migration progress state bound to the reviewed dry run"
+effect = "The typed Start Migration command appends one Event, updates the owning Projection, records a Receipt, and preserves History; the reviewed migration begins once with duplicate prevention and an interruption journal"
+success_focus = "the migration progress heading and current verified phase"
+failure_focus = "the Start Migration control and first failed gate or dry-run fact"
+commit_boundary = "Mutation: the exact current revision validates before one typed command commits atomically."
+rollback_undo = "The verified rollback checkpoint and migration journal restore the pre-migration local projection through the typed recovery path."
+privacy_egress = "Only user-owned encrypted continuity transport may carry the confirmed scope after the full gate."
+verification_ids = ["SCENARIO-SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"]
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+rollback_posture = "checkpoint_restore"
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-PAUSED"
 requirement_id = "SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"
@@ -260,6 +358,10 @@ commit_boundary = "Mutation: future Resume Continuity may commit only through Ev
 rollback_undo = "Before commit, cancellation changes nothing; after a future commit, inverse control is separately typed and verified, while remote deletion is never implied."
 privacy_egress = "Continuity remains separate from Ambitions Account and R2; no private envelope leaves the device while gated, and future eligible iCloud transport is user-owned, minimized, encrypted, and explicitly consented."
 verification_ids = ["SCENARIO-SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"]
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+rollback_posture = "inverse_command"
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-REMOTE-PENDING"
 requirement_id = "SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"
@@ -284,12 +386,15 @@ commit_boundary = "Non-mutating: gate, conflict, migration, or restore review re
 rollback_undo = "No Undo is required; dismissal returns to unchanged local truth and preserves every quarantined alternative, checkpoint, and causal identity."
 privacy_egress = "Continuity remains separate from Ambitions Account and R2; no private envelope leaves the device while gated, and future eligible iCloud transport is user-owned, minimized, encrypted, and explicitly consented."
 verification_ids = ["SCENARIO-SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"]
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-RESTORING"
 requirement_id = "SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"
 activation_posture = "future_gated"
 gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
-transition_exit = "Review Restore => destination: the restore dry run and verified local checkpoint from Continuity control — Restoring; effect: No durable mutation occurs and no Receipt is created; Review Restore exposes only gate status, local authority, affected identities, dry-run consequences, or rollback information. It cannot enable, upload, download, merge, restore, migrate, delete, pause, resume, retry, or choose a conflict while gated. Visible evidence remains: A selected continuity copy is loading. Information already saved on this device remains recoverable.; focus: the Review Restore gate, preview, or result heading in Continuity control — Restoring."
+transition_exit = "Review Restore => destination: the restore dry run and verified local checkpoint from Continuity control — Restoring; effect: No durable mutation occurs and no Receipt is created; Review Restore exposes only gate status, local authority, affected identities, dry-run consequences, or rollback information. It cannot enable, upload, download, merge, restore, migrate, delete, pause, resume, retry, or choose a conflict while gated. Visible evidence remains: A selected continuity copy is loading. Information already saved on this device remains recoverable.; focus: the Review Restore gate, preview, or result heading in Continuity control — Restoring.\nRestore Reviewed Copy => destination: the future restore progress state bound to the reviewed copy; effect: The typed Restore Reviewed Copy command appends one Event, updates the owning Projection, records a Receipt, and preserves History; the reviewed copy restores atomically without duplicate records or silent conflict loss; focus: the restored local result and retained rollback checkpoint."
 durable_effect = "This contract is future-gated and must not enter task-pack or visual implementation eligibility while the continuity-disabled gate remains. Exact continuity consequence: Review Restore: No durable mutation occurs and no Receipt is created; Review Restore exposes only gate status, local authority, affected identities, dry-run consequences, or rollback information. It cannot enable, upload, download, merge, restore, migrate, delete, pause, resume, retry, or choose a conflict while gated. Visible evidence remains: A selected continuity copy is loading. Information already saved on this device remains recoverable. No silent last-writer-wins, remote deletion, or nonlocal authority is permitted. Current visible status: A selected continuity copy is loading. Information already saved on this device remains recoverable."
 recovery_rollback = "Exact checkpoint, conflict, causal-identity, cancellation, and rollback behavior: Review Restore: No Undo is required; dismissal returns to unchanged local truth and preserves every quarantined alternative, checkpoint, and causal identity. Local truth and both conflicting alternatives remain protected. Recovery preserves: A selected continuity copy is loading. Information already saved on this device remains recoverable."
 offline_behavior = "The complete local core remains readable, mutable, replayable, and authoritative offline. While gated, no upload, download, merge, migration, restore, retry, or remote deletion is attempted. Offline evidence remains: A selected continuity copy is loading. Information already saved on this device remains recoverable."
@@ -308,6 +413,26 @@ commit_boundary = "Non-mutating: gate, conflict, migration, or restore review re
 rollback_undo = "No Undo is required; dismissal returns to unchanged local truth and preserves every quarantined alternative, checkpoint, and causal identity."
 privacy_egress = "Continuity remains separate from Ambitions Account and R2; no private envelope leaves the device while gated, and future eligible iCloud transport is user-owned, minimized, encrypted, and explicitly consented."
 verification_ids = ["SCENARIO-SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"]
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-CONTINUITY-CONTROL-RESTORING-002"
+label = "Restore Reviewed Copy"
+canonical_owner = "system.continuity.command-contract"
+preconditions = ["A current verified backup, dry run, rollback checkpoint, and duplicate-prevention proof exist", "Current explicit consent is present", "Eligible iCloud state and privacy/security gate are verified", "Local source authority, stable schema, and causal identity are verified", "Silent last-writer-wins is forbidden", "The reviewed restore dry run, exact backup identity, and replacement consequences are explicitly confirmed"]
+destination = "the future restore progress state bound to the reviewed copy"
+effect = "The typed Restore Reviewed Copy command appends one Event, updates the owning Projection, records a Receipt, and preserves History; the reviewed copy restores atomically without duplicate records or silent conflict loss"
+success_focus = "the restored local result and retained rollback checkpoint"
+failure_focus = "the Restore Reviewed Copy control and first invalid backup, schema, or causal fact"
+commit_boundary = "Mutation: the exact current revision validates before one typed command commits atomically."
+rollback_undo = "The verified rollback checkpoint and restore journal recover the pre-restore local projection through the typed recovery path."
+privacy_egress = "Only user-owned encrypted continuity storage supplies the confirmed reviewed copy after the full gate."
+verification_ids = ["SCENARIO-SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"]
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+rollback_posture = "checkpoint_restore"
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-RETRYING"
 requirement_id = "SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"
@@ -332,6 +457,9 @@ commit_boundary = "External-result: any future retry remains subordinate to curr
 rollback_undo = "Cancellation preserves the verified local checkpoint and failed causal identity; another retry requires full freshness and gate revalidation."
 privacy_egress = "Continuity remains separate from Ambitions Account and R2; no private envelope leaves the device while gated, and future eligible iCloud transport is user-owned, minimized, encrypted, and explicitly consented."
 verification_ids = ["SCENARIO-SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"]
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-SIGNED-OUT"
 requirement_id = "SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"
@@ -356,6 +484,9 @@ commit_boundary = "Non-mutating: gate, conflict, migration, or restore review re
 rollback_undo = "No Undo is required; dismissal returns to unchanged local truth and preserves every quarantined alternative, checkpoint, and causal identity."
 privacy_egress = "Continuity remains separate from Ambitions Account and R2; no private envelope leaves the device while gated, and future eligible iCloud transport is user-owned, minimized, encrypted, and explicitly consented."
 verification_ids = ["SCENARIO-SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"]
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-UNAVAILABLE"
 requirement_id = "SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"
@@ -380,6 +511,9 @@ commit_boundary = "External-result: any future retry remains subordinate to curr
 rollback_undo = "Cancellation preserves the verified local checkpoint and failed causal identity; another retry requires full freshness and gate revalidation."
 privacy_egress = "Continuity remains separate from Ambitions Account and R2; no private envelope leaves the device while gated, and future eligible iCloud transport is user-owned, minimized, encrypted, and explicitly consented."
 verification_ids = ["SCENARIO-SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"]
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-UPLOADING"
 requirement_id = "SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"
@@ -404,6 +538,10 @@ commit_boundary = "Mutation: future Pause Continuity may commit only through Eve
 rollback_undo = "Before commit, cancellation changes nothing; after a future commit, inverse control is separately typed and verified, while remote deletion is never implied."
 privacy_egress = "Continuity remains separate from Ambitions Account and R2; no private envelope leaves the device while gated, and future eligible iCloud transport is user-owned, minimized, encrypted, and explicitly consented."
 verification_ids = ["SCENARIO-SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"]
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+rollback_posture = "inverse_command"
+
 +++
 
 # Sync and Continuity

@@ -16,8 +16,15 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable, Mapping
 
-from tools.ambitions_canon.model import StateCommandContract
-from tools.ambitions_canon.parser import parse_canon_document
+from tools.ambitions_canon.model import (
+    StateCommand,
+    StateCommandActivationPosture,
+    StateCommandContract,
+)
+from tools.ambitions_canon.parser import (
+    parse_canon_document,
+    validate_state_command_contract_semantics,
+)
 
 
 BLUEPRINT_PATH = Path("docs/canon/migration/ux-blueprint.json")
@@ -701,6 +708,7 @@ STATE_VARIANT_FIELDS = frozenset(
         "blueprint_id",
         "displayed_objects",
         "durable_effect",
+        "future_gated_commands",
         "generic_kind",
         "implementation_status",
         "offline_behavior",
@@ -736,11 +744,15 @@ SPECIFICATION_GAP_FIELDS = frozenset(
 BEHAVIOR_AUTHORITY_EVIDENCE_FIELDS = frozenset(
     {"normative_clause", "owned_fields", "requirement_id"}
 )
+FUTURE_GATED_COMMAND_FIELDS = frozenset(
+    {"activation_posture", "command_id", "gate_requirement_ids", "label"}
+)
 BEHAVIOR_OWNED_FIELDS = frozenset(
     {
         "accessibility_focus",
         "allowed_commands",
         "durable_effect",
+        "future_gated_commands",
         "offline_behavior",
         "recovery_rollback",
         "transition_exit",
@@ -1198,6 +1210,55 @@ def load_state_command_contracts(root: Path) -> tuple[StateCommandContract, ...]
     return tuple(sorted(contracts, key=lambda item: item.state_id))
 
 
+def active_state_commands(contract: StateCommandContract) -> tuple[StateCommand, ...]:
+    """Return only commands that may authorize current-state presentation."""
+
+    return tuple(
+        command
+        for command in contract.commands
+        if command.activation_posture is StateCommandActivationPosture.ACTIVE
+    )
+
+
+def future_gated_state_commands(
+    contract: StateCommandContract,
+) -> tuple[dict[str, object], ...]:
+    """Project non-authorizing future commands with their exact machine gates."""
+
+    return tuple(
+        {
+            "activation_posture": "future_gated",
+            "command_id": command.command_id,
+            "gate_requirement_ids": list(command.gate_requirement_ids),
+            "label": command.label,
+        }
+        for command in contract.commands
+        if command.activation_posture is StateCommandActivationPosture.FUTURE_GATED
+    )
+
+
+def active_state_transition_exit(contract: StateCommandContract) -> str:
+    """Render only currently authorizing routes into the active blueprint field."""
+
+    commands = active_state_commands(contract)
+    if not commands:
+        future_ids = ", ".join(
+            command.command_id
+            for command in contract.commands
+            if command.activation_posture
+            is StateCommandActivationPosture.FUTURE_GATED
+        )
+        return (
+            "No active command is exposed; future-gated command metadata "
+            f"{future_ids} remains non-authorizing."
+        )
+    return "\n".join(
+        f"{item.label} => destination: {item.destination}; effect: "
+        f"{item.effect}; focus: {item.success_focus}."
+        for item in commands
+    )
+
+
 def load_state_inventory(root: Path) -> dict[str, object]:
     """Load the explicit matrix-bound state inventory used by validation."""
 
@@ -1583,6 +1644,10 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
     state_contracts = load_state_command_contracts(root)
     state_contracts_by_id = {item.state_id: item for item in state_contracts}
     for contract in state_contracts:
+        validate_state_command_contract_semantics(
+            root / "docs/canon/manifest.toml",
+            contract,
+        )
         if contract.requirement_id not in known_requirements:
             raise UXBlueprintError(
                 f"state contract references unknown requirement: {contract.state_id}"
@@ -1591,6 +1656,12 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
             raise UXBlueprintError(
                 f"state contract references unknown gate requirement: {contract.state_id}"
             )
+        for command in contract.commands:
+            if set(command.gate_requirement_ids) - known_requirements:
+                raise UXBlueprintError(
+                    "state command references unknown gate requirement: "
+                    f"{command.command_id}"
+                )
     matrix = json.loads((root / REPAIR_MATRIX_PATH).read_text(encoding="utf-8"))
     matrix_gap_families = {
         _string(item.get("gap_id"), "matrix gap ID"): frozenset(
@@ -1934,6 +2005,22 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
                 variant.get("allowed_commands"),
                 "state variant allowed commands",
             )
+            future_command_values = _possibly_empty_records(
+                variant.get("future_gated_commands"),
+                "state variant future-gated commands",
+            )
+            future_commands: list[dict[str, object]] = []
+            for command_value in future_command_values:
+                command = _object(
+                    command_value,
+                    "state variant future-gated command",
+                )
+                _closed(
+                    command,
+                    FUTURE_GATED_COMMAND_FIELDS,
+                    "future-gated command fields",
+                )
+                future_commands.append(command)
             behavior_posture = _string(
                 variant.get("behavior_authority_posture"),
                 "state behavior authority posture",
@@ -1979,6 +2066,7 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
             if behavior_posture == "exploratory_blocked_by_specification_gap":
                 if (
                     allowed_commands
+                    or future_commands
                     or behavior_requirements
                     or evidence
                     or not state_gap_ids
@@ -2043,13 +2131,20 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
                     raise UXBlueprintError(
                         f"state command contract requirements are not linked: {variant_id}"
                     )
-                expected_labels = tuple(command.label for command in contract.commands)
+                expected_labels = tuple(
+                    command.label for command in active_state_commands(contract)
+                )
                 if allowed_commands != expected_labels:
                     raise UXBlueprintError(
                         f"allowed commands drift from structured canon: {variant_id}"
                     )
+                expected_future_commands = future_gated_state_commands(contract)
+                if tuple(future_commands) != expected_future_commands:
+                    raise UXBlueprintError(
+                        f"future-gated commands drift from structured canon: {variant_id}"
+                    )
                 for field, expected in {
-                    "transition_exit": contract.transition_exit,
+                    "transition_exit": active_state_transition_exit(contract),
                     "durable_effect": contract.durable_effect,
                     "recovery_rollback": contract.recovery_rollback,
                     "offline_behavior": contract.offline_behavior,
@@ -2105,7 +2200,10 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
                     raise UXBlueprintError(
                         f"behavior fields lack exact ownership: {variant_id}"
                     )
-                for command in allowed_commands:
+                for command in allowed_commands + tuple(
+                    _string(item.get("label"), "future-gated command label")
+                    for item in future_commands
+                ):
                     if BANNED_VISIBLE_INTERNAL_LANGUAGE.search(command):
                         raise UXBlueprintError(
                             f"command exposes internal language: {variant_id} {command}"
@@ -2127,14 +2225,16 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
                     f"{variant_id}"
                 )
             if variant_id == "UX-STATE-VARIANT-TRUST-INLINE-NO-DISCLOSURE":
-                if displayed_objects or allowed_commands or variant.get(
+                if displayed_objects or allowed_commands or future_commands or variant.get(
                     "visible_content_copy"
                 ) != "":
                     raise UXBlueprintError(
                         "no-disclosure variant must render no trust object, copy, or command"
                     )
             elif not displayed_objects or (
-                behavior_posture == "requirement_backed" and not allowed_commands
+                behavior_posture == "requirement_backed"
+                and not allowed_commands
+                and not future_commands
             ):
                 raise UXBlueprintError(
                     f"state variant requires exact objects and commands: {variant_id}"
@@ -2154,7 +2254,7 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
             if behavior_posture == "requirement_backed" and screen_id in (
                 COMPACT_COMMAND_CONTRACT_SCREEN_IDS
                 | GOALS_COMMAND_CONTRACT_SCREEN_IDS
-            ):
+            ) and not (future_commands and not allowed_commands):
                 lines = tuple(
                     line for line in variant["transition_exit"].splitlines() if line
                 )
@@ -2515,13 +2615,17 @@ def render_ux_blueprint_markdown(
             "These stable, frameable variants refine the nine completeness kinds without "
             "collapsing owner-specific state axes.",
             "",
-            "| Variant ID | Screen | Variant | Generic kind | Behavior posture | Visible contract | Commands | Requirements |",
-            "| --- | --- | --- | --- | --- | --- | --- | --- |",
+            "| Variant ID | Screen | Variant | Generic kind | Behavior posture | Visible contract | Active commands | Future-gated commands | Requirements |",
+            "| --- | --- | --- | --- | --- | --- | --- | --- | --- |",
         ]
     )
     for state_model in blueprint["state_models"]:  # type: ignore[index]
         for variant in state_model["variants"]:
             commands = ", ".join(variant["allowed_commands"])
+            future_commands = ", ".join(
+                f"{item['label']} [{', '.join(item['gate_requirement_ids'])}]"
+                for item in variant["future_gated_commands"]
+            )
             requirements = ", ".join(
                 f"`{item}`" for item in variant["requirement_ids"]
             )
@@ -2529,7 +2633,8 @@ def render_ux_blueprint_markdown(
                 f"| `{variant['blueprint_id']}` | `{state_model['screen_id']}` | "
                 f"{variant['title']} | `{variant['generic_kind']}` | "
                 f"`{variant['behavior_authority_posture']}` | "
-                f"{variant['visible_content_copy']} | {commands} | {requirements} |"
+                f"{variant['visible_content_copy']} | {commands} | {future_commands} | "
+                f"{requirements} |"
             )
     lines.extend(
         [

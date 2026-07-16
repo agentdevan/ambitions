@@ -38,12 +38,15 @@ commit_boundary = "Non-mutating: status dismissal cannot create, edit, remove, c
 rollback_undo = "No Undo is required; the owning object, local Rule, external result, and callback Receipt remain independently inspectable."
 privacy_egress = "Lock Screen and system-request payloads are privacy-filtered and minimized; private Goal, Step, Event, Proof, and life-graph context remains local unless an explicitly approved field is necessary for the notification."
 verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-NOTIFICATIONS-DELIVERED"
 requirement_id = "SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"
 activation_posture = "active"
 gate_requirement_ids = []
-transition_exit = "Done => destination: the originating You notification context from Notification rules and delivery state — Delivered; effect: No durable mutation occurs and no Receipt is created; Done closes only the current delivery, callback, reconciliation, or removal status. Delivery or acknowledgment does not complete work; callback actions must already have routed to the resolved object owner and revalidated object revision, authorization, proof, and idempotency. Visible evidence remains: The notification reached the device; delivery alone does not mark work complete.; focus: the changed Rule, owning object, or Done result heading in Notification rules and delivery state — Delivered."
+transition_exit = "Done => destination: the originating You notification context from Notification rules and delivery state — Delivered; effect: No durable mutation occurs and no Receipt is created; Done closes only the current delivery, callback, reconciliation, or removal status. Delivery or acknowledgment does not complete work; callback actions must already have routed to the resolved object owner and revalidated object revision, authorization, proof, and idempotency. Visible evidence remains: The notification reached the device; delivery alone does not mark work complete.; focus: the changed Rule, owning object, or Done result heading in Notification rules and delivery state — Delivered.\nAdd Proof => destination: the resolved object owner’s Proof consequence preview; effect: No durable mutation occurs and no Receipt is created; the resolved owner validates proof requirements before exposing its typed Add Proof command; focus: the owning object or first consequence in its canonical preview.\nComplete => destination: the resolved Step or object closure consequence preview; effect: No durable mutation occurs and no Receipt is created; the resolved owner revalidates completion and proof requirements before exposing its typed closure command; focus: the owning object or first consequence in its canonical preview.\nOpen Event => destination: the resolved Event owner detail; effect: No durable mutation occurs and no Receipt is created; the Event opens for inspection without acknowledging or completing it; focus: the owning object or first consequence in its canonical preview.\nReschedule => destination: the resolved object owner’s scheduling consequence preview; effect: No durable mutation occurs and no Receipt is created; the scheduling owner revalidates revision, capacity, and reflow before exposing its typed move command; focus: the owning object or first consequence in its canonical preview.\nReview Reflow => destination: the resolved Time reflow consequence preview; effect: No durable mutation occurs and no Receipt is created; the Time owner shows the proposed reflow without committing it; focus: the owning object or first consequence in its canonical preview.\nSnooze => destination: the resolved Reminder or notification-rule timing preview; effect: No durable mutation occurs and no Receipt is created; the timing owner revalidates revision and authorization before exposing its typed Snooze command; focus: the owning object or first consequence in its canonical preview.\nStart => destination: the resolved Step execution consequence preview; effect: No durable mutation occurs and no Receipt is created; the Step owner revalidates execution state before exposing its typed Start command; focus: the owning object or first consequence in its canonical preview."
 durable_effect = "Exact local Rule and separate iOS-result consequences: Done: No durable mutation occurs and no Receipt is created; Done closes only the current delivery, callback, reconciliation, or removal status. Delivery or acknowledgment does not complete work; callback actions must already have routed to the resolved object owner and revalidated object revision, authorization, proof, and idempotency. Visible evidence remains: The notification reached the device; delivery alone does not mark work complete. Callback actions Complete, Start, Snooze, Reschedule, Add Proof, Open Event, and Review Reflow route to resolved object owners with current revision, authorization, proof, and idempotency revalidation; delivery or acknowledgment does not complete work. Current visible status: The notification reached the device; delivery alone does not mark work complete."
 recovery_rollback = "Exact local rollback, external retry, permission return, and foreground reconciliation: Done: No Undo is required; the owning object, local Rule, external result, and callback Receipt remain independently inspectable. Reconciliation compares committed Rules with system requests and cannot duplicate scheduling or callback replay. Recovery preserves: The notification reached the device; delivery alone does not mark work complete."
 offline_behavior = "Local Rule creation, editing, removal, History, and Receipts remain available offline. iOS scheduling/removal enters the local outbox and reconciles later without redefining local success; owning objects remain usable. Offline evidence remains: The notification reached the device; delivery alone does not mark work complete."
@@ -62,6 +65,121 @@ commit_boundary = "Non-mutating: status dismissal cannot create, edit, remove, c
 rollback_undo = "No Undo is required; the owning object, local Rule, external result, and callback Receipt remain independently inspectable."
 privacy_egress = "Lock Screen and system-request payloads are privacy-filtered and minimized; private Goal, Step, Event, Proof, and life-graph context remains local unless an explicitly approved field is necessary for the notification."
 verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-DELIVERED-002"
+label = "Add Proof"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["The callback action identity has not been consumed or replayed", "The owner-specific proof and confirmation requirements will be revalidated", "The owning object identity, revision, authorization, and idempotency key remain valid"]
+destination = "the resolved object owner’s Proof consequence preview"
+effect = "No durable mutation occurs and no Receipt is created; the resolved owner validates proof requirements before exposing its typed Add Proof command"
+success_focus = "the owning object or first consequence in its canonical preview"
+failure_focus = "the Add Proof action and opaque stale, authorization, or proof reason"
+commit_boundary = "Non-mutating: the command routes or selects without changing canonical state."
+rollback_undo = "No Undo is required; cancellation returns to the unchanged originating state."
+privacy_egress = "The callback carries only the minimized opaque object/action identity; private content remains local and Lock Screen safe."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-DELIVERED-003"
+label = "Complete"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["The callback action identity has not been consumed or replayed", "The owner-specific proof and confirmation requirements will be revalidated", "The owning object identity, revision, authorization, and idempotency key remain valid"]
+destination = "the resolved Step or object closure consequence preview"
+effect = "No durable mutation occurs and no Receipt is created; the resolved owner revalidates completion and proof requirements before exposing its typed closure command"
+success_focus = "the owning object or first consequence in its canonical preview"
+failure_focus = "the Complete action and opaque stale, authorization, or proof reason"
+commit_boundary = "Non-mutating: the command routes or selects without changing canonical state."
+rollback_undo = "No Undo is required; cancellation returns to the unchanged originating state."
+privacy_egress = "The callback carries only the minimized opaque object/action identity; private content remains local and Lock Screen safe."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-DELIVERED-004"
+label = "Open Event"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["The callback action identity has not been consumed or replayed", "The owner-specific proof and confirmation requirements will be revalidated", "The owning object identity, revision, authorization, and idempotency key remain valid"]
+destination = "the resolved Event owner detail"
+effect = "No durable mutation occurs and no Receipt is created; the Event opens for inspection without acknowledging or completing it"
+success_focus = "the owning object or first consequence in its canonical preview"
+failure_focus = "the Open Event action and opaque stale, authorization, or proof reason"
+commit_boundary = "Non-mutating: the command routes or selects without changing canonical state."
+rollback_undo = "No Undo is required; cancellation returns to the unchanged originating state."
+privacy_egress = "The callback carries only the minimized opaque object/action identity; private content remains local and Lock Screen safe."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-DELIVERED-005"
+label = "Reschedule"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["The callback action identity has not been consumed or replayed", "The owner-specific proof and confirmation requirements will be revalidated", "The owning object identity, revision, authorization, and idempotency key remain valid"]
+destination = "the resolved object owner’s scheduling consequence preview"
+effect = "No durable mutation occurs and no Receipt is created; the scheduling owner revalidates revision, capacity, and reflow before exposing its typed move command"
+success_focus = "the owning object or first consequence in its canonical preview"
+failure_focus = "the Reschedule action and opaque stale, authorization, or proof reason"
+commit_boundary = "Non-mutating: the command routes or selects without changing canonical state."
+rollback_undo = "No Undo is required; cancellation returns to the unchanged originating state."
+privacy_egress = "The callback carries only the minimized opaque object/action identity; private content remains local and Lock Screen safe."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-DELIVERED-006"
+label = "Review Reflow"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["The callback action identity has not been consumed or replayed", "The owner-specific proof and confirmation requirements will be revalidated", "The owning object identity, revision, authorization, and idempotency key remain valid"]
+destination = "the resolved Time reflow consequence preview"
+effect = "No durable mutation occurs and no Receipt is created; the Time owner shows the proposed reflow without committing it"
+success_focus = "the owning object or first consequence in its canonical preview"
+failure_focus = "the Review Reflow action and opaque stale, authorization, or proof reason"
+commit_boundary = "Non-mutating: the command routes or selects without changing canonical state."
+rollback_undo = "No Undo is required; cancellation returns to the unchanged originating state."
+privacy_egress = "The callback carries only the minimized opaque object/action identity; private content remains local and Lock Screen safe."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-DELIVERED-007"
+label = "Snooze"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["The callback action identity has not been consumed or replayed", "The owner-specific proof and confirmation requirements will be revalidated", "The owning object identity, revision, authorization, and idempotency key remain valid"]
+destination = "the resolved Reminder or notification-rule timing preview"
+effect = "No durable mutation occurs and no Receipt is created; the timing owner revalidates revision and authorization before exposing its typed Snooze command"
+success_focus = "the owning object or first consequence in its canonical preview"
+failure_focus = "the Snooze action and opaque stale, authorization, or proof reason"
+commit_boundary = "Non-mutating: the command routes or selects without changing canonical state."
+rollback_undo = "No Undo is required; cancellation returns to the unchanged originating state."
+privacy_egress = "The callback carries only the minimized opaque object/action identity; private content remains local and Lock Screen safe."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-DELIVERED-008"
+label = "Start"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["The callback action identity has not been consumed or replayed", "The owner-specific proof and confirmation requirements will be revalidated", "The owning object identity, revision, authorization, and idempotency key remain valid"]
+destination = "the resolved Step execution consequence preview"
+effect = "No durable mutation occurs and no Receipt is created; the Step owner revalidates execution state before exposing its typed Start command"
+success_focus = "the owning object or first consequence in its canonical preview"
+failure_focus = "the Start action and opaque stale, authorization, or proof reason"
+commit_boundary = "Non-mutating: the command routes or selects without changing canonical state."
+rollback_undo = "No Undo is required; cancellation returns to the unchanged originating state."
+privacy_egress = "The callback carries only the minimized opaque object/action identity; private content remains local and Lock Screen safe."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-NOTIFICATIONS-DISABLED"
 requirement_id = "SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"
@@ -86,12 +204,15 @@ commit_boundary = "External-result: system Settings owns authorization; foregrou
 rollback_undo = "Cancellation or an unchanged permission returns to the prior status; no rule, owning object, or callback action is replayed."
 privacy_egress = "Lock Screen and system-request payloads are privacy-filtered and minimized; private Goal, Step, Event, Proof, and life-graph context remains local unless an explicitly approved field is necessary for the notification."
 verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-NOTIFICATIONS-EXTERNALLY-FAILED"
 requirement_id = "SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"
 activation_posture = "active"
 gate_requirement_ids = []
-transition_exit = "Try Again => destination: the current-rule iOS scheduling or removal reconciliation result from Notification rules and delivery state — Externally Failed; effect: The Try Again external result causes no local canonical mutation; it retries only the failed iOS scheduling or removal identity for the current committed Rule, cannot replay a superseded request or callback action, and preserves local success if iOS fails again. Visible evidence remains: The notification could not be scheduled. The related Step remains unchanged.; focus: the changed Rule, owning object, or Try Again result heading in Notification rules and delivery state — Externally Failed."
+transition_exit = "Try Again => destination: the current-rule iOS scheduling or removal reconciliation result from Notification rules and delivery state — Externally Failed; effect: The Try Again external result causes no local canonical mutation; it retries only the failed iOS scheduling or removal identity for the current committed Rule, cannot replay a superseded request or callback action, and preserves local success if iOS fails again. Visible evidence remains: The notification could not be scheduled. The related Step remains unchanged.; focus: the changed Rule, owning object, or Try Again result heading in Notification rules and delivery state — Externally Failed.\nReconcile => destination: the reconciled local-rule and iOS-request status; effect: The Reconcile external result causes no local canonical mutation; the comparison reports current external results without completing work or mutating an owning object; focus: the first reconciled rule or remaining external failure."
 durable_effect = "Exact local Rule and separate iOS-result consequences: Try Again: The Try Again external result causes no local canonical mutation; it retries only the failed iOS scheduling or removal identity for the current committed Rule, cannot replay a superseded request or callback action, and preserves local success if iOS fails again. Visible evidence remains: The notification could not be scheduled. The related Step remains unchanged. Callback actions Complete, Start, Snooze, Reschedule, Add Proof, Open Event, and Review Reflow route to resolved object owners with current revision, authorization, proof, and idempotency revalidation; delivery or acknowledgment does not complete work. Current visible status: The notification could not be scheduled. The related Step remains unchanged."
 recovery_rollback = "Exact local rollback, external retry, permission return, and foreground reconciliation: Try Again: Cancellation leaves the local Rule and failed external identity unchanged; foreground reconciliation compares current committed rules with system requests before another retry. Reconciliation compares committed Rules with system requests and cannot duplicate scheduling or callback replay. Recovery preserves: The notification could not be scheduled. The related Step remains unchanged."
 offline_behavior = "Local Rule creation, editing, removal, History, and Receipts remain available offline. iOS scheduling/removal enters the local outbox and reconciles later without redefining local success; owning objects remain usable. Offline evidence remains: The notification could not be scheduled. The related Step remains unchanged."
@@ -110,6 +231,25 @@ commit_boundary = "External-result: iOS scheduling or removal follows the accept
 rollback_undo = "Cancellation leaves the local Rule and failed external identity unchanged; foreground reconciliation compares current committed rules with system requests before another retry."
 privacy_egress = "Lock Screen and system-request payloads are privacy-filtered and minimized; private Goal, Step, Event, Proof, and life-graph context remains local unless an explicitly approved field is necessary for the notification."
 verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-NOTIFICATIONS-EXTERNALLY-FAILED-002"
+label = "Reconcile"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["Committed local Notification Rule identities and revisions are current", "Current iOS request identities have been read without replaying a callback", "The comparison is idempotent and cannot duplicate scheduling"]
+destination = "the reconciled local-rule and iOS-request status"
+effect = "The Reconcile external result causes no local canonical mutation; the comparison reports current external results without completing work or mutating an owning object"
+success_focus = "the first reconciled rule or remaining external failure"
+failure_focus = "the Reconcile control and exact rule or iOS request identity"
+commit_boundary = "External-result: the external or protected-system result is revalidated before any separately authorized local command."
+rollback_undo = "No Undo is required; cancellation or external failure preserves the prior verified local state."
+privacy_egress = "Only minimized rule identifiers and scheduling fields reach iOS; callback payloads disclose no private graph context."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-NOTIFICATIONS-PERMISSION-ALLOWED"
 requirement_id = "SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"
@@ -134,6 +274,10 @@ commit_boundary = "Mutation: the local Notification Rule commits first through E
 rollback_undo = "Before commit, cancellation changes nothing; after local commit, Undo or a typed rule command reverses local policy while any iOS request removal reconciles separately."
 privacy_egress = "Lock Screen and system-request payloads are privacy-filtered and minimized; private Goal, Step, Event, Proof, and life-graph context remains local unless an explicitly approved field is necessary for the notification."
 verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "inverse_command"
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-NOTIFICATIONS-PERMISSION-DENIED"
 requirement_id = "SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"
@@ -158,6 +302,9 @@ commit_boundary = "External-result: system Settings owns authorization; foregrou
 rollback_undo = "Cancellation or an unchanged permission returns to the prior status; no rule, owning object, or callback action is replayed."
 privacy_egress = "Lock Screen and system-request payloads are privacy-filtered and minimized; private Goal, Step, Event, Proof, and life-graph context remains local unless an explicitly approved field is necessary for the notification."
 verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-NOTIFICATIONS-PERMISSION-NOT-REQUESTED"
 requirement_id = "SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"
@@ -182,6 +329,9 @@ commit_boundary = "External-result: system Settings owns authorization; foregrou
 rollback_undo = "Cancellation or an unchanged permission returns to the prior status; no rule, owning object, or callback action is replayed."
 privacy_egress = "Lock Screen and system-request payloads are privacy-filtered and minimized; private Goal, Step, Event, Proof, and life-graph context remains local unless an explicitly approved field is necessary for the notification."
 verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-NOTIFICATIONS-RECONCILED"
 requirement_id = "SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"
@@ -206,6 +356,9 @@ commit_boundary = "Non-mutating: status dismissal cannot create, edit, remove, c
 rollback_undo = "No Undo is required; the owning object, local Rule, external result, and callback Receipt remain independently inspectable."
 privacy_egress = "Lock Screen and system-request payloads are privacy-filtered and minimized; private Goal, Step, Event, Proof, and life-graph context remains local unless an explicitly approved field is necessary for the notification."
 verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-NOTIFICATIONS-REMOVED"
 requirement_id = "SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"
@@ -230,6 +383,9 @@ commit_boundary = "Non-mutating: status dismissal cannot create, edit, remove, c
 rollback_undo = "No Undo is required; the owning object, local Rule, external result, and callback Receipt remain independently inspectable."
 privacy_egress = "Lock Screen and system-request payloads are privacy-filtered and minimized; private Goal, Step, Event, Proof, and life-graph context remains local unless an explicitly approved field is necessary for the notification."
 verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-NOTIFICATIONS-SCHEDULED"
 requirement_id = "SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"
@@ -254,6 +410,9 @@ commit_boundary = "Mutation: rule editing commits locally through Event, Project
 rollback_undo = "Before commit, cancellation preserves the prior rule; after commit, a typed inverse restores the prior local policy and external requests reconcile idempotently."
 privacy_egress = "Lock Screen and system-request payloads are privacy-filtered and minimized; private Goal, Step, Event, Proof, and life-graph context remains local unless an explicitly approved field is necessary for the notification."
 verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "inverse_command"
 
 [[state_command_contracts.commands]]
 command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-002"
@@ -268,6 +427,9 @@ commit_boundary = "Mutation: local rule removal commits through Event, Projectio
 rollback_undo = "Before commit, cancellation preserves the rule; after commit, restoring notification policy is a separate typed command and cannot recreate or complete the owning object."
 privacy_egress = "Lock Screen and system-request payloads are privacy-filtered and minimized; private Goal, Step, Event, Proof, and life-graph context remains local unless an explicitly approved field is necessary for the notification."
 verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "owner_recovery_handoff"
 
 [[state_command_contracts.commands]]
 command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-003"
@@ -282,6 +444,10 @@ commit_boundary = "Mutation: turning a rule off commits locally through Event, P
 rollback_undo = "Before commit, cancellation preserves the active rule; after commit, re-enabling is a separate typed command and scheduling reconciles without duplicate requests."
 privacy_egress = "Lock Screen and system-request payloads are privacy-filtered and minimized; private Goal, Step, Event, Proof, and life-graph context remains local unless an explicitly approved field is necessary for the notification."
 verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "inverse_command"
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-NOTIFICATIONS-SUPERSEDED"
 requirement_id = "SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"
@@ -306,6 +472,10 @@ commit_boundary = "Mutation: rule editing commits locally through Event, Project
 rollback_undo = "Before commit, cancellation preserves the prior rule; after commit, a typed inverse restores the prior local policy and external requests reconcile idempotently."
 privacy_egress = "Lock Screen and system-request payloads are privacy-filtered and minimized; private Goal, Step, Event, Proof, and life-graph context remains local unless an explicitly approved field is necessary for the notification."
 verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+rollback_posture = "inverse_command"
+
 +++
 
 # Notifications

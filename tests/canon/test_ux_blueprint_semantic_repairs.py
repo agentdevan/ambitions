@@ -18,6 +18,7 @@ VARIANT_FIELDS = {
     "blueprint_id",
     "displayed_objects",
     "durable_effect",
+    "future_gated_commands",
     "generic_kind",
     "implementation_status",
     "offline_behavior",
@@ -364,6 +365,7 @@ class UXBlueprintSemanticRepairTests(unittest.TestCase):
             if item["behavior_authority_posture"] == "requirement_backed":
                 self.assertTrue(
                     item["allowed_commands"]
+                    or item["future_gated_commands"]
                     or item["blueprint_id"]
                     == "UX-STATE-VARIANT-TRUST-INLINE-NO-DISCLOSURE"
                 )
@@ -1143,7 +1145,10 @@ class UXBlueprintSemanticRepairTests(unittest.TestCase):
                 continue
             for variant in model["variants"]:
                 if variant["behavior_authority_posture"] == "requirement_backed":
-                    self.assertTrue(variant["allowed_commands"])
+                    self.assertTrue(
+                        variant["allowed_commands"]
+                        or variant["future_gated_commands"]
+                    )
                     self.assertEqual(variant["specification_gap_ids"], [])
                 else:
                     self.assertEqual(variant["allowed_commands"], [])

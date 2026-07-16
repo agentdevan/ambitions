@@ -6,7 +6,7 @@
 - Canon revision: `1`
 - Authority state: `shadow`
 - Compiler version: `0.2.0`
-- Canon content SHA: `37ca3d028309c10537e359cc5d9e95dbbc54b40b5a10557e1f34d08ffb90281c`
+- Canon content SHA: `865157d4d1a8ec074d7b4d233e2e1c021b2eea1aeda6ab9392d63481c6d7d611`
 
 ## Specifications
 
@@ -86,35 +86,35 @@
 | `A11Y-REDUCED-EFFECTS-001` | MUST | `accessibility.reduced-effects` | `docs/canon/standards/accessibility.md:70` |
 | `A11Y-STATUS-ERRORS-001` | MUST | `accessibility.status-errors` | `docs/canon/standards/accessibility.md:118` |
 | `ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001` | MUST | `accessibility.semantic-equivalence` | `docs/canon/CONSTITUTION.md:837` |
-| `APP-ACCOUNT-COMMAND-CONTRACT-001` | MUST | `account.command-contract` | `docs/canon/specifications/app/launch-and-setup.md:871` |
-| `APP-ACCOUNT-LAUNCH-001` | MUST | `account.launch-commitment` | `docs/canon/specifications/app/launch-and-setup.md:768` |
-| `APP-DEEP-LINK-COMMAND-CONTRACT-001` | MUST | `app.deep-linking.command-contract` | `docs/canon/specifications/app/deep-linking.md:250` |
-| `APP-DEEP-LINK-EXTERNAL-ENTRY-001` | MUST | `app.deep-linking.external-entry` | `docs/canon/specifications/app/deep-linking.md:195` |
-| `APP-DEEP-LINK-FALLBACK-001` | MUST | `app.deep-linking.fallback` | `docs/canon/specifications/app/deep-linking.md:228` |
-| `APP-DEEP-LINK-PRIVACY-001` | MUST | `app.deep-linking.privacy` | `docs/canon/specifications/app/deep-linking.md:217` |
-| `APP-DEEP-LINK-RESOLVE-001` | MUST | `app.deep-linking.resolution` | `docs/canon/specifications/app/deep-linking.md:206` |
-| `APP-DEEP-LINK-STATE-001` | MUST | `app.deep-linking.state` | `docs/canon/specifications/app/deep-linking.md:239` |
-| `APP-DEGRADED-COMMAND-CONTRACT-001` | MUST | `app.degraded.command-contract` | `docs/canon/specifications/app/degraded-states.md:596` |
-| `APP-DEGRADED-FAILURE-TAXONOMY-001` | MUST | `app.degraded.failure-taxonomy` | `docs/canon/specifications/app/degraded-states.md:535` |
-| `APP-DEGRADED-PRESENTATION-001` | MUST | `app.degraded.presentation` | `docs/canon/specifications/app/degraded-states.md:548` |
-| `APP-DEGRADED-PRESERVE-001` | MUST | `app.degraded.input-preservation` | `docs/canon/specifications/app/degraded-states.md:561` |
-| `APP-DEGRADED-RECOVERY-001` | MUST | `app.degraded.recovery` | `docs/canon/specifications/app/degraded-states.md:572` |
-| `APP-DEGRADED-STATE-001` | MUST | `app.degraded.state` | `docs/canon/specifications/app/degraded-states.md:585` |
-| `APP-LAUNCH-READINESS-001` | MUST | `app.launch.readiness` | `docs/canon/specifications/app/launch-and-setup.md:814` |
-| `APP-LAUNCH-RECOVERY-001` | MUST | `app.launch.recovery` | `docs/canon/specifications/app/launch-and-setup.md:827` |
-| `APP-LAUNCH-SETUP-COMMAND-CONTRACT-001` | MUST | `app.launch-setup.command-contract` | `docs/canon/specifications/app/launch-and-setup.md:892` |
+| `APP-ACCOUNT-COMMAND-CONTRACT-001` | MUST | `account.command-contract` | `docs/canon/specifications/app/launch-and-setup.md:1030` |
+| `APP-ACCOUNT-LAUNCH-001` | MUST | `account.launch-commitment` | `docs/canon/specifications/app/launch-and-setup.md:927` |
+| `APP-DEEP-LINK-COMMAND-CONTRACT-001` | MUST | `app.deep-linking.command-contract` | `docs/canon/specifications/app/deep-linking.md:302` |
+| `APP-DEEP-LINK-EXTERNAL-ENTRY-001` | MUST | `app.deep-linking.external-entry` | `docs/canon/specifications/app/deep-linking.md:247` |
+| `APP-DEEP-LINK-FALLBACK-001` | MUST | `app.deep-linking.fallback` | `docs/canon/specifications/app/deep-linking.md:280` |
+| `APP-DEEP-LINK-PRIVACY-001` | MUST | `app.deep-linking.privacy` | `docs/canon/specifications/app/deep-linking.md:269` |
+| `APP-DEEP-LINK-RESOLVE-001` | MUST | `app.deep-linking.resolution` | `docs/canon/specifications/app/deep-linking.md:258` |
+| `APP-DEEP-LINK-STATE-001` | MUST | `app.deep-linking.state` | `docs/canon/specifications/app/deep-linking.md:291` |
+| `APP-DEGRADED-COMMAND-CONTRACT-001` | MUST | `app.degraded.command-contract` | `docs/canon/specifications/app/degraded-states.md:659` |
+| `APP-DEGRADED-FAILURE-TAXONOMY-001` | MUST | `app.degraded.failure-taxonomy` | `docs/canon/specifications/app/degraded-states.md:598` |
+| `APP-DEGRADED-PRESENTATION-001` | MUST | `app.degraded.presentation` | `docs/canon/specifications/app/degraded-states.md:611` |
+| `APP-DEGRADED-PRESERVE-001` | MUST | `app.degraded.input-preservation` | `docs/canon/specifications/app/degraded-states.md:624` |
+| `APP-DEGRADED-RECOVERY-001` | MUST | `app.degraded.recovery` | `docs/canon/specifications/app/degraded-states.md:635` |
+| `APP-DEGRADED-STATE-001` | MUST | `app.degraded.state` | `docs/canon/specifications/app/degraded-states.md:648` |
+| `APP-LAUNCH-READINESS-001` | MUST | `app.launch.readiness` | `docs/canon/specifications/app/launch-and-setup.md:973` |
+| `APP-LAUNCH-RECOVERY-001` | MUST | `app.launch.recovery` | `docs/canon/specifications/app/launch-and-setup.md:986` |
+| `APP-LAUNCH-SETUP-COMMAND-CONTRACT-001` | MUST | `app.launch-setup.command-contract` | `docs/canon/specifications/app/launch-and-setup.md:1051` |
 | `APP-NAVIGATION-RESTORATION-001` | MUST | `app.navigation.restoration` | `docs/canon/specifications/app/navigation.md:75` |
 | `APP-NAVIGATION-STATE-001` | MUST | `app.navigation.state` | `docs/canon/specifications/app/navigation.md:88` |
-| `APP-PERMISSION-DENIAL-001` | MUST | `app.permissions.denied-fallback` | `docs/canon/specifications/app/permissions.md:788` |
-| `APP-PERMISSION-RECONCILE-001` | MUST | `app.permissions.reconciliation` | `docs/canon/specifications/app/permissions.md:823` |
-| `APP-PERMISSION-RECOVERY-001` | MUST | `app.permissions.recovery` | `docs/canon/specifications/app/permissions.md:812` |
-| `APP-PERMISSION-STATE-001` | MUST | `app.permissions.state` | `docs/canon/specifications/app/permissions.md:801` |
-| `APP-PERMISSIONS-COMMAND-CONTRACT-001` | MUST | `app.permissions.command-contract` | `docs/canon/specifications/app/permissions.md:834` |
-| `APP-PERMISSIONS-CONTRACT-001` | MUST | `app.permissions.contextual-request` | `docs/canon/specifications/app/permissions.md:775` |
-| `APP-SETUP-PROGRESS-001` | MUST | `app.setup.progress` | `docs/canon/specifications/app/launch-and-setup.md:860` |
-| `APP-SETUP-PROGRESSIVE-FIRST-USE-001` | MUST | `app.setup.progressive-first-use` | `docs/canon/specifications/app/launch-and-setup.md:791` |
-| `APP-SETUP-RESUME-001` | MUST | `app.setup.interruption-resume` | `docs/canon/specifications/app/launch-and-setup.md:838` |
-| `APP-SETUP-STATE-001` | MUST | `app.setup.state` | `docs/canon/specifications/app/launch-and-setup.md:849` |
+| `APP-PERMISSION-DENIAL-001` | MUST | `app.permissions.denied-fallback` | `docs/canon/specifications/app/permissions.md:882` |
+| `APP-PERMISSION-RECONCILE-001` | MUST | `app.permissions.reconciliation` | `docs/canon/specifications/app/permissions.md:917` |
+| `APP-PERMISSION-RECOVERY-001` | MUST | `app.permissions.recovery` | `docs/canon/specifications/app/permissions.md:906` |
+| `APP-PERMISSION-STATE-001` | MUST | `app.permissions.state` | `docs/canon/specifications/app/permissions.md:895` |
+| `APP-PERMISSIONS-COMMAND-CONTRACT-001` | MUST | `app.permissions.command-contract` | `docs/canon/specifications/app/permissions.md:928` |
+| `APP-PERMISSIONS-CONTRACT-001` | MUST | `app.permissions.contextual-request` | `docs/canon/specifications/app/permissions.md:869` |
+| `APP-SETUP-PROGRESS-001` | MUST | `app.setup.progress` | `docs/canon/specifications/app/launch-and-setup.md:1019` |
+| `APP-SETUP-PROGRESSIVE-FIRST-USE-001` | MUST | `app.setup.progressive-first-use` | `docs/canon/specifications/app/launch-and-setup.md:950` |
+| `APP-SETUP-RESUME-001` | MUST | `app.setup.interruption-resume` | `docs/canon/specifications/app/launch-and-setup.md:997` |
+| `APP-SETUP-STATE-001` | MUST | `app.setup.state` | `docs/canon/specifications/app/launch-and-setup.md:1008` |
 | `APP-SHELL-FAILURE-001` | MUST | `app.shell.failure-recovery` | `docs/canon/specifications/app/shell.md:667` |
 | `APP-SHELL-STATE-001` | MUST | `app.shell.state` | `docs/canon/specifications/app/shell.md:656` |
 | `AUTHORITY-AMENDMENT-001` | MUST | `authority.amendment` | `docs/canon/CONSTITUTION.md:939` |
@@ -192,14 +192,14 @@
 | `GAP-PERFORMANCE-CALIBRATION-ATLAS-001` | MUST | `engineering.performance.calibration-gap` | `docs/canon/standards/performance-and-energy.md:84` |
 | `GOVERNANCE-LINEAR-RETENTION-001` | MUST | `canon.external-linear-retention` | `docs/canon/CONSTITUTION.md:926` |
 | `IA-PLAIN-BRANDED-NAMING-001` | MUST | `ia.root-labels` | `docs/canon/CONSTITUTION.md:486` |
-| `JOURNEY-CALENDAR-CANDIDATE-001` | MUST | `journey.calendar-import.candidate` | `docs/canon/specifications/journeys/external-calendar-import.md:460` |
-| `JOURNEY-CALENDAR-CONFLICT-CHOICE-001` | MUST | `journey.calendar-diff.conflict-choice` | `docs/canon/specifications/journeys/external-calendar-import.md:323` |
-| `JOURNEY-CALENDAR-DIFF-001` | MUST | `journey.calendar-diff.no-silent-mutation` | `docs/canon/specifications/journeys/external-calendar-import.md:282` |
-| `JOURNEY-CALENDAR-DIFF-GROUPING-001` | MUST | `journey.calendar-diff.grouping` | `docs/canon/specifications/journeys/external-calendar-import.md:313` |
-| `JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001` | MUST | `journey.calendar-import.command-contract` | `docs/canon/specifications/journeys/external-calendar-import.md:410` |
-| `JOURNEY-CALENDAR-IMPORT-COMMIT-001` | MUST | `journey.calendar-import.commit` | `docs/canon/specifications/journeys/external-calendar-import.md:449` |
-| `JOURNEY-CALENDAR-INVITE-DIFF-001` | MUST NOT | `journey.calendar-invite-diff` | `docs/canon/specifications/journeys/external-calendar-import.md:399` |
-| `JOURNEY-CALENDAR-NOTIFICATION-HANDOFF-001` | MUST NOT | `journey.calendar-diff.notification-handoff` | `docs/canon/specifications/journeys/external-calendar-import.md:335` |
+| `JOURNEY-CALENDAR-CANDIDATE-001` | MUST | `journey.calendar-import.candidate` | `docs/canon/specifications/journeys/external-calendar-import.md:780` |
+| `JOURNEY-CALENDAR-CONFLICT-CHOICE-001` | MUST | `journey.calendar-diff.conflict-choice` | `docs/canon/specifications/journeys/external-calendar-import.md:643` |
+| `JOURNEY-CALENDAR-DIFF-001` | MUST | `journey.calendar-diff.no-silent-mutation` | `docs/canon/specifications/journeys/external-calendar-import.md:602` |
+| `JOURNEY-CALENDAR-DIFF-GROUPING-001` | MUST | `journey.calendar-diff.grouping` | `docs/canon/specifications/journeys/external-calendar-import.md:633` |
+| `JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001` | MUST | `journey.calendar-import.command-contract` | `docs/canon/specifications/journeys/external-calendar-import.md:730` |
+| `JOURNEY-CALENDAR-IMPORT-COMMIT-001` | MUST | `journey.calendar-import.commit` | `docs/canon/specifications/journeys/external-calendar-import.md:769` |
+| `JOURNEY-CALENDAR-INVITE-DIFF-001` | MUST NOT | `journey.calendar-invite-diff` | `docs/canon/specifications/journeys/external-calendar-import.md:719` |
+| `JOURNEY-CALENDAR-NOTIFICATION-HANDOFF-001` | MUST NOT | `journey.calendar-diff.notification-handoff` | `docs/canon/specifications/journeys/external-calendar-import.md:655` |
 | `JOURNEY-CAPTURE-PLACEMENT-001` | MUST | `journey.capture.commit-boundary` | `docs/canon/specifications/journeys/capture-to-placement.md:35` |
 | `JOURNEY-DELETE-RESTORE-001` | MUST | `journey.delete-restore.trash` | `docs/canon/specifications/journeys/backup-restore-reset.md:19` |
 | `JOURNEY-FIRST-USE-001` | MUST | `journey.first-use.trigger` | `docs/canon/specifications/journeys/capture-to-placement.md:24` |
@@ -356,33 +356,33 @@
 | `SPEC-APP-SHELL-FIRST-VIEWPORT-001` | MUST | `app.shell.first-viewport` | `docs/canon/specifications/app/shell.md:641` |
 | `SPEC-APP-SHELL-GLOBAL-ACTIONS-001` | MUST | `app.shell.global-actions` | `docs/canon/specifications/app/shell.md:626` |
 | `SPEC-APP-SHELL-ROOT-NAVIGATION-001` | MUST | `app.shell.root-navigation` | `docs/canon/specifications/app/shell.md:597` |
-| `SPEC-COMPLETED-CONTEXTUAL-PLACEMENT-001` | MUST NOT | `global.completed.contextual-placement` | `docs/canon/specifications/global/trust-inspection.md:1129` |
-| `SPEC-GLOBAL-CAPTURE-ATTACHMENT-INTAKE-001` | MUST | `global.capture.attachment-intake` | `docs/canon/specifications/global/capture.md:925` |
-| `SPEC-GLOBAL-CAPTURE-CLASSIFICATION-001` | MUST | `global.capture.classification` | `docs/canon/specifications/global/capture.md:914` |
-| `SPEC-GLOBAL-CAPTURE-CLOSE-BEHAVIOR-001` | MUST | `global.capture.close-behavior` | `docs/canon/specifications/global/capture.md:1022` |
-| `SPEC-GLOBAL-CAPTURE-COMMAND-CONTRACT-001` | MUST | `global.capture.command-contract` | `docs/canon/specifications/global/capture.md:936` |
-| `SPEC-GLOBAL-CAPTURE-DRAFT-RECOVERY-001` | MUST | `global.capture.draft-recovery` | `docs/canon/specifications/global/capture.md:865` |
-| `SPEC-GLOBAL-CAPTURE-IDENTITY-001` | MUST | `global.capture.identity` | `docs/canon/specifications/global/capture.md:816` |
-| `SPEC-GLOBAL-CAPTURE-KEYBOARD-001` | MUST | `global.capture.keyboard` | `docs/canon/specifications/global/capture.md:839` |
-| `SPEC-GLOBAL-CAPTURE-PROPOSAL-FLOW-001` | MUST | `global.capture.proposal-flow` | `docs/canon/specifications/global/capture.md:884` |
-| `SPEC-GLOBAL-CAPTURE-SAVED-FOR-LATER-001` | MUST | `global.capture.saved-for-later` | `docs/canon/specifications/global/capture.md:852` |
-| `SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001` | MUST | `global.capture.visual-authority` | `docs/canon/specifications/global/capture.md:903` |
+| `SPEC-COMPLETED-CONTEXTUAL-PLACEMENT-001` | MUST NOT | `global.completed.contextual-placement` | `docs/canon/specifications/global/trust-inspection.md:1131` |
+| `SPEC-GLOBAL-CAPTURE-ATTACHMENT-INTAKE-001` | MUST | `global.capture.attachment-intake` | `docs/canon/specifications/global/capture.md:930` |
+| `SPEC-GLOBAL-CAPTURE-CLASSIFICATION-001` | MUST | `global.capture.classification` | `docs/canon/specifications/global/capture.md:919` |
+| `SPEC-GLOBAL-CAPTURE-CLOSE-BEHAVIOR-001` | MUST | `global.capture.close-behavior` | `docs/canon/specifications/global/capture.md:1027` |
+| `SPEC-GLOBAL-CAPTURE-COMMAND-CONTRACT-001` | MUST | `global.capture.command-contract` | `docs/canon/specifications/global/capture.md:941` |
+| `SPEC-GLOBAL-CAPTURE-DRAFT-RECOVERY-001` | MUST | `global.capture.draft-recovery` | `docs/canon/specifications/global/capture.md:870` |
+| `SPEC-GLOBAL-CAPTURE-IDENTITY-001` | MUST | `global.capture.identity` | `docs/canon/specifications/global/capture.md:821` |
+| `SPEC-GLOBAL-CAPTURE-KEYBOARD-001` | MUST | `global.capture.keyboard` | `docs/canon/specifications/global/capture.md:844` |
+| `SPEC-GLOBAL-CAPTURE-PROPOSAL-FLOW-001` | MUST | `global.capture.proposal-flow` | `docs/canon/specifications/global/capture.md:889` |
+| `SPEC-GLOBAL-CAPTURE-SAVED-FOR-LATER-001` | MUST | `global.capture.saved-for-later` | `docs/canon/specifications/global/capture.md:857` |
+| `SPEC-GLOBAL-CAPTURE-VISUAL-AUTHORITY-001` | MUST | `global.capture.visual-authority` | `docs/canon/specifications/global/capture.md:908` |
 | `SPEC-GLOBAL-MOTION-ACCESSIBILITY-001` | MUST | `global.motion.accessibility` | `docs/canon/specifications/global/motion.md:57` |
 | `SPEC-GLOBAL-MOTION-RESPONSIBILITY-001` | MUST | `global.motion.responsibility` | `docs/canon/specifications/global/motion.md:33` |
 | `SPEC-GLOBAL-MOTION-STATE-CONTINUITY-001` | MUST | `global.motion.state-continuity` | `docs/canon/specifications/global/motion.md:44` |
-| `SPEC-GLOBAL-SEARCH-ACTIONS-001` | MUST | `global.search.canonical-actions` | `docs/canon/specifications/global/search.md:675` |
-| `SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001` | MUST | `global.search.command-contract` | `docs/canon/specifications/global/search.md:686` |
-| `SPEC-GLOBAL-SEARCH-FIRST-VIEWPORT-001` | MUST | `global.search.first-viewport` | `docs/canon/specifications/global/search.md:627` |
-| `SPEC-GLOBAL-SEARCH-IDENTITY-001` | MUST | `global.search.identity` | `docs/canon/specifications/global/search.md:616` |
-| `SPEC-GLOBAL-SEARCH-INDEX-001` | MUST | `global.search.index-ranking` | `docs/canon/specifications/global/search.md:664` |
-| `SPEC-GLOBAL-SEARCH-INDEX-ACTIONS-001` | MUST | `global.search.index-actions` | `docs/canon/specifications/global/search.md:642` |
-| `SPEC-GLOBAL-SEARCH-PLACEMENT-001` | MUST | `global.search.placement` | `docs/canon/specifications/global/search.md:772` |
-| `SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001` | MUST | `global.search.visual-authority` | `docs/canon/specifications/global/search.md:653` |
-| `SPEC-GLOBAL-TRUST-COMMAND-CONTRACT-001` | MUST | `global.trust.command-contract` | `docs/canon/specifications/global/trust-inspection.md:1043` |
-| `SPEC-GLOBAL-TRUST-INSPECTION-001` | MUST | `global.trust.identity` | `docs/canon/specifications/global/trust-inspection.md:988` |
-| `SPEC-GLOBAL-TRUST-LAYERS-001` | MUST | `global.trust.layers` | `docs/canon/specifications/global/trust-inspection.md:1005` |
-| `SPEC-GLOBAL-TRUST-PROPORTIONAL-RECEIPTS-001` | MUST | `global.trust.proportional-receipts` | `docs/canon/specifications/global/trust-inspection.md:1022` |
-| `SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001` | MUST | `global.trust.visual-authority` | `docs/canon/specifications/global/trust-inspection.md:1032` |
+| `SPEC-GLOBAL-SEARCH-ACTIONS-001` | MUST | `global.search.canonical-actions` | `docs/canon/specifications/global/search.md:763` |
+| `SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001` | MUST | `global.search.command-contract` | `docs/canon/specifications/global/search.md:774` |
+| `SPEC-GLOBAL-SEARCH-FIRST-VIEWPORT-001` | MUST | `global.search.first-viewport` | `docs/canon/specifications/global/search.md:715` |
+| `SPEC-GLOBAL-SEARCH-IDENTITY-001` | MUST | `global.search.identity` | `docs/canon/specifications/global/search.md:704` |
+| `SPEC-GLOBAL-SEARCH-INDEX-001` | MUST | `global.search.index-ranking` | `docs/canon/specifications/global/search.md:752` |
+| `SPEC-GLOBAL-SEARCH-INDEX-ACTIONS-001` | MUST | `global.search.index-actions` | `docs/canon/specifications/global/search.md:730` |
+| `SPEC-GLOBAL-SEARCH-PLACEMENT-001` | MUST | `global.search.placement` | `docs/canon/specifications/global/search.md:860` |
+| `SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001` | MUST | `global.search.visual-authority` | `docs/canon/specifications/global/search.md:741` |
+| `SPEC-GLOBAL-TRUST-COMMAND-CONTRACT-001` | MUST | `global.trust.command-contract` | `docs/canon/specifications/global/trust-inspection.md:1045` |
+| `SPEC-GLOBAL-TRUST-INSPECTION-001` | MUST | `global.trust.identity` | `docs/canon/specifications/global/trust-inspection.md:990` |
+| `SPEC-GLOBAL-TRUST-LAYERS-001` | MUST | `global.trust.layers` | `docs/canon/specifications/global/trust-inspection.md:1007` |
+| `SPEC-GLOBAL-TRUST-PROPORTIONAL-RECEIPTS-001` | MUST | `global.trust.proportional-receipts` | `docs/canon/specifications/global/trust-inspection.md:1024` |
+| `SPEC-GLOBAL-TRUST-VISUAL-AUTHORITY-001` | MUST | `global.trust.visual-authority` | `docs/canon/specifications/global/trust-inspection.md:1034` |
 | `SPEC-SURFACE-GOAL-DETAIL-VIEWPORT-001` | MUST | `surface.goal-detail.viewport` | `docs/canon/specifications/surfaces/goals.md:1631` |
 | `SPEC-SURFACE-GOALS-ANTI-PATTERNS-001` | MUST NOT | `surface.goals.anti-patterns` | `docs/canon/specifications/surfaces/goals.md:1494` |
 | `SPEC-SURFACE-GOALS-CLOSURE-001` | MUST | `surface.goals.closure` | `docs/canon/specifications/surfaces/goals.md:1576` |
@@ -398,52 +398,52 @@
 | `SPEC-SURFACE-GOALS-ROOT-VIEWPORT-001` | MUST | `surface.goals.root-viewport` | `docs/canon/specifications/surfaces/goals.md:1620` |
 | `SPEC-SURFACE-GOALS-SCREEN-INVENTORY-001` | MUST | `surface.goals.screen-inventory` | `docs/canon/specifications/surfaces/goals.md:1505` |
 | `SPEC-SURFACE-GOALS-VISUAL-AUTHORITY-001` | MUST | `surface.goals.visual-authority` | `docs/canon/specifications/surfaces/goals.md:1552` |
-| `SPEC-SURFACE-TIME-CREATION-ROUTES-001` | SHOULD | `surface.time.creation-routes` | `docs/canon/specifications/surfaces/time.md:2517` |
-| `SPEC-SURFACE-TIME-DAY-001` | MUST | `surface.time.day` | `docs/canon/specifications/surfaces/time.md:2451` |
-| `SPEC-SURFACE-TIME-DEGRADED-COMMAND-CONTRACT-001` | MUST | `surface.time.degraded-command-contract` | `docs/canon/specifications/surfaces/time.md:2657` |
-| `SPEC-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001` | MUST | `surface.time.detail-command-contract` | `docs/canon/specifications/surfaces/time.md:2668` |
-| `SPEC-SURFACE-TIME-FIRST-VIEWPORT-001` | MUST | `surface.time.first-viewport` | `docs/canon/specifications/surfaces/time.md:2466` |
-| `SPEC-SURFACE-TIME-IMPORTED-SOURCE-001` | MUST | `surface.time.imported-source` | `docs/canon/specifications/surfaces/time.md:2558` |
-| `SPEC-SURFACE-TIME-LIST-001` | MUST | `surface.time.list` | `docs/canon/specifications/surfaces/time.md:2624` |
-| `SPEC-SURFACE-TIME-MONTH-001` | MUST | `surface.time.month` | `docs/canon/specifications/surfaces/time.md:2602` |
-| `SPEC-SURFACE-TIME-OBJECT-DETAIL-001` | MUST | `surface.time.object-detail` | `docs/canon/specifications/surfaces/time.md:2635` |
-| `SPEC-SURFACE-TIME-PRIMARY-IDENTITY-001` | MUST | `surface.time.primary-identity` | `docs/canon/specifications/surfaces/time.md:2421` |
-| `SPEC-SURFACE-TIME-PURPOSE-001` | MUST | `surface.time.purpose` | `docs/canon/specifications/surfaces/time.md:2479` |
-| `SPEC-SURFACE-TIME-SEARCH-001` | MUST | `surface.time.search` | `docs/canon/specifications/surfaces/time.md:2569` |
-| `SPEC-SURFACE-TIME-STEP-MEMBERSHIP-001` | MUST | `surface.time.step-membership` | `docs/canon/specifications/surfaces/time.md:2533` |
-| `SPEC-SURFACE-TIME-TODAY-CONTROL-001` | MUST | `surface.time.today-control` | `docs/canon/specifications/surfaces/time.md:2505` |
-| `SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001` | MUST | `surface.time.view-command-contract` | `docs/canon/specifications/surfaces/time.md:2646` |
-| `SPEC-SURFACE-TIME-VIEW-SWITCHING-001` | MUST | `surface.time.view-switching` | `docs/canon/specifications/surfaces/time.md:2580` |
-| `SPEC-SURFACE-TIME-VIEWS-001` | MUST | `surface.time.views` | `docs/canon/specifications/surfaces/time.md:2440` |
-| `SPEC-SURFACE-TIME-VISUAL-AUTHORITY-001` | MUST | `surface.time.visual-authority` | `docs/canon/specifications/surfaces/time.md:2494` |
-| `SPEC-SURFACE-TIME-VISUAL-GEOMETRY-001` | MUST | `surface.time.visual-geometry` | `docs/canon/specifications/surfaces/time.md:2547` |
-| `SPEC-SURFACE-TIME-WEEK-001` | MUST | `surface.time.week` | `docs/canon/specifications/surfaces/time.md:2591` |
-| `SPEC-SURFACE-TIME-YEAR-001` | MUST | `surface.time.year` | `docs/canon/specifications/surfaces/time.md:2613` |
-| `SPEC-SURFACE-TODAY-COMMAND-CONTRACT-001` | MUST | `surface.today.command-contract` | `docs/canon/specifications/surfaces/today.md:710` |
-| `SPEC-SURFACE-TODAY-ELIGIBILITY-001` | MUST | `surface.today.eligibility` | `docs/canon/specifications/surfaces/today.md:618` |
-| `SPEC-SURFACE-TODAY-FIRST-VIEWPORT-001` | MUST | `surface.today.first-viewport` | `docs/canon/specifications/surfaces/today.md:648` |
-| `SPEC-SURFACE-TODAY-MISSED-CONTINUITY-001` | MUST | `surface.today.missed-placement-continuity` | `docs/canon/specifications/surfaces/today.md:689` |
-| `SPEC-SURFACE-TODAY-PURPOSE-001` | MUST | `surface.today.purpose` | `docs/canon/specifications/surfaces/today.md:582` |
-| `SPEC-SURFACE-TODAY-ROW-001` | MUST | `surface.today.object-row` | `docs/canon/specifications/surfaces/today.md:699` |
-| `SPEC-SURFACE-TODAY-SCREEN-INVENTORY-001` | MUST | `surface.today.screen-inventory` | `docs/canon/specifications/surfaces/today.md:633` |
-| `SPEC-SURFACE-TODAY-STATES-001` | MUST | `surface.today.states` | `docs/canon/specifications/surfaces/today.md:667` |
-| `SPEC-SURFACE-TODAY-TEMPORAL-RAIL-001` | MUST | `surface.today.temporal-rail` | `docs/canon/specifications/surfaces/today.md:601` |
-| `SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001` | MUST | `surface.today.visual-authority` | `docs/canon/specifications/surfaces/today.md:678` |
-| `SPEC-SURFACE-YOU-APPEARANCE-001` | MUST | `surface.you.appearance` | `docs/canon/specifications/surfaces/you.md:1402` |
-| `SPEC-SURFACE-YOU-COMMAND-CONTRACT-001` | MUST | `surface.you.command-contract` | `docs/canon/specifications/surfaces/you.md:1446` |
-| `SPEC-SURFACE-YOU-CONTEXTUAL-EDUCATION-001` | SHOULD | `surface.you.contextual-education` | `docs/canon/specifications/surfaces/you.md:1435` |
-| `SPEC-SURFACE-YOU-DATA-CONTROLS-001` | MUST | `surface.you.data-controls` | `docs/canon/specifications/surfaces/you.md:1413` |
-| `SPEC-SURFACE-YOU-DEPTH-001` | MUST | `surface.you.depth` | `docs/canon/specifications/surfaces/you.md:1357` |
-| `SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001` | MUST | `surface.you.entitlement-command-contract` | `docs/canon/specifications/surfaces/you.md:1457` |
-| `SPEC-SURFACE-YOU-FIRST-VIEWPORT-001` | MUST | `surface.you.first-viewport` | `docs/canon/specifications/surfaces/you.md:1344` |
-| `SPEC-SURFACE-YOU-IDENTITY-001` | MUST | `surface.you.identity` | `docs/canon/specifications/surfaces/you.md:1298` |
-| `SPEC-SURFACE-YOU-NO-KNOWLEDGE-MODEL-001` | MUST NOT | `surface.you.no-knowledge-model` | `docs/canon/specifications/surfaces/you.md:1379` |
-| `SPEC-SURFACE-YOU-PRIVACY-DATA-BOUNDARY-001` | MUST | `surface.you.privacy-data-boundary` | `docs/canon/specifications/surfaces/you.md:1424` |
-| `SPEC-SURFACE-YOU-PROFILE-001` | MUST | `surface.you.profile` | `docs/canon/specifications/surfaces/you.md:1391` |
-| `SPEC-SURFACE-YOU-SCREEN-INVENTORY-001` | MUST | `surface.you.screen-inventory` | `docs/canon/specifications/surfaces/you.md:1313` |
-| `SPEC-SURFACE-YOU-SETTINGS-DRILLDOWN-001` | MUST | `surface.you.settings-drilldown` | `docs/canon/specifications/surfaces/you.md:1550` |
-| `SPEC-SURFACE-YOU-TIME-PREFERENCES-001` | MUST | `surface.you.time-preferences` | `docs/canon/specifications/surfaces/you.md:1561` |
-| `SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001` | MUST | `surface.you.visual-authority` | `docs/canon/specifications/surfaces/you.md:1368` |
+| `SPEC-SURFACE-TIME-CREATION-ROUTES-001` | SHOULD | `surface.time.creation-routes` | `docs/canon/specifications/surfaces/time.md:2687` |
+| `SPEC-SURFACE-TIME-DAY-001` | MUST | `surface.time.day` | `docs/canon/specifications/surfaces/time.md:2621` |
+| `SPEC-SURFACE-TIME-DEGRADED-COMMAND-CONTRACT-001` | MUST | `surface.time.degraded-command-contract` | `docs/canon/specifications/surfaces/time.md:2827` |
+| `SPEC-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001` | MUST | `surface.time.detail-command-contract` | `docs/canon/specifications/surfaces/time.md:2838` |
+| `SPEC-SURFACE-TIME-FIRST-VIEWPORT-001` | MUST | `surface.time.first-viewport` | `docs/canon/specifications/surfaces/time.md:2636` |
+| `SPEC-SURFACE-TIME-IMPORTED-SOURCE-001` | MUST | `surface.time.imported-source` | `docs/canon/specifications/surfaces/time.md:2728` |
+| `SPEC-SURFACE-TIME-LIST-001` | MUST | `surface.time.list` | `docs/canon/specifications/surfaces/time.md:2794` |
+| `SPEC-SURFACE-TIME-MONTH-001` | MUST | `surface.time.month` | `docs/canon/specifications/surfaces/time.md:2772` |
+| `SPEC-SURFACE-TIME-OBJECT-DETAIL-001` | MUST | `surface.time.object-detail` | `docs/canon/specifications/surfaces/time.md:2805` |
+| `SPEC-SURFACE-TIME-PRIMARY-IDENTITY-001` | MUST | `surface.time.primary-identity` | `docs/canon/specifications/surfaces/time.md:2591` |
+| `SPEC-SURFACE-TIME-PURPOSE-001` | MUST | `surface.time.purpose` | `docs/canon/specifications/surfaces/time.md:2649` |
+| `SPEC-SURFACE-TIME-SEARCH-001` | MUST | `surface.time.search` | `docs/canon/specifications/surfaces/time.md:2739` |
+| `SPEC-SURFACE-TIME-STEP-MEMBERSHIP-001` | MUST | `surface.time.step-membership` | `docs/canon/specifications/surfaces/time.md:2703` |
+| `SPEC-SURFACE-TIME-TODAY-CONTROL-001` | MUST | `surface.time.today-control` | `docs/canon/specifications/surfaces/time.md:2675` |
+| `SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001` | MUST | `surface.time.view-command-contract` | `docs/canon/specifications/surfaces/time.md:2816` |
+| `SPEC-SURFACE-TIME-VIEW-SWITCHING-001` | MUST | `surface.time.view-switching` | `docs/canon/specifications/surfaces/time.md:2750` |
+| `SPEC-SURFACE-TIME-VIEWS-001` | MUST | `surface.time.views` | `docs/canon/specifications/surfaces/time.md:2610` |
+| `SPEC-SURFACE-TIME-VISUAL-AUTHORITY-001` | MUST | `surface.time.visual-authority` | `docs/canon/specifications/surfaces/time.md:2664` |
+| `SPEC-SURFACE-TIME-VISUAL-GEOMETRY-001` | MUST | `surface.time.visual-geometry` | `docs/canon/specifications/surfaces/time.md:2717` |
+| `SPEC-SURFACE-TIME-WEEK-001` | MUST | `surface.time.week` | `docs/canon/specifications/surfaces/time.md:2761` |
+| `SPEC-SURFACE-TIME-YEAR-001` | MUST | `surface.time.year` | `docs/canon/specifications/surfaces/time.md:2783` |
+| `SPEC-SURFACE-TODAY-COMMAND-CONTRACT-001` | MUST | `surface.today.command-contract` | `docs/canon/specifications/surfaces/today.md:713` |
+| `SPEC-SURFACE-TODAY-ELIGIBILITY-001` | MUST | `surface.today.eligibility` | `docs/canon/specifications/surfaces/today.md:621` |
+| `SPEC-SURFACE-TODAY-FIRST-VIEWPORT-001` | MUST | `surface.today.first-viewport` | `docs/canon/specifications/surfaces/today.md:651` |
+| `SPEC-SURFACE-TODAY-MISSED-CONTINUITY-001` | MUST | `surface.today.missed-placement-continuity` | `docs/canon/specifications/surfaces/today.md:692` |
+| `SPEC-SURFACE-TODAY-PURPOSE-001` | MUST | `surface.today.purpose` | `docs/canon/specifications/surfaces/today.md:585` |
+| `SPEC-SURFACE-TODAY-ROW-001` | MUST | `surface.today.object-row` | `docs/canon/specifications/surfaces/today.md:702` |
+| `SPEC-SURFACE-TODAY-SCREEN-INVENTORY-001` | MUST | `surface.today.screen-inventory` | `docs/canon/specifications/surfaces/today.md:636` |
+| `SPEC-SURFACE-TODAY-STATES-001` | MUST | `surface.today.states` | `docs/canon/specifications/surfaces/today.md:670` |
+| `SPEC-SURFACE-TODAY-TEMPORAL-RAIL-001` | MUST | `surface.today.temporal-rail` | `docs/canon/specifications/surfaces/today.md:604` |
+| `SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001` | MUST | `surface.today.visual-authority` | `docs/canon/specifications/surfaces/today.md:681` |
+| `SPEC-SURFACE-YOU-APPEARANCE-001` | MUST | `surface.you.appearance` | `docs/canon/specifications/surfaces/you.md:1473` |
+| `SPEC-SURFACE-YOU-COMMAND-CONTRACT-001` | MUST | `surface.you.command-contract` | `docs/canon/specifications/surfaces/you.md:1517` |
+| `SPEC-SURFACE-YOU-CONTEXTUAL-EDUCATION-001` | SHOULD | `surface.you.contextual-education` | `docs/canon/specifications/surfaces/you.md:1506` |
+| `SPEC-SURFACE-YOU-DATA-CONTROLS-001` | MUST | `surface.you.data-controls` | `docs/canon/specifications/surfaces/you.md:1484` |
+| `SPEC-SURFACE-YOU-DEPTH-001` | MUST | `surface.you.depth` | `docs/canon/specifications/surfaces/you.md:1428` |
+| `SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001` | MUST | `surface.you.entitlement-command-contract` | `docs/canon/specifications/surfaces/you.md:1528` |
+| `SPEC-SURFACE-YOU-FIRST-VIEWPORT-001` | MUST | `surface.you.first-viewport` | `docs/canon/specifications/surfaces/you.md:1415` |
+| `SPEC-SURFACE-YOU-IDENTITY-001` | MUST | `surface.you.identity` | `docs/canon/specifications/surfaces/you.md:1369` |
+| `SPEC-SURFACE-YOU-NO-KNOWLEDGE-MODEL-001` | MUST NOT | `surface.you.no-knowledge-model` | `docs/canon/specifications/surfaces/you.md:1450` |
+| `SPEC-SURFACE-YOU-PRIVACY-DATA-BOUNDARY-001` | MUST | `surface.you.privacy-data-boundary` | `docs/canon/specifications/surfaces/you.md:1495` |
+| `SPEC-SURFACE-YOU-PROFILE-001` | MUST | `surface.you.profile` | `docs/canon/specifications/surfaces/you.md:1462` |
+| `SPEC-SURFACE-YOU-SCREEN-INVENTORY-001` | MUST | `surface.you.screen-inventory` | `docs/canon/specifications/surfaces/you.md:1384` |
+| `SPEC-SURFACE-YOU-SETTINGS-DRILLDOWN-001` | MUST | `surface.you.settings-drilldown` | `docs/canon/specifications/surfaces/you.md:1621` |
+| `SPEC-SURFACE-YOU-TIME-PREFERENCES-001` | MUST | `surface.you.time-preferences` | `docs/canon/specifications/surfaces/you.md:1632` |
+| `SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001` | MUST | `surface.you.visual-authority` | `docs/canon/specifications/surfaces/you.md:1439` |
 | `STANDARD-ACCEPTANCE-ACCESSIBILITY-001` | MUST NOT | `standard.acceptance.accessibility` | `docs/canon/standards/accessibility.md:152` |
 | `STANDARD-ACCEPTANCE-BUILD-001` | MUST | `standard.acceptance.build` | `docs/canon/standards/validation-and-release.md:492` |
 | `STANDARD-ACCEPTANCE-DOCS-001` | MUST | `standard.acceptance.documentation` | `docs/canon/standards/validation-and-release.md:514` |
@@ -485,18 +485,18 @@
 | `SYSTEM-APPLE-SHARE-HANDOFF-001` | MUST NOT | `system.apple.share-handoff` | `docs/canon/specifications/systems/apple-ecosystem.md:113` |
 | `SYSTEM-APPLE-WIDGET-ACTION-001` | MUST | `system.apple.widget-action` | `docs/canon/specifications/systems/apple-ecosystem.md:124` |
 | `SYSTEM-APPLE-WIDGET-PROJECTION-001` | MUST NOT | `system.apple.widget-projection` | `docs/canon/specifications/systems/apple-ecosystem.md:135` |
-| `SYSTEM-CONTINUITY-COMMAND-CONTRACT-001` | MUST | `system.continuity.command-contract` | `docs/canon/specifications/systems/sync-and-continuity.md:441` |
-| `SYSTEM-CONTINUITY-CONFLICT-001` | MUST NOT | `system.continuity.conflict` | `docs/canon/specifications/systems/sync-and-continuity.md:518` |
-| `SYSTEM-CONTINUITY-CONTROL-CENTER-001` | MUST | `system.continuity.control-center` | `docs/canon/specifications/systems/sync-and-continuity.md:529` |
-| `SYSTEM-CONTINUITY-DISABLED-001` | MUST | `system.continuity.disabled-gate` | `docs/canon/specifications/systems/sync-and-continuity.md:430` |
-| `SYSTEM-CONTINUITY-ENVIRONMENT-001` | MUST | `system.continuity.environment` | `docs/canon/specifications/systems/sync-and-continuity.md:540` |
-| `SYSTEM-CONTINUITY-FAILURE-001` | MUST | `system.continuity.failure` | `docs/canon/specifications/systems/sync-and-continuity.md:551` |
-| `SYSTEM-CONTINUITY-RECORD-IDENTITY-001` | MUST | `system.continuity.record-identity` | `docs/canon/specifications/systems/sync-and-continuity.md:562` |
-| `SYSTEM-CONTINUITY-RESTORE-001` | MUST | `system.continuity.restore` | `docs/canon/specifications/systems/sync-and-continuity.md:573` |
-| `SYSTEM-CONTINUITY-SEPARATION-001` | MUST | `system.continuity.user-owned-cloudkit` | `docs/canon/specifications/systems/sync-and-continuity.md:413` |
-| `SYSTEM-DIAGNOSTICS-AUTHORITY-001` | MUST NOT | `system.diagnostics.non-authority` | `docs/canon/specifications/systems/diagnostics.md:332` |
-| `SYSTEM-DIAGNOSTICS-COMMAND-CONTRACT-001` | MUST | `system.diagnostics.command-contract` | `docs/canon/specifications/systems/diagnostics.md:343` |
-| `SYSTEM-DIAGNOSTICS-HEALTH-001` | MUST | `system.diagnostics.redacted-health` | `docs/canon/specifications/systems/diagnostics.md:319` |
+| `SYSTEM-CONTINUITY-COMMAND-CONTRACT-001` | MUST | `system.continuity.command-contract` | `docs/canon/specifications/systems/sync-and-continuity.md:579` |
+| `SYSTEM-CONTINUITY-CONFLICT-001` | MUST NOT | `system.continuity.conflict` | `docs/canon/specifications/systems/sync-and-continuity.md:656` |
+| `SYSTEM-CONTINUITY-CONTROL-CENTER-001` | MUST | `system.continuity.control-center` | `docs/canon/specifications/systems/sync-and-continuity.md:667` |
+| `SYSTEM-CONTINUITY-DISABLED-001` | MUST | `system.continuity.disabled-gate` | `docs/canon/specifications/systems/sync-and-continuity.md:568` |
+| `SYSTEM-CONTINUITY-ENVIRONMENT-001` | MUST | `system.continuity.environment` | `docs/canon/specifications/systems/sync-and-continuity.md:678` |
+| `SYSTEM-CONTINUITY-FAILURE-001` | MUST | `system.continuity.failure` | `docs/canon/specifications/systems/sync-and-continuity.md:689` |
+| `SYSTEM-CONTINUITY-RECORD-IDENTITY-001` | MUST | `system.continuity.record-identity` | `docs/canon/specifications/systems/sync-and-continuity.md:700` |
+| `SYSTEM-CONTINUITY-RESTORE-001` | MUST | `system.continuity.restore` | `docs/canon/specifications/systems/sync-and-continuity.md:711` |
+| `SYSTEM-CONTINUITY-SEPARATION-001` | MUST | `system.continuity.user-owned-cloudkit` | `docs/canon/specifications/systems/sync-and-continuity.md:551` |
+| `SYSTEM-DIAGNOSTICS-AUTHORITY-001` | MUST NOT | `system.diagnostics.non-authority` | `docs/canon/specifications/systems/diagnostics.md:370` |
+| `SYSTEM-DIAGNOSTICS-COMMAND-CONTRACT-001` | MUST | `system.diagnostics.command-contract` | `docs/canon/specifications/systems/diagnostics.md:381` |
+| `SYSTEM-DIAGNOSTICS-HEALTH-001` | MUST | `system.diagnostics.redacted-health` | `docs/canon/specifications/systems/diagnostics.md:357` |
 | `SYSTEM-EXPORT-001` | MUST | `system.data.export` | `docs/canon/specifications/systems/import-export-repair.md:32` |
 | `SYSTEM-EXTERNAL-ASSISTANCE-BOUNDARY-001` | MUST NOT | `system.privacy.external-assistance` | `docs/canon/specifications/systems/privacy-and-data-classification.md:88` |
 | `SYSTEM-IMPORTED-SOURCE-001` | MUST | `system.imported-source.no-silent-change` | `docs/canon/specifications/systems/import-export-repair.md:19` |
@@ -504,9 +504,9 @@
 | `SYSTEM-LEARNING-CONTROL-001` | MUST | `system.learning.user-control` | `docs/canon/specifications/systems/local-learning.md:37` |
 | `SYSTEM-LEARNING-GOAL-SUGGESTION-001` | MUST | `system.learning.goal-suggestion` | `docs/canon/specifications/systems/local-learning.md:54` |
 | `SYSTEM-LEARNING-LOCAL-001` | MUST | `system.learning.local-inspectable` | `docs/canon/specifications/systems/local-learning.md:22` |
-| `SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001` | MUST | `system.notifications.command-contract` | `docs/canon/specifications/systems/notifications.md:345` |
-| `SYSTEM-NOTIFICATIONS-EFFECT-001` | MUST | `system.notifications.external-effect` | `docs/canon/specifications/systems/notifications.md:330` |
-| `SYSTEM-NOTIFICATIONS-POLICY-001` | MUST | `system.notifications.object-aware` | `docs/canon/specifications/systems/notifications.md:315` |
+| `SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001` | MUST | `system.notifications.command-contract` | `docs/canon/specifications/systems/notifications.md:515` |
+| `SYSTEM-NOTIFICATIONS-EFFECT-001` | MUST | `system.notifications.external-effect` | `docs/canon/specifications/systems/notifications.md:500` |
+| `SYSTEM-NOTIFICATIONS-POLICY-001` | MUST | `system.notifications.object-aware` | `docs/canon/specifications/systems/notifications.md:485` |
 | `SYSTEM-PERSISTENCE-ATOMIC-001` | MUST | `system.persistence.atomicity` | `docs/canon/specifications/systems/persistence-and-replay.md:22` |
 | `SYSTEM-PERSISTENCE-COMPACTION-001` | MUST | `system.persistence.compaction` | `docs/canon/specifications/systems/persistence-and-replay.md:70` |
 | `SYSTEM-PERSISTENCE-CORRUPTION-001` | MUST NOT | `system.persistence.corruption` | `docs/canon/specifications/systems/persistence-and-replay.md:131` |

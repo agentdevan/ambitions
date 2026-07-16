@@ -194,7 +194,10 @@
                 "commit_boundary": {"type": "string", "minLength": 1},
                 "rollback_undo": {"type": "string", "minLength": 1},
                 "privacy_egress": {"type": "string", "minLength": 1},
-                "verification_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+                "verification_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+                "activation_posture": {"type": "string", "enum": ["active", "future_gated"]},
+                "gate_requirement_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+                "rollback_posture": {"type": "string", "enum": ["inverse_command", "checkpoint_restore", "owner_recovery_handoff", "confirmed_irreversible"]}
               }
             }
           }

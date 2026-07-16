@@ -32,6 +32,8 @@ from tools.ambitions_canon.model import (
     CanonRegistry,
     DocumentKind,
     Requirement,
+    StateCommand,
+    StateCommandActivationPosture,
 )
 from tools.ambitions_canon.render import stable_json
 from tools.ambitions_canon.traceability import TraceabilityReport
@@ -413,6 +415,20 @@ def build_task_pack(
             key=lambda item: item.requirement_id,
         )
     )
+    future_gated_commands = tuple(
+        sorted(
+            (
+                (contract.requirement_id, command)
+                for document in semantic_documents
+                for contract in document.state_command_contracts
+                if contract.requirement_id in selected_requirement_ids
+                for command in contract.commands
+                if command.activation_posture
+                is StateCommandActivationPosture.FUTURE_GATED
+            ),
+            key=lambda item: item[1].command_id,
+        )
+    )
     required_tests = tuple(
         sorted(
             {
@@ -450,6 +466,10 @@ def build_task_pack(
     known_risk_values = (
         sorted(
             {str(issue["summary"]) for issue in relevant_issues}
+            | {
+                _future_gated_command_risk(requirement_id, command)
+                for requirement_id, command in future_gated_commands
+            }
             | (
                 {"Declared scope has no owning specification in the current canon."}
                 if no_owner
@@ -562,7 +582,12 @@ def build_task_pack(
     forbidden_changes = (
         "Changes outside the declared task scope and changed-file boundary.",
         "Product, runtime, visual, accessibility, privacy, device, TestFlight, App Store, or release Green claims without separate current evidence.",
-    ) + (("Implementation authorized by this shadow pack.",) if shadow else ())
+    )
+    if future_gated_commands:
+        forbidden_changes += (
+            "Future-gated command metadata must not authorize implementation, source edits, UI exposure, active-state tests, or authority claims.",
+        )
+    forbidden_changes += (("Implementation authorized by this shadow pack.",) if shadow else ())
     claim_ceiling = (
         "Shadow pack only; it cannot authorize implementation or any product, runtime, visual, accessibility, privacy, device, TestFlight, App Store, or release claim."
         if shadow
@@ -1527,12 +1552,82 @@ def _render_sections(
     return tuple((heading, values[heading]) for heading in PACK_SECTION_ORDER)
 
 
-def _render_requirement(requirement: Requirement) -> str:
-    body = requirement.body.strip()
-    quoted_body = "\n".join(f"  > {line}" for line in body.splitlines())
+def _future_gated_command_risk(
+    requirement_id: str,
+    command: StateCommand,
+) -> str:
+    gates = ", ".join(command.gate_requirement_ids)
+    preconditions = " | ".join(command.preconditions)
     return (
+        "Future-gated command metadata is non-authorizing: "
+        f"owning_requirement_id={requirement_id}; command_id={command.command_id}; "
+        f"label={command.label}; activation_posture=future_gated; "
+        f"gate_requirement_ids={gates}; unmet_gate_reason=authorization remains invalid "
+        f"until every named gate and precondition is current: {preconditions}."
+    )
+
+
+def _annotate_future_gated_requirement_body(
+    body: str,
+    commands: tuple[StateCommand, ...],
+) -> str:
+    """Keep the owning law while removing plain future labels from active prose."""
+
+    if not commands:
+        return body
+    by_label: dict[str, tuple[StateCommand, ...]] = {}
+    for label in sorted({command.label for command in commands}):
+        by_label[label.casefold()] = tuple(
+            command for command in commands if command.label == label
+        )
+    labels = sorted(
+        (command.label for command in commands),
+        key=lambda value: (-len(value), value.casefold()),
+    )
+    pattern = re.compile(
+        "|".join(
+            rf"(?<!\w){re.escape(label)}(?!\w)"
+            for label in dict.fromkeys(labels)
+        ),
+        re.IGNORECASE,
+    )
+
+    def replacement(match: re.Match[str]) -> str:
+        matching = by_label[match.group(0).casefold()]
+        identifier_field = "command_id" if len(matching) == 1 else "command_ids"
+        identifiers = ",".join(command.command_id for command in matching)
+        return (
+            "FUTURE-GATED / NON-AUTHORIZING "
+            f"({identifier_field}={identifiers}; label={match.group(0)})"
+        )
+
+    return pattern.sub(replacement, body)
+
+
+def _render_requirement(
+    requirement: Requirement,
+    future_gated_commands: tuple[StateCommand, ...] = (),
+) -> str:
+    body = _annotate_future_gated_requirement_body(
+        requirement.body.strip(),
+        future_gated_commands,
+    )
+    quoted_body = "\n".join(f"  > {line}" for line in body.splitlines())
+    rendered = (
         f"- **{requirement.requirement_id}** (`{requirement.modality.value}`):\n{quoted_body}"
     )
+    if not future_gated_commands:
+        return rendered
+    metadata = "\n".join(
+        "  - **FUTURE-GATED / NON-AUTHORIZING command metadata:** "
+        f"command_id=`{command.command_id}`; label=`{command.label}`; "
+        "activation_posture=`future_gated`; gate_requirement_ids="
+        f"`{', '.join(command.gate_requirement_ids)}`; unmet_gate_reason="
+        "`authorization remains invalid until every named gate and precondition is "
+        f"current: {' | '.join(command.preconditions)}`."
+        for command in future_gated_commands
+    )
+    return f"{rendered}\n{metadata}"
 
 
 def _render_laws(
@@ -1547,8 +1642,24 @@ def _render_document(
     document: CanonDocument,
     selected_requirement_ids: frozenset[str],
 ) -> str:
+    future_commands_by_requirement = {
+        requirement_id: tuple(
+            sorted(
+                (
+                    command
+                    for contract in document.state_command_contracts
+                    if contract.requirement_id == requirement_id
+                    for command in contract.commands
+                    if command.activation_posture
+                    is StateCommandActivationPosture.FUTURE_GATED
+                ),
+                key=lambda command: command.command_id,
+            )
+        )
+        for requirement_id in selected_requirement_ids
+    }
     requirements = "\n".join(
-        f"  {_render_requirement(requirement)}"
+        f"  {_render_requirement(requirement, future_commands_by_requirement.get(requirement.requirement_id, ()))}"
         for requirement in sorted(
             document.requirements,
             key=lambda item: item.requirement_id,

@@ -1,9 +1,11 @@
 import copy
 import json
 import re
+import tomllib
 import unittest
 from dataclasses import replace
 from pathlib import Path
+from unittest.mock import patch
 
 from tools.ambitions_canon.model import CanonError
 from tools.ambitions_canon.parser import (
@@ -13,6 +15,8 @@ from tools.ambitions_canon.parser import (
 from tools.ambitions_canon.task_pack import require_pack_authorization_current
 from tools.ambitions_canon.ux_blueprint import (
     UXBlueprintError,
+    active_state_commands,
+    future_gated_state_commands,
     load_state_command_contracts,
     validate_ux_blueprint,
 )
@@ -58,6 +62,171 @@ SCREEN_REQUIREMENT_OWNERS = {
     "UX-SCREEN-YOU-NOTIFICATIONS": "SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001",
 }
 
+APPROVED_LAW_COMMAND_LABELS = {
+    "APP-ACCOUNT-COMMAND-CONTRACT-001": {
+        "Cancel",
+        "Continue Without an Account",
+        "Done",
+        "Sign Out",
+        "Sign in with Apple",
+        "Sign in with Google",
+        "Try Again",
+    },
+    "APP-DEEP-LINK-COMMAND-CONTRACT-001": {
+        "Dismiss",
+        "Try Again",
+        "Unlock",
+        "Update Ambitions",
+    },
+    "APP-DEGRADED-COMMAND-CONTRACT-001": {
+        "Export Data",
+        "Open Diagnostics",
+        "Open Settings",
+        "Refresh Source",
+        "Retry External Update",
+        "Retry Failed Items",
+        "Review Access",
+        "Review Conflict",
+        "Review Continuity Status",
+        "Review Details",
+        "Review Partial Import",
+        "Review Source",
+        "Review Storage",
+        "Unlock and Retry",
+    },
+    "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001": {
+        "Back",
+        "Continue",
+        "Export Data",
+        "Open Diagnostics",
+        "Resume Setup",
+        "Review Repair",
+        "Save and Exit",
+        "Skip Setup for Now",
+        "Skip This Chapter",
+        "Skip This Question",
+        "Start Over Setup",
+        "Try Again",
+    },
+    "APP-PERMISSIONS-COMMAND-CONTRACT-001": {
+        "Allow Calendar Access",
+        "Allow Notifications",
+        "Check Again",
+        "Done",
+        "Not Now",
+        "Open Settings",
+        "Review Access",
+        "Use Local Only",
+    },
+    "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001": {
+        "Clear Selection",
+        "Done",
+        "Edit before import",
+        "Edit notification rules",
+        "Ignore",
+        "Ignore for planning",
+        "Import and reflow",
+        "Import into Ambitions",
+        "Import Selected",
+        "Import with Ambitions notifications",
+        "Import without Ambitions notifications",
+        "Import without reflow",
+        "Keep external",
+        "Keep external but reserve time",
+        "Link",
+        "Reject permanently",
+        "Replace",
+        "Retry Failed Items",
+        "Review Selected",
+        "Select All in Group",
+        "Select Item",
+        "Undo Imported Items",
+    },
+    "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001": {
+        "Apply Filters",
+        "Cancel Rebuild",
+        "Clear Filters",
+        "Clear Search",
+        "Filters",
+        "Inspect History",
+        "Inspect Privacy",
+        "Inspect Receipt",
+        "Inspect Source",
+        "Rebuild Search",
+        "Undo",
+    },
+    "SPEC-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001": {
+        "Cancel",
+        "Delete Permanently",
+        "Edit",
+        "Entire Series",
+        "Import into Ambitions",
+        "Keep external but reserve time",
+        "Link",
+        "Move to Trash",
+        "Open in Calendar",
+        "Restore",
+        "Save",
+        "This Occurrence",
+        "This and Following",
+    },
+    "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001": {
+        "Check Again",
+        "Done",
+        "Manage Subscription",
+        "Purchase",
+        "Restore Purchases",
+        "Review Account",
+        "View Plans",
+    },
+    "SYSTEM-CONTINUITY-COMMAND-CONTRACT-001": {
+        "Enable Continuity",
+        "Keep Other Copy",
+        "Keep This Device",
+        "Merge Selected Changes",
+        "Pause Continuity",
+        "Restore Reviewed Copy",
+        "Resume Continuity",
+        "Review Conflict",
+        "Review Continuity Status",
+        "Review Migration",
+        "Review Restore",
+        "Start Migration",
+        "Try Again",
+        "Turn Off Continuity",
+    },
+    "SYSTEM-DIAGNOSTICS-COMMAND-CONTRACT-001": {
+        "Cancel",
+        "Create Diagnostic File",
+        "Done",
+        "Inspect",
+        "Preview Diagnostic Export",
+        "Quarantine Affected Data",
+        "Review Quarantine",
+        "Review Repair",
+        "Run Health Check",
+        "Run Repair",
+        "Try Again",
+    },
+    "SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001": {
+        "Add Proof",
+        "Complete",
+        "Create Rule",
+        "Done",
+        "Edit Rule",
+        "Open Event",
+        "Open Settings",
+        "Reconcile",
+        "Remove Rule",
+        "Reschedule",
+        "Review Reflow",
+        "Snooze",
+        "Start",
+        "Try Again",
+        "Turn Off",
+    },
+}
+
 
 class VisualR1CommandContractTests(unittest.TestCase):
     @classmethod
@@ -80,6 +249,42 @@ class VisualR1CommandContractTests(unittest.TestCase):
                     {item.requirement_id for item in document.requirements},
                 )
 
+    def test_complete_approved_law_command_inventory_is_structured(self):
+        parsed = {requirement_id: set() for requirement_id in APPROVED_LAW_COMMAND_LABELS}
+        for contract in self.contracts.values():
+            if contract.requirement_id in parsed:
+                parsed[contract.requirement_id].update(
+                    command.label for command in contract.commands
+                )
+        missing = {
+            requirement_id: sorted(expected - parsed[requirement_id])
+            for requirement_id, expected in APPROVED_LAW_COMMAND_LABELS.items()
+            if expected - parsed[requirement_id]
+        }
+        unexpected = {
+            requirement_id: sorted(parsed[requirement_id] - expected)
+            for requirement_id, expected in APPROVED_LAW_COMMAND_LABELS.items()
+            if parsed[requirement_id] - expected
+        }
+        self.assertEqual(sum(len(labels) for labels in missing.values()), 0, missing)
+        self.assertEqual(unexpected, {})
+
+    def test_every_approved_law_command_declares_explicit_posture_and_gates(self):
+        records = []
+        for requirement_id, relative in APPROVED_REQUIREMENT_OWNERS.items():
+            path = ROOT / "docs/canon/specifications" / relative
+            metadata = tomllib.loads(
+                path.read_text(encoding="utf-8").split("+++", 2)[1]
+            )
+            for contract in metadata["state_command_contracts"]:
+                if contract["requirement_id"] != requirement_id:
+                    continue
+                for command in contract["commands"]:
+                    records.append((requirement_id, command))
+                    self.assertIn("activation_posture", command)
+                    self.assertIn("gate_requirement_ids", command)
+        self.assertEqual(len(records), 239)
+
     def test_all_twelve_gap_records_are_removed_by_structured_ownership(self):
         self.assertEqual(self.blueprint["specification_gaps"], [])
         models = {
@@ -97,10 +302,40 @@ class VisualR1CommandContractTests(unittest.TestCase):
                     )
                     contract = self.contracts[variant["blueprint_id"]]
                     self.assertEqual(contract.requirement_id, requirement_id)
+                    active = active_state_commands(contract)
+                    future = future_gated_state_commands(contract)
                     self.assertEqual(
                         variant["allowed_commands"],
-                        [command.label for command in contract.commands],
+                        [command.label for command in active],
                     )
+                    self.assertEqual(
+                        variant["future_gated_commands"], list(future)
+                    )
+                    for command in contract.commands:
+                        if command.activation_posture.value != "future_gated":
+                            continue
+                        self.assertTrue(command.gate_requirement_ids)
+                        self.assertTrue(
+                            set(command.gate_requirement_ids)
+                            <= {
+                                item["requirement_id"]
+                                for item in self.blueprint[
+                                    "requirement_dispositions"
+                                ]
+                            }
+                        )
+                    if contract.activation_posture.value == "future_gated":
+                        self.assertEqual(active, ())
+                        self.assertTrue(contract.gate_requirement_ids)
+                        self.assertTrue(
+                            set(contract.gate_requirement_ids)
+                            <= {
+                                item["requirement_id"]
+                                for item in self.blueprint[
+                                    "requirement_dispositions"
+                                ]
+                            }
+                        )
 
     def test_empty_gap_inventory_cannot_bypass_missing_contract_ownership(self):
         payload = copy.deepcopy(self.blueprint)
@@ -132,17 +367,25 @@ class VisualR1CommandContractTests(unittest.TestCase):
         self.assertEqual(len(continuity), 16)
         expected = {
             prefix + "BLOCKED": ["Review Continuity Status"],
-            prefix + "CONFLICTED-QUARANTINED": ["Review Conflict"],
+            prefix + "CONFLICTED-QUARANTINED": [
+                "Review Conflict",
+                "Keep Other Copy",
+                "Keep This Device",
+                "Merge Selected Changes",
+            ],
             prefix + "DISABLED": ["Review Continuity Status"],
             prefix + "ELIGIBLE-NOT-ENABLED": ["Enable Continuity"],
             prefix + "ENABLED-IDLE": ["Turn Off Continuity"],
             prefix + "INELIGIBLE": ["Review Continuity Status"],
             prefix + "LOCAL-PENDING": ["Pause Continuity"],
             prefix + "MERGING": ["Review Conflict"],
-            prefix + "MIGRATING": ["Review Migration"],
+            prefix + "MIGRATING": ["Review Migration", "Start Migration"],
             prefix + "PAUSED": ["Resume Continuity"],
             prefix + "REMOTE-PENDING": ["Review Conflict"],
-            prefix + "RESTORING": ["Review Restore"],
+            prefix + "RESTORING": [
+                "Review Restore",
+                "Restore Reviewed Copy",
+            ],
             prefix + "RETRYING": ["Try Again"],
             prefix + "SIGNED-OUT": ["Review Continuity Status"],
             prefix + "UNAVAILABLE": ["Try Again"],
@@ -166,6 +409,11 @@ class VisualR1CommandContractTests(unittest.TestCase):
                 continue
             with self.subTest(state_id=state_id):
                 self.assertEqual(contract.activation_posture.value, "future_gated")
+                self.assertEqual(active_state_commands(contract), ())
+                self.assertEqual(
+                    [item["label"] for item in future_gated_state_commands(contract)],
+                    expected[state_id],
+                )
                 self.assertIn(
                     "SYSTEM-CONTINUITY-DISABLED-001",
                     contract.gate_requirement_ids,
@@ -233,7 +481,11 @@ class VisualR1CommandContractTests(unittest.TestCase):
                 "Dismiss",
                 "Try Again",
             ],
-            "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-REJECTED": ["Dismiss"],
+            "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-REJECTED": [
+                "Dismiss",
+                "Unlock",
+                "Update Ambitions",
+            ],
             "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-RESOLVING": ["Dismiss"],
         }
         self.assertEqual(set(contracts), set(expected))
@@ -256,12 +508,26 @@ class VisualR1CommandContractTests(unittest.TestCase):
             == "SPEC-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"
         }
         expected = {
-            "UX-STATE-VARIANT-TIME-DETAIL-CONFLICT-REVIEW": ["Cancel"],
+            "UX-STATE-VARIANT-TIME-DETAIL-CONFLICT-REVIEW": [
+                "Cancel",
+                "Entire Series",
+                "This Occurrence",
+                "This and Following",
+            ],
             "UX-STATE-VARIANT-TIME-DETAIL-EDITING": ["Cancel", "Save"],
             "UX-STATE-VARIANT-TIME-DETAIL-SAVED": ["Edit"],
             "UX-STATE-VARIANT-TIME-DETAIL-UNDO-ELIGIBLE": ["Edit"],
             "UX-STATE-VARIANT-TIME-DETAIL-UNDO-UNAVAILABLE": ["Edit"],
-            "UX-STATE-VARIANT-TIME-DETAIL-VIEWING": ["Edit", "Move to Trash"],
+            "UX-STATE-VARIANT-TIME-DETAIL-VIEWING": [
+                "Edit",
+                "Move to Trash",
+                "Delete Permanently",
+                "Import into Ambitions",
+                "Keep external but reserve time",
+                "Link",
+                "Open in Calendar",
+                "Restore",
+            ],
         }
         self.assertEqual(set(contracts), set(expected))
         for state_id, labels in expected.items():
@@ -273,9 +539,20 @@ class VisualR1CommandContractTests(unittest.TestCase):
                     [command.label for command in contract.commands], labels
                 )
                 for command in contract.commands:
-                    joined = " ".join(command.preconditions).casefold()
-                    self.assertIn("current revision", joined)
-                    self.assertIn("ownership", joined)
+                    with self.subTest(command_id=command.command_id):
+                        joined = " ".join(command.preconditions).casefold()
+                        self.assertTrue(
+                            any(
+                                identity_fact in joined
+                                for identity_fact in (
+                                    "current revision",
+                                    "current object revision",
+                                    "confirmed source identity",
+                                    "current allowlisted external calendar identity",
+                                )
+                            )
+                        )
+                        self.assertRegex(joined, r"\b(?:ownership|owned|external)\b")
 
     def test_time_import_owner_has_ten_complete_contracts(self):
         path = (
@@ -310,6 +587,23 @@ class VisualR1CommandContractTests(unittest.TestCase):
             "UX-STATE-VARIANT-TIME-IMPORT-REVIEWING-DIFF": [
                 "Import Selected",
                 "Review Selected",
+                "Clear Selection",
+                "Edit before import",
+                "Edit notification rules",
+                "Ignore",
+                "Ignore for planning",
+                "Import and reflow",
+                "Import into Ambitions",
+                "Import with Ambitions notifications",
+                "Import without Ambitions notifications",
+                "Import without reflow",
+                "Keep external",
+                "Keep external but reserve time",
+                "Link",
+                "Reject permanently",
+                "Replace",
+                "Select All in Group",
+                "Select Item",
             ],
         }
         self.assertEqual(set(contracts), set(expected))
@@ -409,11 +703,23 @@ class VisualR1CommandContractTests(unittest.TestCase):
                 self.assertEqual(contract.activation_posture.value, "active")
                 self.assertEqual(contract.gate_requirement_ids, ())
                 self.assertEqual(
-                    [command.label for command in contract.commands], labels
+                    [command.label for command in active_state_commands(contract)],
+                    labels,
                 )
-                self.assertNotIn(
-                    "Purchase", [command.label for command in contract.commands]
-                )
+                future = future_gated_state_commands(contract)
+                if state_id.endswith("-EXPIRED"):
+                    self.assertEqual(
+                        [item["label"] for item in future], ["Purchase"]
+                    )
+                    self.assertEqual(
+                        future[0]["gate_requirement_ids"],
+                        [
+                            "ENTITLEMENT-003",
+                            "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001",
+                        ],
+                    )
+                else:
+                    self.assertEqual(future, ())
 
     def test_notifications_owner_has_eleven_local_first_contracts(self):
         path = ROOT / "docs/canon/specifications/systems/notifications.md"
@@ -426,10 +732,20 @@ class VisualR1CommandContractTests(unittest.TestCase):
         }
         expected = {
             "UX-STATE-VARIANT-YOU-NOTIFICATIONS-ACTED": ["Done"],
-            "UX-STATE-VARIANT-YOU-NOTIFICATIONS-DELIVERED": ["Done"],
+            "UX-STATE-VARIANT-YOU-NOTIFICATIONS-DELIVERED": [
+                "Done",
+                "Add Proof",
+                "Complete",
+                "Open Event",
+                "Reschedule",
+                "Review Reflow",
+                "Snooze",
+                "Start",
+            ],
             "UX-STATE-VARIANT-YOU-NOTIFICATIONS-DISABLED": ["Open Settings"],
             "UX-STATE-VARIANT-YOU-NOTIFICATIONS-EXTERNALLY-FAILED": [
-                "Try Again"
+                "Try Again",
+                "Reconcile",
             ],
             "UX-STATE-VARIANT-YOU-NOTIFICATIONS-PERMISSION-ALLOWED": [
                 "Create Rule"
@@ -602,7 +918,10 @@ class VisualR1CommandContractTests(unittest.TestCase):
             ],
             "UX-STATE-VARIANT-SEARCH-RESULTS-FILTERED": ["Clear Filters"],
             "UX-STATE-VARIANT-SEARCH-RESULTS-NO-RESULTS": ["Clear Search"],
-            "UX-STATE-VARIANT-SEARCH-RESULTS-RESULTS": ["Filters"],
+            "UX-STATE-VARIANT-SEARCH-RESULTS-RESULTS": [
+                "Filters",
+                "Apply Filters",
+            ],
             "UX-STATE-VARIANT-SEARCH-RESULTS-SELECTED": ["Inspect Source"],
             "UX-STATE-VARIANT-SEARCH-ROOT-ACTION-MUTATING": ["Inspect History"],
             "UX-STATE-VARIANT-SEARCH-ROOT-ACTION-REJECTED": ["Clear Search"],
@@ -732,7 +1051,7 @@ class VisualR1CommandContractTests(unittest.TestCase):
                         ):
                             self.assertIn(fact, preconditions)
 
-    def test_entitlement_never_authorizes_purchase_without_product_registry(self):
+    def test_entitlement_purchase_and_continuity_mutations_remain_future_gated(self):
         product_registries = sorted(
             path
             for path in (ROOT / "docs/canon").rglob("*")
@@ -741,13 +1060,67 @@ class VisualR1CommandContractTests(unittest.TestCase):
             and "product" in path.name.casefold()
         )
         self.assertEqual(product_registries, [])
-        contracts = (
+        entitlement_contracts = [
             contract
             for state_id, contract in self.contracts.items()
             if state_id.startswith("UX-STATE-VARIANT-YOU-ENTITLEMENT-")
+        ]
+        purchase = [
+            command
+            for contract in entitlement_contracts
+            for command in contract.commands
+            if command.label == "Purchase"
+        ]
+        self.assertEqual(len(purchase), 1)
+        self.assertEqual(purchase[0].activation_posture.value, "future_gated")
+        self.assertIn("ENTITLEMENT-003", purchase[0].gate_requirement_ids)
+
+        entitlement_states = {
+            variant["blueprint_id"]: variant
+            for model in self.blueprint["state_models"]
+            if model["screen_id"] == "UX-SCREEN-YOU-ENTITLEMENT"
+            for variant in model["variants"]
+        }
+        self.assertTrue(
+            any(
+                item["label"] == "Purchase"
+                for state in entitlement_states.values()
+                for item in state["future_gated_commands"]
+            )
         )
-        labels = {command.label for contract in contracts for command in contract.commands}
-        self.assertNotIn("Purchase", labels)
+        self.assertFalse(
+            any(
+                "Purchase" in state["allowed_commands"]
+                for state in entitlement_states.values()
+            )
+        )
+
+        continuity_mutations = {
+            "Enable Continuity",
+            "Keep Other Copy",
+            "Keep This Device",
+            "Merge Selected Changes",
+            "Pause Continuity",
+            "Restore Reviewed Copy",
+            "Resume Continuity",
+            "Start Migration",
+            "Turn Off Continuity",
+        }
+        commands = [
+            command
+            for state_id, contract in self.contracts.items()
+            if "CONTINUITY" in state_id and not state_id.endswith("-DISABLED")
+            for command in contract.commands
+            if command.label in continuity_mutations
+        ]
+        self.assertEqual({command.label for command in commands}, continuity_mutations)
+        for command in commands:
+            with self.subTest(command_id=command.command_id):
+                self.assertEqual(command.activation_posture.value, "future_gated")
+                self.assertIn(
+                    "SYSTEM-CONTINUITY-DISABLED-001",
+                    command.gate_requirement_ids,
+                )
 
     def test_import_confirmation_is_bound_to_current_source_fingerprint(self):
         contracts = (
@@ -844,8 +1217,17 @@ class VisualR1CommandContractTests(unittest.TestCase):
         ]
         for field, value in (
             ("destination", "unresolved route"),
+            ("destination", "TBD"),
+            ("destination", "pending route"),
+            ("destination", "destination to be decided"),
+            ("destination", "unspecified"),
+            ("destination", "unknown"),
             ("success_focus", "unresolved focus"),
+            ("success_focus", "pending focus target"),
+            ("success_focus", "focus to be decided"),
+            ("success_focus", "unspecified"),
             ("failure_focus", "unresolved focus"),
+            ("failure_focus", "unknown"),
         ):
             with self.subTest(field=field):
                 command = replace(contract.commands[0], **{field: value})
@@ -863,30 +1245,94 @@ class VisualR1CommandContractTests(unittest.TestCase):
                         [command],
                     )
 
+    def test_full_document_and_blueprint_reject_placeholder_targets(self):
+        from tools.ambitions_canon import ux_blueprint
+
+        path = ROOT / "docs/canon/specifications/app/deep-linking.md"
+        source = path.read_text(encoding="utf-8")
+        placeholder = "destination to be decided"
+        mutated_source = re.sub(
+            r'^destination = "[^"]+"$',
+            f'destination = "{placeholder}"',
+            source,
+            count=1,
+            flags=re.MULTILINE,
+        )
+        with self.assertRaisesRegex(CanonError, "unresolved command route or focus"):
+            parse_canon_document(path, mutated_source)
+
+        contract = self.contracts[
+            "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-CONSUMED"
+        ]
+        malformed = replace(
+            contract,
+            commands=(replace(contract.commands[0], destination=placeholder),),
+        )
+        contracts = tuple(
+            malformed if item.state_id == malformed.state_id else item
+            for item in self.contracts.values()
+        )
+        with patch.object(
+            ux_blueprint,
+            "load_state_command_contracts",
+            return_value=contracts,
+        ):
+            with self.assertRaisesRegex(
+                (CanonError, UXBlueprintError),
+                "unresolved command route or focus",
+            ):
+                validate_ux_blueprint(ROOT, copy.deepcopy(self.blueprint))
+
     def test_mutation_without_actionable_rollback_is_rejected(self):
         contract = self.contracts["UX-STATE-VARIANT-TIME-DETAIL-EDITING"]
-        commands = [
-            replace(
-                command,
-                rollback_undo="No rollback or Undo is declared.",
-            )
-            if command.label == "Save"
-            else command
-            for command in contract.commands
-        ]
-        with self.assertRaisesRegex(
-            CanonError,
-            "mutation command omits actionable rollback",
-        ):
-            _validate_state_command_semantics(
-                Path("fixture.md"),
-                contract.state_id,
-                contract.durable_effect,
-                contract.recovery_rollback,
-                contract.offline_behavior,
-                contract.accessibility_focus,
-                commands,
-            )
+        mutation = next(
+            command for command in contract.commands if command.label == "Save"
+        )
+        self.assertIn(
+            mutation.rollback_posture.value,
+            {
+                "checkpoint_restore",
+                "confirmed_irreversible",
+                "inverse_command",
+                "owner_recovery_handoff",
+            },
+        )
+        invalid = (
+            "Rollback is unavailable.",
+            "Undo is unavailable.",
+            "Rollback has not been specified.",
+            "No recovery is provided.",
+            "No safe inverse exists.",
+            "Checkpoint restore is not available for this mutation.",
+            "Recovery is impossible; owner handoff is named only for completeness.",
+            "This is irreversible but no confirmation exists.",
+            "TBD",
+            (
+                "Rollback is unavailable, although inverse command, checkpoint restore, "
+                "owner handoff, typed rollback, and Undo are all mentioned."
+            ),
+        )
+        for rollback in invalid:
+            commands = [
+                replace(command, rollback_undo=rollback)
+                if command.command_id == mutation.command_id
+                else command
+                for command in contract.commands
+            ]
+            with self.subTest(rollback=rollback):
+                with self.assertRaisesRegex(
+                    CanonError,
+                    "mutation command omits actionable rollback",
+                ):
+                    _validate_state_command_semantics(
+                        Path("fixture.md"),
+                        contract.state_id,
+                        contract.durable_effect,
+                        contract.recovery_rollback,
+                        contract.offline_behavior,
+                        contract.accessibility_focus,
+                        commands,
+                    )
 
     def test_stale_task_pack_inputs_fail_closed(self):
         current = {

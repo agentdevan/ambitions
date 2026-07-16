@@ -134,7 +134,7 @@ class StateCommandSemanticTests(unittest.TestCase):
             for command in contract.commands
         ]
         self.assertEqual(len(self.contracts), 433)
-        self.assertEqual(len(commands), 520)
+        self.assertEqual(len(commands), 567)
         banned = (
             "command review for ux-state-variant-",
             "truthful status for ux-state-variant-",

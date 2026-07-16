@@ -5,6 +5,7 @@ from contextlib import redirect_stdout
 from io import StringIO
 from pathlib import Path
 
+from tools.ambitions_canon import parser as parser_module
 from tools.ambitions_canon.cli import main
 from tools.ambitions_canon.model import CanonError, DocumentKind, Modality
 from tools.ambitions_canon.parser import parse_canon_document, parse_front_matter
@@ -293,6 +294,29 @@ class ParserTests(unittest.TestCase):
             ("Current Step identity exists", "Today row revision is current"),
         )
         self.assertEqual(command.verification_ids, ("SCENARIO-TODAY-001",))
+
+    def test_unresolved_target_detection_is_exact_and_preserves_named_states(self):
+        unresolved = (
+            "destination not yet determined",
+            "route forthcoming",
+            "focus has not been defined",
+            "destination to be decided",
+            "pending route",
+            "unresolved focus",
+            "TBD",
+        )
+        resolved = (
+            "the owner root primary object within Unavailable Route Unknown Owner",
+            "the original route when current-revision route resolution succeeds",
+            "the route-failure reason and Try again control",
+        )
+
+        for value in unresolved:
+            with self.subTest(unresolved=value):
+                self.assertTrue(parser_module._is_unresolved_command_target(value))
+        for value in resolved:
+            with self.subTest(resolved=value):
+                self.assertFalse(parser_module._is_unresolved_command_target(value))
 
     def test_state_command_contract_rejects_unknown_missing_duplicate_and_unsorted_fields(self):
         path, valid = self.fixture("valid-surface.md")

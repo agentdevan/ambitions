@@ -54,6 +54,9 @@ commit_boundary = "Non-mutating: status dismissal cannot grant, revoke, reconcil
 rollback_undo = "No Undo is required; reopening the capability shows the current revalidated status and local fallback."
 privacy_egress = "The system receives only the native Calendar permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-DENIED"
 requirement_id = "APP-PERMISSIONS-COMMAND-CONTRACT-001"
@@ -78,6 +81,8 @@ commit_boundary = "External-result: Settings changes are externally owned; foreg
 rollback_undo = "Cancellation, unchanged status, or Settings-return failure preserves the prior known status and local fallback, focuses the recovery control, and triggers no repeated prompt."
 privacy_egress = "The system receives only the native Calendar permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-PERMISSIONS-CALENDAR-DENIED-002"
@@ -92,6 +97,9 @@ commit_boundary = "Non-mutating: choosing the local fallback performs no permiss
 rollback_undo = "No Undo is required; the user may later choose a relevant permission-dependent feature, which must restart contextual eligibility and explanation."
 privacy_egress = "The system receives only the native Calendar permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-ELIGIBILITY-CHECK"
 requirement_id = "APP-PERMISSIONS-COMMAND-CONTRACT-001"
@@ -116,6 +124,9 @@ commit_boundary = "External-result: authorization re-read and capability reconci
 rollback_undo = "Failure preserves the prior known status, local fallback, and objects; another Check Again requires explicit retry or a new foreground return and cannot replay a rejected action."
 privacy_egress = "The system receives only the native Calendar permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-LIMITED"
 requirement_id = "APP-PERMISSIONS-COMMAND-CONTRACT-001"
@@ -140,6 +151,9 @@ commit_boundary = "Non-mutating: access inspection remains explanatory and cross
 rollback_undo = "No Undo is required; dismissal returns to the exact prior capability status and preserves all local content."
 privacy_egress = "The system receives only the native Calendar permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-LOCAL-FALLBACK"
 requirement_id = "APP-PERMISSIONS-COMMAND-CONTRACT-001"
@@ -164,6 +178,9 @@ commit_boundary = "Non-mutating: choosing the local fallback performs no permiss
 rollback_undo = "No Undo is required; the user may later choose a relevant permission-dependent feature, which must restart contextual eligibility and explanation."
 privacy_egress = "The system receives only the native Calendar permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-NOT-DETERMINED"
 requirement_id = "APP-PERMISSIONS-COMMAND-CONTRACT-001"
@@ -188,6 +205,8 @@ commit_boundary = "External-result: the system permission prompt owns authorizat
 rollback_undo = "Cancellation, denial, interruption, or prompt failure preserves all local objects and returns focus to the status and local fallback; Ambitions does not prompt again without new explicit intent and eligibility."
 privacy_egress = "The system receives only the native Calendar permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-PERMISSIONS-CALENDAR-NOT-DETERMINED-002"
@@ -202,6 +221,9 @@ commit_boundary = "Non-mutating: declining or postponing a permission crosses no
 rollback_undo = "No Undo is required; later prompting requires fresh explicit intent, relevance, eligibility, scope explanation, and fallback."
 privacy_egress = "The system receives only the native Calendar permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-PARTIAL-EXTERNAL-ACCESS"
 requirement_id = "APP-PERMISSIONS-COMMAND-CONTRACT-001"
@@ -226,6 +248,9 @@ commit_boundary = "Non-mutating: access inspection remains explanatory and cross
 rollback_undo = "No Undo is required; dismissal returns to the exact prior capability status and preserves all local content."
 privacy_egress = "The system receives only the native Calendar permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-RECONCILING"
 requirement_id = "APP-PERMISSIONS-COMMAND-CONTRACT-001"
@@ -250,6 +275,9 @@ commit_boundary = "External-result: authorization re-read and capability reconci
 rollback_undo = "Failure preserves the prior known status, local fallback, and objects; another Check Again requires explicit retry or a new foreground return and cannot replay a rejected action."
 privacy_egress = "The system receives only the native Calendar permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-REQUEST-FAILED"
 requirement_id = "APP-PERMISSIONS-COMMAND-CONTRACT-001"
@@ -274,6 +302,8 @@ commit_boundary = "External-result: authorization re-read and capability reconci
 rollback_undo = "Failure preserves the prior known status, local fallback, and objects; another Check Again requires explicit retry or a new foreground return and cannot replay a rejected action."
 privacy_egress = "The system receives only the native Calendar permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-PERMISSIONS-CALENDAR-REQUEST-FAILED-002"
@@ -288,6 +318,9 @@ commit_boundary = "Non-mutating: choosing the local fallback performs no permiss
 rollback_undo = "No Undo is required; the user may later choose a relevant permission-dependent feature, which must restart contextual eligibility and explanation."
 privacy_egress = "The system receives only the native Calendar permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-RESTRICTED"
 requirement_id = "APP-PERMISSIONS-COMMAND-CONTRACT-001"
@@ -312,6 +345,9 @@ commit_boundary = "Non-mutating: choosing the local fallback performs no permiss
 rollback_undo = "No Undo is required; the user may later choose a relevant permission-dependent feature, which must restart contextual eligibility and explanation."
 privacy_egress = "The system receives only the native Calendar permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-REVOKED"
 requirement_id = "APP-PERMISSIONS-COMMAND-CONTRACT-001"
@@ -336,6 +372,8 @@ commit_boundary = "External-result: Settings changes are externally owned; foreg
 rollback_undo = "Cancellation, unchanged status, or Settings-return failure preserves the prior known status and local fallback, focuses the recovery control, and triggers no repeated prompt."
 privacy_egress = "The system receives only the native Calendar permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-PERMISSIONS-CALENDAR-REVOKED-002"
@@ -350,6 +388,9 @@ commit_boundary = "Non-mutating: choosing the local fallback performs no permiss
 rollback_undo = "No Undo is required; the user may later choose a relevant permission-dependent feature, which must restart contextual eligibility and explanation."
 privacy_egress = "The system receives only the native Calendar permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-SETTINGS-RETURN-FAILED"
 requirement_id = "APP-PERMISSIONS-COMMAND-CONTRACT-001"
@@ -374,6 +415,9 @@ commit_boundary = "External-result: authorization re-read and capability reconci
 rollback_undo = "Failure preserves the prior known status, local fallback, and objects; another Check Again requires explicit retry or a new foreground return and cannot replay a rejected action."
 privacy_egress = "The system receives only the native Calendar permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-PERMISSIONS-CALENDAR-UNAVAILABLE"
 requirement_id = "APP-PERMISSIONS-COMMAND-CONTRACT-001"
@@ -398,6 +442,9 @@ commit_boundary = "Non-mutating: choosing the local fallback performs no permiss
 rollback_undo = "No Undo is required; the user may later choose a relevant permission-dependent feature, which must restart contextual eligibility and explanation."
 privacy_egress = "The system receives only the native Calendar permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-AUTHORIZED"
 requirement_id = "APP-PERMISSIONS-COMMAND-CONTRACT-001"
@@ -422,6 +469,9 @@ commit_boundary = "Non-mutating: status dismissal cannot grant, revoke, reconcil
 rollback_undo = "No Undo is required; reopening the capability shows the current revalidated status and local fallback."
 privacy_egress = "The system receives only the native Notifications permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-DENIED"
 requirement_id = "APP-PERMISSIONS-COMMAND-CONTRACT-001"
@@ -446,6 +496,8 @@ commit_boundary = "External-result: Settings changes are externally owned; foreg
 rollback_undo = "Cancellation, unchanged status, or Settings-return failure preserves the prior known status and local fallback, focuses the recovery control, and triggers no repeated prompt."
 privacy_egress = "The system receives only the native Notifications permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-PERMISSIONS-NOTIFICATIONS-DENIED-002"
@@ -460,6 +512,9 @@ commit_boundary = "Non-mutating: choosing the local fallback performs no permiss
 rollback_undo = "No Undo is required; the user may later choose a relevant permission-dependent feature, which must restart contextual eligibility and explanation."
 privacy_egress = "The system receives only the native Notifications permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-ELIGIBILITY-CHECK"
 requirement_id = "APP-PERMISSIONS-COMMAND-CONTRACT-001"
@@ -484,6 +539,9 @@ commit_boundary = "External-result: authorization re-read and capability reconci
 rollback_undo = "Failure preserves the prior known status, local fallback, and objects; another Check Again requires explicit retry or a new foreground return and cannot replay a rejected action."
 privacy_egress = "The system receives only the native Notifications permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-LIMITED"
 requirement_id = "APP-PERMISSIONS-COMMAND-CONTRACT-001"
@@ -508,6 +566,9 @@ commit_boundary = "Non-mutating: access inspection remains explanatory and cross
 rollback_undo = "No Undo is required; dismissal returns to the exact prior capability status and preserves all local content."
 privacy_egress = "The system receives only the native Notifications permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-LOCAL-FALLBACK"
 requirement_id = "APP-PERMISSIONS-COMMAND-CONTRACT-001"
@@ -532,6 +593,9 @@ commit_boundary = "Non-mutating: choosing the local fallback performs no permiss
 rollback_undo = "No Undo is required; the user may later choose a relevant permission-dependent feature, which must restart contextual eligibility and explanation."
 privacy_egress = "The system receives only the native Notifications permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-NOT-DETERMINED"
 requirement_id = "APP-PERMISSIONS-COMMAND-CONTRACT-001"
@@ -556,6 +620,8 @@ commit_boundary = "External-result: the system permission prompt owns authorizat
 rollback_undo = "Cancellation, denial, interruption, or prompt failure preserves all local objects and returns focus to the status and local fallback; Ambitions does not prompt again without new explicit intent and eligibility."
 privacy_egress = "The system receives only the native Notifications permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-PERMISSIONS-NOTIFICATIONS-NOT-DETERMINED-002"
@@ -570,6 +636,9 @@ commit_boundary = "Non-mutating: declining or postponing a permission crosses no
 rollback_undo = "No Undo is required; later prompting requires fresh explicit intent, relevance, eligibility, scope explanation, and fallback."
 privacy_egress = "The system receives only the native Notifications permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-PARTIAL-EXTERNAL-ACCESS"
 requirement_id = "APP-PERMISSIONS-COMMAND-CONTRACT-001"
@@ -594,6 +663,9 @@ commit_boundary = "Non-mutating: access inspection remains explanatory and cross
 rollback_undo = "No Undo is required; dismissal returns to the exact prior capability status and preserves all local content."
 privacy_egress = "The system receives only the native Notifications permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-RECONCILING"
 requirement_id = "APP-PERMISSIONS-COMMAND-CONTRACT-001"
@@ -618,6 +690,9 @@ commit_boundary = "External-result: authorization re-read and capability reconci
 rollback_undo = "Failure preserves the prior known status, local fallback, and objects; another Check Again requires explicit retry or a new foreground return and cannot replay a rejected action."
 privacy_egress = "The system receives only the native Notifications permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-REQUEST-FAILED"
 requirement_id = "APP-PERMISSIONS-COMMAND-CONTRACT-001"
@@ -642,6 +717,8 @@ commit_boundary = "External-result: authorization re-read and capability reconci
 rollback_undo = "Failure preserves the prior known status, local fallback, and objects; another Check Again requires explicit retry or a new foreground return and cannot replay a rejected action."
 privacy_egress = "The system receives only the native Notifications permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-PERMISSIONS-NOTIFICATIONS-REQUEST-FAILED-002"
@@ -656,6 +733,9 @@ commit_boundary = "Non-mutating: choosing the local fallback performs no permiss
 rollback_undo = "No Undo is required; the user may later choose a relevant permission-dependent feature, which must restart contextual eligibility and explanation."
 privacy_egress = "The system receives only the native Notifications permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-RESTRICTED"
 requirement_id = "APP-PERMISSIONS-COMMAND-CONTRACT-001"
@@ -680,6 +760,9 @@ commit_boundary = "Non-mutating: choosing the local fallback performs no permiss
 rollback_undo = "No Undo is required; the user may later choose a relevant permission-dependent feature, which must restart contextual eligibility and explanation."
 privacy_egress = "The system receives only the native Notifications permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-REVOKED"
 requirement_id = "APP-PERMISSIONS-COMMAND-CONTRACT-001"
@@ -704,6 +787,8 @@ commit_boundary = "External-result: Settings changes are externally owned; foreg
 rollback_undo = "Cancellation, unchanged status, or Settings-return failure preserves the prior known status and local fallback, focuses the recovery control, and triggers no repeated prompt."
 privacy_egress = "The system receives only the native Notifications permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-PERMISSIONS-NOTIFICATIONS-REVOKED-002"
@@ -718,6 +803,9 @@ commit_boundary = "Non-mutating: choosing the local fallback performs no permiss
 rollback_undo = "No Undo is required; the user may later choose a relevant permission-dependent feature, which must restart contextual eligibility and explanation."
 privacy_egress = "The system receives only the native Notifications permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-SETTINGS-RETURN-FAILED"
 requirement_id = "APP-PERMISSIONS-COMMAND-CONTRACT-001"
@@ -742,6 +830,9 @@ commit_boundary = "External-result: authorization re-read and capability reconci
 rollback_undo = "Failure preserves the prior known status, local fallback, and objects; another Check Again requires explicit retry or a new foreground return and cannot replay a rejected action."
 privacy_egress = "The system receives only the native Notifications permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-PERMISSIONS-NOTIFICATIONS-UNAVAILABLE"
 requirement_id = "APP-PERMISSIONS-COMMAND-CONTRACT-001"
@@ -766,6 +857,9 @@ commit_boundary = "Non-mutating: choosing the local fallback performs no permiss
 rollback_undo = "No Undo is required; the user may later choose a relevant permission-dependent feature, which must restart contextual eligibility and explanation."
 privacy_egress = "The system receives only the native Notifications permission request; Ambitions sends no private life graph content, and partial or denied access never reveals unavailable external fields."
 verification_ids = ["SCENARIO-APP-PERMISSIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+
 +++
 
 # Contextual Permissions
