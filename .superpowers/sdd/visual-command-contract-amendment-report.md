@@ -368,6 +368,29 @@ tools/ambitions_canon/parser.py
 tools/ambitions_canon/ux_blueprint.py
 ```
 
+## Visual Authority Revision 1 semantic refresh
+
+The owner-approved Revision 1 design contract and its deterministic fixture repair are frozen at `1b31c0f8eafd179865575a5fcf42e7ff482e77c1`. The design-spec SHA-256 is `f579a8d15094161afc8c060419c1dee597ffd4d498f67f37bddf194ac58dfa80`. The exact fixture/golden review returned 0 Critical, 0 Important, and 2 residual Minor portability-hardening notes; all fourteen shadow goldens byte-match the live render.
+
+The final pre-refresh Python 3.12 discovery run executed 743 tests in 1,424.357 seconds. It passed 739 tests, skipped 2, and failed exactly the four stale-receipt assertions expected after frozen non-proof changes: regenerated new-prompt hash, regenerated pack hashes, evaluated `task_pack.py` bytes, and the tracked current-receipt check. No compiler, fixture, golden, UX-blueprint, visual-authority, traceability, or task-pack test failed.
+
+A fresh blinded semantic evaluation used the frozen old prompt and new task-pack prompt. The evaluators could not inspect the other path or the prior receipt/comparison. The independent comparator could inspect only both responses, both symmetric prompts, and the new semantic record. Exact evidence:
+
+```text
+evaluated commit: 1b31c0f8eafd179865575a5fcf42e7ff482e77c1
+canon SHA-256: 050ad36b253bef7d0b6c53ab25d23483d1ebf1c9007210c653c68ad89aa68c9e
+old prompt SHA-256: 338c2088cc6a74dc06a3fc087bc6848280b117b7638aefdb377b9649face56cb
+new prompt SHA-256: 7b4e439b6689a09cf771f5b251240e5d4a33229b71b507fed9a73ea7aae8aa9e
+old response SHA-256: c7d5794e0c2625db29bcbb92d9282c83d5058c1b1509ce9fe436ff7147b05f04
+new response SHA-256: 7cb1847fbd2360120f23b409f363de21effa717dde5ca0440dd9399053c964c8
+comparison SHA-256: 24a75acb7e448c46a5e4481ffccc3b77748c79f84e96df2a2670b2b0e6570e5d
+comparison totals: old 25 / new 28
+overall verdict: new_better
+old_better dimensions: 0
+```
+
+Semantic equivalence, relevant-law recall, source ownership, and validation completeness are equivalent; contradiction control, unauthorized-assumption control, and proof discipline are `new_better`. This remains explicit non-CI shadow comparison evidence only and does not authorize implementation or raise any product, runtime, source, visual, accessibility, privacy, device, distribution, or release claim.
+
 ## Generated outputs
 
 The deterministic canon build and UX-blueprint writer refresh the canon index, requirement graph, ownership/source/test/proof maps, coverage and benchmark projections, visual-authority manifest, UX blueprint Markdown, and requirement-disposition projection. Outputs contain no volatile timestamp and remain newline-terminated.

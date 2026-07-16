@@ -7,14 +7,14 @@
       {
         "dimension": "semantic_equivalence",
         "new_score": 4,
-        "old_score": 3,
-        "verdict": "new_better"
+        "old_score": 4,
+        "verdict": "equivalent"
       },
       {
         "dimension": "relevant_law_recall",
         "new_score": 4,
-        "old_score": 3,
-        "verdict": "new_better"
+        "old_score": 4,
+        "verdict": "equivalent"
       },
       {
         "dimension": "contradiction_control",
@@ -31,8 +31,8 @@
       {
         "dimension": "source_ownership",
         "new_score": 4,
-        "old_score": 3,
-        "verdict": "new_better"
+        "old_score": 4,
+        "verdict": "equivalent"
       },
       {
         "dimension": "validation_completeness",
@@ -49,30 +49,30 @@
     ],
     "model": "gpt-5-sol-max",
     "new_total_score": 28,
-    "old_total_score": 22,
+    "old_total_score": 25,
     "overall_verdict": "new_better",
-    "reviewer": "Final Polished Independent Semantic Comparator",
-    "sha256": "7e45a2155823abdf96c902efe2ff4db2f23e28c837f07895ea1f0f28aecaacbb"
+    "reviewer": "Fresh Visual Revision 1 Semantic Comparator",
+    "sha256": "24a75acb7e448c46a5e4481ffccc3b77748c79f84e96df2a2670b2b0e6570e5d"
   },
   "compiler_version": "0.2.0",
-  "evaluated_task_pack_commit": "a338d77006c7e7c0399ed8d394194be85e8f404d",
+  "evaluated_task_pack_commit": "1b31c0f8eafd179865575a5fcf42e7ff482e77c1",
   "lane": "explicit_non_ci_semantic_review",
-  "new_prompt_sha256": "e3eed47bc27559428cacbc1cb279f42b6a86c552c1c4124d114c28cb413419ac",
+  "new_prompt_sha256": "7b4e439b6689a09cf771f5b251240e5d4a33229b71b507fed9a73ea7aae8aa9e",
   "new_response": {
     "model": "gpt-5-sol-high",
-    "reviewer": "Final Polished New Pack Evaluator",
-    "sha256": "647515a442f05cbe9fc8ea099d04d9be68ece8e0826486b53f0d09a21475ddc4"
+    "reviewer": "Fresh New Pack Evaluator",
+    "sha256": "7cb1847fbd2360120f23b409f363de21effa717dde5ca0440dd9399053c964c8"
   },
   "old_prompt_sha256": "338c2088cc6a74dc06a3fc087bc6848280b117b7638aefdb377b9649face56cb",
   "old_response": {
     "model": "gpt-5-sol-high",
-    "reviewer": "Old Path Evaluator",
-    "sha256": "f8e73052af92ad97e4f686730190e15532c5107328060c5c9ac8272aa9bd9834"
+    "reviewer": "Fresh Old Path Evaluator",
+    "sha256": "c7d5794e0c2625db29bcbb92d9282c83d5058c1b1509ce9fe436ff7147b05f04"
   },
   "pack_hashes": [
     {
-      "json_sha256": "c1e85caf34dd47a4d46b55fb2a2a4c37326f9ab79fc3f88a617d041813f610ef",
-      "markdown_sha256": "9e93f0c4ec21e94527894f2068475247cf1dac71f9a98f10a0a3d351189e8698",
+      "json_sha256": "6af4dc6960db4eccd794b7968a5b437a78cf9e103b0057bdf4a7ec0b2fdeb177",
+      "markdown_sha256": "032e8db47c65e583a2cdb734182deec50c4e78ea52cb35e6878d3c36d7f39f31",
       "scenario_id": "today-swiftui"
     },
     {
@@ -81,8 +81,8 @@
       "scenario_id": "time-recurrence"
     },
     {
-      "json_sha256": "ca36e764ab80da9a4594634080500a6a21cc5bedd93bf872c45b811df3bcf5cb",
-      "markdown_sha256": "30a5159ca4473ea497056a6c25a29a36fb7b25e914b1f664cc63e183020a9714",
+      "json_sha256": "87d0a4a13f93b1bf97eacd82356032b15792ab8134f29d59e4bb6fccdb9df6cd",
+      "markdown_sha256": "d0c52898447a0a4ccc39dc110e458462cde95625ebe28ecbddfdc825df5900ea",
       "scenario_id": "capture-proposal"
     },
     {
@@ -91,23 +91,23 @@
       "scenario_id": "local-runtime-mutation"
     },
     {
-      "json_sha256": "9a654b4dd3c4e231571a4e9dc537b27bd7a1358b35b92558a009d29ac066cdc4",
-      "markdown_sha256": "2de546cfc52eedc158de2026a231bb3085af7ea3d090a5406e11e0f29cac5b44",
+      "json_sha256": "c0db4e5d05b2e172a1ada3224b408b716d99b10d7b644f29059575047e9244b0",
+      "markdown_sha256": "7bd13459a17bfd4fed48187ac7bee37c6be47ad8cf5e744096a8831d7b6d4e25",
       "scenario_id": "cloudkit-continuity"
     },
     {
-      "json_sha256": "0ebfbc533fa83111e4946cde7dc881e00243e904a6358e0ba3f6220ecd85e28e",
-      "markdown_sha256": "5a229bc38762cf31f1860eb2712d653ab5c09148b9ce2a4077513116deafbc98",
+      "json_sha256": "86e0591b7cbce051404760272faf49cce68c22fb9b69fcb1ab6e3db606eb89ac",
+      "markdown_sha256": "b37fd42795f6c8138a8b1d0e25861d26ba763620383d055f3767cf933850651e",
       "scenario_id": "source-atlas-boundary"
     },
     {
-      "json_sha256": "05bfa9d07af0362d27cf71726ec142d2954fb6d0690a26157e52d1c22b8ba9b0",
-      "markdown_sha256": "ba12cbc9430814d30e24b14c130af80c5ba96279551d34924fe981c2485fc067",
+      "json_sha256": "2d9dda548068ca570221afb3a4f99df3549841b8b38f80262e1ab72446d345d4",
+      "markdown_sha256": "94752d0372b2df04857fde845782094bbd0b50ba78e34f90faa38ea694a401df",
       "scenario_id": "accessibility-repair"
     },
     {
-      "json_sha256": "6cae43b7b6e98a6e6cfd6a2d3d4ad8dbbef9ba09bbafd200babcad53e450d042",
-      "markdown_sha256": "b7b14ff16d5ef23078221f5983fc50dc39caf7d48c154cf4fd205494783196cd",
+      "json_sha256": "6cffdf74744b34d77eca23a595bed4233e54f487df2748fe8e546a032086d2d9",
+      "markdown_sha256": "3ffb737807bcf7c5d7d9fa7666988e9fc5c11fb8fb4dad8b229b9e8c840f05a8",
       "scenario_id": "release-proof-claim"
     }
   ],
