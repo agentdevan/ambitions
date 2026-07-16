@@ -283,7 +283,7 @@
     "stateVariant": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["accessibility_focus", "allowed_commands", "behavior_authority_evidence", "behavior_authority_posture", "behavior_authority_rationale", "behavior_requirement_ids", "blueprint_id", "displayed_objects", "durable_effect", "future_gated_commands", "generic_kind", "implementation_status", "offline_behavior", "operation_phase", "proof_ceiling", "recovery_rollback", "requirement_ids", "specification_gap_ids", "state_axis", "title", "transition_exit", "variant_key", "visible_content_copy", "visible_presentation"],
+      "required": ["accessibility_focus", "allowed_commands", "behavior_authority_evidence", "behavior_authority_posture", "behavior_authority_rationale", "behavior_requirement_ids", "blueprint_id", "displayed_objects", "durable_effect", "future_gated_commands", "generic_kind", "implementation_status", "machine_command_contracts", "offline_behavior", "operation_phase", "proof_ceiling", "recovery_rollback", "requirement_ids", "specification_gap_ids", "state_axis", "title", "transition_exit", "variant_key", "visible_content_copy", "visible_presentation"],
       "properties": {
         "accessibility_focus": {"$ref": "#/$defs/nonempty"},
         "allowed_commands": {"$ref": "#/$defs/possiblyEmptyStringArray"},
@@ -312,6 +312,11 @@
               "label": {"$ref": "#/$defs/nonempty"}
             }
           }
+        },
+        "machine_command_contracts": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/machineCommandContract"}
         },
         "generic_kind": {"enum": ["degraded", "empty", "failure", "interruption", "loading", "recovery", "resting", "rollback", "transitional"]},
         "implementation_status": {"const": "design_input_only"},
@@ -359,6 +364,47 @@
           "items": {"enum": ["accessibility_focus", "allowed_commands", "durable_effect", "future_gated_commands", "offline_behavior", "recovery_rollback", "transition_exit"]}
         },
         "requirement_id": {"type": "string", "pattern": "^[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)+-[0-9]{3}$"}
+      }
+    },
+    "machineTarget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["detail", "id", "posture"],
+      "properties": {
+        "detail": {"$ref": "#/$defs/nonempty"},
+        "id": {"type": "string", "pattern": "^(?:DEST|FOCUS)-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "posture": {"enum": ["current", "deferred", "unavailable"]}
+      }
+    },
+    "machineRecovery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["checkpoint_id", "detail", "id", "inverse_command_id", "irreversible_confirmation_id", "irreversible_receipt_id", "owner", "posture", "recovery_handoff_command_id", "rollback_posture"],
+      "properties": {
+        "checkpoint_id": {"type": ["string", "null"], "pattern": "^CHECKPOINT-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "detail": {"$ref": "#/$defs/nonempty"},
+        "id": {"type": "string", "pattern": "^RECOVERY-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "inverse_command_id": {"type": ["string", "null"], "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "irreversible_confirmation_id": {"type": ["string", "null"], "pattern": "^CONFIRMATION-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "irreversible_receipt_id": {"type": ["string", "null"], "pattern": "^RECEIPT-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "owner": {"$ref": "#/$defs/nonempty"},
+        "posture": {"enum": ["current", "deferred", "unavailable"]},
+        "recovery_handoff_command_id": {"type": ["string", "null"], "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "rollback_posture": {"type": ["string", "null"], "enum": ["checkpoint_restore", "confirmed_irreversible", "inverse_command", "owner_recovery_handoff", null]}
+      }
+    },
+    "machineCommandContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["activation_posture", "command_id", "destination", "failure_focus", "label", "recovery", "success_focus"],
+      "properties": {
+        "activation_posture": {"enum": ["active", "future_gated"]},
+        "command_id": {"type": "string", "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "destination": {"$ref": "#/$defs/machineTarget"},
+        "failure_focus": {"$ref": "#/$defs/machineTarget"},
+        "label": {"$ref": "#/$defs/nonempty"},
+        "recovery": {"$ref": "#/$defs/machineRecovery"},
+        "success_focus": {"$ref": "#/$defs/machineTarget"}
       }
     },
     "setupContract": {

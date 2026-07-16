@@ -29,8 +29,10 @@ from tools.ambitions_canon.model import (
     StateCommand,
     StateCommandActivationPosture,
     StateCommandContract,
+    StateCommandResolutionPosture,
 )
 from tools.ambitions_canon.manifest import load_documents, load_manifest
+from tools.ambitions_canon.parser import state_command_machine_contract
 from tools.ambitions_canon.registry import build_registry
 from tools.ambitions_canon.reference_index import parse_reference_index_bytes
 from tools.ambitions_canon.task_pack import (
@@ -461,6 +463,15 @@ class TaskPackTests(unittest.TestCase):
             command_id="CMD-TODAY-PURCHASE-001",
             label="Purchase",
             canonical_owner=gated_requirement.concept,
+            destination_id="DEST-TODAY-PURCHASE-001",
+            destination_posture=StateCommandResolutionPosture.CURRENT,
+            success_focus_id="FOCUS-TODAY-PURCHASE-001-SUCCESS",
+            success_focus_posture=StateCommandResolutionPosture.CURRENT,
+            failure_focus_id="FOCUS-TODAY-PURCHASE-001-FAILURE",
+            failure_focus_posture=StateCommandResolutionPosture.CURRENT,
+            recovery_id="RECOVERY-TODAY-PURCHASE-001",
+            recovery_posture=StateCommandResolutionPosture.CURRENT,
+            recovery_owner=gated_requirement.concept,
             preconditions=(
                 "A separately registered and owner-approved StoreKit product registry exists",
             ),
@@ -554,6 +565,7 @@ class TaskPackTests(unittest.TestCase):
                     "gate_dependencies": [],
                     "gate_requirement_ids": ["TODAY-002"],
                     "label": "Purchase",
+                    "machine_contract": state_command_machine_contract(future_command),
                     "requirement_id": gated_requirement.requirement_id,
                     "state_id": "UX-STATE-VARIANT-TODAY-PURCHASE",
                 },
@@ -647,6 +659,7 @@ class TaskPackTests(unittest.TestCase):
                             "gate_dependencies",
                             "gate_requirement_ids",
                             "label",
+                            "machine_contract",
                             "requirement_id",
                             "state_id",
                         }

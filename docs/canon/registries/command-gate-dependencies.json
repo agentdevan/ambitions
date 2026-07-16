@@ -1,18 +1,21 @@
 {
+  "canon_content_sha256": "eb0a44125ec4814cec2c5a53f14d72c96b6539bb46b7fca9b90418a7ed6cc57b",
   "canon_revision": 1,
   "dependencies": [
     {
       "activation_authorization": false,
+      "approval_receipt_id": null,
+      "canon_content_sha256": "eb0a44125ec4814cec2c5a53f14d72c96b6539bb46b7fca9b90418a7ed6cc57b",
       "command_id": "CMD-YOU-ENTITLEMENT-EXPIRED-002",
       "dependency_id": "GATE-STOREKIT-PRODUCT-REGISTRY-001",
       "dependency_kind": "storekit_product_registry",
       "dependency_posture": "blocked",
       "dependency_revision": 1,
-      "dependency_sha256": "14e38ea5d86f63dc271dd005f8f44b507edd3e68b1e2804261568cb9b1104323",
+      "dependency_sha256": "a70a2832b05a4860215c7da604f8578fbf2b8848d04a03b5649637a74d20e1a6",
       "exact_product_mappings": [],
       "freshness": "absent",
       "mapping_sha256": null,
-      "owner_approval_evidence": null,
+      "mapping_record_id": null,
       "owner_approval_state": "withheld",
       "owner_concept": "surface.you.entitlement-command-contract",
       "requirement_id": "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001",

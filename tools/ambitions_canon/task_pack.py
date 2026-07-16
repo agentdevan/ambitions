@@ -41,6 +41,7 @@ from tools.ambitions_canon.model import (
     StateCommand,
     StateCommandActivationPosture,
 )
+from tools.ambitions_canon.parser import state_command_machine_contract
 from tools.ambitions_canon.render import stable_json
 from tools.ambitions_canon.traceability import TraceabilityReport
 from tools.ambitions_canon.visual_authority import (
@@ -1671,6 +1672,7 @@ def _command_authorization_record(
         "gate_dependencies": dependencies,
         "gate_requirement_ids": list(command.gate_requirement_ids),
         "label": command.label,
+        "machine_contract": state_command_machine_contract(command),
         "requirement_id": requirement_id,
         "state_id": state_id,
     }
@@ -1696,7 +1698,14 @@ def _render_command_authorizations(
             "activation_authorized="
             f"`{str(record['activation_authorized']).casefold()}`; "
             "gate_requirement_ids="
-            f"`{', '.join(record['gate_requirement_ids'])}`; gate_dependencies=`"
+            f"`{', '.join(record['gate_requirement_ids'])}`; machine_contract=`"
+            + json.dumps(
+                record["machine_contract"],
+                ensure_ascii=False,
+                sort_keys=True,
+                separators=(",", ":"),
+            )
+            + "`; gate_dependencies=`"
             + json.dumps(
                 record["gate_dependencies"],
                 ensure_ascii=False,

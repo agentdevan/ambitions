@@ -1209,7 +1209,7 @@ class VisualR1CommandContractTests(unittest.TestCase):
                     'canonical_owner = "unresolved.owner"',
                     1,
                 ),
-                "command owner concept mismatch",
+                "command recovery owner is unresolved",
             ),
         )
         for label, mutated, expected in cases:
@@ -1257,6 +1257,68 @@ class VisualR1CommandContractTests(unittest.TestCase):
                         contract.accessibility_focus,
                         [command],
                     )
+
+    def test_equivalent_modal_target_prose_cannot_authorize_resolution(self):
+        contract = self.contracts[
+            "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-CONSUMED"
+        ]
+        adversarial = (
+            "destination is pending approval",
+            "destination awaits definition",
+            "route to be finalized",
+            "destination is unknown to the implementation",
+        )
+
+        for value in adversarial:
+            with self.subTest(value=value):
+                command = replace(contract.commands[0], destination=value)
+                with self.assertRaisesRegex(
+                    CanonError,
+                    "unresolved command route or focus",
+                ):
+                    _validate_state_command_semantics(
+                        Path("fixture.md"),
+                        contract.state_id,
+                        contract.durable_effect,
+                        contract.recovery_rollback,
+                        contract.offline_behavior,
+                        contract.accessibility_focus,
+                        [command],
+                    )
+
+    def test_complete_corpus_declares_machine_target_focus_and_recovery_identity(self):
+        expected_postures = {"current"}
+        for contract in self.contracts.values():
+            for command in contract.commands:
+                with self.subTest(command_id=command.command_id):
+                    self.assertRegex(command.destination_id, r"^DEST-[A-Z0-9-]+$")
+                    self.assertIn(command.destination_posture.value, expected_postures)
+                    self.assertRegex(command.success_focus_id, r"^FOCUS-[A-Z0-9-]+$")
+                    self.assertIn(command.success_focus_posture.value, expected_postures)
+                    self.assertRegex(command.failure_focus_id, r"^FOCUS-[A-Z0-9-]+$")
+                    self.assertIn(command.failure_focus_posture.value, expected_postures)
+                    self.assertRegex(command.recovery_id, r"^RECOVERY-[A-Z0-9-]+$")
+                    self.assertIn(command.recovery_posture.value, expected_postures)
+                    self.assertEqual(command.recovery_owner, command.canonical_owner)
+
+    def test_blueprint_projects_exact_machine_command_contracts(self):
+        variants = {
+            variant["blueprint_id"]: variant
+            for model in self.blueprint["state_models"]
+            for variant in model["variants"]
+        }
+        for state_id, contract in self.contracts.items():
+            with self.subTest(state_id=state_id):
+                projected = variants[state_id]["machine_command_contracts"]
+                self.assertEqual(
+                    [item["command_id"] for item in projected],
+                    [item.command_id for item in contract.commands],
+                )
+                for record, command in zip(projected, contract.commands, strict=True):
+                    self.assertEqual(record["destination"]["id"], command.destination_id)
+                    self.assertEqual(record["success_focus"]["id"], command.success_focus_id)
+                    self.assertEqual(record["failure_focus"]["id"], command.failure_focus_id)
+                    self.assertEqual(record["recovery"]["id"], command.recovery_id)
 
     def test_concrete_named_routes_with_status_words_remain_valid(self):
         contract = self.contracts[
@@ -1456,6 +1518,77 @@ class VisualR1CommandContractTests(unittest.TestCase):
                             contract.accessibility_focus,
                             commands,
                         )
+
+    def test_every_recovery_class_rejects_equivalent_modal_execution_prose(self):
+        cases = (
+            (
+                "UX-STATE-VARIANT-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED",
+                "CMD-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-001",
+                "A typed inverse command is pending implementation.",
+                "mutation command omits actionable rollback",
+            ),
+            (
+                "UX-STATE-VARIANT-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED",
+                "CMD-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-001",
+                "A typed inverse command is specified for documentation only.",
+                "mutation command omits actionable rollback",
+            ),
+            (
+                "UX-STATE-VARIANT-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED",
+                "CMD-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-001",
+                "A typed inverse command may someday exist.",
+                "mutation command omits actionable rollback",
+            ),
+            (
+                "UX-STATE-VARIANT-CAPTURE-COMPOSER-DISCARD-REVIEW",
+                "CMD-CAPTURE-COMPOSER-DISCARD-REVIEW-001",
+                "A checkpoint restore is pending implementation.",
+                "mutation command omits actionable rollback",
+            ),
+            (
+                "UX-STATE-VARIANT-ACCOUNT-STATUS-SIGNED-IN",
+                "CMD-ACCOUNT-STATUS-SIGNED-IN-001",
+                "A recovery handoff is pending implementation.",
+                "mutation command omits actionable rollback",
+            ),
+            (
+                "UX-STATE-VARIANT-TIME-DETAIL-VIEWING",
+                "CMD-TIME-DETAIL-VIEWING-003",
+                "The change is irreversible; confirmation remains pending; a Receipt records scope.",
+                "mutation command omits actionable rollback",
+            ),
+            (
+                "UX-STATE-VARIANT-ACCOUNT-BOUNDARY-ACCOUNT-IDENTITY-ONLY",
+                "CMD-ACCOUNT-BOUNDARY-ACCOUNT-IDENTITY-ONLY-001",
+                "On failure, the command might preserve the prior view.",
+                "command recovery is unresolved",
+            ),
+            (
+                "UX-STATE-VARIANT-ACCOUNT-SIGN-IN-CANCELLED",
+                "CMD-ACCOUNT-SIGN-IN-CANCELLED-001",
+                "On cancellation, the external flow may leave local state unchanged.",
+                "command recovery is unresolved",
+            ),
+        )
+        for state_id, command_id, rollback, expected in cases:
+            contract = self.contracts[state_id]
+            commands = [
+                replace(command, rollback_undo=rollback)
+                if command.command_id == command_id
+                else command
+                for command in contract.commands
+            ]
+            with self.subTest(command_id=command_id, rollback=rollback):
+                with self.assertRaisesRegex(CanonError, expected):
+                    _validate_state_command_semantics(
+                        Path("fixture.md"),
+                        contract.state_id,
+                        contract.durable_effect,
+                        contract.recovery_rollback,
+                        contract.offline_behavior,
+                        contract.accessibility_focus,
+                        commands,
+                    )
 
     def test_external_and_non_mutating_commands_reject_unresolved_recovery(self):
         cases = (

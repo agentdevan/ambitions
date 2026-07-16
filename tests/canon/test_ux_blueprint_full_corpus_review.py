@@ -216,6 +216,8 @@ class UXBlueprintFullCorpusReviewTests(unittest.TestCase):
                 if variant["blueprint_id"] == state_id
             )
             state["allowed_commands"] = []
+            state["future_gated_commands"] = []
+            state["machine_command_contracts"] = []
             state["behavior_authority_evidence"] = []
             state["behavior_authority_posture"] = (
                 "exploratory_blocked_by_specification_gap"

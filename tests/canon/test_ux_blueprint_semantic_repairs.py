@@ -21,6 +21,7 @@ VARIANT_FIELDS = {
     "future_gated_commands",
     "generic_kind",
     "implementation_status",
+    "machine_command_contracts",
     "offline_behavior",
     "operation_phase",
     "proof_ceiling",

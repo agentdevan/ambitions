@@ -240,6 +240,12 @@ class StateCommandRollbackPosture(StrEnum):
     CONFIRMED_IRREVERSIBLE = "confirmed_irreversible"
 
 
+class StateCommandResolutionPosture(StrEnum):
+    CURRENT = "current"
+    DEFERRED = "deferred"
+    UNAVAILABLE = "unavailable"
+
+
 class GapSeverity(StrEnum):
     P0_BLOCKER = "P0_BLOCKER"
     P1_REQUIRED = "P1_REQUIRED"
@@ -351,6 +357,15 @@ class StateCommand:
     command_id: str
     label: str
     canonical_owner: str
+    destination_id: str
+    destination_posture: StateCommandResolutionPosture
+    success_focus_id: str
+    success_focus_posture: StateCommandResolutionPosture
+    failure_focus_id: str
+    failure_focus_posture: StateCommandResolutionPosture
+    recovery_id: str
+    recovery_posture: StateCommandResolutionPosture
+    recovery_owner: str
     preconditions: tuple[str, ...]
     destination: str
     effect: str
@@ -364,6 +379,11 @@ class StateCommand:
     gate_requirement_ids: tuple[str, ...]
     rollback_posture: StateCommandRollbackPosture | None
     gate_dependency_ids: tuple[str, ...] = ()
+    inverse_command_id: str | None = None
+    checkpoint_id: str | None = None
+    recovery_handoff_command_id: str | None = None
+    irreversible_confirmation_id: str | None = None
+    irreversible_receipt_id: str | None = None
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "preconditions", tuple(self.preconditions))

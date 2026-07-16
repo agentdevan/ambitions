@@ -682,6 +682,115 @@ Independent exact-range specification-compliance and code-quality re-review is
 still required after this repair commit. Critical and Important findings remain
 non-waivable.
 
+### Final Important I1/I2 repair against `59e1d41c`
+
+The exact independent re-review of
+`d7fe80dc8e70a4a8cda08b6acde5139753b8b0d3..59e1d41c05a0b9f60db1ea5fc23bf686166d5415`
+returned `0 Critical / 2 Important / 0 Minor`. This one-commit candidate starts
+from clean base `59e1d41c05a0b9f60db1ea5fc23bf686166d5415` and addresses only
+those two Important findings.
+
+I1 no longer lets route, focus, or recovery prose establish machine closure.
+All `433` structured states and all `567` commands now project closed
+destination, success-focus, failure-focus, and recovery identities with an
+explicit `current / deferred / unavailable` posture. Active authorization
+requires every one of those postures to be `current`. Recovery additionally
+binds the canonical owner and the posture-specific mechanism identity:
+
+- `36` inverse-command mutations bind an exact inverse command ID;
+- `10` checkpoint-restore mutations bind an exact checkpoint ID;
+- `12` owner-handoff mutations bind an exact recovery-handoff command ID and
+  canonical owner;
+- `2` confirmed-irreversible mutations bind exact confirmation and Receipt IDs;
+- the remaining `507` non-mutating or external-result commands bind a closed
+  recovery identity/owner without inventing a mutation mechanism.
+
+The human destination, focus, and recovery clauses remain unchanged detail.
+They are projected beside, but cannot replace, the closed identities. The JSON
+UX blueprint, Markdown blueprint, and JSON/Markdown task-pack projections expose
+the exact machine contract for every active and future command. Concrete names
+such as `the pending route requests list` and
+`the unknown route diagnostics` remain accepted, while the reviewed grammatical
+and modal/deferred equivalents fail closed.
+
+I2 replaces arbitrary `owner_approval_evidence` with an independently loaded
+approval-receipt registry. An approved dependency must now bind all of:
+
+- dependency ID and revision;
+- exact mapping-record ID, mapping list, and mapping SHA-256;
+- dependency SHA-256;
+- the non-circular compiler canon-content SHA-256;
+- approval identity, closed approval state, exact owner/requirement/state/command
+  scope, and scope SHA-256;
+- deterministic receipt ID/revision, receipt SHA-256, and the prior receipt hash
+  for revisions after `R0002`.
+
+Receipt history starts at dependency revision `2`, must be contiguous,
+append-only, and hash-chained, and the dependency must reference the latest
+receipt. A mapping/content substitution invalidates the old receipt; a later
+mapping requires the next dependency revision and a new matching receipt. Task
+packs expose the exact product mapping list, mapping-record identity, receipt
+identity, receipt-registry identity/revision/source hash, and the complete
+resolved receipt rather than a count or arbitrary evidence string.
+
+The tracked current posture remains deliberately empty and non-authorizing:
+`Purchase` is `future_gated`; dependency revision is `1`; owner approval is
+`withheld`; mapping and receipt identities are `null`; exact mappings and the
+approval-receipt registry are empty; freshness is `absent`; posture is
+`blocked`; activation authorization is `false`. No SKU, product identifier,
+price, plan, trial, paywall, paid-feature boundary, or monetization law was
+added. The registry files remain outside the normative manifest and own no
+requirement or product concept. The exact current compiler content binding is
+`eb0a44125ec4814cec2c5a53f14d72c96b6539bb46b7fca9b90418a7ed6cc57b`.
+
+Strict TDD was observed before production edits. The first selected I1 RED
+exited `1` with `13` failures and `1,002` subtest errors across seven selected
+tests, proving the modal target/recovery bypasses and missing machine fields and
+projections. The I2-specific RED then ran nine dependency tests and produced
+eight errors, proving that canon-content, receipt, stale-content,
+mapping-substitution, and approval-hash controls were absent. The authoritative
+pinned Python 3.12 focused suite then exited `0`: `131` tests ran in `118.823s`.
+
+The first frozen covering run correctly exposed two test-harness field-set
+drifts and no production defect: `260` tests ran in `449.005s`, with two
+failures and one expected skip. The two exact harness repairs passed `2/2` in
+`15.253s`. The complete frozen command was restarted from zero under
+`/Users/devan/.local/share/uv/python/cpython-3.12-macos-x86_64-none/bin/python3.12`
+and exited `0`: `260` tests ran in `393.113s`; all passed with one expected
+skip. No semantic evaluation or semantic receipt was run, changed, or rebound.
+
+Final deterministic gates all exited `0`:
+
+```text
+ambitions-canon.py audit: 61 documents, 461 requirements/concepts, shadow
+ambitions-canon.py build --check: generated outputs current
+ambitions-canon.py ux-blueprint --check: 47 screens, 433 variants, 461 requirements
+ambitions-canon.py coverage --fail-on-p0-gap: 61 documents, five profiles
+ambitions-canon.py traceability --check: 461 requirements, 20 references, 1,044 posture gaps
+ambitions-canon.py external-authority --kind figma --check: 11 references, zero reconciliation entities
+ambitions-truth-path-vocabulary-audit.py: Green
+ambitions-constitution-audit.py: 124 laws, 34 source maps, 34 test maps
+ambitions-remediation-governance-check.py: 68 changed paths, zero production/support Swift changes, Green
+canon-language-drift-scan.sh: exit 0; Yellow prohibition/backlog evidence only
+git diff --check: exit 0
+```
+
+Architecture closeout: Final Architecture Tree inspected: yes. This bounded
+canon/compiler repair creates no production owner, runtime authority, package,
+Swift source, or compatibility shim. Canonical production owners touched: none.
+New durable files are only the command-gate approval-receipt registry and its
+closed schema. Old/non-canonical production paths removed: none. Yellow
+architecture debt introduced: none. No equivalent-folder or approximate-owner
+interpretation was used.
+
+Allowed claim before independent re-review: deterministic shadow-canon repair
+candidate with the exact machine-command, approval-receipt, task-pack,
+generated-projection, and governance evidence above Green. Independent exact
+specification-compliance and code-quality re-review is still required. Visual
+approval, semantic-evaluation readiness, Gate B, authority cutover, source UI,
+runtime/device/accessibility/privacy/distribution, TestFlight, App Store, and
+Release Green remain explicitly unclaimed.
+
 ## Rollback and claim ceiling
 
 Rollback before the proof-only commit: discard the three-file bounded worktree diff and return to `a338d77006c7e7c0399ed8d394194be85e8f404d`. Rollback of only the final proof-only commit after creation: revert `HEAD`. Rollback of the complete multi-commit amendment range: revert the final proof-only `HEAD`, then `a338d77006c7e7c0399ed8d394194be85e8f404d`, then Markdown-lint repair `680aa8a160c6fdd0c11238f427396212e63f2fe0`, then prior proof commit `23f480c4de5cb7d921c0ae5485f4587e704eb2f4`, then `f1a37b4f4ffdefb0788d1149bbf2c61393e71a94`, then prior proof commit `d8278db7eda86221037d97996f1473498dce5b83`, then `15beb50106a641ab3eb02ed10679dd425de69913`, then prior proof commit `d0461881077f8ddc9f01520c31b67b82c01aa247`, then `6e88b61414417cdaeaae9586c606f175de099e48`, then prior proof commit `4cbdfcc9c1ef7018b208255a65f6051ff9ec9d92`, then `f11b414f342346dfd7200381d232045efb34de9a`, then earlier proof commit `534941616edc1dac34d94fc184435b51593e3c79`, then `262327c04261deb43bfe3bd3e7ad1e9380c0c0ab`, then `030cf73f38c6bab9a0096af7706e6a85644026a2`, then `bc5e1e82dbbc506b562fc763e9ea92dba965b88d`, then `1e81d170e997e6895b92cdc080563b28b60ac636` in reverse order, restoring base SHA `3c0957ebb2202f10de53975b2cb74e8f35253808` without rewriting published history.

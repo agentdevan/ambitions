@@ -18,6 +18,7 @@ from tools.ambitions_canon.model import (
     StateCommand,
     StateCommandActivationPosture,
     StateCommandContract,
+    StateCommandResolutionPosture,
     StateCommandRollbackPosture,
 )
 
@@ -118,6 +119,15 @@ STATE_COMMAND_REQUIRED_FIELDS = frozenset(
         "command_id",
         "label",
         "canonical_owner",
+        "destination_id",
+        "destination_posture",
+        "success_focus_id",
+        "success_focus_posture",
+        "failure_focus_id",
+        "failure_focus_posture",
+        "recovery_id",
+        "recovery_posture",
+        "recovery_owner",
         "preconditions",
         "destination",
         "effect",
@@ -134,10 +144,21 @@ STATE_COMMAND_FIELDS = STATE_COMMAND_REQUIRED_FIELDS | {
     "gate_dependency_ids",
     "gate_requirement_ids",
     "rollback_posture",
+    "inverse_command_id",
+    "checkpoint_id",
+    "recovery_handoff_command_id",
+    "irreversible_confirmation_id",
+    "irreversible_receipt_id",
 }
 STATE_ID = re.compile(r"^UX-STATE-VARIANT-[A-Z0-9]+(?:-[A-Z0-9]+)*$")
 COMMAND_ID = re.compile(r"^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$")
 GATE_DEPENDENCY_ID = re.compile(r"^GATE-[A-Z0-9]+(?:-[A-Z0-9]+)*$")
+DESTINATION_ID = re.compile(r"^DEST-[A-Z0-9]+(?:-[A-Z0-9]+)*$")
+FOCUS_ID = re.compile(r"^FOCUS-[A-Z0-9]+(?:-[A-Z0-9]+)*$")
+RECOVERY_ID = re.compile(r"^RECOVERY-[A-Z0-9]+(?:-[A-Z0-9]+)*$")
+CHECKPOINT_ID = re.compile(r"^CHECKPOINT-[A-Z0-9]+(?:-[A-Z0-9]+)*$")
+CONFIRMATION_ID = re.compile(r"^CONFIRMATION-[A-Z0-9]+(?:-[A-Z0-9]+)*$")
+RECEIPT_ID = re.compile(r"^RECEIPT-[A-Z0-9]+(?:-[A-Z0-9]+)*$")
 NO_DISCLOSURE_STATE_ID = "UX-STATE-VARIANT-TRUST-INLINE-NO-DISCLOSURE"
 GENERIC_STATE_COMMAND_PHRASES = (
     "command review for ux-state-variant-",
@@ -159,6 +180,14 @@ def _is_unresolved_command_target(value: str) -> bool:
 
     normalized = " ".join(value.split())
     if UNRESOLVED_COMMAND_MARKER.fullmatch(normalized):
+        return True
+    unresolved_phrases = (
+        r"\b(?:destination|route|focus|target)\b\s+(?:is|are|remains?|becomes?)\s+(?:pending|unknown|unresolved|unspecified|undecided)\b",
+        r"\b(?:destination|route|focus|target)\b[^.;]{0,48}\b(?:awaits?|waiting for)\b[^.;]{0,24}\b(?:approval|definition|resolution|specification)\b",
+        r"\b(?:destination|route|focus|target)\b[^.;]{0,32}\bto be\b[^.;]{0,24}\b(?:decided|defined|determined|finalized|resolved|specified)\b",
+        r"\b(?:destination|route|focus|target)\b[^.;]{0,48}\bunknown to (?:the )?(?:implementation|runtime|source)\b",
+    )
+    if any(re.search(pattern, normalized, re.IGNORECASE) for pattern in unresolved_phrases):
         return True
     tokens = re.findall(r"[a-z0-9]+", normalized.casefold())
     markers = {
@@ -256,6 +285,21 @@ def _rollback_is_deferred_or_negated(command: StateCommand) -> bool:
         flags=re.IGNORECASE,
     )
     tokens = _rollback_tokens(scrubbed)
+    if re.search(
+        r"\b(?:pending (?:approval|definition|implementation)|"
+        r"documentation only|may someday|might someday|could someday|"
+        r"may eventually|might eventually|could eventually|remains pending)\b",
+        scrubbed,
+        re.IGNORECASE,
+    ):
+        return True
+    if re.search(
+        r"\b(?:may|might|could)\b[^.;]{0,48}\b"
+        r"(?:preserve|retain|restore|return|leave|execute|exist)\b",
+        scrubbed,
+        re.IGNORECASE,
+    ):
+        return True
     markers = {"tbd", "todo", "unspecified", "unresolved", "undecided", "forthcoming"}
     if any(token in markers for token in tokens):
         return True
@@ -651,6 +695,29 @@ def _trimmed_state_text(value: object, path: Path, field: str) -> str:
     return value
 
 
+def _optional_state_text(
+    value: object | None,
+    path: Path,
+    field: str,
+) -> str | None:
+    if value is None:
+        return None
+    return _trimmed_state_text(value, path, field)
+
+
+def _resolution_posture(
+    value: object,
+    path: Path,
+    field: str,
+) -> StateCommandResolutionPosture:
+    try:
+        return StateCommandResolutionPosture(
+            _trimmed_state_text(value, path, field)
+        )
+    except ValueError as exc:
+        raise _state_command_error(path, f"invalid resolution posture: {field}") from exc
+
+
 def _state_string_array(
     value: object,
     path: Path,
@@ -854,6 +921,51 @@ def _state_command_contracts(
                         command_raw["label"], path, "commands.label"
                     ),
                     canonical_owner=canonical_owner,
+                    destination_id=_trimmed_state_text(
+                        command_raw["destination_id"],
+                        path,
+                        "commands.destination_id",
+                    ),
+                    destination_posture=_resolution_posture(
+                        command_raw["destination_posture"],
+                        path,
+                        "commands.destination_posture",
+                    ),
+                    success_focus_id=_trimmed_state_text(
+                        command_raw["success_focus_id"],
+                        path,
+                        "commands.success_focus_id",
+                    ),
+                    success_focus_posture=_resolution_posture(
+                        command_raw["success_focus_posture"],
+                        path,
+                        "commands.success_focus_posture",
+                    ),
+                    failure_focus_id=_trimmed_state_text(
+                        command_raw["failure_focus_id"],
+                        path,
+                        "commands.failure_focus_id",
+                    ),
+                    failure_focus_posture=_resolution_posture(
+                        command_raw["failure_focus_posture"],
+                        path,
+                        "commands.failure_focus_posture",
+                    ),
+                    recovery_id=_trimmed_state_text(
+                        command_raw["recovery_id"],
+                        path,
+                        "commands.recovery_id",
+                    ),
+                    recovery_posture=_resolution_posture(
+                        command_raw["recovery_posture"],
+                        path,
+                        "commands.recovery_posture",
+                    ),
+                    recovery_owner=_trimmed_state_text(
+                        command_raw["recovery_owner"],
+                        path,
+                        "commands.recovery_owner",
+                    ),
                     preconditions=_state_string_array(
                         command_raw["preconditions"],
                         path,
@@ -899,6 +1011,31 @@ def _state_command_contracts(
                     gate_requirement_ids=command_gate_requirement_ids,
                     rollback_posture=rollback_posture,
                     gate_dependency_ids=command_gate_dependency_ids,
+                    inverse_command_id=_optional_state_text(
+                        command_raw.get("inverse_command_id"),
+                        path,
+                        "commands.inverse_command_id",
+                    ),
+                    checkpoint_id=_optional_state_text(
+                        command_raw.get("checkpoint_id"),
+                        path,
+                        "commands.checkpoint_id",
+                    ),
+                    recovery_handoff_command_id=_optional_state_text(
+                        command_raw.get("recovery_handoff_command_id"),
+                        path,
+                        "commands.recovery_handoff_command_id",
+                    ),
+                    irreversible_confirmation_id=_optional_state_text(
+                        command_raw.get("irreversible_confirmation_id"),
+                        path,
+                        "commands.irreversible_confirmation_id",
+                    ),
+                    irreversible_receipt_id=_optional_state_text(
+                        command_raw.get("irreversible_receipt_id"),
+                        path,
+                        "commands.irreversible_receipt_id",
+                    ),
                 )
             )
         if tuple(item.command_id for item in commands) != tuple(
@@ -1006,6 +1143,90 @@ def _state_command_contracts(
     return tuple(contracts)
 
 
+def _validate_machine_command_contract(path: Path, command: StateCommand) -> None:
+    suffix = command.command_id.removeprefix("CMD-")
+    expected_identities = {
+        "destination_id": (command.destination_id, f"DEST-{suffix}", DESTINATION_ID),
+        "success_focus_id": (
+            command.success_focus_id,
+            f"FOCUS-{suffix}-SUCCESS",
+            FOCUS_ID,
+        ),
+        "failure_focus_id": (
+            command.failure_focus_id,
+            f"FOCUS-{suffix}-FAILURE",
+            FOCUS_ID,
+        ),
+        "recovery_id": (command.recovery_id, f"RECOVERY-{suffix}", RECOVERY_ID),
+    }
+    for field, (actual, expected, pattern) in expected_identities.items():
+        if pattern.fullmatch(actual) is None or actual != expected:
+            raise _state_command_error(
+                path,
+                f"command machine identity is unresolved: {command.command_id} {field}",
+            )
+    if command.recovery_owner != command.canonical_owner:
+        raise _state_command_error(
+            path,
+            f"command recovery owner is unresolved: {command.command_id}",
+        )
+    postures = (
+        command.destination_posture,
+        command.success_focus_posture,
+        command.failure_focus_posture,
+        command.recovery_posture,
+    )
+    if (
+        command.activation_posture is StateCommandActivationPosture.ACTIVE
+        and any(item is not StateCommandResolutionPosture.CURRENT for item in postures)
+    ):
+        raise _state_command_error(
+            path,
+            f"active command has non-current machine resolution: {command.command_id}",
+        )
+
+    declared = {
+        "inverse_command_id": command.inverse_command_id,
+        "checkpoint_id": command.checkpoint_id,
+        "recovery_handoff_command_id": command.recovery_handoff_command_id,
+        "irreversible_confirmation_id": command.irreversible_confirmation_id,
+        "irreversible_receipt_id": command.irreversible_receipt_id,
+    }
+    expected: dict[str, str] = {}
+    if command.commit_boundary.startswith("Mutation:"):
+        if command.rollback_posture is StateCommandRollbackPosture.INVERSE_COMMAND:
+            expected = {"inverse_command_id": f"CMD-{suffix}-INVERSE"}
+        elif command.rollback_posture is StateCommandRollbackPosture.CHECKPOINT_RESTORE:
+            expected = {"checkpoint_id": f"CHECKPOINT-{suffix}"}
+        elif command.rollback_posture is StateCommandRollbackPosture.OWNER_RECOVERY_HANDOFF:
+            expected = {
+                "recovery_handoff_command_id": f"CMD-{suffix}-RECOVERY-HANDOFF"
+            }
+        elif command.rollback_posture is StateCommandRollbackPosture.CONFIRMED_IRREVERSIBLE:
+            expected = {
+                "irreversible_confirmation_id": f"CONFIRMATION-{suffix}",
+                "irreversible_receipt_id": f"RECEIPT-{suffix}",
+            }
+    if {key: value for key, value in declared.items() if value is not None} != expected:
+        raise _state_command_error(
+            path,
+            f"command recovery mechanism identity is unresolved: {command.command_id}",
+        )
+    patterns = {
+        "inverse_command_id": COMMAND_ID,
+        "checkpoint_id": CHECKPOINT_ID,
+        "recovery_handoff_command_id": COMMAND_ID,
+        "irreversible_confirmation_id": CONFIRMATION_ID,
+        "irreversible_receipt_id": RECEIPT_ID,
+    }
+    for field, value in expected.items():
+        if patterns[field].fullmatch(value) is None:
+            raise _state_command_error(
+                path,
+                f"command recovery mechanism identity is invalid: {command.command_id}",
+            )
+
+
 def _validate_state_command_semantics(
     path: Path,
     state_id: str,
@@ -1029,6 +1250,7 @@ def _validate_state_command_semantics(
 
     signatures: set[tuple[str, ...]] = set()
     for command in commands:
+        _validate_machine_command_contract(path, command)
         semantic_fields = (
             command.destination,
             command.effect,
@@ -1130,6 +1352,47 @@ def validate_state_command_contract_semantics(
         contract.accessibility_focus,
         list(contract.commands),
     )
+
+
+def state_command_machine_contract(command: StateCommand) -> dict[str, object]:
+    """Project the closed machine contract without treating prose as identity."""
+
+    return {
+        "activation_posture": command.activation_posture.value,
+        "command_id": command.command_id,
+        "destination": {
+            "detail": command.destination,
+            "id": command.destination_id,
+            "posture": command.destination_posture.value,
+        },
+        "failure_focus": {
+            "detail": command.failure_focus,
+            "id": command.failure_focus_id,
+            "posture": command.failure_focus_posture.value,
+        },
+        "label": command.label,
+        "recovery": {
+            "checkpoint_id": command.checkpoint_id,
+            "detail": command.rollback_undo,
+            "id": command.recovery_id,
+            "inverse_command_id": command.inverse_command_id,
+            "irreversible_confirmation_id": command.irreversible_confirmation_id,
+            "irreversible_receipt_id": command.irreversible_receipt_id,
+            "owner": command.recovery_owner,
+            "posture": command.recovery_posture.value,
+            "recovery_handoff_command_id": command.recovery_handoff_command_id,
+            "rollback_posture": (
+                command.rollback_posture.value
+                if command.rollback_posture is not None
+                else None
+            ),
+        },
+        "success_focus": {
+            "detail": command.success_focus,
+            "id": command.success_focus_id,
+            "posture": command.success_focus_posture.value,
+        },
+    }
 
 
 def _object_boundary(

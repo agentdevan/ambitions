@@ -183,6 +183,7 @@
           "gate_dependencies",
           "gate_requirement_ids",
           "label",
+          "machine_contract",
           "requirement_id",
           "state_id"
         ],
@@ -197,15 +198,21 @@
               "additionalProperties": false,
               "required": [
                 "activation_authorization",
+                "approval_receipt",
+                "approval_receipt_id",
+                "approval_receipt_registry_id",
+                "approval_receipt_registry_revision",
+                "approval_receipt_source_sha256",
+                "canon_content_sha256",
                 "dependency_id",
                 "dependency_kind",
                 "dependency_posture",
                 "dependency_revision",
                 "dependency_sha256",
-                "exact_product_mapping_count",
+                "exact_product_mappings",
                 "freshness",
                 "mapping_sha256",
-                "owner_approval_evidence",
+                "mapping_record_id",
                 "owner_approval_state",
                 "registry_id",
                 "registry_revision",
@@ -213,15 +220,21 @@
               ],
               "properties": {
                 "activation_authorization": {"type": "boolean"},
+                "approval_receipt": {"anyOf": [{"$ref": "#/$defs/approvalReceipt"}, {"type": "null"}]},
+                "approval_receipt_id": {"type": ["string", "null"], "pattern": "^APPROVAL-RECEIPT-GATE-[A-Z0-9]+(?:-[A-Z0-9]+)*-R[0-9]{4,}$"},
+                "approval_receipt_registry_id": {"const": "COMMAND-GATE-APPROVAL-RECEIPT-REGISTRY-001"},
+                "approval_receipt_registry_revision": {"type": "integer", "minimum": 1},
+                "approval_receipt_source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+                "canon_content_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
                 "dependency_id": {"type": "string", "pattern": "^GATE-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
                 "dependency_kind": {"type": "string", "minLength": 1},
                 "dependency_posture": {"type": "string", "enum": ["blocked", "ready"]},
                 "dependency_revision": {"type": "integer", "minimum": 1},
                 "dependency_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
-                "exact_product_mapping_count": {"type": "integer", "minimum": 0},
+                "exact_product_mappings": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
                 "freshness": {"type": "string", "enum": ["absent", "current", "stale"]},
                 "mapping_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
-                "owner_approval_evidence": {"type": ["string", "null"]},
+                "mapping_record_id": {"type": ["string", "null"], "pattern": "^MAPPING-GATE-[A-Z0-9]+(?:-[A-Z0-9]+)*-R[0-9]{4,}$"},
                 "owner_approval_state": {"type": "string", "enum": ["approved", "withheld"]},
                 "registry_id": {"type": "string", "minLength": 1},
                 "registry_revision": {"type": "integer", "minimum": 1},
@@ -231,6 +244,7 @@
           },
           "gate_requirement_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
           "label": {"type": "string", "minLength": 1},
+          "machine_contract": {"$ref": "#/$defs/machineCommandContract"},
           "requirement_id": {"type": "string", "minLength": 1},
           "state_id": {"type": "string", "pattern": "^UX-STATE-VARIANT-[A-Z0-9]+(?:-[A-Z0-9]+)*$"}
         }
@@ -280,6 +294,83 @@
       "type": "array",
       "uniqueItems": true,
       "items": {"type": "string", "minLength": 1}
+    }
+  },
+  "$defs": {
+    "nonempty": {"type": "string", "minLength": 1},
+    "machineTarget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["detail", "id", "posture"],
+      "properties": {
+        "detail": {"$ref": "#/$defs/nonempty"},
+        "id": {"type": "string", "pattern": "^(?:DEST|FOCUS)-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "posture": {"enum": ["current", "deferred", "unavailable"]}
+      }
+    },
+    "machineRecovery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["checkpoint_id", "detail", "id", "inverse_command_id", "irreversible_confirmation_id", "irreversible_receipt_id", "owner", "posture", "recovery_handoff_command_id", "rollback_posture"],
+      "properties": {
+        "checkpoint_id": {"type": ["string", "null"], "pattern": "^CHECKPOINT-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "detail": {"$ref": "#/$defs/nonempty"},
+        "id": {"type": "string", "pattern": "^RECOVERY-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "inverse_command_id": {"type": ["string", "null"], "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "irreversible_confirmation_id": {"type": ["string", "null"], "pattern": "^CONFIRMATION-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "irreversible_receipt_id": {"type": ["string", "null"], "pattern": "^RECEIPT-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "owner": {"$ref": "#/$defs/nonempty"},
+        "posture": {"enum": ["current", "deferred", "unavailable"]},
+        "recovery_handoff_command_id": {"type": ["string", "null"], "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "rollback_posture": {"type": ["string", "null"], "enum": ["checkpoint_restore", "confirmed_irreversible", "inverse_command", "owner_recovery_handoff", null]}
+      }
+    },
+    "machineCommandContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["activation_posture", "command_id", "destination", "failure_focus", "label", "recovery", "success_focus"],
+      "properties": {
+        "activation_posture": {"enum": ["active", "future_gated"]},
+        "command_id": {"type": "string", "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "destination": {"$ref": "#/$defs/machineTarget"},
+        "failure_focus": {"$ref": "#/$defs/machineTarget"},
+        "label": {"$ref": "#/$defs/nonempty"},
+        "recovery": {"$ref": "#/$defs/machineRecovery"},
+        "success_focus": {"$ref": "#/$defs/machineTarget"}
+      }
+    },
+    "approvalScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["command_id", "owner_concept", "requirement_id", "state_id"],
+      "properties": {
+        "command_id": {"type": "string", "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "owner_concept": {"type": "string", "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"},
+        "requirement_id": {"type": "string", "pattern": "^[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "state_id": {"type": "string", "pattern": "^UX-STATE-VARIANT-[A-Z0-9]+(?:-[A-Z0-9]+)*$"}
+      }
+    },
+    "approvalReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["approval_identity", "approval_state", "approved_scope", "approved_scope_sha256", "canon_content_sha256", "dependency_id", "dependency_revision", "dependency_sha256", "exact_product_mappings", "mapping_record_id", "mapping_sha256", "previous_receipt_sha256", "receipt_id", "receipt_revision", "receipt_sha256"],
+      "properties": {
+        "approval_identity": {"type": "string", "pattern": "^OWNER-APPROVAL-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "approval_state": {"const": "approved"},
+        "approved_scope": {"$ref": "#/$defs/approvalScope"},
+        "approved_scope_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "canon_content_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "dependency_id": {"type": "string", "pattern": "^GATE-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "dependency_revision": {"type": "integer", "minimum": 2},
+        "dependency_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "exact_product_mappings": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "mapping_record_id": {"type": "string", "pattern": "^MAPPING-GATE-[A-Z0-9]+(?:-[A-Z0-9]+)*-R[0-9]{4,}$"},
+        "mapping_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "previous_receipt_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "receipt_id": {"type": "string", "pattern": "^APPROVAL-RECEIPT-GATE-[A-Z0-9]+(?:-[A-Z0-9]+)*-R[0-9]{4,}$"},
+        "receipt_revision": {"type": "integer", "minimum": 2},
+        "receipt_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
     }
   }
 }

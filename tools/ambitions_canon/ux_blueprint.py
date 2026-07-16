@@ -20,9 +20,11 @@ from tools.ambitions_canon.model import (
     StateCommand,
     StateCommandActivationPosture,
     StateCommandContract,
+    StateCommandResolutionPosture,
 )
 from tools.ambitions_canon.parser import (
     parse_canon_document,
+    state_command_machine_contract,
     validate_state_command_contract_semantics,
 )
 
@@ -709,6 +711,7 @@ STATE_VARIANT_FIELDS = frozenset(
         "displayed_objects",
         "durable_effect",
         "future_gated_commands",
+        "machine_command_contracts",
         "generic_kind",
         "implementation_status",
         "offline_behavior",
@@ -1239,7 +1242,24 @@ def active_state_commands(contract: StateCommandContract) -> tuple[StateCommand,
         command
         for command in contract.commands
         if command.activation_posture is StateCommandActivationPosture.ACTIVE
+        and all(
+            posture is StateCommandResolutionPosture.CURRENT
+            for posture in (
+                command.destination_posture,
+                command.success_focus_posture,
+                command.failure_focus_posture,
+                command.recovery_posture,
+            )
+        )
     )
+
+
+def machine_state_command_contracts(
+    contract: StateCommandContract,
+) -> tuple[dict[str, object], ...]:
+    """Expose exact machine identities for every active or future command."""
+
+    return tuple(state_command_machine_contract(command) for command in contract.commands)
 
 
 def future_gated_state_commands(
@@ -2031,6 +2051,10 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
                 variant.get("future_gated_commands"),
                 "state variant future-gated commands",
             )
+            machine_command_values = _possibly_empty_records(
+                variant.get("machine_command_contracts"),
+                "state variant machine command contracts",
+            )
             future_commands: list[dict[str, object]] = []
             for command_value in future_command_values:
                 command = _object(
@@ -2089,6 +2113,7 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
                 if (
                     allowed_commands
                     or future_commands
+                    or machine_command_values
                     or behavior_requirements
                     or evidence
                     or not state_gap_ids
@@ -2164,6 +2189,12 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
                 if tuple(future_commands) != expected_future_commands:
                     raise UXBlueprintError(
                         f"future-gated commands drift from structured canon: {variant_id}"
+                    )
+                if tuple(machine_command_values) != machine_state_command_contracts(
+                    contract
+                ):
+                    raise UXBlueprintError(
+                        f"machine command contracts drift from structured canon: {variant_id}"
                     )
                 for field, expected in {
                     "transition_exit": active_state_transition_exit(contract),
@@ -2637,8 +2668,8 @@ def render_ux_blueprint_markdown(
             "These stable, frameable variants refine the nine completeness kinds without "
             "collapsing owner-specific state axes.",
             "",
-            "| Variant ID | Screen | Variant | Generic kind | Behavior posture | Visible contract | Active commands | Future-gated commands | Requirements |",
-            "| --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+            "| Variant ID | Screen | Variant | Generic kind | Behavior posture | Visible contract | Active commands | Future-gated commands | Machine command identities | Requirements |",
+            "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
         ]
     )
     for state_model in blueprint["state_models"]:  # type: ignore[index]
@@ -2648,6 +2679,12 @@ def render_ux_blueprint_markdown(
                 f"{item['label']} [{', '.join(item['gate_requirement_ids'])}]"
                 for item in variant["future_gated_commands"]
             )
+            machine_commands = ", ".join(
+                f"`{item['command_id']}` => `{item['destination']['id']}` / "
+                f"`{item['success_focus']['id']}` / `{item['failure_focus']['id']}` / "
+                f"`{item['recovery']['id']}`"
+                for item in variant["machine_command_contracts"]
+            )
             requirements = ", ".join(
                 f"`{item}`" for item in variant["requirement_ids"]
             )
@@ -2656,6 +2693,7 @@ def render_ux_blueprint_markdown(
                 f"{variant['title']} | `{variant['generic_kind']}` | "
                 f"`{variant['behavior_authority_posture']}` | "
                 f"{variant['visible_content_copy']} | {commands} | {future_commands} | "
+                f"{machine_commands} | "
                 f"{requirements} |"
             )
     lines.extend(

@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://ambitions.local/canon/schemas/command-gate-dependency.schema.json",
   "title": "Ambitions Command-Gate Dependency Registry",
-  "description": "Offline machine-control dependencies that can block command activation without defining product law.",
+  "description": "Offline command dependencies bound to current normative canon and independent owner-approval receipts.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -10,6 +10,7 @@
     "registry_id",
     "registry_revision",
     "canon_revision",
+    "canon_content_sha256",
     "dependencies"
   ],
   "properties": {
@@ -17,6 +18,7 @@
     "registry_id": {"type": "string", "const": "COMMAND-GATE-DEPENDENCY-REGISTRY-001"},
     "registry_revision": {"type": "integer", "minimum": 1},
     "canon_revision": {"type": "integer", "minimum": 0},
+    "canon_content_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
     "dependencies": {
       "type": "array",
       "uniqueItems": true,
@@ -32,7 +34,9 @@
           "state_id",
           "command_id",
           "owner_approval_state",
-          "owner_approval_evidence",
+          "approval_receipt_id",
+          "mapping_record_id",
+          "canon_content_sha256",
           "exact_product_mappings",
           "mapping_sha256",
           "freshness",
@@ -49,7 +53,9 @@
           "state_id": {"type": "string", "const": "UX-STATE-VARIANT-YOU-ENTITLEMENT-EXPIRED"},
           "command_id": {"type": "string", "const": "CMD-YOU-ENTITLEMENT-EXPIRED-002"},
           "owner_approval_state": {"type": "string", "enum": ["approved", "withheld"]},
-          "owner_approval_evidence": {"type": ["string", "null"]},
+          "approval_receipt_id": {"type": ["string", "null"], "pattern": "^APPROVAL-RECEIPT-GATE-[A-Z0-9]+(?:-[A-Z0-9]+)*-R[0-9]{4,}$"},
+          "mapping_record_id": {"type": ["string", "null"], "pattern": "^MAPPING-GATE-[A-Z0-9]+(?:-[A-Z0-9]+)*-R[0-9]{4,}$"},
+          "canon_content_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
           "exact_product_mappings": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
           "mapping_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
           "freshness": {"type": "string", "enum": ["absent", "current", "stale"]},
