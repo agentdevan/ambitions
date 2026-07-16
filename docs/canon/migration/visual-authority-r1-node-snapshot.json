@@ -1,0 +1,776 @@
+{
+  "authority_metadata": [
+    {
+      "implementation_status": "design_authority_candidate_not_source_implementation",
+      "node_id": "270:1430",
+      "owner_approval_state": "candidate_pending_independent_review",
+      "proof_ceiling": "visual_design_authority_candidate_only",
+      "task_pack_eligibility": "blocked_until_gate_b_green",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-001"
+    },
+    {
+      "implementation_status": "design_authority_candidate_not_source_implementation",
+      "node_id": "296:60",
+      "owner_approval_state": "candidate_pending_independent_review",
+      "proof_ceiling": "visual_design_authority_candidate_only",
+      "task_pack_eligibility": "blocked_until_gate_b_green",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-002"
+    },
+    {
+      "implementation_status": "design_authority_candidate_not_source_implementation",
+      "node_id": "296:84",
+      "owner_approval_state": "candidate_pending_independent_review",
+      "proof_ceiling": "visual_design_authority_candidate_only",
+      "task_pack_eligibility": "blocked_until_gate_b_green",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-003"
+    },
+    {
+      "implementation_status": "design_authority_candidate_not_source_implementation",
+      "node_id": "327:1603",
+      "owner_approval_state": "candidate_pending_independent_review",
+      "proof_ceiling": "visual_design_authority_candidate_only",
+      "task_pack_eligibility": "blocked_until_gate_b_green",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-004"
+    },
+    {
+      "implementation_status": "design_authority_candidate_not_source_implementation",
+      "node_id": "329:1635",
+      "owner_approval_state": "candidate_pending_independent_review",
+      "proof_ceiling": "visual_design_authority_candidate_only",
+      "task_pack_eligibility": "blocked_until_gate_b_green",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-005"
+    },
+    {
+      "implementation_status": "design_authority_candidate_not_source_implementation",
+      "node_id": "327:1648",
+      "owner_approval_state": "candidate_pending_independent_review",
+      "proof_ceiling": "visual_design_authority_candidate_only",
+      "task_pack_eligibility": "blocked_until_gate_b_green",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-006"
+    },
+    {
+      "implementation_status": "design_authority_candidate_not_source_implementation",
+      "node_id": "266:1424",
+      "owner_approval_state": "candidate_pending_independent_review",
+      "proof_ceiling": "visual_design_authority_candidate_only",
+      "task_pack_eligibility": "blocked_until_gate_b_green",
+      "visual_authority_id": "VA-P4-CANDIDATE-001"
+    },
+    {
+      "implementation_status": "design_authority_candidate_not_source_implementation",
+      "node_id": "266:1709",
+      "owner_approval_state": "candidate_pending_independent_review",
+      "proof_ceiling": "visual_design_authority_candidate_only",
+      "task_pack_eligibility": "blocked_until_gate_b_green",
+      "visual_authority_id": "VA-P4-CANDIDATE-002"
+    },
+    {
+      "implementation_status": "design_authority_candidate_not_source_implementation",
+      "node_id": "272:1424",
+      "owner_approval_state": "candidate_pending_independent_review",
+      "proof_ceiling": "visual_design_authority_candidate_only",
+      "task_pack_eligibility": "blocked_until_gate_b_green",
+      "visual_authority_id": "VA-P4-CANDIDATE-003"
+    },
+    {
+      "implementation_status": "design_authority_candidate_not_source_implementation",
+      "node_id": "275:1424",
+      "owner_approval_state": "candidate_pending_independent_review",
+      "proof_ceiling": "visual_design_authority_candidate_only",
+      "task_pack_eligibility": "blocked_until_gate_b_green",
+      "visual_authority_id": "VA-P4-CANDIDATE-004"
+    },
+    {
+      "implementation_status": "design_authority_candidate_not_source_implementation",
+      "node_id": "278:1449",
+      "owner_approval_state": "candidate_pending_independent_review",
+      "proof_ceiling": "visual_design_authority_candidate_only",
+      "task_pack_eligibility": "blocked_until_gate_b_green",
+      "visual_authority_id": "VA-P4-CANDIDATE-005"
+    },
+    {
+      "implementation_status": "design_authority_candidate_not_source_implementation",
+      "node_id": "281:1465",
+      "owner_approval_state": "candidate_pending_independent_review",
+      "proof_ceiling": "visual_design_authority_candidate_only",
+      "task_pack_eligibility": "blocked_until_gate_b_green",
+      "visual_authority_id": "VA-P4-CANDIDATE-006"
+    },
+    {
+      "implementation_status": "design_authority_candidate_not_source_implementation",
+      "node_id": "288:41",
+      "owner_approval_state": "candidate_pending_independent_review",
+      "proof_ceiling": "visual_design_authority_candidate_only",
+      "task_pack_eligibility": "blocked_until_gate_b_green",
+      "visual_authority_id": "VA-P4-CANDIDATE-007"
+    },
+    {
+      "implementation_status": "design_authority_candidate_not_source_implementation",
+      "node_id": "288:156",
+      "owner_approval_state": "candidate_pending_independent_review",
+      "proof_ceiling": "visual_design_authority_candidate_only",
+      "task_pack_eligibility": "blocked_until_gate_b_green",
+      "visual_authority_id": "VA-P4-CANDIDATE-008"
+    },
+    {
+      "implementation_status": "design_authority_candidate_not_source_implementation",
+      "node_id": "293:23",
+      "owner_approval_state": "candidate_pending_independent_review",
+      "proof_ceiling": "visual_design_authority_candidate_only",
+      "task_pack_eligibility": "blocked_until_gate_b_green",
+      "visual_authority_id": "VA-P4-CANDIDATE-009"
+    },
+    {
+      "implementation_status": "design_authority_candidate_not_source_implementation",
+      "node_id": "293:141",
+      "owner_approval_state": "candidate_pending_independent_review",
+      "proof_ceiling": "visual_design_authority_candidate_only",
+      "task_pack_eligibility": "blocked_until_gate_b_green",
+      "visual_authority_id": "VA-P4-CANDIDATE-010"
+    },
+    {
+      "implementation_status": "design_authority_candidate_not_source_implementation",
+      "node_id": "293:164",
+      "owner_approval_state": "candidate_pending_independent_review",
+      "proof_ceiling": "visual_design_authority_candidate_only",
+      "task_pack_eligibility": "blocked_until_gate_b_green",
+      "visual_authority_id": "VA-P4-CANDIDATE-011"
+    },
+    {
+      "implementation_status": "design_authority_candidate_not_source_implementation",
+      "node_id": "293:83",
+      "owner_approval_state": "candidate_pending_independent_review",
+      "proof_ceiling": "visual_design_authority_candidate_only",
+      "task_pack_eligibility": "blocked_until_gate_b_green",
+      "visual_authority_id": "VA-P4-CANDIDATE-012"
+    }
+  ],
+  "authority_node_bindings": [
+    {
+      "node_id": "296:2",
+      "visual_authority_id": "VA-P3-ACCESSIBILITY-STRESS-001"
+    },
+    {
+      "node_id": "250:3498",
+      "visual_authority_id": "VA-P3-COMP-ACTION-001"
+    },
+    {
+      "node_id": "321:1528",
+      "visual_authority_id": "VA-P3-COMP-CARD-001"
+    },
+    {
+      "node_id": "324:1607",
+      "visual_authority_id": "VA-P3-COMP-CONTEXT-001"
+    },
+    {
+      "node_id": "255:1424",
+      "visual_authority_id": "VA-P3-COMP-CONTROL-001"
+    },
+    {
+      "node_id": "253:1135",
+      "visual_authority_id": "VA-P3-COMP-FIELD-001"
+    },
+    {
+      "node_id": "249:546",
+      "visual_authority_id": "VA-P3-COMP-NAV-001"
+    },
+    {
+      "node_id": "251:696",
+      "visual_authority_id": "VA-P3-COMP-OBJECT-ROW-001"
+    },
+    {
+      "node_id": "250:570",
+      "visual_authority_id": "VA-P3-COMP-PRESENTATION-001"
+    },
+    {
+      "node_id": "254:1245",
+      "visual_authority_id": "VA-P3-COMP-RECOVERY-001"
+    },
+    {
+      "node_id": "330:1670",
+      "visual_authority_id": "VA-P3-COMP-SHELL-001"
+    },
+    {
+      "node_id": "327:1606",
+      "visual_authority_id": "VA-P3-COMP-STATE-001"
+    },
+    {
+      "node_id": "253:1053",
+      "visual_authority_id": "VA-P3-COMP-TIME-001"
+    },
+    {
+      "node_id": "255:1220",
+      "visual_authority_id": "VA-P3-COMP-TRUST-001"
+    },
+    {
+      "node_id": "239:4",
+      "visual_authority_id": "VA-P3-COMPONENTS-001"
+    },
+    {
+      "node_id": "296:114",
+      "visual_authority_id": "VA-P3-CROSS-001"
+    },
+    {
+      "node_id": "281:1468",
+      "visual_authority_id": "VA-P3-CROSS-002"
+    },
+    {
+      "node_id": "278:1457",
+      "visual_authority_id": "VA-P3-CROSS-003"
+    },
+    {
+      "node_id": "296:141",
+      "visual_authority_id": "VA-P3-CROSS-004"
+    },
+    {
+      "node_id": "296:218",
+      "visual_authority_id": "VA-P3-CROSS-005"
+    },
+    {
+      "node_id": "326:1603",
+      "visual_authority_id": "VA-P3-CROSS-006"
+    },
+    {
+      "node_id": "296:231",
+      "visual_authority_id": "VA-P3-CROSS-007"
+    },
+    {
+      "node_id": "278:1465",
+      "visual_authority_id": "VA-P3-CROSS-008"
+    },
+    {
+      "node_id": "288:124",
+      "visual_authority_id": "VA-P3-CROSS-009"
+    },
+    {
+      "node_id": "321:1512",
+      "visual_authority_id": "VA-P3-CROSS-010"
+    },
+    {
+      "node_id": "296:142",
+      "visual_authority_id": "VA-P3-CROSS-011"
+    },
+    {
+      "node_id": "270:1430",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-001"
+    },
+    {
+      "node_id": "296:60",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-002"
+    },
+    {
+      "node_id": "296:84",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-003"
+    },
+    {
+      "node_id": "327:1603",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-004"
+    },
+    {
+      "node_id": "329:1635",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-005"
+    },
+    {
+      "node_id": "327:1648",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-006"
+    },
+    {
+      "node_id": "296:35",
+      "visual_authority_id": "VA-P4-A11Y-MATRIX-R2-001"
+    },
+    {
+      "node_id": "266:1424",
+      "visual_authority_id": "VA-P4-CANDIDATE-001"
+    },
+    {
+      "node_id": "266:1709",
+      "visual_authority_id": "VA-P4-CANDIDATE-002"
+    },
+    {
+      "node_id": "272:1424",
+      "visual_authority_id": "VA-P4-CANDIDATE-003"
+    },
+    {
+      "node_id": "275:1424",
+      "visual_authority_id": "VA-P4-CANDIDATE-004"
+    },
+    {
+      "node_id": "278:1449",
+      "visual_authority_id": "VA-P4-CANDIDATE-005"
+    },
+    {
+      "node_id": "281:1465",
+      "visual_authority_id": "VA-P4-CANDIDATE-006"
+    },
+    {
+      "node_id": "288:41",
+      "visual_authority_id": "VA-P4-CANDIDATE-007"
+    },
+    {
+      "node_id": "288:156",
+      "visual_authority_id": "VA-P4-CANDIDATE-008"
+    },
+    {
+      "node_id": "293:23",
+      "visual_authority_id": "VA-P4-CANDIDATE-009"
+    },
+    {
+      "node_id": "293:141",
+      "visual_authority_id": "VA-P4-CANDIDATE-010"
+    },
+    {
+      "node_id": "293:164",
+      "visual_authority_id": "VA-P4-CANDIDATE-011"
+    },
+    {
+      "node_id": "293:83",
+      "visual_authority_id": "VA-P4-CANDIDATE-012"
+    },
+    {
+      "node_id": "215:2",
+      "visual_authority_id": "VA-P4-LIVE-INDEX-R2-001"
+    },
+    {
+      "node_id": "330:1667",
+      "visual_authority_id": "VA-P4-MASTER-ANATOMY-R2-001"
+    },
+    {
+      "node_id": "306:2",
+      "visual_authority_id": "VA-P4-PROOF-BOARD-R2-001"
+    },
+    {
+      "node_id": "307:57",
+      "visual_authority_id": "VA-P4-RECONCILIATION-001"
+    }
+  ],
+  "authority_state": "candidate_shadow",
+  "canon": {
+    "content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
+    "revision": 1,
+    "source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3"
+  },
+  "deleted_node_ids": [],
+  "destructive_actions": [],
+  "drilldown_shell_frames": [
+    {
+      "back_count": 1,
+      "back_hit_node_id": "354:2759",
+      "back_node_id": "354:2760",
+      "capture_count": 0,
+      "frame_id": "272:1428",
+      "root_dock_count": 0,
+      "search_count": 0
+    },
+    {
+      "back_count": 1,
+      "back_hit_node_id": "354:2763",
+      "back_node_id": "354:2764",
+      "capture_count": 0,
+      "frame_id": "272:1432",
+      "root_dock_count": 0,
+      "search_count": 0
+    },
+    {
+      "back_count": 1,
+      "back_hit_node_id": "354:2767",
+      "back_node_id": "354:2768",
+      "capture_count": 0,
+      "frame_id": "272:1436",
+      "root_dock_count": 0,
+      "search_count": 0
+    },
+    {
+      "back_count": 1,
+      "back_hit_node_id": "354:2771",
+      "back_node_id": "354:2772",
+      "capture_count": 0,
+      "frame_id": "278:1453",
+      "root_dock_count": 0,
+      "search_count": 0
+    },
+    {
+      "back_count": 1,
+      "back_hit_node_id": "354:2775",
+      "back_node_id": "354:2776",
+      "capture_count": 0,
+      "frame_id": "278:1457",
+      "root_dock_count": 0,
+      "search_count": 0
+    },
+    {
+      "back_count": 1,
+      "back_hit_node_id": "354:2779",
+      "back_node_id": "354:2780",
+      "capture_count": 0,
+      "frame_id": "278:1461",
+      "root_dock_count": 0,
+      "search_count": 0
+    },
+    {
+      "back_count": 1,
+      "back_hit_node_id": "354:2783",
+      "back_node_id": "354:2784",
+      "capture_count": 0,
+      "frame_id": "278:1465",
+      "root_dock_count": 0,
+      "search_count": 0
+    }
+  ],
+  "figma_write_receipt": {
+    "created_node_count": 77,
+    "deleted_node_ids": [],
+    "destructive_actions": [],
+    "mutated_node_count": 92
+  },
+  "file_key": "Oik7612LSTUHWsNRFoTlTJ",
+  "page_id": "215:2",
+  "page_name": "CANDIDATE — AV1 · Revision 1",
+  "pixel_equivalent_replacements": [
+    {
+      "audit_conclusion": "The hidden rounded-rectangle/icon pairs and visible replacement pairs have matching geometry and fills; an unchanged render SHA is expected and is not evidence that the replacement failed.",
+      "frame_id": "270:1430",
+      "non_destructive": true,
+      "old_hidden_node_ids": [
+        "354:2517",
+        "354:2518",
+        "354:2522",
+        "354:2523"
+      ],
+      "pixel_equivalent": true,
+      "render_proof": {
+        "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-001-viewport.png",
+        "sha256": "311374645649f6bdd851b9e34783599847c94b76d6862d0dbb2d67a473260376"
+      },
+      "replacement_node_ids": [
+        "359:242",
+        "359:243",
+        "359:247",
+        "359:248"
+      ],
+      "visible_capture_node_ids": [
+        "359:248"
+      ],
+      "visible_search_node_ids": [
+        "359:243"
+      ]
+    }
+  ],
+  "repository_base_sha": "201f1e1451a295b53fcfcefb6ba4c0acce207d45",
+  "root_shell_frames": [
+    {
+      "bottom_clearance": 84,
+      "capture_count": 1,
+      "capture_node_id": "354:2307",
+      "dock_height": 84,
+      "dock_node_id": "354:2310",
+      "fade_node_id": "354:2300",
+      "frame_id": "266:1424",
+      "root_dock_count": 1,
+      "search_count": 1,
+      "search_node_id": "354:2302"
+    },
+    {
+      "bottom_clearance": 84,
+      "capture_count": 1,
+      "capture_node_id": "354:2343",
+      "dock_height": 84,
+      "dock_node_id": "354:2346",
+      "fade_node_id": "354:2336",
+      "frame_id": "266:1486",
+      "root_dock_count": 1,
+      "search_count": 1,
+      "search_node_id": "354:2338"
+    },
+    {
+      "bottom_clearance": 84,
+      "capture_count": 1,
+      "capture_node_id": "354:2379",
+      "dock_height": 84,
+      "dock_node_id": "354:2382",
+      "fade_node_id": "354:2372",
+      "frame_id": "266:1547",
+      "root_dock_count": 1,
+      "search_count": 1,
+      "search_node_id": "354:2374"
+    },
+    {
+      "bottom_clearance": 84,
+      "capture_count": 1,
+      "capture_node_id": "354:2415",
+      "dock_height": 84,
+      "dock_node_id": "354:2418",
+      "fade_node_id": "354:2408",
+      "frame_id": "266:1608",
+      "root_dock_count": 1,
+      "search_count": 1,
+      "search_node_id": "354:2410"
+    },
+    {
+      "bottom_clearance": 84,
+      "capture_count": 1,
+      "capture_node_id": "354:2451",
+      "dock_height": 84,
+      "dock_node_id": "354:2454",
+      "fade_node_id": "354:2444",
+      "frame_id": "266:1669",
+      "root_dock_count": 1,
+      "search_count": 1,
+      "search_node_id": "354:2446"
+    },
+    {
+      "bottom_clearance": 84,
+      "capture_count": 1,
+      "capture_node_id": "354:2487",
+      "dock_height": 84,
+      "dock_node_id": "354:2490",
+      "fade_node_id": "354:2480",
+      "frame_id": "266:1709",
+      "root_dock_count": 1,
+      "search_count": 1,
+      "search_node_id": "354:2482"
+    },
+    {
+      "bottom_clearance": 96,
+      "capture_count": 1,
+      "capture_node_id": "359:248",
+      "dock_height": 96,
+      "dock_node_id": "354:2526",
+      "fade_node_id": "354:2516",
+      "frame_id": "270:1430",
+      "root_dock_count": 1,
+      "search_count": 1,
+      "search_node_id": "359:243"
+    },
+    {
+      "bottom_clearance": 84,
+      "capture_count": 1,
+      "capture_node_id": "354:2559",
+      "dock_height": 84,
+      "dock_node_id": "354:2562",
+      "fade_node_id": "354:2552",
+      "frame_id": "272:1424",
+      "root_dock_count": 1,
+      "search_count": 1,
+      "search_node_id": "354:2554"
+    },
+    {
+      "bottom_clearance": 84,
+      "capture_count": 1,
+      "capture_node_id": "275:1438",
+      "dock_height": 84,
+      "dock_node_id": "354:2589",
+      "fade_node_id": "354:2588",
+      "frame_id": "275:1424",
+      "root_dock_count": 1,
+      "search_count": 1,
+      "search_node_id": "275:1433"
+    },
+    {
+      "bottom_clearance": 84,
+      "capture_count": 1,
+      "capture_node_id": "275:1456",
+      "dock_height": 84,
+      "dock_node_id": "354:2616",
+      "fade_node_id": "354:2615",
+      "frame_id": "275:1442",
+      "root_dock_count": 1,
+      "search_count": 1,
+      "search_node_id": "275:1451"
+    },
+    {
+      "bottom_clearance": 84,
+      "capture_count": 1,
+      "capture_node_id": "275:1474",
+      "dock_height": 84,
+      "dock_node_id": "354:2643",
+      "fade_node_id": "354:2642",
+      "frame_id": "275:1460",
+      "root_dock_count": 1,
+      "search_count": 1,
+      "search_node_id": "275:1469"
+    },
+    {
+      "bottom_clearance": 84,
+      "capture_count": 1,
+      "capture_node_id": "275:1492",
+      "dock_height": 84,
+      "dock_node_id": "354:2670",
+      "fade_node_id": "354:2669",
+      "frame_id": "275:1478",
+      "root_dock_count": 1,
+      "search_count": 1,
+      "search_node_id": "275:1487"
+    },
+    {
+      "bottom_clearance": 84,
+      "capture_count": 1,
+      "capture_node_id": "275:1510",
+      "dock_height": 84,
+      "dock_node_id": "354:2697",
+      "fade_node_id": "354:2696",
+      "frame_id": "275:1496",
+      "root_dock_count": 1,
+      "search_count": 1,
+      "search_node_id": "275:1505"
+    },
+    {
+      "bottom_clearance": 84,
+      "capture_count": 1,
+      "capture_node_id": "354:2730",
+      "dock_height": 84,
+      "dock_node_id": "354:2733",
+      "fade_node_id": "354:2723",
+      "frame_id": "278:1449",
+      "root_dock_count": 1,
+      "search_count": 1,
+      "search_node_id": "354:2725"
+    }
+  ],
+  "schema_version": 1,
+  "task_pack_targets": [
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=270-1430",
+      "frame_version": "R1",
+      "node_id": "270:1430",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-001-viewport.png",
+      "screenshot_sha256": "311374645649f6bdd851b9e34783599847c94b76d6862d0dbb2d67a473260376",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-001"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=296-60",
+      "frame_version": "R1",
+      "node_id": "296:60",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-002-viewport.png",
+      "screenshot_sha256": "eee76b72a8feba19539ba8c293fd071a0e256c15fbc40a210e05124b52df61b8",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-002"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=296-84",
+      "frame_version": "R1",
+      "node_id": "296:84",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-003-viewport.png",
+      "screenshot_sha256": "f709b45fbf3612e4a6323cdd7210711caa6e21fb03258af39e61ea631c3b33d7",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-003"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=327-1603",
+      "frame_version": "R1",
+      "node_id": "327:1603",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-004-viewport.png",
+      "screenshot_sha256": "93395d4705581ec180101def15d1688e48db8cedc2688edc2ee20917109e1d6f",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-004"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=329-1635",
+      "frame_version": "R1",
+      "node_id": "329:1635",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-005-viewport.png",
+      "screenshot_sha256": "92a74a355dc82c9e19742eda6d7e01f12ca89e562a3e20000297b060c1ac6732",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-005"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=327-1648",
+      "frame_version": "R1",
+      "node_id": "327:1648",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-006-viewport.png",
+      "screenshot_sha256": "e0f06df3f1b5340c5ed19592490cfc7df682cac25323c01e45ad780b07977a55",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-006"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=266-1424",
+      "frame_version": "R1",
+      "node_id": "266:1424",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-001-viewport.png",
+      "screenshot_sha256": "3a90bdc58fe6cc586df9312db395a5d4a3df9c1d291635b9c1e381b455bf96d1",
+      "visual_authority_id": "VA-P4-CANDIDATE-001"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=266-1709",
+      "frame_version": "R1",
+      "node_id": "266:1709",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-002-viewport.png",
+      "screenshot_sha256": "93ac12da90916382b8288b5e28557d4be16939181a27aab927c929bf22c9d114",
+      "visual_authority_id": "VA-P4-CANDIDATE-002"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=272-1424",
+      "frame_version": "R1",
+      "node_id": "272:1424",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-003-viewport.png",
+      "screenshot_sha256": "a5a08c2c0e0c7350d00d873601a862ee27e04153e7e8994547ac47de2614f50f",
+      "visual_authority_id": "VA-P4-CANDIDATE-003"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=275-1424",
+      "frame_version": "R1",
+      "node_id": "275:1424",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-004-viewport.png",
+      "screenshot_sha256": "9736a4cedf0e22a90d7fff8498732f845e11443775ecd8ccc7a5f351377f8b47",
+      "visual_authority_id": "VA-P4-CANDIDATE-004"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=278-1449",
+      "frame_version": "R1",
+      "node_id": "278:1449",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-005-viewport.png",
+      "screenshot_sha256": "a792881c96c7f3e12b7cdd5ece054fb9bde25b6bb80fcfe9e2919ed53c8d20a3",
+      "visual_authority_id": "VA-P4-CANDIDATE-005"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=281-1465",
+      "frame_version": "R1",
+      "node_id": "281:1465",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-006-viewport.png",
+      "screenshot_sha256": "8684664e80fc6bbee087e7fa85fe9ade32064f622e757bc903462f38987f198e",
+      "visual_authority_id": "VA-P4-CANDIDATE-006"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=288-41",
+      "frame_version": "R1",
+      "node_id": "288:41",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-007-viewport.png",
+      "screenshot_sha256": "365fb42edb5a2b613318a9ee208ae66fb4da150313d642e7b62bcdfb218c0f81",
+      "visual_authority_id": "VA-P4-CANDIDATE-007"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=288-156",
+      "frame_version": "R1",
+      "node_id": "288:156",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-008-viewport.png",
+      "screenshot_sha256": "ff94201fe6e379b596a3e16738efcd609e16adf9b204f6be9e899fff1e97538a",
+      "visual_authority_id": "VA-P4-CANDIDATE-008"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=293-23",
+      "frame_version": "R1",
+      "node_id": "293:23",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-009-viewport.png",
+      "screenshot_sha256": "33b9fe783397b3281ebb8a50ac97112463c6234ef81c086c1e70818981ac0fb0",
+      "visual_authority_id": "VA-P4-CANDIDATE-009"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=293-141",
+      "frame_version": "R1",
+      "node_id": "293:141",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-010-viewport.png",
+      "screenshot_sha256": "14d3f07e500adfbf26fea838271a1cd29b1c17bc600e0f64915fe49060a6de9f",
+      "visual_authority_id": "VA-P4-CANDIDATE-010"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=293-164",
+      "frame_version": "R1",
+      "node_id": "293:164",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-011-viewport.png",
+      "screenshot_sha256": "5ba9f9524b1e381833e64ab16a0656aece675d221a13cd0985fe06aa6b42c8af",
+      "visual_authority_id": "VA-P4-CANDIDATE-011"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=293-83",
+      "frame_version": "R1",
+      "node_id": "293:83",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-012-viewport.png",
+      "screenshot_sha256": "ca505e0a79a47b26610b48b2418282e59c561f79dd27180eeb818a34ff2ec1c8",
+      "visual_authority_id": "VA-P4-CANDIDATE-012"
+    }
+  ]
+}

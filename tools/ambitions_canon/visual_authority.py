@@ -21,6 +21,9 @@ from tools.ambitions_canon.ux_blueprint import (
 
 MANIFEST_PATH = Path("docs/canon/migration/visual-authority-rebaseline.json")
 SCHEMA_PATH = Path("docs/canon/schemas/visual-authority-rebaseline.schema.json")
+R1_NODE_SNAPSHOT_PATH = Path(
+    "docs/canon/migration/visual-authority-r1-node-snapshot.json"
+)
 REQUIREMENT_DISPOSITIONS_PATH = Path(
     "docs/canon/migration/ux-blueprint-requirement-dispositions.json"
 )
@@ -216,7 +219,9 @@ def load_visual_authority_rebaseline(repo_root: Path) -> VisualAuthoritySnapshot
         payload = json.loads(source_bytes)
     except (UnicodeError, json.JSONDecodeError) as exc:
         raise _error("VISUAL_AUTHORITY_SCHEMA_INVALID", "manifest is not valid JSON") from exc
-    return validate_visual_authority_payload(repo_root, payload, source_bytes)
+    snapshot = validate_visual_authority_payload(repo_root, payload, source_bytes)
+    _validate_r1_node_snapshot(repo_root, _object(payload, "manifest"))
+    return snapshot
 
 
 def load_visual_authority_rebaseline_if_present(
@@ -369,10 +374,21 @@ def validate_visual_authority_payload(
     _exact_fields(figma, _FIGMA_FIELDS, "figma")
     file_key = _string(figma["file_key"], "Figma file key")
     pages = set(_sorted_unique_strings(figma["additive_page_ids"], "additive page IDs"))
-    if pages != {f"17:{index}" for index in range(2, 12)}:
+    if pages != {f"17:{index}" for index in range(2, 12)} | {"215:2"}:
         raise _error(
             "VISUAL_AUTHORITY_FIGMA_MAPPING_INVALID",
-            "additive Phase 3/4 pages do not match the frozen page family",
+            "additive Phase 3/4 pages do not match the retained and R1 page family",
+        )
+    if (
+        figma.get("reconciliation_root_node_id") != "307:57"
+        or "215:2"
+        not in _sorted_unique_strings(
+            figma.get("phase3_root_node_ids"), "Phase 3 root node IDs"
+        )
+    ):
+        raise _error(
+            "VISUAL_AUTHORITY_FIGMA_MAPPING_INVALID",
+            "R1 live index and reconciliation roots are not exact",
         )
     records = tuple(_object(item, "authority node") for item in _list(figma["authority_nodes"], "authority nodes"))
     if len(records) != 147:
@@ -967,8 +983,11 @@ def _validate_candidate_proofs(
                 )
             relative = _string(artifact.get("path"), "proof artifact path")
             expected_path = (
-                "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/"
-                "screens/phase3-4/candidate-masters/"
+                "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-"
+                f"repair/screens/task-pack/{authority_id.lower()}-viewport.png"
+                if role == "viewport"
+                else "docs/qa/evidence/2026-07-14-canon-visual-authority-"
+                "rebaseline/screens/phase3-4/candidate-masters/"
                 f"{authority_id.lower()}-{role}.png"
             )
             if relative != expected_path or relative in paths:
@@ -996,6 +1015,265 @@ def _validate_candidate_proofs(
                 "VISUAL_AUTHORITY_PROOF_INVALID",
                 f"proof nodes are not product-only and canonical: {authority_id}",
             )
+
+
+def _validate_r1_node_snapshot(
+    root: Path,
+    manifest: Mapping[str, object],
+) -> None:
+    """Fail closed when the frozen live-node and render bindings drift."""
+
+    snapshot = _load_json_object(root, R1_NODE_SNAPSHOT_PATH)
+    expected_fields = frozenset(
+        {
+            "authority_metadata",
+            "authority_node_bindings",
+            "authority_state",
+            "canon",
+            "deleted_node_ids",
+            "destructive_actions",
+            "drilldown_shell_frames",
+            "figma_write_receipt",
+            "file_key",
+            "page_id",
+            "page_name",
+            "pixel_equivalent_replacements",
+            "repository_base_sha",
+            "root_shell_frames",
+            "schema_version",
+            "task_pack_targets",
+        }
+    )
+    _exact_fields(snapshot, expected_fields, "R1 node snapshot")
+    figma = _object(manifest.get("figma"), "figma")
+    canon = _object(manifest.get("canon"), "canon")
+    if (
+        snapshot.get("schema_version") != 1
+        or snapshot.get("authority_state") != "candidate_shadow"
+        or snapshot.get("file_key") != figma.get("file_key")
+        or snapshot.get("page_id") != "215:2"
+        or snapshot.get("page_name") != "CANDIDATE — AV1 · Revision 1"
+        or snapshot.get("canon") != canon
+        or snapshot.get("deleted_node_ids") != []
+        or snapshot.get("destructive_actions") != []
+    ):
+        raise _error(
+            "VISUAL_AUTHORITY_R1_SNAPSHOT_INVALID",
+            "R1 snapshot identity, canon, or non-destructive posture is stale",
+        )
+
+    receipt = _object(snapshot.get("figma_write_receipt"), "Figma write receipt")
+    if receipt != {
+        "created_node_count": 77,
+        "deleted_node_ids": [],
+        "destructive_actions": [],
+        "mutated_node_count": 92,
+    }:
+        raise _error(
+            "VISUAL_AUTHORITY_R1_SNAPSHOT_INVALID",
+            "R1 Figma write receipt is incomplete or destructive",
+        )
+
+    authority_nodes = {
+        _string(item.get("visual_authority_id"), "visual authority ID"): item
+        for item in (
+            _object(value, "authority node")
+            for value in _list(figma.get("authority_nodes"), "authority nodes")
+        )
+    }
+    bindings = tuple(
+        _object(value, "R1 authority binding")
+        for value in _list(
+            snapshot.get("authority_node_bindings"), "R1 authority bindings"
+        )
+    )
+    binding_pairs = tuple(
+        (
+            _string(item.get("visual_authority_id"), "visual authority ID"),
+            _string(item.get("node_id"), "node ID"),
+        )
+        for item in bindings
+    )
+    expected_bindings = tuple(
+        sorted(
+            (
+                authority_id,
+                _string(item.get("node_id"), "node ID"),
+            )
+            for authority_id, item in authority_nodes.items()
+            if item.get("page_id") == "215:2"
+        )
+    )
+    if (
+        len(binding_pairs) != 49
+        or binding_pairs != expected_bindings
+        or any(
+            authority_nodes[authority_id].get("page_name")
+            != "CANDIDATE — AV1 · Revision 1"
+            or authority_nodes[authority_id].get("frame_version") != "R1"
+            for authority_id, _ in binding_pairs
+        )
+    ):
+        raise _error(
+            "VISUAL_AUTHORITY_R1_SNAPSHOT_INVALID",
+            "R1 authority-node bindings do not match the live candidate page",
+        )
+
+    candidate_proofs = {
+        _string(item.get("visual_authority_id"), "proof visual authority ID"): item
+        for item in (
+            _object(value, "candidate proof")
+            for value in _list(manifest.get("candidate_proofs"), "candidate proofs")
+        )
+    }
+    targets = tuple(
+        _object(value, "R1 task-pack target")
+        for value in _list(snapshot.get("task_pack_targets"), "R1 task-pack targets")
+    )
+    target_ids = tuple(
+        _string(item.get("visual_authority_id"), "visual authority ID")
+        for item in targets
+    )
+    if target_ids != tuple(sorted(candidate_proofs)) or len(target_ids) != 18:
+        raise _error(
+            "VISUAL_AUTHORITY_R1_SNAPSHOT_INVALID",
+            "R1 task-pack targets are incomplete or unsorted",
+        )
+    for item in targets:
+        authority_id = _string(
+            item.get("visual_authority_id"), "visual authority ID"
+        )
+        node_id = _string(item.get("node_id"), "node ID")
+        path = _string(item.get("screenshot_path"), "screenshot path")
+        sha = _sha(item.get("screenshot_sha256"), 64, "screenshot SHA")
+        expected_link = (
+            "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ"
+            f"?node-id={node_id.replace(':', '-')}"
+        )
+        viewport = _object(
+            _object(
+                candidate_proofs[authority_id].get("artifacts"), "proof artifacts"
+            ).get("viewport"),
+            "viewport proof",
+        )
+        if (
+            item.get("frame_version") != "R1"
+            or item.get("direct_link") != expected_link
+            or authority_nodes[authority_id].get("node_id") != node_id
+            or candidate_proofs[authority_id].get("canonical_node_id") != node_id
+            or viewport.get("node_id") != node_id
+            or viewport.get("path") != path
+            or viewport.get("sha256") != sha
+            or hashlib.sha256(_read_regular_nofollow(root, Path(path))).hexdigest()
+            != sha
+        ):
+            raise _error(
+                "VISUAL_AUTHORITY_R1_PROOF_INVALID",
+                f"R1 task-pack target or render proof is stale: {authority_id}",
+            )
+
+    metadata = tuple(
+        _object(value, "R1 authority metadata")
+        for value in _list(snapshot.get("authority_metadata"), "R1 authority metadata")
+    )
+    metadata_ids = tuple(
+        _string(item.get("visual_authority_id"), "visual authority ID")
+        for item in metadata
+    )
+    if metadata_ids != target_ids or any(
+        item.get("node_id") != authority_nodes[authority_id].get("node_id")
+        or item.get("owner_approval_state")
+        != authority_nodes[authority_id].get("owner_approval_state")
+        or item.get("implementation_status")
+        != authority_nodes[authority_id].get("implementation_status")
+        or item.get("proof_ceiling")
+        != authority_nodes[authority_id].get("proof_ceiling")
+        or item.get("task_pack_eligibility") != "blocked_until_gate_b_green"
+        for authority_id, item in zip(metadata_ids, metadata, strict=True)
+    ):
+        raise _error(
+            "VISUAL_AUTHORITY_R1_SNAPSHOT_INVALID",
+            "R1 candidate metadata is stale or authorizes source work",
+        )
+
+    roots = tuple(
+        _object(value, "root shell frame")
+        for value in _list(snapshot.get("root_shell_frames"), "root shell frames")
+    )
+    if (
+        len(roots) != 14
+        or len({_string(item.get("frame_id"), "frame ID") for item in roots}) != 14
+        or any(
+            item.get("root_dock_count") != 1
+            or item.get("search_count") != 1
+            or item.get("capture_count") != 1
+            or item.get("bottom_clearance") != item.get("dock_height")
+            or item.get("dock_height") not in {84, 96}
+            for item in roots
+        )
+    ):
+        raise _error(
+            "VISUAL_AUTHORITY_R1_SHELL_INVALID",
+            "root shell frames do not preserve unique dock and global actions",
+        )
+    drilldowns = tuple(
+        _object(value, "drilldown shell frame")
+        for value in _list(
+            snapshot.get("drilldown_shell_frames"), "drilldown shell frames"
+        )
+    )
+    if (
+        len(drilldowns) != 7
+        or len({_string(item.get("frame_id"), "frame ID") for item in drilldowns})
+        != 7
+        or any(
+            item.get("root_dock_count") != 0
+            or item.get("search_count") != 0
+            or item.get("capture_count") != 0
+            or item.get("back_count") != 1
+            for item in drilldowns
+        )
+    ):
+        raise _error(
+            "VISUAL_AUTHORITY_R1_SHELL_INVALID",
+            "drilldown frames do not preserve one back affordance and no root chrome",
+        )
+
+    replacements = tuple(
+        _object(value, "pixel-equivalent replacement")
+        for value in _list(
+            snapshot.get("pixel_equivalent_replacements"),
+            "pixel-equivalent replacements",
+        )
+    )
+    if len(replacements) != 1:
+        raise _error(
+            "VISUAL_AUTHORITY_R1_PROOF_INVALID",
+            "R1 replacement proof is missing or ambiguous",
+        )
+    replacement = replacements[0]
+    render = _object(replacement.get("render_proof"), "replacement render proof")
+    render_path = _string(render.get("path"), "replacement render path")
+    render_sha = _sha(render.get("sha256"), 64, "replacement render SHA")
+    if (
+        replacement.get("frame_id") != "270:1430"
+        or replacement.get("visible_search_node_ids") != ["359:243"]
+        or replacement.get("visible_capture_node_ids") != ["359:248"]
+        or replacement.get("old_hidden_node_ids")
+        != ["354:2517", "354:2518", "354:2522", "354:2523"]
+        or replacement.get("replacement_node_ids")
+        != ["359:242", "359:243", "359:247", "359:248"]
+        or replacement.get("pixel_equivalent") is not True
+        or replacement.get("non_destructive") is not True
+        or hashlib.sha256(
+            _read_regular_nofollow(root, Path(render_path))
+        ).hexdigest()
+        != render_sha
+    ):
+        raise _error(
+            "VISUAL_AUTHORITY_R1_PROOF_INVALID",
+            "R1 visible-node uniqueness or pixel-equivalent render proof is stale",
+        )
 
 
 def _validate_screenshot_records(

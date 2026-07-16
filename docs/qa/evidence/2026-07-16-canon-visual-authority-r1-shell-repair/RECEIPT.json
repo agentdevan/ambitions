@@ -1,0 +1,111 @@
+{
+  "authority_state": "candidate_shadow",
+  "canon": {
+    "content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
+    "revision": 1,
+    "source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3"
+  },
+  "claim_ceiling": "Visual design authority candidate only for the exact Figma/canon mapping scope; no source UI, runtime, rendered-app Visual, accessibility, device, privacy/legal, TestFlight, App Store, release, or Gate B Green claim.",
+  "figma": {
+    "file_key": "Oik7612LSTUHWsNRFoTlTJ",
+    "page_id": "215:2",
+    "page_name": "CANDIDATE — AV1 · Revision 1",
+    "write_receipt": {
+      "created_node_count": 77,
+      "deleted_node_ids": [],
+      "destructive_actions": [],
+      "mutated_node_count": 92
+    }
+  },
+  "mapping": {
+    "authority_node_binding_count": 49,
+    "drilldown_shell_frame_count": 7,
+    "root_shell_frame_count": 14,
+    "task_pack_target_count": 18
+  },
+  "non_claims": [
+    "No production Swift changed.",
+    "No canon law, AGENTS.md, CI, skill, Linear, or authority state changed.",
+    "No legacy Figma node was deleted, archived, consolidated, overwritten, or destructively modified.",
+    "No semantic evaluation was run or regenerated in this bounded repair.",
+    "No candidate target can authorize source work while Gate B is pending."
+  ],
+  "pixel_equivalent_replacements": [
+    {
+      "audit_conclusion": "The hidden rounded-rectangle/icon pairs and visible replacement pairs have matching geometry and fills; an unchanged render SHA is expected and is not evidence that the replacement failed.",
+      "frame_id": "270:1430",
+      "non_destructive": true,
+      "old_hidden_node_ids": [
+        "354:2517",
+        "354:2518",
+        "354:2522",
+        "354:2523"
+      ],
+      "pixel_equivalent": true,
+      "render_proof": {
+        "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-001-viewport.png",
+        "sha256": "311374645649f6bdd851b9e34783599847c94b76d6862d0dbb2d67a473260376"
+      },
+      "replacement_node_ids": [
+        "359:242",
+        "359:243",
+        "359:247",
+        "359:248"
+      ],
+      "visible_capture_node_ids": [
+        "359:248"
+      ],
+      "visible_search_node_ids": [
+        "359:243"
+      ]
+    }
+  ],
+  "repository_base_sha": "201f1e1451a295b53fcfcefb6ba4c0acce207d45",
+  "schema_version": 1,
+  "snapshot_path": "docs/canon/migration/visual-authority-r1-node-snapshot.json",
+  "tdd": {
+    "focused_green": {
+      "command": "uv run --python 3.12 python -m unittest -v tests.canon.test_visual_authority_rebaseline.VisualAuthorityRebaselineTests.test_r1_node_snapshot_binds_live_targets_and_shell_contract_without_destruction",
+      "exit_code": 0,
+      "result": "1 test passed in 6.410s"
+    },
+    "observed_red": {
+      "command": "uv run --python 3.12 python -m unittest -v tests.canon.test_visual_authority_rebaseline.VisualAuthorityRebaselineTests.test_r1_node_snapshot_binds_live_targets_and_shell_contract_without_destruction",
+      "exit_code": 1,
+      "result": "FileNotFoundError for visual-authority-r1-node-snapshot.json; 1 test failed as expected in 6.606s"
+    }
+  },
+  "validation": [
+    {
+      "command": "git diff --check && uv run --python 3.12 python -m unittest -v tests.canon.test_visual_authority_rebaseline tests.canon.test_task_pack tests.canon.test_external_authority",
+      "exit_code": 0,
+      "result": "Ran 92 tests in 104.495s; OK"
+    },
+    {
+      "command": "python3 scripts/ambitions-truth-path-vocabulary-audit.py",
+      "exit_code": 0,
+      "result": "GREEN"
+    },
+    {
+      "command": "python3 scripts/ambitions-constitution-audit.py",
+      "exit_code": 0,
+      "result": "GREEN; opportunities=118 p0=18 p1=100; laws=124 source_maps=34 test_maps=34; scenarios=16 budgets=9 classifications=6"
+    },
+    {
+      "command": "python3 scripts/ambitions-remediation-governance-check.py",
+      "exit_code": 0,
+      "result": "GREEN remediation governance guard passed; production Swift changed=0"
+    },
+    {
+      "command": "bash scripts/canon-language-drift-scan.sh",
+      "exit_code": 0,
+      "result": "GREEN no changed-file canon language drift candidates; pre-existing backlog reported Yellow"
+    }
+  ],
+  "validation_not_run": [
+    {
+      "command": "uv run --python 3.12 python -c 'from jsonschema import Draft202012Validator'",
+      "reason": "The repository Python environment does not include the optional jsonschema package. The command exited 1 with ModuleNotFoundError. Both schema files passed Python JSON parsing, and the standard-library compiler validator plus the 92-test covering set validated the exact runtime contract."
+    }
+  ]
+}

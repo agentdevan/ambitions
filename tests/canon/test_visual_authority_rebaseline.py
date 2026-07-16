@@ -18,6 +18,31 @@ from tools.ambitions_canon.visual_authority import (
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = ROOT / "docs/canon/migration/visual-authority-rebaseline.json"
 HAND_RECORD = ROOT / "docs/canon/migration/VISUAL_AUTHORITY_REBASELINE.md"
+R1_NODE_SNAPSHOT = (
+    ROOT / "docs/canon/migration/visual-authority-r1-node-snapshot.json"
+)
+
+
+R1_TASK_PACK_TARGETS = {
+    "VA-P4-A11Y-CLASS-001": "270:1430",
+    "VA-P4-A11Y-CLASS-002": "296:60",
+    "VA-P4-A11Y-CLASS-003": "296:84",
+    "VA-P4-A11Y-CLASS-004": "327:1603",
+    "VA-P4-A11Y-CLASS-005": "329:1635",
+    "VA-P4-A11Y-CLASS-006": "327:1648",
+    "VA-P4-CANDIDATE-001": "266:1424",
+    "VA-P4-CANDIDATE-002": "266:1709",
+    "VA-P4-CANDIDATE-003": "272:1424",
+    "VA-P4-CANDIDATE-004": "275:1424",
+    "VA-P4-CANDIDATE-005": "278:1449",
+    "VA-P4-CANDIDATE-006": "281:1465",
+    "VA-P4-CANDIDATE-007": "288:41",
+    "VA-P4-CANDIDATE-008": "288:156",
+    "VA-P4-CANDIDATE-009": "293:23",
+    "VA-P4-CANDIDATE-010": "293:141",
+    "VA-P4-CANDIDATE-011": "293:164",
+    "VA-P4-CANDIDATE-012": "293:83",
+}
 
 
 class VisualAuthorityRebaselineTests(unittest.TestCase):
@@ -47,6 +72,168 @@ class VisualAuthorityRebaselineTests(unittest.TestCase):
         self.assertEqual(snapshot.legacy_node_count, 15)
         self.assertEqual(snapshot.destructive_actions, ())
 
+    def test_r1_node_snapshot_binds_live_targets_and_shell_contract_without_destruction(self) -> None:
+        node_snapshot = json.loads(R1_NODE_SNAPSHOT.read_text(encoding="utf-8"))
+        self.assertEqual(node_snapshot["schema_version"], 1)
+        self.assertEqual(node_snapshot["file_key"], "Oik7612LSTUHWsNRFoTlTJ")
+        self.assertEqual(node_snapshot["page_id"], "215:2")
+        self.assertEqual(node_snapshot["authority_state"], "candidate_shadow")
+        self.assertEqual(node_snapshot["deleted_node_ids"], [])
+        self.assertEqual(node_snapshot["destructive_actions"], [])
+        self.assertEqual(
+            node_snapshot["figma_write_receipt"],
+            {
+                "created_node_count": 77,
+                "mutated_node_count": 92,
+                "deleted_node_ids": [],
+                "destructive_actions": [],
+            },
+        )
+        self.assertEqual(
+            {
+                item["visual_authority_id"]: item["node_id"]
+                for item in node_snapshot["task_pack_targets"]
+            },
+            R1_TASK_PACK_TARGETS,
+        )
+
+        manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+        manifest_targets = {
+            item["visual_authority_id"]: item["node_id"]
+            for item in manifest["figma"]["authority_nodes"]
+            if item["visual_authority_id"] in R1_TASK_PACK_TARGETS
+        }
+        self.assertEqual(manifest_targets, R1_TASK_PACK_TARGETS)
+        self.assertTrue(
+            all(
+                item["page_id"] == "215:2"
+                and item["page_name"] == "CANDIDATE — AV1 · Revision 1"
+                and item["frame_version"] == "R1"
+                for item in manifest["figma"]["authority_nodes"]
+                if item["visual_authority_id"] in R1_TASK_PACK_TARGETS
+            )
+        )
+
+        viewport_proofs = {
+            item["visual_authority_id"]: item["artifacts"]["viewport"]
+            for item in manifest["candidate_proofs"]
+        }
+        snapshot_targets = {
+            item["visual_authority_id"]: item
+            for item in node_snapshot["task_pack_targets"]
+        }
+        self.assertEqual(set(viewport_proofs), set(R1_TASK_PACK_TARGETS))
+        self.assertTrue(
+            all(
+                viewport_proofs[authority_id]["node_id"] == target["node_id"]
+                and viewport_proofs[authority_id]["path"]
+                == target["screenshot_path"]
+                and viewport_proofs[authority_id]["sha256"]
+                == target["screenshot_sha256"]
+                for authority_id, target in snapshot_targets.items()
+            )
+        )
+
+        roots = {item["frame_id"]: item for item in node_snapshot["root_shell_frames"]}
+        expected_roots = {
+            "266:1424",
+            "266:1486",
+            "266:1547",
+            "266:1608",
+            "266:1669",
+            "266:1709",
+            "270:1430",
+            "272:1424",
+            "275:1424",
+            "275:1442",
+            "275:1460",
+            "275:1478",
+            "275:1496",
+            "278:1449",
+        }
+        self.assertEqual(set(roots), expected_roots)
+        self.assertTrue(
+            all(
+                item["root_dock_count"] == 1
+                and item["search_count"] == 1
+                and item["capture_count"] == 1
+                and item["bottom_clearance"] >= item["dock_height"]
+                for item in roots.values()
+            )
+        )
+
+        replacement = node_snapshot["pixel_equivalent_replacements"][0]
+        self.assertEqual(replacement["frame_id"], "270:1430")
+        self.assertEqual(replacement["visible_search_node_ids"], ["359:243"])
+        self.assertEqual(replacement["visible_capture_node_ids"], ["359:248"])
+        self.assertEqual(
+            replacement["old_hidden_node_ids"],
+            ["354:2517", "354:2518", "354:2522", "354:2523"],
+        )
+        self.assertEqual(
+            replacement["replacement_node_ids"],
+            ["359:242", "359:243", "359:247", "359:248"],
+        )
+        self.assertTrue(replacement["pixel_equivalent"])
+        self.assertTrue(replacement["non_destructive"])
+        self.assertEqual(
+            replacement["render_proof"],
+            {
+                "path": (
+                    "docs/qa/evidence/2026-07-16-canon-visual-authority-"
+                    "r1-shell-repair/screens/task-pack/"
+                    "va-p4-a11y-class-001-viewport.png"
+                ),
+                "sha256": (
+                    "311374645649f6bdd851b9e34783599847c94b76d6862d0dbb2d67a473260376"
+                ),
+            },
+        )
+
+        drilldowns = {
+            item["frame_id"]: item
+            for item in node_snapshot["drilldown_shell_frames"]
+        }
+        self.assertEqual(
+            set(drilldowns),
+            {
+                "272:1428",
+                "272:1432",
+                "272:1436",
+                "278:1453",
+                "278:1457",
+                "278:1461",
+                "278:1465",
+            },
+        )
+        self.assertTrue(
+            all(
+                item["root_dock_count"] == 0
+                and item["search_count"] == 0
+                and item["capture_count"] == 0
+                and item["back_count"] == 1
+                for item in drilldowns.values()
+            )
+        )
+
+        metadata = {
+            item["visual_authority_id"]: item
+            for item in node_snapshot["authority_metadata"]
+        }
+        self.assertTrue(set(R1_TASK_PACK_TARGETS).issubset(metadata))
+        self.assertTrue(
+            all(
+                item["owner_approval_state"]
+                == "candidate_pending_independent_review"
+                and item["implementation_status"]
+                == "design_authority_candidate_not_source_implementation"
+                and item["proof_ceiling"]
+                == "visual_design_authority_candidate_only"
+                and item["task_pack_eligibility"] == "blocked_until_gate_b_green"
+                for item in metadata.values()
+            )
+        )
+
     def test_canon_freshness_refresh_changes_only_the_148_sha_bindings(self) -> None:
         payload = json.loads(MANIFEST.read_text(encoding="utf-8"))
         expected_sha = payload["canon"]["content_sha"]
@@ -70,7 +257,7 @@ class VisualAuthorityRebaselineTests(unittest.TestCase):
         ).hexdigest()
         self.assertEqual(
             non_hash_digest,
-            "0aa09682448585165b7d659f3351d62dae49ffe19ae867d42a80b2a7367d1a24",
+            "fc4fcac9f188a5e479e0a5565bd63eb41d1a436569dfad4e22eb8e48d7556df4",
         )
 
     def test_hand_record_matches_machine_canon_and_coverage_digest(self) -> None:
@@ -173,7 +360,12 @@ class VisualAuthorityRebaselineTests(unittest.TestCase):
         )
 
         self.assertTrue(any("VA-P4-CANDIDATE-002" in item for item in selected))
-        self.assertTrue(any("figma:Oik7612LSTUHWsNRFoTlTJ:51:100" in item for item in selected))
+        self.assertTrue(
+            any(
+                "figma:Oik7612LSTUHWsNRFoTlTJ:266:1709" in item
+                for item in selected
+            )
+        )
         self.assertFalse(any("SWtHm9ouHTPbEFfNrrtZwv" in item for item in selected))
 
     def test_future_and_stale_canon_fail_closed(self) -> None:

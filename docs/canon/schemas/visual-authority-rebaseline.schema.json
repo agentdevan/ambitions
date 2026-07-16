@@ -98,7 +98,7 @@
           "$ref": "#/$defs/stringSet"
         },
         "reconciliation_root_node_id": {
-          "const": "37:438"
+          "const": "307:57"
         }
       },
       "required": [
@@ -456,7 +456,7 @@
           ]
         },
         "page_id": {
-          "pattern": "^17:(?:[2-9]|10|11)$",
+          "pattern": "^(?:17:(?:[2-9]|10|11)|215:2)$",
           "type": "string"
         },
         "page_name": {
@@ -559,7 +559,7 @@
           "type": "string"
         },
         "path": {
-          "pattern": "^docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/",
+          "pattern": "^docs/qa/evidence/(?:2026-07-14-canon-visual-authority-rebaseline|2026-07-16-canon-visual-authority-r1-shell-repair)/",
           "type": "string"
         },
         "proof_posture": {
@@ -630,7 +630,7 @@
           "type": "string"
         },
         "path": {
-          "pattern": "^docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/candidate-masters/",
+          "pattern": "^docs/qa/evidence/(?:2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/candidate-masters|2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack)/",
           "type": "string"
         },
         "proof_posture": {

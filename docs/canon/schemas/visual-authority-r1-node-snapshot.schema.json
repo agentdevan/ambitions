@@ -1,0 +1,398 @@
+{
+  "$id": "https://ambitions.local/schemas/visual-authority-r1-node-snapshot.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "authority_metadata": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "implementation_status": {
+            "const": "design_authority_candidate_not_source_implementation"
+          },
+          "node_id": {
+            "$ref": "#/$defs/nodeId"
+          },
+          "owner_approval_state": {
+            "const": "candidate_pending_independent_review"
+          },
+          "proof_ceiling": {
+            "const": "visual_design_authority_candidate_only"
+          },
+          "task_pack_eligibility": {
+            "const": "blocked_until_gate_b_green"
+          },
+          "visual_authority_id": {
+            "$ref": "#/$defs/taskAuthorityId"
+          }
+        },
+        "required": [
+          "implementation_status",
+          "node_id",
+          "owner_approval_state",
+          "proof_ceiling",
+          "task_pack_eligibility",
+          "visual_authority_id"
+        ],
+        "type": "object"
+      },
+      "maxItems": 18,
+      "minItems": 18,
+      "type": "array"
+    },
+    "authority_node_bindings": {
+      "items": {
+        "$ref": "#/$defs/binding"
+      },
+      "maxItems": 49,
+      "minItems": 49,
+      "type": "array"
+    },
+    "authority_state": {
+      "const": "candidate_shadow"
+    },
+    "canon": {
+      "additionalProperties": false,
+      "properties": {
+        "content_sha": {
+          "$ref": "#/$defs/sha256"
+        },
+        "revision": {
+          "const": 1
+        },
+        "source_sha": {
+          "$ref": "#/$defs/sha1"
+        }
+      },
+      "required": [
+        "content_sha",
+        "revision",
+        "source_sha"
+      ],
+      "type": "object"
+    },
+    "deleted_node_ids": {
+      "$ref": "#/$defs/emptyArray"
+    },
+    "destructive_actions": {
+      "$ref": "#/$defs/emptyArray"
+    },
+    "drilldown_shell_frames": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "back_count": {
+            "const": 1
+          },
+          "back_hit_node_id": {
+            "$ref": "#/$defs/nodeId"
+          },
+          "back_node_id": {
+            "$ref": "#/$defs/nodeId"
+          },
+          "capture_count": {
+            "const": 0
+          },
+          "frame_id": {
+            "$ref": "#/$defs/nodeId"
+          },
+          "root_dock_count": {
+            "const": 0
+          },
+          "search_count": {
+            "const": 0
+          }
+        },
+        "required": [
+          "back_count",
+          "back_hit_node_id",
+          "back_node_id",
+          "capture_count",
+          "frame_id",
+          "root_dock_count",
+          "search_count"
+        ],
+        "type": "object"
+      },
+      "maxItems": 7,
+      "minItems": 7,
+      "type": "array"
+    },
+    "figma_write_receipt": {
+      "additionalProperties": false,
+      "properties": {
+        "created_node_count": {
+          "const": 77
+        },
+        "deleted_node_ids": {
+          "$ref": "#/$defs/emptyArray"
+        },
+        "destructive_actions": {
+          "$ref": "#/$defs/emptyArray"
+        },
+        "mutated_node_count": {
+          "const": 92
+        }
+      },
+      "required": [
+        "created_node_count",
+        "deleted_node_ids",
+        "destructive_actions",
+        "mutated_node_count"
+      ],
+      "type": "object"
+    },
+    "file_key": {
+      "const": "Oik7612LSTUHWsNRFoTlTJ"
+    },
+    "page_id": {
+      "const": "215:2"
+    },
+    "page_name": {
+      "const": "CANDIDATE — AV1 · Revision 1"
+    },
+    "pixel_equivalent_replacements": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "audit_conclusion": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "frame_id": {
+            "const": "270:1430"
+          },
+          "non_destructive": {
+            "const": true
+          },
+          "old_hidden_node_ids": {
+            "const": [
+              "354:2517",
+              "354:2518",
+              "354:2522",
+              "354:2523"
+            ]
+          },
+          "pixel_equivalent": {
+            "const": true
+          },
+          "render_proof": {
+            "$ref": "#/$defs/renderProof"
+          },
+          "replacement_node_ids": {
+            "const": [
+              "359:242",
+              "359:243",
+              "359:247",
+              "359:248"
+            ]
+          },
+          "visible_capture_node_ids": {
+            "const": [
+              "359:248"
+            ]
+          },
+          "visible_search_node_ids": {
+            "const": [
+              "359:243"
+            ]
+          }
+        },
+        "required": [
+          "audit_conclusion",
+          "frame_id",
+          "non_destructive",
+          "old_hidden_node_ids",
+          "pixel_equivalent",
+          "render_proof",
+          "replacement_node_ids",
+          "visible_capture_node_ids",
+          "visible_search_node_ids"
+        ],
+        "type": "object"
+      },
+      "maxItems": 1,
+      "minItems": 1,
+      "type": "array"
+    },
+    "repository_base_sha": {
+      "$ref": "#/$defs/sha1"
+    },
+    "root_shell_frames": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "bottom_clearance": {
+            "enum": [
+              84,
+              96
+            ]
+          },
+          "capture_count": {
+            "const": 1
+          },
+          "capture_node_id": {
+            "$ref": "#/$defs/nodeId"
+          },
+          "dock_height": {
+            "enum": [
+              84,
+              96
+            ]
+          },
+          "dock_node_id": {
+            "$ref": "#/$defs/nodeId"
+          },
+          "fade_node_id": {
+            "$ref": "#/$defs/nodeId"
+          },
+          "frame_id": {
+            "$ref": "#/$defs/nodeId"
+          },
+          "root_dock_count": {
+            "const": 1
+          },
+          "search_count": {
+            "const": 1
+          },
+          "search_node_id": {
+            "$ref": "#/$defs/nodeId"
+          }
+        },
+        "required": [
+          "bottom_clearance",
+          "capture_count",
+          "capture_node_id",
+          "dock_height",
+          "dock_node_id",
+          "fade_node_id",
+          "frame_id",
+          "root_dock_count",
+          "search_count",
+          "search_node_id"
+        ],
+        "type": "object"
+      },
+      "maxItems": 14,
+      "minItems": 14,
+      "type": "array"
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "task_pack_targets": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "direct_link": {
+            "pattern": "^https://www\\.figma\\.com/design/Oik7612LSTUHWsNRFoTlTJ\\?node-id=[0-9]+-[0-9]+$",
+            "type": "string"
+          },
+          "frame_version": {
+            "const": "R1"
+          },
+          "node_id": {
+            "$ref": "#/$defs/nodeId"
+          },
+          "screenshot_path": {
+            "pattern": "^docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-(?:a11y-class|candidate)-[0-9]{3}-viewport\\.png$",
+            "type": "string"
+          },
+          "screenshot_sha256": {
+            "$ref": "#/$defs/sha256"
+          },
+          "visual_authority_id": {
+            "$ref": "#/$defs/taskAuthorityId"
+          }
+        },
+        "required": [
+          "direct_link",
+          "frame_version",
+          "node_id",
+          "screenshot_path",
+          "screenshot_sha256",
+          "visual_authority_id"
+        ],
+        "type": "object"
+      },
+      "maxItems": 18,
+      "minItems": 18,
+      "type": "array"
+    }
+  },
+  "required": [
+    "authority_metadata",
+    "authority_node_bindings",
+    "authority_state",
+    "canon",
+    "deleted_node_ids",
+    "destructive_actions",
+    "drilldown_shell_frames",
+    "figma_write_receipt",
+    "file_key",
+    "page_id",
+    "page_name",
+    "pixel_equivalent_replacements",
+    "repository_base_sha",
+    "root_shell_frames",
+    "schema_version",
+    "task_pack_targets"
+  ],
+  "title": "Ambitions Visual Authority R1 Node Snapshot",
+  "type": "object",
+  "$defs": {
+    "binding": {
+      "additionalProperties": false,
+      "properties": {
+        "node_id": {
+          "$ref": "#/$defs/nodeId"
+        },
+        "visual_authority_id": {
+          "pattern": "^VA-P[34]-[A-Z0-9-]+$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "node_id",
+        "visual_authority_id"
+      ],
+      "type": "object"
+    },
+    "emptyArray": {
+      "maxItems": 0,
+      "type": "array"
+    },
+    "nodeId": {
+      "pattern": "^[0-9]+:[0-9]+$",
+      "type": "string"
+    },
+    "renderProof": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "const": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-001-viewport.png"
+        },
+        "sha256": {
+          "const": "311374645649f6bdd851b9e34783599847c94b76d6862d0dbb2d67a473260376"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "type": "object"
+    },
+    "sha1": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "taskAuthorityId": {
+      "pattern": "^VA-P4-(?:A11Y-CLASS|CANDIDATE)-[0-9]{3}$",
+      "type": "string"
+    }
+  }
+}

@@ -13,253 +13,263 @@
   "current_candidate": {
     "accessibility_boards": [
       {
-        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=54-8",
-        "node_id": "54:8",
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=270-1430",
+        "node_id": "270:1430",
         "screenshot": {
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-a11y-class-001-hero.png",
-          "sha256": "c529eba4b6ecf8deee2eb54a23b45fe325d64dc87b06ca1f1d8b395e515bb1c2"
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-001-viewport.png",
+          "sha256": "311374645649f6bdd851b9e34783599847c94b76d6862d0dbb2d67a473260376"
         },
         "visual_authority_id": "VA-P4-A11Y-CLASS-001"
       },
       {
-        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=54-105",
-        "node_id": "54:105",
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=296-60",
+        "node_id": "296:60",
         "screenshot": {
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-a11y-class-002-hero.png",
-          "sha256": "7896fa2fa3e6a7077f90ae8a9271301789cd10c7b1542e6baec70df64d64b4fe"
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-002-viewport.png",
+          "sha256": "eee76b72a8feba19539ba8c293fd071a0e256c15fbc40a210e05124b52df61b8"
         },
         "visual_authority_id": "VA-P4-A11Y-CLASS-002"
       },
       {
-        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=54-174",
-        "node_id": "54:174",
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=296-84",
+        "node_id": "296:84",
         "screenshot": {
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-a11y-class-003-hero.png",
-          "sha256": "267a9686afde8d8d8fb6456601c805391ebe835cfb77ea45bcdd0c5e6af66ebe"
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-003-viewport.png",
+          "sha256": "f709b45fbf3612e4a6323cdd7210711caa6e21fb03258af39e61ea631c3b33d7"
         },
         "visual_authority_id": "VA-P4-A11Y-CLASS-003"
       },
       {
-        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=54-243",
-        "node_id": "54:243",
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=327-1603",
+        "node_id": "327:1603",
         "screenshot": {
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-a11y-class-004-hero.png",
-          "sha256": "dcb966573521617225d830e444b5b7a6b5a617bf53bfb82fe928151b7821b62d"
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-004-viewport.png",
+          "sha256": "93395d4705581ec180101def15d1688e48db8cedc2688edc2ee20917109e1d6f"
         },
         "visual_authority_id": "VA-P4-A11Y-CLASS-004"
       },
       {
-        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=54-312",
-        "node_id": "54:312",
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=329-1635",
+        "node_id": "329:1635",
         "screenshot": {
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-a11y-class-005-hero.png",
-          "sha256": "0d977f707b35db39e5d98b952ea3e0bf7d8e19bf504f7eaf5b59dc4ff521594d"
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-005-viewport.png",
+          "sha256": "92a74a355dc82c9e19742eda6d7e01f12ca89e562a3e20000297b060c1ac6732"
         },
         "visual_authority_id": "VA-P4-A11Y-CLASS-005"
       },
       {
-        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=54-381",
-        "node_id": "54:381",
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=327-1648",
+        "node_id": "327:1648",
         "screenshot": {
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-a11y-class-006-hero.png",
-          "sha256": "3c7a91ef32a1a4c41aadf158a48d1367834d34b907c98fdb336880f9dc5301e5"
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-006-viewport.png",
+          "sha256": "e0f06df3f1b5340c5ed19592490cfc7df682cac25323c01e45ad780b07977a55"
         },
         "visual_authority_id": "VA-P4-A11Y-CLASS-006"
       }
     ],
+    "assessment_posture": "Exact current node links and screenshots were refreshed for R1. The prior workshop's semantic assessment was not regenerated in this deterministic mapping repair.",
     "problems": [
-      "Generic beige card/list skeleton with weak spatial identity.",
-      "Root dock exposes text labels despite icon-only canon.",
-      "Today does not convincingly express the ±24-hour Reality Window.",
-      "Goals lacks the standard horizontal living Goal Path.",
-      "Capture and Search do not prove keyboard-active/focus depth.",
-      "Accessibility boards are matrices rather than populated representative reflow."
+      "R1 remains candidate/shadow and cannot authorize source work while Gate B is pending.",
+      "Figma node and render proof do not prove source implementation, runtime behavior, rendered-app quality, or accessibility.",
+      "The exact R1 candidate still requires independent review before any authority-state decision."
     ],
     "standard_viewports": [
       {
-        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=51-10",
-        "node_id": "51:10",
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=266-1424",
+        "node_id": "266:1424",
         "screenshot": {
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-candidate-001-viewport.png",
-          "sha256": "5f57ce55c45124457b22fc197e804e1ccee851d4cabd42cd34a25b189261f2bf"
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-001-viewport.png",
+          "sha256": "3a90bdc58fe6cc586df9312db395a5d4a3df9c1d291635b9c1e381b455bf96d1"
         },
         "visual_authority_id": "VA-P4-CANDIDATE-001"
       },
       {
-        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=51-100",
-        "node_id": "51:100",
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=266-1709",
+        "node_id": "266:1709",
         "screenshot": {
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-candidate-002-viewport.png",
-          "sha256": "e492134e0d1be8a39f1611fdee134882bbdb79a87820efbd0093562b9e6247f7"
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-002-viewport.png",
+          "sha256": "93ac12da90916382b8288b5e28557d4be16939181a27aab927c929bf22c9d114"
         },
         "visual_authority_id": "VA-P4-CANDIDATE-002"
       },
       {
-        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=51-195",
-        "node_id": "51:195",
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=272-1424",
+        "node_id": "272:1424",
         "screenshot": {
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-candidate-003-viewport.png",
-          "sha256": "33eb8e4e66aedf9d750d4935f8f5aa93e751cc2a26438e4e27e8966373aa5f31"
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-003-viewport.png",
+          "sha256": "a5a08c2c0e0c7350d00d873601a862ee27e04153e7e8994547ac47de2614f50f"
         },
         "visual_authority_id": "VA-P4-CANDIDATE-003"
       },
       {
-        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=51-292",
-        "node_id": "51:292",
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=275-1424",
+        "node_id": "275:1424",
         "screenshot": {
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-candidate-004-viewport.png",
-          "sha256": "46a8ed1fd2a4ea01c266b7928ab351a8a52c5d3e414f11e9af9e68926ffb9033"
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-004-viewport.png",
+          "sha256": "9736a4cedf0e22a90d7fff8498732f845e11443775ecd8ccc7a5f351377f8b47"
         },
         "visual_authority_id": "VA-P4-CANDIDATE-004"
       },
       {
-        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=52-57",
-        "node_id": "52:57",
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=278-1449",
+        "node_id": "278:1449",
         "screenshot": {
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-candidate-005-viewport.png",
-          "sha256": "1bdd234ded65a9450c98c24fdd0383b3182955dcdf15a98fb969f3fddb6b6230"
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-005-viewport.png",
+          "sha256": "a792881c96c7f3e12b7cdd5ece054fb9bde25b6bb80fcfe9e2919ed53c8d20a3"
         },
         "visual_authority_id": "VA-P4-CANDIDATE-005"
       },
       {
-        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=52-157",
-        "node_id": "52:157",
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=281-1465",
+        "node_id": "281:1465",
         "screenshot": {
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-candidate-006-viewport.png",
-          "sha256": "a130a7c0e9d1c34356f05eae10be4b866beca3561f3b5c9c7a0e976fb40df2c7"
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-006-viewport.png",
+          "sha256": "8684664e80fc6bbee087e7fa85fe9ade32064f622e757bc903462f38987f198e"
         },
         "visual_authority_id": "VA-P4-CANDIDATE-006"
       },
       {
-        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=52-232",
-        "node_id": "52:232",
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=288-41",
+        "node_id": "288:41",
         "screenshot": {
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-candidate-007-viewport.png",
-          "sha256": "9549281007b77683d1baf1bc0ad2e4ec2da86e39433ea7df311ef9a950570986"
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-007-viewport.png",
+          "sha256": "365fb42edb5a2b613318a9ee208ae66fb4da150313d642e7b62bcdfb218c0f81"
         },
         "visual_authority_id": "VA-P4-CANDIDATE-007"
       },
       {
-        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=52-314",
-        "node_id": "52:314",
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=288-156",
+        "node_id": "288:156",
         "screenshot": {
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-candidate-008-viewport.png",
-          "sha256": "95b1309c495e3e0de2dfd8b714aac96b779bcc2a748e868a3f6cc5b53e23246b"
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-008-viewport.png",
+          "sha256": "ff94201fe6e379b596a3e16738efcd609e16adf9b204f6be9e899fff1e97538a"
         },
         "visual_authority_id": "VA-P4-CANDIDATE-008"
       },
       {
-        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=53-69",
-        "node_id": "53:69",
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=293-23",
+        "node_id": "293:23",
         "screenshot": {
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-candidate-009-viewport.png",
-          "sha256": "90b0fa111c5b5d26c923a69a9510f6ad63682edc1086598567a31b448d577e94"
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-009-viewport.png",
+          "sha256": "33b9fe783397b3281ebb8a50ac97112463c6234ef81c086c1e70818981ac0fb0"
         },
         "visual_authority_id": "VA-P4-CANDIDATE-009"
       },
       {
-        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=53-145",
-        "node_id": "53:145",
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=293-141",
+        "node_id": "293:141",
         "screenshot": {
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-candidate-010-viewport.png",
-          "sha256": "9b6b2336d7ff669ba59039db4de264894f48588e08d5fa1e7949ba4990abc36e"
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-010-viewport.png",
+          "sha256": "14d3f07e500adfbf26fea838271a1cd29b1c17bc600e0f64915fe49060a6de9f"
         },
         "visual_authority_id": "VA-P4-CANDIDATE-010"
       },
       {
-        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=53-228",
-        "node_id": "53:228",
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=293-164",
+        "node_id": "293:164",
         "screenshot": {
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-candidate-011-viewport.png",
-          "sha256": "aceb9dffc68aea1fd8b40f44f77f1be5577f28cd105f636f301b4ea1a1e3b43b"
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-011-viewport.png",
+          "sha256": "5ba9f9524b1e381833e64ab16a0656aece675d221a13cd0985fe06aa6b42c8af"
         },
         "visual_authority_id": "VA-P4-CANDIDATE-011"
       },
       {
-        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=53-322",
-        "node_id": "53:322",
+        "figma_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=293-83",
+        "node_id": "293:83",
         "screenshot": {
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-owner-workshop/screens/current-candidate/va-p4-candidate-012-viewport.png",
-          "sha256": "ef3f64eefcc3818bdc44c571b953b7e829a75e3ccb942474166dfffb2157db6a"
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-012-viewport.png",
+          "sha256": "ca505e0a79a47b26610b48b2418282e59c561f79dd27180eeb818a34ff2ec1c8"
         },
         "visual_authority_id": "VA-P4-CANDIDATE-012"
       }
     ],
     "strengths": [
-      "Complete canonical surface and journey coverage.",
-      "Local-first, privacy, offline, object, and lifecycle boundaries are explicit.",
-      "Stable 393×852 SHA-bound candidate corpus."
+      "All 18 live R1 candidate viewports are bound to exact Figma node IDs and render SHA-256 values.",
+      "The four-root shell has one dock plus one Search and Capture action; seven drilldowns have one Back affordance and no root chrome.",
+      "The R1 repair is additive and preserves pre-R1 and legacy artifacts as provenance."
     ]
   },
   "current_candidate_screen_assessments": [
     {
-      "node_id": "51:10",
+      "assessment_posture": "historical_pre_r1_semantic_assessment_node_and_screenshot_refreshed_only",
+      "node_id": "266:1424",
       "problems": "Text-labeled root dock conflicts with icon-only canon; generic card stack weakens spatial identity and the ±24-hour Reality Window.",
       "screen_class": "Root shell and Today overview",
       "strengths": "Complete four-root shell with contextual Capture, Search, and Trust boundaries."
     },
     {
-      "node_id": "51:100",
+      "assessment_posture": "historical_pre_r1_semantic_assessment_node_and_screenshot_refreshed_only",
+      "node_id": "266:1709",
       "problems": "Recovery reads as a conventional card/list state and is visually detached from the Reality Window.",
       "screen_class": "Today recovery",
       "strengths": "Preserves agency, closure language, receipts, and Undo without shame."
     },
     {
-      "node_id": "51:195",
+      "assessment_posture": "historical_pre_r1_semantic_assessment_node_and_screenshot_refreshed_only",
+      "node_id": "272:1424",
       "problems": "Goal Path is not expressed as the standard horizontal living route; card density obscures path continuity.",
       "screen_class": "Goals",
       "strengths": "Covers Goal, Life Area, path, recovery, closure, and history boundaries."
     },
     {
-      "node_id": "51:292",
+      "assessment_posture": "historical_pre_r1_semantic_assessment_node_and_screenshot_refreshed_only",
+      "node_id": "275:1424",
       "problems": "Boxed controls and compact density understate Day/Week/Month/Year/List calendar-grade breadth.",
       "screen_class": "Time",
       "strengths": "Uses real hour-grid geometry for Protected, Fixed, open capacity, and reflow."
     },
     {
-      "node_id": "52:57",
+      "assessment_posture": "historical_pre_r1_semantic_assessment_node_and_screenshot_refreshed_only",
+      "node_id": "278:1449",
       "problems": "Settings-list posture feels generic and exposes too much system organization in the first viewport.",
       "screen_class": "You",
       "strengths": "Makes local data, optional identity, continuity, privacy, diagnostics, and export inspectable."
     },
     {
-      "node_id": "52:157",
+      "assessment_posture": "historical_pre_r1_semantic_assessment_node_and_screenshot_refreshed_only",
+      "node_id": "281:1465",
       "problems": "Does not prove an actual keyboard-active composition, focus order, or accessory action boundary.",
       "screen_class": "Capture",
       "strengths": "Maintains the global, local-first composer and explicit Save boundary without root chrome."
     },
     {
-      "node_id": "52:232",
+      "assessment_posture": "historical_pre_r1_semantic_assessment_node_and_screenshot_refreshed_only",
+      "node_id": "288:41",
       "problems": "Generic result rows provide limited spatial/context depth and weak differentiation from a utility search list.",
       "screen_class": "Search",
       "strengths": "Typed, privacy-aware results preserve object identity and action preview."
     },
     {
-      "node_id": "52:314",
+      "assessment_posture": "historical_pre_r1_semantic_assessment_node_and_screenshot_refreshed_only",
+      "node_id": "288:156",
       "problems": "Uniform row treatment makes Proof, Source, Privacy, History, Receipts, and Undo feel equally dense.",
       "screen_class": "Contextual Trust",
       "strengths": "Keeps trust object-bound and contextual rather than persistent root chrome."
     },
     {
-      "node_id": "53:69",
+      "assessment_posture": "historical_pre_r1_semantic_assessment_node_and_screenshot_refreshed_only",
+      "node_id": "293:23",
       "problems": "Text-heavy cards flatten local value, optional permission, and optional account hierarchy.",
       "screen_class": "Setup and permission",
       "strengths": "Establishes local value before optional identity or permission and preserves denial/resume."
     },
     {
-      "node_id": "53:145",
+      "assessment_posture": "historical_pre_r1_semantic_assessment_node_and_screenshot_refreshed_only",
+      "node_id": "293:141",
       "problems": "Recovery remains a technical card stack and does not visually normalize healthy offline use.",
       "screen_class": "Offline and degraded recovery",
       "strengths": "Names exact consequences and preserves continue, inspect, retry, export, and repair paths."
     },
     {
-      "node_id": "53:228",
+      "assessment_posture": "historical_pre_r1_semantic_assessment_node_and_screenshot_refreshed_only",
+      "node_id": "293:164",
       "problems": "Many lifecycle states appear in one board, so Active, Trash, Restore, and permanent-delete coherence is not demonstrated.",
       "screen_class": "Lifecycle boundaries",
       "strengths": "Includes edit, Archive, Trash, restore, recurrence, History, Receipts, privacy, and ownership."
     },
     {
-      "node_id": "53:322",
+      "assessment_posture": "historical_pre_r1_semantic_assessment_node_and_screenshot_refreshed_only",
+      "node_id": "293:83",
       "problems": "Reads as an evidence matrix rather than a real populated product viewport or representative accessibility reflow.",
       "screen_class": "Journey and accessibility proof",
       "strengths": "Covers checkpoint, interruption, resume, commit, failure, recovery, receipt, rollback, and focus continuity."

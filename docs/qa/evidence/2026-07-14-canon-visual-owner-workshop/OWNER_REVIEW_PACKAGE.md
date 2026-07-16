@@ -39,20 +39,19 @@ No recommendation changes the package status. An explicit owner choice is still 
 
 ### Strengths
 
-- Complete canonical surface and journey coverage.
-- Local-first, privacy, offline, object, and lifecycle boundaries are explicit.
-- Stable 393×852 SHA-bound candidate corpus.
+- All 18 live R1 candidate viewports are bound to exact Figma node IDs and render SHA-256 values.
+- The four-root shell has one dock plus one Search and Capture action; seven drilldowns have one Back affordance and no root chrome.
+- The R1 repair is additive and preserves pre-R1 and legacy artifacts as provenance.
 
 ### Problems
 
-- Generic beige card/list skeleton with weak spatial identity.
-- Root dock exposes text labels despite icon-only canon.
-- Today does not convincingly express the ±24-hour Reality Window.
-- Goals lacks the standard horizontal living Goal Path.
-- Capture and Search do not prove keyboard-active/focus depth.
-- Accessibility boards are matrices rather than populated representative reflow.
+- R1 remains candidate/shadow and cannot authorize source work while Gate B is pending.
+- Figma node and render proof do not prove source implementation, runtime behavior, rendered-app quality, or accessibility.
+- The exact R1 candidate still requires independent review before any authority-state decision.
 
 ### Current-candidate screen-by-screen assessment
+
+The prose below is the historical pre-R1 workshop assessment. This bounded repair refreshes only the exact current node links and product screenshots; it does not claim a new semantic evaluation.
 
 | Screen class | Node | Strength | Problem |
 | --- | --- | --- | --- |
@@ -73,29 +72,29 @@ No recommendation changes the package status. An explicit owner choice is still 
 
 | Authority ID | Figma | Product-only screenshot |
 | --- | --- | --- |
-| VA-P4-CANDIDATE-001 · `51:10` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=51-10) | <img src="screens/current-candidate/va-p4-candidate-001-viewport.png" width="148" alt="VA-P4-CANDIDATE-001"> |
-| VA-P4-CANDIDATE-002 · `51:100` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=51-100) | <img src="screens/current-candidate/va-p4-candidate-002-viewport.png" width="148" alt="VA-P4-CANDIDATE-002"> |
-| VA-P4-CANDIDATE-003 · `51:195` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=51-195) | <img src="screens/current-candidate/va-p4-candidate-003-viewport.png" width="148" alt="VA-P4-CANDIDATE-003"> |
-| VA-P4-CANDIDATE-004 · `51:292` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=51-292) | <img src="screens/current-candidate/va-p4-candidate-004-viewport.png" width="148" alt="VA-P4-CANDIDATE-004"> |
-| VA-P4-CANDIDATE-005 · `52:57` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=52-57) | <img src="screens/current-candidate/va-p4-candidate-005-viewport.png" width="148" alt="VA-P4-CANDIDATE-005"> |
-| VA-P4-CANDIDATE-006 · `52:157` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=52-157) | <img src="screens/current-candidate/va-p4-candidate-006-viewport.png" width="148" alt="VA-P4-CANDIDATE-006"> |
-| VA-P4-CANDIDATE-007 · `52:232` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=52-232) | <img src="screens/current-candidate/va-p4-candidate-007-viewport.png" width="148" alt="VA-P4-CANDIDATE-007"> |
-| VA-P4-CANDIDATE-008 · `52:314` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=52-314) | <img src="screens/current-candidate/va-p4-candidate-008-viewport.png" width="148" alt="VA-P4-CANDIDATE-008"> |
-| VA-P4-CANDIDATE-009 · `53:69` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=53-69) | <img src="screens/current-candidate/va-p4-candidate-009-viewport.png" width="148" alt="VA-P4-CANDIDATE-009"> |
-| VA-P4-CANDIDATE-010 · `53:145` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=53-145) | <img src="screens/current-candidate/va-p4-candidate-010-viewport.png" width="148" alt="VA-P4-CANDIDATE-010"> |
-| VA-P4-CANDIDATE-011 · `53:228` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=53-228) | <img src="screens/current-candidate/va-p4-candidate-011-viewport.png" width="148" alt="VA-P4-CANDIDATE-011"> |
-| VA-P4-CANDIDATE-012 · `53:322` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=53-322) | <img src="screens/current-candidate/va-p4-candidate-012-viewport.png" width="148" alt="VA-P4-CANDIDATE-012"> |
+| VA-P4-CANDIDATE-001 · `266:1424` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=266-1424) | <img src="../2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-001-viewport.png" width="148" alt="VA-P4-CANDIDATE-001"> |
+| VA-P4-CANDIDATE-002 · `266:1709` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=266-14240) | <img src="../2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-002-viewport.png" width="148" alt="VA-P4-CANDIDATE-002"> |
+| VA-P4-CANDIDATE-003 · `272:1424` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=272-1424) | <img src="../2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-003-viewport.png" width="148" alt="VA-P4-CANDIDATE-003"> |
+| VA-P4-CANDIDATE-004 · `275:1424` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=275-1424) | <img src="../2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-004-viewport.png" width="148" alt="VA-P4-CANDIDATE-004"> |
+| VA-P4-CANDIDATE-005 · `278:1449` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=278-1449) | <img src="../2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-005-viewport.png" width="148" alt="VA-P4-CANDIDATE-005"> |
+| VA-P4-CANDIDATE-006 · `281:1465` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=281-1465) | <img src="../2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-006-viewport.png" width="148" alt="VA-P4-CANDIDATE-006"> |
+| VA-P4-CANDIDATE-007 · `288:41` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=288-41) | <img src="../2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-007-viewport.png" width="148" alt="VA-P4-CANDIDATE-007"> |
+| VA-P4-CANDIDATE-008 · `288:156` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=288-156) | <img src="../2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-008-viewport.png" width="148" alt="VA-P4-CANDIDATE-008"> |
+| VA-P4-CANDIDATE-009 · `293:23` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=293-23) | <img src="../2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-009-viewport.png" width="148" alt="VA-P4-CANDIDATE-009"> |
+| VA-P4-CANDIDATE-010 · `293:141` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=293-141) | <img src="../2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-010-viewport.png" width="148" alt="VA-P4-CANDIDATE-010"> |
+| VA-P4-CANDIDATE-011 · `293:164` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=293-164) | <img src="../2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-011-viewport.png" width="148" alt="VA-P4-CANDIDATE-011"> |
+| VA-P4-CANDIDATE-012 · `293:83` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=293-83) | <img src="../2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-012-viewport.png" width="148" alt="VA-P4-CANDIDATE-012"> |
 
 ### Existing accessibility-class boards
 
 | Authority ID | Figma | Product-only screenshot |
 | --- | --- | --- |
-| VA-P4-A11Y-CLASS-001 · `54:8` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=54-8) | <img src="screens/current-candidate/va-p4-a11y-class-001-hero.png" width="320" alt="VA-P4-A11Y-CLASS-001"> |
-| VA-P4-A11Y-CLASS-002 · `54:105` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=54-105) | <img src="screens/current-candidate/va-p4-a11y-class-002-hero.png" width="320" alt="VA-P4-A11Y-CLASS-002"> |
-| VA-P4-A11Y-CLASS-003 · `54:174` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=54-174) | <img src="screens/current-candidate/va-p4-a11y-class-003-hero.png" width="320" alt="VA-P4-A11Y-CLASS-003"> |
-| VA-P4-A11Y-CLASS-004 · `54:243` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=54-243) | <img src="screens/current-candidate/va-p4-a11y-class-004-hero.png" width="320" alt="VA-P4-A11Y-CLASS-004"> |
-| VA-P4-A11Y-CLASS-005 · `54:312` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=54-312) | <img src="screens/current-candidate/va-p4-a11y-class-005-hero.png" width="320" alt="VA-P4-A11Y-CLASS-005"> |
-| VA-P4-A11Y-CLASS-006 · `54:381` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=54-381) | <img src="screens/current-candidate/va-p4-a11y-class-006-hero.png" width="320" alt="VA-P4-A11Y-CLASS-006"> |
+| VA-P4-A11Y-CLASS-001 · `270:1430` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=270-1430) | <img src="../2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-001-viewport.png" width="320" alt="VA-P4-A11Y-CLASS-001"> |
+| VA-P4-A11Y-CLASS-002 · `296:60` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=296-60) | <img src="../2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-002-viewport.png" width="320" alt="VA-P4-A11Y-CLASS-002"> |
+| VA-P4-A11Y-CLASS-003 · `296:84` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=296-84) | <img src="../2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-003-viewport.png" width="320" alt="VA-P4-A11Y-CLASS-003"> |
+| VA-P4-A11Y-CLASS-004 · `327:1603` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=327-1603) | <img src="../2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-004-viewport.png" width="320" alt="VA-P4-A11Y-CLASS-004"> |
+| VA-P4-A11Y-CLASS-005 · `329:1635` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=329-1635) | <img src="../2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-005-viewport.png" width="320" alt="VA-P4-A11Y-CLASS-005"> |
+| VA-P4-A11Y-CLASS-006 · `327:1648` | [Open](https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=327-1648) | <img src="../2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-006-viewport.png" width="320" alt="VA-P4-A11Y-CLASS-006"> |
 
 ## Direction A — Quiet Spatial Stage (recommended)
 

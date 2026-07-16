@@ -12,14 +12,15 @@ The additive Phase 3/4 Figma corpus is represented as one deterministic, require
 - Canon revision: `1`
 - Canon source SHA: `ffd462ab52c0eff798071333388a051d9f3e55f3`
 - Canon content SHA: `6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67`
-- Frozen repository base: `4d73857b1c7ec86a0ce4293219c49d56bec18864`
+- Frozen R1 repository base: `201f1e1451a295b53fcfcefb6ba4c0acce207d45`
 - New Figma file: `Oik7612LSTUHWsNRFoTlTJ`
-- Additive pages: `17:2` through `17:11`
-- Live reconciliation root: `37:438`
-- Live replacement index panel: `56:62`
-- Product-anatomy root: `51:2`
-- Accessibility-class root: `54:2`
-- Product-only proof root: `62:62`
+- Retained additive pages: `17:2` through `17:11`
+- R1 candidate page: `215:2` (`CANDIDATE — AV1 · Revision 1`)
+- Live reconciliation root: `307:57`
+- Live replacement index: `215:2`
+- Product-anatomy root: `330:1667`
+- Accessibility-class root: `296:35`
+- Product-only proof root: `306:2`
 - Exact authority nodes: `147`
 - Conditionally selectable candidate masters after a future approved Gate B: `18`
 - Candidate screen mappings: `47`
@@ -35,7 +36,9 @@ The additive Phase 3/4 Figma corpus is represented as one deterministic, require
 - Cross-cutting records: `11`
 - Sensitive exposure channels: `9`
 
-The normative machine record is `visual-authority-rebaseline.json`. It preserves each authority node ID, Figma page, stable visual-authority ID, applicable requirement IDs, state variants where applicable, accessibility variants, canon provenance, approval posture, SwiftUI plausibility, implementation posture, and proof ceiling. Every tracked node carries exactly one `CANDIDATE`, `ARCHIVE`, or `FAILURE_EVIDENCE` prefix. The `18` compact candidate masters are only proposed for conditional selection after owner workshop, explicit approval, independent review, and a future Green Gate B; they have zero current task-pack authority. The `47` generic skeleton screens remain provenance and can never authorize source work.
+The normative machine record is `visual-authority-rebaseline.json`. The companion `visual-authority-r1-node-snapshot.json` binds the `49` remapped live nodes, all `18` task-pack candidate targets, the root/drilldown shell contract, and exact render digests without volatile timestamps. It also records `77` created nodes, `92` mutated/read-bound nodes, and zero deleted or destructive actions. Every tracked node carries exactly one `CANDIDATE`, `ARCHIVE`, or `FAILURE_EVIDENCE` prefix. The `18` compact candidate masters are only proposed for conditional selection after owner workshop, explicit approval, independent review, and a future Green Gate B; they have zero current task-pack authority. The `47` generic skeleton screens remain provenance and can never authorize source work.
+
+The accessibility-size Today repair at `270:1430` has exactly one visible Search node (`359:243`) and one visible Capture node (`359:248`). The replaced hidden pairs and the visible pairs have matching geometry and fills, so the unchanged product render SHA `311374645649f6bdd851b9e34783599847c94b76d6862d0dbb2d67a473260376` is expected. This is a non-destructive, pixel-equivalent replacement receipt—not a claim that no node replacement occurred.
 
 The exact presentation matrix limits persistent root navigation to Today, Goals, Time, and You. Capture and Search are global overlays without root chrome, and Trust/Proof is contextual inspection only. Every candidate master records the seven required variants: Standard, Large Text, Accessibility Size, Reduce Motion, Reduce Transparency, Increase Contrast, and VoiceOver Order.
 
@@ -72,7 +75,7 @@ This record does not itself claim that Gate B has passed.
 
 ## Rollback
 
-- Repository rollback begins from `4d73857b1c7ec86a0ce4293219c49d56bec18864` and reverts this bounded branch commit.
+- Repository rollback begins from `201f1e1451a295b53fcfcefb6ba4c0acce207d45` and reverts this bounded branch commit.
 - Figma rollback removes only the additive candidate page family if separately authorized; legacy nodes remain unchanged.
 - No Gate C cleanup is part of this change.
 

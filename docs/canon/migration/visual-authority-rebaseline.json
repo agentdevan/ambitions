@@ -18,16 +18,16 @@
           "sha256": "deef3ba07ccaa35020429e98d0ebbb3730e1c633119a75e432d3577059d06aad"
         },
         "viewport": {
-          "asset_id": "5aea7101-37ca-4296-9525-ce74fa2e3788",
-          "node_id": "54:9",
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/candidate-masters/va-p4-a11y-class-001-viewport.png",
+          "asset_id": "figma-mcp-r1-va-p4-a11y-class-001",
+          "node_id": "270:1430",
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-001-viewport.png",
           "proof_posture": "product_only",
-          "sha256": "2249fc9eee659f631cfcfe19809f529657a2706b5d43e927c4b68684b604964a"
+          "sha256": "311374645649f6bdd851b9e34783599847c94b76d6862d0dbb2d67a473260376"
         }
       },
-      "canonical_artifact_role": "hero",
-      "canonical_node_id": "54:8",
-      "direct_visual_review_note": "Root surfaces preserve exact four-root navigation and stable hierarchy across all seven explicit accessibility variants.",
+      "canonical_artifact_role": "viewport",
+      "canonical_node_id": "270:1430",
+      "direct_visual_review_note": "Root surfaces preserve exact four-root navigation and stable hierarchy across all seven explicit accessibility variants. R1 binds the live candidate viewport and exact render digest; it remains shadow and non-authoritative pending independent review.",
       "visual_authority_id": "VA-P4-A11Y-CLASS-001"
     },
     {
@@ -47,16 +47,16 @@
           "sha256": "074cd395201b2c7d51d602094aa50d729f9bea9ffc8bf548744ad8c5a32cc6f3"
         },
         "viewport": {
-          "asset_id": "e1ad64cc-0f5e-488f-a79a-778c0dbc39e5",
-          "node_id": "54:106",
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/candidate-masters/va-p4-a11y-class-002-viewport.png",
+          "asset_id": "figma-mcp-r1-va-p4-a11y-class-002",
+          "node_id": "296:60",
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-002-viewport.png",
           "proof_posture": "product_only",
-          "sha256": "e19890525afc16f657456402d5c3d44a6278271b408f629bf7cbcbd10265938d"
+          "sha256": "eee76b72a8feba19539ba8c293fd071a0e256c15fbc40a210e05124b52df61b8"
         }
       },
-      "canonical_artifact_role": "hero",
-      "canonical_node_id": "54:105",
-      "direct_visual_review_note": "Capture and Search remain dismissible, keyboard-safe overlays with no root chrome in all seven explicit variants.",
+      "canonical_artifact_role": "viewport",
+      "canonical_node_id": "296:60",
+      "direct_visual_review_note": "Capture and Search remain dismissible, keyboard-safe overlays with no root chrome in all seven explicit variants. R1 binds the live candidate viewport and exact render digest; it remains shadow and non-authoritative pending independent review.",
       "visual_authority_id": "VA-P4-A11Y-CLASS-002"
     },
     {
@@ -76,16 +76,16 @@
           "sha256": "e4e314a9becbc93847bc087638f1a661b91ff4d3e98b27c6fe7d2e5378d3e80f"
         },
         "viewport": {
-          "asset_id": "afc92dce-4769-4642-9073-aa2af1cf6ee6",
-          "node_id": "54:175",
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/candidate-masters/va-p4-a11y-class-003-viewport.png",
+          "asset_id": "figma-mcp-r1-va-p4-a11y-class-003",
+          "node_id": "296:84",
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-003-viewport.png",
           "proof_posture": "product_only",
-          "sha256": "9eae64f1f58f5328bc5f886cd0a3e3adc834cab0ccac320f3a10321253da647e"
+          "sha256": "f709b45fbf3612e4a6323cdd7210711caa6e21fb03258af39e61ea631c3b33d7"
         }
       },
-      "canonical_artifact_role": "hero",
-      "canonical_node_id": "54:174",
-      "direct_visual_review_note": "Trust and object inspection preserve context, back path, reading order, and proportional disclosure in all explicit variants.",
+      "canonical_artifact_role": "viewport",
+      "canonical_node_id": "296:84",
+      "direct_visual_review_note": "Trust and object inspection preserve context, back path, reading order, and proportional disclosure in all explicit variants. R1 binds the live candidate viewport and exact render digest; it remains shadow and non-authoritative pending independent review.",
       "visual_authority_id": "VA-P4-A11Y-CLASS-003"
     },
     {
@@ -105,16 +105,16 @@
           "sha256": "ee64d706a8642815793edec449e9c9fdc5b3a282109cff7ab6fb5c3018beab22"
         },
         "viewport": {
-          "asset_id": "8b520bfb-53d7-44c4-8bec-88fce2c75758",
-          "node_id": "54:244",
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/candidate-masters/va-p4-a11y-class-004-viewport.png",
+          "asset_id": "figma-mcp-r1-va-p4-a11y-class-004",
+          "node_id": "327:1603",
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-004-viewport.png",
           "proof_posture": "product_only",
-          "sha256": "297d2d65dba5a2b652ce6bf17dd902d6686e071098ed00de2b89c521a37e195a"
+          "sha256": "93395d4705581ec180101def15d1688e48db8cedc2688edc2ee20917109e1d6f"
         }
       },
-      "canonical_artifact_role": "hero",
-      "canonical_node_id": "54:243",
-      "direct_visual_review_note": "Setup, permission, offline, degraded, and recovery states name consequences without color-only or motion-only meaning.",
+      "canonical_artifact_role": "viewport",
+      "canonical_node_id": "327:1603",
+      "direct_visual_review_note": "Setup, permission, offline, degraded, and recovery states name consequences without color-only or motion-only meaning. R1 binds the live candidate viewport and exact render digest; it remains shadow and non-authoritative pending independent review.",
       "visual_authority_id": "VA-P4-A11Y-CLASS-004"
     },
     {
@@ -134,16 +134,16 @@
           "sha256": "1dfa5c6cf480724a4d9a77d56199bb0d73fe728fe60f0232840ff1fe62573221"
         },
         "viewport": {
-          "asset_id": "9bc2cf73-5ac4-4649-a90d-8886ef1ef897",
-          "node_id": "54:313",
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/candidate-masters/va-p4-a11y-class-005-viewport.png",
+          "asset_id": "figma-mcp-r1-va-p4-a11y-class-005",
+          "node_id": "329:1635",
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-005-viewport.png",
           "proof_posture": "product_only",
-          "sha256": "2cc591cd19a2fac9c380010c459d886b64d1745f43fd7f4474dac714916a25dd"
+          "sha256": "92a74a355dc82c9e19742eda6d7e01f12ca89e562a3e20000297b060c1ac6732"
         }
       },
-      "canonical_artifact_role": "hero",
-      "canonical_node_id": "54:312",
-      "direct_visual_review_note": "Detail, edit, Trash, restore, archive, history, and receipt controls preserve 44-point targets and reversible boundaries.",
+      "canonical_artifact_role": "viewport",
+      "canonical_node_id": "329:1635",
+      "direct_visual_review_note": "Detail, edit, Trash, restore, archive, history, and receipt controls preserve 44-point targets and reversible boundaries. R1 binds the live candidate viewport and exact render digest; it remains shadow and non-authoritative pending independent review.",
       "visual_authority_id": "VA-P4-A11Y-CLASS-005"
     },
     {
@@ -163,16 +163,16 @@
           "sha256": "6d584ceb41374a1da3a7225fc2d81ac53903f711c209cf4d1b0719346e39b903"
         },
         "viewport": {
-          "asset_id": "aa207042-c23e-49e4-96bd-6ffc248038d6",
-          "node_id": "54:382",
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/candidate-masters/va-p4-a11y-class-006-viewport.png",
+          "asset_id": "figma-mcp-r1-va-p4-a11y-class-006",
+          "node_id": "327:1648",
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-006-viewport.png",
           "proof_posture": "product_only",
-          "sha256": "193a747043118e74a7d7997e0f4402903688dbc603a1965730aeb9f6c6bfef83"
+          "sha256": "e0f06df3f1b5340c5ed19592490cfc7df682cac25323c01e45ad780b07977a55"
         }
       },
-      "canonical_artifact_role": "hero",
-      "canonical_node_id": "54:381",
-      "direct_visual_review_note": "Interruption, resume, commit, failure, recovery, rollback, and proof preserve focus and semantic continuity.",
+      "canonical_artifact_role": "viewport",
+      "canonical_node_id": "327:1648",
+      "direct_visual_review_note": "Interruption, resume, commit, failure, recovery, rollback, and proof preserve focus and semantic continuity. R1 binds the live candidate viewport and exact render digest; it remains shadow and non-authoritative pending independent review.",
       "visual_authority_id": "VA-P4-A11Y-CLASS-006"
     },
     {
@@ -192,16 +192,16 @@
           "sha256": "2ba8614414586f0a9067ff5b263a6e9b0266bf8344a353b55aa574b44e571be4"
         },
         "viewport": {
-          "asset_id": "611917b4-4cee-4488-a485-80834c278eac",
-          "node_id": "51:10",
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/candidate-masters/va-p4-candidate-001-viewport.png",
+          "asset_id": "figma-mcp-r1-va-p4-candidate-001",
+          "node_id": "266:1424",
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-001-viewport.png",
           "proof_posture": "product_only",
-          "sha256": "5f57ce55c45124457b22fc197e804e1ccee851d4cabd42cd34a25b189261f2bf"
+          "sha256": "3a90bdc58fe6cc586df9312db395a5d4a3df9c1d291635b9c1e381b455bf96d1"
         }
       },
       "canonical_artifact_role": "viewport",
-      "canonical_node_id": "51:10",
-      "direct_visual_review_note": "Exact four-root shell with a dense Today Reality Window; Search and Capture remain toolbar actions and Trust remains contextual.",
+      "canonical_node_id": "266:1424",
+      "direct_visual_review_note": "Exact four-root shell with a dense Today Reality Window; Search and Capture remain toolbar actions and Trust remains contextual. R1 binds the live candidate viewport and exact render digest; it remains shadow and non-authoritative pending independent review.",
       "visual_authority_id": "VA-P4-CANDIDATE-001"
     },
     {
@@ -221,16 +221,16 @@
           "sha256": "7d43331c534547bb7b56d559803912430ca0f57c47a4eb04774207696c635c1b"
         },
         "viewport": {
-          "asset_id": "6811d501-d65e-4e34-bd5c-925478d8f099",
-          "node_id": "51:100",
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/candidate-masters/va-p4-candidate-002-viewport.png",
+          "asset_id": "figma-mcp-r1-va-p4-candidate-002",
+          "node_id": "266:1709",
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-002-viewport.png",
           "proof_posture": "product_only",
-          "sha256": "e492134e0d1be8a39f1611fdee134882bbdb79a87820efbd0093562b9e6247f7"
+          "sha256": "93ac12da90916382b8288b5e28557d4be16939181a27aab927c929bf22c9d114"
         }
       },
       "canonical_artifact_role": "viewport",
-      "canonical_node_id": "51:100",
-      "direct_visual_review_note": "Today recovery preserves agency, closure language, receipt history, and Undo without shame or urgency.",
+      "canonical_node_id": "266:1709",
+      "direct_visual_review_note": "Today recovery preserves agency, closure language, receipt history, and Undo without shame or urgency. R1 binds the live candidate viewport and exact render digest; it remains shadow and non-authoritative pending independent review.",
       "visual_authority_id": "VA-P4-CANDIDATE-002"
     },
     {
@@ -250,16 +250,16 @@
           "sha256": "4a9a08f04e3ece4a5e0478bd580978edb5b68503a39430cc3221b05e838a6fa2"
         },
         "viewport": {
-          "asset_id": "b95c5342-a4c3-4f69-a636-30b85cd4206e",
-          "node_id": "51:195",
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/candidate-masters/va-p4-candidate-003-viewport.png",
+          "asset_id": "figma-mcp-r1-va-p4-candidate-003",
+          "node_id": "272:1424",
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-003-viewport.png",
           "proof_posture": "product_only",
-          "sha256": "33eb8e4e66aedf9d750d4935f8f5aa93e751cc2a26438e4e27e8966373aa5f31"
+          "sha256": "a5a08c2c0e0c7350d00d873601a862ee27e04153e7e8994547ac47de2614f50f"
         }
       },
       "canonical_artifact_role": "viewport",
-      "canonical_node_id": "51:195",
-      "direct_visual_review_note": "Goals remain object-led through Direction Field, Life Areas, Full Goal Path, recovery, closure, completed-total continuity, and history.",
+      "canonical_node_id": "272:1424",
+      "direct_visual_review_note": "Goals remain object-led through Direction Field, Life Areas, Full Goal Path, recovery, closure, completed-total continuity, and history. R1 binds the live candidate viewport and exact render digest; it remains shadow and non-authoritative pending independent review.",
       "visual_authority_id": "VA-P4-CANDIDATE-003"
     },
     {
@@ -279,16 +279,16 @@
           "sha256": "2349d2d1628b24d401c609ba596ec9a25c18fdb95bffa02cf9e86418c6961895"
         },
         "viewport": {
-          "asset_id": "9202eadd-6180-4bd0-9f7b-745026882801",
-          "node_id": "51:292",
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/candidate-masters/va-p4-candidate-004-viewport.png",
+          "asset_id": "figma-mcp-r1-va-p4-candidate-004",
+          "node_id": "275:1424",
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-004-viewport.png",
           "proof_posture": "product_only",
-          "sha256": "46a8ed1fd2a4ea01c266b7928ab351a8a52c5d3e414f11e9af9e68926ffb9033"
+          "sha256": "9736a4cedf0e22a90d7fff8498732f845e11443775ecd8ccc7a5f351377f8b47"
         }
       },
       "canonical_artifact_role": "viewport",
-      "canonical_node_id": "51:292",
-      "direct_visual_review_note": "Time uses native hour-grid geometry for Protected Time, Fixed Commitment, Open Window, and inspectable Reflow Trace.",
+      "canonical_node_id": "275:1424",
+      "direct_visual_review_note": "Time uses native hour-grid geometry for Protected Time, Fixed Commitment, Open Window, and inspectable Reflow Trace. R1 binds the live candidate viewport and exact render digest; it remains shadow and non-authoritative pending independent review.",
       "visual_authority_id": "VA-P4-CANDIDATE-004"
     },
     {
@@ -308,16 +308,16 @@
           "sha256": "3e108ede46eed392cb946e0f727ac6f4d9437923bf7865f9caaedadc644dd4ed"
         },
         "viewport": {
-          "asset_id": "a8bc7c12-115f-4ecb-8715-339f14d78f06",
-          "node_id": "52:57",
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/candidate-masters/va-p4-candidate-005-viewport.png",
+          "asset_id": "figma-mcp-r1-va-p4-candidate-005",
+          "node_id": "278:1449",
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-005-viewport.png",
           "proof_posture": "product_only",
-          "sha256": "1bdd234ded65a9450c98c24fdd0383b3182955dcdf15a98fb969f3fddb6b6230"
+          "sha256": "a792881c96c7f3e12b7cdd5ece054fb9bde25b6bb80fcfe9e2919ed53c8d20a3"
         }
       },
       "canonical_artifact_role": "viewport",
-      "canonical_node_id": "52:57",
-      "direct_visual_review_note": "You grounds local data, optional identity, continuity, notifications, Source Atlas, diagnostics, export, and settings in user control.",
+      "canonical_node_id": "278:1449",
+      "direct_visual_review_note": "You grounds local data, optional identity, continuity, notifications, Source Atlas, diagnostics, export, and settings in user control. R1 binds the live candidate viewport and exact render digest; it remains shadow and non-authoritative pending independent review.",
       "visual_authority_id": "VA-P4-CANDIDATE-005"
     },
     {
@@ -337,16 +337,16 @@
           "sha256": "548353048284bacadfc84104bdfd06e2b777073c67c1884463918dd4527a4f1a"
         },
         "viewport": {
-          "asset_id": "4e37c2f9-2c79-4c6c-9653-e03ea22607d7",
-          "node_id": "52:157",
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/candidate-masters/va-p4-candidate-006-viewport.png",
+          "asset_id": "figma-mcp-r1-va-p4-candidate-006",
+          "node_id": "281:1465",
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-006-viewport.png",
           "proof_posture": "product_only",
-          "sha256": "a130a7c0e9d1c34356f05eae10be4b866beca3561f3b5c9c7a0e976fb40df2c7"
+          "sha256": "8684664e80fc6bbee087e7fa85fe9ade32064f622e757bc903462f38987f198e"
         }
       },
       "canonical_artifact_role": "viewport",
-      "canonical_node_id": "52:157",
-      "direct_visual_review_note": "Capture is a global local-first composer with proposal, placement, privacy, and explicit Save boundary; it has no root dock.",
+      "canonical_node_id": "281:1465",
+      "direct_visual_review_note": "Capture is a global local-first composer with proposal, placement, privacy, and explicit Save boundary; it has no root dock. R1 binds the live candidate viewport and exact render digest; it remains shadow and non-authoritative pending independent review.",
       "visual_authority_id": "VA-P4-CANDIDATE-006"
     },
     {
@@ -366,16 +366,16 @@
           "sha256": "ba706d97edb11e5c17aaf76bd055842961b310429a123ced900cf5c4d16b1076"
         },
         "viewport": {
-          "asset_id": "5fd92e26-af33-454c-b921-a59ab11651e9",
-          "node_id": "52:232",
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/candidate-masters/va-p4-candidate-007-viewport.png",
+          "asset_id": "figma-mcp-r1-va-p4-candidate-007",
+          "node_id": "288:41",
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-007-viewport.png",
           "proof_posture": "product_only",
-          "sha256": "9549281007b77683d1baf1bc0ad2e4ec2da86e39433ea7df311ef9a950570986"
+          "sha256": "365fb42edb5a2b613318a9ee208ae66fb4da150313d642e7b62bcdfb218c0f81"
         }
       },
       "canonical_artifact_role": "viewport",
-      "canonical_node_id": "52:232",
-      "direct_visual_review_note": "Search is a typed privacy-aware global overlay with object-led results, action preview, and no root dock.",
+      "canonical_node_id": "288:41",
+      "direct_visual_review_note": "Search is a typed privacy-aware global overlay with object-led results, action preview, and no root dock. R1 binds the live candidate viewport and exact render digest; it remains shadow and non-authoritative pending independent review.",
       "visual_authority_id": "VA-P4-CANDIDATE-007"
     },
     {
@@ -395,16 +395,16 @@
           "sha256": "6137493807bd296b9010e1c59c5684ad05e3c28294de8c5dafb83813d70555a0"
         },
         "viewport": {
-          "asset_id": "41c3fcc3-afc0-4c04-9d16-c3df475b47ae",
-          "node_id": "52:314",
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/candidate-masters/va-p4-candidate-008-viewport.png",
+          "asset_id": "figma-mcp-r1-va-p4-candidate-008",
+          "node_id": "288:156",
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-008-viewport.png",
           "proof_posture": "product_only",
-          "sha256": "95b1309c495e3e0de2dfd8b714aac96b779bcc2a748e868a3f6cc5b53e23246b"
+          "sha256": "ff94201fe6e379b596a3e16738efcd609e16adf9b204f6be9e899fff1e97538a"
         }
       },
       "canonical_artifact_role": "viewport",
-      "canonical_node_id": "52:314",
-      "direct_visual_review_note": "Trust is object-bound inspection of why, source, privacy, history, receipt, and Undo; it is never persistent root chrome.",
+      "canonical_node_id": "288:156",
+      "direct_visual_review_note": "Trust is object-bound inspection of why, source, privacy, history, receipt, and Undo; it is never persistent root chrome. R1 binds the live candidate viewport and exact render digest; it remains shadow and non-authoritative pending independent review.",
       "visual_authority_id": "VA-P4-CANDIDATE-008"
     },
     {
@@ -424,16 +424,16 @@
           "sha256": "8711b66b4ef26c6aa446f4b08ce65110435e0913a8b7a2283f52b1f972417ad3"
         },
         "viewport": {
-          "asset_id": "8a92dc84-29a5-4884-ba45-bf28e2f60498",
-          "node_id": "53:69",
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/candidate-masters/va-p4-candidate-009-viewport.png",
+          "asset_id": "figma-mcp-r1-va-p4-candidate-009",
+          "node_id": "293:23",
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-009-viewport.png",
           "proof_posture": "product_only",
-          "sha256": "90b0fa111c5b5d26c923a69a9510f6ad63682edc1086598567a31b448d577e94"
+          "sha256": "33b9fe783397b3281ebb8a50ac97112463c6234ef81c086c1e70818981ac0fb0"
         }
       },
       "canonical_artifact_role": "viewport",
-      "canonical_node_id": "53:69",
-      "direct_visual_review_note": "First use establishes local value before optional identity or permissions and preserves denial, interruption, and resume paths.",
+      "canonical_node_id": "293:23",
+      "direct_visual_review_note": "First use establishes local value before optional identity or permissions and preserves denial, interruption, and resume paths. R1 binds the live candidate viewport and exact render digest; it remains shadow and non-authoritative pending independent review.",
       "visual_authority_id": "VA-P4-CANDIDATE-009"
     },
     {
@@ -453,16 +453,16 @@
           "sha256": "b74c2897533d358c40ab69164c67a6e425de7eacc0739c229bada74985690bb2"
         },
         "viewport": {
-          "asset_id": "7c2b59bc-68bd-4850-a2be-e87d67e0d6bf",
-          "node_id": "53:145",
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/candidate-masters/va-p4-candidate-010-viewport.png",
+          "asset_id": "figma-mcp-r1-va-p4-candidate-010",
+          "node_id": "293:141",
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-010-viewport.png",
           "proof_posture": "product_only",
-          "sha256": "9b6b2336d7ff669ba59039db4de264894f48588e08d5fa1e7949ba4990abc36e"
+          "sha256": "14d3f07e500adfbf26fea838271a1cd29b1c17bc600e0f64915fe49060a6de9f"
         }
       },
       "canonical_artifact_role": "viewport",
-      "canonical_node_id": "53:145",
-      "direct_visual_review_note": "Offline is normal; degraded states name exact consequence and preserve deterministic continue, inspect, retry, export, and repair paths.",
+      "canonical_node_id": "293:141",
+      "direct_visual_review_note": "Offline is normal; degraded states name exact consequence and preserve deterministic continue, inspect, retry, export, and repair paths. R1 binds the live candidate viewport and exact render digest; it remains shadow and non-authoritative pending independent review.",
       "visual_authority_id": "VA-P4-CANDIDATE-010"
     },
     {
@@ -482,16 +482,16 @@
           "sha256": "b8310ae9bfcd5286e4df8e6b437152b7126f9680d7d082f2b06fd85f1fd4809d"
         },
         "viewport": {
-          "asset_id": "a206359c-179b-43d7-a118-cea742a74b52",
-          "node_id": "53:228",
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/candidate-masters/va-p4-candidate-011-viewport.png",
+          "asset_id": "figma-mcp-r1-va-p4-candidate-011",
+          "node_id": "293:164",
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-011-viewport.png",
           "proof_posture": "product_only",
-          "sha256": "aceb9dffc68aea1fd8b40f44f77f1be5577f28cd105f636f301b4ea1a1e3b43b"
+          "sha256": "5ba9f9524b1e381833e64ab16a0656aece675d221a13cd0985fe06aa6b42c8af"
         }
       },
       "canonical_artifact_role": "viewport",
-      "canonical_node_id": "53:228",
-      "direct_visual_review_note": "Canonical object detail keeps edit, delete, Trash, restore, archive, recurrence, history, receipts, privacy, and ownership in one boundary.",
+      "canonical_node_id": "293:164",
+      "direct_visual_review_note": "Canonical object detail keeps edit, delete, Trash, restore, archive, recurrence, history, receipts, privacy, and ownership in one boundary. R1 binds the live candidate viewport and exact render digest; it remains shadow and non-authoritative pending independent review.",
       "visual_authority_id": "VA-P4-CANDIDATE-011"
     },
     {
@@ -511,16 +511,16 @@
           "sha256": "467a60bf76ec00be51bbc3a32da386478f2c3d13ecb822ae422b1b47b1878661"
         },
         "viewport": {
-          "asset_id": "45352f9e-1bde-4020-ae93-a3fbdf02a917",
-          "node_id": "53:322",
-          "path": "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/candidate-masters/va-p4-candidate-012-viewport.png",
+          "asset_id": "figma-mcp-r1-va-p4-candidate-012",
+          "node_id": "293:83",
+          "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-012-viewport.png",
           "proof_posture": "product_only",
-          "sha256": "ef3f64eefcc3818bdc44c571b953b7e829a75e3ccb942474166dfffb2157db6a"
+          "sha256": "ca505e0a79a47b26610b48b2418282e59c561f79dd27180eeb818a34ff2ec1c8"
         }
       },
       "canonical_artifact_role": "viewport",
-      "canonical_node_id": "53:322",
-      "direct_visual_review_note": "Principal journeys expose checkpoint, interruption, resume, commit boundary, failure, recovery, receipt, and rollback without guessing.",
+      "canonical_node_id": "293:83",
+      "direct_visual_review_note": "Principal journeys expose checkpoint, interruption, resume, commit boundary, failure, recovery, receipt, and rollback without guessing. R1 binds the live candidate viewport and exact render digest; it remains shadow and non-authoritative pending independent review.",
       "visual_authority_id": "VA-P4-CANDIDATE-012"
     }
   ],
@@ -892,7 +892,8 @@
       "17:6",
       "17:7",
       "17:8",
-      "17:9"
+      "17:9",
+      "215:2"
     ],
     "authority_nodes": [
       {
@@ -916,10 +917,10 @@
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Accessibility & Stress",
-        "node_id": "31:2",
+        "node_id": "296:2",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:10",
-        "page_name": "CANDIDATE — Accessibility Class Variants",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [
           "A11Y-002",
@@ -990,10 +991,10 @@
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Action",
-        "node_id": "24:36",
+        "node_id": "250:3498",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:4",
-        "page_name": "CANDIDATE — Governed Components",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [
           "A11Y-INPUT-EQUIVALENCE-001",
@@ -1021,10 +1022,10 @@
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Object Card",
-        "node_id": "24:158",
+        "node_id": "321:1528",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:4",
-        "page_name": "CANDIDATE — Governed Components",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [
           "DESIGN-001",
@@ -1053,10 +1054,10 @@
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Account, Permission & Diagnostics",
-        "node_id": "25:365",
+        "node_id": "324:1607",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:4",
-        "page_name": "CANDIDATE — Governed Components",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [
           "APP-ACCOUNT-LAUNCH-001",
@@ -1085,10 +1086,10 @@
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Selection & Validation Control",
-        "node_id": "25:533",
+        "node_id": "255:1424",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:4",
-        "page_name": "CANDIDATE — Governed Components",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [
           "A11Y-INPUT-EQUIVALENCE-001",
@@ -1116,10 +1117,10 @@
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Field",
-        "node_id": "24:127",
+        "node_id": "253:1135",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:4",
-        "page_name": "CANDIDATE — Governed Components",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [
           "A11Y-INPUT-EQUIVALENCE-001",
@@ -1147,10 +1148,10 @@
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Root Navigation",
-        "node_id": "24:64",
+        "node_id": "249:546",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:4",
-        "page_name": "CANDIDATE — Governed Components",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [
           "LAW-IA-FOUR-ROOTS-001",
@@ -1178,10 +1179,10 @@
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Object Row",
-        "node_id": "24:234",
+        "node_id": "251:696",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:4",
-        "page_name": "CANDIDATE — Governed Components",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [
           "A11Y-002",
@@ -1209,10 +1210,10 @@
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Presentation Chrome",
-        "node_id": "25:469",
+        "node_id": "250:570",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:4",
-        "page_name": "CANDIDATE — Governed Components",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [
           "SPEC-APP-NAVIGATION-PRESENTATION-001",
@@ -1240,10 +1241,10 @@
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Closure & Recovery Command",
-        "node_id": "25:433",
+        "node_id": "254:1245",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:4",
-        "page_name": "CANDIDATE — Governed Components",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [
           "APP-DEGRADED-RECOVERY-001",
@@ -1272,10 +1273,10 @@
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Root Shell",
-        "node_id": "25:197",
+        "node_id": "330:1670",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:4",
-        "page_name": "CANDIDATE — Governed Components",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [
           "APP-SHELL-STATE-001",
@@ -1304,10 +1305,10 @@
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — State Presentation",
-        "node_id": "24:108",
+        "node_id": "327:1606",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:4",
-        "page_name": "CANDIDATE — Governed Components",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [
           "A11Y-STATUS-ERRORS-001",
@@ -1335,10 +1336,10 @@
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Time Placement",
-        "node_id": "25:301",
+        "node_id": "253:1053",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:4",
-        "page_name": "CANDIDATE — Governed Components",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [
           "SPEC-SURFACE-TIME-DAY-001",
@@ -1366,10 +1367,10 @@
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Trust Inspection Row",
-        "node_id": "25:249",
+        "node_id": "255:1220",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:4",
-        "page_name": "CANDIDATE — Governed Components",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [
           "LAW-IA-TRUST-001",
@@ -1398,10 +1399,10 @@
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Ambitions Component System R1",
-        "node_id": "24:2",
+        "node_id": "239:4",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:4",
-        "page_name": "CANDIDATE — Governed Components",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [
           "A11Y-002",
@@ -1434,10 +1435,10 @@
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Dynamic Type resilience",
-        "node_id": "31:7",
+        "node_id": "296:114",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:10",
-        "page_name": "CANDIDATE — Accessibility Class Variants",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [
           "A11Y-DYNAMIC-TYPE-001",
@@ -1464,10 +1465,10 @@
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Keyboard and focus continuity",
-        "node_id": "31:16",
+        "node_id": "281:1468",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:10",
-        "page_name": "CANDIDATE — Accessibility Class Variants",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [
           "A11Y-INPUT-EQUIVALENCE-001",
@@ -1496,10 +1497,10 @@
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Light and dark behavior",
-        "node_id": "31:42",
+        "node_id": "278:1457",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:10",
-        "page_name": "CANDIDATE — Accessibility Class Variants",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [
           "DESIGN-001",
@@ -1525,10 +1526,10 @@
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Localization and long-copy stress",
-        "node_id": "31:56",
+        "node_id": "296:141",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:10",
-        "page_name": "CANDIDATE — Accessibility Class Variants",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [
           "COPY-HUMANE-TONE-001",
@@ -1565,10 +1566,10 @@
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Motion and haptic specification",
-        "node_id": "31:68",
+        "node_id": "296:218",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:10",
-        "page_name": "CANDIDATE — Accessibility Class Variants",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [
           "SPEC-GLOBAL-MOTION-ACCESSIBILITY-001",
@@ -1595,10 +1596,10 @@
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Non-color semantics",
-        "node_id": "31:83",
+        "node_id": "326:1603",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:10",
-        "page_name": "CANDIDATE — Accessibility Class Variants",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [
           "A11Y-002",
@@ -1624,10 +1625,10 @@
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Reduce Motion",
-        "node_id": "31:95",
+        "node_id": "296:231",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:10",
-        "page_name": "CANDIDATE — Accessibility Class Variants",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [
           "A11Y-REDUCED-EFFECTS-001",
@@ -1656,10 +1657,10 @@
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Reduce Transparency",
-        "node_id": "31:110",
+        "node_id": "278:1465",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:10",
-        "page_name": "CANDIDATE — Accessibility Class Variants",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [
           "A11Y-REDUCED-EFFECTS-001",
@@ -1690,10 +1691,10 @@
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Sensitive exposure channels",
-        "node_id": "31:122",
+        "node_id": "288:124",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:10",
-        "page_name": "CANDIDATE — Accessibility Class Variants",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [
           "PRIVACY-VISIBILITY-001",
@@ -1718,10 +1719,10 @@
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Native SwiftUI plausibility",
-        "node_id": "31:134",
+        "node_id": "321:1512",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:10",
-        "page_name": "CANDIDATE — Accessibility Class Variants",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [
           "DESIGN-001",
@@ -1760,10 +1761,10 @@
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — VoiceOver reading order",
-        "node_id": "31:155",
+        "node_id": "296:142",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:10",
-        "page_name": "CANDIDATE — Accessibility Class Variants",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [
           "A11Y-002",
@@ -7207,15 +7208,15 @@
         "canon_content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
         "canon_revision": 1,
         "canon_source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3",
-        "frame_version": "R2",
+        "frame_version": "R1",
         "implementation_status": "design_authority_candidate_not_source_implementation",
         "kind": "candidate_master",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Root Surface Accessibility Class",
-        "node_id": "54:8",
+        "node_id": "270:1430",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:10",
-        "page_name": "CANDIDATE — Accessibility Class Variants",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "presentation_class": "Root surface",
         "presentation_variants": [
           "Accessibility Size",
@@ -7259,15 +7260,15 @@
         "canon_content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
         "canon_revision": 1,
         "canon_source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3",
-        "frame_version": "R2",
+        "frame_version": "R1",
         "implementation_status": "design_authority_candidate_not_source_implementation",
         "kind": "candidate_master",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Global Overlay Accessibility Class",
-        "node_id": "54:105",
+        "node_id": "296:60",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:10",
-        "page_name": "CANDIDATE — Accessibility Class Variants",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "presentation_class": "Global overlay",
         "presentation_variants": [
           "Accessibility Size",
@@ -7309,15 +7310,15 @@
         "canon_content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
         "canon_revision": 1,
         "canon_source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3",
-        "frame_version": "R2",
+        "frame_version": "R1",
         "implementation_status": "design_authority_candidate_not_source_implementation",
         "kind": "candidate_master",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Contextual Detail Accessibility Class",
-        "node_id": "54:174",
+        "node_id": "296:84",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:10",
-        "page_name": "CANDIDATE — Accessibility Class Variants",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "presentation_class": "Contextual detail",
         "presentation_variants": [
           "Accessibility Size",
@@ -7350,15 +7351,15 @@
         "canon_content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
         "canon_revision": 1,
         "canon_source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3",
-        "frame_version": "R2",
+        "frame_version": "R1",
         "implementation_status": "design_authority_candidate_not_source_implementation",
         "kind": "candidate_master",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — System State Accessibility Class",
-        "node_id": "54:243",
+        "node_id": "327:1603",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:10",
-        "page_name": "CANDIDATE — Accessibility Class Variants",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "presentation_class": "System state",
         "presentation_variants": [
           "Accessibility Size",
@@ -7397,15 +7398,15 @@
         "canon_content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
         "canon_revision": 1,
         "canon_source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3",
-        "frame_version": "R2",
+        "frame_version": "R1",
         "implementation_status": "design_authority_candidate_not_source_implementation",
         "kind": "candidate_master",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Object Lifecycle Accessibility Class",
-        "node_id": "54:312",
+        "node_id": "329:1635",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:10",
-        "page_name": "CANDIDATE — Accessibility Class Variants",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "presentation_class": "Object lifecycle",
         "presentation_variants": [
           "Accessibility Size",
@@ -7438,15 +7439,15 @@
         "canon_content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
         "canon_revision": 1,
         "canon_source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3",
-        "frame_version": "R2",
+        "frame_version": "R1",
         "implementation_status": "design_authority_candidate_not_source_implementation",
         "kind": "candidate_master",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Journey Flow Accessibility Class",
-        "node_id": "54:381",
+        "node_id": "327:1648",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:10",
-        "page_name": "CANDIDATE — Accessibility Class Variants",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "presentation_class": "Journey flow",
         "presentation_variants": [
           "Accessibility Size",
@@ -7486,15 +7487,15 @@
         "canon_content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
         "canon_revision": 1,
         "canon_source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3",
-        "frame_version": "R2",
+        "frame_version": "R1",
         "implementation_status": "design_authority_candidate_not_source_implementation",
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Accessibility Presentation Classes R2",
-        "node_id": "54:2",
+        "node_id": "296:35",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:10",
-        "page_name": "CANDIDATE — Accessibility Class Variants",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [],
         "swiftui_plausibility": "native_swiftui_accessibility_environment_plausible_unverified",
@@ -7516,15 +7517,15 @@
         "canon_content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
         "canon_revision": 1,
         "canon_source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3",
-        "frame_version": "R2",
+        "frame_version": "R1",
         "implementation_status": "design_authority_candidate_not_source_implementation",
         "kind": "candidate_master",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Exact Shell & Today",
-        "node_id": "51:10",
+        "node_id": "266:1424",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:11",
-        "page_name": "CANDIDATE — Live Visual Authority Reconciliation",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "presentation_class": "Root surface",
         "presentation_variants": [
           "Accessibility Size",
@@ -7693,15 +7694,15 @@
         "canon_content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
         "canon_revision": 1,
         "canon_source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3",
-        "frame_version": "R2",
+        "frame_version": "R1",
         "implementation_status": "design_authority_candidate_not_source_implementation",
         "kind": "candidate_master",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Today Recovery & Receipt",
-        "node_id": "51:100",
+        "node_id": "266:1709",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:11",
-        "page_name": "CANDIDATE — Live Visual Authority Reconciliation",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "presentation_class": "Root surface",
         "presentation_variants": [
           "Accessibility Size",
@@ -7831,15 +7832,15 @@
         "canon_content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
         "canon_revision": 1,
         "canon_source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3",
-        "frame_version": "R2",
+        "frame_version": "R1",
         "implementation_status": "design_authority_candidate_not_source_implementation",
         "kind": "candidate_master",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Goals & Object Lifecycle",
-        "node_id": "51:195",
+        "node_id": "272:1424",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:11",
-        "page_name": "CANDIDATE — Live Visual Authority Reconciliation",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "presentation_class": "Root surface",
         "presentation_variants": [
           "Accessibility Size",
@@ -8018,15 +8019,15 @@
         "canon_content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
         "canon_revision": 1,
         "canon_source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3",
-        "frame_version": "R2",
+        "frame_version": "R1",
         "implementation_status": "design_authority_candidate_not_source_implementation",
         "kind": "candidate_master",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Time & Reflow Trace",
-        "node_id": "51:292",
+        "node_id": "275:1424",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:11",
-        "page_name": "CANDIDATE — Live Visual Authority Reconciliation",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "presentation_class": "Root surface",
         "presentation_variants": [
           "Accessibility Size",
@@ -8255,15 +8256,15 @@
         "canon_content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
         "canon_revision": 1,
         "canon_source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3",
-        "frame_version": "R2",
+        "frame_version": "R1",
         "implementation_status": "design_authority_candidate_not_source_implementation",
         "kind": "candidate_master",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — You & Local Control",
-        "node_id": "52:57",
+        "node_id": "278:1449",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:11",
-        "page_name": "CANDIDATE — Live Visual Authority Reconciliation",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "presentation_class": "Root surface",
         "presentation_variants": [
           "Accessibility Size",
@@ -8487,15 +8488,15 @@
         "canon_content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
         "canon_revision": 1,
         "canon_source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3",
-        "frame_version": "R2",
+        "frame_version": "R1",
         "implementation_status": "design_authority_candidate_not_source_implementation",
         "kind": "candidate_master",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Capture Composer",
-        "node_id": "52:157",
+        "node_id": "281:1465",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:11",
-        "page_name": "CANDIDATE — Live Visual Authority Reconciliation",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "presentation_class": "Global overlay",
         "presentation_variants": [
           "Accessibility Size",
@@ -8604,15 +8605,15 @@
         "canon_content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
         "canon_revision": 1,
         "canon_source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3",
-        "frame_version": "R2",
+        "frame_version": "R1",
         "implementation_status": "design_authority_candidate_not_source_implementation",
         "kind": "candidate_master",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Search",
-        "node_id": "52:232",
+        "node_id": "288:41",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:11",
-        "page_name": "CANDIDATE — Live Visual Authority Reconciliation",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "presentation_class": "Global overlay",
         "presentation_variants": [
           "Accessibility Size",
@@ -8695,15 +8696,15 @@
         "canon_content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
         "canon_revision": 1,
         "canon_source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3",
-        "frame_version": "R2",
+        "frame_version": "R1",
         "implementation_status": "design_authority_candidate_not_source_implementation",
         "kind": "candidate_master",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Contextual Trust Inspection",
-        "node_id": "52:314",
+        "node_id": "288:156",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:11",
-        "page_name": "CANDIDATE — Live Visual Authority Reconciliation",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "presentation_class": "Contextual detail",
         "presentation_variants": [
           "Accessibility Size",
@@ -8811,15 +8812,15 @@
         "canon_content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
         "canon_revision": 1,
         "canon_source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3",
-        "frame_version": "R2",
+        "frame_version": "R1",
         "implementation_status": "design_authority_candidate_not_source_implementation",
         "kind": "candidate_master",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Setup, Account & Permissions",
-        "node_id": "53:69",
+        "node_id": "293:23",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:11",
-        "page_name": "CANDIDATE — Live Visual Authority Reconciliation",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "presentation_class": "System state",
         "presentation_variants": [
           "Accessibility Size",
@@ -8973,15 +8974,15 @@
         "canon_content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
         "canon_revision": 1,
         "canon_source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3",
-        "frame_version": "R2",
+        "frame_version": "R1",
         "implementation_status": "design_authority_candidate_not_source_implementation",
         "kind": "candidate_master",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Offline, Degraded & Recovery",
-        "node_id": "53:145",
+        "node_id": "293:141",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:11",
-        "page_name": "CANDIDATE — Live Visual Authority Reconciliation",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "presentation_class": "System state",
         "presentation_variants": [
           "Accessibility Size",
@@ -9051,15 +9052,15 @@
         "canon_content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
         "canon_revision": 1,
         "canon_source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3",
-        "frame_version": "R2",
+        "frame_version": "R1",
         "implementation_status": "design_authority_candidate_not_source_implementation",
         "kind": "candidate_master",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Object Detail, Trash & Restore",
-        "node_id": "53:228",
+        "node_id": "293:164",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:11",
-        "page_name": "CANDIDATE — Live Visual Authority Reconciliation",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "presentation_class": "Object lifecycle",
         "presentation_variants": [
           "Accessibility Size",
@@ -9095,15 +9096,15 @@
         "canon_content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
         "canon_revision": 1,
         "canon_source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3",
-        "frame_version": "R2",
+        "frame_version": "R1",
         "implementation_status": "design_authority_candidate_not_source_implementation",
         "kind": "candidate_master",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Journey Interruption, Resume & Rollback",
-        "node_id": "53:322",
+        "node_id": "293:83",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:11",
-        "page_name": "CANDIDATE — Live Visual Authority Reconciliation",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "presentation_class": "Journey flow",
         "presentation_variants": [
           "Accessibility Size",
@@ -9292,15 +9293,15 @@
         "canon_content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
         "canon_revision": 1,
         "canon_source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3",
-        "frame_version": "R2",
+        "frame_version": "R1",
         "implementation_status": "design_authority_candidate_not_source_implementation",
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Live Replacement Authority Index",
-        "node_id": "56:62",
+        "node_id": "215:2",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:11",
-        "page_name": "CANDIDATE — Live Visual Authority Reconciliation",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [],
         "swiftui_plausibility": "reconciliation_index_only_not_runtime_proof",
@@ -9321,15 +9322,15 @@
         "canon_content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
         "canon_revision": 1,
         "canon_source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3",
-        "frame_version": "R2",
+        "frame_version": "R1",
         "implementation_status": "design_authority_candidate_not_source_implementation",
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Final-grade Ambitions Master Anatomy R2",
-        "node_id": "51:2",
+        "node_id": "330:1667",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:11",
-        "page_name": "CANDIDATE — Live Visual Authority Reconciliation",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [],
         "swiftui_plausibility": "design_anatomy_only_not_task_pack_authority",
@@ -9350,15 +9351,15 @@
         "canon_content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
         "canon_revision": 1,
         "canon_source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3",
-        "frame_version": "R2",
+        "frame_version": "R1",
         "implementation_status": "design_authority_candidate_not_source_implementation",
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Product-only Proof Frames R2",
-        "node_id": "62:62",
+        "node_id": "306:2",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:11",
-        "page_name": "CANDIDATE — Live Visual Authority Reconciliation",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [],
         "swiftui_plausibility": "proof_evidence_only_not_source_implementation",
@@ -9383,10 +9384,10 @@
         "kind": "infrastructure",
         "metadata_provenance": "direct_figma_shared_plugin_data",
         "name": "CANDIDATE — Ambitions Visual Authority Reconciliation R1",
-        "node_id": "37:438",
+        "node_id": "307:57",
         "owner_approval_state": "candidate_pending_independent_review",
-        "page_id": "17:11",
-        "page_name": "CANDIDATE — Live Visual Authority Reconciliation",
+        "page_id": "215:2",
+        "page_name": "CANDIDATE — AV1 · Revision 1",
         "proof_ceiling": "visual_design_authority_candidate_only",
         "requirement_ids": [
           "DESIGN-001",
@@ -9401,21 +9402,23 @@
     ],
     "file_key": "Oik7612LSTUHWsNRFoTlTJ",
     "phase3_root_node_ids": [
+      "215:2",
       "22:2",
-      "24:2",
+      "239:4",
       "28:1251",
       "28:2",
       "28:616",
       "28:954",
+      "296:2",
+      "296:35",
       "29:2",
-      "31:2",
+      "306:2",
+      "307:57",
+      "330:1667",
       "34:438",
-      "49:2",
-      "51:2",
-      "54:2",
-      "62:62"
+      "49:2"
     ],
-    "reconciliation_root_node_id": "37:438"
+    "reconciliation_root_node_id": "307:57"
   },
   "gate_b": {
     "blocked_state_handling": "fail_closed_zero_source_authorization",
@@ -9673,85 +9676,95 @@
     ]
   },
   "repository": {
-    "frozen_base_sha": "4d73857b1c7ec86a0ce4293219c49d56bec18864"
+    "frozen_base_sha": "201f1e1451a295b53fcfcefb6ba4c0acce207d45"
   },
   "rollback": {
     "destructive_cleanup": "not_authorized",
     "figma_policy": "additive candidate pages and proof nodes only; legacy visual bytes unchanged; Gate C destruction withheld",
-    "repository_base_sha": "4d73857b1c7ec86a0ce4293219c49d56bec18864",
-    "visual_candidate_nodes": "51:2, 54:2, 62:62; live index 37:438"
+    "repository_base_sha": "201f1e1451a295b53fcfcefb6ba4c0acce207d45",
+    "visual_candidate_nodes": "330:1667, 296:35, 306:2; live index 215:2"
   },
   "schema_version": 1,
   "screenshots": [
     {
-      "asset_id": "bb108e6f-e20c-4736-b4c3-35861a66a7bd",
-      "binding_id": "accessibility-stress",
-      "node_id": "31:2",
-      "path": "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/accessibility-stress.png",
-      "sha256": "6f1b5c30e4334c2ff80226c899a86a68cb6b2dd9a5ca5b09df1c20fa32fac746"
+      "asset_id": "figma-mcp-r1-va-p4-a11y-class-001",
+      "binding_id": "va-p4-a11y-class-001",
+      "node_id": "270:1430",
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-001-viewport.png",
+      "proof_posture": "product_only_candidate_shadow",
+      "sha256": "311374645649f6bdd851b9e34783599847c94b76d6862d0dbb2d67a473260376"
     },
     {
-      "asset_id": "8afe598f-7451-4115-8eec-e716ad3c4efe",
-      "binding_id": "authority-index",
-      "node_id": "34:438",
-      "path": "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/authority-index.png",
-      "sha256": "66bbc322e950d2cf367600cc2a00321baaaee77decd7cef8d86d27953e7bcbfb"
+      "asset_id": "figma-mcp-r1-va-p4-a11y-class-002",
+      "binding_id": "va-p4-a11y-class-002",
+      "node_id": "296:60",
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-002-viewport.png",
+      "proof_posture": "product_only_candidate_shadow",
+      "sha256": "eee76b72a8feba19539ba8c293fd071a0e256c15fbc40a210e05124b52df61b8"
     },
     {
-      "asset_id": "7849c3f1-4bd1-4258-825d-a0b728185d6d",
-      "binding_id": "components",
-      "node_id": "24:2",
-      "path": "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/components.png",
-      "sha256": "7933b36a4bbc94eed90d19b3cf0761429e916071e94647f3fa7c68fb7f041d29"
+      "asset_id": "figma-mcp-r1-va-p4-a11y-class-003",
+      "binding_id": "va-p4-a11y-class-003",
+      "node_id": "296:84",
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-003-viewport.png",
+      "proof_posture": "product_only_candidate_shadow",
+      "sha256": "f709b45fbf3612e4a6323cdd7210711caa6e21fb03258af39e61ea631c3b33d7"
     },
     {
-      "asset_id": "5da8f536-b03e-4276-a479-a392d3285a66",
-      "binding_id": "foundations",
-      "node_id": "22:2",
-      "path": "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/foundations.png",
-      "sha256": "cd2a8ad04cf472d1334619190b45dd06c2815ea230fad1e7153289fe7b554c74"
+      "asset_id": "figma-mcp-r1-va-p4-a11y-class-004",
+      "binding_id": "va-p4-a11y-class-004",
+      "node_id": "327:1603",
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-004-viewport.png",
+      "proof_posture": "product_only_candidate_shadow",
+      "sha256": "93395d4705581ec180101def15d1688e48db8cedc2688edc2ee20917109e1d6f"
     },
     {
-      "asset_id": "1cd24ee5-7640-4e3e-bedd-3030bad93515",
-      "binding_id": "objects-journeys",
-      "node_id": "29:2",
-      "path": "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/objects-journeys.png",
-      "sha256": "fba2b0fbf3d5768cd2ef03d95f95a29e5b2cbd4cb2808446c939deea0d9e2de2"
+      "asset_id": "figma-mcp-r1-va-p4-a11y-class-005",
+      "binding_id": "va-p4-a11y-class-005",
+      "node_id": "329:1635",
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-005-viewport.png",
+      "proof_posture": "product_only_candidate_shadow",
+      "sha256": "92a74a355dc82c9e19742eda6d7e01f12ca89e562a3e20000297b060c1ac6732"
     },
     {
-      "asset_id": "1c890946-5614-409f-ade4-1e6c096aa4a8",
-      "binding_id": "reconciliation",
-      "node_id": "37:438",
-      "path": "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/reconciliation.png",
-      "sha256": "87443265f9c6dc04d911ea7680b7009350dbaed94b1874e44a52d048b116a1f9"
+      "asset_id": "figma-mcp-r1-va-p4-a11y-class-006",
+      "binding_id": "va-p4-a11y-class-006",
+      "node_id": "327:1648",
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-006-viewport.png",
+      "proof_posture": "product_only_candidate_shadow",
+      "sha256": "e0f06df3f1b5340c5ed19592490cfc7df682cac25323c01e45ad780b07977a55"
     },
     {
-      "asset_id": "64b4c14d-5c62-4d20-87d2-0286ca995f08",
-      "binding_id": "shell-setup-global",
-      "node_id": "28:2",
-      "path": "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/shell-setup-global.png",
-      "sha256": "21c92a2947ba983e1f545a00d04f1e25491e540747f3cadb6d0c74771f6aa991"
+      "asset_id": "figma-mcp-r1-va-p4-candidate-001",
+      "binding_id": "va-p4-candidate-001",
+      "node_id": "266:1424",
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-001-viewport.png",
+      "proof_posture": "product_only_candidate_shadow",
+      "sha256": "3a90bdc58fe6cc586df9312db395a5d4a3df9c1d291635b9c1e381b455bf96d1"
     },
     {
-      "asset_id": "d7577b7c-7b24-4aa2-9460-677dfc9b4de4",
-      "binding_id": "time",
-      "node_id": "28:954",
-      "path": "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/time.png",
-      "sha256": "bc9ab6da6b6ce8b3b6cc0454e974e516974e75d61cd52df80a6c56ef69b47be0"
+      "asset_id": "figma-mcp-r1-va-p4-candidate-002",
+      "binding_id": "va-p4-candidate-002",
+      "node_id": "266:1709",
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-002-viewport.png",
+      "proof_posture": "product_only_candidate_shadow",
+      "sha256": "93ac12da90916382b8288b5e28557d4be16939181a27aab927c929bf22c9d114"
     },
     {
-      "asset_id": "69f2ca16-62de-4016-8129-80134416ae25",
-      "binding_id": "today-goals",
-      "node_id": "28:616",
-      "path": "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/today-goals.png",
-      "sha256": "4785782918ad574ac71e34a2b1a5d542960bbd90bc70992177a289240a2a497f"
+      "asset_id": "figma-mcp-r1-va-p4-candidate-003",
+      "binding_id": "va-p4-candidate-003",
+      "node_id": "272:1424",
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-003-viewport.png",
+      "proof_posture": "product_only_candidate_shadow",
+      "sha256": "a5a08c2c0e0c7350d00d873601a862ee27e04153e7e8994547ac47de2614f50f"
     },
     {
-      "asset_id": "af0fe11d-618a-48d6-95b6-e709e3f9871d",
-      "binding_id": "you-trust-data",
-      "node_id": "28:1251",
-      "path": "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline/screens/phase3-4/you-trust-data.png",
-      "sha256": "b8ba486beabdd055107f040733837dd59d6fc2dc36e76ffafa96106dc0075cf0"
+      "asset_id": "figma-mcp-r1-va-p4-candidate-004",
+      "binding_id": "va-p4-candidate-004",
+      "node_id": "275:1424",
+      "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-004-viewport.png",
+      "proof_posture": "product_only_candidate_shadow",
+      "sha256": "9736a4cedf0e22a90d7fff8498732f845e11443775ecd8ccc7a5f351377f8b47"
     }
   ],
   "state_posture": {
