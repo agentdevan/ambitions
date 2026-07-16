@@ -123,18 +123,24 @@ The independent docket identified one Critical and two Important defects: 47
 approved requirement-local command labels were absent from their exact state
 owners; unresolved target and rollback prose could launder incomplete command
 contracts; and future-gated commands could leak as authorizing task-pack prose.
-The bounded repair added the 47 records without adding a product-law registry,
-made all 239 approved state-bound records declare an explicit activation posture
-and exact gate IDs, introduced typed mutation rollback posture, and made target
-and rollback validation fail closed without rejecting legitimate named routes.
+The bounded repair added the 47 records, made all 239 approved state-bound
+records declare an explicit activation posture and exact gate IDs, introduced
+typed mutation rollback posture, and made target and rollback validation fail
+closed without rejecting legitimate named routes. A separate closed
+machine-control dependency registry records the withheld StoreKit product
+mapping posture without adding a product requirement, concept owner, SKU, plan,
+price, or thirteenth monetization law.
 
-Task-pack projection preserves the applicable law while annotating only the
-owning requirement's exact future-gated command tokens as
-`FUTURE-GATED / NON-AUTHORIZING`. It emits the command ID, owning requirement,
-unmet gate IDs, risk, and forbidden-change entry. `Purchase` is future-gated by
-both `ENTITLEMENT-003` and
-`SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001`; active `Restore Purchases`
-remains separately authorizing. No global label substitution was introduced.
+The prior candidate did introduce requirement-wide lexical label substitution;
+the exact re-review proved that it corrupted live mixed-posture `Done` and
+`Review Continuity Status` laws and even common-noun prose. That transform is
+removed. Task packs now preserve every canonical requirement body byte-for-byte
+and project every selected active and future command in a separate deterministic
+identity-bound authorization section keyed by requirement, state, command,
+label, posture, requirement gates, and dependency posture. `Purchase` remains
+future-gated and non-authorizing behind both `ENTITLEMENT-003`, its command law,
+and the withheld StoreKit registry dependency; active `Restore Purchases`
+remains separately authorizing.
 
 The review RED covered the exact missing-command inventory, adversarial target
 and rollback cases, active/future projection separation, stale visual-node
@@ -605,10 +611,85 @@ The exact review of `3c0957e..bc5e1e82` returned one Critical semantic-contract 
 
 Residual Minor findings: none from the final exact-range review. The current inline global duplicate-ID regression remains Green.
 
+## Exact re-review docket repair candidate
+
+The exact independent re-review of `d3a7e29..d7fe80dc` returned one Critical
+and two Important findings. This bounded repair starts from clean base
+`d7fe80dc8e70a4a8cda08b6acde5139753b8b0d3` and addresses only that docket:
+
+- canonical requirement bodies are no longer lexically rewritten by command
+  labels;
+- every selected active and future command has a deterministic machine-readable
+  authorization record keyed by requirement ID, state ID, command ID, exact
+  label, activation posture, requirement gates, dependency posture, and final
+  activation authorization;
+- the five active and one future `Done` records under
+  `APP-ACCOUNT-COMMAND-CONTRACT-001` remain distinct, as do the one active and
+  three future `Review Continuity Status` records under
+  `SYSTEM-CONTINUITY-COMMAND-CONTRACT-001`;
+- route/focus validation now uses a token-state classifier that rejects every
+  reviewed placeholder, deferred, and unresolved declaration while permitting
+  concrete names such as `the pending route requests list` and
+  `the unknown route diagnostics`;
+- every mutation rollback posture, external-result command, and non-mutating
+  command rejects placeholder, future, or negated recovery while the current
+  433-state / 567-command corpus remains valid;
+- `Purchase` remains future-gated and non-authorizing behind the closed
+  `GATE-STOREKIT-PRODUCT-REGISTRY-001` machine dependency. Owner approval is
+  withheld, exact product mappings are empty, freshness is absent, and
+  activation authorization is false. The registry is not a normative manifest
+  entry, requirement, concept owner, SKU declaration, plan, price, or product
+  law;
+- task-pack requirement closure now embeds `ENTITLEMENT-003`, while dependency
+  IDs remain separate machine-control identities;
+- shadow task packs keep every command's `activation_authorized` value false;
+  active command authorization requires active canon authority, an active
+  command posture, satisfied requirement gates, and authorized machine
+  dependencies;
+- the shadow visual-rebaseline freshness refresh changes exactly the top-level
+  canon content SHA plus the same field on all 147 existing candidate nodes.
+  A normalized non-hash digest regression freezes every frame/node mapping,
+  approval, eligibility, status, classification, Gate B posture, rollback
+  posture, and Figma reference.
+
+Strict TDD observed the expected Python 3.12 RED before implementation: 14
+selected tests produced 65 failures and 5 errors covering every reviewed target
+and rollback bypass, both named-route false positives, missing structured task
+pack authorization, and the absent dependency registry/API. The frozen focused
+sets then passed 7/7 I1 adversarial document/blueprint tests, 82/82 parser/task
+pack/dependency tests, and 55/55 visual-command/state/UX-blueprint tests.
+
+The final frozen-candidate covering regression exited `0`: 271 tests ran in
+192.106 seconds,
+270 passed, and one expected test was skipped. No semantic evaluation was run or
+bound for this repair. Exact deterministic gates then returned:
+
+```text
+exit 0 — ambitions-canon.py audit: 61 documents, 461 requirements/concepts, shadow
+exit 0 — ambitions-canon.py build --check: generated outputs current
+exit 0 — ambitions-canon.py ux-blueprint --check: 47 screens, 433 variants, 461 requirements
+exit 0 — ambitions-canon.py coverage --fail-on-p0-gap: 61 documents, five profiles
+exit 0 — ambitions-canon.py traceability --check: 461 requirements, 20 references, 1,044 honest posture gaps
+exit 0 — ambitions-canon.py external-authority --kind figma --check: 11 references, zero reconciliation entities
+exit 0 — ambitions-truth-path-vocabulary-audit.py: Green
+exit 0 — ambitions-constitution-audit.py: 124 laws, 34 source maps, 34 test maps
+exit 0 — ambitions-remediation-governance-check.py: 51 changed paths, zero production/support Swift changes, Green
+exit 0 — canon-language-drift-scan.sh: Yellow prohibition/backlog evidence only
+exit 0 — git diff --check
+```
+
+Independent exact-range specification-compliance and code-quality re-review is
+still required after this repair commit. Critical and Important findings remain
+non-waivable.
+
 ## Rollback and claim ceiling
 
 Rollback before the proof-only commit: discard the three-file bounded worktree diff and return to `a338d77006c7e7c0399ed8d394194be85e8f404d`. Rollback of only the final proof-only commit after creation: revert `HEAD`. Rollback of the complete multi-commit amendment range: revert the final proof-only `HEAD`, then `a338d77006c7e7c0399ed8d394194be85e8f404d`, then Markdown-lint repair `680aa8a160c6fdd0c11238f427396212e63f2fe0`, then prior proof commit `23f480c4de5cb7d921c0ae5485f4587e704eb2f4`, then `f1a37b4f4ffdefb0788d1149bbf2c61393e71a94`, then prior proof commit `d8278db7eda86221037d97996f1473498dce5b83`, then `15beb50106a641ab3eb02ed10679dd425de69913`, then prior proof commit `d0461881077f8ddc9f01520c31b67b82c01aa247`, then `6e88b61414417cdaeaae9586c606f175de099e48`, then prior proof commit `4cbdfcc9c1ef7018b208255a65f6051ff9ec9d92`, then `f11b414f342346dfd7200381d232045efb34de9a`, then earlier proof commit `534941616edc1dac34d94fc184435b51593e3c79`, then `262327c04261deb43bfe3bd3e7ad1e9380c0c0ab`, then `030cf73f38c6bab9a0096af7706e6a85644026a2`, then `bc5e1e82dbbc506b562fc763e9ea92dba965b88d`, then `1e81d170e997e6895b92cdc080563b28b60ac636` in reverse order, restoring base SHA `3c0957ebb2202f10de53975b2cb74e8f35253808` without rewriting published history.
 
-Allowed claim after final receipt verification and before re-review: deterministic shadow-canon repair candidate only; focused parser/state/schema/UX-blueprint/build, validator, and explicit non-CI semantic-receipt evidence is Green for the exact commands above, and independent re-review remains pending. Four continuity variants remain structured but future-gated.
+Current allowed claim before exact re-review: deterministic shadow-canon repair
+candidate only; the exact parser, dependency registry, task-pack authorization,
+generated projections, UX-blueprint, traceability, and governance checks above
+are Green, and independent re-review remains pending. The visual candidate,
+Gate B, task-pack visual selection, and authority cutover remain blocked.
 
 Forbidden claims: active authority cutover; source UI implemented; Runtime Green; rendered-app Visual Green; Accessibility Green; privacy/legal approval; device readiness; TestFlight readiness; App Store readiness; Release Green.

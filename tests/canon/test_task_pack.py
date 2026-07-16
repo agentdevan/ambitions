@@ -30,6 +30,7 @@ from tools.ambitions_canon.model import (
     StateCommandActivationPosture,
     StateCommandContract,
 )
+from tools.ambitions_canon.manifest import load_documents, load_manifest
 from tools.ambitions_canon.registry import build_registry
 from tools.ambitions_canon.reference_index import parse_reference_index_bytes
 from tools.ambitions_canon.task_pack import (
@@ -517,7 +518,12 @@ class TaskPackTests(unittest.TestCase):
         pack = build_task_pack(active, replace(intake("docs"), scope=("surface.today",)), "repo-sha", ())
         markdown = pack.to_markdown()
 
-        self.assertNotIn("The implementation control is `Purchase`.", markdown)
+        self.assertIn("The implementation control is `Purchase`.", markdown)
+        self.assertIn(
+            "Purchase is authorized only after the separately registered and "
+            "owner-approved product gate passes.",
+            markdown,
+        )
         self.assertIn("FUTURE-GATED / NON-AUTHORIZING", markdown)
         self.assertIn("command_id=`CMD-TODAY-PURCHASE-001`", markdown)
         self.assertIn("label=`Purchase`", markdown)
@@ -538,6 +544,135 @@ class TaskPackTests(unittest.TestCase):
                 for value in pack.forbidden_changes
             )
         )
+        self.assertEqual(
+            pack.command_authorizations,
+            (
+                {
+                    "activation_authorized": False,
+                    "activation_posture": "future_gated",
+                    "command_id": "CMD-TODAY-PURCHASE-001",
+                    "gate_dependencies": [],
+                    "gate_requirement_ids": ["TODAY-002"],
+                    "label": "Purchase",
+                    "requirement_id": gated_requirement.requirement_id,
+                    "state_id": "UX-STATE-VARIANT-TODAY-PURCHASE",
+                },
+            ),
+        )
+
+    def test_live_mixed_labels_preserve_active_authorization_by_command_identity(self):
+        manifest = load_manifest(ROOT)
+        current = build_registry(manifest, load_documents(ROOT, manifest))
+        active = replace(
+            current,
+            manifest=replace(current.manifest, authority_state=AuthorityState.ACTIVE),
+        )
+        cases = (
+            (
+                "account.command-contract",
+                "APP-ACCOUNT-COMMAND-CONTRACT-001",
+                "Done",
+                5,
+                (
+                    "UX-STATE-VARIANT-ACCOUNT-BOUNDARY-CONTINUITY-CONFLICTED",
+                ),
+            ),
+            (
+                "system.continuity.command-contract",
+                "SYSTEM-CONTINUITY-COMMAND-CONTRACT-001",
+                "Review Continuity Status",
+                1,
+                (
+                    "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-BLOCKED",
+                    "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-INELIGIBLE",
+                    "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-SIGNED-OUT",
+                ),
+            ),
+        )
+        requirements = {
+            item.requirement_id: item for item in current.requirements
+        }
+        for scope, requirement_id, label, active_count, future_state_ids in cases:
+            current_intake = TaskIntake.from_json(
+                {
+                    "schema_version": 1,
+                    "issue_id": "VISUAL-R1-COMMAND-AUTHORIZATION",
+                    "task_type": "release",
+                    "scope": [scope],
+                    "changed_files": ["docs/canon/specifications"],
+                    "claim_type": "governance",
+                    "known_issue_ids": [],
+                }
+            )
+            pack = build_task_pack(active, current_intake, "repo-sha", ())
+            records = tuple(
+                record
+                for record in pack.command_authorizations
+                if record["requirement_id"] == requirement_id
+                and record["label"] == label
+            )
+            with self.subTest(scope=scope):
+                self.assertEqual(
+                    sum(
+                        record["activation_posture"] == "active"
+                        and record["activation_authorized"] is True
+                        for record in records
+                    ),
+                    active_count,
+                )
+                self.assertEqual(
+                    sum(
+                        record["activation_posture"] == "future_gated"
+                        and record["activation_authorized"] is False
+                        for record in records
+                    ),
+                    len(future_state_ids),
+                )
+                self.assertEqual(
+                    {
+                        record["state_id"]
+                        for record in records
+                        if record["activation_posture"] == "future_gated"
+                    },
+                    set(future_state_ids),
+                )
+                self.assertEqual(len(records), active_count + len(future_state_ids))
+                self.assertTrue(
+                    all(
+                        set(record)
+                        == {
+                            "activation_authorized",
+                            "activation_posture",
+                            "command_id",
+                            "gate_dependencies",
+                            "gate_requirement_ids",
+                            "label",
+                            "requirement_id",
+                            "state_id",
+                        }
+                        for record in records
+                    )
+                )
+                exact_body = "\n".join(
+                    f"  > {line}"
+                    for line in requirements[requirement_id].body.strip().splitlines()
+                )
+                self.assertIn(exact_body, pack.to_markdown())
+
+            shadow_pack = build_task_pack(current, current_intake, "repo-sha", ())
+            shadow_records = tuple(
+                record
+                for record in shadow_pack.command_authorizations
+                if record["requirement_id"] == requirement_id
+                and record["label"] == label
+            )
+            self.assertTrue(shadow_records)
+            self.assertTrue(
+                all(
+                    record["activation_authorized"] is False
+                    for record in shadow_records
+                )
+            )
 
     def test_profile_section_bodies_are_rendered_for_selected_semantic_documents(self):
         registry = sample_registry()
@@ -832,6 +967,7 @@ class TaskPackTests(unittest.TestCase):
             "source_owners",
             "implementation_posture",
             "known_risks",
+            "command_authorizations",
             "visual_authority",
             "required_tests",
             "required_validation",

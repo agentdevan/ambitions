@@ -1056,10 +1056,12 @@ class VisualR1CommandContractTests(unittest.TestCase):
             path
             for path in (ROOT / "docs/canon").rglob("*")
             if path.is_file()
-            and "storekit" in path.name.casefold()
-            and "product" in path.name.casefold()
+            and path.name == "command-gate-dependencies.json"
         )
-        self.assertEqual(product_registries, [])
+        self.assertEqual(
+            product_registries,
+            [ROOT / "docs/canon/registries/command-gate-dependencies.json"],
+        )
         entitlement_contracts = [
             contract
             for state_id, contract in self.contracts.items()
@@ -1074,6 +1076,10 @@ class VisualR1CommandContractTests(unittest.TestCase):
         self.assertEqual(len(purchase), 1)
         self.assertEqual(purchase[0].activation_posture.value, "future_gated")
         self.assertIn("ENTITLEMENT-003", purchase[0].gate_requirement_ids)
+        self.assertEqual(
+            purchase[0].gate_dependency_ids,
+            ("GATE-STOREKIT-PRODUCT-REGISTRY-001",),
+        )
 
         entitlement_states = {
             variant["blueprint_id"]: variant
@@ -1220,13 +1226,20 @@ class VisualR1CommandContractTests(unittest.TestCase):
             ("destination", "TBD"),
             ("destination", "pending route"),
             ("destination", "destination to be decided"),
+            ("destination", "destination is TBD"),
+            ("destination", "route remains TBD"),
+            ("destination", "target pending"),
+            ("destination", "the route will be decided later"),
+            ("destination", "the destination will be specified later"),
             ("destination", "unspecified"),
             ("destination", "unknown"),
             ("success_focus", "unresolved focus"),
             ("success_focus", "pending focus target"),
             ("success_focus", "focus to be decided"),
+            ("success_focus", "focus is TODO"),
             ("success_focus", "unspecified"),
             ("failure_focus", "unresolved focus"),
+            ("failure_focus", "failure target is TBD"),
             ("failure_focus", "unknown"),
         ):
             with self.subTest(field=field):
@@ -1245,43 +1258,76 @@ class VisualR1CommandContractTests(unittest.TestCase):
                         [command],
                     )
 
+    def test_concrete_named_routes_with_status_words_remain_valid(self):
+        contract = self.contracts[
+            "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-CONSUMED"
+        ]
+        for destination in (
+            "the pending route requests list",
+            "the unknown route diagnostics",
+        ):
+            with self.subTest(destination=destination):
+                command = replace(contract.commands[0], destination=destination)
+                _validate_state_command_semantics(
+                    Path("fixture.md"),
+                    contract.state_id,
+                    contract.durable_effect,
+                    contract.recovery_rollback,
+                    contract.offline_behavior,
+                    contract.accessibility_focus,
+                    [command],
+                )
+
     def test_full_document_and_blueprint_reject_placeholder_targets(self):
         from tools.ambitions_canon import ux_blueprint
 
         path = ROOT / "docs/canon/specifications/app/deep-linking.md"
         source = path.read_text(encoding="utf-8")
-        placeholder = "destination to be decided"
-        mutated_source = re.sub(
-            r'^destination = "[^"]+"$',
-            f'destination = "{placeholder}"',
-            source,
-            count=1,
-            flags=re.MULTILINE,
-        )
-        with self.assertRaisesRegex(CanonError, "unresolved command route or focus"):
-            parse_canon_document(path, mutated_source)
-
         contract = self.contracts[
             "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-CONSUMED"
         ]
-        malformed = replace(
-            contract,
-            commands=(replace(contract.commands[0], destination=placeholder),),
+        placeholders = (
+            "destination is TBD",
+            "route remains TBD",
+            "focus is TODO",
+            "target pending",
+            "the route will be decided later",
+            "the destination will be specified later",
+            "failure target is TBD",
         )
-        contracts = tuple(
-            malformed if item.state_id == malformed.state_id else item
-            for item in self.contracts.values()
-        )
-        with patch.object(
-            ux_blueprint,
-            "load_state_command_contracts",
-            return_value=contracts,
-        ):
-            with self.assertRaisesRegex(
-                (CanonError, UXBlueprintError),
-                "unresolved command route or focus",
-            ):
-                validate_ux_blueprint(ROOT, copy.deepcopy(self.blueprint))
+        for placeholder in placeholders:
+            with self.subTest(placeholder=placeholder, layer="document"):
+                mutated_source = re.sub(
+                    r'^destination = "[^"]+"$',
+                    f'destination = "{placeholder}"',
+                    source,
+                    count=1,
+                    flags=re.MULTILINE,
+                )
+                with self.assertRaisesRegex(
+                    CanonError, "unresolved command route or focus"
+                ):
+                    parse_canon_document(path, mutated_source)
+
+            malformed = replace(
+                contract,
+                commands=(replace(contract.commands[0], destination=placeholder),),
+            )
+            contracts = tuple(
+                malformed if item.state_id == malformed.state_id else item
+                for item in self.contracts.values()
+            )
+            with self.subTest(placeholder=placeholder, layer="blueprint"):
+                with patch.object(
+                    ux_blueprint,
+                    "load_state_command_contracts",
+                    return_value=contracts,
+                ):
+                    with self.assertRaisesRegex(
+                        (CanonError, UXBlueprintError),
+                        "unresolved command route or focus",
+                    ):
+                        validate_ux_blueprint(ROOT, copy.deepcopy(self.blueprint))
 
     def test_mutation_without_actionable_rollback_is_rejected(self):
         contract = self.contracts["UX-STATE-VARIANT-TIME-DETAIL-EDITING"]
@@ -1333,6 +1379,217 @@ class VisualR1CommandContractTests(unittest.TestCase):
                         contract.accessibility_focus,
                         commands,
                     )
+
+    def test_every_rollback_posture_rejects_deferred_or_negated_execution(self):
+        cases = (
+            (
+                "UX-STATE-VARIANT-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED",
+                "CMD-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-001",
+                (
+                    "A typed inverse command will be specified later.",
+                    "A typed inverse command is TBD.",
+                    "A typed inverse command cannot safely restore the prior state.",
+                    "A typed inverse command is listed for completeness but cannot be executed.",
+                    "A typed inverse command may be available in a future release.",
+                ),
+            ),
+            (
+                "UX-STATE-VARIANT-CAPTURE-COMPOSER-DISCARD-REVIEW",
+                "CMD-CAPTURE-COMPOSER-DISCARD-REVIEW-001",
+                (
+                    "The checkpoint restore will be specified later.",
+                    "The checkpoint restore cannot be executed.",
+                ),
+            ),
+            (
+                "UX-STATE-VARIANT-ACCOUNT-STATUS-SIGNED-IN",
+                "CMD-ACCOUNT-STATUS-SIGNED-IN-001",
+                (
+                    "The owner recovery handoff is TBD.",
+                    "The owner recovery handoff may be available in a future release.",
+                ),
+            ),
+            (
+                "UX-STATE-VARIANT-TIME-DETAIL-VIEWING",
+                "CMD-TIME-DETAIL-VIEWING-003",
+                (
+                    "The irreversible scope, confirmation, and Receipt will be specified later.",
+                    "The irreversible scope is confirmed but no Receipt can be produced.",
+                ),
+            ),
+        )
+        for state_id, command_id, invalid_values in cases:
+            contract = self.contracts[state_id]
+            original = next(
+                command for command in contract.commands if command.command_id == command_id
+            )
+            _validate_state_command_semantics(
+                Path("fixture.md"),
+                contract.state_id,
+                contract.durable_effect,
+                contract.recovery_rollback,
+                contract.offline_behavior,
+                contract.accessibility_focus,
+                list(contract.commands),
+            )
+            for rollback in invalid_values:
+                commands = [
+                    replace(command, rollback_undo=rollback)
+                    if command.command_id == original.command_id
+                    else command
+                    for command in contract.commands
+                ]
+                with self.subTest(
+                    posture=original.rollback_posture.value,
+                    rollback=rollback,
+                ):
+                    with self.assertRaisesRegex(
+                        CanonError,
+                        "mutation command omits actionable rollback",
+                    ):
+                        _validate_state_command_semantics(
+                            Path("fixture.md"),
+                            contract.state_id,
+                            contract.durable_effect,
+                            contract.recovery_rollback,
+                            contract.offline_behavior,
+                            contract.accessibility_focus,
+                            commands,
+                        )
+
+    def test_external_and_non_mutating_commands_reject_unresolved_recovery(self):
+        cases = (
+            (
+                "UX-STATE-VARIANT-ACCOUNT-SIGN-IN-CANCELLED",
+                "CMD-ACCOUNT-SIGN-IN-CANCELLED-001",
+            ),
+            (
+                "UX-STATE-VARIANT-ACCOUNT-BOUNDARY-ACCOUNT-IDENTITY-ONLY",
+                "CMD-ACCOUNT-BOUNDARY-ACCOUNT-IDENTITY-ONLY-001",
+            ),
+        )
+        invalid_values = (
+            "TBD",
+            "No recovery is specified.",
+            "Cancellation behavior will be specified later.",
+            "Recovery may be available in a future release.",
+        )
+        for state_id, command_id in cases:
+            contract = self.contracts[state_id]
+            original = next(
+                command for command in contract.commands if command.command_id == command_id
+            )
+            for rollback in invalid_values:
+                commands = [
+                    replace(command, rollback_undo=rollback)
+                    if command.command_id == original.command_id
+                    else command
+                    for command in contract.commands
+                ]
+                with self.subTest(
+                    commit_boundary=original.commit_boundary,
+                    rollback=rollback,
+                ):
+                    with self.assertRaisesRegex(
+                        CanonError,
+                        "command recovery is unresolved",
+                    ):
+                        _validate_state_command_semantics(
+                            Path("fixture.md"),
+                            contract.state_id,
+                            contract.durable_effect,
+                            contract.recovery_rollback,
+                            contract.offline_behavior,
+                            contract.accessibility_focus,
+                            commands,
+                        )
+
+    def test_document_and_blueprint_reject_invalid_recovery_for_every_posture(self):
+        from tools.ambitions_canon import ux_blueprint
+
+        cases = (
+            (
+                "global/capture.md",
+                "UX-STATE-VARIANT-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED",
+                "CMD-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-001",
+                "A typed inverse command will be specified later.",
+                "mutation command omits actionable rollback",
+            ),
+            (
+                "global/capture.md",
+                "UX-STATE-VARIANT-CAPTURE-COMPOSER-DISCARD-REVIEW",
+                "CMD-CAPTURE-COMPOSER-DISCARD-REVIEW-001",
+                "The checkpoint restore cannot be executed.",
+                "mutation command omits actionable rollback",
+            ),
+            (
+                "app/launch-and-setup.md",
+                "UX-STATE-VARIANT-ACCOUNT-STATUS-SIGNED-IN",
+                "CMD-ACCOUNT-STATUS-SIGNED-IN-001",
+                "The owner recovery handoff may be available in a future release.",
+                "mutation command omits actionable rollback",
+            ),
+            (
+                "surfaces/time.md",
+                "UX-STATE-VARIANT-TIME-DETAIL-VIEWING",
+                "CMD-TIME-DETAIL-VIEWING-003",
+                "The irreversible scope, confirmation, and Receipt will be specified later.",
+                "mutation command omits actionable rollback",
+            ),
+            (
+                "app/launch-and-setup.md",
+                "UX-STATE-VARIANT-ACCOUNT-SIGN-IN-CANCELLED",
+                "CMD-ACCOUNT-SIGN-IN-CANCELLED-001",
+                "No recovery is specified.",
+                "command recovery is unresolved",
+            ),
+            (
+                "app/launch-and-setup.md",
+                "UX-STATE-VARIANT-ACCOUNT-BOUNDARY-ACCOUNT-IDENTITY-ONLY",
+                "CMD-ACCOUNT-BOUNDARY-ACCOUNT-IDENTITY-ONLY-001",
+                "TBD",
+                "command recovery is unresolved",
+            ),
+        )
+        for relative, state_id, command_id, invalid, expected in cases:
+            path = ROOT / "docs/canon/specifications" / relative
+            source = path.read_text(encoding="utf-8")
+            contract = self.contracts[state_id]
+            command = next(
+                item for item in contract.commands if item.command_id == command_id
+            )
+            original = f'rollback_undo = "{command.rollback_undo}"'
+            replacement = f'rollback_undo = "{invalid}"'
+            self.assertIn(original, source)
+            mutated_source = source.replace(original, replacement, 1)
+            with self.subTest(state_id=state_id, layer="document"):
+                with self.assertRaisesRegex(CanonError, expected):
+                    parse_canon_document(path, mutated_source)
+
+            malformed = replace(
+                contract,
+                commands=tuple(
+                    replace(item, rollback_undo=invalid)
+                    if item.command_id == command_id
+                    else item
+                    for item in contract.commands
+                ),
+            )
+            contracts = tuple(
+                malformed if item.state_id == state_id else item
+                for item in self.contracts.values()
+            )
+            with self.subTest(state_id=state_id, layer="blueprint"):
+                with patch.object(
+                    ux_blueprint,
+                    "load_state_command_contracts",
+                    return_value=contracts,
+                ):
+                    with self.assertRaisesRegex(
+                        (CanonError, UXBlueprintError),
+                        expected,
+                    ):
+                        validate_ux_blueprint(ROOT, copy.deepcopy(self.blueprint))
 
     def test_stale_task_pack_inputs_fail_closed(self):
         current = {

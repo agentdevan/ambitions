@@ -35,7 +35,7 @@ class VisualAuthorityRebaselineTests(unittest.TestCase):
         )
         self.assertEqual(
             snapshot.canon_content_sha,
-            "865157d4d1a8ec074d7b4d233e2e1c021b2eea1aeda6ab9392d63481c6d7d611",
+            "e51a71da8ef572eeca5b517faaec76949069ff6f200e9bfd421afbb70dd0f5b4",
         )
         self.assertEqual(snapshot.figma_file_key, "Oik7612LSTUHWsNRFoTlTJ")
         self.assertEqual(snapshot.authority_node_count, 147)
@@ -46,6 +46,32 @@ class VisualAuthorityRebaselineTests(unittest.TestCase):
         self.assertEqual(len(snapshot.gap_blocked_state_ids), 0)
         self.assertEqual(snapshot.legacy_node_count, 15)
         self.assertEqual(snapshot.destructive_actions, ())
+
+    def test_canon_freshness_refresh_changes_only_the_148_sha_bindings(self) -> None:
+        payload = json.loads(MANIFEST.read_text(encoding="utf-8"))
+        expected_sha = payload["canon"]["content_sha"]
+        nodes = payload["figma"]["authority_nodes"]
+
+        self.assertEqual(len(nodes), 147)
+        self.assertTrue(
+            all(node["canon_content_sha"] == expected_sha for node in nodes)
+        )
+        normalized = json.loads(json.dumps(payload))
+        normalized["canon"]["content_sha"] = "<CANON_CONTENT_SHA>"
+        for node in normalized["figma"]["authority_nodes"]:
+            node["canon_content_sha"] = "<CANON_CONTENT_SHA>"
+        non_hash_digest = hashlib.sha256(
+            json.dumps(
+                normalized,
+                ensure_ascii=False,
+                sort_keys=True,
+                separators=(",", ":"),
+            ).encode("utf-8")
+        ).hexdigest()
+        self.assertEqual(
+            non_hash_digest,
+            "0aa09682448585165b7d659f3351d62dae49ffe19ae867d42a80b2a7367d1a24",
+        )
 
     def test_hand_record_matches_machine_canon_and_coverage_digest(self) -> None:
         payload = json.loads(MANIFEST.read_text(encoding="utf-8"))

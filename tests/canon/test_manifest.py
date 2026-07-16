@@ -16,6 +16,7 @@ SCHEMAS = (
     "specification.schema.json",
     "requirement.schema.json",
     "authority-reference.schema.json",
+    "command-gate-dependency.schema.json",
     "task-pack.schema.json",
 )
 GENERATED_FILES = (

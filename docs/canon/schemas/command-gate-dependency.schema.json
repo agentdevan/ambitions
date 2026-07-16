@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ambitions.local/canon/schemas/command-gate-dependency.schema.json",
+  "title": "Ambitions Command-Gate Dependency Registry",
+  "description": "Offline machine-control dependencies that can block command activation without defining product law.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "registry_id",
+    "registry_revision",
+    "canon_revision",
+    "dependencies"
+  ],
+  "properties": {
+    "schema_version": {"type": "integer", "const": 1},
+    "registry_id": {"type": "string", "const": "COMMAND-GATE-DEPENDENCY-REGISTRY-001"},
+    "registry_revision": {"type": "integer", "minimum": 1},
+    "canon_revision": {"type": "integer", "minimum": 0},
+    "dependencies": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "dependency_id",
+          "dependency_revision",
+          "dependency_kind",
+          "owner_concept",
+          "requirement_id",
+          "state_id",
+          "command_id",
+          "owner_approval_state",
+          "owner_approval_evidence",
+          "exact_product_mappings",
+          "mapping_sha256",
+          "freshness",
+          "dependency_posture",
+          "activation_authorization",
+          "dependency_sha256"
+        ],
+        "properties": {
+          "dependency_id": {"type": "string", "pattern": "^GATE-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+          "dependency_revision": {"type": "integer", "minimum": 1},
+          "dependency_kind": {"type": "string", "const": "storekit_product_registry"},
+          "owner_concept": {"type": "string", "const": "surface.you.entitlement-command-contract"},
+          "requirement_id": {"type": "string", "const": "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"},
+          "state_id": {"type": "string", "const": "UX-STATE-VARIANT-YOU-ENTITLEMENT-EXPIRED"},
+          "command_id": {"type": "string", "const": "CMD-YOU-ENTITLEMENT-EXPIRED-002"},
+          "owner_approval_state": {"type": "string", "enum": ["approved", "withheld"]},
+          "owner_approval_evidence": {"type": ["string", "null"]},
+          "exact_product_mappings": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+          "mapping_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+          "freshness": {"type": "string", "enum": ["absent", "current", "stale"]},
+          "dependency_posture": {"type": "string", "enum": ["blocked", "ready"]},
+          "activation_authorization": {"type": "boolean"},
+          "dependency_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    }
+  }
+}

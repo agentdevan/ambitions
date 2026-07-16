@@ -131,11 +131,13 @@ STATE_COMMAND_REQUIRED_FIELDS = frozenset(
 )
 STATE_COMMAND_FIELDS = STATE_COMMAND_REQUIRED_FIELDS | {
     "activation_posture",
+    "gate_dependency_ids",
     "gate_requirement_ids",
     "rollback_posture",
 }
 STATE_ID = re.compile(r"^UX-STATE-VARIANT-[A-Z0-9]+(?:-[A-Z0-9]+)*$")
 COMMAND_ID = re.compile(r"^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$")
+GATE_DEPENDENCY_ID = re.compile(r"^GATE-[A-Z0-9]+(?:-[A-Z0-9]+)*$")
 NO_DISCLOSURE_STATE_ID = "UX-STATE-VARIANT-TRUST-INLINE-NO-DISCLOSURE"
 GENERIC_STATE_COMMAND_PHRASES = (
     "command review for ux-state-variant-",
@@ -146,21 +148,6 @@ UNRESOLVED_COMMAND_MARKER = re.compile(
     r"^\s*(?:tbd|todo|unknown|unspecified|unresolved|undecided)\s*$",
     re.IGNORECASE,
 )
-UNRESOLVED_COMMAND_TARGET_PREFIX = re.compile(
-    r"^\s*(?:the\s+)?(?:"
-    r"(?:pending|unknown|unspecified|unresolved|undecided|forthcoming)\s+"
-    r"(?:destination|route|focus|target)\b"
-    r"|(?:destination|route|focus|target)\b\s+(?:"
-    r"(?:is|remains|will\s+be)\s+"
-    r"(?:pending|unknown|unspecified|unresolved|undecided|forthcoming)\b"
-    r"|(?:is|has|remains)?\s*not(?:\s+yet)?\s+(?:been\s+)?"
-    r"(?:known|decided|defined|determined|specified|available)\b"
-    r"|to\s+be\s+(?:decided|defined|determined|specified)\b"
-    r"|forthcoming\b"
-    r")"
-    r")",
-    re.IGNORECASE,
-)
 ROLLBACK_PLACEHOLDER = re.compile(
     r"^\s*(?:tbd|todo|unknown|unspecified|unresolved|undecided)\s*$",
     re.IGNORECASE,
@@ -168,12 +155,195 @@ ROLLBACK_PLACEHOLDER = re.compile(
 
 
 def _is_unresolved_command_target(value: str) -> bool:
-    """Reject placeholder routes/focuses without matching legitimate state titles."""
+    """Classify unresolved route declarations without matching concrete names."""
 
     normalized = " ".join(value.split())
-    return bool(
-        UNRESOLVED_COMMAND_MARKER.fullmatch(normalized)
-        or UNRESOLVED_COMMAND_TARGET_PREFIX.match(normalized)
+    if UNRESOLVED_COMMAND_MARKER.fullmatch(normalized):
+        return True
+    tokens = re.findall(r"[a-z0-9]+", normalized.casefold())
+    markers = {
+        "tbd",
+        "todo",
+        "pending",
+        "unknown",
+        "unspecified",
+        "unresolved",
+        "undecided",
+        "forthcoming",
+    }
+    subjects = {"destination", "route", "focus", "target"}
+    linkers = {
+        "is",
+        "are",
+        "remains",
+        "remain",
+        "has",
+        "have",
+        "will",
+        "shall",
+        "may",
+        "might",
+        "could",
+        "to",
+        "be",
+        "been",
+        "not",
+        "yet",
+        "still",
+    }
+    resolutions = {
+        "decide",
+        "decided",
+        "define",
+        "defined",
+        "determine",
+        "determined",
+        "specify",
+        "specified",
+        "resolve",
+        "resolved",
+        "choose",
+        "chosen",
+        "select",
+        "selected",
+        "available",
+        "known",
+    }
+    future_or_negative = {"later", "future", "eventually", "forthcoming", "not"}
+    for index, token in enumerate(tokens):
+        if token not in subjects:
+            continue
+        before = tokens[:index]
+        after = tokens[index + 1 :]
+        if after and after[0] in markers:
+            if len(after) == 1 or set(after[1:]) <= subjects | markers:
+                return True
+        if before and before[-1] in markers:
+            if not after or set(after) <= subjects | markers:
+                return True
+        chain_index = 0
+        while chain_index < len(after) and after[chain_index] in linkers:
+            chain_index += 1
+        tail = after[chain_index:]
+        if not tail:
+            continue
+        if tail[0] in markers and (
+            len(tail) == 1 or set(tail[1:]) <= subjects | markers
+        ):
+            return True
+        if tail[0] in resolutions and (
+            any(item in future_or_negative for item in after)
+            or any(item in {"will", "shall", "may", "might", "could", "to"} for item in after)
+        ):
+            return True
+    return False
+
+
+def _rollback_tokens(text: str) -> tuple[str, ...]:
+    return tuple(re.findall(r"[a-z0-9]+", text.casefold()))
+
+
+def _rollback_is_deferred_or_negated(command: StateCommand) -> bool:
+    """Reject deferred, placeholder, and non-executable recovery assertions."""
+
+    text = " ".join(command.rollback_undo.split())
+    if ROLLBACK_PLACEHOLDER.fullmatch(text):
+        return True
+    scrubbed = re.sub(
+        r"\bNo(?:\s+(?:canonical|Search))?\s+Undo\s+is\s+required\b[;,.]?",
+        " ",
+        text,
+        flags=re.IGNORECASE,
+    )
+    tokens = _rollback_tokens(scrubbed)
+    markers = {"tbd", "todo", "unspecified", "unresolved", "undecided", "forthcoming"}
+    if any(token in markers for token in tokens):
+        return True
+    joined = " ".join(tokens)
+    if "future release" in joined:
+        return True
+    deferred_tail = {"later", "future", "eventually", "forthcoming"}
+    resolution_terms = {
+        "available",
+        "defined",
+        "provided",
+        "specified",
+        "supported",
+        "executed",
+        "execute",
+        "produced",
+    }
+    if any(token in deferred_tail for token in tokens) and any(
+        token in resolution_terms for token in tokens
+    ):
+        return True
+    if any(token in {"listed", "named", "mentioned"} for token in tokens) and "completeness" in tokens:
+        return True
+
+    posture_actions = {
+        StateCommandRollbackPosture.INVERSE_COMMAND: {
+            "inverse", "undo", "restore", "restoring", "reversing", "reopens",
+            "reopening", "re", "enabling", "execute", "executed", "available",
+            "specified", "defined",
+        },
+        StateCommandRollbackPosture.CHECKPOINT_RESTORE: {
+            "checkpoint", "restore", "restores", "recover", "recovers", "rollback",
+            "journal", "execute", "executed", "available", "specified", "defined",
+        },
+        StateCommandRollbackPosture.OWNER_RECOVERY_HANDOFF: {
+            "recovery", "handoff", "correction", "quarantine", "execute", "executed",
+            "available", "specified", "defined",
+        },
+        StateCommandRollbackPosture.CONFIRMED_IRREVERSIBLE: {
+            "confirmation", "confirmed", "confirm", "receipt", "scope", "execute",
+            "executed", "available", "specified", "defined", "produced",
+        },
+        None: {
+            "recovery", "undo", "cancellation", "dismissal", "failure", "return",
+            "restore", "preserve", "retain", "discard", "resume", "execute",
+            "executed", "available", "specified", "defined",
+        },
+    }
+    actions = posture_actions[command.rollback_posture]
+    negators = {
+        "no", "not", "never", "cannot", "without", "unavailable", "impossible",
+        "missing", "absent", "undefined", "unspecified", "unsupported",
+    }
+    for index, token in enumerate(tokens):
+        if token in negators and any(
+            candidate in actions for candidate in tokens[index + 1 : index + 6]
+        ):
+            return True
+    return False
+
+
+def _has_actionable_nonmutation_recovery(command: StateCommand) -> bool:
+    text = " ".join(command.rollback_undo.split()).casefold()
+    if _rollback_is_deferred_or_negated(command):
+        return False
+    if re.search(
+        r"\bno(?:\s+(?:canonical|search))?\s+undo\s+is\s+required\b",
+        text,
+    ):
+        return True
+    triggers = ("cancel", "cancelling", "cancellation", "dismissal", "failure")
+    outcomes = ("return", "restore", "preserve", "retain", "discard", "resume")
+    return any(item in text for item in triggers) and any(
+        item in text for item in outcomes
+    )
+
+
+def _has_actionable_external_recovery(command: StateCommand) -> bool:
+    text = " ".join(command.rollback_undo.split()).casefold()
+    if _rollback_is_deferred_or_negated(command):
+        return False
+    triggers = (
+        "cancel", "cancelling", "cancellation", "failure", "rejection", "denial",
+        "interruption", "timeout",
+    )
+    outcomes = ("preserve", "unchanged", "return", "remove", "restore", "retain", "leave")
+    return any(item in text for item in triggers) and any(
+        item in text for item in outcomes
     )
 
 
@@ -195,7 +365,7 @@ def _has_actionable_mutation_rollback(command: StateCommand) -> bool:
 
     posture = command.rollback_posture
     text = " ".join(command.rollback_undo.split()).casefold()
-    if posture is None or ROLLBACK_PLACEHOLDER.fullmatch(text):
+    if posture is None or _rollback_is_deferred_or_negated(command):
         return False
 
     if posture is StateCommandRollbackPosture.INVERSE_COMMAND:
@@ -648,6 +818,19 @@ def _state_command_contracts(
                 raise _state_command_error(
                     path, f"future-gated state cannot expose active command: {command_id}"
                 )
+            command_gate_dependency_ids = _state_string_array(
+                command_raw.get("gate_dependency_ids", []),
+                path,
+                "commands.gate_dependency_ids",
+                allow_empty=True,
+            )
+            if any(
+                GATE_DEPENDENCY_ID.fullmatch(identifier) is None
+                for identifier in command_gate_dependency_ids
+            ):
+                raise _state_command_error(
+                    path, f"invalid command gate dependency ID: {command_id}"
+                )
             rollback_posture_raw = command_raw.get("rollback_posture")
             if rollback_posture_raw is None:
                 rollback_posture = None
@@ -715,6 +898,7 @@ def _state_command_contracts(
                     activation_posture=command_activation_posture,
                     gate_requirement_ids=command_gate_requirement_ids,
                     rollback_posture=rollback_posture,
+                    gate_dependency_ids=command_gate_dependency_ids,
                 )
             )
         if tuple(item.command_id for item in commands) != tuple(
@@ -883,6 +1067,11 @@ def _validate_state_command_semantics(
                     path,
                     f"non-mutating command omits no-mutation/Receipt law: {command.command_id}",
                 )
+            if not _has_actionable_nonmutation_recovery(command):
+                raise _state_command_error(
+                    path,
+                    f"command recovery is unresolved: {command.command_id}",
+                )
         elif command.commit_boundary.startswith("Mutation:"):
             required = ("typed", "event", "projection", "receipt", "history")
             if any(term not in command.effect.casefold() for term in required):
@@ -900,6 +1089,11 @@ def _validate_state_command_semantics(
                 raise _state_command_error(
                     path,
                     f"external-result command can replay local mutation: {command.command_id}",
+                )
+            if not _has_actionable_external_recovery(command):
+                raise _state_command_error(
+                    path,
+                    f"command recovery is unresolved: {command.command_id}",
                 )
         else:
             raise _state_command_error(

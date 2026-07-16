@@ -439,6 +439,7 @@ rollback_undo = "No Undo is required; cancellation or external failure preserves
 privacy_egress = "StoreKit receives only minimum registered product and transaction fields; local private data never transfers or becomes account-owned."
 verification_ids = ["SCENARIO-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"]
 activation_posture = "future_gated"
+gate_dependency_ids = ["GATE-STOREKIT-PRODUCT-REGISTRY-001"]
 gate_requirement_ids = ["ENTITLEMENT-003", "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"]
 
 [[state_command_contracts]]

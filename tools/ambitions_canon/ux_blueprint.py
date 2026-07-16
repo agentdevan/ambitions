@@ -1207,7 +1207,29 @@ def load_state_command_contracts(root: Path) -> tuple[StateCommandContract, ...]
                     )
                 command_ids.add(command.command_id)
             contracts.append(contract)
-    return tuple(sorted(contracts, key=lambda item: item.state_id))
+    ordered = tuple(sorted(contracts, key=lambda item: item.state_id))
+    if any(
+        command.gate_dependency_ids
+        for contract in ordered
+        for command in contract.commands
+    ):
+        from tools.ambitions_canon.command_gate_dependencies import (
+            load_command_gate_dependency_registry,
+            validate_command_gate_dependency_bindings,
+        )
+        from tools.ambitions_canon.manifest import load_manifest
+
+        manifest = load_manifest(root)
+        dependency_registry = load_command_gate_dependency_registry(
+            root,
+            expected_canon_revision=manifest.canon_revision,
+        )
+        validate_command_gate_dependency_bindings(
+            dependency_registry,
+            ordered,
+            canon_revision=manifest.canon_revision,
+        )
+    return ordered
 
 
 def active_state_commands(contract: StateCommandContract) -> tuple[StateCommand, ...]:

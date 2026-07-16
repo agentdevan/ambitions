@@ -363,12 +363,16 @@ class StateCommand:
     activation_posture: StateCommandActivationPosture
     gate_requirement_ids: tuple[str, ...]
     rollback_posture: StateCommandRollbackPosture | None
+    gate_dependency_ids: tuple[str, ...] = ()
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "preconditions", tuple(self.preconditions))
         object.__setattr__(self, "verification_ids", tuple(self.verification_ids))
         object.__setattr__(
             self, "gate_requirement_ids", tuple(self.gate_requirement_ids)
+        )
+        object.__setattr__(
+            self, "gate_dependency_ids", tuple(self.gate_dependency_ids)
         )
 
 

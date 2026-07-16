@@ -13,6 +13,12 @@ from pathlib import Path
 
 from tools.ambitions_canon.audit import audit_registry
 from tools.ambitions_canon.coverage import profile_section_bodies
+from tools.ambitions_canon.command_gate_dependencies import (
+    CommandGateDependencyRegistry,
+    command_gate_dependency_projection,
+    load_command_gate_dependency_registry,
+    validate_command_gate_dependency_bindings,
+)
 from tools.ambitions_canon.build import (
     _content_sha_entries,
     _assert_parent_path_identity,
@@ -52,6 +58,7 @@ PACK_SECTION_ORDER = (
     "Cross-cutting standards",
     "Source ownership",
     "Implementation posture",
+    "Command authorization",
     "Known risks",
     "Visual authority",
     "Required tests",
@@ -212,6 +219,7 @@ class TaskPack:
     claim_ceiling: str
     rollback_requirements: tuple[str, ...]
     _section_content: tuple[tuple[str, tuple[str, ...]], ...]
+    command_authorizations: tuple[dict[str, object], ...] = ()
 
     def to_dict(self) -> dict[str, object]:
         """Return the stable public machine contract without render internals."""
@@ -242,6 +250,9 @@ class TaskPack:
             "standards": list(self.standards),
             "source_owners": list(self.source_owners),
             "implementation_posture": self.implementation_posture,
+            "command_authorizations": [
+                dict(item) for item in self.command_authorizations
+            ],
             "known_risks": list(self.known_risks),
             "visual_authority": list(self.visual_authority),
             "required_tests": list(self.required_tests),
@@ -346,6 +357,63 @@ def build_task_pack(
     semantic_documents = tuple(
         document for document in closure if document.spec_id in requirement_graph
     )
+    selected_requirement_ids = {
+        requirement_id
+        for requirement_ids in requirement_graph.values()
+        for requirement_id in requirement_ids
+    }
+    while True:
+        selected_command_records = tuple(
+            sorted(
+                (
+                    (contract.requirement_id, contract.state_id, command)
+                    for document in semantic_documents
+                    for contract in document.state_command_contracts
+                    if contract.requirement_id in selected_requirement_ids
+                    for command in contract.commands
+                ),
+                key=lambda item: (item[0], item[1], item[2].command_id),
+            )
+        )
+        gate_requirement_ids = {
+            identifier
+            for _, _, command in selected_command_records
+            for identifier in command.gate_requirement_ids
+        }
+        missing_gate_ids = gate_requirement_ids - selected_requirement_ids
+        if not missing_gate_ids:
+            break
+        selected_requirement_ids.update(missing_gate_ids)
+        gate_documents = {
+            document.spec_id: document
+            for document in registry.documents
+            if any(
+                requirement.requirement_id in missing_gate_ids
+                for requirement in document.requirements
+            )
+        }
+        if {
+            identifier
+            for identifier in missing_gate_ids
+            if identifier not in {
+                requirement.requirement_id
+                for document in gate_documents.values()
+                for requirement in document.requirements
+            }
+        }:
+            raise CanonError(
+                "PACK_COMMAND_GATE_REQUIREMENT_UNKNOWN",
+                f"command gate requirement is not in canon: {sorted(missing_gate_ids)[0]}",
+            )
+        semantic_documents = tuple(
+            sorted(
+                {
+                    document.spec_id: document
+                    for document in (*semantic_documents, *gate_documents.values())
+                }.values(),
+                key=lambda item: item.spec_id,
+            )
+        )
     requirements_by_id = {
         requirement.requirement_id: requirement for requirement in registry.requirements
     }
@@ -394,11 +462,6 @@ def build_task_pack(
     source_owners = tuple(
         sorted({owner for document in semantic_documents for owner in document.source_owners})
     )
-    selected_requirement_ids = {
-        requirement_id
-        for requirement_ids in requirement_graph.values()
-        for requirement_id in requirement_ids
-    }
     selected_requirements = tuple(
         sorted(
             {
@@ -416,18 +479,45 @@ def build_task_pack(
         )
     )
     future_gated_commands = tuple(
-        sorted(
-            (
-                (contract.requirement_id, command)
-                for document in semantic_documents
-                for contract in document.state_command_contracts
-                if contract.requirement_id in selected_requirement_ids
-                for command in contract.commands
-                if command.activation_posture
-                is StateCommandActivationPosture.FUTURE_GATED
-            ),
-            key=lambda item: item[1].command_id,
+        (requirement_id, command)
+        for requirement_id, _, command in selected_command_records
+        if command.activation_posture is StateCommandActivationPosture.FUTURE_GATED
+    )
+    dependency_registry: CommandGateDependencyRegistry | None = None
+    if any(
+        command.gate_dependency_ids
+        for _, _, command in selected_command_records
+    ):
+        repository_root = registry.manifest.repository_root
+        if repository_root is None:
+            raise CanonError(
+                "PACK_COMMAND_GATE_DEPENDENCY_ROOT_MISSING",
+                "command dependency validation requires the manifest repository root",
+            )
+        dependency_registry = load_command_gate_dependency_registry(
+            repository_root,
+            expected_canon_revision=registry.manifest.canon_revision,
         )
+        validate_command_gate_dependency_bindings(
+            dependency_registry,
+            tuple(
+                contract
+                for document in registry.documents
+                for contract in document.state_command_contracts
+            ),
+            canon_revision=registry.manifest.canon_revision,
+        )
+    command_authorizations = tuple(
+        _command_authorization_record(
+            requirement_id,
+            state_id,
+            command,
+            dependency_registry,
+            authority_active=(
+                registry.manifest.authority_state is AuthorityState.ACTIVE
+            ),
+        )
+        for requirement_id, state_id, command in selected_command_records
     )
     required_tests = tuple(
         sorted(
@@ -641,6 +731,7 @@ def build_task_pack(
         claim_ceiling=claim_ceiling,
         rollback_requirements=rollback_requirements,
         _section_content=(),
+        command_authorizations=command_authorizations,
     )
     for _ in range(8):
         section_content = _render_sections(
@@ -1539,6 +1630,9 @@ def _render_sections(
         "Implementation posture": (
             _implementation_posture_markdown(pack.implementation_posture),
         ),
+        "Command authorization": _render_command_authorizations(
+            pack.command_authorizations
+        ),
         "Known risks": _bullet_values(pack.known_risks),
         "Visual authority": _bullet_values(pack.visual_authority),
         "Required tests": _bullet_values(pack.required_tests),
@@ -1550,6 +1644,68 @@ def _render_sections(
         "Rollback": _bullet_values(pack.rollback_requirements),
     }
     return tuple((heading, values[heading]) for heading in PACK_SECTION_ORDER)
+
+
+def _command_authorization_record(
+    requirement_id: str,
+    state_id: str,
+    command: StateCommand,
+    dependency_registry: CommandGateDependencyRegistry | None,
+    *,
+    authority_active: bool,
+) -> dict[str, object]:
+    dependencies = (
+        command_gate_dependency_projection(dependency_registry, command)
+        if dependency_registry is not None and command.gate_dependency_ids
+        else []
+    )
+    activation_authorized = bool(
+        authority_active
+        and command.activation_posture is StateCommandActivationPosture.ACTIVE
+        and all(item["activation_authorization"] is True for item in dependencies)
+    )
+    return {
+        "activation_authorized": activation_authorized,
+        "activation_posture": command.activation_posture.value,
+        "command_id": command.command_id,
+        "gate_dependencies": dependencies,
+        "gate_requirement_ids": list(command.gate_requirement_ids),
+        "label": command.label,
+        "requirement_id": requirement_id,
+        "state_id": state_id,
+    }
+
+
+def _render_command_authorizations(
+    records: tuple[dict[str, object], ...],
+) -> tuple[str, ...]:
+    rendered = []
+    for record in records:
+        posture = str(record["activation_posture"])
+        prefix = (
+            "FUTURE-GATED / NON-AUTHORIZING"
+            if posture == "future_gated"
+            else "ACTIVE / AUTHORIZING"
+            if record["activation_authorized"] is True
+            else "ACTIVE COMMAND / NON-AUTHORIZING PACK"
+        )
+        rendered.append(
+            f"- **{prefix}:** requirement_id=`{record['requirement_id']}`; "
+            f"state_id=`{record['state_id']}`; command_id=`{record['command_id']}`; "
+            f"label=`{record['label']}`; activation_posture=`{posture}`; "
+            "activation_authorized="
+            f"`{str(record['activation_authorized']).casefold()}`; "
+            "gate_requirement_ids="
+            f"`{', '.join(record['gate_requirement_ids'])}`; gate_dependencies=`"
+            + json.dumps(
+                record["gate_dependencies"],
+                ensure_ascii=False,
+                sort_keys=True,
+                separators=(",", ":"),
+            )
+            + "`."
+        )
+    return tuple(rendered)
 
 
 def _future_gated_command_risk(
@@ -1567,67 +1723,12 @@ def _future_gated_command_risk(
     )
 
 
-def _annotate_future_gated_requirement_body(
-    body: str,
-    commands: tuple[StateCommand, ...],
-) -> str:
-    """Keep the owning law while removing plain future labels from active prose."""
-
-    if not commands:
-        return body
-    by_label: dict[str, tuple[StateCommand, ...]] = {}
-    for label in sorted({command.label for command in commands}):
-        by_label[label.casefold()] = tuple(
-            command for command in commands if command.label == label
-        )
-    labels = sorted(
-        (command.label for command in commands),
-        key=lambda value: (-len(value), value.casefold()),
-    )
-    pattern = re.compile(
-        "|".join(
-            rf"(?<!\w){re.escape(label)}(?!\w)"
-            for label in dict.fromkeys(labels)
-        ),
-        re.IGNORECASE,
-    )
-
-    def replacement(match: re.Match[str]) -> str:
-        matching = by_label[match.group(0).casefold()]
-        identifier_field = "command_id" if len(matching) == 1 else "command_ids"
-        identifiers = ",".join(command.command_id for command in matching)
-        return (
-            "FUTURE-GATED / NON-AUTHORIZING "
-            f"({identifier_field}={identifiers}; label={match.group(0)})"
-        )
-
-    return pattern.sub(replacement, body)
-
-
-def _render_requirement(
-    requirement: Requirement,
-    future_gated_commands: tuple[StateCommand, ...] = (),
-) -> str:
-    body = _annotate_future_gated_requirement_body(
-        requirement.body.strip(),
-        future_gated_commands,
-    )
+def _render_requirement(requirement: Requirement) -> str:
+    body = requirement.body.strip()
     quoted_body = "\n".join(f"  > {line}" for line in body.splitlines())
-    rendered = (
+    return (
         f"- **{requirement.requirement_id}** (`{requirement.modality.value}`):\n{quoted_body}"
     )
-    if not future_gated_commands:
-        return rendered
-    metadata = "\n".join(
-        "  - **FUTURE-GATED / NON-AUTHORIZING command metadata:** "
-        f"command_id=`{command.command_id}`; label=`{command.label}`; "
-        "activation_posture=`future_gated`; gate_requirement_ids="
-        f"`{', '.join(command.gate_requirement_ids)}`; unmet_gate_reason="
-        "`authorization remains invalid until every named gate and precondition is "
-        f"current: {' | '.join(command.preconditions)}`."
-        for command in future_gated_commands
-    )
-    return f"{rendered}\n{metadata}"
 
 
 def _render_laws(
@@ -1642,24 +1743,8 @@ def _render_document(
     document: CanonDocument,
     selected_requirement_ids: frozenset[str],
 ) -> str:
-    future_commands_by_requirement = {
-        requirement_id: tuple(
-            sorted(
-                (
-                    command
-                    for contract in document.state_command_contracts
-                    if contract.requirement_id == requirement_id
-                    for command in contract.commands
-                    if command.activation_posture
-                    is StateCommandActivationPosture.FUTURE_GATED
-                ),
-                key=lambda command: command.command_id,
-            )
-        )
-        for requirement_id in selected_requirement_ids
-    }
     requirements = "\n".join(
-        f"  {_render_requirement(requirement, future_commands_by_requirement.get(requirement.requirement_id, ()))}"
+        f"  {_render_requirement(requirement)}"
         for requirement in sorted(
             document.requirements,
             key=lambda item: item.requirement_id,

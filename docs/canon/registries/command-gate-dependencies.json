@@ -1,0 +1,25 @@
+{
+  "canon_revision": 1,
+  "dependencies": [
+    {
+      "activation_authorization": false,
+      "command_id": "CMD-YOU-ENTITLEMENT-EXPIRED-002",
+      "dependency_id": "GATE-STOREKIT-PRODUCT-REGISTRY-001",
+      "dependency_kind": "storekit_product_registry",
+      "dependency_posture": "blocked",
+      "dependency_revision": 1,
+      "dependency_sha256": "14e38ea5d86f63dc271dd005f8f44b507edd3e68b1e2804261568cb9b1104323",
+      "exact_product_mappings": [],
+      "freshness": "absent",
+      "mapping_sha256": null,
+      "owner_approval_evidence": null,
+      "owner_approval_state": "withheld",
+      "owner_concept": "surface.you.entitlement-command-contract",
+      "requirement_id": "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001",
+      "state_id": "UX-STATE-VARIANT-YOU-ENTITLEMENT-EXPIRED"
+    }
+  ],
+  "registry_id": "COMMAND-GATE-DEPENDENCY-REGISTRY-001",
+  "registry_revision": 1,
+  "schema_version": 1
+}

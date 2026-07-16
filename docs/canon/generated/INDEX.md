@@ -6,7 +6,7 @@
 - Canon revision: `1`
 - Authority state: `shadow`
 - Compiler version: `0.2.0`
-- Canon content SHA: `865157d4d1a8ec074d7b4d233e2e1c021b2eea1aeda6ab9392d63481c6d7d611`
+- Canon content SHA: `e51a71da8ef572eeca5b517faaec76949069ff6f200e9bfd421afbb70dd0f5b4`
 
 ## Specifications
 
@@ -429,21 +429,21 @@
 | `SPEC-SURFACE-TODAY-STATES-001` | MUST | `surface.today.states` | `docs/canon/specifications/surfaces/today.md:670` |
 | `SPEC-SURFACE-TODAY-TEMPORAL-RAIL-001` | MUST | `surface.today.temporal-rail` | `docs/canon/specifications/surfaces/today.md:604` |
 | `SPEC-SURFACE-TODAY-VISUAL-AUTHORITY-001` | MUST | `surface.today.visual-authority` | `docs/canon/specifications/surfaces/today.md:681` |
-| `SPEC-SURFACE-YOU-APPEARANCE-001` | MUST | `surface.you.appearance` | `docs/canon/specifications/surfaces/you.md:1473` |
-| `SPEC-SURFACE-YOU-COMMAND-CONTRACT-001` | MUST | `surface.you.command-contract` | `docs/canon/specifications/surfaces/you.md:1517` |
-| `SPEC-SURFACE-YOU-CONTEXTUAL-EDUCATION-001` | SHOULD | `surface.you.contextual-education` | `docs/canon/specifications/surfaces/you.md:1506` |
-| `SPEC-SURFACE-YOU-DATA-CONTROLS-001` | MUST | `surface.you.data-controls` | `docs/canon/specifications/surfaces/you.md:1484` |
-| `SPEC-SURFACE-YOU-DEPTH-001` | MUST | `surface.you.depth` | `docs/canon/specifications/surfaces/you.md:1428` |
-| `SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001` | MUST | `surface.you.entitlement-command-contract` | `docs/canon/specifications/surfaces/you.md:1528` |
-| `SPEC-SURFACE-YOU-FIRST-VIEWPORT-001` | MUST | `surface.you.first-viewport` | `docs/canon/specifications/surfaces/you.md:1415` |
-| `SPEC-SURFACE-YOU-IDENTITY-001` | MUST | `surface.you.identity` | `docs/canon/specifications/surfaces/you.md:1369` |
-| `SPEC-SURFACE-YOU-NO-KNOWLEDGE-MODEL-001` | MUST NOT | `surface.you.no-knowledge-model` | `docs/canon/specifications/surfaces/you.md:1450` |
-| `SPEC-SURFACE-YOU-PRIVACY-DATA-BOUNDARY-001` | MUST | `surface.you.privacy-data-boundary` | `docs/canon/specifications/surfaces/you.md:1495` |
-| `SPEC-SURFACE-YOU-PROFILE-001` | MUST | `surface.you.profile` | `docs/canon/specifications/surfaces/you.md:1462` |
-| `SPEC-SURFACE-YOU-SCREEN-INVENTORY-001` | MUST | `surface.you.screen-inventory` | `docs/canon/specifications/surfaces/you.md:1384` |
-| `SPEC-SURFACE-YOU-SETTINGS-DRILLDOWN-001` | MUST | `surface.you.settings-drilldown` | `docs/canon/specifications/surfaces/you.md:1621` |
-| `SPEC-SURFACE-YOU-TIME-PREFERENCES-001` | MUST | `surface.you.time-preferences` | `docs/canon/specifications/surfaces/you.md:1632` |
-| `SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001` | MUST | `surface.you.visual-authority` | `docs/canon/specifications/surfaces/you.md:1439` |
+| `SPEC-SURFACE-YOU-APPEARANCE-001` | MUST | `surface.you.appearance` | `docs/canon/specifications/surfaces/you.md:1474` |
+| `SPEC-SURFACE-YOU-COMMAND-CONTRACT-001` | MUST | `surface.you.command-contract` | `docs/canon/specifications/surfaces/you.md:1518` |
+| `SPEC-SURFACE-YOU-CONTEXTUAL-EDUCATION-001` | SHOULD | `surface.you.contextual-education` | `docs/canon/specifications/surfaces/you.md:1507` |
+| `SPEC-SURFACE-YOU-DATA-CONTROLS-001` | MUST | `surface.you.data-controls` | `docs/canon/specifications/surfaces/you.md:1485` |
+| `SPEC-SURFACE-YOU-DEPTH-001` | MUST | `surface.you.depth` | `docs/canon/specifications/surfaces/you.md:1429` |
+| `SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001` | MUST | `surface.you.entitlement-command-contract` | `docs/canon/specifications/surfaces/you.md:1529` |
+| `SPEC-SURFACE-YOU-FIRST-VIEWPORT-001` | MUST | `surface.you.first-viewport` | `docs/canon/specifications/surfaces/you.md:1416` |
+| `SPEC-SURFACE-YOU-IDENTITY-001` | MUST | `surface.you.identity` | `docs/canon/specifications/surfaces/you.md:1370` |
+| `SPEC-SURFACE-YOU-NO-KNOWLEDGE-MODEL-001` | MUST NOT | `surface.you.no-knowledge-model` | `docs/canon/specifications/surfaces/you.md:1451` |
+| `SPEC-SURFACE-YOU-PRIVACY-DATA-BOUNDARY-001` | MUST | `surface.you.privacy-data-boundary` | `docs/canon/specifications/surfaces/you.md:1496` |
+| `SPEC-SURFACE-YOU-PROFILE-001` | MUST | `surface.you.profile` | `docs/canon/specifications/surfaces/you.md:1463` |
+| `SPEC-SURFACE-YOU-SCREEN-INVENTORY-001` | MUST | `surface.you.screen-inventory` | `docs/canon/specifications/surfaces/you.md:1385` |
+| `SPEC-SURFACE-YOU-SETTINGS-DRILLDOWN-001` | MUST | `surface.you.settings-drilldown` | `docs/canon/specifications/surfaces/you.md:1622` |
+| `SPEC-SURFACE-YOU-TIME-PREFERENCES-001` | MUST | `surface.you.time-preferences` | `docs/canon/specifications/surfaces/you.md:1633` |
+| `SPEC-SURFACE-YOU-VISUAL-AUTHORITY-001` | MUST | `surface.you.visual-authority` | `docs/canon/specifications/surfaces/you.md:1440` |
 | `STANDARD-ACCEPTANCE-ACCESSIBILITY-001` | MUST NOT | `standard.acceptance.accessibility` | `docs/canon/standards/accessibility.md:152` |
 | `STANDARD-ACCEPTANCE-BUILD-001` | MUST | `standard.acceptance.build` | `docs/canon/standards/validation-and-release.md:492` |
 | `STANDARD-ACCEPTANCE-DOCS-001` | MUST | `standard.acceptance.documentation` | `docs/canon/standards/validation-and-release.md:514` |

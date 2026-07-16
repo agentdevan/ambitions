@@ -298,6 +298,13 @@ class ParserTests(unittest.TestCase):
     def test_unresolved_target_detection_is_exact_and_preserves_named_states(self):
         unresolved = (
             "destination not yet determined",
+            "destination is TBD",
+            "route remains TBD",
+            "focus is TODO",
+            "target pending",
+            "the route will be decided later",
+            "the destination will be specified later",
+            "failure target is TBD",
             "route forthcoming",
             "focus has not been defined",
             "destination to be decided",
@@ -309,6 +316,8 @@ class ParserTests(unittest.TestCase):
             "the owner root primary object within Unavailable Route Unknown Owner",
             "the original route when current-revision route resolution succeeds",
             "the route-failure reason and Try again control",
+            "the pending route requests list",
+            "the unknown route diagnostics",
         )
 
         for value in unresolved:
