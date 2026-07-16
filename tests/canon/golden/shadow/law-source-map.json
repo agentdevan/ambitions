@@ -41901,7 +41901,7 @@
     {
       "exists": true,
       "gaps": [],
-      "implementation_file_count": 99,
+      "implementation_file_count": 100,
       "implementation_files": [
         "scripts/ambitions-accepted-yellow-misuse-audit.py",
         "scripts/ambitions-architecture-10-scorecard-check.py",
@@ -41930,6 +41930,7 @@
         "scripts/ambitions-local-runtime-proof.py",
         "scripts/ambitions-master-sequencing-check.py",
         "scripts/ambitions-module-candidate-gate.py",
+        "scripts/ambitions-native-mcp-lifecycle-check.sh",
         "scripts/ambitions-pr-xcode-scope.sh",
         "scripts/ambitions-provenance-report-generate.py",
         "scripts/ambitions-quality-gate.py",
@@ -42042,5 +42043,5 @@
       "status": "source_files_present"
     }
   ],
-  "traceability_input_sha": "5a5d78ae445f6287d74cc7329ae2fc535cb82a905bda9a7caa19875a44e64a07"
+  "traceability_input_sha": "0325ca1f208b16eb88470965be3d4e512520c93bf5e93418cd6da8c4baf50c77"
 }
