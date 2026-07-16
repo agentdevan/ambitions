@@ -138,7 +138,7 @@
           "node_id": "329:1635",
           "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-005-viewport.png",
           "proof_posture": "product_only",
-          "sha256": "92a74a355dc82c9e19742eda6d7e01f12ca89e562a3e20000297b060c1ac6732"
+          "sha256": "d88a9f64c7ac6a780be443ed01a52834246caa7d470b3cd90c34694fd6514440"
         }
       },
       "canonical_artifact_role": "viewport",
@@ -167,7 +167,7 @@
           "node_id": "327:1648",
           "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-006-viewport.png",
           "proof_posture": "product_only",
-          "sha256": "e0f06df3f1b5340c5ed19592490cfc7df682cac25323c01e45ad780b07977a55"
+          "sha256": "2b37bf9db0d74e53f574b69f3bf54486904a77967f743f93364da1c5183e3e71"
         }
       },
       "canonical_artifact_role": "viewport",
@@ -196,7 +196,7 @@
           "node_id": "266:1424",
           "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-001-viewport.png",
           "proof_posture": "product_only",
-          "sha256": "3a90bdc58fe6cc586df9312db395a5d4a3df9c1d291635b9c1e381b455bf96d1"
+          "sha256": "af6bf216b3809b832780089eb14e5ecdef6a57d58b4514275ca8c52cdfe2532b"
         }
       },
       "canonical_artifact_role": "viewport",
@@ -254,7 +254,7 @@
           "node_id": "272:1424",
           "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-003-viewport.png",
           "proof_posture": "product_only",
-          "sha256": "a5a08c2c0e0c7350d00d873601a862ee27e04153e7e8994547ac47de2614f50f"
+          "sha256": "a19e378f86dcf4d9a0cde336ef35b8c77d99a8da6a543ef2f4dd1449bb406090"
         }
       },
       "canonical_artifact_role": "viewport",
@@ -7330,8 +7330,83 @@
           "VoiceOver Order"
         ],
         "proof_ceiling": "visual_design_authority_candidate_only",
-        "requirement_ids": [],
-        "screen_mappings": [],
+        "requirement_ids": [
+          "LAW-IA-TRUST-001",
+          "LAW-RUNTIME-DURABLE-SUCCESS-001",
+          "OBJ-HISTORY-EVENT-IDENTITY-001",
+          "OBJ-RECEIPT-IDENTITY-001",
+          "OBJ-SOURCE-REFERENCE-IDENTITY-001",
+          "OBJECT-PROOF-REQUIREMENT-001",
+          "SPEC-COMPLETED-CONTEXTUAL-PLACEMENT-001",
+          "SPEC-GLOBAL-TRUST-COMMAND-CONTRACT-001",
+          "SPEC-GLOBAL-TRUST-INSPECTION-001",
+          "SPEC-GLOBAL-TRUST-PROPORTIONAL-RECEIPTS-001",
+          "SYSTEM-SOURCE-ATLAS-PUBLIC-001"
+        ],
+        "screen_mappings": [
+          {
+            "authority_eligible_state_count": 20,
+            "blueprint_id": "UX-SCREEN-TRUST-DEEP",
+            "future_gated_state_count": 0,
+            "gap_blocked_state_count": 0,
+            "state_variant_ids": [
+              "UX-STATE-VARIANT-TRUST-DEEP-CORRECTING",
+              "UX-STATE-VARIANT-TRUST-DEEP-CORRECTION-COMPLETE",
+              "UX-STATE-VARIANT-TRUST-DEEP-CORRECTION-REQUIRED",
+              "UX-STATE-VARIANT-TRUST-DEEP-HISTORY-EMPTY",
+              "UX-STATE-VARIANT-TRUST-DEEP-HISTORY-PAGINATING",
+              "UX-STATE-VARIANT-TRUST-DEEP-HISTORY-POPULATED",
+              "UX-STATE-VARIANT-TRUST-DEEP-LOCAL-STORE-DEGRADED",
+              "UX-STATE-VARIANT-TRUST-DEEP-MISSING-PROOF",
+              "UX-STATE-VARIANT-TRUST-DEEP-OFFLINE-HEALTHY",
+              "UX-STATE-VARIANT-TRUST-DEEP-PARTIAL-HISTORY",
+              "UX-STATE-VARIANT-TRUST-DEEP-PERMISSION-DENIED",
+              "UX-STATE-VARIANT-TRUST-DEEP-PRIVACY-BOUNDARY-REVIEW",
+              "UX-STATE-VARIANT-TRUST-DEEP-PRIVACY-PREVIEW",
+              "UX-STATE-VARIANT-TRUST-DEEP-PRIVACY-REDACTED",
+              "UX-STATE-VARIANT-TRUST-DEEP-PROOF-LOADING",
+              "UX-STATE-VARIANT-TRUST-DEEP-RESTORING",
+              "UX-STATE-VARIANT-TRUST-DEEP-SOURCE-CHECKING",
+              "UX-STATE-VARIANT-TRUST-DEEP-SOURCE-CURRENT",
+              "UX-STATE-VARIANT-TRUST-DEEP-SOURCE-STALE",
+              "UX-STATE-VARIANT-TRUST-DEEP-SOURCE-UNAVAILABLE"
+            ]
+          },
+          {
+            "authority_eligible_state_count": 6,
+            "blueprint_id": "UX-SCREEN-TRUST-INLINE",
+            "future_gated_state_count": 0,
+            "gap_blocked_state_count": 0,
+            "state_variant_ids": [
+              "UX-STATE-VARIANT-TRUST-INLINE-MARKER-PRESENT",
+              "UX-STATE-VARIANT-TRUST-INLINE-NO-DISCLOSURE",
+              "UX-STATE-VARIANT-TRUST-INLINE-PROOF-OPTIONAL",
+              "UX-STATE-VARIANT-TRUST-INLINE-PROOF-REQUIRED",
+              "UX-STATE-VARIANT-TRUST-INLINE-PROOF-SATISFIED",
+              "UX-STATE-VARIANT-TRUST-INLINE-PROOF-SUGGESTED"
+            ]
+          },
+          {
+            "authority_eligible_state_count": 12,
+            "blueprint_id": "UX-SCREEN-TRUST-RECEIPT",
+            "future_gated_state_count": 0,
+            "gap_blocked_state_count": 0,
+            "state_variant_ids": [
+              "UX-STATE-VARIANT-TRUST-RECEIPT-ABSENT-RECEIPT-DETAIL",
+              "UX-STATE-VARIANT-TRUST-RECEIPT-LOCAL-STORE-DEGRADED",
+              "UX-STATE-VARIANT-TRUST-RECEIPT-OFFLINE-HEALTHY",
+              "UX-STATE-VARIANT-TRUST-RECEIPT-RECEIPT-COMMITTED",
+              "UX-STATE-VARIANT-TRUST-RECEIPT-RECEIPT-COMMITTED-UNDO-ELIGIBLE",
+              "UX-STATE-VARIANT-TRUST-RECEIPT-RECEIPT-COMMITTED-UNDO-UNAVAILABLE",
+              "UX-STATE-VARIANT-TRUST-RECEIPT-RECEIPT-EXTERNAL-FAILED",
+              "UX-STATE-VARIANT-TRUST-RECEIPT-RECEIPT-PENDING",
+              "UX-STATE-VARIANT-TRUST-RECEIPT-RECEIPT-RESOLVING",
+              "UX-STATE-VARIANT-TRUST-RECEIPT-RECEIPT-UNDONE",
+              "UX-STATE-VARIANT-TRUST-RECEIPT-RESTORING",
+              "UX-STATE-VARIANT-TRUST-RECEIPT-UNDOING"
+            ]
+          }
+        ],
         "swiftui_plausibility": "native_swiftui_product_presentation_plausible_unverified",
         "task_pack_eligible": true,
         "visual_authority_id": "VA-P4-A11Y-CLASS-003"
@@ -7418,8 +7493,132 @@
           "VoiceOver Order"
         ],
         "proof_ceiling": "visual_design_authority_candidate_only",
-        "requirement_ids": [],
-        "screen_mappings": [],
+        "requirement_ids": [
+          "CONTROL-MATERIAL-CONFIRMATION-001",
+          "CONTROL-UNDO-RECOVERY-001",
+          "COPY-STATE-CONSEQUENCE-001",
+          "JOURNEY-CALENDAR-DIFF-001",
+          "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001",
+          "JOURNEY-DELETE-RESTORE-001",
+          "JOURNEY-STEP-START-COMPLETE-001",
+          "OBJ-CAPTURE-DRAFT-IDENTITY-001",
+          "OBJ-GOAL-PATH-IDENTITY-001",
+          "OBJECT-GOAL-LIFECYCLE-001",
+          "RUNTIME-MUTATION-SEQUENCE-001",
+          "SPEC-GLOBAL-CAPTURE-COMMAND-CONTRACT-001",
+          "SPEC-GLOBAL-CAPTURE-DRAFT-RECOVERY-001",
+          "SPEC-GLOBAL-CAPTURE-IDENTITY-001",
+          "SPEC-GLOBAL-CAPTURE-PROPOSAL-FLOW-001",
+          "SPEC-GLOBAL-CAPTURE-SAVED-FOR-LATER-001",
+          "SPEC-SURFACE-GOAL-DETAIL-VIEWPORT-001",
+          "SPEC-SURFACE-GOALS-CLOSURE-001",
+          "SPEC-SURFACE-GOALS-COMMAND-CONTRACT-001",
+          "SPEC-SURFACE-GOALS-DETAIL-001",
+          "SPEC-SURFACE-GOALS-IDENTITY-001",
+          "SPEC-SURFACE-GOALS-PATH-INTERACTION-001",
+          "SPEC-SURFACE-GOALS-PATH-VISUAL-001",
+          "SPEC-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001",
+          "SPEC-SURFACE-TIME-IMPORTED-SOURCE-001",
+          "SPEC-SURFACE-TIME-VIEWS-001",
+          "SPEC-SURFACE-TODAY-COMMAND-CONTRACT-001",
+          "SPEC-SURFACE-TODAY-STATES-001",
+          "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001",
+          "SPEC-SURFACE-YOU-DATA-CONTROLS-001",
+          "SYSTEM-IMPORTED-SOURCE-001",
+          "SYSTEM-RUNTIME-MUTATION-001"
+        ],
+        "screen_mappings": [
+          {
+            "authority_eligible_state_count": 1,
+            "blueprint_id": "UX-SCREEN-CAPTURE-PROPOSAL",
+            "future_gated_state_count": 0,
+            "gap_blocked_state_count": 0,
+            "state_variant_ids": [
+              "UX-STATE-VARIANT-CAPTURE-PROPOSAL-PROPOSAL-READY"
+            ]
+          },
+          {
+            "authority_eligible_state_count": 1,
+            "blueprint_id": "UX-SCREEN-CAPTURE-SAVED-FOR-LATER",
+            "future_gated_state_count": 0,
+            "gap_blocked_state_count": 0,
+            "state_variant_ids": [
+              "UX-STATE-VARIANT-CAPTURE-SAVED-FOR-LATER-SAVED-FOR-LATER"
+            ]
+          },
+          {
+            "authority_eligible_state_count": 1,
+            "blueprint_id": "UX-SCREEN-GOALS-CLOSURE",
+            "future_gated_state_count": 0,
+            "gap_blocked_state_count": 0,
+            "state_variant_ids": [
+              "UX-STATE-VARIANT-GOALS-CLOSURE-COMPLETED"
+            ]
+          },
+          {
+            "authority_eligible_state_count": 1,
+            "blueprint_id": "UX-SCREEN-GOALS-DETAIL",
+            "future_gated_state_count": 0,
+            "gap_blocked_state_count": 0,
+            "state_variant_ids": [
+              "UX-STATE-VARIANT-GOALS-DETAIL-ACTIVE"
+            ]
+          },
+          {
+            "authority_eligible_state_count": 1,
+            "blueprint_id": "UX-SCREEN-GOALS-PATH",
+            "future_gated_state_count": 0,
+            "gap_blocked_state_count": 0,
+            "state_variant_ids": [
+              "UX-STATE-VARIANT-GOALS-PATH-ACTIVE"
+            ]
+          },
+          {
+            "authority_eligible_state_count": 1,
+            "blueprint_id": "UX-SCREEN-TIME-DETAIL",
+            "future_gated_state_count": 0,
+            "gap_blocked_state_count": 0,
+            "state_variant_ids": [
+              "UX-STATE-VARIANT-TIME-DETAIL-VIEWING"
+            ]
+          },
+          {
+            "authority_eligible_state_count": 1,
+            "blueprint_id": "UX-SCREEN-TIME-IMPORT",
+            "future_gated_state_count": 0,
+            "gap_blocked_state_count": 0,
+            "state_variant_ids": [
+              "UX-STATE-VARIANT-TIME-IMPORT-REVIEWING-DIFF"
+            ]
+          },
+          {
+            "authority_eligible_state_count": 1,
+            "blueprint_id": "UX-SCREEN-TODAY-DETAIL",
+            "future_gated_state_count": 0,
+            "gap_blocked_state_count": 0,
+            "state_variant_ids": [
+              "UX-STATE-VARIANT-TODAY-DETAIL-VIEWING"
+            ]
+          },
+          {
+            "authority_eligible_state_count": 1,
+            "blueprint_id": "UX-SCREEN-TODAY-START-HERE",
+            "future_gated_state_count": 0,
+            "gap_blocked_state_count": 0,
+            "state_variant_ids": [
+              "UX-STATE-VARIANT-TODAY-START-HERE-ACTIVE-EXECUTION"
+            ]
+          },
+          {
+            "authority_eligible_state_count": 1,
+            "blueprint_id": "UX-SCREEN-YOU-DATA",
+            "future_gated_state_count": 0,
+            "gap_blocked_state_count": 0,
+            "state_variant_ids": [
+              "UX-STATE-VARIANT-YOU-DATA-TRASH-POPULATED"
+            ]
+          }
+        ],
         "swiftui_plausibility": "native_swiftui_product_presentation_plausible_unverified",
         "task_pack_eligible": true,
         "visual_authority_id": "VA-P4-A11Y-CLASS-005"
@@ -9724,7 +9923,7 @@
       "node_id": "329:1635",
       "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-005-viewport.png",
       "proof_posture": "product_only_candidate_shadow",
-      "sha256": "92a74a355dc82c9e19742eda6d7e01f12ca89e562a3e20000297b060c1ac6732"
+      "sha256": "d88a9f64c7ac6a780be443ed01a52834246caa7d470b3cd90c34694fd6514440"
     },
     {
       "asset_id": "figma-mcp-r1-va-p4-a11y-class-006",
@@ -9732,7 +9931,7 @@
       "node_id": "327:1648",
       "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-006-viewport.png",
       "proof_posture": "product_only_candidate_shadow",
-      "sha256": "e0f06df3f1b5340c5ed19592490cfc7df682cac25323c01e45ad780b07977a55"
+      "sha256": "2b37bf9db0d74e53f574b69f3bf54486904a77967f743f93364da1c5183e3e71"
     },
     {
       "asset_id": "figma-mcp-r1-va-p4-candidate-001",
@@ -9740,7 +9939,7 @@
       "node_id": "266:1424",
       "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-001-viewport.png",
       "proof_posture": "product_only_candidate_shadow",
-      "sha256": "3a90bdc58fe6cc586df9312db395a5d4a3df9c1d291635b9c1e381b455bf96d1"
+      "sha256": "af6bf216b3809b832780089eb14e5ecdef6a57d58b4514275ca8c52cdfe2532b"
     },
     {
       "asset_id": "figma-mcp-r1-va-p4-candidate-002",
@@ -9756,7 +9955,7 @@
       "node_id": "272:1424",
       "path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-003-viewport.png",
       "proof_posture": "product_only_candidate_shadow",
-      "sha256": "a5a08c2c0e0c7350d00d873601a862ee27e04153e7e8994547ac47de2614f50f"
+      "sha256": "a19e378f86dcf4d9a0cde336ef35b8c77d99a8da6a543ef2f4dd1449bb406090"
     },
     {
       "asset_id": "figma-mcp-r1-va-p4-candidate-004",

@@ -7,6 +7,7 @@ import unittest
 from dataclasses import replace
 from pathlib import Path
 
+import tools.ambitions_canon.visual_authority as visual_authority
 from tools.ambitions_canon.model import CanonError
 from tools.ambitions_canon.visual_authority import (
     load_visual_authority_rebaseline,
@@ -83,10 +84,34 @@ class VisualAuthorityRebaselineTests(unittest.TestCase):
         self.assertEqual(
             node_snapshot["figma_write_receipt"],
             {
-                "created_node_count": 77,
-                "mutated_node_count": 92,
+                "created_node_count": 79,
+                "mutated_node_count": 105,
                 "deleted_node_ids": [],
                 "destructive_actions": [],
+                "review_repair": {
+                    "atomic_write_count": 2,
+                    "created_node_ids": ["367:2746", "368:2746"],
+                    "failed_atomic_attempt_count": 1,
+                    "failed_atomic_debug_uuid": (
+                        "fba516e2-f956-4ca1-9563-a52d7e73597b"
+                    ),
+                    "hidden_retained_node_ids": ["354:2562", "354:2733"],
+                    "mutated_node_ids": [
+                        "296:84",
+                        "329:1635",
+                        "329:1695",
+                        "329:1698",
+                        "327:1648",
+                        "354:2733",
+                        "I367:2746;249:305",
+                        "I367:2746;249:310",
+                        "354:2300",
+                        "354:2552",
+                        "354:2562",
+                        "I368:2746;249:305",
+                        "I368:2746;249:300",
+                    ],
+                },
             },
         )
         self.assertEqual(
@@ -113,6 +138,222 @@ class VisualAuthorityRebaselineTests(unittest.TestCase):
                 if item["visual_authority_id"] in R1_TASK_PACK_TARGETS
             )
         )
+
+    def test_r1_accessibility_classes_are_registry_bound_without_stale_gap_copy(self) -> None:
+        manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+        node_snapshot = json.loads(R1_NODE_SNAPSHOT.read_text(encoding="utf-8"))
+        nodes = {
+            item["visual_authority_id"]: item
+            for item in manifest["figma"]["authority_nodes"]
+        }
+
+        contextual_detail = nodes["VA-P4-A11Y-CLASS-003"]
+        trust_candidate = nodes["VA-P4-CANDIDATE-008"]
+        self.assertEqual(
+            contextual_detail["requirement_ids"],
+            trust_candidate["requirement_ids"],
+        )
+        self.assertEqual(
+            contextual_detail["screen_mappings"],
+            trust_candidate["screen_mappings"],
+        )
+
+        lifecycle = nodes["VA-P4-A11Y-CLASS-005"]
+        self.assertTrue(lifecycle["requirement_ids"])
+        lifecycle_mappings = {
+            item["blueprint_id"]: item for item in lifecycle["screen_mappings"]
+        }
+        self.assertIn("UX-SCREEN-TIME-DETAIL", lifecycle_mappings)
+        self.assertIn("UX-SCREEN-TIME-IMPORT", lifecycle_mappings)
+        self.assertIn(
+            "UX-STATE-VARIANT-TIME-DETAIL-VIEWING",
+            lifecycle_mappings["UX-SCREEN-TIME-DETAIL"]["state_variant_ids"],
+        )
+        self.assertIn(
+            "UX-STATE-VARIANT-TIME-IMPORT-REVIEWING-DIFF",
+            lifecycle_mappings["UX-SCREEN-TIME-IMPORT"]["state_variant_ids"],
+        )
+
+        command_registry = json.loads(
+            (ROOT / "docs/canon/registries/command-resolution-registry.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        current_commands = {
+            item["state_id"]: sorted(
+                {
+                    entry["command_id"]
+                    for entry in command_registry["records"]
+                    if entry["state_id"] == item["state_id"]
+                    and entry["posture"] == "current"
+                    and not entry["command_id"].endswith(
+                        ("-INVERSE", "-RECOVERY-HANDOFF")
+                    )
+                }
+            )
+            for item in node_snapshot["command_registry_bindings"]
+        }
+        self.assertEqual(
+            node_snapshot["command_registry_bindings"],
+            [
+                {
+                    "command_ids": current_commands[
+                        "UX-STATE-VARIANT-TIME-DETAIL-VIEWING"
+                    ],
+                    "figma_text_node_id": "329:1695",
+                    "requirement_id": "SPEC-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001",
+                    "state_id": "UX-STATE-VARIANT-TIME-DETAIL-VIEWING",
+                },
+                {
+                    "command_ids": current_commands[
+                        "UX-STATE-VARIANT-TIME-IMPORT-REVIEWING-DIFF"
+                    ],
+                    "figma_text_node_id": "329:1698",
+                    "requirement_id": "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001",
+                    "state_id": "UX-STATE-VARIANT-TIME-IMPORT-REVIEWING-DIFF",
+                },
+            ],
+        )
+        serialized = json.dumps(
+            {
+                "manifest": manifest,
+                "node_snapshot": node_snapshot,
+            },
+            sort_keys=True,
+        )
+        self.assertNotIn("GAP-UX-COMMAND-CONTRACT-TIME-DETAIL-001", serialized)
+        self.assertNotIn("GAP-UX-COMMAND-CONTRACT-TIME-IMPORT-001", serialized)
+
+    def test_r1_presentation_repairs_are_durable_and_task_pack_exact(self) -> None:
+        node_snapshot = json.loads(R1_NODE_SNAPSHOT.read_text(encoding="utf-8"))
+        repairs = {
+            item["visual_authority_id"]: item
+            for item in node_snapshot["presentation_repairs"]
+        }
+        self.assertEqual(
+            set(repairs),
+            {
+                "VA-P4-A11Y-CLASS-006",
+                "VA-P4-CANDIDATE-001",
+                "VA-P4-CANDIDATE-003",
+                "VA-P4-CANDIDATE-005",
+            },
+        )
+        journey = repairs["VA-P4-A11Y-CLASS-006"]
+        self.assertEqual(journey["frame_id"], "327:1648")
+        self.assertGreater(journey["frame_height"], 80)
+        self.assertFalse(journey["clips_consequence_copy"])
+        self.assertEqual(journey["visible_consequence_text"], "You can continue offline")
+
+        you = repairs["VA-P4-CANDIDATE-005"]
+        self.assertEqual(you["frame_id"], "278:1449")
+        self.assertEqual(you["visible_root_dock_glyphs"], ["Goals", "Time", "Today", "You"])
+        today = repairs["VA-P4-CANDIDATE-001"]
+        goals = repairs["VA-P4-CANDIDATE-003"]
+        self.assertGreaterEqual(today["content_bottom_clearance"], today["dock_height"])
+        self.assertGreaterEqual(goals["content_bottom_clearance"], goals["dock_height"])
+        self.assertEqual(today["preserved_composition"], "rolling_vertical_time_rail")
+
+        manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+        proofs = {
+            item["visual_authority_id"]: item["artifacts"]
+            for item in manifest["candidate_proofs"]
+        }
+        targets = {
+            item["visual_authority_id"]: item
+            for item in node_snapshot["task_pack_targets"]
+        }
+        for authority_id in ("VA-P4-CANDIDATE-004", "VA-P4-CANDIDATE-005"):
+            with self.subTest(authority_id=authority_id):
+                self.assertEqual(
+                    proofs[authority_id]["viewport"]["sha256"],
+                    targets[authority_id]["screenshot_sha256"],
+                )
+                self.assertEqual(
+                    proofs[authority_id]["viewport"]["path"],
+                    targets[authority_id]["screenshot_path"],
+                )
+
+    def test_r1_snapshot_rejects_unknown_fields_at_every_nested_record(self) -> None:
+        manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+        snapshot = json.loads(R1_NODE_SNAPSHOT.read_text(encoding="utf-8"))
+        cases = (
+            ("canon", snapshot["canon"]),
+            ("figma_write_receipt", snapshot["figma_write_receipt"]),
+            ("review_repair_receipt", snapshot["figma_write_receipt"]["review_repair"]),
+            ("authority_node_binding", snapshot["authority_node_bindings"][0]),
+            ("task_pack_target", snapshot["task_pack_targets"][0]),
+            ("authority_metadata", snapshot["authority_metadata"][0]),
+            ("root_shell_frame", snapshot["root_shell_frames"][0]),
+            ("drilldown_shell_frame", snapshot["drilldown_shell_frames"][0]),
+            ("pixel_equivalent_replacement", snapshot["pixel_equivalent_replacements"][0]),
+            ("render_proof", snapshot["pixel_equivalent_replacements"][0]["after_render"]),
+            ("raw_node_pair", snapshot["pixel_equivalent_replacements"][0]["raw_node_pairs"][0]),
+            ("normalized_node", snapshot["pixel_equivalent_replacements"][0]["normalized_old_nodes"][0]),
+            ("normalized_paint", snapshot["pixel_equivalent_replacements"][0]["normalized_old_nodes"][0]["fill_paints"][0]),
+            ("normalized_vector", snapshot["pixel_equivalent_replacements"][0]["normalized_old_nodes"][1]["vectors"][0]),
+            ("command_registry", snapshot["command_registry"]),
+            ("command_registry_binding", snapshot["command_registry_bindings"][0]),
+            ("presentation_repair", snapshot["presentation_repairs"][0]),
+            ("support_overlay", snapshot["support_overlay_bindings"][0]),
+            ("support_screen_mapping", snapshot["support_overlay_bindings"][0]["screen_mappings"][0]),
+        )
+        for name, record in cases:
+            mutated = json.loads(json.dumps(snapshot))
+            target = record
+            # Locate the copied record by its unique serialized representation.
+            needle = json.dumps(record, sort_keys=True)
+
+            def inject(value: object) -> bool:
+                if isinstance(value, dict):
+                    if json.dumps(value, sort_keys=True) == needle:
+                        value["unexpected_field"] = True
+                        return True
+                    return any(inject(child) for child in value.values())
+                if isinstance(value, list):
+                    return any(inject(child) for child in value)
+                return False
+
+            self.assertTrue(inject(mutated), name)
+            with self.subTest(record=name):
+                with self.assertRaises(CanonError) as raised:
+                    visual_authority.validate_r1_node_snapshot_payload(
+                        ROOT,
+                        manifest,
+                        mutated,
+                    )
+                self.assertEqual(
+                    raised.exception.code,
+                    "VISUAL_AUTHORITY_R1_SNAPSHOT_INVALID",
+                )
+
+    def test_r1_pixel_equivalence_is_independently_reproducible(self) -> None:
+        snapshot = json.loads(R1_NODE_SNAPSHOT.read_text(encoding="utf-8"))
+        node_snapshot = snapshot
+        manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+        replacement = snapshot["pixel_equivalent_replacements"][0]
+        self.assertEqual(
+            replacement["normalized_old_nodes"],
+            replacement["normalized_replacement_nodes"],
+        )
+        normalized_digest = hashlib.sha256(
+            json.dumps(
+                replacement["normalized_old_nodes"],
+                ensure_ascii=False,
+                sort_keys=True,
+                separators=(",", ":"),
+            ).encode("utf-8")
+        ).hexdigest()
+        self.assertEqual(replacement["normalized_properties_sha256"], normalized_digest)
+        before = replacement["before_render"]
+        after = replacement["after_render"]
+        self.assertNotEqual(before["path"], after["path"])
+        self.assertEqual(before["sha256"], after["sha256"])
+        for render in (before, after):
+            self.assertEqual(
+                hashlib.sha256((ROOT / render["path"]).read_bytes()).hexdigest(),
+                render["sha256"],
+            )
 
         viewport_proofs = {
             item["visual_authority_id"]: item["artifacts"]["viewport"]
@@ -177,18 +418,10 @@ class VisualAuthorityRebaselineTests(unittest.TestCase):
         self.assertTrue(replacement["pixel_equivalent"])
         self.assertTrue(replacement["non_destructive"])
         self.assertEqual(
-            replacement["render_proof"],
-            {
-                "path": (
-                    "docs/qa/evidence/2026-07-16-canon-visual-authority-"
-                    "r1-shell-repair/screens/task-pack/"
-                    "va-p4-a11y-class-001-viewport.png"
-                ),
-                "sha256": (
-                    "311374645649f6bdd851b9e34783599847c94b76d6862d0dbb2d67a473260376"
-                ),
-            },
+            replacement["before_render"]["sha256"],
+            "311374645649f6bdd851b9e34783599847c94b76d6862d0dbb2d67a473260376",
         )
+        self.assertEqual(replacement["before_render"]["sha256"], replacement["after_render"]["sha256"])
 
         drilldowns = {
             item["frame_id"]: item
@@ -257,7 +490,7 @@ class VisualAuthorityRebaselineTests(unittest.TestCase):
         ).hexdigest()
         self.assertEqual(
             non_hash_digest,
-            "fc4fcac9f188a5e479e0a5565bd63eb41d1a436569dfad4e22eb8e48d7556df4",
+            "9384b572533a4a8ac2e2bd0b068e1fa76d427db8417a9668239043707eff0202",
         )
 
     def test_hand_record_matches_machine_canon_and_coverage_digest(self) -> None:

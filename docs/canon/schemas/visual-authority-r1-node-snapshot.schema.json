@@ -122,7 +122,7 @@
       "additionalProperties": false,
       "properties": {
         "created_node_count": {
-          "const": 77
+          "const": 79
         },
         "deleted_node_ids": {
           "$ref": "#/$defs/emptyArray"
@@ -131,14 +131,18 @@
           "$ref": "#/$defs/emptyArray"
         },
         "mutated_node_count": {
-          "const": 92
+          "const": 105
+        },
+        "review_repair": {
+          "$ref": "#/$defs/reviewRepairReceipt"
         }
       },
       "required": [
         "created_node_count",
         "deleted_node_ids",
         "destructive_actions",
-        "mutated_node_count"
+        "mutated_node_count",
+        "review_repair"
       ],
       "type": "object"
     },
@@ -155,15 +159,40 @@
       "items": {
         "additionalProperties": false,
         "properties": {
+          "after_render": {
+            "$ref": "#/$defs/renderProof"
+          },
           "audit_conclusion": {
             "minLength": 1,
             "type": "string"
+          },
+          "before_render": {
+            "$ref": "#/$defs/renderProof"
           },
           "frame_id": {
             "const": "270:1430"
           },
           "non_destructive": {
             "const": true
+          },
+          "normalized_old_nodes": {
+            "items": {
+              "$ref": "#/$defs/normalizedNode"
+            },
+            "maxItems": 4,
+            "minItems": 4,
+            "type": "array"
+          },
+          "normalized_properties_sha256": {
+            "$ref": "#/$defs/sha256"
+          },
+          "normalized_replacement_nodes": {
+            "items": {
+              "$ref": "#/$defs/normalizedNode"
+            },
+            "maxItems": 4,
+            "minItems": 4,
+            "type": "array"
           },
           "old_hidden_node_ids": {
             "const": [
@@ -176,8 +205,13 @@
           "pixel_equivalent": {
             "const": true
           },
-          "render_proof": {
-            "$ref": "#/$defs/renderProof"
+          "raw_node_pairs": {
+            "items": {
+              "$ref": "#/$defs/rawNodePair"
+            },
+            "maxItems": 4,
+            "minItems": 4,
+            "type": "array"
           },
           "replacement_node_ids": {
             "const": [
@@ -199,12 +233,17 @@
           }
         },
         "required": [
+          "after_render",
           "audit_conclusion",
+          "before_render",
           "frame_id",
           "non_destructive",
+          "normalized_old_nodes",
+          "normalized_properties_sha256",
+          "normalized_replacement_nodes",
           "old_hidden_node_ids",
           "pixel_equivalent",
-          "render_proof",
+          "raw_node_pairs",
           "replacement_node_ids",
           "visible_capture_node_ids",
           "visible_search_node_ids"
@@ -318,6 +357,204 @@
       "maxItems": 18,
       "minItems": 18,
       "type": "array"
+    },
+    "command_registry": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "const": "docs/canon/registries/command-resolution-registry.json"
+        },
+        "registry_id": {
+          "const": "COMMAND-RESOLUTION-REGISTRY-001"
+        },
+        "registry_revision": {
+          "const": 2
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "required": [
+        "path",
+        "registry_id",
+        "registry_revision",
+        "sha256"
+      ],
+      "type": "object"
+    },
+    "command_registry_bindings": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "command_ids": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "figma_text_node_id": {
+            "$ref": "#/$defs/nodeId"
+          },
+          "requirement_id": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "state_id": {
+            "pattern": "^UX-STATE-VARIANT-",
+            "type": "string"
+          }
+        },
+        "required": [
+          "command_ids",
+          "figma_text_node_id",
+          "requirement_id",
+          "state_id"
+        ],
+        "type": "object"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "type": "array"
+    },
+    "presentation_repairs": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "clips_consequence_copy": {
+            "type": "boolean"
+          },
+          "content_bottom_clearance": {
+            "type": "integer"
+          },
+          "dock_height": {
+            "type": "integer"
+          },
+          "fade_height": {
+            "type": "integer"
+          },
+          "fade_node_id": {
+            "$ref": "#/$defs/nodeId"
+          },
+          "fade_y": {
+            "type": "number"
+          },
+          "frame_height": {
+            "type": "number"
+          },
+          "frame_id": {
+            "$ref": "#/$defs/nodeId"
+          },
+          "old_hidden_dock_node_id": {
+            "$ref": "#/$defs/nodeId"
+          },
+          "pixel_equivalent_render": {
+            "type": "boolean"
+          },
+          "preserved_composition": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "repair_kind": {
+            "enum": [
+              "replace_dock",
+              "trim_fade_and_replace_dock",
+              "trim_fade_to_dock",
+              "unclip_and_resize"
+            ]
+          },
+          "replacement_dock_node_id": {
+            "$ref": "#/$defs/nodeId"
+          },
+          "screenshot_height": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "screenshot_path": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "screenshot_sha256": {
+            "$ref": "#/$defs/sha256"
+          },
+          "screenshot_width": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "visible_consequence_text": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "visible_root_dock_glyphs": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "visual_authority_id": {
+            "$ref": "#/$defs/taskAuthorityId"
+          }
+        },
+        "required": [
+          "frame_id",
+          "repair_kind",
+          "screenshot_height",
+          "screenshot_path",
+          "screenshot_sha256",
+          "screenshot_width",
+          "visual_authority_id"
+        ],
+        "type": "object"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array"
+    },
+    "support_overlay_bindings": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "mapping_role": {
+            "const": "accessibility_support_overlay"
+          },
+          "requirement_ids": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "screen_mappings": {
+            "items": {
+              "$ref": "#/$defs/screenMapping"
+            },
+            "minItems": 1,
+            "type": "array"
+          },
+          "visual_authority_id": {
+            "enum": [
+              "VA-P4-A11Y-CLASS-003",
+              "VA-P4-A11Y-CLASS-005"
+            ]
+          }
+        },
+        "required": [
+          "mapping_role",
+          "requirement_ids",
+          "screen_mappings",
+          "visual_authority_id"
+        ],
+        "type": "object"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "type": "array"
     }
   },
   "required": [
@@ -325,6 +562,8 @@
     "authority_node_bindings",
     "authority_state",
     "canon",
+    "command_registry",
+    "command_registry_bindings",
     "deleted_node_ids",
     "destructive_actions",
     "drilldown_shell_frames",
@@ -333,9 +572,11 @@
     "page_id",
     "page_name",
     "pixel_equivalent_replacements",
+    "presentation_repairs",
     "repository_base_sha",
     "root_shell_frames",
     "schema_version",
+    "support_overlay_bindings",
     "task_pack_targets"
   ],
   "title": "Ambitions Visual Authority R1 Node Snapshot",
@@ -370,10 +611,11 @@
       "additionalProperties": false,
       "properties": {
         "path": {
-          "const": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-001-viewport.png"
+          "minLength": 1,
+          "type": "string"
         },
         "sha256": {
-          "const": "311374645649f6bdd851b9e34783599847c94b76d6862d0dbb2d67a473260376"
+          "$ref": "#/$defs/sha256"
         }
       },
       "required": [
@@ -393,6 +635,254 @@
     "taskAuthorityId": {
       "pattern": "^VA-P4-(?:A11Y-CLASS|CANDIDATE)-[0-9]{3}$",
       "type": "string"
+    },
+    "normalizedNode": {
+      "additionalProperties": false,
+      "properties": {
+        "component_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fill_paints": {
+          "items": {
+            "$ref": "#/$defs/paint"
+          },
+          "type": "array"
+        },
+        "geometry": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "type": "array"
+        },
+        "opacity": {
+          "type": "number"
+        },
+        "role": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "shape_kind": {
+          "enum": [
+            "circle",
+            "component"
+          ]
+        },
+        "stroke_paints": {
+          "items": {
+            "$ref": "#/$defs/paint"
+          },
+          "type": "array"
+        },
+        "stroke_weight": {
+          "type": "number"
+        },
+        "vectors": {
+          "items": {
+            "$ref": "#/$defs/vector"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "component_id",
+        "fill_paints",
+        "geometry",
+        "opacity",
+        "role",
+        "shape_kind",
+        "stroke_paints",
+        "stroke_weight",
+        "vectors"
+      ],
+      "type": "object"
+    },
+    "paint": {
+      "additionalProperties": false,
+      "properties": {
+        "color": {
+          "pattern": "^#[0-9A-F]{6}$",
+          "type": "string"
+        },
+        "opacity": {
+          "type": "number"
+        },
+        "type": {
+          "const": "SOLID"
+        }
+      },
+      "required": [
+        "color",
+        "opacity",
+        "type"
+      ],
+      "type": "object"
+    },
+    "rawNodePair": {
+      "additionalProperties": false,
+      "properties": {
+        "old_node_id": {
+          "$ref": "#/$defs/nodeId"
+        },
+        "old_node_type": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "old_visible": {
+          "type": "boolean"
+        },
+        "replacement_node_id": {
+          "$ref": "#/$defs/nodeId"
+        },
+        "replacement_node_type": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "replacement_visible": {
+          "type": "boolean"
+        },
+        "role": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "old_node_id",
+        "old_node_type",
+        "old_visible",
+        "replacement_node_id",
+        "replacement_node_type",
+        "replacement_visible",
+        "role"
+      ],
+      "type": "object"
+    },
+    "reviewRepairReceipt": {
+      "additionalProperties": false,
+      "properties": {
+        "atomic_write_count": {
+          "const": 2
+        },
+        "created_node_ids": {
+          "items": {
+            "$ref": "#/$defs/nodeId"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "failed_atomic_attempt_count": {
+          "const": 1
+        },
+        "failed_atomic_debug_uuid": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "hidden_retained_node_ids": {
+          "items": {
+            "$ref": "#/$defs/nodeId"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "mutated_node_ids": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 13,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "atomic_write_count",
+        "created_node_ids",
+        "failed_atomic_attempt_count",
+        "failed_atomic_debug_uuid",
+        "hidden_retained_node_ids",
+        "mutated_node_ids"
+      ],
+      "type": "object"
+    },
+    "screenMapping": {
+      "additionalProperties": false,
+      "properties": {
+        "authority_eligible_state_count": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "blueprint_id": {
+          "pattern": "^UX-SCREEN-",
+          "type": "string"
+        },
+        "future_gated_state_count": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "gap_blocked_state_count": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "state_variant_ids": {
+          "items": {
+            "pattern": "^UX-STATE-VARIANT-",
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "authority_eligible_state_count",
+        "blueprint_id",
+        "future_gated_state_count",
+        "gap_blocked_state_count",
+        "state_variant_ids"
+      ],
+      "type": "object"
+    },
+    "vector": {
+      "additionalProperties": false,
+      "properties": {
+        "geometry": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "type": "array"
+        },
+        "paths": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "stroke_paints": {
+          "items": {
+            "$ref": "#/$defs/paint"
+          },
+          "type": "array"
+        },
+        "stroke_weight": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "geometry",
+        "paths",
+        "stroke_paints",
+        "stroke_weight"
+      ],
+      "type": "object"
     }
   }
 }

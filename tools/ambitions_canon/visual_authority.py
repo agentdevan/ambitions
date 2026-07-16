@@ -415,6 +415,7 @@ def validate_visual_authority_payload(
     bindings: list[VisualAuthorityBinding] = []
     mapped_requirement_ids: set[str] = set()
     mapped_state_ids: set[str] = set()
+    support_overlay_state_ids: set[str] = set()
     screen_count = 0
     candidate_records: dict[str, Mapping[str, object]] = {}
     anatomy_node_ids: set[str] = set()
@@ -435,6 +436,10 @@ def validate_visual_authority_payload(
         authority_id = _string(
             item.get("visual_authority_id"), "visual authority ID"
         )
+        support_overlay = authority_id in {
+            "VA-P4-A11Y-CLASS-003",
+            "VA-P4-A11Y-CLASS-005",
+        }
         if (
             item.get("canon_revision") != canon_revision
             or item.get("canon_source_sha") != canon_source_sha
@@ -589,12 +594,15 @@ def validate_visual_authority_payload(
             state_ids = _sorted_unique_strings(
                 mapping.get("state_variant_ids"), "candidate screen state IDs"
             )
-            if mapped_state_ids.intersection(state_ids):
+            if not support_overlay and mapped_state_ids.intersection(state_ids):
                 raise _error(
                     "VISUAL_AUTHORITY_STATE_POSTURE_INVALID",
                     "one UX state is mapped by more than one candidate master",
                 )
-            mapped_state_ids.update(state_ids)
+            if not support_overlay:
+                mapped_state_ids.update(state_ids)
+            else:
+                support_overlay_state_ids.update(state_ids)
             eligible_count = _integer(
                 mapping.get("authority_eligible_state_count"), "eligible state count"
             )
@@ -613,7 +621,8 @@ def validate_visual_authority_payload(
                     "VISUAL_AUTHORITY_STATE_POSTURE_INVALID",
                     f"candidate screen state counts do not resolve for {mapped_blueprint}",
                 )
-            screen_count += 1
+            if not support_overlay:
+                screen_count += 1
             bindings.append(
                 VisualAuthorityBinding(
                     visual_authority_id=authority_id,
@@ -646,7 +655,12 @@ def validate_visual_authority_payload(
                     gap_blocked_state_count=0,
                 )
             )
-    if len(candidate_records) != 18 or screen_count != 47 or mapped_state_ids != inventory_ids:
+    if (
+        len(candidate_records) != 18
+        or screen_count != 47
+        or mapped_state_ids != inventory_ids
+        or not support_overlay_state_ids.issubset(mapped_state_ids)
+    ):
         raise _error(
             "VISUAL_AUTHORITY_FIGMA_MAPPING_INVALID",
             "18 candidate masters must map all 47 UX screens and every state exactly once",
@@ -1024,12 +1038,24 @@ def _validate_r1_node_snapshot(
     """Fail closed when the frozen live-node and render bindings drift."""
 
     snapshot = _load_json_object(root, R1_NODE_SNAPSHOT_PATH)
+    validate_r1_node_snapshot_payload(root, manifest, snapshot)
+
+
+def validate_r1_node_snapshot_payload(
+    root: Path,
+    manifest: Mapping[str, object],
+    snapshot: Mapping[str, object],
+) -> None:
+    """Validate one caller-supplied R1 snapshot with closed nested records."""
+
     expected_fields = frozenset(
         {
             "authority_metadata",
             "authority_node_bindings",
             "authority_state",
             "canon",
+            "command_registry",
+            "command_registry_bindings",
             "deleted_node_ids",
             "destructive_actions",
             "drilldown_shell_frames",
@@ -1038,15 +1064,18 @@ def _validate_r1_node_snapshot(
             "page_id",
             "page_name",
             "pixel_equivalent_replacements",
+            "presentation_repairs",
             "repository_base_sha",
             "root_shell_frames",
             "schema_version",
+            "support_overlay_bindings",
             "task_pack_targets",
         }
     )
-    _exact_fields(snapshot, expected_fields, "R1 node snapshot")
+    _r1_exact_fields(snapshot, expected_fields, "R1 node snapshot")
     figma = _object(manifest.get("figma"), "figma")
     canon = _object(manifest.get("canon"), "canon")
+    _r1_exact_fields(canon, _CANON_FIELDS, "R1 canon")
     if (
         snapshot.get("schema_version") != 1
         or snapshot.get("authority_state") != "candidate_shadow"
@@ -1063,12 +1092,45 @@ def _validate_r1_node_snapshot(
         )
 
     receipt = _object(snapshot.get("figma_write_receipt"), "Figma write receipt")
-    if receipt != {
-        "created_node_count": 77,
-        "deleted_node_ids": [],
-        "destructive_actions": [],
-        "mutated_node_count": 92,
-    }:
+    _r1_exact_fields(
+        receipt,
+        frozenset(
+            {
+                "created_node_count",
+                "deleted_node_ids",
+                "destructive_actions",
+                "mutated_node_count",
+                "review_repair",
+            }
+        ),
+        "R1 Figma write receipt",
+    )
+    repair_receipt = _object(receipt.get("review_repair"), "review repair receipt")
+    _r1_exact_fields(
+        repair_receipt,
+        frozenset(
+            {
+                "atomic_write_count",
+                "created_node_ids",
+                "failed_atomic_attempt_count",
+                "failed_atomic_debug_uuid",
+                "hidden_retained_node_ids",
+                "mutated_node_ids",
+            }
+        ),
+        "R1 review repair receipt",
+    )
+    if (
+        receipt.get("created_node_count") != 79
+        or receipt.get("mutated_node_count") != 105
+        or receipt.get("deleted_node_ids") != []
+        or receipt.get("destructive_actions") != []
+        or repair_receipt.get("atomic_write_count") != 2
+        or repair_receipt.get("failed_atomic_attempt_count") != 1
+        or repair_receipt.get("created_node_ids") != ["367:2746", "368:2746"]
+        or repair_receipt.get("hidden_retained_node_ids")
+        != ["354:2562", "354:2733"]
+    ):
         raise _error(
             "VISUAL_AUTHORITY_R1_SNAPSHOT_INVALID",
             "R1 Figma write receipt is incomplete or destructive",
@@ -1087,6 +1149,12 @@ def _validate_r1_node_snapshot(
             snapshot.get("authority_node_bindings"), "R1 authority bindings"
         )
     )
+    for item in bindings:
+        _r1_exact_fields(
+            item,
+            frozenset({"node_id", "visual_authority_id"}),
+            "R1 authority binding",
+        )
     binding_pairs = tuple(
         (
             _string(item.get("visual_authority_id"), "visual authority ID"),
@@ -1130,6 +1198,21 @@ def _validate_r1_node_snapshot(
         _object(value, "R1 task-pack target")
         for value in _list(snapshot.get("task_pack_targets"), "R1 task-pack targets")
     )
+    for item in targets:
+        _r1_exact_fields(
+            item,
+            frozenset(
+                {
+                    "direct_link",
+                    "frame_version",
+                    "node_id",
+                    "screenshot_path",
+                    "screenshot_sha256",
+                    "visual_authority_id",
+                }
+            ),
+            "R1 task-pack target",
+        )
     target_ids = tuple(
         _string(item.get("visual_authority_id"), "visual authority ID")
         for item in targets
@@ -1176,6 +1259,21 @@ def _validate_r1_node_snapshot(
         _object(value, "R1 authority metadata")
         for value in _list(snapshot.get("authority_metadata"), "R1 authority metadata")
     )
+    for item in metadata:
+        _r1_exact_fields(
+            item,
+            frozenset(
+                {
+                    "implementation_status",
+                    "node_id",
+                    "owner_approval_state",
+                    "proof_ceiling",
+                    "task_pack_eligibility",
+                    "visual_authority_id",
+                }
+            ),
+            "R1 authority metadata",
+        )
     metadata_ids = tuple(
         _string(item.get("visual_authority_id"), "visual authority ID")
         for item in metadata
@@ -1196,10 +1294,180 @@ def _validate_r1_node_snapshot(
             "R1 candidate metadata is stale or authorizes source work",
         )
 
+    support_overlays = tuple(
+        _object(value, "R1 support overlay")
+        for value in _list(
+            snapshot.get("support_overlay_bindings"),
+            "R1 support overlay bindings",
+        )
+    )
+    support_ids = tuple(
+        _string(item.get("visual_authority_id"), "support authority ID")
+        for item in support_overlays
+    )
+    if support_ids != ("VA-P4-A11Y-CLASS-003", "VA-P4-A11Y-CLASS-005"):
+        raise _error(
+            "VISUAL_AUTHORITY_R1_SNAPSHOT_INVALID",
+            "R1 accessibility support overlays are incomplete or unsorted",
+        )
+    for item in support_overlays:
+        _r1_exact_fields(
+            item,
+            frozenset(
+                {
+                    "mapping_role",
+                    "requirement_ids",
+                    "screen_mappings",
+                    "visual_authority_id",
+                }
+            ),
+            "R1 support overlay",
+        )
+        authority_id = _string(
+            item.get("visual_authority_id"), "support authority ID"
+        )
+        mappings = tuple(
+            _object(value, "support screen mapping")
+            for value in _list(item.get("screen_mappings"), "support screen mappings")
+        )
+        for mapping in mappings:
+            _r1_exact_fields(
+                mapping,
+                _SCREEN_MAPPING_FIELDS,
+                "R1 support screen mapping",
+            )
+        if (
+            item.get("mapping_role") != "accessibility_support_overlay"
+            or not _list(item.get("requirement_ids"), "support requirements")
+            or item.get("requirement_ids")
+            != authority_nodes[authority_id].get("requirement_ids")
+            or item.get("screen_mappings")
+            != authority_nodes[authority_id].get("screen_mappings")
+        ):
+            raise _error(
+                "VISUAL_AUTHORITY_R1_SNAPSHOT_INVALID",
+                f"R1 support-overlay mapping is stale: {authority_id}",
+            )
+
+    registry_binding = _object(
+        snapshot.get("command_registry"), "R1 command registry"
+    )
+    _r1_exact_fields(
+        registry_binding,
+        frozenset({"path", "registry_id", "registry_revision", "sha256"}),
+        "R1 command registry",
+    )
+    registry_path = Path(
+        _string(registry_binding.get("path"), "command registry path")
+    )
+    registry_bytes = _read_regular_nofollow(root, registry_path)
+    registry = _object(json.loads(registry_bytes), "command registry")
+    if (
+        hashlib.sha256(registry_bytes).hexdigest()
+        != _sha(registry_binding.get("sha256"), 64, "command registry SHA")
+        or registry_binding.get("registry_id") != registry.get("registry_id")
+        or registry_binding.get("registry_revision") != registry.get("registry_revision")
+    ):
+        raise _error(
+            "VISUAL_AUTHORITY_R1_SNAPSHOT_INVALID",
+            "R1 command-registry provenance is stale",
+        )
+    command_bindings = tuple(
+        _object(value, "R1 command registry binding")
+        for value in _list(
+            snapshot.get("command_registry_bindings"),
+            "R1 command registry bindings",
+        )
+    )
+    expected_command_states = {
+        "UX-STATE-VARIANT-TIME-DETAIL-VIEWING": (
+            "329:1695",
+            "SPEC-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001",
+        ),
+        "UX-STATE-VARIANT-TIME-IMPORT-REVIEWING-DIFF": (
+            "329:1698",
+            "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001",
+        ),
+    }
+    if tuple(item.get("state_id") for item in command_bindings) != tuple(
+        sorted(expected_command_states)
+    ):
+        raise _error(
+            "VISUAL_AUTHORITY_R1_SNAPSHOT_INVALID",
+            "R1 command-registry bindings are incomplete or unsorted",
+        )
+    registry_records = tuple(
+        _object(value, "command registry record")
+        for value in _list(registry.get("records"), "command registry records")
+    )
+    for item in command_bindings:
+        _r1_exact_fields(
+            item,
+            frozenset(
+                {
+                    "command_ids",
+                    "figma_text_node_id",
+                    "requirement_id",
+                    "state_id",
+                }
+            ),
+            "R1 command registry binding",
+        )
+        state_id = _string(item.get("state_id"), "command state ID")
+        expected_node, expected_requirement = expected_command_states[state_id]
+        expected_commands = sorted(
+            {
+                _string(record.get("command_id"), "command ID")
+                for record in registry_records
+                if record.get("state_id") == state_id
+                and record.get("posture") == "current"
+                and not _string(record.get("command_id"), "command ID").endswith(
+                    ("-INVERSE", "-RECOVERY-HANDOFF")
+                )
+            }
+        )
+        if (
+            item.get("figma_text_node_id") != expected_node
+            or item.get("requirement_id") != expected_requirement
+            or item.get("command_ids") != expected_commands
+        ):
+            raise _error(
+                "VISUAL_AUTHORITY_R1_SNAPSHOT_INVALID",
+                f"R1 command-registry binding is stale: {state_id}",
+            )
+    serialized_snapshot = json.dumps(snapshot, sort_keys=True)
+    if (
+        "GAP-UX-COMMAND-CONTRACT-TIME-DETAIL-001" in serialized_snapshot
+        or "GAP-UX-COMMAND-CONTRACT-TIME-IMPORT-001" in serialized_snapshot
+    ):
+        raise _error(
+            "VISUAL_AUTHORITY_R1_SNAPSHOT_INVALID",
+            "R1 snapshot retains obsolete Time command-gap copy",
+        )
+
     roots = tuple(
         _object(value, "root shell frame")
         for value in _list(snapshot.get("root_shell_frames"), "root shell frames")
     )
+    for item in roots:
+        _r1_exact_fields(
+            item,
+            frozenset(
+                {
+                    "bottom_clearance",
+                    "capture_count",
+                    "capture_node_id",
+                    "dock_height",
+                    "dock_node_id",
+                    "fade_node_id",
+                    "frame_id",
+                    "root_dock_count",
+                    "search_count",
+                    "search_node_id",
+                }
+            ),
+            "R1 root shell frame",
+        )
     if (
         len(roots) != 14
         or len({_string(item.get("frame_id"), "frame ID") for item in roots}) != 14
@@ -1222,6 +1490,22 @@ def _validate_r1_node_snapshot(
             snapshot.get("drilldown_shell_frames"), "drilldown shell frames"
         )
     )
+    for item in drilldowns:
+        _r1_exact_fields(
+            item,
+            frozenset(
+                {
+                    "back_count",
+                    "back_hit_node_id",
+                    "back_node_id",
+                    "capture_count",
+                    "frame_id",
+                    "root_dock_count",
+                    "search_count",
+                }
+            ),
+            "R1 drilldown shell frame",
+        )
     if (
         len(drilldowns) != 7
         or len({_string(item.get("frame_id"), "frame ID") for item in drilldowns})
@@ -1239,6 +1523,155 @@ def _validate_r1_node_snapshot(
             "drilldown frames do not preserve one back affordance and no root chrome",
         )
 
+    presentation_repairs = tuple(
+        _object(value, "R1 presentation repair")
+        for value in _list(
+            snapshot.get("presentation_repairs"), "R1 presentation repairs"
+        )
+    )
+    expected_presentation_repairs: dict[str, Mapping[str, object]] = {
+        "VA-P4-A11Y-CLASS-006": {
+            "clips_consequence_copy": False,
+            "frame_height": 124,
+            "frame_id": "327:1648",
+            "repair_kind": "unclip_and_resize",
+            "screenshot_height": 124,
+            "screenshot_path": (
+                "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-"
+                "repair/screens/task-pack/va-p4-a11y-class-006-viewport.png"
+            ),
+            "screenshot_sha256": (
+                "2b37bf9db0d74e53f574b69f3bf54486904a77967f743f93364da1c5183e3e71"
+            ),
+            "screenshot_width": 916,
+            "visible_consequence_text": "You can continue offline",
+            "visual_authority_id": "VA-P4-A11Y-CLASS-006",
+        },
+        "VA-P4-CANDIDATE-001": {
+            "content_bottom_clearance": 84,
+            "dock_height": 84,
+            "fade_height": 84,
+            "fade_node_id": "354:2300",
+            "fade_y": 768,
+            "frame_id": "266:1424",
+            "preserved_composition": "rolling_vertical_time_rail",
+            "repair_kind": "trim_fade_to_dock",
+            "screenshot_height": 852,
+            "screenshot_path": (
+                "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-"
+                "repair/screens/task-pack/va-p4-candidate-001-viewport.png"
+            ),
+            "screenshot_sha256": (
+                "af6bf216b3809b832780089eb14e5ecdef6a57d58b4514275ca8c52cdfe2532b"
+            ),
+            "screenshot_width": 393,
+            "visual_authority_id": "VA-P4-CANDIDATE-001",
+        },
+        "VA-P4-CANDIDATE-003": {
+            "content_bottom_clearance": 84,
+            "dock_height": 84,
+            "fade_height": 84,
+            "fade_node_id": "354:2552",
+            "fade_y": 768,
+            "frame_id": "272:1424",
+            "old_hidden_dock_node_id": "354:2562",
+            "repair_kind": "trim_fade_and_replace_dock",
+            "replacement_dock_node_id": "368:2746",
+            "screenshot_height": 852,
+            "screenshot_path": (
+                "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-"
+                "repair/screens/task-pack/va-p4-candidate-003-viewport.png"
+            ),
+            "screenshot_sha256": (
+                "a19e378f86dcf4d9a0cde336ef35b8c77d99a8da6a543ef2f4dd1449bb406090"
+            ),
+            "screenshot_width": 393,
+            "visible_root_dock_glyphs": ["Goals", "Time", "Today", "You"],
+            "visual_authority_id": "VA-P4-CANDIDATE-003",
+        },
+        "VA-P4-CANDIDATE-005": {
+            "frame_id": "278:1449",
+            "old_hidden_dock_node_id": "354:2733",
+            "pixel_equivalent_render": True,
+            "repair_kind": "replace_dock",
+            "replacement_dock_node_id": "367:2746",
+            "screenshot_height": 852,
+            "screenshot_path": (
+                "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-"
+                "repair/screens/task-pack/va-p4-candidate-005-viewport.png"
+            ),
+            "screenshot_sha256": (
+                "a792881c96c7f3e12b7cdd5ece054fb9bde25b6bb80fcfe9e2919ed53c8d20a3"
+            ),
+            "screenshot_width": 393,
+            "visible_root_dock_glyphs": ["Goals", "Time", "Today", "You"],
+            "visual_authority_id": "VA-P4-CANDIDATE-005",
+        },
+    }
+    repair_ids = tuple(item.get("visual_authority_id") for item in presentation_repairs)
+    if repair_ids != tuple(sorted(expected_presentation_repairs)):
+        raise _error(
+            "VISUAL_AUTHORITY_R1_SNAPSHOT_INVALID",
+            "R1 presentation repairs are incomplete or unsorted",
+        )
+    for item in presentation_repairs:
+        authority_id = _string(
+            item.get("visual_authority_id"), "presentation repair authority ID"
+        )
+        expected = expected_presentation_repairs[authority_id]
+        _r1_exact_fields(
+            item,
+            frozenset(expected),
+            "R1 presentation repair",
+        )
+        screenshot_path = Path(
+            _string(item.get("screenshot_path"), "presentation screenshot path")
+        )
+        screenshot = _read_regular_nofollow(root, screenshot_path)
+        if (
+            item != expected
+            or hashlib.sha256(screenshot).hexdigest()
+            != item.get("screenshot_sha256")
+            or _png_dimensions(screenshot)
+            != (item.get("screenshot_width"), item.get("screenshot_height"))
+        ):
+            raise _error(
+                "VISUAL_AUTHORITY_R1_PROOF_INVALID",
+                f"R1 presentation repair proof is stale: {authority_id}",
+            )
+    representative_pairs = (
+        (
+            "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-"
+            "repair/screens/266-1424-today-populated-light.png",
+            expected_presentation_repairs["VA-P4-CANDIDATE-001"]["screenshot_path"],
+        ),
+        (
+            "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-"
+            "repair/screens/272-1424-goals-root-light.png",
+            expected_presentation_repairs["VA-P4-CANDIDATE-003"]["screenshot_path"],
+        ),
+        (
+            "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-"
+            "repair/screens/275-1424-time-day-light.png",
+            "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-"
+            "repair/screens/task-pack/va-p4-candidate-004-viewport.png",
+        ),
+        (
+            "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-"
+            "repair/screens/278-1449-you-root-light.png",
+            expected_presentation_repairs["VA-P4-CANDIDATE-005"]["screenshot_path"],
+        ),
+    )
+    if any(
+        _read_regular_nofollow(root, Path(representative))
+        != _read_regular_nofollow(root, Path(task_pack))
+        for representative, task_pack in representative_pairs
+    ):
+        raise _error(
+            "VISUAL_AUTHORITY_R1_PROOF_INVALID",
+            "R1 representative and task-pack screenshots are not byte-identical",
+        )
+
     replacements = tuple(
         _object(value, "pixel-equivalent replacement")
         for value in _list(
@@ -1252,9 +1685,120 @@ def _validate_r1_node_snapshot(
             "R1 replacement proof is missing or ambiguous",
         )
     replacement = replacements[0]
-    render = _object(replacement.get("render_proof"), "replacement render proof")
-    render_path = _string(render.get("path"), "replacement render path")
-    render_sha = _sha(render.get("sha256"), 64, "replacement render SHA")
+    _r1_exact_fields(
+        replacement,
+        frozenset(
+            {
+                "after_render",
+                "audit_conclusion",
+                "before_render",
+                "frame_id",
+                "non_destructive",
+                "normalized_old_nodes",
+                "normalized_properties_sha256",
+                "normalized_replacement_nodes",
+                "old_hidden_node_ids",
+                "pixel_equivalent",
+                "raw_node_pairs",
+                "replacement_node_ids",
+                "visible_capture_node_ids",
+                "visible_search_node_ids",
+            }
+        ),
+        "R1 pixel-equivalent replacement",
+    )
+    before_render = _object(replacement.get("before_render"), "before render")
+    after_render = _object(replacement.get("after_render"), "after render")
+    for render in (before_render, after_render):
+        _r1_exact_fields(
+            render,
+            frozenset({"path", "sha256"}),
+            "R1 replacement render",
+        )
+    raw_pairs = tuple(
+        _object(value, "R1 replacement node pair")
+        for value in _list(replacement.get("raw_node_pairs"), "replacement node pairs")
+    )
+    for pair in raw_pairs:
+        _r1_exact_fields(
+            pair,
+            frozenset(
+                {
+                    "old_node_id",
+                    "old_node_type",
+                    "old_visible",
+                    "replacement_node_id",
+                    "replacement_node_type",
+                    "replacement_visible",
+                    "role",
+                }
+            ),
+            "R1 replacement node pair",
+        )
+    normalized_old = tuple(
+        _object(value, "R1 normalized old node")
+        for value in _list(
+            replacement.get("normalized_old_nodes"), "normalized old nodes"
+        )
+    )
+    normalized_new = tuple(
+        _object(value, "R1 normalized replacement node")
+        for value in _list(
+            replacement.get("normalized_replacement_nodes"),
+            "normalized replacement nodes",
+        )
+    )
+    normalized_node_fields = frozenset(
+        {
+            "component_id",
+            "fill_paints",
+            "geometry",
+            "opacity",
+            "role",
+            "shape_kind",
+            "stroke_paints",
+            "stroke_weight",
+            "vectors",
+        }
+    )
+    paint_fields = frozenset({"color", "opacity", "type"})
+    vector_fields = frozenset(
+        {"geometry", "paths", "stroke_paints", "stroke_weight"}
+    )
+    for node in (*normalized_old, *normalized_new):
+        _r1_exact_fields(node, normalized_node_fields, "R1 normalized node")
+        for paint_value in (
+            *_list(node.get("fill_paints"), "normalized fill paints"),
+            *_list(node.get("stroke_paints"), "normalized stroke paints"),
+        ):
+            _r1_exact_fields(
+                _object(paint_value, "normalized paint"),
+                paint_fields,
+                "R1 normalized paint",
+            )
+        for vector_value in _list(node.get("vectors"), "normalized vectors"):
+            vector = _object(vector_value, "normalized vector")
+            _r1_exact_fields(vector, vector_fields, "R1 normalized vector")
+            for paint_value in _list(
+                vector.get("stroke_paints"), "normalized vector stroke paints"
+            ):
+                _r1_exact_fields(
+                    _object(paint_value, "normalized vector paint"),
+                    paint_fields,
+                    "R1 normalized vector paint",
+                )
+    normalized_digest = hashlib.sha256(
+        json.dumps(
+            list(normalized_old),
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8")
+    ).hexdigest()
+    before_path = Path(_string(before_render.get("path"), "before render path"))
+    after_path = Path(_string(after_render.get("path"), "after render path"))
+    before_sha = _sha(before_render.get("sha256"), 64, "before render SHA")
+    after_sha = _sha(after_render.get("sha256"), 64, "after render SHA")
     if (
         replacement.get("frame_id") != "270:1430"
         or replacement.get("visible_search_node_ids") != ["359:243"]
@@ -1265,10 +1809,18 @@ def _validate_r1_node_snapshot(
         != ["359:242", "359:243", "359:247", "359:248"]
         or replacement.get("pixel_equivalent") is not True
         or replacement.get("non_destructive") is not True
-        or hashlib.sha256(
-            _read_regular_nofollow(root, Path(render_path))
-        ).hexdigest()
-        != render_sha
+        or tuple(item.get("old_visible") for item in raw_pairs)
+        != (False, False, False, False)
+        or tuple(item.get("replacement_visible") for item in raw_pairs)
+        != (True, True, True, True)
+        or normalized_old != normalized_new
+        or replacement.get("normalized_properties_sha256") != normalized_digest
+        or before_path == after_path
+        or before_sha != after_sha
+        or hashlib.sha256(_read_regular_nofollow(root, before_path)).hexdigest()
+        != before_sha
+        or hashlib.sha256(_read_regular_nofollow(root, after_path)).hexdigest()
+        != after_sha
     ):
         raise _error(
             "VISUAL_AUTHORITY_R1_PROOF_INVALID",
@@ -1365,6 +1917,32 @@ def _exact_fields(value: Mapping[str, object], expected: frozenset[str], name: s
             "VISUAL_AUTHORITY_SCHEMA_INVALID",
             f"{name} fields do not match schema version 1",
         )
+
+
+def _r1_exact_fields(
+    value: Mapping[str, object], expected: frozenset[str], name: str
+) -> None:
+    if set(value) != expected:
+        raise _error(
+            "VISUAL_AUTHORITY_R1_SNAPSHOT_INVALID",
+            f"{name} fields do not match the closed R1 snapshot contract",
+        )
+
+
+def _png_dimensions(content: bytes) -> tuple[int, int]:
+    if (
+        len(content) < 24
+        or content[:8] != b"\x89PNG\r\n\x1a\n"
+        or content[12:16] != b"IHDR"
+    ):
+        raise _error(
+            "VISUAL_AUTHORITY_R1_PROOF_INVALID",
+            "R1 screenshot proof is not a valid PNG",
+        )
+    return (
+        int.from_bytes(content[16:20], "big"),
+        int.from_bytes(content[20:24], "big"),
+    )
 
 
 def _object(value: object, name: str) -> Mapping[str, object]:
