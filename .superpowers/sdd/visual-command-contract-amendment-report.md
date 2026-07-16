@@ -1227,6 +1227,133 @@ destructive artifact changed. The allowed claim remains deterministic
 shadow-canon repair candidate Green only for this exact trust boundary, pending
 independent exact-range specification-compliance and code-quality re-review.
 
+## Visual R1 build-current semantic proof projection — 2026-07-16
+
+### Frozen deterministic preconditions
+
+The semantic evaluation is bound to the clean, build-current commit
+`dbdc72ce90f14369aa900dbb2cd13741af2e1b83`. The exact independent visual
+review of
+`201f1e1451a295b53fcfcefb6ba4c0acce207d45..6b275edef2029de5a1af6b787990f139624d972f`
+returned `0 Critical / 0 Important / 1 Minor`. The exact independent generated-
+projection refresh review of
+`ab53c4a906d56306b4ab2a063f76fbef90d8c8c8..dbdc72ce90f14369aa900dbb2cd13741af2e1b83`
+returned `0 Critical / 0 Important / 0 Minor`. Both reviews covered
+specification compliance and code quality. The residual visual-review Minor is
+non-authorizing and does not upgrade the visual, accessibility, device, or
+release posture.
+
+An earlier comparison prepared after merge commit
+`ab53c4a906d56306b4ab2a063f76fbef90d8c8c8` is explicitly invalidated and
+non-authorizing. Its comparison artifact SHA-256 was
+`a1b7551c903c93e60c544d0cce6395a3183981f1a8b8e7408fbf229b6ef48f0f`
+with old/new totals `26 / 28`, but the subsequent deterministic build check
+found P0-stale generated source-traceability projections. Commit
+`dbdc72ce90f14369aa900dbb2cd13741af2e1b83` refreshed the nine generated
+projections and their nine shadow goldens. The invalidated comparison was not
+projected into the tracked receipt and proves nothing about the build-current
+candidate.
+
+### Fresh build-current evidence
+
+The controller prepared and ingested the build-current bundle through the
+offline deterministic CLI. The three semantic-review commands exited `0` in
+sequence: prepare with no response files, ingest the two isolated responses,
+then ingest the blinded comparison. Their terminal states were respectively
+`awaiting_independent_responses`,
+`responses_recorded_pending_blinded_comparison`, and `comparison_recorded`.
+The operator identity was `Visual R1 build-current semantic bundle operator`
+and the operator model was `deterministic-no-model-execution`.
+
+```text
+$PY scripts/ambitions-canon.py semantic-review --reviewer "Visual R1 build-current semantic bundle operator" --model "deterministic-no-model-execution"
+$PY scripts/ambitions-canon.py semantic-review --reviewer "Visual R1 build-current semantic bundle operator" --model "deterministic-no-model-execution" --old-response /tmp/ambitions-visual-r1-build-current-old-response.json --new-response /tmp/ambitions-visual-r1-build-current-new-response.json
+$PY scripts/ambitions-canon.py semantic-review --reviewer "Visual R1 build-current semantic bundle operator" --model "deterministic-no-model-execution" --old-response /tmp/ambitions-visual-r1-build-current-old-response.json --new-response /tmp/ambitions-visual-r1-build-current-new-response.json --comparison /tmp/ambitions-visual-r1-build-current-comparison.json
+```
+
+The old-path and new-pack evaluator roles were assigned as Sol High work and
+the blinded-comparator role as Sol Max work. The active runtime did not expose
+a tier identifier, so all three evidence artifacts honestly record
+`gpt-5-codex-runtime-identifier-not-exposed`. This report does not claim that a
+`gpt-5-sol-high` or `gpt-5-sol-max` runtime executed.
+
+Exact build-current evidence:
+
+```text
+evaluated commit: dbdc72ce90f14369aa900dbb2cd13741af2e1b83
+canon SHA-256: c7a5026b051abcf3951a73bc855179e4ecd9c26b87c490d4bf16ce2fc02de6a2
+old prompt SHA-256: 338c2088cc6a74dc06a3fc087bc6848280b117b7638aefdb377b9649face56cb
+new prompt SHA-256: 58f9ae1ea9d509ef2dc5e261ce25e9dff823f0bd2c53daf054ba08573ffe2718
+old response reviewer: Visual R1 Build-Current Old Path Evaluator
+old response SHA-256: f93d3fb9bbb276b7228ca4aa6b428a6432cfcc184af9fef5307efb56ad63d5bd
+new response reviewer: Visual R1 Build-Current New Pack Evaluator
+new response SHA-256: 94b93cc8ab2ead337237f5fd8897843bf1dc86411dc60ae205861aa13cd688a0
+comparison reviewer: Visual R1 Build-Current Blinded Comparator
+comparison SHA-256: 3b513798f1932b2768a1eafe7b3defc501d73c6260603000571fc7d6ba543aa5
+comparison totals: old 25 / new 28
+overall verdict: new_better
+old_better dimensions: 0
+```
+
+Ordered comparison dimensions:
+
+```text
+semantic_equivalence: equivalent, 4 / 4
+relevant_law_recall: new_better, 3 / 4
+contradiction_control: new_better, 3 / 4
+unauthorized_assumptions: equivalent, 4 / 4
+source_ownership: new_better, 3 / 4
+validation_completeness: equivalent, 4 / 4
+proof_discipline: equivalent, 4 / 4
+```
+
+The owner hard gate passed without score mutation: no dimension is
+`old_better`, and the new total is greater than the old total. Raw evaluator
+prose and comparator rationales remain ignored and untracked; the tracked
+receipt contains only the closed hashes, attribution, ordered scores, verdict,
+shadow posture, and claim ceiling.
+
+### Strict receipt TDD
+
+The pinned Python 3.12 receipt module first exited `1`: `13` tests ran in
+`121.368s`, with `4` failures and `1` error. The failures proved the stale
+canon hash, new-prompt hash, all ordered pack hashes, evaluated task-pack bytes,
+and old evaluated commit. The offline receipt CLI separately exited `1` with
+`P0_BLOCKER SEMANTIC_RECEIPT_STALE`, naming `Makefile` as the first non-proof
+path changed after the old evaluated commit. Bare `python3.12` was not on this
+shell's `PATH`; all authoritative test and verification execution therefore
+uses the pinned Python 3.12 interpreter at
+`/Users/devan/.local/share/uv/python/cpython-3.12-macos-x86_64-none/bin/python3.12`.
+
+This proof-only projection changes exactly the report, tracked receipt, and
+receipt test. It changes no canon source, compiler, generated output, Figma
+node, production Swift, CI, `AGENTS.md`, skill, authority state, or Gate B
+state.
+
+The final pre-commit focused receipt suite exited `0`: `13` tests ran in
+`1088.497s`, all passed. The offline receipt check exited `0` and printed
+`GREEN ambitions canon semantic-review receipt packs=8 verdict=new_better
+scores=25/28`. The deterministic build check exited `0` and printed
+`GREEN ambitions canon generated outputs`. The exact commands were:
+
+```text
+PYTHONPATH=. $PY -m unittest tests.canon.test_semantic_receipt
+$PY scripts/ambitions-canon.py semantic-review --check-receipt
+$PY scripts/ambitions-canon.py build --check
+git diff --check
+```
+
+### Claim ceiling
+
+The receipt authority remains `shadow`. Allowed claim: the fresh explicit
+non-CI semantic comparison is deterministically bound to the exact
+build-current commit and satisfies the no-`old_better` / non-decreasing-new-
+score gate for the eight representative task-pack scenarios.
+
+Forbidden claims: implementation authorization; product, source, Runtime,
+rendered-app Visual, Accessibility, privacy/legal, device, TestFlight, App
+Store, Release, Gate B, or authority-cutover Green.
+
 ## Rollback and claim ceiling
 
 ### Bounded candidate rollback

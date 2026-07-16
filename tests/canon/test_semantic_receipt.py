@@ -21,7 +21,7 @@ RECEIPT = (
     ROOT
     / "docs/qa/evidence/2026-07-13-train-4-semantic-comparison/receipt.json"
 )
-EVALUATED_COMMIT = "1b31c0f8eafd179865575a5fcf42e7ff482e77c1"
+EVALUATED_COMMIT = "dbdc72ce90f14369aa900dbb2cd13741af2e1b83"
 
 
 class SemanticReceiptTest(unittest.TestCase):
@@ -68,12 +68,12 @@ class SemanticReceiptTest(unittest.TestCase):
             ),
             (
                 ("semantic_equivalence", "equivalent", 4, 4),
-                ("relevant_law_recall", "equivalent", 4, 4),
+                ("relevant_law_recall", "new_better", 3, 4),
                 ("contradiction_control", "new_better", 3, 4),
-                ("unauthorized_assumptions", "new_better", 3, 4),
-                ("source_ownership", "equivalent", 4, 4),
+                ("unauthorized_assumptions", "equivalent", 4, 4),
+                ("source_ownership", "new_better", 3, 4),
                 ("validation_completeness", "equivalent", 4, 4),
-                ("proof_discipline", "new_better", 3, 4),
+                ("proof_discipline", "equivalent", 4, 4),
             ),
         )
         self.assertNotIn(
