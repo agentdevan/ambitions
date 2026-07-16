@@ -4,7 +4,7 @@ BATCH ?= LOCAL
 LANE ?= build-for-testing
 TEST ?=
 
-.PHONY: help setup build test-local xcode-build-for-testing xcode-focused-test xcode-validate swift6-final-gate claim-scan privacy-scan language-scan copy-scan changed-boundary clean-generated
+.PHONY: help setup build test-local xcode-build-for-testing xcode-focused-test xcode-validate swift6-final-gate native-mcp-lifecycle-check claim-scan privacy-scan language-scan copy-scan changed-boundary clean-generated
 
 help:
 	@echo "Ambitions retained local targets"
@@ -15,6 +15,7 @@ help:
 	@echo "  make xcode-validate BATCH=LOCAL LANE=build-for-testing"
 	@echo "  make test-local BATCH=LOCAL LANE=build-for-testing"
 	@echo "  make swift6-final-gate"
+	@echo "  make native-mcp-lifecycle-check"
 	@echo "  make claim-scan"
 	@echo "  make privacy-scan"
 	@echo "  make language-scan"
@@ -43,6 +44,9 @@ xcode-validate:
 
 swift6-final-gate:
 	./scripts/ambitions-swift6-final-gate.sh
+
+native-mcp-lifecycle-check:
+	./scripts/ambitions-native-mcp-lifecycle-check.sh
 
 claim-scan:
 	./scripts/release-claim-safety-scan.sh
