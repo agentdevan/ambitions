@@ -1819,6 +1819,8 @@ class BuildTests(unittest.TestCase):
                 shutil.copytree(ROOT / "docs/canon", root / "docs/canon")
                 copy_figma_reconciliation_evidence(ROOT, root)
                 self.clear_local_proof_references(root / "docs/canon")
+                (root / "docs/canon/migration/visual-authority-rebaseline.json").unlink()
+                (root / "docs/canon/migration/figma-reconciliation.json").unlink()
                 step = root / "docs/canon/specifications/objects/step.md"
                 step.write_text(step.read_text(encoding="utf-8").replace(old, new, 1), encoding="utf-8")
 
@@ -1831,6 +1833,8 @@ class BuildTests(unittest.TestCase):
         shutil.copytree(ROOT / "docs/canon", self.canon_root)
         copy_figma_reconciliation_evidence(ROOT, self.root)
         self.clear_local_proof_references(self.canon_root)
+        (self.canon_root / "migration/visual-authority-rebaseline.json").unlink()
+        (self.canon_root / "migration/figma-reconciliation.json").unlink()
         self.assertEqual(build_canon(self.root), ())
         step = self.canon_root / "specifications/objects/step.md"
         step.write_text(

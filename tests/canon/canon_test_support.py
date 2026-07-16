@@ -1,5 +1,6 @@
 import json
 import shutil
+import subprocess
 from pathlib import Path
 
 
@@ -15,7 +16,58 @@ def copy_figma_reconciliation_evidence(
     repository_root: Path,
     destination_root: Path,
 ) -> None:
-    """Copy every non-canon file bound by the tracked Figma reconciliation."""
+    """Copy every non-canon file bound by the tracked visual-authority inputs."""
+
+    subprocess.run(("git", "init", "-q"), cwd=destination_root, check=True)
+    source_git_common = Path(
+        subprocess.run(
+            ("git", "rev-parse", "--path-format=absolute", "--git-common-dir"),
+            cwd=repository_root,
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+    )
+    alternates = destination_root / ".git/objects/info/alternates"
+    alternates.parent.mkdir(parents=True, exist_ok=True)
+    alternates.write_text(
+        f"{(source_git_common / 'objects').resolve().as_posix()}\n",
+        encoding="utf-8",
+    )
+
+    platform_source = (
+        repository_root / "docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md"
+    )
+    platform_target = (
+        destination_root / "docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md"
+    )
+    platform_target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(platform_source, platform_target)
+
+    repair_matrix_source = (
+        repository_root
+        / "tests/canon/fixtures/visual-blueprint-phase1-repair-matrix.json"
+    )
+    repair_matrix_target = (
+        destination_root
+        / "tests/canon/fixtures/visual-blueprint-phase1-repair-matrix.json"
+    )
+    repair_matrix_target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(repair_matrix_source, repair_matrix_target)
+
+    visual_evidence_source = (
+        repository_root
+        / "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline"
+    )
+    visual_evidence_target = (
+        destination_root
+        / "docs/qa/evidence/2026-07-14-canon-visual-authority-rebaseline"
+    )
+    shutil.copytree(
+        visual_evidence_source,
+        visual_evidence_target,
+        dirs_exist_ok=True,
+    )
 
     approval_source = repository_root / "docs/design/provenance/owner-approvals"
     approval_target = destination_root / "docs/design/provenance/owner-approvals"

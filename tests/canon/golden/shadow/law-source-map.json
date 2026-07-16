@@ -41137,7 +41137,7 @@
     {
       "exists": true,
       "gaps": [],
-      "implementation_file_count": 23,
+      "implementation_file_count": 24,
       "implementation_files": [
         "tools/ambitions_canon/__init__.py",
         "tools/ambitions_canon/audit.py",
@@ -41161,11 +41161,12 @@
         "tools/ambitions_canon/supersession.py",
         "tools/ambitions_canon/task_pack.py",
         "tools/ambitions_canon/traceability.py",
-        "tools/ambitions_canon/ux_blueprint.py"
+        "tools/ambitions_canon/ux_blueprint.py",
+        "tools/ambitions_canon/visual_authority.py"
       ],
       "owner_path": "tools/ambitions_canon/",
       "status": "source_files_present"
     }
   ],
-  "traceability_input_sha": "d0a7d36c7f18fe2a5d8108ddf50092f32b4dbfdc48376aa2f6209d395836f20b"
+  "traceability_input_sha": "df5867d846fea27dd311bf512c569c84380c160211223be860cae7b1e9c0063f"
 }
