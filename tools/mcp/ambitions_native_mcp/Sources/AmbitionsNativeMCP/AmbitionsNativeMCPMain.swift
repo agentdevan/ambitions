@@ -61,9 +61,7 @@ struct AmbitionsNativeMCPMain {
 
         let transport = StdioTransport()
         try await server.start(transport: transport)
-
-        while true {
-            try await Task.sleep(nanoseconds: 3_600_000_000_000)
-        }
+        await server.waitUntilCompleted()
+        await server.stop()
     }
 }
