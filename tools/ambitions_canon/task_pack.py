@@ -15,9 +15,17 @@ from tools.ambitions_canon.audit import audit_registry
 from tools.ambitions_canon.coverage import profile_section_bodies
 from tools.ambitions_canon.command_gate_dependencies import (
     CommandGateDependencyRegistry,
+    TrustedCommandGateApprovalBase,
     command_gate_dependency_projection,
     load_command_gate_dependency_registry,
     validate_command_gate_dependency_bindings,
+)
+from tools.ambitions_canon.command_resolution_registry import (
+    CommandResolutionRegistry,
+    compact_resolved_machine_contract,
+    load_command_resolution_registry,
+    resolve_state_command_machine_contract,
+    validate_command_resolution_bindings,
 )
 from tools.ambitions_canon.build import (
     _content_sha_entries,
@@ -40,8 +48,8 @@ from tools.ambitions_canon.model import (
     Requirement,
     StateCommand,
     StateCommandActivationPosture,
+    StateCommandContract,
 )
-from tools.ambitions_canon.parser import state_command_machine_contract
 from tools.ambitions_canon.render import stable_json
 from tools.ambitions_canon.traceability import TraceabilityReport
 from tools.ambitions_canon.visual_authority import (
@@ -300,6 +308,7 @@ def build_task_pack(
     known_issues: Sequence[Mapping[str, object]],
     *,
     traceability: TraceabilityReport | None = None,
+    trusted_command_gate_approval_base: TrustedCommandGateApprovalBase | None = None,
 ) -> TaskPack:
     """Compile the dependency-closed, scope-bounded task pack or fail closed."""
 
@@ -507,13 +516,34 @@ def build_task_pack(
                 for contract in document.state_command_contracts
             ),
             canon_revision=registry.manifest.canon_revision,
+            trusted_approval_base=trusted_command_gate_approval_base,
         )
+    resolution_registry: CommandResolutionRegistry | None = None
+    command_sources: dict[str, tuple[Path, StateCommandContract]] = {}
+    if selected_command_records:
+        repository_root = registry.manifest.repository_root
+        if repository_root is None:
+            raise CanonError(
+                "PACK_COMMAND_RESOLUTION_ROOT_MISSING",
+                "command resolution requires the manifest repository root",
+            )
+        resolution_registry = load_command_resolution_registry(repository_root)
+        validate_command_resolution_bindings(resolution_registry, registry)
+        command_sources = {
+            command.command_id: (document.source_path, contract)
+            for document in registry.documents
+            for contract in document.state_command_contracts
+            for command in contract.commands
+        }
     command_authorizations = tuple(
         _command_authorization_record(
             requirement_id,
             state_id,
             command,
             dependency_registry,
+            resolution_registry,
+            command_sources[command.command_id][0],
+            command_sources[command.command_id][1],
             authority_active=(
                 registry.manifest.authority_state is AuthorityState.ACTIVE
             ),
@@ -1652,9 +1682,17 @@ def _command_authorization_record(
     state_id: str,
     command: StateCommand,
     dependency_registry: CommandGateDependencyRegistry | None,
+    resolution_registry: CommandResolutionRegistry | None,
+    source_path: Path,
+    contract: StateCommandContract,
     *,
     authority_active: bool,
 ) -> dict[str, object]:
+    if resolution_registry is None:
+        raise CanonError(
+            "PACK_COMMAND_RESOLUTION_MISSING",
+            f"command resolution is missing: {command.command_id}",
+        )
     dependencies = (
         command_gate_dependency_projection(dependency_registry, command)
         if dependency_registry is not None and command.gate_dependency_ids
@@ -1665,6 +1703,13 @@ def _command_authorization_record(
         and command.activation_posture is StateCommandActivationPosture.ACTIVE
         and all(item["activation_authorization"] is True for item in dependencies)
     )
+    resolved_machine = resolve_state_command_machine_contract(
+        resolution_registry,
+        source_path,
+        contract,
+        command,
+    )
+    compact_machine = compact_resolved_machine_contract(resolved_machine)
     return {
         "activation_authorized": activation_authorized,
         "activation_posture": command.activation_posture.value,
@@ -1672,7 +1717,7 @@ def _command_authorization_record(
         "gate_dependencies": dependencies,
         "gate_requirement_ids": list(command.gate_requirement_ids),
         "label": command.label,
-        "machine_contract": state_command_machine_contract(command),
+        "machine_contract": compact_machine,
         "requirement_id": requirement_id,
         "state_id": state_id,
     }

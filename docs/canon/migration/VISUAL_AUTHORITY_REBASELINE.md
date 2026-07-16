@@ -11,7 +11,7 @@ The additive Phase 3/4 Figma corpus is represented as one deterministic, require
 
 - Canon revision: `1`
 - Canon source SHA: `ffd462ab52c0eff798071333388a051d9f3e55f3`
-- Canon content SHA: `eb0a44125ec4814cec2c5a53f14d72c96b6539bb46b7fca9b90418a7ed6cc57b`
+- Canon content SHA: `6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67`
 - Frozen repository base: `4d73857b1c7ec86a0ce4293219c49d56bec18864`
 - New Figma file: `Oik7612LSTUHWsNRFoTlTJ`
 - Additive pages: `17:2` through `17:11`

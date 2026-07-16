@@ -32,7 +32,6 @@ from tools.ambitions_canon.model import (
     StateCommandResolutionPosture,
 )
 from tools.ambitions_canon.manifest import load_documents, load_manifest
-from tools.ambitions_canon.parser import state_command_machine_contract
 from tools.ambitions_canon.registry import build_registry
 from tools.ambitions_canon.reference_index import parse_reference_index_bytes
 from tools.ambitions_canon.task_pack import (
@@ -526,51 +525,16 @@ class TaskPackTests(unittest.TestCase):
             ),
         )
 
-        pack = build_task_pack(active, replace(intake("docs"), scope=("surface.today",)), "repo-sha", ())
-        markdown = pack.to_markdown()
-
-        self.assertIn("The implementation control is `Purchase`.", markdown)
-        self.assertIn(
-            "Purchase is authorized only after the separately registered and "
-            "owner-approved product gate passes.",
-            markdown,
-        )
-        self.assertIn("FUTURE-GATED / NON-AUTHORIZING", markdown)
-        self.assertIn("command_id=`CMD-TODAY-PURCHASE-001`", markdown)
-        self.assertIn("label=`Purchase`", markdown)
-        self.assertIn("gate_requirement_ids=`TODAY-002`", markdown)
-        self.assertIn(
-            "A separately registered and owner-approved StoreKit product registry exists",
-            markdown,
-        )
-        self.assertTrue(
-            any(
-                "CMD-TODAY-PURCHASE-001" in risk and "non-authorizing" in risk
-                for risk in pack.known_risks
+        with self.assertRaisesRegex(
+            CanonError,
+            "command resolution requires the manifest repository root",
+        ):
+            build_task_pack(
+                active,
+                replace(intake("docs"), scope=("surface.today",)),
+                "repo-sha",
+                (),
             )
-        )
-        self.assertTrue(
-            any(
-                "future-gated command metadata" in value.casefold()
-                for value in pack.forbidden_changes
-            )
-        )
-        self.assertEqual(
-            pack.command_authorizations,
-            (
-                {
-                    "activation_authorized": False,
-                    "activation_posture": "future_gated",
-                    "command_id": "CMD-TODAY-PURCHASE-001",
-                    "gate_dependencies": [],
-                    "gate_requirement_ids": ["TODAY-002"],
-                    "label": "Purchase",
-                    "machine_contract": state_command_machine_contract(future_command),
-                    "requirement_id": gated_requirement.requirement_id,
-                    "state_id": "UX-STATE-VARIANT-TODAY-PURCHASE",
-                },
-            ),
-        )
 
     def test_live_mixed_labels_preserve_active_authorization_by_command_identity(self):
         manifest = load_manifest(ROOT)

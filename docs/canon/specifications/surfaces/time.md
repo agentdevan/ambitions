@@ -1202,6 +1202,36 @@ gate_requirement_ids = []
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-TIME-DETAIL-EDITING-002-INVERSE"
 
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-TIME-DETAIL-EDITING-002"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-TIME-DETAIL-EDITING-002"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-TIME-DETAIL-EDITING-002-INVERSE"
+label = "Restore prior time values"
+canonical_owner = "surface.time.detail-command-contract"
+preconditions = ["CMD-TIME-DETAIL-EDITING-002 is the exact trigger command and its exact trigger Receipt is current", "The saved time-item revision, exact prior field set, recurrence scope, placement/capacity dependencies, notification posture, and external-write status are current"]
+destination = "Time detail for the exact item with its pre-save fields, recurrence scope, placement, and local notification posture restored"
+destination_id = "DEST-TIME-DETAIL-EDITING-002-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it restores the exact pre-save time fields and recurrence scope, recomputes only the affected placement/capacity and local notification projections, appends a reversing Event, updates the Time Projection, and creates a new inverse Receipt and History entry while the Save Receipt and History remain intact and any optional external write reconciles separately."
+success_focus = "the first restored time field followed by the restored recurrence/placement summary and inverse Receipt"
+success_focus_id = "FOCUS-TIME-DETAIL-EDITING-002-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Restore prior time values control and exact unsafe, stale, or dependency-invalid field/recurrence/placement reason; the saved values and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-TIME-DETAIL-EDITING-002-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-TIME-DETAIL-EDITING-002-INVERSE"
+recovery_posture = "current"
+recovery_owner = "surface.time.detail-command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-DETAIL-SAVED"
 requirement_id = "SPEC-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"
@@ -1373,6 +1403,36 @@ gate_requirement_ids = []
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-TIME-DETAIL-VIEWING-002-INVERSE"
 
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-TIME-DETAIL-VIEWING-002"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-TIME-DETAIL-VIEWING-002"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-TIME-DETAIL-VIEWING-002-INVERSE"
+label = "Restore trashed time item"
+canonical_owner = "surface.time.detail-command-contract"
+preconditions = ["CMD-TIME-DETAIL-VIEWING-002 is the exact trigger command and its exact trigger Receipt is current", "The trashed object revision, prior owner/lifecycle, recurrence scope, placement/capacity dependencies, and notification effects are current"]
+destination = "Time detail for the exact restored object at its prior lifecycle and recurrence scope, with Trash and placement History visible"
+destination_id = "DEST-TIME-DETAIL-VIEWING-002-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it restores the exact time object from Trash to its prior owning lifecycle and recurrence scope, revalidates placement, capacity, and notification effects, appends a reversing Event, updates the Time and Trash Projection, and creates a new inverse Receipt and History entry while the deletion Receipt and Trash History remain intact."
+success_focus = "the restored time-item heading followed by its recurrence/placement status and new inverse Receipt"
+success_focus_id = "FOCUS-TIME-DETAIL-VIEWING-002-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Restore trashed time item control and exact unsafe, stale, or dependency-invalid lifecycle/recurrence/placement reason; the Trash row and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-TIME-DETAIL-VIEWING-002-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-TIME-DETAIL-VIEWING-002-INVERSE"
+recovery_posture = "current"
+recovery_owner = "surface.time.detail-command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
+
 [[state_command_contracts.commands]]
 command_id = "CMD-TIME-DETAIL-VIEWING-003"
 label = "Delete Permanently"
@@ -1527,6 +1587,36 @@ activation_posture = "active"
 gate_requirement_ids = []
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-TIME-DETAIL-VIEWING-008-INVERSE"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-TIME-DETAIL-VIEWING-008"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-TIME-DETAIL-VIEWING-008"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-TIME-DETAIL-VIEWING-008-INVERSE"
+label = "Return time item to Trash"
+canonical_owner = "surface.time.detail-command-contract"
+preconditions = ["CMD-TIME-DETAIL-VIEWING-008 is the exact trigger command and its exact trigger Receipt is current", "The restored object revision, restored owner/lifecycle, original Trash identity, recurrence scope, and dependent projections are current"]
+destination = "Trash with the exact time object returned under its original Trash identity, deletion date, retention posture, and complete lifecycle History"
+destination_id = "DEST-TIME-DETAIL-VIEWING-008-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it returns the exact restored time object to Trash under its original Trash identity and recurrence scope, removes it from active Time placement, appends a reversing Event, updates the Time and Trash Projection, and creates a new inverse Receipt and History entry while both lifecycle Receipts and prior History remain intact."
+success_focus = "the returned time-item row in Trash followed by its retention posture and new inverse Receipt"
+success_focus_id = "FOCUS-TIME-DETAIL-VIEWING-008-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Return time item to Trash control and exact unsafe, stale, or dependency-invalid lifecycle/recurrence reason; the restored object and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-TIME-DETAIL-VIEWING-008-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-TIME-DETAIL-VIEWING-008-INVERSE"
+recovery_posture = "current"
+recovery_owner = "surface.time.detail-command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
 
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-LIST-CONFLICTING"

@@ -285,6 +285,36 @@ gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-YOU-CONTINUITY-CONTROL-ENABLED-IDLE-001-INVERSE"
 
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-YOU-CONTINUITY-CONTROL-ENABLED-IDLE-001"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-YOU-CONTINUITY-CONTROL-ENABLED-IDLE-001"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-YOU-CONTINUITY-CONTROL-ENABLED-IDLE-001-INVERSE"
+label = "Restore continuity enabled"
+canonical_owner = "system.continuity.command-contract"
+preconditions = ["CMD-YOU-CONTINUITY-CONTROL-ENABLED-IDLE-001 is the exact trigger command and its exact trigger Receipt is current", "The disabled local continuity-control revision, user consent, backup, local source authority, iCloud eligibility, schema/causal/privacy gates, dry-run proof, rollback proof, and transport state are current"]
+destination = "You Continuity Control with the exact local enabled-idle posture restored and local source authority, pending transport, and remote-retention status visible"
+destination_id = "DEST-YOU-CONTINUITY-CONTROL-ENABLED-IDLE-001-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: after every future gate revalidates, it restores only the local continuity control to enabled-idle, appends a reversing Event, updates the local continuity Projection, and creates a new inverse Receipt and History entry while local and remote records, local source authority, the Turn Off Receipt, and History remain intact and transport reconciles separately."
+success_focus = "the restored enabled-idle continuity status followed by local-source-authority and transport-reconciliation evidence"
+success_focus_id = "FOCUS-YOU-CONTINUITY-CONTROL-ENABLED-IDLE-001-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Restore continuity enabled control and exact unsafe, stale, or dependency-invalid gate/source/transport reason; continuity remains off and the exact trigger Receipt remains visible and unchanged"
+failure_focus_id = "FOCUS-YOU-CONTINUITY-CONTROL-ENABLED-IDLE-001-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-YOU-CONTINUITY-CONTROL-ENABLED-IDLE-001-INVERSE"
+recovery_posture = "current"
+recovery_owner = "system.continuity.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"]
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+gate_dependency_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-INELIGIBLE"
 requirement_id = "SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"
@@ -358,6 +388,36 @@ activation_posture = "future_gated"
 gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-YOU-CONTINUITY-CONTROL-LOCAL-PENDING-001-INVERSE"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-YOU-CONTINUITY-CONTROL-LOCAL-PENDING-001"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-YOU-CONTINUITY-CONTROL-LOCAL-PENDING-001"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-YOU-CONTINUITY-CONTROL-LOCAL-PENDING-001-INVERSE"
+label = "Restore local-pending continuity"
+canonical_owner = "system.continuity.command-contract"
+preconditions = ["CMD-YOU-CONTINUITY-CONTROL-LOCAL-PENDING-001 is the exact trigger command and its exact trigger Receipt is current", "The paused local-pending change set, continuity-control revision, user consent, backup, local source authority, schema/causal/privacy gates, rollback proof, and transport checkpoint are current"]
+destination = "You Continuity Control with the exact local-pending posture restored and the retained local change set and transport checkpoint visible"
+destination_id = "DEST-YOU-CONTINUITY-CONTROL-LOCAL-PENDING-001-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: after every future gate revalidates, it restores the exact local-pending continuity posture and retained change-set checkpoint, appends a reversing Event, updates the local continuity Projection, and creates a new inverse Receipt and History entry while local canonical data, remote records, local source authority, the Pause Receipt, and History remain intact and transport resumes separately."
+success_focus = "the restored local-pending change-set status followed by the transport checkpoint and inverse Receipt"
+success_focus_id = "FOCUS-YOU-CONTINUITY-CONTROL-LOCAL-PENDING-001-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Restore local-pending continuity control and exact unsafe, stale, or dependency-invalid gate/change-set/transport reason; the paused posture and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-YOU-CONTINUITY-CONTROL-LOCAL-PENDING-001-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-YOU-CONTINUITY-CONTROL-LOCAL-PENDING-001-INVERSE"
+recovery_posture = "current"
+recovery_owner = "system.continuity.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"]
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+gate_dependency_ids = []
 
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-MERGING"
@@ -495,6 +555,36 @@ activation_posture = "future_gated"
 gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-YOU-CONTINUITY-CONTROL-PAUSED-001-INVERSE"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-YOU-CONTINUITY-CONTROL-PAUSED-001"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-YOU-CONTINUITY-CONTROL-PAUSED-001"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-YOU-CONTINUITY-CONTROL-PAUSED-001-INVERSE"
+label = "Restore continuity paused"
+canonical_owner = "system.continuity.command-contract"
+preconditions = ["CMD-YOU-CONTINUITY-CONTROL-PAUSED-001 is the exact trigger command and its exact trigger Receipt is current", "The resumed continuity-control revision, retained pending History, user consent, backup, local source authority, schema/causal/privacy gates, rollback proof, and transport checkpoint are current"]
+destination = "You Continuity Control with the exact paused posture restored and pending local/remote history and transport checkpoint retained"
+destination_id = "DEST-YOU-CONTINUITY-CONTROL-PAUSED-001-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: after every future gate revalidates, it restores the exact paused continuity-control posture without discarding pending local or remote history, appends a reversing Event, updates the local continuity Projection, and creates a new inverse Receipt and History entry while canonical data, local source authority, the Resume Receipt, and History remain intact and transport stops at the retained checkpoint."
+success_focus = "the restored paused continuity status followed by retained pending-history and transport-checkpoint evidence"
+success_focus_id = "FOCUS-YOU-CONTINUITY-CONTROL-PAUSED-001-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Restore continuity paused control and exact unsafe, stale, or dependency-invalid gate/history/transport reason; the resumed posture and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-YOU-CONTINUITY-CONTROL-PAUSED-001-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-YOU-CONTINUITY-CONTROL-PAUSED-001-INVERSE"
+recovery_posture = "current"
+recovery_owner = "system.continuity.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"]
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+gate_dependency_ids = []
 
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-CONTINUITY-CONTROL-REMOTE-PENDING"
@@ -740,6 +830,36 @@ activation_posture = "future_gated"
 gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-YOU-CONTINUITY-CONTROL-UPLOADING-001-INVERSE"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-YOU-CONTINUITY-CONTROL-UPLOADING-001"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-YOU-CONTINUITY-CONTROL-UPLOADING-001"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-YOU-CONTINUITY-CONTROL-UPLOADING-001-INVERSE"
+label = "Resume continuity upload"
+canonical_owner = "system.continuity.command-contract"
+preconditions = ["CMD-YOU-CONTINUITY-CONTROL-UPLOADING-001 is the exact trigger command and its exact trigger Receipt is current", "The paused encrypted-upload identity, exact transport checkpoint, continuity-control revision, user consent, backup, local source authority, schema/causal/privacy gates, rollback proof, and remote destination posture are current"]
+destination = "You Continuity Control with the exact encrypted upload resumed from its retained checkpoint and local source authority still primary"
+destination_id = "DEST-YOU-CONTINUITY-CONTROL-UPLOADING-001-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: after every future gate revalidates, it resumes only the exact encrypted upload from its retained transport checkpoint, appends a reversing Event, updates the local continuity Projection, and creates a new inverse Receipt and History entry while local canonical data, remote records, local source authority, the Pause Receipt, and History remain intact and no remote deletion is implied."
+success_focus = "the resumed encrypted-upload progress followed by checkpoint, local-source-authority, and inverse-Receipt evidence"
+success_focus_id = "FOCUS-YOU-CONTINUITY-CONTROL-UPLOADING-001-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Resume continuity upload control and exact unsafe, stale, or dependency-invalid gate/checkpoint/destination reason; the upload remains paused and the exact trigger Receipt remains visible and unchanged"
+failure_focus_id = "FOCUS-YOU-CONTINUITY-CONTROL-UPLOADING-001-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-YOU-CONTINUITY-CONTROL-UPLOADING-001-INVERSE"
+recovery_posture = "current"
+recovery_owner = "system.continuity.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"]
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+gate_dependency_ids = []
 
 +++
 

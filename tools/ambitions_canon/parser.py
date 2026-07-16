@@ -14,6 +14,7 @@ from tools.ambitions_canon.model import (
     Modality,
     NotApplicable,
     ObjectBoundary,
+    RecoveryCommandRecord,
     Requirement,
     StateCommand,
     StateCommandActivationPosture,
@@ -100,7 +101,7 @@ OBJECT_BOUNDARY_LAWS = (
     "reminder_acknowledgement_noncompletion",
     "proof_receipt_separation",
 )
-STATE_COMMAND_CONTRACT_FIELDS = frozenset(
+STATE_COMMAND_CONTRACT_REQUIRED_FIELDS = frozenset(
     {
         "state_id",
         "requirement_id",
@@ -114,6 +115,9 @@ STATE_COMMAND_CONTRACT_FIELDS = frozenset(
         "commands",
     }
 )
+STATE_COMMAND_CONTRACT_FIELDS = STATE_COMMAND_CONTRACT_REQUIRED_FIELDS | {
+    "recovery_commands"
+}
 STATE_COMMAND_REQUIRED_FIELDS = frozenset(
     {
         "command_id",
@@ -150,6 +154,25 @@ STATE_COMMAND_FIELDS = STATE_COMMAND_REQUIRED_FIELDS | {
     "irreversible_confirmation_id",
     "irreversible_receipt_id",
 }
+RECOVERY_COMMAND_REQUIRED_FIELDS = STATE_COMMAND_REQUIRED_FIELDS | {
+    "activation_posture",
+    "gate_requirement_ids",
+    "mechanism_kind",
+    "trigger_command_id",
+}
+RECOVERY_COMMAND_FIELDS = RECOVERY_COMMAND_REQUIRED_FIELDS | {
+    "gate_dependency_ids",
+    "redo_command_id",
+    "redo_preconditions",
+}
+RECOVERY_COMMAND_MECHANISMS = frozenset(
+    {"inverse_command", "recovery_handoff_command"}
+)
+INVERSE_REDO_PRECONDITIONS = (
+    "current inverse Receipt",
+    "current revision",
+    "fresh task authorization",
+)
 STATE_ID = re.compile(r"^UX-STATE-VARIANT-[A-Z0-9]+(?:-[A-Z0-9]+)*$")
 COMMAND_ID = re.compile(r"^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$")
 GATE_DEPENDENCY_ID = re.compile(r"^GATE-[A-Z0-9]+(?:-[A-Z0-9]+)*$")
@@ -164,6 +187,15 @@ GENERIC_STATE_COMMAND_PHRASES = (
     "command review for ux-state-variant-",
     "truthful status for ux-state-variant-",
     "preserves current canonical state for ux-state-variant-",
+)
+GENERIC_RECOVERY_COMMAND_EFFECT = (
+    "the command reverses only the exact proven trigger effect by appending a "
+    "reversing event, updating the projection, and creating a new inverse receipt "
+    "and history entry; the original trigger receipt and history remain intact."
+)
+GENERIC_RECOVERY_DESTINATION_PHRASES = (
+    "the owning presentation for the exact",
+    "recovery presentation scoped only to the exact trigger receipt",
 )
 UNRESOLVED_COMMAND_MARKER = re.compile(
     r"^\s*(?:tbd|todo|unknown|unspecified|unresolved|undecided)\s*$",
@@ -737,6 +769,262 @@ def _state_string_array(
     return items
 
 
+def _recovery_command_record(
+    value: object,
+    path: Path,
+    state_id: str,
+    trigger_commands: dict[str, StateCommand],
+    command_ids: set[str],
+) -> RecoveryCommandRecord:
+    if (
+        not isinstance(value, dict)
+        or not RECOVERY_COMMAND_REQUIRED_FIELDS <= set(value)
+        or not set(value) <= RECOVERY_COMMAND_FIELDS
+    ):
+        raise _state_command_error(
+            path,
+            f"recovery command fields are closed: {state_id}",
+        )
+    command_id = _trimmed_state_text(
+        value["command_id"], path, "recovery_commands.command_id"
+    )
+    trigger_command_id = _trimmed_state_text(
+        value["trigger_command_id"],
+        path,
+        "recovery_commands.trigger_command_id",
+    )
+    mechanism_kind = _trimmed_state_text(
+        value["mechanism_kind"],
+        path,
+        "recovery_commands.mechanism_kind",
+    )
+    if COMMAND_ID.fullmatch(command_id) is None:
+        raise _state_command_error(path, f"invalid recovery command ID: {command_id}")
+    if command_id in command_ids:
+        raise _state_command_error(path, f"duplicate command ID: {command_id}")
+    trigger = trigger_commands.get(trigger_command_id)
+    if trigger is None:
+        raise _state_command_error(
+            path,
+            f"recovery command trigger is not in the same state: {command_id}",
+        )
+    if mechanism_kind not in RECOVERY_COMMAND_MECHANISMS:
+        raise _state_command_error(
+            path,
+            f"invalid recovery command mechanism: {command_id}",
+        )
+    expected_id = (
+        trigger.inverse_command_id
+        if mechanism_kind == "inverse_command"
+        else trigger.recovery_handoff_command_id
+    )
+    if expected_id != command_id:
+        raise _state_command_error(
+            path,
+            f"recovery command does not resolve its trigger reference: {command_id}",
+        )
+    redo_command_id = _optional_state_text(
+        value.get("redo_command_id"),
+        path,
+        "recovery_commands.redo_command_id",
+    )
+    redo_preconditions = _state_string_array(
+        value.get("redo_preconditions", []),
+        path,
+        "recovery_commands.redo_preconditions",
+        allow_empty=True,
+    )
+    if mechanism_kind == "inverse_command":
+        if redo_command_id != trigger_command_id:
+            raise _state_command_error(
+                path,
+                f"redo command must bind original trigger: {command_id}",
+            )
+        if redo_preconditions != INVERSE_REDO_PRECONDITIONS:
+            raise _state_command_error(
+                path,
+                f"redo preconditions must require fresh authorization, current "
+                f"revision, and current inverse Receipt: {command_id}",
+            )
+    elif redo_command_id is not None or redo_preconditions:
+        raise _state_command_error(
+            path,
+            f"non-inverse recovery command cannot declare redo: {command_id}",
+        )
+    canonical_owner = _trimmed_state_text(
+        value["canonical_owner"],
+        path,
+        "recovery_commands.canonical_owner",
+    )
+    recovery_owner = _trimmed_state_text(
+        value["recovery_owner"],
+        path,
+        "recovery_commands.recovery_owner",
+    )
+    if (
+        CONCEPT_KEY.fullmatch(canonical_owner) is None
+        or canonical_owner != trigger.recovery_owner
+        or recovery_owner != canonical_owner
+    ):
+        raise _state_command_error(
+            path,
+            f"recovery command owner binding is wrong: {command_id}",
+        )
+    try:
+        activation_posture = StateCommandActivationPosture(
+            _trimmed_state_text(
+                value["activation_posture"],
+                path,
+                "recovery_commands.activation_posture",
+            )
+        )
+    except ValueError as exc:
+        raise _state_command_error(
+            path,
+            f"invalid recovery command activation posture: {command_id}",
+        ) from exc
+    gate_requirement_ids = _state_string_array(
+        value["gate_requirement_ids"],
+        path,
+        "recovery_commands.gate_requirement_ids",
+        allow_empty=True,
+    )
+    gate_dependency_ids = _state_string_array(
+        value.get("gate_dependency_ids", []),
+        path,
+        "recovery_commands.gate_dependency_ids",
+        allow_empty=True,
+    )
+    if (
+        activation_posture is not trigger.activation_posture
+        or gate_requirement_ids != trigger.gate_requirement_ids
+        or gate_dependency_ids != trigger.gate_dependency_ids
+    ):
+        raise _state_command_error(
+            path,
+            f"recovery command activation or gate binding is wrong: {command_id}",
+        )
+    if any(
+        re.fullmatch(CANONICAL_ID_GRAMMAR, identifier) is None
+        for identifier in gate_requirement_ids
+    ) or any(
+        GATE_DEPENDENCY_ID.fullmatch(identifier) is None
+        for identifier in gate_dependency_ids
+    ):
+        raise _state_command_error(
+            path,
+            f"invalid recovery command gate identity: {command_id}",
+        )
+    verification_ids = _state_string_array(
+        value["verification_ids"],
+        path,
+        "recovery_commands.verification_ids",
+    )
+    if verification_ids != trigger.verification_ids:
+        raise _state_command_error(
+            path,
+            f"recovery command verification binding is wrong: {command_id}",
+        )
+    command = StateCommand(
+        command_id=command_id,
+        label=_trimmed_state_text(
+            value["label"], path, "recovery_commands.label"
+        ),
+        canonical_owner=canonical_owner,
+        destination_id=_trimmed_state_text(
+            value["destination_id"],
+            path,
+            "recovery_commands.destination_id",
+        ),
+        destination_posture=_resolution_posture(
+            value["destination_posture"],
+            path,
+            "recovery_commands.destination_posture",
+        ),
+        success_focus_id=_trimmed_state_text(
+            value["success_focus_id"],
+            path,
+            "recovery_commands.success_focus_id",
+        ),
+        success_focus_posture=_resolution_posture(
+            value["success_focus_posture"],
+            path,
+            "recovery_commands.success_focus_posture",
+        ),
+        failure_focus_id=_trimmed_state_text(
+            value["failure_focus_id"],
+            path,
+            "recovery_commands.failure_focus_id",
+        ),
+        failure_focus_posture=_resolution_posture(
+            value["failure_focus_posture"],
+            path,
+            "recovery_commands.failure_focus_posture",
+        ),
+        recovery_id=_trimmed_state_text(
+            value["recovery_id"],
+            path,
+            "recovery_commands.recovery_id",
+        ),
+        recovery_posture=_resolution_posture(
+            value["recovery_posture"],
+            path,
+            "recovery_commands.recovery_posture",
+        ),
+        recovery_owner=recovery_owner,
+        preconditions=_state_string_array(
+            value["preconditions"],
+            path,
+            "recovery_commands.preconditions",
+        ),
+        destination=_trimmed_state_text(
+            value["destination"], path, "recovery_commands.destination"
+        ),
+        effect=_trimmed_state_text(
+            value["effect"], path, "recovery_commands.effect"
+        ),
+        success_focus=_trimmed_state_text(
+            value["success_focus"],
+            path,
+            "recovery_commands.success_focus",
+        ),
+        failure_focus=_trimmed_state_text(
+            value["failure_focus"],
+            path,
+            "recovery_commands.failure_focus",
+        ),
+        commit_boundary=_trimmed_state_text(
+            value["commit_boundary"],
+            path,
+            "recovery_commands.commit_boundary",
+        ),
+        rollback_undo=_trimmed_state_text(
+            value["rollback_undo"],
+            path,
+            "recovery_commands.rollback_undo",
+        ),
+        privacy_egress=_trimmed_state_text(
+            value["privacy_egress"],
+            path,
+            "recovery_commands.privacy_egress",
+        ),
+        verification_ids=verification_ids,
+        activation_posture=activation_posture,
+        gate_requirement_ids=gate_requirement_ids,
+        rollback_posture=None,
+        gate_dependency_ids=gate_dependency_ids,
+    )
+    _validate_recovery_command_semantics(path, trigger, mechanism_kind, command)
+    command_ids.add(command_id)
+    return RecoveryCommandRecord(
+        trigger_command_id=trigger_command_id,
+        mechanism_kind=mechanism_kind,
+        command=command,
+        redo_command_id=redo_command_id,
+        redo_preconditions=redo_preconditions,
+    )
+
+
 def _state_command_contracts(
     metadata: dict[str, object],
     path: Path,
@@ -752,7 +1040,11 @@ def _state_command_contracts(
     contracts: list[StateCommandContract] = []
     command_ids: set[str] = set()
     for index, value in enumerate(raw):
-        if not isinstance(value, dict) or set(value) != STATE_COMMAND_CONTRACT_FIELDS:
+        if (
+            not isinstance(value, dict)
+            or not STATE_COMMAND_CONTRACT_REQUIRED_FIELDS <= set(value)
+            or not set(value) <= STATE_COMMAND_CONTRACT_FIELDS
+        ):
             raise _state_command_error(
                 path,
                 f"state_command_contracts[{index}] fields are closed",
@@ -1047,6 +1339,45 @@ def _state_command_contracts(
             raise _state_command_error(
                 path, f"duplicate command label: {state_id}"
             )
+        recovery_raw = value.get("recovery_commands", [])
+        if not isinstance(recovery_raw, list):
+            raise _state_command_error(
+                path,
+                f"recovery_commands must be an array: {state_id}",
+            )
+        trigger_commands = {item.command_id: item for item in commands}
+        recovery_commands = tuple(
+            _recovery_command_record(
+                item,
+                path,
+                state_id,
+                trigger_commands,
+                command_ids,
+            )
+            for item in recovery_raw
+        )
+        recovery_ids = tuple(
+            item.command.command_id for item in recovery_commands
+        )
+        if recovery_ids != tuple(sorted(set(recovery_ids))):
+            raise _state_command_error(
+                path,
+                f"recovery commands must be sorted with unique IDs: {state_id}",
+            )
+        expected_recovery_ids = {
+            identifier
+            for item in commands
+            for identifier in (
+                item.inverse_command_id,
+                item.recovery_handoff_command_id,
+            )
+            if identifier is not None
+        }
+        if set(recovery_ids) != expected_recovery_ids:
+            raise _state_command_error(
+                path,
+                f"recovery command reference set is not closed: {state_id}",
+            )
         transition_exit = _trimmed_state_text(
             value["transition_exit"], path, "transition_exit"
         )
@@ -1096,6 +1427,7 @@ def _state_command_contracts(
                 offline_behavior=offline_behavior,
                 accessibility_focus=accessibility_focus,
                 commands=tuple(commands),
+                recovery_commands=recovery_commands,
             )
         )
     if tuple(item.state_id for item in contracts) != tuple(
@@ -1140,30 +1472,28 @@ def _state_command_contracts(
                         path,
                         f"owning requirement does not name command label: {command.command_id}",
                     )
+            for record in contract.recovery_commands:
+                if record.command.canonical_owner != requirement.concept:
+                    raise _state_command_error(
+                        path,
+                        "recovery command owner concept mismatch: "
+                        f"{record.command.command_id}",
+                    )
     return tuple(contracts)
 
 
 def _validate_machine_command_contract(path: Path, command: StateCommand) -> None:
-    suffix = command.command_id.removeprefix("CMD-")
-    expected_identities = {
-        "destination_id": (command.destination_id, f"DEST-{suffix}", DESTINATION_ID),
-        "success_focus_id": (
-            command.success_focus_id,
-            f"FOCUS-{suffix}-SUCCESS",
-            FOCUS_ID,
-        ),
-        "failure_focus_id": (
-            command.failure_focus_id,
-            f"FOCUS-{suffix}-FAILURE",
-            FOCUS_ID,
-        ),
-        "recovery_id": (command.recovery_id, f"RECOVERY-{suffix}", RECOVERY_ID),
+    declared_identities = {
+        "destination_id": (command.destination_id, DESTINATION_ID),
+        "success_focus_id": (command.success_focus_id, FOCUS_ID),
+        "failure_focus_id": (command.failure_focus_id, FOCUS_ID),
+        "recovery_id": (command.recovery_id, RECOVERY_ID),
     }
-    for field, (actual, expected, pattern) in expected_identities.items():
-        if pattern.fullmatch(actual) is None or actual != expected:
+    for field, (actual, pattern) in declared_identities.items():
+        if pattern.fullmatch(actual) is None:
             raise _state_command_error(
                 path,
-                f"command machine identity is unresolved: {command.command_id} {field}",
+                f"command machine identity is invalid: {command.command_id} {field}",
             )
     if command.recovery_owner != command.canonical_owner:
         raise _state_command_error(
@@ -1192,22 +1522,22 @@ def _validate_machine_command_contract(path: Path, command: StateCommand) -> Non
         "irreversible_confirmation_id": command.irreversible_confirmation_id,
         "irreversible_receipt_id": command.irreversible_receipt_id,
     }
-    expected: dict[str, str] = {}
+    expected_fields: frozenset[str] = frozenset()
     if command.commit_boundary.startswith("Mutation:"):
         if command.rollback_posture is StateCommandRollbackPosture.INVERSE_COMMAND:
-            expected = {"inverse_command_id": f"CMD-{suffix}-INVERSE"}
+            expected_fields = frozenset({"inverse_command_id"})
         elif command.rollback_posture is StateCommandRollbackPosture.CHECKPOINT_RESTORE:
-            expected = {"checkpoint_id": f"CHECKPOINT-{suffix}"}
+            expected_fields = frozenset({"checkpoint_id"})
         elif command.rollback_posture is StateCommandRollbackPosture.OWNER_RECOVERY_HANDOFF:
-            expected = {
-                "recovery_handoff_command_id": f"CMD-{suffix}-RECOVERY-HANDOFF"
-            }
+            expected_fields = frozenset({"recovery_handoff_command_id"})
         elif command.rollback_posture is StateCommandRollbackPosture.CONFIRMED_IRREVERSIBLE:
-            expected = {
-                "irreversible_confirmation_id": f"CONFIRMATION-{suffix}",
-                "irreversible_receipt_id": f"RECEIPT-{suffix}",
-            }
-    if {key: value for key, value in declared.items() if value is not None} != expected:
+            expected_fields = frozenset(
+                {"irreversible_confirmation_id", "irreversible_receipt_id"}
+            )
+    present_fields = frozenset(
+        key for key, value in declared.items() if value is not None
+    )
+    if present_fields != expected_fields:
         raise _state_command_error(
             path,
             f"command recovery mechanism identity is unresolved: {command.command_id}",
@@ -1219,11 +1549,138 @@ def _validate_machine_command_contract(path: Path, command: StateCommand) -> Non
         "irreversible_confirmation_id": CONFIRMATION_ID,
         "irreversible_receipt_id": RECEIPT_ID,
     }
-    for field, value in expected.items():
+    for field in expected_fields:
+        value = declared[field]
+        assert value is not None
         if patterns[field].fullmatch(value) is None:
             raise _state_command_error(
                 path,
                 f"command recovery mechanism identity is invalid: {command.command_id}",
+            )
+
+
+def _validate_recovery_command_semantics(
+    path: Path,
+    trigger: StateCommand,
+    mechanism_kind: str,
+    command: StateCommand,
+) -> None:
+    """Keep recovery-only commands exact, non-recursive, and non-primary."""
+
+    _validate_machine_command_contract(path, command)
+    if any(
+        _is_unresolved_command_target(value)
+        for value in (
+            command.destination,
+            command.success_focus,
+            command.failure_focus,
+        )
+    ):
+        raise _state_command_error(
+            path,
+            f"unresolved recovery command route or focus: {command.command_id}",
+        )
+    preconditions = " ".join(command.preconditions).casefold()
+    effect = command.effect.casefold()
+    destination = command.destination.casefold()
+    failure = command.failure_focus.casefold()
+    commit = command.commit_boundary.casefold()
+    rollback = command.rollback_undo.casefold()
+    privacy = command.privacy_egress.casefold()
+    if (
+        effect == GENERIC_RECOVERY_COMMAND_EFFECT
+        or any(
+            phrase in destination
+            for phrase in GENERIC_RECOVERY_DESTINATION_PHRASES
+        )
+        or (
+            effect.startswith(
+                "no durable mutation occurs and no receipt is created; the exact "
+                "trigger receipt and scope route only to "
+            )
+            and effect.endswith(
+                "; canonical state, projection, receipt, and history remain "
+                "unchanged."
+            )
+        )
+    ):
+        raise _state_command_error(
+            path,
+            f"generic recovery command behavior: {command.command_id}",
+        )
+    if (
+        trigger.command_id.casefold() not in preconditions
+        or "exact trigger receipt" not in preconditions
+        or "current" not in preconditions
+    ):
+        raise _state_command_error(
+            path,
+            f"recovery command trigger preconditions are incomplete: {command.command_id}",
+        )
+    if "off device" not in privacy:
+        raise _state_command_error(
+            path,
+            f"recovery command privacy boundary is incomplete: {command.command_id}",
+        )
+    if mechanism_kind == "inverse_command":
+        required_effect = (
+            "exact proven trigger effect",
+            "reversing event",
+            "projection",
+            "inverse receipt",
+            "history",
+        )
+        if any(item not in effect for item in required_effect):
+            raise _state_command_error(
+                path,
+                f"inverse command behavior is incomplete: {command.command_id}",
+            )
+        if (
+            not commit.startswith("inverse mutation:")
+            or "exact trigger receipt" not in commit
+            or "current revision" not in commit
+            or "dependencies" not in commit
+        ):
+            raise _state_command_error(
+                path,
+                f"inverse command commit boundary is incomplete: {command.command_id}",
+            )
+        if any(
+            item not in failure
+            for item in ("unsafe", "stale", "dependency-invalid")
+        ):
+            raise _state_command_error(
+                path,
+                f"inverse command failure preservation is incomplete: {command.command_id}",
+            )
+        if any(
+            item not in rollback
+            for item in ("redo", "distinct typed command", "current inverse receipt")
+        ):
+            raise _state_command_error(
+                path,
+                f"inverse command redo boundary is incomplete: {command.command_id}",
+            )
+    else:
+        if (
+            not command.commit_boundary.startswith("Non-mutating:")
+            or "no durable mutation occurs" not in effect
+            or "no receipt is created" not in effect
+            or "exact trigger receipt and scope" not in effect
+            or command.canonical_owner.casefold() not in effect
+        ):
+            raise _state_command_error(
+                path,
+                f"recovery handoff non-mutation boundary is incomplete: {command.command_id}",
+            )
+        if (
+            "exact trigger receipt and scope" not in failure
+            or "unchanged" not in failure
+            or "no undo" not in rollback
+        ):
+            raise _state_command_error(
+                path,
+                f"recovery handoff failure preservation is incomplete: {command.command_id}",
             )
 
 
@@ -1352,47 +1809,6 @@ def validate_state_command_contract_semantics(
         contract.accessibility_focus,
         list(contract.commands),
     )
-
-
-def state_command_machine_contract(command: StateCommand) -> dict[str, object]:
-    """Project the closed machine contract without treating prose as identity."""
-
-    return {
-        "activation_posture": command.activation_posture.value,
-        "command_id": command.command_id,
-        "destination": {
-            "detail": command.destination,
-            "id": command.destination_id,
-            "posture": command.destination_posture.value,
-        },
-        "failure_focus": {
-            "detail": command.failure_focus,
-            "id": command.failure_focus_id,
-            "posture": command.failure_focus_posture.value,
-        },
-        "label": command.label,
-        "recovery": {
-            "checkpoint_id": command.checkpoint_id,
-            "detail": command.rollback_undo,
-            "id": command.recovery_id,
-            "inverse_command_id": command.inverse_command_id,
-            "irreversible_confirmation_id": command.irreversible_confirmation_id,
-            "irreversible_receipt_id": command.irreversible_receipt_id,
-            "owner": command.recovery_owner,
-            "posture": command.recovery_posture.value,
-            "recovery_handoff_command_id": command.recovery_handoff_command_id,
-            "rollback_posture": (
-                command.rollback_posture.value
-                if command.rollback_posture is not None
-                else None
-            ),
-        },
-        "success_focus": {
-            "detail": command.success_focus,
-            "id": command.success_focus_id,
-            "posture": command.success_focus_posture.value,
-        },
-    }
 
 
 def _object_boundary(

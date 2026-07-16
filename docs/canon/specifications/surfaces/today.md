@@ -105,6 +105,36 @@ verification_ids = ["SCENARIO-SURFACE-TODAY-COMMAND-CONTRACT-001"]
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-TODAY-DETAIL-CLOSURE-REVIEW-001-INVERSE"
 
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-TODAY-DETAIL-CLOSURE-REVIEW-001"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-TODAY-DETAIL-CLOSURE-REVIEW-001"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-TODAY-DETAIL-CLOSURE-REVIEW-001-INVERSE"
+label = "Reopen Still counts Step"
+canonical_owner = "surface.today.command-contract"
+preconditions = ["CMD-TODAY-DETAIL-CLOSURE-REVIEW-001 is the exact trigger command and its exact trigger Receipt is current", "The closed Step revision, Still counts outcome, Goal/path lineage, attached Proof posture, and dependent schedule state are current"]
+destination = "Today Step detail with the exact Step reopened to its pre-closure lifecycle and the Still counts and inverse Receipts visible in History"
+destination_id = "DEST-TODAY-DETAIL-CLOSURE-REVIEW-001-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it reopens the exact Step from the Still counts closure to its pre-closure lifecycle without deleting Proof or Goal/path lineage, appends a reversing Event, updates the Today and Step Projection, and creates a new inverse Receipt and History entry while the closure Receipt and History remain intact."
+success_focus = "the reopened Step status in Today detail followed by its preserved Proof and new inverse Receipt"
+success_focus_id = "FOCUS-TODAY-DETAIL-CLOSURE-REVIEW-001-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Reopen Still counts Step control and exact unsafe, stale, or dependency-invalid Step/Proof/schedule reason; the closure result and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-TODAY-DETAIL-CLOSURE-REVIEW-001-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-TODAY-DETAIL-CLOSURE-REVIEW-001-INVERSE"
+recovery_posture = "current"
+recovery_owner = "surface.today.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-TODAY-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TODAY-DETAIL-RECOVERY"
 requirement_id = "SPEC-SURFACE-TODAY-COMMAND-CONTRACT-001"
@@ -310,6 +340,36 @@ privacy_egress = "The mutation remains local and sends no private content off de
 verification_ids = ["SCENARIO-SURFACE-TODAY-COMMAND-CONTRACT-001"]
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-TODAY-ROOT-DESTRUCTIVE-CONFIRMATION-001-INVERSE"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-TODAY-ROOT-DESTRUCTIVE-CONFIRMATION-001"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-TODAY-ROOT-DESTRUCTIVE-CONFIRMATION-001"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-TODAY-ROOT-DESTRUCTIVE-CONFIRMATION-001-INVERSE"
+label = "Reopen Not needed Step"
+canonical_owner = "surface.today.command-contract"
+preconditions = ["CMD-TODAY-ROOT-DESTRUCTIVE-CONFIRMATION-001 is the exact trigger command and its exact trigger Receipt is current", "The closed Step revision, Not needed outcome, Goal/path lineage, prior Today placement, and dependent schedule state are current"]
+destination = "Today with the exact Step reopened from Not needed at its supported current placement and full closure History preserved"
+destination_id = "DEST-TODAY-ROOT-DESTRUCTIVE-CONFIRMATION-001-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it reopens the exact Step from the Not needed closure without deleting, archiving, or fabricating completion and without erasing Goal/path lineage, appends a reversing Event, updates the Today and Step Projection, and creates a new inverse Receipt and History entry while the closure Receipt and History remain intact."
+success_focus = "the reopened Step in Today followed by its restored lifecycle status and new inverse Receipt"
+success_focus_id = "FOCUS-TODAY-ROOT-DESTRUCTIVE-CONFIRMATION-001-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Reopen Not needed Step control and exact unsafe, stale, or dependency-invalid Step/placement reason; the Not needed result and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-TODAY-ROOT-DESTRUCTIVE-CONFIRMATION-001-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-TODAY-ROOT-DESTRUCTIVE-CONFIRMATION-001-INVERSE"
+recovery_posture = "current"
+recovery_owner = "surface.today.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-TODAY-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
 
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TODAY-ROOT-EMPTY"
@@ -743,6 +803,36 @@ privacy_egress = "The mutation remains local and sends no private content off de
 verification_ids = ["SCENARIO-SURFACE-TODAY-COMMAND-CONTRACT-001"]
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-TODAY-START-HERE-CLOSURE-READY-001-INVERSE"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-TODAY-START-HERE-CLOSURE-READY-001"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-TODAY-START-HERE-CLOSURE-READY-001"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-TODAY-START-HERE-CLOSURE-READY-001-INVERSE"
+label = "Return Still counts Step to Start here"
+canonical_owner = "surface.today.command-contract"
+preconditions = ["CMD-TODAY-START-HERE-CLOSURE-READY-001 is the exact trigger command and its exact trigger Receipt is current", "The closed Start here Step revision, Still counts outcome, recommendation eligibility, Goal/path lineage, Proof posture, and rolling Today-window context are current"]
+destination = "Start here with the exact Step returned to its pre-closure actionable state and the closure and inverse Receipts available in inspection"
+destination_id = "DEST-TODAY-START-HERE-CLOSURE-READY-001-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it reopens the exact Start here Step from the Still counts closure, recomputes recommendation eligibility without fabricating priority, preserves attached Proof and Goal/path lineage, appends a reversing Event, updates the Today/Start here Projection, and creates a new inverse Receipt and History entry while the closure Receipt and History remain intact."
+success_focus = "the returned Start here Step status followed by its current recommendation eligibility and new inverse Receipt"
+success_focus_id = "FOCUS-TODAY-START-HERE-CLOSURE-READY-001-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Return Still counts Step to Start here control and exact unsafe, stale, or dependency-invalid Step/recommendation/window reason; the closure result and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-TODAY-START-HERE-CLOSURE-READY-001-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-TODAY-START-HERE-CLOSURE-READY-001-INVERSE"
+recovery_posture = "current"
+recovery_owner = "surface.today.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-TODAY-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
 
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TODAY-START-HERE-RECOVERY-NEEDED"

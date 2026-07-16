@@ -214,6 +214,9 @@
                 "mapping_sha256",
                 "mapping_record_id",
                 "owner_approval_state",
+                "owner_approval_registry_id",
+                "owner_approval_registry_revision",
+                "owner_approval_source_sha256",
                 "registry_id",
                 "registry_revision",
                 "source_sha256"
@@ -236,6 +239,9 @@
                 "mapping_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
                 "mapping_record_id": {"type": ["string", "null"], "pattern": "^MAPPING-GATE-[A-Z0-9]+(?:-[A-Z0-9]+)*-R[0-9]{4,}$"},
                 "owner_approval_state": {"type": "string", "enum": ["approved", "withheld"]},
+                "owner_approval_registry_id": {"const": "COMMAND-GATE-OWNER-APPROVAL-REGISTRY-001"},
+                "owner_approval_registry_revision": {"type": "integer", "minimum": 1},
+                "owner_approval_source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
                 "registry_id": {"type": "string", "minLength": 1},
                 "registry_revision": {"type": "integer", "minimum": 1},
                 "source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
@@ -301,17 +307,18 @@
     "machineTarget": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["detail", "id", "posture"],
+      "required": ["detail", "id", "posture", "resolution_record"],
       "properties": {
         "detail": {"$ref": "#/$defs/nonempty"},
         "id": {"type": "string", "pattern": "^(?:DEST|FOCUS)-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
-        "posture": {"enum": ["current", "deferred", "unavailable"]}
+        "posture": {"enum": ["current", "deferred", "unavailable"]},
+        "resolution_record": {"$ref": "#/$defs/resolutionRecord"}
       }
     },
     "machineRecovery": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["checkpoint_id", "detail", "id", "inverse_command_id", "irreversible_confirmation_id", "irreversible_receipt_id", "owner", "posture", "recovery_handoff_command_id", "rollback_posture"],
+      "required": ["checkpoint_id", "detail", "id", "inverse_command_id", "irreversible_confirmation_id", "irreversible_receipt_id", "mechanism_commands", "mechanism_records", "owner", "posture", "recovery_handoff_command_id", "resolution_record", "rollback_posture"],
       "properties": {
         "checkpoint_id": {"type": ["string", "null"], "pattern": "^CHECKPOINT-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
         "detail": {"$ref": "#/$defs/nonempty"},
@@ -319,16 +326,83 @@
         "inverse_command_id": {"type": ["string", "null"], "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
         "irreversible_confirmation_id": {"type": ["string", "null"], "pattern": "^CONFIRMATION-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
         "irreversible_receipt_id": {"type": ["string", "null"], "pattern": "^RECEIPT-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "mechanism_commands": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/recoveryMechanismCommand"}},
+        "mechanism_records": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/resolutionRecord"}},
         "owner": {"$ref": "#/$defs/nonempty"},
         "posture": {"enum": ["current", "deferred", "unavailable"]},
         "recovery_handoff_command_id": {"type": ["string", "null"], "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "resolution_record": {"$ref": "#/$defs/resolutionRecord"},
         "rollback_posture": {"type": ["string", "null"], "enum": ["checkpoint_restore", "confirmed_irreversible", "inverse_command", "owner_recovery_handoff", null]}
+      }
+    },
+    "recoveryMechanismCommand": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["behavior", "mechanism_kind", "redo", "state_command_record_sha256", "trigger_command_id"],
+      "properties": {
+        "behavior": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["activation_posture", "canonical_owner", "command_id", "commit_boundary", "effect", "failure_focus", "gate_dependency_ids", "gate_requirement_ids", "label", "preconditions", "presentation", "privacy_egress", "recovery_id", "recovery_owner", "recovery_posture", "rollback_undo", "verification_ids"],
+          "properties": {
+            "activation_posture": {"enum": ["active", "future_gated"]},
+            "canonical_owner": {"type": "string", "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"},
+            "command_id": {"type": "string", "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+            "commit_boundary": {"$ref": "#/$defs/nonempty"},
+            "effect": {"$ref": "#/$defs/nonempty"},
+            "failure_focus": {"$ref": "#/$defs/nonempty"},
+            "gate_dependency_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^GATE-[A-Z0-9]+(?:-[A-Z0-9]+)*$"}},
+            "gate_requirement_ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/nonempty"}},
+            "label": {"$ref": "#/$defs/nonempty"},
+            "preconditions": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/nonempty"}},
+            "presentation": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["destination", "destination_id", "destination_posture", "failure_focus_id", "failure_focus_posture", "success_focus", "success_focus_id", "success_focus_posture"],
+              "properties": {
+                "destination": {"$ref": "#/$defs/nonempty"},
+                "destination_id": {"type": "string", "pattern": "^DEST-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "destination_posture": {"enum": ["current", "deferred", "unavailable"]},
+                "failure_focus_id": {"type": "string", "pattern": "^FOCUS-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "failure_focus_posture": {"enum": ["current", "deferred", "unavailable"]},
+                "success_focus": {"$ref": "#/$defs/nonempty"},
+                "success_focus_id": {"type": "string", "pattern": "^FOCUS-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "success_focus_posture": {"enum": ["current", "deferred", "unavailable"]}
+              }
+            },
+            "privacy_egress": {"$ref": "#/$defs/nonempty"},
+            "recovery_id": {"type": "string", "pattern": "^RECOVERY-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+            "recovery_owner": {"type": "string", "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"},
+            "recovery_posture": {"enum": ["current", "deferred", "unavailable"]},
+            "rollback_undo": {"$ref": "#/$defs/nonempty"},
+            "verification_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/nonempty"}}
+          }
+        },
+        "mechanism_kind": {"enum": ["inverse_command", "recovery_handoff_command"]},
+        "redo": {
+          "oneOf": [
+            {"type": "null"},
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["authorization_posture", "command_id", "receipt_posture", "revision_posture"],
+              "properties": {
+                "authorization_posture": {"const": "fresh_task_authorization_required"},
+                "command_id": {"type": "string", "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "receipt_posture": {"const": "current_inverse_receipt_required"},
+                "revision_posture": {"const": "current_revision_required"}
+              }
+            }
+          ]
+        },
+        "state_command_record_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "trigger_command_id": {"type": "string", "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"}
       }
     },
     "machineCommandContract": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["activation_posture", "command_id", "destination", "failure_focus", "label", "recovery", "success_focus"],
+      "required": ["activation_posture", "command_id", "destination", "failure_focus", "label", "recovery", "resolution_registry", "success_focus"],
       "properties": {
         "activation_posture": {"enum": ["active", "future_gated"]},
         "command_id": {"type": "string", "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
@@ -336,7 +410,28 @@
         "failure_focus": {"$ref": "#/$defs/machineTarget"},
         "label": {"$ref": "#/$defs/nonempty"},
         "recovery": {"$ref": "#/$defs/machineRecovery"},
+        "resolution_registry": {"$ref": "#/$defs/resolutionRegistry"},
         "success_focus": {"$ref": "#/$defs/machineTarget"}
+      }
+    },
+    "resolutionRegistry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["registry_id", "registry_revision", "source_sha256"],
+      "properties": {
+        "registry_id": {"const": "COMMAND-RESOLUTION-REGISTRY-001"},
+        "registry_revision": {"type": "integer", "minimum": 1},
+        "source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "resolutionRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["record_sha256", "resolution_id"],
+      "properties": {
+        "record_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "resolution_id": {"type": "string", "pattern": "^(?:DEST|FOCUS|RECOVERY|CMD|CHECKPOINT|CONFIRMATION|RECEIPT)-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "state_command_record_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
       }
     },
     "approvalScope": {
@@ -353,8 +448,9 @@
     "approvalReceipt": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["approval_identity", "approval_state", "approved_scope", "approved_scope_sha256", "canon_content_sha256", "dependency_id", "dependency_revision", "dependency_sha256", "exact_product_mappings", "mapping_record_id", "mapping_sha256", "previous_receipt_sha256", "receipt_id", "receipt_revision", "receipt_sha256"],
+      "required": ["approval_attestation_sha256", "approval_identity", "approval_state", "approved_scope", "approved_scope_sha256", "canon_content_sha256", "dependency_id", "dependency_revision", "dependency_sha256", "exact_product_mappings", "mapping_record_id", "mapping_sha256", "previous_receipt_sha256", "receipt_id", "receipt_revision", "receipt_sha256"],
       "properties": {
+        "approval_attestation_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
         "approval_identity": {"type": "string", "pattern": "^OWNER-APPROVAL-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
         "approval_state": {"const": "approved"},
         "approved_scope": {"$ref": "#/$defs/approvalScope"},

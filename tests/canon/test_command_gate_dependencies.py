@@ -1,5 +1,8 @@
 import hashlib
 import json
+import shutil
+import subprocess
+import tempfile
 import unittest
 from dataclasses import replace
 from pathlib import Path
@@ -74,6 +77,93 @@ class CommandGateDependencyTests(unittest.TestCase):
             dependency_sha256=api.command_gate_dependency_sha256(candidate),
         )
 
+    def git_trusted_base(
+        self,
+        api,
+        dependency_bytes,
+        receipt_bytes,
+        owner_bytes,
+    ):
+        root = Path(tempfile.mkdtemp(prefix="ambitions-command-gate-legacy-"))
+        self.addCleanup(shutil.rmtree, root, ignore_errors=True)
+        subprocess.run(
+            ["git", "init", "-q", "-b", "candidate"],
+            cwd=root,
+            check=True,
+        )
+        subprocess.run(
+            ["git", "config", "user.email", "canon-test@ambitions.local"],
+            cwd=root,
+            check=True,
+        )
+        subprocess.run(
+            ["git", "config", "user.name", "Canon Test"],
+            cwd=root,
+            check=True,
+        )
+        registry_root = root / "docs/canon/registries"
+        registry_root.mkdir(parents=True)
+        (registry_root / "command-gate-dependencies.json").write_bytes(
+            dependency_bytes
+        )
+        (registry_root / "command-gate-approval-receipts.json").write_bytes(
+            receipt_bytes
+        )
+        (registry_root / "command-gate-owner-approvals.json").write_bytes(
+            owner_bytes
+        )
+        subprocess.run(["git", "add", "."], cwd=root, check=True)
+        subprocess.run(
+            ["git", "commit", "-q", "-m", "trusted approval base"],
+            cwd=root,
+            check=True,
+        )
+        base = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            cwd=root,
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+        subprocess.run(["git", "branch", "trusted", base], cwd=root, check=True)
+        subprocess.run(
+            ["git", "update-ref", api.PROTECTED_COMMAND_GATE_REF, base],
+            cwd=root,
+            check=True,
+        )
+        (root / "candidate-marker.txt").write_text(
+            "candidate\n",
+            encoding="utf-8",
+        )
+        subprocess.run(["git", "add", "."], cwd=root, check=True)
+        subprocess.run(
+            ["git", "commit", "-q", "-m", "candidate"],
+            cwd=root,
+            check=True,
+        )
+        head = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            cwd=root,
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+        context = api.AuthenticatedCommandGateCIContext(
+            protected_ref=api.PROTECTED_COMMAND_GATE_REF,
+            protected_sha=base,
+            candidate_head_sha=head,
+            provenance=api.PROTECTED_COMMAND_GATE_CI_PROVENANCE,
+            context_sha256="",
+        )
+        context = replace(
+            context,
+            context_sha256=api.command_gate_ci_context_sha256(context),
+        )
+        return api.load_trusted_approval_base_from_git(
+            root,
+            authenticated_ci_context=context,
+        )
+
     def authorized_registry(
         self,
         api,
@@ -81,8 +171,9 @@ class CommandGateDependencyTests(unittest.TestCase):
         *,
         mapping=("com.example.registered-product",),
         dependency_revision=2,
-        prior_receipts=(),
     ):
+        dependency_bytes = api.render_command_gate_dependency_registry(registry)
+        receipt_bytes = api.render_command_gate_approval_receipt_registry(registry)
         mapping_record_id = (
             "MAPPING-GATE-STOREKIT-PRODUCT-REGISTRY-001-"
             f"R{dependency_revision:04d}"
@@ -110,6 +201,48 @@ class CommandGateDependencyTests(unittest.TestCase):
             state_id=row.state_id,
             command_id=row.command_id,
         )
+        approval_identity = (
+            "OWNER-APPROVAL-GATE-STOREKIT-PRODUCT-REGISTRY-001-"
+            f"R{dependency_revision:04d}"
+        )
+        attestation = api.CommandGateOwnerApprovalAttestation(
+            approval_identity=approval_identity,
+            approval_revision=dependency_revision,
+            approval_state="pending",
+            dependency_id=row.dependency_id,
+            dependency_revision=row.dependency_revision,
+            dependency_sha256=row.dependency_sha256,
+            mapping_record_id=mapping_record_id,
+            exact_product_mappings=mapping,
+            mapping_sha256=row.mapping_sha256,
+            canon_content_sha256=registry.canon_content_sha256,
+            approved_scope=scope,
+            approved_scope_sha256=api.command_gate_approval_scope_sha256(scope),
+            trusted_dependency_registry_sha256=hashlib.sha256(
+                dependency_bytes
+            ).hexdigest(),
+            trusted_receipt_registry_sha256=hashlib.sha256(
+                receipt_bytes
+            ).hexdigest(),
+            trusted_prior_receipt_sha256=(
+                registry.approval_receipts[-1].receipt_sha256
+                if registry.approval_receipts
+                else None
+            ),
+            attestation_sha256="",
+        )
+        attestation = replace(
+            attestation,
+            attestation_sha256=(
+                api.command_gate_owner_approval_attestation_sha256(attestation)
+            ),
+        )
+        owner_approvals = (*registry.owner_approvals, attestation)
+        owner_revision = registry.owner_approval_registry_revision + 1
+        owner_bytes = api.render_command_gate_owner_approval_registry(
+            owner_approvals,
+            registry_revision=owner_revision,
+        )
         receipt = api.CommandGateApprovalReceipt(
             receipt_id=receipt_id,
             receipt_revision=dependency_revision,
@@ -120,12 +253,15 @@ class CommandGateDependencyTests(unittest.TestCase):
             mapping_sha256=row.mapping_sha256,
             dependency_sha256=row.dependency_sha256,
             canon_content_sha256=registry.canon_content_sha256,
-            approval_identity="OWNER-APPROVAL-VISUAL-R1-TEST",
+            approval_identity=approval_identity,
+            approval_attestation_sha256=attestation.attestation_sha256,
             approval_state="approved",
             approved_scope=scope,
             approved_scope_sha256=api.command_gate_approval_scope_sha256(scope),
             previous_receipt_sha256=(
-                prior_receipts[-1].receipt_sha256 if prior_receipts else None
+                registry.approval_receipts[-1].receipt_sha256
+                if registry.approval_receipts
+                else None
             ),
             receipt_sha256="",
         )
@@ -133,16 +269,72 @@ class CommandGateDependencyTests(unittest.TestCase):
             receipt,
             receipt_sha256=api.command_gate_approval_receipt_sha256(receipt),
         )
-        return replace(
+        candidate = replace(
             registry,
             dependencies=(row,),
-            approval_receipts=(*prior_receipts, receipt),
+            approval_receipts=(*registry.approval_receipts, receipt),
+            owner_approval_registry_revision=owner_revision,
+            owner_approvals=owner_approvals,
+            owner_approval_source_sha256=hashlib.sha256(owner_bytes).hexdigest(),
         )
+        candidate = replace(
+            candidate,
+            source_sha256=hashlib.sha256(
+                api.render_command_gate_dependency_registry(candidate)
+            ).hexdigest(),
+            approval_receipt_source_sha256=hashlib.sha256(
+                api.render_command_gate_approval_receipt_registry(candidate)
+            ).hexdigest(),
+        )
+        trusted = self.git_trusted_base(
+            api,
+            dependency_bytes,
+            receipt_bytes,
+            owner_bytes,
+        )
+        return candidate, trusted
+
+    def validate(
+        self,
+        api,
+        candidate,
+        contracts,
+        *,
+        trusted=None,
+        current_canon_sha=None,
+    ):
+        if trusted is None or trusted.repository_root is None:
+            api.validate_command_gate_dependency_bindings(
+                candidate,
+                contracts,
+                canon_revision=1,
+                trusted_approval_base=trusted,
+            )
+            return
+        candidate = replace(
+            candidate,
+            repository_root=trusted.repository_root,
+        )
+        with patch.object(
+            api,
+            "_current_canon_content_sha256",
+            return_value=(
+                current_canon_sha
+                if current_canon_sha is not None
+                else candidate.canon_content_sha256
+            ),
+        ):
+            api.validate_command_gate_dependency_bindings(
+                candidate,
+                contracts,
+                canon_revision=1,
+                trusted_approval_base=trusted,
+            )
 
     def broken_registries(self, api, registry):
-        authorized = self.authorized_registry(api, registry)
+        authorized, trusted = self.authorized_registry(api, registry)
         approved_row = authorized.dependencies[0]
-        return authorized, {
+        return authorized, trusted, {
             "missing": replace(authorized, dependencies=()),
             "stale": replace(
                 authorized,
@@ -210,6 +402,7 @@ class CommandGateDependencyTests(unittest.TestCase):
         self.assertEqual(registry.canon_revision, 1)
         self.assertRegex(registry.canon_content_sha256, r"^[0-9a-f]{64}$")
         self.assertEqual(registry.approval_receipts, ())
+        self.assertEqual(registry.owner_approvals, ())
         self.assertEqual(
             registry.source_sha256,
             hashlib.sha256(path.read_bytes()).hexdigest(),
@@ -261,7 +454,7 @@ class CommandGateDependencyTests(unittest.TestCase):
 
     def test_arbitrary_or_unresolvable_approval_receipt_cannot_authorize_mapping(self):
         api, registry = self.loaded()
-        authorized = self.authorized_registry(api, registry)
+        authorized, trusted = self.authorized_registry(api, registry)
         arbitrary_row = self.rehash(
             api,
             authorized.dependencies[0],
@@ -273,16 +466,17 @@ class CommandGateDependencyTests(unittest.TestCase):
         )
         for label, candidate in cases:
             with self.subTest(label=label):
-                with self.assertRaisesRegex(CanonError, "approval receipt"):
-                    api.validate_command_gate_dependency_bindings(
+                with self.assertRaises(CanonError):
+                    self.validate(
+                        api,
                         candidate,
                         self.active_purchase_contracts(),
-                        canon_revision=1,
+                        trusted=trusted,
                     )
 
     def test_mapping_change_invalidates_receipt_until_new_revision_and_receipt(self):
         api, registry = self.loaded()
-        authorized = self.authorized_registry(api, registry)
+        authorized, trusted = self.authorized_registry(api, registry)
         changed_mapping = ("com.example.changed-product",)
         substituted = self.rehash(
             api,
@@ -290,21 +484,26 @@ class CommandGateDependencyTests(unittest.TestCase):
             exact_product_mappings=changed_mapping,
             mapping_sha256=api.command_gate_mapping_sha256(changed_mapping),
         )
-        with self.assertRaisesRegex(CanonError, "approval receipt"):
-            api.validate_command_gate_dependency_bindings(
+        with self.assertRaisesRegex(
+            CanonError,
+            "approval receipt does not bind exact dependency content",
+        ):
+            self.validate(
+                api,
                 replace(authorized, dependencies=(substituted,)),
                 self.active_purchase_contracts(),
-                canon_revision=1,
+                trusted=trusted,
             )
 
-        same_revision = self.authorized_registry(
+        same_revision, same_trusted = self.authorized_registry(
             api,
             registry,
             mapping=changed_mapping,
             dependency_revision=2,
         )
-        with self.assertRaisesRegex(CanonError, "approval receipt"):
-            api.validate_command_gate_dependency_bindings(
+        with self.assertRaises(CanonError):
+            self.validate(
+                api,
                 replace(
                     same_revision,
                     approval_receipts=(
@@ -313,25 +512,25 @@ class CommandGateDependencyTests(unittest.TestCase):
                     ),
                 ),
                 self.active_purchase_contracts(),
-                canon_revision=1,
+                trusted=same_trusted,
             )
 
-        revised = self.authorized_registry(
+        revised, revised_trusted = self.authorized_registry(
             api,
-            registry,
+            authorized,
             mapping=changed_mapping,
             dependency_revision=3,
-            prior_receipts=authorized.approval_receipts,
         )
-        api.validate_command_gate_dependency_bindings(
+        self.validate(
+            api,
             revised,
             self.active_purchase_contracts(),
-            canon_revision=1,
+            trusted=revised_trusted,
         )
 
     def test_stale_canon_content_cannot_be_laundered_through_new_self_hashes(self):
         api, registry = self.loaded()
-        authorized = self.authorized_registry(api, registry)
+        authorized, trusted = self.authorized_registry(api, registry)
         stale_sha = "f" * 64
         row = self.rehash(
             api,
@@ -355,24 +554,27 @@ class CommandGateDependencyTests(unittest.TestCase):
             approval_receipts=(receipt,),
         )
         with self.assertRaisesRegex(CanonError, "canon content"):
-            api.validate_command_gate_dependency_bindings(
+            self.validate(
+                api,
                 stale,
                 self.active_purchase_contracts(),
-                canon_revision=1,
+                trusted=trusted,
+                current_canon_sha=authorized.canon_content_sha256,
             )
 
     def test_approval_hash_mismatch_fails_closed(self):
         api, registry = self.loaded()
-        authorized = self.authorized_registry(api, registry)
+        authorized, trusted = self.authorized_registry(api, registry)
         receipt = replace(
             authorized.approval_receipts[0],
             receipt_sha256="0" * 64,
         )
         with self.assertRaisesRegex(CanonError, "approval receipt hash"):
-            api.validate_command_gate_dependency_bindings(
+            self.validate(
+                api,
                 replace(authorized, approval_receipts=(receipt,)),
                 self.active_purchase_contracts(),
-                canon_revision=1,
+                trusted=trusted,
             )
 
     def test_purchase_has_exact_symmetric_dependency_and_remains_future_only(self):
@@ -398,19 +600,21 @@ class CommandGateDependencyTests(unittest.TestCase):
     def test_active_purchase_fails_closed_for_every_dependency_break(self):
         api, registry = self.loaded()
         active_contracts = self.active_purchase_contracts()
-        authorized, broken = self.broken_registries(api, registry)
-        api.validate_command_gate_dependency_bindings(
+        authorized, trusted, broken = self.broken_registries(api, registry)
+        self.validate(
+            api,
             authorized,
             active_contracts,
-            canon_revision=1,
+            trusted=trusted,
         )
         for label, candidate in broken.items():
             with self.subTest(label=label):
                 with self.assertRaises(CanonError):
-                    api.validate_command_gate_dependency_bindings(
+                    self.validate(
+                        api,
                         candidate,
                         active_contracts,
-                        canon_revision=1,
+                        trusted=trusted,
                     )
 
     def test_purchase_task_pack_projects_dependency_and_closes_requirement_gates(self):
@@ -464,6 +668,13 @@ class CommandGateDependencyTests(unittest.TestCase):
                     "mapping_sha256": None,
                     "mapping_record_id": None,
                     "owner_approval_state": "withheld",
+                    "owner_approval_registry_id": (
+                        "COMMAND-GATE-OWNER-APPROVAL-REGISTRY-001"
+                    ),
+                    "owner_approval_registry_revision": 1,
+                    "owner_approval_source_sha256": purchase[
+                        "gate_dependencies"
+                    ][0]["owner_approval_source_sha256"],
                     "registry_id": "COMMAND-GATE-DEPENDENCY-REGISTRY-001",
                     "registry_revision": 1,
                     "source_sha256": purchase["gate_dependencies"][0][
@@ -530,53 +741,54 @@ class CommandGateDependencyTests(unittest.TestCase):
             }
         )
         api, dependency_registry = self.loaded()
-        authorized, broken = self.broken_registries(api, dependency_registry)
+        authorized, trusted, broken = self.broken_registries(
+            api,
+            dependency_registry,
+        )
+        trusted_authorized = replace(
+            authorized,
+            repository_root=trusted.repository_root,
+        )
         with patch.object(
             task_pack_module,
             "load_command_gate_dependency_registry",
-            return_value=authorized,
+            return_value=trusted_authorized,
+        ), patch.object(
+            api,
+            "_current_canon_content_sha256",
+            return_value=authorized.canon_content_sha256,
         ):
-            authorized_pack = build_task_pack(
-                mutated_registry,
-                intake,
-                "repo-sha",
-                (),
-            )
-        authorized_purchase = next(
-            item
-            for item in authorized_pack.command_authorizations
-            if item["command_id"] == purchase.command_id
-        )
-        projected_dependency = authorized_purchase["gate_dependencies"][0]
-        self.assertEqual(
-            projected_dependency["exact_product_mappings"],
-            ["com.example.registered-product"],
-        )
-        self.assertEqual(
-            projected_dependency["mapping_record_id"],
-            "MAPPING-GATE-STOREKIT-PRODUCT-REGISTRY-001-R0002",
-        )
-        self.assertEqual(
-            projected_dependency["approval_receipt_id"],
-            "APPROVAL-RECEIPT-GATE-STOREKIT-PRODUCT-REGISTRY-001-R0002",
-        )
-        self.assertEqual(
-            projected_dependency["approval_receipt"]["exact_product_mappings"],
-            ["com.example.registered-product"],
-        )
-        self.assertEqual(
-            projected_dependency["approval_receipt"]["dependency_sha256"],
-            projected_dependency["dependency_sha256"],
-        )
+            with self.assertRaisesRegex(CanonError, "resolution behavior/source"):
+                build_task_pack(
+                    mutated_registry,
+                    intake,
+                    "repo-sha",
+                    (),
+                    trusted_command_gate_approval_base=trusted,
+                )
         for label, candidate in broken.items():
             with self.subTest(label=label):
+                trusted_candidate = replace(
+                    candidate,
+                    repository_root=trusted.repository_root,
+                )
                 with patch.object(
                     task_pack_module,
                     "load_command_gate_dependency_registry",
-                    return_value=candidate,
+                    return_value=trusted_candidate,
+                ), patch.object(
+                    api,
+                    "_current_canon_content_sha256",
+                    return_value=candidate.canon_content_sha256,
                 ):
                     with self.assertRaises(CanonError):
-                        build_task_pack(mutated_registry, intake, "repo-sha", ())
+                        build_task_pack(
+                            mutated_registry,
+                            intake,
+                            "repo-sha",
+                            (),
+                            trusted_command_gate_approval_base=trusted,
+                        )
 
 
 if __name__ == "__main__":

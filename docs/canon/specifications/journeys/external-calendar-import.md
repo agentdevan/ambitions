@@ -165,6 +165,34 @@ gate_requirement_ids = []
 rollback_posture = "owner_recovery_handoff"
 recovery_handoff_command_id = "CMD-TIME-IMPORT-IMPORT-FAILED-001-RECOVERY-HANDOFF"
 
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-TIME-IMPORT-IMPORT-FAILED-001"
+mechanism_kind = "recovery_handoff_command"
+command_id = "CMD-TIME-IMPORT-IMPORT-FAILED-001-RECOVERY-HANDOFF"
+label = "Review failed import recovery"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["CMD-TIME-IMPORT-IMPORT-FAILED-001 is the exact trigger command and its exact trigger Receipt is current", "The source fingerprint, completed-ID set, remaining failed-ID set, and per-record import Receipts are current"]
+destination = "the calendar import recovery ledger filtered to the failed retry scope, with completed IDs, remaining failed IDs, source fingerprint, and per-record Receipts visible"
+destination_id = "DEST-TIME-IMPORT-IMPORT-FAILED-001-RECOVERY-HANDOFF"
+destination_posture = "current"
+effect = "No durable mutation occurs and no Receipt is created; the exact trigger Receipt and scope route only to journey.calendar-import.command-contract for the failed retry set, preserving every completed import ID, remaining failed ID, source fingerprint, local object, Projection, Receipt, and History unchanged."
+success_focus = "the remaining failed-ID heading followed by the first separately authorized per-record recovery action"
+success_focus_id = "FOCUS-TIME-IMPORT-IMPORT-FAILED-001-RECOVERY-HANDOFF-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the failed-import recovery control and exact ledger-route failure; the exact trigger Receipt and scope, completed IDs, and failed IDs remain visible and unchanged"
+failure_focus_id = "FOCUS-TIME-IMPORT-IMPORT-FAILED-001-RECOVERY-HANDOFF-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Non-mutating: routing and inspection complete without a canonical Event, Projection change, or new Receipt."
+rollback_undo = "No Undo is required; dismissal returns to the exact trigger result with canonical state, Receipt, and History unchanged."
+recovery_id = "RECOVERY-TIME-IMPORT-IMPORT-FAILED-001-RECOVERY-HANDOFF"
+recovery_posture = "current"
+recovery_owner = "journey.calendar-import.command-contract"
+privacy_egress = "The handoff reads only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-IMPORT-IMPORT-UNDO-UNAVAILABLE"
 requirement_id = "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001"
@@ -239,6 +267,36 @@ gate_requirement_ids = []
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-TIME-IMPORT-NATIVE-IMPORT-UNDO-001-INVERSE"
 
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-TIME-IMPORT-NATIVE-IMPORT-UNDO-001"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-TIME-IMPORT-NATIVE-IMPORT-UNDO-001"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-TIME-IMPORT-NATIVE-IMPORT-UNDO-001-INVERSE"
+label = "Restore imported items"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["CMD-TIME-IMPORT-NATIVE-IMPORT-UNDO-001 is the exact trigger command and its exact trigger Receipt is current", "The exact imported object set, source lineage, capacity/reflow dependencies, notification-rule links, and trigger Undo revision are current"]
+destination = "the Time import result with the exact previously undone native objects restored under their original source lineage and per-record recovery Receipts"
+destination_id = "DEST-TIME-IMPORT-NATIVE-IMPORT-UNDO-001-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it restores the exact Ambitions-native object set removed by Undo Imported Items together with its source lineage, capacity, badge, approved reflow, and linked local notification posture, appends a reversing Event, updates the Time and import Projection, and creates a new inverse Receipt and History entry while the external source, original import Receipts, trigger Undo Receipt, and History remain intact."
+success_focus = "the first restored imported object followed by the restored-set count and new recovery Receipt"
+success_focus_id = "FOCUS-TIME-IMPORT-NATIVE-IMPORT-UNDO-001-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Restore imported items control and exact unsafe, stale, or dependency-invalid object/lineage/reflow reason; the undone set and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-TIME-IMPORT-NATIVE-IMPORT-UNDO-001-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-TIME-IMPORT-NATIVE-IMPORT-UNDO-001-INVERSE"
+recovery_posture = "current"
+recovery_owner = "journey.calendar-import.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-IMPORT-PARTIAL-IMPORT"
 requirement_id = "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001"
@@ -276,6 +334,34 @@ activation_posture = "active"
 gate_requirement_ids = []
 rollback_posture = "owner_recovery_handoff"
 recovery_handoff_command_id = "CMD-TIME-IMPORT-PARTIAL-IMPORT-001-RECOVERY-HANDOFF"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-TIME-IMPORT-PARTIAL-IMPORT-001"
+mechanism_kind = "recovery_handoff_command"
+command_id = "CMD-TIME-IMPORT-PARTIAL-IMPORT-001-RECOVERY-HANDOFF"
+label = "Review partial import recovery"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["CMD-TIME-IMPORT-PARTIAL-IMPORT-001 is the exact trigger command and its exact trigger Receipt is current", "The source fingerprint, successfully copied object IDs, missing object IDs, and atomic per-record boundary are current"]
+destination = "the partial import reconciliation view separating successfully copied objects from missing objects under the exact source fingerprint and trigger Receipt"
+destination_id = "DEST-TIME-IMPORT-PARTIAL-IMPORT-001-RECOVERY-HANDOFF"
+destination_posture = "current"
+effect = "No durable mutation occurs and no Receipt is created; the exact trigger Receipt and scope route only to journey.calendar-import.command-contract for partial-import reconciliation, preserving copied objects and their Receipts, missing IDs, source lineage, Projection, and History unchanged."
+success_focus = "the missing-object group heading followed by the first separately authorized per-record retry action"
+success_focus_id = "FOCUS-TIME-IMPORT-PARTIAL-IMPORT-001-RECOVERY-HANDOFF-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the partial-import recovery control and exact reconciliation-route failure; the exact trigger Receipt and scope, copied IDs, and missing IDs remain visible and unchanged"
+failure_focus_id = "FOCUS-TIME-IMPORT-PARTIAL-IMPORT-001-RECOVERY-HANDOFF-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Non-mutating: routing and inspection complete without a canonical Event, Projection change, or new Receipt."
+rollback_undo = "No Undo is required; dismissal returns to the exact trigger result with canonical state, Receipt, and History unchanged."
+recovery_id = "RECOVERY-TIME-IMPORT-PARTIAL-IMPORT-001-RECOVERY-HANDOFF"
+recovery_posture = "current"
+recovery_owner = "journey.calendar-import.command-contract"
+privacy_egress = "The handoff reads only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
 
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-IMPORT-RECONCILING"
@@ -386,6 +472,34 @@ activation_posture = "active"
 gate_requirement_ids = []
 rollback_posture = "owner_recovery_handoff"
 recovery_handoff_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-001-RECOVERY-HANDOFF"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-001"
+mechanism_kind = "recovery_handoff_command"
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-001-RECOVERY-HANDOFF"
+label = "Review selected import recovery"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["CMD-TIME-IMPORT-REVIEWING-DIFF-001 is the exact trigger command and its exact trigger Receipt is current", "The reviewed selection, source fingerprint, completed-ID set, failed-ID set, and last atomic record boundary are current"]
+destination = "the selected import recovery ledger at the last atomic record boundary with completed, failed, and not-yet-attempted IDs separated"
+destination_id = "DEST-TIME-IMPORT-REVIEWING-DIFF-001-RECOVERY-HANDOFF"
+destination_posture = "current"
+effect = "No durable mutation occurs and no Receipt is created; the exact trigger Receipt and scope route only to journey.calendar-import.command-contract for the reviewed selection, preserving completed imports, failed IDs, unattempted IDs, source fingerprint, Projection, Receipt, and History unchanged."
+success_focus = "the selected import recovery summary followed by the first separately authorized action for the exact failed or unattempted scope"
+success_focus_id = "FOCUS-TIME-IMPORT-REVIEWING-DIFF-001-RECOVERY-HANDOFF-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the selected-import recovery control and exact batch-ledger route failure; the exact trigger Receipt and scope and every completion boundary remain visible and unchanged"
+failure_focus_id = "FOCUS-TIME-IMPORT-REVIEWING-DIFF-001-RECOVERY-HANDOFF-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Non-mutating: routing and inspection complete without a canonical Event, Projection change, or new Receipt."
+rollback_undo = "No Undo is required; dismissal returns to the exact trigger result with canonical state, Receipt, and History unchanged."
+recovery_id = "RECOVERY-TIME-IMPORT-REVIEWING-DIFF-001-RECOVERY-HANDOFF"
+recovery_posture = "current"
+recovery_owner = "journey.calendar-import.command-contract"
+privacy_egress = "The handoff reads only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-002"
@@ -514,6 +628,34 @@ gate_requirement_ids = []
 rollback_posture = "owner_recovery_handoff"
 recovery_handoff_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-006-RECOVERY-HANDOFF"
 
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-006"
+mechanism_kind = "recovery_handoff_command"
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-006-RECOVERY-HANDOFF"
+label = "Review ignored import decision"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["CMD-TIME-IMPORT-REVIEWING-DIFF-006 is the exact trigger command and its exact trigger Receipt is current", "The ignored source identity, conflict revision, source fingerprint, and exclusion decision Receipt are current"]
+destination = "the import decision inspection for the exact ignored source identity with its conflict, source fingerprint, exclusion scope, and correction route visible"
+destination_id = "DEST-TIME-IMPORT-REVIEWING-DIFF-006-RECOVERY-HANDOFF"
+destination_posture = "current"
+effect = "No durable mutation occurs and no Receipt is created; the exact trigger Receipt and scope route only to journey.calendar-import.command-contract for inspection of the ignored import decision, while the external record, exclusion marker, Projection, Receipt, and History remain unchanged."
+success_focus = "the ignored source identity and exclusion reason followed by the first separately authorized correction action"
+success_focus_id = "FOCUS-TIME-IMPORT-REVIEWING-DIFF-006-RECOVERY-HANDOFF-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the ignored-decision review control and exact source/decision route failure; the exact trigger Receipt and scope remain visible and unchanged"
+failure_focus_id = "FOCUS-TIME-IMPORT-REVIEWING-DIFF-006-RECOVERY-HANDOFF-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Non-mutating: routing and inspection complete without a canonical Event, Projection change, or new Receipt."
+rollback_undo = "No Undo is required; dismissal returns to the exact trigger result with canonical state, Receipt, and History unchanged."
+recovery_id = "RECOVERY-TIME-IMPORT-REVIEWING-DIFF-006-RECOVERY-HANDOFF"
+recovery_posture = "current"
+recovery_owner = "journey.calendar-import.command-contract"
+privacy_egress = "The handoff reads only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
+
 [[state_command_contracts.commands]]
 command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-007"
 label = "Ignore for planning"
@@ -540,6 +682,34 @@ activation_posture = "active"
 gate_requirement_ids = []
 rollback_posture = "owner_recovery_handoff"
 recovery_handoff_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-007-RECOVERY-HANDOFF"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-007"
+mechanism_kind = "recovery_handoff_command"
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-007-RECOVERY-HANDOFF"
+label = "Review planning exclusion"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["CMD-TIME-IMPORT-REVIEWING-DIFF-007 is the exact trigger command and its exact trigger Receipt is current", "The external source identity, planning-capacity exclusion marker, source fingerprint, and decision Receipt are current"]
+destination = "the import planning-decision inspection for the exact external record with its capacity exclusion and correction route visible"
+destination_id = "DEST-TIME-IMPORT-REVIEWING-DIFF-007-RECOVERY-HANDOFF"
+destination_posture = "current"
+effect = "No durable mutation occurs and no Receipt is created; the exact trigger Receipt and scope route only to journey.calendar-import.command-contract for planning-exclusion inspection, while the external record remains unowned and the capacity exclusion marker, Projection, Receipt, and History remain unchanged."
+success_focus = "the planning-capacity exclusion summary followed by the first separately authorized correction action"
+success_focus_id = "FOCUS-TIME-IMPORT-REVIEWING-DIFF-007-RECOVERY-HANDOFF-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the planning-exclusion review control and exact source/capacity route failure; the exact trigger Receipt and scope remain visible and unchanged"
+failure_focus_id = "FOCUS-TIME-IMPORT-REVIEWING-DIFF-007-RECOVERY-HANDOFF-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Non-mutating: routing and inspection complete without a canonical Event, Projection change, or new Receipt."
+rollback_undo = "No Undo is required; dismissal returns to the exact trigger result with canonical state, Receipt, and History unchanged."
+recovery_id = "RECOVERY-TIME-IMPORT-REVIEWING-DIFF-007-RECOVERY-HANDOFF"
+recovery_posture = "current"
+recovery_owner = "journey.calendar-import.command-contract"
+privacy_egress = "The handoff reads only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-008"
@@ -568,6 +738,36 @@ gate_requirement_ids = []
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-008-INVERSE"
 
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-008"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-008"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-008-INVERSE"
+label = "Undo imported object and reflow"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["CMD-TIME-IMPORT-REVIEWING-DIFF-008 is the exact trigger command and its exact trigger Receipt is current", "The imported native object, atomic reflow change set, source lineage, capacity revision, and affected schedule dependencies are current"]
+destination = "the Time import result with the exact imported object removed from active placement and the pre-import schedule/capacity arrangement restored"
+destination_id = "DEST-TIME-IMPORT-REVIEWING-DIFF-008-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it moves the exact imported native object out of active placement, reverses only its atomic schedule reflow change set, restores the prior capacity arrangement, appends a reversing Event, updates the Time/import Projection, and creates a new inverse Receipt and History entry while external source data, lineage, the import Receipt, and History remain intact."
+success_focus = "the restored pre-import schedule position and capacity summary followed by the inverse Receipt"
+success_focus_id = "FOCUS-TIME-IMPORT-REVIEWING-DIFF-008-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Undo imported object and reflow control and exact unsafe, stale, or dependency-invalid object/reflow reason; the imported placement and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-TIME-IMPORT-REVIEWING-DIFF-008-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-TIME-IMPORT-REVIEWING-DIFF-008-INVERSE"
+recovery_posture = "current"
+recovery_owner = "journey.calendar-import.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
+
 [[state_command_contracts.commands]]
 command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-009"
 label = "Import into Ambitions"
@@ -594,6 +794,36 @@ activation_posture = "active"
 gate_requirement_ids = []
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-009-INVERSE"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-009"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-009"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-009-INVERSE"
+label = "Undo native import"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["CMD-TIME-IMPORT-REVIEWING-DIFF-009 is the exact trigger command and its exact trigger Receipt is current", "The imported native object identity, source lineage, owning Time revision, and dependent local relationships are current"]
+destination = "the Time import result with the exact native object removed from active projections into its recoverable imported-object lifecycle while source lineage remains inspectable"
+destination_id = "DEST-TIME-IMPORT-REVIEWING-DIFF-009-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it removes the exact imported native object from active Time projections into its recoverable lifecycle without changing the external source, appends a reversing Event, updates the Time/import Projection, and creates a new inverse Receipt and History entry while source lineage, the import Receipt, and History remain intact."
+success_focus = "the import History row showing the native object removed from active Time and its recoverable lineage retained"
+success_focus_id = "FOCUS-TIME-IMPORT-REVIEWING-DIFF-009-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Undo native import control and exact unsafe, stale, or dependency-invalid object/lineage reason; the imported object and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-TIME-IMPORT-REVIEWING-DIFF-009-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-TIME-IMPORT-REVIEWING-DIFF-009-INVERSE"
+recovery_posture = "current"
+recovery_owner = "journey.calendar-import.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-010"
@@ -622,6 +852,36 @@ gate_requirement_ids = []
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-010-INVERSE"
 
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-010"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-010"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-010-INVERSE"
+label = "Undo import and local notification"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["CMD-TIME-IMPORT-REVIEWING-DIFF-010 is the exact trigger command and its exact trigger Receipt is current", "The imported native object, linked local notification rule, source lineage, owning revisions, and external-request reconciliation state are current"]
+destination = "the Time import result with the exact native object removed from active projections and its linked Ambitions notification rule removed from active local policy"
+destination_id = "DEST-TIME-IMPORT-REVIEWING-DIFF-010-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it removes the exact imported native object from active Time projections and reverses only its linked Ambitions notification-rule policy, appends a reversing Event, updates the Time/import/notification Projection, and creates a new inverse Receipt and History entry while external source data and alerts remain unchanged and any iOS request removal reconciles separately."
+success_focus = "the import History row showing the native object and linked local notification policy reversed, followed by reconciliation status"
+success_focus_id = "FOCUS-TIME-IMPORT-REVIEWING-DIFF-010-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Undo import and local notification control and exact unsafe, stale, or dependency-invalid object/rule/request reason; the imported object, rule, and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-TIME-IMPORT-REVIEWING-DIFF-010-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-TIME-IMPORT-REVIEWING-DIFF-010-INVERSE"
+recovery_posture = "current"
+recovery_owner = "journey.calendar-import.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
+
 [[state_command_contracts.commands]]
 command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-011"
 label = "Import without Ambitions notifications"
@@ -648,6 +908,36 @@ activation_posture = "active"
 gate_requirement_ids = []
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-011-INVERSE"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-011"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-011"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-011-INVERSE"
+label = "Undo import without local notification"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["CMD-TIME-IMPORT-REVIEWING-DIFF-011 is the exact trigger command and its exact trigger Receipt is current", "The imported native object identity, explicit no-Ambitions-alert posture, source lineage, and owning Time revision are current"]
+destination = "the Time import result with the exact native object removed from active projections and the external alert-ownership posture still explicit"
+destination_id = "DEST-TIME-IMPORT-REVIEWING-DIFF-011-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it removes the exact imported native object from active Time projections without creating, changing, or removing any Ambitions notification rule or external alert, appends a reversing Event, updates the Time/import Projection, and creates a new inverse Receipt and History entry while source lineage, the import Receipt, and History remain intact."
+success_focus = "the import History row showing the native object reversed and no Ambitions alert policy created"
+success_focus_id = "FOCUS-TIME-IMPORT-REVIEWING-DIFF-011-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Undo import without local notification control and exact unsafe, stale, or dependency-invalid object/lineage reason; the imported object and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-TIME-IMPORT-REVIEWING-DIFF-011-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-TIME-IMPORT-REVIEWING-DIFF-011-INVERSE"
+recovery_posture = "current"
+recovery_owner = "journey.calendar-import.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-012"
@@ -676,6 +966,36 @@ gate_requirement_ids = []
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-012-INVERSE"
 
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-012"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-012"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-012-INVERSE"
+label = "Undo import without reflow"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["CMD-TIME-IMPORT-REVIEWING-DIFF-012 is the exact trigger command and its exact trigger Receipt is current", "The imported native object identity, explicit no-reflow posture, source lineage, and unchanged schedule revision are current"]
+destination = "the Time import result with the exact native object removed from active projections and the unchanged pre-import schedule still visible"
+destination_id = "DEST-TIME-IMPORT-REVIEWING-DIFF-012-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it removes the exact imported native object from active Time projections without applying any schedule reflow, appends a reversing Event, updates the Time/import Projection, and creates a new inverse Receipt and History entry while the unchanged schedule, source lineage, import Receipt, and History remain intact."
+success_focus = "the unchanged schedule context followed by the import History row showing the object reversal"
+success_focus_id = "FOCUS-TIME-IMPORT-REVIEWING-DIFF-012-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Undo import without reflow control and exact unsafe, stale, or dependency-invalid object/schedule reason; the imported object and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-TIME-IMPORT-REVIEWING-DIFF-012-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-TIME-IMPORT-REVIEWING-DIFF-012-INVERSE"
+recovery_posture = "current"
+recovery_owner = "journey.calendar-import.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
+
 [[state_command_contracts.commands]]
 command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-013"
 label = "Keep external"
@@ -702,6 +1022,34 @@ activation_posture = "active"
 gate_requirement_ids = []
 rollback_posture = "owner_recovery_handoff"
 recovery_handoff_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-013-RECOVERY-HANDOFF"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-013"
+mechanism_kind = "recovery_handoff_command"
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-013-RECOVERY-HANDOFF"
+label = "Review external-ownership decision"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["CMD-TIME-IMPORT-REVIEWING-DIFF-013 is the exact trigger command and its exact trigger Receipt is current", "The external source identity, external record/alert ownership posture, no-native-object result, and decision Receipt are current"]
+destination = "the import decision inspection for the exact externally owned record with its no-native-object result and separately authorized correction route visible"
+destination_id = "DEST-TIME-IMPORT-REVIEWING-DIFF-013-RECOVERY-HANDOFF"
+destination_posture = "current"
+effect = "No durable mutation occurs and no Receipt is created; the exact trigger Receipt and scope route only to journey.calendar-import.command-contract for external-ownership decision inspection, while the record and alert remain external, no native object is created, and the decision Projection, Receipt, and History remain unchanged."
+success_focus = "the external record and alert ownership summary followed by the first separately authorized correction action"
+success_focus_id = "FOCUS-TIME-IMPORT-REVIEWING-DIFF-013-RECOVERY-HANDOFF-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the external-ownership decision review control and exact source/decision route failure; the exact trigger Receipt and scope remain visible and unchanged"
+failure_focus_id = "FOCUS-TIME-IMPORT-REVIEWING-DIFF-013-RECOVERY-HANDOFF-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Non-mutating: routing and inspection complete without a canonical Event, Projection change, or new Receipt."
+rollback_undo = "No Undo is required; dismissal returns to the exact trigger result with canonical state, Receipt, and History unchanged."
+recovery_id = "RECOVERY-TIME-IMPORT-REVIEWING-DIFF-013-RECOVERY-HANDOFF"
+recovery_posture = "current"
+recovery_owner = "journey.calendar-import.command-contract"
+privacy_egress = "The handoff reads only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-014"
@@ -730,6 +1078,36 @@ gate_requirement_ids = []
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-014-INVERSE"
 
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-014"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-014"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-014-INVERSE"
+label = "Remove capacity reservation"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["CMD-TIME-IMPORT-REVIEWING-DIFF-014 is the exact trigger command and its exact trigger Receipt is current", "The exact local capacity reservation, source identity, Time revision, and dependent placement calculations are current"]
+destination = "the Time import result with the exact local capacity reservation removed and the external record still visible as externally owned"
+destination_id = "DEST-TIME-IMPORT-REVIEWING-DIFF-014-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it removes the exact local capacity reservation created for the external record without importing, editing, or unlinking that record, appends a reversing Event, updates the Time capacity Projection, and creates a new inverse Receipt and History entry while source identity, the reservation Receipt, and History remain intact."
+success_focus = "the restored capacity summary and external record row showing that no local reservation remains"
+success_focus_id = "FOCUS-TIME-IMPORT-REVIEWING-DIFF-014-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Remove capacity reservation control and exact unsafe, stale, or dependency-invalid reservation/placement reason; the reservation and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-TIME-IMPORT-REVIEWING-DIFF-014-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-TIME-IMPORT-REVIEWING-DIFF-014-INVERSE"
+recovery_posture = "current"
+recovery_owner = "journey.calendar-import.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
+
 [[state_command_contracts.commands]]
 command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-015"
 label = "Link"
@@ -756,6 +1134,36 @@ activation_posture = "active"
 gate_requirement_ids = []
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-015-INVERSE"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-015"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-015"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-015-INVERSE"
+label = "Unlink source reference"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["CMD-TIME-IMPORT-REVIEWING-DIFF-015 is the exact trigger command and its exact trigger Receipt is current", "The exact local source-reference link, linked native object revision, external source identity, and lineage dependencies are current"]
+destination = "the Time import result with the exact local source-reference link removed while both the native object and external record remain independently intact"
+destination_id = "DEST-TIME-IMPORT-REVIEWING-DIFF-015-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it removes only the exact local source-reference link without deleting or editing the native object or external record, appends a reversing Event, updates the import lineage Projection, and creates a new inverse Receipt and History entry while both object histories, the link Receipt, and source provenance remain intact."
+success_focus = "the unlinked native object and external record identities followed by the new inverse Receipt"
+success_focus_id = "FOCUS-TIME-IMPORT-REVIEWING-DIFF-015-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Unlink source reference control and exact unsafe, stale, or dependency-invalid object/link/lineage reason; the link and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-TIME-IMPORT-REVIEWING-DIFF-015-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-TIME-IMPORT-REVIEWING-DIFF-015-INVERSE"
+recovery_posture = "current"
+recovery_owner = "journey.calendar-import.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-016"
@@ -784,6 +1192,34 @@ gate_requirement_ids = []
 rollback_posture = "owner_recovery_handoff"
 recovery_handoff_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-016-RECOVERY-HANDOFF"
 
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-016"
+mechanism_kind = "recovery_handoff_command"
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-016-RECOVERY-HANDOFF"
+label = "Review permanent rejection"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["CMD-TIME-IMPORT-REVIEWING-DIFF-016 is the exact trigger command and its exact trigger Receipt is current", "The exact rejected source identity, rejection-marker revision, source fingerprint, and decision Receipt are current"]
+destination = "the import decision inspection for the exact permanently rejected source identity with the rejection marker, preserved external record, and correction route visible"
+destination_id = "DEST-TIME-IMPORT-REVIEWING-DIFF-016-RECOVERY-HANDOFF"
+destination_posture = "current"
+effect = "No durable mutation occurs and no Receipt is created; the exact trigger Receipt and scope route only to journey.calendar-import.command-contract for rejection-marker inspection, while the external record remains untouched and the exact rejection marker, Projection, Receipt, and History remain unchanged."
+success_focus = "the rejected source identity and rejection-marker scope followed by the first separately authorized correction action"
+success_focus_id = "FOCUS-TIME-IMPORT-REVIEWING-DIFF-016-RECOVERY-HANDOFF-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the permanent-rejection review control and exact source/marker route failure; the exact trigger Receipt and scope remain visible and unchanged"
+failure_focus_id = "FOCUS-TIME-IMPORT-REVIEWING-DIFF-016-RECOVERY-HANDOFF-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Non-mutating: routing and inspection complete without a canonical Event, Projection change, or new Receipt."
+rollback_undo = "No Undo is required; dismissal returns to the exact trigger result with canonical state, Receipt, and History unchanged."
+recovery_id = "RECOVERY-TIME-IMPORT-REVIEWING-DIFF-016-RECOVERY-HANDOFF"
+recovery_posture = "current"
+recovery_owner = "journey.calendar-import.command-contract"
+privacy_egress = "The handoff reads only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
+
 [[state_command_contracts.commands]]
 command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-017"
 label = "Replace"
@@ -810,6 +1246,36 @@ activation_posture = "active"
 gate_requirement_ids = []
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-017-INVERSE"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-017"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-017"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-017-INVERSE"
+label = "Restore replaced native owner"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["CMD-TIME-IMPORT-REVIEWING-DIFF-017 is the exact trigger command and its exact trigger Receipt is current", "The prior native owner revision, replacement object revision, source lineage, dependent relationships, and atomic replacement Receipt are current"]
+destination = "the Time import result with the prior native owner restored as active and the replacement retained only as inspectable lineage and History"
+destination_id = "DEST-TIME-IMPORT-REVIEWING-DIFF-017-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it atomically restores the prior native owner and its relationships, removes the replacement from active ownership without erasing its lineage, appends a reversing Event, updates the Time/import Projection, and creates a new inverse Receipt and History entry while the external source, replacement Receipt, and all prior History remain intact."
+success_focus = "the restored prior native owner followed by the replacement lineage and new inverse Receipt"
+success_focus_id = "FOCUS-TIME-IMPORT-REVIEWING-DIFF-017-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Restore replaced native owner control and exact unsafe, stale, or dependency-invalid owner/relationship/lineage reason; the replacement result and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-TIME-IMPORT-REVIEWING-DIFF-017-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-TIME-IMPORT-REVIEWING-DIFF-017-INVERSE"
+recovery_posture = "current"
+recovery_owner = "journey.calendar-import.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-018"

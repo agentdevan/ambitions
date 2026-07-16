@@ -14,6 +14,9 @@ from contextlib import contextmanager
 from pathlib import Path, PurePosixPath
 
 from tools.ambitions_canon.audit import audit_registry
+from tools.ambitions_canon.command_resolution_registry import (
+    validate_repository_command_resolutions,
+)
 from tools.ambitions_canon.manifest import load_documents, load_manifest
 from tools.ambitions_canon.model import (
     CanonError,
@@ -653,6 +656,7 @@ def _load_audited_registry(root: Path) -> CanonRegistry:
             manifest.source_path,
         )
     registry = build_registry(manifest, documents)
+    validate_repository_command_resolutions(root, registry)
     findings = audit_registry(registry)
     if findings:
         first = findings[0]

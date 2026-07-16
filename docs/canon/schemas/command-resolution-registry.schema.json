@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ambitions.local/canon/schemas/command-resolution-registry.schema.json",
+  "title": "Ambitions Command Resolution Registry",
+  "description": "Independent closed records that resolve state-command destination, focus, recovery, and recovery-mechanism identities to exact governed source behavior.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "registry_id",
+    "registry_revision",
+    "canon_revision",
+    "records",
+    "state_command_records"
+  ],
+  "properties": {
+    "schema_version": {"type": "integer", "const": 2},
+    "registry_id": {"type": "string", "const": "COMMAND-RESOLUTION-REGISTRY-001"},
+    "registry_revision": {"type": "integer", "minimum": 1},
+    "canon_revision": {"type": "integer", "minimum": 0},
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/record"}
+    },
+    "state_command_records": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/stateCommandRecord"}
+    }
+  },
+  "$defs": {
+    "behaviorBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_path",
+        "source_field",
+        "source_text_sha256",
+        "behavior_sha256"
+      ],
+      "properties": {
+        "source_path": {"type": "string", "pattern": "^docs/canon/specifications/.+\\.md$"},
+        "source_field": {"enum": ["destination", "success_focus", "failure_focus", "rollback_undo"]},
+        "source_text_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "behavior_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resolution_id",
+        "resolution_kind",
+        "mechanism_kind",
+        "posture",
+        "owner_concept",
+        "requirement_id",
+        "state_id",
+        "command_id",
+        "behavior_binding",
+        "state_command_record_sha256",
+        "record_sha256"
+      ],
+      "properties": {
+        "resolution_id": {"type": "string", "pattern": "^(?:DEST|FOCUS|RECOVERY|CMD|CHECKPOINT|CONFIRMATION|RECEIPT)-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "resolution_kind": {"enum": ["destination", "success_focus", "failure_focus", "recovery", "recovery_command", "checkpoint", "confirmation", "receipt"]},
+        "mechanism_kind": {"type": ["string", "null"], "enum": ["inverse_command", "checkpoint_restore", "recovery_handoff_command", "irreversible_confirmation", "irreversible_receipt", null]},
+        "posture": {"enum": ["current", "deferred", "unavailable"]},
+        "owner_concept": {"type": "string", "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"},
+        "requirement_id": {"type": "string", "pattern": "^[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "state_id": {"type": "string", "pattern": "^UX-STATE-VARIANT-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "command_id": {"type": "string", "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "behavior_binding": {"$ref": "#/$defs/behaviorBinding"},
+        "state_command_record_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "record_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "stateCommandRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_path",
+        "requirement_id",
+        "state_id",
+        "trigger_command_id",
+        "mechanism_kind",
+        "redo_command_id",
+        "redo_preconditions",
+        "command_id",
+        "command_sha256",
+        "record_sha256"
+      ],
+      "properties": {
+        "source_path": {"type": "string", "pattern": "^docs/canon/specifications/.+\\.md$"},
+        "requirement_id": {"type": "string", "pattern": "^[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "state_id": {"type": "string", "pattern": "^UX-STATE-VARIANT-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "trigger_command_id": {"type": "string", "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "mechanism_kind": {"enum": ["inverse_command", "recovery_handoff_command"]},
+        "redo_command_id": {"type": ["string", "null"], "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "redo_preconditions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"enum": ["current inverse Receipt", "current revision", "fresh task authorization"]}
+        },
+        "command_id": {"type": "string", "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "command_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "record_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  }
+}

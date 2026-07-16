@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "eb0a44125ec4814cec2c5a53f14d72c96b6539bb46b7fca9b90418a7ed6cc57b",
+  "canon_content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
   "canon_revision": 1,
   "compiler_version": "0.2.0",
   "document_edges": [
@@ -7715,5 +7715,5 @@
     "TIME-EXTERNAL-VISIBILITY-001"
   ],
   "schema_version": 1,
-  "traceability_input_sha": "bd98e17881e8f2f53e88f2602791bcd1507e6589364d77ae5e44b105535e0f9c"
+  "traceability_input_sha": "5a5d78ae445f6287d74cc7329ae2fc535cb82a905bda9a7caa19875a44e64a07"
 }

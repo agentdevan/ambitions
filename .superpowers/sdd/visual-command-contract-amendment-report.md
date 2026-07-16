@@ -1,5 +1,193 @@
 # Visual command-contract canon amendment report
 
+## Important review-docket repair: command resolution and trusted approval history — 2026-07-16
+
+### Bounded scope and claim posture
+
+- Repair base SHA: `57943fd21a3afa268ef5ad680b28f0d1efd085eb`.
+- Review authority: the two Important findings in
+  `.superpowers/sdd/visual-command-identity-review.md`.
+- Canon content SHA after the repair:
+  `eb0a44125ec4814cec2c5a53f14d72c96b6539bb46b7fca9b90418a7ed6cc57b`.
+- Authority posture: shadow only. This repair does not approve visual
+  authority, perform Gate B, activate Purchase, or authorize implementation.
+- Excluded scope: semantic evaluation, Figma, production Swift, runtime,
+  product requirements, owner cutover, and release state.
+
+This repair closes only the machine-identity and approval-history defects. It
+does not change the `567` specification-owned commands or their product
+semantics. Instead, it gives every declared machine identity an independently
+allocated, source-bound registry record, and it makes any future approval
+transition prove an exact immutable Git base plus an owner attestation. The
+current Purchase dependency remains withheld, revision `1`, with no mappings,
+no receipt, no owner approval, and no activation authorization.
+
+### Important finding I1: independent command-resolution authority
+
+`COMMAND-RESOLUTION-REGISTRY-001` revision `1` now contains exactly `2,330`
+immutable records:
+
+- `567` destinations, `567` success-focus records, `567` failure-focus
+  records, and `567` recovery records;
+- `36` inverse-command records and `12` recovery-handoff records, both typed
+  as declared recovery commands rather than formula-only IDs;
+- `10` checkpoint records, `2` irreversible confirmations, and `2`
+  irreversible receipts.
+
+Registry source SHA:
+`9c87cc81b0a28131a1c1f51212f312ede8f3ac85578068a1357a789ede620c9c`.
+Every record carries its exact owner, command, state, requirement, source-text
+digest, full structured behavior digest, and record digest. The behavior digest
+binds the command contract rather than merely binding generated ID text.
+Missing records, duplicate identities, wrong owners, wrong command bindings,
+source contradictions, behavior drift, and undeclared mechanisms fail closed.
+
+The parser no longer manufactures a state-command machine contract or treats a
+bare command-derived ID formula as proof. UX blueprints and task packs consume
+compact immutable `{resolution_id, record_sha256}` references backed by the
+independent registry. Canon audit and build entry points validate the complete
+live command-bearing corpus before reporting Green. Exact source-SHA keyed
+loading, exact contract-set validation caching, and compact consumer references
+remove the initially observed whole-registry reconstruction hot path without
+weakening any binding.
+
+### Important finding I2: immutable trusted approval history
+
+The command-gate dependency compiler now separates three deterministic byte
+streams: the dependency registry, approval-receipt registry, and owner-approval
+attestation registry. `COMMAND-GATE-OWNER-APPROVAL-REGISTRY-001` is revision
+`1` and intentionally contains zero approvals. Dependency registry source SHA:
+`9e3a82a758b544ba7a8730bf575a8f9912982e2ae6c1e09c8314267c2d4c9dad`.
+
+An approved or receipted candidate must now supply a trusted approval base
+loaded from exact Git object bytes. The loader accepts only full
+`refs/heads/...` or `refs/remotes/...` names, requires the caller's exact
+expected merge-base SHA, rejects ambiguous merge bases and self-selected
+ancestor expressions, and reads each registry from that exact commit. The
+candidate must preserve the trusted dependency, receipt, and owner-approval
+prefixes byte-for-byte; increment a changed dependency revision exactly once;
+append exactly one linked receipt; preserve historical receipt Canon SHAs;
+resolve the approval identity to a trusted owner attestation; and bind the
+dependency, mapping, Canon content, approved scope, and prior history hashes.
+Whole-history replacement, receipt deletion, revision reuse, stale expected
+bases, and self-attested task-pack approval all fail closed.
+
+Withheld dependencies need no trusted approval context and remain buildable but
+non-authorizing. Task-pack generation accepts an explicit trusted base only for
+an approval transition; it has no candidate-as-history fallback. This repairs
+the trust boundary without adding a SKU, plan, price, mapping, owner decision,
+or cutover.
+
+### TDD and performance evidence
+
+The architectural RED was observed before production implementation: the
+original `7` I1 tests plus all `10` I2 tests ran `17` tests and failed `17`.
+The exact executable path from that first observation was not retained across
+context compaction, so this report does not invent or attribute one.
+
+A separate post-hoc confirmation then loaded those unchanged test definitions
+against a detached clean checkout of
+`57943fd21a3afa268ef5ad680b28f0d1efd085eb`, with both imports and test `ROOT`
+bound to the detached parent and the pinned executable:
+
+```text
+/Users/devan/.local/share/uv/python/cpython-3.12-macos-x86_64-none/bin/python3.12
+```
+
+That confirmation ran the original seven
+`CommandResolutionRegistryTests` methods and all ten
+`CommandGateTrustedHistoryTests` methods in `0.483s`: `17` failures, zero
+errors, expected process exit `1`. The parent lacks both the independent
+resolution API and the owner-attestation API, which is the intended
+architectural RED. This post-hoc confirmation is supplemental and is not
+represented as the original pre-implementation run.
+
+Focused Green evidence on the repaired candidate:
+
+- `tests.canon.test_command_resolution_registry`: `9` tests, `OK`, `5.276s`.
+- `tests.canon.test_command_gate_trusted_history`: `10` tests, `OK`, about
+  `27.7s`.
+- `tests.canon.test_command_gate_dependencies`: `9` tests, `OK`, `43.595s`.
+- `tests.canon.test_task_pack`: `52` tests, `OK`, `32.248s`.
+
+The first frozen covering attempt was intentionally interrupted with exit `130`
+after approximately eight minutes when profiling exposed an avoidable
+per-command `2,330`-record reconstruction path. No assertion failure had
+surfaced. The repair added exact immutable caches and compact references, then
+reran the identical frozen state under a captured session. The authoritative
+covering result is:
+
+```text
+Ran 270 tests in 486.757s
+OK (skipped=1)
+```
+
+That exit-`0` command covered both new suites; the frozen visual command,
+state-semantics, rebaseline, UX-blueprint review and repair suites; parser and
+task-pack suites; shadow-golden byte equality; whole-train repairs; and the live
+shadow audit. Its embedded UX-blueprint check remained Green with `47` screens,
+`47` state models, `423` taxonomy states, `433` state variants, `18` objects,
+`12` journeys, `461` requirements, `336` visual dispositions, `125` nonvisual
+dispositions, and shadow authority.
+
+### Final deterministic gates
+
+The complete post-report gate stack exited `0`:
+
+- `scripts/ambitions-canon.py audit`: Green, `61` documents, `461`
+  requirements, `461` concepts, shadow authority.
+- `scripts/ambitions-canon.py build --check`: Green, generated outputs current.
+- `scripts/ambitions-canon.py ux-blueprint --check`: Green with the frozen
+  `47/47/423/433/18/12/461/336/125` counts and shadow authority.
+- `scripts/ambitions-canon.py coverage --fail-on-p0-gap`: Green, `61`
+  documents and `5` profiles.
+- `scripts/ambitions-canon.py traceability --check`: Green, `461`
+  requirements, `20` references, and `1,044` honest shadow posture gaps.
+- `scripts/ambitions-canon.py external-authority --kind figma --check`: Green,
+  `11` references, zero reconciliation entities, shadow authority.
+- `scripts/ambitions-truth-path-vocabulary-audit.py`: Green.
+- `scripts/ambitions-constitution-audit.py`: Green, `124` laws, `34` source
+  maps, and `34` test maps.
+- `scripts/ambitions-remediation-governance-check.py`: Green, `41` changed
+  paths, no changed production Swift, no changed support Swift, and no changed
+  file over the Swift hard-line cap.
+- `scripts/canon-language-drift-scan.sh`: exit `0`. Its changed-file Yellow is
+  the existing explicit prohibition on emotional labels, productivity scores,
+  streak pressure, hidden profiling, and hosted-model dependency projected into
+  the regenerated blueprint; it does not authorize that language.
+- Pinned Python 3.12 `compileall` over `tools/ambitions_canon` and `tests/canon`:
+  exit `0` with no diagnostic.
+- `git diff --check`: exit `0` with no output.
+
+### Architecture-tree closeout
+
+- Final Architecture Tree inspected: yes.
+- Canonical product/runtime owners touched: none; this is canon compiler,
+  registry, schema, deterministic projection, and test scope only.
+- New files: the command-resolution registry and schema, owner-approval
+  registry and schema, their two focused test modules, and
+  `tools/ambitions_canon/command_resolution_registry.py`.
+- Old/non-canonical paths removed: none. The obsolete parser-owned formula
+  projection was removed from its existing module.
+- Compatibility shims left behind: none.
+- Yellow architecture debt introduced: none. Product/runtime implementation
+  remains outside this repair's claim ceiling.
+- Next repair train: none for these two docket findings; any future Purchase
+  approval is a separate owner-authorized transition with its own trusted Git
+  base and evidence.
+- Equivalent-folder/path interpretation used: no.
+
+### Claim ceiling
+
+Allowed claim: Green only for the exact deterministic command-resolution
+registry, source/behavior binding, trusted command-gate history transition, and
+shadow consumer projection scope proven here.
+
+Forbidden claims: semantic review complete, Figma updated, visual authority
+approved, Gate B passed, Purchase activated, production Swift implemented,
+runtime Green, rendered-app Visual Green, accessibility Green, privacy/legal
+approved, device ready, TestFlight ready, App Store ready, or Release Green.
+
 ## Visual R1 owner-approved completion amendment — 2026-07-16
 
 ### Scope and deterministic posture
@@ -791,9 +979,298 @@ approval, semantic-evaluation readiness, Gate B, authority cutover, source UI,
 runtime/device/accessibility/privacy/distribution, TestFlight, App Store, and
 Release Green remain explicitly unclaimed.
 
+## Final recovery-command identity repair — 2026-07-16
+
+This bounded follow-up closes only the remaining I1 recovery-command identity
+defect. The exact normative corpus now declares `48` source-grounded recovery
+commands: `36` inverse commands and `12` non-mutating owner recovery handoffs.
+Each command owns distinct effect, destination, success focus, failure focus,
+preconditions, and the same closed safety/privacy law. The registry binds those
+commands as `48` actual-command records and resolves their `192` nested
+destination, success-focus, failure-focus, and recovery identities. The complete
+registry therefore contains `2,522` resolution records and has source SHA-256
+`2f7af6329a6ac779dbb224447e8e615cd9dac43a44629b949706a128ab2a8c8b`.
+
+The corpus rejects the former generic inverse, generic destination, and generic
+handoff templates. Exact inverse behavior is declared only when the existing
+canon proves it; otherwise the recovery command is an explicit non-mutating
+handoff that names the retained, completed, failed, or artifact scope. The
+resolver now supplies the registered recovery-command hashes when validating
+primary command projections, so UX-blueprint and task-pack references bind the
+same actual command records instead of failing as stale.
+
+Strict TDD evidence:
+
+- The new corpus negative first failed on all `48` generic recovery records.
+- The nested-identity test first errored on all `192` missing identities.
+- The parser generic-template negative first failed because the old template
+  was accepted.
+- The complete focused command-resolution run initially exited `1` with `567`
+  stale blueprint-reference subtest failures and one resolver error, exposing
+  the missing registered recovery-hash input.
+- After the bounded repair and deterministic projection refresh, the exact
+  focused command exited `0`: `16` tests ran in `7.339s`, all passed.
+
+The single frozen covering command ran `291` tests in `671.605s`. It reported
+exactly three mechanical freshness failures: the frozen visual-rebaseline SHA
+constant, its hand record, and the shadow-golden copies. No command behavior,
+parser, owner binding, task-pack, UX-blueprint, or product-law assertion failed.
+The bounded freshness bundle changed only those three classes of tracked bytes;
+the exact three covering assertions then exited `0` in `12.140s`. Per the
+owner-approved fast-safe limit, the complete expensive covering command was not
+run a second time.
+
+The current canon-content SHA-256 is
+`9cf5640da51cc6d0702b69626bf8aa1af11a337cbf4ec930f9ff5c4fa57ea92a`.
+All final deterministic governance commands exited `0`:
+
+```text
+/Users/devan/.local/share/uv/python/cpython-3.12-macos-x86_64-none/bin/python3.12 scripts/ambitions-canon.py audit
+GREEN: 61 documents, 461 requirements, 461 concepts, shadow authority
+
+/Users/devan/.local/share/uv/python/cpython-3.12-macos-x86_64-none/bin/python3.12 scripts/ambitions-canon.py build --check
+GREEN: generated outputs current
+
+/Users/devan/.local/share/uv/python/cpython-3.12-macos-x86_64-none/bin/python3.12 scripts/ambitions-canon.py ux-blueprint --check
+GREEN: 47 screens, 433 variants, 461 requirements, shadow authority
+
+/Users/devan/.local/share/uv/python/cpython-3.12-macos-x86_64-none/bin/python3.12 scripts/ambitions-canon.py coverage --fail-on-p0-gap
+GREEN: 61 documents, five profiles
+
+/Users/devan/.local/share/uv/python/cpython-3.12-macos-x86_64-none/bin/python3.12 scripts/ambitions-canon.py traceability --check
+GREEN: 461 requirements, 20 references, 1,044 honest shadow posture gaps
+
+/Users/devan/.local/share/uv/python/cpython-3.12-macos-x86_64-none/bin/python3.12 scripts/ambitions-canon.py external-authority --kind figma --check
+GREEN: 11 references, zero reconciliation entities, shadow authority
+
+/Users/devan/.local/share/uv/python/cpython-3.12-macos-x86_64-none/bin/python3.12 scripts/ambitions-truth-path-vocabulary-audit.py
+GREEN
+
+/Users/devan/.local/share/uv/python/cpython-3.12-macos-x86_64-none/bin/python3.12 scripts/ambitions-constitution-audit.py
+GREEN: 124 laws, 34 source maps, 34 test maps
+
+/Users/devan/.local/share/uv/python/cpython-3.12-macos-x86_64-none/bin/python3.12 scripts/ambitions-remediation-governance-check.py
+GREEN: 68 changed paths; zero production/support Swift changes
+
+bash scripts/canon-language-drift-scan.sh
+exit 0: Yellow prohibition/backlog evidence only; no Red
+
+git diff --check
+exit 0: no output
+```
+
+Architecture closeout remains unchanged: Final Architecture Tree inspected;
+no production Swift, runtime owner, package boundary, Figma node, compatibility
+shim, authority state, or CI surface changed. No semantic evaluation was run.
+Independent exact-range specification-compliance and code-quality re-review is
+still required before merge.
+
+Allowed claim: deterministic shadow-canon recovery-command identity repair
+candidate Green for the exact tested scope. Visual approval, Gate B, authority
+cutover, product/runtime/accessibility/privacy/device/distribution, TestFlight,
+App Store, and Release Green remain unclaimed.
+
+## Exact four-Important review repair — 2026-07-16
+
+The consolidated review docket contained exactly four Important findings and
+no authorized scope beyond them. This bounded repair closes those findings as
+one bundle:
+
+- all `36` inverse recovery commands now bind redo to the exact original
+  trigger command and require the current inverse Receipt, current revision,
+  and fresh task authorization; the deterministic registry hash-binds those
+  fields and task packs project the complete recovery-command behavior rather
+  than only IDs and hashes;
+- the two setup skip inverses atomically clear the exact chapter or question
+  skip marker and commit the supplied answer to its exact setup field, while
+  preserving accepted answers, History, and both trigger and inverse Receipts;
+- every approval receipt is now symmetrically bound to its exact owner
+  attestation across dependency revision/hash, mapping identity/list/hash,
+  canon SHA, approval state, and approved scope/hash; changed dependencies
+  cannot launder appended approval history through withheld/deactivated state,
+  and unreferenced attestations fail closed;
+- the bounded rollback is the exact
+  `57943fd21a3afa268ef5ad680b28f0d1efd085eb..HEAD` range below, distinct from
+  the separately listed historical rollback.
+
+Strict TDD began with the six selected review regressions. The initial command
+exited `1` with `42` intended failures and one test-harness error. Correcting
+only that harness to reach the intended assertion left the end-to-end
+task-pack recovery projection Red. After the bounded implementation and
+deterministic projection refresh, the exact six-test command exited `0`:
+`6` tests ran in `15.600s`, all passed. The end-to-end method builds a real
+release task pack for the setup command requirement and asserts the full
+inverse behavior plus the fail-closed redo authorization posture.
+
+The one frozen covering command exercised command resolution, trusted approval
+history, command-gate dependencies, state-command semantics, the parser,
+task-pack generation, UX-blueprint validation, visual-rebaseline validation,
+the closed schema inventory, and the shadow goldens. It exited `1`: `197`
+tests ran in `356.339s`, with exactly four failures and no command, parser,
+task-pack, approval-history, or product-law failure. The complete docket was
+mechanical: two frozen visual SHA/hand-record assertions, stale shadow goldens,
+and one closed-schema assertion for the new conditional discriminator. The
+bounded freshness/closure repair changed only those bytes. The exact four
+failed methods then exited `0`: `4` tests ran in `13.957s`, all passed. Per the
+fast-safe limit, the expensive covering command was not restarted.
+
+The current canon-content SHA-256 is
+`6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67`.
+The complete command-resolution registry contains `2,522` records and has
+SHA-256
+`864a4e373cf8897d4d5093ad4b3ff30f1fe9974f758388277d0187d3f220bda0`.
+All final deterministic governance commands exited `0`:
+
+```text
+/Users/devan/.local/share/uv/python/cpython-3.12-macos-x86_64-none/bin/python3.12 scripts/ambitions-canon.py audit
+GREEN: 61 documents, 461 requirements, 461 concepts, shadow authority
+
+/Users/devan/.local/share/uv/python/cpython-3.12-macos-x86_64-none/bin/python3.12 scripts/ambitions-canon.py build --check
+GREEN: generated outputs current
+
+/Users/devan/.local/share/uv/python/cpython-3.12-macos-x86_64-none/bin/python3.12 scripts/ambitions-canon.py ux-blueprint --check
+GREEN: 47 screens, 433 variants, 461 requirements, shadow authority
+
+/Users/devan/.local/share/uv/python/cpython-3.12-macos-x86_64-none/bin/python3.12 scripts/ambitions-canon.py coverage --fail-on-p0-gap
+GREEN: 61 documents, five profiles, shadow authority
+
+/Users/devan/.local/share/uv/python/cpython-3.12-macos-x86_64-none/bin/python3.12 scripts/ambitions-canon.py traceability --check
+GREEN: 461 requirements, 20 references, 1,044 honest shadow posture gaps
+
+/Users/devan/.local/share/uv/python/cpython-3.12-macos-x86_64-none/bin/python3.12 scripts/ambitions-canon.py external-authority --kind figma --check
+GREEN: 11 references, zero reconciliation entities, shadow authority
+
+/Users/devan/.local/share/uv/python/cpython-3.12-macos-x86_64-none/bin/python3.12 scripts/ambitions-truth-path-vocabulary-audit.py
+GREEN
+
+/Users/devan/.local/share/uv/python/cpython-3.12-macos-x86_64-none/bin/python3.12 scripts/ambitions-constitution-audit.py
+GREEN: 124 laws, 34 source maps, 34 test maps
+
+/Users/devan/.local/share/uv/python/cpython-3.12-macos-x86_64-none/bin/python3.12 scripts/ambitions-remediation-governance-check.py
+GREEN: 56 changed paths; zero production/support Swift changes
+
+bash scripts/canon-language-drift-scan.sh
+exit 0: Yellow prohibition/backlog evidence only; no Red
+
+git diff --check
+exit 0: no output
+```
+
+No semantic evidence, Figma node, production Swift, CI, `AGENTS.md`, skill,
+authority state, Gate B state, or destructive artifact changed. Independent
+exact-range specification-compliance and code-quality re-review remains
+required before merge. The allowed claim remains deterministic shadow-canon
+repair candidate Green only for the exact tested scope.
+
+## Authenticated protected-base approval repair — 2026-07-16
+
+The exact-range re-review returned one remaining Important finding: the prior
+Git context accepted a caller-selected ref and merge-base SHA, while the owner
+attestation and its consuming receipt could be introduced without a separately
+validated protected-base staging transition. This bounded repair replaces only
+that trust and transition boundary.
+
+The authorization input is now a typed externally authenticated CI context
+bound to the fixed `refs/remotes/origin/main` ref, an exact protected SHA, an
+exact candidate `HEAD` SHA, the closed
+`github-protected-branch-required-check-v1` provenance, and a deterministic
+context digest over all four fields. At load and again at authorization time,
+the fixed ref must resolve exactly to the authenticated protected SHA, actual
+`HEAD` must equal the authenticated candidate SHA, and the protected SHA must
+be a strict ancestor and never `HEAD`. A local heads ref, same-HEAD base,
+changed ref, substituted protected SHA, changed candidate head, stale digest,
+or local provenance fails closed.
+
+Owner approval is now an explicit two-step transition. The first candidate may
+append exactly one `pending` attestation and increment only the append-only
+owner registry by one revision. Dependency and receipt registries must remain
+byte-identical to the authenticated protected base. The pending record binds
+the exact future dependency revision/hash, mapping identity/list/hash, canon
+SHA, command-owner scope/hash, current dependency-registry hash,
+receipt-registry hash, and prior receipt head; it grants no activation. After
+that staging commit becomes the protected base, a later candidate may consume
+the exact pending record once through the matching approval receipt and future
+dependency. Consumption cannot mutate the owner registry, cannot mix staging
+with consumption, cannot reuse an already consumed attestation, and cannot
+retain an untyped approved attestation or unmatched receipt history.
+
+Strict TDD began with four new security/transition methods. The exact focused
+RED exited `1`: `4` tests ran in `0.020s`, all four failing on the absent typed
+authenticated CI context before production edits. The first bounded GREEN
+exited `0`: `4` tests ran in `16.770s`, all passed. The full existing trusted
+history module then exposed only five legacy harness/expectation updates for
+the removed raw fields and new pending state; after those bounded updates it
+exited `0`: `21` tests ran in `73.963s`, all passed. The existing dependency
+module exited `0`: `9` tests ran in `44.233s`, all passed. A final focused run
+including fixed-ref/SHA/HEAD revalidation, provenance/digest negatives,
+positive protected-base staging/consumption, and closed-schema validation
+exited `0`: `5` tests ran in `16.772s`, all passed.
+
+The single covering command exercised command resolution, complete trusted
+approval history, command-gate dependencies, task-pack generation, and schema
+closure. It exited `0`: `103` tests ran in `176.361s`, all passed. Generated
+task packs remained shadow and explicitly non-authorizing.
+
+All deterministic governance gates remained Green: audit reported `61`
+documents and `461` requirements/concepts in shadow authority; build check
+reported current generated output; UX-blueprint check reported `47` screens,
+`433` variants, and `461` requirements; coverage reported five profiles;
+traceability reported `20` references and `1,044` honest shadow posture gaps;
+Figma external-authority check reported `11` references and zero reconciliation
+entities; truth-path/vocabulary and Constitution audits were Green; the drift
+scan reported no changed-file candidate and only existing Yellow backlog.
+
+Current tracked Purchase remains revision `1`, `withheld`, empty, blocked, and
+non-authorizing. No semantic evidence, Figma node, production Swift, generated
+canon output, CI, `AGENTS.md`, skill, authority state, Gate B state, or
+destructive artifact changed. The allowed claim remains deterministic
+shadow-canon repair candidate Green only for this exact trust boundary, pending
+independent exact-range specification-compliance and code-quality re-review.
+
 ## Rollback and claim ceiling
 
-Rollback before the proof-only commit: discard the three-file bounded worktree diff and return to `a338d77006c7e7c0399ed8d394194be85e8f404d`. Rollback of only the final proof-only commit after creation: revert `HEAD`. Rollback of the complete multi-commit amendment range: revert the final proof-only `HEAD`, then `a338d77006c7e7c0399ed8d394194be85e8f404d`, then Markdown-lint repair `680aa8a160c6fdd0c11238f427396212e63f2fe0`, then prior proof commit `23f480c4de5cb7d921c0ae5485f4587e704eb2f4`, then `f1a37b4f4ffdefb0788d1149bbf2c61393e71a94`, then prior proof commit `d8278db7eda86221037d97996f1473498dce5b83`, then `15beb50106a641ab3eb02ed10679dd425de69913`, then prior proof commit `d0461881077f8ddc9f01520c31b67b82c01aa247`, then `6e88b61414417cdaeaae9586c606f175de099e48`, then prior proof commit `4cbdfcc9c1ef7018b208255a65f6051ff9ec9d92`, then `f11b414f342346dfd7200381d232045efb34de9a`, then earlier proof commit `534941616edc1dac34d94fc184435b51593e3c79`, then `262327c04261deb43bfe3bd3e7ad1e9380c0c0ab`, then `030cf73f38c6bab9a0096af7706e6a85644026a2`, then `bc5e1e82dbbc506b562fc763e9ea92dba965b88d`, then `1e81d170e997e6895b92cdc080563b28b60ac636` in reverse order, restoring base SHA `3c0957ebb2202f10de53975b2cb74e8f35253808` without rewriting published history.
+### Bounded candidate rollback
+
+The exact recovery-command repair range is
+`57943fd21a3afa268ef5ad680b28f0d1efd085eb..HEAD`. At the frozen candidate,
+`git rev-list --count 57943fd21a3afa268ef5ad680b28f0d1efd085eb..HEAD`
+must return `1`; `HEAD` is that single reviewable candidate commit. Before
+publication, discard only the working-tree repair and reset the isolated branch
+to `57943fd21a3afa268ef5ad680b28f0d1efd085eb`. After publication, create a
+non-rewriting rollback commit with:
+
+```text
+git revert --no-commit 57943fd21a3afa268ef5ad680b28f0d1efd085eb..HEAD
+git diff --check
+git commit -m "revert: remove recovery-command identity repair"
+```
+
+That range reverts only the recovery-command identities, redo bindings, exact
+task-pack projection, trusted approval-history hardening, generated shadow
+projections, tests, and this report added above the named repair base.
+
+### Broader historical rollback
+
+The earlier visual-command amendment history is outside the bounded candidate
+range and must not be swept into the command above. A separately approved
+broader rollback reverts the prior commits in reverse order—
+`a338d77006c7e7c0399ed8d394194be85e8f404d`,
+`680aa8a160c6fdd0c11238f427396212e63f2fe0`,
+`23f480c4de5cb7d921c0ae5485f4587e704eb2f4`,
+`f1a37b4f4ffdefb0788d1149bbf2c61393e71a94`,
+`d8278db7eda86221037d97996f1473498dce5b83`,
+`15beb50106a641ab3eb02ed10679dd425de69913`,
+`d0461881077f8ddc9f01520c31b67b82c01aa247`,
+`6e88b61414417cdaeaae9586c606f175de099e48`,
+`4cbdfcc9c1ef7018b208255a65f6051ff9ec9d92`,
+`f11b414f342346dfd7200381d232045efb34de9a`,
+`534941616edc1dac34d94fc184435b51593e3c79`,
+`262327c04261deb43bfe3bd3e7ad1e9380c0c0ab`,
+`030cf73f38c6bab9a0096af7706e6a85644026a2`,
+`bc5e1e82dbbc506b562fc763e9ea92dba965b88d`, and
+`1e81d170e997e6895b92cdc080563b28b60ac636`—to restore
+`3c0957ebb2202f10de53975b2cb74e8f35253808` without rewriting published
+history. That destructive breadth is not authorized by this bounded repair.
 
 Current allowed claim before exact re-review: deterministic shadow-canon repair
 candidate only; the exact parser, dependency registry, task-pack authorization,

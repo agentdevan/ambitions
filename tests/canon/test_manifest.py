@@ -16,7 +16,10 @@ SCHEMAS = (
     "specification.schema.json",
     "requirement.schema.json",
     "authority-reference.schema.json",
+    "command-gate-approval-receipt.schema.json",
     "command-gate-dependency.schema.json",
+    "command-gate-owner-approval.schema.json",
+    "command-resolution-registry.schema.json",
     "task-pack.schema.json",
 )
 GENERATED_FILES = (

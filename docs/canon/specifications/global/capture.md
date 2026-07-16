@@ -77,6 +77,36 @@ verification_ids = ["SCENARIO-GLOBAL-CAPTURE-COMMAND-CONTRACT-001"]
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-001-INVERSE"
 
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-001"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-001"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-001-INVERSE"
+label = "Restore failed attachment"
+canonical_owner = "global.capture.command-contract"
+preconditions = ["CMD-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-001 is the exact trigger command and its exact trigger Receipt is current", "The detached failed-attachment identity, Capture draft revision, draft text, and remaining attachment set are current"]
+destination = "the Capture draft attachment list with the same failed attachment row restored beside unchanged draft text and other attachments"
+destination_id = "DEST-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-001-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it reattaches the same failed staged attachment record to the current Capture draft, appends a reversing Event, updates the draft attachment Projection, and creates a new inverse Receipt and History entry while draft text, other attachments, the removal Receipt, and History remain intact."
+success_focus = "the restored failed attachment row and its unchanged failure status in the Capture draft"
+success_focus_id = "FOCUS-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-001-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the failed-attachment restore control and exact unsafe, stale, or dependency-invalid draft/attachment reason; the detached result and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-001-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-001-INVERSE"
+recovery_posture = "current"
+recovery_owner = "global.capture.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-GLOBAL-CAPTURE-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
+
 [[state_command_contracts.commands]]
 command_id = "CMD-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-002"
 label = "Replace"
@@ -101,6 +131,36 @@ privacy_egress = "The mutation remains local and sends no private content off de
 verification_ids = ["SCENARIO-GLOBAL-CAPTURE-COMMAND-CONTRACT-001"]
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-002-INVERSE"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-002"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-002"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-002-INVERSE"
+label = "Restore prior attachment"
+canonical_owner = "global.capture.command-contract"
+preconditions = ["CMD-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-002 is the exact trigger command and its exact trigger Receipt is current", "The prior failed-attachment identity, staged replacement identity, Capture draft revision, and unchanged sibling attachments are current"]
+destination = "the Capture draft attachment list with the prior failed attachment pointer restored and the replacement no longer selected for this row"
+destination_id = "DEST-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-002-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it restores the row link to the prior failed attachment identity without deleting the staged replacement artifact, appends a reversing Event, updates the draft attachment Projection, and creates a new inverse Receipt and History entry while draft text, sibling attachments, the replacement Receipt, and History remain intact."
+success_focus = "the restored prior failed attachment row with the replacement link removed from that row"
+success_focus_id = "FOCUS-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-002-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the attachment-replacement recovery control and exact unsafe, stale, or dependency-invalid draft/attachment reason; the replacement result and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-002-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-002-INVERSE"
+recovery_posture = "current"
+recovery_owner = "global.capture.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-GLOBAL-CAPTURE-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
 
 [[state_command_contracts.commands]]
 command_id = "CMD-CAPTURE-ATTACHMENT-ATTACHMENT-FAILED-003"
@@ -432,6 +492,36 @@ privacy_egress = "The mutation remains local and sends no private content off de
 verification_ids = ["SCENARIO-GLOBAL-CAPTURE-COMMAND-CONTRACT-001"]
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-CAPTURE-COMPOSER-DICTATING-001-INVERSE"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-CAPTURE-COMPOSER-DICTATING-001"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-CAPTURE-COMPOSER-DICTATING-001"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-CAPTURE-COMPOSER-DICTATING-001-INVERSE"
+label = "Remove inserted transcript"
+canonical_owner = "global.capture.command-contract"
+preconditions = ["CMD-CAPTURE-COMPOSER-DICTATING-001 is the exact trigger command and its exact trigger Receipt is current", "The inserted transcript range, Capture draft revision, surrounding draft text, and absence of a separately retained Voice attachment are current"]
+destination = "the Capture composer at the transcript insertion point with only the reviewed dictated text removed"
+destination_id = "DEST-CAPTURE-COMPOSER-DICTATING-001-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it removes only the transcript range inserted by Stop dictation, appends a reversing Event, updates the Capture draft Projection, and creates a new inverse Receipt and History entry while surrounding text, attachments, any separately chosen Voice attachment, the dictation Receipt, and History remain intact."
+success_focus = "the Capture text insertion point where the reviewed transcript was removed"
+success_focus_id = "FOCUS-CAPTURE-COMPOSER-DICTATING-001-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the transcript-removal control and exact unsafe, stale, or dependency-invalid draft/range reason; the inserted transcript and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-CAPTURE-COMPOSER-DICTATING-001-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-CAPTURE-COMPOSER-DICTATING-001-INVERSE"
+recovery_posture = "current"
+recovery_owner = "global.capture.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-GLOBAL-CAPTURE-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
 
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-CAPTURE-COMPOSER-DISCARD-REVIEW"
@@ -765,6 +855,36 @@ privacy_egress = "The mutation remains local and sends no private content off de
 verification_ids = ["SCENARIO-GLOBAL-CAPTURE-COMMAND-CONTRACT-001"]
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-CAPTURE-COMPOSER-SAVED-UNDO-ELIGIBLE-001-INVERSE"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-CAPTURE-COMPOSER-SAVED-UNDO-ELIGIBLE-001"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-CAPTURE-COMPOSER-SAVED-UNDO-ELIGIBLE-001"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-CAPTURE-COMPOSER-SAVED-UNDO-ELIGIBLE-001-INVERSE"
+label = "Restore saved Capture"
+canonical_owner = "global.capture.command-contract"
+preconditions = ["CMD-CAPTURE-COMPOSER-SAVED-UNDO-ELIGIBLE-001 is the exact trigger command and its exact trigger Receipt is current", "The inverse Receipt for the saved Capture, original save Receipt, restored draft/object identities, and dependent revisions are current"]
+destination = "the exact saved Capture result restored to its owning object presentation with both the save and Undo History visible"
+destination_id = "DEST-CAPTURE-COMPOSER-SAVED-UNDO-ELIGIBLE-001-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it reapplies the saved Capture result that the trigger Undo reversed, appends a reversing Event, updates the owning object and Capture Projection, and creates a new inverse Receipt and History entry while the original save Receipt, trigger Undo Receipt, and full History remain intact."
+success_focus = "the restored saved Capture result and its newly appended recovery Receipt"
+success_focus_id = "FOCUS-CAPTURE-COMPOSER-SAVED-UNDO-ELIGIBLE-001-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Restore saved Capture control and exact unsafe, stale, or dependency-invalid object/draft reason; the undone result and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-CAPTURE-COMPOSER-SAVED-UNDO-ELIGIBLE-001-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-CAPTURE-COMPOSER-SAVED-UNDO-ELIGIBLE-001-INVERSE"
+recovery_posture = "current"
+recovery_owner = "global.capture.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-GLOBAL-CAPTURE-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
 
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-CAPTURE-COMPOSER-SAVED-UNDO-UNAVAILABLE"

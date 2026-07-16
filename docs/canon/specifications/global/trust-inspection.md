@@ -88,6 +88,36 @@ verification_ids = ["SCENARIO-GLOBAL-TRUST-COMMAND-CONTRACT-001"]
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-TRUST-DEEP-CORRECTING-002-INVERSE"
 
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-TRUST-DEEP-CORRECTING-002"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-TRUST-DEEP-CORRECTING-002"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-TRUST-DEEP-CORRECTING-002-INVERSE"
+label = "Reverse correction"
+canonical_owner = "global.trust.command-contract"
+preconditions = ["CMD-TRUST-DEEP-CORRECTING-002 is the exact trigger command and its exact trigger Receipt is current", "The corrected claim revision, authoritative owner, correction lineage, affected projections, and dependent facts are current"]
+destination = "Deep Trust inspection for the corrected claim with the supported prior value restored by a new counter-correction and all correction History visible"
+destination_id = "DEST-TRUST-DEEP-CORRECTING-002-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: the authoritative owner appends a counter-correction that restores the supported prior claim value without rewriting either fact, appends a reversing Event, updates affected Trust projections, and creates a new inverse Receipt and History entry while the original correction Receipt and History remain intact."
+success_focus = "the restored supported claim value followed by the new counter-correction Receipt in Deep Trust inspection"
+success_focus_id = "FOCUS-TRUST-DEEP-CORRECTING-002-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Reverse correction control and exact unsafe, stale, or dependency-invalid claim/lineage reason; the current corrected claim and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-TRUST-DEEP-CORRECTING-002-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-TRUST-DEEP-CORRECTING-002-INVERSE"
+recovery_posture = "current"
+recovery_owner = "global.trust.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-GLOBAL-TRUST-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TRUST-DEEP-CORRECTION-COMPLETE"
 requirement_id = "SPEC-GLOBAL-TRUST-COMMAND-CONTRACT-001"
@@ -1087,6 +1117,36 @@ privacy_egress = "The mutation remains local and sends no private content off de
 verification_ids = ["SCENARIO-GLOBAL-TRUST-COMMAND-CONTRACT-001"]
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-TRUST-RECEIPT-RECEIPT-COMMITTED-UNDO-ELIGIBLE-001-INVERSE"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-TRUST-RECEIPT-RECEIPT-COMMITTED-UNDO-ELIGIBLE-001"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-TRUST-RECEIPT-RECEIPT-COMMITTED-UNDO-ELIGIBLE-001"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-TRUST-RECEIPT-RECEIPT-COMMITTED-UNDO-ELIGIBLE-001-INVERSE"
+label = "Restore undone result"
+canonical_owner = "global.trust.command-contract"
+preconditions = ["CMD-TRUST-RECEIPT-RECEIPT-COMMITTED-UNDO-ELIGIBLE-001 is the exact trigger command and its exact trigger Receipt is current", "The trigger Undo Receipt, original Receipt, object revision, supported prior result, and dependent projections are current"]
+destination = "Receipt inspection for the exact object with the trigger Undo result reversed and the original, Undo, and recovery Receipts visible in order"
+destination_id = "DEST-TRUST-RECEIPT-RECEIPT-COMMITTED-UNDO-ELIGIBLE-001-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it restores the exact object result that the trigger Undo changed, appends a reversing Event, updates the authoritative object Projection, and creates a new inverse Receipt and History entry while the original action Receipt, trigger Undo Receipt, and append-only History remain intact."
+success_focus = "the restored object result followed by the new recovery Receipt in Receipt inspection"
+success_focus_id = "FOCUS-TRUST-RECEIPT-RECEIPT-COMMITTED-UNDO-ELIGIBLE-001-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Restore undone result control and exact unsafe, stale, or dependency-invalid object/Receipt reason; the trigger Undo result and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-TRUST-RECEIPT-RECEIPT-COMMITTED-UNDO-ELIGIBLE-001-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-TRUST-RECEIPT-RECEIPT-COMMITTED-UNDO-ELIGIBLE-001-INVERSE"
+recovery_posture = "current"
+recovery_owner = "global.trust.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-GLOBAL-TRUST-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
 
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TRUST-RECEIPT-RECEIPT-COMMITTED-UNDO-UNAVAILABLE"

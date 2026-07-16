@@ -22,9 +22,15 @@ from tools.ambitions_canon.model import (
     StateCommandContract,
     StateCommandResolutionPosture,
 )
+from tools.ambitions_canon.command_resolution_registry import (
+    CommandResolutionRegistry,
+    compact_resolved_machine_contract,
+    load_command_resolution_registry,
+    resolve_state_command_machine_contract,
+    validate_command_resolution_bindings,
+)
 from tools.ambitions_canon.parser import (
     parse_canon_document,
-    state_command_machine_contract,
     validate_state_command_contract_semantics,
 )
 
@@ -1232,11 +1238,34 @@ def load_state_command_contracts(root: Path) -> tuple[StateCommandContract, ...]
             ordered,
             canon_revision=manifest.canon_revision,
         )
+    from tools.ambitions_canon.manifest import load_documents, load_manifest
+    from tools.ambitions_canon.registry import build_registry
+
+    manifest = load_manifest(root)
+    canon = build_registry(manifest, load_documents(root, manifest))
+    resolution_registry = load_command_resolution_registry(root)
+    validate_command_resolution_bindings(resolution_registry, canon)
     return ordered
 
 
-def active_state_commands(contract: StateCommandContract) -> tuple[StateCommand, ...]:
-    """Return only commands that may authorize current-state presentation."""
+def _state_command_source_paths(root: Path) -> dict[str, Path]:
+    """Map every closed state identity to its repository-relative source path."""
+
+    index = _requirement_records(root)
+    paths = sorted({_string(item.get("source_path"), "source path") for item in index})
+    result: dict[str, Path] = {}
+    for relative in paths:
+        path = root / relative
+        document = parse_canon_document(path, path.read_text(encoding="utf-8"))
+        for contract in document.state_command_contracts:
+            result[contract.state_id] = Path(relative)
+    return result
+
+
+def declared_current_state_commands(
+    contract: StateCommandContract,
+) -> tuple[StateCommand, ...]:
+    """Filter current declarations only; this function grants no authority."""
 
     return tuple(
         command
@@ -1256,10 +1285,22 @@ def active_state_commands(contract: StateCommandContract) -> tuple[StateCommand,
 
 def machine_state_command_contracts(
     contract: StateCommandContract,
+    source_path: Path,
+    registry: CommandResolutionRegistry,
 ) -> tuple[dict[str, object], ...]:
-    """Expose exact machine identities for every active or future command."""
+    """Resolve every active or future machine identity through the registry."""
 
-    return tuple(state_command_machine_contract(command) for command in contract.commands)
+    return tuple(
+        compact_resolved_machine_contract(
+            resolve_state_command_machine_contract(
+                registry,
+                source_path,
+                contract,
+                command,
+            )
+        )
+        for command in contract.commands
+    )
 
 
 def future_gated_state_commands(
@@ -1282,7 +1323,7 @@ def future_gated_state_commands(
 def active_state_transition_exit(contract: StateCommandContract) -> str:
     """Render only currently authorizing routes into the active blueprint field."""
 
-    commands = active_state_commands(contract)
+    commands = declared_current_state_commands(contract)
     if not commands:
         future_ids = ", ".join(
             command.command_id
@@ -1685,6 +1726,8 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
     )
     state_contracts = load_state_command_contracts(root)
     state_contracts_by_id = {item.state_id: item for item in state_contracts}
+    state_source_paths = _state_command_source_paths(root)
+    resolution_registry = load_command_resolution_registry(root)
     for contract in state_contracts:
         validate_state_command_contract_semantics(
             root / "docs/canon/manifest.toml",
@@ -2179,7 +2222,8 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
                         f"state command contract requirements are not linked: {variant_id}"
                     )
                 expected_labels = tuple(
-                    command.label for command in active_state_commands(contract)
+                    command.label
+                    for command in declared_current_state_commands(contract)
                 )
                 if allowed_commands != expected_labels:
                     raise UXBlueprintError(
@@ -2191,7 +2235,9 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
                         f"future-gated commands drift from structured canon: {variant_id}"
                     )
                 if tuple(machine_command_values) != machine_state_command_contracts(
-                    contract
+                    contract,
+                    state_source_paths[contract.state_id],
+                    resolution_registry,
                 ):
                     raise UXBlueprintError(
                         f"machine command contracts drift from structured canon: {variant_id}"

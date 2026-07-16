@@ -494,6 +494,34 @@ gate_requirement_ids = []
 rollback_posture = "owner_recovery_handoff"
 recovery_handoff_command_id = "CMD-ACCOUNT-STATUS-SIGNED-IN-001-RECOVERY-HANDOFF"
 
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-ACCOUNT-STATUS-SIGNED-IN-001"
+mechanism_kind = "recovery_handoff_command"
+command_id = "CMD-ACCOUNT-STATUS-SIGNED-IN-001-RECOVERY-HANDOFF"
+label = "Review recovery"
+canonical_owner = "account.command-contract"
+preconditions = ["CMD-ACCOUNT-STATUS-SIGNED-IN-001 is the exact trigger command and its exact trigger Receipt is current", "The signed-out account revision, retained local-data inventory, and failed recovery scope are current"]
+destination = "Account and Sync status with the signed-out revision, retained local-data inventory, and exact Sign Out Receipt visible for account recovery review"
+destination_id = "DEST-ACCOUNT-STATUS-SIGNED-IN-001-RECOVERY-HANDOFF"
+destination_posture = "current"
+effect = "No durable mutation occurs and no Receipt is created; the exact trigger Receipt and scope route only to account.command-contract for Sign Out recovery review, with the signed-out account posture and retained local Goals, Captures, Time, settings, Proof, and Receipts unchanged."
+success_focus = "the Sign Out recovery heading followed by the retained local-data summary and first separately authorized account-recovery action"
+success_focus_id = "FOCUS-ACCOUNT-STATUS-SIGNED-IN-001-RECOVERY-HANDOFF-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Sign Out recovery control and exact account-route failure; the exact trigger Receipt and scope remain visible and unchanged"
+failure_focus_id = "FOCUS-ACCOUNT-STATUS-SIGNED-IN-001-RECOVERY-HANDOFF-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Non-mutating: routing and inspection complete without a canonical Event, Projection change, or new Receipt."
+rollback_undo = "No Undo is required; dismissal returns to the exact trigger result with canonical state, Receipt, and History unchanged."
+recovery_id = "RECOVERY-ACCOUNT-STATUS-SIGNED-IN-001-RECOVERY-HANDOFF"
+recovery_posture = "current"
+recovery_owner = "account.command-contract"
+privacy_egress = "The handoff reads only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-ACCOUNT-STATUS-SIGNED-OUT"
 requirement_id = "APP-ACCOUNT-COMMAND-CONTRACT-001"
@@ -861,6 +889,36 @@ gate_requirement_ids = []
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-SETUP-FIRST-USE-IN-PROGRESS-004-INVERSE"
 
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-SETUP-FIRST-USE-IN-PROGRESS-004"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-SETUP-FIRST-USE-IN-PROGRESS-004"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-SETUP-FIRST-USE-IN-PROGRESS-004-INVERSE"
+label = "Undo"
+canonical_owner = "app.launch-setup.command-contract"
+preconditions = ["CMD-SETUP-FIRST-USE-IN-PROGRESS-004 is the exact trigger command and its exact trigger Receipt is current", "The skipped chapter marker, setup checkpoint revision, supplied answer and exact target field, and accepted chapter answers are current, with no newer dependent setup answer"]
+destination = "the skipped setup chapter immediately after the supplied answer is accepted, with accepted answers preserved and the inverse Receipt available in setup History"
+destination_id = "DEST-SETUP-FIRST-USE-IN-PROGRESS-004-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it atomically clears the exact chapter skip marker and commits the supplied answer to its exact setup field without clearing accepted answers, appends a reversing Event, updates the setup checkpoint Projection, and creates a new inverse Receipt and History entry while the original skip Receipt and History remain intact."
+success_focus = "the next unanswered prompt after the committed supplied answer, followed by confirmation that the chapter skip marker cleared and accepted answers were preserved"
+success_focus_id = "FOCUS-SETUP-FIRST-USE-IN-PROGRESS-004-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the supplied answer field and exact unsafe, stale, invalid-answer, or dependency-invalid chapter/checkpoint reason; the exact skip marker and trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-SETUP-FIRST-USE-IN-PROGRESS-004-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: the exact skip marker clear and supplied answer commit occur atomically only after the exact trigger Receipt, current revision, answer validity, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-SETUP-FIRST-USE-IN-PROGRESS-004-INVERSE"
+recovery_posture = "current"
+recovery_owner = "app.launch-setup.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
+
 [[state_command_contracts.commands]]
 command_id = "CMD-SETUP-FIRST-USE-IN-PROGRESS-005"
 label = "Skip This Question"
@@ -887,6 +945,36 @@ activation_posture = "active"
 gate_requirement_ids = []
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-SETUP-FIRST-USE-IN-PROGRESS-005-INVERSE"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-SETUP-FIRST-USE-IN-PROGRESS-005"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-SETUP-FIRST-USE-IN-PROGRESS-005"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-SETUP-FIRST-USE-IN-PROGRESS-005-INVERSE"
+label = "Undo"
+canonical_owner = "app.launch-setup.command-contract"
+preconditions = ["CMD-SETUP-FIRST-USE-IN-PROGRESS-005 is the exact trigger command and its exact trigger Receipt is current", "The skipped question identity, setup checkpoint revision, supplied answer and exact target field, and absence of an accepted answer are current, with no newer dependent setup answer"]
+destination = "the setup sequence immediately after the supplied answer to the exact skipped question is accepted, with the inverse Receipt available in setup History"
+destination_id = "DEST-SETUP-FIRST-USE-IN-PROGRESS-005-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it atomically clears the exact question skip marker and commits the supplied answer to its exact setup field without inferring any other answer, appends a reversing Event, updates the setup checkpoint Projection, and creates a new inverse Receipt and History entry while the original skip Receipt and History remain intact."
+success_focus = "the next setup question or chapter after the committed supplied answer, followed by confirmation that the question skip marker cleared and no other answer was inferred"
+success_focus_id = "FOCUS-SETUP-FIRST-USE-IN-PROGRESS-005-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the supplied answer field and exact unsafe, stale, invalid-answer, or dependency-invalid question/checkpoint reason; the exact skip marker and trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-SETUP-FIRST-USE-IN-PROGRESS-005-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: the exact skip marker clear and supplied answer commit occur atomically only after the exact trigger Receipt, current revision, answer validity, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-SETUP-FIRST-USE-IN-PROGRESS-005-INVERSE"
+recovery_posture = "current"
+recovery_owner = "app.launch-setup.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
 
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-SETUP-FIRST-USE-NOT-STARTED"

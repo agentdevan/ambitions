@@ -396,6 +396,36 @@ gate_requirement_ids = []
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-YOU-NOTIFICATIONS-PERMISSION-ALLOWED-001-INVERSE"
 
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-YOU-NOTIFICATIONS-PERMISSION-ALLOWED-001"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-YOU-NOTIFICATIONS-PERMISSION-ALLOWED-001"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-YOU-NOTIFICATIONS-PERMISSION-ALLOWED-001-INVERSE"
+label = "Remove created notification rule"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["CMD-YOU-NOTIFICATIONS-PERMISSION-ALLOWED-001 is the exact trigger command and its exact trigger Receipt is current", "The created local Rule identity, owning-object revision, permission posture, privacy policy, and iOS request reconciliation state are current"]
+destination = "You Notifications with the exact created local Rule removed from active policy and its owning Goal, Step, or time item unchanged"
+destination_id = "DEST-YOU-NOTIFICATIONS-PERMISSION-ALLOWED-001-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it removes the exact created Notification Rule from active local policy without deleting or completing its owning object, appends a reversing Event, updates the Notification Rule Projection, and creates a new inverse Receipt and History entry while the Create Rule Receipt and History remain intact and any iOS request removal reconciles separately."
+success_focus = "the owning object notification summary showing no active local Rule, followed by reconciliation status and inverse Receipt"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-PERMISSION-ALLOWED-001-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Remove created notification rule control and exact unsafe, stale, or dependency-invalid Rule/object/request reason; the created Rule and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-PERMISSION-ALLOWED-001-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-PERMISSION-ALLOWED-001-INVERSE"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-NOTIFICATIONS-PERMISSION-DENIED"
 requirement_id = "SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"
@@ -578,6 +608,36 @@ gate_requirement_ids = []
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-001-INVERSE"
 
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-001"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-001"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-001-INVERSE"
+label = "Restore prior notification rule"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["CMD-YOU-NOTIFICATIONS-SCHEDULED-001 is the exact trigger command and its exact trigger Receipt is current", "The edited Rule revision, exact prior rule fields, owning-object revision, superseded iOS request identity, and replacement reconciliation state are current"]
+destination = "You Notifications with the exact prior Rule fields restored and replacement/superseded request reconciliation visible"
+destination_id = "DEST-YOU-NOTIFICATIONS-SCHEDULED-001-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it restores the exact pre-edit Notification Rule fields without changing the owning object's completion state, appends a reversing Event, updates the Notification Rule Projection, and creates a new inverse Receipt and History entry while the Edit Rule Receipt and History remain intact and iOS request replacement/removal reconciles idempotently."
+success_focus = "the restored Rule schedule and policy summary followed by external-request reconciliation status and inverse Receipt"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-SCHEDULED-001-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Restore prior notification rule control and exact unsafe, stale, or dependency-invalid Rule/object/request reason; the edited Rule and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-SCHEDULED-001-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-SCHEDULED-001-INVERSE"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
+
 [[state_command_contracts.commands]]
 command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-002"
 label = "Remove Rule"
@@ -605,6 +665,34 @@ gate_requirement_ids = []
 rollback_posture = "owner_recovery_handoff"
 recovery_handoff_command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-002-RECOVERY-HANDOFF"
 
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-002"
+mechanism_kind = "recovery_handoff_command"
+command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-002-RECOVERY-HANDOFF"
+label = "Review removed rule recovery"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["CMD-YOU-NOTIFICATIONS-SCHEDULED-002 is the exact trigger command and its exact trigger Receipt is current", "The removed Rule identity, owning-object revision, local removal Receipt, and external iOS request-removal reconciliation state are current"]
+destination = "You Notifications rule-removal inspection for the exact removed Rule with its unchanged owning object, external request status, and separately authorized policy-restoration route visible"
+destination_id = "DEST-YOU-NOTIFICATIONS-SCHEDULED-002-RECOVERY-HANDOFF"
+destination_posture = "current"
+effect = "No durable mutation occurs and no Receipt is created; the exact trigger Receipt and scope route only to system.notifications.command-contract for removed-Rule recovery inspection, while the Rule remains removed, its Goal, Step, Event, Reminder, Proof, completion state, Projection, Receipt, History, and external request status remain unchanged."
+success_focus = "the removed Rule summary and unchanged owning-object status followed by the first separately authorized policy-restoration action"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-SCHEDULED-002-RECOVERY-HANDOFF-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the removed-Rule recovery control and exact Rule/object/request route failure; the exact trigger Receipt and scope remain visible and unchanged"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-SCHEDULED-002-RECOVERY-HANDOFF-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Non-mutating: routing and inspection complete without a canonical Event, Projection change, or new Receipt."
+rollback_undo = "No Undo is required; dismissal returns to the exact trigger result with canonical state, Receipt, and History unchanged."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-SCHEDULED-002-RECOVERY-HANDOFF"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "The handoff reads only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
+
 [[state_command_contracts.commands]]
 command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-003"
 label = "Turn Off"
@@ -631,6 +719,36 @@ activation_posture = "active"
 gate_requirement_ids = []
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-003-INVERSE"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-003"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-003"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-YOU-NOTIFICATIONS-SCHEDULED-003-INVERSE"
+label = "Re-enable notification rule"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["CMD-YOU-NOTIFICATIONS-SCHEDULED-003 is the exact trigger command and its exact trigger Receipt is current", "The inactive Rule revision, owning-object revision, permission/privacy posture, and external request-removal reconciliation state are current"]
+destination = "You Notifications with the exact local Rule active again and its iOS scheduling reconciliation status visible"
+destination_id = "DEST-YOU-NOTIFICATIONS-SCHEDULED-003-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it re-enables the exact local Notification Rule without changing the owning object or completion state, appends a reversing Event, updates the Notification Rule Projection, and creates a new inverse Receipt and History entry while the Turn Off Receipt and History remain intact and a new iOS request schedules separately without duplication."
+success_focus = "the re-enabled Rule status followed by the pending or completed iOS scheduling reconciliation and inverse Receipt"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-SCHEDULED-003-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Re-enable notification rule control and exact unsafe, stale, or dependency-invalid Rule/object/request reason; the Rule remains off and the exact trigger Receipt remains visible and unchanged"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-SCHEDULED-003-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-SCHEDULED-003-INVERSE"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
 
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-NOTIFICATIONS-SUPERSEDED"
@@ -669,6 +787,36 @@ activation_posture = "active"
 gate_requirement_ids = []
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-YOU-NOTIFICATIONS-SUPERSEDED-001-INVERSE"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-YOU-NOTIFICATIONS-SUPERSEDED-001"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-YOU-NOTIFICATIONS-SUPERSEDED-001"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-YOU-NOTIFICATIONS-SUPERSEDED-001-INVERSE"
+label = "Restore superseded rule version"
+canonical_owner = "system.notifications.command-contract"
+preconditions = ["CMD-YOU-NOTIFICATIONS-SUPERSEDED-001 is the exact trigger command and its exact trigger Receipt is current", "The current Rule revision, exact superseded rule fields, owning-object revision, old/new iOS request identities, and reconciliation state are current"]
+destination = "You Notifications with the exact superseded Rule version restored as current and both old/new request identities visible for reconciliation"
+destination_id = "DEST-YOU-NOTIFICATIONS-SUPERSEDED-001-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it restores the exact superseded Notification Rule fields as current without changing the owning object, appends a reversing Event, updates the Notification Rule Projection, and creates a new inverse Receipt and History entry while both rule-version Receipts and History remain intact and iOS request replacement/removal reconciles idempotently."
+success_focus = "the restored superseded Rule version followed by request-reconciliation status and inverse Receipt"
+success_focus_id = "FOCUS-YOU-NOTIFICATIONS-SUPERSEDED-001-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Restore superseded rule version control and exact unsafe, stale, or dependency-invalid Rule/version/request reason; the newer Rule and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-YOU-NOTIFICATIONS-SUPERSEDED-001-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-YOU-NOTIFICATIONS-SUPERSEDED-001-INVERSE"
+recovery_posture = "current"
+recovery_owner = "system.notifications.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
 
 +++
 

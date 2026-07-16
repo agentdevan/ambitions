@@ -35,7 +35,7 @@ class VisualAuthorityRebaselineTests(unittest.TestCase):
         )
         self.assertEqual(
             snapshot.canon_content_sha,
-            "eb0a44125ec4814cec2c5a53f14d72c96b6539bb46b7fca9b90418a7ed6cc57b",
+            "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
         )
         self.assertEqual(snapshot.figma_file_key, "Oik7612LSTUHWsNRFoTlTJ")
         self.assertEqual(snapshot.authority_node_count, 147)

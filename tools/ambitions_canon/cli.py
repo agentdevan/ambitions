@@ -30,6 +30,9 @@ from tools.ambitions_canon.benchmark import (
     write_semantic_review_bundle,
 )
 from tools.ambitions_canon.coverage import coverage_findings, load_profiles
+from tools.ambitions_canon.command_resolution_registry import (
+    validate_repository_command_resolutions,
+)
 from tools.ambitions_canon.conflicts import (
     docket_known_issues,
     load_conflict_dockets,
@@ -613,6 +616,7 @@ def _audit(root: Path) -> int:
         manifest = load_manifest(root)
         documents = load_documents(root, manifest)
         registry = build_registry(manifest, documents)
+        validate_repository_command_resolutions(root, registry)
         _validated_docket_issues(root, registry)
         validate_compact_semantic_loss_review(root, registry)
         findings = audit_registry(registry)

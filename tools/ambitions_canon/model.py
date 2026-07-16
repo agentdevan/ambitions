@@ -397,6 +397,22 @@ class StateCommand:
 
 
 @dataclass(frozen=True, slots=True)
+class RecoveryCommandRecord:
+    trigger_command_id: str
+    mechanism_kind: str
+    command: StateCommand
+    redo_command_id: str | None = None
+    redo_preconditions: tuple[str, ...] = ()
+
+    def __post_init__(self) -> None:
+        object.__setattr__(
+            self,
+            "redo_preconditions",
+            tuple(self.redo_preconditions),
+        )
+
+
+@dataclass(frozen=True, slots=True)
 class StateCommandContract:
     state_id: str
     requirement_id: str
@@ -408,12 +424,16 @@ class StateCommandContract:
     offline_behavior: str
     accessibility_focus: str
     commands: tuple[StateCommand, ...]
+    recovery_commands: tuple[RecoveryCommandRecord, ...] = ()
 
     def __post_init__(self) -> None:
         object.__setattr__(
             self, "gate_requirement_ids", tuple(self.gate_requirement_ids)
         )
         object.__setattr__(self, "commands", tuple(self.commands))
+        object.__setattr__(
+            self, "recovery_commands", tuple(self.recovery_commands)
+        )
 
 
 @dataclass(frozen=True, slots=True)

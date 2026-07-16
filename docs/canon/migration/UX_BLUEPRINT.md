@@ -5,7 +5,7 @@
 
 - Blueprint ID: `AMB-UX-BLUEPRINT-REBASELINE-001`
 - Canon revision: `1`
-- Canon content SHA: `eb0a44125ec4814cec2c5a53f14d72c96b6539bb46b7fca9b90418a7ed6cc57b`
+- Canon content SHA: `6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67`
 - Source SHA: `ffd462ab52c0eff798071333388a051d9f3e55f3`
 - Authority state: `shadow`
 - Specification gaps: `0`; all gap-blocked behavior is ineligible for Phase 2 authority and task-pack selection.

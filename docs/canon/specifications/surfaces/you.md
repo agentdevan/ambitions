@@ -77,6 +77,34 @@ verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
 rollback_posture = "owner_recovery_handoff"
 recovery_handoff_command_id = "CMD-YOU-DATA-BACKUP-READY-001-RECOVERY-HANDOFF"
 
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-YOU-DATA-BACKUP-READY-001"
+mechanism_kind = "recovery_handoff_command"
+command_id = "CMD-YOU-DATA-BACKUP-READY-001-RECOVERY-HANDOFF"
+label = "Review backup artifact recovery"
+canonical_owner = "surface.you.command-contract"
+preconditions = ["CMD-YOU-DATA-BACKUP-READY-001 is the exact trigger command and its exact trigger Receipt is current", "The exact backup artifact identity, included-data scope, integrity/schema/restorability verdict, designation status, and artifact Receipt are current"]
+destination = "You Data and Storage backup inspection for the exact artifact with included scope, integrity/schema/restorability proof, designation status, and quarantine route visible"
+destination_id = "DEST-YOU-DATA-BACKUP-READY-001-RECOVERY-HANDOFF"
+destination_posture = "current"
+effect = "No durable mutation occurs and no Receipt is created; the exact trigger Receipt and scope route only to surface.you.command-contract for backup-artifact recovery inspection, preserving the active store, artifact bytes, designation status, integrity/schema/restorability evidence, Projection, Receipt, and History unchanged."
+success_focus = "the backup artifact designation and verification summary followed by the first separately authorized quarantine or recovery action"
+success_focus_id = "FOCUS-YOU-DATA-BACKUP-READY-001-RECOVERY-HANDOFF-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the backup-artifact recovery control and exact artifact/proof route failure; the exact trigger Receipt and scope and active-store posture remain visible and unchanged"
+failure_focus_id = "FOCUS-YOU-DATA-BACKUP-READY-001-RECOVERY-HANDOFF-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Non-mutating: routing and inspection complete without a canonical Event, Projection change, or new Receipt."
+rollback_undo = "No Undo is required; dismissal returns to the exact trigger result with canonical state, Receipt, and History unchanged."
+recovery_id = "RECOVERY-YOU-DATA-BACKUP-READY-001-RECOVERY-HANDOFF"
+recovery_posture = "current"
+recovery_owner = "surface.you.command-contract"
+privacy_egress = "The handoff reads only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DATA-DIAGNOSTICS-REDACTED"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -179,6 +207,34 @@ verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
 rollback_posture = "owner_recovery_handoff"
 recovery_handoff_command_id = "CMD-YOU-DATA-EXPORT-PREVIEW-001-RECOVERY-HANDOFF"
 
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-YOU-DATA-EXPORT-PREVIEW-001"
+mechanism_kind = "recovery_handoff_command"
+command_id = "CMD-YOU-DATA-EXPORT-PREVIEW-001-RECOVERY-HANDOFF"
+label = "Review completed export artifact"
+canonical_owner = "surface.you.command-contract"
+preconditions = ["CMD-YOU-DATA-EXPORT-PREVIEW-001 is the exact trigger command and its exact trigger Receipt is current", "The exact export artifact identity, reviewed data scope, redaction set, format, destination result, and egress Receipt are current"]
+destination = "You Data and Storage export-result inspection for the exact generated artifact with reviewed scope, redactions, format, destination result, and egress History visible"
+destination_id = "DEST-YOU-DATA-EXPORT-PREVIEW-001-RECOVERY-HANDOFF"
+destination_posture = "current"
+effect = "No durable mutation occurs and no Receipt is created; the exact trigger Receipt and scope route only to surface.you.command-contract for completed-export inspection, preserving the exported artifact result, reviewed scope/redactions, saved Ambitions data, Projection, egress Receipt, and History unchanged and never reclassifying the export as a backup."
+success_focus = "the export artifact result and egress scope summary followed by the first separately authorized artifact action"
+success_focus_id = "FOCUS-YOU-DATA-EXPORT-PREVIEW-001-RECOVERY-HANDOFF-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the completed-export recovery control and exact artifact/destination route failure; the exact trigger Receipt and scope and export result remain visible and unchanged"
+failure_focus_id = "FOCUS-YOU-DATA-EXPORT-PREVIEW-001-RECOVERY-HANDOFF-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Non-mutating: routing and inspection complete without a canonical Event, Projection change, or new Receipt."
+rollback_undo = "No Undo is required; dismissal returns to the exact trigger result with canonical state, Receipt, and History unchanged."
+recovery_id = "RECOVERY-YOU-DATA-EXPORT-PREVIEW-001-RECOVERY-HANDOFF"
+recovery_posture = "current"
+recovery_owner = "surface.you.command-contract"
+privacy_egress = "The handoff reads only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DATA-EXPORT-PROGRESS"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -214,6 +270,34 @@ privacy_egress = "Only explicitly selected and redacted fields go to the reviewe
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
 rollback_posture = "owner_recovery_handoff"
 recovery_handoff_command_id = "CMD-YOU-DATA-EXPORT-PROGRESS-001-RECOVERY-HANDOFF"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-YOU-DATA-EXPORT-PROGRESS-001"
+mechanism_kind = "recovery_handoff_command"
+command_id = "CMD-YOU-DATA-EXPORT-PROGRESS-001-RECOVERY-HANDOFF"
+label = "Review export progress recovery"
+canonical_owner = "surface.you.command-contract"
+preconditions = ["CMD-YOU-DATA-EXPORT-PROGRESS-001 is the exact trigger command and its exact trigger Receipt is current", "The exact export operation identity, reviewed data scope, redaction set, completed/failed artifact status, destination result, and egress Receipt are current"]
+destination = "You Data and Storage export-progress recovery for the exact operation with completed, failed, or absent artifact status and reviewed egress scope visible"
+destination_id = "DEST-YOU-DATA-EXPORT-PROGRESS-001-RECOVERY-HANDOFF"
+destination_posture = "current"
+effect = "No durable mutation occurs and no Receipt is created; the exact trigger Receipt and scope route only to surface.you.command-contract for export-progress recovery, preserving any completed artifact, failed or cancelled operation status, reviewed scope/redactions, saved Ambitions data, Projection, egress Receipt, and History unchanged."
+success_focus = "the exact export operation status and artifact-presence summary followed by the first separately authorized recovery action"
+success_focus_id = "FOCUS-YOU-DATA-EXPORT-PROGRESS-001-RECOVERY-HANDOFF-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the export-progress recovery control and exact operation/artifact route failure; the exact trigger Receipt and scope and last confirmed export status remain visible and unchanged"
+failure_focus_id = "FOCUS-YOU-DATA-EXPORT-PROGRESS-001-RECOVERY-HANDOFF-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Non-mutating: routing and inspection complete without a canonical Event, Projection change, or new Receipt."
+rollback_undo = "No Undo is required; dismissal returns to the exact trigger result with canonical state, Receipt, and History unchanged."
+recovery_id = "RECOVERY-YOU-DATA-EXPORT-PROGRESS-001-RECOVERY-HANDOFF"
+recovery_posture = "current"
+recovery_owner = "surface.you.command-contract"
+privacy_egress = "The handoff reads only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
 
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DATA-PERMANENT-DELETE-IRREVERSIBLE"
@@ -321,6 +405,36 @@ verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-YOU-DATA-RESET-REVIEW-001-INVERSE"
 
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-YOU-DATA-RESET-REVIEW-001"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-YOU-DATA-RESET-REVIEW-001"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-YOU-DATA-RESET-REVIEW-001-INVERSE"
+label = "Restore reviewed preferences"
+canonical_owner = "surface.you.command-contract"
+preconditions = ["CMD-YOU-DATA-RESET-REVIEW-001 is the exact trigger command and its exact trigger Receipt is current", "The exact pre-reset preference snapshot, approved-default set, settings revision, and dependent appearance/behavior projections are current"]
+destination = "You settings with the exact reviewed pre-reset preference values restored and the reset and inverse Receipts visible"
+destination_id = "DEST-YOU-DATA-RESET-REVIEW-001-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it restores only the exact preference values replaced by approved defaults, appends a reversing Event, updates the settings and affected appearance/behavior Projection, and creates a new inverse Receipt and History entry while the private graph, learned influences, Goals, Proof, reset Receipt, and History remain intact."
+success_focus = "the first restored preference group followed by the restored-values summary and inverse Receipt"
+success_focus_id = "FOCUS-YOU-DATA-RESET-REVIEW-001-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Restore reviewed preferences control and exact unsafe, stale, or dependency-invalid snapshot/settings reason; the reset preferences and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-YOU-DATA-RESET-REVIEW-001-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-YOU-DATA-RESET-REVIEW-001-INVERSE"
+recovery_posture = "current"
+recovery_owner = "surface.you.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DATA-RESET-ROLLBACK"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -356,6 +470,36 @@ privacy_egress = "The mutation remains local and sends no private content off de
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-YOU-DATA-RESET-ROLLBACK-001-INVERSE"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-YOU-DATA-RESET-ROLLBACK-001"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-YOU-DATA-RESET-ROLLBACK-001"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-YOU-DATA-RESET-ROLLBACK-001-INVERSE"
+label = "Restore rollback preference set"
+canonical_owner = "surface.you.command-contract"
+preconditions = ["CMD-YOU-DATA-RESET-ROLLBACK-001 is the exact trigger command and its exact trigger Receipt is current", "The rollback-state preference snapshot, just-reset default set, current settings revision, and affected appearance/behavior projections are current"]
+destination = "You Data and Storage reset rollback with the exact earlier preference set restored and current product information unchanged"
+destination_id = "DEST-YOU-DATA-RESET-ROLLBACK-001-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it restores the exact earlier preference set recorded by the rollback state, appends a reversing Event, updates the settings and affected appearance/behavior Projection, and creates a new inverse Receipt and History entry while product data, private graph, reset Receipt, and History remain intact."
+success_focus = "the restored rollback preference-set summary followed by the new inverse Receipt"
+success_focus_id = "FOCUS-YOU-DATA-RESET-ROLLBACK-001-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Restore rollback preference set control and exact unsafe, stale, or dependency-invalid snapshot/settings reason; the reset values and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-YOU-DATA-RESET-ROLLBACK-001-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-YOU-DATA-RESET-ROLLBACK-001-INVERSE"
+recovery_posture = "current"
+recovery_owner = "surface.you.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
 
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DATA-RESTORE-REVIEW"
@@ -461,6 +605,36 @@ privacy_egress = "The mutation remains local and sends no private content off de
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-YOU-DATA-TRASH-POPULATED-001-INVERSE"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-YOU-DATA-TRASH-POPULATED-001"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-YOU-DATA-TRASH-POPULATED-001"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-YOU-DATA-TRASH-POPULATED-001-INVERSE"
+label = "Return restored object to Trash"
+canonical_owner = "surface.you.command-contract"
+preconditions = ["CMD-YOU-DATA-TRASH-POPULATED-001 is the exact trigger command and its exact trigger Receipt is current", "The restored object identity, original Trash record, owner/lifecycle revision, relationships, retention deadline, and dependent projections are current"]
+destination = "Trash with the exact restored Goal, Step, Capture, Proof, or Note returned under its original Trash identity and retention posture"
+destination_id = "DEST-YOU-DATA-TRASH-POPULATED-001-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it returns the exact restored object to Trash with identity, relationships, deletion date, retention deadline, and History preserved, appends a reversing Event, updates the owning and Trash Projection, and creates a new inverse Receipt and History entry while the Restore Receipt and all lifecycle History remain intact."
+success_focus = "the returned object row in Trash followed by its retention deadline and new inverse Receipt"
+success_focus_id = "FOCUS-YOU-DATA-TRASH-POPULATED-001-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Return restored object to Trash control and exact unsafe, stale, or dependency-invalid object/relationship/retention reason; the restored object and exact trigger Receipt remain visible and unchanged"
+failure_focus_id = "FOCUS-YOU-DATA-TRASH-POPULATED-001-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-YOU-DATA-TRASH-POPULATED-001-INVERSE"
+recovery_posture = "current"
+recovery_owner = "surface.you.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
 
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DATA-TRASH-RESTORE"
@@ -1484,6 +1658,36 @@ verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-YOU-SETTINGS-APP-LOCK-DISABLED-001-INVERSE"
 
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-YOU-SETTINGS-APP-LOCK-DISABLED-001"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-YOU-SETTINGS-APP-LOCK-DISABLED-001"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-YOU-SETTINGS-APP-LOCK-DISABLED-001-INVERSE"
+label = "Restore App Lock off"
+canonical_owner = "surface.you.command-contract"
+preconditions = ["CMD-YOU-SETTINGS-APP-LOCK-DISABLED-001 is the exact trigger command and its exact trigger Receipt is current", "The enabled App Lock setting revision, device access-protection posture, and absence of a newer security-setting dependency are current"]
+destination = "You App Lock settings with App Lock returned to off and the device access-protection posture still visible"
+destination_id = "DEST-YOU-SETTINGS-APP-LOCK-DISABLED-001-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it restores the local App Lock setting to off without changing private data, account identity, device passcode protection, or network state, appends a reversing Event, updates the security-settings Projection, and creates a new inverse Receipt and History entry while the enable Receipt and History remain intact."
+success_focus = "the App Lock off status followed by the unchanged device-protection summary and inverse Receipt"
+success_focus_id = "FOCUS-YOU-SETTINGS-APP-LOCK-DISABLED-001-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Restore App Lock off control and exact unsafe, stale, or dependency-invalid security-setting reason; App Lock remains on and the exact trigger Receipt remains visible and unchanged"
+failure_focus_id = "FOCUS-YOU-SETTINGS-APP-LOCK-DISABLED-001-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-YOU-SETTINGS-APP-LOCK-DISABLED-001-INVERSE"
+recovery_posture = "current"
+recovery_owner = "surface.you.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
+
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-SETTINGS-APP-LOCK-ENABLED"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -1519,6 +1723,36 @@ privacy_egress = "Authentication and the App Lock setting remain local; no Ambit
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
 rollback_posture = "inverse_command"
 inverse_command_id = "CMD-YOU-SETTINGS-APP-LOCK-ENABLED-001-INVERSE"
+
+[[state_command_contracts.recovery_commands]]
+trigger_command_id = "CMD-YOU-SETTINGS-APP-LOCK-ENABLED-001"
+mechanism_kind = "inverse_command"
+redo_command_id = "CMD-YOU-SETTINGS-APP-LOCK-ENABLED-001"
+redo_preconditions = ["current inverse Receipt", "current revision", "fresh task authorization"]
+command_id = "CMD-YOU-SETTINGS-APP-LOCK-ENABLED-001-INVERSE"
+label = "Restore App Lock on"
+canonical_owner = "surface.you.command-contract"
+preconditions = ["CMD-YOU-SETTINGS-APP-LOCK-ENABLED-001 is the exact trigger command and its exact trigger Receipt is current", "The disabled App Lock setting revision, device passcode availability, and absence of a newer security-setting dependency are current"]
+destination = "You App Lock settings with App Lock returned to on and device passcode access still available"
+destination_id = "DEST-YOU-SETTINGS-APP-LOCK-ENABLED-001-INVERSE"
+destination_posture = "current"
+effect = "The command reverses only the exact proven trigger effect: it restores the local App Lock setting to on without changing private data, account identity, device passcode availability, or network state, appends a reversing Event, updates the security-settings Projection, and creates a new inverse Receipt and History entry while the disable Receipt and History remain intact."
+success_focus = "the App Lock on status followed by the device-passcode fallback summary and inverse Receipt"
+success_focus_id = "FOCUS-YOU-SETTINGS-APP-LOCK-ENABLED-001-INVERSE-SUCCESS"
+success_focus_posture = "current"
+failure_focus = "the Restore App Lock on control and exact unsafe, stale, or dependency-invalid security-setting reason; App Lock remains off and the exact trigger Receipt remains visible and unchanged"
+failure_focus_id = "FOCUS-YOU-SETTINGS-APP-LOCK-ENABLED-001-INVERSE-FAILURE"
+failure_focus_posture = "current"
+commit_boundary = "Inverse mutation: commit only after the exact trigger Receipt, current revision, dependencies, and absence of a newer dependent command are validated."
+rollback_undo = "Redo is a distinct typed command that requires the current inverse Receipt and complete revalidation; this recovery-only record grants no implicit redo authority."
+recovery_id = "RECOVERY-YOU-SETTINGS-APP-LOCK-ENABLED-001-INVERSE"
+recovery_posture = "current"
+recovery_owner = "surface.you.command-contract"
+privacy_egress = "The inverse reads and writes only local canonical state and sends no private content off device."
+verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
+activation_posture = "active"
+gate_requirement_ids = []
+gate_dependency_ids = []
 
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-SETTINGS-APPEARANCE-DARK"

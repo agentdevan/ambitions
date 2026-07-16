@@ -15,7 +15,7 @@ from tools.ambitions_canon.parser import (
 from tools.ambitions_canon.task_pack import require_pack_authorization_current
 from tools.ambitions_canon.ux_blueprint import (
     UXBlueprintError,
-    active_state_commands,
+    declared_current_state_commands,
     future_gated_state_commands,
     load_state_command_contracts,
     validate_ux_blueprint,
@@ -302,7 +302,7 @@ class VisualR1CommandContractTests(unittest.TestCase):
                     )
                     contract = self.contracts[variant["blueprint_id"]]
                     self.assertEqual(contract.requirement_id, requirement_id)
-                    active = active_state_commands(contract)
+                    active = declared_current_state_commands(contract)
                     future = future_gated_state_commands(contract)
                     self.assertEqual(
                         variant["allowed_commands"],
@@ -409,7 +409,7 @@ class VisualR1CommandContractTests(unittest.TestCase):
                 continue
             with self.subTest(state_id=state_id):
                 self.assertEqual(contract.activation_posture.value, "future_gated")
-                self.assertEqual(active_state_commands(contract), ())
+                self.assertEqual(declared_current_state_commands(contract), ())
                 self.assertEqual(
                     [item["label"] for item in future_gated_state_commands(contract)],
                     expected[state_id],
@@ -703,7 +703,10 @@ class VisualR1CommandContractTests(unittest.TestCase):
                 self.assertEqual(contract.activation_posture.value, "active")
                 self.assertEqual(contract.gate_requirement_ids, ())
                 self.assertEqual(
-                    [command.label for command in active_state_commands(contract)],
+                    [
+                        command.label
+                        for command in declared_current_state_commands(contract)
+                    ],
                     labels,
                 )
                 future = future_gated_state_commands(contract)

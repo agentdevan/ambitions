@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ambitions.local/canon/schemas/command-gate-owner-approval.schema.json",
+  "title": "Ambitions Command-Gate Owner Approval Registry",
+  "description": "Append-only pending owner attestations staged on the protected base for later exact one-to-one receipt consumption; pending records never authorize activation and an empty registry grants no authorization.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "registry_id", "registry_revision", "owner_approvals"],
+  "properties": {
+    "schema_version": {"type": "integer", "const": 1},
+    "registry_id": {"const": "COMMAND-GATE-OWNER-APPROVAL-REGISTRY-001"},
+    "registry_revision": {"type": "integer", "minimum": 1},
+    "owner_approvals": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/ownerApproval"}
+    }
+  },
+  "$defs": {
+    "approvalScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["owner_concept", "requirement_id", "state_id", "command_id"],
+      "properties": {
+        "owner_concept": {"type": "string", "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"},
+        "requirement_id": {"type": "string", "pattern": "^[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "state_id": {"type": "string", "pattern": "^UX-STATE-VARIANT-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "command_id": {"type": "string", "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"}
+      }
+    },
+    "ownerApproval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["approval_identity", "approval_revision", "approval_state", "dependency_id", "dependency_revision", "dependency_sha256", "mapping_record_id", "exact_product_mappings", "mapping_sha256", "canon_content_sha256", "approved_scope", "approved_scope_sha256", "trusted_dependency_registry_sha256", "trusted_receipt_registry_sha256", "trusted_prior_receipt_sha256", "attestation_sha256"],
+      "properties": {
+        "approval_identity": {"type": "string", "pattern": "^OWNER-APPROVAL-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "approval_revision": {"type": "integer", "minimum": 2},
+        "approval_state": {"const": "pending"},
+        "dependency_id": {"type": "string", "pattern": "^GATE-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+        "dependency_revision": {"type": "integer", "minimum": 2},
+        "dependency_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "mapping_record_id": {"type": "string", "pattern": "^MAPPING-GATE-[A-Z0-9]+(?:-[A-Z0-9]+)*-R[0-9]{4,}$"},
+        "exact_product_mappings": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "mapping_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "canon_content_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "approved_scope": {"$ref": "#/$defs/approvalScope"},
+        "approved_scope_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "trusted_dependency_registry_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "trusted_receipt_registry_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "trusted_prior_receipt_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "attestation_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  }
+}

@@ -215,6 +215,52 @@
                 "irreversible_receipt_id": {"type": "string", "pattern": "^RECEIPT-[A-Z0-9]+(?:-[A-Z0-9]+)*$"}
               }
             }
+          },
+          "recovery_commands": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["trigger_command_id", "mechanism_kind", "command_id", "label", "canonical_owner", "destination_id", "destination_posture", "success_focus_id", "success_focus_posture", "failure_focus_id", "failure_focus_posture", "recovery_id", "recovery_posture", "recovery_owner", "preconditions", "destination", "effect", "success_focus", "failure_focus", "commit_boundary", "rollback_undo", "privacy_egress", "verification_ids", "activation_posture", "gate_requirement_ids"],
+              "properties": {
+                "trigger_command_id": {"type": "string", "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "mechanism_kind": {"enum": ["inverse_command", "recovery_handoff_command"]},
+                "redo_command_id": {"type": "string", "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "redo_preconditions": {"type": "array", "const": ["current inverse Receipt", "current revision", "fresh task authorization"]},
+                "command_id": {"type": "string", "pattern": "^CMD-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "label": {"type": "string", "minLength": 1},
+                "canonical_owner": {"type": "string", "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"},
+                "destination_id": {"type": "string", "pattern": "^DEST-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "destination_posture": {"enum": ["current", "deferred", "unavailable"]},
+                "success_focus_id": {"type": "string", "pattern": "^FOCUS-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "success_focus_posture": {"enum": ["current", "deferred", "unavailable"]},
+                "failure_focus_id": {"type": "string", "pattern": "^FOCUS-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "failure_focus_posture": {"enum": ["current", "deferred", "unavailable"]},
+                "recovery_id": {"type": "string", "pattern": "^RECOVERY-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+                "recovery_posture": {"enum": ["current", "deferred", "unavailable"]},
+                "recovery_owner": {"type": "string", "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"},
+                "preconditions": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+                "destination": {"type": "string", "minLength": 1},
+                "effect": {"type": "string", "minLength": 1},
+                "success_focus": {"type": "string", "minLength": 1},
+                "failure_focus": {"type": "string", "minLength": 1},
+                "commit_boundary": {"type": "string", "minLength": 1},
+                "rollback_undo": {"type": "string", "minLength": 1},
+                "privacy_egress": {"type": "string", "minLength": 1},
+                "verification_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+                "activation_posture": {"enum": ["active", "future_gated"]},
+                "gate_dependency_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^GATE-[A-Z0-9]+(?:-[A-Z0-9]+)*$"}},
+                "gate_requirement_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+              },
+              "allOf": [
+                {
+                  "if": {"patternProperties": {"^mechanism_kind$": {"const": "inverse_command"}}},
+                  "then": {"required": ["redo_command_id", "redo_preconditions"]},
+                  "else": {"not": {"anyOf": [{"required": ["redo_command_id"]}, {"required": ["redo_preconditions"]}]}}
+                }
+              ]
+            }
           }
         }
       }
