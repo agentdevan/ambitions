@@ -13,16 +13,23 @@ from tools.ambitions_canon.parser import parse_canon_document
 
 ROOT = Path(__file__).resolve().parents[2]
 SPECIFICATIONS = (
+    "app/deep-linking.md",
+    "app/degraded-states.md",
+    "app/launch-and-setup.md",
+    "app/permissions.md",
     "app/shell.md",
     "global/capture.md",
+    "global/search.md",
     "global/trust-inspection.md",
+    "journeys/external-calendar-import.md",
     "surfaces/goals.md",
     "surfaces/time.md",
     "surfaces/today.md",
     "surfaces/you.md",
+    "systems/diagnostics.md",
+    "systems/notifications.md",
+    "systems/sync-and-continuity.md",
 )
-
-
 class StateCommandSemanticTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -120,14 +127,14 @@ class StateCommandSemanticTests(unittest.TestCase):
             ),
         )
 
-    def test_all_267_contracts_reject_self_referential_template_semantics(self):
+    def test_all_433_contracts_reject_self_referential_template_semantics(self):
         commands = [
             command
             for contract in self.contracts.values()
             for command in contract.commands
         ]
-        self.assertEqual(len(self.contracts), 267)
-        self.assertEqual(len(commands), 328)
+        self.assertEqual(len(self.contracts), 433)
+        self.assertEqual(len(commands), 520)
         banned = (
             "command review for ux-state-variant-",
             "truthful status for ux-state-variant-",

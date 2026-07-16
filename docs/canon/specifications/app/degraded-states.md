@@ -7,6 +7,7 @@ owner_domain = "app-degraded-states"
 canon_revision = 1
 profile = "system-v1"
 owns_concepts = [
+  "app.degraded.command-contract",
   "app.degraded.failure-taxonomy",
   "app.degraded.input-preservation",
   "app.degraded.presentation",
@@ -33,6 +34,498 @@ source_owners = [
   "Native/Ambitions/Surfaces/You/",
   "Native/Ambitions/Quality/",
 ]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-CONTINUITY-CONFLICT"
+requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+transition_exit = "Review Conflict => destination: the future-gated continuity conflict review from Scoped degraded state — Continuity Conflict; effect: No durable mutation occurs and no Receipt is created; Review Conflict is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Optional continuity copies disagree. Information saved on this device remains protected and unchanged.; focus: the updated classified status or first affected item after Review Conflict in Scoped degraded state — Continuity Conflict."
+durable_effect = "Exact failure-class recovery consequences: Review Conflict: No durable mutation occurs and no Receipt is created; Review Conflict is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Optional continuity copies disagree. Information saved on this device remains protected and unchanged. Existing local truth and accepted input remain available wherever safe; Offline Healthy exposes review only and no repair prompt. Current visible status: Optional continuity copies disagree. Information saved on this device remains protected and unchanged."
+recovery_rollback = "Exact classified recovery and rollback: Review Conflict: No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged. No inline destructive reset exists. Reset routes only through You → Data & Storage → Review Reset with exact scope, irreversibility, verified export or backup when feasible, explicit confirmation, and a rollback reference. Recovery preserves: Optional continuity copies disagree. Information saved on this device remains protected and unchanged."
+offline_behavior = "Readable Goals, Captures, Time, settings, accepted input, completed results, snapshots, History, and Receipts remain available offline wherever safe. Network and external operations wait without weakening local truth. Offline evidence remains: Optional continuity copies disagree. Information saved on this device remains protected and unchanged."
+accessibility_focus = "VoiceOver announces failure class, affected scope, local consequence, safe recovery, and unchanged data before controls: Review Conflict announces failure class and consequence; success focuses the updated classified status or first affected item after Review Conflict in Scoped degraded state — Continuity Conflict; rejection focuses the Review Conflict control and exact affected scope or failed identity in Scoped degraded state — Continuity Conflict. Dynamic Type stacks status and actions without color dependence. The announcement first communicates: Optional continuity copies disagree. Information saved on this device remains protected and unchanged."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-OFFLINE-DEGRADED-LOCAL-HEALTH-CONTINUITY-CONFLICT-001"
+label = "Review Conflict"
+canonical_owner = "app.degraded.command-contract"
+preconditions = ["The command is allowlisted for this exact failure class and preserves accepted local input and truth", "The current failure classification revalidates the disabled continuity gate, local source authority, checkpoint, and quarantined alternatives"]
+destination = "the future-gated continuity conflict review from Scoped degraded state — Continuity Conflict"
+effect = "No durable mutation occurs and no Receipt is created; Review Conflict is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Optional continuity copies disagree. Information saved on this device remains protected and unchanged."
+success_focus = "the updated classified status or first affected item after Review Conflict in Scoped degraded state — Continuity Conflict"
+failure_focus = "the Review Conflict control and exact affected scope or failed identity in Scoped degraded state — Continuity Conflict"
+commit_boundary = "Non-mutating: classified recovery review and owner handoff remain before any dedicated canonical or external commit."
+rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
+privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
+verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-CONTINUITY-PENDING"
+requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+transition_exit = "Review Continuity Status => destination: the disabled continuity status explanation from Scoped degraded state — Continuity Pending; effect: No durable mutation occurs and no Receipt is created; Review Continuity Status is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: A continuity update is waiting. Information already saved on this device remains unchanged.; focus: the updated classified status or first affected item after Review Continuity Status in Scoped degraded state — Continuity Pending."
+durable_effect = "Exact failure-class recovery consequences: Review Continuity Status: No durable mutation occurs and no Receipt is created; Review Continuity Status is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: A continuity update is waiting. Information already saved on this device remains unchanged. Existing local truth and accepted input remain available wherever safe; Offline Healthy exposes review only and no repair prompt. Current visible status: A continuity update is waiting. Information already saved on this device remains unchanged."
+recovery_rollback = "Exact classified recovery and rollback: Review Continuity Status: No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged. No inline destructive reset exists. Reset routes only through You → Data & Storage → Review Reset with exact scope, irreversibility, verified export or backup when feasible, explicit confirmation, and a rollback reference. Recovery preserves: A continuity update is waiting. Information already saved on this device remains unchanged."
+offline_behavior = "Readable Goals, Captures, Time, settings, accepted input, completed results, snapshots, History, and Receipts remain available offline wherever safe. Network and external operations wait without weakening local truth. Offline evidence remains: A continuity update is waiting. Information already saved on this device remains unchanged."
+accessibility_focus = "VoiceOver announces failure class, affected scope, local consequence, safe recovery, and unchanged data before controls: Review Continuity Status announces failure class and consequence; success focuses the updated classified status or first affected item after Review Continuity Status in Scoped degraded state — Continuity Pending; rejection focuses the Review Continuity Status control and exact affected scope or failed identity in Scoped degraded state — Continuity Pending. Dynamic Type stacks status and actions without color dependence. The announcement first communicates: A continuity update is waiting. Information already saved on this device remains unchanged."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-OFFLINE-DEGRADED-LOCAL-HEALTH-CONTINUITY-PENDING-001"
+label = "Review Continuity Status"
+canonical_owner = "app.degraded.command-contract"
+preconditions = ["The command is allowlisted for this exact failure class and preserves accepted local input and truth", "The current failure classification revalidates the disabled continuity gate, local source authority, checkpoint, and quarantined alternatives"]
+destination = "the disabled continuity status explanation from Scoped degraded state — Continuity Pending"
+effect = "No durable mutation occurs and no Receipt is created; Review Continuity Status is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: A continuity update is waiting. Information already saved on this device remains unchanged."
+success_focus = "the updated classified status or first affected item after Review Continuity Status in Scoped degraded state — Continuity Pending"
+failure_focus = "the Review Continuity Status control and exact affected scope or failed identity in Scoped degraded state — Continuity Pending"
+commit_boundary = "Non-mutating: classified recovery review and owner handoff remain before any dedicated canonical or external commit."
+rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
+privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
+verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-EXTERNAL-WRITE-FAILURE"
+requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Retry External Update => destination: the owning external-write reconciliation result from Scoped degraded state — External Write Failure; effect: The Retry External Update external result causes no local canonical mutation; it retries only the failed external outbox identity and cannot replay or roll back accepted local success. Visible evidence and local truth remain: An outside update did not finish; the accepted local change remains recorded separately.; focus: the updated classified status or first affected item after Retry External Update in Scoped degraded state — External Write Failure.\nReview Details => destination: the affected-scope status and consequence details from Scoped degraded state — External Write Failure; effect: No durable mutation occurs and no Receipt is created; Review Details is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: An outside update did not finish; the accepted local change remains recorded separately.; focus: the updated classified status or first affected item after Review Details in Scoped degraded state — External Write Failure."
+durable_effect = "Exact failure-class recovery consequences: Retry External Update: The Retry External Update external result causes no local canonical mutation; it retries only the failed external outbox identity and cannot replay or roll back accepted local success. Visible evidence and local truth remain: An outside update did not finish; the accepted local change remains recorded separately. | Review Details: No durable mutation occurs and no Receipt is created; Review Details is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: An outside update did not finish; the accepted local change remains recorded separately. Existing local truth and accepted input remain available wherever safe; Offline Healthy exposes review only and no repair prompt. Current visible status: An outside update did not finish; the accepted local change remains recorded separately."
+recovery_rollback = "Exact classified recovery and rollback: Retry External Update: Cancellation leaves the accepted local result and failed outbox identity unchanged; another retry requires fresh owner and external-state validation. | Review Details: No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged. No inline destructive reset exists. Reset routes only through You → Data & Storage → Review Reset with exact scope, irreversibility, verified export or backup when feasible, explicit confirmation, and a rollback reference. Recovery preserves: An outside update did not finish; the accepted local change remains recorded separately."
+offline_behavior = "Readable Goals, Captures, Time, settings, accepted input, completed results, snapshots, History, and Receipts remain available offline wherever safe. Network and external operations wait without weakening local truth. Offline evidence remains: An outside update did not finish; the accepted local change remains recorded separately."
+accessibility_focus = "VoiceOver announces failure class, affected scope, local consequence, safe recovery, and unchanged data before controls: Retry External Update announces failure class and consequence; success focuses the updated classified status or first affected item after Retry External Update in Scoped degraded state — External Write Failure; rejection focuses the Retry External Update control and exact affected scope or failed identity in Scoped degraded state — External Write Failure | Review Details announces failure class and consequence; success focuses the updated classified status or first affected item after Review Details in Scoped degraded state — External Write Failure; rejection focuses the Review Details control and exact affected scope or failed identity in Scoped degraded state — External Write Failure. Dynamic Type stacks status and actions without color dependence. The announcement first communicates: An outside update did not finish; the accepted local change remains recorded separately."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-OFFLINE-DEGRADED-LOCAL-HEALTH-EXTERNAL-WRITE-FAILURE-001"
+label = "Retry External Update"
+canonical_owner = "app.degraded.command-contract"
+preconditions = ["Only the exact failed external outbox identity may be retried", "The command is allowlisted for this exact failure class and preserves accepted local input and truth", "The current failure classification revalidates the accepted local command revision, external outbox identity, and failed external result"]
+destination = "the owning external-write reconciliation result from Scoped degraded state — External Write Failure"
+effect = "The Retry External Update external result causes no local canonical mutation; it retries only the failed external outbox identity and cannot replay or roll back accepted local success. Visible evidence and local truth remain: An outside update did not finish; the accepted local change remains recorded separately."
+success_focus = "the updated classified status or first affected item after Retry External Update in Scoped degraded state — External Write Failure"
+failure_focus = "the Retry External Update control and exact affected scope or failed identity in Scoped degraded state — External Write Failure"
+commit_boundary = "External-result: the external retry remains downstream of accepted local truth and cannot redefine canonical success."
+rollback_undo = "Cancellation leaves the accepted local result and failed outbox identity unchanged; another retry requires fresh owner and external-state validation."
+privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
+verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts.commands]]
+command_id = "CMD-OFFLINE-DEGRADED-LOCAL-HEALTH-EXTERNAL-WRITE-FAILURE-002"
+label = "Review Details"
+canonical_owner = "app.degraded.command-contract"
+preconditions = ["The command is allowlisted for this exact failure class and preserves accepted local input and truth", "The current failure classification revalidates the accepted local command revision, external outbox identity, and failed external result"]
+destination = "the affected-scope status and consequence details from Scoped degraded state — External Write Failure"
+effect = "No durable mutation occurs and no Receipt is created; Review Details is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: An outside update did not finish; the accepted local change remains recorded separately."
+success_focus = "the updated classified status or first affected item after Review Details in Scoped degraded state — External Write Failure"
+failure_focus = "the Review Details control and exact affected scope or failed identity in Scoped degraded state — External Write Failure"
+commit_boundary = "Non-mutating: classified recovery review and owner handoff remain before any dedicated canonical or external commit."
+rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
+privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
+verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-IMPORT-FAILURE"
+requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Retry Failed Items => destination: the owning import review with explicit failed identities from Scoped degraded state — Import Failure; effect: No durable mutation occurs and no Receipt is created; Retry Failed Items is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: An import did not finish. Original input and completed local items remain identifiable.; focus: the updated classified status or first affected item after Retry Failed Items in Scoped degraded state — Import Failure.\nReview Partial Import => destination: the import owner’s completed, failed, and pending record review from Scoped degraded state — Import Failure; effect: No durable mutation occurs and no Receipt is created; Review Partial Import is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: An import did not finish. Original input and completed local items remain identifiable.; focus: the updated classified status or first affected item after Review Partial Import in Scoped degraded state — Import Failure."
+durable_effect = "Exact failure-class recovery consequences: Retry Failed Items: No durable mutation occurs and no Receipt is created; Retry Failed Items is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: An import did not finish. Original input and completed local items remain identifiable. | Review Partial Import: No durable mutation occurs and no Receipt is created; Review Partial Import is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: An import did not finish. Original input and completed local items remain identifiable. Existing local truth and accepted input remain available wherever safe; Offline Healthy exposes review only and no repair prompt. Current visible status: An import did not finish. Original input and completed local items remain identifiable."
+recovery_rollback = "Exact classified recovery and rollback: Retry Failed Items: No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged. | Review Partial Import: No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged. No inline destructive reset exists. Reset routes only through You → Data & Storage → Review Reset with exact scope, irreversibility, verified export or backup when feasible, explicit confirmation, and a rollback reference. Recovery preserves: An import did not finish. Original input and completed local items remain identifiable."
+offline_behavior = "Readable Goals, Captures, Time, settings, accepted input, completed results, snapshots, History, and Receipts remain available offline wherever safe. Network and external operations wait without weakening local truth. Offline evidence remains: An import did not finish. Original input and completed local items remain identifiable."
+accessibility_focus = "VoiceOver announces failure class, affected scope, local consequence, safe recovery, and unchanged data before controls: Retry Failed Items announces failure class and consequence; success focuses the updated classified status or first affected item after Retry Failed Items in Scoped degraded state — Import Failure; rejection focuses the Retry Failed Items control and exact affected scope or failed identity in Scoped degraded state — Import Failure | Review Partial Import announces failure class and consequence; success focuses the updated classified status or first affected item after Review Partial Import in Scoped degraded state — Import Failure; rejection focuses the Review Partial Import control and exact affected scope or failed identity in Scoped degraded state — Import Failure. Dynamic Type stacks status and actions without color dependence. The announcement first communicates: An import did not finish. Original input and completed local items remain identifiable."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-OFFLINE-DEGRADED-LOCAL-HEALTH-IMPORT-FAILURE-001"
+label = "Retry Failed Items"
+canonical_owner = "app.degraded.command-contract"
+preconditions = ["The command is allowlisted for this exact failure class and preserves accepted local input and truth", "The current failure classification revalidates the import source fingerprint and explicit completed, failed, and pending record identities"]
+destination = "the owning import review with explicit failed identities from Scoped degraded state — Import Failure"
+effect = "No durable mutation occurs and no Receipt is created; Retry Failed Items is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: An import did not finish. Original input and completed local items remain identifiable."
+success_focus = "the updated classified status or first affected item after Retry Failed Items in Scoped degraded state — Import Failure"
+failure_focus = "the Retry Failed Items control and exact affected scope or failed identity in Scoped degraded state — Import Failure"
+commit_boundary = "Non-mutating: classified recovery review and owner handoff remain before any dedicated canonical or external commit."
+rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
+privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
+verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts.commands]]
+command_id = "CMD-OFFLINE-DEGRADED-LOCAL-HEALTH-IMPORT-FAILURE-002"
+label = "Review Partial Import"
+canonical_owner = "app.degraded.command-contract"
+preconditions = ["The command is allowlisted for this exact failure class and preserves accepted local input and truth", "The current failure classification revalidates the import source fingerprint and explicit completed, failed, and pending record identities"]
+destination = "the import owner’s completed, failed, and pending record review from Scoped degraded state — Import Failure"
+effect = "No durable mutation occurs and no Receipt is created; Review Partial Import is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: An import did not finish. Original input and completed local items remain identifiable."
+success_focus = "the updated classified status or first affected item after Review Partial Import in Scoped degraded state — Import Failure"
+failure_focus = "the Review Partial Import control and exact affected scope or failed identity in Scoped degraded state — Import Failure"
+commit_boundary = "Non-mutating: classified recovery review and owner handoff remain before any dedicated canonical or external commit."
+rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
+privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
+verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-LOCAL-STORE-DEGRADATION"
+requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Diagnostics => destination: the redacted local Diagnostics inspection from Scoped degraded state — Local Store Degradation; effect: No durable mutation occurs and no Receipt is created; Open Diagnostics is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Some saved local information cannot be read safely; affected content is isolated for recovery.; focus: the updated classified status or first affected item after Open Diagnostics in Scoped degraded state — Local Store Degradation."
+durable_effect = "Exact failure-class recovery consequences: Open Diagnostics: No durable mutation occurs and no Receipt is created; Open Diagnostics is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Some saved local information cannot be read safely; affected content is isolated for recovery. Existing local truth and accepted input remain available wherever safe; Offline Healthy exposes review only and no repair prompt. Current visible status: Some saved local information cannot be read safely; affected content is isolated for recovery."
+recovery_rollback = "Exact classified recovery and rollback: Open Diagnostics: No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged. No inline destructive reset exists. Reset routes only through You → Data & Storage → Review Reset with exact scope, irreversibility, verified export or backup when feasible, explicit confirmation, and a rollback reference. Recovery preserves: Some saved local information cannot be read safely; affected content is isolated for recovery."
+offline_behavior = "Readable Goals, Captures, Time, settings, accepted input, completed results, snapshots, History, and Receipts remain available offline wherever safe. Network and external operations wait without weakening local truth. Offline evidence remains: Some saved local information cannot be read safely; affected content is isolated for recovery."
+accessibility_focus = "VoiceOver announces failure class, affected scope, local consequence, safe recovery, and unchanged data before controls: Open Diagnostics announces failure class and consequence; success focuses the updated classified status or first affected item after Open Diagnostics in Scoped degraded state — Local Store Degradation; rejection focuses the Open Diagnostics control and exact affected scope or failed identity in Scoped degraded state — Local Store Degradation. Dynamic Type stacks status and actions without color dependence. The announcement first communicates: Some saved local information cannot be read safely; affected content is isolated for recovery."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-OFFLINE-DEGRADED-LOCAL-HEALTH-LOCAL-STORE-DEGRADATION-001"
+label = "Open Diagnostics"
+canonical_owner = "app.degraded.command-contract"
+preconditions = ["The command is allowlisted for this exact failure class and preserves accepted local input and truth", "The current failure classification revalidates the affected local-store scope, verified snapshot, quarantine identity, and repair evidence"]
+destination = "the redacted local Diagnostics inspection from Scoped degraded state — Local Store Degradation"
+effect = "No durable mutation occurs and no Receipt is created; Open Diagnostics is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Some saved local information cannot be read safely; affected content is isolated for recovery."
+success_focus = "the updated classified status or first affected item after Open Diagnostics in Scoped degraded state — Local Store Degradation"
+failure_focus = "the Open Diagnostics control and exact affected scope or failed identity in Scoped degraded state — Local Store Degradation"
+commit_boundary = "Non-mutating: classified recovery review and owner handoff remain before any dedicated canonical or external commit."
+rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
+privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
+verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-OFFLINE-HEALTHY"
+requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Review Details => destination: the affected-scope status and consequence details from Scoped degraded state — Offline Healthy; effect: No durable mutation occurs and no Receipt is created; Review Details is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Saved Goals, Captures, and time remain fully available without a connection.; focus: the updated classified status or first affected item after Review Details in Scoped degraded state — Offline Healthy."
+durable_effect = "Exact failure-class recovery consequences: Review Details: No durable mutation occurs and no Receipt is created; Review Details is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Saved Goals, Captures, and time remain fully available without a connection. Existing local truth and accepted input remain available wherever safe; Offline Healthy exposes review only and no repair prompt. Current visible status: Saved Goals, Captures, and time remain fully available without a connection."
+recovery_rollback = "Exact classified recovery and rollback: Review Details: No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged. No inline destructive reset exists. Reset routes only through You → Data & Storage → Review Reset with exact scope, irreversibility, verified export or backup when feasible, explicit confirmation, and a rollback reference. Recovery preserves: Saved Goals, Captures, and time remain fully available without a connection."
+offline_behavior = "Readable Goals, Captures, Time, settings, accepted input, completed results, snapshots, History, and Receipts remain available offline wherever safe. Network and external operations wait without weakening local truth. Offline evidence remains: Saved Goals, Captures, and time remain fully available without a connection."
+accessibility_focus = "VoiceOver announces failure class, affected scope, local consequence, safe recovery, and unchanged data before controls: Review Details announces failure class and consequence; success focuses the updated classified status or first affected item after Review Details in Scoped degraded state — Offline Healthy; rejection focuses the Review Details control and exact affected scope or failed identity in Scoped degraded state — Offline Healthy. Dynamic Type stacks status and actions without color dependence. The announcement first communicates: Saved Goals, Captures, and time remain fully available without a connection."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-OFFLINE-DEGRADED-LOCAL-HEALTH-OFFLINE-HEALTHY-001"
+label = "Review Details"
+canonical_owner = "app.degraded.command-contract"
+preconditions = ["The command is allowlisted for this exact failure class and preserves accepted local input and truth", "The current failure classification revalidates the classified health evidence, affected scope, current local revision, and safe local availability"]
+destination = "the affected-scope status and consequence details from Scoped degraded state — Offline Healthy"
+effect = "No durable mutation occurs and no Receipt is created; Review Details is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Saved Goals, Captures, and time remain fully available without a connection."
+success_focus = "the updated classified status or first affected item after Review Details in Scoped degraded state — Offline Healthy"
+failure_focus = "the Review Details control and exact affected scope or failed identity in Scoped degraded state — Offline Healthy"
+commit_boundary = "Non-mutating: classified recovery review and owner handoff remain before any dedicated canonical or external commit."
+rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
+privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
+verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-PARTIAL-OPERATION"
+requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Retry Failed Items => destination: the owning import review with explicit failed identities from Scoped degraded state — Partial Operation; effect: No durable mutation occurs and no Receipt is created; Retry Failed Items is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Only part of the requested work completed; finished and pending results remain distinct.; focus: the updated classified status or first affected item after Retry Failed Items in Scoped degraded state — Partial Operation.\nReview Partial Import => destination: the import owner’s completed, failed, and pending record review from Scoped degraded state — Partial Operation; effect: No durable mutation occurs and no Receipt is created; Review Partial Import is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Only part of the requested work completed; finished and pending results remain distinct.; focus: the updated classified status or first affected item after Review Partial Import in Scoped degraded state — Partial Operation."
+durable_effect = "Exact failure-class recovery consequences: Retry Failed Items: No durable mutation occurs and no Receipt is created; Retry Failed Items is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Only part of the requested work completed; finished and pending results remain distinct. | Review Partial Import: No durable mutation occurs and no Receipt is created; Review Partial Import is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Only part of the requested work completed; finished and pending results remain distinct. Existing local truth and accepted input remain available wherever safe; Offline Healthy exposes review only and no repair prompt. Current visible status: Only part of the requested work completed; finished and pending results remain distinct."
+recovery_rollback = "Exact classified recovery and rollback: Retry Failed Items: No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged. | Review Partial Import: No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged. No inline destructive reset exists. Reset routes only through You → Data & Storage → Review Reset with exact scope, irreversibility, verified export or backup when feasible, explicit confirmation, and a rollback reference. Recovery preserves: Only part of the requested work completed; finished and pending results remain distinct."
+offline_behavior = "Readable Goals, Captures, Time, settings, accepted input, completed results, snapshots, History, and Receipts remain available offline wherever safe. Network and external operations wait without weakening local truth. Offline evidence remains: Only part of the requested work completed; finished and pending results remain distinct."
+accessibility_focus = "VoiceOver announces failure class, affected scope, local consequence, safe recovery, and unchanged data before controls: Retry Failed Items announces failure class and consequence; success focuses the updated classified status or first affected item after Retry Failed Items in Scoped degraded state — Partial Operation; rejection focuses the Retry Failed Items control and exact affected scope or failed identity in Scoped degraded state — Partial Operation | Review Partial Import announces failure class and consequence; success focuses the updated classified status or first affected item after Review Partial Import in Scoped degraded state — Partial Operation; rejection focuses the Review Partial Import control and exact affected scope or failed identity in Scoped degraded state — Partial Operation. Dynamic Type stacks status and actions without color dependence. The announcement first communicates: Only part of the requested work completed; finished and pending results remain distinct."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-OFFLINE-DEGRADED-LOCAL-HEALTH-PARTIAL-OPERATION-001"
+label = "Retry Failed Items"
+canonical_owner = "app.degraded.command-contract"
+preconditions = ["The command is allowlisted for this exact failure class and preserves accepted local input and truth", "The current failure classification revalidates the import source fingerprint and explicit completed, failed, and pending record identities"]
+destination = "the owning import review with explicit failed identities from Scoped degraded state — Partial Operation"
+effect = "No durable mutation occurs and no Receipt is created; Retry Failed Items is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Only part of the requested work completed; finished and pending results remain distinct."
+success_focus = "the updated classified status or first affected item after Retry Failed Items in Scoped degraded state — Partial Operation"
+failure_focus = "the Retry Failed Items control and exact affected scope or failed identity in Scoped degraded state — Partial Operation"
+commit_boundary = "Non-mutating: classified recovery review and owner handoff remain before any dedicated canonical or external commit."
+rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
+privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
+verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts.commands]]
+command_id = "CMD-OFFLINE-DEGRADED-LOCAL-HEALTH-PARTIAL-OPERATION-002"
+label = "Review Partial Import"
+canonical_owner = "app.degraded.command-contract"
+preconditions = ["The command is allowlisted for this exact failure class and preserves accepted local input and truth", "The current failure classification revalidates the import source fingerprint and explicit completed, failed, and pending record identities"]
+destination = "the import owner’s completed, failed, and pending record review from Scoped degraded state — Partial Operation"
+effect = "No durable mutation occurs and no Receipt is created; Review Partial Import is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Only part of the requested work completed; finished and pending results remain distinct."
+success_focus = "the updated classified status or first affected item after Review Partial Import in Scoped degraded state — Partial Operation"
+failure_focus = "the Review Partial Import control and exact affected scope or failed identity in Scoped degraded state — Partial Operation"
+commit_boundary = "Non-mutating: classified recovery review and owner handoff remain before any dedicated canonical or external commit."
+rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
+privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
+verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-PROTECTED-DATA-UNAVAILABLE"
+requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Unlock and Retry => destination: the native device-protection result, then the exact protected operation from Scoped degraded state — Protected Data Unavailable; effect: The Unlock and Retry external result causes no local canonical mutation; native device protection reauthorizes access before the exact operation and current revision are revalidated. Rejection preserves protected local data unchanged. Visible evidence remains: Protected Data Unavailable — Protected local data is unavailable until device protection permits access.; focus: the updated classified status or first affected item after Unlock and Retry in Scoped degraded state — Protected Data Unavailable."
+durable_effect = "Exact failure-class recovery consequences: Unlock and Retry: The Unlock and Retry external result causes no local canonical mutation; native device protection reauthorizes access before the exact operation and current revision are revalidated. Rejection preserves protected local data unchanged. Visible evidence remains: Protected Data Unavailable — Protected local data is unavailable until device protection permits access. Existing local truth and accepted input remain available wherever safe; Offline Healthy exposes review only and no repair prompt. Current visible status: Protected Data Unavailable — Protected local data is unavailable until device protection permits access."
+recovery_rollback = "Exact classified recovery and rollback: Unlock and Retry: Cancellation or failed authentication changes nothing, reveals no protected content, and returns focus to Unlock and Retry. No inline destructive reset exists. Reset routes only through You → Data & Storage → Review Reset with exact scope, irreversibility, verified export or backup when feasible, explicit confirmation, and a rollback reference. Recovery preserves: Protected Data Unavailable — Protected local data is unavailable until device protection permits access."
+offline_behavior = "Readable Goals, Captures, Time, settings, accepted input, completed results, snapshots, History, and Receipts remain available offline wherever safe. Network and external operations wait without weakening local truth. Offline evidence remains: Protected Data Unavailable — Protected local data is unavailable until device protection permits access."
+accessibility_focus = "VoiceOver announces failure class, affected scope, local consequence, safe recovery, and unchanged data before controls: Unlock and Retry announces failure class and consequence; success focuses the updated classified status or first affected item after Unlock and Retry in Scoped degraded state — Protected Data Unavailable; rejection focuses the Unlock and Retry control and exact affected scope or failed identity in Scoped degraded state — Protected Data Unavailable. Dynamic Type stacks status and actions without color dependence. The announcement first communicates: Protected Data Unavailable — Protected local data is unavailable until device protection permits access."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-OFFLINE-DEGRADED-LOCAL-HEALTH-PROTECTED-DATA-UNAVAILABLE-001"
+label = "Unlock and Retry"
+canonical_owner = "app.degraded.command-contract"
+preconditions = ["The command is allowlisted for this exact failure class and preserves accepted local input and truth", "The current failure classification revalidates the device-protection posture, protected scope, and unchanged last readable local state", "The user explicitly invokes the native device-protection challenge"]
+destination = "the native device-protection result, then the exact protected operation from Scoped degraded state — Protected Data Unavailable"
+effect = "The Unlock and Retry external result causes no local canonical mutation; native device protection reauthorizes access before the exact operation and current revision are revalidated. Rejection preserves protected local data unchanged. Visible evidence remains: Protected Data Unavailable — Protected local data is unavailable until device protection permits access."
+success_focus = "the updated classified status or first affected item after Unlock and Retry in Scoped degraded state — Protected Data Unavailable"
+failure_focus = "the Unlock and Retry control and exact affected scope or failed identity in Scoped degraded state — Protected Data Unavailable"
+commit_boundary = "External-result: authentication itself is not canonical success; any later owner operation revalidates independently."
+rollback_undo = "Cancellation or failed authentication changes nothing, reveals no protected content, and returns focus to Unlock and Retry."
+privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
+verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-STALE-EXTERNAL-SOURCE"
+requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Refresh Source => destination: the source-owner freshness comparison from Scoped degraded state — Stale External Source; effect: The Refresh Source external result causes no local canonical mutation; it obtains a new source fingerprint for owner review while the last verified local facts remain usable. A changed source cannot silently overwrite local truth. Visible evidence remains: Stale External Source — An external source is stale while verified local facts remain usable.; focus: the updated classified status or first affected item after Refresh Source in Scoped degraded state — Stale External Source.\nReview Source => destination: the Trust source lineage and freshness inspection from Scoped degraded state — Stale External Source; effect: No durable mutation occurs and no Receipt is created; Review Source is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Stale External Source — An external source is stale while verified local facts remain usable.; focus: the updated classified status or first affected item after Review Source in Scoped degraded state — Stale External Source."
+durable_effect = "Exact failure-class recovery consequences: Refresh Source: The Refresh Source external result causes no local canonical mutation; it obtains a new source fingerprint for owner review while the last verified local facts remain usable. A changed source cannot silently overwrite local truth. Visible evidence remains: Stale External Source — An external source is stale while verified local facts remain usable. | Review Source: No durable mutation occurs and no Receipt is created; Review Source is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Stale External Source — An external source is stale while verified local facts remain usable. Existing local truth and accepted input remain available wherever safe; Offline Healthy exposes review only and no repair prompt. Current visible status: Stale External Source — An external source is stale while verified local facts remain usable."
+recovery_rollback = "Exact classified recovery and rollback: Refresh Source: Cancellation or source failure preserves the last verified local facts and stale marker; another refresh cannot replay an accepted local Event. | Review Source: No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged. No inline destructive reset exists. Reset routes only through You → Data & Storage → Review Reset with exact scope, irreversibility, verified export or backup when feasible, explicit confirmation, and a rollback reference. Recovery preserves: Stale External Source — An external source is stale while verified local facts remain usable."
+offline_behavior = "Readable Goals, Captures, Time, settings, accepted input, completed results, snapshots, History, and Receipts remain available offline wherever safe. Network and external operations wait without weakening local truth. Offline evidence remains: Stale External Source — An external source is stale while verified local facts remain usable."
+accessibility_focus = "VoiceOver announces failure class, affected scope, local consequence, safe recovery, and unchanged data before controls: Refresh Source announces failure class and consequence; success focuses the updated classified status or first affected item after Refresh Source in Scoped degraded state — Stale External Source; rejection focuses the Refresh Source control and exact affected scope or failed identity in Scoped degraded state — Stale External Source | Review Source announces failure class and consequence; success focuses the updated classified status or first affected item after Review Source in Scoped degraded state — Stale External Source; rejection focuses the Review Source control and exact affected scope or failed identity in Scoped degraded state — Stale External Source. Dynamic Type stacks status and actions without color dependence. The announcement first communicates: Stale External Source — An external source is stale while verified local facts remain usable."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-OFFLINE-DEGRADED-LOCAL-HEALTH-STALE-EXTERNAL-SOURCE-001"
+label = "Refresh Source"
+canonical_owner = "app.degraded.command-contract"
+preconditions = ["The command is allowlisted for this exact failure class and preserves accepted local input and truth", "The current failure classification revalidates the external source identity, last verified fingerprint, freshness, and locally accepted facts", "The source adapter can re-read only minimum necessary facts without mutating canonical state"]
+destination = "the source-owner freshness comparison from Scoped degraded state — Stale External Source"
+effect = "The Refresh Source external result causes no local canonical mutation; it obtains a new source fingerprint for owner review while the last verified local facts remain usable. A changed source cannot silently overwrite local truth. Visible evidence remains: Stale External Source — An external source is stale while verified local facts remain usable."
+success_focus = "the updated classified status or first affected item after Refresh Source in Scoped degraded state — Stale External Source"
+failure_focus = "the Refresh Source control and exact affected scope or failed identity in Scoped degraded state — Stale External Source"
+commit_boundary = "External-result: source refresh produces external facts only; any later accepted local lineage or object change belongs to a separate owner command."
+rollback_undo = "Cancellation or source failure preserves the last verified local facts and stale marker; another refresh cannot replay an accepted local Event."
+privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
+verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts.commands]]
+command_id = "CMD-OFFLINE-DEGRADED-LOCAL-HEALTH-STALE-EXTERNAL-SOURCE-002"
+label = "Review Source"
+canonical_owner = "app.degraded.command-contract"
+preconditions = ["The command is allowlisted for this exact failure class and preserves accepted local input and truth", "The current failure classification revalidates the external source identity, last verified fingerprint, freshness, and locally accepted facts"]
+destination = "the Trust source lineage and freshness inspection from Scoped degraded state — Stale External Source"
+effect = "No durable mutation occurs and no Receipt is created; Review Source is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Stale External Source — An external source is stale while verified local facts remain usable."
+success_focus = "the updated classified status or first affected item after Review Source in Scoped degraded state — Stale External Source"
+failure_focus = "the Review Source control and exact affected scope or failed identity in Scoped degraded state — Stale External Source"
+commit_boundary = "Non-mutating: classified recovery review and owner handoff remain before any dedicated canonical or external commit."
+rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
+privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
+verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-STORAGE-PRESSURE"
+requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Export Data => destination: the dedicated reviewed export preview from Scoped degraded state — Storage Pressure; effect: No durable mutation occurs and no Receipt is created; Export Data is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Storage space is low enough to threaten new saves. Existing readable information remains unchanged.; focus: the updated classified status or first affected item after Export Data in Scoped degraded state — Storage Pressure.\nReview Storage => destination: You → Data & Storage with safe capacity options from Scoped degraded state — Storage Pressure; effect: No durable mutation occurs and no Receipt is created; Review Storage is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Storage space is low enough to threaten new saves. Existing readable information remains unchanged.; focus: the updated classified status or first affected item after Review Storage in Scoped degraded state — Storage Pressure."
+durable_effect = "Exact failure-class recovery consequences: Export Data: No durable mutation occurs and no Receipt is created; Export Data is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Storage space is low enough to threaten new saves. Existing readable information remains unchanged. | Review Storage: No durable mutation occurs and no Receipt is created; Review Storage is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Storage space is low enough to threaten new saves. Existing readable information remains unchanged. Existing local truth and accepted input remain available wherever safe; Offline Healthy exposes review only and no repair prompt. Current visible status: Storage space is low enough to threaten new saves. Existing readable information remains unchanged."
+recovery_rollback = "Exact classified recovery and rollback: Export Data: No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged. | Review Storage: No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged. No inline destructive reset exists. Reset routes only through You → Data & Storage → Review Reset with exact scope, irreversibility, verified export or backup when feasible, explicit confirmation, and a rollback reference. Recovery preserves: Storage space is low enough to threaten new saves. Existing readable information remains unchanged."
+offline_behavior = "Readable Goals, Captures, Time, settings, accepted input, completed results, snapshots, History, and Receipts remain available offline wherever safe. Network and external operations wait without weakening local truth. Offline evidence remains: Storage space is low enough to threaten new saves. Existing readable information remains unchanged."
+accessibility_focus = "VoiceOver announces failure class, affected scope, local consequence, safe recovery, and unchanged data before controls: Export Data announces failure class and consequence; success focuses the updated classified status or first affected item after Export Data in Scoped degraded state — Storage Pressure; rejection focuses the Export Data control and exact affected scope or failed identity in Scoped degraded state — Storage Pressure | Review Storage announces failure class and consequence; success focuses the updated classified status or first affected item after Review Storage in Scoped degraded state — Storage Pressure; rejection focuses the Review Storage control and exact affected scope or failed identity in Scoped degraded state — Storage Pressure. Dynamic Type stacks status and actions without color dependence. The announcement first communicates: Storage space is low enough to threaten new saves. Existing readable information remains unchanged."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-OFFLINE-DEGRADED-LOCAL-HEALTH-STORAGE-PRESSURE-001"
+label = "Export Data"
+canonical_owner = "app.degraded.command-contract"
+preconditions = ["The command is allowlisted for this exact failure class and preserves accepted local input and truth", "The current failure classification revalidates the current storage threshold, readable local scope, and safe export eligibility"]
+destination = "the dedicated reviewed export preview from Scoped degraded state — Storage Pressure"
+effect = "No durable mutation occurs and no Receipt is created; Export Data is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Storage space is low enough to threaten new saves. Existing readable information remains unchanged."
+success_focus = "the updated classified status or first affected item after Export Data in Scoped degraded state — Storage Pressure"
+failure_focus = "the Export Data control and exact affected scope or failed identity in Scoped degraded state — Storage Pressure"
+commit_boundary = "Non-mutating: classified recovery review and owner handoff remain before any dedicated canonical or external commit."
+rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
+privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
+verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts.commands]]
+command_id = "CMD-OFFLINE-DEGRADED-LOCAL-HEALTH-STORAGE-PRESSURE-002"
+label = "Review Storage"
+canonical_owner = "app.degraded.command-contract"
+preconditions = ["The command is allowlisted for this exact failure class and preserves accepted local input and truth", "The current failure classification revalidates the current storage threshold, readable local scope, and safe export eligibility"]
+destination = "You → Data & Storage with safe capacity options from Scoped degraded state — Storage Pressure"
+effect = "No durable mutation occurs and no Receipt is created; Review Storage is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Storage space is low enough to threaten new saves. Existing readable information remains unchanged."
+success_focus = "the updated classified status or first affected item after Review Storage in Scoped degraded state — Storage Pressure"
+failure_focus = "the Review Storage control and exact affected scope or failed identity in Scoped degraded state — Storage Pressure"
+commit_boundary = "Non-mutating: classified recovery review and owner handoff remain before any dedicated canonical or external commit."
+rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
+privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
+verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-LOCAL-HEALTH-UNAVAILABLE-PERMISSION"
+requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Settings => destination: the relevant Ambitions permission control in iOS Settings from Scoped degraded state — Unavailable Permission; effect: The Open Settings external result causes no local canonical mutation; system authorization remains externally owned and foreground return must re-read the actual status. Unaffected local work remains usable. Visible evidence remains: A permission is unavailable; unaffected local work remains usable.; focus: the updated classified status or first affected item after Open Settings in Scoped degraded state — Unavailable Permission.\nReview Access => destination: the contextual permission status and local fallback from Scoped degraded state — Unavailable Permission; effect: No durable mutation occurs and no Receipt is created; Review Access is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: A permission is unavailable; unaffected local work remains usable.; focus: the updated classified status or first affected item after Review Access in Scoped degraded state — Unavailable Permission."
+durable_effect = "Exact failure-class recovery consequences: Open Settings: The Open Settings external result causes no local canonical mutation; system authorization remains externally owned and foreground return must re-read the actual status. Unaffected local work remains usable. Visible evidence remains: A permission is unavailable; unaffected local work remains usable. | Review Access: No durable mutation occurs and no Receipt is created; Review Access is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: A permission is unavailable; unaffected local work remains usable. Existing local truth and accepted input remain available wherever safe; Offline Healthy exposes review only and no repair prompt. Current visible status: A permission is unavailable; unaffected local work remains usable."
+recovery_rollback = "Exact classified recovery and rollback: Open Settings: Cancellation or unchanged permission preserves the prior status and local data; no repeated prompt is triggered automatically. | Review Access: No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged. No inline destructive reset exists. Reset routes only through You → Data & Storage → Review Reset with exact scope, irreversibility, verified export or backup when feasible, explicit confirmation, and a rollback reference. Recovery preserves: A permission is unavailable; unaffected local work remains usable."
+offline_behavior = "Readable Goals, Captures, Time, settings, accepted input, completed results, snapshots, History, and Receipts remain available offline wherever safe. Network and external operations wait without weakening local truth. Offline evidence remains: A permission is unavailable; unaffected local work remains usable."
+accessibility_focus = "VoiceOver announces failure class, affected scope, local consequence, safe recovery, and unchanged data before controls: Open Settings announces failure class and consequence; success focuses the updated classified status or first affected item after Open Settings in Scoped degraded state — Unavailable Permission; rejection focuses the Open Settings control and exact affected scope or failed identity in Scoped degraded state — Unavailable Permission | Review Access announces failure class and consequence; success focuses the updated classified status or first affected item after Review Access in Scoped degraded state — Unavailable Permission; rejection focuses the Review Access control and exact affected scope or failed identity in Scoped degraded state — Unavailable Permission. Dynamic Type stacks status and actions without color dependence. The announcement first communicates: A permission is unavailable; unaffected local work remains usable."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-OFFLINE-DEGRADED-LOCAL-HEALTH-UNAVAILABLE-PERMISSION-001"
+label = "Open Settings"
+canonical_owner = "app.degraded.command-contract"
+preconditions = ["The command is allowlisted for this exact failure class and preserves accepted local input and truth", "The current failure classification revalidates the current system authorization, prior known status, and unaffected local capability"]
+destination = "the relevant Ambitions permission control in iOS Settings from Scoped degraded state — Unavailable Permission"
+effect = "The Open Settings external result causes no local canonical mutation; system authorization remains externally owned and foreground return must re-read the actual status. Unaffected local work remains usable. Visible evidence remains: A permission is unavailable; unaffected local work remains usable."
+success_focus = "the updated classified status or first affected item after Open Settings in Scoped degraded state — Unavailable Permission"
+failure_focus = "the Open Settings control and exact affected scope or failed identity in Scoped degraded state — Unavailable Permission"
+commit_boundary = "External-result: Settings owns authorization; return reconciliation is separate and cannot infer consent or replay a rejected action."
+rollback_undo = "Cancellation or unchanged permission preserves the prior status and local data; no repeated prompt is triggered automatically."
+privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
+verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts.commands]]
+command_id = "CMD-OFFLINE-DEGRADED-LOCAL-HEALTH-UNAVAILABLE-PERMISSION-002"
+label = "Review Access"
+canonical_owner = "app.degraded.command-contract"
+preconditions = ["The command is allowlisted for this exact failure class and preserves accepted local input and truth", "The current failure classification revalidates the current system authorization, prior known status, and unaffected local capability"]
+destination = "the contextual permission status and local fallback from Scoped degraded state — Unavailable Permission"
+effect = "No durable mutation occurs and no Receipt is created; Review Access is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: A permission is unavailable; unaffected local work remains usable."
+success_focus = "the updated classified status or first affected item after Review Access in Scoped degraded state — Unavailable Permission"
+failure_focus = "the Review Access control and exact affected scope or failed identity in Scoped degraded state — Unavailable Permission"
+commit_boundary = "Non-mutating: classified recovery review and owner handoff remain before any dedicated canonical or external commit."
+rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
+privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
+verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-REPAIR-EXPORT-ONLY"
+requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Export Data => destination: the dedicated reviewed export preview from Recovery and repair — Export Only; effect: No durable mutation occurs and no Receipt is created; Export Data is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Automatic repair is unsafe. Saved information remains unchanged, and the affected scope is available as a redacted record.; focus: the updated classified status or first affected item after Export Data in Recovery and repair — Export Only."
+durable_effect = "Exact failure-class recovery consequences: Export Data: No durable mutation occurs and no Receipt is created; Export Data is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Automatic repair is unsafe. Saved information remains unchanged, and the affected scope is available as a redacted record. Existing local truth and accepted input remain available wherever safe; Offline Healthy exposes review only and no repair prompt. Current visible status: Automatic repair is unsafe. Saved information remains unchanged, and the affected scope is available as a redacted record."
+recovery_rollback = "Exact classified recovery and rollback: Export Data: No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged. No inline destructive reset exists. Reset routes only through You → Data & Storage → Review Reset with exact scope, irreversibility, verified export or backup when feasible, explicit confirmation, and a rollback reference. Recovery preserves: Automatic repair is unsafe. Saved information remains unchanged, and the affected scope is available as a redacted record."
+offline_behavior = "Readable Goals, Captures, Time, settings, accepted input, completed results, snapshots, History, and Receipts remain available offline wherever safe. Network and external operations wait without weakening local truth. Offline evidence remains: Automatic repair is unsafe. Saved information remains unchanged, and the affected scope is available as a redacted record."
+accessibility_focus = "VoiceOver announces failure class, affected scope, local consequence, safe recovery, and unchanged data before controls: Export Data announces failure class and consequence; success focuses the updated classified status or first affected item after Export Data in Recovery and repair — Export Only; rejection focuses the Export Data control and exact affected scope or failed identity in Recovery and repair — Export Only. Dynamic Type stacks status and actions without color dependence. The announcement first communicates: Automatic repair is unsafe. Saved information remains unchanged, and the affected scope is available as a redacted record."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-OFFLINE-DEGRADED-REPAIR-EXPORT-ONLY-001"
+label = "Export Data"
+canonical_owner = "app.degraded.command-contract"
+preconditions = ["The command is allowlisted for this exact failure class and preserves accepted local input and truth", "The current failure classification revalidates the affected local-store scope, verified snapshot, quarantine identity, and repair evidence"]
+destination = "the dedicated reviewed export preview from Recovery and repair — Export Only"
+effect = "No durable mutation occurs and no Receipt is created; Export Data is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Automatic repair is unsafe. Saved information remains unchanged, and the affected scope is available as a redacted record."
+success_focus = "the updated classified status or first affected item after Export Data in Recovery and repair — Export Only"
+failure_focus = "the Export Data control and exact affected scope or failed identity in Recovery and repair — Export Only"
+commit_boundary = "Non-mutating: classified recovery review and owner handoff remain before any dedicated canonical or external commit."
+rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
+privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
+verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-REPAIR-QUARANTINE-INSPECTION"
+requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Review Details => destination: the affected-scope status and consequence details from Recovery and repair — Quarantine Inspection; effect: No durable mutation occurs and no Receipt is created; Review Details is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Protected information is isolated. Saved information outside the affected area remains unchanged.; focus: the updated classified status or first affected item after Review Details in Recovery and repair — Quarantine Inspection."
+durable_effect = "Exact failure-class recovery consequences: Review Details: No durable mutation occurs and no Receipt is created; Review Details is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Protected information is isolated. Saved information outside the affected area remains unchanged. Existing local truth and accepted input remain available wherever safe; Offline Healthy exposes review only and no repair prompt. Current visible status: Protected information is isolated. Saved information outside the affected area remains unchanged."
+recovery_rollback = "Exact classified recovery and rollback: Review Details: No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged. No inline destructive reset exists. Reset routes only through You → Data & Storage → Review Reset with exact scope, irreversibility, verified export or backup when feasible, explicit confirmation, and a rollback reference. Recovery preserves: Protected information is isolated. Saved information outside the affected area remains unchanged."
+offline_behavior = "Readable Goals, Captures, Time, settings, accepted input, completed results, snapshots, History, and Receipts remain available offline wherever safe. Network and external operations wait without weakening local truth. Offline evidence remains: Protected information is isolated. Saved information outside the affected area remains unchanged."
+accessibility_focus = "VoiceOver announces failure class, affected scope, local consequence, safe recovery, and unchanged data before controls: Review Details announces failure class and consequence; success focuses the updated classified status or first affected item after Review Details in Recovery and repair — Quarantine Inspection; rejection focuses the Review Details control and exact affected scope or failed identity in Recovery and repair — Quarantine Inspection. Dynamic Type stacks status and actions without color dependence. The announcement first communicates: Protected information is isolated. Saved information outside the affected area remains unchanged."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-OFFLINE-DEGRADED-REPAIR-QUARANTINE-INSPECTION-001"
+label = "Review Details"
+canonical_owner = "app.degraded.command-contract"
+preconditions = ["The command is allowlisted for this exact failure class and preserves accepted local input and truth", "The current failure classification revalidates the affected local-store scope, verified snapshot, quarantine identity, and repair evidence"]
+destination = "the affected-scope status and consequence details from Recovery and repair — Quarantine Inspection"
+effect = "No durable mutation occurs and no Receipt is created; Review Details is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Protected information is isolated. Saved information outside the affected area remains unchanged."
+success_focus = "the updated classified status or first affected item after Review Details in Recovery and repair — Quarantine Inspection"
+failure_focus = "the Review Details control and exact affected scope or failed identity in Recovery and repair — Quarantine Inspection"
+commit_boundary = "Non-mutating: classified recovery review and owner handoff remain before any dedicated canonical or external commit."
+rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
+privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
+verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-REPAIR-REPAIR-AVAILABLE"
+requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Review Details => destination: the affected-scope status and consequence details from Recovery and repair — Repair Available; effect: No durable mutation occurs and no Receipt is created; Review Details is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: A limited data issue is isolated within a verified snapshot. The last valid saved copy remains protected.; focus: the updated classified status or first affected item after Review Details in Recovery and repair — Repair Available."
+durable_effect = "Exact failure-class recovery consequences: Review Details: No durable mutation occurs and no Receipt is created; Review Details is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: A limited data issue is isolated within a verified snapshot. The last valid saved copy remains protected. Existing local truth and accepted input remain available wherever safe; Offline Healthy exposes review only and no repair prompt. Current visible status: A limited data issue is isolated within a verified snapshot. The last valid saved copy remains protected."
+recovery_rollback = "Exact classified recovery and rollback: Review Details: No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged. No inline destructive reset exists. Reset routes only through You → Data & Storage → Review Reset with exact scope, irreversibility, verified export or backup when feasible, explicit confirmation, and a rollback reference. Recovery preserves: A limited data issue is isolated within a verified snapshot. The last valid saved copy remains protected."
+offline_behavior = "Readable Goals, Captures, Time, settings, accepted input, completed results, snapshots, History, and Receipts remain available offline wherever safe. Network and external operations wait without weakening local truth. Offline evidence remains: A limited data issue is isolated within a verified snapshot. The last valid saved copy remains protected."
+accessibility_focus = "VoiceOver announces failure class, affected scope, local consequence, safe recovery, and unchanged data before controls: Review Details announces failure class and consequence; success focuses the updated classified status or first affected item after Review Details in Recovery and repair — Repair Available; rejection focuses the Review Details control and exact affected scope or failed identity in Recovery and repair — Repair Available. Dynamic Type stacks status and actions without color dependence. The announcement first communicates: A limited data issue is isolated within a verified snapshot. The last valid saved copy remains protected."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-OFFLINE-DEGRADED-REPAIR-REPAIR-AVAILABLE-001"
+label = "Review Details"
+canonical_owner = "app.degraded.command-contract"
+preconditions = ["The command is allowlisted for this exact failure class and preserves accepted local input and truth", "The current failure classification revalidates the affected local-store scope, verified snapshot, quarantine identity, and repair evidence"]
+destination = "the affected-scope status and consequence details from Recovery and repair — Repair Available"
+effect = "No durable mutation occurs and no Receipt is created; Review Details is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: A limited data issue is isolated within a verified snapshot. The last valid saved copy remains protected."
+success_focus = "the updated classified status or first affected item after Review Details in Recovery and repair — Repair Available"
+failure_focus = "the Review Details control and exact affected scope or failed identity in Recovery and repair — Repair Available"
+commit_boundary = "Non-mutating: classified recovery review and owner handoff remain before any dedicated canonical or external commit."
+rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
+privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
+verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-REPAIR-REPAIR-COMPLETE"
+requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Review Details => destination: the affected-scope status and consequence details from Recovery and repair — Repair Complete; effect: No durable mutation occurs and no Receipt is created; Review Details is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Repair Complete — Repair completed and the receipt names corrected and unchanged data.; focus: the updated classified status or first affected item after Review Details in Recovery and repair — Repair Complete."
+durable_effect = "Exact failure-class recovery consequences: Review Details: No durable mutation occurs and no Receipt is created; Review Details is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Repair Complete — Repair completed and the receipt names corrected and unchanged data. Existing local truth and accepted input remain available wherever safe; Offline Healthy exposes review only and no repair prompt. Current visible status: Repair Complete — Repair completed and the receipt names corrected and unchanged data."
+recovery_rollback = "Exact classified recovery and rollback: Review Details: No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged. No inline destructive reset exists. Reset routes only through You → Data & Storage → Review Reset with exact scope, irreversibility, verified export or backup when feasible, explicit confirmation, and a rollback reference. Recovery preserves: Repair Complete — Repair completed and the receipt names corrected and unchanged data."
+offline_behavior = "Readable Goals, Captures, Time, settings, accepted input, completed results, snapshots, History, and Receipts remain available offline wherever safe. Network and external operations wait without weakening local truth. Offline evidence remains: Repair Complete — Repair completed and the receipt names corrected and unchanged data."
+accessibility_focus = "VoiceOver announces failure class, affected scope, local consequence, safe recovery, and unchanged data before controls: Review Details announces failure class and consequence; success focuses the updated classified status or first affected item after Review Details in Recovery and repair — Repair Complete; rejection focuses the Review Details control and exact affected scope or failed identity in Recovery and repair — Repair Complete. Dynamic Type stacks status and actions without color dependence. The announcement first communicates: Repair Complete — Repair completed and the receipt names corrected and unchanged data."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-OFFLINE-DEGRADED-REPAIR-REPAIR-COMPLETE-001"
+label = "Review Details"
+canonical_owner = "app.degraded.command-contract"
+preconditions = ["The command is allowlisted for this exact failure class and preserves accepted local input and truth", "The current failure classification revalidates the affected local-store scope, verified snapshot, quarantine identity, and repair evidence"]
+destination = "the affected-scope status and consequence details from Recovery and repair — Repair Complete"
+effect = "No durable mutation occurs and no Receipt is created; Review Details is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Repair Complete — Repair completed and the receipt names corrected and unchanged data."
+success_focus = "the updated classified status or first affected item after Review Details in Recovery and repair — Repair Complete"
+failure_focus = "the Review Details control and exact affected scope or failed identity in Recovery and repair — Repair Complete"
+commit_boundary = "Non-mutating: classified recovery review and owner handoff remain before any dedicated canonical or external commit."
+rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
+privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
+verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-REPAIR-REPAIR-FAILED"
+requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Diagnostics => destination: the redacted local Diagnostics inspection from Recovery and repair — Repair Failed; effect: No durable mutation occurs and no Receipt is created; Open Diagnostics is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Repair Failed — Repair failed without replacing the last valid local snapshot.; focus: the updated classified status or first affected item after Open Diagnostics in Recovery and repair — Repair Failed."
+durable_effect = "Exact failure-class recovery consequences: Open Diagnostics: No durable mutation occurs and no Receipt is created; Open Diagnostics is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Repair Failed — Repair failed without replacing the last valid local snapshot. Existing local truth and accepted input remain available wherever safe; Offline Healthy exposes review only and no repair prompt. Current visible status: Repair Failed — Repair failed without replacing the last valid local snapshot."
+recovery_rollback = "Exact classified recovery and rollback: Open Diagnostics: No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged. No inline destructive reset exists. Reset routes only through You → Data & Storage → Review Reset with exact scope, irreversibility, verified export or backup when feasible, explicit confirmation, and a rollback reference. Recovery preserves: Repair Failed — Repair failed without replacing the last valid local snapshot."
+offline_behavior = "Readable Goals, Captures, Time, settings, accepted input, completed results, snapshots, History, and Receipts remain available offline wherever safe. Network and external operations wait without weakening local truth. Offline evidence remains: Repair Failed — Repair failed without replacing the last valid local snapshot."
+accessibility_focus = "VoiceOver announces failure class, affected scope, local consequence, safe recovery, and unchanged data before controls: Open Diagnostics announces failure class and consequence; success focuses the updated classified status or first affected item after Open Diagnostics in Recovery and repair — Repair Failed; rejection focuses the Open Diagnostics control and exact affected scope or failed identity in Recovery and repair — Repair Failed. Dynamic Type stacks status and actions without color dependence. The announcement first communicates: Repair Failed — Repair failed without replacing the last valid local snapshot."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-OFFLINE-DEGRADED-REPAIR-REPAIR-FAILED-001"
+label = "Open Diagnostics"
+canonical_owner = "app.degraded.command-contract"
+preconditions = ["The command is allowlisted for this exact failure class and preserves accepted local input and truth", "The current failure classification revalidates the affected local-store scope, verified snapshot, quarantine identity, and repair evidence"]
+destination = "the redacted local Diagnostics inspection from Recovery and repair — Repair Failed"
+effect = "No durable mutation occurs and no Receipt is created; Open Diagnostics is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: Repair Failed — Repair failed without replacing the last valid local snapshot."
+success_focus = "the updated classified status or first affected item after Open Diagnostics in Recovery and repair — Repair Failed"
+failure_focus = "the Open Diagnostics control and exact affected scope or failed identity in Recovery and repair — Repair Failed"
+commit_boundary = "Non-mutating: classified recovery review and owner handoff remain before any dedicated canonical or external commit."
+rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
+privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
+verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-OFFLINE-DEGRADED-REPAIR-REPAIR-RUNNING"
+requirement_id = "APP-DEGRADED-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Review Details => destination: the affected-scope status and consequence details from Recovery and repair — Repair Running; effect: No durable mutation occurs and no Receipt is created; Review Details is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: A limited repair is in progress against a verified snapshot. The last valid saved copy remains protected.; focus: the updated classified status or first affected item after Review Details in Recovery and repair — Repair Running."
+durable_effect = "Exact failure-class recovery consequences: Review Details: No durable mutation occurs and no Receipt is created; Review Details is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: A limited repair is in progress against a verified snapshot. The last valid saved copy remains protected. Existing local truth and accepted input remain available wherever safe; Offline Healthy exposes review only and no repair prompt. Current visible status: A limited repair is in progress against a verified snapshot. The last valid saved copy remains protected."
+recovery_rollback = "Exact classified recovery and rollback: Review Details: No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged. No inline destructive reset exists. Reset routes only through You → Data & Storage → Review Reset with exact scope, irreversibility, verified export or backup when feasible, explicit confirmation, and a rollback reference. Recovery preserves: A limited repair is in progress against a verified snapshot. The last valid saved copy remains protected."
+offline_behavior = "Readable Goals, Captures, Time, settings, accepted input, completed results, snapshots, History, and Receipts remain available offline wherever safe. Network and external operations wait without weakening local truth. Offline evidence remains: A limited repair is in progress against a verified snapshot. The last valid saved copy remains protected."
+accessibility_focus = "VoiceOver announces failure class, affected scope, local consequence, safe recovery, and unchanged data before controls: Review Details announces failure class and consequence; success focuses the updated classified status or first affected item after Review Details in Recovery and repair — Repair Running; rejection focuses the Review Details control and exact affected scope or failed identity in Recovery and repair — Repair Running. Dynamic Type stacks status and actions without color dependence. The announcement first communicates: A limited repair is in progress against a verified snapshot. The last valid saved copy remains protected."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-OFFLINE-DEGRADED-REPAIR-REPAIR-RUNNING-001"
+label = "Review Details"
+canonical_owner = "app.degraded.command-contract"
+preconditions = ["The command is allowlisted for this exact failure class and preserves accepted local input and truth", "The current failure classification revalidates the affected local-store scope, verified snapshot, quarantine identity, and repair evidence"]
+destination = "the affected-scope status and consequence details from Recovery and repair — Repair Running"
+effect = "No durable mutation occurs and no Receipt is created; Review Details is inspection, preview, or a handoff to the dedicated owner. It performs no inline repair, retry commit, export creation, destructive reset, source overwrite, or continuity operation. Visible evidence remains: A limited repair is in progress against a verified snapshot. The last valid saved copy remains protected."
+success_focus = "the updated classified status or first affected item after Review Details in Recovery and repair — Repair Running"
+failure_focus = "the Review Details control and exact affected scope or failed identity in Recovery and repair — Repair Running"
+commit_boundary = "Non-mutating: classified recovery review and owner handoff remain before any dedicated canonical or external commit."
+rollback_undo = "No Undo is required; dismissal returns to the classified state with accepted local truth, input, snapshots, and explicit failed identities unchanged."
+privacy_egress = "Degraded presentation remains local and reveals only the affected scope and safe consequence; external retry, source refresh, Settings, export, and diagnostics use their dedicated privacy boundaries."
+verification_ids = ["SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001"]
 +++
 
 # App Degraded States
@@ -99,6 +592,33 @@ Controls MUST NOT report success before durable mutation.
 - **Supersedes:** none
 
 Each degraded state MUST carry the affected capability or object scope, failure class, local-authority health, freshness, retry safety, available recovery actions, and whether user attention is required. Resolution clears only the affected degraded state after current facts are re-read; it does not discard unresolved history, receipt, conflict, or repair evidence.
+
+## APP-DEGRADED-COMMAND-CONTRACT-001 — Degraded commands match classified failure consequences
+
+- **Concept:** `app.degraded.command-contract`
+- **Modality:** `MUST`
+- **Scope:** Offline health, stale sources, continuity, external writes, imports, permissions, protected data, storage, local-store degradation, repair handoff, focus, offline preservation, and reset routing
+- **Status:** `normative`
+- **Verification:** `SCENARIO-APP-DEGRADED-COMMAND-CONTRACT-001`
+- **Supersedes:** none
+
+Degraded presentation MUST expose only recovery appropriate to the classified failure:
+
+- Offline but locally healthy → optional `Review Details`; no repair prompt.
+- Stale external source → `Refresh Source`, `Review Source`.
+- Continuity pending/conflict → future-gated `Review Continuity Status` or `Review Conflict`.
+- External-write failure → `Retry External Update`, `Review Details`.
+- Import failure/partial import → `Review Partial Import`, `Retry Failed Items`.
+- Permission unavailable → `Review Access`, `Open Settings`.
+- Protected data unavailable → `Unlock and Retry`.
+- Storage pressure → `Review Storage`, `Export Data` when safe.
+- Local-store degradation → `Open Diagnostics`.
+- Unknown health → `Open Diagnostics`; no blind retry.
+
+No inline degraded state may perform destructive reset. Reset MUST route through `You → Data & Storage → Review Reset`, disclose exact scope and irreversibility, offer verified export/backup when feasible, require confirmation, and preserve a rollback reference. Export, quarantine, repair, and reset remain owned by their dedicated systems.
+
+
+Entry focuses affected scope and consequence. Recovery focuses the updated status or first failed item. Existing local truth and accepted input remain available wherever safe.
 
 ## Completeness contract
 

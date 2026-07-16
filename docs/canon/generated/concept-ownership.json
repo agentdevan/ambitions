@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "0ac3656f1f55c0514ada19da8b36b8a090628e4fa1648a6aaee3f660a3ed27bb",
+  "canon_content_sha": "37ca3d028309c10537e359cc5d9e95dbbc54b40b5a10557e1f34d08ffb90281c",
   "canon_revision": 1,
   "compiler_version": "0.2.0",
   "concepts": [
@@ -41,8 +41,16 @@
       "spec_id": "CONSTITUTION"
     },
     {
+      "concept": "account.command-contract",
+      "spec_id": "APP-LAUNCH-SETUP"
+    },
+    {
       "concept": "account.launch-commitment",
       "spec_id": "APP-LAUNCH-SETUP"
+    },
+    {
+      "concept": "app.deep-linking.command-contract",
+      "spec_id": "APP-DEEP-LINKING"
     },
     {
       "concept": "app.deep-linking.external-entry",
@@ -65,6 +73,10 @@
       "spec_id": "APP-DEEP-LINKING"
     },
     {
+      "concept": "app.degraded.command-contract",
+      "spec_id": "APP-DEGRADED-STATES"
+    },
+    {
       "concept": "app.degraded.failure-taxonomy",
       "spec_id": "APP-DEGRADED-STATES"
     },
@@ -83,6 +95,10 @@
     {
       "concept": "app.degraded.state",
       "spec_id": "APP-DEGRADED-STATES"
+    },
+    {
+      "concept": "app.launch-setup.command-contract",
+      "spec_id": "APP-LAUNCH-SETUP"
     },
     {
       "concept": "app.launch.readiness",
@@ -111,6 +127,10 @@
     {
       "concept": "app.navigation.state",
       "spec_id": "APP-NAVIGATION"
+    },
+    {
+      "concept": "app.permissions.command-contract",
+      "spec_id": "APP-PERMISSIONS"
     },
     {
       "concept": "app.permissions.contextual-request",
@@ -653,6 +673,10 @@
       "spec_id": "GLOBAL-SEARCH"
     },
     {
+      "concept": "global.search.command-contract",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
       "concept": "global.search.first-viewport",
       "spec_id": "GLOBAL-SEARCH"
     },
@@ -742,6 +766,10 @@
     },
     {
       "concept": "journey.calendar-import.candidate",
+      "spec_id": "JOURNEY-EXTERNAL-CALENDAR-IMPORT"
+    },
+    {
+      "concept": "journey.calendar-import.command-contract",
       "spec_id": "JOURNEY-EXTERNAL-CALENDAR-IMPORT"
     },
     {
@@ -1429,6 +1457,10 @@
       "spec_id": "SURFACE-TIME"
     },
     {
+      "concept": "surface.time.detail-command-contract",
+      "spec_id": "SURFACE-TIME"
+    },
+    {
       "concept": "surface.time.first-viewport",
       "spec_id": "SURFACE-TIME"
     },
@@ -1565,6 +1597,10 @@
       "spec_id": "SURFACE-YOU"
     },
     {
+      "concept": "surface.you.entitlement-command-contract",
+      "spec_id": "SURFACE-YOU"
+    },
+    {
       "concept": "surface.you.first-viewport",
       "spec_id": "SURFACE-YOU"
     },
@@ -1629,6 +1665,10 @@
       "spec_id": "SYSTEM-APPLE-ECOSYSTEM"
     },
     {
+      "concept": "system.continuity.command-contract",
+      "spec_id": "SYSTEM-SYNC-CONTINUITY"
+    },
+    {
       "concept": "system.continuity.conflict",
       "spec_id": "SYSTEM-SYNC-CONTINUITY"
     },
@@ -1669,6 +1709,10 @@
       "spec_id": "SYSTEM-IMPORT-EXPORT-REPAIR"
     },
     {
+      "concept": "system.diagnostics.command-contract",
+      "spec_id": "SYSTEM-DIAGNOSTICS"
+    },
+    {
       "concept": "system.diagnostics.non-authority",
       "spec_id": "SYSTEM-DIAGNOSTICS"
     },
@@ -1695,6 +1739,10 @@
     {
       "concept": "system.learning.user-control",
       "spec_id": "SYSTEM-LOCAL-LEARNING"
+    },
+    {
+      "concept": "system.notifications.command-contract",
+      "spec_id": "SYSTEM-NOTIFICATIONS"
     },
     {
       "concept": "system.notifications.external-effect",

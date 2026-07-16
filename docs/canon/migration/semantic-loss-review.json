@@ -19499,20 +19499,8 @@
       "source_text_sha256": "f9baddbdf3656a27f00058b4df7dc0ec268822c69d1fe4b023cf3d88cf89eb71"
     }
   ],
-  "equivalence_ledger_sha256": "2390c7c54025cdbcd67af613e677ca50fe6c8de73b63c8d9fd7d1e996634c650",
-  "independent_review": {
-    "finding_counts": {
-      "critical": 0,
-      "important": 0,
-      "minor": 0
-    },
-    "reviewed_candidate_diff_sha256": "12055e3f7cc5340bd8fdf3c66e44eb9584cbcc2d56289738266766b28933275c",
-    "reviewed_path_count": 113,
-    "reviewed_semantic_content_sha256": "db8601f94ec0cc98832851a1468707baa549f5795f5384001cc90ed51340ec74",
-    "reviewer_report_sha256": "70a45abd9ee12042b7aaef752cfa7af52a2781f000578a932de30a9d67b6ae43",
-    "schema_version": 1,
-    "verdict": "clean"
-  },
-  "review_status": "independently_reviewed",
+  "equivalence_ledger_sha256": "6072c7466a2cc1157d07aa448234886bf8dd4ab96329274190c7cdd496978b69",
+  "independent_review": null,
+  "review_status": "candidate",
   "schema_version": 4
 }

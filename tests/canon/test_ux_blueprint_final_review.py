@@ -101,7 +101,7 @@ class UXBlueprintFinalReviewTests(unittest.TestCase):
     def _state(self, payload, screen_id, variant_key):
         return self._states(payload)[(screen_id, variant_key)]
 
-    def test_time_detail_is_gap_blocked_and_time_views_cannot_authorize_it(self):
+    def test_time_detail_has_exact_owner_and_time_views_cannot_authorize_it(self):
         payload = self._payload()
         module = self._module()
         states = {
@@ -126,16 +126,16 @@ class UXBlueprintFinalReviewTests(unittest.TestCase):
         for key, state in states.items():
             self.assertEqual(
                 state["behavior_authority_posture"],
-                "exploratory_blocked_by_specification_gap",
+                "requirement_backed",
                 key,
             )
-            self.assertEqual(state["allowed_commands"], [], key)
+            self.assertTrue(state["allowed_commands"], key)
+            self.assertEqual(state["specification_gap_ids"], [], key)
             self.assertEqual(
-                state["specification_gap_ids"],
-                ["GAP-UX-COMMAND-CONTRACT-TIME-DETAIL-001"],
+                state["behavior_requirement_ids"],
+                ["SPEC-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"],
                 key,
             )
-            self.assertEqual(state["behavior_requirement_ids"], [], key)
             self.assertNotIn(
                 "SPEC-SURFACE-TIME-VIEWS-001",
                 state["behavior_requirement_ids"],
@@ -154,7 +154,7 @@ class UXBlueprintFinalReviewTests(unittest.TestCase):
         )
         with self.assertRaisesRegex(
             module.UXBlueprintError,
-            "independent structured canon field ownership|unsupported behavior authority|Time Detail behavior has no owning requirement",
+            "allowed commands drift from structured canon|evidence requirement mismatch|state command contract requirements are not linked|unsupported behavior authority",
         ):
             module.validate_ux_blueprint(REPO_ROOT, forged)
 
@@ -170,6 +170,7 @@ class UXBlueprintFinalReviewTests(unittest.TestCase):
             undo_states,
             [
                 "UX-STATE-VARIANT-CAPTURE-COMPOSER-SAVED-UNDO-ELIGIBLE",
+                "UX-STATE-VARIANT-SEARCH-RESULTS-ACTION-COMPLETE-UNDO-ELIGIBLE",
                 "UX-STATE-VARIANT-TRUST-RECEIPT-RECEIPT-COMMITTED-UNDO-ELIGIBLE",
             ],
         )

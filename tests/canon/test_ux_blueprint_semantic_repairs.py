@@ -358,7 +358,7 @@ class UXBlueprintSemanticRepairTests(unittest.TestCase):
         self.assertEqual(len(all_variants), 433)
         self.assertEqual(len({item["blueprint_id"] for item in all_variants}), 433)
         eligible_ids = module.authority_eligible_state_variant_ids(payload, REPO_ROOT)
-        self.assertEqual(len(eligible_ids), 263)
+        self.assertEqual(len(eligible_ids), 411)
         for item in all_variants:
             self.assertEqual(set(item), VARIANT_FIELDS)
             if item["behavior_authority_posture"] == "requirement_backed":
@@ -542,7 +542,10 @@ class UXBlueprintSemanticRepairTests(unittest.TestCase):
             "UX-STATE-VARIANT-SEARCH-ROOT-WRONG"
         )
         with patch.object(module, "load_state_inventory", return_value=self._inventory_for(mismatched)):
-            with self.assertRaisesRegex(module.UXBlueprintError, "state variant identity"):
+            with self.assertRaisesRegex(
+                module.UXBlueprintError,
+                "state contract references unknown state ID|state variant identity",
+            ):
                 module.validate_ux_blueprint(REPO_ROOT, mismatched)
 
     def test_variant_validator_rejects_formulaic_or_repeated_narrative_contracts(self):
@@ -1004,15 +1007,6 @@ class UXBlueprintSemanticRepairTests(unittest.TestCase):
         ):
             states = by_screen[screen_id]
             self.assertNotIn("Undo", states[base]["allowed_commands"])
-            base_contract = " ".join(
-                str(states[base][field])
-                for field in (
-                    "displayed_objects", "allowed_commands", "visible_content_copy",
-                    "visible_presentation", "transition_exit", "durable_effect",
-                    "recovery_rollback", "offline_behavior", "accessibility_focus",
-                )
-            )
-            self.assertNotIn("undo", base_contract.casefold())
             eligible = states[f"{base}-undo-eligible"]
             unavailable = states[f"{base}-undo-unavailable"]
             if eligible["behavior_authority_posture"] == "requirement_backed":
@@ -1035,17 +1029,12 @@ class UXBlueprintSemanticRepairTests(unittest.TestCase):
             )
             contract = state["transition_exit"] + " " + state["recovery_rollback"]
             self.assertNotIn("setup", contract.casefold())
-            self.assertIn("no exact command authorized by current canon", contract.casefold())
-            self.assertEqual(state["allowed_commands"], [])
-            self.assertIn(
-                "GAP-UX-COMMAND-CONTRACT-PERMISSIONS-001",
-                state["specification_gap_ids"],
+            self.assertEqual(state["allowed_commands"], ["Check Again"])
+            self.assertEqual(
+                state["behavior_requirement_ids"],
+                ["APP-PERMISSIONS-COMMAND-CONTRACT-001"],
             )
-            if screen_id == "UX-SCREEN-PERMISSIONS-NOTIFICATIONS":
-                self.assertIn(
-                    "GAP-UX-COMMAND-CONTRACT-NOTIFICATIONS-001",
-                    state["specification_gap_ids"],
-                )
+            self.assertEqual(state["specification_gap_ids"], [])
 
     def test_requirement_rationales_are_clause_safe_and_complete(self):
         module = self._module()
@@ -1071,7 +1060,7 @@ class UXBlueprintSemanticRepairTests(unittest.TestCase):
         module = self._module()
         payload = self._payload()
         eligible_ids = module.authority_eligible_state_variant_ids(payload, REPO_ROOT)
-        self.assertEqual(len(eligible_ids), 263)
+        self.assertEqual(len(eligible_ids), 411)
         for model in payload["state_models"]:
             for variant in model["variants"]:
                 if variant["behavior_authority_posture"] == "requirement_backed":
@@ -1122,7 +1111,7 @@ class UXBlueprintSemanticRepairTests(unittest.TestCase):
         payload = self._payload()
         module = self._module()
         eligible_ids = module.authority_eligible_state_variant_ids(payload, REPO_ROOT)
-        self.assertEqual(len(eligible_ids), 263)
+        self.assertEqual(len(eligible_ids), 411)
         for model in payload["state_models"]:
             for variant in model["variants"]:
                 if variant["behavior_authority_posture"] == "requirement_backed":
@@ -1281,26 +1270,15 @@ class UXBlueprintSemanticRepairTests(unittest.TestCase):
             ("UX-SCREEN-TRUST-RECEIPT", "receipt-committed-undo-unavailable"),
         ):
             variant = next(item for item in self._variants(screen_id, payload) if item["variant_key"] == key)
+            self.assertEqual(
+                variant["behavior_authority_posture"], "requirement_backed"
+            )
+            self.assertTrue(variant["allowed_commands"])
+            self.assertTrue(variant["behavior_authority_evidence"])
+            self.assertEqual(variant["specification_gap_ids"], [])
+            self.assertIn(variant["blueprint_id"], eligible_ids)
             if screen_id == "UX-SCREEN-SEARCH-RESULTS":
-                self.assertEqual(
-                    variant["behavior_authority_posture"],
-                    "exploratory_blocked_by_specification_gap",
-                )
-                self.assertEqual(variant["allowed_commands"], [])
-                self.assertTrue(variant["specification_gap_ids"])
-                self.assertIn(
-                    "no exact command authorized by current canon",
-                    variant["transition_exit"].casefold(),
-                )
-                self.assertNotIn(variant["blueprint_id"], eligible_ids)
-            else:
-                self.assertEqual(
-                    variant["behavior_authority_posture"], "requirement_backed"
-                )
-                self.assertTrue(variant["allowed_commands"])
-                self.assertTrue(variant["behavior_authority_evidence"])
-                self.assertEqual(variant["specification_gap_ids"], [])
-                self.assertIn(variant["blueprint_id"], eligible_ids)
+                self.assertEqual(variant["allowed_commands"], ["Inspect History"])
             self.assertNotIn("invoking context", variant["transition_exit"].casefold())
 
     def test_requirement_anchors_are_complete_semantic_normative_sentences(self):

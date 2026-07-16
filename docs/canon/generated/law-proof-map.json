@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "0ac3656f1f55c0514ada19da8b36b8a090628e4fa1648a6aaee3f660a3ed27bb",
+  "canon_content_sha": "37ca3d028309c10537e359cc5d9e95dbbc54b40b5a10557e1f34d08ffb90281c",
   "canon_revision": 1,
   "compiler_version": "0.2.0",
   "mappings": [
@@ -80,7 +80,23 @@
       "mapping_status": "gap",
       "references": [],
       "required_verification_ids": [],
+      "requirement_id": "APP-ACCOUNT-COMMAND-CONTRACT-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
       "requirement_id": "APP-ACCOUNT-LAUNCH-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "APP-DEEP-LINK-COMMAND-CONTRACT-001"
     },
     {
       "current_claim_posture": "no_current_evidence",
@@ -121,6 +137,14 @@
       "references": [],
       "required_verification_ids": [],
       "requirement_id": "APP-DEEP-LINK-STATE-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "APP-DEGRADED-COMMAND-CONTRACT-001"
     },
     {
       "current_claim_posture": "no_current_evidence",
@@ -190,6 +214,14 @@
       "mapping_status": "gap",
       "references": [],
       "required_verification_ids": [],
+      "requirement_id": "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
       "requirement_id": "APP-NAVIGATION-RESTORATION-001"
     },
     {
@@ -231,6 +263,14 @@
       "references": [],
       "required_verification_ids": [],
       "requirement_id": "APP-PERMISSION-STATE-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "APP-PERMISSIONS-COMMAND-CONTRACT-001"
     },
     {
       "current_claim_posture": "no_current_evidence",
@@ -929,6 +969,14 @@
       "references": [],
       "required_verification_ids": [],
       "requirement_id": "JOURNEY-CALENDAR-DIFF-GROUPING-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001"
     },
     {
       "current_claim_posture": "no_current_evidence",
@@ -2359,6 +2407,14 @@
       "requirement_id": "SPEC-GLOBAL-SEARCH-ACTIONS-001"
     },
     {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001"
+    },
+    {
       "current_claim_posture": "required_but_unverified",
       "gap_note": "missing mapping is a gap and does not prove absent implementation",
       "mapping_status": "gap",
@@ -2630,6 +2686,14 @@
       "references": [],
       "required_verification_ids": [],
       "requirement_id": "SPEC-SURFACE-TIME-DEGRADED-COMMAND-CONTRACT-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "SPEC-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"
     },
     {
       "current_claim_posture": "required_but_unverified",
@@ -2914,6 +2978,14 @@
       "references": [],
       "required_verification_ids": [],
       "requirement_id": "SPEC-SURFACE-YOU-DEPTH-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"
     },
     {
       "current_claim_posture": "required_but_unverified",
@@ -3340,6 +3412,14 @@
       "mapping_status": "gap",
       "references": [],
       "required_verification_ids": [],
+      "requirement_id": "SYSTEM-CONTINUITY-COMMAND-CONTRACT-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
       "requirement_id": "SYSTEM-CONTINUITY-CONFLICT-001"
     },
     {
@@ -3412,6 +3492,14 @@
       "mapping_status": "gap",
       "references": [],
       "required_verification_ids": [],
+      "requirement_id": "SYSTEM-DIAGNOSTICS-COMMAND-CONTRACT-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
       "requirement_id": "SYSTEM-DIAGNOSTICS-HEALTH-001"
     },
     {
@@ -3469,6 +3557,14 @@
       "references": [],
       "required_verification_ids": [],
       "requirement_id": "SYSTEM-LEARNING-LOCAL-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001"
     },
     {
       "current_claim_posture": "no_current_evidence",

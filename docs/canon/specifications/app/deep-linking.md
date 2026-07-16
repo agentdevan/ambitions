@@ -7,6 +7,7 @@ owner_domain = "app-deep-linking"
 canon_revision = 1
 profile = "system-v1"
 owns_concepts = [
+  "app.deep-linking.command-contract",
   "app.deep-linking.external-entry",
   "app.deep-linking.fallback",
   "app.deep-linking.privacy",
@@ -27,6 +28,164 @@ source_owners = [
   "Native/Ambitions/PreviewSupport/",
   "Native/Ambitions/Quality/",
 ]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-CONSUMED"
+requirement_id = "APP-DEEP-LINK-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Dismiss => destination: the nearest safe owning context without protected target disclosure from Deep-link intake and resolution — Consumed; effect: No durable mutation occurs and no Receipt is created; Dismiss closes only the route request. It cannot consume, replay, reveal, or mutate the requested target, and recoverable Capture input remains locally preserved. Visible evidence remains: This link was already used. Saved information remains unchanged.; focus: the safe destination heading after Consumed."
+durable_effect = "Exact deep-link consequences: Dismiss: No durable mutation occurs and no Receipt is created; Dismiss closes only the route request. It cannot consume, replay, reveal, or mutate the requested target, and recoverable Capture input remains locally preserved. Visible evidence remains: This link was already used. Saved information remains unchanged. Current visible status: This link was already used. Saved information remains unchanged."
+recovery_rollback = "Exact fallback and replay protection: Dismiss: No Undo is required; cancellation preserves the last stable route, local canonical state, and any recoverable Capture input. Recovery preserves: This link was already used. Saved information remains unchanged."
+offline_behavior = "Allowlisted local routes and preserved Capture input remain available offline; network-only destinations wait without changing local truth. Offline evidence remains: This link was already used. Saved information remains unchanged."
+accessibility_focus = "VoiceOver route and recovery contract: Dismiss announces its safe route consequence; success focuses the safe destination heading after Consumed; rejection focuses the Dismiss control and opaque recovery reason in Deep-link intake and resolution — Consumed. The announcement first communicates: This link was already used. Saved information remains unchanged."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-APP-DEEP-LINK-INTAKE-CONSUMED-001"
+label = "Dismiss"
+canonical_owner = "app.deep-linking.command-contract"
+preconditions = ["The current stable route and originating valid root have been revalidated", "The opaque deep-link request identity and source-class revision are current"]
+destination = "the nearest safe owning context without protected target disclosure from Deep-link intake and resolution — Consumed"
+effect = "No durable mutation occurs and no Receipt is created; Dismiss closes only the route request. It cannot consume, replay, reveal, or mutate the requested target, and recoverable Capture input remains locally preserved. Visible evidence remains: This link was already used. Saved information remains unchanged."
+success_focus = "the safe destination heading after Consumed"
+failure_focus = "the Dismiss control and opaque recovery reason in Deep-link intake and resolution — Consumed"
+commit_boundary = "Non-mutating: route resolution, retry, fallback, or dismissal completes without a canonical commit."
+rollback_undo = "No Undo is required; cancellation preserves the last stable route, local canonical state, and any recoverable Capture input."
+privacy_egress = "Resolution uses only allowlisted source metadata and opaque identifiers; rejected or locked targets disclose no protected identity or content."
+verification_ids = ["SCENARIO-APP-DEEP-LINK-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-PRESENTED"
+requirement_id = "APP-DEEP-LINK-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Dismiss => destination: the nearest safe owning context without protected target disclosure from Deep-link intake and resolution — Presented; effect: No durable mutation occurs and no Receipt is created; Dismiss closes only the route request. It cannot consume, replay, reveal, or mutate the requested target, and recoverable Capture input remains locally preserved. Visible evidence remains: This link has already opened once. Goals, Captures, time, and settings remain as they were.; focus: the safe destination heading after Presented."
+durable_effect = "Exact deep-link consequences: Dismiss: No durable mutation occurs and no Receipt is created; Dismiss closes only the route request. It cannot consume, replay, reveal, or mutate the requested target, and recoverable Capture input remains locally preserved. Visible evidence remains: This link has already opened once. Goals, Captures, time, and settings remain as they were. Current visible status: This link has already opened once. Goals, Captures, time, and settings remain as they were."
+recovery_rollback = "Exact fallback and replay protection: Dismiss: No Undo is required; cancellation preserves the last stable route, local canonical state, and any recoverable Capture input. Recovery preserves: This link has already opened once. Goals, Captures, time, and settings remain as they were."
+offline_behavior = "Allowlisted local routes and preserved Capture input remain available offline; network-only destinations wait without changing local truth. Offline evidence remains: This link has already opened once. Goals, Captures, time, and settings remain as they were."
+accessibility_focus = "VoiceOver route and recovery contract: Dismiss announces its safe route consequence; success focuses the safe destination heading after Presented; rejection focuses the Dismiss control and opaque recovery reason in Deep-link intake and resolution — Presented. The announcement first communicates: This link has already opened once. Goals, Captures, time, and settings remain as they were."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-APP-DEEP-LINK-INTAKE-PRESENTED-001"
+label = "Dismiss"
+canonical_owner = "app.deep-linking.command-contract"
+preconditions = ["The current stable route and originating valid root have been revalidated", "The opaque deep-link request identity and source-class revision are current"]
+destination = "the nearest safe owning context without protected target disclosure from Deep-link intake and resolution — Presented"
+effect = "No durable mutation occurs and no Receipt is created; Dismiss closes only the route request. It cannot consume, replay, reveal, or mutate the requested target, and recoverable Capture input remains locally preserved. Visible evidence remains: This link has already opened once. Goals, Captures, time, and settings remain as they were."
+success_focus = "the safe destination heading after Presented"
+failure_focus = "the Dismiss control and opaque recovery reason in Deep-link intake and resolution — Presented"
+commit_boundary = "Non-mutating: route resolution, retry, fallback, or dismissal completes without a canonical commit."
+rollback_undo = "No Undo is required; cancellation preserves the last stable route, local canonical state, and any recoverable Capture input."
+privacy_egress = "Resolution uses only allowlisted source metadata and opaque identifiers; rejected or locked targets disclose no protected identity or content."
+verification_ids = ["SCENARIO-APP-DEEP-LINK-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-QUEUED"
+requirement_id = "APP-DEEP-LINK-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Dismiss => destination: the nearest safe owning context without protected target disclosure from Deep-link intake and resolution — Queued; effect: No durable mutation occurs and no Receipt is created; Dismiss closes only the route request. It cannot consume, replay, reveal, or mutate the requested target, and recoverable Capture input remains locally preserved. Visible evidence remains: Ambitions cannot open this link yet. Destination and access checks are pending; no Goal, Capture, or time item has changed.; focus: the safe destination heading after Queued."
+durable_effect = "Exact deep-link consequences: Dismiss: No durable mutation occurs and no Receipt is created; Dismiss closes only the route request. It cannot consume, replay, reveal, or mutate the requested target, and recoverable Capture input remains locally preserved. Visible evidence remains: Ambitions cannot open this link yet. Destination and access checks are pending; no Goal, Capture, or time item has changed. Current visible status: Ambitions cannot open this link yet. Destination and access checks are pending; no Goal, Capture, or time item has changed."
+recovery_rollback = "Exact fallback and replay protection: Dismiss: No Undo is required; cancellation preserves the last stable route, local canonical state, and any recoverable Capture input. Recovery preserves: Ambitions cannot open this link yet. Destination and access checks are pending; no Goal, Capture, or time item has changed."
+offline_behavior = "Allowlisted local routes and preserved Capture input remain available offline; network-only destinations wait without changing local truth. Offline evidence remains: Ambitions cannot open this link yet. Destination and access checks are pending; no Goal, Capture, or time item has changed."
+accessibility_focus = "VoiceOver route and recovery contract: Dismiss announces its safe route consequence; success focuses the safe destination heading after Queued; rejection focuses the Dismiss control and opaque recovery reason in Deep-link intake and resolution — Queued. The announcement first communicates: Ambitions cannot open this link yet. Destination and access checks are pending; no Goal, Capture, or time item has changed."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-APP-DEEP-LINK-INTAKE-QUEUED-001"
+label = "Dismiss"
+canonical_owner = "app.deep-linking.command-contract"
+preconditions = ["The current stable route and originating valid root have been revalidated", "The opaque deep-link request identity and source-class revision are current"]
+destination = "the nearest safe owning context without protected target disclosure from Deep-link intake and resolution — Queued"
+effect = "No durable mutation occurs and no Receipt is created; Dismiss closes only the route request. It cannot consume, replay, reveal, or mutate the requested target, and recoverable Capture input remains locally preserved. Visible evidence remains: Ambitions cannot open this link yet. Destination and access checks are pending; no Goal, Capture, or time item has changed."
+success_focus = "the safe destination heading after Queued"
+failure_focus = "the Dismiss control and opaque recovery reason in Deep-link intake and resolution — Queued"
+commit_boundary = "Non-mutating: route resolution, retry, fallback, or dismissal completes without a canonical commit."
+rollback_undo = "No Undo is required; cancellation preserves the last stable route, local canonical state, and any recoverable Capture input."
+privacy_egress = "Resolution uses only allowlisted source metadata and opaque identifiers; rejected or locked targets disclose no protected identity or content."
+verification_ids = ["SCENARIO-APP-DEEP-LINK-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-RECOVERABLE"
+requirement_id = "APP-DEEP-LINK-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Dismiss => destination: the nearest safe owning context without protected target disclosure from Deep-link intake and resolution — Recoverable; effect: No durable mutation occurs and no Receipt is created; Dismiss closes only the route request. It cannot consume, replay, reveal, or mutate the requested target, and recoverable Capture input remains locally preserved. Visible evidence remains: This link did not open because its destination or access needs another check. Saved information is unchanged.; focus: the safe destination heading after Recoverable.\nTry Again => destination: the allowlisted deep-link resolver for the interrupted request from Deep-link intake and resolution — Recoverable; effect: No durable mutation occurs and no Receipt is created; Try Again repeats only source-class, access, version, and destination resolution. It cannot replay a consumed action or commit a material request. Visible evidence remains: This link did not open because its destination or access needs another check. Saved information is unchanged.; focus: the safe destination heading after Recoverable."
+durable_effect = "Exact deep-link consequences: Dismiss: No durable mutation occurs and no Receipt is created; Dismiss closes only the route request. It cannot consume, replay, reveal, or mutate the requested target, and recoverable Capture input remains locally preserved. Visible evidence remains: This link did not open because its destination or access needs another check. Saved information is unchanged. | Try Again: No durable mutation occurs and no Receipt is created; Try Again repeats only source-class, access, version, and destination resolution. It cannot replay a consumed action or commit a material request. Visible evidence remains: This link did not open because its destination or access needs another check. Saved information is unchanged. Current visible status: This link did not open because its destination or access needs another check. Saved information is unchanged."
+recovery_rollback = "Exact fallback and replay protection: Dismiss: No Undo is required; cancellation preserves the last stable route, local canonical state, and any recoverable Capture input. | Try Again: No Undo is required; cancellation preserves the last stable route, local canonical state, and any recoverable Capture input. Recovery preserves: This link did not open because its destination or access needs another check. Saved information is unchanged."
+offline_behavior = "Allowlisted local routes and preserved Capture input remain available offline; network-only destinations wait without changing local truth. Offline evidence remains: This link did not open because its destination or access needs another check. Saved information is unchanged."
+accessibility_focus = "VoiceOver route and recovery contract: Dismiss announces its safe route consequence; success focuses the safe destination heading after Recoverable; rejection focuses the Dismiss control and opaque recovery reason in Deep-link intake and resolution — Recoverable | Try Again announces its safe route consequence; success focuses the safe destination heading after Recoverable; rejection focuses the Try Again control and opaque recovery reason in Deep-link intake and resolution — Recoverable. The announcement first communicates: This link did not open because its destination or access needs another check. Saved information is unchanged."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-APP-DEEP-LINK-INTAKE-RECOVERABLE-001"
+label = "Dismiss"
+canonical_owner = "app.deep-linking.command-contract"
+preconditions = ["The current stable route and originating valid root have been revalidated", "The opaque deep-link request identity and source-class revision are current"]
+destination = "the nearest safe owning context without protected target disclosure from Deep-link intake and resolution — Recoverable"
+effect = "No durable mutation occurs and no Receipt is created; Dismiss closes only the route request. It cannot consume, replay, reveal, or mutate the requested target, and recoverable Capture input remains locally preserved. Visible evidence remains: This link did not open because its destination or access needs another check. Saved information is unchanged."
+success_focus = "the safe destination heading after Recoverable"
+failure_focus = "the Dismiss control and opaque recovery reason in Deep-link intake and resolution — Recoverable"
+commit_boundary = "Non-mutating: route resolution, retry, fallback, or dismissal completes without a canonical commit."
+rollback_undo = "No Undo is required; cancellation preserves the last stable route, local canonical state, and any recoverable Capture input."
+privacy_egress = "Resolution uses only allowlisted source metadata and opaque identifiers; rejected or locked targets disclose no protected identity or content."
+verification_ids = ["SCENARIO-APP-DEEP-LINK-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts.commands]]
+command_id = "CMD-APP-DEEP-LINK-INTAKE-RECOVERABLE-002"
+label = "Try Again"
+canonical_owner = "app.deep-linking.command-contract"
+preconditions = ["Destination access and disclosure eligibility have been revalidated", "The interrupted request is recoverable and has not been consumed", "The opaque deep-link request identity and source-class revision are current"]
+destination = "the allowlisted deep-link resolver for the interrupted request from Deep-link intake and resolution — Recoverable"
+effect = "No durable mutation occurs and no Receipt is created; Try Again repeats only source-class, access, version, and destination resolution. It cannot replay a consumed action or commit a material request. Visible evidence remains: This link did not open because its destination or access needs another check. Saved information is unchanged."
+success_focus = "the safe destination heading after Recoverable"
+failure_focus = "the Try Again control and opaque recovery reason in Deep-link intake and resolution — Recoverable"
+commit_boundary = "Non-mutating: route resolution, retry, fallback, or dismissal completes without a canonical commit."
+rollback_undo = "No Undo is required; cancellation preserves the last stable route, local canonical state, and any recoverable Capture input."
+privacy_egress = "Resolution uses only allowlisted source metadata and opaque identifiers; rejected or locked targets disclose no protected identity or content."
+verification_ids = ["SCENARIO-APP-DEEP-LINK-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-REJECTED"
+requirement_id = "APP-DEEP-LINK-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Dismiss => destination: the nearest safe owning context without protected target disclosure from Deep-link intake and resolution — Rejected; effect: No durable mutation occurs and no Receipt is created; Dismiss closes only the route request. It cannot consume, replay, reveal, or mutate the requested target, and recoverable Capture input remains locally preserved. Visible evidence remains: This link could not open safely. No saved information or Capture changed.; focus: the safe destination heading after Rejected."
+durable_effect = "Exact deep-link consequences: Dismiss: No durable mutation occurs and no Receipt is created; Dismiss closes only the route request. It cannot consume, replay, reveal, or mutate the requested target, and recoverable Capture input remains locally preserved. Visible evidence remains: This link could not open safely. No saved information or Capture changed. Current visible status: This link could not open safely. No saved information or Capture changed."
+recovery_rollback = "Exact fallback and replay protection: Dismiss: No Undo is required; cancellation preserves the last stable route, local canonical state, and any recoverable Capture input. Recovery preserves: This link could not open safely. No saved information or Capture changed."
+offline_behavior = "Allowlisted local routes and preserved Capture input remain available offline; network-only destinations wait without changing local truth. Offline evidence remains: This link could not open safely. No saved information or Capture changed."
+accessibility_focus = "VoiceOver route and recovery contract: Dismiss announces its safe route consequence; success focuses the safe destination heading after Rejected; rejection focuses the Dismiss control and opaque recovery reason in Deep-link intake and resolution — Rejected. The announcement first communicates: This link could not open safely. No saved information or Capture changed."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-APP-DEEP-LINK-INTAKE-REJECTED-001"
+label = "Dismiss"
+canonical_owner = "app.deep-linking.command-contract"
+preconditions = ["The current stable route and originating valid root have been revalidated", "The opaque deep-link request identity and source-class revision are current"]
+destination = "the nearest safe owning context without protected target disclosure from Deep-link intake and resolution — Rejected"
+effect = "No durable mutation occurs and no Receipt is created; Dismiss closes only the route request. It cannot consume, replay, reveal, or mutate the requested target, and recoverable Capture input remains locally preserved. Visible evidence remains: This link could not open safely. No saved information or Capture changed."
+success_focus = "the safe destination heading after Rejected"
+failure_focus = "the Dismiss control and opaque recovery reason in Deep-link intake and resolution — Rejected"
+commit_boundary = "Non-mutating: route resolution, retry, fallback, or dismissal completes without a canonical commit."
+rollback_undo = "No Undo is required; cancellation preserves the last stable route, local canonical state, and any recoverable Capture input."
+privacy_egress = "Resolution uses only allowlisted source metadata and opaque identifiers; rejected or locked targets disclose no protected identity or content."
+verification_ids = ["SCENARIO-APP-DEEP-LINK-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-RESOLVING"
+requirement_id = "APP-DEEP-LINK-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Dismiss => destination: the nearest safe owning context without protected target disclosure from Deep-link intake and resolution — Resolving; effect: No durable mutation occurs and no Receipt is created; Dismiss closes only the route request. It cannot consume, replay, reveal, or mutate the requested target, and recoverable Capture input remains locally preserved. Visible evidence remains: Ambitions is checking this link before anything opens or changes.; focus: the safe destination heading after Resolving."
+durable_effect = "Exact deep-link consequences: Dismiss: No durable mutation occurs and no Receipt is created; Dismiss closes only the route request. It cannot consume, replay, reveal, or mutate the requested target, and recoverable Capture input remains locally preserved. Visible evidence remains: Ambitions is checking this link before anything opens or changes. Current visible status: Ambitions is checking this link before anything opens or changes."
+recovery_rollback = "Exact fallback and replay protection: Dismiss: No Undo is required; cancellation preserves the last stable route, local canonical state, and any recoverable Capture input. Recovery preserves: Ambitions is checking this link before anything opens or changes."
+offline_behavior = "Allowlisted local routes and preserved Capture input remain available offline; network-only destinations wait without changing local truth. Offline evidence remains: Ambitions is checking this link before anything opens or changes."
+accessibility_focus = "VoiceOver route and recovery contract: Dismiss announces its safe route consequence; success focuses the safe destination heading after Resolving; rejection focuses the Dismiss control and opaque recovery reason in Deep-link intake and resolution — Resolving. The announcement first communicates: Ambitions is checking this link before anything opens or changes."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-APP-DEEP-LINK-INTAKE-RESOLVING-001"
+label = "Dismiss"
+canonical_owner = "app.deep-linking.command-contract"
+preconditions = ["The current stable route and originating valid root have been revalidated", "The opaque deep-link request identity and source-class revision are current"]
+destination = "the nearest safe owning context without protected target disclosure from Deep-link intake and resolution — Resolving"
+effect = "No durable mutation occurs and no Receipt is created; Dismiss closes only the route request. It cannot consume, replay, reveal, or mutate the requested target, and recoverable Capture input remains locally preserved. Visible evidence remains: Ambitions is checking this link before anything opens or changes."
+success_focus = "the safe destination heading after Resolving"
+failure_focus = "the Dismiss control and opaque recovery reason in Deep-link intake and resolution — Resolving"
+commit_boundary = "Non-mutating: route resolution, retry, fallback, or dismissal completes without a canonical commit."
+rollback_undo = "No Undo is required; cancellation preserves the last stable route, local canonical state, and any recoverable Capture input."
+privacy_egress = "Resolution uses only allowlisted source metadata and opaque identifiers; rejected or locked targets disclose no protected identity or content."
+verification_ids = ["SCENARIO-APP-DEEP-LINK-COMMAND-CONTRACT-001"]
 +++
 
 # Deep Linking and External Route Entry
@@ -87,6 +246,30 @@ An unavailable target MUST degrade to the nearest safe owning context without fa
 - **Supersedes:** none
 
 Deep-link state MUST distinguish queued, resolving, presented, rejected, consumed, and recoverable input. Repeated delivery may reopen an idempotent destination but cannot repeat a consumed mutation or duplicate Capture intake. Interruption preserves recoverable input and resumes only after revalidating target, authorization, canonical state, and user-visible consequence.
+
+## APP-DEEP-LINK-COMMAND-CONTRACT-001 — Deep-link commands resolve safely without replay
+
+- **Concept:** `app.deep-linking.command-contract`
+- **Modality:** `MUST`
+- **Scope:** Allowlisted deep-link intake, resolution, fallback, retry, dismissal, focus, privacy, and single-use replay protection
+- **Status:** `normative`
+- **Verification:** `SCENARIO-APP-DEEP-LINK-COMMAND-CONTRACT-001`
+- **Supersedes:** none
+
+Every deep link MUST resolve through an allowlisted source-class contract and choose the nearest authorized owning context:
+
+- Share/File recoverable input → Capture draft.
+- Spotlight, Widget, App Intent, Notification, or Handoff → owning object, date, setting, review, or material-action preview.
+- Missing or deleted authorized target → Search or Trash only when existence and access may safely be disclosed.
+- Locked target → `Unlock` followed by full revalidation.
+- Stale or unsupported version → `Update Ambitions` or `Dismiss`.
+- Recoverable interruption → `Try Again` or `Dismiss`.
+- Malformed or unauthorized input → `Dismiss` only, without target disclosure.
+
+Fallback order MUST be: nearest safe owning context, originating valid root, current stable route, then Today on cold launch. A material requested action MUST focus its consequence preview and never commit directly from the link. Consumed single-use actions MUST NOT replay.
+
+
+Presented destinations focus their heading or resolved object. Material actions focus the first consequence. Rejection focuses the recovery control without announcing protected identity. Recoverable Capture input remains locally preserved until explicitly accepted or discarded.
 
 ## Completeness contract
 

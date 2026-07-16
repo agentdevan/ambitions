@@ -12,6 +12,7 @@ owns_concepts = [
   "surface.you.contextual-education",
   "surface.you.data-controls",
   "surface.you.depth",
+  "surface.you.entitlement-command-contract",
   "surface.you.first-viewport",
   "surface.you.identity",
   "surface.you.no-knowledge-model",
@@ -64,7 +65,6 @@ commit_boundary = "Mutation: the typed command commits only after current-revisi
 rollback_undo = "Cancellation before recovery-point designation leaves no recovery-point claim; an incomplete artifact is quarantined and the active store remains unchanged."
 privacy_egress = "The mutation remains local and sends no private content off device; any external side effect requires a separate minimum-field egress review under SYSTEM-PRIVACY-EGRESS-001."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DATA-DIAGNOSTICS-REDACTED"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -89,7 +89,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "Diagnostics default to redacted local health metadata; no private titles or content leave the device."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DATA-EXPORT-FAILED"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -114,7 +113,6 @@ commit_boundary = "External-result: the existing durable result or outbox identi
 rollback_undo = "Cancelling the retry preserves the accepted local state and prior external result; any supported local Undo remains a separate typed command."
 privacy_egress = "Only the previously approved minimum payload may leave the device; authorization and SYSTEM-PRIVACY-EGRESS-001 are revalidated and failure remains inspectable."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DATA-EXPORT-PREVIEW"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -139,7 +137,6 @@ commit_boundary = "Mutation: the typed command commits only after current-revisi
 rollback_undo = "Cancellation before successful generation creates no success claim; after success, dismissal cannot erase the artifact result or egress History and export is not a backup."
 privacy_egress = "Only explicitly selected and redacted fields go to the reviewed destination under SYSTEM-PRIVACY-EGRESS-001; export never authorizes ongoing sync."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DATA-EXPORT-PROGRESS"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -164,7 +161,6 @@ commit_boundary = "Mutation: the typed command commits only after current-revisi
 rollback_undo = "Cancellation before successful generation creates no success claim; after success, dismissal cannot erase the artifact result or egress History and export is not a backup."
 privacy_egress = "Only explicitly selected and redacted fields go to the reviewed destination under SYSTEM-PRIVACY-EGRESS-001; export never authorizes ongoing sync."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DATA-PERMANENT-DELETE-IRREVERSIBLE"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -189,7 +185,6 @@ commit_boundary = "Non-mutating: dismissal returns from the completed result and
 rollback_undo = "No Undo is required; failed dismissal leaves the completed result visible, and retrying Done cannot reopen or repeat deletion."
 privacy_egress = "Dismissal reads only the local result state and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DATA-PERMANENT-DELETE-REVIEW"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -214,7 +209,6 @@ commit_boundary = "Mutation: the typed command commits only after current-revisi
 rollback_undo = "Cancellation before commit changes nothing; after the irreversible boundary no Undo or Restore is promised, and the Receipt records the exact destroyed scope."
 privacy_egress = "The mutation remains local and sends no private content off device; any external side effect requires a separate minimum-field egress review under SYSTEM-PRIVACY-EGRESS-001."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DATA-RESET-REVIEW"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -239,7 +233,6 @@ commit_boundary = "Mutation: the typed command commits only after current-revisi
 rollback_undo = "Cancellation before commit changes nothing; after commit, only the named typed Undo or recovery command may append a reversing Event while History remains intact."
 privacy_egress = "The mutation remains local and sends no private content off device; any external side effect requires a separate minimum-field egress review under SYSTEM-PRIVACY-EGRESS-001."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DATA-RESET-ROLLBACK"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -264,7 +257,6 @@ commit_boundary = "Mutation: the typed command commits only after current-revisi
 rollback_undo = "Cancellation before commit changes nothing; after commit, only the named typed Undo or recovery command may append a reversing Event while History remains intact."
 privacy_egress = "The mutation remains local and sends no private content off device; any external side effect requires a separate minimum-field egress review under SYSTEM-PRIVACY-EGRESS-001."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DATA-RESTORE-REVIEW"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -289,7 +281,6 @@ commit_boundary = "Mutation: the typed command commits only after current-revisi
 rollback_undo = "Failure returns to the last honest store; cancellation before activation changes nothing, and post-activation rollback uses the operation journal without rewriting History."
 privacy_egress = "The mutation remains local and sends no private content off device; any external side effect requires a separate minimum-field egress review under SYSTEM-PRIVACY-EGRESS-001."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DATA-TRASH-EMPTY"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -314,7 +305,6 @@ commit_boundary = "Non-mutating: dismissal returns from the empty state and make
 rollback_undo = "No Undo is required; failed dismissal keeps the empty state visible, and retrying Done cannot invent an object or perform restoration."
 privacy_egress = "Dismissal reads only the local empty-state status and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DATA-TRASH-POPULATED"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -339,7 +329,6 @@ commit_boundary = "Mutation: the typed command commits only after current-revisi
 rollback_undo = "Cancellation before commit changes nothing; after commit, only the named typed Undo or recovery command may append a reversing Event while History remains intact."
 privacy_egress = "The mutation remains local and sends no private content off device; any external side effect requires a separate minimum-field egress review under SYSTEM-PRIVACY-EGRESS-001."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-DATA-TRASH-RESTORE"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -364,7 +353,270 @@ commit_boundary = "Mutation: the typed command commits only after current-revisi
 rollback_undo = "Failure returns to the last honest store; cancellation before activation changes nothing, and post-activation rollback uses the operation journal without rewriting History."
 privacy_egress = "The mutation remains local and sends no private content off device; any external side effect requires a separate minimum-field egress review under SYSTEM-PRIVACY-EGRESS-001."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-YOU-ENTITLEMENT-ACTIVE"
+requirement_id = "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Manage Subscription => destination: Apple subscription management from Entitlement status and recovery — Active; effect: The Manage Subscription external result causes no local canonical mutation; Apple owns the management surface. On return, Ambitions revalidates signed entitlement observation before any separate local status commit. A downgrade never deletes, hides, transfers, or makes local private data inaccessible. Visible evidence remains until revalidation: Plan access is active; local private information remains available independently.; focus: the verified Manage Subscription result or current status heading in Entitlement status and recovery — Active."
+durable_effect = "Exact entitlement status and external-result consequences: Manage Subscription: The Manage Subscription external result causes no local canonical mutation; Apple owns the management surface. On return, Ambitions revalidates signed entitlement observation before any separate local status commit. A downgrade never deletes, hides, transfers, or makes local private data inaccessible. Visible evidence remains until revalidation: Plan access is active; local private information remains available independently. No SKU, price, plan, paywall, trial promise, paid-feature boundary, downgrade restriction, or core restriction is created. Current visible status: Plan access is active; local private information remains available independently."
+recovery_rollback = "Exact cancellation, retry, mismatch, restore, and downgrade recovery: Manage Subscription: Cancellation or interruption returns to the prior verified status; a later downgrade changes only eligible service access and never local-core data availability. A mismatch cannot bind or transfer the graph, and downgrade never deletes or hides local data. Recovery preserves: Plan access is active; local private information remains available independently."
+offline_behavior = "The last verified entitlement status shows freshness offline; purchase, restore, check, and Apple management wait when unavailable. The full local core and all local private data remain usable independently. Offline evidence remains: Plan access is active; local private information remains available independently."
+accessibility_focus = "VoiceOver announces status, freshness, account mismatch, external destination, cancellation, and local-core consequence without pressure: Manage Subscription announces verified status and consequence; success focuses the verified Manage Subscription result or current status heading in Entitlement status and recovery — Active; rejection focuses the Manage Subscription control and exact StoreKit, account, or registry reason in Entitlement status and recovery — Active. Dynamic Type stacks status and explanation. The announcement first communicates: Plan access is active; local private information remains available independently."
 
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-ENTITLEMENT-ACTIVE-001"
+label = "Manage Subscription"
+canonical_owner = "surface.you.entitlement-command-contract"
+preconditions = ["A verified Apple subscription-management route is available", "The current observed entitlement revision, StoreKit transaction freshness, and account association have been revalidated", "The current product-registry posture has been checked and no unregistered product can be presented or purchased"]
+destination = "Apple subscription management from Entitlement status and recovery — Active"
+effect = "The Manage Subscription external result causes no local canonical mutation; Apple owns the management surface. On return, Ambitions revalidates signed entitlement observation before any separate local status commit. A downgrade never deletes, hides, transfers, or makes local private data inaccessible. Visible evidence remains until revalidation: Plan access is active; local private information remains available independently."
+success_focus = "the verified Manage Subscription result or current status heading in Entitlement status and recovery — Active"
+failure_focus = "the Manage Subscription control and exact StoreKit, account, or registry reason in Entitlement status and recovery — Active"
+commit_boundary = "External-result: Apple subscription management occurs outside Ambitions; only a later verified entitlement observation may separately persist non-sensitive status and a Receipt."
+rollback_undo = "Cancellation or interruption returns to the prior verified status; a later downgrade changes only eligible service access and never local-core data availability."
+privacy_egress = "StoreKit receives only minimum transaction/account fields; Goals, Captures, Time, settings, Proof, History, Receipts, and the private graph never transfer or bind through entitlement controls."
+verification_ids = ["SCENARIO-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-YOU-ENTITLEMENT-EXPIRED"
+requirement_id = "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Restore Purchases => destination: the verified restore result and entitlement status in Entitlement status and recovery — Expired; effect: The Restore Purchases external result causes no local canonical mutation; it validates current signed StoreKit transactions and returns a bounded observation. Any later accepted status persistence is separate, non-sensitive, and Receipt-backed. Restore cannot switch accounts, transfer data, bind the private graph, or restrict the offline core. Visible evidence remains until verified: The plan ended. Private local data is still available.; focus: the verified Restore Purchases result or current status heading in Entitlement status and recovery — Expired."
+durable_effect = "Exact entitlement status and external-result consequences: Restore Purchases: The Restore Purchases external result causes no local canonical mutation; it validates current signed StoreKit transactions and returns a bounded observation. Any later accepted status persistence is separate, non-sensitive, and Receipt-backed. Restore cannot switch accounts, transfer data, bind the private graph, or restrict the offline core. Visible evidence remains until verified: The plan ended. Private local data is still available. No SKU, price, plan, paywall, trial promise, paid-feature boundary, downgrade restriction, or core restriction is created. Current visible status: The plan ended. Private local data is still available."
+recovery_rollback = "Exact cancellation, retry, mismatch, restore, and downgrade recovery: Restore Purchases: Cancellation or failure preserves the prior verified status and all local data; retry cannot duplicate a transaction or entitlement observation. A mismatch cannot bind or transfer the graph, and downgrade never deletes or hides local data. Recovery preserves: The plan ended. Private local data is still available."
+offline_behavior = "The last verified entitlement status shows freshness offline; purchase, restore, check, and Apple management wait when unavailable. The full local core and all local private data remain usable independently. Offline evidence remains: The plan ended. Private local data is still available."
+accessibility_focus = "VoiceOver announces status, freshness, account mismatch, external destination, cancellation, and local-core consequence without pressure: Restore Purchases announces verified status and consequence; success focuses the verified Restore Purchases result or current status heading in Entitlement status and recovery — Expired; rejection focuses the Restore Purchases control and exact StoreKit, account, or registry reason in Entitlement status and recovery — Expired. Dynamic Type stacks status and explanation. The announcement first communicates: The plan ended. Private local data is still available."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-ENTITLEMENT-EXPIRED-001"
+label = "Restore Purchases"
+canonical_owner = "surface.you.entitlement-command-contract"
+preconditions = ["Current signed StoreKit transactions can be validated", "The current observed entitlement revision, StoreKit transaction freshness, and account association have been revalidated", "The current product-registry posture has been checked and no unregistered product can be presented or purchased", "The request cannot switch accounts, transfer private data, or bind the private graph"]
+destination = "the verified restore result and entitlement status in Entitlement status and recovery — Expired"
+effect = "The Restore Purchases external result causes no local canonical mutation; it validates current signed StoreKit transactions and returns a bounded observation. Any later accepted status persistence is separate, non-sensitive, and Receipt-backed. Restore cannot switch accounts, transfer data, bind the private graph, or restrict the offline core. Visible evidence remains until verified: The plan ended. Private local data is still available."
+success_focus = "the verified Restore Purchases result or current status heading in Entitlement status and recovery — Expired"
+failure_focus = "the Restore Purchases control and exact StoreKit, account, or registry reason in Entitlement status and recovery — Expired"
+commit_boundary = "External-result: StoreKit restore completes outside canonical product mutation and must be revalidated before a separate entitlement-status commit."
+rollback_undo = "Cancellation or failure preserves the prior verified status and all local data; retry cannot duplicate a transaction or entitlement observation."
+privacy_egress = "StoreKit receives only minimum transaction/account fields; Goals, Captures, Time, settings, Proof, History, Receipts, and the private graph never transfer or bind through entitlement controls."
+verification_ids = ["SCENARIO-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-YOU-ENTITLEMENT-GRACE"
+requirement_id = "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Manage Subscription => destination: Apple subscription management from Entitlement status and recovery — Grace; effect: The Manage Subscription external result causes no local canonical mutation; Apple owns the management surface. On return, Ambitions revalidates signed entitlement observation before any separate local status commit. A downgrade never deletes, hides, transfers, or makes local private data inaccessible. Visible evidence remains until revalidation: Plan access is in a grace period; local private information remains available.; focus: the verified Manage Subscription result or current status heading in Entitlement status and recovery — Grace."
+durable_effect = "Exact entitlement status and external-result consequences: Manage Subscription: The Manage Subscription external result causes no local canonical mutation; Apple owns the management surface. On return, Ambitions revalidates signed entitlement observation before any separate local status commit. A downgrade never deletes, hides, transfers, or makes local private data inaccessible. Visible evidence remains until revalidation: Plan access is in a grace period; local private information remains available. No SKU, price, plan, paywall, trial promise, paid-feature boundary, downgrade restriction, or core restriction is created. Current visible status: Plan access is in a grace period; local private information remains available."
+recovery_rollback = "Exact cancellation, retry, mismatch, restore, and downgrade recovery: Manage Subscription: Cancellation or interruption returns to the prior verified status; a later downgrade changes only eligible service access and never local-core data availability. A mismatch cannot bind or transfer the graph, and downgrade never deletes or hides local data. Recovery preserves: Plan access is in a grace period; local private information remains available."
+offline_behavior = "The last verified entitlement status shows freshness offline; purchase, restore, check, and Apple management wait when unavailable. The full local core and all local private data remain usable independently. Offline evidence remains: Plan access is in a grace period; local private information remains available."
+accessibility_focus = "VoiceOver announces status, freshness, account mismatch, external destination, cancellation, and local-core consequence without pressure: Manage Subscription announces verified status and consequence; success focuses the verified Manage Subscription result or current status heading in Entitlement status and recovery — Grace; rejection focuses the Manage Subscription control and exact StoreKit, account, or registry reason in Entitlement status and recovery — Grace. Dynamic Type stacks status and explanation. The announcement first communicates: Plan access is in a grace period; local private information remains available."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-ENTITLEMENT-GRACE-001"
+label = "Manage Subscription"
+canonical_owner = "surface.you.entitlement-command-contract"
+preconditions = ["A verified Apple subscription-management route is available", "The current observed entitlement revision, StoreKit transaction freshness, and account association have been revalidated", "The current product-registry posture has been checked and no unregistered product can be presented or purchased"]
+destination = "Apple subscription management from Entitlement status and recovery — Grace"
+effect = "The Manage Subscription external result causes no local canonical mutation; Apple owns the management surface. On return, Ambitions revalidates signed entitlement observation before any separate local status commit. A downgrade never deletes, hides, transfers, or makes local private data inaccessible. Visible evidence remains until revalidation: Plan access is in a grace period; local private information remains available."
+success_focus = "the verified Manage Subscription result or current status heading in Entitlement status and recovery — Grace"
+failure_focus = "the Manage Subscription control and exact StoreKit, account, or registry reason in Entitlement status and recovery — Grace"
+commit_boundary = "External-result: Apple subscription management occurs outside Ambitions; only a later verified entitlement observation may separately persist non-sensitive status and a Receipt."
+rollback_undo = "Cancellation or interruption returns to the prior verified status; a later downgrade changes only eligible service access and never local-core data availability."
+privacy_egress = "StoreKit receives only minimum transaction/account fields; Goals, Captures, Time, settings, Proof, History, Receipts, and the private graph never transfer or bind through entitlement controls."
+verification_ids = ["SCENARIO-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-YOU-ENTITLEMENT-MISMATCH"
+requirement_id = "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Review Account => destination: the separate Account flow and mismatch explanation from Entitlement status and recovery — Mismatch; effect: No durable mutation occurs and no Receipt is created; Review Account explains the mismatch and opens the separate account flow. It cannot switch accounts, transfer data, bind the private graph, or infer entitlement ownership. Visible evidence remains: Plan and account details do not agree; local private information remains accessible.; focus: the verified Review Account result or current status heading in Entitlement status and recovery — Mismatch."
+durable_effect = "Exact entitlement status and external-result consequences: Review Account: No durable mutation occurs and no Receipt is created; Review Account explains the mismatch and opens the separate account flow. It cannot switch accounts, transfer data, bind the private graph, or infer entitlement ownership. Visible evidence remains: Plan and account details do not agree; local private information remains accessible. No SKU, price, plan, paywall, trial promise, paid-feature boundary, downgrade restriction, or core restriction is created. Current visible status: Plan and account details do not agree; local private information remains accessible."
+recovery_rollback = "Exact cancellation, retry, mismatch, restore, and downgrade recovery: Review Account: No Undo is required; cancellation returns to the mismatch explanation and prior verified entitlement status with all local data unchanged. A mismatch cannot bind or transfer the graph, and downgrade never deletes or hides local data. Recovery preserves: Plan and account details do not agree; local private information remains accessible."
+offline_behavior = "The last verified entitlement status shows freshness offline; purchase, restore, check, and Apple management wait when unavailable. The full local core and all local private data remain usable independently. Offline evidence remains: Plan and account details do not agree; local private information remains accessible."
+accessibility_focus = "VoiceOver announces status, freshness, account mismatch, external destination, cancellation, and local-core consequence without pressure: Review Account announces verified status and consequence; success focuses the verified Review Account result or current status heading in Entitlement status and recovery — Mismatch; rejection focuses the Review Account control and exact StoreKit, account, or registry reason in Entitlement status and recovery — Mismatch. Dynamic Type stacks status and explanation. The announcement first communicates: Plan and account details do not agree; local private information remains accessible."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-ENTITLEMENT-MISMATCH-001"
+label = "Review Account"
+canonical_owner = "surface.you.entitlement-command-contract"
+preconditions = ["The current observed entitlement revision, StoreKit transaction freshness, and account association have been revalidated", "The current product-registry posture has been checked and no unregistered product can be presented or purchased", "The mismatch explanation is privacy-safe and names no protected graph content"]
+destination = "the separate Account flow and mismatch explanation from Entitlement status and recovery — Mismatch"
+effect = "No durable mutation occurs and no Receipt is created; Review Account explains the mismatch and opens the separate account flow. It cannot switch accounts, transfer data, bind the private graph, or infer entitlement ownership. Visible evidence remains: Plan and account details do not agree; local private information remains accessible."
+success_focus = "the verified Review Account result or current status heading in Entitlement status and recovery — Mismatch"
+failure_focus = "the Review Account control and exact StoreKit, account, or registry reason in Entitlement status and recovery — Mismatch"
+commit_boundary = "Non-mutating: mismatch review and account navigation complete before any separately authorized account or entitlement change."
+rollback_undo = "No Undo is required; cancellation returns to the mismatch explanation and prior verified entitlement status with all local data unchanged."
+privacy_egress = "StoreKit receives only minimum transaction/account fields; Goals, Captures, Time, settings, Proof, History, Receipts, and the private graph never transfer or bind through entitlement controls."
+verification_ids = ["SCENARIO-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-YOU-ENTITLEMENT-OFFLINE-CACHED"
+requirement_id = "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Done => destination: the originating You or Account & Sync context from Entitlement status and recovery — Offline Cached; effect: No durable mutation occurs and no Receipt is created; Done closes only the current entitlement status. Local private data, offline core access, History, Proof, and settings remain available independently. Visible evidence remains: The last confirmed plan status is shown offline; local information remains available.; focus: the verified Done result or current status heading in Entitlement status and recovery — Offline Cached."
+durable_effect = "Exact entitlement status and external-result consequences: Done: No durable mutation occurs and no Receipt is created; Done closes only the current entitlement status. Local private data, offline core access, History, Proof, and settings remain available independently. Visible evidence remains: The last confirmed plan status is shown offline; local information remains available. No SKU, price, plan, paywall, trial promise, paid-feature boundary, downgrade restriction, or core restriction is created. Current visible status: The last confirmed plan status is shown offline; local information remains available."
+recovery_rollback = "Exact cancellation, retry, mismatch, restore, and downgrade recovery: Done: No Undo is required; reopening Plan & Purchases restores the last verified status and freshness explanation. A mismatch cannot bind or transfer the graph, and downgrade never deletes or hides local data. Recovery preserves: The last confirmed plan status is shown offline; local information remains available."
+offline_behavior = "The last verified entitlement status shows freshness offline; purchase, restore, check, and Apple management wait when unavailable. The full local core and all local private data remain usable independently. Offline evidence remains: The last confirmed plan status is shown offline; local information remains available."
+accessibility_focus = "VoiceOver announces status, freshness, account mismatch, external destination, cancellation, and local-core consequence without pressure: Done announces verified status and consequence; success focuses the verified Done result or current status heading in Entitlement status and recovery — Offline Cached; rejection focuses the Done control and exact StoreKit, account, or registry reason in Entitlement status and recovery — Offline Cached. Dynamic Type stacks status and explanation. The announcement first communicates: The last confirmed plan status is shown offline; local information remains available."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-ENTITLEMENT-OFFLINE-CACHED-001"
+label = "Done"
+canonical_owner = "surface.you.entitlement-command-contract"
+preconditions = ["The current observed entitlement revision, StoreKit transaction freshness, and account association have been revalidated", "The current product-registry posture has been checked and no unregistered product can be presented or purchased"]
+destination = "the originating You or Account & Sync context from Entitlement status and recovery — Offline Cached"
+effect = "No durable mutation occurs and no Receipt is created; Done closes only the current entitlement status. Local private data, offline core access, History, Proof, and settings remain available independently. Visible evidence remains: The last confirmed plan status is shown offline; local information remains available."
+success_focus = "the verified Done result or current status heading in Entitlement status and recovery — Offline Cached"
+failure_focus = "the Done control and exact StoreKit, account, or registry reason in Entitlement status and recovery — Offline Cached"
+commit_boundary = "Non-mutating: dismissal completes without entitlement, account, StoreKit, or local-data mutation."
+rollback_undo = "No Undo is required; reopening Plan & Purchases restores the last verified status and freshness explanation."
+privacy_egress = "StoreKit receives only minimum transaction/account fields; Goals, Captures, Time, settings, Proof, History, Receipts, and the private graph never transfer or bind through entitlement controls."
+verification_ids = ["SCENARIO-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-YOU-ENTITLEMENT-RESTORED"
+requirement_id = "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Done => destination: the originating You or Account & Sync context from Entitlement status and recovery — Restored; effect: No durable mutation occurs and no Receipt is created; Done closes only the current entitlement status. Local private data, offline core access, History, Proof, and settings remain available independently. Visible evidence remains: Plan access was restored; local private information was never transferred or deleted.; focus: the verified Done result or current status heading in Entitlement status and recovery — Restored."
+durable_effect = "Exact entitlement status and external-result consequences: Done: No durable mutation occurs and no Receipt is created; Done closes only the current entitlement status. Local private data, offline core access, History, Proof, and settings remain available independently. Visible evidence remains: Plan access was restored; local private information was never transferred or deleted. No SKU, price, plan, paywall, trial promise, paid-feature boundary, downgrade restriction, or core restriction is created. Current visible status: Plan access was restored; local private information was never transferred or deleted."
+recovery_rollback = "Exact cancellation, retry, mismatch, restore, and downgrade recovery: Done: No Undo is required; reopening Plan & Purchases restores the last verified status and freshness explanation. A mismatch cannot bind or transfer the graph, and downgrade never deletes or hides local data. Recovery preserves: Plan access was restored; local private information was never transferred or deleted."
+offline_behavior = "The last verified entitlement status shows freshness offline; purchase, restore, check, and Apple management wait when unavailable. The full local core and all local private data remain usable independently. Offline evidence remains: Plan access was restored; local private information was never transferred or deleted."
+accessibility_focus = "VoiceOver announces status, freshness, account mismatch, external destination, cancellation, and local-core consequence without pressure: Done announces verified status and consequence; success focuses the verified Done result or current status heading in Entitlement status and recovery — Restored; rejection focuses the Done control and exact StoreKit, account, or registry reason in Entitlement status and recovery — Restored. Dynamic Type stacks status and explanation. The announcement first communicates: Plan access was restored; local private information was never transferred or deleted."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-ENTITLEMENT-RESTORED-001"
+label = "Done"
+canonical_owner = "surface.you.entitlement-command-contract"
+preconditions = ["The current observed entitlement revision, StoreKit transaction freshness, and account association have been revalidated", "The current product-registry posture has been checked and no unregistered product can be presented or purchased"]
+destination = "the originating You or Account & Sync context from Entitlement status and recovery — Restored"
+effect = "No durable mutation occurs and no Receipt is created; Done closes only the current entitlement status. Local private data, offline core access, History, Proof, and settings remain available independently. Visible evidence remains: Plan access was restored; local private information was never transferred or deleted."
+success_focus = "the verified Done result or current status heading in Entitlement status and recovery — Restored"
+failure_focus = "the Done control and exact StoreKit, account, or registry reason in Entitlement status and recovery — Restored"
+commit_boundary = "Non-mutating: dismissal completes without entitlement, account, StoreKit, or local-data mutation."
+rollback_undo = "No Undo is required; reopening Plan & Purchases restores the last verified status and freshness explanation."
+privacy_egress = "StoreKit receives only minimum transaction/account fields; Goals, Captures, Time, settings, Proof, History, Receipts, and the private graph never transfer or bind through entitlement controls."
+verification_ids = ["SCENARIO-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-YOU-ENTITLEMENT-RETRY"
+requirement_id = "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Check Again => destination: the freshly verified entitlement status in Entitlement status and recovery — Retry; effect: The Check Again external result causes no local canonical mutation; it refreshes only signed StoreKit transaction and account-association evidence. The last verified local status and full local core remain available while the result is checked. Visible evidence remains: Plan status is being checked again; the last confirmed local access remains.; focus: the verified Check Again result or current status heading in Entitlement status and recovery — Retry."
+durable_effect = "Exact entitlement status and external-result consequences: Check Again: The Check Again external result causes no local canonical mutation; it refreshes only signed StoreKit transaction and account-association evidence. The last verified local status and full local core remain available while the result is checked. Visible evidence remains: Plan status is being checked again; the last confirmed local access remains. No SKU, price, plan, paywall, trial promise, paid-feature boundary, downgrade restriction, or core restriction is created. Current visible status: Plan status is being checked again; the last confirmed local access remains."
+recovery_rollback = "Exact cancellation, retry, mismatch, restore, and downgrade recovery: Check Again: Cancellation, timeout, or invalid response preserves the prior verified status and focuses Check Again without changing local data or access. A mismatch cannot bind or transfer the graph, and downgrade never deletes or hides local data. Recovery preserves: Plan status is being checked again; the last confirmed local access remains."
+offline_behavior = "The last verified entitlement status shows freshness offline; purchase, restore, check, and Apple management wait when unavailable. The full local core and all local private data remain usable independently. Offline evidence remains: Plan status is being checked again; the last confirmed local access remains."
+accessibility_focus = "VoiceOver announces status, freshness, account mismatch, external destination, cancellation, and local-core consequence without pressure: Check Again announces verified status and consequence; success focuses the verified Check Again result or current status heading in Entitlement status and recovery — Retry; rejection focuses the Check Again control and exact StoreKit, account, or registry reason in Entitlement status and recovery — Retry. Dynamic Type stacks status and explanation. The announcement first communicates: Plan status is being checked again; the last confirmed local access remains."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-ENTITLEMENT-RETRY-001"
+label = "Check Again"
+canonical_owner = "surface.you.entitlement-command-contract"
+preconditions = ["The current observed entitlement revision, StoreKit transaction freshness, and account association have been revalidated", "The current product-registry posture has been checked and no unregistered product can be presented or purchased"]
+destination = "the freshly verified entitlement status in Entitlement status and recovery — Retry"
+effect = "The Check Again external result causes no local canonical mutation; it refreshes only signed StoreKit transaction and account-association evidence. The last verified local status and full local core remain available while the result is checked. Visible evidence remains: Plan status is being checked again; the last confirmed local access remains."
+success_focus = "the verified Check Again result or current status heading in Entitlement status and recovery — Retry"
+failure_focus = "the Check Again control and exact StoreKit, account, or registry reason in Entitlement status and recovery — Retry"
+commit_boundary = "External-result: entitlement observation completes outside canonical mutation and requires separate validation before persistence."
+rollback_undo = "Cancellation, timeout, or invalid response preserves the prior verified status and focuses Check Again without changing local data or access."
+privacy_egress = "StoreKit receives only minimum transaction/account fields; Goals, Captures, Time, settings, Proof, History, Receipts, and the private graph never transfer or bind through entitlement controls."
+verification_ids = ["SCENARIO-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-YOU-ENTITLEMENT-REVOKED"
+requirement_id = "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Restore Purchases => destination: the verified restore result and entitlement status in Entitlement status and recovery — Revoked; effect: The Restore Purchases external result causes no local canonical mutation; it validates current signed StoreKit transactions and returns a bounded observation. Any later accepted status persistence is separate, non-sensitive, and Receipt-backed. Restore cannot switch accounts, transfer data, bind the private graph, or restrict the offline core. Visible evidence remains until verified: Plan access was withdrawn, but private local information remains available.; focus: the verified Restore Purchases result or current status heading in Entitlement status and recovery — Revoked."
+durable_effect = "Exact entitlement status and external-result consequences: Restore Purchases: The Restore Purchases external result causes no local canonical mutation; it validates current signed StoreKit transactions and returns a bounded observation. Any later accepted status persistence is separate, non-sensitive, and Receipt-backed. Restore cannot switch accounts, transfer data, bind the private graph, or restrict the offline core. Visible evidence remains until verified: Plan access was withdrawn, but private local information remains available. No SKU, price, plan, paywall, trial promise, paid-feature boundary, downgrade restriction, or core restriction is created. Current visible status: Plan access was withdrawn, but private local information remains available."
+recovery_rollback = "Exact cancellation, retry, mismatch, restore, and downgrade recovery: Restore Purchases: Cancellation or failure preserves the prior verified status and all local data; retry cannot duplicate a transaction or entitlement observation. A mismatch cannot bind or transfer the graph, and downgrade never deletes or hides local data. Recovery preserves: Plan access was withdrawn, but private local information remains available."
+offline_behavior = "The last verified entitlement status shows freshness offline; purchase, restore, check, and Apple management wait when unavailable. The full local core and all local private data remain usable independently. Offline evidence remains: Plan access was withdrawn, but private local information remains available."
+accessibility_focus = "VoiceOver announces status, freshness, account mismatch, external destination, cancellation, and local-core consequence without pressure: Restore Purchases announces verified status and consequence; success focuses the verified Restore Purchases result or current status heading in Entitlement status and recovery — Revoked; rejection focuses the Restore Purchases control and exact StoreKit, account, or registry reason in Entitlement status and recovery — Revoked. Dynamic Type stacks status and explanation. The announcement first communicates: Plan access was withdrawn, but private local information remains available."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-ENTITLEMENT-REVOKED-001"
+label = "Restore Purchases"
+canonical_owner = "surface.you.entitlement-command-contract"
+preconditions = ["Current signed StoreKit transactions can be validated", "The current observed entitlement revision, StoreKit transaction freshness, and account association have been revalidated", "The current product-registry posture has been checked and no unregistered product can be presented or purchased", "The request cannot switch accounts, transfer private data, or bind the private graph"]
+destination = "the verified restore result and entitlement status in Entitlement status and recovery — Revoked"
+effect = "The Restore Purchases external result causes no local canonical mutation; it validates current signed StoreKit transactions and returns a bounded observation. Any later accepted status persistence is separate, non-sensitive, and Receipt-backed. Restore cannot switch accounts, transfer data, bind the private graph, or restrict the offline core. Visible evidence remains until verified: Plan access was withdrawn, but private local information remains available."
+success_focus = "the verified Restore Purchases result or current status heading in Entitlement status and recovery — Revoked"
+failure_focus = "the Restore Purchases control and exact StoreKit, account, or registry reason in Entitlement status and recovery — Revoked"
+commit_boundary = "External-result: StoreKit restore completes outside canonical product mutation and must be revalidated before a separate entitlement-status commit."
+rollback_undo = "Cancellation or failure preserves the prior verified status and all local data; retry cannot duplicate a transaction or entitlement observation."
+privacy_egress = "StoreKit receives only minimum transaction/account fields; Goals, Captures, Time, settings, Proof, History, Receipts, and the private graph never transfer or bind through entitlement controls."
+verification_ids = ["SCENARIO-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-YOU-ENTITLEMENT-SUPPORTED-SHARING"
+requirement_id = "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Done => destination: the originating You or Account & Sync context from Entitlement status and recovery — Supported Sharing; effect: No durable mutation occurs and no Receipt is created; Done closes only the current entitlement status. Local private data, offline core access, History, Proof, and settings remain available independently. Visible evidence remains: Supported purchase sharing is active. Goals, Captures, time, and personal settings are not shared.; focus: the verified Done result or current status heading in Entitlement status and recovery — Supported Sharing."
+durable_effect = "Exact entitlement status and external-result consequences: Done: No durable mutation occurs and no Receipt is created; Done closes only the current entitlement status. Local private data, offline core access, History, Proof, and settings remain available independently. Visible evidence remains: Supported purchase sharing is active. Goals, Captures, time, and personal settings are not shared. No SKU, price, plan, paywall, trial promise, paid-feature boundary, downgrade restriction, or core restriction is created. Current visible status: Supported purchase sharing is active. Goals, Captures, time, and personal settings are not shared."
+recovery_rollback = "Exact cancellation, retry, mismatch, restore, and downgrade recovery: Done: No Undo is required; reopening Plan & Purchases restores the last verified status and freshness explanation. A mismatch cannot bind or transfer the graph, and downgrade never deletes or hides local data. Recovery preserves: Supported purchase sharing is active. Goals, Captures, time, and personal settings are not shared."
+offline_behavior = "The last verified entitlement status shows freshness offline; purchase, restore, check, and Apple management wait when unavailable. The full local core and all local private data remain usable independently. Offline evidence remains: Supported purchase sharing is active. Goals, Captures, time, and personal settings are not shared."
+accessibility_focus = "VoiceOver announces status, freshness, account mismatch, external destination, cancellation, and local-core consequence without pressure: Done announces verified status and consequence; success focuses the verified Done result or current status heading in Entitlement status and recovery — Supported Sharing; rejection focuses the Done control and exact StoreKit, account, or registry reason in Entitlement status and recovery — Supported Sharing. Dynamic Type stacks status and explanation. The announcement first communicates: Supported purchase sharing is active. Goals, Captures, time, and personal settings are not shared."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-ENTITLEMENT-SUPPORTED-SHARING-001"
+label = "Done"
+canonical_owner = "surface.you.entitlement-command-contract"
+preconditions = ["The current observed entitlement revision, StoreKit transaction freshness, and account association have been revalidated", "The current product-registry posture has been checked and no unregistered product can be presented or purchased"]
+destination = "the originating You or Account & Sync context from Entitlement status and recovery — Supported Sharing"
+effect = "No durable mutation occurs and no Receipt is created; Done closes only the current entitlement status. Local private data, offline core access, History, Proof, and settings remain available independently. Visible evidence remains: Supported purchase sharing is active. Goals, Captures, time, and personal settings are not shared."
+success_focus = "the verified Done result or current status heading in Entitlement status and recovery — Supported Sharing"
+failure_focus = "the Done control and exact StoreKit, account, or registry reason in Entitlement status and recovery — Supported Sharing"
+commit_boundary = "Non-mutating: dismissal completes without entitlement, account, StoreKit, or local-data mutation."
+rollback_undo = "No Undo is required; reopening Plan & Purchases restores the last verified status and freshness explanation."
+privacy_egress = "StoreKit receives only minimum transaction/account fields; Goals, Captures, Time, settings, Proof, History, Receipts, and the private graph never transfer or bind through entitlement controls."
+verification_ids = ["SCENARIO-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-YOU-ENTITLEMENT-TRIAL"
+requirement_id = "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "View Plans => destination: the non-merchandising plan-status explanation in Entitlement status and recovery — Trial; effect: No durable mutation occurs and no Receipt is created; View Plans may explain current observed status and the product-registry boundary only. Without a current owner-approved registry it exposes no Purchase command, SKU, price, plan promise, paywall, trial promise, paid-feature boundary, downgrade restriction, or core restriction. Visible evidence remains: Trial access is active, with its end condition stated without pressure.; focus: the verified View Plans result or current status heading in Entitlement status and recovery — Trial."
+durable_effect = "Exact entitlement status and external-result consequences: View Plans: No durable mutation occurs and no Receipt is created; View Plans may explain current observed status and the product-registry boundary only. Without a current owner-approved registry it exposes no Purchase command, SKU, price, plan promise, paywall, trial promise, paid-feature boundary, downgrade restriction, or core restriction. Visible evidence remains: Trial access is active, with its end condition stated without pressure. No SKU, price, plan, paywall, trial promise, paid-feature boundary, downgrade restriction, or core restriction is created. Current visible status: Trial access is active, with its end condition stated without pressure."
+recovery_rollback = "Exact cancellation, retry, mismatch, restore, and downgrade recovery: View Plans: No Undo is required; dismissal restores the observed status and never changes local data, entitlement state, or core availability. A mismatch cannot bind or transfer the graph, and downgrade never deletes or hides local data. Recovery preserves: Trial access is active, with its end condition stated without pressure."
+offline_behavior = "The last verified entitlement status shows freshness offline; purchase, restore, check, and Apple management wait when unavailable. The full local core and all local private data remain usable independently. Offline evidence remains: Trial access is active, with its end condition stated without pressure."
+accessibility_focus = "VoiceOver announces status, freshness, account mismatch, external destination, cancellation, and local-core consequence without pressure: View Plans announces verified status and consequence; success focuses the verified View Plans result or current status heading in Entitlement status and recovery — Trial; rejection focuses the View Plans control and exact StoreKit, account, or registry reason in Entitlement status and recovery — Trial. Dynamic Type stacks status and explanation. The announcement first communicates: Trial access is active, with its end condition stated without pressure."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-ENTITLEMENT-TRIAL-001"
+label = "View Plans"
+canonical_owner = "surface.you.entitlement-command-contract"
+preconditions = ["No separately registered, owner-approved current StoreKit product registry exists, so Purchase remains unavailable", "The current observed entitlement revision, StoreKit transaction freshness, and account association have been revalidated", "The current product-registry posture has been checked and no unregistered product can be presented or purchased"]
+destination = "the non-merchandising plan-status explanation in Entitlement status and recovery — Trial"
+effect = "No durable mutation occurs and no Receipt is created; View Plans may explain current observed status and the product-registry boundary only. Without a current owner-approved registry it exposes no Purchase command, SKU, price, plan promise, paywall, trial promise, paid-feature boundary, downgrade restriction, or core restriction. Visible evidence remains: Trial access is active, with its end condition stated without pressure."
+success_focus = "the verified View Plans result or current status heading in Entitlement status and recovery — Trial"
+failure_focus = "the View Plans control and exact StoreKit, account, or registry reason in Entitlement status and recovery — Trial"
+commit_boundary = "Non-mutating: plan-status viewing remains informational and cannot authorize StoreKit merchandising or purchase."
+rollback_undo = "No Undo is required; dismissal restores the observed status and never changes local data, entitlement state, or core availability."
+privacy_egress = "StoreKit receives only minimum transaction/account fields; Goals, Captures, Time, settings, Proof, History, Receipts, and the private graph never transfer or bind through entitlement controls."
+verification_ids = ["SCENARIO-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-YOU-ENTITLEMENT-UNKNOWN"
+requirement_id = "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Check Again => destination: the freshly verified entitlement status in Entitlement status and recovery — Unknown; effect: The Check Again external result causes no local canonical mutation; it refreshes only signed StoreKit transaction and account-association evidence. The last verified local status and full local core remain available while the result is checked. Visible evidence remains: Plan status cannot be confirmed right now; local private information remains available.; focus: the verified Check Again result or current status heading in Entitlement status and recovery — Unknown."
+durable_effect = "Exact entitlement status and external-result consequences: Check Again: The Check Again external result causes no local canonical mutation; it refreshes only signed StoreKit transaction and account-association evidence. The last verified local status and full local core remain available while the result is checked. Visible evidence remains: Plan status cannot be confirmed right now; local private information remains available. No SKU, price, plan, paywall, trial promise, paid-feature boundary, downgrade restriction, or core restriction is created. Current visible status: Plan status cannot be confirmed right now; local private information remains available."
+recovery_rollback = "Exact cancellation, retry, mismatch, restore, and downgrade recovery: Check Again: Cancellation, timeout, or invalid response preserves the prior verified status and focuses Check Again without changing local data or access. A mismatch cannot bind or transfer the graph, and downgrade never deletes or hides local data. Recovery preserves: Plan status cannot be confirmed right now; local private information remains available."
+offline_behavior = "The last verified entitlement status shows freshness offline; purchase, restore, check, and Apple management wait when unavailable. The full local core and all local private data remain usable independently. Offline evidence remains: Plan status cannot be confirmed right now; local private information remains available."
+accessibility_focus = "VoiceOver announces status, freshness, account mismatch, external destination, cancellation, and local-core consequence without pressure: Check Again announces verified status and consequence; success focuses the verified Check Again result or current status heading in Entitlement status and recovery — Unknown; rejection focuses the Check Again control and exact StoreKit, account, or registry reason in Entitlement status and recovery — Unknown. Dynamic Type stacks status and explanation. The announcement first communicates: Plan status cannot be confirmed right now; local private information remains available."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-YOU-ENTITLEMENT-UNKNOWN-001"
+label = "Check Again"
+canonical_owner = "surface.you.entitlement-command-contract"
+preconditions = ["The current observed entitlement revision, StoreKit transaction freshness, and account association have been revalidated", "The current product-registry posture has been checked and no unregistered product can be presented or purchased"]
+destination = "the freshly verified entitlement status in Entitlement status and recovery — Unknown"
+effect = "The Check Again external result causes no local canonical mutation; it refreshes only signed StoreKit transaction and account-association evidence. The last verified local status and full local core remain available while the result is checked. Visible evidence remains: Plan status cannot be confirmed right now; local private information remains available."
+success_focus = "the verified Check Again result or current status heading in Entitlement status and recovery — Unknown"
+failure_focus = "the Check Again control and exact StoreKit, account, or registry reason in Entitlement status and recovery — Unknown"
+commit_boundary = "External-result: entitlement observation completes outside canonical mutation and requires separate validation before persistence."
+rollback_undo = "Cancellation, timeout, or invalid response preserves the prior verified status and focuses Check Again without changing local data or access."
+privacy_egress = "StoreKit receives only minimum transaction/account fields; Goals, Captures, Time, settings, Proof, History, Receipts, and the private graph never transfer or bind through entitlement controls."
+verification_ids = ["SCENARIO-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001"]
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-ROOT-ACCOUNT-SIGNED-IN"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -389,7 +641,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-ROOT-ACCOUNT-SIGNED-OUT"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -414,7 +665,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-ROOT-ACTION-REQUIRED"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -439,7 +689,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-ROOT-CONTINUITY-CONFLICTED"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -464,7 +713,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-ROOT-CONTINUITY-DISABLED"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -489,7 +737,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-ROOT-CONTINUITY-PENDING"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -514,7 +761,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-ROOT-DIAGNOSTICS-DEGRADED"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -539,7 +785,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "Diagnostics default to redacted local health metadata; no private titles or content leave the device."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-ROOT-DIAGNOSTICS-HEALTHY"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -564,7 +809,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "Diagnostics default to redacted local health metadata; no private titles or content leave the device."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-ROOT-LIFE-CAPITAL-EMPTY"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -589,7 +833,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-ROOT-LIFE-CAPITAL-POPULATED"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -614,7 +857,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-ROOT-NO-ACCOUNT-HEALTHY"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -639,7 +881,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-ROOT-NORMAL"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -664,7 +905,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-ROOT-PERMISSIONS-AVAILABLE"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -689,7 +929,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-ROOT-PERMISSIONS-DENIED"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -714,7 +953,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-ROOT-SETUP-COMPLETE"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -739,7 +977,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-ROOT-SETUP-PARTIAL"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -764,7 +1001,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-SETTINGS-APP-LOCK-DISABLED"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -789,7 +1025,6 @@ commit_boundary = "Mutation: the typed command commits only after current-revisi
 rollback_undo = "Cancellation before commit changes nothing; after commit, only the named typed Undo or recovery command may append a reversing Event while History remains intact."
 privacy_egress = "Authentication and the App Lock setting remain local; no Ambitions Account or network is required."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-SETTINGS-APP-LOCK-ENABLED"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -814,7 +1049,6 @@ commit_boundary = "Mutation: the typed command commits only after current-revisi
 rollback_undo = "Cancellation before commit changes nothing; after commit, only the named typed Undo or recovery command may append a reversing Event while History remains intact."
 privacy_egress = "Authentication and the App Lock setting remain local; no Ambitions Account or network is required."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-SETTINGS-APPEARANCE-DARK"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -839,7 +1073,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-SETTINGS-APPEARANCE-LIGHT"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -864,7 +1097,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-SETTINGS-APPEARANCE-OLED-DARK"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -889,7 +1121,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-SETTINGS-APPEARANCE-SYSTEM"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -914,7 +1145,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-SETTINGS-AUTOMATION-POLICY"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -939,7 +1169,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-SETTINGS-BIOMETRIC-UNAVAILABLE"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -964,7 +1193,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-SETTINGS-INCREASE-CONTRAST"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -989,7 +1217,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-SETTINGS-NOTIFICATION-CONTROLS"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -1014,7 +1241,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-SETTINGS-PRIVACY-REVIEW"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -1039,7 +1265,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-YOU-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-YOU-SETTINGS-TIME-PREFERENCES"
 requirement_id = "SPEC-SURFACE-YOU-COMMAND-CONTRACT-001"
@@ -1228,6 +1453,26 @@ You SHOULD provide concise contextual education at the relevant control or state
 - **Supersedes:** none
 
 The owning specification MUST authorize only the state-bound command labels `Create Backup`, `Delete local data permanently`, `Done`, `Export Data`, `Life Capital`, `Open diagnostics`, `Open settings`, `Reset preferences`, `Restore`, `Restore Backup`, `Review conflict`, `Review continuity status`, `Try again`, `Turn off App Lock`, `Turn on App Lock` for the structured states declared in this file. Every command MUST bind stable state and object identity, current revision, canonical owner, preconditions, destination, exact effect and focus targets; navigation, inspection, selection, preview, refresh, and cancellation remain non-mutating. A durable mutation MUST commit only after current-revision validation and required confirmation through Command -> Event -> Projection -> Receipt -> Replay; cancellation or rejection preserves accepted input, and rollback or Undo uses an owning typed command without rewriting history. Local canonical behavior MUST remain available offline without an account; external results remain separate and retryable without replaying the local commit. Sensitive content MUST remain local unless explicit minimum-field egress review passes. VoiceOver MUST announce object, accepted or rejected outcome, consequence, recovery or Undo availability, and destination focus; no color, motion, gesture, or position may carry command meaning alone. Verification MUST prove every declared state, command, transition, commit boundary, durable effect, rollback, offline, privacy, accessibility, and focus mapping against the structured contract.
+
+## SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001 — Entitlement commands fail closed without a product registry
+
+- **Concept:** `surface.you.entitlement-command-contract`
+- **Modality:** `MUST`
+- **Scope:** Entitlement status, plan viewing, retry, restore, account mismatch, Apple subscription management, offline access, privacy, focus, and product-registry gating
+- **Status:** `normative`
+- **Verification:** `SCENARIO-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001`
+- **Supersedes:** none
+
+`You → Account & Sync → Plan & Purchases` MUST expose `View Plans`, `Purchase`, `Restore Purchases`, `Check Again`, `Review Account`, `Manage Subscription`, and `Done`.
+
+`Purchase` is authorized only for a separately registered, owner-approved StoreKit product. This contract MUST NOT create a SKU, price, plan, paywall, trial promise, or paid-feature boundary. StoreKit owns the purchase sheet; cancellation changes nothing. Verified success may persist only non-sensitive transaction/entitlement state and a Receipt.
+
+`Restore Purchases` MUST validate current signed StoreKit transactions. Account mismatch MUST NOT switch accounts, transfer private data, or bind the graph automatically; `Review Account` explains the mismatch and routes to the separate account flow.
+
+`Manage Subscription` leaves to Apple’s subscription management. A downgrade becomes durable only after verified entitlement observation and MUST NOT delete or make existing local data inaccessible.
+
+
+Entry focuses current status. Purchase/restore success focuses verified status; cancellation returns to its command; mismatch focuses the mismatch explanation and `Review Account`; failure focuses `Check Again`. Offline Cached shows freshness; purchase and restore are unavailable offline while local core data remains usable.
 
 ## Completeness contract
 

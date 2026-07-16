@@ -51,13 +51,13 @@ class UXBlueprintReviewRepairTests(unittest.TestCase):
 
         self.assertNotIn("requirement_disposition_policy", payload)
         dispositions = payload["requirement_dispositions"]
-        self.assertEqual(len(dispositions), 449)
+        self.assertEqual(len(dispositions), 461)
         self.assertEqual(
             [item["requirement_id"] for item in dispositions],
             sorted(item["requirement_id"] for item in dispositions),
         )
         self.assertEqual(
-            len({item["requirement_id"] for item in dispositions}), 449
+            len({item["requirement_id"] for item in dispositions}), 461
         )
         for item in dispositions:
             self.assertEqual(
@@ -138,7 +138,7 @@ class UXBlueprintReviewRepairTests(unittest.TestCase):
             self.assertEqual(by_id[requirement_id]["blueprint_ids"], expected[1])
 
         summary = module.validate_ux_blueprint(REPO_ROOT, payload)
-        self.assertEqual(summary.disposition_count, 449)
+        self.assertEqual(summary.disposition_count, 461)
 
     def test_each_screen_has_nine_fail_closed_taxonomy_dispositions(self):
         module = self._module()

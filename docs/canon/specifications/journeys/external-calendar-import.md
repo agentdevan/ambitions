@@ -6,13 +6,273 @@ status = "normative"
 owner_domain = "journey-external-calendar-import"
 canon_revision = 1
 profile = "journey-v1"
-owns_concepts = ["journey.calendar-diff.conflict-choice", "journey.calendar-diff.grouping", "journey.calendar-diff.no-silent-mutation", "journey.calendar-diff.notification-handoff", "journey.calendar-invite-diff",
-  "journey.calendar-import.commit",
+owns_concepts = [
+  "journey.calendar-diff.conflict-choice",
+  "journey.calendar-diff.grouping",
+  "journey.calendar-diff.no-silent-mutation",
+  "journey.calendar-diff.notification-handoff",
   "journey.calendar-import.candidate",
+  "journey.calendar-import.command-contract",
+  "journey.calendar-import.commit",
+  "journey.calendar-invite-diff",
 ]
 inherits = ["TIME-EXTERNAL-VISIBILITY-001", "CONTROL-MATERIAL-CONFIRMATION-001", "LAW-RUNTIME-NO-DIRECT-WRITE-001", "LAW-RUNTIME-DURABLE-SUCCESS-001"]
 depends_on = ["CONSTITUTION", "APP-PERMISSIONS", "SURFACE-TIME", "OBJECT-IMPORT-DIFF-RECORD", "OBJECT-EVENT", "OBJECT-SOURCE-REFERENCE", "GLOBAL-TRUST-INSPECTION"]
 source_owners = ["Native/Ambitions/Surfaces/Time/", "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/", "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/", "Native/Ambitions/Core/LocalRuntimeOS/Commands/", "Native/Ambitions/Core/LocalRuntimeOS/Inspection/", "Native/Ambitions/Trust/", "Native/Ambitions/Quality/"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-TIME-IMPORT-COMMITTING-IMPORT"
+requirement_id = "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Done => destination: the Time import origin or durable result summary from External calendar review — Committing Import; effect: No durable mutation occurs and no Receipt is created; Done dismisses only the current progress or result presentation. Completed and failed record IDs, source lineage, Receipts, and external-source status remain available. Visible evidence remains: Creating the selected Ambitions-native copies. The external source is not being edited.; focus: the first affected record or Done result heading in External calendar review — Committing Import."
+durable_effect = "Exact import consequences across reviewed groups [Needs attention; Safe to import; Duplicate or link candidates; Removed source; Ignored history]: Done: No durable mutation occurs and no Receipt is created; Done dismisses only the current progress or result presentation. Completed and failed record IDs, source lineage, Receipts, and external-source status remain available. Visible evidence remains: Creating the selected Ambitions-native copies. The external source is not being edited. Outcomes preserve native-object, capacity, lineage, badge, notification, and external effects separately. Current visible status: Creating the selected Ambitions-native copies. The external source is not being edited."
+recovery_rollback = "Exact atomic partial, failed-ID retry, semantic Undo, and external-write recovery: Done: No Undo is required; reopening Time import restores the durable completed/failed identities, Receipt, and safe recovery route. Completed and failed identities remain explicit, and a changed source fingerprint invalidates confirmation. Recovery preserves: Creating the selected Ambitions-native copies. The external source is not being edited."
+offline_behavior = "Stored Import/Diff Records, exact groups, selection, reviewed outcomes, lineage, completed/failed IDs, Receipts, and recovery remain usable offline. New source reads and external writes wait without changing accepted local truth. Offline evidence remains: Creating the selected Ambitions-native copies. The external source is not being edited."
+accessibility_focus = "VoiceOver names group, source summary, prior/new values, outcome, native-object and capacity consequence, external effect, and recovery without color dependence: Done announces the exact record consequence; success focuses the first affected record or Done result heading in External calendar review — Committing Import; rejection focuses the Done control and first stale, invalid, or failed record in External calendar review — Committing Import. Dynamic Type stacks every diff and consequence. The announcement first communicates: Creating the selected Ambitions-native copies. The external source is not being edited."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-IMPORT-COMMITTING-IMPORT-001"
+label = "Done"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["Permission and minimum necessary source access remain valid for the attempted import", "The presented source identity, source fingerprint, diff revision, and local revision have been revalidated"]
+destination = "the Time import origin or durable result summary from External calendar review — Committing Import"
+effect = "No durable mutation occurs and no Receipt is created; Done dismisses only the current progress or result presentation. Completed and failed record IDs, source lineage, Receipts, and external-source status remain available. Visible evidence remains: Creating the selected Ambitions-native copies. The external source is not being edited."
+success_focus = "the first affected record or Done result heading in External calendar review — Committing Import"
+failure_focus = "the Done control and first stale, invalid, or failed record in External calendar review — Committing Import"
+commit_boundary = "Non-mutating: dismissal completes without changing selection, import outcomes, lineage, or external source."
+rollback_undo = "No Undo is required; reopening Time import restores the durable completed/failed identities, Receipt, and safe recovery route."
+privacy_egress = "Review uses minimum necessary stored source facts; selection and preview never alter the source, and any explicit external write sends only approved event fields with a separate egress Receipt."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-TIME-IMPORT-EXTERNAL-SOURCE-UNCHANGED"
+requirement_id = "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Done => destination: the Time import origin or durable result summary from External calendar review — External Source Unchanged; effect: No durable mutation occurs and no Receipt is created; Done dismisses only the current progress or result presentation. Completed and failed record IDs, source lineage, Receipts, and external-source status remain available. Visible evidence remains: Import complete. The external source remains unchanged; Ambitions created separate native copies only.; focus: the first affected record or Done result heading in External calendar review — External Source Unchanged."
+durable_effect = "Exact import consequences across reviewed groups [Needs attention; Safe to import; Duplicate or link candidates; Removed source; Ignored history]: Done: No durable mutation occurs and no Receipt is created; Done dismisses only the current progress or result presentation. Completed and failed record IDs, source lineage, Receipts, and external-source status remain available. Visible evidence remains: Import complete. The external source remains unchanged; Ambitions created separate native copies only. Outcomes preserve native-object, capacity, lineage, badge, notification, and external effects separately. Current visible status: Import complete. The external source remains unchanged; Ambitions created separate native copies only."
+recovery_rollback = "Exact atomic partial, failed-ID retry, semantic Undo, and external-write recovery: Done: No Undo is required; reopening Time import restores the durable completed/failed identities, Receipt, and safe recovery route. Completed and failed identities remain explicit, and a changed source fingerprint invalidates confirmation. Recovery preserves: Import complete. The external source remains unchanged; Ambitions created separate native copies only."
+offline_behavior = "Stored Import/Diff Records, exact groups, selection, reviewed outcomes, lineage, completed/failed IDs, Receipts, and recovery remain usable offline. New source reads and external writes wait without changing accepted local truth. Offline evidence remains: Import complete. The external source remains unchanged; Ambitions created separate native copies only."
+accessibility_focus = "VoiceOver names group, source summary, prior/new values, outcome, native-object and capacity consequence, external effect, and recovery without color dependence: Done announces the exact record consequence; success focuses the first affected record or Done result heading in External calendar review — External Source Unchanged; rejection focuses the Done control and first stale, invalid, or failed record in External calendar review — External Source Unchanged. Dynamic Type stacks every diff and consequence. The announcement first communicates: Import complete. The external source remains unchanged; Ambitions created separate native copies only."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-IMPORT-EXTERNAL-SOURCE-UNCHANGED-001"
+label = "Done"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["Permission and minimum necessary source access remain valid for the attempted import", "The presented source identity, source fingerprint, diff revision, and local revision have been revalidated"]
+destination = "the Time import origin or durable result summary from External calendar review — External Source Unchanged"
+effect = "No durable mutation occurs and no Receipt is created; Done dismisses only the current progress or result presentation. Completed and failed record IDs, source lineage, Receipts, and external-source status remain available. Visible evidence remains: Import complete. The external source remains unchanged; Ambitions created separate native copies only."
+success_focus = "the first affected record or Done result heading in External calendar review — External Source Unchanged"
+failure_focus = "the Done control and first stale, invalid, or failed record in External calendar review — External Source Unchanged"
+commit_boundary = "Non-mutating: dismissal completes without changing selection, import outcomes, lineage, or external source."
+rollback_undo = "No Undo is required; reopening Time import restores the durable completed/failed identities, Receipt, and safe recovery route."
+privacy_egress = "Review uses minimum necessary stored source facts; selection and preview never alter the source, and any explicit external write sends only approved event fields with a separate egress Receipt."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-TIME-IMPORT-EXTERNAL-WRITE-FAILURE"
+requirement_id = "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Retry Failed Items => destination: the external-write reconciliation result for only the failed identities from External calendar review — External Write Failure; effect: The Retry Failed Items external result causes no local canonical mutation; it retries only explicitly failed external-dispatch identities after revalidating source and local freshness, cannot replay completed local imports, and records the separate external result and egress Receipt. Accepted Ambitions-owned copies remain unchanged. Visible evidence remains: An outside calendar update failed; the Ambitions-owned copy remains unchanged.; focus: the first affected record or Retry Failed Items result heading in External calendar review — External Write Failure."
+durable_effect = "Exact import consequences across reviewed groups [Needs attention; Safe to import; Duplicate or link candidates; Removed source; Ignored history]: Retry Failed Items: The Retry Failed Items external result causes no local canonical mutation; it retries only explicitly failed external-dispatch identities after revalidating source and local freshness, cannot replay completed local imports, and records the separate external result and egress Receipt. Accepted Ambitions-owned copies remain unchanged. Visible evidence remains: An outside calendar update failed; the Ambitions-owned copy remains unchanged. Outcomes preserve native-object, capacity, lineage, badge, notification, and external effects separately. Current visible status: An outside calendar update failed; the Ambitions-owned copy remains unchanged."
+recovery_rollback = "Exact atomic partial, failed-ID retry, semantic Undo, and external-write recovery: Retry Failed Items: Cancellation leaves the accepted local import and failed external identity list unchanged; another retry starts only after fresh revalidation. Completed and failed identities remain explicit, and a changed source fingerprint invalidates confirmation. Recovery preserves: An outside calendar update failed; the Ambitions-owned copy remains unchanged."
+offline_behavior = "Stored Import/Diff Records, exact groups, selection, reviewed outcomes, lineage, completed/failed IDs, Receipts, and recovery remain usable offline. New source reads and external writes wait without changing accepted local truth. Offline evidence remains: An outside calendar update failed; the Ambitions-owned copy remains unchanged."
+accessibility_focus = "VoiceOver names group, source summary, prior/new values, outcome, native-object and capacity consequence, external effect, and recovery without color dependence: Retry Failed Items announces the exact record consequence; success focuses the first affected record or Retry Failed Items result heading in External calendar review — External Write Failure; rejection focuses the Retry Failed Items control and first stale, invalid, or failed record in External calendar review — External Write Failure. Dynamic Type stacks every diff and consequence. The announcement first communicates: An outside calendar update failed; the Ambitions-owned copy remains unchanged."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-IMPORT-EXTERNAL-WRITE-FAILURE-001"
+label = "Retry Failed Items"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["Every non-safe record has an explicit reviewed outcome before commit", "Every selected or failed record ID is explicit and belongs to its reviewed group", "Permission and minimum necessary source access remain valid for the attempted import", "The deterministic ordered batch can commit only at atomic per-record boundaries", "The failed identities name only external dispatches whose local per-record commits are already accepted", "The presented source identity, source fingerprint, diff revision, and local revision have been revalidated"]
+destination = "the external-write reconciliation result for only the failed identities from External calendar review — External Write Failure"
+effect = "The Retry Failed Items external result causes no local canonical mutation; it retries only explicitly failed external-dispatch identities after revalidating source and local freshness, cannot replay completed local imports, and records the separate external result and egress Receipt. Accepted Ambitions-owned copies remain unchanged. Visible evidence remains: An outside calendar update failed; the Ambitions-owned copy remains unchanged."
+success_focus = "the first affected record or Retry Failed Items result heading in External calendar review — External Write Failure"
+failure_focus = "the Retry Failed Items control and first stale, invalid, or failed record in External calendar review — External Write Failure"
+commit_boundary = "External-result: the external write is separately dispatched after local success and cannot redefine or replay the accepted canonical import."
+rollback_undo = "Cancellation leaves the accepted local import and failed external identity list unchanged; another retry starts only after fresh revalidation."
+privacy_egress = "Review uses minimum necessary stored source facts; selection and preview never alter the source, and any explicit external write sends only approved event fields with a separate egress Receipt."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-TIME-IMPORT-IMPORT-FAILED"
+requirement_id = "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Retry Failed Items => destination: the ordered retry result and first still-failed record from External calendar review — Import Failed; effect: Each failed identity executes one typed Retry Failed Items Command after source identity, source fingerprint, diff revision, and local revision validation; it appends an Event, updates the import and Time Projection, and creates a Receipt and History entry. Only failed IDs are retried, completed IDs cannot duplicate, and partial boundaries remain per-record. Visible evidence remains: The calendar import did not finish. The source and any completed local copies remain identifiable.; focus: the first affected record or Retry Failed Items result heading in External calendar review — Import Failed."
+durable_effect = "Exact import consequences across reviewed groups [Needs attention; Safe to import; Duplicate or link candidates; Removed source; Ignored history]: Retry Failed Items: Each failed identity executes one typed Retry Failed Items Command after source identity, source fingerprint, diff revision, and local revision validation; it appends an Event, updates the import and Time Projection, and creates a Receipt and History entry. Only failed IDs are retried, completed IDs cannot duplicate, and partial boundaries remain per-record. Visible evidence remains: The calendar import did not finish. The source and any completed local copies remain identifiable. Outcomes preserve native-object, capacity, lineage, badge, notification, and external effects separately. Current visible status: The calendar import did not finish. The source and any completed local copies remain identifiable."
+recovery_rollback = "Exact atomic partial, failed-ID retry, semantic Undo, and external-write recovery: Retry Failed Items: Before each record commit, cancellation leaves it failed; after commit, the record moves exactly once to completed and any remaining failed IDs stay explicit. Completed and failed identities remain explicit, and a changed source fingerprint invalidates confirmation. Recovery preserves: The calendar import did not finish. The source and any completed local copies remain identifiable."
+offline_behavior = "Stored Import/Diff Records, exact groups, selection, reviewed outcomes, lineage, completed/failed IDs, Receipts, and recovery remain usable offline. New source reads and external writes wait without changing accepted local truth. Offline evidence remains: The calendar import did not finish. The source and any completed local copies remain identifiable."
+accessibility_focus = "VoiceOver names group, source summary, prior/new values, outcome, native-object and capacity consequence, external effect, and recovery without color dependence: Retry Failed Items announces the exact record consequence; success focuses the first affected record or Retry Failed Items result heading in External calendar review — Import Failed; rejection focuses the Retry Failed Items control and first stale, invalid, or failed record in External calendar review — Import Failed. Dynamic Type stacks every diff and consequence. The announcement first communicates: The calendar import did not finish. The source and any completed local copies remain identifiable."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-IMPORT-IMPORT-FAILED-001"
+label = "Retry Failed Items"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["Every non-safe record has an explicit reviewed outcome before commit", "Every selected or failed record ID is explicit and belongs to its reviewed group", "Permission and minimum necessary source access remain valid for the attempted import", "The deterministic ordered batch can commit only at atomic per-record boundaries", "The presented source identity, source fingerprint, diff revision, and local revision have been revalidated"]
+destination = "the ordered retry result and first still-failed record from External calendar review — Import Failed"
+effect = "Each failed identity executes one typed Retry Failed Items Command after source identity, source fingerprint, diff revision, and local revision validation; it appends an Event, updates the import and Time Projection, and creates a Receipt and History entry. Only failed IDs are retried, completed IDs cannot duplicate, and partial boundaries remain per-record. Visible evidence remains: The calendar import did not finish. The source and any completed local copies remain identifiable."
+success_focus = "the first affected record or Retry Failed Items result heading in External calendar review — Import Failed"
+failure_focus = "the Retry Failed Items control and first stale, invalid, or failed record in External calendar review — Import Failed"
+commit_boundary = "Mutation: retry commits only failed identities, one atomic record at a time, through Event, Projection, Receipt, History, and replay-safe idempotency."
+rollback_undo = "Before each record commit, cancellation leaves it failed; after commit, the record moves exactly once to completed and any remaining failed IDs stay explicit."
+privacy_egress = "Review uses minimum necessary stored source facts; selection and preview never alter the source, and any explicit external write sends only approved event fields with a separate egress Receipt."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-TIME-IMPORT-IMPORT-UNDO-UNAVAILABLE"
+requirement_id = "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Done => destination: the Time import origin or durable result summary from External calendar review — Import Undo Unavailable; effect: No durable mutation occurs and no Receipt is created; Done dismisses only the current progress or result presentation. Completed and failed record IDs, source lineage, Receipts, and external-source status remain available. Visible evidence remains: Undo is unavailable because later native changes make reversal unsafe. The external source remains unchanged.; focus: the first affected record or Done result heading in External calendar review — Import Undo Unavailable."
+durable_effect = "Exact import consequences across reviewed groups [Needs attention; Safe to import; Duplicate or link candidates; Removed source; Ignored history]: Done: No durable mutation occurs and no Receipt is created; Done dismisses only the current progress or result presentation. Completed and failed record IDs, source lineage, Receipts, and external-source status remain available. Visible evidence remains: Undo is unavailable because later native changes make reversal unsafe. The external source remains unchanged. Outcomes preserve native-object, capacity, lineage, badge, notification, and external effects separately. Current visible status: Undo is unavailable because later native changes make reversal unsafe. The external source remains unchanged."
+recovery_rollback = "Exact atomic partial, failed-ID retry, semantic Undo, and external-write recovery: Done: No Undo is required; reopening Time import restores the durable completed/failed identities, Receipt, and safe recovery route. Completed and failed identities remain explicit, and a changed source fingerprint invalidates confirmation. Recovery preserves: Undo is unavailable because later native changes make reversal unsafe. The external source remains unchanged."
+offline_behavior = "Stored Import/Diff Records, exact groups, selection, reviewed outcomes, lineage, completed/failed IDs, Receipts, and recovery remain usable offline. New source reads and external writes wait without changing accepted local truth. Offline evidence remains: Undo is unavailable because later native changes make reversal unsafe. The external source remains unchanged."
+accessibility_focus = "VoiceOver names group, source summary, prior/new values, outcome, native-object and capacity consequence, external effect, and recovery without color dependence: Done announces the exact record consequence; success focuses the first affected record or Done result heading in External calendar review — Import Undo Unavailable; rejection focuses the Done control and first stale, invalid, or failed record in External calendar review — Import Undo Unavailable. Dynamic Type stacks every diff and consequence. The announcement first communicates: Undo is unavailable because later native changes make reversal unsafe. The external source remains unchanged."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-IMPORT-IMPORT-UNDO-UNAVAILABLE-001"
+label = "Done"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["Permission and minimum necessary source access remain valid for the attempted import", "The presented source identity, source fingerprint, diff revision, and local revision have been revalidated"]
+destination = "the Time import origin or durable result summary from External calendar review — Import Undo Unavailable"
+effect = "No durable mutation occurs and no Receipt is created; Done dismisses only the current progress or result presentation. Completed and failed record IDs, source lineage, Receipts, and external-source status remain available. Visible evidence remains: Undo is unavailable because later native changes make reversal unsafe. The external source remains unchanged."
+success_focus = "the first affected record or Done result heading in External calendar review — Import Undo Unavailable"
+failure_focus = "the Done control and first stale, invalid, or failed record in External calendar review — Import Undo Unavailable"
+commit_boundary = "Non-mutating: dismissal completes without changing selection, import outcomes, lineage, or external source."
+rollback_undo = "No Undo is required; reopening Time import restores the durable completed/failed identities, Receipt, and safe recovery route."
+privacy_egress = "Review uses minimum necessary stored source facts; selection and preview never alter the source, and any explicit external write sends only approved event fields with a separate egress Receipt."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-TIME-IMPORT-NATIVE-IMPORT-UNDO"
+requirement_id = "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Undo Imported Items => destination: the native import Undo result and preserved batch History from External calendar review — Native Import Undo; effect: A typed Undo Imported Items Command validates current native dependencies, source provenance, and inverse safety; appends an Event, updates the Time, import, lineage, capacity, and badge Projection, and creates a Receipt and History entry. It never changes the external source or erases prior import evidence. Visible evidence before Undo remains: Imported Ambitions-native items remain linked to their source. The external source remains unchanged, and earlier History remains available.; focus: the first affected record or Undo Imported Items result heading in External calendar review — Native Import Undo."
+durable_effect = "Exact import consequences across reviewed groups [Needs attention; Safe to import; Duplicate or link candidates; Removed source; Ignored history]: Undo Imported Items: A typed Undo Imported Items Command validates current native dependencies, source provenance, and inverse safety; appends an Event, updates the Time, import, lineage, capacity, and badge Projection, and creates a Receipt and History entry. It never changes the external source or erases prior import evidence. Visible evidence before Undo remains: Imported Ambitions-native items remain linked to their source. The external source remains unchanged, and earlier History remains available. Outcomes preserve native-object, capacity, lineage, badge, notification, and external effects separately. Current visible status: Imported Ambitions-native items remain linked to their source. The external source remains unchanged, and earlier History remains available."
+recovery_rollback = "Exact atomic partial, failed-ID retry, semantic Undo, and external-write recovery: Undo Imported Items: Before commit, cancellation changes nothing; after commit, redo or further recovery is a separately validated typed command, while unsafe Undo routes to detail, Trash or reconciliation. Completed and failed identities remain explicit, and a changed source fingerprint invalidates confirmation. Recovery preserves: Imported Ambitions-native items remain linked to their source. The external source remains unchanged, and earlier History remains available."
+offline_behavior = "Stored Import/Diff Records, exact groups, selection, reviewed outcomes, lineage, completed/failed IDs, Receipts, and recovery remain usable offline. New source reads and external writes wait without changing accepted local truth. Offline evidence remains: Imported Ambitions-native items remain linked to their source. The external source remains unchanged, and earlier History remains available."
+accessibility_focus = "VoiceOver names group, source summary, prior/new values, outcome, native-object and capacity consequence, external effect, and recovery without color dependence: Undo Imported Items announces the exact record consequence; success focuses the first affected record or Undo Imported Items result heading in External calendar review — Native Import Undo; rejection focuses the Undo Imported Items control and first stale, invalid, or failed record in External calendar review — Native Import Undo. Dynamic Type stacks every diff and consequence. The announcement first communicates: Imported Ambitions-native items remain linked to their source. The external source remains unchanged, and earlier History remains available."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-IMPORT-NATIVE-IMPORT-UNDO-001"
+label = "Undo Imported Items"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["A deterministic inverse remains semantically safe after dependency, provenance, Trash, and external-effect checks", "Permission and minimum necessary source access remain valid for the attempted import", "The exact imported native identities and prior lineage are still available", "The presented source identity, source fingerprint, diff revision, and local revision have been revalidated"]
+destination = "the native import Undo result and preserved batch History from External calendar review — Native Import Undo"
+effect = "A typed Undo Imported Items Command validates current native dependencies, source provenance, and inverse safety; appends an Event, updates the Time, import, lineage, capacity, and badge Projection, and creates a Receipt and History entry. It never changes the external source or erases prior import evidence. Visible evidence before Undo remains: Imported Ambitions-native items remain linked to their source. The external source remains unchanged, and earlier History remains available."
+success_focus = "the first affected record or Undo Imported Items result heading in External calendar review — Native Import Undo"
+failure_focus = "the Undo Imported Items control and first stale, invalid, or failed record in External calendar review — Native Import Undo"
+commit_boundary = "Mutation: semantic Undo commits only a proven deterministic inverse through Event, Projection, Receipt, History, and replay-safe ownership."
+rollback_undo = "Before commit, cancellation changes nothing; after commit, redo or further recovery is a separately validated typed command, while unsafe Undo routes to detail, Trash or reconciliation."
+privacy_egress = "Review uses minimum necessary stored source facts; selection and preview never alter the source, and any explicit external write sends only approved event fields with a separate egress Receipt."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-TIME-IMPORT-PARTIAL-IMPORT"
+requirement_id = "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Retry Failed Items => destination: the ordered retry result and first still-failed record from External calendar review — Partial Import; effect: Each failed identity executes one typed Retry Failed Items Command after source identity, source fingerprint, diff revision, and local revision validation; it appends an Event, updates the import and Time Projection, and creates a Receipt and History entry. Only failed IDs are retried, completed IDs cannot duplicate, and partial boundaries remain per-record. Visible evidence remains: Only some calendar items were copied; completed and missing items are clearly separated.; focus: the first affected record or Retry Failed Items result heading in External calendar review — Partial Import."
+durable_effect = "Exact import consequences across reviewed groups [Needs attention; Safe to import; Duplicate or link candidates; Removed source; Ignored history]: Retry Failed Items: Each failed identity executes one typed Retry Failed Items Command after source identity, source fingerprint, diff revision, and local revision validation; it appends an Event, updates the import and Time Projection, and creates a Receipt and History entry. Only failed IDs are retried, completed IDs cannot duplicate, and partial boundaries remain per-record. Visible evidence remains: Only some calendar items were copied; completed and missing items are clearly separated. Outcomes preserve native-object, capacity, lineage, badge, notification, and external effects separately. Current visible status: Only some calendar items were copied; completed and missing items are clearly separated."
+recovery_rollback = "Exact atomic partial, failed-ID retry, semantic Undo, and external-write recovery: Retry Failed Items: Before each record commit, cancellation leaves it failed; after commit, the record moves exactly once to completed and any remaining failed IDs stay explicit. Completed and failed identities remain explicit, and a changed source fingerprint invalidates confirmation. Recovery preserves: Only some calendar items were copied; completed and missing items are clearly separated."
+offline_behavior = "Stored Import/Diff Records, exact groups, selection, reviewed outcomes, lineage, completed/failed IDs, Receipts, and recovery remain usable offline. New source reads and external writes wait without changing accepted local truth. Offline evidence remains: Only some calendar items were copied; completed and missing items are clearly separated."
+accessibility_focus = "VoiceOver names group, source summary, prior/new values, outcome, native-object and capacity consequence, external effect, and recovery without color dependence: Retry Failed Items announces the exact record consequence; success focuses the first affected record or Retry Failed Items result heading in External calendar review — Partial Import; rejection focuses the Retry Failed Items control and first stale, invalid, or failed record in External calendar review — Partial Import. Dynamic Type stacks every diff and consequence. The announcement first communicates: Only some calendar items were copied; completed and missing items are clearly separated."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-IMPORT-PARTIAL-IMPORT-001"
+label = "Retry Failed Items"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["Every non-safe record has an explicit reviewed outcome before commit", "Every selected or failed record ID is explicit and belongs to its reviewed group", "Permission and minimum necessary source access remain valid for the attempted import", "The deterministic ordered batch can commit only at atomic per-record boundaries", "The presented source identity, source fingerprint, diff revision, and local revision have been revalidated"]
+destination = "the ordered retry result and first still-failed record from External calendar review — Partial Import"
+effect = "Each failed identity executes one typed Retry Failed Items Command after source identity, source fingerprint, diff revision, and local revision validation; it appends an Event, updates the import and Time Projection, and creates a Receipt and History entry. Only failed IDs are retried, completed IDs cannot duplicate, and partial boundaries remain per-record. Visible evidence remains: Only some calendar items were copied; completed and missing items are clearly separated."
+success_focus = "the first affected record or Retry Failed Items result heading in External calendar review — Partial Import"
+failure_focus = "the Retry Failed Items control and first stale, invalid, or failed record in External calendar review — Partial Import"
+commit_boundary = "Mutation: retry commits only failed identities, one atomic record at a time, through Event, Projection, Receipt, History, and replay-safe idempotency."
+rollback_undo = "Before each record commit, cancellation leaves it failed; after commit, the record moves exactly once to completed and any remaining failed IDs stay explicit."
+privacy_egress = "Review uses minimum necessary stored source facts; selection and preview never alter the source, and any explicit external write sends only approved event fields with a separate egress Receipt."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-TIME-IMPORT-RECONCILING"
+requirement_id = "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Review Selected => destination: the first selected record and its complete consequence preview from External calendar review — Reconciling; effect: No durable mutation occurs and no Receipt is created; Review Selected preserves selection while showing native-object, capacity, lineage, badge, notification, and external consequences for each record. Visible evidence remains: Imported and outside calendar versions are being compared before another change.; focus: the first affected record or Review Selected result heading in External calendar review — Reconciling."
+durable_effect = "Exact import consequences across reviewed groups [Needs attention; Safe to import; Duplicate or link candidates; Removed source; Ignored history]: Review Selected: No durable mutation occurs and no Receipt is created; Review Selected preserves selection while showing native-object, capacity, lineage, badge, notification, and external consequences for each record. Visible evidence remains: Imported and outside calendar versions are being compared before another change. Outcomes preserve native-object, capacity, lineage, badge, notification, and external effects separately. Current visible status: Imported and outside calendar versions are being compared before another change."
+recovery_rollback = "Exact atomic partial, failed-ID retry, semantic Undo, and external-write recovery: Review Selected: No Undo is required; cancellation returns to the exact groups, selection, and first reviewed record with local and external data unchanged. Completed and failed identities remain explicit, and a changed source fingerprint invalidates confirmation. Recovery preserves: Imported and outside calendar versions are being compared before another change."
+offline_behavior = "Stored Import/Diff Records, exact groups, selection, reviewed outcomes, lineage, completed/failed IDs, Receipts, and recovery remain usable offline. New source reads and external writes wait without changing accepted local truth. Offline evidence remains: Imported and outside calendar versions are being compared before another change."
+accessibility_focus = "VoiceOver names group, source summary, prior/new values, outcome, native-object and capacity consequence, external effect, and recovery without color dependence: Review Selected announces the exact record consequence; success focuses the first affected record or Review Selected result heading in External calendar review — Reconciling; rejection focuses the Review Selected control and first stale, invalid, or failed record in External calendar review — Reconciling. Dynamic Type stacks every diff and consequence. The announcement first communicates: Imported and outside calendar versions are being compared before another change."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-IMPORT-RECONCILING-001"
+label = "Review Selected"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["Permission and minimum necessary source access remain valid for the attempted import", "The presented source identity, source fingerprint, diff revision, and local revision have been revalidated"]
+destination = "the first selected record and its complete consequence preview from External calendar review — Reconciling"
+effect = "No durable mutation occurs and no Receipt is created; Review Selected preserves selection while showing native-object, capacity, lineage, badge, notification, and external consequences for each record. Visible evidence remains: Imported and outside calendar versions are being compared before another change."
+success_focus = "the first affected record or Review Selected result heading in External calendar review — Reconciling"
+failure_focus = "the Review Selected control and first stale, invalid, or failed record in External calendar review — Reconciling"
+commit_boundary = "Non-mutating: selection and consequence preview remain before every per-record canonical commit boundary."
+rollback_undo = "No Undo is required; cancellation returns to the exact groups, selection, and first reviewed record with local and external data unchanged."
+privacy_egress = "Review uses minimum necessary stored source facts; selection and preview never alter the source, and any explicit external write sends only approved event fields with a separate egress Receipt."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-TIME-IMPORT-RESTORED"
+requirement_id = "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Done => destination: the Time import origin or durable result summary from External calendar review — Restored; effect: No durable mutation occurs and no Receipt is created; Done dismisses only the current progress or result presentation. Completed and failed record IDs, source lineage, Receipts, and external-source status remain available. Visible evidence remains: Earlier Ambitions calendar information is visible again. Import History remains intact.; focus: the first affected record or Done result heading in External calendar review — Restored."
+durable_effect = "Exact import consequences across reviewed groups [Needs attention; Safe to import; Duplicate or link candidates; Removed source; Ignored history]: Done: No durable mutation occurs and no Receipt is created; Done dismisses only the current progress or result presentation. Completed and failed record IDs, source lineage, Receipts, and external-source status remain available. Visible evidence remains: Earlier Ambitions calendar information is visible again. Import History remains intact. Outcomes preserve native-object, capacity, lineage, badge, notification, and external effects separately. Current visible status: Earlier Ambitions calendar information is visible again. Import History remains intact."
+recovery_rollback = "Exact atomic partial, failed-ID retry, semantic Undo, and external-write recovery: Done: No Undo is required; reopening Time import restores the durable completed/failed identities, Receipt, and safe recovery route. Completed and failed identities remain explicit, and a changed source fingerprint invalidates confirmation. Recovery preserves: Earlier Ambitions calendar information is visible again. Import History remains intact."
+offline_behavior = "Stored Import/Diff Records, exact groups, selection, reviewed outcomes, lineage, completed/failed IDs, Receipts, and recovery remain usable offline. New source reads and external writes wait without changing accepted local truth. Offline evidence remains: Earlier Ambitions calendar information is visible again. Import History remains intact."
+accessibility_focus = "VoiceOver names group, source summary, prior/new values, outcome, native-object and capacity consequence, external effect, and recovery without color dependence: Done announces the exact record consequence; success focuses the first affected record or Done result heading in External calendar review — Restored; rejection focuses the Done control and first stale, invalid, or failed record in External calendar review — Restored. Dynamic Type stacks every diff and consequence. The announcement first communicates: Earlier Ambitions calendar information is visible again. Import History remains intact."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-IMPORT-RESTORED-001"
+label = "Done"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["Permission and minimum necessary source access remain valid for the attempted import", "The presented source identity, source fingerprint, diff revision, and local revision have been revalidated"]
+destination = "the Time import origin or durable result summary from External calendar review — Restored"
+effect = "No durable mutation occurs and no Receipt is created; Done dismisses only the current progress or result presentation. Completed and failed record IDs, source lineage, Receipts, and external-source status remain available. Visible evidence remains: Earlier Ambitions calendar information is visible again. Import History remains intact."
+success_focus = "the first affected record or Done result heading in External calendar review — Restored"
+failure_focus = "the Done control and first stale, invalid, or failed record in External calendar review — Restored"
+commit_boundary = "Non-mutating: dismissal completes without changing selection, import outcomes, lineage, or external source."
+rollback_undo = "No Undo is required; reopening Time import restores the durable completed/failed identities, Receipt, and safe recovery route."
+privacy_egress = "Review uses minimum necessary stored source facts; selection and preview never alter the source, and any explicit external write sends only approved event fields with a separate egress Receipt."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-TIME-IMPORT-REVIEWING-DIFF"
+requirement_id = "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Import Selected => destination: the ordered import result and first failed record or batch Receipt from External calendar review — Reviewing Diff; effect: Each selected identity executes one typed Import Selected Command that validates source identity, source fingerprint, diff revision, and local revision; appends an Event; updates the import, Time, lineage, capacity, and badge Projection; and creates a Receipt and History entry. The batch is a deterministic ordered collection of atomic per-record commits, so partial results occur only between records with explicit completed and failed IDs. No external source is changed. Visible evidence before commit remains: The import differences are visible. No outside or Ambitions item has changed.; focus: the first affected record or Import Selected result heading in External calendar review — Reviewing Diff.\nReview Selected => destination: the first selected record and its complete consequence preview from External calendar review — Reviewing Diff; effect: No durable mutation occurs and no Receipt is created; Review Selected preserves selection while showing native-object, capacity, lineage, badge, notification, and external consequences for each record. Visible evidence remains: The import differences are visible. No outside or Ambitions item has changed.; focus: the first affected record or Review Selected result heading in External calendar review — Reviewing Diff."
+durable_effect = "Exact import consequences across reviewed groups [Needs attention; Safe to import; Duplicate or link candidates; Removed source; Ignored history]: Import Selected: Each selected identity executes one typed Import Selected Command that validates source identity, source fingerprint, diff revision, and local revision; appends an Event; updates the import, Time, lineage, capacity, and badge Projection; and creates a Receipt and History entry. The batch is a deterministic ordered collection of atomic per-record commits, so partial results occur only between records with explicit completed and failed IDs. No external source is changed. Visible evidence before commit remains: The import differences are visible. No outside or Ambitions item has changed. | Review Selected: No durable mutation occurs and no Receipt is created; Review Selected preserves selection while showing native-object, capacity, lineage, badge, notification, and external consequences for each record. Visible evidence remains: The import differences are visible. No outside or Ambitions item has changed. Outcomes preserve native-object, capacity, lineage, badge, notification, and external effects separately. Current visible status: The import differences are visible. No outside or Ambitions item has changed."
+recovery_rollback = "Exact atomic partial, failed-ID retry, semantic Undo, and external-write recovery: Import Selected: Before the first record commit, cancellation changes nothing; after any record commits, completed and failed IDs stay explicit and recovery never rolls back a completed identity implicitly. | Review Selected: No Undo is required; cancellation returns to the exact groups, selection, and first reviewed record with local and external data unchanged. Completed and failed identities remain explicit, and a changed source fingerprint invalidates confirmation. Recovery preserves: The import differences are visible. No outside or Ambitions item has changed."
+offline_behavior = "Stored Import/Diff Records, exact groups, selection, reviewed outcomes, lineage, completed/failed IDs, Receipts, and recovery remain usable offline. New source reads and external writes wait without changing accepted local truth. Offline evidence remains: The import differences are visible. No outside or Ambitions item has changed."
+accessibility_focus = "VoiceOver names group, source summary, prior/new values, outcome, native-object and capacity consequence, external effect, and recovery without color dependence: Import Selected announces the exact record consequence; success focuses the first affected record or Import Selected result heading in External calendar review — Reviewing Diff; rejection focuses the Import Selected control and first stale, invalid, or failed record in External calendar review — Reviewing Diff | Review Selected announces the exact record consequence; success focuses the first affected record or Review Selected result heading in External calendar review — Reviewing Diff; rejection focuses the Review Selected control and first stale, invalid, or failed record in External calendar review — Reviewing Diff. Dynamic Type stacks every diff and consequence. The announcement first communicates: The import differences are visible. No outside or Ambitions item has changed."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-001"
+label = "Import Selected"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["Every non-safe record has an explicit reviewed outcome before commit", "Every selected or failed record ID is explicit and belongs to its reviewed group", "Every selected record is Safe to import with an unambiguous outcome", "Permission and minimum necessary source access remain valid for the attempted import", "The deterministic ordered batch can commit only at atomic per-record boundaries", "The presented source identity, source fingerprint, diff revision, and local revision have been revalidated"]
+destination = "the ordered import result and first failed record or batch Receipt from External calendar review — Reviewing Diff"
+effect = "Each selected identity executes one typed Import Selected Command that validates source identity, source fingerprint, diff revision, and local revision; appends an Event; updates the import, Time, lineage, capacity, and badge Projection; and creates a Receipt and History entry. The batch is a deterministic ordered collection of atomic per-record commits, so partial results occur only between records with explicit completed and failed IDs. No external source is changed. Visible evidence before commit remains: The import differences are visible. No outside or Ambitions item has changed."
+success_focus = "the first affected record or Import Selected result heading in External calendar review — Reviewing Diff"
+failure_focus = "the Import Selected control and first stale, invalid, or failed record in External calendar review — Reviewing Diff"
+commit_boundary = "Mutation: each selected record commits independently through Event, Projection, Receipt, History, and replay-safe ownership after the full freshness tuple is validated."
+rollback_undo = "Before the first record commit, cancellation changes nothing; after any record commits, completed and failed IDs stay explicit and recovery never rolls back a completed identity implicitly."
+privacy_egress = "Review uses minimum necessary stored source facts; selection and preview never alter the source, and any explicit external write sends only approved event fields with a separate egress Receipt."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-IMPORT-REVIEWING-DIFF-002"
+label = "Review Selected"
+canonical_owner = "journey.calendar-import.command-contract"
+preconditions = ["Permission and minimum necessary source access remain valid for the attempted import", "The presented source identity, source fingerprint, diff revision, and local revision have been revalidated"]
+destination = "the first selected record and its complete consequence preview from External calendar review — Reviewing Diff"
+effect = "No durable mutation occurs and no Receipt is created; Review Selected preserves selection while showing native-object, capacity, lineage, badge, notification, and external consequences for each record. Visible evidence remains: The import differences are visible. No outside or Ambitions item has changed."
+success_focus = "the first affected record or Review Selected result heading in External calendar review — Reviewing Diff"
+failure_focus = "the Review Selected control and first stale, invalid, or failed record in External calendar review — Reviewing Diff"
+commit_boundary = "Non-mutating: selection and consequence preview remain before every per-record canonical commit boundary."
+rollback_undo = "No Undo is required; cancellation returns to the exact groups, selection, and first reviewed record with local and external data unchanged."
+privacy_egress = "Review uses minimum necessary stored source facts; selection and preview never alter the source, and any explicit external write sends only approved event fields with a separate egress Receipt."
+verification_ids = ["SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001"]
 +++
 
 # External Calendar Import
@@ -146,6 +406,45 @@ Execute `SCENARIO-JOURNEY-CALENDAR-DISCOVERY-COMMIT-001`, `SCENARIO-JOURNEY-CALE
 - **Supersedes:** none
 
 Imported invite Events MUST preserve attendee, organizer, RSVP, location, notes, and source metadata; later changes MUST enter external diff review with explicit accept, keep, split, unlink, or ignore choices and MUST NOT silently mutate native truth.
+
+## JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001 — Calendar import commands preserve atomic reviewed outcomes
+
+- **Concept:** `journey.calendar-import.command-contract`
+- **Modality:** `MUST`
+- **Scope:** External-calendar grouping, selection, outcome review, per-record commit, deterministic partial recovery, external-write separation, semantic Undo, freshness, focus, offline use, privacy, and accessibility
+- **Status:** `normative`
+- **Verification:** `SCENARIO-CALENDAR-IMPORT-COMMAND-CONTRACT-001`
+- **Supersedes:** none
+
+External review MUST preserve the existing groups exactly:
+
+- Needs attention
+- Safe to import
+- Duplicate or link candidates
+- Removed source
+- Ignored history
+
+Selection commands are `Select Item`, `Select All in Group`, `Clear Selection`, `Review Selected`, and `Done`. Review outcomes remain the existing canonical choices:
+
+- `Import into Ambitions`
+- `Replace`
+- `Link`
+- `Keep external but reserve time`
+- `Ignore for planning`
+- `Reject permanently`
+- For conflicts: `Import and reflow`, `Import without reflow`, `Keep external`, `Ignore`, `Edit before import`
+- For alert handoff: `Import with Ambitions notifications`, `Import without Ambitions notifications`, `Edit notification rules`, `Keep external`
+
+`Import Selected` may appear only for Safe to import records whose outcome is unambiguous. Every other selected record requires an explicit outcome before commit.
+
+Each Import/Diff Record outcome is one atomic command covering native-object effect, capacity effect, lineage, badge contribution, and Receipt. A multi-record batch is a deterministic ordered collection of these atomic commands. Partial results may occur only between record boundaries, never within one record. Completed and failed record IDs remain explicit; `Retry Failed Items` retries only failed identities and cannot duplicate completed imports.
+
+Any changed source fingerprint invalidates confirmation and returns to review. Selection and preview never alter the external source. External writeback requires a separate confirmation and external-effect Receipt.
+
+`Undo Imported Items` is available only while a deterministic inverse remains safe. Eligibility is semantic, not an arbitrary timer. If later dependencies, irreversible external effects, permanent deletion, or provenance mismatch make direct Undo unsafe, `Undo Unavailable` MUST state the reason and route to owner detail, Trash/restore, or reconciliation. A temporary snackbar may disappear only if a durable recovery route remains.
+
+
+Entry focuses the first group needing attention. Preview focuses the first consequence. Result focuses the first failed record or batch Receipt. Retry and Undo focus their exact result. Diffs stack under Dynamic Type and communicate prior/new values and consequence without color dependence.
 
 ## JOURNEY-CALENDAR-IMPORT-COMMIT-001 — Calendar import commit
 

@@ -1,6 +1,128 @@
 # Visual command-contract canon amendment report
 
-## Scope and outcome
+## Visual R1 owner-approved completion amendment — 2026-07-16
+
+### Scope and deterministic posture
+
+- Branch: `codex/canon-visual-owner-workshop`
+- Base SHA: `f4909c6a611414ce1782bfaaec32e528ecf14968`
+- Authority posture: shadow canon and frozen visual candidate only.
+- Normative additions: `12` stable requirements in existing specification owners.
+- Newly resolved state contracts: `166`; total structured state contracts: `433`.
+- Structured commands: `520`.
+- Requirement/concept owners: `461`.
+- Visual requirement dispositions: `336`; nonvisual dispositions: `125`.
+- Current authority-eligible state contracts after a future approved Gate B: `411`.
+- Future-gated continuity state contracts: `22`.
+- Current command-contract specification gaps: `0`.
+- Canon content SHA: `37ca3d028309c10537e359cc5d9e95dbbc54b40b5a10557e1f34d08ffb90281c`.
+- Independent semantic-equivalence review binding: intentionally `candidate` and unbound while this exact deterministic delta awaits review.
+
+The amendment resolves the approved Account, launch/setup, deep-link, degraded,
+permission, Search, Time Detail, calendar-import, entitlement, continuity,
+diagnostics, and notification command-contract gaps. Every affected state is
+bound to one parsed specification owner. The UX blueprint retains no live gap
+record or state gap reference. The compiler still permits a future explicit gap
+only through the same closed, fail-closed structure, and a synthetic negative
+test proves action-implying copy remains rejected for such a state.
+
+Continuity remains structurally closed. Only the disabled review state is active;
+the other continuity contracts remain future-gated by
+`SYSTEM-CONTINUITY-DISABLED-001`. This amendment does not activate continuity,
+approve visual authority, pass Gate B, select task-pack visual authority, change
+production Swift, modify Figma, or perform destructive cleanup.
+
+### TDD evidence
+
+Initial integration RED:
+
+```text
+PYTHONPATH=. python3.12 -m unittest tests.canon.test_visual_r1_command_contracts
+```
+
+Exit `1`; `16` tests ran and the expected failure proved that the blueprint
+still retained the twelve approved command-contract gaps before mechanical
+rebinding.
+
+Adversarial parser RED then proved five missing fail-closed checks: duplicate
+in-state command labels, unresolved destination/focus placeholders, and a
+mutating command without explicit rollback/Undo posture. The minimum parser
+repair rejects those forms without weakening existing command-ID, state-ID,
+closed-field, owner, or lexical checks. The four exact adversarial methods then
+passed `4/4`.
+
+Frozen focused GREEN before the stale-regression repair:
+
+```text
+PYTHONPATH=. python3.12 -m unittest \
+  tests.canon.test_visual_r1_command_contracts \
+  tests.canon.test_state_command_semantics \
+  tests.canon.test_visual_authority_rebaseline
+```
+
+Exit `0`; `46` tests passed in `27.689s`.
+
+The first full Python 3.12 discovery was intentionally run once against that
+candidate. It exited `1`; `765` tests ran in `1743.800s`, with `30` failures,
+`6` errors, and `2` skips. The docket consisted of pre-resolution
+`449/267/166/263/12-gap` assertions, four reviewed-copy fixture postures,
+fourteen stale shadow goldens, twenty-three mutable-posture wording hits, and
+the expected stale model-assisted semantic receipt. No receipt was rebound.
+
+The consolidated deterministic repair updates the reviewed expectations to
+`461/433/0/411/22`, preserves the frozen Phase 1 matrices as historical evidence,
+repairs the Search conjunction and stable posture language, refreshes the UX and
+generated projections, and byte-matches all fourteen shadow goldens. The
+grammatical Search change updates exactly four semantic clause-owner hash/span
+records; their independent-review binding remains deliberately unclaimed until
+an exact reviewer covers this delta.
+
+### Current verification
+
+The evidence-recovery run of the exact deterministic covering command exited
+`1`; `147` tests ran in `124.710s`, with `5` failures and `1` error. The complete
+docket was confined to stale negative harnesses: a removed gap-state lookup, two
+older validator-error expectations, a no-op authority-posture mutation, a ban on
+historical explanatory posture prose, and a candidate-ledger self-promotion case
+that no longer supplied a conflicting review binding. No canon behavior defect
+was found.
+
+The six exact negative harnesses were repaired without adding a matrix, fixture,
+semantic dimension, or product scope. Their smallest rerun exited `0`; `6` tests
+passed in `16.483s`. The one authorized rerun of the identical covering command
+then exited `0`; all `147` tests passed in `131.359s`. Its deterministic
+UX-blueprint check was Green with `47` screens, `47` state models, `423` taxonomy
+states, `433` state variants, `18` objects, `12` journeys, `461` requirements,
+`336` visual dispositions, `125` nonvisual dispositions, and shadow authority.
+`git diff --check` also exited `0`.
+
+The model-assisted semantic receipt remains intentionally stale and is excluded
+from this deterministic covering set. No second full discovery or semantic
+comparison is run before independent review.
+
+Controller inspection then found one stale hand-record Canon content SHA. A new
+focused hand/machine parity regression failed as expected on the hand value
+`748214a51baa7373b24374b0253c2bc1d3ce3aea295a9875f5d0c3b0b8d466ee`
+versus the machine value
+`37ca3d028309c10537e359cc5d9e95dbbc54b40b5a10557e1f34d08ffb90281c`;
+the independently computed hand and machine count digests already matched at
+`39c7e4e128b1a016a9f36d7fa73df42d7497a6a99ff7823e807f6f63d2e07406`.
+After changing only that stale hand SHA, the focused regression exited `0` with
+`1` test passed in `1.557s`. The identical covering command then exited `0` with
+all `148` tests passed in `138.546s`; its count increased by exactly the new
+regression and its UX-blueprint summary remained unchanged and Green.
+
+### Claim ceiling
+
+Allowed claim: governance/canon source is Green only for the exact deterministic
+command-contract parsing, ownership, blueprint mapping, and shadow projection
+scope after its required independent review is clean.
+
+Forbidden claims: product complete, source UI implemented, runtime Green,
+rendered-app Visual Green, Accessibility Green, privacy/legal approved, device
+ready, TestFlight ready, App Store ready, or Release Green.
+
+## Historical Train 4 scope and outcome
 
 - Branch: `codex/canon-visual-authority-rebaseline`
 - Base SHA: `3c0957ebb2202f10de53975b2cb74e8f35253808`

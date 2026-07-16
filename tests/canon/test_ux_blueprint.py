@@ -42,10 +42,10 @@ class UXBlueprintTests(unittest.TestCase):
         self.assertEqual(summary.journey_count, 12)
         self.assertEqual(summary.cross_cutting_count, 11)
         self.assertGreaterEqual(summary.requirement_link_count, 180)
-        self.assertEqual(summary.disposition_count, 449)
+        self.assertEqual(summary.disposition_count, 461)
         self.assertEqual(
             summary.visual_mapping_count + summary.nonvisual_count,
-            449,
+            461,
         )
         self.assertRegex(summary.disposition_sha256, r"^[0-9a-f]{64}$")
         disposition_projection = json.loads(
@@ -54,8 +54,8 @@ class UXBlueprintTests(unittest.TestCase):
                 / "docs/canon/migration/ux-blueprint-requirement-dispositions.json"
             ).read_text(encoding="utf-8")
         )
-        self.assertEqual(disposition_projection["requirement_count"], 449)
-        self.assertEqual(len(disposition_projection["dispositions"]), 449)
+        self.assertEqual(disposition_projection["requirement_count"], 461)
+        self.assertEqual(len(disposition_projection["dispositions"]), 461)
         self.assertEqual(
             len(
                 {
@@ -63,7 +63,7 @@ class UXBlueprintTests(unittest.TestCase):
                     for item in disposition_projection["dispositions"]
                 }
             ),
-            449,
+            461,
         )
         self.assertEqual(
             disposition_projection["disposition_sha256"],
@@ -309,18 +309,7 @@ class UXBlueprintTests(unittest.TestCase):
         module = self._module()
         payload = self._payload()
         gaps = {item["gap_id"] for item in payload["specification_gaps"]}
-        resolved = {
-            "GAP-UX-COMMAND-CONTRACT-SHELL-001",
-            "GAP-UX-COMMAND-CONTRACT-TODAY-001",
-            "GAP-UX-COMMAND-CONTRACT-CAPTURE-001",
-            "GAP-UX-COMMAND-CONTRACT-GOALS-001",
-            "GAP-UX-COMMAND-CONTRACT-TIME-VIEWS-001",
-            "GAP-UX-COMMAND-CONTRACT-TIME-DEGRADED-001",
-            "GAP-UX-COMMAND-CONTRACT-YOU-001",
-            "GAP-UX-COMMAND-CONTRACT-TRUST-001",
-        }
-        self.assertEqual(len(gaps), 12)
-        self.assertTrue(resolved.isdisjoint(gaps))
+        self.assertEqual(gaps, set())
 
         eligible = module.authority_eligible_state_variant_ids(payload, REPO_ROOT)
         self.assertIn("UX-STATE-VARIANT-TODAY-ROOT-LOW-DENSITY", eligible)
@@ -330,7 +319,7 @@ class UXBlueprintTests(unittest.TestCase):
         self.assertNotIn(
             "UX-STATE-VARIANT-YOU-ROOT-CONTINUITY-PENDING", eligible
         )
-        self.assertEqual(len(eligible), 263)
+        self.assertEqual(len(eligible), 411)
 
     def test_blueprint_self_assertion_cannot_override_structured_command_contract(self):
         module = self._module()

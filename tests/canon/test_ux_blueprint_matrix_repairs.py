@@ -43,7 +43,7 @@ STATE_REPAIRS = {
     "UX-SCREEN-YOU-NOTIFICATIONS": ({"disabled", "permission-not-requested", "permission-denied", "permission-allowed", "scheduled", "superseded", "removed", "delivered", "acted", "externally-failed", "reconciled"}, set()),
 }
 
-GAP_IDS = {
+FORMER_GAP_IDS = {
     "GAP-UX-COMMAND-CONTRACT-ACCOUNT-001",
     "GAP-UX-COMMAND-CONTRACT-DEGRADED-001", "GAP-UX-COMMAND-CONTRACT-PERMISSIONS-001",
     "GAP-UX-COMMAND-CONTRACT-SEARCH-001", "GAP-UX-COMMAND-CONTRACT-LAUNCH-SETUP-001",
@@ -110,19 +110,18 @@ class UXBlueprintMatrixRepairTests(unittest.TestCase):
             self.assertFalse(set(item["state_blueprint_ids"]) - all_states, requirement_id)
             self.assertFalse(any(value.startswith("UX-STATE-FAMILY-") or value in {"UX-OBJECT-BOUNDARIES", "UX-STATE-MODELS-ALL", "UX-SCREENS-ALL", "UX-JOURNEYS-ALL", "UX-COMPONENT-STATE-CONTRACTS"} for value in item["blueprint_ids"] + item["state_blueprint_ids"]), requirement_id)
 
-    def test_exact_specification_gap_ledger_is_complete_and_actionable(self):
+    def test_exact_specification_gap_ledger_is_fully_resolved(self):
         payload = self._payload()
         gaps = payload["specification_gaps"]
-        self.assertEqual({item["gap_id"] for item in gaps}, GAP_IDS)
-        self.assertEqual([item["gap_id"] for item in gaps], sorted(GAP_IDS))
-        self.assertEqual(len(gaps), 12)
-        for gap in gaps:
-            self.assertEqual(set(gap), {"affected_screen_families", "affected_state_ids", "authority_consequence", "blocked_fields", "gap_id", "source_rationale"})
-            self.assertTrue(gap["affected_screen_families"])
-            self.assertTrue(gap["affected_state_ids"])
-            self.assertTrue(gap["blocked_fields"])
-            self.assertIn("not", gap["authority_consequence"].casefold())
-            self.assertGreaterEqual(len(gap["source_rationale"].split()), 10)
+        self.assertEqual(len(FORMER_GAP_IDS), 12)
+        self.assertEqual(gaps, [])
+        self.assertFalse(
+            any(
+                set(state["specification_gap_ids"]) & FORMER_GAP_IDS
+                for model in payload["state_models"]
+                for state in model["variants"]
+            )
+        )
 
     def test_state_behavior_authority_is_fail_closed(self):
         module = self._module()
@@ -156,13 +155,19 @@ class UXBlueprintMatrixRepairTests(unittest.TestCase):
         ):
             module.validate_ux_blueprint(REPO_ROOT, unsupported)
 
-    def test_gap_blocked_state_cannot_be_selected_as_visual_authority(self):
+    def test_future_gated_state_cannot_be_selected_as_visual_authority(self):
         module = self._module()
         payload = self._payload()
         eligible_ids = module.authority_eligible_state_variant_ids(payload, REPO_ROOT)
-        blocked = [v["blueprint_id"] for m in payload["state_models"] for v in m["variants"] if v["behavior_authority_posture"] == "exploratory_blocked_by_specification_gap"]
-        self.assertTrue(blocked)
-        for variant_id in blocked:
+        all_ids = {
+            variant["blueprint_id"]
+            for model in payload["state_models"]
+            for variant in model["variants"]
+        }
+        future_gated = all_ids - set(eligible_ids)
+        self.assertEqual(len(eligible_ids), 411)
+        self.assertEqual(len(future_gated), 22)
+        for variant_id in future_gated:
             self.assertNotIn(variant_id, eligible_ids)
 
     def test_render_and_check_are_deterministic_with_gap_counts(self):
@@ -171,8 +176,16 @@ class UXBlueprintMatrixRepairTests(unittest.TestCase):
         first = module.render_ux_blueprint_markdown(payload, REPO_ROOT)
         second = module.render_ux_blueprint_markdown(payload, REPO_ROOT)
         self.assertEqual(first, second)
-        self.assertIn(b"12 specification gaps", first)
-        self.assertIn(b"exploratory_blocked_by_specification_gap", first)
+        self.assertIn(b"0 specification gaps", first)
+        self.assertEqual(payload["specification_gaps"], [])
+        self.assertFalse(
+            any(
+                state["behavior_authority_posture"]
+                == "exploratory_blocked_by_specification_gap"
+                for model in payload["state_models"]
+                for state in model["variants"]
+            )
+        )
         result = subprocess.run(
             [
                 sys.executable,

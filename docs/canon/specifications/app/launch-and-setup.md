@@ -7,13 +7,15 @@ owner_domain = "app-launch-setup"
 canon_revision = 1
 profile = "system-v1"
 owns_concepts = [
+  "account.command-contract",
   "account.launch-commitment",
+  "app.launch-setup.command-contract",
   "app.launch.readiness",
   "app.launch.recovery",
   "app.setup.interruption-resume",
+  "app.setup.progress",
   "app.setup.progressive-first-use",
   "app.setup.state",
-  "app.setup.progress",
 ]
 inherits = [
   "MISSION-LAUNCH-BAR-001",
@@ -33,6 +35,730 @@ source_owners = [
   "Native/Ambitions/Surfaces/You/",
   "Native/Ambitions/Quality/",
 ]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-ACCOUNT-BOUNDARY-ACCOUNT-IDENTITY-ONLY"
+requirement_id = "APP-ACCOUNT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Done => destination: the originating Account, launch, or setup context from Account and continuity boundary — Account Identity Only; effect: No durable mutation occurs and no Receipt is created; Done preserves accepted canonical state and changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Account Identity Only — An optional account owns identity and entitlement only; private life data remains local.; focus: the Account Identity Only result heading in Account and continuity boundary."
+durable_effect = "Exact state consequences: Done: No durable mutation occurs and no Receipt is created; Done preserves accepted canonical state and changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Account Identity Only — An optional account owns identity and entitlement only; private life data remains local. Current visible status: Account Identity Only — An optional account owns identity and entitlement only; private life data remains local."
+recovery_rollback = "Exact recovery and rollback: Done: No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged. Recovery preserves this user-visible evidence: Account Identity Only — An optional account owns identity and entitlement only; private life data remains local."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: Account Identity Only — An optional account owns identity and entitlement only; private life data remains local."
+accessibility_focus = "VoiceOver focus contract: Done announces its consequence; success focuses the Account Identity Only result heading in Account and continuity boundary; rejection focuses the Done control and exact failed field in Account and continuity boundary — Account Identity Only. The announcement first communicates: Account Identity Only — An optional account owns identity and entitlement only; private life data remains local."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-ACCOUNT-BOUNDARY-ACCOUNT-IDENTITY-ONLY-001"
+label = "Done"
+canonical_owner = "account.command-contract"
+preconditions = ["The Account and continuity boundary route and Account Identity Only presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated"]
+destination = "the originating Account, launch, or setup context from Account and continuity boundary — Account Identity Only"
+effect = "No durable mutation occurs and no Receipt is created; Done preserves accepted canonical state and changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Account Identity Only — An optional account owns identity and entitlement only; private life data remains local."
+success_focus = "the Account Identity Only result heading in Account and continuity boundary"
+failure_focus = "the Done control and exact failed field in Account and continuity boundary — Account Identity Only"
+commit_boundary = "Non-mutating: navigation, inspection, selection, retry preview, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
+privacy_egress = "The operation remains local and sends no private life graph content off device."
+verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-ACCOUNT-BOUNDARY-CONTINUITY-CONFLICTED"
+requirement_id = "APP-ACCOUNT-COMMAND-CONTRACT-001"
+activation_posture = "future_gated"
+gate_requirement_ids = ["SYSTEM-CONTINUITY-DISABLED-001"]
+transition_exit = "Done => destination: the originating Account, launch, or setup context from Account and continuity boundary — Continuity Conflicted; effect: No durable mutation occurs and no Receipt is created; Done preserves accepted canonical state and changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Two continuity copies disagree on some saved fields. This device keeps its saved information unchanged while the difference is shown.; focus: the Continuity Conflicted result heading in Account and continuity boundary."
+durable_effect = "Exact state consequences: Done: No durable mutation occurs and no Receipt is created; Done preserves accepted canonical state and changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Two continuity copies disagree on some saved fields. This device keeps its saved information unchanged while the difference is shown. Current visible status: Two continuity copies disagree on some saved fields. This device keeps its saved information unchanged while the difference is shown."
+recovery_rollback = "Exact recovery and rollback: Done: No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged. Recovery preserves this user-visible evidence: Two continuity copies disagree on some saved fields. This device keeps its saved information unchanged while the difference is shown."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: Two continuity copies disagree on some saved fields. This device keeps its saved information unchanged while the difference is shown."
+accessibility_focus = "VoiceOver focus contract: Done announces its consequence; success focuses the Continuity Conflicted result heading in Account and continuity boundary; rejection focuses the Done control and exact failed field in Account and continuity boundary — Continuity Conflicted. The announcement first communicates: Two continuity copies disagree on some saved fields. This device keeps its saved information unchanged while the difference is shown."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-ACCOUNT-BOUNDARY-CONTINUITY-CONFLICTED-001"
+label = "Done"
+canonical_owner = "account.command-contract"
+preconditions = ["The Account and continuity boundary route and Continuity Conflicted presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated"]
+destination = "the originating Account, launch, or setup context from Account and continuity boundary — Continuity Conflicted"
+effect = "No durable mutation occurs and no Receipt is created; Done preserves accepted canonical state and changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Two continuity copies disagree on some saved fields. This device keeps its saved information unchanged while the difference is shown."
+success_focus = "the Continuity Conflicted result heading in Account and continuity boundary"
+failure_focus = "the Done control and exact failed field in Account and continuity boundary — Continuity Conflicted"
+commit_boundary = "Non-mutating: navigation, inspection, selection, retry preview, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
+privacy_egress = "The operation remains local and sends no private life graph content off device."
+verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-ACCOUNT-BOUNDARY-CONTINUITY-DISABLED"
+requirement_id = "APP-ACCOUNT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Done => destination: the originating Account, launch, or setup context from Account and continuity boundary — Continuity Disabled; effect: No durable mutation occurs and no Receipt is created; Done preserves accepted canonical state and changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Continuity is off. This device keeps the latest saved information available.; focus: the Continuity Disabled result heading in Account and continuity boundary."
+durable_effect = "Exact state consequences: Done: No durable mutation occurs and no Receipt is created; Done preserves accepted canonical state and changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Continuity is off. This device keeps the latest saved information available. Current visible status: Continuity is off. This device keeps the latest saved information available."
+recovery_rollback = "Exact recovery and rollback: Done: No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged. Recovery preserves this user-visible evidence: Continuity is off. This device keeps the latest saved information available."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: Continuity is off. This device keeps the latest saved information available."
+accessibility_focus = "VoiceOver focus contract: Done announces its consequence; success focuses the Continuity Disabled result heading in Account and continuity boundary; rejection focuses the Done control and exact failed field in Account and continuity boundary — Continuity Disabled. The announcement first communicates: Continuity is off. This device keeps the latest saved information available."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-ACCOUNT-BOUNDARY-CONTINUITY-DISABLED-001"
+label = "Done"
+canonical_owner = "account.command-contract"
+preconditions = ["The Account and continuity boundary route and Continuity Disabled presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated"]
+destination = "the originating Account, launch, or setup context from Account and continuity boundary — Continuity Disabled"
+effect = "No durable mutation occurs and no Receipt is created; Done preserves accepted canonical state and changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Continuity is off. This device keeps the latest saved information available."
+success_focus = "the Continuity Disabled result heading in Account and continuity boundary"
+failure_focus = "the Done control and exact failed field in Account and continuity boundary — Continuity Disabled"
+commit_boundary = "Non-mutating: navigation, inspection, selection, retry preview, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
+privacy_egress = "The operation remains local and sends no private life graph content off device."
+verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-ACCOUNT-BOUNDARY-LOCAL-ONLY"
+requirement_id = "APP-ACCOUNT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Continue Without an Account => destination: the usable local Ambitions core from Account and continuity boundary — Local Only; effect: No durable mutation occurs and no Receipt is created; Continue Without an Account changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Ambitions works without an account. Goals, Captures, time, and preferences stay on this device.; focus: the Local Only result heading in Account and continuity boundary."
+durable_effect = "Exact state consequences: Continue Without an Account: No durable mutation occurs and no Receipt is created; Continue Without an Account changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Ambitions works without an account. Goals, Captures, time, and preferences stay on this device. Current visible status: Ambitions works without an account. Goals, Captures, time, and preferences stay on this device."
+recovery_rollback = "Exact recovery and rollback: Continue Without an Account: No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged. Recovery preserves this user-visible evidence: Ambitions works without an account. Goals, Captures, time, and preferences stay on this device."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: Ambitions works without an account. Goals, Captures, time, and preferences stay on this device."
+accessibility_focus = "VoiceOver focus contract: Continue Without an Account announces its consequence; success focuses the Local Only result heading in Account and continuity boundary; rejection focuses the Continue Without an Account control and exact failed field in Account and continuity boundary — Local Only. The announcement first communicates: Ambitions works without an account. Goals, Captures, time, and preferences stay on this device."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-ACCOUNT-BOUNDARY-LOCAL-ONLY-001"
+label = "Continue Without an Account"
+canonical_owner = "account.command-contract"
+preconditions = ["The Account and continuity boundary route and Local Only presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated"]
+destination = "the usable local Ambitions core from Account and continuity boundary — Local Only"
+effect = "No durable mutation occurs and no Receipt is created; Continue Without an Account changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Ambitions works without an account. Goals, Captures, time, and preferences stay on this device."
+success_focus = "the Local Only result heading in Account and continuity boundary"
+failure_focus = "the Continue Without an Account control and exact failed field in Account and continuity boundary — Local Only"
+commit_boundary = "Non-mutating: navigation, inspection, selection, retry preview, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
+privacy_egress = "The operation remains local and sends no private life graph content off device."
+verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-ACCOUNT-SIGN-IN-APPLE-IN-PROGRESS"
+requirement_id = "APP-ACCOUNT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Cancel => destination: the unchanged provider or setup choice from Optional sign in — Apple In Progress; effect: No durable mutation occurs and no Receipt is created; Cancel preserves accepted canonical state and changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Sign in with Apple is in progress. Information saved on this device remains unchanged.; focus: the Apple In Progress result heading in Optional sign in."
+durable_effect = "Exact state consequences: Cancel: No durable mutation occurs and no Receipt is created; Cancel preserves accepted canonical state and changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Sign in with Apple is in progress. Information saved on this device remains unchanged. Current visible status: Sign in with Apple is in progress. Information saved on this device remains unchanged."
+recovery_rollback = "Exact recovery and rollback: Cancel: No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged. Recovery preserves this user-visible evidence: Sign in with Apple is in progress. Information saved on this device remains unchanged."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: Sign in with Apple is in progress. Information saved on this device remains unchanged."
+accessibility_focus = "VoiceOver focus contract: Cancel announces its consequence; success focuses the Apple In Progress result heading in Optional sign in; rejection focuses the Cancel control and exact failed field in Optional sign in — Apple In Progress. The announcement first communicates: Sign in with Apple is in progress. Information saved on this device remains unchanged."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-ACCOUNT-SIGN-IN-APPLE-IN-PROGRESS-001"
+label = "Cancel"
+canonical_owner = "account.command-contract"
+preconditions = ["The Optional sign in route and Apple In Progress presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated"]
+destination = "the unchanged provider or setup choice from Optional sign in — Apple In Progress"
+effect = "No durable mutation occurs and no Receipt is created; Cancel preserves accepted canonical state and changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Sign in with Apple is in progress. Information saved on this device remains unchanged."
+success_focus = "the Apple In Progress result heading in Optional sign in"
+failure_focus = "the Cancel control and exact failed field in Optional sign in — Apple In Progress"
+commit_boundary = "Non-mutating: navigation, inspection, selection, retry preview, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
+privacy_egress = "The operation remains local and sends no private life graph content off device."
+verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-ACCOUNT-SIGN-IN-CANCELLED"
+requirement_id = "APP-ACCOUNT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Try Again => destination: the exact failed provider or launch readiness operation from Optional sign in — Cancelled; effect: The external Try Again result causes no local canonical mutation; accepted local data and the last confirmed account or readiness state remain unchanged. Visible evidence remains: Sign-in was cancelled. Saved Goals, Captures, time, and settings remain available.; focus: the Cancelled result heading in Optional sign in."
+durable_effect = "Exact state consequences: Try Again: The external Try Again result causes no local canonical mutation; accepted local data and the last confirmed account or readiness state remain unchanged. Visible evidence remains: Sign-in was cancelled. Saved Goals, Captures, time, and settings remain available. Current visible status: Sign-in was cancelled. Saved Goals, Captures, time, and settings remain available."
+recovery_rollback = "Exact recovery and rollback: Try Again: Cancellation or rejection preserves the last confirmed local state; retry cannot replay an accepted local Event or duplicate provider identity. Recovery preserves this user-visible evidence: Sign-in was cancelled. Saved Goals, Captures, time, and settings remain available."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: Sign-in was cancelled. Saved Goals, Captures, time, and settings remain available."
+accessibility_focus = "VoiceOver focus contract: Try Again announces its consequence; success focuses the Cancelled result heading in Optional sign in; rejection focuses the Try Again control and exact failed field in Optional sign in — Cancelled. The announcement first communicates: Sign-in was cancelled. Saved Goals, Captures, time, and settings remain available."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-ACCOUNT-SIGN-IN-CANCELLED-001"
+label = "Try Again"
+canonical_owner = "account.command-contract"
+preconditions = ["The Optional sign in route and Cancelled presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated", "The user explicitly selected the named identity provider"]
+destination = "the exact failed provider or launch readiness operation from Optional sign in — Cancelled"
+effect = "The external Try Again result causes no local canonical mutation; accepted local data and the last confirmed account or readiness state remain unchanged. Visible evidence remains: Sign-in was cancelled. Saved Goals, Captures, time, and settings remain available."
+success_focus = "the Cancelled result heading in Optional sign in"
+failure_focus = "the Try Again control and exact failed field in Optional sign in — Cancelled"
+commit_boundary = "External-result: provider or system work completes outside the canonical mutation boundary and must be revalidated before any later local commit."
+rollback_undo = "Cancellation or rejection preserves the last confirmed local state; retry cannot replay an accepted local Event or duplicate provider identity."
+privacy_egress = "Provider egress is limited to minimum identity and authentication fields; the private life graph never leaves the device."
+verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-ACCOUNT-SIGN-IN-FAILED"
+requirement_id = "APP-ACCOUNT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Try Again => destination: the exact failed provider or launch readiness operation from Optional sign in — Failed; effect: The external Try Again result causes no local canonical mutation; accepted local data and the last confirmed account or readiness state remain unchanged. Visible evidence remains: Failed — Provider sign-in failed without creating an account or changing local private data.; focus: the Failed result heading in Optional sign in."
+durable_effect = "Exact state consequences: Try Again: The external Try Again result causes no local canonical mutation; accepted local data and the last confirmed account or readiness state remain unchanged. Visible evidence remains: Failed — Provider sign-in failed without creating an account or changing local private data. Current visible status: Failed — Provider sign-in failed without creating an account or changing local private data."
+recovery_rollback = "Exact recovery and rollback: Try Again: Cancellation or rejection preserves the last confirmed local state; retry cannot replay an accepted local Event or duplicate provider identity. Recovery preserves this user-visible evidence: Failed — Provider sign-in failed without creating an account or changing local private data."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: Failed — Provider sign-in failed without creating an account or changing local private data."
+accessibility_focus = "VoiceOver focus contract: Try Again announces its consequence; success focuses the Failed result heading in Optional sign in; rejection focuses the Try Again control and exact failed field in Optional sign in — Failed. The announcement first communicates: Failed — Provider sign-in failed without creating an account or changing local private data."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-ACCOUNT-SIGN-IN-FAILED-001"
+label = "Try Again"
+canonical_owner = "account.command-contract"
+preconditions = ["The Optional sign in route and Failed presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated", "The user explicitly selected the named identity provider"]
+destination = "the exact failed provider or launch readiness operation from Optional sign in — Failed"
+effect = "The external Try Again result causes no local canonical mutation; accepted local data and the last confirmed account or readiness state remain unchanged. Visible evidence remains: Failed — Provider sign-in failed without creating an account or changing local private data."
+success_focus = "the Failed result heading in Optional sign in"
+failure_focus = "the Try Again control and exact failed field in Optional sign in — Failed"
+commit_boundary = "External-result: provider or system work completes outside the canonical mutation boundary and must be revalidated before any later local commit."
+rollback_undo = "Cancellation or rejection preserves the last confirmed local state; retry cannot replay an accepted local Event or duplicate provider identity."
+privacy_egress = "Provider egress is limited to minimum identity and authentication fields; the private life graph never leaves the device."
+verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-ACCOUNT-SIGN-IN-GOOGLE-IN-PROGRESS"
+requirement_id = "APP-ACCOUNT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Cancel => destination: the unchanged provider or setup choice from Optional sign in — Google In Progress; effect: No durable mutation occurs and no Receipt is created; Cancel preserves accepted canonical state and changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Google sign-in is in progress. Information saved on this device remains unchanged.; focus: the Google In Progress result heading in Optional sign in."
+durable_effect = "Exact state consequences: Cancel: No durable mutation occurs and no Receipt is created; Cancel preserves accepted canonical state and changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Google sign-in is in progress. Information saved on this device remains unchanged. Current visible status: Google sign-in is in progress. Information saved on this device remains unchanged."
+recovery_rollback = "Exact recovery and rollback: Cancel: No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged. Recovery preserves this user-visible evidence: Google sign-in is in progress. Information saved on this device remains unchanged."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: Google sign-in is in progress. Information saved on this device remains unchanged."
+accessibility_focus = "VoiceOver focus contract: Cancel announces its consequence; success focuses the Google In Progress result heading in Optional sign in; rejection focuses the Cancel control and exact failed field in Optional sign in — Google In Progress. The announcement first communicates: Google sign-in is in progress. Information saved on this device remains unchanged."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-ACCOUNT-SIGN-IN-GOOGLE-IN-PROGRESS-001"
+label = "Cancel"
+canonical_owner = "account.command-contract"
+preconditions = ["The Optional sign in route and Google In Progress presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated"]
+destination = "the unchanged provider or setup choice from Optional sign in — Google In Progress"
+effect = "No durable mutation occurs and no Receipt is created; Cancel preserves accepted canonical state and changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Google sign-in is in progress. Information saved on this device remains unchanged."
+success_focus = "the Google In Progress result heading in Optional sign in"
+failure_focus = "the Cancel control and exact failed field in Optional sign in — Google In Progress"
+commit_boundary = "Non-mutating: navigation, inspection, selection, retry preview, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
+privacy_egress = "The operation remains local and sends no private life graph content off device."
+verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-ACCOUNT-SIGN-IN-PROVIDER-CHOICE"
+requirement_id = "APP-ACCOUNT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Sign in with Apple => destination: the native Sign in with Apple provider sheet from Optional sign in — Provider Choice; effect: The external Sign in with Apple result causes no local canonical mutation; accepted local data and the last confirmed account or readiness state remain unchanged. Visible evidence remains: Apple and Google sign-in choices are shown. Saved information remains available without an account.; focus: the Provider Choice result heading in Optional sign in.\nSign in with Google => destination: the native Google sign-in provider sheet from Optional sign in — Provider Choice; effect: The external Sign in with Google result causes no local canonical mutation; accepted local data and the last confirmed account or readiness state remain unchanged. Visible evidence remains: Apple and Google sign-in choices are shown. Saved information remains available without an account.; focus: the Provider Choice result heading in Optional sign in."
+durable_effect = "Exact state consequences: Sign in with Apple: The external Sign in with Apple result causes no local canonical mutation; accepted local data and the last confirmed account or readiness state remain unchanged. Visible evidence remains: Apple and Google sign-in choices are shown. Saved information remains available without an account. | Sign in with Google: The external Sign in with Google result causes no local canonical mutation; accepted local data and the last confirmed account or readiness state remain unchanged. Visible evidence remains: Apple and Google sign-in choices are shown. Saved information remains available without an account. Current visible status: Apple and Google sign-in choices are shown. Saved information remains available without an account."
+recovery_rollback = "Exact recovery and rollback: Sign in with Apple: Cancellation or rejection preserves the last confirmed local state; retry cannot replay an accepted local Event or duplicate provider identity. | Sign in with Google: Cancellation or rejection preserves the last confirmed local state; retry cannot replay an accepted local Event or duplicate provider identity. Recovery preserves this user-visible evidence: Apple and Google sign-in choices are shown. Saved information remains available without an account."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: Apple and Google sign-in choices are shown. Saved information remains available without an account."
+accessibility_focus = "VoiceOver focus contract: Sign in with Apple announces its consequence; success focuses the Provider Choice result heading in Optional sign in; rejection focuses the Sign in with Apple control and exact failed field in Optional sign in — Provider Choice | Sign in with Google announces its consequence; success focuses the Provider Choice result heading in Optional sign in; rejection focuses the Sign in with Google control and exact failed field in Optional sign in — Provider Choice. The announcement first communicates: Apple and Google sign-in choices are shown. Saved information remains available without an account."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-ACCOUNT-SIGN-IN-PROVIDER-CHOICE-001"
+label = "Sign in with Apple"
+canonical_owner = "account.command-contract"
+preconditions = ["The Optional sign in route and Provider Choice presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated", "The user explicitly selected the named identity provider"]
+destination = "the native Sign in with Apple provider sheet from Optional sign in — Provider Choice"
+effect = "The external Sign in with Apple result causes no local canonical mutation; accepted local data and the last confirmed account or readiness state remain unchanged. Visible evidence remains: Apple and Google sign-in choices are shown. Saved information remains available without an account."
+success_focus = "the Provider Choice result heading in Optional sign in"
+failure_focus = "the Sign in with Apple control and exact failed field in Optional sign in — Provider Choice"
+commit_boundary = "External-result: provider or system work completes outside the canonical mutation boundary and must be revalidated before any later local commit."
+rollback_undo = "Cancellation or rejection preserves the last confirmed local state; retry cannot replay an accepted local Event or duplicate provider identity."
+privacy_egress = "Provider egress is limited to minimum identity and authentication fields; the private life graph never leaves the device."
+verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts.commands]]
+command_id = "CMD-ACCOUNT-SIGN-IN-PROVIDER-CHOICE-002"
+label = "Sign in with Google"
+canonical_owner = "account.command-contract"
+preconditions = ["The Optional sign in route and Provider Choice presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated", "The user explicitly selected the named identity provider"]
+destination = "the native Google sign-in provider sheet from Optional sign in — Provider Choice"
+effect = "The external Sign in with Google result causes no local canonical mutation; accepted local data and the last confirmed account or readiness state remain unchanged. Visible evidence remains: Apple and Google sign-in choices are shown. Saved information remains available without an account."
+success_focus = "the Provider Choice result heading in Optional sign in"
+failure_focus = "the Sign in with Google control and exact failed field in Optional sign in — Provider Choice"
+commit_boundary = "External-result: provider or system work completes outside the canonical mutation boundary and must be revalidated before any later local commit."
+rollback_undo = "Cancellation or rejection preserves the last confirmed local state; retry cannot replay an accepted local Event or duplicate provider identity."
+privacy_egress = "Provider egress is limited to minimum identity and authentication fields; the private life graph never leaves the device."
+verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-ACCOUNT-SIGN-IN-SIGNED-IN"
+requirement_id = "APP-ACCOUNT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Done => destination: the originating Account, launch, or setup context from Optional sign in — Signed In; effect: No durable mutation occurs and no Receipt is created; Done preserves accepted canonical state and changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Signed In — Optional account identity is active and its approved boundary is explicit.; focus: the Signed In result heading in Optional sign in."
+durable_effect = "Exact state consequences: Done: No durable mutation occurs and no Receipt is created; Done preserves accepted canonical state and changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Signed In — Optional account identity is active and its approved boundary is explicit. Current visible status: Signed In — Optional account identity is active and its approved boundary is explicit."
+recovery_rollback = "Exact recovery and rollback: Done: No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged. Recovery preserves this user-visible evidence: Signed In — Optional account identity is active and its approved boundary is explicit."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: Signed In — Optional account identity is active and its approved boundary is explicit."
+accessibility_focus = "VoiceOver focus contract: Done announces its consequence; success focuses the Signed In result heading in Optional sign in; rejection focuses the Done control and exact failed field in Optional sign in — Signed In. The announcement first communicates: Signed In — Optional account identity is active and its approved boundary is explicit."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-ACCOUNT-SIGN-IN-SIGNED-IN-001"
+label = "Done"
+canonical_owner = "account.command-contract"
+preconditions = ["The Optional sign in route and Signed In presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated"]
+destination = "the originating Account, launch, or setup context from Optional sign in — Signed In"
+effect = "No durable mutation occurs and no Receipt is created; Done preserves accepted canonical state and changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Signed In — Optional account identity is active and its approved boundary is explicit."
+success_focus = "the Signed In result heading in Optional sign in"
+failure_focus = "the Done control and exact failed field in Optional sign in — Signed In"
+commit_boundary = "Non-mutating: navigation, inspection, selection, retry preview, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
+privacy_egress = "The operation remains local and sends no private life graph content off device."
+verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-ACCOUNT-STATUS-CONTINUITY-DISABLED"
+requirement_id = "APP-ACCOUNT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Done => destination: the originating Account, launch, or setup context from Account and Sync status — Continuity Disabled; effect: No durable mutation occurs and no Receipt is created; Done preserves accepted canonical state and changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Continuity is off. Signed-in account details and information saved on this device remain available.; focus: the Continuity Disabled result heading in Account and Sync status."
+durable_effect = "Exact state consequences: Done: No durable mutation occurs and no Receipt is created; Done preserves accepted canonical state and changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Continuity is off. Signed-in account details and information saved on this device remain available. Current visible status: Continuity is off. Signed-in account details and information saved on this device remain available."
+recovery_rollback = "Exact recovery and rollback: Done: No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged. Recovery preserves this user-visible evidence: Continuity is off. Signed-in account details and information saved on this device remain available."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: Continuity is off. Signed-in account details and information saved on this device remain available."
+accessibility_focus = "VoiceOver focus contract: Done announces its consequence; success focuses the Continuity Disabled result heading in Account and Sync status; rejection focuses the Done control and exact failed field in Account and Sync status — Continuity Disabled. The announcement first communicates: Continuity is off. Signed-in account details and information saved on this device remain available."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-ACCOUNT-STATUS-CONTINUITY-DISABLED-001"
+label = "Done"
+canonical_owner = "account.command-contract"
+preconditions = ["The Account and Sync status route and Continuity Disabled presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated"]
+destination = "the originating Account, launch, or setup context from Account and Sync status — Continuity Disabled"
+effect = "No durable mutation occurs and no Receipt is created; Done preserves accepted canonical state and changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Continuity is off. Signed-in account details and information saved on this device remain available."
+success_focus = "the Continuity Disabled result heading in Account and Sync status"
+failure_focus = "the Done control and exact failed field in Account and Sync status — Continuity Disabled"
+commit_boundary = "Non-mutating: navigation, inspection, selection, retry preview, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
+privacy_egress = "The operation remains local and sends no private life graph content off device."
+verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-ACCOUNT-STATUS-SIGNED-IN"
+requirement_id = "APP-ACCOUNT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Sign Out => destination: the signed-out Local Only account status from Account and Sync status — Signed In; effect: A typed Sign Out Command validates the current account revision, appends an Event, updates the account Projection, and creates a Receipt and History entry; local Goals, Captures, Time, settings, Proof, and Receipts remain retained. Visible evidence remains: You are signed in. Your account details are current, and saved personal information remains available on this device.; focus: the Signed In result heading in Account and Sync status."
+durable_effect = "Exact state consequences: Sign Out: A typed Sign Out Command validates the current account revision, appends an Event, updates the account Projection, and creates a Receipt and History entry; local Goals, Captures, Time, settings, Proof, and Receipts remain retained. Visible evidence remains: You are signed in. Your account details are current, and saved personal information remains available on this device. Current visible status: You are signed in. Your account details are current, and saved personal information remains available on this device."
+recovery_rollback = "Exact recovery and rollback: Sign Out: Before commit, cancellation changes nothing; after commit, account recovery uses a separately authorized typed command and Receipt, while sign-out never deletes local data. Recovery preserves this user-visible evidence: You are signed in. Your account details are current, and saved personal information remains available on this device."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: You are signed in. Your account details are current, and saved personal information remains available on this device."
+accessibility_focus = "VoiceOver focus contract: Sign Out announces its consequence; success focuses the Signed In result heading in Account and Sync status; rejection focuses the Sign Out control and exact failed field in Account and Sync status — Signed In. The announcement first communicates: You are signed in. Your account details are current, and saved personal information remains available on this device."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-ACCOUNT-STATUS-SIGNED-IN-001"
+label = "Sign Out"
+canonical_owner = "account.command-contract"
+preconditions = ["The Account and Sync status route and Signed In presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated"]
+destination = "the signed-out Local Only account status from Account and Sync status — Signed In"
+effect = "A typed Sign Out Command validates the current account revision, appends an Event, updates the account Projection, and creates a Receipt and History entry; local Goals, Captures, Time, settings, Proof, and Receipts remain retained. Visible evidence remains: You are signed in. Your account details are current, and saved personal information remains available on this device."
+success_focus = "the Signed In result heading in Account and Sync status"
+failure_focus = "the Sign Out control and exact failed field in Account and Sync status — Signed In"
+commit_boundary = "Mutation: the typed Command commits only after current-revision validation through Event, Projection, Receipt, History, and replay-safe ownership."
+rollback_undo = "Before commit, cancellation changes nothing; after commit, account recovery uses a separately authorized typed command and Receipt, while sign-out never deletes local data."
+privacy_egress = "The operation remains local and sends no private life graph content off device."
+verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-ACCOUNT-STATUS-SIGNED-OUT"
+requirement_id = "APP-ACCOUNT-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Done => destination: the originating Account, launch, or setup context from Account and Sync status — Signed Out; effect: No durable mutation occurs and no Receipt is created; Done preserves accepted canonical state and changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: No account is signed in. Saved Goals, Captures, time, and settings remain available.; focus: the Signed Out result heading in Account and Sync status."
+durable_effect = "Exact state consequences: Done: No durable mutation occurs and no Receipt is created; Done preserves accepted canonical state and changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: No account is signed in. Saved Goals, Captures, time, and settings remain available. Current visible status: No account is signed in. Saved Goals, Captures, time, and settings remain available."
+recovery_rollback = "Exact recovery and rollback: Done: No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged. Recovery preserves this user-visible evidence: No account is signed in. Saved Goals, Captures, time, and settings remain available."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: No account is signed in. Saved Goals, Captures, time, and settings remain available."
+accessibility_focus = "VoiceOver focus contract: Done announces its consequence; success focuses the Signed Out result heading in Account and Sync status; rejection focuses the Done control and exact failed field in Account and Sync status — Signed Out. The announcement first communicates: No account is signed in. Saved Goals, Captures, time, and settings remain available."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-ACCOUNT-STATUS-SIGNED-OUT-001"
+label = "Done"
+canonical_owner = "account.command-contract"
+preconditions = ["The Account and Sync status route and Signed Out presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated"]
+destination = "the originating Account, launch, or setup context from Account and Sync status — Signed Out"
+effect = "No durable mutation occurs and no Receipt is created; Done preserves accepted canonical state and changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: No account is signed in. Saved Goals, Captures, time, and settings remain available."
+success_focus = "the Signed Out result heading in Account and Sync status"
+failure_focus = "the Done control and exact failed field in Account and Sync status — Signed Out"
+commit_boundary = "Non-mutating: navigation, inspection, selection, retry preview, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
+privacy_egress = "The operation remains local and sends no private life graph content off device."
+verification_ids = ["SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-APP-LAUNCH-GATE-CHECKING-LOCAL-READINESS"
+requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Diagnostics => destination: the redacted local Diagnostics inspection from Application launch readiness gate — Checking Local Readiness; effect: No durable mutation occurs and no Receipt is created; Open Diagnostics changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Ambitions is checking saved local information before opening the app.; focus: the Checking Local Readiness result heading in Application launch readiness gate."
+durable_effect = "Exact state consequences: Open Diagnostics: No durable mutation occurs and no Receipt is created; Open Diagnostics changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Ambitions is checking saved local information before opening the app. Current visible status: Ambitions is checking saved local information before opening the app."
+recovery_rollback = "Exact recovery and rollback: Open Diagnostics: No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged. Recovery preserves this user-visible evidence: Ambitions is checking saved local information before opening the app."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: Ambitions is checking saved local information before opening the app."
+accessibility_focus = "VoiceOver focus contract: Open Diagnostics announces its consequence; success focuses the Checking Local Readiness result heading in Application launch readiness gate; rejection focuses the Open Diagnostics control and exact failed field in Application launch readiness gate — Checking Local Readiness. The announcement first communicates: Ambitions is checking saved local information before opening the app."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-APP-LAUNCH-GATE-CHECKING-LOCAL-READINESS-001"
+label = "Open Diagnostics"
+canonical_owner = "app.launch-setup.command-contract"
+preconditions = ["The Application launch readiness gate route and Checking Local Readiness presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated"]
+destination = "the redacted local Diagnostics inspection from Application launch readiness gate — Checking Local Readiness"
+effect = "No durable mutation occurs and no Receipt is created; Open Diagnostics changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Ambitions is checking saved local information before opening the app."
+success_focus = "the Checking Local Readiness result heading in Application launch readiness gate"
+failure_focus = "the Open Diagnostics control and exact failed field in Application launch readiness gate — Checking Local Readiness"
+commit_boundary = "Non-mutating: navigation, inspection, selection, retry preview, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
+privacy_egress = "The operation remains local and sends no private life graph content off device."
+verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-APP-LAUNCH-GATE-QUARANTINED"
+requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Diagnostics => destination: the redacted local Diagnostics inspection from Application launch readiness gate — Quarantined; effect: No durable mutation occurs and no Receipt is created; Open Diagnostics changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Some local information cannot be used safely. Other saved information remains available and unchanged.; focus: the Quarantined result heading in Application launch readiness gate."
+durable_effect = "Exact state consequences: Open Diagnostics: No durable mutation occurs and no Receipt is created; Open Diagnostics changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Some local information cannot be used safely. Other saved information remains available and unchanged. Current visible status: Some local information cannot be used safely. Other saved information remains available and unchanged."
+recovery_rollback = "Exact recovery and rollback: Open Diagnostics: No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged. Recovery preserves this user-visible evidence: Some local information cannot be used safely. Other saved information remains available and unchanged."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: Some local information cannot be used safely. Other saved information remains available and unchanged."
+accessibility_focus = "VoiceOver focus contract: Open Diagnostics announces its consequence; success focuses the Quarantined result heading in Application launch readiness gate; rejection focuses the Open Diagnostics control and exact failed field in Application launch readiness gate — Quarantined. The announcement first communicates: Some local information cannot be used safely. Other saved information remains available and unchanged."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-APP-LAUNCH-GATE-QUARANTINED-001"
+label = "Open Diagnostics"
+canonical_owner = "app.launch-setup.command-contract"
+preconditions = ["The Application launch readiness gate route and Quarantined presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated"]
+destination = "the redacted local Diagnostics inspection from Application launch readiness gate — Quarantined"
+effect = "No durable mutation occurs and no Receipt is created; Open Diagnostics changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Some local information cannot be used safely. Other saved information remains available and unchanged."
+success_focus = "the Quarantined result heading in Application launch readiness gate"
+failure_focus = "the Open Diagnostics control and exact failed field in Application launch readiness gate — Quarantined"
+commit_boundary = "Non-mutating: navigation, inspection, selection, retry preview, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
+privacy_egress = "The operation remains local and sends no private life graph content off device."
+verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-APP-LAUNCH-GATE-READY"
+requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Continue => destination: the Today root with ready local data from Application launch readiness gate — Ready; effect: No durable mutation occurs and no Receipt is created; Continue changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Ambitions is ready. Saved Goals, Captures, time, and settings are available.; focus: the Ready result heading in Application launch readiness gate."
+durable_effect = "Exact state consequences: Continue: No durable mutation occurs and no Receipt is created; Continue changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Ambitions is ready. Saved Goals, Captures, time, and settings are available. Current visible status: Ambitions is ready. Saved Goals, Captures, time, and settings are available."
+recovery_rollback = "Exact recovery and rollback: Continue: No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged. Recovery preserves this user-visible evidence: Ambitions is ready. Saved Goals, Captures, time, and settings are available."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: Ambitions is ready. Saved Goals, Captures, time, and settings are available."
+accessibility_focus = "VoiceOver focus contract: Continue announces its consequence; success focuses the Ready result heading in Application launch readiness gate; rejection focuses the Continue control and exact failed field in Application launch readiness gate — Ready. The announcement first communicates: Ambitions is ready. Saved Goals, Captures, time, and settings are available."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-APP-LAUNCH-GATE-READY-001"
+label = "Continue"
+canonical_owner = "app.launch-setup.command-contract"
+preconditions = ["The Application launch readiness gate route and Ready presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated"]
+destination = "the Today root with ready local data from Application launch readiness gate — Ready"
+effect = "No durable mutation occurs and no Receipt is created; Continue changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Ambitions is ready. Saved Goals, Captures, time, and settings are available."
+success_focus = "the Ready result heading in Application launch readiness gate"
+failure_focus = "the Continue control and exact failed field in Application launch readiness gate — Ready"
+commit_boundary = "Non-mutating: navigation, inspection, selection, retry preview, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
+privacy_egress = "The operation remains local and sends no private life graph content off device."
+verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-APP-LAUNCH-GATE-REPAIR-REQUIRED"
+requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Review Repair => destination: the bounded repair preview from Application launch readiness gate — Repair Required; effect: No durable mutation occurs and no Receipt is created; Review Repair changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Saved information needs a safe repair before this part of Ambitions can open.; focus: the Repair Required result heading in Application launch readiness gate."
+durable_effect = "Exact state consequences: Review Repair: No durable mutation occurs and no Receipt is created; Review Repair changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Saved information needs a safe repair before this part of Ambitions can open. Current visible status: Saved information needs a safe repair before this part of Ambitions can open."
+recovery_rollback = "Exact recovery and rollback: Review Repair: No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged. Recovery preserves this user-visible evidence: Saved information needs a safe repair before this part of Ambitions can open."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: Saved information needs a safe repair before this part of Ambitions can open."
+accessibility_focus = "VoiceOver focus contract: Review Repair announces its consequence; success focuses the Repair Required result heading in Application launch readiness gate; rejection focuses the Review Repair control and exact failed field in Application launch readiness gate — Repair Required. The announcement first communicates: Saved information needs a safe repair before this part of Ambitions can open."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-APP-LAUNCH-GATE-REPAIR-REQUIRED-001"
+label = "Review Repair"
+canonical_owner = "app.launch-setup.command-contract"
+preconditions = ["The Application launch readiness gate route and Repair Required presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated"]
+destination = "the bounded repair preview from Application launch readiness gate — Repair Required"
+effect = "No durable mutation occurs and no Receipt is created; Review Repair changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Saved information needs a safe repair before this part of Ambitions can open."
+success_focus = "the Repair Required result heading in Application launch readiness gate"
+failure_focus = "the Review Repair control and exact failed field in Application launch readiness gate — Repair Required"
+commit_boundary = "Non-mutating: navigation, inspection, selection, retry preview, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
+privacy_egress = "The operation remains local and sends no private life graph content off device."
+verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-APP-LAUNCH-GATE-RETRYABLE-DELAY"
+requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Try Again => destination: the exact failed provider or launch readiness operation from Application launch readiness gate — Retryable Delay; effect: No durable mutation occurs and no Receipt is created; Try Again changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Opening is taking longer than expected; saved information remains protected.; focus: the Retryable Delay result heading in Application launch readiness gate."
+durable_effect = "Exact state consequences: Try Again: No durable mutation occurs and no Receipt is created; Try Again changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Opening is taking longer than expected; saved information remains protected. Current visible status: Opening is taking longer than expected; saved information remains protected."
+recovery_rollback = "Exact recovery and rollback: Try Again: No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged. Recovery preserves this user-visible evidence: Opening is taking longer than expected; saved information remains protected."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: Opening is taking longer than expected; saved information remains protected."
+accessibility_focus = "VoiceOver focus contract: Try Again announces its consequence; success focuses the Retryable Delay result heading in Application launch readiness gate; rejection focuses the Try Again control and exact failed field in Application launch readiness gate — Retryable Delay. The announcement first communicates: Opening is taking longer than expected; saved information remains protected."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-APP-LAUNCH-GATE-RETRYABLE-DELAY-001"
+label = "Try Again"
+canonical_owner = "app.launch-setup.command-contract"
+preconditions = ["The Application launch readiness gate route and Retryable Delay presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated"]
+destination = "the exact failed provider or launch readiness operation from Application launch readiness gate — Retryable Delay"
+effect = "No durable mutation occurs and no Receipt is created; Try Again changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Opening is taking longer than expected; saved information remains protected."
+success_focus = "the Retryable Delay result heading in Application launch readiness gate"
+failure_focus = "the Try Again control and exact failed field in Application launch readiness gate — Retryable Delay"
+commit_boundary = "Non-mutating: navigation, inspection, selection, retry preview, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
+privacy_egress = "The operation remains local and sends no private life graph content off device."
+verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-APP-LAUNCH-GATE-STOP-SHIP-DATA-RISK"
+requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Export Data => destination: the reviewed local export destination chooser from Application launch readiness gate — Stop Ship Data Risk; effect: The external Export Data result causes no local canonical mutation; accepted local data and the last confirmed account or readiness state remain unchanged. Visible evidence remains: Local data needs attention before Ambitions can open safely.; focus: the Stop Ship Data Risk result heading in Application launch readiness gate."
+durable_effect = "Exact state consequences: Export Data: The external Export Data result causes no local canonical mutation; accepted local data and the last confirmed account or readiness state remain unchanged. Visible evidence remains: Local data needs attention before Ambitions can open safely. Current visible status: Local data needs attention before Ambitions can open safely."
+recovery_rollback = "Exact recovery and rollback: Export Data: Cancellation or rejection preserves the last confirmed local state; retry cannot replay an accepted local Event or duplicate provider identity. Recovery preserves this user-visible evidence: Local data needs attention before Ambitions can open safely."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: Local data needs attention before Ambitions can open safely."
+accessibility_focus = "VoiceOver focus contract: Export Data announces its consequence; success focuses the Stop Ship Data Risk result heading in Application launch readiness gate; rejection focuses the Export Data control and exact failed field in Application launch readiness gate — Stop Ship Data Risk. The announcement first communicates: Local data needs attention before Ambitions can open safely."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-APP-LAUNCH-GATE-STOP-SHIP-DATA-RISK-001"
+label = "Export Data"
+canonical_owner = "app.launch-setup.command-contract"
+preconditions = ["The Application launch readiness gate route and Stop Ship Data Risk presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated"]
+destination = "the reviewed local export destination chooser from Application launch readiness gate — Stop Ship Data Risk"
+effect = "The external Export Data result causes no local canonical mutation; accepted local data and the last confirmed account or readiness state remain unchanged. Visible evidence remains: Local data needs attention before Ambitions can open safely."
+success_focus = "the Stop Ship Data Risk result heading in Application launch readiness gate"
+failure_focus = "the Export Data control and exact failed field in Application launch readiness gate — Stop Ship Data Risk"
+commit_boundary = "External-result: provider or system work completes outside the canonical mutation boundary and must be revalidated before any later local commit."
+rollback_undo = "Cancellation or rejection preserves the last confirmed local state; retry cannot replay an accepted local Event or duplicate provider identity."
+privacy_egress = "The operation remains local and sends no private life graph content off device."
+verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-SETUP-FIRST-USE-IN-PROGRESS"
+requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Continue => destination: the next incomplete setup chapter from Progressive first use — In Progress; effect: No durable mutation occurs and no Receipt is created; Continue changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Setup is in progress; completed local choices remain saved if the user leaves.; focus: the In Progress result heading in Progressive first use."
+durable_effect = "Exact state consequences: Continue: No durable mutation occurs and no Receipt is created; Continue changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Setup is in progress; completed local choices remain saved if the user leaves. Current visible status: Setup is in progress; completed local choices remain saved if the user leaves."
+recovery_rollback = "Exact recovery and rollback: Continue: No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged. Recovery preserves this user-visible evidence: Setup is in progress; completed local choices remain saved if the user leaves."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: Setup is in progress; completed local choices remain saved if the user leaves."
+accessibility_focus = "VoiceOver focus contract: Continue announces its consequence; success focuses the In Progress result heading in Progressive first use; rejection focuses the Continue control and exact failed field in Progressive first use — In Progress. The announcement first communicates: Setup is in progress; completed local choices remain saved if the user leaves."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-SETUP-FIRST-USE-IN-PROGRESS-001"
+label = "Continue"
+canonical_owner = "app.launch-setup.command-contract"
+preconditions = ["The Progressive first use route and In Progress presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated"]
+destination = "the next incomplete setup chapter from Progressive first use — In Progress"
+effect = "No durable mutation occurs and no Receipt is created; Continue changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Setup is in progress; completed local choices remain saved if the user leaves."
+success_focus = "the In Progress result heading in Progressive first use"
+failure_focus = "the Continue control and exact failed field in Progressive first use — In Progress"
+commit_boundary = "Non-mutating: navigation, inspection, selection, retry preview, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
+privacy_egress = "The operation remains local and sends no private life graph content off device."
+verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-SETUP-FIRST-USE-NOT-STARTED"
+requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Continue => destination: the next incomplete setup chapter from Progressive first use — Not Started; effect: No durable mutation occurs and no Receipt is created; Continue changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Setup has not started. The local app can still open without an account.; focus: the Not Started result heading in Progressive first use."
+durable_effect = "Exact state consequences: Continue: No durable mutation occurs and no Receipt is created; Continue changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Setup has not started. The local app can still open without an account. Current visible status: Setup has not started. The local app can still open without an account."
+recovery_rollback = "Exact recovery and rollback: Continue: No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged. Recovery preserves this user-visible evidence: Setup has not started. The local app can still open without an account."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: Setup has not started. The local app can still open without an account."
+accessibility_focus = "VoiceOver focus contract: Continue announces its consequence; success focuses the Not Started result heading in Progressive first use; rejection focuses the Continue control and exact failed field in Progressive first use — Not Started. The announcement first communicates: Setup has not started. The local app can still open without an account."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-SETUP-FIRST-USE-NOT-STARTED-001"
+label = "Continue"
+canonical_owner = "app.launch-setup.command-contract"
+preconditions = ["The Progressive first use route and Not Started presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated"]
+destination = "the next incomplete setup chapter from Progressive first use — Not Started"
+effect = "No durable mutation occurs and no Receipt is created; Continue changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Setup has not started. The local app can still open without an account."
+success_focus = "the Not Started result heading in Progressive first use"
+failure_focus = "the Continue control and exact failed field in Progressive first use — Not Started"
+commit_boundary = "Non-mutating: navigation, inspection, selection, retry preview, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
+privacy_egress = "The operation remains local and sends no private life graph content off device."
+verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-SETUP-FIRST-USE-REVISITABLE"
+requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Resume Setup => destination: the first unanswered or invalid setup field from Progressive first use — Revisitable; effect: No durable mutation occurs and no Receipt is created; Resume Setup changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Setup is incomplete. Earlier choices remain saved.; focus: the Revisitable result heading in Progressive first use."
+durable_effect = "Exact state consequences: Resume Setup: No durable mutation occurs and no Receipt is created; Resume Setup changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Setup is incomplete. Earlier choices remain saved. Current visible status: Setup is incomplete. Earlier choices remain saved."
+recovery_rollback = "Exact recovery and rollback: Resume Setup: No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged. Recovery preserves this user-visible evidence: Setup is incomplete. Earlier choices remain saved."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: Setup is incomplete. Earlier choices remain saved."
+accessibility_focus = "VoiceOver focus contract: Resume Setup announces its consequence; success focuses the Revisitable result heading in Progressive first use; rejection focuses the Resume Setup control and exact failed field in Progressive first use — Revisitable. The announcement first communicates: Setup is incomplete. Earlier choices remain saved."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-SETUP-FIRST-USE-REVISITABLE-001"
+label = "Resume Setup"
+canonical_owner = "app.launch-setup.command-contract"
+preconditions = ["The Progressive first use route and Revisitable presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated"]
+destination = "the first unanswered or invalid setup field from Progressive first use — Revisitable"
+effect = "No durable mutation occurs and no Receipt is created; Resume Setup changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Setup is incomplete. Earlier choices remain saved."
+success_focus = "the Revisitable result heading in Progressive first use"
+failure_focus = "the Resume Setup control and exact failed field in Progressive first use — Revisitable"
+commit_boundary = "Non-mutating: navigation, inspection, selection, retry preview, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
+privacy_egress = "The operation remains local and sends no private life graph content off device."
+verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-SETUP-FIRST-USE-SKIPPED"
+requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Resume Setup => destination: the first unanswered or invalid setup field from Progressive first use — Skipped; effect: No durable mutation occurs and no Receipt is created; Resume Setup changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Setup was skipped without blocking the local app or discarding prior choices.; focus: the Skipped result heading in Progressive first use."
+durable_effect = "Exact state consequences: Resume Setup: No durable mutation occurs and no Receipt is created; Resume Setup changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Setup was skipped without blocking the local app or discarding prior choices. Current visible status: Setup was skipped without blocking the local app or discarding prior choices."
+recovery_rollback = "Exact recovery and rollback: Resume Setup: No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged. Recovery preserves this user-visible evidence: Setup was skipped without blocking the local app or discarding prior choices."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: Setup was skipped without blocking the local app or discarding prior choices."
+accessibility_focus = "VoiceOver focus contract: Resume Setup announces its consequence; success focuses the Skipped result heading in Progressive first use; rejection focuses the Resume Setup control and exact failed field in Progressive first use — Skipped. The announcement first communicates: Setup was skipped without blocking the local app or discarding prior choices."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-SETUP-FIRST-USE-SKIPPED-001"
+label = "Resume Setup"
+canonical_owner = "app.launch-setup.command-contract"
+preconditions = ["The Progressive first use route and Skipped presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated"]
+destination = "the first unanswered or invalid setup field from Progressive first use — Skipped"
+effect = "No durable mutation occurs and no Receipt is created; Resume Setup changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Setup was skipped without blocking the local app or discarding prior choices."
+success_focus = "the Skipped result heading in Progressive first use"
+failure_focus = "the Resume Setup control and exact failed field in Progressive first use — Skipped"
+commit_boundary = "Non-mutating: navigation, inspection, selection, retry preview, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
+privacy_egress = "The operation remains local and sends no private life graph content off device."
+verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-SETUP-FIRST-USE-SUFFICIENT-FOR-LOCAL-USE"
+requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Continue => destination: the usable local Ambitions core from Progressive first use — Sufficient For Local Use; effect: No durable mutation occurs and no Receipt is created; Continue changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Enough setup is complete for full local use; optional account and permissions remain optional.; focus: the Sufficient For Local Use result heading in Progressive first use."
+durable_effect = "Exact state consequences: Continue: No durable mutation occurs and no Receipt is created; Continue changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Enough setup is complete for full local use; optional account and permissions remain optional. Current visible status: Enough setup is complete for full local use; optional account and permissions remain optional."
+recovery_rollback = "Exact recovery and rollback: Continue: No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged. Recovery preserves this user-visible evidence: Enough setup is complete for full local use; optional account and permissions remain optional."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: Enough setup is complete for full local use; optional account and permissions remain optional."
+accessibility_focus = "VoiceOver focus contract: Continue announces its consequence; success focuses the Sufficient For Local Use result heading in Progressive first use; rejection focuses the Continue control and exact failed field in Progressive first use — Sufficient For Local Use. The announcement first communicates: Enough setup is complete for full local use; optional account and permissions remain optional."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-SETUP-FIRST-USE-SUFFICIENT-FOR-LOCAL-USE-001"
+label = "Continue"
+canonical_owner = "app.launch-setup.command-contract"
+preconditions = ["The Progressive first use route and Sufficient For Local Use presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated"]
+destination = "the usable local Ambitions core from Progressive first use — Sufficient For Local Use"
+effect = "No durable mutation occurs and no Receipt is created; Continue changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Enough setup is complete for full local use; optional account and permissions remain optional."
+success_focus = "the Sufficient For Local Use result heading in Progressive first use"
+failure_focus = "the Continue control and exact failed field in Progressive first use — Sufficient For Local Use"
+commit_boundary = "Non-mutating: navigation, inspection, selection, retry preview, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
+privacy_egress = "The operation remains local and sends no private life graph content off device."
+verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-SETUP-RESUME-CHECKPOINT-FOUND"
+requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Resume Setup => destination: the first unanswered or invalid setup field from Setup interruption and resume — Checkpoint Found; effect: No durable mutation occurs and no Receipt is created; Resume Setup changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Earlier setup progress was found. No unfinished choice is marked complete.; focus: the Checkpoint Found result heading in Setup interruption and resume."
+durable_effect = "Exact state consequences: Resume Setup: No durable mutation occurs and no Receipt is created; Resume Setup changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Earlier setup progress was found. No unfinished choice is marked complete. Current visible status: Earlier setup progress was found. No unfinished choice is marked complete."
+recovery_rollback = "Exact recovery and rollback: Resume Setup: No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged. Recovery preserves this user-visible evidence: Earlier setup progress was found. No unfinished choice is marked complete."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: Earlier setup progress was found. No unfinished choice is marked complete."
+accessibility_focus = "VoiceOver focus contract: Resume Setup announces its consequence; success focuses the Checkpoint Found result heading in Setup interruption and resume; rejection focuses the Resume Setup control and exact failed field in Setup interruption and resume — Checkpoint Found. The announcement first communicates: Earlier setup progress was found. No unfinished choice is marked complete."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-SETUP-RESUME-CHECKPOINT-FOUND-001"
+label = "Resume Setup"
+canonical_owner = "app.launch-setup.command-contract"
+preconditions = ["The Setup interruption and resume route and Checkpoint Found presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated"]
+destination = "the first unanswered or invalid setup field from Setup interruption and resume — Checkpoint Found"
+effect = "No durable mutation occurs and no Receipt is created; Resume Setup changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Earlier setup progress was found. No unfinished choice is marked complete."
+success_focus = "the Checkpoint Found result heading in Setup interruption and resume"
+failure_focus = "the Resume Setup control and exact failed field in Setup interruption and resume — Checkpoint Found"
+commit_boundary = "Non-mutating: navigation, inspection, selection, retry preview, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
+privacy_egress = "The operation remains local and sends no private life graph content off device."
+verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-SETUP-RESUME-CHECKPOINT-INVALID"
+requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Open Diagnostics => destination: the redacted local Diagnostics inspection from Setup interruption and resume — Checkpoint Invalid; effect: No durable mutation occurs and no Receipt is created; Open Diagnostics changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Saved setup progress cannot be used. Earlier product information and choices outside setup remain unchanged.; focus: the Checkpoint Invalid result heading in Setup interruption and resume.\nStart Over Setup => destination: the first setup chapter with accepted answers retained from Setup interruption and resume — Checkpoint Invalid; effect: No durable mutation occurs and no Receipt is created; Start Over Setup changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Saved setup progress cannot be used. Earlier product information and choices outside setup remain unchanged.; focus: the Checkpoint Invalid result heading in Setup interruption and resume."
+durable_effect = "Exact state consequences: Open Diagnostics: No durable mutation occurs and no Receipt is created; Open Diagnostics changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Saved setup progress cannot be used. Earlier product information and choices outside setup remain unchanged. | Start Over Setup: No durable mutation occurs and no Receipt is created; Start Over Setup changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Saved setup progress cannot be used. Earlier product information and choices outside setup remain unchanged. Current visible status: Saved setup progress cannot be used. Earlier product information and choices outside setup remain unchanged."
+recovery_rollback = "Exact recovery and rollback: Open Diagnostics: No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged. | Start Over Setup: No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged. Recovery preserves this user-visible evidence: Saved setup progress cannot be used. Earlier product information and choices outside setup remain unchanged."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: Saved setup progress cannot be used. Earlier product information and choices outside setup remain unchanged."
+accessibility_focus = "VoiceOver focus contract: Open Diagnostics announces its consequence; success focuses the Checkpoint Invalid result heading in Setup interruption and resume; rejection focuses the Open Diagnostics control and exact failed field in Setup interruption and resume — Checkpoint Invalid | Start Over Setup announces its consequence; success focuses the Checkpoint Invalid result heading in Setup interruption and resume; rejection focuses the Start Over Setup control and exact failed field in Setup interruption and resume — Checkpoint Invalid. The announcement first communicates: Saved setup progress cannot be used. Earlier product information and choices outside setup remain unchanged."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-SETUP-RESUME-CHECKPOINT-INVALID-001"
+label = "Open Diagnostics"
+canonical_owner = "app.launch-setup.command-contract"
+preconditions = ["The Setup interruption and resume route and Checkpoint Invalid presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated"]
+destination = "the redacted local Diagnostics inspection from Setup interruption and resume — Checkpoint Invalid"
+effect = "No durable mutation occurs and no Receipt is created; Open Diagnostics changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Saved setup progress cannot be used. Earlier product information and choices outside setup remain unchanged."
+success_focus = "the Checkpoint Invalid result heading in Setup interruption and resume"
+failure_focus = "the Open Diagnostics control and exact failed field in Setup interruption and resume — Checkpoint Invalid"
+commit_boundary = "Non-mutating: navigation, inspection, selection, retry preview, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
+privacy_egress = "The operation remains local and sends no private life graph content off device."
+verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts.commands]]
+command_id = "CMD-SETUP-RESUME-CHECKPOINT-INVALID-002"
+label = "Start Over Setup"
+canonical_owner = "app.launch-setup.command-contract"
+preconditions = ["The Setup interruption and resume route and Checkpoint Invalid presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated"]
+destination = "the first setup chapter with accepted answers retained from Setup interruption and resume — Checkpoint Invalid"
+effect = "No durable mutation occurs and no Receipt is created; Start Over Setup changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Saved setup progress cannot be used. Earlier product information and choices outside setup remain unchanged."
+success_focus = "the Checkpoint Invalid result heading in Setup interruption and resume"
+failure_focus = "the Start Over Setup control and exact failed field in Setup interruption and resume — Checkpoint Invalid"
+commit_boundary = "Non-mutating: navigation, inspection, selection, retry preview, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
+privacy_egress = "The operation remains local and sends no private life graph content off device."
+verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-SETUP-RESUME-RESUMED"
+requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Continue => destination: the next incomplete setup chapter from Setup interruption and resume — Resumed; effect: No durable mutation occurs and no Receipt is created; Continue changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Resumed — Setup resumes at the first unfinished selected step with prior choices preserved.; focus: the Resumed result heading in Setup interruption and resume."
+durable_effect = "Exact state consequences: Continue: No durable mutation occurs and no Receipt is created; Continue changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Resumed — Setup resumes at the first unfinished selected step with prior choices preserved. Current visible status: Resumed — Setup resumes at the first unfinished selected step with prior choices preserved."
+recovery_rollback = "Exact recovery and rollback: Continue: No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged. Recovery preserves this user-visible evidence: Resumed — Setup resumes at the first unfinished selected step with prior choices preserved."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: Resumed — Setup resumes at the first unfinished selected step with prior choices preserved."
+accessibility_focus = "VoiceOver focus contract: Continue announces its consequence; success focuses the Resumed result heading in Setup interruption and resume; rejection focuses the Continue control and exact failed field in Setup interruption and resume — Resumed. The announcement first communicates: Resumed — Setup resumes at the first unfinished selected step with prior choices preserved."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-SETUP-RESUME-RESUMED-001"
+label = "Continue"
+canonical_owner = "app.launch-setup.command-contract"
+preconditions = ["The Setup interruption and resume route and Resumed presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated"]
+destination = "the next incomplete setup chapter from Setup interruption and resume — Resumed"
+effect = "No durable mutation occurs and no Receipt is created; Continue changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Resumed — Setup resumes at the first unfinished selected step with prior choices preserved."
+success_focus = "the Resumed result heading in Setup interruption and resume"
+failure_focus = "the Continue control and exact failed field in Setup interruption and resume — Resumed"
+commit_boundary = "Non-mutating: navigation, inspection, selection, retry preview, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
+privacy_egress = "The operation remains local and sends no private life graph content off device."
+verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-SETUP-RESUME-REVALIDATING"
+requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Save and Exit => destination: the usable local Ambitions core with the setup checkpoint retained from Setup interruption and resume — Revalidating; effect: No durable mutation occurs and no Receipt is created; Save and Exit changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Ambitions is checking the saved setup point against current permissions and optional services. Earlier choices remain saved.; focus: the Revalidating result heading in Setup interruption and resume."
+durable_effect = "Exact state consequences: Save and Exit: No durable mutation occurs and no Receipt is created; Save and Exit changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Ambitions is checking the saved setup point against current permissions and optional services. Earlier choices remain saved. Current visible status: Ambitions is checking the saved setup point against current permissions and optional services. Earlier choices remain saved."
+recovery_rollback = "Exact recovery and rollback: Save and Exit: No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged. Recovery preserves this user-visible evidence: Ambitions is checking the saved setup point against current permissions and optional services. Earlier choices remain saved."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: Ambitions is checking the saved setup point against current permissions and optional services. Earlier choices remain saved."
+accessibility_focus = "VoiceOver focus contract: Save and Exit announces its consequence; success focuses the Revalidating result heading in Setup interruption and resume; rejection focuses the Save and Exit control and exact failed field in Setup interruption and resume — Revalidating. The announcement first communicates: Ambitions is checking the saved setup point against current permissions and optional services. Earlier choices remain saved."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-SETUP-RESUME-REVALIDATING-001"
+label = "Save and Exit"
+canonical_owner = "app.launch-setup.command-contract"
+preconditions = ["The Setup interruption and resume route and Revalidating presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated"]
+destination = "the usable local Ambitions core with the setup checkpoint retained from Setup interruption and resume — Revalidating"
+effect = "No durable mutation occurs and no Receipt is created; Save and Exit changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Ambitions is checking the saved setup point against current permissions and optional services. Earlier choices remain saved."
+success_focus = "the Revalidating result heading in Setup interruption and resume"
+failure_focus = "the Save and Exit control and exact failed field in Setup interruption and resume — Revalidating"
+commit_boundary = "Non-mutating: navigation, inspection, selection, retry preview, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
+privacy_egress = "The operation remains local and sends no private life graph content off device."
+verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-SETUP-RESUME-START-OVER"
+requirement_id = "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Start Over Setup => destination: the first setup chapter with accepted answers retained from Setup interruption and resume — Start Over; effect: No durable mutation occurs and no Receipt is created; Start Over Setup changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Setup progress is unchanged. Product information remains available.; focus: the Start Over result heading in Setup interruption and resume."
+durable_effect = "Exact state consequences: Start Over Setup: No durable mutation occurs and no Receipt is created; Start Over Setup changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Setup progress is unchanged. Product information remains available. Current visible status: Setup progress is unchanged. Product information remains available."
+recovery_rollback = "Exact recovery and rollback: Start Over Setup: No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged. Recovery preserves this user-visible evidence: Setup progress is unchanged. Product information remains available."
+offline_behavior = "The local core, accepted setup answers, and last confirmed account or readiness state remain available offline. Offline evidence remains: Setup progress is unchanged. Product information remains available."
+accessibility_focus = "VoiceOver focus contract: Start Over Setup announces its consequence; success focuses the Start Over result heading in Setup interruption and resume; rejection focuses the Start Over Setup control and exact failed field in Setup interruption and resume — Start Over. The announcement first communicates: Setup progress is unchanged. Product information remains available."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-SETUP-RESUME-START-OVER-001"
+label = "Start Over Setup"
+canonical_owner = "app.launch-setup.command-contract"
+preconditions = ["The Setup interruption and resume route and Start Over presentation anchor are current", "The local object, account, setup, or readiness revision has been revalidated"]
+destination = "the first setup chapter with accepted answers retained from Setup interruption and resume — Start Over"
+effect = "No durable mutation occurs and no Receipt is created; Start Over Setup changes only navigation, selection, checkpoint position, or inspection. Visible evidence remains: Setup progress is unchanged. Product information remains available."
+success_focus = "the Start Over result heading in Setup interruption and resume"
+failure_focus = "the Start Over Setup control and exact failed field in Setup interruption and resume — Start Over"
+commit_boundary = "Non-mutating: navigation, inspection, selection, retry preview, or cancellation completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissal restores the initiating control with accepted answers and local product data unchanged."
+privacy_egress = "The operation remains local and sends no private life graph content off device."
+verification_ids = ["SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001"]
 +++
 
 # Launch and Progressive Setup
@@ -141,6 +867,58 @@ Setup state MUST distinguish not started, in progress, skipped, sufficient for l
 - **Supersedes:** none
 
 Setup MUST disclose bounded progress for work that is not immediate, remain resumable, and never block useful local entry on network availability.
+
+## APP-ACCOUNT-COMMAND-CONTRACT-001 — Account commands preserve local private authority
+
+- **Concept:** `account.command-contract`
+- **Modality:** `MUST`
+- **Scope:** Account choice, provider authentication, account status, sign-out, retry, interruption, and offline local use
+- **Status:** `normative`
+- **Verification:** `SCENARIO-APP-ACCOUNT-COMMAND-CONTRACT-001`
+- **Supersedes:** none
+
+Account and Sync MUST expose explicit Local Only, provider choice, provider-in-progress, cancelled, failed, signed-in, and signed-out behavior. The only launch providers are `Sign in with Apple` and `Sign in with Google`. Opening provider UI, `Cancel`, `Try Again`, `Continue Without an Account`, and `Done` are non-canonical navigation or provider effects.
+
+Successful sign-in MAY commit only account identity, protected provider/session material, entitlement/service association, and an account-action Receipt. It MUST NOT upload, attach, migrate, inspect, or grant the account authority over the private graph.
+
+`Sign Out` MUST invalidate local account credentials and pause account-only services while retaining all local Goals, Captures, Time, settings, Proof, History, and Receipts. It MUST NOT delete local data or continuity data. Deletion requires a separately routed destructive command.
+
+
+`You → Account & Sync → Account`; provider authentication uses a native sheet. Entry focuses provider choice or current account status. Success focuses signed-in status; failure focuses the failed provider and `Try Again`; cancellation returns focus to that provider; sign-out focuses signed-out/local-only status.
+
+
+Provider cancellation or failure makes no local product-state change. Offline use remains Local Only; provider controls are unavailable with a plain reason and core use continues. Provider egress is restricted to identity/authentication fields.
+
+## APP-LAUNCH-SETUP-COMMAND-CONTRACT-001 — Launch and setup commands preserve accepted progress
+
+- **Concept:** `app.launch-setup.command-contract`
+- **Modality:** `MUST`
+- **Scope:** Launch readiness, progressive setup, checkpoint recovery, interruption, skip, resume, and offline entry
+- **Status:** `normative`
+- **Verification:** `SCENARIO-APP-LAUNCH-SETUP-COMMAND-CONTRACT-001`
+- **Supersedes:** none
+
+Progressive setup MUST preserve the canonical chapter order:
+
+1. Direction
+2. Current Schedule
+3. Goals
+4. Energy & Work Style
+5. Resources
+6. Life Capital
+7. Obstacles
+8. Data Sources
+9. Automation
+10. First Path Preview
+
+Commands are `Continue`, `Back`, `Skip This Question`, `Skip This Chapter`, `Save and Exit`, `Resume Setup`, `Start Over Setup`, and `Skip Setup for Now`.
+
+Each accepted answer commits independently with its own revision/history. Navigation is non-mutating. Skipping records only that the question or chapter was skipped; it MUST NOT invent an answer or prevent later completion. `Start Over Setup` resets only navigation/checkpoint position and reopens existing accepted answers; clearing accepted answers requires a separate data command.
+
+An invalid checkpoint MUST be quarantined without deleting accepted answers. Recovery offers `Start Over Setup` and `Open Diagnostics`. Launch readiness may offer `Try Again`, `Review Repair`, `Open Diagnostics`, or `Export Data` only when the classified state safely supports that command. A stop-ship/data-loss state MUST NOT offer continue or reset.
+
+
+Focus resumes at the chapter heading and first unanswered or invalid field. Success focuses the next chapter or completion result; failure focuses the exact field or readiness reason. Setup works offline and never requires an account or permission wall.
 
 ## Completeness contract
 

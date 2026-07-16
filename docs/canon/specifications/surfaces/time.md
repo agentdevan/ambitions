@@ -10,6 +10,7 @@ owns_concepts = [
   "surface.time.creation-routes",
   "surface.time.day",
   "surface.time.degraded-command-contract",
+  "surface.time.detail-command-contract",
   "surface.time.first-viewport",
   "surface.time.imported-source",
   "surface.time.list",
@@ -139,7 +140,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-DAY-DENSE"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -164,7 +164,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-DAY-EDITING"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -231,7 +230,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-DAY-EMPTY"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -256,7 +254,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-DAY-EXTERNAL-HIDDEN-CAPACITY"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -281,7 +278,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-DAY-IMPORTING"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -306,7 +302,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-DAY-NOW-ANCHORED"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -331,7 +326,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-DAY-POPULATED"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -356,7 +350,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-DAY-PREVIEWING"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -395,7 +388,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-DAY-RESTORED"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -420,7 +412,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-DAY-SELECTED"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -445,7 +436,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-DEGRADED-EXTERNAL-WRITE-FAILURE"
 requirement_id = "SPEC-SURFACE-TIME-DEGRADED-COMMAND-CONTRACT-001"
@@ -484,7 +474,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-DEGRADED-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-DEGRADED-LOCAL-STORE-DEGRADATION"
 requirement_id = "SPEC-SURFACE-TIME-DEGRADED-COMMAND-CONTRACT-001"
@@ -523,7 +512,6 @@ commit_boundary = "External-result: the existing durable result or outbox identi
 rollback_undo = "Cancelling the retry preserves the accepted local state and prior external result; any supported local Undo remains a separate typed command."
 privacy_egress = "The retry is entirely local and performs no network or egress operation."
 verification_ids = ["SCENARIO-SURFACE-TIME-DEGRADED-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-DEGRADED-OFFLINE-HEALTHY"
 requirement_id = "SPEC-SURFACE-TIME-DEGRADED-COMMAND-CONTRACT-001"
@@ -548,7 +536,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-DEGRADED-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-DEGRADED-PARTIAL-IMPORT"
 requirement_id = "SPEC-SURFACE-TIME-DEGRADED-COMMAND-CONTRACT-001"
@@ -587,7 +574,6 @@ commit_boundary = "External-result: the existing durable result or outbox identi
 rollback_undo = "Cancelling the retry preserves the accepted local state and prior external result; any supported local Undo remains a separate typed command."
 privacy_egress = "Only the previously approved minimum payload may leave the device; authorization and SYSTEM-PRIVACY-EGRESS-001 are revalidated and failure remains inspectable."
 verification_ids = ["SCENARIO-SURFACE-TIME-DEGRADED-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-DEGRADED-PENDING-EXTERNAL-DIFF"
 requirement_id = "SPEC-SURFACE-TIME-DEGRADED-COMMAND-CONTRACT-001"
@@ -612,7 +598,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-DEGRADED-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-DEGRADED-PERMISSION-DENIED"
 requirement_id = "SPEC-SURFACE-TIME-DEGRADED-COMMAND-CONTRACT-001"
@@ -651,7 +636,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-DEGRADED-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-DEGRADED-STALE-SOURCE"
 requirement_id = "SPEC-SURFACE-TIME-DEGRADED-COMMAND-CONTRACT-001"
@@ -690,7 +674,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-DEGRADED-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-DEGRADED-SYNC-CONFLICT"
 requirement_id = "SPEC-SURFACE-TIME-DEGRADED-COMMAND-CONTRACT-001"
@@ -715,7 +698,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-DEGRADED-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-DEGRADED-SYNC-PENDING"
 requirement_id = "SPEC-SURFACE-TIME-DEGRADED-COMMAND-CONTRACT-001"
@@ -740,7 +722,178 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-DEGRADED-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-TIME-DETAIL-CONFLICT-REVIEW"
+requirement_id = "SPEC-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Cancel => destination: the unchanged owner detail or conflict origin from Time object detail — Conflict Review; effect: No durable mutation occurs and no Receipt is created; Cancel preserves accepted canonical state and closes the draft, conflict preview, or exact-scope confirmation without changing the saved object, recurrence, placement, notification, or external source. Visible evidence remains: The protected conflict stays visible while the current placement remains unchanged.; focus: the Cancel result heading or selected object in Time object detail — Conflict Review."
+durable_effect = "Exact Time detail consequences: Cancel: No durable mutation occurs and no Receipt is created; Cancel preserves accepted canonical state and closes the draft, conflict preview, or exact-scope confirmation without changing the saved object, recurrence, placement, notification, or external source. Visible evidence remains: The protected conflict stays visible while the current placement remains unchanged. External candidates stay source-owned; linked sources hand off explicitly; native local commit precedes external write. Current visible status: The protected conflict stays visible while the current placement remains unchanged."
+recovery_rollback = "Exact draft, Trash, restore, permanent-deletion, and external-failure recovery: Cancel: No Undo is required; the unchanged current object regains focus and any invalid draft remains available only where the user explicitly chose to keep editing. Restore revalidates recurrence, placement, capacity, and notifications; permanent deletion is available only from Trash after a separate exact-scope confirmation. Recovery preserves: The protected conflict stays visible while the current placement remains unchanged."
+offline_behavior = "Ambitions-owned detail, edit, Save, Trash, Restore, History, and Receipts remain local and usable offline. External reads, handoffs, or writes wait; failure cannot roll back accepted local truth. Offline evidence remains: The protected conflict stays visible while the current placement remains unchanged."
+accessibility_focus = "VoiceOver identifies object class, source ownership, recurrence scope, consequence, and recovery without color dependence: Cancel announces object class and consequence; success focuses the Cancel result heading or selected object in Time object detail — Conflict Review; rejection focuses the Cancel control and first invalid field or exact ownership reason in Time object detail — Conflict Review. Dynamic Type stacks fields and recurrence choices. The announcement first communicates: The protected conflict stays visible while the current placement remains unchanged."
 
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-DETAIL-CONFLICT-REVIEW-001"
+label = "Cancel"
+canonical_owner = "surface.time.detail-command-contract"
+preconditions = ["The current revision, stable object identity, source ownership, and permission have been revalidated", "The object class is resolved as Ambitions-owned Event, Reminder, Step placement, external candidate, or linked external source"]
+destination = "the unchanged owner detail or conflict origin from Time object detail — Conflict Review"
+effect = "No durable mutation occurs and no Receipt is created; Cancel preserves accepted canonical state and closes the draft, conflict preview, or exact-scope confirmation without changing the saved object, recurrence, placement, notification, or external source. Visible evidence remains: The protected conflict stays visible while the current placement remains unchanged."
+success_focus = "the Cancel result heading or selected object in Time object detail — Conflict Review"
+failure_focus = "the Cancel control and first invalid field or exact ownership reason in Time object detail — Conflict Review"
+commit_boundary = "Non-mutating: cancellation completes before the canonical mutation boundary."
+rollback_undo = "No Undo is required; the unchanged current object regains focus and any invalid draft remains available only where the user explicitly chose to keep editing."
+privacy_egress = "Native detail and history remain local; source inspection exposes only approved lineage, and any explicit external handoff sends no private life graph context."
+verification_ids = ["SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-TIME-DETAIL-EDITING"
+requirement_id = "SPEC-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Cancel => destination: the unchanged owner detail or conflict origin from Time object detail — Editing; effect: No durable mutation occurs and no Receipt is created; Cancel preserves accepted canonical state and closes the draft, conflict preview, or exact-scope confirmation without changing the saved object, recurrence, placement, notification, or external source. Visible evidence remains: Original and proposed time values remain separate while the change is considered.; focus: the Cancel result heading or selected object in Time object detail — Editing.\nSave => destination: the saved Time object detail result and Receipt inspection for Editing; effect: A typed Save Command validates stable identity, current revision, fields, ownership, permission, and recurrence scope; it appends an Event, updates the Time Projection, and creates a Receipt and History entry. Local commit precedes any optional external write, whose failure preserves local truth and opens degraded reconciliation. Visible evidence becomes: Original and proposed time values remain separate while the change is considered.; focus: the Save result heading or selected object in Time object detail — Editing."
+durable_effect = "Exact Time detail consequences: Cancel: No durable mutation occurs and no Receipt is created; Cancel preserves accepted canonical state and closes the draft, conflict preview, or exact-scope confirmation without changing the saved object, recurrence, placement, notification, or external source. Visible evidence remains: Original and proposed time values remain separate while the change is considered. | Save: A typed Save Command validates stable identity, current revision, fields, ownership, permission, and recurrence scope; it appends an Event, updates the Time Projection, and creates a Receipt and History entry. Local commit precedes any optional external write, whose failure preserves local truth and opens degraded reconciliation. Visible evidence becomes: Original and proposed time values remain separate while the change is considered. External candidates stay source-owned; linked sources hand off explicitly; native local commit precedes external write. Current visible status: Original and proposed time values remain separate while the change is considered."
+recovery_rollback = "Exact draft, Trash, restore, permanent-deletion, and external-failure recovery: Cancel: No Undo is required; the unchanged current object regains focus and any invalid draft remains available only where the user explicitly chose to keep editing. | Save: Before commit, Cancel preserves the draft and saved object separately; after commit, a safe inverse uses a typed Undo command, otherwise History or degraded reconciliation preserves the local result. Restore revalidates recurrence, placement, capacity, and notifications; permanent deletion is available only from Trash after a separate exact-scope confirmation. Recovery preserves: Original and proposed time values remain separate while the change is considered."
+offline_behavior = "Ambitions-owned detail, edit, Save, Trash, Restore, History, and Receipts remain local and usable offline. External reads, handoffs, or writes wait; failure cannot roll back accepted local truth. Offline evidence remains: Original and proposed time values remain separate while the change is considered."
+accessibility_focus = "VoiceOver identifies object class, source ownership, recurrence scope, consequence, and recovery without color dependence: Cancel announces object class and consequence; success focuses the Cancel result heading or selected object in Time object detail — Editing; rejection focuses the Cancel control and first invalid field or exact ownership reason in Time object detail — Editing | Save announces object class and consequence; success focuses the Save result heading or selected object in Time object detail — Editing; rejection focuses the Save control and first invalid field or exact ownership reason in Time object detail — Editing. Dynamic Type stacks fields and recurrence choices. The announcement first communicates: Original and proposed time values remain separate while the change is considered."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-DETAIL-EDITING-001"
+label = "Cancel"
+canonical_owner = "surface.time.detail-command-contract"
+preconditions = ["The current revision, stable object identity, source ownership, and permission have been revalidated", "The object class is resolved as Ambitions-owned Event, Reminder, Step placement, external candidate, or linked external source"]
+destination = "the unchanged owner detail or conflict origin from Time object detail — Editing"
+effect = "No durable mutation occurs and no Receipt is created; Cancel preserves accepted canonical state and closes the draft, conflict preview, or exact-scope confirmation without changing the saved object, recurrence, placement, notification, or external source. Visible evidence remains: Original and proposed time values remain separate while the change is considered."
+success_focus = "the Cancel result heading or selected object in Time object detail — Editing"
+failure_focus = "the Cancel control and first invalid field or exact ownership reason in Time object detail — Editing"
+commit_boundary = "Non-mutating: cancellation completes before the canonical mutation boundary."
+rollback_undo = "No Undo is required; the unchanged current object regains focus and any invalid draft remains available only where the user explicitly chose to keep editing."
+privacy_egress = "Native detail and history remain local; source inspection exposes only approved lineage, and any explicit external handoff sends no private life graph context."
+verification_ids = ["SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-DETAIL-EDITING-002"
+label = "Save"
+canonical_owner = "surface.time.detail-command-contract"
+preconditions = ["Every edited field is valid and the draft remains separate from the saved object", "For recurrence, This Occurrence, This and Following, or Entire Series is selected with affected objects and schedule consequences previewed", "The command is exposed only for an Ambitions-owned item; external candidates hand off to import review and linked external sources hand off to source inspection", "The current revision, stable object identity, source ownership, and permission have been revalidated", "The object class is resolved as Ambitions-owned Event, Reminder, Step placement, external candidate, or linked external source"]
+destination = "the saved Time object detail result and Receipt inspection for Editing"
+effect = "A typed Save Command validates stable identity, current revision, fields, ownership, permission, and recurrence scope; it appends an Event, updates the Time Projection, and creates a Receipt and History entry. Local commit precedes any optional external write, whose failure preserves local truth and opens degraded reconciliation. Visible evidence becomes: Original and proposed time values remain separate while the change is considered."
+success_focus = "the Save result heading or selected object in Time object detail — Editing"
+failure_focus = "the Save control and first invalid field or exact ownership reason in Time object detail — Editing"
+commit_boundary = "Mutation: Save commits only through the Time owner after current-revision validation through Event, Projection, Receipt, History, and replay-safe ownership."
+rollback_undo = "Before commit, Cancel preserves the draft and saved object separately; after commit, a safe inverse uses a typed Undo command, otherwise History or degraded reconciliation preserves the local result."
+privacy_egress = "Native detail and history remain local; source inspection exposes only approved lineage, and any explicit external handoff sends no private life graph context."
+verification_ids = ["SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-TIME-DETAIL-SAVED"
+requirement_id = "SPEC-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Edit => destination: the owner-specific native editor for the selected Time object from Time object detail — Saved; effect: No durable mutation occurs and no Receipt is created; Edit opens a draft separate from the saved object. External candidates and linked external sources route to import review or source inspection instead of native editing. Visible evidence remains: The confirmed time change and its receipt are available for inspection.; focus: the Edit result heading or selected object in Time object detail — Saved."
+durable_effect = "Exact Time detail consequences: Edit: No durable mutation occurs and no Receipt is created; Edit opens a draft separate from the saved object. External candidates and linked external sources route to import review or source inspection instead of native editing. Visible evidence remains: The confirmed time change and its receipt are available for inspection. External candidates stay source-owned; linked sources hand off explicitly; native local commit precedes external write. Current visible status: The confirmed time change and its receipt are available for inspection."
+recovery_rollback = "Exact draft, Trash, restore, permanent-deletion, and external-failure recovery: Edit: No Undo is required; dismissing the editor restores focus to the unchanged saved object, and invalid edits retain the draft while focusing the first invalid field. Restore revalidates recurrence, placement, capacity, and notifications; permanent deletion is available only from Trash after a separate exact-scope confirmation. Recovery preserves: The confirmed time change and its receipt are available for inspection."
+offline_behavior = "Ambitions-owned detail, edit, Save, Trash, Restore, History, and Receipts remain local and usable offline. External reads, handoffs, or writes wait; failure cannot roll back accepted local truth. Offline evidence remains: The confirmed time change and its receipt are available for inspection."
+accessibility_focus = "VoiceOver identifies object class, source ownership, recurrence scope, consequence, and recovery without color dependence: Edit announces object class and consequence; success focuses the Edit result heading or selected object in Time object detail — Saved; rejection focuses the Edit control and first invalid field or exact ownership reason in Time object detail — Saved. Dynamic Type stacks fields and recurrence choices. The announcement first communicates: The confirmed time change and its receipt are available for inspection."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-DETAIL-SAVED-001"
+label = "Edit"
+canonical_owner = "surface.time.detail-command-contract"
+preconditions = ["The command is exposed only for an Ambitions-owned item; external candidates hand off to import review and linked external sources hand off to source inspection", "The current revision, stable object identity, source ownership, and permission have been revalidated", "The object class is resolved as Ambitions-owned Event, Reminder, Step placement, external candidate, or linked external source"]
+destination = "the owner-specific native editor for the selected Time object from Time object detail — Saved"
+effect = "No durable mutation occurs and no Receipt is created; Edit opens a draft separate from the saved object. External candidates and linked external sources route to import review or source inspection instead of native editing. Visible evidence remains: The confirmed time change and its receipt are available for inspection."
+success_focus = "the Edit result heading or selected object in Time object detail — Saved"
+failure_focus = "the Edit control and first invalid field or exact ownership reason in Time object detail — Saved"
+commit_boundary = "Non-mutating: opening an owner-specific edit draft completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissing the editor restores focus to the unchanged saved object, and invalid edits retain the draft while focusing the first invalid field."
+privacy_egress = "Native detail and history remain local; source inspection exposes only approved lineage, and any explicit external handoff sends no private life graph context."
+verification_ids = ["SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-TIME-DETAIL-UNDO-ELIGIBLE"
+requirement_id = "SPEC-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Edit => destination: the owner-specific native editor for the selected Time object from Time object detail — Undo Eligible; effect: No durable mutation occurs and no Receipt is created; Edit opens a draft separate from the saved object. External candidates and linked external sources route to import review or source inspection instead of native editing. Visible evidence remains: This change is marked as reversible, but no reversal action is offered here.; focus: the Edit result heading or selected object in Time object detail — Undo Eligible."
+durable_effect = "Exact Time detail consequences: Edit: No durable mutation occurs and no Receipt is created; Edit opens a draft separate from the saved object. External candidates and linked external sources route to import review or source inspection instead of native editing. Visible evidence remains: This change is marked as reversible, but no reversal action is offered here. External candidates stay source-owned; linked sources hand off explicitly; native local commit precedes external write. Current visible status: This change is marked as reversible, but no reversal action is offered here."
+recovery_rollback = "Exact draft, Trash, restore, permanent-deletion, and external-failure recovery: Edit: No Undo is required; dismissing the editor restores focus to the unchanged saved object, and invalid edits retain the draft while focusing the first invalid field. Restore revalidates recurrence, placement, capacity, and notifications; permanent deletion is available only from Trash after a separate exact-scope confirmation. Recovery preserves: This change is marked as reversible, but no reversal action is offered here."
+offline_behavior = "Ambitions-owned detail, edit, Save, Trash, Restore, History, and Receipts remain local and usable offline. External reads, handoffs, or writes wait; failure cannot roll back accepted local truth. Offline evidence remains: This change is marked as reversible, but no reversal action is offered here."
+accessibility_focus = "VoiceOver identifies object class, source ownership, recurrence scope, consequence, and recovery without color dependence: Edit announces object class and consequence; success focuses the Edit result heading or selected object in Time object detail — Undo Eligible; rejection focuses the Edit control and first invalid field or exact ownership reason in Time object detail — Undo Eligible. Dynamic Type stacks fields and recurrence choices. The announcement first communicates: This change is marked as reversible, but no reversal action is offered here."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-DETAIL-UNDO-ELIGIBLE-001"
+label = "Edit"
+canonical_owner = "surface.time.detail-command-contract"
+preconditions = ["The command is exposed only for an Ambitions-owned item; external candidates hand off to import review and linked external sources hand off to source inspection", "The current revision, stable object identity, source ownership, and permission have been revalidated", "The object class is resolved as Ambitions-owned Event, Reminder, Step placement, external candidate, or linked external source"]
+destination = "the owner-specific native editor for the selected Time object from Time object detail — Undo Eligible"
+effect = "No durable mutation occurs and no Receipt is created; Edit opens a draft separate from the saved object. External candidates and linked external sources route to import review or source inspection instead of native editing. Visible evidence remains: This change is marked as reversible, but no reversal action is offered here."
+success_focus = "the Edit result heading or selected object in Time object detail — Undo Eligible"
+failure_focus = "the Edit control and first invalid field or exact ownership reason in Time object detail — Undo Eligible"
+commit_boundary = "Non-mutating: opening an owner-specific edit draft completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissing the editor restores focus to the unchanged saved object, and invalid edits retain the draft while focusing the first invalid field."
+privacy_egress = "Native detail and history remain local; source inspection exposes only approved lineage, and any explicit external handoff sends no private life graph context."
+verification_ids = ["SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-TIME-DETAIL-UNDO-UNAVAILABLE"
+requirement_id = "SPEC-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Edit => destination: the owner-specific native editor for the selected Time object from Time object detail — Undo Unavailable; effect: No durable mutation occurs and no Receipt is created; Edit opens a draft separate from the saved object. External candidates and linked external sources route to import review or source inspection instead of native editing. Visible evidence remains: This change cannot be reversed here, and the reason stays visible.; focus: the Edit result heading or selected object in Time object detail — Undo Unavailable."
+durable_effect = "Exact Time detail consequences: Edit: No durable mutation occurs and no Receipt is created; Edit opens a draft separate from the saved object. External candidates and linked external sources route to import review or source inspection instead of native editing. Visible evidence remains: This change cannot be reversed here, and the reason stays visible. External candidates stay source-owned; linked sources hand off explicitly; native local commit precedes external write. Current visible status: This change cannot be reversed here, and the reason stays visible."
+recovery_rollback = "Exact draft, Trash, restore, permanent-deletion, and external-failure recovery: Edit: No Undo is required; dismissing the editor restores focus to the unchanged saved object, and invalid edits retain the draft while focusing the first invalid field. Restore revalidates recurrence, placement, capacity, and notifications; permanent deletion is available only from Trash after a separate exact-scope confirmation. Recovery preserves: This change cannot be reversed here, and the reason stays visible."
+offline_behavior = "Ambitions-owned detail, edit, Save, Trash, Restore, History, and Receipts remain local and usable offline. External reads, handoffs, or writes wait; failure cannot roll back accepted local truth. Offline evidence remains: This change cannot be reversed here, and the reason stays visible."
+accessibility_focus = "VoiceOver identifies object class, source ownership, recurrence scope, consequence, and recovery without color dependence: Edit announces object class and consequence; success focuses the Edit result heading or selected object in Time object detail — Undo Unavailable; rejection focuses the Edit control and first invalid field or exact ownership reason in Time object detail — Undo Unavailable. Dynamic Type stacks fields and recurrence choices. The announcement first communicates: This change cannot be reversed here, and the reason stays visible."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-DETAIL-UNDO-UNAVAILABLE-001"
+label = "Edit"
+canonical_owner = "surface.time.detail-command-contract"
+preconditions = ["The command is exposed only for an Ambitions-owned item; external candidates hand off to import review and linked external sources hand off to source inspection", "The current revision, stable object identity, source ownership, and permission have been revalidated", "The object class is resolved as Ambitions-owned Event, Reminder, Step placement, external candidate, or linked external source"]
+destination = "the owner-specific native editor for the selected Time object from Time object detail — Undo Unavailable"
+effect = "No durable mutation occurs and no Receipt is created; Edit opens a draft separate from the saved object. External candidates and linked external sources route to import review or source inspection instead of native editing. Visible evidence remains: This change cannot be reversed here, and the reason stays visible."
+success_focus = "the Edit result heading or selected object in Time object detail — Undo Unavailable"
+failure_focus = "the Edit control and first invalid field or exact ownership reason in Time object detail — Undo Unavailable"
+commit_boundary = "Non-mutating: opening an owner-specific edit draft completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissing the editor restores focus to the unchanged saved object, and invalid edits retain the draft while focusing the first invalid field."
+privacy_egress = "Native detail and history remain local; source inspection exposes only approved lineage, and any explicit external handoff sends no private life graph context."
+verification_ids = ["SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"]
+[[state_command_contracts]]
+state_id = "UX-STATE-VARIANT-TIME-DETAIL-VIEWING"
+requirement_id = "SPEC-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"
+activation_posture = "active"
+gate_requirement_ids = []
+transition_exit = "Edit => destination: the owner-specific native editor for the selected Time object from Time object detail — Viewing; effect: No durable mutation occurs and no Receipt is created; Edit opens a draft separate from the saved object. External candidates and linked external sources route to import review or source inspection instead of native editing. Visible evidence remains: The selected time item shows its current saved details without edit controls.; focus: the Edit result heading or selected object in Time object detail — Viewing.\nMove to Trash => destination: the exact-scope Trash confirmation, then the Time Trash result for Viewing; effect: A typed Move to Trash Command validates current revision, resolved object ownership, and recurrence scope; it appends an Event, updates the Time and Trash Projection, and creates a Receipt and History entry without changing any external source. The object remains recoverable. Visible evidence before confirmation remains: The selected time item shows its current saved details without edit controls.; focus: the Move to Trash result heading or selected object in Time object detail — Viewing."
+durable_effect = "Exact Time detail consequences: Edit: No durable mutation occurs and no Receipt is created; Edit opens a draft separate from the saved object. External candidates and linked external sources route to import review or source inspection instead of native editing. Visible evidence remains: The selected time item shows its current saved details without edit controls. | Move to Trash: A typed Move to Trash Command validates current revision, resolved object ownership, and recurrence scope; it appends an Event, updates the Time and Trash Projection, and creates a Receipt and History entry without changing any external source. The object remains recoverable. Visible evidence before confirmation remains: The selected time item shows its current saved details without edit controls. External candidates stay source-owned; linked sources hand off explicitly; native local commit precedes external write. Current visible status: The selected time item shows its current saved details without edit controls."
+recovery_rollback = "Exact draft, Trash, restore, permanent-deletion, and external-failure recovery: Edit: No Undo is required; dismissing the editor restores focus to the unchanged saved object, and invalid edits retain the draft while focusing the first invalid field. | Move to Trash: Before commit, cancellation changes nothing; after commit, Restore is a separate typed command that revalidates recurrence, placement, capacity, and notification effects. Delete Permanently exists only in Trash behind separate irreversible exact-scope confirmation. Restore revalidates recurrence, placement, capacity, and notifications; permanent deletion is available only from Trash after a separate exact-scope confirmation. Recovery preserves: The selected time item shows its current saved details without edit controls."
+offline_behavior = "Ambitions-owned detail, edit, Save, Trash, Restore, History, and Receipts remain local and usable offline. External reads, handoffs, or writes wait; failure cannot roll back accepted local truth. Offline evidence remains: The selected time item shows its current saved details without edit controls."
+accessibility_focus = "VoiceOver identifies object class, source ownership, recurrence scope, consequence, and recovery without color dependence: Edit announces object class and consequence; success focuses the Edit result heading or selected object in Time object detail — Viewing; rejection focuses the Edit control and first invalid field or exact ownership reason in Time object detail — Viewing | Move to Trash announces object class and consequence; success focuses the Move to Trash result heading or selected object in Time object detail — Viewing; rejection focuses the Move to Trash control and first invalid field or exact ownership reason in Time object detail — Viewing. Dynamic Type stacks fields and recurrence choices. The announcement first communicates: The selected time item shows its current saved details without edit controls."
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-DETAIL-VIEWING-001"
+label = "Edit"
+canonical_owner = "surface.time.detail-command-contract"
+preconditions = ["The command is exposed only for an Ambitions-owned item; external candidates hand off to import review and linked external sources hand off to source inspection", "The current revision, stable object identity, source ownership, and permission have been revalidated", "The object class is resolved as Ambitions-owned Event, Reminder, Step placement, external candidate, or linked external source"]
+destination = "the owner-specific native editor for the selected Time object from Time object detail — Viewing"
+effect = "No durable mutation occurs and no Receipt is created; Edit opens a draft separate from the saved object. External candidates and linked external sources route to import review or source inspection instead of native editing. Visible evidence remains: The selected time item shows its current saved details without edit controls."
+success_focus = "the Edit result heading or selected object in Time object detail — Viewing"
+failure_focus = "the Edit control and first invalid field or exact ownership reason in Time object detail — Viewing"
+commit_boundary = "Non-mutating: opening an owner-specific edit draft completes without a canonical commit."
+rollback_undo = "No Undo is required; dismissing the editor restores focus to the unchanged saved object, and invalid edits retain the draft while focusing the first invalid field."
+privacy_egress = "Native detail and history remain local; source inspection exposes only approved lineage, and any explicit external handoff sends no private life graph context."
+verification_ids = ["SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"]
+
+[[state_command_contracts.commands]]
+command_id = "CMD-TIME-DETAIL-VIEWING-002"
+label = "Move to Trash"
+canonical_owner = "surface.time.detail-command-contract"
+preconditions = ["The command is exposed only for an Ambitions-owned item; external candidates hand off to import review and linked external sources hand off to source inspection", "The current revision, stable object identity, source ownership, and permission have been revalidated", "The exact affected object or recurrence scope and schedule consequences are confirmed", "The item is not an external candidate or externally owned source record", "The object class is resolved as Ambitions-owned Event, Reminder, Step placement, external candidate, or linked external source"]
+destination = "the exact-scope Trash confirmation, then the Time Trash result for Viewing"
+effect = "A typed Move to Trash Command validates current revision, resolved object ownership, and recurrence scope; it appends an Event, updates the Time and Trash Projection, and creates a Receipt and History entry without changing any external source. The object remains recoverable. Visible evidence before confirmation remains: The selected time item shows its current saved details without edit controls."
+success_focus = "the Move to Trash result heading or selected object in Time object detail — Viewing"
+failure_focus = "the Move to Trash control and first invalid field or exact ownership reason in Time object detail — Viewing"
+commit_boundary = "Mutation: Move to Trash commits only after exact-scope confirmation through Event, Projection, Receipt, History, and replay-safe ownership."
+rollback_undo = "Before commit, cancellation changes nothing; after commit, Restore is a separate typed command that revalidates recurrence, placement, capacity, and notification effects. Delete Permanently exists only in Trash behind separate irreversible exact-scope confirmation."
+privacy_egress = "Native detail and history remain local; source inspection exposes only approved lineage, and any explicit external handoff sends no private life graph context."
+verification_ids = ["SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001"]
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-LIST-CONFLICTING"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -835,7 +988,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-LIST-DENSE"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -860,7 +1012,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-LIST-EDITING"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -927,7 +1078,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-LIST-EMPTY"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -952,7 +1102,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-LIST-EXTERNAL-HIDDEN-CAPACITY"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -977,7 +1126,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-LIST-IMPORTING"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -1002,7 +1150,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-LIST-NOW-ANCHORED"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -1027,7 +1174,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-LIST-POPULATED"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -1052,7 +1198,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-LIST-PREVIEWING"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -1091,7 +1236,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-LIST-RESTORED"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -1116,7 +1260,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-LIST-SELECTED"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -1141,7 +1284,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-MONTH-CONFLICTING"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -1236,7 +1378,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-MONTH-DENSE"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -1261,7 +1402,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-MONTH-EDITING"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -1328,7 +1468,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-MONTH-EMPTY"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -1353,7 +1492,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-MONTH-EXTERNAL-HIDDEN-CAPACITY"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -1378,7 +1516,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-MONTH-IMPORTING"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -1403,7 +1540,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-MONTH-NOW-ANCHORED"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -1428,7 +1564,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-MONTH-POPULATED"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -1453,7 +1588,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-MONTH-PREVIEWING"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -1492,7 +1626,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-MONTH-RESTORED"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -1517,7 +1650,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-MONTH-SELECTED"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -1542,7 +1674,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-WEEK-CONFLICTING"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -1637,7 +1768,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-WEEK-DENSE"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -1662,7 +1792,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-WEEK-EDITING"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -1729,7 +1858,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-WEEK-EMPTY"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -1754,7 +1882,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-WEEK-EXTERNAL-HIDDEN-CAPACITY"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -1779,7 +1906,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-WEEK-IMPORTING"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -1804,7 +1930,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-WEEK-NOW-ANCHORED"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -1829,7 +1954,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-WEEK-POPULATED"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -1854,7 +1978,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-WEEK-PREVIEWING"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -1893,7 +2016,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-WEEK-RESTORED"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -1918,7 +2040,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-WEEK-SELECTED"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -1943,7 +2064,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-YEAR-CONFLICTING"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -2038,7 +2158,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-YEAR-DENSE"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -2063,7 +2182,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-YEAR-EDITING"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -2088,7 +2206,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-YEAR-EMPTY"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -2113,7 +2230,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-YEAR-EXTERNAL-HIDDEN-CAPACITY"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -2138,7 +2254,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-YEAR-IMPORTING"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -2163,7 +2278,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-YEAR-NOW-ANCHORED"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -2188,7 +2302,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-YEAR-POPULATED"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -2213,7 +2326,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-YEAR-PREVIEWING"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -2252,7 +2364,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-YEAR-RESTORED"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -2277,7 +2388,6 @@ commit_boundary = "Non-mutating: the route, inspection, selection, preview, refr
 rollback_undo = "No Undo is required; dismissal returns to the initiating object or control with accepted data unchanged."
 privacy_egress = "The operation reads only local canonical data and sends no private content off device."
 verification_ids = ["SCENARIO-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"]
-
 [[state_command_contracts]]
 state_id = "UX-STATE-VARIANT-TIME-YEAR-SELECTED"
 requirement_id = "SPEC-SURFACE-TIME-VIEW-COMMAND-CONTRACT-001"
@@ -2554,6 +2664,25 @@ The owning specification MUST authorize only the state-bound command labels `Adj
 - **Supersedes:** none
 
 The owning specification MUST authorize only the state-bound command labels `Open Settings`, `Open diagnostics`, `Refresh source`, `Retry external update`, `Retry failed items`, `Retry local store`, `Review calendar access`, `Review changes`, `Review conflict`, `Review continuity status`, `Review details`, `Review partial import`, `Review source` for the structured states declared in this file. Every command MUST bind stable state and object identity, current revision, canonical owner, preconditions, destination, exact effect and focus targets; navigation, inspection, selection, preview, refresh, and cancellation remain non-mutating. A durable mutation MUST commit only after current-revision validation and required confirmation through Command -> Event -> Projection -> Receipt -> Replay; cancellation or rejection preserves accepted input, and rollback or Undo uses an owning typed command without rewriting history. Local canonical behavior MUST remain available offline without an account; external results remain separate and retryable without replaying the local commit. Sensitive content MUST remain local unless explicit minimum-field egress review passes. VoiceOver MUST announce object, accepted or rejected outcome, consequence, recovery or Undo availability, and destination focus; no color, motion, gesture, or position may carry command meaning alone. Verification MUST prove every declared state, command, transition, commit boundary, durable effect, rollback, offline, privacy, accessibility, and focus mapping against the structured contract.
+
+## SPEC-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001 — Time detail commands preserve object and source ownership
+
+- **Concept:** `surface.time.detail-command-contract`
+- **Modality:** `MUST`
+- **Scope:** Time object detail, edit, recurrence scope, Trash, restore, permanent deletion, source handoff, external failure, focus, offline use, and rollback
+- **Status:** `normative`
+- **Verification:** `SCENARIO-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001`
+- **Supersedes:** none
+
+Time object detail MUST distinguish Ambitions-owned Event, Reminder, Step placement, external candidate, linked external source, and recurrence ownership before enabling commands.
+
+Allowed commands are `Edit`, `Save`, `Cancel`, `Move to Trash`, `Restore`, and—only from Trash—`Delete Permanently`. Recurring edit, move, Trash, or restore MUST first choose `This Occurrence`, `This and Following`, or `Entire Series`, with affected objects and schedule consequences previewed.
+
+External candidates remain source-owned and route to the import review. They cannot be edited as native Events. Linked/external-owned records route to source inspection or the existing `Import into Ambitions`, `Link`, or `Keep external but reserve time` choices. `Open in Calendar` is an explicit external handoff. No local command silently changes the external source.
+
+Save requires stable identity, current revision, valid fields, ownership, permission, and recurrence scope. Invalid edits keep the draft, commit nothing, and focus the first invalid field. Local commit precedes optional external write; external failure preserves local truth and routes to Time degraded reconciliation.
+
+`Move to Trash` is recoverable and creates History/Receipt. Restore revalidates recurrence, placement, capacity, and notification consequences. Permanent deletion is a separate exact-scope confirmation.
 
 ## Completeness contract
 

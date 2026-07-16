@@ -261,7 +261,7 @@ class Task19WholeTrainRepairTests(unittest.TestCase):
         registry = build_registry(manifest, load_documents(ROOT, manifest))
         for status, binding in (
             ("independently_reviewed", None),
-            ("candidate", ledger.get("independent_review")),
+            ("candidate", {"candidate_review_status": ledger["review_status"]}),
         ):
             with self.subTest(status=status):
                 mutated = deepcopy(ledger)

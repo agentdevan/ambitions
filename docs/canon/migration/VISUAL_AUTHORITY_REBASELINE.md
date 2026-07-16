@@ -11,7 +11,7 @@ The additive Phase 3/4 Figma corpus is represented as one deterministic, require
 
 - Canon revision: `1`
 - Canon source SHA: `ffd462ab52c0eff798071333388a051d9f3e55f3`
-- Canon content SHA: `0ac3656f1f55c0514ada19da8b36b8a090628e4fa1648a6aaee3f660a3ed27bb`
+- Canon content SHA: `37ca3d028309c10537e359cc5d9e95dbbc54b40b5a10557e1f34d08ffb90281c`
 - Frozen repository base: `4d73857b1c7ec86a0ce4293219c49d56bec18864`
 - New Figma file: `Oik7612LSTUHWsNRFoTlTJ`
 - Additive pages: `17:2` through `17:11`
@@ -25,11 +25,11 @@ The additive Phase 3/4 Figma corpus is represented as one deterministic, require
 - Candidate screen mappings: `47`
 - Generic skeleton screens retained as failure evidence: `47`
 - Product-only proof bundles: `18` (`54` hash-bound artifacts)
-- Visual requirements mapped: `324/324`
+- Visual requirements mapped: `336/336`
 - State mappings: `433/433`
-- Authority-eligible states after Gate B: `263`
-- Future-gated states: `4`
-- Gap-blocked states: `166`
+- Authority-eligible states after Gate B: `411`
+- Future-gated states: `22`
+- Gap-blocked states: `0`
 - Canonical object records: `18`
 - Principal journeys: `12`
 - Cross-cutting records: `11`

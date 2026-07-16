@@ -79,8 +79,8 @@
     },
     "requirement_dispositions": {
       "type": "array",
-      "minItems": 449,
-      "maxItems": 449,
+      "minItems": 461,
+      "maxItems": 461,
       "uniqueItems": true,
       "items": {"$ref": "#/$defs/requirementDisposition"}
     },
@@ -116,8 +116,8 @@
     },
     "specification_gaps": {
       "type": "array",
-      "minItems": 12,
-      "maxItems": 12,
+      "minItems": 0,
+      "maxItems": 0,
       "uniqueItems": true,
       "items": {"$ref": "#/$defs/specificationGap"}
     },

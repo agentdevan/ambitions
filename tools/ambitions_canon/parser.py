@@ -136,6 +136,10 @@ GENERIC_STATE_COMMAND_PHRASES = (
     "truthful status for ux-state-variant-",
     "preserves current canonical state for ux-state-variant-",
 )
+UNRESOLVED_COMMAND_TARGET = re.compile(
+    r"^unresolved (?:destination|focus|route)$",
+    re.IGNORECASE,
+)
 
 
 def parse_front_matter(
@@ -530,6 +534,11 @@ def _state_command_contracts(
             sorted(item.command_id for item in commands)
         ):
             raise _state_command_error(path, f"commands must be sorted: {state_id}")
+        labels = tuple(item.label for item in commands)
+        if len(labels) != len(set(labels)):
+            raise _state_command_error(
+                path, f"duplicate command label: {state_id}"
+            )
         transition_exit = _trimmed_state_text(
             value["transition_exit"], path, "transition_exit"
         )
@@ -659,6 +668,18 @@ def _validate_state_command_semantics(
             command.privacy_egress,
         )
         semantic_text = " ".join(semantic_fields).casefold()
+        if any(
+            UNRESOLVED_COMMAND_TARGET.fullmatch(value)
+            for value in (
+                command.destination,
+                command.success_focus,
+                command.failure_focus,
+            )
+        ):
+            raise _state_command_error(
+                path,
+                f"unresolved command route or focus: {command.command_id}",
+            )
         if state_id.casefold() in semantic_text or any(
             phrase in semantic_text for phrase in GENERIC_STATE_COMMAND_PHRASES
         ):
@@ -681,6 +702,12 @@ def _validate_state_command_semantics(
                 raise _state_command_error(
                     path,
                     f"mutation command omits typed source/test/proof consequence: {command.command_id}",
+                )
+            rollback = command.rollback_undo.casefold()
+            if "no rollback" in rollback or "no undo is declared" in rollback:
+                raise _state_command_error(
+                    path,
+                    f"mutation command omits actionable rollback: {command.command_id}",
                 )
         elif command.commit_boundary.startswith("External-result:"):
             if "no local canonical mutation" not in command.effect.casefold():

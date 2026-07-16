@@ -26,9 +26,9 @@ class UXBlueprintIndependentReviewTests(unittest.TestCase):
         blocked = [item for item in states if item["behavior_authority_posture"] == "exploratory_blocked_by_specification_gap"]
         eligible_ids = module.authority_eligible_state_variant_ids(payload, REPO_ROOT)
         self.assertEqual(len(states), 433)
-        self.assertEqual(len(backed), 267)
-        self.assertEqual(len(blocked), 166)
-        self.assertEqual(len(eligible_ids), 263)
+        self.assertEqual(len(backed), 433)
+        self.assertEqual(len(blocked), 0)
+        self.assertEqual(len(eligible_ids), 411)
         for state in backed:
             self.assertTrue(state["behavior_requirement_ids"])
             self.assertTrue(state["behavior_authority_evidence"])
@@ -114,12 +114,12 @@ class UXBlueprintIndependentReviewTests(unittest.TestCase):
         self.assertTrue(module.state_variant_is_authority_eligible(payload, state["blueprint_id"], REPO_ROOT))
         self.assertEqual(
             len(module.authority_eligible_state_variant_ids(payload, REPO_ROOT)),
-            263,
+            411,
         )
 
         posture_only = copy.deepcopy(payload)
         blocked = posture_only["state_models"][0]["variants"][0]
-        blocked["behavior_authority_posture"] = "requirement_backed"
+        blocked["behavior_authority_evidence"] = []
         self.assertFalse(module.state_variant_is_authority_eligible(posture_only, blocked["blueprint_id"], REPO_ROOT))
 
         stale = copy.deepcopy(payload)

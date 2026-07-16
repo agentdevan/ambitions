@@ -58,7 +58,7 @@
           "const": 433
         },
         "visual_requirement_count": {
-          "const": 324
+          "const": 336
         },
         "visual_requirement_ids": {
           "$ref": "#/$defs/stringSet"
@@ -273,8 +273,8 @@
               "$ref": "#/$defs/stringSet"
             },
             {
-              "maxItems": 263,
-              "minItems": 263
+              "maxItems": 411,
+              "minItems": 411
             }
           ]
         },
@@ -284,8 +284,8 @@
               "$ref": "#/$defs/stringSet"
             },
             {
-              "maxItems": 4,
-              "minItems": 4
+              "maxItems": 22,
+              "minItems": 22
             }
           ]
         },
@@ -295,8 +295,8 @@
               "$ref": "#/$defs/stringSet"
             },
             {
-              "maxItems": 166,
-              "minItems": 166
+              "maxItems": 0,
+              "minItems": 0
             }
           ]
         }

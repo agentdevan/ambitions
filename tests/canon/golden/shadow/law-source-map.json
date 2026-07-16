@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "0ac3656f1f55c0514ada19da8b36b8a090628e4fa1648a6aaee3f660a3ed27bb",
+  "canon_content_sha": "37ca3d028309c10537e359cc5d9e95dbbc54b40b5a10557e1f34d08ffb90281c",
   "canon_revision": 1,
   "compiler_version": "0.2.0",
   "finding_inventory": [
@@ -11133,6 +11133,77 @@
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/You/"
       ],
+      "requirement_id": "APP-ACCOUNT-COMMAND-CONTRACT-001",
+      "source_owners": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/App/",
+          "source_inventory_ref": "Native/Ambitions/App/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/",
+          "source_inventory_ref": "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/You/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/You/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
       "requirement_id": "APP-ACCOUNT-LAUNCH-001",
       "source_owners": [
         "Native/Ambitions/App/",
@@ -11141,6 +11212,47 @@
         "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/",
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/You/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/App/",
+          "source_inventory_ref": "Native/Ambitions/App/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/PreviewSupport/",
+          "source_inventory_ref": "Native/Ambitions/PreviewSupport/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/PreviewSupport/",
+        "Native/Ambitions/Quality/"
+      ],
+      "requirement_id": "APP-DEEP-LINK-COMMAND-CONTRACT-001",
+      "source_owners": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/PreviewSupport/",
+        "Native/Ambitions/Quality/"
       ]
     },
     {
@@ -11346,6 +11458,107 @@
         "Native/Ambitions/App/",
         "Native/Ambitions/PreviewSupport/",
         "Native/Ambitions/Quality/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/DesignSystem/",
+          "source_inventory_ref": "Native/Ambitions/DesignSystem/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Diagnostics/",
+          "source_inventory_ref": "Native/Ambitions/Diagnostics/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Goals/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Goals/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Time/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Time/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Today/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Today/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/You/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/You/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "APP-DEGRADED-COMMAND-CONTRACT-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Surfaces/You/"
       ]
     },
     {
@@ -12011,6 +12224,77 @@
           "exists": true,
           "gaps": [],
           "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/",
+          "source_inventory_ref": "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/You/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/You/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "APP-LAUNCH-SETUP-COMMAND-CONTRACT-001",
+      "source_owners": [
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Repair/",
+        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/App/",
+          "source_inventory_ref": "Native/Ambitions/App/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
           "owner_path": "Native/Ambitions/Quality/",
           "source_inventory_ref": "Native/Ambitions/Quality/",
           "status": "source_files_present"
@@ -12313,6 +12597,67 @@
         "Native/Ambitions/Surfaces/You/"
       ],
       "requirement_id": "APP-PERMISSION-STATE-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Core/Permissions/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/Permissions/",
+          "source_inventory_ref": "Native/Ambitions/Core/Permissions/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/You/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/You/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Core/Permissions/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "APP-PERMISSIONS-COMMAND-CONTRACT-001",
       "source_owners": [
         "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
         "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
@@ -16249,6 +16594,87 @@
         "Native/Ambitions/Trust/"
       ],
       "requirement_id": "JOURNEY-CALENDAR-DIFF-GROUPING-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Trust/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Time/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Time/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Trust/",
+          "source_inventory_ref": "Native/Ambitions/Trust/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001",
       "source_owners": [
         "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
         "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
@@ -27064,6 +27490,77 @@
         "Native/Ambitions/Stage/",
         "Native/Ambitions/Trust/"
       ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Stage/",
+          "source_inventory_ref": "Native/Ambitions/Stage/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Trust/",
+          "source_inventory_ref": "Native/Ambitions/Trust/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ],
       "requirement_id": "SPEC-GLOBAL-SEARCH-FIRST-VIEWPORT-001",
       "source_owners": [
         "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
@@ -29182,6 +29679,87 @@
         "Native/Ambitions/Surfaces/Time/"
       ],
       "requirement_id": "SPEC-SURFACE-TIME-DEGRADED-COMMAND-CONTRACT-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/Time/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/Time/",
+          "source_inventory_ref": "Native/Ambitions/Core/Time/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/Time/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/Time/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Scheduling/",
+        "Native/Ambitions/Core/Time/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/Time/"
+      ],
+      "requirement_id": "SPEC-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001",
       "source_owners": [
         "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
         "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
@@ -31774,6 +32352,87 @@
         "Native/Ambitions/Surfaces/You/"
       ],
       "requirement_id": "SPEC-SURFACE-YOU-DEPTH-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Diagnostics/",
+          "source_inventory_ref": "Native/Ambitions/Diagnostics/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/You/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/You/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SPEC-SURFACE-YOU-ENTITLEMENT-COMMAND-CONTRACT-001",
       "source_owners": [
         "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
         "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
@@ -35082,6 +35741,77 @@
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/You/"
       ],
+      "requirement_id": "SYSTEM-CONTINUITY-COMMAND-CONTRACT-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/You/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/You/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Continuity/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
       "requirement_id": "SYSTEM-CONTINUITY-CONFLICT-001",
       "source_owners": [
         "Native/Ambitions/Core/LocalRuntimeOS/Boundary/",
@@ -35721,6 +36451,77 @@
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/You/"
       ],
+      "requirement_id": "SYSTEM-DIAGNOSTICS-COMMAND-CONTRACT-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Diagnostics/",
+          "source_inventory_ref": "Native/Ambitions/Diagnostics/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/You/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/You/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Inspection/",
+        "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
       "requirement_id": "SYSTEM-DIAGNOSTICS-HEALTH-001",
       "source_owners": [
         "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/",
@@ -36244,6 +37045,77 @@
         "Native/Ambitions/Core/LocalRuntimeOS/Planning/",
         "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/",
         "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/Permissions/",
+          "source_inventory_ref": "Native/Ambitions/Core/Permissions/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Surfaces/You/",
+          "source_inventory_ref": "Native/Ambitions/Surfaces/You/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/Permissions/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Surfaces/You/"
+      ],
+      "requirement_id": "SYSTEM-NOTIFICATIONS-COMMAND-CONTRACT-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/ExternalWrites/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/Permissions/",
         "Native/Ambitions/Quality/",
         "Native/Ambitions/Surfaces/You/"
       ]

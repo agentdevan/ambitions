@@ -1,13 +1,13 @@
 {
   "states": [
     {
-      "behavior_authority_posture": "exploratory_blocked_by_specification_gap",
+      "behavior_authority_posture": "requirement_backed",
       "screen_id": "UX-SCREEN-ACCOUNT-BOUNDARY",
       "variant_key": "continuity-conflicted",
       "visible_content_copy": "Two continuity copies disagree on some saved fields. This device keeps its saved information unchanged while the difference is shown."
     },
     {
-      "behavior_authority_posture": "exploratory_blocked_by_specification_gap",
+      "behavior_authority_posture": "requirement_backed",
       "screen_id": "UX-SCREEN-ACCOUNT-STATUS",
       "variant_key": "continuity-disabled",
       "visible_content_copy": "Continuity is off. Signed-in account details and information saved on this device remain available."
@@ -43,13 +43,13 @@
       "visible_content_copy": "The saved Capture is being organized into the selected Ambitions item. Its original text remains visible."
     },
     {
-      "behavior_authority_posture": "exploratory_blocked_by_specification_gap",
+      "behavior_authority_posture": "requirement_backed",
       "screen_id": "UX-SCREEN-OFFLINE-DEGRADED-LOCAL-HEALTH",
       "variant_key": "continuity-pending",
       "visible_content_copy": "A continuity update is waiting. Information already saved on this device remains unchanged."
     },
     {
-      "behavior_authority_posture": "exploratory_blocked_by_specification_gap",
+      "behavior_authority_posture": "requirement_backed",
       "screen_id": "UX-SCREEN-SETUP-RESUME",
       "variant_key": "checkpoint-invalid",
       "visible_content_copy": "Saved setup progress cannot be used. Earlier product information and choices outside setup remain unchanged."

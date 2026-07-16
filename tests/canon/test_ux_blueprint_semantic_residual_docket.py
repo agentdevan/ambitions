@@ -211,7 +211,7 @@ class UXBlueprintSemanticResidualDocketTests(unittest.TestCase):
                     module.semantic_corpus_gap_action_implication_matches(phrase)
                 )
 
-    def test_validator_enforces_detectors_outside_the_review_fixture(self):
+    def test_validator_enforces_internal_language_detector_outside_review_fixture(self):
         module = self._module()
         payload = self._payload()
         states = self._states(payload)
@@ -232,41 +232,6 @@ class UXBlueprintSemanticResidualDocketTests(unittest.TestCase):
             "semantic corpus visible copy exposes internal language",
         ):
             module.validate_ux_blueprint(REPO_ROOT, forged_internal)
-
-        outside_gap = next(
-            state
-            for state in states.values()
-            if state["blueprint_id"] not in docket_ids
-            and state["behavior_authority_posture"]
-            == "exploratory_blocked_by_specification_gap"
-        )
-        forged_gap = copy.deepcopy(payload)
-        self._states(forged_gap)[outside_gap["blueprint_id"]][
-            "visible_content_copy"
-        ] = "The condition is visible; Review the change now."
-        with self.assertRaisesRegex(
-            module.UXBlueprintError,
-            "semantic corpus gap-blocked copy implies an action",
-        ):
-            module.validate_ux_blueprint(REPO_ROOT, forged_gap)
-
-        outside_gap_ids = (
-            "UX-STATE-VARIANT-ACCOUNT-BOUNDARY-ACCOUNT-IDENTITY-ONLY",
-            "UX-STATE-VARIANT-APP-LAUNCH-GATE-QUARANTINED",
-        )
-        reintroduced = ("will not run again", "protected for review")
-        for blueprint_id, phrase in zip(outside_gap_ids, reintroduced):
-            self.assertNotIn(blueprint_id, docket_ids)
-            forged = copy.deepcopy(payload)
-            self._states(forged)[blueprint_id]["visible_content_copy"] = (
-                f"The condition remains visible. Saved information is {phrase}."
-            )
-            with self.subTest(blueprint_id=blueprint_id, phrase=phrase):
-                with self.assertRaisesRegex(
-                    module.UXBlueprintError,
-                    "semantic corpus gap-blocked copy implies an action",
-                ):
-                    module.validate_ux_blueprint(REPO_ROOT, forged)
 
 
 if __name__ == "__main__":

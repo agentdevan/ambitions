@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import hashlib
 import json
+import re
 import unittest
 from dataclasses import replace
 from pathlib import Path
@@ -15,6 +17,7 @@ from tools.ambitions_canon.visual_authority import (
 
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = ROOT / "docs/canon/migration/visual-authority-rebaseline.json"
+HAND_RECORD = ROOT / "docs/canon/migration/VISUAL_AUTHORITY_REBASELINE.md"
 
 
 class VisualAuthorityRebaselineTests(unittest.TestCase):
@@ -32,17 +35,94 @@ class VisualAuthorityRebaselineTests(unittest.TestCase):
         )
         self.assertEqual(
             snapshot.canon_content_sha,
-            "0ac3656f1f55c0514ada19da8b36b8a090628e4fa1648a6aaee3f660a3ed27bb",
+            "37ca3d028309c10537e359cc5d9e95dbbc54b40b5a10557e1f34d08ffb90281c",
         )
         self.assertEqual(snapshot.figma_file_key, "Oik7612LSTUHWsNRFoTlTJ")
         self.assertEqual(snapshot.authority_node_count, 147)
         self.assertEqual(snapshot.screen_count, 47)
-        self.assertEqual(len(snapshot.visual_requirement_ids), 324)
-        self.assertEqual(len(snapshot.eligible_state_ids), 263)
-        self.assertEqual(len(snapshot.future_state_ids), 4)
-        self.assertEqual(len(snapshot.gap_blocked_state_ids), 166)
+        self.assertEqual(len(snapshot.visual_requirement_ids), 336)
+        self.assertEqual(len(snapshot.eligible_state_ids), 411)
+        self.assertEqual(len(snapshot.future_state_ids), 22)
+        self.assertEqual(len(snapshot.gap_blocked_state_ids), 0)
         self.assertEqual(snapshot.legacy_node_count, 15)
         self.assertEqual(snapshot.destructive_actions, ())
+
+    def test_hand_record_matches_machine_canon_and_coverage_digest(self) -> None:
+        payload = json.loads(MANIFEST.read_text(encoding="utf-8"))
+        hand_record = HAND_RECORD.read_text(encoding="utf-8")
+
+        def groups(pattern: str) -> tuple[int, ...]:
+            match = re.search(pattern, hand_record, re.MULTILINE)
+            self.assertIsNotNone(match, pattern)
+            assert match is not None
+            return tuple(int(value) for value in match.groups())
+
+        hand_sha_match = re.search(
+            r"^- Canon content SHA: `([0-9a-f]{64})`$",
+            hand_record,
+            re.MULTILINE,
+        )
+        self.assertIsNotNone(hand_sha_match)
+        assert hand_sha_match is not None
+
+        visual_mapped, visual_total = groups(
+            r"^- Visual requirements mapped: `(\d+)/(\d+)`$"
+        )
+        states_mapped, states_total = groups(r"^- State mappings: `(\d+)/(\d+)`$")
+        hand_counts = {
+            "authority_nodes": groups(r"^- Exact authority nodes: `(\d+)`$")[0],
+            "cross_cutting": groups(r"^- Cross-cutting records: `(\d+)`$")[0],
+            "eligible_states": groups(
+                r"^- Authority-eligible states after Gate B: `(\d+)`$"
+            )[0],
+            "future_states": groups(r"^- Future-gated states: `(\d+)`$")[0],
+            "gap_blocked_states": groups(r"^- Gap-blocked states: `(\d+)`$")[0],
+            "journeys": groups(r"^- Principal journeys: `(\d+)`$")[0],
+            "objects": groups(r"^- Canonical object records: `(\d+)`$")[0],
+            "screens": groups(r"^- Candidate screen mappings: `(\d+)`$")[0],
+            "sensitive_channels": groups(
+                r"^- Sensitive exposure channels: `(\d+)`$"
+            )[0],
+            "states_mapped": states_mapped,
+            "states_total": states_total,
+            "visual_requirements_mapped": visual_mapped,
+            "visual_requirements_total": visual_total,
+        }
+        coverage = payload["coverage"]
+        state_posture = payload["state_posture"]
+        machine_counts = {
+            "authority_nodes": len(payload["figma"]["authority_nodes"]),
+            "cross_cutting": coverage["cross_cutting_count"],
+            "eligible_states": len(state_posture["eligible_state_ids"]),
+            "future_states": len(state_posture["future_state_ids"]),
+            "gap_blocked_states": len(state_posture["gap_blocked_state_ids"]),
+            "journeys": coverage["journey_count"],
+            "objects": coverage["object_count"],
+            "screens": coverage["screen_count"],
+            "sensitive_channels": coverage["sensitive_exposure_channel_count"],
+            "states_mapped": coverage["state_count"],
+            "states_total": sum(
+                len(state_posture[key])
+                for key in (
+                    "eligible_state_ids",
+                    "future_state_ids",
+                    "gap_blocked_state_ids",
+                )
+            ),
+            "visual_requirements_mapped": coverage["visual_requirement_count"],
+            "visual_requirements_total": len(coverage["visual_requirement_ids"]),
+        }
+        hand_count_digest = hashlib.sha256(
+            json.dumps(hand_counts, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+        machine_count_digest = hashlib.sha256(
+            json.dumps(machine_counts, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+
+        self.assertEqual(
+            (hand_sha_match.group(1), hand_count_digest),
+            (payload["canon"]["content_sha"], machine_count_digest),
+        )
 
     def test_pending_gate_b_cannot_select_candidate_authority(self) -> None:
         with self.assertRaises(CanonError) as raised:
@@ -70,18 +150,13 @@ class VisualAuthorityRebaselineTests(unittest.TestCase):
         self.assertTrue(any("figma:Oik7612LSTUHWsNRFoTlTJ:51:100" in item for item in selected))
         self.assertFalse(any("SWtHm9ouHTPbEFfNrrtZwv" in item for item in selected))
 
-    def test_future_gap_and_stale_canon_fail_closed(self) -> None:
+    def test_future_and_stale_canon_fail_closed(self) -> None:
         green = replace(self.snapshot, gate_b_state="green")
         cases = (
             (
                 ("UX-STATE-VARIANT-TIME-DEGRADED-SYNC-PENDING",),
                 green.canon_content_sha,
                 "VISUAL_AUTHORITY_FUTURE_GATED",
-            ),
-            (
-                ("UX-STATE-VARIANT-ACCOUNT-BOUNDARY-LOCAL-ONLY",),
-                green.canon_content_sha,
-                "VISUAL_AUTHORITY_GAP_BLOCKED",
             ),
             (
                 ("UX-SCREEN-TODAY-START-HERE",),
@@ -100,6 +175,15 @@ class VisualAuthorityRebaselineTests(unittest.TestCase):
                         canon_content_sha=canon_content_sha,
                     )
                 self.assertEqual(raised.exception.code, code)
+
+    def test_former_gap_state_selects_only_after_structured_ownership(self) -> None:
+        green = replace(self.snapshot, gate_b_state="green")
+        selected = select_visual_authority(
+            green,
+            scope_ids=("UX-STATE-VARIANT-ACCOUNT-BOUNDARY-LOCAL-ONLY",),
+            requirement_ids=("APP-ACCOUNT-COMMAND-CONTRACT-001",),
+        )
+        self.assertTrue(any("VA-P4-CANDIDATE-009" in item for item in selected))
 
     def test_mixed_or_incomplete_screen_requires_exact_eligible_state_scope(self) -> None:
         green = replace(self.snapshot, gate_b_state="green")

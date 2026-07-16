@@ -860,6 +860,12 @@ def _records(value: object, label: str) -> list[dict[str, object]]:
     return result
 
 
+def _possibly_empty_records(value: object, label: str) -> list[dict[str, object]]:
+    if not isinstance(value, list):
+        raise UXBlueprintError(f"{label} must be an array")
+    return [_object(item, f"{label}[{index}]") for index, item in enumerate(value)]
+
+
 def _string(value: object, label: str) -> str:
     if not isinstance(value, str) or not value.strip():
         raise UXBlueprintError(f"{label} must be a non-empty string")
@@ -1571,7 +1577,7 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
         blueprint.get("sensitive_exposure_channels"),
         "sensitive exposure channels",
     )
-    specification_gaps = _records(
+    specification_gaps = _possibly_empty_records(
         blueprint.get("specification_gaps"), "specification gaps"
     )
     state_contracts = load_state_command_contracts(root)
@@ -1623,7 +1629,7 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
         )
         if "not" not in consequence.casefold():
             raise UXBlueprintError(f"specification gap does not fail closed: {gap_id}")
-    if gap_ids != sorted(set(gap_ids)) or len(gap_ids) != 12:
+    if gap_ids != sorted(set(gap_ids)):
         raise UXBlueprintError("specification gap inventory is stale")
     known_gap_ids = frozenset(gap_ids)
     preliminary_ids = [
@@ -2113,16 +2119,6 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
                         )
             else:
                 raise UXBlueprintError(f"unsupported behavior authority: {variant_id}")
-            if screen_id == "UX-SCREEN-TIME-DETAIL" and (
-                behavior_posture != "exploratory_blocked_by_specification_gap"
-                or allowed_commands
-                or behavior_requirements
-                or state_gap_ids
-                != ("GAP-UX-COMMAND-CONTRACT-TIME-DETAIL-001",)
-            ):
-                raise UXBlueprintError(
-                    f"Time Detail behavior has no owning requirement: {variant_id}"
-                )
             if "Undo" in allowed_commands and (
                 "CONTROL-UNDO-RECOVERY-001" not in variant.get("requirement_ids", [])
             ):

@@ -62,7 +62,7 @@ class UXBlueprintAllCorpusReviewTests(unittest.TestCase):
                     gap_blocked += 1
                     self.assertEqual(state["allowed_commands"], [])
                     self.assertTrue(state["specification_gap_ids"])
-        self.assertEqual((gap_blocked, backed), (4, 14))
+        self.assertEqual((gap_blocked, backed), (0, 18))
 
     def test_internal_language_detection_is_boundary_aware_and_permutation_proof(self):
         module = self._module()

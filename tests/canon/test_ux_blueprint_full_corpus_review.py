@@ -3,6 +3,7 @@ import json
 import re
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -150,7 +151,7 @@ class UXBlueprintFullCorpusReviewTests(unittest.TestCase):
                     state["visible_content_copy"], item["visible_content_copy"]
                 )
 
-    def test_gap_blocked_copy_action_implication_is_grammar_aware_and_fail_closed(self):
+    def test_copy_action_implication_detector_is_grammar_aware(self):
         module = self._module()
         implied_actions = (
             "Review the affected scope before anything changes.",
@@ -178,24 +179,93 @@ class UXBlueprintFullCorpusReviewTests(unittest.TestCase):
             with self.subTest(value=value):
                 self.assertFalse(module.gap_blocked_copy_implies_action(value))
 
-        payload = self._payload()
-        forged = copy.deepcopy(payload)
-        state = self._states(forged)[
-            ("UX-SCREEN-APP-DEEP-LINK-INTAKE", "recoverable")
-        ]
-        state["visible_content_copy"] = implied_actions[0]
-        with self.assertRaisesRegex(
-            module.UXBlueprintError,
-            "gap-blocked visible copy implies an unauthorized action",
+        state_id = "UX-STATE-VARIANT-APP-DEEP-LINK-INTAKE-RECOVERABLE"
+        contracts_without_state = tuple(
+            contract
+            for contract in module.load_state_command_contracts(REPO_ROOT)
+            if contract.state_id != state_id
+        )
+
+        def synthetic_future_gap(visible_copy):
+            payload = copy.deepcopy(self._payload())
+            payload["specification_gaps"] = [
+                {
+                    "affected_screen_families": ["app-deep-link-intake"],
+                    "affected_state_ids": [state_id],
+                    "authority_consequence": (
+                        "The state is not eligible for visual authority until an exact "
+                        "command contract resolves this future gap."
+                    ),
+                    "blocked_fields": [
+                        "material-action focus",
+                        "safe fallback destination",
+                        "user controls by rejection class",
+                        "user controls by source class",
+                    ],
+                    "gap_id": "GAP-UX-COMMAND-CONTRACT-DEEP-LINK-001",
+                    "source_rationale": (
+                        "Synthetic regression coverage preserves fail-closed behavior when "
+                        "a future command gap is explicitly reintroduced."
+                    ),
+                }
+            ]
+            state = next(
+                variant
+                for model in payload["state_models"]
+                for variant in model["variants"]
+                if variant["blueprint_id"] == state_id
+            )
+            state["allowed_commands"] = []
+            state["behavior_authority_evidence"] = []
+            state["behavior_authority_posture"] = (
+                "exploratory_blocked_by_specification_gap"
+            )
+            state["behavior_authority_rationale"] = (
+                "No exact command authorized by current canon; future ownership remains "
+                "blocked by the explicit specification gap."
+            )
+            state["behavior_requirement_ids"] = []
+            state["specification_gap_ids"] = [
+                "GAP-UX-COMMAND-CONTRACT-DEEP-LINK-001"
+            ]
+            state["visible_content_copy"] = visible_copy
+            state["transition_exit"] = (
+                "No exact command authorized by current canon; no transition is available."
+            )
+            state["durable_effect"] = (
+                "No exact command authorized by current canon; saved local data remains "
+                "unchanged."
+            )
+            state["recovery_rollback"] = (
+                "No exact command authorized by current canon; no rollback is available."
+            )
+            state["offline_behavior"] = (
+                "No exact command authorized by current canon; local read-only context "
+                "remains available offline."
+            )
+            state["accessibility_focus"] = (
+                "No exact command authorized by current canon; focus remains on the "
+                "explained unavailable state."
+            )
+            return payload
+
+        with patch.object(
+            module,
+            "load_state_command_contracts",
+            return_value=contracts_without_state,
         ):
-            module.validate_ux_blueprint(REPO_ROOT, forged)
-
-        neutral = copy.deepcopy(payload)
-        self._states(neutral)[
-            ("UX-SCREEN-APP-DEEP-LINK-INTAKE", "recoverable")
-        ]["visible_content_copy"] = neutral_conditions[0]
-        module.validate_ux_blueprint(REPO_ROOT, neutral)
-
+            with self.assertRaisesRegex(
+                module.UXBlueprintError,
+                "gap-blocked visible copy implies an unauthorized action",
+            ):
+                module.validate_ux_blueprint(
+                    REPO_ROOT,
+                    synthetic_future_gap(implied_actions[0]),
+                )
+            module.validate_ux_blueprint(
+                REPO_ROOT,
+                synthetic_future_gap(neutral_conditions[0]),
+            )
 
 if __name__ == "__main__":
     unittest.main()

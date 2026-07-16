@@ -302,7 +302,7 @@
     }
   ],
   "authority_state": "shadow",
-  "canon_content_sha": "0ac3656f1f55c0514ada19da8b36b8a090628e4fa1648a6aaee3f660a3ed27bb",
+  "canon_content_sha": "37ca3d028309c10537e359cc5d9e95dbbc54b40b5a10557e1f34d08ffb90281c",
   "canon_revision": 1,
   "compiler_version": "0.2.0",
   "owner_approval_complete": false,

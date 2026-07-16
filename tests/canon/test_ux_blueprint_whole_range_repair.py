@@ -48,17 +48,9 @@ class UXBlueprintWholeRangeRepairTests(unittest.TestCase):
         )
 
     def _forged_backed_state(self, payload):
-        state = next(
-            row
-            for row in self._states(payload)
-            if row["behavior_authority_posture"]
-            == "exploratory_blocked_by_specification_gap"
-            and "CONTROL-UNDO-RECOVERY-001" in row["requirement_ids"]
-        )
+        state = self._backed_state(payload)
         requirement = self._requirement("CONTROL-UNDO-RECOVERY-001")
-        state["behavior_authority_posture"] = "requirement_backed"
         state["behavior_requirement_ids"] = ["CONTROL-UNDO-RECOVERY-001"]
-        state["specification_gap_ids"] = []
         state["allowed_commands"] = ["Undo"]
         state["behavior_authority_evidence"] = [
             {
@@ -67,9 +59,6 @@ class UXBlueprintWholeRangeRepairTests(unittest.TestCase):
                 "owned_fields": sorted(OWNED_FIELDS),
             }
         ]
-        for gap in payload["specification_gaps"]:
-            if state["blueprint_id"] in gap["affected_state_ids"]:
-                gap["affected_state_ids"].remove(state["blueprint_id"])
         return state
 
     def _backed_state(self, payload):
@@ -136,8 +125,8 @@ class UXBlueprintWholeRangeRepairTests(unittest.TestCase):
             if state["behavior_authority_posture"]
             == "exploratory_blocked_by_specification_gap"
         ]
-        self.assertEqual(len(backed), 267)
-        self.assertEqual(len(blocked), 166)
+        self.assertEqual(len(backed), 433)
+        self.assertEqual(len(blocked), 0)
         for state in backed:
             self.assertTrue(state["behavior_authority_evidence"])
             self.assertTrue(state["behavior_requirement_ids"])
@@ -150,20 +139,19 @@ class UXBlueprintWholeRangeRepairTests(unittest.TestCase):
             self.assertEqual(state["behavior_requirement_ids"], [])
             self.assertTrue(state["specification_gap_ids"])
 
-    def test_gap_affected_state_ids_are_exact_and_bidirectional(self):
+    def test_resolved_gap_ledger_is_empty_and_state_references_are_absent(self):
         payload = self._payload()
-        gaps = {gap["gap_id"]: gap for gap in payload["specification_gaps"]}
-        expected = {gap_id: [] for gap_id in gaps}
+        self.assertEqual(payload["specification_gaps"], [])
         for state in self._states(payload):
-            for gap_id in state["specification_gap_ids"]:
-                expected[gap_id].append(state["blueprint_id"])
-        for gap_id, gap in gaps.items():
-            self.assertEqual(gap["affected_state_ids"], sorted(expected[gap_id]))
+            self.assertEqual(state["specification_gap_ids"], [])
 
         forged = copy.deepcopy(payload)
-        forged["specification_gaps"][0]["affected_state_ids"].pop()
+        self._backed_state(forged)["specification_gap_ids"] = [
+            "GAP-UX-COMMAND-CONTRACT-REMOVED-001"
+        ]
         with self.assertRaisesRegex(
-            self._module().UXBlueprintError, "gap affected state inventory is stale"
+            self._module().UXBlueprintError,
+            "unknown specification gap|requirement-backed state cannot reference gap",
         ):
             self._module().validate_ux_blueprint(REPO_ROOT, forged)
 
@@ -184,6 +172,7 @@ class UXBlueprintWholeRangeRepairTests(unittest.TestCase):
         for gap in payload["specification_gaps"]:
             for state_id in gap["affected_state_ids"]:
                 self.assertIn(state_screens[state_id], approved[gap["gap_id"]])
+        self.assertEqual(payload["specification_gaps"], [])
 
         time_degraded = next(
             model
@@ -197,14 +186,14 @@ class UXBlueprintWholeRangeRepairTests(unittest.TestCase):
             "GAP-UX-COMMAND-CONTRACT-TIME-DEGRADED-001",
             {row["gap_id"] for row in payload["specification_gaps"]},
         )
-        import_gap = next(
-            row
-            for row in payload["specification_gaps"]
-            if row["gap_id"] == "GAP-UX-COMMAND-CONTRACT-TIME-IMPORT-001"
+        time_import = next(
+            model
+            for model in payload["state_models"]
+            if model["screen_id"] == "UX-SCREEN-TIME-IMPORT"
         )
-        self.assertFalse(
-            any("TIME-DEGRADED" in state_id for state_id in import_gap["affected_state_ids"])
-        )
+        for state in time_import["variants"]:
+            self.assertEqual(state["specification_gap_ids"], [])
+            self.assertEqual(state["behavior_authority_posture"], "requirement_backed")
 
     def test_time_today_trust_and_capture_reclassification_is_fail_closed(self):
         payload = self._payload()
@@ -279,7 +268,7 @@ class UXBlueprintWholeRangeRepairTests(unittest.TestCase):
         module = self._module()
         with self.assertRaisesRegex(
             module.UXBlueprintError,
-            "independent structured canon field ownership",
+            "behavior owner contradicts state command contract|evidence requirement mismatch|independent structured canon field ownership",
         ):
             module.validate_ux_blueprint(REPO_ROOT, payload)
         self.assertEqual(
