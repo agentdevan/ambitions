@@ -1,0 +1,162 @@
+{
+  "amendment_id": "TRAIN5-TRUST-TOPOLOGY-AMENDMENT-2026-07-17",
+  "approved_date": "2026-07-17",
+  "base_commit_sha": "7e90833e8b0339237b441f64a9dfed5de8b8bfd8",
+  "budget_law": {
+    "forbidden_mapping": "governance: normal",
+    "other_budget_classes_unchanged": true,
+    "pack_budgets": {
+      "complex": 30000,
+      "constitutional-audit": null,
+      "mechanical": 8000,
+      "normal": 16000
+    },
+    "release_proof_class": "complex",
+    "release_proof_estimated_token_ceiling": 30000,
+    "task_type_budget_class": {
+      "constitutional-audit": "constitutional-audit",
+      "docs": "normal",
+      "mechanical": "mechanical",
+      "privacy": "complex",
+      "release": "complex",
+      "runtime": "complex",
+      "swiftui": "complex"
+    }
+  },
+  "claim_ceiling": {
+    "allowed_after_final_verified_closeout_only": "Canon system Source Green / Governance Green for the exact verified scope",
+    "current_gate_b": "red",
+    "current_gate_c": "red",
+    "forbidden_from_this_amendment": [
+      "Accessibility Green",
+      "App Store ready",
+      "Device ready",
+      "Gate B Green",
+      "Privacy/legal approved",
+      "Product complete",
+      "Release Green",
+      "Rendered-app Visual Green",
+      "Runtime Green",
+      "Source UI implemented",
+      "TestFlight ready"
+    ]
+  },
+  "decisions": [
+    "Task 24 owns a shadow-only reusable Gate B verifier foundation: verifier, task-pack implementation/schema/permanent tests, closed registry, benchmark harness and exact fixtures, fixed benchmark policy, validation-manifest binding, conditional minimum authorization-policy binding, and closed legacy-audit invariant parity.",
+    "Task 24 may be independently reviewed and merged before Task 25, but only with current task authorization and protected-branch required CI.",
+    "The Task 24 merge leaves authority state, AGENTS.md routing, retained skills, replacement CI, protected ruleset configuration, and cutover unchanged.",
+    "Task 25 is proof/generated-output-only and executes already-merged Task 24 verifier bytes.",
+    "Task 25 introduces no verifier, schema, policy, registry, CLI, fixture, or test behavior.",
+    "Bounded reviewed patches from the frozen speculative Task 24 and Task 25 candidates are reused; those branches are not repaired, tested, or merged in place.",
+    "Final integrated history preserves one reviewable commit per numbered task.",
+    "Task 25 derives complete visual coverage from merged canon, UX, and visual ledgers, takes review dimensions from fixed merged policy, requires digest-bound figma-design-export evidence, and remains Red for any gap-blocked state.",
+    "Task 25 runs the base-owned old audit, enforces closed equivalent-or-stronger invariant parity, and requires parsed Green results for audit, build check, P0 coverage, traceability, and authority sprawl.",
+    "Task 25 binds real rollback evidence and uses bounded reads and explicit verifier-controlled subprocess timeouts.",
+    "Task 25 owner approval is limited to Gate B bootstrap authorization for Task 26; destructive approval and purge approval are false, purge-scope approval is deferred to Gate C, and Gate C remains Red.",
+    "Task 26 retains authority, AGENTS.md, retained-skill, replacement-CI, and cutover ownership after Gate B.",
+    "Task 27 retains bounded authorization-bypass cleanup, Task 28 is unchanged, and Task 29 owns permanent negative tests including these repairs, exactly one heavyweight end-to-end canary, the qualifying regression, conditional whole-train rerun, and honest closeout.",
+    "Task 29 records break_glass_status as not_used by default and requires an authenticated one-time attestation only for a separately approved actual incident/use.",
+    "Every Task 24, Task 25, and Task 29 Python proof command uses Python 3.12 and records the exact interpreter version and executable identity in durable evidence.",
+    "This amendment does not establish protected enforcement, authorize break-glass, or make Gate B Green."
+  ],
+  "document_bindings": [
+    {
+      "path": "docs/superpowers/plans/2026-07-11-ambitions-canon-specification-system.md",
+      "post_amendment_sha256": "c3812509be99686162a0d867fc58a115d1de1e80dfb4bad38b7270d5c48258c0",
+      "pre_amendment_sha256": "24adfea917d8f7908dce519550b85a232c712e09837b97ee274ab955426f0aa0"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-07-11-ambitions-canon-train-5a-cutover.md",
+      "post_amendment_sha256": "332c3ed3d85b72b3e42c31dc4e81f3aef6e8a04fdb108589ae04ac6451dce955",
+      "pre_amendment_sha256": "9ae166ac1b244c79200a50ad2d9c1616f38af7161c117bf6f6adbf348525ca6a"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-07-11-ambitions-canon-train-5b-cutover.md",
+      "post_amendment_sha256": "d067b122666f97f9ed3fb61e19096e2e2ec9a2114592737e8ca8e12f66a74803",
+      "pre_amendment_sha256": "cf58100c07756665159bde560d755f3723dd58678c8f6356d10263f7e2501d98"
+    },
+    {
+      "path": "docs/superpowers/specs/2026-07-11-ambitions-canon-specification-system-design.md",
+      "post_amendment_sha256": "932f38f9dda4a5d6e23410a16422b7c81128303f05216bdda445d50779d367d2",
+      "pre_amendment_sha256": "15d03d222cfad9ba6249393524fea4cc5f9a833d60adff5c9309874fe97cd57a"
+    }
+  ],
+  "independent_review": {
+    "critical_findings": 0,
+    "important_findings": 4,
+    "minor_findings": 0,
+    "repair_disposition": "all four Important findings repaired in one bounded five-file bundle; exact re-review remains required before commit"
+  },
+  "owner": "Devan Warner",
+  "protected_enforcement": {
+    "break_glass_approved": false,
+    "break_glass_status_default": "not_used",
+    "protected_required_ci_established_by_this_amendment": false,
+    "task_24_unprotected_merge_authorized": false
+  },
+  "review_requirements": [
+    "This exact five-file amendment range requires one independent consolidated specification-compliance and proof-honesty review before commit.",
+    "Task 24 requires one independent consolidated review, one bounded Critical/Important repair bundle, one covering run after freeze, and one exact re-review before merge.",
+    "Task 25 cannot self-certify; it uses merged Task 24 verifier bytes and independently reviewed proof/generated outputs.",
+    "Every Critical and Important finding blocks integration until repaired and exactly re-reviewed."
+  ],
+  "schema_version": 1,
+  "speculative_sources": {
+    "common_merge_base_sha": "3a196bb9f56ad848140b6c1b42830ed4a68702c5",
+    "task_24_committed_base_sha": "cc49f51f5397b6b83f0482d2056bd8617282f9ea",
+    "task_24_dirty_diff_sha256": "39afd4f1a43d2648bef71c8169a06e753cc9fbfb4d8e405b80c204d91d856663",
+    "task_24_untracked_test_sha256": "05a81b9f646945176e3bbf6b1dcb82836c49d94cc87a42b1ed2a22dff70d74df",
+    "task_25_frozen_commits": [
+      "cc49f51f5397b6b83f0482d2056bd8617282f9ea",
+      "3e165d37fec64a9d75470f90b134dba60b234c8e",
+      "ef1d3f58f4ea4256f1f3e88c06192508cff7775e",
+      "bf914e68d3a4a9bbed7571bec11727d4795cc948",
+      "87e5cae34b46d1517cea595230af25ee0bfa12c6"
+    ],
+    "task_25_frozen_head_sha": "87e5cae34b46d1517cea595230af25ee0bfa12c6"
+  },
+  "status": "owner_approved_independent_review_complete",
+  "task_24_allocation": {
+    "benchmark_fixture_paths": [
+      "tests/canon/fixtures/authorization-benchmarks/01-today-swiftui.json",
+      "tests/canon/fixtures/authorization-benchmarks/02-time-recurrence.json",
+      "tests/canon/fixtures/authorization-benchmarks/03-capture-proposal.json",
+      "tests/canon/fixtures/authorization-benchmarks/04-local-runtime-mutation.json",
+      "tests/canon/fixtures/authorization-benchmarks/05-cloudkit-continuity.json",
+      "tests/canon/fixtures/authorization-benchmarks/06-source-atlas-boundary.json",
+      "tests/canon/fixtures/authorization-benchmarks/07-accessibility-repair.json",
+      "tests/canon/fixtures/authorization-benchmarks/08-release-proof-claim.json"
+    ],
+    "durable_report_path": "docs/canon/migration/TASK_24_IMPLEMENTATION_REPORT.md",
+    "ignored_progress_path": ".superpowers/sdd/progress.md",
+    "permanent_repair_test_paths": [
+      "tests/canon/test_authorization.py",
+      "tests/canon/test_authorization_benchmark.py",
+      "tests/canon/test_cutover_readiness.py",
+      "tests/canon/test_integration.py",
+      "tests/canon/test_purge.py",
+      "tests/canon/test_skill_conformance.py",
+      "tests/canon/test_task_pack.py"
+    ],
+    "retained_visual_fixture_paths": [
+      "tests/canon/fixtures/task25-gate-b-visual-authority-manifest.json",
+      "tests/canon/fixtures/task25-gate-b-visual-complete-contract.json"
+    ],
+    "task_authorization_policy_mutation": "modify docs/canon/references/task-authorization-policy.json only if the Gate B binding requires a byte change",
+    "task_pack_contract_paths": [
+      "docs/canon/schemas/task-pack.schema.json",
+      "tests/canon/test_task_pack.py",
+      "tools/ambitions_canon/task_pack.py"
+    ]
+  },
+  "unchanged_boundaries": [
+    "active authority remains the current pre-cutover authority",
+    "AGENTS.md routing is unchanged",
+    "replacement CI is not installed",
+    "retained skills are unchanged",
+    "protected ruleset configuration is unchanged",
+    "authority cutover remains Task 26 and is prohibited while Gate B is Red",
+    "no production Swift, Figma, Linear, canon, generated-output, or speculative-worktree mutation is authorized by this amendment",
+    "Task 28 is unchanged"
+  ]
+}

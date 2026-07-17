@@ -8,6 +8,8 @@
 
 **Tech Stack:** Python 3.12 standard library (`dataclasses`, `enum`, `tomllib`, `json`, `hashlib`, `sqlite3`, `argparse`, `pathlib`, `tempfile`, `unittest`), Markdown with TOML front matter, TOML/JSON registries, Git, GitHub Actions, Linear and Figma connectors where explicitly scoped.
 
+**Train 5 trust-topology amendment:** `TRAIN5-TRUST-TOPOLOGY-AMENDMENT-2026-07-17`, recorded at `docs/superpowers/amendments/2026-07-17-train-5-trust-topology-amendment.json`, governs this plan where it is more specific than the original allocation. Task 28 is unchanged.
+
 ## Global Constraints
 
 - Implement the approved design at `docs/superpowers/specs/2026-07-11-ambitions-canon-specification-system-design.md`.
@@ -42,6 +44,8 @@
 - Offline compiler checks never claim live external freshness. Mutable external state requires a separately authenticated revisioned snapshot or platform attestation.
 - No routine bypass is allowed. Break-glass requires explicit owner approval, an incident record, rollback, and post-action independent review.
 - Gate B and Gate C remain hard Red gates. Delegated owner approval for Tasks 22–29 cannot waive any Red, Critical, Important, authorization, security, required-CI, protected-branch, or destructive-cleanup requirement.
+- Release-proof task packs are complex with an exact estimated-token ceiling of 30,000. Every other budget class and mapping remains unchanged; the speculative `governance: normal` mapping is prohibited.
+- Task 29 uses fast deterministic unit/fixture tests for permanent negative cases and the eight representative scenarios, exactly one heavyweight end-to-end canary, one qualifying full regression after the integrated cross-cutting enforcement candidate is frozen, and a whole-train closeout rerun only if that candidate changed afterward.
 
 ---
 
@@ -231,6 +235,8 @@ git commit -m "docs: complete external authority supersession"
 - The trusted validation workflow and its command manifest are base-owned or immutably pinned. A validation attestation binds the workflow path/ref/digest, command-manifest digest, exact command/check identity, repository/base/head/merge-base, integration identity, exit status, artifacts, and claim; any re-attested untrusted Green result is invalid.
 - The first post-merge receipt proves the initial live protected boundary before Gate C. Task 29 is the final no-drift proof boundary: final authorization-enforcement and closeout claims require a repeated controlled external GitHub configuration inspection plus independent review.
 - The final claim rule is exact: permanent authorization enforcement cannot be claimed until that repeated inspection and independent review prove no drift at Task 29 closeout.
+- Permanent verifier tests bind the merged Task 24 foundation identity and reject any Task 25 candidate-owned verifier, schema, policy, registry, CLI, fixture, or test behavior.
+- Break-glass status is `not_used` by default. A live break-glass attestation is required only if an actual incident has separate explicit owner approval and the one-time path is used.
 
 - [ ] **Step 1: Write final negative tests**
 
@@ -258,10 +264,21 @@ Add tests for:
 - missing, stale, contributor-authored, mismatched-head, skipped-required, or non-Green CI-owned validation attestation;
 - stale or contributor-asserted external state presented as a current trusted snapshot;
 - forged/stale live-ruleset receipt or reused, revoked, expired, scope-drifted break-glass attestation;
+- caller-defined visual completeness, omission of any required screen/state/journey/object/accessibility variant/visual requirement, caller-defined review dimensions, or any gap-blocked state;
+- visual authority evidence other than a digest-bound `figma-design-export`, incomplete Figma/artifact identity, or design evidence used to upgrade runtime/device/accessibility claims;
+- missing, duplicate, unknown, or weaker legacy-audit invariant mapping, or a missing/non-Green result for audit, build check, P0 coverage, traceability, or authority sprawl;
+- unbounded evidence input, verifier-controlled subprocess without an explicit timeout, or prose-only rollback without a bound restore receipt/artifact;
+- release-proof task-pack classification other than complex at exact ceiling 30,000, any changed non-release budget mapping, or `governance: normal`;
+- Task 25 candidate-owned verifier/schema/policy/registry/CLI/test behavior or execution that does not bind the merged Task 24 verifier bytes;
+- a Task 25 report using `owner_cutover_approval`, approving a purge/destructive scope, omitting the Task 26-only bootstrap scope, or failing to keep Gate C Red and purge approval deferred;
+- break-glass status other than `not_used` when no separately approved actual incident occurred, or a live attestation without the bound approval/incident/use/post-action review;
+- Task 24, Task 25, or Task 29 durable proof evidence missing the exact Python 3.12 version/executable identity or recording a different Python major/minor;
 - bypassed amendment;
 - deleted authority reference.
 
 Every negative test must assert a stable error code and fail closed without partial output. Include protected-branch workflow fixtures that prove the required check regenerates authorization instead of accepting local artifacts.
+
+Keep these cases as fast deterministic unit/fixture tests. Do not turn the eight representative scenarios into eight heavyweight repository integrations.
 
 Add transition fixtures proving the old trusted gate validates a prior-approved verifier/policy digest, the ruleset switch occurs only after merge and independent proof, and no configuration path creates an unprotected interval.
 
@@ -273,26 +290,27 @@ Follow TDD for every new gate. Rename workflow only after tests pass.
 
 Delete tracked raw migration catalogs, claim dispositions, and purge plan only when their durable results exist in the supersession ledger and generated manifests. Keep no active archive.
 
-- [ ] **Step 4: Run final full verification**
+- [ ] **Step 4: Freeze the integrated candidate and run the qualifying verification**
 
 ```bash
-python3 -m unittest discover -s tests/canon -p 'test_*.py' -v
-python3 -m compileall -q tools/ambitions_canon scripts/ambitions-canon.py
-python3 scripts/ambitions-canon.py authority-sprawl --check
-python3 scripts/ambitions-canon.py audit
-python3 scripts/ambitions-canon.py coverage --fail-on-p0-gap
-python3 scripts/ambitions-canon.py traceability --check
-python3 scripts/ambitions-canon.py external-authority --check
-python3 scripts/ambitions-canon.py conflicts report --require-resolved
-python3 scripts/ambitions-canon.py build --check
-python3 scripts/ambitions-canon.py skill-conformance --check
-python3 scripts/ambitions-canon.py benchmark --require-authorization
-python3 scripts/ambitions-canon.py authorization canary \
+python3.12 --version
+python3.12 -m unittest discover -s tests/canon -p 'test_*.py' -v
+python3.12 -m compileall -q tools/ambitions_canon scripts/ambitions-canon.py
+python3.12 scripts/ambitions-canon.py authority-sprawl --check
+python3.12 scripts/ambitions-canon.py audit
+python3.12 scripts/ambitions-canon.py coverage --fail-on-p0-gap
+python3.12 scripts/ambitions-canon.py traceability --check
+python3.12 scripts/ambitions-canon.py external-authority --check
+python3.12 scripts/ambitions-canon.py conflicts report --require-resolved
+python3.12 scripts/ambitions-canon.py build --check
+python3.12 scripts/ambitions-canon.py skill-conformance --check
+python3.12 scripts/ambitions-canon.py benchmark --require-authorization
+python3.12 scripts/ambitions-canon.py authorization canary \
   --handoff docs/canon/generated/CHATGPT_CODEX_HANDOFF.md
-python3 scripts/ambitions-canon.py ruleset-evidence --check \
+python3.12 scripts/ambitions-canon.py ruleset-evidence --check \
   docs/canon/generated/github-authorization-boundary.json
-python3 scripts/ambitions-remediation-governance-check.py
-python3 scripts/ambitions-truth-path-vocabulary-audit.py
+python3.12 scripts/ambitions-remediation-governance-check.py
+python3.12 scripts/ambitions-truth-path-vocabulary-audit.py
 bash scripts/canon-language-drift-scan.sh
 if git grep -nE 'docs/truth/|docs/constitution/' -- ':!docs/superpowers/**' \
   >.codex/canon-program/stale-authority-references.txt; then
@@ -302,17 +320,19 @@ fi
 git diff --check
 ```
 
-Expected: all required commands exit `0`; grep returns no active references outside retained historical implementation plans/specs. Historical plans may mention old paths as truthful history but cannot be routing authority.
+Expected: all required commands exit `0`; grep returns no active references outside retained historical implementation plans/specs. Historical plans may mention old paths as truthful history but cannot be routing authority. Record the exact `python3.12 --version` output, interpreter executable identity, commands, exit codes, and results in the durable Task 29 closeout evidence.
 
-The ChatGPT-to-Codex canary must run end to end from governed Project Instructions and a ChatGPT handoff through request-only schema-valid task intake, trusted event/approval provenance, base-owned/pinned CI `task start`, CI-owned validation attestations, exact base-to-head tree-delta `task finalize`, and merge-check result. It must prove ChatGPT intent is not authorization and must not use a model, network, cloud service, or contributor-generated authorization artifact during offline verification.
+This is the one qualifying full regression after the integrated cross-cutting authorization/enforcement candidate is frozen. Do not run another whole-train regression at closeout unless tracked verifier, policy, schema, fixture, evidence, generated source input, enforcement, or cleanup bytes change after this run. If they do change, freeze the final candidate and rerun this exact whole-train matrix once.
 
-Run all eight representative handoff benchmarks: Today SwiftUI, Time recurrence, Capture proposal flow, LocalRuntimeOS mutation, CloudKit continuity, Source Atlas boundary, accessibility repair, and release-proof claim. Each benchmark must cover start, resume/regeneration, finalization, exact changed files, skill freshness, required validation/proof, and claim ceiling.
+The ChatGPT-to-Codex canary is the program's exactly one heavyweight end-to-end canary. It must run from governed Project Instructions and a ChatGPT handoff through request-only schema-valid task intake, trusted event/approval provenance, base-owned/pinned CI `task start`, CI-owned validation attestations, exact base-to-head tree-delta `task finalize`, and merge-check result. It must prove ChatGPT intent is not authorization and must not use a model, network, cloud service, or contributor-generated authorization artifact during offline verification. Do not run a second heavyweight canary unless its bound inputs changed and the prior result is therefore stale.
+
+Run all eight representative handoff benchmarks through the merged deterministic harness and fixed fixtures: Today SwiftUI, Time recurrence, Capture proposal flow, LocalRuntimeOS mutation, CloudKit continuity, Source Atlas boundary, accessibility repair, and release-proof claim. Each benchmark must cover start, resume/regeneration, finalization, exact changed files, skill freshness, required validation/proof, and claim ceiling without becoming a separate heavyweight repository integration.
 
 Task 29 repeats the controlled external GitHub configuration inspection separately from the offline compiler and proves no drift from the first post-merge receipt acquired before Gate C. Record a durable independently reviewed receipt with repository/ruleset/environment IDs, protected ref, required check context plus integration/app identity, workflow path/ref/digest, command-manifest digest, required reviewers, bypass actors/posture, and observed status. The compiler can validate the receipt and its trusted bindings but the compiler cannot manufacture live proof.
 
-Exercise break-glass only through a platform-authenticated one-time attestation bound to incident ID, repository, PR, base/head, exact scope, authenticated owner principal, rollback, expiry and revocation, and post-action independent-review requirement. Tests and live evidence must reject reuse, ordinary routing, scope drift, missing incident record, expiry, or revocation. Gate B/C and delegated approval cannot waive these properties.
+Do not exercise break-glass merely to produce proof. Record `break_glass_status = "not_used"` by default with no synthetic live attestation. If and only if an actual incident has separate explicit owner approval and the path is used, record a platform-authenticated one-time attestation bound to incident ID, repository, PR, base/head, exact scope, authenticated owner principal, rollback, expiry/revocation, actual use, and post-action independent review. Deterministic fixtures still reject reuse, ordinary routing, scope drift, missing incident record, expiry, or revocation. Gate B/C and delegated approval cannot waive these properties.
 
-Record the exact ChatGPT Project Instructions SHA-256, trusted snapshot revisions/digests, protected-branch/ruleset posture, repository/ruleset/environment IDs, required check context/status and integration/app identity, workflow path/ref/digest, reviewers, bypass posture, canary result, all eight benchmark results, break-glass attestation use, rollback reference, and exact governance claim ceiling in the final generated closeout.
+Record the exact ChatGPT Project Instructions SHA-256, Python 3.12 version/executable identity, trusted snapshot revisions/digests, protected-branch/ruleset posture, repository/ruleset/environment IDs, required check context/status and integration/app identity, workflow path/ref/digest, reviewers, bypass posture, canary result, all eight benchmark results, `break_glass_status`, any conditionally used attestation/incident evidence, rollback reference, and exact governance claim ceiling in the final generated closeout.
 
 - [ ] **Step 5: Final whole-branch review**
 
@@ -329,7 +349,7 @@ Use a fresh most-capable reviewer against the full Train 5 diff. Require explici
 - ChatGPT-to-Codex authorization and local-artifact rejection;
 - skill dependency conformance;
 - protected-branch required-check evidence and Gate C integrity.
-- trusted event/tree-delta, base-owned verifier, CI-owned attestation, live-ruleset receipt, and one-time break-glass evidence.
+- trusted event/tree-delta, base-owned verifier, CI-owned attestation, live-ruleset receipt, and either `break_glass_status = "not_used"` or the conditionally required one-time incident evidence.
 
 Repair and re-review all Critical/Important findings.
 
@@ -354,6 +374,7 @@ Baseline tag and SHA:
 Cutover tag and SHA:
 Final SHA:
 Trains and PRs:
+Task 24 shadow verifier-foundation PR and merge SHA:
 Train 5A cutover PR, merge SHA, and first post-merge receipt:
 Train 5B destructive/finalization PR, merge SHA, and repeated no-drift receipt:
 Files created:
@@ -374,9 +395,11 @@ Required check workflow path/ref/digest and integration/app identity:
 Trusted snapshot revisions/digests:
 Live repository/ruleset/environment evidence receipt:
 Required reviewers and bypass actors/posture:
-Break-glass attestation use/revocation state:
-ChatGPT-to-Codex canary result:
-Eight handoff benchmark results:
+Break-glass status (`not_used` by default; incident/attestation/revocation only if used):
+Python 3.12 interpreter version/executable identity:
+Single heavyweight ChatGPT-to-Codex canary result:
+Eight deterministic handoff benchmark results:
+Qualifying full-regression SHA/result and whether a closeout rerun was required:
 Validation run with exit codes:
 Validation not run and why:
 Independent reviews:

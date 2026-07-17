@@ -1,12 +1,14 @@
-# Ambitions Canon Train 5A — Purge Safety, Dual-Run Proof, and Authority Cutover Implementation Plan
+# Ambitions Canon Train 5A — Shadow Verifier Foundation, Gate B Proof, and Authority Cutover Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Prove purge eligibility and reference safety, pass the dual-run gate, then atomically switch repo routing and CI to the new canon.
+**Goal:** Merge a reviewed shadow-only verifier foundation, run proof-only Gate B from those merged bytes, then atomically switch repo routing and CI to the new canon.
 
-**Architecture:** Create `codex/canon-05-cutover` from the merged reviewed Train 4 head. Cutover is serialized, owner-approved, independently reviewed, and reversible through named tags and a single routing/CI boundary commit.
+**Architecture:** Create the Task 24 foundation from the amended merged Train 4 head, integrate one reviewed Task 24 commit, and merge it without changing authority, routing, retained skills, replacement CI, or cutover. Create Tasks 25–26 from that merged foundation: Task 25 is proof/generated-output-only and Task 26 owns the single routing/CI cutover boundary. Every numbered task remains one reviewable commit.
 
 **Tech Stack:** Python 3.12 standard library (`dataclasses`, `enum`, `tomllib`, `json`, `hashlib`, `sqlite3`, `argparse`, `pathlib`, `tempfile`, `unittest`), Markdown with TOML front matter, TOML/JSON registries, Git, GitHub Actions, Linear and Figma connectors where explicitly scoped.
+
+**Train 5 trust-topology amendment:** `TRAIN5-TRUST-TOPOLOGY-AMENDMENT-2026-07-17`, recorded at `docs/superpowers/amendments/2026-07-17-train-5-trust-topology-amendment.json`, governs this plan where it is more specific than the original allocation.
 
 ## Global Constraints
 
@@ -42,35 +44,62 @@
 - Local hooks are convenience-only. The protected-branch required check is the enforcement boundary; no routine bypass is permitted.
 - Break-glass requires explicit owner approval, an incident record, rollback, and post-action independent review.
 - Gate B and Gate C remain hard Red gates. Delegated owner approval for Tasks 22–29 is exercisable only after all mandated proof is Green and cannot waive any Red, Critical, Important, authorization, security, required-CI, protected-branch, or destructive-cleanup requirement.
+- Release-proof task packs are complex with an exact estimated-token ceiling of 30,000. Every other budget class and mapping remains unchanged; the speculative `governance: normal` mapping MUST NOT survive.
+- Reuse bounded reviewed patches from the frozen speculative Task 24/25 candidates. Do not repair, test, or merge those branches in place.
+- Do not run expensive full regressions on speculative, intermediate, known-blocked, or structurally unmergeable candidates. Run one covering set after the complete Task 24 repair bundle is frozen; Task 25 performs its one proof run with merged verifier bytes. The qualifying integrated enforcement regression belongs to Task 29.
+- No tracked change, including Task 24, may merge without current task authorization and protected-branch required CI. This amendment establishes neither and does not authorize break-glass. If protected enforcement cannot be established, stop for explicit one-time break-glass approval with incident record, rollback, and independent post-action review.
 
 ---
 
-### Task 24: Implement purge eligibility, authority-sprawl enforcement, and reference verification
+### Task 24: Merge the shadow-only verifier foundation
 
 **Files:**
 - Create: `tools/ambitions_canon/purge.py`
 - Modify: `tools/ambitions_canon/audit.py`
 - Modify: `tools/ambitions_canon/cli.py`
+- Modify: `tools/ambitions_canon/task_pack.py`
 - Create: `tools/ambitions_canon/authorization.py`
 - Create: `tools/ambitions_canon/skill_conformance.py`
+- Create: `tools/ambitions_canon/cutover_readiness.py`
+- Create: `tools/ambitions_canon/authorization_benchmark.py`
 - Create: `docs/canon/schemas/task-intake.schema.json`
 - Create: `docs/canon/schemas/task-authorization.schema.json`
 - Create: `docs/canon/schemas/trusted-event.schema.json`
 - Create: `docs/canon/schemas/approval-attestation.schema.json`
 - Create: `docs/canon/schemas/validation-attestation.schema.json`
+- Create: `docs/canon/schemas/gate-b-evidence.schema.json`
+- Modify: `docs/canon/schemas/task-pack.schema.json`
 - Create: `docs/canon/references/skill-dependencies.json`
 - Create: `docs/canon/references/validation-command-manifest.json`
+- Create: `docs/canon/references/gate-b-evidence-registry.json`
+- Create: `docs/canon/references/task-25-authorization-benchmark-policy.json`
+- Create: `docs/canon/references/legacy-audit-invariant-parity.json`
+- Modify: `docs/canon/references/task-authorization-policy.json` only if the Gate B binding requires it; otherwise leave it byte-identical.
 - Create: `tests/canon/test_purge.py`
 - Create: `tests/canon/test_authorization.py`
 - Create: `tests/canon/test_skill_conformance.py`
 - Create: `tests/canon/test_integration.py`
+- Create: `tests/canon/test_cutover_readiness.py`
+- Create: `tests/canon/test_authorization_benchmark.py`
+- Modify: `tests/canon/test_task_pack.py`
+- Create/update durable Task 24 implementation report: `docs/canon/migration/TASK_24_IMPLEMENTATION_REPORT.md`.
+- Update the ignored execution ledger at `.superpowers/sdd/progress.md`; it is not part of the Task 24 tracked commit.
 - Create fixtures:
   - `tests/canon/fixtures/purge-eligible.toml`
   - `tests/canon/fixtures/purge-unresolved-claim.toml`
   - `tests/canon/fixtures/purge-active-reference.toml`
   - `tests/canon/fixtures/authority-outside-canon.txt`
   - `tests/canon/fixtures/task-intake-valid.json`
-  - stale/missing intake, stale-envelope, stale-skill, and undeclared-change fixtures
+  - `tests/canon/fixtures/authorization-benchmarks/01-today-swiftui.json`
+  - `tests/canon/fixtures/authorization-benchmarks/02-time-recurrence.json`
+  - `tests/canon/fixtures/authorization-benchmarks/03-capture-proposal.json`
+  - `tests/canon/fixtures/authorization-benchmarks/04-local-runtime-mutation.json`
+  - `tests/canon/fixtures/authorization-benchmarks/05-cloudkit-continuity.json`
+  - `tests/canon/fixtures/authorization-benchmarks/06-source-atlas-boundary.json`
+  - `tests/canon/fixtures/authorization-benchmarks/07-accessibility-repair.json`
+  - `tests/canon/fixtures/authorization-benchmarks/08-release-proof-claim.json`
+  - `tests/canon/fixtures/task25-gate-b-visual-authority-manifest.json`, retained only as an omission/evidence-kind negative fixture and never as completeness authority
+  - `tests/canon/fixtures/task25-gate-b-visual-complete-contract.json`, retained only as an omission/evidence-kind negative fixture and never as completeness authority
 
 **Interfaces:**
 - `PurgeArtifact`
@@ -93,6 +122,13 @@
 - Required validation derives from the base-owned or pinned `validation-command-manifest.json`; every attestation binds its command-manifest digest and trusted validation workflow path/ref/digest.
 - `skill-conformance --check` validates retained procedural adapters against canonical dependency metadata offline and deterministically.
 - Neither a task pack, envelope, receipt, Project Instructions, skill, nor ChatGPT output is authority. CI independently regenerates authorization and never trusts contributor-generated artifacts.
+- The Task 24 verifier foundation is shadow and non-authoritative. It MUST NOT change `docs/canon/MANIFEST.toml` authority state, `AGENTS.md`, retained skills, replacement CI/workflows, protected ruleset configuration, or cutover state.
+- `cutover_readiness.py`, the Gate B evidence schema/closed registry, fixed benchmark policy, and legacy-audit parity registry are reusable verifier inputs owned by Task 24 and merged before Task 25.
+- Visual completeness is derived from merged canon, UX, and visual ledgers across exact screens, states, journeys, objects, accessibility variants, and visual requirements. Review dimensions come only from fixed merged policy. Caller-provided completeness or review dimensions cannot satisfy Gate B.
+- `figma-design-export` is a closed evidence kind bound to Figma file key, node ID, frame version, artifact bytes/digest, and the merged visual ledger. Simulator-render evidence is separate and optional and cannot upgrade design-authority, accessibility, device, runtime, or release claims.
+- `legacy-audit-invariant-parity.json` maps every base-owned old-audit invariant exactly once to equivalent-or-stronger replacement coverage and rejects missing, duplicate, unknown, or weaker mappings. Gate B requires parsed results for audit, build check, P0 coverage, traceability, and authority sprawl.
+- Evidence reads are bounded, verifier-controlled subprocesses have explicit timeouts, rollback proof binds a real receipt or executable restore evidence, and any `gap_blocked_state_ids` entry keeps Gate B Red.
+- `PACK_BUDGETS` remains exactly `mechanical=8_000`, `normal=16_000`, `complex=30_000`, and `constitutional-audit=None`. `TASK_TYPE_BUDGET_CLASS` remains exactly `mechanical→mechanical`, `docs→normal`, `release→complex`, `swiftui→complex`, `runtime→complex`, `privacy→complex`, and `constitutional-audit→constitutional-audit`. The release-proof benchmark uses task type `release`, class `complex`, and ceiling `30_000`; no other mapping changes. `governance` remains absent and must fail with `PACK_TASK_TYPE_UNKNOWN`, so the speculative `governance: normal` mapping cannot survive.
 
 - [ ] **Step 1: Write failing purge tests**
 
@@ -137,6 +173,17 @@ Before the integration tests, add focused authorization and skill-conformance te
 
 The task-intake, task-authorization, trusted-event, approval-attestation, and validation-attestation schemas must require every binding named above and reject unknown fields.
 
+Add focused verifier-foundation negatives that reject:
+
+1. caller-defined visual completeness, omitted required screen/state/journey/object/accessibility variant/visual requirement, caller-defined review dimensions, or any gap-blocked state;
+2. simulator-render evidence offered as Figma design authority, incomplete Figma identity/artifact binding, or a visual design claim upgraded to runtime/device/accessibility proof;
+3. missing, duplicate, unknown, or weaker old-audit parity mappings and any missing/non-Green one of the five replacement commands;
+4. unbounded evidence input, verifier-controlled subprocess without an explicit timeout, or prose-only rollback evidence;
+5. a release-proof task pack not classified complex at exact ceiling 30,000, any changed non-release budget mapping, or the speculative `governance: normal` mapping;
+6. any Task 25 fixture or evidence attempting to load candidate-owned verifier/schema/policy/registry/CLI/test bytes.
+
+Fold the durable cases from speculative `test_task24_review_repairs.py`, `test_task24_second_review_repairs.py`, and `test_task24_third_review_repairs.py` into the permanent owners `tests/canon/test_task_pack.py`, `tests/canon/test_authorization.py`, `tests/canon/test_purge.py`, `tests/canon/test_skill_conformance.py`, `tests/canon/test_integration.py`, `tests/canon/test_cutover_readiness.py`, and `tests/canon/test_authorization_benchmark.py`. Do not retain or stage the three repair-named test files in the integrated Task 24 commit.
+
 Add full pipelines:
 
 ```text
@@ -152,8 +199,12 @@ Use temporary repositories and fixtures; no network.
 - [ ] **Step 4: Run RED**
 
 ```bash
-python3 -m unittest tests/canon/test_purge.py tests/canon/test_authorization.py \
-  tests/canon/test_skill_conformance.py tests/canon/test_integration.py -v
+python3.12 --version
+python3.12 -m unittest tests/canon/test_purge.py tests/canon/test_authorization.py \
+  tests/canon/test_skill_conformance.py tests/canon/test_integration.py \
+  tests/canon/test_task_pack.py \
+  tests/canon/test_cutover_readiness.py \
+  tests/canon/test_authorization_benchmark.py -v
 ```
 
 Expected: missing module/functions.
@@ -179,50 +230,89 @@ rollback_ref = "canon-system-baseline-2026-07-11"
 
 Do not execute deletion in Python. The compiler proves eligibility and validates the post-delete tree.
 
-Implement authorization as pure standard-library functions over explicit inputs. Canonical JSON serialization uses sorted keys and a terminal newline; tree-delta, command-manifest, snapshot, approval, validation, and dependency digests use SHA-256; outputs are written through a temporary file and atomic replacement. Tree normalization reads Git objects/entries without rename/copy or binary heuristics. `task start` and `task finalize` perform no network/model/cloud calls. Current offline state means exact base-trusted, revisioned repository snapshots or platform-authenticated attestations; intake digest never proves external freshness. `skill-dependencies.json` and `validation-command-manifest.json` own dependency/validation policy metadata, not product doctrine, and retained skills remain non-authoritative procedural adapters.
+Implement authorization and the reusable Gate B verifier as pure standard-library functions over explicit inputs. Canonical JSON serialization uses sorted keys and a terminal newline; tree-delta, command-manifest, snapshot, approval, validation, evidence-artifact, benchmark-policy, and dependency digests use SHA-256; outputs are written through a temporary file and atomic replacement. Tree normalization reads Git objects/entries without rename/copy or binary heuristics. `task start`, `task finalize`, and the Gate B verifier perform no network/model/cloud calls. Current offline state means exact base-trusted, revisioned repository snapshots or platform-authenticated attestations; intake digest never proves external freshness. `skill-dependencies.json`, `validation-command-manifest.json`, the closed Gate B registry/policy, and legacy-audit parity registry own dependency and verification metadata, not product doctrine. Retained skills remain non-authoritative procedural adapters. Bound reads and subprocess timeouts fail closed; rollback and Figma evidence are digest-bound artifacts, never prose assertions.
 
 - [ ] **Step 6: Run GREEN**
 
 ```bash
-python3 -m unittest tests/canon/test_purge.py tests/canon/test_authorization.py \
-  tests/canon/test_skill_conformance.py tests/canon/test_integration.py -v
-python3 scripts/ambitions-canon.py skill-conformance --check
-python3 scripts/ambitions-canon.py authority-sprawl --check
-python3 scripts/ambitions-canon.py purge plan \
+python3.12 --version
+python3.12 -m unittest tests/canon/test_purge.py tests/canon/test_authorization.py \
+  tests/canon/test_skill_conformance.py tests/canon/test_integration.py \
+  tests/canon/test_task_pack.py \
+  tests/canon/test_cutover_readiness.py \
+  tests/canon/test_authorization_benchmark.py -v
+python3.12 scripts/ambitions-canon.py skill-conformance --check
+python3.12 scripts/ambitions-canon.py authority-sprawl --check
+python3.12 scripts/ambitions-canon.py purge plan \
   --output .codex/canon-migration/sample-purge-plan.toml
-python3 scripts/ambitions-canon.py purge verify \
+python3.12 scripts/ambitions-canon.py purge verify \
   --plan .codex/canon-migration/sample-purge-plan.toml --dry-run
 git diff --check
 ```
 
-Expected: shadow authority-sprawl check permits only baseline legacy authority plus `docs/canon/`; sample plan verifies without mutation.
+Expected: shadow authority-sprawl check permits only baseline legacy authority plus `docs/canon/`; sample plan verifies without mutation. Record the exact `python3.12 --version` output, interpreter executable identity, commands, exit codes, and results in `docs/canon/migration/TASK_24_IMPLEMENTATION_REPORT.md`.
 
 - [ ] **Step 7: Commit**
 
 ```bash
 git add tools/ambitions_canon/purge.py tools/ambitions_canon/audit.py \
   tools/ambitions_canon/cli.py tools/ambitions_canon/authorization.py \
-  tools/ambitions_canon/skill_conformance.py docs/canon/schemas/task-intake.schema.json \
+  tools/ambitions_canon/skill_conformance.py tools/ambitions_canon/task_pack.py \
+  tools/ambitions_canon/cutover_readiness.py \
+  tools/ambitions_canon/authorization_benchmark.py \
+  docs/canon/schemas/task-intake.schema.json \
   docs/canon/schemas/task-authorization.schema.json \
   docs/canon/schemas/trusted-event.schema.json \
   docs/canon/schemas/approval-attestation.schema.json \
   docs/canon/schemas/validation-attestation.schema.json \
+  docs/canon/schemas/gate-b-evidence.schema.json \
+  docs/canon/schemas/task-pack.schema.json \
   docs/canon/references/skill-dependencies.json \
-  docs/canon/references/validation-command-manifest.json tests/canon/test_purge.py \
-  tests/canon/test_authorization.py tests/canon/test_skill_conformance.py \
-  tests/canon/test_integration.py tests/canon/fixtures
-git commit -m "feat: prove authority purge eligibility"
+  docs/canon/references/validation-command-manifest.json \
+  docs/canon/references/gate-b-evidence-registry.json \
+  docs/canon/references/task-25-authorization-benchmark-policy.json \
+  docs/canon/references/legacy-audit-invariant-parity.json \
+  tests/canon/test_purge.py tests/canon/test_authorization.py \
+  tests/canon/test_skill_conformance.py tests/canon/test_task_pack.py \
+  tests/canon/test_integration.py tests/canon/test_cutover_readiness.py \
+  tests/canon/test_authorization_benchmark.py \
+  tests/canon/fixtures/purge-eligible.toml \
+  tests/canon/fixtures/purge-unresolved-claim.toml \
+  tests/canon/fixtures/purge-active-reference.toml \
+  tests/canon/fixtures/authority-outside-canon.txt \
+  tests/canon/fixtures/task-intake-valid.json \
+  tests/canon/fixtures/authorization-benchmarks/01-today-swiftui.json \
+  tests/canon/fixtures/authorization-benchmarks/02-time-recurrence.json \
+  tests/canon/fixtures/authorization-benchmarks/03-capture-proposal.json \
+  tests/canon/fixtures/authorization-benchmarks/04-local-runtime-mutation.json \
+  tests/canon/fixtures/authorization-benchmarks/05-cloudkit-continuity.json \
+  tests/canon/fixtures/authorization-benchmarks/06-source-atlas-boundary.json \
+  tests/canon/fixtures/authorization-benchmarks/07-accessibility-repair.json \
+  tests/canon/fixtures/authorization-benchmarks/08-release-proof-claim.json \
+  tests/canon/fixtures/task25-gate-b-visual-authority-manifest.json \
+  tests/canon/fixtures/task25-gate-b-visual-complete-contract.json \
+  docs/canon/migration/TASK_24_IMPLEMENTATION_REPORT.md
+git commit -m "feat: add shadow Gate B verifier foundation"
 ```
 
+Stage `docs/canon/references/task-authorization-policy.json` separately only if the final reviewed Task 24 diff proves the Gate B binding requires a byte change. Never use a broad fixture-directory add.
+
+- [ ] **Step 8: Independently review and merge the foundation**
+
+Freeze one exact Task 24 review package and require consolidated specification-compliance, security/fail-closed, code-quality, determinism, proof-honesty, and claim-ceiling verdicts. Repair all Critical/Important findings in one bounded bundle, run one covering set, and perform one exact re-review. Merge the single Task 24 commit only under current task authorization and protected-branch required CI. The merge MUST leave authority state, `AGENTS.md` routing, retained skills, replacement CI, protected ruleset configuration, and cutover unchanged. If that enforcement cannot be established, stop; this plan does not authorize break-glass.
+
 ---
 ---
 
-### Task 25: Prove the dual-run cutover gate
+### Task 25: Run proof-only Gate B from merged verifier bytes
 
 **Files:**
 - Create generated report: `docs/canon/generated/cutover-readiness.md`
 - Create: `docs/canon/migration/purge-plan.toml`
-- Modify generated outputs only.
+- Modify only deterministic generated outputs changed by frozen merged inputs.
+- Create/update durable Task 25 implementation report: `docs/canon/migration/TASK_25_IMPLEMENTATION_REPORT.md`.
+- Update the ignored execution ledger at `.superpowers/sdd/progress.md`; it is not part of the Task 25 tracked commit.
+- Do not create or modify verifier, schema, policy, registry, CLI, fixture, or test behavior.
 
 **Interfaces:**
 - old and new audits coexist;
@@ -231,6 +321,11 @@ git commit -m "feat: prove authority purge eligibility"
 - no unresolved P0 conflict/gap;
 - rollback tag exists;
 - external reconciliation state explicit.
+- Task 25 runs only the verifier, schemas, policies, registries, CLI, fixtures, and tests already merged by Task 24. The Task 25 tree is rejected if it supplies or substitutes any of those bytes.
+- complete visual coverage is derived from merged canon/UX/visual ledgers and fixed review dimensions from merged policy;
+- every required visual uses digest-bound `figma-design-export` evidence and every gap-blocked state keeps Gate B Red;
+- the base-owned old audit runs, closed invariant parity passes, and audit/build/P0 coverage/traceability/authority-sprawl results all parse Green;
+- rollback proof binds a real receipt or executable restore artifact; evidence reads are bounded and verifier-controlled subprocesses use explicit timeouts.
 - Gate B remains hard Red until current ChatGPT handoff, authorization, skill-conformance, CI-regeneration, rollback, owner approval, and independent-review evidence is Green.
 - The controller's delegated owner approval cannot waive any failed authorization, security, required-CI, protected-branch, or destructive-cleanup check.
 - Gate B approval is bootstrap approval for Task 26 installation only. Live enforcement cannot be claimed from the branch; after the Train 5A merge, the first post-merge protected-boundary receipt must prove activation before Gate C. Task 29 later repeats inspection and proves no drift.
@@ -238,7 +333,7 @@ git commit -m "feat: prove authority purge eligibility"
 - [ ] **Step 1: Generate purge plan without deleting**
 
 ```bash
-python3 scripts/ambitions-canon.py purge plan \
+python3.12 scripts/ambitions-canon.py purge plan \
   --output docs/canon/migration/purge-plan.toml
 ```
 
@@ -246,31 +341,33 @@ Every artifact entry must contain action, replacement IDs, claim coverage, incom
 
 Generate the governed ChatGPT handoff/intake fixture set without authorizing implementation. The Gate B report must prove missing or stale intake, stale authorization envelope, and local-artifact substitution all fail closed.
 
-- [ ] **Step 2: Run the full dual-run matrix**
+- [ ] **Step 2: Run the proof-only Gate B matrix from merged Task 24 bytes**
 
 ```bash
-python3 -m unittest discover -s tests/canon -p 'test_*.py' -v
-python3 -m unittest scripts/tests/test_ambitions_authority_freeze_check.py -v
-python3 -m compileall -q tools/ambitions_canon scripts/ambitions-canon.py
-python3 scripts/ambitions-authority-freeze-check.py
-python3 scripts/ambitions-canon.py audit
-python3 scripts/ambitions-canon.py coverage --fail-on-p0-gap
-python3 scripts/ambitions-canon.py traceability --check
-python3 scripts/ambitions-canon.py external-authority --check
-python3 scripts/ambitions-canon.py conflicts report --require-resolved
-python3 scripts/ambitions-canon.py migration claims coverage
-python3 scripts/ambitions-canon.py build --check
-python3 scripts/ambitions-canon.py skill-conformance --check
-python3 scripts/ambitions-canon.py benchmark --require-authorization
-python3 scripts/ambitions-canon.py purge verify --plan docs/canon/migration/purge-plan.toml --dry-run
-python3 scripts/ambitions-constitution-audit.py
-python3 scripts/ambitions-remediation-governance-check.py
-python3 scripts/ambitions-truth-path-vocabulary-audit.py
+python3.12 --version
+python3.12 -m unittest -v \
+  tests.canon.test_authorization_benchmark \
+  tests.canon.test_cutover_readiness
+python3.12 scripts/ambitions-constitution-audit.py
+python3.12 scripts/ambitions-canon.py audit
+python3.12 scripts/ambitions-canon.py build --check
+python3.12 scripts/ambitions-canon.py coverage --fail-on-p0-gap
+python3.12 scripts/ambitions-canon.py traceability --check
+python3.12 scripts/ambitions-canon.py authority-sprawl --check
+python3.12 scripts/ambitions-canon.py external-authority --check
+python3.12 scripts/ambitions-canon.py conflicts report --require-resolved
+python3.12 scripts/ambitions-canon.py migration claims coverage
+python3.12 scripts/ambitions-canon.py skill-conformance --check
+python3.12 scripts/ambitions-canon.py benchmark --require-authorization
+python3.12 scripts/ambitions-canon.py purge verify \
+  --plan docs/canon/migration/purge-plan.toml --dry-run
 bash scripts/canon-language-drift-scan.sh
 git diff --check
 ```
 
-The authorization benchmark must exercise all eight representative task scenarios under both `task start` and `task finalize`: Today SwiftUI, Time recurrence, Capture proposal flow, LocalRuntimeOS mutation, CloudKit continuity, Source Atlas boundary, accessibility repair, and release-proof claim. For each scenario prove:
+The verifier imports and executes its trusted behavior from the merged Task 24 base, treats the Task 25 checkout as evidence/generated output only, and rejects candidate-owned verifier/schema/policy/registry/CLI/test substitutions. Record the exact `python3.12 --version` output, interpreter executable identity, commands, exit codes, and results in `docs/canon/migration/TASK_25_IMPLEMENTATION_REPORT.md`. This is the single Task 25 proof run for the frozen inputs; do not rerun it without a relevant verifier, policy, schema, fixture, evidence, or source-input change. This is not the qualifying whole-program regression.
+
+The deterministic authorization benchmark must exercise all eight representative task scenarios under both `task start` and `task finalize`: Today SwiftUI, Time recurrence, Capture proposal flow, LocalRuntimeOS mutation, CloudKit continuity, Source Atlas boundary, accessibility repair, and release-proof claim. It MUST use the fixed merged Task 24 policy and fixtures rather than eight heavyweight repository integrations. For each scenario prove:
 
 - ChatGPT handoff produces schema-valid intent/intake but cannot authorize itself;
 - intake is untrusted intent only and carries requested scope, never authoritative owner approval, authorized files, validation/proof results, break-glass, or merge permission;
@@ -282,6 +379,15 @@ The authorization benchmark must exercise all eight representative task scenario
 - required validation is derived by a trusted workflow and command manifest and represented only by CI-owned validation attestations bound to the same event/workflow/command-manifest digest;
 - changed PR workflow/command manifest, wrong digest/integration, and re-attested untrusted Green benchmark cases fail closed;
 - a local task pack, authorization envelope, or finalization receipt cannot substitute for CI regeneration.
+
+The Gate B visual and proof evaluation must also prove:
+
+- the required visual set is the deterministic set derived from merged screen/state/journey/object/accessibility-variant/visual-requirement ledgers, not caller lists or circular manifests;
+- review dimensions are the closed merged policy set;
+- each required frame has `figma-design-export` evidence bound to file key, node ID, frame version, artifact bytes/digest, and merged visual ledger, while simulator-render evidence cannot widen the claim;
+- `gap_blocked_state_ids` is empty;
+- every old-audit invariant has one equivalent-or-stronger closed parity mapping and each of the five replacement commands emitted a parsed Green result;
+- rollback restore evidence, bounded-read limits, and subprocess timeouts are present and verified.
 
 - [ ] **Step 3: Independent cutover review**
 
@@ -295,22 +401,38 @@ A fresh Sol Max reviewer verifies:
 - ChatGPT handoff, start/finalize, resume, final-diff, and changed-file proof;
 - request-only intake, trusted event/approval provenance, canonical tree-delta, and CI-owned evidence proof;
 - skill dependency freshness and independent-CI-regeneration proof;
+- merged-base verifier isolation and candidate-byte rejection;
+- deterministic visual coverage derivation, fixed review dimensions, Figma design-export evidence, and zero gap-blocked states;
+- closed old-audit invariant parity and all five parsed replacement-command results;
+- bounded reads, explicit timeouts, and real rollback restore evidence;
 - purge eligibility;
 - rollback.
 
 Repair all Critical/Important findings.
 
-- [ ] **Step 4: Record owner cutover decision**
+- [ ] **Step 4: Record the Gate B / Task 26 bootstrap decision**
 
-The report must state `owner_cutover_approval = true` with date and approved purge scope. It must also state `gate_b = green` and name the independently reviewed authorization evidence. Without both, stop.
+Only after every Gate B requirement is Green and the exact proof is independently reviewed may the report state `owner_gate_b_task_26_bootstrap_approval = true`, with decision date and the exact Task 26 installation scope. It must also state `gate_b = green`, `owner_destructive_approval = false`, `owner_purge_approval = false`, `purge_scope_approval_status = "deferred_to_gate_c"`, and `gate_c = red`, and name the independently reviewed authorization evidence. This approval authorizes Task 26 installation only; it is not cutover completion, live-enforcement proof, purge approval, or destructive approval. Without the bootstrap approval and Green Gate B evidence, stop.
 
 - [ ] **Step 5: Commit readiness evidence**
 
 ```bash
 git add docs/canon/generated/cutover-readiness.md \
-  docs/canon/migration/purge-plan.toml
+  docs/canon/migration/purge-plan.toml \
+  docs/canon/migration/TASK_25_IMPLEMENTATION_REPORT.md \
+  docs/canon/generated/canon-index.json \
+  docs/canon/generated/concept-ownership.json \
+  docs/canon/generated/external-reference-impact.md \
+  docs/canon/generated/law-proof-map.json \
+  docs/canon/generated/law-source-map.json \
+  docs/canon/generated/law-test-map.json \
+  docs/canon/generated/requirement-graph.json \
+  docs/canon/generated/supersession-manifest.json \
+  docs/canon/generated/visual-authority-manifest.json
 git commit -m "docs: prove canon cutover readiness"
 ```
+
+Stage only the listed generated paths that actually changed under the frozen inputs; never use a broad directory add. The Task 25 commit MUST contain only the proof/generated material declared in this task.
 
 ---
 ---
@@ -424,7 +546,7 @@ git commit -m "docs: cut over to canonical specification system"
 
 - [ ] **Step 6: Review and merge Train 5A**
 
-Open the reviewed Train 5A cutover PR containing Tasks 24–26. The old trusted gate validates the transition. Repair all Critical/Important findings, obtain owner approval, and merge the reviewed Train 5A cutover PR so the verifier/workflow actually exists on protected `main`. An unmerged branch workflow is not live enforcement.
+Open the reviewed Train 5A cutover PR containing Tasks 25–26 from the already-merged Task 24 foundation. The old trusted gate validates the transition. Repair all Critical/Important findings, obtain owner approval, and merge the reviewed Train 5A cutover PR so the required workflow actually exists on protected `main`. An unmerged branch workflow is not live enforcement; the merged Task 24 verifier alone does not establish required CI.
 
 - [ ] **Step 7: Prove the live boundary before Gate C**
 

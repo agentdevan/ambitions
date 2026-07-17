@@ -8,6 +8,8 @@
 
 **Tech Stack:** Python 3.12 standard library (`dataclasses`, `enum`, `tomllib`, `json`, `hashlib`, `sqlite3`, `argparse`, `pathlib`, `tempfile`, `unittest`), Markdown with TOML front matter, TOML/JSON registries, Git, GitHub Actions, Linear and Figma connectors for controlled external reconciliation.
 
+**Train 5 trust-topology amendment:** `TRAIN5-TRUST-TOPOLOGY-AMENDMENT-2026-07-17`, recorded at `docs/superpowers/amendments/2026-07-17-train-5-trust-topology-amendment.json`, governs Tasks 24–29 where it is more specific than the original allocation.
+
 ## Global Constraints
 
 - Implement the approved design at `docs/superpowers/specs/2026-07-11-ambitions-canon-specification-system-design.md`.
@@ -44,6 +46,9 @@
 - Verifier/policy changes use a two-stage gate-change protocol with the old trusted gate protecting the transition and no unprotected ruleset interval.
 - Live required-check/ruleset posture and any platform-authenticated one-time break-glass attestation require controlled external GitHub inspection; the offline compiler validates receipts but cannot manufacture live proof.
 - Gate B and Gate C are hard Red gates. The controller may exercise delegated owner approval for Tasks 22–29 only after all mandated proof is Green; delegation cannot waive any Red, Critical, Important, authorization, security, required-CI, protected-branch, or destructive-cleanup requirement.
+- Release-proof task packs are complex with an exact estimated-token ceiling of 30,000. Every other budget class and mapping remains unchanged; the speculative `governance: normal` mapping is prohibited.
+- Do not run expensive full regressions on speculative, intermediate, known-blocked, or structurally unmergeable candidates. Use one covering set after a complete repair bundle freezes, exactly one heavyweight end-to-end Gate B canary, one qualifying full regression after the integrated cross-cutting enforcement candidate freezes, and a Task 29 whole-train rerun only if that candidate changed afterward.
+- Every Task 24, Task 25, and Task 29 Python proof command uses `python3.12`; durable task evidence records the exact interpreter version and executable identity.
 
 ## Program Execution Model
 
@@ -55,9 +60,9 @@ Use five stacked trains. Each train is independently reviewable and must be Gree
 | 2 | `codex/canon-02-reconciliation` | Train 1 head | 9–12 | Corpus catalog, claims, conflict dockets, owner decision gate |
 | 3 | `codex/canon-03-atlas` | Train 2 head | 13–19 | Constitution, app/surface/object/journey/system/standard specifications |
 | 4 | `codex/canon-04-consumption` | Train 3 head | 20–23 | Traceability, Codex packs/benchmarks, Linear and Figma reconciliation |
-| 5 | `codex/canon-05-cutover` | merged Train 4 head | 24–29 | Dual-run proof, cutover, bounded purge, external destruction, closeout |
+| 5 | `codex/canon-05-cutover` | merged Train 4 head | 24–29 | Merged shadow verifier foundation, proof-only Gate B, cutover, bounded purge, external destruction, closeout |
 
-Train 5 remains one program train but uses two review/merge phases so protected-base enforcement can become live before destructive work. The exact boundary is defined below.
+Train 5 remains one program train but uses three integration boundaries: the shadow-only Task 24 verifier-foundation merge, the Tasks 25–26 Train 5A cutover merge, and the Tasks 27–29 Train 5B closeout merge. The exact boundary is defined below.
 
 Within each train, use **Subagent-Driven Development**:
 
@@ -239,37 +244,38 @@ The bounded plan files are authoritative for task steps. This master file owns s
 | 21 | 4 | Codex consumption benchmark and resume guard |
 | 22 | 4 | Linear execution projection |
 | 23 | 4 | Figma visual-authority projection |
-| 24 | 5 | Purge/sprawl/reference verification plus task authorization and skill conformance |
-| 25 | 5 | Gate B dual-run, handoff, authorization, and regeneration proof |
+| 24 | 5 | Shadow-only reusable Gate B verifier foundation, authorization/purge support, benchmark harness, and legacy-audit parity policy |
+| 25 | 5 | Proof/generated-output-only Gate B run using merged Task 24 verifier bytes |
 | 26 | 5 | Authority, handoff, retained-skill, and required-CI cutover |
 | 27 | 5 | Bounded repo and authorization-bypass purge |
 | 28 | 5 | Linear/Figma destruction |
 | 29 | 5 | Final authorization anti-regression, required-check proof, canary, and closeout |
 
-## ChatGPT-to-Codex Authorization Allocation
+## ChatGPT-to-Codex Authorization and Trust-Topology Allocation
 
-The amendment is allocated without changing the serial Train 5 shape:
+The amendment preserves the serial Train 5 shape and one reviewable commit per numbered task while changing the trust bootstrap boundary:
 
-- **Task 24** retains purge eligibility, authority-sprawl, and reference verification and adds request-only intake plus trusted-event/approval/validation authorization schemas, deterministic local and CI PR-range `task start`/`task finalize`, trusted event bindings, and a command-independent canonical base-to-head tree delta from raw Git entries. It uses merge-base/head trees, raw-path-byte sorting, delete/add normalization, opaque blobs, computed file authorization, a trusted validation command manifest, the canonical skill-dependency registry, offline `skill-conformance --check`, ignored envelope/receipt output, and focused trust-boundary/diff/policy negative tests. Routine authorization derives from the trusted base and base-trusted revisioned snapshots, never contributor claims.
-- **Task 25** extends Gate B with ChatGPT handoff proof; untrusted intent only intake; trusted event/approval provenance; missing/stale intake and stale-envelope proof; resume/regeneration proof across base movement and head replacement; command-independent tree-delta proof; skill-freshness proof; base-owned/pinned validation workflow/command-manifest and CI-owned attestation proof; task start/finalize authorization for all eight representative scenarios; and proof that local or re-attested untrusted Green artifacts cannot substitute for trusted CI.
+- **Task 24** is a shadow-only verifier foundation. It retains the reusable purge, authorization, skill-conformance, task-pack, and reference-verification support required by Gate B and owns `task_pack.py` plus its schema/permanent tests, `cutover_readiness.py`, `authorization_benchmark.py`, required CLI integration, Gate B evidence schema/closed registry, the fixed Task 25 benchmark policy, validation-command-manifest binding, `task-authorization-policy.json` only if Gate B requires a byte change, the closed legacy-audit invariant-parity record, the exact fixtures/permanent tests listed in Train 5A, `docs/canon/migration/TASK_24_IMPLEMENTATION_REPORT.md`, and the ignored `.superpowers/sdd/progress.md` ledger. It preserves every existing non-release task-pack mapping, keeps `release→complex` at 30,000, and rejects absent task type `governance` rather than adding `governance: normal`. It derives from bounded reviewed patches in frozen speculative candidates `cc49f51f5397b6b83f0482d2056bd8617282f9ea` and `87e5cae34b46d1517cea595230af25ee0bfa12c6`; those branches are not repaired, tested, or merged in place. Task 24 receives independent review and merges before Task 25. That merge leaves `authority_state`, `AGENTS.md` routing, retained skills, replacement CI, protected ruleset configuration, and cutover unchanged.
+- **Task 25** is proof/generated-output-only and runs the already-merged Task 24 verifier bytes. Its tracked files are limited to `docs/canon/generated/cutover-readiness.md`, `docs/canon/migration/purge-plan.toml`, deterministic generated outputs changed by frozen inputs, and `docs/canon/migration/TASK_25_IMPLEMENTATION_REPORT.md`; `.superpowers/sdd/progress.md` remains ignored. It introduces no verifier, schema, policy, registry, CLI, fixture, or test behavior. Gate B derives complete visual coverage from merged canon/UX/visual ledgers and fixed review dimensions from merged policy; requires digest-bound `figma-design-export` evidence; keeps any gap-blocked state Red; runs the old audit; enforces closed invariant parity plus all five replacement commands; binds real rollback evidence; uses bounded reads/timeouts; and proves the handoff, authorization, regeneration, skill freshness, and local-artifact rejection properties without self-certification. Any owner decision at this boundary is limited to Gate B bootstrap authorization for Task 26; destructive and purge approvals remain false and deferred to Gate C.
 - **Task 26** makes `AGENTS.md` require task start/finalize authorization for every tracked change, reduces retained skills to procedural adapters with canonical dependency metadata, generates `CHATGPT_CODEX_HANDOFF.md` and `AUTHORIZATION_GATE_TRANSITION.md`, stores the exact governed ChatGPT Project Instructions and records/verifies their Project Instructions SHA-256, and installs a base-owned or immutably pinned verifier and validation command manifest using least-privilege trust-boundary workflow execution. It binds required-check identity, applies the two-stage gate-change protocol, executes required validation, emits CI-owned validation attestations, and finalizes the exact trusted PR range. Project Instructions and skills remain explicitly non-authoritative; local hooks and local validation remain convenience-only.
 - **Task 27** retains bounded purge and explicitly deletes or rewrites approved stale skills, old handoff documents, compatibility routers, and all other authorization bypass paths, with replacement IDs, inbound-reference rewrites, independent review, and rollback before deletion.
 - **Task 28 remains unchanged.**
-- **Task 29** makes the authorization failures permanent: missing/stale/request-overclaiming intake, stale packs/snapshots, undeclared raw-tree changes, missing finalization, stale skills, PR-controlled verifier/validation-command attempts, re-attested untrusted Green results, missing CI-owned evidence, bypassed amendments, and deleted authority references. It repeats controlled external GitHub configuration inspection, generates/validates `github-authorization-boundary.json`, proves no drift from activation, requires platform-authenticated one-time break-glass proof, runs the canary and all eight benchmarks, and records exact closeout fields.
+- **Task 29** makes the authorization failures permanent: missing/stale/request-overclaiming intake, stale packs/snapshots, undeclared raw-tree changes, missing finalization, stale skills, PR-controlled verifier/validation-command attempts, re-attested untrusted Green results, missing CI-owned evidence, bypassed amendments, deleted authority references, caller-asserted visual completeness, wrong visual evidence kinds, parity gaps, unbounded reads/timeouts, prose-only rollback, and the Task 24 budget/topology repairs. It repeats controlled external GitHub configuration inspection, generates/validates `github-authorization-boundary.json`, proves no drift from activation, records `break_glass_status = "not_used"` by default and requires a platform-authenticated one-time attestation only after a separately approved actual incident/use, runs the eight scenarios as bounded deterministic fixtures/unit tests, runs exactly one heavyweight end-to-end canary, and performs the qualifying/final regression sequence required by the acceleration law.
 
 ## Train 5 Execution Boundary
 
-The five-train program model is preserved, but Train 5 has two review/merge phases:
+The five-train program model is preserved, but Train 5 has three integration boundaries:
 
-1. Tasks 24–26 form the **Train 5A cutover PR** from merged Train 4.
-2. Gate B must be Green and owner-approved before Task 26 changes authority, routing, or CI.
-3. Independently review and **merge** Train 5A so the base-owned verifier and required workflow actually exist on protected `main`; an unmerged branch workflow is not live enforcement.
-4. Immediately after merge, run controlled external GitHub inspection and record the first durable **post-merge protected-boundary receipt**. This inspection is outside Tasks 27–29 and occurs before Gate C.
-5. Gate C may become Green only after that receipt, rollback, independent review, and purge manifests are Green. It then authorizes destructive Tasks 27–28 and destructive/migration-state-removal portions of Task 29.
-6. Tasks 27–29 form the **Train 5B continuation** from merged Task 26 `main`, in a separate reviewed PR/commit range. The `codex/canon-05-cutover` name may be updated/recreated only from the merged base.
-7. Task 29 repeats live inspection at final closeout and proves no drift. Non-destructive test preparation may occur earlier only without tracked or external mutation.
+1. Task 24 forms the **shadow verifier-foundation PR** from the amended merged Train 4 base. Reuse bounded speculative patches, integrate one Task 24 commit, independently review it, and merge it without changing active authority, routing, retained skills, replacement CI, protected ruleset configuration, or cutover.
+2. No tracked change, including the Task 24 foundation, may merge without current task authorization and protected-branch required CI. This amendment establishes neither. If protected enforcement cannot be established for that transition, stop for explicit one-time break-glass approval with incident record, rollback, and independent post-action review; no break-glass is implied.
+3. Task 25 begins only from merged Task 24 and produces proof/generated outputs using those base bytes. Gate B must be Green and owner-approved before Task 26 changes authority, routing, retained skills, or CI.
+4. Tasks 25–26 form the **Train 5A cutover PR** from merged Task 24. Independently review and merge Train 5A so the required workflow actually exists on protected `main`; an unmerged branch workflow is not live enforcement.
+5. Immediately after the Train 5A merge, run controlled external GitHub inspection and record the first durable **post-merge protected-boundary receipt**. This inspection is outside Tasks 27–29 and occurs before Gate C.
+6. Gate C may become Green only after that receipt, rollback, independent review, and purge manifests are Green. It then authorizes destructive Tasks 27–28 and destructive/migration-state-removal portions of Task 29.
+7. Tasks 27–29 form the **Train 5B continuation** from merged Task 26 `main`, in a separate reviewed PR/commit range. The `codex/canon-05-cutover` name may be updated/recreated only from the merged base.
+8. Task 29 repeats live inspection at final closeout and proves no drift. It runs exactly one heavyweight end-to-end canary and the qualifying regression sequence; non-destructive test preparation may occur earlier only without tracked or external mutation.
 
-Final closeout records both Train 5 PRs, both reviewed commit ranges, the first activation receipt, and the final no-drift receipt.
+Final closeout records the Task 24 foundation PR, the Train 5A cutover PR, the Train 5B continuation PR, all three reviewed commit ranges, the first activation receipt, and the final no-drift receipt.
 
 ## Program Closeout Contract
 
@@ -280,6 +286,7 @@ Baseline tag and SHA:
 Cutover tag and SHA:
 Final SHA:
 Trains and PRs:
+Task 24 shadow verifier-foundation PR/merge SHA:
 Train 5A cutover PR/merge SHA:
 Train 5B continuation PR/merge SHA:
 Files created:
@@ -299,9 +306,11 @@ Required authorization check name and status:
 Required check workflow path/ref/digest and integration/app identity:
 Trusted snapshot revisions/digests:
 Live ruleset/environment evidence receipt:
-Break-glass bypass posture and attestation use:
-ChatGPT-to-Codex canary result:
-Eight handoff benchmark results:
+Break-glass status (`not_used` by default; incident/attestation only if used):
+Python 3.12 interpreter version/executable identity for Tasks 24, 25, and 29:
+Single heavyweight ChatGPT-to-Codex canary result:
+Eight deterministic handoff benchmark results:
+Qualifying full-regression SHA/result and whether a closeout rerun was required:
 Validation run with exit codes:
 Validation not run and why:
 Independent reviews:
