@@ -6,8 +6,9 @@ import json
 import unittest
 from dataclasses import replace
 from pathlib import Path
+from unittest import mock
 
-from tools.ambitions_canon import migration, ux_blueprint
+from tools.ambitions_canon import migration, ux_blueprint, visual_authority
 from tools.ambitions_canon.manifest import load_documents, load_manifest
 from tools.ambitions_canon.registry import build_registry
 from tools.ambitions_canon.supersession import load_supersession_ledger
@@ -35,7 +36,7 @@ SEARCH_JOURNEY = (
     ROOT / "docs/canon/specifications/journeys/search-find-ask-act-inspect.md"
 )
 
-ASK_GAP_STATE_IDS = {
+ASK_VISUAL_STATE_IDS = {
     "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-FAILED",
     "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-INTERRUPTED",
     "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RECOVERED",
@@ -47,7 +48,138 @@ ASK_GAP_STATE_IDS = {
 }
 ASK_GAP_COMMAND_IDS = {
     state_id: state_id.replace("UX-STATE-VARIANT-", "CMD-") + "-001"
-    for state_id in ASK_GAP_STATE_IDS
+    for state_id in ASK_VISUAL_STATE_IDS
+}
+SEARCH_VISUAL_NODE_SNAPSHOT = (
+    ROOT / "docs/canon/migration/visual-authority-r1-node-snapshot.json"
+)
+SEARCH_VISUAL_FREEZE_ID = "SEARCH-AUTHORITY-R2-2026-07-17T110150Z"
+SEARCH_VISUAL_BINDINGS = {
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-FAILED": (
+        "375:3063",
+        "search-failed-375-3063-r2.png",
+        "21c120eb0f8de6ebe88ff2693f962655ea16a740b96e1f0fe56325e0abebfe27",
+    ),
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-INTERRUPTED": (
+        "375:3159",
+        "search-interrupted-375-3159-r2.png",
+        "315798e0bbeb093fad695efae14a284f0380e46f5c77b98e7a91af430e4c0ade",
+    ),
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RECOVERED": (
+        "375:3326",
+        "search-recovered-375-3326-r2.png",
+        "472e13f495c1d46f592a3c2f9283296d1c8f39721b89f338ed05beaddcdb87cf",
+    ),
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RESUMED": (
+        "375:3245",
+        "search-resumed-375-3245-r2.png",
+        "ab9788a0828f20aa13e95d13ce01aec7d9632c4a383eaa5cde14a8e7d969ed2c",
+    ),
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK": (
+        "375:2972",
+        "search-offline-375-2972-r2.png",
+        "0133d0914a6ee6fd6c5ab11ff8e5b1ad5ced384788b2019dbbedb1ca45d1c549",
+    ),
+    "UX-STATE-VARIANT-SEARCH-RESULTS-CAPTURE-HANDOFF": (
+        "375:3402",
+        "search-capture-375-3402-r2.png",
+        "642068d82d43c392fed92a04a4b29902425996beebd88f93c60061950fb23b48",
+    ),
+    "UX-STATE-VARIANT-SEARCH-RESULTS-GROUNDED-ANSWER": (
+        "375:2806",
+        "search-grounded-375-2806-r2.png",
+        "2c30f3974896a685ce5d1c06fcbeaa42268af4b27575c8e1200f2ee67971ed24",
+    ),
+    "UX-STATE-VARIANT-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS": (
+        "375:2880",
+        "search-progress-375-2880-r2.png",
+        "c38a95f1c1aa75aeaea0464e0466b6e65faf3cfad64bac5b22bcb455e66430a2",
+    ),
+}
+SEARCH_VISUAL_CONTROLS = {
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-FAILED": "Retry Ask",
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-INTERRUPTED": "Resume Ask",
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RECOVERED": "Inspect Source",
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RESUMED": "Cancel Ask",
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK": (
+        "Inspect Privacy"
+    ),
+    "UX-STATE-VARIANT-SEARCH-RESULTS-CAPTURE-HANDOFF": "Open Capture",
+    "UX-STATE-VARIANT-SEARCH-RESULTS-GROUNDED-ANSWER": "Inspect Source",
+    "UX-STATE-VARIANT-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS": "Cancel Ask",
+}
+SEARCH_SHARED_COMPONENT_NAMES = {
+    "Search R2 / Shared / Header",
+    "Search R2 / Shared / State Banner",
+    "Search R2 / Shared / Deterministic Results",
+    "Search R2 / Shared / Evidence Stack",
+    "Search R2 / Shared / Owner Action",
+    "Search R2 / Shared / Contextual Inspector",
+}
+SEARCH_APPROVED_FRAME_IDS = (
+    "375:2806",
+    "375:2880",
+    "375:2972",
+    "375:3063",
+    "375:3159",
+    "375:3245",
+    "375:3326",
+    "375:3402",
+)
+SEARCH_OWNER_APPROVAL_STATEMENT = (
+    "I approve SEARCH-AUTHORITY-R2-2026-07-17T110150Z and frames "
+    "375:2806, 375:2880, 375:2972, 375:3063, 375:3159, 375:3245, "
+    "375:3326, and 375:3402 as the final Search visual authority."
+)
+SEARCH_OWNER_APPROVED_AT_UTC = "2026-07-17T11:46:05Z"
+SEARCH_TERMINAL_REVIEW_RECEIPT = {
+    "critical_count": 0,
+    "entry_count": 24,
+    "important_count": 0,
+    "minor_count": 0,
+    "package_path": (
+        ".superpowers/sdd/"
+        "review-search-visual-authority-r2-295889c9-working-tree.diff"
+    ),
+    "package_sha256": (
+        "8786427a72b6a3cf3d874261ce5c920ef25bfb52bc4ff7c0a76f07adcf9bb80a"
+    ),
+    "package_size_bytes": 995426,
+    "status": "complete_clean",
+    "synthetic_tree": "ff43e51eb389865f0aa42fcd8788490f113fccc8",
+}
+SEARCH_APPROVAL_RECORD_REVIEW_RECEIPT = {
+    "authenticated_base_commit": "295889c9f76528d398fce8d54b155d3285705f29",
+    "critical_count": 0,
+    "entry_count": 24,
+    "important_count": 0,
+    "live_figma_metadata_verification": (
+        "complete_read_only_exact_section_and_eight_frames"
+    ),
+    "minor_count": 0,
+    "package_base_authentication": (
+        "complete_exact_sha256_size_tree_entry_count_and_base_apply_check"
+    ),
+    "package_path": (
+        ".superpowers/sdd/"
+        "review-search-visual-authority-r2-295889c9-working-tree.diff"
+    ),
+    "package_sha256": (
+        "0771b42183a8e57df60dac3ae28047b5d5708eb211fa02f1eead397ea379f926"
+    ),
+    "package_size_bytes": 1034935,
+    "status": "complete_clean",
+    "synthetic_tree": "b1a3445ba4d6f30682d69d2514e6d06acdc34e2e",
+}
+SEARCH_RENDER_BYTE_LENGTHS = {
+    "375:2806": 56362,
+    "375:2880": 52894,
+    "375:2972": 52496,
+    "375:3063": 50924,
+    "375:3159": 51983,
+    "375:3245": 52916,
+    "375:3326": 55954,
+    "375:3402": 55773,
 }
 SEARCH_STATE_REQUIREMENT_MATRIX = {
     "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-FAILED": {
@@ -394,7 +526,7 @@ class SearchFindAskActInspectAmendmentTests(unittest.TestCase):
                 record = dispositions[requirement_id]
                 self.assertEqual(record["disposition"], "visual_mapping_required")
                 self.assertTrue(
-                    ASK_GAP_STATE_IDS.intersection(record["state_blueprint_ids"])
+                    ASK_VISUAL_STATE_IDS.intersection(record["state_blueprint_ids"])
                 )
 
         session = dispositions["SPEC-GLOBAL-SEARCH-SESSION-HISTORY-001"]
@@ -410,7 +542,7 @@ class SearchFindAskActInspectAmendmentTests(unittest.TestCase):
             if item["blueprint_id"] == "UX-STATE-MODEL-SEARCH-RESULTS"
         )
         states = {item["blueprint_id"]: item for item in model["variants"]}
-        self.assertTrue(ASK_GAP_STATE_IDS.issubset(states))
+        self.assertTrue(ASK_VISUAL_STATE_IDS.issubset(states))
         expected_kinds = {
             "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-FAILED": "failure",
             "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-INTERRUPTED": "interruption",
@@ -425,7 +557,7 @@ class SearchFindAskActInspectAmendmentTests(unittest.TestCase):
             {state_id: states[state_id]["generic_kind"] for state_id in expected_kinds},
             expected_kinds,
         )
-        for state_id in ASK_GAP_STATE_IDS:
+        for state_id in ASK_VISUAL_STATE_IDS:
             with self.subTest(state_id=state_id):
                 self.assertEqual(states[state_id]["specification_gap_ids"], [])
                 self.assertEqual(
@@ -433,25 +565,29 @@ class SearchFindAskActInspectAmendmentTests(unittest.TestCase):
                     "requirement_backed",
                 )
 
-    def test_new_ask_states_are_visual_gap_blocked_without_figma_claims(self):
+    def test_new_ask_states_are_future_gated_and_bound_to_exact_figma_frames(self):
         visual = json.loads(VISUAL_REBASELINE.read_text(encoding="utf-8"))
         posture = visual["state_posture"]
-        self.assertEqual(set(posture["gap_blocked_state_ids"]), ASK_GAP_STATE_IDS)
-        self.assertFalse(ASK_GAP_STATE_IDS.intersection(posture["eligible_state_ids"]))
-        self.assertFalse(ASK_GAP_STATE_IDS.intersection(posture["future_state_ids"]))
+        self.assertEqual(posture["gap_blocked_state_ids"], [])
+        self.assertFalse(
+            ASK_VISUAL_STATE_IDS.intersection(posture["eligible_state_ids"])
+        )
+        self.assertTrue(
+            ASK_VISUAL_STATE_IDS.issubset(posture["future_state_ids"])
+        )
         mapped_states = {
             state_id
             for node in visual["figma"]["authority_nodes"]
             for mapping in node.get("screen_mappings", [])
             for state_id in mapping["state_variant_ids"]
         }
-        self.assertFalse(ASK_GAP_STATE_IDS.intersection(mapped_states))
+        self.assertTrue(ASK_VISUAL_STATE_IDS.issubset(mapped_states))
         mapped_requirements = {
             requirement_id
             for node in visual["figma"]["authority_nodes"]
             for requirement_id in node["requirement_ids"]
         }
-        self.assertFalse(
+        self.assertTrue(
             {
                 "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT-001",
                 "LAW-SEARCH-PRIVATE-COMMAND-LAYER-001",
@@ -464,8 +600,338 @@ class SearchFindAskActInspectAmendmentTests(unittest.TestCase):
                 "SPEC-GLOBAL-SEARCH-INSPECT-001",
                 "SPEC-GLOBAL-SEARCH-PRESENTATION-001",
                 "SPEC-GLOBAL-SEARCH-PRIVATE-COMMAND-LAYER-001",
-            }.intersection(mapped_requirements)
+            }.issubset(mapped_requirements)
         )
+        snapshot = json.loads(
+            SEARCH_VISUAL_NODE_SNAPSHOT.read_text(encoding="utf-8")
+        )
+        addendum = snapshot["search_authority_addendum"]
+        self.assertEqual(addendum["freeze_id"], SEARCH_VISUAL_FREEZE_ID)
+        self.assertEqual(addendum["section_node_id"], "375:2805")
+        self.assertEqual(addendum["owner_approval_state"], "approved")
+        self.assertEqual(addendum["independent_review_state"], "terminal_clean")
+        self.assertEqual(
+            addendum["authority_status"],
+            "owner_approved_final_search_visual_authority_shadow_pending_gate_b",
+        )
+        self.assertEqual(
+            addendum["owner_approval"],
+            {
+                "approval_scope": "final_search_visual_authority_only",
+                "approved_at_utc": SEARCH_OWNER_APPROVED_AT_UTC,
+                "approved_frame_ids": list(SEARCH_APPROVED_FRAME_IDS),
+                "approved_freeze_id": SEARCH_VISUAL_FREEZE_ID,
+                "gate_b_state": "red_pending",
+                "owner_statement": SEARCH_OWNER_APPROVAL_STATEMENT,
+                "post_approval_authority_state": "shadow_non_authoritative",
+                "source_authorization": "blocked_until_gate_b_green",
+                "task_pack_selection": "blocked_until_gate_b_green",
+            },
+        )
+        self.assertEqual(
+            addendum["terminal_independent_review"],
+            SEARCH_TERMINAL_REVIEW_RECEIPT,
+        )
+        self.assertNotIn("next_required_action", addendum["owner_approval"])
+        self.assertEqual(
+            addendum["approval_record_independent_review"],
+            SEARCH_APPROVAL_RECORD_REVIEW_RECEIPT,
+        )
+        self.assertEqual(
+            {
+                item["state_id"]: (
+                    item["node_id"],
+                    Path(item["screenshot_path"]).name,
+                    item["screenshot_sha256"],
+                )
+                for item in addendum["state_frame_bindings"]
+            },
+            SEARCH_VISUAL_BINDINGS,
+        )
+        self.assertEqual(
+            {
+                item["proof_posture"]
+                for item in addendum["state_frame_bindings"]
+            },
+            {"owner_approved_product_only_shadow_pending_gate_b"},
+        )
+        visual_authority.validate_r1_node_snapshot_payload(
+            ROOT,
+            visual,
+            snapshot,
+        )
+
+    def test_search_visual_snapshot_rejects_pending_or_missing_owner_approval(self):
+        visual = json.loads(VISUAL_REBASELINE.read_text(encoding="utf-8"))
+        snapshot = json.loads(
+            SEARCH_VISUAL_NODE_SNAPSHOT.read_text(encoding="utf-8")
+        )
+        broken = copy.deepcopy(snapshot)
+        addendum = broken["search_authority_addendum"]
+        addendum["authority_status"] = (
+            "candidate_pending_independent_review_and_owner_approval"
+        )
+        addendum["independent_review_state"] = "pending"
+        addendum["owner_approval_state"] = "pending"
+        addendum.pop("owner_approval", None)
+        addendum.pop("approval_record_independent_review", None)
+        addendum.pop("terminal_independent_review", None)
+        with self.assertRaisesRegex(
+            visual_authority.CanonError,
+            "Search authority addendum",
+        ):
+            visual_authority.validate_r1_node_snapshot_payload(
+                ROOT,
+                visual,
+                broken,
+            )
+
+    def test_search_visual_snapshot_rejects_substituted_final_approval(self):
+        visual = json.loads(VISUAL_REBASELINE.read_text(encoding="utf-8"))
+        snapshot = json.loads(
+            SEARCH_VISUAL_NODE_SNAPSHOT.read_text(encoding="utf-8")
+        )
+        mutations = {
+            "substituted_freeze": (
+                lambda approval, review, approval_review: approval.__setitem__(
+                    "approved_freeze_id", "SEARCH-AUTHORITY-R2-ARBITRARY"
+                )
+            ),
+            "duplicate_and_omitted_frame": (
+                lambda approval, review, approval_review: approval[
+                    "approved_frame_ids"
+                ].__setitem__(-1, approval["approved_frame_ids"][0])
+            ),
+            "missing_frame": (
+                lambda approval, review, approval_review: approval[
+                    "approved_frame_ids"
+                ].pop()
+            ),
+            "pending_review": (
+                lambda approval, review, approval_review: review.__setitem__(
+                    "status", "pending"
+                )
+            ),
+            "transient_next_action": (
+                lambda approval, review, approval_review: approval.__setitem__(
+                    "next_required_action",
+                    "independent_exact_rereview_of_owner_approval_record",
+                )
+            ),
+            "substituted_approval_record_sha": (
+                lambda approval, review, approval_review: approval_review.__setitem__(
+                    "package_sha256", "0" * 64
+                )
+            ),
+            "pending_approval_record_review": (
+                lambda approval, review, approval_review: approval_review.__setitem__(
+                    "status", "pending"
+                )
+            ),
+        }
+        for label, mutate in mutations.items():
+            with self.subTest(label=label):
+                broken = copy.deepcopy(snapshot)
+                addendum = broken["search_authority_addendum"]
+                mutate(
+                    addendum["owner_approval"],
+                    addendum["terminal_independent_review"],
+                    addendum["approval_record_independent_review"],
+                )
+                with self.assertRaisesRegex(
+                    visual_authority.CanonError,
+                    "Search authority addendum",
+                ):
+                    visual_authority.validate_r1_node_snapshot_payload(
+                        ROOT,
+                        visual,
+                        broken,
+                    )
+
+    def test_search_visual_snapshot_binds_figma_metadata_readback_receipt(self):
+        snapshot = json.loads(
+            SEARCH_VISUAL_NODE_SNAPSHOT.read_text(encoding="utf-8")
+        )
+        receipt = snapshot["search_authority_addendum"]["figma_metadata_receipt"]
+        self.assertEqual(receipt["namespace"], "ambitions.canon")
+        self.assertEqual(receipt["page_id"], "215:2")
+        self.assertEqual(receipt["section_node_id"], "375:2805")
+        self.assertEqual(
+            receipt["mutated_node_ids"],
+            ["375:2805", *SEARCH_APPROVED_FRAME_IDS],
+        )
+        self.assertTrue(receipt["metadata_only"])
+        self.assertTrue(receipt["readback_verified"])
+        self.assertFalse(receipt["visible_properties_mutated"])
+        self.assertFalse(receipt["shared_components_mutated"])
+        self.assertFalse(receipt["legacy_nodes_mutated"])
+        self.assertEqual(receipt["created_node_ids"], [])
+        self.assertEqual(receipt["deleted_node_ids"], [])
+        self.assertEqual(receipt["renamed_node_ids"], [])
+        self.assertEqual(
+            receipt["render_hash_algorithm"],
+            "sha256_pure_js_over_figma_export_async_png_contents_only_scale_1",
+        )
+        renders = {item["node_id"]: item for item in receipt["render_bindings"]}
+        self.assertEqual(set(renders), set(SEARCH_APPROVED_FRAME_IDS))
+        expected_sha_by_node = {
+            node_id: digest
+            for node_id, _, digest in SEARCH_VISUAL_BINDINGS.values()
+        }
+        for node_id in SEARCH_APPROVED_FRAME_IDS:
+            with self.subTest(node_id=node_id):
+                render = renders[node_id]
+                self.assertEqual(render["before_sha256"], expected_sha_by_node[node_id])
+                self.assertEqual(render["after_sha256"], expected_sha_by_node[node_id])
+                self.assertEqual(
+                    render["snapshot_sha256"], expected_sha_by_node[node_id]
+                )
+                self.assertEqual(
+                    render["byte_length"], SEARCH_RENDER_BYTE_LENGTHS[node_id]
+                )
+                self.assertTrue(render["byte_identical"])
+        self.assertEqual(
+            {item["node_id"] for item in receipt["readback_records"]},
+            {"375:2805", *SEARCH_APPROVED_FRAME_IDS},
+        )
+        self.assertTrue(
+            all(
+                len(item["readback_sha256"]) == 64
+                and item["key_count"] > 0
+                for item in receipt["readback_records"]
+            )
+        )
+
+    def test_search_visual_snapshot_rejects_arbitrary_or_unbound_frame_ids(self):
+        visual = json.loads(VISUAL_REBASELINE.read_text(encoding="utf-8"))
+        snapshot = json.loads(
+            SEARCH_VISUAL_NODE_SNAPSHOT.read_text(encoding="utf-8")
+        )
+        broken = copy.deepcopy(snapshot)
+        broken["search_authority_addendum"]["state_frame_bindings"][0][
+            "node_id"
+        ] = "999:999"
+        with self.assertRaisesRegex(
+            visual_authority.CanonError,
+            "Search authority addendum",
+        ):
+            visual_authority.validate_r1_node_snapshot_payload(
+                ROOT,
+                visual,
+                broken,
+            )
+
+    def test_search_visual_snapshot_rejects_replaced_bound_screenshot_bytes(self):
+        visual = json.loads(VISUAL_REBASELINE.read_text(encoding="utf-8"))
+        snapshot = json.loads(
+            SEARCH_VISUAL_NODE_SNAPSHOT.read_text(encoding="utf-8")
+        )
+        broken = copy.deepcopy(snapshot)
+        binding = broken["search_authority_addendum"]["state_frame_bindings"][0]
+        target_path = Path(binding["screenshot_path"])
+        replacement_bytes = b"replacement Search R2 screenshot bytes"
+        binding["screenshot_sha256"] = hashlib.sha256(
+            replacement_bytes
+        ).hexdigest()
+        original_reader = visual_authority._read_regular_nofollow
+
+        def replaced_reader(root: Path, path: Path) -> bytes:
+            if path == target_path:
+                return replacement_bytes
+            return original_reader(root, path)
+
+        with mock.patch.object(
+            visual_authority,
+            "_read_regular_nofollow",
+            side_effect=replaced_reader,
+        ):
+            with self.assertRaisesRegex(
+                visual_authority.CanonError,
+                "Search authority addendum",
+            ):
+                visual_authority.validate_r1_node_snapshot_payload(
+                    ROOT,
+                    visual,
+                    broken,
+                )
+
+    def test_search_visual_snapshot_rejects_duplicate_and_omitted_legacy_nodes(self):
+        visual = json.loads(VISUAL_REBASELINE.read_text(encoding="utf-8"))
+        snapshot = json.loads(
+            SEARCH_VISUAL_NODE_SNAPSHOT.read_text(encoding="utf-8")
+        )
+        broken = copy.deepcopy(snapshot)
+        legacy_nodes = broken["search_authority_addendum"][
+            "legacy_integrity_evidence"
+        ]["nodes"]
+        legacy_nodes[2] = copy.deepcopy(legacy_nodes[0])
+        with self.assertRaisesRegex(
+            visual_authority.CanonError,
+            "Search legacy integrity evidence",
+        ):
+            visual_authority.validate_r1_node_snapshot_payload(
+                ROOT,
+                visual,
+                broken,
+            )
+
+    def test_search_visual_snapshot_binds_componentized_auto_layout_contract(self):
+        visual = json.loads(VISUAL_REBASELINE.read_text(encoding="utf-8"))
+        snapshot = json.loads(
+            SEARCH_VISUAL_NODE_SNAPSHOT.read_text(encoding="utf-8")
+        )
+        addendum = snapshot["search_authority_addendum"]
+        components = addendum["shared_anatomy_components"]
+        self.assertEqual(
+            {item["name"] for item in components},
+            SEARCH_SHARED_COMPONENT_NAMES,
+        )
+        self.assertEqual(
+            len({item["node_id"] for item in components}),
+            len(SEARCH_SHARED_COMPONENT_NAMES),
+        )
+        self.assertTrue(all(item["type"] == "COMPONENT" for item in components))
+
+        bindings = {
+            item["state_id"]: item for item in addendum["state_frame_bindings"]
+        }
+        self.assertEqual(set(bindings), ASK_VISUAL_STATE_IDS)
+        for state_id, control in SEARCH_VISUAL_CONTROLS.items():
+            with self.subTest(state_id=state_id):
+                binding = bindings[state_id]
+                self.assertEqual(binding["visible_control"], control)
+                self.assertEqual(binding["layout_mode"], "VERTICAL")
+                self.assertEqual(binding["frame_width"], 393)
+                self.assertEqual(binding["frame_height"], 852)
+                self.assertGreaterEqual(binding["component_instance_count"], 4)
+                self.assertEqual(binding["minimum_semantic_label_font_size"], 10)
+                self.assertTrue(binding["deterministic_results_preserved"])
+                self.assertNotEqual(binding["visible_control"], "Cancel")
+
+        visual_authority.validate_r1_node_snapshot_payload(
+            ROOT,
+            visual,
+            snapshot,
+        )
+
+    def test_search_visual_snapshot_rejects_generic_or_uncomponentized_controls(self):
+        visual = json.loads(VISUAL_REBASELINE.read_text(encoding="utf-8"))
+        snapshot = json.loads(
+            SEARCH_VISUAL_NODE_SNAPSHOT.read_text(encoding="utf-8")
+        )
+        broken = copy.deepcopy(snapshot)
+        binding = broken["search_authority_addendum"]["state_frame_bindings"][0]
+        binding["visible_control"] = "Cancel"
+        binding["component_instance_count"] = 0
+        with self.assertRaisesRegex(
+            visual_authority.CanonError,
+            "Search authority addendum",
+        ):
+            visual_authority.validate_r1_node_snapshot_payload(
+                ROOT,
+                visual,
+                broken,
+            )
 
     def test_ask_commands_do_not_expand_the_existing_find_act_inspect_owner(self):
         existing = self.requirement("SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001")
@@ -491,7 +957,7 @@ class SearchFindAskActInspectAmendmentTests(unittest.TestCase):
             if item["blueprint_id"] == "UX-STATE-MODEL-SEARCH-RESULTS"
         )
         for state in model["variants"]:
-            if state["blueprint_id"] in ASK_GAP_STATE_IDS:
+            if state["blueprint_id"] in ASK_VISUAL_STATE_IDS:
                 state["requirement_ids"] = [
                     item
                     for item in state["requirement_ids"]
@@ -528,9 +994,9 @@ class SearchFindAskActInspectAmendmentTests(unittest.TestCase):
 
         contracts = load_state_command_contracts(ROOT)
         ask_contracts = tuple(
-            item for item in contracts if item.state_id in ASK_GAP_STATE_IDS
+            item for item in contracts if item.state_id in ASK_VISUAL_STATE_IDS
         )
-        self.assertEqual(len(ask_contracts), len(ASK_GAP_STATE_IDS))
+        self.assertEqual(len(ask_contracts), len(ASK_VISUAL_STATE_IDS))
         for contract in ask_contracts:
             with self.subTest(state_id=contract.state_id):
                 self.assertEqual(contract.activation_posture.value, "future_gated")
@@ -577,9 +1043,9 @@ class SearchFindAskActInspectAmendmentTests(unittest.TestCase):
         by_state = {
             item.state_id: item
             for item in contracts
-            if item.state_id in ASK_GAP_STATE_IDS
+            if item.state_id in ASK_VISUAL_STATE_IDS
         }
-        sample_state_id = sorted(ASK_GAP_STATE_IDS)[0]
+        sample_state_id = sorted(ASK_VISUAL_STATE_IDS)[0]
         sample = by_state[sample_state_id]
         sample_command = sample.commands[0]
         gate_id = "SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001"
@@ -765,7 +1231,7 @@ class SearchFindAskActInspectAmendmentTests(unittest.TestCase):
             )
             record["state_blueprint_ids"].remove(sorted(state_ids)[0])
             disposition_mutations.append((requirement_id, "removed", removed))
-            unexpected_states = ASK_GAP_STATE_IDS - state_ids
+            unexpected_states = ASK_VISUAL_STATE_IDS - state_ids
             if unexpected_states:
                 added = copy.deepcopy(blueprint)
                 record = next(

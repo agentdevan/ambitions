@@ -33,9 +33,10 @@ The active truth amendment does not claim that Ask is implemented in the
 production app. All eight Ask/Capture-handoff command contracts remain
 `future_gated` by `SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001`.
 
-## Exact visual gaps
+## R2 visual-authority follow-on
 
-The following states remain independently derived, gap-blocked, and
+At Search canon commit `295889c9f76528d398fce8d54b155d3285705f29`,
+the following states were independently derived, gap-blocked, and
 non-authorizing:
 
 - `UX-STATE-VARIANT-SEARCH-RESULTS-ASK-FAILED`
@@ -47,8 +48,18 @@ non-authorizing:
 - `UX-STATE-VARIANT-SEARCH-RESULTS-GROUNDED-ANSWER`
 - `UX-STATE-VARIANT-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS`
 
-Figma design authority, exact owner-approved frame IDs, visual review, and
-Visual Green are not part of this candidate.
+The additive R2 follow-on now binds those eight states to exact Figma frame
+IDs and product-only screenshot digests. They remain `future_gated`, shadow,
+non-authoritative, and ineligible for source task-pack selection. The owner
+approved freeze `SEARCH-AUTHORITY-R2-2026-07-17T110150Z` and the eight exact
+frames as the final Search visual authority at `2026-07-17T11:46:05Z`. The
+pre-approval frozen design bundle has a terminal independent 0/0/0 review;
+the approval-record delta also completed independent 0/0/0 review with exact
+package/base authentication and live read-only Figma verification. Overall
+Gate B remains Red/pending, so no source authorization follows. See
+`SEARCH_VISUAL_AUTHORITY_R2_REPORT.md` for the exact freeze.
+
+Visual Green remains outside this candidate.
 
 ## Review record
 
@@ -106,10 +117,11 @@ The final generated projections were rebuilt once after the reviewed truth and
 tool inputs froze. Their focused coherence test passed. This generated-output
 Green is not Visual Green or authority selection.
 
-## Scope and claim ceiling
+## Canon-amendment commit scope and claim ceiling
 
 - Production Swift changed: no.
-- Figma changed: no.
+- Figma changed: shared approval metadata only on section `375:2805` and the
+  eight approved frames; before/after exported PNG bytes are identical.
 - Linear changed: no.
 - GitHub protection or CI changed: no.
 - Task 24/25 authority changed: no.

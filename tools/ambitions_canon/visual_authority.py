@@ -39,7 +39,7 @@ R1_NODE_SNAPSHOT_PATH = Path(
 REQUIREMENT_DISPOSITIONS_PATH = Path(
     "docs/canon/migration/ux-blueprint-requirement-dispositions.json"
 )
-SEARCH_GAP_BLOCKED_STATE_IDS = frozenset(
+SEARCH_VISUAL_STATE_IDS = frozenset(
     {
         "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-FAILED",
         "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-INTERRUPTED",
@@ -51,6 +51,206 @@ SEARCH_GAP_BLOCKED_STATE_IDS = frozenset(
         "UX-STATE-VARIANT-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS",
     }
 )
+SEARCH_GAP_BLOCKED_STATE_IDS: frozenset[str] = frozenset()
+SEARCH_AUTHORITY_FREEZE_ID = "SEARCH-AUTHORITY-R2-2026-07-17T110150Z"
+SEARCH_AUTHORITY_EVIDENCE_ROOT = Path(
+    "docs/qa/evidence/2026-07-17-canon-search-authority-r2/"
+    "screens/product-only"
+)
+SEARCH_STATE_FRAME_BINDINGS = {
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-FAILED": (
+        "375:3063",
+        "search-failed-375-3063-r2.png",
+        "21c120eb0f8de6ebe88ff2693f962655ea16a740b96e1f0fe56325e0abebfe27",
+    ),
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-INTERRUPTED": (
+        "375:3159",
+        "search-interrupted-375-3159-r2.png",
+        "315798e0bbeb093fad695efae14a284f0380e46f5c77b98e7a91af430e4c0ade",
+    ),
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RECOVERED": (
+        "375:3326",
+        "search-recovered-375-3326-r2.png",
+        "472e13f495c1d46f592a3c2f9283296d1c8f39721b89f338ed05beaddcdb87cf",
+    ),
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RESUMED": (
+        "375:3245",
+        "search-resumed-375-3245-r2.png",
+        "ab9788a0828f20aa13e95d13ce01aec7d9632c4a383eaa5cde14a8e7d969ed2c",
+    ),
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK": (
+        "375:2972",
+        "search-offline-375-2972-r2.png",
+        "0133d0914a6ee6fd6c5ab11ff8e5b1ad5ced384788b2019dbbedb1ca45d1c549",
+    ),
+    "UX-STATE-VARIANT-SEARCH-RESULTS-CAPTURE-HANDOFF": (
+        "375:3402",
+        "search-capture-375-3402-r2.png",
+        "642068d82d43c392fed92a04a4b29902425996beebd88f93c60061950fb23b48",
+    ),
+    "UX-STATE-VARIANT-SEARCH-RESULTS-GROUNDED-ANSWER": (
+        "375:2806",
+        "search-grounded-375-2806-r2.png",
+        "2c30f3974896a685ce5d1c06fcbeaa42268af4b27575c8e1200f2ee67971ed24",
+    ),
+    "UX-STATE-VARIANT-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS": (
+        "375:2880",
+        "search-progress-375-2880-r2.png",
+        "c38a95f1c1aa75aeaea0464e0466b6e65faf3cfad64bac5b22bcb455e66430a2",
+    ),
+}
+SEARCH_STATE_VISIBLE_CONTROLS = {
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-FAILED": "Retry Ask",
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-INTERRUPTED": "Resume Ask",
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RECOVERED": "Inspect Source",
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RESUMED": "Cancel Ask",
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK": (
+        "Inspect Privacy"
+    ),
+    "UX-STATE-VARIANT-SEARCH-RESULTS-CAPTURE-HANDOFF": "Open Capture",
+    "UX-STATE-VARIANT-SEARCH-RESULTS-GROUNDED-ANSWER": "Inspect Source",
+    "UX-STATE-VARIANT-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS": "Cancel Ask",
+}
+SEARCH_SHARED_ANATOMY_COMPONENTS = (
+    ("Search R2 / Shared / Header", "389:2770", "VERTICAL"),
+    ("Search R2 / Shared / State Banner", "390:2773", "VERTICAL"),
+    ("Search R2 / Shared / Deterministic Results", "390:2777", "VERTICAL"),
+    ("Search R2 / Shared / Evidence Stack", "391:2773", "VERTICAL"),
+    ("Search R2 / Shared / Owner Action", "391:2783", "HORIZONTAL"),
+    ("Search R2 / Shared / Contextual Inspector", "391:2785", "VERTICAL"),
+)
+SEARCH_APPROVED_FRAME_IDS = (
+    "375:2806",
+    "375:2880",
+    "375:2972",
+    "375:3063",
+    "375:3159",
+    "375:3245",
+    "375:3326",
+    "375:3402",
+)
+SEARCH_OWNER_APPROVAL_STATEMENT = (
+    "I approve SEARCH-AUTHORITY-R2-2026-07-17T110150Z and frames "
+    "375:2806, 375:2880, 375:2972, 375:3063, 375:3159, 375:3245, "
+    "375:3326, and 375:3402 as the final Search visual authority."
+)
+SEARCH_OWNER_APPROVED_AT_UTC = "2026-07-17T11:46:05Z"
+SEARCH_TERMINAL_REVIEW_RECEIPT = {
+    "critical_count": 0,
+    "entry_count": 24,
+    "important_count": 0,
+    "minor_count": 0,
+    "package_path": (
+        ".superpowers/sdd/"
+        "review-search-visual-authority-r2-295889c9-working-tree.diff"
+    ),
+    "package_sha256": (
+        "8786427a72b6a3cf3d874261ce5c920ef25bfb52bc4ff7c0a76f07adcf9bb80a"
+    ),
+    "package_size_bytes": 995426,
+    "status": "complete_clean",
+    "synthetic_tree": "ff43e51eb389865f0aa42fcd8788490f113fccc8",
+}
+SEARCH_APPROVAL_RECORD_REVIEW_RECEIPT = {
+    "authenticated_base_commit": "295889c9f76528d398fce8d54b155d3285705f29",
+    "critical_count": 0,
+    "entry_count": 24,
+    "important_count": 0,
+    "live_figma_metadata_verification": (
+        "complete_read_only_exact_section_and_eight_frames"
+    ),
+    "minor_count": 0,
+    "package_base_authentication": (
+        "complete_exact_sha256_size_tree_entry_count_and_base_apply_check"
+    ),
+    "package_path": (
+        ".superpowers/sdd/"
+        "review-search-visual-authority-r2-295889c9-working-tree.diff"
+    ),
+    "package_sha256": (
+        "0771b42183a8e57df60dac3ae28047b5d5708eb211fa02f1eead397ea379f926"
+    ),
+    "package_size_bytes": 1034935,
+    "status": "complete_clean",
+    "synthetic_tree": "b1a3445ba4d6f30682d69d2514e6d06acdc34e2e",
+}
+SEARCH_FIGMA_READBACK_BINDINGS = {
+    "375:2805": (
+        33,
+        "0d68e5d2cd7df8e0602d8f3e6793f15362f9b79dc2bae0a51c7777d19386e099",
+    ),
+    "375:2806": (
+        42,
+        "20acd59575a2df41bc27d4d6186065e1302b7e3bbe1f81499cb905129dae9572",
+    ),
+    "375:2880": (
+        42,
+        "a628fcfc8c120f98a71f11b886719badd7d1a542ffbf9fd6df9c6cded7929ecc",
+    ),
+    "375:2972": (
+        42,
+        "5d4b14fe4a2788d243fdb2c20a55e08d6f75b74e6737f8ad92327bae1a5c1d76",
+    ),
+    "375:3063": (
+        42,
+        "81ce45d0ead649c55017a2261b9692c46283c7119d59162d3d83b30dfb04655c",
+    ),
+    "375:3159": (
+        42,
+        "115f261ca6e37cb33508a45499f2105a3cc77e8880068ea668b26b9473b831f6",
+    ),
+    "375:3245": (
+        42,
+        "19cb3bb0cc05303181a9c182cb55233bb16b96f63d539820e7137a2714162992",
+    ),
+    "375:3326": (
+        42,
+        "ac29a9ac3793f5d4af5769fd4eb917a566899793b4e25592bc44eb6a9ec59013",
+    ),
+    "375:3402": (
+        42,
+        "80fb955bdece775b3e642e11c2391cbae37cdc6c0cf696cfb9ae214155ad23fe",
+    ),
+}
+SEARCH_RENDER_BYTE_LENGTHS = {
+    "375:2806": 56362,
+    "375:2880": 52894,
+    "375:2972": 52496,
+    "375:3063": 50924,
+    "375:3159": 51983,
+    "375:3245": 52916,
+    "375:3326": 55954,
+    "375:3402": 55773,
+}
+SEARCH_LEGACY_INTEGRITY_BINDINGS = {
+    "288:41": (
+        "CANDIDATE — AV1 / Search / Results / Dark / v1",
+        47,
+        50357,
+        "e8d9222c",
+        "4fb4a231",
+        "legacy-search-288-41",
+        "365fb42edb5a2b613318a9ee208ae66fb4da150313d642e7b62bcdfb218c0f81",
+    ),
+    "288:156": (
+        "CANDIDATE — AV1 / Trust / Receipt Undo / Light / v1",
+        32,
+        33032,
+        "bb835d60",
+        "c88da1db",
+        "legacy-trust-288-156",
+        "ff94201fe6e379b596a3e16738efcd609e16adf9b204f6be9e899fff1e97538a",
+    ),
+    "281:1465": (
+        "CANDIDATE — AV1 / Capture / Compact Composer / Light / v1",
+        24,
+        23213,
+        "dbed5fbd",
+        "58b443cd",
+        "legacy-capture-281-1465",
+        "8684664e80fc6bbee087e7fa85fe9ade32064f622e757bc903462f38987f198e",
+    ),
+}
 SEARCH_ASK_COMMAND_REQUIREMENT_ID = (
     "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001"
 )
@@ -400,7 +600,7 @@ def _validate_visual_authority_payload(
     if set(gap_state_ids) != SEARCH_GAP_BLOCKED_STATE_IDS:
         raise _error(
             "VISUAL_AUTHORITY_STATE_POSTURE_INVALID",
-            "gap-blocked states must equal the exact canonical Search gap set",
+            "gap-blocked states must remain empty after the Search R2 mapping",
         )
     try:
         state_contracts = {
@@ -421,11 +621,16 @@ def _validate_visual_authority_payload(
         or contract.activation_posture
         is not StateCommandActivationPosture.FUTURE_GATED
         or contract.gate_requirement_ids != exact_gate
-        for state_id in SEARCH_GAP_BLOCKED_STATE_IDS
+        for state_id in SEARCH_VISUAL_STATE_IDS
     ):
         raise _error(
             "VISUAL_AUTHORITY_STATE_POSTURE_INVALID",
-            "gap-blocked Search states must remain exact future-gated contracts",
+            "mapped Search Ask/Capture states must remain exact future-gated contracts",
+        )
+    if not SEARCH_VISUAL_STATE_IDS.issubset(future_state_ids):
+        raise _error(
+            "VISUAL_AUTHORITY_STATE_POSTURE_INVALID",
+            "mapped Search Ask/Capture states must remain future-gated",
         )
     state_sets = tuple(map(set, (eligible_state_ids, future_state_ids, gap_state_ids)))
     if any(state_sets[index] & state_sets[other] for index in range(3) for other in range(index + 1, 3)):
@@ -791,13 +996,13 @@ def _validate_visual_authority_payload(
     if (
         len(candidate_records) != 18
         or screen_count != 47
-        or mapped_state_ids != inventory_ids - SEARCH_GAP_BLOCKED_STATE_IDS
+        or mapped_state_ids != inventory_ids
         or not support_overlay_state_ids.issubset(mapped_state_ids)
     ):
         raise _error(
             "VISUAL_AUTHORITY_FIGMA_MAPPING_INVALID",
             "18 candidate masters must map all 47 UX screens and every "
-            "non-gap-blocked state exactly once",
+            "current state exactly once",
         )
 
     coverage = _object(data["coverage"], "coverage")
@@ -1169,6 +1374,578 @@ def _validate_candidate_proofs(
             )
 
 
+def _validate_search_authority_addendum(
+    root: Path,
+    manifest: Mapping[str, object],
+    snapshot: Mapping[str, object],
+) -> None:
+    addendum = _object(
+        snapshot.get("search_authority_addendum"),
+        "Search authority addendum",
+    )
+    _r1_exact_fields(
+        addendum,
+        frozenset(
+            {
+                "approval_record_independent_review",
+                "authority_status",
+                "candidate_revision",
+                "canon_commit",
+                "claim_ceiling",
+                "figma_metadata_receipt",
+                "freeze_id",
+                "frozen_at_utc",
+                "independent_review_state",
+                "legacy_integrity_evidence",
+                "legacy_nodes_mutated",
+                "owner_approval",
+                "owner_approval_state",
+                "page_id",
+                "section_node_id",
+                "shared_anatomy_components",
+                "snapshot_binding",
+                "state_frame_bindings",
+                "terminal_independent_review",
+                "visual_pattern_source_node_ids",
+            }
+        ),
+        "Search authority addendum",
+    )
+    if (
+        addendum.get("authority_status")
+        != "owner_approved_final_search_visual_authority_shadow_pending_gate_b"
+        or addendum.get("candidate_revision") != "R2"
+        or addendum.get("canon_commit")
+        != "295889c9f76528d398fce8d54b155d3285705f29"
+        or addendum.get("claim_ceiling")
+        != "owner_approved_final_search_visual_authority_shadow_pending_gate_b_no_runtime_or_accessibility_claim"
+        or addendum.get("freeze_id") != SEARCH_AUTHORITY_FREEZE_ID
+        or addendum.get("frozen_at_utc") != "2026-07-17T11:01:50Z"
+        or addendum.get("independent_review_state") != "terminal_clean"
+        or addendum.get("legacy_nodes_mutated") is not False
+        or addendum.get("owner_approval_state") != "approved"
+        or addendum.get("page_id") != "215:2"
+        or addendum.get("section_node_id") != "375:2805"
+        or addendum.get("snapshot_binding")
+        != "exact_file_key_page_section_frame_ids_screenshot_digests_terminal_reviews_owner_approval_and_figma_metadata_readback_no_figma_file_version_claim"
+        or addendum.get("visual_pattern_source_node_ids")
+        != ["288:41", "288:156"]
+    ):
+        raise _error(
+            "VISUAL_AUTHORITY_SEARCH_ADDENDUM_INVALID",
+            "Search authority addendum identity, review posture, or claim ceiling is invalid",
+        )
+
+    owner_approval = _object(
+        addendum.get("owner_approval"),
+        "Search authority addendum owner approval",
+    )
+    _r1_exact_fields(
+        owner_approval,
+        frozenset(
+            {
+                "approval_scope",
+                "approved_at_utc",
+                "approved_frame_ids",
+                "approved_freeze_id",
+                "gate_b_state",
+                "owner_statement",
+                "post_approval_authority_state",
+                "source_authorization",
+                "task_pack_selection",
+            }
+        ),
+        "Search authority addendum owner approval",
+    )
+    approved_frame_ids = tuple(
+        _string(item, "Search approved frame ID")
+        for item in _list(
+            owner_approval.get("approved_frame_ids"),
+            "Search approved frame IDs",
+        )
+    )
+    if (
+        owner_approval.get("approval_scope")
+        != "final_search_visual_authority_only"
+        or owner_approval.get("approved_at_utc")
+        != SEARCH_OWNER_APPROVED_AT_UTC
+        or approved_frame_ids != SEARCH_APPROVED_FRAME_IDS
+        or len(set(approved_frame_ids)) != len(approved_frame_ids)
+        or owner_approval.get("approved_freeze_id")
+        != SEARCH_AUTHORITY_FREEZE_ID
+        or owner_approval.get("gate_b_state") != "red_pending"
+        or owner_approval.get("owner_statement")
+        != SEARCH_OWNER_APPROVAL_STATEMENT
+        or owner_approval.get("post_approval_authority_state")
+        != "shadow_non_authoritative"
+        or owner_approval.get("source_authorization")
+        != "blocked_until_gate_b_green"
+        or owner_approval.get("task_pack_selection")
+        != "blocked_until_gate_b_green"
+    ):
+        raise _error(
+            "VISUAL_AUTHORITY_SEARCH_ADDENDUM_INVALID",
+            "Search authority addendum owner approval is absent or substituted",
+        )
+
+    terminal_review = _object(
+        addendum.get("terminal_independent_review"),
+        "Search authority addendum terminal independent review",
+    )
+    _r1_exact_fields(
+        terminal_review,
+        frozenset(SEARCH_TERMINAL_REVIEW_RECEIPT),
+        "Search authority addendum terminal independent review",
+    )
+    if terminal_review != SEARCH_TERMINAL_REVIEW_RECEIPT:
+        raise _error(
+            "VISUAL_AUTHORITY_SEARCH_ADDENDUM_INVALID",
+            "Search authority addendum terminal review receipt is stale",
+        )
+
+    approval_record_review = _object(
+        addendum.get("approval_record_independent_review"),
+        "Search authority addendum approval-record independent review",
+    )
+    _r1_exact_fields(
+        approval_record_review,
+        frozenset(SEARCH_APPROVAL_RECORD_REVIEW_RECEIPT),
+        "Search authority addendum approval-record independent review",
+    )
+    if approval_record_review != SEARCH_APPROVAL_RECORD_REVIEW_RECEIPT:
+        raise _error(
+            "VISUAL_AUTHORITY_SEARCH_ADDENDUM_INVALID",
+            "Search authority addendum approval-record review receipt is stale",
+        )
+
+    figma_receipt = _object(
+        addendum.get("figma_metadata_receipt"),
+        "Search authority addendum Figma metadata receipt",
+    )
+    _r1_exact_fields(
+        figma_receipt,
+        frozenset(
+            {
+                "created_node_ids",
+                "deleted_node_ids",
+                "legacy_nodes_mutated",
+                "metadata_only",
+                "mutated_node_ids",
+                "namespace",
+                "page_id",
+                "readback_records",
+                "readback_verified",
+                "renamed_node_ids",
+                "render_bindings",
+                "render_hash_algorithm",
+                "section_node_id",
+                "shared_components_mutated",
+                "visible_properties_mutated",
+            }
+        ),
+        "Search authority addendum Figma metadata receipt",
+    )
+    expected_mutated_node_ids = ["375:2805", *SEARCH_APPROVED_FRAME_IDS]
+    if (
+        figma_receipt.get("namespace") != "ambitions.canon"
+        or figma_receipt.get("page_id") != "215:2"
+        or figma_receipt.get("section_node_id") != "375:2805"
+        or figma_receipt.get("mutated_node_ids") != expected_mutated_node_ids
+        or figma_receipt.get("metadata_only") is not True
+        or figma_receipt.get("readback_verified") is not True
+        or figma_receipt.get("visible_properties_mutated") is not False
+        or figma_receipt.get("shared_components_mutated") is not False
+        or figma_receipt.get("legacy_nodes_mutated") is not False
+        or figma_receipt.get("created_node_ids") != []
+        or figma_receipt.get("deleted_node_ids") != []
+        or figma_receipt.get("renamed_node_ids") != []
+        or figma_receipt.get("render_hash_algorithm")
+        != "sha256_pure_js_over_figma_export_async_png_contents_only_scale_1"
+    ):
+        raise _error(
+            "VISUAL_AUTHORITY_SEARCH_ADDENDUM_INVALID",
+            "Search authority addendum Figma metadata write receipt is invalid",
+        )
+    readback_records = tuple(
+        _object(item, "Search Figma metadata readback record")
+        for item in _list(
+            figma_receipt.get("readback_records"),
+            "Search Figma metadata readback records",
+        )
+    )
+    observed_readbacks: dict[str, tuple[int, str]] = {}
+    for item in readback_records:
+        _r1_exact_fields(
+            item,
+            frozenset({"key_count", "node_id", "readback_sha256"}),
+            "Search Figma metadata readback record",
+        )
+        node_id = _string(item.get("node_id"), "Search readback node ID")
+        observed_readbacks[node_id] = (
+            item.get("key_count"),
+            _sha(item.get("readback_sha256"), 64, "Search readback SHA"),
+        )
+    if (
+        len(readback_records) != len(SEARCH_FIGMA_READBACK_BINDINGS)
+        or len(observed_readbacks) != len(readback_records)
+        or observed_readbacks != SEARCH_FIGMA_READBACK_BINDINGS
+    ):
+        raise _error(
+            "VISUAL_AUTHORITY_SEARCH_ADDENDUM_INVALID",
+            "Search authority addendum Figma metadata readback is stale",
+        )
+    render_bindings = tuple(
+        _object(item, "Search Figma metadata render binding")
+        for item in _list(
+            figma_receipt.get("render_bindings"),
+            "Search Figma metadata render bindings",
+        )
+    )
+    if len(render_bindings) != len(SEARCH_APPROVED_FRAME_IDS):
+        raise _error(
+            "VISUAL_AUTHORITY_SEARCH_ADDENDUM_INVALID",
+            "Search Figma metadata receipt must bind all eight renders",
+        )
+    expected_shas_by_node = {
+        node_id: screenshot_sha
+        for node_id, _, screenshot_sha in SEARCH_STATE_FRAME_BINDINGS.values()
+    }
+    for index, item in enumerate(render_bindings):
+        _r1_exact_fields(
+            item,
+            frozenset(
+                {
+                    "after_sha256",
+                    "before_sha256",
+                    "byte_identical",
+                    "byte_length",
+                    "node_id",
+                    "snapshot_sha256",
+                }
+            ),
+            "Search Figma metadata render binding",
+        )
+        node_id = _string(item.get("node_id"), "Search render node ID")
+        expected_sha = expected_shas_by_node.get(node_id)
+        if (
+            node_id != SEARCH_APPROVED_FRAME_IDS[index]
+            or expected_sha is None
+            or item.get("before_sha256") != expected_sha
+            or item.get("after_sha256") != expected_sha
+            or item.get("snapshot_sha256") != expected_sha
+            or item.get("byte_length") != SEARCH_RENDER_BYTE_LENGTHS[node_id]
+            or item.get("byte_identical") is not True
+        ):
+            raise _error(
+                "VISUAL_AUTHORITY_SEARCH_ADDENDUM_INVALID",
+                f"Search Figma metadata render binding is stale: {node_id}",
+            )
+
+    components = tuple(
+        _object(item, "Search shared anatomy component")
+        for item in _list(
+            addendum.get("shared_anatomy_components"),
+            "Search shared anatomy components",
+        )
+    )
+    if len(components) != len(SEARCH_SHARED_ANATOMY_COMPONENTS):
+        raise _error(
+            "VISUAL_AUTHORITY_SEARCH_ADDENDUM_INVALID",
+            "Search authority addendum must bind the exact six shared components",
+        )
+    observed_components: list[tuple[str, str, str]] = []
+    for component in components:
+        _r1_exact_fields(
+            component,
+            frozenset({"layout_mode", "name", "node_id", "type"}),
+            "Search shared anatomy component",
+        )
+        if component.get("type") != "COMPONENT":
+            raise _error(
+                "VISUAL_AUTHORITY_SEARCH_ADDENDUM_INVALID",
+                "Search shared anatomy entries must be Figma components",
+            )
+        observed_components.append(
+            (
+                _string(component.get("name"), "Search component name"),
+                _string(component.get("node_id"), "Search component node ID"),
+                _string(component.get("layout_mode"), "Search component layout"),
+            )
+        )
+    if tuple(observed_components) != SEARCH_SHARED_ANATOMY_COMPONENTS:
+        raise _error(
+            "VISUAL_AUTHORITY_SEARCH_ADDENDUM_INVALID",
+            "Search shared anatomy component bindings are stale",
+        )
+
+    legacy_evidence = _object(
+        addendum.get("legacy_integrity_evidence"),
+        "Search legacy integrity evidence",
+    )
+    _r1_exact_fields(
+        legacy_evidence,
+        frozenset({"claim_limit", "nodes", "post_write_fingerprint_algorithm"}),
+        "Search legacy integrity evidence",
+    )
+    if (
+        legacy_evidence.get("claim_limit")
+        != "byte_identical_pre_and_post_isolated_exports_plus_stable_live_identity_and_node_counts_no_full_structural_identity_claim"
+        or legacy_evidence.get("post_write_fingerprint_algorithm")
+        != "recursive_closed_property_snapshot_fnv1a32_v1"
+    ):
+        raise _error(
+            "VISUAL_AUTHORITY_SEARCH_ADDENDUM_INVALID",
+            "Search legacy integrity evidence overstates or changes its proof limit",
+        )
+    legacy_nodes = tuple(
+        _object(item, "Search protected legacy node")
+        for item in _list(legacy_evidence.get("nodes"), "Search protected legacy nodes")
+    )
+    if len(legacy_nodes) != len(SEARCH_LEGACY_INTEGRITY_BINDINGS):
+        raise _error(
+            "VISUAL_AUTHORITY_SEARCH_ADDENDUM_INVALID",
+            "Search legacy integrity evidence must bind the exact protected nodes",
+        )
+    legacy_node_ids = tuple(
+        _string(node.get("node_id"), "Search legacy node ID")
+        for node in legacy_nodes
+    )
+    if (
+        len(set(legacy_node_ids)) != len(legacy_node_ids)
+        or set(legacy_node_ids) != set(SEARCH_LEGACY_INTEGRITY_BINDINGS)
+    ):
+        raise _error(
+            "VISUAL_AUTHORITY_SEARCH_ADDENDUM_INVALID",
+            "Search legacy integrity evidence must bind each protected node exactly once",
+        )
+    for node in legacy_nodes:
+        _r1_exact_fields(
+            node,
+            frozenset(
+                {
+                    "canonical_length",
+                    "height",
+                    "name",
+                    "node_count",
+                    "node_id",
+                    "post_screenshot_path",
+                    "post_write_fingerprint",
+                    "pre_screenshot_path",
+                    "pre_write_fingerprint_record",
+                    "render_sha256",
+                    "type",
+                    "width",
+                }
+            ),
+            "Search protected legacy node",
+        )
+        node_id = _string(node.get("node_id"), "Search legacy node ID")
+        expected = SEARCH_LEGACY_INTEGRITY_BINDINGS.get(node_id)
+        if expected is None:
+            raise _error(
+                "VISUAL_AUTHORITY_SEARCH_ADDENDUM_INVALID",
+                f"Unexpected Search legacy node: {node_id}",
+            )
+        (
+            expected_name,
+            expected_count,
+            expected_length,
+            expected_post_fingerprint,
+            expected_pre_fingerprint,
+            expected_stem,
+            expected_render_sha,
+        ) = expected
+        pre_path = Path(
+            _string(node.get("pre_screenshot_path"), "Search legacy pre path")
+        )
+        post_path = Path(
+            _string(node.get("post_screenshot_path"), "Search legacy post path")
+        )
+        expected_root = Path(
+            "docs/qa/evidence/2026-07-17-canon-search-authority-r2/"
+            "screens/legacy-integrity"
+        )
+        if (
+            node.get("name") != expected_name
+            or node.get("type") != "FRAME"
+            or node.get("width") != 393
+            or node.get("height") != 852
+            or node.get("node_count") != expected_count
+            or node.get("canonical_length") != expected_length
+            or node.get("post_write_fingerprint") != expected_post_fingerprint
+            or node.get("pre_write_fingerprint_record") != expected_pre_fingerprint
+            or node.get("render_sha256") != expected_render_sha
+            or pre_path != expected_root / f"{expected_stem}-pre.png"
+            or post_path != expected_root / f"{expected_stem}-post.png"
+            or _read_regular_nofollow(root, pre_path)
+            != _read_regular_nofollow(root, post_path)
+            or hashlib.sha256(_read_regular_nofollow(root, pre_path)).hexdigest()
+            != expected_render_sha
+        ):
+            raise _error(
+                "VISUAL_AUTHORITY_SEARCH_ADDENDUM_INVALID",
+                f"Search protected legacy evidence is stale: {node_id}",
+            )
+
+    bindings = tuple(
+        _object(item, "Search authority frame binding")
+        for item in _list(
+            addendum.get("state_frame_bindings"),
+            "Search authority frame bindings",
+        )
+    )
+    expected_states = tuple(sorted(SEARCH_STATE_FRAME_BINDINGS))
+    state_ids = tuple(
+        _string(item.get("state_id"), "Search authority state ID")
+        for item in bindings
+    )
+    if state_ids != expected_states:
+        raise _error(
+            "VISUAL_AUTHORITY_SEARCH_ADDENDUM_INVALID",
+            "Search authority addendum must bind the exact eight sorted states",
+        )
+    seen_nodes: set[str] = set()
+    seen_paths: set[str] = set()
+    for item in bindings:
+        _r1_exact_fields(
+            item,
+            frozenset(
+                {
+                    "component_instance_count",
+                    "deterministic_results_preserved",
+                    "direct_link",
+                    "frame_height",
+                    "frame_version",
+                    "frame_width",
+                    "layout_mode",
+                    "minimum_semantic_label_font_size",
+                    "node_id",
+                    "proof_posture",
+                    "screenshot_path",
+                    "screenshot_sha256",
+                    "state_id",
+                    "visible_control",
+                }
+            ),
+            "Search authority frame binding",
+        )
+        state_id = _string(item.get("state_id"), "Search authority state ID")
+        node_id = _string(item.get("node_id"), "Search authority node ID")
+        path = Path(
+            _string(item.get("screenshot_path"), "Search authority screenshot path")
+        )
+        sha = _sha(
+            item.get("screenshot_sha256"),
+            64,
+            "Search authority screenshot SHA",
+        )
+        expected_node_id, expected_name, expected_sha = (
+            SEARCH_STATE_FRAME_BINDINGS[state_id]
+        )
+        expected_path = SEARCH_AUTHORITY_EVIDENCE_ROOT / expected_name
+        expected_link = (
+            "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ"
+            f"?node-id={expected_node_id.replace(':', '-')}"
+        )
+        if (
+            node_id != expected_node_id
+            or path != expected_path
+            or sha != expected_sha
+            or item.get("direct_link") != expected_link
+            or item.get("frame_version") != "R2"
+            or item.get("frame_width") != 393
+            or item.get("frame_height") != 852
+            or item.get("layout_mode") != "VERTICAL"
+            or item.get("component_instance_count") != 6
+            or item.get("minimum_semantic_label_font_size") != 10
+            or item.get("deterministic_results_preserved") is not True
+            or item.get("visible_control")
+            != SEARCH_STATE_VISIBLE_CONTROLS[state_id]
+            or item.get("visible_control") == "Cancel"
+            or item.get("proof_posture")
+            != "owner_approved_product_only_shadow_pending_gate_b"
+            or node_id in seen_nodes
+            or path.as_posix() in seen_paths
+            or hashlib.sha256(_read_regular_nofollow(root, path)).hexdigest()
+            != expected_sha
+        ):
+            raise _error(
+                "VISUAL_AUTHORITY_SEARCH_ADDENDUM_INVALID",
+                f"Search authority addendum frame binding is stale: {state_id}",
+            )
+        seen_nodes.add(node_id)
+        seen_paths.add(path.as_posix())
+
+    posture = _object(manifest.get("state_posture"), "state posture")
+    gate_b = _object(manifest.get("gate_b"), "Gate B")
+    future_states = set(
+        _list(posture.get("future_state_ids"), "future state IDs")
+    )
+    if (
+        manifest.get("authority_state") != "shadow"
+        or manifest.get("status") != "candidate_pending_independent_review"
+        or gate_b.get("state") != "pending_independent_review"
+        or gate_b.get("independent_semantic_review") != "pending"
+        or gate_b.get("independent_visual_review") != "pending"
+        or gate_b.get("blocked_state_handling")
+        != "fail_closed_zero_source_authorization"
+        or gate_b.get("task_pack_selection")
+        != "blocked_until_gate_b_green"
+        or set(posture.get("gap_blocked_state_ids", []))
+        or not SEARCH_VISUAL_STATE_IDS.issubset(future_states)
+    ):
+        raise _error(
+            "VISUAL_AUTHORITY_SEARCH_ADDENDUM_INVALID",
+            "Search authority addendum must remain shadow, Gate B blocked, and future-gated",
+        )
+    search_candidate = next(
+        (
+            _object(item, "Search candidate authority node")
+            for item in _list(
+                _object(manifest.get("figma"), "figma").get("authority_nodes"),
+                "authority nodes",
+            )
+            if _object(item, "authority node").get("visual_authority_id")
+            == "VA-P4-CANDIDATE-007"
+        ),
+        None,
+    )
+    if search_candidate is None:
+        raise _error(
+            "VISUAL_AUTHORITY_SEARCH_ADDENDUM_INVALID",
+            "Search authority addendum lacks its candidate master",
+        )
+    results_mapping = next(
+        (
+            _object(item, "Search results mapping")
+            for item in _list(
+                search_candidate.get("screen_mappings"),
+                "Search screen mappings",
+            )
+            if _object(item, "screen mapping").get("blueprint_id")
+            == "UX-SCREEN-SEARCH-RESULTS"
+        ),
+        None,
+    )
+    if (
+        results_mapping is None
+        or not SEARCH_VISUAL_STATE_IDS.issubset(
+            set(
+                _list(
+                    results_mapping.get("state_variant_ids"),
+                    "Search result state IDs",
+                )
+            )
+        )
+        or results_mapping.get("future_gated_state_count") != 8
+        or results_mapping.get("gap_blocked_state_count") != 0
+    ):
+        raise _error(
+            "VISUAL_AUTHORITY_SEARCH_ADDENDUM_INVALID",
+            "Search authority addendum does not resolve its candidate screen mapping",
+        )
+
+
 def _validate_r1_node_snapshot(
     root: Path,
     manifest: Mapping[str, object],
@@ -1206,6 +1983,7 @@ def validate_r1_node_snapshot_payload(
             "repository_base_sha",
             "root_shell_frames",
             "schema_version",
+            "search_authority_addendum",
             "support_overlay_bindings",
             "task_pack_targets",
         }
@@ -1215,7 +1993,7 @@ def validate_r1_node_snapshot_payload(
     canon = _object(manifest.get("canon"), "canon")
     _r1_exact_fields(canon, _CANON_FIELDS, "R1 canon")
     if (
-        snapshot.get("schema_version") != 1
+        snapshot.get("schema_version") != 3
         or snapshot.get("authority_state") != "candidate_shadow"
         or snapshot.get("file_key") != figma.get("file_key")
         or snapshot.get("page_id") != "215:2"
@@ -1228,6 +2006,8 @@ def validate_r1_node_snapshot_payload(
             "VISUAL_AUTHORITY_R1_SNAPSHOT_INVALID",
             "R1 snapshot identity, canon, or non-destructive posture is stale",
         )
+
+    _validate_search_authority_addendum(root, manifest, snapshot)
 
     receipt = _object(snapshot.get("figma_write_receipt"), "Figma write receipt")
     _r1_exact_fields(

@@ -55,10 +55,10 @@
           "const": 9
         },
         "state_count": {
-          "const": 433
+          "const": 441
         },
         "visual_requirement_count": {
-          "const": 336
+          "const": 346
         },
         "visual_requirement_ids": {
           "$ref": "#/$defs/stringSet"

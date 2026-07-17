@@ -26,11 +26,11 @@ The additive Phase 3/4 Figma corpus is represented as one deterministic, require
 - Candidate screen mappings: `47`
 - Generic skeleton screens retained as failure evidence: `47`
 - Product-only proof bundles: `18` (`54` hash-bound artifacts)
-- Visual requirements: `335` mapped + `11` gap-blocked = `346` classified
-- State variants: `433` mapped + `8` gap-blocked = `441` classified
+- Visual requirements: `346` mapped + `0` gap-blocked = `346` classified
+- State variants: `441` mapped + `0` gap-blocked = `441` classified
 - Authority-eligible states after Gate B: `411`
-- Future-gated states: `22`
-- Gap-blocked states: `8`
+- Future-gated states: `30`
+- Gap-blocked states: `0`
 - Canonical object records: `18`
 - Principal journeys: `12`
 - Cross-cutting records: `11`
@@ -41,6 +41,25 @@ The normative machine record is `visual-authority-rebaseline.json`. The companio
 The accessibility-size Today repair at `270:1430` has exactly one visible Search node (`359:243`) and one visible Capture node (`359:248`). The replaced hidden pairs and the visible pairs have matching geometry and fills, so the unchanged product render SHA `311374645649f6bdd851b9e34783599847c94b76d6862d0dbb2d67a473260376` is expected. This is a non-destructive, pixel-equivalent replacement receipt—not a claim that no node replacement occurred.
 
 The exact presentation matrix limits persistent root navigation to Today, Goals, Time, and You. Capture and Search are global overlays without root chrome, and Trust/Proof is contextual inspection only. Every candidate master records the seven required variants: Standard, Large Text, Accessibility Size, Reduce Motion, Reduce Transparency, Increase Contrast, and VoiceOver Order.
+
+## Search R2 exact owner approval
+
+The owner approved freeze `SEARCH-AUTHORITY-R2-2026-07-17T110150Z` and exact
+frames `375:2806`, `375:2880`, `375:2972`, `375:3063`, `375:3159`,
+`375:3245`, `375:3326`, and `375:3402` as the final Search visual authority
+at `2026-07-17T11:46:05Z`. The frozen pre-approval Search design bundle has a
+terminal independent review verdict of Critical 0 / Important 0 / Minor 0.
+The subsequent owner-approval record also completed exact independent review
+with Critical 0 / Important 0 / Minor 0, authenticated package/base evidence,
+and complete live read-only Figma metadata verification.
+
+This Search-only approval does not approve the broader visual corpus, does not
+change this manifest from shadow/non-authoritative, does not change Gate B
+from Red/pending, does not authorize source work or task-pack selection, and
+does not change any of the eight Search states from `future_gated`. The exact
+approval, review receipt, shared-metadata readback, and before/after render-byte
+identity are closed in `visual-authority-r1-node-snapshot.json` and
+`SEARCH_VISUAL_AUTHORITY_R2_REPORT.md`.
 
 ## Task-pack law
 

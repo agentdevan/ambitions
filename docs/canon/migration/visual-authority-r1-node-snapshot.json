@@ -1089,7 +1089,424 @@
       "search_node_id": "354:2725"
     }
   ],
-  "schema_version": 1,
+  "schema_version": 3,
+  "search_authority_addendum": {
+    "approval_record_independent_review": {
+      "authenticated_base_commit": "295889c9f76528d398fce8d54b155d3285705f29",
+      "critical_count": 0,
+      "entry_count": 24,
+      "important_count": 0,
+      "live_figma_metadata_verification": "complete_read_only_exact_section_and_eight_frames",
+      "minor_count": 0,
+      "package_base_authentication": "complete_exact_sha256_size_tree_entry_count_and_base_apply_check",
+      "package_path": ".superpowers/sdd/review-search-visual-authority-r2-295889c9-working-tree.diff",
+      "package_sha256": "0771b42183a8e57df60dac3ae28047b5d5708eb211fa02f1eead397ea379f926",
+      "package_size_bytes": 1034935,
+      "status": "complete_clean",
+      "synthetic_tree": "b1a3445ba4d6f30682d69d2514e6d06acdc34e2e"
+    },
+    "authority_status": "owner_approved_final_search_visual_authority_shadow_pending_gate_b",
+    "candidate_revision": "R2",
+    "canon_commit": "295889c9f76528d398fce8d54b155d3285705f29",
+    "claim_ceiling": "owner_approved_final_search_visual_authority_shadow_pending_gate_b_no_runtime_or_accessibility_claim",
+    "figma_metadata_receipt": {
+      "created_node_ids": [],
+      "deleted_node_ids": [],
+      "legacy_nodes_mutated": false,
+      "metadata_only": true,
+      "mutated_node_ids": [
+        "375:2805",
+        "375:2806",
+        "375:2880",
+        "375:2972",
+        "375:3063",
+        "375:3159",
+        "375:3245",
+        "375:3326",
+        "375:3402"
+      ],
+      "namespace": "ambitions.canon",
+      "page_id": "215:2",
+      "readback_records": [
+        {
+          "key_count": 33,
+          "node_id": "375:2805",
+          "readback_sha256": "0d68e5d2cd7df8e0602d8f3e6793f15362f9b79dc2bae0a51c7777d19386e099"
+        },
+        {
+          "key_count": 42,
+          "node_id": "375:2806",
+          "readback_sha256": "20acd59575a2df41bc27d4d6186065e1302b7e3bbe1f81499cb905129dae9572"
+        },
+        {
+          "key_count": 42,
+          "node_id": "375:2880",
+          "readback_sha256": "a628fcfc8c120f98a71f11b886719badd7d1a542ffbf9fd6df9c6cded7929ecc"
+        },
+        {
+          "key_count": 42,
+          "node_id": "375:2972",
+          "readback_sha256": "5d4b14fe4a2788d243fdb2c20a55e08d6f75b74e6737f8ad92327bae1a5c1d76"
+        },
+        {
+          "key_count": 42,
+          "node_id": "375:3063",
+          "readback_sha256": "81ce45d0ead649c55017a2261b9692c46283c7119d59162d3d83b30dfb04655c"
+        },
+        {
+          "key_count": 42,
+          "node_id": "375:3159",
+          "readback_sha256": "115f261ca6e37cb33508a45499f2105a3cc77e8880068ea668b26b9473b831f6"
+        },
+        {
+          "key_count": 42,
+          "node_id": "375:3245",
+          "readback_sha256": "19cb3bb0cc05303181a9c182cb55233bb16b96f63d539820e7137a2714162992"
+        },
+        {
+          "key_count": 42,
+          "node_id": "375:3326",
+          "readback_sha256": "ac29a9ac3793f5d4af5769fd4eb917a566899793b4e25592bc44eb6a9ec59013"
+        },
+        {
+          "key_count": 42,
+          "node_id": "375:3402",
+          "readback_sha256": "80fb955bdece775b3e642e11c2391cbae37cdc6c0cf696cfb9ae214155ad23fe"
+        }
+      ],
+      "readback_verified": true,
+      "renamed_node_ids": [],
+      "render_bindings": [
+        {
+          "after_sha256": "2c30f3974896a685ce5d1c06fcbeaa42268af4b27575c8e1200f2ee67971ed24",
+          "before_sha256": "2c30f3974896a685ce5d1c06fcbeaa42268af4b27575c8e1200f2ee67971ed24",
+          "byte_identical": true,
+          "byte_length": 56362,
+          "node_id": "375:2806",
+          "snapshot_sha256": "2c30f3974896a685ce5d1c06fcbeaa42268af4b27575c8e1200f2ee67971ed24"
+        },
+        {
+          "after_sha256": "c38a95f1c1aa75aeaea0464e0466b6e65faf3cfad64bac5b22bcb455e66430a2",
+          "before_sha256": "c38a95f1c1aa75aeaea0464e0466b6e65faf3cfad64bac5b22bcb455e66430a2",
+          "byte_identical": true,
+          "byte_length": 52894,
+          "node_id": "375:2880",
+          "snapshot_sha256": "c38a95f1c1aa75aeaea0464e0466b6e65faf3cfad64bac5b22bcb455e66430a2"
+        },
+        {
+          "after_sha256": "0133d0914a6ee6fd6c5ab11ff8e5b1ad5ced384788b2019dbbedb1ca45d1c549",
+          "before_sha256": "0133d0914a6ee6fd6c5ab11ff8e5b1ad5ced384788b2019dbbedb1ca45d1c549",
+          "byte_identical": true,
+          "byte_length": 52496,
+          "node_id": "375:2972",
+          "snapshot_sha256": "0133d0914a6ee6fd6c5ab11ff8e5b1ad5ced384788b2019dbbedb1ca45d1c549"
+        },
+        {
+          "after_sha256": "21c120eb0f8de6ebe88ff2693f962655ea16a740b96e1f0fe56325e0abebfe27",
+          "before_sha256": "21c120eb0f8de6ebe88ff2693f962655ea16a740b96e1f0fe56325e0abebfe27",
+          "byte_identical": true,
+          "byte_length": 50924,
+          "node_id": "375:3063",
+          "snapshot_sha256": "21c120eb0f8de6ebe88ff2693f962655ea16a740b96e1f0fe56325e0abebfe27"
+        },
+        {
+          "after_sha256": "315798e0bbeb093fad695efae14a284f0380e46f5c77b98e7a91af430e4c0ade",
+          "before_sha256": "315798e0bbeb093fad695efae14a284f0380e46f5c77b98e7a91af430e4c0ade",
+          "byte_identical": true,
+          "byte_length": 51983,
+          "node_id": "375:3159",
+          "snapshot_sha256": "315798e0bbeb093fad695efae14a284f0380e46f5c77b98e7a91af430e4c0ade"
+        },
+        {
+          "after_sha256": "ab9788a0828f20aa13e95d13ce01aec7d9632c4a383eaa5cde14a8e7d969ed2c",
+          "before_sha256": "ab9788a0828f20aa13e95d13ce01aec7d9632c4a383eaa5cde14a8e7d969ed2c",
+          "byte_identical": true,
+          "byte_length": 52916,
+          "node_id": "375:3245",
+          "snapshot_sha256": "ab9788a0828f20aa13e95d13ce01aec7d9632c4a383eaa5cde14a8e7d969ed2c"
+        },
+        {
+          "after_sha256": "472e13f495c1d46f592a3c2f9283296d1c8f39721b89f338ed05beaddcdb87cf",
+          "before_sha256": "472e13f495c1d46f592a3c2f9283296d1c8f39721b89f338ed05beaddcdb87cf",
+          "byte_identical": true,
+          "byte_length": 55954,
+          "node_id": "375:3326",
+          "snapshot_sha256": "472e13f495c1d46f592a3c2f9283296d1c8f39721b89f338ed05beaddcdb87cf"
+        },
+        {
+          "after_sha256": "642068d82d43c392fed92a04a4b29902425996beebd88f93c60061950fb23b48",
+          "before_sha256": "642068d82d43c392fed92a04a4b29902425996beebd88f93c60061950fb23b48",
+          "byte_identical": true,
+          "byte_length": 55773,
+          "node_id": "375:3402",
+          "snapshot_sha256": "642068d82d43c392fed92a04a4b29902425996beebd88f93c60061950fb23b48"
+        }
+      ],
+      "render_hash_algorithm": "sha256_pure_js_over_figma_export_async_png_contents_only_scale_1",
+      "section_node_id": "375:2805",
+      "shared_components_mutated": false,
+      "visible_properties_mutated": false
+    },
+    "freeze_id": "SEARCH-AUTHORITY-R2-2026-07-17T110150Z",
+    "frozen_at_utc": "2026-07-17T11:01:50Z",
+    "independent_review_state": "terminal_clean",
+    "legacy_nodes_mutated": false,
+    "owner_approval": {
+      "approval_scope": "final_search_visual_authority_only",
+      "approved_at_utc": "2026-07-17T11:46:05Z",
+      "approved_frame_ids": [
+        "375:2806",
+        "375:2880",
+        "375:2972",
+        "375:3063",
+        "375:3159",
+        "375:3245",
+        "375:3326",
+        "375:3402"
+      ],
+      "approved_freeze_id": "SEARCH-AUTHORITY-R2-2026-07-17T110150Z",
+      "gate_b_state": "red_pending",
+      "owner_statement": "I approve SEARCH-AUTHORITY-R2-2026-07-17T110150Z and frames 375:2806, 375:2880, 375:2972, 375:3063, 375:3159, 375:3245, 375:3326, and 375:3402 as the final Search visual authority.",
+      "post_approval_authority_state": "shadow_non_authoritative",
+      "source_authorization": "blocked_until_gate_b_green",
+      "task_pack_selection": "blocked_until_gate_b_green"
+    },
+    "owner_approval_state": "approved",
+    "page_id": "215:2",
+    "section_node_id": "375:2805",
+    "snapshot_binding": "exact_file_key_page_section_frame_ids_screenshot_digests_terminal_reviews_owner_approval_and_figma_metadata_readback_no_figma_file_version_claim",
+    "terminal_independent_review": {
+      "critical_count": 0,
+      "entry_count": 24,
+      "important_count": 0,
+      "minor_count": 0,
+      "package_path": ".superpowers/sdd/review-search-visual-authority-r2-295889c9-working-tree.diff",
+      "package_sha256": "8786427a72b6a3cf3d874261ce5c920ef25bfb52bc4ff7c0a76f07adcf9bb80a",
+      "package_size_bytes": 995426,
+      "status": "complete_clean",
+      "synthetic_tree": "ff43e51eb389865f0aa42fcd8788490f113fccc8"
+    },
+    "legacy_integrity_evidence": {
+      "claim_limit": "byte_identical_pre_and_post_isolated_exports_plus_stable_live_identity_and_node_counts_no_full_structural_identity_claim",
+      "post_write_fingerprint_algorithm": "recursive_closed_property_snapshot_fnv1a32_v1",
+      "nodes": [
+        {
+          "canonical_length": 50357,
+          "height": 852,
+          "name": "CANDIDATE — AV1 / Search / Results / Dark / v1",
+          "node_count": 47,
+          "node_id": "288:41",
+          "post_screenshot_path": "docs/qa/evidence/2026-07-17-canon-search-authority-r2/screens/legacy-integrity/legacy-search-288-41-post.png",
+          "post_write_fingerprint": "e8d9222c",
+          "pre_screenshot_path": "docs/qa/evidence/2026-07-17-canon-search-authority-r2/screens/legacy-integrity/legacy-search-288-41-pre.png",
+          "pre_write_fingerprint_record": "4fb4a231",
+          "render_sha256": "365fb42edb5a2b613318a9ee208ae66fb4da150313d642e7b62bcdfb218c0f81",
+          "type": "FRAME",
+          "width": 393
+        },
+        {
+          "canonical_length": 33032,
+          "height": 852,
+          "name": "CANDIDATE — AV1 / Trust / Receipt Undo / Light / v1",
+          "node_count": 32,
+          "node_id": "288:156",
+          "post_screenshot_path": "docs/qa/evidence/2026-07-17-canon-search-authority-r2/screens/legacy-integrity/legacy-trust-288-156-post.png",
+          "post_write_fingerprint": "bb835d60",
+          "pre_screenshot_path": "docs/qa/evidence/2026-07-17-canon-search-authority-r2/screens/legacy-integrity/legacy-trust-288-156-pre.png",
+          "pre_write_fingerprint_record": "c88da1db",
+          "render_sha256": "ff94201fe6e379b596a3e16738efcd609e16adf9b204f6be9e899fff1e97538a",
+          "type": "FRAME",
+          "width": 393
+        },
+        {
+          "canonical_length": 23213,
+          "height": 852,
+          "name": "CANDIDATE — AV1 / Capture / Compact Composer / Light / v1",
+          "node_count": 24,
+          "node_id": "281:1465",
+          "post_screenshot_path": "docs/qa/evidence/2026-07-17-canon-search-authority-r2/screens/legacy-integrity/legacy-capture-281-1465-post.png",
+          "post_write_fingerprint": "dbed5fbd",
+          "pre_screenshot_path": "docs/qa/evidence/2026-07-17-canon-search-authority-r2/screens/legacy-integrity/legacy-capture-281-1465-pre.png",
+          "pre_write_fingerprint_record": "58b443cd",
+          "render_sha256": "8684664e80fc6bbee087e7fa85fe9ade32064f622e757bc903462f38987f198e",
+          "type": "FRAME",
+          "width": 393
+        }
+      ]
+    },
+    "shared_anatomy_components": [
+      {
+        "layout_mode": "VERTICAL",
+        "name": "Search R2 / Shared / Header",
+        "node_id": "389:2770",
+        "type": "COMPONENT"
+      },
+      {
+        "layout_mode": "VERTICAL",
+        "name": "Search R2 / Shared / State Banner",
+        "node_id": "390:2773",
+        "type": "COMPONENT"
+      },
+      {
+        "layout_mode": "VERTICAL",
+        "name": "Search R2 / Shared / Deterministic Results",
+        "node_id": "390:2777",
+        "type": "COMPONENT"
+      },
+      {
+        "layout_mode": "VERTICAL",
+        "name": "Search R2 / Shared / Evidence Stack",
+        "node_id": "391:2773",
+        "type": "COMPONENT"
+      },
+      {
+        "layout_mode": "HORIZONTAL",
+        "name": "Search R2 / Shared / Owner Action",
+        "node_id": "391:2783",
+        "type": "COMPONENT"
+      },
+      {
+        "layout_mode": "VERTICAL",
+        "name": "Search R2 / Shared / Contextual Inspector",
+        "node_id": "391:2785",
+        "type": "COMPONENT"
+      }
+    ],
+    "state_frame_bindings": [
+      {
+        "component_instance_count": 6,
+        "deterministic_results_preserved": true,
+        "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=375-3063",
+        "frame_height": 852,
+        "frame_version": "R2",
+        "frame_width": 393,
+        "layout_mode": "VERTICAL",
+        "minimum_semantic_label_font_size": 10,
+        "node_id": "375:3063",
+        "proof_posture": "owner_approved_product_only_shadow_pending_gate_b",
+        "screenshot_path": "docs/qa/evidence/2026-07-17-canon-search-authority-r2/screens/product-only/search-failed-375-3063-r2.png",
+        "screenshot_sha256": "21c120eb0f8de6ebe88ff2693f962655ea16a740b96e1f0fe56325e0abebfe27",
+        "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-FAILED",
+        "visible_control": "Retry Ask"
+      },
+      {
+        "component_instance_count": 6,
+        "deterministic_results_preserved": true,
+        "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=375-3159",
+        "frame_height": 852,
+        "frame_version": "R2",
+        "frame_width": 393,
+        "layout_mode": "VERTICAL",
+        "minimum_semantic_label_font_size": 10,
+        "node_id": "375:3159",
+        "proof_posture": "owner_approved_product_only_shadow_pending_gate_b",
+        "screenshot_path": "docs/qa/evidence/2026-07-17-canon-search-authority-r2/screens/product-only/search-interrupted-375-3159-r2.png",
+        "screenshot_sha256": "315798e0bbeb093fad695efae14a284f0380e46f5c77b98e7a91af430e4c0ade",
+        "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-INTERRUPTED",
+        "visible_control": "Resume Ask"
+      },
+      {
+        "component_instance_count": 6,
+        "deterministic_results_preserved": true,
+        "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=375-3326",
+        "frame_height": 852,
+        "frame_version": "R2",
+        "frame_width": 393,
+        "layout_mode": "VERTICAL",
+        "minimum_semantic_label_font_size": 10,
+        "node_id": "375:3326",
+        "proof_posture": "owner_approved_product_only_shadow_pending_gate_b",
+        "screenshot_path": "docs/qa/evidence/2026-07-17-canon-search-authority-r2/screens/product-only/search-recovered-375-3326-r2.png",
+        "screenshot_sha256": "472e13f495c1d46f592a3c2f9283296d1c8f39721b89f338ed05beaddcdb87cf",
+        "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RECOVERED",
+        "visible_control": "Inspect Source"
+      },
+      {
+        "component_instance_count": 6,
+        "deterministic_results_preserved": true,
+        "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=375-3245",
+        "frame_height": 852,
+        "frame_version": "R2",
+        "frame_width": 393,
+        "layout_mode": "VERTICAL",
+        "minimum_semantic_label_font_size": 10,
+        "node_id": "375:3245",
+        "proof_posture": "owner_approved_product_only_shadow_pending_gate_b",
+        "screenshot_path": "docs/qa/evidence/2026-07-17-canon-search-authority-r2/screens/product-only/search-resumed-375-3245-r2.png",
+        "screenshot_sha256": "ab9788a0828f20aa13e95d13ce01aec7d9632c4a383eaa5cde14a8e7d969ed2c",
+        "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RESUMED",
+        "visible_control": "Cancel Ask"
+      },
+      {
+        "component_instance_count": 6,
+        "deterministic_results_preserved": true,
+        "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=375-2972",
+        "frame_height": 852,
+        "frame_version": "R2",
+        "frame_width": 393,
+        "layout_mode": "VERTICAL",
+        "minimum_semantic_label_font_size": 10,
+        "node_id": "375:2972",
+        "proof_posture": "owner_approved_product_only_shadow_pending_gate_b",
+        "screenshot_path": "docs/qa/evidence/2026-07-17-canon-search-authority-r2/screens/product-only/search-offline-375-2972-r2.png",
+        "screenshot_sha256": "0133d0914a6ee6fd6c5ab11ff8e5b1ad5ced384788b2019dbbedb1ca45d1c549",
+        "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK",
+        "visible_control": "Inspect Privacy"
+      },
+      {
+        "component_instance_count": 6,
+        "deterministic_results_preserved": true,
+        "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=375-3402",
+        "frame_height": 852,
+        "frame_version": "R2",
+        "frame_width": 393,
+        "layout_mode": "VERTICAL",
+        "minimum_semantic_label_font_size": 10,
+        "node_id": "375:3402",
+        "proof_posture": "owner_approved_product_only_shadow_pending_gate_b",
+        "screenshot_path": "docs/qa/evidence/2026-07-17-canon-search-authority-r2/screens/product-only/search-capture-375-3402-r2.png",
+        "screenshot_sha256": "642068d82d43c392fed92a04a4b29902425996beebd88f93c60061950fb23b48",
+        "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-CAPTURE-HANDOFF",
+        "visible_control": "Open Capture"
+      },
+      {
+        "component_instance_count": 6,
+        "deterministic_results_preserved": true,
+        "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=375-2806",
+        "frame_height": 852,
+        "frame_version": "R2",
+        "frame_width": 393,
+        "layout_mode": "VERTICAL",
+        "minimum_semantic_label_font_size": 10,
+        "node_id": "375:2806",
+        "proof_posture": "owner_approved_product_only_shadow_pending_gate_b",
+        "screenshot_path": "docs/qa/evidence/2026-07-17-canon-search-authority-r2/screens/product-only/search-grounded-375-2806-r2.png",
+        "screenshot_sha256": "2c30f3974896a685ce5d1c06fcbeaa42268af4b27575c8e1200f2ee67971ed24",
+        "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-GROUNDED-ANSWER",
+        "visible_control": "Inspect Source"
+      },
+      {
+        "component_instance_count": 6,
+        "deterministic_results_preserved": true,
+        "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=375-2880",
+        "frame_height": 852,
+        "frame_version": "R2",
+        "frame_width": 393,
+        "layout_mode": "VERTICAL",
+        "minimum_semantic_label_font_size": 10,
+        "node_id": "375:2880",
+        "proof_posture": "owner_approved_product_only_shadow_pending_gate_b",
+        "screenshot_path": "docs/qa/evidence/2026-07-17-canon-search-authority-r2/screens/product-only/search-progress-375-2880-r2.png",
+        "screenshot_sha256": "c38a95f1c1aa75aeaea0464e0466b6e65faf3cfad64bac5b22bcb455e66430a2",
+        "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS",
+        "visible_control": "Cancel Ask"
+      }
+    ],
+    "visual_pattern_source_node_ids": [
+      "288:41",
+      "288:156"
+    ]
+  },
   "support_overlay_bindings": [
     {
       "mapping_role": "accessibility_support_overlay",

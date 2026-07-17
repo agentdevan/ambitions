@@ -317,7 +317,10 @@
       "type": "array"
     },
     "schema_version": {
-      "const": 1
+      "const": 3
+    },
+    "search_authority_addendum": {
+      "$ref": "#/$defs/searchAuthorityAddendum"
     },
     "task_pack_targets": {
       "items": {
@@ -576,12 +579,602 @@
     "repository_base_sha",
     "root_shell_frames",
     "schema_version",
+    "search_authority_addendum",
     "support_overlay_bindings",
     "task_pack_targets"
   ],
   "title": "Ambitions Visual Authority R1 Node Snapshot",
   "type": "object",
   "$defs": {
+    "searchAuthorityAddendum": {
+      "additionalProperties": false,
+      "properties": {
+        "approval_record_independent_review": {
+          "$ref": "#/$defs/searchApprovalRecordIndependentReview"
+        },
+        "authority_status": {
+          "const": "owner_approved_final_search_visual_authority_shadow_pending_gate_b"
+        },
+        "candidate_revision": {
+          "const": "R2"
+        },
+        "canon_commit": {
+          "const": "295889c9f76528d398fce8d54b155d3285705f29"
+        },
+        "claim_ceiling": {
+          "const": "owner_approved_final_search_visual_authority_shadow_pending_gate_b_no_runtime_or_accessibility_claim"
+        },
+        "figma_metadata_receipt": {
+          "$ref": "#/$defs/searchFigmaMetadataReceipt"
+        },
+        "freeze_id": {
+          "const": "SEARCH-AUTHORITY-R2-2026-07-17T110150Z"
+        },
+        "frozen_at_utc": {
+          "const": "2026-07-17T11:01:50Z"
+        },
+        "independent_review_state": {
+          "const": "terminal_clean"
+        },
+        "legacy_integrity_evidence": {
+          "additionalProperties": false,
+          "properties": {
+            "claim_limit": {
+              "const": "byte_identical_pre_and_post_isolated_exports_plus_stable_live_identity_and_node_counts_no_full_structural_identity_claim"
+            },
+            "nodes": {
+              "items": {
+                "$ref": "#/$defs/searchLegacyIntegrityNode"
+              },
+              "maxItems": 3,
+              "minItems": 3,
+              "type": "array",
+              "uniqueItems": true
+            },
+            "post_write_fingerprint_algorithm": {
+              "const": "recursive_closed_property_snapshot_fnv1a32_v1"
+            }
+          },
+          "required": [
+            "claim_limit",
+            "nodes",
+            "post_write_fingerprint_algorithm"
+          ],
+          "type": "object"
+        },
+        "legacy_nodes_mutated": {
+          "const": false
+        },
+        "owner_approval_state": {
+          "const": "approved"
+        },
+        "owner_approval": {
+          "$ref": "#/$defs/searchOwnerApproval"
+        },
+        "page_id": {
+          "const": "215:2"
+        },
+        "section_node_id": {
+          "const": "375:2805"
+        },
+        "shared_anatomy_components": {
+          "items": {
+            "$ref": "#/$defs/searchSharedComponent"
+          },
+          "maxItems": 6,
+          "minItems": 6,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "snapshot_binding": {
+          "const": "exact_file_key_page_section_frame_ids_screenshot_digests_terminal_reviews_owner_approval_and_figma_metadata_readback_no_figma_file_version_claim"
+        },
+        "state_frame_bindings": {
+          "items": {
+            "$ref": "#/$defs/searchStateFrameBinding"
+          },
+          "maxItems": 8,
+          "minItems": 8,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "terminal_independent_review": {
+          "$ref": "#/$defs/searchTerminalIndependentReview"
+        },
+        "visual_pattern_source_node_ids": {
+          "const": [
+            "288:41",
+            "288:156"
+          ]
+        }
+      },
+      "required": [
+        "approval_record_independent_review",
+        "authority_status",
+        "candidate_revision",
+        "canon_commit",
+        "claim_ceiling",
+        "figma_metadata_receipt",
+        "freeze_id",
+        "frozen_at_utc",
+        "independent_review_state",
+        "legacy_integrity_evidence",
+        "legacy_nodes_mutated",
+        "owner_approval",
+        "owner_approval_state",
+        "page_id",
+        "section_node_id",
+        "shared_anatomy_components",
+        "snapshot_binding",
+        "state_frame_bindings",
+        "terminal_independent_review",
+        "visual_pattern_source_node_ids"
+      ],
+      "type": "object"
+    },
+    "searchOwnerApproval": {
+      "additionalProperties": false,
+      "properties": {
+        "approval_scope": {
+          "const": "final_search_visual_authority_only"
+        },
+        "approved_at_utc": {
+          "const": "2026-07-17T11:46:05Z"
+        },
+        "approved_frame_ids": {
+          "const": [
+            "375:2806",
+            "375:2880",
+            "375:2972",
+            "375:3063",
+            "375:3159",
+            "375:3245",
+            "375:3326",
+            "375:3402"
+          ]
+        },
+        "approved_freeze_id": {
+          "const": "SEARCH-AUTHORITY-R2-2026-07-17T110150Z"
+        },
+        "gate_b_state": {
+          "const": "red_pending"
+        },
+        "owner_statement": {
+          "const": "I approve SEARCH-AUTHORITY-R2-2026-07-17T110150Z and frames 375:2806, 375:2880, 375:2972, 375:3063, 375:3159, 375:3245, 375:3326, and 375:3402 as the final Search visual authority."
+        },
+        "post_approval_authority_state": {
+          "const": "shadow_non_authoritative"
+        },
+        "source_authorization": {
+          "const": "blocked_until_gate_b_green"
+        },
+        "task_pack_selection": {
+          "const": "blocked_until_gate_b_green"
+        }
+      },
+      "required": [
+        "approval_scope",
+        "approved_at_utc",
+        "approved_frame_ids",
+        "approved_freeze_id",
+        "gate_b_state",
+        "owner_statement",
+        "post_approval_authority_state",
+        "source_authorization",
+        "task_pack_selection"
+      ],
+      "type": "object"
+    },
+    "searchApprovalRecordIndependentReview": {
+      "additionalProperties": false,
+      "properties": {
+        "authenticated_base_commit": {
+          "const": "295889c9f76528d398fce8d54b155d3285705f29"
+        },
+        "critical_count": {
+          "const": 0
+        },
+        "entry_count": {
+          "const": 24
+        },
+        "important_count": {
+          "const": 0
+        },
+        "live_figma_metadata_verification": {
+          "const": "complete_read_only_exact_section_and_eight_frames"
+        },
+        "minor_count": {
+          "const": 0
+        },
+        "package_base_authentication": {
+          "const": "complete_exact_sha256_size_tree_entry_count_and_base_apply_check"
+        },
+        "package_path": {
+          "const": ".superpowers/sdd/review-search-visual-authority-r2-295889c9-working-tree.diff"
+        },
+        "package_sha256": {
+          "const": "0771b42183a8e57df60dac3ae28047b5d5708eb211fa02f1eead397ea379f926"
+        },
+        "package_size_bytes": {
+          "const": 1034935
+        },
+        "status": {
+          "const": "complete_clean"
+        },
+        "synthetic_tree": {
+          "const": "b1a3445ba4d6f30682d69d2514e6d06acdc34e2e"
+        }
+      },
+      "required": [
+        "authenticated_base_commit",
+        "critical_count",
+        "entry_count",
+        "important_count",
+        "live_figma_metadata_verification",
+        "minor_count",
+        "package_base_authentication",
+        "package_path",
+        "package_sha256",
+        "package_size_bytes",
+        "status",
+        "synthetic_tree"
+      ],
+      "type": "object"
+    },
+    "searchTerminalIndependentReview": {
+      "additionalProperties": false,
+      "properties": {
+        "critical_count": {
+          "const": 0
+        },
+        "entry_count": {
+          "const": 24
+        },
+        "important_count": {
+          "const": 0
+        },
+        "minor_count": {
+          "const": 0
+        },
+        "package_path": {
+          "const": ".superpowers/sdd/review-search-visual-authority-r2-295889c9-working-tree.diff"
+        },
+        "package_sha256": {
+          "const": "8786427a72b6a3cf3d874261ce5c920ef25bfb52bc4ff7c0a76f07adcf9bb80a"
+        },
+        "package_size_bytes": {
+          "const": 995426
+        },
+        "status": {
+          "const": "complete_clean"
+        },
+        "synthetic_tree": {
+          "const": "ff43e51eb389865f0aa42fcd8788490f113fccc8"
+        }
+      },
+      "required": [
+        "critical_count",
+        "entry_count",
+        "important_count",
+        "minor_count",
+        "package_path",
+        "package_sha256",
+        "package_size_bytes",
+        "status",
+        "synthetic_tree"
+      ],
+      "type": "object"
+    },
+    "searchFigmaMetadataReceipt": {
+      "additionalProperties": false,
+      "properties": {
+        "created_node_ids": {
+          "$ref": "#/$defs/emptyArray"
+        },
+        "deleted_node_ids": {
+          "$ref": "#/$defs/emptyArray"
+        },
+        "legacy_nodes_mutated": {
+          "const": false
+        },
+        "metadata_only": {
+          "const": true
+        },
+        "mutated_node_ids": {
+          "const": [
+            "375:2805",
+            "375:2806",
+            "375:2880",
+            "375:2972",
+            "375:3063",
+            "375:3159",
+            "375:3245",
+            "375:3326",
+            "375:3402"
+          ]
+        },
+        "namespace": {
+          "const": "ambitions.canon"
+        },
+        "page_id": {
+          "const": "215:2"
+        },
+        "readback_records": {
+          "items": {
+            "$ref": "#/$defs/searchFigmaReadbackRecord"
+          },
+          "maxItems": 9,
+          "minItems": 9,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "readback_verified": {
+          "const": true
+        },
+        "renamed_node_ids": {
+          "$ref": "#/$defs/emptyArray"
+        },
+        "render_bindings": {
+          "items": {
+            "$ref": "#/$defs/searchFigmaRenderBinding"
+          },
+          "maxItems": 8,
+          "minItems": 8,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "render_hash_algorithm": {
+          "const": "sha256_pure_js_over_figma_export_async_png_contents_only_scale_1"
+        },
+        "section_node_id": {
+          "const": "375:2805"
+        },
+        "shared_components_mutated": {
+          "const": false
+        },
+        "visible_properties_mutated": {
+          "const": false
+        }
+      },
+      "required": [
+        "created_node_ids",
+        "deleted_node_ids",
+        "legacy_nodes_mutated",
+        "metadata_only",
+        "mutated_node_ids",
+        "namespace",
+        "page_id",
+        "readback_records",
+        "readback_verified",
+        "renamed_node_ids",
+        "render_bindings",
+        "render_hash_algorithm",
+        "section_node_id",
+        "shared_components_mutated",
+        "visible_properties_mutated"
+      ],
+      "type": "object"
+    },
+    "searchFigmaReadbackRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "key_count": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "node_id": {
+          "$ref": "#/$defs/nodeId"
+        },
+        "readback_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "required": [
+        "key_count",
+        "node_id",
+        "readback_sha256"
+      ],
+      "type": "object"
+    },
+    "searchFigmaRenderBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "after_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "before_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "byte_identical": {
+          "const": true
+        },
+        "byte_length": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "node_id": {
+          "$ref": "#/$defs/nodeId"
+        },
+        "snapshot_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "required": [
+        "after_sha256",
+        "before_sha256",
+        "byte_identical",
+        "byte_length",
+        "node_id",
+        "snapshot_sha256"
+      ],
+      "type": "object"
+    },
+    "searchSharedComponent": {
+      "additionalProperties": false,
+      "properties": {
+        "layout_mode": {
+          "enum": [
+            "HORIZONTAL",
+            "VERTICAL"
+          ]
+        },
+        "name": {
+          "pattern": "^Search R2 / Shared / ",
+          "type": "string"
+        },
+        "node_id": {
+          "$ref": "#/$defs/nodeId"
+        },
+        "type": {
+          "const": "COMPONENT"
+        }
+      },
+      "required": [
+        "layout_mode",
+        "name",
+        "node_id",
+        "type"
+      ],
+      "type": "object"
+    },
+    "searchStateFrameBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component_instance_count": {
+          "const": 6
+        },
+        "deterministic_results_preserved": {
+          "const": true
+        },
+        "direct_link": {
+          "pattern": "^https://www\\.figma\\.com/design/Oik7612LSTUHWsNRFoTlTJ\\?node-id=[0-9]+-[0-9]+$",
+          "type": "string"
+        },
+        "frame_height": {
+          "const": 852
+        },
+        "frame_version": {
+          "const": "R2"
+        },
+        "frame_width": {
+          "const": 393
+        },
+        "layout_mode": {
+          "const": "VERTICAL"
+        },
+        "minimum_semantic_label_font_size": {
+          "minimum": 10,
+          "type": "number"
+        },
+        "node_id": {
+          "$ref": "#/$defs/nodeId"
+        },
+        "proof_posture": {
+          "const": "owner_approved_product_only_shadow_pending_gate_b"
+        },
+        "screenshot_path": {
+          "pattern": "^docs/qa/evidence/2026-07-17-canon-search-authority-r2/screens/product-only/search-[a-z]+-[0-9]+-[0-9]+-r2\\.png$",
+          "type": "string"
+        },
+        "screenshot_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "state_id": {
+          "pattern": "^UX-STATE-VARIANT-SEARCH-RESULTS-",
+          "type": "string"
+        },
+        "visible_control": {
+          "enum": [
+            "Cancel Ask",
+            "Inspect Privacy",
+            "Inspect Source",
+            "Open Capture",
+            "Resume Ask",
+            "Retry Ask"
+          ]
+        }
+      },
+      "required": [
+        "component_instance_count",
+        "deterministic_results_preserved",
+        "direct_link",
+        "frame_height",
+        "frame_version",
+        "frame_width",
+        "layout_mode",
+        "minimum_semantic_label_font_size",
+        "node_id",
+        "proof_posture",
+        "screenshot_path",
+        "screenshot_sha256",
+        "state_id",
+        "visible_control"
+      ],
+      "type": "object"
+    },
+    "searchLegacyIntegrityNode": {
+      "additionalProperties": false,
+      "properties": {
+        "canonical_length": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "height": {
+          "const": 852
+        },
+        "name": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "node_count": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "node_id": {
+          "$ref": "#/$defs/nodeId"
+        },
+        "post_screenshot_path": {
+          "pattern": "^docs/qa/evidence/2026-07-17-canon-search-authority-r2/screens/legacy-integrity/legacy-(?:search|trust|capture)-[0-9]+-[0-9]+-post\\.png$",
+          "type": "string"
+        },
+        "post_write_fingerprint": {
+          "pattern": "^[0-9a-f]{8}$",
+          "type": "string"
+        },
+        "pre_screenshot_path": {
+          "pattern": "^docs/qa/evidence/2026-07-17-canon-search-authority-r2/screens/legacy-integrity/legacy-(?:search|trust|capture)-[0-9]+-[0-9]+-pre\\.png$",
+          "type": "string"
+        },
+        "pre_write_fingerprint_record": {
+          "pattern": "^[0-9a-f]{8}$",
+          "type": "string"
+        },
+        "render_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "type": {
+          "const": "FRAME"
+        },
+        "width": {
+          "const": 393
+        }
+      },
+      "required": [
+        "canonical_length",
+        "height",
+        "name",
+        "node_count",
+        "node_id",
+        "post_screenshot_path",
+        "post_write_fingerprint",
+        "pre_screenshot_path",
+        "pre_write_fingerprint_record",
+        "render_sha256",
+        "type",
+        "width"
+      ],
+      "type": "object"
+    },
     "binding": {
       "additionalProperties": false,
       "properties": {
