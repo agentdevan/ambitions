@@ -1400,9 +1400,9 @@ Search can search:
 * settings
 * local data
 
-Search is local Find / Act / Inspect.
+Search is local-first Find / Ask / Act / Inspect.
 
-Search must not become chatbot search.
+Find remains deterministic and offline. Ask is optional, on-device, grounded in eligible local objects, session-local, and object-led; it may offer a Capture handoff, while any Act remains proposed-only until the canonical owner validates and commits it. Search must not become chatbot search, hosted AI, or a path for private-graph transfer.
 
 ⸻
 

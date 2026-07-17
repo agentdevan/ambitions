@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
+  "canon_content_sha": "0580c94fab6364d64db08629042e1477b27b5c49906d2bf074af41c43f282104",
   "canon_revision": 1,
   "compiler_version": "0.2.0",
   "mappings": [
@@ -1316,6 +1316,16 @@
       "mapping_status": "gap",
       "references": [],
       "required_verification_ids": [
+        "SCENARIO-JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT-001"
+      ],
+      "requirement_id": "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT-001"
+    },
+    {
+      "current_claim_posture": "required_but_unverified",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [
         "SCENARIO-JOURNEY-STEP-CLOSURE-001"
       ],
       "requirement_id": "JOURNEY-STEP-CLOSURE-001"
@@ -1467,6 +1477,16 @@
         "AUDIT-RUNTIME-DIRECT-WRITE-001"
       ],
       "requirement_id": "LAW-RUNTIME-NO-DIRECT-WRITE-001"
+    },
+    {
+      "current_claim_posture": "required_but_unverified",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [
+        "SCENARIO-SEARCH-PRIVATE-COMMAND-LAYER-001"
+      ],
+      "requirement_id": "LAW-SEARCH-PRIVATE-COMMAND-LAYER-001"
     },
     {
       "current_claim_posture": "required_but_unverified",
@@ -2941,9 +2961,74 @@
       "mapping_status": "gap",
       "references": [],
       "required_verification_ids": [
+        "SCENARIO-SEARCH-ANSWER-EVIDENCE-001"
+      ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ANSWER-EVIDENCE-001"
+    },
+    {
+      "current_claim_posture": "required_but_unverified",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [
+        "SCENARIO-SEARCH-ASK-GROUNDING-001",
+        "SCENARIO-SEARCH-ASK-UNAVAILABLE-001"
+      ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-001"
+    },
+    {
+      "current_claim_posture": "required_but_unverified",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [
+        "AUDIT-SEARCH-ASK-ACTIVATION-GATE-001"
+      ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001"
+    },
+    {
+      "current_claim_posture": "required_but_unverified",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [
+        "SCENARIO-SEARCH-ASK-GROUNDING-001",
+        "SCENARIO-SEARCH-ASK-UNAVAILABLE-001",
+        "SCENARIO-SEARCH-CAPTURE-HANDOFF-001",
+        "SCENARIO-SEARCH-SESSION-HISTORY-001"
+      ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001"
+    },
+    {
+      "current_claim_posture": "required_but_unverified",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [
+        "SCENARIO-SEARCH-CAPTURE-HANDOFF-001"
+      ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-CAPTURE-HANDOFF-001"
+    },
+    {
+      "current_claim_posture": "required_but_unverified",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [
         "SCENARIO-GLOBAL-SEARCH-COMMAND-CONTRACT-001"
       ],
       "requirement_id": "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001"
+    },
+    {
+      "current_claim_posture": "required_but_unverified",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [
+        "SCENARIO-SEARCH-FIND-001",
+        "TEST-SEARCH-RANKING-001"
+      ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-FIND-001"
     },
     {
       "current_claim_posture": "no_current_evidence",
@@ -2952,16 +3037,6 @@
       "references": [],
       "required_verification_ids": [],
       "requirement_id": "SPEC-GLOBAL-SEARCH-FIRST-VIEWPORT-001"
-    },
-    {
-      "current_claim_posture": "required_but_unverified",
-      "gap_note": "missing mapping is a gap and does not prove absent implementation",
-      "mapping_status": "gap",
-      "references": [],
-      "required_verification_ids": [
-        "SCENARIO-SEARCH-IDENTITY-001"
-      ],
-      "requirement_id": "SPEC-GLOBAL-SEARCH-IDENTITY-001"
     },
     {
       "current_claim_posture": "required_but_unverified",
@@ -2990,9 +3065,59 @@
       "mapping_status": "gap",
       "references": [],
       "required_verification_ids": [
+        "SCENARIO-SEARCH-UNIFIED-INPUT-001"
+      ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-INPUT-001"
+    },
+    {
+      "current_claim_posture": "required_but_unverified",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [
+        "SCENARIO-SEARCH-INSPECT-001"
+      ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-INSPECT-001"
+    },
+    {
+      "current_claim_posture": "required_but_unverified",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [
         "REVIEW-SPEC-GLOBAL-SEARCH-PLACEMENT-001"
       ],
       "requirement_id": "SPEC-GLOBAL-SEARCH-PLACEMENT-001"
+    },
+    {
+      "current_claim_posture": "required_but_unverified",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [
+        "REVIEW-SEARCH-PRESENTATION-001"
+      ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-PRESENTATION-001"
+    },
+    {
+      "current_claim_posture": "required_but_unverified",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [
+        "SCENARIO-SEARCH-PRIVATE-COMMAND-LAYER-001"
+      ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-PRIVATE-COMMAND-LAYER-001"
+    },
+    {
+      "current_claim_posture": "required_but_unverified",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [
+        "SCENARIO-SEARCH-SESSION-HISTORY-001"
+      ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-SESSION-HISTORY-001"
     },
     {
       "current_claim_posture": "no_current_evidence",

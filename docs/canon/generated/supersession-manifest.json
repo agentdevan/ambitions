@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
+  "canon_content_sha": "0580c94fab6364d64db08629042e1477b27b5c49906d2bf074af41c43f282104",
   "canon_revision": 1,
   "compiler_version": "0.2.0",
   "schema_version": 1,
@@ -370,6 +370,30 @@
       "superseded_artifacts": [
         "LINEAR-CANON-V3:decision:181",
         "LINEAR-CANON-V3:decision:41"
+      ]
+    },
+    {
+      "conflict_id": "CONFLICT-SEARCH-FIND-ASK-ACT-INSPECT",
+      "decision_base_commit": "e52a14c6b249b540345848afb8a4b399c7b8c198",
+      "decision_date": "2026-07-16",
+      "decision_source": "Owner decision on 2026-07-16: “Reject that prohibition and introduce a stronger third law: Global Search MUST be one unified, local-first Find / Ask / Act / Inspect surface.”",
+      "integration_evidence_sha256": "1d48e2df4f417135cd451a4c73794fe08a5f1a09f7489d48a6b484a40654933c",
+      "old_ids": [
+        "CLAIM-LFT-0163",
+        "CLAIM-LFT-0182",
+        "CLAIM-STB-0306",
+        "SPEC-GLOBAL-SEARCH-IDENTITY-001"
+      ],
+      "owner": "Devan Warner",
+      "resolution": "reject_both",
+      "resulting_id": "SPEC-GLOBAL-SEARCH-PRIVATE-COMMAND-LAYER-001",
+      "superseded_artifacts": [
+        "LINEAR-CANON-V3:decision:163",
+        "LINEAR-CANON-V3:decision:182",
+        "REPO-5E65B22176A5B68006DB6CD1:line:721",
+        "REPO-CANON:SPEC-GLOBAL-SEARCH-IDENTITY-001:pre-2026-07-16",
+        "REPO-TRUTH:PRODUCT_DESIGN_TRUTH.md:SEARCH-001",
+        "REPO-TRUTH:PRODUCT_EXPERIENCE_CANON.md:74"
       ]
     },
     {

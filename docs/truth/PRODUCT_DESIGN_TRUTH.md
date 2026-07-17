@@ -1931,9 +1931,9 @@ Primary copy remains plain. Rationale is inspectable.
 
 ## SEARCH-001 — Product identity
 
-Search is local-first **Find / Act / Inspect**.
+Search is local-first **Find / Ask / Act / Inspect**.
 
-It is not chatbot-first, command-line theater, a shallow sheet, or a cloud/LLM dependency.
+It is object-led, not chatbot-first, command-line theater, a shallow sheet, or a cloud/LLM dependency. Find remains deterministic and offline; Ask cannot weaken that core path.
 
 ## SEARCH-002 — Find
 
@@ -1951,6 +1951,14 @@ Find at least:
 - History,
 - Sources/provenance,
 - settings.
+
+## SEARCH-002A — Ask
+
+Ask is an **optional on-device grounded Ask** over eligible local Ambitions objects. It presents grounded, contextual answers inside the object-led Search experience, may offer a **Capture handoff** for creation intent, and keeps conversation history session-local unless the user accepts a proposed-only action through the canonical object owner.
+
+Ask must not transfer the private life graph to hosted AI, an external model, R2, Source Atlas, or an Ambitions backend. It must not become a chatbot destination or a second mutation authority. Any Act surfaced from Ask is proposed-only until the canonical owner validates, confirms where required, commits, receipts, and exposes undo or recovery. Ask unavailability must preserve deterministic offline Find, contextual Act, and Inspect.
+
+This law defines product intent only. It does not activate Ask commands, close specification or visual gaps, prove production implementation, or authorize Visual Green.
 
 ## SEARCH-003 — Act
 

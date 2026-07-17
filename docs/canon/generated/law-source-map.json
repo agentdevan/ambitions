@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
+  "canon_content_sha": "0580c94fab6364d64db08629042e1477b27b5c49906d2bf074af41c43f282104",
   "canon_revision": 1,
   "compiler_version": "0.2.0",
   "finding_inventory": [
@@ -301,6 +301,16 @@
       "code": "CANON_TRACE_CANON_TO_CODE",
       "gap_class": "canon_to_code",
       "message": "gap_class=canon_to_code affected_ids=LAW-RUNTIME-NO-DIRECT-WRITE-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation",
+      "path": null,
+      "severity": "P0_BLOCKER"
+    },
+    {
+      "affected_ids": [
+        "LAW-SEARCH-PRIVATE-COMMAND-LAYER-001"
+      ],
+      "code": "CANON_TRACE_CANON_TO_CODE",
+      "gap_class": "canon_to_code",
+      "message": "gap_class=canon_to_code affected_ids=LAW-SEARCH-PRIVATE-COMMAND-LAYER-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation",
       "path": null,
       "severity": "P0_BLOCKER"
     },
@@ -17564,6 +17574,87 @@
           "exists": true,
           "gaps": [],
           "has_implementation": true,
+          "owner_path": "Native/Ambitions/Composer/Capture/",
+          "source_inventory_ref": "Native/Ambitions/Composer/Capture/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Stage/",
+          "source_inventory_ref": "Native/Ambitions/Stage/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Trust/",
+          "source_inventory_ref": "Native/Ambitions/Trust/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Composer/Capture/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT-001",
+      "source_owners": [
+        "Native/Ambitions/Composer/Capture/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
           "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
           "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
           "status": "source_files_present"
@@ -17897,6 +17988,16 @@
       "mappings": [],
       "references": [],
       "requirement_id": "LAW-RUNTIME-NO-DIRECT-WRITE-001",
+      "source_owners": []
+    },
+    {
+      "current_claim_posture": "source_owner_gap",
+      "gaps": [
+        "gap_class=canon_to_code affected_ids=LAW-SEARCH-PRIVATE-COMMAND-LAYER-001 no source owner mapping; missing mapping is a gap and does not prove absent implementation"
+      ],
+      "mappings": [],
+      "references": [],
+      "requirement_id": "LAW-SEARCH-PRIVATE-COMMAND-LAYER-001",
       "source_owners": []
     },
     {
@@ -27490,6 +27591,361 @@
         "Native/Ambitions/Stage/",
         "Native/Ambitions/Trust/"
       ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ANSWER-EVIDENCE-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Stage/",
+          "source_inventory_ref": "Native/Ambitions/Stage/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Trust/",
+          "source_inventory_ref": "Native/Ambitions/Trust/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Stage/",
+          "source_inventory_ref": "Native/Ambitions/Stage/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Trust/",
+          "source_inventory_ref": "Native/Ambitions/Trust/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Stage/",
+          "source_inventory_ref": "Native/Ambitions/Stage/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Trust/",
+          "source_inventory_ref": "Native/Ambitions/Trust/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Stage/",
+          "source_inventory_ref": "Native/Ambitions/Stage/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Trust/",
+          "source_inventory_ref": "Native/Ambitions/Trust/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-CAPTURE-HANDOFF-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Stage/",
+          "source_inventory_ref": "Native/Ambitions/Stage/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Trust/",
+          "source_inventory_ref": "Native/Ambitions/Trust/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ],
       "requirement_id": "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001",
       "source_owners": [
         "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
@@ -27561,7 +28017,7 @@
         "Native/Ambitions/Stage/",
         "Native/Ambitions/Trust/"
       ],
-      "requirement_id": "SPEC-GLOBAL-SEARCH-FIRST-VIEWPORT-001",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-FIND-001",
       "source_owners": [
         "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
         "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
@@ -27632,7 +28088,7 @@
         "Native/Ambitions/Stage/",
         "Native/Ambitions/Trust/"
       ],
-      "requirement_id": "SPEC-GLOBAL-SEARCH-IDENTITY-001",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-FIRST-VIEWPORT-001",
       "source_owners": [
         "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
         "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
@@ -27845,7 +28301,362 @@
         "Native/Ambitions/Stage/",
         "Native/Ambitions/Trust/"
       ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-INPUT-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Stage/",
+          "source_inventory_ref": "Native/Ambitions/Stage/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Trust/",
+          "source_inventory_ref": "Native/Ambitions/Trust/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-INSPECT-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Stage/",
+          "source_inventory_ref": "Native/Ambitions/Stage/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Trust/",
+          "source_inventory_ref": "Native/Ambitions/Trust/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ],
       "requirement_id": "SPEC-GLOBAL-SEARCH-PLACEMENT-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Stage/",
+          "source_inventory_ref": "Native/Ambitions/Stage/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Trust/",
+          "source_inventory_ref": "Native/Ambitions/Trust/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-PRESENTATION-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Stage/",
+          "source_inventory_ref": "Native/Ambitions/Stage/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Trust/",
+          "source_inventory_ref": "Native/Ambitions/Trust/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-PRIVATE-COMMAND-LAYER-001",
+      "source_owners": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ]
+    },
+    {
+      "current_claim_posture": "source_present_unverified",
+      "gaps": [],
+      "mappings": [
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+          "source_inventory_ref": "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Quality/",
+          "source_inventory_ref": "Native/Ambitions/Quality/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Stage/",
+          "source_inventory_ref": "Native/Ambitions/Stage/",
+          "status": "source_files_present"
+        },
+        {
+          "exists": true,
+          "gaps": [],
+          "has_implementation": true,
+          "owner_path": "Native/Ambitions/Trust/",
+          "source_inventory_ref": "Native/Ambitions/Trust/",
+          "status": "source_files_present"
+        }
+      ],
+      "references": [
+        "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Projections/",
+        "Native/Ambitions/Core/LocalRuntimeOS/Search/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/Trust/"
+      ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-SESSION-HISTORY-001",
       "source_owners": [
         "Native/Ambitions/Core/LocalRuntimeOS/Commands/",
         "Native/Ambitions/Core/LocalRuntimeOS/Projections/",

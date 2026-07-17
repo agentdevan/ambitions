@@ -1240,7 +1240,7 @@ Capture uses `surface-v1` because it presents a full-screen, user-operated compo
 - **Verification:** `SCENARIO-CAPTURE-IDENTITY-001`
 - **Supersedes:** none
 
-Capture MUST be a global full-screen composer that preserves intent, allows or infers type, previews material consequences, and routes accepted objects to canonical owners. It MUST NOT become a root, tab, half-sheet quick box, inbox, category wall, chatbot, notes feed, or permanent floating control.
+Capture MUST be a global full-screen composer that preserves intent, allows or infers type, previews material consequences, and routes accepted objects to canonical owners. A Search creation-intent handoff MUST preserve accepted source context and user-entered intent, and Capture alone MUST own composition, draft durability, type, consequences, confirmation, and canonical-owner routing. Capture MUST NOT become a root, tab, half-sheet quick box, inbox, category wall, chatbot, notes feed, or permanent floating control.
 
 Capture MUST be full-screen, durable, field-first, and multi-surface.
 

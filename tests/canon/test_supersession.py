@@ -161,18 +161,30 @@ class SupersessionLedgerTests(unittest.TestCase):
         ledger = load_supersession_ledger(path)
 
         self.assertEqual(ledger.schema_version, 1)
-        self.assertEqual(len(ledger.entries), 20)
+        self.assertEqual(len(ledger.entries), 21)
         self.assertEqual(
             tuple(item.conflict_id for item in ledger.entries),
             tuple(sorted(item.conflict_id for item in ledger.entries)),
         )
+        original = tuple(
+            item
+            for item in ledger.entries
+            if item.conflict_id != "CONFLICT-SEARCH-FIND-ASK-ACT-INSPECT"
+        )
+        self.assertEqual(len(original), 20)
         self.assertTrue(
             all(
                 item.decision_source
                 == "Owner approval on 2026-07-12: “Approve all 20 recommended resolutions and proposed canonical laws.”"
-                for item in ledger.entries
+                for item in original
             )
         )
+        search = next(
+            item
+            for item in ledger.entries
+            if item.conflict_id == "CONFLICT-SEARCH-FIND-ASK-ACT-INSPECT"
+        )
+        self.assertIn("stronger third law", search.decision_source)
         self.assertTrue(ledger.retired_ids)
 
     def test_registry_loads_closed_durable_ledger_ids(self):

@@ -8,15 +8,38 @@ from __future__ import annotations
 
 import json
 import hashlib
+import errno
+import fcntl
 import os
 import re
+import secrets
+import stat
 import subprocess
-import tempfile
+from contextlib import contextmanager
+from contextvars import ContextVar
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable, Mapping
+from typing import Iterable, Iterator, Mapping
+
+from tools.ambitions_canon.build import (
+    DIRECTORY_FLAGS,
+    READ_FLAGS,
+    WRITE_FLAGS,
+    _AuditedCanonSnapshot,
+    _open_directory_at,
+    _load_audited_canon_snapshot,
+    _open_directory_absolute_nofollow,
+    _read_file_at,
+    _read_file_at_with_identity,
+    _read_confined_bytes,
+    _tree_files_descriptor,
+    _fsync_directory,
+    _verify_audited_canon_snapshot,
+)
 
 from tools.ambitions_canon.model import (
+    CanonError,
+    CanonRegistry,
     StateCommand,
     StateCommandActivationPosture,
     StateCommandContract,
@@ -25,12 +48,11 @@ from tools.ambitions_canon.model import (
 from tools.ambitions_canon.command_resolution_registry import (
     CommandResolutionRegistry,
     compact_resolved_machine_contract,
-    load_command_resolution_registry,
+    _load_command_resolution_registry_bytes,
     resolve_state_command_machine_contract,
     validate_command_resolution_bindings,
 )
 from tools.ambitions_canon.parser import (
-    parse_canon_document,
     validate_state_command_contract_semantics,
 )
 
@@ -46,8 +68,6 @@ REPAIR_MATRIX_PATH = Path(
 STATE_INVENTORY_PATH = Path(
     "docs/canon/migration/ux-blueprint-state-inventory.json"
 )
-REQUIREMENT_GRAPH_PATH = Path("docs/canon/generated/requirement-graph.json")
-CANON_INDEX_PATH = Path("docs/canon/generated/canon-index.json")
 BLUEPRINT_ID = "AMB-UX-BLUEPRINT-REBASELINE-001"
 BLUEPRINT_TITLE = "Ambitions requirement-linked canonical UX blueprint"
 PRIMARY_LINEAR_V3_ID = "96b93346-271d-46fc-beab-43ff7e286b5d"
@@ -94,6 +114,128 @@ REQUIRED_STATE_KINDS = frozenset(
         "interruption",
     }
 )
+SEARCH_FIND_ASK_ACT_INSPECT_STATE_IDS = (
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-FAILED",
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-INTERRUPTED",
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RECOVERED",
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RESUMED",
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK",
+    "UX-STATE-VARIANT-SEARCH-RESULTS-CAPTURE-HANDOFF",
+    "UX-STATE-VARIANT-SEARCH-RESULTS-GROUNDED-ANSWER",
+    "UX-STATE-VARIANT-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS",
+)
+SEARCH_FIND_ASK_ACT_INSPECT_VISUAL_REQUIREMENT_IDS = frozenset(
+    {
+        "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT-001",
+        "LAW-SEARCH-PRIVATE-COMMAND-LAYER-001",
+        "SPEC-GLOBAL-SEARCH-ANSWER-EVIDENCE-001",
+        "SPEC-GLOBAL-SEARCH-ASK-001",
+        "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+        "SPEC-GLOBAL-SEARCH-CAPTURE-HANDOFF-001",
+        "SPEC-GLOBAL-SEARCH-FIND-001",
+        "SPEC-GLOBAL-SEARCH-INPUT-001",
+        "SPEC-GLOBAL-SEARCH-INSPECT-001",
+        "SPEC-GLOBAL-SEARCH-PRESENTATION-001",
+        "SPEC-GLOBAL-SEARCH-PRIVATE-COMMAND-LAYER-001",
+    }
+)
+SEARCH_FIND_ASK_ACT_INSPECT_STATE_REQUIREMENT_MATRIX = {
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-FAILED": frozenset(
+        {
+            "LAW-SEARCH-PRIVATE-COMMAND-LAYER-001",
+            "SPEC-GLOBAL-SEARCH-ASK-001",
+            "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+            "SPEC-GLOBAL-SEARCH-PRESENTATION-001",
+            "SPEC-GLOBAL-SEARCH-PRIVATE-COMMAND-LAYER-001",
+        }
+    ),
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-INTERRUPTED": frozenset(
+        {
+            "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT-001",
+            "SPEC-GLOBAL-SEARCH-ASK-001",
+            "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+            "SPEC-GLOBAL-SEARCH-INPUT-001",
+        }
+    ),
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RECOVERED": frozenset(
+        {
+            "SPEC-GLOBAL-SEARCH-ANSWER-EVIDENCE-001",
+            "SPEC-GLOBAL-SEARCH-ASK-001",
+            "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+            "SPEC-GLOBAL-SEARCH-INSPECT-001",
+            "SPEC-GLOBAL-SEARCH-PRESENTATION-001",
+        }
+    ),
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RESUMED": frozenset(
+        {
+            "SPEC-GLOBAL-SEARCH-ASK-001",
+            "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+            "SPEC-GLOBAL-SEARCH-INPUT-001",
+        }
+    ),
+    "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK": frozenset(
+        {
+            "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT-001",
+            "LAW-SEARCH-PRIVATE-COMMAND-LAYER-001",
+            "SPEC-GLOBAL-SEARCH-ASK-001",
+            "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+            "SPEC-GLOBAL-SEARCH-FIND-001",
+            "SPEC-GLOBAL-SEARCH-PRIVATE-COMMAND-LAYER-001",
+        }
+    ),
+    "UX-STATE-VARIANT-SEARCH-RESULTS-CAPTURE-HANDOFF": frozenset(
+        {
+            "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT-001",
+            "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+            "SPEC-GLOBAL-SEARCH-CAPTURE-HANDOFF-001",
+            "SPEC-GLOBAL-SEARCH-INPUT-001",
+        }
+    ),
+    "UX-STATE-VARIANT-SEARCH-RESULTS-GROUNDED-ANSWER": frozenset(
+        {
+            "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT-001",
+            "LAW-SEARCH-PRIVATE-COMMAND-LAYER-001",
+            "SPEC-GLOBAL-SEARCH-ANSWER-EVIDENCE-001",
+            "SPEC-GLOBAL-SEARCH-ASK-001",
+            "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+            "SPEC-GLOBAL-SEARCH-INPUT-001",
+            "SPEC-GLOBAL-SEARCH-INSPECT-001",
+            "SPEC-GLOBAL-SEARCH-PRESENTATION-001",
+            "SPEC-GLOBAL-SEARCH-PRIVATE-COMMAND-LAYER-001",
+        }
+    ),
+    "UX-STATE-VARIANT-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS": frozenset(
+        {
+            "SPEC-GLOBAL-SEARCH-ASK-001",
+            "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+            "SPEC-GLOBAL-SEARCH-FIND-001",
+            "SPEC-GLOBAL-SEARCH-INPUT-001",
+            "SPEC-GLOBAL-SEARCH-PRESENTATION-001",
+        }
+    ),
+}
+SEARCH_FIND_ASK_ACT_INSPECT_REQUIREMENT_STATE_SETS = {
+    requirement_id: frozenset(
+        state_id
+        for state_id, requirement_ids in (
+            SEARCH_FIND_ASK_ACT_INSPECT_STATE_REQUIREMENT_MATRIX.items()
+        )
+        if requirement_id in requirement_ids
+    )
+    for requirement_id in SEARCH_FIND_ASK_ACT_INSPECT_VISUAL_REQUIREMENT_IDS
+}
+SEARCH_SESSION_HISTORY_REQUIREMENT_ID = "SPEC-GLOBAL-SEARCH-SESSION-HISTORY-001"
+SEARCH_ASK_COMMAND_REQUIREMENT_ID = (
+    "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001"
+)
+SEARCH_ASK_ACTIVATION_GATE_REQUIREMENT_ID = (
+    "SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001"
+)
+SEARCH_ASK_COMMAND_OWNER = "global.search.ask-command-contract"
+SEARCH_ASK_COMMAND_IDS = {
+    state_id: state_id.replace("UX-STATE-VARIANT-", "CMD-") + "-001"
+    for state_id in SEARCH_FIND_ASK_ACT_INSPECT_STATE_IDS
+}
 REQUIRED_FACETS = frozenset(
     {
         "dynamic-type",
@@ -588,6 +730,35 @@ def _owner_state_classifications() -> dict[tuple[str, str], tuple[str, str, str]
             "sync-pending": ("loading", "availability", "in_progress"),
         },
     )
+    add(
+        "UX-SCREEN-SEARCH-RESULTS",
+        {
+            "ask-failed": ("failure", "operation", "failed"),
+            "ask-interrupted": (
+                "interruption",
+                "interruption",
+                "not_applicable",
+            ),
+            "ask-recovered": ("recovery", "recovery", "succeeded"),
+            "ask-resumed": ("recovery", "recovery", "in_progress"),
+            "ask-unavailable-offline-fallback": (
+                "degraded",
+                "availability",
+                "not_applicable",
+            ),
+            "capture-handoff": ("transitional", "operation", "idle"),
+            "grounded-answer": (
+                "resting",
+                "presentation",
+                "not_applicable",
+            ),
+            "synthesis-in-progress": (
+                "loading",
+                "operation",
+                "in_progress",
+            ),
+        },
+    )
     return rows
 
 
@@ -836,6 +1007,47 @@ class UXBlueprintError(ValueError):
 
 
 @dataclass(frozen=True, slots=True)
+class _CapturedInput:
+    path: Path
+    content: bytes
+    identity: tuple[int, int, int, int, int]
+
+
+@dataclass(frozen=True, slots=True)
+class _UXOperationCommitAttestation:
+    """Exact immutable input identity bound at the writer's commit point."""
+
+    canon_content_sha: str
+    inputs: tuple[_CapturedInput, ...]
+    input_identity_sha256: str
+
+
+@dataclass(slots=True)
+class _UXOperationCommitState:
+    attestation: _UXOperationCommitAttestation | None = None
+
+
+@dataclass(frozen=True, slots=True)
+class _UXOperationContext:
+    """Loader-owned immutable identity for every input consumed by an operation."""
+
+    root: Path
+    root_descriptor: int
+    canon: _AuditedCanonSnapshot
+    command_resolution_registry: CommandResolutionRegistry
+    command_gate_registry: object
+    inputs: tuple[_CapturedInput, ...]
+    excluded_paths: frozenset[Path]
+    include_visual_evidence: bool
+    commit_state: _UXOperationCommitState
+
+
+_ACTIVE_OPERATION: ContextVar[_UXOperationContext | None] = ContextVar(
+    "ambitions_ux_operation", default=None
+)
+
+
+@dataclass(frozen=True, slots=True)
 class UXBlueprintSummary:
     screen_count: int
     state_model_count: int
@@ -856,14 +1068,40 @@ class UXBlueprintSummary:
 
 
 def load_ux_blueprint(root: Path) -> dict[str, object]:
-    path = root / BLUEPRINT_PATH
+    context = _ACTIVE_OPERATION.get()
     try:
-        payload = json.loads(path.read_text(encoding="utf-8"))
+        source = (
+            _captured_input_bytes(context, BLUEPRINT_PATH)
+            if context is not None
+            else _read_confined_bytes(root, BLUEPRINT_PATH)
+        )
+        payload = json.loads(source)
     except (OSError, UnicodeError, json.JSONDecodeError) as error:
         raise UXBlueprintError(f"cannot load UX blueprint: {error}") from error
     if not isinstance(payload, dict):
         raise UXBlueprintError("UX blueprint root must be an object")
     return payload
+
+
+def _freeze_mapping(
+    value: Mapping[str, object], label: str
+) -> dict[str, object]:
+    """Detach caller-owned containers after the audited context is captured."""
+
+    try:
+        keys = tuple(value)
+        first_read = {key: value.get(key) for key in keys}
+        second_read = {key: value.get(key) for key in keys}
+        if first_read != second_read:
+            raise UXBlueprintError(f"{label} changed during capture")
+        frozen = json.loads(
+            json.dumps(second_read, ensure_ascii=False, sort_keys=True)
+        )
+    except (TypeError, ValueError, json.JSONDecodeError) as error:
+        raise UXBlueprintError(f"{label} is not a closed JSON object") from error
+    if not isinstance(frozen, dict):
+        raise UXBlueprintError(f"{label} must be an object")
+    return frozen
 
 
 def _object(value: object, label: str) -> dict[str, object]:
@@ -950,26 +1188,158 @@ def _walk_strings(value: object) -> Iterable[str]:
             yield from _walk_strings(child)
 
 
-def source_path_digest(path: Path) -> str:
-    """Hash a declared file or directory with stable relative-path framing."""
+def _source_path_digest_at(root_descriptor: int, relative_path: Path) -> str:
+    """Hash a file/tree below a pinned root without following any link."""
 
-    if path.is_file():
-        return hashlib.sha256(path.read_bytes()).hexdigest()
-    if not path.is_dir():
-        raise UXBlueprintError(f"source document does not exist: {path}")
+    try:
+        directory_descriptor = _open_directory_path_at(
+            root_descriptor, relative_path
+        )
+    except (CanonError, OSError):
+        directory_descriptor = None
+    if directory_descriptor is None:
+        try:
+            return hashlib.sha256(
+                _read_stable_source_file_at(root_descriptor, relative_path)
+            ).hexdigest()
+        except (CanonError, OSError) as error:
+            raise UXBlueprintError(
+                f"source document path is unsafe: {relative_path.as_posix()}"
+            ) from error
+    try:
+        paths = tuple(
+            path
+            for path in _tree_files_descriptor(directory_descriptor)
+            if "__pycache__" not in path.parts
+        )
+        if not paths:
+            raise UXBlueprintError(
+                f"source document directory is empty: {relative_path.as_posix()}"
+            )
+        digest = hashlib.sha256()
+        for child in paths:
+            framed_path = child.as_posix().encode("utf-8")
+            digest.update(len(framed_path).to_bytes(8, "big"))
+            digest.update(framed_path)
+            try:
+                content = _read_stable_source_file_at(
+                    directory_descriptor, child
+                )
+            except (CanonError, OSError) as error:
+                raise UXBlueprintError(
+                    f"source document path is unsafe: "
+                    f"{(relative_path / child).as_posix()}"
+                ) from error
+            digest.update(len(content).to_bytes(8, "big"))
+            digest.update(content)
+        return digest.hexdigest()
+    finally:
+        os.close(directory_descriptor)
+
+
+def _read_stable_source_file_at(
+    root_descriptor: int, relative_path: Path
+) -> bytes:
+    descriptors = [os.dup(root_descriptor)]
+    try:
+        current = descriptors[0]
+        for component in relative_path.parts[:-1]:
+            current = _open_directory_at(current, component)
+            descriptors.append(current)
+        expected = os.stat(
+            relative_path.parts[-1],
+            dir_fd=current,
+            follow_symlinks=False,
+        )
+        if not stat.S_ISREG(expected.st_mode):
+            raise UXBlueprintError(
+                f"source document path is unsafe: {relative_path.as_posix()}"
+            )
+        descriptor = os.open(
+            relative_path.parts[-1], READ_FLAGS, dir_fd=current
+        )
+        descriptors.append(descriptor)
+        before = os.fstat(descriptor)
+        if (
+            not stat.S_ISREG(before.st_mode)
+            or (before.st_dev, before.st_ino)
+            != (expected.st_dev, expected.st_ino)
+        ):
+            raise UXBlueprintError(
+                "source document identity changed before open: "
+                f"{relative_path.as_posix()}"
+            )
+        chunks: list[bytes] = []
+        while chunk := os.read(descriptor, 64 * 1024):
+            chunks.append(chunk)
+        after = os.fstat(descriptor)
+        live = os.stat(
+            relative_path.parts[-1],
+            dir_fd=current,
+            follow_symlinks=False,
+        )
+        before_identity = (
+            before.st_dev,
+            before.st_ino,
+            before.st_size,
+            before.st_mtime_ns,
+            before.st_ctime_ns,
+        )
+        after_identity = (
+            after.st_dev,
+            after.st_ino,
+            after.st_size,
+            after.st_mtime_ns,
+            after.st_ctime_ns,
+        )
+        live_identity = (
+            live.st_dev,
+            live.st_ino,
+            live.st_size,
+            live.st_mtime_ns,
+            live.st_ctime_ns,
+        )
+        if before_identity != after_identity or after_identity != live_identity:
+            raise UXBlueprintError(
+                "source document changed during validation: "
+                f"{relative_path.as_posix()}"
+            )
+        return b"".join(chunks)
+    except UXBlueprintError:
+        raise
+    except OSError as error:
+        raise UXBlueprintError(
+            f"source document path is unsafe: {relative_path.as_posix()}"
+        ) from error
+    finally:
+        for descriptor in reversed(descriptors):
+            os.close(descriptor)
+
+
+def _source_path_digest_from_context(
+    context: _UXOperationContext,
+    relative_path: Path,
+) -> str:
+    exact = tuple(item for item in context.inputs if item.path == relative_path)
+    if len(exact) == 1:
+        return hashlib.sha256(exact[0].content).hexdigest()
+    children: list[tuple[Path, bytes]] = []
+    for item in context.inputs:
+        try:
+            child = item.path.relative_to(relative_path)
+        except ValueError:
+            continue
+        if child.parts and "__pycache__" not in child.parts:
+            children.append((child, item.content))
+    if not children:
+        raise UXBlueprintError(
+            f"source document path is unsafe: {relative_path.as_posix()}"
+        )
     digest = hashlib.sha256()
-    files = sorted(
-        candidate
-        for candidate in path.rglob("*")
-        if candidate.is_file() and "__pycache__" not in candidate.parts
-    )
-    if not files:
-        raise UXBlueprintError(f"source document directory is empty: {path}")
-    for candidate in files:
-        relative = candidate.relative_to(path).as_posix().encode("utf-8")
-        digest.update(len(relative).to_bytes(8, "big"))
-        digest.update(relative)
-        content = candidate.read_bytes()
+    for child, content in sorted(children, key=lambda item: item[0].as_posix()):
+        framed_path = child.as_posix().encode("utf-8")
+        digest.update(len(framed_path).to_bytes(8, "big"))
+        digest.update(framed_path)
         digest.update(len(content).to_bytes(8, "big"))
         digest.update(content)
     return digest.hexdigest()
@@ -980,22 +1350,70 @@ def validate_source_documents(
 ) -> tuple[tuple[str, str], ...]:
     source_records = _records(records, "source documents")
     normalized: list[tuple[str, str]] = []
-    for record in source_records:
-        _closed(record, SOURCE_DOCUMENT_FIELDS, "source document fields")
-        relative = _string(record.get("path"), "source document path")
-        declared = _string(record.get("sha256"), "source document digest")
-        relative_path = Path(relative)
-        if relative_path.is_absolute() or ".." in relative_path.parts:
-            raise UXBlueprintError(f"source document path is unsafe: {relative}")
-        if not re.fullmatch(r"[0-9a-f]{64}", declared):
-            raise UXBlueprintError(f"source document digest is invalid: {relative}")
-        actual = source_path_digest(root / relative_path)
-        if actual != declared:
+    paths: list[Path] = []
+    context = _ACTIVE_OPERATION.get()
+    if context is not None:
+        for record in source_records:
+            _closed(record, SOURCE_DOCUMENT_FIELDS, "source document fields")
+            relative = _string(record.get("path"), "source document path")
+            declared = _string(record.get("sha256"), "source document digest")
+            relative_path = Path(relative)
+            if (
+                relative_path.is_absolute()
+                or ".." in relative_path.parts
+                or not relative_path.parts
+            ):
+                raise UXBlueprintError(f"source document path is unsafe: {relative}")
+            if not re.fullmatch(r"[0-9a-f]{64}", declared):
+                raise UXBlueprintError(
+                    f"source document digest is invalid: {relative}"
+                )
+            actual = _source_path_digest_from_context(context, relative_path)
+            if actual != declared:
+                raise UXBlueprintError(
+                    f"source content digest is stale for {relative}: "
+                    f"declared={declared} actual={actual}"
+                )
+            normalized.append((relative, declared))
+        if normalized != sorted(set(normalized)):
             raise UXBlueprintError(
-                f"source content digest is stale for {relative}: "
-                f"declared={declared} actual={actual}"
+                "source documents must be sorted and unique by path"
             )
-        normalized.append((relative, declared))
+        return tuple(normalized)
+    absolute_root = Path(os.path.abspath(root))
+    with _open_directory_absolute_nofollow(absolute_root) as root_descriptor:
+        first_digests: list[str] = []
+        for record in source_records:
+            _closed(record, SOURCE_DOCUMENT_FIELDS, "source document fields")
+            relative = _string(record.get("path"), "source document path")
+            declared = _string(record.get("sha256"), "source document digest")
+            relative_path = Path(relative)
+            if (
+                relative_path.is_absolute()
+                or ".." in relative_path.parts
+                or not relative_path.parts
+            ):
+                raise UXBlueprintError(f"source document path is unsafe: {relative}")
+            if not re.fullmatch(r"[0-9a-f]{64}", declared):
+                raise UXBlueprintError(
+                    f"source document digest is invalid: {relative}"
+                )
+            actual = _source_path_digest_at(root_descriptor, relative_path)
+            if actual != declared:
+                raise UXBlueprintError(
+                    f"source content digest is stale for {relative}: "
+                    f"declared={declared} actual={actual}"
+                )
+            paths.append(relative_path)
+            first_digests.append(actual)
+            normalized.append((relative, declared))
+        second_digests = [
+            _source_path_digest_at(root_descriptor, path) for path in paths
+        ]
+        if second_digests != first_digests:
+            raise UXBlueprintError(
+                "source document changed during validation"
+            )
     if normalized != sorted(set(normalized)):
         raise UXBlueprintError("source documents must be sorted and unique by path")
     return tuple(normalized)
@@ -1029,31 +1447,271 @@ def _record_posture(record: Mapping[str, object], label: str) -> None:
         raise UXBlueprintError(f"{label} record proof ceiling exceeds design-input scope")
 
 
-def _requirement_ids(root: Path) -> tuple[frozenset[str], str, int, str]:
-    graph_path = root / REQUIREMENT_GRAPH_PATH
+def _open_directory_path_at(root_descriptor: int, relative: Path) -> int:
+    current = os.dup(root_descriptor)
     try:
-        graph = json.loads(graph_path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, json.JSONDecodeError) as error:
-        raise UXBlueprintError(f"cannot load requirement graph: {error}") from error
-    graph = _object(graph, "requirement graph")
-    ids = _strings(graph.get("requirement_ids"), "requirement graph IDs", sorted_unique=True)
+        for component in relative.parts:
+            next_descriptor = _open_directory_at(current, component)
+            os.close(current)
+            current = next_descriptor
+        return current
+    except BaseException:
+        os.close(current)
+        raise
+
+
+def _operation_paths(
+    root_descriptor: int,
+    *,
+    include_visual_evidence: bool,
+) -> tuple[Path, ...]:
+    """Enumerate the closed input trees beneath one pinned repository root."""
+
+    roots = [Path("docs/canon")]
+    if include_visual_evidence:
+        roots.append(Path("docs/qa/evidence"))
+    paths: list[Path] = []
+    for relative_root in roots:
+        try:
+            descriptor = _open_directory_path_at(root_descriptor, relative_root)
+        except (FileNotFoundError, CanonError, OSError):
+            continue
+        try:
+            paths.extend(
+                relative_root / child
+                for child in _tree_files_descriptor(descriptor)
+            )
+        finally:
+            os.close(descriptor)
+    try:
+        _read_file_at(root_descriptor, REPAIR_MATRIX_PATH)
+    except (CanonError, OSError):
+        pass
+    else:
+        paths.append(REPAIR_MATRIX_PATH)
+    try:
+        blueprint_source = _read_file_at(root_descriptor, BLUEPRINT_PATH)
+        blueprint = json.loads(blueprint_source)
+        declared_sources = blueprint.get("source_documents", [])
+    except (CanonError, OSError, UnicodeError, json.JSONDecodeError, AttributeError):
+        declared_sources = []
+    for record in declared_sources:
+        if not isinstance(record, dict) or not isinstance(record.get("path"), str):
+            continue
+        relative = Path(record["path"])
+        if relative.is_absolute() or not relative.parts or ".." in relative.parts:
+            continue
+        try:
+            descriptor = _open_directory_path_at(root_descriptor, relative)
+        except (CanonError, OSError):
+            paths.append(relative)
+            continue
+        try:
+            paths.extend(relative / child for child in _tree_files_descriptor(descriptor))
+        finally:
+            os.close(descriptor)
+    return tuple(sorted(set(paths), key=Path.as_posix))
+
+
+def _capture_operation_inputs(
+    root_descriptor: int,
+    *,
+    include_visual_evidence: bool,
+    excluded_paths: frozenset[Path],
+) -> tuple[_CapturedInput, ...]:
+    result: list[_CapturedInput] = []
+    for relative in _operation_paths(
+        root_descriptor,
+        include_visual_evidence=include_visual_evidence,
+    ):
+        if relative in excluded_paths:
+            continue
+        if relative.name.startswith(".") and relative.name.endswith(
+            (
+                ".tmp",
+                ".backup",
+                ".recovery",
+                ".prepared-cleanup.json",
+                ".committed-cleanup.json",
+            )
+        ):
+            continue
+        try:
+            content, identity = _read_file_at_with_identity(
+                root_descriptor, relative
+            )
+        except (CanonError, OSError) as error:
+            raise UXBlueprintError(
+                f"audited operation input is unsafe: {relative.as_posix()}"
+            ) from error
+        result.append(
+            _CapturedInput(path=relative, content=content, identity=identity)
+        )
+    return tuple(result)
+
+
+def _captured_input_bytes(
+    context: _UXOperationContext,
+    relative: Path,
+) -> bytes:
+    matches = tuple(item for item in context.inputs if item.path == relative)
+    if len(matches) != 1:
+        raise UXBlueprintError(
+            f"audited operation input was not captured: {relative.as_posix()}"
+        )
+    return matches[0].content
+
+
+def _operation_input_identity_sha256(
+    inputs: tuple[_CapturedInput, ...],
+) -> str:
+    digest = hashlib.sha256()
+    for item in inputs:
+        path = item.path.as_posix().encode("utf-8")
+        digest.update(len(path).to_bytes(8, "big"))
+        digest.update(path)
+        digest.update(len(item.content).to_bytes(8, "big"))
+        digest.update(item.content)
+        for value in item.identity:
+            digest.update(value.to_bytes(16, "big", signed=False))
+    return digest.hexdigest()
+
+
+def _verify_operation_context(
+    context: _UXOperationContext,
+    *,
+    projection_locked: bool = False,
+) -> None:
+    try:
+        _verify_audited_canon_snapshot(context.root, context.canon)
+        if projection_locked:
+            current = _capture_operation_inputs(
+                context.root_descriptor,
+                include_visual_evidence=context.include_visual_evidence,
+                excluded_paths=context.excluded_paths,
+            )
+        else:
+            with _projection_lock(
+                context.root_descriptor, exclusive=False
+            ):
+                current = _capture_operation_inputs(
+                    context.root_descriptor,
+                    include_visual_evidence=context.include_visual_evidence,
+                    excluded_paths=context.excluded_paths,
+                )
+    except (CanonError, OSError, UXBlueprintError) as error:
+        raise UXBlueprintError(
+            "canonical source changed during UX blueprint operation; "
+            "audited operation input changed during validation"
+        ) from error
+    if current != context.inputs:
+        raise UXBlueprintError(
+            "canonical source changed during UX blueprint operation; "
+            "audited operation input changed during validation"
+        )
+
+
+@contextmanager
+def _ux_operation(
+    root: Path,
+    *,
+    include_visual_evidence: bool = False,
+    excluded_paths: frozenset[Path] = frozenset(),
+) -> Iterator[_UXOperationContext]:
+    """Capture and end-verify one private, pinned, audited operation context."""
+
+    active = _ACTIVE_OPERATION.get()
+    absolute_root = Path(os.path.abspath(root))
+    if active is not None:
+        if active.root != absolute_root:
+            raise UXBlueprintError("nested UX operation changed repository root")
+        yield active
+        return
+    with _open_directory_absolute_nofollow(absolute_root) as root_descriptor:
+        canon = _load_audited_canon_snapshot(absolute_root)
+        with _projection_lock(root_descriptor, exclusive=False):
+            inputs = _capture_operation_inputs(
+                root_descriptor,
+                include_visual_evidence=include_visual_evidence,
+                excluded_paths=excluded_paths,
+            )
+        resolution_registry = _load_command_resolution_registry_bytes(
+            absolute_root,
+            next(
+                item.content
+                for item in inputs
+                if item.path
+                == Path("docs/canon/registries/command-resolution-registry.json")
+            ),
+            captured_sources={item.path: item.content for item in inputs},
+        )
+        from tools.ambitions_canon.command_gate_dependencies import (
+            _COMMAND_GATE_INPUT_PATHS,
+            _load_command_gate_dependency_registry_for_audited_canon,
+        )
+
+        command_gate_registry = (
+            _load_command_gate_dependency_registry_for_audited_canon(
+                absolute_root,
+                canon,
+                expected_canon_revision=canon.registry.manifest.canon_revision,
+                captured_inputs=tuple(
+                    (item.path, item.content)
+                    for item in inputs
+                    if item.path in _COMMAND_GATE_INPUT_PATHS
+                ),
+            )
+        )
+        context = _UXOperationContext(
+            root=absolute_root,
+            root_descriptor=root_descriptor,
+            canon=canon,
+            command_resolution_registry=resolution_registry,
+            command_gate_registry=command_gate_registry,
+            inputs=inputs,
+            excluded_paths=excluded_paths,
+            include_visual_evidence=include_visual_evidence,
+            commit_state=_UXOperationCommitState(),
+        )
+        _verify_operation_context(context)
+        token = _ACTIVE_OPERATION.set(context)
+        try:
+            try:
+                yield context
+            except BaseException as operation_error:
+                if context.commit_state.attestation is None:
+                    try:
+                        _verify_operation_context(context)
+                    except UXBlueprintError as freshness_error:
+                        raise freshness_error from operation_error
+                raise
+            else:
+                if context.commit_state.attestation is None:
+                    _verify_operation_context(context)
+                elif (
+                    context.commit_state.attestation.canon_content_sha
+                    != context.canon.content_sha
+                    or context.commit_state.attestation.inputs != context.inputs
+                    or context.commit_state.attestation.input_identity_sha256
+                    != _operation_input_identity_sha256(context.inputs)
+                ):
+                    raise UXBlueprintError(
+                        "committed UX operation attestation is internally stale"
+                    )
+        finally:
+            _ACTIVE_OPERATION.reset(token)
+
+
+def _requirement_ids(
+    source_snapshot: _AuditedCanonSnapshot,
+) -> tuple[frozenset[str], str, int, str]:
+    registry = source_snapshot.registry
     return (
-        frozenset(ids),
-        _string(graph.get("canon_content_sha"), "canon content SHA"),
-        int(graph.get("canon_revision", 0)),
-        _string(graph.get("authority_state"), "canon authority state"),
+        frozenset(item.requirement_id for item in registry.requirements),
+        source_snapshot.content_sha,
+        registry.manifest.canon_revision,
+        registry.manifest.authority_state.value,
     )
-
-
-def _requirement_records(root: Path) -> tuple[dict[str, object], ...]:
-    path = root / CANON_INDEX_PATH
-    try:
-        payload = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, json.JSONDecodeError) as error:
-        raise UXBlueprintError(f"cannot load canon index: {error}") from error
-    payload = _object(payload, "canon index")
-    records = _records(payload.get("requirements"), "canon index requirements")
-    return tuple(records)
 
 
 def _consequence_anchor(body: str) -> str:
@@ -1162,47 +1820,49 @@ def visible_copy_semantic_bag_signature(
     return " ".join(sorted(tokens))
 
 
-def load_requirement_source_records(root: Path) -> tuple[dict[str, str], ...]:
+def load_requirement_source_records(
+    root: Path,
+) -> tuple[dict[str, str], ...]:
     """Load exact normative requirement text from the human-editable canon."""
 
-    index = _requirement_records(root)
-    paths = sorted({_string(item.get("source_path"), "source path") for item in index})
-    parsed = {}
-    for relative in paths:
-        path = root / relative
-        document = parse_canon_document(path, path.read_text(encoding="utf-8"))
-        for requirement in document.requirements:
-            parsed[requirement.requirement_id] = requirement
-    records = []
-    for item in index:
-        requirement_id = _string(item.get("requirement_id"), "requirement ID")
-        requirement = parsed.get(requirement_id)
-        if requirement is None:
-            raise UXBlueprintError(
-                f"requirement source text is missing: {requirement_id}"
-            )
-        records.append(
-            {
-                "requirement_id": requirement_id,
-                "source_path": requirement.source_path.relative_to(root).as_posix(),
-                "normative_text": requirement.body,
-                "consequence_anchor": _consequence_anchor(requirement.body),
-            }
-        )
-    return tuple(records)
+    with _ux_operation(root) as context:
+        return _load_requirement_source_records(root, context.canon)
 
 
-def load_state_command_contracts(root: Path) -> tuple[StateCommandContract, ...]:
+def _load_requirement_source_records(
+    root: Path,
+    snapshot: _AuditedCanonSnapshot,
+) -> tuple[dict[str, str], ...]:
+    result = tuple(
+        {
+            "requirement_id": requirement.requirement_id,
+            "source_path": requirement.source_path.as_posix(),
+            "normative_text": requirement.body,
+            "consequence_anchor": _consequence_anchor(requirement.body),
+        }
+        for requirement in snapshot.registry.requirements
+    )
+    return result
+
+
+def load_state_command_contracts(
+    root: Path,
+) -> tuple[StateCommandContract, ...]:
     """Load independently authored state-command ownership from normative canon."""
 
-    index = _requirement_records(root)
-    paths = sorted({_string(item.get("source_path"), "source path") for item in index})
+    with _ux_operation(root) as context:
+        return _load_state_command_contracts(root, context.canon)
+
+
+def _load_state_command_contracts(
+    root: Path,
+    snapshot: _AuditedCanonSnapshot,
+) -> tuple[StateCommandContract, ...]:
+    canon = snapshot.registry
     contracts: list[StateCommandContract] = []
     state_ids: set[str] = set()
     command_ids: set[str] = set()
-    for relative in paths:
-        path = root / relative
-        document = parse_canon_document(path, path.read_text(encoding="utf-8"))
+    for document in canon.documents:
         for contract in document.state_command_contracts:
             if contract.state_id in state_ids:
                 raise UXBlueprintError(
@@ -1217,48 +1877,92 @@ def load_state_command_contracts(root: Path) -> tuple[StateCommandContract, ...]
                 command_ids.add(command.command_id)
             contracts.append(contract)
     ordered = tuple(sorted(contracts, key=lambda item: item.state_id))
+    _validate_search_ask_command_contracts(ordered)
     if any(
         command.gate_dependency_ids
         for contract in ordered
         for command in contract.commands
     ):
         from tools.ambitions_canon.command_gate_dependencies import (
-            load_command_gate_dependency_registry,
-            validate_command_gate_dependency_bindings,
+            _validate_command_gate_dependency_bindings_for_audited_canon,
         )
-        from tools.ambitions_canon.manifest import load_manifest
-
-        manifest = load_manifest(root)
-        dependency_registry = load_command_gate_dependency_registry(
-            root,
-            expected_canon_revision=manifest.canon_revision,
-        )
-        validate_command_gate_dependency_bindings(
-            dependency_registry,
+        context = _ACTIVE_OPERATION.get()
+        if context is None or context.canon is not snapshot:
+            raise UXBlueprintError("state command load lacks audited operation context")
+        _validate_command_gate_dependency_bindings_for_audited_canon(
+            context.command_gate_registry,
             ordered,
-            canon_revision=manifest.canon_revision,
+            snapshot,
+            canon_revision=canon.manifest.canon_revision,
         )
-    from tools.ambitions_canon.manifest import load_documents, load_manifest
-    from tools.ambitions_canon.registry import build_registry
-
-    manifest = load_manifest(root)
-    canon = build_registry(manifest, load_documents(root, manifest))
-    resolution_registry = load_command_resolution_registry(root)
-    validate_command_resolution_bindings(resolution_registry, canon)
+    context = _ACTIVE_OPERATION.get()
+    if context is None or context.canon is not snapshot:
+        raise UXBlueprintError("command resolution lacks audited operation context")
+    validate_command_resolution_bindings(
+        context.command_resolution_registry, canon
+    )
     return ordered
 
 
-def _state_command_source_paths(root: Path) -> dict[str, Path]:
+def _validate_search_ask_command_contracts(
+    contracts: tuple[StateCommandContract, ...],
+) -> None:
+    """Keep the eight shadow Search controls exact and non-authorizing."""
+
+    expected_state_ids = frozenset(SEARCH_FIND_ASK_ACT_INSPECT_STATE_IDS)
+    ask_contracts = tuple(
+        contract
+        for contract in contracts
+        if contract.state_id in expected_state_ids
+        or contract.requirement_id == SEARCH_ASK_COMMAND_REQUIREMENT_ID
+    )
+    if (
+        frozenset(contract.state_id for contract in ask_contracts)
+        != expected_state_ids
+        or len(ask_contracts) != len(expected_state_ids)
+    ):
+        raise UXBlueprintError(
+            "Search Ask command contract is stale or authorizing: state inventory"
+        )
+
+    exact_gate = (SEARCH_ASK_ACTIVATION_GATE_REQUIREMENT_ID,)
+    for contract in ask_contracts:
+        expected_command_id = SEARCH_ASK_COMMAND_IDS[contract.state_id]
+        if (
+            contract.requirement_id != SEARCH_ASK_COMMAND_REQUIREMENT_ID
+            or contract.activation_posture
+            is not StateCommandActivationPosture.FUTURE_GATED
+            or contract.gate_requirement_ids != exact_gate
+            or len(contract.commands) != 1
+        ):
+            raise UXBlueprintError(
+                "Search Ask command contract is stale or authorizing: "
+                f"{contract.state_id}"
+            )
+        command = contract.commands[0]
+        if (
+            command.command_id != expected_command_id
+            or command.canonical_owner != SEARCH_ASK_COMMAND_OWNER
+            or command.recovery_owner != SEARCH_ASK_COMMAND_OWNER
+            or command.activation_posture
+            is not StateCommandActivationPosture.FUTURE_GATED
+            or command.gate_requirement_ids != exact_gate
+        ):
+            raise UXBlueprintError(
+                "Search Ask command contract is stale or authorizing: "
+                f"{contract.state_id} {command.command_id}"
+            )
+
+
+def _state_command_source_paths(
+    source_snapshot: _AuditedCanonSnapshot,
+) -> dict[str, Path]:
     """Map every closed state identity to its repository-relative source path."""
 
-    index = _requirement_records(root)
-    paths = sorted({_string(item.get("source_path"), "source path") for item in index})
     result: dict[str, Path] = {}
-    for relative in paths:
-        path = root / relative
-        document = parse_canon_document(path, path.read_text(encoding="utf-8"))
+    for document in source_snapshot.registry.documents:
         for contract in document.state_command_contracts:
-            result[contract.state_id] = Path(relative)
+            result[contract.state_id] = document.source_path
     return result
 
 
@@ -1345,11 +2049,21 @@ def active_state_transition_exit(contract: StateCommandContract) -> str:
 def load_state_inventory(root: Path) -> dict[str, object]:
     """Load the explicit matrix-bound state inventory used by validation."""
 
-    matrix_bytes = (root / REPAIR_MATRIX_PATH).read_bytes()
+    context = _ACTIVE_OPERATION.get()
+    matrix_bytes = (
+        _captured_input_bytes(context, REPAIR_MATRIX_PATH)
+        if context is not None
+        else _read_confined_bytes(root, REPAIR_MATRIX_PATH)
+    )
     if hashlib.sha256(matrix_bytes).hexdigest() != REPAIR_MATRIX_SHA256:
         raise UXBlueprintError("visual repair matrix bytes are stale")
     try:
-        payload = json.loads((root / STATE_INVENTORY_PATH).read_text(encoding="utf-8"))
+        inventory_bytes = (
+            _captured_input_bytes(context, STATE_INVENTORY_PATH)
+            if context is not None
+            else _read_confined_bytes(root, STATE_INVENTORY_PATH)
+        )
+        payload = json.loads(inventory_bytes)
     except (OSError, UnicodeError, json.JSONDecodeError) as error:
         raise UXBlueprintError(f"cannot load explicit state inventory: {error}") from error
     inventory = _object(payload, "explicit state inventory")
@@ -1375,9 +2089,22 @@ def build_requirement_dispositions(
 ) -> tuple[dict[str, object], ...]:
     """Validate the checked-in per-requirement semantic disposition ledger."""
 
+    with _ux_operation(root) as context:
+        frozen = _freeze_mapping(blueprint, "UX blueprint")
+        return _build_requirement_dispositions(
+            root, frozen, known_blueprint_ids, context.canon
+        )
+
+
+def _build_requirement_dispositions(
+    root: Path,
+    blueprint: Mapping[str, object],
+    known_blueprint_ids: frozenset[str],
+    snapshot: _AuditedCanonSnapshot,
+) -> tuple[dict[str, object], ...]:
     requirements = {
         item["requirement_id"]: item
-        for item in load_requirement_source_records(root)
+        for item in _load_requirement_source_records(root, snapshot)
     }
     records = _records(
         blueprint.get("requirement_dispositions"), "requirement dispositions"
@@ -1574,7 +2301,163 @@ def build_requirement_dispositions(
                     f"state disposition edge has no record declaration: "
                     f"{requirement_id} -> {blueprint_id}"
                 )
-    return tuple(dispositions)
+    result = tuple(dispositions)
+    return result
+
+
+def _validate_unlinked_gate_requirement_ids(
+    blueprint: Mapping[str, object],
+    unlinked_gate_ids: frozenset[str],
+    known_requirement_ids: frozenset[str],
+    state_id: str,
+) -> None:
+    """Allow only known, explicitly nonvisual gates to remain unlinked visually."""
+
+    dispositions = {
+        _string(item.get("requirement_id"), "requirement disposition ID"): item
+        for item in _records(
+            blueprint.get("requirement_dispositions"), "requirement dispositions"
+        )
+    }
+    allowed = {
+        requirement_id
+        for requirement_id in unlinked_gate_ids
+        if requirement_id in known_requirement_ids
+        and requirement_id in dispositions
+        and dispositions[requirement_id].get("disposition")
+        == "nonvisual_with_rationale"
+        and dispositions[requirement_id].get("blueprint_ids") == []
+        and dispositions[requirement_id].get("state_blueprint_ids") == []
+    }
+    if allowed != set(unlinked_gate_ids):
+        raise UXBlueprintError(
+            f"state command contract requirements are not linked: {state_id}"
+        )
+
+
+def _validate_search_find_ask_act_inspect_mapping(
+    blueprint: Mapping[str, object],
+) -> None:
+    """Keep the owner-approved Search amendment in deterministic UX input law."""
+
+    models = _records(blueprint.get("state_models"), "state models")
+    search_models = tuple(
+        item
+        for item in models
+        if item.get("blueprint_id") == "UX-STATE-MODEL-SEARCH-RESULTS"
+    )
+    if len(search_models) != 1:
+        raise UXBlueprintError(
+            "Search Find / Ask / Act / Inspect state model is stale"
+        )
+    variants = _records(
+        search_models[0].get("variants"), "Search Results state variants"
+    )
+    variants_by_id = {
+        _string(item.get("blueprint_id"), "Search Results state variant ID"): item
+        for item in variants
+    }
+    expected_state_ids = frozenset(SEARCH_FIND_ASK_ACT_INSPECT_STATE_IDS)
+    if not expected_state_ids <= variants_by_id.keys():
+        raise UXBlueprintError(
+            "Search Find / Ask / Act / Inspect state inventory is stale"
+        )
+
+    for state_id in SEARCH_FIND_ASK_ACT_INSPECT_STATE_IDS:
+        state = variants_by_id[state_id]
+        requirement_ids = frozenset(
+            _linked_ids(
+                state.get("requirement_ids"),
+                "Search Find / Ask / Act / Inspect state requirement IDs",
+            )
+        )
+        if requirement_ids.intersection(
+            SEARCH_FIND_ASK_ACT_INSPECT_VISUAL_REQUIREMENT_IDS
+        ) != SEARCH_FIND_ASK_ACT_INSPECT_STATE_REQUIREMENT_MATRIX[state_id]:
+            raise UXBlueprintError(
+                "Search Find / Ask / Act / Inspect state requirement matrix is stale; "
+                "Search Find / Ask / Act / Inspect visual requirement mapping is stale"
+            )
+        behavior_ids = frozenset(
+            _linked_ids(
+                state.get("behavior_requirement_ids"),
+                "Search Find / Ask / Act / Inspect behavior requirement IDs",
+            )
+        )
+        if (
+            state.get("behavior_authority_posture") != "requirement_backed"
+            or state.get("specification_gap_ids") != []
+            or SEARCH_ASK_COMMAND_REQUIREMENT_ID not in requirement_ids
+            or SEARCH_ASK_COMMAND_REQUIREMENT_ID not in behavior_ids
+        ):
+            raise UXBlueprintError(
+                "Search Find / Ask / Act / Inspect state authority is stale"
+            )
+    all_records = tuple(
+        item
+        for key in (
+            "screens",
+            "state_models",
+            "object_boundaries",
+            "journeys",
+            "cross_cutting",
+            "sensitive_exposure_channels",
+        )
+        for item in _records(blueprint.get(key), key)
+    )
+    all_variants = tuple(
+        variant
+        for model in models
+        for variant in _records(model.get("variants"), "state variants")
+    )
+    if any(
+        SEARCH_SESSION_HISTORY_REQUIREMENT_ID
+        in item.get("requirement_ids", [])
+        for item in (*all_records, *all_variants)
+    ):
+        raise UXBlueprintError(
+            "Search session-history requirement must remain nonvisual"
+        )
+
+    dispositions = {
+        _string(item.get("requirement_id"), "requirement disposition ID"): item
+        for item in _records(
+            blueprint.get("requirement_dispositions"), "requirement dispositions"
+        )
+    }
+    for requirement_id in SEARCH_FIND_ASK_ACT_INSPECT_VISUAL_REQUIREMENT_IDS:
+        item = dispositions.get(requirement_id)
+        if (
+            item is None
+            or item.get("disposition") != "visual_mapping_required"
+            or frozenset(item.get("state_blueprint_ids", []))
+            != SEARCH_FIND_ASK_ACT_INSPECT_REQUIREMENT_STATE_SETS[requirement_id]
+        ):
+            raise UXBlueprintError(
+                "Search Find / Ask / Act / Inspect disposition state set is stale"
+            )
+    session = dispositions.get(SEARCH_SESSION_HISTORY_REQUIREMENT_ID)
+    if (
+        session is None
+        or session.get("disposition") != "nonvisual_with_rationale"
+        or session.get("blueprint_ids") != []
+        or session.get("state_blueprint_ids") != []
+    ):
+        raise UXBlueprintError(
+            "Search session-history disposition must remain nonvisual"
+        )
+    activation_gate = dispositions.get(
+        SEARCH_ASK_ACTIVATION_GATE_REQUIREMENT_ID
+    )
+    if (
+        activation_gate is None
+        or activation_gate.get("disposition") != "nonvisual_with_rationale"
+        or activation_gate.get("blueprint_ids") != []
+        or activation_gate.get("state_blueprint_ids") != []
+    ):
+        raise UXBlueprintError(
+            "Search Ask activation gate disposition must remain nonvisual"
+        )
 
 
 def _disposition_bytes(dispositions: tuple[dict[str, object], ...]) -> bytes:
@@ -1585,7 +2468,18 @@ def _disposition_bytes(dispositions: tuple[dict[str, object], ...]) -> bytes:
 
 
 def render_requirement_dispositions(
-    root: Path, blueprint: Mapping[str, object]
+    root: Path,
+    blueprint: Mapping[str, object],
+) -> bytes:
+    with _ux_operation(root) as context:
+        frozen = _freeze_mapping(blueprint, "UX blueprint")
+        return _render_requirement_dispositions(root, frozen, context.canon)
+
+
+def _render_requirement_dispositions(
+    root: Path,
+    blueprint: Mapping[str, object],
+    snapshot: _AuditedCanonSnapshot,
 ) -> bytes:
     record_groups = (
         blueprint["screens"],
@@ -1596,7 +2490,12 @@ def render_requirement_dispositions(
         blueprint["sensitive_exposure_channels"],
     )
     all_ids = frozenset(item["blueprint_id"] for group in record_groups for item in group)
-    dispositions = build_requirement_dispositions(root, blueprint, all_ids)
+    dispositions = _build_requirement_dispositions(
+        root,
+        blueprint,
+        all_ids,
+        snapshot,
+    )
     disposition_bytes = _disposition_bytes(dispositions)
     visual_count = sum(
         item["disposition"] == "visual_mapping_required" for item in dispositions
@@ -1615,12 +2514,26 @@ def render_requirement_dispositions(
         "dispositions": list(dispositions),
         "claim_ceiling": blueprint["claim_ceiling"],
     }
-    return (json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode(
+    result = (json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode(
         "utf-8"
     )
+    return result
 
 
-def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlueprintSummary:
+def validate_ux_blueprint(
+    root: Path,
+    blueprint: Mapping[str, object],
+) -> UXBlueprintSummary:
+    with _ux_operation(root) as context:
+        frozen = _freeze_mapping(blueprint, "UX blueprint")
+        return _validate_ux_blueprint(root, frozen, context.canon)
+
+
+def _validate_ux_blueprint(
+    root: Path,
+    blueprint: Mapping[str, object],
+    snapshot: _AuditedCanonSnapshot,
+) -> UXBlueprintSummary:
     _closed(blueprint, TOP_LEVEL_FIELDS, "top-level fields")
     if blueprint.get("schema_version") != 1:
         raise UXBlueprintError("schema_version must be 1")
@@ -1644,7 +2557,9 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
         tuple(path for path, _digest in source_documents),
     )
 
-    known_requirements, canon_sha, canon_revision, authority_state = _requirement_ids(root)
+    known_requirements, canon_sha, canon_revision, authority_state = _requirement_ids(
+        snapshot
+    )
     if blueprint.get("canon_content_sha") != canon_sha:
         raise UXBlueprintError("canon content SHA is stale")
     if blueprint.get("canon_revision") != canon_revision:
@@ -1724,10 +2639,13 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
     specification_gaps = _possibly_empty_records(
         blueprint.get("specification_gaps"), "specification gaps"
     )
-    state_contracts = load_state_command_contracts(root)
+    context = _ACTIVE_OPERATION.get()
+    if context is None or context.canon is not snapshot:
+        raise UXBlueprintError("blueprint validation lacks audited operation context")
+    state_contracts = _load_state_command_contracts(root, snapshot)
     state_contracts_by_id = {item.state_id: item for item in state_contracts}
-    state_source_paths = _state_command_source_paths(root)
-    resolution_registry = load_command_resolution_registry(root)
+    state_source_paths = _state_command_source_paths(snapshot)
+    resolution_registry = context.command_resolution_registry
     for contract in state_contracts:
         validate_state_command_contract_semantics(
             root / "docs/canon/manifest.toml",
@@ -1747,7 +2665,7 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
                     "state command references unknown gate requirement: "
                     f"{command.command_id}"
                 )
-    matrix = json.loads((root / REPAIR_MATRIX_PATH).read_text(encoding="utf-8"))
+    matrix = json.loads(_captured_input_bytes(context, REPAIR_MATRIX_PATH))
     matrix_gap_families = {
         _string(item.get("gap_id"), "matrix gap ID"): frozenset(
             _strings(item.get("screen_families"), "matrix screen families")
@@ -1888,7 +2806,7 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
         raise UXBlueprintError("explicit setup content inventory is incomplete or invented")
     requirement_source_text = {
         record["requirement_id"]: record["normative_text"]
-        for record in load_requirement_source_records(root)
+        for record in _load_requirement_source_records(root, snapshot)
     }
     observed_gap_states: dict[str, list[str]] = {gap_id: [] for gap_id in gap_ids}
     for state_model in states:
@@ -2215,12 +3133,17 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
                     raise UXBlueprintError(
                         f"unsupported behavior authority: {variant_id}"
                     )
-                if contract.requirement_id not in linked or not set(
-                    contract.gate_requirement_ids
-                ) <= linked:
+                unlinked_gate_ids = set(contract.gate_requirement_ids) - linked
+                if contract.requirement_id not in linked:
                     raise UXBlueprintError(
                         f"state command contract requirements are not linked: {variant_id}"
                     )
+                _validate_unlinked_gate_requirement_ids(
+                    blueprint,
+                    frozenset(unlinked_gate_ids),
+                    known_requirements,
+                    variant_id,
+                )
                 expected_labels = tuple(
                     command.label
                     for command in declared_current_state_commands(contract)
@@ -2599,14 +3522,20 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
     if len(screens) != 47 or len(states) != 47 or len(objects) != 18 or len(journeys) != 12 or len(cross) != 11:
         raise UXBlueprintError("blueprint inventory counts are stale")
 
-    dispositions = build_requirement_dispositions(root, blueprint, all_blueprint_ids)
+    dispositions = _build_requirement_dispositions(
+        root,
+        blueprint,
+        all_blueprint_ids,
+        snapshot,
+    )
+    _validate_search_find_ask_act_inspect_mapping(blueprint)
     disposition_bytes = _disposition_bytes(dispositions)
     visual_mapping_count = sum(
         item["disposition"] == "visual_mapping_required" for item in dispositions
     )
     nonvisual_count = len(dispositions) - visual_mapping_count
 
-    return UXBlueprintSummary(
+    summary = UXBlueprintSummary(
         screen_count=len(screens),
         state_model_count=len(states),
         state_taxonomy_count=state_taxonomy_count,
@@ -2624,16 +3553,27 @@ def validate_ux_blueprint(root: Path, blueprint: Mapping[str, object]) -> UXBlue
         nonvisual_count=nonvisual_count,
         disposition_sha256=hashlib.sha256(disposition_bytes).hexdigest(),
     )
+    return summary
 
 
 def render_ux_blueprint_markdown(
-    blueprint: Mapping[str, object], root: Path | None = None
+    blueprint: Mapping[str, object],
+    root: Path | None = None,
 ) -> bytes:
     """Render the already-validated source in a stable human-reviewable form."""
 
-    # Rendering is only called after validation in checked workflows.
     if root is None:
         root = Path(__file__).resolve().parents[2]
+    with _ux_operation(root) as context:
+        frozen = _freeze_mapping(blueprint, "UX blueprint")
+        return _render_ux_blueprint_markdown(frozen, root, context.canon)
+
+
+def _render_ux_blueprint_markdown(
+    blueprint: Mapping[str, object],
+    root: Path,
+    snapshot: _AuditedCanonSnapshot,
+) -> bytes:
     record_groups = (
         blueprint["screens"],
         blueprint["state_models"],
@@ -2643,7 +3583,12 @@ def render_ux_blueprint_markdown(
         blueprint["sensitive_exposure_channels"],
     )
     all_ids = frozenset(item["blueprint_id"] for group in record_groups for item in group)
-    dispositions = build_requirement_dispositions(root, blueprint, all_ids)
+    dispositions = _build_requirement_dispositions(
+        root,
+        blueprint,
+        all_ids,
+        snapshot,
+    )
     disposition_bytes = _disposition_bytes(dispositions)
     visual = sum(item["disposition"] == "visual_mapping_required" for item in dispositions)
     disposition_line = (
@@ -2836,7 +3781,8 @@ def render_ux_blueprint_markdown(
             "approval, TestFlight readiness, App Store readiness, or Release Green.",
         ]
     )
-    return ("\n".join(lines) + "\n").encode("utf-8")
+    result = ("\n".join(lines) + "\n").encode("utf-8")
+    return result
 
 
 def state_variant_is_authority_eligible(
@@ -2850,48 +3796,112 @@ def state_variant_is_authority_eligible(
 
 
 def authority_eligible_state_variant_ids(
-    blueprint: Mapping[str, object], root: Path | None = None
+    blueprint: Mapping[str, object],
+    root: Path | None = None,
 ) -> frozenset[str]:
     """Return eligible IDs only after validating current local source and canon."""
 
     if root is None:
         root = Path(__file__).resolve().parents[2]
     try:
-        validate_ux_blueprint(root, blueprint)
-    except (UXBlueprintError, OSError):
+        with _ux_operation(root) as context:
+            frozen = _freeze_mapping(blueprint, "UX blueprint")
+            _validate_ux_blueprint(root, frozen, context.canon)
+            contracts = {
+                contract.state_id: contract
+                for contract in _load_state_command_contracts(
+                    root, context.canon
+                )
+            }
+            eligible: set[str] = set()
+            for model in frozen.get("state_models", []):
+                for variant in model.get("variants", []):
+                    behavior_requirements = variant.get(
+                        "behavior_requirement_ids"
+                    )
+                    if (
+                        variant.get("behavior_authority_posture")
+                        == "requirement_backed"
+                        and isinstance(behavior_requirements, list)
+                        and bool(behavior_requirements)
+                        and not variant.get("specification_gap_ids")
+                        and set(behavior_requirements)
+                        <= set(variant.get("requirement_ids", []))
+                        and variant.get("blueprint_id") in contracts
+                        and contracts[
+                            str(variant["blueprint_id"])
+                        ].activation_posture.value
+                        == "active"
+                    ):
+                        eligible.add(str(variant["blueprint_id"]))
+            return frozenset(eligible)
+    except (CanonError, UXBlueprintError, OSError, TypeError, AttributeError):
         return frozenset()
-    contracts = {
-        contract.state_id: contract
-        for contract in load_state_command_contracts(root)
-    }
-    eligible: set[str] = set()
-    for model in blueprint.get("state_models", []):  # type: ignore[union-attr]
-        for variant in model.get("variants", []):
-            behavior_requirements = variant.get("behavior_requirement_ids")
-            if (
-                variant.get("behavior_authority_posture") == "requirement_backed"
-                and isinstance(behavior_requirements, list)
-                and bool(behavior_requirements)
-                and not variant.get("specification_gap_ids")
-                and set(behavior_requirements)
-                <= set(variant.get("requirement_ids", []))
-                and variant.get("blueprint_id") in contracts
-                and contracts[str(variant["blueprint_id"])].activation_posture.value
-                == "active"
-            ):
-                eligible.add(str(variant["blueprint_id"]))
-    return frozenset(eligible)
+
+
+@contextmanager
+def _projection_lock(
+    root_descriptor: int,
+    *,
+    exclusive: bool,
+) -> Iterator[int]:
+    """Coordinate all canon-tool readers with the two-output publisher."""
+
+    descriptor = _open_directory_path_at(
+        root_descriptor, PROJECTION_PATH.parent
+    )
+    try:
+        fcntl.flock(
+            descriptor,
+            fcntl.LOCK_EX if exclusive else fcntl.LOCK_SH,
+        )
+        yield descriptor
+    finally:
+        try:
+            fcntl.flock(descriptor, fcntl.LOCK_UN)
+        finally:
+            os.close(descriptor)
+
+
+def _read_projection_pair_from_descriptor(
+    root_descriptor: int,
+) -> tuple[bytes, bytes]:
+    with _projection_lock(root_descriptor, exclusive=False):
+        return (
+            _read_file_at(root_descriptor, PROJECTION_PATH),
+            _read_file_at(root_descriptor, DISPOSITIONS_PATH),
+        )
+
+
+def _read_projection_pair(root: Path) -> tuple[bytes, bytes]:
+    with _open_directory_absolute_nofollow(root) as root_descriptor:
+        return _read_projection_pair_from_descriptor(root_descriptor)
+
+
+def _read_projection_output_locked(root: Path, relative: Path) -> bytes:
+    if relative not in {PROJECTION_PATH, DISPOSITIONS_PATH}:
+        raise UXBlueprintError("requested path is not a UX projection output")
+    with _open_directory_absolute_nofollow(root) as root_descriptor:
+        with _projection_lock(root_descriptor, exclusive=False):
+            return _read_file_at(root_descriptor, relative)
 
 
 def check_ux_blueprint(root: Path) -> int:
     try:
-        blueprint = load_ux_blueprint(root)
-        validate_ux_blueprint(root, blueprint)
-        expected = render_ux_blueprint_markdown(blueprint, root)
-        actual = (root / PROJECTION_PATH).read_bytes()
-        expected_dispositions = render_requirement_dispositions(root, blueprint)
-        actual_dispositions = (root / DISPOSITIONS_PATH).read_bytes()
-    except (UXBlueprintError, OSError):
+        with _ux_operation(root) as context:
+            blueprint = load_ux_blueprint(root)
+            frozen = _freeze_mapping(blueprint, "UX blueprint")
+            _validate_ux_blueprint(root, frozen, context.canon)
+            expected = _render_ux_blueprint_markdown(
+                frozen, root, context.canon
+            )
+            actual, actual_dispositions = _read_projection_pair_from_descriptor(
+                context.root_descriptor
+            )
+            expected_dispositions = _render_requirement_dispositions(
+                root, frozen, context.canon
+            )
+    except (CanonError, UXBlueprintError, OSError):
         return 1
     return (
         0
@@ -2900,33 +3910,934 @@ def check_ux_blueprint(root: Path) -> int:
     )
 
 
-def write_ux_blueprint_projection(root: Path) -> UXBlueprintSummary:
-    """Validate and atomically replace the deterministic human projection."""
+def _entry_identity_at(
+    parent_descriptor: int, name: str
+) -> tuple[int, int, int, int, int] | None:
+    try:
+        info = os.stat(name, dir_fd=parent_descriptor, follow_symlinks=False)
+    except FileNotFoundError:
+        return None
+    if not stat.S_ISREG(info.st_mode):
+        raise UXBlueprintError(f"projection path is unsafe: {name}")
+    return (
+        info.st_dev,
+        info.st_ino,
+        info.st_size,
+        info.st_mtime_ns,
+        info.st_ctime_ns,
+    )
 
-    blueprint = load_ux_blueprint(root)
-    summary = validate_ux_blueprint(root, blueprint)
-    outputs = {
-        root / PROJECTION_PATH: render_ux_blueprint_markdown(blueprint, root),
-        root / DISPOSITIONS_PATH: render_requirement_dispositions(root, blueprint),
-    }
-    for target, rendered in outputs.items():
-        target.parent.mkdir(parents=True, exist_ok=True)
-        descriptor, temporary_name = tempfile.mkstemp(
-            prefix=f".{target.name}.", suffix=".tmp", dir=target.parent
+
+def _read_regular_at(
+    parent_descriptor: int, name: str
+) -> tuple[bytes, tuple[int, int, int, int, int]]:
+    expected = _entry_identity_at(parent_descriptor, name)
+    if expected is None:
+        raise UXBlueprintError(f"projection path disappeared: {name}")
+    try:
+        descriptor = os.open(name, READ_FLAGS, dir_fd=parent_descriptor)
+    except OSError as error:
+        raise UXBlueprintError(f"projection path is unsafe: {name}") from error
+    try:
+        info = os.fstat(descriptor)
+        if (
+            not stat.S_ISREG(info.st_mode)
+            or (info.st_dev, info.st_ino) != expected[:2]
+        ):
+            raise UXBlueprintError(f"projection path is unsafe: {name}")
+        chunks: list[bytes] = []
+        while chunk := os.read(descriptor, 64 * 1024):
+            chunks.append(chunk)
+        after = os.fstat(descriptor)
+        identity = (
+            info.st_dev,
+            info.st_ino,
+            info.st_size,
+            info.st_mtime_ns,
+            info.st_ctime_ns,
         )
-        temporary = Path(temporary_name)
-        try:
-            with os.fdopen(descriptor, "wb") as stream:
-                stream.write(rendered)
-                stream.flush()
-                os.fsync(stream.fileno())
-            os.replace(temporary, target)
-            directory = os.open(target.parent, os.O_RDONLY)
+        after_identity = (
+            after.st_dev,
+            after.st_ino,
+            after.st_size,
+            after.st_mtime_ns,
+            after.st_ctime_ns,
+        )
+    finally:
+        os.close(descriptor)
+    if after_identity != identity or _entry_identity_at(parent_descriptor, name) != identity:
+        raise UXBlueprintError(f"projection changed during read: {name}")
+    return b"".join(chunks), identity
+
+
+def _stage_regular_at(
+    parent_descriptor: int, name: str, content: bytes
+) -> tuple[int, int, int, int, int]:
+    descriptor = os.open(
+        name,
+        WRITE_FLAGS,
+        0o600,
+        dir_fd=parent_descriptor,
+    )
+    try:
+        view = memoryview(content)
+        while view:
+            written = os.write(descriptor, view)
+            if written <= 0:
+                raise OSError(errno.EIO, "short projection write")
+            view = view[written:]
+        os.fsync(descriptor)
+        info = os.fstat(descriptor)
+        identity = (
+            info.st_dev,
+            info.st_ino,
+            info.st_size,
+            info.st_mtime_ns,
+            info.st_ctime_ns,
+        )
+    finally:
+        os.close(descriptor)
+    if _entry_identity_at(parent_descriptor, name) != identity:
+        raise UXBlueprintError(f"staged projection changed during write: {name}")
+    return identity
+
+
+def _unlink_regular_if_present(
+    parent_descriptor: int,
+    name: str,
+    *,
+    expected_identity: tuple[int, int, int, int, int] | None = None,
+) -> None:
+    identity = _entry_identity_at(parent_descriptor, name)
+    if identity is None:
+        return
+    if expected_identity is not None and identity != expected_identity:
+        raise UXBlueprintError(f"projection identity changed during rollback: {name}")
+    os.unlink(name, dir_fd=parent_descriptor)
+
+
+_COMMITTED_CLEANUP_NAME = re.compile(
+    r"^\.([0-9a-f]{16})\.committed-cleanup\.json$"
+)
+
+
+def _cleanup_identity_record(
+    name: str,
+    identity: tuple[int, int, int, int, int],
+    content: bytes,
+    **extra: str,
+) -> dict[str, object]:
+    return {
+        "content_sha256": hashlib.sha256(content).hexdigest(),
+        "device": identity[0],
+        "inode": identity[1],
+        "name": name,
+        "size": identity[2],
+        **extra,
+    }
+
+
+def _render_committed_cleanup_record(
+    context: _UXOperationContext,
+    token: str,
+    relative_outputs: tuple[tuple[Path, bytes], ...],
+    installed_identities: Mapping[str, tuple[int, int, int, int, int]],
+    preimages: Mapping[
+        str, tuple[bytes, tuple[int, int, int, int, int]] | None
+    ],
+    backup_names: Mapping[str, str],
+    backup_identities: Mapping[str, tuple[int, int, int, int, int]],
+    recovery_names: Mapping[str, str],
+    recovery_identities: Mapping[str, tuple[int, int, int, int, int]],
+) -> bytes:
+    targets = [
+        _cleanup_identity_record(
+            relative.name,
+            installed_identities[relative.name],
+            content,
+        )
+        for relative, content in relative_outputs
+    ]
+    artifacts: list[dict[str, object]] = []
+    for relative, _content in relative_outputs:
+        name = relative.name
+        preimage = preimages[name]
+        if preimage is None:
+            continue
+        artifacts.extend(
+            (
+                _cleanup_identity_record(
+                    backup_names[name],
+                    backup_identities[name],
+                    preimage[0],
+                    kind="backup",
+                    target=name,
+                ),
+                _cleanup_identity_record(
+                    recovery_names[name],
+                    recovery_identities[name],
+                    preimage[0],
+                    kind="recovery",
+                    target=name,
+                ),
+            )
+        )
+    payload = {
+        "artifacts": sorted(artifacts, key=lambda item: str(item["name"])),
+        "canon_content_sha256": context.canon.content_sha,
+        "input_identity_sha256": _operation_input_identity_sha256(
+            context.inputs
+        ),
+        "schema_version": 1,
+        "targets": sorted(targets, key=lambda item: str(item["name"])),
+        "transaction_id": token,
+    }
+    return (
+        json.dumps(
+            payload,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        )
+        + "\n"
+    ).encode("utf-8")
+
+
+def _parse_cleanup_identity_record(
+    value: object,
+    *,
+    fields: frozenset[str],
+) -> dict[str, object]:
+    if not isinstance(value, dict) or set(value) != fields:
+        raise UXBlueprintError("committed cleanup identity fields are closed")
+    for field in ("device", "inode", "size"):
+        item = value[field]
+        if isinstance(item, bool) or not isinstance(item, int) or item < 0:
+            raise UXBlueprintError(
+                f"committed cleanup {field} is invalid"
+            )
+    if (
+        not isinstance(value["name"], str)
+        or not value["name"]
+        or "/" in value["name"]
+        or not isinstance(value["content_sha256"], str)
+        or re.fullmatch(r"[0-9a-f]{64}", value["content_sha256"])
+        is None
+    ):
+        raise UXBlueprintError("committed cleanup identity is invalid")
+    return value
+
+
+def _load_committed_cleanup_record(
+    parent_descriptor: int,
+    marker_name: str,
+) -> tuple[
+    dict[str, object],
+    tuple[int, int, int, int, int],
+]:
+    match = _COMMITTED_CLEANUP_NAME.fullmatch(marker_name)
+    if match is None:
+        raise UXBlueprintError("committed cleanup marker name is invalid")
+    source, marker_identity = _read_regular_at(parent_descriptor, marker_name)
+    try:
+        payload = json.loads(source)
+    except (UnicodeError, json.JSONDecodeError) as error:
+        raise UXBlueprintError("committed cleanup marker is invalid") from error
+    fields = {
+        "artifacts",
+        "canon_content_sha256",
+        "input_identity_sha256",
+        "schema_version",
+        "targets",
+        "transaction_id",
+    }
+    if not isinstance(payload, dict) or set(payload) != fields:
+        raise UXBlueprintError("committed cleanup marker fields are closed")
+    token = payload["transaction_id"]
+    if (
+        payload["schema_version"] != 1
+        or isinstance(payload["schema_version"], bool)
+        or token != match.group(1)
+        or not isinstance(payload["canon_content_sha256"], str)
+        or re.fullmatch(r"[0-9a-f]{64}", payload["canon_content_sha256"])
+        is None
+        or not isinstance(payload["input_identity_sha256"], str)
+        or re.fullmatch(r"[0-9a-f]{64}", payload["input_identity_sha256"])
+        is None
+    ):
+        raise UXBlueprintError("committed cleanup marker identity is invalid")
+    raw_targets = payload["targets"]
+    raw_artifacts = payload["artifacts"]
+    if not isinstance(raw_targets, list) or not isinstance(raw_artifacts, list):
+        raise UXBlueprintError("committed cleanup records must be arrays")
+    target_fields = frozenset(
+        {"content_sha256", "device", "inode", "name", "size"}
+    )
+    artifact_fields = target_fields | {"kind", "target"}
+    targets = tuple(
+        _parse_cleanup_identity_record(item, fields=target_fields)
+        for item in raw_targets
+    )
+    artifacts = tuple(
+        _parse_cleanup_identity_record(item, fields=artifact_fields)
+        for item in raw_artifacts
+    )
+    target_names = tuple(str(item["name"]) for item in targets)
+    expected_targets = tuple(
+        sorted((PROJECTION_PATH.name, DISPOSITIONS_PATH.name))
+    )
+    if target_names != expected_targets:
+        raise UXBlueprintError("committed cleanup target set is invalid")
+    artifact_names = tuple(str(item["name"]) for item in artifacts)
+    if artifact_names != tuple(sorted(set(artifact_names))):
+        raise UXBlueprintError("committed cleanup artifacts are not unique")
+    for item in artifacts:
+        kind = item.get("kind")
+        target = item.get("target")
+        if (
+            kind not in {"backup", "recovery"}
+            or target not in expected_targets
+            or item["name"] != f".{target}.{token}.{kind}"
+        ):
+            raise UXBlueprintError(
+                "committed cleanup artifact binding is invalid"
+            )
+    payload["targets"] = targets
+    payload["artifacts"] = artifacts
+    return payload, marker_identity
+
+
+def _record_matches_live_file(
+    content: bytes,
+    identity: tuple[int, int, int, int, int],
+    record: Mapping[str, object],
+) -> bool:
+    return (
+        identity[0] == record["device"]
+        and identity[1] == record["inode"]
+        and identity[2] == record["size"]
+        and hashlib.sha256(content).hexdigest()
+        == record["content_sha256"]
+    )
+
+
+def _publish_committed_cleanup_record_at(
+    parent_descriptor: int,
+    marker_name: str,
+    marker_content: bytes,
+) -> tuple[int, int, int, int, int]:
+    """Durably publish one final-name record without replacing any entry."""
+
+    if _COMMITTED_CLEANUP_NAME.fullmatch(marker_name) is None:
+        raise UXBlueprintError("committed cleanup marker name is invalid")
+    descriptor: int | None = None
+    try:
+        descriptor = os.open(
+            marker_name,
+            WRITE_FLAGS,
+            0o600,
+            dir_fd=parent_descriptor,
+        )
+        opened = os.fstat(descriptor)
+        if not stat.S_ISREG(opened.st_mode):
+            raise UXBlueprintError(
+                "committed cleanup marker is not a regular file"
+            )
+        view = memoryview(marker_content)
+        while view:
+            written = os.write(descriptor, view)
+            if written <= 0:
+                raise OSError(errno.EIO, "short committed cleanup write")
+            view = view[written:]
+        os.fsync(descriptor)
+        info = os.fstat(descriptor)
+        identity = (
+            info.st_dev,
+            info.st_ino,
+            info.st_size,
+            info.st_mtime_ns,
+            info.st_ctime_ns,
+        )
+        os.close(descriptor)
+        descriptor = None
+        source, live_identity = _read_regular_at(
+            parent_descriptor, marker_name
+        )
+        if source != marker_content or live_identity != identity:
+            raise UXBlueprintError(
+                "committed cleanup marker changed during publication"
+            )
+        _fsync_directory(parent_descriptor)
+        source, durable_identity = _read_regular_at(
+            parent_descriptor, marker_name
+        )
+        if source != marker_content or durable_identity != identity:
+            raise UXBlueprintError(
+                "committed cleanup marker changed after directory fsync"
+            )
+        return identity
+    except BaseException as publication_error:
+        cleanup_details = [
+            "committed cleanup marker pathname preserved as publication-"
+            "failure evidence; no pathname unlink was attempted"
+        ]
+        if descriptor is not None:
             try:
-                os.fsync(directory)
-            finally:
-                os.close(directory)
-        except BaseException:
-            temporary.unlink(missing_ok=True)
-            raise
-    return summary
+                info = os.fstat(descriptor)
+                _owned_identity = (
+                    info.st_dev,
+                    info.st_ino,
+                    info.st_size,
+                    info.st_mtime_ns,
+                    info.st_ctime_ns,
+                )
+            except BaseException as cleanup_error:
+                cleanup_details.append(
+                    "committed cleanup marker cleanup fstat failed; "
+                    "marker evidence preserved: "
+                    f"{type(cleanup_error).__name__}: {cleanup_error}"
+                )
+            else:
+                cleanup_details.append(
+                    "committed cleanup marker descriptor fstat succeeded; "
+                    "pathname evidence intentionally preserved"
+                )
+            try:
+                os.close(descriptor)
+            except BaseException as cleanup_error:
+                cleanup_details.append(
+                    "committed cleanup marker descriptor close failed; "
+                    "marker evidence preserved: "
+                    f"{type(cleanup_error).__name__}: "
+                    f"{cleanup_error}"
+                )
+        for detail in cleanup_details:
+            publication_error.add_note(detail)
+        raise
+
+
+def _committed_cleanup_targets_match_at(
+    parent_descriptor: int,
+    payload: Mapping[str, object],
+) -> bool:
+    for record in payload["targets"]:
+        content, identity = _read_regular_at(
+            parent_descriptor, str(record["name"])
+        )
+        if not _record_matches_live_file(content, identity, record):
+            return False
+    return True
+
+
+def _cleanup_committed_projection_record_at(
+    parent_descriptor: int,
+    marker_name: str,
+) -> tuple[str, ...]:
+    payload, marker_identity = _load_committed_cleanup_record(
+        parent_descriptor, marker_name
+    )
+    artifact_names = tuple(
+        str(record["name"]) for record in payload["artifacts"]
+    )
+    for record in payload["targets"]:
+        content, identity = _read_regular_at(
+            parent_descriptor, str(record["name"])
+        )
+        if not _record_matches_live_file(content, identity, record):
+            raise UXBlueprintError(
+                "committed cleanup target identity changed"
+            )
+    for record in payload["artifacts"]:
+        name = str(record["name"])
+        if _entry_identity_at(parent_descriptor, name) is None:
+            continue
+        content, identity = _read_regular_at(parent_descriptor, name)
+        if not _record_matches_live_file(content, identity, record):
+            raise UXBlueprintError(
+                "committed cleanup artifact identity changed"
+            )
+        _unlink_regular_if_present(
+            parent_descriptor,
+            name,
+            expected_identity=identity,
+        )
+    _fsync_directory(parent_descriptor)
+    if any(
+        _entry_identity_at(parent_descriptor, str(record["name"]))
+        is not None
+        for record in payload["artifacts"]
+    ):
+        raise UXBlueprintError("committed cleanup artifacts remain")
+    _unlink_regular_if_present(
+        parent_descriptor,
+        marker_name,
+        expected_identity=marker_identity,
+    )
+    _fsync_directory(parent_descriptor)
+    if _entry_identity_at(parent_descriptor, marker_name) is not None or any(
+        _entry_identity_at(parent_descriptor, name) is not None
+        for name in artifact_names
+    ):
+        raise UXBlueprintError(
+            "committed cleanup evidence survived verified cleanup"
+        )
+    return artifact_names
+
+
+def _cleanup_prior_committed_projection_records_at(
+    parent_descriptor: int,
+) -> None:
+    for name in sorted(os.listdir(parent_descriptor)):
+        if _COMMITTED_CLEANUP_NAME.fullmatch(name) is None:
+            continue
+        try:
+            payload, _marker_identity = _load_committed_cleanup_record(
+                parent_descriptor, name
+            )
+        except (OSError, UXBlueprintError):
+            # Malformed or unrelated exact-name collisions are evidence.
+            continue
+        try:
+            targets_match = _committed_cleanup_targets_match_at(
+                parent_descriptor, payload
+            )
+        except (OSError, UXBlueprintError) as error:
+            raise UXBlueprintError(
+                "prior committed projection targets could not be verified; "
+                "new projection write is blocked"
+            ) from error
+        if not targets_match:
+            # A valid record for another installed generation is stale evidence.
+            continue
+        try:
+            artifact_names = _cleanup_committed_projection_record_at(
+                parent_descriptor, name
+            )
+        except Exception as error:
+            raise UXBlueprintError(
+                "prior committed projection cleanup failed; "
+                "new projection write is blocked"
+            ) from error
+        if _entry_identity_at(parent_descriptor, name) is not None or any(
+            _entry_identity_at(parent_descriptor, artifact_name) is not None
+            for artifact_name in artifact_names
+        ):
+            raise UXBlueprintError(
+                "prior committed projection cleanup is incomplete; "
+                "new projection write is blocked"
+            )
+
+
+def _postcommit_cleanup_noexcept(
+    parent_descriptor: int,
+    committed_marker_name: str,
+) -> None:
+    try:
+        _cleanup_committed_projection_record_at(
+            parent_descriptor, committed_marker_name
+        )
+    except BaseException:
+        # The outputs are already committed. Keep exact marker-bound evidence
+        # for a later exclusive writer; post-commit cleanup cannot roll back or
+        # misreport the successful commit.
+        return
+
+
+def _write_projection_outputs_transaction(
+    context: _UXOperationContext,
+    outputs: Mapping[Path, bytes],
+) -> None:
+    """Install both projections as one recoverable descriptor-confined transaction."""
+
+    relative_outputs = tuple(
+        sorted(outputs.items(), key=lambda item: item[0].as_posix())
+    )
+    if not relative_outputs or any(
+        path.parent != PROJECTION_PATH.parent for path, _ in relative_outputs
+    ):
+        raise UXBlueprintError("projection transaction target set is invalid")
+    token = secrets.token_hex(8)
+    preimages: dict[
+        str, tuple[bytes, tuple[int, int, int, int, int]] | None
+    ] = {}
+    backup_names: dict[str, str] = {}
+    recovery_names: dict[str, str] = {}
+    temporary_names: dict[str, str] = {}
+    staged_identities: dict[
+        str, tuple[int, int, int, int, int]
+    ] = {}
+    backup_identities: dict[
+        str, tuple[int, int, int, int, int]
+    ] = {}
+    recovery_identities: dict[
+        str, tuple[int, int, int, int, int]
+    ] = {}
+    installed_identities: dict[
+        str, tuple[int, int, int, int, int]
+    ] = {}
+    committed_marker_name = f".{token}.committed-cleanup.json"
+    committed_marker_identity: tuple[int, int, int, int, int] | None = None
+    with _projection_lock(context.root_descriptor, exclusive=True) as parent_descriptor:
+        _cleanup_prior_committed_projection_records_at(parent_descriptor)
+        try:
+            for relative, _content in relative_outputs:
+                name = relative.name
+                identity = _entry_identity_at(parent_descriptor, name)
+                preimages[name] = (
+                    None
+                    if identity is None
+                    else _read_regular_at(parent_descriptor, name)
+                )
+                backup_names[name] = f".{name}.{token}.backup"
+                recovery_names[name] = f".{name}.{token}.recovery"
+                temporary_names[name] = f".{name}.{token}.tmp"
+
+            for relative, content in relative_outputs:
+                name = relative.name
+                staged_identities[name] = _stage_regular_at(
+                    parent_descriptor, temporary_names[name], content
+                )
+
+            for relative, _content in relative_outputs:
+                name = relative.name
+                preimage = preimages[name]
+                if preimage is None:
+                    continue
+                if _entry_identity_at(parent_descriptor, name) != preimage[1]:
+                    raise UXBlueprintError(
+                        f"projection changed before backup: {name}"
+                    )
+                os.link(
+                    name,
+                    backup_names[name],
+                    src_dir_fd=parent_descriptor,
+                    dst_dir_fd=parent_descriptor,
+                    follow_symlinks=False,
+                )
+                backup_content, backup_identity = _read_regular_at(
+                    parent_descriptor, backup_names[name]
+                )
+                current_content, current_identity = _read_regular_at(
+                    parent_descriptor, name
+                )
+                if (
+                    backup_content != preimage[0]
+                    or current_content != preimage[0]
+                    or backup_identity[:2] != preimage[1][:2]
+                    or current_identity != backup_identity
+                ):
+                    raise UXBlueprintError(
+                        f"projection backup is not the original identity: {name}"
+                    )
+                preimages[name] = (preimage[0], current_identity)
+                backup_identities[name] = backup_identity
+                os.link(
+                    name,
+                    recovery_names[name],
+                    src_dir_fd=parent_descriptor,
+                    dst_dir_fd=parent_descriptor,
+                    follow_symlinks=False,
+                )
+                recovery_content, recovery_identity = _read_regular_at(
+                    parent_descriptor, recovery_names[name]
+                )
+                backup_content, backup_identity = _read_regular_at(
+                    parent_descriptor, backup_names[name]
+                )
+                current_content, current_identity = _read_regular_at(
+                    parent_descriptor, name
+                )
+                if (
+                    recovery_content != preimage[0]
+                    or backup_content != preimage[0]
+                    or current_content != preimage[0]
+                    or recovery_identity[:2] != preimage[1][:2]
+                    or current_identity != recovery_identity
+                    or backup_identity != recovery_identity
+                ):
+                    raise UXBlueprintError(
+                        f"projection recovery is not the original identity: {name}"
+                    )
+                preimages[name] = (preimage[0], current_identity)
+                backup_identities[name] = backup_identity
+                recovery_identities[name] = recovery_identity
+            _fsync_directory(parent_descriptor)
+
+            for relative, _content in relative_outputs:
+                name = relative.name
+                preimage = preimages[name]
+                expected_original = None if preimage is None else preimage[1]
+                if _entry_identity_at(parent_descriptor, name) != expected_original:
+                    raise UXBlueprintError(
+                        f"projection changed before install: {name}"
+                    )
+                os.replace(
+                    temporary_names[name],
+                    name,
+                    src_dir_fd=parent_descriptor,
+                    dst_dir_fd=parent_descriptor,
+                )
+                identity = _entry_identity_at(parent_descriptor, name)
+                if identity is None or identity[:2] != staged_identities[name][:2]:
+                    raise UXBlueprintError(
+                        f"installed projection identity is stale: {name}"
+                    )
+                installed_identities[name] = identity
+                backup_identity = backup_identities.get(name)
+                recovery_identity = recovery_identities.get(name)
+                preimage = preimages[name]
+                if (
+                    backup_identity is not None
+                    and recovery_identity is not None
+                    and preimage is not None
+                ):
+                    backup_content, live_backup_identity = _read_regular_at(
+                        parent_descriptor, backup_names[name]
+                    )
+                    recovery_content, live_recovery_identity = _read_regular_at(
+                        parent_descriptor, recovery_names[name]
+                    )
+                    if (
+                        backup_content != preimage[0]
+                        or recovery_content != preimage[0]
+                        or live_backup_identity[:2] != backup_identity[:2]
+                        or live_recovery_identity[:2] != recovery_identity[:2]
+                        or live_backup_identity != live_recovery_identity
+                    ):
+                        raise UXBlueprintError(
+                            f"projection recovery changed during install: {name}"
+                        )
+                    # Replacing the target removes one hard link to the backup
+                    # inode and legitimately advances ctime. Preserve the exact
+                    # post-replace identity used by cleanup and rollback.
+                    backup_identities[name] = live_backup_identity
+                    recovery_identities[name] = live_recovery_identity
+            _fsync_directory(parent_descriptor)
+
+            for relative, expected in relative_outputs:
+                actual, identity = _read_regular_at(
+                    parent_descriptor, relative.name
+                )
+                if (
+                    actual != expected
+                    or identity != installed_identities[relative.name]
+                ):
+                    raise UXBlueprintError(
+                        f"installed projection content is stale: {relative.name}"
+                    )
+            marker_content = _render_committed_cleanup_record(
+                context,
+                token,
+                relative_outputs,
+                installed_identities,
+                preimages,
+                backup_names,
+                backup_identities,
+                recovery_names,
+                recovery_identities,
+            )
+            committed_marker_identity = _publish_committed_cleanup_record_at(
+                parent_descriptor,
+                committed_marker_name,
+                marker_content,
+            )
+            _verify_operation_context(context, projection_locked=True)
+            context.commit_state.attestation = _UXOperationCommitAttestation(
+                canon_content_sha=context.canon.content_sha,
+                inputs=context.inputs,
+                input_identity_sha256=_operation_input_identity_sha256(
+                    context.inputs
+                ),
+            )
+            _postcommit_cleanup_noexcept(
+                parent_descriptor,
+                committed_marker_name,
+            )
+            return
+        except BaseException as operation_error:
+            try:
+                for relative, _content in reversed(relative_outputs):
+                    name = relative.name
+                    current = _entry_identity_at(parent_descriptor, name)
+                    installed = installed_identities.get(name)
+                    preimage = preimages.get(name)
+                    if installed is None:
+                        expected = None if preimage is None else preimage[1]
+                        if current != expected:
+                            raise UXBlueprintError(
+                                f"uninstalled projection identity changed: {name}"
+                            )
+                        continue
+                    if current != installed:
+                        raise UXBlueprintError(
+                            f"projection identity changed during rollback: {name}"
+                        )
+                    if preimage is None:
+                        os.unlink(name, dir_fd=parent_descriptor)
+                        if _entry_identity_at(parent_descriptor, name) is not None:
+                            raise UXBlueprintError(
+                                f"new projection survived rollback: {name}"
+                            )
+                        continue
+                    recovery_identity = recovery_identities.get(name)
+                    recovery_content, live_recovery_identity = _read_regular_at(
+                        parent_descriptor, recovery_names[name]
+                    )
+                    if (
+                        recovery_identity is None
+                        or recovery_identity[:2] != preimage[1][:2]
+                        or live_recovery_identity[:2] != recovery_identity[:2]
+                        or recovery_content != preimage[0]
+                    ):
+                        raise UXBlueprintError(
+                            f"projection recovery changed before rollback: {name}"
+                        )
+                    os.replace(
+                        recovery_names[name],
+                        name,
+                        src_dir_fd=parent_descriptor,
+                        dst_dir_fd=parent_descriptor,
+                    )
+                    restored_content, restored_identity = _read_regular_at(
+                        parent_descriptor, name
+                    )
+                    if (
+                        restored_content != preimage[0]
+                        or restored_identity[:2] != preimage[1][:2]
+                    ):
+                        raise UXBlueprintError(
+                            f"restored projection could not be verified: {name}"
+                        )
+                    backup_identity = backup_identities.get(name)
+                    if backup_identity is not None and _entry_identity_at(
+                        parent_descriptor, backup_names[name]
+                    ) is not None:
+                        backup_content, live_backup_identity = _read_regular_at(
+                            parent_descriptor, backup_names[name]
+                        )
+                        if (
+                            backup_content != preimage[0]
+                            or live_backup_identity[:2]
+                            != backup_identity[:2]
+                        ):
+                            raise UXBlueprintError(
+                                f"projection backup changed during rollback: {name}"
+                            )
+                        backup_identities[name] = live_backup_identity
+                _fsync_directory(parent_descriptor)
+                for relative, _content in relative_outputs:
+                    name = relative.name
+                    staged = staged_identities.get(name)
+                    if staged is not None:
+                        _unlink_regular_if_present(
+                            parent_descriptor,
+                            temporary_names[name],
+                            expected_identity=staged,
+                        )
+                    preimage = preimages[name]
+                    recovery = recovery_identities.get(name)
+                    if recovery is not None and _entry_identity_at(
+                        parent_descriptor, recovery_names[name]
+                    ) is not None:
+                        recovery_content, live_recovery = _read_regular_at(
+                            parent_descriptor, recovery_names[name]
+                        )
+                        if (
+                            preimage is None
+                            or recovery_content != preimage[0]
+                            or live_recovery[:2] != recovery[:2]
+                        ):
+                            raise UXBlueprintError(
+                                f"projection recovery changed during cleanup: {name}"
+                            )
+                        _unlink_regular_if_present(
+                            parent_descriptor,
+                            recovery_names[name],
+                            expected_identity=live_recovery,
+                        )
+                    backup = backup_identities.get(name)
+                    if backup is not None and _entry_identity_at(
+                        parent_descriptor, backup_names[name]
+                    ) is not None:
+                        backup_content, live_backup = _read_regular_at(
+                            parent_descriptor, backup_names[name]
+                        )
+                        if (
+                            preimage is None
+                            or backup_content != preimage[0]
+                            or live_backup[:2] != backup[:2]
+                        ):
+                            raise UXBlueprintError(
+                                f"projection backup changed during cleanup: {name}"
+                            )
+                        _unlink_regular_if_present(
+                            parent_descriptor,
+                            backup_names[name],
+                            expected_identity=live_backup,
+                        )
+                if (
+                    committed_marker_identity is not None
+                    and _entry_identity_at(
+                        parent_descriptor, committed_marker_name
+                    )
+                    is not None
+                ):
+                    _unlink_regular_if_present(
+                        parent_descriptor,
+                        committed_marker_name,
+                        expected_identity=committed_marker_identity,
+                    )
+                _fsync_directory(parent_descriptor)
+                for relative, _content in relative_outputs:
+                    name = relative.name
+                    preimage = preimages[name]
+                    if preimage is None:
+                        if _entry_identity_at(parent_descriptor, name) is not None:
+                            raise UXBlueprintError(
+                                f"absent preimage was not restored: {name}"
+                            )
+                        continue
+                    restored_content, restored_identity = _read_regular_at(
+                        parent_descriptor, name
+                    )
+                    if (
+                        restored_content != preimage[0]
+                        or restored_identity[:2] != preimage[1][:2]
+                    ):
+                        raise UXBlueprintError(
+                            f"rollback postcondition is stale: {name}"
+                        )
+            except BaseException as rollback_error:
+                raise CanonError(
+                    "UX_BLUEPRINT_ROLLBACK_FAILED",
+                    "projection transaction failed and rollback could not be verified",
+                    context.root / PROJECTION_PATH.parent,
+                ) from rollback_error
+            raise CanonError(
+                "UX_BLUEPRINT_WRITE_FAILED",
+                "projection transaction failed and both preimages were restored",
+                context.root / PROJECTION_PATH.parent,
+            ) from operation_error
+
+
+def write_ux_blueprint_projection(root: Path) -> UXBlueprintSummary:
+    """Validate and replace both projections with rollback on every failure."""
+
+    excluded = frozenset({PROJECTION_PATH, DISPOSITIONS_PATH})
+    with _ux_operation(
+        root,
+        excluded_paths=excluded,
+    ) as context:
+        blueprint = load_ux_blueprint(root)
+        frozen = _freeze_mapping(blueprint, "UX blueprint")
+        summary = _validate_ux_blueprint(root, frozen, context.canon)
+        outputs = {
+            PROJECTION_PATH: _render_ux_blueprint_markdown(
+                frozen, root, context.canon
+            ),
+            DISPOSITIONS_PATH: _render_requirement_dispositions(
+                root, frozen, context.canon
+            ),
+        }
+        _write_projection_outputs_transaction(context, outputs)
+        return summary

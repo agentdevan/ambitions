@@ -1426,12 +1426,68 @@
       "variant_key": "action-preview"
     },
     {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-FAILED",
+      "generic_kind": "failure",
+      "operation_phase": "failed",
+      "screen_id": "UX-SCREEN-SEARCH-RESULTS",
+      "state_axis": "operation",
+      "variant_key": "ask-failed"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-INTERRUPTED",
+      "generic_kind": "interruption",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-SEARCH-RESULTS",
+      "state_axis": "interruption",
+      "variant_key": "ask-interrupted"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RECOVERED",
+      "generic_kind": "recovery",
+      "operation_phase": "succeeded",
+      "screen_id": "UX-SCREEN-SEARCH-RESULTS",
+      "state_axis": "recovery",
+      "variant_key": "ask-recovered"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RESUMED",
+      "generic_kind": "recovery",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-SEARCH-RESULTS",
+      "state_axis": "recovery",
+      "variant_key": "ask-resumed"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK",
+      "generic_kind": "degraded",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-SEARCH-RESULTS",
+      "state_axis": "availability",
+      "variant_key": "ask-unavailable-offline-fallback"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-RESULTS-CAPTURE-HANDOFF",
+      "generic_kind": "transitional",
+      "operation_phase": "idle",
+      "screen_id": "UX-SCREEN-SEARCH-RESULTS",
+      "state_axis": "operation",
+      "variant_key": "capture-handoff"
+    },
+    {
       "blueprint_id": "UX-STATE-VARIANT-SEARCH-RESULTS-FILTERED",
       "generic_kind": "resting",
       "operation_phase": "not_applicable",
       "screen_id": "UX-SCREEN-SEARCH-RESULTS",
       "state_axis": "presentation",
       "variant_key": "filtered"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-RESULTS-GROUNDED-ANSWER",
+      "generic_kind": "resting",
+      "operation_phase": "not_applicable",
+      "screen_id": "UX-SCREEN-SEARCH-RESULTS",
+      "state_axis": "presentation",
+      "variant_key": "grounded-answer"
     },
     {
       "blueprint_id": "UX-STATE-VARIANT-SEARCH-RESULTS-NO-RESULTS",
@@ -1456,6 +1512,14 @@
       "screen_id": "UX-SCREEN-SEARCH-RESULTS",
       "state_axis": "presentation",
       "variant_key": "selected"
+    },
+    {
+      "blueprint_id": "UX-STATE-VARIANT-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS",
+      "generic_kind": "loading",
+      "operation_phase": "in_progress",
+      "screen_id": "UX-SCREEN-SEARCH-RESULTS",
+      "state_axis": "operation",
+      "variant_key": "synthesis-in-progress"
     },
     {
       "blueprint_id": "UX-STATE-VARIANT-SEARCH-ROOT-ACTION-MUTATING",

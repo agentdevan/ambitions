@@ -167,6 +167,7 @@ TRACKED_DISPOSITION_FIELDS = frozenset(
 MATERIALIZED_TARGET_REFERENCE_PREFIX = "MIGRATION-TARGET-"
 MATERIALIZED_TARGET_SOURCE = "docs/canon/migration/claim-dispositions.json#"
 MATERIALIZED_TARGET_STATUS = "materialized shadow specification target"
+RETIRED_SEARCH_IDENTITY_TARGET = "SPEC-GLOBAL-SEARCH-IDENTITY-001"
 
 
 @dataclass(frozen=True, slots=True)
@@ -4422,6 +4423,7 @@ def validate_tracked_canon_evidence(
         _validate_tracked_claim(item, dispositions_path)
         for item in collections["claims"]
     )
+    validate_no_retired_search_identity_targets(claims, dispositions_path)
     claim_ids = tuple(str(item["claim_id"]) for item in claims)
     if claim_ids != tuple(sorted(set(claim_ids))):
         raise CanonError(
@@ -5358,6 +5360,22 @@ def _validate_tracked_claim(value: object, path: Path) -> dict[str, object]:
             path,
         )
     return dict(value)
+
+
+def validate_no_retired_search_identity_targets(
+    claims: Sequence[Mapping[str, object]],
+    path: Path,
+) -> None:
+    """Reject retired Search identity as a live materialized claim target."""
+
+    for claim in claims:
+        if claim.get("target_id") == RETIRED_SEARCH_IDENTITY_TARGET:
+            raise CanonError(
+                "CLAIM_RETIRED_TARGET",
+                "retired Search identity may appear only in explicit "
+                "supersession evidence, not as a materialized claim target",
+                path,
+            )
 
 
 def _is_sha256(value: object) -> bool:

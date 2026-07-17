@@ -1,6 +1,6 @@
 {
   "claim_count": 1542,
-  "claim_dispositions_sha256": "cd78d2f3c1a2459663a4dc2fc112ddd2709f289b6e93a3f455df28f37f825ef7",
+  "claim_dispositions_sha256": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
   "classification_counts": {
     "duplicated": 0,
     "missing": 0,
@@ -10,7 +10,7 @@
     "represented_with_composition": 684,
     "weakened": 0
   },
-  "clause_count": 2772,
+  "clause_count": 2774,
   "decision_claim_ids": [
     "CLAIM-LFT-0001",
     "CLAIM-LFT-0002",
@@ -1471,7 +1471,7 @@
       "canonical_ids": [
         "SPEC-GLOBAL-SEARCH-PLACEMENT-001",
         "SPEC-GLOBAL-SEARCH-PLACEMENT-001",
-        "SPEC-GLOBAL-SEARCH-IDENTITY-001"
+        "SPEC-GLOBAL-SEARCH-PRIVATE-COMMAND-LAYER-001"
       ],
       "claim_id": "CLAIM-LFT-0026",
       "classification": "represented_with_composition",
@@ -3601,11 +3601,13 @@
         "SPEC-GLOBAL-SEARCH-INDEX-001",
         "SPEC-GLOBAL-SEARCH-INDEX-001",
         "SPEC-GLOBAL-SEARCH-ACTIONS-001",
-        "SPEC-GLOBAL-SEARCH-IDENTITY-001"
+        "SPEC-GLOBAL-SEARCH-PRIVATE-COMMAND-LAYER-001",
+        "SPEC-GLOBAL-SEARCH-PRESENTATION-001",
+        "SPEC-GLOBAL-SEARCH-CAPTURE-HANDOFF-001"
       ],
       "claim_id": "CLAIM-LFT-0163",
       "classification": "represented_with_composition",
-      "clause_count": 5,
+      "clause_count": 7,
       "decision_mapping_status": "independently_reviewed",
       "decision_number": 163,
       "priority": "unknown",
@@ -3920,7 +3922,7 @@
         "SPEC-GLOBAL-SEARCH-ACTIONS-001",
         "SPEC-GLOBAL-SEARCH-ACTIONS-001",
         "SPEC-GLOBAL-SEARCH-ACTIONS-001",
-        "SPEC-GLOBAL-SEARCH-IDENTITY-001"
+        "SPEC-GLOBAL-SEARCH-PRESENTATION-001"
       ],
       "claim_id": "CLAIM-LFT-0182",
       "classification": "represented_with_composition",
@@ -13355,7 +13357,7 @@
     },
     {
       "canonical_ids": [
-        "SPEC-GLOBAL-SEARCH-IDENTITY-001"
+        "SPEC-GLOBAL-SEARCH-PRIVATE-COMMAND-LAYER-001"
       ],
       "claim_id": "CLAIM-STB-0306",
       "classification": "represented_with_composition",
@@ -19499,7 +19501,7 @@
       "source_text_sha256": "f9baddbdf3656a27f00058b4df7dc0ec268822c69d1fe4b023cf3d88cf89eb71"
     }
   ],
-  "equivalence_ledger_sha256": "6072c7466a2cc1157d07aa448234886bf8dd4ab96329274190c7cdd496978b69",
+  "equivalence_ledger_sha256": "7782f681e5e6708b9f675f048b1b0c41d88f2887e873926481e685d399a2985b",
   "independent_review": null,
   "review_status": "candidate",
   "schema_version": 4

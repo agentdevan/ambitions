@@ -1,11 +1,9 @@
 import json
 import re
-import tempfile
 import unittest
 from dataclasses import replace
 from pathlib import Path
 from types import SimpleNamespace
-from unittest.mock import patch
 
 from tools.ambitions_canon.model import CanonError
 from tools.ambitions_canon.parser import parse_canon_document
@@ -109,6 +107,14 @@ class StateCommandSemanticTests(unittest.TestCase):
             for line_number, line in enumerate(text.splitlines(), start=1):
                 if line == locked_trust_heading:
                     continue
+                for owner_approved_search_phrase in (
+                    "Find / Ask / Act / Inspect",
+                    "Find / Act / Inspect",
+                ):
+                    line = line.replace(
+                        owner_approved_search_phrase,
+                        owner_approved_search_phrase.replace(" / ", ", "),
+                    )
                 search_from = 0
                 while (index := line.find(" / ", search_from)) >= 0:
                     if not line[:index].endswith("explicit state contract"):
@@ -127,14 +133,14 @@ class StateCommandSemanticTests(unittest.TestCase):
             ),
         )
 
-    def test_all_433_contracts_reject_self_referential_template_semantics(self):
+    def test_all_441_contracts_reject_self_referential_template_semantics(self):
         commands = [
             command
             for contract in self.contracts.values()
             for command in contract.commands
         ]
-        self.assertEqual(len(self.contracts), 433)
-        self.assertEqual(len(commands), 567)
+        self.assertEqual(len(self.contracts), 441)
+        self.assertEqual(len(commands), 575)
         banned = (
             "command review for ux-state-variant-",
             "truthful status for ux-state-variant-",
@@ -539,31 +545,19 @@ class StateCommandSemanticTests(unittest.TestCase):
             state_id="UX-STATE-VARIANT-APP-SHELL-DRILLDOWN-GLOBAL-DUPLICATE",
             commands=(replace(command),),
         )
-        with tempfile.TemporaryDirectory() as temporary_directory:
-            root = Path(temporary_directory)
-            (root / "one.md").write_text("one", encoding="utf-8")
-            (root / "two.md").write_text("two", encoding="utf-8")
-            records = (
-                {"source_path": "one.md"},
-                {"source_path": "two.md"},
-            )
-            documents = iter(
-                (
+        snapshot = SimpleNamespace(
+            registry=SimpleNamespace(
+                documents=(
                     SimpleNamespace(state_command_contracts=(first,)),
                     SimpleNamespace(state_command_contracts=(second,)),
                 )
             )
-            with patch.object(ux_blueprint, "_requirement_records", return_value=records):
-                with patch.object(
-                    ux_blueprint,
-                    "parse_canon_document",
-                    side_effect=lambda *_: next(documents),
-                ):
-                    with self.assertRaisesRegex(
-                        ux_blueprint.UXBlueprintError,
-                        "duplicate canonical command ID",
-                    ):
-                        ux_blueprint.load_state_command_contracts(root)
+        )
+        with self.assertRaisesRegex(
+            ux_blueprint.UXBlueprintError,
+            "duplicate canonical command ID",
+        ):
+            ux_blueprint._load_state_command_contracts(ROOT, snapshot)
 
 
 if __name__ == "__main__":

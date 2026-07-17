@@ -234,12 +234,12 @@
       "owner_approval_sha256": "846956145ad5c1c02fda132d31b7ecae11338ab2f0985133a7068006195a5806",
       "owner_evidence_rationale_sha256": null,
       "owner_evidence_text_sha256": null,
-      "rationale_sha256": "66c212e2b048789ff10e7709f732e1878773a68f2b9300d1a3962eccc9647783",
+      "rationale_sha256": "14e6db0d0792429ee3479478b7dc4a630e0c5fd75037e243e0d1524d75ce6b53",
       "source_id": "LINEAR-CANON-V3",
       "source_location": "line:125",
       "source_text_sha256": "595da4da703fcdef7f9493ff9ad11f1da5af6b2761295b855c407842f0649eb2",
       "target_class": "specification",
-      "target_id": "SPEC-GLOBAL-SEARCH-IDENTITY-001"
+      "target_id": "SPEC-GLOBAL-SEARCH-PRIVATE-COMMAND-LAYER-001"
     },
     {
       "authority_claim": true,
@@ -938,12 +938,12 @@
       "owner_approval_sha256": null,
       "owner_evidence_rationale_sha256": null,
       "owner_evidence_text_sha256": null,
-      "rationale_sha256": "7fa4df2bde0b4b8ef4bf1b629389a174782599755367fef09c3437bc7cef4eb1",
+      "rationale_sha256": "8b8268e7c783853ce70e51eda5da93428c516a85cdda4301fcec762d78e3309c",
       "source_id": "REPO-43E0D80464B2869224C805D8",
       "source_location": "line:1934",
       "source_text_sha256": "fcd9a26558c7aefd532cf9eec807d352a74b2d8ec5d0d6395dd6dc3735fbc7fc",
       "target_class": "specification",
-      "target_id": "SPEC-GLOBAL-SEARCH-IDENTITY-001"
+      "target_id": "SPEC-GLOBAL-SEARCH-PRIVATE-COMMAND-LAYER-001"
     },
     {
       "authority_claim": true,
@@ -1018,12 +1018,12 @@
       "owner_approval_sha256": null,
       "owner_evidence_rationale_sha256": null,
       "owner_evidence_text_sha256": null,
-      "rationale_sha256": "c7b78829c1ef87de02d34401f972165a902311e2aab964c318573f2a9b18fd13",
+      "rationale_sha256": "da84be131642af5fce193255af984fa0b45a4054a3d7d94fe84662d7db1ef373",
       "source_id": "REPO-AA88FA58EEA6FBA9BAB10270",
       "source_location": "line:1405",
       "source_text_sha256": "694a5438ad626acde3bd3c5fdcd760f4b33172fd3d4976ead8ba89e267fe4b75",
       "target_class": "specification",
-      "target_id": "SPEC-GLOBAL-SEARCH-IDENTITY-001"
+      "target_id": "SPEC-GLOBAL-SEARCH-PRESENTATION-001"
     },
     {
       "authority_claim": true,

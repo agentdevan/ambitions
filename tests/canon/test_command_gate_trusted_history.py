@@ -377,29 +377,82 @@ class CommandGateTrustedHistoryTests(unittest.TestCase):
 
     def validate(self, api, candidate, trusted_base):
         contracts = self.active_purchase_contracts()
-        if trusted_base is None or trusted_base.repository_root is None:
-            api.validate_command_gate_dependency_bindings(
-                candidate,
-                contracts,
-                canon_revision=1,
-                trusted_approval_base=trusted_base,
-            )
-            return
-        candidate = replace(
-            candidate,
-            repository_root=trusted_base.repository_root,
+        repository_root = (
+            trusted_base.repository_root
+            if trusted_base is not None
+            and trusted_base.repository_root is not None
+            else None
         )
-        with patch.object(
+        original_bytes = None
+        if repository_root is not None:
+            original_bytes = {
+                relative_path: (repository_root / relative_path).read_bytes()
+                for relative_path in (
+                    api.REGISTRY_PATH,
+                    api.APPROVAL_RECEIPT_REGISTRY_PATH,
+                    api.OWNER_APPROVAL_REGISTRY_PATH,
+                )
+            }
+        candidate = self.materialize_candidate_registry(
             api,
-            "_current_canon_content_sha256",
-            return_value=candidate.canon_content_sha256,
-        ):
-            api.validate_command_gate_dependency_bindings(
-                candidate,
-                contracts,
-                canon_revision=1,
-                trusted_approval_base=trusted_base,
+            candidate,
+            repository_root,
+        )
+        try:
+            with patch.object(
+                api,
+                "_current_canon_content_sha256",
+                return_value=candidate.canon_content_sha256,
+            ):
+                api.validate_command_gate_dependency_bindings(
+                    candidate,
+                    contracts,
+                    canon_revision=1,
+                    trusted_approval_base=trusted_base,
+                )
+        finally:
+            if original_bytes is not None:
+                for relative_path, content in original_bytes.items():
+                    (repository_root / relative_path).write_bytes(content)
+
+    def materialize_candidate_registry(
+        self,
+        api,
+        candidate,
+        repository_root=None,
+    ):
+        if repository_root is None:
+            repository_root = Path(
+                tempfile.mkdtemp(
+                    prefix="ambitions-command-gate-live-candidate-"
+                )
             )
+            self.addCleanup(shutil.rmtree, repository_root, ignore_errors=True)
+        candidate = replace(candidate, repository_root=repository_root)
+        rendered = (
+            (
+                api.REGISTRY_PATH,
+                api.render_command_gate_dependency_registry(candidate),
+            ),
+            (
+                api.APPROVAL_RECEIPT_REGISTRY_PATH,
+                api.render_command_gate_approval_receipt_registry(candidate),
+            ),
+            (
+                api.OWNER_APPROVAL_REGISTRY_PATH,
+                api.render_command_gate_owner_approval_registry(
+                    candidate.owner_approvals,
+                    registry_revision=(
+                        candidate.owner_approval_registry_revision
+                    ),
+                ),
+            ),
+        )
+        for relative_path, content in rendered:
+            destination = repository_root / relative_path
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes(content)
+        return candidate
 
     def test_current_withheld_purchase_builds_without_trusted_approval_context(self):
         api = self.api()

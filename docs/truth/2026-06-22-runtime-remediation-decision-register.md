@@ -48,7 +48,7 @@ Execution-bundle order:
 3. Capture Routing + Composer
 4. Goals Root / Detail Rebuild
 5. Today Reality Window / Action Gating
-6. Search Find / Act / Inspect
+6. Search Find / Ask / Act / Inspect
 7. Time Native Life Calendar
 8. You Settings / Appearance / Privacy
 9. Final Proof / Accessibility / Release Gate
@@ -716,9 +716,11 @@ Copy:
 
 ---
 
-## 9. Search / Find / Act / Inspect decisions
+## 9. Search / Find / Ask / Act / Inspect decisions
 
-Search = unified Find / Act / Inspect surface.
+Search = unified local-first Find / Ask / Act / Inspect surface.
+
+Find remains deterministic and offline. Ask is optional on-device grounded Ask with session-local history, object-led presentation, Capture handoff, and no hosted AI or private-graph transfer. Ask may surface proposed-only actions, but canonical owners retain validation, mutation, receipt, undo, and recovery authority.
 
 Not:
 

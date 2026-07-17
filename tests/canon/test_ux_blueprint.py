@@ -1,9 +1,12 @@
 import copy
 import importlib.util
 import json
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
+
+from tests.canon.canon_test_support import copy_figma_reconciliation_evidence
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -42,10 +45,10 @@ class UXBlueprintTests(unittest.TestCase):
         self.assertEqual(summary.journey_count, 12)
         self.assertEqual(summary.cross_cutting_count, 11)
         self.assertGreaterEqual(summary.requirement_link_count, 180)
-        self.assertEqual(summary.disposition_count, 461)
+        self.assertEqual(summary.disposition_count, 473)
         self.assertEqual(
             summary.visual_mapping_count + summary.nonvisual_count,
-            461,
+            473,
         )
         self.assertRegex(summary.disposition_sha256, r"^[0-9a-f]{64}$")
         disposition_projection = json.loads(
@@ -54,8 +57,8 @@ class UXBlueprintTests(unittest.TestCase):
                 / "docs/canon/migration/ux-blueprint-requirement-dispositions.json"
             ).read_text(encoding="utf-8")
         )
-        self.assertEqual(disposition_projection["requirement_count"], 461)
-        self.assertEqual(len(disposition_projection["dispositions"]), 461)
+        self.assertEqual(disposition_projection["requirement_count"], 473)
+        self.assertEqual(len(disposition_projection["dispositions"]), 473)
         self.assertEqual(
             len(
                 {
@@ -63,7 +66,7 @@ class UXBlueprintTests(unittest.TestCase):
                     for item in disposition_projection["dispositions"]
                 }
             ),
-            461,
+            473,
         )
         self.assertEqual(
             disposition_projection["disposition_sha256"],
@@ -338,6 +341,47 @@ class UXBlueprintTests(unittest.TestCase):
             module.UXBlueprintError, "blueprint command contract drift"
         ):
             module.validate_ux_blueprint(REPO_ROOT, drifted)
+
+    def test_validation_rejects_real_canon_source_change_during_operation(self):
+        module = self._module()
+
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            shutil.copytree(REPO_ROOT / "docs/canon", root / "docs/canon")
+            copy_figma_reconciliation_evidence(REPO_ROOT, root)
+            source = root / "docs/canon/specifications/global/search.md"
+            payload = json.loads(
+                (root / "docs/canon/migration/ux-blueprint.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            mutated = False
+
+            class SourceMutatingBlueprint(dict):
+                state_model_reads = 0
+
+                def get(self, key, default=None):
+                    nonlocal mutated
+                    if key == "state_models":
+                        self.state_model_reads += 1
+                        if self.state_model_reads == 2:
+                            source.write_text(
+                                source.read_text(encoding="utf-8")
+                                + "\n<!-- deterministic in-operation mutation -->\n",
+                                encoding="utf-8",
+                            )
+                            mutated = True
+                    return super().get(key, default)
+
+            with self.assertRaisesRegex(
+                module.UXBlueprintError,
+                "canonical source changed during UX blueprint operation",
+            ):
+                module.validate_ux_blueprint(
+                    root,
+                    SourceMutatingBlueprint(payload),
+                )
+            self.assertTrue(mutated)
 
 
 if __name__ == "__main__":

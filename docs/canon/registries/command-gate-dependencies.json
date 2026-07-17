@@ -1,17 +1,17 @@
 {
-  "canon_content_sha256": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
+  "canon_content_sha256": "0580c94fab6364d64db08629042e1477b27b5c49906d2bf074af41c43f282104",
   "canon_revision": 1,
   "dependencies": [
     {
       "activation_authorization": false,
       "approval_receipt_id": null,
-      "canon_content_sha256": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
+      "canon_content_sha256": "0580c94fab6364d64db08629042e1477b27b5c49906d2bf074af41c43f282104",
       "command_id": "CMD-YOU-ENTITLEMENT-EXPIRED-002",
       "dependency_id": "GATE-STOREKIT-PRODUCT-REGISTRY-001",
       "dependency_kind": "storekit_product_registry",
       "dependency_posture": "blocked",
       "dependency_revision": 1,
-      "dependency_sha256": "37c5ae4dc135bbf77137e0ab6121fb43b2105038afdd037f1293efdd29408b36",
+      "dependency_sha256": "22a0bcaecb84d162d2fb3d0ff896cc0f13e5905ad53460cde5a45f4e6f80f16a",
       "exact_product_mappings": [],
       "freshness": "absent",
       "mapping_record_id": null,

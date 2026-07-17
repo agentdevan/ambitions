@@ -5,6 +5,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import os
 import re
 from dataclasses import dataclass, field, replace
 from pathlib import Path
@@ -939,21 +940,27 @@ def _parse_state_command_record(
     value: object,
     path: Path,
     repository_root: Path,
+    captured_sources: Mapping[Path, bytes] | None = None,
 ) -> StateCommandResolutionRecord:
     if not isinstance(value, dict) or set(value) != STATE_COMMAND_RECORD_FIELDS:
         raise _error("state command record fields are closed", path)
     source_path = _required_string(value["source_path"], "source_path")
     source_relative = Path(source_path)
-    source_file = (repository_root / source_relative).resolve()
     if (
         source_relative.is_absolute()
         or not source_path.startswith("docs/canon/specifications/")
-        or not source_file.is_relative_to(repository_root)
+        or ".." in source_relative.parts
     ):
         raise _error("state command source path is outside specifications", path)
     try:
-        source = source_file.read_text(encoding="utf-8")
-    except OSError as error:
+        if captured_sources is not None and source_relative in captured_sources:
+            source_bytes = captured_sources[source_relative]
+        else:
+            from tools.ambitions_canon.build import _read_confined_bytes
+
+            source_bytes = _read_confined_bytes(repository_root, source_relative)
+        source = source_bytes.decode("utf-8")
+    except (OSError, UnicodeError, CanonError) as error:
         raise _error(f"cannot load state command source: {error}", path) from error
     from tools.ambitions_canon.parser import parse_canon_document
 
@@ -1036,12 +1043,28 @@ def _parse_state_command_record(
 def load_command_resolution_registry(root: Path) -> CommandResolutionRegistry:
     """Load the separately authored resolution record registry."""
 
-    repository_root = root.resolve()
-    path = repository_root / REGISTRY_PATH
+    from tools.ambitions_canon.build import _read_confined_bytes
+
     try:
-        source = path.read_bytes()
-    except OSError as error:
-        raise _error(f"cannot load command-resolution registry: {error}", path) from error
+        source = _read_confined_bytes(root, REGISTRY_PATH)
+    except (OSError, CanonError) as error:
+        raise _error(
+            f"cannot load command-resolution registry: {error}",
+            root / REGISTRY_PATH,
+        ) from error
+    return _load_command_resolution_registry_bytes(root, source)
+
+
+def _load_command_resolution_registry_bytes(
+    root: Path,
+    source: bytes,
+    *,
+    captured_sources: Mapping[Path, bytes] | None = None,
+) -> CommandResolutionRegistry:
+    """Parse one descriptor-captured immutable registry byte snapshot."""
+
+    repository_root = Path(os.path.abspath(root))
+    path = repository_root / REGISTRY_PATH
     source_sha256 = hashlib.sha256(source).hexdigest()
     cached = _LOADED_REGISTRY_CACHE.get((repository_root, source_sha256))
     if cached is not None:
@@ -1076,7 +1099,9 @@ def load_command_resolution_registry(root: Path) -> CommandResolutionRegistry:
     if not isinstance(raw_state_command_records, list):
         raise _error("state command records must be an array", path)
     state_command_records = tuple(
-        _parse_state_command_record(item, path, repository_root)
+        _parse_state_command_record(
+            item, path, repository_root, captured_sources
+        )
         for item in raw_state_command_records
     )
     state_command_ids = tuple(

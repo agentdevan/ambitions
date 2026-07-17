@@ -6,7 +6,7 @@
 - Canon revision: `1`
 - Authority state: `shadow`
 - Compiler version: `0.2.0`
-- Canon content SHA: `6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67`
+- Canon content SHA: `0580c94fab6364d64db08629042e1477b27b5c49906d2bf074af41c43f282104`
 
 ## Specifications
 
@@ -31,6 +31,7 @@
 | `JOURNEY-MISSED-WORK-RECOVERY` | journey | Missed Work Recovery | `docs/canon/specifications/journeys/missed-work-recovery.md` |
 | `JOURNEY-SCHEDULE-REFLOW` | journey | Schedule Reflow | `docs/canon/specifications/journeys/schedule-reflow.md` |
 | `JOURNEY-SEARCH-FIND-ACT-INSPECT` | journey | Search Find Act Inspect | `docs/canon/specifications/journeys/search-find-act-inspect.md` |
+| `JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT` | journey | Search Find Ask Act Inspect | `docs/canon/specifications/journeys/search-find-ask-act-inspect.md` |
 | `JOURNEY-START-AND-COMPLETE-STEP` | journey | Start and Complete Step | `docs/canon/specifications/journeys/start-and-complete-step.md` |
 | `OBJECT-ATTACHMENT` | object | Attachment | `docs/canon/specifications/objects/attachment.md` |
 | `OBJECT-CLOSURE` | object | Closure | `docs/canon/specifications/objects/closure.md` |
@@ -85,7 +86,7 @@
 | `A11Y-READING-FOCUS-001` | MUST | `accessibility.reading-focus` | `docs/canon/standards/accessibility.md:42` |
 | `A11Y-REDUCED-EFFECTS-001` | MUST | `accessibility.reduced-effects` | `docs/canon/standards/accessibility.md:70` |
 | `A11Y-STATUS-ERRORS-001` | MUST | `accessibility.status-errors` | `docs/canon/standards/accessibility.md:118` |
-| `ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001` | MUST | `accessibility.semantic-equivalence` | `docs/canon/CONSTITUTION.md:837` |
+| `ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001` | MUST | `accessibility.semantic-equivalence` | `docs/canon/CONSTITUTION.md:849` |
 | `APP-ACCOUNT-COMMAND-CONTRACT-001` | MUST | `account.command-contract` | `docs/canon/specifications/app/launch-and-setup.md:1437` |
 | `APP-ACCOUNT-LAUNCH-001` | MUST | `account.launch-commitment` | `docs/canon/specifications/app/launch-and-setup.md:1334` |
 | `APP-DEEP-LINK-COMMAND-CONTRACT-001` | MUST | `app.deep-linking.command-contract` | `docs/canon/specifications/app/deep-linking.md:383` |
@@ -117,12 +118,12 @@
 | `APP-SETUP-STATE-001` | MUST | `app.setup.state` | `docs/canon/specifications/app/launch-and-setup.md:1415` |
 | `APP-SHELL-FAILURE-001` | MUST | `app.shell.failure-recovery` | `docs/canon/specifications/app/shell.md:892` |
 | `APP-SHELL-STATE-001` | MUST | `app.shell.state` | `docs/canon/specifications/app/shell.md:881` |
-| `AUTHORITY-AMENDMENT-001` | MUST | `authority.amendment` | `docs/canon/CONSTITUTION.md:939` |
-| `AUTHORITY-MIGRATION-CORPUS-001` | MUST | `authority.migration-corpus` | `docs/canon/CONSTITUTION.md:155` |
-| `AUTHORITY-MISSION-001` | MUST | `authority.mission` | `docs/canon/CONSTITUTION.md:122` |
-| `AUTHORITY-MOAT-001` | MUST | `authority.moat` | `docs/canon/CONSTITUTION.md:144` |
-| `AUTHORITY-ORIGIN-001` | MUST | `authority.origin` | `docs/canon/CONSTITUTION.md:133` |
-| `CANON-DESTRUCTIVE-SUPERSESSION-001` | MUST NOT | `canon.destructive-supersession` | `docs/canon/CONSTITUTION.md:950` |
+| `AUTHORITY-AMENDMENT-001` | MUST | `authority.amendment` | `docs/canon/CONSTITUTION.md:951` |
+| `AUTHORITY-MIGRATION-CORPUS-001` | MUST | `authority.migration-corpus` | `docs/canon/CONSTITUTION.md:156` |
+| `AUTHORITY-MISSION-001` | MUST | `authority.mission` | `docs/canon/CONSTITUTION.md:123` |
+| `AUTHORITY-MOAT-001` | MUST | `authority.moat` | `docs/canon/CONSTITUTION.md:145` |
+| `AUTHORITY-ORIGIN-001` | MUST | `authority.origin` | `docs/canon/CONSTITUTION.md:134` |
+| `CANON-DESTRUCTIVE-SUPERSESSION-001` | MUST NOT | `canon.destructive-supersession` | `docs/canon/CONSTITUTION.md:962` |
 | `CODEX-DEPT-001` | MUST | `engineering.governance.role-separation` | `docs/canon/standards/validation-and-release.md:273` |
 | `CODEX-DEPT-002` | MUST NOT | `engineering.governance.independent-acceptance` | `docs/canon/standards/validation-and-release.md:285` |
 | `CODEX-DEPT-003` | MUST | `engineering.governance.handoff` | `docs/canon/standards/validation-and-release.md:297` |
@@ -138,14 +139,14 @@
 | `CONCURRENCY-007` | MUST | `engineering.concurrency.clock` | `docs/canon/standards/native-ios-engineering.md:110` |
 | `CONCURRENCY-008` | MUST | `engineering.concurrency.backpressure` | `docs/canon/standards/native-ios-engineering.md:126` |
 | `CONCURRENCY-009` | MUST | `engineering.concurrency.race-proof` | `docs/canon/standards/native-ios-engineering.md:138` |
-| `CONST-HISTORY-NO-GRAVEYARD-001` | MUST NOT | `canon.no-active-graveyard` | `docs/canon/CONSTITUTION.md:915` |
-| `CONST-HISTORY-SUPERSESSION-001` | MUST | `history.supersession` | `docs/canon/CONSTITUTION.md:904` |
-| `CONST-IA-ROOT-001` | MUST | `ia.root-surfaces` | `docs/canon/CONSTITUTION.md:409` |
-| `CONST-PROOF-EVIDENCE-001` | MUST | `proof.evidence` | `docs/canon/CONSTITUTION.md:865` |
-| `CONST-RUNTIME-MUTATION-001` | MUST | `runtime.mutation-invariant` | `docs/canon/CONSTITUTION.md:689` |
-| `CONTROL-FORCE-NOTHING-001` | MUST | `control.force-nothing` | `docs/canon/CONSTITUTION.md:529` |
-| `CONTROL-MATERIAL-CONFIRMATION-001` | MUST | `control.material-confirmation` | `docs/canon/CONSTITUTION.md:540` |
-| `CONTROL-UNDO-RECOVERY-001` | MUST | `control.undo-recovery` | `docs/canon/CONSTITUTION.md:551` |
+| `CONST-HISTORY-NO-GRAVEYARD-001` | MUST NOT | `canon.no-active-graveyard` | `docs/canon/CONSTITUTION.md:927` |
+| `CONST-HISTORY-SUPERSESSION-001` | MUST | `history.supersession` | `docs/canon/CONSTITUTION.md:916` |
+| `CONST-IA-ROOT-001` | MUST | `ia.root-surfaces` | `docs/canon/CONSTITUTION.md:410` |
+| `CONST-PROOF-EVIDENCE-001` | MUST | `proof.evidence` | `docs/canon/CONSTITUTION.md:877` |
+| `CONST-RUNTIME-MUTATION-001` | MUST | `runtime.mutation-invariant` | `docs/canon/CONSTITUTION.md:701` |
+| `CONTROL-FORCE-NOTHING-001` | MUST | `control.force-nothing` | `docs/canon/CONSTITUTION.md:541` |
+| `CONTROL-MATERIAL-CONFIRMATION-001` | MUST | `control.material-confirmation` | `docs/canon/CONSTITUTION.md:552` |
+| `CONTROL-UNDO-RECOVERY-001` | MUST | `control.undo-recovery` | `docs/canon/CONSTITUTION.md:563` |
 | `COPY-HUMANE-TONE-001` | MUST NOT | `language.humane-tone` | `docs/canon/standards/copy-and-state-language.md:64` |
 | `COPY-LOCKED-VOCABULARY-001` | MUST | `language.locked-vocabulary` | `docs/canon/standards/copy-and-state-language.md:28` |
 | `COPY-STATE-CONSEQUENCE-001` | MUST | `language.state-consequence` | `docs/canon/standards/copy-and-state-language.md:54` |
@@ -190,8 +191,8 @@
 | `FRONTEND-009` | MUST | `engineering.frontend.preview-matrix` | `docs/canon/standards/swiftui-and-design-system.md:140` |
 | `FRONTEND-010` | MUST | `engineering.frontend.assets` | `docs/canon/standards/swiftui-and-design-system.md:150` |
 | `GAP-PERFORMANCE-CALIBRATION-ATLAS-001` | MUST | `engineering.performance.calibration-gap` | `docs/canon/standards/performance-and-energy.md:84` |
-| `GOVERNANCE-LINEAR-RETENTION-001` | MUST | `canon.external-linear-retention` | `docs/canon/CONSTITUTION.md:926` |
-| `IA-PLAIN-BRANDED-NAMING-001` | MUST | `ia.root-labels` | `docs/canon/CONSTITUTION.md:486` |
+| `GOVERNANCE-LINEAR-RETENTION-001` | MUST | `canon.external-linear-retention` | `docs/canon/CONSTITUTION.md:938` |
+| `IA-PLAIN-BRANDED-NAMING-001` | MUST | `ia.root-labels` | `docs/canon/CONSTITUTION.md:498` |
 | `JOURNEY-CALENDAR-CANDIDATE-001` | MUST | `journey.calendar-import.candidate` | `docs/canon/specifications/journeys/external-calendar-import.md:1514` |
 | `JOURNEY-CALENDAR-CONFLICT-CHOICE-001` | MUST | `journey.calendar-diff.conflict-choice` | `docs/canon/specifications/journeys/external-calendar-import.md:1377` |
 | `JOURNEY-CALENDAR-DIFF-001` | MUST | `journey.calendar-diff.no-silent-mutation` | `docs/canon/specifications/journeys/external-calendar-import.md:1336` |
@@ -208,23 +209,25 @@
 | `JOURNEY-RECOVERY-001` | MUST | `journey.recovery.material-confirmation` | `docs/canon/specifications/journeys/missed-work-recovery.md:19` |
 | `JOURNEY-SAVED-FOR-LATER-001` | MUST | `journey.saved-for-later.durable-save` | `docs/canon/specifications/journeys/capture-to-placement.md:46` |
 | `JOURNEY-SEARCH-FIND-ACT-INSPECT-001` | MUST | `journey.search.find-act-inspect` | `docs/canon/specifications/journeys/search-find-act-inspect.md:19` |
+| `JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT-001` | MUST | `journey.search.find-ask-act-inspect` | `docs/canon/specifications/journeys/search-find-ask-act-inspect.md:19` |
 | `JOURNEY-STEP-CLOSURE-001` | MUST | `journey.step-closure.required-proof` | `docs/canon/specifications/journeys/closure-and-proof.md:19` |
 | `JOURNEY-STEP-START-COMPLETE-001` | MUST | `journey.step.start-complete` | `docs/canon/specifications/journeys/start-and-complete-step.md:19` |
 | `JOURNEY-TIME-DIRECT-MANIPULATION-001` | MUST | `journey.time-direct-manipulation.conflict-preview` | `docs/canon/specifications/journeys/schedule-reflow.md:19` |
-| `LAW-ACCOUNT-BOUNDARY-001` | MUST NOT | `account.boundary` | `docs/canon/CONSTITUTION.md:774` |
-| `LAW-AUTHORITY-PRODUCT-DEFINITION-001` | MUST | `authority.product-definition` | `docs/canon/CONSTITUTION.md:111` |
-| `LAW-DATA-LOSS-STOP-SHIP-001` | MUST | `data.loss-stop-ship` | `docs/canon/CONSTITUTION.md:889` |
-| `LAW-IA-NONROOT-001` | MUST | `ia.nonroot-ownership` | `docs/canon/CONSTITUTION.md:431` |
-| `LAW-IA-PLAIN-LANGUAGE-001` | MUST | `ia.plain-language` | `docs/canon/CONSTITUTION.md:442` |
-| `LAW-IA-ROOT-001` | MUST | `ia.root-state-invariance` | `docs/canon/CONSTITUTION.md:420` |
-| `LAW-IA-TRUST-001` | MUST | `global.trust-ownership` | `docs/canon/CONSTITUTION.md:464` |
-| `LAW-LANGUAGE-ROOT-LABELS-001` | MUST | `language.root-labels` | `docs/canon/CONSTITUTION.md:453` |
-| `LAW-LOCAL-AUTHORITY-001` | MUST | `privacy.local-authority` | `docs/canon/CONSTITUTION.md:752` |
-| `LAW-OFFLINE-NO-ACCOUNT-001` | MUST | `privacy.no-account-core` | `docs/canon/CONSTITUTION.md:763` |
-| `LAW-R2-PUBLIC-ONLY-001` | MUST NOT | `privacy.r2-public-only` | `docs/canon/CONSTITUTION.md:785` |
-| `LAW-RUNTIME-DURABLE-SUCCESS-001` | MUST | `runtime.durable-success` | `docs/canon/CONSTITUTION.md:700` |
-| `LAW-RUNTIME-NO-DIRECT-WRITE-001` | MUST NOT | `runtime.no-direct-write` | `docs/canon/CONSTITUTION.md:711` |
-| `LAW-SHELL-STAGE-001` | MUST | `shell.stage` | `docs/canon/CONSTITUTION.md:475` |
+| `LAW-ACCOUNT-BOUNDARY-001` | MUST NOT | `account.boundary` | `docs/canon/CONSTITUTION.md:786` |
+| `LAW-AUTHORITY-PRODUCT-DEFINITION-001` | MUST | `authority.product-definition` | `docs/canon/CONSTITUTION.md:112` |
+| `LAW-DATA-LOSS-STOP-SHIP-001` | MUST | `data.loss-stop-ship` | `docs/canon/CONSTITUTION.md:901` |
+| `LAW-IA-NONROOT-001` | MUST | `ia.nonroot-ownership` | `docs/canon/CONSTITUTION.md:432` |
+| `LAW-IA-PLAIN-LANGUAGE-001` | MUST | `ia.plain-language` | `docs/canon/CONSTITUTION.md:454` |
+| `LAW-IA-ROOT-001` | MUST | `ia.root-state-invariance` | `docs/canon/CONSTITUTION.md:421` |
+| `LAW-IA-TRUST-001` | MUST | `global.trust-ownership` | `docs/canon/CONSTITUTION.md:476` |
+| `LAW-LANGUAGE-ROOT-LABELS-001` | MUST | `language.root-labels` | `docs/canon/CONSTITUTION.md:465` |
+| `LAW-LOCAL-AUTHORITY-001` | MUST | `privacy.local-authority` | `docs/canon/CONSTITUTION.md:764` |
+| `LAW-OFFLINE-NO-ACCOUNT-001` | MUST | `privacy.no-account-core` | `docs/canon/CONSTITUTION.md:775` |
+| `LAW-R2-PUBLIC-ONLY-001` | MUST NOT | `privacy.r2-public-only` | `docs/canon/CONSTITUTION.md:797` |
+| `LAW-RUNTIME-DURABLE-SUCCESS-001` | MUST | `runtime.durable-success` | `docs/canon/CONSTITUTION.md:712` |
+| `LAW-RUNTIME-NO-DIRECT-WRITE-001` | MUST NOT | `runtime.no-direct-write` | `docs/canon/CONSTITUTION.md:723` |
+| `LAW-SEARCH-PRIVATE-COMMAND-LAYER-001` | MUST | `global.search.private-command-layer` | `docs/canon/CONSTITUTION.md:443` |
+| `LAW-SHELL-STAGE-001` | MUST | `shell.stage` | `docs/canon/CONSTITUTION.md:487` |
 | `LIFECYCLE-001` | MUST | `engineering.lifecycle.scene` | `docs/canon/standards/native-ios-engineering.md:224` |
 | `LIFECYCLE-002` | MUST | `engineering.lifecycle.system-change` | `docs/canon/standards/native-ios-engineering.md:234` |
 | `LIFECYCLE-003` | MUST | `engineering.lifecycle.background` | `docs/canon/standards/native-ios-engineering.md:244` |
@@ -233,27 +236,27 @@
 | `LOCALIZATION-002` | MUST | `language.temporal-locale` | `docs/canon/standards/copy-and-state-language.md:92` |
 | `LOCALIZATION-003` | MUST | `language.layout-resilience` | `docs/canon/standards/copy-and-state-language.md:102` |
 | `LOCALIZATION-004` | MUST | `language.store-localization` | `docs/canon/standards/copy-and-state-language.md:112` |
-| `MISSION-ANTI-METRICS-001` | MUST NOT | `mission.anti-metrics` | `docs/canon/CONSTITUTION.md:381` |
-| `MISSION-CAPABILITIES-001` | MUST | `mission.capabilities` | `docs/canon/CONSTITUTION.md:225` |
-| `MISSION-CAPABILITY-MEANING-001` | MUST | `mission.capability-meaning` | `docs/canon/CONSTITUTION.md:236` |
-| `MISSION-CATEGORY-001` | MUST | `mission.category` | `docs/canon/CONSTITUTION.md:170` |
-| `MISSION-FOUNDATION-RUNTIME-001` | MUST | `mission.foundation-runtime` | `docs/canon/CONSTITUTION.md:302` |
-| `MISSION-FUNCTION-001` | MUST | `mission.function` | `docs/canon/CONSTITUTION.md:181` |
-| `MISSION-HARD-RED-001` | MUST NOT | `mission.hard-red` | `docs/canon/CONSTITUTION.md:269` |
-| `MISSION-INTEGRATION-001` | MUST | `mission.integration` | `docs/canon/CONSTITUTION.md:203` |
-| `MISSION-LAUNCH-BAR-001` | MUST | `mission.launch-bar` | `docs/canon/CONSTITUTION.md:214` |
-| `MISSION-MOAT-001` | MUST | `mission.moat` | `docs/canon/CONSTITUTION.md:348` |
-| `MISSION-MOAT-CONTINUITY-001` | MUST | `mission.moat-continuity` | `docs/canon/CONSTITUTION.md:359` |
-| `MISSION-NAMING-001` | MUST | `mission.naming-stack` | `docs/canon/CONSTITUTION.md:192` |
-| `MISSION-NON-COMMODITY-001` | MUST NOT | `mission.non-commodity` | `docs/canon/CONSTITUTION.md:370` |
-| `MISSION-ORCHESTRATION-LOOP-001` | MUST | `mission.core-loop` | `docs/canon/CONSTITUTION.md:392` |
-| `MISSION-ORIGIN-OUTCOME-001` | MUST | `mission.origin-outcome` | `docs/canon/CONSTITUTION.md:291` |
-| `MISSION-ORIGIN-PROBLEM-001` | MUST | `mission.origin-problem` | `docs/canon/CONSTITUTION.md:280` |
-| `MISSION-ORIGIN-STRUCTURE-001` | MUST | `mission.origin-structure` | `docs/canon/CONSTITUTION.md:313` |
-| `MISSION-REFLOW-001` | MUST | `mission.reflow` | `docs/canon/CONSTITUTION.md:258` |
-| `MISSION-RUNTIME-RELATION-001` | MUST | `mission.runtime-relation` | `docs/canon/CONSTITUTION.md:247` |
-| `MISSION-SUCCESS-001` | MUST | `mission.success` | `docs/canon/CONSTITUTION.md:324` |
-| `MISSION-USER-001` | MUST | `mission.user` | `docs/canon/CONSTITUTION.md:337` |
+| `MISSION-ANTI-METRICS-001` | MUST NOT | `mission.anti-metrics` | `docs/canon/CONSTITUTION.md:382` |
+| `MISSION-CAPABILITIES-001` | MUST | `mission.capabilities` | `docs/canon/CONSTITUTION.md:226` |
+| `MISSION-CAPABILITY-MEANING-001` | MUST | `mission.capability-meaning` | `docs/canon/CONSTITUTION.md:237` |
+| `MISSION-CATEGORY-001` | MUST | `mission.category` | `docs/canon/CONSTITUTION.md:171` |
+| `MISSION-FOUNDATION-RUNTIME-001` | MUST | `mission.foundation-runtime` | `docs/canon/CONSTITUTION.md:303` |
+| `MISSION-FUNCTION-001` | MUST | `mission.function` | `docs/canon/CONSTITUTION.md:182` |
+| `MISSION-HARD-RED-001` | MUST NOT | `mission.hard-red` | `docs/canon/CONSTITUTION.md:270` |
+| `MISSION-INTEGRATION-001` | MUST | `mission.integration` | `docs/canon/CONSTITUTION.md:204` |
+| `MISSION-LAUNCH-BAR-001` | MUST | `mission.launch-bar` | `docs/canon/CONSTITUTION.md:215` |
+| `MISSION-MOAT-001` | MUST | `mission.moat` | `docs/canon/CONSTITUTION.md:349` |
+| `MISSION-MOAT-CONTINUITY-001` | MUST | `mission.moat-continuity` | `docs/canon/CONSTITUTION.md:360` |
+| `MISSION-NAMING-001` | MUST | `mission.naming-stack` | `docs/canon/CONSTITUTION.md:193` |
+| `MISSION-NON-COMMODITY-001` | MUST NOT | `mission.non-commodity` | `docs/canon/CONSTITUTION.md:371` |
+| `MISSION-ORCHESTRATION-LOOP-001` | MUST | `mission.core-loop` | `docs/canon/CONSTITUTION.md:393` |
+| `MISSION-ORIGIN-OUTCOME-001` | MUST | `mission.origin-outcome` | `docs/canon/CONSTITUTION.md:292` |
+| `MISSION-ORIGIN-PROBLEM-001` | MUST | `mission.origin-problem` | `docs/canon/CONSTITUTION.md:281` |
+| `MISSION-ORIGIN-STRUCTURE-001` | MUST | `mission.origin-structure` | `docs/canon/CONSTITUTION.md:314` |
+| `MISSION-REFLOW-001` | MUST | `mission.reflow` | `docs/canon/CONSTITUTION.md:259` |
+| `MISSION-RUNTIME-RELATION-001` | MUST | `mission.runtime-relation` | `docs/canon/CONSTITUTION.md:248` |
+| `MISSION-SUCCESS-001` | MUST | `mission.success` | `docs/canon/CONSTITUTION.md:325` |
+| `MISSION-USER-001` | MUST | `mission.user` | `docs/canon/CONSTITUTION.md:338` |
 | `OBJ-ARCHIVE-SEMANTICS-001` | MUST | `object.archive.planning-influence` | `docs/canon/specifications/objects/life-area.md:100` |
 | `OBJ-ATTACHMENT-IDENTITY-001` | MUST | `object.attachment.identity-privacy` | `docs/canon/specifications/objects/attachment.md:17` |
 | `OBJ-CANONICAL-IDENTITY-001` | MUST | `object.identity.canonical` | `docs/canon/specifications/objects/life-area.md:54` |
@@ -313,24 +316,24 @@
 | `OBJ-STEP-URGENCY-METADATA-001` | MAY | `object.step.urgency-metadata` | `docs/canon/specifications/objects/step.md:191` |
 | `OBJ-SUBSTEP-IDENTITY-001` | MUST NOT | `object.substep.identity-scheduling` | `docs/canon/specifications/objects/step.md:150` |
 | `OBJ-TYPE-BOUNDARY-001` | MUST NOT | `object.boundary.shared-metadata` | `docs/canon/specifications/objects/step.md:83` |
-| `OBJECT-CANONICAL-GRAPH-001` | MUST | `object.canonical-graph` | `docs/canon/CONSTITUTION.md:607` |
-| `OBJECT-FUTURE-STEP-IDENTITY-001` | MUST | `object.future-step-identity` | `docs/canon/CONSTITUTION.md:620` |
-| `OBJECT-GOAL-LIFECYCLE-001` | MUST | `object.goal-lifecycle` | `docs/canon/CONSTITUTION.md:562` |
-| `OBJECT-LIFECYCLE-DELETION-001` | MUST | `object.lifecycle-deletion` | `docs/canon/CONSTITUTION.md:575` |
-| `OBJECT-PROOF-REQUIREMENT-001` | MUST | `object.proof-requirement` | `docs/canon/CONSTITUTION.md:588` |
-| `OBJECT-REMINDER-COMPLETION-001` | MUST NOT | `object.reminder-completion` | `docs/canon/CONSTITUTION.md:659` |
-| `OBJECT-SAVED-FOR-LATER-001` | MUST | `object.saved-for-later` | `docs/canon/CONSTITUTION.md:672` |
-| `OBJECT-TAXONOMY-001` | MUST | `object.taxonomy` | `docs/canon/CONSTITUTION.md:633` |
+| `OBJECT-CANONICAL-GRAPH-001` | MUST | `object.canonical-graph` | `docs/canon/CONSTITUTION.md:619` |
+| `OBJECT-FUTURE-STEP-IDENTITY-001` | MUST | `object.future-step-identity` | `docs/canon/CONSTITUTION.md:632` |
+| `OBJECT-GOAL-LIFECYCLE-001` | MUST | `object.goal-lifecycle` | `docs/canon/CONSTITUTION.md:574` |
+| `OBJECT-LIFECYCLE-DELETION-001` | MUST | `object.lifecycle-deletion` | `docs/canon/CONSTITUTION.md:587` |
+| `OBJECT-PROOF-REQUIREMENT-001` | MUST | `object.proof-requirement` | `docs/canon/CONSTITUTION.md:600` |
+| `OBJECT-REMINDER-COMPLETION-001` | MUST NOT | `object.reminder-completion` | `docs/canon/CONSTITUTION.md:671` |
+| `OBJECT-SAVED-FOR-LATER-001` | MUST | `object.saved-for-later` | `docs/canon/CONSTITUTION.md:684` |
+| `OBJECT-TAXONOMY-001` | MUST | `object.taxonomy` | `docs/canon/CONSTITUTION.md:645` |
 | `PERF-001` | MUST | `engineering.performance.registry` | `docs/canon/standards/performance-and-energy.md:26` |
 | `PERF-002` | MUST | `engineering.performance.context` | `docs/canon/standards/performance-and-energy.md:38` |
 | `PERF-003` | MUST NOT | `engineering.performance.claim-proof` | `docs/canon/standards/performance-and-energy.md:48` |
 | `PERF-004` | MUST | `engineering.performance.regression` | `docs/canon/standards/performance-and-energy.md:64` |
 | `PERF-005` | MUST | `engineering.performance.resource-aware` | `docs/canon/standards/performance-and-energy.md:74` |
-| `PLATFORM-CALENDAR-REPLACEMENT-001` | MUST | `platform.calendar-replacement` | `docs/canon/CONSTITUTION.md:848` |
-| `PLATFORM-NATIVE-IPHONE-001` | MUST | `platform.native-iphone` | `docs/canon/CONSTITUTION.md:826` |
-| `PRIVACY-CLOUDKIT-CONTINUITY-001` | MUST | `privacy.cloudkit-continuity` | `docs/canon/CONSTITUTION.md:796` |
-| `PRIVACY-VISIBILITY-001` | MUST | `privacy.visibility` | `docs/canon/CONSTITUTION.md:809` |
-| `PROOF-FIGMA-AUTHORITY-001` | MUST | `proof.figma-authority` | `docs/canon/CONSTITUTION.md:876` |
+| `PLATFORM-CALENDAR-REPLACEMENT-001` | MUST | `platform.calendar-replacement` | `docs/canon/CONSTITUTION.md:860` |
+| `PLATFORM-NATIVE-IPHONE-001` | MUST | `platform.native-iphone` | `docs/canon/CONSTITUTION.md:838` |
+| `PRIVACY-CLOUDKIT-CONTINUITY-001` | MUST | `privacy.cloudkit-continuity` | `docs/canon/CONSTITUTION.md:808` |
+| `PRIVACY-VISIBILITY-001` | MUST | `privacy.visibility` | `docs/canon/CONSTITUTION.md:821` |
+| `PROOF-FIGMA-AUTHORITY-001` | MUST | `proof.figma-authority` | `docs/canon/CONSTITUTION.md:888` |
 | `RELEASE-001` | MUST | `engineering.release.identity` | `docs/canon/standards/validation-and-release.md:217` |
 | `RELEASE-002` | MUST | `engineering.release.domains` | `docs/canon/standards/validation-and-release.md:227` |
 | `RELEASE-003` | MUST | `engineering.release.rollout` | `docs/canon/standards/validation-and-release.md:237` |
@@ -341,8 +344,8 @@
 | `RELIABILITY-004` | MUST | `engineering.reliability.crash-hang` | `docs/canon/standards/testing-and-fixtures.md:154` |
 | `RELIABILITY-005` | MUST | `engineering.reliability.incident` | `docs/canon/standards/testing-and-fixtures.md:164` |
 | `RELIABILITY-006` | MUST | `engineering.reliability.no-silent-repair` | `docs/canon/standards/testing-and-fixtures.md:174` |
-| `RUNTIME-MUTATION-SEQUENCE-001` | MUST | `runtime.mutation-sequence` | `docs/canon/CONSTITUTION.md:722` |
-| `RUNTIME-SOURCE-OWNER-001` | MUST | `runtime.source-owner` | `docs/canon/CONSTITUTION.md:735` |
+| `RUNTIME-MUTATION-SEQUENCE-001` | MUST | `runtime.mutation-sequence` | `docs/canon/CONSTITUTION.md:734` |
+| `RUNTIME-SOURCE-OWNER-001` | MUST | `runtime.source-owner` | `docs/canon/CONSTITUTION.md:747` |
 | `SECURITY-001` | MUST | `engineering.security.threat-model` | `docs/canon/standards/security-and-privacy.md:34` |
 | `SECURITY-002` | MUST | `engineering.security.hostile-input` | `docs/canon/standards/security-and-privacy.md:44` |
 | `SECURITY-003` | MUST | `engineering.security.sensitive-surfaces` | `docs/canon/standards/security-and-privacy.md:58` |
@@ -370,14 +373,24 @@
 | `SPEC-GLOBAL-MOTION-ACCESSIBILITY-001` | MUST | `global.motion.accessibility` | `docs/canon/specifications/global/motion.md:57` |
 | `SPEC-GLOBAL-MOTION-RESPONSIBILITY-001` | MUST | `global.motion.responsibility` | `docs/canon/specifications/global/motion.md:33` |
 | `SPEC-GLOBAL-MOTION-STATE-CONTINUITY-001` | MUST | `global.motion.state-continuity` | `docs/canon/specifications/global/motion.md:44` |
-| `SPEC-GLOBAL-SEARCH-ACTIONS-001` | MUST | `global.search.canonical-actions` | `docs/canon/specifications/global/search.md:988` |
-| `SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001` | MUST | `global.search.command-contract` | `docs/canon/specifications/global/search.md:999` |
-| `SPEC-GLOBAL-SEARCH-FIRST-VIEWPORT-001` | MUST | `global.search.first-viewport` | `docs/canon/specifications/global/search.md:940` |
-| `SPEC-GLOBAL-SEARCH-IDENTITY-001` | MUST | `global.search.identity` | `docs/canon/specifications/global/search.md:929` |
-| `SPEC-GLOBAL-SEARCH-INDEX-001` | MUST | `global.search.index-ranking` | `docs/canon/specifications/global/search.md:977` |
-| `SPEC-GLOBAL-SEARCH-INDEX-ACTIONS-001` | MUST | `global.search.index-actions` | `docs/canon/specifications/global/search.md:955` |
-| `SPEC-GLOBAL-SEARCH-PLACEMENT-001` | MUST | `global.search.placement` | `docs/canon/specifications/global/search.md:1085` |
-| `SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001` | MUST | `global.search.visual-authority` | `docs/canon/specifications/global/search.md:966` |
+| `SPEC-GLOBAL-SEARCH-ACTIONS-001` | MUST | `global.search.canonical-actions` | `docs/canon/specifications/global/search.md:1397` |
+| `SPEC-GLOBAL-SEARCH-ANSWER-EVIDENCE-001` | MUST | `global.search.answer-evidence` | `docs/canon/specifications/global/search.md:1294` |
+| `SPEC-GLOBAL-SEARCH-ASK-001` | MAY | `global.search.ask` | `docs/canon/specifications/global/search.md:1250` |
+| `SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001` | MUST | `global.search.ask-activation-gate` | `docs/canon/specifications/global/search.md:1272` |
+| `SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001` | MUST | `global.search.ask-command-contract` | `docs/canon/specifications/global/search.md:1261` |
+| `SPEC-GLOBAL-SEARCH-CAPTURE-HANDOFF-001` | MUST | `global.search.capture-handoff` | `docs/canon/specifications/global/search.md:1327` |
+| `SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001` | MUST | `global.search.command-contract` | `docs/canon/specifications/global/search.md:1410` |
+| `SPEC-GLOBAL-SEARCH-FIND-001` | MUST | `global.search.find` | `docs/canon/specifications/global/search.md:1239` |
+| `SPEC-GLOBAL-SEARCH-FIRST-VIEWPORT-001` | MUST | `global.search.first-viewport` | `docs/canon/specifications/global/search.md:1349` |
+| `SPEC-GLOBAL-SEARCH-INDEX-001` | MUST | `global.search.index-ranking` | `docs/canon/specifications/global/search.md:1386` |
+| `SPEC-GLOBAL-SEARCH-INDEX-ACTIONS-001` | MUST | `global.search.index-actions` | `docs/canon/specifications/global/search.md:1364` |
+| `SPEC-GLOBAL-SEARCH-INPUT-001` | MUST | `global.search.input` | `docs/canon/specifications/global/search.md:1283` |
+| `SPEC-GLOBAL-SEARCH-INSPECT-001` | MUST | `global.search.inspect` | `docs/canon/specifications/global/search.md:1316` |
+| `SPEC-GLOBAL-SEARCH-PLACEMENT-001` | MUST | `global.search.placement` | `docs/canon/specifications/global/search.md:1496` |
+| `SPEC-GLOBAL-SEARCH-PRESENTATION-001` | MUST NOT | `global.search.presentation` | `docs/canon/specifications/global/search.md:1338` |
+| `SPEC-GLOBAL-SEARCH-PRIVATE-COMMAND-LAYER-001` | MUST | `global.search.identity` | `docs/canon/specifications/global/search.md:1228` |
+| `SPEC-GLOBAL-SEARCH-SESSION-HISTORY-001` | MUST | `global.search.session-history` | `docs/canon/specifications/global/search.md:1305` |
+| `SPEC-GLOBAL-SEARCH-VISUAL-AUTHORITY-001` | MUST | `global.search.visual-authority` | `docs/canon/specifications/global/search.md:1375` |
 | `SPEC-GLOBAL-TRUST-COMMAND-CONTRACT-001` | MUST | `global.trust.command-contract` | `docs/canon/specifications/global/trust-inspection.md:1449` |
 | `SPEC-GLOBAL-TRUST-INSPECTION-001` | MUST | `global.trust.identity` | `docs/canon/specifications/global/trust-inspection.md:1394` |
 | `SPEC-GLOBAL-TRUST-LAYERS-001` | MUST | `global.trust.layers` | `docs/canon/specifications/global/trust-inspection.md:1411` |
@@ -474,8 +487,8 @@
 | `SUPPLY-002` | MUST NOT | `engineering.supply.minimal` | `docs/canon/standards/security-and-privacy.md:120` |
 | `SUPPLY-003` | MUST | `engineering.supply.sbom` | `docs/canon/standards/security-and-privacy.md:134` |
 | `SUPPLY-004` | MUST NOT | `engineering.supply.egress` | `docs/canon/standards/security-and-privacy.md:144` |
-| `SURFACE-TODAY-IDENTITY-001` | MUST | `surface.today-primary-identity` | `docs/canon/CONSTITUTION.md:499` |
-| `SURFACE-YOU-DEPTH-001` | MUST | `surface.you-depth` | `docs/canon/CONSTITUTION.md:512` |
+| `SURFACE-TODAY-IDENTITY-001` | MUST | `surface.today-primary-identity` | `docs/canon/CONSTITUTION.md:511` |
+| `SURFACE-YOU-DEPTH-001` | MUST | `surface.you-depth` | `docs/canon/CONSTITUTION.md:524` |
 | `SYS-CANONICAL-GRAPH-001` | MUST | `object.graph.single-canonical` | `docs/canon/specifications/objects/schedule-placement.md:40` |
 | `SYS-PROJECTION-OWNERSHIP-001` | MUST NOT | `object.graph.projection-ownership` | `docs/canon/specifications/objects/schedule-placement.md:53` |
 | `SYSTEM-APPLE-HANDOFF-001` | MUST | `system.apple.command-handoff` | `docs/canon/specifications/systems/apple-ecosystem.md:47` |
@@ -538,4 +551,4 @@
 | `TEST-RUNTIME-CONTRACT-001` | MUST | `test.runtime-contract` | `docs/canon/standards/testing-and-fixtures.md:214` |
 | `TEST-SCENARIO-EXECUTABILITY-001` | MUST | `test.scenario-executability` | `docs/canon/standards/testing-and-fixtures.md:225` |
 | `TEST-SCOPE-MATRIX-001` | MUST | `test.scope-matrix` | `docs/canon/standards/testing-and-fixtures.md:203` |
-| `TIME-EXTERNAL-VISIBILITY-001` | MUST | `surface.time-external-visibility` | `docs/canon/CONSTITUTION.md:646` |
+| `TIME-EXTERNAL-VISIBILITY-001` | MUST | `surface.time-external-visibility` | `docs/canon/CONSTITUTION.md:658` |

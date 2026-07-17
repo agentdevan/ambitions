@@ -183,7 +183,7 @@ Forbidden recommendation language:
 
 ## 5. Surface-by-Surface Moat Requirements
 
-Current surface language follows `PRODUCT_DESIGN_TRUTH.md`: Today is the Reality Window, Goals is the Life Area Atlas, Time is the native Life Calendar, Capture is the global typed route graph and full-screen Stage composer, Search is local Find / Act / Inspect, and Motion is Stage/Motion behavior. Older object names may appear only as internal/source names or historical comparison points; they do not override current design truth.
+Current surface language follows `PRODUCT_DESIGN_TRUTH.md`: Today is the Reality Window, Goals is the Life Area Atlas, Time is the native Life Calendar, Capture is the global typed route graph and full-screen Stage composer, Search is local-first Find / Ask / Act / Inspect, and Motion is Stage/Motion behavior. Older object names may appear only as internal/source names or historical comparison points; they do not override current design truth.
 
 ### Today
 
@@ -219,9 +219,10 @@ Current surface language follows `PRODUCT_DESIGN_TRUTH.md`: Today is the Reality
 
 ### Search
 
-- local Find / Act / Inspect over chatbot search
+- local-first Find / Ask / Act / Inspect over chatbot search; optional grounded Ask remains on-device and object-led
 - deterministic local indexing over cloud/LLM query paths
 - precise navigation and state-gated actions over shallow text results
+- proposed-only Ask actions through canonical owners, session-local Ask history, Capture handoff, and no hosted AI or private-graph transfer
 
 ### Motion
 

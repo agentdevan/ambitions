@@ -345,10 +345,59 @@
   ],
   "authority_state": "candidate_shadow",
   "canon": {
-    "content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
+    "content_sha": "0580c94fab6364d64db08629042e1477b27b5c49906d2bf074af41c43f282104",
     "revision": 1,
     "source_sha": "ffd462ab52c0eff798071333388a051d9f3e55f3"
   },
+  "command_registry": {
+    "path": "docs/canon/registries/command-resolution-registry.json",
+    "registry_id": "COMMAND-RESOLUTION-REGISTRY-001",
+    "registry_revision": 2,
+    "sha256": "afac1a20e98350082b7809f96665c59a8604bb60eb74df5b2b4bd69ed64438a1"
+  },
+  "command_registry_bindings": [
+    {
+      "command_ids": [
+        "CMD-TIME-DETAIL-VIEWING-001",
+        "CMD-TIME-DETAIL-VIEWING-002",
+        "CMD-TIME-DETAIL-VIEWING-003",
+        "CMD-TIME-DETAIL-VIEWING-004",
+        "CMD-TIME-DETAIL-VIEWING-005",
+        "CMD-TIME-DETAIL-VIEWING-006",
+        "CMD-TIME-DETAIL-VIEWING-007",
+        "CMD-TIME-DETAIL-VIEWING-008"
+      ],
+      "figma_text_node_id": "329:1695",
+      "requirement_id": "SPEC-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001",
+      "state_id": "UX-STATE-VARIANT-TIME-DETAIL-VIEWING"
+    },
+    {
+      "command_ids": [
+        "CMD-TIME-IMPORT-REVIEWING-DIFF-001",
+        "CMD-TIME-IMPORT-REVIEWING-DIFF-002",
+        "CMD-TIME-IMPORT-REVIEWING-DIFF-003",
+        "CMD-TIME-IMPORT-REVIEWING-DIFF-004",
+        "CMD-TIME-IMPORT-REVIEWING-DIFF-005",
+        "CMD-TIME-IMPORT-REVIEWING-DIFF-006",
+        "CMD-TIME-IMPORT-REVIEWING-DIFF-007",
+        "CMD-TIME-IMPORT-REVIEWING-DIFF-008",
+        "CMD-TIME-IMPORT-REVIEWING-DIFF-009",
+        "CMD-TIME-IMPORT-REVIEWING-DIFF-010",
+        "CMD-TIME-IMPORT-REVIEWING-DIFF-011",
+        "CMD-TIME-IMPORT-REVIEWING-DIFF-012",
+        "CMD-TIME-IMPORT-REVIEWING-DIFF-013",
+        "CMD-TIME-IMPORT-REVIEWING-DIFF-014",
+        "CMD-TIME-IMPORT-REVIEWING-DIFF-015",
+        "CMD-TIME-IMPORT-REVIEWING-DIFF-016",
+        "CMD-TIME-IMPORT-REVIEWING-DIFF-017",
+        "CMD-TIME-IMPORT-REVIEWING-DIFF-018",
+        "CMD-TIME-IMPORT-REVIEWING-DIFF-019"
+      ],
+      "figma_text_node_id": "329:1698",
+      "requirement_id": "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001",
+      "state_id": "UX-STATE-VARIANT-TIME-IMPORT-REVIEWING-DIFF"
+    }
+  ],
   "deleted_node_ids": [],
   "destructive_actions": [],
   "drilldown_shell_frames": [
@@ -800,6 +849,75 @@
       ]
     }
   ],
+  "presentation_repairs": [
+    {
+      "clips_consequence_copy": false,
+      "frame_height": 124,
+      "frame_id": "327:1648",
+      "repair_kind": "unclip_and_resize",
+      "screenshot_height": 124,
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-006-viewport.png",
+      "screenshot_sha256": "2b37bf9db0d74e53f574b69f3bf54486904a77967f743f93364da1c5183e3e71",
+      "screenshot_width": 916,
+      "visible_consequence_text": "You can continue offline",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-006"
+    },
+    {
+      "content_bottom_clearance": 84,
+      "dock_height": 84,
+      "fade_height": 84,
+      "fade_node_id": "354:2300",
+      "fade_y": 768,
+      "frame_id": "266:1424",
+      "preserved_composition": "rolling_vertical_time_rail",
+      "repair_kind": "trim_fade_to_dock",
+      "screenshot_height": 852,
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-001-viewport.png",
+      "screenshot_sha256": "af6bf216b3809b832780089eb14e5ecdef6a57d58b4514275ca8c52cdfe2532b",
+      "screenshot_width": 393,
+      "visual_authority_id": "VA-P4-CANDIDATE-001"
+    },
+    {
+      "content_bottom_clearance": 84,
+      "dock_height": 84,
+      "fade_height": 84,
+      "fade_node_id": "354:2552",
+      "fade_y": 768,
+      "frame_id": "272:1424",
+      "old_hidden_dock_node_id": "354:2562",
+      "repair_kind": "trim_fade_and_replace_dock",
+      "replacement_dock_node_id": "368:2746",
+      "screenshot_height": 852,
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-003-viewport.png",
+      "screenshot_sha256": "a19e378f86dcf4d9a0cde336ef35b8c77d99a8da6a543ef2f4dd1449bb406090",
+      "screenshot_width": 393,
+      "visible_root_dock_glyphs": [
+        "Goals",
+        "Time",
+        "Today",
+        "You"
+      ],
+      "visual_authority_id": "VA-P4-CANDIDATE-003"
+    },
+    {
+      "frame_id": "278:1449",
+      "old_hidden_dock_node_id": "354:2733",
+      "pixel_equivalent_render": true,
+      "repair_kind": "replace_dock",
+      "replacement_dock_node_id": "367:2746",
+      "screenshot_height": 852,
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-005-viewport.png",
+      "screenshot_sha256": "a792881c96c7f3e12b7cdd5ece054fb9bde25b6bb80fcfe9e2919ed53c8d20a3",
+      "screenshot_width": 393,
+      "visible_root_dock_glyphs": [
+        "Goals",
+        "Time",
+        "Today",
+        "You"
+      ],
+      "visual_authority_id": "VA-P4-CANDIDATE-005"
+    }
+  ],
   "repository_base_sha": "201f1e1451a295b53fcfcefb6ba4c0acce207d45",
   "root_shell_frames": [
     {
@@ -972,270 +1090,6 @@
     }
   ],
   "schema_version": 1,
-  "task_pack_targets": [
-    {
-      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=270-1430",
-      "frame_version": "R1",
-      "node_id": "270:1430",
-      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-001-viewport.png",
-      "screenshot_sha256": "311374645649f6bdd851b9e34783599847c94b76d6862d0dbb2d67a473260376",
-      "visual_authority_id": "VA-P4-A11Y-CLASS-001"
-    },
-    {
-      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=296-60",
-      "frame_version": "R1",
-      "node_id": "296:60",
-      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-002-viewport.png",
-      "screenshot_sha256": "eee76b72a8feba19539ba8c293fd071a0e256c15fbc40a210e05124b52df61b8",
-      "visual_authority_id": "VA-P4-A11Y-CLASS-002"
-    },
-    {
-      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=296-84",
-      "frame_version": "R1",
-      "node_id": "296:84",
-      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-003-viewport.png",
-      "screenshot_sha256": "f709b45fbf3612e4a6323cdd7210711caa6e21fb03258af39e61ea631c3b33d7",
-      "visual_authority_id": "VA-P4-A11Y-CLASS-003"
-    },
-    {
-      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=327-1603",
-      "frame_version": "R1",
-      "node_id": "327:1603",
-      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-004-viewport.png",
-      "screenshot_sha256": "93395d4705581ec180101def15d1688e48db8cedc2688edc2ee20917109e1d6f",
-      "visual_authority_id": "VA-P4-A11Y-CLASS-004"
-    },
-    {
-      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=329-1635",
-      "frame_version": "R1",
-      "node_id": "329:1635",
-      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-005-viewport.png",
-      "screenshot_sha256": "d88a9f64c7ac6a780be443ed01a52834246caa7d470b3cd90c34694fd6514440",
-      "visual_authority_id": "VA-P4-A11Y-CLASS-005"
-    },
-    {
-      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=327-1648",
-      "frame_version": "R1",
-      "node_id": "327:1648",
-      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-006-viewport.png",
-      "screenshot_sha256": "2b37bf9db0d74e53f574b69f3bf54486904a77967f743f93364da1c5183e3e71",
-      "visual_authority_id": "VA-P4-A11Y-CLASS-006"
-    },
-    {
-      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=266-1424",
-      "frame_version": "R1",
-      "node_id": "266:1424",
-      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-001-viewport.png",
-      "screenshot_sha256": "af6bf216b3809b832780089eb14e5ecdef6a57d58b4514275ca8c52cdfe2532b",
-      "visual_authority_id": "VA-P4-CANDIDATE-001"
-    },
-    {
-      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=266-1709",
-      "frame_version": "R1",
-      "node_id": "266:1709",
-      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-002-viewport.png",
-      "screenshot_sha256": "93ac12da90916382b8288b5e28557d4be16939181a27aab927c929bf22c9d114",
-      "visual_authority_id": "VA-P4-CANDIDATE-002"
-    },
-    {
-      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=272-1424",
-      "frame_version": "R1",
-      "node_id": "272:1424",
-      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-003-viewport.png",
-      "screenshot_sha256": "a19e378f86dcf4d9a0cde336ef35b8c77d99a8da6a543ef2f4dd1449bb406090",
-      "visual_authority_id": "VA-P4-CANDIDATE-003"
-    },
-    {
-      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=275-1424",
-      "frame_version": "R1",
-      "node_id": "275:1424",
-      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-004-viewport.png",
-      "screenshot_sha256": "9736a4cedf0e22a90d7fff8498732f845e11443775ecd8ccc7a5f351377f8b47",
-      "visual_authority_id": "VA-P4-CANDIDATE-004"
-    },
-    {
-      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=278-1449",
-      "frame_version": "R1",
-      "node_id": "278:1449",
-      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-005-viewport.png",
-      "screenshot_sha256": "a792881c96c7f3e12b7cdd5ece054fb9bde25b6bb80fcfe9e2919ed53c8d20a3",
-      "visual_authority_id": "VA-P4-CANDIDATE-005"
-    },
-    {
-      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=281-1465",
-      "frame_version": "R1",
-      "node_id": "281:1465",
-      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-006-viewport.png",
-      "screenshot_sha256": "8684664e80fc6bbee087e7fa85fe9ade32064f622e757bc903462f38987f198e",
-      "visual_authority_id": "VA-P4-CANDIDATE-006"
-    },
-    {
-      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=288-41",
-      "frame_version": "R1",
-      "node_id": "288:41",
-      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-007-viewport.png",
-      "screenshot_sha256": "365fb42edb5a2b613318a9ee208ae66fb4da150313d642e7b62bcdfb218c0f81",
-      "visual_authority_id": "VA-P4-CANDIDATE-007"
-    },
-    {
-      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=288-156",
-      "frame_version": "R1",
-      "node_id": "288:156",
-      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-008-viewport.png",
-      "screenshot_sha256": "ff94201fe6e379b596a3e16738efcd609e16adf9b204f6be9e899fff1e97538a",
-      "visual_authority_id": "VA-P4-CANDIDATE-008"
-    },
-    {
-      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=293-23",
-      "frame_version": "R1",
-      "node_id": "293:23",
-      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-009-viewport.png",
-      "screenshot_sha256": "33b9fe783397b3281ebb8a50ac97112463c6234ef81c086c1e70818981ac0fb0",
-      "visual_authority_id": "VA-P4-CANDIDATE-009"
-    },
-    {
-      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=293-141",
-      "frame_version": "R1",
-      "node_id": "293:141",
-      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-010-viewport.png",
-      "screenshot_sha256": "14d3f07e500adfbf26fea838271a1cd29b1c17bc600e0f64915fe49060a6de9f",
-      "visual_authority_id": "VA-P4-CANDIDATE-010"
-    },
-    {
-      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=293-164",
-      "frame_version": "R1",
-      "node_id": "293:164",
-      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-011-viewport.png",
-      "screenshot_sha256": "5ba9f9524b1e381833e64ab16a0656aece675d221a13cd0985fe06aa6b42c8af",
-      "visual_authority_id": "VA-P4-CANDIDATE-011"
-    },
-    {
-      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=293-83",
-      "frame_version": "R1",
-      "node_id": "293:83",
-      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-012-viewport.png",
-      "screenshot_sha256": "ca505e0a79a47b26610b48b2418282e59c561f79dd27180eeb818a34ff2ec1c8",
-      "visual_authority_id": "VA-P4-CANDIDATE-012"
-    }
-  ],
-  "command_registry": {
-    "path": "docs/canon/registries/command-resolution-registry.json",
-    "registry_id": "COMMAND-RESOLUTION-REGISTRY-001",
-    "registry_revision": 2,
-    "sha256": "864a4e373cf8897d4d5093ad4b3ff30f1fe9974f758388277d0187d3f220bda0"
-  },
-  "command_registry_bindings": [
-    {
-      "command_ids": [
-        "CMD-TIME-DETAIL-VIEWING-001",
-        "CMD-TIME-DETAIL-VIEWING-002",
-        "CMD-TIME-DETAIL-VIEWING-003",
-        "CMD-TIME-DETAIL-VIEWING-004",
-        "CMD-TIME-DETAIL-VIEWING-005",
-        "CMD-TIME-DETAIL-VIEWING-006",
-        "CMD-TIME-DETAIL-VIEWING-007",
-        "CMD-TIME-DETAIL-VIEWING-008"
-      ],
-      "figma_text_node_id": "329:1695",
-      "requirement_id": "SPEC-SURFACE-TIME-DETAIL-COMMAND-CONTRACT-001",
-      "state_id": "UX-STATE-VARIANT-TIME-DETAIL-VIEWING"
-    },
-    {
-      "command_ids": [
-        "CMD-TIME-IMPORT-REVIEWING-DIFF-001",
-        "CMD-TIME-IMPORT-REVIEWING-DIFF-002",
-        "CMD-TIME-IMPORT-REVIEWING-DIFF-003",
-        "CMD-TIME-IMPORT-REVIEWING-DIFF-004",
-        "CMD-TIME-IMPORT-REVIEWING-DIFF-005",
-        "CMD-TIME-IMPORT-REVIEWING-DIFF-006",
-        "CMD-TIME-IMPORT-REVIEWING-DIFF-007",
-        "CMD-TIME-IMPORT-REVIEWING-DIFF-008",
-        "CMD-TIME-IMPORT-REVIEWING-DIFF-009",
-        "CMD-TIME-IMPORT-REVIEWING-DIFF-010",
-        "CMD-TIME-IMPORT-REVIEWING-DIFF-011",
-        "CMD-TIME-IMPORT-REVIEWING-DIFF-012",
-        "CMD-TIME-IMPORT-REVIEWING-DIFF-013",
-        "CMD-TIME-IMPORT-REVIEWING-DIFF-014",
-        "CMD-TIME-IMPORT-REVIEWING-DIFF-015",
-        "CMD-TIME-IMPORT-REVIEWING-DIFF-016",
-        "CMD-TIME-IMPORT-REVIEWING-DIFF-017",
-        "CMD-TIME-IMPORT-REVIEWING-DIFF-018",
-        "CMD-TIME-IMPORT-REVIEWING-DIFF-019"
-      ],
-      "figma_text_node_id": "329:1698",
-      "requirement_id": "JOURNEY-CALENDAR-IMPORT-COMMAND-CONTRACT-001",
-      "state_id": "UX-STATE-VARIANT-TIME-IMPORT-REVIEWING-DIFF"
-    }
-  ],
-  "presentation_repairs": [
-    {
-      "clips_consequence_copy": false,
-      "frame_height": 124,
-      "frame_id": "327:1648",
-      "repair_kind": "unclip_and_resize",
-      "screenshot_height": 124,
-      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-006-viewport.png",
-      "screenshot_sha256": "2b37bf9db0d74e53f574b69f3bf54486904a77967f743f93364da1c5183e3e71",
-      "screenshot_width": 916,
-      "visible_consequence_text": "You can continue offline",
-      "visual_authority_id": "VA-P4-A11Y-CLASS-006"
-    },
-    {
-      "content_bottom_clearance": 84,
-      "dock_height": 84,
-      "fade_height": 84,
-      "fade_node_id": "354:2300",
-      "fade_y": 768,
-      "frame_id": "266:1424",
-      "preserved_composition": "rolling_vertical_time_rail",
-      "repair_kind": "trim_fade_to_dock",
-      "screenshot_height": 852,
-      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-001-viewport.png",
-      "screenshot_sha256": "af6bf216b3809b832780089eb14e5ecdef6a57d58b4514275ca8c52cdfe2532b",
-      "screenshot_width": 393,
-      "visual_authority_id": "VA-P4-CANDIDATE-001"
-    },
-    {
-      "content_bottom_clearance": 84,
-      "dock_height": 84,
-      "fade_height": 84,
-      "fade_node_id": "354:2552",
-      "fade_y": 768,
-      "frame_id": "272:1424",
-      "old_hidden_dock_node_id": "354:2562",
-      "repair_kind": "trim_fade_and_replace_dock",
-      "replacement_dock_node_id": "368:2746",
-      "screenshot_height": 852,
-      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-003-viewport.png",
-      "screenshot_sha256": "a19e378f86dcf4d9a0cde336ef35b8c77d99a8da6a543ef2f4dd1449bb406090",
-      "screenshot_width": 393,
-      "visible_root_dock_glyphs": [
-        "Goals",
-        "Time",
-        "Today",
-        "You"
-      ],
-      "visual_authority_id": "VA-P4-CANDIDATE-003"
-    },
-    {
-      "frame_id": "278:1449",
-      "old_hidden_dock_node_id": "354:2733",
-      "pixel_equivalent_render": true,
-      "repair_kind": "replace_dock",
-      "replacement_dock_node_id": "367:2746",
-      "screenshot_height": 852,
-      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-005-viewport.png",
-      "screenshot_sha256": "a792881c96c7f3e12b7cdd5ece054fb9bde25b6bb80fcfe9e2919ed53c8d20a3",
-      "screenshot_width": 393,
-      "visible_root_dock_glyphs": [
-        "Goals",
-        "Time",
-        "Today",
-        "You"
-      ],
-      "visual_authority_id": "VA-P4-CANDIDATE-005"
-    }
-  ],
   "support_overlay_bindings": [
     {
       "mapping_role": "accessibility_support_overlay",
@@ -1447,6 +1301,152 @@
         }
       ],
       "visual_authority_id": "VA-P4-A11Y-CLASS-005"
+    }
+  ],
+  "task_pack_targets": [
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=270-1430",
+      "frame_version": "R1",
+      "node_id": "270:1430",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-001-viewport.png",
+      "screenshot_sha256": "311374645649f6bdd851b9e34783599847c94b76d6862d0dbb2d67a473260376",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-001"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=296-60",
+      "frame_version": "R1",
+      "node_id": "296:60",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-002-viewport.png",
+      "screenshot_sha256": "eee76b72a8feba19539ba8c293fd071a0e256c15fbc40a210e05124b52df61b8",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-002"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=296-84",
+      "frame_version": "R1",
+      "node_id": "296:84",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-003-viewport.png",
+      "screenshot_sha256": "f709b45fbf3612e4a6323cdd7210711caa6e21fb03258af39e61ea631c3b33d7",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-003"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=327-1603",
+      "frame_version": "R1",
+      "node_id": "327:1603",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-004-viewport.png",
+      "screenshot_sha256": "93395d4705581ec180101def15d1688e48db8cedc2688edc2ee20917109e1d6f",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-004"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=329-1635",
+      "frame_version": "R1",
+      "node_id": "329:1635",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-005-viewport.png",
+      "screenshot_sha256": "d88a9f64c7ac6a780be443ed01a52834246caa7d470b3cd90c34694fd6514440",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-005"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=327-1648",
+      "frame_version": "R1",
+      "node_id": "327:1648",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-a11y-class-006-viewport.png",
+      "screenshot_sha256": "2b37bf9db0d74e53f574b69f3bf54486904a77967f743f93364da1c5183e3e71",
+      "visual_authority_id": "VA-P4-A11Y-CLASS-006"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=266-1424",
+      "frame_version": "R1",
+      "node_id": "266:1424",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-001-viewport.png",
+      "screenshot_sha256": "af6bf216b3809b832780089eb14e5ecdef6a57d58b4514275ca8c52cdfe2532b",
+      "visual_authority_id": "VA-P4-CANDIDATE-001"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=266-1709",
+      "frame_version": "R1",
+      "node_id": "266:1709",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-002-viewport.png",
+      "screenshot_sha256": "93ac12da90916382b8288b5e28557d4be16939181a27aab927c929bf22c9d114",
+      "visual_authority_id": "VA-P4-CANDIDATE-002"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=272-1424",
+      "frame_version": "R1",
+      "node_id": "272:1424",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-003-viewport.png",
+      "screenshot_sha256": "a19e378f86dcf4d9a0cde336ef35b8c77d99a8da6a543ef2f4dd1449bb406090",
+      "visual_authority_id": "VA-P4-CANDIDATE-003"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=275-1424",
+      "frame_version": "R1",
+      "node_id": "275:1424",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-004-viewport.png",
+      "screenshot_sha256": "9736a4cedf0e22a90d7fff8498732f845e11443775ecd8ccc7a5f351377f8b47",
+      "visual_authority_id": "VA-P4-CANDIDATE-004"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=278-1449",
+      "frame_version": "R1",
+      "node_id": "278:1449",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-005-viewport.png",
+      "screenshot_sha256": "a792881c96c7f3e12b7cdd5ece054fb9bde25b6bb80fcfe9e2919ed53c8d20a3",
+      "visual_authority_id": "VA-P4-CANDIDATE-005"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=281-1465",
+      "frame_version": "R1",
+      "node_id": "281:1465",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-006-viewport.png",
+      "screenshot_sha256": "8684664e80fc6bbee087e7fa85fe9ade32064f622e757bc903462f38987f198e",
+      "visual_authority_id": "VA-P4-CANDIDATE-006"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=288-41",
+      "frame_version": "R1",
+      "node_id": "288:41",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-007-viewport.png",
+      "screenshot_sha256": "365fb42edb5a2b613318a9ee208ae66fb4da150313d642e7b62bcdfb218c0f81",
+      "visual_authority_id": "VA-P4-CANDIDATE-007"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=288-156",
+      "frame_version": "R1",
+      "node_id": "288:156",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-008-viewport.png",
+      "screenshot_sha256": "ff94201fe6e379b596a3e16738efcd609e16adf9b204f6be9e899fff1e97538a",
+      "visual_authority_id": "VA-P4-CANDIDATE-008"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=293-23",
+      "frame_version": "R1",
+      "node_id": "293:23",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-009-viewport.png",
+      "screenshot_sha256": "33b9fe783397b3281ebb8a50ac97112463c6234ef81c086c1e70818981ac0fb0",
+      "visual_authority_id": "VA-P4-CANDIDATE-009"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=293-141",
+      "frame_version": "R1",
+      "node_id": "293:141",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-010-viewport.png",
+      "screenshot_sha256": "14d3f07e500adfbf26fea838271a1cd29b1c17bc600e0f64915fe49060a6de9f",
+      "visual_authority_id": "VA-P4-CANDIDATE-010"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=293-164",
+      "frame_version": "R1",
+      "node_id": "293:164",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-011-viewport.png",
+      "screenshot_sha256": "5ba9f9524b1e381833e64ab16a0656aece675d221a13cd0985fe06aa6b42c8af",
+      "visual_authority_id": "VA-P4-CANDIDATE-011"
+    },
+    {
+      "direct_link": "https://www.figma.com/design/Oik7612LSTUHWsNRFoTlTJ?node-id=293-83",
+      "frame_version": "R1",
+      "node_id": "293:83",
+      "screenshot_path": "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair/screens/task-pack/va-p4-candidate-012-viewport.png",
+      "screenshot_sha256": "ca505e0a79a47b26610b48b2418282e59c561f79dd27180eeb818a34ff2ec1c8",
+      "visual_authority_id": "VA-P4-CANDIDATE-012"
     }
   ]
 }

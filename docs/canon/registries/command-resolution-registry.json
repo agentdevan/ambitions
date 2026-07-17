@@ -4881,6 +4881,114 @@
     },
     {
       "behavior_binding": {
+        "behavior_sha256": "a2482076f896ddbaea5936d865bace6e646e2a22345b7592ea65045ccf25a261",
+        "source_field": "destination",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "ddb6a5c4d671d13510447f84a98b587e3397bb682f1f86afb8a46e919be77866"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-ASK-FAILED-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "27d81bea76731006ff17007e0c749dbb266d0a8f3c5523740cb6231b153e8571",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "DEST-SEARCH-RESULTS-ASK-FAILED-001",
+      "resolution_kind": "destination",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-FAILED"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "301dcdc4b0a314c29eda6bcdb2959d9bdc46172f7a7f2db16565222fe08a5a09",
+        "source_field": "destination",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "be5bf91fe91b8329e76303ea38abb5a6f674a8bc1d7f3c61380c38343b7f3e74"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-ASK-INTERRUPTED-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "6d318c3f50a34b2af51179773f3b715805c3cdf0c96b6c74af046726732f8d52",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "DEST-SEARCH-RESULTS-ASK-INTERRUPTED-001",
+      "resolution_kind": "destination",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-INTERRUPTED"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "643a2c4536ca8bc49579da011ae326114bbe159880e6729439567ae4314eba88",
+        "source_field": "destination",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "8344649b0c9e4d995b4b137195504e4363bd860424ac75d157e8b4903e6d2ec9"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-ASK-RECOVERED-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "574155cb42600124eb4deb26b902887535ced111378abf7aa91a5e39288cd39c",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "DEST-SEARCH-RESULTS-ASK-RECOVERED-001",
+      "resolution_kind": "destination",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RECOVERED"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "78d27bfd548f4d1c93654751c3cb1edb3ab530a8ec5a0d4276b4e7152732eb00",
+        "source_field": "destination",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "9bc7b393426d3ac328f833f6c12b549cd3e52083fda0ad95b7165294a967e98f"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-ASK-RESUMED-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "ff917b078b714c17b8fe798dd95bb908bcbc79203309a9a7102981ade1e1b582",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "DEST-SEARCH-RESULTS-ASK-RESUMED-001",
+      "resolution_kind": "destination",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RESUMED"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "924b7d0813555f5a2f7ebe20dcf33c652029f0659be4ae2fdb3eccb66ae8c1fa",
+        "source_field": "destination",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "8e150f16cee984179c655d69b16e5fff1ff4fda17823747f17e0c3e3f43330f0"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "adefb6df534231dffaf163c1ed8fa31a1dab8c750a95462001e58ca139251fa2",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "DEST-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK-001",
+      "resolution_kind": "destination",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "4eb92b351e6ee7469cc7499a7d563dd5fe5f363f19793c21ec07f2b150a628c8",
+        "source_field": "destination",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "fe4d90dd5b8b7358d866805899d0700a215931d0a44555040bcd7a76b2912701"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-CAPTURE-HANDOFF-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "1a26179eb47dcda6a1d460a94ae27f2254712375cb04735f42d54b209731032e",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "DEST-SEARCH-RESULTS-CAPTURE-HANDOFF-001",
+      "resolution_kind": "destination",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-CAPTURE-HANDOFF"
+    },
+    {
+      "behavior_binding": {
         "behavior_sha256": "5b72b79aa3350d3fc99cd52eb19a2a6e04fc52aece758c3d315cdab1142e5342",
         "source_field": "destination",
         "source_path": "docs/canon/specifications/global/search.md",
@@ -4896,6 +5004,24 @@
       "resolution_kind": "destination",
       "state_command_record_sha256": null,
       "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-FILTERED"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "e353b671f9afedf92ce80fd232827e94d7cafecb62dbdd92334648f908450427",
+        "source_field": "destination",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "f13c6c4c89fd3f9e77815b471d91ece2801c5dcd413d29352341bfb2dbde33b8"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-GROUNDED-ANSWER-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "aa03c8d7ca5fa25922c96cf07ca4d2a1085b383afd6e392b637988b2ec6e5ca1",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "DEST-SEARCH-RESULTS-GROUNDED-ANSWER-001",
+      "resolution_kind": "destination",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-GROUNDED-ANSWER"
     },
     {
       "behavior_binding": {
@@ -4968,6 +5094,24 @@
       "resolution_kind": "destination",
       "state_command_record_sha256": null,
       "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-SELECTED"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "03d48a054ed173d4ff608d7ce113931783c80917f023b98a59c3288f5860cc32",
+        "source_field": "destination",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "85ff4da7d9a44a26084a90e0d14e901342ef2bf592a8399d68f3c6e4924790ca"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "0cfda89fea511889362677a56e8012b04ef3fb7ca614b8e3823c6cee92983bdd",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "DEST-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS-001",
+      "resolution_kind": "destination",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS"
     },
     {
       "behavior_binding": {
@@ -19749,6 +19893,222 @@
     },
     {
       "behavior_binding": {
+        "behavior_sha256": "a2482076f896ddbaea5936d865bace6e646e2a22345b7592ea65045ccf25a261",
+        "source_field": "failure_focus",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "0842f8fde80f0a017b1b743a6dda4bd872b36a264801e232f46d3c657c6674c9"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-ASK-FAILED-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "0ab9584ff30b0f5f0e16fdda3428237f2c623a69843d391933c7c5267c268545",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "FOCUS-SEARCH-RESULTS-ASK-FAILED-001-FAILURE",
+      "resolution_kind": "failure_focus",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-FAILED"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "a2482076f896ddbaea5936d865bace6e646e2a22345b7592ea65045ccf25a261",
+        "source_field": "success_focus",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "9c79ec4bb2aada934da5fe3da15375cf3e66c4fe6211fd34420779894d9ee151"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-ASK-FAILED-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "870a9d4a7ccd7da816824ad5e0451986de95e13de3bfdfb5410d1851aa73549b",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "FOCUS-SEARCH-RESULTS-ASK-FAILED-001-SUCCESS",
+      "resolution_kind": "success_focus",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-FAILED"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "301dcdc4b0a314c29eda6bcdb2959d9bdc46172f7a7f2db16565222fe08a5a09",
+        "source_field": "failure_focus",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "6ec38a48ae7839f440d82669eeb468303fcafca080c5843d266c043edcf2df0e"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-ASK-INTERRUPTED-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "723e230eb5f372394a8d1c7014a46ac9e694fa758fa0df471edd0905ef785819",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "FOCUS-SEARCH-RESULTS-ASK-INTERRUPTED-001-FAILURE",
+      "resolution_kind": "failure_focus",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-INTERRUPTED"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "301dcdc4b0a314c29eda6bcdb2959d9bdc46172f7a7f2db16565222fe08a5a09",
+        "source_field": "success_focus",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "5fe8c1d79f0c2c5e9295d3ce48230dad5fdadf4427a28bc198df1ad4b6c774ef"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-ASK-INTERRUPTED-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "9f0b8f8b482ffeabaeaff4770d6b7e799ff09c52c17952c7b3daddf7ded48319",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "FOCUS-SEARCH-RESULTS-ASK-INTERRUPTED-001-SUCCESS",
+      "resolution_kind": "success_focus",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-INTERRUPTED"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "643a2c4536ca8bc49579da011ae326114bbe159880e6729439567ae4314eba88",
+        "source_field": "failure_focus",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "3cb1379c26b4e5bae5b1f6b1cb440616e3f594afc67fa6b38b0f237118d4145c"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-ASK-RECOVERED-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "de4dee2beb70d0944010c742ff87c9ad2c10bdde27eb50dc24ab92550cfbb068",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "FOCUS-SEARCH-RESULTS-ASK-RECOVERED-001-FAILURE",
+      "resolution_kind": "failure_focus",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RECOVERED"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "643a2c4536ca8bc49579da011ae326114bbe159880e6729439567ae4314eba88",
+        "source_field": "success_focus",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "3c2f6e7c037e1ddcbbe6c018e38a6f103027a98ec1f18b2dfb0c958b5b9f0af1"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-ASK-RECOVERED-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "6d9536fd86cf43f613bf89645bf1133774d3477beeff4edd15f2868669181fe4",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "FOCUS-SEARCH-RESULTS-ASK-RECOVERED-001-SUCCESS",
+      "resolution_kind": "success_focus",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RECOVERED"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "78d27bfd548f4d1c93654751c3cb1edb3ab530a8ec5a0d4276b4e7152732eb00",
+        "source_field": "failure_focus",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "2a8a475e41ab3f70c89ca3326aac8c5b337c29c11f9b8cfad7bfcf67988d70e7"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-ASK-RESUMED-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "085b7ddd73471fb2735b9e868cb6fd758520e21a07d2feeb0baf6a4612a48328",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "FOCUS-SEARCH-RESULTS-ASK-RESUMED-001-FAILURE",
+      "resolution_kind": "failure_focus",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RESUMED"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "78d27bfd548f4d1c93654751c3cb1edb3ab530a8ec5a0d4276b4e7152732eb00",
+        "source_field": "success_focus",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "556667abdf407cf1b0580ba2f449f6e0a209d30303321c7f47c4ddfaaecf40a7"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-ASK-RESUMED-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "f15e9c3f2a3d9614c9ea241b1688e1b1ef4873000dbab752493a5803b4587061",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "FOCUS-SEARCH-RESULTS-ASK-RESUMED-001-SUCCESS",
+      "resolution_kind": "success_focus",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RESUMED"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "924b7d0813555f5a2f7ebe20dcf33c652029f0659be4ae2fdb3eccb66ae8c1fa",
+        "source_field": "failure_focus",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "a6d419183444e3f0dc0690383c9b621ef2de023311bbc51af5c172c7d986eb2d"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "9656add5b9d1b0e82fd89bf8d1fb39b863d8d7e77d388b2ac2ef725219356d53",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "FOCUS-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK-001-FAILURE",
+      "resolution_kind": "failure_focus",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "924b7d0813555f5a2f7ebe20dcf33c652029f0659be4ae2fdb3eccb66ae8c1fa",
+        "source_field": "success_focus",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "c2a3fd4c8124e9fe6333df65b7263d08b99d6ad21ab37777d0368f1cd723a6f0"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "622adff1f8204b6c25e34d9a848d843ff630140ca20757754cfb5fed74dd624e",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "FOCUS-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK-001-SUCCESS",
+      "resolution_kind": "success_focus",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "4eb92b351e6ee7469cc7499a7d563dd5fe5f363f19793c21ec07f2b150a628c8",
+        "source_field": "failure_focus",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "9766052065e220264404e104b22fd1fb7998d1cb19b3d50b9f76c467e36b5ceb"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-CAPTURE-HANDOFF-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "0eef73ece86c5a0ad4cea7f96e7e91852ed9c47c44a6a5cf6673dae389198729",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "FOCUS-SEARCH-RESULTS-CAPTURE-HANDOFF-001-FAILURE",
+      "resolution_kind": "failure_focus",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-CAPTURE-HANDOFF"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "4eb92b351e6ee7469cc7499a7d563dd5fe5f363f19793c21ec07f2b150a628c8",
+        "source_field": "success_focus",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "f9876509ea9954e46ae09ca5f8fcf576735dfc0f2f9ca2456c3de374235357e6"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-CAPTURE-HANDOFF-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "4367f99e77c29bb30787ad5895c4deb4b7ba45be610085f9346885f880fd33a7",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "FOCUS-SEARCH-RESULTS-CAPTURE-HANDOFF-001-SUCCESS",
+      "resolution_kind": "success_focus",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-CAPTURE-HANDOFF"
+    },
+    {
+      "behavior_binding": {
         "behavior_sha256": "5b72b79aa3350d3fc99cd52eb19a2a6e04fc52aece758c3d315cdab1142e5342",
         "source_field": "failure_focus",
         "source_path": "docs/canon/specifications/global/search.md",
@@ -19782,6 +20142,42 @@
       "resolution_kind": "success_focus",
       "state_command_record_sha256": null,
       "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-FILTERED"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "e353b671f9afedf92ce80fd232827e94d7cafecb62dbdd92334648f908450427",
+        "source_field": "failure_focus",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "f7bb51f2bf03bf5ccd41765082008ec99bd811fb76dd806f2095d1fdc3eac915"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-GROUNDED-ANSWER-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "e61e43e449fb39c675c4410a4fe1dbce7922427ddc4ded182700abd484ab0305",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "FOCUS-SEARCH-RESULTS-GROUNDED-ANSWER-001-FAILURE",
+      "resolution_kind": "failure_focus",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-GROUNDED-ANSWER"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "e353b671f9afedf92ce80fd232827e94d7cafecb62dbdd92334648f908450427",
+        "source_field": "success_focus",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "7c700e43d1faa67ebfbb42df9636806dcf2c2a899aef77052a5971d3b5f08ade"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-GROUNDED-ANSWER-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "55cd2a110377c437dd6aa70384a1358d2e51a071b59bf9fc72d51fba7bf0f1ca",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "FOCUS-SEARCH-RESULTS-GROUNDED-ANSWER-001-SUCCESS",
+      "resolution_kind": "success_focus",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-GROUNDED-ANSWER"
     },
     {
       "behavior_binding": {
@@ -19926,6 +20322,42 @@
       "resolution_kind": "success_focus",
       "state_command_record_sha256": null,
       "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-SELECTED"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "03d48a054ed173d4ff608d7ce113931783c80917f023b98a59c3288f5860cc32",
+        "source_field": "failure_focus",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "5beb576a264c60dbd981221de9f38993c3ffcb6d0cb7ee80c65e38ccbb94c417"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "38d8f8f0719abcae7614ed56db843050a3423d72e70428866e30b81600bb2f07",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "FOCUS-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS-001-FAILURE",
+      "resolution_kind": "failure_focus",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "03d48a054ed173d4ff608d7ce113931783c80917f023b98a59c3288f5860cc32",
+        "source_field": "success_focus",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "556667abdf407cf1b0580ba2f449f6e0a209d30303321c7f47c4ddfaaecf40a7"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "ee81fc95d0b861c259610dbd4f249d6cd9a80f37a0769c5070aabd970718eff8",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "FOCUS-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS-001-SUCCESS",
+      "resolution_kind": "success_focus",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS"
     },
     {
       "behavior_binding": {
@@ -38127,6 +38559,114 @@
     },
     {
       "behavior_binding": {
+        "behavior_sha256": "a2482076f896ddbaea5936d865bace6e646e2a22345b7592ea65045ccf25a261",
+        "source_field": "rollback_undo",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "fc768927cfc8e8a97fcce0fbe5d3ba5abae1dd6d9b16699f44838caad2da3aeb"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-ASK-FAILED-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "c452a29c891a1e41346f9700db0d8d94c0194e856b463146d1a734c370f0248c",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "RECOVERY-SEARCH-RESULTS-ASK-FAILED-001",
+      "resolution_kind": "recovery",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-FAILED"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "301dcdc4b0a314c29eda6bcdb2959d9bdc46172f7a7f2db16565222fe08a5a09",
+        "source_field": "rollback_undo",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "072995f7406ceb313b33a7427e7da47c0828e0baffbb858f940482deeb8998e7"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-ASK-INTERRUPTED-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "efe87208a15fcbf96575db926581087b97231d5e6167311eb4456d12eaf3b24d",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "RECOVERY-SEARCH-RESULTS-ASK-INTERRUPTED-001",
+      "resolution_kind": "recovery",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-INTERRUPTED"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "643a2c4536ca8bc49579da011ae326114bbe159880e6729439567ae4314eba88",
+        "source_field": "rollback_undo",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "c73c53814033f72da3cc967dceee4a7e2df156a3b4fe6d0cce5917ba9b2d8e5a"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-ASK-RECOVERED-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "5dbd60fda8fbe116d36785365c5e63006d3dc35865cb574e593a636f303b6ee2",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "RECOVERY-SEARCH-RESULTS-ASK-RECOVERED-001",
+      "resolution_kind": "recovery",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RECOVERED"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "78d27bfd548f4d1c93654751c3cb1edb3ab530a8ec5a0d4276b4e7152732eb00",
+        "source_field": "rollback_undo",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "0f53f945b5f0cac1f80a529f7b4917627a8492ac55ce5ae66d6a53c3e72e2dff"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-ASK-RESUMED-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "926f35273b1feeacb9006de79eb66bd7fd7bcdc8cab3127a4b9f2d30aff49c36",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "RECOVERY-SEARCH-RESULTS-ASK-RESUMED-001",
+      "resolution_kind": "recovery",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RESUMED"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "924b7d0813555f5a2f7ebe20dcf33c652029f0659be4ae2fdb3eccb66ae8c1fa",
+        "source_field": "rollback_undo",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "14d78408efdd7e4ea4244d71c5753a362db7aeba76cad17a472b9c9b037473d8"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "b38bc32304916460a80200c162de41d87f2b386c56096f1d7016c9c67e01d887",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "RECOVERY-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK-001",
+      "resolution_kind": "recovery",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "4eb92b351e6ee7469cc7499a7d563dd5fe5f363f19793c21ec07f2b150a628c8",
+        "source_field": "rollback_undo",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "4e468375ba7cc780fe7f9d31df4ab314a1fdd7e3a53dcc1d32435d156bb3a7bf"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-CAPTURE-HANDOFF-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "5bd5b818b273a69897d9bc5624a5c9241e1401641d227eac1bebc22f0cd6ffdd",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "RECOVERY-SEARCH-RESULTS-CAPTURE-HANDOFF-001",
+      "resolution_kind": "recovery",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-CAPTURE-HANDOFF"
+    },
+    {
+      "behavior_binding": {
         "behavior_sha256": "5b72b79aa3350d3fc99cd52eb19a2a6e04fc52aece758c3d315cdab1142e5342",
         "source_field": "rollback_undo",
         "source_path": "docs/canon/specifications/global/search.md",
@@ -38142,6 +38682,24 @@
       "resolution_kind": "recovery",
       "state_command_record_sha256": null,
       "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-FILTERED"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "e353b671f9afedf92ce80fd232827e94d7cafecb62dbdd92334648f908450427",
+        "source_field": "rollback_undo",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "ac6d6c84162d2bc0457ed5f3ef93b8c40b03c231ed9e2d6e916fd832756e2e5a"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-GROUNDED-ANSWER-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "93c6e62ce4e18adc70b2c03d72b0652588cea7431792974881ac8f144f52afa3",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "RECOVERY-SEARCH-RESULTS-GROUNDED-ANSWER-001",
+      "resolution_kind": "recovery",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-GROUNDED-ANSWER"
     },
     {
       "behavior_binding": {
@@ -38214,6 +38772,24 @@
       "resolution_kind": "recovery",
       "state_command_record_sha256": null,
       "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-SELECTED"
+    },
+    {
+      "behavior_binding": {
+        "behavior_sha256": "03d48a054ed173d4ff608d7ce113931783c80917f023b98a59c3288f5860cc32",
+        "source_field": "rollback_undo",
+        "source_path": "docs/canon/specifications/global/search.md",
+        "source_text_sha256": "d2a94b1cb6120e1ecb5319927de36c84e3c2bd69423c96b9918f51f18b5bebc0"
+      },
+      "command_id": "CMD-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS-001",
+      "mechanism_kind": null,
+      "owner_concept": "global.search.ask-command-contract",
+      "posture": "current",
+      "record_sha256": "a43c457ba29863d9e0bef2f126d9fba868b5b72674d974cc23a7b8b09622f25e",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001",
+      "resolution_id": "RECOVERY-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS-001",
+      "resolution_kind": "recovery",
+      "state_command_record_sha256": null,
+      "state_id": "UX-STATE-VARIANT-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS"
     },
     {
       "behavior_binding": {

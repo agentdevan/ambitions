@@ -311,9 +311,10 @@ class CommandGateDependencyTests(unittest.TestCase):
                 trusted_approval_base=trusted,
             )
             return
-        candidate = replace(
+        candidate = self.materialize_candidate_registry(
+            api,
             candidate,
-            repository_root=trusted.repository_root,
+            trusted.repository_root,
         )
         with patch.object(
             api,
@@ -330,6 +331,38 @@ class CommandGateDependencyTests(unittest.TestCase):
                 canon_revision=1,
                 trusted_approval_base=trusted,
             )
+
+    def materialize_candidate_registry(
+        self,
+        api,
+        candidate,
+        repository_root,
+    ):
+        candidate = replace(candidate, repository_root=repository_root)
+        rendered = (
+            (
+                api.REGISTRY_PATH,
+                api.render_command_gate_dependency_registry(candidate),
+            ),
+            (
+                api.APPROVAL_RECEIPT_REGISTRY_PATH,
+                api.render_command_gate_approval_receipt_registry(candidate),
+            ),
+            (
+                api.OWNER_APPROVAL_REGISTRY_PATH,
+                api.render_command_gate_owner_approval_registry(
+                    candidate.owner_approvals,
+                    registry_revision=(
+                        candidate.owner_approval_registry_revision
+                    ),
+                ),
+            ),
+        )
+        for relative_path, content in rendered:
+            destination = repository_root / relative_path
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes(content)
+        return candidate
 
     def broken_registries(self, api, registry):
         authorized, trusted = self.authorized_registry(api, registry)
@@ -745,9 +778,10 @@ class CommandGateDependencyTests(unittest.TestCase):
             api,
             dependency_registry,
         )
-        trusted_authorized = replace(
+        trusted_authorized = self.materialize_candidate_registry(
+            api,
             authorized,
-            repository_root=trusted.repository_root,
+            trusted.repository_root,
         )
         with patch.object(
             task_pack_module,
@@ -768,9 +802,10 @@ class CommandGateDependencyTests(unittest.TestCase):
                 )
         for label, candidate in broken.items():
             with self.subTest(label=label):
-                trusted_candidate = replace(
+                trusted_candidate = self.materialize_candidate_registry(
+                    api,
                     candidate,
-                    repository_root=trusted.repository_root,
+                    trusted.repository_root,
                 )
                 with patch.object(
                     task_pack_module,

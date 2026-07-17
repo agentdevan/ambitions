@@ -61,15 +61,15 @@ class VisualAuthorityRebaselineTests(unittest.TestCase):
         )
         self.assertEqual(
             snapshot.canon_content_sha,
-            "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
+            "0580c94fab6364d64db08629042e1477b27b5c49906d2bf074af41c43f282104",
         )
         self.assertEqual(snapshot.figma_file_key, "Oik7612LSTUHWsNRFoTlTJ")
         self.assertEqual(snapshot.authority_node_count, 147)
         self.assertEqual(snapshot.screen_count, 47)
-        self.assertEqual(len(snapshot.visual_requirement_ids), 336)
+        self.assertEqual(len(snapshot.visual_requirement_ids), 346)
         self.assertEqual(len(snapshot.eligible_state_ids), 411)
         self.assertEqual(len(snapshot.future_state_ids), 22)
-        self.assertEqual(len(snapshot.gap_blocked_state_ids), 0)
+        self.assertEqual(len(snapshot.gap_blocked_state_ids), 8)
         self.assertEqual(snapshot.legacy_node_count, 15)
         self.assertEqual(snapshot.destructive_actions, ())
 
@@ -490,7 +490,7 @@ class VisualAuthorityRebaselineTests(unittest.TestCase):
         ).hexdigest()
         self.assertEqual(
             non_hash_digest,
-            "9384b572533a4a8ac2e2bd0b068e1fa76d427db8417a9668239043707eff0202",
+            "1eb05c0dcb1a5c1810ad3c985634104e398861b3318082ad12f506ec7a73d6e2",
         )
 
     def test_hand_record_matches_machine_canon_and_coverage_digest(self) -> None:
@@ -511,10 +511,12 @@ class VisualAuthorityRebaselineTests(unittest.TestCase):
         self.assertIsNotNone(hand_sha_match)
         assert hand_sha_match is not None
 
-        visual_mapped, visual_total = groups(
-            r"^- Visual requirements mapped: `(\d+)/(\d+)`$"
+        visual_mapped, visual_gap, visual_total = groups(
+            r"^- Visual requirements: `(\d+)` mapped \+ `(\d+)` gap-blocked = `(\d+)` classified$"
         )
-        states_mapped, states_total = groups(r"^- State mappings: `(\d+)/(\d+)`$")
+        states_mapped, state_gap, states_total = groups(
+            r"^- State variants: `(\d+)` mapped \+ `(\d+)` gap-blocked = `(\d+)` classified$"
+        )
         hand_counts = {
             "authority_nodes": groups(r"^- Exact authority nodes: `(\d+)`$")[0],
             "cross_cutting": groups(r"^- Cross-cutting records: `(\d+)`$")[0],
@@ -546,7 +548,7 @@ class VisualAuthorityRebaselineTests(unittest.TestCase):
             "objects": coverage["object_count"],
             "screens": coverage["screen_count"],
             "sensitive_channels": coverage["sensitive_exposure_channel_count"],
-            "states_mapped": coverage["state_count"],
+            "states_mapped": coverage["state_count"] - state_gap,
             "states_total": sum(
                 len(state_posture[key])
                 for key in (
@@ -555,7 +557,9 @@ class VisualAuthorityRebaselineTests(unittest.TestCase):
                     "gap_blocked_state_ids",
                 )
             ),
-            "visual_requirements_mapped": coverage["visual_requirement_count"],
+            "visual_requirements_mapped": (
+                coverage["visual_requirement_count"] - visual_gap
+            ),
             "visual_requirements_total": len(coverage["visual_requirement_ids"]),
         }
         hand_count_digest = hashlib.sha256(
@@ -702,6 +706,90 @@ class VisualAuthorityRebaselineTests(unittest.TestCase):
                 with self.assertRaises(CanonError) as raised:
                     validate_visual_authority_payload(ROOT, mutated, b"invalid\n")
                 self.assertEqual(raised.exception.code, fixture["expected_code"])
+
+    def test_gap_posture_cannot_self_authorize_an_unrelated_unmapped_state(self) -> None:
+        payload = json.loads(MANIFEST.read_text(encoding="utf-8"))
+        dispositions = json.loads(
+            (
+                ROOT
+                / "docs/canon/migration/ux-blueprint-requirement-dispositions.json"
+            ).read_text(encoding="utf-8")
+        )["dispositions"]
+        gap_state = payload["state_posture"]["gap_blocked_state_ids"][0]
+        unrelated_state = (
+            "UX-STATE-VARIANT-ACCOUNT-BOUNDARY-ACCOUNT-IDENTITY-ONLY"
+        )
+
+        payload["state_posture"]["gap_blocked_state_ids"].remove(gap_state)
+        payload["state_posture"]["gap_blocked_state_ids"].append(unrelated_state)
+        payload["state_posture"]["gap_blocked_state_ids"].sort()
+        payload["state_posture"]["eligible_state_ids"].remove(unrelated_state)
+        payload["state_posture"]["eligible_state_ids"].append(gap_state)
+        payload["state_posture"]["eligible_state_ids"].sort()
+
+        search_node = next(
+            item
+            for item in payload["figma"]["authority_nodes"]
+            if item["visual_authority_id"] == "VA-P4-CANDIDATE-007"
+        )
+        search_mapping = next(
+            item
+            for item in search_node["screen_mappings"]
+            if item["blueprint_id"] == "UX-SCREEN-SEARCH-RESULTS"
+        )
+        search_mapping["state_variant_ids"].append(gap_state)
+        search_mapping["state_variant_ids"].sort()
+        search_mapping["authority_eligible_state_count"] += 1
+
+        unrelated_mapping = next(
+            mapping
+            for node in payload["figma"]["authority_nodes"]
+            for mapping in node.get("screen_mappings", [])
+            if unrelated_state in mapping["state_variant_ids"]
+            and node["visual_authority_id"] != "VA-P4-A11Y-CLASS-003"
+            and node["visual_authority_id"] != "VA-P4-A11Y-CLASS-005"
+        )
+        unrelated_mapping["state_variant_ids"].remove(unrelated_state)
+        unrelated_mapping["authority_eligible_state_count"] -= 1
+        unrelated_failure_evidence = next(
+            node
+            for node in payload["figma"]["authority_nodes"]
+            if node["kind"] == "screen"
+            and unrelated_state in node["state_variant_ids"]
+        )
+        unrelated_failure_evidence["authority_eligible_state_count"] -= 1
+        unrelated_failure_evidence["gap_blocked_state_count"] += 1
+
+        new_gap_states = set(payload["state_posture"]["gap_blocked_state_ids"])
+        gap_requirement_ids = {
+            item["requirement_id"]
+            for item in dispositions
+            if item["disposition"] == "visual_mapping_required"
+            and item["state_blueprint_ids"]
+            and set(item["state_blueprint_ids"]) <= new_gap_states
+        }
+        mapped_requirement_ids = {
+            requirement_id
+            for node in payload["figma"]["authority_nodes"]
+            if node["task_pack_eligible"]
+            for requirement_id in node["requirement_ids"]
+        }
+        required_mapped_requirement_ids = (
+            set(payload["coverage"]["visual_requirement_ids"])
+            - gap_requirement_ids
+            | set(payload["coverage"]["additional_mapped_requirement_ids"])
+        )
+        search_node["requirement_ids"] = sorted(
+            set(search_node["requirement_ids"])
+            | (required_mapped_requirement_ids - mapped_requirement_ids)
+        )
+
+        with self.assertRaises(CanonError) as raised:
+            validate_visual_authority_payload(ROOT, payload, b"invalid\n")
+        self.assertEqual(
+            raised.exception.code,
+            "VISUAL_AUTHORITY_STATE_POSTURE_INVALID",
+        )
 
     def test_every_authority_node_requires_exact_frozen_metadata(self) -> None:
         payload = json.loads(MANIFEST.read_text(encoding="utf-8"))

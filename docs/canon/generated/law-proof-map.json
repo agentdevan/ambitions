@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
+  "canon_content_sha": "0580c94fab6364d64db08629042e1477b27b5c49906d2bf074af41c43f282104",
   "canon_revision": 1,
   "compiler_version": "0.2.0",
   "mappings": [
@@ -1072,6 +1072,14 @@
       "mapping_status": "gap",
       "references": [],
       "required_verification_ids": [],
+      "requirement_id": "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
       "requirement_id": "JOURNEY-STEP-CLOSURE-001"
     },
     {
@@ -1195,6 +1203,14 @@
       "references": [],
       "required_verification_ids": [],
       "requirement_id": "LAW-RUNTIME-NO-DIRECT-WRITE-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "LAW-SEARCH-PRIVATE-COMMAND-LAYER-001"
     },
     {
       "current_claim_posture": "no_current_evidence",
@@ -2407,12 +2423,62 @@
       "requirement_id": "SPEC-GLOBAL-SEARCH-ACTIONS-001"
     },
     {
+      "current_claim_posture": "required_but_unverified",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [
+        "PROOF-SEARCH-ANSWER-ACCESSIBILITY-001"
+      ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ANSWER-EVIDENCE-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-CAPTURE-HANDOFF-001"
+    },
+    {
       "current_claim_posture": "no_current_evidence",
       "gap_note": "missing mapping is a gap and does not prove absent implementation",
       "mapping_status": "gap",
       "references": [],
       "required_verification_ids": [],
       "requirement_id": "SPEC-GLOBAL-SEARCH-COMMAND-CONTRACT-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-FIND-001"
     },
     {
       "current_claim_posture": "required_but_unverified",
@@ -2423,14 +2489,6 @@
         "PROOF-SEARCH-FIRST-VIEWPORT-001"
       ],
       "requirement_id": "SPEC-GLOBAL-SEARCH-FIRST-VIEWPORT-001"
-    },
-    {
-      "current_claim_posture": "no_current_evidence",
-      "gap_note": "missing mapping is a gap and does not prove absent implementation",
-      "mapping_status": "gap",
-      "references": [],
-      "required_verification_ids": [],
-      "requirement_id": "SPEC-GLOBAL-SEARCH-IDENTITY-001"
     },
     {
       "current_claim_posture": "no_current_evidence",
@@ -2454,7 +2512,49 @@
       "mapping_status": "gap",
       "references": [],
       "required_verification_ids": [],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-INPUT-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-INSPECT-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
       "requirement_id": "SPEC-GLOBAL-SEARCH-PLACEMENT-001"
+    },
+    {
+      "current_claim_posture": "required_but_unverified",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [
+        "PROOF-SEARCH-PRESENTATION-ACCESSIBILITY-001"
+      ],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-PRESENTATION-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-PRIVATE-COMMAND-LAYER-001"
+    },
+    {
+      "current_claim_posture": "no_current_evidence",
+      "gap_note": "missing mapping is a gap and does not prove absent implementation",
+      "mapping_status": "gap",
+      "references": [],
+      "required_verification_ids": [],
+      "requirement_id": "SPEC-GLOBAL-SEARCH-SESSION-HISTORY-001"
     },
     {
       "current_claim_posture": "current_evidence_mapped",

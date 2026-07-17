@@ -6,7 +6,7 @@
 - Canon revision: `1`
 - Authority state: `shadow`
 - Compiler version: `0.2.0`
-- Canon content SHA: `6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67`
+- Canon content SHA: `0580c94fab6364d64db08629042e1477b27b5c49906d2bf074af41c43f282104`
 
 | Specification | Profile | Section markers |
 | --- | --- | ---: |
@@ -29,6 +29,7 @@
 | `JOURNEY-MISSED-WORK-RECOVERY` | journey-v1 | 14 |
 | `JOURNEY-SCHEDULE-REFLOW` | journey-v1 | 14 |
 | `JOURNEY-SEARCH-FIND-ACT-INSPECT` | journey-v1 | 14 |
+| `JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT` | journey-v1 | 14 |
 | `JOURNEY-START-AND-COMPLETE-STEP` | journey-v1 | 14 |
 | `OBJECT-ATTACHMENT` | object-v1 | 15 |
 | `OBJECT-CLOSURE` | object-v1 | 15 |

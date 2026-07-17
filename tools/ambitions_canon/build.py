@@ -11,6 +11,7 @@ import stat
 import sys
 from collections.abc import Callable, Iterable, Mapping, Sequence
 from contextlib import contextmanager
+from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 
 from tools.ambitions_canon.audit import audit_registry
@@ -34,7 +35,12 @@ DIRECTORY_FLAGS = (
     | os.O_NOFOLLOW
     | getattr(os, "O_CLOEXEC", 0)
 )
-READ_FLAGS = os.O_RDONLY | os.O_NOFOLLOW | getattr(os, "O_CLOEXEC", 0)
+READ_FLAGS = (
+    os.O_RDONLY
+    | os.O_NONBLOCK
+    | os.O_NOFOLLOW
+    | getattr(os, "O_CLOEXEC", 0)
+)
 WRITE_FLAGS = (
     os.O_WRONLY
     | os.O_CREAT
@@ -664,6 +670,57 @@ def _load_audited_registry(root: Path) -> CanonRegistry:
     return registry
 
 
+@dataclass(frozen=True, slots=True)
+class _AuditedCanonSnapshot:
+    """One loader-owned view of every input in the canonical content identity."""
+
+    registry: CanonRegistry
+    content_sha: str
+
+
+def _load_audited_canon_snapshot(root: Path) -> _AuditedCanonSnapshot:
+    """Load canon through the canonical audit path and bind conflict inputs too."""
+
+    from tools.ambitions_canon.conflicts import (
+        load_conflict_dockets,
+        validate_conflict_repository,
+    )
+
+    registry = _load_audited_registry(root)
+    dockets = load_conflict_dockets(root)
+    conflicts = validate_conflict_repository(
+        root,
+        dockets,
+        (item.requirement_id for item in registry.requirements),
+        registry.supersession_entries,
+    )
+    return _AuditedCanonSnapshot(
+        registry=registry,
+        content_sha=_registry_content_sha(registry, dockets, conflicts),
+    )
+
+
+def _verify_audited_canon_snapshot(
+    root: Path,
+    expected: _AuditedCanonSnapshot,
+) -> None:
+    """Fail closed if any canon input changed after the operation began."""
+
+    current = _load_audited_canon_snapshot(root)
+    if (
+        current.content_sha != expected.content_sha
+        or current.registry.manifest.canon_revision
+        != expected.registry.manifest.canon_revision
+        or current.registry.manifest.authority_state
+        is not expected.registry.manifest.authority_state
+    ):
+        raise CanonError(
+            "CANON_CONTENT_CHANGED",
+            "canonical source changed during audited operation",
+            expected.registry.manifest.source_path,
+        )
+
+
 def _registry_content_sha(
     registry: CanonRegistry,
     dockets: Sequence[object] = (),
@@ -999,22 +1056,63 @@ def _tree_files_descriptor(
     return tuple(sorted(paths, key=lambda item: item.as_posix()))
 
 
-def _read_file_at(root_descriptor: int, path: Path) -> bytes:
+def _file_identity(info: os.stat_result) -> tuple[int, int, int, int, int]:
+    return (
+        info.st_dev,
+        info.st_ino,
+        info.st_size,
+        info.st_mtime_ns,
+        info.st_ctime_ns,
+    )
+
+
+def _read_file_at_with_identity(
+    root_descriptor: int,
+    path: Path,
+) -> tuple[bytes, tuple[int, int, int, int, int]]:
+    """Read one prechecked regular file without blocking or following links."""
+
     descriptors = [os.dup(root_descriptor)]
     try:
         current = descriptors[0]
         for component in path.parts[:-1]:
             current = _open_directory_at(current, component)
             descriptors.append(current)
-        descriptor = os.open(path.parts[-1], READ_FLAGS, dir_fd=current)
-        descriptors.append(descriptor)
-        if not stat.S_ISREG(os.fstat(descriptor).st_mode):
+        expected = os.stat(
+            path.parts[-1], dir_fd=current, follow_symlinks=False
+        )
+        if not stat.S_ISREG(expected.st_mode):
             raise CanonError(
                 "CANON_GENERATED_CONTENT",
-                "generated output is not a regular file",
+                "canonical input is not a regular file",
                 path,
             )
-        return _read_descriptor(descriptor)
+        descriptor = os.open(path.parts[-1], READ_FLAGS, dir_fd=current)
+        descriptors.append(descriptor)
+        opened = os.fstat(descriptor)
+        if (
+            not stat.S_ISREG(opened.st_mode)
+            or (opened.st_dev, opened.st_ino)
+            != (expected.st_dev, expected.st_ino)
+        ):
+            raise CanonError(
+                "CANON_GENERATED_CONTENT",
+                "canonical input identity changed before open",
+                path,
+            )
+        content = _read_descriptor(descriptor)
+        after = os.fstat(descriptor)
+        live = os.stat(
+            path.parts[-1], dir_fd=current, follow_symlinks=False
+        )
+        identity = _file_identity(opened)
+        if _file_identity(after) != identity or _file_identity(live) != identity:
+            raise CanonError(
+                "CANON_CONTENT_CHANGED",
+                "canonical input changed during descriptor read",
+                path,
+            )
+        return content, identity
     except OSError as exc:
         raise CanonError(
             "CANON_GENERATED_CONTENT",
@@ -1024,6 +1122,10 @@ def _read_file_at(root_descriptor: int, path: Path) -> bytes:
     finally:
         for descriptor in reversed(descriptors):
             os.close(descriptor)
+
+
+def _read_file_at(root_descriptor: int, path: Path) -> bytes:
+    return _read_file_at_with_identity(root_descriptor, path)[0]
 
 
 def _read_confined_bytes(root: Path, relative_path: Path) -> bytes:

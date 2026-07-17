@@ -22,6 +22,7 @@ normative_files = [
   "specifications/journeys/missed-work-recovery.md",
   "specifications/journeys/schedule-reflow.md",
   "specifications/journeys/search-find-act-inspect.md",
+  "specifications/journeys/search-find-ask-act-inspect.md",
   "specifications/journeys/start-and-complete-step.md",
   "specifications/objects/attachment.md",
   "specifications/objects/closure.md",

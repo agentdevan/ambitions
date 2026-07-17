@@ -21,6 +21,7 @@ owns_concepts = [
   "control.material-confirmation",
   "control.undo-recovery",
   "data.loss-stop-ship",
+  "global.search.private-command-layer",
   "global.trust-ownership",
   "history.supersession",
   "ia.nonroot-ownership",
@@ -437,7 +438,18 @@ Every supported app state MUST preserve Today / Goals / Time / You as the comple
 - **Verification:** `CANON-AUDIT-NONROOT-001`
 - **Supersedes:** none
 
-Capture MUST remain the global composer and durable intake boundary, not a tab, inbox, or permanent destination. Motion MUST remain cross-surface behavior that communicates continuity, consequence, recovery, and closure, not a content feed or analytics page. Search MUST remain a global local-first Find / Act / Inspect system. Contextual trust inspection may be entered from affected objects and You, but it does not become persistent global chrome.
+Capture MUST remain the global composer and durable intake boundary, not a tab, inbox, or permanent destination. Motion MUST remain cross-surface behavior that communicates continuity, consequence, recovery, and closure, not a content feed or analytics page. Search MUST remain a global local-first Find / Ask / Act / Inspect system. Contextual trust inspection may be entered from affected objects and You, but it does not become persistent global chrome.
+
+## LAW-SEARCH-PRIVATE-COMMAND-LAYER-001 — Private understanding and command layer
+
+- **Concept:** `global.search.private-command-layer`
+- **Modality:** `MUST`
+- **Scope:** Global Search identity, local intelligence, action authority, creation routing, inspection, and private-data boundary
+- **Status:** `normative`
+- **Verification:** `SCENARIO-SEARCH-PRIVATE-COMMAND-LAYER-001`
+- **Supersedes:** none
+
+Global Search MUST remain one unified, local-first Find / Ask / Act / Inspect surface and MUST remain fully useful without Ask. Find remains deterministic and offline; optional Ask synthesis remains on device and grounded in privacy-authorized data and approved references; Act proposes rather than silently mutating; Inspect keeps source, privacy, proof, history, and receipt evidence contextual; creation belongs to Capture. Search MUST NOT become a generic AI destination, a hosted-intelligence or cloud-profiling path, or a parallel composer. Search MUST NOT transfer the private life graph. Detailed owning specifications define the exact grounding, evidence, confirmation, persistence, accessibility, degraded-state, and performance contracts without weakening this boundary.
 
 ## LAW-IA-PLAIN-LANGUAGE-001 — Plain user mental model
 

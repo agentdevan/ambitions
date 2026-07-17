@@ -109,7 +109,7 @@ class CommandResolutionRegistryTests(unittest.TestCase):
                 }
             )
 
-        self.assertEqual(len(expected_ids), 2522)
+        self.assertEqual(len(expected_ids), 2554)
         self.assertEqual(set(records), expected_ids)
         self.assertEqual(len(registry.records), len(expected_ids))
         self.assertTrue(all(item.record_sha256 for item in registry.records))
@@ -259,7 +259,7 @@ class CommandResolutionRegistryTests(unittest.TestCase):
             if identifier is not None
         }
 
-        self.assertEqual(len(primary), 567)
+        self.assertEqual(len(primary), 575)
         self.assertEqual(len(recovery), 48)
         self.assertTrue(primary.isdisjoint(recovery))
         self.assertEqual(set(recovery), references)
@@ -865,7 +865,7 @@ class CommandResolutionRegistryTests(unittest.TestCase):
             for variant in model["variants"]
             for command in variant["machine_command_contracts"]
         ]
-        self.assertEqual(len(projections), 567)
+        self.assertEqual(len(projections), 575)
         for projection in projections:
             with self.subTest(command_id=projection["command_id"]):
                 self.assertEqual(

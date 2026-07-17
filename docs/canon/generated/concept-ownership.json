@@ -1,6 +1,6 @@
 {
   "authority_state": "shadow",
-  "canon_content_sha": "6e836710d8ed26bae3f01f5207438ebba67831b0f90cc7bded7a6368ecb51f67",
+  "canon_content_sha": "0580c94fab6364d64db08629042e1477b27b5c49906d2bf074af41c43f282104",
   "canon_revision": 1,
   "compiler_version": "0.2.0",
   "concepts": [
@@ -669,11 +669,35 @@
       "spec_id": "GLOBAL-MOTION"
     },
     {
+      "concept": "global.search.answer-evidence",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.ask",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.ask-activation-gate",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.ask-command-contract",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
       "concept": "global.search.canonical-actions",
       "spec_id": "GLOBAL-SEARCH"
     },
     {
+      "concept": "global.search.capture-handoff",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
       "concept": "global.search.command-contract",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.find",
       "spec_id": "GLOBAL-SEARCH"
     },
     {
@@ -693,7 +717,27 @@
       "spec_id": "GLOBAL-SEARCH"
     },
     {
+      "concept": "global.search.input",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.inspect",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
       "concept": "global.search.placement",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.presentation",
+      "spec_id": "GLOBAL-SEARCH"
+    },
+    {
+      "concept": "global.search.private-command-layer",
+      "spec_id": "CONSTITUTION"
+    },
+    {
+      "concept": "global.search.session-history",
       "spec_id": "GLOBAL-SEARCH"
     },
     {
@@ -811,6 +855,10 @@
     {
       "concept": "journey.search.find-act-inspect",
       "spec_id": "JOURNEY-SEARCH-FIND-ACT-INSPECT"
+    },
+    {
+      "concept": "journey.search.find-ask-act-inspect",
+      "spec_id": "JOURNEY-SEARCH-FIND-ASK-ACT-INSPECT"
     },
     {
       "concept": "journey.step-closure.required-proof",

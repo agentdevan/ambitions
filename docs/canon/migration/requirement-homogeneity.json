@@ -9016,7 +9016,7 @@
         "CLAIM-MOM-0058:1": "identity"
       },
       "contract_key": "global.capture.identity",
-      "direct_modal_sentence_count": 8,
+      "direct_modal_sentence_count": 9,
       "incoming_edge_count": 8,
       "modalities": [
         "MUST",
@@ -9364,7 +9364,7 @@
         "CLAIM-STB-0173:1": "identity"
       },
       "contract_key": "global.search.canonical-actions",
-      "direct_modal_sentence_count": 1,
+      "direct_modal_sentence_count": 4,
       "incoming_edge_count": 15,
       "modalities": [
         "MUST"
@@ -9378,6 +9378,33 @@
       ],
       "verification_owner": [
         "SCENARIO-SEARCH-ACTION-001"
+      ]
+    },
+    {
+      "aggregate_contract": false,
+      "allowed_facets": [
+        "input"
+      ],
+      "child_requirement_ids": [],
+      "clause_edge_ids": [
+        "CLAIM-LFT-0163:7"
+      ],
+      "clause_roles": {
+        "CLAIM-LFT-0163:7": "input"
+      },
+      "contract_key": "global.search.capture-handoff",
+      "direct_modal_sentence_count": 2,
+      "incoming_edge_count": 1,
+      "modalities": [
+        "MUST"
+      ],
+      "owner_file": "docs/canon/specifications/global/search.md",
+      "rationale": "Owner-approved Search stronger-third-law candidate is atomized to one bounded concept owner and awaits exact independent review.",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-CAPTURE-HANDOFF-001",
+      "reviewer": "candidate-search-find-ask-act-inspect-amendment",
+      "triggered_by": [],
+      "verification_owner": [
+        "SCENARIO-SEARCH-CAPTURE-HANDOFF-001"
       ]
     },
     {
@@ -9402,42 +9429,6 @@
       "triggered_by": [],
       "verification_owner": [
         "PROOF-SEARCH-FIRST-VIEWPORT-001"
-      ]
-    },
-    {
-      "aggregate_contract": false,
-      "allowed_facets": [
-        "identity",
-        "input",
-        "output"
-      ],
-      "child_requirement_ids": [],
-      "clause_edge_ids": [
-        "CLAIM-LFT-0026:8",
-        "CLAIM-LFT-0163:5",
-        "CLAIM-LFT-0182:8",
-        "CLAIM-STB-0306:1"
-      ],
-      "clause_roles": {
-        "CLAIM-LFT-0026:8": "identity",
-        "CLAIM-LFT-0163:5": "input",
-        "CLAIM-LFT-0182:8": "output",
-        "CLAIM-STB-0306:1": "identity"
-      },
-      "contract_key": "global.search.identity",
-      "direct_modal_sentence_count": 2,
-      "incoming_edge_count": 4,
-      "modalities": [
-        "MUST",
-        "MUST NOT"
-      ],
-      "owner_file": "docs/canon/specifications/global/search.md",
-      "rationale": "Independent 2,772-edge conceptual review found one bounded contract; aggregate contracts own dependency summaries only.",
-      "requirement_id": "SPEC-GLOBAL-SEARCH-IDENTITY-001",
-      "reviewer": "independent-sol-max-semantic-homogeneity-review",
-      "triggered_by": [],
-      "verification_owner": [
-        "SCENARIO-SEARCH-IDENTITY-001"
       ]
     },
     {
@@ -9537,6 +9528,68 @@
       "triggered_by": [],
       "verification_owner": [
         "REVIEW-SPEC-GLOBAL-SEARCH-PLACEMENT-001"
+      ]
+    },
+    {
+      "aggregate_contract": false,
+      "allowed_facets": [
+        "output"
+      ],
+      "child_requirement_ids": [],
+      "clause_edge_ids": [
+        "CLAIM-LFT-0163:6",
+        "CLAIM-LFT-0182:8"
+      ],
+      "clause_roles": {
+        "CLAIM-LFT-0163:6": "output",
+        "CLAIM-LFT-0182:8": "output"
+      },
+      "contract_key": "global.search.presentation",
+      "direct_modal_sentence_count": 1,
+      "incoming_edge_count": 2,
+      "modalities": [
+        "MUST NOT"
+      ],
+      "owner_file": "docs/canon/specifications/global/search.md",
+      "rationale": "Owner-approved Search stronger-third-law candidate is atomized to one bounded concept owner and awaits exact independent review.",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-PRESENTATION-001",
+      "reviewer": "candidate-search-find-ask-act-inspect-amendment",
+      "triggered_by": [],
+      "verification_owner": [
+        "PROOF-SEARCH-PRESENTATION-ACCESSIBILITY-001",
+        "REVIEW-SEARCH-PRESENTATION-001"
+      ]
+    },
+    {
+      "aggregate_contract": false,
+      "allowed_facets": [
+        "identity",
+        "input"
+      ],
+      "child_requirement_ids": [],
+      "clause_edge_ids": [
+        "CLAIM-LFT-0026:8",
+        "CLAIM-LFT-0163:5",
+        "CLAIM-STB-0306:1"
+      ],
+      "clause_roles": {
+        "CLAIM-LFT-0026:8": "identity",
+        "CLAIM-LFT-0163:5": "input",
+        "CLAIM-STB-0306:1": "identity"
+      },
+      "contract_key": "global.search.identity",
+      "direct_modal_sentence_count": 3,
+      "incoming_edge_count": 3,
+      "modalities": [
+        "MUST"
+      ],
+      "owner_file": "docs/canon/specifications/global/search.md",
+      "rationale": "Owner-approved Search stronger-third-law candidate is atomized to one bounded concept owner and awaits exact independent review.",
+      "requirement_id": "SPEC-GLOBAL-SEARCH-PRIVATE-COMMAND-LAYER-001",
+      "reviewer": "candidate-search-find-ask-act-inspect-amendment",
+      "triggered_by": [],
+      "verification_owner": [
+        "SCENARIO-SEARCH-PRIVATE-COMMAND-LAYER-001"
       ]
     },
     {

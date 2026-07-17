@@ -4,19 +4,24 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
 import subprocess
 from dataclasses import dataclass
 from pathlib import Path
 
-from tools.ambitions_canon.build import _registry_content_sha
-from tools.ambitions_canon.manifest import load_documents, load_manifest
+from tools.ambitions_canon.build import (
+    _AuditedCanonSnapshot,
+    _load_audited_canon_snapshot,
+    _open_directory_absolute_nofollow,
+    _read_file_at,
+    _verify_audited_canon_snapshot,
+)
 from tools.ambitions_canon.model import (
     CanonError,
     StateCommand,
     StateCommandContract,
 )
-from tools.ambitions_canon.registry import build_registry
 
 
 REGISTRY_PATH = Path("docs/canon/registries/command-gate-dependencies.json")
@@ -25,6 +30,11 @@ APPROVAL_RECEIPT_REGISTRY_PATH = Path(
 )
 OWNER_APPROVAL_REGISTRY_PATH = Path(
     "docs/canon/registries/command-gate-owner-approvals.json"
+)
+_COMMAND_GATE_INPUT_PATHS = (
+    REGISTRY_PATH,
+    APPROVAL_RECEIPT_REGISTRY_PATH,
+    OWNER_APPROVAL_REGISTRY_PATH,
 )
 REGISTRY_FIELDS = frozenset(
     {
@@ -54,6 +64,13 @@ OWNER_APPROVAL_REGISTRY_FIELDS = frozenset(
         "owner_approvals",
     }
 )
+
+
+@dataclass(frozen=True, slots=True)
+class _CommandGateCanonContext:
+    """Module-owned live canon identity for one validation operation."""
+
+    content_sha: str
 DEPENDENCY_FIELDS = frozenset(
     {
         "dependency_id",
@@ -950,21 +967,7 @@ def render_command_gate_owner_approval_registry(
 
 
 def _current_canon_content_sha256(root: Path) -> str:
-    manifest = load_manifest(root)
-    registry = build_registry(manifest, load_documents(root, manifest))
-    from tools.ambitions_canon.conflicts import (
-        load_conflict_dockets,
-        validate_conflict_repository,
-    )
-
-    dockets = load_conflict_dockets(root)
-    conflict_snapshot = validate_conflict_repository(
-        root,
-        dockets,
-        (item.requirement_id for item in registry.requirements),
-        registry.supersession_entries,
-    )
-    return _registry_content_sha(registry, dockets, conflict_snapshot)
+    return _load_audited_canon_snapshot(root).content_sha
 
 
 def _load_approval_receipt_registry(
@@ -972,10 +975,15 @@ def _load_approval_receipt_registry(
     *,
     expected_canon_revision: int,
     expected_canon_content_sha256: str,
+    source: bytes | None = None,
 ) -> tuple[str, int, tuple[CommandGateApprovalReceipt, ...], str]:
     path = root / APPROVAL_RECEIPT_REGISTRY_PATH
     try:
-        source = path.read_bytes()
+        if source is None:
+            with _open_directory_absolute_nofollow(root) as descriptor:
+                source = _read_file_at(
+                    descriptor, APPROVAL_RECEIPT_REGISTRY_PATH
+                )
         payload = json.loads(source)
     except (OSError, json.JSONDecodeError) as error:
         raise _error(f"cannot load approval receipt registry: {error}", path) from error
@@ -1016,6 +1024,8 @@ def _load_approval_receipt_registry(
 
 def _load_owner_approval_registry(
     root: Path,
+    *,
+    source: bytes | None = None,
 ) -> tuple[
     str,
     int,
@@ -1024,7 +1034,9 @@ def _load_owner_approval_registry(
 ]:
     path = root / OWNER_APPROVAL_REGISTRY_PATH
     try:
-        source = path.read_bytes()
+        if source is None:
+            with _open_directory_absolute_nofollow(root) as descriptor:
+                source = _read_file_at(descriptor, OWNER_APPROVAL_REGISTRY_PATH)
         payload = json.loads(source)
     except (OSError, json.JSONDecodeError) as error:
         raise _error(f"cannot load owner approval registry: {error}", path) from error
@@ -1370,12 +1382,53 @@ def load_command_gate_dependency_registry(
     *,
     expected_canon_revision: int | None = None,
 ) -> CommandGateDependencyRegistry:
-    """Load dependencies and independently tracked receipts without network access."""
+    """Load dependencies against a live audited canon identity."""
 
-    repository_root = root.resolve()
+    with _open_directory_absolute_nofollow(root) as descriptor:
+        captured = _capture_command_gate_input_bytes(descriptor)
+        audited = _load_audited_canon_snapshot(root)
+        registry = _load_command_gate_dependency_registry_for_audited_canon(
+            root,
+            audited,
+            expected_canon_revision=expected_canon_revision,
+            captured_inputs=captured,
+        )
+        if _capture_command_gate_input_bytes(descriptor) != captured:
+            raise _error(
+                "live command-gate bytes changed during registry load",
+                root / REGISTRY_PATH,
+            )
+        _verify_audited_canon_snapshot(root, audited)
+        return registry
+
+
+def _capture_command_gate_input_bytes(
+    root_descriptor: int,
+) -> tuple[tuple[Path, bytes], ...]:
+    return tuple(
+        (path, _read_file_at(root_descriptor, path))
+        for path in _COMMAND_GATE_INPUT_PATHS
+    )
+
+
+def _load_command_gate_dependency_registry_for_audited_canon(
+    root: Path,
+    audited: _AuditedCanonSnapshot,
+    *,
+    expected_canon_revision: int | None = None,
+    captured_inputs: tuple[tuple[Path, bytes], ...] | None = None,
+) -> CommandGateDependencyRegistry:
+    """Module-private optimized load bound to a loader-owned audit context."""
+
+    repository_root = Path(os.path.abspath(root))
     path = repository_root / REGISTRY_PATH
+    captured = dict(captured_inputs or ())
     try:
-        source = path.read_bytes()
+        if REGISTRY_PATH in captured:
+            source = captured[REGISTRY_PATH]
+        else:
+            with _open_directory_absolute_nofollow(repository_root) as descriptor:
+                source = _read_file_at(descriptor, REGISTRY_PATH)
         payload = json.loads(source)
     except (OSError, json.JSONDecodeError) as error:
         raise _error(f"cannot load command-gate dependency registry: {error}", path) from error
@@ -1398,7 +1451,9 @@ def load_command_gate_dependency_registry(
         raise _error("canon_revision must be a nonnegative integer", path)
     if expected_canon_revision is not None and canon_revision != expected_canon_revision:
         raise _error("registry canon revision is stale", path)
-    current_canon_sha = _current_canon_content_sha256(repository_root)
+    current_canon_sha = audited.content_sha
+    if SHA256.fullmatch(current_canon_sha) is None:
+        raise _error("expected canon content SHA is invalid", path)
     declared_canon_sha = _required_sha(
         payload["canon_content_sha256"], "canon_content_sha256"
     )
@@ -1423,13 +1478,17 @@ def load_command_gate_dependency_registry(
         repository_root,
         expected_canon_revision=canon_revision,
         expected_canon_content_sha256=current_canon_sha,
+        source=captured.get(APPROVAL_RECEIPT_REGISTRY_PATH),
     )
     (
         owner_registry_id,
         owner_registry_revision,
         owner_approvals,
         owner_source_sha,
-    ) = _load_owner_approval_registry(repository_root)
+    ) = _load_owner_approval_registry(
+        repository_root,
+        source=captured.get(OWNER_APPROVAL_REGISTRY_PATH),
+    )
     registry = CommandGateDependencyRegistry(
         schema_version=1,
         registry_id=registry_id,
@@ -1877,7 +1936,66 @@ def validate_command_gate_dependency_bindings(
     canon_revision: int,
     trusted_approval_base: TrustedCommandGateApprovalBase | None = None,
 ) -> None:
-    """Require symmetric command, current canon, and exact receipt binding."""
+    """Require symmetric binding against a live audited canon identity."""
+
+    with _open_directory_absolute_nofollow(
+        registry.repository_root
+    ) as descriptor:
+        initial_inputs = _capture_command_gate_input_bytes(descriptor)
+        expected_inputs = (
+            (REGISTRY_PATH, render_command_gate_dependency_registry(registry)),
+            (
+                APPROVAL_RECEIPT_REGISTRY_PATH,
+                render_command_gate_approval_receipt_registry(registry),
+            ),
+            (
+                OWNER_APPROVAL_REGISTRY_PATH,
+                render_command_gate_owner_approval_registry(
+                    registry.owner_approvals,
+                    registry_revision=registry.owner_approval_registry_revision,
+                ),
+            ),
+        )
+        if initial_inputs != expected_inputs:
+            raise _error(
+                "caller registry does not match exact live command-gate bytes",
+                registry.source_path,
+            )
+        initial_canon_sha = _current_canon_content_sha256(
+            registry.repository_root
+        )
+        context = _CommandGateCanonContext(initial_canon_sha)
+        _validate_command_gate_dependency_bindings_for_audited_canon(
+            registry,
+            contracts,
+            context,
+            canon_revision=canon_revision,
+            trusted_approval_base=trusted_approval_base,
+        )
+        if _capture_command_gate_input_bytes(descriptor) != initial_inputs:
+            raise _error(
+                "live command-gate bytes changed during authorization validation",
+                registry.source_path,
+            )
+        if (
+            _current_canon_content_sha256(registry.repository_root)
+            != initial_canon_sha
+        ):
+            raise _error(
+                "canonical source changed during command-gate validation",
+                registry.source_path,
+            )
+
+
+def _validate_command_gate_dependency_bindings_for_audited_canon(
+    registry: CommandGateDependencyRegistry,
+    contracts: tuple[StateCommandContract, ...],
+    audited: _AuditedCanonSnapshot | _CommandGateCanonContext,
+    *,
+    canon_revision: int,
+    trusted_approval_base: TrustedCommandGateApprovalBase | None = None,
+) -> None:
+    """Module-private optimized validation for one loader-owned audit context."""
 
     if (
         registry.schema_version != 1
@@ -1902,7 +2020,9 @@ def validate_command_gate_dependency_bindings(
         raise _error("registry identity, revision, or source hash is invalid")
     if registry.canon_revision != canon_revision:
         raise _error("registry canon revision is stale", registry.source_path)
-    current_canon_sha = _current_canon_content_sha256(registry.repository_root)
+    current_canon_sha = audited.content_sha
+    if SHA256.fullmatch(current_canon_sha) is None:
+        raise _error("expected canon content SHA is invalid", registry.source_path)
     if registry.canon_content_sha256 != current_canon_sha:
         raise _error("registry canon content is stale", registry.source_path)
     requires_trusted_approval = bool(

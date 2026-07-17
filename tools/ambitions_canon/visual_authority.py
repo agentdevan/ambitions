@@ -10,9 +10,21 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable, Mapping, Sequence
 
-from tools.ambitions_canon.model import CanonError
+from tools.ambitions_canon.model import CanonError, StateCommandActivationPosture
+from tools.ambitions_canon.build import (
+    _AuditedCanonSnapshot,
+    _read_confined_bytes,
+)
 from tools.ambitions_canon.ux_blueprint import (
+    _ACTIVE_OPERATION,
+    _captured_input_bytes,
     UXBlueprintError,
+    _freeze_mapping,
+    _load_state_command_contracts,
+    _ux_operation,
+    _validate_ux_blueprint,
+    _read_projection_output_locked,
+    load_state_command_contracts,
     load_state_inventory,
     load_ux_blueprint,
     validate_ux_blueprint,
@@ -26,6 +38,24 @@ R1_NODE_SNAPSHOT_PATH = Path(
 )
 REQUIREMENT_DISPOSITIONS_PATH = Path(
     "docs/canon/migration/ux-blueprint-requirement-dispositions.json"
+)
+SEARCH_GAP_BLOCKED_STATE_IDS = frozenset(
+    {
+        "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-FAILED",
+        "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-INTERRUPTED",
+        "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RECOVERED",
+        "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-RESUMED",
+        "UX-STATE-VARIANT-SEARCH-RESULTS-ASK-UNAVAILABLE-OFFLINE-FALLBACK",
+        "UX-STATE-VARIANT-SEARCH-RESULTS-CAPTURE-HANDOFF",
+        "UX-STATE-VARIANT-SEARCH-RESULTS-GROUNDED-ANSWER",
+        "UX-STATE-VARIANT-SEARCH-RESULTS-SYNTHESIS-IN-PROGRESS",
+    }
+)
+SEARCH_ASK_COMMAND_REQUIREMENT_ID = (
+    "SPEC-GLOBAL-SEARCH-ASK-COMMAND-CONTRACT-001"
+)
+SEARCH_ASK_ACTIVATION_GATE_REQUIREMENT_ID = (
+    "SPEC-GLOBAL-SEARCH-ASK-ACTIVATION-GATE-001"
 )
 _SHA256 = frozenset("0123456789abcdef")
 _TOP_LEVEL_FIELDS = frozenset(
@@ -214,13 +244,44 @@ class VisualAuthoritySnapshot:
 def load_visual_authority_rebaseline(repo_root: Path) -> VisualAuthoritySnapshot:
     """Load and fully validate the tracked Phase 3/4 visual-authority contract."""
 
-    source_bytes = _read_regular_nofollow(repo_root, MANIFEST_PATH)
+    try:
+        with _ux_operation(
+            repo_root, include_visual_evidence=True
+        ) as context:
+            return _load_visual_authority_rebaseline_from_context(
+                repo_root, context
+            )
+    except UXBlueprintError as exc:
+        raise _error(
+            "VISUAL_AUTHORITY_CANON_STALE",
+            f"visual-authority input changed during operation: {exc}",
+        ) from exc
+
+
+def _load_visual_authority_rebaseline_from_context(
+    repo_root: Path,
+    context,
+) -> VisualAuthoritySnapshot:
+    """Parse only the immutable manifest bytes captured by the UX operation."""
+
+    source_bytes = _captured_input_bytes(context, MANIFEST_PATH)
     try:
         payload = json.loads(source_bytes)
     except (UnicodeError, json.JSONDecodeError) as exc:
-        raise _error("VISUAL_AUTHORITY_SCHEMA_INVALID", "manifest is not valid JSON") from exc
-    snapshot = validate_visual_authority_payload(repo_root, payload, source_bytes)
-    _validate_r1_node_snapshot(repo_root, _object(payload, "manifest"))
+        raise _error(
+            "VISUAL_AUTHORITY_SCHEMA_INVALID",
+            "manifest is not valid JSON",
+        ) from exc
+    frozen = _freeze_mapping(payload, "visual-authority manifest")
+    snapshot = _validate_visual_authority_payload(
+        repo_root,
+        frozen,
+        source_bytes,
+        context.canon,
+    )
+    _validate_r1_node_snapshot(
+        repo_root, _object(frozen, "manifest")
+    )
     return snapshot
 
 
@@ -231,18 +292,27 @@ def load_visual_authority_rebaseline_if_present(
 
     if repo_root is None:
         return None
-    path = repo_root / MANIFEST_PATH
     try:
-        os.lstat(path)
-    except FileNotFoundError:
-        return None
-    except OSError as exc:
-        raise CanonError(
-            "VISUAL_AUTHORITY_READ_FAILED",
-            "unable to inspect visual-authority manifest",
-            path,
+        with _ux_operation(
+            repo_root, include_visual_evidence=True
+        ) as context:
+            captured = tuple(
+                item for item in context.inputs if item.path == MANIFEST_PATH
+            )
+            if not captured:
+                return None
+            if len(captured) != 1:
+                raise UXBlueprintError(
+                    "visual-authority manifest capture is ambiguous"
+                )
+            return _load_visual_authority_rebaseline_from_context(
+                repo_root, context
+            )
+    except UXBlueprintError as exc:
+        raise _error(
+            "VISUAL_AUTHORITY_CANON_STALE",
+            f"visual-authority input changed during operation: {exc}",
         ) from exc
-    return load_visual_authority_rebaseline(repo_root)
 
 
 def validate_visual_authority_payload(
@@ -252,6 +322,27 @@ def validate_visual_authority_payload(
 ) -> VisualAuthoritySnapshot:
     """Validate exact coverage, provenance, state posture, and retained evidence."""
 
+    with _ux_operation(
+        repo_root, include_visual_evidence=True
+    ) as context:
+        frozen = _freeze_mapping(
+            _object(payload, "visual-authority manifest"),
+            "visual-authority manifest",
+        )
+        return _validate_visual_authority_payload(
+            repo_root,
+            frozen,
+            bytes(source_bytes),
+            context.canon,
+        )
+
+
+def _validate_visual_authority_payload(
+    repo_root: Path,
+    payload: object,
+    source_bytes: bytes,
+    canon_snapshot: _AuditedCanonSnapshot,
+) -> VisualAuthoritySnapshot:
     data = _object(payload, "visual-authority manifest")
     _exact_fields(data, _TOP_LEVEL_FIELDS, "manifest")
     if data.get("schema_version") != 1:
@@ -269,7 +360,7 @@ def validate_visual_authority_payload(
     canon_content_sha = _sha(canon["content_sha"], 64, "canon content SHA")
     try:
         blueprint = load_ux_blueprint(repo_root)
-        validate_ux_blueprint(repo_root, blueprint)
+        _validate_ux_blueprint(repo_root, blueprint, canon_snapshot)
     except UXBlueprintError as exc:
         raise _error(
             "VISUAL_AUTHORITY_CANON_STALE",
@@ -306,6 +397,36 @@ def validate_visual_authority_payload(
     gap_state_ids = _sorted_unique_strings(
         state_posture["gap_blocked_state_ids"], "gap-blocked state IDs"
     )
+    if set(gap_state_ids) != SEARCH_GAP_BLOCKED_STATE_IDS:
+        raise _error(
+            "VISUAL_AUTHORITY_STATE_POSTURE_INVALID",
+            "gap-blocked states must equal the exact canonical Search gap set",
+        )
+    try:
+        state_contracts = {
+            contract.state_id: contract
+            for contract in _load_state_command_contracts(
+                repo_root, canon_snapshot
+            )
+        }
+    except UXBlueprintError as exc:
+        raise _error(
+            "VISUAL_AUTHORITY_CANON_STALE",
+            f"canonical state-command validation failed: {exc}",
+        ) from exc
+    exact_gate = (SEARCH_ASK_ACTIVATION_GATE_REQUIREMENT_ID,)
+    if any(
+        (contract := state_contracts.get(state_id)) is None
+        or contract.requirement_id != SEARCH_ASK_COMMAND_REQUIREMENT_ID
+        or contract.activation_posture
+        is not StateCommandActivationPosture.FUTURE_GATED
+        or contract.gate_requirement_ids != exact_gate
+        for state_id in SEARCH_GAP_BLOCKED_STATE_IDS
+    ):
+        raise _error(
+            "VISUAL_AUTHORITY_STATE_POSTURE_INVALID",
+            "gap-blocked Search states must remain exact future-gated contracts",
+        )
     state_sets = tuple(map(set, (eligible_state_ids, future_state_ids, gap_state_ids)))
     if any(state_sets[index] & state_sets[other] for index in range(3) for other in range(index + 1, 3)):
         raise _error(
@@ -322,6 +443,18 @@ def validate_visual_authority_payload(
             "VISUAL_AUTHORITY_STATE_POSTURE_INVALID",
             "state posture must classify every current UX state exactly once",
         )
+    gap_blocked_requirement_ids = {
+        _string(item.get("requirement_id"), "requirement ID")
+        for item in _list(dispositions.get("dispositions"), "dispositions")
+        if _object(item, "disposition").get("disposition")
+        == "visual_mapping_required"
+        and (
+            state_ids := set(
+                _list(item.get("state_blueprint_ids"), "state blueprint IDs")
+            )
+        )
+        and state_ids <= SEARCH_GAP_BLOCKED_STATE_IDS
+    }
 
     presentation = _object(data["presentation_matrix"], "presentation_matrix")
     _exact_fields(
@@ -658,12 +791,13 @@ def validate_visual_authority_payload(
     if (
         len(candidate_records) != 18
         or screen_count != 47
-        or mapped_state_ids != inventory_ids
+        or mapped_state_ids != inventory_ids - SEARCH_GAP_BLOCKED_STATE_IDS
         or not support_overlay_state_ids.issubset(mapped_state_ids)
     ):
         raise _error(
             "VISUAL_AUTHORITY_FIGMA_MAPPING_INVALID",
-            "18 candidate masters must map all 47 UX screens and every state exactly once",
+            "18 candidate masters must map all 47 UX screens and every "
+            "non-gap-blocked state exactly once",
         )
 
     coverage = _object(data["coverage"], "coverage")
@@ -680,10 +814,13 @@ def validate_visual_authority_payload(
             "VISUAL_AUTHORITY_REQUIREMENT_COVERAGE_INVALID",
             "declared visual requirements differ from current UX dispositions",
         )
-    if mapped_requirement_ids != set(visual_requirement_ids) | set(additional):
+    if mapped_requirement_ids != (
+        set(visual_requirement_ids) - gap_blocked_requirement_ids
+    ) | set(additional):
         raise _error(
             "VISUAL_AUTHORITY_REQUIREMENT_COVERAGE_INVALID",
-            "Figma authority mappings must cover current visual requirements exactly",
+            "Figma authority mappings must cover current non-gap-blocked visual "
+            "requirements exactly",
         )
     expected_counts = {
         "visual_requirement_count": len(visual_requirement_ids),
@@ -798,7 +935,7 @@ def validate_visual_authority_payload(
             "pending Gate B must block task-pack visual selection",
         )
 
-    return VisualAuthoritySnapshot(
+    result = VisualAuthoritySnapshot(
         source_bytes=source_bytes,
         source_sha256=hashlib.sha256(source_bytes).hexdigest(),
         canon_revision=canon_revision,
@@ -816,6 +953,7 @@ def validate_visual_authority_payload(
         destructive_actions=destructive_actions,
         bindings=tuple(sorted(bindings, key=lambda item: item.visual_authority_id)),
     )
+    return result
 
 
 def select_visual_authority(
@@ -1875,6 +2013,11 @@ def _validate_screenshot_records(
 def _read_regular_nofollow(root: Path, relative_path: Path) -> bytes:
     if relative_path.is_absolute() or not relative_path.parts or ".." in relative_path.parts:
         raise _error("VISUAL_AUTHORITY_PATH_INVALID", "path must stay inside repository")
+    context = _ACTIVE_OPERATION.get()
+    if context is not None:
+        return _captured_input_bytes(context, relative_path)
+    if relative_path == REQUIREMENT_DISPOSITIONS_PATH:
+        return _read_projection_output_locked(root, relative_path)
     path = root / relative_path
     try:
         info = path.lstat()
@@ -1891,8 +2034,8 @@ def _read_regular_nofollow(root: Path, relative_path: Path) -> bytes:
             path,
         )
     try:
-        return path.read_bytes()
-    except OSError as exc:
+        return _read_confined_bytes(root, relative_path)
+    except (OSError, CanonError) as exc:
         raise CanonError(
             "VISUAL_AUTHORITY_READ_FAILED",
             f"unable to read visual-authority artifact: {relative_path}",
