@@ -69,6 +69,20 @@ def copy_figma_reconciliation_evidence(
         dirs_exist_ok=True,
     )
 
+    visual_r1_evidence_source = (
+        repository_root
+        / "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair"
+    )
+    visual_r1_evidence_target = (
+        destination_root
+        / "docs/qa/evidence/2026-07-16-canon-visual-authority-r1-shell-repair"
+    )
+    shutil.copytree(
+        visual_r1_evidence_source,
+        visual_r1_evidence_target,
+        dirs_exist_ok=True,
+    )
+
     approval_source = repository_root / "docs/design/provenance/owner-approvals"
     approval_target = destination_root / "docs/design/provenance/owner-approvals"
     shutil.copytree(approval_source, approval_target, dirs_exist_ok=True)
