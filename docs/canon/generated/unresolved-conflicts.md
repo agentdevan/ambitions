@@ -6,7 +6,7 @@
 - Canon revision: `1`
 - Authority state: `active`
 - Compiler version: `0.2.0`
-- Canon content SHA: `24b5d23c38eb15b628690bf8f846150a2ae465a4c344c6d74b906e310e70b8b7`
+- Canon content SHA: `a1c987a4e753f42a852e0558b5e201cd1168e4b08e5deb9286b341dfbaaaea13`
 - Open dockets: `0`
 
 Open dockets block affected task packs and authority cutover. Recommendations are proposals, not owner decisions.
