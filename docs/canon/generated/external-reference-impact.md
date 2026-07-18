@@ -1,7 +1,7 @@
 # Ambitions External Reference Impact
 
 - Canon revision: `1`
-- Authority state: `shadow`
+- Authority state: `active`
 - Traceability input SHA: `2a498a0c103cbb297b4ca489982b820e1e14f915a56656989fdf21ddfa09e723`
 
 **Representation status:** Represented
@@ -11,7 +11,7 @@
 - Figma references: `11`
 - Proof references: `8`
 - Invalid external findings: `0`
-- Linear reconciliation SHA: `b7a81dea9496fe532dc513995b65e46ce26ec59166e8e7a564cee63daad85847`
+- Linear reconciliation SHA: `2691da618038385b33c1247d3d433cba2f41eec1a5b3de1d013600a31d29b36f`
 - Reconciliation entities: `285`
 - Reconciliation disposition: `initiative_applied_verified_broader_withheld`
 - External mutations applied: `true`

@@ -38,6 +38,26 @@ GENERATED_FILES = (
     "generated/supersession-manifest.json",
     "generated/object-boundary-matrix.md",
 )
+REPOSITORY_GENERATED_FILES = (
+    "generated/AUTHORIZATION_GATE_TRANSITION.md",
+    "generated/CHATGPT_CODEX_HANDOFF.md",
+    "generated/CODEX_START_HERE.md",
+    "generated/INDEX.md",
+    "generated/canon-index.json",
+    "generated/concept-ownership.json",
+    "generated/cutover-readiness.md",
+    "generated/requirement-graph.json",
+    "generated/specification-coverage.md",
+    "generated/unresolved-conflicts.md",
+    "generated/law-source-map.json",
+    "generated/law-test-map.json",
+    "generated/law-proof-map.json",
+    "generated/visual-authority-manifest.json",
+    "generated/external-reference-impact.md",
+    "generated/supersession-manifest.json",
+    "generated/task-25-owner-direct-finalization.json",
+    "generated/object-boundary-matrix.md",
+)
 
 
 def manifest_text(
@@ -395,12 +415,12 @@ class ManifestTests(unittest.TestCase):
                     lambda: load_manifest(self.root),
                 )
 
-    def test_repository_manifest_matches_the_shadow_constitution_contract(self):
+    def test_repository_manifest_matches_the_active_constitution_contract(self):
         manifest = load_manifest(REPO_ROOT)
 
         self.assertEqual(manifest.schema_version, 1)
         self.assertEqual(manifest.canon_revision, 1)
-        self.assertIs(manifest.authority_state, AuthorityState.SHADOW)
+        self.assertIs(manifest.authority_state, AuthorityState.ACTIVE)
         self.assertEqual(manifest.compiler_version, "0.2.0")
         self.assertEqual(
             tuple(item.path for item in manifest.normative_files),
@@ -424,6 +444,7 @@ class ManifestTests(unittest.TestCase):
                 Path("specifications/journeys/missed-work-recovery.md"),
                 Path("specifications/journeys/schedule-reflow.md"),
                 Path("specifications/journeys/search-find-act-inspect.md"),
+                Path("specifications/journeys/search-find-ask-act-inspect.md"),
                 Path("specifications/journeys/start-and-complete-step.md"),
                 Path("specifications/objects/attachment.md"),
                 Path("specifications/objects/closure.md"),
@@ -470,7 +491,7 @@ class ManifestTests(unittest.TestCase):
         )
         self.assertEqual(
             manifest.generated_files,
-            tuple(Path(path) for path in GENERATED_FILES),
+            tuple(Path(path) for path in REPOSITORY_GENERATED_FILES),
         )
 
         systems_root = REPO_ROOT / "docs/canon/specifications/systems"

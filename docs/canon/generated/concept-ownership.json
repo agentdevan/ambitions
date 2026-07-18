@@ -1,6 +1,6 @@
 {
-  "authority_state": "shadow",
-  "canon_content_sha": "b256dc7ceb74c1300aea9980758792692002be102ff706dfcc4a34d8a9a795fe",
+  "authority_state": "active",
+  "canon_content_sha": "4567bff1ab6c758559ca1ffb528984c514c1b20f3ddfbcad78f3c0e4aef20c1c",
   "canon_revision": 1,
   "compiler_version": "0.2.0",
   "concepts": [

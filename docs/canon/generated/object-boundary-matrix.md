@@ -1,12 +1,12 @@
 # Object Boundary Matrix
 
-> Shadow, non-authoritative generated projection.
+> Generated, non-normative projection of the active canon.
 
 - Schema version: `1`
 - Canon revision: `1`
-- Authority state: `shadow`
+- Authority state: `active`
 - Compiler version: `0.2.0`
-- Canon content SHA: `b256dc7ceb74c1300aea9980758792692002be102ff706dfcc4a34d8a9a795fe`
+- Canon content SHA: `4567bff1ab6c758559ca1ffb528984c514c1b20f3ddfbcad78f3c0e4aef20c1c`
 
 - Representation status: `materialized`
 - Scope: validated spec-owned semantic boundaries; not implementation proof

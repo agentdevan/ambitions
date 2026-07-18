@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "canon_revision": 1,
-  "authority_state": "shadow",
+  "authority_state": "active",
   "generated_from": {
     "inventory_date": "2026-07-13",
     "method": "live_linear_oauth_reads"

@@ -1,54 +1,26 @@
 ---
 name: ambitions-source-truth-authority
-description: Use before Ambitions repo edits or reviews to resolve current canon, stale material, and proof hierarchy against docs/truth and live source evidence.
+description: Route Ambitions repo edits and reviews to current canon, live source, and evidence ceilings.
 ---
 
-# Ambitions Source Truth Authority
+# Ambitions source and truth routing adapter
 
-## Skill digest
-- Use when: any Ambitions repo edit, review, docs governance change, stale-material classification, or claim boundary is in scope.
-- Do not use as: product canon, implementation proof, release proof, or permission to widen scope.
-- Required first read: `docs/truth/CODEX_START_HERE.md`.
-- Owns: evidence classification, stale-material handling, truth/source/proof conflict routing, remediation guardrail routing, Private Life Orchestration preservation checks, and smallest safe next action.
-- Does not own: Ambitions canon, current implementation status, release readiness, visual acceptance, or privacy approval.
-- Hard red: treating stale docs, old skills, plans, screenshots, or memory as current truth/proof; allowing new architecture nouns, suffix splits, Source Atlas scope, central projection authority, custom Stage machinery, or proof overclaims without current truth/proof.
-- Required output: truth files inspected, task type, truth-claim status label, source/proof evidence used, conflicts found, claims allowed/forbidden, smallest safe next action.
+This is a non-authoritative procedural adapter. It cannot define product law,
+authorize work or merge, waive a gate, or prove implementation or readiness.
 
-This skill is operating support only. It is not product truth, implementation proof, validation proof, release proof, accessibility proof, privacy approval, App Store proof, or permission to widen scope.
+Registry entry: `docs/canon/references/skill-dependencies.json`
+Allowed purpose: route source and review work to current canon, source evidence,
+and proof boundaries.
+Canonical requirement IDs: `AUTHORITY-MISSION-001`,
+`CONST-PROOF-EVIDENCE-001`.
 
-`docs/truth/*`, live source, tests, current logs, current proof artifacts, and current user or issue instructions win over this skill.
+Procedure:
 
-## Canon
+1. Open `docs/canon/generated/CODEX_START_HERE.md` and generate the bounded pack.
+2. Read only the canonical dependencies and requirement IDs routed by the pack.
+3. Inspect live source, tests, the current diff, and current proof before claims.
+4. Classify unsupported claims at the narrower evidence-bounded status.
+5. Report canon inputs, live evidence, conflicts, validation, non-claims, and rollback.
 
-- Persistent surfaces: Today / Goals / Time / You
-- Global composer: Capture
-- Behavior layer: Motion
-- Trust layer: Proof / Source / Privacy / History / Receipts
-
-Motion is not a tab or destination. Capture is not a tab.
-
-## Workflow
-
-1. Read `docs/truth/CODEX_START_HERE.md`, then the required truth files for the task type.
-2. For the default non-trivial read path, inspect `docs/truth/README.md`, `docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md`, `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `docs/truth/PRODUCT_ORIGIN_TRUTH.md` if present, `docs/truth/PRODUCT_MOAT_TRUTH.md`, `docs/truth/PRODUCT_EXPERIENCE_CANON.md`, `docs/truth/IMPLEMENTATION_TRUTH.md`, `docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md`, `docs/truth/RELEASE_TRUTH.md`, `docs/truth/CODEX_PROCESS_TRUTH.md`, `docs/truth/HISTORICAL_POLICY.md`, then `AGENTS.md`.
-3. Treat live source/project/test/script evidence as implementation truth.
-4. Treat current logs and proof packets as release truth.
-5. Classify non-source material as active, supporting, stale, or delete-worthy before using it.
-6. Classify truth-doc and closeout claims as Implemented Green, Implemented Yellow, Partial, Aspirational, Deprecated, Blocked, or Unknown before using them to justify source work.
-7. Do not revive deleted prompts, trains, artifacts, old skills, old control-plane files, or five-surface IA.
-8. Use `PRODUCT_EXPERIENCE_CANON.md` when the task touches Life Capital, full pathing, Future Steps, proof/progress transfer, Source Atlas, onboarding, reviews, automation, scenario gates, or actionability.
-9. Apply the architecture simplification posture from `PRODUCT_DESIGN_TRUTH.md`: keep the runtime law while reducing lore, deep runtime with plain UI, delete before naming, feature-local projection where safe, proof automation outranks prose, and no Green without linked evidence.
-10. For remediation trains, check for file-size/suffix discipline, no new `+02`, `+03`, or `+04` files, no broad `Models.swift`, no architecture nouns without deletion/collapse, no Source Atlas growth without ADR allowlist and boundary proof, Stage thinness and SwiftUI-native default, and proof artifacts before closeout.
-
-This skill classifies evidence and stale material. It does not define canon.
-
-## Output
-
-- Truth files inspected
-- Task type
-- Truth-claim status label
-- Source/proof evidence used
-- Conflicts found
-- Private Life Orchestration relationship
-- Claims allowed/forbidden
-- Smallest safe next action
+Use the exact dependency paths and SHA-256 values in the registry; stale bytes
+fail `skill-conformance --check`.

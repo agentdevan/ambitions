@@ -1,6 +1,6 @@
 schema_version = 1
 canon_revision = 1
-authority_state = "shadow"
+authority_state = "active"
 compiler_version = "0.2.0"
 normative_files = [
   "CONSTITUTION.md",
@@ -68,10 +68,13 @@ normative_files = [
 ]
 
 generated_files = [
+  "generated/AUTHORIZATION_GATE_TRANSITION.md",
+  "generated/CHATGPT_CODEX_HANDOFF.md",
   "generated/CODEX_START_HERE.md",
   "generated/INDEX.md",
   "generated/canon-index.json",
   "generated/concept-ownership.json",
+  "generated/cutover-readiness.md",
   "generated/requirement-graph.json",
   "generated/specification-coverage.md",
   "generated/unresolved-conflicts.md",
@@ -81,5 +84,6 @@ generated_files = [
   "generated/visual-authority-manifest.json",
   "generated/external-reference-impact.md",
   "generated/supersession-manifest.json",
+  "generated/task-25-owner-direct-finalization.json",
   "generated/object-boundary-matrix.md",
 ]

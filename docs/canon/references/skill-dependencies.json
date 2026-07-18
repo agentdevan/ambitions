@@ -4,7 +4,7 @@
   ],
   "registry_revision": "skill-dependencies-v1",
   "requirement_index_path": "docs/canon/generated/canon-index.json",
-  "requirement_index_sha256": "64338b7a538c1a93c9b6f11e52956670197cea261efd44dd2638abb7994b9b7a",
+  "requirement_index_sha256": "a93e61215ed6d9ec1149440068a1b8a11c21732042e23ad7d0f2ceb2715b934f",
   "schema_version": 1,
   "skills": [
     {
@@ -20,7 +20,7 @@
       "requirement_ids": ["AUTHORITY-MISSION-001", "CONST-PROOF-EVIDENCE-001"],
       "schema_compatibility": [1],
       "skill_id": "ambitions-source-truth-authority",
-      "skill_sha256": "3bd2a4d5758d3dcbd61507d55dd413e110a4a4c715ef37f7ad83541c5b7195e7"
+      "skill_sha256": "221cbac60fb3600e8dfa28afef17135af44e58263bb8efed1291b8fd5415bd27"
     },
     {
       "allowed_adapter_purpose": "Enforce canonical source-owner paths without defining product law.",
@@ -35,7 +35,7 @@
       "requirement_ids": ["ENFORCEMENT-ARCHITECTURE-OWNERSHIP-001", "CONST-RUNTIME-MUTATION-001"],
       "schema_compatibility": [1],
       "skill_id": "ambitions-architecture-tree-enforcement",
-      "skill_sha256": "d17380d279003808e1e2ccf65cb3893e54e13f103460a1b53991c25bbce7ec49"
+      "skill_sha256": "3b409e6182ad192585d0813ecf0c2bfdd15655b55e7074e7a2841b18be5778a1"
     },
     {
       "allowed_adapter_purpose": "Route native iPhone implementation through canonical platform and accessibility obligations.",
@@ -50,7 +50,7 @@
       "requirement_ids": ["SPEC-APP-SHELL-ROOT-NAVIGATION-001", "ACCESSIBILITY-SEMANTIC-EQUIVALENCE-001"],
       "schema_compatibility": [1],
       "skill_id": "ambitions-ios-quality-gate",
-      "skill_sha256": "82971e6c1bb4fdb8ada4dbb26010d64be3687b58e9d9a3a1f251e9c760b06014"
+      "skill_sha256": "abf2e761643a535b045054144aff1fb47b96bb66f4834a1267362de2d833d1ba"
     },
     {
       "allowed_adapter_purpose": "Keep validation and readiness claims within current evidence ceilings.",
@@ -65,7 +65,7 @@
       "requirement_ids": ["CONST-PROOF-EVIDENCE-001", "CANON-DESTRUCTIVE-SUPERSESSION-001"],
       "schema_compatibility": [1],
       "skill_id": "ambitions-release-proof-honesty",
-      "skill_sha256": "37da293f88d977886fa820ad004227f669cc3e1178a60ef0044ce092ef742558"
+      "skill_sha256": "15f8e11d432f40a1c0285992b90a8b956be9604291486052c9b5a0e0ba637203"
     },
     {
       "allowed_adapter_purpose": "Route scoped runtime-contract implementation through canonical mutation and proof law.",
@@ -80,7 +80,7 @@
       "requirement_ids": ["CONST-RUNTIME-MUTATION-001", "LAW-RUNTIME-DURABLE-SUCCESS-001"],
       "schema_compatibility": [1],
       "skill_id": "ambitions-runtime-contract-engineering",
-      "skill_sha256": "41cf95f68b4fdd242e26750ea81f12cb51e566265b95e5bc7149c97e957bf312"
+      "skill_sha256": "7098fd4e785101769c61354d3dff52d2567150ab41674495452dd7e66c064bd1"
     }
   ]
 }

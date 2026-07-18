@@ -317,7 +317,7 @@ class BuildTests(unittest.TestCase):
             tuple(sorted((Path(path) for path in GENERATED_FILES), key=lambda path: path.as_posix())),
         )
 
-    def test_shadow_goldens_match_the_live_manifest_render(self):
+    def test_active_manifest_render_matches_tracked_outputs(self):
         repository_root = Path(__file__).resolve().parents[2]
         manifest = load_manifest(repository_root)
         registry = build_registry(
@@ -330,11 +330,12 @@ class BuildTests(unittest.TestCase):
             outputs = render_outputs(registry)
         finally:
             os.chdir(previous)
-        golden_root = Path(__file__).parent / "golden" / "shadow"
-
         self.assertEqual(
             outputs,
-            {path: (golden_root / path).read_bytes() for path in outputs},
+            {
+                path: (repository_root / "docs/canon/generated" / path).read_bytes()
+                for path in outputs
+            },
         )
 
     def test_shadow_workflow_runs_the_offline_dual_audit_matrix(self):

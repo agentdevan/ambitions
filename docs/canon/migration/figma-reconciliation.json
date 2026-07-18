@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "canon_revision": 1,
-  "authority_state": "shadow",
+  "authority_state": "active",
   "disposition_state": "authority_metadata_and_text_applied_verified",
   "external_mutations_applied": true,
   "execution_receipt": {

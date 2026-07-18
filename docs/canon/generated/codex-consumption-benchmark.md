@@ -3,22 +3,22 @@
 > Deterministic offline benchmark evidence; not product, runtime, visual, accessibility, privacy, device, TestFlight, App Store, or release proof.
 
 - Canon revision: `1`
-- Canon SHA: `5e70d28d0f17c7d9e556f65aa9b1c3537fcfa5ca5551ca52d020d00b1c6cbef2`
-- Authority state: `shadow`
+- Canon SHA: `522491ea63bbf3d8b0743aee831820c947e0c2c98df78ba219c6a7253bde74af`
+- Authority state: `active`
 - Token estimate: deterministic four-characters-per-token ceiling
 
 ## Deterministic scenario measures
 
 | Scenario | Characters (informational) | Estimated tokens | Budget class | Token ceiling | Requirement recall | Requirement precision | Shared laws | Contradictions | Owner recall | Owner precision | Verification | Validation | Proof | Result |
 | --- | ---: | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- | --- |
-| `today-swiftui` | 14995 | 3749 | `complex` | 30000 | 3/3 | 3/3 | 5/5 | 0 | 7/7 | 7/7 | exact | present | present | PASS |
-| `time-recurrence` | 22321 | 5581 | `complex` | 30000 | 6/6 | 6/6 | 7/7 | 0 | 16/16 | 16/16 | exact | present | present | PASS |
-| `capture-proposal` | 17391 | 4348 | `complex` | 30000 | 3/3 | 3/3 | 5/5 | 0 | 13/13 | 13/13 | exact | present | present | PASS |
-| `local-runtime-mutation` | 14378 | 3595 | `complex` | 30000 | 2/2 | 2/2 | 6/6 | 0 | 9/9 | 9/9 | exact | present | present | PASS |
-| `cloudkit-continuity` | 47109 | 11778 | `complex` | 30000 | 19/19 | 19/19 | 12/12 | 0 | 16/16 | 16/16 | exact | present | present | PASS |
-| `source-atlas-boundary` | 41187 | 10297 | `complex` | 30000 | 15/15 | 15/15 | 14/14 | 0 | 16/16 | 16/16 | exact | present | present | PASS |
-| `accessibility-repair` | 11036 | 2759 | `complex` | 30000 | 9/9 | 9/9 | 2/2 | 0 | 7/7 | 7/7 | exact | present | present | PASS |
-| `release-proof-claim` | 31633 | 7909 | `complex` | 30000 | 28/28 | 28/28 | 6/6 | 0 | 12/12 | 12/12 | exact | present | present | PASS |
+| `today-swiftui` | 14827 | 3707 | `complex` | 30000 | 3/3 | 3/3 | 5/5 | 0 | 7/7 | 7/7 | exact | present | present | PASS |
+| `time-recurrence` | 22153 | 5539 | `complex` | 30000 | 6/6 | 6/6 | 7/7 | 0 | 16/16 | 16/16 | exact | present | present | PASS |
+| `capture-proposal` | 17223 | 4306 | `complex` | 30000 | 3/3 | 3/3 | 5/5 | 0 | 13/13 | 13/13 | exact | present | present | PASS |
+| `local-runtime-mutation` | 14210 | 3553 | `complex` | 30000 | 2/2 | 2/2 | 6/6 | 0 | 9/9 | 9/9 | exact | present | present | PASS |
+| `cloudkit-continuity` | 46941 | 11736 | `complex` | 30000 | 19/19 | 19/19 | 12/12 | 0 | 16/16 | 16/16 | exact | present | present | PASS |
+| `source-atlas-boundary` | 41019 | 10255 | `complex` | 30000 | 15/15 | 15/15 | 14/14 | 0 | 16/16 | 16/16 | exact | present | present | PASS |
+| `accessibility-repair` | 10868 | 2717 | `complex` | 30000 | 9/9 | 9/9 | 2/2 | 0 | 7/7 | 7/7 | exact | present | present | PASS |
+| `release-proof-claim` | 31465 | 7867 | `complex` | 30000 | 28/28 | 28/28 | 6/6 | 0 | 12/12 | 12/12 | exact | present | present | PASS |
 
 ## Resume-safe authorization checks
 

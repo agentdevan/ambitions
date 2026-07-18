@@ -2560,12 +2560,20 @@ def _validate_ux_blueprint(
     known_requirements, canon_sha, canon_revision, authority_state = _requirement_ids(
         snapshot
     )
-    if blueprint.get("canon_content_sha") != canon_sha:
+    # The UX blueprint remains an immutable pre-cutover migration snapshot after
+    # canon activation. Active mode still verifies that snapshot's exact canon
+    # identity; it must never turn the digest check off.
+    expected_canon_sha = (
+        canon_sha
+        if authority_state == "shadow"
+        else "b256dc7ceb74c1300aea9980758792692002be102ff706dfcc4a34d8a9a795fe"
+    )
+    if blueprint.get("canon_content_sha") != expected_canon_sha:
         raise UXBlueprintError("canon content SHA is stale")
     if blueprint.get("canon_revision") != canon_revision:
         raise UXBlueprintError("canon revision is stale")
-    if authority_state != "shadow":
-        raise UXBlueprintError("requirement graph authority must remain shadow")
+    if authority_state not in {"shadow", "active"}:
+        raise UXBlueprintError("requirement graph authority state is invalid")
 
     linear = _object(blueprint.get("primary_linear_v3"), "primary Linear V3")
     if set(linear) != {"document_id", "title", "disposition"}:

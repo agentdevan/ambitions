@@ -368,7 +368,7 @@ class AuditTests(unittest.TestCase):
             ),
         )
 
-    def test_live_shadow_cli_audit_is_green_and_deterministic(self):
+    def test_live_active_cli_audit_is_green_and_deterministic(self):
         output = StringIO()
 
         with redirect_stdout(output):
@@ -378,7 +378,7 @@ class AuditTests(unittest.TestCase):
         self.assertEqual(
             output.getvalue(),
             "GREEN ambitions canon audit documents=62 requirements=473 "
-            "concepts=473 authority_state=shadow\n",
+            "concepts=473 authority_state=active\n",
         )
 
     def test_cli_audit_renders_red_finding_and_exits_one(self):
