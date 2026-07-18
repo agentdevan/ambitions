@@ -31,7 +31,7 @@ if [ -z "$hits" ]; then
 fi
 
 # These docs are claim-boundary examples and required proof standards, not release claims.
-allowlisted_docs='docs/truth/RELEASE_TRUTH.md:|docs/native-build-and-release.md:'
+allowlisted_docs='docs/canon/migration/legacy-semantic-migration.json:|docs/native-build-and-release.md:'
 non_claim='not |no |without|unclaimed|absent|unless|forbidden|not run|not produced|does not claim|do not claim|not allowed|future|deferred|missing|cannot infer|claim boundary|separately proven'
 suspect="$(printf '%s\n' "$hits" | rg -v -i "$allowlisted_docs" | rg -v -i "$non_claim" || true)"
 if [ -z "$suspect" ]; then

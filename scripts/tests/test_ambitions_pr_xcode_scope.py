@@ -37,7 +37,7 @@ class PullRequestXcodeScopeTests(unittest.TestCase):
                 self.assertEqual(self.applies(path), 0)
 
     def test_unrelated_docs_only_does_not_apply(self):
-        self.assertEqual(self.applies("docs/README.md", "docs/truth/README.md"), 1)
+        self.assertEqual(self.applies("docs/README.md", "docs/canon/migration/legacy-semantic-migration.json"), 1)
 
 
 if __name__ == "__main__":

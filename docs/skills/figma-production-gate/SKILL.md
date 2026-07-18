@@ -5,7 +5,7 @@ description: Operational gate for Ambitions Figma, VSP files, Figma components, 
 
 # Figma Production Gate
 
-This skill operationalizes `docs/truth/FIGMA_PRODUCTION_GATE_ADDENDUM.md`. Do not restate that file as a looser policy. If this skill and the addendum conflict, the addendum wins.
+This skill operationalizes `docs/canon/migration/legacy-semantic-migration.json`. Do not restate that file as a looser policy. If this skill and the addendum conflict, the addendum wins.
 
 ## When To Load
 
@@ -17,10 +17,10 @@ Also load `docs/skills/ui-north-star-production-gate/SKILL.md` when Figma work a
 
 Read these before producing or reviewing a Figma artifact:
 
-1. `docs/truth/FIGMA_PRODUCTION_GATE_ADDENDUM.md`
-2. `docs/truth/PRODUCT_DESIGN_TRUTH.md`
-3. `docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md`
-4. `docs/truth/RELEASE_TRUTH.md`
+1. `docs/canon/migration/legacy-semantic-migration.json`
+2. `docs/canon/migration/legacy-semantic-migration.json`
+3. `docs/canon/migration/legacy-semantic-migration.json`
+4. `docs/canon/migration/legacy-semantic-migration.json`
 5. Relevant VSP, Figma, screenshot, Linear, or proof artifacts for the task
 
 Read `docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md` when judging SwiftUI plausibility, native controls, Dynamic Type, Reduce Motion, Reduce Transparency, Increase Contrast, materials, or HIG-aligned shell behavior.

@@ -5,7 +5,7 @@ description: Operational gate for Ambitions SwiftUI UI, shell, Stage, chrome, na
 
 # UI North Star Production Gate
 
-This skill operationalizes Ambitions UI north-star production gates and the canonical `docs/truth/FIGMA_PRODUCTION_GATE_ADDENDUM.md` where UI, screenshots, visual proof, Figma handoff, or marketing renders are in scope. It is an operating checklist, not product canon or proof.
+This skill operationalizes Ambitions UI north-star production gates and the canonical `docs/canon/migration/legacy-semantic-migration.json` where UI, screenshots, visual proof, Figma handoff, or marketing renders are in scope. It is an operating checklist, not product canon or proof.
 
 ## When To Load
 
@@ -17,11 +17,11 @@ Also load `docs/skills/figma-production-gate/SKILL.md` when the work touches Fig
 
 Read these before changing or reviewing native UI:
 
-1. `docs/truth/PRODUCT_DESIGN_TRUTH.md`
-2. `docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md`
-3. `docs/truth/RELEASE_TRUTH.md`
+1. `docs/canon/migration/legacy-semantic-migration.json`
+2. `docs/canon/migration/legacy-semantic-migration.json`
+3. `docs/canon/migration/legacy-semantic-migration.json`
 4. `docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md`
-5. `docs/truth/FIGMA_PRODUCTION_GATE_ADDENDUM.md` when screenshots, Figma, VSPs, visual proof, marketing renders, or UI north-star review are in scope
+5. `docs/canon/migration/legacy-semantic-migration.json` when screenshots, Figma, VSPs, visual proof, marketing renders, or UI north-star review are in scope
 6. Relevant live SwiftUI source, tests, screenshots, preview matrices, QA rows, and current proof artifacts
 
 Use the retained `.agents/skills` routing for source ownership, architecture, iOS quality, and proof-honesty work when the task scope triggers those skills.

@@ -427,6 +427,29 @@ class PurgePlanTests(unittest.TestCase):
             }
             self.assertIn("PURGE_REFERENCE_ACTIVE", codes)
 
+    def test_historical_evidence_reference_does_not_block_a_purge(self) -> None:
+        plan = build_purge_plan(
+            catalog(), dispositions(), references(), "refs/tags/canon-baseline"
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            artifact = root / "docs/truth/OLD_CANON.md"
+            artifact.parent.mkdir(parents=True)
+            artifact.write_text("old\n", encoding="utf-8")
+            evidence = root / "docs/audits/historical-proof.md"
+            evidence.parent.mkdir(parents=True)
+            evidence.write_text(
+                "Historical evidence: docs/truth/OLD_CANON.md\n",
+                encoding="utf-8",
+            )
+            commit_tree(root)
+            git(root, "tag", "canon-baseline")
+            codes = {
+                item.code
+                for item in verified_purge(plan, root, registry("REQ-1"))
+            }
+            self.assertNotIn("PURGE_REFERENCE_ACTIVE", codes)
+
     def test_external_reconciliation_snapshot_digest_is_verified(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

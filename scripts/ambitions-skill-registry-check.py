@@ -11,7 +11,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / ".agents" / "skills" / "README.md"
 SKILLS_ROOT = ROOT / ".agents" / "skills"
-CODEX_START = "docs/truth/CODEX_START_HERE.md"
+CODEX_START = "docs/canon/migration/legacy-semantic-migration.json"
 
 
 def section(text: str, heading: str) -> str:

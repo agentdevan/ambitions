@@ -28,7 +28,7 @@ ACTIVE_LAW_EXACT = frozenset(
         "scripts/release-claim-safety-scan.sh",
     }
 )
-ACTIVE_LAW_PREFIXES = ("Native/", "Packages/", "docs/constitution/", "docs/truth/")
+ACTIVE_LAW_PREFIXES = ("Native/", "Packages/", "docs/canon/", "docs/canon/")
 
 SOURCE_ATLAS_EXACT = frozenset(
     {

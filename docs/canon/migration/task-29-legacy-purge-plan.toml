@@ -1,0 +1,5113 @@
+schema_version = 1
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+source_catalog_sha256 = "2a422fd6b8e63f74526e679d222f52bd8892291b917588e689de778ec844265d"
+dispositions_sha256 = "ea84ad61dfa9f80e116474a5eb63dc0f50a170afe9fca44c5084e20b8174d4b7"
+references_sha256 = "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+
+[[artifact]]
+artifact_id = "REPO-0E532EDE42D041D9867A8A3D"
+kind = "repo"
+locator = "docs/constitution/articles/ARTICLE_43_constitutional-evolution-and-audit.md"
+action = "delete"
+claim_ids = ["CLAIM-STB-0008", "CLAIM-STB-0009", "CLAIM-STB-0010", "CLAIM-STB-0011"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0008"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0009"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0010"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0011"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-108BA05D93452C3B8DD3EC51"
+kind = "repo"
+locator = "docs/constitution/ENGINEERING_CONSTITUTION.md"
+action = "delete"
+claim_ids = ["CLAIM-STB-0012", "CLAIM-STB-0013", "CLAIM-STB-0014"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0012"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0013"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0014"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-110D0BFC2660AF72E0673BBF"
+kind = "repo"
+locator = "docs/constitution/data-classification.json"
+action = "delete"
+claim_ids = ["CLAIM-RPPS-0057", "CLAIM-RPPS-0058", "CLAIM-RPPS-0059", "CLAIM-RPPS-0060", "CLAIM-RPPS-0061", "CLAIM-RPPS-0062"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0057"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0058"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0059"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0060"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0061"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0062"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-198A8F176504FA874B4FA078"
+kind = "repo"
+locator = "docs/constitution/opportunities/P1-076-100.json"
+action = "delete"
+claim_ids = ["CLAIM-STB-0015", "CLAIM-STB-0016", "CLAIM-STB-0017", "CLAIM-STB-0018", "CLAIM-STB-0019", "CLAIM-STB-0020", "CLAIM-STB-0021", "CLAIM-STB-0022", "CLAIM-STB-0023", "CLAIM-STB-0024", "CLAIM-STB-0025", "CLAIM-STB-0026", "CLAIM-STB-0027", "CLAIM-STB-0028", "CLAIM-STB-0029", "CLAIM-STB-0030", "CLAIM-STB-0031", "CLAIM-STB-0032", "CLAIM-STB-0033", "CLAIM-STB-0034", "CLAIM-STB-0035", "CLAIM-STB-0036", "CLAIM-STB-0037", "CLAIM-STB-0038", "CLAIM-STB-0039"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0015"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0016"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0017"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0018"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0019"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0020"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0021"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0022"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0023"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0024"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0025"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0026"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0027"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0028"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0029"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0030"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0031"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0032"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0033"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0034"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0035"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0036"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0037"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0038"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0039"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-1B5E29821B6FA7CEF0D57A84"
+kind = "repo"
+locator = "docs/constitution/laws.json"
+action = "delete"
+claim_ids = ["LEGACY-SEMANTIC-1B5E29821B6FA7CE"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "LEGACY-SEMANTIC-1B5E29821B6FA7CE"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-208E98C054DDF2FC7E4EB4F4"
+kind = "repo"
+locator = "docs/constitution/law-test-map/map-01.json"
+action = "delete"
+claim_ids = ["CLAIM-STB-0040", "CLAIM-STB-0041", "CLAIM-STB-0042", "CLAIM-STB-0043", "CLAIM-STB-0044", "CLAIM-STB-0045", "CLAIM-STB-0046", "CLAIM-STB-0047", "CLAIM-STB-0048", "CLAIM-STB-0049", "CLAIM-STB-0050", "CLAIM-STB-0051", "CLAIM-STB-0052", "CLAIM-STB-0053", "CLAIM-STB-0054"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0040"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0041"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0042"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0043"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0044"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0045"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0046"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0047"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0048"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0049"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0050"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0051"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0052"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0053"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0054"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-2354457AAD1DD21D0F59E611"
+kind = "repo"
+locator = "docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md"
+action = "delete"
+claim_ids = ["CLAIM-NAV-001", "CLAIM-NAV-002", "CLAIM-NAV-003", "CLAIM-NAV-004", "CLAIM-NAV-005", "CLAIM-NAV-006", "CLAIM-NAV-007", "CLAIM-NAV-008", "CLAIM-NAV-009", "CLAIM-NAV-010", "CLAIM-NAV-011", "CLAIM-NAV-012", "CLAIM-NAV-013", "CLAIM-NAV-014", "CLAIM-NAV-015", "CLAIM-NAV-016", "CLAIM-NAV-017", "CLAIM-NAV-018", "CLAIM-NAV-019", "CLAIM-NAV-020"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-001"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-002"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-003"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-004"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-005"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-006"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-007"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-008"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-009"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-010"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-011"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-012"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-013"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-014"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-015"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-016"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-017"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-018"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-019"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-020"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-24AE31A618868443E87AFB86"
+kind = "repo"
+locator = "docs/truth/PRODUCT_MOAT_TRUTH.md"
+action = "delete"
+claim_ids = ["CLAIM-MOM-0030", "CLAIM-MOM-0031", "CLAIM-MOM-0032", "CLAIM-MOM-0033", "CLAIM-MOM-0034", "CLAIM-MOM-0035", "CLAIM-MOM-0036", "CLAIM-MOM-0037", "CLAIM-MOM-0038", "CLAIM-MOM-0039", "CLAIM-MOM-0040", "CLAIM-MOM-0041", "CLAIM-MOM-0042", "CLAIM-MOM-0043", "CLAIM-MOM-0044", "CLAIM-MOM-0045", "CLAIM-MOM-0046", "CLAIM-MOM-0047", "CLAIM-MOM-0048", "CLAIM-MOM-0049", "CLAIM-MOM-0055", "CLAIM-MOM-0056", "CLAIM-MOM-0057", "CLAIM-MOM-0058", "CLAIM-MOM-0059", "CLAIM-MOM-0060"]
+replacement_ids = ["AUTHORITY-MOAT-001", "CONST-HISTORY-SUPERSESSION-001", "MISSION-ANTI-METRICS-001", "MISSION-HARD-RED-001", "MISSION-MOAT-001", "MISSION-MOAT-CONTINUITY-001", "MISSION-NON-COMMODITY-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0030"
+replacement_id = "AUTHORITY-MOAT-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0031"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0032"
+replacement_id = "AUTHORITY-MOAT-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0033"
+replacement_id = "MISSION-MOAT-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0034"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0035"
+replacement_id = "MISSION-MOAT-CONTINUITY-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0036"
+replacement_id = "MISSION-NON-COMMODITY-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0037"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0038"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0039"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0040"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0041"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0042"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0043"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0044"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0045"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0046"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0047"
+replacement_id = "MISSION-ANTI-METRICS-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0048"
+replacement_id = "MISSION-HARD-RED-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0049"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0055"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0056"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0057"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0058"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0059"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0060"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-270E46EC3D174DCCE1EFC5B1"
+kind = "repo"
+locator = "docs/truth/README.md"
+action = "delete"
+claim_ids = ["CLAIM-STB-0055", "CLAIM-STB-0056", "CLAIM-STB-0057", "CLAIM-STB-0058", "CLAIM-STB-0059", "CLAIM-STB-0060", "CLAIM-STB-0061", "CLAIM-STB-0062", "CLAIM-STB-0063", "CLAIM-STB-0064", "CLAIM-STB-0065", "CLAIM-STB-0066"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0055"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0056"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0057"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0058"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0059"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0060"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0061"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0062"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0063"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0064"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0065"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0066"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-2AA8C812BCBF285307BB8A30"
+kind = "repo"
+locator = "docs/constitution/opportunity-register.json"
+action = "delete"
+claim_ids = ["CLAIM-STB-0067"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0067"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-2C767C72A533E6B6DB343A2B"
+kind = "repo"
+locator = "docs/constitution/laws/laws-04.json"
+action = "delete"
+claim_ids = ["CLAIM-STB-0068", "CLAIM-STB-0069", "CLAIM-STB-0070", "CLAIM-STB-0071", "CLAIM-STB-0072", "CLAIM-STB-0073", "CLAIM-STB-0074", "CLAIM-STB-0075", "CLAIM-STB-0076", "CLAIM-STB-0077", "CLAIM-STB-0078", "CLAIM-STB-0079", "CLAIM-STB-0080", "CLAIM-STB-0081", "CLAIM-STB-0082", "CLAIM-STB-0083", "CLAIM-STB-0084", "CLAIM-STB-0085", "CLAIM-STB-0086", "CLAIM-STB-0087", "CLAIM-STB-0088", "CLAIM-STB-0089", "CLAIM-STB-0090", "CLAIM-STB-0091", "CLAIM-STB-0092", "CLAIM-STB-0093", "CLAIM-STB-0094", "CLAIM-STB-0095", "CLAIM-STB-0096", "CLAIM-STB-0097", "CLAIM-STB-0098"]
+replacement_ids = ["A11Y-002", "CODEX-DEPT-001", "CODEX-DEPT-002", "CODEX-DEPT-003", "CODEX-DEPT-004", "CONST-HISTORY-SUPERSESSION-001", "ENFORCEMENT-001", "ENFORCEMENT-002", "ENFORCEMENT-003", "ENFORCEMENT-004", "ENTITLEMENT-001", "ENTITLEMENT-002", "ENTITLEMENT-003", "ENTITLEMENT-004", "EVOLUTION-001", "EVOLUTION-002", "EVOLUTION-003", "EVOLUTION-004", "LIFECYCLE-001", "LIFECYCLE-002", "LIFECYCLE-003", "LIFECYCLE-004", "SUPPLY-001", "SUPPLY-002", "SUPPLY-003", "SUPPLY-004"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0068"
+replacement_id = "A11Y-002"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0069"
+replacement_id = "CODEX-DEPT-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0070"
+replacement_id = "CODEX-DEPT-002"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0071"
+replacement_id = "CODEX-DEPT-003"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0072"
+replacement_id = "CODEX-DEPT-004"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0073"
+replacement_id = "ENFORCEMENT-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0074"
+replacement_id = "ENFORCEMENT-002"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0075"
+replacement_id = "ENFORCEMENT-003"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0076"
+replacement_id = "ENFORCEMENT-004"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0077"
+replacement_id = "ENTITLEMENT-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0078"
+replacement_id = "ENTITLEMENT-002"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0079"
+replacement_id = "ENTITLEMENT-003"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0080"
+replacement_id = "ENTITLEMENT-004"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0081"
+replacement_id = "EVOLUTION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0082"
+replacement_id = "EVOLUTION-002"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0083"
+replacement_id = "EVOLUTION-003"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0084"
+replacement_id = "EVOLUTION-004"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0085"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0086"
+replacement_id = "LIFECYCLE-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0087"
+replacement_id = "LIFECYCLE-002"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0088"
+replacement_id = "LIFECYCLE-003"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0089"
+replacement_id = "LIFECYCLE-004"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0090"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0091"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0092"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0093"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0094"
+replacement_id = "SUPPLY-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0095"
+replacement_id = "SUPPLY-002"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0096"
+replacement_id = "SUPPLY-003"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0097"
+replacement_id = "SUPPLY-004"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0098"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-2E32AD0FD1AE317A32D800B4"
+kind = "repo"
+locator = "docs/constitution/LINEAR_COVERAGE_MAP.md"
+action = "delete"
+claim_ids = ["CLAIM-STB-0099", "CLAIM-STB-0100", "CLAIM-STB-0101", "CLAIM-STB-0102", "CLAIM-STB-0103", "CLAIM-STB-0104", "CLAIM-STB-0105"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0099"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0100"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0101"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0102"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0103"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0104"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0105"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-2EE95332ADC9CD5F86A5E66A"
+kind = "repo"
+locator = "docs/constitution/performance-budgets.json"
+action = "delete"
+claim_ids = ["CLAIM-NAV-073"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-073"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-30F82AEBB440C03C0671AE4A"
+kind = "repo"
+locator = "docs/constitution/articles/ARTICLE_34_cloudkit-continuity.md"
+action = "delete"
+claim_ids = ["CLAIM-RPPS-0050", "CLAIM-RPPS-0051", "CLAIM-RPPS-0052", "CLAIM-RPPS-0053", "CLAIM-RPPS-0054", "CLAIM-RPPS-0055", "CLAIM-RPPS-0056"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0050"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0051"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0052"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0053"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0054"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0055"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0056"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-3783A2A0F6E2E4ECF4E1D622"
+kind = "repo"
+locator = "docs/constitution/articles/ARTICLE_27_determinism-replay-and-policy-versioning.md"
+action = "delete"
+claim_ids = ["CLAIM-RPPS-0042", "CLAIM-RPPS-0043", "CLAIM-RPPS-0044", "CLAIM-RPPS-0045", "CLAIM-RPPS-0046", "CLAIM-RPPS-0047", "CLAIM-RPPS-0048", "CLAIM-RPPS-0049"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0042"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0043"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0044"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0045"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0046"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0047"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0048"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0049"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-4296019196E7E491BE6122FD"
+kind = "repo"
+locator = "docs/constitution/articles/ARTICLE_30_design-system-governance.md"
+action = "delete"
+claim_ids = ["CLAIM-NAV-061", "CLAIM-NAV-062", "CLAIM-NAV-063", "CLAIM-NAV-064", "CLAIM-NAV-065", "CLAIM-NAV-066", "CLAIM-NAV-067"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-061"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-062"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-063"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-064"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-065"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-066"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-067"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-43E0D80464B2869224C805D8"
+kind = "repo"
+locator = "docs/truth/PRODUCT_DESIGN_TRUTH.md"
+action = "delete"
+claim_ids = ["CLAIM-IA-SHELL-SURFACES-0043", "CLAIM-IA-SHELL-SURFACES-0044", "CLAIM-IA-SHELL-SURFACES-0045", "CLAIM-IA-SHELL-SURFACES-0046", "CLAIM-IA-SHELL-SURFACES-0047", "CLAIM-IA-SHELL-SURFACES-0048", "CLAIM-IA-SHELL-SURFACES-0049", "CLAIM-IA-SHELL-SURFACES-0050", "CLAIM-IA-SHELL-SURFACES-0051", "CLAIM-IA-SHELL-SURFACES-0052", "CLAIM-IA-SHELL-SURFACES-0053", "CLAIM-IA-SHELL-SURFACES-0054", "CLAIM-IA-SHELL-SURFACES-0055", "CLAIM-IA-SHELL-SURFACES-0056", "CLAIM-IA-SHELL-SURFACES-0057", "CLAIM-IA-SHELL-SURFACES-0058", "CLAIM-IA-SHELL-SURFACES-0059", "CLAIM-NAV-074", "CLAIM-NAV-075", "CLAIM-NAV-076", "CLAIM-NAV-077", "CLAIM-NAV-078", "CLAIM-NAV-079", "CLAIM-NAV-080", "CLAIM-NAV-081", "CLAIM-NAV-082", "CLAIM-NAV-083", "CLAIM-NAV-084", "CLAIM-NAV-085", "CLAIM-NAV-086", "CLAIM-NAV-087", "CLAIM-NAV-088", "CLAIM-NAV-089", "CLAIM-NAV-090", "CLAIM-NAV-091", "CLAIM-NAV-092", "CLAIM-NAV-093", "CLAIM-OBJ-030", "CLAIM-OBJ-031", "CLAIM-OBJ-032", "CLAIM-OBJ-033", "CLAIM-OBJ-034", "CLAIM-OBJ-035", "CLAIM-OBJ-036", "CLAIM-OBJ-037", "CLAIM-OBJ-038", "CLAIM-OBJ-039", "CLAIM-OBJ-040", "CLAIM-OBJ-041", "CLAIM-OBJ-042", "CLAIM-OBJ-043", "CLAIM-OBJ-044", "CLAIM-OBJ-045", "CLAIM-OBJ-046", "CLAIM-OBJ-047", "CLAIM-OBJ-048", "CLAIM-OBJ-049", "CLAIM-OBJ-050", "CLAIM-OBJ-051", "CLAIM-RPPS-0063", "CLAIM-RPPS-0064", "CLAIM-RPPS-0065", "CLAIM-RPPS-0066", "CLAIM-STB-0106", "CLAIM-STB-0107", "CLAIM-STB-0108", "CLAIM-STB-0109", "CLAIM-STB-0110", "CLAIM-STB-0111", "CLAIM-STB-0112", "CLAIM-STB-0113", "CLAIM-STB-0114", "CLAIM-STB-0115", "CLAIM-STB-0116", "CLAIM-STB-0117", "CLAIM-STB-0118", "CLAIM-STB-0119", "CLAIM-STB-0120", "CLAIM-STB-0121", "CLAIM-STB-0122", "CLAIM-STB-0123", "CLAIM-STB-0124", "CLAIM-STB-0125", "CLAIM-STB-0126", "CLAIM-STB-0127", "CLAIM-STB-0128", "CLAIM-STB-0129", "CLAIM-STB-0130", "CLAIM-STB-0131", "CLAIM-STB-0132", "CLAIM-STB-0133", "CLAIM-STB-0134", "CLAIM-STB-0135", "CLAIM-STB-0136", "CLAIM-STB-0137", "CLAIM-STB-0138", "CLAIM-STB-0139", "CLAIM-STB-0140", "CLAIM-STB-0141", "CLAIM-STB-0142", "CLAIM-STB-0143", "CLAIM-STB-0144", "CLAIM-STB-0145", "CLAIM-STB-0146", "CLAIM-STB-0147", "CLAIM-STB-0148", "CLAIM-STB-0149", "CLAIM-STB-0150", "CLAIM-STB-0151", "CLAIM-STB-0152", "CLAIM-STB-0153", "CLAIM-STB-0154", "CLAIM-STB-0155", "CLAIM-STB-0156", "CLAIM-STB-0157", "CLAIM-STB-0158", "CLAIM-STB-0159", "CLAIM-STB-0160", "CLAIM-STB-0161", "CLAIM-STB-0162", "CLAIM-STB-0163", "CLAIM-STB-0164", "CLAIM-STB-0165", "CLAIM-STB-0166", "CLAIM-STB-0167", "CLAIM-STB-0168", "CLAIM-STB-0169", "CLAIM-STB-0170", "CLAIM-STB-0171", "CLAIM-STB-0172", "CLAIM-STB-0173", "CLAIM-STB-0174", "CLAIM-STB-0175", "CLAIM-STB-0176", "CLAIM-STB-0177", "CLAIM-STB-0178", "CLAIM-STB-0179", "CLAIM-STB-0180", "CLAIM-STB-0181", "CLAIM-STB-0182", "CLAIM-STB-0183", "CLAIM-STB-0184", "CLAIM-STB-0185", "CLAIM-STB-0186", "CLAIM-STB-0187", "CLAIM-STB-0188", "CLAIM-STB-0189", "CLAIM-STB-0190", "CLAIM-STB-0191", "CLAIM-STB-0192", "CLAIM-STB-0193", "CLAIM-STB-0194", "CLAIM-STB-0195", "CLAIM-STB-0196", "CLAIM-STB-0197", "CLAIM-STB-0198", "CLAIM-STB-0199", "CLAIM-STB-0200", "CLAIM-STB-0201", "CLAIM-STB-0202", "CLAIM-STB-0203", "CLAIM-STB-0204", "CLAIM-STB-0205", "CLAIM-STB-0206", "CLAIM-STB-0207", "CLAIM-STB-0208", "CLAIM-STB-0209", "CLAIM-STB-0210", "CLAIM-STB-0211", "CLAIM-STB-0212", "CLAIM-STB-0213", "CLAIM-STB-0214", "CLAIM-STB-0215", "CLAIM-STB-0216", "CLAIM-STB-0217", "CLAIM-STB-0218", "CLAIM-STB-0219", "CLAIM-STB-0220", "CLAIM-STB-0221", "CLAIM-STB-0222", "CLAIM-STB-0223", "CLAIM-STB-0224", "CLAIM-STB-0225", "CLAIM-STB-0226", "CLAIM-STB-0227", "CLAIM-STB-0228", "CLAIM-STB-0229", "CLAIM-STB-0230", "CLAIM-STB-0231", "CLAIM-STB-0232", "CLAIM-STB-0233", "CLAIM-STB-0234", "CLAIM-STB-0235", "CLAIM-STB-0236", "CLAIM-STB-0237", "CLAIM-STB-0238", "CLAIM-STB-0239", "CLAIM-STB-0240", "CLAIM-STB-0241", "CLAIM-STB-0242", "CLAIM-STB-0243", "CLAIM-STB-0244", "CLAIM-STB-0245", "CLAIM-STB-0246", "CLAIM-STB-0247", "CLAIM-STB-0248", "CLAIM-STB-0249", "CLAIM-STB-0250", "CLAIM-STB-0251", "CLAIM-STB-0252", "CLAIM-STB-0253", "CLAIM-STB-0254", "CLAIM-STB-0255", "CLAIM-STB-0256", "CLAIM-STB-0257", "CLAIM-STB-0258", "CLAIM-STB-0259", "CLAIM-STB-0260", "CLAIM-STB-0261", "CLAIM-STB-0262", "CLAIM-STB-0263", "CLAIM-STB-0264", "CLAIM-STB-0265", "CLAIM-STB-0266", "CLAIM-STB-0267", "CLAIM-STB-0268", "CLAIM-STB-0269", "CLAIM-STB-0270", "CLAIM-STB-0271", "CLAIM-STB-0272", "CLAIM-STB-0273", "CLAIM-STB-0274"]
+replacement_ids = ["APP-DEEP-LINK-EXTERNAL-ENTRY-001", "APP-DEGRADED-FAILURE-TAXONOMY-001", "APP-PERMISSIONS-CONTRACT-001", "APP-SETUP-PROGRESSIVE-FIRST-USE-001", "CONST-HISTORY-SUPERSESSION-001", "LAW-ACCOUNT-BOUNDARY-001", "LAW-IA-NONROOT-001", "LAW-IA-ROOT-001", "LAW-IA-TRUST-001", "LAW-LOCAL-AUTHORITY-001", "LAW-R2-PUBLIC-ONLY-001", "LAW-SHELL-STAGE-001", "OBJ-CANONICAL-IDENTITY-001", "OBJ-CANONICAL-OWNER-001", "OBJ-CONVERSION-LAW-001", "OBJ-DELETION-RESTORE-001", "OBJ-GOAL-LINK-001", "OBJ-STATE-AXES-001", "OBJ-SUBSTEP-IDENTITY-001", "SPEC-APP-SHELL-GLOBAL-ACTIONS-001", "SPEC-APP-SHELL-ROOT-NAVIGATION-001", "SPEC-GLOBAL-CAPTURE-IDENTITY-001", "SPEC-GLOBAL-CAPTURE-SAVED-FOR-LATER-001", "SPEC-GLOBAL-SEARCH-PRIVATE-COMMAND-LAYER-001", "SPEC-SURFACE-GOALS-IDENTITY-001", "SPEC-SURFACE-TIME-PRIMARY-IDENTITY-001", "SPEC-SURFACE-YOU-IDENTITY-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-IA-SHELL-SURFACES-0043"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-IA-SHELL-SURFACES-0044"
+replacement_id = "LAW-IA-ROOT-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-IA-SHELL-SURFACES-0045"
+replacement_id = "LAW-IA-NONROOT-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-IA-SHELL-SURFACES-0046"
+replacement_id = "LAW-IA-NONROOT-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-IA-SHELL-SURFACES-0047"
+replacement_id = "LAW-IA-TRUST-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-IA-SHELL-SURFACES-0048"
+replacement_id = "LAW-SHELL-STAGE-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-IA-SHELL-SURFACES-0049"
+replacement_id = "SPEC-APP-SHELL-ROOT-NAVIGATION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-IA-SHELL-SURFACES-0050"
+replacement_id = "SPEC-APP-SHELL-ROOT-NAVIGATION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-IA-SHELL-SURFACES-0051"
+replacement_id = "SPEC-APP-SHELL-GLOBAL-ACTIONS-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-IA-SHELL-SURFACES-0052"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-IA-SHELL-SURFACES-0053"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-IA-SHELL-SURFACES-0054"
+replacement_id = "SPEC-SURFACE-GOALS-IDENTITY-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-IA-SHELL-SURFACES-0055"
+replacement_id = "SPEC-SURFACE-TIME-PRIMARY-IDENTITY-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-IA-SHELL-SURFACES-0056"
+replacement_id = "SPEC-SURFACE-YOU-IDENTITY-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-IA-SHELL-SURFACES-0057"
+replacement_id = "SPEC-GLOBAL-CAPTURE-IDENTITY-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-IA-SHELL-SURFACES-0058"
+replacement_id = "SPEC-GLOBAL-CAPTURE-SAVED-FOR-LATER-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-IA-SHELL-SURFACES-0059"
+replacement_id = "SPEC-GLOBAL-SEARCH-PRIVATE-COMMAND-LAYER-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-074"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-075"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-076"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-077"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-078"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-079"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-080"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-081"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-082"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-083"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-084"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-085"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-086"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-087"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-088"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-089"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-090"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-091"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-092"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-093"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-030"
+replacement_id = "OBJ-CANONICAL-IDENTITY-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-031"
+replacement_id = "OBJ-CANONICAL-OWNER-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-032"
+replacement_id = "OBJ-STATE-AXES-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-033"
+replacement_id = "OBJ-SUBSTEP-IDENTITY-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-034"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-035"
+replacement_id = "OBJ-CONVERSION-LAW-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-036"
+replacement_id = "OBJ-GOAL-LINK-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-037"
+replacement_id = "OBJ-DELETION-RESTORE-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-038"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-039"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-040"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-041"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-042"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-043"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-044"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-045"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-046"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-047"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-048"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-049"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-050"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-051"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0063"
+replacement_id = "LAW-LOCAL-AUTHORITY-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0064"
+replacement_id = "LAW-ACCOUNT-BOUNDARY-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0065"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0066"
+replacement_id = "LAW-R2-PUBLIC-ONLY-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0106"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0107"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0108"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0109"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0110"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0111"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0112"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0113"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0114"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0115"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0116"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0117"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0118"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0119"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0120"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0121"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0122"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0123"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0124"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0125"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0126"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0127"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0128"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0129"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0130"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0131"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0132"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0133"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0134"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0135"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0136"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0137"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0138"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0139"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0140"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0141"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0142"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0143"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0144"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0145"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0146"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0147"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0148"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0149"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0150"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0151"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0152"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0153"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0154"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0155"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0156"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0157"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0158"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0159"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0160"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0161"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0162"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0163"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0164"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0165"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0166"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0167"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0168"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0169"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0170"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0171"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0172"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0173"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0174"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0175"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0176"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0177"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0178"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0179"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0180"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0181"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0182"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0183"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0184"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0185"
+replacement_id = "APP-SETUP-PROGRESSIVE-FIRST-USE-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0186"
+replacement_id = "APP-PERMISSIONS-CONTRACT-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0187"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0188"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0189"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0190"
+replacement_id = "APP-DEEP-LINK-EXTERNAL-ENTRY-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0191"
+replacement_id = "APP-DEGRADED-FAILURE-TAXONOMY-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0192"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0193"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0194"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0195"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0196"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0197"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0198"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0199"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0200"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0201"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0202"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0203"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0204"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0205"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0206"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0207"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0208"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0209"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0210"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0211"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0212"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0213"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0214"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0215"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0216"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0217"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0218"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0219"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0220"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0221"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0222"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0223"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0224"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0225"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0226"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0227"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0228"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0229"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0230"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0231"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0232"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0233"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0234"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0235"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0236"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0237"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0238"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0239"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0240"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0241"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0242"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0243"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0244"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0245"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0246"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0247"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0248"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0249"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0250"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0251"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0252"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0253"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0254"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0255"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0256"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0257"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0258"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0259"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0260"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0261"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0262"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0263"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0264"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0265"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0266"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0267"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0268"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0269"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0270"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0271"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0272"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0273"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0274"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-5126C76C760C2E798B32B568"
+kind = "repo"
+locator = "docs/constitution/law-source-map/map-03.json"
+action = "delete"
+claim_ids = ["CLAIM-STB-0283", "CLAIM-STB-0284", "CLAIM-STB-0285", "CLAIM-STB-0286", "CLAIM-STB-0287", "CLAIM-STB-0288", "CLAIM-STB-0289", "CLAIM-STB-0290", "CLAIM-STB-0291", "CLAIM-STB-0292", "CLAIM-STB-0293", "CLAIM-STB-0294", "CLAIM-STB-0295", "CLAIM-STB-0296"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0283"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0284"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0285"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0286"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0287"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0288"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0289"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0290"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0291"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0292"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0293"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0294"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0295"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0296"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-595E296613757CC876D84DCA"
+kind = "repo"
+locator = "docs/truth/PRODUCT_ORIGIN_TRUTH.md"
+action = "delete"
+claim_ids = ["CLAIM-MOM-0020", "CLAIM-MOM-0021", "CLAIM-MOM-0022", "CLAIM-MOM-0023", "CLAIM-MOM-0024", "CLAIM-MOM-0025", "CLAIM-MOM-0026", "CLAIM-MOM-0027", "CLAIM-MOM-0028", "CLAIM-MOM-0029"]
+replacement_ids = ["AUTHORITY-ORIGIN-001", "CONST-HISTORY-SUPERSESSION-001", "MISSION-FOUNDATION-RUNTIME-001", "MISSION-ORIGIN-OUTCOME-001", "MISSION-ORIGIN-PROBLEM-001", "MISSION-ORIGIN-STRUCTURE-001", "MISSION-SUCCESS-001", "MISSION-USER-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0020"
+replacement_id = "AUTHORITY-ORIGIN-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0021"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0022"
+replacement_id = "MISSION-ORIGIN-PROBLEM-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0023"
+replacement_id = "MISSION-USER-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0024"
+replacement_id = "MISSION-ORIGIN-OUTCOME-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0025"
+replacement_id = "MISSION-FOUNDATION-RUNTIME-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0026"
+replacement_id = "MISSION-ORIGIN-STRUCTURE-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0027"
+replacement_id = "MISSION-SUCCESS-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0028"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0029"
+replacement_id = "MISSION-USER-001"
+
+[[artifact]]
+artifact_id = "REPO-5E65B22176A5B68006DB6CD1"
+kind = "repo"
+locator = "docs/truth/2026-06-22-runtime-remediation-decision-register.md"
+action = "delete"
+claim_ids = ["CLAIM-STB-0297", "CLAIM-STB-0298", "CLAIM-STB-0299", "CLAIM-STB-0300", "CLAIM-STB-0301", "CLAIM-STB-0302", "CLAIM-STB-0303", "CLAIM-STB-0304", "CLAIM-STB-0305", "CLAIM-STB-0306", "CLAIM-STB-0307", "CLAIM-STB-0308", "CLAIM-STB-0309"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0297"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0298"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0299"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0300"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0301"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0302"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0303"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0304"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0305"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0306"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0307"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0308"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0309"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-5FC40D76CA8AFD5F55634D14"
+kind = "repo"
+locator = "docs/constitution/opportunities/P0-001-009.json"
+action = "delete"
+claim_ids = ["CLAIM-STB-0310", "CLAIM-STB-0311", "CLAIM-STB-0312", "CLAIM-STB-0313", "CLAIM-STB-0314", "CLAIM-STB-0315", "CLAIM-STB-0316", "CLAIM-STB-0317", "CLAIM-STB-0318"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0310"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0311"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0312"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0313"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0314"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0315"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0316"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0317"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0318"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-684175D7D9AF83208E4BC727"
+kind = "repo"
+locator = "docs/constitution/laws/laws-01.json"
+action = "delete"
+claim_ids = ["CLAIM-STB-0319", "CLAIM-STB-0320", "CLAIM-STB-0321", "CLAIM-STB-0322", "CLAIM-STB-0323", "CLAIM-STB-0324", "CLAIM-STB-0325", "CLAIM-STB-0326", "CLAIM-STB-0327", "CLAIM-STB-0328", "CLAIM-STB-0329", "CLAIM-STB-0330", "CLAIM-STB-0331", "CLAIM-STB-0332", "CLAIM-STB-0333", "CLAIM-STB-0334", "CLAIM-STB-0335", "CLAIM-STB-0336", "CLAIM-STB-0337", "CLAIM-STB-0338", "CLAIM-STB-0339", "CLAIM-STB-0340", "CLAIM-STB-0341", "CLAIM-STB-0342", "CLAIM-STB-0343", "CLAIM-STB-0344", "CLAIM-STB-0345", "CLAIM-STB-0346", "CLAIM-STB-0347", "CLAIM-STB-0348", "CLAIM-STB-0349"]
+replacement_ids = ["CONCURRENCY-001", "CONCURRENCY-002", "CONCURRENCY-003", "CONCURRENCY-004", "CONCURRENCY-005", "CONCURRENCY-006", "CONCURRENCY-007", "CONCURRENCY-008", "CONCURRENCY-009", "CONST-HISTORY-SUPERSESSION-001", "DETERMINISM-001", "DETERMINISM-002", "DETERMINISM-003", "DETERMINISM-004", "DETERMINISM-005", "DETERMINISM-006", "DETERMINISM-007"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0319"
+replacement_id = "CONCURRENCY-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0320"
+replacement_id = "CONCURRENCY-002"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0321"
+replacement_id = "CONCURRENCY-003"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0322"
+replacement_id = "CONCURRENCY-004"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0323"
+replacement_id = "CONCURRENCY-005"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0324"
+replacement_id = "CONCURRENCY-006"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0325"
+replacement_id = "CONCURRENCY-007"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0326"
+replacement_id = "CONCURRENCY-008"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0327"
+replacement_id = "CONCURRENCY-009"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0328"
+replacement_id = "DETERMINISM-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0329"
+replacement_id = "DETERMINISM-002"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0330"
+replacement_id = "DETERMINISM-003"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0331"
+replacement_id = "DETERMINISM-004"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0332"
+replacement_id = "DETERMINISM-005"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0333"
+replacement_id = "DETERMINISM-006"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0334"
+replacement_id = "DETERMINISM-007"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0335"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0336"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0337"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0338"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0339"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0340"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0341"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0342"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0343"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0344"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0345"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0346"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0347"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0348"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0349"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-76F9B2E3818DA58F8848319C"
+kind = "repo"
+locator = "docs/constitution/PR_23_RUTHLESS_REVIEW.md"
+action = "delete"
+claim_ids = ["CLAIM-STB-0356", "CLAIM-STB-0357", "CLAIM-STB-0358", "CLAIM-STB-0359"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0356"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0357"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0358"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0359"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-7D369F0108835D3538A1E6F5"
+kind = "repo"
+locator = "docs/constitution/articles/ARTICLE_28_runtime-intelligence-quality.md"
+action = "delete"
+claim_ids = ["CLAIM-STB-0362", "CLAIM-STB-0363", "CLAIM-STB-0364", "CLAIM-STB-0365", "CLAIM-STB-0366", "CLAIM-STB-0367", "CLAIM-STB-0368"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0362"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0363"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0364"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0365"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0366"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0367"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0368"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-7DCEB69ACBAACC24AA107ABA"
+kind = "repo"
+locator = "docs/constitution/WAVE_0_READBACK.md"
+action = "delete"
+claim_ids = ["CLAIM-STB-0369", "CLAIM-STB-0370", "CLAIM-STB-0371", "CLAIM-STB-0372", "CLAIM-STB-0373", "CLAIM-STB-0374", "CLAIM-STB-0375"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0369"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0370"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0371"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0372"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0373"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0374"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0375"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-82A568416C5D699F73D8646B"
+kind = "repo"
+locator = "docs/constitution/dependency-graph.json"
+action = "delete"
+claim_ids = ["CLAIM-STB-0380"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0380"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-85E8FCCE72F548DEDB08341B"
+kind = "repo"
+locator = "docs/truth/RELEASE_TRUTH.md"
+action = "delete"
+claim_ids = ["CLAIM-NAV-124", "CLAIM-NAV-125", "CLAIM-NAV-126", "CLAIM-NAV-127", "CLAIM-PRC-001", "CLAIM-PRC-002", "CLAIM-PRC-003", "CLAIM-PRC-004", "CLAIM-PRC-005", "CLAIM-PRC-006", "CLAIM-PRC-007", "CLAIM-PRC-008", "CLAIM-PRC-009", "CLAIM-PRC-010", "CLAIM-PRC-011", "CLAIM-PRC-012", "CLAIM-PRC-013", "CLAIM-PRC-014", "CLAIM-PRC-015", "CLAIM-PRC-016", "CLAIM-PRC-017", "CLAIM-PRC-018"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001", "CONST-PROOF-EVIDENCE-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-124"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-125"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-126"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-127"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-001"
+replacement_id = "CONST-PROOF-EVIDENCE-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-002"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-003"
+replacement_id = "CONST-PROOF-EVIDENCE-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-004"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-005"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-006"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-007"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-008"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-009"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-010"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-011"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-012"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-013"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-014"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-015"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-016"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-017"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-018"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-8AD090B849C0D640D8D8B4B1"
+kind = "repo"
+locator = "docs/truth/FIGMA_PRODUCTION_GATE_ADDENDUM.md"
+action = "delete"
+claim_ids = ["CLAIM-NAV-021", "CLAIM-NAV-022", "CLAIM-NAV-023", "CLAIM-NAV-024", "CLAIM-NAV-025", "CLAIM-NAV-026", "CLAIM-NAV-027", "CLAIM-NAV-028", "CLAIM-NAV-029", "CLAIM-NAV-030", "CLAIM-NAV-031", "CLAIM-NAV-032", "CLAIM-NAV-033", "CLAIM-NAV-034", "CLAIM-NAV-035", "CLAIM-NAV-036", "CLAIM-NAV-037", "CLAIM-NAV-038", "CLAIM-NAV-039", "CLAIM-NAV-040", "CLAIM-NAV-041", "CLAIM-NAV-042", "CLAIM-NAV-043", "CLAIM-NAV-044", "CLAIM-NAV-045", "CLAIM-NAV-046", "CLAIM-NAV-047", "CLAIM-NAV-048", "CLAIM-NAV-049", "CLAIM-NAV-050"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-021"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-022"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-023"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-024"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-025"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-026"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-027"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-028"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-029"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-030"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-031"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-032"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-033"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-034"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-035"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-036"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-037"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-038"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-039"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-040"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-041"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-042"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-043"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-044"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-045"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-046"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-047"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-048"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-049"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-050"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-8ADD2E77BEA5128931D17041"
+kind = "repo"
+locator = "docs/constitution/laws/laws-03.json"
+action = "delete"
+claim_ids = ["CLAIM-STB-0381", "CLAIM-STB-0382", "CLAIM-STB-0383", "CLAIM-STB-0384", "CLAIM-STB-0385", "CLAIM-STB-0386", "CLAIM-STB-0387", "CLAIM-STB-0388", "CLAIM-STB-0389", "CLAIM-STB-0390", "CLAIM-STB-0391", "CLAIM-STB-0392", "CLAIM-STB-0393", "CLAIM-STB-0394", "CLAIM-STB-0395", "CLAIM-STB-0396", "CLAIM-STB-0397", "CLAIM-STB-0398", "CLAIM-STB-0399", "CLAIM-STB-0400", "CLAIM-STB-0401", "CLAIM-STB-0402", "CLAIM-STB-0403", "CLAIM-STB-0404", "CLAIM-STB-0405", "CLAIM-STB-0406", "CLAIM-STB-0407", "CLAIM-STB-0408", "CLAIM-STB-0409", "CLAIM-STB-0410", "CLAIM-STB-0411"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001", "LOCALIZATION-001", "LOCALIZATION-002", "LOCALIZATION-003", "LOCALIZATION-004", "RELEASE-001", "RELEASE-002", "RELEASE-003", "RELEASE-004", "RELIABILITY-003", "RELIABILITY-004", "RELIABILITY-005", "RELIABILITY-006", "SECURITY-001", "SECURITY-002", "SECURITY-003", "SECURITY-004", "SECURITY-005", "SECURITY-006", "TEST-001", "TEST-002", "TEST-003", "TEST-004", "TEST-005", "TEST-006", "TEST-007"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0381"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0382"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0383"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0384"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0385"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0386"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0387"
+replacement_id = "LOCALIZATION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0388"
+replacement_id = "LOCALIZATION-002"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0389"
+replacement_id = "LOCALIZATION-003"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0390"
+replacement_id = "LOCALIZATION-004"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0391"
+replacement_id = "RELEASE-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0392"
+replacement_id = "RELEASE-002"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0393"
+replacement_id = "RELEASE-003"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0394"
+replacement_id = "RELEASE-004"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0395"
+replacement_id = "RELIABILITY-003"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0396"
+replacement_id = "RELIABILITY-004"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0397"
+replacement_id = "RELIABILITY-005"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0398"
+replacement_id = "RELIABILITY-006"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0399"
+replacement_id = "SECURITY-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0400"
+replacement_id = "SECURITY-002"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0401"
+replacement_id = "SECURITY-003"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0402"
+replacement_id = "SECURITY-004"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0403"
+replacement_id = "SECURITY-005"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0404"
+replacement_id = "SECURITY-006"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0405"
+replacement_id = "TEST-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0406"
+replacement_id = "TEST-002"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0407"
+replacement_id = "TEST-003"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0408"
+replacement_id = "TEST-004"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0409"
+replacement_id = "TEST-005"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0410"
+replacement_id = "TEST-006"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0411"
+replacement_id = "TEST-007"
+
+[[artifact]]
+artifact_id = "REPO-8E5E95467C0AAC813830AA24"
+kind = "repo"
+locator = "docs/truth/CODEX_PROCESS_TRUTH.md"
+action = "delete"
+claim_ids = ["CLAIM-PRC-019", "CLAIM-PRC-020", "CLAIM-PRC-021", "CLAIM-PRC-022", "CLAIM-PRC-023", "CLAIM-PRC-024", "CLAIM-PRC-025", "CLAIM-PRC-026", "CLAIM-PRC-027", "CLAIM-PRC-028", "CLAIM-PRC-029", "CLAIM-PRC-030", "CLAIM-PRC-031", "CLAIM-PRC-032", "CLAIM-PRC-033", "CLAIM-PRC-034"]
+replacement_ids = ["CONST-HISTORY-NO-GRAVEYARD-001", "CONST-HISTORY-SUPERSESSION-001", "CONST-RUNTIME-MUTATION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-019"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-020"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-021"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-022"
+replacement_id = "CONST-RUNTIME-MUTATION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-023"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-024"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-025"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-026"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-027"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-028"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-029"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-030"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-031"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-032"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-033"
+replacement_id = "CONST-HISTORY-NO-GRAVEYARD-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-034"
+replacement_id = "CONST-HISTORY-NO-GRAVEYARD-001"
+
+[[artifact]]
+artifact_id = "REPO-9CCF7BDDE9232E721AE6A1BD"
+kind = "repo"
+locator = "docs/constitution/law-source-map.json"
+action = "delete"
+claim_ids = ["LEGACY-SEMANTIC-9CCF7BDDE9232E72"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "LEGACY-SEMANTIC-9CCF7BDDE9232E72"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-A1371F8B6FCB79E60DD082A5"
+kind = "repo"
+locator = "docs/constitution/articles/ARTICLE_25_persistence-and-data-integrity.md"
+action = "delete"
+claim_ids = ["CLAIM-RPPS-0025", "CLAIM-RPPS-0026", "CLAIM-RPPS-0027", "CLAIM-RPPS-0028", "CLAIM-RPPS-0029", "CLAIM-RPPS-0030", "CLAIM-RPPS-0031", "CLAIM-RPPS-0032", "CLAIM-RPPS-0033", "CLAIM-RPPS-0034", "CLAIM-RPPS-0035", "CLAIM-RPPS-0036", "CLAIM-RPPS-0037", "CLAIM-RPPS-0038", "CLAIM-RPPS-0039", "CLAIM-RPPS-0040", "CLAIM-RPPS-0041"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001", "LAW-DATA-LOSS-STOP-SHIP-001", "LAW-RUNTIME-NO-DIRECT-WRITE-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0025"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0026"
+replacement_id = "LAW-RUNTIME-NO-DIRECT-WRITE-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0027"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0028"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0029"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0030"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0031"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0032"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0033"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0034"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0035"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0036"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0037"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0038"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0039"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0040"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0041"
+replacement_id = "LAW-DATA-LOSS-STOP-SHIP-001"
+
+[[artifact]]
+artifact_id = "REPO-A99AD2DB1D26DB18B7525CF2"
+kind = "repo"
+locator = "docs/constitution/law-source-map/map-01.json"
+action = "delete"
+claim_ids = ["CLAIM-STB-0431", "CLAIM-STB-0432", "CLAIM-STB-0433", "CLAIM-STB-0434", "CLAIM-STB-0435", "CLAIM-STB-0436", "CLAIM-STB-0437", "CLAIM-STB-0438", "CLAIM-STB-0439", "CLAIM-STB-0440"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0431"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0432"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0433"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0434"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0435"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0436"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0437"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0438"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0439"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0440"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-AA88FA58EEA6FBA9BAB10270"
+kind = "repo"
+locator = "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
+action = "delete"
+claim_ids = ["CLAIM-IA-SHELL-SURFACES-0060", "CLAIM-IA-SHELL-SURFACES-0061", "CLAIM-IA-SHELL-SURFACES-0062", "CLAIM-IA-SHELL-SURFACES-0063", "CLAIM-IA-SHELL-SURFACES-0064", "CLAIM-OBJ-052", "CLAIM-OBJ-053", "CLAIM-OBJ-054", "CLAIM-OBJ-055", "CLAIM-OBJ-056", "CLAIM-OBJ-057", "CLAIM-OBJ-058", "CLAIM-OBJ-059", "CLAIM-OBJ-060", "CLAIM-RPPS-0067", "CLAIM-RPPS-0068", "CLAIM-STB-0441", "CLAIM-STB-0442", "CLAIM-STB-0443", "CLAIM-STB-0444", "CLAIM-STB-0445", "CLAIM-STB-0446", "CLAIM-STB-0447", "CLAIM-STB-0448", "CLAIM-STB-0449", "CLAIM-STB-0450", "CLAIM-STB-0451", "CLAIM-STB-0452", "CLAIM-STB-0453", "CLAIM-STB-0454", "CLAIM-STB-0455", "CLAIM-STB-0456", "CLAIM-STB-0457", "CLAIM-STB-0458", "CLAIM-STB-0459", "CLAIM-STB-0460", "CLAIM-STB-0461", "CLAIM-STB-0462", "CLAIM-STB-0463", "CLAIM-STB-0464", "CLAIM-STB-0465", "CLAIM-STB-0466", "CLAIM-STB-0467", "CLAIM-STB-0468", "CLAIM-STB-0469", "CLAIM-STB-0470", "CLAIM-STB-0471", "CLAIM-STB-0472", "CLAIM-STB-0473", "CLAIM-STB-0474", "CLAIM-STB-0475", "CLAIM-STB-0476", "CLAIM-STB-0477", "CLAIM-STB-0478", "CLAIM-STB-0479", "CLAIM-STB-0480", "CLAIM-STB-0481", "CLAIM-STB-0482", "CLAIM-STB-0483", "CLAIM-STB-0484", "CLAIM-STB-0485", "CLAIM-STB-0486", "CLAIM-STB-0487", "CLAIM-STB-0488", "CLAIM-STB-0489", "CLAIM-STB-0490", "CLAIM-STB-0491", "CLAIM-STB-0492", "CLAIM-STB-0493", "CLAIM-STB-0494", "CLAIM-STB-0495", "CLAIM-STB-0496", "CLAIM-STB-0497", "CLAIM-STB-0498", "CLAIM-STB-0499", "CLAIM-STB-0500", "CLAIM-STB-0501", "CLAIM-STB-0502", "CLAIM-STB-0503", "CLAIM-STB-0504", "CLAIM-STB-0505", "CLAIM-STB-0506", "CLAIM-STB-0507", "CLAIM-STB-0508", "CLAIM-STB-0509", "CLAIM-STB-0510", "CLAIM-STB-0511", "CLAIM-STB-0512", "CLAIM-STB-0513", "CLAIM-STB-0514", "CLAIM-STB-0515", "CLAIM-STB-0516", "CLAIM-STB-0517", "CLAIM-STB-0518", "CLAIM-STB-0519", "CLAIM-STB-0520", "CLAIM-STB-0521", "CLAIM-STB-0522", "CLAIM-STB-0523", "CLAIM-STB-0524", "CLAIM-STB-0525", "CLAIM-STB-0526", "CLAIM-STB-0527", "CLAIM-STB-0528", "CLAIM-STB-0529", "CLAIM-STB-0530", "CLAIM-STB-0531", "CLAIM-STB-0532", "CLAIM-STB-0533", "CLAIM-STB-0534", "CLAIM-STB-0535", "CLAIM-STB-0536", "CLAIM-STB-0537", "CLAIM-STB-0538", "CLAIM-STB-0539", "CLAIM-STB-0540", "CLAIM-STB-0541", "CLAIM-STB-0542", "CLAIM-STB-0543", "CLAIM-STB-0544", "CLAIM-STB-0545", "CLAIM-STB-0546", "CLAIM-STB-0547", "CLAIM-STB-0548", "CLAIM-STB-0549", "CLAIM-STB-0550", "CLAIM-STB-0551", "CLAIM-STB-0552", "CLAIM-STB-0553", "CLAIM-STB-0554", "CLAIM-STB-0555", "CLAIM-STB-0556", "CLAIM-STB-0557", "CLAIM-STB-0558", "CLAIM-STB-0559", "CLAIM-STB-0560", "CLAIM-STB-0561", "CLAIM-STB-0562", "CLAIM-STB-0563", "CLAIM-STB-0564", "CLAIM-STB-0565", "CLAIM-STB-0566", "CLAIM-STB-0567", "CLAIM-STB-0568", "CLAIM-STB-0569", "CLAIM-STB-0570", "CLAIM-STB-0571", "CLAIM-STB-0572", "CLAIM-STB-0573", "CLAIM-STB-0574", "CLAIM-STB-0575", "CLAIM-STB-0576", "CLAIM-STB-0577", "CLAIM-STB-0578", "CLAIM-STB-0579", "CLAIM-STB-0580", "CLAIM-STB-0581", "CLAIM-STB-0582", "CLAIM-STB-0583"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001", "OBJ-ARCHIVE-SEMANTICS-001", "OBJ-DELETION-RESTORE-001", "OBJ-FUTURE-STEP-RECEIPT-001", "OBJ-GOAL-CREATION-FAILURE-001", "OBJ-GOAL-PATH-RECEIPT-001", "OBJ-MEMORY-RETENTION-001", "SPEC-GLOBAL-SEARCH-PRESENTATION-001", "SPEC-SURFACE-GOALS-PURPOSE-001", "SPEC-SURFACE-TIME-PURPOSE-001", "SPEC-SURFACE-TODAY-PURPOSE-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-IA-SHELL-SURFACES-0060"
+replacement_id = "SPEC-SURFACE-TODAY-PURPOSE-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-IA-SHELL-SURFACES-0061"
+replacement_id = "SPEC-SURFACE-GOALS-PURPOSE-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-IA-SHELL-SURFACES-0062"
+replacement_id = "SPEC-SURFACE-TIME-PURPOSE-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-IA-SHELL-SURFACES-0063"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-IA-SHELL-SURFACES-0064"
+replacement_id = "SPEC-GLOBAL-SEARCH-PRESENTATION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-052"
+replacement_id = "OBJ-MEMORY-RETENTION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-053"
+replacement_id = "OBJ-ARCHIVE-SEMANTICS-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-054"
+replacement_id = "OBJ-DELETION-RESTORE-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-055"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-056"
+replacement_id = "OBJ-GOAL-CREATION-FAILURE-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-057"
+replacement_id = "OBJ-GOAL-PATH-RECEIPT-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-058"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-059"
+replacement_id = "OBJ-FUTURE-STEP-RECEIPT-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-OBJ-060"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0067"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0068"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0441"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0442"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0443"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0444"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0445"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0446"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0447"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0448"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0449"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0450"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0451"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0452"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0453"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0454"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0455"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0456"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0457"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0458"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0459"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0460"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0461"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0462"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0463"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0464"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0465"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0466"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0467"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0468"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0469"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0470"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0471"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0472"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0473"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0474"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0475"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0476"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0477"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0478"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0479"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0480"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0481"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0482"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0483"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0484"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0485"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0486"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0487"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0488"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0489"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0490"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0491"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0492"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0493"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0494"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0495"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0496"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0497"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0498"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0499"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0500"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0501"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0502"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0503"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0504"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0505"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0506"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0507"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0508"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0509"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0510"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0511"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0512"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0513"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0514"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0515"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0516"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0517"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0518"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0519"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0520"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0521"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0522"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0523"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0524"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0525"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0526"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0527"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0528"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0529"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0530"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0531"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0532"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0533"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0534"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0535"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0536"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0537"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0538"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0539"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0540"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0541"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0542"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0543"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0544"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0545"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0546"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0547"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0548"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0549"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0550"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0551"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0552"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0553"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0554"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0555"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0556"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0557"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0558"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0559"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0560"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0561"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0562"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0563"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0564"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0565"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0566"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0567"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0568"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0569"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0570"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0571"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0572"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0573"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0574"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0575"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0576"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0577"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0578"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0579"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0580"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0581"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0582"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0583"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-AC6969F876C13A1978611216"
+kind = "repo"
+locator = "docs/truth/CODEX_START_HERE.md"
+action = "delete"
+claim_ids = ["CLAIM-PRC-035", "CLAIM-PRC-036", "CLAIM-PRC-037", "CLAIM-PRC-038", "CLAIM-PRC-039", "CLAIM-PRC-040", "CLAIM-PRC-041", "CLAIM-PRC-042", "CLAIM-PRC-043", "CLAIM-PRC-044", "CLAIM-PRC-045"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001", "CONST-PROOF-EVIDENCE-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-035"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-036"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-037"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-038"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-039"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-040"
+replacement_id = "CONST-PROOF-EVIDENCE-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-041"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-042"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-043"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-044"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-045"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-B11ED8716F99F213DF6470B4"
+kind = "repo"
+locator = "docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md"
+action = "delete"
+claim_ids = ["CLAIM-MOM-0001", "CLAIM-MOM-0002", "CLAIM-MOM-0003", "CLAIM-MOM-0004", "CLAIM-MOM-0005", "CLAIM-MOM-0006", "CLAIM-MOM-0007", "CLAIM-MOM-0008", "CLAIM-MOM-0009", "CLAIM-MOM-0010", "CLAIM-MOM-0011", "CLAIM-MOM-0012", "CLAIM-MOM-0013", "CLAIM-MOM-0014", "CLAIM-MOM-0015", "CLAIM-MOM-0016", "CLAIM-MOM-0017", "CLAIM-MOM-0018", "CLAIM-MOM-0019"]
+replacement_ids = ["AUTHORITY-MISSION-001", "CONST-HISTORY-SUPERSESSION-001", "MISSION-CAPABILITIES-001", "MISSION-CAPABILITY-MEANING-001", "MISSION-CATEGORY-001", "MISSION-FUNCTION-001", "MISSION-HARD-RED-001", "MISSION-INTEGRATION-001", "MISSION-LAUNCH-BAR-001", "MISSION-NAMING-001", "MISSION-REFLOW-001", "MISSION-RUNTIME-RELATION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0001"
+replacement_id = "AUTHORITY-MISSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0002"
+replacement_id = "MISSION-CATEGORY-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0003"
+replacement_id = "MISSION-FUNCTION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0004"
+replacement_id = "MISSION-NAMING-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0005"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0006"
+replacement_id = "MISSION-INTEGRATION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0007"
+replacement_id = "MISSION-LAUNCH-BAR-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0008"
+replacement_id = "MISSION-CAPABILITIES-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0009"
+replacement_id = "MISSION-CAPABILITY-MEANING-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0010"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0011"
+replacement_id = "MISSION-RUNTIME-RELATION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0012"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0013"
+replacement_id = "MISSION-REFLOW-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0014"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0015"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0016"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0017"
+replacement_id = "MISSION-HARD-RED-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0018"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-MOM-0019"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-B65E71E91F3F2B1897FAA7FB"
+kind = "repo"
+locator = "docs/constitution/README.md"
+action = "delete"
+claim_ids = ["CLAIM-STB-0590", "CLAIM-STB-0591", "CLAIM-STB-0592", "CLAIM-STB-0593", "CLAIM-STB-0594"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0590"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0591"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0592"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0593"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0594"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-B8DCA6E9A67D1E0BA43CEC26"
+kind = "repo"
+locator = "docs/constitution/opportunities/P1-051-075.json"
+action = "delete"
+claim_ids = ["CLAIM-STB-0595", "CLAIM-STB-0596", "CLAIM-STB-0597", "CLAIM-STB-0598", "CLAIM-STB-0599", "CLAIM-STB-0600", "CLAIM-STB-0601", "CLAIM-STB-0602", "CLAIM-STB-0603", "CLAIM-STB-0604", "CLAIM-STB-0605", "CLAIM-STB-0606", "CLAIM-STB-0607", "CLAIM-STB-0608", "CLAIM-STB-0609", "CLAIM-STB-0610", "CLAIM-STB-0611", "CLAIM-STB-0612", "CLAIM-STB-0613", "CLAIM-STB-0614", "CLAIM-STB-0615", "CLAIM-STB-0616", "CLAIM-STB-0617", "CLAIM-STB-0618", "CLAIM-STB-0619"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0595"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0596"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0597"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0598"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0599"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0600"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0601"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0602"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0603"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0604"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0605"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0606"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0607"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0608"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0609"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0610"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0611"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0612"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0613"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0614"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0615"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0616"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0617"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0618"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0619"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-BB19A1C5749B205632301BC9"
+kind = "repo"
+locator = "docs/constitution/articles/ARTICLE_41_codex-departmental-operating-model.md"
+action = "delete"
+claim_ids = ["CLAIM-STB-0620", "CLAIM-STB-0621", "CLAIM-STB-0622", "CLAIM-STB-0623"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0620"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0621"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0622"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0623"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-BD8734CA17422446DB65B9BB"
+kind = "repo"
+locator = "docs/truth/PRODUCT_EXPERIENCE_ACTION_MAP.md"
+action = "delete"
+claim_ids = ["CLAIM-STB-0624", "CLAIM-STB-0625", "CLAIM-STB-0626", "CLAIM-STB-0627", "CLAIM-STB-0628", "CLAIM-STB-0629", "CLAIM-STB-0630", "CLAIM-STB-0631", "CLAIM-STB-0632", "CLAIM-STB-0633", "CLAIM-STB-0634", "CLAIM-STB-0635", "CLAIM-STB-0636", "CLAIM-STB-0637", "CLAIM-STB-0638", "CLAIM-STB-0639", "CLAIM-STB-0640", "CLAIM-STB-0641", "CLAIM-STB-0642"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0624"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0625"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0626"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0627"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0628"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0629"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0630"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0631"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0632"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0633"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0634"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0635"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0636"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0637"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0638"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0639"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0640"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0641"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0642"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-BDFB6773AEE1EE818E2AFE56"
+kind = "repo"
+locator = "docs/truth/HISTORICAL_POLICY.md"
+action = "delete"
+claim_ids = ["CLAIM-PRC-046", "CLAIM-PRC-047", "CLAIM-PRC-048", "CLAIM-PRC-049", "CLAIM-PRC-050", "CLAIM-PRC-051", "CLAIM-PRC-052", "CLAIM-PRC-053"]
+replacement_ids = ["CONST-HISTORY-NO-GRAVEYARD-001", "CONST-HISTORY-SUPERSESSION-001", "CONST-IA-ROOT-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-046"
+replacement_id = "CONST-HISTORY-NO-GRAVEYARD-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-047"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-048"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-049"
+replacement_id = "CONST-IA-ROOT-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-050"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-051"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-052"
+replacement_id = "CONST-HISTORY-NO-GRAVEYARD-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-PRC-053"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-BEDDB916A81B3CF9A1764AD1"
+kind = "repo"
+locator = "docs/constitution/law-source-map/map-02.json"
+action = "delete"
+claim_ids = ["CLAIM-STB-0643", "CLAIM-STB-0644", "CLAIM-STB-0645", "CLAIM-STB-0646", "CLAIM-STB-0647", "CLAIM-STB-0648", "CLAIM-STB-0649", "CLAIM-STB-0650", "CLAIM-STB-0651", "CLAIM-STB-0652"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0643"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0644"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0645"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0646"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0647"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0648"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0649"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0650"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0651"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0652"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-C1F43F79DABDCCF8C38F612B"
+kind = "repo"
+locator = "docs/constitution/laws/laws-02.json"
+action = "delete"
+claim_ids = ["CLAIM-STB-0662", "CLAIM-STB-0663", "CLAIM-STB-0664", "CLAIM-STB-0665", "CLAIM-STB-0666", "CLAIM-STB-0667", "CLAIM-STB-0668", "CLAIM-STB-0669", "CLAIM-STB-0670", "CLAIM-STB-0671", "CLAIM-STB-0672", "CLAIM-STB-0673", "CLAIM-STB-0674", "CLAIM-STB-0675", "CLAIM-STB-0676", "CLAIM-STB-0677", "CLAIM-STB-0678", "CLAIM-STB-0679", "CLAIM-STB-0680", "CLAIM-STB-0681", "CLAIM-STB-0682", "CLAIM-STB-0683", "CLAIM-STB-0684", "CLAIM-STB-0685", "CLAIM-STB-0686", "CLAIM-STB-0687", "CLAIM-STB-0688", "CLAIM-STB-0689", "CLAIM-STB-0690", "CLAIM-STB-0691", "CLAIM-STB-0692"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001", "DESIGN-001", "DESIGN-002", "DESIGN-003", "DESIGN-004", "DESIGN-005", "DESIGN-006", "DESIGN-007", "FRONTEND-001", "FRONTEND-002", "FRONTEND-003", "FRONTEND-004", "FRONTEND-005", "FRONTEND-006", "FRONTEND-007", "FRONTEND-008", "FRONTEND-009", "FRONTEND-010", "PERF-001", "PERF-002", "PERF-003", "PERF-004", "PERF-005", "RELIABILITY-001", "RELIABILITY-002"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0662"
+replacement_id = "DESIGN-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0663"
+replacement_id = "DESIGN-002"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0664"
+replacement_id = "DESIGN-003"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0665"
+replacement_id = "DESIGN-004"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0666"
+replacement_id = "DESIGN-005"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0667"
+replacement_id = "DESIGN-006"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0668"
+replacement_id = "DESIGN-007"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0669"
+replacement_id = "FRONTEND-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0670"
+replacement_id = "FRONTEND-002"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0671"
+replacement_id = "FRONTEND-003"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0672"
+replacement_id = "FRONTEND-004"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0673"
+replacement_id = "FRONTEND-005"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0674"
+replacement_id = "FRONTEND-006"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0675"
+replacement_id = "FRONTEND-007"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0676"
+replacement_id = "FRONTEND-008"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0677"
+replacement_id = "FRONTEND-009"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0678"
+replacement_id = "FRONTEND-010"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0679"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0680"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0681"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0682"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0683"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0684"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0685"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0686"
+replacement_id = "PERF-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0687"
+replacement_id = "PERF-002"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0688"
+replacement_id = "PERF-003"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0689"
+replacement_id = "PERF-004"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0690"
+replacement_id = "PERF-005"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0691"
+replacement_id = "RELIABILITY-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0692"
+replacement_id = "RELIABILITY-002"
+
+[[artifact]]
+artifact_id = "REPO-C3294FB61CA34FFF7E205E81"
+kind = "repo"
+locator = "docs/constitution/opportunities/P0-010-018.json"
+action = "delete"
+claim_ids = ["CLAIM-STB-0701", "CLAIM-STB-0702", "CLAIM-STB-0703", "CLAIM-STB-0704", "CLAIM-STB-0705", "CLAIM-STB-0706", "CLAIM-STB-0707", "CLAIM-STB-0708", "CLAIM-STB-0709"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0701"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0702"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0703"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0704"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0705"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0706"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0707"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0708"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0709"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-C4C266F9BC681838FBF35AD0"
+kind = "repo"
+locator = "docs/constitution/law-test-map/map-02.json"
+action = "delete"
+claim_ids = ["CLAIM-STB-0710", "CLAIM-STB-0711", "CLAIM-STB-0712", "CLAIM-STB-0713", "CLAIM-STB-0714", "CLAIM-STB-0715", "CLAIM-STB-0716", "CLAIM-STB-0717", "CLAIM-STB-0718", "CLAIM-STB-0719", "CLAIM-STB-0720", "CLAIM-STB-0721", "CLAIM-STB-0722", "CLAIM-STB-0723", "CLAIM-STB-0724", "CLAIM-STB-0725", "CLAIM-STB-0726", "CLAIM-STB-0727", "CLAIM-STB-0728"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0710"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0711"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0712"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0713"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0714"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0715"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0716"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0717"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0718"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0719"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0720"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0721"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0722"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0723"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0724"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0725"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0726"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0727"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0728"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-CD93CB377D7C64450BCB9B93"
+kind = "repo"
+locator = "docs/constitution/articles/ARTICLE_31_performance-and-energy.md"
+action = "delete"
+claim_ids = ["CLAIM-NAV-068", "CLAIM-NAV-069", "CLAIM-NAV-070", "CLAIM-NAV-071", "CLAIM-NAV-072"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-068"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-069"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-070"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-071"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-NAV-072"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-CDF79CD3D63C16ED778760B0"
+kind = "repo"
+locator = "docs/constitution/PR_COMPLIANCE_TEMPLATE.md"
+action = "delete"
+claim_ids = ["CLAIM-STB-0729", "CLAIM-STB-0730", "CLAIM-STB-0731", "CLAIM-STB-0732", "CLAIM-STB-0733", "CLAIM-STB-0734", "CLAIM-STB-0735", "CLAIM-STB-0736", "CLAIM-STB-0737", "CLAIM-STB-0738", "CLAIM-STB-0739", "CLAIM-STB-0740", "CLAIM-STB-0741"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0729"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0730"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0731"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0732"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0733"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0734"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0735"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0736"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0737"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0738"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0739"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0740"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0741"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-CE1E8C8831E909B1C139C954"
+kind = "repo"
+locator = "docs/truth/IMPLEMENTATION_TRUTH.md"
+action = "delete"
+claim_ids = ["CLAIM-RPPS-0072", "CLAIM-RPPS-0073", "CLAIM-RPPS-0074", "CLAIM-RPPS-0075", "CLAIM-RPPS-0076", "CLAIM-RPPS-0077", "CLAIM-STB-0742", "CLAIM-STB-0743", "CLAIM-STB-0744", "CLAIM-STB-0745", "CLAIM-STB-0746", "CLAIM-STB-0747", "CLAIM-STB-0748", "CLAIM-STB-0749", "CLAIM-STB-0750", "CLAIM-STB-0751", "CLAIM-STB-0752", "CLAIM-STB-0753", "CLAIM-STB-0754", "CLAIM-STB-0755", "CLAIM-STB-0756", "CLAIM-STB-0757", "CLAIM-STB-0758"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0072"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0073"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0074"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0075"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0076"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-RPPS-0077"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0742"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0743"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0744"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0745"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0746"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0747"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0748"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0749"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0750"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0751"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0752"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0753"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0754"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0755"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0756"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0757"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0758"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-D99BAE8DAE729FA01B175D4A"
+kind = "repo"
+locator = "docs/constitution/scenarios.json"
+action = "delete"
+claim_ids = ["CLAIM-STB-0759", "CLAIM-STB-0760", "CLAIM-STB-0761", "CLAIM-STB-0762", "CLAIM-STB-0763", "CLAIM-STB-0764", "CLAIM-STB-0765", "CLAIM-STB-0766", "CLAIM-STB-0767", "CLAIM-STB-0768", "CLAIM-STB-0769", "CLAIM-STB-0770", "CLAIM-STB-0771", "CLAIM-STB-0772", "CLAIM-STB-0773", "CLAIM-STB-0774"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0759"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0760"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0761"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0762"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0763"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0764"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0765"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0766"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0767"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0768"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0769"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0770"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0771"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0772"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0773"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0774"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-E2F17CA3798BA41F89FDA871"
+kind = "repo"
+locator = "docs/constitution/opportunities/P1-026-050.json"
+action = "delete"
+claim_ids = ["CLAIM-STB-0775", "CLAIM-STB-0776", "CLAIM-STB-0777", "CLAIM-STB-0778", "CLAIM-STB-0779", "CLAIM-STB-0780", "CLAIM-STB-0781", "CLAIM-STB-0782", "CLAIM-STB-0783", "CLAIM-STB-0784", "CLAIM-STB-0785", "CLAIM-STB-0786", "CLAIM-STB-0787", "CLAIM-STB-0788", "CLAIM-STB-0789", "CLAIM-STB-0790", "CLAIM-STB-0791", "CLAIM-STB-0792", "CLAIM-STB-0793", "CLAIM-STB-0794", "CLAIM-STB-0795", "CLAIM-STB-0796", "CLAIM-STB-0797", "CLAIM-STB-0798", "CLAIM-STB-0799"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0775"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0776"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0777"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0778"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0779"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0780"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0781"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0782"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0783"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0784"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0785"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0786"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0787"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0788"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0789"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0790"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0791"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0792"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0793"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0794"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0795"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0796"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0797"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0798"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0799"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-FA5FD2273058F8C395A916C0"
+kind = "repo"
+locator = "docs/constitution/law-test-map.json"
+action = "delete"
+claim_ids = ["LEGACY-SEMANTIC-FA5FD2273058F8C3"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "LEGACY-SEMANTIC-FA5FD2273058F8C3"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact]]
+artifact_id = "REPO-FD05FA33E9A2AE8169F6E87F"
+kind = "repo"
+locator = "docs/constitution/opportunities/P1-001-025.json"
+action = "delete"
+claim_ids = ["CLAIM-STB-0810", "CLAIM-STB-0811", "CLAIM-STB-0812", "CLAIM-STB-0813", "CLAIM-STB-0814", "CLAIM-STB-0815", "CLAIM-STB-0816", "CLAIM-STB-0817", "CLAIM-STB-0818", "CLAIM-STB-0819", "CLAIM-STB-0820", "CLAIM-STB-0821", "CLAIM-STB-0822", "CLAIM-STB-0823", "CLAIM-STB-0824", "CLAIM-STB-0825", "CLAIM-STB-0826", "CLAIM-STB-0827", "CLAIM-STB-0828", "CLAIM-STB-0829", "CLAIM-STB-0830", "CLAIM-STB-0831", "CLAIM-STB-0832", "CLAIM-STB-0833", "CLAIM-STB-0834"]
+replacement_ids = ["CONST-HISTORY-SUPERSESSION-001"]
+claims_resolved = true
+incoming_links_rewritten = false
+external_references_reconciled = false
+unique_content_extracted = true
+owner_approved = false
+independent_review = false
+owner_approval_attestation_sha256 = ""
+independent_review_attestation_sha256 = ""
+rollback_ref = "e5248af40b46f2c7f18e95286b2feb928dbdac57"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0810"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0811"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0812"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0813"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0814"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0815"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0816"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0817"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0818"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0819"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0820"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0821"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0822"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0823"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0824"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0825"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0826"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0827"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0828"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0829"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0830"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0831"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0832"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0833"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"
+
+[[artifact.claim_disposition]]
+claim_id = "CLAIM-STB-0834"
+replacement_id = "CONST-HISTORY-SUPERSESSION-001"

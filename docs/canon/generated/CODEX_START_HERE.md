@@ -21,7 +21,7 @@ This file is a generated router, not a second authority root.
 
 ChatGPT, Project Instructions, skills, intake, packs, envelopes, receipts, local approval claims, and local proof cannot authorize work or merge.
 
-The former `docs/truth/` and `docs/constitution/` trees are non-normative migration sources pending governed purge.
+Legacy authority content is retained only in the canonical semantic-migration ledger and cannot route active work; its source trees remain pending governed purge.
 
 ## Registry summary
 

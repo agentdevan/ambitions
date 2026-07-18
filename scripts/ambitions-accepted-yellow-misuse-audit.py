@@ -54,10 +54,10 @@ VALID_CLASSIFICATIONS = {
 
 TRUTH_PROCESS_PATHS = [
     ROOT / "AGENTS.md",
-    ROOT / "docs" / "truth" / "CODEX_START_HERE.md",
-    ROOT / "docs" / "truth" / "CODEX_PROCESS_TRUTH.md",
-    ROOT / "docs" / "truth" / "IMPLEMENTATION_ACCEPTANCE_TRUTH.md",
-    ROOT / "docs" / "truth" / "RELEASE_TRUTH.md",
+    ROOT / "docs" / "canon" / "generated" / "CODEX_START_HERE.md",
+    ROOT / "docs" / "canon" / "CONSTITUTION.md",
+    ROOT / "docs" / "canon" / "standards" / "validation-and-release.md",
+    ROOT / "docs" / "canon" / "migration" / "legacy-semantic-migration.json",
     ROOT / ".agents" / "skills" / "ambitions-release-proof-honesty" / "SKILL.md",
     ROOT / ".agents" / "skills" / "ambitions-architecture-tree-enforcement" / "SKILL.md",
     ROOT / ".agents" / "skills" / "ambitions-runtime-contract-engineering" / "SKILL.md",

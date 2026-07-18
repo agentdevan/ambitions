@@ -10,7 +10,7 @@ Authority: Routing only; never product, implementation, validation, or release p
 and requirement IDs it routes for the task. For nontrivial work, generate a
 bounded pack with `python3 scripts/ambitions-canon.py pack` before acting.
 
-The former `docs/truth/` and `docs/constitution/` authority trees remain
+The former `docs/canon/` and `docs/canon/` authority trees remain
 temporarily present only as non-normative migration sources pending the governed
 purge. They must not direct new work or override `docs/canon/`.
 

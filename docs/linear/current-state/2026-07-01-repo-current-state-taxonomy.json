@@ -55,7 +55,7 @@
   },
   "rows": [
     {
-      "path": "README.md; AGENTS.md; docs/truth/",
+      "path": "README.md; AGENTS.md; docs/canon/migration/legacy-semantic-migration.json#",
       "app_aspect": "Repo authority / product canon",
       "private_life_orchestration_role": "Defines Ambitions as a premium native iPhone-first local-first Personal Life OS and makes Private Life Orchestration the top classification layer.",
       "orchestration_layer": "QA / validation / release proof gate",
@@ -701,7 +701,7 @@
       "gap_classification": "MISSING_KNOWN_ISSUE_MAPPING"
     },
     {
-      "path": "docs/truth/RELEASE_TRUTH.md; docs/quality/; scripts/*green*; scripts/*release*",
+      "path": "docs/canon/migration/legacy-semantic-migration.json#RELEASE_TRUTH.md; docs/quality/; scripts/*green*; scripts/*release*",
       "app_aspect": "Release gates / TestFlight / App Store",
       "private_life_orchestration_role": "Defines release proof gates and blocks TestFlight/App Store claims until current runtime, visual, accessibility, privacy/legal, and owner-review proof exists.",
       "orchestration_layer": "QA / validation / release proof gate",
@@ -752,7 +752,7 @@
       "gap_classification": "DO_NOT_PROMOTE"
     },
     {
-      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/ export/reset sources; docs/truth/RELEASE_TRUTH.md",
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/ export/reset sources; docs/canon/migration/legacy-semantic-migration.json#RELEASE_TRUTH.md",
       "app_aspect": "Import / export / reset / erasure",
       "private_life_orchestration_role": "Controls user-owned data portability, reset, sign-out cleanup, erasure, and repair flows for local private graph data.",
       "orchestration_layer": "Life-data boundary",
@@ -769,7 +769,7 @@
       "gap_classification": "DO_NOT_PROMOTE"
     },
     {
-      "path": "Native/Ambitions/Resources/PrivacyInfo.xcprivacy; docs/truth/RELEASE_TRUTH.md; docs/legal/privacy policy evidence if present",
+      "path": "Native/Ambitions/Resources/PrivacyInfo.xcprivacy; docs/canon/migration/legacy-semantic-migration.json#RELEASE_TRUTH.md; docs/legal/privacy policy evidence if present",
       "app_aspect": "Privacy manifest / legal/privacy policy evidence",
       "private_life_orchestration_role": "Supplies platform privacy declarations and legal release evidence for local-first life-data boundaries.",
       "orchestration_layer": "QA / validation / release proof gate",

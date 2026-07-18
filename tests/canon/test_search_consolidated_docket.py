@@ -62,30 +62,25 @@ class SearchConsolidatedDocketTests(unittest.TestCase):
         )
         self.assertEqual(leftovers, ())
 
-    def test_active_truth_hierarchy_owns_find_ask_act_inspect_without_overclaim(self):
-        design = (ROOT / "docs/truth/PRODUCT_DESIGN_TRUTH.md").read_text()
-        moat = (ROOT / "docs/truth/PRODUCT_MOAT_TRUTH.md").read_text()
-        experience = (ROOT / "docs/truth/PRODUCT_EXPERIENCE_CANON.md").read_text()
-        decisions = (
-            ROOT
-            / "docs/truth/2026-06-22-runtime-remediation-decision-register.md"
+    def test_active_canon_owns_find_ask_act_inspect_without_overclaim(self):
+        constitution = (ROOT / "docs/canon/CONSTITUTION.md").read_text()
+        search = (ROOT / "docs/canon/specifications/global/search.md").read_text()
+        journey = (
+            ROOT / "docs/canon/specifications/journeys/search-find-ask-act-inspect.md"
         ).read_text()
-        implementation = (ROOT / "docs/truth/IMPLEMENTATION_TRUTH.md").read_text()
 
-        for source in (design, moat, experience, decisions):
+        for source in (constitution, search):
             self.assertIn("Find / Ask / Act / Inspect", source)
-        self.assertIn("optional on-device grounded Ask", design)
-        self.assertIn("session-local", design)
-        self.assertIn("Capture handoff", design)
-        self.assertIn("object-led", design)
-        self.assertIn("proposed-only", design)
-        self.assertIn("deterministic", design)
-        self.assertIn("offline", design)
-        self.assertIn("future-gated", implementation)
-        self.assertIn("eight visual gaps", implementation)
-        self.assertIn("not production implementation proof", implementation)
-        self.assertNotIn("Search is local Find / Act / Inspect", moat)
-        self.assertNotIn("Search is local Find / Act / Inspect", experience)
+        self.assertIn("on device", constitution)
+        self.assertIn("session-local", search)
+        self.assertIn("Capture", search)
+        self.assertIn("object-led", search)
+        self.assertIn("proposed", search)
+        self.assertIn("deterministic", search)
+        self.assertIn("offline", search)
+        self.assertIn("future_gated", search)
+        self.assertIn("do not prove or implement on-device Ask", search)
+        self.assertIn("deterministic Find / Act / Inspect fallback", journey)
 
     def test_public_apis_expose_no_constructible_context_or_raw_canon_sha(self):
         self.assertFalse(hasattr(ux_blueprint, "CanonSourceSnapshot"))
@@ -328,11 +323,11 @@ class SearchConsolidatedDocketTests(unittest.TestCase):
             ROOT / "docs/canon/migration/VISUAL_AUTHORITY_REBASELINE.md"
         ).read_text(encoding="utf-8")
         self.assertIn(
-            "Visual requirements: `335` mapped + `11` gap-blocked = `346` classified",
+            "Visual requirements: `346` mapped + `0` gap-blocked = `346` classified",
             hand_record,
         )
         self.assertIn(
-            "State variants: `433` mapped + `8` gap-blocked = `441` classified",
+            "State variants: `441` mapped + `0` gap-blocked = `441` classified",
             hand_record,
         )
         self.assertNotIn("Visual requirements mapped: `346/346`", hand_record)

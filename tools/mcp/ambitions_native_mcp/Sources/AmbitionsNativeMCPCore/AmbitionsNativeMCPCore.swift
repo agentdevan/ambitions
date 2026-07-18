@@ -42,7 +42,7 @@ public struct RepoContext: Sendable {
         let fileManager = FileManager.default
         var candidate = URL(fileURLWithPath: fileManager.currentDirectoryPath).standardizedFileURL
         while candidate.path != "/" {
-            let marker = candidate.appendingPathComponent("docs/truth/README.md")
+            let marker = candidate.appendingPathComponent("docs/canon/MANIFEST.toml")
             if fileManager.fileExists(atPath: marker.path) {
                 return RepoContext(repoRoot: candidate)
             }
@@ -287,7 +287,7 @@ private func repoTools(context: RepoContext) -> [NativeTool] {
                         "exists": .bool(context.exists(path)),
                     ])
                 }),
-                "precedence": .string("docs/truth/* wins conflicts; AGENTS.md routes agents; live source/tests/logs own implementation evidence."),
+                "precedence": .string("docs/canon/* wins conflicts; AGENTS.md routes agents; live source/tests/logs own implementation evidence."),
             ]))
         },
         NativeTool(
@@ -354,7 +354,7 @@ private func repoTools(context: RepoContext) -> [NativeTool] {
         ) { args in
             let paths = stringArray(args["paths"])
             return jsonString(.object([
-                "finalArchitectureTreeInspected": .bool(context.exists("docs/truth/PRODUCT_DESIGN_TRUTH.md")),
+                "finalArchitectureTreeInspected": .bool(context.exists("docs/canon/MANIFEST.toml")),
                 "paths": .array(paths.map { path in
                     let owner = architectureOwner(for: path)
                     return .object([
@@ -1174,17 +1174,17 @@ private func sourceAtlasTools(context: RepoContext) -> [NativeTool] {
 }
 
 private let truthStack = [
-    "docs/truth/README.md",
-    "docs/truth/CODEX_START_HERE.md",
-    "docs/truth/PRODUCT_DESIGN_TRUTH.md",
-    "docs/truth/PRODUCT_ORIGIN_TRUTH.md",
-    "docs/truth/PRODUCT_MOAT_TRUTH.md",
-    "docs/truth/PRODUCT_EXPERIENCE_CANON.md",
-    "docs/truth/IMPLEMENTATION_TRUTH.md",
-    "docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md",
-    "docs/truth/RELEASE_TRUTH.md",
-    "docs/truth/CODEX_PROCESS_TRUTH.md",
-    "docs/truth/HISTORICAL_POLICY.md",
+    "docs/canon/generated/CODEX_START_HERE.md",
+    "docs/canon/MANIFEST.toml",
+    "docs/canon/CONSTITUTION.md",
+    "docs/canon/specifications/global/capture.md",
+    "docs/canon/specifications/global/search.md",
+    "docs/canon/specifications/global/trust-inspection.md",
+    "docs/canon/specifications/systems/private-life-runtime.md",
+    "docs/canon/specifications/systems/privacy-and-data-classification.md",
+    "docs/canon/standards/accessibility.md",
+    "docs/canon/standards/testing-and-fixtures.md",
+    "docs/canon/standards/validation-and-release.md",
     "AGENTS.md",
     "README.md",
     "docs/README.md",
@@ -1263,7 +1263,7 @@ private func architectureOwner(for path: String) -> (owner: String, status: Stri
     if normalized.hasPrefix(".agents/skills/") {
         return ("Agent Skills", "operating support, not truth", false, ["skill registry check"])
     }
-    if normalized.hasPrefix("docs/truth/") {
+    if normalized.hasPrefix("docs/canon/") {
         return ("Truth", "canonical documentation", false, ["claim scan", "truth consistency review"])
     }
     return ("unclassified", "review required", false, ["owner-specific validation"])

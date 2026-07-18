@@ -24,14 +24,13 @@ class TruthPathVocabularyAuditTests(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         root = Path(self.temporary.name)
-        self.truth_dir = root / "docs" / "truth"
-        self.truth_dir.mkdir(parents=True)
+        self.canon_dir = root / "docs" / "canon"
+        self.canon_dir.mkdir(parents=True)
         self.audit.ROOT = root
-        self.audit.TRUTH_DIR = self.truth_dir
-        self.audit.TRUTH_BASENAMES = set()
+        self.audit.CANON_DIR = self.canon_dir
 
     def run_audit(self, text):
-        (self.truth_dir / "TEST_TRUTH.md").write_text(text, encoding="utf-8")
+        (self.canon_dir / "TEST_CANON.md").write_text(text, encoding="utf-8")
         stdout = io.StringIO()
         stderr = io.StringIO()
         with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):

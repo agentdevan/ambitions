@@ -8,21 +8,21 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 
 SCAN_FILES = [
-    ROOT / "docs" / "truth" / "PRODUCT_DESIGN_TRUTH.md",
-    ROOT / "docs" / "truth" / "PRODUCT_MOAT_TRUTH.md",
-    ROOT / "docs" / "truth" / "IMPLEMENTATION_TRUTH.md",
-    ROOT / "docs" / "truth" / "CODEX_START_HERE.md",
-    ROOT / "docs" / "truth" / "CODEX_PROCESS_TRUTH.md",
+    ROOT / "docs" / "canon" / "CONSTITUTION.md",
+    ROOT / "docs" / "canon" / "specifications" / "systems" / "private-life-runtime.md",
+    ROOT / "docs" / "canon" / "specifications" / "systems" / "privacy-and-data-classification.md",
+    ROOT / "docs" / "canon" / "specifications" / "systems" / "source-atlas.md",
+    ROOT / "docs" / "canon" / "generated" / "CODEX_START_HERE.md",
     ROOT / "AGENTS.md",
     ROOT / "README.md",
     ROOT / "docs" / "README.md",
 ]
 
-REQUIRED_PRODUCT_TRUTH_PHRASES = [
-    "Ambitions supports custom Ambitions Accounts at launch",
-    "The app must remain fully usable without an account",
-    "R2 is not a user-data backend",
-    "Hosted AI services and cloud LLMs are not core architecture",
+REQUIRED_CONSTITUTION_PHRASES = [
+    "fully useful for core value without account sign-in and without network access",
+    "MUST NOT own, store, synchronize, profile, or infer from the private life graph",
+    "MUST NOT receive, store, infer from, personalize from, or transmit",
+    "MUST NOT become a generic AI destination, a hosted-intelligence or cloud-profiling path",
 ]
 
 REQUIRED_CONTEXT_PHRASES = [
@@ -39,14 +39,14 @@ def read(path: Path) -> str:
 def main() -> int:
     errors: list[str] = []
 
-    product_truth = ROOT / "docs" / "truth" / "PRODUCT_DESIGN_TRUTH.md"
-    text = read(product_truth)
+    constitution = ROOT / "docs" / "canon" / "CONSTITUTION.md"
+    text = read(constitution)
     if not text:
-        errors.append("missing PRODUCT_DESIGN_TRUTH.md")
+        errors.append("missing canonical constitution")
     else:
-        for phrase in REQUIRED_PRODUCT_TRUTH_PHRASES:
+        for phrase in REQUIRED_CONSTITUTION_PHRASES:
             if phrase not in text:
-                errors.append(f"PRODUCT_DESIGN_TRUTH.md missing: {phrase}")
+                errors.append(f"CONSTITUTION.md missing: {phrase}")
 
     for path in SCAN_FILES:
         if not path.exists():
@@ -61,7 +61,15 @@ def main() -> int:
                     errors.append(f"{rel}: Ambitions Account mentioned without {phrase!r} boundary")
 
         if "r2" in lower:
-            if "not a user-data backend" not in lower and "must never" not in lower:
+            if not any(marker in lower for marker in (
+                "not a user-data backend",
+                "must never",
+                "must not receive",
+                "must not own",
+                "public-only",
+                "public reference is not private intelligence",
+                "never become command or private-graph authority",
+            )):
                 errors.append(f"{rel}: R2 mentioned without user-data boundary")
 
         if "hosted ai" in lower or "cloud llm" in lower:

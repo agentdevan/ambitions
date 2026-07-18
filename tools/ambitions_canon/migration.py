@@ -113,6 +113,8 @@ CLAIM_ID_PATTERN = CANONICAL_ID_PATTERN
 TARGET_ID_PATTERN = CANONICAL_ID_PATTERN
 CONCEPT_PATTERN = re.compile(r"^[a-z0-9]+(?:[._-][a-z0-9]+)*$")
 LINE_LOCATION_PATTERN = re.compile(r"^line:([1-9][0-9]*)$")
+LEGACY_SEMANTIC_SOURCE_ROOTS = ("docs/truth", "docs/constitution")
+LEGACY_SEMANTIC_OWNER_ID = "CONST-HISTORY-SUPERSESSION-001"
 DECISION_LOCATION_PATTERN = re.compile(r"^decision:([1-9][0-9]*)$")
 DECISION_EVIDENCE_PATTERN = re.compile(
     r"^linear-(?:comment|ledger):[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-"
@@ -559,6 +561,231 @@ def load_source_catalog(catalog_path: Path) -> tuple[SourceRecord, ...]:
     records = _parse_catalog_bytes(raw, path)
     root = _repository_root(path.parent)
     return tuple(replace(record, bound_repository_root=root) for record in records)
+
+
+def build_legacy_semantic_migration(root: Path) -> dict[str, object]:
+    """Build exact active-canon semantic records for the legacy source trees.
+
+    The records are historical, not a second doctrinal root. They carry exact
+    bytes and migration links while the legacy files exist; later validation
+    uses the committed records after those legacy files are purged.
+    """
+    catalog_path = root / "docs/canon/migration/source-catalog.json"
+    dispositions_path = root / "docs/canon/migration/claim-dispositions.json"
+    sources_by_path = {
+        record.repo_path: record
+        for record in load_source_catalog(catalog_path)
+        if record.repo_path is not None
+    }
+    try:
+        dispositions = json.loads(dispositions_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise CanonError(
+            "LEGACY_SEMANTIC_MIGRATION_INPUT_INVALID",
+            "claim dispositions must be readable JSON",
+            dispositions_path,
+        ) from exc
+    claims = dispositions.get("claims") if isinstance(dispositions, dict) else None
+    if not isinstance(claims, list):
+        raise CanonError(
+            "LEGACY_SEMANTIC_MIGRATION_INPUT_INVALID",
+            "claim dispositions must contain a claims array",
+            dispositions_path,
+        )
+    active_requirement_ids = _current_requirement_ids(root)
+    claims_by_source: dict[str, list[dict[str, object]]] = {}
+    for claim in claims:
+        if isinstance(claim, dict) and isinstance(claim.get("source_id"), str):
+            claims_by_source.setdefault(claim["source_id"], []).append(claim)
+
+    paths = sorted(
+        (
+            path
+            for prefix in LEGACY_SEMANTIC_SOURCE_ROOTS
+            for path in (root / prefix).rglob("*")
+            if path.is_file()
+        ),
+        key=lambda path: path.relative_to(root).as_posix(),
+    )
+    records: list[dict[str, object]] = []
+    for path in paths:
+        relative = path.relative_to(root).as_posix()
+        source = sources_by_path.get(relative)
+        if source is None or source.content_sha256 is None:
+            raise CanonError(
+                "LEGACY_SEMANTIC_MIGRATION_SOURCE_UNREGISTERED",
+                "legacy source must have digest-bound repo provenance",
+                path,
+            )
+        raw = path.read_bytes()
+        digest = hashlib.sha256(raw).hexdigest()
+        try:
+            source_text = raw.decode("utf-8")
+        except UnicodeDecodeError as exc:
+            raise CanonError(
+                "LEGACY_SEMANTIC_MIGRATION_SOURCE_ENCODING",
+                "legacy source must be UTF-8 text",
+                path,
+            ) from exc
+        source_claims = claims_by_source.get(source.source_id, [])
+        records.append(
+            {
+                "active_requirement_ids": sorted(
+                    {
+                        claim["target_id"]
+                        for claim in source_claims
+                        if isinstance(claim.get("target_id"), str)
+                        and claim.get("disposition") in {"keep", "rewrite", "compose"}
+                        and claim["target_id"] in active_requirement_ids
+                    }
+                ),
+                "authority_posture": "historical_superseded",
+                "canonical_owner_id": LEGACY_SEMANTIC_OWNER_ID,
+                "claim_ids": sorted(
+                    claim["claim_id"]
+                    for claim in source_claims
+                    if isinstance(claim.get("claim_id"), str)
+                ),
+                "content_sha256": digest,
+                "registered_content_sha256": source.content_sha256,
+                "semantic_record_id": (
+                    "LEGACY-SEMANTIC-"
+                    + hashlib.sha256(relative.encode("utf-8")).hexdigest()[:16].upper()
+                ),
+                "source_id": source.source_id,
+                "source_path": relative,
+                "source_text": source_text,
+            }
+        )
+    return {
+        "canonical_owner_id": LEGACY_SEMANTIC_OWNER_ID,
+        "schema_version": 1,
+        "sources": records,
+    }
+
+
+def validate_legacy_semantic_migration(
+    root: Path, ledger_path: Path | None = None
+) -> dict[str, object]:
+    """Validate migrated records after legacy-tree deletion."""
+    path = ledger_path or root / "docs/canon/migration/legacy-semantic-migration.json"
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise CanonError(
+            "LEGACY_SEMANTIC_MIGRATION_INVALID",
+            "legacy semantic migration ledger must be readable JSON",
+            path,
+        ) from exc
+    if (
+        not isinstance(payload, dict)
+        or payload.get("schema_version") != 1
+        or payload.get("canonical_owner_id") != LEGACY_SEMANTIC_OWNER_ID
+        or not isinstance(payload.get("sources"), list)
+    ):
+        raise CanonError(
+            "LEGACY_SEMANTIC_MIGRATION_INVALID",
+            "ledger header must identify the active migration owner and sources",
+            path,
+        )
+    expected = {
+        record.repo_path: record
+        for record in load_source_catalog(root / "docs/canon/migration/source-catalog.json")
+        if record.repo_path is not None
+        and any(record.repo_path.startswith(prefix + "/") for prefix in LEGACY_SEMANTIC_SOURCE_ROOTS)
+        and not record.authority_claim.startswith("historical deleted repo provenance")
+    }
+    try:
+        disposition_payload = json.loads(
+            (root / "docs/canon/migration/claim-dispositions.json").read_text(
+                encoding="utf-8"
+            )
+        )
+    except (OSError, json.JSONDecodeError) as exc:
+        raise CanonError(
+            "LEGACY_SEMANTIC_MIGRATION_DISPOSITIONS_INVALID",
+            "claim-disposition evidence must be readable JSON",
+            path,
+        ) from exc
+    claims = disposition_payload.get("claims") if isinstance(disposition_payload, dict) else None
+    if not isinstance(claims, list):
+        raise CanonError(
+            "LEGACY_SEMANTIC_MIGRATION_DISPOSITIONS_INVALID",
+            "claim-disposition evidence must contain claims",
+            path,
+        )
+    active_requirement_ids = _current_requirement_ids(root)
+    claims_by_source: dict[str, list[dict[str, object]]] = {}
+    for claim in claims:
+        if isinstance(claim, dict) and isinstance(claim.get("source_id"), str):
+            claims_by_source.setdefault(claim["source_id"], []).append(claim)
+    paths: list[str] = []
+    for record in payload["sources"]:
+        if not isinstance(record, dict):
+            raise CanonError("LEGACY_SEMANTIC_MIGRATION_INVALID", "source record must be an object", path)
+        source_path = record.get("source_path")
+        source_text = record.get("source_text")
+        if (
+            not isinstance(source_path, str)
+            or not isinstance(source_text, str)
+            or record.get("canonical_owner_id") != LEGACY_SEMANTIC_OWNER_ID
+            or record.get("authority_posture") != "historical_superseded"
+            or not isinstance(record.get("semantic_record_id"), str)
+            or not isinstance(record.get("source_id"), str)
+            or not isinstance(record.get("registered_content_sha256"), str)
+            or not isinstance(record.get("claim_ids"), list)
+            or not isinstance(record.get("active_requirement_ids"), list)
+        ):
+            raise CanonError("LEGACY_SEMANTIC_MIGRATION_INVALID", "source record is incomplete", path)
+        source = expected.get(source_path)
+        if source is None or source.content_sha256 is None:
+            raise CanonError("LEGACY_SEMANTIC_MIGRATION_SOURCE_UNKNOWN", "ledger source is not a legacy catalog record", path)
+        if (
+            record["source_id"] != source.source_id
+            or record.get("registered_content_sha256") != source.content_sha256
+            or hashlib.sha256(source_text.encode("utf-8")).hexdigest()
+            != record.get("content_sha256")
+        ):
+            raise CanonError("LEGACY_SEMANTIC_MIGRATION_DIGEST_MISMATCH", "ledger source bytes do not match registered provenance", path)
+        mapped_claims = claims_by_source.get(source.source_id, [])
+        expected_claim_ids = sorted(
+            claim["claim_id"]
+            for claim in mapped_claims
+            if isinstance(claim.get("claim_id"), str)
+        )
+        expected_active_requirements = sorted(
+            {
+                claim["target_id"]
+                for claim in mapped_claims
+                if isinstance(claim.get("target_id"), str)
+                and claim.get("disposition") in {"keep", "rewrite", "compose"}
+                and claim["target_id"] in active_requirement_ids
+            }
+        )
+        if (
+            record["claim_ids"] != expected_claim_ids
+            or record["active_requirement_ids"] != expected_active_requirements
+        ):
+            raise CanonError(
+                "LEGACY_SEMANTIC_MIGRATION_MAPPING_MISMATCH",
+                "ledger claim and active-requirement mappings must match disposition evidence",
+                path,
+            )
+        paths.append(source_path)
+    if paths != sorted(expected) or len(paths) != len(set(paths)):
+        raise CanonError("LEGACY_SEMANTIC_MIGRATION_COVERAGE_INCOMPLETE", "ledger must cover each legacy catalog source exactly once", path)
+    return payload
+
+
+def _current_requirement_ids(root: Path) -> frozenset[str]:
+    """Return only requirements registered by the current normative canon."""
+
+    from tools.ambitions_canon.manifest import load_documents, load_manifest
+    from tools.ambitions_canon.registry import build_registry
+
+    manifest = load_manifest(root)
+    registry = build_registry(manifest, load_documents(root, manifest))
+    return frozenset(item.requirement_id for item in registry.requirements)
 
 
 def _parse_catalog_bytes(raw: bytes, path: Path) -> tuple[SourceRecord, ...]:

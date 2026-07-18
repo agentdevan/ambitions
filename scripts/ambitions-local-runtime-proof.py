@@ -16,8 +16,11 @@ from meaningful_mutation_registry import parse_registry_file
 
 ROOT = Path(__file__).resolve().parents[1]
 ARCHITECTURE_INVENTORY = ROOT / "scripts" / "ambitions-architecture-inventory.py"
-IMPLEMENTATION_TRUTH = ROOT / "docs" / "truth" / "IMPLEMENTATION_TRUTH.md"
-PRODUCT_DESIGN_TRUTH = ROOT / "docs" / "truth" / "PRODUCT_DESIGN_TRUTH.md"
+LEGACY_SEMANTIC_LEDGER = ROOT / "docs" / "canon" / "migration" / "legacy-semantic-migration.json"
+PROOF_CEILING_SOURCES = (
+    "LEGACY-SEMANTIC-CE1E8C8831E909B1",
+    "LEGACY-SEMANTIC-43E0D80464B28692",
+)
 KNOWN_ISSUES = ROOT / "docs" / "qa" / "KNOWN_ISSUES.md"
 PR_REVIEW_WORKFLOW = ROOT / ".github" / "workflows" / "ambitions-pr-review.yml"
 MEANINGFUL_MUTATION_REGISTRY = ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Commands" / "MeaningfulMutationRegistry.swift"
@@ -467,6 +470,19 @@ def relative(path: Path) -> str:
 
 def read_text(path: Path) -> str:
     return path.read_text(encoding="utf-8", errors="replace")
+
+
+def legacy_semantic_source_text(record_id: str) -> str | None:
+    if not LEGACY_SEMANTIC_LEDGER.exists():
+        return None
+    try:
+        payload = json.loads(read_text(LEGACY_SEMANTIC_LEDGER))
+    except json.JSONDecodeError:
+        return None
+    for source in payload.get("sources", []):
+        if source.get("semantic_record_id") == record_id and isinstance(source.get("source_text"), str):
+            return source["source_text"]
+    return None
 
 
 def normalize_source_atlas_egress_value(value: str) -> str:
@@ -2283,20 +2299,19 @@ def check_runtime_doctor_local_drift_repair_gate() -> CheckResult:
 
 def check_proof_ceiling_and_ci_evidence() -> CheckResult:
     findings: list[Finding] = []
-    truth_files = [IMPLEMENTATION_TRUTH, PRODUCT_DESIGN_TRUTH]
-    for path in truth_files:
-        if not path.exists():
+    for record_id in PROOF_CEILING_SOURCES:
+        text = legacy_semantic_source_text(record_id)
+        if text is None:
             findings.append(
                 Finding(
                     "blocker",
-                    "missing-truth-file",
-                    relative(path),
+                    "missing-semantic-record",
+                    record_id,
                     None,
-                    "Required truth file is missing.",
+                    "Required historical semantic record is missing from the canonical migration ledger.",
                 )
             )
             continue
-        text = read_text(path)
         lines = text.splitlines()
         for code, phrase in TRUTH_GAP_PATTERNS:
             if phrase not in text:
@@ -2306,7 +2321,7 @@ def check_proof_ceiling_and_ci_evidence() -> CheckResult:
                 Finding(
                     "blocker",
                     code,
-                    relative(path),
+                    record_id,
                     line_number,
                     f"Truth file still declares this LocalRuntimeOS proof gap: {phrase}",
                 )

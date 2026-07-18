@@ -23197,7 +23197,7 @@
       "inventory_only": true,
       "kind": "doc",
       "line_count": 457,
-      "path": "docs/truth/FIGMA_PRODUCTION_GATE_ADDENDUM.md"
+      "path": "docs/canon/migration/legacy-semantic-migration.json"
     },
     {
       "candidate_vsp_ids": [
@@ -23212,7 +23212,7 @@
       "inventory_only": true,
       "kind": "doc",
       "line_count": 375,
-      "path": "docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md"
+      "path": "docs/canon/migration/legacy-semantic-migration.json"
     },
     {
       "candidate_vsp_ids": [
@@ -23227,7 +23227,7 @@
       "inventory_only": true,
       "kind": "doc",
       "line_count": 464,
-      "path": "docs/truth/IMPLEMENTATION_TRUTH.md"
+      "path": "docs/canon/migration/legacy-semantic-migration.json"
     },
     {
       "candidate_vsp_ids": [
@@ -23244,7 +23244,7 @@
       "inventory_only": true,
       "kind": "doc",
       "line_count": 933,
-      "path": "docs/truth/PRODUCT_DESIGN_TRUTH.md"
+      "path": "docs/canon/migration/legacy-semantic-migration.json"
     },
     {
       "candidate_vsp_ids": [
@@ -23257,7 +23257,7 @@
       "inventory_only": true,
       "kind": "doc",
       "line_count": 404,
-      "path": "docs/truth/RELEASE_TRUTH.md"
+      "path": "docs/canon/migration/legacy-semantic-migration.json"
     },
     {
       "candidate_vsp_ids": [

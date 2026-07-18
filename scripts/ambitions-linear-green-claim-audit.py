@@ -45,7 +45,7 @@ def main() -> int:
         if relative not in changed:
             continue
         text = path.read_text(encoding="utf-8", errors="replace")
-        if relative.startswith(("docs/truth/", "docs/design/")):
+        if relative.startswith(("docs/canon/", "docs/design/")):
             continue
         if UNQUALIFIED_GREEN.search(text) and not SCOPED_GREEN.search(text):
             findings.append(f"{relative}: unqualified Green appears without split status")

@@ -2025,11 +2025,18 @@ class FutureTaskAndSelfProtectionTests(unittest.TestCase):
         self.assertNotIn("authorized_deletion_manifest", rules["TASK-28"])
         self.assertEqual(
             rules["TASK-29"]["authorized_deletion_manifest"],
-            "docs/canon/migration/purge-plan.toml",
+            "docs/canon/migration/task-29-legacy-purge-plan.toml",
         )
         self.assertIn(
-            "docs/canon/migration/purge-plan.toml",
+            "docs/canon/migration/task-29-legacy-purge-plan.toml",
             rules["TASK-29"]["authorized_files"],
+        )
+        self.assertFalse(
+            any(
+                path.startswith(("docs/truth/", "docs/constitution/"))
+                for path in rules["TASK-29"]["authorized_files"]
+            ),
+            "Task 29 legacy deletions must be authorized only by its bound purge plan",
         )
 
     def test_task_26_and_29_forbid_protected_enforcement_scope_and_files(self) -> None:
@@ -2062,11 +2069,16 @@ class FutureTaskAndSelfProtectionTests(unittest.TestCase):
                 rule = rules[task_id]
                 self.assertTrue(denied["scopes"].isdisjoint(rule["scopes"]))
                 self.assertTrue(denied["files"].isdisjoint(rule["authorized_files"]))
-                self.assertFalse(
-                    any(
-                        path.startswith(".github/workflows/")
-                        for path in rule["authorized_files"]
-                    )
+                workflows = {
+                    path
+                    for path in rule["authorized_files"]
+                    if path.startswith(".github/workflows/")
+                }
+                self.assertEqual(
+                    workflows,
+                    {".github/workflows/ambitions-constitution-audit.yml"}
+                    if task_id == "TASK-29"
+                    else set(),
                 )
                 self.assertIn(
                     "protected enforcement is explicitly excluded",

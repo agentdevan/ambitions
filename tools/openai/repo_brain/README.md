@@ -9,7 +9,7 @@ This layer provides a deterministic local index and query path for tool-assisted
 
 ## Allowed index inputs
 
-- `docs/truth/**`
+- `docs/canon/**`
 - `docs/codex/**`
 - `docs/audits/**`
 - `prompts/batches/**`

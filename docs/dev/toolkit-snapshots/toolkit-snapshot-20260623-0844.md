@@ -12,7 +12,7 @@
 A comprehensive readiness audit of the local macOS development environment was performed on `main` at commit `79e044178afd4aa8de4a0b6cd969c0416e1cdcdc`.
 
 Overall, the machine is highly capable, and the core iOS compilation toolchain works perfectly. The project generated and compiled successfully in **2m 19s** for the iOS 26.5 Simulator. However, the environment is **Ready with Caveats** due to two main issues:
-1. **Broken Quality Gate Tooling:** The python validation script `scripts/ambitions-quality-gate.py` crashes because it depends on `scripts/ambitions-architecture-inventory.py`, which is looking for a deleted header (`## 17. Final Architecture Tree`) in `docs/truth/PRODUCT_DESIGN_TRUTH.md`. This is a blocking tool bug that must be repaired before starting `AMB-1191` to ensure correct local audits can run.
+1. **Broken Quality Gate Tooling:** The python validation script `scripts/ambitions-quality-gate.py` crashes because it depends on `scripts/ambitions-architecture-inventory.py`, which is looking for a deleted header (`## 17. Final Architecture Tree`) in `docs/canon/migration/legacy-semantic-migration.json`. This is a blocking tool bug that must be repaired before starting `AMB-1191` to ensure correct local audits can run.
 2. **Missing SF Symbols Application:** SF Symbols is not installed in `/Applications`. This is required for visual token mapping and native iOS glyph registry inspection.
 
 ---
@@ -213,7 +213,7 @@ The environment is ready to compile and build Ambitions, but the following issue
 ## 14. Validation Repair Train Closeout (2026-06-23 09:23)
 
 A bounded validation repair train was executed on `main` before starting `AMB-1191`:
-1. **Restored the Canonical Final Architecture Tree:** Section `## 17. Final Architecture Tree` was merged back into `docs/truth/PRODUCT_DESIGN_TRUTH.md` without losing any of the 2026-06-22 remediation canon. This successfully resolved the `ambitions-architecture-inventory.py` parser mismatch (returning `GREEN final-tree parity achieved`).
+1. **Restored the Canonical Final Architecture Tree:** Section `## 17. Final Architecture Tree` was merged back into `docs/canon/migration/legacy-semantic-migration.json` without losing any of the 2026-06-22 remediation canon. This successfully resolved the `ambitions-architecture-inventory.py` parser mismatch (returning `GREEN final-tree parity achieved`).
 2. **Excluded Policy/Audit Definition Files from Quality Gate Scans:** A narrow allowlist (`POLICY_AUDIT_FILES`) was added to `scripts/ambitions-quality-gate.py` containing `ForbiddenTopLevelTerms.swift`, `ForbiddenLanguageAudit.swift`, `LifeShapeFakePrecisionAudit.swift`, and `UserLanguageCategoryAudit.swift`. This prevents forbidden-language false positives on the definitions/audits themselves.
 3. **Successful Execution:** The quality gate command `python3 scripts/ambitions-quality-gate.py` now completes successfully with `GREEN all strict quality gates passed`. The local build `bash scripts/build-local.sh` compiles cleanly without error.
 

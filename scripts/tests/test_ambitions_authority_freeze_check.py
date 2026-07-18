@@ -23,8 +23,8 @@ class AuthorityFreezeTests(unittest.TestCase):
         self.module = load_module()
 
     def test_detects_new_truth_file_outside_canon(self):
-        paths = ["docs/truth/README.md", "docs/product/NEW_PRODUCT_TRUTH.md"]
-        baseline = {"docs/truth/README.md"}
+        paths = ["docs/canon/migration/legacy-semantic-migration.json", "docs/product/NEW_PRODUCT_TRUTH.md"]
+        baseline = {"docs/canon/migration/legacy-semantic-migration.json"}
         self.assertEqual(
             self.module.new_authority_paths(paths, baseline),
             ("docs/product/NEW_PRODUCT_TRUTH.md",),
@@ -201,7 +201,7 @@ class AuthorityFreezeTests(unittest.TestCase):
             ("path-not-string", {"schema_version": 1, "paths": [1]}),
             (
                 "path-not-string",
-                {"schema_version": 1, "paths": ["docs/truth/README.md", 1]},
+                {"schema_version": 1, "paths": ["docs/canon/migration/legacy-semantic-migration.json", 1]},
             ),
             ("path-empty", {"schema_version": 1, "paths": [""]}),
             ("path-absolute", {"schema_version": 1, "paths": ["/docs/truth.md"]}),

@@ -62,10 +62,13 @@ from tools.ambitions_canon.external_authority import (
 )
 from tools.ambitions_canon.manifest import load_documents, load_manifest
 from tools.ambitions_canon.migration import (
+    _write_claim_json,
+    build_legacy_semantic_migration,
     claim_coverage,
     import_claim_batches,
     register_repo_sources,
     register_source,
+    validate_legacy_semantic_migration,
     validate_compact_semantic_loss_review,
     validate_materialized_specification_target_references,
     validate_semantic_loss_review,
@@ -423,6 +426,20 @@ def main(argv: Sequence[str] | None = None) -> int:
         "semantic-verify",
         help="verify semantic evidence against protected ignored claim bytes",
     )
+    legacy_semantic_parser = migration_subparsers.add_parser(
+        "legacy-semantic",
+        help="materialize or verify digest-bound legacy semantic records",
+    )
+    legacy_semantic_mode = legacy_semantic_parser.add_mutually_exclusive_group(
+        required=True
+    )
+    legacy_semantic_mode.add_argument("--write", action="store_true")
+    legacy_semantic_mode.add_argument("--check", action="store_true")
+    legacy_semantic_parser.add_argument(
+        "--output",
+        type=Path,
+        default=Path("docs/canon/migration/legacy-semantic-migration.json"),
+    )
     conflicts_parser = subparsers.add_parser(
         "conflicts", help="report shadow conceptual-conflict dockets"
     )
@@ -551,6 +568,27 @@ def main(argv: Sequence[str] | None = None) -> int:
 def _migration(root: Path, arguments: argparse.Namespace) -> int:
     if arguments.migration_command == "claims":
         return _migration_claims(root, arguments)
+    if arguments.migration_command == "legacy-semantic":
+        output = _rooted(root, arguments.output)
+        try:
+            if arguments.write:
+                payload = build_legacy_semantic_migration(root)
+                _write_claim_json(output, payload)
+                print(
+                    "GREEN ambitions canon migration legacy-semantic "
+                    f"write sources={len(payload['sources'])}"
+                )
+                return 0
+            payload = validate_legacy_semantic_migration(root, output)
+            print(
+                "GREEN ambitions canon migration legacy-semantic "
+                f"check sources={len(payload['sources'])}"
+            )
+            return 0
+        except CanonError as error:
+            location = error.path.as_posix() if error.path is not None else "<migration>"
+            print(f"P0_BLOCKER {error.code} {location}:{error.line or 0} {error.message}")
+            return 1
     catalog = arguments.catalog
     if not catalog.is_absolute():
         catalog = root / catalog
@@ -633,8 +671,6 @@ def _migration_claims(root: Path, arguments: argparse.Namespace) -> int:
                 target_class=arguments.target_class,
             )
             if arguments.output is not None:
-                from tools.ambitions_canon.migration import _write_claim_json
-
                 _write_claim_json(_rooted(root, arguments.output), report.to_dict())
             if not report.complete:
                 for item in report.uncovered:

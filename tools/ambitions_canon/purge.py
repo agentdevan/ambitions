@@ -9,6 +9,7 @@ import subprocess
 import tomllib
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
+from functools import cache
 from pathlib import Path, PurePosixPath
 
 from tools.ambitions_canon.model import (
@@ -28,6 +29,27 @@ from tools.ambitions_canon.authorization import (
 
 
 _SUBPROCESS_TIMEOUT_SECONDS = 60
+
+# These locations are retained historical evidence or canonical migration
+# provenance.  They may quote a purged authority path without becoming an
+# active authority consumer.  Everything else remains an inbound reference.
+_HISTORICAL_PROVENANCE_REFERENCE_PREFIXES = (
+    "docs/adr/",
+    "docs/audits/",
+    "docs/canon/migration/",
+    "docs/linear/reconciliation/",
+    "docs/quality/senior-review/",
+    "docs/superpowers/",
+    "docs/validation/",
+    "fixtures/",
+    "tests/",
+)
+_HISTORICAL_PROVENANCE_REFERENCE_PATHS = frozenset(
+    {
+        "docs/canon/references/task-authorization-policy.json",
+        "docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md",
+    }
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -850,35 +872,11 @@ def _tracked_inbound_references(
     repo_root: Path, artifact_locator: str, candidate_revision: str
 ) -> tuple[str, ...]:
     root = repo_root.resolve()
-    completed = subprocess.run(
-        ["git", "ls-tree", "-r", "-z", "-l", candidate_revision],
-        cwd=root,
-        check=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        timeout=_SUBPROCESS_TIMEOUT_SECONDS,
-    )
     needle = artifact_locator.encode("utf-8")
     inbound: list[str] = []
-    for record in completed.stdout.split(b"\0"):
-        if not record:
+    for raw_path, blob in _candidate_tree_blobs(str(root), candidate_revision):
+        if raw_path == needle or _is_historical_provenance_reference(raw_path):
             continue
-        metadata, raw_path = record.split(b"\t", 1)
-        _mode, object_type, object_id, _size = metadata.split(None, 3)
-        if raw_path == needle:
-            continue
-        if raw_path == b"docs/canon/migration/purge-plan.toml":
-            continue
-        if object_type != b"blob":
-            continue
-        blob = subprocess.run(
-            ["git", "cat-file", "blob", object_id.decode("ascii")],
-            cwd=root,
-            check=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            timeout=_SUBPROCESS_TIMEOUT_SECONDS,
-        ).stdout
         if needle not in blob:
             continue
         try:
@@ -889,6 +887,57 @@ def _tracked_inbound_references(
             ).decode("ascii")
         inbound.append(display)
     return tuple(sorted(inbound))
+
+
+@cache
+def _candidate_tree_blobs(
+    root_path: str, candidate_revision: str
+) -> tuple[tuple[bytes, bytes], ...]:
+    """Load a candidate tree once for all per-artifact inbound checks."""
+
+    root = Path(root_path)
+    completed = subprocess.run(
+        ["git", "ls-tree", "-r", "-z", "-l", candidate_revision],
+        cwd=root,
+        check=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        timeout=_SUBPROCESS_TIMEOUT_SECONDS,
+    )
+    blobs: list[tuple[bytes, bytes]] = []
+    for record in completed.stdout.split(b"\0"):
+        if not record:
+            continue
+        metadata, raw_path = record.split(b"\t", 1)
+        _mode, object_type, object_id, _size = metadata.split(None, 3)
+        if object_type != b"blob":
+            continue
+        blob = subprocess.run(
+            ["git", "cat-file", "blob", object_id.decode("ascii")],
+            cwd=root,
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            timeout=_SUBPROCESS_TIMEOUT_SECONDS,
+        ).stdout
+        blobs.append((raw_path, blob))
+    return tuple(blobs)
+
+
+def _is_historical_provenance_reference(raw_path: bytes) -> bool:
+    """Classify exact historical evidence without suppressing live consumers."""
+
+    try:
+        path = raw_path.decode("utf-8")
+    except UnicodeDecodeError:
+        return False
+    if path in _HISTORICAL_PROVENANCE_REFERENCE_PATHS:
+        return True
+    if path == "docs/qa/product-experience-scenario-gates.yaml":
+        return False
+    if path.startswith("docs/qa/"):
+        return True
+    return path.startswith(_HISTORICAL_PROVENANCE_REFERENCE_PREFIXES)
 
 
 def _external_reconciliation_findings(

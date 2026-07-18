@@ -76,7 +76,7 @@ enum ExportImportResetDataScopeMatrix {
             detail: "No cloud account, sync payload, or hosted private storage is part of the local portable package.",
             sourceContractFiles: [
                 "Native/Ambitions/Core/LocalRuntimeOS/Repair/PortableSnapshotContracts.swift",
-                "docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md"
+                "docs/canon/migration/legacy-semantic-migration.json"
             ]
         ),
         makeExcludedScopeRow(

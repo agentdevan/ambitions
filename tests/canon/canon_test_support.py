@@ -83,6 +83,14 @@ def copy_figma_reconciliation_evidence(
         dirs_exist_ok=True,
     )
 
+    search_r2_source = (
+        repository_root / "docs/qa/evidence/2026-07-17-canon-search-authority-r2"
+    )
+    search_r2_target = (
+        destination_root / "docs/qa/evidence/2026-07-17-canon-search-authority-r2"
+    )
+    shutil.copytree(search_r2_source, search_r2_target, dirs_exist_ok=True)
+
     approval_source = repository_root / "docs/design/provenance/owner-approvals"
     approval_target = destination_root / "docs/design/provenance/owner-approvals"
     shutil.copytree(approval_source, approval_target, dirs_exist_ok=True)

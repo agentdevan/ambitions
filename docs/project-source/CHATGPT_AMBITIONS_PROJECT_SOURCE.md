@@ -2,8 +2,8 @@
 
 ## Source precedence
 
-1. `docs/truth/PRODUCT_DESIGN_TRUTH.md`
-2. `docs/truth/2026-06-22-runtime-remediation-decision-register.md`
+1. `docs/canon/migration/legacy-semantic-migration.json`
+2. `docs/canon/migration/legacy-semantic-migration.json`
 3. `docs/qa/remediation/2026-06-22-codex-remediation-law.md`
 4. matching dossier in `docs/qa/remediation/dossiers/`
 5. `docs/qa/KNOWN_ISSUES.md`

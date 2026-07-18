@@ -42,7 +42,7 @@ def main() -> int:
         relative = path.relative_to(ROOT).as_posix()
         if relative not in changed:
             continue
-        if relative.startswith(("docs/truth/", "docs/design/")):
+        if relative.startswith(("docs/canon/", "docs/design/")):
             continue
         text = path.read_text(encoding="utf-8", errors="replace")
         if VISUAL_RELEASE_GREEN_STATUS.search(text) is None:

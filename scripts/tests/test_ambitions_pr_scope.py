@@ -27,8 +27,8 @@ class PullRequestScopeTests(unittest.TestCase):
     def test_active_law_scope_is_explicit_and_excludes_shadow_canon(self):
         for path in (
             "AGENTS.md",
-            "docs/constitution/AMBITION_CONSTITUTION.md",
-            "docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md",
+            "docs/canon/CONSTITUTION.md",
+            "docs/canon/migration/legacy-semantic-migration.json",
             "Native/Ambitions/App/AmbitionsApp.swift",
             "Packages/AmbitionsDesignSystem/Package.swift",
             "project.yml",

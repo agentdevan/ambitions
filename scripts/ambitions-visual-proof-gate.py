@@ -8,8 +8,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 REQUIRED = [
-    "docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md",
-    "docs/truth/README.md",
+    "docs/canon/migration/legacy-semantic-migration.json",
+    "docs/canon/migration/legacy-semantic-migration.json",
     "docs/design/targets/time/lifeshape_field_visual_target.md",
     "docs/design/targets/time/lifeshape_field_acceptance_rubric.md",
     "docs/design/red_fixtures/time/current_failed_lifeshape_field.png",
@@ -20,7 +20,7 @@ REQUIRED = [
 ]
 
 REQUIRED_SNIPPETS = {
-    "docs/truth/README.md": ["Global Shell Integration Law", "Full-bleed means atmosphere bleeds"],
+    "docs/canon/migration/legacy-semantic-migration.json": ["Global Shell Integration Law", "Full-bleed means atmosphere bleeds"],
     "docs/design/targets/time/lifeshape_field_visual_target.md": ["full-bleed", "LifeShape Field Band", "not a radial dial", "Integrated Continuity Dock"],
     "docs/design/targets/time/lifeshape_field_acceptance_rubric.md": ["Shell Integration", "No hard header slab", "No pasted dock pill"],
 }
@@ -66,7 +66,7 @@ def main() -> int:
         relative = path.relative_to(ROOT).as_posix()
         if relative not in changed:
             continue
-        if relative.startswith(("docs/truth/", "docs/design/targets/", "docs/design/red_fixtures/")):
+        if relative.startswith(("docs/canon/", "docs/design/targets/", "docs/design/red_fixtures/")):
             continue
         text = path.read_text(encoding="utf-8", errors="replace").lower()
         for phrase in FORBIDDEN_CLOSEOUT_PHRASES:

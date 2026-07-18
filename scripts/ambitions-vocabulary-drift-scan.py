@@ -11,12 +11,12 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 
 SCAN_FILES = [
-    ROOT / "docs/truth/PRODUCT_DESIGN_TRUTH.md",
-    ROOT / "docs/truth/PRODUCT_ORIGIN_TRUTH.md",
-    ROOT / "docs/truth/PRODUCT_MOAT_TRUTH.md",
-    ROOT / "docs/truth/PRODUCT_EXPERIENCE_CANON.md",
-    ROOT / "docs/truth/CODEX_START_HERE.md",
-    ROOT / "docs/truth/CODEX_PROCESS_TRUTH.md",
+    ROOT / "docs/canon/migration/legacy-semantic-migration.json",
+    ROOT / "docs/canon/migration/legacy-semantic-migration.json",
+    ROOT / "docs/canon/migration/legacy-semantic-migration.json",
+    ROOT / "docs/canon/migration/legacy-semantic-migration.json",
+    ROOT / "docs/canon/migration/legacy-semantic-migration.json",
+    ROOT / "docs/canon/migration/legacy-semantic-migration.json",
     ROOT / "AGENTS.md",
 ]
 

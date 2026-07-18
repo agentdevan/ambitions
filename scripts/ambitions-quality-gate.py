@@ -111,7 +111,7 @@ REQUIRED_ARCHITECTURE_PATHS = [
     "Native/Ambitions/Scenarios/ScenarioMatrix.swift",
     "docs/validation/master_lifeshape_foldin_ledger.md",
     "docs/validation/lifeshape_control_plane_ledger.md",
-    "docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md",
+    "docs/canon/migration/legacy-semantic-migration.json",
     "docs/design/targets/time/lifeshape_field_visual_target.md",
     "docs/design/targets/time/lifeshape_field_acceptance_rubric.md",
     "docs/design/red_fixtures/time/current_failed_lifeshape_field.png",

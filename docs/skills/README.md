@@ -8,10 +8,10 @@ These docs-local skills are mandatory operating instructions for Ambitions UI an
 Canonical policy lives in:
 
 ```text
-docs/truth/FIGMA_PRODUCTION_GATE_ADDENDUM.md
+docs/canon/migration/legacy-semantic-migration.json
 ```
 
-If a skill conflicts with that addendum or any `docs/truth/*` file, the truth file wins and the skill must be updated.
+If a skill conflicts with that addendum or any `docs/canon/*` file, the truth file wins and the skill must be updated.
 
 ## Skill Selection
 

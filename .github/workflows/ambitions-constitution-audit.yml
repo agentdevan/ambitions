@@ -3,16 +3,16 @@ name: Ambitions Constitution Audit
 on:
   pull_request:
     paths:
-      - "docs/truth/PRODUCT_DESIGN_TRUTH.md"
-      - "docs/constitution/**"
+      - "docs/canon/migration/legacy-semantic-migration.json"
+      - "docs/canon/**"
       - "scripts/ambitions-constitution-audit.py"
       - ".github/workflows/ambitions-constitution-audit.yml"
   push:
     branches:
       - main
     paths:
-      - "docs/truth/PRODUCT_DESIGN_TRUTH.md"
-      - "docs/constitution/**"
+      - "docs/canon/migration/legacy-semantic-migration.json"
+      - "docs/canon/**"
       - "scripts/ambitions-constitution-audit.py"
       - ".github/workflows/ambitions-constitution-audit.yml"
   workflow_dispatch:

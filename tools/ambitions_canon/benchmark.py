@@ -42,15 +42,7 @@ BENCHMARK_REPORT = Path("docs/canon/generated/codex-consumption-benchmark.md")
 BENCHMARK_REPOSITORY_STATE = "benchmark-repository-state-v1"
 SEMANTIC_REVIEW_PACK_DIR = Path(".codex/canon-semantic-review")
 SEMANTIC_REVIEW_TRUTH_PATHS = (
-    Path("docs/truth/README.md"),
-    Path("docs/truth/CODEX_START_HERE.md"),
-    Path("docs/truth/PRIVATE_LIFE_ORCHESTRATION_TRUTH.md"),
-    Path("docs/truth/PRODUCT_DESIGN_TRUTH.md"),
-    Path("docs/truth/PRODUCT_EXPERIENCE_CANON.md"),
-    Path("docs/truth/IMPLEMENTATION_TRUTH.md"),
-    Path("docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md"),
-    Path("docs/truth/RELEASE_TRUTH.md"),
-    Path("docs/truth/CODEX_PROCESS_TRUTH.md"),
+    Path("docs/canon/migration/legacy-semantic-migration.json"),
 )
 ROOT_SURFACE_LAWS = frozenset(
     {

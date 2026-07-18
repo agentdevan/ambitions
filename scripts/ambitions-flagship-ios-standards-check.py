@@ -56,17 +56,17 @@ APPROVED_SKIP_REASON_PATTERNS = [
 ]
 
 REQUIRED_TRUTH_SNIPPETS = {
-    "docs/truth/CODEX_PROCESS_TRUTH.md": [
+    "docs/canon/migration/legacy-semantic-migration.json": [
         "Flagship iOS engineering standard",
         "zero unexpected failures, zero expected failures, zero unreviewed skips",
         "Wrapper timeouts are not test results",
     ],
-    "docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md": [
+    "docs/canon/migration/legacy-semantic-migration.json": [
         "Flagship UI Test Standard",
         "no expected-failure lane may be counted as passing proof",
         "tests must assert rendered hierarchy or frames",
     ],
-    "docs/truth/RELEASE_TRUTH.md": [
+    "docs/canon/migration/legacy-semantic-migration.json": [
         "Flagship Test Evidence Standard",
         "expected failures count as failures",
         "wrapper timeout is inconclusive",

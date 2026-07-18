@@ -17,6 +17,6 @@ then use the bounded canon pack and tracked-change authorization flow it names.
 - XcodeGen source: [project.yml](project.yml)
 - Design-system package: [Packages/AmbitionsDesignSystem/Package.swift](Packages/AmbitionsDesignSystem/Package.swift)
 
-The former `docs/truth/` and `docs/constitution/` trees are temporarily retained
+The former `docs/canon/` and `docs/canon/` trees are temporarily retained
 non-normative migration sources pending the governed purge. Source, tests, and
 current evidence establish implementation and proof claims; prose does not.

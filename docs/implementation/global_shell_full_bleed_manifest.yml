@@ -4,7 +4,7 @@
 # Independent visual review is required for accepted.
 
 issue: AMB-1180
-status_authority: docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md
+status_authority: docs/canon/migration/legacy-semantic-migration.json
 visual_target: docs/design/targets/time/lifeshape_field_visual_target.md
 artifact_manifest: docs/validation/global_shell_artifacts.json
 
