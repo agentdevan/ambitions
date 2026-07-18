@@ -497,6 +497,8 @@
         "docs/canon/migration/source-catalog.json",
         "docs/canon/migration/task-29-legacy-purge-plan.toml",
         "docs/canon/references/task-authorization-policy.json",
+        "docs/canon/registries/command-gate-approval-receipts.json",
+        "docs/canon/registries/command-gate-dependencies.json",
         "docs/design/provenance/generated/source-path-inventory.generated.json",
         "docs/design/provenance/vsp-provenance.json",
         "docs/dev/toolkit-snapshots/toolkit-snapshot-20260623-0844.md",
