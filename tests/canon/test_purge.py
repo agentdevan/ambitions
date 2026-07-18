@@ -656,6 +656,83 @@ def review_purge_inputs(*, claim_ids: tuple[str, ...] = ("CLAIM-1",)):
 
 
 class PurgeTrustAndTreeTests(unittest.TestCase):
+    def test_task29_owner_direct_receipt_binds_an_exact_gate_c_candidate(self) -> None:
+        """The Train 5 exception is exact-candidate-only, never a generic bypass."""
+        with tempfile.TemporaryDirectory() as directory:
+            repo = Path(directory)
+            artifact = repo / "docs/truth/OLD_CANON.md"
+            artifact.parent.mkdir(parents=True)
+            artifact.write_text("legacy\n", encoding="utf-8")
+            commit_tree(repo)
+            base = git(repo, "rev-parse", "HEAD")
+            base_tree = git(repo, "rev-parse", "HEAD^{tree}")
+            git(repo, "tag", "canon-baseline", base)
+            plan = build_purge_plan(catalog(), dispositions(), references(), base)
+            direct_plan = replace(
+                plan,
+                artifacts=tuple(
+                    replace(
+                        item,
+                        owner_approved=False,
+                        independent_review=False,
+                        owner_approval_attestation_sha256="",
+                        independent_review_attestation_sha256="",
+                    )
+                    for item in plan.artifacts
+                ),
+            )
+            git(repo, "rm", "-q", "docs/truth/OLD_CANON.md")
+            git(repo, "commit", "-qm", "gate c candidate")
+            candidate = git(repo, "rev-parse", "HEAD")
+            candidate_tree = git(repo, "rev-parse", "HEAD^{tree}")
+            operation_digest = purge_plan_digest(
+                direct_plan,
+                pre_delete_tree_sha=base_tree,
+                candidate_tree_sha=candidate_tree,
+                rollback_commit_sha=base,
+            )
+            owner_text = (
+                "I approve TASK-29 direct Gate C candidate "
+                f"{candidate} for purge operation {operation_digest}."
+            )
+            receipt = {
+                "schema_version": 1,
+                "receipt_type": "owner-direct-task29-gate-c",
+                "decision_id": "OWNER-TRAIN5-DIRECT-INTEGRATION-2026-07-17T234045Z",
+                "task_id": "TASK-29",
+                "pre_delete": {"commit_sha": base, "tree_sha": base_tree},
+                "candidate": {
+                    "commit_sha": candidate,
+                    "tree_sha": candidate_tree,
+                },
+                "rollback": {"commit_sha": base, "tree_sha": base_tree},
+                "artifact_ids": ["REPO-OLD-CANON"],
+                "purge_operation_digest": operation_digest,
+                "owner_approval": {
+                    "text": owner_text,
+                    "text_sha256": hashlib.sha256(
+                        owner_text.encode("utf-8")
+                    ).hexdigest(),
+                },
+                "exact_review": {
+                    "status": "complete_clean",
+                    "critical_findings": 0,
+                    "important_findings": 0,
+                    "review_package_sha256": "d" * 64,
+                    "reviewed_candidate_tree_sha": candidate_tree,
+                    "reviewed_purge_operation_digest": operation_digest,
+                },
+            }
+            findings = verify_purge_dry_run(
+                direct_plan,
+                repo,
+                registry("REQ-1"),
+                pre_delete_revision=base,
+                candidate_revision=candidate,
+                owner_direct_receipt=receipt,
+            )
+            self.assertEqual(findings, ())
+
     def test_plan_digest_and_attestations_bind_real_git_and_exact_context(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             repo = Path(directory)

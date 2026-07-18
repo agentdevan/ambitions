@@ -35,6 +35,24 @@ Focused Task 29 migration, authorization, and purge tests passed with Python
 legacy source deletion, Figma mutation, Linear mutation, protected-CI claim, or
 Gate C approval is included in this foundation.
 
+## Direct-receipt verification foundation
+
+The standard platform attestation verifier cannot authenticate the expressly
+approved Tasks 24–29 owner-direct exception. The Task 29 verifier therefore
+accepts one closed, local receipt only when it binds all of the following:
+
+- the exact Task 29 decision identifier and an owner text digest containing
+  the immutable candidate commit and purge-operation digest;
+- the pre-delete, candidate, and rollback commit/tree identities;
+- the complete sorted artifact-ID scope;
+- an exact-review package digest with zero Critical and Important findings;
+- a plan whose claim, inbound-link, external-reference, and unique-content
+  gates are already true, but whose owner and review gates remain false until
+  the direct receipt is supplied.
+
+This does not permit a generic local bypass, a different task, an unbound
+candidate, a self-approved plan, or a protected-CI claim.
+
 ## Next step and rollback
 
 The next step is to freeze a Gate C candidate from this commit, run its exact

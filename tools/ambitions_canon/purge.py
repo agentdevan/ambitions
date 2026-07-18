@@ -29,6 +29,7 @@ from tools.ambitions_canon.authorization import (
 
 
 _SUBPROCESS_TIMEOUT_SECONDS = 60
+_TASK29_OWNER_DIRECT_DECISION = "OWNER-TRAIN5-DIRECT-INTEGRATION-2026-07-17T234045Z"
 
 # These locations are retained historical evidence or canonical migration
 # provenance.  They may quote a purged authority path without becoming an
@@ -383,6 +384,7 @@ def verify_purge_dry_run(
     candidate_revision: str | None = None,
     owner_approval_attestations: Sequence[Mapping[str, object]] = (),
     independent_review_attestations: Sequence[Mapping[str, object]] = (),
+    owner_direct_receipt: Mapping[str, object] | None = None,
 ) -> tuple[Finding, ...]:
     """Verify eligibility without mutating any repository or external artifact."""
 
@@ -424,6 +426,36 @@ def verify_purge_dry_run(
         candidate_tree_sha=candidate_tree,
         rollback_commit_sha=rollback_commit,
     )
+    direct_receipt_valid = _valid_task29_owner_direct_receipt(
+        owner_direct_receipt,
+        plan,
+        plan_digest=plan_digest,
+        pre_delete_commit=pre_delete_commit,
+        pre_delete_tree=pre_delete_tree,
+        candidate_commit=candidate_commit,
+        candidate_tree=candidate_tree,
+        rollback_commit=rollback_commit,
+        rollback_tree=_resolve_tree(root, rollback_commit),
+    )
+    if owner_direct_receipt is not None and not direct_receipt_valid:
+        findings.append(
+            _finding(
+                "PURGE_OWNER_DIRECT_RECEIPT_INVALID",
+                "Task 29 owner-direct receipt is missing or scope-mismatched",
+            )
+        )
+    if direct_receipt_valid:
+        findings = [
+            finding
+            for finding in findings
+            if finding.code
+            not in {
+                "PURGE_OWNER_APPROVAL_MISSING",
+                "PURGE_OWNER_APPROVAL_UNVERIFIED",
+                "PURGE_REVIEW_MISSING",
+                "PURGE_REVIEW_UNVERIFIED",
+            }
+        ]
     evidence = _authenticated_purge_evidence(
         root,
         pre_delete_revision,
@@ -432,9 +464,7 @@ def verify_purge_dry_run(
     )
     for artifact in plan.artifacts:
         path = Path(artifact.locator) if _is_repo_path(artifact.locator) else None
-        owner = evidence["owner"].get(
-            artifact.owner_approval_attestation_sha256
-        )
+        owner = evidence["owner"].get(artifact.owner_approval_attestation_sha256)
         expected_scope = sorted(
             [
                 *(candidate.artifact_id for candidate in plan.artifacts),
@@ -442,7 +472,7 @@ def verify_purge_dry_run(
             ]
         )
         owner_digest = artifact.owner_approval_attestation_sha256
-        if (
+        if not direct_receipt_valid and (
             owner is None
             or sorted(owner.get("approved_scope", [])) != expected_scope
             or owner.get("rollback_ref") != rollback_commit
@@ -460,7 +490,7 @@ def verify_purge_dry_run(
         review = evidence["review"].get(
             artifact.independent_review_attestation_sha256
         )
-        if (
+        if not direct_receipt_valid and (
             review is None
             or review.get("command_id") != "independent-review-evidence"
             or review.get("proof_obligation_ids") != ["independent-review"]
@@ -544,6 +574,120 @@ def verify_purge_dry_run(
                 )
             )
     return _sorted_findings(findings)
+
+
+def _valid_task29_owner_direct_receipt(
+    receipt: Mapping[str, object] | None,
+    plan: PurgePlan,
+    *,
+    plan_digest: str,
+    pre_delete_commit: str | None,
+    pre_delete_tree: str | None,
+    candidate_commit: str | None,
+    candidate_tree: str | None,
+    rollback_commit: str | None,
+    rollback_tree: str | None,
+) -> bool:
+    """Validate the one-use owner-direct Task 29 exception without widening it."""
+
+    if not isinstance(receipt, Mapping) or set(receipt) != {
+        "schema_version",
+        "receipt_type",
+        "decision_id",
+        "task_id",
+        "pre_delete",
+        "candidate",
+        "rollback",
+        "artifact_ids",
+        "purge_operation_digest",
+        "owner_approval",
+        "exact_review",
+    }:
+        return False
+    if (
+        receipt.get("schema_version") != 1
+        or receipt.get("receipt_type") != "owner-direct-task29-gate-c"
+        or receipt.get("decision_id") != _TASK29_OWNER_DIRECT_DECISION
+        or receipt.get("task_id") != "TASK-29"
+        or receipt.get("purge_operation_digest") != plan_digest
+    ):
+        return False
+    if any(
+        value is None
+        for value in (
+            pre_delete_commit,
+            pre_delete_tree,
+            candidate_commit,
+            candidate_tree,
+            rollback_commit,
+            rollback_tree,
+        )
+    ):
+        return False
+    expected_artifacts = sorted(item.artifact_id for item in plan.artifacts)
+    artifact_ids = receipt.get("artifact_ids")
+    if not isinstance(artifact_ids, list) or artifact_ids != expected_artifacts:
+        return False
+    if any(
+        any(
+            (
+                not item.claims_resolved,
+                not item.incoming_links_rewritten,
+                not item.external_references_reconciled,
+                not item.unique_content_extracted,
+                item.owner_approved,
+                item.independent_review,
+                bool(item.owner_approval_attestation_sha256),
+                bool(item.independent_review_attestation_sha256),
+            )
+        )
+        for item in plan.artifacts
+    ):
+        return False
+    expected_bindings = (
+        ("pre_delete", pre_delete_commit, pre_delete_tree),
+        ("candidate", candidate_commit, candidate_tree),
+        ("rollback", rollback_commit, rollback_tree),
+    )
+    for key, commit_sha, tree_sha in expected_bindings:
+        value = receipt.get(key)
+        if not isinstance(value, Mapping) or set(value) != {"commit_sha", "tree_sha"}:
+            return False
+        if value.get("commit_sha") != commit_sha or value.get("tree_sha") != tree_sha:
+            return False
+    owner = receipt.get("owner_approval")
+    if not isinstance(owner, Mapping) or set(owner) != {"text", "text_sha256"}:
+        return False
+    owner_text = owner.get("text")
+    if (
+        not isinstance(owner_text, str)
+        or owner.get("text_sha256")
+        != hashlib.sha256(owner_text.encode("utf-8")).hexdigest()
+        or "approve" not in owner_text.lower()
+        or candidate_commit not in owner_text
+        or plan_digest not in owner_text
+    ):
+        return False
+    review = receipt.get("exact_review")
+    if not isinstance(review, Mapping) or set(review) != {
+        "status",
+        "critical_findings",
+        "important_findings",
+        "review_package_sha256",
+        "reviewed_candidate_tree_sha",
+        "reviewed_purge_operation_digest",
+    }:
+        return False
+    return (
+        review.get("status") == "complete_clean"
+        and review.get("critical_findings") == 0
+        and review.get("important_findings") == 0
+        and not isinstance(review.get("critical_findings"), bool)
+        and not isinstance(review.get("important_findings"), bool)
+        and _is_sha256(review.get("review_package_sha256"))
+        and review.get("reviewed_candidate_tree_sha") == candidate_tree
+        and review.get("reviewed_purge_operation_digest") == plan_digest
+    )
 
 
 def purge_plan_digest(
@@ -1277,6 +1421,14 @@ def _optional_sha256(value: object) -> str:
     ):
         raise ValueError("snapshot digest must be lowercase SHA-256")
     return value
+
+
+def _is_sha256(value: object) -> bool:
+    return (
+        isinstance(value, str)
+        and len(value) == 64
+        and all(item in "0123456789abcdef" for item in value)
+    )
 
 
 def _required_sha256(value: object) -> str:

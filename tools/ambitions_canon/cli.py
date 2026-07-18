@@ -315,6 +315,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     purge_verify_parser.add_argument(
         "--independent-review-attestation", type=Path, action="append", default=[]
     )
+    purge_verify_parser.add_argument(
+        "--owner-direct-receipt",
+        type=Path,
+        help="single-use Task 29 owner-direct Gate C receipt",
+    )
     task_parser = subparsers.add_parser(
         "task", help="start or finalize fail-closed tracked-change authorization"
     )
@@ -1220,6 +1225,13 @@ def _purge(root: Path, arguments: argparse.Namespace) -> int:
             _read_json_argument(root, path, "PURGE_REVIEW_READ")
             for path in arguments.independent_review_attestation
         )
+        owner_direct_receipt = (
+            _read_json_argument(
+                root, arguments.owner_direct_receipt, "PURGE_OWNER_DIRECT_RECEIPT_READ"
+            )
+            if arguments.owner_direct_receipt is not None
+            else None
+        )
         findings = verify_purge_dry_run(
             plan,
             root,
@@ -1228,6 +1240,7 @@ def _purge(root: Path, arguments: argparse.Namespace) -> int:
             candidate_revision=candidate_revision,
             owner_approval_attestations=owner_attestations,
             independent_review_attestations=review_attestations,
+            owner_direct_receipt=owner_direct_receipt,
         )
         if findings:
             for finding in findings:

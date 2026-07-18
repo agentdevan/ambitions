@@ -101,6 +101,28 @@ class LegacySemanticMigrationTests(unittest.TestCase):
                     }
                 self.assertEqual(actual, expected)
 
+    def test_task29_plan_proves_nonapproval_gate_inputs_without_self_approval(self) -> None:
+        with PURGE_PLAN_PATH.open("rb") as handle:
+            plan = tomllib.load(handle)
+        artifacts = plan["artifact"]
+        self.assertEqual(len(artifacts), 52)
+        self.assertTrue(all(item["incoming_links_rewritten"] for item in artifacts))
+        self.assertTrue(
+            all(item["external_references_reconciled"] for item in artifacts)
+        )
+        self.assertTrue(all(item["unique_content_extracted"] for item in artifacts))
+        self.assertTrue(all(not item["owner_approved"] for item in artifacts))
+        self.assertTrue(all(not item["independent_review"] for item in artifacts))
+        self.assertTrue(
+            all(not item["owner_approval_attestation_sha256"] for item in artifacts)
+        )
+        self.assertTrue(
+            all(
+                not item["independent_review_attestation_sha256"]
+                for item in artifacts
+            )
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
