@@ -5,7 +5,10 @@ import tomllib
 import unittest
 from pathlib import Path
 
-from tools.ambitions_canon.migration import validate_legacy_semantic_migration
+from tools.ambitions_canon.migration import (
+    validate_legacy_semantic_migration,
+    verify_catalog,
+)
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -42,6 +45,33 @@ class LegacySemanticMigrationTests(unittest.TestCase):
     def test_recorded_source_bytes_remain_valid_after_legacy_purge(self) -> None:
         ledger = validate_legacy_semantic_migration(ROOT, LEDGER_PATH)
         self.assertEqual(len(ledger["sources"]), 52)
+
+    def test_catalog_verifies_purged_legacy_sources_from_validated_ledger(self) -> None:
+        findings = verify_catalog(
+            ROOT / "docs/canon/migration/source-catalog.json",
+            ROOT,
+        )
+        self.assertEqual(findings, ())
+
+    def test_historical_deleted_provenance_is_never_active_authority(self) -> None:
+        catalog = json.loads(
+            (ROOT / "docs/canon/migration/source-catalog.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        historical = [
+            record
+            for record in catalog["sources"]
+            if record.get("authority_claim")
+            == "historical deleted repo provenance retained solely for migration traceability; not active authority or implementation proof"
+        ]
+        self.assertTrue(historical)
+        self.assertTrue(
+            all(
+                str(record.get("repo_path", "")).startswith("docs/constitution/")
+                for record in historical
+            )
+        )
 
     def test_ledger_labels_only_current_canon_ids_as_active_requirements(self) -> None:
         active_ids = set(

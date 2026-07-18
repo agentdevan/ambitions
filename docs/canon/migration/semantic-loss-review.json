@@ -1,6 +1,6 @@
 {
   "claim_count": 1542,
-  "claim_dispositions_sha256": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
+  "claim_dispositions_sha256": "d8a2a2ca1c544d41c2f040be942f43d69a239db318314db24de2196789c0b628",
   "classification_counts": {
     "duplicated": 0,
     "missing": 0,
@@ -19501,8 +19501,20 @@
       "source_text_sha256": "f9baddbdf3656a27f00058b4df7dc0ec268822c69d1fe4b023cf3d88cf89eb71"
     }
   ],
-  "equivalence_ledger_sha256": "7782f681e5e6708b9f675f048b1b0c41d88f2887e873926481e685d399a2985b",
-  "independent_review": null,
-  "review_status": "candidate",
+  "equivalence_ledger_sha256": "a3928bc33e9e4a60a4e04c46bebdd8e06c7ac16ae3c00ef43bd45230f99caf77",
+  "independent_review": {
+    "finding_counts": {
+      "critical": 0,
+      "important": 0,
+      "minor": 0
+    },
+    "reviewed_candidate_diff_sha256": "c9eb59f34b2658bb153260723f600333b470d54a0fdd6cb93b249ebb2e1df358",
+    "reviewed_path_count": 7,
+    "reviewed_semantic_content_sha256": "4aabc1645ed3f9c430ca08df087f41b9bedfb9e3f062deea8b11a68b4d9bbca5",
+    "reviewer_report_sha256": "bcb699badc64a2dd871aeef7d345fc1188d6ec799adb093542185de58a717681",
+    "schema_version": 1,
+    "verdict": "clean"
+  },
+  "review_status": "independently_reviewed",
   "schema_version": 4
 }

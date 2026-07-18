@@ -48,7 +48,14 @@ def copy_semantic_fixture(root: Path) -> None:
     """Copy exact protected inputs while retaining the live Git provenance."""
 
     shutil.copytree(ROOT / "docs/canon", root / "docs/canon")
-    shutil.copy2(ROOT / ".git", root / ".git")
+    git_metadata = ROOT / ".git"
+    if git_metadata.is_file():
+        shutil.copy2(git_metadata, root / ".git")
+    else:
+        (root / ".git").write_text(
+            f"gitdir: {git_metadata.resolve()}\n",
+            encoding="utf-8",
+        )
     shutil.copy2(ROOT / ".gitignore", root / ".gitignore")
     for relative in (
         ".codex/canon-migration/claims",
@@ -62,9 +69,12 @@ def copy_semantic_fixture(root: Path) -> None:
         relative = record.get("repo_path")
         if relative is None:
             continue
+        source = ROOT / relative
+        if not source.is_file():
+            continue
         target = root / relative
         target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(ROOT / relative, target)
+        shutil.copy2(source, target)
 
 
 class AtlasStandardsTests(unittest.TestCase):

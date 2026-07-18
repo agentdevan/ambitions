@@ -38,7 +38,7 @@
       "updated_at": "2026-07-09T22:43:24-04:00"
     },
     {
-      "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
+      "authority_claim": "historical migration source provenance retained solely for traceability; not active authority or implementation proof",
       "content_sha256": "3bcef09962514c8ce29b1dd7b8621d054beb29d2a33807a5bd59ada13f79a606",
       "kind": "repo",
       "locator": "repo:docs/README.md",
@@ -158,7 +158,7 @@
       "updated_at": "2026-07-10T22:16:39-04:00"
     },
     {
-      "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
+      "authority_claim": "historical migration source provenance retained solely for traceability; not active authority or implementation proof",
       "content_sha256": "82971e6c1bb4fdb8ada4dbb26010d64be3687b58e9d9a3a1f251e9c760b06014",
       "kind": "repo",
       "locator": "repo:.agents/skills/ambitions-ios-quality-gate/SKILL.md",
@@ -278,7 +278,7 @@
       "updated_at": "2026-07-09T22:43:24-04:00"
     },
     {
-      "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
+      "authority_claim": "historical migration source provenance retained solely for traceability; not active authority or implementation proof",
       "content_sha256": "41cf95f68b4fdd242e26750ea81f12cb51e566265b95e5bc7149c97e957bf312",
       "kind": "repo",
       "locator": "repo:.agents/skills/ambitions-runtime-contract-engineering/SKILL.md",
@@ -362,7 +362,7 @@
       "updated_at": "2026-07-09T22:43:24-04:00"
     },
     {
-      "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
+      "authority_claim": "historical migration source provenance retained solely for traceability; not active authority or implementation proof",
       "content_sha256": "1eeebe3a00b975edabcdb4db370338d97a01220724ba8681dbacff8205bd9712",
       "kind": "repo",
       "locator": "repo:docs/skills/ui-north-star-production-gate/SKILL.md",
@@ -386,7 +386,7 @@
       "updated_at": "2026-07-09T22:43:24-04:00"
     },
     {
-      "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
+      "authority_claim": "historical migration source provenance retained solely for traceability; not active authority or implementation proof",
       "content_sha256": "2346da541e5dea7aeb5fc5fff1eabd51e420d8391efa1a31276654429e4d7bad",
       "kind": "repo",
       "locator": "repo:docs/skills/README.md",
@@ -446,7 +446,7 @@
       "updated_at": "2026-07-09T22:43:24-04:00"
     },
     {
-      "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
+      "authority_claim": "historical migration source provenance retained solely for traceability; not active authority or implementation proof",
       "content_sha256": "c71394337ce5aa47d3081a1b53641880dd03ac6e6d635710b3690fd09257993f",
       "kind": "repo",
       "locator": "repo:docs/skills/figma-production-gate/SKILL.md",
@@ -470,7 +470,7 @@
       "updated_at": "2026-07-06T21:00:19-04:00"
     },
     {
-      "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
+      "authority_claim": "historical migration source provenance retained solely for traceability; not active authority or implementation proof",
       "content_sha256": "3bd2a4d5758d3dcbd61507d55dd413e110a4a4c715ef37f7ad83541c5b7195e7",
       "kind": "repo",
       "locator": "repo:.agents/skills/ambitions-source-truth-authority/SKILL.md",
@@ -566,7 +566,7 @@
       "updated_at": "2026-07-09T22:43:24-04:00"
     },
     {
-      "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
+      "authority_claim": "historical migration source provenance retained solely for traceability; not active authority or implementation proof",
       "content_sha256": "772a274b20f6aff4227f739d8ece9c36b6a36164d5bea0fe4cee523edf43f175",
       "kind": "repo",
       "locator": "repo:AGENTS.md",
@@ -650,7 +650,7 @@
       "updated_at": "2026-07-09T22:43:24-04:00"
     },
     {
-      "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
+      "authority_claim": "historical migration source provenance retained solely for traceability; not active authority or implementation proof",
       "content_sha256": "48ec84a8d840285c81c4c1c9f81acd9b2c84c22caf719c561ce0e6b74e64b59f",
       "kind": "repo",
       "locator": "repo:README.md",
@@ -758,7 +758,7 @@
       "updated_at": "2026-07-09T22:43:24-04:00"
     },
     {
-      "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
+      "authority_claim": "historical migration source provenance retained solely for traceability; not active authority or implementation proof",
       "content_sha256": "d17380d279003808e1e2ccf65cb3893e54e13f103460a1b53991c25bbce7ec49",
       "kind": "repo",
       "locator": "repo:.agents/skills/ambitions-architecture-tree-enforcement/SKILL.md",
@@ -902,7 +902,7 @@
       "updated_at": "2026-07-09T22:43:24-04:00"
     },
     {
-      "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
+      "authority_claim": "historical migration source provenance retained solely for traceability; not active authority or implementation proof",
       "content_sha256": "8414344846b9531a54c2d726e8c554815e4cb9a3733573176486aacd11d5b507",
       "kind": "repo",
       "locator": "repo:.agents/skills/README.md",
@@ -914,7 +914,7 @@
       "updated_at": "2026-07-02T08:40:31-04:00"
     },
     {
-      "authority_claim": "current tracked repo authority provenance under the active authority hierarchy; not a standalone product or implementation proof",
+      "authority_claim": "historical migration source provenance retained solely for traceability; not active authority or implementation proof",
       "content_sha256": "37da293f88d977886fa820ad004227f669cc3e1178a60ef0044ce092ef742558",
       "kind": "repo",
       "locator": "repo:.agents/skills/ambitions-release-proof-honesty/SKILL.md",

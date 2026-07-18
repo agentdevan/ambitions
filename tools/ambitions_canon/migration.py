@@ -1124,6 +1124,7 @@ def verify_catalog(
         root = _repository_root(repo_root or catalog_path.parent)
     except CanonError as error:
         return (_finding(error.code, error.message, error.path or catalog_path),)
+    purged_legacy_paths = _validated_purged_legacy_catalog_paths(root, records)
     findings: list[Finding] = []
     for record in records:
         registered_path = (
@@ -1138,12 +1139,158 @@ def verify_catalog(
                 )
             )
             continue
+        if record.repo_path is not None and record.repo_path in purged_legacy_paths:
+            tracked = _git_result(
+                root,
+                "ls-files",
+                "--error-unmatch",
+                "--",
+                record.repo_path,
+            )
+            if tracked.returncode != 0:
+                try:
+                    _read_purged_legacy_git_source(record, root)
+                except CanonError as error:
+                    findings.append(_finding(error.code, error.message, error.path))
+                continue
+        if (
+            record.kind in TRACKED_SOURCE_KINDS
+            and record.authority_claim
+            == "historical migration source provenance retained solely for traceability; not active authority or implementation proof"
+        ):
+            try:
+                _read_historical_git_source(record, root)
+            except CanonError as error:
+                findings.append(_finding(error.code, error.message, error.path))
+            continue
         findings.extend(verify_source(record, root / registered_path))
     return tuple(
         sorted(
             findings, key=lambda item: (item.code, str(item.path or ""), item.message)
         )
     )
+
+
+def _validated_purged_legacy_catalog_paths(
+    root: Path,
+    records: Sequence[SourceRecord],
+) -> frozenset[str]:
+    """Return only digest-validated legacy paths intentionally replaced by the ledger."""
+
+    legacy_records = tuple(
+        record
+        for record in records
+        if record.repo_path is not None
+        and any(
+            record.repo_path.startswith(prefix + "/")
+            for prefix in LEGACY_SEMANTIC_SOURCE_ROOTS
+        )
+    )
+    if not legacy_records:
+        return frozenset()
+    ledger_path = root / "docs/canon/migration/legacy-semantic-migration.json"
+    try:
+        payload = json.loads(ledger_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return frozenset()
+    if (
+        not isinstance(payload, dict)
+        or payload.get("schema_version") != 1
+        or payload.get("canonical_owner_id") != LEGACY_SEMANTIC_OWNER_ID
+    ):
+        return frozenset()
+    sources = payload.get("sources")
+    if not isinstance(sources, list):
+        return frozenset()
+    historical_deleted_paths = {
+        record.repo_path
+        for record in legacy_records
+        if record.authority_claim
+        == "historical deleted repo provenance retained solely for migration traceability; not active authority or implementation proof"
+    }
+    expected = {
+        record.repo_path: record
+        for record in legacy_records
+        if record.repo_path not in historical_deleted_paths
+    }
+    recovered: set[str] = set()
+    for source in sources:
+        if not isinstance(source, dict):
+            return frozenset()
+        source_path = source.get("source_path")
+        if not isinstance(source_path, str):
+            return frozenset()
+        record = expected.get(source_path)
+        if record is None:
+            return frozenset()
+        if (
+            source.get("source_id") != record.source_id
+            or source.get("registered_content_sha256") != record.content_sha256
+        ):
+            return frozenset()
+        source_text = source.get("source_text")
+        if (
+            not isinstance(source_text, str)
+            or hashlib.sha256(source_text.encode("utf-8")).hexdigest()
+            != source.get("content_sha256")
+        ):
+            return frozenset()
+        recovered.add(source_path)
+    if recovered != set(expected):
+        return frozenset()
+    return frozenset(recovered | historical_deleted_paths)
+
+
+def _read_purged_legacy_git_source(record: SourceRecord, root: Path) -> bytes:
+    """Read a purged legacy source only from its digest-bound Git revision."""
+
+    if (
+        record.repo_path is None
+        or not any(
+            record.repo_path.startswith(prefix + "/")
+            for prefix in LEGACY_SEMANTIC_SOURCE_ROOTS
+        )
+    ):
+        raise CanonError(
+            "MIGRATION_LEGACY_PROVENANCE_INVALID",
+            "purged legacy source has incomplete immutable Git provenance",
+            Path(record.repo_path or ""),
+        )
+    return _read_historical_git_source(record, root)
+
+
+def _read_historical_git_source(record: SourceRecord, root: Path) -> bytes:
+    """Read one historical migration snapshot from its immutable Git revision."""
+
+    if (
+        record.repo_path is None
+        or record.repository_revision is None
+        or record.content_sha256 is None
+    ):
+        raise CanonError(
+            "MIGRATION_LEGACY_PROVENANCE_INVALID",
+            "historical migration source has incomplete immutable Git provenance",
+            Path(record.repo_path or ""),
+        )
+    result = _git_result(
+        root,
+        "show",
+        f"{record.repository_revision}:{record.repo_path}",
+    )
+    if result.returncode != 0:
+        raise CanonError(
+            "MIGRATION_LEGACY_PROVENANCE_UNAVAILABLE",
+            "historical migration source is absent from its registered Git revision",
+            Path(record.repo_path),
+        )
+    raw = result.stdout
+    if hashlib.sha256(raw).hexdigest() != record.content_sha256:
+        raise CanonError(
+            "MIGRATION_LEGACY_PROVENANCE_MISMATCH",
+            "historical migration Git bytes do not match registered provenance",
+            Path(record.repo_path),
+        )
+    return raw
 
 
 def _validate_metadata(
@@ -2672,7 +2819,8 @@ class _SourceInventory:
     record: SourceRecord
     source_path: Path
     raw: bytes
-    identity: tuple[int, int, int, int, int]
+    identity: tuple[int, int, int, int, int] | None
+    is_historical_snapshot: bool
     byte_length: int
     content_sha256: str
     text: str
@@ -3609,6 +3757,7 @@ def _source_inventories(
     records: tuple[SourceRecord, ...],
 ) -> tuple[_SourceInventory, ...]:
     inventories: list[_SourceInventory] = []
+    purged_legacy_paths = _validated_purged_legacy_catalog_paths(root, records)
     for record in records:
         relative_text = record.repo_path or record.raw_path
         assert relative_text is not None
@@ -3620,7 +3769,27 @@ def _source_inventories(
                 relative,
             )
         source_path = root / relative
-        raw, identity = _read_claim_source_snapshot(source_path)
+        is_historical_snapshot = (
+            record.kind in TRACKED_SOURCE_KINDS
+            and record.authority_claim
+            == "historical migration source provenance retained solely for traceability; not active authority or implementation proof"
+        ) or (
+            record.repo_path is not None
+            and record.repo_path in purged_legacy_paths
+            and _git_result(
+                root,
+                "ls-files",
+                "--error-unmatch",
+                "--",
+                record.repo_path,
+            ).returncode
+            != 0
+        )
+        if is_historical_snapshot:
+            raw = _read_historical_git_source(record, root)
+            identity = None
+        else:
+            raw, identity = _read_claim_source_snapshot(source_path)
         content_sha256 = hashlib.sha256(raw).hexdigest()
         expected_sha256 = record.content_sha256 or record.raw_sha256
         assert expected_sha256 is not None
@@ -3654,10 +3823,11 @@ def _source_inventories(
             sections = (*sections, *(f"decision:{number}" for number in range(1, 202)))
         inventories.append(
             _SourceInventory(
-                record,
+                replace(record, bound_repository_root=root),
                 source_path,
                 raw,
                 identity,
+                is_historical_snapshot,
                 len(raw),
                 content_sha256,
                 text,
@@ -3752,7 +3922,13 @@ def _revalidate_inventory_snapshots(
 ) -> None:
     _require_inventory_snapshots_bound(inventories)
     for inventory in inventories:
-        raw, identity = _read_claim_source_snapshot(inventory.source_path)
+        if inventory.is_historical_snapshot:
+            root = inventory.record.bound_repository_root
+            assert root is not None
+            raw = _read_historical_git_source(inventory.record, root)
+            identity = None
+        else:
+            raw, identity = _read_claim_source_snapshot(inventory.source_path)
         if raw != inventory.raw or identity != inventory.identity:
             raise CanonError(
                 "CLAIM_SOURCE_CHANGED",

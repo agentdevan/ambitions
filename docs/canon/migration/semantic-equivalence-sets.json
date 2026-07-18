@@ -1,7 +1,19 @@
 {
   "clause_count": 2774,
-  "independent_review": null,
-  "review_status": "candidate",
+  "independent_review": {
+    "finding_counts": {
+      "critical": 0,
+      "important": 0,
+      "minor": 0
+    },
+    "reviewed_candidate_diff_sha256": "c9eb59f34b2658bb153260723f600333b470d54a0fdd6cb93b249ebb2e1df358",
+    "reviewed_path_count": 7,
+    "reviewed_semantic_content_sha256": "4aabc1645ed3f9c430ca08df087f41b9bedfb9e3f062deea8b11a68b4d9bbca5",
+    "reviewer_report_sha256": "bcb699badc64a2dd871aeef7d345fc1188d6ec799adb093542185de58a717681",
+    "schema_version": 1,
+    "verdict": "clean"
+  },
+  "review_status": "independently_reviewed",
   "schema_version": 3,
   "source_claim_count": 1542,
   "source_claims": [
