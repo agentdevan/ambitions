@@ -1034,8 +1034,8 @@ class _UXOperationContext:
     root: Path
     root_descriptor: int
     canon: _AuditedCanonSnapshot
-    command_resolution_registry: CommandResolutionRegistry
-    command_gate_registry: object
+    command_resolution_registry: CommandResolutionRegistry | None
+    command_gate_registry: object | None
     inputs: tuple[_CapturedInput, ...]
     excluded_paths: frozenset[Path]
     include_visual_evidence: bool
@@ -1617,6 +1617,7 @@ def _ux_operation(
     *,
     include_visual_evidence: bool = False,
     excluded_paths: frozenset[Path] = frozenset(),
+    require_command_resolution_registry: bool = True,
 ) -> Iterator[_UXOperationContext]:
     """Capture and end-verify one private, pinned, audited operation context."""
 
@@ -1635,33 +1636,44 @@ def _ux_operation(
                 include_visual_evidence=include_visual_evidence,
                 excluded_paths=excluded_paths,
             )
-        resolution_registry = _load_command_resolution_registry_bytes(
-            absolute_root,
-            next(
-                item.content
-                for item in inputs
-                if item.path
-                == Path("docs/canon/registries/command-resolution-registry.json")
-            ),
-            captured_sources={item.path: item.content for item in inputs},
+        registry_path = Path(
+            "docs/canon/registries/command-resolution-registry.json"
         )
-        from tools.ambitions_canon.command_gate_dependencies import (
-            _COMMAND_GATE_INPUT_PATHS,
-            _load_command_gate_dependency_registry_for_audited_canon,
+        registry_bytes = next(
+            (item.content for item in inputs if item.path == registry_path), None
         )
-
-        command_gate_registry = (
-            _load_command_gate_dependency_registry_for_audited_canon(
+        if registry_bytes is None:
+            if require_command_resolution_registry:
+                raise UXBlueprintError(
+                    "command-resolution registry was not captured by the audited operation"
+                )
+            resolution_registry = None
+        else:
+            resolution_registry = _load_command_resolution_registry_bytes(
                 absolute_root,
-                canon,
-                expected_canon_revision=canon.registry.manifest.canon_revision,
-                captured_inputs=tuple(
-                    (item.path, item.content)
-                    for item in inputs
-                    if item.path in _COMMAND_GATE_INPUT_PATHS
-                ),
+                registry_bytes,
+                captured_sources={item.path: item.content for item in inputs},
             )
-        )
+        if registry_bytes is None:
+            command_gate_registry = None
+        else:
+            from tools.ambitions_canon.command_gate_dependencies import (
+                _COMMAND_GATE_INPUT_PATHS,
+                _load_command_gate_dependency_registry_for_audited_canon,
+            )
+
+            command_gate_registry = (
+                _load_command_gate_dependency_registry_for_audited_canon(
+                    absolute_root,
+                    canon,
+                    expected_canon_revision=canon.registry.manifest.canon_revision,
+                    captured_inputs=tuple(
+                        (item.path, item.content)
+                        for item in inputs
+                        if item.path in _COMMAND_GATE_INPUT_PATHS
+                    ),
+                )
+            )
         context = _UXOperationContext(
             root=absolute_root,
             root_descriptor=root_descriptor,
@@ -1889,6 +1901,10 @@ def _load_state_command_contracts(
         context = _ACTIVE_OPERATION.get()
         if context is None or context.canon is not snapshot:
             raise UXBlueprintError("state command load lacks audited operation context")
+        if context.command_gate_registry is None:
+            raise UXBlueprintError(
+                "state command load lacks a command-gate dependency registry"
+            )
         _validate_command_gate_dependency_bindings_for_audited_canon(
             context.command_gate_registry,
             ordered,
@@ -1898,6 +1914,10 @@ def _load_state_command_contracts(
     context = _ACTIVE_OPERATION.get()
     if context is None or context.canon is not snapshot:
         raise UXBlueprintError("command resolution lacks audited operation context")
+    if context.command_resolution_registry is None:
+        raise UXBlueprintError(
+            "state command load lacks a command-resolution registry"
+        )
     validate_command_resolution_bindings(
         context.command_resolution_registry, canon
     )

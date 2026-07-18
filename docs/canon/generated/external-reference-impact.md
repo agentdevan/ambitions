@@ -2,7 +2,7 @@
 
 - Canon revision: `1`
 - Authority state: `active`
-- Traceability input SHA: `2a498a0c103cbb297b4ca489982b820e1e14f915a56656989fdf21ddfa09e723`
+- Traceability input SHA: `6276918d696c6405309d5a07c5e895b31e0907339c525e7781798d82f4db22b6`
 
 **Representation status:** Represented
 
@@ -11,9 +11,9 @@
 - Figma references: `11`
 - Proof references: `8`
 - Invalid external findings: `0`
-- Linear reconciliation SHA: `2691da618038385b33c1247d3d433cba2f41eec1a5b3de1d013600a31d29b36f`
+- Linear reconciliation SHA: `4f85e27f0a95a07790d606eaf44ab152b28b204f4453642ab31b4d165665b252`
 - Reconciliation entities: `285`
-- Reconciliation disposition: `initiative_applied_verified_broader_withheld`
+- Reconciliation disposition: `initiative_applied_verified_task28_terminal_archival_broader_withheld`
 - External mutations applied: `true`
 - Owner gate required: `true`
 - Reconciliation action `delete_after_extraction`: `3`
@@ -21,7 +21,8 @@
 - Reconciliation action `retain_provenance_only`: `178`
 - Reconciliation action `rewrite_to_requirement_references`: `102`
 - Reconciliation status `applied_verified`: `1`
-- Reconciliation status `proposed_not_applied`: `284`
+- Reconciliation status `owner_approved_terminal_archival`: `3`
+- Reconciliation status `proposed_not_applied`: `281`
 
 This stable-link inventory does not prove implementation or readiness; the reconciliation record is also non-normative shadow input.
 

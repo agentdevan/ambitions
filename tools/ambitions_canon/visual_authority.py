@@ -494,7 +494,9 @@ def load_visual_authority_rebaseline_if_present(
         return None
     try:
         with _ux_operation(
-            repo_root, include_visual_evidence=True
+            repo_root,
+            include_visual_evidence=True,
+            require_command_resolution_registry=False,
         ) as context:
             captured = tuple(
                 item for item in context.inputs if item.path == MANIFEST_PATH

@@ -6,7 +6,7 @@
 - Canon revision: `1`
 - Authority state: `active`
 - Compiler version: `0.2.0`
-- Canon content SHA: `4567bff1ab6c758559ca1ffb528984c514c1b20f3ddfbcad78f3c0e4aef20c1c`
+- Canon content SHA: `24b5d23c38eb15b628690bf8f846150a2ae465a4c344c6d74b906e310e70b8b7`
 
 `docs/canon/` is the sole normative repository authority.
 This file is a generated router, not a second authority root.

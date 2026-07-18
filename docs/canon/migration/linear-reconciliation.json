@@ -6,7 +6,7 @@
     "inventory_date": "2026-07-13",
     "method": "live_linear_oauth_reads"
   },
-  "disposition_state": "initiative_applied_verified_broader_withheld",
+  "disposition_state": "initiative_applied_verified_task28_terminal_archival_broader_withheld",
   "external_mutations_applied": true,
   "initiative_execution": {
     "approved_option": "initiative-only",
@@ -125,9 +125,9 @@
     "archive_after_extraction"
   ],
   "action_rules": {
-    "archive_after_extraction": "temporary Yellow only when deletion is unavailable; manual deletion remains required",
+    "archive_after_extraction": "temporary Yellow when deletion is unavailable, except the exact owner-approved Task 28 terminal archival batch; hard deletion remains unclaimed",
     "all_external_actions": "owner approval and fresh hash verification required",
-    "destructive_actions": "deferred to Gate C and not authorized by this manifest"
+    "destructive_actions": "deferred except the exact Task 28 owner-approved terminal archival batch; hard deletion remains unavailable and unclaimed"
   },
   "pilot_decision_required": {
     "mismatch": "Ambitions Product Canon + Operating Model is initiative 1df52f0d-da30-4bcc-8f21-5761596cac19, not a project.",
@@ -201,9 +201,9 @@
         "ebbfb3c1-cd88-4a4d-a254-7bdd1c8a61f6"
       ],
       "gate": "C",
-      "destructive_authorization": "deferred_not_authorized",
-      "manual_deletion_action": "Owner must approve exact deletion after extraction, inbound-reference proof, and independent Gate C review.",
-      "status": "withheld_gate_c"
+      "destructive_authorization": "owner_approved_terminal_archival",
+      "manual_deletion_action": "Owner approved Linear archival as the terminal Task 28 deletion state after the bounded rewrites and verification. The connector did not provide exhaustive rich-text backlink proof or permanent deletion; archival is the approved terminal state for this exact batch.",
+      "status": "owner_approved_terminal_archival"
     },
     {
       "batch_id": "copy-authority-review",
@@ -3746,9 +3746,9 @@
         "SYSTEM-SOURCE-ATLAS-PUBLIC-001"
       ],
       "unique_accepted_content_summary": "redacted_document_scope_and_provenance",
-      "current_execution_value": "superseded_after_verified_extraction",
+      "current_execution_value": "archived_terminal_provenance_only_after_verified_extraction",
       "recommended_action": "delete_after_extraction",
-      "action_status": "proposed_not_applied",
+      "action_status": "owner_approved_terminal_archival",
       "replacement_ids": [
         "96b93346-271d-46fc-beab-43ff7e286b5d"
       ],
@@ -3756,7 +3756,7 @@
       "live_metadata": {
         "created_at": "2026-07-09T06:13:20.990Z",
         "updated_at": "2026-07-09T06:13:21.905Z",
-        "status": "active"
+        "status": "archived"
       },
       "content_sha256": "982fc08d681315dace2c3ded978d5e5224c30d57b79fc46628da9c3831bb69fc"
     },
@@ -4090,9 +4090,9 @@
         "SYSTEM-SOURCE-ATLAS-PUBLIC-001"
       ],
       "unique_accepted_content_summary": "redacted_document_scope_and_provenance",
-      "current_execution_value": "superseded_after_verified_extraction",
+      "current_execution_value": "archived_terminal_provenance_only_after_verified_extraction",
       "recommended_action": "delete_after_extraction",
-      "action_status": "proposed_not_applied",
+      "action_status": "owner_approved_terminal_archival",
       "replacement_ids": [
         "96b93346-271d-46fc-beab-43ff7e286b5d"
       ],
@@ -4100,7 +4100,7 @@
       "live_metadata": {
         "created_at": "2026-06-26T07:20:53.560Z",
         "updated_at": "2026-06-26T15:05:04.840Z",
-        "status": "active"
+        "status": "archived"
       },
       "content_sha256": "3086c5d248687d0a1a62066db5cf922f9e493fd1ff5e3396d0630791e33ccf38"
     },
@@ -5516,9 +5516,9 @@
         "GOVERNANCE-LINEAR-RETENTION-001"
       ],
       "unique_accepted_content_summary": "redacted_execution_scope_acceptance_and_proof_posture",
-      "current_execution_value": "none_beyond_duplicate_provenance",
+      "current_execution_value": "archived_terminal_duplicate_provenance_only",
       "recommended_action": "delete_after_extraction",
-      "action_status": "proposed_not_applied",
+      "action_status": "owner_approved_terminal_archival",
       "replacement_ids": [
         "AMB-1705"
       ],
@@ -5526,7 +5526,7 @@
       "live_metadata": {
         "created_at": "2026-07-05T05:46:53.149Z",
         "updated_at": "2026-07-05T06:00:19.429Z",
-        "status": null
+        "status": "archived"
       },
       "content_sha256": "8b0b1207e8ef7a80ae5defdaf8136233b48f7ad3cd9eb6707ab55a2dcdbb9d0b"
     },

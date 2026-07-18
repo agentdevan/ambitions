@@ -1,6 +1,6 @@
 {
   "claim_count": 1542,
-  "claim_dispositions_sha256": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+  "claim_dispositions_sha256": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
   "classification_counts": {
     "duplicated": 0,
     "missing": 0,
@@ -19504,38 +19504,5 @@
   "equivalence_ledger_sha256": "7782f681e5e6708b9f675f048b1b0c41d88f2887e873926481e685d399a2985b",
   "independent_review": null,
   "review_status": "candidate",
-  "schema_version": 4,
-  "scoped_task_reviews": [
-    {
-      "artifact_ids": [
-        "REPO-0A71762610F2156C71AE5968",
-        "REPO-49594C1526BD63B0ED53C7AF",
-        "REPO-7599EFB6F30B89790BFA8AC2",
-        "REPO-7DE5232D987BEBEC4488640D",
-        "REPO-98E0A39B9B95511D59FDED59",
-        "REPO-A2160D5C4171C0B1CB740F8E",
-        "REPO-A7192B1B77B5A2875E5021BD",
-        "REPO-B2788D54EACE9F585896C1DC",
-        "REPO-C1B6B2BD9D241810C116ABCC",
-        "REPO-F3970166F9EBF1C0C21D2A5B",
-        "REPO-F6B22302C4CBCB44DA13B11E"
-      ],
-      "claim_mapping_count": 62,
-      "finding_counts": {
-        "critical": 0,
-        "important": 0,
-        "minor": 0
-      },
-      "global_semantic_review_promoted": false,
-      "mapping_sha256": "b95c1953aec72ea235344ea1f0b4127d0f9f97f5812e34090c2aff4187a24d9c",
-      "purge_operation_digest": "93cd3b9fddd61c9a543d0a30d5f3ccd32476afdeea54a8233e3cd13dc6ea2385",
-      "receipt_path": ".superpowers/sdd/task27-semantic-review-receipt-b95c1953.json",
-      "receipt_sha256": "80dbcb9e56c844b37acb21ceb1af0b4d338a03bf06221de88d9347b843f6d460",
-      "review_scope": "exact Task 27 reduced deletion candidate",
-      "task_id": "TASK-27",
-      "unique_content_extraction": true,
-      "verdict": "clean",
-      "virtual_candidate_tree_sha": "f338d9590fbbcfcc26c1211fa880955de064abed"
-    }
-  ]
+  "schema_version": 4
 }

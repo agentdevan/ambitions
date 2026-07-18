@@ -293,6 +293,87 @@ _LINEAR_ACTION_ORDER = (
     "owner_review",
     "archive_after_extraction",
 )
+_TASK28_TERMINAL_ARCHIVAL_DISPOSITION = (
+    "initiative_applied_verified_task28_terminal_archival_broader_withheld"
+)
+_TASK28_TERMINAL_ARCHIVAL_STATUS = "owner_approved_terminal_archival"
+_TASK28_TERMINAL_ARCHIVAL_BATCH_ID = "superseded-design-artifacts"
+_TASK28_TERMINAL_ARCHIVAL_BATCH_TEXT = (
+    "Owner approved Linear archival as the terminal Task 28 deletion state after "
+    "the bounded rewrites and verification. The connector did not provide "
+    "exhaustive rich-text backlink proof or permanent deletion; archival is the "
+    "approved terminal state for this exact batch."
+)
+_TASK28_TERMINAL_ARCHIVAL_RECORDS = {
+    "3fc613b3-dac0-4104-b323-5f26fb868645": {
+        "claimed_authority": "document_restates_canon_or_execution_standard",
+        "content_sha256": "982fc08d681315dace2c3ded978d5e5224c30d57b79fc46628da9c3831bb69fc",
+        "current_execution_value": "archived_terminal_provenance_only_after_verified_extraction",
+        "entity_type": "document",
+        "live_metadata": {
+            "created_at": "2026-07-09T06:13:20.990Z",
+            "status": "archived",
+            "updated_at": "2026-07-09T06:13:21.905Z",
+        },
+        "parent_id": "0affb0e0-87cf-4417-b0c2-fbf7490c9975",
+        "represented_requirement_ids": (
+            "CODEX-ISSUE-READINESS-001",
+            "CONST-IA-ROOT-001",
+            "CONST-PROOF-EVIDENCE-001",
+            "GOVERNANCE-LINEAR-RETENTION-001",
+            "RELEASE-004",
+            "SPEC-GLOBAL-CAPTURE-IDENTITY-001",
+            "SPEC-GLOBAL-MOTION-RESPONSIBILITY-001",
+            "SYSTEM-PRIVACY-EGRESS-001",
+            "SYSTEM-SOURCE-ATLAS-PUBLIC-001",
+        ),
+        "replacement_ids": ("96b93346-271d-46fc-beab-43ff7e286b5d",),
+        "title": "B1A-D01R Product / IA Decision Readback — Pre-Spec Summary",
+        "unique_accepted_content_summary": "redacted_document_scope_and_provenance",
+    },
+    "AMB-1756": {
+        "claimed_authority": "issue_restates_canon_or_architecture_law_alongside_execution_acceptance",
+        "content_sha256": "8b0b1207e8ef7a80ae5defdaf8136233b48f7ad3cd9eb6707ab55a2dcdbb9d0b",
+        "current_execution_value": "archived_terminal_duplicate_provenance_only",
+        "entity_type": "issue",
+        "live_metadata": {
+            "created_at": "2026-07-05T05:46:53.149Z",
+            "status": "archived",
+            "updated_at": "2026-07-05T06:00:19.429Z",
+        },
+        "parent_id": "59c3917f-f662-4ca3-b412-b532613f3a7a",
+        "represented_requirement_ids": ("GOVERNANCE-LINEAR-RETENTION-001",),
+        "replacement_ids": ("AMB-1705",),
+        "title": "Architecture Closeout Gate / AMB-1705 Acceptance Object",
+        "unique_accepted_content_summary": "redacted_execution_scope_acceptance_and_proof_posture",
+    },
+    "ebbfb3c1-cd88-4a4d-a254-7bdd1c8a61f6": {
+        "claimed_authority": "document_restates_canon_or_execution_standard",
+        "content_sha256": "3086c5d248687d0a1a62066db5cf922f9e493fd1ff5e3396d0630791e33ccf38",
+        "current_execution_value": "archived_terminal_provenance_only_after_verified_extraction",
+        "entity_type": "document",
+        "live_metadata": {
+            "created_at": "2026-06-26T07:20:53.560Z",
+            "status": "archived",
+            "updated_at": "2026-06-26T15:05:04.840Z",
+        },
+        "parent_id": "0affb0e0-87cf-4417-b0c2-fbf7490c9975",
+        "represented_requirement_ids": (
+            "CODEX-ISSUE-READINESS-001",
+            "CONST-IA-ROOT-001",
+            "CONST-PROOF-EVIDENCE-001",
+            "GOVERNANCE-LINEAR-RETENTION-001",
+            "RELEASE-004",
+            "SPEC-GLOBAL-CAPTURE-IDENTITY-001",
+            "SPEC-GLOBAL-MOTION-RESPONSIBILITY-001",
+            "SYSTEM-PRIVACY-EGRESS-001",
+            "SYSTEM-SOURCE-ATLAS-PUBLIC-001",
+        ),
+        "replacement_ids": ("96b93346-271d-46fc-beab-43ff7e286b5d",),
+        "title": "B1A-D01 — Ambitions Product / IA / Object Model Design Document",
+        "unique_accepted_content_summary": "redacted_document_scope_and_provenance",
+    },
+}
 _LINEAR_CHECKSUM_CONTRACT = {
     "algorithm": "sha256",
     "encoding": "utf-8",
@@ -1087,7 +1168,11 @@ def validate_linear_reconciliation(
         raise _linear_reconciliation_error(path, "root must be an object")
     disposition = data.get("disposition_state")
     bounded_pair_state = disposition == "pilot_applied_verified_broader_withheld"
-    initiative_state = disposition == "initiative_applied_verified_broader_withheld"
+    terminal_archival_state = disposition == _TASK28_TERMINAL_ARCHIVAL_DISPOSITION
+    initiative_state = disposition in {
+        "initiative_applied_verified_broader_withheld",
+        _TASK28_TERMINAL_ARCHIVAL_DISPOSITION,
+    }
     applied_state = bounded_pair_state or initiative_state
     expected_root_fields = set(_LINEAR_ROOT_FIELDS)
     if bounded_pair_state:
@@ -1105,6 +1190,7 @@ def validate_linear_reconciliation(
     if disposition not in {
         "pilot_applied_verified_broader_withheld",
         "initiative_applied_verified_broader_withheld",
+        _TASK28_TERMINAL_ARCHIVAL_DISPOSITION,
         "proposed_not_applied_owner_gate",
     }:
         raise _linear_reconciliation_error(path, "disposition_state is invalid")
@@ -1121,7 +1207,9 @@ def validate_linear_reconciliation(
     allowed_actions = data.get("allowed_actions")
     if allowed_actions != list(_LINEAR_ACTION_ORDER):
         raise _linear_reconciliation_error(path, "allowed_actions is closed or stale")
-    _validate_linear_action_rules(data.get("action_rules"), path)
+    _validate_linear_action_rules(
+        data.get("action_rules"), path, terminal_archival_state=terminal_archival_state
+    )
     pilot = _validate_linear_pilot_decision(
         data.get("pilot_decision_required"), path
     )
@@ -1144,6 +1232,7 @@ def validate_linear_reconciliation(
         path,
         applied_state=applied_state,
         applied_entity_ids=applied_execution_ids,
+        terminal_archival_state=terminal_archival_state,
     )
 
     entities = data.get("entities")
@@ -1155,6 +1244,7 @@ def validate_linear_reconciliation(
     actions: Counter[str] = Counter()
     statuses: Counter[str] = Counter()
     applied_entity_ids: set[str] = set()
+    terminal_archival_ids: set[str] = set()
     for entity in entities:
         if not isinstance(entity, dict) or set(entity) != _LINEAR_ENTITY_FIELDS:
             raise _linear_reconciliation_error(path, "entity fields are closed")
@@ -1201,7 +1291,11 @@ def validate_linear_reconciliation(
         if action not in _LINEAR_ACTIONS:
             raise _linear_reconciliation_error(path, "recommended_action is invalid")
         action_status = entity.get("action_status")
-        if action_status not in {"applied_verified", "proposed_not_applied"}:
+        if action_status not in {
+            "applied_verified",
+            "proposed_not_applied",
+            _TASK28_TERMINAL_ARCHIVAL_STATUS,
+        }:
             raise _linear_reconciliation_error(path, "action_status is invalid")
         if not applied_state and action_status != "proposed_not_applied":
             raise _linear_reconciliation_error(
@@ -1213,6 +1307,32 @@ def validate_linear_reconciliation(
                     path, "applied pilot entities require rewrite action"
                 )
             applied_entity_ids.add(entity_id)
+        if action_status == _TASK28_TERMINAL_ARCHIVAL_STATUS:
+            expected_terminal = _TASK28_TERMINAL_ARCHIVAL_RECORDS.get(entity_id)
+            metadata = entity.get("live_metadata")
+            if (
+                not terminal_archival_state
+                or expected_terminal is None
+                or action != "delete_after_extraction"
+                or entity_type != expected_terminal["entity_type"]
+                or entity.get("current_execution_value")
+                != expected_terminal["current_execution_value"]
+                or entity.get("title") != expected_terminal["title"]
+                or entity.get("parent_id") != expected_terminal["parent_id"]
+                or entity.get("claimed_authority")
+                != expected_terminal["claimed_authority"]
+                or tuple(entity.get("represented_requirement_ids", ()))
+                != expected_terminal["represented_requirement_ids"]
+                or entity.get("unique_accepted_content_summary")
+                != expected_terminal["unique_accepted_content_summary"]
+                or entity.get("content_sha256")
+                != expected_terminal["content_sha256"]
+                or metadata != expected_terminal["live_metadata"]
+            ):
+                raise _linear_reconciliation_error(
+                    path, "terminal archival entity is outside the approved Task 28 scope"
+                )
+            terminal_archival_ids.add(entity_id)
         if entity.get("owner_approval_required") is not True:
             raise _linear_reconciliation_error(path, "owner approval must be required")
         replacement_ids = entity.get("replacement_ids")
@@ -1224,6 +1344,13 @@ def validate_linear_reconciliation(
         if replacements != tuple(sorted(set(replacements))):
             raise _linear_reconciliation_error(
                 path, "replacement_ids must be sorted and unique"
+            )
+        if action_status == _TASK28_TERMINAL_ARCHIVAL_STATUS and (
+            replacements
+            != _TASK28_TERMINAL_ARCHIVAL_RECORDS[entity_id]["replacement_ids"]
+        ):
+            raise _linear_reconciliation_error(
+                path, "terminal archival replacement differs from the approved Task 28 scope"
             )
         metadata = entity.get("live_metadata")
         if not isinstance(metadata, dict) or set(metadata) != _LINEAR_METADATA_FIELDS:
@@ -1295,7 +1422,19 @@ def validate_linear_reconciliation(
             raise _linear_reconciliation_error(
                 path, "applied entities differ from the approved execution scope"
             )
-        if statuses["proposed_not_applied"] != len(entities) - len(applied_execution_ids):
+        expected_terminal_ids = set(_TASK28_TERMINAL_ARCHIVAL_RECORDS)
+        if terminal_archival_state:
+            if terminal_archival_ids != expected_terminal_ids:
+                raise _linear_reconciliation_error(
+                    path, "terminal archival entities differ from the approved Task 28 scope"
+                )
+        elif terminal_archival_ids:
+            raise _linear_reconciliation_error(
+                path, "terminal archival requires the approved Task 28 disposition"
+            )
+        if statuses["proposed_not_applied"] != (
+            len(entities) - len(applied_execution_ids) - len(terminal_archival_ids)
+        ):
             raise _linear_reconciliation_error(
                 path, "all non-executed entities must remain proposed"
             )
@@ -2177,7 +2316,9 @@ def _validate_linear_inventory_scope(value: object, path: Path) -> None:
         raise _linear_reconciliation_error(path, "raw exports cannot be tracked")
 
 
-def _validate_linear_action_rules(value: object, path: Path) -> None:
+def _validate_linear_action_rules(
+    value: object, path: Path, *, terminal_archival_state: bool
+) -> None:
     fields = {
         "all_external_actions",
         "archive_after_extraction",
@@ -2187,9 +2328,26 @@ def _validate_linear_action_rules(value: object, path: Path) -> None:
         raise _linear_reconciliation_error(path, "action_rules fields are closed")
     for field in sorted(fields):
         _linear_string(value.get(field), path, field)
-    if value.get("destructive_actions") != (
+    expected_archival_rule = (
+        "temporary Yellow only when deletion is unavailable; manual deletion remains required"
+        if not terminal_archival_state
+        else (
+            "temporary Yellow when deletion is unavailable, except the exact "
+            "owner-approved Task 28 terminal archival batch; hard deletion remains "
+            "unclaimed"
+        )
+    )
+    if value.get("archive_after_extraction") != expected_archival_rule:
+        raise _linear_reconciliation_error(path, "archival rule is invalid")
+    expected_destructive_actions = (
         "deferred to Gate C and not authorized by this manifest"
-    ):
+        if not terminal_archival_state
+        else (
+            "deferred except the exact Task 28 owner-approved terminal archival "
+            "batch; hard deletion remains unavailable and unclaimed"
+        )
+    )
+    if value.get("destructive_actions") != expected_destructive_actions:
         raise _linear_reconciliation_error(path, "destructive action rule is invalid")
 
 
@@ -2355,6 +2513,7 @@ def _validate_linear_batches(
     *,
     applied_state: bool,
     applied_entity_ids: frozenset[str],
+    terminal_archival_state: bool,
 ) -> Mapping[str, frozenset[str]]:
     if not isinstance(value, list) or not value:
         raise _linear_reconciliation_error(path, "batches must be a non-empty array")
@@ -2363,6 +2522,7 @@ def _validate_linear_batches(
         action: set() for action in _LINEAR_DESTRUCTIVE_ACTIONS
     }
     applied_pilot_batches = 0
+    terminal_batch_count = 0
     for batch in value:
         if not isinstance(batch, dict):
             raise _linear_reconciliation_error(path, "batch rows must be objects")
@@ -2383,6 +2543,7 @@ def _validate_linear_batches(
         selected = _linear_string_array(batch.get(selector), path, selector)
         if selector == "entity_types" and not set(selected) <= _LINEAR_ENTITY_TYPES:
             raise _linear_reconciliation_error(path, "batch entity type is invalid")
+        terminal_batch = False
         if action in _LINEAR_DESTRUCTIVE_ACTIONS:
             if selector != "entity_ids":
                 raise _linear_reconciliation_error(
@@ -2390,13 +2551,40 @@ def _validate_linear_batches(
                 )
             if batch.get("gate") != "C":
                 raise _linear_reconciliation_error(path, "destructive gate must be C")
-            if batch.get("destructive_authorization") != "deferred_not_authorized":
+            terminal_batch = (
+                terminal_archival_state
+                and batch_id == _TASK28_TERMINAL_ARCHIVAL_BATCH_ID
+                and action == "delete_after_extraction"
+                and frozenset(selected) == frozenset(_TASK28_TERMINAL_ARCHIVAL_RECORDS)
+            )
+            if (
+                terminal_archival_state
+                and action == "delete_after_extraction"
+                and frozenset(selected) == frozenset(_TASK28_TERMINAL_ARCHIVAL_RECORDS)
+                and batch_id != _TASK28_TERMINAL_ARCHIVAL_BATCH_ID
+            ):
+                raise _linear_reconciliation_error(
+                    path, "terminal archival batch ID differs from the approved Task 28 scope"
+                )
+            if terminal_batch:
+                terminal_batch_count += 1
+                if (
+                    batch.get("destructive_authorization")
+                    != "owner_approved_terminal_archival"
+                    or batch.get("manual_deletion_action")
+                    != _TASK28_TERMINAL_ARCHIVAL_BATCH_TEXT
+                ):
+                    raise _linear_reconciliation_error(
+                        path, "terminal archival batch differs from approved Task 28 scope"
+                    )
+            elif batch.get("destructive_authorization") != "deferred_not_authorized":
                 raise _linear_reconciliation_error(
                     path, "destructive authorization must remain deferred"
                 )
-            _linear_string(
-                batch.get("manual_deletion_action"), path, "manual_deletion_action"
-            )
+            else:
+                _linear_string(
+                    batch.get("manual_deletion_action"), path, "manual_deletion_action"
+                )
             destructive[action].update(selected)
         status = batch.get("status")
         if applied_state:
@@ -2411,11 +2599,14 @@ def _validate_linear_batches(
                     )
                 applied_pilot_batches += 1
             else:
-                required_status = (
-                    "withheld_gate_c"
-                    if action in _LINEAR_DESTRUCTIVE_ACTIONS
-                    else "withheld_not_authorized"
-                )
+                if terminal_batch:
+                    required_status = _TASK28_TERMINAL_ARCHIVAL_STATUS
+                else:
+                    required_status = (
+                        "withheld_gate_c"
+                        if action in _LINEAR_DESTRUCTIVE_ACTIONS
+                        else "withheld_not_authorized"
+                    )
                 if status != required_status:
                     raise _linear_reconciliation_error(
                         path, "broader batch status is invalid"
@@ -2425,6 +2616,10 @@ def _validate_linear_batches(
     if applied_state and applied_pilot_batches != 1:
         raise _linear_reconciliation_error(
             path, "mixed state requires one applied pilot batch"
+        )
+    if terminal_archival_state and terminal_batch_count != 1:
+        raise _linear_reconciliation_error(
+            path, "terminal archival requires exactly one approved Task 28 batch"
         )
     return {action: frozenset(ids) for action, ids in destructive.items()}
 

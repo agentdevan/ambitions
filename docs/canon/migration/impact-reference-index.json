@@ -135,7 +135,7 @@
       "requirement_ids": [
         "SPEC-APP-SHELL-ROOT-NAVIGATION-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-IA-SHELL-SURFACES-0006"
     },
@@ -148,7 +148,7 @@
       "requirement_ids": [
         "SPEC-APP-NAVIGATION-IA-MAP-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-IA-SHELL-SURFACES-0018"
     },
@@ -161,7 +161,7 @@
       "requirement_ids": [
         "SPEC-APP-NAVIGATION-PRESENTATION-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-IA-SHELL-SURFACES-0019"
     },
@@ -174,7 +174,7 @@
       "requirement_ids": [
         "SPEC-APP-SHELL-FIRST-VIEWPORT-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-IA-SHELL-SURFACES-0025"
     },
@@ -187,7 +187,7 @@
       "requirement_ids": [
         "SPEC-APP-NAVIGATION-ROOT-INTERACTION-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-IA-SHELL-SURFACES-0032"
     },
@@ -200,7 +200,7 @@
       "requirement_ids": [
         "SPEC-APP-SHELL-ROOT-NAVIGATION-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-IA-SHELL-SURFACES-0049"
     },
@@ -213,7 +213,7 @@
       "requirement_ids": [
         "SPEC-APP-SHELL-ROOT-NAVIGATION-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-IA-SHELL-SURFACES-0050"
     },
@@ -226,7 +226,7 @@
       "requirement_ids": [
         "SPEC-APP-SHELL-GLOBAL-ACTIONS-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-IA-SHELL-SURFACES-0051"
     },
@@ -239,7 +239,7 @@
       "requirement_ids": [
         "SPEC-GLOBAL-SEARCH-FIRST-VIEWPORT-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-LFT-0203"
     },
@@ -252,7 +252,7 @@
       "requirement_ids": [
         "JOURNEY-FIRST-USE-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-LFT-0205"
     },
@@ -265,7 +265,7 @@
       "requirement_ids": [
         "JOURNEY-CAPTURE-PLACEMENT-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-LFT-0206"
     },
@@ -278,7 +278,7 @@
       "requirement_ids": [
         "JOURNEY-GOAL-ACTIVATION-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-LFT-0207"
     },
@@ -291,7 +291,7 @@
       "requirement_ids": [
         "JOURNEY-STEP-CLOSURE-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-LFT-0208"
     },
@@ -304,7 +304,7 @@
       "requirement_ids": [
         "JOURNEY-RECOVERY-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-LFT-0209"
     },
@@ -317,7 +317,7 @@
       "requirement_ids": [
         "JOURNEY-TIME-DIRECT-MANIPULATION-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-LFT-0210"
     },
@@ -330,7 +330,7 @@
       "requirement_ids": [
         "JOURNEY-CALENDAR-DIFF-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-LFT-0211"
     },
@@ -343,7 +343,7 @@
       "requirement_ids": [
         "JOURNEY-SAVED-FOR-LATER-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-LFT-0212"
     },
@@ -356,7 +356,7 @@
       "requirement_ids": [
         "JOURNEY-OFFLINE-CREATE-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-LFT-0213"
     },
@@ -369,7 +369,7 @@
       "requirement_ids": [
         "JOURNEY-DELETE-RESTORE-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-LFT-0214"
     },
@@ -382,7 +382,7 @@
       "requirement_ids": [
         "STANDARD-TYPOGRAPHY-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-LFT-0216"
     },
@@ -395,7 +395,7 @@
       "requirement_ids": [
         "STANDARD-SPACING-CORNERS-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-LFT-0217"
     },
@@ -408,7 +408,7 @@
       "requirement_ids": [
         "STANDARD-SCREENSHOT-MATRIX-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-LFT-0218"
     },
@@ -421,7 +421,7 @@
       "requirement_ids": [
         "SYSTEM-IMPORTED-SOURCE-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-LFT-0221"
     },
@@ -434,7 +434,7 @@
       "requirement_ids": [
         "STANDARD-ACCEPTANCE-IA-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-LFT-0224"
     },
@@ -447,7 +447,7 @@
       "requirement_ids": [
         "STANDARD-ACCEPTANCE-OBJECTS-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-LFT-0225"
     },
@@ -460,7 +460,7 @@
       "requirement_ids": [
         "STANDARD-ACCEPTANCE-VIEWPORTS-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-LFT-0226"
     },
@@ -473,7 +473,7 @@
       "requirement_ids": [
         "STANDARD-ACCEPTANCE-INTERACTION-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-LFT-0227"
     },
@@ -486,7 +486,7 @@
       "requirement_ids": [
         "STANDARD-ACCEPTANCE-VISUAL-COPY-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-LFT-0228"
     },
@@ -499,7 +499,7 @@
       "requirement_ids": [
         "STANDARD-ACCEPTANCE-ACCESSIBILITY-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-LFT-0229"
     },
@@ -512,7 +512,7 @@
       "requirement_ids": [
         "STANDARD-ACCEPTANCE-PROOF-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-LFT-0230"
     },
@@ -525,7 +525,7 @@
       "requirement_ids": [
         "OBJ-LIFE-AREA-IDENTITY-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-001"
     },
@@ -538,7 +538,7 @@
       "requirement_ids": [
         "OBJ-GOAL-PATH-IDENTITY-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-003"
     },
@@ -551,7 +551,7 @@
       "requirement_ids": [
         "OBJ-STEP-IDENTITY-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-004"
     },
@@ -564,7 +564,7 @@
       "requirement_ids": [
         "OBJ-EVENT-IDENTITY-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-005"
     },
@@ -577,7 +577,7 @@
       "requirement_ids": [
         "OBJ-REMINDER-IDENTITY-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-006"
     },
@@ -590,7 +590,7 @@
       "requirement_ids": [
         "OBJ-NOTE-IDENTITY-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-007"
     },
@@ -603,7 +603,7 @@
       "requirement_ids": [
         "OBJ-CAPTURE-DRAFT-IDENTITY-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-008"
     },
@@ -616,7 +616,7 @@
       "requirement_ids": [
         "OBJ-ATTACHMENT-IDENTITY-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-010"
     },
@@ -629,7 +629,7 @@
       "requirement_ids": [
         "OBJ-CLOSURE-IDENTITY-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-011"
     },
@@ -642,7 +642,7 @@
       "requirement_ids": [
         "OBJ-SCHEDULE-PLACEMENT-IDENTITY-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-012"
     },
@@ -655,7 +655,7 @@
       "requirement_ids": [
         "OBJ-NOTIFICATION-RULE-IDENTITY-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-013"
     },
@@ -668,7 +668,7 @@
       "requirement_ids": [
         "OBJ-RECEIPT-IDENTITY-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-014"
     },
@@ -681,7 +681,7 @@
       "requirement_ids": [
         "OBJ-HISTORY-EVENT-IDENTITY-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-015"
     },
@@ -694,7 +694,7 @@
       "requirement_ids": [
         "OBJ-SOURCE-REFERENCE-IDENTITY-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-016"
     },
@@ -707,7 +707,7 @@
       "requirement_ids": [
         "OBJ-RECOVERY-SEGMENT-IDENTITY-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-017"
     },
@@ -720,7 +720,7 @@
       "requirement_ids": [
         "OBJ-IMPORT-DIFF-RECORD-IDENTITY-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-018"
     },
@@ -733,7 +733,7 @@
       "requirement_ids": [
         "OBJ-COMMON-ENVELOPE-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-019"
     },
@@ -746,7 +746,7 @@
       "requirement_ids": [
         "OBJ-RECURRENCE-BOUNDARY-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-021"
     },
@@ -759,7 +759,7 @@
       "requirement_ids": [
         "OBJ-CONVERSION-LAW-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-022"
     },
@@ -772,7 +772,7 @@
       "requirement_ids": [
         "OBJ-TYPE-BOUNDARY-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-023"
     },
@@ -785,7 +785,7 @@
       "requirement_ids": [
         "SYS-CANONICAL-GRAPH-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-024"
     },
@@ -798,7 +798,7 @@
       "requirement_ids": [
         "SYS-PROJECTION-OWNERSHIP-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-025"
     },
@@ -811,7 +811,7 @@
       "requirement_ids": [
         "OBJ-SCHEDULE-STATE-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-026"
     },
@@ -824,7 +824,7 @@
       "requirement_ids": [
         "OBJ-RECURRENCE-SERIES-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-027"
     },
@@ -837,7 +837,7 @@
       "requirement_ids": [
         "OBJ-LIFECYCLE-SEPARATION-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-028"
     },
@@ -850,7 +850,7 @@
       "requirement_ids": [
         "OBJ-DELETION-RESTORE-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-029"
     },
@@ -863,7 +863,7 @@
       "requirement_ids": [
         "OBJ-CANONICAL-IDENTITY-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-030"
     },
@@ -876,7 +876,7 @@
       "requirement_ids": [
         "OBJ-CANONICAL-OWNER-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-031"
     },
@@ -889,7 +889,7 @@
       "requirement_ids": [
         "OBJ-STATE-AXES-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-032"
     },
@@ -902,7 +902,7 @@
       "requirement_ids": [
         "OBJ-SUBSTEP-IDENTITY-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-033"
     },
@@ -915,7 +915,7 @@
       "requirement_ids": [
         "OBJ-CONVERSION-LAW-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-035"
     },
@@ -928,7 +928,7 @@
       "requirement_ids": [
         "OBJ-GOAL-LINK-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-036"
     },
@@ -941,7 +941,7 @@
       "requirement_ids": [
         "OBJ-DELETION-RESTORE-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-037"
     },
@@ -954,7 +954,7 @@
       "requirement_ids": [
         "OBJ-MEMORY-RETENTION-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-052"
     },
@@ -967,7 +967,7 @@
       "requirement_ids": [
         "OBJ-ARCHIVE-SEMANTICS-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-053"
     },
@@ -980,7 +980,7 @@
       "requirement_ids": [
         "OBJ-DELETION-RESTORE-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-054"
     },
@@ -993,7 +993,7 @@
       "requirement_ids": [
         "OBJ-GOAL-CREATION-FAILURE-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-056"
     },
@@ -1006,7 +1006,7 @@
       "requirement_ids": [
         "OBJ-GOAL-PATH-RECEIPT-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-057"
     },
@@ -1019,7 +1019,7 @@
       "requirement_ids": [
         "OBJ-FUTURE-STEP-RECEIPT-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-OBJ-059"
     },
@@ -1032,7 +1032,7 @@
       "requirement_ids": [
         "APP-SETUP-PROGRESSIVE-FIRST-USE-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-STB-0185"
     },
@@ -1045,7 +1045,7 @@
       "requirement_ids": [
         "APP-PERMISSIONS-CONTRACT-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-STB-0186"
     },
@@ -1058,7 +1058,7 @@
       "requirement_ids": [
         "APP-DEEP-LINK-EXTERNAL-ENTRY-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-STB-0190"
     },
@@ -1071,7 +1071,7 @@
       "requirement_ids": [
         "APP-DEGRADED-FAILURE-TAXONOMY-001"
       ],
-      "revision": "4145f32ca371aa0629f0bd9b1f80f9c4c8c3b697d2fbbaeb22c59f2ed4381b81",
+      "revision": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
       "schema_version": 1,
       "source": "docs/canon/migration/claim-dispositions.json#CLAIM-STB-0191"
     },

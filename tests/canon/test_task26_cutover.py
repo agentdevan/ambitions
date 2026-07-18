@@ -16,7 +16,10 @@ from tools.ambitions_canon.authorization import (
 )
 from tools.ambitions_canon.build import build_canon
 from tools.ambitions_canon.model import CanonError
-from tools.ambitions_canon.render import _validate_task26_transition_record
+from tools.ambitions_canon.render import (
+    _task26_historical_candidate_binding,
+    _validate_task26_transition_record,
+)
 from tools.ambitions_canon.ux_blueprint import (
     UXBlueprintError,
     load_ux_blueprint,
@@ -259,7 +262,16 @@ class Task26CutoverTests(unittest.TestCase):
             "docs/canon/generated/AUTHORIZATION_GATE_TRANSITION.md",
             "docs/canon/references/task-26-owner-direct-transition.json",
         }
-        self.assertEqual(candidate, self._candidate_binding(review_only))
+        self.assertEqual(
+            candidate,
+            _task26_historical_candidate_binding(
+                ROOT,
+                base=transition_record["base"],
+                candidate_tree_sha=candidate["candidate_tree_sha"],
+                scope_paths=scope["paths"],
+                review_only_files=sorted(review_only),
+            ),
+        )
         self.assertEqual(
             scope["paths"],
             sorted(

@@ -275,7 +275,33 @@ def _render_outputs(
             figma_reconciliation=figma_reconciliation,
         ),
     }
-    retained_task25_evidence = _retained_task25_evidence(repository_root)
+    expected = tuple(
+        sorted(
+            (
+                Path(*path.parts[1:])
+                for path in registry.manifest.generated_files
+            ),
+            key=lambda path: path.as_posix(),
+        )
+    )
+    retained_task25_paths = frozenset(
+        {
+            Path("cutover-readiness.md"),
+            Path("task-25-owner-direct-finalization.json"),
+        }
+    )
+    declared_retained_task25_paths = retained_task25_paths.intersection(expected)
+    if declared_retained_task25_paths and declared_retained_task25_paths != retained_task25_paths:
+        raise CanonError(
+            "CANON_GENERATED_MANIFEST_MISMATCH",
+            "Task 25 retained evidence declarations must be complete",
+            registry.manifest.source_path,
+        )
+    retained_task25_evidence = (
+        _retained_task25_evidence(repository_root)
+        if declared_retained_task25_paths
+        else {}
+    )
 
     rendered: dict[Path, bytes] = {
         **retained_task25_evidence,
@@ -364,15 +390,6 @@ def _render_outputs(
         ),
     }
 
-    expected = tuple(
-        sorted(
-            (
-                Path(*path.parts[1:])
-                for path in registry.manifest.generated_files
-            ),
-            key=lambda path: path.as_posix(),
-        )
-    )
     if Path("CHATGPT_CODEX_HANDOFF.md") in expected:
         rendered[Path("CHATGPT_CODEX_HANDOFF.md")] = _chatgpt_codex_handoff(
             metadata,
@@ -638,6 +655,17 @@ _TASK26_OWNER_TEXT = (
 _TASK26_SCOPE_SHA256 = (
     "ade805bb6d0059e66a0d54358c07da23daa1b70baaabe70d78a8896f6b2a636c"
 )
+_TASK26_BASE = {
+    "commit_sha": "63d65170632f775ddbd8d440f143a7b7654acda9",
+    "tree_sha": "4abd231742d68a4f143205efabf9eb6c0b6f44f0",
+}
+_TASK26_CANDIDATE_TREE_SHA = "63936de213bf9523d1bf2689ed92908352a790e6"
+_TASK26_CANDIDATE_BUNDLE_SHA256 = (
+    "3e77623ce06a71683c8c493103bc40a397cf08ebdaaa3f397019322c1c6c64aa"
+)
+_TASK26_TREE_DELTA_SHA256 = (
+    "058696ef052e9d0f278e3363a86fca104cfdcc08e21ec4ffe573852b83e6be08"
+)
 _TASK26_REVIEW_ONLY = (
     "docs/canon/generated/AUTHORIZATION_GATE_TRANSITION.md",
     "docs/canon/references/task-26-owner-direct-transition.json",
@@ -670,6 +698,18 @@ def _task26_sha256_file(root: Path, path_text: str) -> str:
         content = path.read_bytes()
     except OSError as exc:
         raise _task26_error(f"Task 26 evidence is missing or unsafe: {path_text}") from exc
+    return hashlib.sha256(content).hexdigest()
+
+
+def _task26_sha256_git_file(root: Path, revision: str, path_text: str) -> str:
+    """Return a historical evidence digest without consulting later worktrees."""
+
+    try:
+        content = _task26_git(root, "show", f"{revision}:{path_text}")
+    except CanonError as exc:
+        raise _task26_error(
+            f"Task 26 historical evidence is unavailable: {path_text}"
+        ) from exc
     return hashlib.sha256(content).hexdigest()
 
 
@@ -820,6 +860,95 @@ def _task26_candidate_binding(
     }
 
 
+def _task26_historical_candidate_binding(
+    root: Path,
+    *,
+    base: Mapping[str, str],
+    candidate_tree_sha: str,
+    scope_paths: list[str],
+    review_only_files: list[str],
+) -> dict[str, object]:
+    """Recompute the completed Task 26 candidate from immutable Git objects.
+
+    A completed transition must not become invalid merely because a later task
+    has a dirty worktree.  Its evidence is the historical base/candidate tree,
+    not the state of a subsequent task.
+    """
+
+    from tools.ambitions_canon.authorization import canonical_json_bytes
+
+    base_commit = base["commit_sha"]
+    if _task26_git(root, "rev-parse", f"{base_commit}^{{tree}}") != (
+        base["tree_sha"].encode() + b"\n"
+    ):
+        raise _task26_error("Task 26 historical base tree is unavailable or stale")
+    _task26_git(root, "cat-file", "-e", f"{candidate_tree_sha}^{{tree}}")
+
+    try:
+        changed_paths = sorted(
+            line.decode("utf-8")
+            for line in _task26_git(
+                root,
+                "diff",
+                "--name-only",
+                base_commit,
+                candidate_tree_sha,
+                "--",
+            ).splitlines()
+        )
+    except UnicodeDecodeError as exc:
+        raise _task26_error("Task 26 historical candidate has a non-UTF-8 path") from exc
+    expected_bound_paths = sorted(set(scope_paths) - set(review_only_files))
+    if changed_paths != expected_bound_paths:
+        raise _task26_error("Task 26 historical candidate paths differ from approved scope")
+
+    files: list[dict[str, object]] = []
+    for path_text in expected_bound_paths:
+        candidate_entry = _task26_git(
+            root, "ls-tree", candidate_tree_sha, "--", path_text
+        ).decode("utf-8").strip()
+        if not candidate_entry or "\t" not in candidate_entry:
+            raise _task26_error("Task 26 historical candidate file is missing")
+        header, entry_path = candidate_entry.split("\t", 1)
+        fields = header.split()
+        if len(fields) != 3 or entry_path != path_text or fields[1] != "blob":
+            raise _task26_error("Task 26 historical candidate contains an invalid entry")
+        mode, _object_type, object_id = fields
+        base_entry = _task26_git(root, "ls-tree", base_commit, "--", path_text)
+        if base_entry and object_id.encode() in base_entry:
+            raise _task26_error("Task 26 historical candidate omits an approved change")
+        content = _task26_git(root, "cat-file", "blob", object_id)
+        files.append(
+            {
+                "byte_size": len(content),
+                "git_blob_oid": object_id,
+                "mode": mode,
+                "path": path_text,
+                "sha256": hashlib.sha256(content).hexdigest(),
+            }
+        )
+    bundle_payload = {
+        "schema_version": 1,
+        "task_id": "TASK-26",
+        "base_commit_sha": base_commit,
+        "base_tree_sha": base["tree_sha"],
+        "candidate_tree_sha": candidate_tree_sha,
+        "tree_delta_sha256": _TASK26_TREE_DELTA_SHA256,
+        "files": files,
+    }
+    return {
+        "base_commit_sha": base_commit,
+        "base_tree_sha": base["tree_sha"],
+        "bound_files": files,
+        "candidate_bundle_sha256": hashlib.sha256(
+            canonical_json_bytes(bundle_payload)
+        ).hexdigest(),
+        "candidate_tree_sha": candidate_tree_sha,
+        "review_only_files": review_only_files,
+        "tree_delta_sha256": _TASK26_TREE_DELTA_SHA256,
+    }
+
+
 def _validate_task26_transition_record(
     metadata: Mapping[str, object], repository_root: Path, record: object
 ) -> dict[str, object]:
@@ -873,17 +1002,12 @@ def _validate_task26_transition_record(
         or scope_paths != sorted(set(scope_paths))
         or hashlib.sha256(("\n".join(scope_paths) + "\n").encode()).hexdigest()
         != _TASK26_SCOPE_SHA256
-        or _task26_status_paths(repository_root) != scope_paths
     ):
         raise _task26_error("Task 26 worktree scope differs from owner approval")
 
     base = record["base"]
-    current_base = _task26_git(repository_root, "rev-parse", "HEAD").decode().strip()
-    current_tree = _task26_git(
-        repository_root, "rev-parse", f"{current_base}^{{tree}}"
-    ).decode().strip()
-    if base != {"commit_sha": current_base, "tree_sha": current_tree}:
-        raise _task26_error("Task 26 clean-base anchor is stale")
+    if base != _TASK26_BASE:
+        raise _task26_error("Task 26 historical base anchor is stale")
 
     verifier = record["verifier"]
     expected_verifier = {
@@ -906,7 +1030,12 @@ def _validate_task26_transition_record(
         ("policy_path", "policy_sha256"),
         ("command_manifest_path", "command_manifest_sha256"),
     ):
-        if _task26_sha256_file(repository_root, verifier[path_key]) != verifier[sha_key]:
+        if (
+            _task26_sha256_git_file(
+                repository_root, _TASK26_BASE["commit_sha"], verifier[path_key]
+            )
+            != verifier[sha_key]
+        ):
             raise _task26_error("Task 24 verifier evidence is stale")
 
     task25 = record["task25_evidence"]
@@ -925,7 +1054,12 @@ def _validate_task26_transition_record(
         ("readiness_path", "readiness_sha256"),
         ("report_path", "report_sha256"),
     ):
-        if _task26_sha256_file(repository_root, task25[path_key]) != task25[sha_key]:
+        if (
+            _task26_sha256_git_file(
+                repository_root, _TASK26_BASE["commit_sha"], task25[path_key]
+            )
+            != task25[sha_key]
+        ):
             raise _task26_error("Task 25 anchor evidence is stale")
 
     rollback = record["rollback"]
@@ -952,12 +1086,18 @@ def _validate_task26_transition_record(
         raise _task26_error("Task 26 rollback Git identity is stale")
 
     review_only = list(_TASK26_REVIEW_ONLY)
-    candidate = _task26_candidate_binding(
+    candidate = _task26_historical_candidate_binding(
         repository_root,
+        base=_TASK26_BASE,
+        candidate_tree_sha=_TASK26_CANDIDATE_TREE_SHA,
         scope_paths=scope_paths,
         review_only_files=review_only,
     )
-    if record["candidate"] != candidate:
+    if (
+        record["candidate"] != candidate
+        or candidate["candidate_bundle_sha256"] != _TASK26_CANDIDATE_BUNDLE_SHA256
+        or candidate["tree_delta_sha256"] != _TASK26_TREE_DELTA_SHA256
+    ):
         raise _task26_error("Task 26 candidate binding is stale or mutated")
 
     start_payload = {

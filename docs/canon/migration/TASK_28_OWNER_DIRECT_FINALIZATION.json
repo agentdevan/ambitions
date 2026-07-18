@@ -1,0 +1,69 @@
+{
+  "authority_scope": "Tasks 24-29 only; Task 28 exact candidate only",
+  "base": {
+    "commit_sha": "8aa2995144bfae935adb65c1f1aa55ecf984d7ab",
+    "tree_sha": "d6507282d457f9503627e6588b35b21eba51394c"
+  },
+  "candidate": {
+    "binding_definition": "SHA-256 over tools.ambitions_canon.authorization.canonical_json_bytes of {base_commit_sha,base_tree_sha,files,schema_version,task_id}; files is this candidate_file_sha256 mapping and the canonicalizer uses sorted UTF-8 JSON with a terminal LF. This receipt is excluded to avoid self-reference and is instead covered by the exact independent review closure.",
+    "candidate_bundle_sha256": "f7e2d41b99f40dd89eb74d41d436eea20f3305ebd6f77de026af45eaad7917a7",
+    "candidate_file_sha256": {
+      "docs/canon/generated/AUTHORIZATION_GATE_TRANSITION.md": "49b74f32cead020da4ed101c1d766b9e22c88c8ad87513cc900f94b8ae4c5281",
+      "docs/canon/generated/CHATGPT_CODEX_HANDOFF.md": "8b91fd4dd14d9990176105c9297e7209aca2d14516387cf98c1da60d9b5221c0",
+      "docs/canon/generated/CODEX_START_HERE.md": "46e479d443d6fe7f3fe2a172cc9d4add79c17639042b4cf68afd5518d152e542",
+      "docs/canon/generated/INDEX.md": "9df8dd5ac982efb323f4f885fae57ff4d27296bd05f07261d9a5884adfbf632f",
+      "docs/canon/generated/canon-index.json": "5e177d02a96a28d0660f328fb286076b2806c5c7c012ab9e03d2486224b1b191",
+      "docs/canon/generated/codex-consumption-benchmark.md": "2fffaa7cfb41897dc1ee768bf3360dff5f8cda8d59cca9453db1d8cc720211af",
+      "docs/canon/generated/concept-ownership.json": "5311f4bb89b487dc5ed8714793990cd4f96bb9e390c25f4e6de50690df8db857",
+      "docs/canon/generated/external-reference-impact.md": "d957fc87f1b0f3c00a40921b41687f2be5501cff8eec2b3ca3ce2588b71c362c",
+      "docs/canon/generated/law-proof-map.json": "2a90055c085193e331560d41d657255e0c1c953ee37f8653cc7c7667b8ee2f7a",
+      "docs/canon/generated/law-source-map.json": "b6c9c3932589b016b6c88f12fe9fc6937180b8fac914563775e3aef457f20294",
+      "docs/canon/generated/law-test-map.json": "904e934d875d52b1033ff1b5235c11108df475aba97f9ca68fa914804961477c",
+      "docs/canon/generated/object-boundary-matrix.md": "5f8d135575192540461f5fd87486adea62442d9569436b693dc93dd40aa2fdda",
+      "docs/canon/generated/requirement-graph.json": "d343a6c6c8849de0de8059f161661cb30bdadc6dc0979621b053e4ddc2796ed7",
+      "docs/canon/generated/specification-coverage.md": "d14b2343e409a63830cd23025674fa490b9f387dfad241f99ac6f4ef13c6a4dc",
+      "docs/canon/generated/supersession-manifest.json": "b1271d39605798e88ada4b4b5eef454c3a03acd6363eb4bb909faa6f975ed5cb",
+      "docs/canon/generated/unresolved-conflicts.md": "084c97dd0e9bdff92bddd9996ecb96faf72e44984a20c64988d207269f26cb9a",
+      "docs/canon/generated/visual-authority-manifest.json": "b4cd407a129a42e802f8af75f1198650be085f4ca18b66ffb4d56725b694d0db",
+      "docs/canon/migration/TASK_28_IMPLEMENTATION_REPORT.md": "2abfe2b74f09333925173733d2045914d69a4aea4872e881a4de6c301a9c420f",
+      "docs/canon/migration/claim-dispositions.json": "dbf9a87bed561e0472532fda183c3452992fa51d882a340660ff0ed6e58d1810",
+      "docs/canon/migration/conflict-docket-baseline.json": "1354010697304b802a590431e26659500e325d7e7b0d9242f3f0eebbfeba4d2a",
+      "docs/canon/migration/impact-reference-index.json": "91eef3bc038445af7c654b6a4ea797e98db277e2fd95e4f330ca1b036c8d679d",
+      "docs/canon/migration/linear-reconciliation.json": "4f85e27f0a95a07790d606eaf44ab152b28b204f4453642ab31b4d165665b252",
+      "docs/canon/migration/semantic-loss-review.json": "79360d62e5aab355a7533ef4948d54fc5356454725aba81bdac37b1361d42ce2",
+      "docs/canon/migration/source-catalog.json": "8d3bbe4ab4e73020681482cb25ec5c94e118d40e501a995641fa269c5b65f22e",
+      "docs/canon/references/task-authorization-policy.json": "ec4e861cbca8cfb734349e7b42d8d6c89bb29fab523674c75187cc3b9b9eff69",
+      "docs/canon/registries/command-gate-approval-receipts.json": "4d1ae97ec4d7b9c63561875b3dd456e16303a1fd688e009eebba213b5d5338f3",
+      "docs/canon/registries/command-gate-dependencies.json": "1da40c6834dc37b83f6ecc77168d6f5788d7fad31808617ae2da6d1995d59cc5",
+      "tests/canon/test_task26_cutover.py": "caea736aedcd3b88b9f790e465e250eec77f2a41fc4f6e9ea7b1da9b44d6ab5b",
+      "tests/canon/test_task28_terminal_archival.py": "f59fd49629c2da7e78464351d2257657f1d3f6b477290d9476f51c364b4618aa",
+      "tools/ambitions_canon/external_authority.py": "e1fd43994c7fffdb98ea06b426f4302fd538323d2f18cf765a5e1072c98a83b0",
+      "tools/ambitions_canon/render.py": "9ee562d8620727badb219f5f4799a5d6ae3368bd32d34df86d7e9a6f45b6bb29",
+      "tools/ambitions_canon/ux_blueprint.py": "96a8d7fa49d218e5eae2d32428d224dcc5a203930171f2e111ffedea48ad7760",
+      "tools/ambitions_canon/visual_authority.py": "59e498c541f6fb80e31fca6581bae90a024290c58dbe622e18e57ef4cf38f692"
+    },
+    "path_count": 33,
+    "scope_manifest_sha256": "381d74aec35c1e6b21b56b2e286982788c693339afee747df403700fdfee13e4"
+  },
+  "claim_ceiling": "Owner-approved terminal Linear archival and deterministic post-cutover reconciliation for the exact Task 28 scope only; hard deletion and exhaustive backlink proof remain unproven.",
+  "decision_id": "OWNER-TRAIN5-DIRECT-INTEGRATION-2026-07-17T234045Z",
+  "exact_review_closure": {
+    "receipt_review_requirement": "The independent exact re-review must include this receipt and return zero Critical and Important findings before commit.",
+    "required_result": "critical_and_important_zero",
+    "review_id": "TASK28-OWNER-DIRECT-EXACT-REREVIEW-2026-07-18",
+    "reviewed_candidate_bundle_sha256": "f7e2d41b99f40dd89eb74d41d436eea20f3305ebd6f77de026af45eaad7917a7"
+  },
+  "owner_approvals": {
+    "direct_integration_exception": "OWNER-TRAIN5-DIRECT-INTEGRATION-2026-07-17T234045Z",
+    "scope_amendment": "Rebind claim-dispositions.json and only mandatory deterministic dependent projections required to clear CLAIM_DISPOSITIONS_STALE.",
+    "terminal_archival": "Linear archival as the terminal Task 28 deletion state for AMB-1756, 3fc613b3-dac0-4104-b323-5f26fb868645, and ebbfb3c1-cd88-4a4d-a254-7bdd1c8a61f6; hard deletion remains unclaimed."
+  },
+  "receipt_type": "owner-direct-local-task-finalization",
+  "rollback": {
+    "commit_sha": "8aa2995144bfae935adb65c1f1aa55ecf984d7ab",
+    "tree_sha": "d6507282d457f9503627e6588b35b21eba51394c"
+  },
+  "schema_version": 1,
+  "single_use": true,
+  "task_id": "TASK-28"
+}
