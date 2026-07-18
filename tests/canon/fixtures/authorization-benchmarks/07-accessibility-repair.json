@@ -40,7 +40,7 @@
   "scenario_id": "accessibility-repair",
   "schema_version": 1,
   "scope": [
-    "standard.accessibility.reading-focus"
+    "accessibility.reading-focus"
   ],
   "skill_adapters": [
     "ambitions-architecture-tree-enforcement",

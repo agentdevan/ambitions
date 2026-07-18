@@ -201,7 +201,7 @@
       ],
       "scenario_id": "accessibility-repair",
       "scope": [
-        "standard.accessibility.reading-focus"
+        "accessibility.reading-focus"
       ],
       "skill_adapters": [
         "ambitions-architecture-tree-enforcement",
